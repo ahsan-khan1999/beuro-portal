@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+  
+.hiddenCheckbox {
+    display: none;
+}
+  
+.checkboxLabel {
+    position: relative;
+    display: block;
+    width: 20px; /* Adjusted to include padding */
+    height: 20px; /* Adjusted to include padding */
+    border: 2px solid #C4C4C4;
+    border-radius: 4px;  /* Square with border radius */
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.3s ease;
+}
+  
+.hiddenCheckbox:checked + .checkboxLabel {
+    border-color: #68119a;
+}
+  
+.checkboxLabel::after {
+    content: '';
+    position: absolute;
+    border-radius: 2px 2px 0 2px;
+    width: 6px;
+    height: 13px;
+    border: 2px solid #68119a;
+    border-width: 0 3px 3px 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%) rotate(45deg); /* Adjusted translation */
+    transition: transform 0.3s ease, width 0.3s 0.1s ease, height 0.3s 0.1s ease;
+    display: none;
+}
+  
+.hiddenCheckbox:checked + .checkboxLabel::after {
+    display: block;
+}

@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+  
+.hiddenCheckbox {
+    display: none;
+}
+  
+.checkboxLabel {
+    position: relative;
+    width: 16px; /* Adjusted to include padding */
+    height: 16px; /* Adjusted to include padding */
+    padding: 4px; /* Padding around the tick */
+    border: 1px solid #C4C4C4;
+    border-radius: 4px;  /* Square with border radius */
+    cursor: pointer;
+    background: white;
+}
+  
+.hiddenCheckbox:checked + .checkboxLabel {
+    border-color: #68119a;
+}
+  
+.checkboxLabel::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 8px;
+    border: solid #68119a;
+    border-width: 0 2px 2px 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg); /* Adjusted translation */
+    display: none;
+}
+  
+.hiddenCheckbox:checked + .checkboxLabel::after {
+    display: block;
+}

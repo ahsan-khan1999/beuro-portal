@@ -1,0 +1,30 @@
+.hideDefaultRadio {
+    display: none;
+}
+
+.customRadio {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #000; 
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.hideDefaultRadio:checked + .customRadio {
+    border-color: blue; 
+}
+
+.hideDefaultRadio:checked + .customRadio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
