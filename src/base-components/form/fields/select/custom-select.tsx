@@ -1,9 +1,9 @@
-import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
+// import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
-import searchIcon from "@/assets/svgs/search.svg";
+// import searchIcon from "@/assets/svgs/search.svg";
 
 export const SelectBox = ({
   id,
@@ -50,12 +50,12 @@ export const SelectBox = ({
         className="h-12 px-4 text-left text-dark bg-white py-3 rounded-lg border-2 border-lightGray focus:border-primary outline-none w-full"
       >
         {(field && field.value) || defaultValue}
-        <ArrowIcon isOpen={isOpen} />
+        {/* <ArrowIcon isOpen={isOpen} /> */}
       </button>
       {isOpen && (
         <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-[1]">
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
-            <Image src={searchIcon} alt={"Search Icon"} className="ml-3" />
+            {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
 
             <input value={search.current} onChange={(e) => handleChange(e.target.value)} placeholder="Search..." className="w-full px-2 py-3 outline-none rounded-lg " />
           </div>

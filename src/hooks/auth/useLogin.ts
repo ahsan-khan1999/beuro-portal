@@ -1,6 +1,6 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { generateLoginFormField } from "@/components/loginAndRegister/login/login-fields";
-import { generateLoginValidation } from "@/validation/loginSchema";
+import { generateLoginValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";

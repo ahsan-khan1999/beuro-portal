@@ -1,5 +1,5 @@
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
-import { FileUploadIcon } from "@/assets/svgs/components/file-upload-icon";
+// import { FileUploadIcon } from "@/assets/svgs/components/file-upload-icon";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Image from "next/image";
 import { useState } from "react";
@@ -73,7 +73,8 @@ export const ImageFileUpload = ({
             }}
           />
         ) : (
-          <FileUploadIcon />
+          // <FileUploadIcon />
+          ""
         )}
         {!field.value && (
           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">

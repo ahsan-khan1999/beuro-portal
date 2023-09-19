@@ -1,4 +1,4 @@
-import { ModalType } from "@/enums";
+// import { ModalType } from "@/enums";
 import { BASEURL } from "@/services/HttpProvider";
 import { GlobalState } from "@/types/global";
 import { getToken, logout } from "@/utils/auth.util";
@@ -9,7 +9,8 @@ const initialState: GlobalState = {
     loading: false,
     file: null,
     modal: {
-        type: ModalType.NONE
+        // type: ModalType.NONE
+        type:""
     }
 }
 

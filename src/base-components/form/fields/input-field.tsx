@@ -1,4 +1,4 @@
-import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
+// import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
 import { InputProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import { useEffect } from "react";
@@ -30,9 +30,9 @@ export const InputField = ({
         className={`${classes}`}
         disabled={disabled}
       />
-      {success && (
+      {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />
-      )}
+      )} */}
     </div>
   );
 };

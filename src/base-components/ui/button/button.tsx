@@ -1,7 +1,7 @@
 import { ButtonProps } from "@/types";
 import Loader from "../loader/loader";
 import { combineClasses } from "@/utils/utility";
-import { ButtonSuccessIcon } from "@/assets/svgs/components/button-success-icon";
+// import { ButtonSuccessIcon } from "@/assets/svgs/components/button-success-icon";
 import Image from "next/image";
 export const Button = ({
   inputType,
@@ -41,7 +41,7 @@ export const Button = ({
       }}
     >
       {icon && <Image src={icon} alt={iconAlt} className="mr-1 " />}{" "}
-      {success ? "Geändert" : text} {success && <ButtonSuccessIcon />}
+      {/* {success ? "Geändert" : text} {success && <ButtonSuccessIcon />} */}
     </button>
   );
 };

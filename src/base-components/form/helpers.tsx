@@ -6,12 +6,20 @@ import {
   FieldType,
   GetCreditCardIconProps,
 } from "@/types";
-import { InputField, PasswordField, SelectField, TelephoneInputField, SpanField, CheckBox, DragAndDropFileField } from "./fields";
+import {
+  InputField,
+  PasswordField,
+  SelectField,
+  TelephoneInputField,
+  SpanField,
+  CheckBox,
+  DragAndDropFileField,
+} from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
 import { CreditCardNumberField } from "./fields/credit-card-number-field";
-import { CardType } from "@/enums";
+// import { CardType } from "@/enums";
 import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
@@ -31,7 +39,7 @@ const fieldComponents: FieldComponents = {
   span: SpanField,
   div: DivField,
   button: Button,
-  link: LinkField
+  link: LinkField,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -40,11 +48,13 @@ export const getTypedFieldComponent = <T extends FieldProps>(
   error?: string,
   errors?: Record<string, any>
 ): JSX.Element => {
-  const Component = fieldComponents[type] as React.FC<Record<string, any>>;
+  // const Component = fieldComponents[type] as React.FC<Record<string, any>>;
+  const Component = fieldComponents[type];
+
   return (
     <>
-  <Component {...props} errors={errors} />
-  { error && <span className="mt-[3px] text-red text-sm">{error}</span> }
+      <Component {...props} errors={errors} />
+      {error && <span className="mt-[3px] text-red text-sm">{error}</span>}
     </>
   );
 };
@@ -53,7 +63,7 @@ export function isFieldType(type: any): type is FieldType {
   return [
     "input",
     "creditCardNumberInput",
-    'creditCardExpiryDateInput',
+    "creditCardExpiryDateInput",
     "password",
     "select",
     "phone",
@@ -68,23 +78,23 @@ export function isFieldType(type: any): type is FieldType {
   ].includes(type);
 }
 
-const cardPatterns = [
-  { type: CardType.VISA, pattern: /^4/, format: [4, 4, 4, 4] },
-  { type: CardType.MASTERCARD, pattern: /^5[1-5]/, format: [4, 4, 4, 4] },
-  // Add more card patterns here...
-];
+// const cardPatterns = [
+//   { type: CardType.VISA, pattern: /^4/, format: [4, 4, 4, 4] },
+//   { type: CardType.MASTERCARD, pattern: /^5[1-5]/, format: [4, 4, 4, 4] },
+//   // Add more card patterns here...
+// ];
 
-export const detectCardType = (cardNumber: string): DetectedCardInfo | null => {
-  const cleanNumber = cardNumber.replace(/\D+/g, "");
+// export const detectCardType = (cardNumber: string): DetectedCardInfo | null => {
+//   const cleanNumber = cardNumber.replace(/\D+/g, "");
 
-  for (const card of cardPatterns) {
-    if (card.pattern.test(cleanNumber)) {
-      return { type: card.type, format: card.format };
-    }
-  }
+//   for (const card of cardPatterns) {
+//     if (card.pattern.test(cleanNumber)) {
+//       return { type: card.type, format: card.format };
+//     }
+//   }
 
-  return null;
-};
+//   return null;
+// };
 
 export const formatCardNumber = (cardNumber: string, format: number[]) => {
   const cleanNumber = cardNumber.replace(/\D+/g, "");
@@ -98,21 +108,21 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
   }, "");
 };
 
-export const getCardIcon = ({
-  cardType,
-  icons: { visa, mastercard },
-}: GetCreditCardIconProps) => {
-  const creditCardIcons: CreditCardIconsType = {
-    [CardType.VISA]: visa,
-    [CardType.MASTERCARD]: mastercard,
-  };
-  const iconSrc = cardType && creditCardIcons[cardType?.type];
-  if (!iconSrc) return null;
-  return (
-    <Image
-      src={iconSrc}
-      alt={`${cardType.type} Icon`}
-      className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4"
-    />
-  );
-};
+// export const getCardIcon = ({
+//   cardType,
+//   icons: { visa, mastercard },
+// }: GetCreditCardIconProps) => {
+//   const creditCardIcons: CreditCardIconsType = {
+//     [CardType.VISA]: visa,
+//     [CardType.MASTERCARD]: mastercard,
+//   };
+//   const iconSrc = cardType && creditCardIcons[cardType?.type];
+//   if (!iconSrc) return null;
+//   return (
+//     <Image
+//       src={iconSrc}
+//       alt={`${cardType.type} Icon`}
+//       className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4"
+//     />
+//   );
+// };

@@ -1,10 +1,10 @@
 import { Country, State } from "@/enums/auth";
 import { countryType } from "@/types";
-import personalDetailsIcon from "@/assets/personel-details-icon.png";
-import securityIcon from "@/assets/security-icon.png";
-import locationIcon from "@/assets/location-icon.png";
-import paymentIcon from "@/assets/payments-icon.png";
-import notificationIcon from "@/assets/notifications-icon.png";
+// import personalDetailsIcon from "@/assets/personel-details-icon.png";
+// import securityIcon from "@/assets/security-icon.png";
+// import locationIcon from "@/assets/location-icon.png";
+// import paymentIcon from "@/assets/payments-icon.png";
+// import notificationIcon from "@/assets/notifications-icon.png";
 
 export const countryList: countryType =
 {
@@ -531,61 +531,61 @@ export const staticEnums = {
 }
 
 
-export const USER_ACCOUNT_CARDS = [
-    {
-      link: "/user-account-settings/personal-details",
-      imageSrc: personalDetailsIcon,
-      imageAlt: "Personal Details Icon",
-      title: "Persönliche Details",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [0, 1]
-    },
-    {
-      link: "/user-account-settings/login-and-security-settings",
-      imageSrc: securityIcon,
-      imageAlt: "Security Icon",
-      title: "Anmeldung und Sicherheit",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [1, 2]
+// export const USER_ACCOUNT_CARDS = [
+//     {
+//       link: "/user-account-settings/personal-details",
+//       imageSrc: personalDetailsIcon,
+//       imageAlt: "Personal Details Icon",
+//       title: "Persönliche Details",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [0, 1]
+//     },
+//     {
+//       link: "/user-account-settings/login-and-security-settings",
+//       imageSrc: securityIcon,
+//       imageAlt: "Security Icon",
+//       title: "Anmeldung und Sicherheit",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [1, 2]
   
-    },
-    {
-      link: "/user-account-settings/address-settings",
-      imageSrc: locationIcon,
-      imageAlt: "location Icon",
-      title: "Adresseinstellungen",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [1, 2]
+//     },
+//     {
+//       link: "/user-account-settings/address-settings",
+//       imageSrc: locationIcon,
+//       imageAlt: "location Icon",
+//       title: "Adresseinstellungen",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [1, 2]
   
-    },
-    {
-      link: "/user-account-settings/payment-settings",
-      imageSrc: paymentIcon,
-      imageAlt: "payment Icon",
-      title: "Zahlungen",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [1, 2]
+//     },
+//     {
+//       link: "/user-account-settings/payment-settings",
+//       imageSrc: paymentIcon,
+//       imageAlt: "payment Icon",
+//       title: "Zahlungen",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [1, 2]
   
-    },
-    {
-      link: "/user-account-settings/notification-settings",
-      imageSrc: notificationIcon,
-      imageAlt: "notification Icon",
-      title: "Benachrichtigungen",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [1, 2]
+//     },
+//     {
+//       link: "/user-account-settings/notification-settings",
+//       imageSrc: notificationIcon,
+//       imageAlt: "notification Icon",
+//       title: "Benachrichtigungen",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [1, 2]
   
-    },
-    {
-      link: "/user-account-settings/commercial-seller",
-      imageSrc: notificationIcon,
-      imageAlt: "notification Icon",
-      title: "Details zur Firma",
-      description: 'Lorem Ipsum has been the industry"s standard dummy.',
-      role: [2]
+//     },
+//     {
+//       link: "/user-account-settings/commercial-seller",
+//       imageSrc: notificationIcon,
+//       imageAlt: "notification Icon",
+//       title: "Details zur Firma",
+//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
+//       role: [2]
   
-    },
-  ];
+//     },
+//   ];
 
 
   

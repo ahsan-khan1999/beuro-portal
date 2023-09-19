@@ -1,4 +1,4 @@
-import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
+// import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
 import { PhoneProps } from "@/types";
 import { useEffect } from "react";
 import { Controller } from "react-hook-form";
@@ -46,9 +46,9 @@ export const TelephoneInputField = ({
               onlyCountries={["ch", "de", "at", "fr", "it","pk"]}
               disabled={disabled}
             />
-            {success && (
+            {/* {success && (
               <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />
-            )}
+            )} */}
           </div>
         );
       }}
