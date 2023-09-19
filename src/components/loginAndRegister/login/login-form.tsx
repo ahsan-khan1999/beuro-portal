@@ -7,7 +7,7 @@ export const LoginForm = ({
   handleSubmit,
   errors,
 }: LoginFormProps) => {
-  const defaultClassName = "mt-[30px] max-w-[384px] w-full ";
+  const defaultClassName = "mt-[30px]  ";
   return (
     <>
       <Form

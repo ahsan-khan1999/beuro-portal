@@ -10,14 +10,15 @@ export default function Home() {
   return (
     <div className="p-[14px]">
       <Image src={logo} alt="Buro Logo" />
-      <div className="mt-[123px]">
-        <h1 className="font-semibold text-dark text-[26px] ">
-          Sign in to Büro-365
-        </h1>
-        <span className="mt-3 text-xs text-[#8F8F8F]">
-          Manage your business with us
-        </span>
-        {/* <div className="mt-4">
+      <div className="px-8">
+        <div className="mt-[123px] max-w-[384px] w-full ">
+          <h1 className="font-semibold text-dark text-[26px] text-center ">
+            Sign in to Büro-365
+          </h1>
+          <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
+            Manage your business with us
+          </span>
+          {/* <div className="mt-4">
           <label className="text-[#1E1E1E] text-sm mb-3">Email</label>
           <div className=" relative">
             <Image src={emailIcon} alt="Email Icon" className="absolute" />
@@ -27,7 +28,7 @@ export default function Home() {
             />
           </div>
         </div> */}
-        <div className="px-8">
+
           <LoginForm
             fields={fields}
             onSubmit={onSubmit}

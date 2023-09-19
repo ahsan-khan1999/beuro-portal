@@ -1,10 +1,10 @@
-import { ModalType } from "@/enums";
+// import { ModalType } from "@/enums";
 
 export interface GlobalState {
   loading: boolean;
   file: object | null;
   modal: {
-    type: ModalType;
+    // type: ModalType;
     cardId?: number;
   };
 }
