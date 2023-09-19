@@ -4,6 +4,7 @@ import logo from "@/assets/svgs/logo.svg";
 import emailIcon from "@/assets/svgs/input-email.svg";
 import { useLoginForm } from "@/hooks/auth/useLogin";
 import { LoginForm } from "@/components/loginAndRegister/login/login-form";
+import Link from "next/link";
 
 export default function Home() {
   const { fields, onSubmit, handleSubmit, errors, error } = useLoginForm();
@@ -35,7 +36,24 @@ export default function Home() {
             handleSubmit={handleSubmit}
             errors={errors}
           />
+          <div className="mt-6 text-sm flex justify-center text-dark">
+            Don't have an account?
+            <Link href={""} className="text-primary">
+              &nbsp;Sign Up
+            </Link>
+          </div>
         </div>
+      </div>
+      <div className="space-x-4 flex justify-center">
+        <Link href={""} className="text-xs text-[#8F8F8F]">
+          English
+        </Link>
+        <Link href={""} className="text-xs text-[#8F8F8F]">
+          Privacy Policy
+        </Link>
+        <Link href={""} className="text-xs text-[#8F8F8F]">
+          Copyright 2023
+        </Link>
       </div>
     </div>
   );
