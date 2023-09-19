@@ -44,7 +44,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="space-x-4 flex justify-center">
+      <div className="space-x-[18px] flex justify-center">
         <Link href={""} className="text-xs text-[#8F8F8F]">
           English
         </Link>
