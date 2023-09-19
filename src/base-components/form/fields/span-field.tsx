@@ -23,13 +23,13 @@ export const SpanField: React.FC<SpanProps> = ({
       </span>
     </span>
   ) : (
-    <span className={`${containerClassName || ''}`} onClick={() => onClick && onClick()}>
+    <span
+      className={`${containerClassName || ""}`}
+      onClick={() => onClick && onClick()}
+    >
       {text}
       {linkText && (
-        <Link
-          className={`${linkClasses}`}
-          href={linkHref ? linkHref : "/"}
-        >
+        <Link className={`${linkClasses} `} href={linkHref ? linkHref : "/"}>
           {linkText}
         </Link>
       )}

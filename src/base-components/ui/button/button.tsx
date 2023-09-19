@@ -15,7 +15,7 @@ export const Button = ({
   iconAlt,
 }: ButtonProps) => {
   const defaultClasses =
-    "min-w-fit px-4 bg-primary hover:bg-buttonHover rounded text-white !h-[50px] font-medium";
+    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium";
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button
@@ -41,7 +41,8 @@ export const Button = ({
       }}
     >
       {icon && <Image src={icon} alt={iconAlt} className="mr-1 " />}{" "}
-      {/* {success ? "Geändert" : text} {success && <ButtonSuccessIcon />} */}
+      {success ? "Geändert" : text}
+      {/* {success && <ButtonSuccessIcon />} */}
     </button>
   );
 };

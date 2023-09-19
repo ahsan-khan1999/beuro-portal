@@ -11,19 +11,19 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      label: { text: "E-Mail", htmlFor: "email" },
+      label: { text: "Email", htmlFor: "email" },
       field: {
         type: Field.input,
         id: "email",
         name: "email",
         inputType: "email",
-        placeholder: "E-Mail Address",
+        placeholder: "Please enter an email address",
         register,
       },
     },
     {
       label: {
-        text: "Passwort",
+        text: "Password",
         htmlFor: "password",
         className: "mb-[10px]",
       },
@@ -35,6 +35,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         register,
       },
     },
+
     {
       containerClass: "inline-flex mb-0",
       field: {
@@ -42,26 +43,27 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         name: "rememberMe",
         type: Field.checkbox,
         register,
-        description: "Eingeloggt bleiben",
+        description: "Remember me",
       },
     },
     {
-      containerClass: "inline-flex mb-0",
+      containerClass: "inline-flex mb-0  ml-[44px]",
       field: {
         type: Field.span,
         name: Field.span,
-        linkText: "Passwort vergessen",
+        linkText: "Forget Password?",
         linkHref: "/forget-password",
-        containerClassName: "inline-flex font-medium text-gray ml-[44px]",
-        linkClassName: "font-medium !text-gray",
+        containerClassName: "inline-flex font-medium text-gray",
+        linkClassName: "text-sm font-medium text-primary",
       },
     },
+
     {
-      containerClass: "mt-5",
+      containerClass: "mt-8",
       label: null,
       field: {
         type: Field.button,
-        text: "Anmeldung",
+        text: "Login",
         inputType: "submit",
         className: "rounded-lg justify-center text-white ",
         loading,

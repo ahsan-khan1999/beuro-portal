@@ -11,7 +11,7 @@ export const CheckBox = ({
   textClassName,
   description,
 }: CheckBoxProps) => {
-  const containerDefaultClasses = "flex items-center gap-x-[6px]";
+  const containerDefaultClasses = "flex items-center gap-x-[12px]";
   const containerClasses = combineClasses(
     containerDefaultClasses,
     containerClassName
@@ -23,11 +23,11 @@ export const CheckBox = ({
           id={id}
           type="checkbox"
           {...register(name)}
-          className={styles.hiddenCheckbox}
+          className={`${styles.hiddenCheckbox} checkbox-gradietnt`}
         />
-        <label htmlFor={id} className={styles.checkboxLabel}></label>
+        <label htmlFor={id} className={`${styles.checkboxLabel}`}></label>
       </div>
-      <span className={textClassName}>{description}</span>
+      <span className={`${textClassName} text-sm`}>{description}</span>
     </div>
   );
 };

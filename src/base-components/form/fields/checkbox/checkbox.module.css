@@ -7,16 +7,18 @@
 .hiddenCheckbox {
     display: none;
 }
+
   
 .checkboxLabel {
     position: relative;
     width: 16px; /* Adjusted to include padding */
     height: 16px; /* Adjusted to include padding */
     padding: 4px; /* Padding around the tick */
-    border: 1px solid #C4C4C4;
-    border-radius: 4px;  /* Square with border radius */
+    /* border: 1px solid #C4C4C4; */
+    border-radius: 100%;  /* Square with border radius */
     cursor: pointer;
-    background: white;
+  background: var(--G3);
+    /* font-size: 14px !important; */
 }
   
 .hiddenCheckbox:checked + .checkboxLabel {
@@ -28,9 +30,9 @@
     position: absolute;
     width: 5px;
     height: 8px;
-    border: solid #68119a;
+    border: solid white;
     border-width: 0 2px 2px 0;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg); /* Adjusted translation */
     display: none;
