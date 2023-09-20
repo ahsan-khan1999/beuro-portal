@@ -43,7 +43,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         name: "rememberMe",
         type: Field.checkbox,
         register,
-        description: "Remember me",
+        label: "Remember me",
       },
     },
     {

@@ -37,10 +37,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="space-x-[18px] flex justify-center mt-[94px]">
-              <Link href={""} className="text-xs text-[#8F8F8F]">
-                English
-              </Link>
+            <div className="space-x-[18px] flex items-center justify-center mt-[94px]">
+              <select className="text-xs text-[#8F8F8F] focus:outline-none">
+                <option>English</option>
+                <option>German</option>
+              </select>
               <Link href={""} className="text-xs text-[#8F8F8F]">
                 Privacy Policy
               </Link>

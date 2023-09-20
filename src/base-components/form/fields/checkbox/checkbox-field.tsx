@@ -9,6 +9,7 @@ export const CheckBox = ({
   className,
   containerClassName,
   textClassName,
+  label,
   description,
 }: CheckBoxProps) => {
   const containerDefaultClasses = "flex items-center gap-x-[12px]";
@@ -18,14 +19,17 @@ export const CheckBox = ({
   );
   return (
     <div className={`${containerClasses}`}>
-      <div className="flex">
+      <div className="flex items-center">
         <input
           id={id}
           type="checkbox"
           {...register(name)}
           className={`${styles.hiddenCheckbox} checkbox-gradietnt`}
         />
-        <label htmlFor={id} className={`${styles.checkboxLabel}`}></label>
+        <label htmlFor={id} className={`${styles.checkboxLabel} `}></label>
+        <label htmlFor={id} className="ml-2 cursor-pointer">
+          {label}
+        </label>
       </div>
       <span className={`${textClassName} text-sm`}>{description}</span>
     </div>

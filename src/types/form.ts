@@ -1,4 +1,17 @@
-import { FieldErrors, FieldValues, SubmitHandler, UseFormHandleSubmit, UseFormRegister, Control, UseFormWatch, UseFormSetValue, ControllerRenderProps, UseFormTrigger, FieldError, UseFormSetError } from "react-hook-form";
+import {
+  FieldErrors,
+  FieldValues,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  Control,
+  UseFormWatch,
+  UseFormSetValue,
+  ControllerRenderProps,
+  UseFormTrigger,
+  FieldError,
+  UseFormSetError,
+} from "react-hook-form";
 import { ButtonProps } from "./ui";
 import { CardType, Field, Salutation } from "@/enums";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -15,25 +28,27 @@ export interface LabelProps {
   text: string;
   htmlFor: string;
   className?: string;
-};
+}
 
 export interface InputProps extends BaseFieldProps<Field.input> {
-  inputType: 'text' | 'email' | 'number';
+  inputType: "text" | "email" | "number";
   value?: string;
   success?: boolean;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
   disabled?: boolean;
-  setValue?: UseFormSetValue<FieldValues>
-};
+  setValue?: UseFormSetValue<FieldValues>;
+}
 
-export interface CreditCardInputProps extends BaseFieldProps<Field.creditCardNumberInput> {
+export interface CreditCardInputProps
+  extends BaseFieldProps<Field.creditCardNumberInput> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
 }
 
-export interface CreditCardExpiryDateInputProps extends BaseFieldProps<Field.creditCardExpiryDateInput> {
+export interface CreditCardExpiryDateInputProps
+  extends BaseFieldProps<Field.creditCardExpiryDateInput> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
@@ -43,7 +58,6 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-
 }
 
 export interface OptionType {
@@ -56,7 +70,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string;
   trigger?: UseFormTrigger<FieldValues>;
-};
+}
 
 export interface SelectBoxProps {
   id: string;
@@ -71,6 +85,7 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   description: string;
   containerClassName?: string;
   textClassName?: string;
+  label?: string;
 }
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
@@ -80,7 +95,8 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   textClassName?: string;
 }
 
-export interface DragAndDropFileFieldProps extends BaseFieldProps<Field.dragAndDropFileField> {
+export interface DragAndDropFileFieldProps
+  extends BaseFieldProps<Field.dragAndDropFileField> {
   control?: Control<FieldValues>;
 }
 
@@ -91,8 +107,7 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   watch?: UseFormWatch<FieldValues>;
   setValue?: UseFormSetValue<FieldValues>;
   success?: boolean;
-  disabled?: boolean
-
+  disabled?: boolean;
 }
 
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
@@ -109,8 +124,8 @@ export interface SpanProps {
   containerClassName?: string;
   linkClassName?: string;
   name?: string;
-  dispatch?: Dispatch,
-  onClick?: Function
+  dispatch?: Dispatch;
+  onClick?: Function;
 }
 
 export interface DivProps {
@@ -119,7 +134,6 @@ export interface DivProps {
   children: FormField[];
   className?: string;
   errors?: Record<string, any>;
-
 }
 
 interface LinkImage {
@@ -141,16 +155,44 @@ export interface LinkProps extends BaseFieldProps<Field.link> {
 export type FieldPropsWithChildren = FieldProps & {
   childrenFields: FormField[];
   className?: string;
-}
+};
 
-export type FieldType = Field.input | Field.creditCardNumberInput | Field.creditCardExpiryDateInput | Field.password | Field.select | Field.phone | Field.date | Field.checkbox | Field.radio | Field.dragAndDropFileField | Field.span | Field.div | Field.button | Field.link;
-export type FieldProps = InputProps | CreditCardInputProps | CreditCardExpiryDateInputProps | PasswordInputProps | SelectProps | PhoneProps | DatePickerProps | CheckBoxProps | RadioButtonProps | DragAndDropFileFieldProps | SpanProps | DivProps | ButtonProps | LinkProps;
+export type FieldType =
+  | Field.input
+  | Field.creditCardNumberInput
+  | Field.creditCardExpiryDateInput
+  | Field.password
+  | Field.select
+  | Field.phone
+  | Field.date
+  | Field.checkbox
+  | Field.radio
+  | Field.dragAndDropFileField
+  | Field.span
+  | Field.div
+  | Field.button
+  | Field.link;
+export type FieldProps =
+  | InputProps
+  | CreditCardInputProps
+  | CreditCardExpiryDateInputProps
+  | PasswordInputProps
+  | SelectProps
+  | PhoneProps
+  | DatePickerProps
+  | CheckBoxProps
+  | RadioButtonProps
+  | DragAndDropFileFieldProps
+  | SpanProps
+  | DivProps
+  | ButtonProps
+  | LinkProps;
 
 export interface FormField {
   containerClass?: string;
   label?: LabelProps | null;
   field: FieldProps;
-};
+}
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
@@ -162,7 +204,7 @@ export interface FieldComponents {
   date: React.FC<DatePickerProps>;
   checkbox: React.FC<CheckBoxProps>;
   radio: React.FC<RadioButtonProps>;
-  dragAndDropFileField: React.FC<DragAndDropFileFieldProps>
+  dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
@@ -182,7 +224,6 @@ export interface IPersonalDetailsInputs {
   fullName: string;
   userName: string;
   DOB: string;
-
 }
 
 export interface FormComponentProps {
@@ -194,8 +235,8 @@ export interface FormComponentProps {
   setValue?: UseFormSetValue<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
   onSubmit: SubmitHandler<FieldValues>;
-  nextFormHandler: Function,
-  setError?: UseFormSetError<FieldValues>
+  nextFormHandler: Function;
+  setError?: UseFormSetError<FieldValues>;
 }
 
 export interface FormFooterProps {
