@@ -27,12 +27,12 @@ const FormSection = () => {
             handleSubmit={handleSubmit}
             errors={errors}
           />
-          <div className="mt-6 text-sm flex justify-center text-dark">
+          {/* <div className="mt-6 text-sm flex justify-center text-dark">
             Don't have an account?
             <Link href={""} className="text-primary">
               &nbsp;Sign Up
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="space-x-[18px] flex items-center justify-center    ">

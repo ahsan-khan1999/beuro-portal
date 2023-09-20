@@ -27,7 +27,7 @@ export const SpanField: React.FC<SpanProps> = ({
       className={`${containerClassName || ""}`}
       onClick={() => onClick && onClick()}
     >
-      {text}&nbsp;
+      {text}{""}
       {linkText && (
         <Link className={`${linkClasses} `} href={linkHref ? linkHref : "/"}>
           {linkText}

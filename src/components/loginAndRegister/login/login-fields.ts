@@ -76,6 +76,18 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         loading,
       },
     },
+    {
+      containerClass: "flex mb-0 justify-center mt-6",
+      field: {
+        type: Field.span,
+        text: "Don't have an account?",
+        name: Field.span,
+        linkText: " Sign Up",
+        linkHref: "/registration",
+        containerClassName: "text-[14px] text-dark  ",
+        linkClassName: "  text-primary",
+      },
+    },
   ];
   return formField;
 };

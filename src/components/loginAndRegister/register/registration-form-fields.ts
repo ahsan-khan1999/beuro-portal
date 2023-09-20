@@ -66,7 +66,7 @@ export const generateFormField: GenerateRegistrationFormField = (
         linkText: " Privacy Policy.",
         linkHref: "/forget-password",
         containerClassName: "text-[14px] text-dark ",
-        linkClassName: " text-dark text-primary",
+        linkClassName: " text-primary",
       },
     },
     {
@@ -78,6 +78,18 @@ export const generateFormField: GenerateRegistrationFormField = (
         inputType: "submit",
         className: "rounded-lg justify-center text-white",
         loading,
+      },
+    },
+    {
+      containerClass: "flex mb-0 justify-center mt-6",
+      field: {
+        type: Field.span,
+        text: "Don't have an account?",
+        name: Field.span,
+        linkText: " Sign In",
+        linkHref: "/login",
+        containerClassName: "text-sm text-dark  ",
+        linkClassName: " text-primary",
       },
     },
   ];
