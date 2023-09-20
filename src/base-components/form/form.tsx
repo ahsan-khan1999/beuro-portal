@@ -22,7 +22,7 @@ export const Form = React.memo(
           const error =
             errors && fieldName ? errors[fieldName]?.message : undefined;
           const containerClasses = combineClasses(
-            "flex flex-col mb-5",
+            "flex flex-col mb-4",
             fieldData?.containerClass
           );
           const labelClasses = combineClasses(

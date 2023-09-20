@@ -12,7 +12,7 @@ const FormSection = () => {
   return (
     <div className="w-[50%] px-7 flex flex-col justify-between">
       <Image src={logo} alt="Buro Logo" className="mt-5" />
-      <div className="px-8 flex flex-col justify-center  ">
+      <div className="px-[32px] flex flex-col justify-center pt-3 ">
         <div className=" max-w-[384px] w-full  ">
           {/* mt-[123px] */}
           <h1 className="font-semibold text-dark text-[26px] text-center ">

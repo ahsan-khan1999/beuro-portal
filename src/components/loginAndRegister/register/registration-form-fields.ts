@@ -11,59 +11,72 @@ export const generateFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      label: { text: "E-Mail", htmlFor: "email" },
+      label: { text: "Full Name", htmlFor: "text" },
       field: {
         type: Field.input,
-        id: "email",
-        name: "email",
-        inputType: "email",
-        placeholder: "E-Mail Address",
+        id: "text",
+        name: "text",
+        inputType: "text",
+        placeholder: "Enter your full name",
         register,
       },
     },
     {
-      label: { text: "E-Mail", htmlFor: "email" },
+      label: { text: "Email", htmlFor: "email" },
       field: {
         type: Field.input,
         id: "email",
         name: "email",
         inputType: "email",
-        placeholder: "E-Mail Address",
+        placeholder: "user@example.com",
         register,
       },
     },
 
     {
       label: {
-        text: "Passwort",
+        text: "Password",
         htmlFor: "password",
-        className: "mb-[10px]",
+        // className: "mb-[10px]",
       },
       field: {
         type: Field.password,
         id: "password",
         name: "password",
-        placeholder: "Password",
+        placeholder: "Enter Your Password",
         register,
       },
     },
     {
-      label: { text: "Passwort bestätigen", htmlFor: "confirmPassword" },
+      label: { text: "Confirm Password", htmlFor: "confirmPassword" },
       field: {
         type: Field.password,
         id: "confirmPassword",
         name: "confirmPassword",
-        placeholder: "Password",
+        placeholder: "Confirm Your Password",
         register,
       },
     },
     {
+      containerClass: "inline-flex mb-0",
+      field: {
+        type: Field.span,
+        text: "By creating an account your agreeing to our",
+        name: Field.span,
+        linkText: " Privacy Policy.",
+        linkHref: "/forget-password",
+        containerClassName: "text-[14px] text-dark ",
+        linkClassName: " text-dark text-primary",
+      },
+    },
+    {
+      containerClass: "mt-6",
       label: null,
       field: {
         type: Field.button,
-        text: "Weiter",
+        text: "Sign Up",
         inputType: "submit",
-        className: "mt-5 rounded-lg justify-center",
+        className: "rounded-lg justify-center text-white",
         loading,
       },
     },

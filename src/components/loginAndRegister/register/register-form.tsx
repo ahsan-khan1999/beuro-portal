@@ -6,13 +6,14 @@ export const RegisterationForm = ({
   onSubmit,
   errors,
 }: RegistrationFormProps) => {
+  const defaultClassName = "mt-4  ";
   return (
     <Form
       formFields={fields}
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       errors={errors}
-      className="mt-[30px] max-w-[580px] w-full px-4"
+      className={`${defaultClassName} `}
     />
   );
 };
