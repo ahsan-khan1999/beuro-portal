@@ -19,9 +19,9 @@ export const InputField = ({
   setValue,
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
+  const defaultClasses = `border border-borderColor rounded-lg w-full  ${
     success ? "pl-4 pr-10" : name == "email" ? "pl-10 pr-4" : "px-4"
-  } py-3 focus:border-primary outline-none text-dark text-sm`;
+  } py-[10px] focus:border-primary outline-none text-dark text-sm`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
   console.log(inputFocus);
@@ -31,7 +31,7 @@ export const InputField = ({
       {name == "email" && (
         <InputEmail
           pathClass={inputFocus ? "fill-primary" : "fill-[#8F8F8F]"}
-          className="absolute top-5 left-4"
+          className="absolute top-4 left-4"
         />
       )}
       <input

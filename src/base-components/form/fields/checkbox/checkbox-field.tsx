@@ -27,7 +27,7 @@ export const CheckBox = ({
           className={`${styles.hiddenCheckbox} checkbox-gradietnt`}
         />
         <label htmlFor={id} className={`${styles.checkboxLabel} `}></label>
-        <label htmlFor={id} className="ml-2 cursor-pointer">
+        <label htmlFor={id} className="ml-2 cursor-pointer text-sm">
           {label}
         </label>
       </div>

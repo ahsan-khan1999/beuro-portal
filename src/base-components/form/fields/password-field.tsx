@@ -15,7 +15,7 @@ export const PasswordField = ({
   className,
 }: PasswordInputProps) => {
   const [showPass, setShowPass] = useState<boolean>(false);
-  const defaultClasses = `w-full border border-borderColor rounded-lg h-12  py-3 focus:border-primary outline-none ${
+  const defaultClasses = `w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     name == "password" ? "pl-10 pr-4" : "px-4"
   }`;
   return (
@@ -24,7 +24,7 @@ export const PasswordField = ({
         <Image
           src={passwordIcon}
           alt="Password Icon"
-          className="absolute top-[17px] left-4"
+          className="absolute top-[14px] left-4"
         />
       )}
       <input
@@ -39,8 +39,8 @@ export const PasswordField = ({
         className="absolute right-[16px] cursor-pointer"
         src={showPass ? eyeOpen : eyeClose}
         alt="show password icon"
-        width={24}
-        height={24}
+        width={20}
+        height={20}
         onClick={() => setShowPass(!showPass)}
       />
     </div>
