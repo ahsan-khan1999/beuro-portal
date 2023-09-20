@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PasswordInputProps } from "@/types";
-// import eyeOpen from "@/assets/eye-open.png";
-// import eyeClose from '@/assets/eye-close.png';
+import eyeOpen from "@/assets/pngs/eye-open.png";
+import eyeClose from "@/assets/pngs/eye-close.png";
 import { useState } from "react";
 import passwordIcon from "@/assets/svgs/password.svg";
 
@@ -35,14 +35,14 @@ export const PasswordField = ({
         placeholder={placeholder}
         className={`${defaultClasses} ${className}`}
       />
-      {/* <Image
+      <Image
         className="absolute right-[16px] cursor-pointer"
         src={showPass ? eyeOpen : eyeClose}
         alt="show password icon"
         width={24}
         height={24}
         onClick={() => setShowPass(!showPass)}
-      /> */}
+      />
     </div>
   );
 };

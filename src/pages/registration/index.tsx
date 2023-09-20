@@ -1,6 +1,8 @@
-// import { Poppins } from "next/font/google";
 import LoginOrRegister from "@/components/loginAndRegister/LoginOrRegister";
+import React from "react";
 
-export default function Home() {
+const Index = () => {
   return <LoginOrRegister />;
-}
+};
+
+export default Index;

@@ -13,6 +13,11 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
 import { CountryType, Image, countryType } from "./ui";
 
+export interface SVGIconProp {
+  className?: string;
+  pathClass?: string;
+}
+
 export interface MyComponentProp {
   children: ReactNode;
 }
@@ -99,9 +104,7 @@ export type GenerateFormContactField = (
   verifyPhoneOtp?: Function,
   otp?: string,
   setError?: UseFormSetError<FieldValues>,
-  translate?: Function,
-
-
+  translate?: Function
 ) => FormField[];
 export type GenerateFormAddressField = (
   register: UseFormRegister<FieldValues>,

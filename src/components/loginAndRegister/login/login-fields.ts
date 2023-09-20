@@ -35,26 +35,33 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         register,
       },
     },
-
     {
-      containerClass: "inline-flex mb-0",
       field: {
-        id: Field.checkbox,
-        name: "rememberMe",
-        type: Field.checkbox,
-        register,
-        label: "Remember me",
-      },
-    },
-    {
-      containerClass: "inline-flex mb-0  ml-[44px]",
-      field: {
-        type: Field.span,
-        name: Field.span,
-        linkText: "Forget Password?",
-        linkHref: "/forget-password",
-        containerClassName: "inline-flex font-medium text-gray",
-        linkClassName: "text-sm font-medium text-primary",
+        type: Field.div,
+        className: "flex justify-between ",
+        children: [
+          {
+            containerClass: "inline-flex mb-0",
+            field: {
+              id: Field.checkbox,
+              name: "rememberMe",
+              type: Field.checkbox,
+              register,
+              label: "Remember me",
+            },
+          },
+          {
+            containerClass: "inline-flex mb-0  ",
+            field: {
+              type: Field.span,
+              name: Field.span,
+              linkText: "Forget Password?",
+              linkHref: "/forget-password",
+              containerClassName: "inline-flex font-medium text-gray",
+              linkClassName: "text-sm font-medium text-primary",
+            },
+          },
+        ],
       },
     },
 

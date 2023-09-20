@@ -2,8 +2,9 @@
 import { InputProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import emailIcon from "@/assets/svgs/input-email.svg";
+import { InputEmail } from "@/assets/svgs/components/inputEmail";
 
 export const InputField = ({
   id,
@@ -17,22 +18,25 @@ export const InputField = ({
   disabled,
   setValue,
 }: InputProps) => {
+  const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
     success ? "pl-4 pr-10" : name == "email" ? "pl-10 pr-4" : "px-4"
   } py-3 focus:border-primary outline-none text-dark text-sm`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
+  console.log(inputFocus);
 
   return (
     <div className="relative w-full">
       {name == "email" && (
-        <Image
-          src={emailIcon}
-          alt="Email Icon"
+        <InputEmail
+          pathClass={inputFocus ? "fill-primary" : "fill-[#8F8F8F]"}
           className="absolute top-5 left-4"
         />
       )}
       <input
+        onFocus={() => setInputFocus(true)}
+        // onBlur={()=>setInputFocus(false)}
         id={id}
         type={inputType}
         defaultValue={value}
