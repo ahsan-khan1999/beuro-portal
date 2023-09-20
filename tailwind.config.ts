@@ -12,7 +12,7 @@ module.exports = {
       xl: "1160px",
     },
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
+      sans: ["Open Sans", "sans-serif"],
     },
     extend: {
       fontFamily: {
