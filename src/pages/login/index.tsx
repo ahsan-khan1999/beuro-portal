@@ -7,7 +7,7 @@ const Index = () => {
     <div className="flex flex-col justify-center min-h-screen">
       <div className="mx-auto max-w-[1030px]    shadow-loginCard ">
         <div className="p-[14px] flex min-h-[749px] ">
-          <FormSection />
+          <FormSection heading="Sign in to Büro-365" name="login" />
           <DescriptionSection />
         </div>
       </div>
