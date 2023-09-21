@@ -12,6 +12,7 @@ import {
 import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
 import { CountryType, Image, countryType } from "./ui";
+import { NextRouter } from "next/router";
 
 export interface SVGIconProp {
   className?: string;
@@ -88,7 +89,8 @@ export type GenerateFormField = (
 ) => FormField[];
 export type GenerateRegistrationFormField = (
   register: UseFormRegister<FieldValues>,
-  loader: boolean
+  loader: boolean,
+  router: NextRouter
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,

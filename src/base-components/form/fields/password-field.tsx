@@ -16,11 +16,11 @@ export const PasswordField = ({
 }: PasswordInputProps) => {
   const [showPass, setShowPass] = useState<boolean>(false);
   const defaultClasses = `w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
-    name == "password" ? "pl-10 pr-4" : "px-4"
+    type == "password" ? "pl-10 pr-4" : "px-4"
   }`;
   return (
     <div className="relative flex items-center">
-      {name == "password" && (
+      {type == "password" && (
         <Image
           src={passwordIcon}
           alt="Password Icon"

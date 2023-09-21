@@ -67,6 +67,7 @@ module.exports = {
       },
       boxShadow: (theme: any) => ({
         loginCard: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
+        emailPopup: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
         shadowCard: `0px 6px 10px ${theme("colors.shadowColor")}`,
         languagesDropDown: `0px 0px 26px ${theme("colors.shadowColor")}`,
         blogsShadow: `0px 0px 16px ${theme("colors.shadowColor")}`,

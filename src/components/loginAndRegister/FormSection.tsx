@@ -7,10 +7,16 @@ import Image from "next/image";
 import { RegisterationForm } from "./register/register-form";
 import useRegistration from "@/hooks/auth/useRegistration";
 import Links from "./links";
+import useResetPassword from "@/hooks/auth/useResetPassword";
+import useFrogetPassword from "@/hooks/auth/useFrogetPassword";
 
 const FormSection = ({ heading, name }: any) => {
   const { fields, onSubmit, handleSubmit, errors, error } =
-    name == "login" ? useLoginForm() : useRegistration();
+    name == "login"
+      ? useLoginForm()
+      : name == "register"
+      ? useRegistration()
+      : useFrogetPassword();
   return (
     <div className="w-[50%] px-7 flex flex-col justify-between">
       <Image src={logo} alt="Buro Logo" className="mt-5" />

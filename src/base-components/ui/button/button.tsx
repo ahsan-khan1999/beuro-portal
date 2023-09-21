@@ -15,7 +15,7 @@ export const Button = ({
   iconAlt,
 }: ButtonProps) => {
   const defaultClasses =
-    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium";
+    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg ";
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button
@@ -35,7 +35,7 @@ export const Button = ({
       type={inputType}
       className={`${classes} ${
         success && "flex items-center gap-x-2 "
-      } flex items-center`}
+      } flex items-center justify-center `}
       onClick={() => {
         onClick && onClick();
       }}

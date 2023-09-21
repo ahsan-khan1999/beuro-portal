@@ -4,6 +4,7 @@ import {
   GenerateFormField,
   GenerateRegistrationFormField,
 } from "@/types";
+import { useRouter } from "next/router";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
@@ -89,33 +90,56 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       },
     },
   ];
+
   return formField;
 };
 
 export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
   register,
-  loading
+  loading,
+  router
 ) => {
   const formFields: FormField[] = [
     {
-      label: { text: "E-Mail", htmlFor: "email" },
+      containerClass: "mb-8",
+      label: { text: "Enter Your Email", htmlFor: "email" },
       field: {
         type: Field.input,
         id: "email",
         name: "email",
         inputType: "email",
-        placeholder: "E-Mail Address",
+        placeholder: "User@example.com",
         register,
       },
     },
     {
-      label: null,
       field: {
-        type: Field.button,
-        text: "Passwort zurücksetzen",
-        inputType: "submit",
-        className: "mt-5 rounded-lg",
-        loading,
+        type: Field.div,
+        className: "flex gap-x-4 ",
+        children: [
+          {
+            label: null,
+            field: {
+              type: Field.button,
+              text: "Back To Login",
+              inputType: "button",
+              className:
+                "w-[175px] bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
+              onClick: () => router.push("/login"),
+              loading,
+            },
+          },
+          {
+            label: null,
+            field: {
+              type: Field.button,
+              text: "Submit",
+              inputType: "submit",
+              className: "w-[190px]",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];
@@ -129,7 +153,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
   const formFields: FormField[] = [
     {
       label: {
-        text: "Neues Passwort",
+        text: "New Password",
         htmlFor: "password",
         className: "mb-[10px]",
       },
@@ -137,13 +161,14 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "password",
         name: "password",
-        placeholder: "Password",
+        placeholder: "Enter Your Password",
         register,
       },
     },
     {
+      containerClass: "mb-0",
       label: {
-        text: "Passwort bestätigen",
+        text: "Confirm Password",
         htmlFor: "confirmPassword",
         className: "mb-[10px]",
       },
@@ -151,7 +176,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "confirmPassword",
         name: "confirmPassword",
-        placeholder: "Password",
+        placeholder: "Confirm Your Password",
         register,
       },
     },
@@ -159,9 +184,9 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
-        text: "Passwort zurücksetzen",
+        text: "Submit",
         inputType: "submit",
-        className: "mt-5 rounded-lg",
+        className: "mt-8 rounded-lg",
         loading,
       },
     },
