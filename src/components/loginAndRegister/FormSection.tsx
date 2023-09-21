@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { RegisterationForm } from "./register/register-form";
 import useRegistration from "@/hooks/auth/useRegistration";
-import Links from "./links";
+import EntryLinks from "./EntryLinks";
 import useResetPassword from "@/hooks/auth/useResetPassword";
 import useFrogetPassword from "@/hooks/auth/useFrogetPassword";
 
@@ -45,7 +45,7 @@ const FormSection = ({ heading, name }: any) => {
           )}
         </div>
       </div>
-      <Links />
+      <EntryLinks />
     </div>
   );
 };

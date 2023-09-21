@@ -21,3 +21,9 @@ body {
   color: #1e1e1e;
   background: white;
 }
+.pricing-gradient{
+  background: linear-gradient(to right, #B503FE, #FF376F);
+}
+.filter-shadow {
+  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.07));
+}

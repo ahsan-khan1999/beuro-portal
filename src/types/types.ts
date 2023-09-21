@@ -90,7 +90,7 @@ export type GenerateFormField = (
 export type GenerateRegistrationFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  router: NextRouter
+  router?: NextRouter
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,

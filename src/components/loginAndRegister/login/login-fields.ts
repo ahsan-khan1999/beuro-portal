@@ -125,7 +125,7 @@ export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
               inputType: "button",
               className:
                 "w-[175px] bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
-              onClick: () => router.push("/login"),
+              onClick: () => router?.push("/login"),
               loading,
             },
           },
