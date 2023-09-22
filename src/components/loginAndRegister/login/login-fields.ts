@@ -93,6 +93,118 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 
   return formField;
 };
+export const detailScreensFormField: GenerateRegistrationFormField = (
+  register,
+  loading
+) => {
+  const formField: FormField[] = [
+    {
+      field: {
+        type: Field.div,
+        className: "grid grid-cols-2 gap-x-6 ",
+        children: [
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Password",
+              htmlFor: "password",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.password,
+              id: "password",
+              name: "password",
+              placeholder: "Password",
+              register,
+            },
+          },
+        ],
+      },
+    },
+    {
+      containerClass: "mt-8",
+      label: null,
+      field: {
+        type: Field.button,
+        text: "Login",
+        inputType: "submit",
+        className: "rounded-lg justify-center text-white ",
+        loading,
+      },
+    },
+  ];
+
+  return formField;
+};
 
 export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
   register,

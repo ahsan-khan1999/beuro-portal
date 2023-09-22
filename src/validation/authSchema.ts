@@ -1,4 +1,4 @@
-import { LoginFields } from "@/enums/auth";
+import { LoginFields, CompanyFields } from "@/enums/auth";
 import * as yup from "yup";
 import {
   RegisterationFields,
@@ -36,6 +36,28 @@ export const generateLoginValidation = (translate: Function) => {
     [LoginFields.password]: yup
       .string()
       .min(6, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+  });
+};
+export const detailScreensValidation = (translate: Function) => {
+  return yup.object().shape({
+    [CompanyFields.name]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [CompanyFields.phoneNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [CompanyFields.mobileNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [CompanyFields.websiteUrl]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [CompanyFields.mwstNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),
   });
 };
