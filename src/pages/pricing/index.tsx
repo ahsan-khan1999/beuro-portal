@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Cards from "@/components/loginAndRegister/pricing/cards";
+import Cards from "@/components/pricing/Cards";
 
 const Pricing = () => {
   const [planTime, setPlanTime] = useState("Monthly");
