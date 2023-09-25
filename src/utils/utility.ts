@@ -19,6 +19,16 @@ export const getNextFormStage = (
   }
   return null;
 };
+export const getBackFormStage = (
+  current: DetailScreensStages
+): DetailScreensStages | null => {
+  const stages = Object.values(DetailScreensStages);
+  const currentIndex = stages.indexOf(current);
+  if (currentIndex !== -1 && currentIndex > 0) {
+    return stages[currentIndex - 1];
+  }
+  return null;
+};
 
 
 export function isFieldType(type: any): type is FieldType {

@@ -12,7 +12,7 @@ import { getNextFormStage, returnStep } from "@/utils/utility";
 import { updateQuery } from "@/utils/update-query";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { DetailScreensStages } from "@/enums/auth";
-import Company from "@/components/loginAndRegister/detailScreens/company";
+import Company from "@/components/loginAndRegister/detailScreens/Company";
 import Bank from "@/components/loginAndRegister/detailScreens/Bank";
 import Location from "@/components/loginAndRegister/detailScreens/Location";
 
@@ -101,6 +101,7 @@ export default function useDetail() {
     onSubmit,
     nextFormHandler,
     CurrentFormComponent,
+    currentFormStage,
     progress,
   };
 }

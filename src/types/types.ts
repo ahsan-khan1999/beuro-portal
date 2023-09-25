@@ -54,8 +54,8 @@ export interface SideBarCardProps {
   setArticleType: (articleType: number) => void;
   articleType: number;
 }
-export interface helpCenterLayout {
-  hideContact?: boolean;
+export interface detailScreenCardsLayout {
+  currentFormStage: string;
   children: ReactNode;
 }
 export interface successPopup {

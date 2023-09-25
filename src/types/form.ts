@@ -237,6 +237,7 @@ export interface FormComponentProps {
   onSubmit: SubmitHandler<FieldValues>;
   nextFormHandler: Function;
   setError?: UseFormSetError<FieldValues>;
+  currentFormStage: string;
 }
 
 export interface FormFooterProps {
