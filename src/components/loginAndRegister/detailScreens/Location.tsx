@@ -3,11 +3,21 @@ import companyIcon from "@/assets/svgs/company-details.svg";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import { useDetailLocation } from "@/hooks/auth/useDetailLocation";
+import { detailLocationFormField } from "../login/login-fields";
+import { FormComponentProps } from "@/types";
+import { useAppSelector } from "@/hooks/useRedux";
 
-
-const Location = () => {
+const Location = ({
+  onSubmit,
+  handleSubmit,
+  errors,
+  register,
+  control,
+}: FormComponentProps) => {
   const defaultClassName = "mt-4";
-  const { fields, onSubmit, handleSubmit, errors, error } = useDetailLocation();
+  // const { fields, onSubmit, handleSubmit, errors, error } = useDetailLocation();
+  const { loading } = useAppSelector((state) => state.auth);
+  const fields = detailLocationFormField(register, loading, control);
   return (
     <div className="flex flex-col justify-center min-h-screen mx-10">
       <div className="mx-auto max-w-[890px] w-full rounded-2xl    shadow-loginCard bg-white">

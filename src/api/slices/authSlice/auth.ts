@@ -139,25 +139,25 @@ export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      let apiData = {
-        ...data,
-        phoneNumber: data?.phoneNumber?.includes("+")
-          ? data?.phoneNumber
-          : "+" + data?.phoneNumber,
-      };
-      const response: ApiResponseTypePut = await apiServices.profileStep2(
-        apiData
-      );
-      thunkApi.dispatch(setErrorMessage(null));
+      // let apiData = {
+      //   ...data,
+      //   phoneNumber: data?.phoneNumber?.includes("+")
+      //     ? data?.phoneNumber
+      //     : "+" + data?.phoneNumber,
+      // };
+      // const response: ApiResponseTypePut = await apiServices.profileStep2(
+      //   apiData
+      // );
+      // thunkApi.dispatch(setErrorMessage(null));
 
-      thunkApi.dispatch(setUser(response.data.User));
-      saveUser(response.data.User);
+      // thunkApi.dispatch(setUser(response.data.User));
+      // saveUser(response.data.User);
       nextFormHandler();
 
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate);
-      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      // setErrors(setError, e?.data.data, translate);
+      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
@@ -166,16 +166,16 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      const response: ApiResponseTypePut = await apiServices.profileStep3(data);
-      thunkApi.dispatch(setUser(response.data.User));
-      thunkApi.dispatch(setErrorMessage(null));
+      // const response: ApiResponseTypePut = await apiServices.profileStep3(data);
+      // thunkApi.dispatch(setUser(response.data.User));
+      // thunkApi.dispatch(setErrorMessage(null));
 
-      saveUser(response.data.User);
+      // saveUser(response.data.User);
       nextFormHandler();
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate);
-      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      // setErrors(setError, e?.data.data, translate);
+      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }

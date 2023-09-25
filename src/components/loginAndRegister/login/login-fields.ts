@@ -212,7 +212,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
 };
 export const detailLocationFormField: GenerateRegistrationFormField = (
   register,
-  loading
+  loading,
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -292,7 +293,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.button,
               text: "Back",
-              inputType: "submit",
+              inputType: "button",
+              // onClick:()=>{Ro},
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
               loading,
@@ -318,7 +320,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
-  trigger
+  trigger,
+  router
 ) => {
   const formField: FormField[] = [
     {
@@ -335,17 +338,16 @@ export const detailBankFormField: GenerateRegistrationFormField = (
             },
             field: {
               // placeholder:"234324",
-              control: control,
               type: Field.select,
-              id: 1,
-              name: "123213",
+              id: "1",
+              name: "currency",
               options: [
-                { value: "", label: "123213" },
-                { value: "", label: "123213" },
-                { value: "", label: "123213" },
+                { value: "kujhi", label: "123213" },
+                { value: "kujhirt", label: "123213" },
+                { value: "kujhiyrt", label: "123213" },
               ],
               trigger,
-              value: "",
+              control,
             },
           },
           {
@@ -408,7 +410,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.button,
               text: "Back",
-              inputType: "submit",
+              inputType: "button",
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
               loading,

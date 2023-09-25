@@ -3,10 +3,26 @@ import companyIcon from "@/assets/svgs/company-details.svg";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import { useDetailBank } from "@/hooks/auth/useDetailBank";
+import { FormComponentProps } from "@/types";
+import {
+  detailBankFormField,
+  detailScreensFormField,
+} from "../login/login-fields";
+import { useAppSelector } from "@/hooks/useRedux";
 
-const Bank = () => {
+const Bank = ({
+  onSubmit,
+  handleSubmit,
+  errors,
+  register,
+  control,
+}: FormComponentProps) => {
   const defaultClassName = "mt-4";
-  const { fields, onSubmit, handleSubmit, errors, error } = useDetailBank();
+  // const { fields, onSubmit, handleSubmit, errors, error } = useDetailBank();
+  const { loading } = useAppSelector((state) => state.auth);
+  console.log(onSubmit);
+
+  const fields = detailBankFormField(register, loading, control);
   return (
     <div className="flex flex-col justify-center min-h-screen mx-10">
       <div className="mx-auto max-w-[890px] w-full rounded-2xl    shadow-loginCard bg-white">
