@@ -55,7 +55,7 @@ export interface SideBarCardProps {
   articleType: number;
 }
 export interface detailScreenCardsLayout {
-  currentFormStage: string;
+  currentFormStage?: string;
   children: ReactNode;
 }
 export interface successPopup {

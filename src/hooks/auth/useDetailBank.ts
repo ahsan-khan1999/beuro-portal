@@ -1,16 +1,6 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import {
-    detailBankFormField,
-  detailLocationFormField,
-  detailScreensFormField,
-  generateLoginFormField,
-} from "@/components/loginAndRegister/login/login-fields";
-import {
-  detailBankValidation,
-  detailLoactionValidation,
-  detailScreensValidation,
-  generateLoginValidation,
-} from "@/validation/authSchema";
+import { detailBankFormField } from "@/components/loginAndRegister/login/login-fields";
+import { detailBankValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -34,7 +24,7 @@ export const useDetailBank = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = detailBankFormField(register, loading, control,trigger);
+  const fields = detailBankFormField(register, loading, control, trigger);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
