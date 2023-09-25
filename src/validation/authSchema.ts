@@ -1,4 +1,9 @@
-import { LoginFields, CompanyFields } from "@/enums/auth";
+import {
+  LoginFields,
+  CompanyFields,
+  LocationFields,
+  BankFields,
+} from "@/enums/auth";
 import * as yup from "yup";
 import {
   RegisterationFields,
@@ -41,9 +46,7 @@ export const generateLoginValidation = (translate: Function) => {
 };
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
-    [CompanyFields.name]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [CompanyFields.name]: yup.string().required("tdguy"),
     [CompanyFields.phoneNumber]: yup
       .number()
       .min(11, translate("validationMessages.string.min"))
@@ -56,6 +59,44 @@ export const detailScreensValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mwstNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [CompanyFields.companyLogo]: yup.object(),
+  });
+};
+export const detailLocationValidation = (translate: Function) => {
+  return yup.object().shape({
+    [LocationFields.streetNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [LocationFields.houseNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [LocationFields.postalCode]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [LocationFields.city]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+export const detailBankValidation = (translate: Function) => {
+  return yup.object().shape({
+    [BankFields.currency]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [BankFields.bankName]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [BankFields.accountNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [BankFields.ibanNumber]: yup
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),

@@ -95,7 +95,8 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 };
 export const detailScreensFormField: GenerateRegistrationFormField = (
   register,
-  loading
+  loading,
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -105,86 +106,90 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
         children: [
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "Company Name",
+              htmlFor: "Company Name Input",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
+              type: Field.input,
+              inputType: "text",
+              id: "companyName",
+              name: "companyName",
+              placeholder: "Enter Your Company Name",
               register,
             },
           },
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "Phone Number",
+              htmlFor: "Phone Number Input",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
+              type: Field.input,
+              inputType: "number",
+              id: "phoneNumber",
+              name: "phoneNumber",
+              placeholder: "Enter Your Phone Number",
               register,
             },
           },
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "Mobile Number",
+              htmlFor: "number",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
+              type: Field.input,
+              inputType: "number",
+              id: "mobileNumber",
+              name: "mobileNumber",
+              placeholder: "Enter Your Mobile Number",
               register,
             },
           },
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "Website",
+              htmlFor: "text",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
+              type: Field.input,
+              inputType: "text",
+              id: "websiteAddress",
+              name: "websiteAddress",
+              placeholder: "Enter Your Website",
               register,
             },
           },
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "MwST Number",
+              htmlFor: "number",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
+              type: Field.input,
+              inputType: "number",
+              id: "mwstNumber",
+              name: "mwstNumber",
+              placeholder: "Enter Your MwST Number",
               register,
             },
           },
           {
             label: {
-              text: "Password",
-              htmlFor: "password",
+              text: "Upload Company Logo",
+              htmlFor: "upload",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
-              id: "password",
-              name: "password",
-              placeholder: "Password",
-              register,
+              id: "companyLogo",
+              name: "companyLogo",
+              type: Field.dragAndDropFileField,
+              control,
             },
           },
         ],
@@ -195,10 +200,230 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
-        text: "Login",
+        text: "Next",
         inputType: "submit",
-        className: "rounded-lg justify-center text-white ",
+        className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
         loading,
+      },
+    },
+  ];
+
+  return formField;
+};
+export const detailLocationFormField: GenerateRegistrationFormField = (
+  register,
+  loading
+) => {
+  const formField: FormField[] = [
+    {
+      field: {
+        type: Field.div,
+        className: "grid grid-cols-2 gap-x-6 ",
+        children: [
+          {
+            label: {
+              text: "Street Number",
+              htmlFor: "number",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "number",
+              id: "streetNumber",
+              name: "streetNumber",
+              placeholder: "Enter your Address",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "House Number",
+              htmlFor: "number",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "text",
+              id: "houseNumber",
+              name: "houseNumber",
+              placeholder: "Enter your Address",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Postcode",
+              htmlFor: "number",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "number",
+              id: "postalCode",
+              name: "postalCode",
+              placeholder: "Enter Your Postcode",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "City",
+              htmlFor: "text",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "text",
+              id: "city",
+              name: "city",
+              placeholder: "Enter Your City",
+              register,
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        className: "flex space-x-6",
+        children: [
+          {
+            field: {
+              type: Field.button,
+              text: "Back",
+              inputType: "submit",
+              className:
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
+              loading,
+            },
+          },
+          {
+            field: {
+              type: Field.button,
+              text: "Next",
+              inputType: "submit",
+              className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
+              loading,
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  return formField;
+};
+export const detailBankFormField: GenerateRegistrationFormField = (
+  register,
+  loading,
+  control,
+  trigger
+) => {
+  const formField: FormField[] = [
+    {
+      containerClass: "mb-11",
+      field: {
+        type: Field.div,
+        className: "grid grid-cols-2 gap-x-6 ",
+        children: [
+          {
+            label: {
+              text: "Choose currency",
+              htmlFor: "select",
+              className: "mb-[10px]",
+            },
+            field: {
+              // placeholder:"234324",
+              control: control,
+              type: Field.select,
+              id: 1,
+              name: "123213",
+              options: [
+                { value: "", label: "123213" },
+                { value: "", label: "123213" },
+                { value: "", label: "123213" },
+              ],
+              trigger,
+              value: "",
+            },
+          },
+          {
+            label: {
+              text: "Bank name",
+              htmlFor: "name",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "text",
+              id: "bankName",
+              name: "bankName",
+              placeholder: "Bank",
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
+              text: "Account no",
+              htmlFor: "number",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "number",
+              id: "accountNumber",
+              name: "accountNumber",
+              placeholder: "Enter Your Account Number",
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
+              text: "Iban Number",
+              htmlFor: "number",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "number",
+              id: "ibanNumber",
+              name: "ibanNumber",
+              placeholder: "Enter Your Iban",
+              register,
+            },
+          },
+        ],
+      },
+    },
+
+    {
+      field: {
+        type: Field.div,
+        className: "flex space-x-6",
+        children: [
+          {
+            field: {
+              type: Field.button,
+              text: "Back",
+              inputType: "submit",
+              className:
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
+              loading,
+            },
+          },
+          {
+            field: {
+              type: Field.button,
+              text: "Lets finish",
+              inputType: "submit",
+              className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

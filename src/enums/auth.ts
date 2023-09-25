@@ -37,11 +37,24 @@ export enum LoginFields {
 }
 
 export enum CompanyFields {
-  name = "name",
+  name = "companyName",
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
-  websiteUrl = "websiteLink",
-  mwstNumber = "number",
+  websiteUrl = "websiteAddress",
+  mwstNumber = "mwstNumber",
+  companyLogo = "comapnyLogo",
+}
+export enum LocationFields {
+  streetNumber = "streetNumber",
+  houseNumber = "houseNumber",
+  postalCode = "postalCode",
+  city = "city",
+}
+export enum BankFields {
+  currency = "currency",
+  bankName = "bankName",
+  accountNumber = "accountNumber",
+  ibanNumber = "ibanNumber",
 }
 
 export enum Address {
@@ -66,6 +79,11 @@ export enum Header {
   refreshtoken = "refreshtoken",
   data = "data",
   user = "User",
+}
+export enum DetailScreensStages {
+  CompanyDetails = "companyDetails",
+  LocationDetails = "locationDetails",
+  BankDetails = "bankDetails",
 }
 
 export enum ActionPayload {

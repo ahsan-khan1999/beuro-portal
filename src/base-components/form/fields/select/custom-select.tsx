@@ -47,7 +47,7 @@ export const SelectBox = ({
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className="h-12 px-4 text-left text-dark bg-white py-3 rounded-lg border-2 border-lightGray focus:border-primary outline-none w-full"
+        className="h-12 px-4 text-left text-dark bg-white py-3 rounded-lg border border-lightGray focus:border-primary outline-none w-full"
       >
         {(field && field.value) || defaultValue}
         {/* <ArrowIcon isOpen={isOpen} /> */}

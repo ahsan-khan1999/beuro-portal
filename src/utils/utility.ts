@@ -5,17 +5,20 @@ import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { staticEnums } from "./static";
+import { DetailScreensStages } from "@/enums/auth";
 // import { FormStages } from "@/enums";
 
 //get next form
-export const getNextFormStage = (current: FormStages): FormStages | null => {
-  const stages = Object.values(FormStages);
+export const getNextFormStage = (
+  current: DetailScreensStages
+): DetailScreensStages | null => {
+  const stages = Object.values(DetailScreensStages);
   const currentIndex = stages.indexOf(current);
   if (currentIndex !== -1 && currentIndex < stages.length - 1) {
     return stages[currentIndex + 1];
   }
   return null;
-}
+};
 
 
 export function isFieldType(type: any): type is FieldType {
@@ -43,9 +46,9 @@ export function setErrorMessage(error: string | null, translate: Function): stri
 }
 
 export function returnStep(data: object, router: NextRouter, setError: Function, translate: Function, currentFormStage: string, nextFormHandler: Function): AsyncThunkAction<any, any, any> | any {
-  if (currentFormStage === FormStages.PersonalDetails) return updateProfileStep1({ data, router, setError, translate, currentFormStage, nextFormHandler })
-  if (currentFormStage === FormStages.LoginAndContacts) return updateProfileStep2({ data, router, setError, translate, currentFormStage, nextFormHandler })
-  if (currentFormStage === FormStages.AddressDetails) return updateProfileStep3({ data, router, setError, translate, currentFormStage, nextFormHandler })
+  if (currentFormStage === DetailScreensStages.CompanyDetails) return updateProfileStep1({ data, router, setError, translate, currentFormStage, nextFormHandler })
+  if (currentFormStage === DetailScreensStages.LocationDetails) return updateProfileStep2({ data, router, setError, translate, currentFormStage, nextFormHandler })
+  if (currentFormStage === DetailScreensStages.BankDetails) return updateProfileStep3({ data, router, setError, translate, currentFormStage, nextFormHandler })
   return updateProfileStep1({ data, router, setError, translate, currentFormStage, nextFormHandler });
 }
 

@@ -8,6 +8,7 @@ export const SelectField = ({
   options,
   value: defaultValue,
   control,
+  
   name,
   trigger,
 }: SelectProps) => {

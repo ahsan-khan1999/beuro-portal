@@ -24,7 +24,6 @@ export const InputField = ({
   } py-[10px] focus:border-primary outline-none text-dark text-sm`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
-  console.log(inputFocus);
 
   return (
     <div className="relative w-full">

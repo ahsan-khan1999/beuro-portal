@@ -1,9 +1,13 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import {
+    detailBankFormField,
+  detailLocationFormField,
   detailScreensFormField,
   generateLoginFormField,
 } from "@/components/loginAndRegister/login/login-fields";
 import {
+  detailBankValidation,
+  detailLoactionValidation,
   detailScreensValidation,
   generateLoginValidation,
 } from "@/validation/authSchema";
@@ -13,27 +17,26 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 
-export const useDetailScreens = () => {
+export const useDetailBank = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = detailScreensValidation(translate);
+  const schema = detailBankValidation(translate);
   const {
     register,
     handleSubmit,
     setError,
     control,
-    
+    trigger,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors, "errors");
-  const fields = detailScreensFormField(register, loading, control);
+  const fields = detailBankFormField(register, loading, control,trigger);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // dispatch(loginUser({ data, router, setError, translate }));
+    dispatch(loginUser({ data, router, setError, translate }));
   };
   return {
     fields,

@@ -1,9 +1,21 @@
-import { AnyAction, AsyncThunk, PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  AsyncThunk,
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 import apiServices from "../../../services/requestHandler";
-import { ApiResponseType, ApiResponseTypeProfile, ApiResponseTypePut, AuthState, User } from "@/types/auth";
+import {
+  ApiResponseType,
+  ApiResponseTypeProfile,
+  ApiResponseTypePut,
+  AuthState,
+  User,
+} from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
 import { conditionHandler, setErrors } from "@/utils/utility";
-import { SignUpPayload } from '@/types/registeration';
+import { SignUpPayload } from "@/types/registeration";
 import { saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
 import { SalutationValue } from "@/enums";
 import { formatDateString, isJSON } from "@/utils/functions";
@@ -22,41 +34,39 @@ const initialState: AuthState = {
   apple: false,
 };
 
-export const loginUser: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "login/user",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any //SignUpPayload
+export const loginUser: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("login/user", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any; //SignUpPayload
 
     try {
-
       const response: ApiResponseType = await apiServices.login(data);
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
-      conditionHandler(router, response)
+      thunkApi.dispatch(setErrorMessage(null));
+      conditionHandler(router, response);
 
       return true;
     } catch (e: any) {
-
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
-      setErrors(setError, e?.data.data, translate)
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
 
       // toast.info(e?.data?.message);
       return false;
     }
-  }
-);
-export const resetPassword: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "reset/user",
-  async (args, thunkApi) => {
-    const { router, data } = args as any
+  });
+export const resetPassword: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("reset/user", async (args, thunkApi) => {
+    const { router, data } = args as any;
     try {
-      const response = await apiServices.resetPassword({ otp: router.asPath?.split("=")[1], data });
+      const response = await apiServices.resetPassword({
+        otp: router.asPath?.split("=")[1],
+        data,
+      });
 
-      router.pathname = "/passwordChangedSuccess"
-      updateQuery(router, "en")
+      router.pathname = "/passwordChangedSuccess";
+      updateQuery(router, "en");
 
       return true;
     } catch (e: any) {
@@ -64,301 +74,298 @@ export const resetPassword: AsyncThunk<boolean, object, object> | any = createAs
 
       return false;
     }
-  }
-);
-export const forgotPassword: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "forgot/user",
-  async (args, thunkApi) => {
-    const { translate, data,setError } = args as any
+  });
+export const forgotPassword: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("forgot/user", async (args, thunkApi) => {
+    const { translate, data, setError } = args as any;
     try {
       const response = await apiServices.forgotPassword(data);
       thunkApi.dispatch(setErrorMessage(response?.data?.message));
       return response;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
+      setErrors(setError, e?.data.data, translate);
 
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const signUp: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "signup/user",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any //SignUpPayload
+  });
+export const signUp: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("signup/user", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any; //SignUpPayload
     try {
       const response: ApiResponseType = await apiServices.singUp(data);
 
-      thunkApi.dispatch(setErrorMessage(null))
-      conditionHandler(router, response)
+      thunkApi.dispatch(setErrorMessage(null));
+      conditionHandler(router, response);
 
       saveUser(response.data.data.User);
 
       return response;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
+      setErrors(setError, e?.data.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
       return e;
     }
-  }
-);
-export const updateProfileStep1: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "profileStep1/user",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate, nextFormHandler } = args as any //SignUpPayload
+  });
+export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
+    const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      let apiData = {
-        ...data,
-        salutation: SalutationValue[data?.salutation],
-        dob: formatDateString(data?.dob)
-      }
-      const response: ApiResponseTypePut = await apiServices.profileStep1(apiData);
-      thunkApi.dispatch(setErrorMessage(null))
+      console.log("responivess");
 
-      thunkApi.dispatch(setUser(response.data.User));
-      saveUser(response.data.User);
+      // let apiData = {
+      //   ...data,
+      //   salutation: SalutationValue[data?.salutation],
+      //   dob: formatDateString(data?.dob)
+      // }
+      // const response: ApiResponseTypePut = await apiServices.profileStep1(apiData);
+      // thunkApi.dispatch(setErrorMessage(null))
 
-      nextFormHandler()
+      // thunkApi.dispatch(setUser(response.data.User));
+      // saveUser(response.data.User);
+
+      nextFormHandler();
 
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      // setErrors(setError, e?.data.data, translate)
+      // thunkApi.dispatch(setErrorMessage(e?.data?.message))
 
       return false;
     }
-  }
-);
-export const updateProfileStep2: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "profileStep2/user",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate, nextFormHandler } = args as any //SignUpPayload
+  });
+export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
+    const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
       let apiData = {
         ...data,
-        phoneNumber: data?.phoneNumber?.includes("+") ? data?.phoneNumber : "+" + data?.phoneNumber,
-      }
-      const response: ApiResponseTypePut = await apiServices.profileStep2(apiData);
-      thunkApi.dispatch(setErrorMessage(null))
+        phoneNumber: data?.phoneNumber?.includes("+")
+          ? data?.phoneNumber
+          : "+" + data?.phoneNumber,
+      };
+      const response: ApiResponseTypePut = await apiServices.profileStep2(
+        apiData
+      );
+      thunkApi.dispatch(setErrorMessage(null));
 
       thunkApi.dispatch(setUser(response.data.User));
       saveUser(response.data.User);
-      nextFormHandler()
+      nextFormHandler();
 
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const updateProfileStep3: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "profileStep3/user",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate, nextFormHandler } = args as any //SignUpPayload
+  });
+export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
+    const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-
       const response: ApiResponseTypePut = await apiServices.profileStep3(data);
       thunkApi.dispatch(setUser(response.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setErrorMessage(null));
 
       saveUser(response.data.User);
-      nextFormHandler()
+      nextFormHandler();
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const signUpGoogle: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "signup/Google/user",
-  async (args, thunkApi) => {
-    const { router, oauthCode, translate } = args as any //SignUpPayload
+  });
+export const signUpGoogle: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("signup/Google/user", async (args, thunkApi) => {
+    const { router, oauthCode, translate } = args as any; //SignUpPayload
 
     try {
-      const response: ApiResponseType = await apiServices.loginGoogle({ oAuthCode: oauthCode });
+      const response: ApiResponseType = await apiServices.loginGoogle({
+        oAuthCode: oauthCode,
+      });
 
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setErrorMessage(null));
 
-      conditionHandler(router, response)
+      conditionHandler(router, response);
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
-
-
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const signUpFacebook: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "signup/Google/user",
-  async (args, thunkApi) => {
-    const { router, oauthCode, translate } = args as any //SignUpPayload
+  });
+export const signUpFacebook: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("signup/Google/user", async (args, thunkApi) => {
+    const { router, oauthCode, translate } = args as any; //SignUpPayload
 
     try {
-      const response: ApiResponseType = await apiServices.loginFaceBook({ oAuthCode: oauthCode });
+      const response: ApiResponseType = await apiServices.loginFaceBook({
+        oAuthCode: oauthCode,
+      });
 
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
-      conditionHandler(router, response)
+      thunkApi.dispatch(setErrorMessage(null));
+      conditionHandler(router, response);
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
-
-
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const userDetails: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "user/details",
-  async (data, thunkApi) => {
+  });
+export const userDetails: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/details", async (data, thunkApi) => {
     try {
       const response: ApiResponseType = await apiServices.readUserProfile();
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
     }
-  }
-);
-export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
-  "verify/otp",
-  async (router: NextRouter, thunkApi) => {
-
-
+  });
+export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk("verify/otp", async (router: NextRouter, thunkApi) => {
     try {
-      const response: ApiResponseType = await apiServices.verifyEmailOtp(router.asPath?.split("=")[1]);
+      const response: ApiResponseType = await apiServices.verifyEmailOtp(
+        router.asPath?.split("=")[1]
+      );
       setToken(response.headers.accesstoken);
       setRefreshToken(response.headers.refreshtoken);
-      const user = isJSON(getCookie("kaufesuser"))
-      let newUser = { ...user, isEmailVerified: true }
-      saveUser(newUser)
-      thunkApi.dispatch(setUser(newUser))
+      const user = isJSON(getCookie("kaufesuser"));
+      let newUser = { ...user, isEmailVerified: true };
+      saveUser(newUser);
+      thunkApi.dispatch(setUser(newUser));
       if (user?.isProfileComplete) {
-        router.pathname = "/"
-        updateQuery(router, "en")
+        router.pathname = "/";
+        updateQuery(router, "en");
       } else if (!user?.isProfileComplete) {
-        router.pathname = "/register/profiledetails"
-        updateQuery(router, "en")
+        router.pathname = "/register/profiledetails";
+        updateQuery(router, "en");
       }
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
     }
-  }
-);
-export const generateOtp: AsyncThunk<boolean, Object, object> | any = createAsyncThunk(
-  "generate/otp",
-  async (args: any, thunkApi) => {
-    const { phone, setError, translate } = args
+  });
+export const generateOtp: AsyncThunk<boolean, Object, object> | any =
+  createAsyncThunk("generate/otp", async (args: any, thunkApi) => {
+    const { phone, setError, translate } = args;
     try {
-      const response = await apiServices.generateOtp({ "phoneNumber": phone?.includes("+") ? phone : "+" + phone });
-      setErrors(setError, { "phoneNumber": null }, translate)
-      thunkApi.dispatch(setErrorMessage(null))
-      return true
+      const response = await apiServices.generateOtp({
+        phoneNumber: phone?.includes("+") ? phone : "+" + phone,
+      });
+      setErrors(setError, { phoneNumber: null }, translate);
+      thunkApi.dispatch(setErrorMessage(null));
+      return true;
       // toast.info(response?.data?.message);
       return true;
     } catch (e: any) {
+      setErrors(setError, e?.data.data, translate);
 
-      setErrors(setError, e?.data.data, translate)
-
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const updateProfile: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "update/profile/user",
-  async (args, thunkApi) => {
-    const { data, type, setError, translate } = args as any //SignUpPayload
+  });
+export const updateProfile: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("update/profile/user", async (args, thunkApi) => {
+    const { data, type, setError, translate } = args as any; //SignUpPayload
     try {
-      let field = type
-      const response: ApiResponseTypePut = await apiServices.updateProfile({ key: field, ...{ [field]: field === "salutation" ? SalutationValue[data["salutation"]] : field === "phoneNumber" ? data?.[field]?.includes("+") ? data?.[field] : "+" + data?.[field] : field === "password" ? { "currentPassword": data?.["currentPassword"], "newPassword": data?.["newPassword"] } : data?.[field] } });
+      let field = type;
+      const response: ApiResponseTypePut = await apiServices.updateProfile({
+        key: field,
+        ...{
+          [field]:
+            field === "salutation"
+              ? SalutationValue[data["salutation"]]
+              : field === "phoneNumber"
+              ? data?.[field]?.includes("+")
+                ? data?.[field]
+                : "+" + data?.[field]
+              : field === "password"
+              ? {
+                  currentPassword: data?.["currentPassword"],
+                  newPassword: data?.["newPassword"],
+                }
+              : data?.[field],
+        },
+      });
       thunkApi.dispatch(setUser(response.data.User));
       saveUser(response.data.User);
 
-      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setErrorMessage(null));
 
       saveUser(response.data.User);
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const updateProfileAddress: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "update/profile/address",
-  async (args, thunkApi) => {
-    const { data, setError, translate } = args as any //SignUpPayload
+  });
+export const updateProfileAddress: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("update/profile/address", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any; //SignUpPayload
     try {
-      const response: ApiResponseTypePut = await apiServices.updateProfileAddress(data);
+      const response: ApiResponseTypePut =
+        await apiServices.updateProfileAddress(data);
       saveUser(response.data.User);
       thunkApi.dispatch(setUser(response.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
-
+      thunkApi.dispatch(setErrorMessage(null));
 
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
-  }
-);
-export const connectGoogle: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "connect/Google/user",
-  async (args, thunkApi) => {
-    const { router, oauthCode, translate } = args as any //SignUpPayload
+  });
+export const connectGoogle: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("connect/Google/user", async (args, thunkApi) => {
+    const { router, oauthCode, translate } = args as any; //SignUpPayload
 
     try {
-      const response: ApiResponseType = await apiServices.connectGoogle({ oAuthCode: oauthCode });
+      const response: ApiResponseType = await apiServices.connectGoogle({
+        oAuthCode: oauthCode,
+      });
 
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
-      conditionHandler(router, response, true)
+      thunkApi.dispatch(setErrorMessage(null));
+      conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const disConnectGoogle: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "disConnect/Google/user",
-  async (args, thunkApi) => {
-    const { router, translate } = args as any //SignUpPayload
+  });
+export const disConnectGoogle: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("disConnect/Google/user", async (args, thunkApi) => {
+    const { router, translate } = args as any; //SignUpPayload
 
     try {
       const response: ApiResponseType = await apiServices.disConnectGoogle({});
@@ -367,98 +374,99 @@ export const disConnectGoogle: AsyncThunk<boolean, object, object> | any = creat
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true)
+      conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const connectFacebook: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "connect/facebook/user",
-  async (args, thunkApi) => {
-    const { router, oauthCode, translate } = args as any //SignUpPayload
+  });
+export const connectFacebook: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("connect/facebook/user", async (args, thunkApi) => {
+    const { router, oauthCode, translate } = args as any; //SignUpPayload
 
     try {
-      const response: ApiResponseType = await apiServices.connectFb({ oAuthCode: oauthCode });
+      const response: ApiResponseType = await apiServices.connectFb({
+        oAuthCode: oauthCode,
+      });
 
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
-      conditionHandler(router, response, true)
+      thunkApi.dispatch(setErrorMessage(null));
+      conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const disConnectFacebook: AsyncThunk<boolean, object, object> | any = createAsyncThunk(
-  "disConnect/facebook/user",
-  async (args, thunkApi) => {
-    const { router, translate } = args as any //SignUpPayload
+  });
+export const disConnectFacebook: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("disConnect/facebook/user", async (args, thunkApi) => {
+    const { router, translate } = args as any; //SignUpPayload
 
     try {
-      const response: ApiResponseType = await apiServices.disConnectFacebook({});
+      const response: ApiResponseType = await apiServices.disConnectFacebook(
+        {}
+      );
 
       setToken(response?.headers?.accesstoken);
       setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true)
+      conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       // thunkApi.dispatch(setEmail(e?.data?.message));
       return false;
     }
-  }
-);
-export const verifyPhoneOtp: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
-  "verify/phone/otp",
-  async (data: { otp: number }, thunkApi) => {
-
-
-    try {
-      const response: ApiResponseType = await apiServices.verifyPhone({ otp: data });
-      saveUser(response.data.data.User)
-      thunkApi.dispatch(setUser(response.data.data.User))
-      return true;
-    } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
-      return false;
+  });
+export const verifyPhoneOtp: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "verify/phone/otp",
+    async (data: { otp: number }, thunkApi) => {
+      try {
+        const response: ApiResponseType = await apiServices.verifyPhone({
+          otp: data,
+        });
+        saveUser(response.data.data.User);
+        thunkApi.dispatch(setUser(response.data.data.User));
+        return true;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
     }
-  }
-);
+  );
 
-export const changePassword: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
-  "change/passowrd",
-  async (data: { password: string, newPassword: string }, thunkApi) => {
-
-
-    try {
-      const response: ApiResponseType = await apiServices.verifyPhone({ data });
-      saveUser(response.data.data.User)
-      thunkApi.dispatch(setUser(response.data.data.User))
-      return true;
-    } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
-      return false;
+export const changePassword: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "change/passowrd",
+    async (data: { password: string; newPassword: string }, thunkApi) => {
+      try {
+        const response: ApiResponseType = await apiServices.verifyPhone({
+          data,
+        });
+        saveUser(response.data.data.User);
+        thunkApi.dispatch(setUser(response.data.data.User));
+        return true;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
     }
-  }
-);
+  );
 // export const logoutUser = createAsyncThunk(
 //   "logout/user",
 //   async (user, thunkApi) => {
@@ -517,27 +525,36 @@ const authSlice = createSlice({
     builder.addCase(updateProfileStep1.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(updateProfileStep1.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      updateProfileStep1.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+      }
+    );
     builder.addCase(updateProfileStep1.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(updateProfileStep2.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(updateProfileStep2.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      updateProfileStep2.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+      }
+    );
     builder.addCase(updateProfileStep2.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(updateProfileStep3.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(updateProfileStep3.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      updateProfileStep3.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+      }
+    );
     builder.addCase(updateProfileStep3.rejected, (state) => {
       state.loading = false;
     });
