@@ -38,7 +38,7 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   placeholder?: string;
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
-  svg?: SVGElement;
+  svg?: string;
   alt: string;
 }
 
