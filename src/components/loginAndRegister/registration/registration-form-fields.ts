@@ -4,6 +4,7 @@ import {
   GenerateRegistrationFormField,
 } from "@/types";
 import { Field } from "@/enums/form";
+import NameIcon from "@/assets/svgs/name-input.svg";
 
 export const generateFormField: GenerateRegistrationFormField = (
   register,
@@ -19,6 +20,8 @@ export const generateFormField: GenerateRegistrationFormField = (
         name: "text",
         inputType: "text",
         placeholder: "Enter your full name",
+        svg: NameIcon,
+        alt: "Full Name Icon",
         register,
       },
     },

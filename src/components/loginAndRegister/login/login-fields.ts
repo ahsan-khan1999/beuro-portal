@@ -6,7 +6,7 @@ import {
 } from "@/types";
 import { useRouter } from "next/router";
 import bankNameIcon from "@/assets/svgs/bank-name.svg";
-import companyNameIcon from "@/assets/svgs/company-name.svg";
+import NameIcon from "@/assets/svgs/name-input.svg";
 import phoneIcon from "@/assets/svgs/phone-number.svg";
 import websiteIcon from "@/assets/svgs/website-input.svg";
 import mwstIcon from "@/assets/svgs/mwst-number.svg";
@@ -125,7 +125,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "companyName",
               name: "companyName",
               placeholder: "Enter Your Company Name",
-              svg: companyNameIcon,
+              svg: NameIcon,
               alt: "Company Name Icon",
               register,
             },

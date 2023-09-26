@@ -3,7 +3,6 @@ import { InputProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import emailIcon from "@/assets/svgs/input-email.svg";
 import { InputEmail } from "@/assets/svgs/components/inputEmail";
 
 export const InputField = ({
