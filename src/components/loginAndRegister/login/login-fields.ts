@@ -12,6 +12,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mb-5",
       label: { text: "Email", htmlFor: "email" },
       field: {
         type: Field.input,
@@ -23,6 +24,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       },
     },
     {
+      containerClass: "mb-[22px]",
       label: {
         text: "Password",
         htmlFor: "password",
@@ -501,6 +503,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
 ) => {
   const formFields: FormField[] = [
     {
+      containerClass:"mb-5",
       label: {
         text: "New Password",
         htmlFor: "password",

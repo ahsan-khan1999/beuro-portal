@@ -119,7 +119,7 @@ const Cards = ({ planTime, setPlanTime }:any) => {
             key={index}
             className=" mx-auto cursor-pointer rounded-[14px] transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
           >
-            <div className="pricing-card-shadow rounded-[14px] group bg-white  hover:bg-primary">
+            <div className="pricing-card-shadow rounded-[14px] group bg-white  hover:bg-gradient-pricingCards">
               <div className=" px-8 pt-8 pb-5 rounded-t-[14px]  ">
                 <div className="flex items-center mb-5">
                   <Image
