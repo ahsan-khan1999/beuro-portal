@@ -8,7 +8,7 @@ import {
 } from "@/validation/authSchema";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getNextFormStage, returnStep } from "@/utils/utility";
+import { getBackFormStage, getNextFormStage, returnStep } from "@/utils/utility";
 import { updateQuery } from "@/utils/update-query";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { DetailScreensStages } from "@/enums/auth";
@@ -56,6 +56,8 @@ export default function useDetail() {
     setValue,
     setError,
     trigger,
+    
+    
     formState: { errors },
   } = formMethodsConfig[currentFormStage];
 
@@ -75,10 +77,12 @@ export default function useDetail() {
     );
     // nextFormHandler();
   };
+  const backStage = getBackFormStage(currentFormStage);
+   const nextStage = getNextFormStage(currentFormStage);
 
    const nextFormHandler = () => {
     const nextStage = getNextFormStage(currentFormStage);
-    console.log(nextStage);
+    console.log(nextStage,"nextStage");
 
     if (nextStage) {
       setProgress((prev) => prev + 40);
@@ -103,5 +107,8 @@ export default function useDetail() {
     CurrentFormComponent,
     currentFormStage,
     progress,
+    backStage,
+    nextStage,
+    setCurrentFormStage,
   };
 }

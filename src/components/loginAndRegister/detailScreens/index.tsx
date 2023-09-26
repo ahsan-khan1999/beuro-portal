@@ -14,11 +14,13 @@ const DetailScreens = () => {
     trigger,
     watch,
     currentFormStage,
+    setCurrentFormStage,
   } = useDetail();
 
   return (
     <CurrentFormComponent
       currentFormStage={currentFormStage}
+      setCurrentFormStage={setCurrentFormStage}
       register={register}
       handleSubmit={handleSubmit}
       control={control}

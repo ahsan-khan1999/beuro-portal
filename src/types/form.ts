@@ -238,6 +238,7 @@ export interface FormComponentProps {
   nextFormHandler: Function;
   setError?: UseFormSetError<FieldValues>;
   currentFormStage?: string;
+  setCurrentFormStage?: any;
 }
 
 export interface FormFooterProps {

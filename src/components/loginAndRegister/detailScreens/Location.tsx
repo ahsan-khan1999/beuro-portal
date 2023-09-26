@@ -15,15 +15,26 @@ const Location = ({
   register,
   control,
   currentFormStage,
+
+  setCurrentFormStage,
 }: FormComponentProps) => {
   const defaultClassName = "mt-4";
   // const { fields, onSubmit, handleSubmit, errors, error } = useDetailLocation();
   const { loading } = useAppSelector((state) => state.auth);
-  const fields = detailLocationFormField(register, loading, control);
+  const fields = detailLocationFormField(
+    register,
+    loading,
+    control,
+
+    setCurrentFormStage
+  );
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">
-        <h1 className="text-[#000] text-[26px] font-medium tracking-[-0.2px] mb-3">
+        <h1
+          onClick={() => setCurrentFormStage("companyDetails")}
+          className="text-[#000] text-[26px] font-medium tracking-[-0.2px] mb-3"
+        >
           Tell Us About Your Location
         </h1>
         <p className="text-xs text-dark tracking-[0.36px] mb-[56px]">

@@ -22,6 +22,7 @@ export const getNextFormStage = (
 export const getBackFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
+  console.log("back")
   const stages = Object.values(DetailScreensStages);
   const currentIndex = stages.indexOf(current);
   if (currentIndex !== -1 && currentIndex > 0) {

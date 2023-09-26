@@ -213,8 +213,11 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
 export const detailLocationFormField: GenerateRegistrationFormField = (
   register,
   loading,
-  control
+  control,
+
+  setCurrentFormStage
 ) => {
+  
   const formField: FormField[] = [
     {
       field: {
@@ -294,7 +297,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               type: Field.button,
               text: "Back",
               inputType: "button",
-              // onClick:()=>{Ro},
+              onClick: () => setCurrentFormStage("companyDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
               loading,
@@ -320,8 +323,9 @@ export const detailBankFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
-  trigger,
-  router
+  setCurrentFormStage
+  // trigger,
+  // router
 ) => {
   const formField: FormField[] = [
     {
@@ -411,6 +415,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               type: Field.button,
               text: "Back",
               inputType: "button",
+              onClick: () => setCurrentFormStage("locationDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
               loading,

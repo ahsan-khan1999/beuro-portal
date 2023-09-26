@@ -18,13 +18,20 @@ const Bank = ({
   register,
   control,
   currentFormStage,
+  setCurrentFormStage,
+ 
 }: FormComponentProps) => {
   const defaultClassName = "mt-4";
   // const { fields, onSubmit, handleSubmit, errors, error } = useDetailBank();
   const { loading } = useAppSelector((state) => state.auth);
   console.log(onSubmit);
 
-  const fields = detailBankFormField(register, loading, control);
+  const fields = detailBankFormField(
+    register,
+    loading,
+    control,
+    setCurrentFormStage
+  );
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">

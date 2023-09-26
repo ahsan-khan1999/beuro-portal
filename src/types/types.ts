@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, SetStateAction, Dispatch as stateDispatch } from "react";
 import { FormField } from "./form";
 import {
   Control,
@@ -92,6 +92,7 @@ export type GenerateRegistrationFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
   router?: NextRouter
 ) => FormField[];
 export type GenerateFormContactField = (
