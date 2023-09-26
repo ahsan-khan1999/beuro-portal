@@ -22,27 +22,29 @@ export const InputField = ({
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${
-    success ? "pl-4 pr-10" : name == "email" ? "pl-10 pr-4" : "px-4"
-  } py-[10px]  `;
+    success ? "pl-4 pr-10" : name == "email" ? "pl-10 pr-4" : "pl-10 pr-4"
+  } py-[10px] outline-none text-dark text-sm focus:border-primary `;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
 
   return (
-    <div className={`${classes} relative w-full flex items-center`}>
+    <div className={` relative w-full flex items-center `}>
       {name == "email" && (
         <InputEmail
           pathClass={inputFocus ? "fill-primary" : "fill-[#8F8F8F]"}
           className="absolute top-4 left-4"
         />
       )}
-      {svg && <Image src={svg} alt={alt} className="mr-3" />}
+      {svg && (
+        <Image src={svg} alt={alt} className="mr-3 absolute top-4 left-4" />
+      )}
 
       <input
         onFocus={() => setInputFocus(true)}
         // onBlur={()=>setInputFocus(false)}
         id={id}
         type={inputType}
-        className="w-full focus:border-primary outline-none text-dark text-sm"
+        className={`${classes}`}
         defaultValue={value}
         {...register(name)}
         placeholder={placeholder}
