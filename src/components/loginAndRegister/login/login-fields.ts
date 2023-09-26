@@ -5,6 +5,13 @@ import {
   GenerateRegistrationFormField,
 } from "@/types";
 import { useRouter } from "next/router";
+import bankNameIcon from "@/assets/svgs/bank-name.svg";
+import companyNameIcon from "@/assets/svgs/company-name.svg";
+import phoneIcon from "@/assets/svgs/phone-number.svg";
+import websiteIcon from "@/assets/svgs/website-input.svg";
+import mwstIcon from "@/assets/svgs/mwst-number.svg";
+import locationIcon from "@/assets/svgs/location.svg";
+import postalCodeIcon from "@/assets/svgs/postal-code.svg";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
@@ -118,6 +125,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "companyName",
               name: "companyName",
               placeholder: "Enter Your Company Name",
+              svg: companyNameIcon,
+              alt: "Company Name Icon",
               register,
             },
           },
@@ -133,6 +142,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               placeholder: "Enter Your Phone Number",
+              svg: phoneIcon,
+              alt: "Phone Icon",
               register,
             },
           },
@@ -148,6 +159,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "mobileNumber",
               name: "mobileNumber",
               placeholder: "Enter Your Mobile Number",
+              svg: phoneIcon,
+              alt: "Phone Icon",
               register,
             },
           },
@@ -163,6 +176,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "websiteAddress",
               name: "websiteAddress",
               placeholder: "Enter Your Website",
+              svg: websiteIcon,
+              alt: "Website Icon",
               register,
             },
           },
@@ -179,6 +194,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "mwstNumber",
               name: "mwstNumber",
               placeholder: "Enter Your MwST Number",
+              svg: mwstIcon,
+              alt: "MwST Number Icon",
               register,
             },
           },
@@ -240,6 +257,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               id: "streetNumber",
               name: "streetNumber",
               placeholder: "Enter your Address",
+              svg: locationIcon,
+              alt: "Location Icon",
               register,
             },
           },
@@ -255,6 +274,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               id: "houseNumber",
               name: "houseNumber",
               placeholder: "Enter your Address",
+              svg: locationIcon,
+              alt: "Location Icon",
               register,
             },
           },
@@ -271,6 +292,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               id: "postalCode",
               name: "postalCode",
               placeholder: "Enter Your Postcode",
+              svg: postalCodeIcon,
+              alt: "Postal Code Icon",
               register,
             },
           },
@@ -287,6 +310,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               id: "city",
               name: "city",
               placeholder: "Enter Your City",
+              svg: locationIcon,
+              alt: "Location Icon",
               register,
             },
           },
@@ -372,6 +397,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               id: "bankName",
               name: "bankName",
               placeholder: "Bank",
+              svg: bankNameIcon,
+              alt: "Credit Card Icon",
               register,
             },
           },
@@ -388,6 +415,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               id: "accountNumber",
               name: "accountNumber",
               placeholder: "Enter Your Account Number",
+              svg: bankNameIcon,
+              alt: "Credit Card Icon",
               register,
             },
           },
@@ -404,6 +433,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               id: "ibanNumber",
               name: "ibanNumber",
               placeholder: "Enter Your Iban",
+              svg: bankNameIcon,
+              alt: "Credit Card Icon",
               register,
             },
           },
@@ -503,7 +534,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
 ) => {
   const formFields: FormField[] = [
     {
-      containerClass:"mb-5",
+      containerClass: "mb-5",
       label: {
         text: "New Password",
         htmlFor: "password",
