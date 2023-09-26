@@ -14,6 +14,7 @@ const Company = ({
   errors,
   register,
   control,
+  currentFormStage,
 }: FormComponentProps) => {
   const defaultClassName = "mt-4";
   // const { fields } = useDetailScreens();
@@ -23,7 +24,7 @@ const Company = ({
   const fields = detailScreensFormField(register, loading, control);
 
   return (
-    <DetailScreensCard>
+    <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">
         <h1 className="text-[#000] text-[26px] font-medium tracking-[-0.2px] mb-3">
           Tell Us About Your Company
