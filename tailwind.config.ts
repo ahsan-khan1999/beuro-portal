@@ -82,9 +82,12 @@ module.exports = {
       backgroundImage: {
         "our-partner-background": "url('/assets/our-partners-bg.png')",
         "login-background": "url('/src/assets/login-bg.png')",
-        "linear-gradient":
-          "linear-gradient(180deg, #68119A 0%, #B668E5 64%, #E2B2FF 100%)",
+        "gradient-pricingCards":
+          "linear-gradient(180deg, #4A13E7 12.45%, #7B18FF 63.46%)",
       },
+      // background: {
+      //   gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",
+      // },
       stroke: ["group-hover"],
       textColor: ["group-hover"],
     },

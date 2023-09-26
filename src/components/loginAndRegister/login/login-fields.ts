@@ -205,7 +205,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
         text: "Next",
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg   p-4 w-[160px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },
@@ -313,7 +313,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               text: "Next",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg   p-4 w-[160px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },
@@ -431,7 +431,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               text: "Lets finish",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg   p-4 w-[180px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

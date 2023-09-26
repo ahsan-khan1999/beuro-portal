@@ -24,7 +24,7 @@ export const DetailScreensCard = ({
               className={`flex justify-center items-center pl-[53px] pr-11 py-4 ${
                 currentFormStage?.includes("companyDetails") &&
                 "rounded-r-[24px]"
-              } bg-primary  rounded-tl-2xl cursor-pointer w-full`}
+              } bg-gradient-pricingCards  rounded-tl-2xl cursor-pointer w-full`}
             >
               <Image
                 src={companyIcon}
@@ -39,7 +39,7 @@ export const DetailScreensCard = ({
               className={`flex  justify-center items-center py-4 mx-auto cursor-pointer w-full ${
                 (currentFormStage?.includes("locationDetails") ||
                   currentFormStage?.includes("bankDetails")) &&
-                "bg-primary "
+                "bg-gradient-pricingCards "
               }
             ${
               currentFormStage?.includes("locationDetails") &&
@@ -63,7 +63,8 @@ export const DetailScreensCard = ({
             </div>
             <div
               className={`flex justify-center items-center py-4 mx-auto cursor-pointer w-full rounded-tr-2xl ${
-                currentFormStage?.includes("bankDetails") && "bg-primary"
+                currentFormStage?.includes("bankDetails") &&
+                "bg-gradient-pricingCards"
               }`}
             >
               <Image src={bankIcon} alt="Bank Icon" className="mr-[10px]" />

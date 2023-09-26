@@ -19,7 +19,6 @@ const Bank = ({
   control,
   currentFormStage,
   setCurrentFormStage,
- 
 }: FormComponentProps) => {
   // const defaultClassName = "mt-4";
   // const { fields, onSubmit, handleSubmit, errors, error } = useDetailBank();
@@ -36,7 +35,7 @@ const Bank = ({
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">
         <h1 className="text-[#000] text-[26px] font-medium tracking-[-0.2px] mb-3">
-          Procced with your bank
+          Proceed with your bank
         </h1>
         <p className="text-xs text-dark tracking-[0.36px] mb-[56px]">
           Lorem ipsum dollar smith amit dolem isplum sumip alpsum .
