@@ -1,8 +1,5 @@
 import React from "react";
-import companyIcon from "@/assets/svgs/company-details.svg";
-import Image from "next/image";
 import { Form } from "@/base-components/form/form";
-import { useDetailLocation } from "@/hooks/auth/useDetailLocation";
 import { detailLocationFormField } from "../login/login-fields";
 import { FormComponentProps } from "@/types";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -18,8 +15,6 @@ const Location = ({
 
   setCurrentFormStage,
 }: FormComponentProps) => {
-  // const defaultClassName = "mt-4";
-  // const { fields, onSubmit, handleSubmit, errors, error } = useDetailLocation();
   const { loading } = useAppSelector((state) => state.auth);
   const fields = detailLocationFormField(
     register,
@@ -45,7 +40,6 @@ const Location = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          // className={`${defaultClassName}`}
         />
       </div>
     </DetailScreensCard>

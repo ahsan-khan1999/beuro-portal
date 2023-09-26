@@ -1,13 +1,9 @@
 import React from "react";
-import companyIcon from "@/assets/svgs/company-details.svg";
-import Image from "next/image";
+
 import { Form } from "@/base-components/form/form";
-import { useDetailBank } from "@/hooks/auth/useDetailBank";
+
 import { FormComponentProps } from "@/types";
-import {
-  detailBankFormField,
-  detailScreensFormField,
-} from "../login/login-fields";
+import { detailBankFormField } from "../login/login-fields";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DetailScreensCard } from "@/layout/detailScreensCard";
 
@@ -20,8 +16,6 @@ const Bank = ({
   currentFormStage,
   setCurrentFormStage,
 }: FormComponentProps) => {
-  // const defaultClassName = "mt-4";
-  // const { fields, onSubmit, handleSubmit, errors, error } = useDetailBank();
   const { loading } = useAppSelector((state) => state.auth);
   console.log(onSubmit);
 
@@ -45,7 +39,6 @@ const Bank = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          // className={`${defaultClassName}`}
         />
       </div>
     </DetailScreensCard>

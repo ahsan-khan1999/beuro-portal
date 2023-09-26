@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "@/assets/svgs/logo.svg";
-import { LoginForm } from "@/components/loginAndRegister/login/login-form";
 import { useLoginForm } from "@/hooks/auth/useLogin";
 import Image from "next/image";
 

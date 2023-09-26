@@ -1,10 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateFormField,
-  GenerateRegistrationFormField,
-} from "@/types";
-import { useRouter } from "next/router";
+import { FormField, GenerateRegistrationFormField } from "@/types";
 import bankNameIcon from "@/assets/svgs/bank-name.svg";
 import NameIcon from "@/assets/svgs/name-input.svg";
 import phoneIcon from "@/assets/svgs/phone-number.svg";

@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Cards from "@/components/pricing/Cards";
 
 const Pricing = () => {
   const [planTime, setPlanTime] = useState("Monthly");
-  const { locale } = useRouter();
-  const router = useRouter();
-
   return (
     <div className="flex flex-col justify-center min-h-screen">
       <div className="mx-auto max-w-[950px]   shadow-loginCard pt-[62px] pb-11 px-[52px] rounded-2xl">

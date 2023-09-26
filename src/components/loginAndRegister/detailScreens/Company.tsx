@@ -1,8 +1,7 @@
 import React from "react";
-import companyIcon from "@/assets/svgs/company-details.svg";
-import Image from "next/image";
+
 import { Form } from "@/base-components/form/form";
-import { useDetailScreens } from "@/hooks/auth/useDetailScreens";
+
 import { FormComponentProps } from "@/types";
 import { detailScreensFormField } from "../login/login-fields";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -16,8 +15,6 @@ const Company = ({
   control,
   currentFormStage,
 }: FormComponentProps) => {
-  // const defaultClassName = "mt-4";
-  // const { fields } = useDetailScreens();
   const { loading } = useAppSelector((state) => state.auth);
   console.log(onSubmit);
 
@@ -37,7 +34,6 @@ const Company = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          // className={`${defaultClassName}`}
         />
       </div>
     </DetailScreensCard>

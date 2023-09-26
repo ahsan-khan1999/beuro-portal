@@ -6,7 +6,7 @@ import { Button } from "@/base-components/ui/button/button";
 const EmailConfirmation = () => {
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[624.86px] ">
+      <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
         <Image
           src={mailPopIcon}
           alt="Email Popup Image"

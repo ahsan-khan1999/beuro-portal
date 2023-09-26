@@ -1,8 +1,4 @@
-import {
-  FormField,
-  GenerateFormField,
-  GenerateRegistrationFormField,
-} from "@/types";
+import { FormField, GenerateRegistrationFormField } from "@/types";
 import { Field } from "@/enums/form";
 import NameIcon from "@/assets/svgs/name-input.svg";
 
@@ -43,7 +39,6 @@ export const generateFormField: GenerateRegistrationFormField = (
       label: {
         text: "Password",
         htmlFor: "password",
-        // className: "mb-[10px]",
       },
       field: {
         type: Field.password,
