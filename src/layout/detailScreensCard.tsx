@@ -4,6 +4,8 @@ import { ReactNode, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
 import companyIcon from "@/assets/svgs/company-details.svg";
+import locationIcon from "@/assets/svgs/location-details.svg";
+import bankIcon from "@/assets/svgs/bank-details.svg";
 
 import Image from "next/image";
 
@@ -15,58 +17,69 @@ export const DetailScreensCard = ({
 
   return (
     <div className="flex flex-col justify-center min-h-screen mx-10">
-      <div className="mx-auto max-w-[890px] w-full rounded-2xl    shadow-loginCard bg-white">
-        <div className="grid grid-cols-3 bg-[#FAFAFA] rounded-tl-2xl rounded-tr-2xl min-w-full">
-          <div
-            className={`flex justify-center items-center pl-[53px] pr-11 py-4 ${
-              currentFormStage?.includes("companyDetails") && "rounded-r-[24px]"
-            } bg-primary  rounded-tl-2xl cursor-pointer w-full`}
-          >
-            <Image src={companyIcon} alt="Company Icon" className="mr-[10px]" />
-            <h2 className="text-sm text-white font-semibold tracking-[0.42px]">
-              Company Details
-            </h2>
-          </div>
-          <div
-            className={`flex  justify-center items-center py-4 mx-auto cursor-pointer w-full ${
-              (currentFormStage?.includes("locationDetails") ||
-                currentFormStage?.includes("bankDetails")) &&
-              "bg-primary "
-            }
+      <div className="h-[633px]">
+        <div className="mx-auto max-w-[890px] w-full rounded-2xl    shadow-loginCard bg-white">
+          <div className="grid grid-cols-3 bg-[#FAFAFA] rounded-tl-2xl rounded-tr-2xl min-w-full">
+            <div
+              className={`flex justify-center items-center pl-[53px] pr-11 py-4 ${
+                currentFormStage?.includes("companyDetails") &&
+                "rounded-r-[24px]"
+              } bg-primary  rounded-tl-2xl cursor-pointer w-full`}
+            >
+              <Image
+                src={companyIcon}
+                alt="Company Icon"
+                className="mr-[10px]"
+              />
+              <h2 className="text-sm text-white font-semibold tracking-[0.42px]">
+                Company Details
+              </h2>
+            </div>
+            <div
+              className={`flex  justify-center items-center py-4 mx-auto cursor-pointer w-full ${
+                (currentFormStage?.includes("locationDetails") ||
+                  currentFormStage?.includes("bankDetails")) &&
+                "bg-primary "
+              }
             ${
               currentFormStage?.includes("locationDetails") &&
               "rounded-r-[24px]"
             }`}
-          >
-            <Image src={companyIcon} alt="Company Icon" className="mr-[10px]" />
-            <h2
-              className={`text-sm  ${
-                currentFormStage?.includes("companyDetails")
-                  ? "text-[#B9B9B9]"
-                  : "text-white"
-              } font-semibold tracking-[0.42px]`}
             >
-              Location Details
-            </h2>
-          </div>
-          <div
-            className={`flex justify-center items-center py-4 mx-auto cursor-pointer w-full rounded-tr-2xl ${
-              currentFormStage?.includes("bankDetails") && "bg-primary"
-            }`}
-          >
-            <Image src={companyIcon} alt="Company Icon" className="mr-[10px]" />
-            <h2
-              className={`text-sm  ${
-                currentFormStage?.includes("bankDetails")
-                  ? "text-white"
-                  : "text-[#B9B9B9]"
-              } font-semibold tracking-[0.42px]`}
+              <Image
+                src={locationIcon}
+                alt="Location Icon"
+                className="mr-[10px]"
+              />
+              <h2
+                className={`text-sm  ${
+                  currentFormStage?.includes("companyDetails")
+                    ? "text-[#B9B9B9]"
+                    : "text-white"
+                } font-semibold tracking-[0.42px]`}
+              >
+                Location Details
+              </h2>
+            </div>
+            <div
+              className={`flex justify-center items-center py-4 mx-auto cursor-pointer w-full rounded-tr-2xl ${
+                currentFormStage?.includes("bankDetails") && "bg-primary"
+              }`}
             >
-              Bank Details
-            </h2>
+              <Image src={bankIcon} alt="Bank Icon" className="mr-[10px]" />
+              <h2
+                className={`text-sm  ${
+                  currentFormStage?.includes("bankDetails")
+                    ? "text-white"
+                    : "text-[#B9B9B9]"
+                } font-semibold tracking-[0.42px]`}
+              >
+                Bank Details
+              </h2>
+            </div>
           </div>
+          <main>{children}</main>
         </div>
-        <main>{children}</main>
       </div>
     </div>
   );

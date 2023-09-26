@@ -18,7 +18,7 @@ const Location = ({
 
   setCurrentFormStage,
 }: FormComponentProps) => {
-  const defaultClassName = "mt-4";
+  // const defaultClassName = "mt-4";
   // const { fields, onSubmit, handleSubmit, errors, error } = useDetailLocation();
   const { loading } = useAppSelector((state) => state.auth);
   const fields = detailLocationFormField(
@@ -45,7 +45,7 @@ const Location = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
+          // className={`${defaultClassName}`}
         />
       </div>
     </DetailScreensCard>

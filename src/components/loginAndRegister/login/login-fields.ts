@@ -165,6 +165,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "MwST Number",
               htmlFor: "number",
@@ -180,6 +181,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "Upload Company Logo",
               htmlFor: "upload",
@@ -196,13 +198,14 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
       },
     },
     {
-      containerClass: "mt-8",
+      containerClass: "mt-10",
       label: null,
       field: {
         type: Field.button,
         text: "Next",
         inputType: "submit",
-        className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
+        className:
+          "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },
@@ -217,7 +220,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 
   setCurrentFormStage
 ) => {
-  
   const formField: FormField[] = [
     {
       field: {
@@ -255,6 +257,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "Postcode",
               htmlFor: "number",
@@ -270,6 +273,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "City",
               htmlFor: "text",
@@ -290,7 +294,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
-        className: "flex space-x-6",
+        className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
@@ -299,7 +303,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               inputType: "button",
               onClick: () => setCurrentFormStage("companyDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
               loading,
             },
           },
@@ -308,7 +312,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               type: Field.button,
               text: "Next",
               inputType: "submit",
-              className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
+              className:
+                "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },
@@ -329,7 +334,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-11",
       field: {
         type: Field.div,
         className: "grid grid-cols-2 gap-x-6 ",
@@ -346,11 +350,11 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               id: "1",
               name: "currency",
               options: [
-                { value: "kujhi", label: "123213" },
-                { value: "kujhirt", label: "123213" },
-                { value: "kujhiyrt", label: "123213" },
+                { value: "PKR", label: "PKR" },
+                { value: "Riyal", label: "Riyal" },
+                { value: "Dollar", label: "Dollar" },
               ],
-              trigger,
+              // trigger,
               control,
             },
           },
@@ -408,7 +412,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
-        className: "flex space-x-6",
+        className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
@@ -417,7 +421,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               inputType: "button",
               onClick: () => setCurrentFormStage("locationDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3]",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
               loading,
             },
           },
@@ -426,7 +430,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               type: Field.button,
               text: "Lets finish",
               inputType: "submit",
-              className: "rounded-lg   p-4 w-[277px] h-[50px]  text-white  ",
+              className:
+                "rounded-lg   p-4 w-[277px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

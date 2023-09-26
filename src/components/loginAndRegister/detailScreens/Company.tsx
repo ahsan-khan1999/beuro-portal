@@ -16,7 +16,7 @@ const Company = ({
   control,
   currentFormStage,
 }: FormComponentProps) => {
-  const defaultClassName = "mt-4";
+  // const defaultClassName = "mt-4";
   // const { fields } = useDetailScreens();
   const { loading } = useAppSelector((state) => state.auth);
   console.log(onSubmit);
@@ -37,7 +37,7 @@ const Company = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
+          // className={`${defaultClassName}`}
         />
       </div>
     </DetailScreensCard>

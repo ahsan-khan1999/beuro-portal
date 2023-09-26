@@ -16,7 +16,7 @@ export const DivField = ({ children, className, errors }: DivProps) => {
           getTypedFieldComponent(field.type as FieldType, field, error, errors);
 
         const childClasses = combineClasses(
-          "flex flex-col mb-[10px]",
+          "flex flex-col mb-5",
           containerClass
         );
         const labelClasses = combineClasses(
