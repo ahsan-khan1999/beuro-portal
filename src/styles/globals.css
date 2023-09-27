@@ -21,18 +21,17 @@ body {
   color: #1e1e1e;
   background: white;
 }
-.pricing-gradient{
-  background: linear-gradient(to right, #B503FE, #FF376F);
+.pricing-gradient {
+  background: linear-gradient(to right, #b503fe, #ff376f);
 }
 .filter-shadow {
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.07));
 }
 
-.tests svg path{
-  fill: #4A13E7 !important;
+.tests svg path {
+  fill: #4a13e7 !important;
 }
 
-
-.test svg path{
-  fill: red;
+.test svg path {
+  fill: #8F8F8F;
 }

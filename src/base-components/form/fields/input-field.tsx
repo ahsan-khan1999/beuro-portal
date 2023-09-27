@@ -19,6 +19,7 @@ export const InputField = ({
   svg,
   alt,
 }: InputProps) => {
+  console.log(svg,"svg")
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : name == "email" ? "pl-10 pr-4" : "pl-10 pr-4"
     } py-[10px] outline-none text-dark text-sm focus:border-primary `;
