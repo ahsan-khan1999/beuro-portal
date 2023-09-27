@@ -11,6 +11,7 @@ export const SelectBox = ({
   value: defaultValue,
   field,
   trigger,
+  placeholder,
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
@@ -43,11 +44,12 @@ export const SelectBox = ({
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
+      placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className="h-[42px] px-4 text-left text-dark bg-white py-[10px] rounded-lg border border-lightGray focus:border-primary outline-none w-full"
+        className="h-[42px] placeholder:text-dark px-4 text-left text-dark bg-white py-[10px] rounded-lg border border-lightGray focus:border-primary outline-none w-full"
       >
         {(field && field.value) || defaultValue}
         {/* <ArrowIcon isOpen={isOpen} /> */}

@@ -80,6 +80,7 @@ export interface SelectBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
+  placeholder: string;
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {

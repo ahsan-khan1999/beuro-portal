@@ -465,7 +465,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              // placeholder:"234324",
+              placeholder:"234324",
               type: Field.select,
               id: "1",
               name: "currency",
