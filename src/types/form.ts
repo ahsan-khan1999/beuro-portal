@@ -60,6 +60,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
+  svg?:SVGElement;
+  alt?:string
 }
 
 export interface OptionType {
