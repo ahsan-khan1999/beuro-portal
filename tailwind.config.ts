@@ -66,6 +66,8 @@ module.exports = {
         statusColor: "#AF2626",
       },
       boxShadow: (theme: any) => ({
+        header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,
+        followUp: `0px 3px 16px 6px rgba(0, 0, 0, 0.11)`,
         loginCard: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
         emailPopup: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
         shadowCard: `0px 6px 10px ${theme("colors.shadowColor")}`,

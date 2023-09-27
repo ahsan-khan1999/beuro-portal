@@ -1,5 +1,6 @@
 import { store } from "@/api/store";
 import "@/styles/globals.css";
+import "node_modules/flag-icons/css/flag-icons.min.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 
