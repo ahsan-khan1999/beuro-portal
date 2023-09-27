@@ -47,7 +47,7 @@ export const PasswordField = ({
         placeholder={placeholder}
         className={`${defaultClasses} ${className}`}
       />
-      <Image
+       <Image
         className={`absolute right-[16px] cursor-pointer ${
           (inputFocus && "tests") || "test"
         }`}
