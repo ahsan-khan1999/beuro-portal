@@ -35,3 +35,12 @@ body {
 .test svg path {
   fill: #8F8F8F;
 }
+.menu:hover .menuItems {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menuItems {
+  opacity: 0;
+  transform: translateY(-100rem);
+}
