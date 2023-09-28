@@ -1,4 +1,9 @@
-import { ReactNode, SetStateAction, Dispatch as stateDispatch } from "react";
+import {
+  Component,
+  ReactNode,
+  SetStateAction,
+  Dispatch as stateDispatch,
+} from "react";
 import { FormField } from "./form";
 import {
   Control,
@@ -13,6 +18,12 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
 import { CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
+export interface SideBar {
+  icon: string;
+  title: string;
+  pathname: string;
+  role: Array<number>[];
+}
 
 export interface SVGIconProp {
   className?: string;

@@ -17,10 +17,11 @@ import { MailTrackerIcon } from "@/assets/svgs/components/sideBar/MailTracker";
 import { SettingsIcon } from "@/assets/svgs/components/sideBar/Settings";
 import { ContactSupportsIcon } from "@/assets/svgs/components/sideBar/ContactSupports";
 import { useState } from "react";
+import { SideBar } from "@/types";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState<number>(null);
-  const sideBar = [
+  const sideBar: SideBar[] = [
     {
       icon: "Dashboard",
       title: "Dashboard",
