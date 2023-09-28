@@ -19,7 +19,7 @@
 
 body {
   color: #1e1e1e;
-  background: white;
+  background: #f3f3f3;
 }
 .pricing-gradient {
   background: linear-gradient(to right, #b503fe, #ff376f);

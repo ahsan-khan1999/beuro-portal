@@ -1,4 +1,3 @@
-import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 
 import { MyComponentProp } from "@/types";
@@ -8,24 +7,29 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
 import { isJSON } from "@/utils/functions";
 import { getCookie } from "cookies-next";
+import SideBar from "@/base-components/SideBar";
+import Header from "@/base-components/Header";
 
 export const Layout = ({ children }: MyComponentProp) => {
-  const { user } = useAppSelector(state => state.auth)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    useGlobalUser(user, dispatch)
-  }, [])
+  // const { user } = useAppSelector(state => state.auth)
+  // const dispatch = useAppDispatch()
+  // useEffect(() => {
+  //   useGlobalUser(user, dispatch)
+  // }, [])
 
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Header />
-      <div className="mx-5">
-        <main>{children}</main>
-        <Footer />
-      </div>
+
+      <main className="bg-[#F3F3F3]">
+        <Header />
+        <div className="flex">
+          <SideBar />
+          <div className="ml-[272px] mt-[14px]">{children}</div>
+        </div>
+      </main>
     </>
   );
 };
