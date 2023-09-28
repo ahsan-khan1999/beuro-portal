@@ -21,7 +21,7 @@ export const Layout = ({ children }: MyComponentProp) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+       </Head>
 
       <main className="bg-[#F3F3F3]">
         <Header />
