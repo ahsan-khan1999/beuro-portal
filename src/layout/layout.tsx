@@ -21,13 +21,13 @@ export const Layout = ({ children }: MyComponentProp) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-       </Head>
+      </Head>
 
       <main className="bg-[#F3F3F3]">
         <Header />
         <div className="flex">
           <SideBar />
-          <div className="ml-[272px] mt-[14px]">{children}</div>
+          <div className="ml-[272px] mt-[14px] w-full">{children}</div>
         </div>
       </main>
     </>
