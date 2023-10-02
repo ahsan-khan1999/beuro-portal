@@ -106,28 +106,36 @@ export default function Home() {
           title: "ID",
           field: "id",
           responsive: 0,
-          titleFormatter(cell, formatterParams, onRendered) {
-             alert("test");
-             return `<div class="flex lg:justify-center">
-                    <div class="intro-x w-20 h-20 text-white">
-                     ${cell.getData().id}
-                    </div>
-                </div>`;
-          },
-          
+
+          // headerCssClass: "text-black",
+
+          // cssClass: "text-white  ",
+          cssClass: "text-white !py-[19px] !bg-black !text-[#4B4B4B]",
+
+          // titleFormatter(cell, formatterParams, onRendered) {
+          //   alert("test");
+          //   return `<div class="flex lg:justify-center">
+          //           <div class="intro-x w-20 h-20 text-white">
+          //            ${cell.getData().id}
+          //           </div>
+          //       </div>`;
+          // },
         }, //never hide this column
         {
           title: "Progress",
           field: "progress",
+          // cssClass: "text-white ",
+
           hozAlign: "right",
           sorter: "number",
-          formatter(cell) {
-            return `<div class="flex lg:justify-center">
-                    <div class="intro-x w-20 h-20 image-fit">
-                      <img alt="Thumbnail" class="rounded-full " src="${"./"}">
-                    </div>
-                </div>`;
-          },
+          // formatter(cell) {
+          //   return `<div class="flex lg:justify-center">
+          //           <div class="intro-x w-20 h-20 image-fit">
+          //             <img alt="Thumbnail" class="rounded-full " src="${"./"}">
+          //           </div>
+          //       </div>`;
+          // },
+
           // formatter(cell) {
           //   const cellValue = cell.getValue();
           //   //  const cellValue = parseFloat(cell.getValue());
@@ -142,19 +150,20 @@ export default function Home() {
 
           //   return cellValue;
           // },
-          formatter: function (cell, formatterParams) {
-            var value = cell.getValue();
 
-            if (value) {
-              return (
-                "<span style='color:#ffff; font-weight:bold;'>" +
-                value +
-                "</span>"
-              );
-            } else {
-              return value;
-            }
-          },
+          // formatter: function (cell, formatterParams) {
+          //   var value = cell.getValue();
+
+          //   if (value) {
+          //     return (
+          //       "<span style='color:#ffff; font-weight:bold;'>" +
+          //       value +
+          //       "</span>"
+          //     );
+          //   } else {
+          //     return value;
+          //   }
+          // },
         },
         {
           title: "Gender",
@@ -167,18 +176,19 @@ export default function Home() {
           //   tickElement: "<i class='fa fa-check '></i>",
           //   crossElement: "<i class='fa fa-times'></i>",
           // },
-          formatter: function (cell, formatterParams) {
-            var value = cell.getValue();
-            if (value.indexOf("o") > 0) {
-              return (
-                "<span style='color:#3FB449; font-weight:bold;'>" +
-                value +
-                "</span>"
-              );
-            } else {
-              return value;
-            }
-          },
+
+          // formatter: function (cell, formatterParams) {
+          //   var value = cell.getValue();
+          //   if (value.indexOf("o") > 0) {
+          //     return (
+          //       "<span style='color:#3FB449; font-weight:bold;'>" +
+          //       value +
+          //       "</span>"
+          //     );
+          //   } else {
+          //     return value;
+          //   }
+          // },
         }, //hide this column first
         { title: "Rating", field: "rating", hozAlign: "center" },
         {
@@ -199,24 +209,26 @@ export default function Home() {
           title: "Driver",
           field: "car",
           vertAlign: "top",
-          formatter: function (cell, formatterParams) {
-            var value = cell.getValue();
 
-            if (value) {
-              return (
-                "<span style='color:#ffff !important; font-weight:bold;'>" +
-                value +
-                "</span>"
-              );
-            } else {
-              return value;
-            }
-          },
+          // formatter: function (cell, formatterParams) {
+          //   var value = cell.getValue();
+
+          //   if (value) {
+          //     return (
+          //       "<span style='color:#ffff !important; font-weight:bold;'>" +
+          //       value +
+          //       "</span>"
+          //     );
+          //   } else {
+          //     return value;
+          //   }
+          // },
         },
       ],
       rowFormatter: function (row) {
         row.getElement().style.backgroundColor = "red";
         row.getElement().style.width = "100%";
+        row.getElement().style.marginTop = "8px";
       },
     });
 

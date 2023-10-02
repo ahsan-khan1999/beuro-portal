@@ -55,6 +55,7 @@ body {
   position: absolute !important;
 }
 
+
 /* Thin scrollbar thumb */
 ::-webkit-scrollbar-thumb {
   background: rgb(202, 202, 202); /* Color of the scrollbar thumb */
@@ -67,4 +68,6 @@ body {
 }
 
 
-
+.tabulator-col {
+  padding: 16px !important;
+}
