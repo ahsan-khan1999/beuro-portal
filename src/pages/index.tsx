@@ -156,7 +156,7 @@ export default function Home() {
           <span className="px-6 py-4  font-medium text-[#8F8F8F] ">
             Location
           </span>
-          <span className="px-6 py-4  font-medium text-[#8F8F8F] ">Status</span>
+           <span className="px-6 py-4  font-medium text-[#8F8F8F] ">Status</span>
           <span className="px-6 py-4  font-medium text-[#8F8F8F] ">Edit</span>
           <span className="px-6 py-4  font-medium text-[#8F8F8F] "></span>
         </div>
