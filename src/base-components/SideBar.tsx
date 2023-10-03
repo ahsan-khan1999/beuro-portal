@@ -169,7 +169,7 @@ const SideBar = () => {
   };
   const router = useRouter();
   return (
-    <div className="fixed overflow-x-hidden  overflow-y-scroll mt-[14px] bg-white rounded-r-[6px] ">
+    <div className="fixed overflow-x-hidden  overflow-y-scroll  bg-white rounded-r-[6px] ">
       <div className="max-w-[247px] pt-6 px-4 pb-8   relative      sidebar-height    flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {

@@ -55,7 +55,6 @@ body {
   position: absolute !important;
 }
 
-
 /* Thin scrollbar thumb */
 ::-webkit-scrollbar-thumb {
   background: rgb(202, 202, 202); /* Color of the scrollbar thumb */
@@ -67,7 +66,42 @@ body {
   background: #555; /* Color of the scrollbar thumb on hover */
 }
 
+.tabulator {
+  border: none !important;
+  border-radius: 6px !important;
+  background: #f3f3f3 !important;
+}
+.tabulator-header {
+  border: none !important;
+  border-radius: 6px !important;
+}
 
 .tabulator-col {
-  padding: 16px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  border: none !important;
+  background: white !important;
+  /* border-radius: 6px !important; */
+}
+.tabulator-col-title {
+  color: #8f8f8f !important;
+  font-weight: 500 !important;
+}
+.tabulator-col-content {
+  padding: 0 !important;
+  /* border-radius: 6px !important; */
+}
+.tabulator-table {
+  background: #f3f3f3 !important;
+}
+.tabulator-cell {
+  padding-top: 19px !important;
+  padding-bottom: 19px !important;
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  text-align: left !important;
+  border: none !important;
+  color: #4b4b4b !important;
 }

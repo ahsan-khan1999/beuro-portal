@@ -1,5 +1,4 @@
-import Header from "@/base-components/Header";
-import SideBar from "@/base-components/SideBar";
+import React from "react";
 import { Layout } from "@/layout/layout";
 import { useEffect, useRef } from "react";
 import { Tabulator } from "tabulator-tables";
@@ -89,28 +88,47 @@ export default function Home() {
   // function printFormatter(cell, formatterParams, onRendered) {
   //   return cell.getValue() ? "YES" : "NO";
   // }
+  function paramLookup(cell) {
+    //cell - the cell component
+
+    //do some processing and return the param object
+    return { param1: "green" };
+  }
+  function customJSXFormatter(cell) {
+    const rowData = cell.getRow().getData(); // Get the data for the entire row
+    return (
+      <div>
+        <p>ID: {rowData.id}</p>
+        <p>Name: {rowData.name}</p>
+        {/* Add more JSX content here */}
+      </div>
+    );
+  }
 
   useEffect(() => {
     tabulatorRef.current = new Tabulator("#example-table", {
+      data: dataToAdd,
       // width:"5000px",
       // height: "311px",
       // responsiveLayout: "hide",
       // renderHorizontal: "virtual",
-      responsiveLayout: "hide",
+      // responsiveLayout: "hide",
       // layout: "fitDataTable",
       layout: "fitColumns",
-      resizableColumnFit: true,
+      // resizableColumnFit: true,
       // layout: "fitDataStretch",
       columns: [
         {
           title: "ID",
           field: "id",
-          responsive: 0,
+          // responsive: 0,
+          width: "60",
 
           // headerCssClass: "text-black",
 
           // cssClass: "text-white  ",
-          cssClass: "text-white !py-[19px] !bg-black !text-[#4B4B4B]",
+          cssClass:
+            "text-white !py-[19px] !bg-blacks !text-[#4B4B4B] text !h-fit !w-16s !rounded-mds",
 
           // titleFormatter(cell, formatterParams, onRendered) {
           //   alert("test");
@@ -122,16 +140,33 @@ export default function Home() {
           // },
         }, //never hide this column
         {
-          title: "Progress",
-          field: "progress",
+          title: "Name",
+          field: "name",
+          // formatter: customJSXFormatter,
+          formatter: function (cell, formatterParams, onRendered) {
+            console.log("2134214");
+            //cell - the cell component
+            //formatterParams - parameters set for the column
+            //onRendered - function to call when the formatter has been rendered
+
+            return console.log("2134214");
+
+            //return the contents of the cell;
+          },
+          // formatter: "star",
+          // formatterParams: { stars: 6 },
           // cssClass: "text-white ",
 
           hozAlign: "right",
-          sorter: "number",
+          // sorter: "number",
           // formatter(cell) {
+          //   console.log(cell, "w324324");
+          //   alert("324324324");
+          //   debugger;
+
           //   return `<div class="flex lg:justify-center">
           //           <div class="intro-x w-20 h-20 image-fit">
-          //             <img alt="Thumbnail" class="rounded-full " src="${"./"}">
+          //             <h1>2342343124234234234324234<h1>
           //           </div>
           //       </div>`;
           // },
@@ -166,9 +201,12 @@ export default function Home() {
           // },
         },
         {
-          title: "Gender",
-          field: "gender",
-          responsive: 2,
+          title: "Email",
+          field: "email",
+          // responsive: 2,
+          // formatter: "star",
+          // formatterParams: paramLookup,
+
           // formatter: "tickCross",
           // formatterParams: {
           //   allowEmpty: true,
@@ -190,25 +228,26 @@ export default function Home() {
           //   }
           // },
         }, //hide this column first
-        { title: "Rating", field: "rating", hozAlign: "center" },
+        { title: "Phone", field: "phone", hozAlign: "center" },
         {
-          title: "Favourite Color",
-          field: "col",
+          title: "Desire Date",
+          field: "date",
           // formatterParams(cell) {},
         },
-        { title: "Favourite Color", field: "col" },
-        { title: "Favourite Color", field: "col" },
+        { title: "Location", field: "location" },
+        { title: "Status", field: "status", cssClass: "bg-black" },
         {
-          title: "Date Of Birth",
-          field: "dob",
+          title: "Edit",
+          field: "edit",
           hozAlign: "center",
-          sorter: "date",
+          // sorter: "date",
           // formatterPrint: printFormatter,
         },
         {
-          title: "Driver",
-          field: "car",
+          title: "",
+          field: "arrow",
           vertAlign: "top",
+          width: "60",
 
           // formatter: function (cell, formatterParams) {
           //   var value = cell.getValue();
@@ -225,10 +264,12 @@ export default function Home() {
           // },
         },
       ],
+
       rowFormatter: function (row) {
-        row.getElement().style.backgroundColor = "red";
+        row.getElement().style.backgroundColor = "white";
         row.getElement().style.width = "100%";
         row.getElement().style.marginTop = "8px";
+        row.getElement().style.borderRadius = "6px";
       },
     });
 
@@ -237,30 +278,156 @@ export default function Home() {
       tabulatorRef.current.destroy();
     };
   }, []);
+  const dataToAdd = [
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    {
+      id: "1",
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      edit: "3434",
+      arrow: "32",
+    },
+    // Add more rows as needed
+  ];
 
-  const addRowsToTable = () => {
-    const dataToAdd = [
-      {
-        id: "1",
-        progress: 50,
-        gender: "Mole",
-        rating: 4,
-        col: "Blue",
-        dob: "1990-01-15",
-        car: "Yes",
-      },
-      // Add more rows as needed
-    ];
+  // const addRowsToTable = () => {
+  //   const dataToAdd = [
+  //     {
+  //       id: "1",
+  //       name: "Rahal Ahmed",
+  //       email: "Test12@gmail.com",
+  //       phone: "+49 302 1231234",
+  //       date: "25/08/2023",
+  //       location: "Islamabad",
+  //       status: "Open",
+  //       edit: "3434",
+  //       arrow: "32",
+  //     },
+  //     // Add more rows as needed
+  //   ];
 
-    tabulatorRef.current.addData(dataToAdd);
-  };
+  //   tabulatorRef.current.addData(dataToAdd);
+  // };
 
   return (
     <Layout>
       <div className="w-full overflow-scroll">
         <div className="w-full" id="example-table" />
       </div>
-      <button onClick={addRowsToTable}>Add Rows</button>
+      {/* <button onClick={addRowsToTable}>Add Rows</button> */}
     </Layout>
   );
 }

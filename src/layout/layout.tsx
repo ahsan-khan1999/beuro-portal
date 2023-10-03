@@ -25,9 +25,9 @@ export const Layout = ({ children }: MyComponentProp) => {
 
       <main className="bg-[#F3F3F3]">
         <Header />
-        <div className="flex">
+        <div className="flex mt-[90px]">
           <SideBar />
-          <div className="ml-[272px] mt-[14px] w-full">{children}</div>
+          <div className="ml-[272px]  w-full mr-5">{children}</div>
         </div>
       </main>
     </>

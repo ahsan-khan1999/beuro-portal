@@ -7,7 +7,7 @@ import FollowUpDropDown from "@/components/FollowUpDropDown";
 import Image from "next/image";
 const Header = () => {
   return (
-    <div className="p-4 flex justify-between items-center shadow-header z-50 bg-white">
+    <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white">
       <div className="flex items-center">
         <Image
           src={companyLogo}
