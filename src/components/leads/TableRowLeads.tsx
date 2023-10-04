@@ -1,141 +1,6 @@
 import React from "react";
 
-const TableRowLeads = () => {
-  const dataToAdd = [
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    {
-      id: "1",
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      edit: "3434",
-      arrow: "32",
-    },
-    // Add more rows as needed
-  ];
+const TableRowLeads = ({ dataToAdd }) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index) => {
@@ -164,7 +29,7 @@ const TableRowLeads = () => {
               </div>
             </span>
             <span className="px-6 py-4 bg-white ">
-              <div className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit">
+              <div className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -184,6 +49,7 @@ const TableRowLeads = () => {
 
             <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
               <svg
+                className="cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 width="8"
                 height="15"

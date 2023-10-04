@@ -129,6 +129,32 @@ export type GenerateFormAddressField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
+
+export interface PaginationProps {
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+  containerClassName?: string;
+}
+
+export interface PaginationItemProps {
+  handlePageClick: ButtonClickFunction;
+  icon: any;
+  className?: string;
+  disabled?: boolean;
+}
+
+
+export interface TableRowTypes {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  location: string;
+  status: string;
+}
+
 // export interface SuccessMessage {
 //   image:Image
 // }

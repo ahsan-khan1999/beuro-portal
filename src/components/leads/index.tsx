@@ -1,19 +1,149 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
 import TableRowLeads from "@/components/leads/TableRowLeads";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
+import { Pagination } from "@/base-components/ui/pagination/pagination";
+import { TableRowTypes } from "@/types";
 
 export default function Leads() {
   const [filter, setFilter] = useState([]);
   console.log(filter, "filter");
-  const handleButtonClick = (buttonName) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+
+  const dataToAdd: TableRowTypes[] = [
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Close",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Close",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Expired",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Expired",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+    },
+    // Add more rows as needed
+  ];
+
+  const handleButtonClick = (buttonName:string) => {
     // Use the spread operator to create a new array with the buttonName added
     const deletedElement = filter.filter((item) => item !== buttonName);
     filter.includes(buttonName)
       ? setFilter(deletedElement)
       : setFilter([...filter, buttonName]);
+  };
+
+  const totalItems = dataToAdd.length;
+  const itemsPerPage = 2;
+
+  useEffect(() => {
+    // Update rows for the current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -140,7 +270,27 @@ export default function Leads() {
               )}
             </button>
             <SearchInput />
+            <div className="text-[#404040] font-medium flex items-center cursor-pointer">
+              Sort by
+              <svg
+                className="ml-[2px]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="16"
+                viewBox="0 0 17 16"
+                fill="none"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12.0961 6.12191C12.2318 6.00587 12.4191 5.97103 12.5874 6.03051C12.7557 6.08999 12.8795 6.23475 12.9122 6.41026C12.9449 6.58578 12.8814 6.76538 12.7457 6.88141L9.248 9.87946C9.06101 10.0394 8.78541 10.0394 8.59842 9.87946L5.1007 6.88141C4.89097 6.70204 4.86636 6.3866 5.04574 6.17687C5.22511 5.96714 5.54055 5.94253 5.75028 6.12191L8.92321 8.84114L12.0961 6.12291V6.12191Z"
+                  fill="#404040"
+                  stroke="black"
+                />
+              </svg>
+            </div>
             <svg
+              className="cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="17"
@@ -185,8 +335,13 @@ export default function Leads() {
       </div>
       <TableLayout>
         <TableHeadingLeads />
-        <TableRowLeads />
+        <TableRowLeads dataToAdd={dataToAdd} />
       </TableLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
     </Layout>
   );
 }
