@@ -37,7 +37,7 @@ const SideBar = () => {
     {
       icon: "Leads",
       title: "Leads",
-      pathname: "/dashboard",
+      pathname: "/leads",
       role: [0, 1],
       inner: [
         {
