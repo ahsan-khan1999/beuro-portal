@@ -70,6 +70,7 @@ module.exports = {
         followUp: `0px 3px 16px 6px rgba(0, 0, 0, 0.11)`,
         loginCard: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
         emailPopup: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
+        tableRow: `0.5px 3px 10px 0px rgba(119, 119, 119, 0.10)`,
         shadowCard: `0px 6px 10px ${theme("colors.shadowColor")}`,
         languagesDropDown: `0px 0px 26px ${theme("colors.shadowColor")}`,
         blogsShadow: `0px 0px 16px ${theme("colors.shadowColor")}`,
