@@ -9,13 +9,13 @@ import { TableRowTypes } from "@/types";
 interface Status {
   open: boolean;
   close: boolean;
-  expired: boolean
+  expired: boolean;
 }
 export default function Leads() {
   const [filter, setFilter] = useState<Status>({
     open: false,
     close: false,
-    expired: false
+    expired: false,
   });
   console.log(filter, "filter");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -132,12 +132,10 @@ export default function Leads() {
     },
     // Add more rows as needed
   ];
-  function onInputChange(text: string) {
-
-  }
+  function onInputChange(text: string) {}
 
   const handleButtonClick = (key: string, value: boolean) => {
-    setFilter({ ...filter, [key]: value })
+    setFilter({ ...filter, [key]: value });
   };
 
   const totalItems = dataToAdd.length;
@@ -200,7 +198,6 @@ export default function Leads() {
             </button>
             <button
               onClick={() => handleButtonClick("close", !filter.close)}
-
               className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
             >
               Close Leads
@@ -238,12 +235,12 @@ export default function Leads() {
                 </svg>
               )}
             </button>
-            {/* <button
-              onClick={() => handleButtonClick("expire")}
+            <button
+              onClick={() => handleButtonClick("expired", !filter.expired)}
               className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
             >
               Expire leads
-              {filter.includes("expire") ? (
+              {filter.expired ? (
                 <svg
                   className="absolute top-1 right-1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +273,7 @@ export default function Leads() {
                   />
                 </svg>
               )}
-            </button> */}
+            </button>
             <SearchInput onInputChange={onInputChange} />
             <div className="text-[#404040] font-medium flex items-center cursor-pointer">
               Sort by

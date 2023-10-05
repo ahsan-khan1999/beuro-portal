@@ -24,9 +24,11 @@ import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
+import { CustomerInputField } from "./fields/customer-input-field";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
+  customerInput: CustomerInputField,
   creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,

@@ -201,6 +201,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  customerInput: React.FC<InputProps>;
   creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;

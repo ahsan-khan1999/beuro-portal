@@ -13,6 +13,7 @@ import {
   ResetPasswordFields,
   ChangePasswordFields,
 } from "@/enums/registration";
+import { CustomerDetailsFields } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
 export const generateValidation = (translate: Function) => {
@@ -41,6 +42,41 @@ export const generateLoginValidation = (translate: Function) => {
     [LoginFields.password]: yup
       .string()
       .min(6, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+  });
+};
+export const generateCustomerValidation = (translate: Function) => {
+  return yup.object().shape({
+    [CustomerDetailsFields.firstName]: yup
+      .string()
+      .required("validation required"),
+    [CustomerDetailsFields.lastName]: yup
+      .string()
+      .required("validation required"),
+    [CustomerDetailsFields.customerType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.email]: yup
+      .string()
+      .email()
+      .required(translate("validationMessages.required")),
+
+    [CustomerDetailsFields.phone]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.mobile]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.streetNo]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.postalCode]: yup
+      .number()
+      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.country]: yup
+      .string()
       .required(translate("validationMessages.required")),
   });
 };
