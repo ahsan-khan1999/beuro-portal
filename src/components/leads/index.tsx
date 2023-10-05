@@ -6,9 +6,17 @@ import TableRowLeads from "@/components/leads/TableRowLeads";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes } from "@/types";
-
+interface Status {
+  open: boolean;
+  close: boolean;
+  expired: boolean
+}
 export default function Leads() {
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState<Status>({
+    open: false,
+    close: false,
+    expired: false
+  });
   console.log(filter, "filter");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
@@ -124,17 +132,16 @@ export default function Leads() {
     },
     // Add more rows as needed
   ];
+  function onInputChange(text: string) {
 
-  const handleButtonClick = (buttonName:string) => {
-    // Use the spread operator to create a new array with the buttonName added
-    const deletedElement = filter.filter((item) => item !== buttonName);
-    filter.includes(buttonName)
-      ? setFilter(deletedElement)
-      : setFilter([...filter, buttonName]);
+  }
+
+  const handleButtonClick = (key: string, value: boolean) => {
+    setFilter({ ...filter, [key]: value })
   };
 
   const totalItems = dataToAdd.length;
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     // Update rows for the current page
@@ -153,11 +160,11 @@ export default function Leads() {
         <div className="flex items-center ">
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => handleButtonClick("open")}
+              onClick={() => handleButtonClick("open", !filter.open)}
               className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
             >
               Open Leads
-              {filter.includes("open") ? (
+              {filter.open ? (
                 <svg
                   className="absolute top-1 right-1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -192,11 +199,12 @@ export default function Leads() {
               )}
             </button>
             <button
-              onClick={() => handleButtonClick("close")}
+              onClick={() => handleButtonClick("close", !filter.close)}
+
               className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
             >
               Close Leads
-              {filter.includes("close") ? (
+              {filter.close ? (
                 <svg
                   className="absolute top-1 right-1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -230,7 +238,7 @@ export default function Leads() {
                 </svg>
               )}
             </button>
-            <button
+            {/* <button
               onClick={() => handleButtonClick("expire")}
               className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
             >
@@ -268,8 +276,8 @@ export default function Leads() {
                   />
                 </svg>
               )}
-            </button>
-            <SearchInput />
+            </button> */}
+            <SearchInput onInputChange={onInputChange} />
             <div className="text-[#404040] font-medium flex items-center cursor-pointer">
               Sort by
               <svg
@@ -335,7 +343,7 @@ export default function Leads() {
       </div>
       <TableLayout>
         <TableHeadingLeads />
-        <TableRowLeads dataToAdd={dataToAdd} />
+        <TableRowLeads dataToAdd={currentPageRows} />
       </TableLayout>
       <Pagination
         totalItems={totalItems}

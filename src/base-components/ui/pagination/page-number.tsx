@@ -1,4 +1,5 @@
 // import { getButtonClass } from "@/utils/utility";
+import { getButtonClass } from "@/utils/utility";
 import { PaginationItem } from "./pagination-item";
 
 export const PageNumber = ({
@@ -14,10 +15,10 @@ export const PageNumber = ({
     key={pageNumber}
     icon={pageNumber}
     handlePageClick={() => handlePageClick(pageNumber)}
-    // className={getButtonClass(
-    //   currentPage === pageNumber,
-    //   "bg-primary text-white",
-    //   "hover:bg-gray-200"
-    // )}
+    className={getButtonClass(
+      currentPage === pageNumber,
+      "bg-primary text-white",
+      "hover:bg-gray-200"
+    )}
   />
 );
