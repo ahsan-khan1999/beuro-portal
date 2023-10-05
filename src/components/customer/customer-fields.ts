@@ -73,26 +73,26 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               register,
             },
           },
-          // {
-          //   label: {
-          //     text: "Customer Type",
-          //     htmlFor: "select",
-          //     className: "mb-[10px]",
-          //   },
-          //   field: {
-          //     placeholder: "Please Select Customer Type",
-          //     type: Field.select,
-          //     id: "customerType",
-          //     name: "customerType",
-          //     options: [
-          //       { value: "Individual", label: "Individual" },
-          //       { value: "Riyal", label: "Riyal" },
-          //       { value: "Dollar", label: "Dollar" },
-          //     ],
-          //     // trigger,
-          //     control,
-          //   },
-          // },
+          {
+            label: {
+              text: "Customer Type",
+              htmlFor: "select",
+              className: "mb-[10px]",
+            },
+            field: {
+              placeholder: "Please Select Customer Type",
+              type: Field.select,
+              id: "customerType",
+              name: "customerType",
+              options: [
+                { value: "Individual", label: "Individual" },
+                { value: "Riyal", label: "Riyal" },
+                { value: "Dollar", label: "Dollar" },
+              ],
+              // trigger,
+              control,
+            },
+          },
 
           {
             containerClass: "mb-0",
