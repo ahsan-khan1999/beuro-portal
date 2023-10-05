@@ -1,6 +1,7 @@
 // import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
+import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 // import searchIcon from "@/assets/svgs/search.svg";
@@ -12,22 +13,23 @@ export const SelectBox = ({
   field,
   trigger,
   placeholder,
+  className,
 }: SelectBoxProps) => {
+  console.log(className,"1243")
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
   useMemo(() => {
-    if(options.length > 0){
-      setOption(options)
+    if (options.length > 0) {
+      setOption(options);
     }
-  }, [options.length])
-  
+  }, [options.length]);
+
   const search = useRef<string>("");
-  
+
   const toggleDropDown = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     setIsOpen(false);
@@ -36,20 +38,26 @@ export const SelectBox = ({
   };
 
   const handleChange = (value: string) => {
-    search.current = value
-    setOption(options.filter((item) => item.value?.toLowerCase()?.includes(value?.toLowerCase())))
-  }
-
+    search.current = value;
+    setOption(
+      options.filter((item) =>
+        item.value?.toLowerCase()?.includes(value?.toLowerCase())
+      )
+    );
+  };
+  const defaultClasses =
+    "h-[42px] placeholder:text-dark px-4 py-[10px]  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
+  const classes = combineClasses(defaultClasses, className);
 
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-      placeholder={placeholder}
+        placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className="h-[42px] placeholder:text-dark px-4 text-left text-dark bg-white py-[10px] rounded-lg border border-lightGray focus:border-primary outline-none w-full"
+        className={classes}
       >
         {(field && field.value) || defaultValue}
         {/* <ArrowIcon isOpen={isOpen} /> */}
@@ -59,7 +67,12 @@ export const SelectBox = ({
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
             {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
 
-            <input value={search.current} onChange={(e) => handleChange(e.target.value)} placeholder="Search..." className="w-full px-2 py-3 outline-none rounded-lg " />
+            <input
+              value={search.current}
+              onChange={(e) => handleChange(e.target.value)}
+              placeholder="Search..."
+              className="w-full px-2 py-3 outline-none rounded-lg "
+            />
           </div>
           {option.map(({ value, label }) => (
             <li
