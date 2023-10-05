@@ -23,7 +23,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark",
+              className: "!p-4 !!border-borderColor border border-dark  ",
               inputType: "text",
               id: "firstName",
               name: "firstName",
