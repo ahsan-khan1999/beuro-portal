@@ -42,20 +42,21 @@ export enum SalutationValue {
 
 
 export enum Field {
-  input = 'input',
-  creditCardNumberInput = 'creditCardNumberInput',
-  creditCardExpiryDateInput = 'creditCardExpiryDateInput',
-  password = 'password',
-  select = 'select',
-  phone = 'phone',
-  date = 'date',
-  checkbox = 'checkbox',
-  radio = 'radio',
-  dragAndDropFileField = 'dragAndDropFileField',
-  span = 'span',
-  div = 'div',
-  button = 'button',
-  link = 'link',
+  input = "input",
+  customerInput = "customerInput",
+  creditCardNumberInput = "creditCardNumberInput",
+  creditCardExpiryDateInput = "creditCardExpiryDateInput",
+  password = "password",
+  select = "select",
+  phone = "phone",
+  date = "date",
+  checkbox = "checkbox",
+  radio = "radio",
+  dragAndDropFileField = "dragAndDropFileField",
+  span = "span",
+  div = "div",
+  button = "button",
+  link = "link",
 }
 
 export enum CardType {

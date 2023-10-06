@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
-import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
-import TableRowLeads from "@/components/leads/TableRowLeads";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes } from "@/types";
-import TableFunctions from "./TableFunctions";
+import TableFunctions from "./table/TableFunctions";
+import TableHeading from "./table/TableHeading";
+import TableRow from "./table/TableRow";
 
-export default function Leads() {
+export default function Customers() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
 
@@ -20,7 +20,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -29,7 +29,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Close",
+      type: "Individual",
     },
     {
       id: 1,
@@ -38,7 +38,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -47,7 +47,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Close",
+      type: "Individual",
     },
     {
       id: 1,
@@ -56,7 +56,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Expired",
+      type: "Individual",
     },
     {
       id: 1,
@@ -65,7 +65,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -74,7 +74,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Expired",
+      type: "Individual",
     },
     {
       id: 1,
@@ -83,7 +83,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -92,7 +92,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -101,7 +101,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -110,7 +110,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     {
       id: 1,
@@ -119,7 +119,7 @@ export default function Leads() {
       phone: "+49 302 1231234",
       date: "25/08/2023",
       location: "Islamabad",
-      status: "Open",
+      type: "Individual",
     },
     // Add more rows as needed
   ];
@@ -141,8 +141,8 @@ export default function Leads() {
     <Layout>
       <TableFunctions />
       <TableLayout>
-        <TableHeadingLeads />
-        <TableRowLeads dataToAdd={currentPageRows} />
+        <TableHeading />
+        <TableRow dataToAdd={currentPageRows} />
       </TableLayout>
       <Pagination
         totalItems={totalItems}

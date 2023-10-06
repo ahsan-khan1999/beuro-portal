@@ -60,8 +60,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-  svg?:SVGElement;
-  alt?:string
+  svg?: SVGElement;
+  alt?: string;
 }
 
 export interface OptionType {
@@ -74,6 +74,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string;
   trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
 }
 
 export interface SelectBoxProps {
@@ -83,6 +84,7 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   placeholder: string;
+  className?: string;
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
@@ -201,6 +203,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  customerInput: React.FC<InputProps>;
   creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
