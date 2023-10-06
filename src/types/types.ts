@@ -148,9 +148,10 @@ export interface TableRowTypes {
   name: string;
   email: string;
   phone: string;
-  date: Date;
+  date: string;
   location: string;
-  status: string;
+  status?: string;
+  type?: string;
 }
 
 // export interface SuccessMessage {

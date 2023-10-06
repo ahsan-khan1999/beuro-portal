@@ -1,12 +1,12 @@
-import { Form } from '@/base-components/form/form';
-import { useCustomerDetails } from '@/hooks/useCustomerDetails';
-import FormCard from '@/layout/customer/FormCard';
-import React from 'react'
+import { Form } from "@/base-components/form/form";
+import { useCustomerDetails } from "@/hooks/useCustomerDetails";
+import FormCard from "@/layout/customers/FormCard";
+import React from "react";
 
-const CustomerForm= () => {
-    const defaultClassName = "mt-[30px]  ";
-    const { fields, control, onSubmit, handleSubmit, errors, error } =
-      useCustomerDetails();
+const CustomerForm = () => {
+  const defaultClassName = "mt-[30px]  ";
+  const { fields, control, onSubmit, handleSubmit, errors, error } =
+    useCustomerDetails();
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
@@ -24,6 +24,6 @@ const CustomerForm= () => {
       />
     </FormCard>
   );
-}
+};
 
-export default CustomerForm
+export default CustomerForm;
