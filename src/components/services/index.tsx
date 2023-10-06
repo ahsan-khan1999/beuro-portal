@@ -16,7 +16,7 @@ export default function Services() {
 
 
   // Function for handling the date format
-  function parseCustomDate(dateString) {
+  function parseCustomDate(dateString: string) {
     const parts = dateString.split("/");
     if (parts.length === 3) {
       const day = parseInt(parts[0], 10);
@@ -27,7 +27,7 @@ export default function Services() {
       }
     }
 
-    return null; 
+    return null;
   }
 
 
@@ -161,7 +161,7 @@ export default function Services() {
       price: {
         value: 300,
         currency: "CHF"
-        
+
       },
       description: "We need to move office furniture to.....",
       action: "edit"
@@ -202,7 +202,7 @@ export default function Services() {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  };  
+  };
 
   return (
     <Layout>

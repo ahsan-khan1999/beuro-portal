@@ -154,6 +154,20 @@ export interface TableRowTypes {
   type?: string;
 }
 
+// Interface for the services table
+export interface TRowServices {
+  id: string;
+  service: string;
+  createdOn: Date | null;
+  price: {
+    value: number;
+    currency: string;
+  };
+  description: string;
+  action: "edit"; 
+}
+
+
 // export interface SuccessMessage {
 //   image:Image
 // }
