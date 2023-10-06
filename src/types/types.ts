@@ -16,7 +16,7 @@ import {
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
-import { CountryType, Image, countryType } from "./ui";
+import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 export interface SideBar {
   icon: string;
@@ -129,7 +129,6 @@ export type GenerateFormAddressField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
-
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -144,13 +143,12 @@ export interface PaginationItemProps {
   disabled?: boolean;
 }
 
-
 export interface TableRowTypes {
   id: number;
   name: string;
   email: string;
   phone: string;
-  date: string;
+  date: Date;
   location: string;
   status: string;
 }

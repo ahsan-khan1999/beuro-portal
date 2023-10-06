@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableRowLeads = (dataToAdd) => {
+const TableRowLeads = ({ dataToAdd }) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
