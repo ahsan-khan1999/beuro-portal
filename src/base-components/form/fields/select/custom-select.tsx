@@ -15,7 +15,8 @@ export const SelectBox = ({
   placeholder,
   className,
 }: SelectBoxProps) => {
-  console.log(className,"1243")
+  console.log(className, "1243");
+  defaultValue = "Please select a value";
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
   useMemo(() => {
@@ -46,7 +47,7 @@ export const SelectBox = ({
     );
   };
   const defaultClasses =
-    "h-[42px] placeholder:text-dark px-4 py-[10px]  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
+    "h-[42px] placeholder:text-dark px-4 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -60,6 +61,20 @@ export const SelectBox = ({
         className={classes}
       >
         {(field && field.value) || defaultValue}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="9"
+          viewBox="0 0 14 9"
+          fill="none"
+        >
+          <path
+            d="M1.93359 1.4209L7.43359 7.4209L12.9336 1.4209"
+            stroke="#4B4B4B"
+            strokeWidth={2}
+            strokeLinecap="round"
+          />
+        </svg>
         {/* <ArrowIcon isOpen={isOpen} /> */}
       </button>
       {isOpen && (

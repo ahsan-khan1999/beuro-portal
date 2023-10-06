@@ -17,58 +17,12 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
         children: [
           {
             label: {
-              text: "First name",
-              htmlFor: "name",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !!border-borderColor border border-dark  ",
-              inputType: "text",
-              id: "firstName",
-              name: "firstName",
-              placeholder: "Please Enter First Name",
-              register,
-            },
-          },
-          {
-            label: {
-              text: "Last name",
-              htmlFor: "name",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark",
-              inputType: "text",
-              id: "lastName",
-              name: "lastName",
-              placeholder: "Please Enter Last Name",
-              register,
-            },
-          },
-          {
-            containerClass: "mb-5",
-            label: { text: "Email", htmlFor: "email" },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark",
-              id: "email",
-              name: "email",
-              inputType: "email",
-              placeholder: "Please Enter Email Address",
-              register,
-            },
-          },
-
-          {
-            label: {
               text: "Customer Type",
               htmlFor: "select",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] ",
+              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
@@ -82,6 +36,52 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               control,
             },
           },
+          {
+            label: {
+              text: "Your Name",
+              htmlFor: "name",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-dark focus:!border-primary ",
+              inputType: "text",
+              id: "Name",
+              name: "Name",
+              placeholder: "Please Enter Your Name",
+              register,
+            },
+          },
+          {
+            label: {
+              text: "Company Name",
+              htmlFor: "name",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className:
+                "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
+              inputType: "text",
+              id: "companyName",
+              name: "companyName",
+              placeholder: "Please Enter Company Name",
+              register,
+            },
+          },
+          {
+            containerClass: "mb-5",
+            label: { text: "Email Address", htmlFor: "email" },
+            field: {
+              type: Field.input,
+              className: "!p-4    !border-dark  focus:!border-primary",
+              id: "email",
+              name: "email",
+              inputType: "email",
+              placeholder: "Please Enter Email Address",
+              register,
+            },
+          },
 
           {
             containerClass: "mb-0",
@@ -92,7 +92,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark",
+              className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
               id: "phoneNumber",
               name: "phoneNumber",
@@ -110,7 +110,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark",
+              className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
               id: "mobileNumber",
               name: "mobileNumber",
@@ -143,7 +143,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark",
+              className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -176,17 +176,18 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Postal Code",
-              htmlFor: "postal code",
+              text: "Post Code",
+              htmlFor: "post code",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-dark focus:!border-primary",
+              className:
+                "!p-4  !border-dark focus:!border-primary focus:!border-primary",
               inputType: "number",
-              id: "postalCode",
-              name: "postalCode",
-              placeholder: "Enter Your Postal Code",
+              id: "postCode",
+              name: "postCode",
+              placeholder: "Enter Your Post Code",
 
               register,
             },
@@ -199,7 +200,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] ",
+              className: "!p-4 !h-[54px] !border-dark  ",
               placeholder: "Please Select Country",
               type: Field.select,
               id: "country",
