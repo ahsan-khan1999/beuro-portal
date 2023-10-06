@@ -342,7 +342,7 @@ export default function Leads() {
         <TableHeadingLeads />
         <TableRowLeads dataToAdd={currentPageRows} />
       </TableLayout>
-      <Pagination
+       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
