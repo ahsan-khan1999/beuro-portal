@@ -12,4 +12,4 @@ const DeleteConfirmation = () => {
   );
 };
 
-export default DeleteConfirmation;
+ export default DeleteConfirmation;
