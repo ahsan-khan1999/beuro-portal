@@ -1,3 +1,4 @@
+import { TableRowEmailTracker } from "@/types";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -14,33 +15,44 @@ const TableRow = ({ dataToAdd }) => {
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
             <span className="px-6 py-4 bg-white  ">{item.recipient}</span>
             <span className="px-6 py-4 bg-white ">{item.subject}</span>
-            <span className="px-6 py-4 bg-white ">
-              <div>{item.sendAt.time}</div>
-              {item.phone}
-            </span>
-            <span className="px-6 py-4 bg-white ">{item.date}</span>
-            <span className="px-6 py-4 bg-white ">{item.location}</span>
-            <span className="px-6 py-4 bg-white ">{item.type}</span>
+            <div className="px-6 py-4 bg-white  flex flex-col ">
+              <span>{item.sendAt.time}</span>
+              <span>{item.sendAt.date}</span>
+            </div>
+            <div className="px-6 py-4 bg-white  flex flex-col ">
+              <span>{item.sendAt.time}</span>
+              <span>{item.sendAt.date}</span>
+            </div>
             <span className="px-6 py-4 bg-white ">
               <div
-                onClick={() => router.push("/customers/details")}
-                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
+                className={`bg-[${item.status.colorClass}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="17"
-                  viewBox="0 0 18 17"
-                  fill="none"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M11.7644 3.29533C12.1737 2.91021 12.7196 2.70117 13.28 2.70117C13.8403 2.70117 14.3862 2.91021 14.7955 3.29533L14.7956 3.2954L14.9174 3.41007L14.9175 3.41015C15.3282 3.79684 15.5682 4.33129 15.5682 4.89889C15.5682 5.46649 15.3282 6.00094 14.9175 6.38763L14.9174 6.3877L13.7979 7.4414C13.795 7.44417 13.792 7.44692 13.7891 7.44964L6.71065 14.1117C6.61471 14.202 6.49667 14.2654 6.36841 14.2956L3.53508 14.9623C3.27853 15.0226 3.00913 14.9439 2.82545 14.7549C2.64177 14.5659 2.57077 14.2944 2.63843 14.0397L3.34677 11.373C3.38269 11.2378 3.45572 11.1153 3.55761 11.0194L10.637 4.3564C10.64 4.35361 10.6429 4.35084 10.6459 4.34811L11.7644 3.2954L11.7644 3.29533ZM11.155 5.92882L4.74154 11.965L4.40934 13.2156L5.82907 12.8816L12.1857 6.89889L11.155 5.92882ZM13.28 5.86895L12.2493 4.89889L12.7923 4.38778C12.7923 4.38776 12.7924 4.38773 12.7924 4.3877C12.9144 4.27294 13.0891 4.20117 13.28 4.20117C13.4709 4.20117 13.6455 4.27294 13.7675 4.3877C13.7676 4.38773 13.7676 4.38776 13.7676 4.38778L13.8893 4.50229C14.0097 4.61568 14.0682 4.75938 14.0682 4.89889C14.0682 5.03836 14.0097 5.18203 13.8894 5.2954C13.8893 5.29543 13.8893 5.29546 13.8893 5.29548L13.28 5.86895ZM8.9883 14.2322C8.9883 13.818 9.32408 13.4822 9.7383 13.4822H15.405C15.8192 13.4822 16.155 13.818 16.155 14.2322C16.155 14.6464 15.8192 14.9822 15.405 14.9822H9.7383C9.32408 14.9822 8.9883 14.6464 8.9883 14.2322Z"
-                    fill="#4A13E7"
-                  />
-                </svg>
+                {item.status.text}
               </div>
+            </span>
+
+            <span className="px-6 py-4 bg-white ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="29"
+                viewBox="0 0 29 29"
+                fill="none"
+              >
+                <path
+                  opacity="0.1"
+                  d="M1.02344 4.57492C1.02344 2.83354 2.43511 1.42188 4.17649 1.42188H24.6713C26.4127 1.42188 27.8243 2.83354 27.8243 4.57492V25.0697C27.8243 26.8111 26.4127 28.2228 24.6713 28.2228H4.17648C2.4351 28.2228 1.02344 26.8111 1.02344 25.0697V4.57492Z"
+                  stroke="#8F8F8F"
+                />
+                <path
+                  fill={item.status.colorClass}
+                  d="M14.3469 16.3718C15.2181 16.3718 15.9243 15.6642 15.9243 14.7914C15.9243 13.9185 15.2181 13.2109 14.3469 13.2109C13.4757 13.2109 12.7695 13.9185 12.7695 14.7914C12.7695 15.6642 13.4757 16.3718 14.3469 16.3718Z"
+                />
+                <path
+                  fill={item.status.colorClass}
+                  d="M6.56417 15.2905C7.60261 16.5944 10.6916 20.0714 14.3459 20.0714C18.0001 20.0714 21.0891 16.5945 22.1275 15.2905C22.3509 15.0008 22.3509 14.5925 22.1275 14.3161C21.0891 13.0122 18.0001 9.53519 14.3459 9.53519C10.6916 9.52202 7.60261 12.999 6.56417 14.3029C6.32757 14.5926 6.32757 15.0008 6.56417 15.2905ZM14.3459 11.6293C16.0941 11.6293 17.5006 13.0385 17.5006 14.7902C17.5006 16.5419 16.0941 17.9511 14.3459 17.9511C12.5976 17.9511 11.1911 16.5419 11.1911 14.7902C11.1911 13.0385 12.5976 11.6293 14.3459 11.6293Z"
+                />
+              </svg>
             </span>
 
             <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">

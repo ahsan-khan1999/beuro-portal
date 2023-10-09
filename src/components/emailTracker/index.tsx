@@ -29,7 +29,41 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "Pending",
+        colorClass: "#FE9244",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "Failed",
+        colorClass: "#FF376F",
       },
     },
     {
@@ -46,7 +80,7 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
       },
     },
     {
@@ -63,7 +97,41 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "Failed",
+        colorClass: "#FF376F",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "Pending",
+        colorClass: "#FE9244",
       },
     },
     {
@@ -80,7 +148,24 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "Pending",
+        colorClass: "#FE9244",
       },
     },
     {
@@ -97,7 +182,7 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
       },
     },
     {
@@ -114,7 +199,7 @@ export default function EmailTracker() {
       },
       status: {
         text: "open",
-        colorClass: "bg-green",
+        colorClass: "#45C769",
       },
     },
     {
@@ -130,265 +215,11 @@ export default function EmailTracker() {
         date: "25/08/2023",
       },
       status: {
-        text: "open",
-        colorClass: "bg-green",
+        text: "Failed",
+        colorClass: "#FF376F",
       },
     },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
-    {
-      id: 1,
-      recipient: "Rahal Ahmed",
-      subject: "Test12@gmail.com",
-      sendAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      viewedAt: {
-        time: "08:34am",
-        date: "25/08/2023",
-      },
-      status: {
-        text: "open",
-        colorClass: "bg-green",
-      },
-    },
+
     // Add more rows as needed
   ];
 

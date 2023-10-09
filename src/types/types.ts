@@ -190,9 +190,8 @@ export interface TRowServices {
     currency: string;
   };
   description: string;
-  action: "edit"; 
+  action: "edit";
 }
-
 
 // export interface SuccessMessage {
 //   image:Image
