@@ -56,6 +56,15 @@ export interface CheckProps {
   truthy: string;
   falsy: string;
 }
+export interface tabArrayTypes {
+  name: string;
+  content?: React.ReactNode;
+}
+export interface tabsSectionTypes {
+  tabsArray: tabArrayTypes[];
+  setTabType: (tabType: number) => void;
+  tabType: number;
+}
 export interface articlesSectionTypes {
   name: string;
   content?: React.ReactNode;
