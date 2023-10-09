@@ -7,6 +7,7 @@ import { TableRowEmailTracker, TableRowTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
+import DeleteConfirmation from "./modals/DeleteConfirmation";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -238,7 +239,8 @@ export default function EmailTracker() {
 
   return (
     <Layout>
-      <TableFunctions />
+      <DeleteConfirmation />
+      {/* <TableFunctions />
       <TableLayout>
         <TableHeading />
         <TableRow dataToAdd={currentPageRows} />
@@ -247,7 +249,7 @@ export default function EmailTracker() {
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
-      />
+      /> */}
     </Layout>
   );
 }

@@ -2,7 +2,7 @@ import { TableRowEmailTracker } from "@/types";
 import { useRouter } from "next/router";
 import React from "react";
 
-const TableRow = ({ dataToAdd }) => {
+const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
   return (
     <div>
