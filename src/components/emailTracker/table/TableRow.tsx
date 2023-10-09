@@ -2,28 +2,30 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const TableRow = ({ dataToAdd }) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
             key={index}
-            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(70px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
-            <span className="px-6 py-4 bg-white  ">{item.name}</span>
-            <span className="px-6 py-4 bg-white ">{item.email}</span>
-            <span className="px-6 py-4 bg-white ">{item.phone}</span>
+            <span className="px-6 py-4 bg-white  ">{item.recipient}</span>
+            <span className="px-6 py-4 bg-white ">{item.subject}</span>
+            <span className="px-6 py-4 bg-white ">
+              <div>{item.sendAt.time}</div>
+              {item.phone}
+            </span>
             <span className="px-6 py-4 bg-white ">{item.date}</span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
+            <span className="px-6 py-4 bg-white ">{item.type}</span>
             <span className="px-6 py-4 bg-white ">
-            {item.type}
-            </span>
-            <span className="px-6 py-4 bg-white ">
-              <div 
-              onClick={()=>router.push("/customers/details")}
-              className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
+              <div
+                onClick={() => router.push("/customers/details")}
+                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

@@ -162,15 +162,22 @@ export interface TableRowTypes {
   status?: string;
   type?: string;
 }
-export interface TableRowTypes {
+export interface TableRowEmailTracker {
   id: number;
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  location: string;
-  status?: string;
-  type?: string;
+  recipient: string;
+  subject: string;
+  sendAt: {
+    time: string;
+    date: string;
+  };
+  viewedAt: {
+    time: string;
+    date: string;
+  };
+  status: {
+    text: string;
+    colorClass: string;
+  };
 }
 
 // export interface SuccessMessage {

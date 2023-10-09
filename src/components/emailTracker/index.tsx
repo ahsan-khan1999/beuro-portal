@@ -3,123 +3,391 @@ import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowTypes } from "@/types";
+import { TableRowEmailTracker, TableRowTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<
+    TableRowEmailTracker[]
+  >([]);
 
-  const dataToAdd: TableRowTypes[] = [
+  const dataToAdd: TableRowEmailTracker[] = [
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     {
       id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      type: "Individual",
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
+    },
+    {
+      id: 1,
+      recipient: "Rahal Ahmed",
+      subject: "Test12@gmail.com",
+      sendAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      viewedAt: {
+        time: "08:34am",
+        date: "25/08/2023",
+      },
+      status: {
+        text: "open",
+        colorClass: "bg-green",
+      },
     },
     // Add more rows as needed
   ];
