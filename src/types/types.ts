@@ -162,6 +162,16 @@ export interface TableRowTypes {
   status?: string;
   type?: string;
 }
+export interface TableRowTypes {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  location: string;
+  status?: string;
+  type?: string;
+}
 
 // export interface SuccessMessage {
 //   image:Image
