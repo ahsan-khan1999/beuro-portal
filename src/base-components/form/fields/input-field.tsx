@@ -54,6 +54,7 @@ export const InputField = ({
         // onBlur={() => setInputFocus(false)}
         onBlurCapture={() => setInputFocus(false)}
         id={id}
+        
         type={inputType}
         className={`${classes}`}
         defaultValue={value}
