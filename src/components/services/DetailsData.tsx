@@ -146,12 +146,12 @@ const DetailsData = () => {
             </span>
           </h3>
         </div>
-        <h3 className="text-[#4D4D4D] mt-4">
+        {/* <h3 className="text-[#4D4D4D] mt-4">
           Creation Date:
           <span className="text-[#4B4B4B] font-medium">
             &nbsp;&nbsp;25/08/2023
           </span>
-        </h3>
+        </h3> */}
       </div>
     </>
   );

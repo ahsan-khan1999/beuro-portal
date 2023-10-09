@@ -13,7 +13,7 @@ import {
   ResetPasswordFields,
   ChangePasswordFields,
 } from "@/enums/registration";
-import { CustomerDetailsFields } from "@/enums";
+import { CustomerDetailsFields, ServicesDetailFields } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
 export const generateValidation = (translate: Function) => {
@@ -45,6 +45,7 @@ export const generateLoginValidation = (translate: Function) => {
       .required(translate("validationMessages.required")),
   });
 };
+
 export const generateCustomerValidation = (translate: Function) => {
   return yup.object().shape({
     [CustomerDetailsFields.firstName]: yup
@@ -80,6 +81,27 @@ export const generateCustomerValidation = (translate: Function) => {
       .required(translate("validationMessages.required")),
   });
 };
+
+// generatServiceValidation here
+export const generateServicesValidation = (translate: Function) => {
+  return yup.object().shape({
+    [ServicesDetailFields.serviceTitle]: yup
+      .string()
+      .required("validation required"),
+    [ServicesDetailFields.unit]: yup
+      .string()
+      .required("validation required"),
+    [ServicesDetailFields.price]: yup
+      .string()
+      .required(translate("validation required")),
+    [ServicesDetailFields.description]: yup
+      .string()
+      .email()
+      .required(translate("validation required")),
+  });
+};
+
+
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
     [CompanyFields.name]: yup.string().required("tdguy"),

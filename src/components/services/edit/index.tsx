@@ -1,8 +1,9 @@
+import React from "react";
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
-import React from "react";
 import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
+import CustomerForm from "../Form";
 
 const ServicesDetails = () => {
   return (
@@ -11,9 +12,7 @@ const ServicesDetails = () => {
         <DetailsData />
       </DetailsCard>
       <div className="flex mt-8">
-        <div className="w-full">
-          <h2 className="flex justify-center items-center h-full">Buro 365</h2>
-        </div>
+        <CustomerForm />
         <SideCard />
       </div>
     </Layout>
