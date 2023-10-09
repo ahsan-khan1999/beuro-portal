@@ -3,11 +3,11 @@ import { Layout } from "@/layout";
 import React, { useState } from "react";
 
 import CustomerForm from "../Form";
-import { articlesSectionTypes, tabArrayTypes } from "@/types";
+import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
 
 const AddCustomer = () => {
-  const [tabType, setTabType] = useState<number>(1);
+  const [tabType, setTabType] = useState<number>(0);
 
   const tabSection: tabArrayTypes[] = [
     {
