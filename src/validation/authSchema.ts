@@ -82,7 +82,7 @@ export const generateCustomerValidation = (translate: Function) => {
   });
 };
 
-// generatServiceValidation here
+// generateServiceValidation here
 export const generateServicesValidation = (translate: Function) => {
   return yup.object().shape({
     [ServicesDetailFields.serviceTitle]: yup

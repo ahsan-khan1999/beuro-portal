@@ -1,6 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 const TableRowServices = ({ servicesData }) => {
+  const router = useRouter();
+
   return (
     <div>
       {servicesData?.map((item: any) => {
@@ -14,9 +17,9 @@ const TableRowServices = ({ servicesData }) => {
             <span className="px-6 py-4 bg-white ">{item.createdOn.toLocaleDateString()}</span>
             <span className="px-6 py-4 bg-white ">{item.price.value} {item.price.currency}</span>
             <span className="px-6 py-4 bg-white overflow-hidden overflow-ellipsis whitespace-nowrap">{item.description}</span>
-            
+
             <span className="px-6 py-4 bg-white ">
-              <div className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
+              <div onClick={() => router.push("/services/details")} className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

@@ -5,15 +5,13 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TRowServices } from "@/types";
 import TableRowServices from "./table/TableRowServices";
 import TableHeadingServices from "./table/TableHeadingServices";
-import TopBar from "./table/TopBar";
+import ServiceTopBar from "./table/ServiceTopBar";
 
 
 export default function Services() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<TRowServices[]>([]);
-
-
 
   // Function for handling the date format
   function parseCustomDate(dateString: string) {
@@ -208,7 +206,7 @@ export default function Services() {
     <Layout>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl text-[#222B45] ">Services</h1>
-        <TopBar />
+        <ServiceTopBar />
       </div>
       <TableLayout>
         <TableHeadingServices />
