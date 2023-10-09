@@ -3,7 +3,7 @@ import React from "react";
 const TableRowLeads = ({ dataToAdd }) => {
   return (
     <div>
-      {dataToAdd?.map((item: any, index) => {
+      {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
             key={index}

@@ -1,7 +1,9 @@
+import React from "react";
 import { FormField, FormProps } from "@/types";
 import { getTypedFieldComponent, isFieldType } from "./helpers";
-import React from "react";
 import { combineClasses } from "@/utils/utility";
+
+
 export const Form = React.memo(
   ({ formFields, handleSubmit, onSubmit, errors, className }: FormProps) => {
     const renderField = (fieldData: FormField, error: string) => {

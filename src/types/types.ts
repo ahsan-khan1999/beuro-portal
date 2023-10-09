@@ -16,7 +16,7 @@ import {
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
-import { CountryType, Image, countryType } from "./ui";
+import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 export interface SideBar {
   icon: string;
@@ -55,6 +55,15 @@ export interface CheckProps {
   condition?: boolean;
   truthy: string;
   falsy: string;
+}
+export interface tabArrayTypes {
+  name: string;
+  content?: React.ReactNode;
+}
+export interface tabsSectionTypes {
+  tabsArray: tabArrayTypes[];
+  setTabType: (tabType: number) => void;
+  tabType: number;
 }
 export interface articlesSectionTypes {
   name: string;
@@ -129,7 +138,6 @@ export type GenerateFormAddressField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
-
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -144,7 +152,6 @@ export interface PaginationItemProps {
   disabled?: boolean;
 }
 
-
 export interface TableRowTypes {
   id: number;
   name: string;
@@ -152,7 +159,38 @@ export interface TableRowTypes {
   phone: string;
   date: string;
   location: string;
-  status: string;
+  status?: string;
+  type?: string;
+}
+export interface TableRowEmailTracker {
+  id: number;
+  recipient: string;
+  subject: string;
+  sendAt: {
+    time: string;
+    date: string;
+  };
+  viewedAt: {
+    time: string;
+    date: string;
+  };
+  status: {
+    text: string;
+    colorClass: string;
+  };
+}
+
+// Interface for the services table
+export interface TRowServices {
+  id: string;
+  service: string;
+  createdOn: Date | null;
+  price: {
+    value: number;
+    currency: string;
+  };
+  description: string;
+  action: "edit";
 }
 
 // export interface SuccessMessage {

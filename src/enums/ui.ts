@@ -10,3 +10,12 @@ export enum DropDownKeys {
   DROP_DOWN_DISABLED = 'dropDownDisabled',
   SHOULD_NOT_SELECT_ITEM = 'shouldNotSelectItem',
 }
+
+
+export enum ModalType {
+  NONE,
+  EMAIL_TRACKER
+}
+export type ModalConfigType = {
+  [key in ModalType]?: JSX.Element;
+};

@@ -23,7 +23,7 @@ export const useCustomerDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = customerDetailsFormField(register, loading, control);
+  const fields = customerDetailsFormField(register, loading,control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

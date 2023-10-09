@@ -1,40 +1,154 @@
-import { Form } from "@/base-components/form/form";
-import { useCustomerDetails } from "@/hooks/useCustomerDetails";
-import { Layout } from "@/layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Layout } from "@/layout/layout";
+import TableLayout from "@/layout/TableLayout";
 
-const CustomerDetails = () => {
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useCustomerDetails();
+import { Pagination } from "@/base-components/ui/pagination/pagination";
+import { TableRowTypes } from "@/types";
+import TableFunctions from "./table/TableFunctions";
+import TableHeading from "./table/TableHeading";
+import TableRow from "./table/TableRow";
+
+export default function Customers() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+
+  const dataToAdd: TableRowTypes[] = [
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      type: "Individual",
+    },
+    // Add more rows as needed
+  ];
+
+  const totalItems = dataToAdd.length;
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    // Update rows for the current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <Layout>
-      <div className="flex">
-        <div className="rounded-md bg-white pt-5 px-6 pb-6 border border-primary w-full h-fit">
-          <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-            <h2 className="text-[#393939] text-lg font-medium">
-              Customer Details
-            </h2>
-            <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-9">
-              Cancel
-            </button>
-          </div>
-          <Form
-            formFields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-            className={`${defaultClassName}`}
-          />
-        </div>
-        <div className="ml-8 bg-white rounded-md px-5 py-6 w-full max-w-[254px] h-[634px]">
-          <h2 className="text-[#393939] text-lg font-medium pb-6 border-b border-black border-opacity-20">
-            Customer Details
-          </h2>
-        </div>
-      </div>
+      <TableFunctions />
+      <TableLayout>
+        <TableHeading />
+        <TableRow dataToAdd={currentPageRows} />
+      </TableLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
     </Layout>
   );
-};
-
-export default CustomerDetails;
+}
