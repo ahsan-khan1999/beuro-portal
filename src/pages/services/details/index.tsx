@@ -1,9 +1,12 @@
-import React from "react";
-import ServicesDetails from "@/components/services/edit";
+import ServicesDetails from '@/components/services/details'
+import React from 'react'
 
+const index = () => {
+    return (
+        <div>
+            <ServicesDetails />
+        </div>
+    )
+}
 
-const Index = () => {
-  return <ServicesDetails />;
-};
-
-export default Index;
+export default index
