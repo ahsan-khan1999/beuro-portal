@@ -15,6 +15,14 @@ export enum CustomerDetailsFields {
   country = "country",
 }
 
+
+export enum ServicesDetailFields {
+  serviceTitle= "serviceTitle",
+  unit = "unit",
+  price = "price",
+  description = "description"
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';
