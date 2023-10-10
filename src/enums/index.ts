@@ -16,11 +16,23 @@ export enum CustomerDetailsFields {
 }
 
 
+
+// Services detail enum
 export enum ServicesDetailFields {
-  serviceTitle= "serviceTitle",
+  serviceTitle = "serviceTitle",
   unit = "unit",
   price = "price",
   description = "description"
+}
+
+// contact-support enum
+export enum ContactSupportFields {
+  firstName = "firstName",
+  lastName = "lastName",
+  email = "email",
+  mobileNumber = "mobileNumber",
+  reasonForContact = "reasonForContact",
+  message = "message",
 }
 
 // export * from './registration';

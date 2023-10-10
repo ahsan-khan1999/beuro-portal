@@ -1,7 +1,9 @@
-import { SearchInput } from '@/base-components/ui/searchBar/search-bar'
 import React from 'react'
+import { SearchInput } from '@/base-components/ui/searchBar/search-bar'
+import { useRouter } from 'next/router'
 
 const TopBar = () => {
+    const router = useRouter();
     function onInputChange(text: string) { }
 
     return (
@@ -54,7 +56,7 @@ const TopBar = () => {
                     </defs>
                 </svg>
             </div>
-            <button className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap">
+            <button onClick={() => router.push("/services/add")} className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap">
                 <svg
                     className="mr-2"
                     xmlns="http://www.w3.org/2000/svg"

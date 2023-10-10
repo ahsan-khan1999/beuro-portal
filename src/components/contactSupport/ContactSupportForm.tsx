@@ -1,19 +1,17 @@
 import { Form } from "@/base-components/form/form";
-import { useServicesDetails } from "@/hooks/useServicesDetails";
+import { userContactSupport } from "@/hooks/userContactSupport";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const CustomerForm = () => {
+const ContactSupportForm = () => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useServicesDetails();
+    userContactSupport();
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Service/Product Details</h2>
-        <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-9">
-          Cancel
-        </button>
+        <h2 className="text-[#393939] text-lg font-medium">Submit your request</h2>
+
       </div>
       <Form
         formFields={fields}
@@ -26,4 +24,4 @@ const CustomerForm = () => {
   );
 };
 
-export default CustomerForm;
+export default ContactSupportForm;

@@ -3,7 +3,7 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
-import CustomerForm from "../Form";
+import ServiceForm from "../Form";
 
 const ServicesDetails = () => {
   return (
@@ -12,7 +12,7 @@ const ServicesDetails = () => {
         <DetailsData />
       </DetailsCard>
       <div className="flex mt-8">
-        <CustomerForm />
+        <ServiceForm />
         <SideCard />
       </div>
     </Layout>

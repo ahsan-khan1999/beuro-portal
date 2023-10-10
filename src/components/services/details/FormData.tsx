@@ -1,7 +1,7 @@
+import React from "react";
 import { useServicesDetails } from "@/hooks/useServicesDetails";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
-import React from "react";
 
 const FormData = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const FormData = () => {
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Services/Product Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">Service/Product Details</h2>
         <button
           onClick={() => router.push("/services/edit")}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
@@ -56,7 +56,7 @@ const FormData = () => {
         <div className="flex justify-between items-center gap-3">
           <div className="w-[65%]">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Services/Product Name
+              Service/Product Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               Lorem Ipsum
