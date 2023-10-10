@@ -1,6 +1,6 @@
 import { IBaseModalProps, IInfoModalProps } from "@/types";
 import { BaseModal } from "./base-modal";
-import { ModalCrossIcon } from "@/assets/svgs/components/modal-cross-icon";
+// import { ModalCrossIcon } from "@/assets/svgs/components/modal-cross-icon";
 
 export const InfoModal = ({
   modalTitle,
@@ -9,10 +9,7 @@ export const InfoModal = ({
   containerClassName,
 }: IInfoModalProps) => {
   return (
-    <BaseModal
-      onClose={onClose}
-      containerClassName={containerClassName}
-    >
+    <BaseModal onClose={onClose} containerClassName={containerClassName}>
       <div className="flex justify-between border-b-2 pb-5 border-slate-gray border-opacity-20">
         <h1 className="text-dark font-semibold">{modalTitle}</h1>
         <button
