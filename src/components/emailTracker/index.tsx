@@ -239,8 +239,8 @@ export default function EmailTracker() {
 
   return (
     <Layout>
-      <DeleteConfirmation />
-      {/* <TableFunctions />
+      {/* <DeleteConfirmation /> */}
+      <TableFunctions />
       <TableLayout>
         <TableHeading />
         <TableRow dataToAdd={currentPageRows} />
@@ -249,7 +249,7 @@ export default function EmailTracker() {
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
-      /> */}
+      />
     </Layout>
   );
 }

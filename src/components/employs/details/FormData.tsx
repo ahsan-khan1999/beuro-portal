@@ -1,5 +1,4 @@
 import React from "react";
-import { useServicesDetails } from "@/hooks/useServicesDetails";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -7,9 +6,7 @@ import editPswIcon from "@/assets/svgs/edit-password.svg";
 
 const FormData = () => {
   const router = useRouter();
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useServicesDetails();
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">

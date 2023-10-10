@@ -1,17 +1,16 @@
 import React from "react";
-import { useServicesDetails } from "@/hooks/useServicesDetails";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 
 const FormData = () => {
   const router = useRouter();
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useServicesDetails();
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Service/Product Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          Service/Product Details
+        </h2>
         <button
           onClick={() => router.push("/services/edit")}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
@@ -63,27 +62,20 @@ const FormData = () => {
             </div>
           </div>
           <div className="w-[35%]">
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Unit
-            </label>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">Unit</label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               Std.
             </div>
           </div>
-
         </div>
         <div className="mt-5 w-full max-w-[260px]">
           <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Price
-            </label>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">Price</label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               100CHF
             </div>
           </div>
-
         </div>
-
       </div>
 
       <div className="mt-5 w-full">
@@ -92,8 +84,12 @@ const FormData = () => {
             Description
           </label>
           <div className="rounded-lg border border-[#EBEBEB] bg-white p-3  text-[#4B4B4B] font-normal text-base">
-            Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyales Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard lorm il
-            ie has  a been the industry's standard dummyales Lorem Ipsum is simply dummy text of the.
+            Lorem Ipsum is simply dummy text of the isp ispu printing and
+            typesetting industry. Lorem Ipsum ie has a been the industry's
+            standard dummyales Lorem Ipsum is simply dummy text of the isp ispu
+            printing and typesetting industry. Lorem Ipsum ie has a been the
+            industry's standard lorm il ie has a been the industry's standard
+            dummyales Lorem Ipsum is simply dummy text of the.
           </div>
         </div>
       </div>
