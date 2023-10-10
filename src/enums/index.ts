@@ -15,14 +15,12 @@ export enum CustomerDetailsFields {
   country = "country",
 }
 
-
-
 // Services detail enum
 export enum ServicesDetailFields {
   serviceTitle = "serviceTitle",
   unit = "unit",
   price = "price",
-  description = "description"
+  description = "description",
 }
 
 // contact-support enum
@@ -33,6 +31,15 @@ export enum ContactSupportFields {
   mobileNumber = "mobileNumber",
   reasonForContact = "reasonForContact",
   message = "message",
+}
+
+// Employ details enum
+export enum EmployDetailsFields {
+  employName = "employName",
+  designation = "designation",
+  email = "email",
+  phoneNumber = "phoneNumber",
+  mobileNumber = "mobileNumber",
 }
 
 // export * from './registration';

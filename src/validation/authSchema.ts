@@ -13,7 +13,12 @@ import {
   ResetPasswordFields,
   ChangePasswordFields,
 } from "@/enums/registration";
-import { CustomerDetailsFields, ContactSupportFields, ServicesDetailFields } from "@/enums";
+import {
+  CustomerDetailsFields,
+  ContactSupportFields,
+  ServicesDetailFields,
+  EmployDetailsFields,
+} from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
 export const generateValidation = (translate: Function) => {
@@ -88,9 +93,7 @@ export const generateServicesValidation = (translate: Function) => {
     [ServicesDetailFields.serviceTitle]: yup
       .string()
       .required("validation required"),
-    [ServicesDetailFields.unit]: yup
-      .string()
-      .required("validation required"),
+    [ServicesDetailFields.unit]: yup.string().required("validation required"),
     [ServicesDetailFields.price]: yup
       .string()
       .required(translate("validation required")),
@@ -132,6 +135,33 @@ export const generateContactSupportValidation = (translate: Function) => {
   });
 };
 
+// Generate employ details validation here
+export const generateEmployDetailsValidation = (translate: Function) => {
+  return yup.object().shape({
+    [EmployDetailsFields.employName]: yup
+      .string()
+      .required("validation required"),
+
+    [EmployDetailsFields.designation]: yup
+      .string()
+      .required("validation required"),
+
+    [EmployDetailsFields.email]: yup
+      .string()
+      .email()
+      .required(translate("validation required")),
+
+    [EmployDetailsFields.phoneNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+
+    [EmployDetailsFields.mobileNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+  });
+};
 
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({

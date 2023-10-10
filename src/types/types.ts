@@ -173,9 +173,19 @@ export interface TRowServices {
     currency: string;
   };
   description: string;
-  action: "edit"; 
+  action: "edit";
 }
 
+// Interface for the services table
+export interface TRowEmployees {
+  id: string;
+  name: string;
+  email: string;
+  phone: number;
+  designation: string;
+  createdOn: Date | null;
+  action: "edit";
+}
 
 // export interface SuccessMessage {
 //   image:Image
