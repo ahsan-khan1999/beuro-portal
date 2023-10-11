@@ -18,6 +18,8 @@ import {
   ContactSupportFields,
   ServicesDetailFields,
   EmployDetailsFields,
+  LeadsCustomerEditDetails,
+  LeadsAddressEditDetails,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -160,6 +162,74 @@ export const generateEmployDetailsValidation = (translate: Function) => {
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validation required")),
+  });
+};
+
+// Validation for leads customer edit details
+export const generateLeadsCustomerEditDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [LeadsCustomerEditDetails.firstName]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsCustomerEditDetails.lastName]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsCustomerEditDetails.customerType]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsCustomerEditDetails.email]: yup
+      .string()
+      .email()
+      .required(translate("validation required")),
+
+    [LeadsCustomerEditDetails.phoneNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+
+    [LeadsCustomerEditDetails.mobileNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+
+    [LeadsCustomerEditDetails.streetNo]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+      
+    [LeadsCustomerEditDetails.postCode]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+
+    [LeadsCustomerEditDetails.country]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+// Validation for leads address edit details
+export const generateLeadsAddressEditDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [LeadsAddressEditDetails.streetNo]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsAddressEditDetails.postCode]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsAddressEditDetails.country]: yup
+      .string()
+      .required("validation required"),
+
+    [LeadsAddressEditDetails.description]: yup
+      .string()
+      .required("validation required"),
   });
 };
 

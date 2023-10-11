@@ -8,9 +8,11 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import DeleteConfirmation from "./modals/DeleteConfirmation";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  // const { modal } = useAppSelector((state) => state.global);
   const [currentPageRows, setCurrentPageRows] = useState<
     TableRowEmailTracker[]
   >([]);

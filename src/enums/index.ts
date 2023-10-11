@@ -42,6 +42,27 @@ export enum EmployDetailsFields {
   mobileNumber = "mobileNumber",
 }
 
+// Leads customer details edit
+export enum LeadsCustomerEditDetails {
+  firstName = "firstName",
+  lastName = "lastName",
+  customerType = "customerType",
+  email = "email",
+  phoneNumber = "phoneNumber",
+  mobileNumber = "mobileNumber",
+  streetNo = "streetNo",
+  postCode = "postCode",
+  country = "country",
+}
+
+// Leads Address edit details
+export enum LeadsAddressEditDetails {
+  streetNo = "streetNo",
+  postCode = "postCode",
+  country = "country",
+  description = "description",
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

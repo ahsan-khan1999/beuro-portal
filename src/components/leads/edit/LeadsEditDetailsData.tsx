@@ -1,45 +1,31 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-import AddressDetailsData from "./details/AddressDetailsData";
-import CustomerDetailsData from "./details/CustomerDetailsData";
-import LeadsDetailsImages from "./LeadsDetailsImages";
-import ServiceDetailsData from "./details/ServiceDetailsData";
-import AdditionalDetails from "./details/AdditionalDetails";
+import LeadsDetailsImages from "../LeadsDetailsImages";
+// import ServiceDetailsData from "./ServiceDetailsData";
+// import AdditionalDetails from "./AdditionalDetails";
+import CustomerEditDetails from "./CustomerEditDetails";
+import AddressEditDetails from "./AddressEditDetails";
 
-const LeadsDetailsData = () => {
+const LeadsEditDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
   const tabSection: tabArrayTypes[] = [
     {
-      icon: `<svg
-      className="mr-3"
-      xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="25"
-      viewBox="0 0 25 25"
-      fill=${tabType === 0 ? "#4A13E7" : "#000"}
-    >
-      <g clipPath="url(#clip0_784_17859)">
-        <path
-          d="M22.0625 3.83105H3.5625C2.0455 3.83105 0.8125 5.06405 0.8125 6.58105V19.0811C0.8125 20.5981 2.0455 21.8311 3.5625 21.8311H22.0625C23.5795 21.8311 24.8125 20.5981 24.8125 19.0811V6.58105C24.8125 5.06405 23.5795 3.83105 22.0625 3.83105ZM8.3125 7.83105C9.6905 7.83105 10.8125 8.95305 10.8125 10.3311C10.8125 11.7091 9.6905 12.8311 8.3125 12.8311C6.9345 12.8311 5.8125 11.7091 5.8125 10.3311C5.8125 8.95305 6.9345 7.83105 8.3125 7.83105ZM12.8125 17.0811C12.8125 17.4951 12.4765 17.8311 12.0625 17.8311H4.5625C4.1485 17.8311 3.8125 17.4951 3.8125 17.0811V16.5811C3.8125 15.0641 5.0455 13.8311 6.5625 13.8311H10.0625C11.5795 13.8311 12.8125 15.0641 12.8125 16.5811V17.0811ZM21.0625 17.8311H15.5625C15.1485 17.8311 14.8125 17.4951 14.8125 17.0811C14.8125 16.6671 15.1485 16.3311 15.5625 16.3311H21.0625C21.4765 16.3311 21.8125 16.6671 21.8125 17.0811C21.8125 17.4951 21.4765 17.8311 21.0625 17.8311ZM21.0625 13.8311H15.5625C15.1485 13.8311 14.8125 13.4951 14.8125 13.0811C14.8125 12.6671 15.1485 12.3311 15.5625 12.3311H21.0625C21.4765 12.3311 21.8125 12.6671 21.8125 13.0811C21.8125 13.4951 21.4765 13.8311 21.0625 13.8311ZM21.0625 9.83105H15.5625C15.1485 9.83105 14.8125 9.49505 14.8125 9.08105C14.8125 8.66705 15.1485 8.33105 15.5625 8.33105H21.0625C21.4765 8.33105 21.8125 8.66705 21.8125 9.08105C21.8125 9.49505 21.4765 9.83105 21.0625 9.83105Z"
-          fill={isSelected ? "#4A13E7" : "#000"}
-        />
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
+        tabType === 0 ? "#4A13E7" : "#000"
+      }>
+      <g clip-path="url(#clip0_1199_34418)">
+        <path d="M21.8281 3.79688H3.32812C1.81113 3.79688 0.578125 5.02988 0.578125 6.54688V19.0469C0.578125 20.5639 1.81113 21.7969 3.32812 21.7969H21.8281C23.3451 21.7969 24.5781 20.5639 24.5781 19.0469V6.54688C24.5781 5.02988 23.3451 3.79688 21.8281 3.79688ZM8.07812 7.79688C9.45613 7.79688 10.5781 8.91887 10.5781 10.2969C10.5781 11.6749 9.45613 12.7969 8.07812 12.7969C6.70012 12.7969 5.57812 11.6749 5.57812 10.2969C5.57812 8.91887 6.70012 7.79688 8.07812 7.79688ZM12.5781 17.0469C12.5781 17.4609 12.2421 17.7969 11.8281 17.7969H4.32812C3.91412 17.7969 3.57812 17.4609 3.57812 17.0469V16.5469C3.57812 15.0299 4.81112 13.7969 6.32812 13.7969H9.82812C11.3451 13.7969 12.5781 15.0299 12.5781 16.5469V17.0469ZM20.8281 17.7969H15.3281C14.9141 17.7969 14.5781 17.4609 14.5781 17.0469C14.5781 16.6329 14.9141 16.2969 15.3281 16.2969H20.8281C21.2421 16.2969 21.5781 16.6329 21.5781 17.0469C21.5781 17.4609 21.2421 17.7969 20.8281 17.7969ZM20.8281 13.7969H15.3281C14.9141 13.7969 14.5781 13.4609 14.5781 13.0469C14.5781 12.6329 14.9141 12.2969 15.3281 12.2969H20.8281C21.2421 12.2969 21.5781 12.6329 21.5781 13.0469C21.5781 13.4609 21.2421 13.7969 20.8281 13.7969ZM20.8281 9.79688H15.3281C14.9141 9.79688 14.5781 9.46088 14.5781 9.04688C14.5781 8.63287 14.9141 8.29688 15.3281 8.29688H20.8281C21.2421 8.29688 21.5781 8.63287 21.5781 9.04688C21.5781 9.46088 21.2421 9.79688 20.8281 9.79688Z" fill={isSelected ? "#4A13E7" : "#000"}/>
       </g>
       <defs>
-        <clipPath id="clip0_784_17859">
-          <rectsetTabType
-            width="24"
-            height="24"
-            fill="white"
-            transform="translate(0.8125 0.831055)"
-          />
+        <clipPath id="clip0_1199_34418">
+          <rect width="24" height="24" fill="white" transform="translate(0.578125 0.796875)"/>
         </clipPath>
       </defs>
     </svg>`,
       name: "Customer Details",
-      content: <CustomerDetailsData />,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -50,7 +36,6 @@ const LeadsDetailsData = () => {
       }/>
     </svg>`,
       name: "Address Details",
-      content: <CustomerDetailsData />,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -66,7 +51,6 @@ const LeadsDetailsData = () => {
       </defs>
     </svg>`,
       name: "Service Details",
-      content: <CustomerDetailsData />,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -84,15 +68,14 @@ const LeadsDetailsData = () => {
       </defs>
     </svg>`,
       name: "Additional Details",
-      content: <CustomerDetailsData />,
     },
   ];
 
   const componentsLookUp = {
-    0: <CustomerDetailsData />,
-    1: <AddressDetailsData />,
-    2: <ServiceDetailsData />,
-    3: <AdditionalDetails />,
+    0: <CustomerEditDetails />,
+    1: <AddressEditDetails />,
+    // 2: <ServiceDetailsData />,
+    // 3: <AdditionalDetails />,
   };
   return (
     <div className="flex w-full gap-6">
@@ -118,4 +101,4 @@ const LeadsDetailsData = () => {
   );
 };
 
-export default LeadsDetailsData;
+export default LeadsEditDetailsData;
