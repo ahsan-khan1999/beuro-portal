@@ -36,6 +36,7 @@ export interface MyComponentProp {
 
 export interface UserAccountCardProp extends MyComponentProp {
   containerClassName?: string;
+  tabsArray: tabArrayTypes[];
   secondChildClassName?: string;
   borderColor?: string;
 }
@@ -60,6 +61,7 @@ export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
 }
+
 export interface tabsSectionTypes {
   tabsArray: tabArrayTypes[];
   setTabType: (tabType: number) => void;
@@ -78,6 +80,7 @@ export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
 }
+
 export interface successPopup {
   heading: string;
   description: string;
@@ -202,6 +205,16 @@ export interface TRowEmployees {
   designation: string;
   createdOn: Date | null;
   action: "edit";
+}
+
+// Interface for tab
+export interface leadsTabsSectionTypes {
+  setTabType: (tabType: number) => void;
+  tabType: number;
+  isSelected: boolean;
+  selectedTab: number;
+  name: string;
+  icon: ReactNode;
 }
 
 // export interface SuccessMessage {
