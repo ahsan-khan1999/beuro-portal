@@ -11,7 +11,7 @@ export const DatePicker = ({
 }: DatePickerProps) => {
   
   const defaultClasses =
-    "flex flex-row-reverse gap-x-4 border-2 bg-no-repeat bg-[length:24px_24px] border-lightGray rounded-lg h-12 pl-12 py-3 focus:border-primary outline-none";
+    "flex flex-row-reverse gap-x-4 border bg-no-repeat bg-[length:24px_24px] border-lightGray rounded-lg h-12 pl-12 py-3 focus:border-primary outline-none";
   const classes = combineClasses(defaultClasses, className);
   return (
     <>
@@ -21,11 +21,11 @@ export const DatePicker = ({
         defaultValue={formatDateString(value)}
         id={id}
         {...register(name)}
-        style={{
-          backgroundImage: 'url("/assets/svgs/calender-icon.svg")',
-          backgroundPosition: "4% 50%",
-        }}
-        className={`${classes}`}
+        // style={{
+        //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
+        //   backgroundPosition: "4% 50%",
+        // }}
+        className={`${classes} relative` }
       />
     </>
   );

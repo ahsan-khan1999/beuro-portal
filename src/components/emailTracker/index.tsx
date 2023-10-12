@@ -8,7 +8,10 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import DeleteConfirmation from "./modals/DeleteConfirmation";
-import { useAppSelector } from "@/hooks/useRedux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { closeModal } from "../../utils/hooks";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -16,6 +19,8 @@ export default function EmailTracker() {
   const [currentPageRows, setCurrentPageRows] = useState<
     TableRowEmailTracker[]
   >([]);
+  const { modal } = useAppSelector((state) => state.global);
+  const dispatch = useAppDispatch();
 
   const dataToAdd: TableRowEmailTracker[] = [
     {
@@ -226,32 +231,26 @@ export default function EmailTracker() {
     // Add more rows as needed
   ];
 
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.EMAIL_TRACKER]: <DeleteConfirmation closeModal={closeModal} />,
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 
   useEffect(() => {
+    dispatch(updateModalType(ModalType.EMAIL_TRACKER));
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);
+  console.log(modal, "modal", renderModal());
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  return (
-    <Layout>
-      {/* <DeleteConfirmation /> */}
-      <TableFunctions />
-      <TableLayout>
-        <TableHeading />
-        <TableRow dataToAdd={currentPageRows} />
-      </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
-    </Layout>
-  );
+  return <Layout>{renderModal()}</Layout>;
 }

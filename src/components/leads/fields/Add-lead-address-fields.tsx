@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateRegistrationFormField } from "@/types";
 
-export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
+export const AddLeadAddressDetailsFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
@@ -33,7 +33,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
 
   const formField: FormField[] = [
     {
-      containerClass: "mt-5 border-b border-black border-opacity-20 pb-[29px]",
+      containerClass: "mt-4 border-b border-black border-opacity-20 pb-[29px]",
       label: {
         text: "Address 1 Details*",
         htmlFor: "address-1-details",
@@ -68,7 +68,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
       },
     },
     {
-      containerClass: "mt-[29px] ",
+      containerClass: "mt-[29px] mb-0",
       label: {
         text: "Address 2 Details*",
         htmlFor: "address-1-details",
@@ -82,7 +82,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
           addressFormField("Post Code", "1234", "number"),
           addressFormField("Country", "Switzerland", "text"),
           {
-            containerClass: "mt-5 mb-0 col-span-3", // Take full width
+            containerClass: "mt-5 col-span-3 mb-0", // Take full width
             label: {
               text: "Description",
               htmlFor: "description",
@@ -104,15 +104,16 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
     },
 
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
-        className: "flex space-x-[18px] mt-[30px]",
+        className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-              text: "Cancel",
+              text: "Back",
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
@@ -123,7 +124,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
-              text: "Save Changes",
+              text: "Next",
               inputType: "submit",
               className:
                 "rounded-lg p-4 w-[152px] h-[50px] text-white hover-bg-none",

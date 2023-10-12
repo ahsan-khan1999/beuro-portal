@@ -111,7 +111,7 @@ export type GenerateFormField = (
   nextFormHandler?: Function
 ) => FormField[];
 export type GenerateRegistrationFormField = (
-  register: UseFormRegister<FieldValues>,
+  register: UseFormRegister<FieldValues>, 
   loader: boolean,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,

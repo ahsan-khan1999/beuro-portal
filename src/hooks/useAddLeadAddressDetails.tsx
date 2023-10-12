@@ -1,19 +1,19 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { generateLeadsCustomerEditDetailsValidation } from "@/validation/authSchema";
+import { generateLeadsAddressEditDetailsValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "./useRedux";
-import { LeadsCustomerDetailsFormField } from "@/components/leads/fields/Leads-customer-details-fields";
+import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 
-export const useLeadCustomerEditDetails = () => {
+export const useAddLeadAddressDetails = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateLeadsCustomerEditDetailsValidation(translate);
+  const schema = generateLeadsAddressEditDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ export const useLeadCustomerEditDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = LeadsCustomerDetailsFormField(register, loading, control);
+  const fields = AddLeadAddressDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

@@ -63,6 +63,37 @@ export enum LeadsAddressEditDetails {
   description = "description",
 }
 
+// Leads Service edit details
+export enum LeadsServiceEditDetails {
+  requiredService = "requiredService",
+  desireDate = "desireDate",
+  contactAvailablity = "contactAvailablity",
+  flexibility = "flexibility",
+  preferContact = "preferContact",
+  budget = "budget",
+  leadSource = "leadSource",
+  otherServices = "otherServices",
+}
+
+// Add new customer lead details
+export enum AddNewLeadCustomer {
+  customer = "customer",
+  customerType = "customerType",
+  yourName = "yourName",
+  companyName = "companyName",
+  email = "email",
+  phoneNumber = "phoneNumber",
+  mobileNumber = "mobileNumber",
+  streetNumber = "streetNumber",
+  postCode = "postCode",
+  country = "country",
+}
+
+// Additional details enum
+export enum LeadAdditionalDetails {
+  additionlData = "additionlData",
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

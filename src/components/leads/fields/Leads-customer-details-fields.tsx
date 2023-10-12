@@ -68,11 +68,11 @@ export const LeadsCustomerDetailsFormField: GenerateRegistrationFormField = (
           },
 
           {
-            containerClass: "mb-5",
+            containerClass: "mb-0",
             label: { text: "Email Address", htmlFor: "email" },
             field: {
               type: Field.input,
-              className: "!p-4    !border-dark  focus:!border-primary",
+              className: "!p-4 !border-dark  focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
@@ -198,9 +198,10 @@ export const LeadsCustomerDetailsFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
-        className: "flex space-x-[18px] mt-8",
+        className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
+            containerClass: "mb-0",
             field: {
               type: Field.button,
               text: "Cancel",
@@ -212,6 +213,7 @@ export const LeadsCustomerDetailsFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             field: {
               type: Field.button,
               text: "Save Changes",

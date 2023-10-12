@@ -105,3 +105,18 @@ body {
   border: none !important;
   color: #4b4b4b !important;
 }
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url('../assets/svgs/calender.svg') no-repeat;
+  position: absolute;
+  right: 18px;
+  width: 16px; /* Adjust the width and height as needed */
+  height: 16px;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 18px;
+}

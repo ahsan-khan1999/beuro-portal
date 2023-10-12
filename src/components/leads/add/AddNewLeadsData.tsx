@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-import CustomerEditDetails from "./CustomerEditDetails";
-import AddressEditDetails from "./AddressEditDetails";
-import ServiceEditDetails from "./ServiceEditDetails";
-import AditionalEditDetails from "./AditionalEditDetails";
+import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
+import AddLeadAddressDetails from "./AddLeadAddressDetails";
+import AddLeadServiceDetails from "./AddLeadServiceDetails";
+import AddLeadAdditionalDetails from "./AddLeadAdditionalDetails";
 
-const LeadsEditDetailsData = () => {
+const AddNewLeadsData = () => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -71,10 +71,10 @@ const LeadsEditDetailsData = () => {
   ];
 
   const componentsLookUp = {
-    0: <CustomerEditDetails />,
-    1: <AddressEditDetails />,
-    2: <ServiceEditDetails />,
-    3: <AditionalEditDetails />,
+    0: <AddLeadsCustomerDetails />,
+    1: <AddLeadAddressDetails />,
+    2: <AddLeadServiceDetails />,
+    3: <AddLeadAdditionalDetails />,
   };
   return (
     <div className="flex w-full gap-6">
@@ -96,4 +96,4 @@ const LeadsEditDetailsData = () => {
   );
 };
 
-export default LeadsEditDetailsData;
+export default AddNewLeadsData;
