@@ -12,20 +12,23 @@ export const AddLeadAddressDetailsFormField: GenerateRegistrationFormField = (
   const addressFormField = (
     labelText: string,
     placeholder: string,
+    id: string,
+    name: string,
     inputType
   ) => ({
     containerClass: "mb-0",
     label: {
       text: labelText,
-      htmlFor: labelText,
+      htmlFor: name,
+
       className: "mb-[10px] text-[#4D4D4D]",
     },
     field: {
       type: Field.input,
       className: commonInputClasses,
       inputType,
-      id: labelText,
-      name: labelText,
+      id: id,
+      name: name,
       placeholder,
       register,
     },
@@ -43,9 +46,27 @@ export const AddLeadAddressDetailsFormField: GenerateRegistrationFormField = (
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3",
         children: [
-          addressFormField("Street NO.", "Zweibrückenstraße, 12", "text"),
-          addressFormField("Post Code", "1234", "number"),
-          addressFormField("Country", "Switzerland", "text"),
+          addressFormField(
+            "Street NO.",
+            "Zweibrückenstraße, 12",
+            "text",
+            "streetNo",
+            "streetNo"
+          ),
+          addressFormField(
+            "Post Code",
+            "1234",
+            "number",
+            "postCode",
+            "postCode"
+          ),
+          addressFormField(
+            "Country",
+            "Switzerland",
+            "text",
+            "country",
+            "country"
+          ),
           {
             containerClass: "mt-5 mb-0 col-span-3", // Take full width
             label: {
@@ -78,9 +99,27 @@ export const AddLeadAddressDetailsFormField: GenerateRegistrationFormField = (
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3",
         children: [
-          addressFormField("Street NO.", "Zweibrückenstraße, 12", "text"),
-          addressFormField("Post Code", "1234", "number"),
-          addressFormField("Country", "Switzerland", "text"),
+          addressFormField(
+            "Street NO.",
+            "Zweibrückenstraße, 12",
+            "text",
+            "streetNo",
+            "streetNo"
+          ),
+          addressFormField(
+            "Post Code",
+            "1234",
+            "number",
+            "postCode",
+            "postCode"
+          ),
+          addressFormField(
+            "Country",
+            "Switzerland",
+            "text",
+            "country",
+            "country"
+          ),
           {
             containerClass: "mt-5 col-span-3 mb-0", // Take full width
             label: {

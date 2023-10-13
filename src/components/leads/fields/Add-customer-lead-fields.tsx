@@ -184,15 +184,15 @@ export const AddNewCustomerLeadFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             label: {
               text: "Street NO.",
-              htmlFor: "streetNo",
+              htmlFor: "streetNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
-              id: "streetNo",
-              name: "streetNo",
+              id: "streetNumber",
+              name: "streetNumber",
               placeholder: "Please Enter Street Number",
               register,
             },

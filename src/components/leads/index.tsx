@@ -3,6 +3,8 @@ import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
 import TableRowLeads from "@/components/leads/TableRowLeads";
+import editImage from "@/assets/svgs/edit_image.svg"
+import editNote from "@/assets/svgs/Edit_note.svg"
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes } from "@/types";
@@ -21,6 +23,8 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -30,6 +34,8 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Close",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -39,6 +45,19 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -48,6 +67,8 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Close",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -57,6 +78,8 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Expired",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -66,6 +89,19 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Open",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -75,6 +111,8 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Expired",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -84,6 +122,30 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Expired",
+      editImg: editImage,
+      editNote: editNote
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Close",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -93,6 +155,19 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
+    },
+    {
+      id: 1,
+      name: "Rahal Ahmed",
+      email: "Test12@gmail.com",
+      phone: "+49 302 1231234",
+      date: "25/08/2023",
+      location: "Islamabad",
+      status: "Close",
+      editImg: editImage,
+      editNote: editNote
     },
     {
       id: 1,
@@ -102,25 +177,10 @@ export default function Leads() {
       date: "25/08/2023",
       location: "Islamabad",
       status: "Open",
+      editImg: editImage,
+      editNote: editNote
     },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
+    
     // Add more rows as needed
   ];
 

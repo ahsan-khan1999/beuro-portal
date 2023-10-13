@@ -45,7 +45,7 @@ export const InputField = ({
       svg
 
       )} */}
-       {img && <Image src={addtionalDetailImg} alt="jhshads" className="absolute top-4 left-4"/>}
+       {img && <Image src={addtionalDetailImg} alt="paragraph_icon" className="absolute top-4 left-4"/>}
         {svg && (
           <span
             className={`mr-3 absolute top-4 left-4 ${

@@ -270,11 +270,7 @@ export const generateLeadsServiceEditDetailsValidation = (
       .string()
       .required(translate("validationMessages.required")),
 
-    [LeadsCustomerEditDetails.postCode]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-
-    [LeadsCustomerEditDetails.country]: yup
+    [LeadsServiceEditDetails.otherServices]: yup
       .string()
       .required(translate("validationMessages.required")),
   });

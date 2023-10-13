@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
+import { useRouter } from "next/router";
+
 interface Status {
   open: boolean;
   close: boolean;
   expired: boolean;
 }
 const TableFunctions = () => {
-      const [filter, setFilter] = useState<Status>({
-        open: false,
-        close: false,
-        expired: false,
-      });
-      function onInputChange(text: string) {}
+  const [filter, setFilter] = useState<Status>({
+    open: false,
+    close: false,
+    expired: false,
+  });
+  function onInputChange(text: string) {}
 
-      const handleButtonClick = (key: string, value: boolean) => {
-        setFilter({ ...filter, [key]: value });
-      };
+  const handleButtonClick = (key: string, value: boolean) => {
+    setFilter({ ...filter, [key]: value });
+  };
+
+  const router = useRouter();
   return (
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Leads</h1>
@@ -184,7 +188,10 @@ const TableFunctions = () => {
             </defs>
           </svg>
         </div>
-        <button className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap">
+        <button
+          onClick={() => router.push("/leads/add")}
+          className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
+        >
           <svg
             className="mr-2"
             xmlns="http://www.w3.org/2000/svg"
@@ -203,6 +210,6 @@ const TableFunctions = () => {
       </div>
     </div>
   );
-}
+};
 
-export default TableFunctions
+export default TableFunctions;

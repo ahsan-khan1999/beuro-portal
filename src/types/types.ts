@@ -163,6 +163,8 @@ export interface TableRowTypes {
   date: string;
   location: string;
   status?: string;
+  editImg?: string,
+  editNote?: string,
   type?: string;
 }
 export interface TableRowEmailTracker {
