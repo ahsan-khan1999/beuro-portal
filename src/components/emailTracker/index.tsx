@@ -7,11 +7,12 @@ import { TableRowEmailTracker, TableRowTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
-import DeleteConfirmation from "./modals/DeleteConfirmation";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { closeModal } from "../../utils/hooks";
+import DeleteConfirmation_1 from "../../base-components/ui/modals1/DeleteConfirmation_1";
+import DeleteConfirmation_2 from "../../base-components/ui/modals1/DeleteConfirmation_2";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -19,6 +20,8 @@ export default function EmailTracker() {
   const [currentPageRows, setCurrentPageRows] = useState<
     TableRowEmailTracker[]
   >([]);
+
+
   const { modal } = useAppSelector((state) => state.global);
   const dispatch = useAppDispatch();
 
@@ -232,11 +235,13 @@ export default function EmailTracker() {
   ];
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.EMAIL_TRACKER]: <DeleteConfirmation closeModal={closeModal} />,
+    [ModalType.EMAIL_TRACKER]: <DeleteConfirmation_2 />,
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+  
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 

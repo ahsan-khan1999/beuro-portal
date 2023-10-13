@@ -5,6 +5,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
+  handleRequestModal
 ) => {
   const formField: FormField[] = [
     {
@@ -56,7 +57,6 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
               register,
             },
           },
-
         ],
       },
     },
@@ -140,15 +140,15 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
       field: {
         type: Field.div,
         children: [
-
           {
             field: {
               type: Field.button,
               text: "Submit Request",
-              inputType: "submit",
+              inputType: "button",
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
+              onClick: handleRequestModal,
             },
           },
         ],

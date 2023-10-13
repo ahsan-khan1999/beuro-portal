@@ -19,7 +19,7 @@ export const Backdrop = ({ children, onClose }: IBackdropProps) => {
 
   return ReactDOM.createPortal(
     <div
-      className="fixed flex justify-center items-center z-99999 bg-dark bg-opacity-90 w-screen h-screen bg-blend-saturation backdrop-blur-sm"
+      className="absolute top-0 left-0 flex justify-center items-center z-99999 bg-dark bg-opacity-90 w-screen h-screen bg-blend-saturation backdrop-blur-sm"
       onClick={handleBackdropClicked}
     >
       {children}

@@ -6,6 +6,12 @@ import { TRowEmployees } from "@/types";
 import TableRowEmploys from "./table/TableRowEmploys";
 import TableHeadingEmploys from "./table/TableHeadingEmploys";
 import EmploysTopBar from "./table/EmploysTopBar";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { useAppSelector } from "@/hooks/useRedux";
+import { useDispatch } from "react-redux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
+import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
 
 export default function Employees() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -215,21 +221,39 @@ export default function Employees() {
     setCurrentPage(page);
   };
 
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.NEW_PASSWORD]: <CreateNewPassword />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  useEffect(() => {
+    dispatch(updateModalType(ModalType.NEW_PASSWORD));
+  }, []);
+
   return (
-    <Layout>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl text-[#222B45] ">Employs</h1>
-        <EmploysTopBar />
-      </div>
-      <TableLayout>
-        <TableHeadingEmploys />
-        <TableRowEmploys employsData={currentPageRows} />
-      </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
-    </Layout>
+    <>
+      <Layout>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-xl text-[#222B45] ">Employs</h1>
+          <EmploysTopBar />
+        </div>
+        <TableLayout>
+          <TableHeadingEmploys />
+          <TableRowEmploys employsData={currentPageRows} />
+        </TableLayout>
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      </Layout>
+      {renderModal()}
+    </>
   );
 }

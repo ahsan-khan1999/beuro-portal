@@ -8,7 +8,7 @@ export const BaseModal = ({
   containerClassName,
 }: IBaseModalProps) => {
   const defaultContainerClasses =
-    "rounded-lg bg-white p-[30px] w-[964px] max-w-[964px] min-h-[615px] max-h-[615px]";
+    "rounded-lg bg-white w-[964px] max-w-[964px] min-h-[615px] max-h-[615px]";
   const containerClasses = combineClasses(
     defaultContainerClasses,
     containerClassName

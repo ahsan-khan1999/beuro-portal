@@ -5,9 +5,11 @@ import React from "react";
 
 const ContactSupportForm = () => {
   const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, renderModal } =
     userContactSupport();
   return (
+    <>
+    
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Submit your request</h2>
@@ -21,6 +23,8 @@ const ContactSupportForm = () => {
         className={`${defaultClassName}`}
       />
     </FormCard>
+    {renderModal()}
+    </>
   );
 };
 

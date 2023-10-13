@@ -12,6 +12,8 @@ import {
   addressDetailsFields,
   ResetPasswordFields,
   ChangePasswordFields,
+  employeePasswordResetFields,
+  createEMployeeNewPasswordFields,
 } from "@/enums/registration";
 import {
   CustomerDetailsFields,
@@ -330,6 +332,44 @@ export const generateLeadAdditionalDetailsValidation = (
     [LeadAdditionalDetails.additionlData]: yup
       .string()
       .required("validation required"),
+  });
+};
+
+// Password reset validation is here
+export const generateEmployeePasswordResetValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [employeePasswordResetFields.yourPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [employeePasswordResetFields.newPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [employeePasswordResetFields.confirmNewPassword]: yup
+      .string()
+      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .required(translate("validationMessages.required")),
+  });
+};
+// Password reset validation is here
+export const generateEmployeeNewPasswordValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [createEMployeeNewPasswordFields.newPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [createEMployeeNewPasswordFields.confirmNewPassword]: yup
+      .string()
+      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .required(translate("validationMessages.required")),
   });
 };
 

@@ -14,7 +14,13 @@ export enum DropDownKeys {
 
 export enum ModalType {
   NONE,
-  EMAIL_TRACKER
+  EMAIL_TRACKER,
+  REQUEST_SUBMITTED,
+  PASSWORD_CHANGE_SUCCESSFULLY,
+  LINK_SEND_TO_EMAIL,
+  LEAD_CREATED,
+  PASSWORD_RESET,
+  NEW_PASSWORD
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

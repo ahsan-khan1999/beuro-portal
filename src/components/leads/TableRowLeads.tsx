@@ -29,9 +29,20 @@ const TableRowLeads = ({ dataToAdd }) => {
                 {item.status}
               </div>
             </span>
-            <span className="px-6 py-4 flex justify-center items-center cursor-pointer bg-white "><Image src={item.editImg} alt="edit_img_icon"/></span>
-            <span className="px-6 py-4 flex justify-center items-center cursor-pointer bg-white "><Image src={item.editNote} alt="edit_note_icon"/></span>
-            
+            <span className="px-6 py-4 flex justify-center items-center  bg-white ">
+              <Image
+                src={item.editImg}
+                alt="edit_img_icon"
+                className="cursor-pointer"
+              />
+            </span>
+            <span className="px-6 py-4 flex justify-center items-center bg-white ">
+              <Image
+                src={item.editNote}
+                alt="edit_note_icon"
+                className="cursor-pointer"
+              />
+            </span>
 
             <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
               <svg

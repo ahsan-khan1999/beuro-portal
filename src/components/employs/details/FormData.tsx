@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import editPswIcon from "@/assets/svgs/edit-password.svg";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { useDispatch } from "react-redux";
+import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const FormData = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <PasswordChangeSuccessfully />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  useEffect(() => {
+    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+  }, []);
 
   return (
+    <>
+    {renderModal()}
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Employs Details</h2>
@@ -111,6 +132,8 @@ const FormData = () => {
         </div>
       </div>
     </FormCard>
+    
+    </>
   );
 };
 
