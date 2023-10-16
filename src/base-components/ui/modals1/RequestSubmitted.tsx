@@ -8,7 +8,7 @@ const RequestSubmitted = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[624px] min-h-[465px] max-h-[465px]"
+        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
       >
         <div className="flex items-center flex-col">
           <Image src={requestSUbIcon} alt="request_submitted" className="mb-10 mt-[47px]"/>
@@ -19,7 +19,7 @@ const RequestSubmitted = () => {
             Thanks for sending your request to Buro we are happy to have you.
           </p>
 
-          <button className="bg-[#4A13E7] cursor-pointer mt-[32px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
+          <button className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
             Done
           </button>
         </div>

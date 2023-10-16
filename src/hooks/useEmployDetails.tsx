@@ -5,7 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "./useRedux";
-import { employDetailsFormField } from "@/components/employs/employ-fields";
+import { employDetailsFormField } from "@/components/employs/fields/employ-fields";
 
 export const useEmployDetails = () => {
   const { t: translate } = useTranslation();

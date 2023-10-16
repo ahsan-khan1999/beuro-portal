@@ -3,12 +3,17 @@ import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
 import TableRowLeads from "@/components/leads/TableRowLeads";
-import editImage from "@/assets/svgs/edit_image.svg"
-import editNote from "@/assets/svgs/Edit_note.svg"
+import editImage from "@/assets/svgs/edit_image.svg";
+import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes } from "@/types";
 import TableFunctions from "./TableFunctions";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/hooks/useRedux";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export default function Leads() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -24,7 +29,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -35,7 +40,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -46,7 +51,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -57,7 +62,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -68,7 +73,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -79,7 +84,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -90,7 +95,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -101,7 +106,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -112,7 +117,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -123,7 +128,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -134,7 +139,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -145,7 +150,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -156,7 +161,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -167,7 +172,7 @@ export default function Leads() {
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
     {
       id: 1,
@@ -178,16 +183,28 @@ export default function Leads() {
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
-      editNote: editNote
+      editNote: editNote,
     },
-    
+
     // Add more rows as needed
   ];
 
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
   useEffect(() => {
+    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
@@ -198,17 +215,20 @@ export default function Leads() {
   };
 
   return (
-    <Layout>
-      <TableFunctions />
-      <TableLayout>
-        <TableHeadingLeads />
-        <TableRowLeads dataToAdd={currentPageRows} />
-      </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
-    </Layout>
+    <>
+      <Layout>
+        <TableFunctions />
+        <TableLayout>
+          <TableHeadingLeads />
+          <TableRowLeads dataToAdd={currentPageRows} />
+        </TableLayout>
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      </Layout>
+      {renderModal()}
+    </>
   );
 }

@@ -8,7 +8,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import LinkSendToEmail from "@/base-components/ui/modals1/LinkSendToEmail";
-import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
+import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
 
 const AddEmploy = () => {
   const [tabType, setTabType] = useState<number>(0);
@@ -24,7 +24,7 @@ const AddEmploy = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.LEAD_CREATED]: <LeadCreated />,
+    [ModalType.LEAD_CREATED]: <CreateNewPassword />,
   };
 
   const renderModal = () => {

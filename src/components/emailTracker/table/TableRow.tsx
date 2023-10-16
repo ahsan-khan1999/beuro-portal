@@ -23,7 +23,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               <span>{item.sendAt.time}</span>
               <span>{item.sendAt.date}</span>
             </div>
-            <span className="px-6 py-4 bg-white ">
+            <span className="px-6 py-4 bg-white flex justify-center items-center">
               <div
                 className={`bg-[${item.status.colorClass}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
@@ -31,7 +31,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               </div>
             </span>
 
-            <span className="px-6 py-4 bg-white ">
+            <span className="px-6 py-4 bg-white flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="29"

@@ -14,6 +14,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
+            containerClass: "mb-0",
             label: {
               text: "First Name",
               htmlFor: "firstName",
@@ -30,6 +31,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "Last Name",
               htmlFor: "firstName",
@@ -46,6 +48,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: { text: "Email Address", htmlFor: "email" },
             field: {
               type: Field.input,
@@ -62,7 +65,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "mt-[25px]",
       field: {
         type: Field.div,
         className: "flex justify-between items-center gap-3",
@@ -111,12 +114,13 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "mt-[22px]",
       field: {
         type: Field.div,
         className: "w-full",
         children: [
           {
+            containerClass: "mb-0",
             label: {
               text: "Your Message",
               htmlFor: "message",
@@ -141,6 +145,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
         type: Field.div,
         children: [
           {
+            containerClass: "mt-[30px]",
             field: {
               type: Field.button,
               text: "Submit Request",

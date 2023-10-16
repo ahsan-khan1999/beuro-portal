@@ -8,12 +8,13 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-0",
       field: {
         type: Field.div,
         className: "flex justify-between items-center gap-3",
         children: [
           {
-            containerClass: "w-[67%]",
+            containerClass: "w-[67%] mb-0",
             label: {
               text: "Employ Name",
               htmlFor: "employName",
@@ -30,7 +31,7 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
             },
           },
           {
-            containerClass: "w-[33%]",
+            containerClass: "w-[33%] mb-0",
             label: {
               text: "Designation",
               htmlFor: "designation",
@@ -58,6 +59,7 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
         className: "grid grid-cols-3 gap-4",
         children: [
           {
+            containerClass: "mb-0",
             label: {
               text: "Email Address",
               htmlFor: "email",
@@ -74,6 +76,7 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "Phone Number",
               htmlFor: "phoneNumber",
@@ -90,6 +93,7 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
               text: "Mobile Number",
               htmlFor: "mobileNumber",
@@ -110,22 +114,25 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
     },
 
     {
+      // containerClass: "mb-[26px]",
       field: {
         type: Field.div,
-        className: "flex space-x-[18px] mt-8",
+        className: "flex space-x-[18px] mt-[30px]",
         children: [
+          // {
+          //   containerClass: "mb-0",
+          //   field: {
+          //     type: Field.button,
+          //     text: "Cancel",
+          //     inputType: "button",
+          //     // onClick: () => setCurrentFormStage("locationDetails"),
+          //     className:
+          //       "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+          //     loading,
+          //   },
+          // },
           {
-            field: {
-              type: Field.button,
-              text: "Cancel",
-              inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
-            },
-          },
-          {
+            containerClass: "mb-0",
             field: {
               type: Field.button,
               text: "Save",

@@ -21,7 +21,6 @@ export default function EmailTracker() {
     TableRowEmailTracker[]
   >([]);
 
-
   const { modal } = useAppSelector((state) => state.global);
   const dispatch = useAppDispatch();
 
@@ -235,13 +234,13 @@ export default function EmailTracker() {
   ];
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.EMAIL_TRACKER]: <DeleteConfirmation_2 />,
+    [ModalType.EMAIL_TRACKER]: <DeleteConfirmation_1 />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  
+
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 
@@ -257,5 +256,21 @@ export default function EmailTracker() {
     setCurrentPage(page);
   };
 
-  return <Layout>{renderModal()}</Layout>;
+  return (
+    <>
+      <Layout>
+        <TableFunctions />
+        <TableLayout>
+          <TableHeading />
+          <TableRow dataToAdd={currentPageRows} />
+        </TableLayout>
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      </Layout>
+      {renderModal()}
+    </>
+  );
 }

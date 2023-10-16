@@ -8,7 +8,7 @@ const PasswordChangeSuccessfully = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[624px] min-h-[465px] max-h-[465px]"
+        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
       >
         <div className="flex items-center flex-col">
           <Image
@@ -24,7 +24,7 @@ const PasswordChangeSuccessfully = () => {
             mattis ac dictum.
           </p>
 
-          <button className="bg-[#4A13E7] cursor-pointer mt-[19px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
+          <button className="bg-[#4A13E7] cursor-pointer mt-[19px] mb-[47px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
             Done
           </button>
         </div>

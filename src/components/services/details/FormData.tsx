@@ -1,5 +1,5 @@
 import React from "react";
-import FormCard from "@/layout/customers/FormCard";
+import FormCard from "@/layout/services/FormCard";
 import { useRouter } from "next/router";
 
 const FormData = () => {

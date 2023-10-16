@@ -9,7 +9,7 @@ const DeleteConfirmation_1 = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[564px] min-h-[383px]"
+        containerClassName="max-w-[564px] min-h-auto"
       >
         <div className="relative flex flex-col items-center">
           <Image src={crossIcon} alt="cross_icon" className="absolute right-5 top-5 cursor-pointer"/>
@@ -28,7 +28,7 @@ const DeleteConfirmation_1 = () => {
             ID: &nbsp; A-0001
           </div>
 
-          <div className="flex gap-[33px] mt-[27px]"> 
+          <div className="flex gap-[33px] mt-[26px] mb-[38px]"> 
             <button className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md">Cancel</button>
             <button className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md">Confirm</button>
           </div>

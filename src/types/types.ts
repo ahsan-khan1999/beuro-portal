@@ -111,7 +111,7 @@ export type GenerateFormField = (
   nextFormHandler?: Function
 ) => FormField[];
 export type GenerateRegistrationFormField = (
-  register: UseFormRegister<FieldValues>, 
+  register: UseFormRegister<FieldValues>,
   loader: boolean,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
@@ -163,8 +163,8 @@ export interface TableRowTypes {
   date: string;
   location: string;
   status?: string;
-  editImg?: string,
-  editNote?: string,
+  editImg?: string;
+  editNote?: string;
   type?: string;
 }
 export interface TableRowEmailTracker {
@@ -217,6 +217,19 @@ export interface leadsTabsSectionTypes {
   selectedTab: number;
   name: string;
   icon: ReactNode;
+}
+
+export interface contractTableTypes {
+  id: string;
+  customer: string;
+  contractTitle: string;
+  totalPrice: string;
+  createdOn: Date | null;
+  payment?: string;
+  status?: string;
+  editImg?: string;
+  editNote?: string;
+  type?: string;
 }
 
 // export interface SuccessMessage {

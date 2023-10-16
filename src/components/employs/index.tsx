@@ -253,7 +253,7 @@ export default function Employees() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 }

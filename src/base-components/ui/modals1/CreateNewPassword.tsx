@@ -12,13 +12,15 @@ const CreateNewPassword = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
+        containerClassName="max-w-[624px] min-h-auto px-[120px] !py-[45px] max-h-[465px]"
       >
-        <div className="relative flex flex-col px-[120px] !py-[45px] ">
+        <div className="relative flex flex-col  ">
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[13px]">
             Create New Password
           </p>
-          <p className="text-[#1E1E1E] text-[14px] font-medium mb-[12px]">Your Email</p>
+          <p className="text-[#1E1E1E] text-[14px] font-medium mb-[12px]">
+            Your Email
+          </p>
 
           <div className="w-[380px] py-4 pl-[41px] border border-[#BFBFBF] rounded-lg mb-5">
             Testuser123@gmail.com

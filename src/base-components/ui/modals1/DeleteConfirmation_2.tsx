@@ -9,7 +9,7 @@ const DeleteConfirmation_2 = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[564px] min-h-[383px]"
+        containerClassName="max-w-[564px] min-h-auto"
       >
         <div className="relative flex flex-col items-center">
           <Image
@@ -20,13 +20,13 @@ const DeleteConfirmation_2 = () => {
           <Image
             src={deleteConfirmIcon}
             alt="delete_icon"
-            className="mt-[66px]"
+            className="mt-[59px]"
           />
-          <p className="text-[#000] font-medium text-[20px] leading-7 my-2 max-w-[290px] text-center mt-[44px]">
+          <p className="text-[#000] font-medium text-[20px] leading-7 mt-[44px] max-w-[290px] text-center ">
             Are you sure you want to delete this Email?
           </p>
 
-          <div className="flex gap-[33px] mt-[27px]">
+          <div className="flex gap-[33px] mt-[27px] mb-[38px]">
             <button className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md">
               Cancel
             </button>

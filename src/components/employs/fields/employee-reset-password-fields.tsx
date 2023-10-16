@@ -77,12 +77,13 @@ export const EmployeeResetPasswordFieldsFormField: GenerateRegistrationFormField
         },
       },
       {
+        
         label: null,
         field: {
           type: Field.button,
           text: "Submit",
           inputType: "submit",
-          className: "mt-8 rounded-lg",
+          className: "mt-[19px] rounded-lg",
           loading,
         },
       },
