@@ -6,6 +6,7 @@ import { FormField } from "./form";
 import { FieldValues, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 
 
+
 export interface User extends CommercialSellerType {
     [UserResponse.id]: string,
     [UserResponse.role]: string,
