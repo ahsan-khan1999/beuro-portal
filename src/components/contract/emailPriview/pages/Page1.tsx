@@ -5,7 +5,7 @@ import writeIcon from "@/assets/svgs/write_icon.svg";
 const Page1 = () => {
   return (
     <div className="px-[80px] flex flex-col bg-white">
-      <div className="flex justify-between items-center mt-5 mb-[50px]">
+      <div className="flex justify-between items-center mt-5 mb-[37px]">
         <div className="flex flex-col gap-[4px]">
           <span className="text-[#000] text-base font-medium">
             Frau Natalie Semeli
@@ -31,125 +31,201 @@ const Page1 = () => {
           </div>
         </div>
       </div>
-      <div className="h-[3px] bg-black mb-[35px]"></div>
 
-      <div className="flex flex-col gap-1">
-        <div className="flex gap-[10px]">
-          <span className="text-[#000] text-base font-medium">
-            Vertragsabschluss:
+      <div className="flex gap-[10px] mb-[10px]">
+        <span className="text-xl font-semibold text-[#393939]">
+          Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken{" "}
+        </span>
+        <Image
+          src={writeIcon}
+          alt="writeIcon"
+          className="cursor-pointer h-[25px] w-[25px]"
+        />
+      </div>
+      <div className="h-[3px] bg-black mb-[20px]"></div>
+
+      <div className="flex gap-[30px]">
+        <span>Address 1:</span>
+        <span className="text-[#141414] text-base font-normal">
+          <strong> Erlenweg 8, 3294 Buren an der Aare</strong> 6.5
+          Zimmerwohanhnung, Ug/EG/OG, grosser und voller Keller,
+          <br /> vollmolbilert, Kartons einpacken, Mobel demontieren
+        </span>
+      </div>
+      <div className="h-[2px] bg-[#8C8C8C] opacity-50 my-[8px]"></div>
+      <div className="flex gap-[30px]">
+        <span>Address 2:</span>
+        <span className="text-[#141414] text-base font-normal">
+          <strong> Rebenstrasse, 4112 Battwil</strong>&nbsp; 6Mobel montieren,
+          Kartons auspacken
+        </span>
+      </div>
+      <div className="h-[2px] bg-[#8C8C8C] opacity-50 my-[8px]"></div>
+
+      <div className="flex gap-[20px] mb-[46px]">
+        <span>Work Dates:</span>
+        <span className="text-[#000] text-base font-normal">
+          30-11-2023 to 07-11-2023
+        </span>
+      </div>
+
+      <div className="bg-[#40506A] py-[8px] rounded-[4px] mb-3">
+        <div className="flex justify-between items-center ">
+          <span className="pl-[12px] text-white text-base font-medium ">
+            Service / Product
           </span>
-          <Image
-            src={writeIcon}
-            alt="writeIcon"
-            className="cursor-pointer h-[25px] w-[25px]"
-          />
+          <div className="flex gap-[82px] ">
+            <span className="text-base font-medium text-white">Price</span>
+            <span className="text-base font-medium text-white">Unit</span>
+            <span className="text-base font-medium text-white">Count</span>
+            <span className="text-base font-medium text-white pr-[46px]">
+              Total
+            </span>
+          </div>
         </div>
-        <p className="text-[#000] text-[14px] font-normal">
-          Wenn Sie mit der Offerte einverstanden sind, bitten wir Sie um
-          Unterzeichnung der Offerte. Sie können das Angebot gerne per Post oder
-          per E-Mail zurücksenden. Nach Erhalt der unterzeichneten Offerte,
-          werden Sie eine Auftragsbestätigung erhalten. Start der Arbeiten:
-          08.00 Uhr, sofern keine andere Uhrzeit vereinbart wurde.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">
-          Zahlungsarten:
-        </span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Banküberweisung: Sie können den Betrag auf unser angegebenes Bankkonto
-          überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem
-          Umzugstermin eingehen muss (mindestens einen Tag vorher).
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">Bar Zahlung:</span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Sie haben die Möglichkeit, den Betrag direkt vor Ort Bar zu
-          begleichen. Bitte sorgen Sie dafür, dass Sie den entsprechenden Betrag
-          passend verfügen.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">Lorm Ipsum :</span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Sie können den ausstehenden Betrag vor Ort via TWINT begleichen, indem
-          Sie mit der TWINT-App einen QR-Code scannen. Der Betrag wird
-          anschliessend von Ihrem Bankkonto belastet.
-          <br /> Nach Erhalt des Betrages, werden wir Ihnen lorem ipsum dollar
-          smith mit eine Quittung zustellen.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">
-          Zahlung per TWINT:
-        </span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Sie können den ausstehenden Betrag vor Ort via TWINT begleichen, indem
-          Sie mit der TWINT-App einen QR-Code scannen. Der Betrag wird
-          anschliessend von Ihrem Bankkonto belastet.
-          <br /> Nach Erhalt des Betrages, werden wir Ihnen per E-Mail eine
-          Quittung zustellen.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">
-          Aufgrund unserer Erfahrungen stellen wir an Privatpersonen keine
-          Rechnungen mehr aus , ausgenommen:
-        </span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Personen, bei denen der Umzug vom Sozialdienst übernommen wird.
-          Diesbezüglich brauchen wir vom Sozialamt eine schriftliche Bestätigung
-          der Kostenübernahme. - Firmen, welche eine Anzahlung der Hälfte des
-          Betrages leisten, können den Restbetrag per Rechnung begleichen. Die
-          unterzeichnete Offerte ist zwingend Anzahlung, können wir eine
-          Rechnung für den Restbetrag ausstellen. Ansonsten wird der ganze
-          Betrag Bar oder per TWINT vor Ort verrechnet.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">
-          Stornierungsgebühren:
-        </span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          Bei einer Stornierung werden Ihnen mindestens vier volle gebuchte
-          Arbeitsstunden in Rechnung gestellt. Die berechneten Arbeitsstunden
-          beziehen sich auf die gebuchten Leistungen gemäß dem Angebot, sowie
-          Unkosten, die durch die Reservierung entstehen. Wenn Sie Ihren
-          vereinbarten Umzugstermin mit uns auf einen neuen Tag festlegen bzw.
-          verschieben, fallen keine Stornogebühren an.
-        </p>
-      </div>
-      <div className="flex flex-col gap-1 mt-[30px]">
-        <span className="text-[#000] text-base font-medium">
-          Gültigkeit der Offerte:
-        </span>
-
-        <p className="text-[#000] text-[14px] font-normal">
-          3 Monate ab Erstellung der Offerte
-        </p>
       </div>
 
-      <p className="mt-[30px] mb-[78px] text-[18px] text-black font-medium">
-        I share the contract with you.
-      </p>
+      <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] p-[12px] mb-3">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-[4px]">
+            <span className="text-base font-normal text-[#000]">
+              3 Mitarbeiter ohne Farzeung
+            </span>
+            <span className="text-[#404040] text-[14px] font-normal">
+              Arbeit nach Aufwand. Mindestbetrag 4 stunden. Nur die <br />
+              grossen.Arbeit nach Aufwand. Mindestbetrag 4 stunden. Nur die
+              <br />
+              grossen.
+            </span>
+          </div>
+          <div className="flex  gap-[82px] ">
+            <span className="text-base font-normal text-[#000]">150 CHF</span>
+            <span className="text-base font-normal text-[#000]">Std</span>
+            <span className="text-base font-normal text-[#000]">05.00</span>
+            <span className="text-base font-semibold text-[#000]">750 CHF</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] p-[12px] mb-3">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-[4px]">
+            <span className="text-base font-normal text-[#000]">
+              3 Mitarbeiter und 2 Lieferwagen, davon 1 Anhanger
+            </span>
+            <span className="text-[#404040] text-[14px] font-normal">
+              3 Tag: Noch mals Transport von der ersten zur zweiten Addresse
+            </span>
+          </div>
+          <div className="flex  gap-[82px] ">
+            <span className="text-base font-normal text-[#000]">150 CHF</span>
+            <span className="text-base font-normal text-[#000]">Std</span>
+            <span className="text-base font-normal text-[#000]">05.00</span>
+            <span className="text-base font-semibold text-[#000]">750 CHF</span>
+          </div>
+        </div>
+      </div>
 
-      <div className="grid grid-cols-2 gap-[100px] mb-[50px]">
-        <div >
-          <hr className="mb-[11px]" />
-          <span className="text-base text-black font-normal ">
-            Place - Date
+      <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] p-[12px] mb-3">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-[4px]">
+            <span className="text-base font-normal text-[#000]">
+              Wylerringstrasse 66, 3013 Bern
+            </span>
+            <span className="text-[#404040] text-[14px] font-normal">
+              Arbeit nach Aufwand. Mindestbetrag 4 stunden. Nur die grossen.
+            </span>
+          </div>
+          <div className="flex  gap-[82px] ">
+            <span className="text-base font-normal text-[#000]">150 CHF</span>
+            <span className="text-base font-normal text-[#000]">Std</span>
+            <span className="text-base font-normal text-[#000]">05.00</span>
+            <span className="text-base font-semibold text-[#000]">750 CHF</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] p-[12px] mb-3">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-[4px]">
+            <span className="text-base font-normal text-[#000]">
+              3 Mitarbeiter und 2 Lieferwagen, davon 1 Anhanger
+            </span>
+            <span className="text-[#404040] text-[14px] font-normal">
+              3 Tag: Noch mals Transport von der ersten zur zweiten Addresse
+            </span>
+          </div>
+          <div className="flex  gap-[82px] ">
+            <span className="text-base font-normal text-[#000]">150 CHF</span>
+            <span className="text-base font-normal text-[#000]">Std</span>
+            <span className="text-base font-normal text-[#000]">05.00</span>
+            <span className="text-base font-semibold text-[#000]">750 CHF</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] p-[12px]">
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-[4px]">
+            <span className="text-base font-normal text-[#000]">
+              3 Mitarbeiter und 2 Lieferwagen, davon 1 Anhanger
+            </span>
+            <span className="text-[#404040] text-[14px] font-normal">
+              3 Tag: Noch mals Transport von der ersten zur zweiten Addresse
+            </span>
+          </div>
+          <div className="flex  gap-[82px] ">
+            <span className="text-base font-normal text-[#000]">150 CHF</span>
+            <span className="text-base font-normal text-[#000]">Std</span>
+            <span className="text-base font-normal text-[#000]">05.00</span>
+            <span className="text-base font-semibold text-[#000]">750 CHF</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-[90px] mt-[44px]">
+        <div className="flex flex-col">
+          <span className="text-base font-medium text-[#000]">
+            Konditionen Schätzofferte Umzug
+          </span>
+
+          <span className="text-[#404040] font-normal mt-[10px]">
+            Vielen Dank für Ihr Interesse an unseren Dienstleistungen. <br />
+            Sie finden nachfolgend weitere Informationen bezüglich der
+            Richtlinien <br /> und Bedingungen. Bitte nehmen Sie sich Zeit, um
+            die nachfolgenden <br /> Geschäftsbedingungen zu verstehen.
           </span>
         </div>
-        <div >
-          <hr className="mb-[11px]" />
-          <span className="text-base text-black font-normal">Signature</span>
+
+        <div>
+          <div className="flex gap-[77px]">
+            <div className="flex flex-col gap-[10px]">
+              <span className="text-[#1E1E1E] text-base font-medium">
+                Sub Total
+              </span>
+              <span className="text-[#1E1E1E] text-base font-medium">Tax%</span>
+              <span className="text-[#1E1E1E] text-base font-medium">
+                Discount:
+              </span>
+            </div>
+            <div className="flex flex-col gap-[10px]">
+              <span className="text-[#1E1E1E] text-base font-medium">
+                2000CHF
+              </span>
+              <span className="text-[#1E1E1E] text-base font-medium">
+                100CHF (7.7%)
+              </span>
+              <span className="text-[#1E1E1E] text-base font-medium">
+                100.50 CHF
+              </span>
+            </div>
+          </div>
+          <div className="flex justify-between items-center bg-[#404F6A] rounded-[4px] px-[10px] py-[8px] gap-[55px] mt-[10px]">
+            <span className="text-base font-semibold text-[#fff]">
+              Grand Total:
+            </span>
+            <span className="text-base font-semibold text-[#fff]">
+              2100.50 CHF
+            </span>
+          </div>
         </div>
       </div>
     </div>
