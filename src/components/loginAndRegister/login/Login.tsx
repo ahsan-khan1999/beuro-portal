@@ -29,6 +29,7 @@ const Login = () => {
             errors={errors}
             className={`${defaultClassName}`}
           />
+          {/* <ClassicCKEditor /> */}
         </div>
       </div>
       <EntryLinks />
