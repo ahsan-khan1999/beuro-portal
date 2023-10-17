@@ -94,6 +94,15 @@ export enum LeadAdditionalDetails {
   additionlData = "additionlData",
 }
 
+// contract email preview
+export enum ContractEmailPreview {
+  email = "email",
+  content = "content",
+  subject = "subject",
+  description = "descritpion",
+  fileUpload = "fileUpload",
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';
