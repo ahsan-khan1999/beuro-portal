@@ -5,11 +5,7 @@ import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { InvoiceTableRowTypes } from "@/types";
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "@/hooks/useRedux";
-import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import TableFunctions from "./TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
@@ -184,19 +180,18 @@ export default function Invoices() {
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
+  // const dispatch = useDispatch();
+  // const { modal } = useAppSelector((state) => state.global);
 
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
-  };
+  // const MODAL_CONFIG: ModalConfigType = {
+  //   [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+  // };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
+  // const renderModal = () => {
+  //   return MODAL_CONFIG[modal.type] || null;
+  // };
 
   useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));

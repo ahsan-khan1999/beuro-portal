@@ -249,6 +249,32 @@ export interface InvoiceTableRowTypes {
   type?: string;
 }
 
+// Inovice details table
+export interface InvoiceDetailsTableRowTypes {
+  id: string;
+  customer: string;
+  invoiceTitle: string;
+  issueDate: Date | null;
+  amount: string;
+  emailStatus: string;
+  payment: string;
+  status: string;
+  type?: string;
+}
+
+// Receipt details table
+export interface ReceiptDetailsTableRowTypes {
+  id: string;
+  customer: string;
+  receiptTitle: string;
+  paidDate: Date | null;
+  amount: string;
+  invoice?: string;
+  payment: string;
+  emailStatus: string;
+  type?: string;
+}
+
 // export interface SuccessMessage {
 //   image:Image
 // }
