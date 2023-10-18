@@ -167,6 +167,7 @@ export interface TableRowTypes {
   editNote?: string;
   type?: string;
 }
+
 export interface TableRowEmailTracker {
   id: number;
   recipient: string;
@@ -228,6 +229,22 @@ export interface contractTableTypes {
   payment?: string;
   status?: string;
   editImg?: string;
+  editNote?: string;
+  type?: string;
+}
+
+// Inovice table layout
+export interface InvoiceTableRowTypes {
+  id: string;
+  customer: string;
+  invoiceTitle: string;
+  totalPrice: string;
+  emailStatus: string;
+  paid: {
+    initialValue: string;
+    finalValue: string;
+  };
+  status: string;
   editNote?: string;
   type?: string;
 }
