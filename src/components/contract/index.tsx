@@ -9,6 +9,9 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes, contractTableTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
+import EmailForm from "./EmailForm";
+import EmailPriview from "./emailPriview";
+import CkEditor from "@/base-components/ui/editor/ck-editor";
 
 export default function Contract() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -193,7 +196,7 @@ export default function Contract() {
   return (
     <>
       <Layout>
-        <TableFunctions />
+        {/* <TableFunctions />
         <TableLayout>
           <TableHeadings />
           <TableRows dataToAdd={currentPageRows} />
@@ -202,7 +205,10 @@ export default function Contract() {
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
-        />
+        /> */}
+
+        {/* <EmailForm /> */}
+        <EmailPriview />
       </Layout>
     </>
   );
