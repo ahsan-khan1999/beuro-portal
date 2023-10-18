@@ -9,16 +9,22 @@ const ClassicCKEditor = ({
   data: string;
   onChange: (event: any, editor: ClassicEditor) => void;
 }) => (
+  
+
   <CKEditor
     editor={ClassicEditor}
     data={data}
-    onReady={(editor) => {}}
+    
+    onReady={(editor) => {
+    }}
     onChange={(event, editor) => {
       const data = editor.getData();
       onChange(event, editor);
     }}
-    onBlur={(event, editor) => {}}
-    onFocus={(event, editor) => {}}
+    onBlur={(event, editor) => {
+    }}
+    onFocus={(event, editor) => {
+    }}
     config={{
       //   toolbar: [
       //     "undo",

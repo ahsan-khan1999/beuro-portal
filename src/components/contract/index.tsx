@@ -11,6 +11,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
 import EmailForm from "./EmailForm";
 import EmailPriview from "./emailPriview";
+import CkEditor from "@/base-components/ui/editor/ck-editor";
 
 export default function Contract() {
   const [currentPage, setCurrentPage] = useState<number>(1);
