@@ -37,7 +37,6 @@ export enum ChangePasswordFields {
   newPassword = "newPassword",
 }
 
-
 // Employee password reset
 export enum employeePasswordResetFields {
   yourPassword = "yourPassword",
@@ -45,9 +44,17 @@ export enum employeePasswordResetFields {
   confirmNewPassword = "confirmNewPassword",
 }
 
-
 // Employee password reset
 export enum createEMployeeNewPasswordFields {
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
+}
+
+// enum for created invoice
+export enum createInvoice {
+  totalAmount = "totalAmount",
+  remainingAmount = "remainingAmount",
+  enterAmount = "enterAmount",
+  paymentMethod = "paymentMethod",
+  markItRecuring = "markItRecuring",
 }

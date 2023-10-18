@@ -27,6 +27,7 @@ const ContactSupportForm = () => {
   useEffect(() => {
     dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
   }, []);
+  
   return (
     <>
       <FormCard>
