@@ -53,7 +53,7 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "mb-[14px]",
+      containerClass: "mt-4 mb-[12px]",
       field: {
         type: Field.div,
         children: [

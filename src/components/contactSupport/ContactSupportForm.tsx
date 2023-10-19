@@ -44,7 +44,7 @@ const ContactSupportForm = () => {
           className={`${defaultClassName}`}
         />
       </FormCard>
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 };

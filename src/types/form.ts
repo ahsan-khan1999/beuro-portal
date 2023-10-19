@@ -13,9 +13,11 @@ import {
   UseFormSetError,
 } from "react-hook-form";
 import { ButtonProps } from "./ui";
-import { CardType, Field, Salutation } from "@/enums";
+import { CardType, Salutation } from "@/enums";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
+import React from "react";
+import { Field } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -41,6 +43,15 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   svg?: string;
   img?:boolean;
   alt: string;
+}
+
+export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
+  inputType: "text";
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 export interface CreditCardInputProps
@@ -167,6 +178,7 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
+  | Field.textArea
   | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
@@ -182,6 +194,7 @@ export type FieldType =
   | Field.link;
 export type FieldProps =
   | InputProps
+  | TextAreaProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
@@ -204,6 +217,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  textArea: React.FC<TextAreaProps>
   customerInput: React.FC<InputProps>;
   creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
