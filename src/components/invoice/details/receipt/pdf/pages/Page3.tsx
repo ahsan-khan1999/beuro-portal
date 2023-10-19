@@ -10,13 +10,13 @@ const Page3 = () => {
     <>
       <PdfHeader />
       <div className="flex flex-col bg-white">
-        <div className="flex justify-between items-center mt-5 pb-[50px] px-[80px]">
+        <div className="flex justify-between items-center pt-5 pb-[50px] px-[80px]">
           <div className="flex flex-col gap-[4px]">
             <span className="text-[#000] text-base font-medium">
               Frau Natalie Semeli
             </span>
             <span className="text-[#000] text-base font-medium">
-              Erlenweg 8{" "}
+              Erlenweg 8
             </span>
             <span className="text-[#000] text-base font-medium">
               3294 Buren an der Aare
@@ -43,7 +43,7 @@ const Page3 = () => {
 
         <div className="h-[3px] bg-black"></div>
 
-        <div className="relative border-t-2 border-dashed border-[#8F8F8F] mt-[500px] mb-[52px]">
+        <div className="relative border-t-2 border-dashed border-[#8F8F8F] mt-[560px] mb-[52px]">
           <Image
             src={horizontalCuterIcon}
             alt="horizontalCuterIcon"
@@ -128,10 +128,8 @@ const Page3 = () => {
             </div>
 
             {/* 2nd cols is here */}
-            <div className="pt-[48px]">
-              <span className="text-black text-[22px] font-semibold ">
-                Zahlteil
-              </span>
+            <div className="pt-[48px] ">
+              <p className="text-black text-[22px] font-semibold ">Zahlteil</p>
               <Image
                 src={QR_CODE}
                 alt="QR_CODE"

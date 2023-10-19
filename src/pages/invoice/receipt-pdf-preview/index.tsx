@@ -1,10 +1,10 @@
-import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
+import ReceiptPdfPriview from "@/components/invoice/details/receipt/pdf";
 import React from "react";
 
 const index = () => {
   return (
     <div>
-      <DetailsPdfPriview />
+      <ReceiptPdfPriview />
     </div>
   );
 };
