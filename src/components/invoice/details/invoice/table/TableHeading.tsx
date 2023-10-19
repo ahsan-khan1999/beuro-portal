@@ -2,7 +2,7 @@ import React from "react";
 
 const TableHeading = () => {
   return (
-    <div className="grid grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(120px,_100%)_minmax(70px,_70px)]   bg-white rounded-md ">
+    <div className="grid grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(150px,_100%)_minmax(70px,_70px)]   bg-white rounded-md ">
       <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white  rounded-md">
         ID
       </span>

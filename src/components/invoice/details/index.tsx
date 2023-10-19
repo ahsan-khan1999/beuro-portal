@@ -11,6 +11,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
+import InvoiceCreatedSuccessfully from "@/base-components/ui/modals1/InvoiceCreatedSuccessfully";
 
 const InvoiceDetails = () => {
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -20,7 +21,7 @@ const InvoiceDetails = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.INVOICE_CREATED]: <InvoiceCreated />,
+    [ModalType.INVOICE_CREATED]: <InvoiceCreatedSuccessfully />,
   };
 
   const renderModal = () => {

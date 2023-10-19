@@ -418,7 +418,16 @@ export const generateCreateInvoiceValidationSchema = (translate: Function) => {
     [createInvoice.paymentMethod]: yup
       .string()
       .required(translate("validation required")),
+
     [createInvoice.markItRecuring]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.date]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.frequency]: yup
       .string()
       .required(translate("validation required")),
   });

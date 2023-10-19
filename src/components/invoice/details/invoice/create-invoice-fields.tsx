@@ -97,93 +97,98 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
         ],
       },
     },
-    {
-      containerClass: "mb-4",
-      field: {
-        type: Field.div,
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.input,
-              className:
-                "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-              inputType: "text",
-              id: "enterAmount",
-              name: "enterAmount",
-              placeholder: "20000 CHF",
-              register,
-            },
-          },
-        ],
-      },
-    },
 
     {
       containerClass: "mb-0",
       field: {
-        type: Field.div,
-        children: [
-          {
-            containerClass: "mb-0",
-            label: {
-              text: "Payment Method",
-              htmlFor: "paymentMethod",
-              className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
-            },
-            field: {
-              className:
-                "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-              placeholder: "Please Select Payment Method",
-              type: Field.select,
-              id: "paymentMethod",
-              name: "paymentMethod",
-              options: [
-                { value: "Online", label: "Online" },
-                { value: "Cash", label: "Cash" },
-              ],
-              control,
-            },
-          },
+        type: Field.input,
+        className:
+          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+        inputType: "text",
+        id: "enterAmount",
+        name: "enterAmount",
+        placeholder: "20000 CHF",
+        register,
+      },
+    },
+
+    {
+      containerClass: "mb-0 mt-4",
+      label: {
+        text: "Payment Method",
+        htmlFor: "paymentMethod",
+        className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
+      },
+      field: {
+        className:
+          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+        placeholder: "Please Select Payment Method",
+        type: Field.select,
+        id: "paymentMethod",
+        name: "paymentMethod",
+        options: [
+          { value: "Online", label: "Online" },
+          { value: "Cash", label: "Cash" },
         ],
+        control,
       },
     },
 
     {
       containerClass: "mb-0 mt-[17px]",
       field: {
-        type: Field.div,
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              className: "text-[#4B4B4B] text-[14px] font-normal",
-              type: Field.checkbox,
-              id: "markItRecuring",
-              name: "markItRecuring",
-              description: "Make it Recurring",
-              register,
-            },
-          },
-        ],
+        className: "text-[#4B4B4B] text-[14px] font-normal",
+        type: Field.checkbox,
+        id: "markItRecuring",
+        name: "markItRecuring",
+        description: "Make it Recurring",
+        register,
+      },
+    },
+
+    // fields shows after clicked the check button
+    {
+      containerClass: "mt-4",
+      label: {
+        text: "Date of next invoice",
+        htmlFor: "date",
+        className: "mb-[12px]",
+      },
+      field: {
+        type: Field.date,
+        className: "!p-4 !border-dark focus:!border-primary ",
+        id: "date",
+        name: "date",
+        placeholder: "12/09/2023",
+        register,
+      },
+    },
+    {
+      containerClass: "mb-0 mt-4",
+      label: {
+        text: "Frequency",
+        htmlFor: "frequency",
+        className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
+      },
+      field: {
+        className:
+          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+        placeholder: "Please Select frequency",
+        type: Field.select,
+        id: "frequency",
+        name: "frequency",
+        options: [{ value: "200GHZ", label: "200GHZ" }],
+        control,
       },
     },
 
     {
-      containerClass: "mt-[13px]",
+      containerClass: "mb-0 mt-[13px]",
       field: {
-        type: Field.div,
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              text: "Create Invoice",
-              inputType: "submit",
-              loading,
-            },
-          },
-        ],
+        type: Field.button,
+        text: "Create Invoice",
+        inputType: "submit",
+        loading,
       },
     },
   ];

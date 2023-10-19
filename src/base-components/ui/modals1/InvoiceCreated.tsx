@@ -12,7 +12,7 @@ const InvoiceCreated = () => {
   return (
     <>
       <BaseModal
-        onClose={() => false}
+        onClose={() => true}
         containerClassName="max-w-[624px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[39px] pb-[40px] pt-[24px]">

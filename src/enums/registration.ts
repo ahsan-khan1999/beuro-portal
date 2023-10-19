@@ -57,4 +57,6 @@ export enum createInvoice {
   enterAmount = "enterAmount",
   paymentMethod = "paymentMethod",
   markItRecuring = "markItRecuring",
+  date = "date",
+  frequency = "frequency",
 }
