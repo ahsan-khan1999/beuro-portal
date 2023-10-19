@@ -43,6 +43,7 @@ export enum SalutationValue {
 
 export enum Field {
   input = "input",
+  textArea = "textArea",
   customerInput = "customerInput",
   creditCardNumberInput = "creditCardNumberInput",
   creditCardExpiryDateInput = "creditCardExpiryDateInput",

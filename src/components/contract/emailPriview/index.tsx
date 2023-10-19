@@ -14,7 +14,6 @@ const EmailPriview = () => {
         <EmailHeader />
         <Page1 />
         <EmailFooter />
-        
       </div>
 
       <div className="mt-[30px]">

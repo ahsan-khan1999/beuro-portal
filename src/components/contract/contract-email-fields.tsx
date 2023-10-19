@@ -140,6 +140,27 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
             },
           },
           
+          {
+            containerClass: "mb-0",
+            label: {
+              text: "Attachments",
+              htmlFor: "fileUpload",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.dragAndDropFileField,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "fileUpload",
+              name: "fileUpload",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm.",
+              control,
+            },
+          },
+
+          
+          
         ],
       },
     },

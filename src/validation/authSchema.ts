@@ -14,6 +14,7 @@ import {
   ChangePasswordFields,
   employeePasswordResetFields,
   createEMployeeNewPasswordFields,
+  createInvoice,
 } from "@/enums/registration";
 import {
   CustomerDetailsFields,
@@ -396,6 +397,30 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
     [ContractEmailPreview.fileUpload]: yup
       .string()
       .required(translate("validationMessages.required")),
+  });
+};
+
+// Created invoice validation is here
+export const generateCreateInvoiceValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [createInvoice.totalAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.remainingAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.enterAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.paymentMethod]: yup
+      .string()
+      .required(translate("validation required")),
+    [createInvoice.markItRecuring]: yup
+      .string()
+      .required(translate("validation required")),
   });
 };
 

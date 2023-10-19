@@ -1,8 +1,27 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 
 const Page1 = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState(
+    "Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken"
+  );
+  const [tempText, setTempText] = useState(text);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    setText(tempText);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setTempText(text);
+  };
   return (
     <div className="px-[80px] flex flex-col bg-white">
       <div className="flex justify-between items-center mt-5 mb-[37px]">
@@ -32,15 +51,49 @@ const Page1 = () => {
         </div>
       </div>
 
-      <div className="flex gap-[10px] mb-[10px]">
-        <span className="text-xl font-semibold text-[#393939]">
-          Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken{" "}
-        </span>
-        <Image
-          src={writeIcon}
-          alt="writeIcon"
-          className="cursor-pointer h-[25px] w-[25px]"
-        />
+      <div
+        className={`mb-[10px] ${
+          isEditing
+            ? "border border-[#4B4B4B] p-2 rounded-md flex justify-between"
+            : ""
+        }`}
+      >
+        <div className="flex gap-[10px]">
+          {isEditing ? (
+            <input
+              type="text"
+              value={tempText}
+              onChange={(e) => setTempText(e.target.value)}
+              className="border border-[#4B4B4B] p-1 rounded-md outline-none border-none"
+            />
+          ) : (
+            <span className="text-xl font-semibold text-[#393939]">{text}</span>
+          )}
+          {!isEditing && (
+            <Image
+              src={writeIcon}
+              alt="writeIcon"
+              className="cursor-pointer h-[25px] w-[25px]"
+              onClick={handleEditClick}
+            />
+          )}
+        </div>
+        {isEditing && (
+          <div className="flex gap-[20px]">
+            <button
+              onClick={handleCancelClick}
+              className="border border-[#8F8F8F] px-[11px] py-[6px] rounded-[3px] text-[12px] font-normal"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSaveClick}
+              className=" bg-[#4A13E7] rounded-[3px]  px-[29px] py-[6px]   text-[#fff]"
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
       <div className="h-[3px] bg-black mb-[20px]"></div>
 

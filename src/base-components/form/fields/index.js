@@ -6,3 +6,4 @@ export { DatePicker } from './date-picker';
 export { CheckBox } from './checkbox/checkbox-field';
 export { DragAndDropFileField } from './fileUpload/drag-and-drop-file-field';
 export { SpanField } from './span-field';
+export { TextAreaField} from './text-area-field';

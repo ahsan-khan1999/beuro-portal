@@ -8,6 +8,7 @@ import {
 } from "@/types";
 import {
   InputField,
+  TextAreaField,
   PasswordField,
   SelectField,
   TelephoneInputField,
@@ -28,6 +29,7 @@ import { CustomerInputField } from "./fields/customer-input-field";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
+  textArea: TextAreaField,
   customerInput: CustomerInputField,
   creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
@@ -64,6 +66,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
 export function isFieldType(type: any): type is FieldType {
   return [
     "input",
+    "textArea",
     "creditCardNumberInput",
     "creditCardExpiryDateInput",
     "password",
