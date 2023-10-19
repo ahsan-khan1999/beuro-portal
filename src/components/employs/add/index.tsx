@@ -53,7 +53,7 @@ const AddEmploy = () => {
         </div>
       </Layout>
 
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 };

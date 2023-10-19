@@ -228,7 +228,7 @@ export default function Leads() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 }
