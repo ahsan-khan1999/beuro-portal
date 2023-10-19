@@ -1,10 +1,7 @@
 // import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
-import { InputProps, TextAreaProps } from "@/types";
+import { TextAreaProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { InputEmail } from "@/assets/svgs/components/inputEmail";
-import addtionalDetailImg from "@/assets/pngs/addtional_details.png";
 
 export const TextAreaField = ({
   id,
@@ -26,10 +23,11 @@ export const TextAreaField = ({
 
   return (
     <div className={` relative w-full flex items-center `}>
-      <input
+      <textarea
         onFocus={() => setInputFocus(true)}
         // onBlur={() => setInputFocus(false)}
         onBlurCapture={() => setInputFocus(false)}
+        rows={5}
         id={id}
         type={inputType}
         className={`${classes}`}

@@ -66,6 +66,45 @@ body {
   background: #555; /* Color of the scrollbar thumb on hover */
 }
 
+
+/* for ck editor logo disable */
+.ck-powered-by-balloon {
+  display: none !important;
+}
+.ck-toolbar {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-width: 2px !important;
+  border-color: #c4c4c4 !important;
+  min-height: 56px !important;
+  padding-inline: 20px !important;
+  padding-block: 9px !important;
+}
+
+/* .ck-editor {
+  max-width: 904px !important;
+} */
+
+.ck-content {
+  min-height: 260px !important;
+  max-height: 260px !important;
+  border-bottom-left-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+.ck-content ul,
+ol {
+  padding-inline: 0px !important;
+  margin-inline: 16px !important;
+}
+.ck-content p {
+  font-size: 14px !important;
+  color: #272727 !important;
+}
+.ck-focused {
+  border: 1px solid #ccced1 !important;
+  box-shadow: none !important;
+}
+
 .tabulator {
   border: none !important;
   border-radius: 6px !important;

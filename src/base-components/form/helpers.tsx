@@ -9,6 +9,7 @@ import {
 import {
   InputField,
   TextAreaField,
+  CkEditor,
   PasswordField,
   SelectField,
   TelephoneInputField,
@@ -30,6 +31,7 @@ import { CustomerInputField } from "./fields/customer-input-field";
 const fieldComponents: FieldComponents = {
   input: InputField,
   textArea: TextAreaField,
+  ckEditor: CkEditor,
   customerInput: CustomerInputField,
   creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
@@ -67,6 +69,7 @@ export function isFieldType(type: any): type is FieldType {
   return [
     "input",
     "textArea",
+    "ckEditor",
     "creditCardNumberInput",
     "creditCardExpiryDateInput",
     "password",

@@ -89,7 +89,7 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.textArea,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
               id: "description",

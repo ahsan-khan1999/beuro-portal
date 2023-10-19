@@ -56,7 +56,7 @@ const CustomCKEditor = ({
         ],
         shouldNotGroupWhenFull: true,
       },
-      placeholder: "Describe your item",
+      placeholder: "Describe your term here....",
     }}
   />
 );
