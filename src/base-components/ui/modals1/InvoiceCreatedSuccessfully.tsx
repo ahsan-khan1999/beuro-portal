@@ -33,7 +33,7 @@ const InvoiceCreatedSuccessfully = () => {
           </p>
 
           <button
-            onClick={() => router.push("/invoice/pdf-preview")}
+            onClick={() => router.push("/invoice/details-pdf-preview")}
             className="bg-[#4A13E7] cursor-pointer mt-[31px] mb-[59px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
             Preview PDF

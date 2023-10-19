@@ -6,7 +6,7 @@ import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
 import { Layout } from "@/layout";
 
-const PdfPriview = () => {
+const DetailsPdfPriview = () => {
   return (
     <Layout>
       <PdfCard />
@@ -25,4 +25,4 @@ const PdfPriview = () => {
   );
 };
 
-export default PdfPriview;
+export default DetailsPdfPriview;

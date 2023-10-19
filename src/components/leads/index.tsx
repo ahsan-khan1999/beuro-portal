@@ -14,6 +14,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function Leads() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -196,7 +197,7 @@ export default function Leads() {
   const { modal } = useAppSelector((state) => state.global);
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <AddNewNote />,
   };
 
   const renderModal = () => {
@@ -228,7 +229,7 @@ export default function Leads() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {/* {renderModal()} */}
+      {renderModal()}
     </>
   );
 }

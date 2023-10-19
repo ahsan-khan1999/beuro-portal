@@ -103,6 +103,11 @@ export enum ContractEmailPreview {
   fileUpload = "fileUpload",
 }
 
+// enum for add new note
+export enum AddNewNote {
+  noteMessage = "noteMessage",
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

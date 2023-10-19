@@ -7,9 +7,7 @@ import TableRowServices from "./table/TableRowServices";
 import TableHeadingServices from "./table/TableHeadingServices";
 import ServiceTopBar from "./table/ServiceTopBar";
 
-
 export default function Services() {
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<TRowServices[]>([]);
 
@@ -28,7 +26,6 @@ export default function Services() {
     return null;
   }
 
-
   const servicesData: TRowServices[] = [
     {
       id: "001",
@@ -36,10 +33,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -47,10 +44,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -58,10 +55,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
 
     {
@@ -70,10 +67,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -81,10 +78,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -92,10 +89,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -103,10 +100,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -114,10 +111,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -125,10 +122,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -136,10 +133,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -147,10 +144,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -158,11 +155,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
-
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -170,10 +166,10 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
     {
       id: "001",
@@ -181,13 +177,12 @@ export default function Services() {
       createdOn: parseCustomDate("25/08/2023"),
       price: {
         value: 300,
-        currency: "CHF"
+        currency: "CHF",
       },
       description: "We need to move office furniture to.....",
-      action: "edit"
+      action: "edit",
     },
   ];
-
 
   const totalItems = servicesData.length;
   const itemsPerPage = 10;
@@ -195,7 +190,9 @@ export default function Services() {
   useEffect(() => {
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(servicesData.slice(startIndex, startIndex + itemsPerPage));
+    setCurrentPageRows(
+      servicesData.slice(startIndex, startIndex + itemsPerPage)
+    );
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

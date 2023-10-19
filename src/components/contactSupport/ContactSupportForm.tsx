@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const ContactSupportForm = () => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "mt-[30px] ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     userContactSupport();
 

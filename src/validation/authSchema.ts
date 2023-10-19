@@ -27,6 +27,7 @@ import {
   AddNewLeadCustomer,
   LeadAdditionalDetails,
   ContractEmailPreview,
+  AddNewNote,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -430,6 +431,13 @@ export const generateCreateInvoiceValidationSchema = (translate: Function) => {
     [createInvoice.frequency]: yup
       .string()
       .required(translate("validation required")),
+  });
+};
+
+// Validation for Add new note
+export const generateAddNewNoteValidation = (translate: Function) => {
+  return yup.object().shape({
+    [AddNewNote.noteMessage]: yup.string().required("validation required"),
   });
 };
 
