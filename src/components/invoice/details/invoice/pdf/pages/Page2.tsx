@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import ClassicCKEditor from "@/base-components/ui/editor/ck-editor";
 import dynamic from "next/dynamic";
-import EmailHeader from "../EmailHeader";
-import EmailFooter from "../EmailFooter";
+import EmailHeader from "../PdfHeader";
+import EmailFooter from "../PdfFooter";
 
 const CustomCKEditor = dynamic(
   () => import("@/base-components/ui/editor/ck-editor"),

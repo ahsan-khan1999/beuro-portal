@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
-import EmailHeader from "../EmailHeader";
-import EmailFooter from "../EmailFooter";
+import EmailHeader from "../PdfHeader";
+import EmailFooter from "../PdfFooter";
 
 const Page1 = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -42,13 +42,13 @@ const Page1 = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <div>
+            <div className="flex gap-5">
               <span className="text-[#000] text-base font-medium">Email:</span>
               <span className="text-[#000] text-base font-medium">
                 karinsch242@gmail.com
               </span>
             </div>
-            <div>
+            <div className="flex gap-3">
               <span className="text-[#404040] text-base font-medium">
                 Phone:
               </span>

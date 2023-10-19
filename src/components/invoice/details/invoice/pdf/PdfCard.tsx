@@ -1,5 +1,5 @@
 import React from "react";
-import EmailCardLayout from "./EmailCardLayout";
+import PdfCardLayout from "./PdfCardLayout";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import postIcon from "@/assets/svgs/post_icon.svg";
@@ -7,9 +7,9 @@ import emailIcon from "@/assets/svgs/color_ful_input_email.svg";
 import downloadIcon from "@/assets/svgs/download_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 
-const EmailCard = () => {
+const PdfCard = () => {
   return (
-    <EmailCardLayout>
+    <PdfCardLayout>
       <>
         <div className="flex justify-between items-center">
           <div className="flex items-center">
@@ -65,15 +65,15 @@ const EmailCard = () => {
             <span className="text-[#4D4D4D] text-base font-normal">
               Contract Status:
             </span>
-            
+
             <div className="border-[#FE9244] border rounded-lg px-[8px] w-[68px]">
               <span className="text-[#FE9244] text-base font-medium">Open</span>
             </div>
           </div>
         </div>
       </>
-    </EmailCardLayout>
+    </PdfCardLayout>
   );
 };
 
-export default EmailCard;
+export default PdfCard;

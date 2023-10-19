@@ -1,5 +1,5 @@
 import React from "react";
-import EmailHeader from "../EmailHeader";
+import EmailHeader from "../PdfHeader";
 import Image from "next/image";
 import horizontalCuterIcon from "@/assets/svgs/horizontal_cuter_icon.svg";
 import verticleCuterIcon from "@/assets/svgs/veticle_cuter_icon.svg";

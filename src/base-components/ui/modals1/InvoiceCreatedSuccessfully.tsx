@@ -3,9 +3,11 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import leadCreatedIcon from "@/assets/svgs/created_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import EmailPriview from "@/components/invoice/details/invoice/emailPriview";
+import EmailPriview from "@/components/invoice/details/invoice/pdf";
+import { useRouter } from "next/router";
 
 const InvoiceCreatedSuccessfully = () => {
+  const router = useRouter();
   return (
     <>
       <BaseModal
@@ -31,7 +33,7 @@ const InvoiceCreatedSuccessfully = () => {
           </p>
 
           <button
-            onClick={() => <EmailPriview />}
+            onClick={() => router.push("/invoice/pdf-preview")}
             className="bg-[#4A13E7] cursor-pointer mt-[31px] mb-[59px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
             Preview PDF
