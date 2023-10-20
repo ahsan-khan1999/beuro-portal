@@ -1,5 +1,5 @@
 import React from "react";
-import EmploysDetails from "@/components/employs/details";
+import EmploysDetails from "@/components/employees/details";
 
 const index = () => {
   return (

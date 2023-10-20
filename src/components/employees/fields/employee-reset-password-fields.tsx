@@ -77,7 +77,6 @@ export const EmployeeResetPasswordFieldsFormField: GenerateRegistrationFormField
         },
       },
       {
-        
         label: null,
         field: {
           type: Field.button,

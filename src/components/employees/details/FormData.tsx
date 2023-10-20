@@ -1,31 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import editPswIcon from "@/assets/svgs/edit-password.svg";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { useDispatch } from "react-redux";
-import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
-import { useAppSelector } from "@/hooks/useRedux";
-import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
 
-const FormData = () => {
+const FormData = ({
+  handlePasswordReset,
+}: {
+  handlePasswordReset: () => void;
+}) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <PasswordReset />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
-  }, []);
 
   return (
     <>
@@ -36,7 +20,7 @@ const FormData = () => {
           </h2>
           <div className="flex gap-5">
             <button
-              onClick={() => router.push("/employs/edit")}
+              onClick={() => handlePasswordReset()}
               className="flex items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4  w-fit whitespace-nowrap"
             >
               <Image
@@ -47,7 +31,7 @@ const FormData = () => {
               Edit Password
             </button>
             <button
-              onClick={() => router.push("/employs/edit")}
+              onClick={() => router.push("/employees/edit")}
               className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
             >
               <svg
@@ -134,7 +118,6 @@ const FormData = () => {
           </div>
         </div>
       </FormCard>
-      {renderModal()}
     </>
   );
 };

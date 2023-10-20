@@ -1,7 +1,14 @@
+import { contractTableTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const TableRows = ({ dataToAdd }) => {
+const TableRows = ({
+  dataToAdd,
+  openModal,
+}: {
+  dataToAdd: contractTableTypes;
+  openModal: (item: contractTableTypes) => void;
+}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
@@ -51,6 +58,7 @@ const TableRows = ({ dataToAdd }) => {
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">
               <Image
+                onClick={() => openModal(item)}
                 src={item.editNote}
                 alt="edit_note_icon"
                 className="cursor-pointer"

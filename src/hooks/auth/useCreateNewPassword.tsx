@@ -5,7 +5,7 @@ import { generateEmployeeNewPasswordValidationSchema } from "@/validation/authSc
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { EmployeeCreateNewPasswordFieldsFormField } from "@/components/employs/fields/employee-create-password-fields";
+import { EmployeeCreateNewPasswordFieldsFormField } from "@/components/employees/fields/employee-create-password-fields";
 
 export default function useCreateNewPassword() {
   const router = useRouter();

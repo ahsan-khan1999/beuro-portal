@@ -17,7 +17,7 @@ const ContactSupportForm = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <RequestSubmitted />,
+    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted />,
   };
 
   const renderModal = () => {
@@ -25,9 +25,9 @@ const ContactSupportForm = () => {
   };
 
   useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+    dispatch(updateModalType(ModalType.REQUEST_SUBMITTED));
   }, []);
-  
+
   return (
     <>
       <FormCard>

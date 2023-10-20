@@ -1,5 +1,5 @@
 import React from 'react'
-import Employs from '@/components/employs'
+import Employs from '@/components/employees'
 
 const index = () => {
   return (

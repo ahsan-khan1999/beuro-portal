@@ -23,7 +23,7 @@ const TableRowEmployees = ({ employsData }) => {
 
             <span className="px-6 py-4 bg-white ">
               <div
-                onClick={() => router.push("/employs/details")}
+                onClick={() => router.push("/employees/details")}
                 className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
               >
                 <svg

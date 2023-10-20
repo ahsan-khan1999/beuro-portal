@@ -5,7 +5,7 @@ import { generateEmployeePasswordResetValidationSchema } from "@/validation/auth
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { EmployeeResetPasswordFieldsFormField } from "@/components/employs/fields/employee-reset-password-fields";
+import { EmployeeResetPasswordFieldsFormField } from "@/components/employees/fields/employee-reset-password-fields";
 
 export default function useModalPasswordReset() {
   const router = useRouter();
