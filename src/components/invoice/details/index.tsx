@@ -20,6 +20,8 @@ const InvoiceDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.INVOICE_CREATED]: <InvoiceCreatedSuccessfully />,
   };

@@ -9,6 +9,11 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/hooks/useRedux";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function Invoices() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -180,16 +185,36 @@ export default function Invoices() {
   const totalItems = dataToAdd.length;
   const itemsPerPage = 10;
 
-  // const dispatch = useDispatch();
-  // const { modal } = useAppSelector((state) => state.global);
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
 
-  // const MODAL_CONFIG: ModalConfigType = {
-  //   [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
-  // };
+  // Function for close the modal
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
 
-  // const renderModal = () => {
-  //   return MODAL_CONFIG[modal.type] || null;
-  // };
+  // Function for handling the modal for exiting notes
+  const handleNotes = (item: InvoiceTableRowTypes) => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+  };
+
+  // function for hnadling the add note
+  const handleAddNote = () => {
+    dispatch(updateModalType(ModalType.ADD_NOTE));
+  };
+
+  // METHOD FOR HANDLING THE MODALS
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+    ),
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
 
   useEffect(() => {
     // Update rows for the current page
@@ -207,7 +232,7 @@ export default function Invoices() {
         <TableFunctions />
         <TableLayout>
           <TableHeading />
-          <TableRows dataToAdd={currentPageRows} />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}
@@ -215,6 +240,8 @@ export default function Invoices() {
           onPageChange={handlePageChange}
         />
       </Layout>
+
+      {renderModal()}
     </>
   );
 }

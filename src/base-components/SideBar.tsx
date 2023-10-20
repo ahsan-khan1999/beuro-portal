@@ -31,7 +31,7 @@ const SideBar = () => {
     {
       icon: "Customers",
       title: "Customers",
-      pathname: "/dashboard",
+      pathname: "/customers",
       role: [0, 1],
     },
     {
@@ -54,7 +54,7 @@ const SideBar = () => {
     {
       icon: "Offers",
       title: "Offers",
-      pathname: "/dashboard",
+      pathname: "/offers",
       role: [0, 1],
       inner: [
         {
@@ -71,7 +71,7 @@ const SideBar = () => {
     {
       icon: "Contracts",
       title: "Contracts",
-      pathname: "/dashboard",
+      pathname: "/contract",
       role: [0, 1],
       inner: [
         {
@@ -88,7 +88,7 @@ const SideBar = () => {
     {
       icon: "Invoices",
       title: "Invoices",
-      pathname: "/dashboard",
+      pathname: "/invoices",
       role: [0, 1],
       inner: [
         {
@@ -105,13 +105,13 @@ const SideBar = () => {
     {
       icon: "Services",
       title: "Services",
-      pathname: "/dashboard",
+      pathname: "/services",
       role: [0, 1],
     },
     {
       icon: "Employees",
       title: "Employees",
-      pathname: "/dashboard",
+      pathname: "/employees",
       role: [0, 1],
     },
     {
@@ -123,7 +123,7 @@ const SideBar = () => {
     {
       icon: "MailTracker",
       title: "Mail Tracker",
-      pathname: "/dashboard",
+      pathname: "/email-tracker",
       role: [0, 1],
       margin: "mb-6",
     },
@@ -149,7 +149,7 @@ const SideBar = () => {
     {
       icon: "ContactSupports",
       title: "Contact Supports",
-      pathname: "/contact-supports",
+      pathname: "/contact-support",
       role: [0, 1],
     },
   ];
@@ -177,7 +177,7 @@ const SideBar = () => {
               <div key={index}>
                 {!item.inner ? (
                   <button
-                    // onClick={()=>router.push(item.pathname)}
+                    onClick={()=>router.push(item.pathname)}
                     className={`flex items-center px-3 py-2 w-full ${
                       router.pathname === item.pathname &&
                       "bg-primary rounded-lg"
@@ -210,7 +210,7 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
+                        isOpen == index ? setIsOpen(null) || router.push(item.pathname): setIsOpen(index) || router.push(item.pathname);
                       }}
                       className={`flex  justify-between items-center px-3 py-2 w-full ${
                         router.pathname === item.pathname &&

@@ -1,7 +1,14 @@
+import { InvoiceTableRowTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const TableRows = ({ dataToAdd }) => {
+const TableRows = ({
+  dataToAdd,
+  openModal,
+}: {
+  dataToAdd: InvoiceTableRowTypes;
+  openModal: (item: InvoiceTableRowTypes) => void;
+}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
@@ -67,6 +74,7 @@ const TableRows = ({ dataToAdd }) => {
             <span className="px-6 py-4 flex justify-center items-center  bg-white ">
               <Image
                 src={item.editNote}
+                onClick={() => openModal(item)}
                 alt="edit_img_icon"
                 className="cursor-pointer"
               />
