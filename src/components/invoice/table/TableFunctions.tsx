@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 
 interface Status {
   open: boolean;
-  confirmed: boolean;
-  cancelled: boolean;
+  overdue: boolean;
+  paid: boolean;
 }
 const TableFunctions = () => {
   const [filter, setFilter] = useState<Status>({
     open: false,
-    confirmed: false,
-    cancelled: false,
+    overdue: false,
+    paid: false,
   });
   function onInputChange(text: string) {}
 
@@ -22,7 +22,7 @@ const TableFunctions = () => {
   const router = useRouter();
   return (
     <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">Contracts</h1>
+      <h1 className="text-xl text-[#222B45] ">Invoice</h1>
       <div className="flex items-center ">
         <div className="flex items-center space-x-4">
           <button
@@ -65,11 +65,11 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("close", !filter.confirmed)}
+            onClick={() => handleButtonClick("close", !filter.overdue)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
-            Confirmed
-            {filter.confirmed ? (
+            Overdue
+            {filter.overdue ? (
               <svg
                 className="absolute top-1 right-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,11 +104,11 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("expired", !filter.cancelled)}
+            onClick={() => handleButtonClick("expired", !filter.paid)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
-            Cancelled
-            {filter.cancelled ? (
+            Paid
+            {filter.paid ? (
               <svg
                 className="absolute top-1 right-1"
                 xmlns="http://www.w3.org/2000/svg"

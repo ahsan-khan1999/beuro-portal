@@ -6,7 +6,7 @@ import editNote from "@/assets/svgs/Edit_note.svg";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { InvoiceTableRowTypes } from "@/types";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import TableFunctions from "./TableFunctions";
+import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 

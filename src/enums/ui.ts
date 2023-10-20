@@ -21,7 +21,9 @@ export enum ModalType {
   LEAD_CREATED,
   PASSWORD_RESET,
   NEW_PASSWORD,
-  INVOICE_CREATED
+  INVOICE_CREATED,
+  EXISTING_NOTES,
+  ADD_NOTE
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

@@ -1,41 +1,63 @@
-import { TableRowTypes } from "@/types";
+import { OffersTableRowTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const TableRowLeads = ({
-  dataToAdd,
-  openModal,
-}: {
-  dataToAdd: TableRowTypes;
-  openModal: (item: TableRowTypes) => void;
-}) => {
+const TableRows = ({ dataToAdd, openModal }: {dataToAdd: OffersTableRowTypes; openModal: (item: OffersTableRowTypes) => void;}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
             key={index}
-            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(150px,_100%)_minmax(200px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
-            <span className="px-6 py-4 bg-white  ">{item.name}</span>
-            <span className="px-6 py-4 bg-white ">{item.email}</span>
-            <span className="px-6 py-4 bg-white ">{item.phone}</span>
-            <span className="px-6 py-4 bg-white ">{item.date}</span>
-            <span className="px-6 py-4 bg-white ">{item.location}</span>
+            <span className="px-6 py-4 bg-white  ">{item.customer}</span>
+            <span className="px-6 py-4 bg-white ">{item.offerTitle}</span>
+            <span className="px-6 py-4 bg-white ">{item.totalPrice}</span>
+            <span className="px-6 py-4 bg-white ">
+              {item.createdOn.toLocaleDateString()}
+            </span>
+            <span className="px-6 py-4 bg-white ">
+              <div
+                className={`${
+                  item.email.includes("Draft")
+                    ? "bg-[#FE9244]"
+                    : item.email.includes("Send")
+                    ? "bg-[#4A13E7]"
+                    : "bg-[#FF0000]"
+                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+              >
+                {item.email}
+              </div>
+            </span>
+
+            <span className="px-6 py-4 bg-white ">
+              <div
+                className={`${
+                  item.payment.includes("Cash") ? "bg-[#45C769]" : ""
+                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+              >
+                {item.payment}
+              </div>
+            </span>
+
             <span className="px-6 py-4 bg-white ">
               <div
                 className={`${
                   item.status.includes("Open")
-                    ? "bg-primary"
-                    : item.status.includes("Close")
-                    ? "bg-[#FE9244]"
-                    : "bg-[#FF376F]"
+                    ? "bg-[#4A13E7]"
+                    : item.status.includes("Signed")
+                    ? "bg-[#45C769]"
+                    : item.status.includes("Expired")
+                    ? "bg-[#FF376F]"
+                    : "bg-[#FF0000]"
                 } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
                 {item.status}
               </div>
             </span>
+
             <span className="px-6 py-4 flex justify-center items-center  bg-white ">
               <Image
                 src={item.editImg}
@@ -45,10 +67,10 @@ const TableRowLeads = ({
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">
               <Image
+                onClick={() => openModal(item)}
                 src={item.editNote}
                 alt="edit_note_icon"
                 className="cursor-pointer"
-                onClick={() => openModal(item)}
               />
             </span>
 
@@ -74,4 +96,4 @@ const TableRowLeads = ({
   );
 };
 
-export default TableRowLeads;
+export default TableRows;
