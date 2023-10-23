@@ -32,8 +32,16 @@ const EmailCard = () => {
               </span>
             </div>
 
-            <Image src={downloadIcon} alt="downloadIcon" />
-            <Image src={printerIcon} alt="printerIcon" />
+            <Image
+              src={downloadIcon}
+              alt="downloadIcon"
+              className="cursor-pointer"
+            />
+            <Image
+              src={printerIcon}
+              alt="printerIcon"
+              className="cursor-pointer"
+            />
           </div>
         </div>
         <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -65,7 +73,7 @@ const EmailCard = () => {
             <span className="text-[#4D4D4D] text-base font-normal">
               Contract Status:
             </span>
-            
+
             <div className="border-[#FE9244] border rounded-lg px-[8px] w-[68px]">
               <span className="text-[#FE9244] text-base font-medium">Open</span>
             </div>
