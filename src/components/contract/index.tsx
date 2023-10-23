@@ -12,6 +12,12 @@ import TableRows from "./table/TableRows";
 import EmailForm from "./EmailForm";
 import EmailPriview from "./emailPriview";
 import CkEditor from "@/base-components/ui/editor/ck-editor";
+import { useDispatch } from "react-redux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { useAppSelector } from "@/hooks/useRedux";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function Contract() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -193,23 +199,57 @@ export default function Contract() {
     setCurrentPage(page);
   };
 
+
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  // Function for close the modal
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  // Function for handling the modal for exiting notes
+  const handleNotes = (item: contractTableTypes) => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+  };
+
+  // function for hnadling the add note
+  const handleAddNote = () => {
+    dispatch(updateModalType(ModalType.ADD_NOTE));
+  };
+
+  // METHOD FOR HANDLING THE MODALS
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+    ),
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
   return (
     <>
       <Layout>
-        {/* <TableFunctions />
+        <TableFunctions />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows} />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes}/>
         </TableLayout>
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
-        /> */}
+        />
 
-        {/* <EmailForm /> */}
-        <EmailPriview />
+        {/* <EmailForm />
+        <EmailPriview /> */}
       </Layout>
+
+      {renderModal()}
     </>
   );
 }

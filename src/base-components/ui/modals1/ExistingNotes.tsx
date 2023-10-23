@@ -4,11 +4,17 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import addNewNote from "@/assets/svgs/add_new_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
-const ExistingNotes = () => {
+const ExistingNotes = ({
+  handleAddNote,
+  onClose,
+}: {
+  handleAddNote: () => void;
+  onClose: () => void;
+}) => {
   return (
     <>
       <BaseModal
-        onClose={() => false}
+        onClose={onClose}
         containerClassName="max-w-[624px] min-h-auto max-h-fit"
       >
         <div className="relative flex flex-col ">
@@ -16,12 +22,16 @@ const ExistingNotes = () => {
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
+            onClick={onClose}
           />
           <div className="flex justify-between items-center mb-[19px] mt-[30px] mx-[38px]">
             <p className="text-[24px] leading-6 font-medium text-[#000]">
               Notes
             </p>
-            <div className="flex justify-between items-center gap-[10px] cursor-pointer">
+            <div
+              className="flex justify-between items-center gap-[10px] cursor-pointer"
+              onClick={handleAddNote}
+            >
               <Image src={addNewNote} alt="request_submitted" />
               <p className="text-[#4B4B4B] text-base">Add New Note</p>
             </div>

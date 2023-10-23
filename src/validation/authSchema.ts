@@ -14,6 +14,7 @@ import {
   ChangePasswordFields,
   employeePasswordResetFields,
   createEMployeeNewPasswordFields,
+  createInvoice,
 } from "@/enums/registration";
 import {
   CustomerDetailsFields,
@@ -26,6 +27,7 @@ import {
   AddNewLeadCustomer,
   LeadAdditionalDetails,
   ContractEmailPreview,
+  AddNewNote,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -396,6 +398,46 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
     [ContractEmailPreview.fileUpload]: yup
       .string()
       .required(translate("validationMessages.required")),
+  });
+};
+
+// Created invoice validation is here
+export const generateCreateInvoiceValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [createInvoice.totalAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.remainingAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.enterAmount]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.paymentMethod]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.markItRecuring]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.date]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [createInvoice.frequency]: yup
+      .string()
+      .required(translate("validation required")),
+  });
+};
+
+// Validation for Add new note
+export const generateAddNewNoteValidation = (translate: Function) => {
+  return yup.object().shape({
+    [AddNewNote.noteMessage]: yup.string().required("validation required"),
   });
 };
 

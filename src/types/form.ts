@@ -13,9 +13,11 @@ import {
   UseFormSetError,
 } from "react-hook-form";
 import { ButtonProps } from "./ui";
-import { CardType, Field, Salutation } from "@/enums";
+import { CardType, Salutation } from "@/enums";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
+import React from "react";
+import { Field } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -39,8 +41,35 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
   svg?: string;
-  img?:boolean;
+  img?: boolean;
   alt: string;
+}
+
+// textarea added
+export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
+  inputType: "text";
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
+// ckEditor is added
+export interface CKEditorProps extends BaseFieldProps<Field.ckEditor> {
+  value?: string;
+  control: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+}
+
+
+// CKEditorBoxProps added 
+export interface CKEditorBoxProps {
+  id: string;
+  data?: string;
+  field: ControllerRenderProps<FieldValues, string>;
+  trigger?: UseFormTrigger<FieldValues>;
+  name?: string;
 }
 
 export interface CreditCardInputProps
@@ -167,6 +196,8 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
+  | Field.textArea
+  | Field.ckEditor
   | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
@@ -182,6 +213,8 @@ export type FieldType =
   | Field.link;
 export type FieldProps =
   | InputProps
+  | TextAreaProps
+  | CkEditorProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
@@ -204,6 +237,8 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  textArea: React.FC<TextAreaProps>;
+  ckEditor: React.FC<CkEditorProps>;
   customerInput: React.FC<InputProps>;
   creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;

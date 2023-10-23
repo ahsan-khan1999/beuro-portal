@@ -1,7 +1,14 @@
+import { TableRowTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const TableRowLeads = ({ dataToAdd }) => {
+const TableRowLeads = ({
+  dataToAdd,
+  openModal,
+}: {
+  dataToAdd: TableRowTypes;
+  openModal: (item: TableRowTypes) => void;
+}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
@@ -41,6 +48,7 @@ const TableRowLeads = ({ dataToAdd }) => {
                 src={item.editNote}
                 alt="edit_note_icon"
                 className="cursor-pointer"
+                onClick={() => openModal(item)}
               />
             </span>
 

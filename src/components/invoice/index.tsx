@@ -1,191 +1,184 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
-import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
-import TableRowLeads from "@/components/leads/TableRowLeads";
-import editImage from "@/assets/svgs/edit_image.svg";
 import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowTypes } from "@/types";
-// import TableFunctions from "./TableFunctions";
+import { InvoiceTableRowTypes } from "@/types";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import TableFunctions from "./table/TableFunctions";
+import TableHeading from "./table/TableHeading";
+import TableRows from "./table/TableRows";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function Invoices() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<
+    InvoiceTableRowTypes[]
+  >([]);
 
-  const dataToAdd: TableRowTypes[] = [
+  const dataToAdd: InvoiceTableRowTypes[] = [
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "300",
+        finalValue: "500",
+      },
+      status: "1 Overdue",
       editNote: editNote,
     },
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "2/2 Sent",
+      paid: {
+        initialValue: "500",
+        finalValue: "300",
+      },
+      status: "Paid",
       editNote: editNote,
     },
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "200",
+        finalValue: "500",
+      },
+      status: "Pending",
       editNote: editNote,
     },
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/3 Sent",
+      paid: {
+        initialValue: "500",
+        finalValue: "200",
+      },
+      status: "Paid",
       editNote: editNote,
     },
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "200",
+        finalValue: "500",
+      },
+      status: "1 Overdue",
       editNote: editNote,
     },
     {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-      editImg: editImage,
-      editNote: editNote,
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-      editImg: editImage,
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "2/2 Sent",
+      paid: {
+        initialValue: "500",
+        finalValue: "300",
+      },
+      status: "Paid",
       editNote: editNote,
     },
 
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "200",
+        finalValue: "500",
+      },
+      status: "Pending",
+      editNote: editNote,
+    },
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "300",
+        finalValue: "500",
+      },
+      status: "1 Overdue",
+      editNote: editNote,
+    },
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "2/2 Sent",
+      paid: {
+        initialValue: "500",
+        finalValue: "300",
+      },
+      status: "Paid",
+      editNote: editNote,
+    },
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "200",
+        finalValue: "500",
+      },
+      status: "Pending",
+      editNote: editNote,
+    },
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/3 Sent",
+      paid: {
+        initialValue: "500",
+        finalValue: "200",
+      },
+      status: "Paid",
+      editNote: editNote,
+    },
+    {
+      id: "R-2000",
+      customer: "Rahal Ahmed",
+      invoiceTitle: "Umzug Cleaning Service",
+      totalPrice: "1000 CHF",
+      emailStatus: "1/2 Sent",
+      paid: {
+        initialValue: "200",
+        finalValue: "500",
+      },
+      status: "1 Overdue",
+      editNote: editNote,
+    },
     // Add more rows as needed
   ];
 
@@ -195,8 +188,28 @@ export default function Invoices() {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  // Function for close the modal
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  // Function for handling the modal for exiting notes
+  const handleNotes = (item: InvoiceTableRowTypes) => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+  };
+
+  // function for hnadling the add note
+  const handleAddNote = () => {
+    dispatch(updateModalType(ModalType.ADD_NOTE));
+  };
+
+  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+    ),
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -204,7 +217,6 @@ export default function Invoices() {
   };
 
   useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
@@ -219,8 +231,8 @@ export default function Invoices() {
       <Layout>
         <TableFunctions />
         <TableLayout>
-          <TableHeadingLeads />
-          <TableRowLeads dataToAdd={currentPageRows} />
+          <TableHeading />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}
@@ -228,6 +240,7 @@ export default function Invoices() {
           onPageChange={handlePageChange}
         />
       </Layout>
+
       {renderModal()}
     </>
   );

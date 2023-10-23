@@ -112,51 +112,34 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
         ],
       },
     },
-
     {
-      containerClass: "mt-[22px]",
+      containerClass: "mb-0 mt-[22px]",
+      label: {
+        text: "Your Message",
+        htmlFor: "message",
+        className: "mb-[10px]",
+      },
       field: {
-        type: Field.div,
-        className: "w-full",
-        children: [
-          {
-            containerClass: "mb-0",
-            label: {
-              text: "Your Message",
-              htmlFor: "message",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "text",
-              id: "message",
-              name: "message",
-              placeholder: "Type your message here",
-              register,
-            },
-          },
-        ],
+        type: Field.textArea,
+        className: "!p-4 !border-dark focus:!border-primary",
+        inputType: "text",
+        id: "message",
+        name: "message",
+        placeholder: "Type your message here",
+        register,
       },
     },
 
     {
+      containerClass: "mt-[30px]",
       field: {
-        type: Field.div,
-        children: [
-          {
-            containerClass: "mt-[30px]",
-            field: {
-              type: Field.button,
-              text: "Submit Request",
-              inputType: "button",
-              className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-              loading,
-              onClick: handleRequestModal,
-            },
-          },
-        ],
+        type: Field.button,
+        text: "Submit Request",
+        inputType: "button",
+        className:
+          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        loading,
+        onClick: handleRequestModal,
       },
     },
   ];

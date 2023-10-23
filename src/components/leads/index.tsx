@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 
 export default function Leads() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -195,8 +197,28 @@ export default function Leads() {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  // Function for close the modal
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  // Function for handling the modal for exiting notes
+  const handleNotes = (item: TableRowTypes) => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+  };
+
+  // function for hnadling the add note
+  const handleAddNote = () => {
+    dispatch(updateModalType(ModalType.ADD_NOTE));
+  };
+
+  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+    ),
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -204,7 +226,6 @@ export default function Leads() {
   };
 
   useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
@@ -220,7 +241,7 @@ export default function Leads() {
         <TableFunctions />
         <TableLayout>
           <TableHeadingLeads />
-          <TableRowLeads dataToAdd={currentPageRows} />
+          <TableRowLeads dataToAdd={currentPageRows} openModal={handleNotes} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

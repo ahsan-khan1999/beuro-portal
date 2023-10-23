@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const ContactSupportForm = () => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "mt-[30px] ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     userContactSupport();
 
@@ -17,7 +17,7 @@ const ContactSupportForm = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <RequestSubmitted />,
+    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted />,
   };
 
   const renderModal = () => {
@@ -25,8 +25,9 @@ const ContactSupportForm = () => {
   };
 
   useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+    dispatch(updateModalType(ModalType.REQUEST_SUBMITTED));
   }, []);
+
   return (
     <>
       <FormCard>
@@ -43,7 +44,7 @@ const ContactSupportForm = () => {
           className={`${defaultClassName}`}
         />
       </FormCard>
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 };

@@ -52,53 +52,38 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
     },
 
     {
+      containerClass: "max-w-[260px]",
+      label: {
+        text: "Price",
+        htmlFor: "price",
+        className: "mb-[10px] ",
+      },
       field: {
-        type: Field.div,
-        className: "w-full max-w-[260px]",
-        children: [
-          {
-            label: {
-              text: "Price",
-              htmlFor: "price",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "price",
-              name: "price",
-              placeholder: "100CHF",
-              register,
-            },
-          },
-        ],
+        type: Field.input,
+        className: "!p-4 !border-dark focus:!border-primary ",
+        inputType: "text",
+        id: "price",
+        name: "price",
+        placeholder: "100CHF",
+        register,
       },
     },
 
     {
+      containerClass: "mb-0 mt-5",
+      label: {
+        text: "Description",
+        htmlFor: "description",
+        className: "mb-[10px]",
+      },
       field: {
-        type: Field.div,
-        className: "w-full",
-        children: [
-          {
-            containerClass: "mb-0",
-            label: {
-              text: "Description",
-              htmlFor: "description",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "description",
-              name: "description",
-              placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
-              register,
-            },
-          },
-        ],
+        type: Field.textArea,
+        className: "!p-4 !border-dark focus:!border-primary ",
+        inputType: "text",
+        id: "description",
+        name: "description",
+        placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
+        register,
       },
     },
 

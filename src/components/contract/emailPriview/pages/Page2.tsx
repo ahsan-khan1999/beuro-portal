@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import ClassicCKEditor from "@/base-components/ui/editor/ck-editor";
 import dynamic from "next/dynamic";
+import EmailHeader from "../EmailHeader";
+import EmailFooter from "../EmailFooter";
 
 const CustomCKEditor = dynamic(
   () => import("@/base-components/ui/editor/ck-editor"),
@@ -126,100 +128,108 @@ const Page2 = () => {
   };
 
   return (
-    <div className="px-[80px] flex flex-col bg-white">
-      <div className="flex justify-between items-center mt-5 mb-[50px]">
-        <div className="flex flex-col gap-[4px]">
-          <span className="text-[#000] text-base font-medium">
-            Frau Natalie Semeli
-          </span>
-          <span className="text-[#000] text-base font-medium">Erlenweg 8 </span>
-          <span className="text-[#000] text-base font-medium">
-            3294 Buren an der Aare
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <div>
-            <span className="text-[#000] text-base font-medium">Email:</span>
+    <>
+      <EmailHeader />
+      <div className="px-[80px] flex flex-col bg-white">
+        <div className="flex justify-between items-center mt-5 mb-[50px]">
+          <div className="flex flex-col gap-[4px]">
             <span className="text-[#000] text-base font-medium">
-              karinsch242@gmail.com
+              Frau Natalie Semeli
+            </span>
+            <span className="text-[#000] text-base font-medium">
+              Erlenweg 8
+            </span>
+            <span className="text-[#000] text-base font-medium">
+              3294 Buren an der Aare
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-5">
+              <span className="text-[#000] text-base font-medium">Email:</span>
+              <span className="text-[#000] text-base font-medium">
+                karinsch242@gmail.com
+              </span>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-[#404040] text-base font-medium">
+                Phone:
+              </span>
+              <span className="text-[#000] text-base font-medium">
+                031 350 15 15
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="h-[3px] bg-black mb-[35px]"></div>
+
+        {isEditing ? (
+          ""
+        ) : (
+          <div className="flex gap-[10px]">
+            <span className="text-[#000] text-base font-medium">
+              Vertragsabschluss:
+            </span>
+
+            <Image
+              onClick={handleEditClick}
+              src={writeIcon}
+              alt="writeIcon"
+              className="cursor-pointer h-[25px] w-[25px]"
+            />
+          </div>
+        )}
+
+        {isEditing ? (
+          <div className="mb-4">
+            <CustomCKEditor
+              // editor={ClassicEditor}
+              data={editedText}
+              onChange={(event, editor) => {
+                setEditedText(editor.getData());
+              }}
+            />
+          </div>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: editedText }}></div>
+        )}
+
+        {isEditing && (
+          <div className="flex gap-[19px] justify-end mt-4">
+            <button
+              onClick={handleCancelClick}
+              className="border border-[#C7C7C7] w-[92px] px-4 py-[10px] rounded-md text-[#1E1E1E] text-base font-normal "
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSaveClick}
+              className="border bg-[#4A13E7] w-[152px] px-4 py-[10px] rounded-md text-[#fff] text-base font-normal "
+            >
+              Save
+            </button>
+          </div>
+        )}
+
+        <p className="mt-[30px] mb-[78px] text-[18px] text-black font-medium">
+          I share the contract with you.
+        </p>
+
+        <div className="grid grid-cols-2 gap-[100px] mb-[50px]">
+          <div>
+            <hr className="mb-[11px]" />
+            <span className="text-base text-black font-normal ">
+              Place - Date
             </span>
           </div>
           <div>
-            <span className="text-[#404040] text-base font-medium">Phone:</span>
-            <span className="text-[#000] text-base font-medium">
-              031 350 15 15
-            </span>
+            <hr className="mb-[11px]" />
+            <span className="text-base text-black font-normal">Signature</span>
           </div>
         </div>
       </div>
-      <div className="h-[3px] bg-black mb-[35px]"></div>
-
-      {isEditing ? (
-        ""
-      ) : (
-        <div className="flex gap-[10px]">
-          <span className="text-[#000] text-base font-medium">
-            Vertragsabschluss:
-          </span>
-
-          <Image
-            onClick={handleEditClick}
-            src={writeIcon}
-            alt="writeIcon"
-            className="cursor-pointer h-[25px] w-[25px]"
-          />
-        </div>
-      )}
-
-      {isEditing ? (
-        <div className="mb-4">
-          <CustomCKEditor
-            // editor={ClassicEditor}
-            data={editedText}
-            onChange={(event, editor) => {
-              setEditedText(editor.getData());
-            }}
-          />
-        </div>
-      ) : (
-        <div dangerouslySetInnerHTML={{ __html: editedText }}></div>
-      )}
-
-      {isEditing && (
-        <div className="flex gap-[19px] justify-end mt-4">
-          <button
-            onClick={handleCancelClick}
-            className="border border-[#C7C7C7] w-[92px] px-4 py-[10px] rounded-md text-[#1E1E1E] text-base font-normal "
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSaveClick}
-            className="border bg-[#4A13E7] w-[152px] px-4 py-[10px] rounded-md text-[#fff] text-base font-normal "
-          >
-            Save
-          </button>
-        </div>
-      )}
-
-      <p className="mt-[30px] mb-[78px] text-[18px] text-black font-medium">
-        I share the contract with you.
-      </p>
-
-      <div className="grid grid-cols-2 gap-[100px] mb-[50px]">
-        <div>
-          <hr className="mb-[11px]" />
-          <span className="text-base text-black font-normal ">
-            Place - Date
-          </span>
-        </div>
-        <div>
-          <hr className="mb-[11px]" />
-          <span className="text-base text-black font-normal">Signature</span>
-        </div>
-      </div>
-    </div>
+      <EmailFooter />
+    </>
   );
 };
 

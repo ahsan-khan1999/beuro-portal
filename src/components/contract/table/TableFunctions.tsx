@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 
 interface Status {
   open: boolean;
-  close: boolean;
-  expired: boolean;
+  confirmed: boolean;
+  cancelled: boolean;
 }
 const TableFunctions = () => {
   const [filter, setFilter] = useState<Status>({
     open: false,
-    close: false,
-    expired: false,
+    confirmed: false,
+    cancelled: false,
   });
   function onInputChange(text: string) {}
 
@@ -65,11 +65,11 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("close", !filter.close)}
+            onClick={() => handleButtonClick("close", !filter.confirmed)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Confirmed
-            {filter.close ? (
+            {filter.confirmed ? (
               <svg
                 className="absolute top-1 right-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,11 +104,11 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("expired", !filter.expired)}
+            onClick={() => handleButtonClick("expired", !filter.cancelled)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Cancelled
-            {filter.expired ? (
+            {filter.cancelled ? (
               <svg
                 className="absolute top-1 right-1"
                 xmlns="http://www.w3.org/2000/svg"

@@ -47,7 +47,7 @@ const AddLeadAdditionalDetails = () => {
           className={`${defaultClassName}`}
         />
       </FormCard>
-      {renderModal()}
+      {/* {renderModal()} */}
     </>
   );
 };

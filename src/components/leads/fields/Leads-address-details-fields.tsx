@@ -75,7 +75,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.textArea,
               className: commonInputClasses,
               inputType: "text",
               id: "description",
@@ -128,7 +128,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.textArea,
               className: commonInputClasses,
               inputType: "text",
               id: "description",
