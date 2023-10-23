@@ -7,6 +7,8 @@ import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import LeadsDetailsImages from "@/components/leads/LeadsDetailsImages";
+import Activity from "./activity";
+import SwitchedComp from "./SwitchedComp";
 
 const OffersDetailsData = () => {
   const [tabComp, setTabComp] = useState("Activity");
@@ -72,7 +74,7 @@ const OffersDetailsData = () => {
     2: <ServiceDetailsData />,
     3: <AdditionalDetails />,
   };
-  
+
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
@@ -87,8 +89,8 @@ const OffersDetailsData = () => {
           />
         ))}
 
-        <div>
-          <LeadsDetailsImages />
+        <div className="mt-[14px]">
+          <SwitchedComp />
         </div>
       </div>
 
