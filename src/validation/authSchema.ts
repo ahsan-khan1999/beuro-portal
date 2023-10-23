@@ -28,6 +28,8 @@ import {
   LeadAdditionalDetails,
   ContractEmailPreview,
   AddNewNote,
+  EditOfferDetails,
+  OfferAdditionalDetails,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -438,6 +440,75 @@ export const generateCreateInvoiceValidationSchema = (translate: Function) => {
 export const generateAddNewNoteValidation = (translate: Function) => {
   return yup.object().shape({
     [AddNewNote.noteMessage]: yup.string().required("validation required"),
+  });
+};
+
+// Validation for edit details
+export const generateEditOfferDetailsValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [EditOfferDetails.selectCustomer]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.customerName]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.email]: yup
+      .string()
+      .email()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.offerTitle]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.offerNumber]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.customerType]: yup
+      .string()
+      .required(translate("validation required")),
+
+    [EditOfferDetails.phoneNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+
+    [EditOfferDetails.mobileNumber]: yup
+      .number()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate("validation required")),
+
+    [EditOfferDetails.streetNumber]: yup
+      .string()
+      .required(translate("validation required")),
+    [EditOfferDetails.postCode]: yup
+      .string()
+      .required(translate("validation required")),
+    [EditOfferDetails.country]: yup
+      .string()
+      .required(translate("validation required")),
+    [EditOfferDetails.date]: yup
+      .string()
+      .required(translate("validation required")),
+  });
+};
+
+// Validation for offer additional edit details
+export const generateOfferAdditionalDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [OfferAdditionalDetails.chooseFromExisting]: yup
+      .string()
+      .required("validation required"),
+    [OfferAdditionalDetails.additionlData]: yup
+      .string()
+      .required("validation required"),
   });
 };
 

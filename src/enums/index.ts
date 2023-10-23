@@ -108,6 +108,28 @@ export enum AddNewNote {
   noteMessage = "noteMessage",
 }
 
+// Enum for edit offer details
+export enum EditOfferDetails {
+  selectCustomer = "selectCustomer",
+  customerName = "customerName",
+  email = "email",
+  offerTitle = "offerTitle",
+  offerNumber = "offerNumber",
+  customerType = "customerType",
+  phoneNumber = "phoneNumber",
+  mobileNumber = "mobileNumber",
+  streetNumber = "streetNumber",
+  postCode = "postCode",
+  country = "country",
+  date = "date",
+}
+
+// Additional details enum
+export enum OfferAdditionalDetails {
+  chooseFromExisting = "chooseFromExisting",
+  additionlData = "additionlData",
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

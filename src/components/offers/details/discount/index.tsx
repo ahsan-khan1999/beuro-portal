@@ -53,6 +53,8 @@ const Discounts = () => {
         </div>
       </div>
 
+      <hr className="opacity-20 mx-[11px]" />
+
       {/* Items from discountData */}
       {discountData.map((item, index) => (
         <div key={index}>

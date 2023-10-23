@@ -3,10 +3,11 @@ import React from "react";
 import EditOffersDetailsData from "./EditOffersDetailsData";
 
 const EditOffersDetails = () => {
-  return <Layout>
-
-    <EditOffersDetailsData />
-  </Layout>;
+  return (
+    <Layout>
+      <EditOffersDetailsData />
+    </Layout>
+  );
 };
 
 export default EditOffersDetails;

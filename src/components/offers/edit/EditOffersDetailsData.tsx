@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-import LeadsDetailsImages from "@/components/leads/LeadsDetailsImages";
-import OfferDetailCompData from "../details/OfferDetailCompData";
 import OfferEditImages from "./OfferEditImages";
+import OfferEditDetails from "./OfferEditDetails";
+import AddressEditDetails from "./AddressEditDetails";
+import AditionalEditDetails from "./AditionalEditDetails";
 
 const EditOffersDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
@@ -63,10 +64,10 @@ const EditOffersDetailsData = () => {
   ];
 
   const componentsLookUp = {
-    0: <OfferDetailCompData />,
-    // 1: <AddressDetailsData />,
+    0: <OfferEditDetails />,
+    1: <AddressEditDetails />,
     // 2: <ServiceDetailsData />,
-    // 3: <AdditionalDetails />,
+    3: <AditionalEditDetails />,
   };
 
   return (
