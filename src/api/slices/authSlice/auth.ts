@@ -112,7 +112,7 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      console.log("responivess");
+      // console.log("responivess");
 
       // let apiData = {
       //   ...data,
