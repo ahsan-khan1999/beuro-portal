@@ -3,15 +3,19 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import requestSUbIcon from "@/assets/svgs/created_icon.svg";
 
-const RequestSubmitted = () => {
+const RequestSubmitted = ({ onClose }: { onClose: () => void }) => {
   return (
     <>
       <BaseModal
-        onClose={() => false}
+        onClose={onClose}
         containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
       >
         <div className="flex items-center flex-col">
-          <Image src={requestSUbIcon} alt="request_submitted" className="mb-10 mt-[47px]"/>
+          <Image
+            src={requestSUbIcon}
+            alt="request_submitted"
+            className="mb-10 mt-[47px]"
+          />
           <p className="text-black text-[24px] leading-7 font-medium mb-4">
             Your Request has been sent
           </p>

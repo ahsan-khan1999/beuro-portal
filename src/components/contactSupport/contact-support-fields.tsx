@@ -135,11 +135,10 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
       field: {
         type: Field.button,
         text: "Submit Request",
-        inputType: "button",
+        inputType: "submit",
         className:
-          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
-        onClick: handleRequestModal,
       },
     },
   ];

@@ -37,7 +37,7 @@ const LeadsDetails = () => {
         </div>
       </Layout>
 
-      {renderModal()}
+      {/* {renderModal()}  */}
     </>
   );
 };

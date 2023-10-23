@@ -16,8 +16,12 @@ const ContactSupportForm = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted />,
+    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -44,7 +48,7 @@ const ContactSupportForm = () => {
           className={`${defaultClassName}`}
         />
       </FormCard>
-      {/* {renderModal()} */}
+      {renderModal()}
     </>
   );
 };

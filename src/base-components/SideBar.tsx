@@ -25,7 +25,7 @@ const SideBar = () => {
     {
       icon: "Dashboard",
       title: "Dashboard",
-      pathname: "/",
+      pathname: "/dashboard",
       role: [0, 1],
     },
     {
@@ -117,7 +117,7 @@ const SideBar = () => {
     {
       icon: "Content",
       title: "Content",
-      pathname: "/dashboard",
+      pathname: "/content",
       role: [0, 1],
     },
     {
@@ -131,7 +131,7 @@ const SideBar = () => {
     {
       icon: "Settings",
       title: "Settings",
-      pathname: "/",
+      pathname: "/setting",
       role: [0, 1],
       inner: [
         {
