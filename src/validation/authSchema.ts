@@ -12,9 +12,7 @@ import {
   addressDetailsFields,
   ResetPasswordFields,
   ChangePasswordFields,
-  employeePasswordResetFields,
-  createEMployeeNewPasswordFields,
-  createInvoice,
+ 
 } from "@/enums/registration";
 import {
   CustomerDetailsFields,
@@ -30,6 +28,9 @@ import {
   AddNewNote,
   EditOfferDetails,
   OfferAdditionalDetails,
+   employeePasswordResetFields,
+  createEMployeeNewPasswordFields,
+  createInvoice,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -90,7 +91,7 @@ export const generateCustomerValidation = (translate: Function) => {
     [CustomerDetailsFields.streetNo]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.postalCode]: yup
+    [CustomerDetailsFields.postCode]: yup
       .number()
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.country]: yup

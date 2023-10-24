@@ -5,8 +5,9 @@ import OfferEditImages from "./OfferEditImages";
 import OfferEditDetails from "./OfferEditDetails";
 import AddressEditDetails from "./AddressEditDetails";
 import AditionalEditDetails from "./AditionalEditDetails";
+import ServiceEditDetails from "./ServiceEditDetails";
 
-const EditOffersDetailsData = () => {
+const EditOffersDetailsData = ({shareImgModal}) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -66,7 +67,7 @@ const EditOffersDetailsData = () => {
   const componentsLookUp = {
     0: <OfferEditDetails />,
     1: <AddressEditDetails />,
-    // 2: <ServiceDetailsData />,
+    2: <ServiceEditDetails />,
     3: <AditionalEditDetails />,
   };
 
@@ -85,7 +86,7 @@ const EditOffersDetailsData = () => {
         ))}
 
         <div className="mt-[14px]">
-          <OfferEditImages />
+          <OfferEditImages shareImgModal={shareImgModal}/>
         </div>
       </div>
 

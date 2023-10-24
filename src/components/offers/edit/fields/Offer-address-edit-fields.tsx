@@ -3,9 +3,7 @@ import { FormField, GenerateRegistrationFormField } from "@/types";
 
 export const OfferAddressDetailsFormField: GenerateRegistrationFormField = (
   register,
-  loading,
-  control,
-  setCurrentFormStage
+  loading
 ) => {
   const commonInputClasses = "!p-4 !border-dark focus:!border-primary";
 
@@ -38,7 +36,7 @@ export const OfferAddressDetailsFormField: GenerateRegistrationFormField = (
     {
       containerClass: "mt-5 border-b border-black border-opacity-20 pb-[29px]",
       label: {
-        text: "Address 1 Details*",
+        text: "Address 1 Details",
         htmlFor: "address-1-details",
         className: "mb-[10px] text-[#8F8F8F]",
       },
@@ -91,7 +89,7 @@ export const OfferAddressDetailsFormField: GenerateRegistrationFormField = (
     {
       containerClass: "mt-[29px] ",
       label: {
-        text: "Address 2 Details*",
+        text: "Address 2 Details",
         htmlFor: "address-1-details",
         className: "mb-[10px] text-[#8F8F8F]",
       },

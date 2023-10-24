@@ -8,7 +8,7 @@ import leadsDetailsImg4 from "@/assets/pngs/leads_detail_img4.png";
 import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
 
-const OfferEditImages = () => {
+const OfferEditImages = ({ shareImgModal }: { shareImgModal: () => void }) => {
   //   const leadsImgs = [
   //     "@/assets/pngs/leads_detail_img1.png",
   //     "@/assets/pngs/leads_detail_img2.png",
@@ -21,7 +21,12 @@ const OfferEditImages = () => {
       <div className="flex flex-col">
         <div className="flex justify-between items-center ml-6 mr-[14px] my-4">
           <p className="text-lg font-normal text-[#4A13E7] ">Images</p>
-          <Image src={shareIcon} alt="shareIcon" className="cursor-pointer" />
+          <Image
+            src={shareIcon}
+            alt="shareIcon"
+            className="cursor-pointer"
+            onClick={shareImgModal}
+          />
         </div>
         <div className="bg-[#4A13E7] h-1 "></div>
         <div className="grid grid-cols-2 gap-[14px] py-[18px] px-3">

@@ -12,8 +12,7 @@ export default function useInvoiceCreatedModal() {
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const changePasswordSchema =
-  generateCreateInvoiceValidationSchema(translate);
+  const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
 
   const {
     register,
@@ -21,7 +20,7 @@ export default function useInvoiceCreatedModal() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(createdInvoiceSchema),
   });
 
   const fields = CreateInvoiceFormField(register, loading, control);

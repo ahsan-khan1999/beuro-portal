@@ -4,7 +4,8 @@ export const enum Fields {
   description = "description",
 }
 export enum CustomerDetailsFields {
-  Name = "Name",
+  firstName = "firstName",
+  lastName = "lastName",
   companyName = "companyName",
   customerType = "customerType",
   email = "email",
@@ -128,6 +129,30 @@ export enum EditOfferDetails {
 export enum OfferAdditionalDetails {
   chooseFromExisting = "chooseFromExisting",
   additionlData = "additionlData",
+}
+
+// Employee password reset
+export enum employeePasswordResetFields {
+  yourPassword = "yourPassword",
+  newPassword = "newPassword",
+  confirmNewPassword = "confirmNewPassword",
+}
+
+// Employee password reset
+export enum createEMployeeNewPasswordFields {
+  newPassword = "newPassword",
+  confirmNewPassword = "confirmNewPassword",
+}
+
+// enum for created invoice
+export enum createInvoice {
+  totalAmount = "totalAmount",
+  remainingAmount = "remainingAmount",
+  enterAmount = "enterAmount",
+  paymentMethod = "paymentMethod",
+  markItRecuring = "markItRecuring",
+  date = "date",
+  frequency = "frequency",
 }
 
 // export * from './registration';
