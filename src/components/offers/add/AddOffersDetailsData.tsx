@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
-import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-import OfferEditImages from "../OfferEditImages";
-import OfferEditDetails from "./OfferEditDetails";
-import AddressEditDetails from "./AddressEditDetails";
-import AditionalEditDetails from "./AditionalEditDetails";
-import ServiceEditDetails from "./ServiceEditDetails";
+import OfferEditDetails from "./OfferAddDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
+import OfferEditImages from "../OfferEditImages";
+import AddressAddDetails from "./AddressAddDetails";
+import ServiceAddDetails from "./ServiceAddDetails";
+import AditionalAddDetails from "./AditionalAddDetails";
 
 const EditOffersDetailsData = ({
   shareImgModal,
@@ -71,9 +70,9 @@ const EditOffersDetailsData = ({
 
   const componentsLookUp = {
     0: <OfferEditDetails />,
-    1: <AddressEditDetails />,
-    2: <ServiceEditDetails />,
-    3: <AditionalEditDetails />,
+    1: <AddressAddDetails />,
+    2: <ServiceAddDetails />,
+    3: <AditionalAddDetails />,
   };
 
   return (

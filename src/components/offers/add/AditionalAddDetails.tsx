@@ -1,12 +1,12 @@
 import { Form } from "@/base-components/form/form";
-import { useOfferEditAdditionalDetails } from "@/hooks/useOfferEditAdditionalDetails";
+import { useOfferAditionalDetails } from "@/hooks/useOfferAditionalDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const AditionalEditDetails = () => {
+const AditionalAddDetails = () => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useOfferEditAdditionalDetails();
+    useOfferAditionalDetails();
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
@@ -28,4 +28,4 @@ const AditionalEditDetails = () => {
   );
 };
 
-export default AditionalEditDetails;
+export default AditionalAddDetails;

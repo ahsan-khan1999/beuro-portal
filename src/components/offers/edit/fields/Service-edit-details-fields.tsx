@@ -15,15 +15,15 @@ export const ServiceEditDetailsFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             label: {
               text: "Service Name",
-              htmlFor: "servcieName",
+              htmlFor: "serviceName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "servcieName",
-              name: "servcieName",
+              id: "serviceName",
+              name: "serviceName",
               placeholder: "Versicherung  Lorem Ipsum",
               register,
             },

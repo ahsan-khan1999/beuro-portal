@@ -24,7 +24,8 @@ export enum ModalType {
   INVOICE_CREATED,
   EXISTING_NOTES,
   ADD_NOTE,
-  SHARE_IMAGES
+  SHARE_IMAGES,
+  ARE_YOU_SURE,
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

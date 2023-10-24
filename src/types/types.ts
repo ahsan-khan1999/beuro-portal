@@ -220,6 +220,18 @@ export interface leadsTabsSectionTypes {
   icon: ReactNode;
 }
 
+
+// Interface for tab
+export interface OfferTabsSectionTypes {
+  setTabType: (tabType: number) => void;
+  tabType: number;
+  isSelected: boolean;
+  selectedTab: number;
+  name: string;
+  index: number,
+  icon: ReactNode;
+}
+
 export interface contractTableTypes {
   id: string;
   customer: string;

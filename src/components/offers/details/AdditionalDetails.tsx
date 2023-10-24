@@ -12,7 +12,7 @@ const AdditionalDetails = () => {
           Additional Details
         </h2>
         <button
-          onClick={() => router.push("/customers/edit")}
+          onClick={() => router.push("/offers/edit")}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <svg

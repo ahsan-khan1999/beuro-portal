@@ -1,11 +1,10 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateRegistrationFormField } from "@/types";
 
-export const OfferAdditionalDetailsFormField: GenerateRegistrationFormField = (
+export const OfferEditAdditionalDetailsFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
 ) => {
   const formField: FormField[] = [
     {
@@ -55,7 +54,7 @@ export const OfferAdditionalDetailsFormField: GenerateRegistrationFormField = (
       containerClass: "mt-[30px] mb-0",
       field: {
         type: Field.button,
-        text: "Save Changes",
+        text: "Save",
         inputType: "submit",
         className:
           "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

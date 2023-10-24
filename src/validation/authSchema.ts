@@ -12,7 +12,6 @@ import {
   addressDetailsFields,
   ResetPasswordFields,
   ChangePasswordFields,
- 
 } from "@/enums/registration";
 import {
   CustomerDetailsFields,
@@ -28,9 +27,12 @@ import {
   AddNewNote,
   EditOfferDetails,
   OfferAdditionalDetails,
-   employeePasswordResetFields,
+  employeePasswordResetFields,
   createEMployeeNewPasswordFields,
   createInvoice,
+  OfferAddressEditDetails,
+  ServiceOfferEditDetails,
+  AddServiceOfferDetails,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -445,9 +447,7 @@ export const generateAddNewNoteValidation = (translate: Function) => {
 };
 
 // Validation for edit details
-export const generateEditOfferDetailsValidationSchema = (
-  translate: Function
-) => {
+export const generateOfferDetailsValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [EditOfferDetails.selectCustomer]: yup
       .string()
@@ -508,6 +508,94 @@ export const generateOfferAdditionalDetailsValidation = (
       .string()
       .required("validation required"),
     [OfferAdditionalDetails.additionlData]: yup
+      .string()
+      .required("validation required"),
+  });
+};
+
+// Validation for offer address edit details
+export const generateOfferAddressEditDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [OfferAddressEditDetails.streetNo]: yup
+      .string()
+      .required("validation required"),
+
+    [OfferAddressEditDetails.postCode]: yup
+      .string()
+      .required("validation required"),
+
+    [OfferAddressEditDetails.country]: yup
+      .string()
+      .required("validation required"),
+
+    [OfferAddressEditDetails.description]: yup
+      .string()
+      .required("validation required"),
+  });
+};
+
+// Validation for offer service edit details
+export const generateOfferServiceEditDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [ServiceOfferEditDetails.serviceName]: yup
+      .string()
+      .required("validation required"),
+
+    [ServiceOfferEditDetails.price]: yup
+      .string()
+      .required("validation required"),
+
+    [ServiceOfferEditDetails.unit]: yup
+      .string()
+      .required("validation required"),
+
+    [ServiceOfferEditDetails.count]: yup
+      .string()
+      .required("validation required"),
+    [ServiceOfferEditDetails.totalPrice]: yup
+      .string()
+      .required("validation required"),
+    [ServiceOfferEditDetails.description]: yup
+      .string()
+      .required("validation required"),
+    [ServiceOfferEditDetails.discountDiscription]: yup
+      .string()
+      .required("validation required"),
+  });
+};
+
+// Validation for offer service edit details
+export const generateAddfferServiceDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [AddServiceOfferDetails.serviceType]: yup
+      .string()
+      .required("validation required"),
+    [AddServiceOfferDetails.serviceTitle]: yup
+      .string()
+      .required("validation required"),
+
+    [AddServiceOfferDetails.price]: yup
+      .string()
+      .required("validation required"),
+
+    [AddServiceOfferDetails.unit]: yup.string().required("validation required"),
+
+    [AddServiceOfferDetails.count]: yup
+      .string()
+      .required("validation required"),
+    [AddServiceOfferDetails.totalPrice]: yup
+      .string()
+      .required("validation required"),
+    [AddServiceOfferDetails.description]: yup
+      .string()
+      .required("validation required"),
+    [AddServiceOfferDetails.discountDiscription]: yup
       .string()
       .required("validation required"),
   });

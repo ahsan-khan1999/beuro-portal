@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateRegistrationFormField } from "@/types";
 
-export const OfferAddressDetailsFormField: GenerateRegistrationFormField = (
+export const AddOffAddressDetailsFormField: GenerateRegistrationFormField = (
   register,
   loading
 ) => {
@@ -146,7 +146,8 @@ export const OfferAddressDetailsFormField: GenerateRegistrationFormField = (
         type: Field.button,
         text: "Save",
         inputType: "submit",
-        className: "rounded-lg p-4 w-[152px] h-[50px] text-white hover-bg-none",
+        className:
+          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
         loading,
       },
     },

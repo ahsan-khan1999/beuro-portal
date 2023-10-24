@@ -1,5 +1,7 @@
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Form } from "@/base-components/form/form";
+import AreYouSureOffer from "@/base-components/ui/modals1/AreYouSureOffer";
+import OfferCreated from "@/base-components/ui/modals1/OfferCreated";
 import RequestSubmitted from "@/base-components/ui/modals1/RequestSubmitted";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -21,7 +23,7 @@ const ContactSupportForm = () => {
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted onClose={onClose} />,
+    [ModalType.REQUEST_SUBMITTED]: <OfferCreated onClose={onClose} />,
   };
 
   const renderModal = () => {

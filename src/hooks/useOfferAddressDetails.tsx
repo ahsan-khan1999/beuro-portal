@@ -1,19 +1,19 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { generateOfferDetailsValidationSchema } from "@/validation/authSchema";
+import { generateOfferAddressEditDetailsValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "./useRedux";
-import { OfferEditDetailsFormField } from "@/components/offers/edit/fields/offer-edit-details-fields";
+import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 
-export const useEditOfferDetails = () => {
+export const useOfferAddressDetails = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateOfferDetailsValidationSchema(translate);
+  const schema = generateOfferAddressEditDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ export const useEditOfferDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = OfferEditDetailsFormField(register, loading, control);
+  const fields = AddOffAddressDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

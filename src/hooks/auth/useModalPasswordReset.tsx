@@ -12,7 +12,7 @@ export default function useModalPasswordReset() {
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const changePasswordSchema =
+  const schema =
   generateEmployeePasswordResetValidationSchema(translate);
 
   const {
@@ -20,7 +20,7 @@ export default function useModalPasswordReset() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(schema),
   });
 
   const fields = EmployeeResetPasswordFieldsFormField(register, loading);

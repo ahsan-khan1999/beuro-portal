@@ -12,7 +12,7 @@ export default function useCreateNewPassword() {
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const changePasswordSchema =
+  const schema =
   generateEmployeeNewPasswordValidationSchema(translate);
 
   const {
@@ -20,7 +20,7 @@ export default function useCreateNewPassword() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(schema),
   });
 
   const fields = EmployeeCreateNewPasswordFieldsFormField(register, loading);

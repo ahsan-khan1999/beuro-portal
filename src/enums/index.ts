@@ -155,6 +155,36 @@ export enum createInvoice {
   frequency = "frequency",
 }
 
+// Leads Address edit details
+export enum OfferAddressEditDetails {
+  streetNo = "streetNo",
+  postCode = "postCode",
+  country = "country",
+  description = "description",
+}
+
+// enum for offer service edit detais
+export enum ServiceOfferEditDetails {
+  serviceName = "serviceName",
+  price = "price",
+  unit = "unit",
+  count = "count",
+  totalPrice = "totalPrice",
+  description = "description",
+  discountDiscription = "discountDiscription",
+}
+
+// enum for add service offer details
+export enum AddServiceOfferDetails {
+  serviceType = "serviceType",
+  serviceTitle = "serviceTitle",
+  price = "price",
+  count = "count",
+  unit = "unit",
+  totalPrice = "totalPrice",
+  description = "description",
+  discountDiscription = "discountDiscription",
+}
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

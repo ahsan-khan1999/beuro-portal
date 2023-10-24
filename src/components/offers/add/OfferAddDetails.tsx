@@ -1,18 +1,16 @@
 import { Form } from "@/base-components/form/form";
-import { useOfferEditAdditionalDetails } from "@/hooks/useOfferEditAdditionalDetails";
+import { useAddOfferDetails } from "@/hooks/useAddOfferDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const AditionalEditDetails = () => {
+const OfferAddDetails = () => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useOfferEditAdditionalDetails();
+    useAddOfferDetails();
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">
-          Additional Details
-        </h2>
+        <h2 className="text-[#393939] text-lg font-medium">Offer details</h2>
         <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full">
           Cancel
         </button>
@@ -28,4 +26,4 @@ const AditionalEditDetails = () => {
   );
 };
 
-export default AditionalEditDetails;
+export default OfferAddDetails;
