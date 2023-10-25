@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 import { User } from "./auth";
 import { Country, State } from "@/enums/auth";
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { Field } from "@/enums";
+import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
 
 export interface ContainerProps {
@@ -45,12 +45,22 @@ export interface ButtonProps {
   type?: Field.button;
   name?: string;
   inputType: "submit" | "button";
-  text: string;
+  text?: string;
   className?: string;
   loading?: boolean | null;
   success?: boolean;
   onClick?: Function;
   loaderColor?: string;
+  icon?: any;
+  iconAlt?: any;
+}
+
+
+// Add field interface
+export interface AddFieldProps {
+  text?: string;
+  className?: string;
+  onClick?: Function;
   icon?: any;
   iconAlt?: any;
 }

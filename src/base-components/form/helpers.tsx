@@ -28,6 +28,7 @@ import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-fiel
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
+import { AddFiled } from "./fields/add-field-button";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
@@ -47,7 +48,9 @@ const fieldComponents: FieldComponents = {
   span: SpanField,
   div: DivField,
   button: Button,
+  addField: AddFiled,
   link: LinkField,
+
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -85,6 +88,7 @@ export function isFieldType(type: any): type is FieldType {
     "span",
     "div",
     "button",
+    "addField",
     "link",
   ].includes(type);
 }

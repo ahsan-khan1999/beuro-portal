@@ -1,11 +1,9 @@
-import { Layout } from '@/layout'
+import Content from '@/components/content'
 import React from 'react'
 
 const index = () => {
   return (
-    <Layout>
-      <h1>Content</h1>
-    </Layout>
+    <Content/>
   )
 }
 

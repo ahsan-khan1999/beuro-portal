@@ -56,6 +56,7 @@ export enum Field {
   span = "span",
   div = "div",
   button = "button",
+  addField = "span",
   link = "link",
 }
 

@@ -220,7 +220,6 @@ export interface leadsTabsSectionTypes {
   icon: ReactNode;
 }
 
-
 // Interface for tab
 export interface OfferTabsSectionTypes {
   setTabType: (tabType: number) => void;
@@ -228,7 +227,7 @@ export interface OfferTabsSectionTypes {
   isSelected: boolean;
   selectedTab: number;
   name: string;
-  index: number,
+  index: number;
   icon: ReactNode;
 }
 
@@ -300,6 +299,15 @@ export interface OffersTableRowTypes {
   editImg?: string;
   editNote?: string;
   type?: string;
+}
+
+// Interface for the content table
+export interface ContentTableRowTypes {
+  id: string;
+  name: string;
+  contentTitle: string;
+  createdOn: Date | null;
+  edit?: string;
 }
 
 // export interface SuccessMessage {

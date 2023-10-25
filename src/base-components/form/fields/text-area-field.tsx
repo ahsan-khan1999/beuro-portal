@@ -25,11 +25,9 @@ export const TextAreaField = ({
     <div className={` relative w-full flex items-center `}>
       <textarea
         onFocus={() => setInputFocus(true)}
-        // onBlur={() => setInputFocus(false)}
         onBlurCapture={() => setInputFocus(false)}
         rows={5}
         id={id}
-        type={inputType}
         className={`${classes}`}
         defaultValue={value}
         {...register(name)}

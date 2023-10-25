@@ -1,11 +1,11 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateRegistrationFormField } from "@/types";
+import plusFiled from "@/assets/svgs/add_new_icon.svg";
 
 export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
 ) => {
   const formField: FormField[] = [
     {
@@ -22,7 +22,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer",
               type: Field.select,
               id: "selectCustomer",
               name: "selectCustomer",
@@ -83,7 +82,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select offer Title",
               type: Field.select,
               id: "offerTitle",
               name: "offerTitle",
@@ -112,6 +110,7 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               placeholder: "A-2000",
               register,
             },
+            placeholder: "Please Select Customer Type",
           },
         ],
       },
@@ -132,7 +131,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -288,6 +286,15 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               id: "date",
               name: "date",
               register,
+            },
+          },
+          {
+            containerClass: "mb-0 mt-[30px]",
+            field: {
+              type: Field.addField,
+              icon: plusFiled,
+              className: "rounded-lg p-4 ",
+              loading,
             },
           },
         ],

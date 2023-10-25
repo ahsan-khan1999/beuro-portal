@@ -12,7 +12,7 @@ import {
   FieldError,
   UseFormSetError,
 } from "react-hook-form";
-import { ButtonProps } from "./ui";
+import { AddFieldProps, ButtonProps } from "./ui";
 import { CardType, Salutation } from "@/enums";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
@@ -216,6 +216,8 @@ export type FieldType =
   | Field.span
   | Field.div
   | Field.button
+  | Field.addFieldButton
+  
   | Field.link;
 export type FieldProps =
   | InputProps
@@ -235,6 +237,7 @@ export type FieldProps =
   | SpanProps
   | DivProps
   | ButtonProps
+  | AddFieldProps
   | LinkProps;
 
 export interface FormField {
@@ -262,6 +265,7 @@ export interface FieldComponents {
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
+  addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
 }
 
