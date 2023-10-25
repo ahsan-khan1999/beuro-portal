@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
-import ConfirmationContentDetailsData from "./ConfirmationContentDetailsData";
-import InoviceContentDetails from "./InoviceContentDetails";
-import ReceiptContentDetails from "./ReceiptContentDetails";
 import OfferContentEditDetails from "./OfferContentEditDetails";
+import EditConfirmationContentDetailsData from "./EditConfirmationContentDetailsData";
+import EditInoviceContentDetails from "./EditInoviceContentDetails";
+import EditReceiptContentDetails from "./ReceiptContentDetails";
 
 const ContentEditDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
@@ -70,9 +70,9 @@ const ContentEditDetailsData = () => {
 
   const componentsLookUp = {
     0: <OfferContentEditDetails />,
-    1: <ConfirmationContentDetailsData />,
-    2: <InoviceContentDetails />,
-    3: <ReceiptContentDetails />,
+    1: <EditConfirmationContentDetailsData />,
+    2: <EditInoviceContentDetails />,
+    3: <EditReceiptContentDetails />,
   };
 
   return (
