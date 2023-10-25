@@ -117,6 +117,7 @@ export type GenerateRegistrationFormField = (
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
+  onClick?: Function,
   router?: NextRouter
 ) => FormField[];
 export type GenerateFormContactField = (

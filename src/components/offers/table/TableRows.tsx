@@ -2,7 +2,7 @@ import { OffersTableRowTypes } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-const TableRows = ({ dataToAdd, openModal }: {dataToAdd: OffersTableRowTypes; openModal: (item: OffersTableRowTypes) => void;}) => {
+const TableRows = ({ dataToAdd, openModal }: {dataToAdd: OffersTableRowTypes[]; openModal: (item: OffersTableRowTypes) => void;}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
