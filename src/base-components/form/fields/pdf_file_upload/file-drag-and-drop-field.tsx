@@ -1,13 +1,13 @@
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
-// import { FileUploadIcon } from "@/assets/svgs/components/file-upload-icon";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Image from "next/image";
 import { useState } from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { useSelector } from "react-redux";
-import uploadIcon from "@/assets/svgs/file-uploader.svg";
+import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
+import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
+import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 
-export const ImageFileUpload = ({
+export const PdfFileUpload = ({
   id,
   field,
 }: {
@@ -19,82 +19,93 @@ export const ImageFileUpload = ({
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
     null
   );
-  const [selectedImageName, setSelectedImageName] = useState<string | null>(
-    null
-  );
-  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+
+  const handleFileInput = async (
+    e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
+  ) => {
     e.preventDefault();
+
+    let file: File | null = null;
+
+    if (e instanceof DragEvent && e.dataTransfer) {
+      // Handle the drag-and-drop event and ensure e.dataTransfer is not null
+      file = e.dataTransfer.files[0];
+    } else if (e.target instanceof HTMLInputElement) {
+      // Handle the file input change event
+      file = e.target.files ? e.target.files[0] : null;
+    }
+
+    if (file) {
+      formdata.append("file", file);
+      // const res = await dispatch(uploadFileToFirebase(formdata));
+
+      // Store the file name locally
+      setUploadedImages([...uploadedImages, file.name]);
+      // setSelectedImagePath(res?.payload);
+      // setSelectedImagePath(URL.createObjectURL(file));
+
+      field.onChange(file.name);
+    }
   };
 
-  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    formdata.append("file", file);
-    const res = await dispatch(uploadFileToFirebase(formdata));
-    setSelectedImageName(file?.name);
-    setSelectedImagePath(res?.payload);
-    // setSelectedImagePath(URL.createObjectURL(file));
+  const handleDeleteFile = (fileName: string) => {
+    // Remove the file from the uploadedImages state and update the field
+    const updatedImages = uploadedImages.filter((item) => item !== fileName);
+    setUploadedImages(updatedImages);
+    field.onChange(updatedImages.join(", ")); // Update the field with the remaining file names
 
-    field.onChange(res?.payload);
-  };
-
-  const handleFileSelected = async (e: any) => {
-    const file = e.target.files[0];
-    formdata.append("file", file);
-    const res = await dispatch(uploadFileToFirebase(formdata));
-
-    setSelectedImageName(file?.name);
-    setSelectedImagePath(res?.payload);
-    // setSelectedImagePath(URL.createObjectURL(file));
-
-    field.onChange(res?.payload);
+    // You may also want to add a server request here to delete the file from the server
   };
 
   return (
-    <label
-      htmlFor={id}
-      className="flex flex-col items-center justify-center
-         border border-primary border-dashed rounded-lg 
-        cursor-pointer bg-gray-50
-        hover:bg-gray-100"
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      <div className="flex flex-col items-center justify-center">
-        {field.value ? (
-          <Image
-            src={field.value}
-            width={300}
-            height={148}
-            alt="Uploaded Preview"
-            style={{
-              width: "100%",
-              height: 148,
-            }}
-          />
-        ) : (
-          // <FileUploadIcon />
-          ""
-        )}
-        {!field.value && (
-          <div className="flex items-center">
-            <div className="py-[10px] px-[14px]">
-              <Image src={uploadIcon} alt="Uploader Icon" className="" />
-            </div>
-
-            <p className="text-sm text-primary py-[10px] px-[14px] ">
-              Drag your logo here
-            </p>
+    <div className="flex gap-[15px]">
+      <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
+        <div className="flex gap-3">
+          <div className="flex flex-col items-center border border-[#8F8F8F] border-dashed rounded-lg w-[275px] cursor-pointer">
+            <Image
+              src={fileUploadIcon}
+              alt="fileUploadIcon"
+              className="mt-[37px]"
+            />
+            <span className="text-[#4B4B4B] font-medium text-[14px] mt-3 mb-2">
+              Drop or Attach your files here
+            </span>
+            <span className="text-[#8F8F8F] font-normal text-[12px] mb-[31px]">
+              Files supported: PDF, JPG, PNG, GIF
+            </span>
           </div>
-        )}
-      </div>
+        </div>
 
-      <input
-        id={id}
-        type="file"
-        className="hidden"
-        onChange={handleFileSelected}
-      />
-    </label>
+        <input
+          id={id}
+          type="file"
+          className="hidden"
+          onChange={handleFileInput}
+        />
+      </label>
+
+      {/* Display the file name here */}
+      <div className="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3">
+        {uploadedImages.length > 0 &&
+          uploadedImages.map((item, index) => (
+            <div
+              className="relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 "
+              key={index}
+            >
+              <div className="flex items-center gap-3">
+                <Image
+                  src={deletePdfIcon}
+                  alt="deletePdfIcon"
+                  className="absolute -right-1 -top-1 cursor-pointer "
+                  onClick={() => handleDeleteFile(item)}
+                />
+                <Image src={pdfIcon} alt="pdfIcon" />
+                <span>{item}</span>
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
   );
 };

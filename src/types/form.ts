@@ -62,8 +62,7 @@ export interface CKEditorProps extends BaseFieldProps<Field.ckEditor> {
   trigger?: UseFormTrigger<FieldValues>;
 }
 
-
-// CKEditorBoxProps added 
+// CKEditorBoxProps added
 export interface CKEditorBoxProps {
   id: string;
   data?: string;
@@ -137,6 +136,12 @@ export interface DragAndDropFileFieldProps
   control?: Control<FieldValues>;
 }
 
+// interface for the pdf file upload
+export interface DragAndDropPdfFieldProps
+  extends BaseFieldProps<Field.dragAndDropPdfField> {
+  control?: Control<FieldValues>;
+}
+
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
   value?: string;
@@ -207,6 +212,7 @@ export type FieldType =
   | Field.checkbox
   | Field.radio
   | Field.dragAndDropFileField
+  | Field.dragAndDropPdfField
   | Field.span
   | Field.div
   | Field.button
@@ -214,7 +220,8 @@ export type FieldType =
 export type FieldProps =
   | InputProps
   | TextAreaProps
-  | CkEditorProps
+  | CKEditorProps
+  | CKEditorBoxProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
@@ -224,6 +231,7 @@ export type FieldProps =
   | CheckBoxProps
   | RadioButtonProps
   | DragAndDropFileFieldProps
+  | DragAndDropPdfFieldProps
   | SpanProps
   | DivProps
   | ButtonProps
@@ -238,7 +246,8 @@ export interface FormField {
 export interface FieldComponents {
   input: React.FC<InputProps>;
   textArea: React.FC<TextAreaProps>;
-  ckEditor: React.FC<CkEditorProps>;
+  ckEditor: React.FC<CKEditorProps>;
+  ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
   creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
@@ -249,6 +258,7 @@ export interface FieldComponents {
   checkbox: React.FC<CheckBoxProps>;
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
+  dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
