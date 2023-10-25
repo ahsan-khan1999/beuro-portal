@@ -185,6 +185,17 @@ export enum AddServiceOfferDetails {
   description = "description",
   discountDiscription = "discountDiscription",
 }
+
+// offer edit content enum
+export enum OfferEditContentDetails {
+  contentName = "contentName",
+  addressLabel = "addressLabel",
+  offerTitle = "offerTitle",
+  offerDescription = "offerDescription",
+  emailBody = "emailBody",
+  attachments="attachments"
+}
+
 // export * from './registration';
 // export * from './form';
 // export * from './userAccount';

@@ -1,8 +1,18 @@
 import { useRouter } from "next/router";
 import React from "react";
+import AttachmentsFiles from "./AttachmentsFiles";
 
 const OfferContentDetailsData = () => {
   const router = useRouter();
+
+  const filesData: string[] = [
+    "First File",
+    "Second File",
+    "Third File",
+    "Fourth File",
+    "Fifth File",
+    "Sixth File",
+  ];
 
   return (
     <div className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit">
@@ -97,6 +107,34 @@ const OfferContentDetailsData = () => {
             passages, and more recently with desktop publishing software like
             Aldus PageMaker including versions of Lorem Ipsum
           </p>
+        </div>
+        <div className="flex flex-col mt-5">
+          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+            Email Body
+          </p>
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has a been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took is galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five lorm centuries, but also the leap into electronic
+            typesetting, remaining essentially unchanged. It was popularised in
+            the 1960s with the release of Letraset sheets containing Lorem Ipsum
+            passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum
+          </p>
+        </div>
+
+        {/* attachments is here */}
+        <div className="mt-5 w-[90%]">
+          <span className="text-[#1E1E1E] font-normal text-[14px] ">
+            Attachments
+          </span>
+          <div className="mt-5 grid grid-cols-3 gap-2">
+            {filesData.map((item, index) => (
+              <AttachmentsFiles fileName={item} key={index}/>
+            )) }
+          </div>
         </div>
       </div>
     </div>

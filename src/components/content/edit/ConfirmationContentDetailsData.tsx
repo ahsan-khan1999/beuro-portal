@@ -1,18 +1,15 @@
-import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
 
-const AdditionalDetails = () => {
+const ConfirmationContentDetailsData = () => {
   const router = useRouter();
 
   return (
-    <LeadsCardLayout>
+    <div className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit">
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">
-          Additional Details
-        </h2>
+        <h2 className="text-[#393939] text-lg font-medium">Confirmation Content</h2>
         <button
-          onClick={() => router.push("/offers/edit")}
+          onClick={() => router.push("/content/edit")}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <svg
@@ -52,9 +49,37 @@ const AdditionalDetails = () => {
         </button>
       </div>
 
-      <div className="py-[25px] px-[30px]">
-        <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6  ">
-          <p className="text-[#4B4B4B] font-normal text-base">
+      <div className="mt-5">
+        <div>
+          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+            Confirmation Title
+          </p>
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+            Text For Confirmation
+          </p>
+        </div>
+
+        <div className="flex flex-col mt-5">
+          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+            Confirmation Description
+          </p>
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has a been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took is galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five lorm centuries, but also the leap into electronic
+            typesetting, remaining essentially unchanged. It was popularised in
+            the 1960s with the release of Letraset sheets containing Lorem Ipsum
+            passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum
+          </p>
+        </div>
+        <div className="flex flex-col mt-5">
+          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+            Email Body
+          </p>
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has a been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took is galley of type
@@ -67,8 +92,8 @@ const AdditionalDetails = () => {
           </p>
         </div>
       </div>
-    </LeadsCardLayout>
+    </div>
   );
 };
 
-export default AdditionalDetails;
+export default ConfirmationContentDetailsData;

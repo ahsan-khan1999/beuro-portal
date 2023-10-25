@@ -106,70 +106,45 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
       },
       field: {
         type: Field.dragAndDropPdfField,
-        // className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-        inputType: "text",
+        inputType: "file",
         id: "fileUpload",
         name: "fileUpload",
-        placeholder:
-          "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm.",
+
         control,
       },
     },
 
-    //       {
-    //         containerClass: "mb-0",
-    //         label: {
-    //           text: "Attachments",
-    //           htmlFor: "fileUpload",
-    //           className: "mb-[10px]",
-    //         },
-    //         field: {
-    //           type: Field.dragAndDropFileField,
-    //           className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-    //           inputType: "text",
-    //           id: "fileUpload",
-    //           name: "fileUpload",
-    //           placeholder:
-    //             "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem iss Ipsum Dollar smith emit Lorem Ipsum Dollar smLorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum lsls Dollar sm.",
-    //           control,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
-
-    // {
-    //   containerClass: "mt-6",
-    //   field: {
-    //     type: Field.div,
-    //     className: "flex items-center space-x-[18px] ",
-    //     children: [
-    //       {
-    //         containerClass: "mb-0",
-    //         field: {
-    //           type: Field.button,
-    //           text: "Back",
-    //           inputType: "button",
-    //           // onClick: () => setCurrentFormStage("locationDetails"),
-    //           className:
-    //             "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-    //           loading,
-    //         },
-    //       },
-    //       {
-    //         containerClass: "mb-0",
-    //         field: {
-    //           type: Field.button,
-    //           text: "Next",
-    //           inputType: "submit",
-    //           className:
-    //             "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-    //           loading,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      containerClass: "mt-6",
+      field: {
+        type: Field.div,
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              loading,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
+      },
+    },
   ];
 
   return formField;

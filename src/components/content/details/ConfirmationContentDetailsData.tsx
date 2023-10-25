@@ -1,8 +1,17 @@
 import { useRouter } from "next/router";
 import React from "react";
+import AttachmentsFiles from "./AttachmentsFiles";
 
 const ConfirmationContentDetailsData = () => {
   const router = useRouter();
+  const filesData: string[] = [
+    "First File",
+    "Second File",
+    "Third File",
+    "Fourth File",
+    "Fifth File",
+    "Sixth File",
+  ];
 
   return (
     <div className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit">
@@ -90,6 +99,18 @@ const ConfirmationContentDetailsData = () => {
             passages, and more recently with desktop publishing software like
             Aldus PageMaker including versions of Lorem Ipsum
           </p>
+        </div>
+
+        {/* attachments is here */}
+        <div className="mt-5 w-[90%]">
+          <span className="text-[#1E1E1E] font-normal text-[14px] ">
+            Attachments
+          </span>
+          <div className="mt-5 grid grid-cols-3 gap-2">
+            {filesData.map((item, index) => (
+              <AttachmentsFiles fileName={item} key={index}/>
+            )) }
+          </div>
         </div>
       </div>
     </div>

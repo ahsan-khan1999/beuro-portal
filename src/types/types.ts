@@ -60,6 +60,7 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
+  icon?:string
 }
 
 export interface tabsSectionTypes {

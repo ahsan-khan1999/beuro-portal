@@ -33,6 +33,7 @@ import {
   OfferAddressEditDetails,
   ServiceOfferEditDetails,
   AddServiceOfferDetails,
+  OfferEditContentDetails,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -598,6 +599,34 @@ export const generateAddfferServiceDetailsValidation = (
     [AddServiceOfferDetails.discountDiscription]: yup
       .string()
       .required("validation required"),
+  });
+};
+
+// Offer content edit details validation
+export const generateOfferEditContentDetailsValidation = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [OfferEditContentDetails.contentName]: yup
+      .string()
+      .required("validation required"),
+
+    [OfferEditContentDetails.addressLabel]: yup
+      .string()
+      .required("validation required"),
+
+    [OfferEditContentDetails.offerTitle]: yup
+      .string()
+      .required(translate("validation required")),
+    [OfferEditContentDetails.offerDescription]: yup
+      .string()
+      .required(translate("validation required")),
+    [OfferEditContentDetails.emailBody]: yup
+      .string()
+      .required(translate("validation required")),
+    [OfferEditContentDetails.attachments]: yup
+      .string()
+      .required(translate("validation required")),
   });
 };
 
