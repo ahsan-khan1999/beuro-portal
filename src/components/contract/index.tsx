@@ -9,9 +9,6 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { TableRowTypes, contractTableTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
-import EmailForm from "./EmailForm";
-import EmailPriview from "./emailPriview";
-import CkEditor from "@/base-components/ui/editor/ck-editor";
 import { useDispatch } from "react-redux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -192,13 +189,14 @@ export default function Contract() {
   useEffect(() => {
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
+    setCurrentPageRows(
+      dataToAdd.slice(startIndex, startIndex + itemsPerPage)
+    );
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -237,16 +235,13 @@ export default function Contract() {
         <TableFunctions />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes}/>
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
         />
-
-        {/* <EmailForm />
-        <EmailPriview /> */}
       </Layout>
 
       {renderModal()}
