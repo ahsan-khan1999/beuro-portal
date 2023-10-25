@@ -1,8 +1,7 @@
 import React from "react";
 import { leadsTabsSectionTypes } from "@/types";
-import Image from "next/image";
 
-const LeadsTab = ({
+const DetailsTab = ({
   name,
   setTabType,
   tabType,
@@ -25,4 +24,4 @@ const LeadsTab = ({
   );
 };
 
-export default LeadsTab;
+export default DetailsTab;
