@@ -1,4 +1,4 @@
-import { DropDownFillIcon } from "@/assets/svgs/components/drop-down-icon";
+import { DropDownFillIcon } from "@/assets/svgs/components/drop-down-icon"
 import { useState } from "react";
 import { DropDownItems } from "./drop-down-items";
 import { DropDownProps } from "@/types";

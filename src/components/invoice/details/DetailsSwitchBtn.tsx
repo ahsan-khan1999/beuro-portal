@@ -1,6 +1,12 @@
 import React from "react";
 
-const DetailsSwitchBtn = ({ switchDetails, setSwitchDetails }) => {
+const DetailsSwitchBtn = ({
+  switchDetails,
+  setSwitchDetails,
+}: {
+  switchDetails: string;
+  setSwitchDetails: (item: string) => void;
+}) => {
   return (
     <div className="flex gap-[2px]">
       <button

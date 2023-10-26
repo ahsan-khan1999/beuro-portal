@@ -142,6 +142,18 @@ export interface DragAndDropPdfFieldProps
   control?: Control<FieldValues>;
 }
 
+// Interface for the input field copy
+export interface InputWithCopyProps
+  extends BaseFieldProps<Field.inputWithCopy> {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  control: Control<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
   value?: string;
@@ -203,6 +215,7 @@ export type FieldType =
   | Field.input
   | Field.textArea
   | Field.ckEditor
+  | Field.inputWithCopy
   | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
@@ -216,13 +229,13 @@ export type FieldType =
   | Field.span
   | Field.div
   | Field.button
-  | Field.addFieldButton
-  
+  // | Field.addFieldButton
   | Field.link;
 export type FieldProps =
   | InputProps
   | TextAreaProps
   | CKEditorProps
+  | InputWithCopyProps
   | CKEditorBoxProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps

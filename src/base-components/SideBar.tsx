@@ -133,18 +133,6 @@ const SideBar = () => {
       title: "Settings",
       pathname: "/setting",
       role: [0, 1],
-      inner: [
-        {
-          title: "Accepted",
-        },
-        {
-          title: "Rejected",
-        },
-        {
-          title: "Pending",
-        },
-      ],
-      margin: "mt-6",
     },
     {
       icon: "ContactSupports",
