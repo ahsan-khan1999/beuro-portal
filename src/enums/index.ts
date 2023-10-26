@@ -138,6 +138,13 @@ export enum employeePasswordResetFields {
   confirmNewPassword = "confirmNewPassword",
 }
 
+// Change password
+export enum ChangePasswordField {
+  oldPassword = "oldPassword",
+  newPassword = "newPassword",
+  confirmNewPassword = "confirmNewPassword",
+}
+
 // Employee password reset
 export enum createEMployeeNewPasswordFields {
   newPassword = "newPassword",

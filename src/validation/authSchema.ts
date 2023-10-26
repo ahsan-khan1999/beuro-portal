@@ -37,6 +37,7 @@ import {
   EditConfirmationContentDetails,
   EditInvoiceContentDetails,
   ReceiptEditContentDetails,
+  ChangePasswordField,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -363,6 +364,26 @@ export const generateEmployeePasswordResetValidationSchema = (
       .min(6, translate("validationMessages.string.min")),
 
     [employeePasswordResetFields.confirmNewPassword]: yup
+      .string()
+      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .required(translate("validationMessages.required")),
+  });
+};
+
+// Password Change validation is here
+export const generatePasswordChangeValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [ChangePasswordField.oldPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [ChangePasswordField.newPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [ChangePasswordField.confirmNewPassword]: yup
       .string()
       .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
       .required(translate("validationMessages.required")),

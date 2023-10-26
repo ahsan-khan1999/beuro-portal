@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import TaxVerifiedComp from "./TaxVerifiedComp";
 import InvoiceSection from "./InvoiceSection";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import SettingLayout from "../../SettingLayout";
 import ConnectWithBuro from "./ConnectWithBuro";
+import SettingLayout from "../SettingLayout";
 
-const SystemSettingDetails = () => {
+const SystemSettingDetails = ({
+  handleChangePassword,
+}: {
+  handleChangePassword: () => void;
+}) => {
   const dropDownItems = [{ item: " EUR - Euro" }];
   const [selectedItem, setSelectedItem] = useState(dropDownItems[0].item);
 
@@ -37,8 +41,17 @@ const SystemSettingDetails = () => {
         </div>
       </SettingLayout>
 
-      <div className="my-2">
+      <div className="mt-2">
         <ConnectWithBuro />
+      </div>
+
+      <div className="mt-3 ml-[31px]">
+        <button
+          onClick={handleChangePassword}
+          className="text-white text-base font-medium px-6 py-[10px] bg-[#4A13E7] rounded-md"
+        >
+          Save Setting
+        </button>
       </div>
     </>
   );

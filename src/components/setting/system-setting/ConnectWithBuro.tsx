@@ -1,8 +1,8 @@
 import React from "react";
-import SettingLayout from "../../SettingLayout";
 import Image from "next/image";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import PasswordCopyField from "@/base-components/ui/password-copy-field";
+import SettingLayout from "../SettingLayout";
 
 const ConnectWithBuro = () => {
   const tagData: string[] = ["loremipsum", "loremipsum", "loremipsum"];

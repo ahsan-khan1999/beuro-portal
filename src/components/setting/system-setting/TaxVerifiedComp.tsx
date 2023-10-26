@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SettingLayout from "../../SettingLayout";
 import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
+import SettingLayout from "../SettingLayout";
 
 const TaxVerifiedComp = () => {
   const toggleBtnsData: string[] = ["No Tax", "Inclusive Tax", "Exclusive Tax"];

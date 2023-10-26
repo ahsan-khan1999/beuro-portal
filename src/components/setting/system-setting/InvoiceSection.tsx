@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SettingLayout from "../../SettingLayout";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import SettingLayout from "../SettingLayout";
 
 const InvoiceSection = () => {
   const dropDownItems = [
