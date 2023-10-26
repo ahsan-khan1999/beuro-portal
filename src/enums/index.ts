@@ -4,16 +4,16 @@ export const enum Fields {
   description = "description",
 }
 export enum CustomerDetailsFields {
-  firstName = "firstName",
-  lastName = "lastName",
+  name = "name",
   companyName = "companyName",
   customerType = "customerType",
   email = "email",
   phone = "phone",
   mobile = "mobile",
-  streetNo = "streetNo",
+  street = "street",
   postCode = "postCode",
   country = "country",
+  address = "address"
 }
 
 // Services detail enum

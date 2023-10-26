@@ -18,6 +18,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
+import { Customers } from "./customer";
 export interface SideBar {
   icon: string;
   title: string;
@@ -60,7 +61,7 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?:string
+  icon?: string
 }
 
 export interface tabsSectionTypes {
@@ -118,7 +119,12 @@ export type GenerateRegistrationFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
   onClick?: Function,
-  router?: NextRouter
+  router?: NextRouter,
+) => FormField[];
+export type GenerateCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -157,18 +163,6 @@ export interface PaginationItemProps {
   disabled?: boolean;
 }
 
-export interface TableRowTypes {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  location: string;
-  status?: string;
-  editImg?: string;
-  editNote?: string;
-  type?: string;
-}
 
 export interface TableRowEmailTracker {
   id: number;

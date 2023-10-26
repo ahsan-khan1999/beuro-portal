@@ -6,7 +6,8 @@ import { combineClasses } from "@/utils/utility";
 
 export const Form = React.memo(
   ({ formFields, handleSubmit, onSubmit, errors, className }: FormProps) => {
-    const renderField = (fieldData: FormField, error: string) => {
+    const renderField = (fieldData: FormField, error: string,errors?: Record<string, any>
+    ) => {
       if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
         return null;
       }
@@ -21,6 +22,7 @@ export const Form = React.memo(
       <form className={className} onSubmit={handleSubmit(onSubmit)}>
         {formFields.map((fieldData, index) => {
           const fieldName = fieldData?.field?.name;
+          
           const error =
             errors && fieldName ? errors[fieldName]?.message : undefined;
           const containerClasses = combineClasses(
@@ -41,7 +43,7 @@ export const Form = React.memo(
                   {fieldData?.label?.text}
                 </label>
               )}
-              {renderField(fieldData, error)}
+              {renderField(fieldData, error, errors)}
             </div>
           );
         })}

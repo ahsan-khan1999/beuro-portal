@@ -1,16 +1,19 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { generateCustomerValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, UseFormReset, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "./useRedux";
+import { useAppDispatch, useAppSelector } from "../useRedux";
 import { customerDetailsFormField } from "@/components/customer/customer-fields";
+import { Customers } from "@/types/customer";
+import { useMemo } from "react";
 
-export const useCustomerDetails = () => {
+
+
+export const useCustomerDetails = (data?: Customers) => {
   const { t: translate } = useTranslation();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
+
   const { loading, error } = useAppSelector((state) => state.auth);
 
   const schema = generateCustomerValidation(translate);
@@ -19,13 +22,23 @@ export const useCustomerDetails = () => {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = customerDetailsFormField(register, loading,control);
+  // console.log(errors,"errors");
+  //@ts-expect-error
+  const fields = customerDetailsFormField(register, loading, control);
+  useMemo(() => {
+    if (data?.id) {
+      reset(data)
+    }
+
+  }, [data?.id])
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    console.log(data,"submit");
+
   };
   return {
     fields,

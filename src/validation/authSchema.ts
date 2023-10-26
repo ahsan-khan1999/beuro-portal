@@ -72,10 +72,10 @@ export const generateLoginValidation = (translate: Function) => {
 
 export const generateCustomerValidation = (translate: Function) => {
   return yup.object().shape({
-    [CustomerDetailsFields.firstName]: yup
+    [CustomerDetailsFields.name]: yup
       .string()
       .required("validation required"),
-    [CustomerDetailsFields.lastName]: yup
+    [CustomerDetailsFields.companyName]: yup
       .string()
       .required("validation required"),
     [CustomerDetailsFields.customerType]: yup
@@ -94,15 +94,18 @@ export const generateCustomerValidation = (translate: Function) => {
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.streetNo]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.postCode]: yup
-      .number()
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.country]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.address]: yup.object({
+
+      [CustomerDetailsFields.street]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [CustomerDetailsFields.postCode]: yup
+        .number()
+        .required(translate("validationMessages.required")),
+      [CustomerDetailsFields.country]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+    }).required()
   });
 };
 
