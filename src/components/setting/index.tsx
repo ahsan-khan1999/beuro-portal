@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import SettingDetailsForm from "./SettingDetailsForm";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
+import AddTax from "@/base-components/ui/modals1/AddTax";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -20,6 +21,7 @@ const Setting = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
+    [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -29,6 +31,11 @@ const Setting = () => {
   const handleChangePassword = () => {
     dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
   };
+
+  const addTaxHandler = () => {
+    dispatch(updateModalType(ModalType.ADD_TAX));
+  };
+
 
   return (
     <>
@@ -46,7 +53,7 @@ const Setting = () => {
         </div>
         <div className="mt-4">
           {switchDetails === 1 ? (
-            <SystemSettingDetails handleChangePassword={handleChangePassword} />
+            <SystemSettingDetails handleChangePassword={handleChangePassword} addTaxHandler={addTaxHandler}/>
           ) : null}
         </div>
       </Layout>

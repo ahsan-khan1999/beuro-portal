@@ -3,7 +3,7 @@ import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import SettingLayout from "../SettingLayout";
 
-const TaxVerifiedComp = () => {
+const TaxVerifiedComp = ({ addTaxHandler }: { addTaxHandler: () => void }) => {
   const toggleBtnsData: string[] = ["No Tax", "Inclusive Tax", "Exclusive Tax"];
   const toggleInfo: string[] = ["Name", "Tax Rate (%)", "Action"];
   const toggleInfoValue: (string | JSX.Element)[] = [
@@ -35,11 +35,14 @@ const TaxVerifiedComp = () => {
 
   return (
     <SettingLayout>
-      <div >
+      <div>
         <div className="flex justify-between items-center  my-4">
           <p className="text-[18px] font-normal text-[#393939]">Tax</p>
           {activeButton === 2 && (
-            <button className="bg-[#4A13E7] flex items-center rounded-md p-2 gap-2 cursor-pointer">
+            <button
+              onClick={addTaxHandler}
+              className="bg-[#4A13E7] flex items-center rounded-md p-2 gap-2 cursor-pointer"
+            >
               <Image src={addIcon} alt="addIcon" />
               <span className="text-white font-semibold text-[13px]">
                 Add New

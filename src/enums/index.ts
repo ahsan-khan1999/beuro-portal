@@ -144,6 +144,11 @@ export enum ChangePasswordField {
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
 }
+// Add Tax
+export enum AddTaxField {
+  name = "name",
+  taxRate = "taxRate",
+}
 
 // Employee password reset
 export enum createEMployeeNewPasswordFields {

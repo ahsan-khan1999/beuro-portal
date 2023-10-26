@@ -38,6 +38,7 @@ import {
   EditInvoiceContentDetails,
   ReceiptEditContentDetails,
   ChangePasswordField,
+  AddTaxField,
 } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
@@ -386,6 +387,18 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
     [ChangePasswordField.confirmNewPassword]: yup
       .string()
       .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .required(translate("validationMessages.required")),
+  });
+};
+
+// Add Tax validation is here
+export const generateAddTaxValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [AddTaxField.name]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddTaxField.taxRate]: yup
+      .string()
       .required(translate("validationMessages.required")),
   });
 };
