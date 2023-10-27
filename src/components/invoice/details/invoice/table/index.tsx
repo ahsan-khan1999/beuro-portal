@@ -3,7 +3,7 @@ import TableLayout from "@/layout/TableLayout";
 
 import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
-import { InvoiceDetailsTableRowTypes } from "@/types";
+import { InvoiceDetailsTableRowTypes } from "@/types/invoice";
 
 export default function InvoiceDetailsTable() {
   // Function for handling the date format

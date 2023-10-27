@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TRowEmployees } from "@/types";
 import TableRowEmploys from "./table/TableRowEmploys";
 import TableHeadingEmploys from "./table/TableHeadingEmploys";
 import EmploysTopBar from "./table/EmploysTopBar";
@@ -12,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
 import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
+import { TRowEmployees } from "@/types/employee";
 
 export default function Employees() {
   const [currentPage, setCurrentPage] = useState<number>(1);

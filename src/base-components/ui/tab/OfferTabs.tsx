@@ -1,5 +1,5 @@
+import { OfferTabsSectionTypes } from "@/types/tabs";
 import React from "react";
-import { OfferTabsSectionTypes } from "@/types";
 
 const OfferTabs = ({
   name,

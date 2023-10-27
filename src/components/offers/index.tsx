@@ -5,7 +5,6 @@ import editImage from "@/assets/svgs/edit_image.svg";
 import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { OffersTableRowTypes } from "@/types";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -15,6 +14,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import { OffersTableRowTypes } from "@/types/offers";
 
 export default function Offers() {
   const [currentPage, setCurrentPage] = useState<number>(1);

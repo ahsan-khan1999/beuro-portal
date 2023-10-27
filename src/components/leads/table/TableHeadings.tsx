@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableHeadingLeads = () => {
+const TableHeadings = () => {
   return (
     <div className="grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)]   bg-white rounded-md ">
       <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white  rounded-md">
@@ -35,4 +35,4 @@ const TableHeadingLeads = () => {
   );
 };
 
-export default TableHeadingLeads;
+export default TableHeadings;

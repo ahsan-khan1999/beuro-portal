@@ -4,7 +4,6 @@ import TableLayout from "@/layout/TableLayout";
 import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { InvoiceTableRowTypes } from "@/types";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
@@ -14,6 +13,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { InvoiceTableRowTypes } from "@/types/invoice";
 
 export default function Invoices() {
   const [currentPage, setCurrentPage] = useState<number>(1);

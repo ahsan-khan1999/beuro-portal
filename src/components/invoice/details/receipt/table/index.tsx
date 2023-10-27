@@ -3,8 +3,7 @@ import TableLayout from "@/layout/TableLayout";
 
 import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
-import { ReceiptDetailsTableRowTypes } from "@/types";
-
+import { ReceiptDetailsTableRowTypes } from "@/types/invoice";
 export default function ReceiptDetailsTable() {
   // Function for handling the date format
   function parseCustomDate(dateString: string) {

@@ -1,8 +1,8 @@
-import { TableRowTypes } from "@/types";
+import { CustomerTableRowTypes } from "@/types/customer";
 import { useRouter } from "next/router";
 import React from "react";
 
-const TableRow = ({ dataToAdd }: { dataToAdd: TableRowTypes[] }) => {
+const TableRow = ({ dataToAdd }: { dataToAdd: CustomerTableRowTypes[] }) => {
   const router = useRouter();
   return (
     <div>
@@ -16,7 +16,9 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowTypes[] }) => {
             <span className="px-6 py-4 bg-white  ">{item.name}</span>
             <span className="px-6 py-4 bg-white ">{item.email}</span>
             <span className="px-6 py-4 bg-white ">{item.phone}</span>
-            <span className="px-6 py-4 bg-white ">{item.date}</span>
+            <span className="px-6 py-4 bg-white ">
+              {item.createdOn.toLocaleDateString()}
+            </span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
             <span className="px-6 py-4 bg-white ">{item.type}</span>
             <span className="px-6 py-4 bg-white ">

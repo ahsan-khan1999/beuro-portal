@@ -1,13 +1,13 @@
-import { TableRowTypes } from "@/types";
+import { LeadsTableRowTypes } from "@/types/leads";
 import Image from "next/image";
 import React from "react";
 
-const TableRowLeads = ({
+const TableRows = ({
   dataToAdd,
   openModal,
 }: {
-  dataToAdd: TableRowTypes[];
-  openModal: (item: TableRowTypes) => void;
+  dataToAdd: LeadsTableRowTypes[];
+  openModal: (item: LeadsTableRowTypes) => void;
 }) => {
   return (
     <div>
@@ -21,7 +21,9 @@ const TableRowLeads = ({
             <span className="px-6 py-4 bg-white  ">{item.name}</span>
             <span className="px-6 py-4 bg-white ">{item.email}</span>
             <span className="px-6 py-4 bg-white ">{item.phone}</span>
-            <span className="px-6 py-4 bg-white ">{item.date}</span>
+            <span className="px-6 py-4 bg-white ">
+              {item.createdOn.toLocaleDateString()}
+            </span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
             <span className="px-6 py-4 bg-white ">
               <div
@@ -74,4 +76,4 @@ const TableRowLeads = ({
   );
 };
 
-export default TableRowLeads;
+export default TableRows;

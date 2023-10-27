@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
-import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
-import TableRowLeads from "@/components/leads/TableRowLeads";
 import editImage from "@/assets/svgs/edit_image.svg";
 import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowTypes } from "@/types";
-import TableFunctions from "./TableFunctions";
+import TableFunctions from "./table/TableFunctions";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -16,18 +13,39 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import TableRows from "./table/TableRows";
+import TableHeadings from "./table/TableHeadings";
+import { LeadsTableRowTypes } from "@/types/leads";
 
 export default function Leads() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<LeadsTableRowTypes[]>(
+    []
+  );
 
-  const dataToAdd: TableRowTypes[] = [
+
+   // Function for handling the date format
+   function parseCustomDate(dateString: string) {
+    const parts = dateString.split("/");
+    if (parts.length === 3) {
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+      if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+        return new Date(year, month, day);
+      }
+    }
+
+    return null;
+  }
+
+  const dataToAdd: LeadsTableRowTypes[] = [
     {
       id: 1,
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -38,7 +56,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
@@ -49,7 +67,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -60,7 +78,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -71,7 +89,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
@@ -82,7 +100,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
@@ -93,7 +111,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -104,7 +122,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -115,7 +133,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
@@ -126,7 +144,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -137,7 +155,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Expired",
       editImg: editImage,
@@ -148,7 +166,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
@@ -159,7 +177,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -170,7 +188,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Close",
       editImg: editImage,
@@ -181,7 +199,7 @@ export default function Leads() {
       name: "Rahal Ahmed",
       email: "Test12@gmail.com",
       phone: "+49 302 1231234",
-      date: "25/08/2023",
+      createdOn: parseCustomDate("25/08/2023"),
       location: "Islamabad",
       status: "Open",
       editImg: editImage,
@@ -203,7 +221,7 @@ export default function Leads() {
   };
 
   // Function for handling the modal for exiting notes
-  const handleNotes = (item: TableRowTypes) => {
+  const handleNotes = (item: LeadsTableRowTypes) => {
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
@@ -240,8 +258,8 @@ export default function Leads() {
       <Layout>
         <TableFunctions />
         <TableLayout>
-          <TableHeadingLeads />
-          <TableRowLeads dataToAdd={currentPageRows} openModal={handleNotes} />
+          <TableHeadings />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { ContentTableRowTypes } from "@/types";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
@@ -11,6 +10,7 @@ import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
 import TableHeadings from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import TopBar from "./table/TopBar";
+import { ContentTableRowTypes } from "@/types/content";
 
 export default function Content() {
   const [currentPage, setCurrentPage] = useState<number>(1);
