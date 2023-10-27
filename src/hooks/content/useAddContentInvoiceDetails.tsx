@@ -1,19 +1,19 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { generateOfferEditContentDetailsValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "./useRedux";
-import { OfferEditContentDetailsFormField } from "@/components/content/edit/fields/offer-edit-content-details-fields";
+import { useAppDispatch, useAppSelector } from "../useRedux";
+import { AddContentInvoiceDetailsFormField } from "@/components/content/add/fields/add-invoice-details-fields";
+import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useOfferContentEditDetails = () => {
+export const useAddContentInvoiceDetails = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateOfferEditContentDetailsValidation(translate);
+  const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ export const useOfferContentEditDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = OfferEditContentDetailsFormField(register, loading, control);
+  const fields = AddContentInvoiceDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

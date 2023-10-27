@@ -233,6 +233,7 @@ export interface OfferTabsSectionTypes {
   icon: ReactNode;
 }
 
+// Interface for contract Table
 export interface contractTableTypes {
   id: string;
   customer: string;

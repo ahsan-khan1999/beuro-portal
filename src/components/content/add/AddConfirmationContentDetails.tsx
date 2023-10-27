@@ -1,5 +1,5 @@
 import { Form } from "@/base-components/form/form";
-import { useAddContentConfirmationDetails } from "@/hooks/useAddContentConfirmationDetails";
+import { useAddContentConfirmationDetails } from "@/hooks/content/useAddContentConfirmationDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 

@@ -1,21 +1,19 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { generateEditReceiptContentDetailsValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "./useRedux";
-import { AddReceiptContentDetailsFormField } from "@/components/content/add/fields/add-receipt-details-fields";
+import { useAppDispatch, useAppSelector } from "../useRedux";
+import { AddContentConfirmationDetailsFormField } from "@/components/content/add/fields/add-content-confirmation-details-fields";
+import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useAddContentReceiptDetails = ({
-  handleContentCreated,
-}) => {
+export const useAddContentConfirmationDetails = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateEditReceiptContentDetailsValidation(translate);
+  const schema = generateEditConfirmationContentDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -25,12 +23,7 @@ export const useAddContentReceiptDetails = ({
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = AddReceiptContentDetailsFormField(
-    register,
-    loading,
-    control,
-    handleContentCreated
-  );
+  const fields = AddContentConfirmationDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

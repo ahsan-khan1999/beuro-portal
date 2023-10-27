@@ -1,11 +1,11 @@
 import { Form } from "@/base-components/form/form";
-import { useAddContentReceiptDetails } from "@/hooks/useAddContentReceiptDetails";
+import { useAddContentReceiptDetails } from "@/hooks/content/useAddContentReceiptDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const AddReceiptContentDetails = () => {
   const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error, handleContentCreated } =
+  const { fields, control, onSubmit, handleSubmit, errors, error } =
     useAddContentReceiptDetails();
   return (
     <FormCard>
