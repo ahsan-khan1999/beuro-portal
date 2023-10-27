@@ -1,0 +1,119 @@
+image: node:18.12.1
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build and Test
+            caches:
+              - node
+            script:
+              - npm install
+              # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+              # - npm test
+              - ls
+              -  npm run build
+        - step:
+            name: Lint the node package
+            script:
+              # Run your linter of choice here
+              # - npm run lint
+              - echo "Linting is disabled for now"
+            caches:
+              - node
+  branches:
+    staging:
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+              script:
+                - git submodule update --init --recursive
+                - npm install
+                # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                # - npm test
+                - ls
+                - npm run build
+                - ls
+              artifacts:
+                - build/**
+                # - deploy.sh
+          - step:
+              name: Security Scan
+              script:
+                # Run a security scan for sensitive data.
+                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+                - pipe: atlassian/git-secrets-scan:0.4.3
+                - ls
+      - step:
+          name: Deploy to Staging
+          deployment: Staging
+          # trigger: manual
+          # clone:
+          #   enabled: false
+          script:
+            - ls
+            - pipe: atlassian/rsync-deploy:0.3.2
+              variables:
+                USER: $USER
+                SERVER: $SERVER
+                REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
+                LOCAL_PATH: "./build"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore"
+            - echo "Build Transported...!"
+            - pipe: atlassian/ssh-run:0.4.1
+              variables:
+                SSH_USER: $USER
+                SERVER: $SERVER
+                COMMAND: 'deploy.sh'
+                MODE: 'script'
+            - echo "Deployment is done...!"
+    prod:
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+              script:
+                - git submodule update --init --recursive
+                - npm install
+                # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                # - npm test
+                - ls
+                - npm run build
+                - ls
+              artifacts:
+                - build/**
+                # - deploy.sh
+          - step:
+              name: Security Scan
+              script:
+                # Run a security scan for sensitive data.
+                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+                - pipe: atlassian/git-secrets-scan:0.4.3
+                - ls
+      - step:
+          name: Deploy to Production
+          deployment: Production
+          trigger: manual
+          # clone:
+          #   enabled: false
+          script:
+            - ls
+            - pipe: atlassian/rsync-deploy:0.3.2
+              variables:
+                USER: $USER
+                SERVER: $SERVER
+                REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
+                LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore"
+            - echo "Build Transported...!"
+            - pipe: atlassian/ssh-run:0.4.1
+              variables:
+                SSH_USER: $USER
+                SERVER: $SERVER
+                COMMAND: 'deploy.sh'
+                MODE: 'script'
+            - echo "Deployment is done...!"
+            
