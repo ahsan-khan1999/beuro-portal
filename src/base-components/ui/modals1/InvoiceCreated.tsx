@@ -2,8 +2,8 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
-import useInvoiceCreatedModal from "@/hooks/auth/useInvoiceCreatedModal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import useInvoiceCreatedModal from "@/hooks/invoice/useInvoiceCreatedModal";
 
 const InvoiceCreated = () => {
   const defaultClassName = "mt-0  ";

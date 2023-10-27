@@ -1,7 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { TRowEmployees } from "@/types";
 
-const TableRowEmployees = ({ employsData }) => {
+const TableRowEmployees = ({ employsData } : { employsData: TRowEmployees[]}) => {
   const router = useRouter();
 
   return (

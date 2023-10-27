@@ -18,7 +18,7 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function Contract() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>([]);
 
   // Function for handling the date format
   function parseCustomDate(dateString: string) {

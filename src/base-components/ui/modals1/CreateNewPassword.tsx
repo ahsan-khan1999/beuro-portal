@@ -2,12 +2,12 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
-import useCreateNewPassword from "@/hooks/auth/useCreateNewPassword";
+import useEmployeeCreateNewPassword from "@/hooks/employee/useEmployeeCreateNewPassword";
 
 const CreateNewPassword = () => {
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
-    useCreateNewPassword();
+  useEmployeeCreateNewPassword();
   return (
     <>
       <BaseModal

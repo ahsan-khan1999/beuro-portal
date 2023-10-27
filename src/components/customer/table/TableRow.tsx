@@ -1,8 +1,9 @@
+import { TableRowTypes } from "@/types";
 import { useRouter } from "next/router";
 import React from "react";
 
-const TableRow = ({ dataToAdd }) => {
-  const router = useRouter()
+const TableRow = ({ dataToAdd }: { dataToAdd: TableRowTypes[] }) => {
+  const router = useRouter();
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
@@ -17,13 +18,12 @@ const TableRow = ({ dataToAdd }) => {
             <span className="px-6 py-4 bg-white ">{item.phone}</span>
             <span className="px-6 py-4 bg-white ">{item.date}</span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
+            <span className="px-6 py-4 bg-white ">{item.type}</span>
             <span className="px-6 py-4 bg-white ">
-            {item.type}
-            </span>
-            <span className="px-6 py-4 bg-white ">
-              <div 
-              onClick={()=>router.push("/customers/details")}
-              className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
+              <div
+                onClick={() => router.push("/customers/details")}
+                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

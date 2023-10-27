@@ -68,6 +68,8 @@ export interface tabsSectionTypes {
   setTabType: (tabType: number) => void;
   tabType: number;
 }
+
+
 export interface articlesSectionTypes {
   name: string;
   content?: React.ReactNode;
@@ -230,7 +232,7 @@ export interface OfferTabsSectionTypes {
   selectedTab: number;
   name: string;
   index: number;
-  icon: ReactNode;
+  icon: ReactNode | string;
 }
 
 // Interface for contract Table

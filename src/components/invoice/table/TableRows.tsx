@@ -6,7 +6,7 @@ const TableRows = ({
   dataToAdd,
   openModal,
 }: {
-  dataToAdd: InvoiceTableRowTypes;
+  dataToAdd: InvoiceTableRowTypes[];
   openModal: (item: InvoiceTableRowTypes) => void;
 }) => {
   return (

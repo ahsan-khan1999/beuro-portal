@@ -6,7 +6,7 @@ const TableRowLeads = ({
   dataToAdd,
   openModal,
 }: {
-  dataToAdd: TableRowTypes;
+  dataToAdd: TableRowTypes[];
   openModal: (item: TableRowTypes) => void;
 }) => {
   return (
