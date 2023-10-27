@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import useAddTax from "@/hooks/auth/useAddTax";
+import useAddTax from "@/hooks/modals/useAddTax";
 
 const AddTax = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "mt-0  ";

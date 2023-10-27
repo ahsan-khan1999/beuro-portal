@@ -15,3 +15,11 @@ export enum AddTaxField {
   name = "name",
   taxRate = "taxRate",
 }
+
+// Edit payment details
+export enum EditPaymentDetails {
+  nameOnCard = "nameOnCard",
+  expiry = "expiry",
+  cardNumber = "cardNumber",
+  cvv = "cvv",
+}

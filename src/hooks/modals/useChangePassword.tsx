@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
-import { generateAddTaxValidationSchema } from "@/validation/authSchema";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { addTaxFormField } from "@/components/setting/fields/add-tax-fields";
+import { ChangePasswordFormField } from "@/components/setting/fields/change-password-fields";
+import { generatePasswordChangeValidationSchema } from "@/validation/modalsSchema";
 
-export default function useAddTax() {
+export default function useChangePassword() {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const schema =
-  generateAddTaxValidationSchema(translate);
+  generatePasswordChangeValidationSchema(translate);
 
   const {
     register,
@@ -23,7 +23,7 @@ export default function useAddTax() {
     resolver: yupResolver(schema),
   });
 
-  const fields = addTaxFormField(register, loading);
+  const fields = ChangePasswordFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));

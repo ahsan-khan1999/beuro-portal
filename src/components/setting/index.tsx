@@ -9,6 +9,9 @@ import SettingTopDataButtons from "./SettingTopDataButtons";
 import SettingDetailsForm from "./SettingDetailsForm";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
+import MailSetting from "./mail-setting";
+import Billing from "./billing";
+import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -22,6 +25,7 @@ const Setting = () => {
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
     [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
+    [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -36,6 +40,9 @@ const Setting = () => {
     dispatch(updateModalType(ModalType.ADD_TAX));
   };
 
+  const handleEditPayment = () => {
+    dispatch(updateModalType(ModalType.EDIT_PAYMENT_METHOD));
+  };
 
   return (
     <>
@@ -53,7 +60,17 @@ const Setting = () => {
         </div>
         <div className="mt-4">
           {switchDetails === 1 ? (
-            <SystemSettingDetails handleChangePassword={handleChangePassword} addTaxHandler={addTaxHandler}/>
+            <SystemSettingDetails
+              handleChangePassword={handleChangePassword}
+              addTaxHandler={addTaxHandler}
+            />
+          ) : null}
+        </div>
+        <div className="mt-4">{switchDetails === 4 ? <Billing handleEditPayment={handleEditPayment}/> : null}</div>
+
+        <div className="mt-4">
+          {switchDetails === 5 ? (
+            <MailSetting  />
           ) : null}
         </div>
       </Layout>

@@ -1,4 +1,9 @@
-import { AddNewNote, AddTaxField, ChangePasswordField } from "@/enums/modals";
+import {
+  AddNewNote,
+  AddTaxField,
+  ChangePasswordField,
+  EditPaymentDetails,
+} from "@/enums/modals";
 import * as yup from "yup";
 
 // Password Change validation is here
@@ -37,5 +42,19 @@ export const generateAddTaxValidationSchema = (translate: Function) => {
 export const generateAddNewNoteValidation = (translate: Function) => {
   return yup.object().shape({
     [AddNewNote.noteMessage]: yup.string().required("validation required"),
+  });
+};
+
+// Validation for Edit payment details
+export const generateEditPaymentDetailsValidation = (translate: Function) => {
+  return yup.object().shape({
+    [EditPaymentDetails.nameOnCard]: yup
+      .string()
+      .required("validation required"),
+    [EditPaymentDetails.expiry]: yup.string().required("validation required"),
+    [EditPaymentDetails.cardNumber]: yup
+      .string()
+      .required("validation required"),
+    [EditPaymentDetails.cvv]: yup.string().required("validation required"),
   });
 };

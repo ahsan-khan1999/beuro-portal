@@ -29,7 +29,8 @@ export enum ModalType {
   OFFER_CREATED,
   CONTENT_CREATED,
   PASSWORD_CHANGE,
-  ADD_TAX
+  ADD_TAX,
+  EDIT_PAYMENT_METHOD
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;
