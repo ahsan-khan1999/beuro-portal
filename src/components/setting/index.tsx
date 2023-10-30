@@ -13,6 +13,7 @@ import MailSetting from "./mail-setting";
 import Billing from "./billing";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 import Templates from "./templates";
+import FollowUpSetting from "./follow-up-setting";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -68,6 +69,9 @@ const Setting = () => {
           ) : null}
         </div>
         <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
+        <div className="mt-4">
+          {switchDetails === 3 ? <FollowUpSetting /> : null}
+        </div>
         <div className="mt-4">
           {switchDetails === 4 ? (
             <Billing handleEditPayment={handleEditPayment} />

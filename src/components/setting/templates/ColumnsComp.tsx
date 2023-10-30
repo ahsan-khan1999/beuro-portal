@@ -19,7 +19,7 @@ const Column = ({
   toggle: () => void;
   data: colsData[];
 }) => (
-  <section className="px-[30px] pt-[20px] pb-[25px] border border-[#EBEBEB] rounded-md bg-white mb-6">
+  <section className="px-[30px] pt-[20px] pb-[25px] rounded-md bg-white mb-6">
     <div className="flex justify-between mb-3">
       <span className="text-lg font-medium text-[#393939]">{title}</span>
       <Image

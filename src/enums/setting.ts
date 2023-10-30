@@ -1,4 +1,3 @@
-
 // Change mail setting
 export enum ChangeMailSetting {
   mailDriver = "mailDriver",
@@ -10,4 +9,9 @@ export enum ChangeMailSetting {
   mailFormAddress = "mailFormAddress",
   mailFormName = "mailFormName",
   mail = "mail",
+}
+
+// enum for add reason
+export enum AddReason {
+  addReason = "addReason",
 }

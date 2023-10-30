@@ -1,8 +1,10 @@
 import * as yup from "yup";
-import { ChangeMailSetting } from "@/enums/setting";
+import { AddReason, ChangeMailSetting } from "@/enums/setting";
 
 // Validation for edit details
-export const generateChangeMailSettingValidationSchema = (translate: Function) => {
+export const generateChangeMailSettingValidationSchema = (
+  translate: Function
+) => {
   return yup.object().shape({
     [ChangeMailSetting.mailDriver]: yup
       .string()
@@ -31,5 +33,12 @@ export const generateChangeMailSettingValidationSchema = (translate: Function) =
     [ChangeMailSetting.mail]: yup
       .string()
       .required(translate("validation required")),
+  });
+};
+
+// Validation for add reason
+export const generateAddReasonValidation = (translate: Function) => {
+  return yup.object().shape({
+    [AddReason.addReason]: yup.string().required("validation required"),
   });
 };
