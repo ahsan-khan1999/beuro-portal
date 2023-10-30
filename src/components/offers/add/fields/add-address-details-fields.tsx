@@ -12,7 +12,7 @@ export const AddOffAddressDetailsFormField: GenerateRegistrationFormField = (
     placeholder: string,
     id: string,
     name: string,
-    inputType: any
+    inputType: string
   ) => ({
     containerClass: "mb-0",
     label: {

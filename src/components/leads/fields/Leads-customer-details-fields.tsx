@@ -54,7 +54,6 @@ export const LeadsCustomerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -178,7 +177,6 @@ export const LeadsCustomerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  ",
-              placeholder: "Please Select Country",
               type: Field.select,
               id: "country",
               name: "country",

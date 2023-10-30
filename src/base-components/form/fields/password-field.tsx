@@ -51,7 +51,7 @@ export const PasswordField = ({
           (inputFocus && "tests") || "test"
         }`}
         src={showPass ? eyeOpen : eyeClose}
-        alt="show password icon"
+        alt={alt}
         width={20}
         height={20}
         onClick={() => setShowPass(!showPass)}

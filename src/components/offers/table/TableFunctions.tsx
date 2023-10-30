@@ -67,7 +67,7 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("close", !filter.signed)}
+            onClick={() => handleButtonClick("signed", !filter.signed)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Signed
@@ -145,7 +145,7 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("expired", !filter.rejected)}
+            onClick={() => handleButtonClick("rejected", !filter.rejected)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Rejected

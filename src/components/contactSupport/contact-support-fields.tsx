@@ -98,7 +98,6 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "When is a convenient time for a consultation?",
               type: Field.select,
               id: "reasonForContact",
               name: "reasonForContact",

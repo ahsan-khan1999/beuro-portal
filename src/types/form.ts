@@ -89,8 +89,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-  svg?: SVGElement;
-  alt?: string;
+  svg?: string;
+  alt: string;
 }
 
 export interface OptionType {
@@ -139,6 +139,12 @@ export interface DragAndDropFileFieldProps
 // interface for the pdf file upload
 export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
+  control?: Control<FieldValues>;
+}
+
+// interface for the pdf file upload
+export interface ProfileUploadFieldProps
+  extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
 }
 
@@ -215,8 +221,6 @@ export type FieldType =
   | Field.input
   | Field.textArea
   | Field.ckEditor
-  | Field.inputWithCopy
-  | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
   | Field.select
@@ -226,6 +230,7 @@ export type FieldType =
   | Field.radio
   | Field.dragAndDropFileField
   | Field.dragAndDropPdfField
+  | Field.profileUploadField
   | Field.span
   | Field.div
   | Field.button
@@ -237,7 +242,6 @@ export type FieldProps =
   | CKEditorProps
   | InputWithCopyProps
   | CKEditorBoxProps
-  | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
   | SelectProps
@@ -247,6 +251,7 @@ export type FieldProps =
   | RadioButtonProps
   | DragAndDropFileFieldProps
   | DragAndDropPdfFieldProps
+  | ProfileUploadFieldProps
   | SpanProps
   | DivProps
   | ButtonProps
@@ -263,9 +268,7 @@ export interface FieldComponents {
   input: React.FC<InputProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
-  ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
-  creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
   select: React.FC<SelectProps>;
@@ -275,10 +278,11 @@ export interface FieldComponents {
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
+  profileUploadField: React.FC<ProfileUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
-  addField: React.FC<AddFieldProps>;
+  // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
 }
 

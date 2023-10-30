@@ -65,7 +65,7 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("close", !filter.overdue)}
+            onClick={() => handleButtonClick("overdue", !filter.overdue)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Overdue
@@ -104,7 +104,7 @@ const TableFunctions = () => {
             )}
           </button>
           <button
-            onClick={() => handleButtonClick("expired", !filter.paid)}
+            onClick={() => handleButtonClick("paid", !filter.paid)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
             Paid

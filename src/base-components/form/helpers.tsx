@@ -16,12 +16,11 @@ import {
   SpanField,
   CheckBox,
   DragAndDropFileField,
-  DragAndDropPdfField
+  DragAndDropPdfField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
-import { CreditCardNumberField } from "./fields/credit-card-number-field";
 // import { CardType } from "@/enums";
 import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
@@ -29,13 +28,13 @@ import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
 import { AddFiled } from "./fields/add-field-button";
+import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
-  creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,
   select: SelectField,
@@ -45,12 +44,12 @@ const fieldComponents: FieldComponents = {
   radio: RadioButtonField,
   dragAndDropFileField: DragAndDropFileField,
   dragAndDropPdfField: DragAndDropPdfField,
+  profileUploadField: ProfileControllerField,
   span: SpanField,
   div: DivField,
   button: Button,
-  addField: AddFiled,
+  // addField: AddFiled,
   link: LinkField,
-
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -75,7 +74,6 @@ export function isFieldType(type: any): type is FieldType {
     "input",
     "textArea",
     "ckEditor",
-    "creditCardNumberInput",
     "creditCardExpiryDateInput",
     "password",
     "select",
@@ -85,10 +83,11 @@ export function isFieldType(type: any): type is FieldType {
     "radio",
     "dragAndDropFileField",
     "dragAndDropPdfField",
+    "profileUploadField",
     "span",
     "div",
     "button",
-    "addField",
+    // "addField",
     "link",
   ].includes(type);
 }

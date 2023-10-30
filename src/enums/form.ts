@@ -54,6 +54,7 @@ export enum Field {
   radio = "radio",
   dragAndDropFileField = "dragAndDropFileField",
   dragAndDropPdfField = "dragAndDropPdfField",
+  profileUploadField = "profileUploadField",
   span = "span",
   div = "div",
   button = "button",

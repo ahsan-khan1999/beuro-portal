@@ -57,7 +57,6 @@ export const AddOfferServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Service Title",
               type: Field.select,
               id: "serviceTitle",
               name: "serviceTitle",
@@ -241,7 +240,6 @@ export const AddOfferServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Service Title",
               type: Field.select,
               id: "serviceTitle",
               name: "serviceTitle",

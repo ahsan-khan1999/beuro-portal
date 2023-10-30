@@ -21,7 +21,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Cleaning",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -43,7 +42,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
               className: "!p-4 !border-dark focus:!border-primary ",
               id: "desireDate",
               name: "desireDate",
-              placeholder: "12/09/2023",
               register,
             },
           },
@@ -56,7 +54,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "contactAvailablity",
               name: "contactAvailablity",
@@ -94,7 +91,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
               className: "!p-4 !border-dark focus:!border-primary ",
               id: "flexibility",
               name: "flexibility",
-              placeholder: "12/09/2023",
               register,
             },
           },
@@ -107,7 +103,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "preferContact",
               name: "preferContact",
@@ -132,7 +127,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "budget",
               name: "budget",
@@ -168,7 +162,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Instagram",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
@@ -189,7 +182,6 @@ export const LeadsServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  ",
-              placeholder: "Cleaning, Moving, Painting",
               type: Field.select,
               id: "otherServices",
               name: "otherServices",

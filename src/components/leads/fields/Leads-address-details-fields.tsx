@@ -14,7 +14,7 @@ export const LeadsAddressDetailsFormField: GenerateRegistrationFormField = (
     placeholder: string,
     id: string,
     name: string,
-    inputType
+    inputType: string
   ) => ({
     containerClass: "mb-0",
     label: {

@@ -57,7 +57,6 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -101,7 +100,6 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select offer Title",
               type: Field.select,
               id: "offerTitle",
               name: "offerTitle",
@@ -286,7 +284,6 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,
@@ -302,7 +299,6 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,

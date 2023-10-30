@@ -5,7 +5,7 @@ import plusFiled from "@/assets/svgs/add_new_icon.svg";
 export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
   register,
   loading,
-  control,
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -110,7 +110,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               placeholder: "A-2000",
               register,
             },
-            placeholder: "Please Select Customer Type",
           },
         ],
       },
@@ -186,7 +185,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
 
       field: {
         type: Field.div,
-
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -253,7 +251,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
-
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -266,7 +263,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,
@@ -282,7 +278,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,
