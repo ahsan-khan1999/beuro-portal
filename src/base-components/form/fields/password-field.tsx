@@ -3,7 +3,6 @@ import { PasswordInputProps } from "@/types";
 import eyeOpen from "@/assets/pngs/eye-open.png";
 import eyeClose from "@/assets/pngs/eye-close.png";
 import { useState } from "react";
-import passwordIcon from "@/assets/svgs/password.svg";
 
 export const PasswordField = ({
   id,

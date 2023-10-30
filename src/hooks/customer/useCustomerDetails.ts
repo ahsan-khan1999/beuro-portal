@@ -1,11 +1,11 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { generateCustomerValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, UseFormRegister, UseFormReset, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { customerDetailsFormField } from "@/components/customer/customer-fields";
+import { generateCustomerValidation } from "@/validation/customersSchema";
 import { Customers } from "@/types/customer";
 import { useMemo } from "react";
 

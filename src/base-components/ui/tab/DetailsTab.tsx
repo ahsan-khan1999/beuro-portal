@@ -1,5 +1,5 @@
+import { leadsTabsSectionTypes } from "@/types/tabs";
 import React from "react";
-import { leadsTabsSectionTypes } from "@/types";
 
 const DetailsTab = ({
   name,

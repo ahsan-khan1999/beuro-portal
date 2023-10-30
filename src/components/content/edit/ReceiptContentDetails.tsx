@@ -1,5 +1,5 @@
 import { Form } from "@/base-components/form/form";
-import { useEditReceiptDetails } from "@/hooks/useEditReceiptDetails";
+import { useEditReceiptDetails } from "@/hooks/content/useEditReceiptDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 

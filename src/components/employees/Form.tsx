@@ -1,12 +1,12 @@
 import { Form } from "@/base-components/form/form";
-import { useEmployDetails } from "@/hooks/useEmployDetails";
+import { useEmployeeDetails } from "@/hooks/employee/useEmployDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const CustomerForm = () => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useEmployDetails();
+    useEmployeeDetails();
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TRowServices } from "@/types";
 import TableRowServices from "./table/TableRowServices";
 import TableHeadingServices from "./table/TableHeadingServices";
 import ServiceTopBar from "./table/ServiceTopBar";
+import { TRowServices } from "@/types/service";
 
 export default function Services() {
   const [currentPage, setCurrentPage] = useState<number>(1);

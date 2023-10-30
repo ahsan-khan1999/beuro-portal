@@ -1,12 +1,12 @@
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
-import useModalPasswordReset from "@/hooks/auth/useModalPasswordReset";
+import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
 
 const PasswordReset = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
-    useModalPasswordReset();
+  useEmployeePasswordReset();
   return (
     <>
       <BaseModal

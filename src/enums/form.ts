@@ -43,6 +43,7 @@ export enum Field {
   textArea = "textArea",
   ckEditor = "ckEditor",
   customerInput = "customerInput",
+  inputWithCopy = 'inputWithCopy',
   creditCardNumberInput = "creditCardNumberInput",
   creditCardExpiryDateInput = "creditCardExpiryDateInput",
   password = "password",

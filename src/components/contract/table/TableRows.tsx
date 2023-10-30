@@ -6,7 +6,7 @@ const TableRows = ({
   dataToAdd,
   openModal,
 }: {
-  dataToAdd: contractTableTypes;
+  dataToAdd: contractTableTypes[];
   openModal: (item: contractTableTypes) => void;
 }) => {
   return (

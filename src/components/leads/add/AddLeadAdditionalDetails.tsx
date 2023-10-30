@@ -2,7 +2,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Form } from "@/base-components/form/form";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useAddLeadAdditionalDetails } from "@/hooks/useAddLeadAdditionalDetails";
+import { useAddLeadAdditionalDetails } from "@/hooks/leads/useAddLeadAdditionalDetails";
 import { useAppSelector } from "@/hooks/useRedux";
 import FormCard from "@/layout/customers/FormCard";
 import React, { useEffect } from "react";

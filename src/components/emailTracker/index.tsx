@@ -3,7 +3,6 @@ import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowEmailTracker, TableRowTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { closeModal } from "../../utils/hooks";
 import DeleteConfirmation_1 from "../../base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "../../base-components/ui/modals1/DeleteConfirmation_2";
+import { TableRowEmailTracker } from "@/types/emailTracker";
 
 export default function EmailTracker() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -270,7 +270,7 @@ export default function EmailTracker() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {/* {renderModal()} */}
+      {renderModal()}
     </>
   );
 }

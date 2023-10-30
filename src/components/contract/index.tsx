@@ -6,7 +6,6 @@ import editImage from "@/assets/svgs/edit_image.svg";
 import editNote from "@/assets/svgs/Edit_note.svg";
 
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowTypes, contractTableTypes } from "@/types";
 import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
 import { useDispatch } from "react-redux";
@@ -15,10 +14,11 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppSelector } from "@/hooks/useRedux";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { contractTableTypes } from "@/types/contract";
 
 export default function Contract() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>([]);
 
   // Function for handling the date format
   function parseCustomDate(dateString: string) {

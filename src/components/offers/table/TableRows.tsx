@@ -1,4 +1,4 @@
-import { OffersTableRowTypes } from "@/types";
+import { OffersTableRowTypes } from "@/types/offers";
 import Image from "next/image";
 import React from "react";
 

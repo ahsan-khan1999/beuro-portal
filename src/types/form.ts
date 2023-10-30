@@ -140,6 +140,18 @@ export interface DragAndDropPdfFieldProps
   control?: Control<FieldValues>;
 }
 
+// Interface for the input field copy
+export interface InputWithCopyProps
+  extends BaseFieldProps<Field.inputWithCopy> {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  control: Control<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
   value?: string;

@@ -1,5 +1,5 @@
 import { Form } from "@/base-components/form/form";
-import { useEditOfferAddressDetails } from "@/hooks/useEditOfferAddressDetails";
+import { useEditOfferAddressDetails } from "@/hooks/offers/useEditOfferAddressDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 

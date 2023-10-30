@@ -1,12 +1,8 @@
-import { Layout } from "@/layout";
+import Setting from "@/components/setting";
 import React from "react";
 
 const index = () => {
-  return (
-    <Layout>
-      <h1>Setting</h1>
-    </Layout>
-  );
+  return <Setting />;
 };
 
 export default index;

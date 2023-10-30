@@ -3,7 +3,7 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
-import { useAddNewNote } from "@/hooks/useAddNewNote";
+import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 
 const AddNewNote = ({ onClose }: { onClose: () => void }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
