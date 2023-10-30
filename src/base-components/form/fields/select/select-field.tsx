@@ -24,6 +24,7 @@ export const SelectField = ({
           field={field}
           trigger={trigger}
           className={className}
+          
         />
       )}
     />

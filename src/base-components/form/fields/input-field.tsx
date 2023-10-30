@@ -19,9 +19,7 @@ export const InputField = ({
   setValue,
   svg,
   img,
-  alt,
 }: InputProps) => {
-  console.log(img, "svg");
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${
     success ? "pl-4 pr-10" : "pl-10 pr-4"

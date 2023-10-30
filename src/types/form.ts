@@ -13,11 +13,10 @@ import {
   UseFormSetError,
 } from "react-hook-form";
 import { AddFieldProps, ButtonProps } from "./ui";
-import { CardType, Salutation } from "@/enums";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
 import React from "react";
-import { Field } from "@/enums/form";
+import { CardType, Field, Salutation } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -42,7 +41,6 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   setValue?: UseFormSetValue<FieldValues>;
   svg?: string;
   img?: boolean;
-  alt: string;
 }
 
 // textarea added
@@ -112,7 +110,7 @@ export interface SelectBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
 }
 
@@ -221,6 +219,7 @@ export type FieldType =
   | Field.input
   | Field.textArea
   | Field.ckEditor
+  // | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
   | Field.select
@@ -233,8 +232,7 @@ export type FieldType =
   | Field.profileUploadField
   | Field.span
   | Field.div
-  | Field.button
-  // | Field.addFieldButton
+  | Field.button  
   | Field.link;
 export type FieldProps =
   | InputProps
@@ -242,6 +240,7 @@ export type FieldProps =
   | CKEditorProps
   | InputWithCopyProps
   | CKEditorBoxProps
+  | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
   | SelectProps
@@ -268,7 +267,9 @@ export interface FieldComponents {
   input: React.FC<InputProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
+  // ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
+  // creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
   select: React.FC<SelectProps>;

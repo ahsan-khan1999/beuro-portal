@@ -4,6 +4,7 @@ import { Country, State } from "@/enums/auth";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
+import { Field } from "@/enums/form";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -63,6 +64,10 @@ export interface AddFieldProps {
   onClick?: Function;
   icon?: any;
   iconAlt?: any;
+  type?: Field.button;
+  name: string;
+
+
 }
 
 export interface Image {
@@ -198,7 +203,7 @@ interface WidgetBaseProps {
   containerClassName?: string;
 }
 
-export interface BaseCardProps extends WidgetBaseProps {}
+export interface BaseCardProps extends WidgetBaseProps { }
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {

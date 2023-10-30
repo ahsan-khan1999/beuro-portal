@@ -1,6 +1,8 @@
+import { CustomerDetail } from "@/types/customer";
 import React from "react";
+const DetailsData = ({ date, id, name }: CustomerDetail) => {
 
-const DetailsData = () => {
+
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -135,19 +137,19 @@ const DetailsData = () => {
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
             Customer ID:
-            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;001</span>
+            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             Created by:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;Ahmad Rahal
+              &nbsp;&nbsp;{name}
             </span>
           </h3>
         </div>
         <h3 className="text-[#4D4D4D] mt-4">
           Creation Date:
           <span className="text-[#4B4B4B] font-medium">
-            &nbsp;&nbsp;25/08/2023
+            &nbsp;&nbsp;{date}
           </span>
         </h3>
       </div>

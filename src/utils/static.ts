@@ -1,5 +1,6 @@
 import { Country, State } from "@/enums/auth";
-import { countryType } from "@/types";
+import { SideBar, countryType } from "@/types";
+import { Customers } from "@/types/customer";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -530,62 +531,413 @@ export const staticEnums = {
     }
 }
 
+export const customers: Customers[] = [
+    {
+        id: 1,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Germany",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
 
-// export const USER_ACCOUNT_CARDS = [
-//     {
-//       link: "/user-account-settings/personal-details",
-//       imageSrc: personalDetailsIcon,
-//       imageAlt: "Personal Details Icon",
-//       title: "Persönliche Details",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [0, 1]
-//     },
-//     {
-//       link: "/user-account-settings/login-and-security-settings",
-//       imageSrc: securityIcon,
-//       imageAlt: "Security Icon",
-//       title: "Anmeldung und Sicherheit",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [1, 2]
-  
-//     },
-//     {
-//       link: "/user-account-settings/address-settings",
-//       imageSrc: locationIcon,
-//       imageAlt: "location Icon",
-//       title: "Adresseinstellungen",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [1, 2]
-  
-//     },
-//     {
-//       link: "/user-account-settings/payment-settings",
-//       imageSrc: paymentIcon,
-//       imageAlt: "payment Icon",
-//       title: "Zahlungen",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [1, 2]
-  
-//     },
-//     {
-//       link: "/user-account-settings/notification-settings",
-//       imageSrc: notificationIcon,
-//       imageAlt: "notification Icon",
-//       title: "Benachrichtigungen",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [1, 2]
-  
-//     },
-//     {
-//       link: "/user-account-settings/commercial-seller",
-//       imageSrc: notificationIcon,
-//       imageAlt: "notification Icon",
-//       title: "Details zur Firma",
-//       description: 'Lorem Ipsum has been the industry"s standard dummy.',
-//       role: [2]
-  
-//     },
-//   ];
+    },
+    {
+        id: 2,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 3,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 4,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 5,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 6,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 7,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 8,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 9,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 10,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 11,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "0215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    {
+        id: 12,
+        name: "Rahal Ahmed",
+        email: "Test12@gmail.com",
+        phone: "412545214541",
+        date: "25/08/2023",
+        location: "Islamabad",
+        customerType: "Individual",
+        address: {
+            country: "Switzerland",
+            postCode: "12345",
+            street: "Zweibrückenstraße, 12"
+        },
+        companyName: "SwissHelden",
+        mobile: "02154512120215451212",
+        editImg: "",
+        status: "",
+        editNote: ""
+
+    },
+    // Add more rows as needed
+];
 
 
-  
+
+export const sideBar: SideBar[] = [
+    {
+      icon: "Dashboard",
+      title: "Dashboard",
+      pathname: "/dashboard",
+      role: [0, 1],
+    },
+    {
+      icon: "Customers",
+      title: "Customers",
+      pathname: "/customers",
+      role: [0, 1],
+    },
+    {
+      icon: "Leads",
+      title: "Leads",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Open",
+          pathname: "/leads?open",
+
+          role: [0, 1]
+        },
+        {
+          title: "Close",
+          pathname: "/leads?close",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Expire",
+          pathname: "/leads?expire",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Offers",
+      title: "Offers",
+      role: [0, 1],
+
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/offers?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/offers?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/offers?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Contracts",
+      title: "Contracts",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/contract?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/contract?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/contract?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Invoices",
+      title: "Invoices",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/invoices?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/invoices?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/invoices?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Services",
+      title: "Services",
+      pathname: "/services",
+      role: [0, 1],
+    },
+    {
+      icon: "Employees",
+      title: "Employees",
+      pathname: "/employees",
+      role: [0, 1],
+    },
+    {
+      icon: "Content",
+      title: "Content",
+      pathname: "/content",
+      role: [0, 1],
+    },
+    {
+      icon: "MailTracker",
+      title: "Mail Tracker",
+      pathname: "/email-tracker",
+      role: [0, 1],
+      className: "pb-6 border-b border-[#0000001A] ",
+    },
+    {
+      icon: "Settings",
+      title: "Settings",
+      pathname: "/setting",
+      role: [0, 1],
+      className: "",
+    },
+    {
+      icon: "ContactSupports",
+      title: "Contact Supports",
+      pathname: "/contact-support",
+      role: [0, 1],
+    },
+  ];

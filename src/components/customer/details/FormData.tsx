@@ -1,8 +1,9 @@
 import FormCard from "@/layout/customers/FormCard";
+import { Customers } from "@/types/customer";
 import { useRouter } from "next/router";
 import React from "react";
 
-const FormData = () => {
+const FormData = ({ email, id, name, phone, customerType, address, companyName, mobile }: Customers) => {
   const router = useRouter();
 
   return (
@@ -10,7 +11,7 @@ const FormData = () => {
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
         <button
-          onClick={() => router.push("/customers/edit")}
+          onClick={() => router.push({ pathname: "/customers/edit", query: { customer: id } })}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <svg
@@ -56,7 +57,7 @@ const FormData = () => {
               Customer Type
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Individual
+              {customerType}
             </div>
           </div>
           <div>
@@ -64,7 +65,7 @@ const FormData = () => {
               Your Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Rahal
+              {name}
             </div>
           </div>
           <div>
@@ -72,7 +73,7 @@ const FormData = () => {
               Company Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Cloud Mesh Solutions
+              {companyName}
             </div>
           </div>
         </div>
@@ -82,7 +83,7 @@ const FormData = () => {
               Email Address
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              rahal.ahmad@gmail.com
+              {email}
             </div>
           </div>
           <div>
@@ -90,7 +91,8 @@ const FormData = () => {
               Phone Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
+              {phone}
+
             </div>
           </div>
           <div>
@@ -98,7 +100,7 @@ const FormData = () => {
               Mobile Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
+              {mobile}
             </div>
           </div>
         </div>
@@ -110,7 +112,7 @@ const FormData = () => {
                 Street NO.
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Zweibrückenstraße, 12
+                {address?.street}
               </div>
             </div>
             <div>
@@ -118,7 +120,7 @@ const FormData = () => {
                 Post Code
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                1234
+                {address?.postCode}
               </div>
             </div>
             <div>
@@ -126,7 +128,7 @@ const FormData = () => {
                 Country
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Switzerland
+                {address?.country}
               </div>
             </div>
           </div>

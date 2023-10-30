@@ -21,6 +21,7 @@ import {
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
+// import { CreditCardNumberField } from "./fields/credit-card-number-field";
 // import { CardType } from "@/enums";
 import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
@@ -35,6 +36,7 @@ const fieldComponents: FieldComponents = {
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
+  // creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,
   select: SelectField,
@@ -58,8 +60,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
   error?: string,
   errors?: Record<string, any>
 ): JSX.Element => {
-  // const Component = fieldComponents[type] as React.FC<Record<string, any>>;
-  const Component = fieldComponents[type];
+  const Component = fieldComponents[type] as React.FC<Record<string, any>>;
 
   return (
     <>

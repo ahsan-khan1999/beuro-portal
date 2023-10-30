@@ -1,12 +1,12 @@
-import { CustomerTableRowTypes } from "@/types/customer";
+import { CustomerTable } from "@/types/customer";
 import { useRouter } from "next/router";
 import React from "react";
 
-const TableRow = ({ dataToAdd }: { dataToAdd: CustomerTableRowTypes[] }) => {
-  const router = useRouter();
+const TableRow = ({ currentPageRows }: CustomerTable) => {
+  const router = useRouter()
   return (
     <div>
-      {dataToAdd?.map((item: any, index: number) => {
+      {currentPageRows?.map((item, index) => {
         return (
           <div
             key={index}
@@ -17,15 +17,14 @@ const TableRow = ({ dataToAdd }: { dataToAdd: CustomerTableRowTypes[] }) => {
             <span className="px-6 py-4 bg-white ">{item.email}</span>
             <span className="px-6 py-4 bg-white ">{item.phone}</span>
             <span className="px-6 py-4 bg-white ">
-              {item.createdOn.toLocaleDateString()}
+             
             </span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
-            <span className="px-6 py-4 bg-white ">{item.type}</span>
+            <span className="px-6 py-4 bg-white "> {item.customerType}</span>
             <span className="px-6 py-4 bg-white ">
               <div
-                onClick={() => router.push("/customers/details")}
-                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
-              >
+                onClick={() => router.push({ pathname: "/customers/details", query: { customer: item.id } })}
+                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

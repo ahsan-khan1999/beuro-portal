@@ -1,12 +1,14 @@
 import { Form } from "@/base-components/form/form";
-import { useCustomerDetails } from "@/hooks/customers/useCustomerDetails";
+import { useCustomerDetails } from "@/hooks/customer/useCustomerDetails";
 import FormCard from "@/layout/customers/FormCard";
+import { CustomerField } from "@/types/customer";
 import React from "react";
 
-const CustomerForm = () => {
+const CustomerForm = (data?: CustomerField) => {
   const defaultClassName = "mt-[30px]  ";
+
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useCustomerDetails();
+    useCustomerDetails(data?.customerDetail);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">

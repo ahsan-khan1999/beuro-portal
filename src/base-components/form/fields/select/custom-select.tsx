@@ -1,4 +1,5 @@
 // import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
+import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
@@ -15,8 +16,6 @@ export const SelectBox = ({
   placeholder,
   className,
 }: SelectBoxProps) => {
-  console.log(className, "1243");
-  defaultValue = "Please select a value";
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
   useMemo(() => {
@@ -60,23 +59,12 @@ export const SelectBox = ({
         }}
         className={classes}
       >
+
         {(field && field.value) || defaultValue}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="9"
-          viewBox="0 0 14 9"
-          fill="none"
-        >
-          <path
-            d="M1.93359 1.4209L7.43359 7.4209L12.9336 1.4209"
-            stroke="#4B4B4B"
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
-        </svg>
-        {/* <ArrowIcon isOpen={isOpen} /> */}
-      </button>
+
+        <ArrowIcon isOpen={isOpen} />
+
+      </button >
       {isOpen && (
         <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-[1]">
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
@@ -100,6 +88,6 @@ export const SelectBox = ({
           ))}
         </ul>
       )}
-    </div>
+    </div >
   );
 };
