@@ -34,15 +34,15 @@ export const ProfileUpload = ({
           <Image
             src={field.value}
             layout="responsive" // Allow the image to take full width
-            width={300}
-            height={148}
+            width={241}
+            height={241}
             alt="Uploaded Preview"
           />
         ) : (
-          <div className="relative w-full h-full">
+          <div className="relative w-[241px] h-[241px]">
             {/* Adjust dimensions as needed */}
-            <Image src={profile} alt="profile" className="w-full"/>
-            <label className="absolute right-0 bottom-0">
+            <Image src={profile} alt="profile" />
+            <label className="absolute right-3 bottom-3">
               <input
                 type="file"
                 className="hidden"

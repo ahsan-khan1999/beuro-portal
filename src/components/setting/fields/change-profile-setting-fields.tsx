@@ -8,6 +8,7 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mb-4" ,
       field: {
         type: Field.div,
         className: "flex gap-x-4 items-center relative",
@@ -22,7 +23,8 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.span,
-              containerClassName: " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+              containerClassName:
+                "absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
             },
           },
         ],
@@ -32,10 +34,10 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
-        className: "grid grid-cols-3 gap-x-[59px] mb-5",
+        className: "grid grid-cols-3",
         children: [
           {
-            containerClass: "mb-5 col-span-1",
+            containerClass: "flex justify-center items-center mb-5 col-span-1",
             field: {
               type: Field.profileUploadField,
               id: "fileUpload",
@@ -44,17 +46,16 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
             },
           },
           {
-            containerClass: " col-span-2",
+            containerClass: "col-span-2",
             field: {
               type: Field.div,
               className: "grid grid-cols-2 gap-x-6 ",
               children: [
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0",
                   label: {
                     text: "Full Name",
                     htmlFor: "fullName",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -66,16 +67,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
                   <path d="M9.74966 0.828796C9.56809 0.647231 9.56809 0.352864 9.74966 0.171298C9.93122 -0.0102245 10.2255 -0.0102245 10.4071 0.171298L12.2071 1.97119C12.3886 2.15275 12.3886 2.44712 12.2071 2.62868C12.1163 2.71942 11.9973 2.76486 11.8784 2.76486C11.7594 2.76486 11.6404 2.71947 11.5496 2.62868L9.74966 0.828796ZM12.4326 13.0326H0.478085C0.221333 13.0326 0.0131836 13.2407 0.0131836 13.4975C0.0131836 13.7542 0.221333 13.9624 0.478085 13.9624H12.4326C12.6893 13.9624 12.8975 13.7542 12.8975 13.4975C12.8975 13.2407 12.6894 13.0326 12.4326 13.0326ZM0.703647 11.6748C0.586745 11.5579 0.54072 11.3878 0.58273 11.228L1.22413 8.78651C1.24509 8.7068 1.2868 8.63415 1.34504 8.57591L8.48876 1.43207C8.67033 1.25055 8.96465 1.25055 9.14622 1.43207L10.9463 3.23204C11.0335 3.31923 11.0824 3.43744 11.0824 3.56077C11.0824 3.68405 11.0335 3.80231 10.9463 3.8895L3.80251 11.0333C3.74427 11.0915 3.67158 11.1332 3.59195 11.1541L1.15054 11.7957C1.11149 11.806 1.07176 11.811 1.03242 11.811C0.910655 11.811 0.791936 11.7632 0.703647 11.6748ZM1.68434 10.6941L3.23398 10.2868L9.96009 3.56077L8.81753 2.41829L2.09146 9.14444L1.68434 10.6941Z" fill="#8F8F8F"/>
                 </svg>
               `,
-                    alt: "edit name Icon",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0",
                   label: {
                     text: "Email",
                     htmlFor: "email",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -87,16 +86,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M12.3107 0.703125H1.21449C0.563394 0.703125 0.03125 1.23293 0.03125 1.88637V8.98582C0.03125 9.6395 0.563736 10.1691 1.21449 10.1691H12.3107C12.9618 10.1691 13.4939 9.63926 13.4939 8.98582V1.88637C13.4939 1.23277 12.9615 0.703125 12.3107 0.703125ZM12.129 1.49195C11.7464 1.87577 7.25284 6.384 7.06823 6.56922C6.91404 6.72388 6.61121 6.72399 6.45694 6.56922L1.39619 1.49195H12.129ZM0.820078 8.84081V2.03138L4.21375 5.4361L0.820078 8.84081ZM1.39619 9.38024L4.77064 5.9948L5.89827 7.12611C6.36036 7.5897 7.16499 7.58952 7.62693 7.12611L8.75456 5.99482L12.129 9.38024H1.39619ZM12.7051 8.84081L9.31142 5.4361L12.7051 2.03138V8.84081Z" fill="#8F8F8F"/>
             </svg>
               `,
-                    alt: "edit name Icon",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0 mt-5",
                   label: {
                     text: "Company Name",
                     htmlFor: "companyName",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -113,17 +110,15 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.4624 2.11632C4.4624 1.66975 4.8929 1.34945 5.32064 1.47777L11.3206 3.27777C11.6026 3.36237 11.7957 3.62191 11.7957 3.91632V5.47487L13.7931 6.61626C14.0009 6.73498 14.1291 6.95585 14.1291 7.19512V14.0017H14.4624C14.6465 14.0017 14.7957 14.1509 14.7957 14.335C14.7957 14.5191 14.6465 14.6683 14.4624 14.6683H1.79574C1.61164 14.6683 1.4624 14.5191 1.4624 14.335C1.4624 14.1509 1.61164 14.0017 1.79574 14.0017H2.12907V4.00165C2.12907 3.63346 2.42755 3.33498 2.79574 3.33498H4.4624V2.11632ZM13.4624 14.0017V7.19512L11.7957 6.2427V14.0017H13.4624ZM11.1291 5.66183C11.129 5.66595 11.129 5.67007 11.1291 5.67417V14.0017H9.4624V12.335C9.4624 11.9668 9.16393 11.6683 8.79573 11.6683H7.4624C7.0942 11.6683 6.79573 11.9668 6.79573 12.335V14.0017H5.12907V2.11632L11.1291 3.91632V5.66183ZM4.4624 14.0017H2.79574V4.00165H4.4624V14.0017ZM7.4624 14.0017H8.79573V12.335H7.4624V14.0017Z" fill="#8F8F8F"/>
             </svg>
               `,
-                    alt: "edit name Icon",
                     register,
                     inputType: "text",
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0 mt-5",
                   label: {
                     text: "Phone Number",
                     htmlFor: "phoneNumber",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -135,16 +130,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M0.122396 1.55482C0.120706 1.20608 0.249222 0.86594 0.484365 0.605636C0.747208 0.314584 1.123 0.146604 1.51508 0.144704L3.39397 0.135599C4.10702 0.132143 4.70732 0.661378 4.79022 1.36662C4.83906 1.78167 4.92657 2.1937 5.0503 2.59145C5.2052 3.08925 5.07546 3.62689 4.71162 3.99435L3.95405 4.75937C4.75881 6.21352 5.9805 7.42343 7.44209 8.21398L8.19973 7.44889C8.56365 7.0815 9.10001 6.94656 9.59936 7.0967C9.99828 7.21657 10.4111 7.30008 10.8266 7.3449C11.5327 7.42088 12.0677 8.01603 12.0711 8.72907L12.0803 10.6079C12.0822 11.0001 11.9178 11.3774 11.6293 11.6431C11.3398 11.9099 10.9482 12.0432 10.5553 12.009C9.20658 11.8915 7.90317 11.5404 6.68121 10.9657C5.49321 10.4069 4.41625 9.65354 3.48004 8.72635C2.54389 7.79924 1.77998 6.72956 1.20981 5.54703C0.623272 4.33063 0.259568 3.03068 0.128909 1.68314C0.124702 1.64033 0.122604 1.59758 0.122396 1.55482ZM4.18365 3.00992C4.18342 2.9628 4.17613 2.91491 4.16158 2.86808C4.02079 2.41573 3.9213 1.94719 3.86578 1.47531C3.83825 1.24107 3.63735 1.0652 3.39848 1.06636L1.51959 1.07546C1.38652 1.07611 1.26418 1.13087 1.17507 1.22962C1.08473 1.32946 1.04224 1.45867 1.0554 1.59328C1.54551 6.65005 5.57499 10.6406 10.6362 11.0817C10.7709 11.0935 10.8997 11.0497 10.9988 10.9585C11.0966 10.8683 11.1501 10.7455 11.1495 10.6124L11.1404 8.73358C11.1392 8.49472 10.9615 8.29553 10.7269 8.2702C10.2545 8.21933 9.78504 8.12438 9.33135 7.98806C9.1624 7.93725 8.98221 7.98153 8.86107 8.10385L7.6275 9.34943L7.32711 9.20182C5.45448 8.28142 3.90617 6.74783 2.96745 4.88384L2.81678 4.58491L4.05036 3.33939C4.1377 3.2512 4.18424 3.13259 4.18365 3.00992Z" fill="#8F8F8F"/>
             </svg>
               `,
-                    alt: "call Icon",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0 mt-5",
                   label: {
                     text: "Mobile Number",
                     htmlFor: "mobileNumber",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -156,16 +149,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M0.122396 1.55482C0.120706 1.20608 0.249222 0.86594 0.484365 0.605636C0.747208 0.314584 1.123 0.146604 1.51508 0.144704L3.39397 0.135599C4.10702 0.132143 4.70732 0.661378 4.79022 1.36662C4.83906 1.78167 4.92657 2.1937 5.0503 2.59145C5.2052 3.08925 5.07546 3.62689 4.71162 3.99435L3.95405 4.75937C4.75881 6.21352 5.9805 7.42343 7.44209 8.21398L8.19973 7.44889C8.56365 7.0815 9.10001 6.94656 9.59936 7.0967C9.99828 7.21657 10.4111 7.30008 10.8266 7.3449C11.5327 7.42088 12.0677 8.01603 12.0711 8.72907L12.0803 10.6079C12.0822 11.0001 11.9178 11.3774 11.6293 11.6431C11.3398 11.9099 10.9482 12.0432 10.5553 12.009C9.20658 11.8915 7.90317 11.5404 6.68121 10.9657C5.49321 10.4069 4.41625 9.65354 3.48004 8.72635C2.54389 7.79924 1.77998 6.72956 1.20981 5.54703C0.623272 4.33063 0.259568 3.03068 0.128909 1.68314C0.124702 1.64033 0.122604 1.59758 0.122396 1.55482ZM4.18365 3.00992C4.18342 2.9628 4.17613 2.91491 4.16158 2.86808C4.02079 2.41573 3.9213 1.94719 3.86578 1.47531C3.83825 1.24107 3.63735 1.0652 3.39848 1.06636L1.51959 1.07546C1.38652 1.07611 1.26418 1.13087 1.17507 1.22962C1.08473 1.32946 1.04224 1.45867 1.0554 1.59328C1.54551 6.65005 5.57499 10.6406 10.6362 11.0817C10.7709 11.0935 10.8997 11.0497 10.9988 10.9585C11.0966 10.8683 11.1501 10.7455 11.1495 10.6124L11.1404 8.73358C11.1392 8.49472 10.9615 8.29553 10.7269 8.2702C10.2545 8.21933 9.78504 8.12438 9.33135 7.98806C9.1624 7.93725 8.98221 7.98153 8.86107 8.10385L7.6275 9.34943L7.32711 9.20182C5.45448 8.28142 3.90617 6.74783 2.96745 4.88384L2.81678 4.58491L4.05036 3.33939C4.1377 3.2512 4.18424 3.13259 4.18365 3.00992Z" fill="#8F8F8F"/>
             </svg>
               `,
-                    alt: "call Icon",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0 mt-5",
                   label: {
                     text: "Website",
                     htmlFor: "website",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -178,16 +169,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M3.19291 3.59481C3.26475 3.59481 3.33464 3.56598 3.3855 3.51511C3.4361 3.46452 3.46493 3.39434 3.46493 3.3228C3.46493 3.25126 3.4361 3.18135 3.3855 3.13048C3.33464 3.07989 3.26475 3.05078 3.19291 3.05078C3.12137 3.05078 3.05119 3.07989 3.00063 3.13048C2.95003 3.18135 2.9209 3.25126 2.9209 3.3228C2.9209 3.39434 2.95 3.46452 3.00063 3.51511C3.05119 3.56598 3.12137 3.59481 3.19291 3.59481Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.3"/>
             </svg>
               `,
-                    alt: "call Icon",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-5",
+                  containerClass: "mb-0 mt-5",
                   label: {
                     text: "MwST Number (Optional)",
                     htmlFor: "mwstNumber",
-                    className: "mb-[12px]",
                   },
                   field: {
                     type: Field.input,
@@ -204,7 +193,6 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M7.23882 10.6719H5.01367C4.80357 10.6719 4.6333 10.8421 4.6333 11.0522C4.6333 11.2622 4.80357 11.4326 5.01367 11.4326H7.23882C7.44892 11.4326 7.61919 11.2622 7.61919 11.0522C7.61919 10.8421 7.44892 10.6719 7.23882 10.6719Z" fill="#8F8F8F"/>
             </svg>
               `,
-                    alt: "call Icon",
                     register,
                   },
                 },
@@ -216,6 +204,7 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
     },
 
     {
+      containerClass: "my-5",
       field: {
         type: Field.div,
         className: "flex gap-x-4 items-center relative",
@@ -230,7 +219,8 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.span,
-              containerClassName: " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+              containerClassName:
+                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
             },
           },
         ],
@@ -243,11 +233,10 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
         className: "grid grid-cols-3 gap-x-[43px] ",
         children: [
           {
-            containerClass: "mb-5",
+            containerClass: "mb-0",
             label: {
               text: "Street Address",
               htmlFor: "streetAddress",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -260,16 +249,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
                 <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
               </svg>
                 `,
-              alt: "edit name Icon",
               register,
             },
           },
           {
-            containerClass: "mb-5",
+            containerClass: "mb-0",
             label: {
               text: "Postcode",
               htmlFor: "postCode",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -285,16 +272,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path fill-rule="evenodd" clip-rule="evenodd" d="M3.87581 2.75781H1.26311C1.0104 2.75781 0.78927 2.85258 0.599734 3.04212C0.410198 3.23165 0.31543 3.45278 0.31543 3.70549V11.0528C0.31543 11.3056 0.410198 11.5267 0.599734 11.7162C0.78927 11.9058 1.0104 12.0005 1.26311 12.0005H12.0035C12.2562 12.0005 12.4773 11.9058 12.6669 11.7162C12.8564 11.5267 12.9512 11.3056 12.9512 11.0528V3.70549C12.9512 3.45278 12.8564 3.23165 12.6669 3.04212C12.4773 2.85258 12.2562 2.75781 12.0035 2.75781H9.32169V3.70549H11.9403L6.6333 8.2333L1.34208 3.70549H3.87581V2.75781ZM1.26311 4.5742L6.6333 9.18098L12.0035 4.5742V11.0528H1.26311V4.5742Z" fill="#8F8F8F"/>
             </svg>
                 `,
-              alt: "edit name Icon",
               register,
             },
           },
           {
-            containerClass: "mb-5",
+            containerClass: "mb-0",
             label: {
               text: "Country",
               htmlFor: "country",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -307,16 +292,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
                 <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
               </svg>
                 `,
-              alt: "conutry Icon",
               register,
             },
           },
           {
-            containerClass: "mb-5",
+            containerClass: "mt-5 mb-0",
             label: {
               text: "Bank Name",
               htmlFor: "bankName",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -333,16 +316,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M2.29494 4.75882H5.19088C5.33247 4.75882 5.44725 4.64405 5.44725 4.50246C5.44725 4.36087 5.33247 4.24609 5.19088 4.24609H2.29494C2.15335 4.24609 2.03857 4.36087 2.03857 4.50246C2.03857 4.64405 2.15335 4.75882 2.29494 4.75882Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
             </svg>
                 `,
-              alt: "bank Icon",
               register,
             },
           },
           {
-            containerClass: "mb-5",
+            containerClass: "mt-5 mb-0",
             label: {
               text: "Account No",
               htmlFor: "accountNumber",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -359,16 +340,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M2.29494 4.86429H5.19088C5.33247 4.86429 5.44725 4.74952 5.44725 4.60793C5.44725 4.46634 5.33247 4.35156 5.19088 4.35156H2.29494C2.15335 4.35156 2.03857 4.46634 2.03857 4.60793C2.03857 4.74952 2.15335 4.86429 2.29494 4.86429Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
             </svg>
                 `,
-              alt: "bank Icon",
               register,
             },
           },
           {
-            containerClass: "mb-5",
+            containerClass: "mt-5 mb-0",
             label: {
               text: "Iban Number",
               htmlFor: "IBAN_number",
-              className: "mb-[12px]",
             },
             field: {
               type: Field.input,
@@ -385,7 +364,6 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
               <path d="M2.29494 4.86429H5.19088C5.33247 4.86429 5.44725 4.74952 5.44725 4.60793C5.44725 4.46634 5.33247 4.35156 5.19088 4.35156H2.29494C2.15335 4.35156 2.03857 4.46634 2.03857 4.60793C2.03857 4.74952 2.15335 4.86429 2.29494 4.86429Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
             </svg>
                 `,
-              alt: "bank Icon",
               register,
             },
           },
@@ -393,13 +371,14 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
       },
     },
 
-
     {
+      containerClass: "mb-[14px] mt-[26px] ",
       field: {
         type: Field.div,
         className: "flex gap-x-4 items-center relative",
         children: [
           {
+            containerClass: "mb-0",
             field: {
               type: Field.span,
               text: "Change Password",
@@ -409,7 +388,8 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.span,
-              containerClassName: " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+              containerClassName:
+                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
             },
           },
         ],
@@ -417,12 +397,8 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "mb-5",
-      label: {
-        text: "Change Password",
-        htmlFor: "changePassword",
-        className: "mb-[12px]",
-      },
+      containerClass: "mb-0 ",
+
       field: {
         type: Field.input,
         id: "changePassword",
@@ -437,7 +413,6 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
           <path d="M6.84732 9.38507C7.13056 9.38507 7.36017 9.15546 7.36017 8.87222C7.36017 8.58898 7.13056 8.35938 6.84732 8.35938C6.56408 8.35938 6.33447 8.58898 6.33447 8.87222C6.33447 9.15546 6.56408 9.38507 6.84732 9.38507Z" fill="#8F8F8F"/>
         </svg>
             `,
-        alt: "password Icon",
         register,
       },
     },
