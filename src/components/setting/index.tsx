@@ -12,6 +12,7 @@ import AddTax from "@/base-components/ui/modals1/AddTax";
 import MailSetting from "./mail-setting";
 import Billing from "./billing";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
+import Templates from "./templates";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -66,12 +67,15 @@ const Setting = () => {
             />
           ) : null}
         </div>
-        <div className="mt-4">{switchDetails === 4 ? <Billing handleEditPayment={handleEditPayment}/> : null}</div>
+        <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
+        <div className="mt-4">
+          {switchDetails === 4 ? (
+            <Billing handleEditPayment={handleEditPayment} />
+          ) : null}
+        </div>
 
         <div className="mt-4">
-          {switchDetails === 5 ? (
-            <MailSetting  />
-          ) : null}
+          {switchDetails === 5 ? <MailSetting /> : null}
         </div>
       </Layout>
       {renderModal()}
