@@ -14,26 +14,7 @@ const AddCustomer = () => {
       name: "Customer Details",
       content: <CustomerForm />,
     },
-    {
-      name: "Security Settings",
-      content: "Security Settings",
-    },
-    {
-      name: "Address Settings",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Payments Settings",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Social Media Links",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Notification Preferences",
-      content: <CustomerForm />,
-    },
+   
   ];
   return (
     <Layout>

@@ -1,13 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateCustomerFormField } from "@/types";
 
-export const customerDetailsFormField: GenerateRegistrationFormField = (
+export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
-  // trigger,
-  // router
 ) => {
   const formField: FormField[] = [
     {
@@ -23,10 +20,10 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
               name: "customerType",
+              value: "",
               options: [
                 { value: "Individual", label: "Individual" },
                 { value: "Riyal", label: "Riyal" },
@@ -46,8 +43,9 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "Name",
-              name: "Name",
+              id: "name",
+              name: "name",
+
               placeholder: "Please Enter Your Name",
               register,
             },
@@ -78,6 +76,7 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               id: "email",
               name: "email",
               inputType: "email",
+
               placeholder: "Please Enter Email Address",
               register,
             },
@@ -94,8 +93,9 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
-              id: "phoneNumber",
-              name: "phoneNumber",
+              id: "phone",
+              name: "phone",
+
               placeholder: "Enter Your Phone Number",
 
               register,
@@ -112,8 +112,9 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
-              id: "mobileNumber",
-              name: "mobileNumber",
+              id: "mobile",
+              name: "mobile",
+
               placeholder: "Enter Your Mobile Number",
               register,
             },
@@ -127,51 +128,33 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
         text: "Address Details*",
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
+
       },
 
       field: {
         type: Field.div,
-
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0",
             label: {
               text: "Street NO.",
-              htmlFor: "streetNo",
+              htmlFor: "address.street",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
-              id: "streetNo",
-              name: "streetNo",
+              id: "address.street",
+              name: "address.street",
+
               placeholder: "Please Enter Street Number",
               register,
             },
           },
 
-          // {
-          //   label: {
-          //     text: "Customer Type",
-          //     htmlFor: "select",
-          //     className: "mb-[10px]",
-          //   },
-          //   field: {
-          //     placeholder: "Please Select Customer Type",
-          //     type: Field.select,
-          //     id: "customerType",
-          //     name: "customerType",
-          //     options: [
-          //       { value: "Individual", label: "Individual" },
-          //       { value: "Riyal", label: "Riyal" },
-          //       { value: "Dollar", label: "Dollar" },
-          //     ],
-          //     // trigger,
-          //     control,
-          //   },
-          // },
+
 
           {
             containerClass: "mb-0",
@@ -185,8 +168,8 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
               className:
                 "!p-4  !border-dark focus:!border-primary focus:!border-primary",
               inputType: "number",
-              id: "postCode",
-              name: "postCode",
+              id: "address.postCode",
+              name: "address.postCode",
               placeholder: "Enter Your Post Code",
 
               register,
@@ -201,10 +184,10 @@ export const customerDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  ",
-              placeholder: "Please Select Country",
               type: Field.select,
-              id: "country",
-              name: "country",
+              id: "address.country",
+              name: "address.country",
+              value: "",
               options: [
                 { value: "Switzerland", label: "Switzerland" },
                 { value: "Germany", label: "Germany" },

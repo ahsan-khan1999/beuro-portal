@@ -5,14 +5,18 @@ import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
 import FormData from "./FormData";
 
+import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
+
 const CustomerDetails = () => {
+  const { customerDetail } = useCustomerDetail()
+  
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData />
+        <DetailsData date={customerDetail?.date} id={customerDetail?.id} name={customerDetail?.name} />
       </DetailsCard>
       <div className="flex mt-8">
-        <FormData />
+        <FormData {...customerDetail} />
         <SideCard />
       </div>
     </Layout>

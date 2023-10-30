@@ -1,3 +1,4 @@
+import { svgs } from './../base-components/SideBar';
 import {
   Component,
   ReactNode,
@@ -18,13 +19,21 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
+import { Customers } from "./customer";
 export interface SideBar {
-  icon: string;
+  icon?: keyof typeof svgs;
   title: string;
-  pathname: string;
-  role: Array<number>[];
+  pathname?: string;
+  role: number[];
+  inner?: SideBar[];
+  className?: string;
 }
 
+export interface SubMenu {
+  title: string;
+  pathname: string;
+  icon?: keyof typeof svgs;
+}
 export interface SVGIconProp {
   className?: string;
   pathClass?: string;
@@ -60,7 +69,7 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?:string
+  icon?: string
 }
 
 export interface tabsSectionTypes {
@@ -120,7 +129,12 @@ export type GenerateRegistrationFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
   onClick?: Function,
-  router?: NextRouter
+  router?: NextRouter,
+) => FormField[];
+export type GenerateCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -160,6 +174,3 @@ export interface PaginationItemProps {
 }
 
 
-// export interface SuccessMessage {
-//   image:Image
-// }

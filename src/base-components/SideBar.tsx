@@ -1,9 +1,6 @@
 import logo from "@/assets/svgs/logo.svg";
-import customersIcon from "@/assets/svgs/customers.svg";
-
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { CustomerSsvg } from "@/assets/svgs/components/test";
 import { CustomersIcon } from "@/assets/svgs/components/sideBar/Customers";
 import { DashboardIcon } from "@/assets/svgs/components/sideBar/Dashboard";
 import { LeadsIcon } from "@/assets/svgs/components/sideBar/Leads";
@@ -17,145 +14,24 @@ import { MailTrackerIcon } from "@/assets/svgs/components/sideBar/MailTracker";
 import { SettingsIcon } from "@/assets/svgs/components/sideBar/Settings";
 import { ContactSupportsIcon } from "@/assets/svgs/components/sideBar/ContactSupports";
 import { useState } from "react";
-import { SideBar } from "@/types";
-
+import { sideBar } from "@/utils/static";
+export const svgs = {
+  Dashboard: <DashboardIcon />,
+  Customers: <CustomersIcon />,
+  Leads: <LeadsIcon />,
+  Offers: <OffersIcon />,
+  Contracts: <ContractsIcon />,
+  Invoices: <InvoicesIcon />,
+  Services: <ServicesIcon />,
+  Employees: <EmployeesIcon />,
+  Content: <ContentIcon />,
+  MailTracker: <MailTrackerIcon />,
+  Settings: <SettingsIcon />,
+  ContactSupports: <ContactSupportsIcon />,
+};
 const SideBar = () => {
-  const [isOpen, setIsOpen] = useState<number>(null);
-  const sideBar: SideBar[] = [
-    {
-      icon: "Dashboard",
-      title: "Dashboard",
-      pathname: "/dashboard",
-      role: [0, 1],
-    },
-    {
-      icon: "Customers",
-      title: "Customers",
-      pathname: "/customers",
-      role: [0, 1],
-    },
-    {
-      icon: "Leads",
-      title: "Leads",
-      pathname: "/leads",
-      role: [0, 1],
-      inner: [
-        {
-          title: "Open",
-        },
-        {
-          title: "Close",
-        },
-        {
-          title: "Expire",
-        },
-      ],
-    },
-    {
-      icon: "Offers",
-      title: "Offers",
-      pathname: "/offers",
-      role: [0, 1],
-      inner: [
-        {
-          title: "Accepted",
-        },
-        {
-          title: "Rejected",
-        },
-        {
-          title: "Pending",
-        },
-      ],
-    },
-    {
-      icon: "Contracts",
-      title: "Contracts",
-      pathname: "/contract",
-      role: [0, 1],
-      inner: [
-        {
-          title: "Accepted",
-        },
-        {
-          title: "Rejected",
-        },
-        {
-          title: "Pending",
-        },
-      ],
-    },
-    {
-      icon: "Invoices",
-      title: "Invoices",
-      pathname: "/invoices",
-      role: [0, 1],
-      inner: [
-        {
-          title: "Accepted",
-        },
-        {
-          title: "Rejected",
-        },
-        {
-          title: "Pending",
-        },
-      ],
-    },
-    {
-      icon: "Services",
-      title: "Services",
-      pathname: "/services",
-      role: [0, 1],
-    },
-    {
-      icon: "Employees",
-      title: "Employees",
-      pathname: "/employees",
-      role: [0, 1],
-    },
-    {
-      icon: "Content",
-      title: "Content",
-      pathname: "/content",
-      role: [0, 1],
-    },
-    {
-      icon: "MailTracker",
-      title: "Mail Tracker",
-      pathname: "/email-tracker",
-      role: [0, 1],
-      margin: "mb-6",
-    },
-    "devider",
-    {
-      icon: "Settings",
-      title: "Settings",
-      pathname: "/setting",
-      role: [0, 1],
-    },
-    {
-      icon: "ContactSupports",
-      title: "Contact Supports",
-      pathname: "/contact-support",
-      role: [0, 1],
-    },
-  ];
-  const svgs = {
-    Dashboard: <DashboardIcon />,
-    Customers: <CustomersIcon />,
-    Leads: <LeadsIcon />,
-    Offers: <OffersIcon />,
-    Contracts: <ContractsIcon />,
-    Invoices: <InvoicesIcon />,
-    Services: <ServicesIcon />,
-    Employees: <EmployeesIcon />,
-    Content: <ContentIcon />,
-    MailTracker: <MailTrackerIcon />,
-    Settings: <SettingsIcon />,
-    ContactSupports: <ContactSupportsIcon />,
-  };
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState<number | null>(null);
   return (
     <div className="fixed overflow-x-hidden  overflow-y-scroll  bg-white rounded-r-[6px] ">
       <div className="max-w-[247px] pt-6 px-4 pb-8   relative      sidebar-height    flex flex-col">
@@ -165,31 +41,23 @@ const SideBar = () => {
               <div key={index}>
                 {!item.inner ? (
                   <button
-                    onClick={()=>router.push(item.pathname)}
-                    className={`flex items-center px-3 py-2 w-full ${
-                      router.pathname === item.pathname &&
+                    onClick={() => item.pathname && router.push(item.pathname)}
+                    className={`flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                       "bg-primary rounded-lg"
-                    }`}
+                      } ${item.className}`}
                   >
-                    {/* <Image
-                      src={customersIcon}
-                      alt="Customers Icon"
-                      className="mr-2"
-                    /> */}
+
                     <span
-                      className={`${
-                        router.pathname === item.pathname && "sidebar-svg"
-                      } mr-2 `}
-                      // dangerouslySetInnerHTML={{ __html: svgs[item.icon] }}
+                      className={`${router.pathname === item.pathname && "sidebar-svg"
+                        } mr-2 `}
                     >
-                      {svgs[item.icon]}
+                      {item.icon && svgs[item.icon]}
                     </span>
                     <span
-                      className={` font-medium tracking-[0.5px] ${
-                        router.pathname === item.pathname
-                          ? "text-white"
-                          : " text-[#4B4B4B]"
-                      }`}
+                      className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                        ? "text-white"
+                        : " text-[#4B4B4B]"
+                        }`}
                     >
                       {item.title}
                     </span>
@@ -198,33 +66,25 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        isOpen == index ? setIsOpen(null) || router.push(item.pathname): setIsOpen(index) || router.push(item.pathname);
+                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
                       }}
-                      className={`flex  justify-between items-center px-3 py-2 w-full ${
-                        router.pathname === item.pathname &&
+                      className={`flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                         "bg-primary rounded-lg"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center">
-                        {/* <Image
-                        src={customersIcon}
-                        alt="Customers Icon"
-                        className="mr-2"
-                      /> */}
+
                         <span
-                          className={`${
-                            router.pathname === item.pathname && "sidebar-svg"
-                          } mr-2 `}
-                          // dangerouslySetInnerHTML={{ __html: svgs[item.icon] }}
+                          className={`${router.pathname === item.pathname && "sidebar-svg"
+                            } mr-2 `}
                         >
-                          {svgs[item.icon]}
+                          {item.icon && svgs[item.icon]}
                         </span>
                         <span
-                          className={` font-medium tracking-[0.5px] ${
-                            router.pathname === item.pathname
-                              ? "text-white"
-                              : " text-[#4B4B4B]"
-                          }`}
+                          className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                            ? "text-white"
+                            : " text-[#4B4B4B]"
+                            }`}
                         >
                           {item.title}
                         </span>
@@ -232,8 +92,7 @@ const SideBar = () => {
                       <div
                         className={`
                           cursor-pointer  ${isOpen == index ? "rotate-180" : ""}
-                          ${
-                            router.pathname === item.pathname && "sidebar-svg"
+                          ${router.pathname === item.pathname && "sidebar-svg"
                           }`}
                       >
                         <svg
@@ -254,8 +113,11 @@ const SideBar = () => {
                     {isOpen == index &&
                       item.inner.map((it, ind) => {
                         return (
-                          <div className=" mt-3 ml-8 px-3">
-                            <button className="text-[#4B4B4B] font-medium tracking-[0.5px]  ">
+                          <div className=" mt-3 ml-8 px-3" key={ind}>
+                            <button className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
+                              onClick={() => it.pathname && router.push(it.pathname)}
+
+                            >
                               {it.title}
                             </button>
                           </div>
@@ -263,11 +125,11 @@ const SideBar = () => {
                       })}
                   </>
                 )}
-                {item.title?.includes("Mail Tracker") && (
-                  <div className="my-6">
+                {/* {item.title?.includes("Mail Tracker") && (
+                  <div className="">
                     <hr className="text-[#0000001A] absolute w-full left-0  " />
                   </div>
-                )}
+                )} */}
               </div>
             );
           })}

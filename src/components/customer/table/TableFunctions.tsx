@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
+import CustomerFilter from "./customer-filter";
 
 const TableFunctions = () => {
   const router = useRouter();
@@ -12,7 +13,8 @@ const TableFunctions = () => {
       <h1 className="text-xl text-[#222B45] ">Customers</h1>
       <div className="flex items-center ">
         <div className="flex items-center space-x-4">
-          <SearchInput onInputChange={onInputChange} />
+          <CustomerFilter />
+          {/* <SearchInput onInputChange={onInputChange} />
           <div className="text-[#404040] font-medium flex items-center cursor-pointer">
             Sort by
             <svg
@@ -56,7 +58,7 @@ const TableFunctions = () => {
                 />
               </clipPath>
             </defs>
-          </svg>
+          </svg> */}
         </div>
         <button
           onClick={() => router.push("customers/add")}
