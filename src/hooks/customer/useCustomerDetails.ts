@@ -1,7 +1,7 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { generateCustomerValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, UseFormReset, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, UseFormRegister, UseFormReset, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -11,7 +11,7 @@ import { useMemo } from "react";
 
 
 
-export const useCustomerDetails = (data?: Customers) => {
+export const useCustomerDetails = (data?: FieldValues) => {
   const { t: translate } = useTranslation();
 
   const { loading, error } = useAppSelector((state) => state.auth);
@@ -21,13 +21,11 @@ export const useCustomerDetails = (data?: Customers) => {
     register,
     handleSubmit,
     control,
-    setError,
     reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  // console.log(errors,"errors");
   //@ts-expect-error
   const fields = customerDetailsFormField(register, loading, control);
   useMemo(() => {
@@ -37,7 +35,7 @@ export const useCustomerDetails = (data?: Customers) => {
 
   }, [data?.id])
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data,"submit");
+    console.log(data, "submit");
 
   };
   return {

@@ -1,5 +1,5 @@
 import { Country, State } from "@/enums/auth";
-import { countryType } from "@/types";
+import { SideBar, countryType } from "@/types";
 import { Customers } from "@/types/customer";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
@@ -774,3 +774,170 @@ export const customers: Customers[] = [
     },
     // Add more rows as needed
 ];
+
+
+
+export const sideBar: SideBar[] = [
+    {
+      icon: "Dashboard",
+      title: "Dashboard",
+      pathname: "/dashboard",
+      role: [0, 1],
+    },
+    {
+      icon: "Customers",
+      title: "Customers",
+      pathname: "/customers",
+      role: [0, 1],
+    },
+    {
+      icon: "Leads",
+      title: "Leads",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Open",
+          pathname: "/leads?open",
+
+          role: [0, 1]
+        },
+        {
+          title: "Close",
+          pathname: "/leads?close",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Expire",
+          pathname: "/leads?expire",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Offers",
+      title: "Offers",
+      role: [0, 1],
+
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/offers?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/offers?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/offers?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Contracts",
+      title: "Contracts",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/contract?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/contract?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/contract?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Invoices",
+      title: "Invoices",
+      role: [0, 1],
+      inner: [
+        {
+          title: "Accepted",
+          pathname: "/invoices?accepted",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Rejected",
+          pathname: "/invoices?rejected",
+
+          role: [0, 1]
+
+        },
+        {
+          title: "Pending",
+          pathname: "/invoices?pending",
+
+          role: [0, 1]
+
+        },
+      ],
+    },
+    {
+      icon: "Services",
+      title: "Services",
+      pathname: "/services",
+      role: [0, 1],
+    },
+    {
+      icon: "Employees",
+      title: "Employees",
+      pathname: "/employees",
+      role: [0, 1],
+    },
+    {
+      icon: "Content",
+      title: "Content",
+      pathname: "/content",
+      role: [0, 1],
+    },
+    {
+      icon: "MailTracker",
+      title: "Mail Tracker",
+      pathname: "/email-tracker",
+      role: [0, 1],
+      className: "pb-6 border-b border-[#0000001A] ",
+    },
+    {
+      icon: "Settings",
+      title: "Settings",
+      pathname: "/setting",
+      role: [0, 1],
+      className: "",
+    },
+    {
+      icon: "ContactSupports",
+      title: "Contact Supports",
+      pathname: "/contact-support",
+      role: [0, 1],
+    },
+  ];

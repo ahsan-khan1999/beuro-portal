@@ -1,3 +1,4 @@
+import { svgs } from './../base-components/SideBar';
 import {
   Component,
   ReactNode,
@@ -20,12 +21,19 @@ import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 export interface SideBar {
-  icon: string;
+  icon?: keyof typeof svgs;
   title: string;
-  pathname: string;
-  role: Array<number>[];
+  pathname?: string;
+  role: number[];
+  inner?: SideBar[];
+  className?: string;
 }
 
+export interface SubMenu {
+  title: string;
+  pathname: string;
+  icon?: keyof typeof svgs;
+}
 export interface SVGIconProp {
   className?: string;
   pathClass?: string;

@@ -3,22 +3,23 @@ import { getTypedFieldComponent } from "../helpers";
 import { combineClasses } from "@/utils/utility";
 
 export const DivField = ({ children, className, errors }: DivProps) => {
-  console.log(errors, "errors");
 
   const classes = combineClasses("", className);
   return (
     <div className={classes}>
       {children.map((childField, index) => {
+
+
         const fieldName: string | undefined = childField?.field?.name;
-        if (fieldName?.includes(".")) {
-          const keys = fieldName.split('.');
-          const value = keys.reduce((acc, currentKey) => acc && acc[currentKey], errors);
-          console.log(value,"value");
-          
-        }
-        const error =
-          errors && fieldName ? errors[fieldName]?.message : undefined;
+        const data = fieldName?.includes(".") && fieldName?.split(".") || []
         // console.log(fieldName, "fieldName");
+
+        const error =
+          (errors && fieldName && data?.length > 0) ? errors?.[data[0]]?.[data[1]]?.message : (fieldName && errors) && errors[fieldName]?.message;
+
+        // const error = errors && fieldName ? errors[fieldName]?.message : undefined;
+        // const error = errors && fieldName ? errors[fieldName]?.message : undefined;
+
 
         const { label, field, containerClass } = childField;
         const renderedField =
@@ -48,3 +49,5 @@ export const DivField = ({ children, className, errors }: DivProps) => {
     </div>
   );
 };
+
+
