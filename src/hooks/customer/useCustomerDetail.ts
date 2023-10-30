@@ -8,6 +8,8 @@ export default function useCustomerDetail() {
     // @ts-expect-error
     const [customerDetail, setCustomerDetail] = useState<Customers>({})
     const id = router.query.customer
+    console.log(id,"id");
+    
 
     useEffect(() => {
         if (typeof Number(id) == "number")
