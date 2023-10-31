@@ -4,8 +4,8 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const SettingProfile = () => {
-  const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error, control } = useSettingProfile();
+  const defaultClassName = "mt-[30px]  ";
+  const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile();
   return (
     <FormCard>
       <Form

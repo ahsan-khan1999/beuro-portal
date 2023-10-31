@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
@@ -13,6 +13,7 @@ export const ProfileUpload = ({
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
 }) => {
+  // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();
   const formdata = new FormData();
 
@@ -22,7 +23,6 @@ export const ProfileUpload = ({
     if (file) {
       formdata.append("file", file);
       const res = await dispatch(uploadFileToFirebase(formdata));
-
       field.onChange(res?.payload);
     }
   };
@@ -33,14 +33,13 @@ export const ProfileUpload = ({
         {field.value ? (
           <Image
             src={field.value}
-            layout="responsive" // Allow the image to take full width
+            layout="responsive"
             width={241}
             height={241}
             alt="Uploaded Preview"
           />
         ) : (
-          <div className="relative w-[241px] h-[241px]">
-            {/* Adjust dimensions as needed */}
+          <div className="relative w-[241px] h-[241px] rounded-full">
             <Image src={profile} alt="profile" />
             <label className="absolute right-3 bottom-3">
               <input
