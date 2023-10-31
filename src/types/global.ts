@@ -13,6 +13,11 @@ export interface GlobalState {
 }
 
 export type TranslatorFunction = (value: any) => any;
+export interface Status {
+  open: boolean;
+  close: boolean;
+  expired: boolean;
+}
 
 export interface CheckFieldProps {
   title: string;
@@ -20,25 +25,27 @@ export interface CheckFieldProps {
   options: string[];
   border: number;
   value: boolean;
-  handleChange: (value: boolean) => void
+  handleChange: (value: boolean) => void;
+  filter: Status;
+  setFilter: React.Dispatch<React.SetStateAction<Status>>
+  type: string;
 }
 export interface InputFieldProps {
-  value: string
+  value: string;
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: string) => void
+  handleChange: (value: string) => void;
 }
 
 export interface OptionsFieldProps {
-  value: string
+  value: string;
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: string) => void
+  handleChange: (value: string) => void;
   options: string[];
   dropDownIconClassName: string;
   isOpen: boolean;
   setIsOpen: SetStateAction<any>;
-
 }

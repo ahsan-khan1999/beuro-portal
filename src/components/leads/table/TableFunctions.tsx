@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
+import LeadsFilter from "./leads-filter";
 
 interface Status {
   open: boolean;
@@ -142,7 +143,8 @@ const TableFunctions = () => {
               </svg>
             )}
           </button>
-          <SearchInput onInputChange={onInputChange} />
+          <LeadsFilter />
+          {/* <SearchInput onInputChange={onInputChange} />
           <div className="text-[#404040] font-medium flex items-center cursor-pointer">
             Sort by
             <svg
@@ -161,7 +163,7 @@ const TableFunctions = () => {
                 stroke="black"
               />
             </svg>
-          </div>
+          </div> */}
           <svg
             className="cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
