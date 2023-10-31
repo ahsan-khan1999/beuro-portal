@@ -20,12 +20,12 @@ export interface Status {
 }
 
 export interface CheckFieldProps {
-  title: string;
+  // title: string;
   label: string;
-  options: string[];
-  border: number;
-  value: boolean;
-  handleChange: (value: boolean) => void;
+  // options: string[];
+  // border: number;
+  // value: boolean;
+  // handleChange: (value: boolean) => void;
   filter: Status;
   setFilter: React.Dispatch<React.SetStateAction<Status>>
   type: string;

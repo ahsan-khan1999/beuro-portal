@@ -17,11 +17,25 @@ export default function LeadsFilter() {
   return (
     <div className="flex">
       <CheckField
-        options={["open 1", "close", "expire"]}
+        // options={["open 1", "close", "expire"]}
         filter={filter}
         setFilter={setFilter}
         type={"open"}
-        label="open"
+        label="Open Leads"
+      />
+      <CheckField
+        // options={["open 1", "close", "expire"]}
+        filter={filter}
+        setFilter={setFilter}
+        type={"close"}
+        label="Close Leads"
+      />
+      <CheckField
+        // options={["open 1", "close", "expire"]}
+        filter={filter}
+        setFilter={setFilter}
+        type={"expire"}
+        label="Expire Leads"
       />
       <InputField handleChange={(value) => console.log(value)} value="" />
       <SelectField
