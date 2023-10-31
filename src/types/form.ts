@@ -23,6 +23,8 @@ interface BaseFieldProps<T extends Field> {
   id: string;
   name: string;
   className?: string;
+  text?:string;
+  fileSupported?: string
 }
 
 export interface LabelProps {

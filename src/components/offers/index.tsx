@@ -15,6 +15,7 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import { OffersTableRowTypes } from "@/types/offers";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 
 export default function Offers() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -214,11 +215,16 @@ export default function Offers() {
     dispatch(updateModalType(ModalType.NONE));
   };
 
+  const handleImagesUpload = (item: OffersTableRowTypes) => {
+    dispatch(updateModalType(ModalType.UPLOADS_IMAGES));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
     [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+    [ModalType.UPLOADS_IMAGES]: <ImagesUpload onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -245,7 +251,7 @@ export default function Offers() {
         <TableFunctions />
         <TableLayout>
           <TableHeading />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} handleImagesUpload={handleImagesUpload}/>
         </TableLayout>
         <Pagination
           totalItems={totalItems}

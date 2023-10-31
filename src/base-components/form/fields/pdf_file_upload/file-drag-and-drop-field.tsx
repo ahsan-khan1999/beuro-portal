@@ -6,14 +6,20 @@ import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
+import { useRouter } from "next/router";
 
 export const PdfFileUpload = ({
   id,
   field,
+  text,
+  fileSupported,
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
+  text?: string;
+  fileSupported?: string;
 }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const formdata = new FormData();
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
@@ -59,20 +65,19 @@ export const PdfFileUpload = ({
   };
 
   return (
-    <div className="flex gap-[15px]">
+    <div className="flex ">
       <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
         <div className="flex gap-3">
-          <div className="flex flex-col items-center border border-[#8F8F8F] border-dashed rounded-lg w-[275px] cursor-pointer">
+          <div className="flex flex-col items-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto cursor-pointer px-[25px] pt-6 pb-3">
             <Image
               src={fileUploadIcon}
               alt="fileUploadIcon"
-              className="mt-[37px]"
             />
-            <span className="text-[#4B4B4B] font-medium text-[14px] mt-3 mb-2">
-              Drop or Attach your files here
+            <span className="text-[#4B4B4B] text-center font-medium text-[10px] mt-3 mb-2">
+              {text}
             </span>
-            <span className="text-[#8F8F8F] font-normal text-[12px] mb-[31px]">
-              Files supported: PDF, JPG, PNG, GIF
+            <span className="text-[#8F8F8F] font-normal text-[12px]">
+              {fileSupported}
             </span>
           </div>
         </div>
@@ -86,26 +91,28 @@ export const PdfFileUpload = ({
       </label>
 
       {/* Display the file name here */}
-      <div className="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3">
-        {uploadedImages.length > 0 &&
-          uploadedImages.map((item, index) => (
-            <div
-              className="relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 "
-              key={index}
-            >
-              <div className="flex items-center gap-3">
-                <Image
-                  src={deletePdfIcon}
-                  alt="deletePdfIcon"
-                  className="absolute -right-1 -top-1 cursor-pointer "
-                  onClick={() => handleDeleteFile(item)}
-                />
-                <Image src={pdfIcon} alt="pdfIcon" />
-                <span>{item}</span>
+      {router.pathname === "/contract/email-edit" && (
+        <div className="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 mr-4">
+          {uploadedImages.length > 0 &&
+            uploadedImages.map((item, index) => (
+              <div
+                className="relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 "
+                key={index}
+              >
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={deletePdfIcon}
+                    alt="deletePdfIcon"
+                    className="absolute -right-1 -top-1 cursor-pointer "
+                    onClick={() => handleDeleteFile(item)}
+                  />
+                  <Image src={pdfIcon} alt="pdfIcon" />
+                  <span>{item}</span>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      )}
     </div>
   );
 };

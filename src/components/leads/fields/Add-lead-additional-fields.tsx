@@ -12,7 +12,6 @@ export const AddLeadAdditionalDetailsFormField: GenerateRegistrationFormField =
           className: "!p-4 !border-dark focus:!border-primary",
           id: "additionlData",
           name: "additionlData",
-         
           control,
         },
       },

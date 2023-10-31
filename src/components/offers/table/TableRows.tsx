@@ -2,7 +2,15 @@ import { OffersTableRowTypes } from "@/types/offers";
 import Image from "next/image";
 import React from "react";
 
-const TableRows = ({ dataToAdd, openModal }: {dataToAdd: OffersTableRowTypes[]; openModal: (item: OffersTableRowTypes) => void;}) => {
+const TableRows = ({
+  dataToAdd,
+  openModal,
+  handleImagesUpload,
+}: {
+  dataToAdd: OffersTableRowTypes[];
+  openModal: (item: OffersTableRowTypes) => void;
+  handleImagesUpload: (item: OffersTableRowTypes) => void;
+}) => {
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
@@ -63,6 +71,7 @@ const TableRows = ({ dataToAdd, openModal }: {dataToAdd: OffersTableRowTypes[]; 
                 src={item.editImg}
                 alt="edit_img_icon"
                 className="cursor-pointer"
+                onClick={() => handleImagesUpload(item)}
               />
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">

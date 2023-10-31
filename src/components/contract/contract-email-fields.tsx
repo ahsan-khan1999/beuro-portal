@@ -42,6 +42,7 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "content",
               name: "content",
+              value:"",
               options: [
                 {
                   value:
@@ -88,7 +89,6 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
         className: "!p-4 !border-dark focus:!border-primary",
         id: "description",
         name: "description",
-        
         control,
       },
     },
@@ -103,6 +103,8 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
       field: {
         type: Field.dragAndDropPdfField,
         id: "fileUpload",
+        text: "Drop or Attach your files here",
+        fileSupported: "Files supported: PDF,JPG, PNG,GIF",
         name: "fileUpload",
         control,
       },

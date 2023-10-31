@@ -33,7 +33,9 @@ export const PasswordField = ({
         />
       )} */}
       {router.pathname === "/setting" && (
-        <button className="absolute right-3  z-50 bg-[#4A13E7] text-white rounded-lg px-5 py-1">Change</button>
+        <button className="absolute right-3  z-50 bg-[#4A13E7] text-white rounded-lg px-5 py-1">
+          Change
+        </button>
       )}
       <span
         className={`mr-3 absolute top-4 left-4 ${

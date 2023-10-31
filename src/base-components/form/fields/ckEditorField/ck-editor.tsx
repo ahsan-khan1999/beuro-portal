@@ -17,6 +17,7 @@ export const CkEditor = ({
     <Controller
       name={name}
       control={control}
+      
       defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <CustomCKEditor field={field} trigger={trigger} name={name} id={id} />
