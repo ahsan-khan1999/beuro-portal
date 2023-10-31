@@ -3,8 +3,8 @@ import React from "react";
 
 export default function CheckField({
   label,
-  filter,
-  setFilter,
+  checkboxFilter,
+  setCheckBoxFilter,
   type,
 }: CheckFieldProps) {
   return (
@@ -13,16 +13,18 @@ export default function CheckField({
         <input
           type="checkbox"
           name="check"
-          defaultChecked={filter[type]}
+          defaultChecked={checkboxFilter[type]}
           className="hidden"
-          onChange={(e) => setFilter({ ...filter, [type]: e.target.checked })}
+          onChange={(e) =>
+            setCheckBoxFilter({ ...checkboxFilter, [type]: e.target.checked })
+          }
         />
         <span className="checkbox-control"></span>
 
         <p className=" text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {filter[type] ? (
+        {checkboxFilter[type] ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"

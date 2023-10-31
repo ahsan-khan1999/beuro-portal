@@ -5,13 +5,13 @@ import { Status } from "@/types/global";
 import React, { useState } from "react";
 
 export default function LeadsFilter() {
-  const [filter, setFilter] = useState<Status>({
+  const [checkboxFilter, setCheckBoxFilter] = useState<Status>({
     open: true,
-    close: true,
-    expire: true,
+    close: false,
+    expire: false,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const status = [
+  const checkbox = [
     { label: "Open Leads", type: "open" },
     { label: "Close Leads", type: "close" },
     { label: "Expire Leads", type: "expire" },
@@ -19,10 +19,10 @@ export default function LeadsFilter() {
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
-        {status.map((item, idx) => (
+        {checkbox.map((item, idx) => (
           <CheckField
-            filter={filter}
-            setFilter={setFilter}
+            checkboxFilter={checkboxFilter}
+            setCheckBoxFilter={setCheckBoxFilter}
             type={item.type}
             label={item.label}
           />

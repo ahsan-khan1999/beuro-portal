@@ -21,8 +21,8 @@ export interface Status {
 
 export interface CheckFieldProps {
   label: string;
-  filter: Status;
-  setFilter: React.Dispatch<React.SetStateAction<Status>>;
+  checkboxFilter: Status;
+  setCheckBoxFilter: React.Dispatch<React.SetStateAction<Status>>;
   type: string;
 }
 export interface InputFieldProps {
