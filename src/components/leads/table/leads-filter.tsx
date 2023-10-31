@@ -14,29 +14,22 @@ export default function LeadsFilter() {
     expired: false,
   });
   const [isOpen, setIsOpen] = useState(false);
+  const status = ["open", "close", "expire"]
   return (
     <div className="flex">
-      <CheckField
-        // options={["open 1", "close", "expire"]}
-        filter={filter}
-        setFilter={setFilter}
-        type={"open"}
-        label="Open Leads"
-      />
-      <CheckField
-        // options={["open 1", "close", "expire"]}
-        filter={filter}
-        setFilter={setFilter}
-        type={"close"}
-        label="Close Leads"
-      />
-      <CheckField
-        // options={["open 1", "close", "expire"]}
-        filter={filter}
-        setFilter={setFilter}
-        type={"expire"}
-        label="Expire Leads"
-      />
+      {
+
+        status.map((item, idx) => (
+          <CheckField
+            filter={filter}
+            setFilter={setFilter}
+            type={item}
+            label="Open Leads"
+          />
+        ))
+      }
+
+
       <InputField handleChange={(value) => console.log(value)} value="" />
       <SelectField
         handleChange={(value) => console.log(value)}
