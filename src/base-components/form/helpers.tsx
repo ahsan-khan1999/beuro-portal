@@ -17,6 +17,7 @@ import {
   CheckBox,
   DragAndDropFileField,
   DragAndDropPdfField,
+  ImageUploadField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -47,6 +48,7 @@ const fieldComponents: FieldComponents = {
   dragAndDropFileField: DragAndDropFileField,
   dragAndDropPdfField: DragAndDropPdfField,
   profileUploadField: ProfileControllerField,
+  imageUploadField:ImageUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
@@ -85,6 +87,7 @@ export function isFieldType(type: any): type is FieldType {
     "dragAndDropFileField",
     "dragAndDropPdfField",
     "profileUploadField",
+    "imageUploadField",
     "span",
     "div",
     "button",

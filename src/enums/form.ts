@@ -55,6 +55,7 @@ export enum Field {
   dragAndDropFileField = "dragAndDropFileField",
   dragAndDropPdfField = "dragAndDropPdfField",
   profileUploadField = "profileUploadField",
+  imageUploadField = "imageUploadField",
   span = "span",
   div = "div",
   button = "button",

@@ -5,17 +5,17 @@ export const ImageUploadFormField: GenerateRegistrationFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
+  handleImageSlider
 ) => {
   const formField: FormField[] = [
     {
-      containerClass:"",
       field: {
-        type: Field.dragAndDropPdfField,
+        type: Field.imageUploadField,
         id: "upload_image",
         text: "Drop or Attach your files here",
         name: "upload_image",
         control,
+        onClick: handleImageSlider
       },
     },
   ];

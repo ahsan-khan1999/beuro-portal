@@ -148,6 +148,14 @@ export interface ProfileUploadFieldProps
   control?: Control<FieldValues>;
 }
 
+
+// interface for the Image upload
+export interface ImageUploadFieldProps
+  extends BaseFieldProps<Field.imageUploadField> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
+}
+
 // Interface for the input field copy
 export interface InputWithCopyProps
   extends BaseFieldProps<Field.inputWithCopy> {
@@ -232,6 +240,7 @@ export type FieldType =
   | Field.dragAndDropFileField
   | Field.dragAndDropPdfField
   | Field.profileUploadField
+  | Field.imageUploadField
   | Field.span
   | Field.div
   | Field.button  
@@ -253,6 +262,7 @@ export type FieldProps =
   | DragAndDropFileFieldProps
   | DragAndDropPdfFieldProps
   | ProfileUploadFieldProps
+  | ImageUploadFieldProps
   | SpanProps
   | DivProps
   | ButtonProps
@@ -282,6 +292,7 @@ export interface FieldComponents {
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
   profileUploadField: React.FC<ProfileUploadFieldProps>;
+  imageUploadField: React.FC<ImageUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;

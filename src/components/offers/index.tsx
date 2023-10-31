@@ -16,6 +16,7 @@ import TableRows from "./table/TableRows";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import { OffersTableRowTypes } from "@/types/offers";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 
 export default function Offers() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -216,7 +217,14 @@ export default function Offers() {
   };
 
   const handleImagesUpload = (item: OffersTableRowTypes) => {
-    dispatch(updateModalType(ModalType.UPLOADS_IMAGES));
+    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+  };
+
+
+  const handleImageSlider = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+    console.log("clicked!")
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -224,7 +232,8 @@ export default function Offers() {
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
     [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
-    [ModalType.UPLOADS_IMAGES]: <ImagesUpload onClose={onClose} />,
+    [ModalType.UPLOAD_IMAGE]: <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider}/>,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
   };
 
   const renderModal = () => {

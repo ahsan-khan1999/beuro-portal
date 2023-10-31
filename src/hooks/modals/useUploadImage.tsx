@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
 
-export const useUploadImage = () => {
+export const useUploadImage = ({handleImageSlider}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -16,10 +16,9 @@ export const useUploadImage = () => {
     handleSubmit,
     control,
     setError,
-
     formState: { errors },
   } = useForm();
-  const fields = ImageUploadFormField(register, loading, control);
+  const fields = ImageUploadFormField(register, loading, control, handleImageSlider);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
