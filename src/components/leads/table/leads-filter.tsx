@@ -14,7 +14,7 @@ export default function LeadsFilter() {
     expired: false,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const status = ["open", "close", "expire"]
+  const status = [{ label: "Open", type: "open" }, "close", "expire"]
   return (
     <div className="flex">
       {
