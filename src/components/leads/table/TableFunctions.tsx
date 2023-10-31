@@ -25,7 +25,7 @@ const TableFunctions = () => {
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Leads</h1>
       <div className="flex items-center ">
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           <button
             onClick={() => handleButtonClick("open", !filter.open)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
@@ -144,7 +144,7 @@ const TableFunctions = () => {
             )}
           </button>
           <LeadsFilter />
-          {/* <SearchInput onInputChange={onInputChange} />
+          <SearchInput onInputChange={onInputChange} />
           <div className="text-[#404040] font-medium flex items-center cursor-pointer">
             Sort by
             <svg
@@ -163,7 +163,7 @@ const TableFunctions = () => {
                 stroke="black"
               />
             </svg>
-          </div> */}
+          </div>
           <svg
             className="cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +189,8 @@ const TableFunctions = () => {
               </clipPath>
             </defs>
           </svg>
-        </div>
+        </div> */}
+        <LeadsFilter />
         <button
           onClick={() => router.push("/leads/add")}
           className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"

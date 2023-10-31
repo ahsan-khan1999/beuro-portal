@@ -16,18 +16,13 @@ export type TranslatorFunction = (value: any) => any;
 export interface Status {
   open: boolean;
   close: boolean;
-  expired: boolean;
+  expire: boolean;
 }
 
 export interface CheckFieldProps {
-  // title: string;
   label: string;
-  // options: string[];
-  // border: number;
-  // value: boolean;
-  // handleChange: (value: boolean) => void;
   filter: Status;
-  setFilter: React.Dispatch<React.SetStateAction<Status>>
+  setFilter: React.Dispatch<React.SetStateAction<Status>>;
   type: string;
 }
 export interface InputFieldProps {

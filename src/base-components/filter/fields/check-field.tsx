@@ -2,41 +2,14 @@ import { CheckFieldProps } from "@/types/global";
 import React from "react";
 
 export default function CheckField({
-  // title,
   label,
-  // options,
-  // border,
-  // handleChange,
-  // value,
   filter,
   setFilter,
   type,
 }: CheckFieldProps) {
   return (
     <>
-      {/* <div
-        className={`border-b-[${border}px] border-slate-gray border-opacity-50  `}
-      >
-        {title && (
-          <div className="flex justify-between">
-            <div>
-              <span className="text-dark font-semibold text-lg me-2">
-                {title}{" "}
-              </span>
-              <span className=" text-red text-sm font-medium">{label}</span>
-            </div>
-          </div>
-        )}
-
-        <div className="flex items-center space-x-2 ">
-          {options.map((item, index) => (
-            <div className="mx-1  ">
-              <div className="flex  space-x-2 "></div>
-            </div>
-          ))}
-        </div>
-      </div> */}
-      <label className="custom-checkbox block  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative">
+      <label className="custom-checkbox block  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer">
         <input
           type="checkbox"
           name="check"
