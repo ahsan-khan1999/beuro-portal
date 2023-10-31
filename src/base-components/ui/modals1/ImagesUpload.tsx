@@ -8,11 +8,11 @@ const ImagesUpload = ({
   onClose,
   handleImageSlider,
 }: {
+  handleImageSlider: Function,
   onClose: () => void;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     useUploadImage(handleImageSlider);
-
   return (
     <>
       <BaseModal

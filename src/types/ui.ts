@@ -277,10 +277,10 @@ interface SliderBaseProps {
 // types for slider
 export interface MainImageSliderProps extends SliderBaseProps {
   imageSrc: StaticImageData;
-  handleMouseMove: (
+  handleMouseMove?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
-  handleMouseLeave: (
+  handleMouseLeave?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
 }

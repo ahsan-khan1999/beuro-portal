@@ -36,15 +36,15 @@ export const useSlider = ({
 
   const selectImage = (index: number) => {
     setCurrentIndex(index);
-  
+
     const centerPosition = Math.floor(noOfThumbNails / 2);
     let newStartIndex = Math.max(0, index - centerPosition);
-  
+
     // Make sure there are enough images to fill the remaining slots
     if (index > images.length - centerPosition - 1) {
       newStartIndex = images.length - noOfThumbNails;
     }
-  
+
     setThumbnailStartIndex(newStartIndex);
   };
 

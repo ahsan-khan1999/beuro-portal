@@ -8,8 +8,6 @@ export const MainImageSlider = ({
   imageSrc,
   goToNext,
   goToPrev,
-  handleMouseMove,
-  handleMouseLeave,
 }: MainImageSliderProps) => (
   <div className="flex relative">
     <IconOnlyButton
@@ -25,9 +23,8 @@ export const MainImageSlider = ({
       }
     />
     <div
-      className="w-[670px] h-[453px] overflow-hidden relative hover:cursor-zoom-in rounded-lg"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      className="w-[670px] h-[453px] overflow-hidden relative rounded-lg"
+    
     >
       <Image src={imageSrc} alt="main image" fill={true} id="mainImage" className="rounded-lg"/>
     </div>

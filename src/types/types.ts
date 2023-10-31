@@ -128,8 +128,13 @@ export type GenerateRegistrationFormField = (
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
-  onClick?: Function,
   router?: NextRouter,
+  onClick?: Function,
+) => FormField[];
+export type ImageUploadFormFieldType = (
+  register: UseFormRegister<FieldValues>,
+  control?: Control<FieldValues>,
+  onClick?: Function,
 ) => FormField[];
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
