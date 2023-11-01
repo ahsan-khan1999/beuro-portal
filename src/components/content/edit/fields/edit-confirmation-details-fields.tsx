@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateContentFormField } from "@/types";
 
-export const EditConfirmationContentDetailsFormField: GenerateRegistrationFormField =
+export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
   (register, loading, control) => {
     const formField: FormField[] = [
       {
@@ -33,7 +33,7 @@ export const EditConfirmationContentDetailsFormField: GenerateRegistrationFormFi
           className: "!p-4 !border-dark focus:!border-primary ",
           id: "confirmationDescription",
           name: "confirmationDescription",
-          
+
           control,
         },
       },
@@ -50,7 +50,7 @@ export const EditConfirmationContentDetailsFormField: GenerateRegistrationFormFi
           className: "!p-4 !border-dark focus:!border-primary ",
           id: "emailBody",
           name: "emailBody",
-         
+
           control,
         },
       },
@@ -66,6 +66,8 @@ export const EditConfirmationContentDetailsFormField: GenerateRegistrationFormFi
           type: Field.dragAndDropPdfField,
           id: "attachments",
           name: "attachments",
+          text: "Drop or attach your file here",
+          fileSupported: "Files supported: PDF, JPG, PNG, GIF",
           control,
         },
       },

@@ -2,6 +2,7 @@ import React from "react";
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import ContentCard from "../ContentCard";
+import PdfButtons from "./PdfButtons";
 
 const PdfPreview = () => {
   return (
@@ -13,6 +14,7 @@ const PdfPreview = () => {
 
       <div className="mt-[30px]">
         <Page2 />
+        <PdfButtons />
       </div>
     </div>
   );

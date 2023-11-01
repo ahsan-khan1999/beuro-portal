@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useAppSelector } from "@/hooks/useRedux";
-import { useDispatch } from "react-redux";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
+
 import TableHeadings from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import TopBar from "./table/TopBar";
@@ -141,21 +137,6 @@ export default function Content() {
     setCurrentPage(page);
   };
 
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.NEW_PASSWORD]: <CreateNewPassword />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  useEffect(() => {
-    dispatch(updateModalType(ModalType.NEW_PASSWORD));
-  }, []);
-
   return (
     <>
       <Layout>
@@ -173,7 +154,6 @@ export default function Content() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {/* {renderModal()} */}
     </>
   );
 }

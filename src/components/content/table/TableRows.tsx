@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { ContentTableRowTypes } from "@/types";
+import { ContentTableRowTypes } from "@/types/content";
 
 const TableRows = ({
   contentData,
@@ -15,7 +15,7 @@ const TableRows = ({
         return (
           <div
             key={item.id}
-            className="shadow-tableRow grid grid-cols-[minmax(100px,_100px),minmax(150px,_100%)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="shadow-tableRow grid grid-cols-[minmax(100px,_100px),minmax(200px,_200px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
             <span className="px-6 py-4 bg-white  ">{item.name}</span>

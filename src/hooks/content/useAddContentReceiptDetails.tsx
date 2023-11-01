@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddReceiptContentDetailsFormField } from "@/components/content/add/fields/add-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useAddContentReceiptDetails = () => {
+export const useAddContentReceiptDetails = (handleContentCreated : Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -27,6 +27,7 @@ export const useAddContentReceiptDetails = () => {
     register,
     loading,
     control,
+    handleContentCreated
   );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));

@@ -160,7 +160,6 @@ export type GenerateFormAddressField = (
 ) => FormField[];
 
 // Image upload form field
-
 export type ImageUploadFormFieldType = (
   register: UseFormRegister<FieldValues>,
   control?: Control<FieldValues>,
@@ -216,16 +215,24 @@ export type GenerateAddTaxFormField = (
   onClick?: Function
 ) => FormField[];
 
-
 // contact-support formfield
 export type GenerateContactSupportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
-  router?: NextRouter,
   onClick?: Function
 ) => FormField[];
+
+// content formfield
+export type GenerateContentFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

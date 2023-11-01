@@ -1,5 +1,3 @@
-import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Image from "next/image";
 import { useState } from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
@@ -20,7 +18,6 @@ export const PdfFileUpload = ({
   fileSupported?: string;
 }) => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const formdata = new FormData();
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
     null
@@ -91,8 +88,9 @@ export const PdfFileUpload = ({
         {uploadedImages.length > 0 &&
           uploadedImages.map((item, index) => (
             <div
-              className="relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 "
+              className="relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 cursor-pointer"
               key={index}
+              onClick={() => router.push("/content/pdf-preview")}
             >
               <div className="flex items-center gap-3">
                 <Image

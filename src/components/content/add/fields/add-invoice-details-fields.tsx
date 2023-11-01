@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateContentFormField } from "@/types";
 
-export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
+export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
   (register, loading, control) => {
     const formField: FormField[] = [
       {
@@ -66,6 +66,8 @@ export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
           type: Field.dragAndDropPdfField,
           id: "attachments",
           name: "attachments",
+          text: "Drop or attach your file here",
+          fileSupported: "Files supported: PDF, JPG, PNG, GIF",
           control,
         },
       },

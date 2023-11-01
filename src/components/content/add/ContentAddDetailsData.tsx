@@ -6,7 +6,7 @@ import AddInoviceContentDetails from "./AddInoviceContentDetails";
 import AddReceiptContentDetails from "./AddReceiptContentDetails";
 import OfferContentAddDetails from "./OfferContentAddDetails";
 
-const ContentAddDetailsData = () => {
+const ContentAddDetailsData = ({handleContentCreated} : {handleContentCreated: Function}) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -72,7 +72,7 @@ const ContentAddDetailsData = () => {
     0: <OfferContentAddDetails />,
     1: <AddConfirmationContentDetails />,
     2: <AddInoviceContentDetails />,
-    3: <AddReceiptContentDetails />,
+    3: <AddReceiptContentDetails handleContentCreated={handleContentCreated}/>,
   };
 
   return (
