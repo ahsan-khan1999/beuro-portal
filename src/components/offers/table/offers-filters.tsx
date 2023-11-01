@@ -4,17 +4,19 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { Status } from "@/types/global";
 import React, { useState } from "react";
 
-export default function LeadsFilter() {
+export default function OffersFilters() {
   const [checkboxFilter, setCheckBoxFilter] = useState<Status>({
     open: true,
-    close: false,
+    signed: false,
     expired: false,
+    rejected: false,
   });
   const [isOpen, setIsOpen] = useState(false);
   const checkbox = [
-    { label: "Open Leads", type: "open" },
-    { label: "Close Leads", type: "close" },
-    { label: "Expire Leads", type: "expired" },
+    { label: "Open", type: "open" },
+    { label: "Signed", type: "signed" },
+    { label: "Expired", type: "expired" },
+    { label: "Rejected", type: "rejected" },
   ];
   return (
     <div className="flex">

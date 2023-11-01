@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
 import LeadsFilter from "./leads-filter";
+import { Status } from "@/types/global";
 
-interface Status {
-  open: boolean;
-  close: boolean;
-  expired: boolean;
-}
 const TableFunctions = () => {
   const [filter, setFilter] = useState<Status>({
     open: false,
