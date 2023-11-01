@@ -1,8 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
-import plusFiled from "@/assets/svgs/add_new_icon.svg";
+import { FormField, GenerateChangeMailSettingFormField } from "@/types";
 
-export const ChangeMailSettingFormField: GenerateRegistrationFormField = (
+export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
   register,
   loading,
   control
@@ -124,9 +123,9 @@ export const ChangeMailSettingFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.password,
+              type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "password",
+              inputType: "text",
               id: "mailPassword",
               name: "mailPassword",
               placeholder: "Mail Password",

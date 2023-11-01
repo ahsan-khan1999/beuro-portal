@@ -5,7 +5,7 @@ import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import useAddTax from "@/hooks/modals/useAddTax";
 
-const AddTax = ({ onClose }: { onClose: () => void }) => {
+const ExclusiveTax = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } = useAddTax();
   return (
@@ -22,7 +22,7 @@ const AddTax = ({ onClose }: { onClose: () => void }) => {
             onClick={onClose}
           />
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[50px]">
-            Add New Tax
+            Exclusive Tax
           </p>
 
           <Form
@@ -38,4 +38,4 @@ const AddTax = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export default AddTax;
+export default ExclusiveTax;

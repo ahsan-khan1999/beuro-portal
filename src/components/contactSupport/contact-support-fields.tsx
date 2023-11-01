@@ -1,11 +1,11 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateContactSupportFormField } from "@/types";
 
-export const ContactSupportFormField: GenerateRegistrationFormField = (
+export const ContactSupportFormField: GenerateContactSupportFormField = (
   register,
   loading,
   control,
-  handleRequestModal
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -16,16 +16,16 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "First Name",
-              htmlFor: "firstName",
+              text: "Full Name*",
+              htmlFor: "fullName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "firstName",
-              name: "firstName",
+              id: "fullName",
+              name: "fullName",
               placeholder: "Rahal",
               register,
             },
@@ -33,30 +33,30 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Last Name",
-              htmlFor: "firstName",
+              text: "Email Address*",
+              htmlFor: "email",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "lastName",
-              name: "lastName",
-              placeholder: "Ahmad",
+              inputType: "email",
+              id: "email",
+              name: "email",
+              placeholder: "rahal.ahmad@gmail.com",
               register,
             },
           },
           {
             containerClass: "mb-0",
-            label: { text: "Email Address", htmlFor: "email" },
+            label: { text: "Phone Number", htmlFor: "phoneNumber" },
             field: {
               type: Field.input,
               className: "!p-4    !border-dark  focus:!border-primary",
-              id: "email",
-              name: "email",
-              inputType: "email",
-              placeholder: "rahal.ahmad@gmail.com",
+              id: "phoneNumber",
+              name: "phoneNumber",
+              inputType: "number",
+              placeholder: "-------------",
               register,
             },
           },
@@ -68,37 +68,19 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
-        className: "flex justify-between items-center gap-3",
+        className: "grid grid-cols-3",
         children: [
           {
-            containerClass: "mb-0 w-[33%]",
-            label: {
-              text: "Mobile Number",
-              htmlFor: "mobileNumber",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
-              id: "mobileNumber",
-              name: "mobileNumber",
-              placeholder: "- - - - - - - - - - - - - - - - - - -",
-
-              register,
-            },
-          },
-
-          {
-            containerClass: "mb-0 w-[67%]",
+            containerClass: "mb-0 col-span-2",
             label: {
               text: "Reason for Contact",
-              htmlFor: "select",
+              htmlFor: "reasonForContact",
               className: "mb-[10px]",
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
+              value: "When is a convenient time for a consultation?",
               id: "reasonForContact",
               name: "reasonForContact",
               options: [
@@ -137,6 +119,7 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        onClick: onClick,
         loading,
       },
     },

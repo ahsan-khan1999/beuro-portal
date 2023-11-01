@@ -1,36 +1,16 @@
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Form } from "@/base-components/form/form";
-import RequestSubmitted from "@/base-components/ui/modals1/RequestSubmitted";
-import { ModalConfigType, ModalType } from "@/enums/ui";
 import { userContactSupport } from "@/hooks/contact/userContactSupport";
-import { useAppSelector } from "@/hooks/useRedux";
 import FormCard from "@/layout/customers/FormCard";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 
-const ContactSupportForm = () => {
+const ContactSupportForm = ({
+  requestSubmitHandler,
+}: {
+  requestSubmitHandler: Function;
+}) => {
   const defaultClassName = "mt-[30px] ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    userContactSupport();
-
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted onClose={onClose} />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  useEffect(() => {
-    dispatch(updateModalType(ModalType.REQUEST_SUBMITTED));
-  }, []);
+    userContactSupport(requestSubmitHandler);
 
   return (
     <>
@@ -48,7 +28,6 @@ const ContactSupportForm = () => {
           className={`${defaultClassName}`}
         />
       </FormCard>
-      {renderModal()}
     </>
   );
 };

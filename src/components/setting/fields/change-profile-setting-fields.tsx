@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateAccountSettingFormField } from "@/types";
 
-export const changeProfileSettingFormField: GenerateRegistrationFormField = (
+export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   register,
   loading,
   control
@@ -405,7 +405,8 @@ export const changeProfileSettingFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "changePassword",
         name: "changePassword",
-        placeholder: "************",
+        value:"*******",
+        placeholder:"*******",
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
           <path d="M8.79605 9.38507C9.07929 9.38507 9.3089 9.15546 9.3089 8.87222C9.3089 8.58898 9.07929 8.35938 8.79605 8.35938C8.51281 8.35938 8.2832 8.58898 8.2832 8.87222C8.2832 9.15546 8.51281 9.38507 8.79605 9.38507Z" fill="#8F8F8F"/>
           <path d="M11.1039 9.28255C11.3871 9.28255 11.6167 9.05295 11.6167 8.7697V6.87216C11.6167 5.74102 10.6964 4.82077 9.56531 4.82077H8.94894V3.01211C8.94894 1.35123 7.56856 0 5.87185 0C4.17515 0 2.79477 1.35123 2.79477 3.01211V4.82077H2.1803C1.04916 4.82077 0.128906 5.74102 0.128906 6.87216V11.0775C0.128906 12.2087 1.04916 13.1289 2.1803 13.1289H9.56531C10.6964 13.1289 11.6167 12.2087 11.6167 11.0775C11.6167 10.7943 11.3871 10.5647 11.1039 10.5647C10.8206 10.5647 10.591 10.7943 10.591 11.0775C10.591 11.6431 10.1309 12.1032 9.56531 12.1032H2.1803C1.61473 12.1032 1.1546 11.6431 1.1546 11.0775V6.87216C1.1546 6.30659 1.61473 5.84647 2.1803 5.84647H9.56531C10.1309 5.84647 10.591 6.30659 10.591 6.87216V8.7697C10.591 9.05295 10.8206 9.28255 11.1039 9.28255ZM7.92325 4.82077H3.82046V3.01211C3.82046 1.91679 4.74072 1.0257 5.87185 1.0257C7.00299 1.0257 7.92325 1.91679 7.92325 3.01211V4.82077Z" fill="#8F8F8F"/>

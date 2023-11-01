@@ -30,7 +30,7 @@ const EditOffersDetails = () => {
   return (
     <>
       <Layout>
-        <EditOffersDetailsData shareImgModal={shareImgModal}/>
+        <EditOffersDetailsData shareImgModal={shareImgModal} />
       </Layout>
 
       {renderModal()}

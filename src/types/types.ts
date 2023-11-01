@@ -1,4 +1,4 @@
-import { svgs } from './../base-components/SideBar';
+import { svgs } from "./../base-components/SideBar";
 import {
   Component,
   ReactNode,
@@ -69,7 +69,7 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?: string
+  icon?: string;
 }
 
 export interface tabsSectionTypes {
@@ -77,7 +77,6 @@ export interface tabsSectionTypes {
   setTabType: (tabType: number) => void;
   tabType: number;
 }
-
 
 export interface articlesSectionTypes {
   name: string;
@@ -129,17 +128,13 @@ export type GenerateRegistrationFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
   router?: NextRouter,
-  onClick?: Function,
+  onClick?: Function
 ) => FormField[];
-export type ImageUploadFormFieldType = (
-  register: UseFormRegister<FieldValues>,
-  control?: Control<FieldValues>,
-  onClick?: Function,
-) => FormField[];
+
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -164,6 +159,73 @@ export type GenerateFormAddressField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
+// Image upload form field
+
+export type ImageUploadFormFieldType = (
+  register: UseFormRegister<FieldValues>,
+  control?: Control<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// accounting setting formfield
+export type GenerateAccountSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// change mail setting formfield
+export type GenerateChangeMailSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// edit payment details formfield
+export type GenerateEditPaymentDetailsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// add reason formfield
+export type GenerateAddReasonFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// change password formfield
+export type GenerateChangePasswordFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Add & Exclusive Tax formfield
+export type GenerateAddTaxFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+
+// contact-support formfield
+export type GenerateContactSupportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  router?: NextRouter,
+  onClick?: Function
+) => FormField[];
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -177,5 +239,3 @@ export interface PaginationItemProps {
   className?: string;
   disabled?: boolean;
 }
-
-

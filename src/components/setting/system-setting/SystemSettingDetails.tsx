@@ -7,10 +7,12 @@ import SettingLayout from "../SettingLayout";
 
 const SystemSettingDetails = ({
   handleChangePassword,
-  addTaxHandler
+  addTaxHandler,
+  exclusiveTaxHandler
 }: {
   handleChangePassword: () => void;
   addTaxHandler: () => void;
+  exclusiveTaxHandler: () => void;
 }) => {
   const dropDownItems = [{ item: " EUR - Euro" }];
   const [selectedItem, setSelectedItem] = useState(dropDownItems[0].item);
@@ -21,7 +23,7 @@ const SystemSettingDetails = ({
 
   return (
     <>
-      <TaxVerifiedComp addTaxHandler={addTaxHandler}/>
+      <TaxVerifiedComp addTaxHandler={addTaxHandler} exclusiveTaxHandler={exclusiveTaxHandler}/>
       <div className="my-2">
         <InvoiceSection />
       </div>

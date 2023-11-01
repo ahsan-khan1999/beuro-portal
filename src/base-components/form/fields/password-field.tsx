@@ -20,6 +20,7 @@ export const PasswordField = ({
   const [inputFocus, setInputFocus] = useState(false);
   const router = useRouter();
 
+
   const defaultClasses = `w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
   }`;
@@ -33,10 +34,11 @@ export const PasswordField = ({
         />
       )} */}
       {router.pathname === "/setting" && (
-        <button className="absolute right-3  z-50 bg-[#4A13E7] text-white rounded-lg px-5 py-1">
+        <span className="absolute right-3  z-50 bg-[#4A13E7] text-white rounded-lg px-5 py-1 cursor-pointer">
           Change
-        </button>
+        </span>
       )}
+      
       <span
         className={`mr-3 absolute top-4 left-4 ${
           (inputFocus && "tests") || "test"

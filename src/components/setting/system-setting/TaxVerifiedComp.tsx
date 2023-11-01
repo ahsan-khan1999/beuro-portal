@@ -3,7 +3,13 @@ import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import SettingLayout from "../SettingLayout";
 
-const TaxVerifiedComp = ({ addTaxHandler }: { addTaxHandler: () => void }) => {
+const TaxVerifiedComp = ({
+  addTaxHandler,
+  exclusiveTaxHandler
+}: {
+  addTaxHandler: () => void;
+  exclusiveTaxHandler: () => void;
+}) => {
   const toggleBtnsData: string[] = ["No Tax", "Inclusive Tax", "Exclusive Tax"];
   const toggleInfo: string[] = ["Name", "Tax Rate (%)", "Action"];
   const toggleInfoValue: (string | JSX.Element)[] = [
@@ -31,6 +37,9 @@ const TaxVerifiedComp = ({ addTaxHandler }: { addTaxHandler: () => void }) => {
 
   const handleButtonClick = (index: number) => {
     setActiveButton(index);
+    if (index === toggleBtnsData.length - 1) {
+      exclusiveTaxHandler();
+    }
   };
 
   return (

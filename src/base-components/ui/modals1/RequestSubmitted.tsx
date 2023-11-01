@@ -23,7 +23,10 @@ const RequestSubmitted = ({ onClose }: { onClose: () => void }) => {
             Thanks for sending your request to Buro we are happy to have you.
           </p>
 
-          <button className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
+          <button
+            onClick={onClose}
+            className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
+          >
             Done
           </button>
         </div>

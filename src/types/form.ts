@@ -23,8 +23,8 @@ interface BaseFieldProps<T extends Field> {
   id: string;
   name: string;
   className?: string;
-  text?:string;
-  fileSupported?: string
+  text?: string;
+  fileSupported?: string;
 }
 
 export interface LabelProps {
@@ -89,7 +89,7 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-  svg?: string;
+  svg: string;
   alt: string;
 }
 
@@ -147,7 +147,6 @@ export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
 }
-
 
 // interface for the Image upload
 export interface ImageUploadFieldProps
@@ -243,7 +242,7 @@ export type FieldType =
   | Field.imageUploadField
   | Field.span
   | Field.div
-  | Field.button  
+  | Field.button
   | Field.link;
 export type FieldProps =
   | InputProps
