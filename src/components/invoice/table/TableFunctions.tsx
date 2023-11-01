@@ -1,29 +1,26 @@
 import React, { useState } from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
+import { Status } from "@/types/global";
+import InvoicesFilters from "./invoices-filters";
 
-interface Status {
-  open: boolean;
-  overdue: boolean;
-  paid: boolean;
-}
 const TableFunctions = () => {
-  const [filter, setFilter] = useState<Status>({
-    open: false,
-    overdue: false,
-    paid: false,
-  });
-  function onInputChange(text: string) {}
+  // const [filter, setFilter] = useState<Status>({
+  //   open: false,
+  //   overdue: false,
+  //   paid: false,
+  // });
+  // function onInputChange(text: string) {}
 
-  const handleButtonClick = (key: string, value: boolean) => {
-    setFilter({ ...filter, [key]: value });
-  };
+  // const handleButtonClick = (key: string, value: boolean) => {
+  //   setFilter({ ...filter, [key]: value });
+  // };
 
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Invoice</h1>
-      <div className="flex items-center ">
+      {/* <div className="flex items-center ">
         <div className="flex items-center space-x-4">
           <button
             onClick={() => handleButtonClick("open", !filter.open)}
@@ -188,7 +185,8 @@ const TableFunctions = () => {
             </defs>
           </svg>
         </div>
-      </div>
+      </div> */}
+      <InvoicesFilters />
     </div>
   );
 };

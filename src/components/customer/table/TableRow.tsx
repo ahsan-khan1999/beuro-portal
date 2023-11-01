@@ -17,7 +17,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
             <span className="px-6 py-4 bg-white ">{item.email}</span>
             <span className="px-6 py-4 bg-white ">{item.phone}</span>
             <span className="px-6 py-4 bg-white ">
-             
+             {item.date}
             </span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
             <span className="px-6 py-4 bg-white "> {item.customerType}</span>

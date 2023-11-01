@@ -23,7 +23,7 @@ const DetailsData = () => {
             Employees Details
           </h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <Image src={printerIcon} alt="printerIcon" />
           <Image src={deleteIcon} alt="deleteIcon" />
         </div>
