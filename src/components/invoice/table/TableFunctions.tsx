@@ -16,7 +16,7 @@ const TableFunctions = () => {
   //   setFilter({ ...filter, [key]: value });
   // };
 
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Invoice</h1>

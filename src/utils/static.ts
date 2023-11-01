@@ -7,6 +7,7 @@ import editNote from "@/assets/svgs/Edit_note.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
+import { TRowServices } from "@/types/service";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -1455,6 +1456,163 @@ export const invoicesData: InvoiceTableRowTypes[] = [
     editNote: editNote,
   },
   // Add more rows as needed
+];
+export const servicesData: TRowServices[] = [
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
+  {
+    id: "001",
+    service: "Cleaning",
+    createdOn: parseCustomDate("25/08/2023"),
+    price: {
+      value: 300,
+      currency: "CHF",
+    },
+    description: "We need to move office furniture to.....",
+    action: "edit",
+  },
 ];
 
 export const sideBar: SideBar[] = [
