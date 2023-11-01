@@ -4,10 +4,10 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { employDetailsFormField } from "@/components/employees/fields/employ-fields";
 import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
+import { employeeAddDetailsFormField } from "@/components/employees/fields/employee-add-fields";
 
-export const useEmployeeDetails = () => {
+export const useEmployeeAddDetails = (linkSendHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,7 +23,11 @@ export const useEmployeeDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = employDetailsFormField(register, loading, control);
+  const fields = employeeAddDetailsFormField(
+    register,
+    loading,
+    linkSendHandler
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

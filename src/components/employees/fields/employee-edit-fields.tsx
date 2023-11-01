@@ -1,10 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateEmployeeFormField } from "@/types";
 
-export const employDetailsFormField: GenerateRegistrationFormField = (
+export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
   register,
   loading,
-  control
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -114,14 +114,36 @@ export const employDetailsFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
+        type: Field.div,
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Cancel",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto   text-dark hover:bg-none",
+              loading,
+              onClick: onClick
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Save Changes",
+              inputType: "submit",
+              className:
+                "rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ",
+              loading,
+              onClick: onClick
+            },
+          },
+        ],
       },
     },
   ];

@@ -1,8 +1,8 @@
 import React from "react";
-import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import editPswIcon from "@/assets/svgs/edit-password.svg";
+import DetailsCard from "@/layout/customers/DetailsCard";
 
 const FormData = ({
   handlePasswordReset,
@@ -12,8 +12,7 @@ const FormData = ({
   const router = useRouter();
 
   return (
-    <>
-      <FormCard>
+      <div className="rounded-md bg-white py-[26px] pl-[32px] pr-[25px] w-full h-fit">
         <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
           <h2 className="text-[#393939] text-lg font-medium">
             Employs Details
@@ -117,8 +116,7 @@ const FormData = ({
             </div>
           </div>
         </div>
-      </FormCard>
-    </>
+      </div>
   );
 };
 

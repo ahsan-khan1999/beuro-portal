@@ -1,8 +1,8 @@
 import React from "react";
 
-const TableHeadingServices = () => {
+const TableHeadings = () => {
   return (
-    <div className="grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(70px,_150px)_minmax(70px,_70px)]   bg-white rounded-md ">
+    <div className="grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(200px,_200px)_minmax(_150px,_150px)_minmax(70px,_70px)]   bg-white rounded-md ">
       <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white  rounded-md">
         ID
       </span>
@@ -22,10 +22,10 @@ const TableHeadingServices = () => {
         Created On
       </span>
 
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white rounded-md">Edit</span>
+      <span className="px-6 py-4  font-medium text-[#8F8F8F] flex justify-center items-center bg-white rounded-md">Edit</span>
       <span className="px-6 py-4  bg-white rounded-md"></span>
     </div>
   );
 };
 
-export default TableHeadingServices;
+export default TableHeadings;

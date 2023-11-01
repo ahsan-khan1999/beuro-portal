@@ -9,6 +9,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
+import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
 
 const EmploysDetails = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,26 @@ const EmploysDetails = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  // function for hnadling the add note
   const handlePasswordReset = () => {
     dispatch(updateModalType(ModalType.PASSWORD_RESET));
   };
 
+  const passwordResetSuccessfully = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_RESET]: <PasswordReset onClose={onClose} />,
+    [ModalType.PASSWORD_RESET]: (
+      <PasswordReset
+        onClose={onClose}
+        passwordResetSuccessfully={passwordResetSuccessfully}
+      />
+    ),
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
+      <PasswordChangeSuccessfully onClose={onClose} />
+    ),
   };
 
   const renderModal = () => {

@@ -3,10 +3,10 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
 
-const PasswordReset = ({ onClose }: { onClose: () => void }) => {
+const PasswordReset = ({ onClose, passwordResetSuccessfully }: { onClose: () => void; passwordResetSuccessfully: Function }) => {
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
-  useEmployeePasswordReset();
+  useEmployeePasswordReset(passwordResetSuccessfully);
   return (
     <>
       <BaseModal

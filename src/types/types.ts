@@ -199,7 +199,7 @@ export type GenerateAddReasonFormField = (
   onClick?: Function
 ) => FormField[];
 
-// change password formfield
+// change/Reset password formfield
 export type GenerateChangePasswordFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -229,6 +229,15 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+
+// Employee formfield
+export type GenerateEmployeeFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
 ) => FormField[];

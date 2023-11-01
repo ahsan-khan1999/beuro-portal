@@ -2,15 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import TableRowEmploys from "./table/TableRowEmploys";
-import TableHeadingEmploys from "./table/TableHeadingEmploys";
-import EmploysTopBar from "./table/EmploysTopBar";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useAppSelector } from "@/hooks/useRedux";
-import { useDispatch } from "react-redux";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
-import CreateNewPassword from "@/base-components/ui/modals1/CreateNewPassword";
+import TableRows from "./table/TableRows";
+import TableHeadings from "./table/TableHeadings";
+import TableFunctions from "./table/TableFunctions";
 import { TRowEmployees } from "@/types/employee";
 
 export default function Employees() {
@@ -221,31 +215,16 @@ export default function Employees() {
     setCurrentPage(page);
   };
 
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.NEW_PASSWORD]: <CreateNewPassword />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  useEffect(() => {
-    dispatch(updateModalType(ModalType.NEW_PASSWORD));
-  }, []);
-
   return (
     <>
       <Layout>
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl text-[#222B45] ">Employs</h1>
-          <EmploysTopBar />
+          <h1 className="text-xl text-[#222B45] ">Employees</h1>
+          <TableFunctions />
         </div>
         <TableLayout>
-          <TableHeadingEmploys />
-          <TableRowEmploys employsData={currentPageRows} />
+          <TableHeadings />
+          <TableRows employsData={currentPageRows} />
         </TableLayout>
         <Pagination
           totalItems={totalItems}
