@@ -23,9 +23,9 @@ const DetailsData = () => {
             Employees Details
           </h1>
         </div>
-        <div className="flex items-center ">
-          <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+        <div className="flex items-center gap-x-5">
+          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer"/>
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer"/>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
