@@ -7,6 +7,8 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { OffersTableRowTypes } from "@/types/offers";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 
 const useOffers = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -25,24 +27,40 @@ const useOffers = () => {
     dispatch(updateModalType(ModalType.ADD_NOTE));
   };
 
+  const handleNotes = (item: OffersTableRowTypes) => {
+    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+  };
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const handleImagesUpload = (item: OffersTableRowTypes) => {
+    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+  };
+
+  const handleImageSlider = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+    console.log("clicked!");
   };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
-    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} handleNotes={handleNotes}/>,
+    [ModalType.UPLOAD_IMAGE]: (
+      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    ),
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const handleNotes = (item: OffersTableRowTypes) => {
-    dispatch(updateModalType(ModalType.EXISTING_NOTES));
-  };
+  
 
   useEffect(() => {
     // Update rows for the current page
@@ -60,6 +78,7 @@ const useOffers = () => {
     itemsPerPage,
     handleNotes,
     renderModal,
+    handleImagesUpload,
   };
 };
 

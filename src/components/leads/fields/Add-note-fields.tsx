@@ -1,11 +1,11 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateNotesFormField } from "@/types";
 
-export const AddNoteFormField: GenerateRegistrationFormField = (
+export const AddNoteFormField: GenerateNotesFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -20,7 +20,7 @@ export const AddNoteFormField: GenerateRegistrationFormField = (
         className: "!p-4 !border-dark focus:!border-primary",
         id: "noteMessage",
         name: "noteMessage",
-        
+
         control,
       },
     },
@@ -34,6 +34,7 @@ export const AddNoteFormField: GenerateRegistrationFormField = (
         className:
           "rounded-lg  w-[200px] p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
+        onClick: onClick,
       },
     },
   ];

@@ -3,7 +3,6 @@ import { PasswordInputProps } from "@/types";
 import eyeOpen from "@/assets/pngs/eye-open.png";
 import eyeClose from "@/assets/pngs/eye-close.png";
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 export const PasswordField = ({
   id,
@@ -18,8 +17,6 @@ export const PasswordField = ({
 }: PasswordInputProps) => {
   const [showPass, setShowPass] = useState<boolean>(false);
   const [inputFocus, setInputFocus] = useState(false);
-  const router = useRouter();
-
 
   const defaultClasses = `w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
@@ -33,12 +30,7 @@ export const PasswordField = ({
           className="absolute top-[14px] left-4"
         />
       )} */}
-      {router.pathname === "/setting" && (
-        <span className="absolute right-3  z-50 bg-[#4A13E7] text-white rounded-lg px-5 py-1 cursor-pointer">
-          Change
-        </span>
-      )}
-      
+
       <span
         className={`mr-3 absolute top-4 left-4 ${
           (inputFocus && "tests") || "test"
@@ -58,18 +50,16 @@ export const PasswordField = ({
         className={`${defaultClasses} ${className}`}
       />
 
-      {router.pathname !== "/setting" && (
-        <Image
-          className={`absolute right-[16px] cursor-pointer ${
-            (inputFocus && "tests") || "test"
-          }`}
-          src={showPass ? eyeOpen : eyeClose}
-          alt={alt}
-          width={20}
-          height={20}
-          onClick={() => setShowPass(!showPass)}
-        />
-      )}
+      <Image
+        className={`absolute right-[16px] cursor-pointer ${
+          (inputFocus && "tests") || "test"
+        }`}
+        src={showPass ? eyeOpen : eyeClose}
+        alt={alt}
+        width={20}
+        height={20}
+        onClick={() => setShowPass(!showPass)}
+      />
     </div>
   );
 };

@@ -5,9 +5,15 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 
-const AddNewNote = ({ onClose }: { onClose: () => void }) => {
+const AddNewNote = ({
+  onClose,
+  handleNotes,
+}: {
+  onClose: () => void;
+  handleNotes: Function;
+}) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddNewNote();
+    useAddNewNote(handleNotes);
 
   return (
     <>

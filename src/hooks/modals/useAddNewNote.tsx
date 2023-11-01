@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
 import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
 
-export const useAddNewNote = () => {
+export const useAddNewNote = (handleNotes: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ export const useAddNewNote = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = AddNoteFormField(register, loading, control);
+  const fields = AddNoteFormField(register, loading, control, handleNotes);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

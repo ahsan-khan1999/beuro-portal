@@ -14,6 +14,7 @@ export default function Offers() {
     totalItems,
     itemsPerPage,
     handleNotes,
+    handleImagesUpload,
     renderModal,
   } = useOffers();
 

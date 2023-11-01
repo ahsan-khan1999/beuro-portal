@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
-import { useRouter } from "next/router";
 
 const TableFunctions = () => {
-  const router = useRouter();
-
   function onInputChange(text: string) {}
 
   return (
