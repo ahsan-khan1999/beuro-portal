@@ -56,7 +56,7 @@ const TableFunctions = () => {
           </defs>
         </svg>
       </div> */}
-      <ContentFilters />
+       <ContentFilters />
       <button
         onClick={() => router.push("/content/add")}
         className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
