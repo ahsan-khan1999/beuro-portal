@@ -10,8 +10,10 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
 import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
+import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 
 const EmploysDetails = () => {
+  const { employeeDetail } = useEmployeeDetail();
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
@@ -50,10 +52,17 @@ const EmploysDetails = () => {
     <>
       <Layout>
         <DetailsCard>
-          <DetailsData />
+          <DetailsData
+            date={employeeDetail?.createdOn}
+            id={employeeDetail?.id}
+            name={employeeDetail?.name}
+          />
         </DetailsCard>
         <div className="flex mt-8">
-          <FormData handlePasswordReset={handlePasswordReset} />
+          <FormData
+            handlePasswordReset={handlePasswordReset}
+            {...employeeDetail}
+          />
           <SideCard />
         </div>
       </Layout>

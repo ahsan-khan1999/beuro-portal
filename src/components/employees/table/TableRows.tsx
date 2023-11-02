@@ -37,7 +37,12 @@ const TableHeadings = ({ employsData }: { employsData: TRowEmployees[] }) => {
 
             <span className="px-6 py-4 bg-white flex justify-center items-center">
               <div
-                onClick={() => router.push("/employees/details")}
+                onClick={() =>
+                  router.push({
+                    pathname: "/employees/details",
+                    query: { employee: item.id },
+                  })
+                }
                 className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
               >
                 <Image src={editInfoIcon} alt="editInfoIcon" />

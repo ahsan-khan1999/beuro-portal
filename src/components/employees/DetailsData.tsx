@@ -4,8 +4,12 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { CustomerDetail } from "@/types/customer";
+import { EmployeeDetail } from "@/types/employee";
 
-const DetailsData = () => {
+const DetailsData = ({ date, id, name }: EmployeeDetail) => {
+  console.log(date, "date");
+
   const router = useRouter();
   return (
     <>
@@ -24,8 +28,12 @@ const DetailsData = () => {
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer"/>
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer"/>
+          <Image
+            src={printerIcon}
+            alt="printerIcon"
+            className="cursor-pointer"
+          />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -33,19 +41,19 @@ const DetailsData = () => {
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
             Employee ID:
-            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;001</span>
+            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             Created by:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;Ahmad Rahal
+              &nbsp;&nbsp;{name}
             </span>
           </h3>
         </div>
         <h3 className="text-[#4D4D4D] mt-4">
           Creation Date:
           <span className="text-[#4B4B4B] font-medium">
-            &nbsp;&nbsp;25/08/2023
+            &nbsp;&nbsp;{date?.toLocaleDateString()}
           </span>
         </h3>
       </div>
