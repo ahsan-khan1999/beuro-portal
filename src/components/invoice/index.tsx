@@ -22,7 +22,7 @@ export default function Invoices() {
         <TableFunctions />
         <TableLayout>
           <TableHeading />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
+          <TableRows dataToAdd={currentPageRows}  />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

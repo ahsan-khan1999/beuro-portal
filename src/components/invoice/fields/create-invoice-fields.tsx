@@ -1,10 +1,11 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateInvoiceormField } from "@/types";
 
-export const CreateInvoiceFormField: GenerateRegistrationFormField = (
+export const CreateInvoiceFormField: GenerateInvoiceormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -122,8 +123,8 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
       field: {
         className:
           "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        placeholder: "Please Select Payment Method",
         type: Field.select,
+        value: "Online",
         id: "paymentMethod",
         name: "paymentMethod",
         options: [
@@ -159,7 +160,6 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
         className: "!p-4 !border-dark focus:!border-primary ",
         id: "date",
         name: "date",
-        placeholder: "12/09/2023",
         register,
       },
     },
@@ -173,7 +173,7 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
       field: {
         className:
           "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        placeholder: "Please Select frequency",
+        value: " ",
         type: Field.select,
         id: "frequency",
         name: "frequency",
@@ -189,6 +189,7 @@ export const CreateInvoiceFormField: GenerateRegistrationFormField = (
         text: "Create Invoice",
         inputType: "submit",
         loading,
+        onClick: onClick
       },
     },
   ];

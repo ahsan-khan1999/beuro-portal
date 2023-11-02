@@ -233,7 +233,6 @@ export type GenerateContentFormField = (
   onClick?: Function
 ) => FormField[];
 
-
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
@@ -241,7 +240,6 @@ export type GenerateEmployeeFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
 ) => FormField[];
-
 
 // Notes formfield
 export type GenerateNotesFormField = (
@@ -252,13 +250,21 @@ export type GenerateNotesFormField = (
   onClick?: Function
 ) => FormField[];
 
-
-// Notes formfield
+// Servcies formfield
 export type GenerateServicesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
+) => FormField[];
+
+// Invoice formfield
+export type GenerateInvoiceormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 export interface PaginationProps {

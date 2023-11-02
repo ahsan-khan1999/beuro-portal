@@ -4,7 +4,7 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import editIcon from "@/assets/svgs/Edit_note.svg";
 import Image from "next/image";
 
-const InvoiceDetailsData = ({ setShowModal }) => {
+const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: Function}) => {
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -16,7 +16,7 @@ const InvoiceDetailsData = ({ setShowModal }) => {
         </div>
 
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => handleInvoiceCreation(true)}
           className="px-[13px] py-[9px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
         >
           <Image src={plusIcon} alt="plusIcon" />
