@@ -10,6 +10,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { TRowServices } from "@/types/service";
 import { TRowEmployees } from "@/types/employee";
 import { ContentTableRowTypes } from "@/types/content";
+import { TableRowEmailTracker } from "@/types/emailTracker";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -1880,6 +1881,214 @@ export const contentData: ContentTableRowTypes[] = [
     contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
     createdOn: parseCustomDate("25/08/2023"),
   },
+];
+export const MailTracker: TableRowEmailTracker[] = [
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+
+  // Add more rows as needed
 ];
 
 export const sideBar: SideBar[] = [
