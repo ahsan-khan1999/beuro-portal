@@ -15,10 +15,10 @@ const TableRows = ({ dataToAdd }: { dataToAdd: InvoiceTableRowTypes[] }) => {
             key={index}
             className="cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
-            <span className="px-6 py-4 bg-white  ">{item.customer}</span>
-            <span className="px-6 py-4 bg-white ">{item.invoiceTitle}</span>
-            <span className="px-6 py-4 bg-white ">{item.totalPrice}</span>
+            <span className="px-6 py-4 bg-white rounded-md flex  items-center">{item.id}</span>
+            <span className="px-6 py-4 bg-white  flex  items-center">{item.customer}</span>
+            <span className="px-6 py-4 bg-white flex  items-center">{item.invoiceTitle}</span>
+            <span className="px-6 py-4 bg-white flex  items-center">{item.totalPrice}</span>
 
             <span className="px-6 py-4 bg-white flex justify-center items-center">
               <div

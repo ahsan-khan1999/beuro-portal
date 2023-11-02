@@ -1,11 +1,10 @@
 import { Layout } from "@/layout";
-import React, { useEffect, useState } from "react";
-import InvoiceDetailsData from "./invoice/InvoiceDetailsData";
+import React, { useState } from "react";
+import InvoiceDetailsData from "./InvoiceDetailsData";
 import InvoiceCardLayout from "@/layout/invoice";
 import DetailsSwitchBtn from "./DetailsSwitchBtn";
 import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
-import ReceiptDetailsData from "./receipt/ReceiptDetailsData";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useDispatch } from "react-redux";
@@ -34,9 +33,11 @@ const InvoiceDetails = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.INVOICE_CREATE]: (
-      <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated}/>
+      <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
-    [ModalType.INVOICE_CREATED_SUCCESSFULLY]: <InvoiceCreatedSuccessfully onClose={onClose} />,
+    [ModalType.INVOICE_CREATED_SUCCESSFULLY]: (
+      <InvoiceCreatedSuccessfully onClose={onClose} />
+    ),
   };
 
   const renderModal = () => {
@@ -46,7 +47,7 @@ const InvoiceDetails = () => {
   return (
     <>
       <Layout>
-        {switchDetails.includes("Invoice") ? (
+        {/* {switchDetails.includes("Invoice") ? (
           <InvoiceCardLayout>
             <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
           </InvoiceCardLayout>
@@ -54,7 +55,11 @@ const InvoiceDetails = () => {
           <InvoiceCardLayout>
             <ReceiptDetailsData />
           </InvoiceCardLayout>
-        )}
+        )} */}
+
+        <InvoiceCardLayout>
+          <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
+        </InvoiceCardLayout>
         <div className="flex mt-[12px] mb-[18px]">
           <DetailsSwitchBtn
             switchDetails={switchDetails}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import umzugsLogo from "@/assets/svgs/Umzug-fuchs-logo.svg";
 
-const EmailHeader = () => {
+const PdfHeader = () => {
   return (
     <div className="flex justify-between items-center h-[173px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
       <Image src={umzugsLogo} alt="umzugsLogo" />
@@ -35,4 +35,4 @@ const EmailHeader = () => {
   );
 };
 
-export default EmailHeader;
+export default PdfHeader;

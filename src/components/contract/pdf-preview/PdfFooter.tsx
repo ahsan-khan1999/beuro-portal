@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmailFooter = () => {
+const PdfFooter = () => {
   return (
     <div className="relative flex justify-center items-center h-[149px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
       <div className="flex justify-between gap-[60px]">
@@ -40,4 +40,4 @@ const EmailFooter = () => {
   );
 };
 
-export default EmailFooter;
+export default PdfFooter;

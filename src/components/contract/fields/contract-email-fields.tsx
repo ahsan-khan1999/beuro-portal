@@ -1,11 +1,14 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { useRouter } from "next/router";
+import { FormField, GenerateContractFormField } from "@/types";
 
-export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
+export const ContractEmailPreviewFormField: GenerateContractFormField = (
   register,
   loading,
-  control
+  control,
+  onBack,
 ) => {
+  const router = useRouter();
   const formField: FormField[] = [
     {
       field: {
@@ -21,7 +24,7 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ", // Add col-span-1 here
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ",
               inputType: "email",
               id: "email",
               name: "email",
@@ -42,7 +45,8 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "content",
               name: "content",
-              value:"",
+              value:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
               options: [
                 {
                   value:
@@ -125,6 +129,7 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick: onBack,
             },
           },
           {
@@ -136,6 +141,7 @@ export const ContractEmailPreviewFormField: GenerateRegistrationFormField = (
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
+              // onClick: () => router.push("/contract/pdf-preview"),
             },
           },
         ],

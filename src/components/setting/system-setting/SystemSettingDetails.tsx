@@ -6,11 +6,9 @@ import ConnectWithBuro from "./ConnectWithBuro";
 import SettingLayout from "../SettingLayout";
 
 const SystemSettingDetails = ({
-  handleChangePassword,
   addTaxHandler,
   exclusiveTaxHandler
 }: {
-  handleChangePassword: () => void;
   addTaxHandler: () => void;
   exclusiveTaxHandler: () => void;
 }) => {
@@ -51,7 +49,6 @@ const SystemSettingDetails = ({
 
       <div className="mt-3 ml-[31px]">
         <button
-          onClick={handleChangePassword}
           className="text-white text-base font-medium px-6 py-[10px] bg-[#4A13E7] rounded-md"
         >
           Save Setting

@@ -24,7 +24,7 @@ export default function Contract() {
         <TableFunctions />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
+          <TableRows dataToAdd={currentPageRows}  />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

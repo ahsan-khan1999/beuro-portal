@@ -1,10 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
-import ClassicCKEditor from "@/base-components/ui/editor/ck-editor";
 import dynamic from "next/dynamic";
-import EmailHeader from "../EmailHeader";
-import EmailFooter from "../EmailFooter";
+import PdfHeader from "../PdfHeader";
+import PdfFooter from "../PdfFooter";
 
 const CustomCKEditor = dynamic(
   () => import("@/base-components/ui/editor/ck-editor"),
@@ -129,7 +128,7 @@ const Page2 = () => {
 
   return (
     <>
-      <EmailHeader />
+      <PdfHeader />
       <div className="px-[80px] flex flex-col bg-white">
         <div className="flex justify-between items-center mt-5 mb-[50px]">
           <div className="flex flex-col gap-[4px]">
@@ -228,7 +227,7 @@ const Page2 = () => {
           </div>
         </div>
       </div>
-      <EmailFooter />
+      <PdfFooter />
     </>
   );
 };

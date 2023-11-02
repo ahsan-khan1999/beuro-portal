@@ -2,11 +2,7 @@ import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
 import React from "react";
 
 const index = () => {
-  return (
-    <div>
-      <DetailsPdfPriview />
-    </div>
-  );
+  return <DetailsPdfPriview />;
 };
 
 export default index;

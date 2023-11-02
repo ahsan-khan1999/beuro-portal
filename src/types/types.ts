@@ -259,11 +259,20 @@ export type GenerateServicesFormField = (
 ) => FormField[];
 
 // Invoice formfield
-export type GenerateInvoiceormField = (
+export type GenerateInvoiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+// Contract formfield
+export type GenerateContractFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onBack?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 

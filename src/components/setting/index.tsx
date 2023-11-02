@@ -64,12 +64,13 @@ const Setting = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? <SettingProfile handleChangePassword={handleChangePassword}/> : null}
+          {switchDetails === 0 ? (
+            <SettingProfile handleChangePassword={handleChangePassword} />
+          ) : null}
         </div>
         <div className="mt-4">
           {switchDetails === 1 ? (
             <SystemSettingDetails
-              handleChangePassword={handleChangePassword}
               addTaxHandler={addTaxHandler}
               exclusiveTaxHandler={exclusiveTaxHandler}
             />

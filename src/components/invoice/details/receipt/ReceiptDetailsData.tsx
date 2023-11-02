@@ -2,13 +2,20 @@ import React from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import editIcon from "@/assets/svgs/Edit_note.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const ReceiptDetailsData = () => {
+  const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="back_icon" className="w-10 h-10" />
+          <Image
+            src={backIcon}
+            alt="back_icon"
+            onClick={() => router.push("/invoices")}
+            className="cursor-pointer"
+          />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
             Receipt details
           </p>

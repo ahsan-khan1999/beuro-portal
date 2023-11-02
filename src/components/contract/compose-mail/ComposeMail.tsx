@@ -3,17 +3,18 @@ import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import React from "react";
 
-const EmailForm = () => {
-  const defaultClassName = "mt-[30px]  ";
+const ComposeMail = ({backRouteHandler} : {backRouteHandler:Function}) => {
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useContractEmail();
+    useContractEmail(backRouteHandler);
   return (
     <ContractFormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">
-          Contract Email Preview
-        </h2>
-      </div>
+      <h2 className="text-[#393939] text-lg font-medium">
+        Contract Email Preview
+      </h2>
+
+      <hr className="opacity-20 mt-[25px] mb-5" />
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -25,4 +26,4 @@ const EmailForm = () => {
   );
 };
 
-export default EmailForm;
+export default ComposeMail;

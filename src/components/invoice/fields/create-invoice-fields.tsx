@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateInvoiceormField } from "@/types";
+import { FormField, GenerateInvoiceFormField } from "@/types";
 
-export const CreateInvoiceFormField: GenerateInvoiceormField = (
+export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   register,
   loading,
   control,
@@ -189,7 +189,7 @@ export const CreateInvoiceFormField: GenerateInvoiceormField = (
         text: "Create Invoice",
         inputType: "submit",
         loading,
-        onClick: onClick
+        onClick: onClick,
       },
     },
   ];

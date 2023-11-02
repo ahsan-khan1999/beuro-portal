@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
-import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-import CustomerDetailsData from "./CustomerDetailsData";
+import CustomerDetailsData from "./OfferDetailsData";
 import AddressDetailsData from "./AddressDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import ServiceDetailsData from "./ServiceDetailsData";
+import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 
 const ContractDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
@@ -75,7 +75,7 @@ const ContractDetailsData = () => {
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
         {tabSection.map((item, index) => (
-          <LeadsTab
+          <DetailsTab
             isSelected={tabType === index}
             setTabType={setTabType}
             tabType={tabType}

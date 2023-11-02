@@ -3,35 +3,38 @@ import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
 import downloadIcon from "@/assets/svgs/download_icon.svg";
-import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
+import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
+import { useRouter } from "next/router";
 
-const CardDetailsData = () => {
+const MailDetailsCard = () => {
+  const router = useRouter();
+
   return (
-    <>
+    <ContractCardLayout>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
           <Image
             src={backIcon}
             alt="back_icon"
-            className="w-10 h-10 cursor-pointer"
+            className="cursor-pointer"
+            onClick={() => router.push("/contract")}
           />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
             Contract details
           </p>
         </div>
 
-        <div className="flex gap-[22px]">
-          <button className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex  items-center px-4 py-[6px] ">
-            <Image src={cofirmation_icon} alt="create_offer_icon" />
-            <span className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
-              Send Confirmation
-            </span>
-          </button>
-          <Image src={PDFIcon} alt="PDFIcon" className="cursor-pointer" />
+        <div className="flex gap-x-[22px]">
+          <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            className="cursor-pointer"
+            onClick={() => router.push("/contract/pdf-preview")}
+          />
           <Image
             src={downloadIcon}
             alt="downloadIcon"
@@ -85,6 +88,16 @@ const CardDetailsData = () => {
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
               Creation Date:
+            </span>
+            <div>
+              <span className="text-base font-medium text-[#4B4B4B]">
+                25/08 2023
+              </span>
+            </div>
+          </div>
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              Service Date:
             </span>
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -142,8 +155,8 @@ const CardDetailsData = () => {
           </div>
         </div>
       </div>
-    </>
+    </ContractCardLayout>
   );
 };
 
-export default CardDetailsData;
+export default MailDetailsCard;

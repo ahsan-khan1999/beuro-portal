@@ -1,21 +1,17 @@
 import { Layout } from "@/layout";
 import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import React from "react";
-import CardDetailsData from "./CardDetailsData";
-import ContractDetailHeadLayout from "@/layout/contractCard/ContractDetailHeadLayout";
+import CardDetailsData from "./ContractDetailsCard";
 import DetailsData from "./DetailsData";
 import ContractDetailsData from "./ContractDetailsData";
 
 const ContractDetails = () => {
   return (
     <Layout>
-      <ContractCardLayout>
-        <CardDetailsData />
-      </ContractCardLayout>
-
-      <ContractDetailHeadLayout>
+      <CardDetailsData />
+      <div className="my-4">
         <DetailsData />
-      </ContractDetailHeadLayout>
+      </div>
 
       <div className="flex ">
         <ContractDetailsData />

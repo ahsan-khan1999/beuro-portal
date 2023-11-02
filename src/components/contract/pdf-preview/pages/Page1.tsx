@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
-import EmailHeader from "../EmailHeader";
-import EmailFooter from "../EmailFooter";
+import PdfHeader from "../PdfHeader";
+import PdfFooter from "../PdfFooter";
 
 const Page1 = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,7 +26,7 @@ const Page1 = () => {
   };
   return (
     <>
-      <EmailHeader />
+      <PdfHeader />
       <div className="px-[80px] flex flex-col bg-white">
         <div className="flex justify-between items-center mt-5 mb-[37px]">
           <div className="flex flex-col gap-[4px]">
@@ -304,7 +304,7 @@ const Page1 = () => {
           </div>
         </div>
       </div>
-      <EmailFooter />
+      <PdfFooter />
     </>
   );
 };
