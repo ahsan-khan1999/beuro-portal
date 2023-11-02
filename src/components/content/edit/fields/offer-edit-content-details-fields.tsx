@@ -4,7 +4,8 @@ import { FormField, GenerateContentFormField } from "@/types";
 export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -157,6 +158,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
+              onClick: onClick,
             },
           },
         ],

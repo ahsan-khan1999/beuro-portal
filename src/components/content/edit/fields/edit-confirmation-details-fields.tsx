@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 
 export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
-  (register, loading, control) => {
+  (register, loading, control, onClick) => {
     const formField: FormField[] = [
       {
         containerClass: "mb-0",
@@ -98,6 +98,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 className:
                   "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
                 loading,
+                onClick: onClick,
               },
             },
           ],

@@ -4,10 +4,10 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { servicesDetailsFormField } from "@/components/services/services-fields";
 import { generateServicesValidation } from "@/validation/servicesSchema";
+import { servicesAddDetailsFormField } from "@/components/services/fields/add-services-fields";
 
-export const useServicesDetails = () => {
+export const useServicesAddDetails = (handleRoute: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const useServicesDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = servicesDetailsFormField(register, loading, control);
+  const fields = servicesAddDetailsFormField(register, loading, handleRoute);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

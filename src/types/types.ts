@@ -252,6 +252,15 @@ export type GenerateNotesFormField = (
   onClick?: Function
 ) => FormField[];
 
+
+// Notes formfield
+export type GenerateServicesFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

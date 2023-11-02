@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferEditContentDetailsFormField } from "@/components/content/edit/fields/offer-edit-content-details-fields";
 import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useOfferContentEditDetails = () => {
+export const useOfferContentEditDetails = (handleRoute: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const useOfferContentEditDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = OfferEditContentDetailsFormField(register, loading, control);
+  const fields = OfferEditContentDetailsFormField(register, loading, control, handleRoute);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

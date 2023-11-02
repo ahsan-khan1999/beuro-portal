@@ -3,10 +3,10 @@ import { useOfferContentEditDetails } from "@/hooks/content/useOfferContentEditD
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const OfferContentEditDetails = () => {
+const OfferContentEditDetails = ({handleRoute} : {handleRoute: Function}) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useOfferContentEditDetails();
+  useOfferContentEditDetails(handleRoute);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

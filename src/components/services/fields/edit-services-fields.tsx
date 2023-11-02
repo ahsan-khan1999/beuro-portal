@@ -1,19 +1,19 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateServicesFormField } from "@/types";
 
-export const servicesDetailsFormField: GenerateRegistrationFormField = (
+export const servicesEditDetailsFormField: GenerateServicesFormField = (
   register,
   loading,
-  control
+  onClick
 ) => {
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-        className: "flex justify-between items-center gap-3",
+        className: "grid grid-cols-3 gap-x-3",
         children: [
           {
-            containerClass: "w-[65%]",
+            containerClass: "col-span-2 mb-0",
             label: {
               text: "Service/Product Title",
               htmlFor: "serviceTitle",
@@ -30,7 +30,7 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
             },
           },
           {
-            containerClass: "w-[35%]",
+            containerClass: "col-span-1 mb-0",
             label: {
               text: "Unit",
               htmlFor: "unit",
@@ -52,20 +52,29 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
     },
 
     {
-      containerClass: "max-w-[260px]",
-      label: {
-        text: "Price",
-        htmlFor: "price",
-        className: "mb-[10px] ",
-      },
+      containerClass: "mt-5",
       field: {
-        type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
-        id: "price",
-        name: "price",
-        placeholder: "100CHF",
-        register,
+        type: Field.div,
+        className: "grid grid-cols-3",
+        children: [
+          {
+            containerClass: "col-span-1 mb-0",
+            label: {
+              text: "Price",
+              htmlFor: "price",
+              className: "mb-[10px] ",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-dark focus:!border-primary ",
+              inputType: "text",
+              id: "price",
+              name: "price",
+              placeholder: "100CHF",
+              register,
+            },
+          },
+        ],
       },
     },
 
@@ -99,7 +108,7 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
               type: Field.button,
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+              onClick: onClick,
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
@@ -109,11 +118,12 @@ export const servicesDetailsFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
-              text: "Save",
+              text: "Save Changes",
               inputType: "submit",
               className:
                 "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
+              onClick: onClick,
             },
           },
         ],

@@ -1,9 +1,9 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
-import DetailsData from "../DetailsData";
+import DetailsData from "./DetailsData";
 import SideCard from "../SideCard";
-import FormData from "./FormData";
+import ServiceDetailsData from "./ServiceDetailsData";
 
 const ServicesDetails = () => {
   return (
@@ -12,7 +12,7 @@ const ServicesDetails = () => {
         <DetailsData />
       </DetailsCard>
       <div className="flex mt-8">
-        <FormData />
+        <ServiceDetailsData />
         <SideCard />
       </div>
     </Layout>
