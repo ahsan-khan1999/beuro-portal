@@ -61,7 +61,7 @@ const EmploysDetails = () => {
         <div className="flex mt-8">
           <FormData
             handlePasswordReset={handlePasswordReset}
-            {...employeeDetail}
+            employeeDetail={employeeDetail}
           />
           <SideCard />
         </div>

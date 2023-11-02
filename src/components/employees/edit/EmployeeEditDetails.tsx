@@ -3,7 +3,7 @@ import { useEmployeeEditDetails } from "@/hooks/employee/useEmployeeEditDetails"
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const EmployeeEditDetails = ({ routeHandler }: { routeHandler: Function }) => {
+const EmployeeEditDetails = ({ routeHandler }: { routeHandler: () => void }) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
     useEmployeeEditDetails(routeHandler);

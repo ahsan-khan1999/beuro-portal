@@ -5,18 +5,8 @@ import editPswIcon from "@/assets/svgs/edit-password.svg";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import { TRowEmployees } from "@/types/employee";
 
-const FormData = ({
-  handlePasswordReset,
-  id,
-  name,
-  email,
-  phone,
-  designation,
-  createdOn,
-  action,
-}: TRowEmployees) => {
+const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset: () => void, employeeDetail: TRowEmployees }) => {
   const router = useRouter();
-
   return (
     <div className="rounded-md bg-white py-[26px] pl-[32px] pr-[25px] w-full h-fit">
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
