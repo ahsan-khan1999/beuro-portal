@@ -14,8 +14,6 @@ const OfferDetails = () => {
       <div className="flex mt-7">
         <OffersDetailsData />
       </div>
-
-      
     </Layout>
   );
 };

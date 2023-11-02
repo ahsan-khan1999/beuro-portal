@@ -24,7 +24,11 @@ export default function Offers() {
         <TableFunctions />
         <TableLayout>
           <TableHeading />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} handleImagesUpload={handleImagesUpload}/>
+          <TableRows
+            dataToAdd={currentPageRows}
+            openModal={handleNotes}
+            handleImagesUpload={handleImagesUpload}
+          />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

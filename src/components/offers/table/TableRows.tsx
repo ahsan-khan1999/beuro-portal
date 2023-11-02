@@ -1,6 +1,7 @@
 import { OffersTableRowTypes } from "@/types/offers";
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/router";
 
 const TableRows = ({
   dataToAdd,
@@ -11,19 +12,29 @@ const TableRows = ({
   openModal: (item: OffersTableRowTypes) => void;
   handleImagesUpload: (item: OffersTableRowTypes) => void;
 }) => {
+  const router = useRouter();
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
+            onClick={() => router.push("/offers/details")}
             key={index}
-            className="shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(150px,_100%)_minmax(200px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(150px,_100%)_minmax(200px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
-            <span className="px-6 py-4 bg-white  ">{item.customer}</span>
-            <span className="px-6 py-4 bg-white ">{item.offerTitle}</span>
-            <span className="px-6 py-4 bg-white ">{item.totalPrice}</span>
-            <span className="px-6 py-4 bg-white ">
+            <span className="px-6 py-4 bg-white rounded-md flex items-center">
+              {item.id}
+            </span>
+            <span className="px-6 py-4 bg-white  flex items-center">
+              {item.customer}
+            </span>
+            <span className="px-6 py-4 bg-white flex items-center">
+              {item.offerTitle}
+            </span>
+            <span className="px-6 py-4 bg-white flex items-center">
+              {item.totalPrice}
+            </span>
+            <span className="px-6 py-4 bg-white flex items-center">
               {item.createdOn.toLocaleDateString()}
             </span>
             <span className="px-6 py-4 bg-white ">

@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateOffersFormField } from "@/types";
 
-export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
+export const AddOfferDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
   control
@@ -58,6 +58,7 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
+              value: "Individual",
               id: "customerType",
               name: "customerType",
               options: [{ value: "Individual", label: "Individual" }],
@@ -101,6 +102,7 @@ export const AddOfferDetailsFormField: GenerateRegistrationFormField = (
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
+              value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
               id: "offerTitle",
               name: "offerTitle",
               options: [

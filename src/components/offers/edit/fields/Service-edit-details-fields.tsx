@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateOffersFormField } from "@/types";
 
-export const ServiceEditDetailsFormField: GenerateRegistrationFormField = (
+export const ServiceEditDetailsFormField: GenerateOffersFormField = (
   register,
   loading
 ) => {

@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
-import LeadsTab from "@/base-components/ui/tab/LeadsTab";
-// import LeadsDetailsImages from "../LeadsDetailsImages";
 import OfferDetailCompData from "./OfferDetailCompData";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
-import LeadsDetailsImages from "@/components/leads/LeadsDetailsImages";
-import Activity from "./activity";
 import SwitchedComp from "./SwitchedComp";
+import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 
 const OffersDetailsData = () => {
   const [tabComp, setTabComp] = useState("Activity");
@@ -79,7 +76,7 @@ const OffersDetailsData = () => {
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
         {tabSection.map((item, index) => (
-          <LeadsTab
+          <DetailsTab
             isSelected={tabType === index}
             setTabType={setTabType}
             tabType={tabType}

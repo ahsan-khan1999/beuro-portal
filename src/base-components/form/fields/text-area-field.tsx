@@ -22,7 +22,7 @@ export const TextAreaField = ({
   useEffect(() => setValue && setValue(name, value), []);
 
   return (
-    <div className={` relative w-full flex items-center `}>
+    <div className={`relative w-full flex items-center `}>
       <textarea
         onFocus={() => setInputFocus(true)}
         onBlurCapture={() => setInputFocus(false)}

@@ -276,6 +276,16 @@ export type GenerateContractFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+
+// Contract formfield
+export type GenerateOffersFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

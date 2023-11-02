@@ -2,13 +2,15 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import Image from "next/image";
 import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
+import { useRouter } from "next/router";
 
 const OfferCreated = ({ onClose }: { onClose: () => void }) => {
+  const router = useRouter();
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564px] min-h-auto"
+        containerClassName="max-w-[564px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
@@ -20,7 +22,10 @@ const OfferCreated = ({ onClose }: { onClose: () => void }) => {
             Thanks for creating offer we are happy to have you.
           </span>
 
-          <button className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
+          <button
+            onClick={() => router.push("/offers")}
+            className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
+          >
             Done
           </button>
         </div>

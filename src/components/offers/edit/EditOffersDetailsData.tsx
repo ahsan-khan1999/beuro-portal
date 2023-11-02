@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
-import LeadsTab from "@/base-components/ui/tab/LeadsTab";
 import OfferEditImages from "../OfferEditImages";
 import OfferEditDetails from "./OfferEditDetails";
 import AddressEditDetails from "./AddressEditDetails";
@@ -10,8 +9,10 @@ import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 const EditOffersDetailsData = ({
   shareImgModal,
+  handleImagesUpload
 }: {
-  shareImgModal: () => void;
+  shareImgModal: Function;
+  handleImagesUpload: Function;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
@@ -92,7 +93,7 @@ const EditOffersDetailsData = ({
         ))}
 
         <div className="mt-[14px]">
-          <OfferEditImages shareImgModal={shareImgModal} />
+          <OfferEditImages shareImgModal={shareImgModal} handleImagesUpload={handleImagesUpload}/>
         </div>
       </div>
 
