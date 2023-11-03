@@ -24,8 +24,8 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "employName",
-              name: "employName",
+              id: "name",
+              name: "name",
               placeholder: "Rahal",
               register,
             },
@@ -86,8 +86,8 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "number",
-              id: "phoneNumber",
-              name: "phoneNumber",
+              id: "phone",
+              name: "phone",
               placeholder: "+49 124354 2111",
               register,
             },
@@ -103,8 +103,8 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "number",
-              id: "mobileNumber",
-              name: "mobileNumber",
+              id: "phone",
+              name: "phone",
               placeholder: "+49 124354 2111",
               register,
             },
@@ -128,7 +128,7 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto   text-dark hover:bg-none",
               loading,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -140,7 +140,7 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               className:
                 "rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ",
               loading,
-              onClick: onClick
+              onClick: onClick,
             },
           },
         ],

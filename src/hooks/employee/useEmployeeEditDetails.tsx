@@ -7,7 +7,11 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
 import { employeeEditDetailsFormField } from "@/components/employees/fields/employee-edit-fields";
 import { TRowEmployees } from "@/types/employee";
-export const useEmployeeEditDetails = (routeHandler: () => void, employeeDetail: TRowEmployees) => {
+import { useMemo } from "react";
+export const useEmployeeEditDetails = (
+  routeHandler: () => void,
+  employeeDetail: TRowEmployees
+) => {
   console.log(routeHandler, "routeHandler", employeeDetail);
 
   const { t: translate } = useTranslation();
@@ -20,11 +24,17 @@ export const useEmployeeEditDetails = (routeHandler: () => void, employeeDetail:
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const fields = employeeEditDetailsFormField(register, loading, routeHandler);
+  useMemo(() => {
+    if (employeeDetail?.id) {
+      reset(employeeDetail);
+    }
+  }, [employeeDetail?.id]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
@@ -36,5 +46,4 @@ export const useEmployeeEditDetails = (routeHandler: () => void, employeeDetail:
     errors,
     error,
   };
-
 };

@@ -12,7 +12,10 @@ const EmployDetailsEdit = () => {
 
   // funtion for handling the route
   const routeHandler = () => {
-    router.push("/employees/details");
+    router.push({
+      pathname: "/employees/details",
+      query: { employee: employeeDetail.id },
+    });
   };
   const { employeeDetail } = useEmployeeDetail();
 
