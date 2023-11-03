@@ -7,16 +7,9 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
 import { employeeEditDetailsFormField } from "@/components/employees/fields/employee-edit-fields";
 import { TRowEmployees } from "@/types/employee";
+export const useEmployeeEditDetails = (routeHandler: () => void, employeeDetail: TRowEmployees) => {
+  console.log(routeHandler, "routeHandler", employeeDetail);
 
-export const useEmployeeEditDetails = ({
-  routeHandler,
-  employeeDetail,
-}: {
-  routeHandler: () => void;
-  employeeDetail: TRowEmployees;
-}) => {
-  console.log(employeeDetail,"2345634564dsfsdf");
-  
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -43,4 +36,5 @@ export const useEmployeeEditDetails = ({
     errors,
     error,
   };
+
 };
