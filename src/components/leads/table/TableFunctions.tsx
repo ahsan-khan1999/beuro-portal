@@ -67,7 +67,7 @@ const TableFunctions = () => {
             onClick={() => handleButtonClick("close", !filter.close)}
             className="py-2 pl-[10px] pr-[22px] text-[13px] font-medium text-[#393939] bg-white rounded-md relative whitespace-nowrap"
           >
-            Close Leads
+             Close Leads
             {filter.close ? (
               <svg
                 className="absolute top-1 right-1"
