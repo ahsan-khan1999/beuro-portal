@@ -27,7 +27,10 @@ const TableRows = ({
             <span className="px-6 py-4 bg-white ">
               <div
                 onClick={() =>
-                  router.push("/content/details", { query: item.id })
+                  router.push({
+                    pathname: "/content/details",
+                    query: { content: item.id },
+                  })
                 }
                 className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
               >
