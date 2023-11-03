@@ -34,7 +34,12 @@ const TableRowServices = ({
 
             <span className="px-6 py-4 bg-white flex justify-center items-center">
               <div
-                onClick={() => router.push("/services/details")}
+                onClick={() =>
+                  router.push({
+                    pathname: "/services/details",
+                    query: { service: item.id },
+                  })
+                }
                 className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
               >
                 <Image src={editIcon} alt="editIcon" />

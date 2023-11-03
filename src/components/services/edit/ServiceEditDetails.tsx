@@ -1,12 +1,19 @@
 import { Form } from "@/base-components/form/form";
 import { useEditServicesDetails } from "@/hooks/services/useEditServicesDetails";
 import FormCard from "@/layout/customers/FormCard";
+import { TRowServices } from "@/types/service";
 import React from "react";
 
-const ServiceEditDetails = ({ handleRoute }: { handleRoute: Function }) => {
+const ServiceEditDetails = ({
+  handleRoute,
+  serviceDetail,
+}: {
+  handleRoute: Function;
+  serviceDetail: TRowServices;
+}) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useEditServicesDetails(handleRoute);
+    useEditServicesDetails(handleRoute,serviceDetail);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">

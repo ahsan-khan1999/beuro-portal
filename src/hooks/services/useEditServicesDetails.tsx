@@ -6,8 +6,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateServicesValidation } from "@/validation/servicesSchema";
 import { servicesEditDetailsFormField } from "@/components/services/fields/edit-services-fields";
+import { TRowServices } from "@/types/service";
+import { useMemo } from "react";
 
-export const useEditServicesDetails = (handleRoute: Function) => {
+export const useEditServicesDetails = (
+  handleRoute: Function,
+  serviceDetail: TRowServices
+) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -19,11 +24,17 @@ export const useEditServicesDetails = (handleRoute: Function) => {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const fields = servicesEditDetailsFormField(register, loading, handleRoute);
+  useMemo(() => {
+    if (serviceDetail?.id) {
+      reset(serviceDetail);
+    }
+  }, [serviceDetail?.id]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
