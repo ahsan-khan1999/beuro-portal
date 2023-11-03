@@ -2,8 +2,9 @@ import { Form } from "@/base-components/form/form";
 import { useLeadCustomerEditDetails } from "@/hooks/leads/useLeadCustomerEditDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
+import { ComponentsType } from "../details/LeadsDetailsData";
 
-const CustomerEditDetails = () => {
+const CustomerEditDetails = ({onClick}: {onClick: (index: number, component: ComponentsType) => void;}) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     useLeadCustomerEditDetails();
@@ -11,7 +12,9 @@ const CustomerEditDetails = () => {
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
-        <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full">
+        <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+          onClick={() => onClick(0, ComponentsType.customer)}
+        >
           Cancel
         </button>
       </div>

@@ -1,9 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateLeadsFormField } from "@/types";
 import Image from "next/image";
 
-export const AddLeadAdditionalDetailsFormField: GenerateRegistrationFormField =
-  (register, loading, control, setCurrentFormStage) => {
+export const AddLeadAdditionalDetailsFormField: GenerateLeadsFormField =
+  (register, loading, control) => {
     const formField: FormField[] = [
       {
         containerClass: "mb-0",

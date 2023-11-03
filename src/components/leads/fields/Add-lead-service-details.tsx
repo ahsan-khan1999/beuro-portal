@@ -1,11 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateLeadsFormField } from "@/types";
 
-export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
+export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control,
-  setCurrentFormStage
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -24,6 +23,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
+              value: "Cleaning",
               options: [
                 { value: "Office Boy", label: "Office Boy" },
                 { value: "Security Gaurd", label: "Security Gaurd" },
@@ -56,6 +56,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailablity",
+              value: "Morning(9am to 12am)",
               name: "contactAvailablity",
               options: [
                 {
@@ -106,6 +107,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "preferContact",
               name: "preferContact",
+              value: "Via Email",
               options: [
                 {
                   value: "Via Email",
@@ -130,6 +132,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
+              value: "Less then 1000CHF",
               options: [
                 {
                   value: "Less then 1000CHF",
@@ -164,6 +167,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
+              value: "Instagram",
               options: [
                 { value: "Whats'app", label: "What'sapp" },
                 { value: "Facebook", label: "Facebook" },
@@ -184,6 +188,7 @@ export const AddLeadServiceDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "otherServices",
               name: "otherServices",
+              value: "Cleaning, Moving, Painting",
               options: [
                 {
                   value: "Cleaning, Moving, Painting",

@@ -1,11 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateLeadsFormField } from "@/types";
 
-export const LeadAdditionalDetailsFormField: GenerateRegistrationFormField = (
+export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
   control,
-  setCurrentFormStage
 ) => {
   const formField: FormField[] = [
     {
@@ -15,7 +14,6 @@ export const LeadAdditionalDetailsFormField: GenerateRegistrationFormField = (
         className: "!p-4 !border-dark focus:!border-primary",
         id: "additionlData",
         name: "additionlData",
-        
         control,
       },
     },

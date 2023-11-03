@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import CustomerEditDetails from "./CustomerEditDetails";
 import AddressEditDetails from "./AddressEditDetails";
@@ -70,12 +70,18 @@ const LeadsEditDetailsData = () => {
     },
   ];
 
-  const componentsLookUp = {
-    0: <CustomerEditDetails />,
-    1: <AddressEditDetails />,
-    2: <ServiceEditDetails />,
-    3: <AditionalEditDetails />,
-  };
+  // const componentsLookUp = {
+  //   0: <CustomerEditDetails />,
+  //   1: <AddressEditDetails />,
+  //   2: <ServiceEditDetails />,
+  //   3: <AditionalEditDetails />,
+  // };
+
+  useEffect(() => {
+    console.log("ok");
+  });
+
+
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
@@ -91,7 +97,11 @@ const LeadsEditDetailsData = () => {
         ))}
       </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
+      {/* <CustomerEditDetails />
+      <AddressEditDetails />
+      <ServiceEditDetails />
+      <AditionalEditDetails /> */}
     </div>
   );
 };

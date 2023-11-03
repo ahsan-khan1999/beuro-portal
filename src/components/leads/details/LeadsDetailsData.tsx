@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import AddressDetailsData from "./AddressDetailsData";
 import CustomerDetailsData from "./CustomerDetailsData";
@@ -6,10 +6,61 @@ import LeadsDetailsImages from "../LeadsDetailsImages";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
+import AddressEditDetails from "../edit/AddressEditDetails";
+import CustomerEditDetails from "../edit/CustomerEditDetails";
+import ServiceEditDetails from "../edit/ServiceEditDetails";
+import AditionalEditDetails from "../edit/AditionalEditDetails";
+
+export enum ComponentsType {
+  customer,
+  customerEdit,
+  address,
+  addressEdit,
+  service,
+  serviceEdit,
+  additional,
+  additionalEdit,
+}
 
 const LeadsDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+  const [data, setData] = useState<{
+    index: number;
+    component: ComponentsType;
+  } | null>(null);
+
+  const handleEdit = (index: number, component: ComponentsType) => {
+    console.log(index, component);
+    setData({ index, component });
+  };
+  const componentArray = [
+    <CustomerDetailsData onClick={handleEdit} />,
+    <AddressDetailsData />,
+    <ServiceDetailsData />,
+    <AdditionalDetails />,
+  ];
+  const [renderComponent, setRenderComponent] = useState(componentArray);
+
+  const lookup = {
+    [ComponentsType.customer]: <CustomerDetailsData onClick={handleEdit} />,
+    [ComponentsType.customerEdit]: <CustomerEditDetails onClick={handleEdit} />,
+    [ComponentsType.address]: <AddressDetailsData />,
+    [ComponentsType.addressEdit]: <AddressEditDetails />,
+    [ComponentsType.service]: <ServiceDetailsData />,
+    [ComponentsType.serviceEdit]: <ServiceEditDetails />,
+    [ComponentsType.additional]: <AdditionalDetails />,
+    [ComponentsType.additionalEdit]: <AditionalEditDetails />,
+  };
+
+  useEffect(() => {
+    setRenderComponent((prev) => {
+      const updatedData = [...prev];
+      if (data) {
+        updatedData[data.index] = lookup[data.component];
+      }
+      return updatedData;
+    });
+  }, [data]);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -84,12 +135,6 @@ const LeadsDetailsData = () => {
     },
   ];
 
-  const componentsLookUp = {
-    0: <CustomerDetailsData />,
-    1: <AddressDetailsData />,
-    2: <ServiceDetailsData />,
-    3: <AdditionalDetails />,
-  };
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
@@ -109,7 +154,10 @@ const LeadsDetailsData = () => {
         </div>
       </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
+      <div className="flex flex-col">
+        {renderComponent.map((component) => component)}
+      </div>
     </div>
   );
 };

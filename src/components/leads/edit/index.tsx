@@ -8,7 +8,7 @@ const LeadsEditDetails = () => {
   return (
     <Layout>
       <DetailsCard>
-        <LeadsDetailsCardData />
+        {/* <LeadsDetailsCardData /> */}
       </DetailsCard>
       <div className="flex mt-7">
         <LeadsEditDetailsData />

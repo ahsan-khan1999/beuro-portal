@@ -1,6 +1,6 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
-import React, { useEffect } from "react";
+import React from "react";
 import LeadsDetailsCardData from "../LeadsDetailsCardData";
 import LeadsDetailsData from "./LeadsDetailsData";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -14,30 +14,43 @@ const LeadsDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const leadDeleteHandler = () => {
+    console.log("clickde")
+    dispatch(updateModalType(ModalType.CONFIRM_DELETION));
+  };
+
+  const handleDelete = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.INFO_DELETED));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: <DeleteConfirmation_2 />,
+    [ModalType.CONFIRM_DELETION]: (
+      <DeleteConfirmation_1 onClose={onClose} handleDelete={handleDelete} />
+    ),
+    [ModalType.INFO_DELETED]: <DeleteConfirmation_2 onClose={onClose} />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  useEffect(() => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
-  }, []);
-  
   return (
     <>
       <Layout>
         <DetailsCard>
-          <LeadsDetailsCardData />
+          <LeadsDetailsCardData leadDeleteHandler={leadDeleteHandler} />
         </DetailsCard>
         <div className="flex mt-7">
           <LeadsDetailsData />
         </div>
       </Layout>
 
-      {/* {renderModal()}  */}
+      {renderModal()}
     </>
   );
 };
