@@ -7,6 +7,8 @@ import { LeadsTableRowTypes } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { leads } from "@/utils/static";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 
 const useLeads = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -40,6 +42,22 @@ const useLeads = () => {
     dispatch(updateModalType(ModalType.ADD_NOTE));
   };
 
+  // function for hnadling the add note
+  const handleImageSlider = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+  };
+
+  const handleImageUpload = (
+    item: LeadsTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.stopPropagation();
+    dispatch(updateModalType(ModalType.NONE));
+
+    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
@@ -48,6 +66,10 @@ const useLeads = () => {
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
+    [ModalType.UPLOAD_IMAGE]: (
+      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    ),
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -69,6 +91,7 @@ const useLeads = () => {
     handlePageChange,
     itemsPerPage,
     handleNotes,
+    handleImageUpload,
     renderModal,
   };
 };

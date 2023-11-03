@@ -13,8 +13,14 @@ const TableHeadings = ({ employsData }: { employsData: TRowEmployees[] }) => {
       {employsData?.map((item: any) => {
         return (
           <div
+            onClick={() =>
+              router.push({
+                pathname: "/employees/details",
+                query: { employee: item.id },
+              })
+            }
             key={item.id}
-            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(200px,_200px)_minmax(_150px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(200px,_200px)_minmax(_150px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white roeditInfoIconunded-md flex  items-center">
               {item.id}

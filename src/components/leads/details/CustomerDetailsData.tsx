@@ -1,10 +1,8 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import { useRouter } from "next/router";
-import React, { Component } from "react";
+import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 
 const CustomerDetailsData = ({onClick}: {onClick: (index: number, component: ComponentsType) => void;}) => {
-  const router = useRouter();
 
   return (
     <LeadsCardLayout>

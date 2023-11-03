@@ -7,9 +7,17 @@ import { useRouter } from "next/router";
 const TableRows = ({
   dataToAdd,
   openModal,
+  handleImageUpload,
 }: {
   dataToAdd: LeadsTableRowTypes[];
-  openModal: (item: LeadsTableRowTypes, e:React.MouseEvent<HTMLImageElement>) => void;
+  openModal: (
+    item: LeadsTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => void;
+  handleImageUpload: (
+    item: LeadsTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => void;
 }) => {
   const router = useRouter();
   return (
@@ -55,6 +63,7 @@ const TableRows = ({
                 src={item.editImg}
                 alt="edit_img_icon"
                 className="cursor-pointer"
+                onClick={(e) => handleImageUpload(item, e)}
               />
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">

@@ -35,21 +35,23 @@ const LeadsDetailsData = () => {
   };
   const componentArray = [
     <CustomerDetailsData onClick={handleEdit} />,
-    <AddressDetailsData />,
-    <ServiceDetailsData />,
-    <AdditionalDetails />,
+    <AddressDetailsData onClick={handleEdit} />,
+    <ServiceDetailsData onClick={handleEdit} />,
+    <AdditionalDetails onClick={handleEdit} />,
   ];
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   const lookup = {
     [ComponentsType.customer]: <CustomerDetailsData onClick={handleEdit} />,
     [ComponentsType.customerEdit]: <CustomerEditDetails onClick={handleEdit} />,
-    [ComponentsType.address]: <AddressDetailsData />,
-    [ComponentsType.addressEdit]: <AddressEditDetails />,
-    [ComponentsType.service]: <ServiceDetailsData />,
-    [ComponentsType.serviceEdit]: <ServiceEditDetails />,
-    [ComponentsType.additional]: <AdditionalDetails />,
-    [ComponentsType.additionalEdit]: <AditionalEditDetails />,
+    [ComponentsType.address]: <AddressDetailsData onClick={handleEdit} />,
+    [ComponentsType.addressEdit]: <AddressEditDetails onClick={handleEdit} />,
+    [ComponentsType.service]: <ServiceDetailsData onClick={handleEdit} />,
+    [ComponentsType.serviceEdit]: <ServiceEditDetails onClick={handleEdit} />,
+    [ComponentsType.additional]: <AdditionalDetails onClick={handleEdit} />,
+    [ComponentsType.additionalEdit]: (
+      <AditionalEditDetails onClick={handleEdit} />
+    ),
   };
 
   useEffect(() => {
@@ -155,7 +157,7 @@ const LeadsDetailsData = () => {
       </div>
 
       {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-5">
         {renderComponent.map((component) => component)}
       </div>
     </div>

@@ -28,12 +28,8 @@ const DetailsData = ({ date, id, name }: EmployeeDetail) => {
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-          <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-          />
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" />
+          <Image src={printerIcon} alt="printerIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
