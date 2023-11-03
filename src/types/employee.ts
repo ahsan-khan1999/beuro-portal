@@ -7,8 +7,7 @@ export interface TRowEmployees {
   designation: string;
   createdOn: Date | null;
   action: "edit";
-  handlePasswordReset: Function;
-  
+  // handlePasswordReset: Function;
 }
 export interface EmployeeDetail {
   date?: Date | null;

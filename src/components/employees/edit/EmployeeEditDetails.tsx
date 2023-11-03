@@ -1,12 +1,21 @@
 import { Form } from "@/base-components/form/form";
 import { useEmployeeEditDetails } from "@/hooks/employee/useEmployeeEditDetails";
 import FormCard from "@/layout/customers/FormCard";
+import { TRowEmployees } from "@/types/employee";
 import React from "react";
 
-const EmployeeEditDetails = ({ routeHandler }: { routeHandler: () => void }) => {
+const EmployeeEditDetails = ({
+  routeHandler,
+  employeeDetail,
+}: {
+  routeHandler: () => void;
+  employeeDetail: TRowEmployees;
+}) => {
+  console.log(employeeDetail,"mew");
+  
   const defaultClassName = "mt-[30px]  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
-    useEmployeeEditDetails(routeHandler);
+    useEmployeeEditDetails(routeHandler, employeeDetail);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

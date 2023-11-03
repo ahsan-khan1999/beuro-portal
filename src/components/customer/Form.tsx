@@ -5,6 +5,8 @@ import { CustomerField } from "@/types/customer";
 import React from "react";
 
 const CustomerForm = (data?: CustomerField) => {
+  console.log(data,"data");
+  
   const defaultClassName = "mt-[30px]  ";
 
   const { fields, control, onSubmit, handleSubmit, errors, error } =

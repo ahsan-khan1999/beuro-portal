@@ -5,7 +5,13 @@ import editPswIcon from "@/assets/svgs/edit-password.svg";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import { TRowEmployees } from "@/types/employee";
 
-const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset: () => void, employeeDetail: TRowEmployees }) => {
+const FormData = ({
+  handlePasswordReset,
+  employeeDetail,
+}: {
+  handlePasswordReset: () => void;
+  employeeDetail: TRowEmployees;
+}) => {
   const router = useRouter();
   return (
     <div className="rounded-md bg-white py-[26px] pl-[32px] pr-[25px] w-full h-fit">
@@ -24,7 +30,12 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
             Edit Password
           </button>
           <button
-            onClick={() => router.push("/employees/edit")}
+            onClick={() =>
+              router.push({
+                pathname: "/employees/edit",
+                query: { employee: employeeDetail?.id },
+              })
+            }
             className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
           >
             <svg
@@ -71,7 +82,7 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
               Employ Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {name}
+              {employeeDetail?.name}
             </div>
           </div>
           <div className="w-[33%]">
@@ -79,7 +90,7 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
               Designation
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {designation}
+              {employeeDetail?.designation}
             </div>
           </div>
         </div>
@@ -89,7 +100,7 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
               Email Address
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {email}
+              {employeeDetail?.email}
             </div>
           </div>
           <div>
@@ -97,7 +108,7 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
               Phone Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {phone}
+              {employeeDetail?.phone}
             </div>
           </div>
           <div>
@@ -105,7 +116,7 @@ const FormData = ({ handlePasswordReset, employeeDetail }: { handlePasswordReset
               Mobile Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {phone}
+              {employeeDetail?.phone}
             </div>
           </div>
         </div>
