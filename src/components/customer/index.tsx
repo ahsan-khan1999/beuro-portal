@@ -8,7 +8,8 @@ import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/customer/useCustomer";
 
 export default function Customers() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } = useCustomer()
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+    useCustomer();
 
   return (
     <Layout>

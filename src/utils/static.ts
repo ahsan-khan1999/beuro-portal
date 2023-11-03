@@ -8,6 +8,9 @@ import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { TRowServices } from "@/types/service";
+import { TRowEmployees } from "@/types/employee";
+import { ContentTableRowTypes } from "@/types/content";
+import { TableRowEmailTracker } from "@/types/emailTracker";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -1613,6 +1616,479 @@ export const servicesData: TRowServices[] = [
     description: "We need to move office furniture to.....",
     action: "edit",
   },
+];
+export const employeesData: TRowEmployees[] = [
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "002",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phone: +49014561235,
+    designation: "Islamabad",
+    createdOn: parseCustomDate("25/08/2023"),
+    action: "edit",
+  },
+];
+export const contentData: ContentTableRowTypes[] = [
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+  {
+    id: "001",
+    name: "Text For Contract",
+    contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
+    createdOn: parseCustomDate("25/08/2023"),
+  },
+];
+export const MailTracker: TableRowEmailTracker[] = [
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Pending",
+      colorClass: "#FE9244",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "open",
+      colorClass: "#45C769",
+    },
+  },
+  {
+    id: 1,
+    recipient: "Rahal Ahmed",
+    subject: "Test12@gmail.com",
+    sendAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    viewedAt: {
+      time: "08:34am",
+      date: "25/08/2023",
+    },
+    status: {
+      text: "Failed",
+      colorClass: "#FF376F",
+    },
+  },
+
+  // Add more rows as needed
 ];
 
 export const sideBar: SideBar[] = [

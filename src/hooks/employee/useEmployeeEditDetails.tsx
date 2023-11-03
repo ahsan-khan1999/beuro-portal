@@ -6,8 +6,14 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
 import { employeeEditDetailsFormField } from "@/components/employees/fields/employee-edit-fields";
+import { TRowEmployees } from "@/types/employee";
+import { useMemo } from "react";
+export const useEmployeeEditDetails = (
+  routeHandler: () => void,
+  employeeDetail: TRowEmployees
+) => {
+  console.log(routeHandler, "routeHandler", employeeDetail);
 
-export const useEmployeeEditDetails = (routeHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -18,15 +24,21 @@ export const useEmployeeEditDetails = (routeHandler: Function) => {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const fields = employeeEditDetailsFormField(register, loading, routeHandler);
+  useMemo(() => {
+    if (employeeDetail?.id) {
+      reset(employeeDetail);
+    }
+  }, [employeeDetail?.id]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
-  
+
   return {
     fields,
     onSubmit,

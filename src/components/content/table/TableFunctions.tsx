@@ -1,14 +1,15 @@
 import React from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
+import ContentFilters from "./content-filters";
 
-const TopBar = () => {
+const TableFunctions = () => {
   const router = useRouter();
-  function onInputChange(text: string) {}
+  // function onInputChange(text: string) {}
 
   return (
     <div className="flex items-center ">
-      <div className="flex items-center space-x-4">
+      {/* <div className="flex items-center space-x-4">
         <SearchInput onInputChange={onInputChange} />
         <div className="text-[#404040] font-medium flex items-center cursor-pointer">
           Sort by
@@ -54,7 +55,8 @@ const TopBar = () => {
             </clipPath>
           </defs>
         </svg>
-      </div>
+      </div> */}
+       <ContentFilters />
       <button
         onClick={() => router.push("/content/add")}
         className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
@@ -78,4 +80,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default TableFunctions;

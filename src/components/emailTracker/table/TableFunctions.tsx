@@ -1,13 +1,14 @@
 import React from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
+import EmailTrackerFilters from "./email-tacker-filters";
 
 const TableFunctions = () => {
-  function onInputChange(text: string) {}
+  // function onInputChange(text: string) {}
 
   return (
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Email Tracker</h1>
-      <div className="flex items-center ">
+      {/* <div className="flex items-center ">
         <div className="flex items-center space-x-4">
           <SearchInput onInputChange={onInputChange} />
           <div className="text-[#404040] font-medium flex items-center cursor-pointer">
@@ -55,7 +56,8 @@ const TableFunctions = () => {
             </defs>
           </svg>
         </div>
-      </div>
+      </div> */}
+      <EmailTrackerFilters />
     </div>
   );
 };

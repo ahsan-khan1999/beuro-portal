@@ -4,14 +4,15 @@ import { useRouter } from "next/router";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import filterDropDownIcon from "@/assets/svgs/filter_drop_dwon_icon.svg";
 import Image from "next/image";
+import EmployeesFilters from "./employees-filters";
 
 const TableFunctions = () => {
   const router = useRouter();
-  function onInputChange(text: string) {}
+  // function onInputChange(text: string) {}
 
   return (
     <div className="flex items-center ">
-      <div className="flex items-center space-x-4">
+      {/* <div className="flex items-center space-x-4">
         <SearchInput onInputChange={onInputChange} />
         <div className="text-[#404040] font-medium flex items-center cursor-pointer">
           Sort by
@@ -37,7 +38,8 @@ const TableFunctions = () => {
           alt="filterDropDownIcon"
           className="cursor-pointer"
         />
-      </div>
+      </div> */}
+      <EmployeesFilters />
       <button
         onClick={() => router.push("/employees/add")}
         className="py-2 px-[10px]  cursor-pointer flex items-center gap-x-2 text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
