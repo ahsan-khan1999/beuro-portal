@@ -1,19 +1,28 @@
 import React from "react";
-import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-const LeadsDetailsCardData = () => {
+const LeadsDetailsCardData = ({
+  leadDeleteHandler,
+}: {
+  leadDeleteHandler: Function;
+}) => {
+  const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="back_icon" className="w-10 h-10" />
+          <Image
+            src={backIcon}
+            alt="back_icon"
+            className="cursor-pointer"
+            onClick={() => router.push("/leads")}
+          />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            {" "}
             Leads Details
           </p>
         </div>
@@ -26,7 +35,12 @@ const LeadsDetailsCardData = () => {
             </p>
           </div>
           <Image src={printerIcon} alt="printer_icon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image
+            src={deleteIcon}
+            alt="deleteIcon"
+            className="cursor-pointer"
+            onClick={() => leadDeleteHandler}
+          />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -42,7 +56,7 @@ const LeadsDetailsCardData = () => {
             <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
               Status:
             </span>
-            <span className="font-medium text-base text-[#FE9244] px-[14px] py-[6px] text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
+            <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
               Open
             </span>
           </div>

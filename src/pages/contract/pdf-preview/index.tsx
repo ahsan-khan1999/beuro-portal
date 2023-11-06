@@ -1,13 +1,8 @@
-import EmailPriview from "@/components/contract/emailPriview";
-import { Layout } from "@/layout";
+import PdfPriview from "@/components/contract/pdf-preview";
 import React from "react";
 
 const index = () => {
-  return (
-    <Layout>
-      <EmailPriview />
-    </Layout>
-  );
+  return <PdfPriview />;
 };
 
 export default index;

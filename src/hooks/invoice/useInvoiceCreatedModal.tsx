@@ -4,10 +4,10 @@ import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { CreateInvoiceFormField } from "@/components/invoice/details/invoice/create-invoice-fields";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
+import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
 
-export default function useInvoiceCreatedModal() {
+export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
@@ -23,7 +23,12 @@ export default function useInvoiceCreatedModal() {
     resolver: yupResolver(createdInvoiceSchema),
   });
 
-  const fields = CreateInvoiceFormField(register, loading, control);
+  const fields = CreateInvoiceFormField(
+    register,
+    loading,
+    control,
+    invoiceCreated
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));

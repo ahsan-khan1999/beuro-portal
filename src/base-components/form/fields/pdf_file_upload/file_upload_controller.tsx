@@ -7,13 +7,20 @@ export const DragAndDropPdfField = ({
   control,
   id,
   name,
+  text,
+  fileSupported,
 }: DragAndDropPdfFieldProps) => {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <PdfFileUpload id={id} field={field} />
+        <PdfFileUpload
+          id={id}
+          field={field}
+          text={text}
+          fileSupported={fileSupported}
+        />
       )}
     />
   );

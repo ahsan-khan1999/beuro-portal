@@ -1,4 +1,5 @@
-import { TableRowEmailTracker } from "@/types";
+
+import { TableRowEmailTracker } from "@/types/emailTracker";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -10,7 +11,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
         return (
           <div
             key={index}
-            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(150px,_150px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
             <span className="px-6 py-4 bg-white  ">{item.recipient}</span>
@@ -38,6 +39,8 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                 height="29"
                 viewBox="0 0 29 29"
                 fill="none"
+                onClick={() => router.push("/email-tracker/view-mail")}
+                className="cursor-pointer"
               >
                 <path
                   opacity="0.1"

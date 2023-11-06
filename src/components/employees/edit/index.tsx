@@ -3,16 +3,36 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
-import Form from "../Form";
+import EmployeeEditDetails from "./EmployeeEditDetails";
+import { useRouter } from "next/router";
+import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 
 const EmployDetailsEdit = () => {
+  const router = useRouter();
+
+  // funtion for handling the route
+  const routeHandler = () => {
+    router.push({
+      pathname: "/employees/details",
+      query: { employee: employeeDetail.id },
+    });
+  };
+  const { employeeDetail } = useEmployeeDetail();
+
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData />
+        <DetailsData
+          date={employeeDetail?.createdOn}
+          id={employeeDetail?.id}
+          name={employeeDetail?.name}
+        />
       </DetailsCard>
       <div className="flex mt-8">
-        <Form />
+        <EmployeeEditDetails
+          routeHandler={routeHandler}
+          employeeDetail={employeeDetail}
+        />
         <SideCard />
       </div>
     </Layout>

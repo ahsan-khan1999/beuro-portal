@@ -9,8 +9,10 @@ import colorFullEmailIcon from "@/assets/svgs/color_ful_input_email.svg";
 import editIcon from "@/assets/svgs/name-input.svg";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
+import { useRouter } from "next/router";
 
 const OfferDetailsCard = () => {
+  const router = useRouter()
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -28,7 +30,7 @@ const OfferDetailsCard = () => {
               Send Email
             </p>
           </div>
-          <Image src={PDFIcon} alt="PDFIcon" />
+          <Image src={PDFIcon} alt="PDFIcon" onClick={() => router.push("/offers/pdf-preview")} className="cursor-pointer"/>
           <Image src={downloadIcon} alt="downloadIcon" />
           <Image src={printerIcon} alt="printerIcon" />
           <Image src={deleteIcon} alt="deleteIcon" />
@@ -52,7 +54,7 @@ const OfferDetailsCard = () => {
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
               Office Cleaning Munich Lorem Ipsum dollar
-              <Image src={editIcon} alt="editIcon" className="cursor-pointer" />
+              <Image src={editIcon} alt="editIcon"  />
             </span>
           </div>
           <div className="flex gap-[10px]">
@@ -82,7 +84,7 @@ const OfferDetailsCard = () => {
               <span className="text-base font-medium text-[#4B4B4B]">
                 25/08 to 25/08
               </span>
-              <Image src={editIcon} alt="editIcon" className="cursor-pointer" />
+              <Image src={editIcon} alt="editIcon"  />
             </div>
           </div>
         </div>
@@ -92,7 +94,7 @@ const OfferDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Email Status:
             </span>
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] cursor-pointer">
+            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] ">
               Draft
             </span>
           </div>
@@ -100,7 +102,7 @@ const OfferDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Payment Method:
             </span>
-            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center ">
               Cash
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +123,7 @@ const OfferDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Status:
             </span>
-            <span className="text-base font-medium text-[#FF0000] border border-[#FF0000] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#FF0000] border border-[#FF0000] rounded-lg px-4 py-[3px] flex items-center ">
               Rejected
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +149,7 @@ const OfferDetailsCard = () => {
                 <Image
                   src={writeIcon}
                   alt="writeIcon"
-                  className="cursor-pointer"
+                  
                 />
               </div>
             </div>
@@ -159,7 +161,7 @@ const OfferDetailsCard = () => {
                 <Image
                   src={imageIcon}
                   alt="editImg"
-                  className="cursor-pointer"
+                  
                 />
               </div>
             </div>

@@ -5,6 +5,7 @@ import OfferContentEditDetails from "./OfferContentEditDetails";
 import EditConfirmationContentDetailsData from "./EditConfirmationContentDetailsData";
 import EditInoviceContentDetails from "./EditInoviceContentDetails";
 import EditReceiptContentDetails from "./ReceiptContentDetails";
+import { useRouter } from "next/router";
 
 const ContentEditDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
@@ -68,11 +69,17 @@ const ContentEditDetailsData = () => {
     },
   ];
 
+  const router = useRouter();
+
+  const handleRoute = () => {
+    router.push("/content/details");
+  };
+
   const componentsLookUp = {
-    0: <OfferContentEditDetails />,
-    1: <EditConfirmationContentDetailsData />,
-    2: <EditInoviceContentDetails />,
-    3: <EditReceiptContentDetails />,
+    0: <OfferContentEditDetails handleRoute={handleRoute}/>,
+    1: <EditConfirmationContentDetailsData handleRoute={handleRoute}/>,
+    2: <EditInoviceContentDetails handleRoute={handleRoute}/>,
+    3: <EditReceiptContentDetails handleRoute={handleRoute}/>,
   };
 
   return (

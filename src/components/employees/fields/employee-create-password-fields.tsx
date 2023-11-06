@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateChangePasswordFormField } from "@/types";
 
-export const EmployeeCreateNewPasswordFieldsFormField: GenerateRegistrationFormField =
-  (register, loading, control) => {
+export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFormField =
+  (register, loading, onClick) => {
     const formFields: FormField[] = [
       {
         containerClass: "mb-5",
@@ -53,7 +53,6 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateRegistrationFormF
         },
       },
       {
-        
         label: null,
         field: {
           type: Field.button,
@@ -61,6 +60,7 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateRegistrationFormF
           inputType: "submit",
           className: "mt-[19px] rounded-lg",
           loading,
+          onClick: onClick
         },
       },
     ];

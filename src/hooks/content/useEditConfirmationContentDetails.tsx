@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditConfirmationContentDetailsFormField } from "@/components/content/edit/fields/edit-confirmation-details-fields";
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useEditConfirmationContentDetails = () => {
+export const useEditConfirmationContentDetails = (handleRoute: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const useEditConfirmationContentDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = EditConfirmationContentDetailsFormField(register, loading, control);
+  const fields = EditConfirmationContentDetailsFormField(register, loading, control, handleRoute);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

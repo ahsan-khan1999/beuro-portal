@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
-import OfferEditDetails from "./OfferAddDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
-import OfferEditImages from "../OfferEditImages";
 import AddressAddDetails from "./AddressAddDetails";
 import ServiceAddDetails from "./ServiceAddDetails";
 import AditionalAddDetails from "./AditionalAddDetails";
+import OfferAddDetails from "./OfferAddDetails";
 
-const EditOffersDetailsData = ({
-  shareImgModal,
-}: {
-  shareImgModal: () => void;
-}) => {
+const EditOffersDetailsData = ({handleOfferCreated} : {handleOfferCreated:Function}) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -69,10 +64,10 @@ const EditOffersDetailsData = ({
   ];
 
   const componentsLookUp = {
-    0: <OfferEditDetails />,
+    0: <OfferAddDetails />,
     1: <AddressAddDetails />,
     2: <ServiceAddDetails />,
-    3: <AditionalAddDetails />,
+    3: <AditionalAddDetails handleOfferCreated={handleOfferCreated}/>,
   };
 
   return (
@@ -89,10 +84,6 @@ const EditOffersDetailsData = ({
             selectedTab={index}
           />
         ))}
-
-        <div className="mt-[14px]">
-          <OfferEditImages shareImgModal={shareImgModal} />
-        </div>
       </div>
 
       {componentsLookUp[tabType as keyof typeof componentsLookUp]}

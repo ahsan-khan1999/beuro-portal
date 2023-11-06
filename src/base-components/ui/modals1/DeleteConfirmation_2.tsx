@@ -4,11 +4,11 @@ import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
-const DeleteConfirmation_2 = () => {
+const DeleteConfirmation_2 = ({ onClose }: {  onClose: () => void }) => {
   return (
     <>
       <BaseModal
-        onClose={() => false}
+        onClose={onClose}
         containerClassName="max-w-[564px] min-h-auto"
       >
         <div className="relative flex flex-col items-center">
@@ -16,6 +16,7 @@ const DeleteConfirmation_2 = () => {
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
+            onClick={onClose}
           />
           <Image
             src={deleteConfirmIcon}
@@ -27,7 +28,7 @@ const DeleteConfirmation_2 = () => {
           </p>
 
           <div className="flex gap-[33px] mt-[27px] mb-[38px]">
-            <button className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md">
+            <button onClick={onClose} className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md">
               Cancel
             </button>
             <button className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md">

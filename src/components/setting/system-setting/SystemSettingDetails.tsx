@@ -6,11 +6,11 @@ import ConnectWithBuro from "./ConnectWithBuro";
 import SettingLayout from "../SettingLayout";
 
 const SystemSettingDetails = ({
-  handleChangePassword,
-  addTaxHandler
+  addTaxHandler,
+  exclusiveTaxHandler
 }: {
-  handleChangePassword: () => void;
   addTaxHandler: () => void;
+  exclusiveTaxHandler: () => void;
 }) => {
   const dropDownItems = [{ item: " EUR - Euro" }];
   const [selectedItem, setSelectedItem] = useState(dropDownItems[0].item);
@@ -21,7 +21,7 @@ const SystemSettingDetails = ({
 
   return (
     <>
-      <TaxVerifiedComp addTaxHandler={addTaxHandler}/>
+      <TaxVerifiedComp addTaxHandler={addTaxHandler} exclusiveTaxHandler={exclusiveTaxHandler}/>
       <div className="my-2">
         <InvoiceSection />
       </div>
@@ -49,7 +49,6 @@ const SystemSettingDetails = ({
 
       <div className="mt-3 ml-[31px]">
         <button
-          onClick={handleChangePassword}
           className="text-white text-base font-medium px-6 py-[10px] bg-[#4A13E7] rounded-md"
         >
           Save Setting

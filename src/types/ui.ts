@@ -56,7 +56,6 @@ export interface ButtonProps {
   iconAlt?: any;
 }
 
-
 // Add field interface
 export interface AddFieldProps {
   text?: string;
@@ -66,8 +65,6 @@ export interface AddFieldProps {
   iconAlt?: any;
   type?: Field.button;
   name: string;
-
-
 }
 
 export interface Image {
@@ -203,7 +200,7 @@ interface WidgetBaseProps {
   containerClassName?: string;
 }
 
-export interface BaseCardProps extends WidgetBaseProps { }
+export interface BaseCardProps extends WidgetBaseProps {}
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {
@@ -270,4 +267,53 @@ export interface IconOnlyButtonProps {
   onClick: () => void;
   disabled?: boolean;
   buttonClassName?: string;
+}
+// sliderBase props
+interface SliderBaseProps {
+  goToNext: () => void;
+  goToPrev: () => void;
+}
+
+// types for slider
+export interface MainImageSliderProps extends SliderBaseProps {
+  imageSrc: StaticImageData;
+  handleMouseMove?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+  handleMouseLeave?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+}
+
+interface SliderImagesData {
+  imageSrc: StaticImageData;
+}
+
+// slider image props
+export interface SliderImagesDataProps {
+  noOfThumbNails: number;
+  images: SliderImagesData[];
+}
+
+export interface ThumbnailSliderProps extends SliderBaseProps {
+  sliderImages: SliderImagesData[];
+  thumbnailStartIndex: number;
+  noOfThumbnails: number;
+  selectImage: (index: number) => void;
+}
+
+export interface ThumbnailProps {
+  imageSrc: StaticImageData;
+  onClick: () => void;
+  index: number;
+}
+
+export interface ImageSliderHook {
+  selectedImage: StaticImageData;
+  thumbnailStartIndex: number;
+  goToNext: () => void;
+  goToPrev: () => void;
+  selectImage: (index: number) => void;
+  handleMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleMouseLeave: (event: React.MouseEvent<HTMLDivElement>) => void;
 }

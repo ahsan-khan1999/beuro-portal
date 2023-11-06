@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateAddReasonFormField } from "@/types";
 
-export const addReasonFormField: GenerateRegistrationFormField = (
+export const addReasonFormField: GenerateAddReasonFormField = (
   register,
   loading,
   control

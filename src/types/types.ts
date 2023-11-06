@@ -1,4 +1,4 @@
-import { svgs } from './../base-components/SideBar';
+import { svgs } from "./../base-components/SideBar";
 import {
   Component,
   ReactNode,
@@ -69,15 +69,14 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?: string
+  icon?: string;
 }
 
 export interface tabsSectionTypes {
   tabsArray: tabArrayTypes[];
-  setTabType: (tabType: number) => void;
-  tabType: number;
+  setTabType: (tabType: string) => void;
+  tabType: string;
 }
-
 
 export interface articlesSectionTypes {
   name: string;
@@ -128,12 +127,14 @@ export type GenerateRegistrationFormField = (
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
-  onClick?: Function,
   router?: NextRouter,
+  onClick?: Function
 ) => FormField[];
+
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  isUpdate: boolean,
   control?: Control<FieldValues>,
 ) => FormField[];
 export type GenerateFormContactField = (
@@ -159,6 +160,143 @@ export type GenerateFormAddressField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
+// Image upload form field
+export type ImageUploadFormFieldType = (
+  register: UseFormRegister<FieldValues>,
+  control?: Control<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// accounting setting formfield
+export type GenerateAccountSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// change mail setting formfield
+export type GenerateChangeMailSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// edit payment details formfield
+export type GenerateEditPaymentDetailsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// add reason formfield
+export type GenerateAddReasonFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// change/Reset password formfield
+export type GenerateChangePasswordFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Add & Exclusive Tax formfield
+export type GenerateAddTaxFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// contact-support formfield
+export type GenerateContactSupportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// content formfield
+export type GenerateContentFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Employee formfield
+export type GenerateEmployeeFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Notes formfield
+export type GenerateNotesFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Servcies formfield
+export type GenerateServicesFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// Invoice formfield
+export type GenerateInvoiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+// Contract formfield
+export type GenerateContractFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onBack?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+
+// Contract formfield
+export type GenerateOffersFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+
+// Contract formfield
+export type GenerateLeadsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -172,5 +310,3 @@ export interface PaginationItemProps {
   className?: string;
   disabled?: boolean;
 }
-
-

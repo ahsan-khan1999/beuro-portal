@@ -3,10 +3,10 @@ import { useAddContentReceiptDetails } from "@/hooks/content/useAddContentReceip
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const AddReceiptContentDetails = () => {
+const AddReceiptContentDetails = ({handleContentCreated} : {handleContentCreated: Function}) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddContentReceiptDetails();
+    useAddContentReceiptDetails(handleContentCreated);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

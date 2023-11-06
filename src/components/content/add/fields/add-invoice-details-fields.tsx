@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateContentFormField } from "@/types";
 
-export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
+export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
   (register, loading, control) => {
     const formField: FormField[] = [
       {
@@ -31,11 +31,9 @@ export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
         field: {
           type: Field.ckEditor,
           className: "!p-4 !border-dark focus:!border-primary ",
-          inputType: "text",
           id: "invoiceDescription",
           name: "invoiceDescription",
-          placeholder:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s, when an unknown printer took is galley of type and scrambled it to make a type specimen book. It has survived not only five lorm centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software",
+          
           control,
         },
       },
@@ -50,11 +48,9 @@ export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
         field: {
           type: Field.ckEditor,
           className: "!p-4 !border-dark focus:!border-primary ",
-          inputType: "text",
           id: "emailBody",
           name: "emailBody",
-          placeholder:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s, when an unknown printer took is galley of type and scrambled it to make a type specimen book. It has survived not only five lorm centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software",
+          
           control,
         },
       },
@@ -68,9 +64,10 @@ export const AddContentInvoiceDetailsFormField: GenerateRegistrationFormField =
         },
         field: {
           type: Field.dragAndDropPdfField,
-          inputType: "file",
           id: "attachments",
           name: "attachments",
+          text: "Drop or attach your file here",
+          fileSupported: "Files supported: PDF, JPG, PNG, GIF",
           control,
         },
       },

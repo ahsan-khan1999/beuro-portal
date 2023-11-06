@@ -6,14 +6,21 @@ import postIcon from "@/assets/svgs/post_icon.svg";
 import emailIcon from "@/assets/svgs/color_ful_input_email.svg";
 import downloadIcon from "@/assets/svgs/download_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
+import { useRouter } from "next/router";
 
 const PdfCard = () => {
+  const router = useRouter();
   return (
     <PdfCardLayout>
       <>
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <Image src={backIcon} alt="backIcon" className="cursor-pointer" />
+            <Image
+              src={backIcon}
+              alt="backIcon"
+              className="cursor-pointer"
+              onClick={() => router.push("/invoices/details")}
+            />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
               Contract Details
             </h1>

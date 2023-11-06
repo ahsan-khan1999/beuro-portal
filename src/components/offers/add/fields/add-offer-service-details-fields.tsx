@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateOffersFormField } from "@/types";
 
-export const AddOfferServiceDetailsFormField: GenerateRegistrationFormField = (
+export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
   control
@@ -57,8 +57,8 @@ export const AddOfferServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Service Title",
               type: Field.select,
+              value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
               name: "serviceTitle",
               options: [
@@ -241,8 +241,8 @@ export const AddOfferServiceDetailsFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Service Title",
               type: Field.select,
+              value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
               name: "serviceTitle",
               options: [

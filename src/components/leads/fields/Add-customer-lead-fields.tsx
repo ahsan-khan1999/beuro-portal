@@ -1,11 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateLeadsFormField } from "@/types";
 
-export const AddNewCustomerLeadFormField: GenerateRegistrationFormField = (
+export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control,
-  setCurrentFormStage
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -57,9 +56,9 @@ export const AddNewCustomerLeadFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "Please Select Customer Type",
               type: Field.select,
               id: "customerType",
+              value: "Company",
               name: "customerType",
               options: [{ value: "Company", label: "Company" }],
               control,
@@ -226,10 +225,10 @@ export const AddNewCustomerLeadFormField: GenerateRegistrationFormField = (
             },
             field: {
               className: "!p-4 !h-[54px] !border-dark  ",
-              placeholder: "Please Select Country",
               type: Field.select,
               id: "country",
               name: "country",
+              value: "Switzerland",
               options: [
                 { value: "Switzerland", label: "Switzerland" },
                 { value: "Germany", label: "Germany" },

@@ -28,11 +28,13 @@ const ExistingNotes = ({
             <p className="text-[24px] leading-6 font-medium text-[#000]">
               Notes
             </p>
-            <div
-              className="flex justify-between items-center gap-[10px] cursor-pointer"
-              onClick={handleAddNote}
-            >
-              <Image src={addNewNote} alt="request_submitted" />
+            <div className="flex justify-between items-center gap-[10px] ">
+              <Image
+                src={addNewNote}
+                alt="request_submitted"
+                onClick={handleAddNote}
+                className="cursor-pointer"
+              />
               <p className="text-[#4B4B4B] text-base">Add New Note</p>
             </div>
           </div>

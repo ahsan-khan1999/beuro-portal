@@ -6,7 +6,6 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { Layout } from "@/layout";
 import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
-import SettingDetailsForm from "./SettingDetailsForm";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
 import MailSetting from "./mail-setting";
@@ -14,6 +13,8 @@ import Billing from "./billing";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
+import SettingProfile from "./profile-form";
+import ExclusiveTax from "@/base-components/ui/modals1/ExclusiveTax";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -27,6 +28,7 @@ const Setting = () => {
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
     [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
+    [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
   };
 
@@ -36,6 +38,10 @@ const Setting = () => {
 
   const handleChangePassword = () => {
     dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
+  };
+
+  const exclusiveTaxHandler = () => {
+    dispatch(updateModalType(ModalType.EXCLUSIVE_TAX));
   };
 
   const addTaxHandler = () => {
@@ -58,13 +64,15 @@ const Setting = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? <SettingDetailsForm /> : null}
+          {switchDetails === 0 ? (
+            <SettingProfile handleChangePassword={handleChangePassword} />
+          ) : null}
         </div>
         <div className="mt-4">
           {switchDetails === 1 ? (
             <SystemSettingDetails
-              handleChangePassword={handleChangePassword}
               addTaxHandler={addTaxHandler}
+              exclusiveTaxHandler={exclusiveTaxHandler}
             />
           ) : null}
         </div>

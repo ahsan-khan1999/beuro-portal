@@ -1,11 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
-import plusFiled from "@/assets/svgs/add_new_icon.svg";
+import { FormField, GenerateOffersFormField } from "@/types";
 
-export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
+export const OfferEditDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
-  control,
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -23,6 +22,7 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             field: {
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
+              value: "Rahal Ahmed Ali",
               id: "selectCustomer",
               name: "selectCustomer",
               options: [{ value: "Rahal Ahmed Ali", label: "Rahal Ahmed Ali" }],
@@ -84,6 +84,7 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
+              value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
               name: "offerTitle",
               options: [
                 {
@@ -110,7 +111,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               placeholder: "A-2000",
               register,
             },
-            placeholder: "Please Select Customer Type",
           },
         ],
       },
@@ -134,6 +134,7 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
+              value: "Individual",
               options: [{ value: "Individual", label: "Individual" }],
               control,
             },
@@ -186,7 +187,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
 
       field: {
         type: Field.div,
-
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -253,7 +253,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
-
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -266,7 +265,6 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,
@@ -282,19 +280,9 @@ export const OfferEditDetailsFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.date,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "date",
               id: "date",
               name: "date",
               register,
-            },
-          },
-          {
-            containerClass: "mb-0 mt-[30px]",
-            field: {
-              type: Field.addField,
-              icon: plusFiled,
-              className: "rounded-lg p-4 ",
-              loading,
             },
           },
         ],

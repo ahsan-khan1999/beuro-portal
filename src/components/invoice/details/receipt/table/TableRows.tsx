@@ -1,15 +1,23 @@
 import Image from "next/image";
 import React from "react";
 import pdfIcon from "@/assets/svgs/primary_pdf_icon.svg";
+import { ReceiptDetailsTableRowTypes } from "@/types/invoice";
+import { useRouter } from "next/router";
 
-const TableRows = ({ dataToAdd }) => {
+const TableRows = ({
+  dataToAdd,
+}: {
+  dataToAdd: ReceiptDetailsTableRowTypes[];
+}) => {
+  const router = useRouter();
   return (
     <div>
       {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
+            onClick={() => router.push("/invoices/receipt-pdf-preview")}
             key={index}
-            className="shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(100px,_100%)_minmax(100px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className=" cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(100px,_100%)_minmax(100px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
             <span className="px-6 py-4 bg-white  ">{item.customer}</span>

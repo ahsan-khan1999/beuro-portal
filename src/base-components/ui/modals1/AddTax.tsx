@@ -7,8 +7,7 @@ import useAddTax from "@/hooks/modals/useAddTax";
 
 const AddTax = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error } =
-  useAddTax();
+  const { fields, onSubmit, handleSubmit, errors, error } = useAddTax();
   return (
     <>
       <BaseModal
@@ -16,9 +15,14 @@ const AddTax = ({ onClose }: { onClose: () => void }) => {
         containerClassName="max-w-[624px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[38px] pb-[40px] pt-[25px]">
-          <Image src={crossIcon} alt="crossIcon" className="absolute right-5 top-5 cursor-pointer" onClick={onClose}/>
+          <Image
+            src={crossIcon}
+            alt="crossIcon"
+            className="absolute right-5 top-5 cursor-pointer"
+            onClick={onClose}
+          />
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[50px]">
-          Exclusive Tax
+            Add New Tax
           </p>
 
           <Form

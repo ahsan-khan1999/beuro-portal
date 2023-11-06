@@ -1,3 +1,6 @@
+import { SetStateAction } from "react";
+import { FormField } from ".";
+import { FieldValues, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 
 export interface CustomerTable {
     currentPageRows: Customers[]
@@ -6,9 +9,17 @@ export interface CustomerTable {
 export interface CustomerDetail {
     date?: string;
     id?: number;
-    name?: string
+    name?: string;
+    handlePreviousClick: () => void
 }
+export interface CustomerLeadDetail {
+    id: string;
+    name: string;
+    source?: string;
+    status?: string;
+    expires?: string;
 
+}
 export interface Customers {
     id: number;
     name: string;
@@ -23,14 +34,26 @@ export interface Customers {
     companyName: string;
     mobile: string;
     address: Address;
-    edit?:boolean
+    edit?: boolean;
+    lead: CustomerLeadDetail
 }
 export interface Address {
-    street: string;
+    streetNo: string;
     postCode: string;
     country: string
 }
 
 export interface CustomerField {
     customerDetail?: Customers,
-  }
+}
+
+
+export interface FormDataProps {
+    customerDetail: Customers,
+    isUpdate: boolean,
+    setIsUpdate: SetStateAction<any>;
+    fields: FormField[];
+    handleSubmit: UseFormHandleSubmit<FieldValues>;
+    errors?: Record<string, any>;
+    onSubmit: SubmitHandler<FieldValues>;
+}

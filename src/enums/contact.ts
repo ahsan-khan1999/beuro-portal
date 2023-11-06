@@ -1,9 +1,8 @@
 // contact-support enum
 export enum ContactSupportFields {
-  firstName = "firstName",
-  lastName = "lastName",
+  fullName = "fullName",
   email = "email",
-  mobileNumber = "mobileNumber",
-  reasonForContact = "reasonForContact",
+  phoneNumber = "phoneNumber",
+  // reasonForContact = "reasonForContact",
   message = "message",
 }

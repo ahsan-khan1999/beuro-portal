@@ -26,6 +26,7 @@ export const useLeadsAddressEditDetails = () => {
   const fields = LeadsAddressDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    router.push("")
   };
   return {
     fields,

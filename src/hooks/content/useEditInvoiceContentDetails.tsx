@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditInvoiceContentDetailsFormField } from "@/components/content/edit/fields/edit-invoice-details-fields";
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 
-export const useEditInvoiceContentDetails = () => {
+export const useEditInvoiceContentDetails = (handleRoute: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const useEditInvoiceContentDetails = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = EditInvoiceContentDetailsFormField(register, loading, control);
+  const fields = EditInvoiceContentDetailsFormField(register, loading, control, handleRoute);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };

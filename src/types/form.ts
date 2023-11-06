@@ -23,6 +23,8 @@ interface BaseFieldProps<T extends Field> {
   id: string;
   name: string;
   className?: string;
+  text?: string;
+  fileSupported?: string;
 }
 
 export interface LabelProps {
@@ -87,8 +89,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-  svg?: SVGElement;
-  alt?: string;
+  svg: string;
+  alt: string;
 }
 
 export interface OptionType {
@@ -102,6 +104,8 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   value: string;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
+  disabled?: boolean;
+
 }
 
 export interface SelectBoxProps {
@@ -112,6 +116,8 @@ export interface SelectBoxProps {
   value: string;
   placeholder?: string;
   className?: string;
+  disabled?: boolean;
+
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
@@ -138,6 +144,19 @@ export interface DragAndDropFileFieldProps
 export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
+}
+
+// interface for the pdf file upload
+export interface ProfileUploadFieldProps
+  extends BaseFieldProps<Field.profileUploadField> {
+  control?: Control<FieldValues>;
+}
+
+// interface for the Image upload
+export interface ImageUploadFieldProps
+  extends BaseFieldProps<Field.imageUploadField> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
 }
 
 // Interface for the input field copy
@@ -223,15 +242,18 @@ export type FieldType =
   | Field.radio
   | Field.dragAndDropFileField
   | Field.dragAndDropPdfField
+  | Field.profileUploadField
+  | Field.imageUploadField
   | Field.span
   | Field.div
-  | Field.button  
+  | Field.button
   | Field.link;
 export type FieldProps =
   | InputProps
   | TextAreaProps
   | CKEditorProps
-  // | CKEditorBoxProps
+  | InputWithCopyProps
+  | CKEditorBoxProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
@@ -242,6 +264,8 @@ export type FieldProps =
   | RadioButtonProps
   | DragAndDropFileFieldProps
   | DragAndDropPdfFieldProps
+  | ProfileUploadFieldProps
+  | ImageUploadFieldProps
   | SpanProps
   | DivProps
   | ButtonProps
@@ -270,10 +294,12 @@ export interface FieldComponents {
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
+  profileUploadField: React.FC<ProfileUploadFieldProps>;
+  imageUploadField: React.FC<ImageUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
-  addField: React.FC<AddFieldProps>;
+  // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
 }
 

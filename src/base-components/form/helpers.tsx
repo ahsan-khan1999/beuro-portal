@@ -16,7 +16,8 @@ import {
   SpanField,
   CheckBox,
   DragAndDropFileField,
-  DragAndDropPdfField
+  DragAndDropPdfField,
+  ImageUploadField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -29,6 +30,7 @@ import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
 import { AddFiled } from "./fields/add-field-button";
+import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
@@ -45,10 +47,12 @@ const fieldComponents: FieldComponents = {
   radio: RadioButtonField,
   dragAndDropFileField: DragAndDropFileField,
   dragAndDropPdfField: DragAndDropPdfField,
+  profileUploadField: ProfileControllerField,
+  imageUploadField:ImageUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
-  addField: AddFiled,
+  // addField: AddFiled,
   link: LinkField,
 };
 
@@ -73,7 +77,6 @@ export function isFieldType(type: any): type is FieldType {
     "input",
     "textArea",
     "ckEditor",
-    "creditCardNumberInput",
     "creditCardExpiryDateInput",
     "password",
     "select",
@@ -83,11 +86,13 @@ export function isFieldType(type: any): type is FieldType {
     "radio",
     "dragAndDropFileField",
     "dragAndDropPdfField",
+    "profileUploadField",
+    "imageUploadField",
     "span",
     "div",
     "button",
-    "addField",
     "link",
+    // "addField",
   ].includes(type);
 }
 
