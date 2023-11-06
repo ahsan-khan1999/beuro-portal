@@ -3,10 +3,10 @@ import * as yup from "yup";
 
 export const generateCustomerValidation = (translate: Function) => {
   return yup.object().shape({
-    [CustomerDetailsFields.firstName]: yup
+    [CustomerDetailsFields.name]: yup
       .string()
       .required("validation required"),
-    [CustomerDetailsFields.lastName]: yup
+    [CustomerDetailsFields.companyName]: yup
       .string()
       .required("validation required"),
     [CustomerDetailsFields.customerType]: yup

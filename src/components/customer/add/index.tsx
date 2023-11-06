@@ -1,21 +1,27 @@
 import { Layout } from "@/layout";
-
 import React, { useState } from "react";
-
-import CustomerForm from "../Form";
 import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
+import AddCustomerForm from "../add-customer-form";
+import { useRouter } from "next/router";
+type ComponentLookupType = Record<string, JSX.Element>; 
 
 const AddCustomer = () => {
-  const [tabType, setTabType] = useState<number>(0);
+  const [tabType, setTabType] = useState<string>("Customer Details");
+  const router = useRouter()
+  const handleCancel = () => {
+    router.push("/customers")
+  }
 
   const tabSection: tabArrayTypes[] = [
     {
       name: "Customer Details",
-      content: <CustomerForm />,
+      content: <AddCustomerForm handleCancel={handleCancel} />,
     },
-   
   ];
+  const componentLookup: ComponentLookupType = {
+    "Customer Details": <AddCustomerForm handleCancel={handleCancel} />
+  }
   return (
     <Layout>
       <h1 className="text-[#222B45] text-xl mb-5">Add new Customer </h1>
@@ -28,9 +34,7 @@ const AddCustomer = () => {
             tabType={tabType}
           />
         </div>
-        {tabSection.map((item, index) => {
-          return index == tabType && item.content;
-        })}
+        {componentLookup[tabType]}
       </div>
     </Layout>
   );

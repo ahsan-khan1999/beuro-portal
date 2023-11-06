@@ -74,8 +74,8 @@ export interface tabArrayTypes {
 
 export interface tabsSectionTypes {
   tabsArray: tabArrayTypes[];
-  setTabType: (tabType: number) => void;
-  tabType: number;
+  setTabType: (tabType: string) => void;
+  tabType: string;
 }
 
 export interface articlesSectionTypes {
@@ -134,7 +134,8 @@ export type GenerateRegistrationFormField = (
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  control?: Control<FieldValues>
+  isUpdate: boolean,
+  control?: Control<FieldValues>,
 ) => FormField[];
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,

@@ -104,6 +104,8 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   value: string;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
+  disabled?: boolean;
+
 }
 
 export interface SelectBoxProps {
@@ -114,6 +116,8 @@ export interface SelectBoxProps {
   value: string;
   placeholder?: string;
   className?: string;
+  disabled?: boolean;
+
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {

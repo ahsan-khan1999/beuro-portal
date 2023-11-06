@@ -7,7 +7,7 @@ const TabSection = ({ tabsArray, setTabType, tabType }: tabsSectionTypes) => {
       {tabsArray.map((item, index) => {
         return (
           <button
-            onClick={() => setTabType(index)}
+            onClick={() => setTabType(item.name)}
             key={index}
             className="h-fit whitespace-nowrap rounded-lg border border-primary bg-white py-[10px] px-4  w-full text-lg text-primary font-medium flex items-center"
           >

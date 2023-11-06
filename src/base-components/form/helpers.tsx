@@ -91,8 +91,8 @@ export function isFieldType(type: any): type is FieldType {
     "span",
     "div",
     "button",
-    // "addField",
     "link",
+    // "addField",
   ].includes(type);
 }
 

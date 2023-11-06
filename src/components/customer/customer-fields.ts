@@ -4,6 +4,7 @@ import { FormField, GenerateCustomerFormField } from "@/types";
 export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
   loading,
+  isUpdate,
   control,
 ) => {
   const formField: FormField[] = [
@@ -19,7 +20,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: `!p-4 !h-[54px]  !border-dark ${!isUpdate && "!border-light"} focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -31,6 +32,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
+              disabled:isUpdate
             },
           },
           {
@@ -48,6 +50,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
+              disabled: isUpdate
             },
           },
           {
@@ -65,6 +68,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "companyName",
               placeholder: "Please Enter Company Name",
               register,
+              disabled: isUpdate
+
             },
           },
           {
@@ -79,6 +84,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
+              disabled: isUpdate
+
             },
           },
 
@@ -99,6 +106,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Enter Your Phone Number",
 
               register,
+              disabled: isUpdate
+
             },
           },
           {
@@ -115,8 +124,10 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "mobile",
               name: "mobile",
 
+
               placeholder: "Enter Your Mobile Number",
               register,
+              disabled: isUpdate,
             },
           },
         ],
@@ -139,18 +150,20 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             containerClass: "mb-0",
             label: {
               text: "Street NO.",
-              htmlFor: "address.street",
+              htmlFor: "address.streetNo",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
-              id: "address.street",
-              name: "address.street",
+              id: "address.streetNo",
+              name: "address.streetNo",
 
               placeholder: "Please Enter Street Number",
               register,
+              disabled: isUpdate,
+
             },
           },
 
@@ -160,7 +173,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             containerClass: "mb-0",
             label: {
               text: "Post Code",
-              htmlFor: "post code",
+              htmlFor: "address.postCode",
               className: "mb-[10px]",
             },
             field: {
@@ -173,13 +186,15 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Enter Your Post Code",
 
               register,
+              disabled: isUpdate,
+
             },
           },
           {
             containerClass: "mb-0",
             label: {
               text: "Country",
-              htmlFor: "select",
+              htmlFor: "address.country",
               className: "mb-[10px]",
             },
             field: {
@@ -195,6 +210,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
+              disabled:isUpdate
             },
           },
         ],
@@ -213,8 +229,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               inputType: "button",
               // onClick: () => setCurrentFormStage("locationDetails"),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"}`,
               loading,
+
             },
           },
           {
@@ -223,7 +240,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: "Save Changes",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"}`,
               loading,
             },
           },

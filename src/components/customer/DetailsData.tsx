@@ -1,33 +1,36 @@
 import { CustomerDetail } from "@/types/customer";
 import React from "react";
-const DetailsData = ({ date, id, name }: CustomerDetail) => {
+const DetailsData = ({ date, id, name, handlePreviousClick }: CustomerDetail) => {
 
 
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="40"
-            viewBox="0 0 41 40"
-            fill="none"
-          >
-            <rect
-              x="0.644531"
-              y="0.5"
-              width="39.2105"
-              height="39"
-              rx="7.5"
-              fill="white"
-              stroke="#C7C7C7"
-            />
-            <path
-              d="M23.6836 13.2658C23.8676 13.4498 23.9709 13.6993 23.9709 13.9594C23.9709 14.2196 23.8676 14.4691 23.6836 14.6531L18.8272 19.5095L23.6836 24.366C23.8624 24.551 23.9612 24.7989 23.959 25.0561C23.9568 25.3134 23.8536 25.5594 23.6717 25.7413C23.4898 25.9232 23.2437 26.0264 22.9865 26.0287C22.7292 26.0309 22.4814 25.932 22.2964 25.7533L16.7462 20.2032C16.5623 20.0192 16.459 19.7697 16.459 19.5095C16.459 19.2494 16.5623 18.9999 16.7462 18.8159L22.2964 13.2658C22.4803 13.0818 22.7298 12.9785 22.99 12.9785C23.2502 12.9785 23.4997 13.0818 23.6836 13.2658Z"
-              fill="#4B4B4B"
-            />
-          </svg>
+          <div onClick={handlePreviousClick} className="cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="41"
+              height="40"
+              viewBox="0 0 41 40"
+              fill="none"
+            >
+              <rect
+                x="0.644531"
+                y="0.5"
+                width="39.2105"
+                height="39"
+                rx="7.5"
+                fill="white"
+                stroke="#C7C7C7"
+              />
+              <path
+                d="M23.6836 13.2658C23.8676 13.4498 23.9709 13.6993 23.9709 13.9594C23.9709 14.2196 23.8676 14.4691 23.6836 14.6531L18.8272 19.5095L23.6836 24.366C23.8624 24.551 23.9612 24.7989 23.959 25.0561C23.9568 25.3134 23.8536 25.5594 23.6717 25.7413C23.4898 25.9232 23.2437 26.0264 22.9865 26.0287C22.7292 26.0309 22.4814 25.932 22.2964 25.7533L16.7462 20.2032C16.5623 20.0192 16.459 19.7697 16.459 19.5095C16.459 19.2494 16.5623 18.9999 16.7462 18.8159L22.2964 13.2658C22.4803 13.0818 22.7298 12.9785 22.99 12.9785C23.2502 12.9785 23.4997 13.0818 23.6836 13.2658Z"
+                fill="#4B4B4B"
+              />
+            </svg>
+
+          </div>
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             Customers Details
           </h1>
