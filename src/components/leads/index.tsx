@@ -14,6 +14,7 @@ export default function Leads() {
     totalItems,
     itemsPerPage,
     handleNotes,
+    handleImageUpload,
     renderModal,
   } = useLeads();
 
@@ -23,7 +24,7 @@ export default function Leads() {
         <TableFunctions />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} />
+          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} handleImageUpload={handleImageUpload}/>
         </TableLayout>
         <Pagination
           totalItems={totalItems}

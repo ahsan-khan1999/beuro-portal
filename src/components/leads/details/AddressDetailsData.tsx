@@ -1,16 +1,15 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import { useRouter } from "next/router";
 import React from "react";
+import { ComponentsType } from "./LeadsDetailsData";
 
-const AddressDetailsData = () => {
-  const router = useRouter();
+const AddressDetailsData = ({onClick}: {onClick: (index: number, component: ComponentsType) => void;}) => {
 
   return (
     <LeadsCardLayout>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Address Details</h2>
         <button
-          onClick={() => router.push("/leads/edit")}
+         onClick={() => onClick(ComponentsType.address, ComponentsType.addressEdit)}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <svg

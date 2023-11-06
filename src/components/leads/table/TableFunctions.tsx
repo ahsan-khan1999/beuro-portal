@@ -191,7 +191,7 @@ const TableFunctions = () => {
         <LeadsFilter />
         <button
           onClick={() => router.push("/leads/add")}
-          className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
+          className="gap-x-2 py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
         >
           <Image src={addIcon} alt="addIcon" />
           Add New
