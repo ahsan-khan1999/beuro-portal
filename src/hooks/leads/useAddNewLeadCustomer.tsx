@@ -1,6 +1,6 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -20,12 +20,13 @@ export const useAddNewLeadCustomer = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddNewCustomerLeadFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    // dispatch(loginUser({ data, router, setError, translate }));
+    // setCurrentComponent("Address Details")
   };
   return {
     fields,

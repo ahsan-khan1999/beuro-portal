@@ -266,7 +266,7 @@ export type GenerateInvoiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
+  markItRecuring: boolean,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
