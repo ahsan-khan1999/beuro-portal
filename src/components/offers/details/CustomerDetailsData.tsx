@@ -9,7 +9,10 @@ const CustomerDetailsData = () => {
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 " id="Offer  Details">
+      <div
+        className="flex justify-between items-center pb-5 "
+        id="Offer Details"
+      >
         <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
         <button
           onClick={() => router.push("/offers/edit")}
@@ -20,7 +23,7 @@ const CustomerDetailsData = () => {
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
       <div className="mt-5">
         <div className="grid grid-cols-3 gap-x-3 mb-5">
           <div>

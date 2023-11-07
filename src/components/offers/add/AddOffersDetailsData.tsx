@@ -18,11 +18,7 @@ export enum ComponentsType {
   additionalAdded,
 }
 
-const EditOffersDetailsData = ({
-  handleOfferCreated,
-}: {
-  handleOfferCreated: Function;
-}) => {
+const EditOffersDetailsData = () => {
   const [tabType, setTabType] = useState<ComponentsType>(
     ComponentsType.customerAdded
   );
@@ -51,10 +47,6 @@ const EditOffersDetailsData = ({
       offerCreatedHandler();
       return;
     }
-    setTabType(currentComponent);
-  };
-
-  const onHandleBack = (currentComponent: ComponentsType) => {
     setTabType(currentComponent);
   };
 

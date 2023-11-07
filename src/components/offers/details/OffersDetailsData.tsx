@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import OfferDetailCompData from "./CustomerDetailsData";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
@@ -18,14 +17,14 @@ export enum ComponentsType {
 const OffersDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
 
-  const [data, setData] = useState<{
-    index: number;
-    component: ComponentsType;
-  } | null>(null);
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
-  const handleEdit = (index: number, component: ComponentsType) => {
-    setData({ index, component });
-  };
+
 
   const componentArray = [
     <CustomerDetailsData />,

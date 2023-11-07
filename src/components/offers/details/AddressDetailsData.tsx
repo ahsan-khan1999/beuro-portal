@@ -9,7 +9,10 @@ const AddressDetailsData = () => {
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 " id="Address Details">
+      <div
+        className="flex justify-between items-center pb-5 "
+        id="Address Details"
+      >
         <h2 className="text-[#393939] text-lg font-medium">Address Details</h2>
         <button
           onClick={() => router.push("/offers/edit")}
@@ -19,9 +22,7 @@ const AddressDetailsData = () => {
           Edit Details
         </button>
       </div>
-      <hr  className="opacity-20 mb-5"/>
-
-
+      <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
         <h4 className="text-[#8F8F8F] mb-[10px]">Address 1 Details</h4>
