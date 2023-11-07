@@ -1857,7 +1857,7 @@ export const contentData: ContentTableRowTypes[] = [
     name: "Text For Contract",
     contentTitle: "Umzug Cleaning Service lrem ipsum dollar smith",
     offer: {
-      name: "Text for Offer",
+      name: "Text for Offer2",
       addressLabels: "Dummy address",
       title: "Dummy title",
       description: "Dummy Description ...............",

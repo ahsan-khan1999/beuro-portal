@@ -6,8 +6,13 @@ import EditConfirmationContentDetailsData from "./EditConfirmationContentDetails
 import EditInoviceContentDetails from "./EditInoviceContentDetails";
 import EditReceiptContentDetails from "./ReceiptContentDetails";
 import { useRouter } from "next/router";
+import { ContentTableRowTypes } from "@/types/content";
 
-const ContentEditDetailsData = () => {
+const ContentEditDetailsData = ({
+  contentDetail,
+}: {
+  contentDetail: ContentTableRowTypes;
+}) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -72,14 +77,17 @@ const ContentEditDetailsData = () => {
   const router = useRouter();
 
   const handleRoute = () => {
-    router.push("/content/details");
+    router.push({
+      pathname: "/content/details",
+      query: { content: contentDetail?.id },
+    });
   };
 
   const componentsLookUp = {
-    0: <OfferContentEditDetails handleRoute={handleRoute}/>,
-    1: <EditConfirmationContentDetailsData handleRoute={handleRoute}/>,
-    2: <EditInoviceContentDetails handleRoute={handleRoute}/>,
-    3: <EditReceiptContentDetails handleRoute={handleRoute}/>,
+    0: <OfferContentEditDetails handleRoute={handleRoute} contentDetail={contentDetail} />,
+    1: <EditConfirmationContentDetailsData handleRoute={handleRoute} contentDetail={contentDetail} />,
+    2: <EditInoviceContentDetails handleRoute={handleRoute} contentDetail={contentDetail} />,
+    3: <EditReceiptContentDetails handleRoute={handleRoute} contentDetail={contentDetail} />,
   };
 
   return (
