@@ -15,6 +15,9 @@ import { SettingsIcon } from "@/assets/svgs/components/sideBar/Settings";
 import { ContactSupportsIcon } from "@/assets/svgs/components/sideBar/ContactSupports";
 import { useState } from "react";
 import { sideBar } from "@/utils/static";
+import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
+import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
+import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequest";
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
@@ -28,8 +31,14 @@ export const svgs = {
   MailTracker: <MailTrackerIcon />,
   Settings: <SettingsIcon />,
   ContactSupports: <ContactSupportsIcon />,
+  plans: <PlanIcon />,
+  payment: <PaymentIcon />,
+  SupportRequest: <SupportRequestIcon />,
+  setting: <SettingsIcon />,
+  dummy: <></>,
 };
 const SideBar = () => {
+  const userRole = 0
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   return (
@@ -39,7 +48,7 @@ const SideBar = () => {
           {sideBar.map((item, index) => {
             return (
               <div key={index}>
-                {!item.inner ? (
+                {item.title == "divider" ? <div className="my-6 border-b border-[#0000001A]" /> : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
                     className={`flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
@@ -62,7 +71,7 @@ const SideBar = () => {
                       {item.title}
                     </span>
                   </button>
-                ) : (
+                ) : item.role.includes(userRole) ? (
                   <>
                     <button
                       onClick={() => {
@@ -111,7 +120,7 @@ const SideBar = () => {
                       </div>
                     </button>
                     {isOpen == index &&
-                      item.inner.map((it, ind) => {
+                      item.inner && item.inner.map((it, ind) => {
                         return (
                           <div className=" mt-3 ml-8 px-3" key={ind}>
                             <button className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
@@ -124,12 +133,8 @@ const SideBar = () => {
                         );
                       })}
                   </>
-                )}
-                {/* {item.title?.includes("Mail Tracker") && (
-                  <div className="">
-                    <hr className="text-[#0000001A] absolute w-full left-0  " />
-                  </div>
-                )} */}
+                ) : null}
+
               </div>
             );
           })}

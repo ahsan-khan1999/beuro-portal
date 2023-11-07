@@ -19,8 +19,8 @@ export default function SelectField({ title, label, options, border, handleChang
                     <div className='bg-white flex-col absolute top-6 w-20  border-[1px] border-lightGray rounded-lg p-2'>
                         <div className='  '>
                             {
-                                options.map((item) => (
-                                    <div className='flex justify-center hover:bg-lightGray rounded-md'>
+                                options.map((item,key) => (
+                                    <div className='flex justify-center hover:bg-lightGray rounded-md' key={key}> 
                                         <span onClick={() => handleChange(item)}>{item}</span>
 
                                     </div>

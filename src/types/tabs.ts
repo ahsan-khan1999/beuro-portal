@@ -7,7 +7,7 @@ export interface leadsTabsSectionTypes {
   isSelected: boolean;
   selectedTab: number;
   name: string;
-  icon: ReactNode;
+  icon: string;
 }
 
 // Interface for tab
@@ -18,5 +18,5 @@ export interface OfferTabsSectionTypes {
   selectedTab: number;
   name: string;
   index: number;
-  icon: ReactNode | string;
+  icon: string;
 }

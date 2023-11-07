@@ -1,5 +1,3 @@
-import { InfoModal } from "@/components";
-import SuccessPopupBody from "../successPopupBody";
 import { BaseModal } from "../base-modal";
 import SuccessPopupBodyMini from "../successPopupBodyMini";
 
