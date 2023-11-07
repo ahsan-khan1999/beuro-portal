@@ -30,7 +30,6 @@ const LeadsDetailsData = () => {
   } | null>(null);
 
   const handleEdit = (index: number, component: ComponentsType) => {
-    console.log(index, component);
     setData({ index, component });
   };
   const componentArray = [
@@ -39,6 +38,7 @@ const LeadsDetailsData = () => {
     <ServiceDetailsData onClick={handleEdit} />,
     <AdditionalDetails onClick={handleEdit} />,
   ];
+
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   const lookup = {
@@ -148,6 +148,7 @@ const LeadsDetailsData = () => {
             name={item.name}
             icon={item.icon}
             selectedTab={index}
+            key={index}
           />
         ))}
 
@@ -156,9 +157,11 @@ const LeadsDetailsData = () => {
         </div>
       </div>
 
-      {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
+    
       <div className="flex flex-col gap-y-5">
-        {renderComponent.map((component) => component)}
+        {renderComponent.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
       </div>
     </div>
   );

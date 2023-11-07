@@ -39,7 +39,7 @@ const LeadsDetailsCardData = ({
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
-            onClick={() => leadDeleteHandler}
+            onClick={() => leadDeleteHandler()}
           />
         </div>
       </div>

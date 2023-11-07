@@ -15,7 +15,7 @@ const AdditionalDetails = ({
         </h2>
         <button
           onClick={() =>
-            onClick(ComponentsType.additional, ComponentsType.additionalEdit)
+            onClick(3, ComponentsType.additionalEdit)
           }
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >

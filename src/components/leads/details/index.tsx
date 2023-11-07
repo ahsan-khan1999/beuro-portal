@@ -9,17 +9,19 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { useRouter } from "next/router";
 
 const LeadsDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const router = useRouter();
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
   const leadDeleteHandler = () => {
-    console.log("clickde")
+    console.log("clickde");
     dispatch(updateModalType(ModalType.CONFIRM_DELETION));
   };
 
@@ -28,11 +30,27 @@ const LeadsDetails = () => {
     dispatch(updateModalType(ModalType.INFO_DELETED));
   };
 
+  const routeHandler = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    router.push("/leads");
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
-      <DeleteConfirmation_1 onClose={onClose} handleDelete={handleDelete} />
+      <DeleteConfirmation_1
+        onClose={onClose}
+        handleDelete={handleDelete}
+        modelHeading="Please confirm Lead ID"
+        subHeading="Enter Lead ID"
+      />
     ),
-    [ModalType.INFO_DELETED]: <DeleteConfirmation_2 onClose={onClose} />,
+    [ModalType.INFO_DELETED]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading="Are you sure you want to delete this Lead?"
+        routeHandler={routeHandler}
+      />
+    ),
   };
 
   const renderModal = () => {
