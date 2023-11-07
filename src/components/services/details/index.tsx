@@ -4,15 +4,17 @@ import React from "react";
 import DetailsData from "./DetailsData";
 import SideCard from "../SideCard";
 import ServiceDetailsData from "./ServiceDetailsData";
+import useServiceDetail from "@/hooks/services/useServiceDetail";
 
 const ServicesDetails = () => {
+  const { serviceDetail } = useServiceDetail();
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData />
+        <DetailsData serviceDetail={serviceDetail} />
       </DetailsCard>
       <div className="flex mt-8">
-        <ServiceDetailsData />
+        <ServiceDetailsData serviceDetail={serviceDetail} />
         <SideCard />
       </div>
     </Layout>

@@ -2,8 +2,13 @@ import React from "react";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import { ContentTableRowTypes } from "@/types/content";
 
-const ContentCard = () => {
+const ContentCard = ({
+  contentDetail,
+}: {
+  contentDetail: ContentTableRowTypes;
+}) => {
   return (
     <div className="rounded-md bg-white py-[20px] px-[20px] w-full h-fit">
       <div className="flex justify-between items-center">
@@ -19,7 +24,9 @@ const ContentCard = () => {
       <div className="flex justify-between items-center">
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">S.no:</span>
-          <span className="text-[#4B4B4B] text-base font-medium">01</span>
+          <span className="text-[#4B4B4B] text-base font-medium">
+            {contentDetail?.id}
+          </span>
         </div>
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">
@@ -27,7 +34,7 @@ const ContentCard = () => {
           </span>
 
           <span className="text-[#4B4B4B] text-base font-medium">
-            Office Cleaning Munich Lorem Ipsum dollar{" "}
+            {contentDetail?.contentTitle}
           </span>
         </div>
         <div className="flex gap-[6px]">
@@ -43,7 +50,7 @@ const ContentCard = () => {
           </span>
 
           <span className="text-[#4B4B4B] text-base font-medium">
-            25/08/2023
+            {contentDetail?.createdOn?.toLocaleDateString()}
           </span>
         </div>
       </div>

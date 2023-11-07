@@ -3,8 +3,13 @@ import FormCard from "@/layout/services/FormCard";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
+import { TRowServices } from "@/types/service";
 
-const ServiceDetailsData = () => {
+const ServiceDetailsData = ({
+  serviceDetail,
+}: {
+  serviceDetail: TRowServices;
+}) => {
   const router = useRouter();
 
   return (
@@ -14,7 +19,12 @@ const ServiceDetailsData = () => {
           Service/Product Details
         </h2>
         <button
-          onClick={() => router.push("/services/edit")}
+          onClick={() =>
+            router.push({
+              pathname: "/services/edit",
+              query: { service: serviceDetail?.id },
+            })
+          }
           className="flex  items-center gap-x-3 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <Image src={editIcon} alt="editIcon" />
@@ -28,7 +38,7 @@ const ServiceDetailsData = () => {
               Service/Product Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Lorem Ipsum
+              {serviceDetail?.service}
             </div>
           </div>
           <div className="w-[35%]">
@@ -42,7 +52,8 @@ const ServiceDetailsData = () => {
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">Price</label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              100CHF
+              {serviceDetail?.price?.value}
+              {serviceDetail?.price?.currency}
             </div>
           </div>
         </div>
@@ -54,12 +65,7 @@ const ServiceDetailsData = () => {
             Description
           </label>
           <div className="rounded-lg border border-[#EBEBEB] bg-white p-3  text-[#4B4B4B] font-normal text-base">
-            Lorem Ipsum is simply dummy text of the isp ispu printing and
-            typesetting industry. Lorem Ipsum ie has a been the industry's
-            standard dummyales Lorem Ipsum is simply dummy text of the isp ispu
-            printing and typesetting industry. Lorem Ipsum ie has a been the
-            industry's standard lorm il ie has a been the industry's standard
-            dummyales Lorem Ipsum is simply dummy text of the.
+            {serviceDetail?.description}
           </div>
         </div>
       </div>
