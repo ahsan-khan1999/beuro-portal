@@ -1,8 +1,13 @@
 import { useRouter } from "next/router";
 import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
+import { ContentTableRowTypes } from "@/types/content";
 
-const InoviceContentDetails = () => {
+const InoviceContentDetails = ({
+  contentDetail,
+}: {
+  contentDetail: ContentTableRowTypes;
+}) => {
   const router = useRouter();
   const filesData: string[] = [
     "First File",
@@ -18,7 +23,7 @@ const InoviceContentDetails = () => {
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">Invoice Content</h2>
         <button
-          onClick={() => router.push("/content/edit")}
+          onClick={() => router.push({pathname:"/content/edit",query:{content:contentDetail?.id}})}
           className="flex  items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <svg
@@ -64,7 +69,7 @@ const InoviceContentDetails = () => {
           Invoice Title
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-          Text For Invoice
+          {contentDetail?.invoice?.title}
           </p>
         </div>
 
@@ -73,15 +78,7 @@ const InoviceContentDetails = () => {
           Invoice Description
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has a been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took is galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five lorm centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum
+          {contentDetail?.invoice?.description}
           </p>
         </div>
         <div className="flex flex-col mt-5">
@@ -89,15 +86,7 @@ const InoviceContentDetails = () => {
             Email Body
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has a been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took is galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five lorm centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum
+          {contentDetail?.invoice?.emailBody}
           </p>
         </div>
 

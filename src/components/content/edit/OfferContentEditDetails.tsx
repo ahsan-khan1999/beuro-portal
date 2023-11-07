@@ -1,12 +1,19 @@
 import { Form } from "@/base-components/form/form";
 import { useOfferContentEditDetails } from "@/hooks/content/useOfferContentEditDetails";
 import FormCard from "@/layout/customers/FormCard";
+import { ContentTableRowTypes } from "@/types/content";
 import React from "react";
 
-const OfferContentEditDetails = ({handleRoute} : {handleRoute: Function}) => {
+const OfferContentEditDetails = ({
+  handleRoute,
+  contentDetail,
+}: {
+  handleRoute: Function;
+  contentDetail: ContentTableRowTypes;
+}) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useOfferContentEditDetails(handleRoute);
+    useOfferContentEditDetails(handleRoute);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

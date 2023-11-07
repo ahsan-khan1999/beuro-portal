@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import CustomerEditDetails from "./CustomerEditDetails";
-import AddressEditDetails from "./AddressEditDetails";
-import ServiceEditDetails from "./ServiceEditDetails";
-import AditionalEditDetails from "./AditionalEditDetails";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 
 const LeadsEditDetailsData = () => {
@@ -70,17 +66,9 @@ const LeadsEditDetailsData = () => {
     },
   ];
 
-  // const componentsLookUp = {
-  //   0: <CustomerEditDetails />,
-  //   1: <AddressEditDetails />,
-  //   2: <ServiceEditDetails />,
-  //   3: <AditionalEditDetails />,
-  // };
-
   useEffect(() => {
     console.log("ok");
   });
-
 
   return (
     <div className="flex w-full gap-6">
@@ -96,12 +84,6 @@ const LeadsEditDetailsData = () => {
           />
         ))}
       </div>
-
-      {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
-      {/* <CustomerEditDetails />
-      <AddressEditDetails />
-      <ServiceEditDetails />
-      <AditionalEditDetails /> */}
     </div>
   );
 };
