@@ -15,12 +15,11 @@ import {
 } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
 import { conditionHandler, setErrors } from "@/utils/utility";
-import { SignUpPayload } from "@/types/registeration";
 import { saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
-import { SalutationValue } from "@/enums";
 import { formatDateString, isJSON } from "@/utils/functions";
-import { NextRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import { SalutationValue } from "@/enums/form";
+import { NextRouter } from "next/dist/client/router";
 
 const initialState: AuthState = {
   user: null,

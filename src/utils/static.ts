@@ -604,13 +604,22 @@ export const customers: Customers[] = [
     address: {
       country: "Germany",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 2,
@@ -623,13 +632,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 3,
@@ -642,13 +660,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 4,
@@ -661,13 +688,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 5,
@@ -680,13 +716,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 6,
@@ -699,13 +744,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 7,
@@ -718,13 +772,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 8,
@@ -737,13 +800,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 9,
@@ -756,13 +828,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 10,
@@ -775,13 +856,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 11,
@@ -794,13 +884,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "0215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   {
     id: 12,
@@ -813,13 +912,22 @@ export const customers: Customers[] = [
     address: {
       country: "Switzerland",
       postCode: "12345",
-      street: "Zweibrückenstraße, 12",
+      streetNo: "Zweibrückenstraße, 12",
     },
     companyName: "SwissHelden",
     mobile: "02154512120215451212",
     editImg: "",
     status: "",
     editNote: "",
+    lead: {
+      id: "054631",
+      name: "Hassam",
+      source: "Instagram",
+      status: "Open",
+      expires: "25/08/2023",
+
+
+    }
   },
   // Add more rows as needed
 ];
@@ -2540,101 +2648,101 @@ export const sideBar: SideBar[] = [
   {
     icon: "Leads",
     title: "Leads",
-    role: [0, 1],
+    role: [ 1],
     inner: [
       {
         title: "Open",
         pathname: "/leads?open",
 
-        role: [0, 1],
+        role: [1],
       },
       {
         title: "Close",
         pathname: "/leads?close",
 
-        role: [0, 1],
+        role: [ 1],
       },
       {
         title: "Expire",
         pathname: "/leads?expire",
 
-        role: [0, 1],
+        role: [ 1],
       },
     ],
   },
   {
     icon: "Offers",
     title: "Offers",
-    role: [0, 1],
+    role: [1],
 
     inner: [
       {
         title: "Accepted",
         pathname: "/offers?accepted",
 
-        role: [0, 1],
+        role: [ 1],
       },
       {
         title: "Rejected",
         pathname: "/offers?rejected",
 
-        role: [0, 1],
+        role: [1],
       },
       {
         title: "Pending",
         pathname: "/offers?pending",
 
-        role: [0, 1],
+        role: [ 1],
       },
     ],
   },
   {
     icon: "Contracts",
     title: "Contracts",
-    role: [0, 1],
+    role: [1],
     inner: [
       {
         title: "Accepted",
         pathname: "/contract?accepted",
 
-        role: [0, 1],
+        role: [1],
       },
       {
         title: "Rejected",
         pathname: "/contract?rejected",
 
-        role: [0, 1],
+        role: [ 1],
       },
       {
         title: "Pending",
         pathname: "/contract?pending",
 
-        role: [0, 1],
+        role: [1],
       },
     ],
   },
   {
     icon: "Invoices",
     title: "Invoices",
-    role: [0, 1],
+    role: [1],
     inner: [
       {
         title: "Accepted",
         pathname: "/invoices?accepted",
 
-        role: [0, 1],
+        role: [ 1],
       },
       {
         title: "Rejected",
         pathname: "/invoices?rejected",
 
-        role: [0, 1],
+        role: [ 1],
       },
       {
         title: "Pending",
         pathname: "/invoices?pending",
 
-        role: [0, 1],
+        role: [1],
       },
     ],
   },
@@ -2642,38 +2750,65 @@ export const sideBar: SideBar[] = [
     icon: "Services",
     title: "Services",
     pathname: "/services",
-    role: [0, 1],
+    role: [1],
   },
   {
     icon: "Employees",
     title: "Employees",
     pathname: "/employees",
-    role: [0, 1],
+    role: [ 1],
   },
   {
     icon: "Content",
     title: "Content",
     pathname: "/content",
-    role: [0, 1],
+    role: [ 1],
   },
   {
     icon: "MailTracker",
     title: "Mail Tracker",
     pathname: "/email-tracker",
-    role: [0, 1],
+    role: [1],
     className: "pb-6 border-b border-[#0000001A] ",
   },
   {
     icon: "Settings",
     title: "Settings",
     pathname: "/setting",
-    role: [0, 1],
+    role: [ 1],
     className: "",
+  },
+  
+  {
+    icon: "plans",
+    title: "Plans",
+    pathname: "/plans",
+    role: [0],
+  },
+  {
+    icon: "payment",
+    title: "Payment",
+    pathname: "/payments",
+    role: [0],
   },
   {
     icon: "ContactSupports",
     title: "Contact Supports",
     pathname: "/contact-support",
-    role: [0, 1],
+    role: [0,1],
+    // className:"mb-6 border-b border-[#0000001A]"
   },
+  {
+    icon: "dummy",
+    role:[0],
+    title: "divider",
+  },
+  {
+    className:" ",
+    icon: "setting",
+    title: "Settings",
+    pathname: "/admin-settings",
+    role: [0],
+  },
+  
 ];

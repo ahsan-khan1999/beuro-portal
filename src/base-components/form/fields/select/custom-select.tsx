@@ -15,6 +15,7 @@ export const SelectBox = ({
   trigger,
   placeholder,
   className,
+  disabled
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
@@ -62,10 +63,10 @@ export const SelectBox = ({
 
         {(field && field.value) || defaultValue}
 
-        <ArrowIcon isOpen={isOpen} />
+        {!disabled && <ArrowIcon isOpen={isOpen} />}
 
       </button >
-      {isOpen && (
+      {!disabled&& isOpen && (
         <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-[1]">
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
             {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}

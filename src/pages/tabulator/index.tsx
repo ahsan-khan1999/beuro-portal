@@ -1,15 +1,6 @@
 import React from "react";
 import { Layout } from "@/layout/layout";
 import { useEffect, useRef } from "react";
-import { Tabulator } from "tabulator-tables";
-import "tabulator-tables/dist/css/tabulator.min.css";
-// import { StarRatingParams} from "tabulator-tables"
-// import "tabulator-tables/dist/css/format.min.css";
-// import 'tabulator-tables/dist/css/tabulator.min.css';
-// import Tabulator from 'tabulator-tables';
-// import 'tabulator-tables/dist/css/tabulator_simple.min.css'; // Import the simple CSS theme
-// import 'tabulator-tables/dist/js/tabulator.min.js'; // Import the Tabulator JavaScript file
-// import 'tabulator-tables/dist/js/modules/format.min.js'; // Import the format module
 
 export default function TabulatorTable() {
   const tabulatorRef = useRef(null);

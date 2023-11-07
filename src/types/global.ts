@@ -29,7 +29,7 @@ export interface CheckFieldProps {
   label: string;
   checkboxFilter: Status;
   setCheckBoxFilter: React.Dispatch<React.SetStateAction<Status>>;
-  type: string;
+  type: keyof Status;
 }
 export interface InputFieldProps {
   value: string;

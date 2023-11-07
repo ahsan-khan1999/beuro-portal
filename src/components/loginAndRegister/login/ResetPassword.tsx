@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import EntryLinks from "../EntryLinks";
 import { Form } from "@/base-components/form/form";
-import useResetPassword from "@/hooks/modals/useResetPassword";
+import useResetPassword from "@/hooks/auth/useResetPassword";
 
 const ResetPassword = () => {
   const defaultClassName = "mt-[30px]  ";

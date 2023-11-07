@@ -317,3 +317,8 @@ export interface ImageSliderHook {
   handleMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
   handleMouseLeave: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
+export interface UsePaginationProps {
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+}

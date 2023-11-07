@@ -3,8 +3,8 @@ import { BaseModal } from "./base-modal";
 import { Button } from "../button/button";
 import boostIcon from "@/assets/svgs/boost-icon.svg";
 import Image from "next/image";
-import { TickIcon } from "@/assets/svgs/components/tick-icon";
 import checkIconSelected from "@/assets/svgs/check-icon-success.svg";
+import TickIcon from '@/assets/svgs/success-tick-popup.svg';
 
 const BoostBulkEdit = ({ onClose }: { onClose: () => void }) => {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);

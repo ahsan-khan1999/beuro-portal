@@ -26,7 +26,7 @@ const DeactivateAccount = ({ onClose }: { onClose: () => void }) => {
       <div className="mt-8 space-y-4">
         {deactivateInfo.map((item, index) => {
           return (
-            <div className="flex items-start rounded-lg border-2 border-[#FEC8C8] p-4">
+            <div className="flex items-start rounded-lg border-2 border-[#FEC8C8] p-4" key={index}>
               <Image src={warningIcon} alt="Warning Icon" />
               <label className="ml-3 font-semibold text-dark">{item}</label>
             </div>

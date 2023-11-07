@@ -1,6 +1,7 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
+import { CheckBoxType } from "@/types";
 import { Status } from "@/types/global";
 import React, { useState } from "react";
 
@@ -11,7 +12,7 @@ export default function InvoicesFilters() {
     paid: false,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const checkbox = [
+  const checkbox:CheckBoxType[] = [
     { label: "Open", type: "open" },
     { label: "Overdue", type: "overdue" },
     { label: "Paid", type: "paid" },
