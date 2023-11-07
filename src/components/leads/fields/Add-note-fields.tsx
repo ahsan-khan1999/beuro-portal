@@ -34,7 +34,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
         className:
           "rounded-lg  w-[200px] p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
-        onClick: onClick,
+        
       },
     },
   ];

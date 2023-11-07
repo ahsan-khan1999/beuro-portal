@@ -16,12 +16,16 @@ export default function SelectField({ title, label, options, border, handleChang
                 </div>
 
                 {isOpen &&
-                    <div className='bg-white flex-col absolute top-6 w-20  border-[1px] border-lightGray rounded-lg p-2'>
-                        <div className='  '>
+                    <div className='bg-white flex-col absolute top-6 w-32  border-[1px] border-lightGray rounded-lg p-2'>
+                        <div className='flex-col space-y-2'>
                             {
                                 options.map((item,key) => (
-                                    <div className='flex justify-center hover:bg-lightGray rounded-md' key={key}> 
-                                        <span onClick={() => handleChange(item)}>{item}</span>
+                                    <div className='flex justify-center hover:bg-lightGray rounded-md cursor-pointer' key={key}> 
+                                        <span onClick={() => {
+                                            
+                                            handleChange(item)
+                                            setIsOpen(!isOpen)
+                                            }}>{item}</span>
 
                                     </div>
                                 ))

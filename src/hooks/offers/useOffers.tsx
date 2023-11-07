@@ -27,7 +27,14 @@ const useOffers = () => {
     dispatch(updateModalType(ModalType.ADD_NOTE));
   };
 
-  const handleNotes = (item: OffersTableRowTypes) => {
+  const handleNotes = (
+    item: OffersTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
 
@@ -35,21 +42,28 @@ const useOffers = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleImagesUpload = (item: OffersTableRowTypes) => {
+  const handleImagesUpload = (
+    item: OffersTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.stopPropagation();
+    dispatch(updateModalType(ModalType.NONE));
+
     dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
   };
 
   const handleImageSlider = () => {
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.IMAGE_SLIDER));
-    console.log("clicked!");
   };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
-    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} handleNotes={handleNotes}/>,
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+    ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
@@ -59,8 +73,6 @@ const useOffers = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
-  
 
   useEffect(() => {
     // Update rows for the current page

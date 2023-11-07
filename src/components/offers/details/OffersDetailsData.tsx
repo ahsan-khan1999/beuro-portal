@@ -1,16 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import OfferDetailCompData from "./OfferDetailCompData";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import SwitchedComp from "./SwitchedComp";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
+import CustomerDetailsData from "./CustomerDetailsData";
+
+export enum ComponentsType {
+  customer,
+  address,
+  service,
+  additional,
+}
 
 const OffersDetailsData = () => {
-  const [tabComp, setTabComp] = useState("Activity");
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+
+
+  const componentArray = [
+    <CustomerDetailsData />,
+    <AddressDetailsData />,
+    <ServiceDetailsData />,
+    <AdditionalDetails />,
+  ];
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -65,13 +86,6 @@ const OffersDetailsData = () => {
     },
   ];
 
-  const componentsLookUp = {
-    0: <OfferDetailCompData />,
-    1: <AddressDetailsData />,
-    2: <ServiceDetailsData />,
-    3: <AdditionalDetails />,
-  };
-
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
@@ -91,7 +105,11 @@ const OffersDetailsData = () => {
         </div>
       </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      <div className="flex flex-col gap-y-5">
+        {componentArray.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };

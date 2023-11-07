@@ -266,7 +266,7 @@ export type GenerateInvoiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
+  markItRecuring: boolean,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
@@ -325,4 +325,27 @@ export interface LoaderType {
 export interface CheckBoxType {
   label: string;
   type: keyof Status
+}
+
+export interface FilterType {
+  text: string,
+  sortBy: string,
+  type: string,
+  location: string
+}
+export interface FilterProps {
+  filter: FilterType;
+  setFilter: React.Dispatch<SetStateAction<FilterType>>;
+  moreFilter: boolean;
+  setMoreFilter: React.Dispatch<SetStateAction<boolean>>
+  handleFilterResetToInitial: () => void;
+  handleFilterReset: (key: keyof FilterType, value: string) => void;
+  handleItemSelected: (val: string) => void;
+  typeList: ItemList[];
+
+
+}
+
+interface ItemList {
+  item: string
 }

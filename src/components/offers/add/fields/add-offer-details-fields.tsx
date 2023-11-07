@@ -56,7 +56,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Individual",
               id: "customerType",
@@ -100,7 +100,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
               id: "offerTitle",

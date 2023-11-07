@@ -1,13 +1,16 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ComponentsType } from "../add/AddNewLeadsData";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       label: {
         text: "Address 1 Details",
         htmlFor: "address-1-details",
@@ -190,6 +193,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
               loading,
+              onClick: onClick,
             },
           },
           {

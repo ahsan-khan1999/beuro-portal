@@ -56,7 +56,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
@@ -179,9 +179,9 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        type: Field.input,
+        type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -240,7 +240,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
@@ -363,9 +363,9 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        type: Field.input,
+        type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -391,7 +391,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.textArea,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
+              rows: 4,
               id: "description",
               name: "description",
               placeholder:

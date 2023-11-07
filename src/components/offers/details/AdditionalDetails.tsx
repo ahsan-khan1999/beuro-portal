@@ -9,7 +9,10 @@ const AdditionalDetails = () => {
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
+      <div
+        className="flex justify-between items-center pb-5 "
+        id="Additional Details"
+      >
         <h2 className="text-[#393939] text-lg font-medium">
           Additional Details
         </h2>
@@ -21,6 +24,8 @@ const AdditionalDetails = () => {
           Edit Details
         </button>
       </div>
+
+      <hr className="opacity-20 mb-5" />
 
       <div className="py-[25px] px-[30px]">
         <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6  ">

@@ -8,7 +8,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-6",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-dark focus:!border-primary",

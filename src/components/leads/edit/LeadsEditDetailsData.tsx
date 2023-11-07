@@ -66,10 +66,6 @@ const LeadsEditDetailsData = () => {
     },
   ];
 
-  useEffect(() => {
-    console.log("ok");
-  });
-
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">

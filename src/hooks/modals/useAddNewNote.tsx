@@ -24,9 +24,10 @@ export const useAddNewNote = (handleNotes: Function) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const fields = AddNoteFormField(register, loading, control, handleNotes);
+  const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleNotes()
   };
   return {
     fields,

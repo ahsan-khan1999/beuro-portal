@@ -8,7 +8,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass:"mt-6",
+      containerClass: "mt-6",
       label: {
         text: "Address 1 Details",
         htmlFor: "address-1-details",

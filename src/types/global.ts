@@ -33,10 +33,10 @@ export interface CheckFieldProps {
 }
 export interface InputFieldProps {
   value: string;
-  title?: string;
-  label?: string;
-  border?: number;
   handleChange: (value: string) => void;
+  containerClassName?: string;
+  textClassName?: string;
+  iconDisplay?: boolean
 }
 
 export interface OptionsFieldProps {
