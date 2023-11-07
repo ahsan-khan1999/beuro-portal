@@ -40,7 +40,7 @@ const DeleteConfirmation_2 = ({
               onClick={onClose}
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
-              Cancel
+               Cancel
             </button>
             <button
               onClick={() => routeHandler()}
