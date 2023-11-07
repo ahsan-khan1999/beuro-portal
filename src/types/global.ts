@@ -14,7 +14,7 @@ export interface GlobalState {
 
 export type TranslatorFunction = (value: any) => any;
 export interface Status {
-  open: boolean;
+  open?: boolean;
   close?: boolean;
   expired?: boolean;
   signed?: boolean;
@@ -23,6 +23,8 @@ export interface Status {
   cancelled?: boolean;
   overdue?: boolean;
   paid?: boolean;
+  active?:boolean;
+  blocked?:boolean;
 }
 
 export interface CheckFieldProps {

@@ -11,6 +11,8 @@ import { TRowServices } from "@/types/service";
 import { TRowEmployees } from "@/types/employee";
 import { ContentTableRowTypes } from "@/types/content";
 import { TableRowEmailTracker } from "@/types/emailTracker";
+import companyLogo from "@/assets/svgs/companyLogo.svg";
+import { CustomersAdmin } from "@/types/admin/customer";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -617,9 +619,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 2,
@@ -645,9 +645,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 3,
@@ -673,9 +671,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 4,
@@ -701,9 +697,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 5,
@@ -729,9 +723,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 6,
@@ -757,9 +749,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 7,
@@ -785,9 +775,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 8,
@@ -813,9 +801,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 9,
@@ -841,9 +827,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 10,
@@ -869,9 +853,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 11,
@@ -897,9 +879,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 12,
@@ -925,9 +905,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   // Add more rows as needed
 ];
@@ -2632,6 +2610,153 @@ export const MailTracker: TableRowEmailTracker[] = [
   // Add more rows as needed
 ];
 
+export const customersAdmin: CustomersAdmin[] = [
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 2,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+  },
+];
+
 export const sideBar: SideBar[] = [
   {
     icon: "Dashboard",
@@ -2643,12 +2768,18 @@ export const sideBar: SideBar[] = [
     icon: "Customers",
     title: "Customers",
     pathname: "/customers",
-    role: [0, 1],
+    role: [1],
+  },
+  {
+    icon: "Customers",
+    title: "Customers",
+    pathname: "/admin/customers",
+    role: [0],
   },
   {
     icon: "Leads",
     title: "Leads",
-    role: [ 1],
+    role: [1],
     inner: [
       {
         title: "Open",
@@ -2660,13 +2791,13 @@ export const sideBar: SideBar[] = [
         title: "Close",
         pathname: "/leads?close",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Expire",
         pathname: "/leads?expire",
 
-        role: [ 1],
+        role: [1],
       },
     ],
   },
@@ -2680,7 +2811,7 @@ export const sideBar: SideBar[] = [
         title: "Accepted",
         pathname: "/offers?accepted",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Rejected",
@@ -2692,7 +2823,7 @@ export const sideBar: SideBar[] = [
         title: "Pending",
         pathname: "/offers?pending",
 
-        role: [ 1],
+        role: [1],
       },
     ],
   },
@@ -2711,7 +2842,7 @@ export const sideBar: SideBar[] = [
         title: "Rejected",
         pathname: "/contract?rejected",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Pending",
@@ -2730,13 +2861,13 @@ export const sideBar: SideBar[] = [
         title: "Accepted",
         pathname: "/invoices?accepted",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Rejected",
         pathname: "/invoices?rejected",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Pending",
@@ -2756,13 +2887,13 @@ export const sideBar: SideBar[] = [
     icon: "Employees",
     title: "Employees",
     pathname: "/employees",
-    role: [ 1],
+    role: [1],
   },
   {
     icon: "Content",
     title: "Content",
     pathname: "/content",
-    role: [ 1],
+    role: [1],
   },
   {
     icon: "MailTracker",
@@ -2775,10 +2906,10 @@ export const sideBar: SideBar[] = [
     icon: "Settings",
     title: "Settings",
     pathname: "/setting",
-    role: [ 1],
+    role: [1],
     className: "",
   },
-  
+
   {
     icon: "plans",
     title: "Plans",
@@ -2795,20 +2926,19 @@ export const sideBar: SideBar[] = [
     icon: "ContactSupports",
     title: "Contact Supports",
     pathname: "/contact-support",
-    role: [0,1],
+    role: [0, 1],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {
     icon: "dummy",
-    role:[0],
+    role: [0],
     title: "divider",
   },
   {
-    className:" ",
+    className: " ",
     icon: "setting",
     title: "Settings",
     pathname: "/admin-settings",
     role: [0],
   },
-  
 ];
