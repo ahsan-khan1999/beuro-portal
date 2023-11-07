@@ -5,10 +5,28 @@ import AddLeadAddressDetails from "./AddLeadAddressDetails";
 import AddLeadServiceDetails from "./AddLeadServiceDetails";
 import AddLeadAdditionalDetails from "./AddLeadAdditionalDetails";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
+import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
+import { useAppSelector } from "@/hooks/useRedux";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+
+export enum ComponentsType {
+  customerEdit,
+  addressEdit,
+  serviceEdit,
+  additionalEdit,
+}
 
 const AddNewLeadsData = () => {
-  const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+  const [tabType, setTabType] = useState<ComponentsType>(
+    ComponentsType.customerEdit
+  );
+
+  const router = useRouter();
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -70,29 +88,95 @@ const AddNewLeadsData = () => {
     },
   ];
 
-  const componentsLookUp = {
-    0: <AddLeadsCustomerDetails />,
-    1: <AddLeadAddressDetails />,
-    2: <AddLeadServiceDetails />,
-    3: <AddLeadAdditionalDetails />,
-  };
-  return (
-    <div className="flex w-full gap-6">
-      <div className="flex flex-col gap-[14px]">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
-      </div>
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
-    </div>
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const routeHandler = () => {
+    router.push("/leads");
+  };
+
+  const leadCreatedHandler = () => {
+    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+  };
+
+  const imageUploadHandler = () => {
+    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+  };
+
+  const handleImageSlider = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
+      <LeadCreated
+        imageUploadHandler={imageUploadHandler}
+        onClose={onClose}
+        routeHandler={routeHandler}
+      />
+    ),
+    [ModalType.UPLOAD_IMAGE]: (
+      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    ),
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  const handleNextTab = (currentComponent: ComponentsType) => {
+    if (tabType === ComponentsType.additionalEdit) {
+      leadCreatedHandler();
+      return;
+    }
+    setTabType(currentComponent);
+  };
+
+  const onHandleBack = (currentComponent: ComponentsType) => {
+    setTabType(currentComponent);
+  };
+
+  const componentsLookUp = {
+    [ComponentsType.customerEdit]: (
+      <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addressEdit]: (
+      <AddLeadAddressDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack}/>
+    ),
+    [ComponentsType.serviceEdit]: (
+      <AddLeadServiceDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.additionalEdit]: (
+      <AddLeadAdditionalDetails onHandleNext={handleNextTab} />
+    ),
+  };
+
+  return (
+    <>
+      <div className="flex w-full gap-6">
+        <div className="flex flex-col gap-[14px]">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
+
+        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      </div>
+      {renderModal()}
+    </>
   );
 };
 
