@@ -5,6 +5,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
   loading,
   isUpdate,
+  handleUpdateCancel,
   control,
 ) => {
   const formField: FormField[] = [
@@ -32,7 +33,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled:isUpdate
+              disabled: isUpdate
             },
           },
           {
@@ -210,7 +211,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled:isUpdate
+              disabled: isUpdate
             },
           },
         ],
@@ -227,7 +228,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.button,
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+              onClick: handleUpdateCancel,
               className:
                 `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"}`,
               loading,

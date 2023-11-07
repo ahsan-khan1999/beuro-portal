@@ -36,7 +36,8 @@ export enum ModalType {
   EXCLUSIVE_TAX,
   EDIT_PAYMENT_METHOD,
   UPLOAD_IMAGE,
-  IMAGE_SLIDER
+  IMAGE_SLIDER,
+  DELETE_MAIL
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

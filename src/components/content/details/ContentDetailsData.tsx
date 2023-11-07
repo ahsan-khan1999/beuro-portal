@@ -5,8 +5,13 @@ import OfferContentDetailsData from "./OfferContentDetailsData";
 import ConfirmationContentDetailsData from "./ConfirmationContentDetailsData";
 import InoviceContentDetails from "./InoviceContentDetails";
 import ReceiptContentDetails from "./ReceiptContentDetails";
+import { ContentTableRowTypes } from "@/types/content";
 
-const ContentDetailsData = () => {
+const ContentDetailsData = ({
+  contentDetail,
+}: {
+  contentDetail: ContentTableRowTypes;
+}) => {
   const [tabType, setTabType] = useState<number>(0);
   console.log(tabType);
 
@@ -69,10 +74,10 @@ const ContentDetailsData = () => {
   ];
 
   const componentsLookUp = {
-    0: <OfferContentDetailsData />,
-    1: <ConfirmationContentDetailsData />,
-    2: <InoviceContentDetails />,
-    3: <ReceiptContentDetails />,
+    0: <OfferContentDetailsData contentDetail={contentDetail} />,
+    1: <ConfirmationContentDetailsData  contentDetail={contentDetail}/>,
+    2: <InoviceContentDetails contentDetail={contentDetail} />,
+    3: <ReceiptContentDetails contentDetail={contentDetail} />,
   };
 
   return (

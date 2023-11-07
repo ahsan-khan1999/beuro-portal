@@ -11,7 +11,12 @@ const TableRows = ({ dataToAdd }: { dataToAdd: contractTableTypes[] }) => {
       {dataToAdd?.map((item: any, index: number) => {
         return (
           <div
-            onClick={() => router.push("/contract/details")}
+            onClick={() =>
+              router.push({
+                pathname: "/contract/details",
+                query: { contract: item.id },
+              })
+            }
             key={index}
             className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_100%)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >

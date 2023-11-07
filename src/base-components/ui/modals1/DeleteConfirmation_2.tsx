@@ -4,7 +4,15 @@ import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
-const DeleteConfirmation_2 = ({ onClose }: {  onClose: () => void }) => {
+const DeleteConfirmation_2 = ({
+  onClose,
+  modelHeading,
+  routeHandler,
+}: {
+  onClose: () => void;
+  modelHeading: string;
+  routeHandler: Function;
+}) => {
   return (
     <>
       <BaseModal
@@ -24,14 +32,20 @@ const DeleteConfirmation_2 = ({ onClose }: {  onClose: () => void }) => {
             className="mt-[59px]"
           />
           <p className="text-[#000] font-medium text-[20px] leading-7 mt-[44px] max-w-[290px] text-center ">
-            Are you sure you want to delete this Email?
+            {modelHeading}
           </p>
 
           <div className="flex gap-[33px] mt-[27px] mb-[38px]">
-            <button onClick={onClose} className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md">
-              Cancel
+            <button
+              onClick={onClose}
+              className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
+            >
+               Cancel
             </button>
-            <button className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md">
+            <button
+              onClick={() => routeHandler()}
+              className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
+            >
               Confirm
             </button>
           </div>

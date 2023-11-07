@@ -1,4 +1,4 @@
-import { InfoModal } from "@/components";
+import { InfoModal } from "../info-modal";
 import SuccessPopupBody from "../successPopupBody";
 
 export const ProposalSuccess = ({ onClose }: { onClose: () => void }) => {

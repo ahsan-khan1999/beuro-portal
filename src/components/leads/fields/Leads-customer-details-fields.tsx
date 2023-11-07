@@ -5,9 +5,11 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
   control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3 ",
@@ -55,7 +57,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
-              value:"Individual",
+              value: "Individual",
               name: "customerType",
               options: [
                 { value: "Individual", label: "Individual" },
@@ -180,7 +182,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "country",
               name: "country",
-              value:"Switzerland",
+              value: "Switzerland",
               options: [
                 { value: "Switzerland", label: "Switzerland" },
                 { value: "Pakistan", label: "Pakistan" },
@@ -219,6 +221,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
               className:
                 "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
+              onClick: onClick,
             },
           },
         ],

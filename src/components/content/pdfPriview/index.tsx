@@ -7,7 +7,7 @@ import PdfButtons from "./PdfButtons";
 const PdfPreview = () => {
   return (
     <div>
-      <ContentCard />
+      {/* <ContentCard /> */}
       <div className="mt-[30px]">
         <Page1 />
       </div>

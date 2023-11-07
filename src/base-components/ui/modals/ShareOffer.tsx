@@ -43,9 +43,9 @@ const ShareOffer = ({ onClose }: { onClose: () => void }) => {
       containerClassName="max-w-[572px] min-h-fit"
     >
       <div className="flex justify-between items-center pt-8">
-        {socialLinks.map((item) => {
+        {socialLinks.map((item,key) => {
           return (
-            <Link href={""}>
+            <Link href={""} key={key}>
               <Image src={item.icon} alt={item.alt} className="mx-auto" />
               <h2 className="font-medium text-sm text-[#616161] mt-[10px] text-center">
                 {item.name}

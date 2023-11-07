@@ -2,6 +2,7 @@ import { Customers } from '@/types/customer';
 import React from 'react'
 
 const SideCard = ({ customerDetail }: { customerDetail: Customers }) => {
+  
   return (
     <div className="ml-8 bg-white rounded-md px-5 py-6 w-full max-w-[254px] max-h-[634px]">
       <h2 className="text-[#393939] text-lg font-medium pb-6 border-b border-black border-opacity-20">
@@ -27,22 +28,22 @@ const SideCard = ({ customerDetail }: { customerDetail: Customers }) => {
         </div>
         <div className='flex flex-col space-y-4'>
           <span>
-            {customerDetail.lead.id}
+            {customerDetail?.lead.id}
           </span>
           <span>
-            {customerDetail.lead.name}
+            {customerDetail?.lead.name}
 
           </span>
           <span>
-            {customerDetail.lead.source}
+            {customerDetail?.lead.source}
 
           </span>
           <span>
-            {customerDetail.lead.status}
+            {customerDetail?.lead.status}
 
           </span>
           <span>
-            {customerDetail.lead.expires}
+            {customerDetail?.lead.expires}
 
           </span>
         </div>

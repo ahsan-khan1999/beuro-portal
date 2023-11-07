@@ -1,6 +1,5 @@
 import axios from "axios";
 
-import { toast } from "react-toastify";
 import { getToken, logout } from "../utils/auth.util";
 
 const STAGING_API_URL = " https://staging.kaufes.ch/api";

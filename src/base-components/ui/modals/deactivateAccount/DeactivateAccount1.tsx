@@ -28,7 +28,7 @@ const DeactivateAccount1 = ({ onClose }: { onClose: () => void }) => {
       <div className="mt-8 space-y-4">
         {deactivateActions.map((item, index) => {
           return (
-            <div className="flex items-start rounded-lg border-2 border-[#FEC8C8] p-4">
+            <div className="flex items-start rounded-lg border-2 border-[#FEC8C8] p-4" key={index}>
               <div>
                 <h3 className="font-semibold text-dark text-lg ">
                   {item.name}

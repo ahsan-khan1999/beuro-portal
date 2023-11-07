@@ -5,7 +5,7 @@ import React from "react";
 import { ComponentsType } from "../details/LeadsDetailsData";
 
 const AddressEditDetails = ({onClick}: {onClick: (index: number, component: ComponentsType) => void;}) => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     useLeadsAddressEditDetails();
   return (

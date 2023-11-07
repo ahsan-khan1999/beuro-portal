@@ -20,6 +20,7 @@ import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
+import { Status } from "./global";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -69,7 +70,7 @@ export interface CheckProps {
 export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?: string;
+  icon: string;
 }
 
 export interface tabsSectionTypes {
@@ -135,6 +136,7 @@ export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   isUpdate: boolean,
+  handleUpdateCancel: () => void,
   control?: Control<FieldValues>,
 ) => FormField[];
 export type GenerateFormContactField = (
@@ -309,4 +311,18 @@ export interface PaginationItemProps {
   icon: any;
   className?: string;
   disabled?: boolean;
+}
+
+
+export interface LoaderType {
+  height: string,
+  width: string,
+  radius: string,
+  color: string
+}
+
+
+export interface CheckBoxType {
+  label: string;
+  type: keyof Status
 }
