@@ -9,12 +9,12 @@ const ServiceEditDetails = ({
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useLeadsServiceEditDetails();
+    useLeadsServiceEditDetails(onClick);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
+      <div className="flex justify-between items-center pb-5 ">
         <h2 className="text-[#393939] text-lg font-medium">Address Details</h2>
         <button
           onClick={() => onClick(2, ComponentsType.service)}
@@ -23,6 +23,8 @@ const ServiceEditDetails = ({
           Cancel
         </button>
       </div>
+
+      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
