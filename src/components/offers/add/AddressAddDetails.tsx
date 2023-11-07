@@ -1,14 +1,14 @@
 import { Form } from "@/base-components/form/form";
-import { useOfferAddressDetails } from "@/hooks/offers/useOfferAddressDetails";
+import { useOfferAddAddressDetails } from "@/hooks/offers/useOfferAddAddressDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 
-const AddressAddDetails = () => {
+const AddressAddDetails = ({onHandleNext} : {onHandleNext:Function}) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useOfferAddressDetails();
+  useOfferAddAddressDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">

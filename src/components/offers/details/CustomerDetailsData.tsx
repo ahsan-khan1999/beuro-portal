@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 
-const OfferDetailCompData = () => {
+const CustomerDetailsData = () => {
   const router = useRouter();
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
+      <div className="flex justify-between items-center pb-5 " id="Offer  Details">
         <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
         <button
           onClick={() => router.push("/offers/edit")}
@@ -19,6 +19,8 @@ const OfferDetailCompData = () => {
           Edit Details
         </button>
       </div>
+
+      <hr  className="opacity-20 mb-5"/>
       <div className="mt-5">
         <div className="grid grid-cols-3 gap-x-3 mb-5">
           <div>
@@ -106,4 +108,4 @@ const OfferDetailCompData = () => {
   );
 };
 
-export default OfferDetailCompData;
+export default CustomerDetailsData;

@@ -47,9 +47,9 @@ export interface InputProps extends BaseFieldProps<Field.input> {
 
 // textarea added
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
-  inputType: "text";
-  value?: string;
   register: UseFormRegister<FieldValues>;
+  rows?:number;
+  value?: string;
   placeholder?: string;
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;

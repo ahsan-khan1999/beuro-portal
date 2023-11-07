@@ -25,7 +25,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -42,7 +42,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -59,7 +59,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -80,16 +80,15 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4 !border-dark  focus:!border-primary ",
         id: "description",
         name: "description",
+        rows: 4,
         placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
         register,
       },
     },
-
 
     {
       containerClass: "mt-[30px] border-t border-black border-opacity-20 pt-5",
@@ -111,7 +110,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -128,7 +127,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -145,7 +144,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -166,9 +165,9 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4 !border-dark  focus:!border-primary ",
         id: "description",
+        rows: 4,
         name: "description",
         placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",

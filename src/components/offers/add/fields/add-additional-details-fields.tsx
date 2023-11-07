@@ -11,14 +11,16 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 ",
       label: {
         text: "Choose Form Existing",
         htmlFor: "chooseFromExisting",
         className: "mb-[10px]",
       },
+      
       field: {
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        
+        className: "!p-4 !border-dark focus:!border-primary ",
         type: Field.select,
         value:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has...",

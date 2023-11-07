@@ -3,7 +3,6 @@ import { useAddLeadAddressDetails } from "@/hooks/leads/useAddLeadAddressDetails
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
-import { ComponentsType } from "./AddNewLeadsData";
 
 const AddLeadAddressDetails = ({onHandleNext, onHandleBack} : {onHandleNext:Function; onHandleBack:Function}) => {
   const defaultClassName = "";

@@ -59,7 +59,7 @@ const ServiceDetailsData = () => {
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between  pb-5 border-b border-black border-opacity-20">
+      <div className="flex justify-between  pb-5 " id="Service Details">
         <h2 className="text-[#393939] text-lg font-medium">Service Details</h2>
         <button
           onClick={() => router.push("/offers/edit")}
@@ -69,6 +69,8 @@ const ServiceDetailsData = () => {
           Edit Details
         </button>
       </div>
+
+      <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
         <div className="grid grid-cols-[minmax(250px,_100%)_minmax(300px,_100%)_minmax(130px,_100%)_minmax(80px,_100%)_minmax(80px,_100%)_minmax(92px,_92px)] mb-[28px]">

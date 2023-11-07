@@ -5,10 +5,73 @@ import AddressAddDetails from "./AddressAddDetails";
 import ServiceAddDetails from "./ServiceAddDetails";
 import AditionalAddDetails from "./AditionalAddDetails";
 import OfferAddDetails from "./OfferAddDetails";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/hooks/useRedux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import OfferCreated from "@/base-components/ui/modals1/OfferCreated";
 
-const EditOffersDetailsData = ({handleOfferCreated} : {handleOfferCreated:Function}) => {
-  const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+export enum ComponentsType {
+  customerAdded,
+  addressAdded,
+  serviceAdded,
+  additionalAdded,
+}
+
+const EditOffersDetailsData = ({
+  handleOfferCreated,
+}: {
+  handleOfferCreated: Function;
+}) => {
+  const [tabType, setTabType] = useState<ComponentsType>(
+    ComponentsType.customerAdded
+  );
+
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType(ModalType.LEAD_CREATED));
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.LEAD_CREATED]: <OfferCreated onClose={onClose} />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  const handleNextTab = (currentComponent: ComponentsType) => {
+    if (tabType === ComponentsType.additionalAdded) {
+      offerCreatedHandler();
+      return;
+    }
+    setTabType(currentComponent);
+  };
+
+  const onHandleBack = (currentComponent: ComponentsType) => {
+    setTabType(currentComponent);
+  };
+
+  const componentsLookUp = {
+    [ComponentsType.customerAdded]: (
+      <OfferAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addressAdded]: (
+      <AddressAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.serviceAdded]: (
+      <ServiceAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.additionalAdded]: (
+      <AditionalAddDetails onHandleNext={handleNextTab} />
+    ),
+  };
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -63,31 +126,27 @@ const EditOffersDetailsData = ({handleOfferCreated} : {handleOfferCreated:Functi
     },
   ];
 
-  const componentsLookUp = {
-    0: <OfferAddDetails />,
-    1: <AddressAddDetails />,
-    2: <ServiceAddDetails />,
-    3: <AditionalAddDetails handleOfferCreated={handleOfferCreated}/>,
-  };
-
   return (
-    <div className="flex w-full gap-6">
-      <div className="flex flex-col gap-[14px]">
-        {tabSection.map((item, index) => (
-          <OfferTabs
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            index={index + 1}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
-      </div>
+    <>
+      <div className="flex w-full gap-6">
+        <div className="flex flex-col gap-[14px]">
+          {tabSection.map((item, index) => (
+            <OfferTabs
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              index={index + 1}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
-    </div>
+        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      </div>
+      {renderModal()}
+    </>
   );
 };
 
