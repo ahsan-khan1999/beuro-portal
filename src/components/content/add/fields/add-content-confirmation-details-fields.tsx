@@ -33,7 +33,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
           className: "!p-4 !border-dark focus:!border-primary ",
           id: "confirmationDescription",
           name: "confirmationDescription",
-
+          
           control,
         },
       },

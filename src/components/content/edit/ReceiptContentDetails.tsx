@@ -3,10 +3,10 @@ import { useEditReceiptDetails } from "@/hooks/content/useEditReceiptDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const EditReceiptContentDetails = () => {
+const EditReceiptContentDetails = ({ handleRoute }: { handleRoute: () => void }) => {
   const defaultClassName = "mt-[30px]  ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useEditReceiptDetails();
+    useEditReceiptDetails(handleRoute);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">

@@ -6,7 +6,7 @@ import ContentEditDetailsData from "./ContentEditDetailsData";
 const ContentEditDetails = () => {
   return (
     <Layout>
-      <ContentCard />
+      {/* <ContentCard /> */}
 
       <div className="flex mt-7">
         <ContentEditDetailsData />

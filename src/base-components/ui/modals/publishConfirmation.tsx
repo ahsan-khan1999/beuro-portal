@@ -3,8 +3,8 @@ import { InfoModal } from "./info-modal";
 import Image from "next/image";
 import car from "@/assets/car-img.png";
 import { Button } from "../button/button";
-import { EditIcon } from "@/assets/svgs/components/edit-icons";
 import publishIcon from "@/assets/svgs/publish-icon.svg";
+import { EditIcon } from "@/assets/svgs/components/sideBar/edit-icons";
 
 const PublishConfirmation = ({ onClose }: { onClose: () => void }) => {
   const offers = [

@@ -46,10 +46,12 @@ export default function useCustomerDetail(stage: boolean) {
     }
   }, [id])
 
-
+  const handleUpdateCancel = () => {
+    setIsUpdate(!isUpdate)
+  }
 
   //@ts-expect-error
-  const fields = customerDetailsFormField(register, loading, isUpdate, control);
+  const fields = customerDetailsFormField(register, loading, isUpdate, handleUpdateCancel,control);
 
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -59,6 +61,7 @@ export default function useCustomerDetail(stage: boolean) {
   const handlePreviousClick = () => {
     router.push("/customers")
   }
+
   return {
     customerDetail,
     isUpdate,
@@ -67,6 +70,7 @@ export default function useCustomerDetail(stage: boolean) {
     onSubmit,
     handleSubmit,
     errors,
-    handlePreviousClick
+    handlePreviousClick,
+    handleUpdateCancel
   }
 }

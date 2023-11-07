@@ -1,6 +1,6 @@
-import { BaseButton } from "@/components/ui/button/base-button";
 import { IConfirmationModalProps } from "@/types";
 import { ConfirmationBaseModal } from "./confirmation-base-modal";
+import { BaseButton } from "../../button/base-button";
 
 export const ConfirmationPromptModal = ({
   onCancel,

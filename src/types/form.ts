@@ -69,6 +69,7 @@ export interface CKEditorBoxProps {
   field: ControllerRenderProps<FieldValues, string>;
   trigger?: UseFormTrigger<FieldValues>;
   name?: string;
+  type: string
 }
 
 export interface CreditCardInputProps

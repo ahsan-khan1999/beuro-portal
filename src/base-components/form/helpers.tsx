@@ -24,7 +24,6 @@ import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
 // import { CreditCardNumberField } from "./fields/credit-card-number-field";
 // import { CardType } from "@/enums";
-import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";

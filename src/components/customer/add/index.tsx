@@ -17,6 +17,7 @@ const AddCustomer = () => {
     {
       name: "Customer Details",
       content: <AddCustomerForm handleCancel={handleCancel} />,
+      icon:""
     },
   ];
   const componentLookup: ComponentLookupType = {
