@@ -4,11 +4,19 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import leadCreatedIcon from "@/assets/svgs/created_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
-const LeadCreated = () => {
+const LeadCreated = ({
+  imageUploadHandler,
+  onClose,
+  routeHandler,
+}: {
+  imageUploadHandler: Function;
+  onClose: () => void;
+  routeHandler: Function;
+}) => {
   return (
     <>
       <BaseModal
-        onClose={() => false}
+        onClose={onClose}
         containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
       >
         <div className="relative flex items-center flex-col">
@@ -16,6 +24,7 @@ const LeadCreated = () => {
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
+            onClick={onClose}
           />
           <Image
             src={leadCreatedIcon}
@@ -30,10 +39,16 @@ const LeadCreated = () => {
           </p>
 
           <div className="flex flex-col">
-            <button className="bg-[#4A13E7] cursor-pointer mb-[21px] w-[384px] rounded-lg p-4 text-white text-base font-medium">
+            <button
+              onClick={() => imageUploadHandler()}
+              className="bg-[#4A13E7] cursor-pointer mb-[21px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
+            >
               Add Images
             </button>
-            <button className="bg-[#BFBFBF] cursor-pointer w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium">
+            <button
+              onClick={() => routeHandler()}
+              className="bg-[#BFBFBF] cursor-pointer w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium"
+            >
               Continue without Images
             </button>
           </div>

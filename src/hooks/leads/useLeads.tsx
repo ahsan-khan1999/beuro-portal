@@ -31,9 +31,10 @@ const useLeads = () => {
     item: LeadsTableRowTypes,
     e: React.MouseEvent<HTMLImageElement>
   ) => {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     dispatch(updateModalType(ModalType.NONE));
-
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
 

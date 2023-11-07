@@ -8,6 +8,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3 ",
