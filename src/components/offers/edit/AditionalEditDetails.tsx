@@ -16,7 +16,7 @@ const AditionalEditDetails = () => {
           Additional Details
         </h2>
         <button
-          onClick={() => router.push("/offers")}
+          onClick={() => router.push("/offers/details")}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
         >
           Cancel

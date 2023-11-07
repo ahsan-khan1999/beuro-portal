@@ -11,9 +11,11 @@ import imageUpload from "@/assets/svgs/img_upload.svg";
 const OfferEditImages = ({
   shareImgModal,
   handleImagesUpload,
+  tabType,
 }: {
   shareImgModal: Function;
   handleImagesUpload: Function;
+  tabType: number;
 }) => {
   const leadsImgs = [
     leadsDetailsImg1,
@@ -51,8 +53,8 @@ const OfferEditImages = ({
             View More
           </p>
           <span
-            onClick={() => handleImagesUpload()}
-            className="border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer "
+            onClick={() => tabType === 1 && handleImagesUpload()}
+            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 ${tabType === 1 ? "cursor-pointer" : "cursor-default"} `}
           >
             Upload
             <Image src={imageUpload} alt="imageUpload" className="ml-2" />

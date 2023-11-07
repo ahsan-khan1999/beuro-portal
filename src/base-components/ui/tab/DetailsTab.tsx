@@ -9,15 +9,14 @@ const DetailsTab = ({
   icon,
   selectedTab,
 }: leadsTabsSectionTypes) => {
-  console.log(name)
   const handleClickScroll = (name: string) => {
     const element = document.getElementById(name);
-    console.log(element);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.setAttribute('data-scroll-target', 'true');
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTabType(selectedTab)
     }
   };
-
 
   return (
     <button

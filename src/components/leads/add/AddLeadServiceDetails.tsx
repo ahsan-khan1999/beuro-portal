@@ -4,10 +4,10 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 
-const AddLeadServiceDetails = () => {
+const AddLeadServiceDetails = ({onHandleNext} : {onHandleNext:Function}) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddLeadServiceDetails();
+    useAddLeadServiceDetails(onHandleNext);
   const router = useRouter();
   return (
     <FormCard>

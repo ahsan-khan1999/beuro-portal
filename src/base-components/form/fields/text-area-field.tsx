@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 export const TextAreaField = ({
   id,
-  inputType,
+  register,
+  rows,
   value,
   name,
-  register,
   placeholder,
   className,
   disabled,
@@ -26,7 +26,7 @@ export const TextAreaField = ({
       <textarea
         onFocus={() => setInputFocus(true)}
         onBlurCapture={() => setInputFocus(false)}
-        rows={5}
+        rows={rows}
         id={id}
         className={`${classes}`}
         defaultValue={value}

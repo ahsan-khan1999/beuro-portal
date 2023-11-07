@@ -4,10 +4,14 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 
-const AddLeadsCustomerDetails = () => {
+const AddLeadsCustomerDetails = ({
+  onHandleNext,
+}: {
+  onHandleNext: Function;
+}) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddNewLeadCustomer();
+    useAddNewLeadCustomer(onHandleNext);
   const router = useRouter();
   return (
     <FormCard>
@@ -23,8 +27,8 @@ const AddLeadsCustomerDetails = () => {
           Cancel
         </button>
       </div>
-      <hr  className="opacity-20 mb-5"/>
-      
+      <hr className="opacity-20 mb-5" />
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

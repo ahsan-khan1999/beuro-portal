@@ -12,12 +12,17 @@ import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
 
 const OfferDetailsCard = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="back_icon" className="w-10 h-10" />
+          <Image
+            src={backIcon}
+            alt="back_icon"
+            className="cursor-pointer"
+            onClick={() => router.push("/offers")}
+          />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
             Offer details
           </p>
@@ -30,7 +35,12 @@ const OfferDetailsCard = () => {
               Send Email
             </p>
           </div>
-          <Image src={PDFIcon} alt="PDFIcon" onClick={() => router.push("/offers/pdf-preview")} className="cursor-pointer"/>
+          <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            onClick={() => router.push("/offers/pdf-preview")}
+            className="cursor-pointer"
+          />
           <Image src={downloadIcon} alt="downloadIcon" />
           <Image src={printerIcon} alt="printerIcon" />
           <Image src={deleteIcon} alt="deleteIcon" />
@@ -54,7 +64,7 @@ const OfferDetailsCard = () => {
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
               Office Cleaning Munich Lorem Ipsum dollar
-              <Image src={editIcon} alt="editIcon"  />
+              <Image src={editIcon} alt="editIcon" />
             </span>
           </div>
           <div className="flex gap-[10px]">
@@ -84,7 +94,7 @@ const OfferDetailsCard = () => {
               <span className="text-base font-medium text-[#4B4B4B]">
                 25/08 to 25/08
               </span>
-              <Image src={editIcon} alt="editIcon"  />
+              <Image src={editIcon} alt="editIcon" />
             </div>
           </div>
         </div>
@@ -141,31 +151,22 @@ const OfferDetailsCard = () => {
             </span>
           </div>
 
-            <div>
-              <div className="flex items-center gap-[11px]">
-                <span className="text-[#4D4D4D] font-normal text-base">
-                  Notes:
-                </span>
-                <Image
-                  src={writeIcon}
-                  alt="writeIcon"
-                  
-                />
-              </div>
+          <div>
+            <div className="flex items-center gap-[11px]">
+              <span className="text-[#4D4D4D] font-normal text-base">
+                Notes:
+              </span>
+              <Image src={writeIcon} alt="writeIcon" />
             </div>
-            <div>
-              <div className="flex items-center gap-[11px]">
-                <span className="text-[#4D4D4D] font-normal text-base">
-                  Images:
-                </span>
-                <Image
-                  src={imageIcon}
-                  alt="editImg"
-                  
-                />
-              </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-[11px]">
+              <span className="text-[#4D4D4D] font-normal text-base">
+                Images:
+              </span>
+              <Image src={imageIcon} alt="editImg" />
             </div>
-         
+          </div>
         </div>
       </div>
     </>

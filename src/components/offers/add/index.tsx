@@ -17,11 +17,9 @@ const OfferAddDetails = () => {
     dispatch(updateModalType(ModalType.SHARE_IMAGES));
   };
 
-
   // const areYouSureModal = () => {
   //   dispatch(updateModalType(ModalType.SHARE_IMAGES));
   // };
-
 
   const handleOfferCreated = () => {
     dispatch(updateModalType(ModalType.OFFER_CREATED));
@@ -44,7 +42,7 @@ const OfferAddDetails = () => {
   return (
     <>
       <Layout>
-        <AddOffersDetailsData  handleOfferCreated={handleOfferCreated}/>
+        <AddOffersDetailsData handleOfferCreated={handleOfferCreated} />
       </Layout>
 
       {renderModal()}

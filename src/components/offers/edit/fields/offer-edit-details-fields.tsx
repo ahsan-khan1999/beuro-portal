@@ -20,7 +20,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Rahal Ahmed Ali",
               id: "selectCustomer",
@@ -81,7 +81,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
               value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
@@ -130,7 +130,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
               name: "customerType",

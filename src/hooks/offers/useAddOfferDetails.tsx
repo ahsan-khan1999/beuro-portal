@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOfferDetailsFormField } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
+import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 
-export const useAddOfferDetails = () => {
+export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -21,11 +22,12 @@ export const useAddOfferDetails = () => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
   const fields = AddOfferDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onHandleNext(ComponentsType.addressAdded);
   };
   return {
     fields,

@@ -93,7 +93,7 @@ const EditOffersDetailsData = ({
         ))}
 
         <div className="mt-[14px]">
-          <OfferEditImages shareImgModal={shareImgModal} handleImagesUpload={handleImagesUpload}/>
+          <OfferEditImages shareImgModal={shareImgModal} handleImagesUpload={handleImagesUpload} tabType={tabType}/>
         </div>
       </div>
 

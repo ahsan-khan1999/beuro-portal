@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadServiceDetailsFormField } from "@/components/leads/fields/Add-lead-service-details";
 import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSchema";
+import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 
-export const useAddLeadServiceDetails = () => {
+export const useAddLeadServiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -21,11 +22,12 @@ export const useAddLeadServiceDetails = () => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
   const fields = AddLeadServiceDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onHandleNext(ComponentsType.additionalEdit);
   };
   return {
     fields,

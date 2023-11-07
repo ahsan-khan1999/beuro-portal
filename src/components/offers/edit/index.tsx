@@ -32,7 +32,6 @@ const EditOffersDetails = () => {
     console.log("clicked!");
   };
 
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SHARE_IMAGES]: <ShareImages onClose={onClose} />,
     [ModalType.UPLOAD_IMAGE]: (
@@ -48,7 +47,10 @@ const EditOffersDetails = () => {
   return (
     <>
       <Layout>
-        <EditOffersDetailsData shareImgModal={shareImgModal} handleImagesUpload={handleImagesUpload}/>
+        <EditOffersDetailsData
+          shareImgModal={shareImgModal}
+          handleImagesUpload={handleImagesUpload}
+        />
       </Layout>
 
       {renderModal()}

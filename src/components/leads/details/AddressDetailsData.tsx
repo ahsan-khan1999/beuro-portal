@@ -8,7 +8,7 @@ const AddressDetailsData = ({onClick}: {onClick: (index: number, component: Comp
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 " id="Address Detail">
+      <div className="flex justify-between items-center pb-5 " id="Address Details">
         <h2 className="text-[#393939] text-lg font-medium">Address Details</h2>
         <button
          onClick={() => onClick(1, ComponentsType.addressEdit)}
