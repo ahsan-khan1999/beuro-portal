@@ -6,23 +6,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateChangePassowrdFormField } from "@/components/loginAndRegister/login/login-fields";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { CardBody } from "@/types";
-// import passwordResetIcon from '@/assets/password-reset-icon.png';
 
-export const card: CardBody = {
-  image: {
-    imageUrl: "passwordResetIcon",
-    imageAlt: "Passwort vergessen",
-    width: 97,
-    height: 105,
-  },
-  heading: "Neues Passwort erstellen",
-  description: `Erstellen Sie ein neues Passwort für die Anmeldung in Ihrem Konto`,
-  link: {
-    linkText: "Home Page",
-    linkHref: "/",
-  },
-};
+
 
 export default function useResetPassword() {
   const router = useRouter();
@@ -36,8 +21,8 @@ export default function useResetPassword() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(changePasswordSchema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(changePasswordSchema),
   });
 
   const fields = generateChangePassowrdFormField(register, loading);

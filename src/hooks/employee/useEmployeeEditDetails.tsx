@@ -26,8 +26,8 @@ export const useEmployeeEditDetails = (
     setError,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = employeeEditDetailsFormField(register, loading, routeHandler);
   useMemo(() => {

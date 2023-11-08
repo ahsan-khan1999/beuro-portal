@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateChangePasswordFormField } from "@/types";
 
 export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormField =
-  (register, loading, control, onClick) => {
+  (register, loading, onClick) => {
     const formFields: FormField[] = [
       {
         containerClass: "mb-5",

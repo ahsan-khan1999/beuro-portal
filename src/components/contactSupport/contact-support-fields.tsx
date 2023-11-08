@@ -103,7 +103,6 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary",
-        inputType: "text",
         id: "message",
         name: "message",
         placeholder: "Type your message here",

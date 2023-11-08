@@ -26,8 +26,8 @@ export const useEditServicesDetails = (
     setError,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = servicesEditDetailsFormField(register, loading, handleRoute);
   useMemo(() => {

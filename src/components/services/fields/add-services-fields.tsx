@@ -79,7 +79,6 @@ export const servicesAddDetailsFormField: GenerateServicesFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
         id: "description",
         name: "description",
         placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",

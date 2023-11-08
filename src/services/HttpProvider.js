@@ -83,11 +83,46 @@ export async function newRequest({ method, url, data, headers }) {
   }
 }
 
+// export async function get(url, params, featureAndAction, config) {
+//   if (config.detail) {
+//     url = url + "/" + params;
+//   } else {
+//     for (var key in params) {
+//       if ("filter" in params && !url.includes("filter")) {
+//         if (url.includes("?")) url = url + "&" + "filter" + "=" + JSON.stringify(params["filter"]);
+//         else url = url + "?" + "filter" + "=" + JSON.stringify(params["filter"]);
+//       }
+//       if (!url.includes(key))
+//         if (url.includes("?")) url = url + "&" + key + "=" + params[key];
+//         else url = url + "?" + key + "=" + params[key];
+
+//     }
+//   }
+//   return request({ method: "get", url, data: { featureAndAction }, ...config });
+// }
 export async function get(url, params, featureAndAction, config) {
-  for (var key in params) {
-    url = url + "" + params[key];
+  const { filter, ...otherParams } = params;
+  let queryParams = {};
+  if (config.detail) {
+    url = `${url}/${filter}`;
+    return request({ method: "get", url: url, data: { featureAndAction }, ...config });
+
   }
-  return request({ method: "get", url, data: { featureAndAction }, ...config });
+
+  if (filter && !url.includes("filter")) {
+    queryParams.filter = JSON.stringify(filter);
+  }
+
+  for (const key in otherParams) {
+    if (!url.includes(key)) {
+      queryParams[key] = otherParams[key];
+    }
+  }
+
+  const queryString = new URLSearchParams(queryParams).toString();
+  const fullUrl = queryString ? `${url}?${queryString}` : url;
+
+  return request({ method: "get", url: fullUrl, data: { featureAndAction }, ...config });
 }
 
 export async function del(url, params, config) {

@@ -19,8 +19,8 @@ export default function useEmployeeCreateNewPassword(passwordSetSuccessfully: Fu
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = EmployeeCreateNewPasswordFieldsFormField(register, loading, passwordSetSuccessfully);

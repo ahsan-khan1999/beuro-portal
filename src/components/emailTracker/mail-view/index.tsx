@@ -28,9 +28,9 @@ const ViewMails = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
-      <DeleteConfirmation_1 handleDelete={handleDelete} onClose={onClose} />
+      <DeleteConfirmation_1 handleDelete={handleDelete} onClose={onClose} modelHeading="Please confirm Email ID No. " subHeading="Enter your email ID no" />
     ),
-    [ModalType.DELETE_MAIL]: <DeleteConfirmation_2 onClose={onClose} />,
+    [ModalType.DELETE_MAIL]: <DeleteConfirmation_2 onClose={onClose} modelHeading="Please confirm Email ID No. " routeHandler={() => { }} />,
   };
 
   const renderModal = () => {

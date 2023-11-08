@@ -20,8 +20,8 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ContactSupportFormField(register, loading, control,requestSubmitHandler);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

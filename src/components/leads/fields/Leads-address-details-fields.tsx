@@ -83,7 +83,6 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
         id: "description",
         name: "description",
         placeholder:
@@ -168,7 +167,6 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
         id: "description",
         name: "description",
         placeholder:

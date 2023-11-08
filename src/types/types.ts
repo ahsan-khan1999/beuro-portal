@@ -132,6 +132,13 @@ export type GenerateRegistrationFormField = (
   onClick?: Function
 ) => FormField[];
 
+
+export type GenerateResetPasswordFormField = (
+  register: UseFormRegister<FieldValues>,
+  loading: boolean,
+  onClick: Function
+) => FormField[];
+
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -206,8 +213,8 @@ export type GenerateAddReasonFormField = (
 export type GenerateChangePasswordFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // Add & Exclusive Tax formfield
@@ -223,8 +230,8 @@ export type GenerateContactSupportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control?: Control<FieldValues>,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // content formfield
@@ -232,16 +239,16 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // Notes formfield
@@ -257,8 +264,8 @@ export type GenerateNotesFormField = (
 export type GenerateServicesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // Invoice formfield
@@ -349,3 +356,5 @@ export interface FilterProps {
 interface ItemList {
   item: string
 }
+
+export type Errors = Record<string, any> | undefined;

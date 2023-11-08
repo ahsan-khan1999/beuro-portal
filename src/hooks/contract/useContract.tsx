@@ -52,7 +52,7 @@ const useContract = () => {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
-    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} handleNotes={onClose}/>,
   };
 
   const renderModal = () => {

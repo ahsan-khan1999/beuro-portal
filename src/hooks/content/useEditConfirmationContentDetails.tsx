@@ -20,8 +20,8 @@ export const useEditConfirmationContentDetails = (handleRoute: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = EditConfirmationContentDetailsFormField(register, loading, control, handleRoute);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

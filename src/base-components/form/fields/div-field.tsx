@@ -1,6 +1,6 @@
 import { DivProps, FieldType } from "@/types";
 import { getTypedFieldComponent } from "../helpers";
-import { combineClasses } from "@/utils/utility";
+import { combineClasses, findErrorMessage } from "@/utils/utility";
 
 export const DivField = ({ children, className, errors }: DivProps) => {
 
@@ -10,16 +10,11 @@ export const DivField = ({ children, className, errors }: DivProps) => {
       {children.map((childField, index) => {
 
 
-        const fieldName: string | undefined = childField?.field?.name;
+        const fieldName: string = childField?.field?.name as string;
         const data = fieldName?.includes(".") && fieldName?.split(".") || []
-        // console.log(fieldName, "fieldName");
-
-        const error =
-          (errors && fieldName && data?.length > 0) ? errors?.[data[0]]?.[data[1]]?.message : (fieldName && errors) && errors[fieldName]?.message;
-
-        // const error = errors && fieldName ? errors[fieldName]?.message : undefined;
-        // const error = errors && fieldName ? errors[fieldName]?.message : undefined;
-
+        // const error =
+        //   (errors && fieldName && data?.length > 0) ? errors?.[data[0]]?.[data[1]]?.message : (fieldName && errors) && errors[fieldName]?.message;
+        const error = findErrorMessage(errors, data, fieldName);
 
         const { label, field, containerClass } = childField;
         const renderedField =
@@ -49,5 +44,8 @@ export const DivField = ({ children, className, errors }: DivProps) => {
     </div>
   );
 };
+
+
+
 
 

@@ -1,7 +1,7 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
 import { Customers } from "@/types/customer";
-import { LeadsTableRowTypes } from "@/types/leads";
+import { Lead } from "@/types/leads";
 import editImage from "@/assets/svgs/edit_image.svg";
 import editNote from "@/assets/svgs/Edit_note.svg";
 import { OffersTableRowTypes } from "@/types/offers";
@@ -931,7 +931,7 @@ export const customers: Customers[] = [
   },
   // Add more rows as needed
 ];
-export const leads: LeadsTableRowTypes[] = [
+export const leads: Lead[] = [
   {
     id: 1,
     name: "Rahal Ahmed",

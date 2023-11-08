@@ -1,7 +1,7 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Status } from "@/types/global";
+import { CheckBoxFilterProps, Status } from "@/types/global";
 import React, { useState } from "react";
 
 export default function OffersFilters() {
@@ -12,7 +12,7 @@ export default function OffersFilters() {
     rejected: false,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const checkbox = [
+  const checkbox:CheckBoxFilterProps[] = [
     { label: "Open", type: "open" },
     { label: "Signed", type: "signed" },
     { label: "Expired", type: "expired" },

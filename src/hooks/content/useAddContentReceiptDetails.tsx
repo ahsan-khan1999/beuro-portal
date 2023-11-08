@@ -20,8 +20,8 @@ export const useAddContentReceiptDetails = (handleContentCreated : Function) => 
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddReceiptContentDetailsFormField(
     register,

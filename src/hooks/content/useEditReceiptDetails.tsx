@@ -20,8 +20,8 @@ export const useEditReceiptDetails = (handleRoute: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = EditReceiptContentDetailsFormField(
     register,
