@@ -1,4 +1,5 @@
 import { SupportRequestAdmin } from "@/types/admin/support-request";
+import { useRouter } from "next/router";
 import React from "react";
 
 const TableRow = ({
@@ -6,13 +7,20 @@ const TableRow = ({
 }: {
   currentPageRows: SupportRequestAdmin[];
 }) => {
+  const router = useRouter();
   return (
     <div>
       {currentPageRows?.map((item, index) => {
         return (
           <div
+            onClick={() =>
+              router.push({
+                pathname: "/admin/support-request/details",
+                query: { supportRequest: item.id },
+              })
+            }
             key={index}
-            className="shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_200px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.id}</span>
             <span className="px-6 py-4 bg-white">{item.customerName}</span>
