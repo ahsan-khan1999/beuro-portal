@@ -5,12 +5,11 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
-import useCustomer from "@/hooks/admin/customer/useCustomer";
+import usePayments from "@/hooks/admin/payments/usePayments";
 
-
-export default function Customers() {
+export default function Payments() {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-    useCustomer();
+    usePayments();
 
   return (
     <Layout>

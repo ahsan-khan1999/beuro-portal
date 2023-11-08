@@ -1,8 +1,8 @@
-import Customers from "@/components/admin/customer";
+import Payments from "@/components/admin/payments";
 import React from "react";
 
 const Index = () => {
-  return <Customers />;
+  return <Payments />;
 };
 
 export default Index;
