@@ -14,6 +14,7 @@ import { TableRowEmailTracker } from "@/types/emailTracker";
 import companyLogo from "@/assets/svgs/companyLogo.svg";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { PaymentsAdmin } from "@/types/admin/payments";
+import { SupportRequestAdmin } from "@/types/admin/support-request";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -3045,6 +3046,233 @@ export const paymentsAdminData: PaymentsAdmin[] = [
     status: "Active",
   },
 ];
+export const supportRequestData: SupportRequestAdmin[] = [
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+];
 
 export const sideBar: SideBar[] = [
   {
@@ -3215,7 +3443,14 @@ export const sideBar: SideBar[] = [
     icon: "ContactSupports",
     title: "Contact Supports",
     pathname: "/contact-support",
-    role: [0, 1],
+    role: [1],
+    // className:"mb-6 border-b border-[#0000001A]"
+  },
+  {
+    icon: "ContactSupports",
+    title: "Support Request",
+    pathname: "/admin/support-request",
+    role: [0],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {
