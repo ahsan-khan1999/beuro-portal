@@ -9,7 +9,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-5",
       label: {
         text: "Receipt Title",
         htmlFor: "receiptTitle",
@@ -70,6 +70,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
         type: Field.dragAndDropPdfField,
         id: "attachments",
         name: "attachments",
+        isOpenedFile:false,
         text: "Drop or attach your file here",
         fileSupported: "Files supported: PDF, JPG, PNG, GIF",
         control,

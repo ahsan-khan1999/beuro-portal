@@ -22,7 +22,7 @@ export const useAddLeadServiceDetails = (onHandleNext: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddLeadServiceDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

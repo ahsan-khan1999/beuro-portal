@@ -5,7 +5,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
   (register, loading, control) => {
     const formField: FormField[] = [
       {
-        containerClass: "mb-0",
+        containerClass: "mb-0 mt-5" ,
         label: {
           text: "Confirmation Title",
           htmlFor: "confirmationTitle",
@@ -65,6 +65,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
         field: {
           type: Field.dragAndDropPdfField,
           id: "attachments",
+          isOpenedFile:false,
           name: "attachments",
           text: "Drop or attach your file here",
           fileSupported: "Files supported: PDF, JPG, PNG, GIF",

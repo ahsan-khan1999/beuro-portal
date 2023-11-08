@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferEditContentDetailsFormField } from "@/components/content/edit/fields/offer-edit-content-details-fields";
 import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
+import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 
-export const useOfferContentEditDetails = (handleRoute: Function) => {
+export const useOfferContentEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -21,12 +22,14 @@ export const useOfferContentEditDetails = (handleRoute: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = OfferEditContentDetailsFormField(register, loading, control, handleRoute);
+  const fields = OfferEditContentDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onClick(0, ComponentsType.offerContent);
   };
+  
   return {
     fields,
     onSubmit,

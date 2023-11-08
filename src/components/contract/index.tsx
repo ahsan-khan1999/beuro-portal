@@ -14,6 +14,7 @@ export default function Contract() {
     handlePageChange,
     totalItems,
     itemsPerPage,
+    handleImageUpload,
     handleNotes,
     renderModal,
   } = useContract();
@@ -24,7 +25,7 @@ export default function Contract() {
         <TableFunctions />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows}  />
+          <TableRows dataToAdd={currentPageRows}  handleImageUpload={handleImageUpload} handleNotes={handleNotes}/>
         </TableLayout>
         <Pagination
           totalItems={totalItems}

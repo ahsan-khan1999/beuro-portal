@@ -145,6 +145,7 @@ export interface DragAndDropFileFieldProps
 export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
+  isOpenedFile?: boolean
 }
 
 // interface for the pdf file upload

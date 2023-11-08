@@ -107,6 +107,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       field: {
         type: Field.dragAndDropPdfField,
         id: "fileUpload",
+        isOpenedFile:false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
         name: "fileUpload",

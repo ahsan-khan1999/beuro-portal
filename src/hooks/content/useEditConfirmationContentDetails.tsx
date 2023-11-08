@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditConfirmationContentDetailsFormField } from "@/components/content/edit/fields/edit-confirmation-details-fields";
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
+import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 
-export const useEditConfirmationContentDetails = (handleRoute: Function) => {
+export const useEditConfirmationContentDetails = (onClick:Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -21,11 +22,12 @@ export const useEditConfirmationContentDetails = (handleRoute: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = EditConfirmationContentDetailsFormField(register, loading, control, handleRoute);
+  const fields = EditConfirmationContentDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onClick(1, ComponentsType.confirmationContent)
   };
   return {
     fields,

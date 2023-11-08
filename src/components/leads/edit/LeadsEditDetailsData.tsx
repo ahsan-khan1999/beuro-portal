@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 
 const LeadsEditDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
 
   const tabSection: tabArrayTypes[] = [
     {

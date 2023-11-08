@@ -32,6 +32,8 @@ const LeadsDetailsData = () => {
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
   };
+
+  
   const componentArray = [
     <CustomerDetailsData onClick={handleEdit} />,
     <AddressDetailsData onClick={handleEdit} />,

@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import CustomerDetailsData from "./OfferDetailsData";
+import OfferDetailsData from "./OfferDetailsData";
 import AddressDetailsData from "./AddressDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import ServiceDetailsData from "./ServiceDetailsData";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 
+export enum ComponentsType {
+  customer,
+  address,
+  service,
+  additional,
+}
+
 const ContractDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  const componentArray = [
+    <OfferDetailsData />,
+    <AddressDetailsData />,
+    <ServiceDetailsData />,
+    <AdditionalDetails />,
+  ];
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -19,7 +39,7 @@ const ContractDetailsData = () => {
       <path d="M14.854 15C14.3056 15 13.8594 15.4462 13.8594 15.9946C13.8594 16.543 14.3055 16.9892 14.854 16.9892C15.4024 16.9892 15.8486 16.543 15.8486 15.9946C15.8486 15.4462 15.4024 15 14.854 15Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
       <path d="M10.0805 8.63477C9.53211 8.63477 9.08594 9.08094 9.08594 9.62937C9.08594 10.1778 9.53211 10.624 10.0805 10.624C10.629 10.624 11.0752 10.1778 11.0752 9.62937C11.0751 9.08098 10.629 8.63477 10.0805 8.63477Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
     </svg>`,
-      name: "Customer Details",
+      name: "Offer Details",
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -65,12 +85,6 @@ const ContractDetailsData = () => {
     },
   ];
 
-  const componentsLookUp = {
-    0: <CustomerDetailsData />,
-    1: <AddressDetailsData />,
-    2: <ServiceDetailsData />,
-    3: <AdditionalDetails />,
-  };
   return (
     <div className="flex w-full gap-6">
       <div className="flex flex-col gap-[14px]">
@@ -86,7 +100,11 @@ const ContractDetailsData = () => {
         ))}
       </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      <div className="flex flex-col gap-y-5">
+        {componentArray.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };

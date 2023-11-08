@@ -24,8 +24,6 @@ const OffersDetailsData = () => {
     }
   }, []);
 
-
-
   const componentArray = [
     <CustomerDetailsData />,
     <AddressDetailsData />,

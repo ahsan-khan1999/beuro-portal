@@ -9,7 +9,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-5",
       label: {
         text: "Receipt Title",
         htmlFor: "receiptTitle",
@@ -101,7 +101,6 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
-              onClick: onClick,
             },
           },
         ],
