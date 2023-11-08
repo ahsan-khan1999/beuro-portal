@@ -15,6 +15,7 @@ import companyLogo from "@/assets/svgs/companyLogo.svg";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { PaymentsAdmin } from "@/types/admin/payments";
 import { SupportRequestAdmin } from "@/types/admin/support-request";
+import { PlansAdmin } from "@/types/admin/plans";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -3271,6 +3272,47 @@ export const supportRequestData: SupportRequestAdmin[] = [
       "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
     message:
       "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+];
+export const plansAdminData: PlansAdmin[] = [
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
+  },
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
+  },
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
   },
 ];
 
