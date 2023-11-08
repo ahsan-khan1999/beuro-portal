@@ -159,7 +159,7 @@ const LeadsDetailsData = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-5">
+      <div className="flex flex-col gap-y-5 w-full h-[600px] overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

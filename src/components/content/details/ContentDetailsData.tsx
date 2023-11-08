@@ -27,6 +27,8 @@ const ContentDetailsData = ({
 }: {
   contentDetail: ContentTableRowTypes;
 }) => {
+  
+  
   const [tabType, setTabType] = useState<number>(0);
   const [data, setData] = useState<{
     index: number;
@@ -55,12 +57,13 @@ const ContentDetailsData = ({
       contentDetail={contentDetail}
     />,
   ];
+  console.log(contentDetail,"23");
 
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   useEffect(() => {
     setRenderComponent(componentArray);
-  }, [contentDetail]);
+  }, [contentDetail])
 
   const lookup = {
     [ComponentsType.offerContent]: (
@@ -114,6 +117,7 @@ const ContentDetailsData = ({
   };
 
   useEffect(() => {
+    
     setRenderComponent((prev) => {
       const updatedData = [...prev];
       if (data) {
@@ -182,7 +186,7 @@ const ContentDetailsData = ({
   ];
 
   return (
-    <div className="flex w-full gap-6">
+    <div className="flex w-full gap-x-6">
       <div className="flex flex-col gap-[14px]">
         {tabSection.map((item, index) => (
           <DetailsTab
@@ -196,7 +200,7 @@ const ContentDetailsData = ({
         ))}
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full">
+      <div className="flex flex-col gap-y-5 w-full h-[680px] overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}
