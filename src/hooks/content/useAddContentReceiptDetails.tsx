@@ -14,6 +14,10 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+  const handleBack = () => {
+    onHandleNext(ComponentsType.addInvoiceContent);
+  };
+
   const schema = generateEditReceiptContentDetailsValidation(translate);
   const {
     register,
@@ -24,15 +28,10 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddReceiptContentDetailsFormField(
-    register,
-    loading,
-    control,
-    
-  );
+  const fields = AddReceiptContentDetailsFormField(register, loading, control, handleBack);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    onHandleNext(ComponentsType.addReceiptContent)
+    onHandleNext(ComponentsType.addReceiptContent);
   };
   return {
     fields,

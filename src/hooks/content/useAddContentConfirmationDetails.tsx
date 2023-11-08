@@ -14,6 +14,10 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+  const backHandle = () => {
+    onHandleNext(ComponentsType.addOffer);
+  };
+
   const schema = generateEditConfirmationContentDetailsValidation(translate);
   const {
     register,
@@ -27,7 +31,8 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function) => {
   const fields = AddContentConfirmationDetailsFormField(
     register,
     loading,
-    control
+    control,
+    backHandle
   );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));

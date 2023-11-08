@@ -27,9 +27,9 @@ export const useEditServicesDetails = (
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = servicesEditDetailsFormField(register, loading, handleRoute);
+  const fields = servicesEditDetailsFormField(register, loading, );
   useMemo(() => {
     if (serviceDetail?.id) {
       reset(serviceDetail);
@@ -37,6 +37,7 @@ export const useEditServicesDetails = (
   }, [serviceDetail?.id]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleRoute()
   };
   return {
     fields,

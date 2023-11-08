@@ -20,7 +20,7 @@ export default function useChangePassword() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = ChangePasswordFormField(register, loading);

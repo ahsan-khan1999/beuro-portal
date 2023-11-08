@@ -21,15 +21,16 @@ export const useEmployeeAddDetails = (linkSendHandler: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = employeeAddDetailsFormField(
     register,
     loading,
-    linkSendHandler
+    
   );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    linkSendHandler()
   };
   return {
     fields,

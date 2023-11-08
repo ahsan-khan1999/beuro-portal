@@ -4,17 +4,24 @@ import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 import backIcon from "@/assets/svgs/back_icon.svg";
+import { useRouter } from "next/router";
 
 const DetailsData = ({
   handleConfirmDeletion,
 }: {
   handleConfirmDeletion: Function;
 }) => {
+  const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="backIcon" />
+          <Image
+            src={backIcon}
+            alt="backIcon"
+            onClick={() => router.push("/email-tracker")}
+            className="cursor-pointer"
+          />
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             Email Details
           </h1>

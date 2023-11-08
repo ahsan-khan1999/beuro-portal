@@ -27,7 +27,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
   const fields = AddOfferContentDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    onHandleNext(ComponentsType.addCOnfirmationContent);
+    onHandleNext(ComponentsType.addConfirmationContent);
   };
   return {
     fields,

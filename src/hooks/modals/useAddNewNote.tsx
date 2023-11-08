@@ -22,7 +22,7 @@ export const useAddNewNote = (handleNotes: Function) => {
 
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

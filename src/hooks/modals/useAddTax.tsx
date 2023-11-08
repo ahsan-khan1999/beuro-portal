@@ -20,7 +20,7 @@ export default function useAddTax() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = addTaxFormField(register, loading);

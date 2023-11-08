@@ -5,6 +5,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
   control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -29,10 +30,11 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
               type: Field.button,
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+             
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick:onClick
             },
           },
           {

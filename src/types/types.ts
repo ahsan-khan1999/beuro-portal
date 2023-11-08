@@ -182,6 +182,7 @@ export type GenerateAccountSettingFormField = (
 export type GenerateChangeMailSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  control?:Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
 ) => FormField[];

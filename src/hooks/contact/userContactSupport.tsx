@@ -21,11 +21,12 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = ContactSupportFormField(register, loading, control,requestSubmitHandler);
+  const fields = ContactSupportFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    requestSubmitHandler();
   };
   return {
     fields,

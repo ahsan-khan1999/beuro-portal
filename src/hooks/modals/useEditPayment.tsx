@@ -19,7 +19,7 @@ export default function useEditPayment() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = editPaymentDetailsFormField(register, loading);

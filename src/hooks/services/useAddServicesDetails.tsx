@@ -21,11 +21,12 @@ export const useServicesAddDetails = (handleRoute: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = servicesAddDetailsFormField(register, loading, handleRoute);
+  const fields = servicesAddDetailsFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleRoute()
   };
   return {
     fields,

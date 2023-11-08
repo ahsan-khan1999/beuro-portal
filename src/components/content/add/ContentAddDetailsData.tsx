@@ -13,7 +13,7 @@ import ContentCreated from "@/base-components/ui/modals1/ContentCreated";
 
 export enum ComponentsType {
   addOffer,
-  addCOnfirmationContent,
+  addConfirmationContent,
   addInvoiceContent,
   addReceiptContent,
 }
@@ -33,6 +33,8 @@ const ContentAddDetailsData = () => {
     dispatch(updateModalType(ModalType.CONTENT_CREATED));
   };
 
+  
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONTENT_CREATED]: <ContentCreated onClose={onClose} />,
   };
@@ -49,15 +51,11 @@ const ContentAddDetailsData = () => {
     setTabType(currentComponent);
   };
 
-  const onHandleBack = (currentComponent: ComponentsType) => {
-    setTabType(currentComponent);
-  };
-
   const componentsLookUp = {
     [ComponentsType.addOffer]: (
       <OfferContentAddDetails onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.addCOnfirmationContent]: (
+    [ComponentsType.addConfirmationContent]: (
       <AddConfirmationContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addInvoiceContent]: (

@@ -21,7 +21,7 @@ export const useChangeMailSetting = () => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ChangeMailSettingFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

@@ -20,7 +20,7 @@ export default function useSettingProfile() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = changeProfileSettingFormField(register, loading, control);

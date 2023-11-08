@@ -8,11 +8,15 @@ import { AddContentInvoiceDetailsFormField } from "@/components/content/add/fiel
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 
-export const useAddContentInvoiceDetails = (onHandleNext:Function) => {
+export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+
+  const backHandle = () => {
+    onHandleNext(ComponentsType.addConfirmationContent);
+  };
 
   const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {
@@ -24,10 +28,15 @@ export const useAddContentInvoiceDetails = (onHandleNext:Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddContentInvoiceDetailsFormField(register, loading, control);
+  const fields = AddContentInvoiceDetailsFormField(
+    register,
+    loading,
+    control,
+    backHandle
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    onHandleNext(ComponentsType.addReceiptContent)
+    onHandleNext(ComponentsType.addReceiptContent);
   };
   return {
     fields,
