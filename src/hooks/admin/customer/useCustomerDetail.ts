@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 
 export default function useCustomerDetail(stage: boolean) {
   const router = useRouter();
-  const [customerDetail, setCustomerDetail] = useState<CustomersAdmin>(customersAdmin[0]);
+  const [customerDetail, setCustomerDetail] = useState<CustomersAdmin>(
+    customersAdmin[0]
+  );
 
   const id = router.query.customer;
 

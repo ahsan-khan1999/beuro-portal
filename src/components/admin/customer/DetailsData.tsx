@@ -1,4 +1,5 @@
 import { CustomersAdmin } from "@/types/admin/customer";
+import Image from "next/image";
 import React from "react";
 const DetailsData = ({
   customerDetail,
@@ -38,149 +39,83 @@ const DetailsData = ({
             Customers Details
           </h1>
         </div>
-        <div className="flex items-center">
+        <button className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="40"
-            viewBox="0 0 41 40"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
             fill="none"
           >
-            <rect
-              x="0.820312"
-              y="0.5"
-              width="39.2105"
-              height="39"
-              rx="7.5"
-              fill="white"
-              stroke="#C7C7C7"
-            />
-            <path
-              d="M26.7659 25.3115H27.9756C29.3579 25.3115 30.4783 24.197 30.4783 22.8219V17.8426C30.4783 16.4675 29.3579 15.353 27.9756 15.353H12.8758C11.4934 15.353 10.373 16.4675 10.373 17.8426V22.8219C10.373 24.197 11.4934 25.3115 12.8758 25.3115H14.0854"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M27.7686 21.9917H13.0859"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M15.3373 30H25.5151C26.2062 30 26.7664 29.4427 26.7664 28.7552V21.9917H14.0859V28.7552C14.0859 29.4427 14.6462 30 15.3373 30Z"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M22.0928 24.6475H18.7559"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M22.0928 27.3032H18.7559"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M15.0881 18.0083H13.0859"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16.5887 9.99984H24.2637C25.6459 9.99984 26.7664 11.1145 26.7664 12.4895V15.3525H14.0859V12.4895C14.0859 11.1145 15.2065 9.99984 16.5887 9.99984Z"
-              stroke="#4B4B4B"
-              strokeWidth={1.4}
-              strokeMiterlimit={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <g clip-path="url(#clip0_2278_94181)">
+              <path
+                d="M16.9725 0.234375H3.97671C2.32129 0.234375 0.974609 1.58105 0.974609 3.23648V16.2323C0.974609 17.8877 2.32129 19.2344 3.97671 19.2344H16.9725C18.6279 19.2344 19.9746 17.8877 19.9746 16.2323V3.23648C19.9746 1.58105 18.6279 0.234375 16.9725 0.234375ZM17.9732 16.2323C17.9732 16.784 17.5242 17.2329 16.9726 17.2329H3.97671C3.42498 17.2329 2.9761 16.784 2.9761 16.2323V3.23648C2.9761 2.68474 3.42503 2.23587 3.97671 2.23587H16.9725C17.5242 2.23587 17.9731 2.68479 17.9731 3.23648V16.2323H17.9732Z"
+                fill="#4A13E7"
+              />
+              <path
+                d="M14.3556 5.38281C14.0158 5.38281 13.6964 5.5152 13.4561 5.75559L8.7495 10.4699L7.49505 9.21554C7.25489 8.97531 6.93555 8.84298 6.59589 8.84298C6.25616 8.84298 5.93683 8.97531 5.69661 9.21548C5.45644 9.45565 5.32422 9.77498 5.32422 10.1146C5.32422 10.4543 5.45644 10.7736 5.69661 11.0138L7.8505 13.1676C8.09066 13.4079 8.41 13.5402 8.74972 13.5402C9.08927 13.5402 9.40872 13.4078 9.64916 13.1674L15.2548 7.55376C15.7505 7.05787 15.7504 6.25109 15.2548 5.7552C15.0146 5.51509 14.6952 5.38281 14.3556 5.38281Z"
+                fill="#4A13E7"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_2278_94181">
+                <rect
+                  width="19"
+                  height="19"
+                  fill="white"
+                  transform="translate(0.974609 0.234375)"
+                />
+              </clipPath>
+            </defs>
           </svg>
-          <svg
-            className="ml-[22px]"
-            xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="40"
-            viewBox="0 0 41 40"
-            fill="none"
-          >
-            <rect
-              x="1.14648"
-              y="0.5"
-              width="39.2105"
-              height="39"
-              rx="7.5"
-              fill="white"
-              stroke="#ED2F2F"
-            />
-            <path
-              d="M24.6945 12.3357H26.9586H26.9587C27.896 12.3358 28.6859 13.0408 28.8069 13.9806L28.8069 13.9806C28.9243 14.8946 28.3743 15.7581 27.5112 16.0292V27.4942C27.5112 28.1999 27.2561 28.8654 26.8069 29.3448C26.3596 29.8256 25.7367 30.0989 25.0842 30.1H25.084H16.3476H16.3474C15.6951 30.0989 15.0722 29.8256 14.6248 29.3448C14.1755 28.8654 13.9204 28.1999 13.9204 27.4942V16.0292C13.0573 15.7581 12.5073 14.8946 12.6247 13.9806L12.6247 13.9806C12.7457 13.0408 13.5356 12.3358 14.473 12.3357H14.473H16.7371V11.8505V11.8502L24.6945 12.3357ZM24.6945 12.3357V11.8504M24.6945 12.3357V11.8504M24.6945 11.8504V11.8502H24.5945L24.6945 11.8504ZM17.8606 11.8502H17.8606L17.8606 11.8489C17.8579 11.6316 17.9421 11.4228 18.0937 11.2698L18.0938 11.2697C18.2451 11.1169 18.4508 11.0331 18.664 11.0368L18.664 11.0368H18.6657H22.7659V11.0368L22.7677 11.0368C22.9808 11.0331 23.1865 11.1169 23.3379 11.2697L23.3379 11.2698C23.4895 11.4226 23.5738 11.6316 23.571 11.8489L23.571 11.8489V11.8502V12.3357H17.8606V11.8502ZM23.4399 17.1461C23.1283 17.1461 22.8782 17.4019 22.8782 17.7145V26.5669C22.8782 26.8793 23.1283 27.1353 23.4399 27.1353C23.7515 27.1353 24.0017 26.8793 24.0017 26.5669V17.7145C24.0017 17.4019 23.7515 17.1461 23.4399 17.1461ZM17.9915 17.1461C17.6799 17.1461 17.4297 17.4019 17.4297 17.7145V26.5669C17.4297 26.8793 17.6798 27.1353 17.9915 27.1353C18.3031 27.1353 18.5532 26.8793 18.5532 26.5669V17.7145C18.5532 17.4019 18.3031 17.1461 17.9915 17.1461ZM25.084 28.9632H16.3476C15.6236 28.9632 15.0439 28.3309 15.0439 27.4942V16.0954H26.3877V27.4942C26.3877 28.3309 25.8081 28.9632 25.084 28.9632ZM14.473 13.4724H26.9586C27.3611 13.4724 27.6898 13.8037 27.6898 14.2155C27.6898 14.6273 27.3611 14.9586 26.9586 14.9586H14.473C14.0705 14.9586 13.7418 14.6273 13.7418 14.2155C13.7418 13.8037 14.0705 13.4724 14.473 13.4724ZM20.7154 17.1461C20.4037 17.1461 20.1536 17.4019 20.1536 17.7145V26.5669C20.1536 26.8793 20.4037 27.1353 20.7154 27.1353C21.027 27.1353 21.2771 26.8793 21.2771 26.5669V17.7145C21.2771 17.4019 21.027 17.1461 20.7154 17.1461Z"
-              fill="#ED2F2F"
-              stroke="#ED2F2F"
-              strokeWidth={0.2}
-            />
-          </svg>
-        </div>
+          Make Infinite
+        </button>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>
         <div className="flex justify-between items-center ">
           <h3 className="text-[#4D4D4D] ">
             Customer ID:
-            <span className="text-[#4B4B4B] font-medium ml-3">{customerDetail?.id}</span>
+            <span className="text-[#4B4B4B] font-medium ml-3">
+              {customerDetail?.id}
+            </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             Role:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.id}
+            <span className="ml-3 text-[#4B4B4B] font-medium">
+              {customerDetail?.role}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             No of Employs:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.id}
+            <span className="ml-3 text-[#4B4B4B] font-medium">
+              {customerDetail?.employsNumber}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             Plan:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.plans}
+            <span className="ml-3 text-[#4B4B4B] font-medium">
+              {customerDetail?.plans}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             Subscriptions Date:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.id}
+            <span className="ml-3 text-[#4B4B4B] font-medium">
+              {customerDetail?.subscriptionDate?.toLocaleDateString()}
             </span>
           </h3>
         </div>
         <div className="mt-5 flex items-center">
           <h3 className="text-[#4D4D4D] ">
             Status:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.status}
+            <span className="ml-3 text-[#4B4B4B] font-medium">
+              {customerDetail?.status}
             </span>
           </h3>
-          <h3 className="text-[#4D4D4D] ml-[80px] ">
+          <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
             Company Logo:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{customerDetail?.id}
+            <span className="text-[#4B4B4B] font-medium ml-3">
+              <Image src={customerDetail?.logo} alt="company logo" />
             </span>
           </h3>
         </div>

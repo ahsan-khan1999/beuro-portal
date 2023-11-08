@@ -4,6 +4,7 @@ import React from "react";
 import DetailsData from "../DetailsData";
 
 import useCustomerDetail from "@/hooks/admin/customer/useCustomerDetail";
+import CustomerDetailsData from "./customer-details-data";
 
 const CustomerDetails = () => {
   const { customerDetail, handlePreviousClick } = useCustomerDetail(true);
@@ -16,17 +17,9 @@ const CustomerDetails = () => {
           handlePreviousClick={handlePreviousClick}
         />
       </DetailsCard>
-      {/* <div className="flex mt-8">
-        <CustomerForm
-          isUpdate={isUpdate}
-          setIsUpdate={setIsUpdate}
-          customerDetail={customerDetail}
-          fields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-        />
-      </div> */}
+      <div className="flex mt-8">
+        <CustomerDetailsData customerDetail={customerDetail} />
+      </div>
     </Layout>
   );
 };
