@@ -3089,13 +3089,13 @@ export const sideBar: SideBar[] = [
   {
     icon: "plans",
     title: "Plans",
-    pathname: "/plans",
+    pathname: "/admin/plans",
     role: [0],
   },
   {
     icon: "payment",
     title: "Payment",
-    pathname: "/payments",
+    pathname: "/admin/payments",
     role: [0],
   },
   {
@@ -3114,7 +3114,7 @@ export const sideBar: SideBar[] = [
     className: " ",
     icon: "setting",
     title: "Settings",
-    pathname: "/admin-settings",
+    pathname: "admin/settings",
     role: [0],
   },
 ];
