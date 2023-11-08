@@ -11,7 +11,7 @@ const OfferDetails = () => {
         <OfferDetailsCard />
       </DetailsCard>
 
-      <div className="flex mt-7">
+      <div className="mt-7">
         <OffersDetailsData />
       </div>
     </Layout>

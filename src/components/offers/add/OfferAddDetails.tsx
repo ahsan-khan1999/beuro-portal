@@ -4,7 +4,6 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import backIcon from "@/assets/svgs/back_icon.svg";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {

@@ -100,7 +100,7 @@ const ContractDetailsData = () => {
         ))}
       </div>
 
-      <div className="flex flex-col gap-y-5">
+      <div className="flex flex-col gap-y-5 h-[500px] overflow-scroll">
         {componentArray.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

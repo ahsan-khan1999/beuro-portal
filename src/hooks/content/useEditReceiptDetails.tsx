@@ -14,6 +14,11 @@ export const useEditReceiptDetails = (onClick: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+
+  const handleBack = () => {
+    onClick(3, ComponentsType.receiptContent);
+  }
+
   const schema = generateEditReceiptContentDetailsValidation(translate);
   const {
     register,
@@ -24,7 +29,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = EditReceiptContentDetailsFormField(register, loading, control);
+  const fields = EditReceiptContentDetailsFormField(register, loading, control, handleBack);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onClick(3, ComponentsType.receiptContent);

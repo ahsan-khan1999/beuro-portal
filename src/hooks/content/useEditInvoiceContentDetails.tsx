@@ -13,6 +13,9 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+  const handleBack = () => {
+    onClick(2, ComponentsType.invoiceContent);
+  };
 
   const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {
@@ -24,7 +27,12 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = EditInvoiceContentDetailsFormField(register, loading, control);
+  const fields = EditInvoiceContentDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onClick(2, ComponentsType.invoiceContent);

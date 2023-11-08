@@ -6,15 +6,15 @@ import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 
 const EditInoviceContentDetails = ({
+  onClick,
   contentDetail,
-  onClick
 }: {
-  contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
+  contentDetail: ContentTableRowTypes;
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useEditInvoiceContentDetails(onClick);
+    useEditInvoiceContentDetails( onClick);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20 ">

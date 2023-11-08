@@ -10,6 +10,7 @@ import EditConfirmationContentDetailsData from "../edit/EditConfirmationContentD
 import EditInoviceContentDetails from "../edit/EditInoviceContentDetails";
 import EditReceiptContentDetails from "../edit/ReceiptContentDetails";
 import { ContentTableRowTypes } from "@/types/content";
+import { useRouter } from "next/router";
 
 export enum ComponentsType {
   offerContent,
@@ -27,8 +28,6 @@ const ContentDetailsData = ({
 }: {
   contentDetail: ContentTableRowTypes;
 }) => {
-  
-  
   const [tabType, setTabType] = useState<number>(0);
   const [data, setData] = useState<{
     index: number;
@@ -38,6 +37,10 @@ const ContentDetailsData = ({
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
   };
+
+  const router = useRouter()
+
+
 
   const componentArray = [
     <OfferContentDetailsData
@@ -57,13 +60,12 @@ const ContentDetailsData = ({
       contentDetail={contentDetail}
     />,
   ];
-  console.log(contentDetail,"23");
 
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   useEffect(() => {
     setRenderComponent(componentArray);
-  }, [contentDetail])
+  }, [contentDetail]);
 
   const lookup = {
     [ComponentsType.offerContent]: (
@@ -76,6 +78,7 @@ const ContentDetailsData = ({
       <OfferContentEditDetails
         onClick={handleEdit}
         contentDetail={contentDetail}
+        
       />
     ),
     [ComponentsType.confirmationContent]: (
@@ -117,7 +120,6 @@ const ContentDetailsData = ({
   };
 
   useEffect(() => {
-    
     setRenderComponent((prev) => {
       const updatedData = [...prev];
       if (data) {

@@ -6,11 +6,11 @@ import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 
 const EditConfirmationContentDetailsData = ({
+  onClick,
   contentDetail,
-  onClick
 }: {
-  contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
+  contentDetail: ContentTableRowTypes;
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =

@@ -43,12 +43,11 @@ const useOffers = () => {
   };
 
   const handleImagesUpload = (
-    item: OffersTableRowTypes,
-    e: React.MouseEvent<HTMLImageElement>
+    item?: OffersTableRowTypes,
+    e?: React.MouseEvent<HTMLImageElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(updateModalType(ModalType.NONE));
-
     dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
   };
 
@@ -75,7 +74,6 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(offersData.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);

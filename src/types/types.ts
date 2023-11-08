@@ -232,8 +232,8 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // Employee formfield

@@ -14,6 +14,10 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+  const backHandle = () => {
+    onClick(0, ComponentsType.offerContent);
+  };
+
   const schema = generateOfferEditContentDetailsValidation(translate);
   const {
     register,
@@ -24,12 +28,17 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = OfferEditContentDetailsFormField(register, loading, control);
+  const fields = OfferEditContentDetailsFormField(
+    register,
+    loading,
+    control,
+    backHandle
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onClick(0, ComponentsType.offerContent);
   };
-  
+
   return {
     fields,
     onSubmit,

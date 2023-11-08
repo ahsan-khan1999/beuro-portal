@@ -8,11 +8,15 @@ import { EditConfirmationContentDetailsFormField } from "@/components/content/ed
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 
-export const useEditConfirmationContentDetails = (onClick:Function) => {
+export const useEditConfirmationContentDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+
+  const handleBack = () => {
+    onClick(1, ComponentsType.confirmationContent);
+  };
 
   const schema = generateEditConfirmationContentDetailsValidation(translate);
   const {
@@ -24,10 +28,15 @@ export const useEditConfirmationContentDetails = (onClick:Function) => {
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = EditConfirmationContentDetailsFormField(register, loading, control);
+  const fields = EditConfirmationContentDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    onClick(1, ComponentsType.confirmationContent)
+    onClick(1, ComponentsType.confirmationContent);
   };
   return {
     fields,

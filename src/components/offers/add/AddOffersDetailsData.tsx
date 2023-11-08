@@ -23,48 +23,6 @@ const EditOffersDetailsData = () => {
     ComponentsType.customerAdded
   );
 
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType(ModalType.LEAD_CREATED));
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.LEAD_CREATED]: <OfferCreated onClose={onClose} />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handleNextTab = (currentComponent: ComponentsType) => {
-    if (tabType === ComponentsType.additionalAdded) {
-      offerCreatedHandler();
-      return;
-    }
-    setTabType(currentComponent);
-  };
-
-  const componentsLookUp = {
-    [ComponentsType.customerAdded]: (
-      <OfferAddDetails onHandleNext={handleNextTab} />
-    ),
-    [ComponentsType.addressAdded]: (
-      <AddressAddDetails onHandleNext={handleNextTab} />
-    ),
-    [ComponentsType.serviceAdded]: (
-      <ServiceAddDetails onHandleNext={handleNextTab} />
-    ),
-    [ComponentsType.additionalAdded]: (
-      <AditionalAddDetails onHandleNext={handleNextTab} />
-    ),
-  };
-
   const tabSection: tabArrayTypes[] = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill=${
@@ -118,6 +76,48 @@ const EditOffersDetailsData = () => {
     },
   ];
 
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType(ModalType.LEAD_CREATED));
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.LEAD_CREATED]: <OfferCreated onClose={onClose} />,
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  const handleNextTab = (currentComponent: ComponentsType) => {
+    if (tabType === ComponentsType.additionalAdded) {
+      offerCreatedHandler();
+      return;
+    }
+    setTabType(currentComponent);
+  };
+
+  const componentsLookUp = {
+    [ComponentsType.customerAdded]: (
+      <OfferAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addressAdded]: (
+      <AddressAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.serviceAdded]: (
+      <ServiceAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.additionalAdded]: (
+      <AditionalAddDetails onHandleNext={handleNextTab} />
+    ),
+  };
+
   return (
     <>
       <div className="flex w-full gap-6">
@@ -125,6 +125,7 @@ const EditOffersDetailsData = () => {
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}

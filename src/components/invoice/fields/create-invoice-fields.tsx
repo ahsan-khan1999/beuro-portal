@@ -118,7 +118,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       label: {
         text: "Payment Method",
         htmlFor: "paymentMethod",
-        className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
+        className: "mb-[12px]",
       },
       field: {
         className:
@@ -147,7 +147,6 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       },
     },
 
-    // fields shows after clicked the check button
     {
       containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
       label: {
@@ -168,7 +167,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       label: {
         text: "Frequency",
         htmlFor: "frequency",
-        className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
+        className: "mb-[12px]",
       },
       field: {
         className:

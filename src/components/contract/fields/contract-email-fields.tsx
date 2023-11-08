@@ -1,14 +1,13 @@
 import { Field } from "@/enums/form";
-import { useRouter } from "next/router";
 import { FormField, GenerateContractFormField } from "@/types";
 
 export const ContractEmailPreviewFormField: GenerateContractFormField = (
   register,
   loading,
   control,
-  onBack,
+  onClick,
+  onBack
 ) => {
-  const router = useRouter();
   const formField: FormField[] = [
     {
       field: {
@@ -98,7 +97,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: " mt-5",
       label: {
         text: "Attachments",
         htmlFor: "fileUpload",
@@ -107,7 +106,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       field: {
         type: Field.dragAndDropPdfField,
         id: "fileUpload",
-        isOpenedFile:false,
+        isOpenedFile: false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
         name: "fileUpload",
@@ -142,7 +141,6 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
-              // onClick: () => router.push("/contract/pdf-preview"),
             },
           },
         ],

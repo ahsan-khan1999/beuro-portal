@@ -7,7 +7,10 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
 import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
 
-export const useContractEmail = (backRouteHandler: Function) => {
+export const useContractEmail = (
+  backRouteHandler: Function,
+  onNextHandle: Function
+) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -21,18 +24,17 @@ export const useContractEmail = (backRouteHandler: Function) => {
     setError,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ContractEmailPreviewFormField(
     register,
     loading,
     control,
-    backRouteHandler
+    backRouteHandler,
   );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
     dispatch(loginUser({ data, router, setError, translate }));
-    router.push("/contract/pdf-preview");
+    onNextHandle();
   };
   return {
     fields,

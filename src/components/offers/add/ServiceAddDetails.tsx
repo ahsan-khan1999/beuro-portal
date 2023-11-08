@@ -21,9 +21,8 @@ const ServiceAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
         >
           Cancel
         </button>
-
-        <hr className="opacity-20 mb-5" />
       </div>
+      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

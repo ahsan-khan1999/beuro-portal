@@ -4,7 +4,13 @@ import React from "react";
 import { useRouter } from "next/router";
 import moreInfo from "@/assets/svgs/entity_more_info.svg";
 
-const TableRows = ({ dataToAdd }: { dataToAdd: InvoiceTableRowTypes[] }) => {
+const TableRows = ({
+  dataToAdd,
+  handleNotes,
+}: {
+  dataToAdd: InvoiceTableRowTypes[];
+  handleNotes: Function;
+}) => {
   const router = useRouter();
   return (
     <div>
@@ -15,10 +21,18 @@ const TableRows = ({ dataToAdd }: { dataToAdd: InvoiceTableRowTypes[] }) => {
             key={index}
             className="cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md flex  items-center">{item.id}</span>
-            <span className="px-6 py-4 bg-white  flex  items-center">{item.customer}</span>
-            <span className="px-6 py-4 bg-white flex  items-center">{item.invoiceTitle}</span>
-            <span className="px-6 py-4 bg-white flex  items-center">{item.totalPrice}</span>
+            <span className="px-6 py-4 bg-white rounded-md flex  items-center">
+              {item.id}
+            </span>
+            <span className="px-6 py-4 bg-white  flex  items-center">
+              {item.customer}
+            </span>
+            <span className="px-6 py-4 bg-white flex  items-center">
+              {item.invoiceTitle}
+            </span>
+            <span className="px-6 py-4 bg-white flex  items-center">
+              {item.totalPrice}
+            </span>
 
             <span className="px-6 py-4 bg-white flex justify-center items-center">
               <div
@@ -70,7 +84,11 @@ const TableRows = ({ dataToAdd }: { dataToAdd: InvoiceTableRowTypes[] }) => {
               </div>
             </span>
             <span className="px-6 py-4 flex justify-center items-center  bg-white ">
-              <Image src={item.editNote} alt="edit_img_icon" />
+              <Image
+                src={item.editNote}
+                onClick={(e) => handleNotes(item, e)}
+                alt="edit_img_icon"
+              />
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
               <Image src={moreInfo} alt="moreInfo" />

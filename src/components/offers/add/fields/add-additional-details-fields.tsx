@@ -1,8 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateOffersFormField,
-} from "@/types";
+import { FormField, GenerateOffersFormField } from "@/types";
 
 export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   register,
@@ -17,9 +14,8 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         htmlFor: "chooseFromExisting",
         className: "mb-[10px]",
       },
-      
+
       field: {
-        
         className: "!p-4 !border-dark focus:!border-primary ",
         type: Field.select,
         value:
@@ -55,33 +51,14 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
     },
 
     {
+      containerClass: "mb-0 mt-[30px]",
       field: {
-        type: Field.div,
-        className: "flex space-x-[18px] mt-[30px]",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              text: "Back",
-              inputType: "submit",
-              className:
-                "rounded-lg  border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-black",
-              loading,
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              text: "Save",
-              inputType: "submit",
-              className:
-                "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
-              loading,
-            },
-          },
-        ],
+        type: Field.button,
+        text: "Save",
+        inputType: "submit",
+        className:
+          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
+        loading,
       },
     },
   ];

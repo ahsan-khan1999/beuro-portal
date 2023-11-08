@@ -26,7 +26,13 @@ const useInvoice = () => {
   };
 
   // Function for handling the modal for exiting notes
-  const handleNotes = (item: InvoiceTableRowTypes) => {
+  const handleNotes = (
+    item: InvoiceTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    if (e) {
+      e.stopPropagation();
+    }
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
@@ -41,7 +47,9 @@ const useInvoice = () => {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
-    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} />,
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+    ),
   };
 
   const renderModal = () => {
