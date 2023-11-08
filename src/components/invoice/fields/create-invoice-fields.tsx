@@ -5,7 +5,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   register,
   loading,
   control,
-  onClick
+  markItRecuring
 ) => {
   const formField: FormField[] = [
     {
@@ -149,7 +149,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
 
     // fields shows after clicked the check button
     {
-      containerClass: "mt-4",
+      containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
       label: {
         text: "Date of next invoice",
         htmlFor: "date",
@@ -164,7 +164,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       },
     },
     {
-      containerClass: "mb-0 mt-4",
+      containerClass: `mb-0 mt-4 ${!markItRecuring && "hidden"}`,
       label: {
         text: "Frequency",
         htmlFor: "frequency",
@@ -189,7 +189,6 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         text: "Create Invoice",
         inputType: "submit",
         loading,
-        onClick: onClick,
       },
     },
   ];
