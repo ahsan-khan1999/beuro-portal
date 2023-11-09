@@ -306,15 +306,14 @@ export type GenerateLeadsFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
-
 // Notes formfield
 export type GenerateAddFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  isShow?:boolean,
-  
-  trigger?: UseFormTrigger<FieldValues>,
+  isShow?: boolean,
+
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 export interface PaginationProps {

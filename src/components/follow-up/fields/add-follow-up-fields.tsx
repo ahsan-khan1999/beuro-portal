@@ -8,10 +8,10 @@ export const AddFollowUpFormField: GenerateAddFollowUpFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: `mb-0 ${isShow && "hidden"}`,
       field: {
         type: Field.date,
-        className: `!p-4 !border-dark focus:!border-primary ${!isShow}`,
+        className: `!p-4 !border-dark focus:!border-primary `,
         id: "noteMessage",
         name: "noteMessage",
         value: "12/12/2023",

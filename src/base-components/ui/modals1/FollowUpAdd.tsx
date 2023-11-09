@@ -9,12 +9,12 @@ const FollowUpAdd = ({
   onClose,
   heading,
   subHeading,
-  isShow
+  isShow,
 }: {
   onClose: () => void;
   heading: string;
   subHeading: string;
-  isShow:boolean
+  isShow: boolean;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
     useAddFollowUp(isShow);
@@ -28,13 +28,15 @@ const FollowUpAdd = ({
         <div className="relative flex flex-col px-[52px] py-6">
           <Image
             src={crossIcon}
-            alt="cross_icon"
+            alt="cross_icon" 
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
           <div className="flex flex-col">
             <p className="text-2xl font-normal text-[#000] ">{heading}</p>
-            <p className="text-sm  font-normal text-[#1E1E1E] my-3">{subHeading}</p>
+            <p className="text-sm  font-normal text-[#1E1E1E] my-3">
+              {subHeading}
+            </p>
           </div>
 
           <Form

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/modalsSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 
-export const useAddFollowUp = (isShow:boolean) => {
+export const useAddFollowUp = (isShow: boolean) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -19,7 +19,6 @@ export const useAddFollowUp = (isShow:boolean) => {
     handleSubmit,
     control,
     setError,
-
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
