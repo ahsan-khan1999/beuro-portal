@@ -11,6 +11,11 @@ import { TRowServices } from "@/types/service";
 import { TRowEmployees } from "@/types/employee";
 import { ContentTableRowTypes } from "@/types/content";
 import { TableRowEmailTracker } from "@/types/emailTracker";
+import companyLogo from "@/assets/svgs/companyLogo.svg";
+import { CustomersAdmin } from "@/types/admin/customer";
+import { PaymentsAdmin } from "@/types/admin/payments";
+import { SupportRequestAdmin } from "@/types/admin/support-request";
+import { PlansAdmin } from "@/types/admin/plans";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -617,9 +622,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 2,
@@ -645,9 +648,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 3,
@@ -673,9 +674,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 4,
@@ -701,9 +700,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 5,
@@ -729,9 +726,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 6,
@@ -757,9 +752,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 7,
@@ -785,9 +778,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 8,
@@ -813,9 +804,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 9,
@@ -841,9 +830,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 10,
@@ -869,9 +856,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 11,
@@ -897,9 +882,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   {
     id: 12,
@@ -925,9 +908,7 @@ export const customers: Customers[] = [
       source: "Instagram",
       status: "Open",
       expires: "25/08/2023",
-
-
-    }
+    },
   },
   // Add more rows as needed
 ];
@@ -2632,6 +2613,709 @@ export const MailTracker: TableRowEmailTracker[] = [
   // Add more rows as needed
 ];
 
+export const customersAdmin: CustomersAdmin[] = [
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 2,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+  {
+    id: 1,
+    logo: companyLogo,
+    companyName: "CloudMeshSolutions",
+    customerName: "Muhammad Hamza Naeem",
+    email: "Testuser123@gmail.com",
+    plans: "Diamond",
+    status: "Active",
+    role: "Admin",
+    employsNumber: 5,
+    subscriptionDate: parseCustomDate("25/08/2023"),
+    createdOn: parseCustomDate("25/08/2023"),
+    mobileNumber: "+49 445612 2112",
+    phoneNumber: "+49 445612 2112",
+    addressDetails: {
+      streetNo: "Zweibrückenstraße, 12 ",
+      postCode: 1234,
+      country: "Switzerland",
+    },
+  },
+];
+export const paymentsAdminData: PaymentsAdmin[] = [
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+  {
+    id: 1,
+    companyName: "CloudMeshSolutions",
+    ownerName: "Muhammad Hamza Naeem",
+    plans: "Diamond",
+    pricing: "49 CHF",
+    payments: "Stripe",
+    subscriptionAt: parseCustomDate("15-06-2023"),
+    status: "Active",
+  },
+];
+export const supportRequestData: SupportRequestAdmin[] = [
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+  {
+    id: 1,
+    customerName: "CloudMeshSolutions",
+    email: "Testuser123@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    requestDate: parseCustomDate("15-06-2023"),
+    status: "Solved",
+    name: "Hassam Ud dien",
+    companyName: "Cloud Mesh solutions",
+    mobileNumber: "+49 445612 2112",
+    contractReason:
+      "When is a convenient time for a consultation Loaem ipsum dollar smith emit lore.",
+    message:
+      "When is a convenient time for a consultation Loaem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra cursus congue. Vivamus porta porta venenatis. Donec finibus scelerisque orci non commodo. Nunc euismod orci torci turpis, porta placerat mauris porttitor eget. Praesent rhoncus turpis a massa ullamcorper, at iaculis velit blandit.",
+  },
+];
+export const plansAdminData: PlansAdmin[] = [
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
+  },
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
+  },
+  {
+    id: 3,
+    planName: "Diamond",
+    description: "Lrem Ipsum dolar msith emith dolaer lo..",
+    price: "49 CHF",
+    employs: 5,
+    anuallyDiscount: "20%",
+    requestsNo: 100,
+    accountingReports: "Enable Reports",
+    customizeEmails: "Enable Customization",
+    wateMark: "Enable Watermark",
+    apiFeature: "Enable API",
+  },
+];
+
 export const sideBar: SideBar[] = [
   {
     icon: "Dashboard",
@@ -2643,12 +3327,18 @@ export const sideBar: SideBar[] = [
     icon: "Customers",
     title: "Customers",
     pathname: "/customers",
-    role: [0, 1],
+    role: [1],
+  },
+  {
+    icon: "Customers",
+    title: "Customers",
+    pathname: "/admin/customers",
+    role: [0],
   },
   {
     icon: "Leads",
     title: "Leads",
-    role: [ 1],
+    role: [1],
     inner: [
       {
         title: "Open",
@@ -2660,13 +3350,13 @@ export const sideBar: SideBar[] = [
         title: "Close",
         pathname: "/leads?close",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Expire",
         pathname: "/leads?expire",
 
-        role: [ 1],
+        role: [1],
       },
     ],
   },
@@ -2680,7 +3370,7 @@ export const sideBar: SideBar[] = [
         title: "Accepted",
         pathname: "/offers?accepted",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Rejected",
@@ -2692,7 +3382,7 @@ export const sideBar: SideBar[] = [
         title: "Pending",
         pathname: "/offers?pending",
 
-        role: [ 1],
+        role: [1],
       },
     ],
   },
@@ -2711,7 +3401,7 @@ export const sideBar: SideBar[] = [
         title: "Rejected",
         pathname: "/contract?rejected",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Pending",
@@ -2730,13 +3420,13 @@ export const sideBar: SideBar[] = [
         title: "Accepted",
         pathname: "/invoices?accepted",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Rejected",
         pathname: "/invoices?rejected",
 
-        role: [ 1],
+        role: [1],
       },
       {
         title: "Pending",
@@ -2756,13 +3446,13 @@ export const sideBar: SideBar[] = [
     icon: "Employees",
     title: "Employees",
     pathname: "/employees",
-    role: [ 1],
+    role: [1],
   },
   {
     icon: "Content",
     title: "Content",
     pathname: "/content",
-    role: [ 1],
+    role: [1],
   },
   {
     icon: "MailTracker",
@@ -2775,40 +3465,46 @@ export const sideBar: SideBar[] = [
     icon: "Settings",
     title: "Settings",
     pathname: "/setting",
-    role: [ 1],
+    role: [1],
     className: "",
   },
-  
+
   {
     icon: "plans",
     title: "Plans",
-    pathname: "/plans",
+    pathname: "/admin/plans",
     role: [0],
   },
   {
     icon: "payment",
     title: "Payment",
-    pathname: "/payments",
+    pathname: "/admin/payments",
     role: [0],
   },
   {
     icon: "ContactSupports",
     title: "Contact Supports",
     pathname: "/contact-support",
-    role: [0,1],
+    role: [1],
+    // className:"mb-6 border-b border-[#0000001A]"
+  },
+  {
+    icon: "ContactSupports",
+    title: "Support Request",
+    pathname: "/admin/support-request",
+    role: [0],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {
     icon: "dummy",
-    role:[0],
+    role: [0],
     title: "divider",
   },
   {
-    className:" ",
+    className: " ",
     icon: "setting",
     title: "Settings",
-    pathname: "/admin-settings",
+    pathname: "admin/settings",
     role: [0],
   },
-  
 ];
