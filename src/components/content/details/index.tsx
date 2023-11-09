@@ -10,7 +10,7 @@ const ContentDetails = () => {
     <Layout>
       <ContentCard contentDetail={contentDetail} />
 
-      <div className="flex mt-7">
+      <div className=" mt-7">
         <ContentDetailsData contentDetail={contentDetail} />
       </div>
     </Layout>

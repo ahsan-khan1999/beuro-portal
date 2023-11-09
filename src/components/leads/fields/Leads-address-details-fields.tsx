@@ -4,7 +4,8 @@ import { FormField, GenerateLeadsFormField } from "@/types";
 export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
@@ -83,6 +84,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        rows:4,
         id: "description",
         name: "description",
         placeholder:
@@ -167,6 +169,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        rows:4,
         id: "description",
         name: "description",
         placeholder:
@@ -187,8 +190,9 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
               text: "Cancel",
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick:onClick
             },
           },
           {
@@ -198,7 +202,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
               text: "Save Changes",
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-[152px] h-[50px] text-white hover-bg-none",
+                "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

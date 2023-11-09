@@ -26,10 +26,11 @@ export const useEmployeeAddDetails = (linkSendHandler: Function) => {
   const fields = employeeAddDetailsFormField(
     register,
     loading,
-    linkSendHandler
+    
   );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    linkSendHandler()
   };
   return {
     fields,

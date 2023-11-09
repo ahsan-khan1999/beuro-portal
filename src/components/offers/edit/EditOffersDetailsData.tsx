@@ -6,16 +6,28 @@ import AddressEditDetails from "./AddressEditDetails";
 import AditionalEditDetails from "./AditionalEditDetails";
 import ServiceEditDetails from "./ServiceEditDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
+import { OffersTableRowTypes } from "@/types/offers";
+
+export enum ComponentsType {
+  offerEdit,
+  addressEdit,
+  serviceEdit,
+  additionalEdit,
+}
 
 const EditOffersDetailsData = ({
   shareImgModal,
-  handleImagesUpload
+  handleImagesUpload,
 }: {
   shareImgModal: Function;
-  handleImagesUpload: Function;
+  handleImagesUpload: (
+    item?: OffersTableRowTypes,
+    e?: React.MouseEvent<HTMLImageElement>
+  ) => void;
 }) => {
-  const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+  const [tabType, setTabType] = useState<ComponentsType>(
+    ComponentsType.offerEdit
+  );
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -71,10 +83,10 @@ const EditOffersDetailsData = ({
   ];
 
   const componentsLookUp = {
-    0: <OfferEditDetails />,
-    1: <AddressEditDetails />,
-    2: <ServiceEditDetails />,
-    3: <AditionalEditDetails />,
+    [ComponentsType.offerEdit]: <OfferEditDetails />,
+    [ComponentsType.addressEdit]: <AddressEditDetails />,
+    [ComponentsType.serviceEdit]: <ServiceEditDetails />,
+    [ComponentsType.additionalEdit]: <AditionalEditDetails />,
   };
 
   return (
@@ -84,6 +96,7 @@ const EditOffersDetailsData = ({
           <OfferTabs
             isSelected={tabType === index}
             setTabType={setTabType}
+            isToggle={false}
             tabType={tabType}
             name={item.name}
             index={index + 1}
@@ -93,7 +106,11 @@ const EditOffersDetailsData = ({
         ))}
 
         <div className="mt-[14px]">
-          <OfferEditImages shareImgModal={shareImgModal} handleImagesUpload={handleImagesUpload} tabType={tabType}/>
+          <OfferEditImages
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleImagesUpload}
+            tabType={tabType}
+          />
         </div>
       </div>
 

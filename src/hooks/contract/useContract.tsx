@@ -7,6 +7,8 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 
 const useContract = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -37,7 +39,13 @@ const useContract = () => {
   };
 
   // Function for handling the modal for exiting notes
-  const handleNotes = (item: contractTableTypes) => {
+  const handleNotes = (
+    item: contractTableTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    if (e) {
+      e.stopPropagation();
+    }
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
@@ -47,12 +55,34 @@ const useContract = () => {
     dispatch(updateModalType(ModalType.ADD_NOTE));
   };
 
+  // function for hnadling the add note
+  const handleImageSlider = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+  };
+
+  const handleImageUpload = (
+    item: contractTableTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => {
+    e.stopPropagation();
+    dispatch(updateModalType(ModalType.NONE));
+
+    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
     ),
-    [ModalType.ADD_NOTE]: <AddNewNote onClose={onClose} handleNotes={onClose}/>,
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+    ),
+    [ModalType.UPLOAD_IMAGE]: (
+      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    ),
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -63,6 +93,7 @@ const useContract = () => {
     totalItems,
     handlePageChange,
     itemsPerPage,
+    handleImageUpload,
     handleNotes,
     renderModal,
   };

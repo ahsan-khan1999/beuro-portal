@@ -177,14 +177,34 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[25px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
-        loading,
+        type: Field.div,
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              loading,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

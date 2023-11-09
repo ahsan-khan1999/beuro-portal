@@ -27,6 +27,8 @@ export const useAddServiceDetails = (onHandleNext:Function) => {
   const fields = AddOfferServiceDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    console.log("CLicked!");
+    
     onHandleNext(ComponentsType.additionalAdded)
   };
   return {

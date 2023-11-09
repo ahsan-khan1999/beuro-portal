@@ -30,12 +30,12 @@ const Setting = () => {
     [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
     [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
-  };
+  }; 
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
+ 
   const handleChangePassword = () => {
     dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
   };

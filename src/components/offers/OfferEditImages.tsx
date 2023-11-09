@@ -7,6 +7,7 @@ import leadsDetailsImg3 from "@/assets/pngs/leads_detail_img3.png";
 import leadsDetailsImg4 from "@/assets/pngs/leads_detail_img4.png";
 import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
+import { OffersTableRowTypes } from "@/types/offers";
 
 const OfferEditImages = ({
   shareImgModal,
@@ -14,7 +15,10 @@ const OfferEditImages = ({
   tabType,
 }: {
   shareImgModal: Function;
-  handleImagesUpload: Function;
+  handleImagesUpload: (
+    item?: OffersTableRowTypes,
+    e?: React.MouseEvent<HTMLImageElement>
+  ) => void;
   tabType: number;
 }) => {
   const leadsImgs = [
@@ -54,7 +58,9 @@ const OfferEditImages = ({
           </p>
           <span
             onClick={() => tabType === 1 && handleImagesUpload()}
-            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 ${tabType === 1 ? "cursor-pointer" : "cursor-default"} `}
+            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 ${
+              tabType === 1 ? "cursor-pointer" : "cursor-default"
+            } `}
           >
             Upload
             <Image src={imageUpload} alt="imageUpload" className="ml-2" />

@@ -8,7 +8,7 @@ const EmployeeEditDetails = ({
   routeHandler,
   employeeDetail,
 }: {
-  routeHandler: () => void;
+  routeHandler: Function;
   employeeDetail: TRowEmployees;
 }) => {
   console.log(employeeDetail,"mew");

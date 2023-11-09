@@ -4,11 +4,11 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 
-const AddressAddDetails = ({onHandleNext} : {onHandleNext:Function}) => {
+const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useOfferAddAddressDetails(onHandleNext);
+    useOfferAddAddressDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">

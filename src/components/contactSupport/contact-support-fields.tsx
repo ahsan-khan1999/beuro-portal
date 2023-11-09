@@ -103,6 +103,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary",
+        rows:4,
         id: "message",
         name: "message",
         placeholder: "Type your message here",
@@ -118,7 +119,6 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        onClick: onClick,
         loading,
       },
     },

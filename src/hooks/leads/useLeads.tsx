@@ -34,7 +34,6 @@ const useLeads = () => {
     if (e) {
       e.stopPropagation();
     }
-    dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.EXISTING_NOTES));
   };
 

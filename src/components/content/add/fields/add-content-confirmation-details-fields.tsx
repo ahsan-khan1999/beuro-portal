@@ -2,10 +2,10 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 
 export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
-  (register, loading, control) => {
+  (register, loading, control, onClick) => {
     const formField: FormField[] = [
       {
-        containerClass: "mb-0",
+        containerClass: "mb-0 mt-5",
         label: {
           text: "Confirmation Title",
           htmlFor: "confirmationTitle",
@@ -33,7 +33,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
           className: "!p-4 !border-dark focus:!border-primary ",
           id: "confirmationDescription",
           name: "confirmationDescription",
-          
+
           control,
         },
       },
@@ -65,6 +65,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
         field: {
           type: Field.dragAndDropPdfField,
           id: "attachments",
+          isOpenedFile: false,
           name: "attachments",
           text: "Drop or attach your file here",
           fileSupported: "Files supported: PDF, JPG, PNG, GIF",
@@ -87,6 +88,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
+                onClick:onClick
               },
             },
             {

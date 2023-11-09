@@ -15,7 +15,7 @@ import {
 import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
-import React from "react";
+import React, { ReactNode } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
@@ -48,7 +48,7 @@ export interface InputProps extends BaseFieldProps<Field.input> {
 // textarea added
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
   register: UseFormRegister<FieldValues>;
-  rows?:number;
+  rows?: number;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -69,7 +69,7 @@ export interface CKEditorBoxProps {
   field: ControllerRenderProps<FieldValues, string>;
   trigger?: UseFormTrigger<FieldValues>;
   name?: string;
-  type: string
+  type: string;
 }
 
 export interface CreditCardInputProps
@@ -90,6 +90,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
+  disabled?: boolean;
+  isButton?:boolean,
   svg: string;
   alt: string;
 }
@@ -106,7 +108,6 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
-
 }
 
 export interface SelectBoxProps {
@@ -118,7 +119,6 @@ export interface SelectBoxProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
-
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
@@ -145,6 +145,7 @@ export interface DragAndDropFileFieldProps
 export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
+  isOpenedFile?: boolean;
 }
 
 // interface for the pdf file upload
@@ -198,6 +199,7 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
+  id:string
 }
 
 export interface DivProps {
@@ -350,4 +352,13 @@ export type CreditCardIconsType = Record<CardType, StaticImageData>;
 export interface GetCreditCardIconProps {
   cardType: DetectedCardInfo | null;
   icons: Record<CardType, StaticImageData>;
+}
+
+
+export interface CustomHookFormProps {
+  children: ReactNode;
+  className?: string;
+}
+export interface HookFieldProps {
+  [key: string]: JSX.Element;
 }

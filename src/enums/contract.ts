@@ -3,6 +3,6 @@ export enum ContractEmailPreview {
   email = "email",
   content = "content",
   subject = "subject",
-  description = "descritpion",
+  description = "description",
   fileUpload = "fileUpload",
 }

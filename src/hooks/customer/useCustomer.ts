@@ -9,6 +9,10 @@ export default function useCustomer() {
     const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customers);
     const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    setCurrentPageRows(customers.slice(startIndex, startIndex + itemsPerPage));
+  }, [currentPage]);
 
     const totalItems = customers.length;
     const itemsPerPage = 10;

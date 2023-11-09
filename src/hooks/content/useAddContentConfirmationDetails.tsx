@@ -6,12 +6,17 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddContentConfirmationDetailsFormField } from "@/components/content/add/fields/add-content-confirmation-details-fields";
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
+import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 
-export const useAddContentConfirmationDetails = () => {
+export const useAddContentConfirmationDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+
+  const backHandle = () => {
+    onHandleNext(ComponentsType.addOffer);
+  };
 
   const schema = generateEditConfirmationContentDetailsValidation(translate);
   const {
@@ -23,9 +28,15 @@ export const useAddContentConfirmationDetails = () => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddContentConfirmationDetailsFormField(register, loading, control);
+  const fields = AddContentConfirmationDetailsFormField(
+    register,
+    loading,
+    control,
+    backHandle
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onHandleNext(ComponentsType.addInvoiceContent);
   };
   return {
     fields,

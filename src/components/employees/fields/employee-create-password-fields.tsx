@@ -60,7 +60,6 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
           inputType: "submit",
           className: "mt-[19px] rounded-lg",
           loading,
-          onClick: onClick
         },
       },
     ];

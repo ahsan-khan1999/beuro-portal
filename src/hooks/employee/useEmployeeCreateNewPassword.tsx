@@ -7,13 +7,14 @@ import { resetPassword } from "@/api/slices/authSlice/auth";
 import { EmployeeCreateNewPasswordFieldsFormField } from "@/components/employees/fields/employee-create-password-fields";
 import { generateEmployeeNewPasswordValidationSchema } from "@/validation/employeeSchema";
 
-export default function useEmployeeCreateNewPassword(passwordSetSuccessfully: Function) {
+export default function useEmployeeCreateNewPassword(
+  passwordSetSuccessfully: Function
+) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const schema =
-  generateEmployeeNewPasswordValidationSchema(translate);
+  const schema = generateEmployeeNewPasswordValidationSchema(translate);
 
   const {
     register,
@@ -23,10 +24,11 @@ export default function useEmployeeCreateNewPassword(passwordSetSuccessfully: Fu
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = EmployeeCreateNewPasswordFieldsFormField(register, loading, passwordSetSuccessfully);
+  const fields = EmployeeCreateNewPasswordFieldsFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));
+    passwordSetSuccessfully();
   };
   return {
     error,

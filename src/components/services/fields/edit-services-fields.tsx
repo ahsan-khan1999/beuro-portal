@@ -88,6 +88,7 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
+        rows:4,
         id: "description",
         name: "description",
         placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
@@ -122,7 +123,6 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
               className:
                 "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
-              onClick: onClick,
             },
           },
         ],

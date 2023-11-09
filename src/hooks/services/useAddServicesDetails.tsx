@@ -23,9 +23,10 @@ export const useServicesAddDetails = (handleRoute: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = servicesAddDetailsFormField(register, loading, handleRoute);
+  const fields = servicesAddDetailsFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleRoute()
   };
   return {
     fields,

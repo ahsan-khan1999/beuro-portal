@@ -6,12 +6,17 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddContentInvoiceDetailsFormField } from "@/components/content/add/fields/add-invoice-details-fields";
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
+import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 
-export const useAddContentInvoiceDetails = () => {
+export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+
+  const backHandle = () => {
+    onHandleNext(ComponentsType.addConfirmationContent);
+  };
 
   const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {
@@ -23,9 +28,15 @@ export const useAddContentInvoiceDetails = () => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddContentInvoiceDetailsFormField(register, loading, control);
+  const fields = AddContentInvoiceDetailsFormField(
+    register,
+    loading,
+    control,
+    backHandle
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onHandleNext(ComponentsType.addReceiptContent);
   };
   return {
     fields,
