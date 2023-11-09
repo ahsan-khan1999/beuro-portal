@@ -2,6 +2,7 @@ import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import FormCard from "@/layout/customers/FormCard";
 import { FormDataProps } from "@/types/admin/plans";
+import { useRouter } from "next/router";
 import React, { SetStateAction } from "react";
 
 const PlansForm = ({
@@ -13,6 +14,7 @@ const PlansForm = ({
   errors,
 }: FormDataProps) => {
   const defaultClassName = "mt-[30px]  ";
+  const router = useRouter()
 
   return (
     <FormCard>
@@ -27,7 +29,7 @@ const PlansForm = ({
         <div className="flex items-center space-x-5 mt-8">
           <BaseButton
             buttonText="Back"
-            onClick={() => setIsUpdate(!isUpdate)}
+            onClick={() => router.push("/admin/plans")}
             containerClassName="px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] !h-[50px]"
           />
           <BaseButton
