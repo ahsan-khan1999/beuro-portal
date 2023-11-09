@@ -299,6 +299,14 @@ export type GenerateLeadsFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+export type GeneratePlansFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  isUpdate: boolean,
+  handleUpdateCancel: () => void,
+  control?: Control<FieldValues>,
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

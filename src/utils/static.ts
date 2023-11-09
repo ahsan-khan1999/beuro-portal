@@ -3285,7 +3285,7 @@ export const plansAdminData: PlansAdmin[] = [
     requestsNo: 100,
     accountingReports: "Enable Reports",
     customizeEmails: "Enable Customization",
-    wateMark: "Enable Watermark",
+    waterMark: "Enable Watermark",
     apiFeature: "Enable API",
   },
   {
@@ -3298,7 +3298,7 @@ export const plansAdminData: PlansAdmin[] = [
     requestsNo: 100,
     accountingReports: "Enable Reports",
     customizeEmails: "Enable Customization",
-    wateMark: "Enable Watermark",
+    waterMark: "Enable Watermark",
     apiFeature: "Enable API",
   },
   {
@@ -3311,7 +3311,7 @@ export const plansAdminData: PlansAdmin[] = [
     requestsNo: 100,
     accountingReports: "Enable Reports",
     customizeEmails: "Enable Customization",
-    wateMark: "Enable Watermark",
+    waterMark: "Enable Watermark",
     apiFeature: "Enable API",
   },
 ];
