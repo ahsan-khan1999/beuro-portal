@@ -17,7 +17,10 @@ const ServiceForm = ({
   const defaultClassName = "";
 
   return (
-    <FormCard>
+    <div
+    className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+      !isUpdate ? "border-primary" : "border-none"
+    } w-full h-fit`}>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           Service/Product Details
@@ -45,7 +48,7 @@ const ServiceForm = ({
         errors={errors}
         className={`${defaultClassName}`}
       />
-    </FormCard>
+    </div>
   );
 };
 

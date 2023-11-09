@@ -6,10 +6,15 @@ import React from "react";
 
 const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors } = useServiceDetail(false);
+  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
+    useServiceDetail(false);
 
   return (
-    <FormCard>
+    <div
+      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+        !isUpdate ? "border-primary" : "border-none"
+      } w-full h-fit`}
+    >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           Service/Product Details
@@ -28,7 +33,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-    </FormCard>
+    </div>
   );
 };
 

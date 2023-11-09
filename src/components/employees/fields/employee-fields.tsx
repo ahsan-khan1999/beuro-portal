@@ -1,14 +1,15 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateEmployeeFormField } from "@/types";
 
-export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
+export const employeeDetailsFormField: GenerateEmployeeFormField = (
   register,
   loading,
-  onClick
+  isUpdate,
+  handleUpdateCancel
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mt-0",
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "flex justify-between items-center gap-3",
@@ -22,12 +23,15 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: `!p-4 !border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "employName",
               name: "employName",
               placeholder: "Rahal",
               register,
+              disabled: isUpdate,
             },
           },
           {
@@ -39,13 +43,15 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className:
-                "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
+              className: `!p-4 !!border-borderColor border border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "designation",
               name: "designation",
               placeholder: "Manager",
               register,
+              disabled: isUpdate,
             },
           },
         ],
@@ -67,12 +73,15 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: `!p-4 !border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "email",
               name: "email",
               placeholder: "rahal.ahmad@gmail.com",
               register,
+              disabled: isUpdate,
             },
           },
           {
@@ -84,12 +93,16 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: `!p-4 !border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "number",
               id: "phoneNumber",
               name: "phoneNumber",
               placeholder: "+49 124354 2111",
               register,
+
+              disabled: isUpdate,
             },
           },
           {
@@ -101,12 +114,15 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: `!p-4 !border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "number",
               id: "mobileNumber",
               name: "mobileNumber",
               placeholder: "+49 124354 2111",
               register,
+              disabled: isUpdate,
             },
           },
         ],
@@ -114,14 +130,37 @@ export const employeeAddDetailsFormField: GenerateEmployeeFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
+        type: Field.div,
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Cancel",
+              inputType: "button",
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
+              loading,
+              onClick: handleUpdateCancel,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Save Changes",
+              inputType: "submit",
+              className: `rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

@@ -55,11 +55,6 @@ export const generateEmployeePasswordResetValidationSchema = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [employeePasswordResetFields.yourPassword]: yup
-      .string()
-      .required(translate("validation required"))
-      .min(6, translate("validationMessages.string.min")),
-
     [employeePasswordResetFields.newPassword]: yup
       .string()
       .required(translate("validation required"))

@@ -27,8 +27,8 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
                 !isUpdate && "!border-light"
               } focus:!border-primary `,
               inputType: "text",
-              id: "service",
-              name: "service",
+              id: "serviceTitle",
+              name: "serviceTitle",
               placeholder: "Product Name...",
               register,
               disabled: isUpdate,

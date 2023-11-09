@@ -18,12 +18,14 @@ const DetailsData = ({
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image
-            src={backIcon}
-            alt="backIcon"
-            className="cursor-pointer"
-            onClick={() => router.push("/services")}
-          />
+          {isUpdate && (
+            <Image
+              src={backIcon}
+              alt="backIcon"
+              className="cursor-pointer"
+              onClick={() => router.push("/services")}
+            />
+          )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             {isUpdate ? "Services Details" : "Services/Product Details"}
           </h1>
@@ -49,12 +51,14 @@ const DetailsData = ({
             </span>
           </h3>
         </div>
-        {isUpdate && <h3 className="text-[#4D4D4D] mt-4">
-          Creation Date:
-          <span className="text-[#4B4B4B] font-medium">
-            &nbsp;&nbsp;{serviceDetail?.createdOn?.toLocaleDateString()}
-          </span>
-        </h3>}
+        {isUpdate && (
+          <h3 className="text-[#4D4D4D] mt-4">
+            Creation Date:
+            <span className="text-[#4B4B4B] font-medium">
+              &nbsp;&nbsp;{serviceDetail?.createdOn?.toLocaleDateString()}
+            </span>
+          </h3>
+        )}
       </div>
     </>
   );

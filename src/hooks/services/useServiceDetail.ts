@@ -26,7 +26,7 @@ const useServiceDetail = (stage: boolean) => {
     reset,
     formState: { errors },
   } = useForm<FieldValues>({
-    // resolver: yupResolver<FieldValues>(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {

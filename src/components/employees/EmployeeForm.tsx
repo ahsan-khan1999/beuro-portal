@@ -1,20 +1,22 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import FormCard from "@/layout/customers/FormCard";
-import { CustomerField, Customers, FormDataProps } from "@/types/customer";
+import { FormDataProps } from "@/types/employee";
 import Image from "next/image";
-import React, { SetStateAction } from "react";
+import React from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";
+import editPassword from "@/assets/svgs/edit-password.svg";
 
-const CustomerForm = ({
+const EmployeeForm = ({
   isUpdate,
   setIsUpdate,
   fields,
   onSubmit,
   handleSubmit,
   errors,
+  handlePasswordReset,
 }: FormDataProps) => {
-  const defaultClassName = "mt-[30px]";
+  const defaultClassName = "";
 
   return (
     <div
@@ -23,15 +25,24 @@ const CustomerForm = ({
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">Employee Details</h2>
         {isUpdate ? (
-          <BaseButton
-            buttonText="Edit Details"
-            onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
-          >
-            <Image src={editInfo} alt="editInfo" />
-          </BaseButton>
+          <div className="flex gap-x-5">
+            <BaseButton
+              buttonText="Edit Password"
+              onClick={() => handlePasswordReset()}
+              containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4  w-fit whitespace-nowrap"
+            >
+              <Image src={editPassword} alt="editPassword" />
+            </BaseButton>
+            <BaseButton
+              buttonText="Edit Details"
+              onClick={() => setIsUpdate(!isUpdate)}
+              containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            >
+              <Image src={editInfo} alt="editInfo" />
+            </BaseButton>
+          </div>
         ) : (
           <BaseButton
             buttonText="Cancel"
@@ -51,4 +62,4 @@ const CustomerForm = ({
   );
 };
 
-export default CustomerForm;
+export default EmployeeForm;
