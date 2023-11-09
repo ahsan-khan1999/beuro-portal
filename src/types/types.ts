@@ -293,8 +293,8 @@ export type GenerateOffersFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  onClick: () => void,
+  count?:number
 ) => FormField[];
 
 

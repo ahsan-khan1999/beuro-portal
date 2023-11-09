@@ -24,7 +24,7 @@ export const useOfferAditionalDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddOfferAdditionalDetailsFormField(register, loading, control);
+  const fields = AddOfferAdditionalDetailsFormField(register, loading, control,() => console.log(""));
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onHandleNext(ComponentsType.additionalAdded);

@@ -7,17 +7,18 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddDateFormField, AddOfferDetailsFormField } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { FormField } from "@/types";
 import { useFormFields } from "@/base-components/form/hook";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
-  const [allFields, setAllFields] = useState<FormField[]>([])
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  let [dateCount, setDateCount] = useState<number>(1)
 
+  const { loading, error } = useAppSelector((state) => state.auth);
+  const count = useRef(1)
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -28,29 +29,27 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  
   const handleAddDateField = () => {
-    const dateFields = AddDateFormField(register, loading, control);
-    setAllFields([...allFields,...dateFields])
+    setDateCount(dateCount + 1)
   }
-  const offerFields = AddOfferDetailsFormField(register, loading, control,handleAddDateField);
+  const offerFields = AddOfferDetailsFormField(register, loading, control, () => console.log("")
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onHandleNext(ComponentsType.addressAdded);
   };
-  const fields = [...offerFields,...allFields]
-  const {
-    Form,
-    fields: {
-     
-    },
-  } = useFormFields({
-    formFields: fields,
-    errors,
-    handleSubmit,
-    onSubmit,
-  });
+
+  const formFields = useMemo((): FormField[] => {
+    const dynamicFormFields = [];
+    dynamicFormFields.push(
+      ...AddDateFormField(register, loading, control, handleAddDateField, dateCount)
+    );
+    return dynamicFormFields;
+  }, [dateCount]);
+  const fields = [...offerFields, ...formFields]
+
+
   return {
     fields,
     onSubmit,

@@ -91,7 +91,7 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
   disabled?: boolean;
-  isButton?:boolean,
+  isButton?: boolean,
   svg: string;
   alt: string;
 }
@@ -182,11 +182,20 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   success?: boolean;
   disabled?: boolean;
 }
-
+export interface MultiDateProps extends BaseFieldProps<Field.phone> {
+  value?: string;
+  control?: Control<FieldValues>;
+  watch?: UseFormWatch<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  success?: boolean;
+  disabled?: boolean;
+}
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;
   value?: string;
   className?: string;
+  remove?: string;
+  onRemove?: () => void
 }
 
 export interface SpanProps {
@@ -199,7 +208,7 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
-  id:string
+  id: string
 }
 
 export interface DivProps {
@@ -304,6 +313,8 @@ export interface FieldComponents {
   button: React.FC<ButtonProps>;
   // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
+  dateRange: React.FC<MultiDateProps>;
+
 }
 
 export interface FormProps {

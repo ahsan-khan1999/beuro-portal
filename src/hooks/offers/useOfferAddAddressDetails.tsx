@@ -24,7 +24,7 @@ export const useOfferAddAddressDetails = (onHandleNext:Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddOffAddressDetailsFormField(register, loading, control);
+  const fields = AddOffAddressDetailsFormField(register, loading, control,() => console.log(""));
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onHandleNext(ComponentsType.serviceAdded)
