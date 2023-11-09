@@ -4,29 +4,29 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { ContactSupportFormField } from "@/components/contactSupport/contact-support-fields";
-import { generateContactSupportValidation } from "@/validation/contactSchema";
+import { generateAddFollowUpValidation } from "@/validation/modalsSchema";
+import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 
-export const userContactSupport = (followUpHandler: Function) => {
+export const useAddFollowUp = (isShow:boolean) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateContactSupportValidation(translate);
+  const schema = generateAddFollowUpValidation(translate);
   const {
     register,
     handleSubmit,
     control,
     setError,
+
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = ContactSupportFormField(register, loading, control);
+  const fields = AddFollowUpFormField(register, loading, control, isShow);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    followUpHandler();
   };
   return {
     fields,
