@@ -92,6 +92,7 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   placeholder?: string;
   disabled?: boolean;
   isButton?:boolean,
+  onClick?:Function,
   svg: string;
   alt: string;
 }

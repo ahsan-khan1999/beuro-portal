@@ -2,10 +2,10 @@ import { Form } from "@/base-components/form/form";
 import { useChangeMailSetting } from "@/hooks/setting/useChangeMailSetting";
 import React from "react";
 
-const MailSettingForm = () => {
-  const defaultClassName = "mt-[30px]  ";
+const MailSettingForm = ({handleCreation} : {handleCreation:Function}) => {
+  const defaultClassName = " ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useChangeMailSetting();
+  useChangeMailSetting(handleCreation);
   return (
     <>
       <Form

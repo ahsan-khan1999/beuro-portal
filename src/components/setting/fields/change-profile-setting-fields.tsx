@@ -4,11 +4,12 @@ import { FormField, GenerateAccountSettingFormField } from "@/types";
 export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-4",
+      containerClass: "mb-4 mt-6",
       field: {
         type: Field.div,
         className: "flex gap-x-4 items-center relative",
@@ -24,7 +25,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.span,
               containerClassName:
-                "absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+                "absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", 
             },
           },
         ],
@@ -391,7 +392,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.span,
               containerClassName:
-                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", 
             },
           },
         ],
@@ -417,6 +418,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
         </svg>
             `,
         alt: "password",
+        onClick:onClick,
         register,
       },
     },
@@ -444,7 +446,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               text: "Save Changes",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
+                "rounded-lg p-4 w-fit h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

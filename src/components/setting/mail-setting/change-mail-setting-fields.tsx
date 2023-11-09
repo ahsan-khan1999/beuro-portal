@@ -8,6 +8,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "grid grid-cols-2 gap-x-[60px] ",
@@ -205,7 +206,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
         text: "Save Setting",
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

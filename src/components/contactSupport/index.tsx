@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import RequestSubmitted from "@/base-components/ui/modals1/RequestSubmitted";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
 export default function ContactSupport() {
   const dispatch = useDispatch();
@@ -15,8 +16,10 @@ export default function ContactSupport() {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.REQUEST_SUBMITTED]: <RequestSubmitted onClose={onClose} />,
+  const router = useRouter();
+
+  const route = () => {
+    router.push("/dashboard");
   };
 
   const renderModal = () => {
@@ -24,7 +27,18 @@ export default function ContactSupport() {
   };
 
   const requestSubmitHandler = () => {
-    dispatch(updateModalType(ModalType.REQUEST_SUBMITTED));
+    dispatch(updateModalType(ModalType.CREATION));
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Your Request has been sent"
+        subHeading="Thanks for sending your request to Buro we are happy to have you. "
+        route={route}
+      />
+    ),
   };
 
   return (

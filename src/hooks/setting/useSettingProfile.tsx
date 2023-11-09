@@ -7,11 +7,12 @@ import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateProfileSettingValidation } from "@/validation/settingSchema";
 import { changeProfileSettingFormField } from "@/components/setting/fields/change-profile-setting-fields";
 
-export default function useSettingProfile() {
+export default function useSettingProfile(handleChangePassword:Function) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+
   const schema = generateProfileSettingValidation(translate);
 
   const {
@@ -23,7 +24,7 @@ export default function useSettingProfile() {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = changeProfileSettingFormField(register, loading, control);
+  const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));

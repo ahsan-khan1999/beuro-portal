@@ -174,8 +174,8 @@ export type GenerateAccountSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // change mail setting formfield
@@ -191,8 +191,8 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateEditPaymentDetailsFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
 ) => FormField[];
 
 // add reason formfield

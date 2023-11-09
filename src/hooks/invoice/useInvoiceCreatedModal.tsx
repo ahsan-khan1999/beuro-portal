@@ -23,7 +23,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
-  const markItRecuring = watch("markItRecuring")
+  const markItRecuring = watch("markItRecuring");
   const fields = CreateInvoiceFormField(
     register,
     loading,
@@ -32,8 +32,8 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // dispatch(resetPassword({ router, data }));
-    invoiceCreated()
+    dispatch(resetPassword({ router, data }));
+    invoiceCreated();
   };
   return {
     error,

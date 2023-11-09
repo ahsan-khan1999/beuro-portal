@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateChangeMailSettingValidationSchema } from "@/validation/settingSchema";
 import { ChangeMailSettingFormField } from "@/components/setting/mail-setting/change-mail-setting-fields";
 
-export const useChangeMailSetting = () => {
+export const useChangeMailSetting = (handleCreation: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -26,6 +26,7 @@ export const useChangeMailSetting = () => {
   const fields = ChangeMailSettingFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleCreation();
   };
   return {
     fields,

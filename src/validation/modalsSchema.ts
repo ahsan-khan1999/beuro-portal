@@ -21,7 +21,7 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
 
     [ChangePasswordField.confirmNewPassword]: yup
       .string()
-      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      // .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
       .required(translate("validationMessages.required")),
   });
 };

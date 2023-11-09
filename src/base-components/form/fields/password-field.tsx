@@ -13,6 +13,7 @@ export const PasswordField = ({
   placeholder,
   disabled,
   isButton,
+  onClick,
   className,
   svg,
   alt,
@@ -54,8 +55,10 @@ export const PasswordField = ({
       />
 
       {isButton ? (
-        <span className="absolut right-2 z-40">
-          <h1>MAteen</h1> 
+        <span onClick={() => {
+          onClick && onClick();
+        }} className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default">
+         Change
         </span>
       ) : (
         <Image

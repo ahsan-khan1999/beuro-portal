@@ -5,14 +5,14 @@ import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import useAddTax from "@/hooks/modals/useAddTax";
 
-const AddTax = ({ onClose }: { onClose: () => void }) => {
-  const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useAddTax();
+const AddTax = ({ onClose, heading }: { onClose: () => void; heading:string}) => {
+  const defaultClassName = "";
+  const { fields, onSubmit, handleSubmit, errors, error } = useAddTax(onClose);
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-auto"
+        containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[38px] pb-[40px] pt-[25px]">
           <Image
@@ -22,7 +22,7 @@ const AddTax = ({ onClose }: { onClose: () => void }) => {
             onClick={onClose}
           />
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[50px]">
-            Add New Tax
+            {heading}
           </p>
 
           <Form

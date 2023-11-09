@@ -48,7 +48,7 @@ export const addTaxFormField: GenerateAddTaxFormField = (
         type: Field.button,
         text: "Add Tax",
         inputType: "submit",
-        className: "rounded-lg  text-white ",
+        className: "rounded-lg  text-white hover:bg-none ",
         loading,
       },
     },

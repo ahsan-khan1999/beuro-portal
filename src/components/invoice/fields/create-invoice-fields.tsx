@@ -187,6 +187,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         type: Field.button,
         text: "Create Invoice",
         inputType: "submit",
+        className:"hover:bg-none",
         loading,
       },
     },

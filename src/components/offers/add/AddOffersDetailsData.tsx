@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import OfferCreated from "@/base-components/ui/modals1/OfferCreated";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
 export enum ComponentsType {
   customerAdded,
@@ -84,11 +85,24 @@ const EditOffersDetailsData = () => {
   };
 
   const offerCreatedHandler = () => {
-    dispatch(updateModalType(ModalType.LEAD_CREATED));
+    dispatch(updateModalType(ModalType.CREATION));
+  };
+
+  const router = useRouter();
+
+  const route = () => {
+    router.push("/offers");
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.LEAD_CREATED]: <OfferCreated onClose={onClose} />,
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Offer Created Successful "
+        subHeading="Thanks for creating offer we are happy to have you. "
+        route={route}
+      />
+    ),
   };
 
   const renderModal = () => {

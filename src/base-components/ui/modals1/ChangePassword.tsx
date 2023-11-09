@@ -6,14 +6,14 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import useChangePassword from "@/hooks/modals/useChangePassword";
 
 const ChangePassword = ({ onClose }: { onClose: () => void }) => {
-  const defaultClassName = "mt-0  ";
+  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error } =
-  useChangePassword();
+  useChangePassword(onClose);
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-auto"
+        containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[38px] pb-[40px] pt-[25px]">
           <Image src={crossIcon} alt="crossIcon" className="absolute right-5 top-5 cursor-pointer" onClick={onClose}/>

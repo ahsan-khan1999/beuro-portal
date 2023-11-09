@@ -7,13 +7,12 @@ import { resetPassword } from "@/api/slices/authSlice/auth";
 import { ChangePasswordFormField } from "@/components/setting/fields/change-password-fields";
 import { generatePasswordChangeValidationSchema } from "@/validation/modalsSchema";
 
-export default function useChangePassword() {
+export default function useChangePassword(onClose: Function) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const schema =
-  generatePasswordChangeValidationSchema(translate);
+  const schema = generatePasswordChangeValidationSchema(translate);
 
   const {
     register,
@@ -27,6 +26,7 @@ export default function useChangePassword() {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));
+    onClose();
   };
   return {
     error,
