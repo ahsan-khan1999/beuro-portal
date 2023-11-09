@@ -1,8 +1,8 @@
-import Setting from "@/components/setting";
+import AdminSettings from "@/components/admin/setting";
 import React from "react";
 
 const index = () => {
-  return <Setting />;
+  return <AdminSettings />;
 };
 
 export default index;

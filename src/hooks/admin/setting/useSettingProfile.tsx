@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "../useRedux";
+import { useAppDispatch, useAppSelector } from "../../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
