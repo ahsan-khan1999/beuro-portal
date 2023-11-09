@@ -18,7 +18,7 @@ export default function useEditPayment(onClose: Function) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 

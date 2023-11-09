@@ -26,21 +26,15 @@ export default function useCustomerDetail(stage: boolean) {
     control,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
     if (typeof Number(id) == "number") {
       let customer = customers.filter((item) => item.id == Number(id))[0]
       if (customer) {
-        //@ts-expect-error
-        reset({
-          ...customer,
-          ["address.country"]: customer.address.country,
-          ["address.streetNo"]: customer.address.streetNo,
-          ["address.postCode"]: customer.address.postCode,
-        })
+        reset(customer)
       }
       setCustomerDetail(customer);
     }
@@ -49,9 +43,7 @@ export default function useCustomerDetail(stage: boolean) {
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate)
   }
-
-  //@ts-expect-error
-  const fields = customerDetailsFormField(register, loading, isUpdate, handleUpdateCancel,control);
+  const fields = customerDetailsFormField(register, loading, isUpdate, handleUpdateCancel, control);
 
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

@@ -19,8 +19,8 @@ export const useLoginForm = () => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = generateLoginFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

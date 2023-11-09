@@ -26,7 +26,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = EditReceiptContentDetailsFormField(register, loading, control, handleBack);

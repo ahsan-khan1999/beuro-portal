@@ -38,7 +38,7 @@ export const svgs = {
   dummy: <></>,
 };
 const SideBar = () => {
-  const userRole = 1
+  const userRole = 1;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   return (
@@ -48,25 +48,29 @@ const SideBar = () => {
           {sideBar.map((item, index) => {
             return (
               <div key={index}>
-                {item.title == "divider" ? <div className="my-6 border-b border-[#0000001A]" /> : !item.inner && item.role.includes(userRole) ? (
+                {item.title == "divider" ? (
+                  <div className="my-6 border-b border-[#0000001A]" />
+                ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                    className={`flex items-center px-3 py-2 w-full ${
+                      router.pathname === item.pathname &&
                       "bg-primary rounded-lg"
-                      } ${item.className}`}
+                    } ${item.className}`}
                   >
-
                     <span
-                      className={`${router.pathname === item.pathname && "sidebar-svg"
-                        } mr-2 `}
+                      className={`${
+                        router.pathname === item.pathname && "sidebar-svg"
+                      } mr-2 `}
                     >
                       {item.icon && svgs[item.icon]}
                     </span>
                     <span
-                      className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
-                        ? "text-white"
-                        : " text-[#4B4B4B]"
-                        }`}
+                      className={` font-medium tracking-[0.5px] ${
+                        router.pathname === item.pathname
+                          ? "text-white"
+                          : " text-[#4B4B4B]"
+                      }`}
                     >
                       {item.title}
                     </span>
@@ -77,23 +81,25 @@ const SideBar = () => {
                       onClick={() => {
                         isOpen == index ? setIsOpen(null) : setIsOpen(index);
                       }}
-                      className={`flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                      className={`flex  justify-between items-center px-3 py-2 w-full ${
+                        router.pathname === item.pathname &&
                         "bg-primary rounded-lg"
-                        }`}
+                      }`}
                     >
                       <div className="flex items-center">
-
                         <span
-                          className={`${router.pathname === item.pathname && "sidebar-svg"
-                            } mr-2 `}
+                          className={`${
+                            router.pathname === item.pathname && "sidebar-svg"
+                          } mr-2 `}
                         >
                           {item.icon && svgs[item.icon]}
                         </span>
                         <span
-                          className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
-                            ? "text-white"
-                            : " text-[#4B4B4B]"
-                            }`}
+                          className={` font-medium tracking-[0.5px] ${
+                            router.pathname === item.pathname
+                              ? "text-white"
+                              : " text-[#4B4B4B]"
+                          }`}
                         >
                           {item.title}
                         </span>
@@ -101,7 +107,8 @@ const SideBar = () => {
                       <div
                         className={`
                           cursor-pointer  ${isOpen == index ? "rotate-180" : ""}
-                          ${router.pathname === item.pathname && "sidebar-svg"
+                          ${
+                            router.pathname === item.pathname && "sidebar-svg"
                           }`}
                       >
                         <svg
@@ -120,12 +127,15 @@ const SideBar = () => {
                       </div>
                     </button>
                     {isOpen == index &&
-                      item.inner && item.inner.map((it, ind) => {
+                      item.inner &&
+                      item.inner.map((it, ind) => {
                         return (
                           <div className=" mt-3 ml-8 px-3" key={ind}>
-                            <button className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
-                              onClick={() => it.pathname && router.push(it.pathname)}
-
+                            <button
+                              className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
+                              onClick={() =>
+                                it.pathname && router.push(it.pathname)
+                              }
                             >
                               {it.title}
                             </button>
@@ -134,7 +144,6 @@ const SideBar = () => {
                       })}
                   </>
                 ) : null}
-
               </div>
             );
           })}

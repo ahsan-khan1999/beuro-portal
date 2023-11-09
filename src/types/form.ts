@@ -15,7 +15,7 @@ import {
 import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
-import React from "react";
+import React, { ReactNode } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
@@ -200,6 +200,7 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
+  id:string
 }
 
 export interface DivProps {
@@ -352,4 +353,13 @@ export type CreditCardIconsType = Record<CardType, StaticImageData>;
 export interface GetCreditCardIconProps {
   cardType: DetectedCardInfo | null;
   icons: Record<CardType, StaticImageData>;
+}
+
+
+export interface CustomHookFormProps {
+  children: ReactNode;
+  className?: string;
+}
+export interface HookFieldProps {
+  [key: string]: JSX.Element;
 }

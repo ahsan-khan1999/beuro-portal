@@ -4,6 +4,7 @@ import {
   FieldComponents,
   FieldProps,
   FieldType,
+  FormField,
   GetCreditCardIconProps,
 } from "@/types";
 import {
@@ -143,3 +144,20 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
 //     />
 //   );
 // };
+
+
+export const renderField = (
+  fieldData: FormField,
+  error: string,
+  errors?: Record<string, any>
+) => {
+  if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
+    return null;
+  }
+  return getTypedFieldComponent(
+    fieldData?.field?.type,
+    fieldData?.field,
+    error,
+    errors
+  );
+};

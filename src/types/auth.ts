@@ -11,7 +11,6 @@ import {
 } from "@/enums/auth";
 import { NextRouter } from "next/router";
 import { Dispatch } from "react";
-import { CommercialSellerType, UserNotifications } from "./userAccount";
 import { FormField } from "./form";
 import {
   FieldValues,
@@ -19,7 +18,7 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 
-export interface User extends CommercialSellerType {
+export interface User  {
   [UserResponse.id]: string;
   [UserResponse.role]: string;
   [UserResponse.email]: string;
@@ -38,7 +37,6 @@ export interface User extends CommercialSellerType {
   [UserResponse.oAuthIds]: UserOAuth;
   [UserResponse._isSocialLogin]: boolean;
   [UserResponse.isCommercialSellerRequested]: boolean;
-  [UserResponse.notificationSettings]: UserNotifications;
 }
 // [AddressType.primary]:{}
 export interface UserAddress {

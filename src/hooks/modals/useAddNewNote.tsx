@@ -21,7 +21,7 @@ export const useAddNewNote = (handleNotes: Function) => {
     setError,
 
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddNoteFormField(register, loading, control);

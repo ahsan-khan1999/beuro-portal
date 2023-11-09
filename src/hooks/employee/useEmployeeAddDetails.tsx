@@ -20,7 +20,7 @@ export const useEmployeeAddDetails = (linkSendHandler: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = employeeAddDetailsFormField(

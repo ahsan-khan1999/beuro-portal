@@ -26,7 +26,7 @@ export const useEmployeeEditDetails = (
     setError,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = employeeEditDetailsFormField(register, loading);

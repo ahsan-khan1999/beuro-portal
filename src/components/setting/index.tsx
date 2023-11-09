@@ -29,7 +29,7 @@ const Setting = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
+ 
   const handleChangePassword = () => {
     dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
   };

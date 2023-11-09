@@ -20,7 +20,7 @@ export default function useSettingProfile(handleChangePassword:Function) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 

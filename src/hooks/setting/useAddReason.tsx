@@ -18,7 +18,7 @@ export default function useAddReason() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 

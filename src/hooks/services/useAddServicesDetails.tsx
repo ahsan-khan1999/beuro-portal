@@ -20,7 +20,7 @@ export const useServicesAddDetails = (handleRoute: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = servicesAddDetailsFormField(register, loading);

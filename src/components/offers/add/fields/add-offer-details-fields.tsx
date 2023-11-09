@@ -4,7 +4,8 @@ import { FormField, GenerateOffersFormField } from "@/types";
 export const AddOfferDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
-  control
+  control,
+  OnClick
 ) => {
   const formField: FormField[] = [
     {
@@ -268,7 +269,6 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
         ],
       },
     },
-
     {
       containerClass: "mt-5",
       field: {
@@ -292,18 +292,14 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
             },
           },
           {
-            containerClass: "mb-0",
-            label: {
-              text: "Date",
-              htmlFor: "date",
-              className: "mb-[10px]",
-            },
+            containerClass: "mb-0 mt-[30px]",
             field: {
-              type: Field.date,
-              className: "!p-4 !border-dark focus:!border-primary",
-              id: "date",
-              name: "date",
-              register,
+              type: Field.button,
+              text: "Add",
+              inputType: "button",
+              className:
+                "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
+              onClick: OnClick
             },
           },
         ],
@@ -323,5 +319,43 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
     },
   ];
 
+  return formField;
+};
+
+
+export const AddDateFormField: GenerateOffersFormField = (
+  register,
+  loading,
+  control,
+  OnClick
+) => {
+  const formField: FormField[] = [
+    {
+      containerClass: "mt-5",
+      field: {
+        type: Field.div,
+
+        className: "grid grid-cols-3 gap-x-3 ",
+        children: [
+          {
+            containerClass: "mb-0",
+            label: {
+              text: "Date",
+              htmlFor: "date",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.date,
+              className: "!p-4 !border-dark focus:!border-primary",
+              id: "date",
+              name: "date",
+              register,
+            },
+          },
+        
+        ],
+      },
+    },
+  ];
   return formField;
 };

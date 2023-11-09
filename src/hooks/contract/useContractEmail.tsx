@@ -23,7 +23,7 @@ export const useContractEmail = (
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ContractEmailPreviewFormField(

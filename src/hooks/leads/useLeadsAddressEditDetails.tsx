@@ -25,7 +25,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = LeadsAddressDetailsFormField(

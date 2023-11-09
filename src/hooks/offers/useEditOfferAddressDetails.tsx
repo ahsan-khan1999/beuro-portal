@@ -20,7 +20,7 @@ export const useEditOfferAddressDetails = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = OfferAddressDetailsFormField(register, loading, control);

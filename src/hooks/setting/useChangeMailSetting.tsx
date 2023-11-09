@@ -20,10 +20,10 @@ export const useChangeMailSetting = (handleCreation: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = ChangeMailSettingFormField(register, loading, control);
+  const fields = ChangeMailSettingFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     handleCreation();

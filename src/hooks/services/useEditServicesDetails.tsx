@@ -26,7 +26,7 @@ export const useEditServicesDetails = (
     setError,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = servicesEditDetailsFormField(register, loading, );
