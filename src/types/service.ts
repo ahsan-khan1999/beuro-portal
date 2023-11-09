@@ -1,5 +1,13 @@
+import { SetStateAction } from "react";
+import { FormField } from ".";
+import {
+  FieldValues,
+  SubmitHandler,
+  UseFormHandleSubmit,
+} from "react-hook-form";
+
 // Interface for the services table
-export interface TRowServices {
+export interface Service {
   id: string;
   service: string;
   unit?: string;
@@ -11,4 +19,14 @@ export interface TRowServices {
   };
   description: string;
   action: "edit";
+}
+
+export interface FormDataProps {
+  serviceDetail: Service;
+  isUpdate: boolean;
+  setIsUpdate: SetStateAction<any>;
+  fields: FormField[];
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  errors?: Record<string, any>;
+  onSubmit: SubmitHandler<FieldValues>;
 }

@@ -20,9 +20,11 @@ const AddCustomer = () => {
       icon:""
     },
   ];
+  
   const componentLookup: ComponentLookupType = {
     "Customer Details": <AddCustomerForm handleCancel={handleCancel} />
   }
+
   return (
     <Layout>
       <h1 className="text-[#222B45] text-xl mb-5">Add new Customer </h1>

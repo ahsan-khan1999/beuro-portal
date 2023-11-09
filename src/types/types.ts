@@ -265,7 +265,8 @@ export type GenerateNotesFormField = (
 export type GenerateServicesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  onClick?: Function,
+  isUpdate: boolean,
+  handleUpdateCancel: () => void,
   trigger?: UseFormTrigger<FieldValues>,
 ) => FormField[];
 

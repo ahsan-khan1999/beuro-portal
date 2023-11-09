@@ -4,11 +4,15 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { TRowServices } from "@/types/service";
+import { Service } from "@/types/service";
 
-const DetailsData = ({ serviceDetail }: { serviceDetail: TRowServices }) => {
-  console.log(serviceDetail, "serviceDetails");
-
+const DetailsData = ({
+  serviceDetail,
+  isUpdate,
+}: {
+  serviceDetail: Service;
+  isUpdate: boolean;
+}) => {
   const router = useRouter();
   return (
     <>
@@ -21,7 +25,7 @@ const DetailsData = ({ serviceDetail }: { serviceDetail: TRowServices }) => {
             onClick={() => router.push("/services")}
           />
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            Services/Product Details
+            {isUpdate ? "Services Details" : "Services/Product Details"}
           </h1>
         </div>
         <div className="flex items-center gap-5">
@@ -45,12 +49,12 @@ const DetailsData = ({ serviceDetail }: { serviceDetail: TRowServices }) => {
             </span>
           </h3>
         </div>
-        <h3 className="text-[#4D4D4D] mt-4">
+        {isUpdate && <h3 className="text-[#4D4D4D] mt-4">
           Creation Date:
           <span className="text-[#4B4B4B] font-medium">
             &nbsp;&nbsp;{serviceDetail?.createdOn?.toLocaleDateString()}
           </span>
-        </h3>
+        </h3>}
       </div>
     </>
   );
