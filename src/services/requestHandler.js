@@ -24,7 +24,20 @@ const SERVICE_URLS = {
   changePassword: "/profile/update-profile/password",
   comericalSeller: "/profile/commercial-seller-request",
   idVarificationReq: "/profile/id-verification-request",
-  profileNotifications: "/profile/notification-settings"
+  profileNotifications: "/profile/notification-settings",
+  customer: "/customer",
+  lead: "/lead",
+  content: "/content",
+  offer: "/offer",
+  contract: "/contract",
+  company: "/company",
+  invoice: "/invoice",
+  contactSupport: "/contact-support",
+  employee: "/employee",
+  service: "/service",
+  offerService: "/offer-service",
+
+
 };
 
 const login = (data) =>
@@ -75,6 +88,132 @@ const idVarificationRequest = (data) =>
   post(SERVICE_URLS.idVarificationReq, data, { feature: featureConstants.login });
 const profileNotification = (data) =>
   put(SERVICE_URLS.profileNotifications, data, { feature: featureConstants.login });
+
+// new Req method
+
+const readCustomer = (params) =>
+  get(SERVICE_URLS.customer, params, { feature: featureConstants.login }, { detail: false });
+
+const readCustomerDetail = (params) =>
+  get(SERVICE_URLS.customer, params, { feature: featureConstants.login }, { detail: true });
+
+const createCustomer = (data) =>
+  post(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+
+const updateCustomer = (data) =>
+  put(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+const deleteCustomer = (data) =>
+  del(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+const readLead = (data) =>
+  get(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+
+const createLead = (data) =>
+  post(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+
+const updateLead = (data) =>
+  put(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+const deleteLead = (data) =>
+  del(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+
+const readContent = (data) =>
+  get(SERVICE_URLS.content, data, { feature: featureConstants.login });
+
+const createContent = (data) =>
+  post(SERVICE_URLS.content, data, { feature: featureConstants.login });
+
+const updateContent = (data) =>
+  put(SERVICE_URLS.content, data, { feature: featureConstants.login });
+const deleteContent = (data) =>
+  del(SERVICE_URLS.content, data, { feature: featureConstants.login });
+
+const readOffer = (data) =>
+  get(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+
+const createOffer = (data) =>
+  post(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+
+const updateOffer = (data) =>
+  put(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+const deleteOffer = (data) =>
+  del(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+
+const readContract = (data) =>
+  get(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
+const createContract = (data) =>
+  post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
+const updateContract = (data) =>
+  put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+const deleteContract = (data) =>
+  del(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
+const readCompany = (data) =>
+  get(SERVICE_URLS.company, data, { feature: featureConstants.login });
+
+const createCompany = (data) =>
+  post(SERVICE_URLS.company, data, { feature: featureConstants.login });
+
+const updateCompany = (data) =>
+  put(SERVICE_URLS.company, data, { feature: featureConstants.login });
+const deleteCompany = (data) =>
+  del(SERVICE_URLS.company, data, { feature: featureConstants.login });
+
+const readInvoice = (data) =>
+  get(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+
+const createInvoice = (data) =>
+  post(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+
+const updateInvoice = (data) =>
+  put(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+const deleteInvoice = (data) =>
+  del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+
+const readContactSupport = (data) =>
+  get(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+
+const createContactSupport = (data) =>
+  post(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+
+const updateContactSupport = (data) =>
+  put(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+const deleteContactSupport = (data) =>
+  del(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+
+const readEmployee = (data) =>
+  get(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+
+const createEmployee = (data) =>
+  post(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+
+const updateEmployee = (data) =>
+  put(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+const deleteEmployee = (data) =>
+  del(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+
+const readService = (data) =>
+  get(SERVICE_URLS.service, data, { feature: featureConstants.login });
+
+const createService = (data) =>
+  post(SERVICE_URLS.service, data, { feature: featureConstants.login });
+
+const updateService = (data) =>
+  put(SERVICE_URLS.service, data, { feature: featureConstants.login });
+const deleteService = (data) =>
+  del(SERVICE_URLS.service, data, { feature: featureConstants.login });
+
+const readOfferService = (data) =>
+  get(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
+
+const createOfferService = (data) =>
+  post(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
+
+const updateOfferService = (data) =>
+  put(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
+const deleteOfferService = (data) =>
+  del(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
+
 const apiServices = {
   login,
   singUp,
@@ -98,6 +237,51 @@ const apiServices = {
   verifyPhone,
   commercialSellerRequest,
   idVarificationRequest,
-  profileNotification
+  profileNotification,
+  readCustomer,
+  createCustomer,
+  updateCustomer,
+  deleteCustomer,
+  readLead,
+  createLead,
+  updateLead,
+  deleteLead,
+  readContent,
+  createContent,
+  updateContent,
+  deleteContent,
+  readOffer,
+  createOffer,
+  updateOffer,
+  deleteOffer,
+  readContract,
+  createContract,
+  updateContract,
+  deleteContract,
+  readCompany,
+  createCompany,
+  updateCompany,
+  deleteCompany,
+  readInvoice,
+  createInvoice,
+  updateInvoice,
+  deleteInvoice,
+  readContactSupport,
+  createContactSupport,
+  updateContactSupport,
+  deleteContactSupport,
+  readEmployee,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+  readService,
+  createService,
+  updateService,
+  deleteService,
+  readOfferService,
+  createOfferService,
+  updateOfferService,
+  deleteOfferService,
+  readCustomerDetail
 };
 export default apiServices;

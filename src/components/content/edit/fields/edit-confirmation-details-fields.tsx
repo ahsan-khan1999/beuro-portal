@@ -5,7 +5,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
   (register, loading, control, onClick) => {
     const formField: FormField[] = [
       {
-        containerClass: "mb-0",
+        containerClass: "mb-0 mt-5",
         label: {
           text: "Confirmation Title",
           htmlFor: "confirmationTitle",
@@ -87,6 +87,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
+                onClick:onClick
               },
             },
             {
@@ -98,7 +99,6 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 className:
                   "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
                 loading,
-                onClick: onClick,
               },
             },
           ],

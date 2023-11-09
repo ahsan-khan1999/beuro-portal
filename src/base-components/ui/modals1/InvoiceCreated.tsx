@@ -13,7 +13,7 @@ const InvoiceCreated = ({onClose, invoiceCreated} : {onClose: () => void, invoic
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-auto"
+        containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[39px] pb-[40px] pt-[24px]">
           <Image

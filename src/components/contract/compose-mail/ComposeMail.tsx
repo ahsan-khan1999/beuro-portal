@@ -3,10 +3,10 @@ import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import React from "react";
 
-const ComposeMail = ({backRouteHandler} : {backRouteHandler:Function}) => {
+const ComposeMail = ({ backRouteHandler, onNextHandle }: { backRouteHandler: Function;onNextHandle:Function }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useContractEmail(backRouteHandler);
+    useContractEmail(backRouteHandler, onNextHandle);
   return (
     <ContractFormCard>
       <h2 className="text-[#393939] text-lg font-medium">

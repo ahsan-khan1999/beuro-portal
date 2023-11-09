@@ -6,10 +6,11 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   loading,
   isUpdate,
   handleUpdateCancel,
-  control,
+  control
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3 ",
@@ -21,7 +22,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: `!p-4 !h-[54px]  !border-dark ${!isUpdate && "!border-light"} focus:!border-primary `,
+              className: `!p-4 !h-[54px]  !border-dark ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -33,7 +36,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
           {
@@ -51,7 +54,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
           {
@@ -69,8 +72,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "companyName",
               placeholder: "Please Enter Company Name",
               register,
-              disabled: isUpdate
-
+              disabled: isUpdate,
             },
           },
           {
@@ -85,8 +87,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              disabled: isUpdate
-
+              disabled: isUpdate,
             },
           },
 
@@ -107,8 +108,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Enter Your Phone Number",
 
               register,
-              disabled: isUpdate
-
+              disabled: isUpdate,
             },
           },
           {
@@ -125,7 +125,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "mobile",
               name: "mobile",
 
-
               placeholder: "Enter Your Mobile Number",
               register,
               disabled: isUpdate,
@@ -140,7 +139,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         text: "Address Details*",
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
-
       },
 
       field: {
@@ -164,11 +162,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
-
             },
           },
-
-
 
           {
             containerClass: "mb-0",
@@ -188,7 +183,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               register,
               disabled: isUpdate,
-
             },
           },
           {
@@ -211,7 +205,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
         ],
@@ -229,10 +223,10 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: "Cancel",
               inputType: "button",
               onClick: handleUpdateCancel,
-              className:
-                `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"}`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
-
             },
           },
           {
@@ -240,8 +234,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.button,
               text: "Save Changes",
               inputType: "submit",
-              className:
-                `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"}`,
+              className: `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },

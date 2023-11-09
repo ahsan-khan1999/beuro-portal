@@ -18,8 +18,8 @@ export default function useRegistration() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = generateFormField(register, loading);

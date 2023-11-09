@@ -9,6 +9,7 @@ export const DragAndDropPdfField = ({
   name,
   text,
   fileSupported,
+  isOpenedFile
 }: DragAndDropPdfFieldProps) => {
   return (
     <Controller
@@ -20,6 +21,7 @@ export const DragAndDropPdfField = ({
           field={field}
           text={text}
           fileSupported={fileSupported}
+          isOpenedFile={false}
         />
       )}
     />

@@ -21,12 +21,14 @@ export const useAddServiceDetails = (onHandleNext:Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddOfferServiceDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    console.log("CLicked!");
+    
     onHandleNext(ComponentsType.additionalAdded)
   };
   return {

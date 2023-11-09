@@ -34,17 +34,17 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     register,
                   },
                 },
-                {
-                  containerClass: "mb-0",
-                  field: {
-                    type: Field.radio,
-                    value: "Existing Service",
-                    label: "Existing Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
+                // {
+                //   containerClass: "mb-0",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "Existing Service",
+                //     label: "Existing Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
               ],
             },
           },
@@ -207,28 +207,28 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               type: Field.div,
               className: "flex flex-col",
               children: [
-                {
-                  containerClass: "mb-0 pb-[6px]",
-                  field: {
-                    type: Field.radio,
-                    value: "New Service",
-                    label: "New Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
-                {
-                  containerClass: "mb-0",
-                  field: {
-                    type: Field.radio,
-                    value: "Existing Service",
-                    label: "Existing Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
+                // {
+                //   containerClass: "mb-0 pb-[6px]",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "New Service",
+                //     label: "New Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
+                // {
+                //   containerClass: "mb-0",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "Existing Service",
+                //     label: "Existing Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
               ],
             },
           },
@@ -404,14 +404,34 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
+        type: Field.div,
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              loading,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

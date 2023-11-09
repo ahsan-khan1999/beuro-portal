@@ -140,7 +140,6 @@ export const employeeEditDetailsFormField: GenerateEmployeeFormField = (
               className:
                 "rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ",
               loading,
-              onClick: onClick,
             },
           },
         ],

@@ -4,7 +4,6 @@ import { FormField, GenerateChangeMailSettingFormField } from "@/types";
 export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
   register,
   loading,
-  control
 ) => {
   const formField: FormField[] = [
     {

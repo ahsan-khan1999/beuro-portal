@@ -20,8 +20,8 @@ export const useServiceOfferEditDetail = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ServiceEditDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

@@ -15,6 +15,7 @@ export interface OfferTabsSectionTypes {
   setTabType: (tabType: number) => void;
   tabType: number;
   isSelected: boolean;
+  isToggle?:boolean;
   selectedTab: number;
   name: string;
   index: number;

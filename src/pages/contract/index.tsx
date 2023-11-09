@@ -1,12 +1,8 @@
-import Contract from '@/components/contract'
-import React from 'react'
+import Contract from "@/components/contract";
+import React from "react";
 
 const index = () => {
-  return (
-    <div>
-      <Contract/>
-    </div>
-  )
-}
+  return <Contract />;
+};
 
-export default index
+export default index;

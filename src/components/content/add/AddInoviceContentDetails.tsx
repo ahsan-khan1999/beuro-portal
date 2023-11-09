@@ -3,18 +3,20 @@ import { useAddContentInvoiceDetails } from "@/hooks/content/useAddContentInvoic
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const AddInoviceContentDetails = () => {
-  const defaultClassName = "mt-[30px]  ";
+const AddInoviceContentDetails = ({
+  onHandleNext,
+}: {
+  onHandleNext: Function;
+}) => {
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useAddContentInvoiceDetails();
+    useAddContentInvoiceDetails(onHandleNext);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
+      <div className="flex justify-between items-center pb-[26px] ">
         <h2 className="text-[#393939] text-lg font-medium">Invoice Content</h2>
-        <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7]  px-9">
-          Cancel
-        </button>
       </div>
+      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

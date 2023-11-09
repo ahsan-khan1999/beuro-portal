@@ -14,6 +14,12 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+
+  const handleBack = () => {
+    onClick(2, ComponentsType.service);
+  };
+
+
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
     register,
@@ -21,10 +27,10 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = LeadsServiceDetailsFormField(register, loading, control);
+  const fields = LeadsServiceDetailsFormField(register, loading, control, handleBack);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onClick(2, ComponentsType.service);

@@ -14,6 +14,10 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
+  const handleBack = () => {
+    onClick(1, ComponentsType.address);
+  };
+
   const schema = generateLeadsAddressEditDetailsValidation(translate);
   const {
     register,
@@ -21,10 +25,15 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = LeadsAddressDetailsFormField(register, loading, control);
+  const fields = LeadsAddressDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     onClick(1, ComponentsType.address);

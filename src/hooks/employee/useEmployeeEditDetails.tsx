@@ -9,7 +9,7 @@ import { employeeEditDetailsFormField } from "@/components/employees/fields/empl
 import { TRowEmployees } from "@/types/employee";
 import { useMemo } from "react";
 export const useEmployeeEditDetails = (
-  routeHandler: () => void,
+  routeHandler: Function,
   employeeDetail: TRowEmployees
 ) => {
   console.log(routeHandler, "routeHandler", employeeDetail);
@@ -26,10 +26,10 @@ export const useEmployeeEditDetails = (
     setError,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = employeeEditDetailsFormField(register, loading, routeHandler);
+  const fields = employeeEditDetailsFormField(register, loading);
   useMemo(() => {
     if (employeeDetail?.id) {
       reset(employeeDetail);
@@ -37,6 +37,7 @@ export const useEmployeeEditDetails = (
   }, [employeeDetail?.id]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    routeHandler();
   };
 
   return {

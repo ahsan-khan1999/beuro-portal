@@ -39,18 +39,15 @@ const ContractDetailsCard = () => {
               Send Confirmation
             </span>
           </button>
-          <Image src={PDFIcon} alt="PDFIcon" className="cursor-pointer" />
           <Image
-            src={downloadIcon}
-            alt="downloadIcon"
+            src={PDFIcon}
+            alt="PDFIcon"
             className="cursor-pointer"
+            onClick={() => router.push("/contract/pdf-preview")}
           />
-          <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-          />
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" />
+          <Image src={downloadIcon} alt="downloadIcon" />
+          <Image src={printerIcon} alt="printerIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -117,15 +114,15 @@ const ContractDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Offer Status:
             </span>
-            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-pointer">
+            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
               Signed
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base">
+            <span className="text-[#4D4D4D] font-normal text-base ">
               Payment Method:
             </span>
-            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-default">
               Cash
             </span>
           </div>
@@ -133,7 +130,7 @@ const ContractDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Status:
             </span>
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-default">
               Open
             </span>
           </div>
@@ -143,11 +140,7 @@ const ContractDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Notes:
               </span>
-              <Image
-                src={writeIcon}
-                alt="writeIcon"
-                className="cursor-pointer"
-              />
+              <Image src={writeIcon} alt="writeIcon" />
             </div>
           </div>
           <div>
@@ -155,7 +148,7 @@ const ContractDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Images:
               </span>
-              <Image src={imageIcon} alt="editImg" className="cursor-pointer" />
+              <Image src={imageIcon} alt="editImg" />
             </div>
           </div>
         </div>

@@ -6,8 +6,10 @@ export enum CustomerDetailsFields {
   email = "email",
   phone = "phone",
   mobile = "mobile",
-  streetNo = "address.streetNo",
-  postCode = "address.postCode",
-  country = "address.country",
+  streetNo = "streetNo",
+  postCode = "postCode",
+  country = "country",
+  address = "address",
+
 }
 
