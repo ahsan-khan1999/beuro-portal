@@ -15,6 +15,7 @@ import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import ExclusiveTax from "@/base-components/ui/modals1/ExclusiveTax";
+import PaymentSettings from "./payment-settings";
 
 const AdminSettings = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -69,12 +70,7 @@ const AdminSettings = () => {
           ) : null}
         </div>
         <div className="mt-4">
-          {switchDetails === 1 ? (
-            <SystemSettingDetails
-              addTaxHandler={addTaxHandler}
-              exclusiveTaxHandler={exclusiveTaxHandler}
-            />
-          ) : null}
+          {switchDetails === 1 ? <PaymentSettings /> : null}
         </div>
         <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
         <div className="mt-4">
