@@ -85,7 +85,7 @@ export const ChangePasswordFormField: GenerateChangePasswordFormField = (
         type: Field.button,
         text: "Change",
         inputType: "submit",
-        className: "mt-[19px] rounded-lg",
+        className: "mt-[19px] rounded-lg hover:bg-none ",
         loading,
       },
     },

@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import ContentCreated from "@/base-components/ui/modals1/ContentCreated";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
 export enum ComponentsType {
   addOffer,
@@ -30,13 +31,24 @@ const ContentAddDetailsData = () => {
 
   // Function for handling the modal for exiting notes
   const handleContentCreated = () => {
-    dispatch(updateModalType(ModalType.CONTENT_CREATED));
+    dispatch(updateModalType(ModalType.CREATION));
   };
 
-  
+  const router = useRouter();
+
+  const route = () => {
+    router.push("/content");
+  };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.CONTENT_CREATED]: <ContentCreated onClose={onClose} />,
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Content Created Successful "
+        subHeading="Thanks for creating offer we are happy to have you. "
+        route={route}
+      />
+    ),
   };
 
   const renderModal = () => {

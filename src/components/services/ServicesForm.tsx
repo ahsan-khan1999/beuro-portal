@@ -1,12 +1,12 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import FormCard from "@/layout/customers/FormCard";
-import { CustomerField, Customers, FormDataProps } from "@/types/customer";
+import { FormDataProps } from "@/types/service";
 import Image from "next/image";
 import React, { SetStateAction } from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";
 
-const CustomerForm = ({
+const ServiceForm = ({
   isUpdate,
   setIsUpdate,
   fields,
@@ -14,16 +14,17 @@ const CustomerForm = ({
   handleSubmit,
   errors,
 }: FormDataProps) => {
-  const defaultClassName = "mt-[30px]";
+  const defaultClassName = "";
 
   return (
     <div
-      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
-        !isUpdate ? "border-primary" : "border-none"
-      } w-full h-fit`}
-    >
+    className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+      !isUpdate ? "border-primary" : "border-none"
+    } w-full h-fit`}>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          Service/Product Details
+        </h2>
         {isUpdate ? (
           <BaseButton
             buttonText="Edit Details"
@@ -51,4 +52,4 @@ const CustomerForm = ({
   );
 };
 
-export default CustomerForm;
+export default ServiceForm;

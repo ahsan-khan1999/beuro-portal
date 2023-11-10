@@ -78,7 +78,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "When is a convenient time for a consultation?",
               id: "reasonForContact",

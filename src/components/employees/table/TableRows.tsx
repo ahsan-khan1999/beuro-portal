@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { TRowEmployees } from "@/types/employee";
+import { Employee } from "@/types/employee";
 import editInfoIcon from "@/assets/svgs/edit_info.svg";
 import morefoIcon from "@/assets/svgs/entity_more_info.svg";
 
-const TableHeadings = ({ employsData }: { employsData: TRowEmployees[] }) => {
+const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
 
   return (

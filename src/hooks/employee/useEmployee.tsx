@@ -1,10 +1,10 @@
-import { TRowEmployees } from "@/types/employee";
+import { Employee } from "@/types/employee";
 import { employeesData } from "@/utils/static";
 import React, { useEffect, useState } from "react";
 
 const useEmployee = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TRowEmployees[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = employeesData.length;
   const itemsPerPage = 10;
 

@@ -28,7 +28,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -45,7 +45,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -62,7 +62,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -83,7 +83,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        className: "!p-4  !border-dark  focus:!border-primary ",
         rows:4,
         id: "description",
         name: "description",
@@ -113,7 +113,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -130,7 +130,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -147,7 +147,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -168,7 +168,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        className: "!p-4  !border-dark  focus:!border-primary ",
         rows:4,
         id: "description",
         name: "description",

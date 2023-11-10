@@ -1,13 +1,15 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateServicesFormField } from "@/types";
 
-export const servicesEditDetailsFormField: GenerateServicesFormField = (
+export const servicesDetailsFormField: GenerateServicesFormField = (
   register,
   loading,
-  onClick
+  isUpdate,
+  handleUpdateCancel
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
         className: "grid grid-cols-3 gap-x-3",
@@ -21,12 +23,15 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: `!p-4 !border-dark ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               inputType: "text",
-              id: "service",
-              name: "service",
+              id: "serviceTitle",
+              name: "serviceTitle",
               placeholder: "Product Name...",
               register,
+              disabled: isUpdate,
             },
           },
           {
@@ -45,6 +50,7 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
               name: "unit",
               placeholder: "Std. ",
               register,
+              disabled: isUpdate,
             },
           },
         ],
@@ -72,6 +78,7 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
               name: "price.value",
               placeholder: "100CHF",
               register,
+              disabled: isUpdate,
             },
           },
         ],
@@ -88,11 +95,12 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        rows:4,
+        rows: 4,
         id: "description",
         name: "description",
         placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
         register,
+        disabled: isUpdate,
       },
     },
 
@@ -108,9 +116,10 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
               type: Field.button,
               text: "Cancel",
               inputType: "button",
-              onClick: onClick,
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              onClick: handleUpdateCancel,
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },
@@ -120,8 +129,9 @@ export const servicesEditDetailsFormField: GenerateServicesFormField = (
               type: Field.button,
               text: "Save Changes",
               inputType: "submit",
-              className:
-                "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              className: `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },

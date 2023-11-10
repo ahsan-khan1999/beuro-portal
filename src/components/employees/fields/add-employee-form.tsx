@@ -1,17 +1,21 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
-import FormCard from "@/layout/customers/FormCard";
+import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 import React from "react";
 
-const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
+const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors } = useCustomerDetail(false);
+  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
+    useEmployeeDetail(false);
 
   return (
-    <FormCard>
+    <div
+      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+        !isUpdate ? "border-primary" : "border-none"
+      } w-full h-fit`}
+    >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">Employee Details</h2>
 
         <BaseButton
           buttonText="Cancel"
@@ -26,8 +30,8 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-    </FormCard>
+    </div>
   );
 };
 
-export default AddCustomerForm;
+export default AddEmployeeForm;

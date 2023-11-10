@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SettingLayout from "../SettingLayout";
 import MailSettingForm from "./mail-setting-form";
 
-const MailSetting = () => {
+const MailSetting = ({handleCreation} : {handleCreation: Function}) => {
   const tabsData: string[] = [
     "Use System Mail Configuration",
     "Use Own Mail Configuration",
@@ -42,7 +42,7 @@ const MailSetting = () => {
           ))}
         </div>
 
-        {selectedTab === 1 && <MailSettingForm />}
+        {selectedTab === 1 && <MailSettingForm handleCreation={handleCreation}/>}
 
         {selectedTab === 0 && (
           <button className="text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-[150px]">

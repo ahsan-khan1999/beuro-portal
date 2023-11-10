@@ -14,7 +14,8 @@ import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails"
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
-import ExclusiveTax from "@/base-components/ui/modals1/ExclusiveTax";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
 const Setting = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -24,13 +25,6 @@ const Setting = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
-    [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
-    [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
-  }; 
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -50,6 +44,33 @@ const Setting = () => {
 
   const handleEditPayment = () => {
     dispatch(updateModalType(ModalType.EDIT_PAYMENT_METHOD));
+  };
+
+  const handleCreation = () => {
+    dispatch(updateModalType(ModalType.CREATION));
+  };
+
+  const router = useRouter();
+
+  const route = () => {
+    router.push("/setting");
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
+    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading="Add New Tax" />,
+    [ModalType.EXCLUSIVE_TAX]: (
+      <AddTax onClose={onClose} heading="Exclusive Tax" />
+    ),
+    [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Email Configration Created Successfully"
+        subHeading="Thanks for created email configration."
+        route={route}
+      />
+    ),
   };
 
   return (
@@ -87,7 +108,7 @@ const Setting = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 5 ? <MailSetting /> : null}
+          {switchDetails === 5 ? <MailSetting handleCreation={handleCreation}/> : null}
         </div>
       </Layout>
       {renderModal()}

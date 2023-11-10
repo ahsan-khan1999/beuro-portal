@@ -7,13 +7,13 @@ import silverIcon from "@/assets/svgs/sliver_ion.svg";
 import useEditPayment from "@/hooks/modals/useEditPayment";
 
 const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
-  const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useEditPayment();
+  const defaultClassName = "";
+  const { fields, onSubmit, handleSubmit, errors, error } = useEditPayment(onClose);
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-auto"
+        containerClassName="max-w-[606px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col px-[30px] pb-[26px] pt-[25px]">
           <Image

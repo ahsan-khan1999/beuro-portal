@@ -1,125 +1,40 @@
-import { Field } from "@/enums/form";
-import { FormField, GenerateServicesFormField } from "@/types";
+import { Form } from "@/base-components/form/form";
+import { BaseButton } from "@/base-components/ui/button/base-button";
+import useServiceDetail from "@/hooks/services/useServiceDetail";
+import FormCard from "@/layout/customers/FormCard";
+import React from "react";
 
-export const servicesAddDetailsFormField: GenerateServicesFormField = (
-  register,
-  loading,
-  onClick
-) => {
-  const formField: FormField[] = [
-    {
-      field: {
-        type: Field.div,
-        className: "flex justify-between items-center gap-3",
-        children: [
-          {
-            containerClass: "w-[65%]",
-            label: {
-              text: "Service/Product Title",
-              htmlFor: "serviceTitle",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "serviceTitle",
-              name: "serviceTitle",
-              placeholder: "Product Name...",
-              register,
-            },
-          },
-          {
-            containerClass: "w-[35%]",
-            label: {
-              text: "Unit",
-              htmlFor: "unit",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className:
-                "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "unit",
-              name: "unit",
-              placeholder: "Std. ",
-              register,
-            },
-          },
-        ],
-      },
-    },
+const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
+  const defaultClassName = "";
+  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
+    useServiceDetail(false);
 
-    {
-      containerClass: "max-w-[260px]",
-      label: {
-        text: "Price",
-        htmlFor: "price",
-        className: "mb-[10px] ",
-      },
-      field: {
-        type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
-        id: "price",
-        name: "price",
-        placeholder: "100CHF",
-        register,
-      },
-    },
+  return (
+    <div
+      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+        !isUpdate ? "border-primary" : "border-none"
+      } w-full h-fit`}
+    >
+      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
+        <h2 className="text-[#393939] text-lg font-medium">
+          Service/Product Details
+        </h2>
 
-    {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: "Description",
-        htmlFor: "description",
-        className: "mb-[10px]",
-      },
-      field: {
-        type: Field.textArea,
-        className: "!p-4 !border-dark focus:!border-primary ",
-        rows:4,
-        id: "description",
-        name: "description",
-        placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
-        register,
-      },
-    },
-
-    {
-      containerClass: "mt-[30px]",
-      field: {
-        type: Field.div,
-        className: "flex space-x-[18px] ",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              text: "Cancel",
-              inputType: "button",
-              onClick: onClick,
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              text: "Save",
-              inputType: "submit",
-              className:
-                "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-              loading,
-            },
-          },
-        ],
-      },
-    },
-  ];
-
-  return formField;
+        <BaseButton
+          buttonText="Cancel"
+          onClick={handleCancel}
+          containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+        ></BaseButton>
+      </div>
+      <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
+    </div>
+  );
 };
+
+export default AddServiceForm;

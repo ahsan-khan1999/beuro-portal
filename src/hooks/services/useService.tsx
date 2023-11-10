@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { TRowServices } from "@/types/service";
+import { Service } from "@/types/service";
 import { servicesData } from "@/utils/static";
 
 const useService = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TRowServices[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
 
   const totalItems = servicesData.length;
   const itemsPerPage = 10;

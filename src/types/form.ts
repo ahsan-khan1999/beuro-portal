@@ -91,7 +91,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
   disabled?: boolean;
-  isButton?: boolean,
+  isButton?:boolean,
+  onClick?:Function,
   svg: string;
   alt: string;
 }

@@ -22,7 +22,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: `!p-4 !h-[54px]  !border-dark ${
+              className: `!p-4 !border-dark ${
                 !isUpdate && "!border-light"
               } focus:!border-primary `,
               type: Field.select,
@@ -193,7 +193,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "!p-4 !border-dark  ",
               type: Field.select,
               id: "address.country",
               name: "address.country",
