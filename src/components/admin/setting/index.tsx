@@ -72,7 +72,7 @@ const AdminSettings = () => {
         <div className="mt-4">
           {switchDetails === 1 ? <PaymentSettings /> : null}
         </div>
-        <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
+        <div className="mt-4">{switchDetails === 2 ? <MailSetting /> : null}</div>
         <div className="mt-4">
           {switchDetails === 3 ? <FollowUpSetting /> : null}
         </div>

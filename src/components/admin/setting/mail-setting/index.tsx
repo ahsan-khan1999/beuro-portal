@@ -4,8 +4,8 @@ import MailSettingForm from "./mail-setting-form";
 
 const MailSetting = () => {
   const tabsData: string[] = [
-    "Use System Mail Configuration",
     "Use Own Mail Configuration",
+    // "Use System Mail Configuration",
   ];
 
   // State to manage the selected tab
@@ -42,13 +42,13 @@ const MailSetting = () => {
           ))}
         </div>
 
-        {selectedTab === 1 && <MailSettingForm />}
+        {selectedTab === 0 && <MailSettingForm />}
 
-        {selectedTab === 0 && (
+        {/* {selectedTab === 1 && (
           <button className="text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-[150px]">
             Save Setting
           </button>
-        )}
+        )} */}
       </div>
     </SettingLayout>
   );
