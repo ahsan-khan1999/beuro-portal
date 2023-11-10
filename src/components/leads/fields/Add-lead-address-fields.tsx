@@ -18,6 +18,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -103,6 +104,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -182,12 +184,14 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               className:
@@ -200,6 +204,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:

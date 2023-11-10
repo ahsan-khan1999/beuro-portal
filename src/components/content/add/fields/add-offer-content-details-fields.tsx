@@ -29,6 +29,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-4",
         children: [
           {
@@ -136,6 +137,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       containerClass: "mb-0 mt-6",
       field: {
         type: Field.button,
+id:"button",
         text: "Next",
         inputType: "submit",
         className:

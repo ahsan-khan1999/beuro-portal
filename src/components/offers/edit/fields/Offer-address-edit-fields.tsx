@@ -14,6 +14,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -99,6 +100,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -179,6 +181,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       containerClass: "mb-0 mt-[25px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className: "rounded-lg p-4 w-[152px] h-[50px] text-white hover-bg-none",

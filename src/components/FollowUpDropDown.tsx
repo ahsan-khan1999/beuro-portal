@@ -22,6 +22,8 @@ const FollowUpDropDown = () => {
           inputType="button"
           text="Add Follow Up"
           className="text-white text-[13px] font-semibold rounded-md !h-8"
+          id="button"
+
         />
       </div>
       {followUp.map((item, index) => {

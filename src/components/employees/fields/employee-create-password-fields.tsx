@@ -56,6 +56,7 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
         label: null,
         field: {
           type: Field.button,
+id:"button",
           text: "Submit",
           inputType: "submit",
           className: "mt-[19px] rounded-lg",

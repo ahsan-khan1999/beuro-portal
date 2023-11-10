@@ -22,12 +22,14 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
              
@@ -41,6 +43,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className:

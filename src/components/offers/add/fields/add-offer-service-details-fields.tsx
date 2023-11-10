@@ -10,6 +10,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -21,6 +22,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.div,
+id:"div-field",
               className: "flex flex-col",
               children: [
                 {
@@ -78,12 +80,14 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 ",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -127,6 +131,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0 col-span-2",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-2 gap-3",
               children: [
                 {
@@ -194,6 +199,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -205,6 +211,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.div,
+id:"div-field",
               className: "flex flex-col",
               children: [
                 // {
@@ -262,12 +269,14 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 ",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -311,6 +320,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0 col-span-2",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-2 gap-3",
               children: [
                 {
@@ -379,6 +389,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-3 ",
         children: [
           {
@@ -407,12 +418,14 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               className:
@@ -424,6 +437,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:

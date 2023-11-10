@@ -175,6 +175,8 @@ const Cards = ({ planTime, setPlanTime }:any) => {
                   inputType="button"
                   text="Choose Plan"
                   className="border border-primary bg-white   mt-4  min-w-full  text-primary hover:bg-none mt-6"
+                  id="button"
+
                 />
               </div>
             </div>

@@ -3,9 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateChangeMailSettingValidationSchema } from "@/validation/settingSchema";
 import { ChangeMailSettingFormField } from "@/components/setting/mail-setting/change-mail-setting-fields";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 
 export const useChangeMailSetting = () => {
   const { t: translate } = useTranslation();
@@ -20,8 +20,8 @@ export const useChangeMailSetting = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ChangeMailSettingFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

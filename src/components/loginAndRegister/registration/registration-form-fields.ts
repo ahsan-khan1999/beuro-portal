@@ -102,6 +102,8 @@ export const generateFormField: GenerateRegistrationFormField = (
         linkHref: "/forget-password",
         containerClassName: "text-[14px] text-dark ",
         linkClassName: " text-primary",
+        id: "",
+
       },
     },
     {
@@ -109,6 +111,7 @@ export const generateFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Sign Up",
         inputType: "submit",
         className: "rounded-lg justify-center text-white",
@@ -125,6 +128,8 @@ export const generateFormField: GenerateRegistrationFormField = (
         linkHref: "/login",
         containerClassName: "text-sm text-dark  ",
         linkClassName: " text-primary",
+        id: "",
+
       },
     },
   ];

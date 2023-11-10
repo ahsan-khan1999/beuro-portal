@@ -12,6 +12,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex justify-between items-center gap-3",
         children: [
           {
@@ -62,6 +63,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-4",
         children: [
           {
@@ -133,12 +135,14 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
               className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${
@@ -152,6 +156,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className: `rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ${

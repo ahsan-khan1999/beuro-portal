@@ -12,6 +12,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -23,6 +24,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.div,
+              id: "div-field",
               className: "flex flex-col",
               children: [
                 {
@@ -92,6 +94,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -141,6 +144,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -208,6 +212,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
 
       field: {
         type: Field.div,
+        id: "div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
@@ -274,6 +279,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
     //   containerClass: "mt-5 relative",
     //   field: {
     //     type: Field.div,
+    // id:"div-field",
 
     //     className: "grid grid-cols-3 gap-x-3 ",
     //     children: [
@@ -299,6 +305,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
     //         containerClass: "mb-0 mt-[30px]",
     //         field: {
     //           type: Field.button,
+    // id: "button",
     //           text: "",
     //           inputType: "button",
     //           className:
@@ -315,6 +322,7 @@ export const AddOfferDetailsFormField: GenerateOffersFormField = (
     //   containerClass: "mb-0 mt-[30px]",
     //   field: {
     //     type: Field.button,
+    // id: "button",
     //     text: "Next",
     //     inputType: "submit",
     //     className:
@@ -341,6 +349,7 @@ export const AddDateFormField: GenerateOffersFormField = (
       //@ts-expect-error
       field: {
         type: Field.div,
+        id: "div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: (count) && generateDateChildren(register, count, OnClick)
@@ -359,28 +368,28 @@ const generateDateChildren = (register: UseFormRegister<FieldValues>, count: num
       containerClass: "mb-0 ",
       label: {
         text: "Date",
-        htmlFor: `date-${key}`,
+        htmlFor: `date_${key}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.date,
         className: "!p-4 !border-dark focus:!border-primary w-full",
-        id: `date-${key}`,
-        name: `date-${key}`,
+        id: `date_${key}`,
+        name: `date_${key}`,
         register,
-        remove: key !== 0 && "Remove",
-        onRemove: key !== 0 && OnClick,
+        remove: "Remove",
+        onRemove: OnClick,
       },
     };
 
     if (isLastIndex) {
-      // Add the additional field for the last date
       return [
         dateField,
         {
           containerClass: "mb-0 mt-[30px]",
           field: {
             type: Field.button,
+            id: "button",
             text: "",
             inputType: "button",
             className:
@@ -388,11 +397,37 @@ const generateDateChildren = (register: UseFormRegister<FieldValues>, count: num
             onClick: OnClick,
             icon: icon,
           },
+
         },
       ];
     }
 
     return dateField;
-  }).flat(); // Use flat() to flatten the array if additional fields were added
-  
+  }).flat();
+
+};
+
+
+export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
+  register,
+  loading,
+  control,
+  OnClick
+) => {
+  const formField: FormField[] = [
+    {
+      containerClass: "mb-0 mt-[30px]",
+      field: {
+        type: Field.button,
+        id: "button",
+        text: "Next",
+        inputType: "submit",
+        className:
+          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
+        loading,
+      },
+    },
+  ];
+
+  return formField;
 };

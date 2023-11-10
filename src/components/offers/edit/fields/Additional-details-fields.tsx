@@ -52,6 +52,7 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px] mb-0",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

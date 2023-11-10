@@ -2,10 +2,10 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
-import { TRowServices } from "@/types/service";
+import { Service } from "@/types/service";
 
 interface ServiceState {
-    service: TRowServices[];
+    service: Service[];
     loading: boolean;
     error: Record<string, object>
 }

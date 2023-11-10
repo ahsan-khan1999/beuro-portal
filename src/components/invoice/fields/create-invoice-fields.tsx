@@ -11,6 +11,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-[23px] ",
         children: [
           {
@@ -57,6 +58,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       containerClass: "mt-4 mb-[12px]",
       field: {
         type: Field.div,
+id:"div-field",
         children: [
           {
             containerClass:
@@ -68,6 +70,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
             },
             field: {
               type: Field.div,
+id:"div-field",
               className: "flex gap-[20px]",
               children: [
                 {
@@ -185,6 +188,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       containerClass: "mb-0 mt-[13px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Create Invoice",
         inputType: "submit",
         className:"hover:bg-none",

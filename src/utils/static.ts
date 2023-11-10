@@ -7,8 +7,6 @@ import editNote from "@/assets/svgs/Edit_note.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import { TRowServices } from "@/types/service";
-import { TRowEmployees } from "@/types/employee";
 import { ContentTableRowTypes } from "@/types/content";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import companyLogo from "@/assets/svgs/companyLogo.svg";
@@ -16,6 +14,8 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import { PaymentsAdmin } from "@/types/admin/payments";
 import { SupportRequestAdmin } from "@/types/admin/support-request";
 import { PlansAdmin } from "@/types/admin/plans";
+import { Service } from "@/types/service";
+import { Employee } from "@/types/employee";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -602,7 +602,7 @@ export const customers: Customers[] = [
     id: 1,
     name: "Rahal Ahmed",
     email: "Test12@gmail.com",
-    phone: "412545214541",
+    phone: "41343434353",
     date: "25/08/2023",
     location: "Islamabad",
     customerType: "Individual",
@@ -1549,7 +1549,7 @@ export const invoicesData: InvoiceTableRowTypes[] = [
   },
   // Add more rows as needed
 ];
-export const servicesData: TRowServices[] = [
+export const servicesData: Service[] = [
   {
     id: "001",
     service: "Cleaning",
@@ -1734,7 +1734,7 @@ export const servicesData: TRowServices[] = [
     action: "edit",
   },
 ];
-export const employeesData: TRowEmployees[] = [
+export const employeesData: Employee[] = [
   {
     id: "001",
     name: "Rahal Ahmad",

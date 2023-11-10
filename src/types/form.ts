@@ -213,11 +213,12 @@ export interface SpanProps {
 }
 
 export interface DivProps {
-  type: Field.div;
+  type: Field.div,
   name?: string;
   children: FormField[];
   className?: string;
   errors?: Record<string, any>;
+  id:string
 }
 
 interface LinkImage {

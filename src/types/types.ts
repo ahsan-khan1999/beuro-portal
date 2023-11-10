@@ -143,8 +143,13 @@ export type GenerateCustomerFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  control?: Control<FieldValues>
+  properties: CustomerProperties,
+  control?: Control<FieldValues>,
 ) => FormField[];
+export interface CustomerProperties  {
+  phone?: string;
+  mobile?: string;
+}
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

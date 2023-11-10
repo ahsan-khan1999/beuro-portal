@@ -37,11 +37,15 @@ const DeactivateAccount = ({ onClose }: { onClose: () => void }) => {
         text="Deactivate my account"
         inputType="button"
         className="mt-10 bg-[#CB2C2C] hover:bg-none  min-w-full rounded-lg  "
+        id="button"
+
       />
       <Button
         text="Cancel"
         inputType="button"
         className="mt-4 bg-transparent text-gray min-w-full rounded-lg hover:bg-none  border border-lightGray  "
+        id="button"
+
       />
     </InfoModal>
   );

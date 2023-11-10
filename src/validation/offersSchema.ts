@@ -40,8 +40,13 @@ export const generateOfferServiceEditDetailsValidation = (
 };
 
 // Validation for edit details
-export const generateOfferDetailsValidationSchema = (translate: Function) => {
-  return yup.object().shape({
+export const generateOfferDetailsValidationSchema = (translate: Function, count: number) => {
+  const schemaObject: any = {};
+  for (let i = 0; i < count; i++) {
+    schemaObject[`${EditOfferDetails.date}_${i}`] = yup.string().required(translate("validationMessage.required"));
+  }
+
+  const validationSchema = yup.object().shape({
     [EditOfferDetails.selectCustomer]: yup
       .string()
       .required(translate("validation required")),
@@ -86,10 +91,11 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
     [EditOfferDetails.country]: yup
       .string()
       .required(translate("validation required")),
-    [EditOfferDetails.date]: yup
-      .string()
-      .required(translate("validation required")),
+
   });
+  console.log(schemaObject, "schemaObject", validationSchema);
+
+  return Object.assign(validationSchema, { ...schemaObject["date_0"] })
 };
 
 // Validation for offer additional edit details

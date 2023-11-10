@@ -10,6 +10,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex ",
         children: [
           {
@@ -25,12 +26,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "w-full ml-[60px]",
             field: {
               type: Field.div,
+              id: "div-field",
               className: "",
               children: [
                 {
                   containerClass: "w-full relative",
                   field: {
                     type: Field.div,
+                    id: "div-field",
                     className: "grid grid-cols-2 gap-x-6 ",
                     children: [
                       {
@@ -81,6 +84,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   containerClass: "my-6",
                   field: {
                     type: Field.div,
+                    id: "div-field",
                     className: "flex gap-x-4 items-center relative w-full",
                     children: [
                       {
@@ -89,6 +93,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                           text: "Update Password",
                           containerClassName:
                             "text-[14px] text-[#393939] font-normal ",
+                          id: ""
+
                         },
                       },
                       {
@@ -96,6 +102,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                           type: Field.span,
                           containerClassName:
                             " absolute top-3 bg-[#BFBFBF] w-[87%]  mx-auto h-[1px]",
+              id:""
+
                         },
                       },
                     ],
@@ -105,6 +113,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   containerClass: "w-full relative",
                   field: {
                     type: Field.div,
+                    id: "div-field",
                     className: "grid grid-cols-2 gap-x-6 ",
                     children: [
                       {
@@ -128,6 +137,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                               `,
                           alt: "password",
                           register,
+
                         },
                       },
                       {
@@ -294,6 +304,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-[43px] ",
         children: [
           {
@@ -439,6 +450,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       containerClass: "mb-[14px] mt-[26px] ",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex gap-x-4 items-center relative",
         children: [
           {
@@ -447,6 +459,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               type: Field.span,
               text: "Change Password",
               containerClassName: "text-[14px] text-[#393939] font-normal ",
+              id: ""
             },
           },
           {
@@ -454,6 +467,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               type: Field.span,
               containerClassName:
                 " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]", // Use 'flex-1' class to make it fill the width
+              id: ""
+
             },
           },
         ],
@@ -484,12 +499,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-[18px] mt-5",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+              id: "button",
               text: "Restore Default",
               inputType: "button",
               className:
@@ -501,6 +518,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+              id: "button",
               text: "Save Changes",
               inputType: "submit",
               className:
