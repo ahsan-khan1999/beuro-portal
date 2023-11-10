@@ -1,7 +1,7 @@
-import SupportRequestDetails from "@/components/admin/support-request/details";
+import PlanDetails from "@/components/admin/plans/details";
 import React from "react";
 const Index = () => {
-  return <SupportRequestDetails />;
+  return <PlanDetails />;
 };
 
 export default Index;

@@ -12,7 +12,7 @@ const TableRow = ({ currentPageRows }: { currentPageRows: PlansAdmin[] }) => {
             onClick={() =>
               router.push({
                 pathname: "/admin/plans/details",
-                query: { supportRequest: item.id },
+                query: { plans: item.id },
               })
             }
             key={index}

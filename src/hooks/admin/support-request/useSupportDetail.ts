@@ -1,6 +1,5 @@
 import { SupportRequestAdmin } from "@/types/admin/support-request";
-import { Customers } from "@/types/customer";
-import { customers, customersAdmin, supportRequestData } from "@/utils/static";
+import { supportRequestData } from "@/utils/static";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

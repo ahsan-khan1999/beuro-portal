@@ -1,26 +1,33 @@
 import { Layout } from "@/layout";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
-import DetailsData from "../DetailsData";
-import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
-import SupportDetailsData from "./support-request-data";
+import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
+import PlansForm from "../Form";
 
-const SupportRequestDetails = () => {
-  const { supportDetail, handlePreviousClick } = useSupportDetail(true);
+const PlanDetails = () => {
+  const {
+    planDetail,
+    isUpdate,
+    setIsUpdate,
+    fields,
+    handleSubmit,
+    onSubmit,
+    errors,
+    handlePreviousClick,
+  } = usePlanDetail(true);
 
   return (
     <Layout>
-      <DetailsCard>
-        <DetailsData
-          supportDetail={supportDetail}
-          handlePreviousClick={handlePreviousClick}
-        />
-      </DetailsCard>
-      <div className="flex mt-8">
-        <SupportDetailsData supportDetail={supportDetail} />
-      </div>
+      <PlansForm
+        isUpdate={isUpdate}
+        setIsUpdate={setIsUpdate}
+        planDetail={planDetail}
+        fields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+      />
     </Layout>
   );
 };
 
-export default SupportRequestDetails;
+export default PlanDetails;
