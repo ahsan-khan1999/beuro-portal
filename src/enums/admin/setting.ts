@@ -27,9 +27,6 @@ export enum SettingProfile {
 
 // setting profile enum
 export enum PaymentSettings {
-  fullName = "fullName",
-  oldPassword = "oldPassword",
-  newPassword = "newPassword",
-  confirmNewPassword = "confirmNewPassword",
-  changePassword = "changePassword",
+  publishableKey = "publishableKey",
+  searchKey = "searchKey",
 }

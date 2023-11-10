@@ -62,10 +62,10 @@ export const generateProfileSettingValidation = (translate: Function) => {
 // Validation for add reason
 export const generatePaymentSettingsValidation = (translate: Function) => {
   return yup.object().shape({
-    [PaymentSettings.fullName]: yup.string().required("validation required"),
-
-    [PaymentSettings.changePassword]: yup
+    [PaymentSettings.publishableKey]: yup
       .string()
       .required("validation required"),
+
+    [PaymentSettings.searchKey]: yup.string().required("validation required"),
   });
 };

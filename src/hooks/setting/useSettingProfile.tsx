@@ -4,8 +4,8 @@ import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
-import { generateProfileSettingValidation } from "@/validation/admin/settingSchema";
-import { changeProfileSettingFormField } from "@/components/admin/setting/fields/change-profile-setting-fields";
+import { generateProfileSettingValidation } from "@/validation/settingSchema";
+import { changeProfileSettingFormField } from "@/components/setting/fields/change-profile-setting-fields";
 
 export default function useSettingProfile() {
   const router = useRouter();
