@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { TRowServices } from "@/types/service";
+import { Service } from "@/types/service";
 import editIcon from "@/assets/svgs/edit_info.svg";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import Image from "next/image";
 const TableRowServices = ({
   servicesData,
 }: {
-  servicesData: TRowServices[];
+  servicesData: Service[];
 }) => {
   const router = useRouter();
 

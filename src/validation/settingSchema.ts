@@ -68,8 +68,5 @@ export const generateProfileSettingValidation = (translate: Function) => {
       .number()
       .required("validation required"),
     [SettingProfile.IBAN_number]: yup.number().required("validation required"),
-    [SettingProfile.changePassword]: yup
-      .string()
-      .required("validation required"),
   });
 };

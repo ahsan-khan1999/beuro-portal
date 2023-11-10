@@ -17,7 +17,7 @@ const DeleteConfirmation_2 = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564px] min-h-auto"
+        containerClassName="max-w-[564.004px] min-h-auto"
       >
         <div className="relative flex flex-col items-center">
           <Image

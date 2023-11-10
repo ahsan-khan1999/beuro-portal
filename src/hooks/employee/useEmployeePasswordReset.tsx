@@ -29,11 +29,12 @@ export default function useEmployeePasswordReset(
   const fields = EmployeeResetPasswordFieldsFormField(
     register,
     loading,
-    passwordResetSuccessfully
+    
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));
+    passwordResetSuccessfully()
   };
   return {
     error,

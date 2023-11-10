@@ -23,3 +23,9 @@ export enum EditPaymentDetails {
   cardNumber = "cardNumber",
   cvv = "cvv",
 }
+
+// add follow up
+export enum AddFollowUp {
+  date = "date",
+  detail = "detail",
+}

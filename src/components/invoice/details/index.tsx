@@ -10,7 +10,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
-import InvoiceCreatedSuccessfully from "@/base-components/ui/modals1/InvoiceCreatedSuccessfully";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const InvoiceDetails = () => {
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -24,10 +24,14 @@ const InvoiceDetails = () => {
 
   const invoiceCreated = () => {
     dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.INVOICE_CREATED_SUCCESSFULLY));
+    dispatch(updateModalType(ModalType.CREATION));
   };
 
   const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const route = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
@@ -35,8 +39,13 @@ const InvoiceDetails = () => {
     [ModalType.INVOICE_CREATE]: (
       <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
-    [ModalType.INVOICE_CREATED_SUCCESSFULLY]: (
-      <InvoiceCreatedSuccessfully onClose={onClose} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Invoice Created Successful "
+        subHeading="Thanks for creating Invoice we are happy to have you. "
+        route={route}
+      />
     ),
   };
 

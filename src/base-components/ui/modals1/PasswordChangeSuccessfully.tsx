@@ -8,7 +8,7 @@ const PasswordChangeSuccessfully = ({onClose} : {onClose: () => void}) => {
     <>
       <BaseModal
        onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
+        containerClassName="max-w-[624.862px] min-h-auto max-h-[465px]"
       >
         <div className="flex items-center flex-col">
           <Image

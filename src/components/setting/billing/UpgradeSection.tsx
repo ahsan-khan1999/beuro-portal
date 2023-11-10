@@ -33,7 +33,7 @@ const UpgradeSection = ({
       <section className="bg-white p-4 rounded-md mt-[18px]">
         <div className="flex flex-col gap-y-2">
           <p className="text-base font-normal text-[#4B4B4B]">Payment Method</p>
-          <p className=" bg-[#5488EE] rounded-md px-3 py-1 w-fit">
+          <p className=" bg-[#5488EE] rounded-md px-3 py-1 w-fit bg-opacity-20">
             <span className="text-[#4B4B4B] font-normal text-xs">
               Next Renew 24 september 2018
             </span>

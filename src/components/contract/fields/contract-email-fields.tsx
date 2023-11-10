@@ -40,7 +40,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             },
             field: {
               className:
-                "!p-4 !h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+                "!p-4  !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",

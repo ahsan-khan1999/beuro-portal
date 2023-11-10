@@ -4,18 +4,15 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { CustomerDetail } from "@/types/customer";
 import { EmployeeDetail } from "@/types/employee";
 
-const DetailsData = ({ date, id, name }: EmployeeDetail) => {
-  console.log(date, "date");
-
+const DetailsData = ({ date, id, name, isUpdate }: EmployeeDetail) => {
   const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          {router.pathname === "/employees/details" && (
+          {isUpdate && router.pathname === "/employees/details" && (
             <Image
               src={backIcon}
               alt="backIcon"

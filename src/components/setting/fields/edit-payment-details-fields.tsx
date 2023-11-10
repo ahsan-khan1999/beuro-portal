@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateEditPaymentDetailsFormField } from "@/types";
 
 export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
-  (register, loading, control) => {
+  (register, loading, onClick) => {
     const formField: FormField[] = [
       {
         field: {
@@ -105,6 +105,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
+                onClick:onClick
               },
             },
             {
