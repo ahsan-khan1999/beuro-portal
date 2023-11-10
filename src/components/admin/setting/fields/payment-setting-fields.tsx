@@ -13,7 +13,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
         className: "flex ",
         children: [
           {
-            containerClass: "w-full",
+            containerClass: "w-full mb-0",
             field: {
               type: Field.div,
               className: "",

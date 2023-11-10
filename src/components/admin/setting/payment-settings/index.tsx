@@ -4,7 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const PaymentSettings = () => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "  ";
   const { fields, onSubmit, handleSubmit, errors } =
     usePaymentSettings();
   return (
