@@ -20,8 +20,14 @@ const PieChart = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="max-w-[300px] mx-auto ">
-      <canvas id="myPieChart" width="400" height="400"></canvas>
+    <div className="rounded-[20px] bg-white max-w-[400px]">
+      <h3 className="pt-5 pb-3 px-10 font-medium text-[#18181B]">Plans</h3>
+      <hr className="h-[1px] text-black opacity-10 pb-11" />
+      <div className="px-6 pb-5">
+        <div className="max-w-[300px] mx-auto ">
+          <canvas id="myPieChart" width="400" height="400"></canvas>
+        </div>
+      </div>
     </div>
   );
 };
