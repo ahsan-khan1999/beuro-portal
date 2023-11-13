@@ -37,7 +37,7 @@ const AdminDashboard = () => {
     labels: ["Silver", "Gold", "Diamond", "Infinite"],
   };
   const data2 = {
-    labels: [1, 2, 3, 4, 5, 6, 7], // X-axis labels (time or other variable)
+    labels: ["Feb","Mar","Apr","May","Jun"], // X-axis labels (time or other variable)
     waveHeight: [0, 0.5, 1.2, 1.8, 1.5, 0.8, 0.2], // Y-axis data (wave height)
   };
 

@@ -15,12 +15,14 @@ const WavesChart = ({ data }) => {
           borderColor: "#36A2EB",
           data: data.waveHeight,
           fill: true,
+          tension:0.4,
         }],
+        
       },
       options: {
         scales: {
           x: {
-            type: 'linear',
+            type: 'category',
             position: 'bottom',
           },
           y: {
