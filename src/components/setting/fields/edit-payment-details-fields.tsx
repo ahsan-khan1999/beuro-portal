@@ -7,6 +7,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
       {
         field: {
           type: Field.div,
+id:"div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
@@ -51,6 +52,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         containerClass: "mt-[14px]",
         field: {
           type: Field.div,
+id:"div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
@@ -94,12 +96,14 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
       {
         field: {
           type: Field.div,
+id:"div-field",
           className: "flex space-x-[18px] mt-5",
           children: [
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Cancel",
                 inputType: "button",
                 className:
@@ -112,6 +116,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Save Changes",
                 inputType: "submit",
                 className:

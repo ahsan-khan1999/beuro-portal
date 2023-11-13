@@ -76,12 +76,14 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
         containerClass: "mt-6",
         field: {
           type: Field.div,
+id:"div-field",
           className: "flex items-center space-x-[18px] ",
           children: [
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Cancel",
                 inputType: "button",
                 className:
@@ -94,6 +96,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Save Changes",
                 inputType: "submit",
                 className:

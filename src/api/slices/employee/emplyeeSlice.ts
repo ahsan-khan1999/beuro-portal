@@ -2,10 +2,10 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
-import { TRowEmployees } from "@/types/employee";
+import { Employee } from "@/types/employee";
 
 interface EmployeeState {
-    employee: TRowEmployees[];
+    employee: Employee[];
     loading: boolean;
     error: Record<string, object>
 }

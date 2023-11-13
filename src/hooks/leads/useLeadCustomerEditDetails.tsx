@@ -30,7 +30,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
   });
   const fields = LeadsCustomerDetailsFormField(register, loading, control,handleBack);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    // dispatch(loginUser({ data, router, setError, translate }));
     onClick(0, ComponentsType.customer);
   };
   return {

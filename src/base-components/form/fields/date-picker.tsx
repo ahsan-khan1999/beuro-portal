@@ -20,7 +20,7 @@ export const DatePicker = ({
       <div>
         {
           remove &&
-          <div className="cursor-pointer  absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md" onClick={onRemove}>
+          <div className="cursor-pointer top-0 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md" onClick={onRemove}>
             {remove}
           </div>
         }

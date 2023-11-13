@@ -1,5 +1,10 @@
 import * as yup from "yup";
-import { AddReason, ChangeMailSetting, SettingProfile } from "@/enums/setting";
+import {
+  AddReason,
+  ChangeMailSetting,
+  PaymentSettings,
+  SettingProfile,
+} from "@/enums/admin/setting";
 
 // Validation for edit details
 export const generateChangeMailSettingValidationSchema = (
@@ -47,29 +52,20 @@ export const generateAddReasonValidation = (translate: Function) => {
 export const generateProfileSettingValidation = (translate: Function) => {
   return yup.object().shape({
     [SettingProfile.fullName]: yup.string().required("validation required"),
-    [SettingProfile.companyName]: yup.string().required("validation required"),
-    [SettingProfile.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validation required")),
-    [SettingProfile.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validation required")),
-    [SettingProfile.website]: yup.string().required("validation required"),
-    [SettingProfile.mwstNumber]: yup.number().required("validation required"),
-    [SettingProfile.streetAddress]: yup
+    [SettingProfile.oldPassword]: yup.string().required("validation required"),
+    [SettingProfile.newPassword]: yup.string().required("validation required"),
+    [SettingProfile.confirmNewPassword]: yup
       .string()
       .required("validation required"),
-    [SettingProfile.postCode]: yup.number().required("validation required"),
-    [SettingProfile.country]: yup.string().required("validation required"),
-    [SettingProfile.bankName]: yup.string().required("validation required"),
-    [SettingProfile.accountNumber]: yup
-      .number()
-      .required("validation required"),
-    [SettingProfile.IBAN_number]: yup.number().required("validation required"),
-    [SettingProfile.changePassword]: yup
+  });
+};
+// Validation for add reason
+export const generatePaymentSettingsValidation = (translate: Function) => {
+  return yup.object().shape({
+    [PaymentSettings.publishableKey]: yup
       .string()
       .required("validation required"),
+
+    [PaymentSettings.searchKey]: yup.string().required("validation required"),
   });
 };

@@ -15,6 +15,7 @@ import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import ExclusiveTax from "@/base-components/ui/modals1/ExclusiveTax";
+import PaymentSettings from "./payment-settings";
 
 const AdminSettings = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
@@ -27,8 +28,10 @@ const AdminSettings = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
-    [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
+    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading="" />,
+    // [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
+    [ModalType.EXCLUSIVE_TAX]: <AddTax onClose={onClose} heading="" />,
+
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
   };
 
@@ -69,14 +72,9 @@ const AdminSettings = () => {
           ) : null}
         </div>
         <div className="mt-4">
-          {switchDetails === 1 ? (
-            <SystemSettingDetails
-              addTaxHandler={addTaxHandler}
-              exclusiveTaxHandler={exclusiveTaxHandler}
-            />
-          ) : null}
+          {switchDetails === 1 ? <PaymentSettings /> : null}
         </div>
-        <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
+        <div className="mt-4">{switchDetails === 2 ? <MailSetting /> : null}</div>
         <div className="mt-4">
           {switchDetails === 3 ? <FollowUpSetting /> : null}
         </div>

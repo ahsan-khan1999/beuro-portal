@@ -10,6 +10,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -53,6 +54,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -96,6 +98,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -140,6 +143,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -181,31 +185,48 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[25px]",
+      containerClass: "mb-0 mt-8",
       label: {
         text: "Email",
         htmlFor: "mail",
-        className: "mb-[10px]",
+        className: "mb-[10px] !text-base",
       },
+
       field: {
-        type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
-        id: "mail",
-        name: "mail",
-        placeholder: "Mail From Address",
-        register,
+        type: Field.div,
+        children: [
+          {
+            containerClass: "mb-3",
+            field: {
+              type: Field.span,
+              text: "Enter The Email To Receive The Testing Email Of Mail Configuration.",
+              containerClassName: "text-[14px] font-normal ",
+            },
+          },
+          {
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-dark focus:!border-primary ",
+              inputType: "text",
+              id: "mail",
+              name: "mail",
+              placeholder: "Mail From Address",
+              register,
+            },
+          },
+        ],
       },
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0",
       field: {
         type: Field.button,
-        text: "Save Setting",
+        text: "Save",
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        id: "save",
         loading,
       },
     },

@@ -12,6 +12,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -130,6 +131,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
 
       field: {
         type: Field.div,
+id:"div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
@@ -198,12 +200,14 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
               className:
@@ -216,6 +220,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className:

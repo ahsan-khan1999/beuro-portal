@@ -77,11 +77,15 @@ const DeactivateAccount2 = ({ onClose }: { onClose: () => void }) => {
         text="Continue"
         inputType="button"
         className="mt-6 bg-[#CB2C2C] hover:bg-none  min-w-full rounded-lg  "
+        id="button"
+
       />
       <Button
         text="Cancel"
         inputType="button"
         className="mt-3 bg-transparent text-gray min-w-full rounded-lg hover:bg-none  border border-lightGray"
+        id="button"
+
       />
     </InfoModal>
   );

@@ -11,6 +11,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -80,6 +81,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -154,6 +156,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -212,12 +215,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               // onClick: () => setCurrentFormStage("locationDetails"),
@@ -230,6 +235,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:

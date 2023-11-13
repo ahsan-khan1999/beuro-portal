@@ -11,6 +11,8 @@ export default function Home() {
     <LoginFlowCard>
       <Login />
       <DescriptionSection />
+    
     </LoginFlowCard>
+
   );
 }

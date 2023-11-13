@@ -56,6 +56,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex justify-between ",
         children: [
           {
@@ -78,6 +79,8 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
               linkHref: "/forget-password",
               containerClassName: "inline-flex font-medium text-gray",
               linkClassName: "text-sm font-medium text-primary",
+              id: "",
+
             },
           },
         ],
@@ -89,6 +92,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Login",
         inputType: "submit",
         className: "rounded-lg justify-center text-white ",
@@ -105,6 +109,8 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         linkHref: "/registration",
         containerClassName: "text-[14px] text-dark  ",
         linkClassName: "  text-primary",
+        id: "",
+
       },
     },
   ];
@@ -120,6 +126,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -254,6 +261,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Next",
         inputType: "submit",
         className:
@@ -276,6 +284,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -405,11 +414,13 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Back",
               inputType: "button",
               onClick: () => setCurrentFormStage && setCurrentFormStage("companyDetails"),
@@ -421,6 +432,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Next",
               inputType: "submit",
               className:
@@ -447,6 +459,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -550,11 +563,13 @@ export const detailBankFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Back",
               inputType: "button",
               onClick: () => setCurrentFormStage && setCurrentFormStage("locationDetails"),
@@ -566,6 +581,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Lets finish",
               inputType: "submit",
               className:
@@ -606,12 +622,14 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex gap-x-4 ",
         children: [
           {
             label: null,
             field: {
               type: Field.button,
+              id: "button",
               text: "Back To Login",
               inputType: "button",
               className:
@@ -624,6 +642,7 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
             label: null,
             field: {
               type: Field.button,
+              id: "button",
               text: "Submit",
               inputType: "submit",
               className: "w-[190px]",
@@ -694,6 +713,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Submit",
         inputType: "submit",
         className: "mt-8 rounded-lg",

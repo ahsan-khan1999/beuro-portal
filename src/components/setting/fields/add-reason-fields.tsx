@@ -29,6 +29,7 @@ export const addReasonFormField: GenerateAddReasonFormField = (
       containerClass: "mb-0 mt-4 float-right mb-[53px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Add Reason",
         inputType: "submit",
         className:

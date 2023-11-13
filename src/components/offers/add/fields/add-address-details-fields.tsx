@@ -15,6 +15,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -100,6 +101,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -180,12 +182,14 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               className:
@@ -197,6 +201,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:
