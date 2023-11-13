@@ -4,7 +4,15 @@ import React from "react";
 import moreInfoIcon from "@/assets/svgs/entity_more_info.svg";
 import { useRouter } from "next/router";
 
-const TableRows = ({ dataToAdd }: { dataToAdd: contractTableTypes[] }) => {
+const TableRows = ({
+  dataToAdd,
+  handleNotes,
+  handleImageUpload,
+}: {
+  dataToAdd: contractTableTypes[];
+  handleNotes: Function;
+  handleImageUpload: Function;
+}) => {
   const router = useRouter();
   return (
     <div>
@@ -61,10 +69,18 @@ const TableRows = ({ dataToAdd }: { dataToAdd: contractTableTypes[] }) => {
               </div>
             </span>
             <span className="px-6 py-4 flex justify-center items-center  bg-white ">
-              <Image src={item.editImg} alt="edit_img_icon" />
+              <Image
+                src={item.editImg}
+                alt="edit_img_icon"
+                onClick={(e) => handleImageUpload(item, e)}
+              />
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">
-              <Image src={item.editNote} alt="edit_note_icon" />
+              <Image
+                src={item.editNote}
+                alt="edit_note_icon"
+                onClick={(e) => handleNotes(item, e)}
+              />
             </span>
 
             <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">

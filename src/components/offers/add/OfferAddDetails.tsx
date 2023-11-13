@@ -3,16 +3,30 @@ import { useAddOfferDetails } from "@/hooks/offers/useAddOfferDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import backIcon from "@/assets/svgs/back_icon.svg";
 
-const OfferAddDetails = () => {
+const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddOfferDetails();
+    useAddOfferDetails(onHandleNext);
+
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 ">
-        <h2 className="text-[#393939] text-lg font-medium">Offer details</h2>
+      <div
+        className="flex justify-between items-center pb-5 "
+        id="Customer Details"
+      >
+        <div className="flex items-center gap-x-[26px]">
+          <Image
+            src={backIcon}
+            alt="back_icon"
+            className="cursor-pointer"
+            onClick={() => router.push("/offers")}
+          />
+          <p className="font-medium text-[24px] leading-6 ">Offer details</p>
+        </div>
         <button
           onClick={() => router.push("/offers")}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
@@ -20,7 +34,6 @@ const OfferAddDetails = () => {
           Cancel
         </button>
       </div>
-
       <hr className="opacity-20 mb-5" />
 
       <Form

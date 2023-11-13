@@ -1,5 +1,5 @@
 // Leads Table
-export interface LeadsTableRowTypes {
+export interface Lead {
   id: number;
   name: string;
   email: string;

@@ -1,13 +1,16 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ComponentsType } from "../add/AddNewLeadsData";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       label: {
         text: "Address 1 Details",
         htmlFor: "address-1-details",
@@ -15,6 +18,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -26,7 +30,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -43,7 +47,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -60,7 +64,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -81,8 +85,8 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4 !border-dark  focus:!border-primary ",
+        rows:4,
         id: "description",
         name: "description",
         placeholder:
@@ -100,6 +104,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -111,7 +116,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -128,7 +133,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -145,7 +150,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -166,8 +171,8 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4 !border-dark  focus:!border-primary ",
+        rows:4,
         id: "description",
         name: "description",
         placeholder:
@@ -179,23 +184,27 @@ export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
               loading,
+              onClick: onClick,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:

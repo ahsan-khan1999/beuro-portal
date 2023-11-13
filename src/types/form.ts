@@ -15,7 +15,7 @@ import {
 import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
-import React from "react";
+import React, { ReactNode } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
 
 interface BaseFieldProps<T extends Field> {
@@ -47,9 +47,9 @@ export interface InputProps extends BaseFieldProps<Field.input> {
 
 // textarea added
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
-  inputType: "text";
-  value?: string;
   register: UseFormRegister<FieldValues>;
+  rows?: number;
+  value?: string;
   placeholder?: string;
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
@@ -69,7 +69,7 @@ export interface CKEditorBoxProps {
   field: ControllerRenderProps<FieldValues, string>;
   trigger?: UseFormTrigger<FieldValues>;
   name?: string;
-  type: string
+  type: string;
 }
 
 export interface CreditCardInputProps
@@ -90,6 +90,9 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
+  disabled?: boolean;
+  isButton?:boolean,
+  onClick?:Function,
   svg: string;
   alt: string;
 }
@@ -106,7 +109,6 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
-
 }
 
 export interface SelectBoxProps {
@@ -118,7 +120,6 @@ export interface SelectBoxProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
-
 }
 
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
@@ -145,6 +146,7 @@ export interface DragAndDropFileFieldProps
 export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
+  isOpenedFile?: boolean;
 }
 
 // interface for the pdf file upload
@@ -181,11 +183,20 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   success?: boolean;
   disabled?: boolean;
 }
-
+export interface MultiDateProps extends BaseFieldProps<Field.phone> {
+  value?: string;
+  control?: Control<FieldValues>;
+  watch?: UseFormWatch<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  success?: boolean;
+  disabled?: boolean;
+}
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;
   value?: string;
   className?: string;
+  remove?: string;
+  onRemove?: () => void
 }
 
 export interface SpanProps {
@@ -198,14 +209,16 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
+  id: string
 }
 
 export interface DivProps {
-  type: Field.div;
+  type: Field.div,
   name?: string;
   children: FormField[];
   className?: string;
   errors?: Record<string, any>;
+  id:string
 }
 
 interface LinkImage {
@@ -302,6 +315,8 @@ export interface FieldComponents {
   button: React.FC<ButtonProps>;
   // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
+  dateRange: React.FC<MultiDateProps>;
+
 }
 
 export interface FormProps {
@@ -350,4 +365,13 @@ export type CreditCardIconsType = Record<CardType, StaticImageData>;
 export interface GetCreditCardIconProps {
   cardType: DetectedCardInfo | null;
   icons: Record<CardType, StaticImageData>;
+}
+
+
+export interface CustomHookFormProps {
+  children: ReactNode;
+  className?: string;
+}
+export interface HookFieldProps {
+  [key: string]: JSX.Element;
 }

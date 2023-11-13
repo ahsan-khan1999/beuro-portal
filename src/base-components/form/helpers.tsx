@@ -4,6 +4,7 @@ import {
   FieldComponents,
   FieldProps,
   FieldType,
+  FormField,
   GetCreditCardIconProps,
 } from "@/types";
 import {
@@ -18,6 +19,7 @@ import {
   DragAndDropFileField,
   DragAndDropPdfField,
   ImageUploadField,
+  MultiDateField
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -53,6 +55,7 @@ const fieldComponents: FieldComponents = {
   button: Button,
   // addField: AddFiled,
   link: LinkField,
+  dateRange:MultiDateField
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -91,6 +94,7 @@ export function isFieldType(type: any): type is FieldType {
     "div",
     "button",
     "link",
+    "dateRange"
     // "addField",
   ].includes(type);
 }
@@ -143,3 +147,20 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
 //     />
 //   );
 // };
+
+
+export const renderField = (
+  fieldData: FormField,
+  error: string,
+  errors?: Record<string, any>
+) => {
+  if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
+    return null;
+  }
+  return getTypedFieldComponent(
+    fieldData?.field?.type,
+    fieldData?.field,
+    error,
+    errors
+  );
+};

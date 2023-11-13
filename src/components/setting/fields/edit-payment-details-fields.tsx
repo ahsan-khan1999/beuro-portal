@@ -2,11 +2,12 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateEditPaymentDetailsFormField } from "@/types";
 
 export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
-  (register, loading, control) => {
+  (register, loading, onClick) => {
     const formField: FormField[] = [
       {
         field: {
           type: Field.div,
+id:"div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
@@ -51,6 +52,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         containerClass: "mt-[14px]",
         field: {
           type: Field.div,
+id:"div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
@@ -94,23 +96,27 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
       {
         field: {
           type: Field.div,
+id:"div-field",
           className: "flex space-x-[18px] mt-5",
           children: [
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Cancel",
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
+                onClick:onClick
               },
             },
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Save Changes",
                 inputType: "submit",
                 className:

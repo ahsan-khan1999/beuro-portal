@@ -61,6 +61,8 @@ export enum Field {
   button = "button",
   addField = "span",
   link = "link",
+  dateRange = "dateRange",
+
 }
 
 export enum CardType {

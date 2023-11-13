@@ -63,7 +63,7 @@ const LeadsDetails = () => {
         <DetailsCard>
           <LeadsDetailsCardData leadDeleteHandler={leadDeleteHandler} />
         </DetailsCard>
-        <div className="flex mt-7">
+        <div className=" mt-7">
           <LeadsDetailsData />
         </div>
       </Layout>

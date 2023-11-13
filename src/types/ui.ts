@@ -54,6 +54,7 @@ export interface ButtonProps {
   loaderColor?: string;
   icon?: any;
   iconAlt?: any;
+  id: string
 }
 
 // Add field interface
@@ -65,6 +66,8 @@ export interface AddFieldProps {
   iconAlt?: any;
   type?: Field.button;
   name: string;
+  id: string
+
 }
 
 export interface Image {
@@ -200,7 +203,7 @@ interface WidgetBaseProps {
   containerClassName?: string;
 }
 
-export interface BaseCardProps extends WidgetBaseProps {}
+export interface BaseCardProps extends WidgetBaseProps { }
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {

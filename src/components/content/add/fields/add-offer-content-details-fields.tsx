@@ -8,7 +8,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-5",
       label: {
         text: "Content Name",
         htmlFor: "contentName",
@@ -29,6 +29,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-4",
         children: [
           {
@@ -125,6 +126,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
         type: Field.dragAndDropPdfField,
         id: "attachments",
         name: "attachments",
+        isOpenedFile: false,
         text: "Drop or attach your file here",
         fileSupported: "Files supported: PDF, JPG, PNG, GIF",
         control,
@@ -135,6 +137,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       containerClass: "mb-0 mt-6",
       field: {
         type: Field.button,
+id:"button",
         text: "Next",
         inputType: "submit",
         className:

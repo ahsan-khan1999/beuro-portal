@@ -111,6 +111,8 @@ const SellerBankDetails = ({ onClose }: { onClose: () => void }) => {
             text="Mark as Paid"
             inputType="button"
             className="rounded-lg w-[278px] mt-5"
+            id="button"
+
           />
         </div>
         <div className="pt-[56px] pl-[52px]">

@@ -8,8 +8,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -20,6 +22,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.div,
+              id: "div-field",
               className: "flex flex-col",
               children: [
                 {
@@ -55,7 +58,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
               value: "Company",
@@ -87,6 +90,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -127,14 +131,13 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.phone,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
               id: "phoneNumber",
               name: "phoneNumber",
-              placeholder: "Enter Your Phone Number",
+              control,
+              country:"ch",
 
-              register,
             },
           },
         ],
@@ -144,6 +147,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -154,13 +158,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.phone,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
               id: "mobileNumber",
               name: "mobileNumber",
-              placeholder: "Enter Your Mobile Number",
-              register,
+              country:"ch",
+              control,
             },
           },
         ],
@@ -177,6 +180,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
 
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -224,7 +228,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "!p-4 !border-dark  ",
               type: Field.select,
               id: "country",
               name: "country",
@@ -246,12 +250,14 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
       containerClass: "mb-0",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-[18px] mt-[18px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+              id: "button",
               text: "Next",
               inputType: "submit",
               className:

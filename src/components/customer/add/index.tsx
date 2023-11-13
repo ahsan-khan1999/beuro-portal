@@ -2,8 +2,8 @@ import { Layout } from "@/layout";
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
-import AddCustomerForm from "../add-customer-form";
 import { useRouter } from "next/router";
+import AddCustomerForm from "../add-customer-form";
 type ComponentLookupType = Record<string, JSX.Element>; 
 
 const AddCustomer = () => {
@@ -20,9 +20,11 @@ const AddCustomer = () => {
       icon:""
     },
   ];
+  
   const componentLookup: ComponentLookupType = {
     "Customer Details": <AddCustomerForm handleCancel={handleCancel} />
   }
+
   return (
     <Layout>
       <h1 className="text-[#222B45] text-xl mb-5">Add new Customer </h1>

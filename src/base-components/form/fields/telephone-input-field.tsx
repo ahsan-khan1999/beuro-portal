@@ -1,6 +1,5 @@
 // import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
 import { PhoneProps } from "@/types";
-import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -15,18 +14,9 @@ export const TelephoneInputField = ({
   success,
   disabled
 }: PhoneProps) => {
-  // const updatedValue = watch!(name, value);
-  // useEffect(() => setValue &&setValue(name, value), [])
-
-  return (
-    // <PhoneInput
-    //   country={country}
-    //   onChange={(value) => setValue!(name, value)}
-    //   value={updatedValue}
-    //   placeholder="+41 - _ _  _ _ _  _ _ _ _"
-    //   containerClass="!border-2 !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary"
-    //   inputClass="!w-full !h-12 !border-0 !rounded-lg"
-    // />
+  
+  return (  
+    
     <Controller
       control={control}
       name={name}

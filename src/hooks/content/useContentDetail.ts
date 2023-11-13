@@ -13,7 +13,7 @@ const useContentDetail = () => {
   useEffect(() => {
     if (typeof Number(id) == "number")
       console.log(
-        contentData.filter((item) => item.id === id),
+        contentData.filter((item) => item.id === id)[0],
         "1234"
       );
 

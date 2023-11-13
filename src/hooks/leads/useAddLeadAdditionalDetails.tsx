@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAdditionalDetailsFormField } from "@/components/leads/fields/Add-lead-additional-fields";
 import { generateLeadAdditionalDetailsValidation } from "@/validation/leadsSchema";
+import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 
-export const useAddLeadAdditionalDetails = () => {
+export const useAddLeadAdditionalDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -20,12 +21,13 @@ export const useAddLeadAdditionalDetails = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddLeadAdditionalDetailsFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    onHandleNext(ComponentsType.additionalEdit);
   };
   return {
     fields,

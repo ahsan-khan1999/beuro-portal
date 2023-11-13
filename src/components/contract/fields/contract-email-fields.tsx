@@ -1,18 +1,18 @@
 import { Field } from "@/enums/form";
-import { useRouter } from "next/router";
 import { FormField, GenerateContractFormField } from "@/types";
 
 export const ContractEmailPreviewFormField: GenerateContractFormField = (
   register,
   loading,
   control,
-  onBack,
+  onClick,
+  onBack
 ) => {
-  const router = useRouter();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -41,7 +41,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             },
             field: {
               className:
-                "!p-4 !h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+                "!p-4  !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
@@ -98,7 +98,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: " mt-5",
       label: {
         text: "Attachments",
         htmlFor: "fileUpload",
@@ -107,6 +107,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       field: {
         type: Field.dragAndDropPdfField,
         id: "fileUpload",
+        isOpenedFile: false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
         name: "fileUpload",
@@ -118,12 +119,14 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               className:
@@ -136,12 +139,12 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
-              // onClick: () => router.push("/contract/pdf-preview"),
             },
           },
         ],

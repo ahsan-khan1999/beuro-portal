@@ -3,18 +3,22 @@ import { useAddContentConfirmationDetails } from "@/hooks/content/useAddContentC
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const AddConfirmationContentDetails = () => {
-  const defaultClassName = "mt-[30px]  ";
+const AddConfirmationContentDetails = ({
+  onHandleNext,
+}: {
+  onHandleNext: Function;
+}) => {
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useAddContentConfirmationDetails();
+    useAddContentConfirmationDetails(onHandleNext);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Confirmation Content</h2>
-        <button className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7]  px-9">
-          Cancel
-        </button>
+      <div className="flex justify-between items-center pb-[26px] ">
+        <h2 className="text-[#393939] text-lg font-medium">
+          Confirmation Content
+        </h2>
       </div>
+      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

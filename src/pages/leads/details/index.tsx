@@ -1,12 +1,8 @@
-import React from 'react'
-import LeadsDetails from '@/components/leads/details'
+import React from "react";
+import LeadsDetails from "@/components/leads/details";
 
 const index = () => {
-  return (
-    <div>
-      <LeadsDetails/>
-    </div>
-  )
-}
+  return <LeadsDetails />;
+};
 
-export default index
+export default index;

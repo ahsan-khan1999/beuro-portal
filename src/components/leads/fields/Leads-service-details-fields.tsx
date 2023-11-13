@@ -4,12 +4,15 @@ import { FormField, GenerateLeadsFormField } from "@/types";
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -19,7 +22,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -53,7 +56,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailablity",
               name: "contactAvailablity",
@@ -79,6 +82,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -103,7 +107,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "preferContact",
               name: "preferContact",
@@ -128,7 +132,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
@@ -153,6 +157,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
@@ -164,7 +169,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               value: "Facebook",
@@ -185,7 +190,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "!p-4 !border-dark  ",
               type: Field.select,
               id: "otherServices",
               name: "otherServices",
@@ -211,24 +216,27 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick: onClick,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className:

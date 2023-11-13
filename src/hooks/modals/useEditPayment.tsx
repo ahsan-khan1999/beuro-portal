@@ -7,7 +7,7 @@ import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateEditPaymentDetailsValidation } from "@/validation/modalsSchema";
 import { editPaymentDetailsFormField } from "@/components/setting/fields/edit-payment-details-fields";
 
-export default function useEditPayment() {
+export default function useEditPayment(onClose: Function) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { t: translate } = useTranslation();
@@ -18,14 +18,15 @@ export default function useEditPayment() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = editPaymentDetailsFormField(register, loading);
+  const fields = editPaymentDetailsFormField(register, loading, onClose);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));
+    onClose();
   };
   return {
     error,

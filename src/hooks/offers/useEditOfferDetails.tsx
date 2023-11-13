@@ -13,19 +13,19 @@ export const useEditOfferDetails = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateOfferDetailsValidationSchema(translate);
+  const schema = generateOfferDetailsValidationSchema(translate,3);
   const {
     register,
     handleSubmit,
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = OfferEditDetailsFormField(register, loading, control);
+  const fields = OfferEditDetailsFormField(register, loading, control,() => console.log(""));
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    // dispatch(loginUser({ data, router, setError, translate }));
     router.push("/offers/details");
   };
   return {

@@ -4,8 +4,8 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const SettingProfile = ({handleChangePassword} : {handleChangePassword: Function}) => {
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile();
+  const defaultClassName = "";
+  const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile(handleChangePassword);
   return (
     <FormCard>
       <Form

@@ -10,7 +10,7 @@ const RequestSubmitted = ({ onClose }: { onClose: () => void }) => {
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
+        containerClassName="max-w-[606px] min-h-auto max-h-[465px]"
       >
         <div className="flex items-center flex-col">
           <Image

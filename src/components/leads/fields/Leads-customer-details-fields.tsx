@@ -12,6 +12,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -54,7 +55,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
               value: "Individual",
@@ -130,6 +131,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
 
       field: {
         type: Field.div,
+id:"div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
@@ -178,7 +180,7 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "!p-4 !border-dark  ",
               type: Field.select,
               id: "country",
               name: "country",
@@ -198,30 +200,32 @@ export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick:onClick
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className:
                 "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
-              onClick: onClick,
             },
           },
         ],

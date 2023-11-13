@@ -1,21 +1,34 @@
+import DetailFilter from "@/base-components/filter/detail-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
+import useFilter from "@/hooks/filter/hook";
 import React, { useState } from "react";
 
+
 export default function CustomerFilter() {
-  const [isOpen, setIsOpen] = useState(false);
+
+  const { filter, setFilter, isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter()
   return (
     <div className="flex">
-      <InputField handleChange={(value) => console.log(value)} value="" />
+      <InputField handleChange={(value) => setFilter({ ...filter, ["text"]: value })} value={filter.text} iconDisplay={true} />
       <SelectField
-        handleChange={(value) => console.log(value)}
+        handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value=""
         dropDownIconClassName=""
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        options={["1", "2", "2", "2", "2"]}
+        options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
+      <DetailFilter
+        filter={filter}
+        setFilter={setFilter}
+        moreFilter={moreFilter}
+        setMoreFilter={setMoreFilter}
+        handleFilterResetToInitial={handleFilterResetToInitial}
+        handleFilterReset={handleFilterReset}
+        handleItemSelected={handleItemSelected}
+        typeList={typeList} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -20,7 +21,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Rahal Ahmed Ali",
               id: "selectCustomer",
@@ -71,6 +72,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -81,7 +83,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
               value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
@@ -120,6 +122,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -130,7 +133,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -187,6 +190,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
 
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -253,6 +257,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -293,6 +298,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

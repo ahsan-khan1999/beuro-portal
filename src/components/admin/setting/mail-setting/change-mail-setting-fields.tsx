@@ -10,6 +10,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -53,6 +54,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -96,6 +98,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -140,6 +143,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -222,6 +226,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        id: "save",
         loading,
       },
     },

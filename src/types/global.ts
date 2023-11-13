@@ -1,5 +1,6 @@
 // import { ModalType } from "@/enums";
 
+import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { SetStateAction } from "react";
 
@@ -26,7 +27,10 @@ export interface Status {
   active?:boolean;
   blocked?:boolean;
 }
-
+export interface CheckBoxFilterProps{
+  label:string;
+  type:keyof Status
+}
 export interface CheckFieldProps {
   label: string;
   checkboxFilter: Status;
@@ -35,10 +39,10 @@ export interface CheckFieldProps {
 }
 export interface InputFieldProps {
   value: string;
-  title?: string;
-  label?: string;
-  border?: number;
   handleChange: (value: string) => void;
+  containerClassName?: string;
+  textClassName?: string;
+  iconDisplay?: boolean
 }
 
 export interface OptionsFieldProps {
@@ -51,4 +55,18 @@ export interface OptionsFieldProps {
   dropDownIconClassName: string;
   isOpen: boolean;
   setIsOpen: SetStateAction<any>;
+}
+
+
+export interface GlobalApiResponseType {
+  [Header.header]: {
+    [Header.accesstoken]: string;
+    [Header.refreshtoken]: string;
+  };
+  [Header.data]: {
+    [ApiResponse.success]: boolean;
+    [ApiResponse.code]: number;
+    [ApiResponse.message]: string;
+    [Header.data]: Record<string, any>
+  };
 }

@@ -11,6 +11,9 @@ export const PasswordField = ({
   name,
   register,
   placeholder,
+  disabled,
+  isButton,
+  onClick,
   className,
   svg,
   alt,
@@ -18,7 +21,7 @@ export const PasswordField = ({
   const [showPass, setShowPass] = useState<boolean>(false);
   const [inputFocus, setInputFocus] = useState(false);
 
-  const defaultClasses = `w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
+  const defaultClasses = ` w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
   }`;
   return (
@@ -47,19 +50,28 @@ export const PasswordField = ({
         defaultValue={value}
         {...register(name)}
         placeholder={placeholder}
+        disabled={disabled}
         className={`${defaultClasses} ${className}`}
       />
 
-      <Image
-        className={`absolute right-[16px] cursor-pointer ${
-          (inputFocus && "tests") || "test"
-        }`}
-        src={showPass ? eyeOpen : eyeClose}
-        alt={alt}
-        width={20}
-        height={20}
-        onClick={() => setShowPass(!showPass)}
-      />
+      {isButton ? (
+        <span onClick={() => {
+          onClick && onClick();
+        }} className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default">
+         Change
+        </span>
+      ) : (
+        <Image
+          className={`absolute right-[16px] cursor-pointer ${
+            (inputFocus && "tests") || "test"
+          }`}
+          src={showPass ? eyeOpen : eyeClose}
+          alt={alt}
+          width={20}
+          height={20}
+          onClick={() => setShowPass(!showPass)}
+        />
+      )}
     </div>
   );
 };

@@ -8,8 +8,10 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -19,7 +21,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -53,7 +55,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailablity",
               value: "Morning(9am to 12am)",
@@ -79,6 +81,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -103,7 +106,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "preferContact",
               name: "preferContact",
@@ -128,7 +131,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
@@ -153,6 +156,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -163,7 +167,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
@@ -184,7 +188,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "!p-4 !border-dark  ",
               type: Field.select,
               id: "otherServices",
               name: "otherServices",
@@ -211,12 +215,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Back",
               inputType: "button",
               // onClick: () => setCurrentFormStage("locationDetails"),
@@ -229,6 +235,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Next",
               inputType: "submit",
               className:

@@ -15,7 +15,7 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+        className: "!p-4  !border-dark  focus:!border-primary ",
         type: Field.select,
         value:
           "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
@@ -52,6 +52,7 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px] mb-0",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

@@ -6,12 +6,15 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   loading,
   isUpdate,
   handleUpdateCancel,
+  { mobile, phone },
   control,
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -21,7 +24,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: `!p-4 !h-[54px]  !border-dark ${!isUpdate && "!border-light"} focus:!border-primary `,
+              className: `!min-h-[54px] !border-dark ${!isUpdate && "!border-light"
+                } focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -33,7 +37,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
           {
@@ -51,7 +55,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
           {
@@ -69,8 +73,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "companyName",
               placeholder: "Please Enter Company Name",
               register,
-              disabled: isUpdate
-
+              disabled: isUpdate,
             },
           },
           {
@@ -85,8 +88,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              disabled: isUpdate
-
+              disabled: isUpdate,
             },
           },
 
@@ -98,17 +100,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.phone,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
               id: "phone",
               name: "phone",
-
-              placeholder: "Enter Your Phone Number",
-
-              register,
-              disabled: isUpdate
-
+              country: "ch",
+              control,
+              value: phone,
+              disabled: isUpdate,
             },
           },
           {
@@ -119,15 +118,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
+              type: Field.phone,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
               id: "mobile",
               name: "mobile",
-
-
-              placeholder: "Enter Your Mobile Number",
-              register,
+              country: "ch",
+              control,
+              value: mobile,
               disabled: isUpdate,
             },
           },
@@ -140,11 +137,11 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         text: "Address Details*",
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
-
       },
 
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -164,11 +161,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
-
             },
           },
-
-
 
           {
             containerClass: "mb-0",
@@ -188,7 +182,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               register,
               disabled: isUpdate,
-
             },
           },
           {
@@ -199,7 +192,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  ",
+              className: "min-h-[54px] !border-dark  ",
               type: Field.select,
               id: "address.country",
               name: "address.country",
@@ -211,7 +204,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               ],
               // trigger,
               control,
-              disabled: isUpdate
+              disabled: isUpdate,
             },
           },
         ],
@@ -221,27 +214,29 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-[18px] mt-8",
         children: [
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Cancel",
               inputType: "button",
               onClick: handleUpdateCancel,
-              className:
-                `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"}`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
-
             },
           },
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Save Changes",
               inputType: "submit",
-              className:
-                `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"}`,
+              className: `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },

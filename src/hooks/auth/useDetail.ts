@@ -38,13 +38,13 @@ export default function useDetail() {
 
   const formMethodsConfig = {
     [DetailScreensStages.CompanyDetails]: useForm<FieldValues>({
-      resolver: yupResolver(companyDetailsSchema),
+      resolver: yupResolver<FieldValues>(companyDetailsSchema),
     }),
     [DetailScreensStages.LocationDetails]: useForm<FieldValues>({
-      resolver: yupResolver(locationDetailSchema),
+      resolver: yupResolver<FieldValues>(locationDetailSchema),
     }),
     [DetailScreensStages.BankDetails]: useForm<FieldValues>({
-      resolver: yupResolver(bankDetailSchema),
+      resolver: yupResolver<FieldValues>(bankDetailSchema),
     }),
   };
 

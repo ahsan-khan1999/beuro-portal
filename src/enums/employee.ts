@@ -15,7 +15,6 @@ export enum createEMployeeNewPasswordFields {
 
 // Employee password reset
 export enum employeePasswordResetFields {
-  yourPassword = "yourPassword",
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
 }

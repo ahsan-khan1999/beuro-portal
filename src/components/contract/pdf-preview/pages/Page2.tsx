@@ -15,9 +15,15 @@ const Page2 = () => {
   const [editedText, setEditedText] = useState(
     `<div>
       <div className="flex flex-col gap-1">
-      <span className="text-[#000] text-base font-medium">
-          Vertragsabschluss:
-        </span>
+      ${
+        isEditing ? (
+          <span className="text-[#000] text-base font-medium">
+            Vertragsabschluss:
+          </span>
+        ) : (
+          ""
+        )
+      }
         <p className="text-[#000] text-[14px] font-normal">
           Wenn Sie mit der Offerte einverstanden sind, bitten wir Sie um
           Unterzeichnung der Offerte. Sie können das Angebot gerne per Post oder

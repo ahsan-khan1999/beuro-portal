@@ -23,6 +23,7 @@ const EmailConfirmation = () => {
           text="Confirm Email Address"
           inputType="button"
           className="w-full max-w-[384px] mx-auto"
+          id='button'
         />
       </div>
     </div>

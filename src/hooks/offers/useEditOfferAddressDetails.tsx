@@ -20,10 +20,10 @@ export const useEditOfferAddressDetails = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = OfferAddressDetailsFormField(register, loading, control);
+  const fields = OfferAddressDetailsFormField(register, loading, control,() => console.log(""));
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
     router.push("/offers/details");

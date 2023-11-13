@@ -35,16 +35,8 @@ const MailDetailsCard = () => {
             className="cursor-pointer"
             onClick={() => router.push("/contract/pdf-preview")}
           />
-          <Image
-            src={downloadIcon}
-            alt="downloadIcon"
-            className="cursor-pointer"
-          />
-          <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-          />
+          <Image src={downloadIcon} alt="downloadIcon" />
+          <Image src={printerIcon} alt="printerIcon" />
           <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" />
         </div>
       </div>
@@ -112,7 +104,7 @@ const MailDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Offer Status:
             </span>
-            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-pointer">
+            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
               Signed
             </span>
           </div>
@@ -120,7 +112,7 @@ const MailDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Payment Method:
             </span>
-            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-default">
               Cash
             </span>
           </div>
@@ -128,7 +120,7 @@ const MailDetailsCard = () => {
             <span className="text-[#4D4D4D] font-normal text-base">
               Status:
             </span>
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-pointer">
+            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-default">
               Open
             </span>
           </div>
@@ -138,11 +130,7 @@ const MailDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Notes:
               </span>
-              <Image
-                src={writeIcon}
-                alt="writeIcon"
-                className="cursor-pointer"
-              />
+              <Image src={writeIcon} alt="writeIcon" />
             </div>
           </div>
           <div>
@@ -150,7 +138,7 @@ const MailDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Images:
               </span>
-              <Image src={imageIcon} alt="editImg" className="cursor-pointer" />
+              <Image src={imageIcon} alt="editImg" />
             </div>
           </div>
         </div>

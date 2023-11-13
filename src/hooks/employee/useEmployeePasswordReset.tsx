@@ -22,19 +22,19 @@ export default function useEmployeePasswordReset(
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = EmployeeResetPasswordFieldsFormField(
     register,
     loading,
-    control,
-    passwordResetSuccessfully
+    
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(resetPassword({ router, data }));
+    passwordResetSuccessfully()
   };
   return {
     error,

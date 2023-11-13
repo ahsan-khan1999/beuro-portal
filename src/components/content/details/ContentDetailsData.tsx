@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import OfferContentDetailsData from "./OfferContentDetailsData";
 import ConfirmationContentDetailsData from "./ConfirmationContentDetailsData";
 import InoviceContentDetails from "./InoviceContentDetails";
 import ReceiptContentDetails from "./ReceiptContentDetails";
+import OfferContentEditDetails from "../edit/OfferContentEditDetails";
+import EditConfirmationContentDetailsData from "../edit/EditConfirmationContentDetailsData";
+import EditInoviceContentDetails from "../edit/EditInoviceContentDetails";
+import EditReceiptContentDetails from "../edit/ReceiptContentDetails";
 import { ContentTableRowTypes } from "@/types/content";
+import { useRouter } from "next/router";
+
+export enum ComponentsType {
+  offerContent,
+  editOfferContent,
+  confirmationContent,
+  editConfirmationContent,
+  invoiceContent,
+  editInvoiceContent,
+  receiptContent,
+  editReceiptContent,
+}
 
 const ContentDetailsData = ({
   contentDetail,
@@ -13,7 +29,105 @@ const ContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+  const [data, setData] = useState<{
+    index: number;
+    component: ComponentsType;
+  } | null>(null);
+
+  const handleEdit = (index: number, component: ComponentsType) => {
+    setData({ index, component });
+  };
+
+  const router = useRouter()
+
+
+
+  const componentArray = [
+    <OfferContentDetailsData
+      onClick={handleEdit}
+      contentDetail={contentDetail}
+    />,
+    <ConfirmationContentDetailsData
+      onClick={handleEdit}
+      contentDetail={contentDetail}
+    />,
+    <InoviceContentDetails
+      onClick={handleEdit}
+      contentDetail={contentDetail}
+    />,
+    <ReceiptContentDetails
+      onClick={handleEdit}
+      contentDetail={contentDetail}
+    />,
+  ];
+
+  const [renderComponent, setRenderComponent] = useState(componentArray);
+
+  useEffect(() => {
+    setRenderComponent(componentArray);
+  }, [contentDetail]);
+
+  const lookup = {
+    [ComponentsType.offerContent]: (
+      <OfferContentDetailsData
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.editOfferContent]: (
+      <OfferContentEditDetails
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+        
+      />
+    ),
+    [ComponentsType.confirmationContent]: (
+      <ConfirmationContentDetailsData
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.editConfirmationContent]: (
+      <EditConfirmationContentDetailsData
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.invoiceContent]: (
+      <InoviceContentDetails
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.editInvoiceContent]: (
+      <EditInoviceContentDetails
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.receiptContent]: (
+      <ReceiptContentDetails
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+    [ComponentsType.editReceiptContent]: (
+      <EditReceiptContentDetails
+        onClick={handleEdit}
+        contentDetail={contentDetail}
+      />
+    ),
+  };
+
+  useEffect(() => {
+    setRenderComponent((prev) => {
+      const updatedData = [...prev];
+      if (data) {
+        updatedData[data.index] = lookup[data.component];
+      }
+      return updatedData;
+    });
+  }, [data]);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -73,15 +187,8 @@ const ContentDetailsData = ({
     },
   ];
 
-  const componentsLookUp = {
-    0: <OfferContentDetailsData contentDetail={contentDetail} />,
-    1: <ConfirmationContentDetailsData  contentDetail={contentDetail}/>,
-    2: <InoviceContentDetails contentDetail={contentDetail} />,
-    3: <ReceiptContentDetails contentDetail={contentDetail} />,
-  };
-
   return (
-    <div className="flex w-full gap-6">
+    <div className="flex w-full gap-x-6">
       <div className="flex flex-col gap-[14px]">
         {tabSection.map((item, index) => (
           <DetailsTab
@@ -95,7 +202,11 @@ const ContentDetailsData = ({
         ))}
       </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      <div className="flex flex-col gap-y-5 w-full h-[680px] overflow-scroll">
+        {renderComponent.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };

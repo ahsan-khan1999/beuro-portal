@@ -20,7 +20,6 @@ export const generateFormField: GenerateRegistrationFormField = (
         <path id="XMLID_484_" d="M10.3712 1.35126C10.1897 1.16969 10.1897 0.875324 10.3712 0.693759C10.5528 0.512236 10.8471 0.512236 11.0287 0.693759L12.8287 2.49365C13.0102 2.67521 13.0102 2.96958 12.8287 3.15114C12.7379 3.24188 12.6189 3.28732 12.4999 3.28732C12.381 3.28732 12.262 3.24193 12.1712 3.15114L10.3712 1.35126ZM13.0542 13.555H1.09967C0.842915 13.555 0.634766 13.7632 0.634766 14.0199C0.634766 14.2767 0.842915 14.4848 1.09967 14.4848H13.0541C13.3109 14.4848 13.519 14.2767 13.519 14.0199C13.519 13.7632 13.3109 13.555 13.0542 13.555ZM1.32523 12.1973C1.20833 12.0804 1.1623 11.9103 1.20431 11.7504L1.84571 9.30897C1.86667 9.22926 1.90838 9.15661 1.96662 9.09837L9.11034 1.95453C9.29191 1.77301 9.58623 1.77301 9.7678 1.95453L11.5679 3.7545C11.655 3.84169 11.704 3.9599 11.704 4.08323C11.704 4.20651 11.655 4.32477 11.5679 4.41196L4.42409 11.5557C4.36585 11.614 4.29316 11.6557 4.21353 11.6766L1.77213 12.3182C1.73307 12.3284 1.69335 12.3334 1.654 12.3334C1.53224 12.3334 1.41352 12.2856 1.32523 12.1973ZM2.30592 11.2165L3.85556 10.8093L10.5817 4.08323L9.43911 2.94075L2.71304 9.66691L2.30592 11.2165Z" fill="#8F8F8F"/>
         </svg>
         `,
-        alt: "Full Name Icon",
         register,
       },
     },
@@ -103,6 +102,8 @@ export const generateFormField: GenerateRegistrationFormField = (
         linkHref: "/forget-password",
         containerClassName: "text-[14px] text-dark ",
         linkClassName: " text-primary",
+        id: "",
+
       },
     },
     {
@@ -110,6 +111,7 @@ export const generateFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Sign Up",
         inputType: "submit",
         className: "rounded-lg justify-center text-white",
@@ -126,6 +128,8 @@ export const generateFormField: GenerateRegistrationFormField = (
         linkHref: "/login",
         containerClassName: "text-sm text-dark  ",
         linkClassName: " text-primary",
+        id: "",
+
       },
     },
   ];

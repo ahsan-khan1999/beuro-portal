@@ -28,8 +28,10 @@ const AdminSettings = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} />,
-    [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
+    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading="" />,
+    // [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
+    [ModalType.EXCLUSIVE_TAX]: <AddTax onClose={onClose} heading="" />,
+
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
   };
 

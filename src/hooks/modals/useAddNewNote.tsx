@@ -21,12 +21,13 @@ export const useAddNewNote = (handleNotes: Function) => {
     setError,
 
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddNoteFormField(register, loading, control, handleNotes);
+  const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleNotes()
   };
   return {
     fields,

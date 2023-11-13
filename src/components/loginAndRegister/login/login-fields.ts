@@ -1,5 +1,5 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateRegistrationFormField, GenerateResetPasswordFormField } from "@/types";
 import bankNameIcon from "@/assets/svgs/bank-name.svg";
 import NameIcon from "@/assets/svgs/name-input.svg";
 import phoneIcon from "@/assets/svgs/phone-number.svg";
@@ -26,7 +26,6 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 <path d="M12.4318 0.550781H1.33559C0.684487 0.550781 0.152344 1.08058 0.152344 1.73402V8.83348C0.152344 9.48716 0.684829 10.0167 1.33559 10.0167H12.4318C13.0829 10.0167 13.615 9.48692 13.615 8.83348V1.73402C13.615 1.08043 13.0826 0.550781 12.4318 0.550781ZM12.2501 1.33961C11.8675 1.72343 7.37394 6.23166 7.18932 6.41688C7.03514 6.57154 6.7323 6.57165 6.57804 6.41688L1.51728 1.33961H12.2501ZM0.941172 8.68847V1.87904L4.33484 5.28375L0.941172 8.68847ZM1.51728 9.22789L4.89173 5.84245L6.01936 6.97376C6.48146 7.43736 7.28609 7.43718 7.74803 6.97376L8.87566 5.84248L12.2501 9.22789H1.51728ZM12.8262 8.68847L9.43252 5.28375L12.8262 1.87904V8.68847Z" fill="#8F8F8F"/>
 </svg>
 `,
-        alt: "Email Icon",
         register,
       },
     },
@@ -57,15 +56,17 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex justify-between ",
         children: [
           {
             containerClass: "inline-flex mb-0",
             field: {
-              id: Field.checkbox,
-              name: "rememberMe",
               type: Field.checkbox,
+              id: "",
+              name: "rememberMe",
               register,
+              description: "",
               label: "Remember me",
             },
           },
@@ -73,11 +74,13 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
             containerClass: "inline-flex mb-0  ",
             field: {
               type: Field.span,
-              name: Field.span,
+              name: "",
               linkText: "Forget Password?",
               linkHref: "/forget-password",
               containerClassName: "inline-flex font-medium text-gray",
               linkClassName: "text-sm font-medium text-primary",
+              id: "",
+
             },
           },
         ],
@@ -89,6 +92,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Login",
         inputType: "submit",
         className: "rounded-lg justify-center text-white ",
@@ -105,6 +109,8 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         linkHref: "/registration",
         containerClassName: "text-[14px] text-dark  ",
         linkClassName: "  text-primary",
+        id: "",
+
       },
     },
   ];
@@ -120,6 +126,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -138,7 +145,6 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
 <path id="XMLID_484_" d="M10.3712 1.35126C10.1897 1.16969 10.1897 0.875324 10.3712 0.693759C10.5528 0.512236 10.8471 0.512236 11.0287 0.693759L12.8287 2.49365C13.0102 2.67521 13.0102 2.96958 12.8287 3.15114C12.7379 3.24188 12.6189 3.28732 12.4999 3.28732C12.381 3.28732 12.262 3.24193 12.1712 3.15114L10.3712 1.35126ZM13.0542 13.555H1.09967C0.842915 13.555 0.634766 13.7632 0.634766 14.0199C0.634766 14.2767 0.842915 14.4848 1.09967 14.4848H13.0541C13.3109 14.4848 13.519 14.2767 13.519 14.0199C13.519 13.7632 13.3109 13.555 13.0542 13.555ZM1.32523 12.1973C1.20833 12.0804 1.1623 11.9103 1.20431 11.7504L1.84571 9.30897C1.86667 9.22926 1.90838 9.15661 1.96662 9.09837L9.11034 1.95453C9.29191 1.77301 9.58623 1.77301 9.7678 1.95453L11.5679 3.7545C11.655 3.84169 11.704 3.9599 11.704 4.08323C11.704 4.20651 11.655 4.32477 11.5679 4.41196L4.42409 11.5557C4.36585 11.614 4.29316 11.6557 4.21353 11.6766L1.77213 12.3182C1.73307 12.3284 1.69335 12.3334 1.654 12.3334C1.53224 12.3334 1.41352 12.2856 1.32523 12.1973ZM2.30592 11.2165L3.85556 10.8093L10.5817 4.08323L9.43911 2.94075L2.71304 9.66691L2.30592 11.2165Z" fill="#8F8F8F"/>
 </svg>
 `,
-              alt: "Company Name Icon",
               register,
             },
           },
@@ -157,7 +163,6 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               svg: `<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path id="Vector" d="M0.74349 2.07338C0.7418 1.72463 0.870315 1.38449 1.10546 1.12419C1.3683 0.833139 1.74409 0.665159 2.13617 0.663259L4.01507 0.654153C4.72811 0.650698 5.32841 1.17993 5.41131 1.88518C5.46015 2.30023 5.54767 2.71226 5.67139 3.11C5.82629 3.6078 5.69655 4.14545 5.33271 4.5129L4.57515 5.27792C5.3799 6.73208 6.60159 7.94199 8.06319 8.73254L8.82083 7.96744C9.18474 7.60006 9.7211 7.46511 10.2205 7.61525C10.6194 7.73512 11.0322 7.81864 11.4477 7.86345C12.1538 7.93944 12.6888 8.53458 12.6922 9.24763L12.7013 11.1265C12.7032 11.5186 12.5389 11.896 12.2504 12.1617C11.9608 12.4285 11.5693 12.5618 11.1764 12.5275C9.82767 12.41 8.52426 12.059 7.3023 11.4842C6.1143 10.9255 5.03735 10.1721 4.10113 9.24491C3.16498 8.31779 2.40107 7.24811 1.83091 6.06559C1.24437 4.84918 0.880661 3.54923 0.750003 2.20169C0.745796 2.15888 0.743697 2.11613 0.74349 2.07338ZM4.80474 3.52847C4.80451 3.48135 4.79723 3.43347 4.78268 3.38663C4.64189 2.93429 4.54239 2.46575 4.48688 1.99386C4.45934 1.75963 4.25845 1.58375 4.01958 1.58491L2.14068 1.59402C2.00761 1.59466 1.88528 1.64943 1.79617 1.74817C1.70583 1.84802 1.66333 1.97722 1.67649 2.11183C2.16661 7.16861 6.19608 11.1591 11.2573 11.6003C11.392 11.6121 11.5208 11.5683 11.6198 11.4771C11.7177 11.3869 11.7712 11.264 11.7706 11.131L11.7615 9.25214C11.7603 9.01327 11.5826 8.81409 11.348 8.78875C10.8756 8.73789 10.4061 8.64294 9.95245 8.50661C9.7835 8.4558 9.6033 8.50009 9.48216 8.6224L8.24859 9.86799L7.94821 9.72038C6.07557 8.79998 4.52726 7.26639 3.58854 5.4024L3.43788 5.10346L4.67145 3.85795C4.75879 3.76975 4.80534 3.65114 4.80474 3.52847Z" fill="#8F8F8F" />
 </svg>`,
-              alt: "Phone Icon",
               register,
             },
           },
@@ -176,7 +181,6 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               svg: `<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path id="Vector" d="M0.74349 2.07338C0.7418 1.72463 0.870315 1.38449 1.10546 1.12419C1.3683 0.833139 1.74409 0.665159 2.13617 0.663259L4.01507 0.654153C4.72811 0.650698 5.32841 1.17993 5.41131 1.88518C5.46015 2.30023 5.54767 2.71226 5.67139 3.11C5.82629 3.6078 5.69655 4.14545 5.33271 4.5129L4.57515 5.27792C5.3799 6.73208 6.60159 7.94199 8.06319 8.73254L8.82083 7.96744C9.18474 7.60006 9.7211 7.46511 10.2205 7.61525C10.6194 7.73512 11.0322 7.81864 11.4477 7.86345C12.1538 7.93944 12.6888 8.53458 12.6922 9.24763L12.7013 11.1265C12.7032 11.5186 12.5389 11.896 12.2504 12.1617C11.9608 12.4285 11.5693 12.5618 11.1764 12.5275C9.82767 12.41 8.52426 12.059 7.3023 11.4842C6.1143 10.9255 5.03735 10.1721 4.10113 9.24491C3.16498 8.31779 2.40107 7.24811 1.83091 6.06559C1.24437 4.84918 0.880661 3.54923 0.750003 2.20169C0.745796 2.15888 0.743697 2.11613 0.74349 2.07338ZM4.80474 3.52847C4.80451 3.48135 4.79723 3.43347 4.78268 3.38663C4.64189 2.93429 4.54239 2.46575 4.48688 1.99386C4.45934 1.75963 4.25845 1.58375 4.01958 1.58491L2.14068 1.59402C2.00761 1.59466 1.88528 1.64943 1.79617 1.74817C1.70583 1.84802 1.66333 1.97722 1.67649 2.11183C2.16661 7.16861 6.19608 11.1591 11.2573 11.6003C11.392 11.6121 11.5208 11.5683 11.6198 11.4771C11.7177 11.3869 11.7712 11.264 11.7706 11.131L11.7615 9.25214C11.7603 9.01327 11.5826 8.81409 11.348 8.78875C10.8756 8.73789 10.4061 8.64294 9.95245 8.50661C9.7835 8.4558 9.6033 8.50009 9.48216 8.6224L8.24859 9.86799L7.94821 9.72038C6.07557 8.79998 4.52726 7.26639 3.58854 5.4024L3.43788 5.10346L4.67145 3.85795C4.75879 3.76975 4.80534 3.65114 4.80474 3.52847Z" fill="#8F8F8F" />
 </svg>`,
-              alt: "Phone Icon",
               register,
             },
           },
@@ -201,7 +205,6 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "Website Icon",
               register,
             },
           },
@@ -233,7 +236,6 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "MwST Number Icon",
               register,
             },
           },
@@ -259,6 +261,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Next",
         inputType: "submit",
         className:
@@ -281,6 +284,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -310,7 +314,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "Location Icon",
               register,
             },
           },
@@ -341,7 +344,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "Location Icon",
               register,
             },
           },
@@ -372,7 +374,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "Postal Code Icon",
               register,
             },
           },
@@ -404,7 +405,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </g>
 </svg>
 `,
-              alt: "Location Icon",
               register,
             },
           },
@@ -414,14 +414,16 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Back",
               inputType: "button",
-              onClick: () => setCurrentFormStage("companyDetails"),
+              onClick: () => setCurrentFormStage && setCurrentFormStage("companyDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
               loading,
@@ -430,6 +432,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Next",
               inputType: "submit",
               className:
@@ -456,6 +459,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-2 gap-x-6 ",
         children: [
           {
@@ -465,7 +469,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               className: "mb-[10px]",
             },
             field: {
-              placeholder: "234324",
               type: Field.select,
               id: "1",
               name: "currency",
@@ -474,8 +477,9 @@ export const detailBankFormField: GenerateRegistrationFormField = (
                 { value: "Riyal", label: "Riyal" },
                 { value: "Dollar", label: "Dollar" },
               ],
-              // trigger,
               control,
+              value: ""
+
             },
           },
           {
@@ -499,7 +503,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 <path d="M2.00246 4.1287H4.8984C5.03999 4.1287 5.15477 4.01392 5.15477 3.87233C5.15477 3.73074 5.03999 3.61597 4.8984 3.61597H2.00246C1.86087 3.61597 1.74609 3.73074 1.74609 3.87233C1.74609 4.01392 1.86087 4.1287 2.00246 4.1287Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
 </svg>
 `,
-              alt: "Credit Card Icon",
               register,
             },
           },
@@ -525,7 +528,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 <path d="M2.00246 4.1287H4.8984C5.03999 4.1287 5.15477 4.01392 5.15477 3.87233C5.15477 3.73074 5.03999 3.61597 4.8984 3.61597H2.00246C1.86087 3.61597 1.74609 3.73074 1.74609 3.87233C1.74609 4.01392 1.86087 4.1287 2.00246 4.1287Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
 </svg>
 `,
-              alt: "Credit Card Icon",
               register,
             },
           },
@@ -551,7 +553,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 <path d="M2.00246 4.1287H4.8984C5.03999 4.1287 5.15477 4.01392 5.15477 3.87233C5.15477 3.73074 5.03999 3.61597 4.8984 3.61597H2.00246C1.86087 3.61597 1.74609 3.73074 1.74609 3.87233C1.74609 4.01392 1.86087 4.1287 2.00246 4.1287Z" fill="#8F8F8F" stroke="#8F8F8F" stroke-width="0.2"/>
 </svg>
 `,
-              alt: "Credit Card Icon",
               register,
             },
           },
@@ -562,14 +563,16 @@ export const detailBankFormField: GenerateRegistrationFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex space-x-6 mt-10",
         children: [
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Back",
               inputType: "button",
-              onClick: () => setCurrentFormStage("locationDetails"),
+              onClick: () => setCurrentFormStage && setCurrentFormStage("locationDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
               loading,
@@ -578,6 +581,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
           {
             field: {
               type: Field.button,
+              id: "button",
               text: "Lets finish",
               inputType: "submit",
               className:
@@ -593,10 +597,10 @@ export const detailBankFormField: GenerateRegistrationFormField = (
   return formField;
 };
 
-export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
+export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
   register,
   loading,
-  router
+  onClick
 ) => {
   const formFields: FormField[] = [
     {
@@ -612,24 +616,25 @@ export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
 <path d="M12.4318 0.550781H1.33559C0.684487 0.550781 0.152344 1.08058 0.152344 1.73402V8.83348C0.152344 9.48716 0.684829 10.0167 1.33559 10.0167H12.4318C13.0829 10.0167 13.615 9.48692 13.615 8.83348V1.73402C13.615 1.08043 13.0826 0.550781 12.4318 0.550781ZM12.2501 1.33961C11.8675 1.72343 7.37394 6.23166 7.18932 6.41688C7.03514 6.57154 6.7323 6.57165 6.57804 6.41688L1.51728 1.33961H12.2501ZM0.941172 8.68847V1.87904L4.33484 5.28375L0.941172 8.68847ZM1.51728 9.22789L4.89173 5.84245L6.01936 6.97376C6.48146 7.43736 7.28609 7.43718 7.74803 6.97376L8.87566 5.84248L12.2501 9.22789H1.51728ZM12.8262 8.68847L9.43252 5.28375L12.8262 1.87904V8.68847Z" fill="#8F8F8F"/>
 </svg>
 `,
-        alt: "Email Icon",
         register,
       },
     },
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "flex gap-x-4 ",
         children: [
           {
             label: null,
             field: {
               type: Field.button,
+              id: "button",
               text: "Back To Login",
               inputType: "button",
               className:
                 "w-[175px] bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
-              onClick: () => router?.push("/login"),
+              onClick: onClick,
               loading,
             },
           },
@@ -637,6 +642,7 @@ export const generateResetPassowrdFormField: GenerateRegistrationFormField = (
             label: null,
             field: {
               type: Field.button,
+              id: "button",
               text: "Submit",
               inputType: "submit",
               className: "w-[190px]",
@@ -707,6 +713,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
       label: null,
       field: {
         type: Field.button,
+        id: "button",
         text: "Submit",
         inputType: "submit",
         className: "mt-8 rounded-lg",

@@ -4,12 +4,13 @@ import { FormField, GenerateChangeMailSettingFormField } from "@/types";
 export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
   register,
   loading,
-  control
 ) => {
   const formField: FormField[] = [
     {
+      containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -53,6 +54,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -96,6 +98,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -140,6 +143,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-[60px] ",
         children: [
           {
@@ -202,10 +206,11 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Save Setting",
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

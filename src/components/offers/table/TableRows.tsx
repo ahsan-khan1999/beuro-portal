@@ -9,8 +9,14 @@ const TableRows = ({
   handleImagesUpload,
 }: {
   dataToAdd: OffersTableRowTypes[];
-  openModal: (item: OffersTableRowTypes) => void;
-  handleImagesUpload: (item: OffersTableRowTypes) => void;
+  openModal: (
+    item: OffersTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => void;
+  handleImagesUpload: (
+    item: OffersTableRowTypes,
+    e: React.MouseEvent<HTMLImageElement>
+  ) => void;
 }) => {
   const router = useRouter();
   return (
@@ -82,12 +88,12 @@ const TableRows = ({
                 src={item.editImg}
                 alt="edit_img_icon"
                 className="cursor-pointer"
-                onClick={() => handleImagesUpload(item)}
+                onClick={(e) => handleImagesUpload(item, e)}
               />
             </span>
             <span className="px-6 py-4 flex justify-center items-center bg-white ">
               <Image
-                onClick={() => openModal(item)}
+                onClick={(e) => openModal(item, e)}
                 src={item.editNote}
                 alt="edit_note_icon"
                 className="cursor-pointer"

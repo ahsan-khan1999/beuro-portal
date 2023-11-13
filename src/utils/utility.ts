@@ -3,16 +3,13 @@ import {
   updateProfileStep2,
   updateProfileStep3,
 } from "@/api/slices/authSlice/auth";
-import { FormStages } from "@/enums/form";
-import { AddressType, ApiResponseType, CheckProps, FieldType } from "@/types";
+import { AddressType, ApiResponseType, CheckProps, Errors, FieldType } from "@/types";
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { staticEnums } from "./static";
 import { DetailScreensStages } from "@/enums/auth";
-// import { FormStages } from "@/enums";
 
-//get next form
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -208,4 +205,21 @@ export const getButtonClass = (
   inactiveClass: string = ""
 ) => {
   return condition ? activeClass : inactiveClass;
+};
+
+
+export const findErrorMessage = (errors: Errors, data: string[], fieldName: string) => {
+  const keys = data.length > 0 ? data : [fieldName];
+
+  let currentError = errors;
+
+  for (const key of keys) {
+    if (currentError && currentError.hasOwnProperty(key)) {
+      currentError = currentError[key];
+    } else {
+      return undefined;
+    }
+  }
+
+  return currentError?.message;
 };

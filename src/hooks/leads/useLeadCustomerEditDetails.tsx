@@ -6,12 +6,17 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsCustomerDetailsFormField } from "@/components/leads/fields/Leads-customer-details-fields";
 import { generateLeadsCustomerEditDetailsValidation } from "@/validation/leadsSchema";
+import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 
-export const useLeadCustomerEditDetails = () => {
+export const useLeadCustomerEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+
+  const handleBack = () => {
+    onClick(0, ComponentsType.customer);
+  };
 
   const schema = generateLeadsCustomerEditDetailsValidation(translate);
   const {
@@ -20,12 +25,13 @@ export const useLeadCustomerEditDetails = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = LeadsCustomerDetailsFormField(register, loading, control);
+  const fields = LeadsCustomerDetailsFormField(register, loading, control,handleBack);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    // dispatch(loginUser({ data, router, setError, translate }));
+    onClick(0, ComponentsType.customer);
   };
   return {
     fields,

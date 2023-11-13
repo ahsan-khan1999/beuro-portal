@@ -198,6 +198,8 @@ const BoostBulkEdit = ({ onClose }: { onClose: () => void }) => {
                   } w-full rounded-md`}
                   text={selectedCard === index ? "Selected" : "Boost Now"}
                   inputType="button"
+                  id="button"
+
                 />
               </div>
             </div>
@@ -211,6 +213,8 @@ const BoostBulkEdit = ({ onClose }: { onClose: () => void }) => {
         <Button
           className="rounded-lg w-[236px] ml-5"
           text="Save Changes"
+          id="button"
+
           inputType="button"
         />
       </div>

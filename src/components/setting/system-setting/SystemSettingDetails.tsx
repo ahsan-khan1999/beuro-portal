@@ -7,7 +7,7 @@ import SettingLayout from "../SettingLayout";
 
 const SystemSettingDetails = ({
   addTaxHandler,
-  exclusiveTaxHandler
+  exclusiveTaxHandler,
 }: {
   addTaxHandler: () => void;
   exclusiveTaxHandler: () => void;
@@ -21,7 +21,10 @@ const SystemSettingDetails = ({
 
   return (
     <>
-      <TaxVerifiedComp addTaxHandler={addTaxHandler} exclusiveTaxHandler={exclusiveTaxHandler}/>
+      <TaxVerifiedComp
+        addTaxHandler={addTaxHandler}
+        exclusiveTaxHandler={exclusiveTaxHandler}
+      />
       <div className="my-2">
         <InvoiceSection />
       </div>
@@ -48,9 +51,7 @@ const SystemSettingDetails = ({
       </div>
 
       <div className="mt-3 ml-[31px]">
-        <button
-          className="text-white text-base font-medium px-6 py-[10px] bg-[#4A13E7] rounded-md"
-        >
+        <button className="text-white text-base font-medium px-6 py-[10px] bg-[#4A13E7] rounded-md">
           Save Setting
         </button>
       </div>

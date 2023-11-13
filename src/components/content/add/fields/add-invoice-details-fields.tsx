@@ -2,10 +2,10 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 
 export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
-  (register, loading, control) => {
+  (register, loading, control, onClick) => {
     const formField: FormField[] = [
       {
-        containerClass: "mb-0",
+        containerClass: "mb-0 mt-5",
         label: {
           text: "Invoice Title",
           htmlFor: "invoiceTitle",
@@ -65,6 +65,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
         field: {
           type: Field.dragAndDropPdfField,
           id: "attachments",
+          isOpenedFile:false,
           name: "attachments",
           text: "Drop or attach your file here",
           fileSupported: "Files supported: PDF, JPG, PNG, GIF",
@@ -76,23 +77,27 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
         containerClass: "mt-6",
         field: {
           type: Field.div,
+id:"div-field",
           className: "flex items-center space-x-[18px] ",
           children: [
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Back",
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
+                onClick:onClick
               },
             },
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
+id:"button",
                 text: "Next",
                 inputType: "submit",
                 className:

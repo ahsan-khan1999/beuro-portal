@@ -8,6 +8,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
         field: {
           type: Field.div,
           className: "flex ",
+          id:"div-field",
+
           children: [
             {
               containerClass: "flex justify-start  mb-5",
@@ -16,6 +18,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                 id: "fileUpload",
                 name: "fileUpload",
                 control,
+
               },
             },
             {
@@ -23,6 +26,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
               field: {
                 type: Field.div,
                 className: "",
+                id:"div-field",
                 children: [
                   {
                     containerClass: "w-full relative",
@@ -79,6 +83,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     field: {
                       type: Field.div,
                       className: "flex gap-x-4 items-center relative w-full ",
+                id:"div-field",
+
                       children: [
                         {
                           containerClass: "mb-0",

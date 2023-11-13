@@ -29,12 +29,13 @@ export const AddNoteFormField: GenerateNotesFormField = (
       containerClass: "my-[30px] ",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:
           "rounded-lg  w-[200px] p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
-        onClick: onClick,
+        
       },
     },
   ];

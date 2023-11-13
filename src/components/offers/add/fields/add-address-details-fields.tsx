@@ -15,6 +15,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -26,7 +27,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -43,7 +44,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -60,7 +61,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -81,8 +82,8 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4  !border-dark  focus:!border-primary ",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -100,6 +101,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -111,7 +113,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -128,7 +130,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -145,7 +147,7 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -166,8 +168,8 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-        inputType: "text",
+        className: "!p-4  !border-dark  focus:!border-primary ",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -177,14 +179,37 @@ export const AddOffAddressDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[25px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
-        loading,
+        type: Field.div,
+id:"div-field",
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+id:"button",
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              loading,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+id:"button",
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

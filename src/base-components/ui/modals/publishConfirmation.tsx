@@ -64,6 +64,8 @@ const PublishConfirmation = ({ onClose }: { onClose: () => void }) => {
         text={"Skip incomplete and Publish"}
         inputType="button"
         className="w-full mt-8 rounded-lg"
+        id="button"
+
       />
       <button className="rounded-lg border border-lightGray py-3 font-medium text-gray w-full  mt-4 ">
         Schließen Sie

@@ -10,6 +10,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -21,6 +22,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.div,
+id:"div-field",
               className: "flex flex-col",
               children: [
                 {
@@ -34,17 +36,17 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     register,
                   },
                 },
-                {
-                  containerClass: "mb-0",
-                  field: {
-                    type: Field.radio,
-                    value: "Existing Service",
-                    label: "Existing Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
+                // {
+                //   containerClass: "mb-0",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "Existing Service",
+                //     label: "Existing Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
               ],
             },
           },
@@ -56,7 +58,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
@@ -78,12 +80,14 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 ",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -127,6 +131,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0 col-span-2",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-2 gap-3",
               children: [
                 {
@@ -179,9 +184,9 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        type: Field.input,
+        type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -194,6 +199,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -205,30 +211,31 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.div,
+id:"div-field",
               className: "flex flex-col",
               children: [
-                {
-                  containerClass: "mb-0 pb-[6px]",
-                  field: {
-                    type: Field.radio,
-                    value: "New Service",
-                    label: "New Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
-                {
-                  containerClass: "mb-0",
-                  field: {
-                    type: Field.radio,
-                    value: "Existing Service",
-                    label: "Existing Service",
-                    id: "serviceType",
-                    name: "serviceType",
-                    register,
-                  },
-                },
+                // {
+                //   containerClass: "mb-0 pb-[6px]",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "New Service",
+                //     label: "New Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
+                // {
+                //   containerClass: "mb-0",
+                //   field: {
+                //     type: Field.radio,
+                //     value: "Existing Service",
+                //     label: "Existing Service",
+                //     id: "serviceType",
+                //     name: "serviceType",
+                //     register,
+                //   },
+                // },
               ],
             },
           },
@@ -240,7 +247,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "Versicherung  Lorem Ipsum",
               id: "serviceTitle",
@@ -262,12 +269,14 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 ",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -311,6 +320,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             containerClass: "mb-0 col-span-2",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-2 gap-3",
               children: [
                 {
@@ -363,9 +373,9 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        type: Field.input,
+        type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        inputType: "text",
+        rows: 4,
         id: "description",
         name: "description",
         placeholder:
@@ -379,6 +389,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-3 ",
         children: [
           {
@@ -391,7 +402,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.textArea,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
+              rows: 4,
               id: "description",
               name: "description",
               placeholder:
@@ -404,14 +415,37 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
+        type: Field.div,
+id:"div-field",
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+id:"button",
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+              loading,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+id:"button",
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

@@ -1,4 +1,4 @@
-import { LeadsTableRowTypes } from "@/types/leads";
+import { Lead } from "@/types/leads";
 import Image from "next/image";
 import React from "react";
 import moreInfo from "@/assets/svgs/entity_more_info.svg";
@@ -9,13 +9,13 @@ const TableRows = ({
   openModal,
   handleImageUpload,
 }: {
-  dataToAdd: LeadsTableRowTypes[];
+  dataToAdd: Lead[];
   openModal: (
-    item: LeadsTableRowTypes,
+    item: Lead,
     e: React.MouseEvent<HTMLImageElement>
   ) => void;
   handleImageUpload: (
-    item: LeadsTableRowTypes,
+    item: Lead,
     e: React.MouseEvent<HTMLImageElement>
   ) => void;
 }) => {

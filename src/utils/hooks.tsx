@@ -262,7 +262,7 @@ export const useTimeLeft = (endDate: string) => {
 };
 
 export const closeModal = (dispatch: Dispatch, type: keyof ModalType) => {
-  dispatch(updateModalType(ModalType.type));
+  dispatch(updateModalType(ModalType.NONE));
 };
 
 // Hook for the input field copy

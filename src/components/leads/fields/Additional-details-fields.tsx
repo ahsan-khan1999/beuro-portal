@@ -5,10 +5,11 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
   control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-6",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-dark focus:!border-primary",
@@ -21,24 +22,28 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+             
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               loading,
+              onClick:onClick
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className:

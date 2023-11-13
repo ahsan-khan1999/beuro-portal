@@ -47,7 +47,7 @@ export const SelectBox = ({
     );
   };
   const defaultClasses =
-    "h-[42px] placeholder:text-dark px-4 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
+    "placeholder:text-dark px-4 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -67,7 +67,7 @@ export const SelectBox = ({
 
       </button >
       {!disabled&& isOpen && (
-        <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-[1]">
+        <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10">
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
             {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
 
@@ -75,7 +75,7 @@ export const SelectBox = ({
               value={search.current}
               onChange={(e) => handleChange(e.target.value)}
               placeholder="Search..."
-              className="w-full px-2 py-3 outline-none rounded-lg "
+              className="w-full outline-none rounded-lg p-2"
             />
           </div>
           {option.map(({ value, label }) => (

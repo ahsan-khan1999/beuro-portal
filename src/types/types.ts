@@ -132,13 +132,24 @@ export type GenerateRegistrationFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateResetPasswordFormField = (
+  register: UseFormRegister<FieldValues>,
+  loading: boolean,
+  onClick: Function
+) => FormField[];
+
 export type GenerateCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
+  properties: CustomerProperties,
   control?: Control<FieldValues>,
 ) => FormField[];
+export interface CustomerProperties  {
+  phone?: string;
+  mobile?: string;
+}
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -174,14 +185,15 @@ export type GenerateAccountSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // change mail setting formfield
 export type GenerateChangeMailSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
 ) => FormField[];
@@ -190,8 +202,8 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateEditPaymentDetailsFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // add reason formfield
@@ -206,8 +218,8 @@ export type GenerateAddReasonFormField = (
 export type GenerateChangePasswordFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Add & Exclusive Tax formfield
@@ -223,8 +235,8 @@ export type GenerateContactSupportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control?: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // content formfield
@@ -232,16 +244,17 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  isUpdate: boolean,
+  handleUpdateCancel: () => void,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Notes formfield
@@ -257,8 +270,9 @@ export type GenerateNotesFormField = (
 export type GenerateServicesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  isUpdate: boolean,
+  handleUpdateCancel: () => void,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Invoice formfield
@@ -266,7 +280,7 @@ export type GenerateInvoiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
+  markItRecuring: boolean,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
@@ -279,16 +293,14 @@ export type GenerateContractFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
-
 // Contract formfield
 export type GenerateOffersFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  onClick: () => void,
+  count?: number
 ) => FormField[];
-
 
 // Contract formfield
 export type GenerateLeadsFormField = (
@@ -305,6 +317,15 @@ export type GeneratePlansFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   control?: Control<FieldValues>,
+) => FormField[];
+// Notes formfield
+export type GenerateAddFollowUpFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  isShow?: boolean,
+
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -339,16 +360,37 @@ export interface PaginationItemProps {
   disabled?: boolean;
 }
 
-
 export interface LoaderType {
-  height: string,
-  width: string,
-  radius: string,
-  color: string
+  height: string;
+  width: string;
+  radius: string;
+  color: string;
 }
-
 
 export interface CheckBoxType {
   label: string;
-  type: keyof Status
+  type: keyof Status;
 }
+
+export interface FilterType {
+  text: string;
+  sortBy: string;
+  type: string;
+  location: string;
+}
+export interface FilterProps {
+  filter: FilterType;
+  setFilter: React.Dispatch<SetStateAction<FilterType>>;
+  moreFilter: boolean;
+  setMoreFilter: React.Dispatch<SetStateAction<boolean>>;
+  handleFilterResetToInitial: () => void;
+  handleFilterReset: (key: keyof FilterType, value: string) => void;
+  handleItemSelected: (val: string) => void;
+  typeList: ItemList[];
+}
+
+interface ItemList {
+  item: string;
+}
+
+export type Errors = Record<string, any> | undefined;

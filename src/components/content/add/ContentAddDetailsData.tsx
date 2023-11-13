@@ -5,10 +5,78 @@ import AddConfirmationContentDetails from "./AddConfirmationContentDetails";
 import AddInoviceContentDetails from "./AddInoviceContentDetails";
 import AddReceiptContentDetails from "./AddReceiptContentDetails";
 import OfferContentAddDetails from "./OfferContentAddDetails";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/hooks/useRedux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
-const ContentAddDetailsData = ({handleContentCreated} : {handleContentCreated: Function}) => {
+export enum ComponentsType {
+  addOffer,
+  addConfirmationContent,
+  addInvoiceContent,
+  addReceiptContent,
+}
+
+const ContentAddDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
-  console.log(tabType);
+
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  // Function for handling the modal for exiting notes
+  const handleContentCreated = () => {
+    dispatch(updateModalType(ModalType.CREATION));
+  };
+
+  const router = useRouter();
+
+  const route = () => {
+    router.push("/content");
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Content Created Successful "
+        subHeading="Thanks for creating offer we are happy to have you. "
+        route={route}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  const handleNextTab = (currentComponent: ComponentsType) => {
+    if (tabType === ComponentsType.addReceiptContent) {
+      handleContentCreated();
+      return;
+    }
+    setTabType(currentComponent);
+  };
+
+  const componentsLookUp = {
+    [ComponentsType.addOffer]: (
+      <OfferContentAddDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addConfirmationContent]: (
+      <AddConfirmationContentDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addInvoiceContent]: (
+      <AddInoviceContentDetails onHandleNext={handleNextTab} />
+    ),
+    [ComponentsType.addReceiptContent]: (
+      <AddReceiptContentDetails onHandleNext={handleNextTab} />
+    ),
+  };
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -68,30 +136,26 @@ const ContentAddDetailsData = ({handleContentCreated} : {handleContentCreated: F
     },
   ];
 
-  const componentsLookUp = {
-    0: <OfferContentAddDetails />,
-    1: <AddConfirmationContentDetails />,
-    2: <AddInoviceContentDetails />,
-    3: <AddReceiptContentDetails handleContentCreated={handleContentCreated}/>,
-  };
-
   return (
-    <div className="flex w-full gap-6">
-      <div className="flex flex-col gap-[14px]">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
-      </div>
+    <>
+      <div className="flex w-full gap-6">
+        <div className="flex flex-col gap-[14px]">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
 
-      {componentsLookUp[tabType as keyof typeof componentsLookUp]}
-    </div>
+        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      </div>
+      {renderModal()}
+    </>
   );
 };
 

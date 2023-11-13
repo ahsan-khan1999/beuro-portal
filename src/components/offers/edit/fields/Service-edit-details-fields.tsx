@@ -9,6 +9,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -70,12 +71,14 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -142,6 +145,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -203,12 +207,14 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             field: {
               type: Field.div,
+id:"div-field",
               className: "mb-0 grid grid-cols-3 gap-3",
               children: [
                 {
@@ -275,6 +281,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-2 gap-x-3 ",
         children: [
           {
@@ -287,7 +294,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.textArea,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
+              rows: 4,
               id: "description",
               name: "description",
               placeholder:
@@ -303,6 +310,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

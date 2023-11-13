@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ContactSupportFormField } from "@/components/contactSupport/contact-support-fields";
 import { generateContactSupportValidation } from "@/validation/contactSchema";
 
-export const userContactSupport = (requestSubmitHandler: Function) => {
+export const userContactSupport = (followUpHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -18,14 +18,14 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     register,
     handleSubmit,
     control,
-    setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = ContactSupportFormField(register, loading, control,requestSubmitHandler);
+  const fields = ContactSupportFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
+    // dispatch(loginUser({ data, router, setError, translate }));
+    followUpHandler();
   };
   return {
     fields,

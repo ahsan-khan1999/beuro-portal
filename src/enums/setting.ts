@@ -30,5 +30,5 @@ export enum SettingProfile {
   bankName = "bankName",
   accountNumber = "accountNumber",
   IBAN_number = "IBAN_number",
-  changePassword = "changePassword"
+  changePassword="changePassword"
 }

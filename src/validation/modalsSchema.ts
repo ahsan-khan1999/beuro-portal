@@ -1,4 +1,5 @@
 import {
+  AddFollowUp,
   AddNewNote,
   AddTaxField,
   ChangePasswordField,
@@ -21,7 +22,7 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
 
     [ChangePasswordField.confirmNewPassword]: yup
       .string()
-      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      // .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
       .required(translate("validationMessages.required")),
   });
 };
@@ -55,6 +56,16 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
     [EditPaymentDetails.cardNumber]: yup
       .string()
       .required("validation required"),
+    [EditPaymentDetails.cvv]: yup.string().required("validation required"),
+  });
+};
+
+// Validation for add follow up
+export const generateAddFollowUpValidation = (translate: Function) => {
+  return yup.object().shape({
+    [AddFollowUp.date]: yup.string().required("validation required"),
+    [EditPaymentDetails.expiry]: yup.string().required("validation required"),
+    [AddFollowUp.detail]: yup.string().required("validation required"),
     [EditPaymentDetails.cvv]: yup.string().required("validation required"),
   });
 };

@@ -46,9 +46,10 @@ export const addTaxFormField: GenerateAddTaxFormField = (
       containerClass: "mb-0 mt-[48px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Add Tax",
         inputType: "submit",
-        className: "rounded-lg  text-white ",
+        className: "rounded-lg  text-white hover:bg-none ",
         loading,
       },
     },
