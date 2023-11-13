@@ -473,6 +473,21 @@ export const changePassword: AsyncThunk<boolean, NextRouter, object> | any =
 //     Cookies.remove("kaufestoken");
 //   }
 // );
+export const sendOtpViaEmail: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
+  "send/otp/email",
+  async (data, thunkApi) => {
+
+
+    try {
+      await apiServices.sendEmailOtp({ data });
+      
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      return false;
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -519,6 +534,15 @@ const authSlice = createSlice({
       if (action?.payload) state.user = action.payload.user;
     });
     builder.addCase(signUp.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpViaEmail.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(sendOtpViaEmail.fulfilled, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpViaEmail.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(updateProfileStep1.pending, (state) => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getToken, logout } from "../utils/auth.util";
+import { getRefreshToken, getToken, logout } from "../utils/auth.util";
 
 const STAGING_API_URL = "https://staging.buero-365.cloudmeshsolutions.com/api";
 export const GOOGLE_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
@@ -11,14 +11,13 @@ export const FB_CONNECT_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oa
 export const BASEURL = STAGING_API_URL;
 
 export async function getApiRequestHeader() {
-  const authToken = await getToken();
-  const key = authToken?.key || "";
-  const type = authToken?.type || "";
+  const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     accessToken: authToken,
+    refreshToken: refreshToken,
     lang: JSON.parse(localStorage.getItem("locale")),
   };
 }

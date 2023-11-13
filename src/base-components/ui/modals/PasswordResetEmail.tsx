@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useRouter } from "next/router";
+import { verifyOtp } from "@/api/slices/authSlice/auth";
 
-const PasswordResetEmail = () => {
+const PasswordResetEmail = ({ data }: { data: { heading: string, description: String } }) => {
+  const dispatch = useAppDispatch()
+  const { loading, error } = useAppSelector(state => state.auth)
+  const router = useRouter()
+  // useEffect(() => {
+  //   dispatch(verifyOtp(router))
+  // }, [dispatch])
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
@@ -28,11 +37,10 @@ const PasswordResetEmail = () => {
           className="mb-[63px] mx-auto"
         />
         <h1 className="font-medium text-2xl text-[#000000] mb-[14px] text-center">
-          We send an email to rest password
+          {data.heading}
         </h1>
         <p className="text-sm text-dark  text-center">
-          We have sent you the link to reset the password by e-mail! Please take
-          a second to make sure we have your correct email address
+          {data.description}
         </p>
       </div>
     </div>
