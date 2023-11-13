@@ -14,10 +14,10 @@ const PieChart = ({ data }) => {
       options: {
         plugins: {
           legend: {
-            position: "bottom"
-          }
-        }
-      }
+            position: "bottom",
+          },
+        },
+      },
     });
 
     // Clean up the chart when the component is unmounted
@@ -32,7 +32,7 @@ const PieChart = ({ data }) => {
       <hr className="h-[1px] text-black opacity-10 pb-11" />
       <div className="px-6 pb-5">
         <div className="max-w-[300px] mx-auto ">
-          <canvas id="myPieChart" width="400" height="400"></canvas>
+          <canvas id="myPieChart" width="300" height="300" />
         </div>
       </div>
     </div>

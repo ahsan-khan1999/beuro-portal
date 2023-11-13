@@ -2,30 +2,7 @@
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
 
-const WavesChart = ({ data }) => {
-  const datatest = {
-    labels: ["JAN", "JAN", "JAN", "JAN", "JAN", "JAN", "JAN"],
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [10, 30, 39, 20, 25, 34, -10],
-        tension: 0.4,
-
-        // borderColor: Utils.CHART_COLORS.red,
-        // backgroundColor: Utils.CHART_COLORS.red,
-      },
-      {
-        label: 'Dataset 2',
-        data: [18, 33, 22, 19, 11, 39, 30],
-    tension: 0.4,
-
-        // borderColor: Utils.CHART_COLORS.blue,
-        // backgroundColor: Utils.CHART_COLORS.blue,
-      }
-    ],
-
-  };
-  console.log(data?.waveHeight);
+const WavesChart = ({ datatest }) => {
   useEffect(() => {
     const ctx = document.getElementById("myWavesChart").getContext("2d");
 
@@ -34,18 +11,17 @@ const WavesChart = ({ data }) => {
       data: datatest,
       fill: true,
 
-
       options: {
         scales: {
           x: {
-            type: 'category',
-            position: 'bottom',
+            type: "category",
+            position: "bottom",
           },
           y: {
             display: false,
             title: {
               display: false,
-              text: 'Wave Height (meters)',
+              text: "Wave Height (meters)",
             },
             beginAtZero: false,
           },
@@ -56,14 +32,31 @@ const WavesChart = ({ data }) => {
     return () => {
       wavesChart.destroy();
     };
-  }, [data]);
+  }, [datatest]);
 
   return (
-    <div className="w-full">
-      <canvas className="min-w-full max-h-[421px]" id="myWavesChart" ></canvas>
+    <div className="bg-white p-6 w-full rounded-[20px] ">
+      <div className="flex items-center justify-between mb-10">
+        <h3 className="font-medium text-[#18181B]">Sales Report</h3>
+        <div>
+          <button className="w-20 h-7 rounded-[5px] border border-[#A1A1AA] font-medium text-[#18181B] text-xs">
+            12 Months
+          </button>
+          <button className="w-20 h-7 rounded-[5px]  font-medium text-[#18181B] text-xs">
+            6 Months
+          </button>
+          <button className="w-20 h-7 rounded-[5px]  font-medium text-[#18181B] text-xs">
+            30 Days
+          </button>
+          <button className="w-20 h-7 rounded-[5px]  font-medium text-[#18181B] text-xs">
+            7 Days
+          </button>
+        </div>
+      </div>
+      <canvas className="min-w-full max-h-[300px] z-[50]" id="myWavesChart" />
     </div>
   );
 };
 
 export default WavesChart;
-``
+``;

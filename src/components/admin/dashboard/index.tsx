@@ -36,13 +36,40 @@ const AdminDashboard = () => {
     ],
     labels: ["Silver", "Gold", "Diamond", "Infinite"],
   };
-  const data2 = {
-    labels: ["JAN", "JAN", "JAN", "JAN", "JAN", "JAN", "JAN"], // X-axis labels (time or other variable)
-    waveHeight: [
-      { "data": [0, 2.5, 10, 1.8, 1.5, 0.8, 0.2] },
-      { "data": [0, 2.5, 10, 1.8, 1.5, 0.8, 0.2] }
-    ], // Y-axis data (wave height)
 
+  const datatest = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [10, 20, 25, 40, 30, 40, 50, 40, 50, 60, 50, 60],
+        tension: 0.4,
+
+        // borderColor: Utils.CHART_COLORS.red,
+        // backgroundColor: Utils.CHART_COLORS.red,
+      },
+      {
+        label: "Dataset 2",
+        data: [15, 25, 15, 45, 35, 45, 25, 45, 55, 35, 55, 65],
+        tension: 0.4,
+
+        // borderColor: Utils.CHART_COLORS.blue,
+        // backgroundColor: Utils.CHART_COLORS.blue,
+      },
+    ],
   };
 
   return (
@@ -105,7 +132,7 @@ const AdminDashboard = () => {
         })}
       </div>
       <div className="mt-[60px] space-x-5 flex justify-between">
-        <WavesChart data={data2} />
+        <WavesChart datatest={datatest} />
         <PieChart data={data} />
       </div>
     </Layout>
