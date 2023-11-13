@@ -12,7 +12,6 @@ import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { servicesDetailsFormField } from "@/components/services/fields/services-fields";
 import { employeeDetailsFormField } from "@/components/employees/fields/employee-fields";
 
 const useEmployeeDetail = (stage: boolean) => {

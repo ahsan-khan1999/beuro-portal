@@ -17,6 +17,7 @@ export enum ModalType {
   CONFIRM_DELETION,
   CREATION,
   ADD_POSTSPONED_NOTE,
+  FOLLOW_UPS,
   INFO_DELETED,
   PASSWORD_CHANGE_SUCCESSFULLY,
   PASSWORD_SET,
@@ -35,7 +36,7 @@ export enum ModalType {
   EDIT_PAYMENT_METHOD,
   UPLOAD_IMAGE,
   IMAGE_SLIDER,
-  DELETE_MAIL
+  DELETE_MAIL,
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;
