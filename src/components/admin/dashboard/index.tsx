@@ -37,13 +37,17 @@ const AdminDashboard = () => {
     labels: ["Silver", "Gold", "Diamond", "Infinite"],
   };
   const data2 = {
-    labels: ["Feb","Mar","Apr","May","Jun"], // X-axis labels (time or other variable)
-    waveHeight: [0, 0.5, 1.2, 1.8, 1.5, 0.8, 0.2], // Y-axis data (wave height)
+    labels: ["JAN", "JAN", "JAN", "JAN", "JAN", "JAN", "JAN"], // X-axis labels (time or other variable)
+    waveHeight: [
+      { "data": [0, 2.5, 10, 1.8, 1.5, 0.8, 0.2] },
+      { "data": [0, 2.5, 10, 1.8, 1.5, 0.8, 0.2] }
+    ], // Y-axis data (wave height)
+
   };
 
   return (
     <Layout>
-       <div className="p-9 bg-gradient rounded-lg">
+      <div className="p-9 bg-gradient rounded-lg">
         <h1 className="font-medium text-[28px] tracking-[0.5px] text-white">
           Super Admin
         </h1>

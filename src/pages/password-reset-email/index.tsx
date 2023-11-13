@@ -6,7 +6,6 @@ const Index = () => {
   return (
     <>
       <PasswordResetEmail />
-      <EmailConfirmation />;
     </>
   );
 };

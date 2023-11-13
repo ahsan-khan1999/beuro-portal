@@ -156,13 +156,13 @@ export const conditionHandler = (
 ) => {
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
-      router.pathname = "/register/verifyEmailAddress";
+      router.pathname = "/email-varification";
       updateQuery(router, "en");
     } else if (!response.data.data.User.isProfileComplete) {
-      router.pathname = "/register/profiledetails";
+      router.pathname = "/profile";
       updateQuery(router, "en");
     } else {
-      router.pathname = "/user-account-settings";
+      router.pathname = "/dashboard";
       updateQuery(router, "en");
     }
   } else {

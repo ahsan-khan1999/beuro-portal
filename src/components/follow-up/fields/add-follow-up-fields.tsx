@@ -1,14 +1,14 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateAddFollowUpFormField } from "@/types";
+import { FormField,  GenerateAddPostPonedNoteFormField } from "@/types";
 
-export const AddFollowUpFormField: GenerateAddFollowUpFormField = (
+export const PostPonedFollowUpFormField: GenerateAddPostPonedNoteFormField = (
   register,
   loading,
-  isShow
+  control
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: `mb-0 ${isShow && "hidden"}`,
+      containerClass: `mb-0 `,
       field: {
         type: Field.date,
         className: `!p-4 !border-dark focus:!border-primary `,

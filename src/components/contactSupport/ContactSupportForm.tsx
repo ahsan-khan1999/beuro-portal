@@ -5,14 +5,12 @@ import React from "react";
 
 const ContactSupportForm = ({
   requestSubmitHandler,
-  followUpHandler
 }: {
   requestSubmitHandler: Function;
-  followUpHandler: Function;
 }) => {
   const defaultClassName = "mt-[30px] ";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    userContactSupport(followUpHandler);
+    userContactSupport(requestSubmitHandler);
 
   return (
     <>

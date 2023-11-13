@@ -1,4 +1,5 @@
 export enum RegisterationFields {
+  fullName = "fullName",
   email = "email",
   password = "password",
   confirmPassword = "confirmPassword",

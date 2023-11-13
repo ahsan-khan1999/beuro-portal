@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddDateFormField, AddOfferDetailsFormField, AddOfferDetailsSubmitFormField } from "@/components/offers/add/fields/add-offer-details-fields";
-import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
+import { generateOfferDetailsDateValidationSchema, generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useMemo, useRef, useState } from "react";
 import { FormField } from "@/types";
@@ -20,7 +20,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const { loading, error } = useAppSelector((state) => state.auth);
   const count = useRef(1)
-  const schema = generateOfferDetailsValidationSchema(translate, dateCount);
+  const schema = generateOfferDetailsValidationSchema(translate);
+  const schemaDate = generateOfferDetailsDateValidationSchema(translate, dateCount);
+  console.log(schema, "schema");
+  const mergedSchema = schema.concat(schemaDate);
   const {
     register,
     handleSubmit,
@@ -28,7 +31,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     setError,
     formState: { errors },
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(schema),
+    resolver: yupResolver<FieldValues>(mergedSchema),
   });
   const handleAddDateField = () => {
     setDateCount(dateCount + 1)

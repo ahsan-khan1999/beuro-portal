@@ -3,22 +3,38 @@ import { useEffect } from "react";
 import Chart from "chart.js/auto";
 
 const WavesChart = ({ data }) => {
+  const datatest = {
+    labels: ["JAN", "JAN", "JAN", "JAN", "JAN", "JAN", "JAN"],
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [10, 30, 39, 20, 25, 34, -10],
+        tension: 0.4,
+
+        // borderColor: Utils.CHART_COLORS.red,
+        // backgroundColor: Utils.CHART_COLORS.red,
+      },
+      {
+        label: 'Dataset 2',
+        data: [18, 33, 22, 19, 11, 39, 30],
+    tension: 0.4,
+
+        // borderColor: Utils.CHART_COLORS.blue,
+        // backgroundColor: Utils.CHART_COLORS.blue,
+      }
+    ],
+
+  };
+  console.log(data?.waveHeight);
   useEffect(() => {
     const ctx = document.getElementById("myWavesChart").getContext("2d");
 
     const wavesChart = new Chart(ctx, {
       type: "line",
-      data: {
-        labels: data.labels,
-        datasets: [{
-          label: "Wave Height",
-          borderColor: "#36A2EB",
-          data: data.waveHeight,
-          fill: true,
-          tension:0.4,
-        }],
-        
-      },
+      data: datatest,
+      fill: true,
+
+
       options: {
         scales: {
           x: {
@@ -26,7 +42,7 @@ const WavesChart = ({ data }) => {
             position: 'bottom',
           },
           y: {
-            display:false,
+            display: false,
             title: {
               display: false,
               text: 'Wave Height (meters)',

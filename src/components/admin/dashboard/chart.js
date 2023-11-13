@@ -11,6 +11,13 @@ const PieChart = ({ data }) => {
     const myPieChart = new Chart(ctx, {
       type: "pie",
       data: data,
+      options: {
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
     });
 
     // Clean up the chart when the component is unmounted
