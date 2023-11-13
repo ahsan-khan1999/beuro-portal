@@ -53,7 +53,7 @@ const WavesChart = ({ datatest }) => {
           </button>
         </div>
       </div>
-      <canvas className="min-w-full max-h-[300px] z-[50]" id="myWavesChart" />
+       <canvas className="min-w-full max-h-[300px] z-[50]" id="myWavesChart" />
     </div>
   );
 };
