@@ -24,17 +24,22 @@ import { FollowUps } from "@/types/follow-up";
 // import notificationIcon from "@/assets/notifications-icon.png";
 
 // Function for handling the date format
-function parseCustomDate(dateString: string) {
-  const parts = dateString.split("/");
-  if (parts.length === 3) {
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1;
-    const year = parseInt(parts[2], 10);
-    if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-      return new Date(year, month, day);
+function parseCustomDate(dateString:string) {
+  const separators = ['/', '-'];
+
+  for (const separator of separators) {
+    const parts = dateString.split(separator);
+    if (parts.length === 3) {
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+      if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+        return new Date(year, month, day);
+      }
     }
   }
 
+  // If neither format is matched, return null
   return null;
 }
 
