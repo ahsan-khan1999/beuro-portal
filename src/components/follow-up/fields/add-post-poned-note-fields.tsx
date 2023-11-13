@@ -1,17 +1,17 @@
 import { Field } from "@/enums/form";
-import { FormField,  GenerateAddPostPonedNoteFormField } from "@/types";
+import { FormField, GenerateAddPostPonedNoteFormField } from "@/types";
 
-export const PostPonedFollowUpFormField: GenerateAddPostPonedNoteFormField = (
+export const AddPostPonedFollowUpFormField: GenerateAddPostPonedNoteFormField = (
   register,
   loading,
   control
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: `mb-0 `,
+      containerClass: `mb-0`,
       field: {
         type: Field.date,
-        className: `!p-4 !border-dark focus:!border-primary `,
+        className: `!p-4 !border-dark focus:!border-primary`,
         id: "noteMessage",
         name: "noteMessage",
         value: "12/12/2023",
@@ -37,12 +37,11 @@ export const PostPonedFollowUpFormField: GenerateAddPostPonedNoteFormField = (
       containerClass: "mt-5 ",
       field: {
         type: Field.button,
-id:"button",
-        text: "Save",
+        text: "Next",
         inputType: "submit",
-        className:
-          "rounded-lg  w-[200px] p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        className: "rounded-lg p-4 w-[174px] text-white hover:bg-none ",
         loading,
+        id:"Next"
       },
     },
   ];

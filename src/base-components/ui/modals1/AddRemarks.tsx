@@ -3,17 +3,10 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
-import { useAddPostPonedNote } from "@/hooks/follow-up/useAddPostPonedNote";
+import { useAddRemarks } from "@/hooks/follow-up/useAddRemarks";
 
-const AddPostPonedNote = ({
-  onClose,
-  handleFollowUpsDetails,
-}: {
-  onClose: () => void;
-  handleFollowUpsDetails: Function;
-}) => {
-  const { errors, fields, handleSubmit, onSubmit } =
-    useAddPostPonedNote(handleFollowUpsDetails);
+const AddRemarks = ({ onClose }: { onClose: () => void }) => {
+  const { errors, fields, handleSubmit, onSubmit } = useAddRemarks();
 
   return (
     <>
@@ -29,9 +22,11 @@ const AddPostPonedNote = ({
             onClick={onClose}
           />
           <div className="flex flex-col">
-            <p className="text-2xl font-normal text-[#000] mb-4">
-              Add a postponed Note
-            </p>
+            <p className="text-2xl font-normal text-[#000] ">Add Remarks</p>
+
+            <span className="text-[#1E1E1E] text-sm font-normal my-3">
+              Lorem Ipsum dollar smith
+            </span>
           </div>
 
           <Form
@@ -46,4 +41,4 @@ const AddPostPonedNote = ({
   );
 };
 
-export default AddPostPonedNote;
+export default AddRemarks;

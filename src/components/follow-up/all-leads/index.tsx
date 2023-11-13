@@ -1,21 +1,21 @@
 import TableLayout from "@/layout/TableLayout";
 import React from "react";
-import TableHeading from "./table/TableHeading";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import useFollowUps from "@/hooks/follow-up/useFollowUp";
-import TableRows from "./table/TableRows";
 import TableFunctions from "./table/TableFunctions";
+import TableHeading from "./table/TableHeading";
+import TableRows from "./table/TableRows";
+import useAllLeads from "@/hooks/follow-up/useAllLeads";
 
-const FollowUpsTable = () => {
+const AllLeadsTable = () => {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-    useFollowUps();
+  useAllLeads();
 
   return (
     <>
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRows currentPageRows={currentPageRows}/>
+        <TableRows currentPageRows={currentPageRows} />
       </TableLayout>
       <Pagination
         totalItems={totalItems}
@@ -26,4 +26,4 @@ const FollowUpsTable = () => {
   );
 };
 
-export default FollowUpsTable;
+export default AllLeadsTable;
