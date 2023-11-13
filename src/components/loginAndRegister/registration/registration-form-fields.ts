@@ -9,11 +9,11 @@ export const generateFormField: GenerateRegistrationFormField = (
   const formField: FormField[] = [
     {
       containerClass: "mb-3",
-      label: { text: "Full Name", htmlFor: "text" },
+      label: { text: "Full Name", htmlFor: "fullName" },
       field: {
         type: Field.input,
-        id: "text",
-        name: "text",
+        id: "fullName",
+        name: "fullName",
         inputType: "text",
         placeholder: "Enter your full name",
         svg: `<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">

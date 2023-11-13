@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
-import { FieldValue, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
+import { Control, FieldValue, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 export const AddOfferDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
@@ -352,7 +352,7 @@ export const AddDateFormField: GenerateOffersFormField = (
         id: "div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
-        children: (count) && generateDateChildren(register, count, OnClick)
+        children: (count) && generateDateChildren(control, count, OnClick)
 
       },
     },
@@ -360,7 +360,7 @@ export const AddDateFormField: GenerateOffersFormField = (
   return formField;
 };
 
-const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: () => void) => {
+const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
@@ -372,13 +372,14 @@ const generateDateChildren = (register: UseFormRegister<FieldValues>, count: num
         className: "mb-[10px]",
       },
       field: {
-        type: Field.date,
+        type: Field.dateRange,
         className: "!p-4 !border-dark focus:!border-primary w-full",
         id: `date_${key}`,
         name: `date_${key}`,
-        register,
-        remove: "Remove",
-        onRemove: OnClick,
+        remove: key > 0 && "Remove",
+        onRemove: key > 0 && OnClick,
+        control,
+
       },
     };
 

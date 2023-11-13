@@ -1,0 +1,156 @@
+{
+  "register": {
+    "main_heading": "Create Account",
+    "sub_heading": "Join free! Please enter your details",
+    "email_label": "Email",
+    "password_label": "Password",
+    "confirm_password_label": "Confirm Password",
+    "email_placeholder": "Enter Your Email",
+    "password_placeholder": "Enter Your Password",
+    "confirm_password_placeholder": "Enter Your Password",
+    "button": "Create Account",
+    "have_an_account": "Already have an account ?",
+    "login": "Login",
+    "or_login": "or login with"
+  },
+  "login": {
+    "main_heading": "Welcome Back",
+    "sub_heading": "Enter your account details",
+    "email_label": "Email",
+    "password_label": "Password",
+    "email_placeholder": "Enter Your Email",
+    "password_placeholder": "Enter Your Password",
+    "button": "Login",
+    "dont_have_an_account": "Dont have an account ?",
+    "create": "Create Account",
+    "or_login": "or login with",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot Password"
+  },
+  "account_type": {
+    "main_heading": "Account Type",
+    "sub_heading": "Choose your account type",
+    "business_heading": "Business Account",
+    "business_desc": "Designed for businesses and individuals who want to sell products or services online through our platform.",
+    "button": "Next",
+    "private_heading": "Private Account",
+    "private_desc": "Designed for individuals who want to buy products or services online through our platform."
+  },
+  "private": {
+    "main_heading": "Personal Details",
+    "sub_heading": "Enter your personal detail",
+    "fname_label": "First Name",
+    "lname_label": "Last Name",
+    "phone_label": "Phone Number",
+    "home_label": "Home Address",
+    "street_label": "Street Address",
+    "country_label": "Country",
+    "state_label": "State",
+    "city_label": "City",
+    "zip_label": "Zip Code",
+    "fname_placeholder": "First Name",
+    "lname_placeholder": "Last Name",
+    "phone_placeholder": "Phone Number",
+    "street_placeholder": "Street Address",
+    "zip_placeholder": "Zip Code",
+    "button_back": "Back",
+    "button_next": "Next"
+  },
+  "business": {
+    "main_heading": "Business Details",
+    "sub_heading": "Enter your business detail",
+    "logo_label": "Upload Logo",
+    "logo_text": "Uplaod Images",
+    "file_label": "JPG, JPEG, PNG Min: 400px, Max: 1024px",
+    "business_name_label": "Business Name",
+    "website_label": "Website Link",
+    "website_link_placeholder": "https://",
+    "business_location": "Business Location",
+    "business_name_placeholder": "Business Name",
+    "website_placeholder": "Website Link",
+    "business_placeholder": "Search Place",
+    "button_back": "Back",
+    "button_next": "Create Account"
+  },
+  "phone_verification": {
+    "title": "Verify your phone number",
+    "description": "Thank you for registering! To verify your phone number, please enter the (OTP) that we have sent to your phone number.",
+    "label": "Enter OTP",
+    "button": "Verify",
+    "notrecieve": "Did not recieve?",
+    "sendagain": "Send Again"
+  },
+  "email_verification": {
+    "title": "Verify your email address",
+    "description": "Thanks for registering! Please enter OTP that we sent to your email address to complete registration. Check your spam folder or contact support if you haven't received the email.",
+    "label": "Enter OTP",
+    "button": "Verify",
+    "notrecieve": "Did not recieve?",
+    "sendagain": "Send Again"
+  },
+  "reset_password": {
+    "title": "Reset Passowrd",
+    "description": "Enter your account details",
+    "label": "Password",
+    "label2": "Confirm Password",
+    "placeholder1": "Enter your Password",
+    "placeholder2": "Enter your Password Again",
+    "button": "Reset",
+    "dont_have_an_account": "Dont have an account ?",
+    "create": "Create Account",
+    "or_login": "or login with"
+  },
+  "forogt_password": {
+    "title": "Forgot Password",
+    "description": "Enter your account details",
+    "label": "Email",
+    "placeholder1": "Enter your Email",
+    "button": "Submit",
+    "backLogin": "Back to Login",
+    "dont_have_an_account": "Dont have an account ?",
+    "create": "Create Account",
+    "or_login": "or login with"
+  },
+
+  "toast": {
+    "login": "Please login",
+    "file": "Please Select a valid file format"
+  },
+  "validationMessages": {
+    "required": "This field is required",
+    "nonexistent": "nonexistent",
+    "already_exists": "{0} with this {1} already exists",
+    "not_found": "not_found:{0}:{1}",
+    "password_length_error": "Password must be greater then 6",
+    "password_missing_lower": "password_missing_lower",
+    "password_missing_upper": "password_missing_upper",
+    "password_missing_number": "password_missing_number",
+    "password_missing_special": "password_missing_special",
+    "invalid_datatype": "invalid_datatype:{0}:{1}",
+    "invalid_format": "Invalid Format",
+    "invalid_option": "Please select a valid option",
+    "auth_invalid_credentials": "Invalid Credentials",
+    "length_error": "length_error:{0}:{1}",
+    "length_max": "{0} has max length of {1}",
+    "length_min": "{0} has min length of {1}",
+    "otp_invalid": "Invalid Otp",
+    "server_error": "Internal Server Error : 500",
+    "oauth_account_in_use": "Account already in use",
+    "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
+
+    "mail_sent_maybe": "Email Sent",
+
+    "mixed": {
+      "required": "This is required field ",
+      "oneOf": "Password must match "
+    },
+    "string": {
+      "email": "Please enter a valid email",
+      "min": "This field must contain minimum 6 charachters"
+    },
+    "array": {
+      "min": "Minimum 1 is required"
+    },
+    "user_profile_already_complete": "User Profile is already completed"
+  }
+}

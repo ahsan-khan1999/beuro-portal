@@ -394,3 +394,13 @@ interface ItemList {
 }
 
 export type Errors = Record<string, any> | undefined;
+
+
+export interface DateRangeValueProps {
+  selection: DateRangeSelectionProps
+}
+interface DateRangeSelectionProps {
+  startDate: string;
+  endDate: string;
+
+}

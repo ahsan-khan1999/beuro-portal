@@ -5,6 +5,7 @@ import Image from "next/image";
 import EntryLinks from "../EntryLinks";
 import { Form } from "@/base-components/form/form";
 import useRegistration from "@/hooks/auth/useRegistration";
+import Error from "@/base-components/ui/error";
 
 const Register = () => {
   const defaultClassName = "mt-4   ";
@@ -21,7 +22,7 @@ const Register = () => {
           <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
             Manage your business with us
           </span>
-
+          <Error error={error} />
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}
