@@ -316,15 +316,15 @@ export type GeneratePlansFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
-// Notes formfield
-export type GenerateAddFollowUpFormField = (
+
+
+// follow-up formfield
+export type GenerateAddPostPonedNoteFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  isShow?: boolean,
-
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 

@@ -42,6 +42,7 @@ export interface InputFieldProps {
   handleChange: (value: string) => void;
   containerClassName?: string;
   textClassName?: string;
+  bgColor?:boolean,
   iconDisplay?: boolean
 }
 
