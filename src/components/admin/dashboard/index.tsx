@@ -1,6 +1,8 @@
 import { Layout } from "@/layout";
 import React from "react";
 import DashboardFunctions from "./Functions";
+import PieChart from "./chart";
+import WavesChart from "./waves";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -23,6 +25,21 @@ const AdminDashboard = () => {
       backgroundColor: "bg-dashboardCard3-gradient",
     },
   ];
+  // Sample data for the pie chart
+  const data = {
+    datasets: [
+      {
+        data: [20, 20, 20, 40],
+        backgroundColor: ["#FE9244", "#FF376F", "#4A13E7", "#45C769"],
+      },
+    ],
+    labels: ["Silver", "Gold", "Diamond", "Infinite"],
+  };
+  const data2 = {
+    labels: ["feb", "mar", "ap", "ma", "juyb", "afs", "asf"], // X-axis labels (time or other variable)
+    waveHeight: [0, 0.5, 1.2, 1.8, 1.5, 0.8, 0.2], // Y-axis data (wave height)
+  };
+
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -144,6 +161,16 @@ const AdminDashboard = () => {
             </div>
           );
         })}
+      </div>
+      <div className="mt-[60px] flex justify-between">
+        <WavesChart data={data2} />
+        <div className="rounded-[20px] bg-white max-w-[400px]">
+          <h3 className="pt-5 pb-3 px-10 font-medium text-[#18181B]">Plans</h3>
+          <hr className="h-[1px] text-black opacity-10 pb-11" />
+          <div className="px-6 pb-5">
+            <PieChart data={data} />
+          </div>
+        </div>
       </div>
     </Layout>
   );
