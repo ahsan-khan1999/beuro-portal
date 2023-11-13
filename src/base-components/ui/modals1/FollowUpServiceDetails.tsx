@@ -7,6 +7,7 @@ type details = {
   label: string;
   value: string;
 };
+
 const FollowUpServiceDetails = () => {
   const detailsData: details[] = [
     {

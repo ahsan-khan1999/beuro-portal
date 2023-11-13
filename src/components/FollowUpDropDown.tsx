@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import FollowUps from "@/base-components/ui/modals1/FollowUps";
 import { updateModalType } from "@/api/slices/globalSlice/global";
+import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -31,9 +32,15 @@ const FollowUpDropDown = () => {
     dispatch(updateModalType(ModalType.FOLLOW_UPS));
   };
 
+  const handleFollowUpsDetails = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} />,
+    [ModalType.FOLLOW_UPS_DETAILS]: <FollowUpDetails onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -55,6 +62,7 @@ const FollowUpDropDown = () => {
           return (
             <div
               key={index}
+              onClick={() => handleFollowUpsDetails()}
               className={`pt-[10px] px-4 cursor-pointer ${
                 (index == 0 || index == 1) && "bg-primary"
               } bg-opacity-10 `}

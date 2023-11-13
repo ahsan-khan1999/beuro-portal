@@ -1,7 +1,5 @@
-import { Lead } from "@/types/leads";
-import Image from "next/image";
+
 import React from "react";
-import moreInfo from "@/assets/svgs/entity_more_info.svg";
 import { useRouter } from "next/router";
 import { FollowUpsTable } from "@/types/follow-up";
 

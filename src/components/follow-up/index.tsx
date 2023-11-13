@@ -15,7 +15,7 @@ const FollowUpsTable = () => {
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRows currentPageRows={currentPageRows} />
+        <TableRows currentPageRows={currentPageRows}/>
       </TableLayout>
       <Pagination
         totalItems={totalItems}
