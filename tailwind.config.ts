@@ -81,12 +81,18 @@ module.exports = {
         notificationsDropdownShadow: `0px 0px 30px ${theme(
           "colors.shadowColor"
         )}`,
+        dashboardSearch: `0px 0px 8px 0px rgba(0, 0, 0, 0.22)`,
       }),
       backgroundImage: {
         "our-partner-background": "url('/assets/our-partners-bg.png')",
         "login-background": "url('/src/assets/login-bg.png')",
         "gradient-pricingCards":
           "linear-gradient(180deg, #4A13E7 12.45%, #7B18FF 63.46%)",
+        gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",
+        "dashboardCard2-gradient":
+          "linear-gradient(90deg, #B503FE -18.73%, #FF376F 91.94%)",
+        "dashboardCard3-gradient":
+          "linear-gradient(90deg, #FF3671 0.03%, #FE9841 100.05%)",
       },
       // background: {
       //   gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",

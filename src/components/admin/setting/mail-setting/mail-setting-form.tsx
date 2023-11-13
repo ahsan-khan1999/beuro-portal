@@ -1,5 +1,5 @@
 import { Form } from "@/base-components/form/form";
-import { useChangeMailSetting } from "@/hooks/setting/useChangeMailSetting";
+import { useChangeMailSetting } from "@/hooks/admin/setting/useChangeMailSetting";
 import React from "react";
 
 const MailSettingForm = () => {

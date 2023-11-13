@@ -328,6 +328,24 @@ export type GenerateAddFollowUpFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+// accounting setting formfield
+export type GenerateAccountSettingAdminFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
+// accounting setting formfield
+export type GeneratePaymentSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

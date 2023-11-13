@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateCustomerFormField,
-  GeneratePlansFormField,
-} from "@/types";
+import { FormField, GeneratePlansFormField } from "@/types";
 
 export const planDetailsFormField: GeneratePlansFormField = (
   register,

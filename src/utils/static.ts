@@ -3321,7 +3321,13 @@ export const sideBar: SideBar[] = [
     icon: "Dashboard",
     title: "Dashboard",
     pathname: "/dashboard",
-    role: [0, 1],
+    role: [1],
+  },
+  {
+    icon: "Dashboard",
+    title: "Dashboard",
+    pathname: "/admin/dashboard",
+    role: [0],
   },
   {
     icon: "Customers",
