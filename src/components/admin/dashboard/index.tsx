@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     labels: ["Silver", "Gold", "Diamond", "Infinite"],
   };
   const data2 = {
-    labels: ["feb", "mar", "ap", "ma", "juyb", "afs", "asf"], // X-axis labels (time or other variable)
+    labels: [1, 2, 3, 4, 5, 6, 7], // X-axis labels (time or other variable)
     waveHeight: [0, 0.5, 1.2, 1.8, 1.5, 0.8, 0.2], // Y-axis data (wave height)
   };
 
@@ -162,7 +162,7 @@ const AdminDashboard = () => {
           );
         })}
       </div>
-      <div className="mt-[60px] flex justify-between">
+      <div className="mt-[60px] space-x-5 flex justify-between">
         <WavesChart data={data2} />
         <div className="rounded-[20px] bg-white max-w-[400px]">
           <h3 className="pt-5 pb-3 px-10 font-medium text-[#18181B]">Plans</h3>
