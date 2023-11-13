@@ -1,11 +1,7 @@
-
 import React from "react";
-import { useRouter } from "next/router";
 import { FollowUpsTable } from "@/types/follow-up";
 
 const TableRows = ({ currentPageRows }: FollowUpsTable) => {
-  const router = useRouter();
-
   console.log(currentPageRows);
 
   return (
@@ -13,12 +9,6 @@ const TableRows = ({ currentPageRows }: FollowUpsTable) => {
       {currentPageRows?.map((item: any, index: number) => {
         return (
           <div
-            onClick={() =>
-              router.push({
-                pathname: "/followUps/details",
-                query: { followup: item.id },
-              })
-            }
             key={index}
             className="border border-[#4A13E7] cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2 bg-white rounded-md p-4"
           >

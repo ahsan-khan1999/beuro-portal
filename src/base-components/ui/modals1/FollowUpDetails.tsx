@@ -8,7 +8,15 @@ type details = {
   value: string;
 };
 
-const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
+const FollowUpDetails = ({
+  onClose,
+  handleAddPostPonedNote,
+  handleAddRemarks,
+}: {
+  onClose: () => void;
+  handleAddPostPonedNote: Function;
+  handleAddRemarks: Function;
+}) => {
   const detailsData: details[] = [
     {
       label: "Name",
@@ -71,7 +79,6 @@ const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
     },
   ];
 
-
   const addressDetails: details[] = [
     {
       label: "Street NO.",
@@ -109,7 +116,10 @@ const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
             <section className="flex justify-between items-center mb-5">
               <h2 className="font-medium text-2xl text-black">Details</h2>
               <div className="flex items-center gap-x-[14px] mr-5">
-                <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer">
+                <span
+                  onClick={() => handleAddPostPonedNote()}
+                  className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="23"
@@ -124,7 +134,10 @@ const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
                   </svg>
                   Postponed
                 </span>
-                <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer ">
+                <span
+                  onClick={() => handleAddRemarks()}
+                  className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -238,10 +251,7 @@ const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
 
                 <div className="grid grid-cols-4 gap-x-[25px] mt-[23px]">
                   {leadsDetails.map((item, index) => (
-                    <div
-                      className="flex flex-col gap-y-[10px] "
-                      key={index}
-                    >
+                    <div className="flex flex-col gap-y-[10px] " key={index}>
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
@@ -261,10 +271,7 @@ const FollowUpDetails = ({ onClose }: { onClose: () => void }) => {
 
                 <div className="grid grid-cols-[minmax(200px,_100%)_minmax(100px,_100%)_minmax(200px,_100%)_minmax(400px,_100%)] gap-x-[25px] mt-3">
                   {addressDetails.map((item, index) => (
-                    <div
-                      className="flex flex-col gap-y-[10px]"
-                      key={index}
-                    >
+                    <div className="flex flex-col gap-y-[10px]" key={index}>
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>

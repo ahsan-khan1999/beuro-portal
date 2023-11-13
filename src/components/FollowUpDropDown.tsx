@@ -10,6 +10,8 @@ import { useAppSelector } from "@/hooks/useRedux";
 import FollowUps from "@/base-components/ui/modals1/FollowUps";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
+import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
+import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -33,14 +35,35 @@ const FollowUpDropDown = () => {
   };
 
   const handleFollowUpsDetails = () => {
-    dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
+  };
+
+  const handleAddPostPonedNote = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
+  };
+
+  const handleAddRemarks = () => {
+    dispatch(updateModalType(ModalType.ADD_REMARKS));
   };
 
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} />,
-    [ModalType.FOLLOW_UPS_DETAILS]: <FollowUpDetails onClose={onClose} />,
+    [ModalType.FOLLOW_UPS_DETAILS]: (
+      <FollowUpDetails
+        onClose={onClose}
+        handleAddPostPonedNote={handleAddPostPonedNote}
+        handleAddRemarks={handleAddRemarks}
+      />
+    ),
+    [ModalType.ADD_POSTSPONED_NOTE]: (
+      <AddPostPonedNote
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} />,
   };
 
   const renderModal = () => {
