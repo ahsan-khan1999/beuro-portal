@@ -201,12 +201,13 @@ const AdminDashboard = () => {
               title={item.title}
               id={item.id}
               salePercent={item.salePercent}
+              key={index}
             />
           );
         })}
       </div>
       <div className="mt-[60px] space-x-5 flex justify-between">
-        <WavesChart datatest={datatest} />
+        {/* <WavesChart datatest={datatest} /> */}
         <PieChart data={data} />
       </div>
     </Layout>

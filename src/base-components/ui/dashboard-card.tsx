@@ -34,6 +34,7 @@ const DashboardCard = ({
         tension: 0.4,
         borderColor: "#4A13E7",
         backgroundColor: "blue",
+
         // borderColor: Utils.CHART_COLORS.red,
         // backgroundColor: Utils.CHART_COLORS.red,
       },
@@ -49,16 +50,13 @@ const DashboardCard = ({
     ],
   };
   useEffect(() => {
- 
-
-    const ctx = document.getElementById("small").getContext("2d");
-
-    const wavesChart2 = new Chart(ctx, {
+    const ctx = document?.getElementById(id).getContext("2d");
+    let wavesChart2 = new Chart(ctx, {
       type: "line",
       data: datatest2,
       fill: true,
-
       options: {
+        plugins: {},
         scales: {
           x: {
             type: "category",
@@ -76,10 +74,11 @@ const DashboardCard = ({
       },
     });
 
-    return () => {
-      wavesChart2.destroy();
-    };
-  }, [datatest2]);
+    // Ensure cleanup of the previous chart before creating a new one
+    if (wavesChart2) {
+      return wavesChart2.destroy();
+    }
+  }, [datatest2, id]);
 
 
   return (
@@ -144,7 +143,7 @@ const DashboardCard = ({
     //     </svg>
     //   </div>
     // </div>
-    <canvas id="small" className="" />
+    <canvas id={id} className="" />
   );
 };
 
