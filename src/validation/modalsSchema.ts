@@ -1,5 +1,4 @@
 import {
-  AddFollowUp,
   AddNewNote,
   AddTaxField,
   ChangePasswordField,
@@ -60,12 +59,4 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
   });
 };
 
-// Validation for add follow up
-export const generateAddFollowUpValidation = (translate: Function) => {
-  return yup.object().shape({
-    [AddFollowUp.date]: yup.string().required("validation required"),
-    [EditPaymentDetails.expiry]: yup.string().required("validation required"),
-    [AddFollowUp.detail]: yup.string().required("validation required"),
-    [EditPaymentDetails.cvv]: yup.string().required("validation required"),
-  });
-};
+

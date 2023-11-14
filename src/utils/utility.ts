@@ -149,20 +149,41 @@ export const toggler = ({ condition, truthy, falsy }: CheckProps): string => {
   return condition ? truthy : falsy;
 };
 
-export const conditionHandler = (
+export const conditionHandlerRegistration = (
   router: NextRouter,
   response: ApiResponseType,
   connect?: boolean
 ) => {
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
-      router.pathname = "/register/verifyEmailAddress";
+      router.pathname = "/register-success";
       updateQuery(router, "en");
     } else if (!response.data.data.User.isProfileComplete) {
-      router.pathname = "/register/profiledetails";
+      router.pathname = "/profile";
       updateQuery(router, "en");
     } else {
-      router.pathname = "/user-account-settings";
+      router.pathname = "/dashboard";
+      updateQuery(router, "en");
+    }
+  } else {
+    router.query = {};
+    updateQuery(router, "en");
+  }
+};
+export const conditionHandlerLogin = (
+  router: NextRouter,
+  response: ApiResponseType,
+  connect?: boolean
+) => {
+  if (!connect) {
+    if (!response.data.data.User.isEmailVerified) {
+      router.pathname = "/verify-email";
+      updateQuery(router, "en");
+    } else if (!response.data.data.User.isProfileComplete) {
+      router.pathname = "/profile";
+      updateQuery(router, "en");
+    } else {
+      router.pathname = "/dashboard";
       updateQuery(router, "en");
     }
   } else {

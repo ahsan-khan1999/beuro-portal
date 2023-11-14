@@ -64,7 +64,6 @@ export default function useDetail() {
   const CurrentFormComponent = FORM_COMPONENTS[currentFormStage];
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("test");
     dispatch(
       returnStep(
         data,
@@ -82,16 +81,15 @@ export default function useDetail() {
 
    const nextFormHandler = () => {
     const nextStage = getNextFormStage(currentFormStage);
-    console.log(nextStage,"nextStage");
 
     if (nextStage) {
       setProgress((prev) => prev + 40);
       setCurrentFormStage(nextStage);
     }
-    //  else {
-    //   router.pathname = "registrationSuccess";
-    //   updateQuery(router, "en");
-    // }
+     else {
+      router.pathname = "/dashboard";
+      updateQuery(router, "en");
+    }
   };
   return {
     register,

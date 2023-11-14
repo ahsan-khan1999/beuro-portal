@@ -316,15 +316,16 @@ export type GeneratePlansFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
-// Notes formfield
-export type GenerateAddFollowUpFormField = (
+
+
+// follow-up formfield
+export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  isShow?: boolean,
-
+  onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
@@ -394,3 +395,13 @@ interface ItemList {
 }
 
 export type Errors = Record<string, any> | undefined;
+
+
+export interface DateRangeValueProps {
+  selection: DateRangeSelectionProps
+}
+interface DateRangeSelectionProps {
+  startDate: string;
+  endDate: string;
+
+}

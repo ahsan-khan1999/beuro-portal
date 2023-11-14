@@ -10,6 +10,7 @@ export interface GlobalState {
   modal: {
     type: ModalType.NONE;
     cardId?: number;
+    data?: any
   };
 }
 
@@ -24,12 +25,12 @@ export interface Status {
   cancelled?: boolean;
   overdue?: boolean;
   paid?: boolean;
-  active?:boolean;
-  blocked?:boolean;
+  active?: boolean;
+  blocked?: boolean;
 }
-export interface CheckBoxFilterProps{
-  label:string;
-  type:keyof Status
+export interface CheckBoxFilterProps {
+  label: string;
+  type: keyof Status
 }
 export interface CheckFieldProps {
   label: string;
@@ -42,6 +43,7 @@ export interface InputFieldProps {
   handleChange: (value: string) => void;
   containerClassName?: string;
   textClassName?: string;
+  bgColor?: boolean,
   iconDisplay?: boolean
 }
 

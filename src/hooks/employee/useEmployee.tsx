@@ -19,6 +19,7 @@ const useEmployee = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  
   return { currentPageRows, handlePageChange, totalItems, itemsPerPage };
 };
 

@@ -16,6 +16,7 @@ import { SupportRequestAdmin } from "@/types/admin/support-request";
 import { PlansAdmin } from "@/types/admin/plans";
 import { Service } from "@/types/service";
 import { Employee } from "@/types/employee";
+import { AllCustomers, AllLeads, FollowUps } from "@/types/follow-up";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -23,17 +24,22 @@ import { Employee } from "@/types/employee";
 // import notificationIcon from "@/assets/notifications-icon.png";
 
 // Function for handling the date format
-function parseCustomDate(dateString: string) {
-  const parts = dateString.split("/");
-  if (parts.length === 3) {
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1;
-    const year = parseInt(parts[2], 10);
-    if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-      return new Date(year, month, day);
+function parseCustomDate(dateString:string) {
+  const separators = ['/', '-'];
+
+  for (const separator of separators) {
+    const parts = dateString.split(separator);
+    if (parts.length === 3) {
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+      if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+        return new Date(year, month, day);
+      }
     }
   }
 
+  // If neither format is matched, return null
   return null;
 }
 
@@ -3512,5 +3518,292 @@ export const sideBar: SideBar[] = [
     title: "Settings",
     pathname: "/admin/settings",
     role: [0],
+  },
+];
+
+// Follow ups table data
+export const followUpsData: FollowUps[] = [
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Overdue",
+  },
+  {
+    id: "001",
+    customerName: "Rahal Ahmad",
+    dateAndTime: "22:30:06, 25/08/2023",
+    title:
+      "Call for information of cleaning and moving services Lorem ipsum do..",
+    status: "Pending",
+  },
+];
+
+// all customer table data
+export const AllCustomersData: AllCustomers[] = [
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+];
+
+// all Leads table data
+export const AllLeadsData: AllLeads[] = [
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
   },
 ];

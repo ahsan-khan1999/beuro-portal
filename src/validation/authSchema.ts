@@ -17,6 +17,9 @@ import {
 
 export const generateValidation = (translate: Function) => {
   return yup.object().shape({
+    [RegisterationFields.fullName]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     [RegisterationFields.email]: yup
       .string()
       .email()

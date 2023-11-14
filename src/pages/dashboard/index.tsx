@@ -1,12 +1,8 @@
-import { Layout } from "@/layout";
+import Dashboard from "@/components/dashboard";
 import React from "react";
 
 const index = () => {
-  return (
-    <Layout>
-      <h1>Dashboard</h1>
-    </Layout>
-  );
+  return <Dashboard />;
 };
 
 export default index;

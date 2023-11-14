@@ -3,9 +3,10 @@ import companyLogo from "@/assets/svgs/company-logo.svg";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/user.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
-import FollowUpDropDown from "@/components/FollowUpDropDown";
 import Image from "next/image";
+import FollowUpDropDown from "@/components/FollowUpDropDown";
 const Header = () => {
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white">
       <div className="flex items-center">
@@ -20,7 +21,7 @@ const Header = () => {
       </div>
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          <div className="relative menu  mr-6">
+          <div className="relative menu  mr-6" >
             <Image src={createOfferIcon} alt="Create Offer Icon" />
             <FollowUpDropDown />
           </div>

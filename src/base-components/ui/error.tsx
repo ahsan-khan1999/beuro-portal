@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 export default function Error({ error }:any) {
     
-    const { t: translate } = useTranslation()
+    const { t: translate } = useTranslation(["common"])
     return (
         <div>
         {setErrorMessage(error, translate)}

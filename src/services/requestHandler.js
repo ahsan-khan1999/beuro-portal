@@ -36,6 +36,7 @@ const SERVICE_URLS = {
   employee: "/employee",
   service: "/service",
   offerService: "/offer-service",
+  sendEmailOtp: "/otp/send-verify-email-link"
 
 
 };
@@ -54,6 +55,8 @@ const loginInstagram = (data) =>
   post(SERVICE_URLS.loginInstagram, data, { feature: featureConstants.login });
 const singUp = (data) =>
   post(SERVICE_URLS.userSignup, data, { feature: featureConstants.login });
+const sendEmailOtp = (data) =>
+  post(SERVICE_URLS.sendEmailOtp, data, { feature: featureConstants.login });
 const profileStep1 = (data) =>
   put(SERVICE_URLS.profileStep1, data, { feature: featureConstants.login });
 const profileStep2 = (data) =>
@@ -63,7 +66,7 @@ const profileStep3 = (data) =>
 const generateOtp = (data) =>
   post(SERVICE_URLS.generateOtp, data, { feature: featureConstants.login });
 const verifyEmailOtp = (data) =>
-  post(`${SERVICE_URLS.verifyEmailOtp}?otp=${data}`, { otp: data }, { feature: featureConstants.login });
+  post(`${SERVICE_URLS.verifyEmailOtp}`, { otp: data }, { feature: featureConstants.login });
 const readUserProfile = (data) =>
   get(SERVICE_URLS.readProfile, {}, { feature: featureConstants.login });
 const updateProfile = (data) =>
@@ -282,6 +285,7 @@ const apiServices = {
   createOfferService,
   updateOfferService,
   deleteOfferService,
-  readCustomerDetail
+  readCustomerDetail,
+  sendEmailOtp
 };
 export default apiServices;
