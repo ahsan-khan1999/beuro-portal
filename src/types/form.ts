@@ -106,6 +106,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
   value: string;
+  svg?: string,
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
@@ -117,6 +118,8 @@ export interface SelectBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
+  svg?: string;
+  success?: boolean;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
@@ -196,6 +199,8 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   value?: string;
   className?: string;
   remove?: string;
+  svg?:string
+  success? :boolean
   onRemove?: () => void
 }
 

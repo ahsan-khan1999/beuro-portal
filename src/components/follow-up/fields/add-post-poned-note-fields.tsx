@@ -12,8 +12,8 @@ export const AddPostPonedFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.date,
         className: `!p-4 !border-dark focus:!border-primary`,
-        id: "noteMessage",
-        name: "noteMessage",
+        id: "date",
+        name: "date",
         value: "12/12/2023",
         register,
       },
@@ -25,9 +25,9 @@ export const AddPostPonedFollowUpFormField: GenerateFollowUpFormField = (
         type: Field.textArea,
         className: "!p-4 !border-dark  focus:!border-primary ",
         rows: 4,
-        id: "description",
-        name: "description",
-        value:
+        id: "detail",
+        name: "detail",
+        placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
         register,
       },
@@ -36,6 +36,7 @@ export const AddPostPonedFollowUpFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5 ",
       field: {
+        id:"button",
         type: Field.button,
         text: "Next",
         inputType: "submit",

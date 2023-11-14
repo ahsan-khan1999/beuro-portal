@@ -12,6 +12,7 @@ export interface FollowUps {
 // follow up table is here
 export interface FollowUpsTable {
   currentPageRows: FollowUps[];
+  handleFollowUpsDetails: () => void;
 }
 
 // interface for all customers

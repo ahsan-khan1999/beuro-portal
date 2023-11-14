@@ -9,6 +9,7 @@ export const SelectField = ({
   control,
   name,
   trigger,
+  svg,
   className,
   disabled
 }: SelectProps) => {
@@ -22,6 +23,7 @@ export const SelectField = ({
       render={({ field, fieldState: { error } }) => (
         <SelectBox
           id={id}
+          svg={svg}
           options={options}
           value={defaultValue}
           field={field}

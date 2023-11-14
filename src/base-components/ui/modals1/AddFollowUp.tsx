@@ -5,9 +5,9 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddFollowUp } from "@/hooks/follow-up/useAddFollowUp";
 
-const AddFollowUp = ({ onClose }: { onClose: () => void }) => {
+const AddFollowUp = ({ onClose, handleFollowUps }: { onClose: () => void; handleFollowUps: Function }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddFollowUp();
+    useAddFollowUp(handleFollowUps);
 
   return (
     <>
@@ -23,8 +23,11 @@ const AddFollowUp = ({ onClose }: { onClose: () => void }) => {
             onClick={onClose}
           />
           <div className="flex justify-between items-center">
-            <p className="text-2xl font-medium text-[#000]">Add Followup</p>
+            <p className="text-2xl font-medium text-[#000] mb-5">
+              Add Followup
+            </p>
           </div>
+
           <hr className="opacity-10 mb-[30px]" />
 
           <Form

@@ -16,5 +16,5 @@ export enum AddFollowUp {
   selectLead = "selectLead",
   dateAndTime = "dateAndTime",
   followUpType = "followUpType",
-  addititionalDetails = "additionalDetails"
+  addititionalDetails = "addititionalDetails",
 }

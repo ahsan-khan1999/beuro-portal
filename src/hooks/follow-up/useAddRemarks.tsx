@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddRemarksValidation } from "@/validation/followUpSchema";
 import { AddRemarksFormField } from "@/components/follow-up/fields/add-remarks-fields";
 
-export const useAddRemarks = () => {
+export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -26,6 +26,7 @@ export const useAddRemarks = () => {
   const fields = AddRemarksFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
+    handleFollowUpsDetails('remarkss');
   };
   return {
     fields,

@@ -1,5 +1,5 @@
 import { Field } from "@/enums/form";
-import { FormField,  GenerateFollowUpFormField } from "@/types";
+import { FormField, GenerateFollowUpFormField } from "@/types";
 
 export const AddRemarksFormField: GenerateFollowUpFormField = (
   register,
@@ -13,9 +13,9 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
         type: Field.textArea,
         className: "!p-4 !border-dark  focus:!border-primary ",
         rows: 5,
-        id: "description",
-        name: "description",
-        value:
+        id: "remark",
+        name: "remark",
+        placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
         register,
       },
@@ -24,6 +24,7 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5 ",
       field: {
+        id: "button",
         type: Field.button,
         text: "Next",
         inputType: "submit",

@@ -3,8 +3,8 @@ import companyLogo from "@/assets/svgs/company-logo.svg";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/user.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
-import FollowUpDropDown from "@/components/FollowUpDropDown";
 import Image from "next/image";
+import FollowUpDropDown from "@/components/FollowUpDropDown";
 const Header = () => {
 
   return (

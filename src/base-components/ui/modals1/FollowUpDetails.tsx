@@ -169,6 +169,16 @@ const FollowUpDetails = ({
 
             <hr className="opacity-10" />
 
+            <div className="flex flex-col gap-y-1 mt-1">
+              <p className="text-[#4D4D4D] text-sm font-normal ">
+                Your Postponed Note
+              </p>
+              <p className="text-[#484848] text-base font-normal ">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. sitl
+                Pellentesque viverra Lorem ipsum dolor sit amet, consectetur.
+              </p>
+            </div>
+
             <section className="grid grid-cols-2 mt-[30px] mb-[18px]">
               {/* customer details */}
               <div className="flex flex-col border-r border-[#000] border-opacity-10 pr-5">
@@ -224,7 +234,7 @@ const FollowUpDetails = ({
                   <p className="text-sm font-normal text-[#4D4D4D]">
                     Additional Detail
                   </p>
-                  <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     sitl Pellentesque viverra venenatis velit et tristique. Nam
                     quis a eros sit amet ipsum imperdiet molestie Etiam
