@@ -66,7 +66,7 @@ const profileStep3 = (data) =>
 const generateOtp = (data) =>
   post(SERVICE_URLS.generateOtp, data, { feature: featureConstants.login });
 const verifyEmailOtp = (data) =>
-  post(`${SERVICE_URLS.verifyEmailOtp}?otp=${data}`, { otp: data }, { feature: featureConstants.login });
+  post(`${SERVICE_URLS.verifyEmailOtp}`, { otp: data }, { feature: featureConstants.login });
 const readUserProfile = (data) =>
   get(SERVICE_URLS.readProfile, {}, { feature: featureConstants.login });
 const updateProfile = (data) =>

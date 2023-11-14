@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from "next/image";
 import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { useRouter } from 'next/router';
+import { verifyOtp } from '@/api/slices/authSlice/auth';
 
 const EmailConfirmation = ({ data }: { data: { heading: string, description: String } }) => {
-  const dispatch = useAppDispatch()
-  const { loading, error } = useAppSelector(state => state.auth)
   const router = useRouter()
-  // useEffect(() => {
-  //   dispatch(verifyOtp(router))
-  // }, [dispatch])
+  
+  const handleVerifyEmail = () => {
+    router.push("/login")
+  }
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
@@ -31,6 +31,7 @@ const EmailConfirmation = ({ data }: { data: { heading: string, description: Str
           inputType="button"
           className="w-full max-w-[384px] mx-auto"
           id='button'
+          onClick={handleVerifyEmail}
         />
       </div>
     </div>

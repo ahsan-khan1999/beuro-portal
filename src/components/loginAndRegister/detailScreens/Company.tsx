@@ -16,7 +16,6 @@ const Company = ({
   currentFormStage,
 }: FormComponentProps) => {
   const { loading } = useAppSelector((state) => state.auth);
-  console.log(onSubmit);
 
   const fields = detailScreensFormField(register, loading, control);
 

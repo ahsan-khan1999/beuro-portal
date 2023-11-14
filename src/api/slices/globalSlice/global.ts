@@ -10,8 +10,8 @@ const initialState: GlobalState = {
   loading: false,
   file: null,
   modal: {
-    type: ModalType.NONE
-    // type: "",
+    type: ModalType.NONE,
+    data: ""
   },
 };
 
@@ -48,6 +48,8 @@ const globalSlice = createSlice({
   reducers: {
     updateModalType: (state, action) => {
       state.modal.type = action.payload;
+      state.modal.data = action.payload.data;
+
     },
   },
   extraReducers: (builder) => {
