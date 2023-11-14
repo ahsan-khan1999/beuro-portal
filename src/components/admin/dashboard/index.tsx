@@ -14,6 +14,7 @@ const AdminDashboard = () => {
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
+      
     },
     {
       title: "Pending Compnies",
