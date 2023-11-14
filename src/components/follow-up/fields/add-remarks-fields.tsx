@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateAddPostPonedNoteFormField } from "@/types";
+import { FormField,  GenerateFollowUpFormField } from "@/types";
 
-export const AddRemarksFormField: GenerateAddPostPonedNoteFormField = (
+export const AddRemarksFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control

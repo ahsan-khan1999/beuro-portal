@@ -31,7 +31,7 @@ export const InputField = ({
     <div>
      
 
-      <div className={` relative w-full flex items-center `}>
+      <div className={`relative w-full flex items-center`}>
         {/* {name == "email" && (
         <InputEmail
           pathClass={inputFocus ? "fill-primary" : "fill-[#8F8F8F]"}
@@ -46,7 +46,7 @@ export const InputField = ({
        {img && <Image src={addtionalDetailImg} alt="paragraph_icon" className="absolute top-4 left-4"/>}
         {svg && (
           <span
-            className={`mr-3 absolute top-4 left-4 ${
+            className={`mr-3 absolute  left-4 ${
               (inputFocus && "tests") || "test"
             }`}
             dangerouslySetInnerHTML={{ __html: svg }}

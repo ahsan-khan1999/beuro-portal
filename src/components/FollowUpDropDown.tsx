@@ -12,6 +12,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
 import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
 import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
+import AddFollowUp from "@/base-components/ui/modals1/AddFollowUp";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -47,6 +48,10 @@ const FollowUpDropDown = () => {
     dispatch(updateModalType(ModalType.ADD_REMARKS));
   };
 
+  const handleAddFollowUp = () => {
+    dispatch(updateModalType(ModalType.ADD_FOLLOW_UP));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} />,
@@ -64,6 +69,7 @@ const FollowUpDropDown = () => {
       />
     ),
     [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} />,
+    [ModalType.ADD_FOLLOW_UP]: <AddFollowUp onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -76,6 +82,7 @@ const FollowUpDropDown = () => {
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
           <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
           <Button
+            onClick={() => handleAddFollowUp()}
             inputType="button"
             text="Add Follow Up"
             className="text-white text-[13px] font-semibold rounded-md !h-8"

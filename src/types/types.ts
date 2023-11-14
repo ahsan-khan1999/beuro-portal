@@ -316,7 +316,7 @@ export type GeneratePlansFormField = (
 
 
 // follow-up formfield
-export type GenerateAddPostPonedNoteFormField = (
+export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
