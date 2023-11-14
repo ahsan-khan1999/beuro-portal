@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateCustomerFormField,
-  GeneratePlansFormField,
-} from "@/types";
+import { FormField, GeneratePlansFormField } from "@/types";
 
 export const planDetailsFormField: GeneratePlansFormField = (
   register,
@@ -16,6 +12,8 @@ export const planDetailsFormField: GeneratePlansFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
+
         className: "grid grid-cols-4 gap-x-3 ",
         children: [
           {
@@ -30,7 +28,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "planName",
               name: "planName",
-
+              
               placeholder: "Please Enter Your Plan Name",
               register,
               disabled: isUpdate,
@@ -46,7 +44,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.input,
               className:
                 "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
-              inputType: "string",
+              inputType: "text",
               id: "price",
               name: "price",
               placeholder: "Please Enter Monthly Pricing",
@@ -65,7 +63,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               className: "!p-4    !border-dark  focus:!border-primary",
               id: "anuallyDiscount",
               name: "anuallyDiscount",
-              inputType: "string",
+              inputType: "text",
 
               placeholder: "Please Enter Anually Discount",
               register,
@@ -99,6 +97,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-4 gap-x-3 ",
         children: [
           {
@@ -145,6 +144,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-4 gap-x-3 mt-5",
         children: [
           {
@@ -177,7 +177,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.input,
               className:
                 "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
-              inputType: "string",
+              inputType: "text",
               id: "customizeEmails",
               name: "customizeEmails",
               placeholder: "Please Enter Customize Emails",
@@ -196,7 +196,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               className: "!p-4    !border-dark  focus:!border-primary",
               id: "waterMark",
               name: "waterMark",
-              inputType: "string",
+              inputType: "text",
 
               placeholder: "Please Enter Water mark",
               register,
@@ -214,7 +214,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "string",
+              inputType: "text",
               id: "apiFeature",
               name: "apiFeature",
 
@@ -231,18 +231,19 @@ export const planDetailsFormField: GeneratePlansFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: `flex space-x-[18px] mt-8 ${isUpdate && "hidden"}`,
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+              id: "button",
               text: "Back",
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${
-                isUpdate && "hidden"
-              }`,
+              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },
@@ -250,11 +251,11 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+              id: "button",
               text: "Save",
               inputType: "submit",
-              className: `px-4 py-[10px] w-[152px] hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
+              className: `px-4 py-[10px] w-[152px] hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },

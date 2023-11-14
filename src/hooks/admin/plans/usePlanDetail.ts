@@ -60,8 +60,8 @@ export default function usePlanDetail(stage: boolean) {
     control,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FieldValues>({
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
@@ -82,7 +82,6 @@ export default function usePlanDetail(stage: boolean) {
     setIsUpdate(!isUpdate);
   };
 
-  //@ts-expect-error
   const fields = planDetailsFormField(
     register,
     loading,

@@ -147,6 +147,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       containerClass: "mt-[30px] mb-0",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

@@ -2,8 +2,8 @@ import { Layout } from "@/layout";
 import React, { useState } from "react";
 import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
-import AddCustomerForm from "../../employees/fields/add-employee-form";
 import { useRouter } from "next/router";
+import AddCustomerForm from "../add-customer-form";
 type ComponentLookupType = Record<string, JSX.Element>; 
 
 const AddCustomer = () => {

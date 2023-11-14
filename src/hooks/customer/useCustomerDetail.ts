@@ -29,12 +29,12 @@ export default function useCustomerDetail(stage: boolean) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
-  useEffect(() => {
+  
+  useMemo(() => {
     if (typeof Number(id) == "number") {
       let customer = customers.filter((item) => item.id == Number(id))[0];
       if (customer) {
-        reset(customer);
+        reset({ ...customer, phone: customer.phone });
       }
       setCustomerDetail(customer);
     }
@@ -49,13 +49,14 @@ export default function useCustomerDetail(stage: boolean) {
     loading,
     isUpdate,
     handleUpdateCancel,
-    control
+    { phone: customerDetail?.phone, mobile: customerDetail?.mobile },
+    control,
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data, "submit");
   };
-  
+
   const handlePreviousClick = () => {
     router.push("/customers");
   };

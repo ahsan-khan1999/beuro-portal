@@ -11,6 +11,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     {
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -51,13 +52,14 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             containerClass: "mb-0",
             label: { text: "Phone Number", htmlFor: "phoneNumber" },
             field: {
-              type: Field.input,
+              type: Field.phone,
               className: "!p-4    !border-dark  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType: "number",
-              placeholder: "-------------",
-              register,
+              country: "ch",
+              control,
+              value: "",
+              disabled: false
             },
           },
         ],
@@ -68,6 +70,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       containerClass: "mt-[25px]",
       field: {
         type: Field.div,
+        id: "div-field",
         className: "grid grid-cols-3",
         children: [
           {
@@ -103,7 +106,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary",
-        rows:4,
+        rows: 4,
         id: "message",
         name: "message",
         placeholder: "Type your message here",
@@ -115,6 +118,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.button,
+        id: "button",
         text: "Submit Request",
         inputType: "submit",
         className:

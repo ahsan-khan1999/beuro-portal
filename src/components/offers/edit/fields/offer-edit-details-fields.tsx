@@ -10,6 +10,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
     {
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -71,6 +72,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -120,6 +122,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -187,6 +190,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
 
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -253,6 +257,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -293,6 +298,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
+id:"button",
         text: "Save",
         inputType: "submit",
         className:

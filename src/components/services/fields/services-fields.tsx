@@ -12,6 +12,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
@@ -61,6 +62,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       containerClass: "mt-5",
       field: {
         type: Field.div,
+id:"div-field",
         className: "grid grid-cols-3",
         children: [
           {
@@ -108,12 +110,14 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
+id:"div-field",
         className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Cancel",
               inputType: "button",
               onClick: handleUpdateCancel,
@@ -127,6 +131,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+id:"button",
               text: "Save Changes",
               inputType: "submit",
               className: `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${

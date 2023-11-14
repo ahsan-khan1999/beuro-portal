@@ -4,12 +4,13 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddDateFormField, AddOfferDetailsFormField } from "@/components/offers/add/fields/add-offer-details-fields";
+import { AddDateFormField, AddOfferDetailsFormField, AddOfferDetailsSubmitFormField } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useMemo, useRef, useState } from "react";
 import { FormField } from "@/types";
 import { useFormFields } from "@/base-components/form/hook";
+import * as yup from 'yup';
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -19,7 +20,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const { loading, error } = useAppSelector((state) => state.auth);
   const count = useRef(1)
-  const schema = generateOfferDetailsValidationSchema(translate);
+  const schema = generateOfferDetailsValidationSchema(translate, dateCount);
   const {
     register,
     handleSubmit,
@@ -34,6 +35,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   }
   const offerFields = AddOfferDetailsFormField(register, loading, control, () => console.log("")
   );
+  const offerSubmitField = AddOfferDetailsSubmitFormField(register, loading, control, () => console.log("")
+  );
+  console.log(errors, "error");
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
@@ -47,7 +51,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     );
     return dynamicFormFields;
   }, [dateCount]);
-  const fields = [...offerFields, ...formFields]
+  const fields = [...offerFields, ...formFields, ...offerSubmitField]
 
 
   return {
