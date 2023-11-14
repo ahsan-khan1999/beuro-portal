@@ -1,9 +1,10 @@
 import { Layout } from "@/layout";
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
+import Chart from "chart.js/auto";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -58,7 +59,7 @@ const AdminDashboard = () => {
         data: [10, 20, 25, 40, 30, 40, 50, 40, 50, 60, 50, 60],
         tension: 0.4,
         borderColor: "#4A13E7",
-        backgroundColor:"blue",
+        backgroundColor: "blue",
         // borderColor: Utils.CHART_COLORS.red,
         // backgroundColor: Utils.CHART_COLORS.red,
       },
@@ -73,6 +74,75 @@ const AdminDashboard = () => {
       },
     ],
   };
+
+  // const datatest2 = {
+  //   labels: [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "Dataset 1",
+  //       data: [10, 20, 25, 40, 30, 40, 50, 40, 50, 60, 50, 20],
+  //       tension: 0.4,
+  //       borderColor: "#4A13E7",
+  //       backgroundColor: "blue",
+  //       // borderColor: Utils.CHART_COLORS.red,
+  //       // backgroundColor: Utils.CHART_COLORS.red,
+  //     },
+  //     {
+  //       label: "Dataset 2",
+  //       data: [15, 25, 15, 45, 35, 45, 25, 45, 55, 35, 55, 65],
+  //       tension: 0.4,
+  //       borderColor: "#FE9244",
+
+  //       // borderColor: Utils.CHART_COLORS.blue,
+  //       // backgroundColor: Utils.CHART_COLORS.blue,
+  //     },
+  //   ],
+  // };
+  // useEffect(() => {
+ 
+
+  //   const ctx = document.getElementById("small2").getContext("2d");
+
+  //   const wavesChart2 = new Chart(ctx, {
+  //     type: "doughnut",
+  //     data: datatest2,
+  //     fill: true,
+
+  //     options: {
+  //       scales: {
+  //         x: {
+  //           type: "category",
+  //           position: "bottom",
+  //         },
+  //         y: {
+  //           display: false,
+  //           title: {
+  //             display: false,
+  //             text: "Wave Height (meters)",
+  //           },
+  //           beginAtZero: false,
+  //         },
+  //       },
+  //     },
+  //   });
+
+  //   return () => {
+  //     wavesChart2.destroy();
+  //   };
+  // }, [datatest2]);
 
   return (
     <Layout>
@@ -121,6 +191,8 @@ const AdminDashboard = () => {
         />
       </div>
       <DashboardFunctions />
+      <canvas id="small2" className="" />
+
       <div className="grid grid-cols-3 gap-x-6">
         {dashboardCards.map((item, index) => {
           return (
