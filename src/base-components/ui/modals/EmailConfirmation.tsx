@@ -13,9 +13,9 @@ const EmailConfirmation = () => {
   const dispatch = useAppDispatch()
   const handleClick = async () => {
     const res = await dispatch(sendOtpViaEmail())
-    // if (!res) return
-    // router.pathname = "/email-sent"
-    // updateQuery(router, router.locale as string)
+    if (!res) return
+    router.pathname = "/email-sent"
+    updateQuery(router, router.locale as string)
   }
   return (
     <div className="min-h-screen flex justify-center items-center">
