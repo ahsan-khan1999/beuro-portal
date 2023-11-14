@@ -7,6 +7,7 @@ type details = {
   label: string;
   value: string;
 };
+
 const FollowUpServiceDetails = () => {
   const detailsData: details[] = [
     {
@@ -47,9 +48,9 @@ const FollowUpServiceDetails = () => {
     <>
       <BaseModal
         onClose={() => false}
-        containerClassName="max-w-[564.004px] min-h-auto"
+        containerClassName="max-w-[862.597px] min-h-auto"
       >
-        <div className="relative flex flex-col items-center py-[26px] pl-[32px] pr-[25px]">
+        <div className="relative flex flex-col items-center pt-[26px] pb-[41px] pl-[31px] pr-[24px]">
           <Image
             src={crossIcon}
             alt="cross_icon"

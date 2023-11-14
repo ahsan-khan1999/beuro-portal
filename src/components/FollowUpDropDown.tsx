@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import FollowUps from "@/base-components/ui/modals1/FollowUps";
 import { updateModalType } from "@/api/slices/globalSlice/global";
+import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
+import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
+import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -31,9 +34,36 @@ const FollowUpDropDown = () => {
     dispatch(updateModalType(ModalType.FOLLOW_UPS));
   };
 
+  const handleFollowUpsDetails = () => {
+    dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
+  };
+
+  const handleAddPostPonedNote = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
+  };
+
+  const handleAddRemarks = () => {
+    dispatch(updateModalType(ModalType.ADD_REMARKS));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} />,
+    [ModalType.FOLLOW_UPS_DETAILS]: (
+      <FollowUpDetails
+        onClose={onClose}
+        handleAddPostPonedNote={handleAddPostPonedNote}
+        handleAddRemarks={handleAddRemarks}
+      />
+    ),
+    [ModalType.ADD_POSTSPONED_NOTE]: (
+      <AddPostPonedNote
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -56,8 +86,10 @@ const FollowUpDropDown = () => {
           return (
             <div
               key={index}
-              className={`pt-[10px] px-4 cursor-pointer ${(index == 0 || index == 1) && "bg-primary"
-                } bg-opacity-10 `}
+              onClick={() => handleFollowUpsDetails()}
+              className={`pt-[10px] px-4 cursor-pointer ${
+                (index == 0 || index == 1) && "bg-primary"
+              } bg-opacity-10 `}
             >
               <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
                 <Image
