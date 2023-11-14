@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import followUpIcon from "@/assets/svgs/follow-up.svg";
 import timeIcon from "@/assets/svgs/time.svg";
@@ -23,12 +23,23 @@ const FollowUpDropDown = () => {
     { id: "00082" },
     { id: "00025" },
   ];
-
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const [status, setStatus] = useState({
+    postpond: true,
+    completed: true,
 
+
+  })
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const handleStatusUpdate = (key) => {
+    setStatus({
+      ...status,
+      key: !status[key]
+    })
   };
 
   const handleFollowUps = () => {
@@ -37,15 +48,24 @@ const FollowUpDropDown = () => {
 
   const handleFollowUpsDetails = () => {
     dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
+
   };
 
   const handleAddPostPonedNote = () => {
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
+    setStatus({
+      ...status,
+      postpond: false
+    })
   };
 
   const handleAddRemarks = () => {
     dispatch(updateModalType(ModalType.ADD_REMARKS));
+    setStatus({
+      ...status,
+      completed: false
+    })
   };
 
   const handleAddFollowUp = () => {
@@ -54,12 +74,13 @@ const FollowUpDropDown = () => {
 
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails}/>,
+    [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails} />,
     [ModalType.FOLLOW_UPS_DETAILS]: (
       <FollowUpDetails
         onClose={onClose}
         handleAddPostPonedNote={handleAddPostPonedNote}
         handleAddRemarks={handleAddRemarks}
+        status={status}
       />
     ),
     [ModalType.ADD_POSTSPONED_NOTE]: (
@@ -68,8 +89,8 @@ const FollowUpDropDown = () => {
         handleFollowUpsDetails={handleFollowUpsDetails}
       />
     ),
-    [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails}/>,
-    [ModalType.ADD_FOLLOW_UP]: <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps}/>,
+    [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails} />,
+    [ModalType.ADD_FOLLOW_UP]: <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} />,
   };
 
   const renderModal = () => {
@@ -78,7 +99,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="bg-white rounded-md shadow-followUp w-[405px] absolute menuItems right-0 mt-1 ">
+      <div className="bg-white rounded-md shadow-followUp w-[405px] absolute top-3 menuItems right-0 mt-1 ">
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
           <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
           <Button
@@ -94,9 +115,8 @@ const FollowUpDropDown = () => {
             <div
               key={index}
               onClick={() => handleFollowUpsDetails()}
-              className={`pt-[10px] px-4 cursor-pointer ${
-                (index == 0 || index == 1) && "bg-primary"
-              } bg-opacity-10 `}
+              className={`pt-[10px] px-4 cursor-pointer ${(index == 0 || index == 1) && "bg-primary"
+                } bg-opacity-10 `}
             >
               <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
                 <Image

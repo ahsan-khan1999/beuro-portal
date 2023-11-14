@@ -8,6 +8,7 @@ import { useAddPostPonedNote } from "@/hooks/follow-up/useAddPostPonedNote";
 const AddPostPonedNote = ({
   onClose,
   handleFollowUpsDetails,
+ 
 }: {
   onClose: () => void;
   handleFollowUpsDetails: Function;
