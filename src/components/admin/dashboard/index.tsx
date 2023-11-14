@@ -13,18 +13,21 @@ const AdminDashboard = () => {
       id: "202504 ",
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
+      chartPointColor: "#5114EA",
     },
     {
       title: "Pending Compnies",
       id: "202326 ",
       salePercent: "-4.5%",
       backgroundColor: "bg-dashboardCard2-gradient",
+      chartPointColor: "#FC3576",
     },
     {
       title: "Customers",
-      id: "202504 ",
+      id: "202505 ",
       salePercent: "+4.5%",
       backgroundColor: "bg-dashboardCard3-gradient",
+      chartPointColor: "#FE8D46",
     },
   ];
   // Sample data for the pie chart
@@ -75,75 +78,6 @@ const AdminDashboard = () => {
     ],
   };
 
-  // const datatest2 = {
-  //   labels: [
-  //     "Jan",
-  //     "Feb",
-  //     "Mar",
-  //     "Apr",
-  //     "May",
-  //     "Jun",
-  //     "Jul",
-  //     "Aug",
-  //     "Sep",
-  //     "Oct",
-  //     "Nov",
-  //     "Dec",
-  //   ],
-  //   datasets: [
-  //     {
-  //       label: "Dataset 1",
-  //       data: [10, 20, 25, 40, 30, 40, 50, 40, 50, 60, 50, 20],
-  //       tension: 0.4,
-  //       borderColor: "#4A13E7",
-  //       backgroundColor: "blue",
-  //       // borderColor: Utils.CHART_COLORS.red,
-  //       // backgroundColor: Utils.CHART_COLORS.red,
-  //     },
-  //     {
-  //       label: "Dataset 2",
-  //       data: [15, 25, 15, 45, 35, 45, 25, 45, 55, 35, 55, 65],
-  //       tension: 0.4,
-  //       borderColor: "#FE9244",
-
-  //       // borderColor: Utils.CHART_COLORS.blue,
-  //       // backgroundColor: Utils.CHART_COLORS.blue,
-  //     },
-  //   ],
-  // };
-  // useEffect(() => {
- 
-
-  //   const ctx = document.getElementById("small2").getContext("2d");
-
-  //   const wavesChart2 = new Chart(ctx, {
-  //     type: "doughnut",
-  //     data: datatest2,
-  //     fill: true,
-
-  //     options: {
-  //       scales: {
-  //         x: {
-  //           type: "category",
-  //           position: "bottom",
-  //         },
-  //         y: {
-  //           display: false,
-  //           title: {
-  //             display: false,
-  //             text: "Wave Height (meters)",
-  //           },
-  //           beginAtZero: false,
-  //         },
-  //       },
-  //     },
-  //   });
-
-  //   return () => {
-  //     wavesChart2.destroy();
-  //   };
-  // }, [datatest2]);
-
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -191,7 +125,6 @@ const AdminDashboard = () => {
         />
       </div>
       <DashboardFunctions />
-      <canvas id="small2" className="" />
 
       <div className="grid grid-cols-3 gap-x-6">
         {dashboardCards.map((item, index) => {
@@ -201,6 +134,7 @@ const AdminDashboard = () => {
               title={item.title}
               id={item.id}
               salePercent={item.salePercent}
+              chartPointColor={item.chartPointColor}
             />
           );
         })}
