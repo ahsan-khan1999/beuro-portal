@@ -22,7 +22,7 @@ const DashboardCard = ({
         data: [10, 11.5, 11, 12.5],
         tension: 0.4,
         borderColor: "white",
-        backgroundColor: "black",
+        backgroundColor: chartPointColor,
         // borderColor: Utils.CHART_COLORS.red,
         // backgroundColor: Utils.CHART_COLORS.red,
       },
@@ -57,25 +57,24 @@ const DashboardCard = ({
       },
     });
 
-    // Ensure cleanup of the previous chart before creating a new one
-    if (wavesChart2) {
-      return wavesChart2.destroy();
-    }
-  }, [datatest2, id]);
+    return () => {
+      wavesChart2.destroy();
+    };
+  }, [datatest2]);
 
   return (
-    // <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
-    //   <div className="flex items-center mb-8">
-    //     <h3 className="text-xl text-white font-semibold">{title}</h3>
-    //   </div>
-    //   <div className="flex items-center justify-between">
-    //     <div className="flex items-center">
-    //       <span className="text-xl font-medium text-white">{id}</span>
-    //       <span className="text-white ml-[10px]">{salePercent}</span>
-    //     </div>
-    //   </div>
-    // </div>
-        <canvas id={id} className="max-w-[78px] max-h-[50px] z-50" />
+    <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
+      <div className="flex items-center mb-8">
+        <h3 className="text-xl text-white font-semibold">{title}</h3>
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <span className="text-xl font-medium text-white">{id}</span>
+          <span className="text-white ml-[10px]">{salePercent}</span>
+        </div>
+        <canvas id={id} className="max-w-[78px] max-h-[50px]" />
+      </div>
+    </div>
   );
 };
 
