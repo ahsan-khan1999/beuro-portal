@@ -4,10 +4,16 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddFollowUp } from "@/hooks/follow-up/useAddFollowUp";
+import { AddFollowUpProps } from "@/types/follow-up";
 
-const AddFollowUp = ({ onClose, handleFollowUps }: { onClose: () => void; handleFollowUps: Function }) => {
+const AddFollowUp = ({
+  onClose,
+  handleFollowUps,
+  handleAllCustomers,
+  handleAllLeads,
+}: AddFollowUpProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddFollowUp(handleFollowUps);
+    useAddFollowUp(handleFollowUps, handleAllCustomers, handleAllLeads);
 
   return (
     <>

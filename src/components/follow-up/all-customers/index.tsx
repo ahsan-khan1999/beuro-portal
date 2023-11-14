@@ -6,7 +6,7 @@ import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 import useAllCustomers from "@/hooks/follow-up/useAllCustomers";
 
-const AllCustomersTable = () => {
+const AllCustomersTable = ({handleCustomerDetail} : {handleCustomerDetail:() => void}) => {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
   useAllCustomers();
 
@@ -15,7 +15,7 @@ const AllCustomersTable = () => {
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRows currentPageRows={currentPageRows} />
+        <TableRows currentPageRows={currentPageRows} handleCustomerDetail={handleCustomerDetail}/>
       </TableLayout>
       <Pagination
         totalItems={totalItems}

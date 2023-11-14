@@ -1,3 +1,4 @@
+import { Modals } from "@/enums/follow-up";
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
 
@@ -5,8 +6,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  isCustomer,
-  isLead,
+  onItemChange
 ) => {
   const formField: FormField[] = [
     {
@@ -39,7 +39,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               options: [
                 { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)"},
               ],
-              
+              onItemChange: () =>  onItemChange && onItemChange(Modals.customer),
               control,
             },
           },
@@ -93,6 +93,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M11.7383 10.9702H4.75303C4.75303 9.04421 6.31971 7.47754 8.24566 7.47754C10.1716 7.47754 11.7383 9.04421 11.7383 10.9702Z" fill="#8F8F8F"/>
             </svg>`,
               control,
+              onItemChange:() => onItemChange && onItemChange(Modals.leads)
             },
           },
 

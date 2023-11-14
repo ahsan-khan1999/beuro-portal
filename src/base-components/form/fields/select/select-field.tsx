@@ -10,6 +10,7 @@ export const SelectField = ({
   name,
   trigger,
   svg,
+  onItemChange,
   className,
   disabled
 }: SelectProps) => {
@@ -24,6 +25,7 @@ export const SelectField = ({
         <SelectBox
           id={id}
           svg={svg}
+          onItemChange={onItemChange}
           options={options}
           value={defaultValue}
           field={field}

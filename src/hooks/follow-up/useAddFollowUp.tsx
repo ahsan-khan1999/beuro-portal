@@ -6,8 +6,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
+import { Modals } from "@/enums/follow-up";
 
-export const useAddFollowUp = (handleFollowUps: Function) => {
+export const useAddFollowUp = (
+  handleFollowUps: Function,
+  handleAllCustomers: Function,
+  handleAllLeads: Function
+) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,10 +28,25 @@ export const useAddFollowUp = (handleFollowUps: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddFollowUpFormField(register, loading, control);
+
+  const lookUpModals = {
+    [Modals.customer]: () => handleAllCustomers(),
+    [Modals.leads]: () => handleAllLeads(),
+  };
+
+  const handleModalPop = (item: Modals) => {
+    lookUpModals[item]();
+  };
+
+  const fields = AddFollowUpFormField(
+    register,
+    loading,
+    control,
+    handleModalPop
+  );
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
-    handleFollowUps()
+    handleFollowUps();
   };
   return {
     fields,

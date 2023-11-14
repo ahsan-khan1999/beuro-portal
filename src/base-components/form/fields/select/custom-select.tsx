@@ -17,6 +17,7 @@ export const SelectBox = ({
   success,
   placeholder,
   className,
+  onItemChange,
   disabled,
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ export const SelectBox = ({
     setIsOpen(false);
     field?.onChange(value);
     trigger?.(field?.name);
+    onItemChange && onItemChange();
   };
 
   const handleChange = (value: string) => {

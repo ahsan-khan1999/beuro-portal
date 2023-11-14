@@ -28,6 +28,7 @@ export interface AllCustomers {
 
 export interface AllCustomersTable {
   currentPageRows: AllCustomers[];
+  handleCustomerDetail: () => void;
 }
 
 // interface for all the leads
@@ -43,4 +44,17 @@ export interface AllLeads {
 
 export interface AllLeadsTable {
   currentPageRows: AllLeads[];
+  handleLeadDetail: () => void;
+}
+
+export interface AddFollowUpProps {
+  onClose: () => void;
+  handleFollowUps: () => void;
+  handleAllCustomers: () => void;
+  handleAllLeads: () => void;
+}
+
+export interface AllCustomersProps {
+  onClose: () => void;
+  handleCustomerDetail: () => void;
 }

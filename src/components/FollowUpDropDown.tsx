@@ -13,6 +13,8 @@ import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
 import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
 import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
 import AddFollowUp from "@/base-components/ui/modals1/AddFollowUp";
+import AllCustomers from "@/base-components/ui/modals1/AllCustomers";
+import AllLeads from "@/base-components/ui/modals1/AllLeads";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -66,6 +68,22 @@ const FollowUpDropDown = () => {
     dispatch(updateModalType(ModalType.ADD_FOLLOW_UP));
   };
 
+  const handleAllCustomers = () => {
+    dispatch(updateModalType(ModalType.ALL_CUSTOMERS_LIST));
+  };
+
+  const handleCustomerDetail = () => {
+    dispatch(updateModalType(ModalType.SELECTED_CUSTOMER_DETAIL));
+  };
+
+  const handleAllLeads = () => {
+    dispatch(updateModalType(ModalType.ALL_LEADS_LIST));
+  };
+
+  const handleLeadDetail = () => {
+    dispatch(updateModalType(ModalType.SELECTED_LEADS_DETAIL));
+  };
+
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: (
@@ -95,8 +113,10 @@ const FollowUpDropDown = () => {
       />
     ),
     [ModalType.ADD_FOLLOW_UP]: (
-      <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} />
+      <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} handleAllCustomers={handleAllCustomers} handleAllLeads={handleAllLeads}/>
     ),
+    [ModalType.ALL_CUSTOMERS_LIST]: <AllCustomers onClose={onClose} handleCustomerDetail={handleCustomerDetail}/>,
+    [ModalType.ALL_LEADS_LIST]: <AllLeads onClose={onClose} handleLeadDetail={handleLeadDetail}/>,
   };
 
   const renderModal = () => {

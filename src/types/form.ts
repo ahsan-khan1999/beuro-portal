@@ -107,6 +107,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string;
   svg?: string;
+  onItemChange?: Function
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
@@ -119,6 +120,7 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   svg?: string;
+  onItemChange?: Function
   success?: boolean;
   placeholder?: string;
   className?: string;

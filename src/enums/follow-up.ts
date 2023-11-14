@@ -18,3 +18,9 @@ export enum AddFollowUp {
   followUpType = "followUpType",
   addititionalDetails = "addititionalDetails",
 }
+
+// add follow enums
+export enum Modals {
+  customer = "customer",
+  leads = "leads",
+}
