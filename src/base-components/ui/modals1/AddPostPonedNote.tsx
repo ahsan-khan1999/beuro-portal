@@ -12,8 +12,9 @@ const AddPostPonedNote = ({
   onClose: () => void;
   handleFollowUpsDetails: Function;
 }) => {
-  const { errors, fields, handleSubmit, onSubmit } =
-    useAddPostPonedNote(handleFollowUpsDetails);
+  const { errors, fields, handleSubmit, onSubmit } = useAddPostPonedNote(
+    handleFollowUpsDetails
+  );
 
   return (
     <>

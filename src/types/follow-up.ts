@@ -12,6 +12,7 @@ export interface FollowUps {
 // follow up table is here
 export interface FollowUpsTable {
   currentPageRows: FollowUps[];
+  handleFollowUpsDetails: () => void;
 }
 
 // interface for all customers
@@ -27,6 +28,7 @@ export interface AllCustomers {
 
 export interface AllCustomersTable {
   currentPageRows: AllCustomers[];
+  handleCustomerDetail: () => void;
 }
 
 // interface for all the leads
@@ -42,4 +44,17 @@ export interface AllLeads {
 
 export interface AllLeadsTable {
   currentPageRows: AllLeads[];
+  handleLeadDetail: () => void;
+}
+
+export interface AddFollowUpProps {
+  onClose: () => void;
+  handleFollowUps: () => void;
+  handleAllCustomers: () => void;
+  handleAllLeads: () => void;
+}
+
+export interface AllCustomersProps {
+  onClose: () => void;
+  handleCustomerDetail: () => void;
 }

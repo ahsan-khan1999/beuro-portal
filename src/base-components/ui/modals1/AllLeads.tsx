@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import AllCustomersTable from "@/components/follow-up/all-customers";
+import AllLeadsTable from "@/components/follow-up/all-leads";
 
-const AllLeads = ({ onClose }: { onClose: () => void }) => {
+const AllLeads = ({ onClose, handleLeadDetail }: { onClose: () => void, handleLeadDetail:() => void }) => {
   return (
     <>
       <BaseModal
@@ -18,7 +18,7 @@ const AllLeads = ({ onClose }: { onClose: () => void }) => {
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <AllCustomersTable />
+          <AllLeadsTable handleLeadDetail={handleLeadDetail}/>
         </div>
       </BaseModal>
     </>

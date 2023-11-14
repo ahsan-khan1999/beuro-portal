@@ -4,7 +4,9 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import FollowUpsTable from "@/components/follow-up";
 
-const FollowUps = ({ onClose }: { onClose: () => void }) => {
+const FollowUps = ({ onClose, handleFollowUpsDetails }: { onClose: () => void; handleFollowUpsDetails:Function }) => {
+  console.log(handleFollowUpsDetails);
+  
   return (
     <>
       <BaseModal
@@ -18,7 +20,7 @@ const FollowUps = ({ onClose }: { onClose: () => void }) => {
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <FollowUpsTable />
+          <FollowUpsTable handleFollowUpsDetails={handleFollowUpsDetails}/>
         </div>
       </BaseModal>
     </>

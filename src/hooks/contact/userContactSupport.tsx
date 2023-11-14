@@ -24,8 +24,9 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
   });
   const fields = ContactSupportFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // dispatch(loginUser({ data, router, setError, translate }));
+    dispatch(loginUser({ data, router, translate }));
     requestSubmitHandler();
+    // dispatch(loginUser({ data, router, setError, translate }));
   };
   return {
     fields,

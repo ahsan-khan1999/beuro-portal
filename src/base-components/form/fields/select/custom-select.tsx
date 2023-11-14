@@ -13,9 +13,12 @@ export const SelectBox = ({
   value: defaultValue,
   field,
   trigger,
+  svg,
+  success,
   placeholder,
   className,
-  disabled
+  onItemChange,
+  disabled,
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
@@ -36,6 +39,7 @@ export const SelectBox = ({
     setIsOpen(false);
     field?.onChange(value);
     trigger?.(field?.name);
+    onItemChange && onItemChange();
   };
 
   const handleChange = (value: string) => {
@@ -46,8 +50,9 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses =
-    "placeholder:text-dark px-4 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
+  const defaultClasses = `placeholder:text-dark  py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+    success ? "pl-4 pr-10" : "pl-11 pr-4"
+  }`;
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -60,13 +65,17 @@ export const SelectBox = ({
         }}
         className={classes}
       >
-
         {(field && field.value) || defaultValue}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
-
-      </button >
-      {!disabled&& isOpen && (
+        {svg && (
+          <span
+            className={`mr-3 absolute  left-4 ${(isOpen && "tests") || "test"}`}
+            dangerouslySetInnerHTML={{ __html: svg }}
+          />
+        )}
+      </button>
+      {!disabled && isOpen && (
         <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10">
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
             {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
@@ -89,6 +98,6 @@ export const SelectBox = ({
           ))}
         </ul>
       )}
-    </div >
+    </div>
   );
 };
