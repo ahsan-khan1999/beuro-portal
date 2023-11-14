@@ -21,7 +21,9 @@ export default function SelectField({
         <div
           className="flex  justify-between cursor-pointer"
           onClick={() => {
-            return !isOpen ? setIsOpen(label) : setIsOpen("");
+            return !isOpen || isOpen !== label
+              ? setIsOpen(label)
+              : setIsOpen("");
           }}
         >
           <span className="text-dark   me-2">{label}</span>
