@@ -3,7 +3,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import React, { useState } from "react";
 
 export default function EmployeesFilters() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState("");
 
   return (
     <div className="flex">
