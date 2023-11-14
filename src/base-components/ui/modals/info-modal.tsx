@@ -1,6 +1,6 @@
 import { IInfoModalProps } from "@/types";
-import { BaseModal } from "./base-modal";
 import { ModalCrossIcon } from "@/assets/svgs/components/sideBar/modal-cross-icon";
+import { BaseModal } from "./base-modal";
 
 export const InfoModal = ({
   modalTitle,

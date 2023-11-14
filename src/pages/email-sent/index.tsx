@@ -1,4 +1,4 @@
-import PasswordResetEmail from '@/base-components/ui/modals/PasswordResetEmail'
+import PasswordResetEmail from '@/base-components/ui/password-reset-email'
 import React from 'react'
 let data = {
     heading: "We send an email to rest password",
