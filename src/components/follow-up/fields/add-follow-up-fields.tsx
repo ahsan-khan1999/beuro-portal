@@ -4,7 +4,9 @@ import { FormField, GenerateFollowUpFormField } from "@/types";
 export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
-  control
+  control,
+  isCustomer,
+  isLead,
 ) => {
   const formField: FormField[] = [
     {
@@ -34,7 +36,10 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M13.221 12.1009C11.5177 11.9588 10.0372 12.1025 8.76018 13.1566C6.6232 14.8683 7.03445 17.173 7.03445 19.9925C7.03445 20.7385 7.64138 21.3567 8.39867 21.3567C16.6215 21.3567 16.9487 21.622 17.4364 20.5422C17.5963 20.177 17.5524 20.293 17.5524 16.7997C17.5524 14.0251 15.1499 12.1009 13.221 12.1009Z" fill="#4A13E7"/>
               <path d="M19.6209 12.0855C18.6404 12.0855 17.8808 11.9949 17.0386 12.685C19.0629 14.7518 18.7211 16.8117 18.7211 19.9926C18.7211 20.1607 18.4483 20.1103 21.0794 20.1103C21.7339 20.1103 22.266 19.5801 22.266 18.9284V14.7146C22.266 13.265 21.0794 12.0855 19.6209 12.0855Z" fill="#4A13E7"/>
             </svg>`,
-              options: [{ value: "Rahal Ahmed", label: "Rahal Ahmed" }],
+              options: [
+                { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)"},
+              ],
+              
               control,
             },
           },
@@ -73,11 +78,13 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             field: {
               className: "!border-dark  focus:!border-primary ",
               type: Field.select,
-              value: "Please Select Lead",
+              value: "Enter your Lead",
               id: "selectLead",
               name: "selectLead",
-
-              options: [{ value: "Reason", label: "Mateen Nawaz(R-1)" }],
+              options: [
+                { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)" },
+                { value: "Hamza(R-2)", label: "Hamza(R-2)" },
+              ],
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path d="M16.3952 7.47788C15.1093 7.47788 14.0668 6.43541 14.0668 5.14946C14.0668 3.86351 15.1093 2.82104 16.3952 2.82104C17.6812 2.82104 18.7236 3.86351 18.7236 5.14946C18.7236 6.43541 17.6812 7.47788 16.3952 7.47788Z" fill="#8F8F8F"/>
               <path d="M8.2458 7.47788C6.95986 7.47788 5.91739 6.43541 5.91739 5.14946C5.91739 3.86351 6.95986 2.82104 8.2458 2.82104C9.53175 2.82104 10.5742 3.86351 10.5742 5.14946C10.5742 6.43541 9.53175 7.47788 8.2458 7.47788Z" fill="#8F8F8F"/>
@@ -131,7 +138,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         value: "Reason",
         id: "followUpType",
         name: "followUpType",
-        options: [{ value: "Reason", label: "Mateen Nawaz(R-1)" }],
+        options: [{ value: "Reason", label: "Reason" }],
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21" fill="none">
         <path d="M2.29318 20.821H14.2672C15.2576 20.821 16.0633 20.0153 16.0633 19.0248V6.37227H11.8724C10.882 6.37227 10.0763 5.56658 10.0763 4.57617V0.385254H2.29318C1.30276 0.385254 0.49707 1.19095 0.49707 2.18136V19.0248C0.49707 20.0153 1.30276 20.821 2.29318 20.821ZM4.68798 8.807H11.8724C12.2033 8.807 12.4711 9.07478 12.4711 9.4057C12.4711 9.73662 12.2033 10.0044 11.8724 10.0044H4.68798C4.35706 10.0044 4.08928 9.73662 4.08928 9.4057C4.08928 9.07478 4.35706 8.807 4.68798 8.807ZM4.68798 11.2018H11.8724C12.2033 11.2018 12.4711 11.4696 12.4711 11.8005C12.4711 12.1314 12.2033 12.3992 11.8724 12.3992H4.68798C4.35706 12.3992 4.08928 12.1314 4.08928 11.8005C4.08928 11.4696 4.35706 11.2018 4.68798 11.2018ZM4.68798 13.5966H11.8724C12.2033 13.5966 12.4711 13.8644 12.4711 14.1953C12.4711 14.5262 12.2033 14.794 11.8724 14.794H4.68798C4.35706 14.794 4.08928 14.5262 4.08928 14.1953C4.08928 13.8644 4.35706 13.5966 4.68798 13.5966ZM4.68798 15.9914H9.4776C9.80852 15.9914 10.0763 16.2592 10.0763 16.5901C10.0763 16.921 9.80852 17.1888 9.4776 17.1888H4.68798C4.35706 17.1888 4.08928 16.921 4.08928 16.5901C4.08928 16.2592 4.35706 15.9914 4.68798 15.9914Z" fill="#8F8F8F"/>
       </svg>`,

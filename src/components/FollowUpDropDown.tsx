@@ -26,20 +26,13 @@ const FollowUpDropDown = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const [status, setStatus] = useState({
-    postpond: true,
-    completed: true,
+    postpond: false,
+    completed: false,
+    neutral: true,
+  });
 
-
-  })
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const handleStatusUpdate = (key) => {
-    setStatus({
-      ...status,
-      key: !status[key]
-    })
   };
 
   const handleFollowUps = () => {
@@ -48,24 +41,25 @@ const FollowUpDropDown = () => {
 
   const handleFollowUpsDetails = () => {
     dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
-
   };
 
   const handleAddPostPonedNote = () => {
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
     setStatus({
-      ...status,
-      postpond: false
-    })
+      postpond: true,
+      completed: false,
+      neutral: false,
+    });
   };
 
   const handleAddRemarks = () => {
     dispatch(updateModalType(ModalType.ADD_REMARKS));
     setStatus({
-      ...status,
-      completed: false
-    })
+      postpond: false,
+      completed: true,
+      neutral: false,
+    });
   };
 
   const handleAddFollowUp = () => {
@@ -74,7 +68,12 @@ const FollowUpDropDown = () => {
 
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.FOLLOW_UPS]: <FollowUps onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails} />,
+    [ModalType.FOLLOW_UPS]: (
+      <FollowUps
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
     [ModalType.FOLLOW_UPS_DETAILS]: (
       <FollowUpDetails
         onClose={onClose}
@@ -89,8 +88,15 @@ const FollowUpDropDown = () => {
         handleFollowUpsDetails={handleFollowUpsDetails}
       />
     ),
-    [ModalType.ADD_REMARKS]: <AddRemarks onClose={onClose} handleFollowUpsDetails={handleFollowUpsDetails} />,
-    [ModalType.ADD_FOLLOW_UP]: <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} />,
+    [ModalType.ADD_REMARKS]: (
+      <AddRemarks
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.ADD_FOLLOW_UP]: (
+      <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} />
+    ),
   };
 
   const renderModal = () => {
@@ -115,8 +121,9 @@ const FollowUpDropDown = () => {
             <div
               key={index}
               onClick={() => handleFollowUpsDetails()}
-              className={`pt-[10px] px-4 cursor-pointer ${(index == 0 || index == 1) && "bg-primary"
-                } bg-opacity-10 `}
+              className={`pt-[10px] px-4 cursor-pointer ${
+                (index == 0 || index == 1) && "bg-primary"
+              } bg-opacity-10 `}
             >
               <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
                 <Image
@@ -127,7 +134,7 @@ const FollowUpDropDown = () => {
                 <div>
                   <div>
                     <span className="text-dark text-sm">
-                      Up coming Follow up:{" "}
+                      Up coming Follow up:
                     </span>
                     <span className="text-dark text-sm font-medium">
                       Call for information of cleaning and moving services

@@ -325,6 +325,8 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  isCustomer?: Function,
+  isLead?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
