@@ -57,7 +57,8 @@ const AdminDashboard = () => {
         label: "Dataset 1",
         data: [10, 20, 25, 40, 30, 40, 50, 40, 50, 60, 50, 60],
         tension: 0.4,
-
+        borderColor: "#4A13E7",
+        backgroundColor:"blue",
         // borderColor: Utils.CHART_COLORS.red,
         // backgroundColor: Utils.CHART_COLORS.red,
       },
@@ -65,6 +66,7 @@ const AdminDashboard = () => {
         label: "Dataset 2",
         data: [15, 25, 15, 45, 35, 45, 25, 45, 55, 35, 55, 65],
         tension: 0.4,
+        borderColor: "#FE9244",
 
         // borderColor: Utils.CHART_COLORS.blue,
         // backgroundColor: Utils.CHART_COLORS.blue,
