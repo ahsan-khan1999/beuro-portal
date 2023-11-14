@@ -4,7 +4,8 @@ import { FormField, GenerateFollowUpFormField } from "@/types";
 export const AddRemarksFormField: GenerateFollowUpFormField = (
   register,
   loading,
-  control
+  control,
+  onClick
 ) => {
   const formField: FormField[] = [
     {

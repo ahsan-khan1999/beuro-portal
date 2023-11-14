@@ -6,7 +6,7 @@ import useFollowUps from "@/hooks/follow-up/useFollowUp";
 import TableRows from "./table/TableRows";
 import TableFunctions from "./table/TableFunctions";
 
-const FollowUpsTable = ({handleFollowUpsDetails} : {handleFollowUpsDetails:Function}) => {
+const FollowUpsTable = ({handleFollowUpsDetails} : {handleFollowUpsDetails:() => void}) => {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
     useFollowUps();
 

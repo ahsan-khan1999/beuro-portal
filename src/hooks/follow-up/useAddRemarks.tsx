@@ -25,8 +25,10 @@ export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   });
   const fields = AddRemarksFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+ 
     dispatch(loginUser({ data, router, setError, translate }));
-    handleFollowUpsDetails('remarkss');
+    handleFollowUpsDetails();
+
   };
   return {
     fields,
