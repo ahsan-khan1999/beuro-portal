@@ -10,7 +10,7 @@ export default function CustomerFilter() {
     active: true,
     blocked: false,
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState("");
   const checkbox: CheckBoxType[] = [
     { label: "Active", type: "active" },
     { label: "Blocked", type: "blocked" },

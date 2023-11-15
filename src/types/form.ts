@@ -195,6 +195,8 @@ export interface MultiDateProps extends BaseFieldProps<Field.phone> {
   setValue?: UseFormSetValue<FieldValues>;
   success?: boolean;
   disabled?: boolean;
+  remove?: string;
+  onRemove?: () => void
 }
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;

@@ -11,7 +11,7 @@ export default function OffersFilters() {
     expired: false,
     rejected: false,
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState("");
   const checkbox:CheckBoxFilterProps[] = [
     { label: "Open", type: "open" },
     { label: "Signed", type: "signed" },

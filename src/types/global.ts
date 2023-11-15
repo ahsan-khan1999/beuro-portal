@@ -54,7 +54,7 @@ export interface OptionsFieldProps {
   handleChange: (value: string) => void;
   options: string[];
   dropDownIconClassName: string;
-  isOpen: boolean;
+  isOpen: string;
   setIsOpen: SetStateAction<any>;
 }
 

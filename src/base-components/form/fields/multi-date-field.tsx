@@ -1,43 +1,64 @@
 import { Controller } from "react-hook-form";
-import { MultiDateProps, PhoneProps } from "@/types";
+import { DateRangeValueProps, MultiDateProps, PhoneProps } from "@/types";
 //@ts-expect-error
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { DateRange } from "react-date-range";
+
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+
 
 export const MultiDateField = ({
-  name,
-  control,
-  value,
-  disabled,
+    name,
+    control,
+    value,
+    disabled,
+    remove,
+    onRemove
 }: MultiDateProps) => {
-  console.log(value, "value");
+    return (
 
-  return (
-    <Controller
-      control={control}
-      name={name}
-      defaultValue={value}
-      render={({ field: { onChange } }) => {
-        return (
-          <div className="relative w-full">
-            <DatePicker
-              onChange={(date: string) => {
-                onChange(date);
-                console.log(value, "value");
-              }}
-              inputProps={{ name: name }}
-              startDate={value}
-              endDate={value}
-              class="!border-2 !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary "
-              inputClass="!w-full !h-12 !border-0 !rounded-lg"
-              disabled={disabled}
-              selectsRange={true}
-            />
-          </div>
-        );
-      }}
-    />
-  );
+        <Controller
+            control={control}
+            name={name}
+            defaultValue={value}
+
+            render={({ field: { onChange: handleChange, value } }) => {
+                return (
+                    <div className="relative w-full">
+                        {
+                            remove &&
+                            <div className="cursor-pointer -top-9 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md" onClick={onRemove}>
+                                {remove}
+                            </div>
+                        }
+                        <DateRange
+                            ranges={[{
+                                startDate: value?.startDate,
+                                endDate: value?.endDate,
+                                key: 'selection',
+                            }] ||{
+                                startDate: new Date(),
+                                endDate: new Date(),
+                                key: 'selection',
+                            } }
+                            onChange={(val: DateRangeValueProps) => {
+                                let { selection } = val
+                                console.log(value, "value");
+                                handleChange({
+                                    startDate: selection.startDate,
+                                    endDate: selection.endDate,
+
+                                })
+
+                            }}
+                            moveRangeOnFirstSelection={false}
+                        />
+
+                    </div>
+                );
+            }}
+        />
+    );
 };
 
-// const value = watch!(name, defaultValue);
+

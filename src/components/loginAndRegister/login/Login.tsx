@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import EntryLinks from "../EntryLinks";
 import { Form } from "@/base-components/form/form";
+import Error from "@/base-components/ui/error";
 
 const Login = () => {
   const defaultClassName = "mt-[30px]  ";
@@ -21,6 +22,7 @@ const Login = () => {
           <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
             Manage your business with us
           </span>
+          <Error error={error} />
 
           <Form
             formFields={fields}
