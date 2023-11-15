@@ -7,9 +7,9 @@ interface DashboardCard {
   id: string;
   salePercent: string;
   chartPointColor: string;
-  open: number;
-  closed: number;
-  expired: number;
+  open: string;
+  closed: string;
+  expired: string;
 }
 const DashboardCard = ({
   backgroundColor,
@@ -166,7 +166,7 @@ const DashboardCard = ({
             />
           </svg>
           <span className="ml-[3px] text-white font-medium text-xs">
-            {open} Open
+            {open}
           </span>
         </div>
         <div className="flex items-center">
@@ -185,11 +185,11 @@ const DashboardCard = ({
             />
           </svg>
           <span className="ml-[3px] text-white font-medium text-xs">
-            {closed} Close
+            {closed}
           </span>
         </div>
         <span className="ml-[3px] text-white font-medium text-xs">
-          {expired} Expired
+          {expired}
         </span>
       </div>
     </div>

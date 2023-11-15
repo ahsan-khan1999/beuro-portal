@@ -3,6 +3,11 @@ import React from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import DashboardCard from "./Cards";
+import { Button } from "@/base-components/ui/button/button";
+import Image from "next/image";
+import followUpIcon from "@/assets/svgs/follow-up.svg";
+import timeIcon from "@/assets/svgs/time.svg";
+import idIcon from "@/assets/svgs/id.svg";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -13,9 +18,9 @@ const AdminDashboard = () => {
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: 2782,
-      closed: 2782,
-      expired: 2782,
+      open: "2782 Open",
+      closed: "2782 Close",
+      expired: "2782 Expired",
     },
     {
       title: "Offers",
@@ -24,9 +29,9 @@ const AdminDashboard = () => {
       salePercent: "-4.5%",
       backgroundColor: "bg-dashboardCard2-gradient",
       chartPointColor: "#FC3576",
-      open: 2782,
-      closed: 2782,
-      expired: 2782,
+      open: "2782 Open",
+      closed: "2782 Signed",
+      expired: "2782 Expired",
     },
     {
       title: "Contracts",
@@ -35,9 +40,9 @@ const AdminDashboard = () => {
       salePercent: "+4.5%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
-      open: 2782,
-      closed: 2782,
-      expired: 2782,
+      open: "2782 Open",
+      closed: "2782 Confirmed",
+      expired: "2782 Cancelled",
     },
     {
       title: "Sales",
@@ -46,21 +51,43 @@ const AdminDashboard = () => {
       salePercent: "+4.5%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
-      open: 2782,
-      closed: 2782,
-      expired: 2782,
+      open: "2782 Open",
+      closed: "2782 Overdue",
+      expired: "2782 Paid",
     },
   ];
   // Sample data for the pie chart
   const data = {
     datasets: [
       {
-        data: [20, 20, 20, 40],
-        backgroundColor: ["#FE9244", "#FF376F", "#4A13E7", "#45C769"],
+        data: [40, 10, 10, 10, 15, 15],
+        backgroundColor: [
+          "#FE9244",
+          "#FF376F",
+          "#4A13E7",
+          "#45C769",
+          "#7B18FF",
+          "#221177",
+        ],
       },
     ],
-    labels: ["Silver", "Gold", "Diamond", "Infinite"],
+    labels: [
+      "Website",
+      "Google",
+      "Facebook",
+      "Instagram",
+      "Pinterest",
+      "Whatsapp",
+    ],
   };
+  const followUp = [
+    { id: "00071" },
+    { id: "00045" },
+    { id: "00075" },
+    { id: "00034" },
+    { id: "00082" },
+    { id: "00025" },
+  ];
 
   return (
     <Layout>
@@ -110,7 +137,7 @@ const AdminDashboard = () => {
       </div>
       <DashboardFunctions />
 
-      <div className="grid grid-cols-3 gap-x-6">
+      <div className="grid grid-cols-4 gap-x-6">
         {dashboardCards.map((item, index) => {
           return (
             <DashboardCard
@@ -128,6 +155,146 @@ const AdminDashboard = () => {
         })}
       </div>
       <div className="mt-[60px] space-x-5 flex justify-between">
+        <div className="bg-white rounded-[20px] shadow-followUp w-[380px] max-h-[400px]   ml-2 mt-1 ">
+          <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
+            <h1 className="text-[#18181B]  font-medium">Follow Ups</h1>
+          </div>
+          <div className="overflow-y-scroll max-h-[340px]">
+            {followUp.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`pt-[10px] px-4 cursor-pointer ${
+                    (index == 0 || index == 1) && "bg-primary"
+                  } bg-opacity-10 `}
+                >
+                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+                    <Image
+                      src={followUpIcon}
+                      alt="Follow Up Icon"
+                      className="mr-6"
+                    />
+                    <div>
+                      <div>
+                        <span className="text-dark text-sm">
+                          Recent Follow up:{" "}
+                        </span>
+                        <span className="text-dark text-sm font-medium">
+                          Call for information of cleaning and moving services
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between mt-1">
+                        <div className="flex items-center ">
+                          <Image
+                            src={timeIcon}
+                            alt="Time Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            14:20:05,12/09/2023
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <Image
+                            src={idIcon}
+                            alt="Id Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            {item.id}
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <Image
+                            src={idIcon}
+                            alt="Id Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            {item.id}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="flex justify-center py-4">
+              <button className=" text-primary w-fit text-sm font-medium ">
+                View All
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-[20px] shadow-followUp w-[380px] max-h-[400px]   ml-2 mt-1 ">
+          <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
+            <h1 className="text-[#18181B]  font-medium">Activity</h1>
+          </div>
+          <div className="overflow-y-scroll max-h-[340px]">
+            {followUp.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`pt-[10px] px-4 cursor-pointer ${
+                    (index == 0 || index == 1) && "bg-primary"
+                  } bg-opacity-10 `}
+                >
+                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+               
+                    <div>
+                      <div>
+                        <span className="text-dark text-sm">
+                          Recent Follow up:{" "}
+                        </span>
+                        <span className="text-dark text-sm font-medium">
+                          Call for information of cleaning and moving services
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between mt-1">
+                        <div className="flex items-center ">
+                          <Image
+                            src={timeIcon}
+                            alt="Time Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            14:20:05,12/09/2023
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <Image
+                            src={idIcon}
+                            alt="Id Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            {item.id}
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <Image
+                            src={idIcon}
+                            alt="Id Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-xs ">
+                            {item.id}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="flex justify-center py-4">
+              <button className=" text-primary w-fit text-sm font-medium ">
+                View All
+              </button>
+            </div>
+          </div>
+        </div>
         <PieChart data={data} />
       </div>
     </Layout>
