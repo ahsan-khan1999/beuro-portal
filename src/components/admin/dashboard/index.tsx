@@ -1,10 +1,11 @@
 import { Layout } from "@/layout";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
 import Chart from "chart.js/auto";
+import InputField from "@/base-components/filter/fields/input-field";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -14,7 +15,6 @@ const AdminDashboard = () => {
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      
     },
     {
       title: "Pending Compnies",
@@ -78,7 +78,12 @@ const AdminDashboard = () => {
       },
     ],
   };
-
+  const [filter, setFilter] = useState({
+    text: "",
+    sortBy: "",
+    type: "None",
+    location: "",
+  });
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -86,7 +91,7 @@ const AdminDashboard = () => {
           Super Admin
         </h1>
       </div>
-      <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
+      {/* <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -124,7 +129,14 @@ const AdminDashboard = () => {
           name="search"
           type="text"
         />
-      </div>
+      </div> */}
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+        containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        textClassName="ml-4 w-full  focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF] py-0 rounded-none "
+      />
       <DashboardFunctions />
 
       <div className="grid grid-cols-3 gap-x-6">

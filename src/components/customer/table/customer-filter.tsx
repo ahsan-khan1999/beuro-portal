@@ -4,13 +4,26 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
 import React, { useState } from "react";
 
-
 export default function CustomerFilter() {
-
-  const { filter, setFilter, isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter()
+  const {
+    filter,
+    setFilter,
+    isOpen,
+    setIsOpen,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter();
   return (
     <div className="flex">
-      <InputField handleChange={(value) => setFilter({ ...filter, ["text"]: value })} value={filter.text} iconDisplay={true} />
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+      />
       <SelectField
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value=""
@@ -28,7 +41,8 @@ export default function CustomerFilter() {
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
         handleItemSelected={handleItemSelected}
-        typeList={typeList} />
+        typeList={typeList}
+      />
     </div>
   );
 }

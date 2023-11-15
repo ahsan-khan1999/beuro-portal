@@ -9,6 +9,7 @@ import followUpIcon from "@/assets/svgs/follow-up.svg";
 import timeIcon from "@/assets/svgs/time.svg";
 import idIcon from "@/assets/svgs/id.svg";
 import SelectField from "@/base-components/filter/fields/select-field";
+import InputField from "@/base-components/filter/fields/input-field";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -90,6 +91,12 @@ const AdminDashboard = () => {
     { id: "A-2000" },
   ];
   const [isOpen, setIsOpen] = useState("");
+  const [filter, setFilter] = useState({
+    text: "",
+    sortBy: "",
+    type: "None",
+    location: "",
+  });
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -97,7 +104,7 @@ const AdminDashboard = () => {
           Customer Dashboard
         </h1>
       </div>
-      <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
+      {/* <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -153,7 +160,14 @@ const AdminDashboard = () => {
           label="All"
           containerClassName="mx-0  "
         />
-      </div>
+      </div> */}
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+        containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        textClassName="ml-4 w-full  focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF] py-0 rounded-none "
+      />
       <DashboardFunctions />
 
       <div className="grid grid-cols-4 gap-x-6">

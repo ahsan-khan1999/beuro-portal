@@ -17,7 +17,7 @@ const typeList = [
 ]
 export default function useFilter() {
     const [moreFilter, setMoreFilter] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState("");
     const [filter, setFilter] = useState({
         text: "",
         sortBy: "",
