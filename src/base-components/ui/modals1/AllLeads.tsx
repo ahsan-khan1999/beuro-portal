@@ -3,8 +3,9 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import AllLeadsTable from "@/components/follow-up/all-leads";
+import { AllLeadsProps } from "@/types/follow-up";
 
-const AllLeads = ({ onClose, handleLeadDetail }: { onClose: () => void, handleLeadDetail:() => void }) => {
+const AllLeads = ({ onClose, handleLeadDetail }: AllLeadsProps) => {
   return (
     <>
       <BaseModal
@@ -18,7 +19,7 @@ const AllLeads = ({ onClose, handleLeadDetail }: { onClose: () => void, handleLe
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <AllLeadsTable handleLeadDetail={handleLeadDetail}/>
+          <AllLeadsTable handleLeadDetail={handleLeadDetail} />
         </div>
       </BaseModal>
     </>

@@ -4,9 +4,12 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddRemarks } from "@/hooks/follow-up/useAddRemarks";
+import { AddRemarksProps } from "@/types/follow-up";
 
-const AddRemarks = ({ onClose, handleFollowUpsDetails}: { onClose: () => void; handleFollowUpsDetails:Function }) => {
-  const { errors, fields, handleSubmit, onSubmit } = useAddRemarks(handleFollowUpsDetails);
+const AddRemarks = ({ onClose, handleFollowUpsDetails }: AddRemarksProps) => {
+  const { errors, fields, handleSubmit, onSubmit } = useAddRemarks(
+    handleFollowUpsDetails
+  );
 
   return (
     <>

@@ -58,3 +58,56 @@ export interface AllCustomersProps {
   onClose: () => void;
   handleCustomerDetail: () => void;
 }
+
+// Follow up service details
+export interface FollowUpServicesDetailsProps {
+  onClose: () => void;
+}
+
+// Follow up customers details
+export interface FollowUpCustomersDetailsProps {
+  onClose: () => void;
+}
+
+export interface FollowUpsProps {
+  onClose: () => void;
+  handleFollowUpsDetails: () => void;
+}
+
+export interface AddPostPonedNoteProps {
+  onClose: () => void;
+  handleFollowUpsDetails: () => void;
+}
+export interface AddRemarksProps {
+  onClose: () => void;
+  handleFollowUpsDetails: () => void;
+}
+
+export interface AllLeadsProps {
+  onClose: () => void;
+  handleLeadDetail: () => void;
+}
+
+export interface FollowUpDetailsProps {
+  onClose: () => void;
+  handleAddPostPonedNote: () => void;
+  handleAddRemarks: () => void;
+  status: {
+    postpond: boolean;
+    completed: boolean;
+    neutral: boolean;
+  };
+}
+
+
+export interface FollowUpsTableProps {
+  handleFollowUpsDetails:() => void
+}
+
+
+export interface AllLeadsTableProps {
+  handleLeadDetail:() => void
+}
+export interface AllCustomersTableProps {
+  handleCustomerDetail:() => void
+}

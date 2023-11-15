@@ -15,6 +15,8 @@ import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
 import AddFollowUp from "@/base-components/ui/modals1/AddFollowUp";
 import AllCustomers from "@/base-components/ui/modals1/AllCustomers";
 import AllLeads from "@/base-components/ui/modals1/AllLeads";
+import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
+import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
 
 const FollowUpDropDown = () => {
   const followUp = [
@@ -113,10 +115,28 @@ const FollowUpDropDown = () => {
       />
     ),
     [ModalType.ADD_FOLLOW_UP]: (
-      <AddFollowUp onClose={onClose} handleFollowUps={handleFollowUps} handleAllCustomers={handleAllCustomers} handleAllLeads={handleAllLeads}/>
+      <AddFollowUp
+        onClose={onClose}
+        handleFollowUps={handleFollowUps}
+        handleAllCustomers={handleAllCustomers}
+        handleAllLeads={handleAllLeads}
+      />
     ),
-    [ModalType.ALL_CUSTOMERS_LIST]: <AllCustomers onClose={onClose} handleCustomerDetail={handleCustomerDetail}/>,
-    [ModalType.ALL_LEADS_LIST]: <AllLeads onClose={onClose} handleLeadDetail={handleLeadDetail}/>,
+    [ModalType.ALL_CUSTOMERS_LIST]: (
+      <AllCustomers
+        onClose={onClose}
+        handleCustomerDetail={handleCustomerDetail}
+      />
+    ),
+    [ModalType.ALL_LEADS_LIST]: (
+      <AllLeads onClose={onClose} handleLeadDetail={handleLeadDetail} />
+    ),
+    [ModalType.SELECTED_CUSTOMER_DETAIL]: (
+      <FollowUpCustomersDetails onClose={onClose} />
+    ),
+    [ModalType.SELECTED_LEADS_DETAIL]: (
+      <FollowUpServiceDetails onClose={onClose} />
+    ),
   };
 
   const renderModal = () => {

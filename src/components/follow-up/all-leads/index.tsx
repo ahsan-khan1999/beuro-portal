@@ -5,17 +5,21 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 import useAllLeads from "@/hooks/follow-up/useAllLeads";
+import { AllLeadsTableProps } from "@/types/follow-up";
 
-const AllLeadsTable = ({handleLeadDetail} : {handleLeadDetail:() => void}) => {
+const AllLeadsTable = ({ handleLeadDetail }: AllLeadsTableProps) => {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-  useAllLeads();
+    useAllLeads();
 
   return (
     <>
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRows currentPageRows={currentPageRows} handleLeadDetail={handleLeadDetail}/>
+        <TableRows
+          currentPageRows={currentPageRows}
+          handleLeadDetail={handleLeadDetail}
+        />
       </TableLayout>
       <Pagination
         totalItems={totalItems}
