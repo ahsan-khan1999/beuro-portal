@@ -1,5 +1,5 @@
 import { Layout } from "@/layout";
-import React from "react";
+import React, { useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import DashboardCard from "./Cards";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import followUpIcon from "@/assets/svgs/follow-up.svg";
 import timeIcon from "@/assets/svgs/time.svg";
 import idIcon from "@/assets/svgs/id.svg";
+import SelectField from "@/base-components/filter/fields/select-field";
 
 const AdminDashboard = () => {
   const dashboardCards = [
@@ -88,12 +89,12 @@ const AdminDashboard = () => {
     { id: "A-2000" },
     { id: "A-2000" },
   ];
-
+  const [isOpen, setIsOpen] = useState("");
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
         <h1 className="font-medium text-[28px] tracking-[0.5px] text-white">
-          Super Admin
+          Customer Dashboard
         </h1>
       </div>
       <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
@@ -129,10 +130,28 @@ const AdminDashboard = () => {
           <g mask="url(#mask0_2278_93826)"></g>
         </svg>
         <input
-          className="ml-4 w-full focus:outline-none"
+          className="ml-4 w-full focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF]"
           placeholder="Search..."
           name="search"
           type="text"
+        />
+        <SelectField
+          handleChange={(value) => console.log(value)}
+          value=""
+          dropDownIconClassName=""
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          options={[
+            "All",
+            "Lead",
+            "Offer",
+            "Contract",
+            "Invoice",
+            "Receipt",
+            "Customer",
+          ]}
+          label="All"
+          containerClassName="mx-0  "
         />
       </div>
       <DashboardFunctions />

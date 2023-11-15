@@ -11,8 +11,9 @@ export default function DashboardFilters() {
         dropDownIconClassName=""
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        options={["1", "2", "2", "2", "2"]}
+        options={["Weekly", "Monthly", "Yearly"]}
         label="Monthly"
+        containerClassName="bg-white w-[105px] h-8 rounded-[7px] border border-[#8F8F8F80]"
       />
       <SelectField
         handleChange={(value) => console.log(value)}
@@ -20,8 +21,22 @@ export default function DashboardFilters() {
         dropDownIconClassName=""
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        options={["1", "2", "2", "2", "2"]}
+        options={[
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ]}
         label="February"
+        containerClassName="bg-white w-[105px] h-8 rounded-[7px] border border-[#8F8F8F80]"
       />
     </div>
   );
