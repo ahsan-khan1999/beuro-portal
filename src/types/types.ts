@@ -132,6 +132,13 @@ export type GenerateRegistrationFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateCompanyProfileFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  properties?: User,
+) => FormField[];
+
 export type GenerateResetPasswordFormField = (
   register: UseFormRegister<FieldValues>,
   loading: boolean,
@@ -146,9 +153,10 @@ export type GenerateCustomerFormField = (
   properties: CustomerProperties,
   control?: Control<FieldValues>,
 ) => FormField[];
-export interface CustomerProperties  {
-  phone?: string;
-  mobile?: string;
+export interface CustomerProperties {
+  phoneNumber?: string;
+  mobileNumber?: string;
+  customerType?:string
 }
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,

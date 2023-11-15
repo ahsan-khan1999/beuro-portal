@@ -4,14 +4,18 @@ import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { useRouter } from 'next/router';
-import { verifyOtp } from '@/api/slices/authSlice/auth';
+import { sendOtpViaEmail, verifyOtp } from '@/api/slices/authSlice/auth';
+import { BaseButton } from './button/base-button';
 
 const EmailConfirmation = ({ data }: { data: { heading: string, description: String } }) => {
   const router = useRouter()
-  
+  const dispatch  = useAppDispatch()
   const handleVerifyEmail = () => {
     router.push("/login")
   }
+  const handleSendOtp = () => {
+    dispatch(sendOtpViaEmail({}))
+}
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
@@ -26,13 +30,19 @@ const EmailConfirmation = ({ data }: { data: { heading: string, description: Str
         <p className="text-sm text-dark mb-8 text-center">
           {data.description}
         </p>
-        <Button
-          text="Confirm Email Address"
-          inputType="button"
-          className="w-full max-w-[384px] mx-auto"
-          id='button'
+        <div className='flex justify-between space-x-3'>
+        <BaseButton
+          buttonText="Login"
+          containerClassName='w-full max-w-[384px] mx-auto bg-white '
           onClick={handleVerifyEmail}
         />
+        <BaseButton
+          buttonText="Resend Link?"
+          containerClassName='w-full max-w-[384px] mx-auto bg-primary  '
+          textClassName='text-white'
+          onClick={handleSendOtp}
+        />
+        </div>
       </div>
     </div>
   );

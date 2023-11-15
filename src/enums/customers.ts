@@ -1,13 +1,13 @@
 export enum CustomerDetailsFields {
-  name = "name",
+  name = "fullName",
   lastName = "lastName",
   companyName = "companyName",
   customerType = "customerType",
   email = "email",
-  phone = "phone",
-  mobile = "mobile",
-  streetNo = "streetNo",
-  postCode = "postCode",
+  phone = "phoneNumber",
+  mobile = "mobileNumber",
+  streetNo = "streetNumber",
+  postCode = "postalCode",
   country = "country",
   address = "address",
 

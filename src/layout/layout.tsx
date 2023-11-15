@@ -14,7 +14,9 @@ export const Layout = ({ children }: MyComponentProp) => {
   // const { user } = useAppSelector(state => state.auth)
   // const dispatch = useAppDispatch()
   // useEffect(() => {
-  //   useGlobalUser(user, dispatch)
+  //   console.log("login");
+    
+    // if(!user) useGlobalUser(user, dispatch)
   // }, [])
 
   return (
@@ -27,7 +29,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <Header />
         <div className="flex mt-[90px]">
           <SideBar />
-          <div className="ml-[272px] w-full overflow-scroll  mr-5">
+          <div className="ml-[272px] w-full   mr-5">
             {children}
           </div>
         </div>

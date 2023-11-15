@@ -2,9 +2,10 @@
 import { ModalType } from "@/enums/ui";
 import { BASEURL } from "@/services/HttpProvider";
 import { GlobalState } from "@/types/global";
-import { getToken, logout } from "@/utils/auth.util";
+import { getRefreshToken, getToken, logout } from "@/utils/auth.util";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const initialState: GlobalState = {
   loading: false,
@@ -19,6 +20,7 @@ const initialState: GlobalState = {
 export const uploadFileToFirebase: any = createAsyncThunk(
   "file/upload",
   async (data) => {
+    const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
     try {
       const response = await axios.post(
         BASEURL + "/integrations/aws/storage",
@@ -28,7 +30,9 @@ export const uploadFileToFirebase: any = createAsyncThunk(
             Accept: "multipart/form-data",
             "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
-            accessToken: getToken(),
+            accessToken: authToken,
+            refreshToken: refreshToken,
+
           },
         }
       );

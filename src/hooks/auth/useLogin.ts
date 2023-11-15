@@ -32,6 +32,6 @@ export const useLoginForm = () => {
     onSubmit,
     handleSubmit,
     errors,
-    error,
+    error,translate
   };
 };

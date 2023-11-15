@@ -1,5 +1,5 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField, GenerateResetPasswordFormField } from "@/types";
+import { FormField, GenerateCompanyProfileFormField, GenerateRegistrationFormField, GenerateResetPasswordFormField } from "@/types";
 import bankNameIcon from "@/assets/svgs/bank-name.svg";
 import NameIcon from "@/assets/svgs/name-input.svg";
 import phoneIcon from "@/assets/svgs/phone-number.svg";
@@ -117,10 +117,11 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
 
   return formField;
 };
-export const detailScreensFormField: GenerateRegistrationFormField = (
+export const detailScreensFormField: GenerateCompanyProfileFormField = (
   register,
   loading,
-  control
+  control,
+  user,
 ) => {
   const formField: FormField[] = [
     {
@@ -159,7 +160,8 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               control,
-              country: "ch"
+              country: "ch",
+              value: user && user?.company?.phoneNumber
             },
           },
           {
@@ -173,20 +175,23 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
               id: "mobileNumber",
               name: "mobileNumber",
               control,
-              country: "ch"
+              country: "ch",
+              value: user && user?.company?.mobileNumber,
+              className:"h-42"
+
             },
           },
           {
             label: {
               text: "Website",
-              htmlFor: "text",
+              htmlFor: "website",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               inputType: "text",
-              id: "websiteAddress",
-              name: "websiteAddress",
+              id: "website",
+              name: "website",
               placeholder: "Enter Your Website",
               svg: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="XMLID_235_">
@@ -204,14 +209,14 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             label: {
               text: "MwST Number",
-              htmlFor: "number",
+              htmlFor: "taxNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               inputType: "number",
-              id: "mwstNumber",
-              name: "mwstNumber",
+              id: "taxNumber",
+              name: "taxNumber",
               placeholder: "Enter Your MwST Number",
               svg: `<svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 40031">
@@ -235,12 +240,12 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
             containerClass: "mb-0",
             label: {
               text: "Upload Company Logo",
-              htmlFor: "upload",
+              htmlFor: "logo",
               className: "mb-[10px]",
             },
             field: {
-              id: "companyLogo",
-              name: "companyLogo",
+              id: "logo",
+              name: "logo",
               type: Field.dragAndDropFileField,
               control,
             },
@@ -257,7 +262,7 @@ export const detailScreensFormField: GenerateRegistrationFormField = (
         text: "Next",
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[160px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg  w-[160px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

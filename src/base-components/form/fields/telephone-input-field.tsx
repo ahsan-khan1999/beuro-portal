@@ -1,5 +1,6 @@
 // import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
 import { PhoneProps } from "@/types";
+import { combineClasses } from "@/utils/utility";
 import { Controller } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -12,11 +13,12 @@ export const TelephoneInputField = ({
   watch,
   value,
   success,
-  disabled
+  disabled,
+  className
 }: PhoneProps) => {
-  
-  return (  
-    
+  const classes = combineClasses("!w-full h-10 !border-0 !rounded-lg", className)
+  return (
+
     <Controller
       control={control}
       name={name}
@@ -27,13 +29,16 @@ export const TelephoneInputField = ({
           <div className="relative w-full">
             <PhoneInput
               country={country}
-              onChange={(value) => onChange(value)}
+              onChange={(value) => {
+                const numberWithPlus = "+" + value;
+                onChange(numberWithPlus);
+              }}
               inputProps={{ name: name }}
               placeholder="+41 - _ _  _ _ _  _ _ _ _"
               value={value}
-              containerClass="!border-2 !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary "
-              inputClass="!w-full !h-12 !border-0 !rounded-lg"
-              onlyCountries={["ch", "de", "at", "fr", "it","pk"]}
+              containerClass="!border-[1px] !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary "
+              inputClass={classes}
+              onlyCountries={["ch", "de", "at", "fr", "it", "pk"]}
               disabled={disabled}
             />
             {/* {success && (

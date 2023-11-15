@@ -14,7 +14,7 @@ import {
   User,
 } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
-import { conditionHandler, conditionHandlerLogin, conditionHandlerRegistration, setErrors } from "@/utils/utility";
+import { conditionHandlerLogin, conditionHandlerRegistration, senitizePhone, setErrors } from "@/utils/utility";
 import { saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
 import { formatDateString, isJSON } from "@/utils/functions";
 import { getCookie } from "cookies-next";
@@ -22,7 +22,7 @@ import { SalutationValue } from "@/enums/form";
 import { NextRouter } from "next/dist/client/router";
 
 const initialState: AuthState = {
-  user: null,
+  user: undefined,
   userRole: null,
   loading: false,
   error: null,
@@ -96,7 +96,9 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
       const response: ApiResponseType = await apiServices.singUp(data);
 
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandlerRegistration(router, response);
+      // conditionHandlerRegistration(router, response);
+      router.pathname = "/login-success";
+      updateQuery(router, router.locale as string)
 
       saveUser(response.data.data.User);
 
@@ -110,10 +112,12 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
 export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
+    console.log("getting in");
+
     try {
       let apiData = { ...data }
-      if (apiData?.phoneNumber) apiData = { ...apiData, phoneNumber: apiData?.phoneNumber.toString() }
-      if (apiData?.mobileNumber) apiData = { ...apiData, mobileNumber: apiData?.mobileNumber.toString() }
+      if (apiData?.phoneNumber) apiData = { ...apiData, phoneNumber: senitizePhone(apiData?.phoneNumber) }
+      if (apiData?.mobileNumber) apiData = { ...apiData, mobileNumber: senitizePhone(apiData?.mobileNumber) }
 
       const response: ApiResponseTypePut = await apiServices.profileStep1(apiData);
       thunkApi.dispatch(setErrorMessage(null))
@@ -191,7 +195,7 @@ export const signUpGoogle: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
 
-      conditionHandler(router, response);
+      // conditionHandler(router, response);
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -214,7 +218,7 @@ export const signUpFacebook: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response);
+      // conditionHandler(router, response);
 
       return true;
     } catch (e: any) {
@@ -243,18 +247,18 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
         router.query.otp
       );
-      setToken(response.headers.accesstoken);
-      setRefreshToken(response.headers.refreshtoken);
 
       saveUser(response.data.data.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      if (response.data.data.User?.isProfileComplete) {
-        router.pathname = "/dashboard";
-        updateQuery(router, "en");
-      } else if (!response.data.data.User?.isProfileComplete) {
-        router.pathname = "/profile";
-        updateQuery(router, "en");
-      }
+      conditionHandlerLogin(router, response);
+
+      // if (response.data.data.User?.isProfileComplete) {
+      //   router.pathname = "/dashboard";
+      //   updateQuery(router, "en");
+      // } else if (!response.data.data.User?.isProfileComplete) {
+      //   router.pathname = "/profile";
+      //   updateQuery(router, "en");
+      // }
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -350,7 +354,7 @@ export const connectGoogle: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -372,7 +376,7 @@ export const disConnectGoogle: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -395,7 +399,7 @@ export const connectFacebook: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -419,7 +423,7 @@ export const disConnectFacebook: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {

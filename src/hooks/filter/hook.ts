@@ -1,5 +1,5 @@
 import { FilterType } from "@/types";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
 const typeList = [
     {
@@ -15,15 +15,10 @@ const typeList = [
 
     }
 ]
-export default function useFilter() {
+export default function useFilter({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
     const [moreFilter, setMoreFilter] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [filter, setFilter] = useState({
-        text: "",
-        sortBy: "",
-        type: "None",
-        location: ""
-    });
+
     const handleItemSelected = (val: string) => {
         setFilter({ ...filter, ["type"]: val })
     }
@@ -39,7 +34,7 @@ export default function useFilter() {
             location: ""
         })
     }
-    
+
     return {
         moreFilter,
         setMoreFilter,

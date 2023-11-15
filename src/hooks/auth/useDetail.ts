@@ -56,10 +56,11 @@ export default function useDetail() {
     setValue,
     setError,
     trigger,
-    
-    
+
+
     formState: { errors },
   } = formMethodsConfig[currentFormStage];
+  console.log(errors, "errors");
 
   const CurrentFormComponent = FORM_COMPONENTS[currentFormStage];
 
@@ -77,16 +78,16 @@ export default function useDetail() {
     // nextFormHandler();
   };
   const backStage = getBackFormStage(currentFormStage);
-   const nextStage = getNextFormStage(currentFormStage);
+  const nextStage = getNextFormStage(currentFormStage);
 
-   const nextFormHandler = () => {
+  const nextFormHandler = () => {
     const nextStage = getNextFormStage(currentFormStage);
 
     if (nextStage) {
       setProgress((prev) => prev + 40);
       setCurrentFormStage(nextStage);
     }
-     else {
+    else {
       router.pathname = "/dashboard";
       updateQuery(router, "en");
     }

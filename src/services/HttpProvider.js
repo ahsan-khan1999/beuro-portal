@@ -38,6 +38,7 @@ export async function request({ method, url, data, headers }) {
   if (headers === undefined) {
     await updateHeaders();
   }
+
   const promise = instance[method](url, data);
   let response;
   try {
@@ -49,7 +50,6 @@ export async function request({ method, url, data, headers }) {
     }
     throw error.response;
   }
-
   return response;
 }
 
@@ -102,6 +102,7 @@ export async function get(url, params, featureAndAction, config) {
   const { filter, ...otherParams } = params;
   let queryParams = {};
   if (config.detail) {
+
     url = `${url}/${filter}`;
     return request({ method: "get", url: url, data: { featureAndAction }, ...config });
 
@@ -119,7 +120,6 @@ export async function get(url, params, featureAndAction, config) {
 
   const queryString = new URLSearchParams(queryParams).toString();
   const fullUrl = queryString ? `${url}?${queryString}` : url;
-
   return request({ method: "get", url: fullUrl, data: { featureAndAction }, ...config });
 }
 
@@ -150,3 +150,13 @@ export const independentRequest = async (url, method, data) => {
   const payload = response;
   return payload;
 };
+
+
+
+
+
+
+
+
+// dispatch(readCustomerDetail({ params: { filter: "65436739f4a8c09ef4669708" } }))
+// dispatch(readCustomer({ params: { filter: { sortBy: "desc", name: "test", type: "none" }, page: 1, size: 10 } }))

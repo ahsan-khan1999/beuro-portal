@@ -177,7 +177,7 @@ export const conditionHandlerLogin = (
 ) => {
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
-      router.pathname = "/verify-email";
+      router.pathname = "/login-success";
       updateQuery(router, "en");
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
@@ -203,8 +203,8 @@ export const validateUserRole = (
 ): boolean => {
   const roleMapping: { [key: string]: number } = {
     Admin: staticEnums.User.role.Admin,
-    Private: staticEnums.User.role.Private,
-    Commercial: staticEnums.User.role.Commercial,
+    Company: staticEnums.User.role.Company,
+    Employee: staticEnums.User.role.Employee,
   };
 
   if (roleMapping.hasOwnProperty(userRoleString)) {
@@ -244,3 +244,9 @@ export const findErrorMessage = (errors: Errors, data: string[], fieldName: stri
 
   return currentError?.message;
 };
+
+export const senitizePhone = (data: string) => {
+  if (!data?.toString().includes("+")) return "+" + data;
+  else return data
+
+}

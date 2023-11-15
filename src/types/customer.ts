@@ -25,26 +25,31 @@ export interface CustomerLeadDetail {
 }
 export interface Customers {
   id: number;
-  name: string;
+  refID: string;
+  createdAt: string
+  fullName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   date: string;
-  location: string;
+  mobileNumber: string;
+  
   status?: string;
   editImg?: string;
   editNote?: string;
   customerType?: string;
   companyName: string;
   mobile: string;
-  address: Address;
+  address: CustomerAddress;
   edit?: boolean;
   lead: CustomerLeadDetail;
 }
-export interface Address {
-  streetNo: string;
-  postCode: string;
+
+interface CustomerAddress {
+  streetNumber: string;
   country: string;
+  postalCode: string
 }
+
 
 export interface CustomerField {
   customerDetail?: Customers;

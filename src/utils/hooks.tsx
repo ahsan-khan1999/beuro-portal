@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { TranslatorFunction } from "@/types/global";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
+import { getUser } from "./auth.util";
 
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   callback: ButtonClickFunction
@@ -31,8 +32,8 @@ export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   return ref;
 };
 
-export const useGlobalUser = (user: User | null, dispatch: Dispatch) => {
-  const cookieUser = isJSON(getCookie("kaufesuser"));
+export const useGlobalUser = (user: User | undefined, dispatch: Dispatch) => {
+  const cookieUser = isJSON(getUser());
   if (!user) {
     dispatch(setUser(cookieUser));
   }

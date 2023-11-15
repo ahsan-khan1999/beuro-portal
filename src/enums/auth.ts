@@ -8,6 +8,9 @@ export enum UserResponse {
   id = "id",
   role = "role",
   email = "email",
+  company = "company",
+  bank = "bank",
+  employee = "employee",
   addresses = "addresses",
   isProfileComplete = "isProfileComplete",
   isEmailVerified = "isEmailVerified",
@@ -20,15 +23,17 @@ export enum UserResponse {
   username = "username",
   dob = "dob",
   phoneNumber = "phoneNumber",
+
   oAuthIds = "oAuthIds",
   _isSocialLogin = "_isSocialLogin",
   isCommercialSellerRequested = "isCommercialSellerRequested",
   companyName = "companyName",
   companyNumber = "companyNumber",
   taxNumber = "taxNumber",
-  websiteUrl = "websiteLink",
-  companyLogo = "logoLink",
+  websiteUrl = "website",
+  companyLogo = "logo",
   notificationSettings = "notificationSettings",
+  mobileNumber = "mobileNumber"
 }
 
 export enum LoginFields {
@@ -40,9 +45,9 @@ export enum CompanyFields {
   name = "companyName",
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
-  websiteUrl = "websiteAddress",
-  mwstNumber = "mwstNumber",
-  companyLogo = "comapnyLogo",
+  websiteUrl = "website",
+  mwstNumber = "taxNumber",
+  companyLogo = "logo",
 }
 export enum LocationFields {
   streetNumber = "streetNumber",

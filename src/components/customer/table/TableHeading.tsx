@@ -16,7 +16,7 @@ const TableHeading = () => {
         Phone
       </span>
       <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white">
-        Desire Date
+        Created On
       </span>
       <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white ">
         Location

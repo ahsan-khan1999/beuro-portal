@@ -15,7 +15,6 @@ export default function InputField({
     textClassName
   );
   const containerClasses = combineClasses("min-w-[274px]", containerClassName);
-console.log(bgColor)
   return (
     <div className={containerClasses}>
       <div className="relative w-full ">

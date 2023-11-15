@@ -1,19 +1,26 @@
 import apiServices from "@/services/requestHandler";
 import { Customers } from "@/types/customer"
-import { setErrors } from "@/utils/utility";
+import { senitizePhone, setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
+import { staticEnums } from "@/utils/static";
 
 interface CustomerState {
     customer: Customers[];
     loading: boolean;
-    error: Record<string, object>
+    error: Record<string, object>,
+    totalCount: number;
+    lastPage: number;
+
 }
 
 const initialState: CustomerState = {
     customer: [],
     loading: false,
-    error: {}
+    error: {},
+    lastPage: 1,
+    totalCount: 10
+
 }
 
 export const readCustomer: AsyncThunk<boolean, object, object> | any =
@@ -21,8 +28,8 @@ export const readCustomer: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readCustomer(params);
-            return true;
+            const response = await apiServices.readCustomer(params);
+            return response?.data?.data;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -48,7 +55,12 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.createCustomer(data);
+            let apiData = { ...data }
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            await apiServices.createCustomer(apiData);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -97,8 +109,10 @@ const customerSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readCustomer.fulfilled, (state, action) => {
-            state.loading = false;
-            state.customer = action.payload
+            state.customer = action.payload.Customer,
+                state.lastPage = action.payload.lastPage,
+                state.totalCount = action.payload.totalCount,
+                state.loading = false;
         });
         builder.addCase(readCustomer.rejected, (state) => {
             state.loading = false

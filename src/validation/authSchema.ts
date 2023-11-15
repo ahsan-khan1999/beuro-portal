@@ -66,7 +66,7 @@ export const detailScreensValidation = (translate: Function) => {
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),
-    [CompanyFields.companyLogo]: yup.object(),
+    [CompanyFields.companyLogo]: yup.string().required(),
   });
 };
 export const detailLocationValidation = (translate: Function) => {

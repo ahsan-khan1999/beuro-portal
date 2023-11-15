@@ -43,7 +43,7 @@ export default function DetailFilter({ filter,  moreFilter, setMoreFilter, handl
                                 dropDownIconClassName="custom-icon-style"
                                 dropDownDisabled={false}
                                 shouldNotSelectItem={false}
-                                dropDownClassName="my-2 border border-black "
+                                dropDownClassName="my-2 border border-black h-10"
                                 key={Math.random()}
                             />
 
