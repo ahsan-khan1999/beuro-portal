@@ -47,7 +47,7 @@ const AdminDashboard = () => {
     {
       title: "Sales",
       subTitle: "2378 Sales",
-      id: "202505 ",
+      id: "202705 ",
       salePercent: "+4.5%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",

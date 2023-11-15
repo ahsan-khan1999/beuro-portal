@@ -24,12 +24,12 @@ export interface Status {
   cancelled?: boolean;
   overdue?: boolean;
   paid?: boolean;
-  active?:boolean;
-  blocked?:boolean;
+  active?: boolean;
+  blocked?: boolean;
 }
-export interface CheckBoxFilterProps{
-  label:string;
-  type:keyof Status
+export interface CheckBoxFilterProps {
+  label: string;
+  type: keyof Status;
 }
 export interface CheckFieldProps {
   label: string;
@@ -42,8 +42,8 @@ export interface InputFieldProps {
   handleChange: (value: string) => void;
   containerClassName?: string;
   textClassName?: string;
-  bgColor?:boolean,
-  iconDisplay?: boolean
+  bgColor?: boolean;
+  iconDisplay?: boolean;
 }
 
 export interface OptionsFieldProps {
@@ -56,8 +56,8 @@ export interface OptionsFieldProps {
   dropDownIconClassName: string;
   isOpen: string;
   setIsOpen: SetStateAction<any>;
+  containerClassName?: string;
 }
-
 
 export interface GlobalApiResponseType {
   [Header.header]: {
@@ -68,6 +68,6 @@ export interface GlobalApiResponseType {
     [ApiResponse.success]: boolean;
     [ApiResponse.code]: number;
     [ApiResponse.message]: string;
-    [Header.data]: Record<string, any>
+    [Header.data]: Record<string, any>;
   };
 }
