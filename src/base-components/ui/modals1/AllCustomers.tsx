@@ -3,8 +3,9 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import AllCustomersTable from "@/components/follow-up/all-customers";
+import { AllCustomersProps } from "@/types/follow-up";
 
-const AllCustomers = ({ onClose }: { onClose: () => void }) => {
+const AllCustomers = ({ onClose, handleCustomerDetail }: AllCustomersProps) => {
   return (
     <>
       <BaseModal
@@ -18,7 +19,7 @@ const AllCustomers = ({ onClose }: { onClose: () => void }) => {
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <AllCustomersTable />
+          <AllCustomersTable handleCustomerDetail={handleCustomerDetail} />
         </div>
       </BaseModal>
     </>

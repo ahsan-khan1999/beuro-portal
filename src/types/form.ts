@@ -91,8 +91,8 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
   disabled?: boolean;
-  isButton?:boolean,
-  onClick?:Function,
+  isButton?: boolean;
+  onClick?: Function;
   svg: string;
   alt: string;
 }
@@ -106,6 +106,8 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
   value: string;
+  svg?: string;
+  onItemChange?: Function
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
@@ -117,6 +119,9 @@ export interface SelectBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
+  svg?: string;
+  onItemChange?: Function
+  success?: boolean;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
@@ -198,7 +203,9 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   value?: string;
   className?: string;
   remove?: string;
-  onRemove?: () => void
+  svg?: string;
+  success?: boolean;
+  onRemove?: () => void;
 }
 
 export interface SpanProps {
@@ -211,16 +218,16 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
-  id: string
+  id: string;
 }
 
 export interface DivProps {
-  type: Field.div,
+  type: Field.div;
   name?: string;
   children: FormField[];
   className?: string;
   errors?: Record<string, any>;
-  id:string
+  id: string;
 }
 
 interface LinkImage {
@@ -318,7 +325,6 @@ export interface FieldComponents {
   // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
   dateRange: React.FC<MultiDateProps>;
-
 }
 
 export interface FormProps {
@@ -368,7 +374,6 @@ export interface GetCreditCardIconProps {
   cardType: DetectedCardInfo | null;
   icons: Record<CardType, StaticImageData>;
 }
-
 
 export interface CustomHookFormProps {
   children: ReactNode;

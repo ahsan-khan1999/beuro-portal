@@ -1,6 +1,7 @@
 import { DatePickerProps } from "@/types";
 import { formatDateString } from "@/utils/functions";
 import { combineClasses } from "@/utils/utility";
+import { useState } from "react";
 
 export const DatePicker = ({
   id,
@@ -9,27 +10,42 @@ export const DatePicker = ({
   value,
   className,
   remove,
-  onRemove
+  svg,
+  success,
+  onRemove,
 }: DatePickerProps) => {
-
-  const defaultClasses =
-    "flex  gap-x-4 border bg-no-repeat bg-[length:24px_24px] border-lightGray rounded-lg h-12 pl-12 py-3 focus:border-primary outline-none";
+  const [inputFocus, setInputFocus] = useState(false);
+  const defaultClasses = `border border-borderColor rounded-lg w-full  ${
+    success ? "pl-4 pr-10" : "pl-11 pr-4"
+  } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
   const classes = combineClasses(defaultClasses, className);
   return (
     <>
-      <div>
-        {
-          remove &&
-          <div className="cursor-pointer top-0 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md" onClick={onRemove}>
+      <div className={`relative w-full flex items-center`}>
+        {remove && (
+          <div
+            className="cursor-pointer top-0 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+            onClick={onRemove}
+          >
             {remove}
           </div>
-        }
+        )}
+
+        {svg && (
+          <span
+            className={`mr-3 absolute  left-4 z-50 ${
+              (inputFocus && "tests") || "test"
+            }`}
+            dangerouslySetInnerHTML={{ __html: svg }}
+          />
+        )}
 
         <input
           type="date"
           // value={formatDateString(value)}
           defaultValue={formatDateString(value)}
           id={id}
+          onBlurCapture={() => setInputFocus(false)}
           {...register(name)}
           // style={{
           //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
@@ -38,7 +54,6 @@ export const DatePicker = ({
           className={`${classes} relative`}
         />
       </div>
-
     </>
   );
 };

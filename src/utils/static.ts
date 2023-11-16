@@ -7,8 +7,6 @@ import editNote from "@/assets/svgs/Edit_note.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import { Service } from "@/types/service";
-import { Employee } from "@/types/employee";
 import { ContentTableRowTypes } from "@/types/content";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import companyLogo from "@/assets/svgs/companyLogo.svg";
@@ -16,6 +14,8 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import { PaymentsAdmin } from "@/types/admin/payments";
 import { SupportRequestAdmin } from "@/types/admin/support-request";
 import { PlansAdmin } from "@/types/admin/plans";
+import { Service } from "@/types/service";
+import { Employee } from "@/types/employee";
 import { AllCustomers, AllLeads, FollowUps } from "@/types/follow-up";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
@@ -3603,6 +3603,7 @@ export const followUpsData: FollowUps[] = [
       "Call for information of cleaning and moving services Lorem ipsum do..",
     status: "Pending",
   },
+  
   {
     id: "001",
     customerName: "Rahal Ahmad",
@@ -3712,10 +3713,82 @@ export const AllCustomersData: AllCustomers[] = [
     location: "Islamabad",
     type: "Individual",
   },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    createdOn: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    type: "Individual",
+  },
 ];
 
 // all Leads table data
 export const AllLeadsData: AllLeads[] = [
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
+  {
+    id: "001",
+    name: "Rahal Ahmad",
+    email: "Test12@gmail.com",
+    phoneNumber: "+49 302 1231234",
+    desireDate: parseCustomDate("25/08/2023"),
+    location: "Islamabad",
+    status: "Open",
+  },
   {
     id: "001",
     name: "Rahal Ahmad",
