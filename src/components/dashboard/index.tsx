@@ -60,7 +60,7 @@ const AdminDashboard = () => {
       id: "202705 ",
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
-      chartPointColor: "#FE8D46",
+      chartPointColor: "#5114EA",
       open: "2782 Open",
       closed: "2782 Overdue",
       expired: "2782 Paid",
