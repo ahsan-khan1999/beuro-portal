@@ -1,10 +1,9 @@
 import { Layout } from "@/layout";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
-import Chart from "chart.js/auto";
 import InputField from "@/base-components/filter/fields/input-field";
 import activeSubscribersIcon from "@/assets/svgs/leads.svg";
 import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";

@@ -3,10 +3,6 @@ import React, { useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import DashboardCard from "./Cards";
-import { Button } from "@/base-components/ui/button/button";
-import Image from "next/image";
-
-import SelectField from "@/base-components/filter/fields/select-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import { FollowUpNotificationBar } from "./notification-bar/FollowUp";
 import ActivitiesNotificationBar from "./notification-bar/Activities";
@@ -94,15 +90,7 @@ const AdminDashboard = () => {
       "Whatsapp",
     ],
   };
-  const followUp = [
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-  ];
-  const [isOpen, setIsOpen] = useState("");
+
   const [filter, setFilter] = useState({
     text: "",
     sortBy: "",

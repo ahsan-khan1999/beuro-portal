@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import followUpIcon from "@/assets/svgs/follow-up.svg";
 import idIcon from "@/assets/svgs/id.svg";
 import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
 import dayIcon from "@/assets/svgs/day-icon.svg";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/hooks/useRedux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import FollowUps from "@/base-components/ui/modals1/FollowUps";
+import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
+import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
+import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
+import AddFollowUp from "@/base-components/ui/modals1/AddFollowUp";
+import AllCustomers from "@/base-components/ui/modals1/AllCustomers";
+import AllLeads from "@/base-components/ui/modals1/AllLeads";
+import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
+import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
 
 export const FollowUpNotificationBar = () => {
   const followUp = [
@@ -110,63 +123,195 @@ export const FollowUpNotificationBar = () => {
       day: "1 Day",
     },
   ];
+  const dispatch = useDispatch();
+  const { modal } = useAppSelector((state) => state.global);
+  const [status, setStatus] = useState({
+    postpond: false,
+    completed: false,
+    neutral: true,
+  });
+
+  const onClose = () => {
+    dispatch(updateModalType(ModalType.NONE));
+  };
+
+  const handleFollowUps = () => {
+    dispatch(updateModalType(ModalType.FOLLOW_UPS));
+  };
+
+  const handleFollowUpsDetails = () => {
+    dispatch(updateModalType(ModalType.FOLLOW_UPS_DETAILS));
+  };
+
+  const handleAddPostPonedNote = () => {
+    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
+    setStatus({
+      postpond: true,
+      completed: false,
+      neutral: false,
+    });
+  };
+
+  const handleAddRemarks = () => {
+    dispatch(updateModalType(ModalType.ADD_REMARKS));
+    setStatus({
+      postpond: false,
+      completed: true,
+      neutral: false,
+    });
+  };
+
+  const handleAddFollowUp = () => {
+    dispatch(updateModalType(ModalType.ADD_FOLLOW_UP));
+  };
+
+  const handleAllCustomers = () => {
+    dispatch(updateModalType(ModalType.ALL_CUSTOMERS_LIST));
+  };
+
+  const handleCustomerDetail = () => {
+    dispatch(updateModalType(ModalType.SELECTED_CUSTOMER_DETAIL));
+  };
+
+  const handleAllLeads = () => {
+    dispatch(updateModalType(ModalType.ALL_LEADS_LIST));
+  };
+
+  const handleLeadDetail = () => {
+    dispatch(updateModalType(ModalType.SELECTED_LEADS_DETAIL));
+  };
+
+  // METHOD FOR HANDLING THE MODALS
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.FOLLOW_UPS]: (
+      <FollowUps
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.FOLLOW_UPS_DETAILS]: (
+      <FollowUpDetails
+        onClose={onClose}
+        handleAddPostPonedNote={handleAddPostPonedNote}
+        handleAddRemarks={handleAddRemarks}
+        status={status}
+      />
+    ),
+    [ModalType.ADD_POSTSPONED_NOTE]: (
+      <AddPostPonedNote
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.ADD_REMARKS]: (
+      <AddRemarks
+        onClose={onClose}
+        handleFollowUpsDetails={handleFollowUpsDetails}
+      />
+    ),
+    [ModalType.ADD_FOLLOW_UP]: (
+      <AddFollowUp
+        onClose={onClose}
+        handleFollowUps={handleFollowUps}
+        handleAllCustomers={handleAllCustomers}
+        handleAllLeads={handleAllLeads}
+      />
+    ),
+    [ModalType.ALL_CUSTOMERS_LIST]: (
+      <AllCustomers
+        onClose={onClose}
+        handleCustomerDetail={handleCustomerDetail}
+      />
+    ),
+    [ModalType.ALL_LEADS_LIST]: (
+      <AllLeads onClose={onClose} handleLeadDetail={handleLeadDetail} />
+    ),
+    [ModalType.SELECTED_CUSTOMER_DETAIL]: (
+      <FollowUpCustomersDetails onClose={onClose} />
+    ),
+    [ModalType.SELECTED_LEADS_DETAIL]: (
+      <FollowUpServiceDetails onClose={onClose} />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
   return (
-    <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]     ">
-      <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
-        <h1 className="text-[#18181B]  font-medium">Follow Ups</h1>
-      </div>
-      <div className="overflow-y-scroll max-h-[340px]">
-        {followUp.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10 `}
-            >
-              <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
-                <div
-                  className="mr-6"
-                  dangerouslySetInnerHTML={{ __html: item.svg }}
-                />
-                <div>
+    <>
+      <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]     ">
+        <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
+          <h1 className="text-[#18181B]  font-medium">Follow Ups</h1>
+        </div>
+        <div className="overflow-y-scroll max-h-[340px]">
+          {followUp.map((item, index) => {
+            return (
+              <div
+                onClick={() => handleFollowUpsDetails()}
+                key={index}
+                className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10 `}
+              >
+                <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+                  <div
+                    className="mr-6"
+                    dangerouslySetInnerHTML={{ __html: item.svg }}
+                  />
                   <div>
-                    <span className="text-dark text-sm">{item.title}: </span>
-                    <span className="text-dark text-sm font-medium">
-                      {item.description}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between mt-1">
-                    <div className="flex items-center ">
-                      <Image
-                        src={timeIcon}
-                        alt="Time Icon"
-                        className="mr-[6px]"
-                      />
-                      <span className="text-[#393939] text-xs ">
-                        {item.time},{item.date}
+                    <div>
+                      <span className="text-dark text-sm">{item.title}: </span>
+                      <span className="text-dark text-sm font-medium">
+                        {item.description}
                       </span>
                     </div>
-                    <div className="flex items-center">
-                      <Image src={idIcon} alt="Id Icon" className="mr-[6px]" />
-                      <span className="text-[#4B4B4B] text-xs ">{item.id}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Image src={dayIcon} alt="Id Icon" className="mr-[6px]" />
-                      <span className="text-[#4B4B4B] text-xs ">
-                        {item.day}
-                      </span>
+                    <div className="flex items-center justify-between mt-1">
+                      <div className="flex items-center ">
+                        <Image
+                          src={timeIcon}
+                          alt="Time Icon"
+                          className="mr-[6px]"
+                        />
+                        <span className="text-[#393939] text-xs ">
+                          {item.time},{item.date}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <Image
+                          src={idIcon}
+                          alt="Id Icon"
+                          className="mr-[6px]"
+                        />
+                        <span className="text-[#4B4B4B] text-xs ">
+                          {item.id}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <Image
+                          src={dayIcon}
+                          alt="Id Icon"
+                          className="mr-[6px]"
+                        />
+                        <span className="text-[#4B4B4B] text-xs ">
+                          {item.day}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-        <div className="flex justify-center py-4">
-          <button className=" text-primary w-fit text-sm font-medium ">
-            View All
-          </button>
+            );
+          })}
+          <div className="flex justify-center py-4">
+            <button
+              onClick={() => handleFollowUps()}
+              className=" text-primary w-fit text-sm font-medium "
+            >
+              View All
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      {renderModal()}
+    </>
   );
 };
