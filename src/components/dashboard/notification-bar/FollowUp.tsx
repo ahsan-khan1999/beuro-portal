@@ -3,15 +3,58 @@ import followUpIcon from "@/assets/svgs/follow-up.svg";
 import idIcon from "@/assets/svgs/id.svg";
 import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
+import dayIcon from "@/assets/svgs/day-icon.svg";
 
 export const FollowUpNotificationBar = () => {
   const followUp = [
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
+    {
+      title: "Recent Follow up",
+      description: "Call for information of cleaning and moving services",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id: "00071",
+      day: "1 Day",
+    },
   ];
   return (
     <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]     ">
@@ -33,11 +76,9 @@ export const FollowUpNotificationBar = () => {
                 />
                 <div>
                   <div>
-                    <span className="text-dark text-sm">
-                      Recent Follow up:{" "}
-                    </span>
+                    <span className="text-dark text-sm">{item.title}: </span>
                     <span className="text-dark text-sm font-medium">
-                      Call for information of cleaning and moving services
+                      {item.description}
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-1">
@@ -45,19 +86,21 @@ export const FollowUpNotificationBar = () => {
                       <Image
                         src={timeIcon}
                         alt="Time Icon"
-                        className="mr-[10px]"
+                        className="mr-[6px]"
                       />
                       <span className="text-[#393939] text-xs ">
-                        14:20:05,12/09/2023
+                        {item.time},{item.date}
                       </span>
                     </div>
                     <div className="flex items-center">
-                      <Image src={idIcon} alt="Id Icon" className="mr-[10px]" />
+                      <Image src={idIcon} alt="Id Icon" className="mr-[6px]" />
                       <span className="text-[#4B4B4B] text-xs ">{item.id}</span>
                     </div>
                     <div className="flex items-center">
-                      <Image src={idIcon} alt="Id Icon" className="mr-[10px]" />
-                      <span className="text-[#4B4B4B] text-xs ">{item.id}</span>
+                      <Image src={dayIcon} alt="Id Icon" className="mr-[6px]" />
+                      <span className="text-[#4B4B4B] text-xs ">
+                        {item.day}
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -3,19 +3,57 @@ import React from "react";
 import timeIcon from "@/assets/svgs/time.svg";
 const ActivitiesNotificationBar = () => {
   const followUp = [
-    { 
-      name:"",
-      description:"",
-      time:"",
-      id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
-    { id: "A-2000" },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
+    {
+      name: "Hassam Ud dien",
+      description: "Converted Offer to Contract",
+      time: "14:20:05",
+      date: "12/09/2023",
+      id1: "A-2000",
+      id2: "A-2000",
+    },
   ];
   return (
-    <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]     ">
+    <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]">
       <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
         <h1 className="text-[#18181B]  font-medium">Activity</h1>
       </div>
@@ -28,11 +66,9 @@ const ActivitiesNotificationBar = () => {
             >
               <div className=" pb-[5px]  border-b border-[#000] border-opacity-10  ">
                 <div>
-                  <span className="text-dark text-sm">
-                    Hassam Ud dien&nbsp;
-                  </span>
+                  <span className="text-dark text-sm">{item.name}&nbsp;</span>
                   <span className="text-dark text-sm font-medium">
-                    Converted Offer to Contract
+                    {item.description}
                   </span>
                 </div>
                 <div className="flex items-center justify-between mt-1">
@@ -43,12 +79,12 @@ const ActivitiesNotificationBar = () => {
                       className="mr-[10px]"
                     />
                     <span className="text-[#393939] text-xs ">
-                      14:20:05,12/09/2023
+                      {item.time},{item.date}
                     </span>
                   </div>
                   <div className="flex justify-between items-center ">
                     <span className="mr-3 text-white bg-primary text-xs rounded-[2px] px-1 py-0.5 font-medium">
-                      {item.id}
+                      {item.id1}
                     </span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +101,7 @@ const ActivitiesNotificationBar = () => {
                       />
                     </svg>
                     <span className="ml-3 text-white text-xs bg-[#45C769] rounded-[2px] px-1 py-0.5 font-medium">
-                      {item.id}
+                      {item.id2}
                     </span>
                   </div>
                 </div>
