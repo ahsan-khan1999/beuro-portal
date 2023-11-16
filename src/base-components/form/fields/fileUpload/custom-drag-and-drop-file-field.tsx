@@ -2,7 +2,7 @@ import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 // import { FileUploadIcon } from "@/assets/svgs/components/file-upload-icon";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from 'react';
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { useSelector } from "react-redux";
 import uploadIcon from "@/assets/svgs/file-uploader.svg";
@@ -10,42 +10,33 @@ import uploadIcon from "@/assets/svgs/file-uploader.svg";
 export const ImageFileUpload = ({
   id,
   field,
+  value
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
+  value?: string
 }) => {
   const dispatch = useAppDispatch();
-  const formdata = new FormData();
-  const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
-    null
-  );
-  const [selectedImageName, setSelectedImageName] = useState<string | null>(
-    null
-  );
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
 
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
+    const formdata = new FormData();
+
     const file = e.dataTransfer.files[0];
     formdata.append("file", file);
     const res = await dispatch(uploadFileToFirebase(formdata));
-    setSelectedImageName(file?.name);
-    setSelectedImagePath(res?.payload);
-    // setSelectedImagePath(URL.createObjectURL(file));
-
     field.onChange(res?.payload);
   };
 
   const handleFileSelected = async (e: any) => {
+    const formdata = new FormData();
     const file = e.target.files[0];
+
     formdata.append("file", file);
     const res = await dispatch(uploadFileToFirebase(formdata));
-
-    setSelectedImageName(file?.name);
-    setSelectedImagePath(res?.payload);
-    // setSelectedImagePath(URL.createObjectURL(file));
 
     field.onChange(res?.payload);
   };
@@ -94,6 +85,7 @@ export const ImageFileUpload = ({
         type="file"
         className="hidden"
         onChange={handleFileSelected}
+        key={value}
       />
     </label>
   );

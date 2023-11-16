@@ -32,17 +32,6 @@ export const InputField = ({
      
 
       <div className={`relative w-full flex items-center`}>
-        {/* {name == "email" && (
-        <InputEmail
-          pathClass={inputFocus ? "fill-primary" : "fill-[#8F8F8F]"}
-          className="absolute top-4 left-4"
-        />
-      )} */}
-        {/* {svg && (
-        // <Image src={svg} alt={alt} className="mr-3 absolute top-4 left-4 tests" />
-      svg
-
-      )} */}
        {img && <Image src={addtionalDetailImg} alt="paragraph_icon" className="absolute top-4 left-4"/>}
         {svg && (
           <span
@@ -55,7 +44,6 @@ export const InputField = ({
 
         <input
           onFocus={() => setInputFocus(true)}
-          // onBlur={() => setInputFocus(false)}
           onBlurCapture={() => setInputFocus(false)}
           id={id}
           type={inputType}
@@ -64,6 +52,7 @@ export const InputField = ({
           {...register(name)}
           placeholder={placeholder}
           disabled={disabled}
+          key={id}
         />
         {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />

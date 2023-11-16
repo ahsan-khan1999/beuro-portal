@@ -14,13 +14,14 @@ const Location = ({
   currentFormStage,
 
   setCurrentFormStage,
+  user
 }: FormComponentProps) => {
   const { loading } = useAppSelector((state) => state.auth);
   const fields = detailLocationFormField(
     register,
     loading,
     control,
-
+    user,
     setCurrentFormStage
   );
   return (

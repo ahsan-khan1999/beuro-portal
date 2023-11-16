@@ -9,6 +9,7 @@ import { FormField } from "./form";
 import {
   Control,
   FieldValues,
+  SetFieldValue,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -137,6 +138,8 @@ export type GenerateCompanyProfileFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   properties?: User,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
+
 ) => FormField[];
 
 export type GenerateResetPasswordFormField = (
@@ -150,13 +153,15 @@ export type GenerateCustomerFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  properties: CustomerProperties,
+  properties: { customer?: Customers, customerType?: string },
   control?: Control<FieldValues>,
+  setValue?: SetFieldValue<FieldValues>,
+
 ) => FormField[];
 export interface CustomerProperties {
   phoneNumber?: string;
   mobileNumber?: string;
-  customerType?:string
+  customerType?: string
 }
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,

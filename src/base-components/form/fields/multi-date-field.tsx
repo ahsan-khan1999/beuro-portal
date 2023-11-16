@@ -43,7 +43,6 @@ export const MultiDateField = ({
                             } }
                             onChange={(val: DateRangeValueProps) => {
                                 let { selection } = val
-                                console.log(value, "value");
                                 handleChange({
                                     startDate: selection.startDate,
                                     endDate: selection.endDate,

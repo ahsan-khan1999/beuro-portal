@@ -7,8 +7,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   loading,
   isUpdate,
   handleUpdateCancel,
-  { mobileNumber, phoneNumber, customerType },
+  { customer: customerDetails, customerType: customerType },
   control,
+  setValue
 ) => {
   let formField: FormField[] = [
     {
@@ -30,7 +31,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              value: "",
               options: Object.keys(staticEnums.CustomerType).map((item, key) => (
                 {
                   value: item,
@@ -40,6 +40,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               control,
               disabled: isUpdate,
+              value: ""
+
             },
           },
           {
@@ -58,6 +60,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               disabled: isUpdate,
+              value: ""
+
             },
           },
 
@@ -74,6 +78,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Email Address",
               register,
               disabled: isUpdate,
+              value: ""
+
             },
           },
 
@@ -91,7 +97,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: phoneNumber,
+              value: customerDetails && customerDetails.phoneNumber,
 
 
             },
@@ -110,7 +116,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: mobileNumber,
+              value: customerDetails && customerDetails.mobileNumber,
               disabled: isUpdate,
             },
           },
@@ -147,6 +153,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
+              value: ""
+
             },
           },
 
@@ -162,13 +170,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className:
                 "!p-4  !border-dark focus:!border-primary focus:!border-primary",
 
-              inputType: "number",
+              inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: "Enter Your Post Code",
 
               register,
               disabled: isUpdate,
+              value: ""
             },
           },
           {
@@ -183,7 +192,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              value: "",
               options: Object.keys(staticEnums.Country).map((item) => (
                 {
                   value: item,
@@ -192,6 +200,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               )),
               control,
               disabled: isUpdate,
+              value: ""
+
             },
           },
         ],
@@ -233,7 +243,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   const fieldIndex = formField.findIndex(
     (field) =>
       field?.field?.type === Field.div &&
+      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
+      //@ts-expect-error
       field?.field?.children.some((child) => child?.field?.id == "fullName")
   );
 
@@ -242,10 +254,11 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       containerClass: "mb-0",
       label: {
         text: "Company Name",
-        htmlFor: "name",
+        htmlFor: "companyName",
         className: "mb-[10px]",
       },
       field: {
+
         type: Field.input,
         className:
           "!p-4 !!border-borderColor border border-dark focus:!border-primary",
@@ -255,13 +268,19 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         disabled: isUpdate,
+        value: customerDetails && customerDetails?.companyName,
+        setValue: setValue
+
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
     const divField = formField[fieldIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
+      //@ts-expect-error
       divField.children.splice(fieldIndex + 2, 0, companyNameField);
     }
   }
+  console.log(formField, "formField");
+
   return formField
 };

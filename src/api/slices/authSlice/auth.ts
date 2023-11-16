@@ -15,11 +15,12 @@ import {
 } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
 import { conditionHandlerLogin, conditionHandlerRegistration, senitizePhone, setErrors } from "@/utils/utility";
-import { saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
+import { getUser, saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
 import { formatDateString, isJSON } from "@/utils/functions";
 import { getCookie } from "cookies-next";
 import { SalutationValue } from "@/enums/form";
 import { NextRouter } from "next/dist/client/router";
+import { staticEnums } from "@/utils/static";
 
 const initialState: AuthState = {
   user: undefined,
@@ -112,18 +113,13 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
 export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
-    console.log("getting in");
-
     try {
-      let apiData = { ...data }
-      if (apiData?.phoneNumber) apiData = { ...apiData, phoneNumber: senitizePhone(apiData?.phoneNumber) }
-      if (apiData?.mobileNumber) apiData = { ...apiData, mobileNumber: senitizePhone(apiData?.mobileNumber) }
+      const user = isJSON(getUser())
 
-      const response: ApiResponseTypePut = await apiServices.profileStep1(apiData);
+      const response = await apiServices.profileStep1(data);
       thunkApi.dispatch(setErrorMessage(null))
-
-      thunkApi.dispatch(setUser(response.data.User));
-      saveUser(response.data.User);
+      thunkApi.dispatch(setUser({ ...user, ...response?.data?.Company }));
+      saveUser({ ...user, ...response?.data?.data?.Company });
 
       nextFormHandler();
 
@@ -139,25 +135,22 @@ export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      // let apiData = {
-      //   ...data,
-      //   phoneNumber: data?.phoneNumber?.includes("+")
-      //     ? data?.phoneNumber
-      //     : "+" + data?.phoneNumber,
-      // };
-      // const response: ApiResponseTypePut = await apiServices.profileStep2(
-      //   apiData
-      // );
-      // thunkApi.dispatch(setErrorMessage(null));
+      const user = isJSON(getUser())
 
-      // thunkApi.dispatch(setUser(response.data.User));
-      // saveUser(response.data.User);
+      const response = await apiServices.profileStep2(
+        { address: { ...data } }
+      );
+
+      thunkApi.dispatch(setErrorMessage(null));
+        
+      thunkApi.dispatch(setUser({ ...user, ...response?.data?.Company }));
+      saveUser({ ...user, ...response?.data?.Company });
       nextFormHandler();
 
       return true;
     } catch (e: any) {
-      // setErrors(setError, e?.data.data, translate);
-      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
@@ -166,16 +159,22 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      // const response: ApiResponseTypePut = await apiServices.profileStep3(data);
-      // thunkApi.dispatch(setUser(response.data.User));
-      // thunkApi.dispatch(setErrorMessage(null));
+      //@ts-expect-error 
+      let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
+      console.log(apiData,"apiData");
+      
+      const response: ApiResponseTypePut = await apiServices.profileStep3({ bankDetails: { ...apiData } });
 
-      // saveUser(response.data.User);
+      thunkApi.dispatch(setUser(response.data.User));
+      saveUser(response.data.User);
+
+      thunkApi.dispatch(setErrorMessage(null));
+
       nextFormHandler();
       return true;
     } catch (e: any) {
-      // setErrors(setError, e?.data.data, translate);
-      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }

@@ -51,7 +51,7 @@ const globalSlice = createSlice({
   initialState,
   reducers: {
     updateModalType: (state, action) => {
-      state.modal.type = action.payload;
+      state.modal.type = action.payload.type;
       state.modal.data = action.payload.data;
 
     },

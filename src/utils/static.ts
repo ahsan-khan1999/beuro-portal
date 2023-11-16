@@ -3853,3 +3853,32 @@ export const AllLeadsData: AllLeads[] = [
     status: "Open",
   },
 ];
+export const DEFAULT_CUSTOMER = {
+  id: 0,
+  refID: "",
+  createdAt: "",
+  fullName: "",
+  email: "",
+  phoneNumber: "",
+  date: "",
+  mobileNumber: "",
+  status: "",
+  editImg: "",
+  editNote: "",
+  customerType: "",
+  companyName: "",
+  mobile: "",
+  address: {
+    streetNumber: "",
+    country: "",
+    postalCode: ""
+  },
+  edit: false,
+  lead: {
+    id: "",
+    name: "",
+    source: "",
+    status: "",
+    expires: "",
+  },
+}

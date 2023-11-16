@@ -12,9 +12,10 @@ export interface CustomerTable {
 
 export interface CustomerDetail {
   date?: string;
-  id?: number;
+  id?: string;
   name?: string;
   handlePreviousClick: () => void;
+  handleDelete: () => void
 }
 export interface CustomerLeadDetail {
   id: string;
@@ -32,7 +33,7 @@ export interface Customers {
   phoneNumber: string;
   date: string;
   mobileNumber: string;
-  
+
   status?: string;
   editImg?: string;
   editNote?: string;
@@ -63,4 +64,9 @@ export interface FormDataProps {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   errors?: Record<string, any>;
   onSubmit: SubmitHandler<FieldValues>;
+}
+export interface CustomerPromiseActionType {
+  type: string,
+  payload: object,
+  meta: object,
 }

@@ -17,6 +17,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
 import React, { ReactNode } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
+import { User } from ".";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -145,6 +146,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
 export interface DragAndDropFileFieldProps
   extends BaseFieldProps<Field.dragAndDropFileField> {
   control?: Control<FieldValues>;
+  value?: string
 }
 
 // interface for the pdf file upload
@@ -355,6 +357,7 @@ export interface FormComponentProps {
   setError?: UseFormSetError<FieldValues>;
   currentFormStage?: string;
   setCurrentFormStage?: any;
+  user?: User
 }
 
 export interface FormFooterProps {

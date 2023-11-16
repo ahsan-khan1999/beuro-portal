@@ -1,8 +1,10 @@
+import { FieldValue, FieldValues } from 'react-hook-form';
 // import { ModalType } from "@/enums";
 
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { SetStateAction } from "react";
+import { FieldValue, SubmitHandler } from "react-hook-form";
 
 export interface GlobalState {
   loading: boolean;
@@ -71,4 +73,20 @@ export interface GlobalApiResponseType {
     [ApiResponse.message]: string;
     [Header.data]: Record<string, any>
   };
+}
+export interface CreateSuccessProps {
+  onClose: () => void;
+  modelHeading: string;
+  modelSubHeading: string;
+  routeHandler: () => void;
+
+}
+export interface UpdateSuccessProps {
+  onClose: () => void;
+  modelHeading: string;
+  modelSubHeading: string;
+  cancelHandler: () => void;
+  confirmHandler: () => void;
+  loading:boolean
+
 }

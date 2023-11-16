@@ -16,6 +16,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               router.push({
                 pathname: "/customers/details",
                 query: { customer: item.id },
+                
               })
             }
             key={index}

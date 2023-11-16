@@ -10,6 +10,7 @@ const DetailsData = ({
   id,
   name,
   handlePreviousClick,
+  handleDelete
 }: CustomerDetail) => {
   return (
     <>
@@ -24,7 +25,7 @@ const DetailsData = ({
         </div>
         <div className="flex items-center gap-x-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={handleDelete}/>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />

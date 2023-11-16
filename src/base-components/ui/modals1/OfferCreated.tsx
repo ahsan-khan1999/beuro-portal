@@ -3,9 +3,9 @@ import Image from "next/image";
 import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useRouter } from "next/router";
+import { CreateSuccessProps } from "@/types/global";
 
-const OfferCreated = ({ onClose }: { onClose: () => void }) => {
-  const router = useRouter();
+const RecordCreateSuccess = ({ onClose, modelHeading, modelSubHeading, routeHandler }: CreateSuccessProps) => {
   return (
     <>
       <BaseModal
@@ -15,15 +15,15 @@ const OfferCreated = ({ onClose }: { onClose: () => void }) => {
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
           <p className="text-[#000] font-medium text-[24px] leading-7 mt-[40px]  text-center ">
-            Offer Created Successful
+            {modelHeading}
           </p>
 
           <span className="text-[#1E1E1E] font-normal text-[14px] mt-[6px]">
-            Thanks for creating offer we are happy to have you.
+            {modelSubHeading}
           </span>
 
           <button
-            onClick={() => router.push("/offers")}
+            onClick={routeHandler}
             className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[66px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
             Done
@@ -34,4 +34,4 @@ const OfferCreated = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export default OfferCreated;
+export default RecordCreateSuccess;

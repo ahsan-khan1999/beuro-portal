@@ -3,16 +3,20 @@ import Image from "next/image";
 import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { Button } from "../button/button";
 
 const DeleteConfirmation_2 = ({
   onClose,
   modelHeading,
   routeHandler,
+  loading
 }: {
   onClose: () => void;
   modelHeading: string;
   routeHandler: Function;
+  loading: boolean
 }) => {
+  
   return (
     <>
       <BaseModal
@@ -40,14 +44,12 @@ const DeleteConfirmation_2 = ({
               onClick={onClose}
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
-               Cancel
+              Cancel
             </button>
-            <button
-              onClick={() => routeHandler()}
-              className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
-            >
-              Confirm
-            </button>
+
+            <Button id="Delete" inputType="submit" loading={loading} text="Confirm" onClick={routeHandler}
+              className=" px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
+            />
           </div>
         </div>
       </BaseModal>

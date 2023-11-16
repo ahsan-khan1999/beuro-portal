@@ -7,6 +7,7 @@ import websiteIcon from "@/assets/svgs/website-input.svg";
 import mwstIcon from "@/assets/svgs/mwst-number.svg";
 import locationIcon from "@/assets/svgs/location.svg";
 import postalCodeIcon from "@/assets/svgs/postal-code.svg";
+import { staticEnums } from "@/utils/static";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
@@ -147,6 +148,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
+              value: user?.company?.companyName
             },
           },
           {
@@ -177,7 +179,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               control,
               country: "ch",
               value: user && user?.company?.mobileNumber,
-              className:"h-42"
+              className: "h-42"
 
             },
           },
@@ -203,6 +205,8 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
+              value: user?.company?.website
+
             },
           },
           {
@@ -234,6 +238,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company.taxNumber
             },
           },
           {
@@ -248,6 +253,8 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "logo",
               type: Field.dragAndDropFileField,
               control,
+              value: user && user?.company.logo
+
             },
           },
         ],
@@ -270,13 +277,15 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 
   return formField;
 };
-export const detailLocationFormField: GenerateRegistrationFormField = (
+export const detailLocationFormField: GenerateCompanyProfileFormField = (
   register,
   loading,
   control,
-
+  user,
   setCurrentFormStage
 ) => {
+  console.log(user);
+
   const formField: FormField[] = [
     {
       field: {
@@ -292,7 +301,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "streetNumber",
               name: "streetNumber",
               placeholder: "Enter your Address",
@@ -312,6 +321,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.address.streetNumber
             },
           },
           {
@@ -342,6 +352,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.address.houseNumber
             },
           },
           {
@@ -353,7 +364,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "postalCode",
               name: "postalCode",
               placeholder: "Enter Your Postcode",
@@ -372,6 +383,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.address.postalCode
             },
           },
           {
@@ -403,6 +415,8 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.address.city
+
             },
           },
         ],
@@ -423,7 +437,6 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               onClick: () => setCurrentFormStage && setCurrentFormStage("companyDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
-              loading,
             },
           },
           {
@@ -433,7 +446,7 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
               text: "Next",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[160px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg   px-4 w-[160px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },
@@ -444,10 +457,11 @@ export const detailLocationFormField: GenerateRegistrationFormField = (
 
   return formField;
 };
-export const detailBankFormField: GenerateRegistrationFormField = (
+export const detailBankFormField: GenerateCompanyProfileFormField = (
   register,
   loading,
   control,
+  user,
   setCurrentFormStage
   // trigger,
   // router
@@ -469,13 +483,17 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               type: Field.select,
               id: "1",
               name: "currency",
-              options: [
-                { value: "PKR", label: "PKR" },
-                { value: "Riyal", label: "Riyal" },
-                { value: "Dollar", label: "Dollar" },
-              ],
+              options: Object.keys(staticEnums["currency"]).map((item) => (
+                {
+                  label: item,
+                  
+                  value: item,
+
+                }
+              )),
               control,
-              value: ""
+              value: user && user?.company?.bankDetails?.currency,
+              className: "h-[42px] !px-4"
 
             },
           },
@@ -501,6 +519,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.bankDetails?.bankName,
+
             },
           },
           {
@@ -512,7 +532,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "accountNumber",
               name: "accountNumber",
               placeholder: "Enter Your Account Number",
@@ -526,6 +546,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.bankDetails?.accountNumber,
+
             },
           },
           {
@@ -537,7 +559,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "ibanNumber",
               name: "ibanNumber",
               placeholder: "Enter Your Iban",
@@ -551,6 +573,8 @@ export const detailBankFormField: GenerateRegistrationFormField = (
 </svg>
 `,
               register,
+              value: user && user?.company?.bankDetails?.ibanNumber,
+
             },
           },
         ],
@@ -572,7 +596,6 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               onClick: () => setCurrentFormStage && setCurrentFormStage("locationDetails"),
               className:
                 "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
-              loading,
             },
           },
           {
@@ -582,7 +605,7 @@ export const detailBankFormField: GenerateRegistrationFormField = (
               text: "Lets finish",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[180px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg   px-4 w-[180px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

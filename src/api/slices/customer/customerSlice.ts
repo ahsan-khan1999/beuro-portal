@@ -3,7 +3,11 @@ import { Customers } from "@/types/customer"
 import { senitizePhone, setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
-import { staticEnums } from "@/utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
+import { object } from "yup";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 interface CustomerState {
     customer: Customers[];
@@ -11,6 +15,8 @@ interface CustomerState {
     error: Record<string, object>,
     totalCount: number;
     lastPage: number;
+    customerDetails: Customers;
+
 
 }
 
@@ -19,7 +25,8 @@ const initialState: CustomerState = {
     loading: false,
     error: {},
     lastPage: 1,
-    totalCount: 10
+    totalCount: 10,
+    customerDetails: DEFAULT_CUSTOMER
 
 }
 
@@ -42,8 +49,8 @@ export const readCustomerDetail: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readCustomerDetail(params);
-            return true;
+            const response = await apiServices.readCustomerDetail(params);
+            return response?.data?.data.Customer;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -55,7 +62,8 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            let apiData = { ...data }
+            console.log(data,"data at submit");
+            
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
@@ -73,7 +81,14 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.updateCustomer(data);
+            console.log("hey");
+            
+            let apiData = { ...data }
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
+            await apiServices.updateCustomer(apiData);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -83,10 +98,16 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
     });
 export const deleteCustomer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("customer/delete", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { customerDetails: data, router, setError, translate } = args as any;
 
         try {
             await apiServices.deleteCustomer(data);
+            router.pathname = "/customers"
+            updateQuery(router, router.locale)
+            thunkApi.dispatch(updateModalType({
+                type:
+                    ModalType.NONE
+            }));
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -102,6 +123,9 @@ const customerSlice = createSlice({
     reducers: {
         setErrorMessage: (state, action) => {
             state.error = action.payload;
+        },
+        setCustomerDetails: (state, action) => {
+            state.customerDetails = action.payload;
         },
     },
     extraReducers(builder) {
@@ -148,6 +172,7 @@ const customerSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readCustomerDetail.fulfilled, (state, action) => {
+            state.customerDetails = action.payload
             state.loading = false;
         });
         builder.addCase(readCustomerDetail.rejected, (state) => {
@@ -158,4 +183,4 @@ const customerSlice = createSlice({
 })
 
 export default customerSlice.reducer;
-export const { setErrorMessage } = customerSlice.actions
+export const { setErrorMessage, setCustomerDetails } = customerSlice.actions

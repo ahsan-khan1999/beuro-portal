@@ -104,9 +104,9 @@ const createCustomer = (data) =>
   post(SERVICE_URLS.customer, data, { feature: featureConstants.login });
 
 const updateCustomer = (data) =>
-  put(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.customer+`/${data?.id}`, data, { feature: featureConstants.login });
 const deleteCustomer = (data) =>
-  del(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.customer+`/${data?.id}`, {}, { feature: featureConstants.login });
 const readLead = (data) =>
   get(SERVICE_URLS.lead, data, { feature: featureConstants.login });
 

@@ -9,9 +9,9 @@ export enum UserResponse {
   role = "role",
   email = "email",
   company = "company",
-  bank = "bank",
+  bank = "bankDetails",
   employee = "employee",
-  addresses = "addresses",
+  addresses = "address",
   isProfileComplete = "isProfileComplete",
   isEmailVerified = "isEmailVerified",
   isPhoneVerified = "isPhoneVerified",
@@ -73,10 +73,11 @@ export enum Address {
   emailAddress = "emailAddress",
 }
 export enum AddressTypes {
-  primary = "primary",
-  secondary1 = "secondary1",
-  secondary2 = "secondary2",
-  billing = "billing",
+  streetNumber = "streetNumber",
+  postalCode = "postalCode",
+  city = "city",
+  houseNumber = "houseNumber",
+
 }
 export enum Header {
   header = "headers",

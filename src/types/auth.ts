@@ -4,6 +4,7 @@ import {
   AddressTypes,
   ApiResponse,
   AuthenticationState,
+  BankFields,
   ErrorMessage,
   Header,
   OAuthId,
@@ -54,14 +55,23 @@ export interface UserCompany {
   [UserResponse.taxNumber]: number;
   [UserResponse.phoneNumber]: string;
   [UserResponse.mobileNumber]: string;
+  [UserResponse.addresses]: UserAddress;
+  [UserResponse.bank]: UserBankDetail;
 
 
 }
 export interface UserAddress {
-  [AddressTypes.primary]?: AddressType;
-  [AddressTypes.secondary1]?: AddressType;
-  [AddressTypes.secondary2]?: AddressType;
-  [AddressTypes.billing]?: AddressType;
+  [AddressTypes.city]: string;
+  [AddressTypes.postalCode]: string;
+  [AddressTypes.streetNumber]: string;
+  [AddressTypes.houseNumber]: string;
+
+}
+export interface UserBankDetail {
+  [BankFields.bankName]: string;
+  [BankFields.accountNumber]: string;
+  [BankFields.ibanNumber]: string;
+  [BankFields.currency]: string;
 }
 export interface UserOAuth {
   [OAuthId.apple]: boolean;
