@@ -6,10 +6,15 @@ import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
 import Chart from "chart.js/auto";
 import InputField from "@/base-components/filter/fields/input-field";
+import activeSubscribersIcon from "@/assets/svgs/leads.svg";
+import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
+import customersIcon from "@/assets/svgs/customers-card.svg";
 
 const AdminDashboard = () => {
   const dashboardCards = [
     {
+      icon: activeSubscribersIcon,
+      alt: "active subscribers icon",
       title: "Active Subscribers",
       id: "202504 ",
       salePercent: "+4.5%",
@@ -17,6 +22,8 @@ const AdminDashboard = () => {
       chartPointColor: "#5114EA",
     },
     {
+      icon: pendingCompaniesIcon,
+      alt: "pending companies icon",
       title: "Pending Compnies",
       id: "202326 ",
       salePercent: "-4.5%",
@@ -24,6 +31,8 @@ const AdminDashboard = () => {
       chartPointColor: "#FC3576",
     },
     {
+      icon: customersIcon,
+      alt: "customers icon",
       title: "Customers",
       id: "202505 ",
       salePercent: "+4.5%",
@@ -143,6 +152,8 @@ const AdminDashboard = () => {
         {dashboardCards.map((item, index) => {
           return (
             <DashboardCard
+              icon={item.icon}
+              alt={item.alt}
               backgroundColor={item.backgroundColor}
               title={item.title}
               id={item.id}

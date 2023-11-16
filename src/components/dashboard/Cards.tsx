@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 interface DashboardCard {
+  icon: string | StaticImport;
+  alt: string;
   backgroundColor: string;
   title: string;
   subTitle: string;
@@ -12,6 +16,8 @@ interface DashboardCard {
   expired: string;
 }
 const DashboardCard = ({
+  icon,
+  alt,
   backgroundColor,
   title,
   subTitle,
@@ -73,7 +79,7 @@ const DashboardCard = ({
   return (
     <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
       <div className="flex items-center mb-8">
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           width="34"
           height="35"
@@ -136,7 +142,8 @@ const DashboardCard = ({
               <stop offset="1" stop-color="#FF376F" />
             </linearGradient>
           </defs>
-        </svg>
+        </svg> */}
+        <Image src={icon} alt={alt} />
         <div className="ml-2 space-y-1">
           <h3 className="text-xl text-white font-semibold ">{title}</h3>
           <span className="text-xs text-white  ">{subTitle}</span>

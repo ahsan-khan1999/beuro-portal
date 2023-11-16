@@ -10,10 +10,16 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import { FollowUpNotificationBar } from "./notification-bar/FollowUp";
 import ActivitiesNotificationBar from "./notification-bar/Activities";
+import leadsIcon from "@/assets/svgs/leads.svg";
+import offersIcon from "@/assets/svgs/offers.svg";
+import contractsIcon from "@/assets/svgs/contracts.svg";
+import salesIcon from "@/assets/svgs/sales.svg";
 
 const AdminDashboard = () => {
   const dashboardCards = [
     {
+      icon: leadsIcon,
+      alt: "leads icon",
       title: "Leads",
       subTitle: "2378 Leads",
       id: "202504 ",
@@ -25,6 +31,8 @@ const AdminDashboard = () => {
       expired: "2782 Expired",
     },
     {
+      icon: offersIcon,
+      alt: "offers icon",
       title: "Offers",
       subTitle: "2378 Offers",
       id: "202326 ",
@@ -36,6 +44,8 @@ const AdminDashboard = () => {
       expired: "2782 Expired",
     },
     {
+      icon: contractsIcon,
+      alt: "contracts icon",
       title: "Contracts",
       subTitle: "2378 Contracts",
       id: "202505 ",
@@ -47,11 +57,13 @@ const AdminDashboard = () => {
       expired: "2782 Cancelled",
     },
     {
+      icon: salesIcon,
+      alt: "sales icon",
       title: "Sales",
       subTitle: "2378 Sales",
       id: "202705 ",
       salePercent: "+4.5%",
-      backgroundColor: "bg-dashboardCard3-gradient",
+      backgroundColor: "bg-gradient",
       chartPointColor: "#FE8D46",
       open: "2782 Open",
       closed: "2782 Overdue",
@@ -174,6 +186,8 @@ const AdminDashboard = () => {
         {dashboardCards.map((item, index) => {
           return (
             <DashboardCard
+              icon={item.icon}
+              alt={item.alt}
               backgroundColor={item.backgroundColor}
               title={item.title}
               subTitle={item.subTitle}
