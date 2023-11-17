@@ -4,14 +4,12 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddPostPonedNote } from "@/hooks/follow-up/useAddPostPonedNote";
+import { AddPostPonedNoteProps } from "@/types/follow-up";
 
 const AddPostPonedNote = ({
   onClose,
   handleFollowUpsDetails,
-}: {
-  onClose: () => void;
-  handleFollowUpsDetails: Function;
-}) => {
+}: AddPostPonedNoteProps) => {
   const { errors, fields, handleSubmit, onSubmit } = useAddPostPonedNote(
     handleFollowUpsDetails
   );

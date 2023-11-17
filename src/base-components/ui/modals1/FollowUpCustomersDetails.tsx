@@ -2,13 +2,14 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { FollowUpCustomersDetailsProps } from "@/types/follow-up";
 
 type details = {
   label: string;
   value: string;
 };
 
-const FollowUpCustomersDetails = ({ onClose }: { onClose: () => void }) => {
+const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) => {
   const customersData: details[] = [
     {
       label: "First Name",
@@ -58,7 +59,7 @@ const FollowUpCustomersDetails = ({ onClose }: { onClose: () => void }) => {
         onClose={onClose}
         containerClassName="w-full max-w-[862.597px] min-h-auto max-h-fit"
       >
-        <main className="relative pt-[28px] pb-[37px] px-[40px]">
+        <main className="relative pt-[26px] pb-[47px] pl-[32px] pr-[25px]">
           <Image
             src={crossIcon}
             alt="cross_icon"
@@ -74,7 +75,7 @@ const FollowUpCustomersDetails = ({ onClose }: { onClose: () => void }) => {
             <hr className="opacity-10" />
 
             {/* customer details */}
-            <div className="grid grid-cols-3 gap-x-3 mt-5">
+            <div className="grid grid-cols-3 gap-x-3 gap-y-5 mt-5">
               {customersData.map((item, index) => (
                 <div className="flex flex-col gap-y-[10px] " key={index}>
                   <p className="text-sm font-normal text-[#4D4D4D]">

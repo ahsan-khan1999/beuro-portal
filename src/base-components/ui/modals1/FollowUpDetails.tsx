@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { FollowUpDetailsProps } from "@/types/follow-up";
 
 type details = {
   label: string;
@@ -13,16 +14,7 @@ const FollowUpDetails = ({
   handleAddPostPonedNote,
   handleAddRemarks,
   status,
-}: {
-  onClose: () => void;
-  handleAddPostPonedNote: Function;
-  handleAddRemarks: Function;
-  status: {
-    postpond: boolean;
-    completed: boolean;
-    neutral: boolean;
-  };
-}) => {
+}: FollowUpDetailsProps) => {
   console.log(status);
 
   const detailsData: details[] = [
