@@ -1,19 +1,33 @@
 import apiServices from "@/services/requestHandler";
 import { Customers } from "@/types/customer"
-import { setErrors } from "@/utils/utility";
+import { senitizePhone, setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
+import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
+import { object } from "yup";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 interface CustomerState {
     customer: Customers[];
     loading: boolean;
-    error: Record<string, object>
+    error: Record<string, object>,
+    totalCount: number;
+    lastPage: number;
+    customerDetails: Customers;
+
+
 }
 
 const initialState: CustomerState = {
     customer: [],
     loading: false,
-    error: {}
+    error: {},
+    lastPage: 1,
+    totalCount: 10,
+    customerDetails: DEFAULT_CUSTOMER
+
 }
 
 export const readCustomer: AsyncThunk<boolean, object, object> | any =
@@ -21,8 +35,8 @@ export const readCustomer: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readCustomer(params);
-            return true;
+            const response = await apiServices.readCustomer(params);
+            return response?.data?.data;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -35,8 +49,8 @@ export const readCustomerDetail: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readCustomerDetail(params);
-            return true;
+            const response = await apiServices.readCustomerDetail(params);
+            return response?.data?.data.Customer;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -48,7 +62,12 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.createCustomer(data);
+            let apiData={...data}
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            await apiServices.createCustomer(apiData);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -61,7 +80,13 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.updateCustomer(data);
+            
+            let apiData = { ...data }
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
+            await apiServices.updateCustomer(apiData);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -71,10 +96,16 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
     });
 export const deleteCustomer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("customer/delete", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { customerDetails: data, router, setError, translate } = args as any;
 
         try {
             await apiServices.deleteCustomer(data);
+            router.pathname = "/customers"
+            updateQuery(router, router.locale)
+            thunkApi.dispatch(updateModalType({
+                type:
+                    ModalType.NONE
+            }));
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -91,14 +122,19 @@ const customerSlice = createSlice({
         setErrorMessage: (state, action) => {
             state.error = action.payload;
         },
+        setCustomerDetails: (state, action) => {
+            state.customerDetails = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readCustomer.pending, (state) => {
             state.loading = true
         });
         builder.addCase(readCustomer.fulfilled, (state, action) => {
-            state.loading = false;
-            state.customer = action.payload
+            state.customer = action.payload.Customer,
+                state.lastPage = action.payload.lastPage,
+                state.totalCount = action.payload.totalCount,
+                state.loading = false;
         });
         builder.addCase(readCustomer.rejected, (state) => {
             state.loading = false
@@ -134,6 +170,7 @@ const customerSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readCustomerDetail.fulfilled, (state, action) => {
+            state.customerDetails = action.payload
             state.loading = false;
         });
         builder.addCase(readCustomerDetail.rejected, (state) => {
@@ -144,4 +181,4 @@ const customerSlice = createSlice({
 })
 
 export default customerSlice.reducer;
-export const { setErrorMessage } = customerSlice.actions
+export const { setErrorMessage, setCustomerDetails } = customerSlice.actions

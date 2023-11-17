@@ -1,6 +1,5 @@
 import { CustomersAdmin } from "@/types/admin/customer";
-import { Customers } from "@/types/customer";
-import { customers, customersAdmin } from "@/utils/static";
+import {  customersAdmin } from "@/utils/static";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

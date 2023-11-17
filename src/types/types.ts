@@ -9,6 +9,7 @@ import { FormField } from "./form";
 import {
   Control,
   FieldValues,
+  SetFieldValue,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -21,6 +22,7 @@ import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 import { Status } from "./global";
+import { Employee } from "./employee";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -132,6 +134,15 @@ export type GenerateRegistrationFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateCompanyProfileFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  properties?: User,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
+
+) => FormField[];
+
 export type GenerateResetPasswordFormField = (
   register: UseFormRegister<FieldValues>,
   loading: boolean,
@@ -143,12 +154,15 @@ export type GenerateCustomerFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  properties: CustomerProperties,
+  properties: { customer?: Customers, customerType?: string },
   control?: Control<FieldValues>,
+  setValue?: SetFieldValue<FieldValues>,
+
 ) => FormField[];
-export interface CustomerProperties  {
-  phone?: string;
-  mobile?: string;
+export interface CustomerProperties {
+  phoneNumber?: string;
+  mobileNumber?: string;
+  customerType?: string
 }
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -254,7 +268,8 @@ export type GenerateEmployeeFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  trigger?: UseFormTrigger<FieldValues>
+  employeeDetails?: Employee,
+  control?: Control<FieldValues>,
 ) => FormField[];
 
 // Notes formfield
@@ -325,6 +340,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  customers:Customers[],
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];

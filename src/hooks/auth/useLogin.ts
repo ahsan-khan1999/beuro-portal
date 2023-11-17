@@ -19,7 +19,7 @@ export const useLoginForm = () => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<FieldValues>({
+  } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = generateLoginFormField(register, loading);
@@ -32,6 +32,6 @@ export const useLoginForm = () => {
     onSubmit,
     handleSubmit,
     errors,
-    error,
+    error,translate
   };
 };

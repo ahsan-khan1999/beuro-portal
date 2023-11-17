@@ -4,6 +4,7 @@ import {
   AddressTypes,
   ApiResponse,
   AuthenticationState,
+  BankFields,
   ErrorMessage,
   Header,
   OAuthId,
@@ -18,10 +19,16 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 
-export interface User  {
+export interface User {
   [UserResponse.id]: string;
   [UserResponse.role]: string;
   [UserResponse.email]: string;
+  [UserResponse.role]: string;
+
+  [UserResponse.bank]: string;
+  [UserResponse.company]: UserCompany;
+  [UserResponse.employee]: string;
+
   [UserResponse.addresses]: UserAddress;
   [UserResponse.isProfileComplete]: boolean;
   [UserResponse.isEmailVerified]: boolean;
@@ -34,16 +41,37 @@ export interface User  {
   [UserResponse.username]: string;
   [UserResponse.dob]: string;
   [UserResponse.phoneNumber]: string;
+  [UserResponse.mobileNumber]: string;
   [UserResponse.oAuthIds]: UserOAuth;
   [UserResponse._isSocialLogin]: boolean;
   [UserResponse.isCommercialSellerRequested]: boolean;
 }
 // [AddressType.primary]:{}
+
+export interface UserCompany {
+  [UserResponse.companyName]: string;
+  [UserResponse.websiteUrl]: string;
+  [UserResponse.companyLogo]: string;
+  [UserResponse.taxNumber]: number;
+  [UserResponse.phoneNumber]: string;
+  [UserResponse.mobileNumber]: string;
+  [UserResponse.addresses]: UserAddress;
+  [UserResponse.bank]: UserBankDetail;
+
+
+}
 export interface UserAddress {
-  [AddressTypes.primary]?: AddressType;
-  [AddressTypes.secondary1]?: AddressType;
-  [AddressTypes.secondary2]?: AddressType;
-  [AddressTypes.billing]?: AddressType;
+  [AddressTypes.city]: string;
+  [AddressTypes.postalCode]: string;
+  [AddressTypes.streetNumber]: string;
+  [AddressTypes.houseNumber]: string;
+
+}
+export interface UserBankDetail {
+  [BankFields.bankName]?: string;
+  [BankFields.accountNumber]?: string;
+  [BankFields.ibanNumber]?: string;
+  [BankFields.currency]?: string;
 }
 export interface UserOAuth {
   [OAuthId.apple]: boolean;
@@ -110,7 +138,7 @@ export interface ErrorPropType {
 }
 
 export interface AuthState {
-  [AuthenticationState.user]: User | null;
+  [AuthenticationState.user]: User | undefined;
   [AuthenticationState.userRole]: string | null;
   [AuthenticationState.loading]: boolean;
   [AuthenticationState.error]: string | null;

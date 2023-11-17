@@ -1,6 +1,8 @@
 import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import SelectField from "./select-field";
 
 export default function InputField({
   value,
@@ -8,14 +10,16 @@ export default function InputField({
   textClassName,
   containerClassName,
   iconDisplay,
-  bgColor
+  bgColor,
 }: InputFieldProps) {
   const inputClasses = combineClasses(
-    `${bgColor ? "bg-[#F4F4F4]" : "bg-white"} w-full  text-sm  rounded-md  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px]`,
+    `${
+      bgColor ? "bg-[#F4F4F4]" : "bg-white"
+    } w-full  text-sm  rounded-md  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px]`,
     textClassName
   );
   const containerClasses = combineClasses("min-w-[274px]", containerClassName);
-console.log(bgColor)
+  const router = useRouter();
   return (
     <div className={containerClasses}>
       <div className="relative w-full ">
@@ -28,7 +32,11 @@ console.log(bgColor)
           onChange={(e) => handleChange(e.target.value)}
         />
         {iconDisplay && (
-          <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+          <div
+            className={`absolute top-1/2 ${
+              router.pathname.includes("dashboard") ? "left-0" : "right-3"
+            }  transform -translate-y-1/2`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="21"
@@ -64,6 +72,7 @@ console.log(bgColor)
           </div>
         )}
       </div>
+      
     </div>
   );
 }

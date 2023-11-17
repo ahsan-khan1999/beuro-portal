@@ -17,6 +17,9 @@ const CustomerDetails = () => {
     onSubmit,
     errors,
     handlePreviousClick,
+    deleteHandler,
+    renderModal,
+
   } = useCustomerDetail(true);
 
   return (
@@ -24,9 +27,10 @@ const CustomerDetails = () => {
       <DetailsCard>
         <DetailsData
           date={customerDetail?.date}
-          id={customerDetail?.id}
-          name={customerDetail?.name}
+          id={customerDetail?.refID}
+          name={customerDetail?.fullName}
           handlePreviousClick={handlePreviousClick}
+          handleDelete={deleteHandler}
         />
       </DetailsCard>
       <div className="flex mt-8">
@@ -41,6 +45,7 @@ const CustomerDetails = () => {
         />
         <SideCard customerDetail={customerDetail} />
       </div>
+      {renderModal()}
     </Layout>
   );
 };

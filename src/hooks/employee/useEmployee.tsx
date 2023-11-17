@@ -1,26 +1,46 @@
+import { FilterType } from "@/types";
 import { Employee } from "@/types/employee";
-import { employeesData } from "@/utils/static";
 import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../useRedux";
+import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
 
 const useEmployee = () => {
+  const [filter, setFilter] = useState<FilterType>({
+    location: "",
+    sortBy: "",
+    text: "",
+    type: ""
+  });
+  const { employee, lastPage, totalCount } = useAppSelector(state => state.employee)
+  const dispatch = useAppDispatch()
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
-  const totalItems = employeesData.length;
+  const totalItems = totalCount;
   const itemsPerPage = 10;
-
   useEffect(() => {
-    // Update rows for the current page
+    
+    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+
+      if (res?.payload) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        setCurrentPageRows(res?.payload?.Employee?.slice(startIndex, startIndex + itemsPerPage));
+      }
+    })
+  }, [dispatch])
+  useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      employeesData.slice(startIndex, startIndex + itemsPerPage)
-    );
+    setCurrentPageRows(employee?.slice(startIndex, startIndex + itemsPerPage));
+
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage };
+  const handleFilterChange = (filter: FilterType) => {
+    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } }))
+  };
+
+  return { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange };
 };
 
 export default useEmployee;

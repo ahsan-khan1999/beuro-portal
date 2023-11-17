@@ -42,7 +42,6 @@ export const AddPostPonedFollowUpFormField: GenerateFollowUpFormField = (
         inputType: "submit",
         className: "rounded-lg p-4 w-[174px] text-white hover:bg-none ",
         loading,
-        id:"Next"
       },
     },
   ];

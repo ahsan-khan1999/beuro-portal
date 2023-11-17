@@ -3,9 +3,9 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import FollowUpsTable from "@/components/follow-up";
+import { FollowUpsProps } from "@/types/follow-up";
 
-const FollowUps = ({ onClose, handleFollowUpsDetails }: { onClose: () => void; handleFollowUpsDetails:Function }) => {
-  console.log(handleFollowUpsDetails);
+const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
   
   return (
     <>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const DeleteConfirmation_1 = ({
   handleDelete,
@@ -15,6 +16,8 @@ const DeleteConfirmation_1 = ({
   modelHeading: string;
   subHeading: string;
 }) => {
+  const { modal: { data } } = useAppSelector(state => state.global)
+  
   return (
     <>
       <BaseModal
@@ -38,7 +41,7 @@ const DeleteConfirmation_1 = ({
           </p>
           <p className="text-[#4D4D4D] font-normal text-sm ">{subHeading}</p>
           <div className="mt-[10px] w-[260px] p-4 rounded-lg border border-[#EBEBEB] text-[#4B4B4B] text-base font-medium">
-            ID: &nbsp; A-0001
+            ID: &nbsp; {data?.refId}
           </div>
 
           <div className="flex gap-[33px] mt-[26px] mb-[38px]">

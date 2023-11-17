@@ -5,31 +5,32 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   register,
   loading,
   isUpdate,
-  handleUpdateCancel
+  handleUpdateCancel,
+  employeeDetails,
+  control
 ) => {
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex justify-between items-center gap-3",
         children: [
           {
             containerClass: "w-[67%] mb-0",
             label: {
               text: "Employ Name",
-              htmlFor: "employName",
+              htmlFor: "fullName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
+              className: `!p-4 !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+                }`,
               inputType: "text",
-              id: "employName",
-              name: "employName",
+              id: "fullName",
+              name: "fullName",
               placeholder: "Rahal",
               register,
               disabled: isUpdate,
@@ -44,9 +45,8 @@ id:"div-field",
             },
             field: {
               type: Field.input,
-              className: `!p-4 !!border-borderColor border border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
+              className: `!p-4 !!border-borderColor border border-dark focus:!border-primary ${!isUpdate && "!border-light"
+                }`,
               inputType: "text",
               id: "designation",
               name: "designation",
@@ -63,7 +63,7 @@ id:"div-field",
       containerClass: "mt-5",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-4",
         children: [
           {
@@ -75,9 +75,8 @@ id:"div-field",
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
+              className: `!p-4 !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+                }`,
               inputType: "text",
               id: "email",
               name: "email",
@@ -94,17 +93,15 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
-              inputType: "number",
+              type: Field.phone,
+              className: `!h-[54px]  !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+                }`,
               id: "phoneNumber",
               name: "phoneNumber",
-              placeholder: "+49 124354 2111",
-              register,
-
               disabled: isUpdate,
+              control,
+              country: "ch",
+              value: employeeDetails && employeeDetails?.phoneNumber
             },
           },
           {
@@ -115,16 +112,17 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
-              inputType: "number",
+              type: Field.phone,
+              className: `!h-[54px] !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+                }`,
               id: "mobileNumber",
               name: "mobileNumber",
-              placeholder: "+49 124354 2111",
-              register,
               disabled: isUpdate,
+              control,
+              country: "ch",
+              value: employeeDetails && employeeDetails?.mobileNumber
+
+
             },
           },
         ],
@@ -135,20 +133,18 @@ id:"div-field",
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Cancel",
               inputType: "button",
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
-              loading,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${isUpdate && "hidden"
+                }`,
               onClick: handleUpdateCancel,
             },
           },
@@ -156,12 +152,11 @@ id:"button",
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Save Changes",
               inputType: "submit",
-              className: `rounded-lg px-4 py-[10px] w-fit h-auto  text-white hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
+              className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },

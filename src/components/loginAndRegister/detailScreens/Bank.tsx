@@ -15,15 +15,16 @@ const Bank = ({
   control,
   currentFormStage,
   setCurrentFormStage,
+  user
 }: FormComponentProps) => {
   const { loading } = useAppSelector((state) => state.auth);
-  console.log(onSubmit);
 
   const fields = detailBankFormField(
     register,
     loading,
     control,
-    setCurrentFormStage
+    user,
+    setCurrentFormStage,
   );
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>

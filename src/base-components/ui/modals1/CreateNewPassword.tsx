@@ -8,6 +8,7 @@ const CreateNewPassword = ({ onClose, passwordSetSuccessfully }: { onClose: () =
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } =
     useEmployeeCreateNewPassword(passwordSetSuccessfully);
+    
   return (
     <>
       <BaseModal
@@ -23,7 +24,7 @@ const CreateNewPassword = ({ onClose, passwordSetSuccessfully }: { onClose: () =
           </p>
 
           <div className="w-[380px] py-4 pl-[41px] border border-[#BFBFBF] rounded-lg mb-5">
-            Testuser123@gmail.com
+            {/* {email} */}
           </div>
           <Form
             formFields={fields}

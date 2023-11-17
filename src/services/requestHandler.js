@@ -34,10 +34,13 @@ const SERVICE_URLS = {
   invoice: "/invoice",
   contactSupport: "/contact-support",
   employee: "/employee",
+  createEmployee: "/user/create-manager",
+  updateEmployee: "/employee/profile",
+  updateEmployeePassword: "/employee/password",
   service: "/service",
   offerService: "/offer-service",
-  sendEmailOtp: "/otp/send-verify-email-link"
-
+  sendEmailOtp: "/otp/send-verify-email-link",
+  followUp: "/followup"
 
 };
 
@@ -104,9 +107,9 @@ const createCustomer = (data) =>
   post(SERVICE_URLS.customer, data, { feature: featureConstants.login });
 
 const updateCustomer = (data) =>
-  put(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.customer + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteCustomer = (data) =>
-  del(SERVICE_URLS.customer, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.customer + `/${data?.id}`, {}, { feature: featureConstants.login });
 const readLead = (data) =>
   get(SERVICE_URLS.lead, data, { feature: featureConstants.login });
 
@@ -184,16 +187,20 @@ const updateContactSupport = (data) =>
 const deleteContactSupport = (data) =>
   del(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
 
-const readEmployee = (data) =>
-  get(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+const readEmployee = (params) =>
+  get(SERVICE_URLS.employee, params, { feature: featureConstants.login }, { detail: false });
+const readEmployeeDetail = (params) =>
+  get(SERVICE_URLS.employee, params, { feature: featureConstants.login }, { detail: true });
 
 const createEmployee = (data) =>
-  post(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+  post(SERVICE_URLS.createEmployee, data, { feature: featureConstants.login });
 
 const updateEmployee = (data) =>
-  put(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.updateEmployee + `/${data?.id}`, data, { feature: featureConstants.login });
+const updateEmployeePassword = (data) =>
+  patch(SERVICE_URLS.updateEmployeePassword + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteEmployee = (data) =>
-  del(SERVICE_URLS.employee, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.employee + `/${data}`, {}, { feature: featureConstants.login });
 
 const readService = (data) =>
   get(SERVICE_URLS.service, data, { feature: featureConstants.login });
@@ -217,6 +224,19 @@ const updateOfferService = (data) =>
 const deleteOfferService = (data) =>
   del(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
 
+const readFollowUp = (params) =>
+  get(SERVICE_URLS.followUp, params, { feature: featureConstants.login }, { detail: false });
+
+const readFollowUpDetail = (params) =>
+  get(SERVICE_URLS.followUp, params, { feature: featureConstants.login }, { detail: true });
+
+const createFollowUp = (data) =>
+  post(SERVICE_URLS.followUp, data, { feature: featureConstants.login });
+
+const updateFollowUp = (data) =>
+  put(SERVICE_URLS.followUp + `/${data?.id}`, data, { feature: featureConstants.login });
+const deleteFollowUp = (data) =>
+  del(SERVICE_URLS.followUp + `/${data?.id}`, {}, { feature: featureConstants.login });
 const apiServices = {
   login,
   singUp,
@@ -286,6 +306,13 @@ const apiServices = {
   updateOfferService,
   deleteOfferService,
   readCustomerDetail,
-  sendEmailOtp
+  sendEmailOtp,
+  readEmployeeDetail,
+  updateEmployeePassword,
+  readFollowUp,
+  readFollowUpDetail,
+  createFollowUp,
+  updateFollowUp,
+  deleteFollowUp
 };
 export default apiServices;

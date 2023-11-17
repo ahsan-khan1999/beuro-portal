@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   detailBankValidation,
@@ -15,6 +15,8 @@ import { DetailScreensStages } from "@/enums/auth";
 import Company from "@/components/loginAndRegister/detailScreens/Company";
 import Bank from "@/components/loginAndRegister/detailScreens/Bank";
 import Location from "@/components/loginAndRegister/detailScreens/Location";
+import { isJSON } from "@/utils/functions";
+import { getUser } from "@/utils/auth.util";
 
 const FORM_COMPONENTS = {
   [DetailScreensStages.CompanyDetails]: Company,
@@ -23,10 +25,9 @@ const FORM_COMPONENTS = {
 };
 export default function useDetail() {
   const { t: translate } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
+  const user = isJSON(getUser());
   const dispatch = useAppDispatch();
-
-  const [progress, setProgress] = useState(20);
+  
   const [currentFormStage, setCurrentFormStage] = useState<DetailScreensStages>(
     DetailScreensStages.CompanyDetails
   );
@@ -56,10 +57,14 @@ export default function useDetail() {
     setValue,
     setError,
     trigger,
-    
-    
+    reset,
+
     formState: { errors },
   } = formMethodsConfig[currentFormStage];
+
+  useEffect(() => {
+    if (user?.company?.logo) setValue("logo",user?.company?.logo)
+  }, [])
 
   const CurrentFormComponent = FORM_COMPONENTS[currentFormStage];
 
@@ -77,16 +82,15 @@ export default function useDetail() {
     // nextFormHandler();
   };
   const backStage = getBackFormStage(currentFormStage);
-   const nextStage = getNextFormStage(currentFormStage);
+  const nextStage = getNextFormStage(currentFormStage);
 
-   const nextFormHandler = () => {
+  const nextFormHandler = () => {
     const nextStage = getNextFormStage(currentFormStage);
 
     if (nextStage) {
-      setProgress((prev) => prev + 40);
       setCurrentFormStage(nextStage);
     }
-     else {
+    else {
       router.pathname = "/dashboard";
       updateQuery(router, "en");
     }
@@ -104,9 +108,9 @@ export default function useDetail() {
     nextFormHandler,
     CurrentFormComponent,
     currentFormStage,
-    progress,
     backStage,
     nextStage,
     setCurrentFormStage,
+    user
   };
 }

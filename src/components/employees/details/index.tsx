@@ -8,7 +8,7 @@ import EmployeeForm from "../EmployeeForm";
 
 const EmploysDetails = () => {
   const {
-    employeeDetail,
+    employeeDetails,
     handlePasswordReset,
     renderModal,
     isUpdate,
@@ -17,6 +17,7 @@ const EmploysDetails = () => {
     onSubmit,
     handleSubmit,
     errors,
+    deleteHandler
   } = useEmployeeDetail(true);
 
   return (
@@ -24,18 +25,18 @@ const EmploysDetails = () => {
       <Layout>
         <DetailsCard>
           <DetailsData
-            date={employeeDetail?.createdOn}
-            id={employeeDetail?.id}
-            name={employeeDetail?.name}
+            date={employeeDetails?.creationDate}
+            id={employeeDetails?.employeeID}
+            name={employeeDetails?.createdBy}
             isUpdate={isUpdate}
+            handleDelete={deleteHandler}
           />
         </DetailsCard>
         <div className="flex mt-8">
           <EmployeeForm
             isUpdate={isUpdate}
-            handlePasswordReset={handlePasswordReset}
             setIsUpdate={setIsUpdate}
-            employeeDetail={employeeDetail}
+            handlePasswordReset={handlePasswordReset}
             fields={fields}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}

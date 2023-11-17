@@ -52,36 +52,30 @@ export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
     [CompanyFields.name]: yup.string().required("tdguy"),
     [CompanyFields.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.websiteUrl]: yup
       .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mwstNumber]: yup
       .number()
-      .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),
-    [CompanyFields.companyLogo]: yup.object(),
+    [CompanyFields.companyLogo]: yup.string().required(),
   });
 };
 export const detailLocationValidation = (translate: Function) => {
   return yup.object().shape({
     [LocationFields.streetNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.houseNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.postalCode]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.city]: yup
       .string()
@@ -97,12 +91,10 @@ export const detailBankValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [BankFields.accountNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [BankFields.ibanNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
   });
 };

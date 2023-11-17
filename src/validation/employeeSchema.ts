@@ -22,13 +22,11 @@ export const generateEmployDetailsValidation = (translate: Function) => {
       .required(translate("validation required")),
 
     [EmployDetailsFields.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validation required")),
 
     [EmployDetailsFields.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validation required")),
   });
 };
@@ -55,6 +53,10 @@ export const generateEmployeePasswordResetValidationSchema = (
   translate: Function
 ) => {
   return yup.object().shape({
+    [employeePasswordResetFields.yourPassword]: yup
+      .string()
+      .required(translate("validation required"))
+      .min(6, translate("validationMessages.string.min")),
     [employeePasswordResetFields.newPassword]: yup
       .string()
       .required(translate("validation required"))
@@ -62,7 +64,7 @@ export const generateEmployeePasswordResetValidationSchema = (
 
     [employeePasswordResetFields.confirmNewPassword]: yup
       .string()
-      .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .oneOf([yup.ref("newPassword")], translate("validationMessages.mixed.oneOf"))
       .required(translate("validationMessages.required")),
   });
 };

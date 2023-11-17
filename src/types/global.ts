@@ -1,4 +1,3 @@
-// import { ModalType } from "@/enums";
 
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
@@ -57,8 +56,8 @@ export interface OptionsFieldProps {
   dropDownIconClassName: string;
   isOpen: boolean;
   setIsOpen: SetStateAction<any>;
+  containerClassName?: string;
 }
-
 
 export interface GlobalApiResponseType {
   [Header.header]: {
@@ -69,6 +68,22 @@ export interface GlobalApiResponseType {
     [ApiResponse.success]: boolean;
     [ApiResponse.code]: number;
     [ApiResponse.message]: string;
-    [Header.data]: Record<string, any>
+    [Header.data]: Record<string, any>;
   };
+}
+export interface CreateSuccessProps {
+  onClose: () => void;
+  modelHeading: string;
+  modelSubHeading: string;
+  routeHandler: () => void;
+
+}
+export interface UpdateSuccessProps {
+  onClose: () => void;
+  modelHeading: string;
+  modelSubHeading: string;
+  cancelHandler: () => void;
+  confirmHandler: () => void;
+  loading:boolean
+
 }

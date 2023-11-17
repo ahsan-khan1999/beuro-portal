@@ -8,7 +8,7 @@ import React from "react";
 
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
     const defaultClassName = "mt-[30px]  ";
-    const { fields, onSubmit, handleSubmit, errors } = useCustomerDetail(false);
+    const { fields, onSubmit, handleSubmit, errors,renderModal } = useCustomerDetail(false);
 
     return (
         <FormCard>
@@ -25,6 +25,7 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
                 errors={errors}
                 className={`${defaultClassName}`}
             />
+            {renderModal()}
         </FormCard>
     );
 };

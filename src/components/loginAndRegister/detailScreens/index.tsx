@@ -7,7 +7,6 @@ const DetailScreens = () => {
     handleSubmit,
     nextFormHandler,
     onSubmit,
-    progress,
     register,
     setError,
     setValue,
@@ -15,6 +14,7 @@ const DetailScreens = () => {
     watch,
     currentFormStage,
     setCurrentFormStage,
+    user
   } = useDetail();
 
   return (
@@ -31,6 +31,7 @@ const DetailScreens = () => {
       errors={errors}
       nextFormHandler={nextFormHandler}
       setError={setError}
+      user={user}
     />
   );
 };

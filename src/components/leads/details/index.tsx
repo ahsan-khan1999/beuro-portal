@@ -21,7 +21,6 @@ const LeadsDetails = () => {
   };
 
   const leadDeleteHandler = () => {
-    console.log("clickde");
     dispatch(updateModalType(ModalType.CONFIRM_DELETION));
   };
 
@@ -49,6 +48,7 @@ const LeadsDetails = () => {
         onClose={onClose}
         modelHeading="Are you sure you want to delete this Lead?"
         routeHandler={routeHandler}
+        loading={false}
       />
     ),
   };

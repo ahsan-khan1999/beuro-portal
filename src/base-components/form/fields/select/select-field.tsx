@@ -14,7 +14,6 @@ export const SelectField = ({
   className,
   disabled
 }: SelectProps) => {
-  console.log(defaultValue,"defaultValue");
   
   return (
     <Controller

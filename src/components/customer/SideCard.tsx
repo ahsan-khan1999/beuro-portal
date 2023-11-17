@@ -28,22 +28,22 @@ const SideCard = ({ customerDetail }: { customerDetail: Customers }) => {
         </div>
         <div className='flex flex-col space-y-4'>
           <span>
-            {customerDetail?.lead.id}
+            {customerDetail?.lead?.id}
           </span>
           <span>
-            {customerDetail?.lead.name}
+            {customerDetail?.lead?.name}
 
           </span>
           <span>
-            {customerDetail?.lead.source}
+            {customerDetail?.lead?.source}
 
           </span>
           <span>
-            {customerDetail?.lead.status}
+            {customerDetail?.lead?.status}
 
           </span>
           <span>
-            {customerDetail?.lead.expires}
+            {customerDetail?.lead?.expires}
 
           </span>
         </div>

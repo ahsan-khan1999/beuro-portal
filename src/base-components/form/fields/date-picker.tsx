@@ -33,7 +33,7 @@ export const DatePicker = ({
 
         {svg && (
           <span
-            className={`mr-3 absolute  left-4 ${
+            className={`mr-3 absolute  left-4 z-50 ${
               (inputFocus && "tests") || "test"
             }`}
             dangerouslySetInnerHTML={{ __html: svg }}
@@ -41,7 +41,7 @@ export const DatePicker = ({
         )}
 
         <input
-          type="date"
+          type="datetime-local"
           // value={formatDateString(value)}
           defaultValue={formatDateString(value)}
           id={id}

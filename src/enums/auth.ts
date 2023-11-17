@@ -8,7 +8,10 @@ export enum UserResponse {
   id = "id",
   role = "role",
   email = "email",
-  addresses = "addresses",
+  company = "company",
+  bank = "bankDetails",
+  employee = "employee",
+  addresses = "address",
   isProfileComplete = "isProfileComplete",
   isEmailVerified = "isEmailVerified",
   isPhoneVerified = "isPhoneVerified",
@@ -20,15 +23,17 @@ export enum UserResponse {
   username = "username",
   dob = "dob",
   phoneNumber = "phoneNumber",
+
   oAuthIds = "oAuthIds",
   _isSocialLogin = "_isSocialLogin",
   isCommercialSellerRequested = "isCommercialSellerRequested",
   companyName = "companyName",
   companyNumber = "companyNumber",
   taxNumber = "taxNumber",
-  websiteUrl = "websiteLink",
-  companyLogo = "logoLink",
+  websiteUrl = "website",
+  companyLogo = "logo",
   notificationSettings = "notificationSettings",
+  mobileNumber = "mobileNumber"
 }
 
 export enum LoginFields {
@@ -40,9 +45,9 @@ export enum CompanyFields {
   name = "companyName",
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
-  websiteUrl = "websiteAddress",
-  mwstNumber = "mwstNumber",
-  companyLogo = "comapnyLogo",
+  websiteUrl = "website",
+  mwstNumber = "taxNumber",
+  companyLogo = "logo",
 }
 export enum LocationFields {
   streetNumber = "streetNumber",
@@ -68,10 +73,11 @@ export enum Address {
   emailAddress = "emailAddress",
 }
 export enum AddressTypes {
-  primary = "primary",
-  secondary1 = "secondary1",
-  secondary2 = "secondary2",
-  billing = "billing",
+  streetNumber = "streetNumber",
+  postalCode = "postalCode",
+  city = "city",
+  houseNumber = "houseNumber",
+
 }
 export enum Header {
   header = "headers",
