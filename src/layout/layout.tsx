@@ -11,13 +11,11 @@ import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
 
 export const Layout = ({ children }: MyComponentProp) => {
-  // const { user } = useAppSelector(state => state.auth)
-  // const dispatch = useAppDispatch()
-  // useEffect(() => {
-  //   console.log("login");
-    
-    // if(!user) useGlobalUser(user, dispatch)
-  // }, [])
+  const { user } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if(!user) useGlobalUser(user, dispatch)
+  }, [])
 
   return (
     <>

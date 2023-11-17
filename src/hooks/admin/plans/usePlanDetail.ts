@@ -67,7 +67,6 @@ export default function usePlanDetail(stage: boolean) {
   useEffect(() => {
     if (typeof Number(id) == "number") {
       let plan = plansAdminData.filter((item) => item.id == Number(id))[0];
-      console.log(plan, "plan");
 
       if (plan) {
         reset({
@@ -91,7 +90,6 @@ export default function usePlanDetail(stage: boolean) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data, "submit");
   };
   const handlePreviousClick = () => {
     router.push("/admin/support-request");

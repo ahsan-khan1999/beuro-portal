@@ -10,6 +10,7 @@ import offerSlice from "../slices/offer/offerSlice";
 // import userAccountSlice from "../slices/user/user-account-slice";
 import EmployeeSlice from '../slices/employee/emplyeeSlice';
 import serviceSlice from "../slices/service/serviceSlice";
+import followUp from "../slices/followUp/followUp";
 
 const reducer = {
   auth,
@@ -24,12 +25,7 @@ const reducer = {
   contactSupport: contactSupportSlice,
   employee: EmployeeSlice,
   service: serviceSlice,
-
-
-
-
-
-
+  followUp: followUp,
 
 };
 export default reducer;

@@ -1,6 +1,7 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
 import React from "react";
+import { combineClasses } from "@/utils/utility";
 
 export default function SelectField({
   title,
@@ -12,19 +13,16 @@ export default function SelectField({
   isOpen,
   dropDownIconClassName,
   setIsOpen,
+  containerClassName,
 }: OptionsFieldProps) {
+  const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50  mx-3 relative flex justify-center items-center my-auto`;
+  const containerClasses = combineClasses(defaultClasses, containerClassName);
   return (
     <>
-      <div
-        className={`border-b-[${border}px] border-slate-gray border-opacity-50  mx-3 relative flex my-auto`}
-      >
+      <div className={containerClasses}>
         <div
           className="flex  justify-between cursor-pointer"
-          onClick={() => {
-            return !isOpen || isOpen !== label
-              ? setIsOpen(label)
-              : setIsOpen("");
-          }}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span className="text-dark   me-2">{label}</span>
           <DropDownNonFillIcon
@@ -34,8 +32,8 @@ export default function SelectField({
           />
         </div>
 
-        {isOpen == label && (
-          <div className="bg-white flex-col absolute top-6 w-32  border-[1px] border-lightGray rounded-lg p-2">
+        {isOpen && (
+          <div className="bg-white flex-col absolute top-[36px] w-32  border-[1px] border-lightGray rounded-lg p-2">
             <div className="flex-col space-y-2">
               {options.map((item, key) => (
                 <div

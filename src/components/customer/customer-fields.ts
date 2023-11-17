@@ -280,7 +280,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       divField.children.splice(fieldIndex + 2, 0, companyNameField);
     }
   }
-  console.log(formField, "formField");
 
   return formField
 };

@@ -41,7 +41,7 @@ export const DatePicker = ({
         )}
 
         <input
-          type="date"
+          type="datetime-local"
           // value={formatDateString(value)}
           defaultValue={formatDateString(value)}
           id={id}

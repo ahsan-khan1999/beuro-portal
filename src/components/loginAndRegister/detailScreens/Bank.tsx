@@ -18,7 +18,6 @@ const Bank = ({
   user
 }: FormComponentProps) => {
   const { loading } = useAppSelector((state) => state.auth);
-  console.log(onSubmit);
 
   const fields = detailBankFormField(
     register,

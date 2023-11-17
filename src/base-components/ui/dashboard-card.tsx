@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
+import Image from "next/image";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 interface DashboardCard {
+  icon: string | StaticImport;
+  alt: string;
   backgroundColor: string;
   title: string;
   id: string;
@@ -8,6 +12,8 @@ interface DashboardCard {
   chartPointColor: string;
 }
 const DashboardCard = ({
+  icon,
+  alt,
   backgroundColor,
   title,
   id,
@@ -33,11 +39,13 @@ const DashboardCard = ({
     if (existingChart) {
       existingChart.destroy();
     }
+    //@ts-expect-error
     const ctx = document.getElementById(id).getContext("2d");
 
     const wavesChart2 = new Chart(ctx, {
       type: "line",
       data: datatest2,
+      //@ts-expect-error
       fill: true,
       options: {
         plugins: {
@@ -65,6 +73,7 @@ const DashboardCard = ({
   return (
     <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
       <div className="flex items-center mb-8">
+        <Image src={icon} alt={alt} className="mr-3" />
         <h3 className="text-xl text-white font-semibold">{title}</h3>
       </div>
       <div className="flex items-center justify-between">

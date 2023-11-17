@@ -13,7 +13,7 @@ export const useEditOfferDetails = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
 
-  const schema = generateOfferDetailsValidationSchema(translate,3);
+  const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
     handleSubmit,

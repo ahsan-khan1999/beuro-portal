@@ -23,6 +23,8 @@ export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  // @ts-expect-error
+
   const fields = AddRemarksFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
  

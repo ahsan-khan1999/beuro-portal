@@ -13,7 +13,6 @@ export const DetailScreensCard = ({
   children,
   currentFormStage,
 }: detailScreenCardsLayout) => {
-  console.log(currentFormStage);
 
   return (
     <div className="flex flex-col justify-center min-h-screen mx-10">

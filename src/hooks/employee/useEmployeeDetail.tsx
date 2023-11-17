@@ -1,7 +1,6 @@
 import { Employee } from "@/types/employee";
-import { employeesData } from "@/utils/static";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -13,11 +12,20 @@ import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { employeeDetailsFormField } from "@/components/employees/fields/employee-fields";
+import { createEmployee, deleteEmployee, readEmployeeDetail, setEmployeeDetails, updateEmployee } from "@/api/slices/employee/emplyeeSlice";
+import LinkSendToEmail from "@/base-components/ui/modals1/LinkSendToEmail";
+import { updateQuery } from "@/utils/update-query";
+import { CustomerPromiseActionType } from "@/types/customer";
+import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useEmployeeDetail = (stage: boolean) => {
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
+  const { employeeDetails } = useAppSelector((state) => state.employee);
+
+  const router = useRouter();
 
   // Function for close the modal
   const onClose = () => {
@@ -25,35 +33,16 @@ const useEmployeeDetail = (stage: boolean) => {
   };
 
   const handlePasswordReset = () => {
-    dispatch(updateModalType(ModalType.PASSWORD_RESET));
+    dispatch(updateModalType({ type: ModalType.PASSWORD_RESET }));
   };
 
   const passwordResetSuccessfully = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
-
   // METHOD FOR HANDLING THE MODALS
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_RESET]: (
-      <PasswordReset
-        onClose={onClose}
-        passwordResetSuccessfully={passwordResetSuccessfully}
-      />
-    ),
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
-      <PasswordChangeSuccessfully onClose={onClose} />
-    ),
-  };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const router = useRouter();
-  // @ts-expect-error
-  const [employeeDetail, setEmployeeDetail] = useState<Employee>({});
-  const { loading } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.employee);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
   const id = router.query.employee;
   const schema = generateEmployDetailsValidation(translate);
@@ -63,33 +52,108 @@ const useEmployeeDetail = (stage: boolean) => {
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
+    control
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
-    if (typeof Number(id) == "number") {
-      let employee = employeesData.filter((item) => item.id === id)[0];
-      if (employee) {
-        reset(employee);
-      }
-      setEmployeeDetail(employee);
+    if (id) {
+      dispatch(readEmployeeDetail({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
+        dispatch(setEmployeeDetails(res.payload))
+      })
     }
   }, [id]);
+  useMemo(() => {
+    if (employeeDetails && stage) reset({ ...employeeDetails })
+  }, [employeeDetails?.id]);
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);
   };
+  const handleUpdateSuccess = () => {
+    router.pathname = "/employees"
+    updateQuery(router, router.locale as string)
+  };
+  const handleCreateSuccess = (email: string) => {
 
+    dispatch(updateModalType({ type: ModalType.EMPLOYEE_SUCCESS, data: email }));
+
+  }
+  const deleteHandler = () => {
+
+    dispatch(updateModalType({
+      type: ModalType.CONFIRM_DELETION,
+      data: { refId: employeeDetails?.employeeID, id: employeeDetails?.id }
+
+    }
+    ));
+  };
+  const handleDelete = () => {
+    dispatch(updateModalType({
+      type:
+        ModalType.INFO_DELETED
+    }));
+  };
+  const routeHandler = async () => {
+    const res = await dispatch(deleteEmployee({ data: employeeDetails, router, setError, translate }))
+    if (res?.payload) {
+      onClose()
+      router.pathname = "/employees"
+      updateQuery(router, router.locale as string)
+    }
+  };
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CONFIRM_DELETION]: (
+      <DeleteConfirmation_1
+        onClose={onClose}
+        handleDelete={handleDelete}
+        modelHeading="Please confirm Employee ID"
+        subHeading="Employee ID"
+      />
+    ),
+    [ModalType.INFO_DELETED]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading="Are you sure you want to delete this Employee?"
+        routeHandler={routeHandler}
+        loading={loading}
+      />
+    ),
+    [ModalType.PASSWORD_RESET]: (
+      <PasswordReset
+        onClose={onClose}
+        passwordResetSuccessfully={passwordResetSuccessfully}
+      />
+    ),
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
+      <PasswordChangeSuccessfully onClose={onClose} />
+    ),
+
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
   const fields = employeeDetailsFormField(
     register,
     loading,
     isUpdate,
-    handleUpdateCancel
+    handleUpdateCancel,
+    employeeDetails,
+    control
   );
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data, "submit");
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    let res;
+    if (!stage) {
+      res = await dispatch(createEmployee({ data, router, setError, translate }))
+      if (res.payload) handleCreateSuccess(data?.email)
+    } else if (stage) {
+      res = await dispatch(updateEmployee({ data, router, setError, translate }))
+      if (res.payload) handleUpdateSuccess()
+
+    }
   };
 
   const handlePreviousClick = () => {
@@ -97,7 +161,7 @@ const useEmployeeDetail = (stage: boolean) => {
   };
 
   return {
-    employeeDetail,
+    employeeDetails,
     handlePasswordReset,
     renderModal,
     isUpdate,
@@ -108,6 +172,7 @@ const useEmployeeDetail = (stage: boolean) => {
     errors,
     handlePreviousClick,
     handleUpdateCancel,
+    deleteHandler
   };
 };
 export default useEmployeeDetail;

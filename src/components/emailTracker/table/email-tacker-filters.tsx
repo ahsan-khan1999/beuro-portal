@@ -3,7 +3,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import React, { useState } from "react";
 
 export default function EmailTrackerFilters() {
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex">

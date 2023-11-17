@@ -15,7 +15,6 @@ const FollowUpDetails = ({
   handleAddRemarks,
   status,
 }: FollowUpDetailsProps) => {
-  console.log(status);
 
   const detailsData: details[] = [
     {

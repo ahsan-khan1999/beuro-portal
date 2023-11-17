@@ -62,8 +62,7 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            console.log(data,"data at submit");
-            
+            let apiData={...data}
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
@@ -81,11 +80,10 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            console.log("hey");
             
             let apiData = { ...data }
             //@ts-expect-error 
-            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
             //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.updateCustomer(apiData);

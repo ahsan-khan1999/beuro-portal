@@ -1,10 +1,7 @@
-import { FieldValue, FieldValues } from 'react-hook-form';
-// import { ModalType } from "@/enums";
 
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { SetStateAction } from "react";
-import { FieldValue, SubmitHandler } from "react-hook-form";
 
 export interface GlobalState {
   loading: boolean;
@@ -57,10 +54,10 @@ export interface OptionsFieldProps {
   handleChange: (value: string) => void;
   options: string[];
   dropDownIconClassName: string;
-  isOpen: string;
+  isOpen: boolean;
   setIsOpen: SetStateAction<any>;
+  containerClassName?: string;
 }
-
 
 export interface GlobalApiResponseType {
   [Header.header]: {
@@ -71,7 +68,7 @@ export interface GlobalApiResponseType {
     [ApiResponse.success]: boolean;
     [ApiResponse.code]: number;
     [ApiResponse.message]: string;
-    [Header.data]: Record<string, any>
+    [Header.data]: Record<string, any>;
   };
 }
 export interface CreateSuccessProps {

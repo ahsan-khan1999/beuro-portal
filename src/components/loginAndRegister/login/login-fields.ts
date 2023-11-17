@@ -238,7 +238,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company.taxNumber
+              value: user && user?.company.taxNumber?.toString()
             },
           },
           {
@@ -284,7 +284,6 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
   user,
   setCurrentFormStage
 ) => {
-  console.log(user);
 
   const formField: FormField[] = [
     {
@@ -468,6 +467,7 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 ) => {
   const formField: FormField[] = [
     {
+      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",

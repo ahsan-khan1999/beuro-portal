@@ -5,7 +5,6 @@ const TableRows = ({
   currentPageRows,
   handleCustomerDetail,
 }: AllCustomersTable) => {
-  console.log(handleCustomerDetail);
   
   return (
     <div>

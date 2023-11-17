@@ -3,6 +3,7 @@ import useFilter from "@/hooks/filter/hook";
 import React from "react";
 
 export default function AllLeadsFilter() {
+  //@ts-expect-error
   const { filter, setFilter } = useFilter();
   return (
     <div className="flex">

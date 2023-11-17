@@ -11,7 +11,11 @@ export default function CustomerFilter({ filter, setFilter }: { filter: FilterTy
   const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
   return (
     <div className="flex">
-      <InputField handleChange={(value) => setFilter({ ...filter, ["text"]: value })} value={filter.text} iconDisplay={true} />
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+      />
       <SelectField
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value=""
@@ -29,7 +33,8 @@ export default function CustomerFilter({ filter, setFilter }: { filter: FilterTy
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
         handleItemSelected={handleItemSelected}
-        typeList={typeList} />
+        typeList={typeList}
+      />
     </div>
   );
 }

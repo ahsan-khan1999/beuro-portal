@@ -27,7 +27,6 @@ export default function useDetail() {
   const { t: translate } = useTranslation();
   const user = isJSON(getUser());
   const dispatch = useAppDispatch();
-  console.log(user);
   
   const [currentFormStage, setCurrentFormStage] = useState<DetailScreensStages>(
     DetailScreensStages.CompanyDetails
@@ -62,7 +61,6 @@ export default function useDetail() {
 
     formState: { errors },
   } = formMethodsConfig[currentFormStage];
-  console.log(user, "user");
 
   useEffect(() => {
     if (user?.company?.logo) setValue("logo",user?.company?.logo)

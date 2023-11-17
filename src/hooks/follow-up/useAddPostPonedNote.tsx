@@ -23,6 +23,7 @@ export const useAddPostPonedNote = (handleFollowUpsDetails:Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  // @ts-expect-error
   const fields = AddPostPonedFollowUpFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));

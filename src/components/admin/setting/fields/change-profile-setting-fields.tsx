@@ -5,10 +5,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
   (register, loading, control) => {
     const formField: FormField[] = [
       {
+
         field: {
           type: Field.div,
           className: "flex ",
-          id:"div-field",
+          id: "div-field",
 
           children: [
             {
@@ -26,12 +27,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
               field: {
                 type: Field.div,
                 className: "",
-                id:"div-field",
+                id: "div-field",
                 children: [
                   {
                     containerClass: "w-full relative",
                     field: {
                       type: Field.div,
+                      id: "paymentdiv",
+
                       className: "grid grid-cols-2 gap-x-6 ",
                       children: [
                         {
@@ -83,7 +86,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     field: {
                       type: Field.div,
                       className: "flex gap-x-4 items-center relative w-full ",
-                id:"div-field",
+                      id: "div-field",
 
                       children: [
                         {
@@ -93,6 +96,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             text: "Update Password",
                             containerClassName:
                               "text-[14px] text-[#393939] font-normal ",
+                            id: "paymentdiv",
+
                           },
                         },
                         {
@@ -100,6 +105,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             type: Field.span,
                             containerClassName:
                               " absolute top-3 bg-[#BFBFBF] w-[87%]  mx-auto h-[1px]",
+                            id: "paymentdiv",
+
                           },
                         },
                       ],
@@ -109,6 +116,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     containerClass: "w-full relative mb-7",
                     field: {
                       type: Field.div,
+                      id: "paymentdiv",
+
                       className: "grid grid-cols-2 gap-x-6 ",
                       children: [
                         {
@@ -192,6 +201,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       className:
                         "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
+                      id: "paymentdiv",
+
                     },
                   },
                 ],

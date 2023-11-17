@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 import { Modals } from "@/enums/follow-up";
+import { createFollowUp } from "@/api/slices/followUp/followUp";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -17,6 +18,8 @@ export const useAddFollowUp = (
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+  const { customer } = useAppSelector((state) => state.customer);
+
 
   const schema = generateAddFollowUpValidation(translate);
   const {
@@ -42,11 +45,14 @@ export const useAddFollowUp = (
     register,
     loading,
     control,
-    handleModalPop
+    customer,
+    handleModalPop,
   );
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    handleFollowUps();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const response = await dispatch(createFollowUp({ data, router, setError, translate }));
+    if (response?.payload) handleFollowUps();
+
+
   };
   return {
     fields,
@@ -55,5 +61,6 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
+    customer
   };
 };

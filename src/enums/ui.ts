@@ -46,7 +46,7 @@ export enum ModalType {
   DELETE_MAIL,
   CREATE_SUCCESS,
   UPDATE_SUCCESS,
-
+  EMPLOYEE_SUCCESS
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

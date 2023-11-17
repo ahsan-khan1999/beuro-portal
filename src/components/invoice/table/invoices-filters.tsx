@@ -11,7 +11,7 @@ export default function InvoicesFilters() {
     overdue: false,
     paid: false,
   });
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const checkbox:CheckBoxType[] = [
     { label: "Open", type: "open" },
     { label: "Overdue", type: "overdue" },

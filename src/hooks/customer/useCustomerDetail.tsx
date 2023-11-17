@@ -67,10 +67,14 @@ export default function useCustomerDetail(stage: boolean) {
   const routeHandler = () => {
     dispatch(deleteCustomer({ customerDetails, router, setError, translate }))
   };
+  const changeRouterHandler = () => {
+    router.pathname = "/customers"
+    updateQuery(router, router.locale as string)
+    onClose()
+  };
 
 
   const renderModal = () => {
-    console.log(MODAL_CONFIG);
 
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -98,7 +102,7 @@ export default function useCustomerDetail(stage: boolean) {
     }
   }, [id]);
   useMemo(() => {
-    if (customerDetails) reset({ ...customerDetails })
+    if (customerDetails && stage) reset({ ...customerDetails })
   }, [customerDetails.id]);
 
   const handleUpdateCancel = () => {
@@ -118,6 +122,7 @@ export default function useCustomerDetail(stage: boolean) {
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
     let res;
     if (!stage) {
       res = await dispatch(createCustomer({ data, router, setError, translate }))
@@ -135,6 +140,9 @@ export default function useCustomerDetail(stage: boolean) {
       router.pathname = "/customers",
         router.query = {}
       updateQuery(router, router.locale as string)
+    }else{
+      onClose()
+
     }
   }
   const MODAL_CONFIG: ModalConfigType = {
@@ -159,14 +167,14 @@ export default function useCustomerDetail(stage: boolean) {
         onClose={onClose}
         modelHeading="Customer Created Successful "
         modelSubHeading="Thanks for creating Customer we are happy to have you. "
-        routeHandler={routeHandler}
+        routeHandler={changeRouterHandler}
       />
     ),
     [ModalType.UPDATE_SUCCESS]: (
       <RecordUpdateSuccess
         onClose={onClose}
-        modelHeading="Customer Created Successful "
-        modelSubHeading="Thanks for creating Customer we are happy to have you. "
+        modelHeading="Are You Sure? "
+        modelSubHeading="You want to leave this page without saving changes. "
         cancelHandler={handleUpdateCancle}
         confirmHandler={() => test({ data, router, setError, translate })}
         loading={loading}

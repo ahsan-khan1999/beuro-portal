@@ -6,7 +6,6 @@ import FollowUpsTable from "@/components/follow-up";
 import { FollowUpsProps } from "@/types/follow-up";
 
 const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
-  console.log(handleFollowUpsDetails);
   
   return (
     <>

@@ -2,14 +2,16 @@ import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import sendEmailIcon from "@/assets/svgs/send_email_icon.svg";
+import { Button } from "../button/button";
 
 const LinkSendToEmail = ({
   onClose,
   createNewPswHandler,
 }: {
   onClose: () => void;
-  createNewPswHandler: Function;
+  createNewPswHandler: () => void;
 }) => {
+  
   return (
     <>
       <BaseModal
@@ -31,12 +33,15 @@ const LinkSendToEmail = ({
             <br /> address
           </p>
 
-          <button
-            onClick={() => createNewPswHandler()}
+          <Button
+            id="button"
+            inputType="button"
+            onClick={createNewPswHandler}
             className="bg-[#4A13E7] cursor-pointer mt-[31px] mb-[59px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
-          >
-            Done
-          </button>
+            text="Done"
+          />
+            
+          
         </div>
       </BaseModal>
     </>

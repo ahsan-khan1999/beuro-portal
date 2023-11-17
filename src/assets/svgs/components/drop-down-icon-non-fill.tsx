@@ -6,10 +6,10 @@ export const DropDownNonFillIcon = ({
   className,
 }: {
   label?: string;
-  isOpen: string;
+  isOpen: boolean;
   className?: string;
 }) => {
-  const rotateTransform = isOpen == label ? "rotate(180)" : "";
+  const rotateTransform = isOpen ? "rotate(180)" : "";
   const classes = combineClasses("text-lightGray", className);
   return (
     <svg

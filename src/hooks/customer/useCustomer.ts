@@ -35,7 +35,7 @@ export default function useCustomer() {
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(customer.slice(startIndex, startIndex + itemsPerPage));
+    setCurrentPageRows(customer?.slice(startIndex, startIndex + itemsPerPage));
 
   }, [currentPage]);
 

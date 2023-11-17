@@ -1,6 +1,6 @@
 // Employ details enum
 export enum EmployDetailsFields {
-  employName = "employName",
+  employName = "fullName",
   designation = "designation",
   email = "email",
   phoneNumber = "phoneNumber",
@@ -15,6 +15,7 @@ export enum createEMployeeNewPasswordFields {
 
 // Employee password reset
 export enum employeePasswordResetFields {
+  yourPassword = "yourPassword",
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
 }

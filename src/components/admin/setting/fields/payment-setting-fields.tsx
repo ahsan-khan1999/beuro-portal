@@ -11,16 +11,21 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
       field: {
         type: Field.div,
         className: "flex ",
+        id: "paymentDiv",
         children: [
           {
             containerClass: "w-full mb-0",
             field: {
               type: Field.div,
               className: "",
+              id: "paymentDiv",
+
               children: [
                 {
                   containerClass: "mb-6",
                   field: {
+                    id: "paymentspan",
+
                     type: Field.span,
                     text: "Stripe Setting",
                     containerClassName:
@@ -32,6 +37,8 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                   field: {
                     type: Field.div,
                     className: "grid grid-cols-2 gap-x-6 gap-y-6 ",
+                    id: "paymentdiv",
+
                     children: [
                       {
                         containerClass: "mb-0",
@@ -122,6 +129,8 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                     className:
                       "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
                     loading,
+                    id: "paymentdiv",
+
                   },
                 },
               ],

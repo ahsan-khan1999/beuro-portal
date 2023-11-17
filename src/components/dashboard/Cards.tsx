@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 interface DashboardCard {
+  icon: string | StaticImport;
+  alt: string;
   backgroundColor: string;
   title: string;
   subTitle: string;
   id: string;
   salePercent: string;
   chartPointColor: string;
-  open: number;
-  closed: number;
-  expired: number;
+  open: string;
+  closed: string;
+  expired: string;
 }
 const DashboardCard = ({
+  icon,
+  alt,
   backgroundColor,
   title,
   subTitle,
@@ -41,11 +47,13 @@ const DashboardCard = ({
     if (existingChart) {
       existingChart.destroy();
     }
+    //@ts-expect-error
     const ctx = document.getElementById(id).getContext("2d");
 
     const wavesChart2 = new Chart(ctx, {
       type: "line",
       data: datatest2,
+      //@ts-expect-error
       fill: true,
       options: {
         plugins: {
@@ -68,75 +76,13 @@ const DashboardCard = ({
     return () => {
       wavesChart2.destroy();
     };
-  }, [datatest2]);
+  }, []);
 
   return (
     <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
       <div className="flex items-center mb-8">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="34"
-          height="35"
-          viewBox="0 0 34 35"
-          fill="none"
-        >
-          <rect
-            x="0.917969"
-            y="1.26758"
-            width="32.2438"
-            height="32.2438"
-            rx="7.5"
-            fill="white"
-            stroke="#EFF4FA"
-          />
-          <path
-            d="M22.8532 17.5632C22.7992 17.4527 22.7992 17.326 22.8532 17.2156L23.3537 16.1917C23.6323 15.6216 23.4115 14.9422 22.851 14.6448L21.8443 14.1106C21.7357 14.053 21.6613 13.9505 21.64 13.8294L21.4431 12.7069C21.3335 12.0819 20.7553 11.6619 20.1272 11.7508L18.9988 11.9104C18.877 11.9276 18.7566 11.8884 18.6682 11.803L17.8491 11.0106C17.3931 10.5694 16.6786 10.5694 16.2226 11.0106L15.4035 11.803C15.3151 11.8885 15.1946 11.9276 15.0729 11.9105L13.9445 11.7509C13.3161 11.6619 12.7382 12.082 12.6285 12.707L12.4317 13.8294C12.4104 13.9505 12.3359 14.053 12.2274 14.1107L11.2207 14.6448C10.6601 14.9422 10.4394 15.6217 10.718 16.1918L11.2185 17.2156C11.2725 17.3261 11.2725 17.4528 11.2185 17.5633L10.718 18.5871C10.4393 19.1572 10.6601 19.8367 11.2206 20.1341L12.2273 20.6682C12.3359 20.7258 12.4104 20.8284 12.4317 20.9494L12.6285 22.0719C12.7284 22.6409 13.2162 23.0399 13.7769 23.0399C13.8321 23.0399 13.8882 23.036 13.9445 23.028L15.0729 22.8684C15.1946 22.8511 15.3151 22.8904 15.4035 22.9758L16.2226 23.7682C16.4506 23.9888 16.7432 24.0991 17.0358 24.0991C17.3284 24.0991 17.6211 23.9888 17.8491 23.7682L18.6682 22.9758C18.7566 22.8904 18.877 22.8513 18.9988 22.8684L20.1272 23.028C20.7556 23.1169 21.3335 22.6969 21.4431 22.0719L21.64 20.9494C21.6613 20.8284 21.7357 20.7259 21.8443 20.6682L22.851 20.1341C23.4115 19.8367 23.6323 19.1572 23.3537 18.5871L22.8532 17.5632ZM15.4879 13.9065C16.2703 13.9065 16.9068 14.5431 16.9068 15.3255C16.9068 16.1079 16.2703 16.7445 15.4879 16.7445C14.7055 16.7445 14.0689 16.1079 14.0689 15.3255C14.0689 14.5431 14.7055 13.9065 15.4879 13.9065ZM14.7555 20.217C14.6799 20.2926 14.5809 20.3304 14.4818 20.3304C14.3828 20.3304 14.2838 20.2926 14.2082 20.217C14.0571 20.0659 14.0571 19.8208 14.2082 19.6697L19.3162 14.5618C19.4673 14.4107 19.7123 14.4107 19.8634 14.5618C20.0146 14.7129 20.0146 14.9579 19.8634 15.1091L14.7555 20.217ZM18.5837 20.8723C17.8013 20.8723 17.1648 20.2357 17.1648 19.4533C17.1648 18.6709 17.8013 18.0344 18.5837 18.0344C19.3661 18.0344 20.0027 18.6709 20.0027 19.4533C20.0027 20.2357 19.3661 20.8723 18.5837 20.8723Z"
-            fill="url(#paint0_linear_2051_43641)"
-          />
-          <path
-            d="M18.5859 18.8086C18.2303 18.8086 17.9409 19.0979 17.9409 19.4536C17.9409 19.8092 18.2302 20.0985 18.5859 20.0985C18.9415 20.0985 19.2309 19.8092 19.2309 19.4536C19.2309 19.0979 18.9415 18.8086 18.5859 18.8086Z"
-            fill="url(#paint1_linear_2051_43641)"
-          />
-          <path
-            d="M15.4975 14.6807C15.1419 14.6807 14.8525 14.97 14.8525 15.3256C14.8525 15.6813 15.1419 15.9706 15.4975 15.9706C15.8531 15.9706 16.1425 15.6813 16.1425 15.3256C16.1425 14.97 15.8531 14.6807 15.4975 14.6807Z"
-            fill="url(#paint2_linear_2051_43641)"
-          />
-          <defs>
-            <linearGradient
-              id="paint0_linear_2051_43641"
-              x1="8.18585"
-              y1="17.3911"
-              x2="22.4364"
-              y2="17.3911"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#B503FE" />
-              <stop offset="1" stop-color="#FF376F" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear_2051_43641"
-              x1="17.6993"
-              y1="19.4537"
-              x2="19.1269"
-              y2="19.4537"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#B503FE" />
-              <stop offset="1" stop-color="#FF376F" />
-            </linearGradient>
-            <linearGradient
-              id="paint2_linear_2051_43641"
-              x1="14.6109"
-              y1="15.3258"
-              x2="16.0385"
-              y2="15.3258"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#B503FE" />
-              <stop offset="1" stop-color="#FF376F" />
-            </linearGradient>
-          </defs>
-        </svg>
+      
+        <Image src={icon} alt={alt} />
         <div className="ml-2 space-y-1">
           <h3 className="text-xl text-white font-semibold ">{title}</h3>
           <span className="text-xs text-white  ">{subTitle}</span>
@@ -166,7 +112,7 @@ const DashboardCard = ({
             />
           </svg>
           <span className="ml-[3px] text-white font-medium text-xs">
-            {open} Open
+            {open}
           </span>
         </div>
         <div className="flex items-center">
@@ -185,11 +131,11 @@ const DashboardCard = ({
             />
           </svg>
           <span className="ml-[3px] text-white font-medium text-xs">
-            {closed} Close
+            {closed}
           </span>
         </div>
         <span className="ml-[3px] text-white font-medium text-xs">
-          {expired} Expired
+          {expired}
         </span>
       </div>
     </div>

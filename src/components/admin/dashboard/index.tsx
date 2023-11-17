@@ -1,22 +1,28 @@
 import { Layout } from "@/layout";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
-import Chart from "chart.js/auto";
+import InputField from "@/base-components/filter/fields/input-field";
+import activeSubscribersIcon from "@/assets/svgs/leads.svg";
+import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
+import customersIcon from "@/assets/svgs/customers-card.svg";
 
 const AdminDashboard = () => {
   const dashboardCards = [
     {
+      icon: activeSubscribersIcon,
+      alt: "active subscribers icon",
       title: "Active Subscribers",
       id: "202504 ",
       salePercent: "+4.5%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      
     },
     {
+      icon: pendingCompaniesIcon,
+      alt: "pending companies icon",
       title: "Pending Compnies",
       id: "202326 ",
       salePercent: "-4.5%",
@@ -24,6 +30,8 @@ const AdminDashboard = () => {
       chartPointColor: "#FC3576",
     },
     {
+      icon: customersIcon,
+      alt: "customers icon",
       title: "Customers",
       id: "202505 ",
       salePercent: "+4.5%",
@@ -78,7 +86,12 @@ const AdminDashboard = () => {
       },
     ],
   };
-
+  const [filter, setFilter] = useState({
+    text: "",
+    sortBy: "",
+    type: "None",
+    location: "",
+  });
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -86,7 +99,7 @@ const AdminDashboard = () => {
           Super Admin
         </h1>
       </div>
-      <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
+      {/* <div className="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex  items-center mx-auto ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -124,13 +137,22 @@ const AdminDashboard = () => {
           name="search"
           type="text"
         />
-      </div>
+      </div> */}
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+        containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        textClassName="ml-4 w-full  focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF] py-0 rounded-none "
+      />
       <DashboardFunctions />
 
       <div className="grid grid-cols-3 gap-x-6">
         {dashboardCards.map((item, index) => {
           return (
             <DashboardCard
+              icon={item.icon}
+              alt={item.alt}
               backgroundColor={item.backgroundColor}
               title={item.title}
               id={item.id}

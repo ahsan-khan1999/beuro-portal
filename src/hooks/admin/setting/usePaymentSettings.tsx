@@ -20,7 +20,7 @@ export default function usePaymentSettings() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = changePaymentSettingsFormField(register, loading, control);

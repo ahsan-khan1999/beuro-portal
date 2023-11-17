@@ -68,10 +68,10 @@ export interface UserAddress {
 
 }
 export interface UserBankDetail {
-  [BankFields.bankName]: string;
-  [BankFields.accountNumber]: string;
-  [BankFields.ibanNumber]: string;
-  [BankFields.currency]: string;
+  [BankFields.bankName]?: string;
+  [BankFields.accountNumber]?: string;
+  [BankFields.ibanNumber]?: string;
+  [BankFields.currency]?: string;
 }
 export interface UserOAuth {
   [OAuthId.apple]: boolean;

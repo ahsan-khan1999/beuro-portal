@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Employee } from "@/types/employee";
 import editInfoIcon from "@/assets/svgs/edit_info.svg";
 import morefoIcon from "@/assets/svgs/entity_more_info.svg";
+import moment from "moment";
 
 const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
@@ -26,19 +27,19 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               {item.id}
             </span>
             <span className="px-6 py-4 bg-white   flex  items-center">
-              {item.name}
+              {item.fullName}
             </span>
             <span className="px-6 py-4 bg-white   flex  items-center">
               {item.email}
             </span>
             <span className="px-6 py-4 bg-white   flex  items-center">
-              {item.phone}
+              {item.phoneNumber}
             </span>
             <span className="px-6 py-4 bg-white   flex  items-center">
               {item.designation}
             </span>
             <span className="px-6 py-4 bg-white  flex  items-center">
-              {item.createdOn.toLocaleDateString()}
+              {moment(item?.creationDate).format("DD/MM/YYYY")}
             </span>
 
             <span className="px-6 py-4 bg-white flex justify-center items-center">

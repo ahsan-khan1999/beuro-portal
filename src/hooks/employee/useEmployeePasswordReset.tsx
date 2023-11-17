@@ -6,12 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { EmployeeResetPasswordFieldsFormField } from "@/components/employees/fields/employee-reset-password-fields";
 import { generateEmployeePasswordResetValidationSchema } from "@/validation/employeeSchema";
+import { updateEmployeePassword } from "@/api/slices/employee/emplyeeSlice";
 
 export default function useEmployeePasswordReset(
   passwordResetSuccessfully: Function
 ) {
   const router = useRouter();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, employeeDetails } = useAppSelector((state) => state.employee);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -21,6 +22,7 @@ export default function useEmployeePasswordReset(
     register,
     control,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -29,12 +31,14 @@ export default function useEmployeePasswordReset(
   const fields = EmployeeResetPasswordFieldsFormField(
     register,
     loading,
-    
+
   );
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(resetPassword({ router, data }));
-    passwordResetSuccessfully()
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    let apiData = { ...data, id: employeeDetails?.id }
+    const res = await dispatch(updateEmployeePassword({ apiData, router, setError, translate }));
+    if (res?.payload) passwordResetSuccessfully()
+
   };
   return {
     error,

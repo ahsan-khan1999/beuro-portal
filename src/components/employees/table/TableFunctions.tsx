@@ -5,50 +5,48 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import filterDropDownIcon from "@/assets/svgs/filter_drop_dwon_icon.svg";
 import Image from "next/image";
 import EmployeesFilters from "./employees-filters";
+import { FilterType } from '../../../types/types';
+import { SetStateAction } from 'react';
 
-const TableFunctions = () => {
+const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value:FilterType) => void }) => {
   const router = useRouter();
-  // function onInputChange(text: string) {}
+
+  function onInputChange(text: string) { }
 
   return (
-    <div className="flex items-center ">
-      {/* <div className="flex items-center space-x-4">
-        <SearchInput onInputChange={onInputChange} />
-        <div className="text-[#404040] font-medium flex items-center cursor-pointer">
-          Sort by
+    <div className="flex justify-between items-center mb-4">
+      <div className="flex items-center ">
+        <div className="flex items-center space-x-4">
+          <EmployeesFilters filter={filter} setFilter={setFilter} />
+        </div>
+        <button
+          onClick={() => handleFilterChange(filter)}
+          className="py-2  px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
+        >
+
+          Apply
+        </button>
+        <button
+          onClick={() => router.push("employees/add")}
+          className="py-2 pl-2 pr-[10px] px-[8px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-2 whitespace-nowrap"
+        >
           <svg
-            className="ml-[2px]"
+            className="mr-2"
             xmlns="http://www.w3.org/2000/svg"
-            width="17"
-            height="16"
-            viewBox="0 0 17 16"
+            width="15"
+            height="14"
+            viewBox="0 0 15 14"
             fill="none"
           >
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M12.0961 6.12191C12.2318 6.00587 12.4191 5.97103 12.5874 6.03051C12.7557 6.08999 12.8795 6.23475 12.9122 6.41026C12.9449 6.58578 12.8814 6.76538 12.7457 6.88141L9.248 9.87946C9.06101 10.0394 8.78541 10.0394 8.59842 9.87946L5.1007 6.88141C4.89097 6.70204 4.86636 6.3866 5.04574 6.17687C5.22511 5.96714 5.54055 5.94253 5.75028 6.12191L8.92321 8.84114L12.0961 6.12291V6.12191Z"
-              fill="#404040"
-              stroke="black"
+              d="M13.2526 7.94451H8.52654V12.6706C8.52654 13.1904 8.1012 13.6158 7.58133 13.6158C7.06146 13.6158 6.63612 13.1904 6.63612 12.6706V7.94451H1.91006C1.39019 7.94451 0.964844 7.51917 0.964844 6.9993C0.964844 6.47943 1.39019 6.05409 1.91006 6.05409H6.63612V1.32802C6.63612 0.808158 7.06146 0.382812 7.58133 0.382812C8.1012 0.382812 8.52654 0.808158 8.52654 1.32802V6.05409H13.2526C13.7725 6.05409 14.1978 6.47943 14.1978 6.9993C14.1978 7.51917 13.7725 7.94451 13.2526 7.94451Z"
+              fill="white"
             />
           </svg>
-        </div>
-        <Image
-          src={filterDropDownIcon}
-          alt="filterDropDownIcon"
-          className="cursor-pointer"
-        />
-      </div> */}
-      <EmployeesFilters />
-      <button
-        onClick={() => router.push("/employees/add")}
-        className="py-2 px-[10px]  cursor-pointer flex items-center gap-x-2 text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
-      >
-        <Image src={addIcon} alt="addIcon" />
-        Add New
-      </button>
+          Add New
+        </button>
+      </div>
     </div>
   );
 };
-
-export default TableFunctions;
+export default TableFunctions

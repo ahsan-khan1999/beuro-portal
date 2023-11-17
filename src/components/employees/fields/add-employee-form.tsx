@@ -5,7 +5,7 @@ import React from "react";
 
 const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
+  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal } =
     useEmployeeDetail(false);
 
   return (
@@ -30,6 +30,7 @@ const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
+      {renderModal()}
     </div>
   );
 };

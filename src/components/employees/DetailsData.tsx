@@ -5,8 +5,9 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { EmployeeDetail } from "@/types/employee";
+import moment from "moment";
 
-const DetailsData = ({ date, id, name, isUpdate }: EmployeeDetail) => {
+const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) => {
   const router = useRouter();
   return (
     <>
@@ -26,7 +27,7 @@ const DetailsData = ({ date, id, name, isUpdate }: EmployeeDetail) => {
         </div>
         <div className="flex items-center gap-x-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={handleDelete}/>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -46,7 +47,7 @@ const DetailsData = ({ date, id, name, isUpdate }: EmployeeDetail) => {
         <h3 className="text-[#4D4D4D] mt-4">
           Creation Date:
           <span className="text-[#4B4B4B] font-medium">
-            &nbsp;&nbsp;{date?.toLocaleDateString()}
+            &nbsp;&nbsp;{moment(date).format("DD/MM/YYYY")}
           </span>
         </h3>
       </div>

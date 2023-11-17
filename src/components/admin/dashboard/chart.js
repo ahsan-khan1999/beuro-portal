@@ -24,7 +24,7 @@ const PieChart = ({ data }) => {
     return () => {
       myPieChart.destroy();
     };
-  }, [data]);
+  }, []);
 
   return (
     <div className="rounded-[20px] bg-white max-w-[400px]">

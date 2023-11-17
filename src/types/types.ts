@@ -22,6 +22,7 @@ import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 import { Status } from "./global";
+import { Employee } from "./employee";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -267,7 +268,8 @@ export type GenerateEmployeeFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  trigger?: UseFormTrigger<FieldValues>
+  employeeDetails?: Employee,
+  control?: Control<FieldValues>,
 ) => FormField[];
 
 // Notes formfield
@@ -338,6 +340,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  customers:Customers[],
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];

@@ -194,6 +194,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
 
       field: {
         type: Field.div,
+        id:"divfield",
         children: [
           {
             containerClass: "mb-3",
@@ -201,6 +202,8 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               type: Field.span,
               text: "Enter The Email To Receive The Testing Email Of Mail Configuration.",
               containerClassName: "text-[14px] font-normal ",
+        id:"spanfield",
+
             },
           },
           {

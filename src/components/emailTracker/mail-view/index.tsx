@@ -45,6 +45,7 @@ const ViewMails = () => {
         onClose={onClose}
         modelHeading="Are you sure you want to delete this Email?"
         routeHandler={routeHandler}
+        loading={false}
       />
     ),
   };

@@ -11,7 +11,7 @@ export default function LeadsFilter() {
     close: false,
     expired: false,
   });
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const checkbox:CheckBoxType[] = [
     { label: "Open Leads", type: "open" },
     { label: "Close Leads", type: "close" },

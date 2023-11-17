@@ -1,0 +1,181 @@
+import apiServices from "@/services/requestHandler";
+import { setErrors } from "@/utils/utility";
+import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { DEFAULT_FOLLOWUP, staticEnums } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
+import { FollowUps } from "@/types/follow-up";
+
+interface CustomerState {
+    followUp: FollowUps[];
+    loading: boolean;
+    error: Record<string, object>,
+    totalCount: number;
+    lastPage: number;
+    followUpDetails: FollowUps;
+
+
+}
+
+const initialState: CustomerState = {
+    followUp: [],
+    loading: false,
+    error: {},
+    lastPage: 1,
+    totalCount: 10,
+    followUpDetails: DEFAULT_FOLLOWUP
+
+}
+
+export const readFollowUp: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/read", async (args, thunkApi) => {
+        const { params, router, translate } = args as any;
+
+        try {
+            const response = await apiServices.readFollowUp(params);
+            return response?.data?.data;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const readFollowUpDetail: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/read/details", async (args, thunkApi) => {
+        const { params, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.readFollowUpDetail(params);
+            return response?.data?.data.FollowUp;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const createFollowUp: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/create", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            let apiData = { ...data }
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            await apiServices.createFollowUp(apiData);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const updateFollowUp: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/update", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            let apiData = { ...data }
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
+            await apiServices.updateFollowUp(apiData);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const deleteFollowUp: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/delete", async (args, thunkApi) => {
+        const { customerDetails: data, router, setError, translate } = args as any;
+
+        try {
+            await apiServices.deleteFollowUp(data);
+            router.pathname = "/dashboard"
+            updateQuery(router, router.locale)
+            thunkApi.dispatch(updateModalType({
+                type:
+                    ModalType.NONE
+            }));
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
+
+const followUpSlice = createSlice({
+    name: "FollowUpSlice",
+    initialState,
+    reducers: {
+        setErrorMessage: (state, action) => {
+            state.error = action.payload;
+        },
+        setFollowUpDetails: (state, action) => {
+            state.followUpDetails = action.payload;
+        },
+    },
+    extraReducers(builder) {
+        builder.addCase(readFollowUp.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readFollowUp.fulfilled, (state, action) => {
+            state.followUp = action.payload.FollowUp,
+                state.lastPage = action.payload.lastPage,
+                state.totalCount = action.payload.totalCount,
+                state.loading = false;
+        });
+        builder.addCase(readFollowUp.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(createFollowUp.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(createFollowUp.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(createFollowUp.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateFollowUp.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateFollowUp.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateFollowUp.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(deleteFollowUp.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(deleteFollowUp.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(deleteFollowUp.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(readFollowUpDetail.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readFollowUpDetail.fulfilled, (state, action) => {
+            state.followUpDetails = action.payload
+            state.loading = false;
+        });
+        builder.addCase(readFollowUpDetail.rejected, (state) => {
+            state.loading = false
+        })
+
+    },
+})
+
+export default followUpSlice.reducer;
+export const { setErrorMessage, setFollowUpDetails } = followUpSlice.actions

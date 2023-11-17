@@ -11,7 +11,7 @@ export default function ContractFilters() {
     confirmed: false,
     cancelled: false,
   });
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const checkbox:CheckBoxType[] = [
     { label: "Open", type: "open" },
     { label: "Confirmed", type: "confirmed" },

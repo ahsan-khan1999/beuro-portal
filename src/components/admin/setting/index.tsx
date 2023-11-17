@@ -6,15 +6,12 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { Layout } from "@/layout";
 import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
-import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
 import MailSetting from "./mail-setting";
 import Billing from "./billing";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
-import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
-import ExclusiveTax from "@/base-components/ui/modals1/ExclusiveTax";
 import PaymentSettings from "./payment-settings";
 
 const AdminSettings = () => {

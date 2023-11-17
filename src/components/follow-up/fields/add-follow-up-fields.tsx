@@ -6,10 +6,12 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  onItemChange
+  customer,
+  onItemChange,
 ) => {
   const formField: FormField[] = [
     {
+      //@ts-expect-error
       field: {
         id: "div-field",
         type: Field.div,
@@ -19,15 +21,14 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             containerClass: "mb-0",
             label: {
               text: "Select Customers*",
-              htmlFor: "selectCustomer",
+              htmlFor: "customer",
               className: "mb-[12px]",
             },
             field: {
-              className: "!border-dark  focus:!border-primary ",
+              className: "h-[42px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              value: "Rahal Ahmed",
-              id: "selectCustomer",
-              name: "selectCustomer",
+              id: "customer",
+              name: "customer",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path d="M12.2934 10.7609C14.1652 10.7609 15.6826 9.24356 15.6826 7.3718C15.6826 5.50003 14.1652 3.98267 12.2934 3.98267C10.4217 3.98267 8.9043 5.50003 8.9043 7.3718C8.9043 9.24356 10.4217 10.7609 12.2934 10.7609Z" fill="#4A13E7"/>
               <path d="M19.1496 10.7609C20.3329 10.7609 21.2922 9.80168 21.2922 8.61838C21.2922 7.43508 20.3329 6.47583 19.1496 6.47583C17.9663 6.47583 17.0071 7.43508 17.0071 8.61838C17.0071 9.80168 17.9663 10.7609 19.1496 10.7609Z" fill="#4A13E7"/>
@@ -36,11 +37,15 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M13.221 12.1009C11.5177 11.9588 10.0372 12.1025 8.76018 13.1566C6.6232 14.8683 7.03445 17.173 7.03445 19.9925C7.03445 20.7385 7.64138 21.3567 8.39867 21.3567C16.6215 21.3567 16.9487 21.622 17.4364 20.5422C17.5963 20.177 17.5524 20.293 17.5524 16.7997C17.5524 14.0251 15.1499 12.1009 13.221 12.1009Z" fill="#4A13E7"/>
               <path d="M19.6209 12.0855C18.6404 12.0855 17.8808 11.9949 17.0386 12.685C19.0629 14.7518 18.7211 16.8117 18.7211 19.9926C18.7211 20.1607 18.4483 20.1103 21.0794 20.1103C21.7339 20.1103 22.266 19.5801 22.266 18.9284V14.7146C22.266 13.265 21.0794 12.0855 19.6209 12.0855Z" fill="#4A13E7"/>
             </svg>`,
-              options: [
-                { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)" },
-              ],
-              onItemChange: () => onItemChange && onItemChange(Modals.customer),
+              options: customer?.map((item) => (
+                {
+                  label: item?.fullName + " "+(item?.refID),
+                  value: item?.id.toString(),
+                }
+              )),
+              // onItemChange: () => onItemChange && onItemChange(Modals.customer),
               control,
+
             },
           },
           {

@@ -9,24 +9,28 @@ import {
 // Interface for the Employee table
 export interface Employee {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
-  phone: number;
+  phoneNumber: string;
+  mobileNumber: string;
   designation: string;
-  createdOn: Date | null;
-  action: "edit";
+  creationDate: string;
+  action: string;
+  createdBy: string;
+  employeeID: string
 }
 export interface EmployeeDetail {
-  date?: Date | null;
+  date?: string;
   id?: string;
   name?: string;
   isUpdate: boolean;
+  handleDelete: () => void
 }
 
 export interface FormDataProps {
-  employeeDetail: Employee;
+  employeeDetail?: Employee;
   isUpdate: boolean;
-  handlePasswordReset:Function
+  handlePasswordReset: Function
   setIsUpdate: SetStateAction<any>;
   fields: FormField[];
   handleSubmit: UseFormHandleSubmit<FieldValues>;

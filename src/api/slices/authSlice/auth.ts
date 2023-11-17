@@ -161,7 +161,6 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
     try {
       //@ts-expect-error 
       let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
-      console.log(apiData,"apiData");
       
       const response: ApiResponseTypePut = await apiServices.profileStep3({ bankDetails: { ...apiData } });
 
