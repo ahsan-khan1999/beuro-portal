@@ -9,6 +9,8 @@ import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { staticEnums } from "./static";
 import { DetailScreensStages } from "@/enums/auth";
+import moment from "moment";
+import { CustomerAddress } from "@/types/customer";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -191,9 +193,9 @@ export const conditionHandlerLogin = (
   }
 };
 
-export const formatAddress = (address: AddressType | undefined) => {
-  if (!address?.streetAddress) return null;
-  return `${address?.houseNumber},  ${address?.streetAddress},  ${address?.postCode}, ${address?.state}, ${address?.country}`;
+export const formatAddress = (address: CustomerAddress | undefined) => {
+  if (!address) return ""
+  return `${address?.streetNumber},  ${address?.country},  ${address?.postalCode}`;
 };
 
 export const validateUserRole = (
@@ -248,4 +250,13 @@ export const senitizePhone = (data: string) => {
   if (!data?.toString().includes("+")) return "+" + data;
   else return data
 
+}
+
+export function getDaysDifference(targetDate: string) {
+  const targetDateTime = moment(targetDate);
+  const currentDate = moment();
+
+  const daysDifference = targetDateTime.diff(currentDate, 'days');
+
+  return Math.abs(daysDifference);
 }

@@ -40,7 +40,9 @@ const SERVICE_URLS = {
   service: "/service",
   offerService: "/offer-service",
   sendEmailOtp: "/otp/send-verify-email-link",
-  followUp: "/followup"
+  followUp: "/followup",
+  postPondNotes: "/followup/postpond",
+  markComplete: "/followup/complete"
 
 };
 
@@ -110,8 +112,8 @@ const updateCustomer = (data) =>
   put(SERVICE_URLS.customer + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteCustomer = (data) =>
   del(SERVICE_URLS.customer + `/${data?.id}`, {}, { feature: featureConstants.login });
-const readLead = (data) =>
-  get(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+const readLead = (params) =>
+  get(SERVICE_URLS.lead, params, { feature: featureConstants.login }, { detail: false });
 
 const createLead = (data) =>
   post(SERVICE_URLS.lead, data, { feature: featureConstants.login });
@@ -233,6 +235,11 @@ const readFollowUpDetail = (params) =>
 const createFollowUp = (data) =>
   post(SERVICE_URLS.followUp, data, { feature: featureConstants.login });
 
+const createPostPondNotes = (data) =>
+  put(SERVICE_URLS.postPondNotes + `/${data?.id}`, data, { feature: featureConstants.login });
+const markComplete = (data) =>
+  put(SERVICE_URLS.markComplete + `/${data?.id}`, data, { feature: featureConstants.login });
+
 const updateFollowUp = (data) =>
   put(SERVICE_URLS.followUp + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteFollowUp = (data) =>
@@ -313,6 +320,8 @@ const apiServices = {
   readFollowUpDetail,
   createFollowUp,
   updateFollowUp,
-  deleteFollowUp
+  deleteFollowUp,
+  createPostPondNotes,
+  markComplete
 };
 export default apiServices;

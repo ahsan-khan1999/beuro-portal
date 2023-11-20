@@ -17,6 +17,7 @@ import AllCustomers from "@/base-components/ui/modals1/AllCustomers";
 import AllLeads from "@/base-components/ui/modals1/AllLeads";
 import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
 import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
+import { readFollowUpDetail } from "@/api/slices/followUp/followUp";
 
 export const FollowUpNotificationBar = () => {
   const followUp = [
@@ -125,6 +126,8 @@ export const FollowUpNotificationBar = () => {
   ];
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const { followUpDetails } = useAppSelector((state) => state.followUp);
+
   const [status, setStatus] = useState({
     postpond: false,
     completed: false,
@@ -136,30 +139,27 @@ export const FollowUpNotificationBar = () => {
   };
 
   const handleFollowUps = () => {
-    dispatch(updateModalType({type:ModalType.FOLLOW_UPS}));
+    dispatch(updateModalType({ type: ModalType.FOLLOW_UPS }));
   };
 
-  const handleFollowUpsDetails = () => {
-    dispatch(updateModalType({ type: ModalType.FOLLOW_UPS_DETAILS }));
+  const handleFollowUpsDetails = (id: string) => {
+
+    if (id) dispatch(readFollowUpDetail({ params: { filter: id } }));
+    dispatch(updateModalType({ type: ModalType.FOLLOW_UPS_DETAILS, data: id }));
   };
 
   const handleAddPostPonedNote = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.ADD_POSTSPONED_NOTE));
-    setStatus({
-      postpond: true,
-      completed: false,
-      neutral: false,
-    });
+    dispatch(updateModalType({ type: ModalType.ADD_POSTSPONED_NOTE }));
+    // setStatus({
+    //   postpond: true,
+    //   completed: false,
+    //   neutral: false,
+    // });
   };
 
   const handleAddRemarks = () => {
-    dispatch(updateModalType(ModalType.ADD_REMARKS));
-    setStatus({
-      postpond: false,
-      completed: true,
-      neutral: false,
-    });
+    dispatch(updateModalType({type:ModalType.ADD_REMARKS}));
+    
   };
 
   const handleAddFollowUp = () => {
@@ -196,6 +196,7 @@ export const FollowUpNotificationBar = () => {
         handleAddPostPonedNote={handleAddPostPonedNote}
         handleAddRemarks={handleAddRemarks}
         status={status}
+        followUpDetails={followUpDetails}
       />
     ),
     [ModalType.ADD_POSTSPONED_NOTE]: (
@@ -248,7 +249,7 @@ export const FollowUpNotificationBar = () => {
           {followUp.map((item, index) => {
             return (
               <div
-                onClick={() => handleFollowUpsDetails()}
+                onClick={() => handleFollowUpsDetails(item.id)}
                 key={index}
                 className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10 `}
               >

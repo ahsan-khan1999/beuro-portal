@@ -6,7 +6,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  customer,
+  { customer, lead },
   onItemChange,
 ) => {
   const formField: FormField[] = [
@@ -39,7 +39,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             </svg>`,
               options: customer?.map((item) => (
                 {
-                  label: item?.fullName + " "+(item?.refID),
+                  label: item?.fullName + " " + (item?.refID),
                   value: item?.id.toString(),
                 }
               )),
@@ -77,19 +77,20 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             containerClass: "mb-0",
             label: {
               text: "Select Lead*",
-              htmlFor: "selectLead",
+              htmlFor: "lead",
               className: "mb-[12px]",
             },
             field: {
-              className: "!border-dark  focus:!border-primary ",
+              className: "h-[42px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              value: "Enter your Lead",
-              id: "selectLead",
-              name: "selectLead",
-              options: [
-                { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)" },
-                { value: "Hamza(R-2)", label: "Hamza(R-2)" },
-              ],
+              id: "lead",
+              name: "lead",
+              options: lead?.map((item) => (
+                {
+                  label: item?.leadStatus + " " + (item?.refID),
+                  value: item?.id.toString(),
+                }
+              )),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path d="M16.3952 7.47788C15.1093 7.47788 14.0668 6.43541 14.0668 5.14946C14.0668 3.86351 15.1093 2.82104 16.3952 2.82104C17.6812 2.82104 18.7236 3.86351 18.7236 5.14946C18.7236 6.43541 17.6812 7.47788 16.3952 7.47788Z" fill="#8F8F8F"/>
               <path d="M8.2458 7.47788C6.95986 7.47788 5.91739 6.43541 5.91739 5.14946C5.91739 3.86351 6.95986 2.82104 8.2458 2.82104C9.53175 2.82104 10.5742 3.86351 10.5742 5.14946C10.5742 6.43541 9.53175 7.47788 8.2458 7.47788Z" fill="#8F8F8F"/>
@@ -98,7 +99,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M11.7383 10.9702H4.75303C4.75303 9.04421 6.31971 7.47754 8.24566 7.47754C10.1716 7.47754 11.7383 9.04421 11.7383 10.9702Z" fill="#8F8F8F"/>
             </svg>`,
               control,
-              onItemChange: () => onItemChange && onItemChange(Modals.leads),
             },
           },
 
@@ -106,7 +106,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             containerClass: "mb-0",
             label: {
               text: "Follow up Date and time*",
-              htmlFor: "dateAndTime",
+              htmlFor: "dateTime",
               className: "mb-[12px]",
             },
             field: {
@@ -114,8 +114,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               className: `!border-dark focus:!border-primary 
                 !border-light
               `,
-              id: "dateAndTime",
-              name: "dateAndTime",
+              id: "dateTime",
+              name: "dateTime",
               value: "22:10:06,  12 September 2023",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M8.83764 11.6513C9.39544 11.6513 9.84763 11.1992 9.84763 10.6413C9.84763 10.0835 9.39544 9.63135 8.83764 9.63135C8.27983 9.63135 7.82764 10.0835 7.82764 10.6413C7.82764 11.1992 8.27983 11.6513 8.83764 11.6513Z" fill="#8F8F8F"/>
@@ -134,15 +134,15 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       containerClass: "mt-5",
       label: {
         text: "Follow up type",
-        htmlFor: "followUpType",
+        htmlFor: "type",
         className: "mb-[12px]",
       },
       field: {
         className: "!border-dark  focus:!border-primary ",
         type: Field.select,
         value: "Reason",
-        id: "followUpType",
-        name: "followUpType",
+        id: "type",
+        name: "type",
         options: [{ value: "Reason", label: "Reason" }],
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21" fill="none">
         <path d="M2.29318 20.821H14.2672C15.2576 20.821 16.0633 20.0153 16.0633 19.0248V6.37227H11.8724C10.882 6.37227 10.0763 5.56658 10.0763 4.57617V0.385254H2.29318C1.30276 0.385254 0.49707 1.19095 0.49707 2.18136V19.0248C0.49707 20.0153 1.30276 20.821 2.29318 20.821ZM4.68798 8.807H11.8724C12.2033 8.807 12.4711 9.07478 12.4711 9.4057C12.4711 9.73662 12.2033 10.0044 11.8724 10.0044H4.68798C4.35706 10.0044 4.08928 9.73662 4.08928 9.4057C4.08928 9.07478 4.35706 8.807 4.68798 8.807ZM4.68798 11.2018H11.8724C12.2033 11.2018 12.4711 11.4696 12.4711 11.8005C12.4711 12.1314 12.2033 12.3992 11.8724 12.3992H4.68798C4.35706 12.3992 4.08928 12.1314 4.08928 11.8005C4.08928 11.4696 4.35706 11.2018 4.68798 11.2018ZM4.68798 13.5966H11.8724C12.2033 13.5966 12.4711 13.8644 12.4711 14.1953C12.4711 14.5262 12.2033 14.794 11.8724 14.794H4.68798C4.35706 14.794 4.08928 14.5262 4.08928 14.1953C4.08928 13.8644 4.35706 13.5966 4.68798 13.5966ZM4.68798 15.9914H9.4776C9.80852 15.9914 10.0763 16.2592 10.0763 16.5901C10.0763 16.921 9.80852 17.1888 9.4776 17.1888H4.68798C4.35706 17.1888 4.08928 16.921 4.08928 16.5901C4.08928 16.2592 4.35706 15.9914 4.68798 15.9914Z" fill="#8F8F8F"/>
@@ -155,7 +155,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       containerClass: "mt-5",
       label: {
         text: "Additional Details",
-        htmlFor: "addititionalDetails",
+        htmlFor: "additionalDetails",
         className: "mb-[12px]",
       },
       field: {
@@ -164,8 +164,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           !border-light
         `,
         rows: 5,
-        id: "addititionalDetails",
-        name: "addititionalDetails",
+        id: "additionalDetails",
+        name: "additionalDetails",
         placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",
         register,
       },
@@ -179,7 +179,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         text: "Save",
         inputType: "submit",
         className:
-          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

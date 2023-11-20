@@ -3972,10 +3972,21 @@ export const DEFAULT_EMPLOYEE = {
 
 export const DEFAULT_FOLLOWUP = {
   id: "",
-  customerName: "",
   dateAndTime: "",
   title: "",
   status: "",
   delete: "",
   details: "",
+  dateTime: "",
+  customer: {
+    id: "",
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    createdOn: "",
+    location: "",
+    type: "",
+    refID: "",
+  }
 }
+

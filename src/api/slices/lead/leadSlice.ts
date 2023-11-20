@@ -7,25 +7,28 @@ import { Lead } from "@/types/leads";
 interface LeadState {
     lead: Lead[];
     loading: boolean;
-    error: Record<string, object>
+    error: Record<string, object>,
+    lastPage: number,
+    totalCount: number
 }
 
 const initialState: LeadState = {
     lead: [],
     loading: false,
-    error: {}
+    error: {},
+    lastPage: 1,
+    totalCount: 10,
 }
 
 export const readLead: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("lead/read", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params } = args as any;
 
         try {
-            await apiServices.readLead(data);
-            return true;
+            const response = await apiServices.readLead(params);
+            return response?.data?.data;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
-            setErrors(setError, e?.data.data, translate);
             return false;
         }
     });
@@ -83,8 +86,10 @@ const leadSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readLead.fulfilled, (state, action) => {
-            state.loading = false;
-            state.lead = action.payload
+            state.lead = action.payload.Lead;
+            state.lastPage = action.payload.lastPage,
+                state.totalCount = action.payload.totalCount,
+                state.loading = false;
         });
         builder.addCase(readLead.rejected, (state) => {
             state.loading = false

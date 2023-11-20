@@ -17,8 +17,11 @@ export const useAddFollowUp = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
   const { customer } = useAppSelector((state) => state.customer);
+  const { lead } = useAppSelector((state) => state.lead);
+  const { loading,error } = useAppSelector((state) => state.followUp);
+
+
 
 
   const schema = generateAddFollowUpValidation(translate);
@@ -31,6 +34,8 @@ export const useAddFollowUp = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  console.log(errors);
+
 
   const lookUpModals = {
     [Modals.customer]: () => handleAllCustomers(),
@@ -45,7 +50,7 @@ export const useAddFollowUp = (
     register,
     loading,
     control,
-    customer,
+    { customer: customer, lead: lead },
     handleModalPop,
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -61,6 +66,7 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    customer
+    customer,
+    lead
   };
 };

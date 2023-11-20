@@ -1,22 +1,22 @@
 // add follow up
 export enum AddPostPonedNote {
-  date = "date",
-  detail = "detail",
+  date = "dateTime",
+  detail = "postPonedNote",
 }
 
 // add remarks
 export enum AddRemarks {
-  remark = "remark",
+  remark = "completeRemarks",
 }
 
 // Add follow-up
 export enum AddFollowUp {
-  selectCustomer = "selectCustomer",
+  selectCustomer = "customer",
   title = "title",
-  selectLead = "selectLead",
-  dateAndTime = "dateAndTime",
-  followUpType = "followUpType",
-  addititionalDetails = "addititionalDetails",
+  selectLead = "lead",
+  dateAndTime = "dateTime",
+  followUpType = "type",
+  addititionalDetails = "additionalDetails",
 }
 
 // add follow enums

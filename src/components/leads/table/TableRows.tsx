@@ -22,7 +22,7 @@ const TableRows = ({
   const router = useRouter();
   return (
     <div>
-      {dataToAdd?.map((item: any, index: number) => {
+      {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div
             onClick={() => router.push("/leads/details")}
@@ -30,7 +30,7 @@ const TableRows = ({
             className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md flex items-center">
-              {item.id}
+              {item?.refID}
             </span>
             <span className="px-6 py-4 bg-white  flex items-center">
               {item.name}
@@ -42,18 +42,19 @@ const TableRows = ({
               {item.phone}
             </span>
             <span className="px-6 py-4 bg-white flex items-center">
-              {item.createdOn.toLocaleDateString()}
+              {/* {item.create.toLocaleDateString()} */}
             </span>
             <span className="px-6 py-4 bg-white ">{item.location}</span>
             <span className="px-6 py-4 bg-white ">
               <div
-                className={`${
-                  item.status.includes("Open")
-                    ? "bg-primary"
-                    : item.status.includes("Close")
-                    ? "bg-[#FE9244]"
-                    : "bg-[#FF376F]"
-                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+              // ${
+              //   item.status.includes("Open")
+              //     ? "bg-primary"
+              //     : item.status.includes("Close")
+              //     ? "bg-[#FE9244]"
+              //     : "bg-[#FF376F]"
+              // }
+                className={` text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
                 {item.status}
               </div>

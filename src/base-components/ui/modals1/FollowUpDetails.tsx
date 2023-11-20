@@ -3,6 +3,9 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { FollowUpDetailsProps } from "@/types/follow-up";
+import { formatAddress } from "@/utils/utility";
+import moment from "moment";
+import { staticEnums } from "@/utils/static";
 
 type details = {
   label: string;
@@ -14,86 +17,87 @@ const FollowUpDetails = ({
   handleAddPostPonedNote,
   handleAddRemarks,
   status,
+  followUpDetails
 }: FollowUpDetailsProps) => {
 
   const detailsData: details[] = [
     {
       label: "Name",
-      value: "Rahal Ahmed",
+      value: followUpDetails?.customer?.fullName,
     },
     {
       label: "Customer Type",
-      value: "Individual",
+      value: followUpDetails?.customer?.customerType,
     },
     {
       label: "Email Address",
-      value: "rahal.ahmad@gmail.com",
+      value: followUpDetails?.customer?.email,
     },
     {
       label: "Phone Number",
-      value: "+49 445612 2112",
+      value: followUpDetails?.customer?.phoneNumber,
     },
 
     {
       label: "Mobile Number",
-      value: "+49 445612 2112",
+      value: followUpDetails?.customer?.mobileNumber,
     },
     {
       label: "Address Details",
-      value: `Mohrenstrasse 37 10117 Berlin`,
+      value: formatAddress(followUpDetails?.customer?.address),
     },
   ];
 
-  const followUpDetails: details[] = [
-    {
-      label: "Title/Subject",
-      value: "Offerten Follow up",
-    },
-    {
-      label: "Follow up Date and Time",
-      value: "22:10:06,  12 September 2023",
-    },
-    {
-      label: "Follow Up type",
-      value: "Reason",
-    },
-  ];
+  // const followUpDetails: details[] = [
+  //   {
+  //     label: "Title/Subject",
+  //     value: "Offerten Follow up",
+  //   },
+  //   {
+  //     label: "Follow up Date and Time",
+  //     value: "22:10:06,  12 September 2023",
+  //   },
+  //   {
+  //     label: "Follow Up type",
+  //     value: "Reason",
+  //   },
+  // ];
 
   const leadsDetails: details[] = [
     {
       label: "Required Service ",
-      value: "Cleaning",
+      value: followUpDetails?.lead?.leadStatus,
     },
     {
       label: "Desire Date and time",
-      value: "22:10:06,  12 September 2023",
+      value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
     },
     {
       label: "Flexibility",
-      value: "25/09 to 28/09",
+      value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
     },
     {
       label: "Budget",
-      value: "Less then 1000CHF",
+      value: followUpDetails?.lead?.leadStatus,
     },
   ];
 
   const addressDetails: details[] = [
     {
       label: "Street NO.",
-      value: "Zweibrückenstraße, 12 ",
+      value: followUpDetails?.customer?.address?.streetNumber,
     },
     {
       label: "Post Code",
-      value: "1234",
+      value: followUpDetails?.customer?.address?.postalCode,
     },
     {
       label: "Country",
-      value: "Switzerland",
+      value: followUpDetails?.customer?.address?.country,
     },
     {
       label: "Description",
-      value: "Lorem ipsum dolor sit amet, sit dolr s...View more",
+      value: followUpDetails?.customer?.address?.country,
     },
   ];
 
@@ -115,7 +119,8 @@ const FollowUpDetails = ({
             <section className="flex justify-between items-center mb-5">
               <h2 className="font-medium text-2xl text-black">Details</h2>
               <div className="flex items-center gap-x-[14px] mr-5">
-                {status.neutral && (
+                {/*@ts-ignore  */}
+                {!followUpDetails?.isPostponed &&
                   <>
                     <span
                       onClick={() => handleAddPostPonedNote()}
@@ -135,39 +140,43 @@ const FollowUpDetails = ({
                       </svg>
                       Postponed
                     </span>
-                    <span
-                      onClick={() => handleAddRemarks()}
-                      className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer "
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <g clip-path="url(#clip0_1225_39586)">
-                          <path
-                            d="M16.3104 0.874512H3.31461C1.65918 0.874512 0.3125 2.22119 0.3125 3.87662V16.8724C0.3125 18.5278 1.65918 19.8745 3.31461 19.8745H16.3104C17.9658 19.8745 19.3125 18.5278 19.3125 16.8724V3.87662C19.3125 2.22119 17.9658 0.874512 16.3104 0.874512ZM17.3111 16.8724C17.3111 17.4241 16.8621 17.8731 16.3104 17.8731H3.31461C2.76287 17.8731 2.31399 17.4241 2.31399 16.8724V3.87662C2.31399 3.32488 2.76292 2.876 3.31461 2.876H16.3104C16.8621 2.876 17.311 3.32493 17.311 3.87662V16.8724H17.3111Z"
-                            fill="#4A13E7"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_1225_39586">
-                            <rect
-                              width="19"
-                              height="19"
-                              fill="white"
-                              transform="translate(0.3125 0.874512)"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      Mark as Complete
-                    </span>
+
                   </>
-                )}
-                {status.completed && (
+                }
+                {
+                  !followUpDetails?.isCompleted && <span
+                    onClick={() => handleAddRemarks()}
+                    className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <g clip-path="url(#clip0_1225_39586)">
+                        <path
+                          d="M16.3104 0.874512H3.31461C1.65918 0.874512 0.3125 2.22119 0.3125 3.87662V16.8724C0.3125 18.5278 1.65918 19.8745 3.31461 19.8745H16.3104C17.9658 19.8745 19.3125 18.5278 19.3125 16.8724V3.87662C19.3125 2.22119 17.9658 0.874512 16.3104 0.874512ZM17.3111 16.8724C17.3111 17.4241 16.8621 17.8731 16.3104 17.8731H3.31461C2.76287 17.8731 2.31399 17.4241 2.31399 16.8724V3.87662C2.31399 3.32488 2.76292 2.876 3.31461 2.876H16.3104C16.8621 2.876 17.311 3.32493 17.311 3.87662V16.8724H17.3111Z"
+                          fill="#4A13E7"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1225_39586">
+                          <rect
+                            width="19"
+                            height="19"
+                            fill="white"
+                            transform="translate(0.3125 0.874512)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    Mark as Complete
+                  </span>
+                }
+                {
+                  followUpDetails.isCompleted &&
                   <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-default ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -199,23 +208,29 @@ const FollowUpDetails = ({
                     </svg>
                     Completed
                   </span>
-                )}
+                }
               </div>
             </section>
 
             <hr className="opacity-10" />
 
-            {(status.postpond || status.completed) && (
+            {followUpDetails?.isCompleted ? (
               <div className="flex flex-col gap-y-1 mt-1">
                 <p className="text-[#4D4D4D] text-sm font-normal">
-                  Your {status.postpond ? "Postponed Note " : "Remark"}
+                  Your Remarks
                 </p>
                 <p className="text-[#484848] text-base font-normal">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. sitl
-                  Pellentesque viverra Lorem ipsum dolor sit amet, consectetur.
+                  {followUpDetails?.completeRemarks}
                 </p>
               </div>
-            )}
+            ) : followUpDetails?.isPostponed ? <div className="flex flex-col gap-y-1 mt-1">
+              <p className="text-[#4D4D4D] text-sm font-normal">
+                Your Postponed Note
+              </p>
+              <p className="text-[#484848] text-base font-normal">
+                {followUpDetails?.postPonedNote}
+              </p>
+            </div> : null}
 
             <section className="grid grid-cols-2 mt-[30px] mb-[18px]">
               {/* customer details */}
@@ -225,7 +240,7 @@ const FollowUpDetails = ({
                     Customer Details
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
-                    ID: 001
+                    ID: {followUpDetails?.customer?.refID}
                   </span>
                 </article>
 
@@ -253,7 +268,7 @@ const FollowUpDetails = ({
                 </h2>
 
                 <div className="grid grid-cols-2 gap-x-3 mt-[22px]">
-                  {followUpDetails.map((item, index) => (
+                  {/* {followUpDetails.map((item, index) => (
                     <div
                       className="flex flex-col gap-y-[10px] mb-5"
                       key={index}
@@ -265,7 +280,7 @@ const FollowUpDetails = ({
                         {item.value}
                       </span>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
 
                 <div className="flex flex-col gap-y-[10px] mb-5">
@@ -273,10 +288,7 @@ const FollowUpDetails = ({
                     Additional Detail
                   </p>
                   <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    sitl Pellentesque viverra venenatis velit et tristique. Nam
-                    quis a eros sit amet ipsum imperdiet molestie Etiam
-                    ut....View more
+                    {followUpDetails?.additionalDetails}
                   </p>
                 </div>
               </div>
@@ -293,7 +305,7 @@ const FollowUpDetails = ({
                     Lead Details
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
-                    ID: 001-1
+                    ID: {followUpDetails?.lead?.refID}
                   </span>
                 </article>
 

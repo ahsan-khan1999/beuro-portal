@@ -6,6 +6,7 @@ import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { FollowUps } from "@/types/follow-up";
+import moment from "moment";
 
 interface CustomerState {
     followUp: FollowUps[];
@@ -59,11 +60,7 @@ export const createFollowUp: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            let apiData = { ...data }
-            //@ts-expect-error 
-            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
-            //@ts-expect-error 
-            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            let apiData = { ...data, dateTime: moment(data?.dateTime).toISOString() }
             await apiServices.createFollowUp(apiData);
             return true;
         } catch (e: any) {
@@ -110,8 +107,32 @@ export const deleteFollowUp: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const createPostpondNotes: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/create/postpond/notes", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+        
+        try {
+            const response = await apiServices.createPostPondNotes(data);
+            return response?.data?.FollowUp;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const markComplete: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("followUp/markComplete", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
 
-
+        try {
+            const response = await apiServices.markComplete(data);
+            return response?.data?.FollowUp;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 const followUpSlice = createSlice({
     name: "FollowUpSlice",
     initialState,
@@ -171,6 +192,26 @@ const followUpSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(readFollowUpDetail.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(createPostpondNotes.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(createPostpondNotes.fulfilled, (state, action) => {
+            state.followUpDetails = action.payload
+            state.loading = false;
+        });
+        builder.addCase(createPostpondNotes.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(markComplete.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(markComplete.fulfilled, (state, action) => {
+            state.followUpDetails = action.payload
+            state.loading = false;
+        });
+        builder.addCase(markComplete.rejected, (state) => {
             state.loading = false
         })
 

@@ -10,12 +10,12 @@ import { AllCustomersTableProps } from "@/types/follow-up";
 const AllCustomersTable = ({
   handleCustomerDetail,
 }: AllCustomersTableProps) => {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter } =
     useAllCustomers();
 
   return (
     <>
-      <TableFunctions />
+      <TableFunctions filter={filter} setFilter={setFilter}/>
       <TableLayout>
         <TableHeading />
         <TableRows

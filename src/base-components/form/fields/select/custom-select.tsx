@@ -1,6 +1,7 @@
 // import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
+import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
@@ -65,7 +66,7 @@ export const SelectBox = ({
         }}
         className={classes}
       >
-        {(field && field.value) || defaultValue}
+        {(field && getLabelByValue(field.value,option)) || defaultValue}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (

@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddRemarksValidation } from "@/validation/followUpSchema";
 import { AddRemarksFormField } from "@/components/follow-up/fields/add-remarks-fields";
+import { markComplete } from "@/api/slices/followUp/followUp";
 
 export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, followUpDetails } = useAppSelector((state) => state.followUp);
 
   const schema = generateAddRemarksValidation(translate);
   const {
@@ -26,10 +27,11 @@ export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   // @ts-expect-error
 
   const fields = AddRemarksFormField(register, loading, control);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
- 
-    dispatch(loginUser({ data, router, setError, translate }));
-    handleFollowUpsDetails();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, id: followUpDetails?.id }
+    const res = await dispatch(markComplete({ data: apiData, router, setError, translate }));
+    if (res?.payload) handleFollowUpsDetails(followUpDetails?.id);
+
 
   };
   return {

@@ -45,7 +45,7 @@ export interface Customers {
   lead: CustomerLeadDetail;
 }
 
-interface CustomerAddress {
+export interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string

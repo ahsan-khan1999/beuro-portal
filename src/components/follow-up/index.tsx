@@ -8,12 +8,12 @@ import TableFunctions from "./table/TableFunctions";
 import { FollowUpsTableProps } from "@/types/follow-up";
 
 const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter } =
     useFollowUps();
 
   return (
     <>
-      <TableFunctions />
+      <TableFunctions filter={filter} setFilter={setFilter}/>
       <TableLayout>
         <TableHeading />
         <TableRows

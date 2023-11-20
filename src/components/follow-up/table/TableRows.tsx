@@ -1,5 +1,6 @@
 import React from "react";
-import { FollowUpsTable } from "@/types/follow-up";
+import { FollowUps, FollowUpsTable } from "@/types/follow-up";
+import moment from "moment";
 
 const TableRows = ({
   currentPageRows,
@@ -7,33 +8,31 @@ const TableRows = ({
 }: FollowUpsTable) => {
   return (
     <div>
-      {currentPageRows?.map((item: any, index: number) => {
+      {currentPageRows?.map((item: FollowUps, index: number) => {
         return (
           <div
-            onClick={handleFollowUpsDetails}
+            onClick={() => handleFollowUpsDetails(item.id)}
             key={index}
             className="border border-[#4A13E7] cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2 bg-white rounded-md p-4"
           >
             <span className=" bg-white rounded-md flex items-center ">
-              {item.id}
+              {item.customer?.refID}
             </span>
             <span className=" bg-white  flex items-center">
-              {item.customerName}
+              {item.customer?.fullName}
             </span>
             <span className=" bg-white flex items-center">
-              {item.dateAndTime}
+              {moment(item.dateTime).format("DD/MM/YYYY hh:mm")}
             </span>
             <span className=" bg-white flex items-center">{item.title}</span>
 
             <span className=" bg-white flex items-center justify-center">
               <div
-                className={`${
-                  item.status.includes("Overdue")
-                    ? "bg-[#FF376F]"
-                    : item.status.includes("Pending")
+                className={`${item.status == "Upcoming" ? "bg-[#FF376F]"
+                  : item.status?.includes("Pending")
                     ? "bg-[#FE9244]"
                     : "bg-[#4A13E7]"
-                } text-white px-2 py-1 text-center rounded-md  text-sm `}
+                  } text-white px-2 py-1 text-center rounded-md  text-sm `}
               >
                 {item.status}
               </div>

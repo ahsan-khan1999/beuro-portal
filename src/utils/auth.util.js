@@ -112,3 +112,8 @@ export const generateValues = (data) => {
   }
   return option;
 };
+
+export const getLabelByValue = (value, list) => {
+  let filteredItem = list.filter((item) => item.value === value)
+  if (filteredItem) return filteredItem[0]?.label
+}

@@ -23,6 +23,7 @@ import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 import { Status } from "./global";
 import { Employee } from "./employee";
+import { Lead } from "./leads";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -340,9 +341,15 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  customers:Customers[],
+  data: { customer: Customers[], lead: Lead[] },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+export type GeneratePostPondFormField = (
+  register: UseFormRegister<FieldValues>,
+  loading: boolean,
+  control: Control<FieldValues>,
 ) => FormField[];
 
 // accounting setting formfield
@@ -391,9 +398,9 @@ export interface CheckBoxType {
 
 export interface FilterType {
   text: string;
-  sortBy: string;
-  type: string;
-  location: string;
+  sortBy?: string;
+  type?: string;
+  location?: string;
 }
 export interface FilterProps {
   filter: FilterType;
