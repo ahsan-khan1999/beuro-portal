@@ -11,20 +11,23 @@ import AllLeads from "@/base-components/ui/modals1/AllLeads";
 import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
 import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
 import FollowUps from "@/base-components/ui/modals1/FollowUps";
-import { readFollowUp, readFollowUpDetail } from "@/api/slices/followUp/followUp";
+import { deleteFollowUp, readFollowUp, readFollowUpDetail } from "@/api/slices/followUp/followUp";
 import { FilterType } from "@/types";
 import { readCustomer } from "@/api/slices/customer/customerSlice";
 import { readLead } from "@/api/slices/lead/leadSlice";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useGeneralFollowUp = () => {
 
     const dispatch = useAppDispatch();
-    const { followUp, followUpDetails } = useAppSelector(state => state.followUp)
+    const { followUp, followUpDetails, loading } = useAppSelector(state => state.followUp)
     const [filter, setFilter] = useState<FilterType>({
         text: ""
     });
 
     const { modal } = useAppSelector((state) => state.global);
+    const { modal: { data } } = useAppSelector((state) => state.global);
+
     const [status, setStatus] = useState({
         postpond: false,
         completed: false,
@@ -56,6 +59,21 @@ const useGeneralFollowUp = () => {
         //     neutral: false,
         // });
     };
+    const handleDeleteFollowUp = (id: string,
+        e: React.MouseEvent<HTMLDivElement>) => {
+
+        if (e) {
+            e.stopPropagation();
+        }
+
+        dispatch(updateModalType({
+            type: ModalType.INFO_DELETED,
+            data: id
+
+        }
+        ));
+
+    }
 
     const handleAddRemarks = () => {
         dispatch(updateModalType({ type: ModalType.ADD_REMARKS }));
@@ -89,7 +107,12 @@ const useGeneralFollowUp = () => {
     const handleLeadDetail = () => {
         dispatch(updateModalType({ type: ModalType.SELECTED_LEADS_DETAIL }));
     };
+    const routeHandler = async () => {
+        const response = await dispatch(deleteFollowUp({ data: { id: data } }))
+        if (response?.payload)
+            dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
 
+    }
     // METHOD FOR HANDLING THE MODALS
     const MODAL_CONFIG: ModalConfigType = {
         [ModalType.FOLLOW_UPS]: (
@@ -105,7 +128,7 @@ const useGeneralFollowUp = () => {
                 handleAddRemarks={handleAddRemarks}
                 status={status}
                 followUpDetails={followUpDetails}
-                
+
             />
         ),
         [ModalType.ADD_POSTSPONED_NOTE]: (
@@ -143,6 +166,14 @@ const useGeneralFollowUp = () => {
         [ModalType.SELECTED_LEADS_DETAIL]: (
             <FollowUpServiceDetails onClose={onClose} />
         ),
+        [ModalType.INFO_DELETED]: (
+            <DeleteConfirmation_2
+                onClose={onClose}
+                modelHeading="Are you sure you want to delete this FollowUp?"
+                routeHandler={routeHandler}
+                loading={loading}
+            />
+        ),
     };
 
     const renderModal = () => {
@@ -154,7 +185,8 @@ const useGeneralFollowUp = () => {
         handleAddFollowUp,
         handleFollowUpsDetails,
         handleFollowUps,
-        followUpDetails
+        followUpDetails,
+        handleDeleteFollowUp
     };
 };
 

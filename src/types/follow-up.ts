@@ -1,3 +1,4 @@
+import { StatusColors } from "@/enums/follow-up";
 import { CustomerAddress, CustomerLeadDetail } from "./customer";
 import { Lead } from "./leads";
 
@@ -6,7 +7,7 @@ export interface FollowUps {
   id: string;
   dateAndTime: string;
   title: string;
-  status?: string;
+  status:  keyof typeof StatusColors;
   delete?: string;
   details?: string;
   dateTime: string
@@ -17,13 +18,15 @@ export interface FollowUps {
   isPostponed:boolean;
   postPonedNote:string;
   completeRemarks:string
-
+  createdAt:string
 }
 
 // follow up table is here
 export interface FollowUpsTable {
   currentPageRows: FollowUps[];
   handleFollowUpsDetails: (id:string) => void;
+  handleFollowUpsDelete: (id:string) => void;
+
 }
 
 // interface for all customers

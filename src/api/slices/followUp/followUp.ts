@@ -90,20 +90,20 @@ export const updateFollowUp: AsyncThunk<boolean, object, object> | any =
     });
 export const deleteFollowUp: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("followUp/delete", async (args, thunkApi) => {
-        const { customerDetails: data, router, setError, translate } = args as any;
+        const {  data } = args as any;
 
         try {
             await apiServices.deleteFollowUp(data);
-            router.pathname = "/dashboard"
-            updateQuery(router, router.locale)
+
             thunkApi.dispatch(updateModalType({
                 type:
                     ModalType.NONE
             }));
+
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
-            setErrors(setError, e?.data.data, translate);
+            // setErrors(setError, e?.data.data, translate);
             return false;
         }
     });

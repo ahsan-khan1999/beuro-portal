@@ -24,3 +24,9 @@ export enum Modals {
   customer = "customer",
   leads = "leads",
 }
+
+export enum StatusColors {
+  "Upcoming" = "#4A13E7",
+  "Pending" = "#FE9244",
+  "Overdue" = "#FF376F"
+}

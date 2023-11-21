@@ -1,24 +1,28 @@
-import { readFollowUp } from "@/api/slices/followUp/followUp";
-import { FilterType } from "@/types";
+import { deleteFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
+import { Action, FilterType } from "@/types";
 import { FollowUps } from "@/types/follow-up";
-import { followUpsData } from "@/utils/static";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: "",
   });
   const dispatch = useAppDispatch();
-  const { followUp } = useAppSelector(state => state.followUp)
+  const { followUp, totalCount, loading } = useAppSelector(state => state.followUp)
+  const { modal: { data } } = useAppSelector((state) => state.global);
+  const { modal } = useAppSelector((state) => state.global);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<FollowUps[]>([]);
-  const totalItems = followUpsData.length;
+  const totalItems = totalCount;
   const itemsPerPage = 10;
 
   useEffect(() => {
-    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } })).then((res) => {
+    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage));
@@ -29,14 +33,46 @@ const useFollowUps = () => {
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(
-      followUpsData.slice(startIndex, startIndex + itemsPerPage)
+      followUp.slice(startIndex, startIndex + itemsPerPage)
     );
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter };
+  const handleDeleteFollowUp = (id: string) => {
+    dispatch(updateModalType({
+      type: ModalType.INFO_DELETED,
+      data: id
+
+    }
+    ));
+
+  }
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+  const routeHandler = async () => {
+    const response = await dispatch(deleteFollowUp({ data: { id: data } }))
+    if (response?.payload)
+      dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
+
+  }
+  const MODAL_CONFIG: ModalConfigType = {
+
+    [ModalType.INFO_DELETED]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading="Are you sure you want to delete this FollowUp?"
+        routeHandler={routeHandler}
+        loading={loading}
+      />
+    ),
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal };
 };
 
 export default useFollowUps;

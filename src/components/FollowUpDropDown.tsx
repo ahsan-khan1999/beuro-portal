@@ -15,8 +15,7 @@ import moment from "moment";
 import { getDaysDifference } from "@/utils/utility";
 
 const FollowUpDropDown = () => {
-  const { followUp, handleAddFollowUp, handleFollowUps, handleFollowUpsDetails, renderModal } = useGeneralFollowUp()
-  console.log(followUp, "follow");
+  const { followUp, handleAddFollowUp, handleFollowUps, handleFollowUpsDetails, renderModal ,handleDeleteFollowUp} = useGeneralFollowUp()
 
   return (
     <>
@@ -32,7 +31,7 @@ const FollowUpDropDown = () => {
           />
         </div>
         {followUp?.map((item, index) => {
-          let days = getDaysDifference(item.dateTime)
+          let days = getDaysDifference(item.createdAt)
           return (
             <div
               key={index}
@@ -89,7 +88,7 @@ const FollowUpDropDown = () => {
                     }
                     {
                       days > 0 ?
-                        <div className="flex items-center absolute right-5">
+                        <div className="flex items-center absolute right-5" onClick={(e) => handleDeleteFollowUp(item.id,e)}>
                           <div className="ml-2 border-2 border-red rounded-md p-1">
 
                             <Image src={deleteIcon} alt="Id Icon" className="" />
