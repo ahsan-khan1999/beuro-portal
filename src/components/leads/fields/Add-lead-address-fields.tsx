@@ -1,197 +1,118 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadsFormField } from "@/types";
+import { FormField, GenerateLeadAddressFormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 
-export const AddLeadAddressDetailsFormField: GenerateLeadsFormField = (
+export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
-  onClick
+  onClick,
+  count
 ) => {
-  const formField: FormField[] = [
-    {
-      containerClass: "mt-6",
-      label: {
-        text: "Address 1 Details",
-        htmlFor: "address-1-details",
-        className: "mb-[10px] text-[#8F8F8F]",
-      },
-      field: {
-        type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3",
-        children: [
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Street NO.",
-              htmlFor: "streetNo",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "streetNo",
-              name: "streetNo",
-              placeholder: "Zweibrückenstraße, 12 ",
-              register,
-            },
-          },
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Post Code",
-              htmlFor: "postCode",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "postCode",
-              name: "postCode",
-              placeholder: "1234",
-              register,
-            },
-          },
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Country",
-              htmlFor: "country",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "country",
-              name: "country",
-              placeholder: "Switzerland",
-              register,
-            },
-          },
-        ],
-      },
-    },
+  const formField: FormField[] = [];
 
-    {
-      containerClass: "mt-5 mb-0 ",
-      label: {
-        text: "Description",
-        htmlFor: "description",
-        className: "mb-[10px]",
+  for (let i = 0; i <= count; i++) {
+    formField.push(
+      {
+        containerClass: "mt-6",
+        label: {
+          text: `Address ${i} Details`,
+          htmlFor: `address-${i}-details`,
+          className: "mb-[10px] text-[#8F8F8F]",
+        },
+        field: {
+          type: Field.div,
+          id: `div-field-${i}`,
+          className: "grid grid-cols-3 gap-x-3",
+          children: [
+            {
+              containerClass: "mb-0 ",
+              label: {
+                text: "Street NO.",
+                htmlFor: `streetNo-${i}`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.input,
+                className: "!p-4 !border-dark  focus:!border-primary ",
+                inputType: "text",
+                id: `streetNo-${i}`,
+                name: `streetNo-${i}`,
+                placeholder: `Zweibrückenstraße, ${i}`,
+                register,
+              },
+            },
+            {
+              containerClass: "mb-0 ",
+              label: {
+                text: "Post Code",
+                htmlFor: `postCode-${i}`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.input,
+                className: "!p-4 !border-dark  focus:!border-primary ",
+                inputType: "text",
+                id: `postCode-${i}`,
+                name: `postCode-${i}`,
+                placeholder: `123${i}`,
+                register,
+              },
+            },
+            {
+              containerClass: "mb-0 ",
+              label: {
+                text: "Country",
+                htmlFor: `country-${i}`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.input,
+                className: "!p-4 !border-dark  focus:!border-primary ",
+                inputType: "text",
+                id: `country-${i}`,
+                name: `country-${i}`,
+                placeholder: `Country ${i}`,
+                register,
+              },
+            },
+          ],
+        },
       },
-      field: {
-        type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
-        rows:4,
-        id: "description",
-        name: "description",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
-        register,
+      {
+        containerClass: "mt-5 mb-0 ",
+        label: {
+          text: "Description",
+          htmlFor: "description",
+          className: "mb-[10px]",
+        },
+        field: {
+          type: Field.textArea,
+          className: "!p-4 !border-dark  focus:!border-primary ",
+          rows: 4,
+          id: "description",
+          name: "description",
+          placeholder:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+          register,
+        },
       },
-    },
+    );
+  }
 
-    {
-      containerClass: "mt-[30px] border-t border-black border-opacity-20 pt-5",
-      label: {
-        text: "Address 2 Details",
-        htmlFor: "address-1-details",
-        className: "mb-[10px] text-[#8F8F8F]",
-      },
-      field: {
-        type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3",
-        children: [
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Street NO.",
-              htmlFor: "streetNo",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "streetNo",
-              name: "streetNo",
-              placeholder: "Zweibrückenstraße, 12 ",
-              register,
-            },
-          },
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Post Code",
-              htmlFor: "postCode",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "postCode",
-              name: "postCode",
-              placeholder: "1234",
-              register,
-            },
-          },
-          {
-            containerClass: "mb-0 ",
-            label: {
-              text: "Country",
-              htmlFor: "country",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
-              inputType: "text",
-              id: "country",
-              name: "country",
-              placeholder: "Switzerland",
-              register,
-            },
-          },
-        ],
-      },
-    },
-
-    {
-      containerClass: "mt-5 mb-0 ",
-      label: {
-        text: "Description",
-        htmlFor: "description",
-        className: "mb-[10px]",
-      },
-      field: {
-        type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
-        rows:4,
-        id: "description",
-        name: "description",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
-        register,
-      },
-    },
+  formField.push(
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Back",
               inputType: "button",
               className:
@@ -204,7 +125,7 @@ id:"button",
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Next",
               inputType: "submit",
               className:
@@ -214,8 +135,8 @@ id:"button",
           },
         ],
       },
-    },
-  ];
+    }
+  );
 
   return formField;
 };

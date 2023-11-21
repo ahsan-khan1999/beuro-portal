@@ -324,7 +324,21 @@ export type GenerateLeadsFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  trigger?: UseFormTrigger<FieldValues>,
+) => FormField[];
+export type GenerateLeadAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: () => void,
+  count: number
+) => FormField[];
+export type GenerateLeadsCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void },
+  setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 
 export type GeneratePlansFormField = (

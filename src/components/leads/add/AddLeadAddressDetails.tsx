@@ -4,11 +4,13 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 
-const AddLeadAddressDetails = ({onHandleNext, onHandleBack} : {onHandleNext:Function; onHandleBack:Function}) => {
+const AddLeadAddressDetails = ({ onHandleNext, onHandleBack }: { onHandleNext: Function; onHandleBack: Function }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors } =
     useAddLeadAddressDetails(onHandleNext);
-    const router = useRouter()
+  const router = useRouter()
+  console.log(errors,"errors");
+  
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 " id="Address Details">
@@ -18,8 +20,8 @@ const AddLeadAddressDetails = ({onHandleNext, onHandleBack} : {onHandleNext:Func
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
-      
+      <hr className="opacity-20 mb-5" />
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -27,6 +29,7 @@ const AddLeadAddressDetails = ({onHandleNext, onHandleBack} : {onHandleNext:Func
         errors={errors}
         className={`${defaultClassName}`}
       />
+     
     </FormCard>
   );
 };

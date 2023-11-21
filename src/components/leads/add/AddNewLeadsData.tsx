@@ -23,7 +23,7 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const [tabType, setTabType] = useState<ComponentsType>(
-    ComponentsType.customerEdit
+    ComponentsType.addressEdit
   );
 
   const router = useRouter();

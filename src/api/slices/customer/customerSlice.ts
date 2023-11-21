@@ -66,7 +66,7 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
-            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.createCustomer(apiData);
             return true;
         } catch (e: any) {

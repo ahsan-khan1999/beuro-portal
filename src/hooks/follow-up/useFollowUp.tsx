@@ -40,6 +40,9 @@ const useFollowUps = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  const handleFilterChange = () => {
+    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
+  };
   const handleDeleteFollowUp = (id: string) => {
     dispatch(updateModalType({
       type: ModalType.INFO_DELETED,
@@ -72,7 +75,7 @@ const useFollowUps = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal };
+  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal,handleFilterChange };
 };
 
 export default useFollowUps;

@@ -330,7 +330,7 @@ export interface FieldComponents {
 }
 
 export interface FormProps {
-  formFields: FormField[];
+  formFields: FormField[] ;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   errors?: Record<string, any>;
   onSubmit: SubmitHandler<FieldValues>;

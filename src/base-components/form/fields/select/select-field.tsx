@@ -14,7 +14,6 @@ export const SelectField = ({
   className,
   disabled
 }: SelectProps) => {
-  
   return (
     <Controller
       name={name}
@@ -31,6 +30,7 @@ export const SelectField = ({
           trigger={trigger}
           className={className}
           disabled={disabled}
+          key={id}
         />
       )}
     />

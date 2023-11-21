@@ -25,7 +25,7 @@ export interface CustomerLeadDetail {
   expires?: string;
 }
 export interface Customers {
-  id: number;
+  id: string;
   refID: string;
   createdAt: string
   fullName: string;
@@ -37,7 +37,7 @@ export interface Customers {
   status?: string;
   editImg?: string;
   editNote?: string;
-  customerType?: string;
+  customerType: string;
   companyName: string;
   mobile: string;
   address: CustomerAddress;

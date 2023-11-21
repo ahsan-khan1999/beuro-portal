@@ -26,7 +26,8 @@ const SERVICE_URLS = {
   idVarificationReq: "/profile/id-verification-request",
   profileNotifications: "/profile/notification-settings",
   customer: "/customer",
-  lead: "/lead",
+  readLead:"/lead",
+  lead: "/lead/lead-step/1",
   content: "/content",
   offer: "/offer",
   contract: "/contract",
@@ -113,7 +114,7 @@ const updateCustomer = (data) =>
 const deleteCustomer = (data) =>
   del(SERVICE_URLS.customer + `/${data?.id}`, {}, { feature: featureConstants.login });
 const readLead = (params) =>
-  get(SERVICE_URLS.lead, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.readLead, params, { feature: featureConstants.login }, { detail: false });
 
 const createLead = (data) =>
   post(SERVICE_URLS.lead, data, { feature: featureConstants.login });

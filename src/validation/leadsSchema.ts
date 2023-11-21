@@ -1,3 +1,4 @@
+import { CustomerDetailsFields } from "@/enums/customers";
 import {
   AddNewLeadCustomer,
   LeadAdditionalDetails,
@@ -12,7 +13,7 @@ export const generateLeadsCustomerEditDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [LeadsCustomerEditDetails.firstName]: yup
+    [LeadsCustomerEditDetails.name]: yup
       .string()
       .required("validation required"),
 
@@ -29,12 +30,12 @@ export const generateLeadsCustomerEditDetailsValidation = (
       .email()
       .required(translate("validation required")),
 
-    [LeadsCustomerEditDetails.phoneNumber]: yup
+    [LeadsCustomerEditDetails.phone]: yup
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validation required")),
 
-    [LeadsCustomerEditDetails.mobileNumber]: yup
+    [LeadsCustomerEditDetails.mobile]: yup
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validation required")),
@@ -55,25 +56,23 @@ export const generateLeadsCustomerEditDetailsValidation = (
 
 // Validation for leads address edit details
 export const generateLeadsAddressEditDetailsValidation = (
-  translate: Function
+  translate: Function,
+  count: number
 ) => {
+
+  const addressSchema = Array.from({ length: count }, (_, index) => ({
+    [`${LeadsAddressEditDetails.streetNo}`]: yup.string().required(translate("validationMessages.required")),
+    [`${LeadsAddressEditDetails.postCode}`]: yup.string().required(translate("validationMessages.required")),
+    [`${LeadsAddressEditDetails.country}`]: yup.string().required(translate("validationMessages.required")),
+    [`${LeadsAddressEditDetails.description}`]: yup.string().required(translate("validationMessages.required")),
+  }))
+  .reduce((acc, obj) => ({ ...acc, ...obj }), {});
   return yup.object().shape({
-    [LeadsAddressEditDetails.streetNo]: yup
-      .string()
-      .required("validation required"),
+    address: yup.array().of(
+      yup.object().shape(addressSchema)
+    )
+  })
 
-    [LeadsAddressEditDetails.postCode]: yup
-      .string()
-      .required("validation required"),
-
-    [LeadsAddressEditDetails.country]: yup
-      .string()
-      .required("validation required"),
-
-    [LeadsAddressEditDetails.description]: yup
-      .string()
-      .required("validation required"),
-  });
 };
 
 // Validation for leads service edit details
@@ -120,46 +119,53 @@ export const generateAddNewLeadCustomerDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [AddNewLeadCustomer.customer]: yup.string().required("validation required"),
-
-    [AddNewLeadCustomer.customerType]: yup
+    [LeadsCustomerEditDetails.type]: yup
       .string()
       .required("validation required"),
-
-    [AddNewLeadCustomer.yourName]: yup.string().required("validation required"),
-
-    [AddNewLeadCustomer.companyName]: yup
+    [LeadsCustomerEditDetails.customer]: yup
+      .string().when('type', {
+        is: (type: string) => type === 'Existing Customer',
+        then: () => yup.string().required(translate("validationMessages.required")),
+      }),
+    [LeadsCustomerEditDetails.name]: yup
       .string()
       .required("validation required"),
+    [LeadsCustomerEditDetails.customerType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.companyName]: yup
+      .string().when('customerType', {
+        is: (customerType: string) => customerType === 'company',
+        then: () => yup.string().required(translate("validationMessages.required")),
+      }),
 
-    [AddNewLeadCustomer.email]: yup
+    [LeadsCustomerEditDetails.email]: yup
       .string()
       .email()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
-    [AddNewLeadCustomer.phoneNumber]: yup
-      .number()
+    [LeadsCustomerEditDetails.phone]: yup
+      .string()
       .min(11, translate("validationMessages.string.min"))
-      .required("validation required"),
-
-    [AddNewLeadCustomer.mobileNumber]: yup
-      .number()
+      .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.mobile]: yup
+      .string()
       .min(11, translate("validationMessages.string.min"))
-      .required("validation required"),
-
-    [AddNewLeadCustomer.streetNumber]: yup
-      .string()
-      .required(translate("validation required")),
-
-    [AddNewLeadCustomer.postCode]: yup
-      .string()
-      .required(translate("validation required")),
-
-    [AddNewLeadCustomer.country]: yup
-      .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.address]: yup.object({
+      [LeadsCustomerEditDetails.streetNo]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [LeadsCustomerEditDetails.postCode]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [LeadsCustomerEditDetails.country]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+    }).required()
   });
 };
+
 
 // Validation for leads additional edit details
 export const generateLeadAdditionalDetailsValidation = (

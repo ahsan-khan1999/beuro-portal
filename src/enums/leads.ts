@@ -1,14 +1,19 @@
 // Leads customer details edit
 export enum LeadsCustomerEditDetails {
-  firstName = "firstName",
+  name = "fullName",
   lastName = "lastName",
+  companyName = "companyName",
   customerType = "customerType",
   email = "email",
-  phoneNumber = "phoneNumber",
-  mobileNumber = "mobileNumber",
-  streetNo = "streetNo",
-  postCode = "postCode",
+  phone = "phoneNumber",
+  mobile = "mobileNumber",
+  streetNo = "streetNumber",
+  postCode = "postalCode",
   country = "country",
+  address = "address",
+  type = "type",
+  customer = "customerID"
+
 }
 
 // Leads Service edit details

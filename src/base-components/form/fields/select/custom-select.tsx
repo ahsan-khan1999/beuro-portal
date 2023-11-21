@@ -5,7 +5,7 @@ import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from 'react';
 // import searchIcon from "@/assets/svgs/search.svg";
 
 export const SelectBox = ({
@@ -23,11 +23,17 @@ export const SelectBox = ({
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
+
+
+  useEffect(() => {
+    if (defaultValue) field?.onChange(defaultValue)
+  }, [defaultValue])
+
   useMemo(() => {
     if (options.length > 0) {
       setOption(options);
     }
-  }, [options.length]);
+  }, [options?.length]);
 
   const search = useRef<string>("");
 
@@ -40,7 +46,7 @@ export const SelectBox = ({
     setIsOpen(false);
     field?.onChange(value);
     trigger?.(field?.name);
-    onItemChange && onItemChange();
+    onItemChange && onItemChange(value);
   };
 
   const handleChange = (value: string) => {
@@ -51,9 +57,8 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark  py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
-    success ? "pl-4 pr-10" : "pl-11 pr-4"
-  }`;
+  const defaultClasses = `placeholder:text-dark  py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+    }`;
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -66,7 +71,7 @@ export const SelectBox = ({
         }}
         className={classes}
       >
-        {(field && getLabelByValue(field.value,option)) || defaultValue}
+        {(field && getLabelByValue(field.value, option)) || getLabelByValue(defaultValue, option)}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (

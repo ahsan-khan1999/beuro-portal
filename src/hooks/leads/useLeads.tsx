@@ -101,7 +101,7 @@ const useLeads = () => {
   useEffect(() => {
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(lead.slice(startIndex, startIndex + itemsPerPage));
+    setCurrentPageRows(lead?.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

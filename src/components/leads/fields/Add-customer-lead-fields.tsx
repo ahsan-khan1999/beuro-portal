@@ -1,12 +1,16 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadsFormField } from "@/types";
+import { DivProps, FormField, GenerateLeadsCustomerFormField } from "@/types";
+import { staticEnums } from "@/utils/static";
 
-export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
+export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
-  control
+  control,
+  { customerType, type, customer, onCustomerSelect, customerDetails,onCancel },
+  setValue
 ) => {
-  const formField: FormField[] = [
+
+  let formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
@@ -17,7 +21,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
           {
             label: {
               text: "Customer",
-              htmlFor: "customer",
+              htmlFor: "type",
               className: "mb-[10px]",
             },
             field: {
@@ -31,8 +35,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
                     type: Field.radio,
                     value: "New Customer",
                     label: "New Customer",
-                    id: "customer",
-                    name: "customer",
+                    id: "type",
+                    name: "type",
                     register,
                   },
                 },
@@ -40,17 +44,16 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: "New Customer",
+                    value: "Existing Customer",
                     label: "Existing Customer",
-                    id: "customer",
-                    name: "customer",
+                    id: "type",
+                    name: "type",
                     register,
                   },
                 },
               ],
             },
           },
-
           {
             label: {
               text: "Customer Type",
@@ -58,57 +61,42 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: `pl-4 !min-h-[54px] !border-dark  focus:!border-primary `,
               type: Field.select,
               id: "customerType",
-              value: "Company",
               name: "customerType",
-              options: [{ value: "Company", label: "Company" }],
+              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
+                {
+                  value: item,
+                  label: item
+                }
+              )),
+
               control,
+              value: ""
             },
           },
-
           {
             label: {
               text: "Your Name",
-              htmlFor: "yourName",
+              htmlFor: "fullName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "yourName",
-              name: "yourName",
-              placeholder: "Ahmad",
+              id: "fullName",
+              name: "fullName",
+
+              placeholder: "Please Enter Your Name",
               register,
+              setValue
+
+
             },
           },
-        ],
-      },
-    },
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
-        children: [
-          {
-            label: {
-              text: "Company Name*",
-              htmlFor: "companyName",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "companyName",
-              name: "companyName",
-              placeholder: "Cloud Mesh SOlutions",
-              register,
-            },
-          },
+
           {
             containerClass: "mb-5",
             label: { text: "Email Address", htmlFor: "email" },
@@ -117,9 +105,11 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
               className: "!p-4    !border-dark  focus:!border-primary",
               id: "email",
               name: "email",
-              inputType: "email",
+              inputType: "text",
+
               placeholder: "Please Enter Email Address",
               register,
+
             },
           },
 
@@ -127,53 +117,45 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             label: {
               text: "Phone Number",
-              htmlFor: "number",
+              htmlFor: "phoneNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.phone,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: " !h-12  !border-dark  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
+              country: "ch",
               control,
-              country:"ch",
+              value: customerDetails && customerDetails?.phoneNumber
 
             },
           },
-        ],
-      },
-    },
-
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
               text: "Mobile Number",
-              htmlFor: "number",
+              htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.phone,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: " !h-12  !border-dark  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country:"ch",
+              country: "ch",
               control,
+              value: customerDetails && customerDetails?.mobileNumber
             },
           },
-        ],
-      },
-    },
 
+        ]
+      }
+    },
     {
       containerClass: "mt-5",
       label: {
-        text: "Address 1 Details*",
+        text: "Address Details*",
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
       },
@@ -187,17 +169,20 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             label: {
               text: "Street NO.",
-              htmlFor: "streetNumber",
+              htmlFor: "address.streetNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
-              id: "streetNumber",
-              name: "streetNumber",
+              id: "address.streetNumber",
+              name: "address.streetNumber",
+
               placeholder: "Please Enter Street Number",
               register,
+
+
             },
           },
 
@@ -205,63 +190,74 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
             containerClass: "mb-0",
             label: {
               text: "Post Code",
-              htmlFor: "post code",
+              htmlFor: "address.postalCode",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className:
                 "!p-4  !border-dark focus:!border-primary focus:!border-primary",
-              inputType: "number",
-              id: "postCode",
-              name: "postCode",
+
+              inputType: "text",
+              id: "address.postalCode",
+              name: "address.postalCode",
               placeholder: "Enter Your Post Code",
 
               register,
+
             },
           },
           {
             containerClass: "mb-0",
             label: {
               text: "Country",
-              htmlFor: "select",
+              htmlFor: "address.country",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  ",
+              className: "pl-4  min-h-[54px] !border-dark  ",
               type: Field.select,
-              id: "country",
-              name: "country",
-              value: "Switzerland",
-              options: [
-                { value: "Switzerland", label: "Switzerland" },
-                { value: "Germany", label: "Germany" },
-                { value: "Pakistan", label: "Pakistan" },
-              ],
-
+              id: "address.country",
+              name: "address.country",
+              options: Object.keys(staticEnums.Country).map((item) => (
+                {
+                  value: item,
+                  label: item
+                }
+              )),
               control,
+              value: ""
+
             },
           },
         ],
       },
     },
 
+
     {
-      containerClass: "mb-0",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-[18px]",
+        className: "flex space-x-[18px] mt-8",
         children: [
           {
-            containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: "Cancel",
+              inputType: "button",
+              onClick: onCancel,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px]   text-dark hover:bg-none `,
+            },
+          },
+          {
+            field: {
+              type: Field.button,
+              id: "button",
+              text: "Save Changes",
               inputType: "submit",
-              className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none `,
               loading,
             },
           },
@@ -269,6 +265,95 @@ export const AddNewCustomerLeadFormField: GenerateLeadsFormField = (
       },
     },
   ];
+  // customer type
+  const fieldIndex = formField.findIndex(
+    (field) =>
+      field?.field?.type === Field.div &&
+      //@ts-expect-error
+      Array.isArray(field?.field?.children) &&
+      //@ts-expect-error
+      field?.field?.children.some((child) => child?.field?.id == "fullName")
+  );
 
-  return formField;
+  if (fieldIndex !== -1 && customerType === "company") {
+    const companyNameField = {
+      containerClass: "mb-0",
+      label: {
+        text: "Company Name",
+        htmlFor: "companyName",
+        className: "mb-[10px]",
+      },
+      field: {
+
+        type: Field.input,
+        className:
+          "!p-4 !!border-borderColor border border-dark focus:!border-primary",
+        inputType: "text",
+        id: "companyName",
+        name: "companyName",
+        placeholder: "Please Enter Company Name",
+        register,
+        setValue: setValue
+
+      },
+    };
+    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
+    const divField = formField[fieldIndex]?.field as DivProps; // Assert type
+    if (divField && Array.isArray(divField.children)) {
+
+      //@ts-expect-error
+      divField.children.splice(fieldIndex + 3, 0, companyNameField);
+    }
+  }
+
+  // type
+  const fieldTypeIndex = formField.findIndex(
+    (field) =>
+      field?.field?.type === Field.div &&
+      //@ts-expect-error
+      Array.isArray(field?.field?.children) &&
+      //@ts-expect-error
+      field?.field?.children.some((child) => child?.field?.id == "customerType")
+  );
+
+  if (fieldIndex !== -1 && type === "Existing Customer") {
+    const customerField = {
+      containerClass: "mb-0",
+      label: {
+        text: "Customer",
+        htmlFor: "customerID",
+        className: "mb-[10px]",
+      },
+      field: {
+        className: `pl-4 !min-h-[54px] !border-dark  focus:!border-primary `,
+        type: Field.select,
+        id: "customerID",
+        name: "customerID",
+        options: customer?.map((item, key) => (
+          {
+            value: item.id,
+            label: item.fullName,
+          }
+        )),
+
+        control,
+        onItemChange: onCustomerSelect,
+        value: customerDetails && customerDetails?.id,
+        setValue
+      },
+    };
+    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
+
+    const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
+    if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
+
+      //@ts-expect-error
+      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
+    }
+  }
+
+
+
+
+  return formField
 };

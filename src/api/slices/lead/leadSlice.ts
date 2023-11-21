@@ -3,6 +3,7 @@ import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
 import { Lead } from "@/types/leads";
+import { staticEnums } from "@/utils/static";
 
 interface LeadState {
     lead: Lead[];
@@ -37,7 +38,12 @@ export const createLead: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.createLead(data);
+            let apiData={...data}
+            //@ts-expect-error 
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            //@ts-expect-error 
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
+            await apiServices.createLead(apiData);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
