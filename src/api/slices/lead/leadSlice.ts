@@ -1,16 +1,18 @@
 import apiServices from "@/services/requestHandler";
-import { setErrors } from "@/utils/utility";
+import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
 import { Lead } from "@/types/leads";
-import { staticEnums } from "@/utils/static";
+import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
+import localStoreUtil from "@/utils/localstore.util";
 
 interface LeadState {
     lead: Lead[];
     loading: boolean;
     error: Record<string, object>,
     lastPage: number,
-    totalCount: number
+    totalCount: number,
+    leadDetails: Lead
 }
 
 const initialState: LeadState = {
@@ -19,6 +21,7 @@ const initialState: LeadState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    leadDetails: DEFAULT_LEAD
 }
 
 export const readLead: AsyncThunk<boolean, object, object> | any =
@@ -38,13 +41,20 @@ export const createLead: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            let apiData={...data}
+            const { leadId, step } = data
+            let apiData = { ...data, leadId: leadId, step: step }
+
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
-            await apiServices.createLead(apiData);
-            return true;
+            const response = await apiServices.createLead(apiData);
+            let objectToUpdate = { ...response?.data?.data?.Lead, type: apiData?.type }
+            localStoreUtil.store_data("lead", objectToUpdate)
+            thunkApi.dispatch(setLeadDetails(objectToUpdate));
+
+
+            return response?.data?.data?.Lead;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -56,11 +66,18 @@ export const updateLead: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.updateLead(data);
+            const response = await apiServices.updateLead(data);
+            localStoreUtil.store_data("lead", response?.data?.Lead)
+           
             return true;
         } catch (e: any) {
-            thunkApi.dispatch(setErrorMessage(e?.data?.message));
-            setErrors(setError, e?.data.data, translate);
+            if(Array.isArray(e?.data?.data)){
+                let transformedValidationMessages = transformValidationMessages(e?.data?.data?.address)
+                setErrors(setError, transformedValidationMessages, translate);
+            }else{
+                setErrors(setError, e?.data?.data, translate);
+            }
+            thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
             return false;
         }
     });
@@ -86,6 +103,9 @@ const leadSlice = createSlice({
         setErrorMessage: (state, action) => {
             state.error = action.payload;
         },
+        setLeadDetails: (state, action) => {
+            state.leadDetails = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readLead.pending, (state) => {
@@ -104,6 +124,7 @@ const leadSlice = createSlice({
             state.loading = true
         });
         builder.addCase(createLead.fulfilled, (state, action) => {
+
             state.loading = false;
         });
         builder.addCase(createLead.rejected, (state) => {
@@ -132,4 +153,4 @@ const leadSlice = createSlice({
 })
 
 export default leadSlice.reducer;
-export const { setErrorMessage } = leadSlice.actions
+export const { setErrorMessage, setLeadDetails } = leadSlice.actions

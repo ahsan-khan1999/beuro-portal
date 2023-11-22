@@ -36,7 +36,7 @@ const useGeneralFollowUp = () => {
 
 
     useEffect(() => {
-        dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
+        if (followUp?.length === 0) dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
     }, [dispatch])
     const onClose = () => {
         dispatch(updateModalType({ type: ModalType.NONE }));

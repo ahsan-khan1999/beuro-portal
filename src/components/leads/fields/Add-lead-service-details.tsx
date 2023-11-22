@@ -1,17 +1,21 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ComponentsType } from "../details/LeadsDetailsData";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onHandleBack,
+  trigger,
+  service
 ) => {
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -21,15 +25,17 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
               value: "Cleaning",
-              options: [
-                { value: "Office Boy", label: "Office Boy" },
-                { value: "Security Gaurd", label: "Security Gaurd" },
-              ],
+              options: service && service?.map((item) => (
+                {
+                  label: item.serviceName,
+                  value: item.id
+                }
+              )) || [],
               control,
             },
           },
@@ -45,21 +51,23 @@ id:"div-field",
               id: "desireDate",
               name: "desireDate",
               register,
+              dateType: "date"
+
             },
           },
 
           {
             label: {
               text: "Contact Availability",
-              htmlFor: "contactAvailablity",
+              htmlFor: "contactAvailability",
               className: "mb-[10px]",
             },
             field: {
               className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
-              id: "contactAvailablity",
+              id: "contactAvailability",
               value: "Morning(9am to 12am)",
-              name: "contactAvailablity",
+              name: "contactAvailability",
               options: [
                 {
                   value: "Morning(9am to 12am)",
@@ -81,7 +89,7 @@ id:"div-field",
     {
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -96,20 +104,22 @@ id:"div-field",
               id: "flexibility",
               name: "flexibility",
               register,
+              dateType: "date"
+
             },
           },
 
           {
             label: {
               text: "Preferred Contact",
-              htmlFor: "preferContact",
+              htmlFor: "preferredContact",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              id: "preferContact",
-              name: "preferContact",
+              id: "preferredContact",
+              name: "preferredContact",
               value: "Via Email",
               options: [
                 {
@@ -156,7 +166,7 @@ id:"div-field",
     {
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
@@ -167,7 +177,7 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
@@ -188,23 +198,21 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  ",
-              type: Field.select,
+              type: Field.multiSelect,
+              // @ts-expect-error
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: "Cleaning, Moving, Painting",
-              options: [
+              options: service?.map((item) => (
                 {
-                  value: "Cleaning, Moving, Painting",
-                  label: "Cleaning, Moving, Painting",
-                },
-                {
-                  value: "Cleaning, Moving, Painting",
-                  label: "Cleaning, Moving, Painting",
-                },
-              ],
+                  label: item.serviceName,
+                  value: item.id
+                }
+              )) || [],
+
 
               control,
+              trigger
             },
           },
         ],
@@ -215,31 +223,30 @@ id:"div-field",
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Back",
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+              onClick: () => onHandleBack && onHandleBack(ComponentsType.addressEdit),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Next",
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

@@ -163,6 +163,8 @@ id:"div-field",
         id: "date",
         name: "date",
         register,
+        dateType:"datetime-local"
+
       },
     },
     {

@@ -1,17 +1,18 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadAddressFormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
+import { staticEnums } from "@/utils/static";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
-  onClick,
+  onHandleBack,
   count
 ) => {
   const formField: FormField[] = [];
 
-  for (let i = 0; i <= count; i++) {
+  for (let i = 1; i <= count; i++) {
     formField.push(
       {
         containerClass: "mt-6",
@@ -29,15 +30,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0 ",
               label: {
                 text: "Street NO.",
-                htmlFor: `streetNo-${i}`,
+                htmlFor: `streetNumber-${i}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-dark  focus:!border-primary ",
                 inputType: "text",
-                id: `streetNo-${i}`,
-                name: `streetNo-${i}`,
+                id: `streetNumber-${i}`,
+                name: `streetNumber-${i}`,
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
               },
@@ -46,34 +47,40 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0 ",
               label: {
                 text: "Post Code",
-                htmlFor: `postCode-${i}`,
+                htmlFor: `postalCode-${i}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-dark  focus:!border-primary ",
                 inputType: "text",
-                id: `postCode-${i}`,
-                name: `postCode-${i}`,
+                id: `postalCode-${i}`,
+                name: `postalCode-${i}`,
                 placeholder: `123${i}`,
                 register,
               },
             },
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: "Country",
-                htmlFor: `country-${i}`,
+                htmlFor: "address.country",
                 className: "mb-[10px]",
               },
               field: {
-                type: Field.input,
-                className: "!p-4 !border-dark  focus:!border-primary ",
-                inputType: "text",
+                className: "pl-4  min-h-[54px] !border-dark  ",
+                type: Field.select,
                 id: `country-${i}`,
                 name: `country-${i}`,
-                placeholder: `Country ${i}`,
-                register,
+                options: Object.keys(staticEnums.Country).map((item) => (
+                  {
+                    value: item,
+                    label: item
+                  }
+                )),
+                control,
+                value: ""
+
               },
             },
           ],
@@ -83,15 +90,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         containerClass: "mt-5 mb-0 ",
         label: {
           text: "Description",
-          htmlFor: "description",
+          htmlFor: `description-${i}`,
           className: "mb-[10px]",
         },
         field: {
           type: Field.textArea,
           className: "!p-4 !border-dark  focus:!border-primary ",
           rows: 4,
-          id: "description",
-          name: "description",
+          id: `description-${i}`,
+          name: `description-${i}`,
           placeholder:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
           register,
@@ -117,8 +124,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-              loading,
-              onClick: onClick,
+              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerEdit),
             },
           },
           {
@@ -129,7 +135,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               text: "Next",
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-[152px] h-[50px] text-white hover-bg-none",
+                "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
               loading,
             },
           },
@@ -140,3 +146,5 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
 
   return formField;
 };
+
+

@@ -7,16 +7,16 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect } from "react";
+import { useEffect, useMemo } from 'react';
 import { readCustomer, setCustomerDetails } from "@/api/slices/customer/customerSlice";
-import { createLead } from "@/api/slices/lead/leadSlice";
+import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
 
 export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.lead);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customer, customerDetails } = useAppSelector((state) => state.customer);
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: { paginate: 0 } } }))
@@ -54,12 +54,32 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     })
 
   }
-  const fields = AddNewCustomerLeadFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails,onCancel }, setValue);
+  // useMemo(() => {
+  //   console.log(leadDetails);
+
+  //   if (leadDetails.id) {
+  //     reset({
+  //       ...leadDetails,
+
+  //     })
+  //   }
+  // }, [leadDetails.id])
+
+  const fields = AddNewCustomerLeadFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails }, setValue);
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(createLead({ data, router, setError, translate }));
-    if (res?.payload) onHandleNext(ComponentsType.addressEdit);
+    if (leadDetails?.id) {
+      const apiData = { ...data, step: 1, leadId: leadDetails?.id }
+
+      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressEdit);
+    } else {
+      const apiData = { ...data, step: 1 }
+
+      const res = await dispatch(createLead({ data:apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressEdit);
+    }
 
   };
   return {

@@ -19,7 +19,8 @@ import {
   DragAndDropFileField,
   DragAndDropPdfField,
   ImageUploadField,
-  MultiDateField
+  MultiDateField,
+  MultiSelectField
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -55,7 +56,8 @@ const fieldComponents: FieldComponents = {
   button: Button,
   // addField: AddFiled,
   link: LinkField,
-  dateRange:MultiDateField
+  dateRange:MultiDateField,
+  multiSelect:MultiSelectField
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -94,7 +96,8 @@ export function isFieldType(type: any): type is FieldType {
     "div",
     "button",
     "link",
-    "dateRange"
+    "dateRange",
+    "multiSelect"
     // "addField",
   ].includes(type);
 }

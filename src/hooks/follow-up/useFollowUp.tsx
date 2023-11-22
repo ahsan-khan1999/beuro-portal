@@ -22,7 +22,7 @@ const useFollowUps = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+    if (followUp?.length === 0) dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage));
@@ -75,7 +75,7 @@ const useFollowUps = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal,handleFilterChange };
+  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal, handleFilterChange };
 };
 
 export default useFollowUps;

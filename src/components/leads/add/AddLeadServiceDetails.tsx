@@ -3,11 +3,12 @@ import { useAddLeadServiceDetails } from "@/hooks/leads/useAddLeadServiceDetails
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { ComponentsType } from "./AddNewLeadsData";
 
-const AddLeadServiceDetails = ({onHandleNext} : {onHandleNext:Function}) => {
+const AddLeadServiceDetails = ({ onHandleBack,onHandleNext }: { onHandleBack: (currentComponent: ComponentsType) => void, onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddLeadServiceDetails(onHandleNext);
+    useAddLeadServiceDetails({onHandleBack,onHandleNext});
   const router = useRouter();
   return (
     <FormCard>

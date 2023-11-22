@@ -273,6 +273,8 @@ id:"div-field",
               id: "date",
               name: "date",
               register,
+              dateType:"date"
+
             },
           },
           {
@@ -288,6 +290,8 @@ id:"div-field",
               id: "date",
               name: "date",
               register,
+              dateType:"date"
+
             },
           },
         ],

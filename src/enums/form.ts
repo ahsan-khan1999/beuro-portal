@@ -62,6 +62,8 @@ export enum Field {
   addField = "span",
   link = "link",
   dateRange = "dateRange",
+  multiSelect = "multiSelect",
+
 
 }
 

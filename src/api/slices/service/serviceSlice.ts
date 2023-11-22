@@ -3,25 +3,33 @@ import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
 import { Service } from "@/types/service";
+import { DEFAULT_SERVICE } from "@/utils/static";
 
 interface ServiceState {
     service: Service[];
     loading: boolean;
-    error: Record<string, object>
+    error: Record<string, object>,
+    totalCount: number;
+    lastPage: number;
+    serviceDetails: Service;
 }
 
 const initialState: ServiceState = {
     service: [],
     loading: false,
-    error: {}
+    error: {},
+    lastPage: 1,
+    totalCount: 10,
+    serviceDetails: DEFAULT_SERVICE
 }
 
 export const readService: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("service/read", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readService(data);
+            const response = await apiServices.readService(params);
+            return response?.data?.data;
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -83,8 +91,10 @@ const ServiceSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readService.fulfilled, (state, action) => {
+            state.service = action.payload.Service
+            state.lastPage = action.payload.lastPage
+            state.totalCount = action.payload.totalCount
             state.loading = false;
-            state.service = action.payload
         });
         builder.addCase(readService.rejected, (state) => {
             state.loading = false

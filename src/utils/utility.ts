@@ -260,3 +260,53 @@ export function getDaysDifference(targetDate: string) {
 
   return Math.abs(daysDifference);
 }
+
+export function senitizeDataForm(inputObject: Record<string, any>) {
+  const outputArray = [];
+  for (let i = 1; i <= Object.keys(inputObject).length / 4; i++) {
+    const addressObj = {
+      streetNumber: inputObject[`streetNumber-${i}`] || "",
+      postalCode: inputObject[`postalCode-${i}`] || "",
+      country: inputObject[`country-${i}`] || "",
+      description: inputObject[`description-${i}`] || ""
+    };
+    outputArray.push(addressObj);
+  }
+
+  return outputArray;
+}
+
+export function formatDate(date: string) {
+  return moment(date).format("DD/MM/YYYY hh:mm:ss")
+}
+
+export function getStatusColor(status: string) {
+  switch (status) {
+    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]:
+      return "#FE9244"
+    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]:
+      return "#4A13E7"
+    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]:
+      return "#FF376F"
+    default:
+      return "#FF376F";
+  }
+
+}
+
+type TransformedMessages = {
+  [key: string]: any;
+};
+export function transformValidationMessages(messages: any):TransformedMessages {
+  let obj:object = {}
+  if (Array.isArray(messages)) {
+    for (let i = 0; i < messages?.length; i++) {
+      for (const [key, value] of Object.entries(messages[i])) {
+        
+        let splitKey = key?.split(".")[1]
+        obj = { ...obj, [splitKey+"-"+(i+1)]: value }
+      }
+    }
+  }
+  return obj;
+}

@@ -46,6 +46,8 @@ id:"div-field",
               id: "desireDate",
               name: "desireDate",
               register,
+              dateType:"date"
+
             },
           },
 
@@ -97,6 +99,8 @@ id:"div-field",
               id: "flexibility",
               name: "flexibility",
               register,
+              dateType:"date"
+
             },
           },
 

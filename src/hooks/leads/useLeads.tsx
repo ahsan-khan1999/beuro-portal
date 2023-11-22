@@ -51,12 +51,12 @@ const useLeads = () => {
   // Function for handling the modal for exiting notes
   const handleNotes = (
     item: Lead,
-    e: React.MouseEvent<HTMLImageElement>
+    e: React.MouseEvent<HTMLSpanElement>
   ) => {
     if (e) {
       e.stopPropagation();
     }
-    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+    dispatch(updateModalType({type:ModalType.EXISTING_NOTES}));
   };
 
   // function for hnadling the add note
@@ -72,12 +72,11 @@ const useLeads = () => {
 
   const handleImageUpload = (
     item: Lead,
-    e: React.MouseEvent<HTMLImageElement>
+    e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(updateModalType(ModalType.NONE));
 
-    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+    dispatch(updateModalType({type:ModalType.UPLOAD_IMAGE}));
   };
 
   // METHOD FOR HANDLING THE MODALS

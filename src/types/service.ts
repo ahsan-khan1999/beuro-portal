@@ -9,16 +9,12 @@ import {
 // Interface for the services table
 export interface Service {
   id: string;
-  service: string;
-  unit?: string;
+  serviceName: string;
+  unit: number;
   createdBy?: string;
-  createdOn: Date | null;
-  price: {
-    value: number;
-    currency: string;
-  };
+  createdOn: string;
+  price: number
   description: string;
-  action: "edit";
 }
 
 export interface FormDataProps {

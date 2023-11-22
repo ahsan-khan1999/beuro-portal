@@ -26,8 +26,9 @@ const SERVICE_URLS = {
   idVarificationReq: "/profile/id-verification-request",
   profileNotifications: "/profile/notification-settings",
   customer: "/customer",
-  readLead:"/lead",
-  lead: "/lead/lead-step/1",
+  readLead: "/lead",
+  lead: "/lead/lead-step/",
+  updateLead: "/lead/lead-step/",
   content: "/content",
   offer: "/offer",
   contract: "/contract",
@@ -116,11 +117,15 @@ const deleteCustomer = (data) =>
 const readLead = (params) =>
   get(SERVICE_URLS.readLead, params, { feature: featureConstants.login }, { detail: false });
 
-const createLead = (data) =>
-  post(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+const createLead = (data) => {
+  console.log(data, "data");
+  let route = data?.leadId ? data?.step + "/" + data?.leadId : data?.step
+  return post(SERVICE_URLS.lead + route, data, { feature: featureConstants.login });
+
+}
 
 const updateLead = (data) =>
-  put(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteLead = (data) =>
   del(SERVICE_URLS.lead, data, { feature: featureConstants.login });
 
@@ -205,8 +210,8 @@ const updateEmployeePassword = (data) =>
 const deleteEmployee = (data) =>
   del(SERVICE_URLS.employee + `/${data}`, {}, { feature: featureConstants.login });
 
-const readService = (data) =>
-  get(SERVICE_URLS.service, data, { feature: featureConstants.login });
+const readService = (params) =>
+  get(SERVICE_URLS.service, params, { feature: featureConstants.login }, { detail: false });
 
 const createService = (data) =>
   post(SERVICE_URLS.service, data, { feature: featureConstants.login });

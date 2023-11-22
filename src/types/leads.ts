@@ -1,6 +1,8 @@
+import { Customers } from "./customer";
+
 // Leads Table
 export interface Lead {
-  id: number;
+  id: string;
   refID: string;
   fullName: string;
   email: string;
@@ -18,7 +20,9 @@ export interface Lead {
   lead: CustomerLeadDetail;
   leadStatus: string;
   images: string[];
-  createdAt: string
+  createdAt: string;
+  customerID:Customers
+  type:string
 }
 
 export interface CustomerLeadDetail {

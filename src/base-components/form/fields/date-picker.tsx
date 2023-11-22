@@ -13,6 +13,7 @@ export const DatePicker = ({
   svg,
   success,
   onRemove,
+  dateType
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${
@@ -41,7 +42,7 @@ export const DatePicker = ({
         )}
 
         <input
-          type="datetime-local"
+          type={dateType}
           // value={formatDateString(value)}
           defaultValue={formatDateString(value)}
           id={id}

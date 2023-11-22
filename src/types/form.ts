@@ -128,6 +128,32 @@ export interface SelectBoxProps {
   disabled?: boolean;
 }
 
+
+
+export interface MultiSelectProps extends BaseFieldProps<Field.select> {
+  control?: Control<FieldValues>;
+  options: OptionType[];
+  value: string[];
+  svg?: string;
+  onItemChange?: Function
+  trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
+  disabled?: boolean;
+}
+
+export interface MultiSelectBoxProps {
+  id: string;
+  options: OptionType[];
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  value: string[];
+  svg?: string;
+  onItemChange?: Function
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+}
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   register: UseFormRegister<FieldValues>;
   description: string;
@@ -141,6 +167,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   value?: string | number;
   containerClassName?: string;
   textClassName?: string;
+  checked?:boolean
 }
 
 export interface DragAndDropFileFieldProps
@@ -208,6 +235,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   svg?: string;
   success?: boolean;
   onRemove?: () => void;
+  dateType?: string
 }
 
 export interface SpanProps {
@@ -272,7 +300,9 @@ export type FieldType =
   | Field.span
   | Field.div
   | Field.button
-  | Field.link;
+  | Field.link
+  | Field.multiSelect;
+
 export type FieldProps =
   | InputProps
   | TextAreaProps
@@ -295,7 +325,9 @@ export type FieldProps =
   | DivProps
   | ButtonProps
   | AddFieldProps
-  | LinkProps;
+  | LinkProps
+  | MultiSelectProps;
+
 
 export interface FormField {
   containerClass?: string;
@@ -327,10 +359,11 @@ export interface FieldComponents {
   // addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
   dateRange: React.FC<MultiDateProps>;
+  multiSelect: React.FC<MultiSelectProps>;
 }
 
 export interface FormProps {
-  formFields: FormField[] ;
+  formFields: FormField[];
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   errors?: Record<string, any>;
   onSubmit: SubmitHandler<FieldValues>;

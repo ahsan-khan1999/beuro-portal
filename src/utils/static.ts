@@ -3990,3 +3990,46 @@ export const DEFAULT_FOLLOWUP = {
   }
 }
 
+export const DEFAULT_LEAD = {
+  id: "",
+  refID: "",
+  fullName: "",
+  email: "",
+  phoneNumber: "",
+  date: "",
+  mobileNumber: "",
+  status: "",
+  editImg: "",
+  editNote: "",
+  customerType: "",
+  companyName: "",
+  mobile: "",
+  address: {
+    streetNumber: "",
+    country: "",
+    postalCode: "",
+  },
+  edit: false,
+  lead: {
+    id: "",
+    name: "",
+    source: "",
+    status: "",
+    expires: "",
+  },
+  leadStatus: "",
+  images: [""],
+  createdAt: "",
+
+}
+
+
+export const DEFAULT_SERVICE = {
+  id: "",
+  serviceName: "",
+  unit: 0,
+  createdBy: "",
+  createdOn: "",
+  price: 0,
+  description: "",
+}

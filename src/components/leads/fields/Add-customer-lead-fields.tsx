@@ -6,7 +6,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
-  { customerType, type, customer, onCustomerSelect, customerDetails,onCancel },
+  { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails },
   setValue
 ) => {
 
@@ -38,6 +38,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
+                    checked:leadDetails?.id && leadDetails?.type === "New Customer"
                   },
                 },
                 {
@@ -49,6 +50,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
+                    checked:leadDetails?.id && leadDetails?.type === "Existing Customer"
                   },
                 },
               ],
@@ -73,7 +75,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               )),
 
               control,
-              value: ""
+              value: leadDetails && leadDetails.customerID?.customerType
             },
           },
           {
@@ -91,7 +93,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
-              setValue
+              setValue,
+              value: leadDetails && leadDetails.customerID?.fullName
 
 
             },
@@ -109,6 +112,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
+              value: leadDetails && leadDetails.customerID?.email
+
 
             },
           },
@@ -127,7 +132,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: customerDetails && customerDetails?.phoneNumber
+              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
+
 
             },
           },
@@ -145,7 +151,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: customerDetails && customerDetails?.mobileNumber
+              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
             },
           },
 
@@ -181,7 +187,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Street Number",
               register,
-
+              value: leadDetails && leadDetails?.customerID?.address?.streetNumber
 
             },
           },
@@ -204,6 +210,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Enter Your Post Code",
 
               register,
+              value: leadDetails && leadDetails?.customerID?.address?.postalCode
+
 
             },
           },
@@ -226,7 +234,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                 }
               )),
               control,
-              value: ""
+              value: leadDetails && leadDetails?.customerID?.address?.country
+
 
             },
           },

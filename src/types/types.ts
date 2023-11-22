@@ -24,6 +24,8 @@ import { Customers } from "./customer";
 import { Status } from "./global";
 import { Employee } from "./employee";
 import { Lead } from "./leads";
+import { Service } from "./service";
+import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -190,9 +192,9 @@ export type GenerateFormAddressField = (
 
 // Image upload form field
 export type ImageUploadFormFieldType = (
-  register: UseFormRegister<FieldValues>,
+  loading: boolean,
   control?: Control<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
 ) => FormField[];
 
 // accounting setting formfield
@@ -325,19 +327,20 @@ export type GenerateLeadsFormField = (
   control: Control<FieldValues>,
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
+  service?: Service[]
 ) => FormField[];
 export type GenerateLeadAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick: () => void,
+  onClick: Function,
   count: number
 ) => FormField[];
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  properties: { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void },
+  properties: { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 

@@ -20,9 +20,9 @@ export enum LeadsCustomerEditDetails {
 export enum LeadsServiceEditDetails {
   requiredService = "requiredService",
   desireDate = "desireDate",
-  contactAvailablity = "contactAvailablity",
+  contactAvailablity = "contactAvailability",
   flexibility = "flexibility",
-  preferContact = "preferContact",
+  preferContact = "preferredContact",
   budget = "budget",
   leadSource = "leadSource",
   otherServices = "otherServices",
@@ -30,8 +30,8 @@ export enum LeadsServiceEditDetails {
 
 // Leads Address edit details
 export enum LeadsAddressEditDetails {
-  streetNo = "streetNo",
-  postCode = "postCode",
+  streetNo = "streetNumber",
+  postCode = "postalCode",
   country = "country",
   description = "description",
 }
@@ -52,5 +52,5 @@ export enum AddNewLeadCustomer {
 
 // Additional details enum
 export enum LeadAdditionalDetails {
-  additionlData = "additionlData",
+  additionlData = "additionalDetails",
 }

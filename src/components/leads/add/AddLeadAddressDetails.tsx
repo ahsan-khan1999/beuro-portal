@@ -3,14 +3,14 @@ import { useAddLeadAddressDetails } from "@/hooks/leads/useAddLeadAddressDetails
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { ComponentsType } from "./AddNewLeadsData";
 
-const AddLeadAddressDetails = ({ onHandleNext, onHandleBack }: { onHandleNext: Function; onHandleBack: Function }) => {
+const AddLeadAddressDetails = ({ onHandleBack,onHandleNext }: { onHandleBack: (currentComponent: ComponentsType) => void, onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors } =
-    useAddLeadAddressDetails(onHandleNext);
+    useAddLeadAddressDetails(onHandleBack,onHandleNext);
   const router = useRouter()
-  console.log(errors,"errors");
-  
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 " id="Address Details">
@@ -29,7 +29,7 @@ const AddLeadAddressDetails = ({ onHandleNext, onHandleBack }: { onHandleNext: F
         errors={errors}
         className={`${defaultClassName}`}
       />
-     
+
     </FormCard>
   );
 };

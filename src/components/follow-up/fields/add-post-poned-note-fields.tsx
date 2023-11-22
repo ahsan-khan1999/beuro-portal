@@ -16,6 +16,8 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
         name: "dateTime",
         value: "12/12/2023",
         register,
+        dateType:"datetime-local"
+
       },
     },
 

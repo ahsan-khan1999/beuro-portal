@@ -5,6 +5,7 @@ import { combineClasses, findErrorMessage } from "@/utils/utility";
 export const DivField = ({ children, className, errors }: DivProps) => {
 
   const classes = combineClasses("", className);
+
   return (
     <div className={classes}>
       {children.map((childField, index) => {
@@ -15,12 +16,11 @@ export const DivField = ({ children, className, errors }: DivProps) => {
         // const error =
         //   (errors && fieldName && data?.length > 0) ? errors?.[data[0]]?.[data[1]]?.message : (fieldName && errors) && errors[fieldName]?.message;
         const error = findErrorMessage(errors, data, fieldName);
-
+        
         const { label, field, containerClass } = childField;
         const renderedField =
           field?.type &&
           getTypedFieldComponent(field.type as FieldType, field, error, errors);
-          console.log(field,"Component");
 
         const childClasses = combineClasses(
           "flex flex-col mb-5",

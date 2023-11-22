@@ -60,18 +60,23 @@ export const generateLeadsAddressEditDetailsValidation = (
   count: number
 ) => {
 
-  const addressSchema = Array.from({ length: count }, (_, index) => ({
-    [`${LeadsAddressEditDetails.streetNo}`]: yup.string().required(translate("validationMessages.required")),
-    [`${LeadsAddressEditDetails.postCode}`]: yup.string().required(translate("validationMessages.required")),
-    [`${LeadsAddressEditDetails.country}`]: yup.string().required(translate("validationMessages.required")),
-    [`${LeadsAddressEditDetails.description}`]: yup.string().required(translate("validationMessages.required")),
-  }))
-  .reduce((acc, obj) => ({ ...acc, ...obj }), {});
-  return yup.object().shape({
-    address: yup.array().of(
-      yup.object().shape(addressSchema)
-    )
+  const addressSchema = Array.from({ length: count }, (_, index) => {
+    return index === 0 ?(
+      ({
+        [`${LeadsAddressEditDetails.streetNo}-${index + 1}`]: yup.string().notRequired(),
+        [`${LeadsAddressEditDetails.postCode}-${index + 1}`]: yup.string().notRequired(),
+        [`${LeadsAddressEditDetails.country}-${index + 1}`]: yup.string().notRequired(),
+        [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup.string().notRequired(),
+      })
+    ): ({
+      [`${LeadsAddressEditDetails.streetNo}-${index + 1}`]: yup.string().notRequired(),
+      [`${LeadsAddressEditDetails.postCode}-${index + 1}`]: yup.string().notRequired(),
+      [`${LeadsAddressEditDetails.country}-${index + 1}`]: yup.string().notRequired(),
+      [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup.string().notRequired(),
+    })
   })
+    .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+  return yup.object().shape(addressSchema)
 
 };
 
@@ -109,9 +114,10 @@ export const generateLeadsServiceEditDetailsValidation = (
       .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.otherServices]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-  });
+      .array()
+      .of(yup.string().required()).min(1, translate("validationMessages.required"))
+  })
+
 };
 
 // Validation for add new customer lead details
