@@ -7,10 +7,11 @@ import { AddressType, ApiResponseType, CheckProps, Errors, FieldType } from "@/t
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
-import { staticEnums } from "./static";
+import { staticEnums } from './static';
 import { DetailScreensStages } from "@/enums/auth";
 import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
+import { FieldValues, UseFormSetValue } from "react-hook-form";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -279,6 +280,10 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY hh:mm:ss")
 }
+export function formatDateTimeToDate(date: string) {
+  return moment(date).format("YYYY-MM-DD")
+}
+
 
 export function getStatusColor(status: string) {
   switch (status) {
@@ -297,16 +302,37 @@ export function getStatusColor(status: string) {
 type TransformedMessages = {
   [key: string]: any;
 };
-export function transformValidationMessages(messages: any):TransformedMessages {
-  let obj:object = {}
+export function transformValidationMessages(messages: any): TransformedMessages {
+  let obj: object = {}
   if (Array.isArray(messages)) {
     for (let i = 0; i < messages?.length; i++) {
       for (const [key, value] of Object.entries(messages[i])) {
-        
+
         let splitKey = key?.split(".")[1]
-        obj = { ...obj, [splitKey+"-"+(i+1)]: value }
+        obj = { ...obj, [splitKey + "-" + (i + 1)]: value }
       }
     }
   }
   return obj;
+}
+
+
+export function transformAddressFormValues(address: any): TransformedMessages {
+  let obj: object = {}
+  if (Array.isArray(address)) {
+    for (let i = 0; i < address?.length; i++) {
+      for (const [key, value] of Object.entries(address[i])) {
+        obj = { ...obj, [key + "-" + (i + 1)]: value }
+      }
+    }
+  }
+  return obj;
+}
+
+export function setImageFieldValues(setValue: UseFormSetValue<FieldValues>, images: string[]) {
+  if (images.length === 0) return;
+  images.forEach((element, idx) => {
+    setValue(`upload_image${idx + 1}`, element)
+
+  });
 }

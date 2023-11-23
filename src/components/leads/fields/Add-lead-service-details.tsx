@@ -1,6 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../details/LeadsDetailsData";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
@@ -8,7 +9,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   control,
   onHandleBack,
   trigger,
-  service
+  service,
+  leadDetails
 ) => {
   const formField: FormField[] = [
     {
@@ -29,7 +31,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: "Cleaning",
+              value: leadDetails?.id && leadDetails?.requiredService || "",
               options: service && service?.map((item) => (
                 {
                   label: item.serviceName,
@@ -51,8 +53,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               id: "desireDate",
               name: "desireDate",
               register,
-              dateType: "date"
-
+              dateType: "date",
             },
           },
 
@@ -63,10 +64,10 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailability",
-              value: "Morning(9am to 12am)",
+              value: leadDetails?.id && leadDetails?.contactAvailability || "",
               name: "contactAvailability",
               options: [
                 {
@@ -99,12 +100,43 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.date,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
+              type: Field.select,
               id: "flexibility",
+              value: leadDetails?.id && leadDetails?.flexibility || "",
               name: "flexibility",
-              register,
-              dateType: "date"
+              options: [
+                {
+                  value: "1",
+                  label: "1 days",
+                },
+                {
+                  value: "2",
+                  label: "2 days",
+                },
+                {
+                  value: "3",
+                  label: "3 days",
+                },
+                {
+                  value: "4",
+                  label: "4 days",
+                },
+                {
+                  value: "5",
+                  label: "5 days",
+                },
+                {
+                  value: "6",
+                  label: "6 days",
+                },
+                {
+                  value: "7",
+                  label: "7 days",
+                },
+
+              ],
+              control,
 
             },
           },
@@ -120,7 +152,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
-              value: "Via Email",
+              value: leadDetails?.id && leadDetails?.preferredContact || "",
               options: [
                 {
                   value: "Via Email",
@@ -141,11 +173,12 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: "Less then 1000CHF",
+              value: leadDetails?.id && leadDetails?.budget || "",
+
               options: [
                 {
                   value: "Less then 1000CHF",
@@ -181,7 +214,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
-              value: "Instagram",
+              value: leadDetails?.id && leadDetails?.leadSource || "",
+
               options: [
                 { value: "Whats'app", label: "What'sapp" },
                 { value: "Facebook", label: "Facebook" },
@@ -203,6 +237,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
+              value: leadDetails?.id && leadDetails?.otherServices || [""],
               options: service?.map((item) => (
                 {
                   label: item.serviceName,
@@ -233,7 +268,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               id: "button",
               text: "Back",
               inputType: "button",
-              onClick: () => onHandleBack && onHandleBack(ComponentsType.addressEdit),
+              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerEdit),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
             },

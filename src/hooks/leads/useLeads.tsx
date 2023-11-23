@@ -6,14 +6,15 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { leads } from "@/utils/static";
+import { DEFAULT_LEAD, leads } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { FilterType } from "@/types";
-import { readLead } from "@/api/slices/lead/leadSlice";
+import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
+import localStoreUtil from "@/utils/localstore.util";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, totalCount } = useAppSelector(state => state.lead)
+  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>(
     []
@@ -25,6 +26,8 @@ const useLeads = () => {
     type: ""
   });
   useEffect(() => {
+    localStoreUtil.remove_data("lead")
+    dispatch(setLeadDetails(DEFAULT_LEAD))
     dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {
@@ -50,39 +53,42 @@ const useLeads = () => {
 
   // Function for handling the modal for exiting notes
   const handleNotes = (
-    item: Lead,
+    item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     if (e) {
       e.stopPropagation();
     }
-    dispatch(updateModalType({type:ModalType.EXISTING_NOTES}));
+    const filteredLead = lead?.filter((item_) => item_.id === item)
+    if (filteredLead?.length === 1) dispatch(setLeadDetails(filteredLead[0]));
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
   // function for hnadling the add note
-  const handleAddNote = () => {
-    dispatch(updateModalType(ModalType.ADD_NOTE));
+  const handleAddNote = (id: string) => {
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
   };
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
   };
 
   const handleImageUpload = (
-    item: Lead,
+    item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-
-    dispatch(updateModalType({type:ModalType.UPLOAD_IMAGE}));
+    const filteredLead = lead.filter((item_) => item_.id === item)
+    if (filteredLead?.length === 1) dispatch(setLeadDetails(filteredLead[0]));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
   };
 
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} leadDetails={leadDetails} />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />

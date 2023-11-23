@@ -167,7 +167,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   value?: string | number;
   containerClassName?: string;
   textClassName?: string;
-  checked?:boolean
+  checked?: boolean
 }
 
 export interface DragAndDropFileFieldProps
@@ -194,6 +194,7 @@ export interface ImageUploadFieldProps
   extends BaseFieldProps<Field.imageUploadField> {
   control?: Control<FieldValues>;
   onClick?: Function;
+  value?: string
 }
 
 // Interface for the input field copy

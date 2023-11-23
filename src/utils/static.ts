@@ -541,7 +541,7 @@ export const countryList: countryType = {
   },
 };
 
-export const staticEnums = {
+export const staticEnums: Record<string, any> = {
   "User": {
     "role": {
       "Admin": 0,

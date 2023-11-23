@@ -7,36 +7,13 @@ import img1 from "@/assets/pngs/leads_detail_img1.png";
 import img2 from "@/assets/pngs/leads_detail_img2.png";
 import img3 from "@/assets/pngs/leads_detail_img3.png";
 import img4 from "@/assets/pngs/leads_detail_img4.png";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const ImageSlider = ({ onClose }: { onClose: () => void }) => {
+  const { leadDetails } = useAppSelector(state => state.lead)
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
-    images: [
-      {
-        imageSrc: img1,
-      },
-      {
-        imageSrc: img2,
-      },
-      {
-        imageSrc: img3,
-      },
-      {
-        imageSrc: img4,
-      },
-      {
-        imageSrc: img1,
-      },
-      {
-        imageSrc: img2,
-      },
-      {
-        imageSrc: img3,
-      },
-      {
-        imageSrc: img4,
-      },
-    ],
+    images: leadDetails?.images?.map((item) => ({ imageSrc: item }))
   };
 
   return (
@@ -54,7 +31,7 @@ const ImageSlider = ({ onClose }: { onClose: () => void }) => {
           />
 
           <p className="text-[24px] leading-6 font-medium text-[#000] mb-5">
-            Image Name
+            Uploaded Images
           </p>
 
           <hr className="opacity-25 mb-6" />

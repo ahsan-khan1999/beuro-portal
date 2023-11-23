@@ -44,8 +44,8 @@ const SERVICE_URLS = {
   sendEmailOtp: "/otp/send-verify-email-link",
   followUp: "/followup",
   postPondNotes: "/followup/postpond",
-  markComplete: "/followup/complete"
-
+  markComplete: "/followup/complete",
+  leadNotes: "/lead/note/"
 };
 
 const login = (data) =>
@@ -116,9 +116,9 @@ const deleteCustomer = (data) =>
   del(SERVICE_URLS.customer + `/${data?.id}`, {}, { feature: featureConstants.login });
 const readLead = (params) =>
   get(SERVICE_URLS.readLead, params, { feature: featureConstants.login }, { detail: false });
-
+const readLeadDetail = (params) =>
+  get(SERVICE_URLS.readLead, params, { feature: featureConstants.login }, { detail: true });
 const createLead = (data) => {
-  console.log(data, "data");
   let route = data?.leadId ? data?.step + "/" + data?.leadId : data?.step
   return post(SERVICE_URLS.lead + route, data, { feature: featureConstants.login });
 
@@ -126,6 +126,8 @@ const createLead = (data) => {
 
 const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
+const updateNotes = (data) =>
+  put(SERVICE_URLS.leadNotes + `${data?.id}`, data, { feature: featureConstants.login });
 const deleteLead = (data) =>
   del(SERVICE_URLS.lead, data, { feature: featureConstants.login });
 
@@ -328,6 +330,8 @@ const apiServices = {
   updateFollowUp,
   deleteFollowUp,
   createPostPondNotes,
-  markComplete
+  markComplete,
+  readLeadDetail,
+  updateNotes
 };
 export default apiServices;

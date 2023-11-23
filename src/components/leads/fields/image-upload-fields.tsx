@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, ImageUploadFormFieldType } from "@/types";
 
-export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control, onClick) => {
+export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control, onClick,leadDetails) => {
   const formField: FormField[] = [
     {
       containerClass: "",
@@ -17,7 +17,8 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: "Drop or Attach your files here",
               name: "upload_image1",
               control,
-              onClick: onClick
+              onClick: onClick,
+              
             },
           },
           {

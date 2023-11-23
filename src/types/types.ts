@@ -195,6 +195,7 @@ export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
+  leadDetails?: Lead
 ) => FormField[];
 
 // accounting setting formfield
@@ -327,14 +328,32 @@ export type GenerateLeadsFormField = (
   control: Control<FieldValues>,
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  service?: Service[]
+  service?: Service[],
+  leadDetails?: Lead
+) => FormField[];
+export type GenerateCustomerLeadFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  leadDetails?: Lead
+) => FormField[];
+export type GenerateLeadsAdditionalDetailsFormField = (
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  leadDetails?: Lead
 ) => FormField[];
 export type GenerateLeadAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
   onClick: Function,
-  count: number
+  count: number,
+  handleAddNewAddress?: () => void,
+  handleRemoveAddress?: () => void,
+
+
 ) => FormField[];
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,

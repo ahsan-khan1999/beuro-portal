@@ -1,6 +1,6 @@
 // enum for add new note
 export enum AddNewNote {
-  noteMessage = "noteMessage",
+  noteMessage = "description",
 }
 
 // Change password

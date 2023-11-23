@@ -1,10 +1,10 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadsFormField } from "@/types";
+import { FormField, GenerateLeadsAdditionalDetailsFormField, GenerateLeadsFormField } from "@/types";
 import Image from "next/image";
 import { ComponentsType } from "../add/AddNewLeadsData";
 
-export const AddLeadAdditionalDetailsFormField: GenerateLeadsFormField =
-  (register, loading, control, onHandleBack) => {
+export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormField =
+  (loading, control, onHandleBack, leadDetails) => {
     const formField: FormField[] = [
       {
         containerClass: "mb-0 mt-6",
@@ -14,6 +14,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsFormField =
           id: "additionalDetails",
           name: "additionalDetails",
           control,
+          value: leadDetails?.id && leadDetails?.additionalDetails
         },
       },
 

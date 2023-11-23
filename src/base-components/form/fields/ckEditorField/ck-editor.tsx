@@ -25,6 +25,7 @@ export const CkEditor = ({
           name={name}
           id={id}
           type="Editor"
+          data={defaultValue}
         />
       )}
     />

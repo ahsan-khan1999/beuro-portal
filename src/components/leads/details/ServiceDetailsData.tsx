@@ -4,13 +4,17 @@ import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 import Image from "next/image";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
+import { Lead } from "@/types/leads";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const ServiceDetailsData = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
+
 }) => {
-  const router = useRouter();
+  const { leadDetails } = useAppSelector(state => state.lead)
+
 
   return (
     <LeadsCardLayout>
@@ -24,7 +28,7 @@ const ServiceDetailsData = ({
           Edit Details
         </button>
       </div>
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
         <div className="grid grid-cols-3 gap-x-3 mb-5">
@@ -33,7 +37,7 @@ const ServiceDetailsData = ({
               Required Service
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Cleaning
+              {leadDetails?.requiredService instanceof Object && leadDetails?.requiredService?.serviceName}
             </div>
           </div>
           <div>
@@ -41,7 +45,7 @@ const ServiceDetailsData = ({
               Desire Date
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              12/09/2023
+              {leadDetails?.desireDate}
             </div>
           </div>
           <div>
@@ -49,7 +53,7 @@ const ServiceDetailsData = ({
               Flexibility
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              25/09 to 28/09
+              {leadDetails?.flexibility}
             </div>
           </div>
         </div>
@@ -59,7 +63,7 @@ const ServiceDetailsData = ({
               Contact Availability
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Morning(9am to 12am)
+              {leadDetails?.contactAvailability}
             </div>
           </div>
           <div>
@@ -67,13 +71,13 @@ const ServiceDetailsData = ({
               Preferred Contact
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Via Email
+              {leadDetails?.preferredContact}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">Budget</label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Less then 1000CHF
+              {leadDetails?.budget}
             </div>
           </div>
         </div>
@@ -84,7 +88,7 @@ const ServiceDetailsData = ({
               Lead Source
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              Instagram
+              {leadDetails?.leadSource}
             </div>
           </div>
           <div className="col-span-2">
@@ -92,7 +96,11 @@ const ServiceDetailsData = ({
               Other Services
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              Cleaning, Moving, Painting
+              {Array.isArray(leadDetails?.otherServices)
+                && leadDetails?.otherServices.map((item) =>
+                  item instanceof Object && item?.serviceName
+                )
+              }
             </div>
           </div>
         </div>

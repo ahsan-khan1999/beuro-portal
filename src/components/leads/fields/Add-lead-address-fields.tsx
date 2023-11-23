@@ -2,20 +2,23 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateLeadAddressFormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { staticEnums } from "@/utils/static";
+import icon from "@/assets/svgs/Vector.svg"
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
   onHandleBack,
-  count
+  count,
+  handleAddNewAddress,
+  handleRemoveAddress
 ) => {
   const formField: FormField[] = [];
 
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
-        containerClass: "mt-6",
+        containerClass: "mt-6 ",
         label: {
           text: `Address ${i} Details`,
           htmlFor: `address-${i}-details`,
@@ -87,23 +90,47 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         },
       },
       {
-        containerClass: "mt-5 mb-0 ",
-        label: {
-          text: "Description",
-          htmlFor: `description-${i}`,
-          className: "mb-[10px]",
-        },
+        containerClass: "mt-6",
         field: {
-          type: Field.textArea,
-          className: "!p-4 !border-dark  focus:!border-primary ",
-          rows: 4,
-          id: `description-${i}`,
-          name: `description-${i}`,
-          placeholder:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
-          register,
-        },
-      },
+          type: Field.div,
+          id: "div-field",
+          className: "grid grid-cols-1 relative w-full space-x-[18px] ",
+          children: [
+            {
+              containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
+              label: {
+                text: "Description",
+                htmlFor: `description-${i}`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.textArea,
+                className: "!p-4 !border-dark  focus:!border-primary ",
+                rows: 4,
+                id: `description-${i}`,
+                name: `description-${i}`,
+                placeholder:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                register,
+              },
+            },
+            {
+              containerClass: "mb-0 absolute top-52 right-0",
+              field: {
+                type: Field.button,
+                id: "button",
+                text: "Remove",
+                inputType: "button",
+                className:
+                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i  === 1 && 'hidden'}`,
+                onClick: handleRemoveAddress && handleRemoveAddress
+              },
+            },
+          ]
+        }
+      }
+
+
     );
   }
 
@@ -139,6 +166,21 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               loading,
             },
           },
+          
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              inputType: "button",
+              className:
+                `absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4  w-[40px] h-[40px] text-white hover-bg-none ${count === 2 && 'hidden'}`,
+              onClick: handleAddNewAddress && handleAddNewAddress,
+              icon:icon
+            },
+          },
+          
+
         ],
       },
     }

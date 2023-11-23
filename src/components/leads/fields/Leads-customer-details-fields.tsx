@@ -1,52 +1,39 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadsFormField } from "@/types";
+import { FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
+import { staticEnums } from "@/utils/static";
 
-export const LeadsCustomerDetailsFormField: GenerateLeadsFormField = (
+export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   register,
   loading,
   control,
-  onClick
+  onClick,
+  leadDetails
 ) => {
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
             label: {
-              text: "First Name",
-              htmlFor: "firstName",
+              text: "Name",
+              htmlFor: "fullName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "firstName",
-              name: "firstName",
+              id: "fullName",
+              name: "fullName",
               placeholder: "Rahal",
               register,
             },
           },
-          {
-            label: {
-              text: "Last Name",
-              htmlFor: "lastName",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "lastName",
-              name: "lastName",
-              placeholder: "Ahmad",
-              register,
-            },
-          },
+
 
           {
             label: {
@@ -58,14 +45,16 @@ id:"div-field",
               className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
-              value: "Individual",
               name: "customerType",
-              options: [
-                { value: "Individual", label: "Individual" },
-                { value: "Riyal", label: "Riyal" },
-                { value: "Dollar", label: "Dollar" },
-              ],
+              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
+                {
+                  value: item,
+                  label: item
+                }
+              )),
+
               control,
+              value: leadDetails?.id && leadDetails.customerID?.customerType || ""
             },
           },
 
@@ -91,14 +80,15 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
+              type: Field.phone,
+              className: " !h-[54px] !border-dark focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              placeholder: "Enter Your Phone Number",
 
-              register,
+              control,
+              value: leadDetails?.id && leadDetails?.customerID?.phoneNumber,
+              country: 'ch'
+
             },
           },
           {
@@ -109,13 +99,14 @@ id:"div-field",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
+              type: Field.phone,
+              className: " !h-[54px] !border-dark focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              placeholder: "Enter Your Mobile Number",
-              register,
+              control,
+              value: leadDetails?.id && leadDetails?.customerID?.mobileNumber,
+              country: 'ch'
+
             },
           },
         ],
@@ -131,7 +122,7 @@ id:"div-field",
 
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
@@ -139,15 +130,15 @@ id:"div-field",
             containerClass: "mb-0",
             label: {
               text: "Street NO.",
-              htmlFor: "streetNo",
+              htmlFor: "address.streetNumber",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "text",
-              id: "streetNo",
-              name: "streetNo",
+              id: "address.streetNumber",
+              name: "address.streetNumber",
               placeholder: "Please Enter Street Number",
               register,
             },
@@ -157,16 +148,16 @@ id:"div-field",
             containerClass: "mb-0",
             label: {
               text: "Post Code",
-              htmlFor: "post code",
+              htmlFor: "address.postalCode",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className:
                 "!p-4  !border-dark focus:!border-primary focus:!border-primary",
-              inputType: "number",
-              id: "postCode",
-              name: "postCode",
+              inputType: "text",
+              id: "address.postalCode",
+              name: "address.postalCode",
               placeholder: "Enter Your Post Code",
 
               register,
@@ -176,21 +167,22 @@ id:"div-field",
             containerClass: "mb-0",
             label: {
               text: "Country",
-              htmlFor: "select",
+              htmlFor: "address.country",
               className: "mb-[10px]",
             },
             field: {
               className: "!p-4 !border-dark  ",
               type: Field.select,
-              id: "country",
-              name: "country",
-              value: "Switzerland",
-              options: [
-                { value: "Switzerland", label: "Switzerland" },
-                { value: "Pakistan", label: "Pakistan" },
-              ],
-
+              id: "address.country",
+              name: "address.country",
+              options: Object.keys(staticEnums.Country).map((item) => (
+                {
+                  value: item,
+                  label: item
+                }
+              )),
               control,
+              value: leadDetails?.id && leadDetails?.customerID?.address?.country || ""
             },
           },
         ],
@@ -200,31 +192,30 @@ id:"div-field",
     {
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Cancel",
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
-              onClick:onClick
+              onClick: onClick
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Save Changes",
               inputType: "submit",
               className:
-                "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

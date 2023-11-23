@@ -12,14 +12,14 @@ export const AddNoteFormField: GenerateNotesFormField = (
       containerClass: "mb-0",
       label: {
         text: "Add your Note",
-        htmlFor: "noteMessage",
+        htmlFor: "description",
         className: "mb-[10px] text-[#8F8F8F]",
       },
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-dark focus:!border-primary",
-        id: "noteMessage",
-        name: "noteMessage",
+        id: "description",
+        name: "description",
 
         control,
       },
@@ -33,7 +33,7 @@ id:"button",
         text: "Save",
         inputType: "submit",
         className:
-          "rounded-lg  w-[200px] p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg  w-[200px] px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
         
       },

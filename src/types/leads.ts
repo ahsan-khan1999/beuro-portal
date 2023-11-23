@@ -1,4 +1,6 @@
+import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { Customers } from "./customer";
+import { User } from ".";
 
 // Leads Table
 export interface Lead {
@@ -21,8 +23,25 @@ export interface Lead {
   leadStatus: string;
   images: string[];
   createdAt: string;
-  customerID:Customers
-  type:string
+  customerID: Customers
+  type: string;
+  addressID: AddressID;
+  stage: ComponentsType;
+  desireDate: string;
+  contactAvailability: string;
+  flexibility: string;
+  preferredContact: string;
+  budget: string;
+  leadSource: string;
+  otherServices: string[];
+  requiredService: string;
+  additionalDetails: string;
+  createdBy: User
+}
+
+interface AddressID {
+  id: string,
+  address: CustomerAddress[]
 }
 
 export interface CustomerLeadDetail {
@@ -35,5 +54,16 @@ export interface CustomerLeadDetail {
 interface CustomerAddress {
   streetNumber: string;
   country: string;
-  postalCode: string
+  postalCode: string;
+  description: string
 }
+
+
+interface LeadService {
+  description: string;
+  id: string;
+  price: number
+  serviceName: string;
+  unit: number
+}
+

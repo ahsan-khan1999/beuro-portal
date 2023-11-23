@@ -12,11 +12,11 @@ const TableRows = ({
 }: {
   dataToAdd: Lead[];
   openModal: (
-    item: Lead,
+    item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
-    item: Lead,
+    item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
@@ -26,7 +26,7 @@ const TableRows = ({
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div
-            onClick={() => router.push("/leads/details")}
+            // onClick={() => router.push("/leads/details")}
             key={index}
             className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
@@ -54,7 +54,7 @@ const TableRows = ({
                 {item.leadStatus}
               </div>
             </span>
-            <span className="px-6 py-4 flex justify-center items-center  bg-white cursor-pointer" onClick={(e) => handleImageUpload(item, e)}>
+            <span className="px-6 py-4 flex justify-center items-center  bg-white cursor-pointer" onClick={(e) => handleImageUpload(item?.id, e)}>
               {/* <Image
                 src={item.editImg}
                 alt="edit_img_icon"
@@ -70,8 +70,8 @@ const TableRows = ({
               </svg>
 
             </span>
-            <span className="px-6 py-4 flex justify-center items-center bg-white cursor-pointer " onClick={(e) => openModal(item, e)}>
-            
+            <span className="px-6 py-4 flex justify-center items-center bg-white cursor-pointer " onClick={(e) => openModal(item?.id, e)}>
+
               <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.36719" y="1.14453" width="31.1684" height="31" rx="7.5" fill="white" stroke="#C7C7C7" />
                 <path d="M15.4044 22.5059H12.1297C11.1072 22.5059 10.2753 21.674 10.2753 20.6515V12.2449C10.2753 11.2224 11.1072 10.3906 12.1297 10.3906H20.5362C21.5588 10.3906 22.3906 11.2224 22.3906 12.2449V15.6165C22.3906 15.9579 22.6674 16.2346 23.0088 16.2346C23.3501 16.2346 23.6269 15.9579 23.6269 15.6165V12.2449C23.6269 10.5408 22.2405 9.1543 20.5362 9.1543H12.1297C10.4255 9.1543 9.03906 10.5408 9.03906 12.2449V20.6515C9.03906 22.3557 10.4255 23.7421 12.1297 23.7421H15.4044C15.7458 23.7421 16.0225 23.4654 16.0225 23.124C16.0225 22.7826 15.7458 22.5059 15.4044 22.5059Z" fill="#4A13E7" />
@@ -81,8 +81,13 @@ const TableRows = ({
               </svg>
             </span>
 
-            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
-              <Image src={moreInfo} alt="moreInfo" />
+            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md" onClick={() =>
+              router.push({
+                pathname: "/leads/details",
+                query: { lead: item?.id },
+              })
+            }>
+              <Image className="cursor-pointer" src={moreInfo} alt="moreInfo" />
             </span>
           </div>
         );

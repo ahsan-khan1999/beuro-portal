@@ -8,8 +8,9 @@ import { AddLeadServiceDetailsFormField } from "@/components/leads/fields/Add-le
 import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { readService } from "@/api/slices/service/serviceSlice";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
+import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 
 export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHandleBack: (currentComponent: ComponentsType) => void, onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const { t: translate } = useTranslation();
@@ -30,14 +31,25 @@ export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHan
     control,
     setError,
     trigger,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddLeadServiceDetailsFormField(register, loading, control, onHandleBack, trigger, service
+  useMemo(() => {
+    if (leadDetails.id) {
+      console.log(formatDateTimeToDate(leadDetails?.desireDate),"le");
+      
+      reset({
+        ...leadDetails,
+        desireDate:formatDateTimeToDate(leadDetails?.desireDate)
+      })
+    }
+  }, [leadDetails.id])
+  const fields = AddLeadServiceDetailsFormField(register, loading, control, onHandleBack, trigger, service,leadDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 3, id: leadDetails?.id }
+    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
     if (response?.payload) onHandleNext(ComponentsType.additionalEdit);
 

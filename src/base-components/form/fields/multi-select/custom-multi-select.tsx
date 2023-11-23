@@ -18,7 +18,7 @@ export const MultiSelectBox = ({
     onItemChange,
     disabled,
 }: MultiSelectBoxProps) => {
-    
+
     const [option, setOption] = useState(options);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState<string[]>(defaultValues || []);
@@ -27,13 +27,13 @@ export const MultiSelectBox = ({
         if (defaultValues) {
             setOption(options.filter((item) => !defaultValues.includes(item.value)));
         }
-    }, [defaultValues, options]);
+    }, [defaultValues]);
 
-    useMemo(() => {
-        if (options.length > 0) {
-            setOption(options);
-        }
-    }, [options?.length]);
+    // useMemo(() => {
+    //     if (options.length > 0) {
+    //         setOption(options);
+    //     }
+    // }, [options?.length]);
 
     const search = useRef<string>("");
 
@@ -43,10 +43,13 @@ export const MultiSelectBox = ({
 
     const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
     const selectedOptionHandler = (value: string) => {
+
         const isSelected = selectedOptions.includes(value);
+
         const updatedOptions = isSelected
             ? selectedOptions.filter((option) => option !== value)
             : [...selectedOptions, value];
+       
 
         setSelectedOptions(updatedOptions);
         field?.onChange(updatedOptions);

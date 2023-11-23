@@ -3,12 +3,17 @@ import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import Image from "next/image";
+import { Lead } from "@/types/leads";
+import { staticEnums } from "@/utils/static";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const CustomerDetailsData = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
+  const { leadDetails } = useAppSelector(state => state.lead)
+
   return (
     <LeadsCardLayout>
       <div
@@ -27,16 +32,16 @@ const CustomerDetailsData = ({
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
-        <div className="grid grid-cols-3 gap-x-3 mb-5">
+        <div className="grid grid-cols-3 gap-x-3 gap-y-3 mb-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               Customer Type
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Individual
+              {leadDetails?.customerID?.customerType}
             </div>
           </div>
           <div>
@@ -44,25 +49,26 @@ const CustomerDetailsData = ({
               Your Name
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Rahal
+              {leadDetails?.customerID?.fullName}
             </div>
           </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Company Name
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Cloud Mesh Solutions
+          {
+            staticEnums["CustomerType"][leadDetails?.customerID?.customerType] === 1 &&
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                Company Name
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+                {leadDetails?.customerID?.companyName}
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-x-3">
+          }
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               Email Address
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              rahal.ahmad@gmail.com
+              {leadDetails?.customerID?.email}
             </div>
           </div>
           <div>
@@ -70,7 +76,7 @@ const CustomerDetailsData = ({
               Phone Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
+              {leadDetails?.customerID?.phoneNumber}
             </div>
           </div>
           <div>
@@ -78,10 +84,11 @@ const CustomerDetailsData = ({
               Mobile Number
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
+              {leadDetails?.customerID?.mobileNumber}
             </div>
           </div>
         </div>
+
         <div className="mt-5">
           <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
           <div className="grid grid-cols-3 gap-x-3">
@@ -90,7 +97,7 @@ const CustomerDetailsData = ({
                 Street NO.
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Zweibrückenstraße, 12
+                {leadDetails?.customerID?.address?.streetNumber}
               </div>
             </div>
             <div>
@@ -98,7 +105,8 @@ const CustomerDetailsData = ({
                 Post Code
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                1234
+                {leadDetails?.customerID?.address?.postalCode}
+
               </div>
             </div>
             <div>
@@ -106,7 +114,8 @@ const CustomerDetailsData = ({
                 Country
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Switzerland
+                {leadDetails?.customerID?.address?.country}
+
               </div>
             </div>
           </div>

@@ -12,12 +12,14 @@ export const ImageUpload = ({
   text,
   fileSupported,
   onClick,
+  value
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
   text?: string;
   fileSupported?: string;
   onClick?: Function;
+  value?: string
 }) => {
   const dispatch = useAppDispatch();
 
@@ -43,8 +45,8 @@ export const ImageUpload = ({
     field.onChange(res?.payload);
   };
   const deleteImage = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(e,"Event");
-    
+    console.log(e, "Event");
+
     if (e) e.stopPropagation()
     field.onChange(null);
 

@@ -5,11 +5,15 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Lead } from "@/types/leads";
+import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
+  leadDetails
 }: {
   leadDeleteHandler: Function;
+  leadDetails: Lead
 }) => {
   const router = useRouter();
   return (
@@ -50,14 +54,14 @@ const LeadsDetailsCardData = ({
             <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
               Lead ID:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">001-1</span>
+            <span className="font-medium text-[#4B4B4B] text-base">{leadDetails.refID}</span>
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
               Status:
             </span>
             <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
-              Open
+            {leadDetails.leadStatus}
             </span>
           </div>
 
@@ -66,7 +70,7 @@ const LeadsDetailsCardData = ({
               Creation Date:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-              25/08/2023
+            {formatDateTimeToDate(leadDetails.createdAt)}
             </span>
           </div>
           <div>
@@ -74,7 +78,7 @@ const LeadsDetailsCardData = ({
               Creation by:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-              Rahal Ahmad
+              {leadDetails.createdBy?.fullName}
             </span>
           </div>
         </div>

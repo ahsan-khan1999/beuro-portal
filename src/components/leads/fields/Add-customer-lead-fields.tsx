@@ -38,7 +38,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked:leadDetails?.id && leadDetails?.type === "New Customer"
+                    checked: leadDetails?.id && leadDetails?.type === "New Customer" || type === "New Customer"
                   },
                 },
                 {
@@ -50,7 +50,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked:leadDetails?.id && leadDetails?.type === "Existing Customer"
+                    checked: leadDetails?.id && leadDetails?.type === "Existing Customer" || type === "Existing Customer"
                   },
                 },
               ],
@@ -93,8 +93,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
-              setValue,
-              value: leadDetails && leadDetails.customerID?.fullName
+              // value: leadDetails && leadDetails.customerID?.fullName
 
 
             },
@@ -347,7 +346,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: customerDetails && customerDetails?.id,
+        value: leadDetails?.id ? leadDetails?.customerID?.id : customerDetails && customerDetails?.id,
         setValue
       },
     };

@@ -43,6 +43,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const customerType = watch("customerType")
 
   const type = watch("type")
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id)
@@ -54,30 +55,37 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     })
 
   }
-  // useMemo(() => {
-  //   console.log(leadDetails);
 
-  //   if (leadDetails.id) {
-  //     reset({
-  //       ...leadDetails,
+  useMemo(() => {
 
-  //     })
-  //   }
-  // }, [leadDetails.id])
+    if (leadDetails.id) {
+      reset({
+        fullName: leadDetails.customerID?.fullName,
+        type: leadDetails.type,
+        customer: leadDetails.customerID?.id,
+
+        customerType: leadDetails.customerID?.customerType,
+        email: leadDetails.customerID?.email,
+        phoneNumber: leadDetails.customerID?.phoneNumber,
+        mobileNumber: leadDetails.customerID?.mobileNumber,
+        address: leadDetails?.customerID?.address,
+      })
+    }
+  }, [leadDetails.id])
 
   const fields = AddNewCustomerLeadFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails }, setValue);
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (leadDetails?.id) {
-      const apiData = { ...data, step: 1, leadId: leadDetails?.id }
+      const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit }
 
       const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
       if (res?.payload) onHandleNext(ComponentsType.addressEdit);
     } else {
-      const apiData = { ...data, step: 1 }
+      const apiData = { ...data, step: 1, stage: ComponentsType.addressEdit }
 
-      const res = await dispatch(createLead({ data:apiData, router, setError, translate }));
+      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
       if (res?.payload) onHandleNext(ComponentsType.addressEdit);
     }
 

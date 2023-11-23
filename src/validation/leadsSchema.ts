@@ -17,9 +17,7 @@ export const generateLeadsCustomerEditDetailsValidation = (
       .string()
       .required("validation required"),
 
-    [LeadsCustomerEditDetails.lastName]: yup
-      .string()
-      .required("validation required"),
+
 
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
@@ -31,26 +29,24 @@ export const generateLeadsCustomerEditDetailsValidation = (
       .required(translate("validation required")),
 
     [LeadsCustomerEditDetails.phone]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validation required")),
 
     [LeadsCustomerEditDetails.mobile]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validation required")),
 
-    [LeadsCustomerEditDetails.streetNo]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-
-    [LeadsCustomerEditDetails.postCode]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-
-    [LeadsCustomerEditDetails.country]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.address]: yup.object({
+      [LeadsCustomerEditDetails.streetNo]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [LeadsCustomerEditDetails.postCode]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [LeadsCustomerEditDetails.country]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+    }).required()
   });
 };
 
@@ -61,19 +57,14 @@ export const generateLeadsAddressEditDetailsValidation = (
 ) => {
 
   const addressSchema = Array.from({ length: count }, (_, index) => {
-    return index === 0 ?(
+    return (
       ({
-        [`${LeadsAddressEditDetails.streetNo}-${index + 1}`]: yup.string().notRequired(),
-        [`${LeadsAddressEditDetails.postCode}-${index + 1}`]: yup.string().notRequired(),
-        [`${LeadsAddressEditDetails.country}-${index + 1}`]: yup.string().notRequired(),
-        [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup.string().notRequired(),
-      })
-    ): ({
-      [`${LeadsAddressEditDetails.streetNo}-${index + 1}`]: yup.string().notRequired(),
-      [`${LeadsAddressEditDetails.postCode}-${index + 1}`]: yup.string().notRequired(),
-      [`${LeadsAddressEditDetails.country}-${index + 1}`]: yup.string().notRequired(),
-      [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup.string().notRequired(),
-    })
+        [`${LeadsAddressEditDetails.streetNo}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${LeadsAddressEditDetails.postCode}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${LeadsAddressEditDetails.country}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+      }))
+
   })
     .reduce((acc, obj) => ({ ...acc, ...obj }), {});
   return yup.object().shape(addressSchema)

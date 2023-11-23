@@ -289,7 +289,7 @@ export interface MainImageSliderProps extends SliderBaseProps {
 }
 
 interface SliderImagesData {
-  imageSrc: StaticImageData;
+  imageSrc: string;
 }
 
 // slider image props

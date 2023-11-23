@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
 import AddLeadAddressDetails from "./AddLeadAddressDetails";
@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
+import { Lead } from "@/types/leads";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export enum ComponentsType {
   customerEdit,
@@ -23,9 +25,15 @@ export enum ComponentsType {
 }
 
 const AddNewLeadsData = () => {
+  const { leadDetails } = useAppSelector(state => state.lead)
+  
   const [tabType, setTabType] = useState<ComponentsType>(
-    ComponentsType.customerEdit
-  );
+    leadDetails?.id && leadDetails?.stage || ComponentsType.addressEdit
+    );
+
+  useEffect(() => {
+    setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.addressEdit)
+  }, [leadDetails?.id])
 
   const router = useRouter();
 
@@ -106,7 +114,7 @@ const AddNewLeadsData = () => {
   };
 
   const handleImageSlider = () => {
-    dispatch(updateModalType({type:ModalType.NONE}));
+    dispatch(updateModalType({ type: ModalType.NONE }));
     router.pathname = "/leads"
     updateQuery(router, router.locale as string)
   };
@@ -147,7 +155,7 @@ const AddNewLeadsData = () => {
       <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addressEdit]: (
-      <AddLeadAddressDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack} />
+      <AddLeadAddressDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
     ),
     [ComponentsType.serviceEdit]: (
       <AddLeadServiceDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack} />

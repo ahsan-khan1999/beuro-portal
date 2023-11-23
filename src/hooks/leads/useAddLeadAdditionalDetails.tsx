@@ -8,12 +8,13 @@ import { AddLeadAdditionalDetailsFormField } from "@/components/leads/fields/Add
 import { generateLeadAdditionalDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { updateLead } from "@/api/slices/lead/leadSlice";
+import { useMemo } from "react";
 
 export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { onHandleBack: (currentComponent: ComponentsType) => void, onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error ,leadDetails} = useAppSelector((state) => state.lead);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
 
   const schema = generateLeadAdditionalDetailsValidation(translate);
   const {
@@ -21,13 +22,21 @@ export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { on
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddLeadAdditionalDetailsFormField(register, loading, control,onHandleBack);
-  const onSubmit: SubmitHandler<FieldValues> =async (data) => {
-    const apiData = { ...data, step: 4, id: leadDetails?.id }
+  useMemo(() => {
+    if (leadDetails.id) {
+      reset({
+        ...leadDetails
+      })
+    }
+  }, [leadDetails.id])
+  const fields = AddLeadAdditionalDetailsFormField(loading, control, onHandleBack, leadDetails);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
     if (response?.payload) onHandleNext(ComponentsType.additionalEdit);
     // onHandleNext(ComponentsType.additionalEdit);
