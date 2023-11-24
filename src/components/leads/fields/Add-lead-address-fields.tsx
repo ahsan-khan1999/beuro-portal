@@ -172,11 +172,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              inputType: "button",
               className:
-                `absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4  w-[40px] h-[40px] text-white hover-bg-none ${count === 2 && 'hidden'}`,
+                ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4   h-[40px] text-white hover-bg-none ${count === 2 && 'hidden'}`,
               onClick: handleAddNewAddress && handleAddNewAddress,
-              icon:icon
+              icon:icon,
+              name:""
+              // icon
             },
           },
           

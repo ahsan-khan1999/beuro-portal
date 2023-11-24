@@ -302,7 +302,8 @@ export type FieldType =
   | Field.div
   | Field.button
   | Field.link
-  | Field.multiSelect;
+  | Field.multiSelect
+  | Field.addField;
 
 export type FieldProps =
   | InputProps
@@ -327,7 +328,8 @@ export type FieldProps =
   | ButtonProps
   | AddFieldProps
   | LinkProps
-  | MultiSelectProps;
+  | MultiSelectProps
+  | AddFieldProps;
 
 
 export interface FormField {
@@ -357,7 +359,7 @@ export interface FieldComponents {
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
-  // addField: React.FC<AddFieldProps>;
+  addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
   dateRange: React.FC<MultiDateProps>;
   multiSelect: React.FC<MultiSelectProps>;

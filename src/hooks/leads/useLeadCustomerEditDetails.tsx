@@ -28,11 +28,13 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     setError,
     reset,
     formState: { errors },
+    watch,
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   console.log(errors);
-
+  const customerType = watch("customerType")
   useMemo(() => {
     if (leadDetails.id) {
       reset({
@@ -47,7 +49,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
       })
     }
   }, [leadDetails.id]);
-  const fields = LeadsCustomerDetailsFormField(register, loading, control, handleBack, leadDetails);
+  const fields = LeadsCustomerDetailsFormField(register, loading, control, handleBack, leadDetails,customerType,setValue);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit, customerID: leadDetails?.customerID?.id }
     const res = await dispatch(createLead({ data: apiData, router, setError, translate }));

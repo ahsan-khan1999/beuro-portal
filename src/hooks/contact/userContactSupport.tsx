@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ContactSupportFormField } from "@/components/contactSupport/contact-support-fields";
 import { generateContactSupportValidation } from "@/validation/contactSchema";
+import { createContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 
 export const userContactSupport = (requestSubmitHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error } = useAppSelector((state) => state.contactSupport);
 
   const schema = generateContactSupportValidation(translate);
   const {
@@ -19,14 +20,15 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     handleSubmit,
     control,
     formState: { errors },
+    setError
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = ContactSupportFormField(register, loading, control);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, translate }));
-    requestSubmitHandler();
-    // dispatch(loginUser({ data, router, setError, translate }));
+  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+    const response =await  dispatch(createContactSupport({ data, router, setError, translate }));
+    if(response?.payload) requestSubmitHandler();
+    
   };
   return {
     fields,

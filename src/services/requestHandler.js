@@ -34,7 +34,7 @@ const SERVICE_URLS = {
   contract: "/contract",
   company: "/company",
   invoice: "/invoice",
-  contactSupport: "/contact-support",
+  contactSupport: "/contactSupport",
   employee: "/employee",
   createEmployee: "/user/create-manager",
   updateEmployee: "/employee/profile",
@@ -45,7 +45,8 @@ const SERVICE_URLS = {
   followUp: "/followup",
   postPondNotes: "/followup/postpond",
   markComplete: "/followup/complete",
-  leadNotes: "/lead/note/"
+  leadNotes: "/lead/note/",
+  notes: "/note"
 };
 
 const login = (data) =>
@@ -129,7 +130,7 @@ const updateLead = (data) =>
 const updateNotes = (data) =>
   put(SERVICE_URLS.leadNotes + `${data?.id}`, data, { feature: featureConstants.login });
 const deleteLead = (data) =>
-  del(SERVICE_URLS.lead, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.readLead + `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readContent = (data) =>
   get(SERVICE_URLS.content, data, { feature: featureConstants.login });
@@ -214,14 +215,16 @@ const deleteEmployee = (data) =>
 
 const readService = (params) =>
   get(SERVICE_URLS.service, params, { feature: featureConstants.login }, { detail: false });
+const readServiceDetails = (params) =>
+  get(SERVICE_URLS.service, params, { feature: featureConstants.login }, { detail: true });
 
 const createService = (data) =>
   post(SERVICE_URLS.service, data, { feature: featureConstants.login });
 
 const updateService = (data) =>
-  put(SERVICE_URLS.service, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.service + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteService = (data) =>
-  del(SERVICE_URLS.service, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.service + `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readOfferService = (data) =>
   get(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
@@ -252,6 +255,10 @@ const updateFollowUp = (data) =>
   put(SERVICE_URLS.followUp + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteFollowUp = (data) =>
   del(SERVICE_URLS.followUp + `/${data?.id}`, {}, { feature: featureConstants.login });
+const readNotes = (params) =>
+  get(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, {}, { feature: featureConstants.login }, { detail: false });
+const createNotes = (params) =>
+  post(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const apiServices = {
   login,
   singUp,
@@ -332,6 +339,9 @@ const apiServices = {
   createPostPondNotes,
   markComplete,
   readLeadDetail,
-  updateNotes
+  updateNotes,
+  readServiceDetails,
+  readNotes,
+  createNotes
 };
 export default apiServices;

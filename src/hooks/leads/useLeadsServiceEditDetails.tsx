@@ -24,9 +24,7 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     onClick(2, ComponentsType.service);
   };
 
-  useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }))
-  }, [])
+
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
     register,

@@ -38,7 +38,7 @@ export default function DetailFilter({ filter,  moreFilter, setMoreFilter, handl
                             <DropDown
                                 items={typeList}
                                 onItemSelected={handleItemSelected}
-                                selectedItem={filter.type}
+                                selectedItem={filter.type || ""}
                                 dropDownTextClassName="custom-text-style"
                                 dropDownIconClassName="custom-icon-style"
                                 dropDownDisabled={false}
@@ -59,7 +59,7 @@ export default function DetailFilter({ filter,  moreFilter, setMoreFilter, handl
 
                             </div>
 
-                            <InputField iconDisplay={false} handleChange={(value) => handleFilterReset("location", value)} value={filter.location} textClassName="border border-black min-h-[42px]" containerClassName=" my-2"
+                            <InputField iconDisplay={false} handleChange={(value) => handleFilterReset("location", value)} value={filter.location || ""} textClassName="border border-black min-h-[42px]" containerClassName=" my-2"
 
                             />
 

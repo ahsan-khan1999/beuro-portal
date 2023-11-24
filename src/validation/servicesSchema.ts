@@ -7,13 +7,13 @@ export const generateServicesValidation = (translate: Function) => {
     [ServicesDetailFields.serviceTitle]: yup
       .string()
       .required("validation required"),
-    [ServicesDetailFields.unit]: yup.string().required("validation required"),
+    [ServicesDetailFields.unit]: yup.number().required("validation required"),
     [ServicesDetailFields.price]: yup
-      .string()
+      .number()
       .required(translate("validation required")),
     [ServicesDetailFields.description]: yup
       .string()
-      .email()
+
       .required(translate("validation required")),
   });
 };

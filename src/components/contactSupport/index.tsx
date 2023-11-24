@@ -27,7 +27,7 @@ export default function ContactSupport() {
   };
 
   const requestSubmitHandler = () => {
-    dispatch(updateModalType(ModalType.CREATION));
+    dispatch(updateModalType({type:ModalType.CREATION}));
   };
 
   const MODAL_CONFIG: ModalConfigType = {

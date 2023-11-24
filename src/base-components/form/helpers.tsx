@@ -20,7 +20,8 @@ import {
   DragAndDropPdfField,
   ImageUploadField,
   MultiDateField,
-  MultiSelectField
+  MultiSelectField,
+  AddFiled
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -31,7 +32,6 @@ import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-fiel
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
-import { AddFiled } from "./fields/add-field-button";
 import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
 
 const fieldComponents: FieldComponents = {
@@ -54,7 +54,7 @@ const fieldComponents: FieldComponents = {
   span: SpanField,
   div: DivField,
   button: Button,
-  // addField: AddFiled,
+  addField: AddFiled,
   link: LinkField,
   dateRange:MultiDateField,
   multiSelect:MultiSelectField
@@ -97,8 +97,8 @@ export function isFieldType(type: any): type is FieldType {
     "button",
     "link",
     "dateRange",
-    "multiSelect"
-    // "addField",
+    "multiSelect",
+    "addField",
   ].includes(type);
 }
 

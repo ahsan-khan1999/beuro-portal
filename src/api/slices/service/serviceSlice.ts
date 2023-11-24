@@ -4,6 +4,9 @@ import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
 import { Service } from "@/types/service";
 import { DEFAULT_SERVICE } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 interface ServiceState {
     service: Service[];
@@ -31,6 +34,19 @@ export const readService: AsyncThunk<boolean, object, object> | any =
             const response = await apiServices.readService(params);
             return response?.data?.data;
             return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const readServiceDetail: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("service/read/details", async (args, thunkApi) => {
+        const { params, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.readServiceDetails(params);
+            return response?.data?.data.Service;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -65,10 +81,16 @@ export const updateService: AsyncThunk<boolean, object, object> | any =
     });
 export const deleteService: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("service/delete", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { serviceDetails: data, router, setError, translate } = args as any;
 
         try {
             await apiServices.deleteService(data);
+            router.pathname = "/services"
+            updateQuery(router, router.locale)
+            thunkApi.dispatch(updateModalType({
+                type:
+                    ModalType.NONE
+            }));
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -84,6 +106,9 @@ const ServiceSlice = createSlice({
     reducers: {
         setErrorMessage: (state, action) => {
             state.error = action.payload;
+        },
+        setServiceDetails: (state, action) => {
+            state.serviceDetails = action.payload;
         },
     },
     extraReducers(builder) {
@@ -106,6 +131,17 @@ const ServiceSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(createService.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(readServiceDetail.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readServiceDetail.fulfilled, (state, action) => {
+            state.serviceDetails = action.payload;
+            state.loading = false;
+
+        });
+        builder.addCase(readServiceDetail.rejected, (state) => {
             state.loading = false
         });
         builder.addCase(updateService.pending, (state) => {
@@ -131,4 +167,4 @@ const ServiceSlice = createSlice({
 })
 
 export default ServiceSlice.reducer;
-export const { setErrorMessage } = ServiceSlice.actions
+export const { setErrorMessage, setServiceDetails } = ServiceSlice.actions

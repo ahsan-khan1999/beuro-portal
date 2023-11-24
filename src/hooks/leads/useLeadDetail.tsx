@@ -5,18 +5,22 @@ import { useAppDispatch, useAppSelector } from '../useRedux';
 import { useRouter } from 'next/router';
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
-import { readLeadDetails, setLeadDetails } from '@/api/slices/lead/leadSlice';
+import { deleteLead, readLeadDetails, setLeadDetails } from '@/api/slices/lead/leadSlice';
 import { CustomerPromiseActionType } from '@/types/customer';
+import { useTranslation } from 'next-i18next';
+import { readService } from '@/api/slices/service/serviceSlice';
 
 export default function useLeadDetail() {
     const dispatch = useAppDispatch();
     const { modal } = useAppSelector((state) => state.global);
-    const { leadDetails } = useAppSelector((state) => state.lead);
-
+    const { leadDetails, loading } = useAppSelector((state) => state.lead);
+    const { t: translate } = useTranslation()
     const router = useRouter();
     const id = router.query.lead;
 
-
+    useEffect(() => {
+        dispatch(readService({ params: { filter: { paginate: 0 } } }))
+    }, [])
     useEffect(() => {
         if (id) {
             dispatch(readLeadDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
@@ -31,7 +35,7 @@ export default function useLeadDetail() {
     };
 
     const leadDeleteHandler = () => {
-        dispatch(updateModalType({ type: ModalType.CONFIRM_DELETION }));
+        dispatch(updateModalType({ type: ModalType.CONFIRM_DELETION, data: { refId: leadDetails?.refID } }));
     };
 
     const handleDelete = () => {
@@ -39,8 +43,7 @@ export default function useLeadDetail() {
     };
 
     const routeHandler = () => {
-        dispatch(updateModalType({ type: ModalType.NONE }));
-        router.push("/leads");
+        dispatch(deleteLead({ leadDetails, router, translate }))
     };
 
 
@@ -59,7 +62,7 @@ export default function useLeadDetail() {
                 onClose={onClose}
                 modelHeading="Are you sure you want to delete this Lead?"
                 routeHandler={routeHandler}
-                loading={false}
+                loading={loading}
             />
         ),
     };

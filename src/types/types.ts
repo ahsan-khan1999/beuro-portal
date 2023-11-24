@@ -30,6 +30,7 @@ export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
   pathname?: string;
+  query?: string;
   role: number[];
   inner?: SideBar[];
   className?: string;
@@ -336,7 +337,9 @@ export type GenerateCustomerLeadFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  leadDetails?: Lead
+  leadDetails?: Lead,
+  customerType?: string,
+  setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
 export type GenerateLeadsAdditionalDetailsFormField = (
   loader: boolean,
@@ -437,6 +440,7 @@ export interface FilterType {
   sortBy?: string;
   type?: string;
   location?: string;
+  status?:string
 }
 export interface FilterProps {
   filter: FilterType;

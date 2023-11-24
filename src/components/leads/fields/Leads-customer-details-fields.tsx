@@ -1,5 +1,5 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
+import { DivProps, FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 
 export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
@@ -7,7 +7,9 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   loading,
   control,
   onClick,
-  leadDetails
+  leadDetails,
+  customerType,
+  setValue
 ) => {
   const formField: FormField[] = [
     {
@@ -223,6 +225,46 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       },
     },
   ];
+  const fieldIndex = formField.findIndex(
+    (field) =>
+      field?.field?.type === Field.div &&
+      //@ts-expect-error
+      Array.isArray(field?.field?.children) &&
+      //@ts-expect-error
+      field?.field?.children.some((child) => child?.field?.id == "fullName")
+  );
+
+  if (fieldIndex !== -1 && customerType === "company") {
+    const companyNameField = {
+      containerClass: "mb-0",
+      label: {
+        text: "Company Name",
+        htmlFor: "companyName",
+        className: "mb-[10px]",
+      },
+      field: {
+
+        type: Field.input,
+        className:
+          "!p-4 !!border-borderColor border border-dark focus:!border-primary",
+        inputType: "text",
+        id: "companyName",
+        name: "companyName",
+        placeholder: "Please Enter Company Name",
+        register,
+        disabled: false,
+        value: leadDetails?.id && leadDetails?.customerID?.companyName,
+        setValue: setValue
+
+      },
+    };
+    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
+    const divField = formField[fieldIndex]?.field as DivProps; // Assert type
+    if (divField && Array.isArray(divField.children)) {
+      //@ts-expect-error
+      divField.children.splice(fieldIndex + 2, 0, companyNameField);
+    }
+  }
 
   return formField;
 };

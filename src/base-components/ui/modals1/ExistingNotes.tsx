@@ -4,6 +4,8 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import addNewNote from "@/assets/svgs/add_new_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Lead } from "@/types/leads";
+import { useAppSelector } from "@/hooks/useRedux";
+import {  formatDateReverse } from "@/utils/utility";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -14,8 +16,8 @@ const ExistingNotes = ({
   onClose: () => void;
   leadDetails: Lead
 }) => {
-  console.log(leadDetails, "lead");
-
+  const { notes } = useAppSelector(state => state.note)
+  
   return (
     <>
       <BaseModal
@@ -60,39 +62,26 @@ const ExistingNotes = ({
               />
             </svg>
           </span>
+          {
+            notes?.map((item, key) => (
+              <div className={` mb-[10px]  ${notes?.length -1 !== key && 'border-b-[1px] border-lightGray '}pb-3 `} key={key}>
+                <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
+                  Created by &nbsp;
+                  <span className="text-[#1E1E1E] text-base font-normal">
+                    {item.createdBy?.fullName}
+                  </span>
+                </p>
 
-          <div className="mx-[41px] mb-[15px]">
-            <p className="text-[#8F8F8F] text-[14px] font-normal mb-[12px]">
-              Created by &nbsp;
-              <span className="text-[#1E1E1E] text-base font-normal">
-                {leadDetails.createdBy?.fullName}
-              </span>
-            </p>
+                <div className="mx-[41px] border border-[#4B4B4B] rounded-lg">
+                  <div className="text-[#4B4B4B]  text-base font-normal p-[17px]" dangerouslySetInnerHTML={{ __html: item?.description }} />
+                  <div className="p-2 flex justify-end text-sm text-lightGray">
+                    {formatDateReverse(item?.createdAt)}
+                  </div>
+                </div>
+              </div>
 
-            <div className="border border-[#4B4B4B] rounded-lg">
-              <p className="text-[#4B4B4B]  text-base font-normal p-[17px]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has a been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer.
-              </p>
-            </div>
-          </div>
-          <span className="mb-[13px] w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="651"
-              height="3"
-              viewBox="0 0 651 3"
-              fill="none"
-            >
-              <path
-                opacity="0.1"
-                d="M0.585938 1.06348L650.043 1.06342"
-                stroke="black"
-                stroke-width="2"
-              />
-            </svg>
-          </span>
+            ))
+          }
 
         </div>
       </BaseModal>

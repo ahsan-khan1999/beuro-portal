@@ -53,7 +53,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             label: { text: "Phone Number", htmlFor: "phoneNumber" },
             field: {
               type: Field.phone,
-              className: "!p-4    !border-dark  focus:!border-primary",
+              className: "  !h-[54px]  !border-dark  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -77,15 +77,15 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             containerClass: "mb-0 col-span-2",
             label: {
               text: "Reason for Contact",
-              htmlFor: "reasonForContact",
+              htmlFor: "reason",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "pl-4  !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "When is a convenient time for a consultation?",
-              id: "reasonForContact",
-              name: "reasonForContact",
+              id: "reason",
+              name: "reason",
               options: [
                 { value: "Individual", label: "Individual" },
                 { value: "Random", label: "Random" },
@@ -122,7 +122,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         text: "Submit Request",
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

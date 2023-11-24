@@ -6,6 +6,8 @@ export default function CheckField({
   checkboxFilter,
   setCheckBoxFilter,
   type,
+  defaultChecked,
+  value
 }: CheckFieldProps) {
   return (
     <>
@@ -13,10 +15,10 @@ export default function CheckField({
         <input
           type="checkbox"
           name="check"
-          defaultChecked={checkboxFilter[type]}
+          // defaultChecked={defaultChecked === type}
           className="hidden"
           onChange={(e) =>
-            setCheckBoxFilter({ ...checkboxFilter, [type]: e.target.checked })
+            setCheckBoxFilter({ ...checkboxFilter, [type]: value })
           }
         />
         <span className="checkbox-control"></span>
@@ -24,7 +26,7 @@ export default function CheckField({
         <p className=" text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type] ? (
+        {checkboxFilter[type] === value ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"

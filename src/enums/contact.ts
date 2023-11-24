@@ -3,6 +3,6 @@ export enum ContactSupportFields {
   fullName = "fullName",
   email = "email",
   phoneNumber = "phoneNumber",
-  // reasonForContact = "reasonForContact",
+  reasonForContact = "reason",
   message = "message",
 }

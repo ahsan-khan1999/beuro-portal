@@ -1,21 +1,22 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import React, { useState } from "react";
+import { FilterType } from "@/types";
+import React, { SetStateAction, useState } from "react";
 
-export default function ServicesFilters() {
+export default function ServicesFilters({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
-        <InputField handleChange={(value) => console.log(value)} value="" />
+        <InputField handleChange={(value) => setFilter({ ...filter, "text": value })} value={filter.text} />
         <SelectField
-          handleChange={(value) => console.log(value)}
+          handleChange={(value) => setFilter({ ...filter, "sortBy": value })}
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          options={["1", "2", "2", "2", "2"]}
+          options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
       </div>

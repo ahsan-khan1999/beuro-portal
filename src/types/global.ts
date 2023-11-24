@@ -2,6 +2,7 @@
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { SetStateAction } from "react";
+import { FilterType } from ".";
 
 export interface GlobalState {
   loading: boolean;
@@ -17,7 +18,7 @@ export type TranslatorFunction = (value: any) => any;
 export interface Status {
   open?: boolean;
   close?: boolean;
-  expired?: boolean;
+  expire?: boolean;
   signed?: boolean;
   rejected?: boolean;
   confirmed?: boolean;
@@ -33,9 +34,11 @@ export interface CheckBoxFilterProps {
 }
 export interface CheckFieldProps {
   label: string;
-  checkboxFilter: Status;
-  setCheckBoxFilter: React.Dispatch<React.SetStateAction<Status>>;
-  type: keyof Status;
+  checkboxFilter: FilterType;
+  setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
+  type: keyof FilterType;
+  defaultChecked?: string;
+  value?:string
 }
 export interface InputFieldProps {
   value: string;
@@ -84,6 +87,6 @@ export interface UpdateSuccessProps {
   modelSubHeading: string;
   cancelHandler: () => void;
   confirmHandler: () => void;
-  loading:boolean
+  loading: boolean
 
 }

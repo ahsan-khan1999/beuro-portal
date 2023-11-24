@@ -7,11 +7,12 @@ import { AddressType, ApiResponseType, CheckProps, Errors, FieldType } from "@/t
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
-import { staticEnums } from './static';
+import { DEFAULT_SERVICE, staticEnums } from './static';
 import { DetailScreensStages } from "@/enums/auth";
 import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
+import { Service } from "@/types/service";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -280,23 +281,19 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY hh:mm:ss")
 }
+export function formatDateReverse(date: string) {
+  return moment(date).format("hh:mm:ss, DD/MM/YYYY")
+}
 export function formatDateTimeToDate(date: string) {
   return moment(date).format("YYYY-MM-DD")
 }
 
 
 export function getStatusColor(status: string) {
-  switch (status) {
-    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]:
-      return "#FE9244"
-    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]:
-      return "#4A13E7"
-    case staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]:
-      return "#FF376F"
-    default:
-      return "#FF376F";
-  }
-
+  if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]) return "#FE9244";
+  else if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]) return "#FE9244";
+  else if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]) return "#FF376F"
+  else return "#FF376F"
 }
 
 type TransformedMessages = {
@@ -335,4 +332,16 @@ export function setImageFieldValues(setValue: UseFormSetValue<FieldValues>, imag
     setValue(`upload_image${idx + 1}`, element)
 
   });
+}
+export const filterLead = (id: string | string[], service: Service[]): Service | Service[] => {
+  let checkedService: Service | Service[] = DEFAULT_SERVICE;
+  if (Array.isArray(id)) {
+    checkedService = id.map((item) => (
+      service.find((item_) => item_.id === item) || DEFAULT_SERVICE
+    ))
+  } else {
+    checkedService = service.find((item) => item.id === id) || DEFAULT_SERVICE
+
+  }
+  return checkedService
 }

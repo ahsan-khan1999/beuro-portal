@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -12,6 +12,8 @@ import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
+import { useRouter } from "next/router";
+import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
@@ -19,12 +21,23 @@ const useLeads = () => {
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>(
     []
   );
+  const { query } = useRouter()
+
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
     text: "",
-    type: ""
+    type: "",
+    status: query?.filter as string
+
   });
+  console.log(filter, "query");
+
+  useMemo(() => {
+    setFilter({
+      ...filter, status: query?.filter as string
+    })
+  }, [query?.filter])
   useEffect(() => {
     localStoreUtil.remove_data("lead")
     dispatch(setLeadDetails(DEFAULT_LEAD))
@@ -60,8 +73,12 @@ const useLeads = () => {
       e.stopPropagation();
     }
     const filteredLead = lead?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) dispatch(setLeadDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    if (filteredLead?.length === 1) {
+      dispatch(setLeadDetails(filteredLead[0]));
+      dispatch(readNotes({ params: { type: "lead", id: filteredLead[0]?.id } }));
+      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    
+    }
   };
 
   // function for hnadling the add note
@@ -112,6 +129,7 @@ const useLeads = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   return {
     currentPageRows,
     totalItems,
@@ -121,6 +139,8 @@ const useLeads = () => {
     handleImageUpload,
     renderModal,
     handleFilterChange,
+    filter,
+    setFilter,
   };
 };
 

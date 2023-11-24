@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { FormField } from ".";
+import { FormField, User } from ".";
 import {
   FieldValues,
   SubmitHandler,
@@ -11,10 +11,12 @@ export interface Service {
   id: string;
   serviceName: string;
   unit: number;
-  createdBy?: string;
+  createdBy?: User;
   createdOn: string;
   price: number
   description: string;
+  createdAt: string;
+
 }
 
 export interface FormDataProps {

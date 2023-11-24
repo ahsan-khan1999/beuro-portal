@@ -3396,23 +3396,27 @@ export const sideBar: SideBar[] = [
   {
     icon: "Leads",
     title: "Leads",
+    pathname:"/leads",
     role: [1],
     inner: [
       {
         title: "Open",
-        pathname: "/leads?open",
+        pathname: "/leads",
+        query:"open",
 
         role: [1],
       },
       {
         title: "Close",
-        pathname: "/leads?close",
+        pathname: "/leads",
+        query:"close",
 
         role: [1],
       },
       {
         title: "Expire",
-        pathname: "/leads?expire",
+        pathname: "/leads",
+        query:"expire",
 
         role: [1],
       },
@@ -3422,6 +3426,7 @@ export const sideBar: SideBar[] = [
     icon: "Offers",
     title: "Offers",
     role: [1],
+    pathname:"/offers",
 
     inner: [
       {
@@ -3448,6 +3453,8 @@ export const sideBar: SideBar[] = [
     icon: "Contracts",
     title: "Contracts",
     role: [1],
+    pathname:"/contract",
+
     inner: [
       {
         title: "Accepted",
@@ -3473,6 +3480,8 @@ export const sideBar: SideBar[] = [
     icon: "Invoices",
     title: "Invoices",
     role: [1],
+    pathname:"/invoices",
+
     inner: [
       {
         title: "Accepted",

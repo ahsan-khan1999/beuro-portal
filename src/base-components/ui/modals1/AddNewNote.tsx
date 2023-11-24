@@ -10,10 +10,11 @@ const AddNewNote = ({
   handleNotes,
 }: {
   onClose: () => void;
-  handleNotes: Function;
+  handleNotes: (id: string) => void
+
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddNewNote(handleNotes);
+    useAddNewNote({handleNotes});
 
   return (
     <>

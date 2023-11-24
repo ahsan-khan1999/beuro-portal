@@ -28,11 +28,11 @@ const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector(state => state.lead)
   
   const [tabType, setTabType] = useState<ComponentsType>(
-    leadDetails?.id && leadDetails?.stage || ComponentsType.addressEdit
+    leadDetails?.id && leadDetails?.stage || ComponentsType.customerEdit
     );
 
   useEffect(() => {
-    setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.addressEdit)
+    setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.customerEdit)
   }, [leadDetails?.id])
 
   const router = useRouter();

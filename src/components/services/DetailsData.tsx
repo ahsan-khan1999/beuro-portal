@@ -5,13 +5,16 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 const DetailsData = ({
   serviceDetail,
   isUpdate,
+  deleteHandler
 }: {
   serviceDetail: Service;
   isUpdate: boolean;
+  deleteHandler: () => void
 }) => {
   const router = useRouter();
   return (
@@ -32,14 +35,14 @@ const DetailsData = ({
         </div>
         <div className="flex items-center gap-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={deleteHandler}/>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
-            Customer ID:
+            Service ID:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{serviceDetail?.id}
             </span>
@@ -47,7 +50,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             Created by:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.createdBy}
+              &nbsp;&nbsp;{serviceDetail?.createdBy?.fullName}
             </span>
           </h3>
         </div>
@@ -55,7 +58,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] mt-4">
             Creation Date:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.createdOn?.toLocaleDateString()}
+              &nbsp;&nbsp;{formatDateTimeToDate(serviceDetail?.createdAt)}
             </span>
           </h3>
         )}

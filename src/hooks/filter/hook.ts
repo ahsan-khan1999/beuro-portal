@@ -31,7 +31,8 @@ export default function useFilter({ filter, setFilter }: { filter: FilterType, s
             text: "",
             sortBy: "",
             type: "None",
-            location: ""
+            location: "",
+            status:""
         })
     }
 

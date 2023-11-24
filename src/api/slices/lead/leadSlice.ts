@@ -5,6 +5,9 @@ import { GlobalApiResponseType } from "@/types/global";
 import { Lead } from "@/types/leads";
 import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 interface LeadState {
     lead: Lead[];
@@ -115,14 +118,20 @@ export const createLeadNotes: AsyncThunk<boolean, object, object> | any =
     });
 export const deleteLead: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("lead/delete", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { leadDetails: data, router, translate } = args as any;
 
         try {
             await apiServices.deleteLead(data);
+            router.pathname = "/leads"
+            updateQuery(router, router.locale)
+            thunkApi.dispatch(updateModalType({
+                type:
+                    ModalType.NONE
+            }));
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
-            setErrors(setError, e?.data.data, translate);
+            // setErrors(setError, e?.data.data, translate);
             return false;
         }
     });

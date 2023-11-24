@@ -1,7 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../details/LeadsDetailsData";
-import { formatDateTimeToDate } from "@/utils/utility";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,

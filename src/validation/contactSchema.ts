@@ -14,13 +14,12 @@ export const generateContactSupportValidation = (translate: Function) => {
       .required(translate("validation required")),
 
     [ContactSupportFields.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validation required")),
 
-    // [ContactSupportFields.reasonForContact]: yup
-    //   .string()
-    //   .required(translate("validation required")),
+    [ContactSupportFields.reasonForContact]: yup
+      .string()
+      .required(translate("validation required")),
 
     [ContactSupportFields.message]: yup
       .string()

@@ -12,24 +12,23 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3 gap-x-3",
         children: [
           {
             containerClass: "col-span-2 mb-0",
             label: {
               text: "Service/Product Title",
-              htmlFor: "serviceTitle",
+              htmlFor: "serviceName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark ${
-                !isUpdate && "!border-light"
-              } focus:!border-primary `,
+              className: `!p-4 !border-dark ${!isUpdate && "!border-light"
+                } focus:!border-primary `,
               inputType: "text",
-              id: "serviceTitle",
-              name: "serviceTitle",
+              id: "serviceName",
+              name: "serviceName",
               placeholder: "Product Name...",
               register,
               disabled: isUpdate,
@@ -46,7 +45,7 @@ id:"div-field",
               type: Field.input,
               className:
                 "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
-              inputType: "text",
+              inputType: "number",
               id: "unit",
               name: "unit",
               placeholder: "Std. ",
@@ -62,7 +61,7 @@ id:"div-field",
       containerClass: "mt-5",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-3",
         children: [
           {
@@ -75,9 +74,9 @@ id:"div-field",
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "price.value",
-              name: "price.value",
+              inputType: "number",
+              id: "price",
+              name: "price",
               placeholder: "100CHF",
               register,
               disabled: isUpdate,
@@ -110,33 +109,30 @@ id:"div-field",
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Cancel",
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
-              loading,
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
+                }`,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
+              id: "button",
               text: "Save Changes",
               inputType: "submit",
-              className: `rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
+              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },

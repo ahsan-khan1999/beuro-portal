@@ -6,6 +6,9 @@ import Image from "next/image";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import { Lead } from "@/types/leads";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Service } from "@/types/service";
+import { DEFAULT_SERVICE } from "@/utils/static";
+import { filterLead, formatDateTimeToDate } from "@/utils/utility";
 
 const ServiceDetailsData = ({
   onClick,
@@ -14,6 +17,11 @@ const ServiceDetailsData = ({
 
 }) => {
   const { leadDetails } = useAppSelector(state => state.lead)
+  const { service } = useAppSelector(state => state.service)
+
+
+  let requiredService = filterLead(leadDetails?.requiredService, service) as Service
+  let otherServices = filterLead(leadDetails?.otherServices, service) as Service[]
 
 
   return (
@@ -37,7 +45,7 @@ const ServiceDetailsData = ({
               Required Service
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.requiredService instanceof Object && leadDetails?.requiredService?.serviceName}
+              {requiredService?.serviceName}
             </div>
           </div>
           <div>
@@ -45,7 +53,7 @@ const ServiceDetailsData = ({
               Desire Date
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.desireDate}
+              {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
           <div>
@@ -96,10 +104,8 @@ const ServiceDetailsData = ({
               Other Services
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              {Array.isArray(leadDetails?.otherServices)
-                && leadDetails?.otherServices.map((item) =>
-                  item instanceof Object && item?.serviceName
-                )
+              {
+                Array.isArray(otherServices) && otherServices?.map((item) => item.serviceName + ", ")
               }
             </div>
           </div>

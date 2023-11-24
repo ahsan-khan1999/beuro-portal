@@ -7,15 +7,16 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
 import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
 import { createLeadNotes } from "@/api/slices/lead/leadSlice";
+import { createNote } from "@/api/slices/noteSlice/noteSlice";
 
-export const useAddNewNote = (handleNotes: Function) => {
+export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.lead);
+  const { loading, error } = useAppSelector((state) => state.note);
+
   const { modal: { data: leadId } } = useAppSelector((state) => state.global);
-  console.log(leadId);
-  
+
   const schema = generateAddNewNoteValidation(translate);
   const {
     register,
@@ -29,8 +30,8 @@ export const useAddNewNote = (handleNotes: Function) => {
   });
   const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(createLeadNotes({ data: { ...data, id: leadId }, router, setError, translate }));
-    if (res?.payload) handleNotes()
+    const res = await dispatch(createNote({ data: { ...data, id: leadId, type: "lead" }, router, setError, translate }));
+    if (res?.payload) handleNotes(leadId)
 
   };
   return {

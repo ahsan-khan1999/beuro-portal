@@ -53,24 +53,21 @@ const SideBar = () => {
                 ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`flex items-center px-3 py-2 w-full ${
-                      router.pathname === item.pathname &&
+                    className={`flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                       "bg-primary rounded-lg"
-                    } ${item.className}`}
+                      } ${item.className}`}
                   >
                     <span
-                      className={`${
-                        router.pathname === item.pathname && "sidebar-svg"
-                      } mr-2 `}
+                      className={`${router.pathname === item.pathname && "sidebar-svg"
+                        } mr-2 `}
                     >
                       {item.icon && svgs[item.icon]}
                     </span>
                     <span
-                      className={` font-medium tracking-[0.5px] ${
-                        router.pathname === item.pathname
-                          ? "text-white"
-                          : " text-[#4B4B4B]"
-                      }`}
+                      className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                        ? "text-white"
+                        : " text-[#4B4B4B]"
+                        }`}
                     >
                       {item.title}
                     </span>
@@ -79,27 +76,26 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
+                        item.pathname && router.push({ pathname: item.pathname, query: { filter: item.query } })
+
                       }}
-                      className={`flex  justify-between items-center px-3 py-2 w-full ${
-                        router.pathname === item.pathname &&
+                      className={`flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                         "bg-primary rounded-lg"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center">
                         <span
-                          className={`${
-                            router.pathname === item.pathname && "sidebar-svg"
-                          } mr-2 `}
+                          className={`${router.pathname === item.pathname && "sidebar-svg"
+                            } mr-2 `}
+
                         >
                           {item.icon && svgs[item.icon]}
                         </span>
                         <span
-                          className={` font-medium tracking-[0.5px] ${
-                            router.pathname === item.pathname
-                              ? "text-white"
-                              : " text-[#4B4B4B]"
-                          }`}
+                          className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                            ? "text-white"
+                            : " text-[#4B4B4B]"
+                            }`}
                         >
                           {item.title}
                         </span>
@@ -107,9 +103,12 @@ const SideBar = () => {
                       <div
                         className={`
                           cursor-pointer  ${isOpen == index ? "rotate-180" : ""}
-                          ${
-                            router.pathname === item.pathname && "sidebar-svg"
+                          ${router.pathname === item.pathname && "sidebar-svg"
                           }`}
+                        onClick={() => {
+                          isOpen == index ? setIsOpen(null) : setIsOpen(index);
+
+                        }}
                       >
                         <svg
                           className={` `}
@@ -134,7 +133,7 @@ const SideBar = () => {
                             <button
                               className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
                               onClick={() =>
-                                it.pathname && router.push(it.pathname)
+                                it.pathname && router.push({ pathname: it.pathname, query:  { filter: it.query } })
                               }
                             >
                               {it.title}

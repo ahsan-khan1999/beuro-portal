@@ -59,7 +59,7 @@ export enum Field {
   span = "span",
   div = "div",
   button = "button",
-  addField = "span",
+  addField = "addField",
   link = "link",
   dateRange = "dateRange",
   multiSelect = "multiSelect",
