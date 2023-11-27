@@ -7,12 +7,17 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditReceiptContentDetailsFormField } from "@/components/content/edit/fields/edit-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
+import { useMemo, useState } from "react";
+import { Attachement } from "@/types/global";
+import { transformAttachments } from "@/utils/utility";
+import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useEditReceiptDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
+  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.receiptContent?.attachments) || [])
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
 
 
   const handleBack = () => {
@@ -25,14 +30,39 @@ export const useEditReceiptDetails = (onClick: Function) => {
     handleSubmit,
     control,
     setError,
+    reset,
+    trigger,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = EditReceiptContentDetailsFormField(register, loading, control, handleBack);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    onClick(3, ComponentsType.receiptContent);
+  useMemo(() => {
+    if (contentDetails.id) {
+      reset({
+        title: contentDetails?.receiptContent?.title,
+        attachments: contentDetails?.receiptContent?.attachments?.length > 0 && contentDetails?.receiptContent?.attachments[0] || null
+      })
+    }
+
+  }, [contentDetails.id])
+  const fields = EditReceiptContentDetailsFormField(register, loading, control, handleBack, trigger, 0, attachements, setAttachements, contentDetails);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    let apiData = {
+      contentName: data.contentName,
+      receiptContent: {
+        body: data.body,
+        description: data.description,
+        title: data.title,
+        attachments: attachements?.map((item) => item.value),
+      },
+      step: 4,
+      stage: ComponentsType.receiptContent,
+      contentId: contentDetails?.id,
+      id: contentDetails?.id
+    }
+    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
+    if (res?.payload) onClick(3, ComponentsType.receiptContent);
+
   };
   return {
     fields,

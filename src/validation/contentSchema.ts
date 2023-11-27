@@ -15,23 +15,36 @@ export const generateOfferEditContentDetailsValidation = (
       .string()
       .required("validation required"),
 
-    [OfferEditContentDetails.addressLabel]: yup
-      .string()
-      .required("validation required"),
-
-    [OfferEditContentDetails.offerTitle]: yup
-      .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.offerDescription]: yup
-      .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.emailBody]: yup
-      .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.attachments]: yup
-      .string()
-      .required(translate("validation required")),
+    "offerContent": yup.object().shape({
+      [OfferEditContentDetails.offerTitle]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.offerDescription]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.emailBody]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.attachments]: yup
+        .string().required(translate("validationMessages.required"))
+    }).required()
   });
+};
+
+
+
+
+export const generateContentAddressValidationSchema = (
+  translate: Function,
+  count: number
+) => {
+
+  const schemaObject: any = {};
+  for (let i = 0; i < count; i++) {
+    schemaObject[`${OfferEditContentDetails.addressLabel}_${i}`] = yup.string().required(translate("validationMessage.required"));
+  }
+  let addressObj = yup.object().shape(schemaObject)
+  return addressObj
 };
 
 // Confirmation content edit details validation
@@ -39,20 +52,23 @@ export const generateEditConfirmationContentDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [EditConfirmationContentDetails.confirmationTitle]: yup
-      .string()
-      .required("validation required"),
+    "confirmationContent": yup.object().shape({
+      [EditConfirmationContentDetails.confirmationTitle]: yup
+        .string()
+        .required("validation required"),
 
-    [EditConfirmationContentDetails.confirmationDescription]: yup
-      .string()
-      .required("validation required"),
+      [EditConfirmationContentDetails.confirmationDescription]: yup
+        .string()
+        .required("validation required"),
 
-    [EditConfirmationContentDetails.emailBody]: yup
-      .string()
-      .required(translate("validation required")),
-    [EditConfirmationContentDetails.attachments]: yup
-      .string()
-      .required(translate("validation required")),
+      [EditConfirmationContentDetails.emailBody]: yup
+        .string()
+        .required(translate("validation required")),
+      [EditConfirmationContentDetails.attachments]: yup
+        .string()
+        .required(translate("validation required")),
+    }).required()
+
   });
 };
 
@@ -61,20 +77,23 @@ export const generateEditInvoiceContentDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [EditInvoiceContentDetails.invoiceTitle]: yup
-      .string()
-      .required("validation required"),
+    "invoiceContent": yup.object().shape({
+      [EditInvoiceContentDetails.invoiceTitle]: yup
+        .string()
+        .required("validation required"),
 
-    [EditInvoiceContentDetails.invoiceDescription]: yup
-      .string()
-      .required("validation required"),
+      [EditInvoiceContentDetails.invoiceDescription]: yup
+        .string()
+        .required("validation required"),
 
-    [EditInvoiceContentDetails.emailBody]: yup
-      .string()
-      .required(translate("validation required")),
-    [EditInvoiceContentDetails.attachments]: yup
-      .string()
-      .required(translate("validation required")),
+      [EditInvoiceContentDetails.emailBody]: yup
+        .string()
+        .required(translate("validation required")),
+      [EditInvoiceContentDetails.attachments]: yup
+        .string()
+        .required(translate("validation required")),
+    })
+
   });
 };
 
@@ -83,19 +102,21 @@ export const generateEditReceiptContentDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [ReceiptEditContentDetails.receiptTitle]: yup
-      .string()
-      .required("validation required"),
+    "receiptContent": yup.object().shape({
+      [ReceiptEditContentDetails.receiptTitle]: yup
+        .string()
+        .required("validation required"),
 
-    [ReceiptEditContentDetails.receiptDescription]: yup
-      .string()
-      .required("validation required"),
+      [ReceiptEditContentDetails.receiptDescription]: yup
+        .string()
+        .required("validation required"),
 
-    [ReceiptEditContentDetails.emailBody]: yup
-      .string()
-      .required(translate("validation required")),
-    [ReceiptEditContentDetails.attachments]: yup
-      .string()
-      .required(translate("validation required")),
+      [ReceiptEditContentDetails.emailBody]: yup
+        .string()
+        .required(translate("validation required")),
+      [ReceiptEditContentDetails.attachments]: yup
+        .string()
+        .required(translate("validation required")),
+    })
   });
 };

@@ -18,7 +18,7 @@ export const Form = React.memo(
         errors
       );
     };
-    
+      
     return (
       <form className={className} onSubmit={handleSubmit(onSubmit)}>
         {formFields?.map((fieldData, index) => {

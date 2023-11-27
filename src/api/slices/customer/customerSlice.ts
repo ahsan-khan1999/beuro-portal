@@ -62,7 +62,7 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            let apiData={...data}
+            let apiData = { ...data }
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
@@ -80,7 +80,7 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            
+
             let apiData = { ...data }
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
@@ -131,10 +131,10 @@ const customerSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readCustomer.fulfilled, (state, action) => {
-            state.customer = action.payload.Customer,
-                state.lastPage = action.payload.lastPage,
-                state.totalCount = action.payload.totalCount,
-                state.loading = false;
+            state.customer = action.payload.Customer;
+            state.lastPage = action.payload.lastPage;
+            state.totalCount = action.payload.totalCount;
+            state.loading = false;
         });
         builder.addCase(readCustomer.rejected, (state) => {
             state.loading = false

@@ -4,6 +4,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import Image from "next/image";
 import editIcon from "@/assets/svgs/edit_info.svg";
 import moreInfoIcon from "@/assets/svgs/entity_more_info.svg";
+import { formatDateString } from "@/utils/functions";
 
 const TableRows = ({
   contentData,
@@ -14,7 +15,7 @@ const TableRows = ({
 
   return (
     <div>
-      {contentData?.map((item: any) => {
+      {contentData?.map((item) => {
         return (
           <div
             onClick={() =>
@@ -27,16 +28,16 @@ const TableRows = ({
             className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(100px,_100px),minmax(200px,_200px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md  flex items-center">
-              {item.id}
+              {item.refID}
             </span>
             <span className="px-6 py-4 bg-white   flex items-center">
-              {item.name}
+              {item.contentName}
             </span>
             <span className="px-6 py-4 bg-white  flex items-center ">
-              {item.contentTitle}
+              {item.offerContent.title}
             </span>
             <span className="px-6 py-4 bg-white  flex items-center">
-              {item.createdOn.toLocaleDateString()}
+              {formatDateString(item?.createdAt)}
             </span>
 
             <span className="px-6 py-4 bg-white ">

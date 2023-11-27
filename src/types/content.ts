@@ -1,34 +1,41 @@
+import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
+import { User } from ".";
+
 // Interface for the content table
 export interface ContentTableRowTypes {
+  refID: string;
+  createdAt:string;
   id: string;
-  name: string;
+  contentName: string;
   contentTitle: string;
-  createdOn: Date | null;
-  edit?: string;
-  offer: {
+  createdOn: string;
+  offerContent: {
     name: string;
-    addressLabels: string;
+    address: string[];
     title: string;
     description: string;
-    emailBody: string;
-    attachmentName: string;
+    body: string;
+    attachments: string[];
   };
-  confirmation: {
+  confirmationContent: {
     title: string;
     description: string;
-    emailBody: string;
-    attachmentName: string;
+    body: string;
+    attachments: string[];
   };
-  invoice: {
+  invoiceContent: {
     title: string;
     description: string;
-    emailBody: string;
-    attachmentName: string;
+    body: string;
+    attachments: string[];
   };
-  receipt: {
+  receiptContent: {
     title: string;
     description: string;
-    emailBody: string;
-    attachmentName: string;
+    body: string;
+    attachments: string[];
+
   };
+  stage: ComponentsType,
+  createdBy:User
 }

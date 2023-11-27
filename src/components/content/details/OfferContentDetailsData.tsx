@@ -43,7 +43,7 @@ const OfferContentDetailsData = ({
             Content Name
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.offer?.name}
+            {contentDetail?.contentName}
           </p>
         </div>
 
@@ -51,13 +51,16 @@ const OfferContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Addres Labels
           </p>
-          <div className="grid grid-cols-3 gap-6">
-            <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-              {contentDetail?.offer?.addressLabels}
-            </span>
-            <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-              {contentDetail?.offer?.addressLabels}
-            </span>
+          <div className="grid grid-cols-3 gap-6" >
+            {
+              contentDetail?.offerContent?.address?.map((item, key) => (
+
+                <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" key={key}>
+                  {item}
+                </span>
+
+              ))
+            }
           </div>
         </div>
 
@@ -66,7 +69,7 @@ const OfferContentDetailsData = ({
             Offer Title
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.offer?.title}
+            {contentDetail?.offerContent?.title}
           </p>
         </div>
 
@@ -74,17 +77,14 @@ const OfferContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Offer Description
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.offer?.description}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.offerContent?.description }} />
+
         </div>
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Email Body
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.offer?.emailBody}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.offerContent?.body }} />
         </div>
 
         {/* attachments is here */}
@@ -93,7 +93,7 @@ const OfferContentDetailsData = ({
             Attachments
           </span>
           <div className="mt-5 grid grid-cols-3 gap-2">
-            {filesData.map((item, index) => (
+            {contentDetail?.offerContent?.attachments.map((item, index) => (
               <AttachmentsFiles fileName={item} key={index} />
             ))}
           </div>

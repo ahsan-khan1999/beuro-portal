@@ -24,9 +24,9 @@ export enum ComponentsType {
 }
 
 const ContentDetailsData = ({
-  contentDetail,
+  contentDetails,
 }: {
-  contentDetail: ContentTableRowTypes;
+  contentDetails: ContentTableRowTypes;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
   const [data, setData] = useState<{
@@ -45,19 +45,19 @@ const ContentDetailsData = ({
   const componentArray = [
     <OfferContentDetailsData
       onClick={handleEdit}
-      contentDetail={contentDetail}
+      contentDetail={contentDetails}
     />,
     <ConfirmationContentDetailsData
       onClick={handleEdit}
-      contentDetail={contentDetail}
+      contentDetail={contentDetails}
     />,
     <InoviceContentDetails
       onClick={handleEdit}
-      contentDetail={contentDetail}
+      contentDetail={contentDetails}
     />,
     <ReceiptContentDetails
       onClick={handleEdit}
-      contentDetail={contentDetail}
+      contentDetail={contentDetails}
     />,
   ];
 
@@ -65,56 +65,56 @@ const ContentDetailsData = ({
 
   useEffect(() => {
     setRenderComponent(componentArray);
-  }, [contentDetail]);
+  }, [contentDetails]);
 
   const lookup = {
     [ComponentsType.offerContent]: (
       <OfferContentDetailsData
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.editOfferContent]: (
       <OfferContentEditDetails
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
         
       />
     ),
     [ComponentsType.confirmationContent]: (
       <ConfirmationContentDetailsData
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.editConfirmationContent]: (
       <EditConfirmationContentDetailsData
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.invoiceContent]: (
       <InoviceContentDetails
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.editInvoiceContent]: (
       <EditInoviceContentDetails
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.receiptContent]: (
       <ReceiptContentDetails
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
     [ComponentsType.editReceiptContent]: (
       <EditReceiptContentDetails
         onClick={handleEdit}
-        contentDetail={contentDetail}
+        contentDetail={contentDetails}
       />
     ),
   };

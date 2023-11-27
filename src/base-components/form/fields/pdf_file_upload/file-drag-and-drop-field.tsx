@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
+import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { Attachement } from "@/types/global";
 
 export const PdfFileUpload = ({
   id,
@@ -12,21 +15,21 @@ export const PdfFileUpload = ({
   text,
   fileSupported,
   isOpenedFile,
+  attachements,
+  setAttachements
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
   text?: string;
   fileSupported?: string;
   isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: React.Dispatch<SetStateAction<any>>
+
 }) => {
   const router = useRouter();
   const formdata = new FormData();
-  // const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
-  //   null
-  // );
-
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-
+  const dispatch = useAppDispatch()
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -44,16 +47,21 @@ export const PdfFileUpload = ({
       formdata.append("file", file);
 
       // Store the file name locally
-      setUploadedImages([...uploadedImages, file.name]);
+      const response = await dispatch(uploadFileToFirebase(formdata))
+      if (response?.payload) {
+        setAttachements && setAttachements(attachements && [...attachements, { name: file?.name, value: response?.payload }])
+        field.onChange(response?.payload);
 
-      field.onChange(file.name);
+      }
+
     }
   };
 
-  const handleDeleteFile = (fileName: string) => {
-    const updatedImages = uploadedImages.filter((item) => item !== fileName);
-    setUploadedImages(updatedImages);
-    field.onChange(updatedImages.join(", "));
+  const handleDeleteFile = (index: number) => {
+    const list = attachements && [...attachements]
+    list?.splice(index, 1)
+    setAttachements && setAttachements(list)
+    // field.onChange();
   };
 
   return (
@@ -80,12 +88,11 @@ export const PdfFileUpload = ({
       </label>
 
       <div className="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 mr-4">
-        {uploadedImages.length > 0 &&
-          uploadedImages.map((item, index) => (
+        {attachements &&
+          attachements?.map((item, index) => (
             <div
-              className={`relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 ${
-                isOpenedFile ? "cursor-pointer" : "cursor-default"
-              }`}
+              className={`relative flex flex-col gap-3 w-[250px] h-fit border border-[#EBEBEB] rounded-md px-3 py-2 ${isOpenedFile ? "cursor-pointer" : "cursor-default"
+                }`}
               key={index}
               onClick={() =>
                 isOpenedFile && router.push("/content/pdf-preview")
@@ -95,13 +102,12 @@ export const PdfFileUpload = ({
                 <Image
                   src={deletePdfIcon}
                   alt="deletePdfIcon"
-                  className={`absolute -right-1 -top-1 ${
-                    isOpenedFile ? "cursor-pointer" : "cursor-default"
-                  } `}
-                  onClick={() => handleDeleteFile(item)}
+                  className={`absolute -right-1 -top-1 ${isOpenedFile ? "cursor-pointer" : "cursor-pointer"
+                    } `}
+                  onClick={() => handleDeleteFile(index)}
                 />
                 <Image src={pdfIcon} alt="pdfIcon" />
-                <span>{item}</span>
+                <span>{item?.name}</span>
               </div>
             </div>
           ))}

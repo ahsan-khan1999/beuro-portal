@@ -38,7 +38,7 @@ export interface CheckFieldProps {
   setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
   type: keyof FilterType;
   defaultChecked?: string;
-  value?:string
+  value?: string
 }
 export interface InputFieldProps {
   value: string;
@@ -89,4 +89,9 @@ export interface UpdateSuccessProps {
   confirmHandler: () => void;
   loading: boolean
 
+}
+
+export interface Attachement {
+  name: string,
+  value: string
 }

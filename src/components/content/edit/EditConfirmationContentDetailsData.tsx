@@ -21,7 +21,7 @@ const EditConfirmationContentDetailsData = ({
         <h2 className="text-[#393939] text-lg font-medium">
           Confirmation Content
         </h2>
-        <button onClick={() => onClick(1, ComponentsType.confirmationContent)} className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7]  px-9">
+        <button onClick={() => onClick(1, ComponentsType.confirmationContent)} className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9">
           Cancel
         </button>
       </div>

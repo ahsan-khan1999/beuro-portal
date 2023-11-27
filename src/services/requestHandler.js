@@ -30,6 +30,8 @@ const SERVICE_URLS = {
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
   content: "/content",
+  contentDetails: "/content/content-step/",
+
   offer: "/offer",
   contract: "/contract",
   company: "/company",
@@ -132,16 +134,22 @@ const updateNotes = (data) =>
 const deleteLead = (data) =>
   del(SERVICE_URLS.readLead + `/${data?.id}`, {}, { feature: featureConstants.login });
 
-const readContent = (data) =>
-  get(SERVICE_URLS.content, data, { feature: featureConstants.login });
+const readContent = (params) =>
+  get(SERVICE_URLS.content, params, { feature: featureConstants.login }, { detail: false });
 
-const createContent = (data) =>
-  post(SERVICE_URLS.content, data, { feature: featureConstants.login });
+const readContentDetail = (params) =>
+  get(SERVICE_URLS.content, params, { feature: featureConstants.login }, { detail: true });
+
+const createContent = (data) => {
+  let route = data?.contentId ? data?.step + "/" + data?.contentId : data?.step
+  return post(SERVICE_URLS.contentDetails + route, data, { feature: featureConstants.login });
+
+}
 
 const updateContent = (data) =>
-  put(SERVICE_URLS.content, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.contentDetails + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteContent = (data) =>
-  del(SERVICE_URLS.content, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.content+ `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readOffer = (data) =>
   get(SERVICE_URLS.offer, data, { feature: featureConstants.login });
@@ -342,6 +350,7 @@ const apiServices = {
   updateNotes,
   readServiceDetails,
   readNotes,
-  createNotes
+  createNotes,
+  readContentDetail
 };
 export default apiServices;

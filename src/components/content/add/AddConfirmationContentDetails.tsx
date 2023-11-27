@@ -5,12 +5,15 @@ import React from "react";
 
 const AddConfirmationContentDetails = ({
   onHandleNext,
+  onHandleBack
 }: {
   onHandleNext: Function;
+  onHandleBack: Function;
+
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddContentConfirmationDetails(onHandleNext);
+    useAddContentConfirmationDetails(onHandleNext,onHandleBack);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] ">

@@ -12,14 +12,7 @@ const ReceiptContentDetails = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const filesData: string[] = [
-    "First File",
-    "Second File",
-    "Third File",
-    "Fourth File",
-    "Fifth File",
-    "Sixth File",
-  ];
+
 
   return (
     <div
@@ -43,25 +36,22 @@ const ReceiptContentDetails = ({
             Receipt Title
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.receipt?.title}
+            {contentDetail?.receiptContent?.title}
           </p>
         </div>
 
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
-            Receipt Description
+            Offer Description
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.receipt?.description}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.receiptContent?.description }} />
+
         </div>
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Email Body
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.receipt?.emailBody}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.receiptContent?.body }} />
         </div>
 
         {/* attachments is here */}
@@ -70,7 +60,7 @@ const ReceiptContentDetails = ({
             Attachments
           </span>
           <div className="mt-5 grid grid-cols-3 gap-2">
-            {filesData.map((item, index) => (
+            {contentDetail?.receiptContent?.attachments?.map((item, index) => (
               <AttachmentsFiles fileName={item} key={index} />
             ))}
           </div>

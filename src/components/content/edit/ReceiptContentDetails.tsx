@@ -21,7 +21,7 @@ const EditReceiptContentDetails = ({
         <h2 className="text-[#393939] text-lg font-medium">Receipt Content</h2>
         <button
           onClick={() => onClick(3, ComponentsType.receiptContent)}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7]  px-9"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
         >
           Cancel
         </button>

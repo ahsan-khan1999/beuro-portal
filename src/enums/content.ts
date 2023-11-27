@@ -1,32 +1,32 @@
 // offer edit content enum
 export enum OfferEditContentDetails {
   contentName = "contentName",
-  addressLabel = "addressLabel",
-  offerTitle = "offerTitle",
-  offerDescription = "offerDescription",
-  emailBody = "emailBody",
+  addressLabel = "offerContent.address",
+  offerTitle = "title",
+  offerDescription = "description",
+  emailBody = "body",
   attachments = "attachments",
 }
 
 // enum for confirmation edit content details
 export enum EditConfirmationContentDetails {
-  confirmationTitle = "confirmationTitle",
-  confirmationDescription = "confirmationDescription",
-  emailBody = "emailBody",
+  confirmationTitle = "title",
+  confirmationDescription = "description",
+  emailBody = "body",
   attachments = "attachments",
 }
 
 // enum for Invoice edit content details
 export enum EditInvoiceContentDetails {
-  invoiceTitle = "invoiceTitle",
-  invoiceDescription = "invoiceDescription",
-  emailBody = "emailBody",
+  invoiceTitle = "title",
+  invoiceDescription = "description",
+  emailBody = "body",
   attachments = "attachments",
 }
 // enum for Receipt edit content details
 export enum ReceiptEditContentDetails {
-  receiptTitle = "receiptTitle",
-  receiptDescription = "receiptDescription",
-  emailBody = "emailBody",
+  receiptTitle = "title",
+  receiptDescription = "description",
+  emailBody = "body",
   attachments = "attachments",
 }

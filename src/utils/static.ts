@@ -17,6 +17,7 @@ import { PlansAdmin } from "@/types/admin/plans";
 import { Service } from "@/types/service";
 import { Employee } from "@/types/employee";
 import { AllCustomers, AllLeads, FollowUps } from "@/types/follow-up";
+import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 // import personalDetailsIcon from "@/assets/personel-details-icon.png";
 // import securityIcon from "@/assets/security-icon.png";
 // import locationIcon from "@/assets/location-icon.png";
@@ -3396,27 +3397,27 @@ export const sideBar: SideBar[] = [
   {
     icon: "Leads",
     title: "Leads",
-    pathname:"/leads",
+    pathname: "/leads",
     role: [1],
     inner: [
       {
         title: "Open",
         pathname: "/leads",
-        query:"open",
+        query: "open",
 
         role: [1],
       },
       {
         title: "Close",
         pathname: "/leads",
-        query:"close",
+        query: "close",
 
         role: [1],
       },
       {
         title: "Expire",
         pathname: "/leads",
-        query:"expire",
+        query: "expire",
 
         role: [1],
       },
@@ -3426,7 +3427,7 @@ export const sideBar: SideBar[] = [
     icon: "Offers",
     title: "Offers",
     role: [1],
-    pathname:"/offers",
+    pathname: "/offers",
 
     inner: [
       {
@@ -3453,7 +3454,7 @@ export const sideBar: SideBar[] = [
     icon: "Contracts",
     title: "Contracts",
     role: [1],
-    pathname:"/contract",
+    pathname: "/contract",
 
     inner: [
       {
@@ -3480,7 +3481,7 @@ export const sideBar: SideBar[] = [
     icon: "Invoices",
     title: "Invoices",
     role: [1],
-    pathname:"/invoices",
+    pathname: "/invoices",
 
     inner: [
       {
@@ -4037,8 +4038,47 @@ export const DEFAULT_SERVICE = {
   id: "",
   serviceName: "",
   unit: 0,
-  createdBy: "",
   createdOn: "",
   price: 0,
   description: "",
+  createdAt: ""
+}
+
+
+
+export const DEFAULT_CONTENT = {
+  id: "",
+  name: "",
+  contentTitle: "",
+  createdOn: "",
+  createdAt: "",
+
+  offerContent: {
+    name: "",
+    address: [""],
+    title: "",
+    description: "",
+    body: "",
+    attachments: [""],
+  },
+  confirmationContent: {
+    title: "",
+    description: "",
+    body: "",
+    attachments: [""],
+  },
+  invoiceContent: {
+    title: "",
+    description: "",
+    body: "",
+    attachments: [""],
+  },
+  receiptContent: {
+    title: "",
+    description: "",
+    body: "",
+    attachments: [""],
+  },
+  stage: 0,
+
 }

@@ -15,9 +15,10 @@ import {
 import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
-import React, { ReactNode } from "react";
+import React, { ReactNode, SetStateAction } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
 import { User } from ".";
+import { Attachement } from "./global";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -181,6 +182,10 @@ export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
   isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: React.Dispatch<SetStateAction<any>>
+
+
 }
 
 // interface for the pdf file upload

@@ -12,14 +12,7 @@ const ConfirmationContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const filesData: string[] = [
-    "First File",
-    "Second File",
-    "Third File",
-    "Fourth File",
-    "Fifth File",
-    "Sixth File",
-  ];
+
 
   return (
     <div className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit" id="Confirmation Content">
@@ -42,7 +35,7 @@ const ConfirmationContentDetailsData = ({
             Confirmation Title
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.confirmation?.title}
+            {contentDetail?.confirmationContent?.title}
           </p>
         </div>
 
@@ -50,17 +43,13 @@ const ConfirmationContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Confirmation Description
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.confirmation?.description}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.confirmationContent?.description }} />
         </div>
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             Email Body
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-            {contentDetail?.confirmation?.emailBody}
-          </p>
+          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.confirmationContent?.body }} />
         </div>
 
         {/* attachments is here */}
@@ -69,7 +58,7 @@ const ConfirmationContentDetailsData = ({
             Attachments
           </span>
           <div className="mt-5 grid grid-cols-3 gap-2">
-            {filesData.map((item, index) => (
+            {contentDetail?.confirmationContent?.attachments?.map((item, index) => (
               <AttachmentsFiles fileName={item} key={index} />
             ))}
           </div>

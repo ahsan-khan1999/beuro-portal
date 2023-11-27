@@ -290,9 +290,9 @@ export function formatDateTimeToDate(date: string) {
 
 
 export function getStatusColor(status: string) {
-  if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]) return "#FE9244";
-  else if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]) return "#FE9244";
-  else if(staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]) return "#FF376F"
+  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]) return "#FE9244";
+  else if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]) return "#FE9244";
+  else if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]) return "#FF376F"
   else return "#FF376F"
 }
 
@@ -326,12 +326,31 @@ export function transformAddressFormValues(address: any): TransformedMessages {
   return obj;
 }
 
+export const transformFieldsToValues = (obj: Record<string, object>, fields: string[]) => {
+  const result = fields.map(field => obj[field]);
+  return result;
+}
+
 export function setImageFieldValues(setValue: UseFormSetValue<FieldValues>, images: string[]) {
   if (images.length === 0) return;
   images.forEach((element, idx) => {
     setValue(`upload_image${idx + 1}`, element)
 
   });
+}
+export function setAddressFieldValues(setValue: UseFormSetValue<FieldValues>, images: string[]) {
+  if (images.length === 0) return;
+  images.forEach((element, idx) => {
+    setValue(`address_${idx}`, element)
+
+  });
+}
+export const generateAddressFields = (count: number) => {
+  const addressFields = [];
+  for (let i = 0; i < count; i++) {
+    addressFields.push(`address_${i}`);
+  }
+  return addressFields;
 }
 export const filterLead = (id: string | string[], service: Service[]): Service | Service[] => {
   let checkedService: Service | Service[] = DEFAULT_SERVICE;
@@ -344,4 +363,22 @@ export const filterLead = (id: string | string[], service: Service[]): Service |
 
   }
   return checkedService
+}
+
+export const transformAttachments = (attachmemts: string[]) => {
+  if (attachmemts?.length === 0) return;
+
+  const list = attachmemts?.map((item) => (
+    {
+      value: item,
+      name: getFileNameFromUrl(item)
+    }
+  ))
+  return list;
+}
+
+export function getFileNameFromUrl(url: string) {
+  const urlParts = url.split('/');
+  const fileName = urlParts[urlParts.length - 1];
+  return fileName;
 }

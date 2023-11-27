@@ -21,11 +21,12 @@ import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
-import { Status } from "./global";
+import { Attachement, Status } from "./global";
 import { Employee } from "./employee";
 import { Lead } from "./leads";
 import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
+import { ContentTableRowTypes } from "./content";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -263,10 +264,13 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  onClick?: () => void,
+  trigger?: UseFormTrigger<FieldValues>,
+  count?: number,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  contentDetails?: ContentTableRowTypes
 ) => FormField[];
-
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
@@ -440,7 +444,7 @@ export interface FilterType {
   sortBy?: string;
   type?: string;
   location?: string;
-  status?:string
+  status?: string
 }
 export interface FilterProps {
   filter: FilterType;
