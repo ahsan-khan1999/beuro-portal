@@ -8,7 +8,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   loading,
   control,
   onClick,
-  trigger, addressCount, attachements, setAttachements, contentDetails
+  trigger, addressCount, attachements, setAttachements, contentDetails,onRemove
 ) => {
   const formField: FormField[] = [
     {
@@ -36,7 +36,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         type: Field.div,
         id: "div-field",
         className: "grid grid-cols-3 gap-4",
-        children: (addressCount) && generateAddressChildren(register, addressCount, onClick),
+        children: (addressCount) && generateAddressChildren(register, addressCount, onClick,onRemove),
       },
     },
 
@@ -141,7 +141,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   return formField;
 };
 
-const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick?: () => void) => {
+const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick?: () => void, onRemove?: () => void) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
@@ -149,17 +149,18 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
       containerClass: "mb-0 ",
       label: {
         text: "Address Label",
-        htmlFor: `address_${key + 1}`,
+        htmlFor: `offerContent.address_${key + 1}`,
         className: "mb-[10px]",
       },
       field: {
         register,
         type: Field.input,
         className: "!p-4 !border-dark focus:!border-primary w-full",
-        id: `address_${key}`,
-        name: `address_${key}`,
+        id: `offerContent.address_${key}`,
+        name: `offerContent.address_${key}`,
         remove: key > 0 && "Remove",
-        onRemove: key > 0 && OnClick,
+        onRemove: key > 0 && onRemove,
+
 
 
       },

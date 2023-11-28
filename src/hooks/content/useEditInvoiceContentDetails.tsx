@@ -38,8 +38,11 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
   useMemo(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.invoiceContent?.title,
-        attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0] || null
+        invoiceContent: {
+          ...contentDetails?.invoiceContent,
+          title: contentDetails?.invoiceContent?.title,
+          attachments: contentDetails?.invoiceContent?.attachments?.length > 0 && contentDetails?.invoiceContent?.attachments[0] || null
+        }
       })
     }
 
@@ -52,13 +55,13 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     trigger, 0, attachements, setAttachements, contentDetails
 
   );
-  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
       invoiceContent: {
-        body: data.body,
-        description: data.description,
-        title: data.title,
+        body: data.invoiceContent.body,
+        description: data.invoiceContent.description,
+        title: data.invoiceContent.title,
         attachments: attachements?.map((item) => item.value),
       },
       step: 3,
@@ -68,7 +71,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     }
     const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
     if (res?.payload) onClick(2, ComponentsType.invoiceContent);
-    
+
   };
   return {
     fields,

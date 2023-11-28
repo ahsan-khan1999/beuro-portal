@@ -167,14 +167,14 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
 
     },
     {
-      containerClass: "mb-0",
+      containerClass: "flex justify-end mb-0",
       field: {
         type: Field.button,
         id: "button",
         text: "Save",
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          " rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

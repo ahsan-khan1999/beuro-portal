@@ -14,20 +14,23 @@ export default function Offers() {
     totalItems,
     itemsPerPage,
     handleNotes,
-    handleImagesUpload,
+    handleImageUpload,
     renderModal,
+    filter,
+    setFilter,
+    handleFilterChange
   } = useOffers();
 
   return (
     <>
       <Layout>
-        <TableFunctions />
+        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
         <TableLayout>
           <TableHeading />
           <TableRows
             dataToAdd={currentPageRows}
             openModal={handleNotes}
-            handleImagesUpload={handleImagesUpload}
+            handleImageUpload={handleImageUpload}
           />
         </TableLayout>
         <Pagination

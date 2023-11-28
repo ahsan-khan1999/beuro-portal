@@ -15,15 +15,15 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0 mt-5",
               label: {
                 text: "Invoice Title",
-                htmlFor: "title",
+                htmlFor: "invoiceContent.title",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-dark focus:!border-primary ",
                 inputType: "text",
-                id: "title",
-                name: "title",
+                id: "invoiceContent.title",
+                name: "invoiceContent.title",
                 placeholder: "Text for Invoice",
                 register,
               },
@@ -32,14 +32,14 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0 mt-5",
               label: {
                 text: "Invoice Description",
-                htmlFor: "description",
+                htmlFor: "invoiceContent.description",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.ckEditor,
                 className: "!p-4 !border-dark focus:!border-primary ",
-                id: "description",
-                name: "description",
+                id: "invoiceContent.description",
+                name: "invoiceContent.description",
 
                 control,
                 value: contentDetails?.id && contentDetails?.invoiceContent?.description
@@ -51,14 +51,14 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0 mt-5",
               label: {
                 text: "Email Body",
-                htmlFor: "body",
+                htmlFor: "invoiceContent.body",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.ckEditor,
                 className: "!p-4 !border-dark focus:!border-primary ",
-                id: "body",
-                name: "body",
+                id: "invoiceContent.body",
+                name: "invoiceContent.body",
 
                 control,
                 value: contentDetails?.id && contentDetails?.invoiceContent?.body
@@ -69,14 +69,14 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0 mt-5",
               label: {
                 text: "Attachments",
-                htmlFor: "attachments",
+                htmlFor: "invoiceContent.attachments",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.dragAndDropPdfField,
-                id: "attachments",
+                id: "invoiceContent.attachments",
                 isOpenedFile: false,
-                name: "attachments",
+                name: "invoiceContent.attachments",
                 text: "Drop or attach your file here",
                 fileSupported: "Files supported: PDF, JPG, PNG, GIF",
                 control,

@@ -40,8 +40,10 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
   useMemo(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.confirmationContent?.title,
-        attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0]
+        confirmationContent: {
+          title: contentDetails?.confirmationContent?.title,
+          attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0]
+        }
       })
     }
 
@@ -59,9 +61,9 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     let apiData = {
       contentName: data.contentName,
       confirmationContent: {
-        body: data.body,
-        description: data.description,
-        title: data.title,
+        body: data.confirmationContent.body,
+        description: data.confirmationContent.description,
+        title: data.confirmationContent.title,
         attachments: attachements?.map((item) => item.value),
       },
       step: 2,

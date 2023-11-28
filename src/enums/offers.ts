@@ -11,8 +11,8 @@ export enum ServiceOfferEditDetails {
 
 // Enum for edit offer details
 export enum EditOfferDetails {
-  selectCustomer = "selectCustomer",
-  customerName = "customerName",
+  selectCustomer = "customer",
+  customerName = "fullName",
   email = "email",
   offerTitle = "offerTitle",
   offerNumber = "offerNumber",

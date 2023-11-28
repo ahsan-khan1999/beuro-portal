@@ -615,6 +615,32 @@ export const staticEnums: Record<string, any> = {
     "Include": 0,
     "Exclude": 1
   },
+  "PaymentType": {
+    "Cash": 0,
+    "Online": 1
+  },
+  "ContractStatus": {
+    "Open": 0,
+    "Confirmed": 1,
+    "Cancelled": 2
+  },
+ 
+  "InvoiceStatus": {
+    "Pending": 0,
+    "Overdue": 1,
+    "Paid": 2
+  },
+  "Frequency": {
+    "Weekly": 0,
+    "SevenDays": 1,
+    "FourtennDays": 2,
+    "Monthly": 3,
+    "Yearly": 4
+  },
+  "AmountType": {
+    "Percent": 0,
+    "Amount": 1
+  },
   "DiscountType": {
     "Percent": 0,
     "Amount": 1
@@ -3431,20 +3457,32 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "Accepted",
-        pathname: "/offers?accepted",
+        title: "Open",
+        pathname: "/offers",
+        query: "open",
+
+
+        role: [1],
+      },
+      {
+        title: "Signed",
+        pathname: "/offers",
+        query: "signed",
+
+        role: [1],
+      },
+      {
+        title: "Expired",
+        pathname: "/offers",
+        query: "expire",
 
         role: [1],
       },
       {
         title: "Rejected",
-        pathname: "/offers?rejected",
+        query: "rejected",
 
-        role: [1],
-      },
-      {
-        title: "Pending",
-        pathname: "/offers?pending",
+        pathname: "/offers",
 
         role: [1],
       },
@@ -4081,4 +4119,18 @@ export const DEFAULT_CONTENT = {
   },
   stage: 0,
 
+}
+
+
+
+export const DEFAULT_OFFER = {
+  id: "",
+  customer: "",
+  offerTitle: "",
+  totalPrice: "",
+  createdOn: "",
+  email: "",
+  payment: "",
+  status: "",
+  type: "",
 }

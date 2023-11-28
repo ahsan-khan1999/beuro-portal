@@ -11,24 +11,18 @@ export const generateOfferEditContentDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [OfferEditContentDetails.contentName]: yup
+    [OfferEditContentDetails.offerTitle]: yup
       .string()
-      .required("validation required"),
-
-    "offerContent": yup.object().shape({
-      [OfferEditContentDetails.offerTitle]: yup
-        .string()
-        .required(translate("validation required")),
-      [OfferEditContentDetails.offerDescription]: yup
-        .string()
-        .required(translate("validation required")),
-      [OfferEditContentDetails.emailBody]: yup
-        .string()
-        .required(translate("validation required")),
-      [OfferEditContentDetails.attachments]: yup
-        .string().required(translate("validationMessages.required"))
-    }).required()
-  });
+      .required(translate("validation required")),
+    [OfferEditContentDetails.offerDescription]: yup
+      .string()
+      .required(translate("validation required")),
+    [OfferEditContentDetails.emailBody]: yup
+      .string()
+      .required(translate("validation required")),
+    [OfferEditContentDetails.attachments]: yup
+      .string().required(translate("validationMessages.required"))
+  }).required()
 };
 
 
@@ -43,10 +37,28 @@ export const generateContentAddressValidationSchema = (
   for (let i = 0; i < count; i++) {
     schemaObject[`${OfferEditContentDetails.addressLabel}_${i}`] = yup.string().required(translate("validationMessage.required"));
   }
+
+  // const addressObj = yup.object().shape({
+  //   offerContent: yup.object().shape(schemaObject).required(),
+  // });
   let addressObj = yup.object().shape(schemaObject)
   return addressObj
 };
 
+
+export const mergeSchemas = (baseSchema: yup.ObjectSchema<any>, additionalSchema: yup.ObjectSchema<any>) => {
+  return yup.object().shape({
+    [OfferEditContentDetails.contentName]: yup
+      .string()
+      .required("validation required"),
+
+    "offerContent": yup.object().shape({
+      ...baseSchema.fields,
+      ...additionalSchema.fields,
+    })
+
+  });
+};
 // Confirmation content edit details validation
 export const generateEditConfirmationContentDetailsValidation = (
   translate: Function

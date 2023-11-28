@@ -65,7 +65,7 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
       id: contentDetails?.id
     }
     const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
-    if (res?.payload) handleSuccess()
+    if (res?.payload) onHandleNext()
     
   };
   return {

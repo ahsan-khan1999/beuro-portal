@@ -23,15 +23,12 @@ export const useUploadImage = (handleImageSlider: Function) => {
   } = useForm();
   const fields = ImageUploadFormField(loading, control, handleImageSlider, leadDetails);
   useMemo(() => {
-    console.log("running", leadDetails);
-
     if (leadDetails?.id) setImageFieldValues(setValue, leadDetails?.images)
   }, [leadDetails?.id])
 
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data, "data");
     const filteredList = Object.values(data)?.filter(value => value);
     const apiData = { images: filteredList, step: 5, id: leadDetails?.id, stage: ComponentsType.customerEdit, type: "Test" }
 

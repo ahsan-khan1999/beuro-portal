@@ -1,3 +1,4 @@
+import { LeadsCustomerEditDetails } from "@/enums/leads";
 import {
   AddServiceOfferDetails,
   EditOfferDetails,
@@ -42,10 +43,20 @@ export const generateOfferServiceEditDetailsValidation = (
 // Validation for edit details
 export const generateOfferDetailsValidationSchema = (translate: Function) => {
   return yup.object().shape({
-    [EditOfferDetails.selectCustomer]: yup
+    [LeadsCustomerEditDetails.type]: yup
       .string()
-      .required(translate("validation required")),
+      .required("validation required"),
+    [LeadsCustomerEditDetails.customer]: yup
+      .string().when('type', {
+        is: (type: string) => type === 'Existing Customer',
+        then: () => yup.string().required(translate("validationMessages.required")),
+      }),
 
+    [LeadsCustomerEditDetails.companyName]: yup
+      .string().when('customerType', {
+        is: (customerType: string) => customerType === 'company',
+        then: () => yup.string().required(translate("validationMessages.required")),
+      }),
     [EditOfferDetails.customerName]: yup
       .string()
       .required(translate("validation required")),
@@ -76,16 +87,17 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .number()
       .min(11, translate("validationMessages.string.min"))
       .required(translate("validation required")),
-
-    [EditOfferDetails.streetNumber]: yup
-      .string()
-      .required(translate("validation required")),
-    [EditOfferDetails.postCode]: yup
-      .string()
-      .required(translate("validation required")),
-    [EditOfferDetails.country]: yup
-      .string()
-      .required(translate("validation required")),
+    [LeadsCustomerEditDetails.address]: yup.object().shape({
+      [EditOfferDetails.streetNumber]: yup
+        .string()
+        .required(translate("validation required")),
+      [EditOfferDetails.postCode]: yup
+        .string()
+        .required(translate("validation required")),
+      [EditOfferDetails.country]: yup
+        .string()
+        .required(translate("validation required")),
+    })
 
   });
 
@@ -93,7 +105,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
 export const generateOfferDetailsDateValidationSchema = (translate: Function, count: number) => {
   const schemaObject: any = {};
   for (let i = 0; i < count; i++) {
-    schemaObject[`${EditOfferDetails.date}_${i}`] = yup.string().required(translate("validationMessage.required"));
+    schemaObject[`${EditOfferDetails.date}_${i}`] = yup.object().shape({ "startDate": yup.string().required(), "endDate": yup.string().required() }).required();
   }
 
   let testObj = yup.object().shape(schemaObject)

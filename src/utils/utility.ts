@@ -13,6 +13,7 @@ import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
+import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -341,7 +342,9 @@ export function setImageFieldValues(setValue: UseFormSetValue<FieldValues>, imag
 export function setAddressFieldValues(setValue: UseFormSetValue<FieldValues>, images: string[]) {
   if (images.length === 0) return;
   images.forEach((element, idx) => {
-    setValue(`address_${idx}`, element)
+    console.log(element, "element", idx);
+
+    setValue(`offerContent.address_${idx}`, element)
 
   });
 }
@@ -381,4 +384,24 @@ export function getFileNameFromUrl(url: string) {
   const urlParts = url.split('/');
   const fileName = urlParts[urlParts.length - 1];
   return fileName;
+}
+
+export function getEmailColor(status: string) {
+  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Draft"]) return "#FE9244";
+  else if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Send"]) return "#4A13E7";
+  else if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]) return "#FF0000"
+  else return "#FF376F"
+}
+
+export function getPaymentTypeColor(status: string) {
+  if (staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Cash"]) return "#45C769";
+  else if (staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Online"]) return "#FF376F";
+  else return "#FF376F"
+}
+export function getOfferStatusColor(status: string) {
+  if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"]) return "#4A13E7";
+  else if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Signed"]) return "#45C769";
+  else if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Expired"]) return "#FF376F";
+  else if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Rejected"]) return "#FF0000";
+  else return "#FF376F"
 }

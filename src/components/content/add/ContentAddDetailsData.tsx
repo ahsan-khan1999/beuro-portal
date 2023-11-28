@@ -35,10 +35,14 @@ const ContentAddDetailsData = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+  const onCloseRoute = () => {
+    router.push("/content");
+    dispatch(updateModalType(ModalType.NONE));
+  };
 
   // Function for handling the modal for exiting notes
   const handleContentCreated = () => {
-    dispatch(updateModalType(ModalType.CREATION));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const router = useRouter();
@@ -50,7 +54,7 @@ const ContentAddDetailsData = () => {
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
-        onClose={onClose}
+        onClose={onCloseRoute}
         heading="Content Created Successful "
         subHeading="Thanks for creating offer we are happy to have you. "
         route={route}
@@ -80,7 +84,7 @@ const ContentAddDetailsData = () => {
       <AddConfirmationContentDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addInvoiceContent]: (
-      <AddInoviceContentDetails  onHandleNext={handleNextTab} />
+      <AddInoviceContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addReceiptContent]: (
       <AddReceiptContentDetails onHandleNext={handleNextTab} />
@@ -140,7 +144,7 @@ const ContentAddDetailsData = () => {
       name: "Receipt Content",
     },
   ];
- 
+
 
   return (
     <>

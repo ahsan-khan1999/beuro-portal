@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferEditContentDetailsFormField } from "@/components/content/edit/fields/offer-edit-content-details-fields";
-import { generateContentAddressValidationSchema, generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
+import { generateContentAddressValidationSchema, generateOfferEditContentDetailsValidation, mergeSchemas } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 import { useMemo, useState } from "react";
 import { generateAddressFields, setAddressFieldValues, transformAttachments, transformFieldsToValues } from "@/utils/utility";
@@ -23,10 +23,18 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   const backHandle = () => {
     onClick(0, ComponentsType.offerContent);
   };
+  const handleAddAddressField = () => {
+    setAddressCount(addressCount + 1)
+  }
+
+  const handleRemoveAddressField = () => {
+    setAddressCount(addressCount - 1)
+  }
 
   const schema = generateOfferEditContentDetailsValidation(translate);
   const schemaAddress = generateContentAddressValidationSchema(translate, addressCount);
-  const mergedSchema = schema.concat(schemaAddress);
+  const mergedSchema = mergeSchemas(schema, schemaAddress)
+
 
   const {
     register,
@@ -45,28 +53,34 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     if (contentDetails.id) {
       reset({
         contentName: contentDetails?.contentName,
-        title: contentDetails?.offerContent?.title,
-        attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0] || null
+        offerContent: {
+          ...contentDetails?.offerContent,
+          title: contentDetails?.offerContent?.title,
+          attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0] || null
+
+        }
       })
       setAddressFieldValues(setValue, contentDetails?.offerContent?.address)
     }
   }, [contentDetails.id]);
+
   const fields = OfferEditContentDetailsFormField(
     register,
     loading,
     control,
-    backHandle, trigger, addressCount, attachements, setAttachements, contentDetails
+    handleAddAddressField, trigger, addressCount, attachements, setAttachements, contentDetails, handleRemoveAddressField
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let addressField = generateAddressFields(addressCount)
     let apiData = {
       contentName: data.contentName,
       offerContent: {
-        body: data.body,
-        description: data.description,
-        title: data.title,
+        body: data.offerContent.body,
+        description: data.offerContent.description,
+        title: data.offerContent.title,
         attachments: attachements?.map((item) => item.value),
-        address: transformFieldsToValues(data, addressField),
+        address: transformFieldsToValues(data.offerContent, addressField),
       },
       step: 1,
       stage: ComponentsType.editConfirmationContent,

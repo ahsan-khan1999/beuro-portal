@@ -43,7 +43,7 @@ export default function SelectField({
                   <span
                     onClick={() => {
                       handleChange(item);
-                      setIsOpen(label);
+                      setIsOpen(!isOpen);
                     }}
                   >
                     {item}

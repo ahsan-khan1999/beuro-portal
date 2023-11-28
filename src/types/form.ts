@@ -45,6 +45,8 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   setValue?: UseFormSetValue<FieldValues>;
   svg?: string;
   img?: boolean;
+  remove?: string;
+  onRemove?: () => void
 }
 
 // textarea added

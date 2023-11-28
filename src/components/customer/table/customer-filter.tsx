@@ -13,12 +13,12 @@ export default function CustomerFilter({ filter, setFilter }: { filter: FilterTy
     <div className="flex">
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
-        value={filter.text}
+        value={filter?.text}
         iconDisplay={true}
       />
       <SelectField
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
-        value=""
+        value={filter?.sortBy || ""}
         dropDownIconClassName=""
         isOpen={isOpen}
         setIsOpen={setIsOpen}

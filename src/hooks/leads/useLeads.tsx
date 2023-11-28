@@ -67,7 +67,7 @@ const useLeads = () => {
   // Function for handling the modal for exiting notes
   const handleNotes = (
     item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     if (e) {
       e.stopPropagation();

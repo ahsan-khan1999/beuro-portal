@@ -39,7 +39,7 @@ export interface Lead {
   createdBy: User
 }
 
-interface AddressID {
+export interface AddressID {
   id: string,
   address: CustomerAddress[]
 }
@@ -59,7 +59,7 @@ interface CustomerAddress {
 }
 
 
-interface LeadService {
+export interface LeadService {
   description: string;
   id: string;
   price: number

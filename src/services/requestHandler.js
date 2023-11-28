@@ -32,7 +32,9 @@ const SERVICE_URLS = {
   content: "/content",
   contentDetails: "/content/content-step/",
 
-  offer: "/offer",
+  readOffer: "/offer",
+  offer: "/offer/Offer-step/",
+
   contract: "/contract",
   company: "/company",
   invoice: "/invoice",
@@ -48,6 +50,8 @@ const SERVICE_URLS = {
   postPondNotes: "/followup/postpond",
   markComplete: "/followup/complete",
   leadNotes: "/lead/note/",
+  offerNotes: "/offer/note/",
+
   notes: "/note"
 };
 
@@ -149,18 +153,23 @@ const createContent = (data) => {
 const updateContent = (data) =>
   put(SERVICE_URLS.contentDetails + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteContent = (data) =>
-  del(SERVICE_URLS.content+ `/${data?.id}`, {}, { feature: featureConstants.login });
+  del(SERVICE_URLS.content + `/${data?.id}`, {}, { feature: featureConstants.login });
 
-const readOffer = (data) =>
-  get(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+const readOffer = (params) =>
+  get(SERVICE_URLS.readOffer, params, { feature: featureConstants.login }, { detail: false });
+const readOfferDetail = (params) =>
+  get(SERVICE_URLS.readOffer, params, { feature: featureConstants.login }, { detail: true });
+const createOffer = (data) => {
+  let route = data?.offerId ? data?.step + "/" + data?.offerId : data?.step
+  return post(SERVICE_URLS.offer + route, data, { feature: featureConstants.login });
 
-const createOffer = (data) =>
-  post(SERVICE_URLS.offer, data, { feature: featureConstants.login });
-
+}
+const updateOfferNotes = (data) =>
+  put(SERVICE_URLS.offerNotes + `${data?.id}`, data, { feature: featureConstants.login });
 const updateOffer = (data) =>
-  put(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.offer + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteOffer = (data) =>
-  del(SERVICE_URLS.offer, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.offer + `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readContract = (data) =>
   get(SERVICE_URLS.contract, data, { feature: featureConstants.login });
@@ -351,6 +360,8 @@ const apiServices = {
   readServiceDetails,
   readNotes,
   createNotes,
-  readContentDetail
+  readContentDetail,
+  readOfferDetail,
+  updateOfferNotes
 };
 export default apiServices;

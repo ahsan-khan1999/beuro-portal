@@ -69,8 +69,15 @@ export const createContent: AsyncThunk<boolean, object, object> | any =
 
             return response?.data?.data?.Content;
         } catch (e: any) {
+            // if (Array.isArray(e?.data?.data?.offerContent.address)) {
+            //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.offerContent.address)
+            //     setErrors(setError, transformedValidationMessages, translate);
+            //     setErrors(setError, e?.data?.data, translate);
+
+            // } 
+            setErrors(setError, e?.data?.data, translate);
+
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
-            setErrors(setError, e?.data.data, translate);
             return false;
         }
     });

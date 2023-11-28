@@ -157,9 +157,9 @@ const leadSlice = createSlice({
         });
         builder.addCase(readLead.fulfilled, (state, action) => {
             state.lead = action.payload.Lead;
-            state.lastPage = action.payload.lastPage,
-                state.totalCount = action.payload.totalCount,
-                state.loading = false;
+            state.lastPage = action.payload.lastPage;
+            state.totalCount = action.payload.totalCount;
+            state.loading = false;
         });
         builder.addCase(readLead.rejected, (state) => {
             state.loading = false

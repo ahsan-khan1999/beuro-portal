@@ -51,7 +51,9 @@ const useContent = () => {
     handlePageChange,
     totalItems,
     itemsPerPage,
-    handleFilterChange
+    handleFilterChange,
+    filter,
+    setFilter
   };
 };
 

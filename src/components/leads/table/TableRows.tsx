@@ -55,12 +55,7 @@ const TableRows = ({
               </div>
             </span>
             <span className="px-6 py-4 flex justify-center items-center  bg-white cursor-pointer" onClick={(e) => handleImageUpload(item?.id, e)}>
-              {/* <Image
-                src={item.editImg}
-                alt="edit_img_icon"
-                className="cursor-pointer"
-                onClick={(e) => handleImageUpload(item, e)}
-              /> */}
+             
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.03711" y="1.14453" width="31.1684" height="31" rx="7.5" fill="white" stroke="#C7C7C7" />
                 <path d="M20.0838 15.9531C20.0838 15.6117 19.8071 15.335 19.4657 15.335H13.0991C12.7577 15.335 12.481 15.6117 12.481 15.9531C12.481 16.2945 12.7577 16.5712 13.0991 16.5712H19.4657C19.8071 16.5712 20.0838 16.2945 20.0838 15.9531Z" fill="#4A13E7" />

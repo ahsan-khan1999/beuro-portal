@@ -9,7 +9,7 @@ import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
 import { createLeadNotes } from "@/api/slices/lead/leadSlice";
 import { createNote } from "@/api/slices/noteSlice/noteSlice";
 
-export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => void }) => {
+export const useAddNewNote = ({ handleNotes}: { handleNotes: (id: string) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();

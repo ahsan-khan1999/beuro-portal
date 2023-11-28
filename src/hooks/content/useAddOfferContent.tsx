@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
-import { generateContentAddressValidationSchema, generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
+import { generateContentAddressValidationSchema, generateOfferEditContentDetailsValidation, mergeSchemas } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { useMemo, useState } from "react";
 import { FormField } from "@/types";
@@ -27,7 +27,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
   }
   const schema = generateOfferEditContentDetailsValidation(translate);
   const schemaAddress = generateContentAddressValidationSchema(translate, addressCount);
-  const mergedSchema = schema.concat(schemaAddress);
+  const mergedSchema = mergeSchemas(schema, schemaAddress)
 
   const {
     register,
@@ -42,7 +42,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(mergedSchema),
   });
-  
+
   useMemo(() => {
     if (contentDetails.id) {
       reset({
@@ -55,12 +55,12 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     }
 
   }, [contentDetails.id])
-  
+
 
   const fields = AddOfferContentDetailsFormField(register, loading, control, handleAddAddressField, trigger, addressCount, attachements, setAttachements, contentDetails);
 
   console.log(errors);
-  
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let addressField = generateAddressFields(addressCount)
     let apiData = {

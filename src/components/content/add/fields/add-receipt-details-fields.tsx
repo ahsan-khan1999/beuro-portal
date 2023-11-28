@@ -23,15 +23,15 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
             containerClass: "mb-0 mt-5",
             label: {
               text: "Receipt Title",
-              htmlFor: "title",
+              htmlFor: "receiptContent.title",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "title",
-              name: "title",
+              id: "receiptContent.title",
+              name: "receiptContent.title",
               placeholder: "Text for Receipt",
               register,
             },
@@ -40,14 +40,14 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
             containerClass: "mb-0 mt-5",
             label: {
               text: "Receipt Description",
-              htmlFor: "description",
+              htmlFor: "receiptContent.description",
               className: "mb-[10px]",
             },
             field: {
               type: Field.ckEditor,
               className: "!p-4 !border-dark focus:!border-primary ",
-              id: "description",
-              name: "description",
+              id: "receiptContent.description",
+              name: "receiptContent.description",
 
               control,
               value: contentDetails?.id && contentDetails?.receiptContent?.description
@@ -58,14 +58,14 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
             containerClass: "mb-0 mt-5",
             label: {
               text: "Email Body",
-              htmlFor: "body",
+              htmlFor: "receiptContent.body",
               className: "mb-[10px]",
             },
             field: {
               type: Field.ckEditor,
               className: "!p-4 !border-dark focus:!border-primary ",
-              id: "body",
-              name: "body",
+              id: "receiptContent.body",
+              name: "receiptContent.body",
 
               control,
               value: contentDetails?.id && contentDetails?.receiptContent?.body
@@ -77,13 +77,13 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
             containerClass: "mb-0 mt-5",
             label: {
               text: "Attachments",
-              htmlFor: "attachments",
+              htmlFor: "receiptContent.attachments",
               className: "mb-[10px]",
             },
             field: {
               type: Field.dragAndDropPdfField,
-              id: "attachments",
-              name: "attachments",
+              id: "receiptContent.attachments",
+              name: "receiptContent.attachments",
               isOpenedFile: false,
               text: "Drop or attach your file here",
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",

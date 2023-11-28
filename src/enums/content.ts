@@ -1,7 +1,7 @@
 // offer edit content enum
 export enum OfferEditContentDetails {
   contentName = "contentName",
-  addressLabel = "offerContent.address",
+  addressLabel = "address",
   offerTitle = "title",
   offerDescription = "description",
   emailBody = "body",

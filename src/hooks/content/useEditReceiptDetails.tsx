@@ -39,8 +39,11 @@ export const useEditReceiptDetails = (onClick: Function) => {
   useMemo(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.receiptContent?.title,
-        attachments: contentDetails?.receiptContent?.attachments?.length > 0 && contentDetails?.receiptContent?.attachments[0] || null
+        receiptContent: {
+          ...contentDetails?.receiptContent,
+          title: contentDetails?.receiptContent?.title,
+          attachments: contentDetails?.receiptContent?.attachments?.length > 0 && contentDetails?.receiptContent?.attachments[0] || null
+        }
       })
     }
 
@@ -50,9 +53,9 @@ export const useEditReceiptDetails = (onClick: Function) => {
     let apiData = {
       contentName: data.contentName,
       receiptContent: {
-        body: data.body,
-        description: data.description,
-        title: data.title,
+        body: data.receiptContent.body,
+        description: data.receiptContent.description,
+        title: data.receiptContent.title,
         attachments: attachements?.map((item) => item.value),
       },
       step: 4,
