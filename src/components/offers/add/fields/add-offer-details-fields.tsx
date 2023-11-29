@@ -450,7 +450,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   return formField;
 };
 
-const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key:number) => void) => {
+const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key:string) => void) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
@@ -467,7 +467,7 @@ const generateDateChildren = (control: Control<FieldValues>, count: number, OnCl
         id: `date.date_${key}`,
         name: `date.date_${key}`,
         remove: key > 0 && "Remove",
-        onRemove: () => handleRemoveDateField(key),
+        onRemove: () => handleRemoveDateField(`date.date_${key}`),
         control,
 
       },

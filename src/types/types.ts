@@ -270,7 +270,7 @@ export type GenerateContentFormField = (
   count?: number,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  contentDetails?: ContentTableRowTypes;
+  contentDetails?: ContentTableRowTypes,
   onRemove?: () => void
 ) => FormField[];
 // Employee formfield
@@ -334,7 +334,7 @@ export type GenerateOfferDateFormField = (
   control: Control<FieldValues>,
   onClick : () => void,
   count: number,
-  handleRemoveDateField: (key:number) => void
+  handleRemoveDateField: (key:string) => void
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
