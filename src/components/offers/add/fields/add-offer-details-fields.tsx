@@ -178,10 +178,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "content",
               options: content && content?.map((item, key) => (
                 { label: item?.contentName, value: item?.id }
-              )),
+              )) || [],
               control,
-              // value:leadDetails && leadDetails?.
-              onItemChange: handleContentSelect && handleContentSelect()
+              value: leadDetails && leadDetails?.companyName
+              // onItemChange: handleContentSelect && handleContentSelect()
             },
           },
           {
