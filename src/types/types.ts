@@ -24,7 +24,7 @@ import { Customers } from "./customer";
 import { Attachement, Status } from "./global";
 import { Employee } from "./employee";
 import { Lead } from './leads';
-import { Service } from "./service";
+import { Service } from './service';
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes } from "./offers";
@@ -324,17 +324,18 @@ export type GenerateOffersFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick: () => void,
-  count?: number,
-  properties?: { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead },
+  onClick: () => void | Function,
+  count: number,
+  properties?: { customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead,service?:Service[] },
   setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 
 export type GenerateOfferDateFormField = (
-  control: Control<FieldValues>,
-  onClick : () => void,
+  register: UseFormRegister<FieldValues>,
+  onClick: () => void,
   count: number,
-  handleRemoveDateField: (key:number) => void
+  handleRemoveDateField: (key: number) => void;
+  offerDetails: OffersTableRowTypes
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
@@ -376,7 +377,8 @@ export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  properties: { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void },
+  properties:
+    { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 

@@ -3,13 +3,15 @@ import { DivProps, FormField, GenerateLeadsCustomerFormField, GenerateOfferDateF
 import icon from "@/assets/svgs/Vector.svg"
 import { Control, FieldValue, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
+import { OffersTableRowTypes } from "@/types/offers";
 export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
-  { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect },
+  { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect, selectedContent, offerDetails },
   setValue
 ) => {
+
   let formField: FormField[] = [
     {
       containerClass: "mt-6",
@@ -38,7 +40,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: leadDetails?.id && leadDetails?.type === "New Customer" || type === "New Customer"
+                    checked: offerDetails?.id && offerDetails?.type === "New Customer" || type === "New Customer"
                   },
                 },
                 {
@@ -50,7 +52,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: leadDetails?.id && leadDetails?.type === "Existing Customer" || type === "Existing Customer"
+                    checked: offerDetails?.id && offerDetails?.type === "Existing Customer" || type === "Existing Customer"
                   },
                 },
               ],
@@ -75,7 +77,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               )),
 
               control,
-              value: leadDetails && leadDetails.customerID?.customerType
+              value: offerDetails && offerDetails.customerID?.customerType
             },
           },
           {
@@ -111,7 +113,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              value: leadDetails && leadDetails.customerID?.email
+              value: offerDetails && offerDetails.customerID?.email
 
 
             },
@@ -131,7 +133,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
+              value: offerDetails?.id ? offerDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
 
 
             },
@@ -150,7 +152,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
+              value: offerDetails?.id ? offerDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
             },
           },
 
@@ -159,6 +161,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     },
     {
       containerClass: "mt-5",
+      // @ts-ignore
       field: {
         type: Field.div,
         id: "div-field",
@@ -180,8 +183,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 { label: item?.contentName, value: item?.id }
               )) || [],
               control,
-              value: leadDetails && leadDetails?.companyName
-              // onItemChange: handleContentSelect && handleContentSelect()
+              value: offerDetails?.id && offerDetails?.content || "",
+
+              onItemChange: handleContentSelect && handleContentSelect(),
             },
           },
           {
@@ -233,7 +237,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Street Number",
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.streetNumber
+              value: offerDetails && offerDetails?.customerID?.address?.streetNumber
 
             },
           },
@@ -256,7 +260,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Enter Your Post Code",
 
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.postalCode
+              value: offerDetails && offerDetails?.customerID?.address?.postalCode
 
 
             },
@@ -280,7 +284,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 }
               )),
               control,
-              value: leadDetails && leadDetails?.customerID?.address?.country
+              value: offerDetails && offerDetails?.customerID?.address?.country
 
 
             },
@@ -428,10 +432,11 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
 
 export const AddDateFormField: GenerateOfferDateFormField = (
-  control,
+  register,
   OnClick,
   count,
-  handleRemoveDateField
+  handleRemoveDateField,
+  offerDetails
 ) => {
   const formField: FormField[] = [
     {
@@ -442,7 +447,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
         id: "div-field",
 
         className: "grid grid-cols-3 gap-x-3 ",
-        children: (count) && generateDateChildren(control, count, OnClick, handleRemoveDateField)
+        children: (count) && generateDateChildren(register, count, OnClick, handleRemoveDateField, offerDetails)
 
       },
     },
@@ -450,25 +455,64 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   return formField;
 };
 
-const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key: number) => void) => {
+const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key: number) => void, offerDetails: OffersTableRowTypes) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
     const dateField = {
       containerClass: "mb-0 ",
-      label: {
-        text: "Date",
-        htmlFor: `date.date_${key}`,
-        className: "mb-[10px]",
-      },
+      
       field: {
-        type: Field.dateRange,
-        className: "!p-4 !border-dark focus:!border-primary w-full",
+
+        type: Field.div,
+        className: "grid grid-cols-2 gap-x-3",
         id: `date.date_${key}`,
-        name: `date.date_${key}`,
-        remove: key > 0 && "Remove",
-        onRemove: () => handleRemoveDateField(key),
-        control,
+        children: [{
+
+          containerClass: "mb-0 ",
+          label: {
+            text: "Start Date",
+            htmlFor: `date.startDate_${key}`,
+            className: "mb-[10px]",
+          },
+          field: {
+            type: Field.date,
+            className: "!p-4 !border-dark focus:!border-primary w-full",
+            id: `date.startDate_${key}`,
+            name: `date.startDate_${key}`,
+            // remove: key > 0 && "Remove",
+            // onRemove: () => handleRemoveDateField(key),
+            register,
+            dateType:"date",
+
+            value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
+
+          },
+        },
+        {
+
+          containerClass: "mb-0 ",
+          label: {
+            text: "End Date",
+            htmlFor: `date.endDate_${key}`,
+            className: "mb-[10px]",
+          },
+          field: {
+            type: Field.date,
+            className: "!p-4 !border-dark focus:!border-primary w-full",
+            id: `date.endDate_${key}`,
+            name: `date.endDate_${key}`,
+            remove: key > 0 && "Remove",
+            onRemove: () => handleRemoveDateField(key),
+            register,
+            dateType:"date",
+            value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
+
+          },
+        }
+
+        ]
+
 
       },
     };

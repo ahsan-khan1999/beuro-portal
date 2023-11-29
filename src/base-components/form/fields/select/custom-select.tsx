@@ -30,7 +30,7 @@ export const SelectBox = ({
   }, [defaultValue])
 
   useMemo(() => {
-    if (options.length > 0) {
+    if (options?.length > 0) {
       setOption(options);
     }
   }, [options?.length]);
@@ -44,9 +44,9 @@ export const SelectBox = ({
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     setIsOpen(false);
+    onItemChange && onItemChange(value);
     field?.onChange(value);
     trigger?.(field?.name);
-    onItemChange && onItemChange(value);
   };
 
   const handleChange = (value: string) => {

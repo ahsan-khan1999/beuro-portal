@@ -1,7 +1,8 @@
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { CustomerAddress, Customers } from "./customer";
-import { AddressID } from "./leads";
-import { User } from ".";
+import { AddressID, Lead } from "./leads";
+import { DateRangeProps, User } from ".";
+import { ContentTableRowTypes } from "./content";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -10,7 +11,7 @@ export interface OffersTableRowTypes {
   fullName: string;
   email: string;
   phoneNumber: string;
-  date: string;
+  date: DateRangeProps[];
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -45,8 +46,10 @@ export interface OffersTableRowTypes {
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
-  offerTitle: string;
-  totalPrice: number
+  title: string;
+  totalPrice: number;
+  leadID:Lead;
+  content?:ContentTableRowTypes
 }
 
 

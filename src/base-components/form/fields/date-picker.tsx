@@ -16,16 +16,15 @@ export const DatePicker = ({
   dateType
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = `border border-borderColor rounded-lg w-full  ${
-    success ? "pl-4 pr-10" : "pl-11 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+    } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
   const classes = combineClasses(defaultClasses, className);
   return (
     <>
       <div className={`relative w-full flex items-center`}>
         {remove && (
           <div
-            className="cursor-pointer top-0 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+            className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
             onClick={onRemove}
           >
             {remove}
@@ -34,9 +33,8 @@ export const DatePicker = ({
 
         {svg && (
           <span
-            className={`mr-3 absolute  left-4 z-50 ${
-              (inputFocus && "tests") || "test"
-            }`}
+            className={`mr-3 absolute  left-4 z-50 ${(inputFocus && "tests") || "test"
+              }`}
             dangerouslySetInnerHTML={{ __html: svg }}
           />
         )}
@@ -44,7 +42,7 @@ export const DatePicker = ({
         <input
           type={dateType}
           // value={formatDateString(value)}
-          defaultValue={formatDateString(value)}
+          defaultValue={value && formatDateString(value)}
           id={id}
           onBlurCapture={() => setInputFocus(false)}
           {...register(name)}

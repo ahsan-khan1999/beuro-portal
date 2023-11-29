@@ -100,10 +100,14 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
 export const generateOfferDetailsDateValidationSchema = (translate: Function, count: number) => {
   const schemaObject: any = {};
   for (let i = 0; i < count; i++) {
-    schemaObject[`${EditOfferDetails.date}_${i}`] = yup.object().shape({}).required(translate("validationMessages.required"));
+    schemaObject[`${EditOfferDetails.date}`] = yup.object().shape({
+      [`startDate_${i}`]: yup.string().required(translate("validationMessages.required")),
+      [`endDate_${i}`]: yup.string().required(translate("validationMessages.required")),
+
+    }).required(translate("validationMessages.required"));
   }
 
-  let testObj = yup.object().shape({ date: yup.object().shape(schemaObject) })
+  let testObj = yup.object().shape(schemaObject)
 
   return testObj
 };
@@ -123,25 +127,23 @@ export const generateOfferAdditionalDetailsValidation = (
 
 // Validation for offer address edit details
 export const generateOfferAddressEditDetailsValidation = (
-  translate: Function
+  translate: Function,
+  count: number
+
 ) => {
-  return yup.object().shape({
-    [OfferAddressEditDetails.streetNo]: yup
-      .string()
-      .required("validation required"),
+  const addressSchema = Array.from({ length: count }, (_, index) => {
+    return (
+      ({
+        [`${OfferAddressEditDetails.streetNo}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${OfferAddressEditDetails.postCode}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${OfferAddressEditDetails.country}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+        [`${OfferAddressEditDetails.description}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
+      }))
 
-    [OfferAddressEditDetails.postCode]: yup
-      .string()
-      .required("validation required"),
+  })
+    .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+  return yup.object().shape(addressSchema)
 
-    [OfferAddressEditDetails.country]: yup
-      .string()
-      .required("validation required"),
-
-    [OfferAddressEditDetails.description]: yup
-      .string()
-      .required("validation required"),
-  });
 };
 
 

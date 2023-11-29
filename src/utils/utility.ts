@@ -3,7 +3,7 @@ import {
   updateProfileStep2,
   updateProfileStep3,
 } from "@/api/slices/authSlice/auth";
-import { AddressType, ApiResponseType, CheckProps, Errors, FieldType } from "@/types";
+import { AddressType, ApiResponseType, CheckProps, DateRangeProps, Errors, FieldType } from "@/types";
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
@@ -14,6 +14,7 @@ import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
 import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
+import { formatDateString } from "./functions";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -327,16 +328,33 @@ export function transformAddressFormValues(address: any): TransformedMessages {
   return obj;
 }
 
-export function transformDateFormValues(date: object): TransformedMessages {
-  let list = []
-  if (date) {
-    for (const [key, value] of Object.entries(date)) {
-      list.push(value)
-    }
-  }
-  return list;
-}
+type InputStructure = {
+  [key: string]: string;
+};
 
+type OutputStructure = {
+  startDate: string;
+  endDate: string;
+  [key: string]: string; // Index signature
+
+};
+
+export const transformDateFormValues = (input: InputStructure): OutputStructure[] => {
+  const result: OutputStructure[] = [];
+  Object.keys(input).forEach((key) => {
+    const match = key.match(/(startDate|endDate)_(\d+)/);
+    if (match) {
+      const index = parseInt(match[2], 10);
+      const dateType = match[1];
+      if (!result[index]) {
+        result[index] = { startDate: "", endDate: "" };
+      }
+      result[index][dateType] = input[key];
+    }
+  });
+
+  return result;
+};
 export const transformFieldsToValues = (obj: Record<string, object>, fields: string[]) => {
   const result = fields.map(field => obj[field]);
   return result;
@@ -349,6 +367,15 @@ export function setImageFieldValues(setValue: UseFormSetValue<FieldValues>, imag
 
   });
 }
+// export function setDateFieldValues(setValue: UseFormSetValue<FieldValues>, date: DateRangeProps[]) {
+//   if (!date || date.length === 0) return;
+
+//   date.forEach((element, idx) => {
+//     // Use the correct array syntax for field names
+//     setValue(`date${[idx]}.startDate_${idx}`, formatDateString(element?.startDate));
+//     setValue(`date${[idx]}.endDate_${idx}`, formatDateString(element?.endDate));
+//   });
+// }
 export function setAddressFieldValues(setValue: UseFormSetValue<FieldValues>, images: string[]) {
   if (images.length === 0) return;
   images.forEach((element, idx) => {

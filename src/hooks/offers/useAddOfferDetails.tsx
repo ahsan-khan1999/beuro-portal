@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -9,8 +8,6 @@ import { generateOfferDetailsDateValidationSchema, generateOfferDetailsValidatio
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FormField } from "@/types";
-import { useFormFields } from "@/base-components/form/hook";
-import * as yup from 'yup';
 import { readCustomer, setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { updateQuery } from "@/utils/update-query";
 import { readLead } from "@/api/slices/lead/leadSlice";
@@ -42,8 +39,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const schemaDate = generateOfferDetailsDateValidationSchema(translate, dateCount);
   const mergedSchema = schema.concat(schemaDate);
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }))
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }))
+    // dispatch(readCustomer({ params: { filter: { paginate: 0 } } }))
+    // dispatch(readContent({ params: { filter: { paginate: 0 } } }))
 
   }, [])
   const {
@@ -74,6 +71,26 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (type && customerID) dispatch(readLead({ params: { filter: { customerID: customerID, paginate: 0 } } }))
   }, [customerID])
 
+  useMemo(() => {
+    if (offerDetails?.id) {
+      reset({
+        type: offerDetails?.type,
+        customerID: offerDetails?.customerID?.id,
+        leadID: offerDetails?.leadID?.id,
+        customerType: offerDetails?.customerID?.customerType,
+        fullName: offerDetails?.customerID?.fullName,
+        email: offerDetails?.customerID?.email,
+        phoneNumber: offerDetails?.customerID?.phoneNumber,
+        mobileNumber: offerDetails?.customerID?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title: offerDetails?.title,
+        address: offerDetails?.customerID?.address,
+      })
+      // setDateFieldValues(setValue, offerDetails?.date)
+
+    }
+  }, [offerDetails?.id])
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id)
@@ -89,31 +106,31 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const handleContentSelect = () => {
     const filteredContent = content?.find((item) => item.id === selectedContent)
     if (filteredContent) setValue("title", filteredContent?.offerContent?.title)
-
   }
- 
-  const offerFields = AddOfferDetailsFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect }, setValue
+
+  const offerFields = AddOfferDetailsFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect, selectedContent, offerDetails }, setValue
   );
-  const offerSubmitField = AddOfferDetailsSubmitFormField(register, loading, control, () => console.log("")
+  const offerSubmitField = AddOfferDetailsSubmitFormField(register, loading, control, () => console.log(""),0
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
+    console.log(data?.date);
+    
     if (offerDetails?.id) {
-      const apiData = { ...data, step: 1, offerId: offerDetails?.id, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date) }
+      const apiData = { ...data, step: 1, offerId: offerDetails?.id, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date), isLeadCreated: data?.leadID ? true : false }
       const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
       if (res?.payload) onHandleNext(ComponentsType.addressAdded);
     } else {
-      const apiData = { ...data, step: 1, offerId: null, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date) }
+      const apiData = { ...data, step: 1, offerId: null, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date), isLeadCreated: data?.leadID ? true : false }
       const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
       if (res?.payload) onHandleNext(ComponentsType.addressAdded);
     }
   };
-
+  
   const formFields = useMemo((): FormField[] => {
     const dynamicFormFields = [];
     dynamicFormFields.push(
-      ...AddDateFormField(control, handleAddDateField, dateCount, handleRemoveDateField)
+      ...AddDateFormField(register, handleAddDateField, dateCount, handleRemoveDateField, offerDetails)
     );
     return dynamicFormFields;
   }, [dateCount]);

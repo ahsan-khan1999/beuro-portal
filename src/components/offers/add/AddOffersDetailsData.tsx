@@ -23,10 +23,10 @@ const EditOffersDetailsData = () => {
   const { offerDetails } = useAppSelector(state => state.offer)
 
   const [tabType, setTabType] = useState<ComponentsType>(
-    offerDetails?.id && offerDetails?.stage || ComponentsType.customerAdded
+    offerDetails?.stage ? offerDetails?.stage :  ComponentsType.customerAdded
   );
   useEffect(() => {
-    setTabType(offerDetails?.id && offerDetails?.stage || ComponentsType.customerAdded)
+    setTabType(offerDetails?.stage ? offerDetails?.stage :  ComponentsType.customerAdded)
   }, [offerDetails?.id])
   const tabSection: tabArrayTypes[] = [
     {
@@ -76,6 +76,8 @@ const EditOffersDetailsData = () => {
       name: "Additional Details",
     },
   ];
+  console.log(tabType,"offerDetails");
+  
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -118,7 +120,7 @@ const EditOffersDetailsData = () => {
     }
     setTabType(currentComponent);
   };
-
+  
   const componentsLookUp = {
     [ComponentsType.customerAdded]: (
       <OfferAddDetails onHandleNext={handleNextTab} />

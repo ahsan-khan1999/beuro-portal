@@ -124,7 +124,7 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   svg?: string;
-  onItemChange?: Function
+  onItemChange?: () => void | Function
   success?: boolean;
   placeholder?: string;
   className?: string;
@@ -138,7 +138,7 @@ export interface MultiSelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string[];
   svg?: string;
-  onItemChange?: () => void | Function
+  onItemChange?: () => void;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
@@ -226,7 +226,7 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   disabled?: boolean;
 }
 export interface MultiDateProps extends BaseFieldProps<Field.phone> {
-  value?: string;
+  value?: DateRangeProps;
   control?: Control<FieldValues>;
   watch?: UseFormWatch<FieldValues>;
   setValue?: UseFormSetValue<FieldValues>;
@@ -234,6 +234,10 @@ export interface MultiDateProps extends BaseFieldProps<Field.phone> {
   disabled?: boolean;
   remove?: string;
   onRemove?: () => void
+}
+export interface DateRangeProps {
+  startDate: string;
+  endDate: string
 }
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;

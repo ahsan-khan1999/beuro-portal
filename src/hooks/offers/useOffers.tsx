@@ -1,4 +1,4 @@
-import { DEFAULT_OFFER, offersData } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER, offersData } from "@/utils/static";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
@@ -14,6 +14,8 @@ import { FilterType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
 import { readOffer, setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(state => state.offer)
@@ -47,6 +49,10 @@ const useOffers = () => {
   useEffect(() => {
     localStoreUtil.remove_data("offer")
     dispatch(setOfferDetails(DEFAULT_OFFER))
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
+    dispatch(setLeadDetails(DEFAULT_LEAD))
+
+
     dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {

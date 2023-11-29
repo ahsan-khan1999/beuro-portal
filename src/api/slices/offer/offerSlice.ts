@@ -57,8 +57,8 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
         try {
             console.log("comming");
             
-            const { OfferId, step, stage } = data
-            let apiData = { ...data, offerId: OfferId, step: step }
+            const { offerId, step, stage } = data
+            let apiData = { ...data, offerId: offerId, step: step }
 
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
@@ -84,7 +84,7 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
         try {
             const { stage } = data
 
-            const response = await apiServices.updateLead(data);
+            const response = await apiServices.updateOffer(data);
             const offerData = await localStoreUtil.get_data("offer")
             let objectToUpdate = { ...response?.data?.Offer, type: offerData?.type, stage: stage }
 

@@ -23,7 +23,7 @@ export const RadioButtonField = ({
         {...register(name)}
         className={`${classes}`}
       />
-      <span>{label}</span>
+      <span className="ms-4">{label}</span>
     </div>
 
   );

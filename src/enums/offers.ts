@@ -33,8 +33,8 @@ export enum OfferAdditionalDetails {
 
 // Offers Address edit details
 export enum OfferAddressEditDetails {
-  streetNo = "streetNo",
-  postCode = "postCode",
+  streetNo = "streetNumber",
+  postCode = "postalCode",
   country = "country",
   description = "description",
 }
