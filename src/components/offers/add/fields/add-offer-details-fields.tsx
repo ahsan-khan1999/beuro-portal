@@ -458,14 +458,14 @@ const generateDateChildren = (control: Control<FieldValues>, count: number, OnCl
       containerClass: "mb-0 ",
       label: {
         text: "Date",
-        htmlFor: `date_${key}`,
+        htmlFor: `date.date_${key}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.dateRange,
         className: "!p-4 !border-dark focus:!border-primary w-full",
-        id: `date_${key}`,
-        name: `date_${key}`,
+        id: `date.date_${key}`,
+        name: `date.date_${key}`,
         remove: key > 0 && "Remove",
         onRemove: () => handleRemoveDateField(key),
         control,
@@ -514,7 +514,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
         text: "Next",
         inputType: "submit",
         className:
-          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
+          "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
         loading,
       },
     },

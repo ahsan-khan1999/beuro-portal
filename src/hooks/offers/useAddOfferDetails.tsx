@@ -15,6 +15,8 @@ import { readCustomer, setCustomerDetails } from "@/api/slices/customer/customer
 import { updateQuery } from "@/utils/update-query";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { createOffer } from "@/api/slices/offer/offerSlice";
+import { transformDateFormValues } from "@/utils/utility";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -33,7 +35,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
 
   const onCancel = () => {
-    router.pathname = "/leads"
+    router.pathname = "/offers"
     updateQuery(router, router.locale as string)
   }
   const schema = generateOfferDetailsValidationSchema(translate);
@@ -86,32 +88,26 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   }
   const handleContentSelect = () => {
     const filteredContent = content?.find((item) => item.id === selectedContent)
-    console.log(filteredContent, "filteredContent", selectedContent);
     if (filteredContent) setValue("title", filteredContent?.offerContent?.title)
 
   }
-  useMemo(() => {
-    if (offerDetails.id) {
-      // reset({
-      //   fullName: offerDetails.customerID?.fullName,
-      //   type: offerDetails.type,
-      //   customer: offerDetails.customerID?.id, 
-      //   customerType: offerDetails.customerID?.customerType,
-      //   email: offerDetails.customerID?.email,
-      //   phoneNumber: offerDetails.customerID?.phoneNumber,
-      //   mobileNumber: offerDetails.customerID?.mobileNumber,
-      //   address: offerDetails?.customerID?.address,
-      // })
-    }
-  }, [offerDetails.id])
+ 
   const offerFields = AddOfferDetailsFormField(register, loading, control, { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect }, setValue
   );
   const offerSubmitField = AddOfferDetailsSubmitFormField(register, loading, control, () => console.log("")
   );
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    onHandleNext(ComponentsType.addressAdded);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
+    if (offerDetails?.id) {
+      const apiData = { ...data, step: 1, offerId: offerDetails?.id, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date) }
+      const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressAdded);
+    } else {
+      const apiData = { ...data, step: 1, offerId: null, stage: ComponentsType.addressAdded, date: transformDateFormValues(data?.date) }
+      const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressAdded);
+    }
   };
 
   const formFields = useMemo((): FormField[] => {

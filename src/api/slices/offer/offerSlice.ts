@@ -2,7 +2,7 @@ import apiServices from "@/services/requestHandler";
 import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { OffersTableRowTypes } from "@/types/offers";
-import { DEFAULT_OFFER } from "@/utils/static";
+import { DEFAULT_OFFER, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
@@ -55,16 +55,18 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
+            console.log("comming");
+            
             const { OfferId, step, stage } = data
-            let apiData = { ...data, OfferId: OfferId, step: step }
+            let apiData = { ...data, offerId: OfferId, step: step }
 
             //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
             //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
-            const response = await apiServices.createLead(apiData);
+            const response = await apiServices.createOffer(apiData);
             let objectToUpdate = { ...response?.data?.data?.Offer, type: apiData?.type, stage: stage }
-            localStoreUtil.store_data("lead", objectToUpdate)
+            localStoreUtil.store_data("offer", objectToUpdate)
             thunkApi.dispatch(setOfferDetails(objectToUpdate));
 
 

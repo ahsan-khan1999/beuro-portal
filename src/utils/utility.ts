@@ -327,6 +327,16 @@ export function transformAddressFormValues(address: any): TransformedMessages {
   return obj;
 }
 
+export function transformDateFormValues(date: object): TransformedMessages {
+  let list = []
+  if (date) {
+    for (const [key, value] of Object.entries(date)) {
+      list.push(value)
+    }
+  }
+  return list;
+}
+
 export const transformFieldsToValues = (obj: Record<string, object>, fields: string[]) => {
   const result = fields.map(field => obj[field]);
   return result;
