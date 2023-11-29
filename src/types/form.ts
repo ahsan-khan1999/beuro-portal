@@ -138,7 +138,7 @@ export interface MultiSelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string[];
   svg?: string;
-  onItemChange?: Function
+  onItemChange?: () => void | Function
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;

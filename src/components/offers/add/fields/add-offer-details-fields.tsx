@@ -178,10 +178,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "content",
               options: content && content?.map((item, key) => (
                 { label: item?.contentName, value: item?.id }
-              )),
+              )) || [],
               control,
-              // value:leadDetails && leadDetails?.
-              onItemChange: handleContentSelect && handleContentSelect()
+              value: leadDetails && leadDetails?.companyName
+              // onItemChange: handleContentSelect && handleContentSelect()
             },
           },
           {
@@ -450,7 +450,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   return formField;
 };
 
-const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key:number) => void) => {
+const generateDateChildren = (control: Control<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key: number) => void) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
