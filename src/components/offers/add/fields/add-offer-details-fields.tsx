@@ -455,13 +455,13 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   return formField;
 };
 
-const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key: number) => void, offerDetails: OffersTableRowTypes) => {
+const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: () => void, handleRemoveDateField: (key: string) => void, offerDetails: OffersTableRowTypes) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
     const dateField = {
       containerClass: "mb-0 ",
-      
+
       field: {
 
         type: Field.div,
@@ -483,7 +483,7 @@ const generateDateChildren = (register: UseFormRegister<FieldValues>, count: num
             // remove: key > 0 && "Remove",
             // onRemove: () => handleRemoveDateField(key),
             register,
-            dateType:"date",
+            dateType: "date",
 
             value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
 
@@ -503,9 +503,9 @@ const generateDateChildren = (register: UseFormRegister<FieldValues>, count: num
             id: `date.endDate_${key}`,
             name: `date.endDate_${key}`,
             remove: key > 0 && "Remove",
-            onRemove: () => handleRemoveDateField(key),
+            onRemove: () => handleRemoveDateField(`date.date_${key}`),
             register,
-            dateType:"date",
+            dateType: "date",
             value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
 
           },

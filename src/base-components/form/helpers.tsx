@@ -21,7 +21,8 @@ import {
   ImageUploadField,
   MultiDateField,
   MultiSelectField,
-  AddFiled
+  AddFiled,
+  ToggleButton
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -50,14 +51,17 @@ const fieldComponents: FieldComponents = {
   dragAndDropFileField: DragAndDropFileField,
   dragAndDropPdfField: DragAndDropPdfField,
   profileUploadField: ProfileControllerField,
-  imageUploadField:ImageUploadField,
+  imageUploadField: ImageUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
   addField: AddFiled,
   link: LinkField,
-  dateRange:MultiDateField,
-  multiSelect:MultiSelectField
+  dateRange: MultiDateField,
+  multiSelect: MultiSelectField,
+  toggleButton: ToggleButton,
+
+
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -67,7 +71,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
   errors?: Record<string, any>
 ): JSX.Element => {
   const Component = fieldComponents[type] as React.FC<Record<string, any>>;
-  
+
   return (
     <>
       <Component {...props} errors={errors} />
@@ -99,6 +103,7 @@ export function isFieldType(type: any): type is FieldType {
     "dateRange",
     "multiSelect",
     "addField",
+    "toggleButton"
   ].includes(type);
 }
 

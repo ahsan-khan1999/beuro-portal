@@ -8,7 +8,7 @@ export const DivField = ({ children, className, errors }: DivProps) => {
 
   return (
     <div className={classes}>
-      {children.map((childField, index) => {
+      {children?.map((childField, index) => {
 
 
         const fieldName: string = childField?.field?.name as string;

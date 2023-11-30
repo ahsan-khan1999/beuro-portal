@@ -149,33 +149,66 @@ export const generateOfferAddressEditDetailsValidation = (
 
 // Validation for offer service edit details
 export const generateAddfferServiceDetailsValidation = (
+  translate: Function,
+  count: number
+) => {
+  const schemaObject: any = {};
+
+  for (let i = 0; i < count; i++) {
+    schemaObject[`${AddServiceOfferDetails.serviceType}_${i}`] = yup.string().required(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.serviceTitle}_${i}`] = yup.string().notRequired(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.price}_${i}`] = yup.string().required(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.unit}_${i}`] = yup.string().required(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.count}_${i}`] = yup.string().required(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.totalPrice}_${i}`] = yup.string().required(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.description}_${i}`] = yup.string().required(translate("validationMessages.required"))
+
+  }
+
+  let testObj = yup.object().shape({ "serviceDetail": yup.object().shape(schemaObject) })
+  return testObj
+};
+
+export const generateOfferDiscountValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [AddServiceOfferDetails.serviceType]: yup
-      .string()
-      .required("validation required"),
-    [AddServiceOfferDetails.serviceTitle]: yup
-      .string()
-      .required("validation required"),
-
-    [AddServiceOfferDetails.price]: yup
-      .string()
-      .required("validation required"),
-
-    [AddServiceOfferDetails.unit]: yup.string().required("validation required"),
-
-    [AddServiceOfferDetails.count]: yup
-      .string()
-      .required("validation required"),
-    [AddServiceOfferDetails.totalPrice]: yup
-      .string()
-      .required("validation required"),
-    [AddServiceOfferDetails.description]: yup
-      .string()
-      .required("validation required"),
     [AddServiceOfferDetails.discountDiscription]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
+    [AddServiceOfferDetails.isDiscount]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+    [AddServiceOfferDetails.isTax]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+
+    [AddServiceOfferDetails.discountType]: yup
+      .boolean().when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount === true,
+        then: () => yup.boolean().notRequired(),
+      }),
+    [AddServiceOfferDetails.discountAmount]: yup
+      .number().when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount === true,
+        then: () => yup.number().required(translate("validationMessages.required")),
+      }),
+    [AddServiceOfferDetails.taxAmount]: yup
+      .number().notRequired(),
+    [AddServiceOfferDetails.taxType]: yup
+      .boolean().when("isTax", {
+        is: (isTax: boolean) => isTax === true,
+        then: () => yup.boolean().notRequired(),
+      }),
+
+  });
+};
+
+
+export const mergeOfferSchemas = (baseSchema: yup.ObjectSchema<any>, additionalSchema: yup.ObjectSchema<any>) => {
+  return yup.object().shape({
+    ...baseSchema.fields,
+    ...additionalSchema.fields,
+
   });
 };

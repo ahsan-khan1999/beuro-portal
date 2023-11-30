@@ -49,4 +49,10 @@ export enum AddServiceOfferDetails {
   totalPrice = "totalPrice",
   description = "description",
   discountDiscription = "discountDiscription",
+  discountType="discountType",
+  isDiscount="isDiscount",
+  discountAmount="discountAmount",
+  isTax="isTax",
+  taxType="taxType",
+  taxAmount="taxAmount"
 }

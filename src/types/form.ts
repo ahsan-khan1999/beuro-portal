@@ -167,10 +167,11 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
-  value?: string | number;
+  value?:  string;
   containerClassName?: string;
   textClassName?: string;
-  checked?: boolean
+  checked?: boolean;
+  setValue?:UseFormSetValue<FieldValues>
 }
 
 export interface DragAndDropFileFieldProps
@@ -261,6 +262,7 @@ export interface SpanProps {
   dispatch?: Dispatch;
   onClick?: Function;
   id: string;
+  html?: string
 }
 
 export interface DivProps {
@@ -314,7 +316,8 @@ export type FieldType =
   | Field.button
   | Field.link
   | Field.multiSelect
-  | Field.addField;
+  | Field.addField
+  | Field.toggleButton;
 
 export type FieldProps =
   | InputProps
@@ -340,7 +343,8 @@ export type FieldProps =
   | AddFieldProps
   | LinkProps
   | MultiSelectProps
-  | AddFieldProps;
+  | AddFieldProps
+  | ToggleButtonFormProps;
 
 
 export interface FormField {
@@ -374,6 +378,7 @@ export interface FieldComponents {
   link: React.FC<LinkProps>;
   dateRange: React.FC<MultiDateProps>;
   multiSelect: React.FC<MultiSelectProps>;
+  toggleButton: React.FC<ToggleButtonFormProps>;
 }
 
 export interface FormProps {
@@ -431,4 +436,9 @@ export interface CustomHookFormProps {
 }
 export interface HookFieldProps {
   [key: string]: JSX.Element;
+}
+export interface ToggleButtonFormProps extends BaseFieldProps<Field.toggleButton> {
+  register: UseFormRegister<FieldValues>;
+  className: string;
+  checked: boolean
 }

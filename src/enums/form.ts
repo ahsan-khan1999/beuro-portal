@@ -63,7 +63,7 @@ export enum Field {
   link = "link",
   dateRange = "dateRange",
   multiSelect = "multiSelect",
-
+  toggleButton="toggleButton"
 
 }
 

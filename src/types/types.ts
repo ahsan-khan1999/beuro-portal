@@ -270,7 +270,7 @@ export type GenerateContentFormField = (
   count?: number,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  contentDetails?: ContentTableRowTypes;
+  contentDetails?: ContentTableRowTypes,
   onRemove?: () => void
 ) => FormField[];
 // Employee formfield
@@ -326,15 +326,19 @@ export type GenerateOffersFormField = (
   control: Control<FieldValues>,
   onClick: () => void | Function,
   count: number,
-  properties?: { customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead,service?:Service[] },
+  properties: { customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void },
   setValue?: SetFieldValue<FieldValues>
+) => FormField[];
+export type GenerateOffersServiceActionFormField = (
+  loader: boolean,
+  onClick: () => void,
 ) => FormField[];
 
 export type GenerateOfferDateFormField = (
   register: UseFormRegister<FieldValues>,
   onClick: () => void,
   count: number,
-  handleRemoveDateField: (key: number) => void;
+  handleRemoveDateField: (key: string) => void,
   offerDetails: OffersTableRowTypes
 ) => FormField[];
 // Contract formfield

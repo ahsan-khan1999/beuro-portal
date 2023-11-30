@@ -5,6 +5,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -257,6 +258,8 @@ export interface ToggleButtonProps {
   key?: string;
   disabled?: boolean;
 }
+
+
 
 export interface CheckBoxInputProps {
   onChange: (value: boolean) => void;

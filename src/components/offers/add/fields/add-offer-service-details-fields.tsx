@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateOffersFormField } from "@/types";
+import { FormField, GenerateOffersFormField, GenerateOffersServiceActionFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { OffersTableRowTypes } from "@/types/offers";
 
 export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
@@ -10,22 +10,24 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
   control,
   onAddService,
   count,
-  service
+  properties,
+
 ) => {
+  const { handleRemove, service } = properties
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
     formField.push(
       {
         field: {
           type: Field.div,
-          id: "div-field",
-          className: "grid grid-cols-3 gap-x-3 ",
+          id: `serviceDetail_${i}`,
+          className: "grid grid-cols-3 gap-x-3 mt-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
               label: {
                 text: "Service Type",
-                htmlFor: "serviceType",
+                htmlFor: `serviceDetail.serviceType_${i}`,
                 className: "mb-[10px]",
               },
               field: {
@@ -39,8 +41,8 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                       type: Field.radio,
                       value: "New Service",
                       label: "New Service",
-                      id: "serviceType",
-                      name: "serviceType",
+                      id: `serviceDetail.serviceType_${i}`,
+                      name: `serviceDetail.serviceType_${i}`,
                       register,
                     },
                   },
@@ -50,8 +52,8 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                       type: Field.radio,
                       value: "Existing Service",
                       label: "Existing Service",
-                      id: "serviceType",
-                      name: "serviceType",
+                      id: `serviceDetail.serviceType_${i}`,
+                      name: `serviceDetail.serviceType_${i}`,
                       register,
                     },
                   },
@@ -62,22 +64,17 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               containerClass: "mb-0 col-span-2",
               label: {
                 text: "Service Title/Product",
-                htmlFor: "serviceTitle",
+                htmlFor: `serviceDetail.serviceTitle_${i}`,
                 className: "mb-[10px]",
               },
               field: {
-                className: "!p-4  !border-dark  focus:!border-primary ",
+                className: "!p-4  !border-dark  focus:!border-primary !h-[54px]",
                 type: Field.select,
-                value: "Versicherung  Lorem Ipsum",
-                id: "serviceTitle",
-                name: "serviceTitle",
-                options: [
-                  {
-                    value: "Versicherung  Lorem Ipsum",
-                    label: "Versicherung  Lorem Ipsum",
-                  },
-                ],
+                id: `serviceDetail.serviceTitle_${i}`,
+                name: `serviceDetail.serviceTitle_${i}`,
+                options: service?.map((item) => ({ label: item?.serviceName, value: item?.id })) || [],
                 control,
+                value: ""
               },
             },
           ],
@@ -88,7 +85,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
         containerClass: "mt-5 ",
         field: {
           type: Field.div,
-          id: "div-field",
+          id: `serviceDetail_${i}`,
           className: "grid grid-cols-3 gap-x-3 ",
           children: [
             {
@@ -102,15 +99,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 col-span-2",
                     label: {
                       text: "Price",
-                      htmlFor: "totalPrice",
+                      htmlFor: `serviceDetail.price_${i}`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "text",
-                      id: "price",
-                      name: "price",
+                      id: `serviceDetail.price_${i}`,
+                      name: `serviceDetail.price_${i}`,
                       placeholder: "10000 CHF",
                       register,
                     },
@@ -119,15 +116,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 col-span-1",
                     label: {
                       text: "Count",
-                      htmlFor: "count",
+                      htmlFor: `serviceDetail.count_${i}`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "number",
-                      id: "count",
-                      name: "count",
+                      id: `serviceDetail.count_${i}`,
+                      name: `serviceDetail.count_${i}`,
                       placeholder: "10",
                       register,
                     },
@@ -146,15 +143,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 ",
                     label: {
                       text: "Unit",
-                      htmlFor: "unit",
+                      htmlFor: `serviceDetail.unit_${i}`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "text",
-                      id: "unit",
-                      name: "unit",
+                      id: `serviceDetail.unit_${i}`,
+                      name: `serviceDetail.unit_${i}`,
                       placeholder: "Std. ",
                       register,
                     },
@@ -163,15 +160,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 ",
                     label: {
                       text: "Total Price",
-                      htmlFor: "totalPrice",
+                      htmlFor: `serviceDetail.totalPrice_${i}`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "number",
-                      id: "totalPrice",
-                      name: "totalPrice",
+                      id: `serviceDetail.totalPrice_${i}`,
+                      name: `serviceDetail.totalPrice_${i}`,
                       placeholder: "1000CHF",
                       register,
                     },
@@ -184,24 +181,46 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
       },
 
       {
-        containerClass:
-          "mt-5 mb-0 border-b border-black border-opacity-20 pb-[35px]",
-        label: {
-          text: "Description",
-          htmlFor: "description",
-          className: "mb-[10px]",
-        },
+        containerClass: "mt-6",
         field: {
-          type: Field.textArea,
-          className: "!p-4 !border-dark focus:!border-primary ",
-          rows: 4,
-          id: "description",
-          name: "description",
-          placeholder:
-            "Kostenübernahme bei Lorem Ipsum dollar smith emit lorem.....",
-          register,
-        },
+          type: Field.div,
+          id: `serviceDetail_${i}`,
+          className: "grid grid-cols-1 relative w-full space-x-[18px] ",
+          children: [
+            {
+              containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
+              label: {
+                text: "Description",
+                htmlFor: `serviceDetail.description_${i}`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.textArea,
+                className: "!p-4 !border-dark  focus:!border-primary ",
+                rows: 4,
+                id: `serviceDetail.description_${i}`,
+                name: `serviceDetail.description_${i}`,
+                placeholder:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                register,
+              },
+            },
+            {
+              containerClass: "mb-0 absolute -top-60 right-0",
+              field: {
+                type: Field.button,
+                id: "button",
+                text: "Remove",
+                inputType: "button",
+                className:
+                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && 'hidden'}`,
+                onClick: () => handleRemove && handleRemove(`serviceDetail_${i}`)
+              },
+            },
+          ]
+        }
       }
+
     )
   }
   return formField;
@@ -214,7 +233,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
   control,
   onAddService,
   count,
-  service
+  service,
+  setValue
 ) => {
   const formField: FormField[] = [
     {
@@ -222,29 +242,82 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 row-span-2 gap-x-3 ",
+        className: "grid grid-cols-3  gap-x-3 ",
         children: [
           {
-            containerClass: "mb-0",
-            label: {
-              text: "Discount Description",
-              htmlFor: "description",
-              className: "mb-[10px]",
-            },
+            containerClass: "grid col-span-2",
             field: {
-              type: Field.textArea,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              rows: 4,
-              id: "description",
-              name: "description",
-              placeholder:
-                "Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyalesl...",
-              register,
+              type: Field.div,
+              id: "div-field",
+              className: "flex flex-col ",
+              children: [
+                {
+                  containerClass: "mb-0 ",
+                  label: {
+                    text: "Discount Description",
+                    htmlFor: "discountDiscription",
+                    className: "mb-[10px] flex",
+                  },
+                  field: {
+                    type: Field.textArea,
+                    className: "!p-4 !border-dark focus:!border-primary ",
+                    rows: 4,
+                    id: "discountDiscription",
+                    name: "discountDiscription",
+                    placeholder:
+                      "Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyalesl...",
+                    register,
+                  },
+                },
+                {
+                  containerClass: "grid col-span-2",
+                  field: {
+                    type: Field.div,
+                    id: "div-field",
+                    className: "flex space-x-3 mt-3",
+                    children: [
+                      {
+
+                        containerClass: "mb-0 col-span-1 ",
+
+                        field: {
+                          type: Field.span,
+                          id: "button",
+                          text: "",
+                          html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
+                          </svg>
+                          `,
+                          containerClassName:
+                            "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
+                          onClick: onAddService,
+                        },
+
+                      },
+                      {
+
+                        containerClass: "mb-0 pr-2 mt-2",
+                        field: {
+                          type: Field.span,
+                          className: "!p-4  w-full ",
+                          id: "span-field",
+                          text: "Add New Service"
+
+
+
+                        },
+                      },
+
+                    ],
+                  }
+                }
+
+
+              ],
             },
+
           },
-          generateServiceCalulationChildren(register)
-
-
+          generateServiceCalulationChildren(register, setValue)
         ],
       },
     },
@@ -259,7 +332,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
 
 
 
-const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>) => {
+const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>) => {
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
@@ -280,7 +353,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
             children: [
               {
 
-                containerClass: "mb-0 px-4 border-r border-lightGray",
+                containerClass: "mb-0 pr-2 border-r border-lightGray",
                 field: {
                   type: Field.span,
                   className: "!p-4  w-full ",
@@ -320,19 +393,32 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
             children: [
               {
 
-                containerClass: "mb-0 px-8 border-r border-lightGray",
+                containerClass: "mb-0 px-0 ",
                 field: {
-                  type: Field.radio,
-                  className: " !border-dark focus:!border-primary w-full",
-                  id: "span-field",
-                  text: "Sub Total",
-                  name: "tax",
+                  type: Field.toggleButton,
+                  className: " !border-dark focus:!border-primary ",
+                  id: "isTax",
+                  name: "isTax",
                   label: "Tax%",
                   checked: false,
                   register,
+                  value: false
+                },
+              },
+              {
+
+                containerClass: "mb-0 border-r border-lightGray pr-8",
+                field: {
+                  type: Field.span,
+                  className: "! !border-dark focus:!border-primary w-full",
+                  id: "span-field",
+                  text: "Tax %"
+
+
 
                 },
-              }, {
+              },
+              {
 
                 containerClass: "mb-0 ",
                 field: {
@@ -357,13 +443,13 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                       field: {
                         type: Field.radio,
                         className: " !border-dark focus:!border-primary w-full",
-                        id: "span-field",
+                        id: "taxType1",
                         text: "Sub Total",
-                        name: "tax",
+                        name: "taxType",
                         label: "Include",
-                        checked: false,
                         register,
-
+                        value: "1",
+                        setValue
                       },
                     },
                     {
@@ -372,16 +458,17 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                       field: {
                         type: Field.radio,
                         className: " !border-dark focus:!border-primary w-full",
-                        id: "span-field",
+                        id: "taxType2",
                         text: "Sub Total",
-                        name: "tax",
+                        name: "taxType",
                         label: "Exclude",
-                        checked: false,
                         register,
+                        value: "0",
+                        setValue
 
                       },
                     },
-                   
+
                   ]
 
                 }
@@ -398,32 +485,52 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
 
           field: {
             type: Field.div,
-            className: "flex  space-x-5 !h-[45px]",
+            className: "flex   space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {
 
-                containerClass: "mb-0 px-8  border-r border-lightGray ",
+                containerClass: "mb-0 px-0  ",
                 field: {
-                  type: Field.radio,
-                  className: " !border-dark focus:!border-primary w-full ",
+                  type: Field.toggleButton,
+                  className: " !border-dark focus:!border-primary ",
                   id: "span-field",
-                  text: "Sub Total",
-                  name: "tax",
-                  label: "Tax%",
+                  name: "isDiscount",
                   checked: false,
                   register,
 
                 },
-              }, {
+              },
 
-                containerClass: "mb-0 ",
+              {
+
+                containerClass: "mb-0 border-r border-lightGray pr-2",
                 field: {
                   type: Field.span,
                   className: "! !border-dark focus:!border-primary w-full",
                   id: "span-field",
-                  text: "2000 CHF(7.7%)"
+                  text: "Discount "
 
+
+
+                },
+              },
+
+
+
+
+
+              {
+
+                containerClass: "mb-0 ",
+                field: {
+                  type: Field.input,
+                  className: "!px-1 !border-dark focus:!border-primary w-full",
+                  id: "discountAmount",
+                  register,
+                  name: "discountAmount",
+                  inputType: "number",
+                  value: 0
 
 
                 },
@@ -440,12 +547,15 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                       field: {
                         type: Field.radio,
                         className: " !border-dark focus:!border-primary w-full",
-                        id: "span-field",
+                        id: "discountType1",
                         text: "Sub Total",
-                        name: "tax",
-                        label: "Include",
+                        name: "discountType",
+                        label: "Percent",
                         checked: false,
                         register,
+                        value: "1",
+                        setValue
+
 
                       },
                     },
@@ -455,16 +565,19 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                       field: {
                         type: Field.radio,
                         className: " !border-dark focus:!border-primary w-full",
-                        id: "span-field",
+                        id: "discountType2",
                         text: "Sub Total",
-                        name: "tax",
-                        label: "Exclude",
+                        name: "discountType",
+                        label: "Amount",
                         checked: false,
                         register,
+                        value: "0",
+                        setValue
+
 
                       },
                     },
-                   
+
                   ]
 
                 }
@@ -480,7 +593,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
           containerClass: "mb-0 pt-2",
           field: {
             type: Field.span,
-            className: "! !border-dark focus:!border-primary w-full text-dark font-bold text-center",
+            containerClassName: "! !border-dark focus:!border-primary w-full text-dark font-bold ",
             id: "span-field",
             text: "Grand Total : 2100.50 CHF"
 
@@ -488,7 +601,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
 
           },
         },
-        
+
 
       ]
 
@@ -500,3 +613,48 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
   return calculationFields
 };
 
+
+
+export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionFormField = (
+  loading,
+  OnClick
+) => {
+  const formField: FormField[] = [
+    {
+      containerClass: "mt-10",
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className: "flex space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0 mt-[30px]",
+            field: {
+              type: Field.button,
+              id: "buttonBack",
+              text: "Bacl",
+              inputType: "button",
+              className:
+                "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",
+              onClick: OnClick
+            },
+          },
+          {
+            containerClass: "mb-0 mt-[30px]",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: "Next",
+              inputType: "submit",
+              className:
+                "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
+              loading,
+            },
+          },
+        ]
+      }
+    }
+  ];
+
+  return formField;
+};
