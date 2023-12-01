@@ -92,8 +92,13 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       [EditOfferDetails.country]: yup
         .string()
         .required(translate("validation required")),
-    })
-
+    }),
+    [EditOfferDetails.date]: yup.array().of(
+      yup.object().shape({
+        "startDate": yup.string().required(translate("required")),
+        "endDate": yup.string().required(translate("required"))
+      }).required(translate("required"))
+    ).min(1).required(translate("required"))
   });
 
 };
@@ -128,22 +133,18 @@ export const generateOfferAdditionalDetailsValidation = (
 // Validation for offer address edit details
 export const generateOfferAddressEditDetailsValidation = (
   translate: Function,
-  count: number
 
 ) => {
-  const addressSchema = Array.from({ length: count }, (_, index) => {
-    return (
-      ({
-        [`${OfferAddressEditDetails.streetNo}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
-        [`${OfferAddressEditDetails.postCode}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
-        [`${OfferAddressEditDetails.country}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
-        [`${OfferAddressEditDetails.description}-${index + 1}`]: yup.string().required(translate("validationMessages.required")),
-      }))
+  const addressValidationSchema = yup.array().of(
+    yup.object().shape({
+      [OfferAddressEditDetails.streetNo]: yup.string().required(translate("validationMessages.required")),
+      [OfferAddressEditDetails.postCode]: yup.string().required(translate("validationMessages.required")),
+      [OfferAddressEditDetails.country]: yup.string().required(translate("validationMessages.required")),
+      [OfferAddressEditDetails.description]: yup.string().notRequired(),
 
-  })
-    .reduce((acc, obj) => ({ ...acc, ...obj }), {});
-  return yup.object().shape(addressSchema)
-
+    }).required(translate("required"))
+  ).min(1).required(translate("required"))
+  return yup.object().shape({ "address": addressValidationSchema })
 };
 
 
@@ -156,7 +157,7 @@ export const generateAddfferServiceDetailsValidation = (
 
   for (let i = 0; i < count; i++) {
     schemaObject[`${AddServiceOfferDetails.serviceType}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.serviceTitle}_${i}`] = yup.string().notRequired(translate("validationMessages.required"))
+    schemaObject[`${AddServiceOfferDetails.serviceTitle}_${i}`] = yup.string().notRequired()
     schemaObject[`${AddServiceOfferDetails.price}_${i}`] = yup.string().required(translate("validationMessages.required"))
     schemaObject[`${AddServiceOfferDetails.unit}_${i}`] = yup.string().required(translate("validationMessages.required"))
     schemaObject[`${AddServiceOfferDetails.count}_${i}`] = yup.string().required(translate("validationMessages.required"))

@@ -45,7 +45,7 @@ export const DatePicker = ({
           defaultValue={value && formatDateString(value)}
           id={id}
           onBlurCapture={() => setInputFocus(false)}
-          {...register(name)}
+           {...register(name)}
           // style={{
           //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
           //   backgroundPosition: "4% 50%",

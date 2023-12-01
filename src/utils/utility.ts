@@ -3,7 +3,7 @@ import {
   updateProfileStep2,
   updateProfileStep3,
 } from "@/api/slices/authSlice/auth";
-import { AddressType, ApiResponseType, CheckProps, DateRangeProps, Errors, FieldType } from "@/types";
+import { AddressType, ApiResponseType, CheckProps, DateRangeProps, DivProps, Errors, FieldProps, FieldType, FormField } from "@/types";
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
@@ -442,3 +442,4 @@ export function getOfferStatusColor(status: string) {
   else if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Rejected"]) return "#FF0000";
   else return "#FF376F"
 }
+

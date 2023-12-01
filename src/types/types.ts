@@ -10,6 +10,8 @@ import {
   Control,
   FieldValues,
   SetFieldValue,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -336,9 +338,9 @@ export type GenerateOffersServiceActionFormField = (
 
 export type GenerateOfferDateFormField = (
   register: UseFormRegister<FieldValues>,
-  onClick: () => void,
+  onClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
-  handleRemoveDateField: (key: string) => void,
+  handleRemoveDateField: UseFieldArrayRemove,
   offerDetails: OffersTableRowTypes
 ) => FormField[];
 // Contract formfield
@@ -372,11 +374,11 @@ export type GenerateLeadAddressFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
-  handleAddNewAddress?: () => void,
-  handleRemoveAddress?: () => void,
+  handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
+  handleRemoveAddress?: UseFieldArrayRemove,
+  fields?: object[]
 
-
-) => FormField[];
+) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

@@ -3,11 +3,15 @@ import { useOfferAddAddressDetails } from "@/hooks/offers/useOfferAddAddressDeta
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { InputField, SelectField, TextAreaField } from "@/base-components/form/fields";
+import { Field } from "@/enums/form";
+import { OfferAddressEditDetails } from "@/enums/offers";
+import { staticEnums } from "@/utils/static";
 
 const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, addressFields, append, remove, register } =
     useOfferAddAddressDetails(onHandleNext);
   return (
     <FormCard>
@@ -30,6 +34,7 @@ const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
+     
     </FormCard>
   );
 };

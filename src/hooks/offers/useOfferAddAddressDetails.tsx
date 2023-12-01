@@ -1,10 +1,10 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
+import { AddOffAddressDetailsFormField, testFormat } from "@/components/offers/add/fields/add-address-details-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useMemo, useState } from "react";
@@ -21,7 +21,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   }
   const [addressCount, setAddressCount] = useState(offerDetails?.id && offerDetails?.addressID?.address?.length || 1)
 
-  const schema = generateOfferAddressEditDetailsValidation(translate, addressCount);
+  const schema = generateOfferAddressEditDetailsValidation(translate);
   const handleAddNewAddress = () => {
     setAddressCount(addressCount + 1)
   }
@@ -38,15 +38,25 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useMemo(() => {
     if (offerDetails.id) {
-      reset(transformAddressFormValues(offerDetails?.addressID?.address))
+      // reset(transformAddressFormValues(offerDetails?.addressID?.address))
+      reset({
+        address: offerDetails?.addressID?.address
+      })
     }
   }, [offerDetails.id])
+  const { fields: addressFields, append, remove } = useFieldArray({
+    control,
+    name: "address",
 
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressCount, handleAddNewAddress, handleRemoveNewAddress);
+  });
+
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length, append, remove, addressFields);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { address: senitizeDataForm(data).slice(0, addressCount), step: 2, id: offerDetails?.id, stage: ComponentsType.serviceAdded }
+    const apiData = { ...data, step: 2, id: offerDetails?.id, stage: ComponentsType.serviceAdded }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
     if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
 
@@ -58,5 +68,9 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    register,
+    append,
+    remove,
+    addressFields,
   };
 };

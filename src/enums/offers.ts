@@ -37,6 +37,7 @@ export enum OfferAddressEditDetails {
   postCode = "postalCode",
   country = "country",
   description = "description",
+  address="address"
 }
 
 // enum for add service offer details
