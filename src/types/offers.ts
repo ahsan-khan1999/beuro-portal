@@ -46,13 +46,29 @@ export interface OffersTableRowTypes {
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
+  taxAmount: number;
   title: string;
   totalPrice: number;
-  leadID:Lead;
-  content?:ContentTableRowTypes
+  leadID: Lead;
+  content?: ContentTableRowTypes;
+  serviceDetail: OfferServiceDetails;
+  subTotal: number;
+  total: number;
+  discountAmount: number
 }
 
-
+interface OfferServiceDetails {
+  id: string;
+  serviceDetail: ServiceList[]
+}
+interface ServiceList {
+  serviceTitle: string;
+  price: number;
+  unit: string;
+  totalPrice: number;
+  serviceType: strin;
+  description: string
+}
 export interface EmailStatus {
   Pending: number,
   Sent: number,
@@ -75,4 +91,11 @@ export interface OfferStatus {
   Signed: number,
   Expired: number,
   Rejected: number
+}
+
+export interface Total {
+  subTotal: number;
+  grandTotal: number;
+  taxAmount: number;
+
 }

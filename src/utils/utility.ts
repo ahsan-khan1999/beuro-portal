@@ -443,3 +443,10 @@ export function getOfferStatusColor(status: string) {
   else return "#FF376F"
 }
 
+
+
+export function calculateTax(amount: number) {
+  const taxPercentage = 7.7;
+  const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
+  return parseFloat(taxAmount);
+}

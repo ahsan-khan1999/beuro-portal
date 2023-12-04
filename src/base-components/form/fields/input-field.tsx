@@ -20,7 +20,9 @@ export const InputField = ({
   svg,
   img,
   remove,
-  onRemove
+  onRemove,
+  fieldIndex,
+  onChange
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
@@ -59,6 +61,9 @@ export const InputField = ({
           placeholder={placeholder}
           disabled={disabled}
           key={id}
+          // onChangeCapture={}
+          //@ts-expect-error
+          onChangeCapture={(e)=> onChange && onChange(Number(e.target?.value))}
         />
         {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />

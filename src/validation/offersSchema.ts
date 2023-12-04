@@ -151,23 +151,51 @@ export const generateOfferAddressEditDetailsValidation = (
 // Validation for offer service edit details
 export const generateAddfferServiceDetailsValidation = (
   translate: Function,
-  count: number
 ) => {
-  const schemaObject: any = {};
 
-  for (let i = 0; i < count; i++) {
-    schemaObject[`${AddServiceOfferDetails.serviceType}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.serviceTitle}_${i}`] = yup.string().notRequired()
-    schemaObject[`${AddServiceOfferDetails.price}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.unit}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.count}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.totalPrice}_${i}`] = yup.string().required(translate("validationMessages.required"))
-    schemaObject[`${AddServiceOfferDetails.description}_${i}`] = yup.string().required(translate("validationMessages.required"))
+  const serviceValidationSchema = yup.array().of(
+    yup.object().shape({
+      [AddServiceOfferDetails.serviceType]: yup.string().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.serviceTitle]: yup.string().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.price]: yup.number().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.unit]: yup.string().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.count]: yup.number().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.totalPrice]: yup.number().required(translate("validationMessages.required")),
+      [AddServiceOfferDetails.description]: yup.string().required(translate("validationMessages.required")),
 
-  }
 
-  let testObj = yup.object().shape({ "serviceDetail": yup.object().shape(schemaObject) })
-  return testObj
+    }).required(translate("required"))
+  ).min(1).required(translate("required"))
+  return yup.object().shape({
+    "serviceDetail": serviceValidationSchema,
+    [AddServiceOfferDetails.discountDiscription]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddServiceOfferDetails.isDiscount]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+    [AddServiceOfferDetails.isTax]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+
+    [AddServiceOfferDetails.discountType]: yup
+      .boolean().when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount === true,
+        then: () => yup.boolean().notRequired(),
+      }),
+    [AddServiceOfferDetails.discountAmount]: yup
+      .number().when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount === true,
+        then: () => yup.number().required(translate("validationMessages.required")),
+      }),
+    [AddServiceOfferDetails.taxAmount]: yup
+      .number().notRequired(),
+    [AddServiceOfferDetails.taxType]: yup
+      .boolean().when("isTax", {
+        is: (isTax: boolean) => isTax === true,
+        then: () => yup.boolean().notRequired(),
+      }),
+  })
 };
 
 export const generateOfferDiscountValidation = (

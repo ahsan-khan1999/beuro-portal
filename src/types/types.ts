@@ -29,7 +29,7 @@ import { Lead } from './leads';
 import { Service } from './service';
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
-import { OffersTableRowTypes } from "./offers";
+import { OffersTableRowTypes, Total } from "./offers";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -328,7 +328,22 @@ export type GenerateOffersFormField = (
   control: Control<FieldValues>,
   onClick: () => void | Function,
   count: number,
-  properties: { customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void },
+  properties: { content?: ContentTableRowTypes[], contentDetails?: ContentTableRowTypes, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, onContentSelect?: () => void, offerDetails?: OffersTableRowTypes },
+  setValue?: SetFieldValue<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+export type GenerateOfferServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: { offerDetails?: OffersTableRowTypes, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string, index: number) => void, serviceDetails?: Service, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, generatePrice?: (index: number) => void, total?: Total },
+
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveAddress: UseFieldArrayRemove,
+  fields?: object[],
   setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export type GenerateOffersServiceActionFormField = (
@@ -341,7 +356,8 @@ export type GenerateOfferDateFormField = (
   onClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
   handleRemoveDateField: UseFieldArrayRemove,
-  offerDetails: OffersTableRowTypes
+  offerDetails: OffersTableRowTypes,
+  control?: Control<FieldValues>
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (

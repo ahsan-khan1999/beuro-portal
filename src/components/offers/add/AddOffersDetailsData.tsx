@@ -17,6 +17,7 @@ export enum ComponentsType {
   addressAdded,
   serviceAdded,
   additionalAdded,
+  additionalAddedSucces,
 }
 
 const EditOffersDetailsData = () => {
@@ -76,7 +77,6 @@ const EditOffersDetailsData = () => {
       name: "Additional Details",
     },
   ];
-  console.log(tabType,"offerDetails");
   
 
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const EditOffersDetailsData = () => {
   };
 
   const handleNextTab = (currentComponent: ComponentsType) => {
-    if (tabType === ComponentsType.additionalAdded) {
+    if (tabType === ComponentsType.additionalAddedSucces) {
       offerCreatedHandler();
       return;
     }

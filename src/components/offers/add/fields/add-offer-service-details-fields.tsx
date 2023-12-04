@@ -1,19 +1,32 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateOffersFormField, GenerateOffersServiceActionFormField } from "@/types";
+import { FormField, GenerateOfferServiceFormField, GenerateOffersFormField, GenerateOffersServiceActionFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { OffersTableRowTypes } from "@/types/offers";
-
-export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
+import { OffersTableRowTypes, Total } from "@/types/offers";
+const serviceObject = {
+  serviceTitle: "",
+  price: 0,
+  unit: "",
+  count: 0,
+  description: "",
+  totalPrice: ""
+}
+export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   register,
   loading,
   control,
-  onAddService,
+  onCLick,
   count,
   properties,
+  append,
+  remove,
+  fields,
+  setValue
 
 ) => {
-  const { handleRemove, service } = properties
+  const { service, onCustomerSelect, serviceDetails, generatePrice, offerDetails } = properties
+  // if(!fields) return null;
+
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
     formField.push(
@@ -27,7 +40,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               containerClass: "mb-0 col-span-1",
               label: {
                 text: "Service Type",
-                htmlFor: `serviceDetail.serviceType_${i}`,
+                htmlFor: `serviceDetail.${i}.serviceType`,
                 className: "mb-[10px]",
               },
               field: {
@@ -41,8 +54,8 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                       type: Field.radio,
                       value: "New Service",
                       label: "New Service",
-                      id: `serviceDetail.serviceType_${i}`,
-                      name: `serviceDetail.serviceType_${i}`,
+                      id: `serviceDetail.${i}.serviceType`,
+                      name: `serviceDetail.${i}.serviceType`,
                       register,
                     },
                   },
@@ -52,8 +65,8 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                       type: Field.radio,
                       value: "Existing Service",
                       label: "Existing Service",
-                      id: `serviceDetail.serviceType_${i}`,
-                      name: `serviceDetail.serviceType_${i}`,
+                      id: `serviceDetail.${i}.serviceType`,
+                      name: `serviceDetail.${i}.serviceType`,
                       register,
                     },
                   },
@@ -64,17 +77,19 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               containerClass: "mb-0 col-span-2",
               label: {
                 text: "Service Title/Product",
-                htmlFor: `serviceDetail.serviceTitle_${i}`,
+                htmlFor: `serviceDetail.${i}.serviceTitle`,
                 className: "mb-[10px]",
               },
               field: {
                 className: "!p-4  !border-dark  focus:!border-primary !h-[54px]",
                 type: Field.select,
-                id: `serviceDetail.serviceTitle_${i}`,
-                name: `serviceDetail.serviceTitle_${i}`,
+                id: `serviceDetail.${i}.serviceTitle`,
+                name: `serviceDetail.${i}.serviceTitle`,
                 options: service?.map((item) => ({ label: item?.serviceName, value: item?.id })) || [],
                 control,
-                value: ""
+                // value: "",
+                onItemChange: onCustomerSelect,
+                fieldIndex: i
               },
             },
           ],
@@ -99,34 +114,37 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 col-span-2",
                     label: {
                       text: "Price",
-                      htmlFor: `serviceDetail.price_${i}`,
-                      className: "mb-[10px]",
-                    },
-                    field: {
-                      type: Field.input,
-                      className: "!p-4 !border-dark focus:!border-primary ",
-                      inputType: "text",
-                      id: `serviceDetail.price_${i}`,
-                      name: `serviceDetail.price_${i}`,
-                      placeholder: "10000 CHF",
-                      register,
-                    },
-                  },
-                  {
-                    containerClass: "mb-0 col-span-1",
-                    label: {
-                      text: "Count",
-                      htmlFor: `serviceDetail.count_${i}`,
+                      htmlFor: `serviceDetail.${i}.price`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "number",
-                      id: `serviceDetail.count_${i}`,
-                      name: `serviceDetail.count_${i}`,
+                      id: `serviceDetail.${i}.price`,
+                      name: `serviceDetail.${i}.price`,
+                      placeholder: "10000 CHF",
+                      register,
+                      onChange: () => generatePrice && generatePrice(i)
+                    },
+                  },
+                  {
+                    containerClass: "mb-0 col-span-1",
+                    label: {
+                      text: "Count",
+                      htmlFor: `serviceDetail.${i}.count`,
+                      className: "mb-[10px]",
+                    },
+                    field: {
+                      type: Field.input,
+                      className: "!p-4 !border-dark focus:!border-primary ",
+                      inputType: "number",
+                      id: `serviceDetail.${i}.count`,
+                      name: `serviceDetail.${i}.count`,
                       placeholder: "10",
                       register,
+                      onChange: () => generatePrice && generatePrice(i)
+
                     },
                   },
                 ],
@@ -143,15 +161,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 ",
                     label: {
                       text: "Unit",
-                      htmlFor: `serviceDetail.unit_${i}`,
+                      htmlFor: `serviceDetail.${i}.unit`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "text",
-                      id: `serviceDetail.unit_${i}`,
-                      name: `serviceDetail.unit_${i}`,
+                      id: `serviceDetail.${i}.unit`,
+                      name: `serviceDetail.${i}.unit`,
                       placeholder: "Std. ",
                       register,
                     },
@@ -160,15 +178,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                     containerClass: "mb-0 ",
                     label: {
                       text: "Total Price",
-                      htmlFor: `serviceDetail.totalPrice_${i}`,
+                      htmlFor: `serviceDetail.${i}.totalPrice`,
                       className: "mb-[10px]",
                     },
                     field: {
                       type: Field.input,
                       className: "!p-4 !border-dark focus:!border-primary ",
                       inputType: "number",
-                      id: `serviceDetail.totalPrice_${i}`,
-                      name: `serviceDetail.totalPrice_${i}`,
+                      id: `serviceDetail.${i}.totalPrice`,
+                      name: `serviceDetail.${i}.totalPrice`,
                       placeholder: "1000CHF",
                       register,
                     },
@@ -191,15 +209,15 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
               containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
               label: {
                 text: "Description",
-                htmlFor: `serviceDetail.description_${i}`,
+                htmlFor: `serviceDetail.${i}.description`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-dark  focus:!border-primary ",
                 rows: 4,
-                id: `serviceDetail.description_${i}`,
-                name: `serviceDetail.description_${i}`,
+                id: `serviceDetail.${i}.description`,
+                name: `serviceDetail.${i}.description`,
                 placeholder:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
                 register,
@@ -214,7 +232,7 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
                 inputType: "button",
                 className:
                   `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && 'hidden'}`,
-                onClick: () => handleRemove && handleRemove(`serviceDetail_${i}`)
+                onClick: () => remove(i)
               },
             },
           ]
@@ -227,15 +245,19 @@ export const AddOfferServiceDetailsFormField: GenerateOffersFormField = (
 };
 
 
-export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField = (
+export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFormField = (
   register,
   loading,
   control,
-  onAddService,
+  onCLick,
   count,
-  service,
+  properties,
+  append,
+  remove,
+  fields,
   setValue
 ) => {
+  const { total, offerDetails } = properties
   const formField: FormField[] = [
     {
       containerClass: "mt-[30px]",
@@ -255,15 +277,15 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
                   containerClass: "mb-0 ",
                   label: {
                     text: "Discount Description",
-                    htmlFor: "discountDiscription",
+                    htmlFor: "discountDescription",
                     className: "mb-[10px] flex",
                   },
                   field: {
                     type: Field.textArea,
                     className: "!p-4 !border-dark focus:!border-primary ",
                     rows: 4,
-                    id: "discountDiscription",
-                    name: "discountDiscription",
+                    id: "discountDescription",
+                    name: "discountDescription",
                     placeholder:
                       "Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyalesl...",
                     register,
@@ -290,7 +312,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
                           `,
                           containerClassName:
                             "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
-                          onClick: onAddService,
+                          onClick: () => append(serviceObject),
                         },
 
                       },
@@ -317,7 +339,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
             },
 
           },
-          generateServiceCalulationChildren(register, setValue)
+          generateServiceCalulationChildren(register, setValue, total, offerDetails)
         ],
       },
     },
@@ -332,7 +354,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOffersFormField
 
 
 
-const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>) => {
+const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>, total?: Total, offerDetails?: OffersTableRowTypes) => {
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
@@ -370,7 +392,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                   type: Field.span,
                   className: "!p-4 !border-dark focus:!border-primary w-full",
                   id: "span-field",
-                  text: "2000 CHF"
+                  text: `${total?.subTotal} CHF`
 
 
 
@@ -425,7 +447,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                   type: Field.span,
                   className: "! !border-dark focus:!border-primary w-full",
                   id: "span-field",
-                  text: "2000 CHF(7.7%)"
+                  text: `${total?.taxAmount} CHF(7.7%)`
 
 
 
@@ -448,7 +470,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         name: "taxType",
                         label: "Include",
                         register,
-                        value: "1",
+                        value: offerDetails?.id && Number(offerDetails?.taxType) || "1",
                         setValue
                       },
                     },
@@ -463,7 +485,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         name: "taxType",
                         label: "Exclude",
                         register,
-                        value: "0",
+                        value: offerDetails?.id && Number(offerDetails?.taxType) || "0",
                         setValue
 
                       },
@@ -530,7 +552,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                   register,
                   name: "discountAmount",
                   inputType: "number",
-                  value: 0
+                  // value: 0
 
 
                 },
@@ -553,7 +575,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         label: "Percent",
                         checked: false,
                         register,
-                        value: "1",
+                        value: offerDetails?.id && Number(offerDetails?.discountType) || "1",
                         setValue
 
 
@@ -571,7 +593,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         label: "Amount",
                         checked: false,
                         register,
-                        value: "0",
+                        value: offerDetails?.id && Number(offerDetails?.discountType) || "0",
                         setValue
 
 
@@ -595,7 +617,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
             type: Field.span,
             containerClassName: "! !border-dark focus:!border-primary w-full text-dark font-bold ",
             id: "span-field",
-            text: "Grand Total : 2100.50 CHF"
+            text: `Grand Total : ${total?.grandTotal.toFixed(2)} CHF`
 
 
 

@@ -90,8 +90,6 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
 
             localStoreUtil.store_data("offer", objectToUpdate)
             thunkApi.dispatch(setOfferDetails(objectToUpdate));
-
-
             return response?.data?.Offer;
         } catch (e: any) {
             if (Array.isArray(e?.data?.data?.address)) {

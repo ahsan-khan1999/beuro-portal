@@ -20,6 +20,7 @@ export const SelectBox = ({
   className,
   onItemChange,
   disabled,
+  fieldIndex
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
@@ -44,7 +45,7 @@ export const SelectBox = ({
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     setIsOpen(false);
-    onItemChange && onItemChange(value);
+    onItemChange && onItemChange(value,fieldIndex);
     field?.onChange(value);
     trigger?.(field?.name);
   };

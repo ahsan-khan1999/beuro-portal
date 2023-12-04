@@ -27,8 +27,8 @@ export enum EditOfferDetails {
 
 // Additional details enum
 export enum OfferAdditionalDetails {
-  chooseFromExisting = "chooseFromExisting",
-  additionlData = "additionlData",
+  chooseFromExisting = "content",
+  additionlData = "additionalDetails",
 }
 
 // Offers Address edit details
@@ -49,7 +49,7 @@ export enum AddServiceOfferDetails {
   unit = "unit",
   totalPrice = "totalPrice",
   description = "description",
-  discountDiscription = "discountDiscription",
+  discountDiscription = "discountDescription",
   discountType="discountType",
   isDiscount="isDiscount",
   discountAmount="discountAmount",

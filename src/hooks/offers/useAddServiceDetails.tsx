@@ -1,6 +1,6 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -8,39 +8,39 @@ import { AddOfferDetailsServiceSubmitFormField, AddOfferServiceDetailsDescriptio
 import { generateAddfferServiceDetailsValidation, generateOfferDiscountValidation, mergeOfferSchemas } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
-import { readService } from "@/api/slices/service/serviceSlice";
+import { readService, setServiceDetails } from "@/api/slices/service/serviceSlice";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { FormField } from "@/types";
+import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
+import { Service } from "@/types/service";
+import { Total } from "@/types/offers";
+import { calculateTax } from "@/utils/utility";
 
 export const useAddServiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
-  const [formFields, setFormFields] = useState<any[]>([]);
+  const [total, setTotal] = useState<Total>({
+    subTotal: 0,
+    grandTotal: 0,
+    taxAmount: 0
+  })
 
-  const [serviceCount, setServiceCount] = useState<number>(1)
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
-  const { service } = useAppSelector((state) => state.service);
-  const [shouldRegenerateFields, setShouldRegenerateFields] = useState(true);
 
-  const handleAddService = () => {
-    setServiceCount(serviceCount + 1)
-    setShouldRegenerateFields(true);
-
-  }
-  // console.log(serviceCount, "serviceCount");
-
+  const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
-    // dispatch(readService({ params: { filter: { paginate: 0 } } }))
+    dispatch(readService({ params: { filter: { paginate: 0 } } }))
   }, [])
 
   const handleBack = () => {
     onHandleNext(ComponentsType.addressAdded)
   }
-  const schema = generateAddfferServiceDetailsValidation(translate, serviceCount);
-  const discountSchema = generateOfferDiscountValidation(translate)
-  const mergedSchemas = mergeOfferSchemas(schema, discountSchema)
+  const handleNext = () => {
+    onHandleNext(ComponentsType.additionalAdded)
+  }
+  const schema = generateAddfferServiceDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -48,47 +48,112 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
     setError,
     setValue,
     formState: { errors },
+    reset,
+    watch,
+    getValues,
+    trigger,
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(mergedSchemas),
+    resolver: yupResolver<FieldValues>(schema),
+
   });
-  const handleRemoveDateField = (key: string) => {
-    setServiceCount(prevCount => prevCount - 1);
 
-    setShouldRegenerateFields(false);
-    setFormFields(prev => {
-      const updateServiceFields = prev.filter((item) => item.field.id !== key)
-      console.log(updateServiceFields, "updateServiceFields");
 
-      return [...updateServiceFields];
-    });
-  };
-  const formFieldss = useMemo((): FormField[] => {
 
-    if (!shouldRegenerateFields) {
-      return formFields;
+  const { fields: serviceFields, append, remove } = useFieldArray({
+    control,
+    name: "serviceDetail",
+
+  });
+  const onServiceSelect = (id: string, index: number) => {
+
+    if (!id) return;
+    const selectedService: Service[] = service.filter((item) => item.id === id)
+    if (selectedService?.length > 0) {
+      dispatch(setServiceDetails(selectedService[0]))
+      setValue(`serviceDetail.${index}.price`, selectedService[0].price)
+      setValue(`serviceDetail.${index}.unit`, selectedService[0].unit)
     }
-    const dynamicFormFields = [];
-    dynamicFormFields.push(...AddOfferServiceDetailsFormField(register, loading, control, handleAddService, serviceCount, { service: service, handleRemove: handleRemoveDateField }));
-    return dynamicFormFields;
-  }, [serviceCount]);
-  // const fields =
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, handleAddService, serviceCount, { service: service }, setValue);
+
+  }
+  const generateTotalPrice = (index: number) => {
+    const data = getValues()
+    setTimeout(() => {
+      let totalPrice = Number(data?.serviceDetail[index]?.price) * Number(data?.serviceDetail[index]?.count)
+      setValue(`serviceDetail.${index}.totalPrice`, totalPrice)
+      generateGrandTotal()
+    }, 10);
+  }
+
+  const generateGrandTotal = () => {
+    const data = getValues();
+    let totalPrices: number = 0
+
+    data?.serviceDetail?.forEach((element: any) => {
+      totalPrices += parseInt(element.totalPrice)
+    });
+    console.log(totalPrices, "serviceDetail");
+
+    const taxAmount = calculateTax(totalPrices)
+
+    let totalPricesWithTax = totalPrices + taxAmount
+    setTotal({
+      subTotal: totalPrices,
+      grandTotal: totalPricesWithTax,
+      taxAmount: taxAmount
+    })
+
+  }
+  console.log(offerDetails, "off");
+
+  useMemo(() => {
+    if (offerDetails.id) {
+      setTotal({
+        taxAmount: Number((offerDetails.total - offerDetails.subTotal).toFixed(2)),
+        subTotal: offerDetails.subTotal,
+        grandTotal: offerDetails.total,
+
+      })
+      reset({
+        serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
+        isTax: offerDetails?.isTax,
+        isDiscount: offerDetails?.isDiscount,
+        discountType: offerDetails?.discountType,
+        taxType: offerDetails?.taxType,
+        discountAmount: offerDetails?.discountAmount
+
+      })
+    }
+    setValue("serviceDetail", offerDetails?.serviceDetail?.serviceDetail)
+    generateGrandTotal()
+  }, [offerDetails.id])
+
+  console.log(errors, "errors");
+
+  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
+
+  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total }, append, remove, serviceFields, setValue);
   const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data, "data");
+    const apiData: typeof data = { ...data, step: 3, id: offerDetails?.id, stage: ComponentsType.additionalAdded, taxAmount: total?.taxAmount, taxType: Number(data?.taxType), discountType: Number(data?.discountType) }
+    if (!apiData?.isDiscount) {
+      delete apiData["discountAmount"]
+      delete apiData["discountType"]
 
-    // const apiData = { ...data, step: 3, id: offerDetails?.id, stage: ComponentsType.additionalAdded }
-    // const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
-    // if (response?.payload) onHandleNext(ComponentsType.additionalAdded);
+    }
+    if (!apiData?.isTax) {
+      delete apiData["taxAmount"]
+      delete apiData["taxType"]
+    }
+
+    const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+    if (response?.payload) handleNext()
 
   };
-  useEffect(() => {
-    setFormFields(formFieldss);
-  }, [formFieldss]);
+
   return {
-    fields: [...formFields, ...fieldsDescription, ...submitFields],
+    fields: [...fields, ...fieldsDescription, ...submitFields],
     onSubmit,
     control,
     handleSubmit,

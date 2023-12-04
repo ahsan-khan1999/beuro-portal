@@ -46,7 +46,9 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   svg?: string;
   img?: boolean;
   remove?: string;
-  onRemove?: () => void
+  onRemove?: () => void;
+  fieldIndex?: number;
+  onChange?: (value: number) => void
 }
 
 // textarea added
@@ -111,10 +113,11 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string;
   svg?: string;
-  onItemChange?: Function
+  onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
+  fieldIndex?: number
 }
 
 export interface SelectBoxProps {
@@ -124,11 +127,13 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   svg?: string;
-  onItemChange?: () => void | Function
+  onItemChange?: (id: string, index?: number) => void
   success?: boolean;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  fieldIndex?: number
+
 }
 
 
@@ -167,11 +172,11 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
-  value?:  string;
+  value?: string;
   containerClassName?: string;
   textClassName?: string;
   checked?: boolean;
-  setValue?:UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>
 }
 
 export interface DragAndDropFileFieldProps

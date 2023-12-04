@@ -12,7 +12,8 @@ export const SelectField = ({
   svg,
   onItemChange,
   className,
-  disabled
+  disabled,
+  fieldIndex
 }: SelectProps) => {
   return (
     <Controller
@@ -31,6 +32,7 @@ export const SelectField = ({
           className={className}
           disabled={disabled}
           key={id}
+          fieldIndex={fieldIndex}
         />
       )}
     />
