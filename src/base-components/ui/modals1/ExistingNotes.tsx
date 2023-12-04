@@ -51,7 +51,7 @@ const ExistingNotes = ({
                 opacity="0.1"
                 d="M0.585938 1.06348L650.043 1.06342"
                 stroke="black"
-                stroke-width="2"
+                strokeWidth="2"
               />
             </svg>
           </span>
@@ -84,7 +84,7 @@ const ExistingNotes = ({
                 opacity="0.1"
                 d="M0.585938 1.06348L650.043 1.06342"
                 stroke="black"
-                stroke-width="2"
+                strokeWidth="2"
               />
             </svg>
           </span>
@@ -116,7 +116,7 @@ const ExistingNotes = ({
                 opacity="0.1"
                 d="M0.585938 1.06348L650.043 1.06342"
                 stroke="black"
-                stroke-width="2"
+                strokeWidth="2"
               />
             </svg>
           </span>

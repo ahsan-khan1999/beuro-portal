@@ -421,3 +421,109 @@ interface DateRangeSelectionProps {
   endDate: string;
 
 }
+
+export interface DocumentHeaderDetailsProps {
+  offerNo: string;
+  offerDate: string;
+  createdBy: string;
+}
+
+export interface ProductItemFooterProps {
+  subTotal: string;
+  tax: string;
+  discount: string;
+  grandTotal: string;
+}
+
+export interface ContactDetailsProps {
+  address: {
+    name: string;
+    streetWithNumber: string;
+    postalCode: string;
+    city: string;
+  };
+  email: string;
+  phone: string;
+}
+export interface MovingDetailsProps {
+  header: string;
+  address1: string;
+  address1Details: string;
+  address2: string;
+  address2Details: string;
+  workDates: string;
+}
+export interface ProductItemProps {
+  title: string;
+  description: string;
+  price: string;
+  count: string;
+  total: string;
+}
+
+export interface DocumentDetailFooterProps {
+  companyName: string;
+  companyDomain: string;
+  infoMail: string;
+  firstNumber: string;
+  secondNumber: string;
+  postFinance: string;
+  streeAdress: string;
+  streetNumber: string;
+  lastNumber: string;
+}
+
+export interface PdfProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  movingDetails: MovingDetailsProps;
+  serviceItem: ProductItemProps[];
+  serviceItemFooter: ProductItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
+  qrCode: qrCode;
+}
+
+export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {}
+
+interface qrCode {
+  acknowledgementSlip: AcknowledgementSlipProps;
+  payableTo: PayableToProps;
+};
+interface QRCodeBaseProps {
+  accountDetails: {
+    accountNumber: string;
+    name: string;
+    street: string;
+    city: string;
+  };
+  referenceNumber: string;
+  payableByDetails: {
+    name: string;
+    street: string;
+    city: string;
+  };
+}
+export interface AcknowledgementSlipProps extends QRCodeBaseProps {
+  currency: string;
+  amount: number;
+}
+
+export interface PayableToProps extends QRCodeBaseProps {
+  additionalInformation: string;
+}
+
+export interface PaymentQrCodeDetailsProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  qrCode: qrCode;
+}
+
+export interface QrCodeDetailsProps {
+  qrCode: qrCode;
+}
+
+export interface AggrementProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  footerDetails: DocumentDetailFooterProps;
+}
