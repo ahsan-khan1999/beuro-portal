@@ -9,6 +9,7 @@ import {
   ProductItemProps,
 } from "@/types/types";
 import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
+import { YogaPdfContainer } from "./yoga-pdf-container";
 
 export const productItems: ProductItemProps[] = [
   {
@@ -126,7 +127,7 @@ export const DUMMY_DATA: PdfProps = {
 
 export const Pdf = () => {
   return (
-    <div className="mt-[66px] mb-[30px]">
+    <YogaPdfContainer>
       <PreviewCard />
       <div className="flex flex-col gap-y-[30px]">
         <ProductPurchasedItemsDetails {...DUMMY_DATA} />
@@ -145,6 +146,6 @@ export const Pdf = () => {
       <button className="mt-[55px] w-full bg-[#45C769] rounded-[4px] shadow-md py-[10px] text-center text-white">
         Accepted
       </button>
-    </div>
+    </YogaPdfContainer>
   );
 };

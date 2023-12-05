@@ -22,8 +22,8 @@ export const ProductPurchasedItemsDetails = ({
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} />
         <ProcutItemHeader />
-        {serviceItem.map((item) => (
-          <ProductItem {...item} key={item.title} />
+        {serviceItem.map((item, idx) => (
+          <ProductItem {...item} key={idx} />
         ))}
 
         <ProductItemFooter {...serviceItemFooter} />
