@@ -14,6 +14,7 @@ export const ProductPurchasedItemsDetails = ({
   movingDetails,
   serviceItem,
   serviceItemFooter,
+  isShowTotal,
 }: PurchasedItemsDetailsProps) => {
   return (
     <div>
@@ -22,11 +23,11 @@ export const ProductPurchasedItemsDetails = ({
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} />
         <ProcutItemHeader />
-        {serviceItem.map((item, idx) => (
-          <ProductItem {...item} key={idx} />
+        {serviceItem.map((item) => (
+          <ProductItem {...item} key={item.title} />
         ))}
 
-        <ProductItemFooter {...serviceItemFooter} />
+        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
       </div>
       <Footer {...footerDetails} />
     </div>

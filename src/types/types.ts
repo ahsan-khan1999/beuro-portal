@@ -139,8 +139,7 @@ export type GenerateCompanyProfileFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   properties?: User,
-  setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
-
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 
 export type GenerateResetPasswordFormField = (
@@ -154,15 +153,14 @@ export type GenerateCustomerFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  properties: { customer?: Customers, customerType?: string },
+  properties: { customer?: Customers; customerType?: string },
   control?: Control<FieldValues>,
-  setValue?: SetFieldValue<FieldValues>,
-
+  setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export interface CustomerProperties {
   phoneNumber?: string;
   mobileNumber?: string;
-  customerType?: string
+  customerType?: string;
 }
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -269,7 +267,7 @@ export type GenerateEmployeeFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
 
 // Notes formfield
@@ -334,13 +332,12 @@ export type GeneratePlansFormField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
-
 // follow-up formfield
 export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  customers:Customers[],
+  customers: Customers[],
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -412,14 +409,12 @@ interface ItemList {
 
 export type Errors = Record<string, any> | undefined;
 
-
 export interface DateRangeValueProps {
-  selection: DateRangeSelectionProps
+  selection: DateRangeSelectionProps;
 }
 interface DateRangeSelectionProps {
   startDate: string;
   endDate: string;
-
 }
 
 export interface DocumentHeaderDetailsProps {
@@ -483,12 +478,21 @@ export interface PdfProps {
   qrCode: qrCode;
 }
 
-export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {}
+export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
+  isShowTotal: boolean;
+}
+export interface PurchasedItemDetailsNextPageProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  serviceItem: ProductItemProps[];
+  serviceItemFooter: ProductItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
+  isShowTotal: boolean;
+}
 
 interface qrCode {
   acknowledgementSlip: AcknowledgementSlipProps;
   payableTo: PayableToProps;
-};
+}
 interface QRCodeBaseProps {
   accountDetails: {
     accountNumber: string;
