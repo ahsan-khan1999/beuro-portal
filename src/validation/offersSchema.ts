@@ -137,7 +137,7 @@ export const generateOfferAddressEditDetailsValidation = (
 ) => {
   const addressValidationSchema = yup.array().of(
     yup.object().shape({
-      [OfferAddressEditDetails.streetNo]: yup.string().required(translate("validationMessages.required")),
+      [OfferAddressEditDetails.streetNo]: yup.string().notRequired(translate("validationMessages.required")),
       [OfferAddressEditDetails.postCode]: yup.string().required(translate("validationMessages.required")),
       [OfferAddressEditDetails.country]: yup.string().required(translate("validationMessages.required")),
       [OfferAddressEditDetails.description]: yup.string().notRequired(),

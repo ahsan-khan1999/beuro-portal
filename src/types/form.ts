@@ -48,7 +48,7 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   remove?: string;
   onRemove?: () => void;
   fieldIndex?: number;
-  onChange?: (value: number) => void
+  onChange?: (value?: number) => void
 }
 
 // textarea added
@@ -176,7 +176,9 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   containerClassName?: string;
   textClassName?: string;
   checked?: boolean;
-  setValue?: UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>,
+  disabled?: boolean;
+  onClick?: () => void
 }
 
 export interface DragAndDropFileFieldProps
@@ -445,5 +447,7 @@ export interface HookFieldProps {
 export interface ToggleButtonFormProps extends BaseFieldProps<Field.toggleButton> {
   register: UseFormRegister<FieldValues>;
   className: string;
-  checked: boolean
+  checked: boolean;
+  onClick?: () => void
+
 }

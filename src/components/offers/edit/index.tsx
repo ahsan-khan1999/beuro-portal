@@ -28,8 +28,8 @@ const EditOffersDetails = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const { handleImagesUpload } = useOffers();
-
+  // const { handleImagesUpload } = useOffers();
+  const handleImagesUpload = () => { }
   return (
     <>
       <Layout>

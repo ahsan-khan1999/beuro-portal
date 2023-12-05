@@ -40,7 +40,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: offerDetails?.id && offerDetails?.type === "New Customer" || type === "New Customer"
+                    checked: offerDetails?.id && offerDetails?.type === "New Customer" || type === "New Customer",
                   },
                 },
                 {
@@ -369,7 +369,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: leadDetails?.id ? leadDetails?.customerID?.id : customerDetails && customerDetails?.id,
+        value: offerDetails?.id ? offerDetails?.customerID?.id : customerDetails && customerDetails?.id,
         setValue
       },
     };
@@ -414,7 +414,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         // onItemChange: onCustomerSelect,
-        value: lead?.length === 1 && lead[0]?.id,
+        value: offerDetails?.id && offerDetails?.leadID?.id || lead?.length === 1 && lead[0]?.id,
         // setValue
       }
     }
@@ -444,10 +444,10 @@ export const AddDateFormField: GenerateOfferDateFormField = (
       //@ts-expect-error
       field: {
         type: Field.div,
-        id: "div-field",
+        id: "div-field1",
 
         className: "grid grid-cols-3 gap-x-3 ",
-        children: (count) && generateDateChildren(register, count, OnClick, handleRemoveDateField, offerDetails)
+        children: generateDateChildren(register, count, OnClick, handleRemoveDateField, offerDetails)
 
       },
     },
@@ -455,65 +455,75 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   return formField;
 };
 
-export const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: UseFieldArrayAppend<FieldValues>, handleRemoveDateField: UseFieldArrayRemove, offerDetails: OffersTableRowTypes) => {
-  const dateField = {
-    containerClass: "mb-0 ",
+export const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: UseFieldArrayAppend<FieldValues, "date">, handleRemoveDateField: UseFieldArrayRemove, offerDetails: OffersTableRowTypes) => {
+  const dateformFields = []
+  for (let i = 0; i < count; i++) {
+    dateformFields.push({
+      containerClass: "mb-0 ",
 
-    field: {
+      field: {
 
-      type: Field.div,
-      className: "grid grid-cols-2 gap-x-3",
-      id: `date`,
-      children: [{
+        type: Field.div,
+        className: "grid grid-cols-2 gap-x-3",
+        id: `date`,
+        children: [
+          {
 
-        containerClass: "mb-0 ",
-        label: {
-          text: "Start Date",
-          htmlFor: `date.startDate`,
-          className: "mb-[10px]",
-        },
-        field: {
-          type: Field.date,
-          className: "!p-4 !border-dark focus:!border-primary w-full",
-          id: `date.startDate`,
-          name: `date.startDate`,
-          // remove: key > 0 && "Remove",
-          // onRemove: () => handleRemoveDateField(key),
-          register,
-          dateType: "date",
+            containerClass: "mb-0 ",
+            label: {
+              text: "Start Date",
+              htmlFor: `date.${i}.startDate`,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.date,
+              className: "!p-4 !border-dark focus:!border-primary w-full",
+              id: `date.${i}.startDate`,
+              name: `date.${i}.startDate`,
 
-          // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
+              register,
+              dateType: "date",
 
-        },
+
+            },
+          },
+          {
+
+            containerClass: "mb-0 ",
+            label: {
+              text: "End Date",
+              htmlFor: `date.${i}.endDate`,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.date,
+              className: "!p-4 !border-dark focus:!border-primary w-full",
+              id: `date.${i}.endDate`,
+              name: `date.${i}.endDate`,
+              remove: i > 0 && "Remove",
+              onRemove: () => handleRemoveDateField(i),
+              register,
+              dateType: "date",
+            },
+          }
+        ]
       },
-      {
-
-        containerClass: "mb-0 ",
-        label: {
-          text: "End Date",
-          htmlFor: `date.endDate`,
-          className: "mb-[10px]",
-        },
-        field: {
-          type: Field.date,
-          className: "!p-4 !border-dark focus:!border-primary w-full",
-          id: `date.endDate`,
-          name: `date.endDate`,
-          remove: count > 0 && "Remove",
-          onRemove: () => handleRemoveDateField(count),
-          register,
-          dateType: "date",
-          // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
-
-        },
-      }
-
-      ]
-
-
+    })
+  }
+  dateformFields.push({
+    containerClass: "mb-0 mt-[15px]",
+    field: {
+      type: Field.button,
+      id: "button",
+      text: "",
+      inputType: "submit",
+      className:
+        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 my-5 p-4  w-[40px] h-[40px] text-white",
+      onClick: () => OnClick({ "startDate": "", "endDate": "" }),
+      icon: icon
     },
-  };
-  OnClick(dateField)
+  });
+  return dateformFields
 };
 
 
@@ -583,7 +593,7 @@ export const AddOfferDetailsDateFormField = (
       className: "!p-4 !border-dark focus:!border-primary w-full",
       id: `date.endDate`,
       name: `date.endDate`,
-      remove:  "Remove",
+      remove: "Remove",
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",

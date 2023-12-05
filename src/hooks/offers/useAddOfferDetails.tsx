@@ -4,7 +4,9 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
+  AddDateFormField,
   AddOfferDetailsFormField,
+  AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import {
   generateOfferDetailsValidationSchema,
@@ -35,6 +37,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { content } = useAppSelector((state) => state.content);
 
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
+  console.log(offerDetails, "offerDetails");
 
 
   const onCancel = () => {
@@ -93,7 +96,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     }
   }, [offerDetails?.id])
   const { fields: testFields, append, remove } = useFieldArray({
-    control, 
+    control,
     name: "date",
 
   });
@@ -137,6 +140,23 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     setValue
   );
 
+
+  const dateFields = AddDateFormField(register,
+    append,
+    testFields?.length ? testFields?.length : 1,
+    remove,
+    offerDetails,
+    control
+
+  )
+  const submit = AddOfferDetailsSubmitFormField(register,
+    loading,
+    control,
+    () => console.log(), 0, {}
+
+
+  )
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
     if (offerDetails?.id) {
@@ -151,7 +171,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   };
 
   return {
-    fields: offerFields,
+    fields: [...offerFields, ...dateFields, ...submit],
     onSubmit,
     control,
     handleSubmit,

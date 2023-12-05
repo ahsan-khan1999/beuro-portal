@@ -3,12 +3,13 @@ import { useEditOfferAddressDetails } from "@/hooks/offers/useEditOfferAddressDe
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { EditComponentsType } from "./EditOffersDetailsData";
 
-const AddressEditDetails = () => {
+const AddressEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useEditOfferAddressDetails();
+    useEditOfferAddressDetails({ handleNext });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
@@ -23,13 +24,16 @@ const AddressEditDetails = () => {
 
       <hr className="opacity-20 mb-5" />
 
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      {
+        fields &&
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      }
     </FormCard>
   );
 };

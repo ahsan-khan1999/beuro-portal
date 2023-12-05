@@ -83,7 +83,7 @@ const useLeads = () => {
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "lead" } }));
   };
 
   // function for hnadling the add note
@@ -113,7 +113,7 @@ const useLeads = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={leadDetails}/>,
   };
 
   const renderModal = () => {

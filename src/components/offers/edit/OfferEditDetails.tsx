@@ -3,12 +3,18 @@ import { useEditOfferDetails } from "@/hooks/offers/useEditOfferDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { useAddOfferDetails } from "@/hooks/offers/useAddOfferDetails";
+import { Button } from "@/base-components/ui/button/button";
+import icon from "@/assets/svgs/Vector.svg"
+import { DatePicker } from "@/base-components/form/fields";
+import { Field } from "@/enums/form";
+import {  EditComponentsType } from "./EditOffersDetailsData";
 
-const OfferEditDetails = () => {
+const OfferEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void}) => {
   const router = useRouter()
   const defaultClassName = " ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useEditOfferDetails();
+  const { fields, control, onSubmit, handleSubmit, errors, error, testFields, register, remove, loading, append } =
+    useEditOfferDetails(handleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">
@@ -18,7 +24,7 @@ const OfferEditDetails = () => {
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -26,6 +32,8 @@ const OfferEditDetails = () => {
         errors={errors}
         className={`${defaultClassName}`}
       />
+
+      
     </FormCard>
   );
 };

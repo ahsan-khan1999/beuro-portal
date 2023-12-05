@@ -114,7 +114,7 @@ const EditOffersDetailsData = () => {
   };
 
   const handleNextTab = (currentComponent: ComponentsType) => {
-    if (tabType === ComponentsType.additionalAddedSucces) {
+    if (tabType === ComponentsType.additionalAdded) {
       offerCreatedHandler();
       return;
     }

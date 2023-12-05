@@ -169,7 +169,7 @@ const updateOfferNotes = (data) =>
 const updateOffer = (data) =>
   put(SERVICE_URLS.offer + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteOffer = (data) =>
-  del(SERVICE_URLS.offer + `/${data?.id}`, {}, { feature: featureConstants.login });
+  del(SERVICE_URLS.readOffer + `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readContract = (data) =>
   get(SERVICE_URLS.contract, data, { feature: featureConstants.login });

@@ -4,7 +4,7 @@ import { ComponentsType } from "../AddOffersDetailsData";
 import { staticEnums } from "@/utils/static";
 import icon from "@/assets/svgs/Vector.svg"
 import { Fields } from '@/enums';
-const addressObject = {
+export const addressObject = {
   streetNumber:"",
   postalCode:"",
   country:"",
@@ -22,7 +22,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
 ) => {
   const formField: FormField[] = [];
   if(!fields) return null;
-  for (let i = 0; i < fields?.length; i++) {
+  for (let i = 0; i < count; i++) {
     formField.push(
       {
         containerClass: "mt-6 ",
@@ -122,14 +122,14 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
             },
             {
-              containerClass: "mb-0 absolute -top-48 right-0",
+              containerClass: "mb-0 absolute -top-44 right-0",
               field: {
                 type: Field.button,
                 id: "button",
                 text: "Remove",
                 inputType: "button",
                 className:
-                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none  ${i === 0 && 'hidden'}`,
+                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${i === 0 && 'hidden'}`,
                 onClick: () =>handleRemoveAddress && handleRemoveAddress(i)
               },
             },

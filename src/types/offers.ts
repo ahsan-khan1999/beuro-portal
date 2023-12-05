@@ -38,7 +38,7 @@ export interface OffersTableRowTypes {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: DiscountType;
+  discountType: 0 | 1;
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;
@@ -54,7 +54,8 @@ export interface OffersTableRowTypes {
   serviceDetail: OfferServiceDetails;
   subTotal: number;
   total: number;
-  discountAmount: number
+  discountAmount: number;
+  discountDescription: string
 }
 
 interface OfferServiceDetails {
@@ -66,8 +67,10 @@ interface ServiceList {
   price: number;
   unit: string;
   totalPrice: number;
-  serviceType: strin;
-  description: string
+  serviceType: string;
+  description: string;
+  count: number;
+
 }
 export interface EmailStatus {
   Pending: number,

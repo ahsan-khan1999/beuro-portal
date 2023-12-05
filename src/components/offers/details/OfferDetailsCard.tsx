@@ -10,8 +10,17 @@ import editIcon from "@/assets/svgs/name-input.svg";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
+import { OffersTableRowTypes } from "@/types/offers";
+import { formatDateString } from "@/utils/functions";
 
-const OfferDetailsCard = () => {
+interface OfferDetailCardProps {
+  offerDetails: OffersTableRowTypes
+  offerDeleteHandler: () => void
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+  handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+}
+
+const OfferDetailsCard = ({ offerDetails, offerDeleteHandler,handleImageUpload,handleNotes }: OfferDetailCardProps) => {
   const router = useRouter();
   return (
     <>
@@ -43,7 +52,7 @@ const OfferDetailsCard = () => {
           />
           <Image src={downloadIcon} alt="downloadIcon" />
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={offerDeleteHandler} />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -55,7 +64,7 @@ const OfferDetailsCard = () => {
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
               Offer ID:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">A-2000</span>
+            <span className="text-base font-medium text-[#4B4B4B]">{offerDetails?.offerNumber}</span>
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
@@ -63,7 +72,7 @@ const OfferDetailsCard = () => {
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
-              Office Cleaning Munich Lorem Ipsum dollar
+              {offerDetails?.title}
               <Image src={editIcon} alt="editIcon" />
             </span>
           </div>
@@ -72,7 +81,7 @@ const OfferDetailsCard = () => {
               Worker:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
-              Ahamad Rahal Ali
+              {offerDetails?.createdBy?.fullName}
             </span>
           </div>
         </div>
@@ -83,7 +92,8 @@ const OfferDetailsCard = () => {
               Creation Date:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
-              25/08/2023
+              {formatDateString(offerDetails?.createdAt)}
+
             </span>
           </div>
           <div className="flex gap-[10px]">
@@ -92,7 +102,7 @@ const OfferDetailsCard = () => {
             </span>
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
-                25/08 to 25/08
+                {offerDetails?.date?.map((item) => (`${item?.startDate} to ${item?.endDate}`))}
               </span>
               <Image src={editIcon} alt="editIcon" />
             </div>
@@ -105,7 +115,7 @@ const OfferDetailsCard = () => {
               Email Status:
             </span>
             <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] ">
-              Draft
+              {offerDetails?.emailStatus}
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
@@ -113,7 +123,7 @@ const OfferDetailsCard = () => {
               Payment Method:
             </span>
             <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center ">
-              Cash
+              {offerDetails?.paymentType}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -129,12 +139,13 @@ const OfferDetailsCard = () => {
               </svg>
             </span>
           </div>
-          <div className="flex items-center gap-[11px]">
+          <div className="flex items-center gap-[11px] ">
             <span className="text-[#4D4D4D] font-normal text-base">
               Status:
             </span>
             <span className="text-base font-medium text-[#FF0000] border border-[#FF0000] rounded-lg px-4 py-[3px] flex items-center ">
-              Rejected
+              {offerDetails?.offerStatus}
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -152,11 +163,11 @@ const OfferDetailsCard = () => {
           </div>
 
           <div>
-            <div className="flex items-center gap-[11px]">
+            <div className="flex items-center gap-[11px] ">
               <span className="text-[#4D4D4D] font-normal text-base">
                 Notes:
               </span>
-              <Image src={writeIcon} alt="writeIcon" />
+              <Image src={writeIcon} alt="writeIcon" className="cursor-pointer" onClick={(e) => handleNotes(offerDetails?.id,e)}/>
             </div>
           </div>
           <div>
@@ -164,7 +175,7 @@ const OfferDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Images:
               </span>
-              <Image src={imageIcon} alt="editImg" />
+              <Image src={imageIcon} alt="editImg" className="cursor-pointer" onClick={(e) => handleImageUpload(offerDetails?.id,e)} />
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
 } from "react-hook-form";
+import { OffersTableRowTypes } from "./offers";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -68,5 +69,11 @@ export interface FormDataProps {
 export interface CustomerPromiseActionType {
   type: string,
   payload: object,
+  meta: object,
+}
+
+export interface OfferPromiseActionType {
+  type: string,
+  payload: OffersTableRowTypes,
   meta: object,
 }

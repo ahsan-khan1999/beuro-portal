@@ -16,6 +16,7 @@ import { readOffer, setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(state => state.offer)
@@ -24,7 +25,7 @@ const useOffers = () => {
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
-  
+
   const { query } = useRouter()
 
   const [filter, setFilter] = useState<FilterType>({
@@ -85,7 +86,7 @@ const useOffers = () => {
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "offer" } }));
   };
 
   // function for hnadling the add note
@@ -101,7 +102,7 @@ const useOffers = () => {
     e.stopPropagation();
     const filteredLead = offer?.filter((item_) => item_.id === item)
     if (filteredLead?.length === 1) dispatch(setOfferDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
 
 
@@ -112,10 +113,10 @@ const useOffers = () => {
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
-    [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails}/>,
   };
 
   const renderModal = () => {

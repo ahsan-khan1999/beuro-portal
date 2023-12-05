@@ -3,6 +3,8 @@ import { FormField, GenerateOfferServiceFormField, GenerateOffersFormField, Gene
 import icon from "@/assets/svgs/Vector.svg"
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { OffersTableRowTypes, Total } from "@/types/offers";
+import { staticEnums } from "@/utils/static";
+import { getKeyByValue } from "@/utils/auth.util";
 const serviceObject = {
   serviceTitle: "",
   price: 0,
@@ -257,7 +259,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
   fields,
   setValue
 ) => {
-  const { total, offerDetails } = properties
+  const { total, offerDetails, generateTotal, isDiscount, isTax, taxType, discountType } = properties
   const formField: FormField[] = [
     {
       containerClass: "mt-[30px]",
@@ -339,7 +341,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
             },
 
           },
-          generateServiceCalulationChildren(register, setValue, total, offerDetails)
+          generateServiceCalulationChildren(register, setValue, total, offerDetails, generateTotal, isTax, isDiscount, taxType, discountType)
         ],
       },
     },
@@ -354,7 +356,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
 
 
 
-const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>, total?: Total, offerDetails?: OffersTableRowTypes) => {
+const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>, total?: Total, offerDetails?: OffersTableRowTypes, generateTotal?: () => void, isTax?: boolean, isDiscount?: boolean, taxType?: number, discountType?: number) => {
+  console.log(discountType, "discountType");
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
@@ -470,8 +473,13 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         name: "taxType",
                         label: "Include",
                         register,
-                        value: offerDetails?.id && Number(offerDetails?.taxType) || "1",
-                        setValue
+                        checked: taxType == 0 ? true : false,
+
+                        value: 0,
+                        setValue,
+                        disabled: !isTax,
+                        // onClick: generateTotal
+
                       },
                     },
                     {
@@ -485,8 +493,13 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         name: "taxType",
                         label: "Exclude",
                         register,
-                        value: offerDetails?.id && Number(offerDetails?.taxType) || "0",
-                        setValue
+                        checked: taxType == 1 ? true : false,
+
+                        value: 1,
+                        setValue,
+                        disabled: !isTax,
+                        // onClick: generateTotal
+
 
                       },
                     },
@@ -520,6 +533,7 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                   name: "isDiscount",
                   checked: false,
                   register,
+                  // onClick: generateTotal
 
                 },
               },
@@ -552,7 +566,10 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                   register,
                   name: "discountAmount",
                   inputType: "number",
-                  // value: 0
+                  value: offerDetails?.id && offerDetails?.discountAmount,
+                  disabled: !isDiscount,
+                  setValue,
+                  // onChange: generateTotal
 
 
                 },
@@ -573,11 +590,12 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         text: "Sub Total",
                         name: "discountType",
                         label: "Percent",
-                        checked: false,
                         register,
-                        value: offerDetails?.id && Number(offerDetails?.discountType) || "1",
-                        setValue
-
+                        checked: discountType == 1 ? true : false,
+                        value: 1,
+                        setValue,
+                        disabled: !isDiscount,
+                        // onClick: generateTotal
 
                       },
                     },
@@ -591,10 +609,13 @@ const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues
                         text: "Sub Total",
                         name: "discountType",
                         label: "Amount",
-                        checked: false,
+                        checked: discountType == 0 ? true : false,
+
                         register,
-                        value: offerDetails?.id && Number(offerDetails?.discountType) || "0",
-                        setValue
+                        value: 0,
+                        setValue,
+                        disabled: !isDiscount,
+                        // onClick: generateTotal
 
 
                       },
@@ -654,7 +675,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
             field: {
               type: Field.button,
               id: "buttonBack",
-              text: "Bacl",
+              text: "Back",
               inputType: "button",
               className:
                 "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",

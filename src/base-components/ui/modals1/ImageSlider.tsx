@@ -8,12 +8,14 @@ import img2 from "@/assets/pngs/leads_detail_img2.png";
 import img3 from "@/assets/pngs/leads_detail_img3.png";
 import img4 from "@/assets/pngs/leads_detail_img4.png";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Lead } from "@/types/leads";
+import { OffersTableRowTypes } from "@/types/offers";
 
-const ImageSlider = ({ onClose }: { onClose: () => void }) => {
-  const { leadDetails } = useAppSelector(state => state.lead)
+const ImageSlider = ({ onClose, details }: { onClose: () => void, details?: Lead | OffersTableRowTypes }) => {
+  // const { leadDetails } = useAppSelector(state => state.lead)
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
-    images: leadDetails?.images?.map((item) => ({ imageSrc: item }))
+    images: details?.images?.map((item) => ({ imageSrc: item }))
   };
 
   return (

@@ -42,7 +42,23 @@ export function isFieldType(type: any): type is FieldType {
     type
   );
 }
+const mapServerValidationToFieldArray = (serverValidation) => {
+  const fieldArrayErrors = {};
 
+  Object.entries(serverValidation).forEach(([key, value]) => {
+    const [fieldName, fieldError] = key.split('.');
+
+    if (!fieldArrayErrors[fieldName]) {
+      fieldArrayErrors[fieldName] = [];
+    }
+
+    fieldArrayErrors[fieldName].push({
+      [fieldName]: fieldError,
+    });
+  });
+
+  return fieldArrayErrors;
+};
 export function formatStrings(str: string, replaceValues: string[]): string {
   let formattedString = str;
   for (const [index, value] of replaceValues.entries()) {
@@ -56,8 +72,18 @@ export function setErrors(
   translate: Function
 ): void {
   if (!errors) return;
+  let newObj = {}
   for (const [key, value] of Object.entries(errors)) {
     if (key && !value) setError(key, { message: null });
+    if (Array.isArray(value)) {
+      value.forEach((element, index) => {
+        for (let [key1, value1] of Object.entries(element)) {
+          const newKey = key1.split(".")[1]
+          newObj = { ...newObj, [index]: { [newKey]: { message: translate(`validationMessages.${value1}`) } } }
+        }
+      })
+      setError(key, newObj);
+    }
     else
       setError(key, {
         message: formatStrings(
@@ -74,6 +100,7 @@ export function setErrorMessage(
   if (!error) return "";
   return translate(`validationMessages.${error}`);
 }
+
 
 export function returnStep(
   data: object,
@@ -449,4 +476,11 @@ export function calculateTax(amount: number) {
   const taxPercentage = 7.7;
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);
+}
+
+
+export const filterService = (id: string, service: Service[]): string => {
+  if (service?.length === 0 && !id) return "";
+  const filteredService = service.find((item) => item.id === id)
+  return filteredService?.serviceName || ""
 }

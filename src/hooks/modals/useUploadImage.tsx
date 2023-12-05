@@ -21,7 +21,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     setValue,
     formState: { errors },
   } = useForm();
-  const fields = ImageUploadFormField(loading, control, handleImageSlider, leadDetails);
+  const fields = ImageUploadFormField(loading, control, handleImageSlider);
   useMemo(() => {
     if (leadDetails?.id) setImageFieldValues(setValue, leadDetails?.images)
   }, [leadDetails?.id])

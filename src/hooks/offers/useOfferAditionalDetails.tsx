@@ -57,7 +57,7 @@ export const useOfferAditionalDetails = (onHandleNext: Function) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: ComponentsType.additionalAdded }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
-    if (response?.payload) onHandleNext(ComponentsType.additionalAdded);
+    if (response?.payload) onHandleNext(ComponentsType.additionalAdded)
 
   };
   return {

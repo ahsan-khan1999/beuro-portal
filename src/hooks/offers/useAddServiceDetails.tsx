@@ -15,6 +15,7 @@ import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/ad
 import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateTax } from "@/utils/utility";
+import { staticEnums } from "@/utils/static";
 
 export const useAddServiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -57,13 +58,15 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
 
   });
 
+  const isTax = watch("isTax")
+  const isDiscount = watch("isDiscount")
+  const taxType = watch("taxType")
+  const discountType = watch("discountType")
+  const discountAmount = watch("discountAmount")
 
 
-  const { fields: serviceFields, append, remove } = useFieldArray({
-    control,
-    name: "serviceDetail",
 
-  });
+
   const onServiceSelect = (id: string, index: number) => {
 
     if (!id) return;
@@ -84,27 +87,73 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
     }, 10);
   }
 
+
   const generateGrandTotal = () => {
     const data = getValues();
-    let totalPrices: number = 0
+    let totalPrices = 0;
+    let totalPricesWithTax = 0;
+    let totalPricesWithDiscount = 0;
+    let taxAmount = 0;
 
     data?.serviceDetail?.forEach((element: any) => {
-      totalPrices += parseInt(element.totalPrice)
+      totalPrices += parseInt(element.totalPrice);
     });
-    console.log(totalPrices, "serviceDetail");
 
-    const taxAmount = calculateTax(totalPrices)
+    if (data?.isTax) {
+      taxAmount = calculateTax(totalPrices);
+      totalPricesWithTax = totalPrices + taxAmount;
+    }
 
-    let totalPricesWithTax = totalPrices + taxAmount
+    if (data?.isDiscount) {
+
+      if (data?.discountType == 1) {
+        totalPricesWithDiscount = totalPrices - parseInt(data?.discountAmount);
+      } else if (data?.discountType == 0) {
+        const discountPercentage = parseInt(data?.discountAmount);
+        const discountAmount = (totalPrices * (discountPercentage / 100)).toFixed(2);
+
+        totalPricesWithDiscount = totalPrices - parseFloat(discountAmount);
+      }
+    }
+
+    let grandTotal;
+
+    if (data?.isTax && data?.isDiscount) {
+      // Case: Both tax and discount are true
+      if (data?.discountType == 0) {
+        const discountPercentage = parseInt(data?.discountAmount);
+        const discountAmount = (totalPrices * (discountPercentage / 100)).toFixed(2);
+
+        grandTotal = totalPricesWithTax - parseInt(data?.discountAmount);
+      }else{
+        grandTotal = totalPricesWithDiscount
+
+      }
+
+
+    } else if (data?.isTax) {
+      // Case: Only tax is true
+      grandTotal = totalPricesWithTax;
+    } else if (data?.isDiscount) {
+      // Case: Only discount is true
+      grandTotal = totalPricesWithDiscount;
+    } else {
+      // Case: Neither tax nor discount is true
+      grandTotal = totalPrices;
+    }
+
     setTotal({
       subTotal: totalPrices,
-      grandTotal: totalPricesWithTax,
-      taxAmount: taxAmount
-    })
+      grandTotal: grandTotal,
+      taxAmount: taxAmount,
+    });
+  };
 
-  }
-  console.log(offerDetails, "off");
 
+  useMemo(() => {
+
+    generateGrandTotal()
+  }, [discountAmount, discountType, taxType, isTax, isDiscount])
   useMemo(() => {
     if (offerDetails.id) {
       setTotal({
@@ -118,20 +167,23 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: offerDetails?.discountType,
-        taxType: offerDetails?.taxType,
-        discountAmount: offerDetails?.discountAmount
+        taxType: staticEnums["TaxType"][offerDetails?.taxType],
+        discountAmount: offerDetails?.discountAmount,
+        discountDescription: offerDetails?.discountDescription
 
       })
     }
-    setValue("serviceDetail", offerDetails?.serviceDetail?.serviceDetail)
     generateGrandTotal()
   }, [offerDetails.id])
+  const { fields: serviceFields, append, remove } = useFieldArray({
+    control,
+    name: "serviceDetail",
 
-  console.log(errors, "errors");
+  });
 
   const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total }, append, remove, serviceFields, setValue);
+  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType }, append, remove, serviceFields, setValue);
   const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)
 
 

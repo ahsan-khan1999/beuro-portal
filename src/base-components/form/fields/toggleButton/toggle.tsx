@@ -6,7 +6,8 @@ export const ToggleButton = ({
   name,
   register,
   className,
-  checked
+  checked,
+  onClick
 }: ToggleButtonFormProps) => {
   const disabledClass = false ? 'bg-borderColor' : 'bg-lightGray';
   const combineClass = combineClasses(`relative h-[13px] w-[26px] px-[2px] flex-shrink-0 appearance-none rounded-full ${disabledClass}
@@ -24,6 +25,7 @@ export const ToggleButton = ({
       role="switch"
       id={id}
       defaultChecked={checked}
+      onChangeCapture={() => onClick && onClick()}
     />
   );
 };

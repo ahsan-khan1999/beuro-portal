@@ -4,12 +4,13 @@ import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-f
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOffAddressDetailsFormField, testFormat } from "@/components/offers/add/fields/add-address-details-fields";
+import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from 'react';
 import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { addressObject } from '../../components/offers/add/fields/add-address-details-fields';
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -37,11 +38,11 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+
   });
 
   useMemo(() => {
     if (offerDetails.id) {
-      // reset(transformAddressFormValues(offerDetails?.addressID?.address))
       reset({
         address: offerDetails?.addressID?.address
       })
@@ -52,12 +53,14 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     name: "address",
 
   });
-
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length, append, remove, addressFields);
+  console.log(errors);
+  
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? 1 : addressFields?.length, append, remove, addressFields);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 2, id: offerDetails?.id, stage: ComponentsType.serviceAdded }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+
     if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
 
   };

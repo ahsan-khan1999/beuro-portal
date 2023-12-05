@@ -131,7 +131,7 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={leadDetails}/>,
   };
 
   const renderModal = () => {

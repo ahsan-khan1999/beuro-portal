@@ -1,7 +1,7 @@
 <svg width="21" height="23" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M2.73329 1.95444L6.36864 3.40674L10.3623 1.40674L14.3514 3.40674L17.9916 1.95382C18.5045 1.74909 19.0863 1.99895 19.2911 2.51188C19.3381 2.6298 19.3623 2.75561 19.3623 2.88258V12.6567V12.6567C19.3623 16.0416 16.3623 18.9583 10.3623 21.4067C4.3623 18.9482 1.3623 16.0315 1.3623 12.6567V2.88308C1.3623 2.33079 1.81002 1.88308 2.3623 1.88308C2.48938 1.88308 2.61529 1.9073 2.73329 1.95444Z" stroke="url(#paint0_linear_912_65373)" stroke-width="2" stroke-linejoin="round"/>
-<path d="M1.3623 7.45117H19.3623" stroke="url(#paint1_linear_912_65373)" stroke-width="2"/>
-<path d="M13.3752 11.4351L10.3625 15.4067L8.39648 13.4138" stroke="url(#paint2_linear_912_65373)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M2.73329 1.95444L6.36864 3.40674L10.3623 1.40674L14.3514 3.40674L17.9916 1.95382C18.5045 1.74909 19.0863 1.99895 19.2911 2.51188C19.3381 2.6298 19.3623 2.75561 19.3623 2.88258V12.6567V12.6567C19.3623 16.0416 16.3623 18.9583 10.3623 21.4067C4.3623 18.9482 1.3623 16.0315 1.3623 12.6567V2.88308C1.3623 2.33079 1.81002 1.88308 2.3623 1.88308C2.48938 1.88308 2.61529 1.9073 2.73329 1.95444Z" stroke="url(#paint0_linear_912_65373)" strokeWidth="2" strokeLinejoin="round"/>
+<path d="M1.3623 7.45117H19.3623" stroke="url(#paint1_linear_912_65373)" strokeWidth="2"/>
+<path d="M13.3752 11.4351L10.3625 15.4067L8.39648 13.4138" stroke="url(#paint2_linear_912_65373)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 <defs>
 <linearGradient id="paint0_linear_912_65373" x1="1.36687" y1="11.402" x2="19.3713" y2="11.402" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FF3671"/>

@@ -200,7 +200,6 @@ export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  leadDetails?: Lead
 ) => FormField[];
 
 // accounting setting formfield
@@ -339,7 +338,7 @@ export type GenerateOfferServiceFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
-  properties: { offerDetails?: OffersTableRowTypes, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string, index: number) => void, serviceDetails?: Service, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, generatePrice?: (index: number) => void, total?: Total },
+  properties: { isTax?: boolean, isDiscount?: boolean, taxType?: number, discountType?: number, offerDetails?: OffersTableRowTypes, generateTotal?: () => void, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string, index: number) => void, serviceDetails?: Service, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, generatePrice?: (index: number) => void, total?: Total },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
@@ -400,7 +399,7 @@ export type GenerateLeadsCustomerFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   properties:
-    { customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
+    { offerDetails?: OffersTableRowTypes,customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 
@@ -505,4 +504,110 @@ interface DateRangeSelectionProps {
   startDate: string;
   endDate: string;
 
+}
+
+export interface DocumentHeaderDetailsProps {
+  offerNo: string;
+  offerDate: string;
+  createdBy: string;
+}
+
+export interface ProductItemFooterProps {
+  subTotal: string;
+  tax: string;
+  discount: string;
+  grandTotal: string;
+}
+
+export interface ContactDetailsProps {
+  address: {
+    name: string;
+    streetWithNumber: string;
+    postalCode: string;
+    city: string;
+  };
+  email: string;
+  phone: string;
+}
+export interface MovingDetailsProps {
+  header: string;
+  address1: string;
+  address1Details: string;
+  address2: string;
+  address2Details: string;
+  workDates: string;
+}
+export interface ProductItemProps {
+  title: string;
+  description: string;
+  price: string;
+  count: string;
+  total: string;
+}
+
+export interface DocumentDetailFooterProps {
+  companyName: string;
+  companyDomain: string;
+  infoMail: string;
+  firstNumber: string;
+  secondNumber: string;
+  postFinance: string;
+  streeAdress: string;
+  streetNumber: string;
+  lastNumber: string;
+}
+
+export interface PdfProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  movingDetails: MovingDetailsProps;
+  serviceItem: ProductItemProps[];
+  serviceItemFooter: ProductItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
+  qrCode: qrCode;
+}
+
+export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> { }
+
+interface qrCode {
+  acknowledgementSlip: AcknowledgementSlipProps;
+  payableTo: PayableToProps;
+};
+interface QRCodeBaseProps {
+  accountDetails: {
+    accountNumber: string;
+    name: string;
+    street: string;
+    city: string;
+  };
+  referenceNumber: string;
+  payableByDetails: {
+    name: string;
+    street: string;
+    city: string;
+  };
+}
+export interface AcknowledgementSlipProps extends QRCodeBaseProps {
+  currency: string;
+  amount: number;
+}
+
+export interface PayableToProps extends QRCodeBaseProps {
+  additionalInformation: string;
+}
+
+export interface PaymentQrCodeDetailsProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  qrCode: qrCode;
+}
+
+export interface QrCodeDetailsProps {
+  qrCode: qrCode;
+}
+
+export interface AggrementProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  footerDetails: DocumentDetailFooterProps;
 }

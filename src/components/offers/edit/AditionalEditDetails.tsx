@@ -3,12 +3,13 @@ import { useOfferEditAdditionalDetails } from "@/hooks/offers/useOfferEditAdditi
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { EditComponentsType } from "./EditOffersDetailsData";
 
-const AditionalEditDetails = () => {
+const AditionalEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useOfferEditAdditionalDetails();
+    useOfferEditAdditionalDetails({ handleNext });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
@@ -23,9 +24,9 @@ const AditionalEditDetails = () => {
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
 
-      
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

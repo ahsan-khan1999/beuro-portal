@@ -9,13 +9,13 @@ import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
 import { createLeadNotes } from "@/api/slices/lead/leadSlice";
 import { createNote } from "@/api/slices/noteSlice/noteSlice";
 
-export const useAddNewNote = ({ handleNotes}: { handleNotes: (id: string) => void }) => {
+export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
 
-  const { modal: { data: leadId } } = useAppSelector((state) => state.global);
+  const { modal: { data: { id, type } } } = useAppSelector((state) => state.global);
 
   const schema = generateAddNewNoteValidation(translate);
   const {
@@ -30,8 +30,8 @@ export const useAddNewNote = ({ handleNotes}: { handleNotes: (id: string) => voi
   });
   const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(createNote({ data: { ...data, id: leadId, type: "lead" }, router, setError, translate }));
-    if (res?.payload) handleNotes(leadId)
+    const res = await dispatch(createNote({ data: { ...data, id: id, type: type }, router, setError, translate }));
+    if (res?.payload) handleNotes(id)
 
   };
   return {

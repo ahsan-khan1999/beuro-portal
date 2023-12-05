@@ -3,12 +3,13 @@ import { useServiceOfferEditDetail } from "@/hooks/offers/useServiceOfferEditDet
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { EditComponentsType } from "./EditOffersDetailsData";
 
-const ServiceEditDetails = () => {
+const ServiceEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const router = useRouter()
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-  useServiceOfferEditDetail();
+  useServiceOfferEditDetail({handleNext});
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">

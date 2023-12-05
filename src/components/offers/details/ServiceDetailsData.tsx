@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import React from "react";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import Image from "next/image";
+import { OffersTableRowTypes } from "@/types/offers";
+import { filterService } from "@/utils/utility";
 
-const ServiceDetailsData = () => {
+const ServiceDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes }) => {
   const router = useRouter();
 
   const serviceData = [
@@ -62,7 +64,10 @@ const ServiceDetailsData = () => {
       <div className="flex justify-between  pb-5 " id="Service Details">
         <h2 className="text-[#393939] text-lg font-medium">Service Details</h2>
         <button
-          onClick={() => router.push("/offers/edit")}
+           onClick={() => router.push({
+            pathname: "/offers/edit",
+            query: { offer: offerDetails?.id },
+          })}
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <Image src={editIcon} alt="editIcon" />
@@ -87,18 +92,18 @@ const ServiceDetailsData = () => {
           <span> Total Price</span>
         </div>
 
-        {serviceData.map((item, index) => (
+        {offerDetails?.serviceDetail?.serviceDetail.map((item, index) => (
           <div
             className="grid grid-cols-[minmax(250px,_100%)_minmax(300px,_100%)_minmax(130px,_100%)_minmax(80px,_100%)_minmax(80px,_100%)_minmax(92px,_92px)]  mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
             key={index}
           >
-            <span>{item.title}</span>
-            <span>{item.description}</span>
+            <span>{item?.serviceTitle}</span>
+            <span>{item?.description}</span>
 
-            <span>{item.values.price}</span>
-            <span> {item.values.unit}</span>
-            <span> {item.values.count}</span>
-            <span> {item.values.totalPrice}</span>
+            <span>{item?.price}</span>
+            <span> {item?.unit}</span>
+            <span> {item?.count}</span>
+            <span> {item?.totalPrice}</span>
           </div>
         ))}
       </div>
@@ -111,13 +116,14 @@ const ServiceDetailsData = () => {
               Sub Total
             </span>
             <span className="text-[#4B4B4B] text-base font-medium">
-              2000CHF
+              {offerDetails?.subTotal}
             </span>
           </div>
           <div className="flex flex-col gap-2 ml-5">
             <span className="text-[#4D4D4D] text-[14px] font-normal">Tax%</span>
             <span className="text-[#4B4B4B] text-base font-medium">
-              100CHF (7.7%)
+              {offerDetails?.taxAmount} (7.7%)
+
             </span>
           </div>
         </div>
@@ -130,7 +136,7 @@ const ServiceDetailsData = () => {
           </span>
 
           <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-            2100.50 CHF
+            {offerDetails?.total} CHF
           </span>
         </div>
       </div>

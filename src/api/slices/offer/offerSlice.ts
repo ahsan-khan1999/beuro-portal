@@ -56,7 +56,7 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
 
         try {
             console.log("comming");
-            
+
             const { offerId, step, stage } = data
             let apiData = { ...data, offerId: offerId, step: step }
 
@@ -92,12 +92,14 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             thunkApi.dispatch(setOfferDetails(objectToUpdate));
             return response?.data?.Offer;
         } catch (e: any) {
-            if (Array.isArray(e?.data?.data?.address)) {
-                let transformedValidationMessages = transformValidationMessages(e?.data?.data?.address)
-                setErrors(setError, transformedValidationMessages, translate);
-            } else {
-                setErrors(setError, e?.data?.data, translate);
-            }
+            // if (Array.isArray(e?.data?.data?.address)) {
+            //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.address)
+            //     setErrors(setError, transformedValidationMessages, translate);
+            // } else {
+            // }
+            console.log(e,"event");
+            
+            setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
             return false;
         }
