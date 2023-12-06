@@ -37,7 +37,7 @@ const EditOffersDetails = () => {
     [ModalType.SHARE_IMAGES]: <ShareImages onClose={onClose} />,
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} />
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"}/>
     ),
     [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails} />,
   };

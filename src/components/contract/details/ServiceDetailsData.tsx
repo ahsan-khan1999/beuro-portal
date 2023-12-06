@@ -1,56 +1,9 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
+import { contractTableTypes } from "@/types/contract";
 import React from "react";
 
-const ServiceDetailsData = () => {
-  const serviceData = [
-    {
-      title: `2 Mitarbeiter  Lorem ipsum dorl`,
-      description: `Kostenübernahme bei lore
-      Ipsum dollar smith emit em..`,
-      values: {
-        price: 1000,
-        unit: "Std.",
-        count: 2,
-        totalPrice: "2000CHF",
-      },
-    },
-    {
-      title: `2 Mitarbeiter 
-      Lorem ipsum dorl`,
-      description: `Kostenübernahme bei lore
-      Ipsum dollar smith emit em..`,
-      values: {
-        price: 1000,
-        unit: "Std.",
-        count: 2,
-        totalPrice: "2000CHF",
-      },
-    },
-    {
-      title: `2 Mitarbeiter 
-      Lorem ipsum dorl`,
-      description: `Kostenübernahme bei lore
-      Ipsum dollar smith emit em..`,
-      values: {
-        price: 1000,
-        unit: "Std.",
-        count: 2,
-        totalPrice: "2000CHF",
-      },
-    },
-    {
-      title: `2 Mitarbeiter 
-      Lorem ipsum dorl`,
-      description: `Kostenübernahme bei lore
-      Ipsum dollar smith emit em..`,
-      values: {
-        price: 1000,
-        unit: "Std.",
-        count: 2,
-        totalPrice: "2000CHF",
-      },
-    },
-  ];
+const ServiceDetailsData = ({ contractDetails }: { contractDetails: contractTableTypes }) => {
+
 
   return (
     <div className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit" id="Service Details">
@@ -75,18 +28,18 @@ const ServiceDetailsData = () => {
           <span> Total Price</span>
         </div>
 
-        {serviceData.map((item, index) => (
+        {contractDetails?.offerID?.serviceDetail?.serviceDetail.map((item, index) => (
           <div
             className="grid grid-cols-[minmax(250px,_100%)_minmax(300px,_100%)_minmax(130px,_100%)_minmax(80px,_100%)_minmax(80px,_100%)_minmax(92px,_92px)]  mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
             key={index}
           >
-            <span>{item.title}</span>
+            <span>{item.serviceTitle}</span>
             <span>{item.description}</span>
 
-            <span>{item.values.price}</span>
-            <span> {item.values.unit}</span>
-            <span> {item.values.count}</span>
-            <span> {item.values.totalPrice}</span>
+            <span>{item.price}</span>
+            <span> {item.unit}</span>
+            <span> {item.count}</span>
+            <span> {item.totalPrice}</span>
           </div>
         ))}
       </div>
@@ -99,13 +52,13 @@ const ServiceDetailsData = () => {
               Sub Total
             </span>
             <span className="text-[#4B4B4B] text-base font-medium">
-              2000CHF
+              {contractDetails?.offerID?.subTotal}
             </span>
           </div>
           <div className="flex flex-col gap-2 ml-5">
             <span className="text-[#4D4D4D] text-[14px] font-normal">Tax%</span>
             <span className="text-[#4B4B4B] text-base font-medium">
-              100CHF (7.7%)
+              {contractDetails?.offerID?.taxAmount} (7.7%)
             </span>
           </div>
         </div>
@@ -118,7 +71,7 @@ const ServiceDetailsData = () => {
           </span>
 
           <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-            2100.50 CHF
+            {contractDetails?.offerID?.total} CHF
           </span>
         </div>
       </div>

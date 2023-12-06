@@ -8,11 +8,13 @@ import { setImageFieldValues } from "@/utils/utility";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 
-export const useUploadImageOffer = (handleImageSlider: Function) => {
+export const useUploadImageOffer = (handleImageSlider: Function, type: string) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails} = useAppSelector((state) => state.offer);
+  const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+  const { contractDetails } = useAppSelector((state) => state.contract);
+
   const {
     handleSubmit,
     control,
@@ -22,15 +24,27 @@ export const useUploadImageOffer = (handleImageSlider: Function) => {
   } = useForm();
   const fields = ImageUploadFormField(loading, control, handleImageSlider);
   useMemo(() => {
-    if (offerDetails?.id) setImageFieldValues(setValue, offerDetails?.images)
-  }, [offerDetails?.id])
+    if (type === "Offer") {
+      setImageFieldValues(setValue, offerDetails?.images)
+    } else if (type === "Contract") {
+      setImageFieldValues(setValue, contractDetails?.offerID?.images)
+    }
+  }, [offerDetails?.id, contractDetails?.id])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)?.filter(value => value);
-    const apiData = { images: filteredList, step: 5, id: offerDetails?.id, stage: ComponentsType.customerEdit, type: "Test" }
+    if (type === "Offer") {
+      const filteredList = Object.values(data)?.filter(value => value);
+      const apiData = { images: filteredList, step: 5, id: offerDetails?.id, stage: ComponentsType.customerEdit, type: "Test" }
 
-    const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
-    if (response?.payload) handleImageSlider();
+      const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+      if (response?.payload) handleImageSlider();
+    } else if (type === "Contract") {
+      const filteredList = Object.values(data)?.filter(value => value);
+      const apiData = { images: filteredList, step: 5, id: contractDetails?.offerID?.id, stage: ComponentsType.customerEdit, type: "Test" }
+
+      const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+      if (response?.payload) handleImageSlider();
+    } else { }
 
   };
   return {

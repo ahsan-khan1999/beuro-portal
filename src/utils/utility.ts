@@ -471,6 +471,13 @@ export function getOfferStatusColor(status: string) {
   else return "#FF376F"
 }
 
+export function getContractStatusColor(status: string) {
+  if (staticEnums["ContractStatus"][status] == staticEnums["ContractStatus"]["Open"]) return "#4A13E7";
+  else if (staticEnums["ContractStatus"][status] == staticEnums["ContractStatus"]["Confirmed"]) return "#45C769";
+  else if (staticEnums["ContractStatus"][status] == staticEnums["ContractStatus"]["Cancelled"]) return "#FF0000";
+  else return "#FF376F"
+}
+
 
 
 export function calculateTax(amount: number) {

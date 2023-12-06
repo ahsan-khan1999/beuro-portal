@@ -17,7 +17,6 @@ const DeleteConfirmation_1 = ({
   subHeading: string;
 }) => {
   const { modal: { data } } = useAppSelector(state => state.global)
-  console.log(data,"");
 
   
   return (

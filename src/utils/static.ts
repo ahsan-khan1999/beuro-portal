@@ -4134,3 +4134,17 @@ export const DEFAULT_OFFER = {
   status: "",
   type: "",
 }
+
+export const DEFAULT_CONTRACT = {
+  id: "",
+  customer: "",
+  offerTitle: "",
+  totalPrice: "",
+  createdOn: "",
+  email: "",
+  payment: "",
+  status: "",
+  type: "",
+  
+  
+}

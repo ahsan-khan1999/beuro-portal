@@ -6,11 +6,11 @@ import OffersDetailsData from "./OffersDetailsData";
 import useOfferDetails from "@/hooks/offers/useOfferDetails";
 
 const OfferDetails = () => {
-  const { offerDeleteHandler, offerDetails, renderModal, handleImageUpload, handleNotes } = useOfferDetails()
+  const { offerDeleteHandler, offerDetails, renderModal, handleImageUpload, handleNotes,handlePaymentStatusUpdate,handleStatusUpdate } = useOfferDetails()
   return (
     <Layout>
       <DetailsCard>
-        <OfferDetailsCard offerDetails={offerDetails} offerDeleteHandler={offerDeleteHandler} handleNotes={handleNotes} handleImageUpload={handleImageUpload} />
+        <OfferDetailsCard offerDetails={offerDetails} offerDeleteHandler={offerDeleteHandler} handleNotes={handleNotes} handleImageUpload={handleImageUpload} handleStatusUpdate={handleStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate}/>
       </DetailsCard>
 
       <div className="w-full mt-7">

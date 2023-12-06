@@ -11,16 +11,20 @@ import { getUser } from "@/utils/auth.util";
 const Header = () => {
   // const user = isJSON(getUser())
   const { user } = useAppSelector(state => state.auth)
+  
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white">
       <div className="flex items-center">
         <Image
-          src={companyLogo}
+          src={user?.company?.logo || ""}
           alt="Company Logo"
-          className="pr-[50px] border-r-2 border-[#000000] border-opacity-10"
+          className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+          height={50}
+          width={150}
+
         />
         <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
-          Umzugsfuchs{" "}
+          {user?.company?.companyName}{" "}
         </span>
       </div>
       <div className="flex items-center">

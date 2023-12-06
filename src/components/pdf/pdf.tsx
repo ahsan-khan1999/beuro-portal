@@ -438,7 +438,6 @@ export const Pdf = () => {
     setNewPageData(distributeItems());
   }, []);
 
-  console.log(newPageData)
 
   return (
     <YogaPdfContainer>

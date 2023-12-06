@@ -52,7 +52,11 @@ const SERVICE_URLS = {
   leadNotes: "/lead/note/",
   offerNotes: "/offer/note/",
 
-  notes: "/note"
+  notes: "/note",
+  offerStatus: "/offer/updateOfferStatus/",
+  sendEmail: "/offer/updateOfferStatus/",
+  offerPaymentStatus: "/offer/update-payment-status/",
+  contractStatus: "/contract/updateContractStatus/"
 };
 
 const login = (data) =>
@@ -170,17 +174,25 @@ const updateOffer = (data) =>
   put(SERVICE_URLS.offer + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const deleteOffer = (data) =>
   del(SERVICE_URLS.readOffer + `/${data?.id}`, {}, { feature: featureConstants.login });
-
-const readContract = (data) =>
-  get(SERVICE_URLS.contract, data, { feature: featureConstants.login });
-
+const updateOfferStatus = (data) =>
+  put(SERVICE_URLS.offerStatus + `${data?.id}`, data, { feature: featureConstants.login });
+const updatePaymentStatus = (data) =>
+  put(SERVICE_URLS.offerPaymentStatus + `${data?.id}`, data, { feature: featureConstants.login });
+const sendOfferEmail = (data) =>
+  put(SERVICE_URLS.sendEmail + `${data?.id}`, data, { feature: featureConstants.login });
+const readContract = (params) =>
+  get(SERVICE_URLS.contract, params, { feature: featureConstants.login }, { detail: false });
+const readContractDetail = (params) =>
+  get(SERVICE_URLS.contract, params, { feature: featureConstants.login }, { detail: true });
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 
 const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+const updateContractStatus = (data) =>
+  put(SERVICE_URLS.contractStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const deleteContract = (data) =>
-  del(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+  del(SERVICE_URLS.contract + `/${data?.id}`, {}, { feature: featureConstants.login });
 
 const readCompany = (data) =>
   get(SERVICE_URLS.company, data, { feature: featureConstants.login });
@@ -362,6 +374,11 @@ const apiServices = {
   createNotes,
   readContentDetail,
   readOfferDetail,
-  updateOfferNotes
+  updateOfferNotes,
+  updateOfferStatus,
+  sendOfferEmail,
+  updatePaymentStatus,
+  readContractDetail,
+  updateContractStatus
 };
 export default apiServices;

@@ -3,20 +3,12 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Slider } from "../slider/slider";
-import img1 from "@/assets/pngs/leads_detail_img1.png";
-import img2 from "@/assets/pngs/leads_detail_img2.png";
-import img3 from "@/assets/pngs/leads_detail_img3.png";
-import img4 from "@/assets/pngs/leads_detail_img4.png";
-import { useAppSelector } from "@/hooks/useRedux";
-import { Lead } from "@/types/leads";
-import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 
-const ImageSlider = ({ onClose, details }: { onClose: () => void, details?: Lead | OffersTableRowTypes | contractTableTypes }) => {
-  // const { leadDetails } = useAppSelector(state => state.lead)
+const ImageSliderContract = ({ onClose, details }: { onClose: () => void, details: contractTableTypes }) => {
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
-    images: details?.images?.map((item) => ({ imageSrc: item }))
+    images: details?.offerID?.images?.map((item) => ({ imageSrc: item }))
   };
 
   return (
@@ -46,4 +38,4 @@ const ImageSlider = ({ onClose, details }: { onClose: () => void, details?: Lead
   );
 };
 
-export default ImageSlider;
+export default ImageSliderContract;

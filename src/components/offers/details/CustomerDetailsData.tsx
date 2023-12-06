@@ -30,7 +30,17 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
 
       <hr className="opacity-20 mb-5" />
       <div className="mt-5">
-        <div className="grid grid-cols-3 gap-x-3 mb-5">
+        <div className="grid grid-cols-3 gap-3 mb-5">
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              Offer Title
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {offerDetails?.title}
+
+            </div>
+          </div>
+          
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               Customer Type
@@ -60,8 +70,6 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
               </div>
             </div>
           }
-        </div>
-        <div className="grid grid-cols-3 gap-x-3">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               Email Address
@@ -90,6 +98,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
             </div>
           </div>
         </div>
+
         <div className="mt-5">
           <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
           <div className="grid grid-cols-3 gap-x-3">
@@ -123,7 +132,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
           </div>
         </div>
       </div>
-    </LeadsCardLayout>
+    </LeadsCardLayout >
   );
 };
 

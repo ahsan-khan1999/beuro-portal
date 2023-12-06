@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DropDownItems } from "./drop-down-items";
 import { DropDownProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
@@ -19,13 +19,15 @@ export const DropDown = ({
 }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
-
+  
   const toggleDropDown = (item: string) => {
     onItemSelected(item);
     !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
-
+  useEffect(() => {
+    setSelectedItem(defaultSelectedItem)
+  }, [defaultSelectedItem])
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =

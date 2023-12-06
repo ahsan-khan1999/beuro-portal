@@ -97,10 +97,51 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             //     setErrors(setError, transformedValidationMessages, translate);
             // } else {
             // }
-            console.log(e,"event");
-            
+            console.log(e, "event");
+
             setErrors(setError, e?.data?.data, translate);
-            thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const updateOfferStatus: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/status", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updateOfferStatus(data);
+            thunkApi.dispatch(setOfferDetails(response?.data?.Offer))
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const updatePaymentStatus: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/payment", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updatePaymentStatus(data);
+            thunkApi.dispatch(setOfferDetails(response?.data?.Offer))
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/email/", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.sendOfferEmail(data);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
         }
     });
@@ -214,6 +255,33 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(createOfferNotes.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateOfferStatus.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateOfferStatus.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateOfferStatus.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(sendOfferEmail.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(sendOfferEmail.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(sendOfferEmail.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updatePaymentStatus.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updatePaymentStatus.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updatePaymentStatus.rejected, (state) => {
             state.loading = false
         });
 

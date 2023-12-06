@@ -66,7 +66,7 @@ export const useServiceOfferEditDetail = ({ handleNext }: { handleNext: (current
   const onServiceSelect = (id: string, index: number) => {
 
     if (!id) return;
-    const selectedService: Service[] = service.filter((item) => item.id === id)
+    const selectedService: Service[] = service.filter((item) => item.serviceName === id)
     if (selectedService?.length > 0) {
       dispatch(setServiceDetails(selectedService[0]))
       setValue(`serviceDetail.${index}.price`, selectedService[0].price)
@@ -147,6 +147,7 @@ export const useServiceOfferEditDetail = ({ handleNext }: { handleNext: (current
     if (!apiData?.isDiscount) {
       delete apiData["discountAmount"]
       delete apiData["discountType"]
+      delete apiData["discountDescription"]
 
     }
     if (!apiData?.isTax) {

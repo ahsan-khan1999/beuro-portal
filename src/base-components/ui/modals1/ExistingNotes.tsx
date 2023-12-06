@@ -7,6 +7,7 @@ import { Lead } from "@/types/leads";
 import { useAppSelector } from "@/hooks/useRedux";
 import {  formatDateReverse } from "@/utils/utility";
 import { OffersTableRowTypes } from "@/types/offers";
+import { contractTableTypes } from "@/types/contract";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -15,7 +16,7 @@ const ExistingNotes = ({
 }: {
   handleAddNote: (id: string) => void;
   onClose: () => void;
-  leadDetails: Lead | OffersTableRowTypes
+  leadDetails: Lead | OffersTableRowTypes | contractTableTypes
 }) => {
   const { notes } = useAppSelector(state => state.note)
   

@@ -10,10 +10,20 @@ import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
 import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
+import { formatDateTimeToDate } from "@/utils/utility";
+import { contractTableTypes } from "@/types/contract";
+import { formatDateToCustomString } from "@/utils/functions";
+interface ContractDetailCardProps {
+  contractDetails: contractTableTypes
+  offerDeleteHandler: () => void
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+  handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+  handleStatusUpdate: (id: string) => void
+  handlePaymentStatusUpdate: (id: string) => void
 
-const ContractDetailsCard = () => {
+}
+const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, handlePaymentStatusUpdate, handleStatusUpdate, offerDeleteHandler }: ContractDetailCardProps) => {
   const router = useRouter();
-
   return (
     <ContractCardLayout>
       <div className="flex justify-between items-center  ">
@@ -47,7 +57,7 @@ const ContractDetailsCard = () => {
           />
           <Image src={downloadIcon} alt="downloadIcon" />
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={offerDeleteHandler}/>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -59,7 +69,7 @@ const ContractDetailsCard = () => {
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
               Contract ID:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">V-2000</span>
+            <span className="text-base font-medium text-[#4B4B4B]">{contractDetails.contractNumber}</span>
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
@@ -67,7 +77,7 @@ const ContractDetailsCard = () => {
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
-              Office Cleaning Munich Lorem Ipsum dollar
+              {contractDetails.offerID?.title}
             </span>
           </div>
           <div className="flex gap-[10px]">
@@ -75,7 +85,8 @@ const ContractDetailsCard = () => {
               Worker:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
-              Ahamad Rahal Ali
+              {contractDetails.offerID?.customerID?.fullName}
+
             </span>
           </div>
         </div>
@@ -85,7 +96,8 @@ const ContractDetailsCard = () => {
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
               Offer ID:
             </span>
-            <span className="text-base font-medium text-[#4A13E7]">A-2000</span>
+            <span className="text-base font-medium text-[#4A13E7]">            {contractDetails.offerID?.offerNumber}
+            </span>
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
@@ -93,7 +105,7 @@ const ContractDetailsCard = () => {
             </span>
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
-                25/08 2023
+                {formatDateToCustomString(contractDetails.createdAt)}
               </span>
             </div>
           </div>
@@ -103,7 +115,7 @@ const ContractDetailsCard = () => {
             </span>
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
-                25/08 to 25/08
+                {contractDetails?.offerID?.date?.map((item) => (`${formatDateTimeToDate(item.startDate)} to ${formatDateTimeToDate(item.endDate)}`))}
               </span>
             </div>
           </div>
@@ -115,7 +127,7 @@ const ContractDetailsCard = () => {
               Offer Status:
             </span>
             <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
-              Signed
+              {contractDetails.offerID?.offerStatus}
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
@@ -123,7 +135,8 @@ const ContractDetailsCard = () => {
               Payment Method:
             </span>
             <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-default">
-              Cash
+              {contractDetails.offerID?.paymentType}
+
             </span>
           </div>
           <div className="flex items-center gap-[11px]">
@@ -131,7 +144,8 @@ const ContractDetailsCard = () => {
               Status:
             </span>
             <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-default">
-              Open
+              {contractDetails.contractStatus}
+
             </span>
           </div>
 
@@ -140,7 +154,7 @@ const ContractDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Notes:
               </span>
-              <Image src={writeIcon} alt="writeIcon" />
+              <Image src={writeIcon} alt="writeIcon" className="cursor-pointer" onClick={(e) => handleNotes(contractDetails?.id, e)}/>
             </div>
           </div>
           <div>
@@ -148,7 +162,7 @@ const ContractDetailsCard = () => {
               <span className="text-[#4D4D4D] font-normal text-base">
                 Images:
               </span>
-              <Image src={imageIcon} alt="editImg" />
+              <Image src={imageIcon} alt="editImg" className="cursor-pointer" onClick={(e) => handleImageUpload(contractDetails?.id, e)} />
             </div>
           </div>
         </div>

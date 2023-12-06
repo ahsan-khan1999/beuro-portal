@@ -114,7 +114,7 @@ const useOffers = () => {
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} />
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"}/>
     ),
     [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails}/>,
   };

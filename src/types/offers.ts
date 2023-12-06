@@ -58,11 +58,11 @@ export interface OffersTableRowTypes {
   discountDescription: string
 }
 
-interface OfferServiceDetails {
+export interface OfferServiceDetails {
   id: string;
   serviceDetail: ServiceList[]
 }
-interface ServiceList {
+export interface ServiceList {
   serviceTitle: string;
   price: number;
   unit: string;

@@ -7,12 +7,14 @@ import { useUploadImageOffer } from "@/hooks/modals/useUploadImageOffer";
 const ImagesUploadOffer = ({
   onClose,
   handleImageSlider,
+  type
 }: {
   handleImageSlider: Function,
   onClose: () => void;
+  type:string
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useUploadImageOffer(handleImageSlider);
+    useUploadImageOffer(handleImageSlider,type);
   return (
     <>
       <BaseModal
