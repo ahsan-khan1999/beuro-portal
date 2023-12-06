@@ -14,7 +14,7 @@ const OfferEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditC
   const router = useRouter()
   const defaultClassName = " ";
   const { fields, control, onSubmit, handleSubmit, errors, error, testFields, register, remove, loading, append } =
-    useEditOfferDetails(handleNext);
+    useEditOfferDetails({handleNext});
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">

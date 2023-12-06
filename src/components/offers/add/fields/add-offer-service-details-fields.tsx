@@ -87,7 +87,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 type: Field.select,
                 id: `serviceDetail.${i}.serviceTitle`,
                 name: `serviceDetail.${i}.serviceTitle`,
-                options: service?.map((item) => ({ label: item?.serviceName, value: item?.id })) || [],
+                options: service?.map((item) => ({ label: item?.serviceName, value: item?.serviceName })) || [],
                 control,
                 // value: "",
                 onItemChange: onCustomerSelect,

@@ -95,48 +95,7 @@ export const useServiceOfferEditDetail = ({ handleNext }: { handleNext: (current
       totalPrices += parseInt(element.totalPrice);
     });
 
-    if (data?.isTax) {
-      taxAmount = calculateTax(totalPrices);
-      totalPricesWithTax = totalPrices + taxAmount;
-    }
-
-    if (data?.isDiscount) {
-
-      if (data?.discountType == 1) {
-        totalPricesWithDiscount = totalPrices - parseInt(data?.discountAmount);
-      } else if (data?.discountType == 0) {
-        const discountPercentage = parseInt(data?.discountAmount);
-        const discountAmount = (totalPrices * (discountPercentage / 100)).toFixed(2);
-
-        totalPricesWithDiscount = totalPrices - parseFloat(discountAmount);
-      }
-    }
-
-    let grandTotal;
-
-    if (data?.isTax && data?.isDiscount) {
-      // Case: Both tax and discount are true
-      if (data?.discountType == 0) {
-        const discountPercentage = parseInt(data?.discountAmount);
-        const discountAmount = (totalPrices * (discountPercentage / 100)).toFixed(2);
-
-        grandTotal = totalPricesWithTax - parseInt(data?.discountAmount);
-      } else {
-        grandTotal = totalPricesWithDiscount
-
-      }
-
-
-    } else if (data?.isTax) {
-      // Case: Only tax is true
-      grandTotal = totalPricesWithTax;
-    } else if (data?.isDiscount) {
-      // Case: Only discount is true
-      grandTotal = totalPricesWithDiscount;
-    } else {
-      // Case: Neither tax nor discount is true
-      grandTotal = totalPrices;
-    }
+    let grandTotal = ((totalPrices + totalPricesWithTax) - totalPricesWithDiscount)
 
     setTotal({
       subTotal: totalPrices,
@@ -162,7 +121,7 @@ export const useServiceOfferEditDetail = ({ handleNext }: { handleNext: (current
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
-        discountType:  staticEnums["DiscountType"][offerDetails?.discountType],
+        discountType: staticEnums["DiscountType"][offerDetails?.discountType],
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription

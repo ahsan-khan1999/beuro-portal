@@ -168,7 +168,7 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
   };
 
   return {
-    fields: [...offerFields, ...dateFields],
+    fields: [...offerFields, ...dateFields,...submit],
     onSubmit,
     control,
     handleSubmit,
