@@ -20,12 +20,14 @@ export enum EditComponentsType {
 const EditOffersDetailsData = ({
   shareImgModal,
   handleImagesUpload,
+  handleImageSlider
 }: {
   shareImgModal: Function;
   handleImagesUpload: (
-    item?: OffersTableRowTypes,
-    e?: React.MouseEvent<HTMLImageElement>
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  handleImageSlider: () => void
 }) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
     EditComponentsType.offerEdit
@@ -115,6 +117,7 @@ const EditOffersDetailsData = ({
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImagesUpload}
             tabType={tabType}
+            handleImageSlider={handleImageSlider}
           />
         </div>
       </div>

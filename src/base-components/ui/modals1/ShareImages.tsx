@@ -13,6 +13,11 @@ import linkedIncon from "@/assets/svgs/linkedIn_icon.svg";
 import gmailIncon from "@/assets/svgs/gmail_icon.svg";
 import messengerIcon from "@/assets/svgs/messenger_icon.svg";
 import copyIcon from "@/assets/svgs/copy_icon.svg";
+import { BaseButton } from "../button/base-button";
+import { useClipboardCopy } from "@/utils/utility";
+import { CopyIcon } from "@/assets/svgs/components/copy-icon";
+import { useRouter } from "next/router";
+import { DOMAIN } from "@/services/HttpProvider";
 
 const ShareImages = ({ onClose }: { onClose: () => void }) => {
   const imgSource = [
@@ -27,6 +32,8 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
     gmailIncon,
     messengerIcon,
   ];
+  const { handleCopy, inputRef, isCopied } = useClipboardCopy()
+  const router = useRouter()
   return (
     <>
       <BaseModal
@@ -63,16 +70,31 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
             </span>
 
             <div className="flex justify-between items-center border border-[#BFBFBF] rounded-lg px-3 p-1 mt-5">
-              <span className="flex items-center gap-[6px]">
+              <span className="flex items-center gap-[6px] w-full">
                 <Image src={copyIcon} alt="copyIcon" />
-                <span className="text-[#393939] font-medium text-base">
-                  https//www.buro.com/share-link
-                </span>
+
+                <input
+                  id={"id"}
+                  className={"text-[#393939] font-medium text-base w-full me-2"}
+                  disabled={true}
+                  value={DOMAIN + router.asPath}
+                  ref={(e) => {
+                    inputRef.current = e;
+                  }}
+                />
               </span>
 
-              <button className="text-[#fff] bg-[#4A13E7] rounded-lg px-4 py-[6px] font-medium text-base w-[110px]">
-                Copy
-              </button>
+          
+              <BaseButton
+                containerClassName={`flex gap-x-1 ${!isCopied ? "bg-lighttest-gray" : "bg-primary"
+                  } py-1 px-2.5 rounded !!border !!border-lightGray`}
+                textClassName={`${!isCopied ? "text-primary" : "text-white"
+                  } font-medium`}
+                buttonText={!isCopied ? "Copy" : "Copied"}
+                onClick={handleCopy}
+              >
+                {!isCopied && <CopyIcon />}
+              </BaseButton>
             </div>
           </div>
         </div>

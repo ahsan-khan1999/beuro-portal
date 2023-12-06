@@ -15,6 +15,7 @@ import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
 import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
+import { useCallback, useRef, useState } from "react";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -484,3 +485,32 @@ export const filterService = (id: string, service: Service[]): string => {
   const filteredService = service.find((item) => item.id === id)
   return filteredService?.serviceName || ""
 }
+
+
+
+export const useClipboardCopy = <
+  T extends HTMLElement = HTMLInputElement
+>() => {
+  const inputRef = useRef<T | null>(null);
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  const handleCopy = useCallback(async () => {
+    if (inputRef.current) {
+      let textToCopy: string = "";
+      if (inputRef.current instanceof HTMLInputElement) {
+        textToCopy = inputRef.current.value;
+      } else {
+        textToCopy = inputRef.current.textContent || "";
+      }
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        setIsCopied(true);
+      } catch (err) {
+        setIsCopied(false);
+      }
+    }
+  }, []);
+
+  return { inputRef, handleCopy, isCopied };
+};

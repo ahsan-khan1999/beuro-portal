@@ -33,6 +33,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   for (let i = 0; i < count; i++) {
     formField.push(
       {
+        //@ts-expect-error
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
@@ -263,6 +264,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
   const formField: FormField[] = [
     {
       containerClass: "mt-[30px]",
+        //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
@@ -357,7 +359,6 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
 
 
 const generateServiceCalulationChildren = (register: UseFormRegister<FieldValues>, setValue: UseFormSetValue<FieldValues>, total?: Total, offerDetails?: OffersTableRowTypes, generateTotal?: () => void, isTax?: boolean, isDiscount?: boolean, taxType?: number, discountType?: number) => {
-  console.log(discountType, "discountType");
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
