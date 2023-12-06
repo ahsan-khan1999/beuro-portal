@@ -14,6 +14,7 @@ export const ProductPurchasedItemsDetails = ({
   movingDetails,
   serviceItem,
   serviceItemFooter,
+  isShowTotal,
 }: PurchasedItemsDetailsProps) => {
   return (
     <div>
@@ -26,7 +27,7 @@ export const ProductPurchasedItemsDetails = ({
           <ProductItem {...item} key={item.title} />
         ))}
 
-        <ProductItemFooter {...serviceItemFooter} />
+        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
       </div>
       <Footer {...footerDetails} />
     </div>

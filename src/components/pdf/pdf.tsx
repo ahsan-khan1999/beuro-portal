@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PreviewCard } from "./preview-card";
 import { ProductPurchasedItemsDetails } from "./preview/productDetails/purchased-items-details";
 import { Aggrement } from "./preview/aggrement/aggrement";
@@ -9,8 +9,298 @@ import {
   ProductItemProps,
 } from "@/types/types";
 import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
+import { YogaPdfContainer } from "./yoga-pdf-container";
+import { ProductItemNewPage } from "./preview/productDetails/product-item-next-page";
 
 export const productItems: ProductItemProps[] = [
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
+  {
+    title: "3 Mitarbeiter ohne Farzeung",
+    description:
+      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
+    price: "150",
+    count: "05.00",
+    total: "750",
+  },
   {
     title: "3 Mitarbeiter ohne Farzeung",
     description:
@@ -125,11 +415,52 @@ export const DUMMY_DATA: PdfProps = {
 };
 
 export const Pdf = () => {
+  const [newPageData, setNewPageData] = useState<ProductItemProps[][]>([]);
+  const maxItemsFirstPage = 6;
+  const maxItemsPerPage = 10;
+  useEffect(() => {
+    const distributeItems = (): ProductItemProps[][] => {
+      const totalItems = DUMMY_DATA.serviceItem.length;
+      let pages: ProductItemProps[][] = [];
+
+      if (totalItems > maxItemsFirstPage) {
+        pages.push(DUMMY_DATA.serviceItem.slice(0, maxItemsFirstPage));
+        for (let i = maxItemsFirstPage; i < totalItems; i += maxItemsPerPage) {
+          pages.push(DUMMY_DATA.serviceItem.slice(i, i + maxItemsPerPage));
+        }
+      } else {
+        pages.push(DUMMY_DATA.serviceItem);
+      }
+
+      return pages;
+    };
+
+    setNewPageData(distributeItems());
+  }, []);
+
+  console.log(newPageData)
+
   return (
-    <div className="mt-[66px] mb-[30px]">
+    <YogaPdfContainer>
       <PreviewCard />
       <div className="flex flex-col gap-y-[30px]">
-        <ProductPurchasedItemsDetails {...DUMMY_DATA} />
+        {newPageData.length > 0 && (
+          <ProductPurchasedItemsDetails
+            {...DUMMY_DATA}
+            serviceItem={newPageData[0]}
+            isShowTotal={newPageData.length === 1}
+          />
+        )}
+        {newPageData.slice(1).map((pageItems, index) => (
+          <ProductItemNewPage
+            key={index}
+            serviceItem={pageItems}
+            footerDetails={DUMMY_DATA.footerDetails}
+            headerDetails={DUMMY_DATA.headerDetails}
+            serviceItemFooter={DUMMY_DATA.serviceItemFooter}
+            isShowTotal={index === newPageData.length - 2}
+          />
+        ))}
         <Aggrement
           contactAddress={DUMMY_DATA.contactAddress}
           headerDetails={DUMMY_DATA.headerDetails}
@@ -145,6 +476,6 @@ export const Pdf = () => {
       <button className="mt-[55px] w-full bg-[#45C769] rounded-[4px] shadow-md py-[10px] text-center text-white">
         Accepted
       </button>
-    </div>
+    </YogaPdfContainer>
   );
 };
