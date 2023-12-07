@@ -1,22 +1,24 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const OfferEditDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
   control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Select Customer ",
+              text: `${translate("offers.offer_details.select_customer")}`,
               htmlFor: "selectCustomer",
               className: "mb-[10px]",
             },
@@ -33,7 +35,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Customer Name",
+              text: `${translate("offers.offer_details.customer_name")}`,
               htmlFor: "customerName",
               className: "mb-[10px]",
             },
@@ -50,7 +52,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Email",
+              text: `${translate("offers.offer_details.email")}`,
               htmlFor: "email",
               className: "mb-[10px]",
             },
@@ -72,13 +74,13 @@ id:"div-field",
       containerClass: "mt-5",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-col-1 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
-            containerClass: "mb-0 col-span-2",
+            containerClass: "mb-0 2xl:col-span-2",
             label: {
-              text: "Offer Title ",
+              text: `${translate("offers.offer_details.offer_title")}`,
               htmlFor: "offerTitle",
               className: "mb-[10px]",
             },
@@ -98,9 +100,9 @@ id:"div-field",
             },
           },
           {
-            containerClass: "mb-0 col-span-1",
+            containerClass: "mb-0 2xl:col-span-1",
             label: {
-              text: "Offer Number",
+              text: `${translate("offers.offer_details.offer_number")}`,
               htmlFor: "offerNumber",
               className: "mb-[10px]",
             },
@@ -122,13 +124,13 @@ id:"div-field",
       containerClass: "mt-5",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Customer Type",
+              text: `${translate("offers.offer_details.customer_type")}`,
               htmlFor: "customerType",
               className: "mb-[10px]",
             },
@@ -145,7 +147,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate("offers.offer_details.phone_number")}`,
               htmlFor: "phoneNumber",
               className: "mb-[10px]",
             },
@@ -162,7 +164,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text: `${translate("offers.offer_details.mobile_number")}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
@@ -183,20 +185,20 @@ id:"div-field",
     {
       containerClass: "mt-5",
       label: {
-        text: "Customer Address",
+        text: `${translate("offers.offer_details.customer_address")}`,
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
       },
 
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Street NO.",
+              text: `${translate("offers.offer_details.street_no")}`,
               htmlFor: "streetNumber",
               className: "mb-[10px]",
             },
@@ -214,7 +216,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Post Code",
+              text: `${translate("offers.offer_details.post_code")}`,
               htmlFor: "post code",
               className: "mb-[10px]",
             },
@@ -233,7 +235,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Country",
+              text: `${translate("offers.offer_details.country")}`,
               htmlFor: "country",
               className: "mb-[10px]",
             },
@@ -257,13 +259,13 @@ id:"div-field",
       containerClass: "mt-5",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Date",
+              text: `${translate("offers.offer_details.date")}`,
               htmlFor: "date",
               className: "mb-[10px]",
             },
@@ -280,7 +282,7 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Date",
+              text: `${translate("offers.offer_details.date")}`,
               htmlFor: "date",
               className: "mb-[10px]",
             },
@@ -302,8 +304,8 @@ id:"div-field",
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
-id:"button",
-        text: "Save",
+        id: "button",
+        text: `${translate("offers.offer_details.save_button")}`,
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

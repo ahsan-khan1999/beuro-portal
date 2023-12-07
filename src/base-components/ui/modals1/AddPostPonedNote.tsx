@@ -5,6 +5,7 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddPostPonedNote } from "@/hooks/follow-up/useAddPostPonedNote";
 import { AddPostPonedNoteProps } from "@/types/follow-up";
+import { useTranslation } from "next-i18next";
 
 const AddPostPonedNote = ({
   onClose,
@@ -13,6 +14,8 @@ const AddPostPonedNote = ({
   const { errors, fields, handleSubmit, onSubmit } = useAddPostPonedNote(
     handleFollowUpsDetails
   );
+
+  const { t: translate } = useTranslation();
 
   return (
     <>
@@ -29,7 +32,7 @@ const AddPostPonedNote = ({
           />
           <div className="flex flex-col">
             <p className="text-2xl font-normal text-[#000] mb-4">
-              Add a postponed Note
+              {translate("follow_up.add_postponed_note_heading")}
             </p>
           </div>
 

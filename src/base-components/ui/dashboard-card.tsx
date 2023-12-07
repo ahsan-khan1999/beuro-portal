@@ -71,7 +71,7 @@ const DashboardCard = ({
   }, [datatest2]);
 
   return (
-    <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
+    <div className={`rounded-[20px] pt-[37px] p-4 lg:pl-[39px] lg:pr-[31px] lg:pb-[42px] ${backgroundColor}`}>
       <div className="flex items-center mb-8">
         <Image src={icon} alt={alt} className="mr-3" />
         <h3 className="text-xl text-white font-semibold">{title}</h3>

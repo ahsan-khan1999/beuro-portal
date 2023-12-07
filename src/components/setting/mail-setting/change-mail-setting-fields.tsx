@@ -1,22 +1,27 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateChangeMailSettingFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
   register,
-  loading,
+  loading
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
+        id: "div-field",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-y-5   lg:gap-x-[60px] ",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Driver",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_driver"
+              )}`,
               htmlFor: "mailDriver",
               className: "mb-[10px]",
             },
@@ -33,7 +38,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Host",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_driver"
+              )}`,
               htmlFor: "mailHost",
               className: "mb-[10px]",
             },
@@ -47,20 +54,12 @@ id:"div-field",
               register,
             },
           },
-        ],
-      },
-    },
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Port",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_port"
+              )}`,
               htmlFor: "mailPort",
               className: "mb-[10px]",
             },
@@ -77,7 +76,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Encryption",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_encryption"
+              )}`,
               htmlFor: "mailEncryption",
               className: "mb-[10px]",
             },
@@ -91,20 +92,12 @@ id:"div-field",
               register,
             },
           },
-        ],
-      },
-    },
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Username",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_user"
+              )}`,
               htmlFor: "mailUsername",
               className: "mb-[10px]",
             },
@@ -121,7 +114,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Password",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_password"
+              )}`,
               htmlFor: "mailPassword",
               className: "mb-[10px]",
             },
@@ -135,21 +130,12 @@ id:"div-field",
               register,
             },
           },
-        ],
-      },
-    },
-
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail From Address",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_address"
+              )}`,
               htmlFor: "mailFormAddress",
               className: "mb-[10px]",
             },
@@ -166,7 +152,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail From Name",
+              text: `${translate(
+                "setting.mail_setting.mail_form_fields.mail_name"
+              )}`,
               htmlFor: "mailFormName",
               className: "mb-[10px]",
             },
@@ -187,7 +175,7 @@ id:"div-field",
     {
       containerClass: "mb-0 mt-[25px]",
       label: {
-        text: "Email",
+        text: `${translate("setting.mail_setting.mail_form_fields.email")}`,
         htmlFor: "mail",
         className: "mb-[10px]",
       },
@@ -206,8 +194,8 @@ id:"div-field",
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
-id:"button",
-        text: "Save Setting",
+        id: "button",
+        text: `${translate("setting.save_setting")}`,
         inputType: "submit",
         className:
           "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

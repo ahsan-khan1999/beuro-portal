@@ -10,13 +10,18 @@ import leadsIcon from "@/assets/svgs/leads.svg";
 import offersIcon from "@/assets/svgs/offers.svg";
 import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const AdminDashboard = () => {
+  const { t: translate } = useTranslation();
+  const router = useRouter();
+
   const dashboardCards = [
     {
       icon: leadsIcon,
       alt: "leads icon",
-      title: "Leads",
+      title: `${translate("dashboard_detail.cards_title.lead")}`,
       subTitle: "2378 Leads",
       id: "202504 ",
       salePercent: "+4.5%",
@@ -25,11 +30,12 @@ const AdminDashboard = () => {
       open: "2782 Open",
       closed: "2782 Close",
       expired: "2782 Expired",
+      route: () => router.push("/leads"),
     },
     {
       icon: offersIcon,
       alt: "offers icon",
-      title: "Offers",
+      title: `${translate("dashboard_detail.cards_title.offer")}`,
       subTitle: "2378 Offers",
       id: "202326 ",
       salePercent: "-4.5%",
@@ -38,11 +44,12 @@ const AdminDashboard = () => {
       open: "2782 Open",
       closed: "2782 Signed",
       expired: "2782 Expired",
+      route: () => router.push("/offers"),
     },
     {
       icon: contractsIcon,
       alt: "contracts icon",
-      title: "Contracts",
+      title: `${translate("dashboard_detail.cards_title.contracts")}`,
       subTitle: "2378 Contracts",
       id: "202505 ",
       salePercent: "+4.5%",
@@ -51,11 +58,12 @@ const AdminDashboard = () => {
       open: "2782 Open",
       closed: "2782 Confirmed",
       expired: "2782 Cancelled",
+      route: () => router.push("/contract"),
     },
     {
       icon: salesIcon,
       alt: "sales icon",
-      title: "Sales",
+      title: `${translate("dashboard_detail.cards_title.sales")}`,
       subTitle: "2378 Sales",
       id: "202705 ",
       salePercent: "+4.5%",
@@ -64,6 +72,7 @@ const AdminDashboard = () => {
       open: "2782 Open",
       closed: "2782 Overdue",
       expired: "2782 Paid",
+      route: () => router.push("/dashboard"),
     },
   ];
   // Sample data for the pie chart
@@ -82,12 +91,12 @@ const AdminDashboard = () => {
       },
     ],
     labels: [
-      "Website",
-      "Google",
-      "Facebook",
-      "Instagram",
-      "Pinterest",
-      "Whatsapp",
+      `${translate("dashboard_detail.charts_labels.website")}`,
+      `${translate("dashboard_detail.charts_labels.google")}`,
+      `${translate("dashboard_detail.charts_labels.facebook")}`,
+      `${translate("dashboard_detail.charts_labels.insta")}`,
+      `${translate("dashboard_detail.charts_labels.pinterest")}`,
+      `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
   };
 
@@ -101,7 +110,7 @@ const AdminDashboard = () => {
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
         <h1 className="font-medium text-[28px] tracking-[0.5px] text-white">
-          Customer Dashboard
+          {translate("dashboard_detail.main_heading")}
         </h1>
       </div>
       
@@ -112,9 +121,10 @@ const AdminDashboard = () => {
         containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
         textClassName="ml-4 w-full  focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF] py-0 rounded-none "
       />
+
       <DashboardFunctions />
 
-      <div className="grid grid-cols-4 gap-x-6">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
         {dashboardCards.map((item, index) => {
           return (
             <DashboardCard
@@ -129,12 +139,16 @@ const AdminDashboard = () => {
               open={item.open}
               closed={item.closed}
               expired={item.expired}
+              route={item.route}
             />
           );
         })}
       </div>
-      <div className="mt-[60px]  grid grid-cols-3">
-        <FollowUpNotificationBar />
+
+      <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] ">
+        <div className="hidden 2xl:block">
+          <FollowUpNotificationBar />
+        </div>
         <ActivitiesNotificationBar />
         <PieChart data={data} />
       </div>

@@ -6,9 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { EmployeeDetail } from "@/types/employee";
 import moment from "moment";
+import { useTranslation } from "next-i18next";
 
 const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -22,7 +24,7 @@ const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) 
             />
           )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ">
-            Employees Details
+           {translate("employees.card_content.heading")}
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
@@ -34,18 +36,18 @@ const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) 
       <div>
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
-            Employee ID:
+          {translate("employees.card_content.employee_id")}:
             <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
-            Created by:
+          {translate("employees.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{name}
             </span>
           </h3>
         </div>
         <h3 className="text-[#4D4D4D] mt-4">
-          Creation Date:
+        {translate("employees.card_content.created_date")}:
           <span className="text-[#4B4B4B] font-medium">
             &nbsp;&nbsp;{moment(date).format("DD/MM/YYYY")}
           </span>

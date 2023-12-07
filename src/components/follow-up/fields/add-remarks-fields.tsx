@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddRemarksFormField: GenerateFollowUpFormField = (
   register,
@@ -7,6 +8,7 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
   control,
   onClick
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 ",
@@ -27,7 +29,7 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
       field: {
         id: "button",
         type: Field.button,
-        text: "Next",
+        text: `${translate("follow_up.next_button")}`,
         inputType: "submit",
         className: "rounded-lg px-4 w-[174px] text-white hover:bg-none ",
         loading,

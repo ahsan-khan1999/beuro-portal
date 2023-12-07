@@ -67,5 +67,6 @@ export const useOfferAditionalDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

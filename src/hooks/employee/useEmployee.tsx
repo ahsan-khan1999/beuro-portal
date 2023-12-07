@@ -1,5 +1,6 @@
 import { FilterType } from "@/types";
 import { Employee } from "@/types/employee";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
@@ -17,6 +18,8 @@ const useEmployee = () => {
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
   const itemsPerPage = 10;
+  const { t: translate } = useTranslation();
+
   useEffect(() => {
     
     dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
@@ -40,7 +43,7 @@ const useEmployee = () => {
     dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } }))
   };
 
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange };
+  return { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange,translate };
 };
 
 export default useEmployee;

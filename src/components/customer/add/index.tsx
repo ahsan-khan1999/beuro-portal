@@ -4,33 +4,37 @@ import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
 import { useRouter } from "next/router";
 import AddCustomerForm from "../add-customer-form";
-type ComponentLookupType = Record<string, JSX.Element>; 
+import { useTranslation } from "next-i18next";
+type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddCustomer = () => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Customer Details");
-  const router = useRouter()
+  const router = useRouter();
   const handleCancel = () => {
-    router.push("/customers")
-  }
+    router.push("/customers");
+  };
 
   const tabSection: tabArrayTypes[] = [
     {
       name: "Customer Details",
       content: <AddCustomerForm handleCancel={handleCancel} />,
-      icon:""
+      icon: "",
     },
   ];
-  
+
   const componentLookup: ComponentLookupType = {
-    "Customer Details": <AddCustomerForm handleCancel={handleCancel} />
-  }
+    "Customer Details": <AddCustomerForm handleCancel={handleCancel} />,
+  };
 
   return (
     <Layout>
-      <h1 className="text-[#222B45] text-xl mb-5">Add new Customer </h1>
+      <h1 className="text-[#222B45] text-xl mb-5">
+        {translate("customers.details.add_customer_heading")}
+      </h1>
 
-      <div className="flex ">
-        <div className="space-y-4 mr-6">
+      <div className="flex flex-col xl:flex-row gap-4">
+        <div className="space-y-4 w-fit">
           <TabSection
             tabsArray={tabSection}
             setTabType={setTabType}

@@ -3,6 +3,7 @@ import { FormField, GenerateLeadAddressFormField, GenerateLeadsFormField } from 
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { staticEnums } from "@/utils/static";
 import icon from "@/assets/svgs/Vector.svg"
+import { useTranslation } from "next-i18next";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -14,25 +15,26 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   handleRemoveAddress
 ) => {
   const formField: FormField[] = [];
+  const { t: translate } = useTranslation();
 
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
         containerClass: "mt-6 ",
         label: {
-          text: `Address ${i} Details`,
+          text: translate("leads.address_details.heading"),
           htmlFor: `address-${i}-details`,
           className: "mb-[10px] text-[#8F8F8F]",
         },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-3 gap-x-3",
+          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Street NO.",
+                text: translate("leads.address_details.street_no"),
                 htmlFor: `streetNumber-${i}`,
                 className: "mb-[10px]",
               },
@@ -49,7 +51,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Post Code",
+                text: translate("leads.address_details.post_code"),
                 htmlFor: `postalCode-${i}`,
                 className: "mb-[10px]",
               },
@@ -66,7 +68,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mb-0",
               label: {
-                text: "Country",
+                text: translate("leads.address_details.country"),
                 htmlFor: "address.country",
                 className: "mb-[10px]",
               },
@@ -99,7 +101,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
               label: {
-                text: "Description",
+                text: translate("leads.address_details.description"),
                 htmlFor: `description-${i}`,
                 className: "mb-[10px]",
               },
@@ -122,7 +124,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 text: "Remove",
                 inputType: "button",
                 className:
-                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i  === 1 && 'hidden'}`,
+                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 1 && 'hidden'}`,
                 onClick: handleRemoveAddress && handleRemoveAddress
               },
             },
@@ -147,7 +149,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("leads.address_details.back_button")}`,
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
@@ -159,14 +161,14 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: `${translate("leads.address_details.next_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
               loading,
             },
           },
-          
+
           {
             containerClass: "mb-0",
             field: {
@@ -175,12 +177,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               className:
                 ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4   h-[40px] text-white hover-bg-none ${count === 2 && 'hidden'}`,
               onClick: handleAddNewAddress && handleAddNewAddress,
-              icon:icon,
-              name:""
+              icon: icon,
+              name: ""
               // icon
             },
           },
-          
+
 
         ],
       },

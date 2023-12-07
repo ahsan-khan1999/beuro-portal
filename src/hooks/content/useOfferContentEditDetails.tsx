@@ -105,5 +105,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

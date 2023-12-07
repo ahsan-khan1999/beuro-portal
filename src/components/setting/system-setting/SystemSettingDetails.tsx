@@ -4,6 +4,7 @@ import InvoiceSection from "./InvoiceSection";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import ConnectWithBuro from "./ConnectWithBuro";
 import SettingLayout from "../SettingLayout";
+import { useTranslation } from "next-i18next";
 
 const SystemSettingDetails = ({
   addTaxHandler,
@@ -14,6 +15,7 @@ const SystemSettingDetails = ({
 }) => {
   const dropDownItems = [{ item: " EUR - Euro" }];
   const [selectedItem, setSelectedItem] = useState(dropDownItems[0].item);
+  const { t: translate } = useTranslation();
 
   const handleItemSelected = (selectedItem: string) => {
     setSelectedItem(selectedItem);
@@ -32,7 +34,7 @@ const SystemSettingDetails = ({
       <SettingLayout>
         <div className="my-3 ">
           <p className="text-[#393939] font-normal text-[18px] my-3">
-            Currency
+            {translate("setting.system_setting.currency")}
           </p>
           <DropDown
             items={dropDownItems}

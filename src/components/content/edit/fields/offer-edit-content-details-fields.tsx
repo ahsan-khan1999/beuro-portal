@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
 import { FieldValues, UseFormRegister } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   register,
@@ -10,11 +11,13 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   onClick,
   trigger, addressCount, attachements, setAttachements, contentDetails,onRemove
 ) => {
+  const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-5",
       label: {
-        text: "Content Name",
+        text: `${translate("content.details.content_name")}`,
         htmlFor: "contentName",
         className: "mb-[10px]",
       },
@@ -35,7 +38,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-4",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
         children: (addressCount) && generateAddressChildren(register, addressCount, onClick,onRemove),
       },
     },
@@ -50,7 +53,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Offer Title",
+              text: translate("content.details.offer_title"),
               htmlFor: "offerContent.title",
               className: "mb-[10px]",
             },
@@ -67,7 +70,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Offer Description",
+              text: translate("content.details.offer_description"),
               htmlFor: "offerContent.description",
               className: "mb-[10px]",
             },
@@ -84,7 +87,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Email Body",
+              text: translate("content.details.email_body"),
               htmlFor: "offerContent.body",
               className: "mb-[10px]",
             },
@@ -104,7 +107,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Attachments",
+              text: translate("content.details.attachments"),
               htmlFor: "offerContent.attachments",
               className: "mb-[10px]",
             },

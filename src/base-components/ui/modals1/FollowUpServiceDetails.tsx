@@ -2,7 +2,8 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import Image from "next/image";
 import React from "react";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import {  FollowUpServicesDetailsProps } from "@/types/follow-up";
+import { FollowUpServicesDetailsProps } from "@/types/follow-up";
+import { useTranslation } from "next-i18next";
 
 type details = {
   label: string;
@@ -10,37 +11,38 @@ type details = {
 };
 
 const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
+  const { t: translate } = useTranslation();
   const detailsData: details[] = [
     {
-      label: "Required Service",
+      label: `${translate("follow_up.service_details.required_service")}`,
       value: "Cleaning",
     },
     {
-      label: "Desire Date",
+      label: `${translate("follow_up.service_details.desire_date")}`,
       value: "12/09/2023",
     },
     {
-      label: "Contact Availability",
+      label: `${translate("follow_up.service_details.availability")}`,
       value: "Morning(9am to 12am)",
     },
     {
-      label: "Flexibility",
+      label: `${translate("follow_up.service_details.flexibility")}`,
       value: "25/09 to 28/09",
     },
     {
-      label: "Preferred Contact",
+      label: `${translate("follow_up.service_details.prefer_contact")}`,
       value: "Via Email",
     },
     {
-      label: "Budget",
+      label: `${translate("follow_up.service_details.budget")}`,
       value: "Less then 1000CHF",
     },
     {
-      label: "Lead Source",
+      label: `${translate("follow_up.service_details.lead_source")}`,
       value: "Instagram",
     },
     {
-      label: "Other Services",
+      label: `${translate("follow_up.service_details.other_services")}`,
       value: "Cleaning, Moving, Painting",
     },
   ];
@@ -61,7 +63,7 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
 
           <div className="flex flex-col">
             <h2 className="font-medium text-[18px] text-[#393939] mb-[23px]">
-              Services Details
+              {translate("follow_up.service_details.heading")}
             </h2>
 
             <hr className="opacity-10" />
@@ -78,7 +80,10 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
             </section>
 
             <section className="flex flex-col gap-y-[10px]">
-              <p className="text-sm font-normal ">Additional Details</p>
+              <p className="text-sm font-normal ">
+                {" "}
+                {translate("follow_up.additional_detail_heading")}
+              </p>
               <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has a been the industry's standard dummy

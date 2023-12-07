@@ -32,6 +32,7 @@ const EmploysDetails = () => {
             handleDelete={deleteHandler}
           />
         </DetailsCard>
+<<<<<<< HEAD
         <div className="flex mt-8">
           <EmployeeForm
             isUpdate={isUpdate}
@@ -43,6 +44,24 @@ const EmploysDetails = () => {
             errors={errors}
           />
           <SideCard />
+=======
+        <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
+          <div className="xl:col-span-2">
+            <EmployeeForm
+              isUpdate={isUpdate}
+              handlePasswordReset={handlePasswordReset}
+              setIsUpdate={setIsUpdate}
+              employeeDetail={employeeDetail}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+          <div className="xl:col-span-1">
+            <SideCard />
+          </div>
+>>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
         </div>
       </Layout>
 

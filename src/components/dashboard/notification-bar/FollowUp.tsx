@@ -18,6 +18,7 @@ import AllLeads from "@/base-components/ui/modals1/AllLeads";
 import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
 import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
 import { readFollowUpDetail } from "@/api/slices/followUp/followUp";
+import { useTranslation } from "next-i18next";
 
 export const FollowUpNotificationBar = () => {
   const followUp = [
@@ -124,6 +125,7 @@ export const FollowUpNotificationBar = () => {
       day: "1 Day",
     },
   ];
+  const { t: translate } = useTranslation();
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { followUpDetails } = useAppSelector((state) => state.followUp);
@@ -241,11 +243,14 @@ export const FollowUpNotificationBar = () => {
   };
   return (
     <>
-      <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]     ">
-        <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
-          <h1 className="text-[#18181B]  font-medium">Follow Ups</h1>
-        </div>
-        <div className="overflow-y-scroll max-h-[340px]">
+      <div className="bg-white rounded-[20px] h-[397.089px]">
+        <h1 className=" mb-3 ml-[40px] pt-5 text-[#18181B]  font-medium">
+          {translate("dashboard_detail.follow_up_heading")}
+        </h1>
+
+        <hr className="opacity-10" />
+
+        <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar pl-5 pr-[5px] pb-[14px] mr-1">
           {followUp.map((item, index) => {
             return (
               <div
@@ -307,7 +312,7 @@ export const FollowUpNotificationBar = () => {
               onClick={() => handleFollowUps()}
               className=" text-primary w-fit text-sm font-medium "
             >
-              View All
+              {translate("dashboard_detail.view_all")}
             </button>
           </div>
         </div>

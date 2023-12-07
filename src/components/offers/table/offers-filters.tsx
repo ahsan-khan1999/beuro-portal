@@ -4,23 +4,27 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType } from "@/types";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import React, { SetStateAction } from "react";
 
 export default function OffersFilters({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
+  const { t: translate } = useTranslation();
+  const router = useRouter();
 
   const checkbox: CheckBoxType[] = [
-    { label: "Open", type: "open" },
-    { label: "Signed", type: "signed" },
-    { label: "Expired", type: "expire" },
-    { label: "Rejected", type: "rejected" },
+    { label: translate("offers.table_functions.open"), type: "open" },
+    { label: translate("offers.table_functions.signed"), type: "signed" },
+    { label: translate("offers.table_functions.expire"), type: "expire" },
+    { label: translate("offers.table_functions.rejected"), type: "rejected" },
 
   ];
 
   const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
 
   return (
-    <div className="flex">
-      <div className="flex items-center space-x-4">
+    <div className="flex flex-col xl:flex-row gap-4">
+      <div className="flex gap-x-4 w-full xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
             checkboxFilter={filter}
@@ -51,6 +55,8 @@ export default function OffersFilters({ filter, setFilter }: { filter: FilterTyp
           typeList={typeList}
         />
       </div>
+     
+    
     </div>
   );
 }

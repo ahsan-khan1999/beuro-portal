@@ -43,5 +43,6 @@ export const useContractEmail = (
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

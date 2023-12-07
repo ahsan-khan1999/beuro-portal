@@ -8,7 +8,7 @@ import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
-const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePaymentStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string) => void, handleInvoiceStatusUpdate: (id: string) => void }) => {
+const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePaymentStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string,status:string) => void, handleInvoiceStatusUpdate: (id: string,status:string) => void }) => {
   const router = useRouter();
   return (
     <div>
@@ -40,7 +40,7 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
               <DropDown
                 items={Object.keys(staticEnums['PaymentType']).map((item) => ({ item: item }))}
                 selectedItem={item.paymentType}
-                onItemSelected={() => handlePaymentStatusUpdate(item.id)}
+                onItemSelected={(status) => handlePaymentStatusUpdate(item.id,status)}
                 dropDownClassName={`${staticEnums['PaymentType'][item.paymentType] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
@@ -50,7 +50,7 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
               <DropDown
                 items={Object.keys(staticEnums['InvoiceStatus']).map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={() => handleInvoiceStatusUpdate(item.id)}
+                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id,status)}
                 dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}

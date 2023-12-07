@@ -37,13 +37,14 @@ export const svgs = {
   setting: <SettingsIcon />,
   dummy: <></>,
 };
+
 const SideBar = () => {
   const userRole = 1;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   return (
     <div className="fixed overflow-x-hidden  overflow-y-scroll  bg-white rounded-r-[6px] ">
-      <div className="max-w-[247px] pt-6 px-4 pb-8   relative      sidebar-height    flex flex-col">
+      <div className="max-w-[247px] pt-6 px-4 pb-8 relative sidebar-height flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {
             return (
@@ -53,7 +54,7 @@ const SideBar = () => {
                 ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                       "bg-primary rounded-lg"
                       } ${item.className}`}
                   >
@@ -63,15 +64,19 @@ const SideBar = () => {
                     >
                       {item.icon && svgs[item.icon]}
                     </span>
+                   
+
                     <span
-                      className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                      className={`font-medium tracking-[0.5px] ${router.pathname === item.pathname
                         ? "text-white"
-                        : " text-[#4B4B4B]"
+                        : "text-[#4B4B4B]"
                         }`}
                     >
                       {item.title}
                     </span>
                   </button>
+
+
                 ) : item.role.includes(userRole) ? (
                   <>
                     <button
@@ -79,7 +84,7 @@ const SideBar = () => {
                         item.pathname && router.push({ pathname: item.pathname, query: { filter: item.query } })
 
                       }}
-                      className={`flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                         "bg-primary rounded-lg"
                         }`}
                     >
@@ -129,11 +134,11 @@ const SideBar = () => {
                       item.inner &&
                       item.inner.map((it, ind) => {
                         return (
-                          <div className=" mt-3 ml-8 px-3" key={ind}>
+                          <div className=" mt-3 px-3" key={ind}>
                             <button
-                              className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
+                              className="text-[#4B4B4B] hover:bg-[#E9E1FF]  rounded-lg font-medium tracking-[0.5px]  px-3 py-2 w-full"
                               onClick={() =>
-                                it.pathname && router.push({ pathname: it.pathname, query:  { filter: it.query } })
+                                it.pathname && router.push({ pathname: it.pathname, query: { filter: it.query } })
                               }
                             >
                               {it.title}
@@ -150,7 +155,7 @@ const SideBar = () => {
 
         <Image src={logo} alt="Logo" className=" mt-auto pt-10 ml-3 pb-2" />
       </div>
-    </div>
+    </div >
   );
 };
 

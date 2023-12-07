@@ -9,6 +9,7 @@ import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const OfferEditImages = ({
   shareImgModal,
@@ -24,18 +25,22 @@ const OfferEditImages = ({
   tabType: number;
   handleImageSlider: () => void
 }) => {
-  const leadsImgs = [
+  const offersImgs = [
     leadsDetailsImg1,
     leadsDetailsImg2,
     leadsDetailsImg3,
     leadsDetailsImg4,
   ];
   const { offerDetails } = useAppSelector(state => state.offer)
+
+  const { t: translate } = useTranslation();
   return (
     <LeadsDetailImgLayout>
       <div className="flex flex-col">
         <div className="flex justify-between items-center ml-6 mr-[14px] my-4">
-          <p className="text-lg font-normal text-[#4A13E7] ">Images</p>
+          <p className="text-lg font-normal text-[#4A13E7] ">
+            {translate("offers.side_images.heading")}
+          </p>
           <Image
             src={shareIcon}
             alt="shareIcon"
@@ -59,13 +64,13 @@ const OfferEditImages = ({
 
         <div className="flex justify-between items-center mx-[13px] pb-3">
           <p className={`text-[12px] font-normal text-[#4A13E7] ${offerDetails?.images?.length > 0 ? 'cursor-pointer' : 'cursor-default'}   `} onClick={() => offerDetails?.images?.length > 0 && handleImageSlider()}>
-            View More
+            {translate("offers.side_images.views")}
           </p>
           <span
             onClick={(e) => handleImagesUpload(offerDetails?.id, e)}
             className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}
           >
-            Upload
+            {translate("offers.side_images.upload_button")}
             <Image src={imageUpload} alt="imageUpload" className="ml-2" />
           </span>
         </div>

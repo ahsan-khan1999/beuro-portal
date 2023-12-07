@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const DetailsData = ({
   serviceDetail,
@@ -17,6 +18,7 @@ const DetailsData = ({
   deleteHandler: () => void
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -30,7 +32,7 @@ const DetailsData = ({
             />
           )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            {isUpdate ? "Services Details" : "Services/Product Details"}
+            {isUpdate ? "Services Details" : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
         <div className="flex items-center gap-5">
@@ -42,13 +44,13 @@ const DetailsData = ({
       <div>
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
-            Service ID:
+            {translate("services.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{serviceDetail?.id}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
-            Created by:
+          {translate("services.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{serviceDetail?.createdBy?.fullName}
             </span>
@@ -56,7 +58,7 @@ const DetailsData = ({
         </div>
         {isUpdate && (
           <h3 className="text-[#4D4D4D] mt-4">
-            Creation Date:
+            {translate("services.card_content.created_date")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{formatDateTimeToDate(serviceDetail?.createdAt)}
             </span>

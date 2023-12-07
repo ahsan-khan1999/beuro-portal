@@ -67,6 +67,7 @@ export const useAddFollowUp = (
     errors,
     error,
     customer,
-    lead
+    lead,
+    translate
   };
 };

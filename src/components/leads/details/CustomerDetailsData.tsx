@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const CustomerDetailsData = ({
   onClick,
@@ -14,13 +15,16 @@ const CustomerDetailsData = ({
 }) => {
   const { leadDetails } = useAppSelector(state => state.lead)
 
+  const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
       <div
         className="flex justify-between items-center pb-5 "
         id="Customer Details"
       >
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("leads.customer_details.heading")}
+        </h2>
         <button
           onClick={() =>
             onClick(ComponentsType.customer, ComponentsType.customerEdit)
@@ -28,17 +32,17 @@ const CustomerDetailsData = ({
           className="flex  items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <Image src={editIcon} alt="editIcon" />
-          Edit Details
+          {translate("leads.customer_details.edit_button")}
         </button>
       </div>
 
       <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
-        <div className="grid grid-cols-3 gap-x-3 gap-y-3 mb-5">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3  gap-y-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Customer Type
+              {translate("leads.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {leadDetails?.customerID?.customerType}
@@ -46,7 +50,7 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Your Name
+              {translate("leads.customer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {leadDetails?.customerID?.fullName}
@@ -65,7 +69,7 @@ const CustomerDetailsData = ({
           }
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Email Address
+              {translate("leads.customer_details.email_address")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {leadDetails?.customerID?.email}
@@ -73,7 +77,7 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Phone Number
+              {translate("leads.customer_details.phone_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {leadDetails?.customerID?.phoneNumber}
@@ -81,7 +85,7 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Mobile Number
+              {translate("leads.customer_details.mobile_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {leadDetails?.customerID?.mobileNumber}
@@ -90,11 +94,13 @@ const CustomerDetailsData = ({
         </div>
 
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
-          <div className="grid grid-cols-3 gap-x-3">
+          <h4 className="text-[#8F8F8F] mb-[10px]">
+            {translate("leads.customer_details.address_details")}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Street NO.
+                {translate("leads.customer_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {leadDetails?.customerID?.address?.streetNumber}
@@ -102,7 +108,7 @@ const CustomerDetailsData = ({
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Post Code
+                {translate("leads.customer_details.post_code")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {leadDetails?.customerID?.address?.postalCode}
@@ -111,7 +117,7 @@ const CustomerDetailsData = ({
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Country
+                {translate("leads.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {leadDetails?.customerID?.address?.country}

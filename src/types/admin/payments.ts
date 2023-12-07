@@ -8,3 +8,12 @@ export interface PaymentsAdmin {
   subscriptionAt: Date | null;
   status: string;
 }
+
+export interface SelectMonthProps {
+  handleSelectMonth: () => void;
+}
+
+export interface MonthSelectModalProps {
+  onClose: () => void;
+  handleDownload: () => void;
+}

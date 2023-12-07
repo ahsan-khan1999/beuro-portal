@@ -56,5 +56,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

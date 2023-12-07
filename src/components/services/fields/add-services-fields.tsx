@@ -1,12 +1,11 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
-import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, isUpdate,translate } =
     useServiceDetail(false);
 
   return (
@@ -17,11 +16,11 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          Service/Product Details
+          {translate("services.add_service_heading")}
         </h2>
 
         <BaseButton
-          buttonText="Cancel"
+          buttonText={translate("services.detail.cancel_button")}
           onClick={handleCancel}
           containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         ></BaseButton>
@@ -33,7 +32,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {renderModal()}
+      {/* {renderModal()} */}
     </div>
   );
 };

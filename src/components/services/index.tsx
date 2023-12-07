@@ -8,14 +8,14 @@ import useService from "@/hooks/services/useService";
 import TableHeadings from "./table/TableHeadings";
 
 export default function Services() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleFilterChange } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleFilterChange, translate } =
     useService();
 
   return (
     <Layout>
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl text-[#222B45] ">Services</h1>
-        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
+        <h1 className="text-xl text-[#222B45] ">{translate("services.main_heading")}</h1>
+        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
       </div>
       <TableLayout>
         <TableHeadings />

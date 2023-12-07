@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateServicesFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const servicesDetailsFormField: GenerateServicesFormField = (
   register,
@@ -7,6 +8,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
   isUpdate,
   handleUpdateCancel
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
@@ -18,7 +20,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
           {
             containerClass: "col-span-2 mb-0",
             label: {
-              text: "Service/Product Title",
+              text: `${translate("services.detail.title")}`,
               htmlFor: "serviceName",
               className: "mb-[10px]",
             },
@@ -37,7 +39,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
           {
             containerClass: "col-span-1 mb-0",
             label: {
-              text: "Unit",
+              text: `${translate("services.detail.unit")}`,
               htmlFor: "unit",
               className: "mb-[10px]",
             },
@@ -67,7 +69,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
           {
             containerClass: "col-span-1 mb-0",
             label: {
-              text: "Price",
+              text: `${translate("services.detail.price")}`,
               htmlFor: "price",
               className: "mb-[10px] ",
             },
@@ -89,7 +91,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
     {
       containerClass: "mb-0 mt-5",
       label: {
-        text: "Description",
+        text: `${translate("services.detail.description")}`,
         htmlFor: "description",
         className: "mb-[10px]",
       },
@@ -117,7 +119,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("services.detail.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
               className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
@@ -129,7 +131,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate("services.detail.save_changes_button")}`,
               inputType: "submit",
               className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
                 }`,

@@ -5,7 +5,7 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { FollowUpDetailsProps } from "@/types/follow-up";
 import { formatAddress } from "@/utils/utility";
 import moment from "moment";
-import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 type details = {
   label: string;
@@ -19,6 +19,8 @@ const FollowUpDetails = ({
   status,
   followUpDetails
 }: FollowUpDetailsProps) => {
+
+  const { t: translate } = useTranslation();
 
   const detailsData: details[] = [
     {
@@ -84,19 +86,19 @@ const FollowUpDetails = ({
 
   const addressDetails: details[] = [
     {
-      label: "Street NO.",
+      label: translate("follow_up.address_details.street_no"),
       value: followUpDetails?.customer?.address?.streetNumber,
     },
     {
-      label: "Post Code",
+      label: translate("follow_up.address_details.post_code"),
       value: followUpDetails?.customer?.address?.postalCode,
     },
     {
-      label: "Country",
+      label: translate("follow_up.address_details.country"),
       value: followUpDetails?.customer?.address?.country,
     },
     {
-      label: "Description",
+      label: translate("follow_up.address_details.description"),
       value: followUpDetails?.customer?.address?.country,
     },
   ];
@@ -117,7 +119,9 @@ const FollowUpDetails = ({
 
           <div className="flex flex-col">
             <section className="flex justify-between items-center mb-5">
-              <h2 className="font-medium text-2xl text-black">Details</h2>
+              <h2 className="font-medium text-2xl text-black">
+                {translate("follow_up.main_heading")}
+              </h2>
               <div className="flex items-center gap-x-[14px] mr-5">
                 {/*@ts-ignore  */}
                 {!followUpDetails?.isPostponed &&
@@ -138,9 +142,8 @@ const FollowUpDetails = ({
                           fill="#4A13E7"
                         />
                       </svg>
-                      Postponed
+                      {translate("follow_up.post_pond_button")}
                     </span>
-
                   </>
                 }
                 {
@@ -172,7 +175,7 @@ const FollowUpDetails = ({
                         </clipPath>
                       </defs>
                     </svg>
-                    Mark as Complete
+                    {translate("follow_up.mark_as_complete")}
                   </span>
                 }
                 {
@@ -206,7 +209,7 @@ const FollowUpDetails = ({
                         </clipPath>
                       </defs>
                     </svg>
-                    Completed
+                    {translate("follow_up.completed_button")}
                   </span>
                 }
               </div>
@@ -237,7 +240,7 @@ const FollowUpDetails = ({
               <div className="flex flex-col border-r border-[#000] border-opacity-10 pr-5">
                 <article className="flex gap-x-[50px] items-center">
                   <h2 className="text-lg font-medium text-[#393939]">
-                    Customer Details
+                    {translate("follow_up.customer_detail_heading")}
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
                     ID: {followUpDetails?.customer?.refID}
@@ -264,7 +267,7 @@ const FollowUpDetails = ({
               {/* follow up details */}
               <div className="flex flex-col pl-[30px]">
                 <h2 className="text-lg font-medium text-[#393939]">
-                  Follow up Details
+                  {translate("follow_up.follow_up_detail_heading")}
                 </h2>
 
                 <div className="grid grid-cols-2 gap-x-3 mt-[22px]">
@@ -285,7 +288,7 @@ const FollowUpDetails = ({
 
                 <div className="flex flex-col gap-y-[10px] mb-5">
                   <p className="text-sm font-normal text-[#4D4D4D]">
-                    Additional Detail
+                    {translate("follow_up.additional_detail_heading")}
                   </p>
                   <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base">
                     {followUpDetails?.additionalDetails}
@@ -302,7 +305,7 @@ const FollowUpDetails = ({
               <div className="flex flex-col">
                 <article className="flex gap-x-[50px] items-center">
                   <h2 className="text-lg font-medium text-[#393939]">
-                    Lead Details
+                    {translate("follow_up.lead_detail_heading")}
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
                     ID: {followUpDetails?.lead?.refID}
@@ -326,7 +329,7 @@ const FollowUpDetails = ({
               {/* Address details */}
               <div className="flex flex-col mt-5">
                 <h2 className="text-base font-normal text-[#8F8F8F]">
-                  Address Details
+                  {translate("follow_up.address_detail_heading")}
                 </h2>
 
                 <div className="grid grid-cols-[minmax(200px,_100%)_minmax(100px,_100%)_minmax(200px,_100%)_minmax(400px,_100%)] gap-x-[25px] mt-3">

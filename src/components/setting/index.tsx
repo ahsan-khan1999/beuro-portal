@@ -16,8 +16,10 @@ import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const Setting = () => {
+  const { t: translate } = useTranslation();
   const [switchDetails, setSwitchDetails] = useState(0);
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -58,9 +60,9 @@ const Setting = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading="Add New Tax" />,
+    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading={translate("setting.tax_modal.add_new_tax")} />,
     [ModalType.EXCLUSIVE_TAX]: (
-      <AddTax onClose={onClose} heading="Exclusive Tax" />
+      <AddTax onClose={onClose} heading={translate("setting.tax_modal.exclusive_heading")} />
     ),
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
     [ModalType.CREATION]: (
@@ -76,7 +78,7 @@ const Setting = () => {
   return (
     <>
       <Layout>
-        <h1 className="text-[#222B45] font-normal text-xl">Setting</h1>
+        <h1 className="text-[#222B45] font-normal text-xl">{translate("setting.heading")}</h1>
         <div className="mt-[22px]">
           <SettingTopDataButtons
             switchDetails={switchDetails}

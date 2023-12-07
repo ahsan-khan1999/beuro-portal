@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
   register,
@@ -10,6 +11,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
   count,
   attachements, setAttachements, contentDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-5",
@@ -21,7 +23,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Receipt Title",
+              text: translate("content.details.receipt_title"),
               htmlFor: "receiptContent.title",
               className: "mb-[10px]",
             },
@@ -38,7 +40,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Receipt Description",
+              text: translate("content.details.receipt_description"),
               htmlFor: "receiptContent.description",
               className: "mb-[10px]",
             },
@@ -56,7 +58,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Email Body",
+              text: translate("content.details.email_body"),
               htmlFor: "receiptContent.body",
               className: "mb-[10px]",
             },
@@ -75,7 +77,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Attachments",
+              text: translate("content.details.attachments"),
               htmlFor: "receiptContent.attachments",
               className: "mb-[10px]",
             },
@@ -95,7 +97,6 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
       }
     },
 
-
     {
       containerClass: "mt-6",
       field: {
@@ -108,7 +109,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("content.details.cancel_button")}`,
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
@@ -120,7 +121,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save",
+              text: `${translate("content.details.save_changes_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

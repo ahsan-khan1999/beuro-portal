@@ -1,6 +1,6 @@
 import { SupportRequestAdmin } from "@/types/admin/support-request";
-import Image from "next/image";
 import React from "react";
+
 const DetailsData = ({
   supportDetail,
   handlePreviousClick,

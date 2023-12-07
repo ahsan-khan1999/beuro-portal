@@ -85,5 +85,6 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

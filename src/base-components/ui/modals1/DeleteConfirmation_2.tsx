@@ -4,6 +4,7 @@ import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Button } from "../button/button";
+import { useTranslation } from "next-i18next";
 
 const DeleteConfirmation_2 = ({
   onClose,
@@ -16,12 +17,12 @@ const DeleteConfirmation_2 = ({
   routeHandler: Function;
   loading: boolean
 }) => {
-  
+  const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564.004px] min-h-auto"
+        containerClassName="max-w-[480px] lg:max-w-[564.004px] min-h-fit"
       >
         <div className="relative flex flex-col items-center">
           <Image
@@ -35,7 +36,7 @@ const DeleteConfirmation_2 = ({
             alt="delete_icon"
             className="mt-[59px]"
           />
-          <p className="text-[#000] font-medium text-[20px] leading-7 mt-[44px] max-w-[290px] text-center ">
+          <p className="text-[#000] font-medium text-xl  mt-[44px] max-w-[290px] text-center ">
             {modelHeading}
           </p>
 
@@ -44,15 +45,15 @@ const DeleteConfirmation_2 = ({
               onClick={onClose}
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
-              Cancel
-            </button>
+              {translate("email_tracker.email_delete_modal.cancel_button")}
+            </button >
 
-            <Button id="Delete" inputType="submit" loading={loading} text="Confirm" onClick={routeHandler}
+            <Button id="Delete" inputType="submit" loading={loading} text={translate("email_tracker.email_delete_modal.delete_button")} onClick={routeHandler}
               className=" px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
             />
-          </div>
-        </div>
-      </BaseModal>
+          </div >
+        </div >
+      </BaseModal >
     </>
   );
 };

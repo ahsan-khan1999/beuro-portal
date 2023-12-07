@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
@@ -11,17 +12,19 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
   service,
   leadDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "Required Service*",
+              text: `${translate("leads.service_details.required_service")}`,
               htmlFor: "requiredService",
               className: "mb-[10px]",
             },
@@ -41,8 +44,9 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
-              text: "Desire Date*",
+              text: `${translate("leads.service_details.desire_date")}`,
               htmlFor: "desireDate",
               className: "mb-[10px]",
             },
@@ -57,8 +61,9 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
           },
 
           {
+            containerClass: "mb-0",
             label: {
-              text: "Contact Availability",
+              text: `${translate("leads.service_details.availability")}`,
               htmlFor: "contactAvailability",
               className: "mb-[10px]",
             },
@@ -93,8 +98,9 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
         className: "grid grid-cols-3 gap-x-3 ",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "Flexibility",
+              text: `${translate("leads.service_details.flexibility")}`,
               htmlFor: "flexibility",
               className: "mb-[10px]",
             },
@@ -141,11 +147,13 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
           },
 
           {
+            containerClass: "mb-0",
             label: {
-              text: "Preferred Contact",
+              text: `${translate("leads.service_details.prefer_contact")}`,
               htmlFor: "preferredContact",
               className: "mb-[10px]",
             },
+
             field: {
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
@@ -166,8 +174,9 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
           },
           {
+            containerClass: "mb-0",
             label: {
-              text: "Budget*",
+              text: `${translate("leads.service_details.budget")}`,
               htmlFor: "budget",
               className: "mb-[10px]",
             },
@@ -196,15 +205,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     },
 
     {
+      containerClass:"mt-5",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
         children: [
           {
-            containerClass: "col-span-1 mb-0",
+            containerClass: "xl:col-span-1 mb-0",
             label: {
-              text: "Lead Source*",
+              text: `${translate("leads.service_details.lead_source")}`,
               htmlFor: "leadSource",
               className: "mb-[10px]",
             },
@@ -224,9 +234,9 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
           },
 
           {
-            containerClass: "col-span-2 mb-0",
+            containerClass: "xl:col-span-2 mb-0",
             label: {
-              text: "Other Services",
+              text: `${translate("leads.service_details.other_services")}`,
               htmlFor: "otherServices",
               className: "mb-[10px]",
             },
@@ -258,14 +268,14 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("leads.service_details.cancel_button")}`,
               inputType: "button",
               onClick: () => onHandleBack && onHandleBack(),
               className:
@@ -277,7 +287,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate("leads.service_details.save_changes_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

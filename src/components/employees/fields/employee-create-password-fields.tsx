@@ -1,13 +1,15 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateChangePasswordFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFormField =
   (register, loading, onClick) => {
+    const { t: translate } = useTranslation();
     const formFields: FormField[] = [
       {
         containerClass: "mb-5",
         label: {
-          text: "Create New Password",
+          text: `${translate("employees.create_new_password_modal.create_new_password")}`,
           htmlFor: "newPassword",
           className: "mb-[12px]",
         },
@@ -31,7 +33,7 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
       {
         containerClass: "mb-0",
         label: {
-          text: "Confirm New Password",
+          text: `${translate("employees.create_new_password_modal.confirm_password")}`,
           htmlFor: "confirmNewPassword",
           className: "mb-[12px]",
         },
@@ -57,7 +59,7 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
         field: {
           type: Field.button,
 id:"button",
-          text: "Submit",
+          text: `${translate("employees.create_new_password_modal.submit_button")}`,
           inputType: "submit",
           className: "mt-[19px] rounded-lg",
           loading,

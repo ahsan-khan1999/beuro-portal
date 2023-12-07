@@ -16,26 +16,28 @@ import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
 import { Lead } from "@/types/leads";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
-  customerEdit,
-  addressEdit,
-  serviceEdit,
-  additionalEdit,
+  customerAdd,
+  addressAdd,
+  serviceAdd,
+  additionalAdd,
 }
 
 const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector(state => state.lead)
   
   const [tabType, setTabType] = useState<ComponentsType>(
-    leadDetails?.id && leadDetails?.stage || ComponentsType.customerEdit
+    leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd
     );
 
   useEffect(() => {
-    setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.customerEdit)
+    setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd)
   }, [leadDetails?.id])
 
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -50,7 +52,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Customer Details",
+      name: `${translate("leads.tabs_headings.customer")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${tabType === 1 ? "#4A13E7" : "#8F8F8F"
@@ -59,7 +61,7 @@ const AddNewLeadsData = () => {
       <path d="M16.3839 16.0996L13.6165 20.4262C12.9002 21.543 11.2708 21.5393 10.5579 20.4272L7.786 16.1007C5.34718 16.6646 3.84375 17.6976 3.84375 18.932C3.84375 21.0739 8.09121 22.2295 12.0875 22.2295C16.0837 22.2295 20.3312 21.0739 20.3312 18.932C20.3312 17.6967 18.8257 16.6632 16.3839 16.0996Z" fill={isSelected ? "#4A13E7" : "#8F8F8F"}
       }/>
     </svg>`,
-      name: "Address Details",
+      name: `${translate("leads.tabs_headings.address")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${tabType === 2 ? "#4A13E7" : "#8F8F8F"
@@ -73,7 +75,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Service Details",
+      name: `${translate("leads.tabs_headings.service")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${tabType === 3 ? "#4A13E7" : "#8F8F8F"
@@ -89,7 +91,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Additional Details",
+      name: `${translate("leads.tabs_headings.additional")}`,
     },
   ];
 
@@ -139,7 +141,7 @@ const AddNewLeadsData = () => {
   };
 
   const handleNextTab = (currentComponent: ComponentsType) => {
-    if (tabType === ComponentsType.additionalEdit) {
+    if (tabType === ComponentsType.additionalAdd) {
       leadCreatedHandler();
       return;
     }
@@ -151,24 +153,24 @@ const AddNewLeadsData = () => {
   };
 
   const componentsLookUp = {
-    [ComponentsType.customerEdit]: (
+    [ComponentsType.customerAdd]: (
       <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.addressEdit]: (
+    [ComponentsType.additionalAdd]: (
       <AddLeadAddressDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.serviceEdit]: (
+    [ComponentsType.serviceAdd]: (
       <AddLeadServiceDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack} />
     ),
-    [ComponentsType.additionalEdit]: (
+    [ComponentsType.addressAdd]: (
       <AddLeadAdditionalDetails onHandleNext={leadCreatedHandler} onHandleBack={onHandleBack} />
     ),
   };
 
   return (
     <>
-      <div className="flex w-full gap-6">
-        <div className="flex flex-col gap-[14px]">
+      <div className="flex flex-col xl:flex-row w-full gap-6">
+        <div className="flex flex-col w-fit gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}

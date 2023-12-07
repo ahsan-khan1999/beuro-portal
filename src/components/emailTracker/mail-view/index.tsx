@@ -9,10 +9,12 @@ import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmatio
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const ViewMails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
 
   const handleConfirmDeletion = () => {
     dispatch(updateModalType(ModalType.CONFIRM_DELETION));
@@ -36,14 +38,14 @@ const ViewMails = () => {
       <DeleteConfirmation_1
         handleDelete={handleDelete}
         onClose={onClose}
-        modelHeading="Please confirm Email ID No."
-        subHeading="Enter Your Email ID No."
+        modelHeading={translate("email_tracker.email_confirmation_modal.main_heading")}
+        subHeading={translate("email_tracker.email_confirmation_modal.sub_heading")}
       />
     ),
     [ModalType.DELETE_MAIL]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Email?"
+        modelHeading={translate("email_tracker.email_delete_modal.heading")}
         routeHandler={routeHandler}
         loading={false}
       />

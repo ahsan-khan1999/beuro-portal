@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+
 interface DashboardCard {
   icon: string | StaticImport;
   alt: string;
@@ -14,6 +15,7 @@ interface DashboardCard {
   open: string;
   closed: string;
   expired: string;
+  route: Function;
 }
 const DashboardCard = ({
   icon,
@@ -27,6 +29,7 @@ const DashboardCard = ({
   open,
   closed,
   expired,
+  route,
 }: DashboardCard) => {
   const datatest2 = {
     labels: ["Jan", "Feb", "Mar", "Apr"],
@@ -79,12 +82,15 @@ const DashboardCard = ({
   }, []);
 
   return (
-    <div className={`rounded-[20px] py-[38px] pl-10 pr-8 ${backgroundColor}`}>
+    <div
+      onClick={() => route()}
+      className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
+    >
       <div className="flex items-center mb-8">
       
         <Image src={icon} alt={alt} />
         <div className="ml-2 space-y-1">
-          <h3 className="text-xl text-white font-semibold ">{title}</h3>
+          <h3 className="text-xlMonthly text-white font-semibold ">{title}</h3>
           <span className="text-xs text-white  ">{subTitle}</span>
         </div>
       </div>

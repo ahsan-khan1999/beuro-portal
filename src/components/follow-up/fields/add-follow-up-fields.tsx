@@ -1,6 +1,7 @@
 import { Modals } from "@/enums/follow-up";
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
@@ -9,6 +10,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   { customer, lead },
   onItemChange,
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       //@ts-expect-error
@@ -20,7 +22,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Select Customers*",
+              text: `${translate("follow_up.add_follow_up.select_customer")}`,
               htmlFor: "customer",
               className: "mb-[12px]",
             },
@@ -51,7 +53,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Enter Title*",
+              text: `${translate("follow_up.add_follow_up.title")}`,
               htmlFor: "title",
               className: "mb-[12px]",
             },
@@ -76,7 +78,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Select Lead*",
+              text: `${translate("follow_up.add_follow_up.select_lead")}`,
               htmlFor: "lead",
               className: "mb-[12px]",
             },
@@ -105,7 +107,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Follow up Date and time*",
+              text: `${translate("follow_up.add_follow_up.follow_up_date")}`,
               htmlFor: "dateTime",
               className: "mb-[12px]",
             },
@@ -134,7 +136,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Follow up type",
+        text: `${translate("follow_up.add_follow_up.follow_up_type")}`,
         htmlFor: "type",
         className: "mb-[12px]",
       },
@@ -155,7 +157,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Additional Details",
+        text: `${translate("follow_up.add_follow_up.additional_details")}`,
         htmlFor: "additionalDetails",
         className: "mb-[12px]",
       },
@@ -177,7 +179,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Save",
+        text: `${translate("follow_up.save_button")}`,
         inputType: "submit",
         className:
           "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

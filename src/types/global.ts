@@ -10,7 +10,7 @@ export interface GlobalState {
   modal: {
     type: ModalType.NONE;
     cardId?: number;
-    data?: any
+    data?: any;
   };
 }
 
@@ -94,4 +94,64 @@ export interface UpdateSuccessProps {
 export interface Attachement {
   name: string,
   value: string
+}
+
+export interface DocumentHeaderDetailsProps {
+  offerNo: string;
+  offerDate: string;
+  createdBy: string;
+}
+
+export interface ServiceItemFooterProps {
+  subTotal: string;
+  tax: string;
+  discount: string;
+  grandTotal: string;
+}
+
+export interface ContactDetailsProps {
+  address: {
+    name: string;
+    streetWithNumber: string;
+    postalCode: string;
+    city: string;
+  };
+  email: string;
+  phone: string;
+}
+export interface MovingDetailsProps {
+  header: string;
+  address1: string;
+  address1Details: string;
+  address2: string;
+  address2Details: string;
+  workDates: string;
+}
+export interface ServiceItemProps {
+  title: string;
+  description: string;
+  price: string;
+  count: string;
+  total: string;
+}
+
+export interface DocumentDetailFooterProps {
+  companyName: string;
+  companyDomain: string;
+  infoMail: string;
+  firstNumber: string;
+  secondNumber: string;
+  postFinance: string;
+  streeAdress: string;
+  streetNumber: string;
+  lastNumber: string;
+}
+
+export interface PdfPreviewProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  movingDetails: MovingDetailsProps;
+  serviceItem: ServiceItemProps[];
+  serviceItemFooter: ServiceItemFooterProps;
+  footerDetails: DocumentDetailFooterProps
 }

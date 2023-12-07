@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import toggle_active from "@/assets/svgs/toggle_active.svg";
 import toggle_inactive from "@/assets/svgs/toggle_inactive.svg";
+import { useTranslation } from "next-i18next";
 
 type colsData = {
   title: string;
@@ -56,129 +57,135 @@ const ColumnsComp = () => {
   const [isSecondActive, setIsSecondActive] = useState(true);
   const [isThirdActive, setIsThirdActive] = useState(true);
   const [isFourthActive, setIsFourthActive] = useState(true);
+  const { t: translate } = useTranslation();
 
   const firstColumnsData: colsData[] = [
     {
-      title: "Company Name",
+      title: `${translate("setting.templates.first_col_heading.company_name")}`,
       placeholder: "Company Name",
     },
     {
-      title: "Email",
+      title: `${translate("setting.templates.first_col_heading.email")}`,
       placeholder: "youremail@gmail.com",
     },
     {
-      title: "Phone Number",
+      title: `${translate("setting.templates.first_col_heading.phone_number")}`,
       placeholder: "Phone Number",
     },
     {
-      title: "Website",
+      title: `${translate("setting.templates.first_col_heading.website")}`,
       placeholder: "www.your website.com",
     },
     {
-      title: "MwST Number",
+      title: `${translate("setting.templates.first_col_heading.mwst_number")}`,
       placeholder: "MwST Number",
     },
   ];
 
   const secondColumnsData: colsData[] = [
     {
-      title: "Street No",
+      title: `${translate("setting.templates.second_column.street_no")}`,
       placeholder: "Street no#",
     },
     {
-      title: "Post Code",
+      title: `${translate("setting.templates.second_column.post_code")}`,
       placeholder: "00000",
     },
     {
-      title: "Bank Name ",
+      title: `${translate("setting.templates.second_column.bank_name")}`,
       placeholder: "ABC",
     },
     {
-      title: "Account Number",
+      title: `${translate("setting.templates.second_column.account_number")}`,
       placeholder: "0000000",
     },
     {
-      title: "IBAN Number",
+      title: `${translate("setting.templates.second_column.iban_number")}`,
       placeholder: "00000000",
     },
   ];
 
   const thirdColumnsData: colsData[] = [
     {
-      title: "Row 1",
+      title: `${translate("setting.templates.third_column.row_one")}`,
       placeholder: " ",
     },
     {
-      title: "Row 2",
+      title: `${translate("setting.templates.third_column.row_two")}`,
       placeholder: " ",
     },
     {
-      title: "Row 3",
+      title: `${translate("setting.templates.third_column.row_three")}`,
       placeholder: " ",
     },
     {
-      title: "Row 4",
+      title: `${translate("setting.templates.third_column.row_fourth")}`,
       placeholder: " ",
     },
     {
-      title: "Row 5",
+      title: `${translate("setting.templates.third_column.row_fifth")}`,
       placeholder: " ",
     },
   ];
   const fourthColumnsData: colsData[] = [
     {
-      title: "Row 1",
+      title: `${translate("setting.templates.third_column.row_one")}`,
       placeholder: " ",
     },
     {
-      title: "Row 2",
+      title: `${translate("setting.templates.third_column.row_two")}`,
       placeholder: " ",
     },
     {
-      title: "Row 3",
+      title: `${translate("setting.templates.third_column.row_three")}`,
       placeholder: " ",
     },
     {
-      title: "Row 4",
+      title: `${translate("setting.templates.third_column.row_fourth")}`,
       placeholder: " ",
     },
     {
-      title: "Row 5",
+      title: `${translate("setting.templates.third_column.row_fifth")}`,
       placeholder: " ",
     },
   ];
 
   return (
     <>
-    
-    <div className="grid grid-cols-2 gap-x-[27px]">
-      <Column
-        title="First Column"
-        isActive={isActive}
-        toggle={() => setIsActive(!isActive)}
-        data={firstColumnsData}
-      />
-      <Column
-        title="Second Column"
-        isActive={isSecondActive}
-        toggle={() => setIsSecondActive(!isSecondActive)}
-        data={secondColumnsData}
-      />
-      <Column
-        title="Third Column"
-        isActive={isThirdActive}
-        toggle={() => setIsThirdActive(!isThirdActive)}
-        data={thirdColumnsData}
-      />
-      <Column
-        title="Fourth Column"
-        isActive={isFourthActive}
-        toggle={() => setIsFourthActive(!isFourthActive)}
-        data={fourthColumnsData}
-      />
-    </div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-[27px]">
+        <Column
+          title={`${translate("setting.templates.first_col_heading.heading")}`}
+          isActive={isActive}
+          toggle={() => setIsActive(!isActive)}
+          data={firstColumnsData}
+        />
+        <Column
+          title={`${translate("setting.templates.second_column.heading")}`}
+          isActive={isSecondActive}
+          toggle={() => setIsSecondActive(!isSecondActive)}
+          data={secondColumnsData}
+        />
+        <Column
+          title={`${translate(
+            "setting.templates.third_column.third_column_heading"
+          )}`}
+          isActive={isThirdActive}
+          toggle={() => setIsThirdActive(!isThirdActive)}
+          data={thirdColumnsData}
+        />
+        <Column
+          title={`${translate(
+            "setting.templates.third_column.fourth_column_heading"
+          )}`}
+          isActive={isFourthActive}
+          toggle={() => setIsFourthActive(!isFourthActive)}
+          data={fourthColumnsData}
+        />
+      </div>
 
-    <button className="px-4 py-2 text-white text-base font-medium rounded-md ml-[32px] bg-[#4A13E7] " >Save Setting</button>
+      <button className="px-4 py-2 text-white text-base font-medium rounded-md ml-[32px] bg-[#4A13E7] ">
+      {translate("setting.save_setting")}
+      </button>
     </>
   );
 };

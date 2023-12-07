@@ -10,7 +10,7 @@ const AddLeadsCustomerDetails = ({
   onHandleNext: Function;
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewLeadCustomer(onHandleNext);
   const router = useRouter();
   return (
@@ -19,12 +19,12 @@ const AddLeadsCustomerDetails = ({
         className="flex justify-between items-center pb-5 "
         id="Customer Details"
       >
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">{translate("leads.customer_details.heading")}</h2>
         <button
           onClick={() => router.push("/leads")}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
         >
-          Cancel
+          {translate("leads.customer_details.cancel_button")}
         </button>
       </div>
       <hr className="opacity-20 mb-5" />

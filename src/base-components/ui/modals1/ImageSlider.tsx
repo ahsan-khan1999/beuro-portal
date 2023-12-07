@@ -3,29 +3,25 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Slider } from "../slider/slider";
-import img1 from "@/assets/pngs/leads_detail_img1.png";
-import img2 from "@/assets/pngs/leads_detail_img2.png";
-import img3 from "@/assets/pngs/leads_detail_img3.png";
-import img4 from "@/assets/pngs/leads_detail_img4.png";
-import { useAppSelector } from "@/hooks/useRedux";
 import { Lead } from "@/types/leads";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
-
-const ImageSlider = ({ onClose, details }: { onClose: () => void, details?: Lead | OffersTableRowTypes | contractTableTypes }) => {
+import { useTranslation } from "next-i18next";
+const ImageSlider = ({ onClose, details }: { onClose: () => void, details: Lead | OffersTableRowTypes }) => {
   // const { leadDetails } = useAppSelector(state => state.lead)
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
     images: details?.images?.map((item) => ({ imageSrc: item }))
   };
+  const { t: translate } = useTranslation();
 
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
       >
-        <div className="relative flex flex-col px-[28px] py-5">
+        <div className="relative flex flex-col p-4 xl:px-[28px] xl:py-5">
           <Image
             src={crossIcon}
             alt="cross_icon"
@@ -34,7 +30,7 @@ const ImageSlider = ({ onClose, details }: { onClose: () => void, details?: Lead
           />
 
           <p className="text-[24px] leading-6 font-medium text-[#000] mb-5">
-            Uploaded Images
+            {translate("common.images_modal.image_slider_heading")}
           </p>
 
           <hr className="opacity-25 mb-6" />

@@ -1,8 +1,10 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
   (register, loading, control, onClick, trigger, count, attachements, setAttachements, contentDetails) => {
+    const { t: translate } = useTranslation()
     const formField: FormField[] = [
       {
         containerClass: "mt-5",
@@ -14,7 +16,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Confirmation Title",
+                text: translate("content.details.confirmation_title"),
                 htmlFor: "confirmationContent.title",
                 className: "mb-[10px]",
               },
@@ -31,7 +33,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Confirmation Description",
+                text: translate("content.details.confirmation_description"),
                 htmlFor: "confirmationContent.description",
                 className: "mb-[10px]",
               },
@@ -51,7 +53,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               containerClass: "mb-0 mt-5",
               label: {
                 text: "Email Body",
-                htmlFor: "confirmationContent.body",
+                htmlFor: translate("content.details.email_body"),
                 className: "mb-[10px]",
               },
               field: {
@@ -69,7 +71,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Attachments",
+                text: translate("content.details.attachments"),
                 htmlFor: "confirmationContent.attachments",
                 className: "mb-[10px]",
               },
@@ -101,7 +103,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Back",
+                text: `${translate("content.details.cancel_button")}`,
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
@@ -113,7 +115,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Next",
+                text: `${translate("content.details.save_changes_button")}`,
                 inputType: "submit",
                 className:
                   "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

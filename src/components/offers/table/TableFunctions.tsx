@@ -6,15 +6,16 @@ import { Status } from "@/types/global";
 import { FilterType } from "@/types";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
+import { useTranslation } from "next-i18next";
 
 
 const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) => {
 
-
-  const router = useRouter();
+  const router = useRouter()
+  const { t: translate } = useTranslation();
   return (
-    <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">Offers</h1>
+    <div className="flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center mb-4 gap-y-3 2xl:gap-y-0">
+      <h1 className="text-xl text-[#222B45] ">{translate("offers.main_heading")}</h1>
       <div className="flex items-center ">
 
         <OffersFilters filter={filter} setFilter={setFilter} />

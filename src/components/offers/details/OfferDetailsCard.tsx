@@ -24,14 +24,17 @@ interface OfferDetailCardProps {
   handlePaymentStatusUpdate: (id: string) => void
 
 }
+import { useTranslation } from "next-i18next";
 
 const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload, handleNotes, handleStatusUpdate, handlePaymentStatusUpdate }: OfferDetailCardProps) => {
   console.log(offerDetails?.paymentType);
 
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 ">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -40,7 +43,7 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
             onClick={() => router.push("/offers")}
           />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            Offer details
+            {translate("offers.card_content.main_heading")}
           </p>
         </div>
 
@@ -48,7 +51,7 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
           <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] ">
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
-              Send Email
+              {translate("offers.card_content.send_button")}
             </p>
           </div>
           <Image
@@ -65,17 +68,16 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
       <div className="flex flex-col gap-4">
-        {/* first div is here */}
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)]">
+        <div className="grid lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-1">
           <div>
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
-              Offer ID:
+              {translate("offers.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">{offerDetails?.offerNumber}</span>
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
-              Offer Title:
+              {translate("offers.card_content.offer_title")}:
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
@@ -84,18 +86,18 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
-              Worker:
+              {translate("offers.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {offerDetails?.createdBy?.fullName}
             </span>
           </div>
         </div>
-        {/* Secod div is here */}
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
+
+        <div className="grid gap-y-1 lg:grid-cols-2 xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
           <div>
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
-              Creation Date:
+              {translate("offers.card_content.created_date")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {formatDateString(offerDetails?.createdAt)}
@@ -104,7 +106,7 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
-              Service Date:
+              {translate("offers.card_content.service_date")}:
             </span>
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -114,10 +116,10 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(300px,_100%)_minmax(200px,_250px)_minmax(120px,_120px)_minmax(120px,_120px)]">
+        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_100%)_minmax(250px,_250px)_minmax(150px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
-              Email Status:
+              {translate("offers.card_content.email_status")}:
             </span>
             <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] ">
               {offerDetails?.emailStatus}
@@ -161,15 +163,13 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
           <div>
             <div className="flex items-center gap-[11px] ">
               <span className="text-[#4D4D4D] font-normal text-base">
-                Notes:
+                {translate("offers.card_content.notes")}:
               </span>
               <Image src={writeIcon} alt="writeIcon" className="cursor-pointer" onClick={(e) => handleNotes(offerDetails?.id, e)} />
             </div>
-          </div>
-          <div>
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
-                Images:
+                {translate("offers.card_content.images")}:
               </span>
               <Image src={imageIcon} alt="editImg" className="cursor-pointer" onClick={(e) => handleImageUpload(offerDetails?.id, e)} />
             </div>

@@ -48,5 +48,6 @@ export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { on
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

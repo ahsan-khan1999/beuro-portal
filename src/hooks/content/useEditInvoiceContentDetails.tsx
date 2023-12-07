@@ -80,5 +80,6 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

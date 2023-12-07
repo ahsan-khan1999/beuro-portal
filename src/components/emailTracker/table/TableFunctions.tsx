@@ -1,13 +1,15 @@
 import React from "react";
 import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import EmailTrackerFilters from "./email-tacker-filters";
+import { useTranslation } from "next-i18next";
 
 const TableFunctions = () => {
+  const { t: translate } = useTranslation();
   // function onInputChange(text: string) {}
 
   return (
     <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">Email Tracker</h1>
+      <h1 className="text-base lg:text-xl text-[#222B45] ">{translate("email_tracker.main_heading")}</h1>
       {/* <div className="flex items-center ">
         <div className="flex items-center space-x-4">
           <SearchInput onInputChange={onInputChange} />

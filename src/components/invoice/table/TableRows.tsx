@@ -20,7 +20,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(150px,_150px)_minmax(250px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px),minmax(130px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(130px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_130px)_minmax(160px,_100%)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(50px,_50px)]  mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md flex  items-center">
               {item.invoiceNumber}
@@ -35,7 +35,7 @@ const TableRows = ({
               {item.contractID?.offerID?.total}
             </span>
 
-            <span className="px-6 py-4 bg-white flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`${item.sentEmail === item.totalEmail
                   ? "bg-[#FE9244]"
@@ -45,8 +45,8 @@ const TableRows = ({
                 {item.sentEmail + '/' + item.totalEmail + " Sent"}
               </div>
             </span>
-            <span className="px-6 py-4 bg-white flex justify-center items-center">
-              <div className="flex rounded-md w-full">
+            <span className="py-4 flex justify-center items-center">
+              <div className="flex rounded-md w-fit">
                 <div
                   className={`${parseInt(item.paidAmount) >
                     parseInt(item.totalPrice)
@@ -68,7 +68,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="px-6 py-4 bg-white flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getInvoiceStatusColor(item.invoiceStatus)}] text-white px-2 py-1 text-center rounded-md  w-full text-sm`}
               >

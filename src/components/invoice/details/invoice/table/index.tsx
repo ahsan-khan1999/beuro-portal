@@ -5,7 +5,7 @@ import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
 import { InvoiceDetailsTableRowTypes, InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
 
-export default function InvoiceDetailsTable({ collectiveInvoice, handlePaymentStatusUpdate, handleInvoiceStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string) => void, handleInvoiceStatusUpdate: (id: string) => void }) {
+export default function InvoiceDetailsTable({ collectiveInvoice, handlePaymentStatusUpdate, handleInvoiceStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string, status: string) => void, handleInvoiceStatusUpdate: (id: string, status: string) => void }) {
 
   return (
     <>

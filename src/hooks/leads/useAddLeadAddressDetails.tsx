@@ -56,6 +56,7 @@ export const useAddLeadAddressDetails = (onHandleBack: (currentComponent: Compon
     handleSubmit,
     errors,
     error,
+    translate
   };
 };
 

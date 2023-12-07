@@ -36,5 +36,6 @@ export default function useEmployeeCreateNewPassword(
     errors,
     fields,
     onSubmit,
+    translate
   };
 }

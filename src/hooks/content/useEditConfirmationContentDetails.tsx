@@ -83,5 +83,6 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

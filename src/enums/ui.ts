@@ -49,6 +49,9 @@ export enum ModalType {
   EMPLOYEE_SUCCESS,
   UPLOAD_OFFER_IMAGE,
 
+  ARE_YOU_SURE_CUSTOMER,
+  SELECT_MONTH,
+  DOWNLOAD_MODAL
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

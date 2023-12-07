@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateEmployeeFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const employeeDetailsFormField: GenerateEmployeeFormField = (
   register,
@@ -9,6 +10,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   employeeDetails,
   control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
@@ -20,8 +22,13 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
           {
             containerClass: "w-[67%] mb-0",
             label: {
+<<<<<<< HEAD
               text: "Employ Name",
               htmlFor: "fullName",
+=======
+              text: `${translate("employees.details.full_name")}`,
+              htmlFor: "employName",
+>>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
               className: "mb-[10px]",
             },
             field: {
@@ -39,7 +46,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
           {
             containerClass: "w-[33%] mb-0",
             label: {
-              text: "Designation",
+              text: `${translate("employees.details.designation")}`,
               htmlFor: "designation",
               className: "mb-[10px]",
             },
@@ -69,7 +76,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Email Address",
+              text: `${translate("employees.details.email_address")}`,
               htmlFor: "email",
               className: "mb-[10px]",
             },
@@ -88,7 +95,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate("employees.details.phone_number")}`,
               htmlFor: "phoneNumber",
               className: "mb-[10px]",
             },
@@ -107,7 +114,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text: `${translate("employees.details.mobile_number")}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
@@ -140,8 +147,13 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+<<<<<<< HEAD
               id: "button",
               text: "Cancel",
+=======
+id:"button",
+              text: `${translate("employees.details.cancel_button")}`,
+>>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
               inputType: "button",
               className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${isUpdate && "hidden"
                 }`,
@@ -152,8 +164,13 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.button,
+<<<<<<< HEAD
               id: "button",
               text: "Save Changes",
+=======
+id:"button",
+              text: `${translate("employees.details.save_changes_button")}`,
+>>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
               inputType: "submit",
               className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${isUpdate && "hidden"
                 }`,

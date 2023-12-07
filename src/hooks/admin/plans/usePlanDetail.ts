@@ -90,7 +90,10 @@ export default function usePlanDetail(stage: boolean) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    router.push("/admin/plans");
   };
+
+
   const handlePreviousClick = () => {
     router.push("/admin/support-request");
   };

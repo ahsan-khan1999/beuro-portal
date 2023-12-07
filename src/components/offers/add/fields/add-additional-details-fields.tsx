@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   register,
@@ -9,12 +10,12 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   count,
   { content, contentDetails, offerDetails },
 ) => {
-  
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 ",
       label: {
-        text: "Choose Form Existing",
+        text: `${translate("offers.additional_details.choose")}`,
         htmlFor: "content",
         className: "mb-[10px]",
       },
@@ -32,7 +33,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Add New",
+        text: `${translate("offers.additional_details.add_new")}`,
         htmlFor: "additionalDetails",
         className: "mb-[10px] text-[#4D4D4D]",
       },
@@ -70,7 +71,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: translate("offers.additional_details.save_button"),
               inputType: "submit",
               className:
                 "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",

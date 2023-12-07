@@ -39,8 +39,8 @@ const AddService = () => {
   return (
     <Layout>
       <h2 className="text-[#222B45] text-xl font-normal mb-5">Add new Service</h2>
-      <div className="flex ">
-        <div className="space-y-4 mr-6">
+      <div className="flex flex-col xl:flex-row gap-4">
+        <div className="space-y-4 w-fit">
           <TabSection
             tabsArray={tabSection}
             setTabType={setTabType}

@@ -25,29 +25,23 @@ const TableRows = ({
               })
             }
             key={item.id}
-            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(100px,_100px),minmax(200px,_200px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px)_minmax(200px,_200px)_minmax(450px,_100%)_minmax(180px,_180px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(50px,_50px),minmax(150px,_150px)_minmax(180px,_100%)_minmax(100px,_100px)_minmax(50px,_50px)]  xlg:grid-cols-[minmax(50px,_50px),minmax(170px,_170px)_minmax(200px,_100%)_minmax(130px,_130px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(200px,_200px)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(50px,_50px)]  mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md  flex items-center">
               {item.refID}
             </span>
-            <span className="px-6 py-4 bg-white   flex items-center">
+            <span className=" py-4    flex items-center">
               {item.contentName}
             </span>
-            <span className="px-6 py-4 bg-white  flex items-center ">
+            <span className=" py-4   flex items-center ">
               {item.offerContent.title}
             </span>
-            <span className="px-6 py-4 bg-white  flex items-center">
+            <span className=" py-4   flex items-center">
               {formatDateString(item?.createdAt)}
             </span>
 
-            <span className="px-6 py-4 bg-white ">
-              <div className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer">
-                <Image src={editIcon} alt="editIcon" />
-              </div>
-            </span>
-
-            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
-              <Image src={moreInfoIcon} alt="moreInfoIcon" />
+            <span className="py-4 flex items-center justify-center">
+              <Image src={editIcon} alt="editIcon" />
             </span>
           </div>
         );

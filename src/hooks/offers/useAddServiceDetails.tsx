@@ -170,5 +170,6 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+translate
   };
 };

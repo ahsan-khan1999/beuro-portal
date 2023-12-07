@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useState } from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import imgDelete from "@/assets/svgs/img_delete.svg";

@@ -29,24 +29,24 @@ const TableRows = ({
           <div
 
             key={index}
-            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_100%)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(70px,_70px),minmax(120px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(65px,_65px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(130px,_100%)_minmax(120px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(130px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 bg-white rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md flex  items-center">
+            <span className=" py-4 bg-white rounded-md flex  items-center">
               {item.contractNumber}
             </span>
-            <span className="px-6 py-4 bg-white  flex  items-center">
+            <span className=" py-4 bg-white  flex  items-center">
               {item.offerID?.customerID?.fullName}
             </span>
-            <span className="px-6 py-4 bg-white flex  items-center">
+            <span className="hidden xs:flex mlg:hidden xlg:hidden maxSize:hidden  xMaxSize:flex py-4 items-center">
               {item.offerID?.title}
             </span>
-            <span className="px-6 py-4 bg-white flex  items-center">
+            <span className=" py-4 bg-white flex  items-center">
               {item.offerID?.totalPrice}
             </span>
-            <span className="px-6 py-4 bg-white flex  items-center">
+            <span className=" py-4 bg-white flex  items-center">
               {formatDateString(item.createdAt)}
             </span>
-            <span className="flex justify-center items-center bg-white">
+            <span className="flex justify-center items-center ">
               <div
                 className={`bg-[${getPaymentTypeColor(item.offerID?.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
@@ -55,7 +55,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="flex justify-center items-center bg-white ">
+            <span className="flex justify-center items-center  ">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}

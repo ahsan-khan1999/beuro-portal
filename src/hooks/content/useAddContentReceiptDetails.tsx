@@ -75,5 +75,6 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

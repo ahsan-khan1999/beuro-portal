@@ -3,15 +3,15 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import sendEmailIcon from "@/assets/svgs/send_email_icon.svg";
 import { Button } from "../button/button";
+import { useTranslation } from "next-i18next";
+import { LinkSendToEmailModal } from "@/types/employee";
 
 const LinkSendToEmail = ({
   onClose,
   createNewPswHandler,
-}: {
-  onClose: () => void;
-  createNewPswHandler: () => void;
-}) => {
-  
+}: LinkSendToEmailModal) => {
+
+  const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
@@ -25,23 +25,19 @@ const LinkSendToEmail = ({
             className="mb-[37px] mt-[43px]"
           />
           <p className="text-[#000] font-medium text-[24px] leading-7 text-center mb-[13px]">
-            Link Send to Employee Email
+            {translate("employees.link_send_modal.main_heading")}
           </p>
           <p className="text-[#1E1E1E] text-sm font-normal text-center ">
-            Thanks for signing up to Buro we are happy to have you.
-            <br /> Please take a second to make sure we have your correct email{" "}
-            <br /> address
+            {translate("employees.link_send_modal.sub_heading")}
           </p>
 
           <Button
             id="button"
             inputType="button"
             onClick={createNewPswHandler}
+            text={translate("employees.link_send_modal.button")}
             className="bg-[#4A13E7] cursor-pointer mt-[31px] mb-[59px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
-            text="Done"
           />
-            
-          
         </div>
       </BaseModal>
     </>

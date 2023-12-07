@@ -34,5 +34,6 @@ export default function useChangePassword(onClose: Function) {
     errors,
     fields,
     onSubmit,
+    translate
   };
 }

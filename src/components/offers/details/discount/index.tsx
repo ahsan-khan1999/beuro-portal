@@ -3,14 +3,13 @@ import Image from "next/image";
 import priceTaga from "@/assets/svgs/price_tag.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
 
+type DiscountTypes = {
+  discountTitle: string;
+  discountPrice: string;
+  discountPercentage: string;
+  discountDate: string;
+};
 const Discounts = () => {
-  type DiscountTypes = {
-    discountTitle: string;
-    discountPrice: string;
-    discountPercentage: string;
-    discountDate: string;
-  };
-
   const discountData: DiscountTypes[] = [
     {
       discountTitle: "Price",

@@ -13,17 +13,17 @@ const OfferContentEditDetails = ({
   contentDetail: ContentTableRowTypes;
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useOfferContentEditDetails(onClick);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Offer Content</h2>
+        <h2 className="text-[#393939] text-lg font-medium">{translate("content.details.offer_heading")}</h2>
         <button
           onClick={() => onClick(0, ComponentsType.offerContent)}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
         >
-          Cancel
+          {translate("content.details.cancel_button")}
         </button>
       </div>
       <Form

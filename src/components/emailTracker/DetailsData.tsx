@@ -5,6 +5,7 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const DetailsData = ({
   handleConfirmDeletion,
@@ -12,6 +13,7 @@ const DetailsData = ({
   handleConfirmDeletion: Function;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -23,7 +25,7 @@ const DetailsData = ({
             className="cursor-pointer"
           />
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            Email Details
+            {translate("email_tracker.card_content.main_heading")}
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
@@ -41,61 +43,61 @@ const DetailsData = ({
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="w-4/5">
-        <div className="grid grid-cols-3 gap-5">
+      <div className="xl:w-11/12 w-full">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
           <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              ID:
+            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+              {translate("email_tracker.card_content.id")}
             </span>
-            <span className="font-medium leading-6 text-[#4B4B4B] text-base">
+            <span className="font-medium  text-[#4B4B4B] text-base">
               01b9H23
             </span>
           </div>
           <div>
-            <span className="font-normal leading-6 text-[#4D4D4D] text-base mr-5">
-              Status:
+            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+              {translate("email_tracker.card_content.status")}:
             </span>
-            <span className="font-medium leading-6 text-base text-white px-2 py-1 text-center rounded-md  w-[70px] bg-[#45C769]">
+            <span className="font-medium text-base text-white px-2 py-1 text-center rounded-md  w-[70px] bg-[#45C769]">
               Open
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              Subject:
+            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+              {translate("email_tracker.card_content.subject")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] leading-6 text-base">
+            <span className="font-medium text-[#4B4B4B] text-base">
               R-2010 Credit Moving Offer
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              Recipient:
+            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+              {translate("email_tracker.card_content.recipient")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] leading-6 text-base">
+            <span className="font-medium text-[#4B4B4B]  text-base">
               Test123@gmail.com
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              Send At:
+            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+              {translate("email_tracker.card_content.send_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] leading-6 text-base">
+            <span className="font-medium text-[#4B4B4B]  text-base">
               14:06:44, 25/08/2023
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              Viewed At:
+            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+              {translate("email_tracker.card_content.viewed_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] leading-6 text-base">
+            <span className="font-medium text-[#4B4B4B]  text-base">
               14:06:44, 25/08/2023
             </span>
           </div>
         </div>
 
         <div className="my-5">
-          <span className="text-[#4B4B4B] text-lg leading-6 font-semibold ">
-            Attachments:
+          <span className="text-[#4B4B4B] text-lg  font-semibold ">
+            {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
 

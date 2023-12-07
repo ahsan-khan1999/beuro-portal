@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateInvoiceFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   register,
@@ -7,17 +8,18 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   control,
   markItRecuring
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "grid grid-cols-2 gap-[23px] ",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Total Amount",
+              text: `${translate("invoice.create_invoice_modal.total_amount")}`,
               htmlFor: "totalAmount",
               className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
             },
@@ -35,7 +37,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Remaining Amount",
+              text: `${translate(
+                "invoice.create_invoice_modal.remaining_amount"
+              )}`,
               htmlFor: "remainingAmount",
               className: "mb-[12px] text-[#8F8F8F] text-[14px] font-normal",
             },
@@ -58,26 +62,28 @@ id:"div-field",
       containerClass: "mt-4 mb-[12px]",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         children: [
           {
             containerClass:
               "!flex !flex-row !justify-between !items-center mb-0",
             label: {
-              text: "Enter the amount ",
+              text: `${translate("invoice.create_invoice_modal.enter_amount")}`,
               htmlFor: "enterAmount",
               className: "mb-0",
             },
             field: {
               type: Field.div,
-id:"div-field",
+              id: "div-field",
               className: "flex gap-[20px]",
               children: [
                 {
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: "Amount",
+                    value: `${translate(
+                      "invoice.create_invoice_modal.amount"
+                    )}`,
                     label: "Amount",
                     id: "enterAmount",
                     name: "enterAmount",
@@ -88,7 +94,9 @@ id:"div-field",
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: "Percentage",
+                    value: `${translate(
+                      "invoice.create_invoice_modal.percentage"
+                    )}`,
                     label: "Percentage",
                     id: "enterAmount",
                     name: "enterAmount",
@@ -119,7 +127,7 @@ id:"div-field",
     {
       containerClass: "mb-0 mt-4",
       label: {
-        text: "Payment Method",
+        text: `${translate("invoice.create_invoice_modal.payment_method")}`,
         htmlFor: "paymentMethod",
         className: "mb-[12px]",
       },
@@ -145,7 +153,9 @@ id:"div-field",
         type: Field.checkbox,
         id: "markItRecuring",
         name: "markItRecuring",
-        description: "Make it Recurring",
+        description: `${translate(
+          "invoice.create_invoice_modal.mark_it_recuring"
+        )}`,
         register,
       },
     },
@@ -153,7 +163,7 @@ id:"div-field",
     {
       containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
       label: {
-        text: "Date of next invoice",
+        text: `${translate("invoice.create_invoice_modal.date_of_invoice")}`,
         htmlFor: "date",
         className: "mb-[12px]",
       },
@@ -170,7 +180,7 @@ id:"div-field",
     {
       containerClass: `mb-0 mt-4 ${!markItRecuring && "hidden"}`,
       label: {
-        text: "Frequency",
+        text: `${translate("invoice.create_invoice_modal.frequency")}`,
         htmlFor: "frequency",
         className: "mb-[12px]",
       },
@@ -190,10 +200,10 @@ id:"div-field",
       containerClass: "mb-0 mt-[13px]",
       field: {
         type: Field.button,
-id:"button",
-        text: "Create Invoice",
+        id: "button",
+        text: `${translate("invoice.create_invoice_modal.button")}`,
         inputType: "submit",
-        className:"hover:bg-none",
+        className: "hover:bg-none",
         loading,
       },
     },

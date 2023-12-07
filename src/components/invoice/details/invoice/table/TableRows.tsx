@@ -40,7 +40,7 @@ const TableRows = ({
               <div
                 className={`bg-[${getInvoiceEmailColor(item.emailStatus)}] text-white px-2 py-1 text-center rounded-md   text-sm`}
               >
-                {item.emailStatus}
+                <span>{item.emailStatus}</span>
               </div>
 
             </span>

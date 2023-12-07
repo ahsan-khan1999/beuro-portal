@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import SettingLayout from "../SettingLayout";
+import { useTranslation } from "next-i18next";
 
 const TaxVerifiedComp = ({
   addTaxHandler,
@@ -10,7 +11,12 @@ const TaxVerifiedComp = ({
   addTaxHandler: () => void;
   exclusiveTaxHandler: () => void;
 }) => {
-  const toggleBtnsData: string[] = ["No Tax", "Inclusive Tax", "Exclusive Tax"];
+  const { t: translate } = useTranslation();
+  const toggleBtnsData: string[] = [
+    `${translate("setting.system_setting.tabs_tax.no_tax")}`,
+    `${translate("setting.system_setting.tabs_tax.inclusive_tax")}`,
+    `${translate("setting.system_setting.tabs_tax.exclusive_tax")}`,
+  ];
   const toggleInfo: string[] = ["Name", "Tax Rate (%)", "Action"];
   const toggleInfoValue: (string | JSX.Element)[] = [
     "Gst Tax",
@@ -45,8 +51,10 @@ const TaxVerifiedComp = ({
   return (
     <SettingLayout>
       <div>
-        <div className="flex justify-between items-center  my-4">
-          <p className="text-[18px] font-normal text-[#393939]">Tax</p>
+        <div className="flex justify-between items-center my-4">
+          <p className="text-[18px] font-normal text-[#393939]">
+            {translate("setting.system_setting.tax")}
+          </p>
           {activeButton === 2 && (
             <button
               onClick={addTaxHandler}
@@ -54,13 +62,13 @@ const TaxVerifiedComp = ({
             >
               <Image src={addIcon} alt="addIcon" />
               <span className="text-white font-semibold text-[13px]">
-                Add New
+                {translate("setting.system_setting.add_button")}
               </span>
             </button>
           )}
         </div>
 
-        <div className="grid grid-cols-3 gap-[110px]">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-[110px] gap-y-5">
           {toggleBtnsData.map((item, index) => (
             <div
               className={`border rounded-md py-4 px-[18px] flex justify-between items-center w-full 

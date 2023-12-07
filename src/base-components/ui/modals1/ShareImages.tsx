@@ -18,6 +18,7 @@ import { useClipboardCopy } from "@/utils/utility";
 import { CopyIcon } from "@/assets/svgs/components/copy-icon";
 import { useRouter } from "next/router";
 import { DOMAIN } from "@/services/HttpProvider";
+import { useTranslation } from "next-i18next";
 
 const ShareImages = ({ onClose }: { onClose: () => void }) => {
   const imgSource = [
@@ -34,39 +35,42 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
   ];
   const { handleCopy, inputRef, isCopied } = useClipboardCopy()
   const router = useRouter()
+
+  const { t: translate } = useTranslation();
+
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-[465px]"
+        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit "
       >
-        <div className="relative flex flex-col px-[39px] pb-[40px] pt-[24px]">
+        <div className="relative flex flex-col lg:px-[39px] lg:pb-[40px] lg:pt-[24px] p-4">
           <Image
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mb-5">
-            Share Image
+          <p className="text-[#000] font-medium text-2xl mb-5">
+            {translate("offers.share_images_modal.heading")}
           </p>
 
           <hr className="opacity-25 mb-[23px]" />
           <div>
             <span className="text-[#393939] font-normal text-base">
-              Share images on
+              {translate("offers.share_images_modal.sub_heading")}
             </span>
 
-            <div className="flex justify-between gap-[25px] flex-wrap my-5">
+            <div className="grid grid-cols-5 gap-y-6 gap-x-[25px] mt-5 mb-4">
               {imgSource.map((src, index) => (
-                <div key={index}>
-                  <Image src={src} alt={src} className="cursor-pointer" />
+                <div key={index} className="flex justify-center items-center">
+                  <Image src={src} alt={src} className="cursor-pointer w-full" />
                 </div>
               ))}
             </div>
 
             <span className="text-[#393939] font-normal text-base">
-              Or copy link
+              {translate("offers.share_images_modal.link")}
             </span>
 
             <div className="flex justify-between items-center border border-[#BFBFBF] rounded-lg px-3 p-1 mt-5">
@@ -84,21 +88,21 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
                 />
               </span>
 
-          
+
               <BaseButton
                 containerClassName={`flex gap-x-1 ${!isCopied ? "bg-lighttest-gray" : "bg-primary"
                   } py-1 px-2.5 rounded !!border !!border-lightGray`}
                 textClassName={`${!isCopied ? "text-primary" : "text-white"
                   } font-medium`}
-                buttonText={!isCopied ? "Copy" : "Copied"}
+                buttonText={!isCopied ? translate("offers.share_images_modal.copy_button") : translate("offers.share_images_modal.copy_button")}
                 onClick={handleCopy}
               >
                 {!isCopied && <CopyIcon />}
               </BaseButton>
-            </div>
-          </div>
-        </div>
-      </BaseModal>
+            </div >
+          </div >
+        </div >
+      </BaseModal >
     </>
   );
 };

@@ -64,5 +64,6 @@ export const useOfferEditAdditionalDetails = ({ handleNext }: { handleNext: (cur
     handleSubmit,
     errors,
     error,
+    translate
   };
 };
