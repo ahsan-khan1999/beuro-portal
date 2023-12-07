@@ -122,6 +122,8 @@ export const useServiceOfferEditDetail = ({
         setValue("discountAmount", totalPrices);
         console.warn("Amount should not be greater than total price");
       }
+    } else {
+      setValue("discountAmount", "");
     }
 
     const grandTotal = totalPrices + taxAmount - discount;
