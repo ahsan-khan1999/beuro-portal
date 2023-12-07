@@ -110,6 +110,21 @@ export const updateContractStatus: AsyncThunk<boolean, object, object> | any =
         }
     });
 
+export const updateContractPaymentStatus: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("contract/update/payment", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updateContractPaymentStatus(data);
+            thunkApi.dispatch(setContractDetails(response?.data?.Contract))
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
 const ContractSlice = createSlice({
     name: "ContractSlice",
     initialState,

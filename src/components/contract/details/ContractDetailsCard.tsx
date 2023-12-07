@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { contractTableTypes } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { staticEnums } from "@/utils/static";
 interface ContractDetailCardProps {
   contractDetails: contractTableTypes
   offerDeleteHandler: () => void
@@ -131,22 +133,38 @@ const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, 
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base ">
+            <span className="text-[#4D4D4D] font-normal text-base  ">
               Payment Method:
             </span>
-            <span className="text-base font-medium text-[#45C769] border border-[#45C769] rounded-lg px-4 py-[3px] flex items-center cursor-default">
-              {contractDetails.offerID?.paymentType}
+            <span>
 
+              <DropDown
+                items={Object.keys(staticEnums['PaymentType']).map((item) => ({ item: item }))}
+                selectedItem={contractDetails.offerID?.paymentType}
+                onItemSelected={handlePaymentStatusUpdate}
+                dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
+                dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+
+              />
             </span>
           </div>
-          <div className="flex items-center gap-[11px]">
+          <div className="flex items-center gap-[11px] ">
             <span className="text-[#4D4D4D] font-normal text-base">
               Status:
             </span>
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] flex items-center cursor-default">
-              {contractDetails.contractStatus}
+            {
+              staticEnums['ContractStatus'][contractDetails?.contractStatus] !== 3 &&
+              <DropDown
+                items={Object.keys(staticEnums['ContractStatus']).map((item) => ({ item: item }))}
+                selectedItem={contractDetails?.contractStatus}
+                onItemSelected={handleStatusUpdate}
+                dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
+                dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
 
-            </span>
+              /> || <span
+                className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium "
+              >{contractDetails?.contractStatus}</span>
+            }
           </div>
 
           <div>

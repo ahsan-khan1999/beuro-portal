@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../useRedux';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { deleteContract, readContractDetails, setContractDetails, updateContractStatus } from '@/api/slices/contract/contractSlice';
+import { deleteContract, readContractDetails, setContractDetails, updateContractPaymentStatus, updateContractStatus } from '@/api/slices/contract/contractSlice';
 import { CustomerPromiseActionType } from '@/types/customer';
 import { ModalConfigType, ModalType } from '@/enums/ui';
 import { updateModalType } from '@/api/slices/globalSlice/global';
@@ -135,11 +135,11 @@ export default function useContractDetail() {
     };
   
     const handlePaymentStatusUpdate = async (paymentType: string) => {
-      const res = await dispatch(updatePaymentStatus({ data: { id: contractDetails?.id, paymentType: staticEnums["PaymentType"][paymentType] } }))
+      const res = await dispatch(updateContractPaymentStatus({ data: { id: contractDetails?.id, paymentType: staticEnums["PaymentType"][paymentType] } }))
       if (res?.payload) offerCreatedHandler()
     }
     const handleStatusUpdate = async (offerStatus: string) => {
-      const res = await dispatch(updateContractStatus({ data: { id: contractDetails?.id, offerStatus: staticEnums["ContractStatus"][offerStatus] } }))
+      const res = await dispatch(updateContractStatus({ data: { id: contractDetails?.id, contractStatus: staticEnums["ContractStatus"][offerStatus] } }))
       if (res?.payload) offerCreatedHandler()
   
     }

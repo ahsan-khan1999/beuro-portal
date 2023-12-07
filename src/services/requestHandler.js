@@ -56,7 +56,8 @@ const SERVICE_URLS = {
   offerStatus: "/offer/updateOfferStatus/",
   sendEmail: "/offer/updateOfferStatus/",
   offerPaymentStatus: "/offer/update-payment-status/",
-  contractStatus: "/contract/updateContractStatus/"
+  contractStatus: "/contract/updateContractStatus/",
+  contractPaymentStatus: "/contract/update-payment-status/"
 };
 
 const login = (data) =>
@@ -191,6 +192,8 @@ const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 const updateContractStatus = (data) =>
   put(SERVICE_URLS.contractStatus + `${data?.id}`, data, { feature: featureConstants.login });
+const updateContractPaymentStatus = (data) =>
+  put(SERVICE_URLS.contractPaymentStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const deleteContract = (data) =>
   del(SERVICE_URLS.contract + `/${data?.id}`, {}, { feature: featureConstants.login });
 
@@ -379,6 +382,7 @@ const apiServices = {
   sendOfferEmail,
   updatePaymentStatus,
   readContractDetail,
-  updateContractStatus
+  updateContractStatus,
+  updateContractPaymentStatus
 };
 export default apiServices;
