@@ -534,3 +534,12 @@ export const useClipboardCopy = <
 
   return { inputRef, handleCopy, isCopied };
 };
+
+export const calculateDiscount = (amount: number, discount: number, isPercent: boolean) => {
+  if (isPercent) {
+    const effectiveDiscountPercentage = Math.min(discount, 100);
+    return (effectiveDiscountPercentage / 100) * amount;
+  } else {
+    return Math.min(discount, amount);
+  }
+};
