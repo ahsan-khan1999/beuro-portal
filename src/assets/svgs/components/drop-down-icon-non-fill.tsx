@@ -10,7 +10,7 @@ export const DropDownNonFillIcon = ({
   className?: string;
 }) => {
   const rotateTransform = isOpen ? "rotate(180)" : "";
-  const classes = combineClasses("text-lightGray", className);
+  const classes = combineClasses("text-lightGray");
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ export const DropDownNonFillIcon = ({
         d="M-11189.91-7594.619l5.494,5.494,5.494-5.494"
         transform="translate(11191.324 7596.033)"
         fill="none"
-        stroke="#707070"
+        stroke={className ? className : "#707070"}
         strokeLinecap="round"
         strokeWidth="2"
       />

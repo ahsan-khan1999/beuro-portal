@@ -38,6 +38,7 @@ const SERVICE_URLS = {
   contract: "/contract",
   company: "/company",
   invoice: "/invoice",
+
   contactSupport: "/contactSupport",
   employee: "/employee",
   createEmployee: "/user/create-manager",
@@ -57,7 +58,13 @@ const SERVICE_URLS = {
   sendEmail: "/offer/updateOfferStatus/",
   offerPaymentStatus: "/offer/update-payment-status/",
   contractStatus: "/contract/updateContractStatus/",
-  contractPaymentStatus: "/contract/update-payment-status/"
+  contractPaymentStatus: "/contract/update-payment-status/",
+  invoiceCollection: "/invoice/invoice-collection",
+  createRecurringInvoice: "/invoice/invoice-collection/create-recurring-invoice/",
+  updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
+  updateInvoiceStatus: "/invoice/update-invoiceCollection-status/"
+
+
 };
 
 const login = (data) =>
@@ -208,8 +215,11 @@ const updateCompany = (data) =>
 const deleteCompany = (data) =>
   del(SERVICE_URLS.company, data, { feature: featureConstants.login });
 
-const readInvoice = (data) =>
-  get(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+const readInvoice = (params) =>
+  get(SERVICE_URLS.invoice, params, { feature: featureConstants.login }, { detail: false });
+
+const readInvoiceDetails = (params) =>
+  get(SERVICE_URLS.invoice, params, { feature: featureConstants.login }, { detail: true });
 
 const createInvoice = (data) =>
   post(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
@@ -291,7 +301,21 @@ const readNotes = (params) =>
   get(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, {}, { feature: featureConstants.login }, { detail: false });
 const createNotes = (params) =>
   post(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+
+const readCollectiveInvoices = (params) =>
+  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: false });
+const readCollectiveInvoicesDetails = (params) =>
+  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: true });
+
+const createInvoiceCollection = (data) =>
+  post(SERVICE_URLS.createRecurringInvoice, data, { feature: featureConstants.login });
+
+const updateInvoiceCollection = (data) =>
+  put(SERVICE_URLS.updateRecurringInvoice + `/${data?.id}`, data, { feature: featureConstants.login });
+const updateInvoiceStatus = (data) =>
+  put(SERVICE_URLS.updateInvoiceStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
+
   login,
   singUp,
   loginGoogle,
@@ -383,6 +407,12 @@ const apiServices = {
   updatePaymentStatus,
   readContractDetail,
   updateContractStatus,
-  updateContractPaymentStatus
+  updateContractPaymentStatus,
+  readInvoiceDetails,
+  readCollectiveInvoices,
+  readCollectiveInvoicesDetails,
+  createInvoiceCollection,
+  updateInvoiceCollection,
+  updateInvoiceStatus
 };
 export default apiServices;

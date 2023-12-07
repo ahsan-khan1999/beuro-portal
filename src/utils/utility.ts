@@ -477,6 +477,19 @@ export function getContractStatusColor(status: string) {
   else if (staticEnums["ContractStatus"][status] == staticEnums["ContractStatus"]["Cancelled"]) return "#FF0000";
   else return "#FF376F"
 }
+export function getInvoiceStatusColor(status: string) {
+  if (staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Pending"]) return "#FE9244";
+  else if (staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Overdue"]) return "#FF0000";
+  else if (staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Paid"]) return "#45C769";
+  else return "#FF376F"
+}
+
+export function getInvoiceEmailColor(status: string) {
+  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Draft"]) return "#FF376F";
+  else if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Send"]) return "#4A13E7";
+  else if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]) return "#FE9244";
+  else return "#FF376F"
+}
 
 
 
