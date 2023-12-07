@@ -31,6 +31,7 @@ export const RadioButtonField = ({
         {...register(name)}
         className={`${classes}`}
         value={value}
+        disabled={disabled}
         // onChangeCapture={() => {
         //   console.log("change");
         //   onClick && onClick()
