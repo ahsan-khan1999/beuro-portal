@@ -624,7 +624,7 @@ export const staticEnums: Record<string, any> = {
     "Confirmed": 1,
     "Cancelled": 2
   },
- 
+
   "InvoiceStatus": {
     "Pending": 0,
     "Overdue": 1,
@@ -3457,20 +3457,20 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "Accepted",
-        pathname: "/invoices?accepted",
+        title: "Open",
+        pathname: "/invoices?open",
 
         role: [1],
       },
       {
-        title: "Rejected",
-        pathname: "/invoices?rejected",
+        title: "Overdue",
+        pathname: "/invoices?overdue",
 
         role: [1],
       },
       {
-        title: "Pending",
-        pathname: "/invoices?pending",
+        title: "Paid",
+        pathname: "/invoices?paid",
 
         role: [1],
       },
@@ -4078,6 +4078,22 @@ export const DEFAULT_CONTRACT = {
   payment: "",
   status: "",
   type: "",
-  
-  
+
+
+}
+
+export const DEFAULT_INVOICE = {
+  id: "",
+  invoiceNumber:"",
+  customer: "",
+  invoiceTitle: "",
+  totalPrice: "",
+  emailStatus: "",
+  paid: {
+    initialValue: "",
+    finalValue: "",
+  },
+  status: "",
+  editNote: "",
+  type: "",
 }

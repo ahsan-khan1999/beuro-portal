@@ -11,65 +11,19 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useTranslation } from "next-i18next";
+import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
 
 const InvoiceDetails = () => {
-  const [switchDetails, setSwitchDetails] = useState("Invoice");
-  const { t: translate } = useTranslation();
-
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const handleInvoiceCreation = () => {
-    dispatch(updateModalType(ModalType.INVOICE_CREATE));
-  };
-
-  const invoiceCreated = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.CREATION));
-  };
-
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const route = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.INVOICE_CREATE]: (
-      <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
-    ),
-    [ModalType.CREATION]: (
-      <CreationCreated
-        onClose={onClose}
-        heading={translate("invoice.invoice_created_modal.main_heading")}
-        subHeading={translate("invoice.invoice_created_modal.sub_heading")}
-        route={route}
-      />
-    ),
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
+  const { handleInvoiceCreation, handleNotes, invoiceDetails, offerDeleteHandler, renderModal, setSwitchDetails, switchDetails ,collectiveInvoice,handlePaymentStatusUpdate,handleInvoiceStatusUpdate,collectiveReciept} = useInvoiceDetail()
+  const invoiceComponent = {
+    "Invoice": <InvoiceDetailsTable collectiveInvoice={collectiveInvoice} handleInvoiceStatusUpdate={handleInvoiceStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate}/>,
+    "Receipt": <ReceiptDetailsTable collectiveInvoice={collectiveReciept} handleInvoiceStatusUpdate={handleInvoiceStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate}/>
+  }
   return (
     <>
       <Layout>
-        {/* {switchDetails.includes("Invoice") ? (
-          <InvoiceCardLayout>
-            <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
-          </InvoiceCardLayout>
-        ) : (
-          <InvoiceCardLayout>
-            <ReceiptDetailsData />
-          </InvoiceCardLayout>
-        )} */}
-
         <InvoiceCardLayout>
-          <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
+          <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} invoiceDetails={invoiceDetails} handleNotes={handleNotes}/>
         </InvoiceCardLayout>
         <div className="flex mt-[12px] mb-[18px]">
           <DetailsSwitchBtn
@@ -78,11 +32,7 @@ const InvoiceDetails = () => {
           />
         </div>
 
-        {switchDetails.includes("Invoice") ? (
-          <InvoiceDetailsTable />
-        ) : (
-          <ReceiptDetailsTable />
-        )}
+        {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
       </Layout>
       {renderModal()}
     </>

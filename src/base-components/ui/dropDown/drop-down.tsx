@@ -39,7 +39,7 @@ export const DropDown = ({
   );
     
   return (
-    <div className={`flex flex-col w-full gap-y-2 ${dropDownDisabled ? 'pointer-events-none' : ''}`} ref={dropdownRef}>
+    <div className={`  flex flex-col w-full gap-y-2 ${dropDownDisabled ? 'pointer-events-none' : ''}`} ref={dropdownRef}>
       {label && <label className="text-sm text-gray">{label}</label>}
       <div className="relative w-full">
         <button

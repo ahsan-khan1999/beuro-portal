@@ -4,20 +4,25 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import editIcon from "@/assets/svgs/Edit_note.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: Function}) => {
+import { InvoiceTableRowTypes } from "@/types/invoice";
+import { formatDateTimeToDate } from "@/utils/utility";
+const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes }: {
+  handleInvoiceCreation: () => void, invoiceDetails: InvoiceTableRowTypes, handleNotes: (item: string,
+    e?: React.MouseEvent<HTMLSpanElement>) => void
+}) => {
   const router = useRouter()
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="back_icon" onClick={() => router.push("/invoices")} className="cursor-pointer"/>
+          <Image src={backIcon} alt="back_icon" onClick={() => router.push("/invoices")} className="cursor-pointer" />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
             Invoice details
           </p>
         </div>
 
         <button
-          onClick={() => handleInvoiceCreation(true)}
+          onClick={() => handleInvoiceCreation()}
           className="px-[13px] py-[9px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
         >
           <Image src={plusIcon} alt="plusIcon" />
@@ -32,19 +37,19 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
             <span className="text-base font-normal text-[#4D4D4D]">
               Invoice ID:
             </span>
-            <span className="text-[#393939] font-medium text-base">R-2000</span>
+            <span className="text-[#393939] font-medium text-base">{invoiceDetails.invoiceNumber}</span>
           </div>
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
               Contract ID:
             </span>
-            <span className="text-[#4A13E7] font-medium text-base">V-2000</span>
+            <span className="text-[#4A13E7] font-medium text-base">{invoiceDetails.contractID?.contractNumber}</span>
           </div>
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
               Offer ID:
             </span>
-            <span className="text-[#4A13E7] font-medium text-base">A-2000</span>
+            <span className="text-[#4A13E7] font-medium text-base">{invoiceDetails.contractID?.offerID?.offerNumber}</span>
           </div>
         </div>
 
@@ -54,7 +59,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               Invoice Title:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              Office Cleaning Munich Lorem Ipsum dollar
+              {invoiceDetails.contractID?.offerID?.title}
             </span>
           </div>
           <div className="flex gap-[44px] items-center">
@@ -63,7 +68,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
                 Worker:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                Hassam
+                {invoiceDetails.contractID?.offerID?.customerID?.fullName}
               </span>
             </div>
             <div className="flex gap-2">
@@ -71,7 +76,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
                 Email Status:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                3/5 Send
+                {invoiceDetails?.sentEmail + "/" + invoiceDetails?.totalEmail + " Sent"}
               </span>
             </div>
           </div>
@@ -82,10 +87,10 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
                 Creation Date:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                25/08/2023
+                {formatDateTimeToDate(invoiceDetails?.createdAt)}
               </span>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center" onClick={(e) => handleNotes(invoiceDetails?.id, e)}>
               <span className="text-base font-normal text-[#4D4D4D]">
                 Notes:
               </span>
@@ -100,7 +105,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               Total Amount:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              20000 CHF
+              {invoiceDetails?.contractID?.offerID?.total}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
@@ -108,7 +113,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               Paid Amount:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              11000 CHF
+              {invoiceDetails?.paidAmount} CHF
             </span>
           </div>
           <div className="flex gap-x-[10px] pt-3">
@@ -116,7 +121,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               Unpaid Amount:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              9000 CHF
+              {invoiceDetails?.remainingAmount} CHF
             </span>
           </div>
         </div>

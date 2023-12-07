@@ -15,11 +15,13 @@ export default function Invoices() {
     itemsPerPage,
     handleNotes,
     renderModal,
+    filter,
+    setFilter, handleFilterChange,
   } = useInvoice();
   return (
     <>
       <Layout>
-        <TableFunctions />
+        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
         <TableLayout>
           <TableHeading />
           <TableRows dataToAdd={currentPageRows} handleNotes={handleNotes} />

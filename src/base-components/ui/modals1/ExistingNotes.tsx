@@ -8,12 +8,8 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { formatDateReverse } from "@/utils/utility";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
+import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
-
-interface ExistingNotes {
-  creator: string;
-  description: string;
-}
 
 const ExistingNotes = ({
   handleAddNote,
@@ -22,7 +18,7 @@ const ExistingNotes = ({
 }: {
   handleAddNote: (id: string) => void;
   onClose: () => void;
-  leadDetails: Lead | OffersTableRowTypes | contractTableTypes
+  leadDetails: Lead | OffersTableRowTypes | contractTableTypes | InvoiceTableRowTypes
 }) => {
   const { notes } = useAppSelector(state => state.note)
   const { t: translate } = useTranslation()

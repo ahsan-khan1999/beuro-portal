@@ -50,7 +50,7 @@ export const YogaPdfContainer = ({children}: MyComponentProp) => {
   };
 
   return (
-    <div style={{ transform: `scale(${scale})` }} className="max-w-[1160px] mx-auto">
+    <div style={{ transform: `scale(${scale})`, transformOrigin: 'top', height: '100vh' }} className="py-6">
       <div className="w-[1160px]">
       {children}
       </div>
