@@ -15,7 +15,7 @@ const LeadsDetails = () => {
         <DetailsCard>
           <LeadsDetailsCardData leadDeleteHandler={leadDeleteHandler} leadDetails={leadDetails}/>
         </DetailsCard>
-        <div className=" mt-7">
+        <div className="mt-7">
           <LeadsDetailsData />
         </div>
       </Layout>

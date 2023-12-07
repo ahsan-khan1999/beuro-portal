@@ -1,22 +1,18 @@
 import React, { SetStateAction, useState } from "react";
-import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
 import LeadsFilter from "./leads-filter";
-import { Status } from "@/types/global";
-import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { FilterType } from "@/types";
 import { Button } from "@/base-components/ui/button/button";
 
 const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) => {
-
+  const router = useRouter()
   function onInputChange(text: string) { }
 
   const handleButtonClick = (key: string, value: boolean) => {
     setFilter({ ...filter, [key]: value });
   };
 
-  const router = useRouter();
   return (
     <div className="flex justify-between items-center mb-4">
       <h1 className="text-xl text-[#222B45] ">Leads</h1>
@@ -41,8 +37,8 @@ const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: Fil
           text="Add New"
           id="add"
         />
-          
-        
+
+
       </div>
     </div>
   );

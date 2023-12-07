@@ -2,12 +2,14 @@ import Image from "next/image";
 import React from "react";
 import atmCardIcon from "@/assets/svgs/bank-name.svg";
 import editInfoIcon from "@/assets/svgs/edit_info.svg";
+import { useTranslation } from "next-i18next";
 
 const UpgradeSection = ({
   handleEditPayment,
 }: {
   handleEditPayment: () => void;
 }) => {
+  const { t: translate } = useTranslation();
   return (
     <div className="flex flex-col">
       <section
@@ -17,25 +19,23 @@ const UpgradeSection = ({
         }}
       >
         <p className="text-xl text-white font-medium">
-          Upgrade To Gold Membership!
+          {translate("setting.billing.upgrade_card.heading")}
         </p>
-        <p className="text-sm text-white font-normal my-3">
-          You can use any of the given package on <br /> one month free trail.
-          smith amit dolem
-          <br /> isplum sumip alpsum Lorem ipsum.
+        <p className="text-sm text-white font-normal mt-3">
+        {translate("setting.billing.upgrade_card.description")}
         </p>
 
-        <button className="text-base font-medium text-[#4A13E7] bg-white w-full rounded-lg p-4">
-          Upgrade
+        <button className="text-base font-medium text-[#4A13E7] bg-white w-full rounded-lg mt-5 p-4">
+        {translate("setting.billing.upgrade_card.button")}
         </button>
       </section>
 
       <section className="bg-white p-4 rounded-md mt-[18px]">
         <div className="flex flex-col gap-y-2">
-          <p className="text-base font-normal text-[#4B4B4B]">Payment Method</p>
+          <p className="text-base font-normal text-[#4B4B4B]">{translate("setting.billing.payment_method")}</p>
           <p className=" bg-[#5488EE] rounded-md px-3 py-1 w-fit bg-opacity-20">
             <span className="text-[#4B4B4B] font-normal text-xs">
-              Next Renew 24 september 2018
+            {translate("setting.billing.next_renew")}
             </span>
           </p>
         </div>
@@ -44,7 +44,7 @@ const UpgradeSection = ({
           <div className="flex items-center gap-x-6">
             <Image src={atmCardIcon} alt="atmCardIcon" className="w-[27px]" />
             <p className="flex flex-col">
-              <span className="text-xm font-medium text-[#4B4B4B]">VISA</span>
+              <span className="text-xm font-medium text-[#4B4B4B]">{translate("setting.billing.card_type")}</span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 **********13165
               </span>

@@ -1,6 +1,7 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   register,
@@ -11,17 +12,19 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   customerType,
   setValue
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "Name",
+              text: `${translate("leads.customer_details.first_name")}`,
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -36,11 +39,11 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
           },
 
-
           {
+            containerClass: "mb-0",
             label: {
-              text: "Customer Type",
-              htmlFor: "select",
+              text: `${translate("leads.customer_details.customer_type")}`,
+              htmlFor: "customerType",
               className: "mb-[10px]",
             },
             field: {
@@ -62,7 +65,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
 
           {
             containerClass: "mb-0",
-            label: { text: "Email Address", htmlFor: "email" },
+            label: {
+              text: `${translate("leads.customer_details.email_address")}`,
+              htmlFor: "email",
+            },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark  focus:!border-primary",
@@ -77,7 +83,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate("leads.customer_details.phone_number")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -96,7 +102,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text: `${translate("leads.customer_details.mobile_number")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -117,7 +123,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Address 1 Details*",
+        text: `${translate("leads.customer_details.address_details")}`,
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
       },
@@ -126,12 +132,12 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
         type: Field.div,
         id: "div-field",
 
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Street NO.",
+              text: `${translate("leads.customer_details.street_no")}`,
               htmlFor: "address.streetNumber",
               className: "mb-[10px]",
             },
@@ -149,7 +155,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Post Code",
+              text: `${translate("leads.customer_details.post_code")}`,
               htmlFor: "address.postalCode",
               className: "mb-[10px]",
             },
@@ -168,7 +174,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Country",
+              text: `${translate("leads.customer_details.country")}`,
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
@@ -214,7 +220,9 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate(
+                "leads.customer_details.save_changes_button"
+              )}`,
               inputType: "submit",
               className:
                 "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

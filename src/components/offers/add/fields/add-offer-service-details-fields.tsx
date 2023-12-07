@@ -13,6 +13,8 @@ const serviceObject = {
   description: "",
   totalPrice: ""
 }
+import { useTranslation } from "next-i18next";
+
 export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   register,
   loading,
@@ -37,7 +39,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "grid grid-cols-3 gap-x-3 mt-5",
+          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
@@ -261,14 +263,15 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
   setValue
 ) => {
   const { total, offerDetails, generateTotal, isDiscount, isTax, taxType, discountType } = properties
+  const { t: translate } = useTranslation()
   const formField: FormField[] = [
     {
       containerClass: "mt-[30px]",
-        //@ts-expect-error
+      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3  gap-x-3 ",
+        className: "grid grid-cols-1 xl:grid-cols-2 gap-x-3 gap-y-5 ",
         children: [
           {
             containerClass: "grid col-span-2",
@@ -280,7 +283,9 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                 {
                   containerClass: "mb-0 ",
                   label: {
-                    text: "Discount Description",
+                    text: translate(
+                      "offers.service_details.discount_description"
+                    ),
                     htmlFor: "discountDescription",
                     className: "mb-[10px] flex",
                   },
@@ -347,7 +352,6 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
         ],
       },
     },
-
 
   ];
 

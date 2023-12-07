@@ -1,11 +1,13 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const EmailDetailsData = () => {
+  const { t: translate } = useTranslation();
   return (
     <div className="bg-white rounded-md px-5 pt-5 pb-10">
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-[2rem] leading-8 font-medium">
-          Email
+          {translate("email_tracker.email_detail_heading")}
         </h2>
       </div>
 

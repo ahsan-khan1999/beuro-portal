@@ -2,6 +2,7 @@ import React from "react";
 import SettingLayout from "../SettingLayout";
 import Image from "next/image";
 import silvreIcon from "@/assets/svgs/sliver_ion.svg";
+import { useTranslation } from "next-i18next";
 
 type PlanData = {
   title: string;
@@ -9,25 +10,27 @@ type PlanData = {
 };
 
 const PlanComp = () => {
+  const { t: translate } = useTranslation();
+
   const planData: PlanData[] = [
     {
-      title: "Managers",
+      title:`${translate("setting.billing.request_services.managers")}`,
       status: "Not Included",
     },
     {
-      title: "Accounting Reports",
+      title: `${translate("setting.billing.request_services.account_reports")}`,
       status: "Not Included",
     },
     {
-      title: "Customize Email",
+      title: `${translate("setting.billing.request_services.customize_email")}`,
       status: "Not Included",
     },
     {
-      title: "With Watermark",
+      title: `${translate("setting.billing.request_services.watermark")}`,
       status: "Not Included",
     },
     {
-      title: "API Features",
+      title: `${translate("setting.billing.request_services.features")}`,
       status: "Not Included",
     },
   ];
@@ -37,7 +40,7 @@ const PlanComp = () => {
       <div className="mx-4 mb-4 ">
         <div className="flex justify-between mt-3 ">
           <span className="text-[#4B4B4B] font-normal text-lg">
-            Current Plan
+            {translate("setting.billing.heading")}
           </span>
           <span className="text-sm font-medium text-[#8F8F8F]">
             <strong className="text-lg font-medium text-black">CHF0</strong>
@@ -49,19 +52,18 @@ const PlanComp = () => {
           <div className="flex flex-col">
             <article className="flex gap-x-2">
               <Image src={silvreIcon} alt="silvreIcon" />
-              <span className="text-lg text-black font-medium">Silver</span>
+              <span className="text-lg text-black font-medium"> {translate("setting.billing.package_name")}</span>
             </article>
 
             <p className="mt-[25px] text-sm font-normal tetx-[#4B4B4B]">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has a been the industry's
+            {translate("setting.billing.package_description")}
             </p>
           </div>
 
           <div>
             <section>
               <span className="text-[#4B4B4B] font-normal text-xs">
-                Request:
+              {translate("setting.billing.request_services.heading")}:
               </span>
               <div>
                 <p
@@ -93,7 +95,7 @@ const PlanComp = () => {
 
             <button className="border border-[#BFBFBF] rounded-lg p-4 text-center mt-[30px] w-full">
               <span className="text-[#393939] font-medium text-base">
-                Change Membership
+              {translate("setting.billing.request_services.change_button")}
               </span>
             </button>
           </div>

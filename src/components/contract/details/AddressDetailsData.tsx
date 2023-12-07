@@ -1,14 +1,15 @@
 import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { contractTableTypes } from "@/types/contract";
-// import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddressDetailsData = ({ contractDetails }: { contractDetails: contractTableTypes }) => {
-  // const router = useRouter();
+  const { t: translate } = useTranslation();
+
 
   return (
     <div className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit" id="Address Details">
-      <h2 className="text-[#393939] text-lg font-medium">Address Details</h2>
+      <h2 className="text-[#393939] text-lg font-medium">{translate("contracts.address_details.main_heading")}</h2>
       <hr className="opacity-20 my-6" />
       {
         contractDetails.offerID?.addressID?.address?.map((item, key) => (
@@ -18,7 +19,8 @@ const AddressDetailsData = ({ contractDetails }: { contractDetails: contractTabl
             <div className="grid grid-cols-3 gap-x-3">
               <div>
                 <label className="text-[#4D4D4D] mb-3 block text-sm">
-                  Street NO.
+                  {translate("contracts.address_details.street_no")}.
+
                 </label>
                 <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                   {item.streetNumber}
@@ -26,7 +28,8 @@ const AddressDetailsData = ({ contractDetails }: { contractDetails: contractTabl
               </div>
               <div>
                 <label className="text-[#4D4D4D] mb-3 block text-sm">
-                  Post Code
+                  {translate("contracts.address_details.post_code")}
+
                 </label>
                 <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                   {item.postalCode}
@@ -34,7 +37,11 @@ const AddressDetailsData = ({ contractDetails }: { contractDetails: contractTabl
                 </div>
               </div>
               <div>
-                <label className="text-[#4D4D4D] mb-3 block text-sm">Country</label>
+                <label className="text-[#4D4D4D] mb-3 block text-sm">
+
+                {translate("contracts.address_details.country")}
+
+                </label>
                 <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                   {item.country}
 
@@ -44,7 +51,8 @@ const AddressDetailsData = ({ contractDetails }: { contractDetails: contractTabl
 
             <div className="mt-5 w-full">
               <label className="text-[#4D4D4D] mb-[10px] block text-sm">
-                Description
+                {translate("contracts.address_details.description")}
+
               </label>
               <div className="h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {item.description}

@@ -63,5 +63,6 @@ export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHan
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

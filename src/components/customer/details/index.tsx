@@ -33,17 +33,21 @@ const CustomerDetails = () => {
           handleDelete={deleteHandler}
         />
       </DetailsCard>
-      <div className="flex mt-8">
-        <CustomerForm
-          isUpdate={isUpdate}
-          setIsUpdate={setIsUpdate}
-          customerDetail={customerDetail}
-          fields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-        />
-        <SideCard customerDetail={customerDetail} />
+      <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
+        <div className="xl:col-span-2">
+          <CustomerForm
+            isUpdate={isUpdate}
+            setIsUpdate={setIsUpdate}
+            customerDetail={customerDetail}
+            fields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+          />
+        </div>
+        <div className="xl:col-span-1">
+          <SideCard customerDetail={customerDetail} />
+        </div>
       </div>
       {renderModal()}
     </Layout>

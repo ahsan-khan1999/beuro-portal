@@ -41,5 +41,6 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     errors,
     fields,
     onSubmit,
+    translate
   };
 }

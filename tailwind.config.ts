@@ -2,21 +2,29 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
-    screens: {
-      xxs: "300px",
-      xs: "475px",
-      sm: "640px",
-      md: "768px",
-      850: "850px",
-      lg: "1024px",
-      xl: "1160px",
-    },
+    // screens: {
+    //   // xxs: "300px",
+    //   // xs: "475px",
+    //   // sm: "640px",
+    //   // md: "768px",
+    //   // 850: "850px",
+    //   // lg: "1024px",
+    //   // xl: "1160px",
+    //   maxSize: '1440px',
+    // },
     fontFamily: {
       sans: ["Poppins", "Graphik", "sans-serif"],
     },
     extend: {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
+      },
+      screens: {
+        xs: "375px",
+        mlg: "1090px",
+        xlg: "1200px",
+        maxSize: "1280px",
+        xMaxSize: "1400px"
       },
       margin: {
         "60px": "3.75rem",

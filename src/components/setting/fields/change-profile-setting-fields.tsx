@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateAccountSettingFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   register,
@@ -7,30 +8,28 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   control,
   onClick
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-4 mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex gap-x-4 items-center relative",
+        className: "flex ",
         children: [
           {
             field: {
               type: Field.span,
-              text: "Public Information",
+              text: `${translate("setting.account_setting.public_info")}`,
               containerClassName: "text-[14px] text-[#393939] font-normal ",
               id: "",
-
             },
           },
           {
             field: {
               type: Field.span,
-              containerClassName:
-                "absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
+              containerClassName: "bg-[#BFBFBF]  w-full h-[5px]",
               id: "",
-
             },
           },
         ],
@@ -41,7 +40,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3",
+        className: "grid grid-cols-2 xl:grid-cols-3",
         children: [
           {
             containerClass: "flex justify-center items-center mb-5 col-span-1",
@@ -57,12 +56,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.div,
               id: "div-field",
-              className: "grid grid-cols-2 gap-x-6 ",
+              className: "grid grid-cols-2 gap-x-6 gap-y-5",
               children: [
                 {
                   containerClass: "mb-0",
                   label: {
-                    text: "Full Name",
+                    text: `${translate("setting.account_setting.full_name")}`,
                     htmlFor: "fullName",
                   },
                   field: {
@@ -81,7 +80,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                 {
                   containerClass: "mb-0",
                   label: {
-                    text: "Email",
+                    text: `${translate("setting.account_setting.email")}`,
                     htmlFor: "email",
                   },
                   field: {
@@ -100,9 +99,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "mb-0",
                   label: {
-                    text: "Company Name",
+                    text: `${translate(
+                      "setting.account_setting.company_name"
+                    )}`,
                     htmlFor: "companyName",
                   },
                   field: {
@@ -125,9 +126,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "mb-0 ",
                   label: {
-                    text: "Phone Number",
+                    text: `${translate(
+                      "setting.account_setting.phone_number"
+                    )}`,
                     htmlFor: "phoneNumber",
                   },
                   field: {
@@ -144,9 +147,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "mb-0",
                   label: {
-                    text: "Mobile Number",
+                    text: `${translate(
+                      "setting.account_setting.mobile_number"
+                    )}`,
                     htmlFor: "mobileNumber",
                   },
                   field: {
@@ -163,9 +168,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "mb-0 ",
                   label: {
-                    text: "Website",
+                    text: `${translate("setting.account_setting.website")}`,
                     htmlFor: "website",
                   },
                   field: {
@@ -183,9 +188,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "mb-0",
                   label: {
-                    text: "MwST Number (Optional)",
+                    text: `${translate("setting.account_setting.mwst_number")}`,
                     htmlFor: "mwstNumber",
                   },
                   field: {
@@ -223,10 +228,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             field: {
               type: Field.span,
-              text: "Private Information",
+              text: `${translate("setting.account_setting.private_info")}`,
               containerClassName: "text-[14px] text-[#393939] font-normal ",
               id: "",
-
             },
           },
           {
@@ -235,7 +239,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               containerClassName:
                 " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
               id: "",
-
             },
           },
         ],
@@ -246,12 +249,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-[43px] ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-y-5 gap-x-[43px] ",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Street Address",
+              text: `${translate("setting.account_setting.street_address")}`,
               htmlFor: "streetAddress",
             },
             field: {
@@ -271,7 +274,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Postcode",
+              text: `${translate("setting.account_setting.post_code")}`,
               htmlFor: "postCode",
             },
             field: {
@@ -294,7 +297,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Country",
+              text: `${translate("setting.account_setting.country")}`,
               htmlFor: "country",
             },
             field: {
@@ -312,9 +315,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass: "mt-5 mb-0",
+            containerClass: "mb-0",
             label: {
-              text: "Bank Name",
+              text: `${translate("setting.account_setting.bank_name")}`,
               htmlFor: "bankName",
             },
             field: {
@@ -336,9 +339,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass: "mt-5 mb-0",
+            containerClass: "mb-0",
             label: {
-              text: "Account No",
+              text: `${translate("setting.account_setting.account_no")}`,
               htmlFor: "accountNumber",
             },
             field: {
@@ -360,9 +363,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass: "mt-5 mb-0",
+            containerClass: "mb-0",
             label: {
-              text: "Iban Number",
+              text: `${translate("setting.account_setting.iban_number")}`,
               htmlFor: "IBAN_number",
             },
             field: {
@@ -398,10 +401,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.span,
-              text: "Change Password",
+              text: `${translate("setting.account_setting.change_password")}`,
               containerClassName: "text-[14px] text-[#393939] font-normal ",
               id: "",
-
             },
           },
           {
@@ -410,7 +412,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               containerClassName:
                 " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
               id: "",
-
             },
           },
         ],
@@ -452,7 +453,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Restore Default",
+              text: `${translate("setting.account_setting.restore_button")}`,
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px]   text-dark hover:bg-none",
@@ -464,7 +465,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate(
+                "setting.account_setting.save_changes_button"
+              )}`,
               inputType: "submit",
               className:
                 "rounded-lg p-4 w-fit h-[50px]  text-white hover:bg-none ",

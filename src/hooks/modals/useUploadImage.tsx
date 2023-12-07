@@ -43,5 +43,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

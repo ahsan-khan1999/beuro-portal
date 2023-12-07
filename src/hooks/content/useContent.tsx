@@ -1,5 +1,6 @@
 import { ContentTableRowTypes } from "@/types/content";
 import { DEFAULT_CONTENT, contentData } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
@@ -20,7 +21,7 @@ const useContent = () => {
     ContentTableRowTypes[]
   >([]);
   const totalItems = totalCount;
-
+  const { t: translate } = useTranslation();
   const itemsPerPage = 10;
   useEffect(() => {
     localStoreUtil.remove_data("content")
@@ -53,7 +54,8 @@ const useContent = () => {
     itemsPerPage,
     handleFilterChange,
     filter,
-    setFilter
+    setFilter,
+    translate
   };
 };
 

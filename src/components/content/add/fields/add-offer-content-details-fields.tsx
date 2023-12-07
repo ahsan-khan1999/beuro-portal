@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
 import { FieldValues, UseFormRegister } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   register,
@@ -14,11 +15,12 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   setAttachements,
   contentDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-5",
       label: {
-        text: "Content Name",
+        text: `${translate("content.details.content_name")}`,
         htmlFor: "contentName",
         className: "mb-[10px]",
       },
@@ -39,8 +41,8 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-4",
-        children: (count) && generateAddressChildren(register, count, OnClick),
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
+        children: (count) && generateAddressChildren(register, count, OnClick,translate),
       },
     },
     {
@@ -53,9 +55,11 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Offer Title",
+              text: translate("content.details.offer_title"),
+
               htmlFor: "offerContent.title",
-              className: "mb-[10px]",
+              className: "mb-2",
+
             },
             field: {
               type: Field.input,
@@ -70,7 +74,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Offer Description",
+              text: translate("content.details.offer_description"),
               htmlFor: "offerContent.description",
               className: "mb-[10px]",
             },
@@ -87,7 +91,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Email Body",
+              text: translate("content.details.email_body"),
               htmlFor: "offerContent.body",
               className: "mb-[10px]",
             },
@@ -107,7 +111,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
           {
             containerClass: "mb-0 mt-5",
             label: {
-              text: "Attachments",
+              text: translate("content.details.attachments"),
               htmlFor: "offerContent.attachments",
               className: "mb-[10px]",
             },
@@ -133,7 +137,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Next",
+        text: `${translate("content.details.next_button")}`,
         inputType: "submit",
         className:
           "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
@@ -147,14 +151,14 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
 
 
 
-const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick?: () => void) => {
+const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick?: () => void, translate: Function) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
     const dateField = {
       containerClass: "mb-0 ",
       label: {
-        text: "Address Label",
+        text: translate("content.details.address_labels"),
         htmlFor: `offerContent.address_${key + 1}`,
         className: "mb-[10px]",
       },

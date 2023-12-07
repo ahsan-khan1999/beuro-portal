@@ -1,17 +1,19 @@
 import { contractTableTypes } from "@/types/contract";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableTypes }) => {
+  const { t: translate } = useTranslation();
   return (
     <div className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit" id="Offer Details">
-      <h2 className="text-[#393939] text-lg font-medium">Offer Details</h2>
+      <h2 className="text-[#393939] text-lg font-medium">{translate("contracts.customer_details.heading")}</h2>
       <hr className="opacity-20 my-6" />
       <div className="mt-5">
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Customer Type
+              {translate("contracts.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {contractDetails.offerID?.customerID?.customerType}
@@ -19,28 +21,29 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Your Name
+              {translate("contracts.customer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {contractDetails.offerID?.customerID?.fullName}
 
             </div>
           </div>
-          {
-            staticEnums["CustomerType"][contractDetails?.offerID?.customerID?.customerType] === 1 &&
-            <div>
-              <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Company Name
-              </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {contractDetails?.offerID?.customerID?.companyName}
+  {
+    staticEnums["CustomerType"][contractDetails?.offerID?.customerID?.customerType] === 1 &&
+      <div>
+        <label className="text-[#4D4D4D] mb-3 block text-sm">
+        {translate("contracts.customer_details.company_name")}
 
-              </div>
-            </div>
+        </label>
+        <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+          {contractDetails?.offerID?.customerID?.companyName}
+
+        </div>
+          </div>
           }
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Email Address
+              {translate("contracts.customer_details.email_address")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {contractDetails?.offerID?.customerID?.email}
@@ -49,7 +52,7 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Phone Number
+              {translate("contracts.customer_details.phone_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {contractDetails?.offerID?.customerID?.phoneNumber}
@@ -58,7 +61,7 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Mobile Number
+              {translate("contracts.customer_details.mobile_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {contractDetails?.offerID?.customerID?.mobileNumber}
@@ -67,11 +70,11 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
           </div>
         </div>
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
+          <h4 className="text-[#8F8F8F] mb-[10px]">{translate("contracts.customer_details.address_details")}</h4>
           <div className="grid grid-cols-3 gap-x-3">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Street NO.
+                {translate("contracts.customer_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {contractDetails?.offerID?.customerID?.address?.streetNumber}
@@ -80,7 +83,7 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Post Code
+                {translate("contracts.customer_details.post_code")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {contractDetails?.offerID?.customerID?.address?.postalCode}
@@ -89,7 +92,7 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Country
+                {translate("contracts.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {contractDetails?.offerID?.customerID?.address?.country}
@@ -99,7 +102,7 @@ const OfferDetailsData = ({ contractDetails }: { contractDetails: contractTableT
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -1,16 +1,14 @@
 import React, { SetStateAction, useState } from "react";
-import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
-import { useRouter } from "next/router";
-import { Status } from "@/types/global";
 import ContractFilters from "./contract-filters";
 import { FilterType } from "@/types";
 import { Button } from "@/base-components/ui/button/button";
+import { useTranslation } from "next-i18next";
 
 const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) => {
-
+  const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">Contracts</h1>
+      <h1 className="text-xl text-[#222B45] ">{translate("contracts.main_heading")}</h1>
       <div className="flex items-center ">
 
         <ContractFilters filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />

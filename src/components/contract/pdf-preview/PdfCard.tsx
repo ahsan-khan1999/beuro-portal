@@ -11,7 +11,7 @@ const PdfCard = () => {
   const router = useRouter();
   return (
     <div className="rounded-md bg-white py-[20px] px-[20px] w-full h-fit">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-5">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -50,7 +50,7 @@ const PdfCard = () => {
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col xl:flex-row justify-between xl:flex-wrap gap-y-2">
         <div>
           <span className="text-[#4D4D4D] text-base font-normal">
             Contract ID:

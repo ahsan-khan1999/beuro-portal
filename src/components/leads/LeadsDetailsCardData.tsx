@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
 import { formatDate, formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -16,6 +17,7 @@ const LeadsDetailsCardData = ({
   leadDetails: Lead
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -27,7 +29,7 @@ const LeadsDetailsCardData = ({
             onClick={() => router.push("/leads")}
           />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            Leads Details
+            {translate("leads.card_content.heading")}
           </p>
         </div>
 
@@ -35,7 +37,7 @@ const LeadsDetailsCardData = ({
           <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] ">
             <Image src={createOfferIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
-              Create Offer
+             {translate("leads.card_content.create_button")}
             </p>
           </div>
           <Image src={printerIcon} alt="printer_icon" />
@@ -48,17 +50,18 @@ const LeadsDetailsCardData = ({
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="w-4/5">
+
+      <div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              Lead ID:
+            {translate("leads.card_content.lead_id")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">{leadDetails.refID}</span>
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
-              Status:
+            {translate("leads.card_content.status")}:
             </span>
             <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
             {leadDetails.leadStatus}
@@ -67,7 +70,7 @@ const LeadsDetailsCardData = ({
 
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
-              Creation Date:
+            {translate("leads.card_content.created_date")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
             {formatDateTimeToDate(leadDetails.createdAt)}
@@ -75,7 +78,7 @@ const LeadsDetailsCardData = ({
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
-              Creation by:
+            {translate("leads.card_content.created_by")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
               {leadDetails.createdBy?.fullName}

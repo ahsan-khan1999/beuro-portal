@@ -15,10 +15,8 @@ import { Field } from "@/enums/form";
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, append, testFields, remove, register, loading } =
+  const { fields, control, onSubmit, handleSubmit, errors, error , translate} =
     useAddOfferDetails(onHandleNext);
-  // console.log(testFields,"testFields");
-  // const { register } = useForm()
   return (
     <FormCard>
       <div
@@ -32,13 +30,13 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
             className="cursor-pointer"
             onClick={() => router.push("/offers")}
           />
-          <p className="font-medium text-[24px] leading-6 ">Offer details</p>
+          <p className="font-medium text-[24px] leading-6 ">{translate("offers.offer_details.heading")}</p>
         </div>
         <button
           onClick={() => router.push("/offers")}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
         >
-          Cancel
+          {translate("offers.offer_details.cancel_button")}
         </button>
       </div>
       <hr className="opacity-20 mb-5" />

@@ -11,9 +11,11 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useTranslation } from "next-i18next";
 
 const InvoiceDetails = () => {
   const [switchDetails, setSwitchDetails] = useState("Invoice");
+  const { t: translate } = useTranslation();
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -42,8 +44,8 @@ const InvoiceDetails = () => {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Invoice Created Successful "
-        subHeading="Thanks for creating Invoice we are happy to have you. "
+        heading={translate("invoice.invoice_created_modal.main_heading")}
+        subHeading={translate("invoice.invoice_created_modal.sub_heading")}
         route={route}
       />
     ),

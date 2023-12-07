@@ -1,11 +1,13 @@
 import { Field } from "@/enums/form";
 import { FormField, GeneratePaymentSettingFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
   register,
   loading,
   control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
@@ -27,7 +29,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                     id: "paymentspan",
 
                     type: Field.span,
-                    text: "Stripe Setting",
+                    text: `${translate("admin.settings.payment_setting.heading")}`,
                     containerClassName:
                       "text-[20px] text-[#222B45] font-normal ",
                   },
@@ -43,7 +45,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: "Publishable Key*",
+                          text: `${translate("admin.settings.payment_setting.pub_key")}`,
                           htmlFor: "publishableKey",
                         },
                         field: {
@@ -60,7 +62,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: "Search Key*",
+                          text: `${translate("admin.settings.payment_setting.search_key")}`,
                           htmlFor: "searchKey",
                         },
                         field: {
@@ -77,7 +79,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0 ",
                         label: {
-                          text: "Test Mode",
+                          text: `${translate("admin.settings.payment_setting.test_mode")}`,
                           htmlFor: "testMode",
                           className: "mb-[10px]",
                         },
@@ -98,7 +100,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: "Active",
+                          text: `${translate("admin.settings.payment_setting.active")}`,
                           htmlFor: "active",
                           className: "mb-[10px]",
                         },
@@ -124,7 +126,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                   containerClass: "mb-0",
                   field: {
                     type: Field.button,
-                    text: "Save Changes",
+                    text: `${translate("admin.settings.payment_setting.save_changes_button")}`,
                     inputType: "submit",
                     className:
                       "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",

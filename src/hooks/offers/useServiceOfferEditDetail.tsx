@@ -167,5 +167,6 @@ export const useServiceOfferEditDetail = ({ handleNext }: { handleNext: (current
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

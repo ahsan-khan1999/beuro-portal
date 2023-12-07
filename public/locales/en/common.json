@@ -100,7 +100,7 @@
     "create": "Create Account",
     "or_login": "or login with"
   },
-  "forogt_password": {
+  "forgot_password": {
     "title": "Forgot Password",
     "description": "Enter your account details",
     "label": "Email",
@@ -153,24 +153,1298 @@
     },
     "user_profile_already_complete": "User Profile is already completed"
   },
-  "sidebar":{
-    "admin":{
 
+  "sidebar": {
+    "customer": {
+      "dashboard": "Dashboard",
+      "customers": "Customers",
+      "leads": {
+        "leads": "Leads",
+        "open": "Open",
+        "close": "Close",
+        "expire": "Expire"
+      },
+      "offers": {
+        "offers": "Offers",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "contracts": {
+        "contracts": "Contracts",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "invoices": {
+        "invoices": "Invoices",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "services": "Services",
+      "employees": "Employees",
+      "content": "Content",
+      "mail_tracker": "Mail Tracker",
+      "settings": "Settings",
+      "contact_supports": "Contact Supports"
     },
-    "customer":{
-      "dashboard":"Dashboard"
+    "admin": {
+      "dashboard": "Dashboard",
+      "customers": "Customers",
+      "plans": "Plans",
+      "payments": "Payments",
+      "contact_supports": "Contact Supports",
+      "Settings": "Settings"
     }
   },
-  "customer":{
-     "table":{
- 
-     },
-     "details":{
 
-     }
+  "customers": {
+    "title": "Customers",
+    "add_button": "Add New",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "created_on": "Created On",
+      "location": "Location",
+      "type": "Type",
+      "edit": "Edit"
+    },
+
+    "card_content": {
+      "heading": "Customers Details",
+      "customer_id": "Customer ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+
+    "details": {
+      "add_customer_heading": "Add new Customer",
+      "heading": "Customer Details",
+      "edit_button": "Edit Details",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "company_name": "Company Name",
+      "save_button": "Save"
+    },
+
+    "side_bar_details": {
+      "heading": "Details",
+      "lead_id": "Lead ID",
+      "name": "Name",
+      "lead_source": "Lead Source",
+      "lead_status": "Lead Status",
+      "lead_expire": "Lead Expire"
+    },
+
+    "customer_cretaed_modal": {
+      "main_heading": "Customer Created Successful ",
+      "sub_heading": "Thanks for creating Customer we are happy to have you. ",
+      "button": "Done"
+    },
+
+    "are_you_sure_modal": {
+      "main_heading": "Are You Sure",
+      "sub_heading": "You want to leave this page without saving changes.",
+      "cancel_button": "Cancel",
+      "confirm": "Confirm"
+    }
   },
-  "filter":{
-    
+
+  "contact_support": {
+    "main_heading": "Submit your request",
+    "form_fields": {
+      "full_name": "Full Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "reason": "Reson for Contact",
+      "message": "Your Message",
+      "request_button": "Submit Request"
+    },
+    "request_modal": {
+      "main_heading": "Your Request has been sent",
+      "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
+      "button": "Done"
+    }
+  },
+  "email_tracker": {
+    "main_heading": "Email Tracker",
+    "email_detail_heading": "Email",
+    "table_functions": {
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
+    "table_headings": {
+      "id": "ID",
+      "recipient": "Recipient",
+      "subject": "Subject",
+      "send_at": "Send at",
+      "viewed_at": "Viewd at",
+      "status": "Status",
+      "view_mail": "View Mail"
+    },
+    "card_content": {
+      "main_heading": "Email Details",
+      "id": "ID",
+      "status": "Status",
+      "subject": "Subject",
+      "recipient": "Recipient",
+      "send_at": "Send At",
+      "viewed_at": "Viewd At",
+      "attachments": "Attachments"
+    },
+    "email_confirmation_modal": {
+      "main_heading": "Please confirm Email ID No.",
+      "sub_heading": "Enter Your Email ID No.",
+      "cancel_button": "Cancel",
+      "confirm_button": "Confirm"
+    },
+    "email_delete_modal": {
+      "heading": "Are you sure you want to delete this Email?",
+      "cancel_button": "Cancel",
+      "delete_button": "Delete"
+    }
+  },
+  "services": {
+    "main_heading": "Services",
+    "add_button": "Add New",
+    "add_service_heading": "Add new Service",
+    "table_headings": {
+      "id": "ID",
+      "service": "Service",
+      "created_on": "Created On",
+      "price": "Price",
+      "description": "Description",
+      "edit": "Edit"
+    },
+    "card_content": {
+      "main_heading": "Services/Product Details",
+      "customer_id": "Customer ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+    "detail": {
+      "main_heading": "Services/Product Details",
+      "edit_button": "Edit Details",
+      "title": "Service/product Name",
+      "unit": "Unit",
+      "price": "Price",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save"
+    }
+  },
+  "employees": {
+    "main_heading": "Employees",
+    "add_button": "Add New",
+    "add_new_employee": "Add Employee",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "designation": "Designation",
+      "created_on": "Created On",
+      "edit": "Edit"
+    },
+    "card_content": {
+      "heading": "Employees Details",
+      "employee_id": "Employee ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+    "details": {
+      "main_heading": "Employee Details",
+      "edit_button": "Edit Details",
+      "edit_password": "Edit Password",
+      "full_name": "Full Name",
+      "designation": "Designation",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save"
+    },
+    "edit_password_modal": {
+      "heading": "Reset Password",
+      "your_password": "Your Password",
+      "new_pasword": "Create New Password",
+      "confirm_password": "Confirm New Password",
+      "submit_button": "Submit"
+    },
+    "password_changed_modal": {
+      "main_heading": "Password has been changes successfully",
+      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "button": "Done"
+    },
+    "link_send_modal": {
+      "main_heading": "Link Send to Employ Email",
+      "sub_heading": "Thanks for signing up to Buro we are happy to have you. Please take a second to make sure we have your correct email address.",
+      "button": "Done"
+    },
+    "create_new_password_modal": {
+      "main_heading": "Create New Password",
+      "your_mail": "Your Mail",
+      "create_new_password": "Create New Password",
+      "confirm_password": "Confirm New Password",
+      "submit_button": "Submit"
+    },
+    "password_set_modal": {
+      "main_heading": "Your Password set Successfully",
+      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "button": "Done"
+    }
+  },
+  "setting": {
+    "heading": "Setting",
+    "save_setting": "Save Setting",
+    "steps_heading": {
+      "account_setting": "Account Setting",
+      "system_setting": "System Setting",
+      "templates": "Templates",
+      "follow_up_setting": "Follow Up Setting",
+      "billing": "Billing",
+      "mail_setting": "Mail Setting"
+    },
+    "account_setting": {
+      "public_info": "Public Information",
+      "full_name": "Full Name",
+      "email": "Email",
+      "company_name": "Company Name",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "website": "Website",
+      "mwst_number": "MWST Number (Optional)",
+      "private_info": "Private Information",
+      "street_address": "Street Address",
+      "post_code": "Post Code",
+      "country": "Country",
+      "bank_name": "Bank Name",
+      "account_no": "Account No",
+      "iban_number": "Iban Number",
+      "change_password": "Change Password",
+      "change": "Change",
+      "restore_button": "Restore Default",
+      "save_changes_button": "Save Changes"
+    },
+    "change_password_modal": {
+      "old_password": "Old Password",
+      "new_pasword": "Create New Password",
+      "confirm_password": "Confirm Password",
+      "change_button": "Change"
+    },
+    "system_setting": {
+      "tax": "Tax",
+      "add_button": "Add New",
+      "invoice_over_due": "Invoice Over Due",
+      "invoice_days_limit": "Invoice Over Due Days Limit",
+      "currency": "Currency",
+      "connect_with_buro": "Connect With Buro",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our",
+      "allowed_domain": "Allowed Domain",
+      "security_token": "Security Token",
+
+      "tabs_tax": {
+        "no_tax": "No Tax",
+        "inclusive_tax": "Inclusive Tax",
+        "exclusive_tax": "Exclusive Tax"
+      }
+    },
+    "tax_modal": {
+      "exclusive_heading": "Exclusive Tax",
+      "add_new_tax": "Add New Tax",
+      "name": "Name",
+      "tax_rate": "Tax Rate(%)",
+      "button": "Add Tax"
+    },
+    "templates": {
+      "heading": "Current PDF Design Templates",
+      "change_button": "Change",
+
+      "first_col_heading": {
+        "heading": "First Column",
+        "company_name": "Company Name",
+        "email": "Email",
+        "phone_number": "Phone Number",
+        "website": "Website",
+        "mwst_number": "MWST Number"
+      },
+      "second_column": {
+        "heading": "Second Column",
+        "street_no": "Street No",
+        "post_code": "Post Code",
+        "bank_name": "Bank Name",
+        "account_number": "Account Number",
+        "iban_number": "IBAN Number"
+      },
+      "third_column": {
+        "third_column_heading": "Third Column",
+        "fourth_column_heading": "Fourth Column",
+        "row_one": "Row 1",
+        "row_two": "Row 2",
+        "row_three": "Row 3",
+        "row_fourth": "Row 4",
+        "row_fifth": "Row 5"
+      }
+    },
+    "follow_up_setting": {
+      "on_offer_expire": "Create Follow Up On Offer Expire",
+      "on_lead_create": "Create Follow Up On Lead Creation",
+      "add_follow_up": {
+        "heading": "Follow Up Reasons",
+        "add_label": "Add Reasons",
+        "add_button": "Add Reason"
+      }
+    },
+    "billing": {
+      "heading": "Current Plan",
+      "payment_method": "Payment Method",
+      "next_renew": "Next Renew 24 september 2018",
+      "card_type": "Visa",
+      "package_name": "Silver",
+      "package_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's",
+      "request_services": {
+        "heading": "Request",
+        "managers": "Managers",
+        "account_reports": "Account Reports",
+        "customize_email": "Customize Email",
+        "watermark": "With Watermark",
+        "features": "API Features",
+        "change_button": "Change Membership"
+      },
+      "payment_history": {
+        "main_heading": "Payment History",
+        "setting": "Setting",
+        "amount": "Amount",
+        "date": "Date",
+        "status": "Status"
+      },
+      "upgrade_card": {
+        "heading": "Upgrade To Gold Membership!",
+        "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "button": "Upgrade"
+      },
+
+      "edit_payment_modal": {
+        "heading": "Edit Payment Details",
+        "sub_heading": "We automatically bill on the 1st of each month",
+        "package_name": "Silver",
+        "name": "Name on card",
+        "expire": "Expire",
+        "card_number": "Card Number",
+        "cvv": "CVV",
+        "cancel_button": "Cancel",
+        "save_changes_button": "Save Changes"
+      }
+    },
+    "mail_setting": {
+      "system_config": "Use System Mail Configuration",
+      "own_config": "Use Own Mail Configuration",
+      "mail_form_fields": {
+        "mail_driver": "Mail Driver",
+        "mail_host": "Mail Host",
+        "mail_port": "Mail Port",
+        "mail_encryption": "Mail Encryption",
+        "mail_user": "Mail Username",
+        "mail_password": "Mail Password",
+        "mail_address": "Mail From Address",
+        "mail_name": "Mail From Name",
+        "email": "Email",
+        "mail_description": "Enter The Email To Receive The Testing Email Of Mail Configuration."
+      }
+    }
+  },
+  "invoice": {
+    "main_heading": "Invoice",
+    "table_functions": {
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "price": "Total Price",
+      "email_status": "Email Status",
+      "paid": "Paid",
+      "status": "Status",
+      "notes": "Notes"
+    },
+    "card_content": {
+      "heading": "Invoice Details",
+      "invoice_id": "Invoice ID",
+      "title": "Invoice Title",
+      "total_amount": "Total Amount",
+      "contract_id": "Contarct ID",
+      "worker": "Worker",
+      "status": "Email Status",
+      "paid_amount": "Paid Amount",
+      "offer_id": "Offer ID",
+      "created_date": "Creation Date",
+      "notes": "Notes",
+      "unpaid_amount": "Unpaid Amount"
+    },
+    "invoice_table_heading": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "issue_date": "Issue Date",
+      "amount": "Amount",
+      "email_status": "Email Status",
+      "payment": "Payment",
+      "status": "Status"
+    },
+    "receipt_table_heading": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "paid_date": "Paid Date",
+      "amount": "Amount",
+      "invoice": "Invoice",
+      "email_status": "Email Status",
+      "payment": "Payment"
+    },
+    "create_invoice_modal": {
+      "total_amount": "Total Amount",
+      "remaining_amount": "Remaining Amount",
+      "enter_amount": "Enter the amount",
+      "amount": "Amount",
+      "percentage": "Percentage",
+      "payment_method": "Payment Method",
+      "mark_it_recuring": "Mark it Recuring",
+      "date_of_invoice": "Date of next invoice",
+      "frequency": "Frequency",
+      "button": "Create Invoice"
+    },
+    "invoice_created_modal": {
+      "main_heading": "Invoice Created Successful ",
+      "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
+      "button": "Preview PDF"
+    }
+  },
+  "contracts": {
+    "main_heading": "Contarcts",
+    "table_functions": {
+      "open": "Open",
+      "confirm": "Confirmed",
+      "cancel": "Cancelled"
+    },
+    "table_headings": {
+      "id": "ID",
+      "title": "Contract Title",
+      "customer": "Customer",
+      "total_price": "Total Price",
+      "created_on": "Created On",
+      "payment": "Payment",
+      "status": "Status",
+      "images": "Images",
+      "notes": "Notes"
+    },
+    "card_content": {
+      "heading": "Offer Details",
+      "confirm_button": "Send Confirmation",
+      "contract_id": "Contarct ID",
+      "offer_title": "Offer Title",
+      "worker": "Worker",
+      "offer_id": "Offer ID",
+      "created_date": "Creation Date",
+      "service_date": "Service Date",
+      "offer_status": "Offer Status",
+      "payment_method": "Payment Method",
+      "contract_status": "Contarct Status",
+      "notes": "Notes",
+      "images": "Images"
+    },
+    "tabs_headings": {
+      "offer_details": "Offer Details",
+      "address_details": "Address Details",
+      "service_details": "Service Details",
+      "additional_details": "Additional Details"
+    },
+    "customer_details": {
+      "heading": "Offer Details",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country"
+    },
+    "address_details": {
+      "main_heading": "Address Details",
+      "heading": "Address 1 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description"
+    },
+    "service_details": {
+      "heading": "Service/Product Details",
+      "title": "Service/Product Title",
+      "description": "Description",
+      "price": "Price(CHF)",
+      "unit": "Unit",
+      "count": "Count",
+      "total_price": "Total Price",
+      "sub_total": "Sub Total",
+      "tax": "Tax(%)"
+    },
+    "additional_details": {
+      "heading": "Additional Details"
+    },
+    "contract_email_preview": {
+      "heading": "Contract Email Preview",
+      "email": "Email",
+      "content": "Content",
+      "subject": "Subject",
+      "description": "Description",
+      "attachments": "Attachments",
+      "back_button": "Back",
+      "next_button": "Next"
+    }
+  },
+  "content": {
+    "main_heading": "Content",
+    "add_button": "Add New",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "title": "Content Title",
+      "created_on": "Created On",
+      "edit": "Edit"
+    },
+    "tabs_headings": {
+      "offer_content": "Offers Content",
+      "confirmation_content": "Confirmation Content",
+      "invoice_content": "Invoice Content",
+      "receipt_content": "Receipt Content"
+    },
+    "details": {
+      "offer_heading": "Offer Content",
+      "confirmation_heading": "Confirmation Content",
+      "invoice_heading": "Invoice Content",
+      "receipt_heading": "Receipt Content",
+      "edit_button": "Edit Details",
+      "content_name": "Content Name",
+      "address_labels": "Address Labels",
+      "offer_title": "Offer Content",
+      "offer_description": "Offer Description",
+      "email_body": "Email Body",
+      "confirmation_title": "Confirmation Title",
+      "Confirmation_description": "Confirmation Description",
+      "invoice_title": "Invoice Title",
+      "invoice_description": "Invoice Description",
+      "receipt_title": "Receipt Title",
+      "receipt_description": "Receipt Description",
+      "attachments": "Attachments",
+      "back_button": "Back",
+      "next_button": "Next",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save"
+    },
+    "content_created_modal": {
+      "main_heading": "Content Created Successful ",
+      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "button": "Done"
+    }
+  },
+  "leads": {
+    "main_heading": "Leads",
+    "add_button": "Add New",
+    "side_images_heading": "Images",
+    "table_functions": {
+      "open": "Open Leads",
+      "close": "Close Leads",
+      "expire": "Expire Leads"
+    },
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "desire_date": "Desire Date",
+      "location": "Location",
+      "status": "Status",
+      "images": "Images",
+      "note": "Notes"
+    },
+
+    "card_content": {
+      "heading": "Leads Details",
+      "create_button": "Create Offer",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "created_date": "Creation Date",
+      "created_by": "Created by"
+    },
+    "tabs_headings": {
+      "customer": "Customer Details",
+      "address": "Address Details",
+      "service": "Service Details",
+      "additional": "Additional Details"
+    },
+    "customer_details": {
+      "heading": "Customer Details",
+      "edit_button": "Edit Details",
+      "customer": "Customer",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next"
+    },
+    "address_details": {
+      "main_heading": "Address Details",
+      "edit_button": "Edit Details",
+      "heading": "Address 1 Details",
+      "sub_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next",
+      "back_button": "Back"
+    },
+    "service_details": {
+      "heading": "Service/Product Details",
+      "edit_button": "Edit Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date",
+      "flexibility": "Flexibility",
+      "availability": "Contact Availability",
+      "prefer_contact": "Preferred Contact",
+      "budget": "Budget",
+      "lead_source": "Lead Source",
+      "other_services": "Other Services",
+      "save_changes_button": "Save Changes",
+      "cancel_button": "Cancel",
+      "next_button": "Next",
+      "back_button": "Back"
+    },
+    "additional": {
+      "heading": "Additional Details",
+      "edit_button": "Edit Details",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next",
+      "cancel_button": "Cancel",
+      "back_button": "Back",
+      "save_button": "Save"
+    },
+    "confirm_lead_modal": {
+      "main_heading": "Please confirm Lead ID",
+      "sub_heading": "Enter Lead ID",
+      "cancel_button": "Cancel",
+      "confirm_button": "Confirm"
+    },
+    "leads_created_modal": {
+      "main_heading": "Lead Created Successful",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
+      "add_button": "Add Images",
+      "without_images": "Continue without Images"
+    }
+  },
+
+  "common": {
+    "image_upload_heading": "Drop or Attach your files here",
+    "notes_modal": {
+      "heading": "Notes",
+      "button": "Add New Note"
+    },
+    "add_note_modal": {
+      "heading": "Add Notes",
+      "label": "Add your Note",
+      "button": "Save"
+    },
+    "images_modal": {
+      "heading": "Images",
+      "title": "7 images uploaded",
+      "sub_title": "Images should be max 20, file size up to 10MB",
+      "image_slider_heading": "Image Name"
+    },
+    "delete_modal": {
+      "heading": "Are you sure you want to delete this Image?",
+      "cancel_button": "Cancel",
+      "delete_button": "Delete"
+    },
+    "are_you_sure_modal": {
+      "title": "Are You Sure",
+      "sub_heading": "You want yo make this account free",
+      "cancel_button": "Cancel",
+      "yes_button": "Yes",
+      "confirm_heading": "Please confirm Company",
+      "company_name": "Enter Company Neme",
+      "confirm_button": "Confirm",
+      "success": "Successful",
+      "success_heading": "Your customer is now totally free.",
+      "finish_button": "Finish"
+    },
+    "select_month_modal": {
+      "heading": "Select Month",
+      "button": "Download",
+      "description": "Select the month and the option to download your payment history data",
+      "months": {
+        "jan": "JAN",
+        "feb": "FEB",
+        "mar": "MAR",
+        "apr": "APR",
+        "may": "MAY",
+        "jun": "JUN",
+        "jul": "JUL",
+        "aug": "AUG",
+        "sep": "SEP",
+        "oct": "OCT",
+        "nov": "NOV",
+        "dec": "DEC"
+      }
+    },
+    "download_modal": {
+      "heading":" Download Successful ",
+      "sub_heading":"Great job on successfully downloading your payment history!",
+      "button":"Done"
+    }
+  },
+  "offers": {
+    "main_heading": "Offers",
+    "add_button": "Add New",
+    "table_functions": {
+      "open": "Open",
+      "signed": "Signed",
+      "expire": "Expired",
+      "rejected": "Rejected"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Offer Title",
+      "total_price": "Total Price",
+      "created_on": "Created On",
+      "email": "Email",
+      "payment": "Payment",
+      "status": "Status",
+      "images": "Images",
+      "note": "Notes"
+    },
+    "card_content": {
+      "main_heading": "Offer Details",
+      "send_button": "Send Email",
+      "offer_id": "Offer ID",
+      "offer_title": "Offer Title",
+      "worker": "Worker",
+      "created_date": "Creation Date",
+      "service_date": "Service Date",
+      "email_status": "Email Status",
+      "payment_method": "Payment Method",
+      "status": "Status",
+      "notes": "Notes",
+      "images": "Images"
+    },
+    "tabs_heading": {
+      "offer": "Offer Details",
+      "address": "Address Details",
+      "service": "Service Details",
+      "additional": "Additional Details"
+    },
+    "detail_buttons": {
+      "activity": "Activity",
+      "discount": "Discount"
+    },
+    "offer_details": {
+      "heading": "Offer Details",
+      "edit_button": "Edit Details",
+      "customer_type": "Customer Type",
+      "full_name": "Your Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "customer_address": "Customer Address",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "select_customer": "Select Customer",
+      "customer_name": "Customer Name",
+      "email": "Email",
+      "offer_title": "Offer Title",
+      "offer_number": "Offer Number",
+      "date": "Date",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "next_button": "Next"
+    },
+    "address_details": {
+      "main_heading": "Address Details",
+      "edit_button": "Edit Details",
+      "heading": "Address 1 Details",
+      "sub_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "add_button": "Add New Address",
+      "back_button": "Back",
+      "next_button": "Next"
+    },
+    "service_details": {
+      "main_heading": "Service/Product Details",
+      "edit_button": "Edit Details",
+      "price": "Price",
+      "detail_headings": {
+        "title": "Service/Product Title",
+        "description": "Description",
+        "price": "Price(CHF)",
+        "unit": "Unit",
+        "count": "Count",
+        "total_price": "Total Price",
+        "grand_toal": " Grand  Total",
+        "sub_total": "Sub Total",
+        "tax": "Tax%"
+      },
+      "service_name": "Service Name",
+      "service_type": "Service Type",
+      "discount_description": "Discount Description",
+      "add_button": "Add New Service",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "back_button": "Back",
+      "next_button": "Next"
+    },
+    "additional_details": {
+      "main_heading": "Additional Details",
+      "edit_button": "Edit Details",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "choose": "Choose From Existing",
+      "add_new": "Add New",
+      "back_button": "Back"
+    },
+    "side_images": {
+      "heading": "Images",
+      "views": "View More",
+      "upload_button": "Upload"
+    },
+    "share_images_modal": {
+      "heading": "Share Images",
+      "sub_heading": "Share Images on",
+      "link": "Or copy link",
+      "copy_button": "Copy"
+    },
+    "are_you_modal": {
+      "main_heading": "Are Your Sure",
+      "sub_heading": "A record already exist for this customer. Do you still want to create new offer?",
+      "yes_button": "Yes",
+      "cancel_button": "Cancel"
+    },
+    "offer_created_modal": {
+      "main_heading": "Offer Created Successful ",
+      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "button": "Done"
+    }
+  },
+  "pdf_preview": {
+    "card_content": {
+      "heading": "Solar EEG",
+      "send_mail": "Send Email",
+      "offer_id": "Offer ID",
+      "email_status": "Email Status"
+    },
+    "pdf_header": {
+      "offer_no": "OFFER NO",
+      "Offer_date": "OFFER DATE",
+      "created_by": "CREATED BY"
+    },
+    "email": "EMAIL",
+    "phone": "PHONE",
+    "address_one": "ADDRESS 1",
+    "address_two": "ADDRESS 2",
+    "work_date": "WORK DATE",
+    "sub_total": "Sub Total",
+    "tax": "Tax%",
+    "place": "Placeee - Date",
+    "signature": "SIgnature",
+    "discount": "Discount",
+    "service_headings": {
+      "product": "Service / Product",
+      "price": "PRICE",
+      "unit": "UNIT",
+      "count": "COUNT",
+      "total": "TOTAL"
+    }
+  },
+  "admin": {
+    "main_heading": "Super Admin",
+    "overview": {
+      "main_heading": "Overview",
+      "subscriber": "Active Sucbscribers",
+      "companies": "Pending Companies",
+      "customers": "Customers",
+      "plans": "Plans",
+      "sales_report": {
+        "heading": "Saleas Rport",
+        "twelve_months": "12 Months",
+        "six": "6 Months",
+        "thirty_day": "30 Days",
+        "seven_days": "7 Days"
+      },
+      "months_name": {
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec",
+        "jan": "Jan"
+      }
+    },
+    "customers_details": {
+      "main_heading": "Customer Management",
+      "table_functions": {
+        "active": "Ative",
+        "block": "Blocked",
+        "sort": "Sort By"
+      },
+      "table_headings": {
+        "id": "ID",
+        "logo": "Logo",
+        "company_name": "Company Name",
+        "customer_name": "Customer Name",
+        "email": "Email",
+        "plans": "Plans",
+        "status": "Status",
+        "login": "Login"
+      },
+      "card_content": {
+        "main_heading": "Customer Details",
+        "make_button": "Make Infinite",
+        "customer_id": "Customer ID",
+        "role": "Role",
+        "no_of_employee": "No of Employees",
+        "plan": "Plan",
+        "subscription_date": "Subscription Date",
+        "status": "Status",
+        "company_logo": "Company Logo"
+      },
+      "customer_details": {
+        "owner_name": "Owner Name",
+        "company_name": "Company Name",
+        "email_address": "Email Address",
+        "created_on": "Created On",
+        "mobile_number": "Mobile Number",
+        "phone_number": "Phone Number",
+        "sub_heading": "Address Details",
+        "street_no": "Street No",
+        "post_code": "Post Code",
+        "country": "Country"
+      }
+    },
+    "plans_management": {
+      "main_heading": "Plans Management",
+      "add_button": "Add New",
+      "id": "ID",
+      "plan_name": "Plans",
+      "description": "Description",
+      "price": "Price",
+      "employees": "Employees",
+      "delete": "Delete"
+    },
+    "plan_details": {
+      "detail_heading": "Plan Details",
+      "add_heading": "Add new plan",
+      "plans_name": "Plan Name",
+      "pricing": "Pricing Monthly",
+      "annually_discount": "Annually Discount(%)",
+      "number_of_employees": "No of employees",
+      "no_of_request": "No of Requests",
+      "description": "Description",
+      "accounting": "Accounting Reports",
+      "customize_email": "Customize Emails",
+      "watermark": "Watermark",
+      "api_feature": "API Feature",
+      "back_button": "Back",
+      "edit_button": "Edit",
+      "save_button": "Save"
+    },
+    "payment_history": {
+      "heading": "Payment History",
+      "table_headings": {
+        "id": "ID",
+        "company_name": "Company Name",
+        "owner_name": "Owner Name",
+        "plans": "Plans",
+        "pricing": "Pricing",
+        "payments": "Payments",
+        "subscribed_at": "Subscribed at",
+        "status": "Status"
+      }
+    },
+    "support_requests": {
+      "heading": "Support Request",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Customer Name",
+        "email_address": "Email Address",
+        "phone_number": "Phone Number",
+        "request_date": "Request Date",
+        "status": "Status"
+      },
+      "card_content": {
+        "heading": "Request Details",
+        "button": "Customer Details",
+        "customer_id": "Customer ID",
+        "request_date": "Request Date",
+        "status": "Status"
+      },
+      "details": {
+        "name": "Name",
+        "company_name": "Company Name",
+        "email_address": "Email Address",
+        "mobile_number": "Mobile Number",
+        "reason_of_contact": "Reason of contact",
+        "message": "Message"
+      }
+    },
+    "settings": {
+      "main_heading": "Account Setting",
+      "tabs_heading": {
+        "account": "Account Setting",
+        "payment": "Payment Setting",
+        "mail": "Mail setting"
+      },
+      "account_setting": {
+        "full_name": "Full Name",
+        "email": "Email",
+        "update_password": "Update Password",
+        "old_password": "Old Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "save_changes_button": "Save Changes"
+      },
+      "payment_setting": {
+        "heading": "Stripe Setting",
+        "pub_key": "Publishable Key*",
+        "search_key": "Search Key*",
+        "test_mode": "Test Mode",
+        "active": "Ative",
+        "save_changes_button": "Save Changes"
+      },
+      "mail_setting": {
+        "heading": "Use Own Mail Configuration",
+        "mail_form_fields": {
+          "mail_driver": "Mail Driver",
+          "mail_host": "Mail Host",
+          "mail_port": "Mail Port",
+          "mail_encryption": "Mail Encryption",
+          "mail_user": "Mail Username",
+          "mail_password": "Mail Password",
+          "mail_from_address": "Mail From Address",
+          "mail_from_name": "Mail From Name",
+          "email": "Email",
+          "mail_heading": "Enter The Email To Receive The Testing Email Of Mail Configuration.",
+          "save_button": "Save"
+        }
+      }
+    }
+  },
+  "follow_up": {
+    "save_button": "Save",
+    "next_button": "Next",
+    "main_heading": "Details",
+    "add_postponed_note_heading": "Add a postponed Note",
+    "add_remarks_heading": "Add Remarks",
+    "post_pond_button": "PostPoned",
+    "mark_as_complete": "Mark as Complete",
+    "completed_button": "Completed",
+    "customer_detail_heading": "Customer Details",
+    "follow_up_detail_heading": "Follow up Details",
+    "additional_detail_heading": "Additional Details",
+    "lead_detail_heading": "Lead Details",
+    "address_detail_heading": "Address Details",
+    "customer_details": {
+      "name": "Name",
+      "customer_type": "Customer Type",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details"
+    },
+    "follow_details": {
+      "title": "Title/Subject",
+      "date_and_time": "Follow up Date ad Time",
+      "follow_up_type": "Follow up tpe"
+    },
+    "lead_details": {
+      "required_service": "Required Service",
+      "desire_date": "Desire Date and time",
+      "flexibility": "Flexibility",
+      "budget": "Budget"
+    },
+    "address_details": {
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description"
+    },
+    "all_follow_ups": {
+      "heading": "All Follow ups",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Customer Name",
+        "follow_up_date": "Follow Up Date and Time",
+        "title": "Subject/Title",
+        "status": "Status",
+        "delete": "Delete",
+        "details": "Details"
+      }
+    },
+    "add_follow_up": {
+      "heading": "Add Follow up",
+      "select_customer": "Select Customer",
+      "title": "Enter Title",
+      "select_lead": "Select Lead",
+      "follow_up_date": "Follow Up Date and Time",
+      "follow_up_type": "Follow up type",
+      "additional_details": "Additional Details"
+    },
+    "customer_details_modal": {
+      "heading": "Customer Details",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "customer_type": "Customer Type",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_one_heading": "Address 1 Details",
+      "address_two_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country"
+    },
+    "all_customer_details": {
+      "heading": "All Customers",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "created_on": "Created On",
+        "location": "Location",
+        "type": "Type"
+      }
+    },
+    "all_leads_details": {
+      "heading": "All Leads",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "desire_date": "Desire Date",
+        "location": "Location",
+        "status": "Status"
+      }
+    },
+    "service_details": {
+      "heading": "Service Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date",
+      "availability": "Contact Availability",
+      "flexibility": "Flexibility",
+      "prefer_contact": "Preferred Contact",
+      "budget": "Budget",
+      "lead_source": "Lead Source",
+      "other_services": "Other Services",
+      "Additional_details": "Additional Details"
+    }
+  },
+  "dashboard_detail": {
+    "main_heading": "Customer Dashboard",
+    "overview": "Overview",
+    "sales_heading": "Sales Report",
+    "plans": "Plans",
+    "lead_source": "Lead Source",
+    "activity": "Activity",
+    "view_all": "View all",
+    "follow_up_heading": "Follow Ups",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "options_labels": {
+      "week": "Weekly",
+      "month": "Monthly",
+      "year": "Yearly"
+    },
+    "cards_title": {
+      "lead": "Leads",
+      "offer": "Offers",
+      "contracts": "Contracts",
+      "sales": "Sales"
+    },
+    "charts_labels": {
+      "website": "Website",
+      "google": "Google",
+      "facebook": "Facebook",
+      "insta": "Instagram",
+      "pinterest": "Pintterest",
+      "whatsapp": "Whatsapp"
+    },
+    "input_filter": {
+      "all": "All",
+      "lead": "Lead",
+      "offer": "Offer",
+      "contract": "Contract",
+      "invoice": "Invoice",
+      "receipt": "Receipt",
+      "customer": "Customer"
+    }
   }
 
 

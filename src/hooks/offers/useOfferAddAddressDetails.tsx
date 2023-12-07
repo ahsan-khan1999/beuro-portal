@@ -71,9 +71,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
-    register,
-    append,
-    remove,
-    addressFields,
+    translate
   };
 };

@@ -28,25 +28,25 @@ const TableRows = ({
           <div
             // onClick={() => router.push("/leads/details")}
             key={index}
-            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(70px,_70px),minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] cursor-pointer px-6 shadow-tableRow  gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(70px,_70px),minmax(200px,_200px)_minmax(250px,_100%)_minmax(170px,_170px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(120px,_120px)_minmax(160px,_100%)_minmax(130px,_130px)_minmax(65px,_65px)_minmax(45px,_45px)_minmax(50px,_50px)_minmax(30px,_30px)] grid xlg:grid-cols-[minmax(40px,_70px),minmax(130px,_130px)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(40px,_70px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(150px,_100%)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(70px,_70px)_minmax(40px,_40px)]  mt-2 bg-white rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md flex items-center">
+            <span className=" py-4 bg-white rounded-md flex items-center">
               {item?.refID}
             </span>
-            <span className="px-6 py-4 bg-white  flex items-center">
+            <span className=" py-4 bg-white  flex items-center">
               {item.customerID?.fullName}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
+            <span className=" py-4 bg-white flex items-center">
               {item.customerID?.email}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
+            <span className=" py-4 bg-white flex items-center">
               {item.customerID?.phoneNumber}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
+            <span className=" py-4 bg-white flex items-center">
               {formatDate(item.createdAt)}
             </span>
-            <span className="px-6 py-4 bg-white ">{item.customerID?.address?.country}</span>
-            <span className={`px-6 py-4  `}>
+            <span className=" py-4 bg-white ">{item.customerID?.address?.country}</span>
+            <span className={` py-4  `}>
               <div
 
                 className={`bg-[${getStatusColor(item.leadStatus)}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
@@ -55,7 +55,7 @@ const TableRows = ({
               </div>
             </span>
             <span className="px-6 py-4 flex justify-center items-center  bg-white cursor-pointer" onClick={(e) => handleImageUpload(item?.id, e)}>
-             
+
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.03711" y="1.14453" width="31.1684" height="31" rx="7.5" fill="white" stroke="#C7C7C7" />
                 <path d="M20.0838 15.9531C20.0838 15.6117 19.8071 15.335 19.4657 15.335H13.0991C12.7577 15.335 12.481 15.6117 12.481 15.9531C12.481 16.2945 12.7577 16.5712 13.0991 16.5712H19.4657C19.8071 16.5712 20.0838 16.2945 20.0838 15.9531Z" fill="#4A13E7" />

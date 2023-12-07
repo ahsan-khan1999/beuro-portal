@@ -5,14 +5,16 @@ import deleteIcon from "@/assets/svgs/delete.svg";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import useAddReason from "@/hooks/setting/useAddReason";
+import { useTranslation } from "next-i18next";
 
 const FollowUpSetting = () => {
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error } = useAddReason();
+  const { t: translate } = useTranslation();
 
   const data: string[] = [
-    "Create Follow Up On Offer Expire",
-    "Create Follow Up On Lead Creation",
+    `${translate("setting.follow_up_setting.on_offer_expire")}`,
+    `${translate("setting.follow_up_setting.on_lead_create")}`,
   ];
 
   const [isActive, setIsActive] = useState(new Array(data.length).fill(false));
@@ -59,10 +61,11 @@ const FollowUpSetting = () => {
         ))}
       </section>
 
-      <section className="grid grid-cols-3 mt-3 gap-x-2">
-        <div className="rounded-md bg-white pl-[32px] pr-[27px] pt-4 w-full h-fit col-span-1">
+      <section className="grid grid-cols-3 mt-3 gap-x-2 gap-y-2 xl:gap-y-0">
+        {/* Form */}
+        <div className="rounded-md bg-white pl-[32px] pr-[27px] pt-4 col-span-3 xl:col-span-1">
           <span className="text-[#4B4B4B] text-base font-medium">
-            Follow Up Reasons
+            {translate("setting.follow_up_setting.add_follow_up.heading")}
           </span>
           <Form
             formFields={fields}
@@ -73,9 +76,10 @@ const FollowUpSetting = () => {
           />
         </div>
 
-        <div className="rounded-md bg-white p-3 w-full h-fit col-span-2">
+        {/* List of reasonData */}
+        <div className="rounded-md bg-white p-3 col-span-3 xl:col-span-2">
           <div
-            className="overflow-y-auto custom-scrollbar "
+            className="overflow-y-auto custom-scrollbar"
             style={{ maxHeight: "15rem" }}
           >
             {reasonData.map((item, index) => (

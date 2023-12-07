@@ -1,61 +1,22 @@
 import React, { useState } from "react";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import ChangePassword from "@/base-components/ui/modals1/ChangePassword";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useAppSelector } from "@/hooks/useRedux";
 import { Layout } from "@/layout";
-import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
-import AddTax from "@/base-components/ui/modals1/AddTax";
 import MailSetting from "./mail-setting";
-import Billing from "./billing";
-import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
-import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import PaymentSettings from "./payment-settings";
+import { useTranslation } from "next-i18next";
 
 const AdminSettings = () => {
   const [switchDetails, setSwitchDetails] = useState(0);
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
 
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading="" />,
-    // [ModalType.EXCLUSIVE_TAX]: <ExclusiveTax onClose={onClose} />,
-    [ModalType.EXCLUSIVE_TAX]: <AddTax onClose={onClose} heading="" />,
-
-    [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handleChangePassword = () => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
-  };
-
-  const exclusiveTaxHandler = () => {
-    dispatch(updateModalType(ModalType.EXCLUSIVE_TAX));
-  };
-
-  const addTaxHandler = () => {
-    dispatch(updateModalType(ModalType.ADD_TAX));
-  };
-
-  const handleEditPayment = () => {
-    dispatch(updateModalType(ModalType.EDIT_PAYMENT_METHOD));
-  };
+  const { t: translate } = useTranslation();
 
   return (
     <>
       <Layout>
-        <h1 className="text-[#222B45] font-normal text-xl">Account Settings</h1>
+        <h1 className="text-[#222B45] font-normal text-xl">
+          {translate("admin.settings.main_heading")}
+        </h1>
         <div className="mt-[22px]">
           <SettingTopDataButtons
             switchDetails={switchDetails}
@@ -64,28 +25,15 @@ const AdminSettings = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? (
-            <SettingProfile handleChangePassword={handleChangePassword} />
-          ) : null}
+          {switchDetails === 0 ? <SettingProfile /> : null}
         </div>
         <div className="mt-4">
           {switchDetails === 1 ? <PaymentSettings /> : null}
         </div>
-        <div className="mt-4">{switchDetails === 2 ? <MailSetting /> : null}</div>
         <div className="mt-4">
-          {switchDetails === 3 ? <FollowUpSetting /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 4 ? (
-            <Billing handleEditPayment={handleEditPayment} />
-          ) : null}
-        </div>
-
-        <div className="mt-4">
-          {switchDetails === 5 ? <MailSetting /> : null}
+          {switchDetails === 2 ? <MailSetting /> : null}
         </div>
       </Layout>
-      {renderModal()}
     </>
   );
 };

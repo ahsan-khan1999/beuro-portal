@@ -8,13 +8,13 @@ const AddReceiptContentDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const defaultClassName = "";
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddContentReceiptDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px]">
-        <h2 className="text-[#393939] text-lg font-medium">Receipt Content</h2>
+        <h2 className="text-[#393939] text-lg font-medium">{translate("content.tabs_heading.receipt_content")}</h2>
       </div>
       <hr className="opacity-20 mb-5" />
       <Form

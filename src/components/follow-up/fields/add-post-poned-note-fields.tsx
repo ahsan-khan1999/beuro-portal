@@ -1,11 +1,13 @@
 import { Field } from "@/enums/form";
 import { FormField, GeneratePostPondFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
   register,
   loading,
   control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: `mb-0`,
@@ -38,9 +40,9 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
     {
       containerClass: "mt-5 ",
       field: {
-        id:"button",
+        id: "button",
         type: Field.button,
-        text: "Next",
+        text: `${translate("follow_up.next_button")}`,
         inputType: "submit",
         className: "rounded-lg px-4 w-[174px] text-white hover:bg-none ",
         loading,

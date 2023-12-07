@@ -1,16 +1,13 @@
 import React from "react";
-import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import { useRouter } from "next/router";
-import addIcon from "@/assets/svgs/plus_icon.svg";
-import filterDropDownIcon from "@/assets/svgs/filter_drop_dwon_icon.svg";
-import Image from "next/image";
 import EmployeesFilters from "./employees-filters";
 import { FilterType } from '../../../types/types';
 import { SetStateAction } from 'react';
+import { useTranslation } from "next-i18next";
 
-const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value:FilterType) => void }) => {
+const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) => {
   const router = useRouter();
-
+  const { t: translate } = useTranslation()
   function onInputChange(text: string) { }
 
   return (
@@ -43,7 +40,7 @@ const TableFunctions = ({ filter, setFilter, handleFilterChange }: { filter: Fil
               fill="white"
             />
           </svg>
-          Add New
+          {translate("employees.add_button")}
         </button>
       </div>
     </div>

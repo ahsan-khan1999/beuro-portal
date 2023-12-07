@@ -1,11 +1,13 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateChangeMailSettingFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
   register,
   loading,
   control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
@@ -16,7 +18,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Driver",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_driver"
+              )}`,
               htmlFor: "mailDriver",
               className: "mb-[10px]",
             },
@@ -33,7 +37,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Host",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_host"
+              )}`,
               htmlFor: "mailHost",
               className: "mb-[10px]",
             },
@@ -60,7 +66,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Port",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_port"
+              )}`,
               htmlFor: "mailPort",
               className: "mb-[10px]",
             },
@@ -77,7 +85,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Encryption",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_encryption"
+              )}`,
               htmlFor: "mailEncryption",
               className: "mb-[10px]",
             },
@@ -104,7 +114,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Username",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_user"
+              )}`,
               htmlFor: "mailUsername",
               className: "mb-[10px]",
             },
@@ -121,7 +133,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail Password",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_password"
+              )}`,
               htmlFor: "mailPassword",
               className: "mb-[10px]",
             },
@@ -149,7 +163,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail From Address",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_from_address"
+              )}`,
               htmlFor: "mailFormAddress",
               className: "mb-[10px]",
             },
@@ -166,7 +182,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mail From Name",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_from_name"
+              )}`,
               htmlFor: "mailFormName",
               className: "mb-[10px]",
             },
@@ -187,7 +205,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     {
       containerClass: "mb-0 mt-8",
       label: {
-        text: "Email",
+        text: `${translate(
+          "admin.settings.mail_setting.mail_form_fields.email"
+        )}`,
         htmlFor: "mail",
         className: "mb-[10px] !text-base",
       },
@@ -200,7 +220,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             containerClass: "mb-3",
             field: {
               type: Field.span,
-              text: "Enter The Email To Receive The Testing Email Of Mail Configuration.",
+              text: `${translate(
+                "admin.settings.mail_setting.mail_form_fields.mail_heading"
+              )}`,
               containerClassName: "text-[14px] font-normal ",
         id:"spanfield",
 
@@ -225,7 +247,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       containerClass: "mb-0",
       field: {
         type: Field.button,
-        text: "Save",
+        text: `${translate(
+          "admin.settings.mail_setting.mail_form_fields.save_button"
+        )}`,
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

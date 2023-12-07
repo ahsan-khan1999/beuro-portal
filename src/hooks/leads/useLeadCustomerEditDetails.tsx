@@ -63,5 +63,6 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

@@ -74,5 +74,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

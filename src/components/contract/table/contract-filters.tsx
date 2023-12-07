@@ -5,13 +5,17 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType } from "@/types";
 import { Status } from "@/types/global";
+import { useTranslation } from "next-i18next";
 import React, { SetStateAction, useState } from "react";
 
 export default function ContractFilters({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) {
+  const { t: translate } = useTranslation();
+  
+  
   const checkbox: CheckBoxType[] = [
-    { label: "Open", type: "open" },
-    { label: "Confirmed", type: "confirmed" },
-    { label: "Cancelled", type: "cancelled" },
+    { label: translate("contracts.table_functions.open"), type: "open" },
+    { label: translate("contracts.table_functions.confirm"), type: "confirmed" },
+    { label: translate("contracts.table_functions.cancel"), type: "cancelled" },
 
   ];
 

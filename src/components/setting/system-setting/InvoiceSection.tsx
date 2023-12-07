@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import SettingLayout from "../SettingLayout";
+import { useTranslation } from "next-i18next";
 
 const InvoiceSection = () => {
-  const dropDownItems = [
-    { item: "Option 1" },
-    { item: "Option 2" },
-    { item: "Option 3" },
-    { item: "Option 4" },
-    { item: "Option 5" },
-  ];
-
+  const dropDownItems = [{ item: "Option 1" }, { item: "Option 2" }];
+  const { t: translate } = useTranslation();
   const [isOverdueActive, setIsOverdueActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState(dropDownItems[0].item);
 
@@ -26,7 +21,7 @@ const InvoiceSection = () => {
     <SettingLayout>
       <div className="mb-4">
         <p className="text-[#393939] font-normal text-[18px] my-3">
-          Invoice Over Due
+          {translate("setting.system_setting.invoice_over_due")}
         </p>
 
         <div
@@ -56,7 +51,7 @@ const InvoiceSection = () => {
         {isOverdueActive && (
           <div className="mt-[22px] ">
             <p className="text-[14px] text-[#1E1E1E] font-normal mb-[6px]">
-              Invoice Over Due Days Limit
+            {translate("setting.system_setting.invoice_days_limit")}
             </p>
             <DropDown
               items={dropDownItems}

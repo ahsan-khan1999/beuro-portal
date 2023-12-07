@@ -79,5 +79,6 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

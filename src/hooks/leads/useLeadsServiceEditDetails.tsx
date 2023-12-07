@@ -64,5 +64,6 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

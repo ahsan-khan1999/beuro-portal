@@ -2,7 +2,7 @@ import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import SelectField from "./select-field";
+import { useTranslation } from "next-i18next";
 
 export default function InputField({
   value,
@@ -15,9 +15,11 @@ export default function InputField({
   const inputClasses = combineClasses(
     `${
       bgColor ? "bg-[#F4F4F4]" : "bg-white"
-    } w-full  text-sm  rounded-md  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px]`,
+    } w-full  text-sm  rounded-lg  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
     textClassName
   );
+
+  const { t: translate } = useTranslation();
   const containerClasses = combineClasses("min-w-[274px]", containerClassName);
   const router = useRouter();
   return (

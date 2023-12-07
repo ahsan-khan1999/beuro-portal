@@ -97,5 +97,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

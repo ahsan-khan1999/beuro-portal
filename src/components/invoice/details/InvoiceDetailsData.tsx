@@ -25,7 +25,8 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
         </button>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex justify-between items-center">
+
+      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-3 xl:gap-y-0">
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
@@ -93,8 +94,8 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
           </div>
         </div>
 
-        <div className="flex flex-col gap-[17px] border border-[#dcdcdc] rounded-md shadow-md p-[18px]">
-          <div className="flex gap-2">
+        <div className="flex flex-col border border-[#dcdcdc] rounded-md shadow-md p-[18px]">
+          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
             <span className="text-base font-normal text-[#4A13E7]">
               Total Amount:
             </span>
@@ -102,7 +103,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               20000 CHF
             </span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               Paid Amount:
             </span>
@@ -110,7 +111,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation } : {handleInvoiceCreation: 
               11000 CHF
             </span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-x-[10px] pt-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               Unpaid Amount:
             </span>

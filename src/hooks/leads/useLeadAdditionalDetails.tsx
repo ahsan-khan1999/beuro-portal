@@ -57,5 +57,6 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

@@ -4,6 +4,7 @@ import { ComponentsType } from "../AddOffersDetailsData";
 import { staticEnums } from "@/utils/static";
 import icon from "@/assets/svgs/Vector.svg"
 import { Fields } from '@/enums';
+import { useTranslation } from "next-i18next";
 export const addressObject = {
   streetNumber:"",
   postalCode:"",
@@ -21,6 +22,8 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   fields
 ) => {
   const formField: FormField[] = [];
+  const { t: translate } = useTranslation();
+
   if(!fields) return null;
   for (let i = 0; i < count; i++) {
     formField.push(
@@ -34,12 +37,12 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-3 gap-x-3",
+          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Street NO.",
+                text: translate("offers.address_details.street_no"),
                 htmlFor: `address.${i}.streetNumber`,
                 className: "mb-[10px]",
               },
@@ -56,7 +59,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Post Code",
+                text: translate("offers.address_details.post_code"),
                 htmlFor: `address.${i}.postalCode`,
                 className: "mb-[10px]",
               },
@@ -73,7 +76,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mb-0",
               label: {
-                text: "Country",
+                text: translate("offers.address_details.country"),
                 htmlFor: `address.${i}.country`,
                 className: "mb-[10px]",
               },
@@ -106,7 +109,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
               label: {
-                text: "Description",
+                text: translate("offers.address_details.description"),
                 htmlFor: `address.${i}.description`,
                 className: "mb-[10px]",
               },
@@ -154,7 +157,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("offers.address_details.back_button")}`,
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
@@ -166,7 +169,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: `${translate("offers.address_details.next_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",

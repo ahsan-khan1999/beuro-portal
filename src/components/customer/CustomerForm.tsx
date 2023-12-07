@@ -5,6 +5,7 @@ import { CustomerField, Customers, FormDataProps } from "@/types/customer";
 import Image from "next/image";
 import React, { SetStateAction } from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";
+import { useTranslation } from "next-i18next";
 
 const CustomerForm = ({
   isUpdate,
@@ -15,6 +16,7 @@ const CustomerForm = ({
   errors,
 }: FormDataProps) => {
   const defaultClassName = "mt-[30px]";
+  const { t: translate } = useTranslation();
 
   return (
     <div
@@ -23,10 +25,10 @@ const CustomerForm = ({
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">{translate("customers.details.heading")}</h2>
         {isUpdate ? (
           <BaseButton
-            buttonText="Edit Details"
+            buttonText={translate("customers.details.edit_button")}
             onClick={() => setIsUpdate(!isUpdate)}
             containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
           >
@@ -34,9 +36,9 @@ const CustomerForm = ({
           </BaseButton>
         ) : (
           <BaseButton
-            buttonText="Cancel"
+            buttonText={translate("customers.details.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
           ></BaseButton>
         )}
       </div>

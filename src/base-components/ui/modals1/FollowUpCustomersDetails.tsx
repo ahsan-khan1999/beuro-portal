@@ -3,6 +3,7 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { FollowUpCustomersDetailsProps } from "@/types/follow-up";
+import { useTranslation } from "next-i18next";
 
 type details = {
   label: string;
@@ -10,45 +11,47 @@ type details = {
 };
 
 const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) => {
+  const { t: translate } = useTranslation();
+  
   const customersData: details[] = [
     {
-      label: "First Name",
+      label: `${translate("follow_up.customer_details_modal.first_name")}`,
       value: "Rahal",
     },
     {
-      label: "Last Name",
+      label: `${translate("follow_up.customer_details_modal.last_name")}`,
       value: "Ahmad",
     },
     {
-      label: "Customer Type",
+      label: `${translate("follow_up.customer_details_modal.customer_type")}`,
       value: "Individual",
     },
     {
-      label: "Email Address",
+      label: `${translate("follow_up.customer_details_modal.email_address")}`,
       value: "rahal.ahmad@gmail.com",
     },
     {
-      label: "Phone Number",
+      label: `${translate("follow_up.customer_details_modal.phone_number")}`,
       value: "+49 445612 2112",
     },
 
     {
-      label: "Mobile Number",
+      label: `${translate("follow_up.customer_details_modal.mobile_number")}`,
       value: "+49 445612 2112",
     },
   ];
 
   const addressData: details[] = [
     {
-      label: "Street NO.",
+      label: `${translate("follow_up.customer_details_modal.street_no")}`,
       value: "Zweibrückenstraße, 12 ",
     },
     {
-      label: "Post Code",
+      label: `${translate("follow_up.customer_details_modal.post_code")}`,
       value: "1234",
     },
     {
-      label: "Country",
+      label: `${translate("follow_up.customer_details_modal.country")}`,
       value: "Switzerland",
     },
   ];
@@ -69,7 +72,7 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
 
           <div className="flex flex-col">
             <h2 className="font-medium text-[18px] text-[#393939] mb-[26px]">
-              Customer Details
+            {translate("follow_up.customer_detail_heading")}
             </h2>
 
             <hr className="opacity-10" />
@@ -91,7 +94,7 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
             {/* Address 1 details */}
             <div className="flex flex-col mt-5">
               <p className="text-base font-normal text-[#8F8F8F] mb-[10px]">
-                Address 1 Details
+              {translate("follow_up.customer_details_modal.address_one_heading")}
               </p>
               <div className="grid grid-cols-3 gap-x-3 ">
                 {addressData.map((item, index) => (
@@ -109,7 +112,7 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
             {/* Address 2 details */}
             <div className="flex flex-col mt-5">
               <p className="text-base font-normal text-[#8F8F8F] mb-[10px]">
-                Address 2 Details
+              {translate("follow_up.customer_details_modal.address_two_heading")}
               </p>
               <div className="grid grid-cols-3 gap-x-3 ">
                 {addressData.map((item, index) => (

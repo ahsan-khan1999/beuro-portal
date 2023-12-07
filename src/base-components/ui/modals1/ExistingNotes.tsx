@@ -5,9 +5,15 @@ import addNewNote from "@/assets/svgs/add_new_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Lead } from "@/types/leads";
 import { useAppSelector } from "@/hooks/useRedux";
-import {  formatDateReverse } from "@/utils/utility";
+import { formatDateReverse } from "@/utils/utility";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
+import { useTranslation } from "next-i18next";
+
+interface ExistingNotes {
+  creator: string;
+  description: string;
+}
 
 const ExistingNotes = ({
   handleAddNote,
@@ -19,23 +25,23 @@ const ExistingNotes = ({
   leadDetails: Lead | OffersTableRowTypes | contractTableTypes
 }) => {
   const { notes } = useAppSelector(state => state.note)
-  
+  const { t: translate } = useTranslation()
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[400px] overflow-y-scroll dashboard_scrollbar"
       >
-        <div className="relative flex flex-col ">
+        <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4">
           <Image
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <div className="flex justify-between items-center mb-[19px] mt-[30px] mx-[38px]">
-            <p className="text-[24px] leading-6 font-medium text-[#000]">
-              Notes
+          <div className="flex justify-between items-center mb-[19px] ml-[38px] mr-[56px]">
+            <p className="text-2xl font-medium text-[#000]">
+              {translate("common.notes_modal.heading")}
             </p>
             <div className="flex justify-between items-center gap-[10px] ">
               <Image
@@ -44,7 +50,7 @@ const ExistingNotes = ({
                 onClick={() => handleAddNote(leadDetails?.id)}
                 className="cursor-pointer"
               />
-              <p className="text-[#4B4B4B] text-base">Add New Note</p>
+              <p className="text-[#4B4B4B] text-base">{translate("common.notes_modal.button")}</p>
             </div>
           </div>
 
@@ -66,7 +72,7 @@ const ExistingNotes = ({
           </span>
           {
             notes?.map((item, key) => (
-              <div className={` mb-[10px]  ${notes?.length -1 !== key && 'border-b-[1px] border-lightGray '}pb-3 `} key={key}>
+              <div className={` mb-[10px]  ${notes?.length - 1 !== key && 'border-b-[1px] border-lightGray '}pb-3 `} key={key}>
                 <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
                   Created by &nbsp;
                   <span className="text-[#1E1E1E] text-base font-normal">

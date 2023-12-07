@@ -15,7 +15,7 @@ export default function SelectField({
   setIsOpen,
   containerClassName,
 }: OptionsFieldProps) {
-  const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50  mx-3 relative flex justify-center items-center my-auto`;
+  const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50  mx-3 relative flex items-center my-auto`;
   const containerClasses = combineClasses(defaultClasses, containerClassName);
   return (
     <>
@@ -24,7 +24,7 @@ export default function SelectField({
           className="flex  justify-between cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="text-dark   me-2">{label}</span>
+          <span className="text-[#4A13E7] me-2">{label}</span>
           <DropDownNonFillIcon
             label={label}
             isOpen={isOpen}

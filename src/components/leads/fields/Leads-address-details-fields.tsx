@@ -1,6 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadAddressFormField, GenerateLeadsFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -9,6 +10,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   handleBack,
   count
 ) => {
+  const { t: translate } = useTranslation()
   const formField: FormField[] = [];
 
   for (let i = 1; i <= count; i++) {
@@ -16,19 +18,19 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
       {
         containerClass: "mt-6",
         label: {
-          text: `Address ${i} Details`,
+          text: translate("leads.address_details.heading"),
           htmlFor: `address-${i}-details`,
           className: "mb-[10px] text-[#8F8F8F]",
         },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-3 gap-x-3",
+          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Street NO.",
+                text: translate("leads.address_details.street_no"),
                 htmlFor: `streetNumber-${i}`,
                 className: "mb-[10px]",
               },
@@ -45,7 +47,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
             {
               containerClass: "mb-0 ",
               label: {
-                text: "Post Code",
+                text: translate("leads.address_details.post_code"),
                 htmlFor: `postalCode-${i}`,
                 className: "mb-[10px]",
               },
@@ -57,12 +59,13 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `postalCode-${i}`,
                 placeholder: `123${i}`,
                 register,
+
               },
             },
             {
               containerClass: "mb-0",
               label: {
-                text: "Country",
+                text: translate("leads.address_details.country"),
                 htmlFor: "address.country",
                 className: "mb-[10px]",
               },
@@ -88,7 +91,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
       {
         containerClass: "mt-5 mb-0 ",
         label: {
-          text: "Description",
+          text: translate("leads.address_details.description"),
           htmlFor: `description-${i}`,
           className: "mb-[10px]",
         },
@@ -131,7 +134,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate("leads.address_details.save_changes_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",

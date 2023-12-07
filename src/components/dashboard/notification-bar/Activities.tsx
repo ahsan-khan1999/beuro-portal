@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import timeIcon from "@/assets/svgs/time.svg";
+import { useTranslation } from "next-i18next";
+
 const ActivitiesNotificationBar = () => {
   const followUp = [
     {
@@ -52,26 +54,31 @@ const ActivitiesNotificationBar = () => {
       id2: "A-2000",
     },
   ];
+
+  const { t: translate } = useTranslation();
   return (
-    <div className="bg-white rounded-[20px]  w-[380px] max-h-[400px]">
-      <div className=" pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
-        <h1 className="text-[#18181B]  font-medium">Activity</h1>
-      </div>
-      <div className="overflow-y-scroll max-h-[340px]">
+    <div className="bg-white rounded-[20px] h-[397.089px]">
+      <h1 className="pb-3 ml-[40px] pt-5 text-[#18181B]  font-medium">
+        {translate("dashboard_detail.activity")}
+      </h1>
+
+      <hr className="opacity-10" />
+
+      <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar pl-5 pr-[5px] pb-[14px] mr-1">
         {followUp.map((item, index) => {
           return (
             <div
               key={index}
-              className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10 `}
+              className={`mt-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10 `}
             >
-              <div className=" pb-[5px]  border-b border-[#000] border-opacity-10  ">
+              <div className="mb-3">
                 <div>
                   <span className="text-dark text-sm">{item.name}&nbsp;</span>
                   <span className="text-dark text-sm font-medium">
                     {item.description}
                   </span>
                 </div>
-                <div className="flex items-center justify-between mt-1">
+                <div className="flex items-center justify-between mt-[5px]">
                   <div className="flex items-center ">
                     <Image
                       src={timeIcon}
@@ -82,7 +89,7 @@ const ActivitiesNotificationBar = () => {
                       {item.time},{item.date}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center ">
+                  <div className="lg:flex justify-between items-center hidden ">
                     <span className="mr-3 text-white bg-primary text-xs rounded-[2px] px-1 py-0.5 font-medium">
                       {item.id1}
                     </span>
@@ -106,12 +113,13 @@ const ActivitiesNotificationBar = () => {
                   </div>
                 </div>
               </div>
+              <hr className="opacity-10" />
             </div>
           );
         })}
         <div className="flex justify-center py-4">
           <button className=" text-primary w-fit text-sm font-medium ">
-            View All
+            {translate("dashboard_detail.view_all")}
           </button>
         </div>
       </div>

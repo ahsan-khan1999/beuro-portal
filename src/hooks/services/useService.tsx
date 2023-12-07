@@ -4,6 +4,7 @@ import { servicesData } from "@/utils/static";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readService } from "@/api/slices/service/serviceSlice";
+import { useTranslation } from "next-i18next";
 
 const useService = () => {
   const { service, lastPage, totalCount } = useAppSelector(state => state.service)
@@ -14,6 +15,7 @@ const useService = () => {
   const dispatch = useAppDispatch()
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
+  const { t: translate } = useTranslation();
 
   const totalItems = lastPage;
   const itemsPerPage = 10;
@@ -48,7 +50,8 @@ const useService = () => {
     itemsPerPage,
     handleFilterChange,
     filter,
-    setFilter
+    setFilter,
+    translate
   };
 };
 

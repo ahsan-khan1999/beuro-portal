@@ -37,5 +37,6 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

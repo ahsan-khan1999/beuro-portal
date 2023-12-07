@@ -3,14 +3,14 @@ import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
 
-const Activity = () => {
-  type ActivityTypes = {
-    activityName: string;
-    activityMode: string;
-    activeTime: string;
-    activeDate: string;
-  };
+type ActivityTypes = {
+  activityName: string;
+  activityMode: string;
+  activeTime: string;
+  activeDate: string;
+};
 
+const Activity = () => {
   const activityData: ActivityTypes[] = [
     {
       activityName: "Ahmed Rahal Ali",
@@ -36,21 +36,13 @@ const Activity = () => {
       activeTime: "13:30:20",
       activeDate: "12/09/2023",
     },
-    {
-      activityName: "Ahmed Rahal Ali",
-      activityMode: "edited Offer:",
-      activeTime: "13:30:20",
-      activeDate: "12/09/2023",
-    },
+  
   ];
 
   return (
     <>
       {activityData.map((item, index) => (
-        <div
-          key={index}
-          className="flex flex-col bg-white rounded-b-lg"
-        >
+        <div key={index} className="flex flex-col bg-white rounded-b-lg">
           <div className="pl-[30px] pr-[11px] py-[11px]">
             <div className="flex gap-[5px]">
               <span className="text-[#4B4B4B] font-normal text-[14px]">

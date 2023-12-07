@@ -1,6 +1,7 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
@@ -11,22 +12,23 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   control,
   setValue
 ) => {
+  const { t: translate } = useTranslation();
   let formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
         children: [
           {
             label: {
-              text: "Customer Type",
+              text: `${translate("customers.details.customer_type")}`,
               htmlFor: "select",
               className: "mb-[10px]",
             },
             field: {
-              className: `pl-4 !min-h-[54px] !border-dark ${!isUpdate && "!border-light"
+              className: `!min-h-[54px] !border-dark ${!isUpdate && "!border-light"
                 } focus:!border-primary `,
               type: Field.select,
               id: "customerType",
@@ -46,7 +48,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           },
           {
             label: {
-              text: "Your Name",
+              text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -64,10 +66,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
             },
           },
-
           {
-            containerClass: "mb-5",
-            label: { text: "Email Address", htmlFor: "email" },
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("customers.details.email_address")}`,
+              htmlFor: "email",
+            },
             field: {
               type: Field.input,
               className: "!p-4    !border-dark  focus:!border-primary",
@@ -86,7 +90,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate("customers.details.phone_number")}`,
               htmlFor: "phoneNumber",
               className: "mb-[10px]",
             },
@@ -105,7 +109,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text: `${translate("customers.details.mobile_number")}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
@@ -126,7 +130,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Address Details*",
+        text: `${translate("customers.details.address_details")}`,
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
       },
@@ -134,12 +138,11 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
         children: [
           {
-            containerClass: "mb-0",
             label: {
-              text: "Street NO.",
+              text: `${translate("customers.details.street_no")}`,
               htmlFor: "address.streetNumber",
               className: "mb-[10px]",
             },
@@ -161,7 +164,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Post Code",
+              text: `${translate("customers.details.post_code")}`,
               htmlFor: "address.postalCode",
               className: "mb-[10px]",
             },
@@ -183,7 +186,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Country",
+              text: `${translate("customers.details.country")}`,
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
@@ -218,7 +221,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
               className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
@@ -229,7 +232,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
               className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
                 }`,
@@ -253,7 +256,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
     const companyNameField = {
       containerClass: "mb-0",
       label: {
-        text: "Company Name",
+        text: translate("customers.details.company_name"),
         htmlFor: "companyName",
         className: "mb-[10px]",
       },

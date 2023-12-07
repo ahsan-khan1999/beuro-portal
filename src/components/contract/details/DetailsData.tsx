@@ -26,12 +26,22 @@ const DetailsData = ({ contractDetails }: { contractDetails: contractTableTypes 
             {formatDateToCustomString(contractDetails?.offerID?.createdAt)}
           </span>
         </div>
+        <div className="flex  justify-between items-center">
+          <div className="flex items-center gap-[10px]">
+            <Image src={watchIcon} alt="watchIcon" />
+            <span className="text-[#4B4B4B] text-base font-medium">
+              18:40:15, 25/08/2023
+            </span>
+          </div>
 
-        <Image
-          src={colorFullPDFIcon}
-          alt="colorFullPDFIcon"
-          className="mr-[68px]"
-        />
+          <div className="flex justify-center items-center">
+            <Image
+              src={colorFullPDFIcon}
+              alt="colorFullPDFIcon"
+              className="mr-[68px]"
+            />
+          </div>
+        </div>
       </div>
     </ContractCardLayout>
   );

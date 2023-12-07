@@ -2,6 +2,7 @@ import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import FormCard from "@/layout/customers/FormCard";
 import { FormDataProps } from "@/types/admin/plans";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { SetStateAction } from "react";
 
@@ -13,8 +14,9 @@ const PlansForm = ({
   handleSubmit,
   errors,
 }: FormDataProps) => {
-  const defaultClassName = "mt-[30px]  ";
-  const router = useRouter()
+  const defaultClassName = "";
+  const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <FormCard>
@@ -28,12 +30,12 @@ const PlansForm = ({
       {isUpdate && (
         <div className="flex items-center space-x-5 mt-8">
           <BaseButton
-            buttonText="Back"
+            buttonText={translate("admin.plan_details.back_button")}
             onClick={() => router.push("/admin/plans")}
             containerClassName="px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] !h-[50px]"
           />
           <BaseButton
-            buttonText="Edit"
+            buttonText={translate("admin.plan_details.edit_button")}
             onClick={() => setIsUpdate(!isUpdate)}
             containerClassName="px-4 py-[10px] w-[152px]  bg-primary !h-[50px]"
             textClassName="text-white font-medium !text-base"

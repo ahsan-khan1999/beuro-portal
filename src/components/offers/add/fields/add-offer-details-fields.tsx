@@ -4,6 +4,7 @@ import icon from "@/assets/svgs/Vector.svg"
 import { Control, FieldValue, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
 import { OffersTableRowTypes } from "@/types/offers";
+import { useTranslation } from "next-i18next";
 export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
@@ -11,6 +12,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect, selectedContent, offerDetails },
   setValue
 ) => {
+  const { t: translate } = useTranslation();
 
   let formField: FormField[] = [
     {
@@ -18,11 +20,11 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             label: {
-              text: "Customer",
+              text: `${translate("offers.offer_details.select_customer")}`,
               htmlFor: "type",
               className: "mb-[10px]",
             },
@@ -61,7 +63,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             label: {
               text: "Customer Type",
-              htmlFor: "select",
+              htmlFor: "customerType",
               className: "mb-[10px]",
             },
             field: {
@@ -82,7 +84,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           },
           {
             label: {
-              text: "Your Name",
+              text: translate("offers.offer_details.offer_number"),
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -122,7 +124,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate("offers.offer_details.phone_number")}`,
               htmlFor: "phoneNumber",
               className: "mb-[10px]",
             },
@@ -141,7 +143,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text:`${translate("offers.offer_details.mobile_number")}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
@@ -165,7 +167,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2  xl:grid-cols-3 gap-x-3 gap-y-5 ",
         children: [
           {
             containerClass: "mb-0 col-span-1",
@@ -211,7 +213,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Address Details*",
+        text: `${translate("offers.offer_details.customer_address")}`,
         htmlFor: "name",
         className: "mb-[10px] text-[#8F8F8F]",
       },
@@ -219,12 +221,13 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+
+        className: "grid grid-cols-2  xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Street NO.",
+              text: `${translate("offers.offer_details.street_no")}`,
               htmlFor: "address.streetNumber",
               className: "mb-[10px]",
             },
@@ -245,7 +248,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Post Code",
+              text: `${translate("offers.offer_details.post_code")}`,
               htmlFor: "address.postalCode",
               className: "mb-[10px]",
             },
@@ -268,7 +271,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Country",
+              text: `${translate("offers.offer_details.country")}`,
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
@@ -446,7 +449,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
         type: Field.div,
         id: "div-field1",
 
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
         children: generateDateChildren(register, count, OnClick, handleRemoveDateField, offerDetails)
 
       },
@@ -533,13 +536,14 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   control,
   OnClick
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
         id: "button",
-        text: "Next",
+        text: `${translate("offers.offer_details.next_button")}`,
         inputType: "submit",
         className:
           "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",

@@ -1,13 +1,15 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateChangePasswordFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormField =
   (register, loading, onClick) => {
+    const { t: translate } = useTranslation();
     const formFields: FormField[] = [
       {
         containerClass: "mb-5",
         label: {
-          text: "Your Password",
+          text: `${translate("employees.edit_password_modal.your_password")}`,
           htmlFor: "yourPassword",
           className: "mb-[12px]",
         },
@@ -34,7 +36,7 @@ export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormFie
       {
         containerClass: "mb-5",
         label: {
-          text: "Create New Password",
+          text: `${translate("employees.edit_password_modal.new_pasword")}`,
           htmlFor: "newPassword",
           className: "mb-[12px]",
         },
@@ -58,7 +60,7 @@ export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormFie
       {
         containerClass: "mb-0",
         label: {
-          text: "Confirm New Password",
+          text: `${translate("employees.edit_password_modal.confirm_password")}`,
           htmlFor: "confirmNewPassword",
           className: "mb-[12px]",
         },
@@ -83,8 +85,13 @@ export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormFie
         label: null,
         field: {
           type: Field.button,
+<<<<<<< HEAD
           id: "button",
           text: "Submit",
+=======
+id:"button",
+          text: `${translate("employees.edit_password_modal.submit_button")}`,
+>>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
           inputType: "submit",
           className: "mt-[19px] rounded-lg hover:bg-none",
           loading,

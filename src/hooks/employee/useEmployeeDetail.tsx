@@ -157,7 +157,7 @@ const useEmployeeDetail = (stage: boolean) => {
   };
 
   const handlePreviousClick = () => {
-    router.push("/services");
+    router.push("/employees");
   };
 
   return {
@@ -172,7 +172,8 @@ const useEmployeeDetail = (stage: boolean) => {
     errors,
     handlePreviousClick,
     handleUpdateCancel,
-    deleteHandler
+    deleteHandler,
+    translate
   };
 };
 export default useEmployeeDetail;

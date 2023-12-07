@@ -37,3 +37,14 @@ export interface FormDataProps {
   errors?: Record<string, any>;
   onSubmit: SubmitHandler<FieldValues>;
 }
+
+
+export interface LinkSendToEmailModal {
+  onClose: () => void;
+  createNewPswHandler: () => void;
+}
+
+
+export interface PasswordChangedModal {
+  onClose: () => void
+}

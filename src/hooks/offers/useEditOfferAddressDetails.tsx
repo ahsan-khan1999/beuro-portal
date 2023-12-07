@@ -63,9 +63,6 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
     handleSubmit,
     errors,
     error,
-    register,
-    append,
-    remove,
-    addressFields,
+    translate
   };
 };

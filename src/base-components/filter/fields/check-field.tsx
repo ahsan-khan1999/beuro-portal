@@ -11,7 +11,7 @@ export default function CheckField({
 }: CheckFieldProps) {
   return (
     <>
-      <label className="custom-checkbox block  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer">
+      <label className="custom-checkbox w-full xl:w-fit  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer">
         <input
           type="checkbox"
           name="check"
@@ -23,7 +23,7 @@ export default function CheckField({
         />
         <span className="checkbox-control"></span>
 
-        <p className=" text-[13px] font-medium text-[#393939] whitespace-nowrap">
+        <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
         {checkboxFilter[type] === value ? (

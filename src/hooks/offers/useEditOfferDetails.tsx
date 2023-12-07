@@ -174,10 +174,6 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
     handleSubmit,
     errors,
     error,
-    append,
-    testFields,
-    remove,
-    register,
-    loading
+    translate
   };
 };

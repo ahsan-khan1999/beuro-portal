@@ -177,10 +177,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
-    append,
-    testFields,
-    remove,
-    register,
-    loading
+    translate
   };
 };

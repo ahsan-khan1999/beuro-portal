@@ -97,5 +97,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsAdditionalDetailsFormField, GenerateLeadsFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormField = (
   loading,
@@ -7,6 +8,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
   onClick,
   leadDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-6",
@@ -32,12 +34,12 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("leads.additional.cancel_button")}`,
               inputType: "button",
 
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -45,7 +47,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
             field: {
               type: Field.button,
               id: "button",
-              text: "Save Changes",
+              text: `${translate("leads.additional.save_changes_button")}`,
               inputType: "submit",
               className:
                 "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

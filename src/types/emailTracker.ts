@@ -15,4 +15,7 @@ export interface TableRowEmailTracker {
     text: string;
     colorClass: string;
   };
+  viewMail: {
+    colorClass: string;
+  };
 }

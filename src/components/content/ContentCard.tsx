@@ -31,7 +31,7 @@ const ContentCard = ({
         <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={contentDeleteHandler}/>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex justify-between items-center">
+      <div className="grid 2xl:flex justify-between items-start  gap-y-3">
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">S.no:</span>
           <span className="text-[#4B4B4B] text-base font-medium">
@@ -42,24 +42,21 @@ const ContentCard = ({
           <span className="text-[#4D4D4D] text-base font-normal">
             Content Title:
           </span>
-
           <span className="text-[#4B4B4B] text-base font-medium">
             {contentDetails?.contentName}
           </span>
         </div>
         <div className="flex gap-[6px]">
-          <span className="text-[#4D4D4D] text-base font-normal">Worker</span>
-
+          <span className="text-[#4D4D4D] text-base font-normal">Worker:</span>
           <span className="text-[#4B4B4B] text-base font-medium">
             {contentDetails?.createdBy?.fullName}
 
           </span>
         </div>
-        <div className="flex  items-center gap-[11px]">
+        <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">
             Creation Date:
           </span>
-
           <span className="text-[#4B4B4B] text-base font-medium">
             {formatDateString(contentDetails?.createdAt)}
           </span>

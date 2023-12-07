@@ -9,7 +9,7 @@ const ContactSupportForm = ({
   requestSubmitHandler: Function;
 }) => {
   const defaultClassName = "mt-[30px] ";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error,translate } =
     userContactSupport(requestSubmitHandler);
 
   return (
@@ -17,7 +17,7 @@ const ContactSupportForm = ({
       <FormCard>
         <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
           <h2 className="text-[#393939] text-lg font-medium">
-            Submit your request
+            {translate("contact_support.form_heading")}
           </h2>
         </div>
         <Form

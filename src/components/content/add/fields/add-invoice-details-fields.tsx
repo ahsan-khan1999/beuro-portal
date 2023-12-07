@@ -1,8 +1,10 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
   (register, loading, control, onClick, trigger, count, attachements, setAttachements, contentDetails) => {
+    const { t: translate } = useTranslation()
     const formField: FormField[] = [
       {
         containerClass: "mt-5",
@@ -14,7 +16,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Invoice Title",
+                text: translate("content.details.invoice_title"),
                 htmlFor: "invoiceContent.title",
                 className: "mb-[10px]",
               },
@@ -31,7 +33,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Invoice Description",
+                text: translate("content.details.invoice_description"),
                 htmlFor: "invoiceContent.description",
                 className: "mb-[10px]",
               },
@@ -50,7 +52,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Email Body",
+                text: translate("content.details.email_body"),
                 htmlFor: "invoiceContent.body",
                 className: "mb-[10px]",
               },
@@ -68,7 +70,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: "Attachments",
+                text: translate("content.details.attachments"),
                 htmlFor: "invoiceContent.attachments",
                 className: "mb-[10px]",
               },
@@ -101,7 +103,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Back",
+                text: `${translate("content.details.back_button")}`,
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
@@ -114,7 +116,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Next",
+                text: `${translate("content.details.next_button")}`,
                 inputType: "submit",
                 className:
                   "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",

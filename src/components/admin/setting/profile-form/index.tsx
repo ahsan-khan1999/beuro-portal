@@ -3,8 +3,8 @@ import useSettingProfile from "@/hooks/admin/setting/useSettingProfile";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const SettingProfile = ({handleChangePassword} : {handleChangePassword: Function}) => {
-  const defaultClassName = "mt-[30px]  ";
+const SettingProfile = () => {
+  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile();
   return (
     <FormCard>
