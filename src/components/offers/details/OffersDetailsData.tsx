@@ -6,11 +6,8 @@ import AdditionalDetails from "./AdditionalDetails";
 import SwitchedComp from "./SwitchedComp";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomerDetailsData from "./CustomerDetailsData";
-<<<<<<< HEAD
 import { OffersTableRowTypes } from "@/types/offers";
-=======
 import { useTranslation } from "next-i18next";
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
 
 export enum ComponentsType {
   customer,
@@ -32,10 +29,10 @@ const OffersDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes
   const { t: translate } = useTranslation();
 
   const componentArray = [
-    <CustomerDetailsData offerDetails={offerDetails}/>,
-    <AddressDetailsData offerDetails={offerDetails}/>,
-    <ServiceDetailsData offerDetails={offerDetails}/>,
-    <AdditionalDetails offerDetails={offerDetails}/>,
+    <CustomerDetailsData offerDetails={offerDetails} />,
+    <AddressDetailsData offerDetails={offerDetails} />,
+    <ServiceDetailsData offerDetails={offerDetails} />,
+    <AdditionalDetails offerDetails={offerDetails} />,
   ];
 
   const tabSection: tabArrayTypes[] = [
@@ -88,20 +85,6 @@ const OffersDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes
   ];
 
   return (
-<<<<<<< HEAD
-    <div className="flex w-full gap-6">
-      <div className="flex  flex-col gap-[14px]">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
-=======
     <div className="grid grid-cols-1 xl:grid-cols-4 xl:gap-x-6 ">
       <div className="col-span-1 gap-y-4">
         <div className="w-full flex flex-col gap-y-[14px]">
@@ -115,24 +98,20 @@ const OffersDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes
               selectedTab={index}
             />
           ))}
-        </div>
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
 
-        <div className="w-full mt-4">
-          <SwitchedComp />
+          <div className="w-full mt-4">
+            <SwitchedComp />
+          </div>
         </div>
-      </div>
 
-<<<<<<< HEAD
-      <div className="flex w-full flex-col gap-y-5 h-[680px] overflow-scroll">
-=======
-      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
-        {componentArray.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+        <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
+          {componentArray.map((component, index) => (
+            <React.Fragment key={index}>{component}</React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
+
   );
 };
 
