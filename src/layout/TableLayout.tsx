@@ -9,7 +9,7 @@ const TableLayout = ({ children }: detailScreenCardsLayout) => {
         the table
       </p>
 
-      <div className="overflow-x-auto rounded-md ">{children}</div>
+      <div className="min-w-full overflow-x-scroll"><div className="xs:w-[1120px] md:w-auto rounded-md ">{children}</div></div>
     </div>
   );
 };

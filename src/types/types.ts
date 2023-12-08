@@ -25,8 +25,8 @@ import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 import { Attachement, Status } from "./global";
 import { Employee } from "./employee";
-import { Lead } from './leads';
-import { Service } from './service';
+import { Lead } from "./leads";
+import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, Total } from "./offers";
@@ -197,7 +197,7 @@ export type GenerateFormAddressField = (
 export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
-  onClick?: Function,
+  onClick?: Function
 ) => FormField[];
 
 // accounting setting formfield
@@ -325,7 +325,21 @@ export type GenerateOffersFormField = (
   control: Control<FieldValues>,
   onClick: () => void | Function,
   count: number,
-  properties: { content?: ContentTableRowTypes[], contentDetails?: ContentTableRowTypes, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string) => void, customerDetails?: Customers, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, onContentSelect?: () => void, offerDetails?: OffersTableRowTypes },
+  properties: {
+    content?: ContentTableRowTypes[];
+    contentDetails?: ContentTableRowTypes;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string) => void;
+    customerDetails?: Customers;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    onContentSelect?: () => void;
+    offerDetails?: OffersTableRowTypes;
+  },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -336,7 +350,25 @@ export type GenerateOfferServiceFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
-  properties: { isTax?: boolean, isDiscount?: boolean, taxType?: number, discountType?: number, offerDetails?: OffersTableRowTypes, generateTotal?: () => void, customerType?: string, type?: string, customer?: Customers[], onCustomerSelect?: (id: string, index: number) => void, serviceDetails?: Service, onCancel?: () => void, leadDetails?: Lead, service?: Service[], handleRemove?: (id: string) => void, generatePrice?: (index: number) => void, total?: Total },
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    offerDetails?: OffersTableRowTypes;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+  },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
@@ -345,7 +377,7 @@ export type GenerateOfferServiceFormField = (
 ) => FormField[];
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
-  onClick: () => void,
+  onClick: () => void
 ) => FormField[];
 
 export type GenerateOfferDateFormField = (
@@ -390,14 +422,25 @@ export type GenerateLeadAddressFormField = (
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[]
-
 ) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  properties:
-    { offerDetails?: OffersTableRowTypes,customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
+  properties: {
+    offerDetails?: OffersTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+  },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 
@@ -414,7 +457,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[], lead: Lead[] },
+  data: { customer: Customers[]; lead: Lead[] },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -422,7 +465,7 @@ export type GenerateFollowUpFormField = (
 export type GeneratePostPondFormField = (
   register: UseFormRegister<FieldValues>,
   loading: boolean,
-  control: Control<FieldValues>,
+  control: Control<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -474,7 +517,7 @@ export interface FilterType {
   sortBy?: string;
   type?: string;
   location?: string;
-  status?: string
+  status?: string;
 }
 export interface FilterProps {
   filter: FilterType;

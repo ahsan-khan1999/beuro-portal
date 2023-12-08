@@ -20,6 +20,7 @@
 body {
   color: #1e1e1e;
   background: #f3f3f3;
+  overflow-x: hidden;
 }
 .pricing-gradient {
   background: linear-gradient(to right, #b503fe, #ff376f);

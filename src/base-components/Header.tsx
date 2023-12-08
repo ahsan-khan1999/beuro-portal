@@ -13,7 +13,7 @@ const Header = () => {
   const { user } = useAppSelector(state => state.auth)
   
   return (
-    <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white">
+    <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       <div className="flex items-center">
         <Image
           src={user?.company?.logo || ""}
