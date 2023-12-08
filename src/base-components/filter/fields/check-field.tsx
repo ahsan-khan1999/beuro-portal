@@ -7,7 +7,7 @@ export default function CheckField({
   setCheckBoxFilter,
   type,
   defaultChecked,
-  value
+  value,
 }: CheckFieldProps) {
   return (
     <>

@@ -54,7 +54,7 @@ export default function LeadsFilter({ filter, setFilter }: { filter: FilterType,
           typeList={typeList}
         />
       </div>
-      <InputField handleChange={(value) => console.log(value)} value="" />
+      {/* <InputField handleChange={(value) => console.log(value)} value="" />
       <SelectField
         handleChange={(value) => console.log(value)}
         value=""
@@ -70,7 +70,7 @@ export default function LeadsFilter({ filter, setFilter }: { filter: FilterType,
       >
         <Image src={addIcon} alt="addIcon" />
         {translate("leads.add_button")}
-      </button>
+      </button> */}
     </div>
   );
 }
