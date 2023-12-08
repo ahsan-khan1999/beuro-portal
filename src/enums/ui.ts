@@ -51,7 +51,12 @@ export enum ModalType {
 
   ARE_YOU_SURE_CUSTOMER,
   SELECT_MONTH,
-  DOWNLOAD_MODAL
+  DOWNLOAD_MODAL,
+  RECURRING_INVOICE,
+  RECURRING_INVOICE_FREQUENCY,
+  INVOICE_UPDATE,
+
+
 }
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;

@@ -104,11 +104,11 @@ const OffersDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes
           </div>
         </div>
 
-        <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
-          {componentArray.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))}
-        </div>
+      </div>
+      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
+        {componentArray.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
       </div>
     </div>
 

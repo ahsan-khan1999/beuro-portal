@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import { contractTableTypes } from "./contract";
 
 // Inovice table layout
@@ -14,6 +15,7 @@ export interface InvoiceTableRowTypes {
   totalPrice: string;
   emailStatus: string;
   invoiceStatus: string;
+  isInvoiceRecurring:boolean
 }
 
 // Inovice details table
@@ -54,5 +56,13 @@ export interface SubInvoiceTableRowTypes {
   invoiceStatus: string;
   paymentType:string;
   createdAt:string;
+
+}
+
+export interface InvoiceEmptyStateType {
+  imageUrl: StaticImageData;
+  imageAlt: string;
+  emptyName: string;
+  emptyDescription: string;
 
 }

@@ -493,8 +493,7 @@ export function getInvoiceEmailColor(status: string) {
 
 
 
-export function calculateTax(amount: number) {
-  const taxPercentage = 7.7;
+export function calculateTax(amount: number, taxPercentage: number) {
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);
 }

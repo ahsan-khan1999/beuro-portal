@@ -629,7 +629,11 @@
       "mark_it_recuring": "Mark it Recuring",
       "date_of_invoice": "Date of next invoice",
       "frequency": "Frequency",
-      "button": "Create Invoice"
+      "update_invoice": "Edit Invoice",
+      "button": "Create Invoice",
+      "recurring_button": "Create Recurring Invoice"
+
+
     },
     "invoice_created_modal": {
       "main_heading": "Invoice Created Successful ",

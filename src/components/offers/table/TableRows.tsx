@@ -28,21 +28,27 @@ const TableRows = ({
         return (
           <div
             key={index}
+            onClick={() =>
+              router.push({
+                pathname: "/offers/details",
+                query: { offer: item?.id },
+              })
+            }
             className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(70px,_70px),minmax(120px,_100%)_minmax(90px,_100%)_minmax(100px,_100px)_minmax(75px,_75px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(65px,_65px)_minmax(60px,_60px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(70px,_70px),minmax(140px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(160px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)]  mt-2 bg-white rounded-md"
           >
-            <span className=" py-4 bg-white rounded-md flex items-center">
+            <span className=" py-4  rounded-md flex items-center">
               {item.offerNumber}
             </span>
-            <span className=" py-4 bg-white  flex items-center">
+            <span className=" py-4   flex items-center">
               {item.customerID?.fullName}
             </span>
             <span className=" hidden py-4 xs:flex mlg:hidden xlg:hidden maxSize:hidden  xMaxSize:flex items-center">
               {item?.title}
             </span>
-            <span className=" py-4 bg-white flex items-center">
+            <span className=" py-4  flex items-center">
               {item.total}
             </span>
-            <span className=" py-4 bg-white flex items-center">
+            <span className=" py-4  flex items-center">
               {formatDateString(item.createdAt)}
             </span>
             <span className="py-4 ">
@@ -71,7 +77,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className=" py-4 flex justify-center items-center  bg-white cursor-pointer" onClick={(e) => handleImageUpload(item?.id, e)}>
+            <span className=" py-4 flex justify-center items-center   cursor-pointer" onClick={(e) => handleImageUpload(item?.id, e)}>
 
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.03711" y="1.14453" width="31.1684" height="31" rx="7.5" fill="white" stroke="#C7C7C7" />
@@ -82,7 +88,7 @@ const TableRows = ({
               </svg>
 
             </span>
-            <span className="px-6 py-4 flex justify-center items-center bg-white cursor-pointer " onClick={(e) => openModal(item?.id, e)}>
+            <span className="px-6 py-4 flex justify-center items-center  cursor-pointer " onClick={(e) => openModal(item?.id, e)}>
 
               <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.36719" y="1.14453" width="31.1684" height="31" rx="7.5" fill="white" stroke="#C7C7C7" />
@@ -93,7 +99,7 @@ const TableRows = ({
               </svg>
             </span>
 
-            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md" onClick={() =>
+            <span className="px-6 py-4 flex justify-center items-center  rounded-md" onClick={() =>
               router.push({
                 pathname: "/offers/details",
                 query: { offer: item?.id },

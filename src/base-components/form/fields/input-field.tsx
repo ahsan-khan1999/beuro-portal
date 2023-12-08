@@ -22,7 +22,8 @@ export const InputField = ({
   remove,
   onRemove,
   fieldIndex,
-  onChange
+  onChange,
+  percentage
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
@@ -63,8 +64,14 @@ export const InputField = ({
           key={id}
           // onChangeCapture={}
           //@ts-expect-error
-          onChangeCapture={(e)=> onChange && onChange(Number(e.target?.value))}
+          onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}
         />
+        {percentage && (
+          <span
+            className={`mr-3 absolute  left-12 ${(inputFocus && "tests") || "test"
+              }`}
+          >{percentage}</span>
+        )}
         {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />
       )} */}

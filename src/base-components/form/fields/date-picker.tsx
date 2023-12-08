@@ -1,5 +1,5 @@
 import { DatePickerProps } from "@/types";
-import { formatDateString } from "@/utils/functions";
+import { disablePastDate, formatDateString } from "@/utils/functions";
 import { combineClasses } from "@/utils/utility";
 import { useState } from "react";
 
@@ -46,6 +46,7 @@ export const DatePicker = ({
           id={id}
           onBlurCapture={() => setInputFocus(false)}
            {...register(name)}
+           min={disablePastDate()}
           // style={{
           //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
           //   backgroundPosition: "4% 50%",

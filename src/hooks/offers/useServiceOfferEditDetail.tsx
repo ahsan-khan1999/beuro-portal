@@ -76,6 +76,8 @@ export const useServiceOfferEditDetail = ({
   const taxType = watch("taxType");
   const discountType = watch("discountType");
   const discountAmount = watch("discountAmount");
+  const taxPercentage = watch("taxPercentage");
+
 
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
@@ -106,7 +108,8 @@ export const useServiceOfferEditDetail = ({
         (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
         0
       ) || 0;
-    let taxAmount = isTax && taxType === "0" ? calculateTax(totalPrices) : 0;
+
+    let taxAmount = isTax && taxType === "0" ? calculateTax(totalPrices, 7.7) : isTax && taxType === "1" ? calculateTax(totalPrices, data?.taxPercentage || 0) : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -137,7 +140,7 @@ export const useServiceOfferEditDetail = ({
 
   useMemo(() => {
     generateGrandTotal();
-  }, [discountAmount, discountType, taxType, isTax, isDiscount]);
+  }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
   useMemo(() => {
     if (offerDetails.id) {
       setTotal({

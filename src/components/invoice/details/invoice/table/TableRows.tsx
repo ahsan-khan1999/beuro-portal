@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import toggleIcon from "@/assets/svgs/toggle_icon.svg";
+import toggleIcon from "@/assets/svgs/edit_info.svg";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
@@ -11,11 +11,13 @@ import { staticEnums } from "@/utils/static";
 const TableRows = ({
   dataToAdd,
   handlePaymentStatusUpdate,
-  handleInvoiceStatusUpdate
+  handleInvoiceStatusUpdate,
+  handleInvoiceEdit,
 }: {
   dataToAdd: SubInvoiceTableRowTypes[];
   handleInvoiceStatusUpdate: (id: string, status: string) => void;
   handlePaymentStatusUpdate: (id: string, status: string) => void;
+  handleInvoiceEdit:(item:any) => void
 
 }) => {
   const router = useRouter();
@@ -61,7 +63,7 @@ const TableRows = ({
                 items={Object.keys(staticEnums['InvoiceStatus']).map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => handleInvoiceStatusUpdate(item.id, status)}
-                dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : staticEnums['InvoiceStatus'][item.invoiceStatus] === 2 ? 'bg-[#4A13E7]' : 'bg-red'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
@@ -72,6 +74,12 @@ const TableRows = ({
 
             >
               <Image src={moreIcon} alt="moreIcon" />
+            </span>
+            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md"
+              onClick={() => handleInvoiceEdit(item)}
+
+            >
+              <Image src={toggleIcon} alt="moreIcon" />
             </span>
           </div>
         );

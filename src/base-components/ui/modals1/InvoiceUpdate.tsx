@@ -5,7 +5,7 @@ import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import useInvoiceCreatedModal from "@/hooks/invoice/useInvoiceCreatedModal";
 
-const InvoiceCreated = ({
+const InvoiceUpdate = ({
   onClose,
   invoiceCreated,
 }: {
@@ -47,4 +47,4 @@ const InvoiceCreated = ({
   );
 };
 
-export default InvoiceCreated;
+export default InvoiceUpdate;
