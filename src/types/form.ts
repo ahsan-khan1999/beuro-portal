@@ -48,7 +48,8 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   remove?: string;
   onRemove?: () => void;
   fieldIndex?: number;
-  onChange?: (value?: number) => void
+  onChange?: (value?: number) => void;
+  percentage?: string
 }
 
 // textarea added
@@ -104,7 +105,7 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
 }
 
 export interface OptionType {
-  value: string;
+  value: string | number;
   label: string;
 }
 

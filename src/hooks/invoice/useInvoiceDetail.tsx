@@ -12,10 +12,14 @@ import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmatio
 import ExistingNotes from '@/base-components/ui/modals1/ExistingNotes';
 import AddNewNote from '@/base-components/ui/modals1/AddNewNote';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
-import { readCollectiveInvoice, readCollectiveReciept, readInvoiceDetails, setInvoiceDetails, updateInvoicePaymentStatus, updateInvoiceStatus } from '@/api/slices/invoice/invoiceSlice';
+import { readCollectiveInvoice, readCollectiveReciept, readInvoiceDetails, setInvoiceDetails, stopRecurringInvoices, updateInvoicePaymentStatus, updateInvoiceStatus } from '@/api/slices/invoice/invoiceSlice';
 import InvoiceCreated from '@/base-components/ui/modals1/InvoiceCreated';
 import { staticEnums } from '@/utils/static';
-
+import AreYouSureOffer from '@/base-components/ui/modals1/AreYouSureOffer';
+import cautionIcon from "@/assets/svgs/caution.svg"
+import RecurringInvoice from '@/base-components/ui/modals1/RecurringInvoice';
+import RecurringInvoiceFrequency from '@/base-components/ui/modals1/InvoiceFrequency';
+import InvoiceUpdate from '@/base-components/ui/modals1/InvoiceUpdate';
 export default function useInvoiceDetail() {
     const dispatch = useAppDispatch();
     const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -61,6 +65,15 @@ export default function useInvoiceDetail() {
     const invoiceCreated = () => {
         dispatch(updateModalType({ type: ModalType.CREATION }));
     };
+    const handleRecurringInvoiceCreation = () => {
+        dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE }));
+    };
+    const handleStopInvoiceCreation = () => {
+        dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE }));
+    };
+    const handleEditInvoiceFrequencyCreation = () => {
+        dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_FREQUENCY }));
+    };
 
 
 
@@ -90,9 +103,23 @@ export default function useInvoiceDetail() {
     const handleAddNote = (id: string) => {
         dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
     };
+    const handleRecurringSuccess = async () => {
+        const res = await dispatch(stopRecurringInvoices({ data: { isInvoiceRecurring: false, id: invoiceDetails?.id } }))
+        if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }));
+    };
 
-
-
+    let modalInfo = {
+        image: cautionIcon,
+        heading: "Are You Sure",
+        text: "You want you want to stop this recurring invoice",
+        noButton: "Cancel",
+        yesButton: "Yes",
+        onSuccess: handleRecurringSuccess,
+        loading: loading
+    }
+    const handleInvoiceEdit = (item: any) => {
+        dispatch(updateModalType({ type: ModalType.INVOICE_CREATE, data: item }))
+    }
 
     const MODAL_CONFIG: ModalConfigType = {
         [ModalType.CONFIRM_DELETION]: (
@@ -122,14 +149,37 @@ export default function useInvoiceDetail() {
         [ModalType.INVOICE_CREATE]: (
             <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
         ),
+        [ModalType.INVOICE_UPDATE]: (
+            <InvoiceUpdate onClose={onClose} invoiceCreated={invoiceCreated} />
+        ),
         [ModalType.CREATION]: (
             <CreationCreated
                 onClose={onClose}
-                heading="Invoice status updated successful "
-                subHeading="Thanks for creating Invoice we are happy to have you. "
+                heading="Successful "
+                subHeading="Your customer is now totally free."
                 route={route}
             />
         ),
+        [ModalType.ARE_YOU_SURE]: (
+            <AreYouSureOffer
+                info={modalInfo}
+                onClose={onClose}
+            />
+        ),
+        [ModalType.RECURRING_INVOICE]: (
+            <RecurringInvoice
+                onClose={onClose}
+                invoiceCreated={invoiceCreated}
+            />
+        ),
+        [ModalType.RECURRING_INVOICE_FREQUENCY]: (
+            <RecurringInvoiceFrequency
+                onClose={onClose}
+                invoiceCreated={invoiceCreated}
+            />
+        ),
+
+
 
     };
     const offerCreatedHandler = () => {
@@ -147,8 +197,6 @@ export default function useInvoiceDetail() {
         if (res?.payload) offerCreatedHandler()
     }
 
-
-
     return {
         invoiceDetails,
         renderModal,
@@ -160,6 +208,10 @@ export default function useInvoiceDetail() {
         collectiveInvoice,
         handleInvoiceStatusUpdate,
         handlePaymentStatusUpdate,
-        collectiveReciept
+        collectiveReciept,
+        handleRecurringInvoiceCreation,
+        handleStopInvoiceCreation,
+        handleEditInvoiceFrequencyCreation,
+        handleInvoiceEdit
     }
 }

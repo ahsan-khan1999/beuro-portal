@@ -1,12 +1,16 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateInvoiceFormField } from "@/types";
+import { disablePastDate } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 
 export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   register,
   loading,
   control,
-  markItRecuring
+  markItRecuring,
+  invoiceDetails,
+  type,
+  data
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -30,8 +34,9 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "totalAmount",
               name: "totalAmount",
-              placeholder: "20000 CHF",
+              value: invoiceDetails?.contractID?.offerID?.total?.toString(),
               register,
+              disabled: true
             },
           },
           {
@@ -50,7 +55,8 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "remainingAmount",
               name: "remainingAmount",
-              placeholder: "20000 CHF",
+              value: invoiceDetails?.remainingAmount,
+              disabled: true,
               register,
             },
           },
@@ -69,8 +75,8 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               "!flex !flex-row !justify-between !items-center mb-0",
             label: {
               text: `${translate("invoice.create_invoice_modal.enter_amount")}`,
-              htmlFor: "enterAmount",
-              className: "mb-0",
+              htmlFor: "type",
+              className: "mb-0 text-sm",
             },
             field: {
               type: Field.div,
@@ -81,26 +87,26 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: `${translate(
-                      "invoice.create_invoice_modal.amount"
-                    )}`,
+                    value: '0',
                     label: "Amount",
-                    id: "enterAmount",
-                    name: "enterAmount",
+                    id: "type",
+                    name: "type",
                     register,
+                    className: "text-sm"
+
                   },
                 },
                 {
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: `${translate(
-                      "invoice.create_invoice_modal.percentage"
-                    )}`,
+                    value: '1',
                     label: "Percentage",
-                    id: "enterAmount",
-                    name: "enterAmount",
+                    id: "type",
+                    name: "type",
                     register,
+                    className: "text-sm"
+
                   },
                 },
               ],
@@ -111,16 +117,19 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     },
 
     {
+
       containerClass: "mb-0",
+
       field: {
         type: Field.input,
         className:
           "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        inputType: "text",
-        id: "enterAmount",
-        name: "enterAmount",
-        placeholder: "20000 CHF",
+        inputType: "number",
+        id: "amount",
+        name: "amount",
+        // placeholder: "20000 CHF",
         register,
+        percentage: type === "1" && "%" || ""
       },
     },
 
@@ -128,16 +137,17 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       containerClass: "mb-0 mt-4",
       label: {
         text: `${translate("invoice.create_invoice_modal.payment_method")}`,
-        htmlFor: "paymentMethod",
+        htmlFor: "paymentType",
         className: "mb-[12px]",
       },
       field: {
         className:
-          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+          "!p-4 !h-[54px] !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
         type: Field.select,
-        value: "Online",
-        id: "paymentMethod",
-        name: "paymentMethod",
+        value: data ? data?.paymentType : "",
+        id: "paymentType",
+        name: "paymentType",
+
         options: [
           { value: "Online", label: "Online" },
           { value: "Cash", label: "Cash" },
@@ -146,55 +156,55 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       },
     },
 
-    {
-      containerClass: "mb-0 mt-[17px]",
-      field: {
-        className: "text-[#4B4B4B] text-[14px] font-normal",
-        type: Field.checkbox,
-        id: "markItRecuring",
-        name: "markItRecuring",
-        description: `${translate(
-          "invoice.create_invoice_modal.mark_it_recuring"
-        )}`,
-        register,
-      },
-    },
+    // {
+    //   containerClass: "mb-0 mt-[17px]",
+    //   field: {
+    //     className: "text-[#4B4B4B] text-[14px] font-normal",
+    //     type: Field.checkbox,
+    //     id: "isInvoiceRecurring",
+    //     name: "isInvoiceRecurring",
+    //     description: `${translate(
+    //       "invoice.create_invoice_modal.mark_it_recuring"
+    //     )}`,
+    //     register,
+    //   },
+    // },
 
-    {
-      containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
-      label: {
-        text: `${translate("invoice.create_invoice_modal.date_of_invoice")}`,
-        htmlFor: "date",
-        className: "mb-[12px]",
-      },
-      field: {
-        type: Field.date,
-        className: "!p-4 !border-dark focus:!border-primary ",
-        id: "date",
-        name: "date",
-        register,
-        dateType:"datetime-local"
+    // {
+    //   containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
+    //   label: {
+    //     text: `${translate("invoice.create_invoice_modal.date_of_invoice")}`,
+    //     htmlFor: "date",
+    //     className: "mb-[12px]",
+    //   },
+    //   field: {
+    //     type: Field.date,
+    //     className: "!p-4 !border-dark focus:!border-primary ",
+    //     id: "date",
+    //     name: "date",
+    //     register,
+    //     dateType:"datetime-local"
 
-      },
-    },
-    {
-      containerClass: `mb-0 mt-4 ${!markItRecuring && "hidden"}`,
-      label: {
-        text: `${translate("invoice.create_invoice_modal.frequency")}`,
-        htmlFor: "frequency",
-        className: "mb-[12px]",
-      },
-      field: {
-        className:
-          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        value: " ",
-        type: Field.select,
-        id: "frequency",
-        name: "frequency",
-        options: [{ value: "200GHZ", label: "200GHZ" }],
-        control,
-      },
-    },
+    //   },
+    // },
+    // {
+    //   containerClass: `mb-0 mt-4 ${!markItRecuring && "hidden"}`,
+    //   label: {
+    //     text: `${translate("invoice.create_invoice_modal.frequency")}`,
+    //     htmlFor: "frequency",
+    //     className: "mb-[12px]",
+    //   },
+    //   field: {
+    //     className:
+    //       "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+    //     value: " ",
+    //     type: Field.select,
+    //     id: "frequency",
+    //     name: "frequency",
+    //     options: [{ value: "200GHZ", label: "200GHZ" }],
+    //     control,
+    //   },
+    // },
 
     {
       containerClass: "mb-0 mt-[13px]",

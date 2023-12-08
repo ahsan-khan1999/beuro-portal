@@ -53,7 +53,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mt-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
@@ -408,7 +408,7 @@ const generateServiceCalulationChildren = (
       containerClass: "w-[112px]",
       field: {
         type: Field.select,
-        id: "tax-select",
+        id: "taxPercentage",
         options: [
           { label: "10%", value: 10 },
           { label: "20%", value: 20 },
@@ -416,11 +416,11 @@ const generateServiceCalulationChildren = (
           { label: "40%", value: 40 },
           { label: "50%", value: 50 },
         ],
-        value: 10,
         text: "Select Tax",
-        name: "tax-select",
+        name: "taxPercentage",
         control,
-        className: "h-10",
+        className: "h-10 !px-8",
+
       },
     };
   }

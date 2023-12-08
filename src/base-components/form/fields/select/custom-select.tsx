@@ -70,7 +70,7 @@ export const SelectBox = ({
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={classes}
+        className={`${classes} `}
       >
         {(field && getLabelByValue(field.value, option)) || getLabelByValue(defaultValue, option)}
 

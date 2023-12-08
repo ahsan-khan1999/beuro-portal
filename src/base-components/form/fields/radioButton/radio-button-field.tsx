@@ -37,7 +37,7 @@ export const RadioButtonField = ({
         //   onClick && onClick()
         // }}
       />
-      <span className="ms-4">{label}</span>
+      <span className="ms-0 text-sm">{label}</span>
     </div>
 
   );

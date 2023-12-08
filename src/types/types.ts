@@ -30,6 +30,7 @@ import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, Total } from "./offers";
+import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -306,7 +307,9 @@ export type GenerateInvoiceFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   markItRecuring: boolean,
-  trigger?: UseFormTrigger<FieldValues>
+  invoiceDetails?: InvoiceTableRowTypes,
+  type?: string,
+  data?: SubInvoiceTableRowTypes
 ) => FormField[];
 
 // Contract formfield
@@ -427,20 +430,8 @@ export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  properties: {
-    offerDetails?: OffersTableRowTypes;
-    customerType: string;
-    type: string;
-    customer: Customers[];
-    onCustomerSelect: (id: string) => void;
-    customerDetails: Customers;
-    onCancel: () => void;
-    leadDetails: Lead;
-    lead?: Lead[];
-    content?: ContentTableRowTypes[];
-    handleContentSelect?: () => void;
-    selectedContent?: string;
-  },
+  properties:
+    { offerDetails?: OffersTableRowTypes, customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 

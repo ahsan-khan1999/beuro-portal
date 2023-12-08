@@ -1,10 +1,9 @@
 // enum for created invoice
 export enum createInvoice {
-  totalAmount = "totalAmount",
+  totalAmount = "amount",
   remainingAmount = "remainingAmount",
-  enterAmount = "enterAmount",
-  paymentMethod = "paymentMethod",
-  markItRecuring = "markItRecuring",
-  date = "date",
+  paymentMethod = "paymentType",
+  date = "dateOfNextInvoice",
   frequency = "frequency",
+  isInvoiceRecurring = "isInvoiceRecurring"
 }

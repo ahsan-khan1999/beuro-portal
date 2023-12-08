@@ -61,11 +61,38 @@ export const createInvoice: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.createInvoiceCollection(data);
-            return true;
+            const response = await apiServices.createInvoiceCollection(data);
+            return response?.data?.data?.InvoiceCollection;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const createRecuringInvoice: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/create/recurring", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.createRecurringInvoiceCollection(data);
+            return response?.data?.data?.InvoiceCollection;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
+export const updateParentInvoice: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/update/parent", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateInvoice(data);
+            return response?.data?.InvoiceCollection;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
         }
     });
@@ -75,7 +102,7 @@ export const updateInvoice: AsyncThunk<boolean, object, object> | any =
 
         try {
             const response = await apiServices.updateInvoiceCollection(data);
-            return response?.data?.Invoice;
+            return response?.data?.InvoiceCollection;
         } catch (e: any) {
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -153,9 +180,24 @@ export const updateInvoicePaymentStatus: AsyncThunk<boolean, object, object> | a
 
         try {
 
-            const response = await apiServices.updateContractPaymentStatus(data);
+            const response = await apiServices.updateInvoicePaymentStatus(data);
+            return response?.data?.InvoiceCollection;
+
             // thunkApi.dispatch(setContractDetails(response?.data?.Contract))
             return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const stopRecurringInvoices: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("stop/recurring/invoice", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.stopRecurringInvoice(data);
+            return response?.data?.Invoice
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -202,7 +244,11 @@ const InvoiceSlice = createSlice({
             state.loading = true
         });
         builder.addCase(createInvoice.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.collectiveInvoice = [...state.collectiveInvoice, action.payload]
+            }
             state.loading = false;
+
         });
         builder.addCase(createInvoice.rejected, (state) => {
             state.loading = false
@@ -276,6 +322,58 @@ const InvoiceSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updateInvoiceStatus.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(createRecuringInvoice.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(createRecuringInvoice.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.collectiveInvoice = [...state.collectiveInvoice, action.payload]
+                state.invoiceDetails = { ...state.invoiceDetails, isInvoiceRecurring: true }
+
+            }
+            state.loading = false;
+        });
+        builder.addCase(createRecuringInvoice.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(stopRecurringInvoices.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(stopRecurringInvoices.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.invoiceDetails = action.payload
+            }
+            state.loading = false;
+        });
+        builder.addCase(stopRecurringInvoices.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateInvoicePaymentStatus.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateInvoicePaymentStatus.fulfilled, (state, action) => {
+            let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+            if (index !== -1) {
+                state.collectiveInvoice.splice(index, 1, action.payload)
+            }
+            state.loading = false;
+        });
+        builder.addCase(updateInvoicePaymentStatus.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateParentInvoice.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateParentInvoice.fulfilled, (state, action) => {
+            let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+            if (index !== -1) {
+                state.collectiveInvoice.splice(index, 1, action.payload)
+            }
+            state.loading = false;
+        });
+        builder.addCase(updateParentInvoice.rejected, (state) => {
             state.loading = false
         });
 
