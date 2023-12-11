@@ -26,7 +26,7 @@ const ExistingNotes = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[400px] overflow-y-scroll dashboard_scrollbar"
+        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[400px] dashboard_scrollbar"
       >
         <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4">
           <Image

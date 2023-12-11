@@ -113,13 +113,13 @@ const AdminDashboard = () => {
           {translate("dashboard_detail.main_heading")}
         </h1>
       </div>
-      
+
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
         containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
-        textClassName="ml-4 w-full  focus:outline-none border-r mr-3 pr-2 border-[#BFBFBF] py-0 rounded-none "
+        textClassName="ml-4 w-full focus:outline-none border-[#BFBFBF] py-0 rounded-none "
       />
 
       <DashboardFunctions />

@@ -12,6 +12,7 @@ const typeList = [
     item: "Company",
   },
 ];
+
 export default function useFilter({
   filter,
   setFilter,

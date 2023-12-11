@@ -2,9 +2,24 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 
+export enum select {
+  month,
+  week,
+}
 export default function DashboardFilters() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState({
+    [select.month]: false,
+    [select.week]: false,
+  });
+
   const { t: translate } = useTranslation();
+
+  const handleSelectToggle = (type: select) => {
+    setIsOpen((prev) => ({
+      ...prev,
+      [type]: !isOpen[type],
+    }));
+  };
 
   return (
     <div className="flex space-x-4">
@@ -12,22 +27,22 @@ export default function DashboardFilters() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        isOpen={isOpen[select.week]}
+        setIsOpen={() => handleSelectToggle(select.week)}
         options={[
           `${translate("dashboard_detail.options_labels.week")}`,
           `${translate("dashboard_detail.options_labels.month")}`,
           `${translate("dashboard_detail.options_labels.year")}`,
         ]}
         label={translate("dashboard_detail.options_labels.month")}
-        containerClassName="bg-white w-[105px] h-8 rounded-[7px] border border-[#8F8F8F80]"
+        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80]"
       />
       <SelectField
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        isOpen={isOpen[select.month]}
+        setIsOpen={() => handleSelectToggle(select.month)}
         options={[
           `${translate("dashboard_detail.months.jan")}`,
           `${translate("dashboard_detail.months.feb")}`,
@@ -43,7 +58,7 @@ export default function DashboardFilters() {
           `${translate("dashboard_detail.months.dec")}`,
         ]}
         label={translate("dashboard_detail.months.feb")}
-        containerClassName="bg-white w-[105px] h-8 rounded-[7px] border border-[#8F8F8F80]"
+        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80]"
       />
     </div>
   );

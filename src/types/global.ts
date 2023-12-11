@@ -1,7 +1,8 @@
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
+import { select } from "@/components/dashboard/filters";
 
 export interface GlobalState {
   loading: boolean;
@@ -57,7 +58,7 @@ export interface OptionsFieldProps {
   options: string[];
   dropDownIconClassName: string;
   isOpen: boolean;
-  setIsOpen: SetStateAction<any>;
+  setIsOpen: () => void;
   containerClassName?: string;
 }
 
