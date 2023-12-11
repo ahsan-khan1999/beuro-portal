@@ -8,15 +8,25 @@ import useContent from "@/hooks/content/useContent";
 import TableFunctions from "./table/TableFunctions";
 
 export default function Content() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange,translate } =
-    useContent();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleFilterChange,
+    translate,
+  } = useContent();
   return (
     <>
       <Layout>
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl text-[#222B45] ">{translate("content.main_heading")}</h1>
-          <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
-        </div>
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+          translate={translate}
+        />
         <TableLayout>
           <TableHeadings />
           <TableRows contentData={currentPageRows} />

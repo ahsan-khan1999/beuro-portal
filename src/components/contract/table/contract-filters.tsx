@@ -3,20 +3,16 @@ import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
-import { CheckBoxType, FilterType } from "@/types";
-import { Status } from "@/types/global";
+import { Button } from "@/base-components/ui/button/button";
+import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import React, { SetStateAction, useState } from "react";
+import React from "react";
 
 export default function ContractFilters({
   filter,
   setFilter,
   handleFilterChange,
-}: {
-  filter: FilterType;
-  setFilter: SetStateAction<any>;
-  handleFilterChange: (value: FilterType) => void;
-}) {
+}: FiltersComponentProps) {
   const { t: translate } = useTranslation();
 
   const checkbox: CheckBoxType[] = [
@@ -72,6 +68,13 @@ export default function ContractFilters({
         handleFilterReset={handleFilterReset}
         handleItemSelected={handleItemSelected}
         typeList={typeList}
+      />
+      <Button
+        id="apply"
+        inputType="button"
+        text="Apply"
+        onClick={() => handleFilterChange(filter)}
+        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       />
     </div>
   );

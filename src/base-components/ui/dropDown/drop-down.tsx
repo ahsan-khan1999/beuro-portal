@@ -19,27 +19,32 @@ export const DropDown = ({
 }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
-  
+
   const toggleDropDown = (item: string) => {
     onItemSelected(item);
     !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
   useEffect(() => {
-    setSelectedItem(defaultSelectedItem)
-  }, [defaultSelectedItem])
+    setSelectedItem(defaultSelectedItem);
+  }, [defaultSelectedItem]);
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
     "flex items-center justify-between bg-white px-4 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
-    `text-sm font-medium text-dark ${dropDownDisabled ? 'text-lightGray': ''}`,
+    `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
     dropDownTextClassName
   );
-    
+
   return (
-    <div className={`  flex flex-col w-full gap-y-2 ${dropDownDisabled ? 'pointer-events-none' : ''}`} ref={dropdownRef}>
+    <div
+      className={`  flex flex-col w-full gap-y-2 ${
+        dropDownDisabled ? "pointer-events-none" : ""
+      }`}
+      ref={dropdownRef}
+    >
       {label && <label className="text-sm text-gray">{label}</label>}
       <div className="relative w-full">
         <button
@@ -49,7 +54,10 @@ export const DropDown = ({
         >
           {children}
           <span className={textClasses}>{selectedItem}</span>
-          <DropDownNonFillIcon isOpen={isOpen} className={dropDownIconClassName} />
+          <DropDownNonFillIcon
+            isOpen={isOpen}
+            className={dropDownIconClassName}
+          />
         </button>
         {isOpen && <DropDownItems items={items} onItemClick={toggleDropDown} />}
       </div>

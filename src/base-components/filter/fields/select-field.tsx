@@ -21,7 +21,7 @@ export default function SelectField({
     <>
       <div className={containerClasses}>
         <div
-          className="flex  justify-between cursor-pointer"
+          className="flex justify-between items-center cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="text-[#4A13E7] me-2">{label}</span>

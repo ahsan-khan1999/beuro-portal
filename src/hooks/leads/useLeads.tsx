@@ -16,39 +16,41 @@ import { useRouter } from "next/router";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>(
-    []
+  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
+    (state) => state.lead
   );
-  const { query } = useRouter()
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
+  const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
     text: "",
     type: "",
-    status: query?.filter as string
-
+    status: query?.filter as string,
   });
-  console.log(filter, "query");
 
   useMemo(() => {
     setFilter({
-      ...filter, status: query?.filter as string
-    })
-  }, [query?.filter])
+      ...filter,
+      status: query?.filter as string,
+    });
+  }, [query?.filter]);
   useEffect(() => {
-    localStoreUtil.remove_data("lead")
-    dispatch(setLeadDetails(DEFAULT_LEAD))
-    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Lead?.slice(startIndex, startIndex + itemsPerPage));
+    localStoreUtil.remove_data("lead");
+    dispatch(setLeadDetails(DEFAULT_LEAD));
+    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          setCurrentPageRows(
+            res?.payload?.Lead?.slice(startIndex, startIndex + itemsPerPage)
+          );
+        }
       }
-    })
-  }, [])
+    );
+  }, []);
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
@@ -56,7 +58,7 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } }));
   };
 
   // Function for close the modal
@@ -65,25 +67,28 @@ const useLeads = () => {
   };
 
   // Function for handling the modal for exiting notes
-  const handleNotes = (
-    item: string,
-    e?: React.MouseEvent<HTMLSpanElement>
-  ) => {
+  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
     }
-    const filteredLead = lead?.filter((item_) => item_.id === item)
+    const filteredLead = lead?.filter((item_) => item_.id === item);
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
-      dispatch(readNotes({ params: { type: "lead", id: filteredLead[0]?.id } }));
+      dispatch(
+        readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
+      );
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-    
     }
   };
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "lead" } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: { id: id, type: "lead" },
+      })
+    );
   };
 
   // function for hnadling the add note
@@ -97,7 +102,7 @@ const useLeads = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = lead.filter((item_) => item_.id === item)
+    const filteredLead = lead.filter((item_) => item_.id === item);
     if (filteredLead?.length === 1) dispatch(setLeadDetails(filteredLead[0]));
     dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
   };
@@ -105,7 +110,11 @@ const useLeads = () => {
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} leadDetails={leadDetails} />
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={leadDetails}
+      />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
@@ -113,7 +122,9 @@ const useLeads = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={leadDetails}/>,
+    [ModalType.IMAGE_SLIDER]: (
+      <ImageSlider onClose={onClose} details={leadDetails} />
+    ),
   };
 
   const renderModal = () => {

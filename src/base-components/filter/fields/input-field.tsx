@@ -74,7 +74,6 @@ export default function InputField({
           </div>
         )}
       </div>
-      
     </div>
   );
 }

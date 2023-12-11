@@ -2,51 +2,53 @@ import { FilterType } from "@/types";
 import { SetStateAction, useState } from "react";
 
 const typeList = [
-    {
-        item: "None",
+  {
+    item: "None",
+  },
+  {
+    item: "Individual",
+  },
+  {
+    item: "Company",
+  },
+];
+export default function useFilter({
+  filter,
+  setFilter,
+}: {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+}) {
+  const [moreFilter, setMoreFilter] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    },
-    {
-        item: "Individual",
+  const handleItemSelected = (val: string) => {
+    setFilter({ ...filter, ["type"]: val });
+  };
 
-    },
-    {
-        item: "Company",
+  const handleFilterReset = (key: keyof FilterType, value: string) => {
+    setFilter({ ...filter, [key]: value });
+  };
+  const handleFilterResetToInitial = () => {
+    setFilter({
+      text: "",
+      sortBy: "",
+      type: "None",
+      location: "",
+      status: "",
+    });
+  };
 
-    }
-]
-export default function useFilter({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
-    const [moreFilter, setMoreFilter] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleItemSelected = (val: string) => {
-        setFilter({ ...filter, ["type"]: val })
-    }
-
-    const handleFilterReset = (key: keyof FilterType, value: string) => {
-        setFilter({ ...filter, [key]: value })
-    }
-    const handleFilterResetToInitial = () => {
-        setFilter({
-            text: "",
-            sortBy: "",
-            type: "None",
-            location: "",
-            status:""
-        })
-    }
-
-    return {
-        moreFilter,
-        setMoreFilter,
-        filter,
-        setFilter,
-        isOpen,
-        setIsOpen,
-        handleItemSelected,
-        handleFilterReset,
-        handleFilterResetToInitial,
-        typeList
-
-    }
+  return {
+    moreFilter,
+    setMoreFilter,
+    filter,
+    setFilter,
+    isOpen,
+    setIsOpen,
+    handleItemSelected,
+    handleFilterReset,
+    handleFilterResetToInitial,
+    typeList,
+  };
 }

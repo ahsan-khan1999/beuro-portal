@@ -11,7 +11,7 @@ export default function CheckField({
 }: CheckFieldProps) {
   return (
     <>
-      <label className="custom-checkbox w-full xl:w-fit  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer">
+      <label className="custom-checkbox  py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer">
         <input
           type="checkbox"
           name="check"

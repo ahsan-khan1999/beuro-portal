@@ -16,22 +16,20 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             key={index}
             className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 bg-white rounded-md"
           >
-            <span className="py-4  rounded-md flex items-center">
-              {item.id}
-            </span>
-            <span className="py-4   flex items-center">{item.recipient}</span>
+            <span className="py-4 rounded-md flex items-center">{item.id}</span>
+            <span className="py-4 flex items-center">{item.recipient}</span>
             <span className="xs:block mlg:hidden xlg:hidden maxSize:flex py-4  items-center">
               {item.subject}
             </span>
-            <div className="py-4   flex flex-col ">
+            <div className="py-4 flex flex-col ">
               <span>{item.sendAt.time}</span>
               <span>{item.sendAt.date}</span>
             </div>
-            <div className="py-4   flex flex-col ">
+            <div className="py-4 flex flex-col ">
               <span>{item.sendAt.time}</span>
               <span>{item.sendAt.date}</span>
             </div>
-            <span className="py-4  flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${item.status.colorClass}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
@@ -66,7 +64,18 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             </span>
 
             <span className="py-4 flex justify-center items-center  rounded-md">
-              <Image src={moreInfo} alt="moreInfo" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="8"
+                height="15"
+                viewBox="0 0 8 15"
+                fill="none"
+              >
+                <path
+                  d="M0.461667 14.0655C0.291259 13.8825 0.206055 13.6659 0.206055 13.4156C0.206055 13.1653 0.291259 12.9489 0.461667 12.7665L5.45463 7.40568L0.444626 2.0266C0.285579 1.85583 0.206055 1.64238 0.206055 1.38623C0.206055 1.13008 0.291259 0.91053 0.461667 0.727568C0.632076 0.544606 0.833839 0.453125 1.06696 0.453125C1.30008 0.453125 1.50161 0.544606 1.67157 0.727568L7.39729 6.89338C7.46545 6.96657 7.51385 7.04585 7.54247 7.13123C7.5711 7.21662 7.58519 7.3081 7.58474 7.40568C7.58474 7.50326 7.57042 7.59474 7.54179 7.68012C7.51316 7.7655 7.465 7.84478 7.39729 7.91797L1.65453 14.0838C1.49548 14.2545 1.29939 14.3399 1.06628 14.3399C0.833157 14.3399 0.631621 14.2485 0.461667 14.0655Z"
+                  fill="black"
+                />
+              </svg>
             </span>
           </div>
         );
