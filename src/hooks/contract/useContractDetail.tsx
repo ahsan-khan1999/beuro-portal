@@ -17,10 +17,13 @@ import ImageSliderContract from '@/base-components/ui/modals1/ImageSliderContrac
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
 import { updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import { staticEnums } from '@/utils/static';
+import { readImage } from '@/api/slices/imageSlice/image';
 
 export default function useContractDetail() {
     const dispatch = useAppDispatch();
     const { modal } = useAppSelector((state) => state.global);
+  const { images } = useAppSelector(state => state.image)
+
     const { contractDetails, loading, contract } = useAppSelector((state) => state.contract);
     const { t: translate } = useTranslation()
     const router = useRouter();
@@ -84,9 +87,12 @@ export default function useContractDetail() {
       e: React.MouseEvent<HTMLSpanElement>
     ) => {
       e.stopPropagation();
-      const filteredLead = contract?.filter((item_) => item_.id === item)
-      if (filteredLead?.length === 1) dispatch(setContractDetails(filteredLead[0]));
-      dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+      const filteredLead = contract?.find((item_) => item_.id === item)
+      if (filteredLead) {
+        dispatch(setContractDetails(filteredLead));
+        dispatch(readImage({ params: { type: "contractID", id: filteredLead?.id } }));
+        dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+      }
     };
   
   
@@ -117,7 +123,7 @@ export default function useContractDetail() {
       [ModalType.UPLOAD_IMAGE]: (
         <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type='Contract'/>
       ),
-      [ModalType.IMAGE_SLIDER]: <ImageSliderContract onClose={onClose} details={contractDetails}/>,
+      [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images}/>,
       [ModalType.CREATION]: (
         <CreationCreated
           onClose={onClose}

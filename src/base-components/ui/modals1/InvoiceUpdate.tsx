@@ -3,7 +3,7 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import useInvoiceCreatedModal from "@/hooks/invoice/useInvoiceCreatedModal";
+import useInvoiceUpdateModal from "@/hooks/invoice/useInvoiceUpdateModal";
 
 const InvoiceUpdate = ({
   onClose,
@@ -15,7 +15,7 @@ const InvoiceUpdate = ({
   
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
-    useInvoiceCreatedModal(invoiceCreated);
+  useInvoiceUpdateModal(invoiceCreated);
   return (
     <>
       <BaseModal
@@ -30,7 +30,7 @@ const InvoiceUpdate = ({
             className="absolute right-5 top-5 cursor-pointer"
           />
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-5">
-            {translate("invoice.create_invoice_modal.button")}
+            {translate("invoice.create_invoice_modal.update_invoice")}
           </p>
 
           <hr className="opacity-25 mb-[23px]" />

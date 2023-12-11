@@ -17,9 +17,11 @@ import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { readImage } from "@/api/slices/imageSlice/image";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(state => state.offer)
+  const { images } = useAppSelector(state => state.image)
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
@@ -100,9 +102,13 @@ const useOffers = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = offer?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) dispatch(setOfferDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    const filteredLead = offer?.find((item_) => item_.id === item)
+    if (filteredLead) {
+      dispatch(setOfferDetails(filteredLead));
+      dispatch(readImage({ params: { type: "offerID", id: filteredLead?.id } }));
+      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    }
+
   };
 
 
@@ -114,9 +120,9 @@ const useOffers = () => {
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"}/>
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails}/>,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
   };
 
   const renderModal = () => {

@@ -16,10 +16,11 @@ import { readContract, setContractDetails } from "@/api/slices/contract/contract
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import ImageSliderContract from "@/base-components/ui/modals1/ImageSliderContract";
+import image, { readImage } from "@/api/slices/imageSlice/image";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } = useAppSelector(state => state.contract)
-
+  const { images } = useAppSelector(state => state.image)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
@@ -99,9 +100,12 @@ const useContract = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = contract?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) dispatch(setContractDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    const filteredLead = contract?.find((item_) => item_.id === item)
+    if (filteredLead) {
+      dispatch(setContractDetails(filteredLead));
+      dispatch(readImage({ params: { type: "contractID", id: filteredLead?.id } }));
+      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    }
   };
 
 
@@ -113,9 +117,9 @@ const useContract = () => {
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"}/>
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSliderContract onClose={onClose} details={contractDetails}/>,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />
   };
 
   const renderModal = () => {

@@ -7,11 +7,13 @@ import { Lead } from "@/types/leads";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { useTranslation } from "next-i18next";
-const ImageSlider = ({ onClose, details }: { onClose: () => void, details: Lead | OffersTableRowTypes }) => {
+const ImageSlider = ({ onClose, details }: { onClose: () => void, details: string[] }) => {
   // const { leadDetails } = useAppSelector(state => state.lead)
+  console.log(details,"de");
+  
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
-    images: details?.images?.map((item) => ({ imageSrc: item }))
+    images: details?.map((item) => ({ imageSrc: item }))
   };
   const { t: translate } = useTranslation();
 

@@ -23,12 +23,12 @@ export enum SettingProfile {
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
   website = "website",
-  mwstNumber = "mwstNumber",
+  mwstNumber = "taxNumber",
   streetAddress = "streetAddress",
   postCode = "postCode",
   country = "country",
   bankName = "bankName",
   accountNumber = "accountNumber",
-  IBAN_number = "IBAN_number",
+  IBAN_number = "ibanNumber",
   changePassword="changePassword"
 }

@@ -64,8 +64,9 @@ const SERVICE_URLS = {
   updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
   updateInvoiceStatus: "/invoice/invoice-collection/update-invoiceCollection-status/",
   createInvoice: "/invoice/invoice-collection/",
-  updateInvoicePaymentStatus:"/invoice/invoice-collection/update-payment-status/",
-  updateInvoiceCollection:"/invoice/invoice-collection/"
+  updateInvoicePaymentStatus: "/invoice/invoice-collection/update-payment-status/",
+  updateInvoiceCollection: "/invoice/invoice-collection/",
+  image: "/lead/images/"
 };
 
 const login = (data) =>
@@ -226,7 +227,7 @@ const createInvoice = (data) =>
   post(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
 
 const updateInvoice = (data) =>
-  put(SERVICE_URLS.updateInvoiceCollection, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.updateInvoiceCollection + `${data?.id}`, data, { feature: featureConstants.login });
 const stopRecurringInvoice = (data) =>
   put(SERVICE_URLS.invoice + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteInvoice = (data) =>
@@ -321,6 +322,12 @@ const updateInvoiceStatus = (data) =>
   put(SERVICE_URLS.updateInvoiceStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const updateInvoicePaymentStatus = (data) =>
   put(SERVICE_URLS.updateInvoicePaymentStatus + `${data?.id}`, data, { feature: featureConstants.login });
+
+
+const readImage = (params) =>
+  get(SERVICE_URLS.image + `${params?.type}/${params?.id}`, {}, { feature: featureConstants.login }, { detail: false });
+const createImage = (params) =>
+  post(SERVICE_URLS.image + `${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const apiServices = {
 
   login,
@@ -424,6 +431,8 @@ const apiServices = {
   createRecurringInvoiceCollection,
   stopRecurringInvoice,
   updateInvoicePaymentStatus,
-  updateInvoice
+  updateInvoice,
+  readImage,
+  createImage
 };
 export default apiServices;

@@ -174,6 +174,20 @@ export const updateInvoiceStatus: AsyncThunk<boolean, object, object> | any =
         }
     });
 
+export const updateRecieptStatus: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("reciept/update/status", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updateInvoiceStatus(data);
+            return response?.data?.InvoiceCollection;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
 export const updateInvoicePaymentStatus: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("invoice/update/payment", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -185,6 +199,20 @@ export const updateInvoicePaymentStatus: AsyncThunk<boolean, object, object> | a
 
             // thunkApi.dispatch(setContractDetails(response?.data?.Contract))
             return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const updateRecieptPaymentStatus: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("reciept/update/payment", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updateInvoicePaymentStatus(data);
+            return response?.data?.InvoiceCollection;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -324,6 +352,19 @@ const InvoiceSlice = createSlice({
         builder.addCase(updateInvoiceStatus.rejected, (state) => {
             state.loading = false
         });
+        builder.addCase(updateRecieptStatus.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateRecieptStatus.fulfilled, (state, action) => {
+            let index = state.collectiveReciept.findIndex((item) => item.id === action.payload?.id)
+            if (index !== -1) {
+                state.collectiveReciept.splice(index, 1, action.payload)
+            }
+            state.loading = false;
+        });
+        builder.addCase(updateRecieptStatus.rejected, (state) => {
+            state.loading = false
+        });
         builder.addCase(createRecuringInvoice.pending, (state) => {
             state.loading = true
         });
@@ -363,11 +404,26 @@ const InvoiceSlice = createSlice({
         builder.addCase(updateInvoicePaymentStatus.rejected, (state) => {
             state.loading = false
         });
+        builder.addCase(updateRecieptPaymentStatus.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateRecieptPaymentStatus.fulfilled, (state, action) => {
+            let index = state.collectiveReciept.findIndex((item) => item.id === action.payload?.id)
+            if (index !== -1) {
+                state.collectiveReciept.splice(index, 1, action.payload)
+            }
+            state.loading = false;
+        });
+        builder.addCase(updateRecieptPaymentStatus.rejected, (state) => {
+            state.loading = false
+        });
         builder.addCase(updateParentInvoice.pending, (state) => {
             state.loading = true
         });
         builder.addCase(updateParentInvoice.fulfilled, (state, action) => {
             let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+            console.log(index, "index");
+
             if (index !== -1) {
                 state.collectiveInvoice.splice(index, 1, action.payload)
             }

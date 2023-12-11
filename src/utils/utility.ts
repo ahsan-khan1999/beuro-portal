@@ -417,8 +417,8 @@ export function setImageFieldValues(
   setValue: UseFormSetValue<FieldValues>,
   images: string[]
 ) {
-  if (images.length === 0) return;
-  images.forEach((element, idx) => {
+  if (images?.length === 0) return;
+  images?.forEach((element, idx) => {
     setValue(`upload_image${idx + 1}`, element);
   });
 }
@@ -435,7 +435,7 @@ export function setAddressFieldValues(
   setValue: UseFormSetValue<FieldValues>,
   images: string[]
 ) {
-  if (images.length === 0) return;
+  if (images?.length === 0) return;
   images.forEach((element, idx) => {
     console.log(element, "element", idx);
 

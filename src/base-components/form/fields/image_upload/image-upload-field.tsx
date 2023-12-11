@@ -64,6 +64,7 @@ export const ImageUpload = ({
               width={100}
               height={100}
               alt="Uploaded Preview"
+              style={{ height: "70px", width: "70px" }}
 
             />
             <div

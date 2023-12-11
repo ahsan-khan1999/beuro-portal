@@ -15,8 +15,8 @@ const TableRows = ({
   handleInvoiceEdit,
 }: {
   dataToAdd: SubInvoiceTableRowTypes[];
-  handleInvoiceStatusUpdate: (id: string, status: string) => void;
-  handlePaymentStatusUpdate: (id: string, status: string) => void;
+  handleInvoiceStatusUpdate: (id: string, status: string,type:string) => void;
+  handlePaymentStatusUpdate: (id: string, status: string,type:string) => void;
   handleInvoiceEdit:(item:any) => void
 
 }) => {
@@ -28,7 +28,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="relative h-[200px] z-0 cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(150px,_100%)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="relative  z-0 cursor-pointer shadow-tableRow grid  grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_100%)_minmax(150px,_150px)_minmax(150px,_100%)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
           >
             <span className="px-6 py-4 bg-white rounded-md ">{item.invoiceNumber}</span>
             <span className="px-6 py-4 bg-white  ">{item.invoiceID?.contractID?.offerID?.customerID?.fullName}</span>
@@ -52,7 +52,7 @@ const TableRows = ({
               <DropDown
                 items={Object.keys(staticEnums['PaymentType']).map((item) => ({ item: item }))}
                 selectedItem={item.paymentType}
-                onItemSelected={(status) => handlePaymentStatusUpdate(item.id, status)}
+                onItemSelected={(status) => handlePaymentStatusUpdate(item.id, status,"invoice")}
                 dropDownClassName={`${staticEnums['PaymentType'][item.paymentType] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
@@ -62,7 +62,7 @@ const TableRows = ({
               <DropDown
                 items={Object.keys(staticEnums['InvoiceStatus']).map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id, status)}
+                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id, status,"invoice")}
                 dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : staticEnums['InvoiceStatus'][item.invoiceStatus] === 2 ? 'bg-[#4A13E7]' : 'bg-red'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}

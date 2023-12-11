@@ -77,6 +77,7 @@ export enum AddressTypes {
   postalCode = "postalCode",
   city = "city",
   houseNumber = "houseNumber",
+  country="country"
 
 }
 export enum Header {

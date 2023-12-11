@@ -8,7 +8,7 @@ import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
-const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePaymentStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string,status:string) => void, handleInvoiceStatusUpdate: (id: string,status:string) => void }) => {
+const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePaymentStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string,status:string,type:string) => void, handleInvoiceStatusUpdate: (id: string,status:string,type:string) => void }) => {
   const router = useRouter();
   return (
     <div>
@@ -36,11 +36,10 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
             </span>
 
             <span className="px-6 py-4 bg-white ">
-
               <DropDown
                 items={Object.keys(staticEnums['PaymentType']).map((item) => ({ item: item }))}
                 selectedItem={item.paymentType}
-                onItemSelected={(status) => handlePaymentStatusUpdate(item.id,status)}
+                onItemSelected={(status) => handlePaymentStatusUpdate(item.id,status,"reciept")}
                 dropDownClassName={`${staticEnums['PaymentType'][item.paymentType] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
@@ -50,8 +49,9 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
               <DropDown
                 items={Object.keys(staticEnums['InvoiceStatus']).map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id,status)}
-                dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id,status,"reciept")}  
+                dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : staticEnums['InvoiceStatus'][item.invoiceStatus] === 2 ? 'bg-[#4A13E7]' : 'bg-red'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />

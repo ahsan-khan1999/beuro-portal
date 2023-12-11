@@ -31,21 +31,21 @@ const Setting = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
- 
+
   const handleChangePassword = () => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE));
+    dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE }));
   };
 
   const exclusiveTaxHandler = () => {
-    dispatch(updateModalType(ModalType.EXCLUSIVE_TAX));
+    dispatch(updateModalType({ type: ModalType.EXCLUSIVE_TAX }));
   };
 
   const addTaxHandler = () => {
-    dispatch(updateModalType(ModalType.ADD_TAX));
+    dispatch(updateModalType({ type: ModalType.ADD_TAX }));
   };
 
   const handleEditPayment = () => {
-    dispatch(updateModalType(ModalType.EDIT_PAYMENT_METHOD));
+    dispatch(updateModalType({ type: ModalType.EDIT_PAYMENT_METHOD }));
   };
 
   const handleCreation = () => {
@@ -74,7 +74,21 @@ const Setting = () => {
       />
     ),
   };
+  const settingsLookup = {
+    0: <SettingProfile handleChangePassword={handleChangePassword} />,
+    1: <SystemSettingDetails
+      addTaxHandler={addTaxHandler}
+      exclusiveTaxHandler={exclusiveTaxHandler}
+    />,
+    2: <Templates />,
+    3: <FollowUpSetting />
 
+    ,
+    4: <Billing handleEditPayment={handleEditPayment} />,
+    5: <MailSetting handleCreation={handleCreation} />,
+
+
+  }
   return (
     <>
       <Layout>
@@ -87,30 +101,7 @@ const Setting = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? (
-            <SettingProfile handleChangePassword={handleChangePassword} />
-          ) : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 1 ? (
-            <SystemSettingDetails
-              addTaxHandler={addTaxHandler}
-              exclusiveTaxHandler={exclusiveTaxHandler}
-            />
-          ) : null}
-        </div>
-        <div className="mt-4">{switchDetails === 2 ? <Templates /> : null}</div>
-        <div className="mt-4">
-          {switchDetails === 3 ? <FollowUpSetting /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 4 ? (
-            <Billing handleEditPayment={handleEditPayment} />
-          ) : null}
-        </div>
-
-        <div className="mt-4">
-          {switchDetails === 5 ? <MailSetting handleCreation={handleCreation}/> : null}
+          {settingsLookup[switchDetails as keyof typeof settingsLookup]}
         </div>
       </Layout>
       {renderModal()}

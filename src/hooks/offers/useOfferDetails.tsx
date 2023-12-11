@@ -15,11 +15,15 @@ import ImagesUpload from '@/base-components/ui/modals1/ImagesUpload';
 import ImageSlider from '@/base-components/ui/modals1/ImageSlider';
 import { staticEnums } from '@/utils/static';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
+import { readImage } from '@/api/slices/imageSlice/image';
+import ImagesUploadOffer from '@/base-components/ui/modals1/ImageUploadOffer';
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails, loading, offer } = useAppSelector((state) => state.offer);
+  const { images } = useAppSelector((state) => state.image);
+
   const { t: translate } = useTranslation()
   const router = useRouter();
   const id = router.query.offer;
@@ -82,9 +86,12 @@ export default function useOfferDetails() {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = offer?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) dispatch(setOfferDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    const filteredLead = offer?.find((item_) => item_.id === item)
+    if (filteredLead) {
+      dispatch(setOfferDetails(filteredLead));
+      dispatch(readImage({ params: { type: "offerID", id: filteredLead?.id } }));
+      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    }
   };
 
 
@@ -112,10 +119,11 @@ export default function useOfferDetails() {
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
-    [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"} />
+
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}

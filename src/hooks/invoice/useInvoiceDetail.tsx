@@ -12,7 +12,7 @@ import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmatio
 import ExistingNotes from '@/base-components/ui/modals1/ExistingNotes';
 import AddNewNote from '@/base-components/ui/modals1/AddNewNote';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
-import { readCollectiveInvoice, readCollectiveReciept, readInvoiceDetails, setInvoiceDetails, stopRecurringInvoices, updateInvoicePaymentStatus, updateInvoiceStatus } from '@/api/slices/invoice/invoiceSlice';
+import { readCollectiveInvoice, readCollectiveReciept, readInvoiceDetails, setInvoiceDetails, stopRecurringInvoices, updateInvoicePaymentStatus, updateInvoiceStatus, updateRecieptPaymentStatus, updateRecieptStatus } from '@/api/slices/invoice/invoiceSlice';
 import InvoiceCreated from '@/base-components/ui/modals1/InvoiceCreated';
 import { staticEnums } from '@/utils/static';
 import AreYouSureOffer from '@/base-components/ui/modals1/AreYouSureOffer';
@@ -118,7 +118,7 @@ export default function useInvoiceDetail() {
         loading: loading
     }
     const handleInvoiceEdit = (item: any) => {
-        dispatch(updateModalType({ type: ModalType.INVOICE_CREATE, data: item }))
+        dispatch(updateModalType({ type: ModalType.INVOICE_UPDATE, data: item }))
     }
 
     const MODAL_CONFIG: ModalConfigType = {
@@ -188,13 +188,24 @@ export default function useInvoiceDetail() {
     const renderModal = () => {
         return MODAL_CONFIG[modal.type] || null;
     };
-    const handleInvoiceStatusUpdate = async (id: string, status: string) => {
-        const res = await dispatch(updateInvoiceStatus({ data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] } }))
-        if (res?.payload) offerCreatedHandler()
+    const handleInvoiceStatusUpdate = async (id: string, status: string, type: string) => {
+        if (type === "invoice") {
+            const res = await dispatch(updateInvoiceStatus({ data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] } }))
+            if (res?.payload) offerCreatedHandler()
+        } else {
+            const res = await dispatch(updateRecieptStatus({ data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] } }))
+            if (res?.payload) offerCreatedHandler()
+        }
+
     }
-    const handlePaymentStatusUpdate = async (id: string, status: string) => {
-        const res = await dispatch(updateInvoicePaymentStatus({ data: { id: id, paymentType: staticEnums["PaymentType"][status] } }))
-        if (res?.payload) offerCreatedHandler()
+    const handlePaymentStatusUpdate = async (id: string, status: string, type: string) => {
+        if (type === "invoice") {
+            const res = await dispatch(updateInvoicePaymentStatus({ data: { id: id, paymentType: staticEnums["PaymentType"][status] } }))
+            if (res?.payload) offerCreatedHandler()
+        } else {
+            const res = await dispatch(updateRecieptPaymentStatus({ data: { id: id, paymentType: staticEnums["PaymentType"][status] } }))
+            if (res?.payload) offerCreatedHandler()
+        }
     }
 
     return {

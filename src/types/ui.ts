@@ -282,7 +282,7 @@ interface SliderBaseProps {
 
 // types for slider
 export interface MainImageSliderProps extends SliderBaseProps {
-  imageSrc: StaticImageData;
+  imageSrc: string;
   handleMouseMove?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -309,13 +309,13 @@ export interface ThumbnailSliderProps extends SliderBaseProps {
 }
 
 export interface ThumbnailProps {
-  imageSrc: StaticImageData;
+  imageSrc: string;
   onClick: () => void;
   index: number;
 }
 
 export interface ImageSliderHook {
-  selectedImage: StaticImageData;
+  selectedImage: string;
   thumbnailStartIndex: number;
   goToNext: () => void;
   goToPrev: () => void;
