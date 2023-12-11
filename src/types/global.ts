@@ -1,8 +1,8 @@
-
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
+import { select } from "@/components/dashboard/filters";
 
 export interface GlobalState {
   loading: boolean;
@@ -30,7 +30,7 @@ export interface Status {
 }
 export interface CheckBoxFilterProps {
   label: string;
-  type: keyof Status
+  type: keyof Status;
 }
 export interface CheckFieldProps {
   label: string;
@@ -38,15 +38,15 @@ export interface CheckFieldProps {
   setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
   type: keyof FilterType;
   defaultChecked?: string;
-  value?: string
+  value?: string;
 }
 export interface InputFieldProps {
   value: string;
   handleChange: (value: string) => void;
   containerClassName?: string;
   textClassName?: string;
-  bgColor?: boolean,
-  iconDisplay?: boolean
+  bgColor?: boolean;
+  iconDisplay?: boolean;
 }
 
 export interface OptionsFieldProps {
@@ -58,7 +58,7 @@ export interface OptionsFieldProps {
   options: string[];
   dropDownIconClassName: string;
   isOpen: boolean;
-  setIsOpen: SetStateAction<any>;
+  setIsOpen: () => void;
   containerClassName?: string;
 }
 
@@ -79,7 +79,6 @@ export interface CreateSuccessProps {
   modelHeading: string;
   modelSubHeading: string;
   routeHandler: () => void;
-
 }
 export interface UpdateSuccessProps {
   onClose: () => void;
@@ -87,13 +86,12 @@ export interface UpdateSuccessProps {
   modelSubHeading: string;
   cancelHandler: () => void;
   confirmHandler: () => void;
-  loading: boolean
-
+  loading: boolean;
 }
 
 export interface Attachement {
-  name: string,
-  value: string
+  name: string;
+  value: string;
 }
 
 export interface DocumentHeaderDetailsProps {
@@ -153,5 +151,5 @@ export interface PdfPreviewProps {
   movingDetails: MovingDetailsProps;
   serviceItem: ServiceItemProps[];
   serviceItemFooter: ServiceItemFooterProps;
-  footerDetails: DocumentDetailFooterProps
+  footerDetails: DocumentDetailFooterProps;
 }

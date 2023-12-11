@@ -41,7 +41,7 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                     query: { employee: item.id },
                   })
                 }
-                className="p-[6px] border border-[#8F8F8F] border-opacity-10 rounded-md w-fit cursor-pointer"
+                className="cursor-pointer"
               >
                 <Image src={editInfoIcon} alt="editInfoIcon" />
               </div>

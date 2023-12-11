@@ -430,8 +430,20 @@ export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  properties:
-    { offerDetails?: OffersTableRowTypes, customerType: string, type: string, customer: Customers[], onCustomerSelect: (id: string) => void, customerDetails: Customers, onCancel: () => void, leadDetails: Lead, lead?: Lead[], content?: ContentTableRowTypes[], handleContentSelect?: () => void, selectedContent?: string },
+  properties: {
+    offerDetails?: OffersTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+  },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 
@@ -629,23 +641,25 @@ export interface AcknowledgementSlipProps extends QRCodeBaseProps {
   currency: string;
   amount: number;
 }
-
 export interface PayableToProps extends QRCodeBaseProps {
   additionalInformation: string;
 }
-
 export interface PaymentQrCodeDetailsProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   qrCode: qrCode;
 }
-
 export interface QrCodeDetailsProps {
   qrCode: qrCode;
 }
-
 export interface AggrementProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   footerDetails: DocumentDetailFooterProps;
+}
+
+export interface FiltersComponentProps {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (value: FilterType) => void;
 }

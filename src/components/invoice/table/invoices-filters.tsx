@@ -5,19 +5,36 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType } from "@/types";
 import React, { SetStateAction } from "react";
+import { Button } from "@/base-components/ui/button/button";
 
-export default function InvoicesFilters({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: (value: FilterType) => void }) {
+export default function InvoicesFilters({
+  filter,
+  setFilter,
+  handleFilterChange,
+}: {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (value: FilterType) => void;
+}) {
   const checkbox: CheckBoxType[] = [
     { label: "Open", type: "open" },
     { label: "Overdue", type: "overdue" },
     { label: "Paid", type: "paid" },
-
   ];
 
-  const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
+  const {
+    isOpen,
+    setIsOpen,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter({ filter, setFilter });
   return (
-    <div className="flex justify-end">
-      <div className="flex items-center space-x-4">
+    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+      <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
             checkboxFilter={filter}
@@ -27,9 +44,15 @@ export default function InvoicesFilters({ filter, setFilter, handleFilterChange 
             value={item.type}
           />
         ))}
-        <InputField handleChange={(value) => setFilter({ ...filter, "text": value })} value={filter?.text} />
+      </div>
+
+      <div className="flex gap-x-4">
+        <InputField
+          handleChange={(value) => setFilter({ ...filter, text: value })}
+          value={filter?.text}
+        />
         <SelectField
-          handleChange={(value) => setFilter({ ...filter, "sortBy": value })}
+          handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
@@ -46,6 +69,14 @@ export default function InvoicesFilters({ filter, setFilter, handleFilterChange 
           handleFilterReset={handleFilterReset}
           handleItemSelected={handleItemSelected}
           typeList={typeList}
+        />
+
+        <Button
+          id="apply"
+          inputType="button"
+          text="Apply"
+          onClick={() => handleFilterChange(filter)}
+          className="!h-[40px] p-2  flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
         />
       </div>
     </div>

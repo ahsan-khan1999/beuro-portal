@@ -2,15 +2,35 @@ import DetailFilter from "@/base-components/filter/detail-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
-import { FilterType } from "@/types";
-import React, { SetStateAction, useState } from "react";
+import { FiltersComponentProps } from "@/types";
+import React from "react";
+import plusIcon from "@/assets/svgs/plus_icon.svg";
+import { Button } from "@/base-components/ui/button/button";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
+export default function CustomerFilter({
+  filter,
+  setFilter,
+  handleFilterChange,
+}: FiltersComponentProps) {
 
-export default function CustomerFilter({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
+  const {
+    isOpen,
+    setIsOpen,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter({ filter, setFilter });
+  
+  const { t: translate } = useTranslation();
+  const router = useRouter();
 
-  const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
   return (
-    <div className="flex">
+    <div className="flex gap-x-4">
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter?.text}
@@ -34,6 +54,24 @@ export default function CustomerFilter({ filter, setFilter }: { filter: FilterTy
         handleFilterReset={handleFilterReset}
         handleItemSelected={handleItemSelected}
         typeList={typeList}
+      />
+
+      <Button
+        onClick={() => handleFilterChange(filter)}
+        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        text="Apply"
+        id="apply"
+        inputType="button"
+        name=""
+      />
+
+      <Button
+        onClick={() => router.push("/content/add")}
+        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        text={translate("customers.add_button")}
+        id="apply"
+        inputType="button"
+        icon={plusIcon}
       />
     </div>
   );

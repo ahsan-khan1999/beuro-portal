@@ -3,27 +3,40 @@ import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
-import { CheckBoxType, FilterType } from "@/types";
+import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { SetStateAction, useState } from "react";
+import React from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
+import { Button } from "@/base-components/ui/button/button";
 
-export default function LeadsFilter({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
+export default function LeadsFilter({
+  filter,
+  setFilter,
+  handleFilterChange,
+}: FiltersComponentProps) {
   const { t: translate } = useTranslation();
-  const router = useRouter()
+  const router = useRouter();
   // const [isOpen, setIsOpen] = useState(false);
   const checkbox: CheckBoxType[] = [
     { label: translate("leads.table_functions.open"), type: "open" },
     { label: translate("leads.table_functions.close"), type: "close" },
     { label: translate("leads.table_functions.expire"), type: "expire" },
   ];
-  const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
+  const {
+    isOpen,
+    setIsOpen,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter({ filter, setFilter });
 
   return (
-    <div className="flex flex-col xl:flex-row gap-4">
-      <div className="flex gap-x-4 w-full xl:w-fit">
+    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+      <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
             checkboxFilter={filter}
@@ -33,9 +46,14 @@ export default function LeadsFilter({ filter, setFilter }: { filter: FilterType,
             value={item.type}
           />
         ))}
-        <InputField handleChange={(value) => setFilter({ ...filter, "text": value })} value={filter.text} />
+      </div>
+      <div className="flex gap-x-4" >
+        <InputField
+          handleChange={(value) => setFilter({ ...filter, text: value })}
+          value={filter.text}
+        />
         <SelectField
-          handleChange={(value) => setFilter({ ...filter, "sortBy": value })}
+          handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
@@ -53,24 +71,23 @@ export default function LeadsFilter({ filter, setFilter }: { filter: FilterType,
           handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
+        <Button
+          id="apply"
+          inputType="button"
+          text="Apply"
+          onClick={() => handleFilterChange(filter)}
+          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        />
+
+        <Button
+          inputType="button"
+          onClick={() => router.push("/leads/add")}
+          className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+          icon={addIcon}
+          text="Add New"
+          id="add"
+        />
       </div>
-      {/* <InputField handleChange={(value) => console.log(value)} value="" />
-      <SelectField
-        handleChange={(value) => console.log(value)}
-        value=""
-        dropDownIconClassName=""
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        options={["1", "2", "2", "2", "2"]}
-        label="Sort By"
-      />
-      <button
-        onClick={() => router.push("/leads/add")}
-        className="flex gap-x-2 items-center px-3 py-2 w-fit text-[13px] font-semibold hover:bg-[#7B18FF] bg-primary text-white rounded-md "
-      >
-        <Image src={addIcon} alt="addIcon" />
-        {translate("leads.add_button")}
-      </button> */}
     </div>
   );
 }
