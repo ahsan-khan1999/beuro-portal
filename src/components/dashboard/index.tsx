@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import DashboardCard from "./Cards";
-import InputField from "@/base-components/filter/fields/input-field";
 import { FollowUpNotificationBar } from "./notification-bar/FollowUp";
 import ActivitiesNotificationBar from "./notification-bar/Activities";
 import leadsIcon from "@/assets/svgs/leads.svg";
@@ -13,6 +12,8 @@ import salesIcon from "@/assets/svgs/sales.svg";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import MainCalender from "./calendar"
+import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
+
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -115,11 +116,11 @@ const AdminDashboard = () => {
         </h1>
       </div>
 
-      <InputField
+      <SearchInputFiled
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
-        containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        containerClassName="py-4 pl-4 max-w-[400px] mlg:max-w-[642px]  rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
         textClassName="ml-4 w-full focus:outline-none border-[#BFBFBF] py-0 rounded-none "
       />
 

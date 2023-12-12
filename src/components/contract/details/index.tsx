@@ -6,19 +6,30 @@ import ContractDetailsData from "./ContractDetailsData";
 import useContractDetail from "@/hooks/contract/useContractDetail";
 
 const ContractDetails = () => {
-  const { offerDeleteHandler, contractDetails, renderModal, handleImageUpload, handleNotes, handlePaymentStatusUpdate, handleStatusUpdate } = useContractDetail()
+  const {
+    offerDeleteHandler,
+    contractDetails,
+    renderModal,
+    handleImageUpload,
+    handleNotes,
+    handlePaymentStatusUpdate,
+    handleStatusUpdate,
+  } = useContractDetail();
 
   return (
     <Layout>
-      <CardDetailsData contractDetails={contractDetails} offerDeleteHandler={offerDeleteHandler} handleImageUpload={handleImageUpload} handleNotes={handleNotes} handlePaymentStatusUpdate={handlePaymentStatusUpdate} handleStatusUpdate={handleStatusUpdate} />
-
+      <CardDetailsData
+        contractDetails={contractDetails}
+        offerDeleteHandler={offerDeleteHandler}
+        handleImageUpload={handleImageUpload}
+        handleNotes={handleNotes}
+        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+        handleStatusUpdate={handleStatusUpdate}
+      />
       <div className="my-4">
         <DetailsData contractDetails={contractDetails} />
       </div>
-
-      <div className="flex ">
-        <ContractDetailsData />
-      </div>
+      <ContractDetailsData />
       {renderModal()}
     </Layout>
   );

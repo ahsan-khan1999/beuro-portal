@@ -27,7 +27,7 @@ export default function OffersFilters({
 
   const {
     isOpen,
-    setIsOpen,
+    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
@@ -59,7 +59,7 @@ export default function OffersFilters({
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          setIsOpen={toggleHandler}
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />

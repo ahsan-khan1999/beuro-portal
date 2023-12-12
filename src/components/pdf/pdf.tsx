@@ -334,6 +334,7 @@ export const productItems: ProductItemProps[] = [
     total: "750",
   },
 ];
+
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
     accountNumber: "CH48 0900 0000 1556 1356 9",
@@ -350,6 +351,7 @@ const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   currency: "CHF",
   amount: 6418.92,
 };
+
 const qrCodePayableToData: PayableToProps = {
   accountDetails: {
     accountNumber: "CH48 0900 0000 1556 1356 9",
@@ -365,6 +367,7 @@ const qrCodePayableToData: PayableToProps = {
   },
   additionalInformation: "R-2000 Umzugsfuchs",
 };
+
 export const DUMMY_DATA: PdfProps = {
   headerDetails: {
     offerNo: "O-4040 Umzugsfuchs",

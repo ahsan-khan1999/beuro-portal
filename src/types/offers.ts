@@ -24,7 +24,7 @@ export interface OffersTableRowTypes {
   leadStatus: string;
   images: string[];
   createdAt: string;
-  customerID: Customers
+  customerID: Customers;
   type: string;
   addressID: AddressID;
   stage: ComponentsType;
@@ -55,12 +55,12 @@ export interface OffersTableRowTypes {
   subTotal: number;
   total: number;
   discountAmount: number;
-  discountDescription: string
+  discountDescription: string;
 }
 
 export interface OfferServiceDetails {
   id: string;
-  serviceDetail: ServiceList[]
+  serviceDetail: ServiceList[];
 }
 export interface ServiceList {
   serviceTitle: string;
@@ -70,35 +70,59 @@ export interface ServiceList {
   serviceType: string;
   description: string;
   count: number;
-
 }
 export interface EmailStatus {
-  Pending: number,
-  Sent: number,
-  Post: number
+  Pending: number;
+  Sent: number;
+  Post: number;
 }
 export interface TaxType {
-  Include: number,
-  Exclude: number,
+  Include: number;
+  Exclude: number;
 }
 export interface DiscountType {
-  Percent: number,
-  Amount: number,
+  Percent: number;
+  Amount: number;
 }
 export interface PaymentType {
-  Cash: number,
-  Online: number,
+  Cash: number;
+  Online: number;
 }
 export interface OfferStatus {
-  Open: number,
-  Signed: number,
-  Expired: number,
-  Rejected: number
+  Open: number;
+  Signed: number;
+  Expired: number;
+  Rejected: number;
 }
 
 export interface Total {
   subTotal: number;
   grandTotal: number;
   taxAmount: number;
+}
 
+export interface OffersActivityDataTypes {
+  activityName: string;
+  activityMode: string;
+  activeTime: string;
+  activeDate: string;
+}
+
+export interface OffersDiscountDataTypes {
+  discountTitle: string;
+  discountPrice: string;
+  discountPercentage: string;
+  discountDate: string;
+}
+
+export interface OfferDetailCardProps {
+  offerDetails: OffersTableRowTypes;
+  offerDeleteHandler: () => void;
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleStatusUpdate: (id: string) => void;
+  handlePaymentStatusUpdate: (id: string) => void;
 }

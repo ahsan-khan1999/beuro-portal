@@ -7,13 +7,15 @@ import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
 
 const LeadsDetails = () => {
-
-  const { renderModal, leadDeleteHandler,leadDetails } = useLeadDetail()
+  const { renderModal, leadDeleteHandler, leadDetails } = useLeadDetail();
   return (
     <>
       <Layout>
         <DetailsCard>
-          <LeadsDetailsCardData leadDeleteHandler={leadDeleteHandler} leadDetails={leadDetails}/>
+          <LeadsDetailsCardData
+            leadDeleteHandler={leadDeleteHandler}
+            leadDetails={leadDetails}
+          />
         </DetailsCard>
         <div className="mt-7">
           <LeadsDetailsData />

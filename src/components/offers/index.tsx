@@ -18,13 +18,17 @@ export default function Offers() {
     renderModal,
     filter,
     setFilter,
-    handleFilterChange
+    handleFilterChange,
   } = useOffers();
 
   return (
     <>
       <Layout>
-        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeading />
           <TableRows

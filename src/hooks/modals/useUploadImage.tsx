@@ -1,5 +1,5 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -40,7 +40,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const apiData = { images: filteredList, id: leadDetails?.id,type:"leadID" }
     const response = await dispatch(createImage({ data: apiData, router, setError, translate }));
     if (response?.payload) handleImageSlider();
-
   };
   return {
     fields,
@@ -49,6 +48,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

@@ -1,19 +1,22 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersComponentProps } from "@/types";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import useFilter from "@/hooks/filter/hook";
 
 export default function ContentFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggleHandler } = useFilter({ filter, setFilter });
+
   const router = useRouter();
+
   const { t: translate } = useTranslation();
 
   return (
@@ -27,7 +30,7 @@ export default function ContentFilters({
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={toggleHandler}
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />

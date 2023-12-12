@@ -2,15 +2,10 @@ import React from "react";
 import Image from "next/image";
 import priceTaga from "@/assets/svgs/price_tag.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
+import { OffersDiscountDataTypes } from "@/types/offers";
 
-type DiscountTypes = {
-  discountTitle: string;
-  discountPrice: string;
-  discountPercentage: string;
-  discountDate: string;
-};
 const Discounts = () => {
-  const discountData: DiscountTypes[] = [
+  const discountData: OffersDiscountDataTypes[] = [
     {
       discountTitle: "Price",
       discountPrice: "50000CHF",
@@ -66,7 +61,7 @@ const Discounts = () => {
                 {item.discountPrice}
               </span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex justify-between">
               <span className="flex gap-[10px] items-center text-[#4B4B4B] font-normal text-[13px]">
                 <Image src={priceTaga} alt="priceTaga" />
                 {item.discountPercentage}

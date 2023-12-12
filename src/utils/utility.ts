@@ -574,8 +574,6 @@ export function getInvoiceEmailColor(status: string) {
   else return "#FF376F";
 }
 
-
-
 export function calculateTax(amount: number, taxPercentage: number) {
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);

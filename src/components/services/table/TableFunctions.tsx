@@ -24,7 +24,6 @@ const TableFunctions = ({
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
-        translate={translate}
       />
     </div>
   );

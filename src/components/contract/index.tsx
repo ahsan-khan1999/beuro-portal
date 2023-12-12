@@ -25,10 +25,18 @@ export default function Contract() {
   return (
     <>
       <Layout>
-        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows}  handleImageUpload={handleImageUpload} openModal={handleNotes}/>
+          <TableRows
+            dataToAdd={currentPageRows}
+            handleImageUpload={handleImageUpload}
+            openModal={handleNotes}
+          />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

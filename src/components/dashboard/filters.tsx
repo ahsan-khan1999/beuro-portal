@@ -16,8 +16,9 @@ export default function DashboardFilters() {
 
   const handleSelectToggle = (type: select) => {
     setIsOpen((prev) => ({
-      ...prev,
-      [type]: !isOpen[type],
+      [select.month]: type === select.month ? !prev[select.month] : false,
+      [select.week]: type === select.week ? !prev[select.week] : false,
+      [type]: !prev[type],
     }));
   };
 
@@ -35,7 +36,7 @@ export default function DashboardFilters() {
           `${translate("dashboard_detail.options_labels.year")}`,
         ]}
         label={translate("dashboard_detail.options_labels.month")}
-        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80]"
+        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
       />
       <SelectField
         handleChange={(value) => console.log(value)}
@@ -58,7 +59,7 @@ export default function DashboardFilters() {
           `${translate("dashboard_detail.months.dec")}`,
         ]}
         label={translate("dashboard_detail.months.feb")}
-        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80]"
+        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
       />
     </div>
   );
