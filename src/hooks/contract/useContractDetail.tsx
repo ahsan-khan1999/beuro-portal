@@ -120,7 +120,7 @@ export default function useContractDetail() {
       [ModalType.ADD_NOTE]: (
         <AddNewNote onClose={onClose} handleNotes={handleNotes} />
       ),
-      [ModalType.UPLOAD_IMAGE]: (
+      [ModalType.UPLOAD_OFFER_IMAGE]: (
         <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type='Contract'/>
       ),
       [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images}/>,

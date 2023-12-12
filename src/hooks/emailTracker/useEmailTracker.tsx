@@ -1,33 +1,56 @@
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import { MailTracker } from "@/utils/static";
 import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../useRedux";
+import { FilterType } from "@/types";
+import { readEmail } from "@/api/slices/emailTracker/email";
 
 const useEmailTracker = () => {
+  const { email, lastPage, totalCount } = useAppSelector(state => state.emailSlice)
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const { modal } = useAppSelector((state) => state.global);
-  const [currentPageRows, setCurrentPageRows] = useState<
-    TableRowEmailTracker[]
-  >([]);
+  const [filter, setFilter] = useState<FilterType>({
+    location: "",
+    sortBy: "",
+    text: "",
+    type: ""
+  });
 
-  const totalItems = MailTracker.length;
+  const [currentPageRows, setCurrentPageRows] =
+    useState<TableRowEmailTracker[]>(email);
+  const dispatch = useAppDispatch();
+
+
+  const totalItems = totalCount;
   const itemsPerPage = 10;
+  useEffect(() => {
+    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+
+      if (res?.payload) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        setCurrentPageRows(res?.payload?.MailTracker?.slice(startIndex, startIndex + itemsPerPage));
+      }
+    })
+  }, [dispatch])
 
   useEffect(() => {
-    // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      MailTracker.slice(startIndex, startIndex + itemsPerPage)
-    );
+    setCurrentPageRows(email?.slice(startIndex, startIndex + itemsPerPage));
+
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  const handleFilterChange = (filter: FilterType) => {
+    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } }))
+  };
   return {
     currentPageRows,
-    handlePageChange,
     totalItems,
+    handlePageChange,
     itemsPerPage,
+    filter, setFilter,
+    handleFilterChange
   };
 };
 

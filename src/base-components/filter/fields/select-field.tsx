@@ -23,7 +23,7 @@ export default function SelectField({
       <div className={containerClasses}>
         <div
           className="flex justify-between items-center cursor-pointer gap-x-2 px-2 py-[6px]"
-          onClick={setIsOpen}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span className="text-[#393939] text-sm font-normal">{label}</span>
           <DropDownNonFillIcon

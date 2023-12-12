@@ -24,9 +24,13 @@ export enum SettingProfile {
   mobileNumber = "mobileNumber",
   website = "website",
   mwstNumber = "taxNumber",
-  streetAddress = "streetAddress",
-  postCode = "postCode",
+  streetAddress = "streetNumber",
+  houseAddress = "houseNumber",
+
+  postCode = "postalCode",
   country = "country",
+  city = "city",
+
   bankName = "bankName",
   accountNumber = "accountNumber",
   IBAN_number = "ibanNumber",

@@ -66,7 +66,15 @@ const SERVICE_URLS = {
   createInvoice: "/invoice/invoice-collection/",
   updateInvoicePaymentStatus: "/invoice/invoice-collection/update-payment-status/",
   updateInvoiceCollection: "/invoice/invoice-collection/",
-  image: "/lead/images/"
+  image: "/lead/images/",
+  accountSetting: "/setting/account-setting",
+  updatePassword: "/setting/update-password/",
+  systemSetting: "/setting/system-setting/",
+  templates: "/setting/template",
+  tax: "/setting/tax",
+  followUp: "/setting/follow-up-setting",
+  mail: "/mailtracker",
+  offerSendEmail: "/offer/send-email/"
 };
 
 const login = (data) =>
@@ -189,7 +197,7 @@ const updateOfferStatus = (data) =>
 const updatePaymentStatus = (data) =>
   put(SERVICE_URLS.offerPaymentStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const sendOfferEmail = (data) =>
-  put(SERVICE_URLS.sendEmail + `${data?.id}`, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.offerSendEmail + `${data?.id}`, data, { feature: featureConstants.login });
 const readContract = (params) =>
   get(SERVICE_URLS.contract, params, { feature: featureConstants.login }, { detail: false });
 const readContractDetail = (params) =>
@@ -328,6 +336,28 @@ const readImage = (params) =>
   get(SERVICE_URLS.image + `${params?.type}/${params?.id}`, {}, { feature: featureConstants.login }, { detail: false });
 const createImage = (params) =>
   post(SERVICE_URLS.image + `${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+const updateAccountSettings = (data) =>
+  put(SERVICE_URLS.accountSetting, data, { feature: featureConstants.login });
+const updatePassword = (params) =>
+  put(SERVICE_URLS.updatePassword + `${params?.id}`, params, { feature: featureConstants.login });
+const updateSystemSettings = (params) =>
+  put(SERVICE_URLS.systemSetting + `${params?.id}`, params, { feature: featureConstants.login });
+const getSystemSettings = (params) =>
+  get(SERVICE_URLS.systemSetting + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+const getTemplateSettings = (params) =>
+  get(SERVICE_URLS.templates + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+const updateTemplateSettings = (params) =>
+  put(SERVICE_URLS.templates + `${params?.id}`, params, { feature: featureConstants.login });
+const getFollowUpSettings = (params) =>
+  get(SERVICE_URLS.followUp + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+const updateFollowUpSettings = (params) =>
+  put(SERVICE_URLS.followUp + `${params?.id}`, params, { feature: featureConstants.login });
+const getEmails = (params) =>
+  get(SERVICE_URLS.mail, params, { feature: featureConstants.login }, { detail: false });
+const getEmailDetails = (params) =>
+  get(SERVICE_URLS.mail, params, { feature: featureConstants.login }, { detail: true });
+const deleteEmail = (data) =>
+  del(SERVICE_URLS.mail + `/${data?.id}`, {}, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -433,6 +463,17 @@ const apiServices = {
   updateInvoicePaymentStatus,
   updateInvoice,
   readImage,
-  createImage
+  createImage,
+  updateAccountSettings,
+  updatePassword,
+  updateSystemSettings,
+  getSystemSettings,
+  getTemplateSettings,
+  updateTemplateSettings,
+  updateFollowUpSettings,
+  getFollowUpSettings,
+  getEmails,
+  getEmailDetails,
+  deleteEmail
 };
 export default apiServices;

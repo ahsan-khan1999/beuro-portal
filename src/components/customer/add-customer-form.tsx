@@ -2,12 +2,14 @@ import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import FormCard from "@/layout/customers/FormCard";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, translate } =
+  const { fields, onSubmit, handleSubmit, errors } =
     useCustomerDetail(false);
+    const { t: translate } = useTranslation();
 
   return (
     <FormCard>

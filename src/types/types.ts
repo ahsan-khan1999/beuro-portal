@@ -317,8 +317,11 @@ export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  onClick: Function,
   onBack?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  content?: ContentTableRowTypes[],
+  contentDetails?: ContentTableRowTypes,
+  onContentSelect?: (id: string) => void
 ) => FormField[];
 
 // Contract formfield

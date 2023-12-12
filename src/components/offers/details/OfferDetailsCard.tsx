@@ -21,12 +21,13 @@ interface OfferDetailCardProps {
   handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
   handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
   handleStatusUpdate: (id: string) => void
-  handlePaymentStatusUpdate: (id: string) => void
+  handlePaymentStatusUpdate: (id: string) => void;
+  handleSendEmail: () => void
 
 }
 import { useTranslation } from "next-i18next";
 
-const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload, handleNotes, handleStatusUpdate, handlePaymentStatusUpdate }: OfferDetailCardProps) => {
+const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload, handleNotes, handleStatusUpdate, handlePaymentStatusUpdate, handleSendEmail }: OfferDetailCardProps) => {
   console.log(offerDetails?.paymentType);
 
   const router = useRouter();
@@ -48,7 +49,7 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
         </div>
 
         <div className="flex gap-[22px]">
-          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] ">
+          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer " onClick={handleSendEmail}>
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
               {translate("offers.card_content.send_button")}

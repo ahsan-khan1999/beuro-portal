@@ -142,7 +142,9 @@
 
     "mixed": {
       "required": "This is required field ",
-      "oneOf": "Password must match "
+      "oneOf": "Password must match ",
+      "notOneOf": "Passwort muss different"
+
     },
     "string": {
       "email": "Please enter a valid email",

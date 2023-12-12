@@ -6,11 +6,16 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { TableRowEmailTracker } from "@/types/emailTracker";
+import { formatDateString } from "@/utils/functions";
+import { formatDateReverse } from "@/utils/utility";
 
 const DetailsData = ({
   handleConfirmDeletion,
+  emailDetails
 }: {
   handleConfirmDeletion: Function;
+  emailDetails: TableRowEmailTracker | null
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -50,7 +55,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.id")}
             </span>
             <span className="font-medium  text-[#4B4B4B] text-base">
-              01b9H23
+              {emailDetails?.id}
             </span>
           </div>
           <div>
@@ -58,7 +63,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.status")}:
             </span>
             <span className="font-medium text-base text-white px-2 py-1 text-center rounded-md  w-[70px] bg-[#45C769]">
-              Open
+              {emailDetails?.status}
             </span>
           </div>
           <div>
@@ -66,7 +71,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.subject")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-              R-2010 Credit Moving Offer
+              {emailDetails?.subject}
             </span>
           </div>
           <div>
@@ -74,7 +79,8 @@ const DetailsData = ({
               {translate("email_tracker.card_content.recipient")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-              Test123@gmail.com
+              {emailDetails?.email}
+
             </span>
           </div>
           <div>
@@ -82,7 +88,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.send_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-              14:06:44, 25/08/2023
+              {/* {formatDateReverse(emailDetails?.createdAt as string)} */}
             </span>
           </div>
           <div>
@@ -90,7 +96,8 @@ const DetailsData = ({
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-              14:06:44, 25/08/2023
+            {/* {formatDateReverse(emailDetails?.viewedAt as string)} */}
+
             </span>
           </div>
         </div>

@@ -10,28 +10,44 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-
+import { useEffect } from "react"
+import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
+import { CustomerPromiseActionType } from "@/types/customer";
 const ViewMails = () => {
   const { modal } = useAppSelector((state) => state.global);
+  const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
+  const router = useRouter();
+
+  const id = router.query.email;
+
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  useEffect(() => {
+    if (id) {
+      dispatch(readEmailDetail({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
+        // dispatch(setCustomerDetails(res.payload))
+      })
+    }
+  }, [id])
 
   const handleConfirmDeletion = () => {
-    dispatch(updateModalType(ModalType.CONFIRM_DELETION));
+    dispatch(updateModalType({ type: ModalType.CONFIRM_DELETION, data: { refId: emailDetails?.id } }));
   };
 
   const handleDelete = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.DELETE_MAIL));
+    dispatch(updateModalType({ type: ModalType.DELETE_MAIL }));
   };
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const router = useRouter();
-  const routeHandler = () => {
-    router.push("/email-tracker");
+  const routeHandler = async () => {
+    console.log(emailDetails,"emailDetails");
+    
+    const res = await dispatch(deleteEmail({ data: emailDetails, router, translate }))
+    if (res?.payload) router.push("/email-tracker");
+
   };
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
@@ -47,7 +63,7 @@ const ViewMails = () => {
         onClose={onClose}
         modelHeading={translate("email_tracker.email_delete_modal.heading")}
         routeHandler={routeHandler}
-        loading={false}
+        loading={loading}
       />
     ),
   };
@@ -60,10 +76,10 @@ const ViewMails = () => {
     <>
       <Layout>
         <DetailsCard>
-          <DetailsData handleConfirmDeletion={handleConfirmDeletion} />
+          <DetailsData handleConfirmDeletion={handleConfirmDeletion} emailDetails={emailDetails} />
         </DetailsCard>
         <div className="flex mt-7">
-          <EmailDetailsData />
+          <EmailDetailsData emailDetails={emailDetails} />
         </div>
       </Layout>
       {renderModal()}

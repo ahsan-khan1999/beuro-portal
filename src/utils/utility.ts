@@ -332,6 +332,9 @@ export function formatDateReverse(date: string) {
 export function formatDateTimeToDate(date: string) {
   return moment(date).format("YYYY-MM-DD");
 }
+export function formatDateTimeToTime(date: string) {
+  return moment(date).format("hh:mm: A");
+}
 
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"])

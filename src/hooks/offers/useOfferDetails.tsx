@@ -1,4 +1,4 @@
-import { deleteOffer, readOfferDetails, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
+import { deleteOffer, readOfferDetails, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
 import { ModalConfigType, ModalType } from '@/enums/ui';
@@ -94,6 +94,11 @@ export default function useOfferDetails() {
     }
   };
 
+  const handleSendEmail =async () => {
+    const res = await dispatch(sendOfferEmail({ data: { "offerStatus": 1, id: offerDetails?.id }, router, translate }))
+    if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
+  }
+
 
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -156,7 +161,7 @@ export default function useOfferDetails() {
     handleNotes,
     handleImageUpload,
     handlePaymentStatusUpdate,
-    handleStatusUpdate
-
+    handleStatusUpdate,
+    handleSendEmail
   }
 }

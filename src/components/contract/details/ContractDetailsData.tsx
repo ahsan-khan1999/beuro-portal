@@ -86,7 +86,7 @@ const ContractDetailsData = () => {
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row gap-x-6">
+    <div className="flex w-full flex-col xl:flex-row gap-x-6">
       <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-full xl:w-fit">
         {tabSection.map((item, index) => (
           <DetailsTab

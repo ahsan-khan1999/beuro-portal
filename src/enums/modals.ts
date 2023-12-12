@@ -5,7 +5,7 @@ export enum AddNewNote {
 
 // Change password
 export enum ChangePasswordField {
-  oldPassword = "oldPassword",
+  oldPassword = "currentPassword",
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
 }

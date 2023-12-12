@@ -9,15 +9,16 @@ import { changeProfileSettingFormField } from "@/components/setting/fields/chang
 import { useEffect } from "react";
 import { isJSON } from "@/utils/functions";
 import { getUser } from "@/utils/auth.util";
+import { updateAccountSettings } from "@/api/slices/settingSlice/settings";
+import { User } from "@/types";
 
 export default function useSettingProfile(handleChangePassword: Function) {
   const router = useRouter();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error } = useAppSelector((state) => state.settings);
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const user = isJSON(getUser())
+  const user: User = isJSON(getUser())
   const schema = generateProfileSettingValidation(translate);
-  console.log(user);
 
   const {
     register,
@@ -25,17 +26,28 @@ export default function useSettingProfile(handleChangePassword: Function) {
     control,
     reset,
     formState: { errors },
+    setError
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
-    reset({ ...user })
+    reset({
+      ...user,
+      companyName: user.company?.companyName,
+      website: user.company?.website,
+      taxNumber: user.company?.taxNumber,
+      address: user.company?.address,
+      bankDetails: user.company?.bankDetails,
+    })
   }, [])
 
-  const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword, user);
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // dispatch(resetPassword({ router, data }));
+  const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword, user);
+  console.log(errors);
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, id: user?.id }
+    const res = await dispatch(updateAccountSettings({ data: apiData, router, setError, translate }))
   };
 
   return {

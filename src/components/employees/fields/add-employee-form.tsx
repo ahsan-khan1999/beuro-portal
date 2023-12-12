@@ -5,11 +5,7 @@ import React from "react";
 
 const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-<<<<<<< HEAD
-  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal } =
-=======
-  const { fields, onSubmit, handleSubmit, errors, isUpdate, translate } =
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
+  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal ,translate} =
     useEmployeeDetail(false);
 
   return (

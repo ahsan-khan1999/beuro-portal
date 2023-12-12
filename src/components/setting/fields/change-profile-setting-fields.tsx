@@ -105,12 +105,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     text: `${translate(
                       "setting.account_setting.company_name"
                     )}`,
-                    htmlFor: "company.companyName",
+                    htmlFor: "companyName",
                   },
                   field: {
                     type: Field.input,
-                    id: "company.companyName",
-                    name: "company.companyName",
+                    id: "companyName",
+                    name: "companyName",
                     placeholder: "Enter Your Company Name",
                     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
               <path d="M6.79574 5.33594C6.61164 5.33594 6.4624 5.48518 6.4624 5.66927V6.33594C6.4624 6.52003 6.61164 6.66927 6.79574 6.66927H7.4624C7.64647 6.66927 7.79574 6.52003 7.79574 6.33594V5.66927C7.79574 5.48518 7.64647 5.33594 7.4624 5.33594H6.79574Z" fill="#8F8F8F"/>
@@ -132,12 +132,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     text: `${translate(
                       "setting.account_setting.phone_number"
                     )}`,
-                    htmlFor: "company.phoneNumber",
+                    htmlFor: "phoneNumber",
                   },
                   field: {
                     type: Field.phone,
-                    id: "company.phoneNumber",
-                    name: "company.phoneNumber",
+                    id: "phoneNumber",
+                    name: "phoneNumber",
                     className: "px-2 h-[42px]",
                     control,
                     country: "ch",
@@ -150,12 +150,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     text: `${translate(
                       "setting.account_setting.mobile_number"
                     )}`,
-                    htmlFor: "company.mobileNumber",
+                    htmlFor: "mobileNumber",
                   },
                   field: {
                     type: Field.phone,
-                    id: "company.mobileNumber",
-                    name: "company.mobileNumber",
+                    id: "mobileNumber",
+                    name: "mobileNumber",
                     value: user?.company?.mobileNumber,
 
 
@@ -168,12 +168,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   containerClass: "mb-0 ",
                   label: {
                     text: `${translate("setting.account_setting.website")}`,
-                    htmlFor: "company.website",
+                    htmlFor: "website",
                   },
                   field: {
                     type: Field.input,
-                    id: "company.website",
-                    name: "company.website",
+                    id: "website",
+                    name: "website",
                     inputType: "text",
                     placeholder: "Enter Your Website",
                     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -188,12 +188,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                   containerClass: "mb-0",
                   label: {
                     text: `${translate("setting.account_setting.mwst_number")}`,
-                    htmlFor: "company.taxNumber",
+                    htmlFor: "taxNumber",
                   },
                   field: {
                     type: Field.input,
-                    id: "company.taxNumber",
-                    name: "company.taxNumber",
+                    id: "taxNumber",
+                    name: "taxNumber",
                     inputType: "text",
                     placeholder: "Enter Your MwST Number",
                     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
@@ -252,12 +252,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("setting.account_setting.street_address")}`,
-              htmlFor: "company.address.streetNumber",
+              htmlFor: "address.streetNumber",
             },
             field: {
               type: Field.input,
-              id: "company.address.streetNumber",
-              name: "company.address.streetNumber",
+              id: "address.streetNumber",
+              name: "address.streetNumber",
               inputType: "text",
               placeholder: "Enter your Address",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
@@ -272,12 +272,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("setting.account_setting.post_code")}`,
-              htmlFor: "company.address.postalCode",
+              htmlFor: "address.postalCode",
             },
             field: {
               type: Field.input,
-              id: "company.address.postalCode",
-              name: "company.address.postalCode",
+              id: "address.postalCode",
+              name: "address.postalCode",
               inputType: "text",
               placeholder: "Enter Your Postcode",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
@@ -294,34 +294,55 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: `${translate("setting.account_setting.country")}`,
-              htmlFor: "company.address.country",
+              text: `${translate("setting.account_setting.city")}`,
+              htmlFor: "address.city",
             },
             field: {
-              type: Field.select,
-              id: "company.address.country",
-              name: "company.address.country",
+              type: Field.input,
+              inputType:"text",
+              placeholder:"01",
+              id: "address.city",
+              name: "address.city",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
                 <path d="M5.74414 0.9375C3.00572 0.9375 0.777832 3.16539 0.777832 5.90381C0.777832 6.82903 1.03412 7.73196 1.51916 8.51531L5.46145 14.8682C5.53696 14.9899 5.67 15.0639 5.81309 15.0639C5.81419 15.0639 5.81527 15.0639 5.81637 15.0639C5.9607 15.0628 6.09402 14.9865 6.16815 14.8627L10.01 8.44821C10.4682 7.68142 10.7104 6.80158 10.7104 5.90381C10.7104 3.16539 8.48256 0.9375 5.74414 0.9375ZM9.29963 8.02326L5.80683 13.855L2.22267 8.07922C1.81894 7.4272 1.60003 6.67497 1.60003 5.90381C1.60003 3.62179 3.46212 1.7597 5.74414 1.7597C8.02616 1.7597 9.88549 3.62179 9.88549 5.90381C9.88549 6.65209 9.68102 7.38509 9.29963 8.02326Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
                 <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
               </svg>
                 `,
-              control,
+              register,
               className: "h-[42px]",
-              options: Object.keys(staticEnums["Country"]).map((item) => ({ label: item, value: item })),
-              value: user?.company?.address?.country || ""
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("setting.account_setting.houseNumber")}`,
+              htmlFor: "address.houseNumber",
+            },
+            field: {
+              type: Field.input,
+              inputType:"text",
+              placeholder:"01",
+              id: "address.houseNumber",
+              name: "address.houseNumber",
+              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
+                <path d="M5.74414 0.9375C3.00572 0.9375 0.777832 3.16539 0.777832 5.90381C0.777832 6.82903 1.03412 7.73196 1.51916 8.51531L5.46145 14.8682C5.53696 14.9899 5.67 15.0639 5.81309 15.0639C5.81419 15.0639 5.81527 15.0639 5.81637 15.0639C5.9607 15.0628 6.09402 14.9865 6.16815 14.8627L10.01 8.44821C10.4682 7.68142 10.7104 6.80158 10.7104 5.90381C10.7104 3.16539 8.48256 0.9375 5.74414 0.9375ZM9.29963 8.02326L5.80683 13.855L2.22267 8.07922C1.81894 7.4272 1.60003 6.67497 1.60003 5.90381C1.60003 3.62179 3.46212 1.7597 5.74414 1.7597C8.02616 1.7597 9.88549 3.62179 9.88549 5.90381C9.88549 6.65209 9.68102 7.38509 9.29963 8.02326Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
+                <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
+              </svg>
+                `,
+              register,
+              className: "h-[42px]",
             },
           },
           {
             containerClass: "mb-0",
             label: {
               text: `${translate("setting.account_setting.bank_name")}`,
-              htmlFor: "company.bankDetails.bankName",
+              htmlFor: "bankDetails.bankName",
             },
             field: {
               type: Field.input,
-              id: "company.bankDetails.bankName",
-              name: "company.bankDetails.bankName",
+              id: "bankDetails.bankName",
+              name: "bankDetails.bankName",
               inputType: "text",
               placeholder: "Bank",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
@@ -340,12 +361,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("setting.account_setting.account_no")}`,
-              htmlFor: "company.bankDetails.accountNumber",
+              htmlFor: "bankDetails.accountNumber",
             },
             field: {
               type: Field.input,
-              id: "company.bankDetails.accountNumber",
-              name: "company.bankDetails.accountNumber",
+              id: "bankDetails.accountNumber",
+              name: "bankDetails.accountNumber",
               inputType: "text",
               placeholder: "Enter Your Account Number",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
@@ -364,12 +385,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("setting.account_setting.iban_number")}`,
-              htmlFor: "company.bankDetails.ibanNumber",
+              htmlFor: "bankDetails.ibanNumber",
             },
             field: {
               type: Field.input,
-              id: "company.bankDetails.ibanNumber",
-              name: "company.bankDetails.ibanNumber",
+              id: "bankDetails.ibanNumber",
+              name: "bankDetails.ibanNumber",
               inputType: "text",
               placeholder: "Enter Your Iban",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
@@ -455,7 +476,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px]   text-dark hover:bg-none",
-              loading,
             },
           },
           {
@@ -468,7 +488,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-fit h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-fit h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },
