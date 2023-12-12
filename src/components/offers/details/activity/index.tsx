@@ -2,41 +2,34 @@ import React from "react";
 import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
-
-type ActivityTypes = {
-  activityName: string;
-  activityMode: string;
-  activeTime: string;
-  activeDate: string;
-};
+import { OffersActivityDataTypes } from "@/types/offers";
 
 const Activity = () => {
-  const activityData: ActivityTypes[] = [
+  const activityData: OffersActivityDataTypes[] = [
     {
-      activityName: "Ahmed Rahal Ali",
+      activityName: "Ahmed",
       activityMode: "edited Offer:",
       activeTime: "13:30:20",
       activeDate: "12/09/2023",
     },
     {
-      activityName: "Ahmed Rahal Ali",
+      activityName: "Ahmed",
       activityMode: "edited Offer:",
       activeTime: "13:30:20",
       activeDate: "12/09/2023",
     },
     {
-      activityName: "Ahmed Rahal Ali",
+      activityName: "Ahmed",
       activityMode: "edited Offer:",
       activeTime: "13:30:20",
       activeDate: "12/09/2023",
     },
     {
-      activityName: "Ahmed Rahal Ali",
+      activityName: "Ahmed",
       activityMode: "edited Offer:",
       activeTime: "13:30:20",
       activeDate: "12/09/2023",
     },
-  
   ];
 
   return (
@@ -53,7 +46,7 @@ const Activity = () => {
               </span>
             </div>
 
-            <div className="mt-2 grid grid-cols-2 gap-3">
+            <div className="mt-2 flex justify-between">
               <span className="text-[#4B4B4B] font-normal text-[14px] flex items-center ">
                 <Image src={timeIcon} alt="timeIcon" className="mr-3" />
                 {item.activeTime}

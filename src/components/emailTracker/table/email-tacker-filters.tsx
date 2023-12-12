@@ -5,6 +5,8 @@ import React, { useState } from "react";
 export default function EmailTrackerFilters() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleHandler = () => setIsOpen((prev) => !prev);
+
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
@@ -14,7 +16,7 @@ export default function EmailTrackerFilters() {
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          setIsOpen={toggleHandler}
           options={["1", "2", "2", "2", "2"]}
           label="Sort By"
         />

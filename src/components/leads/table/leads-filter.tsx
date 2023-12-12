@@ -25,7 +25,7 @@ export default function LeadsFilter({
   ];
   const {
     isOpen,
-    setIsOpen,
+    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
@@ -47,7 +47,7 @@ export default function LeadsFilter({
           />
         ))}
       </div>
-      <div className="flex gap-x-4" >
+      <div className="flex gap-x-4">
         <InputField
           handleChange={(value) => setFilter({ ...filter, text: value })}
           value={filter.text}
@@ -57,7 +57,7 @@ export default function LeadsFilter({
           value=""
           dropDownIconClassName=""
           isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          setIsOpen={toggleHandler}
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />

@@ -16,7 +16,7 @@ export default function ServicesFilters({
 }: FiltersComponentProps) {
   const {
     isOpen,
-    setIsOpen,
+    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
@@ -38,7 +38,7 @@ export default function ServicesFilters({
         value=""
         dropDownIconClassName=""
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={toggleHandler}
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />

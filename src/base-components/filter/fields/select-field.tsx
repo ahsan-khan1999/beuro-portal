@@ -2,6 +2,7 @@ import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non
 import { OptionsFieldProps } from "@/types/global";
 import React from "react";
 import { combineClasses } from "@/utils/utility";
+import { useOutsideClick } from "@/hooks/useOutSideClick";
 
 export default function SelectField({
   title,
@@ -18,11 +19,17 @@ export default function SelectField({
   const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50 relative flex items-center`;
   const containerClasses = combineClasses(defaultClasses, containerClassName);
 
+  // const closeDropDown = () => {
+  //   setIsOpen(false);
+  // };
+
+  // const ref = useOutsideClick<HTMLDivElement>(closeDropDown);
+
   return (
     <>
-      <div className={containerClasses}>
+      <div  className={containerClasses}>
         <div
-          className="flex justify-between items-center cursor-pointer gap-x-2 px-2 py-[6px]"
+          className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full"
           onClick={setIsOpen}
         >
           <span className="text-[#393939] text-sm font-normal">{label}</span>
@@ -38,7 +45,7 @@ export default function SelectField({
             <div className="flex-col space-y-2">
               {options.map((item, key) => (
                 <div
-                  className="flex justify-center hover:bg-lightGray rounded-md cursor-pointer "
+                  className="flex justify-center hover:bg-lightGray rounded-md cursor-pointer"
                   key={key}
                 >
                   <span

@@ -18,21 +18,30 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 interface ContractDetailCardProps {
-  contractDetails: contractTableTypes
-  offerDeleteHandler: () => void
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
-  handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
-  handleStatusUpdate: (id: string) => void
-  handlePaymentStatusUpdate: (id: string) => void
-
+  contractDetails: contractTableTypes;
+  offerDeleteHandler: () => void;
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleStatusUpdate: (id: string) => void;
+  handlePaymentStatusUpdate: (id: string) => void;
 }
-const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, handlePaymentStatusUpdate, handleStatusUpdate, offerDeleteHandler }: ContractDetailCardProps) => {
+const ContractDetailsCard = ({
+  contractDetails,
+  handleImageUpload,
+  handleNotes,
+  handlePaymentStatusUpdate,
+  handleStatusUpdate,
+  offerDeleteHandler,
+}: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
     <ContractCardLayout>
-      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-3">
+      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -63,19 +72,24 @@ const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, 
           />
           <Image src={downloadIcon} alt="downloadIcon" />
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={offerDeleteHandler} />
+          <Image
+            src={deleteIcon}
+            alt="deleteIcon"
+            className="cursor-pointer"
+            onClick={offerDeleteHandler}
+          />
         </div>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div className="flex flex-col gap-4">
-
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)]">
+      <div className="flex flex-col gap-4 mt-5">
+        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2">
           <div>
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
               {translate("contracts.card_content.contract_id")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">{contractDetails.contractNumber}</span>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {contractDetails.contractNumber}
+            </span>
           </div>
           <div className="flex gap-[10px]">
             <span className="text-base  font-normal text-[4D4D4D]">
@@ -92,17 +106,17 @@ const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, 
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {contractDetails.offerID?.customerID?.fullName}
-
             </span>
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
+        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)] gap-y-2">
           <div>
             <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
               {translate("contracts.card_content.offer_id")}:
             </span>
-            <span className="text-base font-medium text-[#4A13E7]">            {contractDetails.offerID?.offerNumber}
+            <span className="text-base font-medium text-[#4A13E7]">
+              {contractDetails.offerID?.offerNumber}
             </span>
           </div>
           <div className="flex gap-[10px]">
@@ -121,13 +135,18 @@ const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, 
             </span>
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
-                {contractDetails?.offerID?.date?.map((item) => (`${formatDateTimeToDate(item.startDate)} to ${formatDateTimeToDate(item.endDate)}`))}
+                {contractDetails?.offerID?.date?.map(
+                  (item) =>
+                    `${formatDateTimeToDate(
+                      item.startDate
+                    )} to ${formatDateTimeToDate(item.endDate)}`
+                )}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(300px,_100%)_minmax(200px,_250px)_minmax(120px,_120px)_minmax(120px,_120px)]">
+        <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.offer_status")}:
@@ -136,60 +155,74 @@ const ContractDetailsCard = ({ contractDetails, handleImageUpload, handleNotes, 
               {contractDetails.offerID?.offerStatus}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
+          <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("contracts.card_content.payment_method")}:
             </span>
             <span>
-
               <DropDown
-                items={Object.keys(staticEnums['PaymentType']).map((item) => ({ item: item }))}
+                items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
+                  item: item,
+                }))}
                 selectedItem={contractDetails.offerID?.paymentType}
                 onItemSelected={handlePaymentStatusUpdate}
                 dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
                 dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
-
               />
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
+          <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.contract_status")}:
             </span>
-            {
-              staticEnums['ContractStatus'][contractDetails?.contractStatus] !== 3 &&
-              <DropDown
-                items={Object.keys(staticEnums['ContractStatus']).map((item) => ({ item: item }))}
-                selectedItem={contractDetails?.contractStatus}
-                onItemSelected={handleStatusUpdate}
-                dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
-
-              /> || <span
-                className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium "
-              >{contractDetails?.contractStatus}</span>
-            }
+            <span>
+              {(staticEnums["ContractStatus"][
+                contractDetails?.contractStatus
+              ] !== 3 && (
+                <DropDown
+                  items={Object.keys(staticEnums["ContractStatus"]).map(
+                    (item) => ({ item: item })
+                  )}
+                  selectedItem={contractDetails?.contractStatus}
+                  onItemSelected={handleStatusUpdate}
+                  dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
+                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                />
+              )) || (
+                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                  {contractDetails?.contractStatus}
+                </span>
+              )}
+            </span>
           </div>
 
-          <div>
+          <div className="flex justify-between">
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
-                N{translate("contracts.card_content.notes")}:
+                {translate("contracts.card_content.notes")}:
               </span>
-              <Image src={writeIcon} alt="writeIcon" className="cursor-pointer" onClick={(e) => handleNotes(contractDetails?.id, e)} />
+              <Image
+                src={writeIcon}
+                alt="writeIcon"
+                className="cursor-pointer"
+                onClick={(e) => handleNotes(contractDetails?.id, e)}
+              />
             </div>
-          </div>
-          <div>
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>
-              <Image src={imageIcon} alt="editImg" className="cursor-pointer" onClick={(e) => handleImageUpload(contractDetails?.id, e)} />
+              <Image
+                src={imageIcon}
+                alt="editImg"
+                className="cursor-pointer"
+                onClick={(e) => handleImageUpload(contractDetails?.id, e)}
+              />
             </div>
           </div>
-        </div >
-      </div >
-    </ContractCardLayout >
+        </div>
+      </div>
+    </ContractCardLayout>
   );
 };
 

@@ -25,7 +25,7 @@
     "create": "Create Account",
     "or_login": "or login with",
     "remember_me": "Remember me",
-    "forgot_password": "Forgot Password" 
+    "forgot_password": "Forgot Password"
   },
   "account_type": {
     "main_heading": "Account Type",
@@ -632,8 +632,6 @@
       "update_invoice": "Edit Invoice",
       "button": "Create Invoice",
       "recurring_button": "Create Recurring Invoice"
-
-
     },
     "invoice_created_modal": {
       "main_heading": "Invoice Created Successful ",
@@ -934,9 +932,9 @@
       }
     },
     "download_modal": {
-      "heading":" Download Successful ",
-      "sub_heading":"Great job on successfully downloading your payment history!",
-      "button":"Done"
+      "heading": " Download Successful ",
+      "sub_heading": "Great job on successfully downloading your payment history!",
+      "button": "Done"
     }
   },
   "offers": {
@@ -1450,6 +1448,4 @@
       "customer": "Customer"
     }
   }
-
-
 }

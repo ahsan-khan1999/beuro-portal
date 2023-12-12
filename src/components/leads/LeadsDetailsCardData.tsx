@@ -19,8 +19,8 @@ const LeadsDetailsCardData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   return (
-    <>
-      <div className="flex justify-between items-center  ">
+    <div className="bg-white rounded-md pt-5 pb-10">
+      <div className="flex justify-between items-center  "> 
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -86,7 +86,7 @@ const LeadsDetailsCardData = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

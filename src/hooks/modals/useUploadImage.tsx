@@ -1,5 +1,5 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -23,18 +23,23 @@ export const useUploadImage = (handleImageSlider: Function) => {
   } = useForm();
   const fields = ImageUploadFormField(loading, control, handleImageSlider);
   useMemo(() => {
-    if (leadDetails?.id) setImageFieldValues(setValue, leadDetails?.images)
-  }, [leadDetails?.id])
-
-
+    if (leadDetails?.id) setImageFieldValues(setValue, leadDetails?.images);
+  }, [leadDetails?.id]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)?.filter(value => value);
-    const apiData = { images: filteredList, step: 5, id: leadDetails?.id, stage: ComponentsType.customerEdit, type: "Test" }
+    const filteredList = Object.values(data)?.filter((value) => value);
+    const apiData = {
+      images: filteredList,
+      step: 5,
+      id: leadDetails?.id,
+      stage: ComponentsType.customerEdit,
+      type: "Test",
+    };
 
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) handleImageSlider();
-
   };
   return {
     fields,
@@ -43,6 +48,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

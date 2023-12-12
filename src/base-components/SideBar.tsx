@@ -42,8 +42,8 @@ const SideBar = () => {
   const userRole = 1;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
-  return (
-    <div className="overflow-x-hidden  overflow-y-scroll  bg-white rounded-r-[6px]">
+  return ( 
+    <div className="overflow-x-hidden overflow-y-scroll bg-white rounded-r-[6px]">
       <div className="max-w-[247px] pt-6 px-4 pb-8 relative sidebar-height flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {

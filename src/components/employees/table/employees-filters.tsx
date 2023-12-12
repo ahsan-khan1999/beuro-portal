@@ -16,7 +16,7 @@ export default function EmployeesFilters({
 }: FiltersComponentProps) {
   const {
     isOpen,
-    setIsOpen,
+    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
@@ -39,7 +39,7 @@ export default function EmployeesFilters({
         value=""
         dropDownIconClassName=""
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={toggleHandler}
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />

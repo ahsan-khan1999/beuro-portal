@@ -40,13 +40,15 @@ export default function useFilter({
     });
   };
 
+  const toggleHandler = () => setIsOpen((prev) => !prev);
+
   return {
     moreFilter,
     setMoreFilter,
     filter,
     setFilter,
     isOpen,
-    setIsOpen,
+    toggleHandler,
     handleItemSelected,
     handleFilterReset,
     handleFilterResetToInitial,

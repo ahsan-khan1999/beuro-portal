@@ -18,7 +18,6 @@ const LeadsDetailsImages = ({
     <LeadsDetailImgLayout>
       <div className="flex flex-col">
         <p className="text-lg font-normal text-[#4A13E7] ml-6 my-4">
-          {" "}
           {translate("leads.side_images_heading")}
         </p>
         <div className="bg-[#4A13E7] h-1 "></div>
