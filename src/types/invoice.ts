@@ -4,18 +4,18 @@ import { contractTableTypes } from "./contract";
 // Inovice table layout
 export interface InvoiceTableRowTypes {
   id: string;
-  invoiceNumber:string;
-  paidAmount:string;
-  remainingAmount:string;
-  totalEmail:string;
-  sentEmail:string;
-  createdAt:string;
-  contractID:contractTableTypes;
+  invoiceNumber: string;
+  paidAmount: string;
+  remainingAmount: string;
+  totalEmail: string;
+  sentEmail: string;
+  createdAt: string;
+  contractID: contractTableTypes;
   invoiceTitle: string;
   totalPrice: string;
   emailStatus: string;
   invoiceStatus: string;
-  isInvoiceRecurring:boolean
+  isInvoiceRecurring: boolean;
 }
 
 // Inovice details table
@@ -44,19 +44,17 @@ export interface ReceiptDetailsTableRowTypes {
   type?: string;
 }
 
-
 export interface SubInvoiceTableRowTypes {
   id: string;
-  amount:number;
-  dateOfNextInvoice:string;
+  amount: number;
+  dateOfNextInvoice: string;
   emailStatus: string;
-  frequency:string;
-  invoiceID:InvoiceTableRowTypes
-  invoiceNumber:string;
+  frequency: string;
+  invoiceID: InvoiceTableRowTypes;
+  invoiceNumber: string;
   invoiceStatus: string;
-  paymentType:string;
-  createdAt:string;
-
+  paymentType: string;
+  createdAt: string;
 }
 
 export interface InvoiceEmptyStateType {
@@ -64,5 +62,20 @@ export interface InvoiceEmptyStateType {
   imageAlt: string;
   emptyName: string;
   emptyDescription: string;
+}
 
+export interface InvoiceCardContentProps {
+  handleInvoiceCreation: () => void;
+  invoiceDetails: InvoiceTableRowTypes;
+  handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
+  handleRecurringInvoiceCreation: () => void;
+  handleStopInvoiceCreation: () => void;
+  handleEditInvoiceFrequencyCreation: () => void;
+}
+
+export interface InvoiceDetailsTableProps {
+  collectiveInvoice: SubInvoiceTableRowTypes[];
+  handlePaymentStatusUpdate: (id: string, status: string) => void;
+  handleInvoiceStatusUpdate: (id: string, status: string) => void;
+  handleInvoiceEdit: (item: any) => void;
 }

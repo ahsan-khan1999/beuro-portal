@@ -10,7 +10,7 @@ export interface contractTableTypes {
   contractNumber: string;
   offerID: ContractOfferDetails;
   createdAt: string;
-  contractStatus:"Open" | "Confirmed" | "Cancelled";
+  contractStatus: "Open" | "Confirmed" | "Cancelled";
 }
 export interface ContractOfferDetails {
   refID: string;
@@ -32,7 +32,7 @@ export interface ContractOfferDetails {
   leadStatus: string;
   images: string[];
   createdAt: string;
-  customerID: Customers
+  customerID: Customers;
   type: string;
   addressID: AddressID;
   desireDate: string;
@@ -64,5 +64,17 @@ export interface ContractOfferDetails {
   subTotal: number;
   total: number;
   discountAmount: number;
-  discountDescription: string
+  discountDescription: string;
+}
+
+export interface ContractDetailCardProps {
+  contractDetails: contractTableTypes;
+  offerDeleteHandler: () => void;
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleStatusUpdate: (id: string) => void;
+  handlePaymentStatusUpdate: (id: string) => void;
 }

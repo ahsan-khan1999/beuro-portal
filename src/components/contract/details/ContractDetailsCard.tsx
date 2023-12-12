@@ -11,23 +11,12 @@ import imageIcon from "@/assets/svgs/edit_image.svg";
 import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
 import { formatDateTimeToDate } from "@/utils/utility";
-import { contractTableTypes } from "@/types/contract";
+import { ContractDetailCardProps } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
-interface ContractDetailCardProps {
-  contractDetails: contractTableTypes;
-  offerDeleteHandler: () => void;
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
-  handleImageUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleStatusUpdate: (id: string) => void;
-  handlePaymentStatusUpdate: (id: string) => void;
-}
 const ContractDetailsCard = ({
   contractDetails,
   handleImageUpload,
@@ -41,7 +30,7 @@ const ContractDetailsCard = ({
 
   return (
     <ContractCardLayout>
-      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center">
           <Image
             src={backIcon}

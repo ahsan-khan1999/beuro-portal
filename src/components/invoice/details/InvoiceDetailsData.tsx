@@ -4,31 +4,38 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import editIcon from "@/assets/svgs/Edit_note.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { InvoiceTableRowTypes } from "@/types/invoice";
+import { InvoiceCardContentProps } from "@/types/invoice";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
-import recurring from "@/assets/svgs/recurring icon.svg"
-const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes, handleRecurringInvoiceCreation, handleEditInvoiceFrequencyCreation, handleStopInvoiceCreation }: {
-  handleInvoiceCreation: () => void, invoiceDetails: InvoiceTableRowTypes, handleNotes: (item: string,
-    e?: React.MouseEvent<HTMLSpanElement>) => void
-  , handleRecurringInvoiceCreation: () => void,
-  handleStopInvoiceCreation: () => void,
-  handleEditInvoiceFrequencyCreation: () => void,
+import recurring from "@/assets/svgs/recurring icon.svg";
+import { useTranslation } from "next-i18next";
 
+const InvoiceDetailsData = ({
+  handleInvoiceCreation,
+  invoiceDetails,
+  handleNotes,
+  handleRecurringInvoiceCreation,
+  handleEditInvoiceFrequencyCreation,
+  handleStopInvoiceCreation,
+}: InvoiceCardContentProps) => {
+  const router = useRouter();
+  const { t: translate } = useTranslation();
 
-}) => {
-  const router = useRouter()
   return (
     <>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center">
-          <Image src={backIcon} alt="back_icon" onClick={() => router.push("/invoices")} className="cursor-pointer" />
+          <Image
+            src={backIcon}
+            alt="back_icon"
+            onClick={() => router.push("/invoices")}
+            className="cursor-pointer"
+          />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            Invoice details
+            {translate("invoice.card_content.heading")}
           </p>
         </div>
-        {
-          !invoiceDetails?.isInvoiceRecurring &&
+        {(!invoiceDetails?.isInvoiceRecurring && (
           <div className="flex space-x-2">
             <Button
               className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
@@ -45,10 +52,9 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
               id="Recurring Invoice"
               icon={recurring}
               onClick={handleRecurringInvoiceCreation}
-
             />
-
-          </div> ||
+          </div>
+        )) || (
           <div className="flex space-x-2">
             <Button
               className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
@@ -62,41 +68,45 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
               inputType="button"
               text="Stop"
               onClick={handleStopInvoiceCreation}
-
               id="freq"
             />
-
           </div>
-        }
+        )}
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-y-3 xl:gap-y-0">
+      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3">
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Invoice ID:
+              {translate("invoice.card_content.invoice_id")}:
             </span>
-            <span className="text-[#393939] font-medium text-base">{invoiceDetails.invoiceNumber}</span>
+            <span className="text-[#393939] font-medium text-base">
+              {invoiceDetails.invoiceNumber}
+            </span>
           </div>
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Contract ID:
+              {translate("invoice.card_content.contract_id")}:
             </span>
-            <span className="text-[#4A13E7] font-medium text-base">{invoiceDetails.contractID?.contractNumber}</span>
+            <span className="text-[#4A13E7] font-medium text-base">
+              {invoiceDetails.contractID?.contractNumber}
+            </span>
           </div>
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Offer ID:
+              {translate("invoice.card_content.offer_id")}:
             </span>
-            <span className="text-[#4A13E7] font-medium text-base">{invoiceDetails.contractID?.offerID?.offerNumber}</span>
+            <span className="text-[#4A13E7] font-medium text-base">
+              {invoiceDetails.contractID?.offerID?.offerNumber}
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Invoice Title:
+              {translate("invoice.card_content.title")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
               {invoiceDetails.contractID?.offerID?.title}
@@ -105,7 +115,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
           <div className="flex gap-[44px] items-center">
             <div className="flex gap-2">
               <span className="text-base font-normal text-[#4D4D4D]">
-                Worker:
+                {translate("invoice.card_content.worker")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
                 {invoiceDetails.contractID?.offerID?.customerID?.fullName}
@@ -113,10 +123,13 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
             </div>
             <div className="flex gap-2">
               <span className="text-base font-normal text-[#4D4D4D]">
-                Email Status:
+                {translate("invoice.card_content.status")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                {invoiceDetails?.sentEmail + "/" + invoiceDetails?.totalEmail + " Sent"}
+                {invoiceDetails?.sentEmail +
+                  "/" +
+                  invoiceDetails?.totalEmail +
+                  " Sent"}
               </span>
             </div>
           </div>
@@ -124,25 +137,28 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
           <div className="flex gap-[44px] items-center">
             <div className="flex gap-2 items-center">
               <span className="text-base font-normal text-[#4D4D4D]">
-                Creation Date:
+                {translate("invoice.card_content.created_date")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
                 {formatDateTimeToDate(invoiceDetails?.createdAt)}
               </span>
             </div>
-            <div className="flex gap-2 items-center" onClick={(e) => handleNotes(invoiceDetails?.id, e)}>
+            <div
+              className="flex gap-2 items-center"
+              onClick={(e) => handleNotes(invoiceDetails?.id, e)}
+            >
               <span className="text-base font-normal text-[#4D4D4D]">
-                Notes:
+                {translate("invoice.card_content.notes")}:
               </span>
               <Image src={editIcon} alt="editIcon" className="cursor-pointer" />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col border border-[#dcdcdc] rounded-md shadow-md p-[18px]">
+        <div className="w-fit flex flex-col border border-[#dcdcdc] rounded-md shadow-md p-[18px]">
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
             <span className="text-base font-normal text-[#4A13E7]">
-              Total Amount:
+              {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
               {invoiceDetails?.contractID?.offerID?.total}
@@ -150,7 +166,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Paid Amount:
+              {translate("invoice.card_content.paid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
               {invoiceDetails?.paidAmount} CHF
@@ -158,7 +174,7 @@ const InvoiceDetailsData = ({ handleInvoiceCreation, invoiceDetails, handleNotes
           </div>
           <div className="flex gap-x-[10px] pt-3">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Unpaid Amount:
+              {translate("invoice.card_content.unpaid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
               {invoiceDetails?.remainingAmount} CHF
