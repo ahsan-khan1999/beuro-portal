@@ -3,12 +3,12 @@ import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import Image from "next/image";
-import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { getKeyByValue } from "@/utils/auth.util";
 
-const CustomerDetailsData = ({
+const customerDetailData = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
@@ -45,7 +45,7 @@ const CustomerDetailsData = ({
               {translate("leads.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerID?.customerType}
+              {getKeyByValue(staticEnums["CustomerType"],leadDetails?.customerDetail?.customerType)}
             </div>
           </div>
           <div>
@@ -53,17 +53,17 @@ const CustomerDetailsData = ({
               {translate("leads.customer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerID?.fullName}
+              {leadDetails?.customerDetail?.fullName}
             </div>
           </div>
           {
-            staticEnums["CustomerType"][leadDetails?.customerID?.customerType] === 1 &&
+            staticEnums["CustomerType"][leadDetails?.customerDetail?.customerType] === 1 &&
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerID?.companyName}
+                {leadDetails?.customerDetail?.companyName}
               </div>
             </div>
           }
@@ -72,7 +72,7 @@ const CustomerDetailsData = ({
               {translate("leads.customer_details.email_address")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerID?.email}
+              {leadDetails?.customerDetail?.email}
             </div>
           </div>
           <div>
@@ -80,7 +80,7 @@ const CustomerDetailsData = ({
               {translate("leads.customer_details.phone_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerID?.phoneNumber}
+              {leadDetails?.customerDetail?.phoneNumber}
             </div>
           </div>
           <div>
@@ -88,7 +88,7 @@ const CustomerDetailsData = ({
               {translate("leads.customer_details.mobile_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerID?.mobileNumber}
+              {leadDetails?.customerDetail?.mobileNumber}
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ const CustomerDetailsData = ({
                 {translate("leads.customer_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerID?.address?.streetNumber}
+                {leadDetails?.customerDetail?.address?.streetNumber}
               </div>
             </div>
             <div>
@@ -111,7 +111,7 @@ const CustomerDetailsData = ({
                 {translate("leads.customer_details.post_code")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerID?.address?.postalCode}
+                {leadDetails?.customerDetail?.address?.postalCode}
 
               </div>
             </div>
@@ -120,7 +120,7 @@ const CustomerDetailsData = ({
                 {translate("leads.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerID?.address?.country}
+                {leadDetails?.customerDetail?.address?.country}
 
               </div>
             </div>
@@ -131,4 +131,4 @@ const CustomerDetailsData = ({
   );
 };
 
-export default CustomerDetailsData;
+export default customerDetailData;

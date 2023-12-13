@@ -484,14 +484,14 @@ export function getFileNameFromUrl(url: string) {
 }
 
 export function getEmailColor(status: string) {
-  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Draft"])
+  if (staticEnums["EmailStatus"][status] == 0)
     return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Send"]
+    staticEnums["EmailStatus"][status] == 1
   )
     return "#4A13E7";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
+    staticEnums["EmailStatus"][status] == 2
   )
     return "#FF0000";
   else return "#FF376F";

@@ -39,7 +39,7 @@ export interface OffersTableRowTypes {
   additionalDetails: string;
   createdBy: User;
   discountType: 0 | 1;
-  emailStatus: "Pening" | "Sent" | "Post";
+  emailStatus: "Draft" | "Sent" | "Failed";
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;

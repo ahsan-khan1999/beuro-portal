@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ColumnsComp from "./ColumnsComp";
 import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 
 const Templates = () => {
   const { t: translate } = useTranslation();
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(getTemplateSettings())
+  }, [])
+  
   return (
     <>
       <div className="border border-[#EBEBEB] rounded-md bg-white pl-[32px] pr-[45px] py-3 w-full h-fit flex justify-between items-center">

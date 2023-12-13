@@ -33,25 +33,24 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  console.log(errors);
   const customerType = watch("customerType")
   useMemo(() => {
     if (leadDetails.id) {
       reset({
-        fullName: leadDetails.customerID?.fullName,
-        customer: leadDetails.customerID?.id,
+        fullName: leadDetails.customerDetail?.fullName,
+        customer: leadDetails.customerDetail?.id,
 
-        customerType: leadDetails.customerID?.customerType,
-        email: leadDetails.customerID?.email,
-        phoneNumber: leadDetails.customerID?.phoneNumber,
-        mobileNumber: leadDetails.customerID?.mobileNumber,
-        address: leadDetails?.customerID?.address,
+        customerType: leadDetails.customerDetail?.customerType,
+        email: leadDetails.customerDetail?.email,
+        phoneNumber: leadDetails.customerDetail?.phoneNumber,
+        mobileNumber: leadDetails.customerDetail?.mobileNumber,
+        address: leadDetails?.customerDetail?.address,
       })
     }
   }, [leadDetails.id]);
   const fields = LeadsCustomerDetailsFormField(register, loading, control, handleBack, leadDetails,customerType,setValue);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit, customerID: leadDetails?.customerID?.id }
+    const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit, customerID: leadDetails?.customerID }
     const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
     if (res?.payload) onClick(0, ComponentsType.customer);
 

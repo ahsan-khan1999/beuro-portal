@@ -68,7 +68,7 @@ export interface FormDataProps {
 }
 export interface CustomerPromiseActionType {
   type: string,
-  payload: object,
+  payload: any,
   meta: object,
 }
 

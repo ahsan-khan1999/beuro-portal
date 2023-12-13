@@ -27,10 +27,12 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector(state => state.lead)
-  
+  const { images } = useAppSelector(state => state.image)
+
+
   const [tabType, setTabType] = useState<ComponentsType>(
     leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd
-    );
+  );
 
   useEffect(() => {
     setTabType(leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd)
@@ -133,7 +135,7 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={leadDetails}/>,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
   };
 
   const renderModal = () => {
@@ -156,13 +158,13 @@ const AddNewLeadsData = () => {
     [ComponentsType.customerAdd]: (
       <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.additionalAdd]: (
+    [ComponentsType.addressAdd]: (
       <AddLeadAddressDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
     ),
     [ComponentsType.serviceAdd]: (
       <AddLeadServiceDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack} />
     ),
-    [ComponentsType.addressAdd]: (
+    [ComponentsType.additionalAdd]: (
       <AddLeadAdditionalDetails onHandleNext={leadCreatedHandler} onHandleBack={onHandleBack} />
     ),
   };

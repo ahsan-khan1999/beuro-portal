@@ -48,13 +48,12 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
       })
     }
   }, [leadDetails.id])
-  console.log(errors, "errors",otherServices);
 
   const fields = LeadsServiceDetailsFormField(register, loading, control, handleBack, trigger, service, leadDetails);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onClick(3, ComponentsType.additional);
+    if (response?.payload) onClick(2, ComponentsType.service);
 
   };
   return {

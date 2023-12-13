@@ -78,15 +78,15 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (leadDetails?.id) {
-      const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit }
+      const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressAdd }
 
       const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
-      if (res?.payload) onHandleNext(ComponentsType.addressEdit);
+      if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     } else {
-      const apiData = { ...data, step: 1, stage: ComponentsType.addressEdit }
+      const apiData = { ...data, step: 1, stage: ComponentsType.addressAdd }
 
       const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
-      if (res?.payload) onHandleNext(ComponentsType.addressEdit);
+      if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     }
 
   };

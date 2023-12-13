@@ -44,9 +44,9 @@ export const useAddLeadAddressDetails = (onHandleBack: (currentComponent: Compon
   const fields = AddLeadAddressDetailsFormField(register, loading, control, onHandleBack, addressCount, handleAddNewAddress, handleRemoveNewAddress)
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { address: senitizeDataForm(data).slice(0, addressCount), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceEdit }
+    const apiData = { address: senitizeDataForm(data).slice(0, addressCount), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceAdd }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onHandleNext(ComponentsType.serviceEdit);
+    if (response?.payload) onHandleNext(ComponentsType.serviceAdd);
   };
 
   return {

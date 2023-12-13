@@ -6,24 +6,12 @@ import { User } from ".";
 export interface Lead {
   id: string;
   refID: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  date: string;
-  mobileNumber: string;
-  status: string;
-  editImg?: string;
-  editNote?: string;
-  customerType?: string;
-  companyName: string;
-  mobile: string;
-  address: CustomerAddress;
-  edit?: boolean;
+  customerDetail: Customers
   lead: CustomerLeadDetail;
   leadStatus: string;
+  customerID:string
   images: string[];
   createdAt: string;
-  customerID: Customers
   type: string;
   addressID: AddressID;
   stage: ComponentsType;
@@ -38,7 +26,9 @@ export interface Lead {
   additionalDetails: string;
   createdBy: User
 }
-
+interface CustomerDetails {
+  Customer: Customers
+}
 export interface AddressID {
   id: string,
   address: CustomerAddress[]

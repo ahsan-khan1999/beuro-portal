@@ -94,7 +94,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-3 gap-x-3 mt-5",
         children: [
           {
             containerClass: "mb-0",
@@ -206,7 +206,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid  grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className: "grid  grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mt-5",
         children: [
           {
             containerClass: "xl:col-span-1 mb-0",
@@ -244,7 +244,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               id: "otherServices",
               name: "otherServices",
               value: leadDetails?.id && leadDetails?.otherServices || [""],
-              options: service?.map((item) => (
+              options: service && service?.map((item) => (
                 {
                   label: item.serviceName,
                   value: item.id

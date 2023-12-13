@@ -965,6 +965,8 @@
       "connect_with_buro": "Connect With Buro",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our help center",
       "allowed_domain": "Allowed Domain",
+      "add_domain": "Enter Domain",
+
       "security_token": "Security Token",
 
       "tabs_tax": {

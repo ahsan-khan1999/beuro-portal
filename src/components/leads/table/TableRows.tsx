@@ -35,19 +35,19 @@ const TableRows = ({
               {item?.refID}
             </span>
             <span className=" py-4 flex items-center">
-              {item.customerID?.fullName}
+              {item.customerDetail?.fullName}
             </span>
             <span className=" py-4 flex items-center mlg:hidden maxSize:flex">
-              {item.customerID?.email}
+              {item.customerDetail?.email}
             </span>
             <span className=" py-4 flex items-center">
-              {item.customerID?.phoneNumber}
+              {item.customerDetail?.phoneNumber}
             </span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex ">
               {formatDate(item.createdAt)}
             </span>
             <span className="flex items-center py-4">
-              {item.customerID?.address?.country}
+              {item.customerDetail?.address?.country}
             </span>
             <span className={` py-4 flex items-center`}>
               <div

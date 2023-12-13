@@ -19,7 +19,7 @@ const AddressEditDetails = ({onClick}: {onClick: (index: number, component: Comp
 
       <hr  className="opacity-20 mb-5"/>
       <Form
-        formFields={fields}
+        formFields={fields || []}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}

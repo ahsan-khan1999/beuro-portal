@@ -417,7 +417,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         // onItemChange: onCustomerSelect,
-        value: offerDetails?.id && offerDetails?.leadID?.id || lead?.length === 1 && lead[0]?.id,
+        value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id,
         // setValue
       }
     }

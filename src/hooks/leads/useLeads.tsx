@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_LEAD, leads } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, leads } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { FilterType } from "@/types";
@@ -15,6 +15,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
@@ -42,6 +43,7 @@ const useLeads = () => {
   useEffect(() => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {

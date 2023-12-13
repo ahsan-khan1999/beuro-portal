@@ -29,11 +29,11 @@ export const MultiSelectBox = ({
         }
     }, [defaultValues]);
 
-    // useMemo(() => {
-    //     if (options.length > 0) {
-    //         setOption(options);
-    //     }
-    // }, [options?.length]);
+    useMemo(() => {
+        if (options.length > 0) {
+            setOption(options);
+        }
+    }, [options?.length]);
 
     const search = useRef<string>("");
 

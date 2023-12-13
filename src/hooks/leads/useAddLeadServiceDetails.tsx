@@ -49,9 +49,9 @@ export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHan
   const fields = AddLeadServiceDetailsFormField(register, loading, control, onHandleBack, trigger, service,leadDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
+    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalAdd }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onHandleNext(ComponentsType.additionalEdit);
+    if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
 
     // dispatch(loginUser({ data, router, setError, translate }));
     // onHandleNext(ComponentsType.additionalEdit);

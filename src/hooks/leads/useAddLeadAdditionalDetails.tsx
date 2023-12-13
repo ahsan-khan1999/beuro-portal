@@ -36,9 +36,9 @@ export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { on
   }, [leadDetails.id])
   const fields = AddLeadAdditionalDetailsFormField(loading, control, onHandleBack, leadDetails);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
+    const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalAdd }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onHandleNext(ComponentsType.additionalEdit);
+    if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
     // onHandleNext(ComponentsType.additionalEdit);
   };
   return {

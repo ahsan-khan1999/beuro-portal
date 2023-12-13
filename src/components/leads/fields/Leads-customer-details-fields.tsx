@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
+import { getKeyByValue, getValueByKey } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
@@ -51,7 +52,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
+              options: Object.keys(staticEnums.CustomerType).map((item) => (
                 {
                   value: item,
                   label: item
@@ -59,7 +60,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               )),
 
               control,
-              value: leadDetails?.id && leadDetails.customerID?.customerType || ""
+              value: leadDetails?.id && getKeyByValue(staticEnums["CustomerType"],leadDetails.customerDetail?.customerType) || ""
             },
           },
 
@@ -94,7 +95,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               name: "phoneNumber",
 
               control,
-              value: leadDetails?.id && leadDetails?.customerID?.phoneNumber,
+              value: leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
               country: 'ch'
 
             },
@@ -112,7 +113,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               id: "mobileNumber",
               name: "mobileNumber",
               control,
-              value: leadDetails?.id && leadDetails?.customerID?.mobileNumber,
+              value: leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
               country: 'ch'
 
             },
@@ -179,7 +180,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  ",
+              className: "h-[54px] !p-4 !border-dark  ",
               type: Field.select,
               id: "address.country",
               name: "address.country",
@@ -190,7 +191,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 }
               )),
               control,
-              value: leadDetails?.id && leadDetails?.customerID?.address?.country || ""
+              value: leadDetails?.id && leadDetails?.customerDetail?.address?.country || ""
             },
           },
         ],
@@ -261,7 +262,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
         placeholder: "Please Enter Company Name",
         register,
         disabled: false,
-        value: leadDetails?.id && leadDetails?.customerID?.companyName,
+        value: leadDetails?.id && leadDetails?.customerDetail?.companyName,
         setValue: setValue
 
       },

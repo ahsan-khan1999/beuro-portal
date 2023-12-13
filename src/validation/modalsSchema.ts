@@ -36,7 +36,7 @@ export const generateAddTaxValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [AddTaxField.taxRate]: yup
-      .string()
+      .number()
       .required(translate("validationMessages.required")),
   });
 };

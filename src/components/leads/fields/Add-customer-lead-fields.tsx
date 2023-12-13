@@ -1,7 +1,6 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateLeadsCustomerFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
-import { FormField, GenerateLeadsFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
@@ -77,7 +76,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               )),
 
               control,
-              value: leadDetails && leadDetails.customerID?.customerType
+              value: leadDetails && leadDetails.customerDetail?.customerType
             },
           },
           {
@@ -116,7 +115,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              value: leadDetails && leadDetails.customerID?.email
+              value: leadDetails && leadDetails.customerDetail?.email
 
 
             },
@@ -136,7 +135,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
+              value: leadDetails?.id ? leadDetails?.customerDetail?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
 
 
             },
@@ -155,7 +154,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
+              value: leadDetails?.id ? leadDetails?.customerDetail?.phoneNumber : customerDetails && customerDetails?.mobileNumber
             },
           },
 
@@ -191,7 +190,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Street Number",
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.streetNumber
+              value: leadDetails && leadDetails?.customerDetail?.address?.streetNumber
 
             },
           },
@@ -214,7 +213,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Enter Your Post Code",
 
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.postalCode
+              value: leadDetails && leadDetails?.customerDetail?.address?.postalCode
 
 
             },
@@ -238,7 +237,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                 }
               )),
               control,
-              value: leadDetails && leadDetails?.customerID?.address?.country
+              value: leadDetails && leadDetails?.customerDetail?.address?.country
 
 
             },
@@ -351,7 +350,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: leadDetails?.id ? leadDetails?.customerID?.id : customerDetails && customerDetails?.id,
+        value: leadDetails?.id ? leadDetails?.customerDetail?.id : customerDetails && customerDetails?.id,
         setValue
       },
     };

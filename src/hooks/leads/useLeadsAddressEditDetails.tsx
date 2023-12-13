@@ -21,7 +21,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     onClick(1, ComponentsType.address);
   };
 
-  const schema = generateLeadsAddressEditDetailsValidation(translate, 2);
+  const schema = generateLeadsAddressEditDetailsValidation(translate, leadDetails?.addressID?.address?.length);
   const {
     register,
     handleSubmit,
@@ -42,7 +42,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     loading,
     control,
     handleBack,
-    2
+    leadDetails?.addressID?.address?.length
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { address: senitizeDataForm(data), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceEdit }

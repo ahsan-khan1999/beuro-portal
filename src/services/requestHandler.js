@@ -341,9 +341,9 @@ const updateAccountSettings = (data) =>
 const updatePassword = (params) =>
   put(SERVICE_URLS.updatePassword + `${params?.id}`, params, { feature: featureConstants.login });
 const updateSystemSettings = (params) =>
-  put(SERVICE_URLS.systemSetting + `${params?.id}`, params, { feature: featureConstants.login });
+  put(SERVICE_URLS.systemSetting, params, { feature: featureConstants.login });
 const getSystemSettings = (params) =>
-  get(SERVICE_URLS.systemSetting + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.systemSetting, params, { feature: featureConstants.login }, { detail: false });
 const getTemplateSettings = (params) =>
   get(SERVICE_URLS.templates + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const updateTemplateSettings = (params) =>
@@ -358,6 +358,10 @@ const getEmailDetails = (params) =>
   get(SERVICE_URLS.mail, params, { feature: featureConstants.login }, { detail: true });
 const deleteEmail = (data) =>
   del(SERVICE_URLS.mail + `/${data?.id}`, {}, { feature: featureConstants.login });
+const readTaxSettings = (params) =>
+  get(SERVICE_URLS.tax, params, { feature: featureConstants.login }, { detail: false });
+const createTaxSettings = (params) =>
+  post(SERVICE_URLS.tax, params, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -474,6 +478,8 @@ const apiServices = {
   getFollowUpSettings,
   getEmails,
   getEmailDetails,
-  deleteEmail
+  deleteEmail,
+  readTaxSettings,
+  createTaxSettings
 };
 export default apiServices;

@@ -95,7 +95,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-3 gap-x-3 mt-3",
         children: [
           {
             containerClass: "mb-0",

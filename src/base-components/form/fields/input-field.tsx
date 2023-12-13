@@ -23,7 +23,8 @@ export const InputField = ({
   onRemove,
   fieldIndex,
   onChange,
-  percentage
+  percentage,
+  step
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
@@ -62,6 +63,7 @@ export const InputField = ({
           placeholder={placeholder}
           disabled={disabled}
           key={id}
+          step={step}
           // onChangeCapture={}
           //@ts-expect-error
           onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}

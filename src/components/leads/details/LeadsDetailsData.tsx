@@ -27,6 +27,8 @@ export enum ComponentsType {
 const LeadsDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
   const { leadDetails } = useAppSelector((state) => state.lead);
+  const { images } = useAppSelector((state) => state.image);
+
   const [data, setData] = useState<{
     index: number;
     component: ComponentsType;
@@ -159,7 +161,7 @@ const LeadsDetailsData = () => {
             />
           ))}
         </div>
-        <LeadsDetailsImages leadDetails={leadDetails} />
+        <LeadsDetailsImages images={images} />
       </div>
 
       <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">

@@ -28,7 +28,7 @@ export default function InputField({
         <input
           id="searchBar"
           type="text"
-          value={value}
+          defaultValue={value}
           placeholder="Search..."
           className={inputClasses}
           onChange={(e) => handleChange(e.target.value)}
