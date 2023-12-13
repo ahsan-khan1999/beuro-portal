@@ -572,7 +572,9 @@
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
-      "oneOf": "Passwort muss übereinstimmen "
+      "oneOf": "Passwort muss übereinstimmen ",
+      "notOneOf": "Passwort muss different"
+
     },
     "string": {
       "email": "Bitte geben Sie eine gültige Email ein",
@@ -937,6 +939,9 @@
       "street_address": "Street Address",
       "post_code": "Post Code",
       "country": "Country",
+      "city": "city",
+      "houseNumber": "houseNumber",
+
       "bank_name": "Bank Name",
       "account_no": "Account No",
       "iban_number": "Iban Number",

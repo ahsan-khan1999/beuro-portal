@@ -14,11 +14,13 @@ import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { readImage } from "@/api/slices/imageSlice/image";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
-    (state) => state.lead
-  );
+  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
+  const { images } = useAppSelector(state => state.image)
+
+ 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
@@ -102,9 +104,12 @@ const useLeads = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = lead.filter((item_) => item_.id === item);
-    if (filteredLead?.length === 1) dispatch(setLeadDetails(filteredLead[0]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    const filteredLead = lead.find((item_) => item_.id === item)
+    if (filteredLead) {
+      dispatch(setLeadDetails(filteredLead));
+      dispatch(readImage({ params: { type: "leadID", id: filteredLead?.id } }));
+      dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    }
   };
 
   // METHOD FOR HANDLING THE MODALS
@@ -122,9 +127,7 @@ const useLeads = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={leadDetails} />
-    ),
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
   };
 
   const renderModal = () => {

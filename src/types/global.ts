@@ -58,7 +58,7 @@ export interface OptionsFieldProps {
   options: string[];
   dropDownIconClassName: string;
   isOpen: boolean;
-  setIsOpen: () => void;
+  setIsOpen: SetStateAction<any>;
   containerClassName?: string;
 }
 

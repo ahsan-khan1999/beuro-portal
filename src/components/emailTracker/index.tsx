@@ -8,12 +8,22 @@ import TableRow from "./table/TableRow";
 import useEmailTracker from "@/hooks/emailTracker/useEmailTracker";
 
 export default function EmailTracker() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleFilterChange, } =
     useEmailTracker();
   return (
     <>
       <Layout>
-        <TableFunctions />
+        <TableFunctions 
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeading />
           <TableRow dataToAdd={currentPageRows} />
@@ -24,6 +34,6 @@ export default function EmailTracker() {
           onPageChange={handlePageChange}
         />
       </Layout>
-    </>
+    </> 
   );
 }

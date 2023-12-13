@@ -66,7 +66,7 @@ export default function CustomerFilter({
       />
 
       <Button
-        onClick={() => router.push("/content/add")}
+        onClick={() => router.push("/customers/add")}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text={translate("customers.add_button")}
         id="apply"

@@ -7,7 +7,10 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   loading,
   control,
   onClick,
-  onBack
+  onBack,
+  content,
+  contentDetails,
+  onContentSelect
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -42,21 +45,14 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4  !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              value:
-                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-              options: [
-                {
-                  value:
-                    "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-                  label:
-                    "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-                },
-              ],
+
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })),
               control,
+              onItemChange: onContentSelect
             },
           },
         ],
@@ -79,6 +75,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
+        value: contentDetails?.confirmationContent?.title
       },
     },
 
@@ -95,6 +92,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
+        value: contentDetails?.confirmationContent?.description
+
       },
     },
 

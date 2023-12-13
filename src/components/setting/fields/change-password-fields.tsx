@@ -13,13 +13,13 @@ export const ChangePasswordFormField: GenerateChangePasswordFormField = (
       containerClass: "mb-5",
       label: {
         text: `${translate("setting.change_password_modal.old_password")}`,
-        htmlFor: "oldPassword",
+        htmlFor: "currentPassword",
         className: "mb-[12px]",
       },
       field: {
         type: Field.password,
-        id: "oldPassword",
-        name: "oldPassword",
+        id: "currentPassword",
+        name: "currentPassword",
         placeholder: "Word.Pass123",
         svg: `<svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M8.80777 9.76447C9.09101 9.76447 9.32062 9.53486 9.32062 9.25162C9.32062 8.96838 9.09101 8.73877 8.80777 8.73877C8.52453 8.73877 8.29492 8.96838 8.29492 9.25162C8.29492 9.53486 8.52453 9.76447 8.80777 9.76447Z" fill="#8F8F8F"/>
@@ -36,7 +36,7 @@ export const ChangePasswordFormField: GenerateChangePasswordFormField = (
     {
       containerClass: "mb-5",
       label: {
-        text: `${translate("setting.change_password_modal.new_password")}`,
+        text: `${translate("setting.change_password_modal.new_pasword")}`,
         htmlFor: "newPassword",
         className: "mb-[12px]",
       },
@@ -85,7 +85,7 @@ export const ChangePasswordFormField: GenerateChangePasswordFormField = (
       label: null,
       field: {
         type: Field.button,
-id:"button",
+        id: "button",
         text: `${translate("setting.change_password_modal.change_button")}`,
         inputType: "submit",
         className: "mt-[19px] rounded-lg hover:bg-none ",

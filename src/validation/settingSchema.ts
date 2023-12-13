@@ -46,27 +46,33 @@ export const generateAddReasonValidation = (translate: Function) => {
 // Validation for add reason
 export const generateProfileSettingValidation = (translate: Function) => {
   return yup.object().shape({
-    [SettingProfile.fullName]: yup.string().required("validation required"),
-    [SettingProfile.companyName]: yup.string().required("validation required"),
+    [SettingProfile.fullName]: yup.string().required(translate("validationMessages.required")),
+    [SettingProfile.companyName]: yup.string().required(translate("validationMessages.required")),
     [SettingProfile.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validation required")),
-    [SettingProfile.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validation required")),
-    [SettingProfile.website]: yup.string().required("validation required"),
-    [SettingProfile.mwstNumber]: yup.number().required("validation required"),
-    [SettingProfile.streetAddress]: yup
       .string()
-      .required("validation required"),
-    [SettingProfile.postCode]: yup.number().required("validation required"),
-    [SettingProfile.country]: yup.string().required("validation required"),
-    [SettingProfile.bankName]: yup.string().required("validation required"),
-    [SettingProfile.accountNumber]: yup
-      .number()
-      .required("validation required"),
-    [SettingProfile.IBAN_number]: yup.number().required("validation required"),
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate(translate("validationMessages.required"))),
+    [SettingProfile.mobileNumber]: yup
+      .string()
+      .min(11, translate("validationMessages.string.min"))
+      .required(translate(translate("validationMessages.required"))),
+    [SettingProfile.website]: yup.string().required(translate("validationMessages.required")),
+    [SettingProfile.mwstNumber]: yup.number().required(translate("validationMessages.required")),
+    "address": yup.object().shape({
+      [SettingProfile.streetAddress]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [SettingProfile.postCode]: yup.string().required(translate("validationMessages.required")),
+      [SettingProfile.city]: yup.string().required(translate("validationMessages.required")),
+      [SettingProfile.houseAddress]: yup.string().required(translate("validationMessages.required")),
+
+    }),
+    "bankDetails": yup.object().shape({
+      [SettingProfile.bankName]: yup.string().required(translate("validationMessages.required")),
+      [SettingProfile.accountNumber]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [SettingProfile.IBAN_number]: yup.string().required(translate("validationMessages.required")),
+    })
   });
 };

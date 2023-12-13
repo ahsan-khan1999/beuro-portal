@@ -12,6 +12,8 @@ export default function Document() {
       <body>
         <Main />
         <div id="backdrop"></div>
+        <div id='calendar'></div>
+
         <NextScript />
       </body>
     </Html>

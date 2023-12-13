@@ -17,11 +17,14 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
     [ChangePasswordField.newPassword]: yup
       .string()
       .required(translate("validation required"))
+      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
+
       .min(6, translate("validationMessages.string.min")),
 
     [ChangePasswordField.confirmNewPassword]: yup
       .string()
-      // .oneOf([yup.ref("password")], translate("validationMessages.mixed.oneOf"))
+      .oneOf([yup.ref("newPassword")], translate("validationMessages.mixed.oneOf"))
+      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
       .required(translate("validationMessages.required")),
   });
 };

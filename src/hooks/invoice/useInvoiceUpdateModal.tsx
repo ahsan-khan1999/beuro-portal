@@ -12,7 +12,7 @@ import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import React, { useEffect } from 'react'
 import { updateModalType } from "@/api/slices/globalSlice/global";
-export default function useInvoiceCreatedModal(invoiceCreated: Function) {
+export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error, invoiceDetails } = useAppSelector((state) => state.invoice);
   const { modal: { data } } = useAppSelector((state) => state.global);
@@ -78,8 +78,9 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
 
   console.log(errors);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, ["paymentType"]: staticEnums["PaymentType"][data.paymentType], id: invoiceDetails?.id, isInvoiceRecurring: false }
+  const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
+    const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring }
+
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
     if (res?.payload) invoiceCreated();
   };

@@ -1,5 +1,5 @@
 import { Layout } from "@/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import DashboardCard from "./Cards";
@@ -11,12 +11,12 @@ import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import MainCalender from "./calendar"
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
 
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
-
   const dashboardCards = [
     {
       icon: leadsIcon,
@@ -106,6 +106,8 @@ const AdminDashboard = () => {
     type: "None",
     location: "",
   });
+
+
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -144,7 +146,10 @@ const AdminDashboard = () => {
           );
         })}
       </div>
+      <div className="mt-[51px] grid grid-cols-1  gap-x-[18px]">
+        <MainCalender />
 
+      </div>
       <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] ">
         <div className="hidden 2xl:block">
           <FollowUpNotificationBar />

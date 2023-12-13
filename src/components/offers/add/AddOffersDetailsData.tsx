@@ -26,10 +26,10 @@ const EditOffersDetailsData = () => {
   const { t: translate } = useTranslation();
 
   const [tabType, setTabType] = useState<ComponentsType>(
-    offerDetails?.stage ? offerDetails?.stage :  ComponentsType.serviceAdded
+    offerDetails?.stage ? offerDetails?.stage :  ComponentsType.customerAdded
   );
   useEffect(() => {
-    setTabType(offerDetails?.stage ? offerDetails?.stage :  ComponentsType.serviceAdded)
+    setTabType(offerDetails?.stage ? offerDetails?.stage :  ComponentsType.customerAdded)
   }, [offerDetails?.id])
   const tabSection: tabArrayTypes[] = [
     {

@@ -11,19 +11,22 @@ import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { staticEnums } from "../../../utils/static";
-import { useTranslation } from "next-i18next";
-import { OfferDetailCardProps } from "@/types/offers";
+import { staticEnums } from '../../../utils/static';
 
-const OfferDetailsCard = ({
-  offerDetails,
-  offerDeleteHandler,
-  handleImageUpload,
-  handleNotes,
-  handleStatusUpdate,
-  handlePaymentStatusUpdate,
-}: OfferDetailCardProps) => {
-  console.log(offerDetails?.paymentType);
+interface OfferDetailCardProps {
+  offerDetails: OffersTableRowTypes
+  offerDeleteHandler: () => void
+  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+  handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
+  handleStatusUpdate: (id: string) => void
+  handlePaymentStatusUpdate: (id: string) => void;
+  handleSendEmail: () => void
+
+}
+import { useTranslation } from "next-i18next";
+import { OffersTableRowTypes } from "@/types/offers";
+
+const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload, handleNotes, handleStatusUpdate, handlePaymentStatusUpdate, handleSendEmail }: OfferDetailCardProps) => {
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -44,7 +47,7 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="flex gap-[22px]">
-          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] ">
+          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer " onClick={handleSendEmail}>
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
               {translate("offers.card_content.send_button")}

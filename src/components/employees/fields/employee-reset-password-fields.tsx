@@ -85,13 +85,8 @@ export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormFie
         label: null,
         field: {
           type: Field.button,
-<<<<<<< HEAD
           id: "button",
-          text: "Submit",
-=======
-id:"button",
           text: `${translate("employees.edit_password_modal.submit_button")}`,
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
           inputType: "submit",
           className: "mt-[19px] rounded-lg hover:bg-none",
           loading,

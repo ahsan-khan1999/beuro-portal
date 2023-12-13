@@ -13,11 +13,8 @@ import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordCha
 import PasswordSet from "@/base-components/ui/modals1/PasswordSet";
 import AddEmployeeForm from "../fields/add-employee-form";
 import TabSection from "@/base-components/ui/tab";
-<<<<<<< HEAD
 import { updateQuery } from "@/utils/update-query";
-=======
 import { useTranslation } from "next-i18next";
->>>>>>> 3cdd1e136fc5c84c6855aae82e5b40b61be4bd16
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddEmployeeDetails = () => {

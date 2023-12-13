@@ -332,6 +332,9 @@ export function formatDateReverse(date: string) {
 export function formatDateTimeToDate(date: string) {
   return moment(date).format("YYYY-MM-DD");
 }
+export function formatDateTimeToTime(date: string) {
+  return moment(date).format("hh:mm: A");
+}
 
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"])
@@ -417,8 +420,8 @@ export function setImageFieldValues(
   setValue: UseFormSetValue<FieldValues>,
   images: string[]
 ) {
-  if (images.length === 0) return;
-  images.forEach((element, idx) => {
+  if (images?.length === 0) return;
+  images?.forEach((element, idx) => {
     setValue(`upload_image${idx + 1}`, element);
   });
 }
@@ -435,7 +438,7 @@ export function setAddressFieldValues(
   setValue: UseFormSetValue<FieldValues>,
   images: string[]
 ) {
-  if (images.length === 0) return;
+  if (images?.length === 0) return;
   images.forEach((element, idx) => {
     console.log(element, "element", idx);
 

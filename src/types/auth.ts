@@ -65,6 +65,7 @@ export interface UserAddress {
   [AddressTypes.postalCode]: string;
   [AddressTypes.streetNumber]: string;
   [AddressTypes.houseNumber]: string;
+  [AddressTypes.country]: string;
 
 }
 export interface UserBankDetail {
