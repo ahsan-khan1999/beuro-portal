@@ -164,7 +164,7 @@ const LeadsDetailsData = () => {
         <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
+      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

@@ -75,7 +75,7 @@ export interface InvoiceCardContentProps {
 
 export interface InvoiceDetailsTableProps {
   collectiveInvoice: SubInvoiceTableRowTypes[];
-  handlePaymentStatusUpdate: (id: string, status: string) => void;
-  handleInvoiceStatusUpdate: (id: string, status: string) => void;
+  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
+  handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
 }

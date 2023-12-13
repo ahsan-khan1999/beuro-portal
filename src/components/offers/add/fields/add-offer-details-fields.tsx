@@ -1,7 +1,21 @@
 import { Field } from "@/enums/form";
-import { DivProps, FormField, GenerateLeadsCustomerFormField, GenerateOfferDateFormField, GenerateOffersFormField } from "@/types";
-import icon from "@/assets/svgs/Vector.svg"
-import { Control, FieldValue, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormRegister, UseFormWatch } from "react-hook-form";
+import {
+  DivProps,
+  FormField,
+  GenerateLeadsCustomerFormField,
+  GenerateOfferDateFormField,
+  GenerateOffersFormField,
+} from "@/types";
+import icon from "@/assets/svgs/Vector.svg";
+import {
+  Control,
+  FieldValue,
+  FieldValues,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
+  UseFormRegister,
+  UseFormWatch,
+} from "react-hook-form";
 import { staticEnums } from "@/utils/static";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
@@ -9,7 +23,20 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
-  { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails, lead, content, handleContentSelect, selectedContent, offerDetails },
+  {
+    customerType,
+    type,
+    customer,
+    onCustomerSelect,
+    customerDetails,
+    onCancel,
+    leadDetails,
+    lead,
+    content,
+    handleContentSelect,
+    selectedContent,
+    offerDetails,
+  },
   setValue
 ) => {
   const { t: translate } = useTranslation();
@@ -42,7 +69,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: offerDetails?.id && offerDetails?.type === "New Customer" || type === "New Customer",
+                    checked:
+                      (offerDetails?.id &&
+                        offerDetails?.type === "New Customer") ||
+                      type === "New Customer",
                   },
                 },
                 {
@@ -54,7 +84,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: offerDetails?.id && offerDetails?.type === "Existing Customer" || type === "Existing Customer"
+                    checked:
+                      (offerDetails?.id &&
+                        offerDetails?.type === "Existing Customer") ||
+                      type === "Existing Customer",
                   },
                 },
               ],
@@ -71,15 +104,15 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
-                {
+              options: Object.keys(staticEnums.CustomerType).map(
+                (item, key) => ({
                   value: item,
-                  label: item
-                }
-              )),
+                  label: item,
+                })
+              ),
 
               control,
-              value: offerDetails && offerDetails.customerID?.customerType
+              value: offerDetails && offerDetails.customerID?.customerType,
             },
           },
           {
@@ -98,8 +131,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
-
-
             },
           },
 
@@ -115,9 +146,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              value: offerDetails && offerDetails.customerID?.email
-
-
+              value: offerDetails && offerDetails.customerID?.email,
             },
           },
 
@@ -135,15 +164,15 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: offerDetails?.id ? offerDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
-
-
+              value: offerDetails?.id
+                ? offerDetails?.customerID?.phoneNumber
+                : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text:`${translate("offers.offer_details.mobile_number")}`,
+              text: `${translate("offers.offer_details.mobile_number")}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px]",
             },
@@ -154,12 +183,13 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: offerDetails?.id ? offerDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
+              value: offerDetails?.id
+                ? offerDetails?.customerID?.phoneNumber
+                : customerDetails && customerDetails?.mobileNumber,
             },
           },
-
-        ]
-      }
+        ],
+      },
     },
     {
       containerClass: "mt-5",
@@ -181,11 +211,15 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "content",
               name: "content",
-              options: content && content?.map((item, key) => (
-                { label: item?.contentName, value: item?.id }
-              )) || [],
+              options:
+                (content &&
+                  content?.map((item, key) => ({
+                    label: item?.contentName,
+                    value: item?.id,
+                  }))) ||
+                [],
               control,
-              value: offerDetails?.id && offerDetails?.content || "",
+              value: (offerDetails?.id && offerDetails?.content) || "",
 
               onItemChange: handleContentSelect && handleContentSelect(),
             },
@@ -221,8 +255,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-
-        className: "grid grid-cols-2  xl:grid-cols-3 gap-x-3 gap-y-5",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
@@ -240,8 +273,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Street Number",
               register,
-              value: offerDetails && offerDetails?.customerID?.address?.streetNumber
-
+              value:
+                offerDetails && offerDetails?.customerID?.address?.streetNumber,
             },
           },
 
@@ -256,20 +289,19 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.input,
               className:
                 "!p-4  !border-dark focus:!border-primary focus:!border-primary",
-
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: "Enter Your Post Code",
 
               register,
-              value: offerDetails && offerDetails?.customerID?.address?.postalCode
-
-
+              value:
+                offerDetails && offerDetails?.customerID?.address?.postalCode,
             },
           },
           {
             containerClass: "mb-0",
+
             label: {
               text: `${translate("offers.offer_details.country")}`,
               htmlFor: "address.country",
@@ -280,24 +312,17 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => (
-                {
-                  value: item,
-                  label: item
-                }
-              )),
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: item,
+              })),
               control,
-              value: offerDetails && offerDetails?.customerID?.address?.country
-
-
+              value: offerDetails && offerDetails?.customerID?.address?.country,
             },
           },
         ],
       },
     },
-
-
-
   ];
   // customer type
   const fieldIndex = formField.findIndex(
@@ -318,7 +343,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-
         type: Field.input,
         className:
           "!p-4 !!border-borderColor border border-dark focus:!border-primary",
@@ -327,14 +351,12 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         name: "companyName",
         placeholder: "Please Enter Company Name",
         register,
-        setValue: setValue
-
+        setValue: setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
     const divField = formField[fieldIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
-
       //@ts-expect-error
       divField.children.splice(fieldIndex + 3, 0, companyNameField);
     }
@@ -363,24 +385,23 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         type: Field.select,
         id: "customerID",
         name: "customerID",
-        options: customer?.map((item, key) => (
-          {
-            value: item.id,
-            label: item.fullName,
-          }
-        )),
+        options: customer?.map((item, key) => ({
+          value: item.id,
+          label: item.fullName,
+        })),
 
         control,
         onItemChange: onCustomerSelect,
-        value: offerDetails?.id ? offerDetails?.customerID?.id : customerDetails && customerDetails?.id,
-        setValue
+        value: offerDetails?.id
+          ? offerDetails?.customerID?.id
+          : customerDetails && customerDetails?.id,
+        setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
 
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-
       //@ts-expect-error
       divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
     }
@@ -408,31 +429,26 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         type: Field.select,
         id: "leadID",
         name: "leadID",
-        options: lead?.map((item, key) => (
-          {
-            value: item.id,
-            label: item.refID,
-          }
-        )),
+        options: lead?.map((item, key) => ({
+          value: item.id,
+          label: item.refID,
+        })),
 
         control,
         // onItemChange: onCustomerSelect,
         value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id,
         // setValue
-      }
-    }
+      },
+    };
     const divField = formField[fieldLeadIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
-
       //@ts-expect-error
       divField.children.splice(fieldLeadIndex + 2, 0, leadField);
     }
   }
 
-
   return formField;
 };
-
 
 export const AddDateFormField: GenerateOfferDateFormField = (
   register,
@@ -448,30 +464,38 @@ export const AddDateFormField: GenerateOfferDateFormField = (
       field: {
         type: Field.div,
         id: "div-field1",
-
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
-        children: generateDateChildren(register, count, OnClick, handleRemoveDateField, offerDetails)
-
+        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3",
+        children: generateDateChildren(
+          register,
+          count,
+          OnClick,
+          handleRemoveDateField,
+          offerDetails
+        ),
       },
     },
   ];
   return formField;
 };
 
-export const generateDateChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick: UseFieldArrayAppend<FieldValues, "date">, handleRemoveDateField: UseFieldArrayRemove, offerDetails: OffersTableRowTypes) => {
-  const dateformFields = []
+export const generateDateChildren = (
+  register: UseFormRegister<FieldValues>,
+  count: number,
+  OnClick: UseFieldArrayAppend<FieldValues, "date">,
+  handleRemoveDateField: UseFieldArrayRemove,
+  offerDetails: OffersTableRowTypes
+) => {
+  const dateformFields = [];
   for (let i = 0; i < count; i++) {
     dateformFields.push({
       containerClass: "mb-0 ",
 
       field: {
-
         type: Field.div,
         className: "grid grid-cols-2 gap-x-3",
         id: `date`,
         children: [
           {
-
             containerClass: "mb-0 ",
             label: {
               text: "Start Date",
@@ -486,12 +510,9 @@ export const generateDateChildren = (register: UseFormRegister<FieldValues>, cou
 
               register,
               dateType: "date",
-
-
             },
           },
           {
-
             containerClass: "mb-0 ",
             label: {
               text: "End Date",
@@ -508,27 +529,26 @@ export const generateDateChildren = (register: UseFormRegister<FieldValues>, cou
               register,
               dateType: "date",
             },
-          }
-        ]
+          },
+        ],
       },
-    })
+    });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-[15px]",
+    containerClass: "mb-0 mt-3 maxSize:mt-[33px]",
     field: {
       type: Field.button,
       id: "button",
       text: "",
       inputType: "submit",
       className:
-        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 my-5 p-4  w-[40px] h-[40px] text-white",
-      onClick: () => OnClick({ "startDate": "", "endDate": "" }),
-      icon: icon
+        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px] text-white",
+      onClick: () => OnClick({ startDate: "", endDate: "" }),
+      icon: icon,
     },
   });
-  return dateformFields
+  return dateformFields;
 };
-
 
 export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   register,
@@ -555,7 +575,6 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   return formField;
 };
 
-
 export const AddOfferDetailsDateFormField = (
   register: UseFormRegister<FieldValues>,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
@@ -580,12 +599,9 @@ export const AddOfferDetailsDateFormField = (
       dateType: "date",
 
       // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
-
     },
-
-  }
+  };
   const dateField2 = {
-
     containerClass: "mb-0 w-full",
     label: {
       text: "End Date",
@@ -602,12 +618,9 @@ export const AddOfferDetailsDateFormField = (
       register,
       dateType: "date",
       // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
-
     },
-  }
-  const fieldObj = { "startDate": dateField, "endDate": dateField2 }
-
+  };
+  const fieldObj = { startDate: dateField, endDate: dateField2 };
 
   return fieldObj;
 };
-

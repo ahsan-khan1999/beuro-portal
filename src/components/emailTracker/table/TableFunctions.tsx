@@ -18,9 +18,15 @@ const TableFunctions = ({
 
   return (
     <div className="flex justify-between items-center mb-4">
-      <h1 className="text-base lg:text-xl text-[#222B45] ">{translate("email_tracker.main_heading")}</h1>
+      <h1 className="text-base lg:text-xl text-[#222B45] ">
+        {translate("email_tracker.main_heading")}
+      </h1>
 
-      <EmailTrackerFilters filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
+      <EmailTrackerFilters
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
     </div>
   );
 };

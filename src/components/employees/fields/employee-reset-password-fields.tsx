@@ -60,7 +60,9 @@ export const EmployeeResetPasswordFieldsFormField: GenerateChangePasswordFormFie
       {
         containerClass: "mb-0",
         label: {
-          text: `${translate("employees.edit_password_modal.confirm_password")}`,
+          text: `${translate(
+            "employees.edit_password_modal.confirm_password"
+          )}`,
           htmlFor: "confirmNewPassword",
           className: "mb-[12px]",
         },

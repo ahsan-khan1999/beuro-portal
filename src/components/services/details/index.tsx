@@ -15,15 +15,17 @@ const ServicesDetails = () => {
     handleSubmit,
     onSubmit,
     errors,
-    
   } = useServiceDetail(true);
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData serviceDetail={serviceDetail} isUpdate={isUpdate} deleteHandler={deleteHandler} />
+        <DetailsData
+          serviceDetail={serviceDetail}
+          isUpdate={isUpdate}
+          // deleteHandler={deleteHandler}
+        />
       </DetailsCard>
       <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
-
         <div className="xl:col-span-2">
           <ServicesForm
             isUpdate={isUpdate}

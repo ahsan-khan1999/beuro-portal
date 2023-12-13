@@ -296,17 +296,17 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols-3  gap-x-3 ",
+          className: "grid grid-cols- mlg:grid-cols-2 gap-x-3",
           children: [
             {
-              containerClass: "grid col-span-2",
+              containerClass: "",
               field: {
                 type: Field.div,
                 id: "div-field",
-                className: "flex flex-col ",
+                className: "flex flex-col",
                 children: [
                   {
-                    containerClass: "mb-0 ",
+                    containerClass: "mb-0",
                     label: {
                       text: "Discount Description",
                       htmlFor: "discountDescription",
@@ -332,7 +332,6 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       children: [
                         {
                           containerClass: "mb-0 col-span-1 ",
-
                           field: {
                             type: Field.span,
                             id: "button",
@@ -420,7 +419,6 @@ const generateServiceCalulationChildren = (
         name: "taxPercentage",
         control,
         className: "h-10 !px-8",
-
       },
     };
   }

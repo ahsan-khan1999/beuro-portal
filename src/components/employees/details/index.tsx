@@ -17,7 +17,7 @@ const EmploysDetails = () => {
     onSubmit,
     handleSubmit,
     errors,
-    deleteHandler
+    deleteHandler,
   } = useEmployeeDetail(true);
 
   return (
@@ -43,13 +43,11 @@ const EmploysDetails = () => {
               onSubmit={onSubmit}
               errors={errors}
             />
-
           </div>
           <div className="xl:col-span-1">
             <SideCard />
           </div>
         </div>
-
       </Layout>
 
       {renderModal()}

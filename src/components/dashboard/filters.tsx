@@ -1,24 +1,20 @@
 import SelectField from "@/base-components/filter/fields/select-field";
+import { DashboardFiltersToggle } from "@/enums/dashboard";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 
-export enum select {
-  month,
-  week,
-}
 export default function DashboardFilters() {
   const [isOpen, setIsOpen] = useState({
-    [select.month]: false,
-    [select.week]: false,
+    [DashboardFiltersToggle.month]: false,
+    [DashboardFiltersToggle.week]: false,
   });
 
   const { t: translate } = useTranslation();
 
-  const handleSelectToggle = (type: select) => {
+  const handleSelectToggle = (type: DashboardFiltersToggle) => {
     setIsOpen((prev) => ({
-      [select.month]: type === select.month ? !prev[select.month] : false,
-      [select.week]: type === select.week ? !prev[select.week] : false,
-      [type]: !prev[type],
+      ...prev,
+      [type]: !isOpen[type],
     }));
   };
 
@@ -28,8 +24,8 @@ export default function DashboardFilters() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen[select.week]}
-        setIsOpen={() => handleSelectToggle(select.week)}
+        isOpen={isOpen[DashboardFiltersToggle.week]}
+        setIsOpen={() => handleSelectToggle(DashboardFiltersToggle.week)}
         options={[
           `${translate("dashboard_detail.options_labels.week")}`,
           `${translate("dashboard_detail.options_labels.month")}`,
@@ -42,8 +38,8 @@ export default function DashboardFilters() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen[select.month]}
-        setIsOpen={() => handleSelectToggle(select.month)}
+        isOpen={isOpen[DashboardFiltersToggle.month]}
+        setIsOpen={() => handleSelectToggle(DashboardFiltersToggle.month)}
         options={[
           `${translate("dashboard_detail.months.jan")}`,
           `${translate("dashboard_detail.months.feb")}`,

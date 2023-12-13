@@ -144,7 +144,6 @@
       "required": "This is required field ",
       "oneOf": "Password must match ",
       "notOneOf": "Passwort muss different"
-
     },
     "string": {
       "email": "Please enter a valid email",
@@ -724,6 +723,15 @@
       "attachments": "Attachments",
       "back_button": "Back",
       "next_button": "Next"
+    },
+    "pdf_card_details": {
+      "heading": "Contract Details",
+      "send_via_post": "Send via Post",
+      "send_via_email": "Send via Email",
+      "contract_id": "Contarct ID",
+      "worker": "Worker",
+      "content_name": "Content Name",
+      "contract_status": "Contarct Status"
     }
   },
   "content": {
@@ -937,6 +945,24 @@
       "heading": " Download Successful ",
       "sub_heading": "Great job on successfully downloading your payment history!",
       "button": "Done"
+    },
+    "PDF_HEADER": {
+      "offer_no":"OFFER NO",
+      "offer_date":"OFFER DATE",
+      "created_by":"CREATED BY",
+      "email":"Email",
+      "phone":"Phone"
+    },
+    "PDF_FOOTER": {
+      "sub_total":"Sub Total",
+      "tax":"Tax%",
+      "discount":"Discount",
+      "grand_toal":" Grand Total"
+    },
+    "PDF_BUTTONS":{
+      "back_button":"Back",
+      "send_via_email":"Send via Email",
+      "send_via_post":"Send via Post"
     }
   },
   "offers": {

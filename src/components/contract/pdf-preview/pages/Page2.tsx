@@ -123,17 +123,15 @@ const Page2 = () => {
   };
 
   const handleSaveClick = () => {
-    // Save the edited text or perform any necessary action.
     setIsEditing(false);
   };
 
   const handleCancelClick = () => {
-    // Cancel editing and revert to the original text.
     setIsEditing(false);
   };
 
   return (
-    <>
+    <div>
       <PdfHeader />
       <div className="px-[80px] flex flex-col bg-white">
         <div className="flex justify-between items-center mt-5 mb-[50px]">
@@ -234,7 +232,7 @@ const Page2 = () => {
         </div>
       </div>
       <PdfFooter />
-    </>
+    </div>
   );
 };
 

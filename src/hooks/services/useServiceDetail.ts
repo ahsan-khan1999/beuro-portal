@@ -68,7 +68,7 @@ const useServiceDetail = (stage: boolean) => {
     errors,
     handlePreviousClick,
     handleUpdateCancel,
-    translate
+    translate,
   };
 };
 export default useServiceDetail;

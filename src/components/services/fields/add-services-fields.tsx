@@ -1,13 +1,16 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate,translate } =
+  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
     useServiceDetail(false);
 
+  const { t: translate } = useTranslation();
+  
   return (
     <div
       className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${

@@ -7,6 +7,7 @@ import { Lead } from "@/types/leads";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { useTranslation } from "next-i18next";
+
 const ImageSlider = ({ onClose, details }: { onClose: () => void, details: string[] }) => {
   // const { leadDetails } = useAppSelector(state => state.lead)
   
@@ -14,6 +15,7 @@ const ImageSlider = ({ onClose, details }: { onClose: () => void, details: strin
     noOfThumbNails: 8,
     images: details?.map((item) => ({ imageSrc: item }))
   };
+  
   const { t: translate } = useTranslation();
 
   return (

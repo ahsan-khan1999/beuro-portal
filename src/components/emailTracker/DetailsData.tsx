@@ -12,10 +12,10 @@ import { formatDateReverse } from "@/utils/utility";
 
 const DetailsData = ({
   handleConfirmDeletion,
-  emailDetails
+  emailDetails,
 }: {
   handleConfirmDeletion: Function;
-  emailDetails: TableRowEmailTracker | null
+  emailDetails: TableRowEmailTracker | null;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -80,7 +80,6 @@ const DetailsData = ({
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
               {emailDetails?.email}
-
             </span>
           </div>
           <div>
@@ -96,8 +95,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-            {/* {formatDateReverse(emailDetails?.viewedAt as string)} */}
-
+              {/* {formatDateReverse(emailDetails?.viewedAt as string)} */}
             </span>
           </div>
         </div>

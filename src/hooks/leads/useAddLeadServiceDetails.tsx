@@ -12,18 +12,23 @@ import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 
-export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHandleBack: (currentComponent: ComponentsType) => void, onHandleNext: (currentComponent: ComponentsType) => void }) => {
+export const useAddLeadServiceDetails = ({
+  onHandleBack,
+  onHandleNext,
+}: {
+  onHandleBack: (currentComponent: ComponentsType) => void;
+  onHandleNext: (currentComponent: ComponentsType) => void;
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { service } = useAppSelector((state) => state.service);
 
-
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }))
-  }, [])
+    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+  }, []);
 
   const {
     register,
@@ -38,23 +43,28 @@ export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHan
   });
   useMemo(() => {
     if (leadDetails.id) {
-      console.log(formatDateTimeToDate(leadDetails?.desireDate),"le");
-      
+      console.log(formatDateTimeToDate(leadDetails?.desireDate), "le");
+
       reset({
         ...leadDetails,
-        desireDate:formatDateTimeToDate(leadDetails?.desireDate)
-      })
+        desireDate: formatDateTimeToDate(leadDetails?.desireDate),
+      });
     }
-  }, [leadDetails.id])
-  const fields = AddLeadServiceDetailsFormField(register, loading, control, onHandleBack, trigger, service,leadDetails
+  }, [leadDetails.id]);
+  const fields = AddLeadServiceDetailsFormField(
+    register,
+    loading,
+    control,
+    onHandleBack,
+    trigger,
+    service,
+    leadDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalAdd }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
     if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
 
-    // dispatch(loginUser({ data, router, setError, translate }));
-    // onHandleNext(ComponentsType.additionalEdit);
   };
   return {
     fields,
@@ -63,6 +73,6 @@ export const useAddLeadServiceDetails = ({ onHandleBack, onHandleNext }: { onHan
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

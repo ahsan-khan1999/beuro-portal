@@ -9,7 +9,9 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
       {
         containerClass: "mb-5",
         label: {
-          text: `${translate("employees.create_new_password_modal.create_new_password")}`,
+          text: `${translate(
+            "employees.create_new_password_modal.create_new_password"
+          )}`,
           htmlFor: "newPassword",
           className: "mb-[12px]",
         },
@@ -33,7 +35,9 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
       {
         containerClass: "mb-0",
         label: {
-          text: `${translate("employees.create_new_password_modal.confirm_password")}`,
+          text: `${translate(
+            "employees.create_new_password_modal.confirm_password"
+          )}`,
           htmlFor: "confirmNewPassword",
           className: "mb-[12px]",
         },
@@ -58,8 +62,10 @@ export const EmployeeCreateNewPasswordFieldsFormField: GenerateChangePasswordFor
         label: null,
         field: {
           type: Field.button,
-id:"button",
-          text: `${translate("employees.create_new_password_modal.submit_button")}`,
+          id: "button",
+          text: `${translate(
+            "employees.create_new_password_modal.submit_button"
+          )}`,
           inputType: "submit",
           className: "mt-[19px] rounded-lg",
           loading,

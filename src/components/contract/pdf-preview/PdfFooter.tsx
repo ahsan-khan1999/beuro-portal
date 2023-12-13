@@ -32,7 +32,7 @@ const PdfFooter = () => {
 
       <div className="absolute bottom-5 right-[80px]">
         <span className="text-[#1E1E1E] text-[14px] font-medium mr-[10px]">
-          Page{" "}
+          Page
         </span>
         <span className="text-[#1E1E1E] text-[14px] font-medium">1/2 </span>
       </div>

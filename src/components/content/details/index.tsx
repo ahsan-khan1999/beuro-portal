@@ -5,10 +5,14 @@ import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
 
 const ContentDetails = () => {
-  const { contentDetails,contentDeleteHandler,renderModal } = useContentDetail();
+  const { contentDetails, contentDeleteHandler, renderModal } =
+    useContentDetail();
   return (
     <Layout>
-      <ContentCard contentDetails={contentDetails} contentDeleteHandler={contentDeleteHandler}/>
+      <ContentCard
+        contentDetails={contentDetails}
+        contentDeleteHandler={contentDeleteHandler}
+      />
 
       <div className=" mt-7">
         <ContentDetailsData contentDetails={contentDetails} />

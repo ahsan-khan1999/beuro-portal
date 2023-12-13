@@ -13,7 +13,7 @@ import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { offerDetails } = useAppSelector(state => state.offer)
+  const { offerDetails } = useAppSelector((state) => state.offer);
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
@@ -37,9 +37,15 @@ const EditOffersDetails = () => {
     [ModalType.SHARE_IMAGES]: <ShareImages onClose={onClose} />,
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Offer"}/>
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={handleImageSlider}
+        type={"Offer"}
+      />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={offerDetails} />,
+    [ModalType.IMAGE_SLIDER]: (
+      <ImageSlider onClose={onClose} details={offerDetails} />
+    ),
   };
 
   const renderModal = () => {
@@ -47,7 +53,8 @@ const EditOffersDetails = () => {
   };
 
   // const { handleImagesUpload } = useOffers();
-  const handleImagesUpload = () => { }
+  // const handleImagesUpload = () => {};
+
   return (
     <>
       <Layout>
