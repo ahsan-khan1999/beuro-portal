@@ -42,7 +42,9 @@ export default function Payments() {
 
   // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.SELECT_MONTH]: <MonthSelect onClose={onClose} handleDownload={handleDownload}/>,
+    [ModalType.SELECT_MONTH]: (
+      <MonthSelect onClose={onClose} handleDownload={handleDownload} />
+    ),
     [ModalType.DOWNLOAD_MODAL]: (
       <DownloadModal
         onClose={onClose}

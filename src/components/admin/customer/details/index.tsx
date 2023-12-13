@@ -33,14 +33,15 @@ const CustomerDetails = () => {
     dispatch(updateModalType(ModalType.ARE_YOU_SURE_CUSTOMER));
   };
 
-
   const handleCreated = () => {
     dispatch(updateModalType(ModalType.NONE));
     dispatch(updateModalType(ModalType.CREATION));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.ARE_YOU_SURE_CUSTOMER]: <WarningModal handleCreated={handleCreated} onClose={onClose} />,
+    [ModalType.ARE_YOU_SURE_CUSTOMER]: (
+      <WarningModal handleCreated={handleCreated} onClose={onClose} />
+    ),
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}

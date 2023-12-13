@@ -68,7 +68,7 @@ const ReceiptDetailsData = () => {
         <div className="flex justify-between items-center">
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Offer ID:
+              Offer ID:ReceiptDetailsData
             </span>
             <span className="text-base text-[#4A13E7] font-medium">A-2000</span>
           </div>

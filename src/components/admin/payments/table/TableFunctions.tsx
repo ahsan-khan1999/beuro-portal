@@ -10,7 +10,7 @@ const TableFunctions = ({ handleSelectMonth }: SelectMonthProps) => {
       <h1 className="text-xl text-[#222B45] ">
         {translate("admin.payment_history.heading")}
       </h1>
-      <CustomerFilter handleSelectMonth={handleSelectMonth}/>
+      <CustomerFilter handleSelectMonth={handleSelectMonth} />
     </div>
   );
 };

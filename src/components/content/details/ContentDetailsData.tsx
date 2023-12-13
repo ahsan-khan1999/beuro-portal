@@ -78,7 +78,6 @@ const ContentDetailsData = ({
       <OfferContentEditDetails
         onClick={handleEdit}
         contentDetail={contentDetails}
-        
       />
     ),
     [ComponentsType.confirmationContent]: (
@@ -204,8 +203,7 @@ const ContentDetailsData = ({
         ))}
       </div>
 
-      {/* Second Section: Rendered Components */}
-      <div className="flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-4 overflow-scroll">
+      <div className="flex flex-col gap-y-5 w-full h-[650px] xl:mt-0 mt-4 overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

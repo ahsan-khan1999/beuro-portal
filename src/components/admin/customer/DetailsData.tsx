@@ -21,7 +21,7 @@ const DetailsData = ({
 
   const handleSecondSvgClick = () => {
     setToggleSvg(false);
-    handleAreYouSure()
+    handleAreYouSure();
     setButtonText("Make Infinite");
   };
 

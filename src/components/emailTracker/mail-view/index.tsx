@@ -10,7 +10,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { useEffect } from "react"
+import { useEffect } from "react";
 import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
 import { CustomerPromiseActionType } from "@/types/customer";
 const ViewMails = () => {
@@ -24,14 +24,21 @@ const ViewMails = () => {
   const { t: translate } = useTranslation();
   useEffect(() => {
     if (id) {
-      dispatch(readEmailDetail({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
-        // dispatch(setCustomerDetails(res.payload))
-      })
+      dispatch(readEmailDetail({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          // dispatch(setCustomerDetails(res.payload))
+        }
+      );
     }
-  }, [id])
+  }, [id]);
 
   const handleConfirmDeletion = () => {
-    dispatch(updateModalType({ type: ModalType.CONFIRM_DELETION, data: { refId: emailDetails?.id } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.CONFIRM_DELETION,
+        data: { refId: emailDetails?.id },
+      })
+    );
   };
 
   const handleDelete = () => {
@@ -43,19 +50,24 @@ const ViewMails = () => {
   };
 
   const routeHandler = async () => {
-    console.log(emailDetails,"emailDetails");
-    
-    const res = await dispatch(deleteEmail({ data: emailDetails, router, translate }))
-    if (res?.payload) router.push("/email-tracker");
+    console.log(emailDetails, "emailDetails");
 
+    const res = await dispatch(
+      deleteEmail({ data: emailDetails, router, translate })
+    );
+    if (res?.payload) router.push("/email-tracker");
   };
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
         handleDelete={handleDelete}
         onClose={onClose}
-        modelHeading={translate("email_tracker.email_confirmation_modal.main_heading")}
-        subHeading={translate("email_tracker.email_confirmation_modal.sub_heading")}
+        modelHeading={translate(
+          "email_tracker.email_confirmation_modal.main_heading"
+        )}
+        subHeading={translate(
+          "email_tracker.email_confirmation_modal.sub_heading"
+        )}
       />
     ),
     [ModalType.DELETE_MAIL]: (
@@ -76,7 +88,10 @@ const ViewMails = () => {
     <>
       <Layout>
         <DetailsCard>
-          <DetailsData handleConfirmDeletion={handleConfirmDeletion} emailDetails={emailDetails} />
+          <DetailsData
+            handleConfirmDeletion={handleConfirmDeletion}
+            emailDetails={emailDetails}
+          />
         </DetailsCard>
         <div className="flex mt-7">
           <EmailDetailsData emailDetails={emailDetails} />

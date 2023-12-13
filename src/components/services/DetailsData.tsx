@@ -11,11 +11,11 @@ import { useTranslation } from "next-i18next";
 const DetailsData = ({
   serviceDetail,
   isUpdate,
-  deleteHandler
-}: {
+}: // deleteHandler,
+{
   serviceDetail: Service;
   isUpdate: boolean;
-  deleteHandler: () => void
+  // deleteHandler: () => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -32,12 +32,18 @@ const DetailsData = ({
             />
           )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            {isUpdate ? "Services Details" : `${translate("services.card_content.main_heading")}`}
+            {isUpdate
+              ? "Services Details"
+              : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
         <div className="flex items-center gap-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={deleteHandler}/>
+          <Image
+            src={deleteIcon}
+            alt="deleteIcon"
+            // onClick={deleteHandler}
+          />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -50,7 +56,7 @@ const DetailsData = ({
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
-          {translate("services.card_content.created_by")}:
+            {translate("services.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{serviceDetail?.createdBy?.fullName}
             </span>
