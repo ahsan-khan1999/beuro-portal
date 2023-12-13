@@ -10,7 +10,7 @@ const DetailsPdfPriview = () => {
   return (
     <Layout>
       <PdfCard />
-      <div className="mt-[30px]">
+      <div className=" flex flex-col">
         <Page1 />
       </div>
 

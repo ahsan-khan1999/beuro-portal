@@ -40,7 +40,7 @@ export const DropDown = ({
 
   return (
     <div
-      className={`  flex flex-col w-full gap-y-2 ${
+      className={`flex flex-col w-full gap-y-2 ${
         dropDownDisabled ? "pointer-events-none" : ""
       }`}
       ref={dropdownRef}

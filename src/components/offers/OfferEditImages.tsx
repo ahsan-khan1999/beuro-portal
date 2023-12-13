@@ -15,7 +15,7 @@ const OfferEditImages = ({
   shareImgModal,
   handleImagesUpload,
   tabType,
-  handleImageSlider
+  handleImageSlider,
 }: {
   shareImgModal: Function;
   handleImagesUpload: (
@@ -23,7 +23,7 @@ const OfferEditImages = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   tabType: number;
-  handleImageSlider: () => void
+  handleImageSlider: () => void;
 }) => {
   const offersImgs = [
     leadsDetailsImg1,
@@ -31,7 +31,7 @@ const OfferEditImages = ({
     leadsDetailsImg3,
     leadsDetailsImg4,
   ];
-  const { offerDetails } = useAppSelector(state => state.offer)
+  const { offerDetails } = useAppSelector((state) => state.offer);
 
   const { t: translate } = useTranslation();
   return (
@@ -44,18 +44,21 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${offerDetails?.images?.length > 0 ? 'cursor-pointer' : 'cursor-default'}  `}
+            className={`${
+              offerDetails?.images?.length > 0
+                ? "cursor-pointer"
+                : "cursor-default"
+            }  `}
             onClick={() => offerDetails?.images?.length > 0 && shareImgModal()}
           />
         </div>
-        <div className="bg-[#4A13E7] h-1 "></div>
-        <div className="grid grid-cols-2 gap-[14px] p-3">
+        <div className="grid grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
           {offerDetails?.images?.map((item, index) => (
             <Image
               src={item}
               key={index}
               alt="leads_images"
-              className="w-[166px] rounded-lg"
+              className="w-auto h-auto rounded-lg"
               height={106}
               width={106}
             />
@@ -63,7 +66,16 @@ const OfferEditImages = ({
         </div>
 
         <div className="flex justify-between items-center mx-[13px] pb-3">
-          <p className={`text-[12px] font-normal text-[#4A13E7] ${offerDetails?.images?.length > 0 ? 'cursor-pointer' : 'cursor-default'}   `} onClick={() => offerDetails?.images?.length > 0 && handleImageSlider()}>
+          <p
+            className={`text-[12px] font-normal text-[#4A13E7] ${
+              offerDetails?.images?.length > 0
+                ? "cursor-pointer"
+                : "cursor-default"
+            }   `}
+            onClick={() =>
+              offerDetails?.images?.length > 0 && handleImageSlider()
+            }
+          >
             {translate("offers.side_images.views")}
           </p>
           <span

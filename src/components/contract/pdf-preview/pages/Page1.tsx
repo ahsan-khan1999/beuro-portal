@@ -3,12 +3,16 @@ import React, { useState } from "react";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import PdfHeader from "../PdfHeader";
 import PdfFooter from "../PdfFooter";
+import { useTranslation } from "next-i18next";
 
 const Page1 = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const { t: translate } = useTranslation();
+
   const [text, setText] = useState(
     "Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken"
   );
+
   const [tempText, setTempText] = useState(text);
 
   const handleEditClick = () => {
@@ -24,8 +28,9 @@ const Page1 = () => {
     setIsEditing(false);
     setTempText(text);
   };
+
   return (
-    <>
+    <div>
       <PdfHeader />
       <div className="px-[80px] flex flex-col bg-white">
         <div className="flex justify-between items-center mt-5 mb-[37px]">
@@ -41,14 +46,16 @@ const Page1 = () => {
             </span>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <div>
-              <span className="text-[#000] text-base font-medium">Email:</span>
+          <div className="flex flex-col gap-y-1">
+            <div className="flex gap-x-3">
+              <span className="text-[#000] text-base font-medium">
+                {translate("common.PDF_HEADER.email")}:
+              </span>
               <span className="text-[#000] text-base font-medium">
                 karinsch242@gmail.com
               </span>
             </div>
-            <div>
+            <div className="flex gap-x-3">
               <span className="text-[#404040] text-base font-medium">
                 Phone:
               </span>
@@ -305,7 +312,7 @@ const Page1 = () => {
         </div>
       </div>
       <PdfFooter />
-    </>
+    </div>
   );
 };
 

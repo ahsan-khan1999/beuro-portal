@@ -10,15 +10,12 @@ const PdfPriview = () => {
   return (
     <Layout>
       <PdfCard />
-      {/* <div className="mt-[30px]">
+      <div className="flex flex-col gap-y-[30px] mt-[30px] h-[650px] overflow-y-scroll">
         <Page1 />
-      </div>
-
-      <div className="mt-[30px]">
         <Page2 />
         <PdfButtons />
-      </div> */}
-      <Pdf />
+      </div>
+      {/* <Pdf /> */}
     </Layout>
   );
 };

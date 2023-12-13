@@ -8,7 +8,15 @@ import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
-const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePaymentStatusUpdate }: { collectiveInvoice: SubInvoiceTableRowTypes[], handlePaymentStatusUpdate: (id: string,status:string,type:string) => void, handleInvoiceStatusUpdate: (id: string,status:string,type:string) => void }) => {
+const TableRows = ({
+  collectiveInvoice,
+  handleInvoiceStatusUpdate,
+  handlePaymentStatusUpdate,
+}: {
+  collectiveInvoice: SubInvoiceTableRowTypes[];
+  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
+  handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
+}) => {
   const router = useRouter();
   return (
     <div>
@@ -38,29 +46,20 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
               </div>
             </span>
 
-<<<<<<< HEAD
-            <span className="px-6 py-4 bg-white ">
-=======
             <span className="py-4">
->>>>>>> b977dd00e20c13bb717e8a300d7bc4d1aaa9d982
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
                   item: item,
                 }))}
                 selectedItem={item.paymentType}
-<<<<<<< HEAD
-                onItemSelected={(status) => handlePaymentStatusUpdate(item.id,status,"reciept")}
-                dropDownClassName={`${staticEnums['PaymentType'][item.paymentType] === 0 ? 'bg-[#45C769]' : 'bg-[#4A13E7]'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
-=======
                 onItemSelected={(status) =>
-                  handlePaymentStatusUpdate(item.id, status)
+                  handlePaymentStatusUpdate(item.id, status, "reciept")
                 }
                 dropDownClassName={`${
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
                 }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
->>>>>>> b977dd00e20c13bb717e8a300d7bc4d1aaa9d982
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
@@ -71,20 +70,16 @@ const TableRows = ({ collectiveInvoice, handleInvoiceStatusUpdate, handlePayment
                   (item) => ({ item: item })
                 )}
                 selectedItem={item.invoiceStatus}
-<<<<<<< HEAD
-                onItemSelected={(status) => handleInvoiceStatusUpdate(item.id,status,"reciept")}  
-                dropDownClassName={`${staticEnums['InvoiceStatus'][item.invoiceStatus] === 0 ? 'bg-[#45C769]' : staticEnums['InvoiceStatus'][item.invoiceStatus] === 2 ? 'bg-[#4A13E7]' : 'bg-red'}  w-fit rounded-lg px-4 py-[3px] flex items-center`}
-
-=======
                 onItemSelected={(status) =>
-                  handleInvoiceStatusUpdate(item.id, status)
+                  handleInvoiceStatusUpdate(item.id, status, "reciept")
                 }
                 dropDownClassName={`${
                   staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
                     ? "bg-[#45C769]"
-                    : "bg-[#4A13E7]"
+                    : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
+                    ? "bg-[#4A13E7]"
+                    : "bg-red"
                 }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
->>>>>>> b977dd00e20c13bb717e8a300d7bc4d1aaa9d982
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />

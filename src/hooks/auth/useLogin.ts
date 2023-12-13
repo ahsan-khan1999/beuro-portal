@@ -24,7 +24,7 @@ export const useLoginForm = () => {
   });
   const fields = generateLoginFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }))
+    dispatch(loginUser({ data, router, setError, translate }));
     // router.push("/dashboard")
   };
   return {
@@ -32,6 +32,7 @@ export const useLoginForm = () => {
     onSubmit,
     handleSubmit,
     errors,
-    error,translate
+    error,
+    translate,
   };
 };

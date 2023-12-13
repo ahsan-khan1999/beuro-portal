@@ -4,7 +4,7 @@ import React from "react";
 const TableLayout = ({ children }: detailScreenCardsLayout) => {
   return (
     <div className="overflow-hidden">
-      <p className="text-[16px] mlg:hidden block mb-2">
+      <p className="text-[16px] mlg:hidden block mb-2 mt-3">
         <span className="text-red-600 font-bold">Note: </span>Drag to scroll on
         the table
       </p>

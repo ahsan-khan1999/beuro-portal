@@ -13,7 +13,7 @@ const AditionalAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.addititonal_details.main_heading")}
+          {translate("offers.additional_details.main_heading")}
         </h2>
         <button
           onClick={() => router.push("/offers")}

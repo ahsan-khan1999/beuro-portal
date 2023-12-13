@@ -21,11 +21,11 @@ export const Layout = ({ children }: MyComponentProp) => {
 
       <main className="bg-[#F3F3F3]">
         <Header />
-        <div className="grid grid-cols-[247px_minmax(0px,_1fr)] gap-x-[30px] mr-5 mt-[90px]">
-          {/* <div className="h-screen"> */}
-            <SideBar />
-          {/* </div> */}
-          <div className="w-full">{children}</div>
+        <div className="flex mt-[90px]">
+          <SideBar />
+          <div className="ml-[272px] w-full overflow-y-scroll  mr-5">
+            {children}
+          </div>
         </div>
       </main>
     </>

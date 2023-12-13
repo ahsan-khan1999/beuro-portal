@@ -20,5 +20,4 @@ function Main(props: props) {
   return <div ref={calendarRef as any} className="full-calendar"></div>;
 }
 
-
 export default Main;

@@ -275,8 +275,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               id: "date",
               name: "date",
               register,
-              dateType:"date"
-
+              dateType: "date",
             },
           },
           {
@@ -292,8 +291,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               id: "date",
               name: "date",
               register,
-              dateType:"date"
-
+              dateType: "date",
             },
           },
         ],

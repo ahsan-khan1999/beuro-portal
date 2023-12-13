@@ -78,7 +78,6 @@ export const useServiceOfferEditDetail = ({
   const discountAmount = watch("discountAmount");
   const taxPercentage = watch("taxPercentage");
 
-
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
     const selectedService: Service[] = service.filter(
@@ -109,7 +108,12 @@ export const useServiceOfferEditDetail = ({
         0
       ) || 0;
 
-    let taxAmount = isTax && taxType === "0" ? calculateTax(totalPrices, 7.7) : isTax && taxType === "1" ? calculateTax(totalPrices, data?.taxPercentage || 0) : 0;
+    let taxAmount =
+      isTax && taxType === "0"
+        ? calculateTax(totalPrices, 7.7)
+        : isTax && taxType === "1"
+        ? calculateTax(totalPrices, data?.taxPercentage || 0)
+        : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -249,6 +253,6 @@ export const useServiceOfferEditDetail = ({
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

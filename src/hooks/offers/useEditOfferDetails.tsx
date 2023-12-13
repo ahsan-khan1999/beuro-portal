@@ -1,5 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -8,10 +13,7 @@ import {
   AddOfferDetailsFormField,
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
-import {
-  generateOfferDetailsValidationSchema,
-} from "@/validation/offersSchema";
-import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
+import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   readCustomer,
@@ -20,15 +22,26 @@ import {
 import { updateQuery } from "@/utils/update-query";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
-import { createOffer, readOfferDetails, setOfferDetails } from "@/api/slices/offer/offerSlice";
-import { CustomerPromiseActionType, OfferPromiseActionType } from "@/types/customer";
+import {
+  createOffer,
+  readOfferDetails,
+  setOfferDetails,
+} from "@/api/slices/offer/offerSlice";
+import {
+  CustomerPromiseActionType,
+  OfferPromiseActionType,
+} from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 
-export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
+export const useEditOfferDetails = ({
+  handleNext,
+}: {
+  handleNext: (currentComponent: EditComponentsType) => void;
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { offer } = router.query
+  const { offer } = router.query;
 
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -39,7 +52,6 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
   const { content } = useAppSelector((state) => state.content);
 
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
-
 
   const onCancel = () => {
     router.pathname = "/offers";
@@ -60,31 +72,33 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
   });
   useEffect(() => {
     if (offer) {
-      dispatch(readOfferDetails({ params: { filter: offer } })).then((res: OfferPromiseActionType) => {
-
-        dispatch(setOfferDetails({ ...res.payload, "type": "Existing Customer" }))
-        reset({
-          type: "Existing Customer",
-          customerID: res?.payload?.customerID?.id,
-          leadID: res?.payload?.leadID?.id,
-          customerType: res?.payload?.customerID?.customerType,
-          fullName: res?.payload?.customerID?.fullName,
-          email: res?.payload?.customerID?.email,
-          phoneNumber: res?.payload?.customerID?.phoneNumber,
-          mobileNumber: res?.payload?.customerID?.mobileNumber,
-          content: res?.payload?.content?.id,
-          title: res?.payload?.title,
-          address: res?.payload?.customerID?.address,
-          date: res?.payload?.date
-        })
-      })
+      dispatch(readOfferDetails({ params: { filter: offer } })).then(
+        (res: OfferPromiseActionType) => {
+          dispatch(
+            setOfferDetails({ ...res.payload, type: "Existing Customer" })
+          );
+          reset({
+            type: "Existing Customer",
+            customerID: res?.payload?.customerID?.id,
+            leadID: res?.payload?.leadID?.id,
+            customerType: res?.payload?.customerID?.customerType,
+            fullName: res?.payload?.customerID?.fullName,
+            email: res?.payload?.customerID?.email,
+            phoneNumber: res?.payload?.customerID?.phoneNumber,
+            mobileNumber: res?.payload?.customerID?.mobileNumber,
+            content: res?.payload?.content?.id,
+            title: res?.payload?.title,
+            address: res?.payload?.customerID?.address,
+            date: res?.payload?.date,
+          });
+        }
+      );
     }
   }, [offer]);
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }))
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }))
-  }, [])
-
+    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }));
+    dispatch(readContent({ params: { filter: { paginate: 0 } } }));
+  }, []);
 
   const type = watch("type");
 
@@ -100,11 +114,13 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
       );
   }, [customerID]);
 
-
-  const { fields: testFields, append, remove } = useFieldArray({
+  const {
+    fields: testFields,
+    append,
+    remove,
+  } = useFieldArray({
     control,
     name: "date",
-
   });
   const onCustomerSelect = (id: string) => {
     if (!id) return;
@@ -142,38 +158,50 @@ export const useEditOfferDetails = ({ handleNext }: { handleNext: (currentCompon
       lead,
       content,
       handleContentSelect,
-      offerDetails
+      offerDetails,
     },
     setValue
   );
-  const dateFields = AddDateFormField(register,
+
+  const dateFields = AddDateFormField(
+    register,
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
     offerDetails,
     control
+  );
 
-  )
-  const submit = AddOfferDetailsSubmitFormField(register,
+  const submit = AddOfferDetailsSubmitFormField(
+    register,
     loading,
     control,
-    () => console.log(), 0, {}
-
-
-  )
+    () => console.log(),
+    0,
+    {}
+  );
+  
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 1, offerId: offerDetails?.id, stage: EditComponentsType.addressEdit, isLeadCreated: data?.leadID ? true : false }
-    const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
+    const apiData = {
+      ...data,
+      step: 1,
+      offerId: offerDetails?.id,
+      stage: EditComponentsType.addressEdit,
+      isLeadCreated: data?.leadID ? true : false,
+    };
+    const res = await dispatch(
+      createOffer({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) handleNext(EditComponentsType.addressEdit);
   };
 
   return {
-    fields: [...offerFields, ...dateFields,...submit],
+    fields: [...offerFields, ...dateFields, ...submit],
     onSubmit,
     control,
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };
