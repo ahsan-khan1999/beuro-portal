@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateLeadsCustomerFormField } from "@/types";
+import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
@@ -10,6 +11,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails },
   setValue
 ) => {
+  console.log(leadDetails, "leadDetails");
+
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -73,10 +76,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   value: item,
                   label: item
                 }
-              )),
+              )) || [],
 
               control,
-              value: leadDetails && leadDetails.customerDetail?.customerType
+              value: leadDetails && getKeyByValue(staticEnums["CustomerType"], leadDetails.customerDetail?.customerType) || ""
             },
           },
           {
@@ -350,7 +353,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: leadDetails?.id ? leadDetails?.customerDetail?.id : customerDetails && customerDetails?.id,
+        value: leadDetails?.id ? leadDetails?.customerID : customerDetails && customerDetails?.id,
         setValue
       },
     };

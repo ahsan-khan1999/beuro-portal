@@ -34,7 +34,7 @@ const TableRows = ({
             <span className=" py-4  rounded-md flex items-center">
               {item?.refID}
             </span>
-            <span className=" py-4 flex items-center">
+            <span className=" py-4 flex items-center ">
               {item.customerDetail?.fullName}
             </span>
             <span className=" py-4 flex items-center mlg:hidden maxSize:flex">

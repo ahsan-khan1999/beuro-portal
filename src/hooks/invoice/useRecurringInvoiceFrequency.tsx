@@ -3,10 +3,8 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { generateCreateRecurringInvoiceValidationSchema, generateRecurringInvoiceFrequencyValidationSchema } from "@/validation/invoiceSchema";
-import { createRecuringInvoice, updateInvoice } from "@/api/slices/invoice/invoiceSlice";
-import { staticEnums } from "@/utils/static";
-import { CreateRecurringInvoiceFormField } from "@/components/invoice/fields/create-recurring-invoice";
+import {  generateRecurringInvoiceFrequencyValidationSchema } from "@/validation/invoiceSchema";
+import {  updateInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { CreateRecurringInvoiceFrequencyFormField } from "@/components/invoice/fields/create-recurring-frequency";
 
 export default function useRecurringInvoiceFrequency(invoiceCreated: () => void) {
@@ -39,7 +37,6 @@ export default function useRecurringInvoiceFrequency(invoiceCreated: () => void)
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const apiData = { ...data, id: invoiceDetails?.id, isInvoiceRecurring: true }
         const res = await dispatch(updateInvoice({ data: apiData, router, setError, translate }));
-        console.log(res, "res");
 
         if (res?.payload) invoiceCreated();
     };

@@ -2,6 +2,9 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "@/types";
+import { FollowUp, TemplateSettings } from "@/types/settings";
+import { setUser } from "../authSlice/auth";
+import { saveUser } from "@/utils/auth.util";
 export interface TaxSetting {
     id: string;
     name: string;
@@ -12,11 +15,14 @@ interface SettingsState {
     user: User | null;
     loading: boolean;
     error: Record<string, object>,
-    templateSettings: object | null,
+    templateSettings: TemplateSettings | null,
     systemSettings: SystemSetting | null,
-    tax: TaxSetting[] | null
+    tax: TaxSetting[] | null,
+    followUps: FollowUp[] | null
 
 }
+
+
 export interface SystemSetting {
     allowedDomains: string[];
     createdAt?: string;
@@ -33,7 +39,8 @@ const initialState: SettingsState = {
     error: {},
     templateSettings: null,
     systemSettings: null,
-    tax: null
+    tax: null,
+    followUps: null
 
 }
 
@@ -43,7 +50,10 @@ export const updateAccountSettings: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.updateAccountSettings(data);
+            const response = await apiServices.updateAccountSettings(data);
+            thunkApi.dispatch(setUser(response?.data?.User))
+            saveUser(response?.data?.User);
+
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -143,7 +153,32 @@ export const createTaxSetting: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const readFollowUpSettings: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("user/followup/setting", async (args, thunkApi) => {
+        // const { data, router, setError, translate } = args as any;
 
+        try {
+            const response = await apiServices.getFollowUpSettings({});
+            return response?.data?.data;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            // setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const updateFollowUpSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("user/followup/settings", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            await apiServices.updateFollowUpSettings(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 const SettingSlice = createSlice({
     name: "SettingSlice",
     initialState,
@@ -154,7 +189,10 @@ const SettingSlice = createSlice({
         setTaxSettings: (state, action) => {
             state.tax = action.payload;
         },
-        
+        setFollowUpSettings: (state, action) => {
+            state.followUps = action.payload;
+        },
+
     },
     extraReducers(builder) {
         builder.addCase(updateAccountSettings.pending, (state) => {
@@ -179,7 +217,7 @@ const SettingSlice = createSlice({
             state.loading = true
         });
         builder.addCase(getTemplateSettings.fulfilled, (state, action) => {
-            state.templateSettings = action.payload?.TemplateSetting
+            state.templateSettings = action.payload?.Template
             state.loading = false;
         });
         builder.addCase(getTemplateSettings.rejected, (state) => {
@@ -241,8 +279,34 @@ const SettingSlice = createSlice({
             state.loading = false
         });
 
+
+
+        builder.addCase(readFollowUpSettings.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readFollowUpSettings.fulfilled, (state, action) => {
+            state.followUps = action.payload?.FollowUpSetting
+            state.loading = false;
+        });
+        builder.addCase(readFollowUpSettings.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateFollowUpSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateFollowUpSetting.fulfilled, (state, action) => {
+            if (state.followUps && action.payload) {
+                state.followUps = [...state.followUps, action.payload]
+            }
+            state.loading = false;
+
+        });
+        builder.addCase(updateFollowUpSetting.rejected, (state) => {
+            state.loading = false
+        });
+
     },
 })
 
 export default SettingSlice.reducer;
-export const { setErrorMessage, setTaxSettings } = SettingSlice.actions
+export const { setErrorMessage, setTaxSettings, setFollowUpSettings } = SettingSlice.actions

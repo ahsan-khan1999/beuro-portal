@@ -6,7 +6,7 @@ import React from "react";
 
 const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate } =
+  const { fields, onSubmit, handleSubmit, errors, isUpdate ,renderModal} =
     useServiceDetail(false);
 
   const { t: translate } = useTranslation();
@@ -35,7 +35,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {/* {renderModal()} */}
+      {renderModal()}
     </div>
   );
 };

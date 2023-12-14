@@ -1,5 +1,5 @@
 import { ContentTableRowTypes } from "@/types/content";
-import { DEFAULT_CONTENT, contentData } from "@/utils/static";
+import { DEFAULT_CONTENT } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";

@@ -1,13 +1,13 @@
-import ReceiptPdfPriview from "@/components/invoice/details/receipt/pdf";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
 
 
 const index = () => {
   return (
     <div>
-      <ReceiptPdfPriview />
+      <DetailsPdfPriview />
     </div>
   );
 };
@@ -17,4 +17,4 @@ export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
     ...(await serverSideTranslations(locale, ["common"])),
   },
-});
+});  

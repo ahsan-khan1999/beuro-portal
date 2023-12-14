@@ -15,15 +15,15 @@ export const addReasonFormField: GenerateAddReasonFormField = (
         text: `${translate(
           "setting.follow_up_setting.add_follow_up.add_label"
         )}`,
-        htmlFor: "addReason",
+        htmlFor: "reason",
         className: "mb-[10px]",
       },
       field: {
         type: Field.input,
         className: "!p-4 !border-dark focus:!border-primary ",
         inputType: "text",
-        id: "addReason",
-        name: "addReason",
+        id: "reason",
+        name: "reason",
         placeholder: " ",
         register,
       },
@@ -39,7 +39,7 @@ export const addReasonFormField: GenerateAddReasonFormField = (
         )}`,
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

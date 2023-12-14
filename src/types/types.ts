@@ -271,7 +271,8 @@ export type GenerateContentFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   contentDetails?: ContentTableRowTypes,
-  onRemove?: () => void
+  append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
+  onRemove?: UseFieldArrayRemove
 ) => FormField[];
 // Employee formfield
 export type GenerateEmployeeFormField = (

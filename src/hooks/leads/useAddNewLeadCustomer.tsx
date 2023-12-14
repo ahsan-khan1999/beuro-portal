@@ -19,6 +19,8 @@ import {
 } from "@/api/slices/customer/customerSlice";
 import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 
 export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -53,7 +55,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const customerType = watch("customerType");
 
   const type = watch("type");
-
+  
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id);
@@ -70,15 +72,17 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   useMemo(() => {
     if (leadDetails.id) {
       reset({
-        fullName: leadDetails.customerID?.fullName,
+        fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,
-        customer: leadDetails.customerID?.id,
+        customer: leadDetails.customerID,
 
-        customerType: leadDetails.customerID?.customerType,
-        email: leadDetails.customerID?.email,
-        phoneNumber: leadDetails.customerID?.phoneNumber,
-        mobileNumber: leadDetails.customerID?.mobileNumber,
-        address: leadDetails?.customerID?.address,
+        customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails.customerDetail?.customerType),
+        email: leadDetails.customerDetail?.email,
+        phoneNumber: leadDetails.customerDetail?.phoneNumber,
+        mobileNumber: leadDetails.customerDetail?.mobileNumber,
+        address: leadDetails?.customerDetail?.address,
+        companyName: leadDetails?.customerDetail?.companyName,
+
       });
     }
   }, [leadDetails.id]);

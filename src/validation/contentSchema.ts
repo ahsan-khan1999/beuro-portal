@@ -11,17 +11,25 @@ export const generateOfferEditContentDetailsValidation = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [OfferEditContentDetails.offerTitle]: yup
+    [OfferEditContentDetails.contentName]: yup
       .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.offerDescription]: yup
-      .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.emailBody]: yup
-      .string()
-      .required(translate("validation required")),
-    [OfferEditContentDetails.attachments]: yup
-      .string().required(translate("validationMessages.required"))
+      .required("validation required"),
+    "offerContent": yup.object().shape({
+      [OfferEditContentDetails.offerTitle]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.offerDescription]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.emailBody]: yup
+        .string()
+        .required(translate("validation required")),
+      [OfferEditContentDetails.attachments]: yup
+        .string().required(translate("validationMessages.required")),
+      [OfferEditContentDetails.address]: yup.array().of(yup.object().shape({ value: yup.string().required(translate("validationMessages.required")) })).required()
+    })
+
+
   }).required()
 };
 

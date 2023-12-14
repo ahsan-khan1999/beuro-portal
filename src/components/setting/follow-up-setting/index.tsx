@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toggle_active from "@/assets/svgs/toggle_active.svg";
 import toggle_inactive from "@/assets/svgs/toggle_inactive.svg";
 import deleteIcon from "@/assets/svgs/delete.svg";
@@ -6,48 +6,36 @@ import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import useAddReason from "@/hooks/setting/useAddReason";
 import { useTranslation } from "next-i18next";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
+import { Button } from "@/base-components/ui/button/button";
 
 const FollowUpSetting = () => {
   const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useAddReason();
-  const { t: translate } = useTranslation();
+  const dispatch = useAppDispatch()
 
-  const data: string[] = [
-    `${translate("setting.follow_up_setting.on_offer_expire")}`,
-    `${translate("setting.follow_up_setting.on_lead_create")}`,
-  ];
 
-  const [isActive, setIsActive] = useState(new Array(data.length).fill(false));
+  const { loading, followUps } = useAppSelector(state => state.settings)
+  const { fields, onSubmit, handleSubmit, errors, error, handleRemoveReason, handleSaveSetings, isActive, renderModal, toggleItem, translate ,data} = useAddReason();
 
-  const toggleItem = (index: number) => {
-    const updatedIsActive = [...isActive];
-    updatedIsActive[index] = !updatedIsActive[index];
-    setIsActive(updatedIsActive);
-  };
 
-  const reasonData: string[] = [
-    "Share New Information.",
-    "Update Your Requirements.",
-    "Provide Feedback or Questions.",
-    "Express Continued Interest.",
-    "COntact Me Again",
-    "COntact Me Later",
-  ];
+
 
   return (
     <>
       <section className="rounded-md bg-white pl-[32px] pr-[37px] py-5 w-full h-fit">
         {data.map((item, index) => (
           <div
-            className={`border rounded-md p-4 flex justify-between items-center mb-4 ${
-              isActive[index] ? "border-[#4A13E7]" : "border-[#BFBFBF]"
-            }`}
+            className={`border rounded-md p-4 flex justify-between items-center mb-4 ${isActive[index] ? "border-[#4A13E7]" : "border-[#BFBFBF]"
+              }`}
             key={index}
           >
             <span
-              className={`text-base font-medium ${
-                isActive[index] ? "text-[#4A13E7]" : "text-[#4B4B4B]"
-              }`}
+              className={`text-base font-medium ${isActive[index] ? "text-[#4A13E7]" : "text-[#4B4B4B]"
+                }`}
             >
               {item}
             </span>
@@ -82,28 +70,38 @@ const FollowUpSetting = () => {
             className="overflow-y-auto custom-scrollbar"
             style={{ maxHeight: "15rem" }}
           >
-            {reasonData.map((item, index) => (
+            {followUps?.map((item, index) => (
               <div
-                className={`flex justify-between py-3 ${
-                  index === reasonData.length - 1
-                    ? "rounded-md"
-                    : "border-b border-[#BFBFBF]"
-                }`}
+                className={`flex justify-between py-3 ${index === followUps?.length - 1
+                  ? "rounded-md"
+                  : "border-b border-[#BFBFBF]"
+                  }`}
                 key={index}
               >
                 <span className="text-base font-medium text-[#4B4B4B]">
-                  {item}
+                  {item?.reason}
                 </span>
                 <Image
                   src={deleteIcon}
                   alt="delete_icon"
                   className="cursor-pointer mr-5"
+                  onClick={() => handleRemoveReason(index)}
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
+      <Button
+        id="setting"
+        inputType="button"
+        className="mt-5 px-4 py-2 text-white text-base font-medium rounded-md  bg-[#4A13E7] "
+        text={translate("setting.save_setting")}
+        loading={loading}
+        onClick={handleSaveSetings}
+
+      />
+      {renderModal()}
     </>
   );
 };

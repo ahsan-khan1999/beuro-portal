@@ -23,6 +23,7 @@ const initialState: ContractState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     contractDetails: DEFAULT_CONTRACT
 }
 

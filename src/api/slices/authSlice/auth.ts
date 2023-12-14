@@ -159,7 +159,6 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      //@ts-expect-error 
       let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
       
       const response: ApiResponseTypePut = await apiServices.profileStep3({ bankDetails: { ...apiData } });

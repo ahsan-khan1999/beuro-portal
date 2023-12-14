@@ -23,6 +23,7 @@ const initialState: OfferState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     offerDetails: DEFAULT_OFFER
 }
 
@@ -60,9 +61,7 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
             const { offerId, step, stage } = data
             let apiData = { ...data, offerId: offerId, step: step }
 
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             const response = await apiServices.createOffer(apiData);
             let objectToUpdate = { ...response?.data?.data?.Offer, type: apiData?.type, stage: stage }

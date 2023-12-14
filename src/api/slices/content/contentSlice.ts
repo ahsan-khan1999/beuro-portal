@@ -25,6 +25,7 @@ const initialState: ContentState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     contentDetails: DEFAULT_CONTENT
 }
 

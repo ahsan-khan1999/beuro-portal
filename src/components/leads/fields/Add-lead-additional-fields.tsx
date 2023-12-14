@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsAdditionalDetailsFormField } from "@/types";
 import { useTranslation } from "next-i18next";
-import { ComponentsType } from "../details/LeadsDetailsData";
+import { ComponentsType } from "../add/AddNewLeadsData";
 
 export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormField =
   (loading, control, onHandleBack, leadDetails) => {
@@ -34,7 +34,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
                 text: translate("leads.address_details.back_button"),
                 inputType: "button",
                 onClick: () =>
-                  onHandleBack && onHandleBack(ComponentsType.serviceEdit),
+                  onHandleBack && onHandleBack(ComponentsType.serviceAdd),
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
               },

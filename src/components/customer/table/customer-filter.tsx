@@ -17,7 +17,7 @@ export default function CustomerFilter({
 
   const {
     isOpen,
-    setIsOpen,
+    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
@@ -41,7 +41,7 @@ export default function CustomerFilter({
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={toggleHandler}
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />

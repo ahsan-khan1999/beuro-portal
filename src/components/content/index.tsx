@@ -25,7 +25,6 @@ export default function Content() {
           filter={filter}
           setFilter={setFilter}
           handleFilterChange={handleFilterChange}
-          translate={translate}
         />
         <TableLayout>
           <TableHeadings />

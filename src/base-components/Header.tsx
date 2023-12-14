@@ -1,7 +1,7 @@
 import React from "react";
 import companyLogo from "@/assets/svgs/company-logo.svg";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
-import userIcon from "@/assets/svgs/user.svg";
+import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
@@ -35,7 +35,7 @@ const Header = () => {
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image src={userIcon} alt="User Icon" className="mr-3" />
+          <Image src={ userIcon} alt="User Icon" className="mr-3" />
           <div className="">
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}

@@ -2,7 +2,6 @@ import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
-import { select } from "@/components/dashboard/filters";
 
 export interface GlobalState {
   loading: boolean;

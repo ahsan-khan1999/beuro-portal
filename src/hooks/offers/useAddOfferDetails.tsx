@@ -37,7 +37,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { content } = useAppSelector((state) => state.content);
 
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
-  console.log(offerDetails, "offerDetails");
 
 
   const onCancel = () => {
@@ -100,6 +99,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     name: "date",
 
   });
+  
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id);

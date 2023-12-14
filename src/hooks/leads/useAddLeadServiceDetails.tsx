@@ -43,7 +43,6 @@ export const useAddLeadServiceDetails = ({
   });
   useMemo(() => {
     if (leadDetails.id) {
-      console.log(formatDateTimeToDate(leadDetails?.desireDate), "le");
 
       reset({
         ...leadDetails,

@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -18,7 +17,6 @@ export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { on
 
   const schema = generateLeadAdditionalDetailsValidation(translate);
   const {
-    register,
     handleSubmit,
     control,
     setError,
@@ -39,7 +37,6 @@ export const useAddLeadAdditionalDetails = ({ onHandleBack, onHandleNext }: { on
     const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalAdd }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
     if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
-    // onHandleNext(ComponentsType.additionalEdit);
   };
   return {
     fields,

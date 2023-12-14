@@ -1,5 +1,4 @@
 import { contractTableTypes } from "@/types/contract";
-import { contractData } from "@/utils/static";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
@@ -7,16 +6,13 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
-import localStoreUtil from "@/utils/localstore.util";
 import { readContract, setContractDetails } from "@/api/slices/contract/contractSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import ImageSliderContract from "@/base-components/ui/modals1/ImageSliderContract";
-import image, { readImage } from "@/api/slices/imageSlice/image";
+import  { readImage } from "@/api/slices/imageSlice/image";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } = useAppSelector(state => state.contract)

@@ -345,13 +345,13 @@ const updateSystemSettings = (params) =>
 const getSystemSettings = (params) =>
   get(SERVICE_URLS.systemSetting, params, { feature: featureConstants.login }, { detail: false });
 const getTemplateSettings = (params) =>
-  get(SERVICE_URLS.templates + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.templates , params, { feature: featureConstants.login }, { detail: false });
 const updateTemplateSettings = (params) =>
-  put(SERVICE_URLS.templates + `${params?.id}`, params, { feature: featureConstants.login });
+  put(SERVICE_URLS.templates, params, { feature: featureConstants.login });
 const getFollowUpSettings = (params) =>
-  get(SERVICE_URLS.followUp + `${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.followUp , params, { feature: featureConstants.login }, { detail: false });
 const updateFollowUpSettings = (params) =>
-  put(SERVICE_URLS.followUp + `${params?.id}`, params, { feature: featureConstants.login });
+  put(SERVICE_URLS.followUp , params, { feature: featureConstants.login });
 const getEmails = (params) =>
   get(SERVICE_URLS.mail, params, { feature: featureConstants.login }, { detail: false });
 const getEmailDetails = (params) =>

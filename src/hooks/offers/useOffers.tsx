@@ -1,4 +1,4 @@
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER, offersData } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER } from "@/utils/static";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";

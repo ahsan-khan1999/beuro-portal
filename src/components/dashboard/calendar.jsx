@@ -1,5 +1,4 @@
 // import "@fullcalendar/core/vdom";
-import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
@@ -7,7 +6,7 @@ import FullCalendar from "@/base-components/calendar/Main";
 
 function MainCalender() {
   const options = {
-    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin],
     droppable: true,
     headerToolbar: {
       left: "prev,next today",

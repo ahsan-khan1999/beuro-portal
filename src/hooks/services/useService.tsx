@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Service } from "@/types/service";
-import { servicesData } from "@/utils/static";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readService } from "@/api/slices/service/serviceSlice";

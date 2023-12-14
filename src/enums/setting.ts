@@ -13,7 +13,7 @@ export enum ChangeMailSetting {
 
 // enum for add reason
 export enum AddReason {
-  addReason = "addReason",
+  addReason = "reason",
 }
 
 // setting profile enum

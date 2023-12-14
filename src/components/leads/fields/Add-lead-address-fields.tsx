@@ -117,7 +117,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
             },
             {
-              containerClass: "mb-0 absolute top-52 right-0",
+              containerClass: "mb-0 absolute -top-44 right-0",
               field: {
                 type: Field.button,
                 id: "button",
@@ -153,7 +153,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerEdit),
+              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerAdd),
             },
           },
           {

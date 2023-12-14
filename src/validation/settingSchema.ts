@@ -39,7 +39,7 @@ export const generateChangeMailSettingValidationSchema = (
 // Validation for add reason
 export const generateAddReasonValidation = (translate: Function) => {
   return yup.object().shape({
-    [AddReason.addReason]: yup.string().required("validation required"),
+    [AddReason.addReason]: yup.string().required(translate("validationMessages.required")),
   });
 };
 

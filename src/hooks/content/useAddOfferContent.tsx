@@ -1,13 +1,12 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
+import {  AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
 import { generateContentAddressValidationSchema, generateOfferEditContentDetailsValidation, mergeSchemas } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { FormField } from "@/types";
 import { Attachement } from "@/types/global";
 import { generateAddressFields, setAddressFieldValues, transformAttachments, transformFieldsToValues } from "@/utils/utility";
@@ -26,8 +25,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     setAddressCount(addressCount + 1)
   }
   const schema = generateOfferEditContentDetailsValidation(translate);
-  const schemaAddress = generateContentAddressValidationSchema(translate, addressCount);
-  const mergedSchema = mergeSchemas(schema, schemaAddress)
 
   const {
     register,
@@ -40,8 +37,9 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     watch,
     formState: { errors },
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(mergedSchema),
+    resolver: yupResolver<FieldValues>(schema),
   });
+  
 
   useMemo(() => {
     if (contentDetails.id) {
@@ -55,39 +53,46 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     }
 
   }, [contentDetails.id])
+  const { fields: addressFields, append, remove } = useFieldArray({
+    control,
+    name: "offerContent.address",
+
+  });
 
 
-  const fields = AddOfferContentDetailsFormField(register, loading, control, handleAddAddressField, trigger, addressCount, attachements, setAttachements, contentDetails);
+  const fields = AddOfferContentDetailsFormField(register, loading, control, handleAddAddressField, trigger, addressFields?.length === 0 ? 1 : addressFields?.length, attachements, setAttachements, contentDetails, append, remove);
 
-  console.log(errors);
+
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    let addressField = generateAddressFields(addressCount)
-    let apiData = {
-      contentName: data.contentName,
-      offerContent: {
-        body: data.offerContent.body,
-        description: data.offerContent.description,
-        title: data.offerContent.title,
-        attachments: attachements?.map((item) => item.value),
-        address: transformFieldsToValues(data.offerContent, addressField),
-      },
-      step: 1,
-      stage: ComponentsType.addConfirmationContent,
-      contentId: ""
-    }
-    if (contentDetails?.id) {
-      apiData = {
-        ...apiData,
-        contentId: contentDetails?.id,
-      }
-      const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
-      if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
-    } else {
+    console.log(data);
+    
+    // let addressField = generateAddressFields(addressCount)
+    // let apiData = {
+    //   contentName: data.contentName,
+    //   offerContent: {
+    //     body: data.offerContent.body,
+    //     description: data.offerContent.description,
+    //     title: data.offerContent.title,
+    //     attachments: attachements?.map((item) => item.value),
+    //     address: transformFieldsToValues(data.offerContent, addressField),
+    //   },
+    //   step: 1,
+    //   stage: ComponentsType.addConfirmationContent,
+    //   contentId: ""
+    // }
+    // if (contentDetails?.id) {
+    //   apiData = {
+    //     ...apiData,
+    //     contentId: contentDetails?.id,
+    //   }
+    //   const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
+    //   if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
+    // } else {
 
-      const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
-      if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
-    }
+    //   const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
+    //   if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
+    // }
 
   };
   return {

@@ -109,10 +109,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   value: item,
                   label: item,
                 })
-              ),
+              ) || [],
 
               control,
-              value: offerDetails && offerDetails.customerID?.customerType,
+              value: offerDetails && offerDetails.customerID?.customerType || "",
             },
           },
           {
@@ -130,7 +130,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Your Name",
               register,
-              // value: leadDetails && leadDetails.customerID?.fullName
+              // value: leadDetails && leadDetails.customerDetail?.fullName
             },
           },
 
@@ -193,7 +193,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     },
     {
       containerClass: "mt-5",
-      // @ts-ignore
       field: {
         type: Field.div,
         id: "div-field",
@@ -219,9 +218,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   }))) ||
                 [],
               control,
-              value: (offerDetails?.id && offerDetails?.content) || "",
-
-              onItemChange: handleContentSelect && handleContentSelect(),
+              value: offerDetails?.id && offerDetails?.content?.id || "",
+              onItemChange: handleContentSelect && handleContentSelect,
             },
           },
           {
@@ -317,7 +315,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 label: item,
               })),
               control,
-              value: offerDetails && offerDetails?.customerID?.address?.country,
+              value: offerDetails && offerDetails?.customerID?.address?.country || "",
             },
           },
         ],
@@ -326,12 +324,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   ];
   // customer type
   const fieldIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "fullName")
+      field?.field?.children.some((child: any) => child?.field?.id == "fullName")
   );
 
   if (fieldIndex !== -1 && customerType === "company") {
@@ -354,22 +350,18 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         setValue: setValue,
       },
     };
-    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
     const divField = formField[fieldIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
-      //@ts-expect-error
-      divField.children.splice(fieldIndex + 3, 0, companyNameField);
+      divField.children.splice(fieldIndex + 3, 0, companyNameField as any);
     }
   }
 
   // type
   const fieldTypeIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "customerType")
+      field?.field?.children.some((child: any) => child?.field?.id == "customerType")
   );
 
   if (fieldIndex !== -1 && type === "Existing Customer") {
@@ -398,22 +390,18 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         setValue,
       },
     };
-    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
 
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-      //@ts-expect-error
-      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
+      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
     }
   }
 
   const fieldLeadIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "customerID")
+      field?.field?.children.some((child: any) => child?.field?.id == "customerID")
   );
 
   if (fieldLeadIndex !== -1 && type === "Existing Customer") {
@@ -435,15 +423,12 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
 
         control,
-        // onItemChange: onCustomerSelect,
         value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id,
-        // setValue
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
-      //@ts-expect-error
-      divField.children.splice(fieldLeadIndex + 2, 0, leadField);
+      divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
     }
   }
 

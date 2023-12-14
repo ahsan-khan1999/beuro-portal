@@ -48,8 +48,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "flex justify-center items-center mb-5 col-span-1",
             field: {
               type: Field.profileUploadField,
-              id: "fileUpload",
-              name: "fileUpload",
+              id: "logo",
+              name: "logo",
               control,
             },
           },
@@ -216,26 +216,29 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     },
 
     {
-      containerClass: "my-5",
+      containerClass: "my-5 ",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex gap-x-4 items-center relative",
+        className: "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
         children: [
           {
+            containerClass:"",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.private_info")}`,
-              containerClassName: "text-[14px] text-[#393939] font-normal ",
-              id: "",
+              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              id: "info",
             },
           },
           {
+            containerClass:"border-lightGray border-b-[1px]",
+
             field: {
               type: Field.span,
               containerClassName:
-                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
-              id: "",
+                "  ",
+              id: "border",
             },
           },
         ],
@@ -408,34 +411,36 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
         ],
       },
     },
-
     {
-      containerClass: "mb-[14px] mt-[26px] ",
+      containerClass: "mt-5 ",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex gap-x-4 items-center relative",
+        className: "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
         children: [
           {
-            containerClass: "mb-0",
+            containerClass:"",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.change_password")}`,
-              containerClassName: "text-[14px] text-[#393939] font-normal ",
-              id: "",
+              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              id: "info",
             },
           },
           {
+            containerClass:"border-lightGray border-b-[1px]",
+
             field: {
               type: Field.span,
               containerClassName:
-                " absolute top-3 bg-[#BFBFBF] w-[90%] mx-auto h-[1px]",
-              id: "",
+                "  ",
+              id: "border",
             },
           },
         ],
       },
     },
+    
 
     {
       containerClass: "mb-0 ",

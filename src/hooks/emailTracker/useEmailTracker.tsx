@@ -1,5 +1,4 @@
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { MailTracker } from "@/utils/static";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";

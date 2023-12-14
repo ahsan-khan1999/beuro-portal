@@ -7,9 +7,9 @@ import React from "react";
 
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors } =
+  const { fields, onSubmit, handleSubmit, errors, renderModal } =
     useCustomerDetail(false);
-    const { t: translate } = useTranslation();
+  const { t: translate } = useTranslation();
 
   return (
     <FormCard>
@@ -28,7 +28,7 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {/* {renderModal()} */}
+      {renderModal()}
     </FormCard>
   );
 };

@@ -6,6 +6,7 @@ export enum OfferEditContentDetails {
   offerDescription = "description",
   emailBody = "body",
   attachments = "attachments",
+  address="address"
 }
 
 // enum for confirmation edit content details

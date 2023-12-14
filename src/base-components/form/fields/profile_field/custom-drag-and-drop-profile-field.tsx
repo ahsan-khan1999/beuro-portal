@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import Image from "next/image";
 import edit_circle from "@/assets/svgs/edit_circle.svg";
-import profile from "@/assets/pngs/profile.png";
+import profile from "@/assets/svgs/Group 480958610.svg";
 
 export const ProfileUpload = ({
   id,
@@ -31,13 +31,29 @@ export const ProfileUpload = ({
     <label htmlFor={id}>
       <div className="w-full">
         {field.value ? (
-          <Image
-            src={field.value}
-            layout="responsive"
-            width={241}
-            height={241}
-            alt="Uploaded Preview"
-          />
+          <div className="relative w-[241px] h-[241px] rounded-full">
+            <Image
+              src={field.value}
+              layout="responsive"
+              width={241}
+              height={241}
+              alt="Uploaded Preview"
+              className="rounded-full !w-[241px] !h-[241px]"
+            />
+            <label className="absolute right-3 bottom-3">
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileSelected}
+              />
+              <Image
+                src={edit_circle}
+                alt="editIcon"
+                className="cursor-pointer"
+              />
+            </label>
+          </div>
+
         ) : (
           <div className="relative w-[241px] h-[241px] rounded-full">
             <Image src={profile} alt="profile" />

@@ -36,7 +36,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       id: "paymentdiv",
 
                       className: "grid grid-cols-2 gap-x-6 ",
-                      id: "div-field",
                       children: [
                         {
                           containerClass: "mb-0",
@@ -97,7 +96,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                           containerClass: "mb-0",
                           field: {
                             type: Field.span,
-                            id: "",
                             text: `${translate(
                               "admin.settings.account_setting.update_password"
                             )}`,
@@ -109,7 +107,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                         },
                         {
                           field: {
-                            id: "",
                             type: Field.span,
                             containerClassName:
                               " absolute top-3 bg-[#BFBFBF] w-[87%]  mx-auto h-[1px]",
@@ -217,7 +214,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       className:
                         "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
-                      id: "paymentdiv",
 
                     },
                   },

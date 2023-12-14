@@ -14,7 +14,7 @@ import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandleBack: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
+  const { loading, error, contentDetails } = useAppSelector(state => state.content);
 
   const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.confirmationContent?.attachments) || [])
   const router = useRouter();

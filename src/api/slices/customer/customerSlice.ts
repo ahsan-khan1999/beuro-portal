@@ -26,6 +26,7 @@ const initialState: CustomerState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     customerDetails: DEFAULT_CUSTOMER
 
 }
@@ -63,9 +64,7 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
 
         try {
             let apiData = { ...data }
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.createCustomer(apiData);
             return true;
@@ -82,9 +81,7 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         try {
 
             let apiData = { ...data }
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.updateCustomer(apiData);
             return true;

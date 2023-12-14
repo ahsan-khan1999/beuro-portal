@@ -35,6 +35,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               name: "email",
               placeholder: "hamzaicp54@gmail.com",
               register,
+              
             },
           },
           {
@@ -50,9 +51,10 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               id: "content",
               name: "content",
 
-              options: content?.map((item) => ({ label: item.contentName, value: item.id })),
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
               control,
-              onItemChange: onContentSelect
+              onItemChange: onContentSelect,
+              value:""
             },
           },
         ],

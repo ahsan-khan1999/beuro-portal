@@ -8,7 +8,7 @@ import ServicesForm from "../ServicesForm";
 
 const ServicesDetails = () => {
   const {
-    serviceDetail,
+    serviceDetails,
     isUpdate,
     setIsUpdate,
     fields,
@@ -20,7 +20,7 @@ const ServicesDetails = () => {
     <Layout>
       <DetailsCard>
         <DetailsData
-          serviceDetail={serviceDetail}
+          serviceDetail={serviceDetails}
           isUpdate={isUpdate}
           // deleteHandler={deleteHandler}
         />
@@ -30,7 +30,7 @@ const ServicesDetails = () => {
           <ServicesForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}
-            serviceDetail={serviceDetail}
+            serviceDetail={serviceDetails}
             fields={fields}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}

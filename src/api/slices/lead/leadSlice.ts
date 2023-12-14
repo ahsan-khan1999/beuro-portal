@@ -24,6 +24,7 @@ const initialState: LeadState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     leadDetails: DEFAULT_LEAD
 }
 
@@ -58,10 +59,7 @@ export const createLead: AsyncThunk<boolean, object, object> | any =
         try {
             const { leadId, step, stage } = data
             let apiData = { ...data, leadId: leadId, step: step }
-
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             const response = await apiServices.createLead(apiData);
             let objectToUpdate = { ...response?.data?.data?.Lead, type: apiData?.type, stage: stage }

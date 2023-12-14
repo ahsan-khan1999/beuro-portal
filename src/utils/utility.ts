@@ -53,23 +53,7 @@ export function isFieldType(type: any): type is FieldType {
     type
   );
 }
-const mapServerValidationToFieldArray = (serverValidation) => {
-  const fieldArrayErrors = {};
 
-  Object.entries(serverValidation).forEach(([key, value]) => {
-    const [fieldName, fieldError] = key.split(".");
-
-    if (!fieldArrayErrors[fieldName]) {
-      fieldArrayErrors[fieldName] = [];
-    }
-
-    fieldArrayErrors[fieldName].push({
-      [fieldName]: fieldError,
-    });
-  });
-
-  return fieldArrayErrors;
-};
 export function formatStrings(str: string, replaceValues: string[]): string {
   let formattedString = str;
   for (const [index, value] of replaceValues.entries()) {
@@ -484,14 +468,14 @@ export function getFileNameFromUrl(url: string) {
 }
 
 export function getEmailColor(status: string) {
-  if (staticEnums["EmailStatus"][status] == 0)
+  if (staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Draft"])
     return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == 1
+    staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Sent"]
   )
     return "#4A13E7";
   else if (
-    staticEnums["EmailStatus"][status] == 2
+    staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Failed"]
   )
     return "#FF0000";
   else return "#FF376F";
@@ -503,7 +487,7 @@ export function getPaymentTypeColor(status: string) {
   else if (
     staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Online"]
   )
-    return "#FF376F";
+    return "#FE9244";
   else return "#FF376F";
 }
 export function getOfferStatusColor(status: string) {

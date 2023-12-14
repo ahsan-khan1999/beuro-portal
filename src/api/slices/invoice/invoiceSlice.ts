@@ -25,8 +25,10 @@ const initialState: InvoiceState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     invoiceDetails: DEFAULT_INVOICE,
     collectiveInvoice: [],
+    //@ts-expect-error
     collectiveInvoiceDetails: DEFAULT_INVOICE,
     collectiveReciept: []
 

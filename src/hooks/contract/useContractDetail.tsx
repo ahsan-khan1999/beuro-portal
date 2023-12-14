@@ -13,9 +13,7 @@ import ExistingNotes from '@/base-components/ui/modals1/ExistingNotes';
 import AddNewNote from '@/base-components/ui/modals1/AddNewNote';
 import ImagesUploadOffer from '@/base-components/ui/modals1/ImageUploadOffer';
 import ImageSlider from '@/base-components/ui/modals1/ImageSlider';
-import ImageSliderContract from '@/base-components/ui/modals1/ImageSliderContract';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
-import { updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import { staticEnums } from '@/utils/static';
 import { readImage } from '@/api/slices/imageSlice/image';
 

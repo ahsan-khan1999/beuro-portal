@@ -25,6 +25,7 @@ const initialState: CustomerState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     followUpDetails: DEFAULT_FOLLOWUP
 
 }
@@ -76,9 +77,7 @@ export const updateFollowUp: AsyncThunk<boolean, object, object> | any =
         try {
 
             let apiData = { ...data }
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.updateFollowUp(apiData);
             return true;

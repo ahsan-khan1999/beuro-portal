@@ -11,10 +11,15 @@ import { isJSON } from "@/utils/functions";
 import { getUser } from "@/utils/auth.util";
 import { updateAccountSettings } from "@/api/slices/settingSlice/settings";
 import { User } from "@/types";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 export default function useSettingProfile(handleChangePassword: Function) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.settings);
+  const { modal } = useAppSelector((state) => state.global);
+
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const user: User = isJSON(getUser())
@@ -40,14 +45,37 @@ export default function useSettingProfile(handleChangePassword: Function) {
       bankDetails: user.company?.bankDetails,
     })
   }, [])
+  
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }))
+  }
+  const handleSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
+  }
 
+  const MODAL_CONFIG: ModalConfigType = {
+
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading="Settings Updated Successful "
+        modelSubHeading="Thanks! we are happy to have you. "
+        routeHandler={onClose}
+      />
+    ),
+
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
 
   const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword, user);
-  console.log(errors);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, id: user?.id }
+    const apiData = { ...data }
+    delete apiData["id"]
     const res = await dispatch(updateAccountSettings({ data: apiData, router, setError, translate }))
+    if (res?.payload) handleSuccess()
   };
 
   return {
@@ -56,5 +84,6 @@ export default function useSettingProfile(handleChangePassword: Function) {
     errors,
     fields,
     onSubmit,
+    renderModal
   };
 }

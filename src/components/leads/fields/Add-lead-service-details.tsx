@@ -240,7 +240,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
+              className: "!p-0 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
               value: leadDetails?.id && leadDetails?.otherServices || [""],
