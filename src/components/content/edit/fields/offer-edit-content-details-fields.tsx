@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
 import icon from "@/assets/svgs/Vector.svg"
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormRegister } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
 export const OfferEditContentDetailsFormField: GenerateContentFormField = (
@@ -9,7 +9,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   loading,
   control,
   onClick,
-  trigger, addressCount, attachements, setAttachements, contentDetails,onRemove
+  trigger, addressCount, attachements, setAttachements, contentDetails, append, onRemove
 ) => {
   const { t: translate } = useTranslation();
 
@@ -39,7 +39,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         type: Field.div,
         id: "div-field",
         className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children: (addressCount) && generateAddressChildren(register, addressCount, onClick,onRemove),
+        children: (addressCount) && generateAddressChildren(register, addressCount, translate, append, onRemove),
       },
     },
 
@@ -144,7 +144,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   return formField;
 };
 
-const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, OnClick?: () => void, onRemove?: () => void) => {
+const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, translate: Function, append?: UseFieldArrayAppend<FieldValues, "offerContent.address">, remove?: UseFieldArrayRemove) => {
   return Array.from({ length: count }, (_, key) => {
     const isLastIndex = key === count - 1;
 
@@ -162,7 +162,7 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
         id: `offerContent.address_${key}`,
         name: `offerContent.address_${key}`,
         remove: key > 0 && "Remove",
-        onRemove: key > 0 && onRemove,
+        onRemove: () => (key > 0 && remove) && remove(key),
 
 
 
@@ -181,7 +181,7 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
             inputType: "button",
             className:
               "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4  w-[40px] h-[40px] text-white hover-bg-none",
-            onClick: OnClick,
+            onClick: () => append && append({ "address": "" }),
             icon: icon,
           },
 
