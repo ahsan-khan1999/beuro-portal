@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { sendOtpViaEmail, verifyOtp } from '@/api/slices/authSlice/auth';
 import { BaseButton } from './button/base-button';
 
-const EmailConfirmation = ({ data }: { data: { heading: string, description: String } }) => {
+const EmailConfirmation = ({ data }: { data: { heading: string, description: string } }) => {
   const router = useRouter()
   const dispatch  = useAppDispatch()
   const handleVerifyEmail = () => {
