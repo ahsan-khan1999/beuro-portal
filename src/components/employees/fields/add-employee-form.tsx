@@ -5,7 +5,7 @@ import React from "react";
 
 const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal ,translate} =
     useEmployeeDetail(false);
 
   return (
@@ -15,10 +15,12 @@ const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">Employee Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("employees.add_new_employee")}
+        </h2>
 
         <BaseButton
-          buttonText="Cancel"
+          buttonText={translate("employees.details.cancel_button")}
           onClick={handleCancel}
           containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         ></BaseButton>

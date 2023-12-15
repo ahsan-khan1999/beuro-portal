@@ -8,16 +8,25 @@ import TableFunctions from "./table/TableFunctions";
 import useEmployee from "@/hooks/employee/useEmployee";
 
 export default function Employees() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,handleFilterChange,setFilter } =
-    useEmployee();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    handleFilterChange,
+    setFilter,
+    translate,
+  } = useEmployee();
 
   return (
     <>
       <Layout>
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl text-[#222B45] ">Employees</h1>
-          <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
-        </div>
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeadings />
           <TableRows employsData={currentPageRows} />
@@ -28,7 +37,6 @@ export default function Employees() {
           onPageChange={handlePageChange}
         />
       </Layout>
-      {/* {renderModal()} */}
     </>
   );
 }

@@ -1,21 +1,23 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const ServiceEditDetailsFormField: GenerateOffersFormField = (
   register,
   loading
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Service Name",
+              text: `${translate("offers.service_details.service_name")}`,
               htmlFor: "serviceName",
               className: "mb-[10px]",
             },
@@ -32,7 +34,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Price",
+              text: `${translate(
+                "offers.service_details.detail_headings.price"
+              )}`,
               htmlFor: "price",
               className: "mb-[10px]",
             },
@@ -49,7 +53,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Unit",
+              text: `${translate(
+                "offers.service_details.detail_headings.unit"
+              )}`,
               htmlFor: "unit",
               className: "mb-[10px]",
             },
@@ -71,20 +77,22 @@ id:"div-field",
       containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
-            containerClass: "mb-0 col-span-1",
+            containerClass: "mb-0 2xl:col-span-1",
             field: {
               type: Field.div,
-id:"div-field",
-              className: "mb-0 grid grid-cols-3 gap-3",
+              id: "div-field",
+              className: "mb-0 grid grid-cols-2 2xl:grid-cols-3 gap-3",
               children: [
                 {
-                  containerClass: "mb-0 col-span-1",
+                  containerClass: "mb-0 2xl:col-span-1",
                   label: {
-                    text: "Count",
+                    text: `${translate(
+                      "offers.service_details.detail_headings.unit"
+                    )}`,
                     htmlFor: "count",
                     className: "mb-[10px]",
                   },
@@ -99,9 +107,11 @@ id:"div-field",
                   },
                 },
                 {
-                  containerClass: "mb-0 col-span-2",
+                  containerClass: "mb-0 2xl:col-span-2",
                   label: {
-                    text: "Total Price",
+                    text: `${translate(
+                      "offers.service_details.detail_headings.total_price"
+                    )}`,
                     htmlFor: "totalPrice",
                     className: "mb-[10px]",
                   },
@@ -119,9 +129,11 @@ id:"div-field",
             },
           },
           {
-            containerClass: "mb-0 col-span-2",
+            containerClass: "mb-0 2xl:col-span-2",
             label: {
-              text: "Description",
+              text: `${translate(
+                "offers.service_details.detail_headings.description"
+              )}`,
               htmlFor: "description",
               className: "mb-[10px]",
             },
@@ -145,13 +157,13 @@ id:"div-field",
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Service Name",
+              text: `${translate("offers.service_details.service_name")}`,
               htmlFor: "servcieName",
               className: "mb-[10px]",
             },
@@ -168,7 +180,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Price",
+              text: `${translate(
+                "offers.service_details.detail_headings.price"
+              )}`,
               htmlFor: "price",
               className: "mb-[10px]",
             },
@@ -185,7 +199,9 @@ id:"div-field",
           {
             containerClass: "mb-0",
             label: {
-              text: "Unit",
+              text: `${translate(
+                "offers.service_details.detail_headings.unit"
+              )}`,
               htmlFor: "unit",
               className: "mb-[10px]",
             },
@@ -207,20 +223,22 @@ id:"div-field",
       containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
-            containerClass: "mb-0 col-span-1",
+            containerClass: "mb-0 2xl:col-span-1",
             field: {
               type: Field.div,
-id:"div-field",
-              className: "mb-0 grid grid-cols-3 gap-3",
+              id: "div-field",
+              className: "mb-0 grid grid-cols-2 2xl:grid-cols-3 gap-3",
               children: [
                 {
-                  containerClass: "mb-0 col-span-1",
+                  containerClass: "mb-0 2xl:col-span-1",
                   label: {
-                    text: "Count",
+                    text: `${translate(
+                      "offers.service_details.detail_headings.unit"
+                    )}`,
                     htmlFor: "count",
                     className: "mb-[10px]",
                   },
@@ -235,9 +253,11 @@ id:"div-field",
                   },
                 },
                 {
-                  containerClass: "mb-0 col-span-2",
+                  containerClass: "mb-0 2xl:col-span-2",
                   label: {
-                    text: "Total Price",
+                    text: `${translate(
+                      "offers.service_details.detail_headings.total_price"
+                    )}`,
                     htmlFor: "totalPrice",
                     className: "mb-[10px]",
                   },
@@ -255,9 +275,11 @@ id:"div-field",
             },
           },
           {
-            containerClass: "mb-0 col-span-2",
+            containerClass: "mb-0 2xl:col-span-2",
             label: {
-              text: "Description",
+              text: `${translate(
+                "offers.service_details.detail_headings.description"
+              )}`,
               htmlFor: "description",
               className: "mb-[10px]",
             },
@@ -281,13 +303,15 @@ id:"div-field",
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-2 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-1 2xl:grid-cols-2 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Discount Description",
+              text: `${translate(
+                "offers.service_details.discount_description"
+              )}`,
               htmlFor: "description",
               className: "mb-[10px]",
             },
@@ -310,8 +334,8 @@ id:"div-field",
       containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
-id:"button",
-        text: "Save",
+        id: "button",
+        text: `${translate("offers.service_details.save_button")}`,
         inputType: "submit",
         className:
           "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

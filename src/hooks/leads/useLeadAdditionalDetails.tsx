@@ -7,12 +7,14 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadAdditionalDetailsFormField } from "@/components/leads/fields/Additional-details-fields";
 import { generateLeadAdditionalDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
+import { updateLead } from "@/api/slices/lead/leadSlice";
+import { useMemo } from "react";
 
 export const useLeadAdditionalDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
 
   const handleBack = () => {
     onClick(3, ComponentsType.additional);
@@ -20,23 +22,33 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
 
   const schema = generateLeadAdditionalDetailsValidation(translate);
   const {
-    register,
     handleSubmit,
     control,
     setError,
     formState: { errors },
+    reset
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = LeadAdditionalDetailsFormField(
-    register,
     loading,
     control,
-    handleBack
+    handleBack,
+    leadDetails
   );
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    onClick(3, ComponentsType.additional);
+  useMemo(() => {
+    if (leadDetails.id) {
+      reset({
+        ...leadDetails
+      })
+    }
+  }, [leadDetails.id])
+  
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
+    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    if (response?.payload) onClick(3, ComponentsType.additional);
+
   };
   return {
     fields,
@@ -45,5 +57,6 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

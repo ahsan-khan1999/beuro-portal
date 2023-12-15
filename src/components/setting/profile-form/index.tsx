@@ -5,7 +5,7 @@ import React from "react";
 
 const SettingProfile = ({handleChangePassword} : {handleChangePassword: Function}) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile(handleChangePassword);
+  const { fields, onSubmit, handleSubmit, errors, error ,renderModal} = useSettingProfile(handleChangePassword);
   return (
     <FormCard>
       <Form
@@ -15,6 +15,7 @@ const SettingProfile = ({handleChangePassword} : {handleChangePassword: Function
         errors={errors}
         className={`${defaultClassName}`}
       />
+      {renderModal()}
     </FormCard>
   );
 };

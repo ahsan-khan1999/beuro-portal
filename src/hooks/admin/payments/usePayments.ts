@@ -20,6 +20,7 @@ export default function usePayments() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  
   return {
     currentPageRows,
     totalItems,

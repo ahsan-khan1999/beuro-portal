@@ -1,55 +1,113 @@
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import { invoicesData } from "@/utils/static";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { useRouter } from "next/router";
+import { FilterType } from "@/types";
+import { readInvoice, setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 
 const useInvoice = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<
-    InvoiceTableRowTypes[]
-  >([]);
+  const { lastPage, invoice, loading, totalCount, invoiceDetails } = useAppSelector(state => state.invoice)
 
-  const totalItems = invoicesData.length;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageRows, setCurrentPageRows] = useState<InvoiceTableRowTypes[]>(
+    []
+  );
+
+  const { query } = useRouter()
+
+  const [filter, setFilter] = useState<FilterType>({
+    location: "",
+    sortBy: "",
+    text: "",
+    type: "",
+    status: query?.filter as string
+
+  });
+  const totalItems = totalCount;
+
   const itemsPerPage = 10;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  useMemo(() => {
+    setFilter({
+      ...filter, status: query?.filter as string
+    })
+  }, [query?.filter])
 
-  // Function for close the modal
+  useEffect(() => {
+
+
+    dispatch(readInvoice({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+
+      if (res?.payload) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        setCurrentPageRows(res?.payload?.Invoice?.slice(startIndex, startIndex + itemsPerPage));
+      }
+    })
+  }, [])
+  const handleFilterChange = (filter: FilterType) => {
+    dispatch(readInvoice({ params: { filter: filter, page: 1, size: 10 } }))
+  };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-
-  // Function for handling the modal for exiting notes
   const handleNotes = (
-    item: InvoiceTableRowTypes,
-    e: React.MouseEvent<HTMLImageElement>
+    item: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     if (e) {
       e.stopPropagation();
     }
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+    const filteredLead = invoice?.filter((item_) => item_.id === item)
+    
+    if (filteredLead?.length === 1) {
+      dispatch(setInvoiceDetails(filteredLead[0]));
+      dispatch(readNotes({ params: { type: "invoice", id: filteredLead[0]?.id } }));
+      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+
+    }
   };
 
   // function for hnadling the add note
-  const handleAddNote = () => {
-    dispatch(updateModalType(ModalType.ADD_NOTE));
+  const handleAddNote = (id: string) => {
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "invoice" } }));
   };
 
-  // METHOD FOR HANDLING THE MODALS
+  // function for hnadling the add note
+  // const handleImageSlider = () => {
+  //   dispatch(updateModalType({ type: ModalType.NONE }));
+  //   dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+  // };
+
+  // const handleImageUpload = (
+  //   item: string,
+  //   e: React.MouseEvent<HTMLSpanElement>
+  // ) => {
+  //   e.stopPropagation();
+  //   const filteredLead = invoice?.filter((item_) => item_.id === item)
+  //   if (filteredLead?.length === 1) dispatch(setInvoiceDetails(filteredLead[0]));
+  //   dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+  // };
+
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} leadDetails={invoiceDetails} />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
+    // [ModalType.UPLOAD_OFFER_IMAGE]: (
+    //   <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"}/>
+    // ),
+    // [ModalType.IMAGE_SLIDER]: <ImageSliderContract onClose={onClose} details={contractDetails}/>,
   };
 
   const renderModal = () => {
@@ -57,24 +115,24 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      invoicesData.slice(startIndex, startIndex + itemsPerPage)
-    );
+    setCurrentPageRows(invoice?.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
   return {
     currentPageRows,
-    handlePageChange,
     totalItems,
+    handlePageChange,
     itemsPerPage,
     handleNotes,
     renderModal,
+    // handleImageUpload,
+    handleFilterChange,
+    filter,
+    setFilter,
   };
 };
 

@@ -13,7 +13,7 @@ export enum ChangeMailSetting {
 
 // enum for add reason
 export enum AddReason {
-  addReason = "addReason",
+  addReason = "reason",
 }
 
 // setting profile enum
@@ -23,12 +23,16 @@ export enum SettingProfile {
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
   website = "website",
-  mwstNumber = "mwstNumber",
-  streetAddress = "streetAddress",
-  postCode = "postCode",
+  mwstNumber = "taxNumber",
+  streetAddress = "streetNumber",
+  houseAddress = "houseNumber",
+
+  postCode = "postalCode",
   country = "country",
+  city = "city",
+
   bankName = "bankName",
   accountNumber = "accountNumber",
-  IBAN_number = "IBAN_number",
+  IBAN_number = "ibanNumber",
   changePassword="changePassword"
 }

@@ -7,12 +7,17 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsServiceDetailsFormField } from "@/components/leads/fields/Leads-service-details-fields";
 import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
+import { useEffect, useMemo } from "react";
+import { readService } from "@/api/slices/service/serviceSlice";
+import { formatDateTimeToDate } from "@/utils/utility";
+import { updateLead } from "@/api/slices/lead/leadSlice";
 
 export const useLeadsServiceEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { service } = useAppSelector((state) => state.service);
 
 
   const handleBack = () => {
@@ -27,13 +32,29 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
+    trigger,
+    reset,
+    watch
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = LeadsServiceDetailsFormField(register, loading, control, handleBack);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    onClick(2, ComponentsType.service);
+  const otherServices=  watch("otherServices")
+
+  useMemo(() => {
+    if (leadDetails.id) {
+      reset({
+        ...leadDetails,
+        desireDate: formatDateTimeToDate(leadDetails?.desireDate)
+      })
+    }
+  }, [leadDetails.id])
+
+  const fields = LeadsServiceDetailsFormField(register, loading, control, handleBack, trigger, service, leadDetails);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
+    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    if (response?.payload) onClick(2, ComponentsType.service);
+
   };
   return {
     fields,
@@ -42,5 +63,6 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

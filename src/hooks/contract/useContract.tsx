@@ -1,101 +1,146 @@
 import { contractTableTypes } from "@/types/contract";
-import { contractData } from "@/utils/static";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
+import { useRouter } from "next/router";
+import { FilterType } from "@/types";
+import { readContract, setContractDetails } from "@/api/slices/contract/contractSlice";
+import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import  { readImage } from "@/api/slices/imageSlice/image";
 
 const useContract = () => {
+  const { lastPage, contract, loading, totalCount, contractDetails } = useAppSelector(state => state.contract)
+  const { images } = useAppSelector(state => state.image)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
-  const totalItems = contractData.length;
+
+  const { query } = useRouter()
+
+  const [filter, setFilter] = useState<FilterType>({
+    location: "",
+    sortBy: "",
+    text: "",
+    type: "",
+    status: query?.filter as string
+
+  });
+  const totalItems = totalCount;
+
   const itemsPerPage = 10;
-
-  useEffect(() => {
-    // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      contractData.slice(startIndex, startIndex + itemsPerPage)
-    );
-  }, [currentPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  useMemo(() => {
+    setFilter({
+      ...filter, status: query?.filter as string
+    })
+  }, [query?.filter])
+  useEffect(() => {
+    // localStoreUtil.remove_data("con")
+    // dispatch(setOfferDetails(DEFAULT_OFFER))
+    // dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
+    // dispatch(setLeadDetails(DEFAULT_LEAD))
 
-  // Function for close the modal
+
+    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+
+      if (res?.payload) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        setCurrentPageRows(res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage));
+      }
+    })
+  }, [])
+  const handleFilterChange = (filter: FilterType) => {
+    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } }))
+  };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-
-  // Function for handling the modal for exiting notes
   const handleNotes = (
-    item: contractTableTypes,
-    e: React.MouseEvent<HTMLImageElement>
+    item: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     if (e) {
       e.stopPropagation();
     }
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.EXISTING_NOTES));
+    const filteredLead = contract?.filter((item_) => item_.id === item)
+    if (filteredLead?.length === 1) {
+      dispatch(setContractDetails(filteredLead[0]));
+      dispatch(readNotes({ params: { type: "contract", id: filteredLead[0]?.id } }));
+      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+
+    }
   };
 
   // function for hnadling the add note
-  const handleAddNote = () => {
-    dispatch(updateModalType(ModalType.ADD_NOTE));
+  const handleAddNote = (id: string) => {
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "contract" } }));
   };
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
   };
 
   const handleImageUpload = (
-    item: contractTableTypes,
-    e: React.MouseEvent<HTMLImageElement>
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(updateModalType(ModalType.NONE));
-
-    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+    const filteredLead = contract?.find((item_) => item_.id === item)
+    if (filteredLead) {
+      dispatch(setContractDetails(filteredLead));
+      dispatch(readImage({ params: { type: "contractID", id: filteredLead?.id } }));
+      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    }
   };
 
-  // METHOD FOR HANDLING THE MODALS
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} />
+      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} leadDetails={contractDetails} />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
-    [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
+  };
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    setCurrentPageRows(contract?.slice(startIndex, startIndex + itemsPerPage));
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
   return {
     currentPageRows,
     totalItems,
     handlePageChange,
     itemsPerPage,
-    handleImageUpload,
     handleNotes,
     renderModal,
+    handleImageUpload,
+    handleFilterChange,
+    filter,
+    setFilter,
   };
 };
 

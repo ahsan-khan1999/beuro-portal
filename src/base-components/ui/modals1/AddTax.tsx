@@ -12,7 +12,7 @@ const AddTax = ({ onClose, heading }: { onClose: () => void; heading:string}) =>
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
+        containerClassName="max-w-[480px] lg:max-w-[474.447px] min-h-fit"
       >
         <div className="relative flex flex-col px-[38px] pb-[40px] pt-[25px]">
           <Image

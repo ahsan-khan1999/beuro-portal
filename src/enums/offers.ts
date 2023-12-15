@@ -11,32 +11,33 @@ export enum ServiceOfferEditDetails {
 
 // Enum for edit offer details
 export enum EditOfferDetails {
-  selectCustomer = "selectCustomer",
-  customerName = "customerName",
+  selectCustomer = "customer",
+  customerName = "fullName",
   email = "email",
-  offerTitle = "offerTitle",
+  offerTitle = "title",
   offerNumber = "offerNumber",
   customerType = "customerType",
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
   streetNumber = "streetNumber",
-  postCode = "postCode",
+  postCode = "postalCode",
   country = "country",
   date = "date",
 }
 
 // Additional details enum
 export enum OfferAdditionalDetails {
-  chooseFromExisting = "chooseFromExisting",
-  additionlData = "additionlData",
+  chooseFromExisting = "content",
+  additionlData = "additionalDetails",
 }
 
 // Offers Address edit details
 export enum OfferAddressEditDetails {
-  streetNo = "streetNo",
-  postCode = "postCode",
+  streetNo = "streetNumber",
+  postCode = "postalCode",
   country = "country",
   description = "description",
+  address="address"
 }
 
 // enum for add service offer details
@@ -48,5 +49,11 @@ export enum AddServiceOfferDetails {
   unit = "unit",
   totalPrice = "totalPrice",
   description = "description",
-  discountDiscription = "discountDiscription",
+  discountDiscription = "discountDescription",
+  discountType="discountType",
+  isDiscount="isDiscount",
+  discountAmount="discountAmount",
+  isTax="isTax",
+  taxType="taxType",
+  taxAmount="taxAmount"
 }

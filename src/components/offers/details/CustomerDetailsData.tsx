@@ -3,9 +3,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
+import { OffersTableRowTypes } from "@/types/offers";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
-const CustomerDetailsData = () => {
+const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>
@@ -13,101 +17,128 @@ const CustomerDetailsData = () => {
         className="flex justify-between items-center pb-5 "
         id="Offer Details"
       >
-        <h2 className="text-[#393939] text-lg font-medium">Customer Details</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("offers.offer_details.heading")}
+        </h2>
         <button
-          onClick={() => router.push("/offers/edit")}
+          onClick={() => router.push({
+            pathname: "/offers/edit",
+            query: { offer: offerDetails?.id },
+          })}
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <Image src={editIcon} alt="editIcon" />
-          Edit Details
+          {translate("offers.offer_details.edit_button")}
         </button>
       </div>
 
       <hr className="opacity-20 mb-5" />
       <div className="mt-5">
-        <div className="grid grid-cols-3 gap-x-3 mb-5">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mb-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Customer Type
+              Offer Title
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Individual
+              {offerDetails?.title}
+
+            </div>
+          </div>
+          
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("offers.offer_details.customer_type")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {offerDetails?.customerID?.customerType}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Your Name
+              {translate("offers.offer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Rahal
+              {offerDetails?.customerID?.fullName}
+
+            </div>
+          </div>
+          {
+            staticEnums["CustomerType"][offerDetails?.customerID?.customerType] === 1 &&
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                Company Name
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+                {offerDetails?.customerID?.companyName}
+
+              </div>
+            </div>
+          }
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("offers.offer_details.email_address")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {offerDetails?.customerID?.email}
+
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Company Name
+              {translate("offers.offer_details.phone_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Cloud Mesh Solutions
+              {offerDetails?.customerID?.phoneNumber}
+
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("offers.offer_details.mobile_number")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {offerDetails?.customerID?.mobileNumber}
+
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-x-3">
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Email Address
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              rahal.ahmad@gmail.com
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Phone Number
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Mobile Number
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              +49 445612 2112
-            </div>
-          </div>
-        </div>
+
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
-          <div className="grid grid-cols-3 gap-x-3">
+          <h4 className="text-[#8F8F8F] mb-[10px]">
+            {translate("offers.offer_details.customer_address")}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Street NO.
+                {translate("offers.offer_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Zweibrückenstraße, 12
+                {offerDetails?.customerID?.address?.streetNumber}
+
               </div>
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Post Code
+                {translate("offers.offer_details.post_code")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                1234
+                {offerDetails?.customerID?.address?.postalCode}
+
               </div>
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Country
+                {translate("offers.offer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                Switzerland
+                {offerDetails?.customerID?.address?.country}
+
               </div>
             </div>
           </div>
         </div>
       </div>
-    </LeadsCardLayout>
+    </LeadsCardLayout >
   );
 };
 

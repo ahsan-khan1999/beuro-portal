@@ -6,12 +6,14 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddPostPonedValidation } from "@/validation/followUpSchema";
 import { AddPostPonedFollowUpFormField } from "@/components/follow-up/fields/add-post-poned-note-fields";
+import { createPostpondNotes } from "@/api/slices/followUp/followUp";
+import moment from "moment";
 
-export const useAddPostPonedNote = (handleFollowUpsDetails:Function) => {
+export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, followUpDetails } = useAppSelector((state) => state.followUp);
 
   const schema = generateAddPostPonedValidation(translate);
   const {
@@ -23,11 +25,13 @@ export const useAddPostPonedNote = (handleFollowUpsDetails:Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  // @ts-expect-error
   const fields = AddPostPonedFollowUpFormField(register, loading, control);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    handleFollowUpsDetails()
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, id: followUpDetails?.id, dateTime: moment(data?.dateTime).toISOString() }
+    const res = await dispatch(createPostpondNotes({ data: apiData, router, setError, translate }));
+    console.log(res,"res");
+    
+    if (res?.payload) handleFollowUpsDetails(followUpDetails?.id)
   };
   return {
     fields,

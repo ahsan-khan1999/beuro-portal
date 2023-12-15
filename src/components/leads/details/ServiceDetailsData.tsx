@@ -4,95 +4,117 @@ import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 import Image from "next/image";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
+import { Lead } from "@/types/leads";
+import { useAppSelector } from "@/hooks/useRedux";
+import { Service } from "@/types/service";
+import { DEFAULT_SERVICE } from "@/utils/static";
+import { filterLead, formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const ServiceDetailsData = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
+
 }) => {
+  const { leadDetails } = useAppSelector(state => state.lead)
+  const { service } = useAppSelector(state => state.service)
+
+
+  let requiredService = filterLead(leadDetails?.requiredService, service) as Service
+  let otherServices = filterLead(leadDetails?.otherServices, service) as Service[]
+
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 " id="Service Details">
-        <h2 className="text-[#393939] text-lg font-medium">Service Details</h2>
+      <div
+        className="flex justify-between items-center pb-5 "
+        id="Service Details"
+      >
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("leads.service_details.heading")}
+        </h2>
         <button
           onClick={() => onClick(2, ComponentsType.serviceEdit)}
           className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
         >
           <Image src={editIcon} alt="editIcon" />
-          Edit Details
+          {translate("leads.service_details.edit_button")}
         </button>
       </div>
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
 
       <div className="mt-5">
-        <div className="grid grid-cols-3 gap-x-3 mb-5">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Required Service
+              {translate("leads.service_details.required_service")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Cleaning
+              {requiredService?.serviceName}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Desire Date
+              {translate("leads.service_details.desire_date")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              12/09/2023
+              {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Flexibility
+              {translate("leads.service_details.flexibility")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              25/09 to 28/09
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-x-3">
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Contact Availability
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Morning(9am to 12am)
+              {leadDetails?.flexibility}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Preferred Contact
+              {translate("leads.service_details.availability")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Via Email
+              {leadDetails?.contactAvailability}
             </div>
           </div>
           <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">Budget</label>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("leads.service_details.prefer_contact")}
+            </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              Less then 1000CHF
+              {leadDetails?.preferredContact}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("leads.service_details.budget")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {leadDetails?.budget}
             </div>
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-3 gap-4">
-          <div className="col-span-1">
+        <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-x-3">
+          <div className="xl:col-span-1">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Lead Source
+              {translate("leads.service_details.lead_source")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              Instagram
+              {leadDetails?.leadSource}
             </div>
           </div>
-          <div className="col-span-2">
+          <div className="xl:col-span-2">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Other Services
+              {translate("leads.service_details.other_services")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              Cleaning, Moving, Painting
+              {
+                Array.isArray(otherServices) && otherServices?.map((item) => item.serviceName + ", ")
+              }
             </div>
           </div>
         </div>

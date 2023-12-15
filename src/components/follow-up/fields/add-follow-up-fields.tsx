@@ -1,14 +1,16 @@
 import { Modals } from "@/enums/follow-up";
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  customer,
+  { customer, lead },
   onItemChange,
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       //@ts-expect-error
@@ -20,7 +22,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Select Customers*",
+              text: `${translate("follow_up.add_follow_up.select_customer")}`,
               htmlFor: "customer",
               className: "mb-[12px]",
             },
@@ -39,7 +41,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             </svg>`,
               options: customer?.map((item) => (
                 {
-                  label: item?.fullName + " "+(item?.refID),
+                  label: item?.fullName + " " + (item?.refID),
                   value: item?.id.toString(),
                 }
               )),
@@ -51,7 +53,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Enter Title*",
+              text: `${translate("follow_up.add_follow_up.title")}`,
               htmlFor: "title",
               className: "mb-[12px]",
             },
@@ -76,20 +78,21 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Select Lead*",
-              htmlFor: "selectLead",
+              text: `${translate("follow_up.add_follow_up.select_lead")}`,
+              htmlFor: "lead",
               className: "mb-[12px]",
             },
             field: {
-              className: "!border-dark  focus:!border-primary ",
+              className: "h-[42px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              value: "Enter your Lead",
-              id: "selectLead",
-              name: "selectLead",
-              options: [
-                { value: "Mateen Nawaz(R-1)", label: "Mateen Nawaz(R-1)" },
-                { value: "Hamza(R-2)", label: "Hamza(R-2)" },
-              ],
+              id: "lead",
+              name: "lead",
+              options: lead?.map((item) => (
+                {
+                  label: item?.leadStatus + " " + (item?.refID),
+                  value: item?.id.toString(),
+                }
+              )),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path d="M16.3952 7.47788C15.1093 7.47788 14.0668 6.43541 14.0668 5.14946C14.0668 3.86351 15.1093 2.82104 16.3952 2.82104C17.6812 2.82104 18.7236 3.86351 18.7236 5.14946C18.7236 6.43541 17.6812 7.47788 16.3952 7.47788Z" fill="#8F8F8F"/>
               <path d="M8.2458 7.47788C6.95986 7.47788 5.91739 6.43541 5.91739 5.14946C5.91739 3.86351 6.95986 2.82104 8.2458 2.82104C9.53175 2.82104 10.5742 3.86351 10.5742 5.14946C10.5742 6.43541 9.53175 7.47788 8.2458 7.47788Z" fill="#8F8F8F"/>
@@ -98,15 +101,14 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M11.7383 10.9702H4.75303C4.75303 9.04421 6.31971 7.47754 8.24566 7.47754C10.1716 7.47754 11.7383 9.04421 11.7383 10.9702Z" fill="#8F8F8F"/>
             </svg>`,
               control,
-              onItemChange: () => onItemChange && onItemChange(Modals.leads),
             },
           },
 
           {
             containerClass: "mb-0",
             label: {
-              text: "Follow up Date and time*",
-              htmlFor: "dateAndTime",
+              text: `${translate("follow_up.add_follow_up.follow_up_date")}`,
+              htmlFor: "dateTime",
               className: "mb-[12px]",
             },
             field: {
@@ -114,8 +116,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               className: `!border-dark focus:!border-primary 
                 !border-light
               `,
-              id: "dateAndTime",
-              name: "dateAndTime",
+              id: "dateTime",
+              name: "dateTime",
               value: "22:10:06,  12 September 2023",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M8.83764 11.6513C9.39544 11.6513 9.84763 11.1992 9.84763 10.6413C9.84763 10.0835 9.39544 9.63135 8.83764 9.63135C8.27983 9.63135 7.82764 10.0835 7.82764 10.6413C7.82764 11.1992 8.27983 11.6513 8.83764 11.6513Z" fill="#8F8F8F"/>
@@ -124,6 +126,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M15.6049 2.02244H15.5309C15.4575 1.56447 15.2848 1.14057 15.0265 0.796098C14.6482 0.291705 14.1105 0.00244141 13.5512 0.00244141C12.9919 0.00244141 12.4542 0.291705 12.076 0.796098C11.8176 1.14057 11.6449 1.56447 11.5716 2.02244H12.6014C12.7436 1.44068 13.1212 1.01244 13.5513 1.01244C13.9813 1.01244 14.3589 1.44068 14.5011 2.02244H12.6015C12.5626 2.18121 12.5412 2.35136 12.5412 2.52744C12.5412 3.34867 13.0037 4.04243 13.5512 4.04243C13.8301 4.04243 14.0562 4.26854 14.0562 4.54743C14.0562 4.82633 13.8301 5.05243 13.5512 5.05243C12.9919 5.05243 12.4542 4.76317 12.076 4.25878C11.7247 3.79044 11.5312 3.17555 11.5312 2.52744C11.5312 2.35604 11.5451 2.1871 11.5716 2.02244H10.8176C10.7442 1.56447 10.5716 1.14057 10.3132 0.796098C9.93488 0.291705 9.39716 0.00244141 8.83789 0.00244141C8.27862 0.00244141 7.7409 0.291705 7.36265 0.796098C7.10426 1.14057 6.93165 1.56447 6.85823 2.02244H7.88812C8.0303 1.44068 8.40783 1.01244 8.83792 1.01244C9.26802 1.01244 9.64555 1.44068 9.78773 2.02244H7.88812C7.84927 2.18121 7.82789 2.35136 7.82789 2.52744C7.82789 3.34867 8.2904 4.04243 8.83789 4.04243C9.11679 4.04243 9.34289 4.26854 9.34289 4.54743C9.34289 4.82633 9.11679 5.05243 8.83789 5.05243C8.27862 5.05243 7.7409 4.76317 7.36265 4.25878C7.01134 3.79044 6.81789 3.17555 6.81789 2.52744C6.81789 2.35604 6.8318 2.1871 6.85823 2.02244H6.10426C6.03084 1.56447 5.85823 1.14057 5.59984 0.796098C5.22156 0.291705 4.68384 0.00244141 4.12457 0.00244141C3.5653 0.00244141 3.02757 0.291705 2.64933 0.796098C2.39094 1.14057 2.21833 1.56447 2.1449 2.02244H3.1748C3.31694 1.44068 3.69447 1.01244 4.12457 1.01244C4.55466 1.01244 4.93219 1.44068 5.07437 2.02244H3.1748C3.13601 2.18121 3.11457 2.35136 3.11457 2.52744C3.11457 3.34867 3.57708 4.04243 4.12457 4.04243C4.40346 4.04243 4.62956 4.26854 4.62956 4.54743C4.62956 4.82633 4.40346 5.05243 4.12457 5.05243C3.5653 5.05243 3.02757 4.76317 2.64933 4.25878C2.29802 3.79044 2.10457 3.17555 2.10457 2.52744C2.10457 2.35604 2.11847 2.1871 2.1449 2.02244H2.0709C1.04989 2.02244 0.219238 2.85309 0.219238 3.8741V6.06243H17.4565V3.8741C17.4565 2.85309 16.6259 2.02244 15.6049 2.02244Z" fill="#8F8F8F"/>
             </svg>`,
               register,
+              dateType:"datetime-local"
             },
           },
         ],
@@ -133,16 +136,16 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Follow up type",
-        htmlFor: "followUpType",
+        text: `${translate("follow_up.add_follow_up.follow_up_type")}`,
+        htmlFor: "type",
         className: "mb-[12px]",
       },
       field: {
         className: "!border-dark  focus:!border-primary ",
         type: Field.select,
         value: "Reason",
-        id: "followUpType",
-        name: "followUpType",
+        id: "type",
+        name: "type",
         options: [{ value: "Reason", label: "Reason" }],
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21" fill="none">
         <path d="M2.29318 20.821H14.2672C15.2576 20.821 16.0633 20.0153 16.0633 19.0248V6.37227H11.8724C10.882 6.37227 10.0763 5.56658 10.0763 4.57617V0.385254H2.29318C1.30276 0.385254 0.49707 1.19095 0.49707 2.18136V19.0248C0.49707 20.0153 1.30276 20.821 2.29318 20.821ZM4.68798 8.807H11.8724C12.2033 8.807 12.4711 9.07478 12.4711 9.4057C12.4711 9.73662 12.2033 10.0044 11.8724 10.0044H4.68798C4.35706 10.0044 4.08928 9.73662 4.08928 9.4057C4.08928 9.07478 4.35706 8.807 4.68798 8.807ZM4.68798 11.2018H11.8724C12.2033 11.2018 12.4711 11.4696 12.4711 11.8005C12.4711 12.1314 12.2033 12.3992 11.8724 12.3992H4.68798C4.35706 12.3992 4.08928 12.1314 4.08928 11.8005C4.08928 11.4696 4.35706 11.2018 4.68798 11.2018ZM4.68798 13.5966H11.8724C12.2033 13.5966 12.4711 13.8644 12.4711 14.1953C12.4711 14.5262 12.2033 14.794 11.8724 14.794H4.68798C4.35706 14.794 4.08928 14.5262 4.08928 14.1953C4.08928 13.8644 4.35706 13.5966 4.68798 13.5966ZM4.68798 15.9914H9.4776C9.80852 15.9914 10.0763 16.2592 10.0763 16.5901C10.0763 16.921 9.80852 17.1888 9.4776 17.1888H4.68798C4.35706 17.1888 4.08928 16.921 4.08928 16.5901C4.08928 16.2592 4.35706 15.9914 4.68798 15.9914Z" fill="#8F8F8F"/>
@@ -154,8 +157,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     {
       containerClass: "mt-5",
       label: {
-        text: "Additional Details",
-        htmlFor: "addititionalDetails",
+        text: `${translate("follow_up.add_follow_up.additional_details")}`,
+        htmlFor: "additionalDetails",
         className: "mb-[12px]",
       },
       field: {
@@ -164,8 +167,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
           !border-light
         `,
         rows: 5,
-        id: "addititionalDetails",
-        name: "addititionalDetails",
+        id: "additionalDetails",
+        name: "additionalDetails",
         placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",
         register,
       },
@@ -176,10 +179,10 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Save",
+        text: `${translate("follow_up.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

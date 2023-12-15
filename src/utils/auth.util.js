@@ -4,7 +4,7 @@ import { setCookie, getCookie, deleteCookie } from 'cookies-next';
 export const getToken = () => getCookie("buroToken");
 export const getRefreshToken = () => getCookie("buroRefreshToken");
 
-export const setToken = (token) => setCookie("buroToken", token);
+export const setToken = (token) => setCookie("buroToken", token, { httpOnly: true, sameSite: true, secure: true });
 export const setRefreshToken = (token) =>
   setCookie("buroRefreshToken", token);
 
@@ -112,3 +112,8 @@ export const generateValues = (data) => {
   }
   return option;
 };
+
+export const getLabelByValue = (value, list) => {
+  let filteredItem = list.filter((item) => item.value === value)
+  if (filteredItem) return filteredItem[0]?.label
+}

@@ -28,7 +28,6 @@ export enum addressDetailsFields {
   state = "state",
 }
 
-
 export enum ResetPasswordFields {
   email = "email",
 }
@@ -39,7 +38,3 @@ export enum ChangePasswordFields {
   currentPassword = "currentPassword",
   newPassword = "newPassword",
 }
-
-
-
-

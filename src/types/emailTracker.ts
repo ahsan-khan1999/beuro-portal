@@ -1,18 +1,16 @@
 // Email-tracker
 export interface TableRowEmailTracker {
-  id: number;
+  id: string;
   recipient: string;
   subject: string;
-  sendAt: {
-    time: string;
-    date: string;
-  };
-  viewedAt: {
-    time: string;
-    date: string;
-  };
-  status: {
-    text: string;
+
+
+  status: "Open" | "Pending"
+  viewMail: {
     colorClass: string;
   };
+  createdAt: string;
+  viewedAt: string;
+  description: string;
+  email:string
 }

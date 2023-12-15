@@ -10,6 +10,8 @@ import AddressEditDetails from "../edit/AddressEditDetails";
 import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
+import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
@@ -24,6 +26,9 @@ export enum ComponentsType {
 
 const LeadsDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
+  const { leadDetails } = useAppSelector((state) => state.lead);
+  const { images } = useAppSelector((state) => state.image);
+
   const [data, setData] = useState<{
     index: number;
     component: ComponentsType;
@@ -33,7 +38,8 @@ const LeadsDetailsData = () => {
     setData({ index, component });
   };
 
-  
+  const { t: translate } = useTranslation();
+
   const componentArray = [
     <CustomerDetailsData onClick={handleEdit} />,
     <AddressDetailsData onClick={handleEdit} />,
@@ -93,7 +99,7 @@ const LeadsDetailsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Customer Details",
+      name: `${translate("leads.tabs_headings.customer")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -103,7 +109,7 @@ const LeadsDetailsData = () => {
       <path d="M16.3839 16.0996L13.6165 20.4262C12.9002 21.543 11.2708 21.5393 10.5579 20.4272L7.786 16.1007C5.34718 16.6646 3.84375 17.6976 3.84375 18.932C3.84375 21.0739 8.09121 22.2295 12.0875 22.2295C16.0837 22.2295 20.3312 21.0739 20.3312 18.932C20.3312 17.6967 18.8257 16.6632 16.3839 16.0996Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"}
       }/>
     </svg>`,
-      name: "Address Details",
+      name: `${translate("leads.tabs_headings.address")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -118,7 +124,7 @@ const LeadsDetailsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Service Details",
+      name: `${translate("leads.tabs_headings.service")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -135,31 +141,30 @@ const LeadsDetailsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Additional Details",
+      name: `${translate("leads.tabs_headings.additional")}`,
     },
   ];
 
   return (
-    <div className="flex w-full gap-6">
-      <div className="flex flex-col gap-[14px]">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-            key={index}
-          />
-        ))}
-
-        <div>
-          <LeadsDetailsImages />
+    <div className="grid grid-cols-1 xl:grid-cols-4 xl:gap-x-6 ">
+      <div className="col-span-1 flex flex-row xl:flex-col gap-4 w-full">
+        <div className="flex flex-col gap-y-[14px]">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+              key={index}
+            />
+          ))}
         </div>
+        <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[600px] overflow-scroll">
+      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

@@ -8,12 +8,23 @@ import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/customer/useCustomer";
 
 export default function Customers() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter,handleFilterChange } =
-    useCustomer();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleFilterChange,
+  } = useCustomer();
 
   return (
     <Layout>
-      <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <TableLayout>
         <TableHeading />
         <TableRow currentPageRows={currentPageRows} />

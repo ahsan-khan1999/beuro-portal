@@ -6,7 +6,6 @@ import FollowUpsTable from "@/components/follow-up";
 import { FollowUpsProps } from "@/types/follow-up";
 
 const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
-  
   return (
     <>
       <BaseModal
@@ -20,7 +19,7 @@ const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <FollowUpsTable handleFollowUpsDetails={handleFollowUpsDetails}/>
+          <FollowUpsTable handleFollowUpsDetails={handleFollowUpsDetails} />
         </div>
       </BaseModal>
     </>

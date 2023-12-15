@@ -1,7 +1,7 @@
 import React from "react";
 import companyLogo from "@/assets/svgs/company-logo.svg";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
-import userIcon from "@/assets/svgs/user.svg";
+import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
@@ -10,36 +10,38 @@ import { isJSON } from "@/utils/functions";
 import { getUser } from "@/utils/auth.util";
 const Header = () => {
   // const user = isJSON(getUser())
-  const { user } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector((state) => state.auth);
+
   return (
-    <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white">
+    <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       <div className="flex items-center">
         <Image
-          src={companyLogo}
+          src={user?.company?.logo || ""}
           alt="Company Logo"
-          className="pr-[50px] border-r-2 border-[#000000] border-opacity-10"
+          className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+          height={50}
+          width={150}
         />
         <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
-          Umzugsfuchs{" "}
+          {user?.company?.companyName}{" "}
         </span>
       </div>
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          <div className="relative menu pl-7 mr-6" >
+          <div className="relative menu pl-7 mr-6">
             <Image src={createOfferIcon} alt="Create Offer Icon" />
             <FollowUpDropDown />
           </div>
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image src={userIcon} alt="User Icon" className="mr-3" />
+          <Image src={ userIcon} alt="User Icon" className="mr-3" />
           <div className="">
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}
             </span>
             <span className="text-sm tracking-[0.4 px] text-[#8F8F8F] block">
               {user?.role}
-
             </span>
           </div>
         </div>

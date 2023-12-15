@@ -7,7 +7,7 @@ import useChangePassword from "@/hooks/modals/useChangePassword";
 
 const ChangePassword = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error } =
+  const { fields, onSubmit, handleSubmit, errors, error , translate} =
   useChangePassword(onClose);
   return (
     <>
@@ -18,7 +18,7 @@ const ChangePassword = ({ onClose }: { onClose: () => void }) => {
         <div className="relative flex flex-col px-[38px] pb-[40px] pt-[25px]">
           <Image src={crossIcon} alt="crossIcon" className="absolute right-5 top-5 cursor-pointer" onClick={onClose}/>
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[28px]">
-            Change Password
+           {translate("setting.account_setting.change_password")}
           </p>
 
           <Form

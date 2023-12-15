@@ -9,12 +9,12 @@ const OfferContentAddDetails = ({
   onHandleNext: Function;
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddOfferContentDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] ">
-        <h2 className="text-[#393939] text-lg font-medium">Offer Content</h2>
+        <h2 className="text-[#393939] text-lg font-medium">{translate("content.tabs_headings.offer_content")}</h2>
       </div>
       <hr className="opacity-20 mb-5" />
       <Form

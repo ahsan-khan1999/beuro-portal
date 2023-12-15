@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContactSupportFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const ContactSupportFormField: GenerateContactSupportFormField = (
   register,
@@ -7,17 +8,18 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
   control,
   onClick
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 lg:grid-cols-3 gap-x-3 ",
         children: [
           {
             containerClass: "mb-0",
             label: {
-              text: "Full Name*",
+              text: `${translate("contact_support.form_fields.full_name")}`,
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -34,7 +36,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Email Address*",
+              text: `${translate("contact_support.form_fields.email_address")}`,
               htmlFor: "email",
               className: "mb-[10px]",
             },
@@ -49,17 +51,20 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
           },
           {
-            containerClass: "mb-0",
-            label: { text: "Phone Number", htmlFor: "phoneNumber" },
+            containerClass: "mb-0 mt-5 lg:mt-0",
+            label: {
+              text: `${translate("contact_support.form_fields.phone_number")}`,
+              htmlFor: "phoneNumber",
+            },
             field: {
               type: Field.phone,
-              className: "!p-4    !border-dark  focus:!border-primary",
+              className: "  !h-[54px]  !border-dark  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
               control,
               value: "",
-              disabled: false
+              disabled: false,
             },
           },
         ],
@@ -76,16 +81,16 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
           {
             containerClass: "mb-0 col-span-2",
             label: {
-              text: "Reason for Contact",
-              htmlFor: "reasonForContact",
+              text: `${translate("contact_support.form_fields.reason")}`,
+              htmlFor: "reason",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "pl-4  !h-[54px] !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "When is a convenient time for a consultation?",
-              id: "reasonForContact",
-              name: "reasonForContact",
+              id: "reason",
+              name: "reason",
               options: [
                 { value: "Individual", label: "Individual" },
                 { value: "Random", label: "Random" },
@@ -99,7 +104,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     {
       containerClass: "mb-0 mt-[22px]",
       label: {
-        text: "Your Message",
+        text: `${translate("contact_support.form_fields.message")}`,
         htmlFor: "message",
         className: "mb-[10px]",
       },
@@ -119,10 +124,10 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Submit Request",
+        text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         loading,
       },
     },

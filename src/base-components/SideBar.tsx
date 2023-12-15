@@ -37,13 +37,14 @@ export const svgs = {
   setting: <SettingsIcon />,
   dummy: <></>,
 };
+
 const SideBar = () => {
   const userRole = 1;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   return (
-    <div className="fixed overflow-x-hidden  overflow-y-scroll  bg-white rounded-r-[6px] ">
-      <div className="max-w-[247px] pt-6 px-4 pb-8   relative      sidebar-height    flex flex-col">
+    <div className="fixed left-0 min-w-[247px] bg-white rounded-r-[6px] h-[90vh] top-[92px]">
+      <div className="  pt-6 px-4 pb-8 flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {
             return (
@@ -53,9 +54,9 @@ const SideBar = () => {
                 ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`flex items-center px-3 py-2 w-full ${
+                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${
                       router.pathname === item.pathname &&
-                      "bg-primary rounded-lg"
+                      "bg-primary rounded-lg  hover:bg-primary"
                     } ${item.className}`}
                   >
                     <span
@@ -65,11 +66,12 @@ const SideBar = () => {
                     >
                       {item.icon && svgs[item.icon]}
                     </span>
+
                     <span
-                      className={` font-medium tracking-[0.5px] ${
+                      className={`font-medium tracking-[0.5px] ${
                         router.pathname === item.pathname
                           ? "text-white"
-                          : " text-[#4B4B4B]"
+                          : "text-[#4B4B4B]"
                       }`}
                     >
                       {item.title}
@@ -79,11 +81,15 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
+                        item.pathname &&
+                          router.push({
+                            pathname: item.pathname,
+                            query: { filter: item.query },
+                          });
                       }}
-                      className={`flex  justify-between items-center px-3 py-2 w-full ${
+                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${
                         router.pathname === item.pathname &&
-                        "bg-primary rounded-lg"
+                        "bg-primary rounded-lg hover:bg-primary"
                       }`}
                     >
                       <div className="flex items-center">
@@ -110,6 +116,9 @@ const SideBar = () => {
                           ${
                             router.pathname === item.pathname && "sidebar-svg"
                           }`}
+                        onClick={() => {
+                          isOpen == index ? setIsOpen(null) : setIsOpen(index);
+                        }}
                       >
                         <svg
                           className={` `}
@@ -130,11 +139,15 @@ const SideBar = () => {
                       item.inner &&
                       item.inner.map((it, ind) => {
                         return (
-                          <div className=" mt-3 ml-8 px-3" key={ind}>
+                          <div className=" mt-3 px-3" key={ind}>
                             <button
-                              className="text-[#4B4B4B] font-medium tracking-[0.5px]  "
+                              className="text-[#4B4B4B] hover:bg-[#E9E1FF]  rounded-lg font-medium tracking-[0.5px]  px-3 py-2 w-full"
                               onClick={() =>
-                                it.pathname && router.push(it.pathname)
+                                it.pathname &&
+                                router.push({
+                                  pathname: it.pathname,
+                                  query: { filter: it.query },
+                                })
                               }
                             >
                               {it.title}
@@ -148,8 +161,9 @@ const SideBar = () => {
             );
           })}
         </div>
-
-        <Image src={logo} alt="Logo" className=" mt-auto pt-10 ml-3 pb-2" />
+      </div>
+      <div className="absolute  bottom-0 py-10 left-3">
+        <Image src={logo} alt="Logo" className="mt-auto pt-10 ml-3 " />
       </div>
     </div>
   );

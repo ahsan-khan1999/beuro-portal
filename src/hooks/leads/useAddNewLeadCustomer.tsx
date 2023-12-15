@@ -1,33 +1,120 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  UseFormRegister,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
+import { useEffect, useMemo } from "react";
+import {
+  readCustomer,
+  setCustomerDetails,
+} from "@/api/slices/customer/customerSlice";
+import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
+import { updateQuery } from "@/utils/update-query";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 
 export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { customer, customerDetails } = useAppSelector(
+    (state) => state.customer
+  );
+  useEffect(() => {
+    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }));
+  }, []);
 
+  const onCancel = () => {
+    router.pathname = "/leads";
+    updateQuery(router, router.locale as string);
+  };
   const schema = generateAddNewLeadCustomerDetailsValidation(translate);
+
   const {
     register,
     handleSubmit,
     control,
     setError,
     formState: { errors },
+    watch,
+    setValue,
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = AddNewCustomerLeadFormField(register, loading, control);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    onHandleNext(ComponentsType.addressEdit);
+  const customerType = watch("customerType");
+
+  const type = watch("type");
+  
+  const onCustomerSelect = (id: string) => {
+    if (!id) return;
+    const selectedCustomers = customer.filter((item) => item.id === id);
+    dispatch(
+      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
+    );
+
+    reset({
+      ...selectedCustomers[0],
+      type: type,
+    });
+  };
+
+  useMemo(() => {
+    if (leadDetails.id) {
+      reset({
+        fullName: leadDetails.customerDetail?.fullName,
+        type: leadDetails.type,
+        customer: leadDetails.customerID,
+
+        customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails.customerDetail?.customerType),
+        email: leadDetails.customerDetail?.email,
+        phoneNumber: leadDetails.customerDetail?.phoneNumber,
+        mobileNumber: leadDetails.customerDetail?.mobileNumber,
+        address: leadDetails?.customerDetail?.address,
+        companyName: leadDetails?.customerDetail?.companyName,
+
+      });
+    }
+  }, [leadDetails.id]);
+
+  const fields = AddNewCustomerLeadFormField(
+    register,
+    loading,
+    control,
+    {
+      customerType,
+      type,
+      customer,
+      onCustomerSelect,
+      customerDetails,
+      onCancel,
+      leadDetails,
+    },
+    setValue
+  );
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if (leadDetails?.id) {
+      const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressAdd }
+
+      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressAdd);
+    } else {
+      const apiData = { ...data, step: 1, stage: ComponentsType.addressAdd }
+
+      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+      if (res?.payload) onHandleNext(ComponentsType.addressAdd);
+    }
   };
   return {
     fields,
@@ -36,5 +123,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    translate,
   };
 };

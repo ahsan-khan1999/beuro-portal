@@ -1,5 +1,6 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { CustomersAdmin } from "@/types/admin/customer";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const CustomerDetailsData = ({
@@ -7,13 +8,14 @@ const CustomerDetailsData = ({
 }: {
   customerDetail: CustomersAdmin;
 }) => {
+  const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
       <div className="mt-5">
-        <div className="grid grid-cols-4 gap-x-3 mb-5">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Owner Name
+              {translate("admin.customers_details.customer_details.owner_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.customerName}
@@ -21,7 +23,9 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Company Name
+              {translate(
+                "admin.customers_details.customer_details.company_name"
+              )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.companyName}
@@ -29,7 +33,9 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Email Address
+              {translate(
+                "admin.customers_details.customer_details.email_address"
+              )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.email}
@@ -37,17 +43,17 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Created On
+              {translate("admin.customers_details.customer_details.created_on")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.createdOn?.toLocaleDateString()}
             </div>
           </div>
-        </div>
-        <div className="grid grid-cols-4 gap-x-3">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Mobile Number
+              {translate(
+                "admin.customers_details.customer_details.mobile_number"
+              )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.mobileNumber}
@@ -55,19 +61,26 @@ const CustomerDetailsData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Phone Number
+              {translate(
+                "admin.customers_details.customer_details.phone_number"
+              )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
               {customerDetail?.phoneNumber}
             </div>
           </div>
         </div>
+
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">Address Details</h4>
-          <div className="grid grid-cols-4 gap-x-3">
+          <h4 className="text-[#8F8F8F] mb-[10px]">
+            {translate("admin.customers_details.customer_details.sub_heading")}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Street NO.
+                {translate(
+                  "admin.customers_details.customer_details.street_no"
+                )}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {customerDetail?.addressDetails?.streetNo}
@@ -75,7 +88,9 @@ const CustomerDetailsData = ({
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Post Code
+                {translate(
+                  "admin.customers_details.customer_details.post_code"
+                )}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {customerDetail?.addressDetails?.postCode}
@@ -83,7 +98,7 @@ const CustomerDetailsData = ({
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Country
+                {translate("admin.customers_details.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {customerDetail?.addressDetails?.country}

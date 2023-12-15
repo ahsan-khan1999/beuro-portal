@@ -26,6 +26,7 @@ const initialState: CustomerState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     customerDetails: DEFAULT_CUSTOMER
 
 }
@@ -62,11 +63,9 @@ export const createCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            let apiData={...data}
-            //@ts-expect-error 
+            let apiData = { ...data }
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
-            //@ts-expect-error 
-            if (staticEnums["CustomerType"][data.customerType] == 1) delete apiData["companyName"]
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.createCustomer(apiData);
             return true;
         } catch (e: any) {
@@ -80,11 +79,9 @@ export const updateCustomer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            
+
             let apiData = { ...data }
-            //@ts-expect-error 
             apiData = { ...apiData, customerType: staticEnums["CustomerType"][data?.customerType] }
-            //@ts-expect-error 
             if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
             await apiServices.updateCustomer(apiData);
             return true;
@@ -131,10 +128,10 @@ const customerSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readCustomer.fulfilled, (state, action) => {
-            state.customer = action.payload.Customer,
-                state.lastPage = action.payload.lastPage,
-                state.totalCount = action.payload.totalCount,
-                state.loading = false;
+            state.customer = action.payload.Customer;
+            state.lastPage = action.payload.lastPage;
+            state.totalCount = action.payload.totalCount;
+            state.loading = false;
         });
         builder.addCase(readCustomer.rejected, (state) => {
             state.loading = false

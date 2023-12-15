@@ -1,24 +1,29 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContractFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const ContractEmailPreviewFormField: GenerateContractFormField = (
   register,
   loading,
   control,
   onClick,
-  onBack
+  onBack,
+  content,
+  contentDetails,
+  onContentSelect
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3",
+        id: "div-field",
+        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
             containerClass: "mb-0 col-span-1",
             label: {
-              text: "Email",
+              text: `${translate("contracts.contract_email_preview.email")}`,
               htmlFor: "email",
               className: "mb-[10px]",
             },
@@ -30,32 +35,26 @@ id:"div-field",
               name: "email",
               placeholder: "hamzaicp54@gmail.com",
               register,
+              
             },
           },
           {
             containerClass: "col-span-2",
             label: {
-              text: "Content",
+              text: `${translate("contracts.contract_email_preview.content")}`,
               htmlFor: "content",
               className: "mb-[10px]",
             },
             field: {
-              className:
-                "!p-4  !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              value:
-                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-              options: [
-                {
-                  value:
-                    "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-                  label:
-                    "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smithem",
-                },
-              ],
+
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
               control,
+              onItemChange: onContentSelect,
+              value:""
             },
           },
         ],
@@ -65,7 +64,7 @@ id:"div-field",
     {
       containerClass: "mb-0 mt-5",
       label: {
-        text: "Subject",
+        text: `${translate("contracts.contract_email_preview.subject")}`,
         htmlFor: "subject",
         className: "mb-[10px]",
       },
@@ -78,13 +77,14 @@ id:"div-field",
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
+        value: contentDetails?.confirmationContent?.title
       },
     },
 
     {
       containerClass: "mb-0 mt-5",
       label: {
-        text: "Description",
+        text: `${translate("contracts.contract_email_preview.description")}`,
         htmlFor: "description",
         className: "mb-[10px]",
       },
@@ -94,13 +94,15 @@ id:"div-field",
         id: "description",
         name: "description",
         control,
+        value: contentDetails?.confirmationContent?.description
+
       },
     },
 
     {
       containerClass: " mt-5",
       label: {
-        text: "Attachments",
+        text: `${translate("contracts.contract_email_preview.attachments")}`,
         htmlFor: "fileUpload",
         className: "mb-[10px]",
       },
@@ -119,15 +121,17 @@ id:"div-field",
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Back",
+              id: "button",
+              text: `${translate(
+                "contracts.contract_email_preview.back_button"
+              )}`,
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
@@ -139,8 +143,10 @@ id:"button",
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Next",
+              id: "button",
+              text: `${translate(
+                "contracts.contract_email_preview.next_button"
+              )}`,
               inputType: "submit",
               className:
                 "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

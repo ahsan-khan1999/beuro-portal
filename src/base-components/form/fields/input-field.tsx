@@ -19,28 +19,38 @@ export const InputField = ({
   setValue,
   svg,
   img,
+  remove,
+  onRemove,
+  fieldIndex,
+  onChange,
+  percentage,
+  step
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = `border border-borderColor rounded-lg w-full  ${
-    success ? "pl-4 pr-10" : "pl-11 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+    } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
 
   return (
     <div>
-     
+
 
       <div className={`relative w-full flex items-center`}>
-       {img && <Image src={addtionalDetailImg} alt="paragraph_icon" className="absolute top-4 left-4"/>}
+        {img && <Image src={addtionalDetailImg} alt="paragraph_icon" className="absolute top-4 left-4" />}
         {svg && (
           <span
-            className={`mr-3 absolute  left-4 ${
-              (inputFocus && "tests") || "test"
-            }`}
+            className={`mr-3 absolute  left-4 ${(inputFocus && "tests") || "test"
+              }`}
             dangerouslySetInnerHTML={{ __html: svg }}
           />
         )}
+        {
+          remove &&
+          <div className="cursor-pointer -top-9 absolute left-80 bg-red px-3 py-1 mt-1 text-white rounded-t-md" onClick={onRemove}>
+            {remove}
+          </div>
+        }
 
         <input
           onFocus={() => setInputFocus(true)}
@@ -53,7 +63,17 @@ export const InputField = ({
           placeholder={placeholder}
           disabled={disabled}
           key={id}
+          step={step}
+          // onChangeCapture={}
+          //@ts-expect-error
+          onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}
         />
+        {percentage && (
+          <span
+            className={`mr-3 absolute  left-12 ${(inputFocus && "tests") || "test"
+              }`}
+          >{percentage}</span>
+        )}
         {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />
       )} */}

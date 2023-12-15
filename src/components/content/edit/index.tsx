@@ -4,10 +4,10 @@ import ContentCard from "../ContentCard";
 import useContentDetail from "@/hooks/content/useContentDetail";
 
 const ContentEditDetails = () => {
-  const { contentDetail } = useContentDetail();
+  const { contentDetails, contentDeleteHandler } = useContentDetail();
   return (
     <Layout>
-      <ContentCard contentDetail={contentDetail} />
+      <ContentCard contentDetails={contentDetails} contentDeleteHandler={contentDeleteHandler} />
     </Layout>
   );
 };

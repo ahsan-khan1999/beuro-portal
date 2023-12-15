@@ -63,9 +63,9 @@ export enum BankFields {
 }
 
 export enum Address {
-  streetAddress = "streetAddress",
+  streetAddress = "streetNumber",
   houseNumber = "houseNumber",
-  postCode = "postCode",
+  postCode = "postalCode",
   city = "state",
   country = "country",
   poBox = "poBox",
@@ -77,6 +77,7 @@ export enum AddressTypes {
   postalCode = "postalCode",
   city = "city",
   houseNumber = "houseNumber",
+  country="country"
 
 }
 export enum Header {

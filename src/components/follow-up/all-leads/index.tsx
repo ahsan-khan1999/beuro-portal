@@ -4,16 +4,15 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
-import useAllLeads from "@/hooks/follow-up/useAllLeads";
 import { AllLeadsTableProps } from "@/types/follow-up";
 
 const AllLeadsTable = ({ handleLeadDetail }: AllLeadsTableProps) => {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-    useAllLeads();
+  // const { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter } =
+  //   useAllLeads();
 
   return (
     <>
-      <TableFunctions />
+      {/* <TableFunctions filter={filter} setFilter={setFilter}/>
       <TableLayout>
         <TableHeading />
         <TableRows
@@ -25,7 +24,7 @@ const AllLeadsTable = ({ handleLeadDetail }: AllLeadsTableProps) => {
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
-      />
+      /> */}
     </>
   );
 };

@@ -2,39 +2,74 @@ import DetailFilter from "@/base-components/filter/detail-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
-import { FilterType } from "@/types";
-import React, { SetStateAction } from "react";
+import { FiltersComponentProps } from "@/types";
+import React from "react";
+import { Button } from "@/base-components/ui/button/button";
+import addIcon from "@/assets/svgs/plus_icon.svg";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
-export default function EmployeesFilters({ filter, setFilter }: { filter: FilterType, setFilter: SetStateAction<any> }) {
-  const { isOpen, setIsOpen, moreFilter, setMoreFilter, handleFilterResetToInitial, handleFilterReset, handleItemSelected, typeList } = useFilter({ filter, setFilter })
+export default function EmployeesFilters({
+  filter,
+  setFilter,
+  handleFilterChange,
+}: FiltersComponentProps) {
+  const {
+    isOpen,
+    toggleHandler,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter({ filter, setFilter });
+  const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
-    <div className="flex">
-      <div className="flex items-center space-x-4">
-        <InputField
-          handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
-          value={filter.text}
-          iconDisplay={true}
-        />
-        <SelectField
-          handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
-          value=""
-          dropDownIconClassName=""
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
-          label="Sort By"
-        />
-        <DetailFilter
-          filter={filter}
-          setFilter={setFilter}
-          moreFilter={moreFilter}
-          setMoreFilter={setMoreFilter}
-          handleFilterResetToInitial={handleFilterResetToInitial}
-          handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
-          typeList={typeList}
-        />
-      </div>
+    <div className="flex items-center space-x-4">
+      <InputField
+        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        value={filter.text}
+        iconDisplay={true}
+      />
+      <SelectField
+        handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
+        value=""
+        dropDownIconClassName=""
+        isOpen={isOpen}
+        setIsOpen={toggleHandler}
+        options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
+        label="Sort By"
+      />
+      <DetailFilter
+        filter={filter}
+        setFilter={setFilter}
+        moreFilter={moreFilter}
+        setMoreFilter={setMoreFilter}
+        handleFilterResetToInitial={handleFilterResetToInitial}
+        handleFilterReset={handleFilterReset}
+        handleItemSelected={handleItemSelected}
+        typeList={typeList}
+      />
+
+      <Button
+        id="apply"
+        inputType="button"
+        text="Apply"
+        onClick={() => handleFilterChange(filter)}
+        className="flex items-center gap-x-2 py-2 mr-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+      />
+
+      <Button
+        inputType="button"
+        onClick={() => router.push("/employees/add")}
+        className="flex items-center gap-x-2 py-2 !h-fit px-[10px] text-[13px] font-semibold hover:bg-[#7B18FF] bg-primary text-white rounded-md whitespace-nowrap"
+        icon={addIcon}
+        text={translate("services.add_button")}
+        id="add"
+      />
     </div>
   );
 }

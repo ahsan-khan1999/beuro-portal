@@ -6,7 +6,7 @@ import useEmployeeCreateNewPassword from "@/hooks/employee/useEmployeeCreateNewP
 
 const CreateNewPassword = ({ onClose, passwordSetSuccessfully }: { onClose: () => void; passwordSetSuccessfully: Function }) => {
   const defaultClassName = "mt-0  ";
-  const { fields, onSubmit, handleSubmit, errors, error } =
+  const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useEmployeeCreateNewPassword(passwordSetSuccessfully);
     
   return (
@@ -17,10 +17,10 @@ const CreateNewPassword = ({ onClose, passwordSetSuccessfully }: { onClose: () =
       >
         <div className="relative flex flex-col  ">
           <p className="text-[#000] font-medium text-[24px] leading-7 mb-[13px]">
-            Create New Password
+            {translate("employees.create_new_password_modal.main_heading")}
           </p>
           <p className="text-[#1E1E1E] text-[14px] font-medium mb-[12px]">
-            Your Email
+          {translate("employees.create_new_password_modal.your_mail")}
           </p>
 
           <div className="w-[380px] py-4 pl-[41px] border border-[#BFBFBF] rounded-lg mb-5">

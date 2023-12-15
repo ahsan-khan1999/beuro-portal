@@ -1,67 +1,86 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
-  control
+  control,
+  onClick,
+  count,
+  { content, contentDetails, offerDetails },
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 ",
       label: {
-        text: "Choose Form Existing",
-        htmlFor: "chooseFromExisting",
+        text: `${translate("offers.additional_details.choose")}`,
+        htmlFor: "content",
         className: "mb-[10px]",
       },
 
       field: {
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!h-[54px] !px-2 !border-dark focus:!border-primary ",
         type: Field.select,
-        value:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has...",
-        id: "chooseFromExisting",
-        name: "chooseFromExisting",
-        options: [
-          {
-            value:
-              "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
-            label:
-              "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
-          },
-        ],
+        id: "content",
+        name: "content",
+        options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
         control,
+        value: offerDetails?.id && offerDetails?.content?.id || "",
       },
     },
     {
       containerClass: "mt-5",
       label: {
-        text: "Add New",
-        htmlFor: "additionlData",
+        text: `${translate("offers.additional_details.add_new")}`,
+        htmlFor: "additionalDetails",
         className: "mb-[10px] text-[#4D4D4D]",
       },
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-dark focus:!border-primary",
-        id: "additionlData",
-        name: "additionlData",
+        id: "additionalDetails",
+        name: "additionalDetails",
 
         control,
+        value: contentDetails?.id && contentDetails?.offerContent?.title || offerDetails?.additionalDetails,
       },
     },
-
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mt-10",
       field: {
-        type: Field.button,
-id:"button",
-        text: "Save",
-        inputType: "submit",
-        className:
-          "rounded-lg bg-[#4A13E7] p-4  w-[152px] h-[50px] text-white hover-bg-none",
-        loading,
-      },
-    },
+        type: Field.div,
+        id: "div-field",
+        className: "flex space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0 mt-[30px]",
+            field: {
+              type: Field.button,
+              id: "buttonBack",
+              text: "Back",
+              inputType: "button",
+              className:
+                "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",
+              onClick: onClick
+            },
+          },
+          {
+            containerClass: "mb-0 mt-[30px]",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: translate("offers.additional_details.save_button"),
+              inputType: "submit",
+              className:
+                "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
+              loading,
+            },
+          },
+        ]
+      }
+    }
   ];
 
   return formField;

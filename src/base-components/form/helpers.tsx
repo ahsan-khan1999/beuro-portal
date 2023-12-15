@@ -19,7 +19,10 @@ import {
   DragAndDropFileField,
   DragAndDropPdfField,
   ImageUploadField,
-  MultiDateField
+  MultiDateField,
+  MultiSelectField,
+  AddFiled,
+  ToggleButton
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -30,7 +33,6 @@ import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-fiel
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
-import { AddFiled } from "./fields/add-field-button";
 import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
 
 const fieldComponents: FieldComponents = {
@@ -49,13 +51,17 @@ const fieldComponents: FieldComponents = {
   dragAndDropFileField: DragAndDropFileField,
   dragAndDropPdfField: DragAndDropPdfField,
   profileUploadField: ProfileControllerField,
-  imageUploadField:ImageUploadField,
+  imageUploadField: ImageUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
-  // addField: AddFiled,
+  addField: AddFiled,
   link: LinkField,
-  dateRange:MultiDateField
+  dateRange: MultiDateField,
+  multiSelect: MultiSelectField,
+  toggleButton: ToggleButton,
+
+
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -94,8 +100,10 @@ export function isFieldType(type: any): type is FieldType {
     "div",
     "button",
     "link",
-    "dateRange"
-    // "addField",
+    "dateRange",
+    "multiSelect",
+    "addField",
+    "toggleButton"
   ].includes(type);
 }
 

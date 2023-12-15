@@ -5,7 +5,7 @@ export const DropDownItems = ({ items, onItemClick }: DropDownItemsProps) => {
     onItemClick(item);
   };
   return (
-    <ul className="absolute z-10 w-full border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg">
+    <ul className="absolute z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-scroll">
       {items.map(({ item }, idx) => (
         <li
           key={idx}

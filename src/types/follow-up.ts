@@ -1,29 +1,55 @@
+import { StatusColors } from "@/enums/follow-up";
+import { CustomerAddress, CustomerLeadDetail } from "./customer";
+import { Lead } from "./leads";
+
 // interface for the follow ups
 export interface FollowUps {
   id: string;
-  customerName: string;
   dateAndTime: string;
   title: string;
-  status?: string;
+  status:  keyof typeof StatusColors;
   delete?: string;
   details?: string;
+  dateTime: string
+  customer: AllCustomers;
+  lead:Lead;
+  additionalDetails:string;
+  isCompleted:boolean;
+  isPostponed:boolean;
+  postPonedNote:string;
+  completeRemarks:string
+  createdAt:string
 }
 
 // follow up table is here
 export interface FollowUpsTable {
   currentPageRows: FollowUps[];
-  handleFollowUpsDetails: () => void;
+  handleFollowUpsDetails: (id:string) => void;
+  handleFollowUpsDelete: (id:string) => void;
+
 }
 
 // interface for all customers
 export interface AllCustomers {
-  id: string;
-  name: string;
+  id: number;
+  refID: string;
+  createdAt: string
+  fullName: string;
   email: string;
   phoneNumber: string;
-  createdOn: Date | null;
-  location: string;
-  type: string;
+  date: string;
+  mobileNumber: string;
+
+  status?: string;
+  editImg?: string;
+  editNote?: string;
+  customerType: string;
+  companyName: string;
+  mobile: string;
+  address: CustomerAddress;
+  edit?: boolean;
+  lead: CustomerLeadDetail;
+
 }
 
 export interface AllCustomersTable {
@@ -71,16 +97,16 @@ export interface FollowUpCustomersDetailsProps {
 
 export interface FollowUpsProps {
   onClose: () => void;
-  handleFollowUpsDetails: () => void;
+  handleFollowUpsDetails: (id:string) => void;
 }
 
 export interface AddPostPonedNoteProps {
   onClose: () => void;
-  handleFollowUpsDetails: () => void;
+  handleFollowUpsDetails: (id:string) => void;
 }
 export interface AddRemarksProps {
   onClose: () => void;
-  handleFollowUpsDetails: () => void;
+  handleFollowUpsDetails: (id:string) => void;
 }
 
 export interface AllLeadsProps {
@@ -97,17 +123,18 @@ export interface FollowUpDetailsProps {
     completed: boolean;
     neutral: boolean;
   };
+  followUpDetails:FollowUps
 }
 
 
 export interface FollowUpsTableProps {
-  handleFollowUpsDetails:() => void
+  handleFollowUpsDetails: (id:string) => void
 }
 
 
 export interface AllLeadsTableProps {
-  handleLeadDetail:() => void
+  handleLeadDetail: () => void
 }
 export interface AllCustomersTableProps {
-  handleCustomerDetail:() => void
+  handleCustomerDetail: () => void
 }

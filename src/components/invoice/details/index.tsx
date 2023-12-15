@@ -11,63 +11,78 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-
+import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
+import InvoiceEmptyState from "./invoice-empty-state";
+enum checkDATA {
+  data,
+  nodata,
+}
+import emptyState from "@/assets/svgs/empty-state.svg";
 const InvoiceDetails = () => {
-  const [switchDetails, setSwitchDetails] = useState("Invoice");
-
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
-  const handleInvoiceCreation = () => {
-    dispatch(updateModalType(ModalType.INVOICE_CREATE));
+  const check = (Currentcomponent: JSX.Element, val: checkDATA) => {
+    const isData = {
+      [checkDATA.data]: Currentcomponent,
+      [checkDATA.nodata]: (
+        <InvoiceEmptyState
+          imageUrl={emptyState}
+          imageAlt="No Data Found"
+          emptyName="No Data Found"
+          emptyDescription="Whoops ... this information is not avilable for a moment"
+        />
+      ),
+    };
+    return isData[val];
   };
-
-  const invoiceCreated = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.CREATION));
-  };
-
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const route = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.INVOICE_CREATE]: (
-      <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
+  const {
+    handleInvoiceCreation,
+    handleNotes,
+    invoiceDetails,
+    offerDeleteHandler,
+    renderModal,
+    setSwitchDetails,
+    switchDetails,
+    collectiveInvoice,
+    handlePaymentStatusUpdate,
+    handleInvoiceStatusUpdate,
+    collectiveReciept,
+    handleEditInvoiceFrequencyCreation,
+    handleRecurringInvoiceCreation,
+    handleStopInvoiceCreation,
+    handleInvoiceEdit,
+  } = useInvoiceDetail();
+  const invoiceComponent = {
+    Invoice: check(
+      <InvoiceDetailsTable
+        collectiveInvoice={collectiveInvoice}
+        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+        handleInvoiceEdit={handleInvoiceEdit}
+      />,
+      (collectiveInvoice?.length === 0 && checkDATA.nodata) || checkDATA.data
     ),
-    [ModalType.CREATION]: (
-      <CreationCreated
-        onClose={onClose}
-        heading="Invoice Created Successful "
-        subHeading="Thanks for creating Invoice we are happy to have you. "
-        route={route}
-      />
+    Receipt: check(
+      <ReceiptDetailsTable
+        collectiveInvoice={collectiveReciept}
+        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+      />,
+      (collectiveReciept?.length === 0 && checkDATA.nodata) || checkDATA.data
     ),
   };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   return (
     <>
       <Layout>
-        {/* {switchDetails.includes("Invoice") ? (
-          <InvoiceCardLayout>
-            <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
-          </InvoiceCardLayout>
-        ) : (
-          <InvoiceCardLayout>
-            <ReceiptDetailsData />
-          </InvoiceCardLayout>
-        )} */}
-
         <InvoiceCardLayout>
-          <InvoiceDetailsData handleInvoiceCreation={handleInvoiceCreation} />
+          <InvoiceDetailsData
+            handleInvoiceCreation={handleInvoiceCreation}
+            invoiceDetails={invoiceDetails}
+            handleNotes={handleNotes}
+            handleEditInvoiceFrequencyCreation={
+              handleEditInvoiceFrequencyCreation
+            }
+            handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
+            handleStopInvoiceCreation={handleStopInvoiceCreation}
+          />
         </InvoiceCardLayout>
         <div className="flex mt-[12px] mb-[18px]">
           <DetailsSwitchBtn
@@ -76,11 +91,7 @@ const InvoiceDetails = () => {
           />
         </div>
 
-        {switchDetails.includes("Invoice") ? (
-          <InvoiceDetailsTable />
-        ) : (
-          <ReceiptDetailsTable />
-        )}
+        {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
       </Layout>
       {renderModal()}
     </>

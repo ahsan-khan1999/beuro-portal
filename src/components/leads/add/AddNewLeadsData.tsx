@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
 import AddLeadAddressDetails from "./AddLeadAddressDetails";
@@ -13,20 +13,35 @@ import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
+import { Lead } from "@/types/leads";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
-  customerEdit,
-  addressEdit,
-  serviceEdit,
-  additionalEdit,
+  customerAdd,
+  addressAdd,
+  serviceAdd,
+  additionalAdd,
 }
 
 const AddNewLeadsData = () => {
+  const { leadDetails } = useAppSelector(state => state.lead)
+  const { images } = useAppSelector(state => state.image)
+
+
   const [tabType, setTabType] = useState<ComponentsType>(
-    ComponentsType.customerEdit
+    leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd
   );
 
+  useEffect(() => {
+    setTabType(
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    );
+  }, [leadDetails?.id]);
+
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -42,7 +57,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Customer Details",
+      name: `${translate("leads.tabs_headings.customer")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -52,7 +67,7 @@ const AddNewLeadsData = () => {
       <path d="M16.3839 16.0996L13.6165 20.4262C12.9002 21.543 11.2708 21.5393 10.5579 20.4272L7.786 16.1007C5.34718 16.6646 3.84375 17.6976 3.84375 18.932C3.84375 21.0739 8.09121 22.2295 12.0875 22.2295C16.0837 22.2295 20.3312 21.0739 20.3312 18.932C20.3312 17.6967 18.8257 16.6632 16.3839 16.0996Z" fill={isSelected ? "#4A13E7" : "#8F8F8F"}
       }/>
     </svg>`,
-      name: "Address Details",
+      name: `${translate("leads.tabs_headings.address")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -67,7 +82,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Service Details",
+      name: `${translate("leads.tabs_headings.service")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -84,7 +99,7 @@ const AddNewLeadsData = () => {
         </clipPath>
       </defs>
     </svg>`,
-      name: "Additional Details",
+      name: `${translate("leads.tabs_headings.additional")}`,
     },
   ];
 
@@ -96,20 +111,22 @@ const AddNewLeadsData = () => {
   };
 
   const routeHandler = () => {
+    onClose();
     router.push("/leads");
   };
 
   const leadCreatedHandler = () => {
-    dispatch(updateModalType(ModalType.PASSWORD_CHANGE_SUCCESSFULLY));
+    dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
 
   const imageUploadHandler = () => {
-    dispatch(updateModalType(ModalType.UPLOAD_IMAGE));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
   };
 
   const handleImageSlider = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.IMAGE_SLIDER));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    router.pathname = "/leads";
+    updateQuery(router, router.locale as string);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -123,7 +140,7 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} />,
+    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
   };
 
   const renderModal = () => {
@@ -131,7 +148,7 @@ const AddNewLeadsData = () => {
   };
 
   const handleNextTab = (currentComponent: ComponentsType) => {
-    if (tabType === ComponentsType.additionalEdit) {
+    if (tabType === ComponentsType.additionalAdd) {
       leadCreatedHandler();
       return;
     }
@@ -143,24 +160,27 @@ const AddNewLeadsData = () => {
   };
 
   const componentsLookUp = {
-    [ComponentsType.customerEdit]: (
+    [ComponentsType.customerAdd]: (
       <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.addressEdit]: (
-      <AddLeadAddressDetails onHandleNext={handleNextTab} onHandleBack={onHandleBack}/>
+    [ComponentsType.addressAdd]: (
+      <AddLeadAddressDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
     ),
-    [ComponentsType.serviceEdit]: (
-      <AddLeadServiceDetails onHandleNext={handleNextTab} />
+    [ComponentsType.serviceAdd]: (
+      <AddLeadServiceDetails
+        onHandleNext={handleNextTab}
+        onHandleBack={onHandleBack}
+      />
     ),
-    [ComponentsType.additionalEdit]: (
-      <AddLeadAdditionalDetails onHandleNext={handleNextTab} />
+    [ComponentsType.additionalAdd]: (
+      <AddLeadAdditionalDetails onHandleNext={leadCreatedHandler} onHandleBack={onHandleBack} />
     ),
   };
 
   return (
     <>
-      <div className="flex w-full gap-6">
-        <div className="flex flex-col gap-[14px]">
+      <div className="flex flex-col xl:flex-row w-full gap-6">
+        <div className="flex flex-col w-fit gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}

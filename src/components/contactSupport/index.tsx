@@ -7,10 +7,13 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export default function ContactSupport() {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+
+  const { t: translate } = useTranslation();
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -27,15 +30,15 @@ export default function ContactSupport() {
   };
 
   const requestSubmitHandler = () => {
-    dispatch(updateModalType(ModalType.CREATION));
+    dispatch(updateModalType({type:ModalType.CREATION}));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Your Request has been sent"
-        subHeading="Thanks for sending your request to Buro we are happy to have you. "
+        heading={translate("request_modal.main_heading")}
+        subHeading={translate("request_modal.sub_heading")}
         route={route}
       />
     ),
@@ -45,7 +48,9 @@ export default function ContactSupport() {
     <>
       <Layout>
         <div className="flex justify-between items-center">
-          <h1 className="text-xl text-[#222B45] ">Contact & Support</h1>
+          <h1 className="text-xl text-[#222B45] ">
+            {translate("contact_support.main_heading")}
+          </h1>
         </div>
         <div className="flex mt-5">
           <ContactSupportForm requestSubmitHandler={requestSubmitHandler} />

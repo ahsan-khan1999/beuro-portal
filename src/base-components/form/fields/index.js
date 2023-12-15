@@ -13,3 +13,5 @@ export { AddFiled } from "./add-field-button";
 export { TextAreaField } from "./text-area-field";
 export { CkEditor } from "./ckEditorField/ck-editor";
 export { MultiDateField } from "./multi-date-field" 
+export { MultiSelectField } from "./multi-select/multi-select-field" 
+export { ToggleButton } from "./toggleButton/toggle" 

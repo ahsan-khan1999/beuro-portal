@@ -14,9 +14,11 @@ import PasswordSet from "@/base-components/ui/modals1/PasswordSet";
 import AddEmployeeForm from "../fields/add-employee-form";
 import TabSection from "@/base-components/ui/tab";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddEmployeeDetails = () => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Employee Details");
   const router = useRouter();
   const handleCancel = () => {
@@ -104,9 +106,11 @@ const AddEmployeeDetails = () => {
   return (
     <>
       <Layout>
-        <h2 className="text-xl text-[#222B45] font-normal mb-5">Add Employ</h2>
-        <div className="flex ">
-          <div className="space-y-4 mr-6">
+        <h2 className="text-xl text-[#222B45] font-normal mb-5">
+          {translate("employees.add_new_employee")}
+        </h2>
+        <div className="flex flex-col xl:flex-row gap-4">
+          <div className="space-y-4 w-fit">
             <TabSection
               tabsArray={tabSection}
               setTabType={setTabType}

@@ -7,12 +7,14 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsCustomerDetailsFormField } from "@/components/leads/fields/Leads-customer-details-fields";
 import { generateLeadsCustomerEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
+import { useMemo } from "react";
+import { createLead } from "@/api/slices/lead/leadSlice";
 
 export const useLeadCustomerEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
 
   const handleBack = () => {
     onClick(0, ComponentsType.customer);
@@ -24,14 +26,34 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { errors },
+    watch,
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = LeadsCustomerDetailsFormField(register, loading, control,handleBack);
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // dispatch(loginUser({ data, router, setError, translate }));
-    onClick(0, ComponentsType.customer);
+  const customerType = watch("customerType")
+  useMemo(() => {
+    if (leadDetails.id) {
+      reset({
+        fullName: leadDetails.customerDetail?.fullName,
+        customer: leadDetails.customerDetail?.id,
+
+        customerType: leadDetails.customerDetail?.customerType,
+        email: leadDetails.customerDetail?.email,
+        phoneNumber: leadDetails.customerDetail?.phoneNumber,
+        mobileNumber: leadDetails.customerDetail?.mobileNumber,
+        address: leadDetails?.customerDetail?.address,
+      })
+    }
+  }, [leadDetails.id]);
+  const fields = LeadsCustomerDetailsFormField(register, loading, control, handleBack, leadDetails,customerType,setValue);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit, customerID: leadDetails?.customerID }
+    const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+    if (res?.payload) onClick(0, ComponentsType.customer);
+
   };
   return {
     fields,
@@ -40,5 +62,6 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

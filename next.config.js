@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "kaufes-dev-v2.s3.me-south-1.amazonaws.com",
       },
+      {
+        protocol: "http",
+        hostname: "abc.com",
+      },
+      {
+        protocol: "http",
+        hostname: "test.com",
+      },
     ],
   },
 

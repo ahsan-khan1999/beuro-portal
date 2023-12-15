@@ -1,34 +1,36 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const TableHeading = () => {
+  const { t: translate } = useTranslation();
   return (
-    <div className="grid grid-cols-[minmax(120px,_100%),minmax(180px,_100%)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(100px,_100%)_minmax(100px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(70px,_70px)]   bg-white rounded-md ">
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white  rounded-md">
-        ID
+    <div className="bg-white xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(120px,_120px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] rounded-md px-5 pt-[23px] pb-[17px]">
+      <span className="font-medium text-[#8F8F8F]  rounded-md">
+        {translate("invoice.receipt_table_heading.id")}
       </span>
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white ">
-        Customer
+      <span className="font-medium text-[#8F8F8F]  mlg:hidden xMaxSize:block">
+        {translate("invoice.receipt_table_heading.customer")}
       </span>
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white">
-        Receipt Title
+      <span className="font-medium text-[#8F8F8F] bg-white">
+        {translate("invoice.receipt_table_heading.title")}
       </span>
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white">
-        Paid Date
+      <span className="font-medium text-[#8F8F8F] bg-white">
+        {translate("invoice.receipt_table_heading.paid_date")}
       </span>
-      <span className="px-6 py-4  font-medium  text-[#8F8F8F] bg-white">
-        Amount
+      <span className="font-medium  text-[#8F8F8F] bg-white">
+        {translate("invoice.receipt_table_heading.amount")}
       </span>
-      <span className="px-6 py-4  flex justify-center items-center font-medium text-[#8F8F8F] bg-white ">
-        Invoice
+      <span className="flex justify-center items-center font-medium text-[#8F8F8F] ">
+        {translate("invoice.receipt_table_heading.invoice")}
       </span>
-      <span className="px-6 py-4 font-medium text-[#8F8F8F] bg-white ">
-        Payment
+      <span className="font-medium text-[#8F8F8F] ">
+        {translate("invoice.receipt_table_heading.payment")}
       </span>
 
-      <span className="px-6 py-4  flex justify-center items-center font-medium text-[#8F8F8F] bg-white ">
-        Email Status
+      <span className="font-medium text-[#8F8F8F] ">
+        {translate("invoice.receipt_table_heading.email_status")}
       </span>
-      <span className="px-6 py-4  font-medium text-[#8F8F8F] bg-white rounded-md"></span>
+      <span className="font-medium text-[#8F8F8F] rounded-md"></span>
     </div>
   );
 };

@@ -3,22 +3,20 @@ import { getTypedFieldComponent } from "../helpers";
 import { combineClasses, findErrorMessage } from "@/utils/utility";
 
 export const DivField = ({ children, className, errors }: DivProps) => {
-
   const classes = combineClasses("", className);
+
   return (
     <div className={classes}>
-      {children.map((childField, index) => {
-
-
+      {children?.map((childField, index) => {
         const fieldName: string = childField?.field?.name as string;
-        const data = fieldName?.includes(".") && fieldName?.split(".") || []
+        const data = (fieldName?.includes(".") && fieldName?.split(".")) || [];
         // const error =
         //   (errors && fieldName && data?.length > 0) ? errors?.[data[0]]?.[data[1]]?.message : (fieldName && errors) && errors[fieldName]?.message;
         const error = findErrorMessage(errors, data, fieldName);
 
         const { label, field, containerClass } = childField;
         const renderedField =
-          field.type &&
+          field?.type &&
           getTypedFieldComponent(field.type as FieldType, field, error, errors);
 
         const childClasses = combineClasses(
@@ -44,8 +42,3 @@ export const DivField = ({ children, className, errors }: DivProps) => {
     </div>
   );
 };
-
-
-
-
-

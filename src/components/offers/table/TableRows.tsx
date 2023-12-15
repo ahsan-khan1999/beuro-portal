@@ -1,108 +1,166 @@
 import { OffersTableRowTypes } from "@/types/offers";
-import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/router";
+import { formatDateString } from "@/utils/functions";
+import {
+  getEmailColor,
+  getOfferStatusColor,
+  getPaymentTypeColor,
+} from "@/utils/utility";
 
 const TableRows = ({
   dataToAdd,
   openModal,
-  handleImagesUpload,
+  handleImageUpload,
 }: {
   dataToAdd: OffersTableRowTypes[];
-  openModal: (
-    item: OffersTableRowTypes,
-    e: React.MouseEvent<HTMLImageElement>
-  ) => void;
-  handleImagesUpload: (
-    item: OffersTableRowTypes,
-    e: React.MouseEvent<HTMLImageElement>
+  openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
   const router = useRouter();
   return (
     <div>
-      {dataToAdd?.map((item: any, index: number) => {
+      {dataToAdd?.map((item, index) => {
         return (
           <div
-            onClick={() => router.push("/offers/details")}
             key={index}
-            className="cursor-pointer shadow-tableRow grid grid-cols-[minmax(120px,_120px),minmax(200px,_100%)_minmax(250px,_100%)_minmax(150px,_100%)_minmax(200px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(75px,_75px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(65px,_65px)_minmax(60px,_60px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(70px,_70px),minmax(140px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_130px)_minmax(150px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)]  mt-2  rounded-md"
           >
-            <span className="px-6 py-4 bg-white rounded-md flex items-center">
-              {item.id}
+            <span className="py-4 rounded-md flex items-center">
+              {item.offerNumber}
             </span>
-            <span className="px-6 py-4 bg-white  flex items-center">
-              {item.customer}
+            <span className="py-4 flex items-center">
+              {item.leadID?.customerDetail?.fullName}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
-              {item.offerTitle}
+            <span className="hidden py-4 xs:flex mlg:hidden xlg:hidden maxSize:hidden  xMaxSize:flex items-center">
+              {item?.title}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
-              {item.totalPrice}
+            <span className="py-4 flex items-center">{item.total}</span>
+            <span className="py-4 flex items-center">
+              {formatDateString(item.createdAt)}
             </span>
-            <span className="px-6 py-4 bg-white flex items-center">
-              {item.createdOn.toLocaleDateString()}
-            </span>
-            <span className="px-6 py-4 bg-white ">
+            <span className="py-4 flex items-center">
               <div
-                className={`${
-                  item.email.includes("Draft")
-                    ? "bg-[#FE9244]"
-                    : item.email.includes("Send")
-                    ? "bg-[#4A13E7]"
-                    : "bg-[#FF0000]"
-                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                className={`bg-[${getEmailColor(
+                  item.emailStatus
+                )}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
-                {item.email}
+                {item.emailStatus}
               </div>
             </span>
 
-            <span className="px-6 py-4 bg-white ">
+            <span className="py-4 ">
               <div
-                className={`${
-                  item.payment.includes("Cash") ? "bg-[#45C769]" : ""
-                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                className={`bg-[${getPaymentTypeColor(item.paymentType)}]
+                  } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
-                {item.payment}
+                {item.paymentType}
               </div>
             </span>
 
-            <span className="px-6 py-4 bg-white ">
+            <span className="py-4 ">
               <div
-                className={`${
-                  item.status.includes("Open")
-                    ? "bg-[#4A13E7]"
-                    : item.status.includes("Signed")
-                    ? "bg-[#45C769]"
-                    : item.status.includes("Expired")
-                    ? "bg-[#FF376F]"
-                    : "bg-[#FF0000]"
-                } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                className={`bg-[${getOfferStatusColor(item.offerStatus)}]
+                  } text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
               >
-                {item.status}
+                {item.offerStatus}
               </div>
             </span>
 
-            <span className="px-6 py-4 flex justify-center items-center  bg-white ">
-              <Image
-                src={item.editImg}
-                alt="edit_img_icon"
-                className="cursor-pointer"
-                onClick={(e) => handleImagesUpload(item, e)}
-              />
-            </span>
-            <span className="px-6 py-4 flex justify-center items-center bg-white ">
-              <Image
-                onClick={(e) => openModal(item, e)}
-                src={item.editNote}
-                alt="edit_note_icon"
-                className="cursor-pointer"
-              />
-            </span>
-
-            <span className="px-6 py-4 flex justify-center items-center bg-white rounded-md">
+            <span
+              className="py-4 flex justify-center items-center   cursor-pointer"
+              onClick={(e) => handleImageUpload(item?.id, e)}
+            >
               <svg
-                className="cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="33"
+                viewBox="0 0 34 33"
+                fill="none"
+              >
+                <rect
+                  x="1.36719"
+                  y="0.69043"
+                  width="31.1684"
+                  height="31"
+                  rx="7.5"
+                  fill="white"
+                  stroke="#C7C7C7"
+                />
+                <path
+                  d="M15.4044 22.0518H12.1297C11.1072 22.0518 10.2753 21.2199 10.2753 20.1974V11.7908C10.2753 10.7683 11.1072 9.93645 12.1297 9.93645H20.5362C21.5588 9.93645 22.3906 10.7683 22.3906 11.7908V15.1624C22.3906 15.5038 22.6674 15.7805 23.0088 15.7805C23.3501 15.7805 23.6269 15.5038 23.6269 15.1624V11.7908C23.6269 10.0867 22.2405 8.7002 20.5362 8.7002H12.1297C10.4255 8.7002 9.03906 10.0867 9.03906 11.7908V20.1974C9.03906 21.9016 10.4255 23.288 12.1297 23.288H15.4044C15.7458 23.288 16.0225 23.0113 16.0225 22.6699C16.0225 22.3285 15.7458 22.0518 15.4044 22.0518Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M24.3194 17.3499C23.5963 16.6269 22.4199 16.6269 21.6969 17.3499L18.5623 20.4845C17.6484 21.3984 17.145 22.6136 17.145 23.9061C17.145 24.2475 17.4218 24.5243 17.7631 24.5243C19.0557 24.5243 20.2709 24.0209 21.1849 23.1069L24.3194 19.9724C25.0424 19.2494 25.0424 18.0729 24.3194 17.3499ZM23.4452 18.224C23.6863 18.4651 23.6863 18.8572 23.4452 19.0982L23.0081 19.5353L22.134 18.6611L22.5711 18.224C22.8121 17.983 23.2043 17.983 23.4452 18.224ZM20.3107 22.2328C19.7939 22.7495 19.1478 23.09 18.4454 23.2239C18.5793 22.5215 18.9198 21.8754 19.4365 21.3586L21.2598 19.5353L22.134 20.4095L20.3107 22.2328Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M13.2906 14.7004L11.6923 16.2988C11.4509 16.5402 11.4509 16.9316 11.6923 17.173C11.9337 17.4144 12.3251 17.4144 12.5665 17.173L14.1648 15.5746C14.4058 15.3336 14.7979 15.3336 15.0389 15.5746L18.192 18.7277C18.4334 18.9691 18.8248 18.9691 19.0662 18.7277C19.3075 18.4863 19.3075 18.0949 19.0662 17.8535L15.9131 14.7004C15.1901 13.9775 14.0137 13.9775 13.2906 14.7004Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M19.3026 14.8806C18.2801 14.8806 17.4482 14.0488 17.4482 13.0263C17.4482 12.0038 18.2801 11.1719 19.3026 11.1719C20.3251 11.1719 21.157 12.0038 21.157 13.0263C21.157 14.0488 20.3251 14.8806 19.3026 14.8806ZM19.3026 12.4081C18.9618 12.4081 18.6845 12.6854 18.6845 13.0263C18.6845 13.3671 18.9618 13.6444 19.3026 13.6444C19.6435 13.6444 19.9208 13.3671 19.9208 13.0263C19.9208 12.6854 19.6435 12.4081 19.3026 12.4081Z"
+                  fill="#4A13E7"
+                />
+              </svg>
+            </span>
+            <span
+              className="py-4 flex justify-center items-center  cursor-pointer "
+              onClick={(e) => openModal(item?.id, e)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="33"
+                height="33"
+                viewBox="0 0 33 33"
+                fill="none"
+              >
+                <rect
+                  x="1.03711"
+                  y="0.69043"
+                  width="31.1684"
+                  height="31"
+                  rx="7.5"
+                  fill="white"
+                  stroke="#C7C7C7"
+                />
+                <path
+                  d="M20.0838 15.499C20.0838 15.1576 19.8071 14.8809 19.4657 14.8809H13.0991C12.7577 14.8809 12.481 15.1576 12.481 15.499C12.481 15.8404 12.7577 16.1171 13.0991 16.1171H19.4657C19.8071 16.1171 20.0838 15.8404 20.0838 15.499Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M13.0991 17.3535C12.7577 17.3535 12.481 17.6302 12.481 17.9716C12.481 18.313 12.7577 18.5897 13.0991 18.5897H16.9657C17.3071 18.5897 17.5838 18.313 17.5838 17.9716C17.5838 17.6302 17.3071 17.3535 16.9657 17.3535H13.0991Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M14.5505 23.2877H12.4832C11.8015 23.2877 11.247 22.7332 11.247 22.0515V11.1727C11.247 10.491 11.8015 9.93643 12.4832 9.93643H20.0826C20.7643 9.93643 21.3188 10.491 21.3188 11.1727V14.9741C21.3188 15.3155 21.5956 15.5922 21.937 15.5922C22.2783 15.5922 22.5551 15.3155 22.5551 14.9741V11.1727C22.5551 9.80934 21.4459 8.7002 20.0826 8.7002H12.4832C11.1199 8.7002 10.0107 9.80934 10.0107 11.1727V22.0515C10.0107 23.4148 11.1199 24.524 12.4832 24.524H14.5505C14.8919 24.524 15.1686 24.2472 15.1686 23.9059C15.1686 23.5645 14.8919 23.2877 14.5505 23.2877Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M23.6495 17.6498C22.9265 16.9267 21.7501 16.9267 21.0275 17.6493L17.634 21.0353C17.5619 21.1072 17.5087 21.1958 17.4791 21.2932L16.7401 23.7263C16.6746 23.942 16.7316 24.1762 16.8891 24.3376C17.007 24.4585 17.1672 24.5241 17.3316 24.5241C17.3865 24.5241 17.442 24.5167 17.4965 24.5016L19.9914 23.8105C20.0941 23.7821 20.1877 23.7276 20.2631 23.6523L23.6495 20.2722C24.3725 19.5492 24.3725 18.3728 23.6495 17.6498ZM19.5048 22.6626L18.2496 23.0102L18.6169 21.8009L20.9067 19.5162L21.781 20.3905L19.5048 22.6626ZM22.7758 19.3977L22.656 19.5172L21.7819 18.6431L21.9012 18.524C22.1422 18.283 22.5344 18.283 22.7754 18.524C23.0164 18.765 23.0164 19.1571 22.7758 19.3977Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
+                  fill="#4A13E7"
+                />
+              </svg>
+            </span>
+
+            <span
+              className="py-4 flex justify-center items-center  rounded-md"
+              onClick={() =>
+                router.push({
+                  pathname: "/offers/details",
+                  query: { offer: item?.id },
+                })
+              }
+            >
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="8"
                 height="15"
@@ -110,7 +168,7 @@ const TableRows = ({
                 fill="none"
               >
                 <path
-                  d="M0.332761 13.773C0.162353 13.59 0.0771484 13.3734 0.0771484 13.1231C0.0771484 12.8728 0.162353 12.6565 0.332761 12.474L5.32573 7.1132L0.31572 1.73412C0.156672 1.56335 0.0771484 1.3499 0.0771484 1.09375C0.0771484 0.837604 0.162353 0.618049 0.332761 0.435087C0.503169 0.252125 0.704933 0.160645 0.938051 0.160645C1.17117 0.160645 1.37271 0.252125 1.54266 0.435087L7.26838 6.6009C7.33654 6.67409 7.38494 6.75337 7.41357 6.83875C7.4422 6.92413 7.45628 7.01562 7.45583 7.1132C7.45583 7.21077 7.44152 7.30226 7.41289 7.38764C7.38426 7.47302 7.33609 7.5523 7.26838 7.62549L1.52562 13.7913C1.36657 13.9621 1.17049 14.0475 0.937369 14.0475C0.704251 14.0475 0.502715 13.956 0.332761 13.773Z"
+                  d="M0.461667 14.0655C0.291259 13.8825 0.206055 13.6659 0.206055 13.4156C0.206055 13.1653 0.291259 12.9489 0.461667 12.7665L5.45463 7.40568L0.444626 2.0266C0.285579 1.85583 0.206055 1.64238 0.206055 1.38623C0.206055 1.13008 0.291259 0.91053 0.461667 0.727568C0.632076 0.544606 0.833839 0.453125 1.06696 0.453125C1.30008 0.453125 1.50161 0.544606 1.67157 0.727568L7.39729 6.89338C7.46545 6.96657 7.51385 7.04585 7.54247 7.13123C7.5711 7.21662 7.58519 7.3081 7.58474 7.40568C7.58474 7.50326 7.57042 7.59474 7.54179 7.68012C7.51316 7.7655 7.465 7.84478 7.39729 7.91797L1.65453 14.0838C1.49548 14.2545 1.29939 14.3399 1.06628 14.3399C0.833157 14.3399 0.631621 14.2485 0.461667 14.0655Z"
                   fill="black"
                 />
               </svg>

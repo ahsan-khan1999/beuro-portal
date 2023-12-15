@@ -6,12 +6,22 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferEditAdditionalDetailsFormField } from "@/components/offers/edit/fields/Additional-details-fields";
 import { generateOfferAdditionalDetailsValidation } from "@/validation/offersSchema";
+import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
+import { useEffect, useMemo } from "react";
+import { readContent, setContentDetails } from "@/api/slices/content/contentSlice";
+import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
+import { updateOffer } from "@/api/slices/offer/offerSlice";
 
-export const useOfferEditAdditionalDetails = () => {
+export const useOfferEditAdditionalDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+  const { content, contentDetails } = useAppSelector((state) => state.content);
+
+  useEffect(() => {
+    dispatch(readContent({ params: { filter: { paginate: 0 } } }))
+  }, [])
 
   const schema = generateOfferAdditionalDetailsValidation(translate);
   const {
@@ -20,13 +30,32 @@ export const useOfferEditAdditionalDetails = () => {
     control,
     setError,
     formState: { errors },
+    watch,
+    setValue,
+    trigger,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const fields = OfferEditAdditionalDetailsFormField(register, loading, control,() => console.log(""));
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(loginUser({ data, router, setError, translate }));
-    router.push("/offers/details");
+  const selectedContent = watch("content")
+  const handleBack = () => {
+    handleNext(EditComponentsType.serviceEdit)
+  }
+  useMemo(() => {
+    const filteredContent = content?.find(
+      (item) => item.id === selectedContent
+    );
+    if (filteredContent) {
+      dispatch(setContentDetails(filteredContent))
+      setValue("additionalDetails", filteredContent?.offerContent?.title);
+    }
+  }, [selectedContent])
+  const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handleBack, 0,
+    { content: content, contentDetails: contentDetails, offerDetails }, setValue, trigger);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, step: 4, id: offerDetails?.id, stage: EditComponentsType.additionalEdit }
+    const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+    if (response?.payload) handleNext(EditComponentsType.additionalEdit)
+
   };
   return {
     fields,
@@ -35,5 +64,6 @@ export const useOfferEditAdditionalDetails = () => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

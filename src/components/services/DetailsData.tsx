@@ -5,15 +5,20 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
+import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const DetailsData = ({
   serviceDetail,
   isUpdate,
-}: {
+}: // deleteHandler,
+{
   serviceDetail: Service;
   isUpdate: boolean;
+  // deleteHandler: () => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -27,35 +32,41 @@ const DetailsData = ({
             />
           )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            {isUpdate ? "Services Details" : "Services/Product Details"}
+            {isUpdate
+              ? "Services Details"
+              : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
         <div className="flex items-center gap-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" />
+          <Image
+            src={deleteIcon}
+            alt="deleteIcon"
+            // onClick={deleteHandler}
+          />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
-            Customer ID:
+            {translate("services.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{serviceDetail?.id}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
-            Created by:
+            {translate("services.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.createdBy}
+              &nbsp;&nbsp;{serviceDetail?.createdBy?.fullName}
             </span>
           </h3>
         </div>
         {isUpdate && (
           <h3 className="text-[#4D4D4D] mt-4">
-            Creation Date:
+            {translate("services.card_content.created_date")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.createdOn?.toLocaleDateString()}
+              &nbsp;&nbsp;{formatDateTimeToDate(serviceDetail?.createdAt)}
             </span>
           </h3>
         )}

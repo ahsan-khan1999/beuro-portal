@@ -8,7 +8,7 @@ import ServicesForm from "../ServicesForm";
 
 const ServicesDetails = () => {
   const {
-    serviceDetail,
+    serviceDetails,
     isUpdate,
     setIsUpdate,
     fields,
@@ -19,20 +19,30 @@ const ServicesDetails = () => {
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData serviceDetail={serviceDetail} isUpdate={isUpdate}/>
-      </DetailsCard>
-      <div className="flex mt-8">
-        <ServicesForm
+        <DetailsData
+          serviceDetail={serviceDetails}
           isUpdate={isUpdate}
-          setIsUpdate={setIsUpdate}
-          serviceDetail={serviceDetail}
-          fields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
+          // deleteHandler={deleteHandler}
         />
-        <SideCard />
+      </DetailsCard>
+      <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
+        <div className="xl:col-span-2">
+          <ServicesForm
+            isUpdate={isUpdate}
+            setIsUpdate={setIsUpdate}
+            serviceDetail={serviceDetails}
+            fields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+          />
+        </div>
+        <div className="xl:col-span-1">
+          <SideCard />
+        </div>
       </div>
+
+      {/* {renderModal()} */}
     </Layout>
   );
 };

@@ -1,8 +1,11 @@
 // components/PieChart.js
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
+import { useTranslation } from "next-i18next";
 
 const PieChart = ({ data }) => {
+  const { t: translate } = useTranslation();
+
   useEffect(() => {
     // Get the canvas element
     const ctx = document.getElementById("myPieChart").getContext("2d");
@@ -27,13 +30,14 @@ const PieChart = ({ data }) => {
   }, []);
 
   return (
-    <div className="rounded-[20px] bg-white max-w-[400px]">
-      <h3 className="pt-5 pb-3 px-10 font-medium text-[#18181B]">Plans</h3>
-      <hr className="h-[1px] text-black opacity-10 pb-11" />
-      <div className="px-6 pb-5">
-        <div className="max-w-[300px] mx-auto ">
-          <canvas id="myPieChart" width="300" height="300" />
-        </div>
+    <div className="rounded-[20px] bg-white h-[402.005px]">
+      <h3 className="pt-5 pb-3 ml-[40px] font-medium text-[#18181B]">
+        {translate("admin.overview.plans")}
+      </h3>
+      <hr className="h-[1px] text-black opacity-10" />
+
+      <div className="flex justify-center items-center h-[340px] py-5">
+        <canvas id="myPieChart" />
       </div>
     </div>
   );

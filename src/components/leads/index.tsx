@@ -16,15 +16,26 @@ export default function Leads() {
     handleNotes,
     handleImageUpload,
     renderModal,
+    filter,
+    setFilter,
+    handleFilterChange,
   } = useLeads();
 
   return (
     <>
       <Layout>
-        <TableFunctions />
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows} openModal={handleNotes} handleImageUpload={handleImageUpload}/>
+          <TableRows
+            dataToAdd={currentPageRows}
+            openModal={handleNotes}
+            handleImageUpload={handleImageUpload}
+          />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

@@ -1,41 +1,52 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ComponentsType } from "../details/LeadsDetailsData";
+import { useTranslation } from "next-i18next";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
-  control
+  control,
+  onHandleBack,
+  trigger,
+  service,
+  leadDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "Required Service*",
+              text: `${translate("leads.service_details.required_service")}`,
               htmlFor: "requiredService",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: "Cleaning",
-              options: [
-                { value: "Office Boy", label: "Office Boy" },
-                { value: "Security Gaurd", label: "Security Gaurd" },
-              ],
+              value: leadDetails?.id && leadDetails?.requiredService || "",
+              options: service && service?.map((item) => (
+                {
+                  label: item.serviceName,
+                  value: item.id
+                }
+              )) || [],
               control,
             },
           },
           {
+            containerClass: "mb-0",
             label: {
-              text: "Desire Date*",
+              text: `${translate("leads.service_details.desire_date")}`,
               htmlFor: "desireDate",
               className: "mb-[10px]",
             },
@@ -45,21 +56,23 @@ id:"div-field",
               id: "desireDate",
               name: "desireDate",
               register,
+              dateType: "date",
             },
           },
 
           {
+            containerClass: "mb-0",
             label: {
-              text: "Contact Availability",
-              htmlFor: "contactAvailablity",
+              text: `${translate("leads.service_details.availability")}`,
+              htmlFor: "contactAvailability",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              id: "contactAvailablity",
-              value: "Morning(9am to 12am)",
-              name: "contactAvailablity",
+              id: "contactAvailability",
+              value: leadDetails?.id && leadDetails?.contactAvailability || "",
+              name: "contactAvailability",
               options: [
                 {
                   value: "Morning(9am to 12am)",
@@ -73,44 +86,78 @@ id:"div-field",
               control,
             },
           },
-        ],
-      },
+        ]
+      }
     },
-
     //   second start from here
     {
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-3 gap-x-3 mt-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "Flexibility",
+              text: `${translate("leads.service_details.flexibility")}`,
               htmlFor: "flexibility",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.date,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
+              type: Field.select,
               id: "flexibility",
+              value: leadDetails?.id && leadDetails?.flexibility || "",
               name: "flexibility",
-              register,
+              options: [
+                {
+                  value: "1",
+                  label: "1 days",
+                },
+                {
+                  value: "2",
+                  label: "2 days",
+                },
+                {
+                  value: "3",
+                  label: "3 days",
+                },
+                {
+                  value: "4",
+                  label: "4 days",
+                },
+                {
+                  value: "5",
+                  label: "5 days",
+                },
+                {
+                  value: "6",
+                  label: "6 days",
+                },
+                {
+                  value: "7",
+                  label: "7 days",
+                },
+
+              ],
+              control,
+
             },
           },
 
           {
+            containerClass: "mb-0",
             label: {
-              text: "Preferred Contact",
-              htmlFor: "preferContact",
+              text: `${translate("leads.service_details.prefer_contact")}`,
+              htmlFor: "preferredContact",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
-              id: "preferContact",
-              name: "preferContact",
-              value: "Via Email",
+              id: "preferredContact",
+              name: "preferredContact",
+              value: leadDetails?.id && leadDetails?.preferredContact || "",
               options: [
                 {
                   value: "Via Email",
@@ -125,17 +172,19 @@ id:"div-field",
             },
           },
           {
+            containerClass: "mb-0",
             label: {
-              text: "Budget*",
+              text: `${translate("leads.service_details.budget")}`,
               htmlFor: "budget",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: "Less then 1000CHF",
+              value: leadDetails?.id && leadDetails?.budget || "",
+
               options: [
                 {
                   value: "Less then 1000CHF",
@@ -156,22 +205,23 @@ id:"div-field",
     {
       field: {
         type: Field.div,
-id:"div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid  grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mt-5",
         children: [
           {
-            containerClass: "col-span-1 mb-0",
+            containerClass: "xl:col-span-1 mb-0",
             label: {
-              text: "Lead Source*",
+              text: `${translate("leads.service_details.lead_source")}`,
               htmlFor: "leadSource",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
-              value: "Instagram",
+              value: leadDetails?.id && leadDetails?.leadSource || "",
+
               options: [
                 { value: "Whats'app", label: "What'sapp" },
                 { value: "Facebook", label: "Facebook" },
@@ -181,30 +231,29 @@ id:"div-field",
           },
 
           {
-            containerClass: "col-span-2 mb-0",
+            containerClass: "xl:col-span-2 mb-0",
             label: {
-              text: "Other Services",
+              text: `${translate("leads.service_details.other_services")}`,
               htmlFor: "otherServices",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  ",
-              type: Field.select,
+              type: Field.multiSelect,
+              // @ts-expect-error
+              className: "!p-0 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: "Cleaning, Moving, Painting",
-              options: [
+              value: leadDetails?.id && leadDetails?.otherServices || [""],
+              options: service && service?.map((item) => (
                 {
-                  value: "Cleaning, Moving, Painting",
-                  label: "Cleaning, Moving, Painting",
-                },
-                {
-                  value: "Cleaning, Moving, Painting",
-                  label: "Cleaning, Moving, Painting",
-                },
-              ],
+                  label: item.serviceName,
+                  value: item.id
+                }
+              )) || [],
+
 
               control,
+              trigger
             },
           },
         ],
@@ -215,31 +264,30 @@ id:"div-field",
       containerClass: "mt-6",
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Back",
+              id: "button",
+              text: `${translate("leads.service_details.back_button")}`,
               inputType: "button",
-              // onClick: () => setCurrentFormStage("locationDetails"),
+              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerEdit),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Next",
+              id: "button",
+              text: `${translate("leads.service_details.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

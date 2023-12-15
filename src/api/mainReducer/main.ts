@@ -11,6 +11,10 @@ import offerSlice from "../slices/offer/offerSlice";
 import EmployeeSlice from '../slices/employee/emplyeeSlice';
 import serviceSlice from "../slices/service/serviceSlice";
 import followUp from "../slices/followUp/followUp";
+import noteSlice from "../slices/noteSlice/noteSlice";
+import imageSlice from "../slices/imageSlice/image";
+import settings from "../slices/settingSlice/settings";
+import EmailSlice from '../slices/emailTracker/email';
 
 const reducer = {
   auth,
@@ -26,6 +30,10 @@ const reducer = {
   employee: EmployeeSlice,
   service: serviceSlice,
   followUp: followUp,
+  note: noteSlice,
+  image: imageSlice,
+  settings,
+  emailSlice: EmailSlice
 
 };
 export default reducer;

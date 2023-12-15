@@ -1,19 +1,21 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateEditPaymentDetailsFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
   (register, loading, onClick) => {
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
         field: {
           type: Field.div,
-id:"div-field",
+          id: "div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
               containerClass: "mb-0 col-span-2",
               label: {
-                text: "Name on card",
+                text: `${translate("setting.billing.edit_payment_modal.name")}`,
                 htmlFor: "nameOnCard",
                 className: "mb-[10px]",
               },
@@ -30,7 +32,9 @@ id:"div-field",
             {
               containerClass: "mb-0 col-span-1",
               label: {
-                text: "Expiry",
+                text: `${translate(
+                  "setting.billing.edit_payment_modal.expire"
+                )}`,
                 htmlFor: "expiry",
                 className: "mb-[10px]",
               },
@@ -52,13 +56,15 @@ id:"div-field",
         containerClass: "mt-[14px]",
         field: {
           type: Field.div,
-id:"div-field",
+          id: "div-field",
           className: "grid grid-cols-3 gap-x-4 ",
           children: [
             {
               containerClass: "mb-0 col-span-2",
               label: {
-                text: "Card number",
+                text: `${translate(
+                  "setting.billing.edit_payment_modal.card_number"
+                )}`,
                 htmlFor: "cardNumber",
                 className: "mb-[10px]",
               },
@@ -75,7 +81,7 @@ id:"div-field",
             {
               containerClass: "mb-0 col-span-1",
               label: {
-                text: "cvv",
+                text: `${translate("setting.billing.edit_payment_modal.cvv")}`,
                 htmlFor: "cvv",
                 className: "mb-[10px]",
               },
@@ -96,28 +102,32 @@ id:"div-field",
       {
         field: {
           type: Field.div,
-id:"div-field",
+          id: "div-field",
           className: "flex space-x-[18px] mt-5",
           children: [
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
-id:"button",
-                text: "Cancel",
+                id: "button",
+                text: `${translate(
+                  "setting.billing.edit_payment_modal.cancel_button"
+                )}`,
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
                 loading,
-                onClick:onClick
+                onClick: onClick,
               },
             },
             {
               containerClass: "mb-0",
               field: {
                 type: Field.button,
-id:"button",
-                text: "Save Changes",
+                id: "button",
+                text: `${translate(
+                  "setting.billing.edit_payment_modal.save_changes_button"
+                )}`,
                 inputType: "submit",
                 className:
                   "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",

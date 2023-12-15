@@ -12,7 +12,7 @@ const AddFollowUp = ({
   handleAllCustomers,
   handleAllLeads,
 }: AddFollowUpProps) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error,customer } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddFollowUp(handleFollowUps, handleAllCustomers, handleAllLeads);
 
   return (
@@ -30,7 +30,7 @@ const AddFollowUp = ({
           />
           <div className="flex justify-between items-center">
             <p className="text-2xl font-medium text-[#000] mb-5">
-              Add Followup
+              {translate("follow_up.add_follow_up.heading")}
             </p>
           </div>
 

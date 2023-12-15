@@ -1,11 +1,11 @@
 // enum for add new note
 export enum AddNewNote {
-  noteMessage = "noteMessage",
+  noteMessage = "description",
 }
 
 // Change password
 export enum ChangePasswordField {
-  oldPassword = "oldPassword",
+  oldPassword = "currentPassword",
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
 }

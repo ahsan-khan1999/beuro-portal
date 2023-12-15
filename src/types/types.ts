@@ -10,6 +10,8 @@ import {
   Control,
   FieldValues,
   SetFieldValue,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -17,16 +19,23 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "./auth";
+import { User } from './auth';
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
-import { Status } from "./global";
+import { Attachement, Status } from "./global";
 import { Employee } from "./employee";
+import { Lead } from "./leads";
+import { Service } from "./service";
+import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
+import { ContentTableRowTypes } from "./content";
+import { OffersTableRowTypes, Total } from "./offers";
+import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
   pathname?: string;
+  query?: string;
   role: number[];
   inner?: SideBar[];
   className?: string;
@@ -139,8 +148,7 @@ export type GenerateCompanyProfileFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   properties?: User,
-  setCurrentFormStage?: stateDispatch<SetStateAction<string>>,
-
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 
 export type GenerateResetPasswordFormField = (
@@ -154,15 +162,14 @@ export type GenerateCustomerFormField = (
   loader: boolean,
   isUpdate: boolean,
   handleUpdateCancel: () => void,
-  properties: { customer?: Customers, customerType?: string },
+  properties: { customer?: Customers; customerType?: string },
   control?: Control<FieldValues>,
-  setValue?: SetFieldValue<FieldValues>,
-
+  setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export interface CustomerProperties {
   phoneNumber?: string;
   mobileNumber?: string;
-  customerType?: string
+  customerType?: string;
 }
 export type GenerateFormContactField = (
   register: UseFormRegister<FieldValues>,
@@ -189,7 +196,7 @@ export type GenerateFormAddressField = (
 
 // Image upload form field
 export type ImageUploadFormFieldType = (
-  register: UseFormRegister<FieldValues>,
+  loading: boolean,
   control?: Control<FieldValues>,
   onClick?: Function
 ) => FormField[];
@@ -200,7 +207,7 @@ export type GenerateAccountSettingFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  user?: User
 ) => FormField[];
 
 // change mail setting formfield
@@ -258,10 +265,15 @@ export type GenerateContentFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  onClick?: () => void,
+  trigger?: UseFormTrigger<FieldValues>,
+  count?: number,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  contentDetails?: ContentTableRowTypes,
+  append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
+  onRemove?: UseFieldArrayRemove
 ) => FormField[];
-
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
@@ -269,7 +281,7 @@ export type GenerateEmployeeFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
 
 // Notes formfield
@@ -296,7 +308,9 @@ export type GenerateInvoiceFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   markItRecuring: boolean,
-  trigger?: UseFormTrigger<FieldValues>
+  invoiceDetails?: InvoiceTableRowTypes,
+  type?: string,
+  data?: SubInvoiceTableRowTypes
 ) => FormField[];
 
 // Contract formfield
@@ -304,8 +318,11 @@ export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  onClick: Function,
   onBack?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  content?: ContentTableRowTypes[],
+  contentDetails?: ContentTableRowTypes,
+  onContentSelect?: (id: string) => void
 ) => FormField[];
 
 // Contract formfield
@@ -313,17 +330,125 @@ export type GenerateOffersFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onClick: () => void,
-  count?: number
+  onClick: () => void | Function,
+  count: number,
+  properties: {
+    content?: ContentTableRowTypes[];
+    contentDetails?: ContentTableRowTypes;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string) => void;
+    customerDetails?: Customers;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    onContentSelect?: () => void;
+    offerDetails?: OffersTableRowTypes;
+  },
+  setValue?: SetFieldValue<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+export type GenerateOfferServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    offerDetails?: OffersTableRowTypes;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+  },
+
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveAddress: UseFieldArrayRemove,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>
+) => FormField[];
+export type GenerateOffersServiceActionFormField = (
+  loader: boolean,
+  onClick: () => void
+) => FormField[];
+
+export type GenerateOfferDateFormField = (
+  register: UseFormRegister<FieldValues>,
+  onClick: UseFieldArrayAppend<FieldValues, "date">,
+  count: number,
+  handleRemoveDateField: UseFieldArrayRemove,
+  offerDetails: OffersTableRowTypes,
+  control?: Control<FieldValues>
+) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  trigger?: UseFormTrigger<FieldValues>,
+  service?: Service[],
+  leadDetails?: Lead
+) => FormField[];
+export type GenerateCustomerLeadFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  leadDetails?: Lead,
+  customerType?: string,
+  setValue?: UseFormSetValue<FieldValues>
+) => FormField[];
+export type GenerateLeadsAdditionalDetailsFormField = (
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  leadDetails?: Lead
+) => FormField[];
+export type GenerateLeadAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
+  handleRemoveAddress?: UseFieldArrayRemove,
+  fields?: object[]
+) => FormField[] | null;
+export type GenerateLeadsCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    offerDetails?: OffersTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+  },
+  setValue: SetFieldValue<FieldValues>
 ) => FormField[];
 
 export type GeneratePlansFormField = (
@@ -334,15 +459,20 @@ export type GeneratePlansFormField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
-
 // follow-up formfield
 export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  customers:Customers[],
+  data: { customer: Customers[]; lead: Lead[] },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+export type GeneratePostPondFormField = (
+  register: UseFormRegister<FieldValues>,
+  loading: boolean,
+  control: Control<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -391,9 +521,10 @@ export interface CheckBoxType {
 
 export interface FilterType {
   text: string;
-  sortBy: string;
-  type: string;
-  location: string;
+  sortBy?: string;
+  type?: string;
+  location?: string;
+  status?: string;
 }
 export interface FilterProps {
   filter: FilterType;
@@ -412,12 +543,127 @@ interface ItemList {
 
 export type Errors = Record<string, any> | undefined;
 
-
 export interface DateRangeValueProps {
-  selection: DateRangeSelectionProps
+  selection: DateRangeSelectionProps;
 }
 interface DateRangeSelectionProps {
   startDate: string;
   endDate: string;
+}
 
+export interface DocumentHeaderDetailsProps {
+  offerNo: string;
+  offerDate: string;
+  createdBy: string;
+}
+
+export interface ProductItemFooterProps {
+  subTotal: string;
+  tax: string;
+  discount: string;
+  grandTotal: string;
+}
+
+export interface ContactDetailsProps {
+  address: {
+    name: string;
+    streetWithNumber: string;
+    postalCode: string;
+    city: string;
+  };
+  email: string;
+  phone: string;
+}
+export interface MovingDetailsProps {
+  header: string;
+  address1: string;
+  address1Details: string;
+  address2: string;
+  address2Details: string;
+  workDates: string;
+}
+export interface ProductItemProps {
+  title: string;
+  description: string;
+  price: string;
+  count: string;
+  total: string;
+}
+
+export interface DocumentDetailFooterProps {
+  companyName: string;
+  companyDomain: string;
+  infoMail: string;
+  firstNumber: string;
+  secondNumber: string;
+  postFinance: string;
+  streeAdress: string;
+  streetNumber: string;
+  lastNumber: string;
+}
+
+export interface PdfProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  movingDetails: MovingDetailsProps;
+  serviceItem: ProductItemProps[];
+  serviceItemFooter: ProductItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
+  qrCode: qrCode;
+}
+
+export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
+  isShowTotal: boolean;
+}
+export interface PurchasedItemDetailsNextPageProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  serviceItem: ProductItemProps[];
+  serviceItemFooter: ProductItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
+  isShowTotal: boolean;
+}
+
+interface qrCode {
+  acknowledgementSlip: AcknowledgementSlipProps;
+  payableTo: PayableToProps;
+}
+interface QRCodeBaseProps {
+  accountDetails: {
+    accountNumber: string;
+    name: string;
+    street: string;
+    city: string;
+  };
+  referenceNumber: string;
+  payableByDetails: {
+    name: string;
+    street: string;
+    city: string;
+  };
+}
+export interface AcknowledgementSlipProps extends QRCodeBaseProps {
+  currency: string;
+  amount: number;
+}
+export interface PayableToProps extends QRCodeBaseProps {
+  additionalInformation: string;
+}
+export interface PaymentQrCodeDetailsProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  qrCode: qrCode;
+}
+export interface QrCodeDetailsProps {
+  qrCode: qrCode;
+}
+export interface AggrementProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  footerDetails: DocumentDetailFooterProps;
+}
+
+export interface FiltersComponentProps {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (value: FilterType) => void;
 }

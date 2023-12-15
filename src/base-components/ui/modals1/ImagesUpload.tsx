@@ -11,13 +11,13 @@ const ImagesUpload = ({
   handleImageSlider: Function,
   onClose: () => void;
 }) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useUploadImage(handleImageSlider);
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[624px] min-h-auto max-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
       >
         <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
           <Image
@@ -28,17 +28,17 @@ const ImagesUpload = ({
           />
           <div className="flex justify-between items-center mb-5 ">
             <p className="text-[24px] leading-6 font-medium text-[#000]">
-              Images
+              {translate("common.images_modal.heading")}
             </p>
           </div>
           <hr className="opacity-10 " />
 
           <div className="flex flex-col gap-y-2 my-5 ">
             <h2 className="text-base font-medium text-[#393939]">
-              7 images uploaded
+            {translate("common.images_modal.title")}
             </h2>
             <p className="text-xs font-normal text-[#8F8F8F]">
-              Images should be max 20, file size up to 10MB.
+            {translate("common.images_modal.sub_title")}
             </p>
           </div>
           <Form

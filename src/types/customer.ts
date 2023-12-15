@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
 } from "react-hook-form";
+import { OffersTableRowTypes } from "./offers";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -25,7 +26,7 @@ export interface CustomerLeadDetail {
   expires?: string;
 }
 export interface Customers {
-  id: number;
+  id: string;
   refID: string;
   createdAt: string
   fullName: string;
@@ -37,7 +38,7 @@ export interface Customers {
   status?: string;
   editImg?: string;
   editNote?: string;
-  customerType?: string;
+  customerType: string;
   companyName: string;
   mobile: string;
   address: CustomerAddress;
@@ -45,7 +46,7 @@ export interface Customers {
   lead: CustomerLeadDetail;
 }
 
-interface CustomerAddress {
+export interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string
@@ -67,6 +68,12 @@ export interface FormDataProps {
 }
 export interface CustomerPromiseActionType {
   type: string,
-  payload: object,
+  payload: any,
+  meta: object,
+}
+
+export interface OfferPromiseActionType {
+  type: string,
+  payload: OffersTableRowTypes,
   meta: object,
 }

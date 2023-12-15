@@ -1,53 +1,56 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadsFormField } from "@/types";
+import { FormField, GenerateLeadsAdditionalDetailsFormField, GenerateLeadsFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
-export const LeadAdditionalDetailsFormField: GenerateLeadsFormField = (
-  register,
+export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormField = (
   loading,
   control,
-  onClick
+  onClick,
+  leadDetails
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-6",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-dark focus:!border-primary",
-        id: "additionlData",
-        name: "additionlData",
+        id: "additionalDetails",
+        name: "additionalDetails",
         control,
+        value: leadDetails?.id && leadDetails?.additionalDetails
+
       },
     },
 
     {
       field: {
         type: Field.div,
-id:"div-field",
+        id: "div-field",
         className: "flex space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Cancel",
+              id: "button",
+              text: `${translate("leads.additional.cancel_button")}`,
               inputType: "button",
-             
+
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              loading,
-              onClick:onClick
+              onClick: onClick,
             },
           },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
-id:"button",
-              text: "Save Changes",
+              id: "button",
+              text: `${translate("leads.additional.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

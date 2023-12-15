@@ -8,12 +8,12 @@ import useEditPayment from "@/hooks/modals/useEditPayment";
 
 const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error } = useEditPayment(onClose);
+  const { fields, onSubmit, handleSubmit, errors, error,translate } = useEditPayment(onClose);
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[606px] min-h-auto max-h-auto"
+        containerClassName="max-w-[480px] lg:max-w-[606px] min-h-fit "
       >
         <div className="relative flex flex-col px-[30px] pb-[26px] pt-[25px]">
           <Image
@@ -23,11 +23,11 @@ const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
             onClick={onClose}
           />
           <p className="text-[#000] font-medium text-2xl mb-2">
-            Edit Payment Details
+            {translate("setting.billing.edit_payment_modal.heading")}
           </p>
 
           <p className="text-sm font-normal text-[#1E1E1E] ">
-            We automatically bill on the 1st of each month
+          {translate("setting.billing.edit_payment_modal.sub_heading")}
           </p>
 
           <section

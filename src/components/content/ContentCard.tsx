@@ -4,11 +4,14 @@ import backIcon from "@/assets/svgs/back_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
+import { formatDateString } from "@/utils/functions";
 
 const ContentCard = ({
-  contentDetail,
+  contentDetails,
+  contentDeleteHandler
 }: {
-  contentDetail: ContentTableRowTypes;
+  contentDetails: ContentTableRowTypes;
+  contentDeleteHandler: () => void
 }) => {
   const router = useRouter();
   return (
@@ -25,39 +28,37 @@ const ContentCard = ({
             Content details
           </h1>
         </div>
-        <Image src={deleteIcon} alt="deleteIcon" className="cursor-default" />
+        <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={contentDeleteHandler}/>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex justify-between items-center">
+      <div className="grid 2xl:flex justify-between items-start  gap-y-3">
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">S.no:</span>
           <span className="text-[#4B4B4B] text-base font-medium">
-            {contentDetail?.id}
+            {contentDetails?.refID}
           </span>
         </div>
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">
             Content Title:
           </span>
-
           <span className="text-[#4B4B4B] text-base font-medium">
-            {contentDetail?.contentTitle}
+            {contentDetails?.contentName}
           </span>
         </div>
         <div className="flex gap-[6px]">
-          <span className="text-[#4D4D4D] text-base font-normal">Worker</span>
-
+          <span className="text-[#4D4D4D] text-base font-normal">Worker:</span>
           <span className="text-[#4B4B4B] text-base font-medium">
-            Ahamad Rahal Ali
+            {contentDetails?.createdBy?.fullName}
+
           </span>
         </div>
-        <div className="flex  items-center gap-[11px]">
+        <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">
             Creation Date:
           </span>
-
           <span className="text-[#4B4B4B] text-base font-medium">
-            {contentDetail?.createdOn?.toLocaleDateString()}
+            {formatDateString(contentDetails?.createdAt)}
           </span>
         </div>
       </div>

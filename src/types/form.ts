@@ -15,9 +15,10 @@ import {
 import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
-import React, { ReactNode } from "react";
+import React, { ReactNode, SetStateAction } from "react";
 import { CardType, Field, Salutation } from "@/enums/form";
 import { User } from ".";
+import { Attachement } from "./global";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
@@ -44,6 +45,12 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   setValue?: UseFormSetValue<FieldValues>;
   svg?: string;
   img?: boolean;
+  remove?: string;
+  onRemove?: () => void;
+  fieldIndex?: number;
+  onChange?: (value?: number) => void;
+  percentage?: string;
+  step?: string
 }
 
 // textarea added
@@ -108,10 +115,11 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   options: OptionType[];
   value: string;
   svg?: string;
-  onItemChange?: Function
+  onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
+  fieldIndex?: number
 }
 
 export interface SelectBoxProps {
@@ -121,13 +129,41 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   svg?: string;
+  onItemChange?: (id: string, index?: number) => void
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+  fieldIndex?: number
+
+}
+
+
+
+export interface MultiSelectProps extends BaseFieldProps<Field.select> {
+  control?: Control<FieldValues>;
+  options: OptionType[];
+  value: string[];
+  svg?: string;
+  onItemChange?: () => void;
+  trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
+  disabled?: boolean;
+}
+
+export interface MultiSelectBoxProps {
+  id: string;
+  options: OptionType[];
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  value: string[];
+  svg?: string;
   onItemChange?: Function
   success?: boolean;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
 }
-
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   register: UseFormRegister<FieldValues>;
   description: string;
@@ -138,9 +174,13 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
-  value?: string | number;
+  value?: string;
   containerClassName?: string;
   textClassName?: string;
+  checked?: boolean;
+  setValue?: UseFormSetValue<FieldValues>,
+  disabled?: boolean;
+  onClick?: () => void
 }
 
 export interface DragAndDropFileFieldProps
@@ -154,6 +194,10 @@ export interface DragAndDropPdfFieldProps
   extends BaseFieldProps<Field.dragAndDropPdfField> {
   control?: Control<FieldValues>;
   isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: React.Dispatch<SetStateAction<any>>
+
+
 }
 
 // interface for the pdf file upload
@@ -167,6 +211,7 @@ export interface ImageUploadFieldProps
   extends BaseFieldProps<Field.imageUploadField> {
   control?: Control<FieldValues>;
   onClick?: Function;
+  value?: string
 }
 
 // Interface for the input field copy
@@ -191,7 +236,7 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   disabled?: boolean;
 }
 export interface MultiDateProps extends BaseFieldProps<Field.phone> {
-  value?: string;
+  value?: DateRangeProps;
   control?: Control<FieldValues>;
   watch?: UseFormWatch<FieldValues>;
   setValue?: UseFormSetValue<FieldValues>;
@@ -199,6 +244,10 @@ export interface MultiDateProps extends BaseFieldProps<Field.phone> {
   disabled?: boolean;
   remove?: string;
   onRemove?: () => void
+}
+export interface DateRangeProps {
+  startDate: string;
+  endDate: string
 }
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;
@@ -208,6 +257,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   svg?: string;
   success?: boolean;
   onRemove?: () => void;
+  dateType?: string
 }
 
 export interface SpanProps {
@@ -221,6 +271,7 @@ export interface SpanProps {
   dispatch?: Dispatch;
   onClick?: Function;
   id: string;
+  html?: string
 }
 
 export interface DivProps {
@@ -272,7 +323,11 @@ export type FieldType =
   | Field.span
   | Field.div
   | Field.button
-  | Field.link;
+  | Field.link
+  | Field.multiSelect
+  | Field.addField
+  | Field.toggleButton;
+
 export type FieldProps =
   | InputProps
   | TextAreaProps
@@ -295,7 +350,11 @@ export type FieldProps =
   | DivProps
   | ButtonProps
   | AddFieldProps
-  | LinkProps;
+  | LinkProps
+  | MultiSelectProps
+  | AddFieldProps
+  | ToggleButtonFormProps;
+
 
 export interface FormField {
   containerClass?: string;
@@ -324,9 +383,11 @@ export interface FieldComponents {
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
-  // addField: React.FC<AddFieldProps>;
+  addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
   dateRange: React.FC<MultiDateProps>;
+  multiSelect: React.FC<MultiSelectProps>;
+  toggleButton: React.FC<ToggleButtonFormProps>;
 }
 
 export interface FormProps {
@@ -384,4 +445,11 @@ export interface CustomHookFormProps {
 }
 export interface HookFieldProps {
   [key: string]: JSX.Element;
+}
+export interface ToggleButtonFormProps extends BaseFieldProps<Field.toggleButton> {
+  register: UseFormRegister<FieldValues>;
+  className: string;
+  checked: boolean;
+  onClick?: () => void
+
 }

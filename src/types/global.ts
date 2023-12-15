@@ -1,7 +1,7 @@
-
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { FilterType } from ".";
 
 export interface GlobalState {
   loading: boolean;
@@ -9,7 +9,7 @@ export interface GlobalState {
   modal: {
     type: ModalType.NONE;
     cardId?: number;
-    data?: any
+    data?: any;
   };
 }
 
@@ -17,7 +17,7 @@ export type TranslatorFunction = (value: any) => any;
 export interface Status {
   open?: boolean;
   close?: boolean;
-  expired?: boolean;
+  expire?: boolean;
   signed?: boolean;
   rejected?: boolean;
   confirmed?: boolean;
@@ -29,21 +29,23 @@ export interface Status {
 }
 export interface CheckBoxFilterProps {
   label: string;
-  type: keyof Status
+  type: keyof Status;
 }
 export interface CheckFieldProps {
   label: string;
-  checkboxFilter: Status;
-  setCheckBoxFilter: React.Dispatch<React.SetStateAction<Status>>;
-  type: keyof Status;
+  checkboxFilter: FilterType;
+  setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
+  type: keyof FilterType;
+  defaultChecked?: string;
+  value?: string;
 }
 export interface InputFieldProps {
   value: string;
   handleChange: (value: string) => void;
   containerClassName?: string;
   textClassName?: string;
-  bgColor?: boolean,
-  iconDisplay?: boolean
+  bgColor?: boolean;
+  iconDisplay?: boolean;
 }
 
 export interface OptionsFieldProps {
@@ -76,7 +78,6 @@ export interface CreateSuccessProps {
   modelHeading: string;
   modelSubHeading: string;
   routeHandler: () => void;
-
 }
 export interface UpdateSuccessProps {
   onClose: () => void;
@@ -84,6 +85,70 @@ export interface UpdateSuccessProps {
   modelSubHeading: string;
   cancelHandler: () => void;
   confirmHandler: () => void;
-  loading:boolean
+  loading: boolean;
+}
 
+export interface Attachement {
+  name: string;
+  value: string;
+}
+
+export interface DocumentHeaderDetailsProps {
+  offerNo: string;
+  offerDate: string;
+  createdBy: string;
+}
+
+export interface ServiceItemFooterProps {
+  subTotal: string;
+  tax: string;
+  discount: string;
+  grandTotal: string;
+}
+
+export interface ContactDetailsProps {
+  address: {
+    name: string;
+    streetWithNumber: string;
+    postalCode: string;
+    city: string;
+  };
+  email: string;
+  phone: string;
+}
+export interface MovingDetailsProps {
+  header: string;
+  address1: string;
+  address1Details: string;
+  address2: string;
+  address2Details: string;
+  workDates: string;
+}
+export interface ServiceItemProps {
+  title: string;
+  description: string;
+  price: string;
+  count: string;
+  total: string;
+}
+
+export interface DocumentDetailFooterProps {
+  companyName: string;
+  companyDomain: string;
+  infoMail: string;
+  firstNumber: string;
+  secondNumber: string;
+  postFinance: string;
+  streeAdress: string;
+  streetNumber: string;
+  lastNumber: string;
+}
+
+export interface PdfPreviewProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  contactAddress: ContactDetailsProps;
+  movingDetails: MovingDetailsProps;
+  serviceItem: ServiceItemProps[];
+  serviceItemFooter: ServiceItemFooterProps;
+  footerDetails: DocumentDetailFooterProps;
 }

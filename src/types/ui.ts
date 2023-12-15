@@ -5,6 +5,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -258,6 +259,8 @@ export interface ToggleButtonProps {
   disabled?: boolean;
 }
 
+
+
 export interface CheckBoxInputProps {
   onChange: (value: boolean) => void;
   isChecked?: boolean;
@@ -279,7 +282,7 @@ interface SliderBaseProps {
 
 // types for slider
 export interface MainImageSliderProps extends SliderBaseProps {
-  imageSrc: StaticImageData;
+  imageSrc: string;
   handleMouseMove?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -289,7 +292,7 @@ export interface MainImageSliderProps extends SliderBaseProps {
 }
 
 interface SliderImagesData {
-  imageSrc: StaticImageData;
+  imageSrc: string;
 }
 
 // slider image props
@@ -306,13 +309,13 @@ export interface ThumbnailSliderProps extends SliderBaseProps {
 }
 
 export interface ThumbnailProps {
-  imageSrc: StaticImageData;
+  imageSrc: string;
   onClick: () => void;
   index: number;
 }
 
 export interface ImageSliderHook {
-  selectedImage: StaticImageData;
+  selectedImage: string;
   thumbnailStartIndex: number;
   goToNext: () => void;
   goToPrev: () => void;

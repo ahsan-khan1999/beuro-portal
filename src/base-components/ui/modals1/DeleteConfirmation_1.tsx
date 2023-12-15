@@ -4,6 +4,7 @@ import React from "react";
 import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const DeleteConfirmation_1 = ({
   handleDelete,
@@ -17,12 +18,14 @@ const DeleteConfirmation_1 = ({
   subHeading: string;
 }) => {
   const { modal: { data } } = useAppSelector(state => state.global)
+
   
+  const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564.004px] min-h-auto"
+        containerClassName="max-w-[480px] lg:max-w-[564.004px] min-h-fit"
       >
         <div className="relative flex flex-col items-center">
           <Image
@@ -36,7 +39,7 @@ const DeleteConfirmation_1 = ({
             alt="delete_icon"
             className="mt-[66px]"
           />
-          <p className="text-[#000] font-medium text-[20px] leading-7 my-2">
+          <p className="text-[#000] font-medium text-xl my-2">
             {modelHeading}
           </p>
           <p className="text-[#4D4D4D] font-normal text-sm ">{subHeading}</p>
@@ -49,13 +52,13 @@ const DeleteConfirmation_1 = ({
               onClick={onClose}
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
-              Cancel
+              {translate("email_tracker.email_confirmation_modal.cancel_button")}
             </button>
             <button
               onClick={() => handleDelete()}
               className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
             >
-              Confirm
+               {translate("email_tracker.email_confirmation_modal.confirm_button")}
             </button>
           </div>
         </div>

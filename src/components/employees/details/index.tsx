@@ -17,7 +17,7 @@ const EmploysDetails = () => {
     onSubmit,
     handleSubmit,
     errors,
-    deleteHandler
+    deleteHandler,
   } = useEmployeeDetail(true);
 
   return (
@@ -32,17 +32,21 @@ const EmploysDetails = () => {
             handleDelete={deleteHandler}
           />
         </DetailsCard>
-        <div className="flex mt-8">
-          <EmployeeForm
-            isUpdate={isUpdate}
-            setIsUpdate={setIsUpdate}
-            handlePasswordReset={handlePasswordReset}
-            fields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-          />
-          <SideCard />
+        <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
+          <div className="xl:col-span-2">
+            <EmployeeForm
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+              handlePasswordReset={handlePasswordReset}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+          <div className="xl:col-span-1">
+            <SideCard />
+          </div>
         </div>
       </Layout>
 

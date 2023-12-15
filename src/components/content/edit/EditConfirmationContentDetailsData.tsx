@@ -13,16 +13,16 @@ const EditConfirmationContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditConfirmationContentDetails(onClick);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          Confirmation Content
+          {translate("content.details.confirmation_heading")}
         </h2>
-        <button onClick={() => onClick(1, ComponentsType.confirmationContent)} className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7]  px-9">
-          Cancel
+        <button onClick={() => onClick(1, ComponentsType.confirmationContent)} className="text-[#4B4B4B] font-medium rounded-lg border py-2 border-[#C7C7C7] px-9">
+        {translate("content.details.cancel_button")}
         </button>
       </div>
       <Form

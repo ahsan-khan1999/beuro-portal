@@ -1,10 +1,11 @@
 // import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
+import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from 'react';
 // import searchIcon from "@/assets/svgs/search.svg";
 
 export const SelectBox = ({
@@ -19,14 +20,21 @@ export const SelectBox = ({
   className,
   onItemChange,
   disabled,
+  fieldIndex
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
+
+
+  useEffect(() => {
+    if (defaultValue) field?.onChange(defaultValue)
+  }, [defaultValue])
+
   useMemo(() => {
-    if (options.length > 0) {
+    if (options?.length > 0) {
       setOption(options);
     }
-  }, [options.length]);
+  }, [options?.length]);
 
   const search = useRef<string>("");
 
@@ -37,9 +45,9 @@ export const SelectBox = ({
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     setIsOpen(false);
+    onItemChange && onItemChange(value,fieldIndex);
     field?.onChange(value);
     trigger?.(field?.name);
-    onItemChange && onItemChange();
   };
 
   const handleChange = (value: string) => {
@@ -50,9 +58,8 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark  py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
-    success ? "pl-4 pr-10" : "pl-11 pr-4"
-  }`;
+  const defaultClasses = `placeholder:text-dark  py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+    }`;
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -63,9 +70,9 @@ export const SelectBox = ({
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={classes}
+        className={`${classes} `}
       >
-        {(field && field.value) || defaultValue}
+        {(field && getLabelByValue(field.value, option)) || getLabelByValue(defaultValue, option)}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (

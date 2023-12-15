@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 import TabSection from "@/base-components/ui/tab";
 import { Layout } from "@/layout";
 import AddServiceForm from "../fields/add-services-fields";
+import { useTranslation } from "next-i18next";
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddService = () => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Service Details");
   const handleCancel = () => {
     router.push("/services");
@@ -38,9 +40,11 @@ const AddService = () => {
 
   return (
     <Layout>
-      <h2 className="text-[#222B45] text-xl font-normal mb-5">Add new Service</h2>
-      <div className="flex ">
-        <div className="space-y-4 mr-6">
+      <h2 className="text-[#222B45] text-xl font-normal mb-5">
+        {translate("services.add_service_heading")}
+      </h2>
+      <div className="flex flex-col xl:flex-row gap-4">
+        <div className="space-y-4 w-fit">
           <TabSection
             tabsArray={tabSection}
             setTabType={setTabType}

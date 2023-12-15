@@ -46,5 +46,6 @@ export default function useEmployeePasswordReset(
     errors,
     fields,
     onSubmit,
+    translate,
   };
 }

@@ -34,5 +34,6 @@ export default function useEditPayment(onClose: Function) {
     errors,
     fields,
     onSubmit,
+    translate
   };
 }

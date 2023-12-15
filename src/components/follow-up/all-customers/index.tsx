@@ -4,18 +4,18 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
-import useAllCustomers from "@/hooks/follow-up/useAllCustomers";
+// import useAllCustomers from "@/hooks/follow-up/useAllCustomers";
 import { AllCustomersTableProps } from "@/types/follow-up";
 
 const AllCustomersTable = ({
   handleCustomerDetail,
 }: AllCustomersTableProps) => {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-    useAllCustomers();
+  // const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter } =
+  //   useAllCustomers();
 
   return (
     <>
-      <TableFunctions />
+      {/* <TableFunctions filter={filter} setFilter={setFilter}/>
       <TableLayout>
         <TableHeading />
         <TableRows
@@ -27,7 +27,7 @@ const AllCustomersTable = ({
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
-      />
+      /> */}
     </>
   );
 };

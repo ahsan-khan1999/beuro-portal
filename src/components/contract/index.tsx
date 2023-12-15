@@ -17,15 +17,26 @@ export default function Contract() {
     handleImageUpload,
     handleNotes,
     renderModal,
+    handleFilterChange,
+    filter,
+    setFilter,
   } = useContract();
 
   return (
     <>
       <Layout>
-        <TableFunctions />
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeadings />
-          <TableRows dataToAdd={currentPageRows}  handleImageUpload={handleImageUpload} handleNotes={handleNotes}/>
+          <TableRows
+            dataToAdd={currentPageRows}
+            handleImageUpload={handleImageUpload}
+            openModal={handleNotes}
+          />
         </TableLayout>
         <Pagination
           totalItems={totalItems}

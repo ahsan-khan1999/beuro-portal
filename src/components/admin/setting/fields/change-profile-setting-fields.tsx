@@ -1,32 +1,32 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateAccountSettingAdminFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField =
   (register, loading, control) => {
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-
+        containerClass: "mt-6",
         field: {
           type: Field.div,
-          className: "flex ",
           id: "div-field",
-
+          className: "grid grid-cols-2 xl:grid-cols-3",
           children: [
             {
-              containerClass: "flex justify-start  mb-5",
+              containerClass:
+                "flex justify-center items-center mb-5 col-span-1",
               field: {
                 type: Field.profileUploadField,
                 id: "fileUpload",
                 name: "fileUpload",
                 control,
-
               },
             },
             {
-              containerClass: "w-full ml-[60px]",
+              containerClass: "col-span-2",
               field: {
                 type: Field.div,
-                className: "",
                 id: "div-field",
                 children: [
                   {
@@ -40,7 +40,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                         {
                           containerClass: "mb-0",
                           label: {
-                            text: "Full Name",
+                            text: `${translate(
+                              "admin.settings.account_setting.full_name"
+                            )}`,
                             htmlFor: "fullName",
                           },
                           field: {
@@ -59,7 +61,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                         {
                           containerClass: "mb-0",
                           label: {
-                            text: "Email",
+                            text: `${translate(
+                              "admin.settings.account_setting.email"
+                            )}`,
                             htmlFor: "email",
                           },
                           field: {
@@ -87,13 +91,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       type: Field.div,
                       className: "flex gap-x-4 items-center relative w-full ",
                       id: "div-field",
-
                       children: [
                         {
                           containerClass: "mb-0",
                           field: {
                             type: Field.span,
-                            text: "Update Password",
+                            text: `${translate(
+                              "admin.settings.account_setting.update_password"
+                            )}`,
                             containerClassName:
                               "text-[14px] text-[#393939] font-normal ",
                             id: "paymentdiv",
@@ -116,14 +121,15 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     containerClass: "w-full relative mb-7",
                     field: {
                       type: Field.div,
-                      id: "paymentdiv",
-
-                      className: "grid grid-cols-2 gap-x-6 ",
+                      id: "div-field",
+                      className: "grid grid-cols-2 gap-x-6 gap-y-5",
                       children: [
                         {
                           containerClass: "mb-0 ",
                           label: {
-                            text: "Old Password",
+                            text: `${translate(
+                              "admin.settings.account_setting.old_password"
+                            )}`,
                             htmlFor: "oldPassword",
                           },
                           field: {
@@ -146,7 +152,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                         {
                           containerClass: "mb-0 ",
                           label: {
-                            text: "New Password",
+                            text: `${translate(
+                              "admin.settings.account_setting.new_password"
+                            )}`,
                             htmlFor: "newPassword",
                           },
                           field: {
@@ -167,9 +175,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                           },
                         },
                         {
-                          containerClass: "mb-0 mt-6",
+                          containerClass: "mb-0",
                           label: {
-                            text: "Confirm New Password",
+                            text: `${translate(
+                              "admin.settings.account_setting.confirm_password"
+                            )}`,
                             htmlFor: "confirmNewPassword",
                           },
                           field: {
@@ -196,12 +206,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     containerClass: "mb-0",
                     field: {
                       type: Field.button,
-                      text: "Save Changes",
+                      id: "button",
+                      text: `${translate(
+                        "admin.settings.account_setting.save_changes_button"
+                      )}`,
                       inputType: "submit",
                       className:
                         "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
-                      id: "paymentdiv",
 
                     },
                   },
