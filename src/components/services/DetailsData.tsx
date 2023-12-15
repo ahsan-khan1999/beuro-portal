@@ -11,11 +11,12 @@ import { useTranslation } from "next-i18next";
 const DetailsData = ({
   serviceDetail,
   isUpdate,
-}: // deleteHandler,
+  deleteHandler
+}: 
 {
   serviceDetail: Service;
   isUpdate: boolean;
-  // deleteHandler: () => void;
+  deleteHandler: () => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -42,7 +43,8 @@ const DetailsData = ({
           <Image
             src={deleteIcon}
             alt="deleteIcon"
-            // onClick={deleteHandler}
+            onClick={deleteHandler}
+            className="cursor-pointer"
           />
         </div>
       </div>

@@ -41,8 +41,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
       reset({
         receiptContent: {
           ...contentDetails?.receiptContent,
-          title: contentDetails?.receiptContent?.title,
-          attachments: contentDetails?.receiptContent?.attachments?.length > 0 && contentDetails?.receiptContent?.attachments[0] || null
         }
       })
     }

@@ -39,7 +39,7 @@ const ContentAddDetailsData = () => {
   };
   const onCloseRoute = () => {
     router.push("/content");
-    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType({type:ModalType.NONE}));
   };
 
   // Function for handling the modal for exiting notes
@@ -50,6 +50,8 @@ const ContentAddDetailsData = () => {
   const router = useRouter();
 
   const route = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+
     router.push("/content");
   };
 

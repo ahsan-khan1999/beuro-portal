@@ -40,8 +40,6 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       reset({
         invoiceContent: {
           ...contentDetails?.invoiceContent,
-          title: contentDetails?.invoiceContent?.title,
-          attachments: contentDetails?.invoiceContent?.attachments?.length > 0 && contentDetails?.invoiceContent?.attachments[0] || null
         }
       })
     }

@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
 import { generateOfferAdditionalDetailsValidation } from "@/validation/offersSchema";
-import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from 'react';
 import { readContent, setContentDetails } from "@/api/slices/content/contentSlice";
 import { DEFAULT_CONTENT } from "@/utils/static";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 
-export const useOfferAditionalDetails = (onHandleNext: Function) => {
+export const useOfferAditionalDetails = (onHandleNext: (currentComponent: ComponentsType) => void,onHandleBack: (currentComponent: ComponentsType) => void) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ export const useOfferAditionalDetails = (onHandleNext: Function) => {
   });
   const selectedContent = watch("content")
   const handleBack = () => {
-    onHandleNext(ComponentsType.serviceAdded)
+    onHandleBack(ComponentsType.serviceAdded)
   }
 
   useMemo(() => {

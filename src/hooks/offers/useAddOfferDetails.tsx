@@ -21,6 +21,8 @@ import { updateQuery } from "@/utils/update-query";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from '../../utils/static';
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -78,18 +80,20 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails?.id) {
+      console.log(offerDetails,"ofer");
+      
       reset({
         type: offerDetails?.type,
-        customerID: offerDetails?.customerID?.id,
+        customerID: offerDetails?.customerID,
         leadID: offerDetails?.leadID?.id,
-        customerType: offerDetails?.customerID?.customerType,
-        fullName: offerDetails?.customerID?.fullName,
-        email: offerDetails?.customerID?.email,
-        phoneNumber: offerDetails?.customerID?.phoneNumber,
-        mobileNumber: offerDetails?.customerID?.mobileNumber,
+        customerType: getKeyByValue(staticEnums["CustomerType"],offerDetails?.leadID?.customerDetail?.customerType),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
         title: offerDetails?.title,
-        address: offerDetails?.customerID?.address,
+        address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date
       })
     }
@@ -99,7 +103,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     name: "date",
 
   });
-  
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id);
@@ -114,13 +118,16 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     });
   };
   const handleContentSelect = () => {
+
+  };
+  useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
-  };
 
+  }, [selectedContent])
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,

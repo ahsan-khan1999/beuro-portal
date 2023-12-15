@@ -169,8 +169,10 @@ export const generateAddfferServiceDetailsValidation = (
   return yup.object().shape({
     "serviceDetail": serviceValidationSchema,
     [AddServiceOfferDetails.discountDiscription]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+      .string().when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount,
+        then: () => yup.string().required(translate("validationMessages.required")),
+      }),
     [AddServiceOfferDetails.isDiscount]: yup
       .boolean()
       .required(translate("validationMessages.required")),

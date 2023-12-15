@@ -238,7 +238,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company.taxNumber?.toString()
+              value: user && user?.company?.taxNumber?.toString()
             },
           },
           {
@@ -253,7 +253,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "logo",
               type: Field.dragAndDropFileField,
               control,
-              value: user && user?.company.logo
+              value: user && user?.company?.logo
 
             },
           },
@@ -320,7 +320,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address.streetNumber
+              value: user && user?.company?.address?.streetNumber
             },
           },
           {
@@ -351,7 +351,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address.houseNumber
+              value: user && user?.company?.address?.houseNumber
             },
           },
           {
@@ -382,7 +382,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address.postalCode
+              value: user && user?.company?.address?.postalCode
             },
           },
           {
@@ -414,7 +414,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address.city
+              value: user && user?.company?.address?.city
 
             },
           },

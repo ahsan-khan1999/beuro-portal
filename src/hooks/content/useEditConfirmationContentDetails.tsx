@@ -41,8 +41,7 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     if (contentDetails.id) {
       reset({
         confirmationContent: {
-          title: contentDetails?.confirmationContent?.title,
-          attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0]
+          ...contentDetails?.confirmationContent
         }
       })
     }

@@ -65,7 +65,7 @@ export const resetPassword: AsyncThunk<boolean, object, object> | any =
         data,
       });
 
-      router.pathname = "/passwordChangedSuccess";
+      router.pathname = "/login";
       updateQuery(router, "en");
 
       return true;
@@ -118,8 +118,8 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
 
       const response = await apiServices.profileStep1(data);
       thunkApi.dispatch(setErrorMessage(null))
-      thunkApi.dispatch(setUser({ ...user, ...response?.data?.Company }));
-      saveUser({ ...user, ...response?.data?.data?.Company });
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
 
       nextFormHandler();
 
@@ -142,9 +142,9 @@ export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
       );
 
       thunkApi.dispatch(setErrorMessage(null));
-        
-      thunkApi.dispatch(setUser({ ...user, ...response?.data?.Company }));
-      saveUser({ ...user, ...response?.data?.Company });
+
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
       nextFormHandler();
 
       return true;
@@ -159,12 +159,14 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
-      
-      const response: ApiResponseTypePut = await apiServices.profileStep3({ bankDetails: { ...apiData } });
+      const user = isJSON(getUser())
 
-      thunkApi.dispatch(setUser(response.data.User));
-      saveUser(response.data.User);
+      let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
+
+      const response = await apiServices.profileStep3({ bankDetails: { ...apiData } });
+
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
 
       thunkApi.dispatch(setErrorMessage(null));
 
@@ -247,7 +249,7 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
 
       saveUser(response.data.data.User);
       thunkApi.dispatch(setUser(response.data.data.User));
-      conditionHandlerLogin(router, response);
+      // conditionHandlerLogin(router, response);
 
       // if (response.data.data.User?.isProfileComplete) {
       //   router.pathname = "/dashboard";
@@ -256,7 +258,7 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
       //   router.pathname = "/profile";
       //   updateQuery(router, "en");
       // }
-      return true;
+      return response.data.data.User;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;

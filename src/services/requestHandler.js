@@ -74,7 +74,10 @@ const SERVICE_URLS = {
   tax: "/setting/tax",
   followUp: "/setting/follow-up-setting",
   mail: "/mailtracker",
-  offerSendEmail: "/offer/send-email/"
+  offerSendEmail: "/offer/send-email/",
+  emailSettings: "/setting/mail-setting/mail-setting",
+  createEmailSettings:"/setting/mail-setting/email-configration"
+
 };
 
 const login = (data) =>
@@ -345,13 +348,13 @@ const updateSystemSettings = (params) =>
 const getSystemSettings = (params) =>
   get(SERVICE_URLS.systemSetting, params, { feature: featureConstants.login }, { detail: false });
 const getTemplateSettings = (params) =>
-  get(SERVICE_URLS.templates , params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.templates, params, { feature: featureConstants.login }, { detail: false });
 const updateTemplateSettings = (params) =>
   put(SERVICE_URLS.templates, params, { feature: featureConstants.login });
 const getFollowUpSettings = (params) =>
-  get(SERVICE_URLS.followUp , params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.followUp, params, { feature: featureConstants.login }, { detail: false });
 const updateFollowUpSettings = (params) =>
-  put(SERVICE_URLS.followUp , params, { feature: featureConstants.login });
+  post(SERVICE_URLS.followUp, params, { feature: featureConstants.login });
 const getEmails = (params) =>
   get(SERVICE_URLS.mail, params, { feature: featureConstants.login }, { detail: false });
 const getEmailDetails = (params) =>
@@ -362,6 +365,10 @@ const readTaxSettings = (params) =>
   get(SERVICE_URLS.tax, params, { feature: featureConstants.login }, { detail: false });
 const createTaxSettings = (params) =>
   post(SERVICE_URLS.tax, params, { feature: featureConstants.login });
+const readMailSettings = (params) =>
+  get(SERVICE_URLS.emailSettings, params, { feature: featureConstants.login }, { detail: false });
+const createMailSettings = (params) =>
+  post(SERVICE_URLS.createEmailSettings, params, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -480,6 +487,8 @@ const apiServices = {
   getEmailDetails,
   deleteEmail,
   readTaxSettings,
-  createTaxSettings
+  createTaxSettings,
+  readMailSettings,
+  createMailSettings
 };
 export default apiServices;

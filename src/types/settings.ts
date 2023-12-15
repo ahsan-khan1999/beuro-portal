@@ -74,6 +74,32 @@ export interface FollowUp {
   id: string;
   createdBy: string;
   company: string;
-  reason: string;
-  createdAt: string
+  reason: string[];
+  createdAt: string;
+  isCreateFollowUpOnOfferExpire:boolean;
+  isCreateFollowUpOnLeadCreation:false
+}
+
+export interface FollowUpProp {
+  isCreateFollowUpOnLeadCreation: FolowUpTypeProps,
+  isCreateFollowUpOnOfferExpire: FolowUpTypeProps,
+}
+export interface FolowUpTypeProps {
+  label: string;
+  value: boolean
+}
+
+
+export interface EmailSetting {
+  isOwnMailConfigration: boolean;
+  mailDriver: string;
+  mailHost: string;
+  mailPort: string;
+  mailEncryption: string;
+  mailUserName: string;
+  mailPassword: string;
+  mailFromAddress: string;
+  mailFromName: string;
+  testingMail: string;
+
 }

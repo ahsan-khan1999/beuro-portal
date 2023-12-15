@@ -7,6 +7,7 @@ export const ProfileControllerField = ({
   control,
   id,
   name,
+  
 }: ProfileUploadFieldProps) => {
 
   return (

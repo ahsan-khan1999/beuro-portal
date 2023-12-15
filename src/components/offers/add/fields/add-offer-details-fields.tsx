@@ -117,7 +117,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           },
           {
             label: {
-              text: translate("offers.offer_details.offer_number"),
+              text: translate("offers.offer_details.full_name"),
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -165,7 +165,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               country: "ch",
               control,
               value: offerDetails?.id
-                ? offerDetails?.customerID?.phoneNumber
+                ? offerDetails?.leadID?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.phoneNumber,
             },
           },
@@ -184,7 +184,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               country: "ch",
               control,
               value: offerDetails?.id
-                ? offerDetails?.customerID?.phoneNumber
+                ? offerDetails?.leadID?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.mobileNumber,
             },
           },
@@ -219,7 +219,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 [],
               control,
               value: offerDetails?.id && offerDetails?.content?.id || "",
-              onItemChange: handleContentSelect && handleContentSelect,
+              // onItemChange: handleContentSelect && handleContentSelect,
             },
           },
           {
@@ -423,7 +423,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
 
         control,
-        value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id,
+        value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id || offerDetails?.leadID?.id,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps; // Assert type

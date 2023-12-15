@@ -16,7 +16,8 @@ export const PdfFileUpload = ({
   fileSupported,
   isOpenedFile,
   attachements,
-  setAttachements
+  setAttachements,
+  isAttachement
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
@@ -24,7 +25,8 @@ export const PdfFileUpload = ({
   fileSupported?: string;
   isOpenedFile?: boolean;
   attachements?: Attachement[];
-  setAttachements?: React.Dispatch<SetStateAction<any>>
+  setAttachements?: React.Dispatch<SetStateAction<any>>;
+  isAttachement?:boolean
 
 }) => {
   const router = useRouter();
@@ -50,7 +52,7 @@ export const PdfFileUpload = ({
       const response = await dispatch(uploadFileToFirebase(formdata))
       if (response?.payload) {
         setAttachements && setAttachements(attachements && [...attachements, { name: file?.name, value: response?.payload }])
-        field.onChange(response?.payload);
+        field.onChange([response?.payload]);
 
       }
 

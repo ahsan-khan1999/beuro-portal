@@ -19,7 +19,8 @@ const Company = ({
   const { loading} = useAppSelector((state) => state.auth);
   
   const fields = detailScreensFormField(register, loading, control,user);
-
+  console.log(user);
+  
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">

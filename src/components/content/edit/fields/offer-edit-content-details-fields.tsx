@@ -8,8 +8,14 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   register,
   loading,
   control,
-  onClick,
-  trigger, addressCount, attachements, setAttachements, contentDetails, append, onRemove
+  OnClick,
+  trigger,
+  count,
+  attachements,
+  setAttachements,
+  contentDetails,
+  append,
+  remove
 ) => {
   const { t: translate } = useTranslation();
 
@@ -39,7 +45,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         type: Field.div,
         id: "div-field",
         className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children: (addressCount) && generateAddressChildren(register, addressCount, translate, append, onRemove),
+        children: (count) && generateAddressChildren(register, count, translate, append, remove),
+
       },
     },
 
@@ -120,7 +127,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements: attachements,
-              setAttachements: setAttachements
+              setAttachements: setAttachements,
+              isAttachement: true
             },
           },
         ]
@@ -145,51 +153,42 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 };
 
 const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, translate: Function, append?: UseFieldArrayAppend<FieldValues, "offerContent.address">, remove?: UseFieldArrayRemove) => {
-  return Array.from({ length: count }, (_, key) => {
-    const isLastIndex = key === count - 1;
-
-    const dateField = {
+  console.log(count, "count");
+  const addressformFields = [];
+  for (let i = 0; i < count; i++) {
+    addressformFields.push({
       containerClass: "mb-0 ",
       label: {
-        text: "Address Label",
-        htmlFor: `offerContent.address_${key + 1}`,
+        text: translate("content.details.address_labels"),
+        htmlFor: `offerContent.address.${i}.value`,
         className: "mb-[10px]",
       },
       field: {
         register,
         type: Field.input,
         className: "!p-4 !border-dark focus:!border-primary w-full",
-        id: `offerContent.address_${key}`,
-        name: `offerContent.address_${key}`,
-        remove: key > 0 && "Remove",
-        onRemove: () => (key > 0 && remove) && remove(key),
-
+        id: `offerContent.address.${i}.value`,
+        name: `offerContent.address.${i}.value`,
+        remove: i > 0 && "Remove",
+        onRemove: () => (i > 0 && remove) && remove(i),
 
 
       },
-    };
+    })
 
-    if (isLastIndex) {
-      return [
-        dateField,
-        {
-          containerClass: "mb-0 mt-[30px]",
-          field: {
-            type: Field.button,
-            id: "button",
-            text: "",
-            inputType: "button",
-            className:
-              "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4  w-[40px] h-[40px] text-white hover-bg-none",
-            onClick: () => append && append({ "address": "" }),
-            icon: icon,
-          },
-
-        },
-      ];
-    }
-
-    return dateField;
-  }).flat();
-
+  }
+  addressformFields.push({
+    containerClass: "mb-0 mt-3 maxSize:mt-[33px]",
+    field: {
+      type: Field.button,
+      id: "button",
+      text: "",
+      inputType: "button",
+      className:
+        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px] text-white",
+      onClick: () => append && append({ address: "" }),
+      icon: icon,
+    },
+  });
+  return addressformFields
 };

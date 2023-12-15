@@ -43,9 +43,10 @@ export default function useSettingProfile(handleChangePassword: Function) {
       taxNumber: user.company?.taxNumber,
       address: user.company?.address,
       bankDetails: user.company?.bankDetails,
+      logo: user.company?.logo
     })
   }, [])
-  
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }))
   }
@@ -72,8 +73,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword, user);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data }
-    delete apiData["id"]
+    const apiData = { ...data, logo: data?.company?.logo }
     const res = await dispatch(updateAccountSettings({ data: apiData, router, setError, translate }))
     if (res?.payload) handleSuccess()
   };

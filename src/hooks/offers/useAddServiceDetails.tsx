@@ -17,7 +17,7 @@ import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 
-export const useAddServiceDetails = (onHandleNext: Function) => {
+export const useAddServiceDetails = (onHandleNext: (currentComponent: ComponentsType) => void) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
@@ -113,7 +113,7 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
         console.warn("Amount should not be greater than total price");
       }
     } else {
-      setValue("discountAmount", "");
+      setValue("discountAmount", 0);
     }
 
     const grandTotal = totalPrices + taxAmount - discount;
@@ -141,7 +141,7 @@ export const useAddServiceDetails = (onHandleNext: Function) => {
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
-        discountType: offerDetails?.discountType,
+        discountType: staticEnums["DiscountType"][offerDetails?.discountType],
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription

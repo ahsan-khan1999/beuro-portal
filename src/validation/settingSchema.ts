@@ -8,31 +8,34 @@ export const generateChangeMailSettingValidationSchema = (
   return yup.object().shape({
     [ChangeMailSetting.mailDriver]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailHost]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailPort]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailEncryption]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailUsername]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailPassword]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailFormAddress]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailFormName]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [ChangeMailSetting.mail]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
+    [ChangeMailSetting.isOwnMailConfigration]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };
 

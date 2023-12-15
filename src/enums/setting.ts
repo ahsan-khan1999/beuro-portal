@@ -4,11 +4,12 @@ export enum ChangeMailSetting {
   mailHost = "mailHost",
   mailPort = "mailPort",
   mailEncryption = "mailEncryption",
-  mailUsername = "mailUsername",
+  mailUsername = "mailUserName",
   mailPassword = "mailPassword",
-  mailFormAddress = "mailFormAddress",
-  mailFormName = "mailFormName",
-  mail = "mail",
+  mailFormAddress = "mailFromAddress",
+  mailFormName = "mailFromName",
+  mail = "testingMail",
+  isOwnMailConfigration="isOwnMailConfigration"
 }
 
 // enum for add reason

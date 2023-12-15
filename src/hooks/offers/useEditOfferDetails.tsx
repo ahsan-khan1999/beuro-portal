@@ -32,6 +32,8 @@ import {
   OfferPromiseActionType,
 } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 
 export const useEditOfferDetails = ({
   handleNext,
@@ -79,16 +81,16 @@ export const useEditOfferDetails = ({
           );
           reset({
             type: "Existing Customer",
-            customerID: res?.payload?.customerID?.id,
+            customerID: res?.payload?.leadID?.customerID,
             leadID: res?.payload?.leadID?.id,
-            customerType: res?.payload?.customerID?.customerType,
-            fullName: res?.payload?.customerID?.fullName,
-            email: res?.payload?.customerID?.email,
-            phoneNumber: res?.payload?.customerID?.phoneNumber,
-            mobileNumber: res?.payload?.customerID?.mobileNumber,
+            customerType: getKeyByValue(staticEnums["CustomerType"], res?.payload?.leadID?.customerDetail?.customerType),
+            fullName: res?.payload?.leadID?.customerDetail?.fullName,
+            email: res?.payload?.leadID?.customerDetail?.email,
+            phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
+            mobileNumber: res?.payload?.leadID?.customerDetail?.mobileNumber,
             content: res?.payload?.content?.id,
             title: res?.payload?.title,
-            address: res?.payload?.customerID?.address,
+            address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
           });
         }
@@ -142,7 +144,7 @@ export const useEditOfferDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   };
-
+  
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -180,7 +182,7 @@ export const useEditOfferDetails = ({
     0,
     {}
   );
-  
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,

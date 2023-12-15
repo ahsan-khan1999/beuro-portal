@@ -126,7 +126,8 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements: attachements,
-              setAttachements: setAttachements
+              setAttachements: setAttachements,
+              isAttachement:true
             },
           },
         ]

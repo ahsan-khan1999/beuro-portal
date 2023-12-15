@@ -40,7 +40,6 @@ export const addReasonFormField: GenerateAddReasonFormField = (
         inputType: "submit",
         className:
           "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
       },
     },
   ];

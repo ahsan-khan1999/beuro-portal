@@ -134,12 +134,12 @@ const useServiceDetail = (stage: boolean) => {
     if (id) {
       dispatch(readServiceDetail({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
         dispatch(setServiceDetails(res.payload))
+        if (serviceDetails && stage) reset({ ...res.payload })
+
       })
     }
   }, [id]);
-  useMemo(() => {
-    if (serviceDetails && stage) reset({ ...serviceDetails })
-  }, [serviceDetails.id]);
+
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);
@@ -169,7 +169,7 @@ const useServiceDetail = (stage: boolean) => {
     if (!stage) {
       res = await dispatch(createService({ data, router, setError, translate }))
       console.log(res);
-      
+
       if (res?.payload) handleCreateSuccess()
     } else if (stage) {
       handleUpdate(data)
