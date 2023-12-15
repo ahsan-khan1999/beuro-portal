@@ -88,7 +88,9 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements,
-              setAttachements
+              setAttachements,
+              isAttachement: true
+
             },
           },
 

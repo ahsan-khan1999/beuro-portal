@@ -11,7 +11,8 @@ export const DragAndDropPdfField = ({
   fileSupported,
   isOpenedFile,
   attachements,
-  setAttachements
+  setAttachements,
+  isAttachement
 }: DragAndDropPdfFieldProps) => {
   return (
     <Controller
@@ -26,6 +27,7 @@ export const DragAndDropPdfField = ({
           isOpenedFile={false}
           attachements={attachements}
           setAttachements={setAttachements}
+          isAttachement={isAttachement}
         />
       )}
     />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from "next/image";
 import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
 import { Button } from "@/base-components/ui/button/button";
@@ -6,6 +6,9 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { useRouter } from 'next/router';
 import { sendOtpViaEmail, verifyOtp } from '@/api/slices/authSlice/auth';
 import { BaseButton } from '@/base-components/ui/button/base-button';
+import {  conditionHandlerProfile } from '@/utils/utility';
+import { isJSON } from '@/utils/functions';
+import { getUser } from '@/utils/auth.util';
 const data = {
     heading: " We are verifying your email ",
     description: "We have sent you the link to reset the password by e-mail! Please take a second to make sure we have your correct email address"
@@ -14,14 +17,24 @@ const VerifyEmail = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const { loading, error } = useAppSelector(state => state.auth)
+    const user = isJSON(getUser())
+    const [isContinue, setIsContinue] = useState(false)
     const { otp } = router.query
     useEffect(() => {
         if (otp) {
-            dispatch(verifyOtp(router))
+        dispatch(verifyOtp(router)).then((response: any) => {
+            if (response?.payload) {
+                setIsContinue(true)
+            }
+        })
         }
     }, [dispatch, otp])
     const handleSendOtp = () => {
         dispatch(sendOtpViaEmail({}))
+    }
+    const handleRouteChange = () => {
+        conditionHandlerProfile(router, user)
+
     }
     return (
         <div className="min-h-screen flex justify-center items-center">
@@ -37,13 +50,22 @@ const VerifyEmail = () => {
                 <p className="text-sm text-dark mb-8 text-center">
                     {data.description}
                 </p>
-                <BaseButton
-                    buttonText='Resend?'
-                    onClick={handleSendOtp}
-                    disabled={loading}
-                    containerClassName='flex justify-center mx-auto bg-primary px-5'
-                    textClassName='text-white'
-                />
+                <div className='flex justify-center space-x-3'>
+                    <BaseButton
+                        buttonText='Resend?'
+                        onClick={handleSendOtp}
+                        disabled={loading || isContinue}
+                        containerClassName=' bg-secondary px-5'
+                        textClassName='text-white'
+                    />
+                    <BaseButton
+                        buttonText='Continue'
+                        onClick={handleRouteChange}
+                        disabled={!isContinue}
+                        containerClassName=' bg-primary px-5'
+                        textClassName='text-white'
+                    />
+                </div>
             </div>
         </div>
     );

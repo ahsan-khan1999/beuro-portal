@@ -6,6 +6,7 @@ import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { getKeyByValue } from "@/utils/auth.util";
 
 const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes }) => {
   const router = useRouter();
@@ -44,13 +45,13 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
 
             </div>
           </div>
-          
+
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {offerDetails?.customerID?.customerType}
+              {getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType)}
             </div>
           </div>
           <div>
@@ -58,18 +59,18 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
               {translate("offers.offer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {offerDetails?.customerID?.fullName}
+              {offerDetails?.leadID?.customerDetail?.fullName}
 
             </div>
           </div>
           {
-            staticEnums["CustomerType"][offerDetails?.customerID?.customerType] === 1 &&
+            staticEnums["CustomerType"][offerDetails?.leadID?.customerDetail?.customerType] === 1 &&
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {offerDetails?.customerID?.companyName}
+                {offerDetails?.leadID?.customerDetail?.companyName}
 
               </div>
             </div>
@@ -79,7 +80,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
               {translate("offers.offer_details.email_address")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {offerDetails?.customerID?.email}
+              {offerDetails?.leadID?.customerDetail?.email}
 
             </div>
           </div>
@@ -88,7 +89,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
               {translate("offers.offer_details.phone_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {offerDetails?.customerID?.phoneNumber}
+              {offerDetails?.leadID?.customerDetail?.phoneNumber}
 
             </div>
           </div>
@@ -97,7 +98,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
               {translate("offers.offer_details.mobile_number")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {offerDetails?.customerID?.mobileNumber}
+              {offerDetails?.leadID?.customerDetail?.mobileNumber}
 
             </div>
           </div>
@@ -113,7 +114,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
                 {translate("offers.offer_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {offerDetails?.customerID?.address?.streetNumber}
+                {offerDetails?.leadID?.customerDetail?.address?.streetNumber}
 
               </div>
             </div>
@@ -122,7 +123,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
                 {translate("offers.offer_details.post_code")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {offerDetails?.customerID?.address?.postalCode}
+                {offerDetails?.leadID?.customerDetail?.address?.postalCode}
 
               </div>
             </div>
@@ -131,7 +132,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
                 {translate("offers.offer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {offerDetails?.customerID?.address?.country}
+                {offerDetails?.leadID?.customerDetail?.address?.country}
 
               </div>
             </div>

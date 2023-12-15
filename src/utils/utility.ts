@@ -13,6 +13,7 @@ import {
   FieldProps,
   FieldType,
   FormField,
+  User,
 } from "@/types";
 import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
@@ -222,6 +223,28 @@ export const conditionHandlerLogin = (
   }
 };
 
+
+export const conditionHandlerProfile = (
+  router: NextRouter,
+  response: User,
+  connect?: boolean
+) => {
+  if (!connect) {
+    if (!response?.isEmailVerified) {
+      router.pathname = "/login-success";
+      updateQuery(router, "en");
+    } else if (!response?.isProfileComplete) {
+      router.pathname = "/profile";
+      updateQuery(router, "en");
+    } else {
+      router.pathname = "/dashboard";
+      updateQuery(router, "en");
+    }
+  } else {
+    router.query = {};
+    updateQuery(router, "en");
+  }
+};
 export const formatAddress = (address: CustomerAddress | undefined) => {
   if (!address) return "";
   return `${address?.streetNumber},  ${address?.country},  ${address?.postalCode}`;

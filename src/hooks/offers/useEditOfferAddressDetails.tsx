@@ -19,10 +19,9 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   const handleBack = () => {
     handleNext(EditComponentsType.offerEdit)
   }
-  const [addressCount, setAddressCount] = useState(offerDetails?.id && offerDetails?.addressID?.address?.length || 1)
 
   const schema = generateOfferAddressEditDetailsValidation(translate);
-  
+
   const {
     register,
     handleSubmit,
@@ -48,7 +47,8 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
 
   });
 
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length, append, remove, addressFields);
+
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? 1 : addressFields?.length, append, remove, addressFields);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 2, id: offerDetails?.id, stage: EditComponentsType.serviceEdit }

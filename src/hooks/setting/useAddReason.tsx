@@ -3,26 +3,32 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateAddReasonValidation } from "@/validation/settingSchema";
 import { addReasonFormField } from "@/components/setting/fields/add-reason-fields";
-import { readFollowUpSettings, setFollowUpSettings } from "@/api/slices/settingSlice/settings";
+import { readFollowUpSettings, setFollowUpSettings, updateFollowUpSetting } from "@/api/slices/settingSlice/settings";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useEffect, useState } from "react";
+import { FollowUpProp } from "@/types/settings";
 
 export default function useAddReason() {
   const router = useRouter();
   const { loading, error, followUps } = useAppSelector((state) => state.settings);
   const { t: translate } = useTranslation();
 
-  const data: string[] = [
-    `${translate("setting.follow_up_setting.on_offer_expire")}`,
-    `${translate("setting.follow_up_setting.on_lead_create")}`,
-  ];
-  const [isActive, setIsActive] = useState(new Array(data.length).fill(false));
 
+  const [toggleObj, setToggleObj] = useState({
+    isCreateFollowUpOnLeadCreation: {
+      label: translate("setting.follow_up_setting.on_lead_create"),
+      value: followUps?.isCreateFollowUpOnLeadCreation || false
+    },
+    isCreateFollowUpOnOfferExpire: {
+      label: translate("setting.follow_up_setting.on_offer_expire"),
+      value: followUps?.isCreateFollowUpOnOfferExpire || false
+    },
+    reason: followUps?.reason || []
+  })
   const dispatch = useAppDispatch();
   const schema = generateAddReasonValidation(translate);
   const { modal } = useAppSelector(state => state.global)
@@ -30,48 +36,53 @@ export default function useAddReason() {
 
 
   useEffect(() => {
-    dispatch(readFollowUpSettings({}))
+    dispatch(readFollowUpSettings({})).then((response: any) => {
+      if (response?.payload) {
+        console.log(response?.payload);
+
+        setToggleObj({
+          isCreateFollowUpOnLeadCreation: {
+            label: translate("setting.follow_up_setting.on_lead_create"),
+            value: response?.payload?.FollowUpSetting
+              ?.isCreateFollowUpOnLeadCreation || false,
+          },
+          isCreateFollowUpOnOfferExpire: {
+            label: translate("setting.follow_up_setting.on_offer_expire"),
+            value: response?.payload?.FollowUpSetting
+              ?.isCreateFollowUpOnOfferExpire || false
+          },
+          reason: response?.payload?.FollowUpSetting
+            ?.reason || []
+        }
+
+        )
+      }
+    })
   }, [])
-
-
-
-  const toggleItem = (index: number) => {
-    const updatedIsActive = [...isActive];
-    updatedIsActive[index] = !updatedIsActive[index];
-    console.log(updatedIsActive,"updatedIsActive");
-    
-    setIsActive(updatedIsActive);
-  };
-
-
-
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = addReasonFormField(register, loading);
   const handleAddReason = (data: string) => {
-    if (!followUps) return;
-    const followUp = [...followUps]
-    followUp.push({
-      id: "",
-      createdBy: "",
-      company: "",
-      reason: data,
-      createdAt: ""
-    })
-    dispatch(setFollowUpSettings(followUp))
+    if (!toggleObj?.reason) return;
+    let followUp = JSON.parse(JSON.stringify(toggleObj))
+    followUp = {
+      ...followUp, "reason": [...followUp?.reason, data]
+    }
+    setToggleObj({ ...followUp })
   }
   const handleRemoveReason = (index: number) => {
-    if (!followUps) return;
-    const followUp = [...followUps]
-    followUp.splice(index, 1)
-    dispatch(setFollowUpSettings(followUp))
+    if (!toggleObj?.reason) return;
+    let followUp = JSON.parse(JSON.stringify(toggleObj))
+    followUp?.reason?.splice(index, 1)
+    setToggleObj({ ...followUp })
+
   }
 
   const onClose = () => {
@@ -96,8 +107,15 @@ export default function useAddReason() {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  const handleSaveSetings = () => {
-    handleSuccess()
+  const handleSaveSetings = async () => {
+    const data = getValues()
+    let apiData = {
+      isCreateFollowUpOnLeadCreation: toggleObj.isCreateFollowUpOnLeadCreation.value,
+      isCreateFollowUpOnOfferExpire: toggleObj.isCreateFollowUpOnOfferExpire.value,
+      reason: data?.reason
+    }
+    const response = await dispatch(updateFollowUpSetting({ data: apiData, router, translate }))
+    if (response?.payload) handleSuccess()
   }
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleAddReason(data?.reason)
@@ -110,10 +128,9 @@ export default function useAddReason() {
     onSubmit,
     handleRemoveReason,
     handleSaveSetings,
-    toggleItem,
     renderModal,
     translate,
-    isActive,
-    data
+    toggleObj,
+    setToggleObj
   };
 }

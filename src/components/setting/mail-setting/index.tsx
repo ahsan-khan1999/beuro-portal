@@ -47,14 +47,14 @@ const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
         </div>
 
         {selectedTab === 1 && (
-          <MailSettingForm handleCreation={handleCreation} />
+          <MailSettingForm handleCreation={handleCreation} selectedTab={selectedTab}/>
         )}
 
-        {selectedTab === 0 && (
+        {/* {selectedTab === 0 && (
           <button className="text-xs lg:text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-fit  lg:w-[150px]">
             {translate("setting.save_setting")}
           </button>
-        )}
+        )} */}
       </div>
     </SettingLayout>
   );

@@ -2,7 +2,7 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "@/types";
-import { FollowUp, TemplateSettings } from "@/types/settings";
+import { EmailSetting, FollowUp, TemplateSettings } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
 import { saveUser } from "@/utils/auth.util";
 export interface TaxSetting {
@@ -18,7 +18,8 @@ interface SettingsState {
     templateSettings: TemplateSettings | null,
     systemSettings: SystemSetting | null,
     tax: TaxSetting[] | null,
-    followUps: FollowUp[] | null
+    followUps: FollowUp | null,
+    emailSettings: EmailSetting | null
 
 }
 
@@ -40,7 +41,8 @@ const initialState: SettingsState = {
     templateSettings: null,
     systemSettings: null,
     tax: null,
-    followUps: null
+    followUps: null,
+    emailSettings: null
 
 }
 
@@ -171,14 +173,42 @@ export const updateFollowUpSetting: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            await apiServices.updateFollowUpSettings(data);
-            return true;
+            const response = await apiServices.updateFollowUpSettings(data);
+            return response?.data?.data?.FollowUpSetting;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;
         }
     });
+
+
+
+export const readEmailSettings: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("user/email/setting/read", async (args, thunkApi) => {
+
+        try {
+            const response = await apiServices.readMailSettings({});
+            return response?.data?.data?.MailSetting;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const updateEmailSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("user/email/settings/update", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.createMailSettings(data);
+            return response?.data?.data?.MailSetting;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
 const SettingSlice = createSlice({
     name: "SettingSlice",
     initialState,
@@ -295,13 +325,35 @@ const SettingSlice = createSlice({
             state.loading = true
         });
         builder.addCase(updateFollowUpSetting.fulfilled, (state, action) => {
-            if (state.followUps && action.payload) {
-                state.followUps = [...state.followUps, action.payload]
-            }
+            state.followUps = action?.payload
             state.loading = false;
 
         });
         builder.addCase(updateFollowUpSetting.rejected, (state) => {
+            state.loading = false
+        });
+
+
+
+        builder.addCase(readEmailSettings.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readEmailSettings.fulfilled, (state, action) => {
+            state.emailSettings = action.payload
+            state.loading = false;
+        });
+        builder.addCase(readEmailSettings.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateEmailSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateEmailSetting.fulfilled, (state, action) => {
+            state.emailSettings = action.payload
+            state.loading = false;
+
+        });
+        builder.addCase(updateEmailSetting.rejected, (state) => {
             state.loading = false
         });
 

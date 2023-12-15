@@ -196,6 +196,7 @@ export interface DragAndDropPdfFieldProps
   isOpenedFile?: boolean;
   attachements?: Attachement[];
   setAttachements?: React.Dispatch<SetStateAction<any>>
+  isAttachement?:boolean
 
 
 }

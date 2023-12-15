@@ -1,6 +1,6 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -27,13 +27,9 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     setAddressCount(addressCount + 1)
   }
 
-  const handleRemoveAddressField = () => {
-    setAddressCount(addressCount - 1)
-  }
+
 
   const schema = generateOfferEditContentDetailsValidation(translate);
-  const schemaAddress = generateContentAddressValidationSchema(translate, addressCount);
-  const mergedSchema = mergeSchemas(schema, schemaAddress)
 
 
   const {
@@ -43,10 +39,9 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     setError,
     formState: { errors },
     reset,
-    setValue,
     trigger
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(mergedSchema),
+    resolver: yupResolver<FieldValues>(schema),
   });
 
   useMemo(() => {
@@ -55,24 +50,23 @@ export const useOfferContentEditDetails = (onClick: Function) => {
         contentName: contentDetails?.contentName,
         offerContent: {
           ...contentDetails?.offerContent,
-          title: contentDetails?.offerContent?.title,
-          attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0] || null
-
+          address: contentDetails?.offerContent?.address?.map((item) => ({ value: item }))
         }
-      })
-      setAddressFieldValues(setValue, contentDetails?.offerContent?.address)
-    }
-  }, [contentDetails.id]);
 
-  const fields = OfferEditContentDetailsFormField(
-    register,
-    loading,
+      })
+
+    }
+
+  }, [contentDetails.id]);
+  const { fields: addressFields, append, remove } = useFieldArray({
     control,
-    handleAddAddressField, trigger, addressCount, attachements, setAttachements, contentDetails, handleRemoveAddressField
-  );
+    name: "offerContent.address",
+
+  });
+ 
+  const fields = OfferEditContentDetailsFormField(register, loading, control, handleAddAddressField, trigger, addressFields?.length === 0 ? 1 : addressFields?.length, attachements, setAttachements, contentDetails, append, remove);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    let addressField = generateAddressFields(addressCount)
     let apiData = {
       contentName: data.contentName,
       offerContent: {
@@ -80,7 +74,8 @@ export const useOfferContentEditDetails = (onClick: Function) => {
         description: data.offerContent.description,
         title: data.offerContent.title,
         attachments: attachements?.map((item) => item.value),
-        address: transformFieldsToValues(data.offerContent, addressField),
+        address: data?.offerContent?.address?.map((item: any) => item.value)
+
       },
       step: 1,
       stage: ComponentsType.editConfirmationContent,

@@ -40,6 +40,7 @@ export const ImageFileUpload = ({
 
     field.onChange(res?.payload);
   };
+  console.log(field.value, "value");
 
   return (
     <label
@@ -55,6 +56,7 @@ export const ImageFileUpload = ({
         {field.value ? (
           <Image
             src={field.value}
+            key={Math.random()}
             width={300}
             height={148}
             alt="Uploaded Preview"

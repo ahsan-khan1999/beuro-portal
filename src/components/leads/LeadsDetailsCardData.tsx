@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
 import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { setOfferDetails } from "@/api/slices/offer/offerSlice";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -16,11 +20,13 @@ const LeadsDetailsCardData = ({
   leadDeleteHandler: Function;
   leadDetails: Lead
 }) => {
+  
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const dispatch = useAppDispatch()
   return (
     <div className="bg-white rounded-md pt-5 pb-10">
-      <div className="flex justify-between items-center  "> 
+      <div className="flex justify-between items-center  ">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -34,10 +40,24 @@ const LeadsDetailsCardData = ({
         </div>
 
         <div className="flex gap-[22px]">
-          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] ">
+          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer" onClick={() => {
+            dispatch(setOfferDetails({
+              id:leadDetails?.id,
+              type: "Existing Customer",
+              customerID: leadDetails?.customerID,
+              leadID: leadDetails?.id,
+              customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails?.customerDetail?.customerType),
+              fullName: leadDetails?.customerDetail?.fullName,
+              email: leadDetails?.customerDetail?.email,
+              phoneNumber: leadDetails?.customerDetail?.phoneNumber,
+              mobileNumber: leadDetails?.customerDetail?.mobileNumber,
+            }))
+
+            router.push("/offers/add")
+          }}>
             <Image src={createOfferIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
-             {translate("leads.card_content.create_button")}
+              {translate("leads.card_content.create_button")}
             </p>
           </div>
           <Image src={printerIcon} alt="printer_icon" />
@@ -55,30 +75,30 @@ const LeadsDetailsCardData = ({
         <div className="grid grid-cols-2 gap-4">
           <div>
             <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-            {translate("leads.card_content.lead_id")}:
+              {translate("leads.card_content.lead_id")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">{leadDetails.refID}</span>
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
-            {translate("leads.card_content.status")}:
+              {translate("leads.card_content.status")}:
             </span>
             <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
-            {leadDetails.leadStatus}
+              {leadDetails.leadStatus}
             </span>
           </div>
 
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
-            {translate("leads.card_content.created_date")}:
+              {translate("leads.card_content.created_date")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-            {formatDateTimeToDate(leadDetails.createdAt)}
+              {formatDateTimeToDate(leadDetails.createdAt)}
             </span>
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
-            {translate("leads.card_content.created_by")}:
+              {translate("leads.card_content.created_by")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
               {leadDetails.createdBy?.fullName}

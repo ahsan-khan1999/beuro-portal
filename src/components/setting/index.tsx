@@ -49,14 +49,12 @@ const Setting = () => {
   };
 
   const handleCreation = () => {
-    dispatch(updateModalType(ModalType.CREATION));
+    dispatch(updateModalType({type:ModalType.CREATION}));
   };
 
   const router = useRouter();
 
-  const route = () => {
-    router.push("/setting");
-  };
+  
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
@@ -70,7 +68,7 @@ const Setting = () => {
         onClose={onClose}
         heading="Email Configration Created Successfully"
         subHeading="Thanks for created email configration."
-        route={route}
+        route={onClose}
       />
     ),
   };

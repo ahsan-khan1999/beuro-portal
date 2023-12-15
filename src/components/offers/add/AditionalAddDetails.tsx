@@ -3,12 +3,13 @@ import { useOfferAditionalDetails } from "@/hooks/offers/useOfferAditionalDetail
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { ComponentsType } from "./AddOffersDetailsData";
 
-const AditionalAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
+const AditionalAddDetails = ({ onHandleNext, onHandleBack }: { onHandleNext: (currentComponent: ComponentsType) => void, onHandleBack: (currentComponent: ComponentsType) => void }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useOfferAditionalDetails(onHandleNext);
+    useOfferAditionalDetails(onHandleNext,onHandleBack);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">

@@ -15,6 +15,8 @@ const ServicesDetails = () => {
     handleSubmit,
     onSubmit,
     errors,
+    deleteHandler,
+    renderModal
   } = useServiceDetail(true);
   return (
     <Layout>
@@ -22,7 +24,7 @@ const ServicesDetails = () => {
         <DetailsData
           serviceDetail={serviceDetails}
           isUpdate={isUpdate}
-          // deleteHandler={deleteHandler}
+          deleteHandler={deleteHandler}
         />
       </DetailsCard>
       <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
@@ -42,7 +44,7 @@ const ServicesDetails = () => {
         </div>
       </div>
 
-      {/* {renderModal()} */}
+      {renderModal()}
     </Layout>
   );
 };

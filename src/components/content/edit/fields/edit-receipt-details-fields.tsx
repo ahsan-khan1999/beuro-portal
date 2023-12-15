@@ -90,7 +90,9 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements,
-              setAttachements
+              setAttachements,
+              isAttachement: true
+
             },
           },
         ],

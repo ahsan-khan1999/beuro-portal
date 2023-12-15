@@ -3,8 +3,9 @@ import { useAddServiceDetails } from "@/hooks/offers/useAddServiceDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { ComponentsType } from "./AddOffersDetailsData";
 
-const ServiceAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
+const ServiceAddDetails = ({ onHandleNext }: { onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const router = useRouter();
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
