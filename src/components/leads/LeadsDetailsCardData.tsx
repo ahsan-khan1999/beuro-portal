@@ -1,6 +1,6 @@
 import React from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
-import createOfferIcon from "@/assets/svgs/create_offer_icon.svg";
+import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";

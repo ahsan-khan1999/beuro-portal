@@ -19,6 +19,7 @@ export default function InvoiceDetailsTable({
     <>
       <TableLayout>
         <TableHeading />
+
         <TableRows
           dataToAdd={collectiveInvoice}
           handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}

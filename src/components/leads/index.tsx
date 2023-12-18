@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
 import TableHeadings from "./table/TableHeadings";
 import useLeads from "@/hooks/leads/useLeads";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Leads() {
   const {
@@ -21,6 +22,15 @@ export default function Leads() {
     handleFilterChange,
   } = useLeads();
 
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+    dataToAdd={currentPageRows}
+      openModal={handleNotes}
+      handleImageUpload={handleImageUpload}
+    />,
+    currentPageRows.length > 0
+  );
+
   return (
     <>
       <Layout>
@@ -31,11 +41,7 @@ export default function Leads() {
         />
         <TableLayout>
           <TableHeadings />
-          <TableRows
-            dataToAdd={currentPageRows}
-            openModal={handleNotes}
-            handleImageUpload={handleImageUpload}
-          />
+         {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

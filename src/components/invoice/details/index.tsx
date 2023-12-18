@@ -5,34 +5,23 @@ import InvoiceCardLayout from "@/layout/invoice";
 import DetailsSwitchBtn from "./DetailsSwitchBtn";
 import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "@/hooks/useRedux";
-import InvoiceCreated from "@/base-components/ui/modals1/InvoiceCreated";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
-import InvoiceEmptyState from "./invoice-empty-state";
-enum checkDATA {
+
+enum CheckData {
   data,
   nodata,
 }
 import emptyState from "@/assets/svgs/empty-state.svg";
+import NoDataEmptyState from "./invoice-empty-state";
 const InvoiceDetails = () => {
-  const check = (Currentcomponent: JSX.Element, val: checkDATA) => {
+  const check = (Currentcomponent: JSX.Element, val: CheckData) => {
     const isData = {
-      [checkDATA.data]: Currentcomponent,
-      [checkDATA.nodata]: (
-        <InvoiceEmptyState
-          imageUrl={emptyState}
-          imageAlt="No Data Found"
-          emptyName="No Data Found"
-          emptyDescription="Whoops ... this information is not avilable for a moment"
-        />
-      ),
+      [CheckData.data]: Currentcomponent,
+      [CheckData.nodata]: <NoDataEmptyState />,
     };
     return isData[val];
   };
+
   const {
     handleInvoiceCreation,
     handleNotes,
@@ -58,7 +47,7 @@ const InvoiceDetails = () => {
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
         handleInvoiceEdit={handleInvoiceEdit}
       />,
-      (collectiveInvoice?.length === 0 && checkDATA.nodata) || checkDATA.data
+      (collectiveInvoice?.length === 0 && CheckData.nodata) || CheckData.data
     ),
     Receipt: check(
       <ReceiptDetailsTable
@@ -66,7 +55,7 @@ const InvoiceDetails = () => {
         handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       />,
-      (collectiveReciept?.length === 0 && checkDATA.nodata) || checkDATA.data
+      (collectiveReciept?.length === 0 && CheckData.nodata) || CheckData.data
     ),
   };
   return (

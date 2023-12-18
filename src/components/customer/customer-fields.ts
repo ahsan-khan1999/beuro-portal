@@ -19,13 +19,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
-          {
+          { containerClass:"mb-0",
             label: {
               text: `${translate("customers.details.customer_type")}`,
               htmlFor: "select",
-              className: "mb-[10px]",
+              className: "mb-[10px] ",
             },
             field: {
               className: `!min-h-[54px] !px-4 !border-dark ${!isUpdate && "!border-light"
@@ -47,6 +47,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
           },
           {
+            containerClass:"mb-0 w-full xl:col-span-2",
             label: {
               text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
@@ -128,7 +129,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass: "mt-5",
+      containerClass:"my-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "name",
@@ -138,9 +139,10 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
               text: `${translate("customers.details.street_no")}`,
               htmlFor: "address.streetNumber",

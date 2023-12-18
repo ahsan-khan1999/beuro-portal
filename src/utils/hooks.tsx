@@ -8,8 +8,9 @@ import { useMemo } from "react";
 import { useTranslation } from "next-i18next";
 import { TranslatorFunction } from "@/types/global";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
+import { EmptyStateType, ModalConfigType, ModalType } from "@/enums/ui";
 import { getUser } from "./auth.util";
+import NoDataEmptyState from "@/components/invoice/details/invoice-empty-state";
 
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   callback: ButtonClickFunction
@@ -292,4 +293,17 @@ export const useClipboardCopy = <
   }, []);
 
   return { inputRef, handleCopy, isCopied };
+};
+
+export const useEmptyStates = (
+  Currentcomponent: JSX.Element,
+  condition: boolean
+) => {
+  const isEmpty: EmptyStateType = Number(condition);
+  const lookup = {
+    [EmptyStateType.hasData]: Currentcomponent,
+    [EmptyStateType.hasNoData]: <NoDataEmptyState />,
+  };
+  const data = useMemo(() => lookup[isEmpty], [isEmpty]);
+  return data;
 };

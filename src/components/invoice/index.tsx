@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 import useInvoice from "@/hooks/invoice/useInvoice";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Invoices() {
   const {
@@ -18,13 +19,23 @@ export default function Invoices() {
     filter,
     setFilter, handleFilterChange,
   } = useInvoice();
+
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+      dataToAdd={currentPageRows}
+      handleNotes={handleNotes}
+    />,
+    currentPageRows.length > 0
+  );
+
+
   return (
     <>
       <Layout>
         <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
         <TableLayout>
           <TableHeading />
-          <TableRows dataToAdd={currentPageRows} handleNotes={handleNotes} />
+         {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

@@ -6,6 +6,8 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/customer/useCustomer";
+import { useEmptyStates } from "@/utils/hooks";
+import { EmptyStateType } from "@/enums/ui";
 
 export default function Customers() {
   const {
@@ -18,6 +20,8 @@ export default function Customers() {
     handleFilterChange,
   } = useCustomer();
 
+  const CurrentComponent = useEmptyStates(<TableRow currentPageRows={currentPageRows} />, currentPageRows.length > 0);
+
   return (
     <Layout>
       <TableFunctions
@@ -27,7 +31,7 @@ export default function Customers() {
       />
       <TableLayout>
         <TableHeading />
-        <TableRow currentPageRows={currentPageRows} />
+        {CurrentComponent}
       </TableLayout>
       <Pagination
         totalItems={totalItems}

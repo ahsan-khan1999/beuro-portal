@@ -61,3 +61,10 @@ export enum ModalType {
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;
 };
+
+
+
+export enum EmptyStateType {
+  hasNoData,
+  hasData,
+}
