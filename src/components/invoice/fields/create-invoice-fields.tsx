@@ -211,7 +211,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: `${translate("invoice.create_invoice_modal.update_invoice")}`,
+        text: `${translate("invoice.create_invoice_modal.button")}`,
         inputType: "submit",
         className: "hover:bg-none",
         loading,

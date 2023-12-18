@@ -23,6 +23,7 @@ import InvoiceUpdate from '@/base-components/ui/modals1/InvoiceUpdate';
 export default function useInvoiceDetail() {
     const dispatch = useAppDispatch();
     const [switchDetails, setSwitchDetails] = useState("Invoice");
+    const [isSendEmail, setIsSendEmail] = useState(false)
 
     const { modal } = useAppSelector((state) => state.global);
     const { invoiceDetails, loading, invoice, collectiveInvoice, collectiveReciept } = useAppSelector((state) => state.invoice);
@@ -75,6 +76,13 @@ export default function useInvoiceDetail() {
         dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_FREQUENCY }));
     };
 
+    const handleSendEmail = async () => {
+        setIsSendEmail(!isSendEmail)
+    }
+    const onSuccess = () => {
+        router.push("/invoice")
+        dispatch(updateModalType({ type: ModalType.NONE }))
+    }
 
 
     const route = () => {
@@ -178,6 +186,14 @@ export default function useInvoiceDetail() {
                 invoiceCreated={invoiceCreated}
             />
         ),
+        [ModalType.EMAIL_CONFIRMATION]: (
+            <CreationCreated
+                onClose={onClose}
+                heading="Email Sent Successfully "
+                subHeading="Thanks for updating offer we are happy to have you. "
+                route={onSuccess}
+            />
+        ),
 
 
 
@@ -207,7 +223,9 @@ export default function useInvoiceDetail() {
             if (res?.payload) offerCreatedHandler()
         }
     }
-
+    const onNextHandle = () => {
+        router.pathname = "/offers/pdf-preview"
+    }
     return {
         invoiceDetails,
         renderModal,
@@ -223,6 +241,10 @@ export default function useInvoiceDetail() {
         handleRecurringInvoiceCreation,
         handleStopInvoiceCreation,
         handleEditInvoiceFrequencyCreation,
-        handleInvoiceEdit
+        handleInvoiceEdit,
+        handleSendEmail,
+        setIsSendEmail,
+        isSendEmail,
+        onNextHandle
     }
 }

@@ -2021,6 +2021,9 @@ export const DEFAULT_SERVICE = {
 
 
 export const DEFAULT_CONTENT = {
+
+  refID: "",
+  contentName: "",
   id: "",
   name: "",
   contentTitle: "",
@@ -2054,6 +2057,7 @@ export const DEFAULT_CONTENT = {
     attachments: [""],
   },
   stage: 0,
+  createdBy:""
 
 }
 

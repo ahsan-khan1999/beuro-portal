@@ -2,7 +2,7 @@ import { deleteOffer, readOfferDetails, sendOfferEmail, setOfferDetails, updateO
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
 import { ModalConfigType, ModalType } from '@/enums/ui';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../useRedux';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -17,13 +17,14 @@ import { staticEnums } from '@/utils/static';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
 import { readImage } from '@/api/slices/imageSlice/image';
 import ImagesUploadOffer from '@/base-components/ui/modals1/ImageUploadOffer';
+import { updateQuery } from '@/utils/update-query';
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails, loading, offer } = useAppSelector((state) => state.offer);
   const { images } = useAppSelector((state) => state.image);
-
+  const [isSendEmail, setIsSendEmail] = useState(false)
   const { t: translate } = useTranslation()
   const router = useRouter();
   const id = router.query.offer;
@@ -94,11 +95,15 @@ export default function useOfferDetails() {
     }
   };
 
-  const handleSendEmail =async () => {
-    const res = await dispatch(sendOfferEmail({ data: { "offerStatus": 1, id: offerDetails?.id }, router, translate }))
-    if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail)
+    // const res = await dispatch(sendOfferEmail({ data: { "offerStatus": 1, id: offerDetails?.id }, router, translate }))
+    // if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
   }
-
+  const onSuccess = () => {
+    router.push("/offers")
+    dispatch(updateModalType({ type: ModalType.NONE }))
+}
 
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -137,7 +142,17 @@ export default function useOfferDetails() {
         route={onClose}
       />
     ),
+    [ModalType.EMAIL_CONFIRMATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Email Sent Successfully "
+        subHeading="Thanks for updating offer we are happy to have you. "
+        route={onSuccess}
+      />
+    ),
   };
+
+  
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -154,6 +169,9 @@ export default function useOfferDetails() {
     if (res?.payload) offerCreatedHandler()
 
   }
+  const onNextHandle = () => { 
+    router.pathname = "/offers/pdf-preview"
+  }
   return {
     offerDetails,
     renderModal,
@@ -162,6 +180,9 @@ export default function useOfferDetails() {
     handleImageUpload,
     handlePaymentStatusUpdate,
     handleStatusUpdate,
-    handleSendEmail
+    handleSendEmail,
+    setIsSendEmail,
+    isSendEmail,
+    onNextHandle
   }
 }

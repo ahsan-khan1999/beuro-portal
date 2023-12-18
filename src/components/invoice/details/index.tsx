@@ -18,6 +18,7 @@ enum checkDATA {
   nodata,
 }
 import emptyState from "@/assets/svgs/empty-state.svg";
+import ComposeMail from "./compose-mail/ComposeMail";
 const InvoiceDetails = () => {
   const check = (Currentcomponent: JSX.Element, val: checkDATA) => {
     const isData = {
@@ -49,6 +50,9 @@ const InvoiceDetails = () => {
     handleRecurringInvoiceCreation,
     handleStopInvoiceCreation,
     handleInvoiceEdit,
+    handleSendEmail,
+    isSendEmail,
+    onNextHandle, setIsSendEmail
   } = useInvoiceDetail();
   const invoiceComponent = {
     Invoice: check(
@@ -82,16 +86,22 @@ const InvoiceDetails = () => {
             }
             handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
             handleStopInvoiceCreation={handleStopInvoiceCreation}
+            handleSendEmail={handleSendEmail}
           />
         </InvoiceCardLayout>
-        <div className="flex mt-[12px] mb-[18px]">
-          <DetailsSwitchBtn
-            switchDetails={switchDetails}
-            setSwitchDetails={setSwitchDetails}
-          />
-        </div>
+        {
+          isSendEmail ? <ComposeMail backRouteHandler={handleSendEmail} onNextHandle={onNextHandle} /> :
+            <>
+              <div className="flex mt-[12px] mb-[18px]">
+                <DetailsSwitchBtn
+                  switchDetails={switchDetails}
+                  setSwitchDetails={setSwitchDetails}
+                />
+              </div>
 
-        {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
+              {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
+            </>
+        }
       </Layout>
       {renderModal()}
     </>

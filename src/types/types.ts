@@ -31,6 +31,7 @@ import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
+import { contractTableTypes } from "./contract";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -314,6 +315,19 @@ export type GenerateInvoiceFormField = (
 ) => FormField[];
 
 // Contract formfield
+export type GenerateOfferFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  onBack?: Function,
+  content?: ContentTableRowTypes[],
+  contentDetails?: ContentTableRowTypes,
+  onContentSelect?: (id: string) => void,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  details?: OffersTableRowTypes
+) => FormField[];
 export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -322,9 +336,24 @@ export type GenerateContractFormField = (
   onBack?: Function,
   content?: ContentTableRowTypes[],
   contentDetails?: ContentTableRowTypes,
-  onContentSelect?: (id: string) => void
+  onContentSelect?: (id: string) => void,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  details?: contractTableTypes
 ) => FormField[];
-
+export type GenerateInvoiceEmailFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  onBack?: Function,
+  content?: ContentTableRowTypes[],
+  contentDetails?: ContentTableRowTypes,
+  onContentSelect?: (id: string) => void,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  details?: InvoiceTableRowTypes
+) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
   register: UseFormRegister<FieldValues>,

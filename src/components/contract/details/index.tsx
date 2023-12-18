@@ -4,6 +4,7 @@ import CardDetailsData from "./ContractDetailsCard";
 import DetailsData from "./DetailsData";
 import ContractDetailsData from "./ContractDetailsData";
 import useContractDetail from "@/hooks/contract/useContractDetail";
+import ComposeMail from "../compose-mail/ComposeMail";
 
 const ContractDetails = () => {
   const {
@@ -14,6 +15,7 @@ const ContractDetails = () => {
     handleNotes,
     handlePaymentStatusUpdate,
     handleStatusUpdate,
+    handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle
   } = useContractDetail();
 
   return (
@@ -25,11 +27,20 @@ const ContractDetails = () => {
         handleNotes={handleNotes}
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
         handleStatusUpdate={handleStatusUpdate}
+        handleSendEmail={handleSendEmail}
       />
       <div className="my-4">
         <DetailsData contractDetails={contractDetails} />
       </div>
-      <ContractDetailsData />
+      {
+        isSendEmail ?
+          <ComposeMail
+            backRouteHandler={handleSendEmail}
+            onNextHandle={onNextHandle}
+          />
+          :
+          <ContractDetailsData />}
+
       {renderModal()}
     </Layout>
   );

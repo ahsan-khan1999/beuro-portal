@@ -15,6 +15,7 @@ const ImageSlider = ({ onClose, details }: { onClose: () => void, details: strin
     noOfThumbNails: 8,
     images: details?.map((item) => ({ imageSrc: item }))
   };
+  console.log(details);
   
   const { t: translate } = useTranslation();
 

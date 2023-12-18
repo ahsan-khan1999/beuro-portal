@@ -4,7 +4,7 @@ import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
 
-const CreationCreated = ({ onClose, heading, subHeading, route }: { onClose: () => void; heading:string; subHeading:string; route:Function }) => {
+const CreationCreated = ({ onClose, heading, subHeading, route }: { onClose: () => void; heading:string; subHeading:string; route:() => void }) => {
   const { t: translate } = useTranslation();
   return (
     <>
@@ -23,7 +23,7 @@ const CreationCreated = ({ onClose, heading, subHeading, route }: { onClose: () 
           </span>
 
           <button
-            onClick={() => route()}
+            onClick={route}
             className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
             {translate("request_modal.button")}
