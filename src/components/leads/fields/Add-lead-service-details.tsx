@@ -1,6 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
-import { ComponentsType } from "../details/LeadsDetailsData";
+import { ComponentsType } from "../add/AddNewLeadsData";
 import { useTranslation } from "next-i18next";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
@@ -33,13 +33,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: leadDetails?.id && leadDetails?.requiredService || "",
-              options: service && service?.map((item) => (
-                {
-                  label: item.serviceName,
-                  value: item.id
-                }
-              )) || [],
+              value: (leadDetails?.id && leadDetails?.requiredService) || "",
+              options:
+                (service &&
+                  service?.map((item) => ({
+                    label: item.serviceName,
+                    value: item.id,
+                  }))) ||
+                [],
               control,
             },
           },
@@ -71,7 +72,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailability",
-              value: leadDetails?.id && leadDetails?.contactAvailability || "",
+              value:
+                (leadDetails?.id && leadDetails?.contactAvailability) || "",
               name: "contactAvailability",
               options: [
                 {
@@ -86,16 +88,6 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               control,
             },
           },
-        ]
-      }
-    },
-    //   second start from here
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 mt-5",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -107,7 +99,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "flexibility",
-              value: leadDetails?.id && leadDetails?.flexibility || "",
+              value: (leadDetails?.id && leadDetails?.flexibility) || "",
               name: "flexibility",
               options: [
                 {
@@ -138,10 +130,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "7",
                   label: "7 days",
                 },
-
               ],
               control,
-
             },
           },
 
@@ -157,7 +147,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
-              value: leadDetails?.id && leadDetails?.preferredContact || "",
+              value: (leadDetails?.id && leadDetails?.preferredContact) || "",
               options: [
                 {
                   value: "Via Email",
@@ -183,7 +173,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: leadDetails?.id && leadDetails?.budget || "",
+              value: (leadDetails?.id && leadDetails?.budget) || "",
 
               options: [
                 {
@@ -198,16 +188,6 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               control,
             },
           },
-        ],
-      },
-    },
-
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid  grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mt-5",
-        children: [
           {
             containerClass: "xl:col-span-1 mb-0",
             label: {
@@ -220,7 +200,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
-              value: leadDetails?.id && leadDetails?.leadSource || "",
+              value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
               options: [
                 { value: "Whats'app", label: "What'sapp" },
@@ -243,17 +223,15 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-0 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: leadDetails?.id && leadDetails?.otherServices || [""],
-              options: service && service?.map((item) => (
-                {
+              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              options:
+                service?.map((item) => ({
                   label: item.serviceName,
-                  value: item.id
-                }
-              )) || [],
-
+                  value: item.id,
+                })) || [],
 
               control,
-              trigger
+              trigger,
             },
           },
         ],
@@ -274,7 +252,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               id: "button",
               text: `${translate("leads.service_details.back_button")}`,
               inputType: "button",
-              onClick: () => onHandleBack && onHandleBack(ComponentsType.customerEdit),
+              onClick: () =>
+                onHandleBack && onHandleBack(ComponentsType.addressAdd),
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
             },

@@ -19,7 +19,6 @@ const CustomerDetails = () => {
     handlePreviousClick,
     deleteHandler,
     renderModal,
-
   } = useCustomerDetail(true);
 
   return (
@@ -49,7 +48,7 @@ const CustomerDetails = () => {
           <SideCard customerDetail={customerDetail} />
         </div>
       </div>
-      {renderModal()}
+      {renderModal()} 
     </Layout>
   );
 };

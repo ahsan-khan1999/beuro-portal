@@ -14,7 +14,6 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-
   const {
     isOpen,
     toggleHandler,
@@ -25,7 +24,7 @@ export default function CustomerFilter({
     handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
-  
+
   const { t: translate } = useTranslation();
   const router = useRouter();
 

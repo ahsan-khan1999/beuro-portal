@@ -3,6 +3,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
 import { FilterProps } from "@/types";
+import { motion } from "framer-motion";
 
 export default function DetailFilter({
   filter,
@@ -42,7 +43,13 @@ export default function DetailFilter({
       </svg>
 
       {moreFilter && (
-        <div className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg">
+        <motion.div
+          className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
+        >
           <div className="flex justify-between border-b border-lightGray pb-3">
             <span className="font-medium text-lg">Filter</span>
             <span
@@ -111,7 +118,7 @@ export default function DetailFilter({
               textClassName="text-white"
             />
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

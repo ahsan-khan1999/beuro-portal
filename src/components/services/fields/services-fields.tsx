@@ -26,8 +26,9 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark ${!isUpdate && "!border-light"
-                } focus:!border-primary `,
+              className: `!p-4 !border-dark ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               inputType: "text",
               id: "serviceName",
               name: "serviceName",
@@ -98,7 +99,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary ",
-        rows: 4,
+        rows: 8,
         id: "description",
         name: "description",
         placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
@@ -122,8 +123,9 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               text: `${translate("services.detail.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
             },
           },
           {
@@ -133,8 +135,9 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               id: "button",
               text: `${translate("services.detail.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },

@@ -101,7 +101,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               },
               field: {
                 className:
-                  "!p-4  !border-dark  focus:!border-primary !h-[54px]",
+                  "!p-4 !border-dark focus:!border-primary",
                 type: Field.select,
                 id: `serviceDetail.${i}.serviceTitle`,
                 name: `serviceDetail.${i}.serviceTitle`,
@@ -238,7 +238,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-dark  focus:!border-primary ",
-                rows: 4,
+                rows: 8,
                 id: `serviceDetail.${i}.description`,
                 name: `serviceDetail.${i}.description`,
                 placeholder:
@@ -315,7 +315,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                     field: {
                       type: Field.textArea,
                       className: "!p-4 !border-dark focus:!border-primary ",
-                      rows: 4,
+                      rows: 8,
                       id: "discountDescription",
                       name: "discountDescription",
                       placeholder:
@@ -466,7 +466,7 @@ const generateServiceCalulationChildren = (
 
           field: {
             type: Field.div,
-            className: "flex  space-x-5 !h-[45px]",
+            className: "flex space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {

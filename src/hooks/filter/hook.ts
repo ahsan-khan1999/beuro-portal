@@ -48,6 +48,7 @@ export default function useFilter({
     filter,
     setFilter,
     isOpen,
+    setIsOpen,
     toggleHandler,
     handleItemSelected,
     handleFilterReset,

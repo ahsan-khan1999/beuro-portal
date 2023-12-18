@@ -100,7 +100,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: `pl-4 !min-h-[54px] !border-dark  focus:!border-primary `,
+              className: `pl-4 !border-dark  focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -206,7 +206,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
@@ -299,17 +299,17 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           },
           {
             containerClass: "mb-0",
-
             label: {
               text: `${translate("offers.offer_details.country")}`,
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4  min-h-[54px] !border-dark  ",
+              className: "pl-4 !border-dark",
               type: Field.select,
               id: "address.country",
               name: "address.country",
+              
               options: Object.keys(staticEnums.Country).map((item) => ({
                 value: item,
                 label: item,

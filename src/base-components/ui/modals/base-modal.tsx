@@ -1,6 +1,7 @@
 import { IBaseModalProps } from "@/types";
 import { Backdrop } from "../backdrop/backdrop";
 import { combineClasses } from "@/utils/utility";
+import { motion } from "framer-motion";
 
 export const BaseModal = ({
   children,
@@ -15,7 +16,15 @@ export const BaseModal = ({
   );
   return (
     <Backdrop onClose={onClose}>
-      <div className={`${containerClasses}`}>{children}</div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        transition={{ duration: 0.3 }}
+        className={`${containerClasses}`}
+      >
+        {children}
+      </motion.div>
     </Backdrop>
   );
 };

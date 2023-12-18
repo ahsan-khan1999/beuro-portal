@@ -14,16 +14,17 @@ export const TelephoneInputField = ({
   value,
   success,
   disabled,
-  className
+  className,
 }: PhoneProps) => {
-  const classes = combineClasses("!w-full !h-12 !border-0 !rounded-lg", className)
+  const classes = combineClasses(
+    "!w-full !h-[48px] !border-0 !rounded-lg",
+    className
+  );
   return (
-
     <Controller
       control={control}
       name={name}
       defaultValue={value}
-
       render={({ field: { onChange } }) => {
         return (
           <div className="relative w-full">
@@ -50,7 +51,5 @@ export const TelephoneInputField = ({
     />
   );
 };
-
-
 
 // const value = watch!(name, defaultValue);

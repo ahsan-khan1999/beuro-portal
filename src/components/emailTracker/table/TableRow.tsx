@@ -1,9 +1,6 @@
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-import editInfo from "@/assets/svgs/edit_info.svg";
-import moreInfo from "@/assets/svgs/entity_more_info.svg";
 import { formatDateTimeToDate, formatDateTimeToTime } from "@/utils/utility";
 
 const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
@@ -26,7 +23,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               {item.id?.slice(0, 5)}
             </span>
             <span className="py-4 flex items-center">{item.recipient}</span>
-            <span className="xs:block mlg:hidden xlg:hidden maxSize:flex py-4  items-center">
+            <span className="break-ll xs:block mlg:hidden xlg:hidden maxSize:flex py-4 items-center">
               {item.subject}
             </span>
             <div className="py-4 flex flex-col ">

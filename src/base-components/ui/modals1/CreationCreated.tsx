@@ -20,7 +20,7 @@ const CreationCreated = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit "
+        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />

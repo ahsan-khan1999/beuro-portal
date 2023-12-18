@@ -13,7 +13,7 @@ export const SelectField = ({
   onItemChange,
   className,
   disabled,
-  fieldIndex
+  fieldIndex,
 }: SelectProps) => {
   return (
     <Controller
