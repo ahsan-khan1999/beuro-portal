@@ -86,7 +86,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
         className: "!p-4 !border-dark  focus:!border-primary ",
         id: "description",
         name: "description",
-        rows: 4,
+        rows: 8,
         placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
         register,
@@ -171,7 +171,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
         type: Field.textArea,
         className: "!p-4 !border-dark  focus:!border-primary ",
         id: "description",
-        rows: 4,
+        rows: 8,
         name: "description",
         placeholder:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",

@@ -180,7 +180,7 @@ export const useEditOfferDetails = ({
     0,
     {}
   );
-  
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,

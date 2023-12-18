@@ -8,7 +8,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   control,
   onClick,
   count,
-  { content, contentDetails, offerDetails },
+  { content, contentDetails, offerDetails }
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -21,13 +21,17 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
 
       field: {
-        className: "!h-[54px] !px-2 !border-dark focus:!border-primary ",
+        className: "!px-2 !border-dark focus:!border-primary ",
         type: Field.select,
         id: "content",
         name: "content",
-        options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+        options:
+          content?.map((item) => ({
+            label: item.contentName,
+            value: item.id,
+          })) || [],
         control,
-        value: offerDetails?.id && offerDetails?.content?.id || "",
+        value: (offerDetails?.id && offerDetails?.content?.id) || "",
       },
     },
     {
@@ -44,7 +48,9 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value: contentDetails?.id && contentDetails?.offerContent?.title || offerDetails?.additionalDetails,
+        value:
+          (contentDetails?.id && contentDetails?.offerContent?.title) ||
+          offerDetails?.additionalDetails,
       },
     },
     {
@@ -63,7 +69,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
               inputType: "button",
               className:
                 "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -75,12 +81,12 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
               inputType: "submit",
               className:
                 "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
-              loading,
+              loading
             },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   ];
 
   return formField;

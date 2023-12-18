@@ -17,9 +17,7 @@ const LeadsDetails = () => {
             leadDetails={leadDetails}
           />
         </DetailsCard>
-        <div className="mt-7">
-          <LeadsDetailsData />
-        </div>
+        <LeadsDetailsData />
       </Layout>
 
       {renderModal()}

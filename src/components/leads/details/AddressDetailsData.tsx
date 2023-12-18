@@ -7,11 +7,12 @@ import { Lead } from "@/types/leads";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 
-const AddressDetailsData = ({ onClick }: {
-  onClick: (index: number, component: ComponentsType) => void,
-
+const AddressDetailsData = ({
+  onClick,
+}: {
+  onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const { leadDetails } = useAppSelector(state => state.lead)
+  const { leadDetails } = useAppSelector((state) => state.lead);
   const { t: translate } = useTranslation();
 
   return (
@@ -29,63 +30,52 @@ const AddressDetailsData = ({ onClick }: {
         >
           <Image src={editIcon} alt="editIcon" />
           {translate("leads.address_details.edit_button")}
-        </button >
-      </div >
+        </button>
+      </div>
       <hr className="opacity-20 mb-5" />
 
-      {
-        leadDetails?.addressID?.address?.map((item, key) => (
-          <div className="mt-5">
-            <h4 className="text-[#8F8F8F] mb-[10px]">
-              {translate("leads.address_details.heading")}
-
-            </h4>
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
-              <div>
-                <label className="text-[#4D4D4D] mb-3 block text-sm">
-                  {translate("leads.address_details.street_no")}
-                </label>
-                <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                  {item?.streetNumber}
-                </div>
-              </div>
-              <div>
-                <label className="text-[#4D4D4D] mb-3 block text-sm">
-                  {translate("leads.address_details.post_code")}
-
-                </label>
-                <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                  {item?.postalCode}
-
-                </div>
-              </div>
-              <div>
-                <label className="text-[#4D4D4D] mb-3 block text-sm">
-                  {translate("leads.address_details.country")}
-
-                </label>
-                <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                  {item?.country}
-
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 w-full">
-              <label className="text-[#4D4D4D] mb-[10px] block text-sm">
-                {translate("leads.address_details.description")}
-
+      {leadDetails?.addressID?.address?.map((item, key) => (
+        <div className="mt-5">
+          <h4 className="text-[#8F8F8F] mb-[10px]">
+            {translate("leads.address_details.heading")}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("leads.address_details.street_no")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {item?.description}
-
+                {item?.streetNumber}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("leads.address_details.post_code")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+                {item?.postalCode}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("leads.address_details.country")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+                {item?.country}
               </div>
             </div>
           </div>
 
-        ))
-      }
-
+          <div className="mt-5 w-full">
+            <label className="text-[#4D4D4D] mb-[10px] block text-sm">
+              {translate("leads.address_details.description")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {item?.description}
+            </div>
+          </div>
+        </div>
+      ))}
     </LeadsCardLayout>
   );
 };

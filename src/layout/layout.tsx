@@ -23,7 +23,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <Header />
         <div className="flex mt-[90px]">
           <SideBar />
-          <div className="ml-[272px] w-full overflow-y-scroll  mr-5">
+          <div className="ml-[272px] w-full overflow-x-scroll mr-5 min-h-[90vh]">
             {children}
           </div>
         </div>

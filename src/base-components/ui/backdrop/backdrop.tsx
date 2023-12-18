@@ -23,7 +23,7 @@ export const Backdrop = ({ children, onClose }: IBackdropProps) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.1 }}
-      className="!fixed top-0 flex justify-center items-center z-[999] bg-[#212529] bg-opacity-90 w-screen h-screen bg-blend-saturation backdrop-blur-sm"
+      className="!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] bg-opacity-90 w-screen h-screen bg-blend-saturation backdrop-blur-sm"
       onClick={handleBackdropClicked}
     >
       {children}

@@ -32,10 +32,10 @@ const TableRows = ({
             <span className="py-4 rounded-md flex items-center">
               {item.offerNumber}
             </span>
-            <span className="py-4 flex items-center">
+            <span className="py-4 break-all flex items-center">
               {item.customerID?.fullName}
             </span>
-            <span className="hidden py-4 xs:flex mlg:hidden xlg:hidden maxSize:hidden  xMaxSize:flex items-center">
+            <span className="hidden break-all py-4 xs:flex mlg:hidden xlg:hidden maxSize:hidden xMaxSize:flex items-center">
               {item?.title}
             </span>
             <span className="py-4 flex items-center">{item.total}</span>

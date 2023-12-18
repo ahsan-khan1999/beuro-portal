@@ -29,12 +29,12 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     reset,
     formState: { errors },
     watch,
-    setValue
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   console.log(errors);
-  const customerType = watch("customerType")
+  const customerType = watch("customerType");
   useMemo(() => {
     if (leadDetails.id) {
       reset({
@@ -46,15 +46,30 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
         phoneNumber: leadDetails.customerID?.phoneNumber,
         mobileNumber: leadDetails.customerID?.mobileNumber,
         address: leadDetails?.customerID?.address,
-      })
+      });
     }
   }, [leadDetails.id]);
-  const fields = LeadsCustomerDetailsFormField(register, loading, control, handleBack, leadDetails,customerType,setValue);
+  const fields = LeadsCustomerDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack,
+    leadDetails,
+    customerType,
+    setValue
+  );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressEdit, customerID: leadDetails?.customerID?.id }
-    const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+    const apiData = {
+      ...data,
+      step: 1,
+      leadId: leadDetails?.id,
+      stage: ComponentsType.addressEdit,
+      customerID: leadDetails?.customerID?.id,
+    };
+    const res = await dispatch(
+      createLead({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) onClick(0, ComponentsType.customer);
-
   };
   return {
     fields,
@@ -63,6 +78,6 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

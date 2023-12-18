@@ -2,7 +2,6 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
-
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
   register,
   loading,
@@ -33,13 +32,14 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: leadDetails?.id && leadDetails?.requiredService || "",
-              options: service && service?.map((item) => (
-                {
-                  label: item.serviceName,
-                  value: item.id
-                }
-              )) || [],
+              value: (leadDetails?.id && leadDetails?.requiredService) || "",
+              options:
+                (service &&
+                  service?.map((item) => ({
+                    label: item.serviceName,
+                    value: item.id,
+                  }))) ||
+                [],
               control,
             },
           },
@@ -71,7 +71,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailability",
-              value: leadDetails?.id && leadDetails?.contactAvailability || "",
+              value:
+                (leadDetails?.id && leadDetails?.contactAvailability) || "",
               name: "contactAvailability",
               options: [
                 {
@@ -86,17 +87,6 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               control,
             },
           },
-        ],
-      },
-    },
-
-    //   second start from here
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-3 gap-x-3 ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -108,7 +98,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "flexibility",
-              value: leadDetails?.id && leadDetails?.flexibility || "",
+              value: (leadDetails?.id && leadDetails?.flexibility) || "",
               name: "flexibility",
               options: [
                 {
@@ -139,10 +129,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "7",
                   label: "7 days",
                 },
-
               ],
               control,
-
             },
           },
 
@@ -159,7 +147,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
-              value: leadDetails?.id && leadDetails?.preferredContact || "",
+              value: (leadDetails?.id && leadDetails?.preferredContact) || "",
               options: [
                 {
                   value: "Via Email",
@@ -185,7 +173,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: leadDetails?.id && leadDetails?.budget || "",
+              value: (leadDetails?.id && leadDetails?.budget) || "",
 
               options: [
                 {
@@ -200,17 +188,6 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               control,
             },
           },
-        ],
-      },
-    },
-
-    {
-      containerClass:"mt-5",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
-        children: [
           {
             containerClass: "xl:col-span-1 mb-0",
             label: {
@@ -223,7 +200,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
-              value: leadDetails?.id && leadDetails?.leadSource || "",
+              value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
               options: [
                 { value: "Whats'app", label: "What'sapp" },
@@ -246,17 +223,15 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 h-[56px] !border-dark  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: leadDetails?.id && leadDetails?.otherServices || [""],
-              options: service?.map((item) => (
-                {
+              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              options:
+                service?.map((item) => ({
                   label: item.serviceName,
-                  value: item.id
-                }
-              )) || [],
-
+                  value: item.id,
+                })) || [],
 
               control,
-              trigger
+              trigger,
             },
           },
         ],
@@ -264,11 +239,11 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "mt-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-[30px]",
+        className: "flex space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",

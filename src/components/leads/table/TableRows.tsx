@@ -31,16 +31,16 @@ const TableRows = ({
             key={index}
             className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow  gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(50px,_50px),minmax(130px,_130px)_minmax(220px,_100%)_minmax(150px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(120px,_100%)_minmax(80px,_100%)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(30px,_30px)]  maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(170px,_100%)_minmax(80px,_100%)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(170px,_100%)_minmax(80px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mt-2  rounded-md"
           >
-            <span className=" py-4  rounded-md flex items-center">
+            <span className="py-4 rounded-md flex items-center">
               {item?.refID}
             </span>
-            <span className=" py-4 flex items-center">
+            <span className="py-4 flex items-center">
               {item.customerID?.fullName}
             </span>
-            <span className=" py-4 flex items-center mlg:hidden maxSize:flex">
+            <span className="py-4 break-all flex items-center mlg:hidden maxSize:flex">
               {item.customerID?.email}
             </span>
-            <span className=" py-4 flex items-center">
+            <span className="py-4 flex items-center">
               {item.customerID?.phoneNumber}
             </span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex ">
@@ -49,7 +49,7 @@ const TableRows = ({
             <span className="flex items-center py-4">
               {item.customerID?.address?.country}
             </span>
-            <span className={` py-4 flex items-center`}>
+            <span className={`py-4 flex items-center`}>
               <div
                 className={`bg-[${getStatusColor(
                   item.leadStatus
