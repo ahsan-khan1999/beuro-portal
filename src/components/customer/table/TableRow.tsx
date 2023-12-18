@@ -16,23 +16,25 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               })
             }
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow grid gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(50px,_50px),minmax(150px,_150px)_minmax(250px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(150px,_100%)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(190px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(110px,_110px)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(50px,_50px),minmax(150px,_150px)_minmax(180px,_100%)_minmax(140px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2  rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow grid gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(50px,_50px),minmax(150px,_150px)_minmax(300px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(150px,_100%)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(190px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(110px,_110px)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(50px,_50px),minmax(150px,_150px)_minmax(180px,_100%)_minmax(140px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2  rounded-md"
           >
-            <span className=" py-4 rounded-md flex items-center">
+            <span className="py-4 rounded-md flex items-center">
               {item.refID}
             </span>
-            <span className=" py-4 flex items-center">{item.fullName}</span>
+            <span className="py-4 flex items-center">{item.fullName}</span>
 
-            <span className=" py-4 flex items-center">{item.email}</span>
-            <span className=" py-4 flex items-center">{item.phoneNumber}</span>
-            <span className=" py-4 xlg:flex items-center mlg:hidden ">
+            <span className="py-4 flex items-center break-all">
+              {item.email}
+            </span>
+            <span className="py-4 flex items-center break-all">{item.phoneNumber}</span>
+            <span className="py-4 xlg:flex items-center mlg:hidden ">
               {item.createdAt}
             </span>
-            <span className=" py-4 flex items-center">
+            <span className="py-4 flex items-center">
               {item.address.country}
             </span>
             <span className="py-4 flex items-center"> {item.customerType}</span>
-            <span className=" flex justify-center items-center">
+            <span className="flex justify-center items-center">
               <div className="p-[5px] rounded-md border border-[#8F8F8F] border-opacity-10 w-[27px] h-[27px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,14 +1,21 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateLeadsCustomerFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
-import { FormField, GenerateLeadsFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
-  { customerType, type, customer, onCustomerSelect, customerDetails, onCancel, leadDetails },
+  {
+    customerType,
+    type,
+    customer,
+    onCustomerSelect,
+    customerDetails,
+    onCancel,
+    leadDetails,
+  },
   setValue
 ) => {
   const { t: translate } = useTranslation();
@@ -40,7 +47,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: leadDetails?.id && leadDetails?.type === "New Customer" || type === "New Customer"
+                    checked:
+                      (leadDetails?.id &&
+                        leadDetails?.type === "New Customer") ||
+                      type === "New Customer",
                   },
                 },
                 {
@@ -52,7 +62,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked: leadDetails?.id && leadDetails?.type === "Existing Customer" || type === "Existing Customer"
+                    checked:
+                      (leadDetails?.id &&
+                        leadDetails?.type === "Existing Customer") ||
+                      type === "Existing Customer",
                   },
                 },
               ],
@@ -69,15 +82,15 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
-                {
+              options: Object.keys(staticEnums.CustomerType).map(
+                (item, key) => ({
                   value: item,
-                  label: item
-                }
-              )),
+                  label: item,
+                })
+              ),
 
               control,
-              value: leadDetails && leadDetails.customerID?.customerType
+              value: leadDetails && leadDetails.customerID?.customerType,
             },
           },
           {
@@ -96,8 +109,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
-
-
             },
           },
 
@@ -116,9 +127,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Email Address",
               register,
-              value: leadDetails && leadDetails.customerID?.email
-
-
+              value: leadDetails && leadDetails.customerID?.email,
             },
           },
 
@@ -136,9 +145,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.phoneNumber,
-
-
+              value: leadDetails?.id
+                ? leadDetails?.customerID?.phoneNumber
+                : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -155,12 +164,13 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: leadDetails?.id ? leadDetails?.customerID?.phoneNumber : customerDetails && customerDetails?.mobileNumber
+              value: leadDetails?.id
+                ? leadDetails?.customerID?.phoneNumber
+                : customerDetails && customerDetails?.mobileNumber,
             },
           },
-
-        ]
-      }
+        ],
+      },
     },
     {
       containerClass: "mt-5",
@@ -191,8 +201,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: "Please Enter Street Number",
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.streetNumber
-
+              value:
+                leadDetails && leadDetails?.customerID?.address?.streetNumber,
             },
           },
 
@@ -214,9 +224,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               placeholder: "Enter Your Post Code",
 
               register,
-              value: leadDetails && leadDetails?.customerID?.address?.postalCode
-
-
+              value:
+                leadDetails && leadDetails?.customerID?.address?.postalCode,
             },
           },
           {
@@ -231,22 +240,17 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => (
-                {
-                  value: item,
-                  label: item
-                }
-              )),
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: item,
+              })),
               control,
-              value: leadDetails && leadDetails?.customerID?.address?.country
-
-
+              value: leadDetails && leadDetails?.customerID?.address?.country,
             },
           },
         ],
       },
     },
-
 
     {
       field: {
@@ -297,7 +301,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-
         type: Field.input,
         className:
           "!p-4 !!border-borderColor border border-dark focus:!border-primary",
@@ -306,14 +309,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         name: "companyName",
         placeholder: "Please Enter Company Name",
         register,
-        setValue: setValue
-
+        setValue: setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
     const divField = formField[fieldIndex]?.field as DivProps; // Assert type
     if (divField && Array.isArray(divField.children)) {
-
       //@ts-expect-error
       divField.children.splice(fieldIndex + 3, 0, companyNameField);
     }
@@ -342,31 +343,27 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         type: Field.select,
         id: "customerID",
         name: "customerID",
-        options: customer?.map((item, key) => (
-          {
-            value: item.id,
-            label: item.fullName,
-          }
-        )),
+        options: customer?.map((item, key) => ({
+          value: item.id,
+          label: item.fullName,
+        })),
 
         control,
         onItemChange: onCustomerSelect,
-        value: leadDetails?.id ? leadDetails?.customerID?.id : customerDetails && customerDetails?.id,
-        setValue
+        value: leadDetails?.id
+          ? leadDetails?.customerID?.id
+          : customerDetails && customerDetails?.id,
+        setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
 
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-
       //@ts-expect-error
       divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
     }
   }
 
-
-
-
-  return formField
+  return formField;
 };

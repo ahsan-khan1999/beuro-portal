@@ -34,9 +34,9 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   });
   useMemo(() => {
     if (leadDetails.id) {
-      reset(transformAddressFormValues(leadDetails?.addressID?.address))
+      reset(transformAddressFormValues(leadDetails?.addressID?.address));
     }
-  }, [leadDetails.id])
+  }, [leadDetails.id]);
   const fields = LeadsAddressDetailsFormField(
     register,
     loading,
@@ -45,8 +45,15 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     2
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { address: senitizeDataForm(data), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceEdit }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    const apiData = {
+      address: senitizeDataForm(data),
+      step: 2,
+      id: leadDetails?.id,
+      stage: ComponentsType.serviceEdit,
+    };
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) onClick(1, ComponentsType.address);
   };
   return {
@@ -56,6 +63,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

@@ -4,18 +4,28 @@ import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
 
-const CreationCreated = ({ onClose, heading, subHeading, route }: { onClose: () => void; heading:string; subHeading:string; route:Function }) => {
+const CreationCreated = ({
+  onClose,
+  heading,
+  subHeading,
+  route,
+}: {
+  onClose: () => void;
+  heading: string;
+  subHeading: string;
+  route: Function;
+}) => {
   const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit "
+        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
           <p className="text-[#000] font-medium text-2xl mt-[40px] text-center ">
-           {heading}
+            {heading}
           </p>
 
           <span className="text-[#1E1E1E] font-normal text-sm mt-[6px] px-[60px] text-center">
