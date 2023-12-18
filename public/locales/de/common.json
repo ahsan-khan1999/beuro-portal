@@ -1468,10 +1468,10 @@
       "discount": "Discount",
       "grand_toal": " Grand Total"
     },
-    "PDF_BUTTONS":{
-      "back_button":"Back",
-      "send_via_email":"Send via Email",
-      "send_via_post":"Send via Post"
+    "PDF_BUTTONS": {
+      "back_button": "Back",
+      "send_via_email": "Send via Email",
+      "send_via_post": "Send via Post"
     }
   },
   "offers": {
@@ -1699,7 +1699,12 @@
         "plan": "Plan",
         "subscription_date": "Subscription Date",
         "status": "Status",
-        "company_logo": "Company Logo"
+        "company_logo": "Company Logo",
+        "customer_status": {
+          "active": "Active",
+          "block": "Block"
+        },
+        "customer_free": "Your customer is now totally free."
       },
       "customer_details": {
         "owner_name": "Owner Name",

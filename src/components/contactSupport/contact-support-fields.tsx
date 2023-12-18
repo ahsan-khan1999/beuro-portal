@@ -58,7 +58,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.phone,
-              className: "  !h-[54px]  !border-dark  focus:!border-primary",
+              className: "!border-dark focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -86,7 +86,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4  !h-[54px] !border-dark  focus:!border-primary ",
+              className: "pl-4 !border-dark  focus:!border-primary ",
               type: Field.select,
               value: "When is a convenient time for a consultation?",
               id: "reason",
@@ -111,7 +111,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark focus:!border-primary",
-        rows: 4,
+        rows: 8,
         id: "message",
         name: "message",
         placeholder: "Type your message here",

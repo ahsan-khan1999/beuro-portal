@@ -48,16 +48,16 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-dark focus:!border-primary",
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map((item) => (
-                {
+              options: Object.keys(staticEnums.CustomerType).map(
+                (item, key) => ({
                   value: item,
-                  label: item
-                }
-              )),
+                  label: item,
+                })
+              ),
 
               control,
               value: leadDetails?.id && getKeyByValue(staticEnums["CustomerType"],leadDetails.customerDetail?.customerType) || ""
@@ -72,7 +72,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary",
+              className: "!p-4 !border-dark focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
@@ -90,7 +90,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-[54px] !border-dark focus:!border-primary",
+              className: "!border-dark focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
 
@@ -109,7 +109,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-[54px] !border-dark focus:!border-primary",
+              className: " !border-dark focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               control,
@@ -180,16 +180,14 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "h-[54px] !p-4 !border-dark  ",
+              className: "!p-4 !border-dark",
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => (
-                {
-                  value: item,
-                  label: item
-                }
-              )),
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: item,
+              })),
               control,
               value: leadDetails?.id && leadDetails?.customerDetail?.address?.country || ""
             },
@@ -213,7 +211,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -252,7 +250,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
         className: "mb-[10px]",
       },
       field: {
-
         type: Field.input,
         className:
           "!p-4 !!border-borderColor border border-dark focus:!border-primary",

@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useEmailTracker from "@/hooks/emailTracker/useEmailTracker";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function EmailTracker() {
   const { currentPageRows,
@@ -16,6 +17,11 @@ export default function EmailTracker() {
     setFilter,
     handleFilterChange, } =
     useEmailTracker();
+
+    const CurrentComponent = useEmptyStates(
+      <TableRow dataToAdd={currentPageRows} />,
+      currentPageRows.length > 0
+    );
   return (
     <>
       <Layout>
@@ -26,7 +32,7 @@ export default function EmailTracker() {
         />
         <TableLayout>
           <TableHeading />
-          <TableRow dataToAdd={currentPageRows} />
+         {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

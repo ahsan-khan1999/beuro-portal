@@ -18,8 +18,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
         name: "dateTime",
         value: "12/12/2023",
         register,
-        dateType:"datetime-local"
-
+        dateType: "datetime-local",
       },
     },
 
@@ -28,7 +27,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark  focus:!border-primary ",
-        rows: 4,
+        rows: 8,
         id: "postPonedNote",
         name: "postPonedNote",
         placeholder:

@@ -187,8 +187,7 @@ const ContentDetailsData = ({
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row gap-x-6">
-      {/* First Section: DetailsTab Components */}
+    <div className="flex flex-col xl:flex-row gap-x-6 mt-6">
       <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-full xl:w-fit">
         {tabSection.map((item, index) => (
           <DetailsTab
@@ -203,7 +202,7 @@ const ContentDetailsData = ({
         ))}
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[650px] xl:mt-0 mt-4 overflow-scroll">
+      <div className="flex flex-col gap-y-5 w-full h-[600px] xl:mt-0 mt-4 overflow-scroll">
         {renderComponent.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>
         ))}

@@ -23,14 +23,17 @@ export interface DropDownProps {
   [DropDownKeys.CHILDREN]?: React.ReactElement<SVGElement>;
   [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_TEXT_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_ICON_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_DISABLED]?: boolean;
+  [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
 }
 
 export interface DropDownItemsProps {
   items: DropDownItem[];
   onItemClick: (data: string) => void;
+  containerClassName?: string;
 }
 export interface SearchInputProps {
   onInputChange: (value: string) => void;
@@ -55,7 +58,7 @@ export interface ButtonProps {
   loaderColor?: string;
   icon?: any;
   iconAlt?: any;
-  id: string
+  id: string;
 }
 
 // Add field interface
@@ -67,8 +70,7 @@ export interface AddFieldProps {
   iconAlt?: any;
   type?: Field.button;
   name: string;
-  id: string
-
+  id: string;
 }
 
 export interface Image {
@@ -204,7 +206,7 @@ interface WidgetBaseProps {
   containerClassName?: string;
 }
 
-export interface BaseCardProps extends WidgetBaseProps { }
+export interface BaseCardProps extends WidgetBaseProps {}
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {
@@ -258,8 +260,6 @@ export interface ToggleButtonProps {
   key?: string;
   disabled?: boolean;
 }
-
-
 
 export interface CheckBoxInputProps {
   onChange: (value: boolean) => void;

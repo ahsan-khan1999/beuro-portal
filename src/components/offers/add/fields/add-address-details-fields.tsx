@@ -1,16 +1,20 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadAddressFormField, GenerateOffersFormField } from "@/types";
+import {
+  FormField,
+  GenerateLeadAddressFormField,
+  GenerateOffersFormField,
+} from "@/types";
 import { ComponentsType } from "../AddOffersDetailsData";
 import { staticEnums } from "@/utils/static";
-import icon from "@/assets/svgs/Vector.svg"
-import { Fields } from '@/enums';
+import icon from "@/assets/svgs/Vector.svg";
+import { Fields } from "@/enums";
 import { useTranslation } from "next-i18next";
 export const addressObject = {
-  streetNumber:"",
-  postalCode:"",
-  country:"",
-  description:""
-}
+  streetNumber: "",
+  postalCode: "",
+  country: "",
+  description: "",
+};
 export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
@@ -24,7 +28,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
 
-  if(!fields) return null;
+  if (!fields) return null;
   for (let i = 0; i < count; i++) {
     formField.push(
       {
@@ -81,19 +85,16 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 className: "mb-[10px]",
               },
               field: {
-                className: "pl-4  min-h-[54px] !border-dark  ",
+                className: "pl-4 !border-dark  ",
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
-                options: Object.keys(staticEnums.Country).map((item) => (
-                  {
-                    value: item,
-                    label: item
-                  }
-                )),
+                options: Object.keys(staticEnums.Country).map((item) => ({
+                  value: item,
+                  label: item,
+                })),
                 control,
-                value: ""
-
+                value: "",
               },
             },
           ],
@@ -116,7 +117,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-dark  focus:!border-primary ",
-                rows: 4,
+                rows: 8,
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
                 placeholder:
@@ -131,76 +132,70 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: "button",
                 text: "Remove",
                 inputType: "button",
-                className:
-                  `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${i === 0 && 'hidden'}`,
-                onClick: () =>handleRemoveAddress && handleRemoveAddress(i)
+                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
+                  i === 0 && "hidden"
+                }`,
+                onClick: () => handleRemoveAddress && handleRemoveAddress(i),
               },
             },
-          ]
-        }
+          ],
+        },
       }
-
-
     );
   }
 
-  formField.push(
-    {
-      containerClass: "mt-10",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "flex space-x-[18px] ",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: `${translate("offers.address_details.back_button")}`,
-              inputType: "button",
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-              onClick: onHandleBack && onHandleBack,
-            },
+  formField.push({
+    containerClass: "mt-10",
+    field: {
+      type: Field.div,
+      id: "div-field",
+      className: "flex space-x-[18px] ",
+      children: [
+        {
+          containerClass: "mb-0",
+          field: {
+            type: Field.button,
+            id: "button",
+            text: `${translate("offers.address_details.back_button")}`,
+            inputType: "button",
+            className:
+              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+            onClick: onHandleBack && onHandleBack,
           },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: `${translate("offers.address_details.next_button")}`,
-              inputType: "submit",
-              className:
-                "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
-              loading
-            },
+        },
+        {
+          containerClass: "mb-0",
+          field: {
+            type: Field.button,
+            id: "button",
+            text: `${translate("offers.address_details.next_button")}`,
+            inputType: "submit",
+            className:
+              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
+            loading,
           },
+        },
 
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              className:
-                ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 px-4   h-[40px] text-white hover-bg-none`,
-              onClick: () => handleAddNewAddress && handleAddNewAddress(addressObject),
-              icon: icon,
-              name: "",
+        {
+          containerClass: "mb-0",
+          field: {
+            type: Field.button,
+            id: "button",
+            className: ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 px-4   h-[40px] text-white hover-bg-none`,
+            onClick: () =>
+              handleAddNewAddress && handleAddNewAddress(addressObject),
+            icon: icon,
+            name: "",
 
-              // icon
-            },
+            // icon
           },
-
-
-        ],
-      },
-    }
-  );
+        },
+      ],
+    },
+  });
 
   return formField;
 };
-
 
 // export const testFormat: GenerateLeadAddressFormField = (
 //   register,

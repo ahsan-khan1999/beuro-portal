@@ -19,11 +19,9 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { service } = useAppSelector((state) => state.service);
 
-
   const handleBack = () => {
     onClick(2, ComponentsType.service);
   };
-
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
@@ -34,22 +32,30 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     formState: { errors },
     trigger,
     reset,
-    watch
+    watch,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const otherServices=  watch("otherServices")
+  const otherServices = watch("otherServices");
 
   useMemo(() => {
     if (leadDetails.id) {
       reset({
         ...leadDetails,
-        desireDate: formatDateTimeToDate(leadDetails?.desireDate)
-      })
+        desireDate: formatDateTimeToDate(leadDetails?.desireDate),
+      });
     }
   }, [leadDetails.id])
 
-  const fields = LeadsServiceDetailsFormField(register, loading, control, handleBack, trigger, service, leadDetails);
+  const fields = LeadsServiceDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack,
+    trigger,
+    service,
+    leadDetails
+  );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
@@ -63,6 +69,6 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

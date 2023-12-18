@@ -318,7 +318,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.textArea,
               className: "!p-4 !border-dark focus:!border-primary ",
-              rows: 4,
+              rows: 8,
               id: "description",
               name: "description",
               placeholder:

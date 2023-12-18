@@ -25,7 +25,7 @@ const InvoiceDetailsData = ({
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 ">
         <div className="flex items-center">
           <Image
             src={backIcon}

@@ -11,7 +11,7 @@ export default function PaymentsFilter({
   return (
     <div className="flex space-x-4">
       <button
-        onClick={() => handleSelectMonth()}
+        onClick={handleSelectMonth}
         className="flex items-center px-3 py-2 bg-white rounded-md gap-x-1"
       >
         Download History

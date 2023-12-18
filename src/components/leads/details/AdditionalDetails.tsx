@@ -10,14 +10,16 @@ const AdditionalDetails = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-
 }) => {
-  const { leadDetails } = useAppSelector(state => state.lead)
+  const { leadDetails } = useAppSelector((state) => state.lead);
 
   const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
-      <div className="flex justify-between items-center pb-5 " id="Additional Details">
+      <div
+        className="flex justify-between items-center pb-5 border-b border-[#e5e5e5]"
+        id="Additional Details"
+      >
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("leads.additional.heading")}
         </h2>
@@ -29,15 +31,12 @@ const AdditionalDetails = ({
           {translate("leads.additional.edit_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
 
-
-      <div className="py-[25px] px-[30px]">
-        <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6  ">
-          <div className="text-[#4B4B4B] font-normal text-base" dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }} />
-
-
-        </div>
+      <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 mt-6">
+        <div
+          className="text-[#4B4B4B] font-normal text-base"
+          dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }}
+        />
       </div>
     </LeadsCardLayout>
   );

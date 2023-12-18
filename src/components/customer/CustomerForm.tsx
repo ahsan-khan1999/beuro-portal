@@ -25,7 +25,9 @@ const CustomerForm = ({
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("customers.details.heading")}</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("customers.details.heading")}
+        </h2>
         {isUpdate ? (
           <BaseButton
             buttonText={translate("customers.details.edit_button")}
@@ -39,7 +41,7 @@ const CustomerForm = ({
             buttonText={translate("customers.details.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
             containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
-          ></BaseButton>
+          />
         )}
       </div>
       <Form

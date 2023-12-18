@@ -19,34 +19,35 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
-          {
+          { containerClass:"mb-0",
             label: {
               text: `${translate("customers.details.customer_type")}`,
               htmlFor: "select",
-              className: "mb-[10px]",
+              className: "mb-[10px] ",
             },
             field: {
-              className: `!min-h-[54px] !px-4 !border-dark ${!isUpdate && "!border-light"
-                } focus:!border-primary `,
+              className: `!border-dark ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map((item, key) => (
-                {
+              options: Object.keys(staticEnums.CustomerType).map(
+                (item, key) => ({
                   value: item,
-                  label: item
-                }
-              )),
+                  label: item,
+                })
+              ),
 
               control,
               disabled: isUpdate,
-              value: ""
-
+              value: "",
             },
           },
           {
+            containerClass:"mb-0 w-full xl:col-span-2",
             label: {
               text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
@@ -62,8 +63,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               disabled: isUpdate,
-              value: ""
-
+              value: "",
             },
           },
           {
@@ -82,8 +82,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Email Address",
               register,
               disabled: isUpdate,
-              value: ""
-
+              value: "",
             },
           },
 
@@ -102,8 +101,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               country: "ch",
               control,
               value: customerDetails && customerDetails.phoneNumber,
-
-
             },
           },
           {
@@ -128,7 +125,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass: "mt-5",
+      containerClass:"my-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "name",
@@ -138,9 +135,10 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 ",
+        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
+            containerClass: "mb-0",
             label: {
               text: `${translate("customers.details.street_no")}`,
               htmlFor: "address.streetNumber",
@@ -156,8 +154,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
-              value: ""
-
+              value: "",
             },
           },
 
@@ -180,7 +177,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               register,
               disabled: isUpdate,
-              value: ""
+              value: "",
             },
           },
           {
@@ -191,20 +188,17 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4  min-h-[54px] !border-dark  ",
+              className: "pl-4 !border-dark",
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => (
-                {
-                  value: item,
-                  label: item
-                }
-              )),
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: item,
+              })),
               control,
               disabled: isUpdate,
-              value: ""
-
+              value: "",
             },
           },
         ],
@@ -224,8 +218,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px]   text-dark hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
             },
           },
           {
@@ -234,8 +229,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "button",
               text: `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },
@@ -261,7 +257,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-
         type: Field.input,
         className:
           "!p-4 !!border-borderColor border border-dark focus:!border-primary",
@@ -272,8 +267,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         register,
         disabled: isUpdate,
         value: customerDetails && customerDetails?.companyName,
-        setValue: setValue
-
+        setValue: setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
@@ -284,5 +278,5 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
     }
   }
 
-  return formField
+  return formField;
 };

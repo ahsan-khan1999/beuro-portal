@@ -5,12 +5,16 @@ import React from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import groupCustomerIcon from "@/assets/svgs/group_customer_icon.svg";
 import { useRouter } from "next/router";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { DropDownItem } from "@/types";
 
 const DetailsData = ({
   supportDetail,
+  status,
   handlePreviousClick,
 }: {
   supportDetail: SupportRequestAdmin;
+  status: DropDownItem[];
   handlePreviousClick: () => void;
 }) => {
   const { t: translate } = useTranslation();
@@ -50,10 +54,18 @@ const DetailsData = ({
             {supportDetail?.requestDate?.toLocaleDateString()}
           </span>
         </h3>
-        <h3 className="text-[#4D4D4D] ">
+        <h3 className="text-[#4D4D4D] flex items-center">
           {translate("admin.support_requests.card_content.status")}:
           <span className="ml-3 text-[#4B4B4B] font-medium">
-            {supportDetail?.status}
+            <DropDown
+              items={status}
+              onItemSelected={(selectedItem) => console.log(selectedItem)}
+              selectedItem={status[0].item}
+              dropDownClassName="w-[108px] border border-primary"
+              dropDownTextClassName="text-primary font-medium"
+              dropDownIconClassName="text-primary"
+              dropDownItemsContainerClassName="border border-primary"
+            />
           </span>
         </h3>
       </div>

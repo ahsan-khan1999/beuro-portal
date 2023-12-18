@@ -152,6 +152,19 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
+.react-tel-input .form-control{
+  border: none !important;
+}
+
+.react-tel-input .flag-dropdown{
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  border: none !important;
+  border-right: 1px solid #c4c4c4 !important;
+}
+
+
+
 .full-calendar {
   background-color: #fff;
   padding: 20px 20px;
@@ -355,4 +368,26 @@ input[type="number"] {
 .dark .full-calendar .fc-event:hover td {
   border-color: #2d3748;
   background-color: #2d3748;
+}
+@keyframes modalOpen {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalClose {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-50px); }
+}
+
+.modal {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.modal-opening {
+  animation-name: modalOpen;
+}
+
+.modal-closing {
+  animation-name: modalClose;
 }

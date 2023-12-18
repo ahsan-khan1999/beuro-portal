@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Offers() {
   const {
@@ -21,6 +22,15 @@ export default function Offers() {
     handleFilterChange,
   } = useOffers();
 
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+            dataToAdd={currentPageRows}
+            openModal={handleNotes}
+            handleImageUpload={handleImageUpload}
+          />,
+    currentPageRows.length > 0
+  );
+
   return (
     <>
       <Layout>
@@ -31,11 +41,7 @@ export default function Offers() {
         />
         <TableLayout>
           <TableHeading />
-          <TableRows
-            dataToAdd={currentPageRows}
-            openModal={handleNotes}
-            handleImageUpload={handleImageUpload}
-          />
+         {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

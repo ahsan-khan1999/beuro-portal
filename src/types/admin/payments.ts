@@ -1,3 +1,5 @@
+import { number } from "yup";
+
 export interface PaymentsAdmin {
   id: number;
   companyName: string;
@@ -13,7 +15,12 @@ export interface SelectMonthProps {
   handleSelectMonth: () => void;
 }
 
+export interface GetYearAndMonth {
+  year: number;
+  month: string;
+}
+
 export interface MonthSelectModalProps {
   onClose: () => void;
-  handleDownload: () => void;
+  handleDownload: (date: GetYearAndMonth) => void;
 }

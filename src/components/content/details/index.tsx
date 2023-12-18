@@ -13,10 +13,7 @@ const ContentDetails = () => {
         contentDetails={contentDetails}
         contentDeleteHandler={contentDeleteHandler}
       />
-
-      <div className=" mt-7">
-        <ContentDetailsData contentDetails={contentDetails} />
-      </div>
+      <ContentDetailsData contentDetails={contentDetails} />
       {renderModal()}
     </Layout>
   );

@@ -6,13 +6,15 @@ import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
 import SupportDetailsData from "./support-request-data";
 
 const SupportRequestDetails = () => {
-  const { supportDetail, handlePreviousClick } = useSupportDetail(true);
+  const { supportDetail,status, handlePreviousClick } = useSupportDetail(true);
+
 
   return (
     <Layout>
       <DetailsCard>
         <DetailsData
           supportDetail={supportDetail}
+          status={status}
           handlePreviousClick={handlePreviousClick}
         />
       </DetailsCard>
