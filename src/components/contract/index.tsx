@@ -7,6 +7,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
 import useLeads from "@/hooks/leads/useLeads";
 import useContract from "@/hooks/contract/useContract";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Contract() {
   const {
@@ -22,6 +23,15 @@ export default function Contract() {
     setFilter,
   } = useContract();
 
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+      dataToAdd={currentPageRows}
+      handleImageUpload={handleImageUpload}
+      openModal={handleNotes}
+    />,
+    currentPageRows.length > 0
+  );
+
   return (
     <>
       <Layout>
@@ -32,11 +42,7 @@ export default function Contract() {
         />
         <TableLayout>
           <TableHeadings />
-          <TableRows
-            dataToAdd={currentPageRows}
-            handleImageUpload={handleImageUpload}
-            openModal={handleNotes}
-          />
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

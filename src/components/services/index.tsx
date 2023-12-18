@@ -6,6 +6,7 @@ import TableRowServices from "./table/TableRows";
 import TableFunctions from "./table/TableFunctions";
 import useService from "@/hooks/services/useService";
 import TableHeadings from "./table/TableHeadings";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Services() {
   const {
@@ -19,6 +20,11 @@ export default function Services() {
     translate,
   } = useService();
 
+  const CurrentComponent = useEmptyStates(
+    <TableRowServices servicesData={currentPageRows} />,
+    currentPageRows.length > 0
+  );
+
   return (
     <Layout>
       <TableFunctions
@@ -29,7 +35,7 @@ export default function Services() {
       />
       <TableLayout>
         <TableHeadings />
-        <TableRowServices servicesData={currentPageRows} />
+        {CurrentComponent}
       </TableLayout>
       <Pagination
         totalItems={totalItems}

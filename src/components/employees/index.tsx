@@ -6,6 +6,7 @@ import TableRows from "./table/TableRows";
 import TableHeadings from "./table/TableHeadings";
 import TableFunctions from "./table/TableFunctions";
 import useEmployee from "@/hooks/employee/useEmployee";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Employees() {
   const {
@@ -19,6 +20,11 @@ export default function Employees() {
     translate,
   } = useEmployee();
 
+  const CurrentComponent = useEmptyStates(
+    <TableRows employsData={currentPageRows} />,
+    currentPageRows.length > 0
+  );
+
   return (
     <>
       <Layout>
@@ -29,7 +35,7 @@ export default function Employees() {
         />
         <TableLayout>
           <TableHeadings />
-          <TableRows employsData={currentPageRows} />
+       {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

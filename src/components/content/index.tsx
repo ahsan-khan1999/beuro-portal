@@ -6,6 +6,7 @@ import TableHeadings from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useContent from "@/hooks/content/useContent";
 import TableFunctions from "./table/TableFunctions";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Content() {
   const {
@@ -18,6 +19,12 @@ export default function Content() {
     handleFilterChange,
     translate,
   } = useContent();
+
+
+  const CurrentComponent = useEmptyStates(
+    <TableRows contentData={currentPageRows} />,
+    currentPageRows.length > 0
+  );
   return (
     <>
       <Layout>
@@ -28,7 +35,7 @@ export default function Content() {
         />
         <TableLayout>
           <TableHeadings />
-          <TableRows contentData={currentPageRows} />
+         {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}
