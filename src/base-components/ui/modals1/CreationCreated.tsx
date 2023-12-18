@@ -4,17 +4,7 @@ import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
 
-const CreationCreated = ({
-  onClose,
-  heading,
-  subHeading,
-  route,
-}: {
-  onClose: () => void;
-  heading: string;
-  subHeading: string;
-  route: () => void;
-}) => {
+const CreationCreated = ({ onClose, heading, subHeading, route }: { onClose: () => void; heading:string; subHeading:string; route:() => void }) => {
   const { t: translate } = useTranslation();
   return (
     <>

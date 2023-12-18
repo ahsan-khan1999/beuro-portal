@@ -4,17 +4,27 @@ import DetailsCard from "@/layout/customers/DetailsCard";
 import OfferDetailsCard from "./OfferDetailsCard";
 import OffersDetailsData from "./OffersDetailsData";
 import useOfferDetails from "@/hooks/offers/useOfferDetails";
+import ComposeMail from "../compose-mail/ComposeMail";
 
 const OfferDetails = () => {
-  const { offerDeleteHandler, offerDetails, renderModal, handleImageUpload, handleNotes,handlePaymentStatusUpdate,handleStatusUpdate,handleSendEmail } = useOfferDetails()
+  const { offerDeleteHandler, offerDetails, renderModal, handleImageUpload, handleNotes, handlePaymentStatusUpdate, handleStatusUpdate, handleSendEmail, isSendEmail, setIsSendEmail ,onNextHandle} = useOfferDetails()
   return (
     <Layout>
       <DetailsCard>
-        <OfferDetailsCard offerDetails={offerDetails} offerDeleteHandler={offerDeleteHandler} handleNotes={handleNotes} handleImageUpload={handleImageUpload} handleStatusUpdate={handleStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate} handleSendEmail={handleSendEmail}/>
+        <OfferDetailsCard offerDetails={offerDetails} offerDeleteHandler={offerDeleteHandler} handleNotes={handleNotes} handleImageUpload={handleImageUpload} handleStatusUpdate={handleStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate} handleSendEmail={handleSendEmail} isSendEmail={isSendEmail} />
       </DetailsCard>
 
       <div className="w-full mt-7">
-        <OffersDetailsData offerDetails={offerDetails} />
+        {
+          isSendEmail ?
+            <ComposeMail
+              backRouteHandler={handleSendEmail}
+              onNextHandle={onNextHandle}
+            />
+            :
+
+            <OffersDetailsData offerDetails={offerDetails} />
+        }
       </div>
       {renderModal()}
     </Layout>

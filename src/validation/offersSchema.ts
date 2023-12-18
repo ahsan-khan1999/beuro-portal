@@ -182,12 +182,12 @@ export const generateAddfferServiceDetailsValidation = (
 
     [AddServiceOfferDetails.discountType]: yup
       .boolean().when("isDiscount", {
-        is: (isDiscount: boolean) => isDiscount === true,
+        is: (isDiscount: boolean) => isDiscount,
         then: () => yup.boolean().notRequired(),
       }),
     [AddServiceOfferDetails.discountAmount]: yup
       .number().when("isDiscount", {
-        is: (isDiscount: boolean) => isDiscount === true,
+        is: (isDiscount: boolean) => isDiscount,
         then: () => yup.number().required(translate("validationMessages.required")),
       }),
     [AddServiceOfferDetails.taxAmount]: yup

@@ -71,6 +71,7 @@ export interface InvoiceCardContentProps {
   handleRecurringInvoiceCreation: () => void;
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
+  handleSendEmail: () => void
 }
 
 export interface InvoiceDetailsTableProps {

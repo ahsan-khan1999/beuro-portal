@@ -40,6 +40,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   setValue
 ) => {
   const { t: translate } = useTranslation();
+  console.log(lead, "lad");
 
   let formField: FormField[] = [
     {
@@ -69,10 +70,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked:
-                      (offerDetails?.id &&
-                        offerDetails?.type === "New Customer") ||
-                      type === "New Customer",
+                    checked: type === "New Customer",
                   },
                 },
                 {
@@ -85,8 +83,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                     name: "type",
                     register,
                     checked:
-                      (offerDetails?.id &&
-                        offerDetails?.type === "Existing Customer") ||
+
                       type === "Existing Customer",
                   },
                 },
@@ -164,7 +161,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "phoneNumber",
               country: "ch",
               control,
-              value: offerDetails?.id
+              value: type === "New Customer" ? "" : offerDetails?.id
                 ? offerDetails?.leadID?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.phoneNumber,
             },
@@ -183,7 +180,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "mobileNumber",
               country: "ch",
               control,
-              value: offerDetails?.id
+              value: type === "New Customer" ? "" : offerDetails?.id
                 ? offerDetails?.leadID?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.mobileNumber,
             },
@@ -350,7 +347,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         setValue: setValue,
       },
     };
-    const divField = formField[fieldIndex]?.field as DivProps; // Assert type
+    const divField = formField[fieldIndex]?.field as DivProps;
     if (divField && Array.isArray(divField.children)) {
       divField.children.splice(fieldIndex + 3, 0, companyNameField as any);
     }
@@ -385,13 +382,13 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         control,
         onItemChange: onCustomerSelect,
         value: offerDetails?.id
-          ? offerDetails?.customerID?.id
+          ? offerDetails?.leadID?.customerID
           : customerDetails && customerDetails?.id,
         setValue,
       },
     };
 
-    const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
+    const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps;
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
       divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
     }
@@ -417,16 +414,16 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         type: Field.select,
         id: "leadID",
         name: "leadID",
-        options: lead?.map((item, key) => ({
+        options: lead?.map((item) => ({
           value: item.id,
           label: item.refID,
+          key: item.id
         })),
-
         control,
         value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id || offerDetails?.leadID?.id,
       },
     };
-    const divField = formField[fieldLeadIndex]?.field as DivProps; // Assert type
+    const divField = formField[fieldLeadIndex]?.field as DivProps;
     if (divField && Array.isArray(divField.children)) {
       divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
     }

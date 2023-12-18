@@ -138,7 +138,7 @@ export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
         try {
 
             const response = await apiServices.sendOfferEmail(data);
-            return response?.data?.Offer;
+            return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;

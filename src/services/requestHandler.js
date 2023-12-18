@@ -76,8 +76,9 @@ const SERVICE_URLS = {
   mail: "/mailtracker",
   offerSendEmail: "/offer/send-email/",
   emailSettings: "/setting/mail-setting/mail-setting",
-  createEmailSettings:"/setting/mail-setting/email-configration"
-
+  createEmailSettings: "/setting/mail-setting/email-configration",
+  composeEmail: "/contract/send-email/",
+  composeInvoiceEmail:"/invoice/invoice-collection/send-email/"
 };
 
 const login = (data) =>
@@ -238,7 +239,7 @@ const createInvoice = (data) =>
   post(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
 
 const updateInvoice = (data) =>
-  put(SERVICE_URLS.updateInvoiceCollection + `${data?.id}`, data, { feature: featureConstants.login });
+  post(SERVICE_URLS.updateInvoiceCollection + `${data?.id}`, data, { feature: featureConstants.login });
 const stopRecurringInvoice = (data) =>
   put(SERVICE_URLS.invoice + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteInvoice = (data) =>
@@ -369,6 +370,11 @@ const readMailSettings = (params) =>
   get(SERVICE_URLS.emailSettings, params, { feature: featureConstants.login }, { detail: false });
 const createMailSettings = (params) =>
   post(SERVICE_URLS.createEmailSettings, params, { feature: featureConstants.login });
+const sendContractEmail = (params) =>
+  put(SERVICE_URLS.composeEmail + `${params?.id}`, params, { feature: featureConstants.login });
+const sendInvoiceEmail = (params) =>
+  put(SERVICE_URLS.composeInvoiceEmail + `${params?.id}`, params, { feature: featureConstants.login });
+
 const apiServices = {
 
   login,
@@ -489,6 +495,8 @@ const apiServices = {
   readTaxSettings,
   createTaxSettings,
   readMailSettings,
-  createMailSettings
+  createMailSettings,
+  sendContractEmail,
+  sendInvoiceEmail
 };
 export default apiServices;

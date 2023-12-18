@@ -18,9 +18,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   readCustomer,
   setCustomerDetails,
+  setCustomers,
 } from "@/api/slices/customer/customerSlice";
 import { updateQuery } from "@/utils/update-query";
-import { readLead } from "@/api/slices/lead/leadSlice";
+import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import {
   createOffer,
@@ -81,7 +82,6 @@ export const useEditOfferDetails = ({
           );
           reset({
             type: "Existing Customer",
-            customerID: res?.payload?.leadID?.customerID,
             leadID: res?.payload?.leadID?.id,
             customerType: getKeyByValue(staticEnums["CustomerType"], res?.payload?.leadID?.customerDetail?.customerType),
             fullName: res?.payload?.leadID?.customerDetail?.fullName,
@@ -92,29 +92,69 @@ export const useEditOfferDetails = ({
             title: res?.payload?.title,
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
+            customerID: res?.payload?.leadID?.customerID,
           });
         }
       );
     }
   }, [offer]);
-  useEffect(() => {
-    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }));
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }));
-  }, []);
-
   const type = watch("type");
 
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
+  useEffect(() => {
+    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }))
+    dispatch(readContent({ params: { filter: { paginate: 0 } } }));
+
+  }, []);
+
+
   useMemo(() => {
-    if (type && customerID)
+    if (type && customerID) {
       dispatch(
         readLead({
           params: { filter: { customerID: customerID, paginate: 0 } },
         })
       );
+    }
+
   }, [customerID]);
+
+  useMemo(() => {
+    if (type === "New Customer") {
+      reset({
+        ...offerDetails,
+        leadID: null,
+        customerType: null,
+        fullName: null,
+        email: null,
+        phoneNumber: null,
+        mobileNumber: null,
+        address: null,
+        customerID: "",
+        type: "New Customer",
+        content: offerDetails?.content?.id,
+
+      })
+    } else {
+      reset({
+        type: "Existing Customer",
+        leadID: offerDetails?.leadID?.id,
+        customerType: getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title: offerDetails?.title,
+        address: offerDetails?.leadID?.customerDetail?.address,
+        date: offerDetails?.date,
+        customerID: offerDetails?.leadID?.customerID,
+      });
+    }
+
+  }, [type]);
 
   const {
     fields: testFields,
@@ -144,7 +184,8 @@ export const useEditOfferDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   };
-  
+  console.log(offerDetails, "offerDetails");
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -194,7 +235,13 @@ export const useEditOfferDetails = ({
     const res = await dispatch(
       createOffer({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) handleNext(EditComponentsType.addressEdit);
+    if (res?.payload) {
+      if (data?.type === "New Customer") {
+        dispatch(setLeads([...lead, res?.payload?.leadID]))
+        dispatch(setCustomers([...customer, { ...res?.payload?.leadID?.customerDetail, id: res?.payload?.leadID?.customerID }]))
+      }
+      handleNext(EditComponentsType.addressEdit)
+    };
   };
 
   return {

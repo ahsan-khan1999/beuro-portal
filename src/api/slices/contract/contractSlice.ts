@@ -125,7 +125,19 @@ export const updateContractPaymentStatus: AsyncThunk<boolean, object, object> | 
             return false;
         }
     });
+export const sendContractEmail: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("send/contract/email", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
 
+        try {
+            await apiServices.sendContractEmail(data);
+            return true;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const ContractSlice = createSlice({
     name: "ContractSlice",
     initialState,
@@ -199,6 +211,15 @@ const ContractSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updateContractStatus.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(sendContractEmail.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(sendContractEmail.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(sendContractEmail.rejected, (state) => {
             state.loading = false
         })
 

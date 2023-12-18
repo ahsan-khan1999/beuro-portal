@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField } from "@/types";
+import { FormField, GenerateContractFormField, GenerateInvoiceEmailFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const ContractEmailPreviewFormField: GenerateContractFormField = (
+export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   register,
   loading,
   control,
@@ -96,7 +96,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
-        value: details?.offerID?.content?.confirmationContent?.description
+        value: details?.contractID?.offerID?.content?.invoiceContent?.description
 
       },
     },

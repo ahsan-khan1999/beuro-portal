@@ -130,7 +130,7 @@ export const useServiceOfferEditDetail = ({
         console.warn("Amount should not be greater than total price");
       }
     } else {
-      setValue("discountAmount", "");
+      setValue("discountAmount", 0);
     }
 
     const grandTotal = totalPrices + taxAmount - discount;
@@ -141,7 +141,8 @@ export const useServiceOfferEditDetail = ({
       taxAmount: taxAmount,
     });
   };
-
+  console.log(offerDetails);
+  
   useMemo(() => {
     generateGrandTotal();
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
@@ -160,7 +161,7 @@ export const useServiceOfferEditDetail = ({
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
-        discountAmount: offerDetails?.discountAmount,
+        discountAmount: offerDetails?.discountAmount || 0,
         discountDescription: offerDetails?.discountDescription,
       });
     }

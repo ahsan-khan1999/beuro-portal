@@ -35,6 +35,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  
   useEffect(() => {
     reset({
       ...user,

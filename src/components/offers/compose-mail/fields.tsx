@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField } from "@/types";
+import { FormField, GenerateContractFormField, GenerateOfferFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const ContractEmailPreviewFormField: GenerateContractFormField = (
+export const OfferEmailFormField: GenerateOfferFormField = (
   register,
   loading,
   control,
@@ -12,7 +12,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   contentDetails,
   onContentSelect,
   attachements, setAttachements,
-  details
+  offerDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -56,7 +56,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               // options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
               register,
               // onItemChange: onContentSelect,
-              // value: details?.content?.offerContent?.title
+              // value: offerDetails?.content?.offerContent?.title
             },
           },
         ],
@@ -96,7 +96,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
-        value: details?.offerID?.content?.confirmationContent?.description
+        value: offerDetails?.content?.offerContent?.description
 
       },
     },

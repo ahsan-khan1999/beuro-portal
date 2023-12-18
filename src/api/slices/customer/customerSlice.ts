@@ -122,6 +122,9 @@ const customerSlice = createSlice({
         setCustomerDetails: (state, action) => {
             state.customerDetails = action.payload;
         },
+        setCustomers: (state, action) => {
+            state.customer = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readCustomer.pending, (state) => {
@@ -178,4 +181,4 @@ const customerSlice = createSlice({
 })
 
 export default customerSlice.reducer;
-export const { setErrorMessage, setCustomerDetails } = customerSlice.actions
+export const { setErrorMessage, setCustomerDetails, setCustomers } = customerSlice.actions

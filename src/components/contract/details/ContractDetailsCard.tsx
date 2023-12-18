@@ -24,6 +24,7 @@ const ContractDetailsCard = ({
   handlePaymentStatusUpdate,
   handleStatusUpdate,
   offerDeleteHandler,
+  handleSendEmail
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -45,7 +46,7 @@ const ContractDetailsCard = ({
 
         <div className="flex gap-x-[22px]">
           <button
-            onClick={() => router.push("/contract/compose-mail")}
+            onClick={handleSendEmail}
             className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex  items-center px-4 py-[6px] "
           >
             <Image src={cofirmation_icon} alt="create_offer_icon" />

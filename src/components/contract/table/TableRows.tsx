@@ -29,13 +29,13 @@ const TableRows = ({
               {item.contractNumber}
             </span>
             <span className="py-4 flex items-center">
-              {item.offerID?.customerID?.fullName}
+              {item.offerID?.leadID?.customerDetail?.fullName}
             </span>
             <span className="hidden xs:flex mlg:hidden xlg:hidden maxSize:hidden  xMaxSize:flex py-4 items-center">
               {item.offerID?.title}
             </span>
             <span className="py-4 flex items-center">
-              {item.offerID?.totalPrice}
+              {item.offerID?.total}
             </span>
             <span className="py-4 flex  items-center">
               {formatDateString(item.createdAt)}

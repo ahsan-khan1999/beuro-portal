@@ -1138,7 +1138,7 @@
       "mark_it_recuring": "Mark it Recuring",
       "date_of_invoice": "Date of next invoice",
       "frequency": "Frequency",
-      "button": "Create Invoice",
+      "button": "Save",
       "update_invoice": "Edit Invoice",
 
       "recurring_button": "Create Recurring Invoice"
