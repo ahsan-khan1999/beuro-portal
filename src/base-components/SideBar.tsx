@@ -39,7 +39,7 @@ export const svgs = {
 };
 
 const SideBar = () => {
-  const userRole = 1;
+  const userRole = 0;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   return (

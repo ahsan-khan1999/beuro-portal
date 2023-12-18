@@ -13,6 +13,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import MonthSelect from "@/base-components/ui/modals1/MonthSelect";
 import { useTranslation } from "next-i18next";
 import DownloadModal from "@/base-components/ui/modals1/DownloadModal";
+import { GetYearAndMonth } from "@/types/admin/payments";
 
 export default function Payments() {
   const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
@@ -28,12 +29,13 @@ export default function Payments() {
   };
 
   const handleSelectMonth = () => {
-    dispatch(updateModalType(ModalType.SELECT_MONTH));
+    dispatch(updateModalType({type: ModalType.SELECT_MONTH}));
   };
 
-  const handleDownload = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.DOWNLOAD_MODAL));
+  const handleDownload = (date: GetYearAndMonth) => {
+    dispatch(updateModalType({type: ModalType.NONE}));
+    dispatch(updateModalType({type: ModalType.DOWNLOAD_MODAL}));
+    console.log(date)
   };
 
   const route = () => {

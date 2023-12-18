@@ -7,6 +7,7 @@ export enum DropDownKeys {
   DROP_DOWN_CLASS_NAME = "dropDownClassName",
   DROP_DOWN_TEXT_CLASS_NAME = "dropDownTextClassName",
   DROP_DOWN_ICON_CLASS_NAME = "dropDownIconClassName",
+  DROP_DOWN_ITEMS_Container_CLASS_NAME = "dropDownItemsContainerClassName",
   DROP_DOWN_DISABLED = 'dropDownDisabled',
   SHOULD_NOT_SELECT_ITEM = 'shouldNotSelectItem',
 }
@@ -48,14 +49,12 @@ export enum ModalType {
   UPDATE_SUCCESS,
   EMPLOYEE_SUCCESS,
   UPLOAD_OFFER_IMAGE,
-
   ARE_YOU_SURE_CUSTOMER,
   SELECT_MONTH,
   DOWNLOAD_MODAL,
   RECURRING_INVOICE,
   RECURRING_INVOICE_FREQUENCY,
   INVOICE_UPDATE,
-
 
 }
 export type ModalConfigType = {

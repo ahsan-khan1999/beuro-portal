@@ -27,9 +27,6 @@ const TableHeading = () => {
       <span className="font-medium text-[#8F8F8F]  flex items-center justify-center">
         {translate("admin.customers_details.table_headings.status")}
       </span>
-      <span className="font-medium text-[#8F8F8F]  flex items-center justify-center">
-        {translate("admin.customers_details.table_headings.login")}
-      </span>
       <span className="font-medium text-[#8F8F8F]  rounded-md"></span>
     </div>
   );

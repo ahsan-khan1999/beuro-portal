@@ -6,12 +6,22 @@ import { useTranslation } from "next-i18next";
 import warningIcon from "@/assets/svgs/warning_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
-const WarningModal = ({ onClose, handleCreated }: { onClose: () => void, handleCreated: () => void }) => {
+const WarningModal = ({
+  onClose,
+  handleCreated,
+}: {
+  onClose: () => void;
+  handleCreated: () => void;
+}) => {
   const { t: translate } = useTranslation();
   const [confirmCompany, setConfirmCompany] = useState(false);
 
   const handleYesButtonClick = () => {
     setConfirmCompany(true);
+  };
+
+  const handleCompanyCancelButton = () => {
+    confirmCompany ? setConfirmCompany(false) : onClose();
   };
 
   return (
@@ -52,7 +62,10 @@ const WarningModal = ({ onClose, handleCreated }: { onClose: () => void, handleC
           </div>
 
           <div className="flex gap-[36px] mt-[40px]">
-            <button className="py-[11px] px-[25px] w-[177px] text-[#fff] bg-[#BFBFBF] rounded-md">
+            <button
+              className="py-[11px] px-[25px] w-[177px] text-[#fff] bg-[#BFBFBF] rounded-md"
+              onClick={handleCompanyCancelButton}
+            >
               {translate("common.are_you_sure_modal.cancel_button")}
             </button>
             {!confirmCompany && (
@@ -64,7 +77,10 @@ const WarningModal = ({ onClose, handleCreated }: { onClose: () => void, handleC
               </button>
             )}
             {confirmCompany && (
-              <button onClick={handleCreated} className="p-4 text-[#fff] w-[177px] bg-[#4A13E7] rounded-md">
+              <button
+                onClick={handleCreated}
+                className="p-4 text-[#fff] w-[177px] bg-[#4A13E7] rounded-md"
+              >
                 {translate("common.are_you_sure_modal.confirm_button")}
               </button>
             )}

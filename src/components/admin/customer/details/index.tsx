@@ -1,6 +1,6 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
-import React from "react";
+import React, { useState } from "react";
 import DetailsData from "../DetailsData";
 
 import useCustomerDetail from "@/hooks/admin/customer/useCustomerDetail";
@@ -14,28 +14,20 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const CustomerDetails = () => {
-  const { customerDetail, handlePreviousClick } = useCustomerDetail(true);
-  const { t: translate } = useTranslation();
-  const router = useRouter();
+  const {
+    customerDetail,
+    translate,
+    isCustomerFree,
+    modal,
+    handleAreYouSure,
+    handleCreated,
+    onClose,
+    route,
+    handlePreviousClick,
+  } = useCustomerDetail(true);
 
-  const { modal } = useAppSelector((state) => state.global);
-  const dispatch = useAppDispatch();
-
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const route = () => {
-    onClose();
-  };
-
-  const handleAreYouSure = () => {
-    dispatch(updateModalType(ModalType.ARE_YOU_SURE_CUSTOMER));
-  };
-
-  const handleCreated = () => {
-    dispatch(updateModalType(ModalType.NONE));
-    dispatch(updateModalType(ModalType.CREATION));
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -45,15 +37,13 @@ const CustomerDetails = () => {
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate("common.are_you_sure_modal.success")}
+        subHeading={translate(
+          "admin.customers_details.card_content.customer_free"
+        )}
         onClose={onClose}
         route={route}
       />
     ),
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
   };
 
   return (
@@ -64,6 +54,7 @@ const CustomerDetails = () => {
             customerDetail={customerDetail}
             handlePreviousClick={handlePreviousClick}
             handleAreYouSure={handleAreYouSure}
+            isCustomerFree={isCustomerFree}
           />
         </DetailsCard>
         <div className="flex mt-8">

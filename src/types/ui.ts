@@ -23,14 +23,17 @@ export interface DropDownProps {
   [DropDownKeys.CHILDREN]?: React.ReactElement<SVGElement>;
   [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_TEXT_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_ICON_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_DISABLED]?: boolean;
+  [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
 }
 
 export interface DropDownItemsProps {
   items: DropDownItem[];
   onItemClick: (data: string) => void;
+  containerClassName?: string;
 }
 export interface SearchInputProps {
   onInputChange: (value: string) => void;

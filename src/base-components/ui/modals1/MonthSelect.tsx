@@ -1,13 +1,13 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { useTranslation } from "next-i18next";
 import { MonthSelectModalProps } from "@/types/admin/payments";
+import { DropDown } from "../dropDown/drop-down";
 
 const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
   const { t: translate } = useTranslation();
-
   const months: string[] = [
     `${translate("common.select_month_modal.months.jan")}`,
     `${translate("common.select_month_modal.months.feb")}`,
@@ -23,10 +23,34 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
     `${translate("common.select_month_modal.months.dec")}`,
   ];
 
-  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const currentYear = new Date().getFullYear();
+  const years = useMemo(() => {
+    const startYear = 1980;
+    const newYears = Array.from(
+      { length: currentYear - startYear + 1 },
+      (_, k) => startYear + k
+    );
+    return newYears;
+  }, [currentYear]);
 
-  const handleItemClick = (index: number) => {
-    setSelectedItem(index);
+  const [year, setYear] = useState(currentYear);
+  const [month, setMonth] = useState("");
+
+  const handleIncrementYear = useCallback(() => {
+    setYear((prevYear) => (prevYear < currentYear ? prevYear + 1 : prevYear));
+  }, []);
+
+  const handleDecrementYear = useCallback(() => {
+    setYear((prevYear) => (prevYear > 1980 ? prevYear - 1 : prevYear));
+  }, []);
+
+  const handleItemClick = (selectedMonth: string) => {
+    setMonth(selectedMonth);
+  };
+
+  const handleSelection = () => {
+    console.log(year, month);
+    handleDownload({ month: month, year: year });
   };
 
   return (
@@ -48,48 +72,48 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
             </p>
 
             <div className="flex justify-between items-center ">
-              <div className="flex items-center gap-x-3">
-                <span className="text-base text-[#7B18FF] font-medium">
-                  2023
-                </span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="8"
-                  viewBox="0 0 14 8"
-                  fill="none"
-                >
-                  <path
-                    d="M0.279443 0.556594C0.463428 0.372665 0.712931 0.26934 0.973085 0.26934C1.23324 0.26934 1.48274 0.372666 1.66673 0.556595L6.5232 5.41307L11.3797 0.556596C11.5647 0.37788 11.8125 0.27899 12.0698 0.281225C12.327 0.283461 12.5731 0.386643 12.755 0.568548C12.9369 0.750453 13.0401 0.996527 13.0423 1.25377C13.0446 1.51101 12.9457 1.75884 12.767 1.94388L7.21684 7.494C7.03286 7.67793 6.78335 7.78125 6.5232 7.78125C6.26305 7.78125 6.01354 7.67793 5.82956 7.494L0.279443 1.94388C0.0955141 1.75989 -0.0078114 1.51039 -0.00781136 1.25024C-0.00781131 0.990082 0.0955143 0.740579 0.279443 0.556594Z"
-                    fill="#4B4B4B"
-                  />
-                </svg>
-              </div>
+              <DropDown
+                items={years.map((y) => ({ item: String(y) }))}
+                onItemSelected={(selectedYear) =>
+                  setYear(parseInt(selectedYear))
+                }
+                selectedItem={String(year)}
+                dropDownClassName="w-[100px]"
+                dropDownIconClassName="text-gray"
+                dropDownTextClassName="text-primary"
+                dropDownItemsContainerClassName="w-[100px]"
+              />
               <div className="flex items-center gap-x-[18px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="14"
-                  viewBox="0 0 8 14"
-                  fill="none"
-                >
-                  <path
-                    d="M7.21684 0.787255C7.40077 0.971239 7.5041 1.22074 7.5041 1.4809C7.5041 1.74105 7.40077 1.99055 7.21684 2.17454L2.36037 7.03101L7.21684 11.8875C7.39556 12.0725 7.49445 12.3204 7.49221 12.5776C7.48998 12.8348 7.3868 13.0809 7.20489 13.2628C7.02299 13.4447 6.77691 13.5479 6.51967 13.5501C6.26243 13.5524 6.0146 13.4535 5.82956 13.2748L0.279442 7.72466C0.0955127 7.54067 -0.0078128 7.29117 -0.00781279 7.03101C-0.00781277 6.77086 0.0955127 6.52136 0.279442 6.33737L5.82956 0.787255C6.01354 0.603326 6.26305 0.5 6.5232 0.5C6.78336 0.5 7.03286 0.603326 7.21684 0.787255Z"
-                    fill="#4B4B4B"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="14"
-                  viewBox="0 0 8 14"
-                  fill="none"
-                >
-                  <path
-                    d="M0.279251 0.787255C0.0953217 0.971239 -0.00800416 1.22074 -0.00800415 1.4809C-0.00800413 1.74105 0.0953217 1.99055 0.279251 2.17454L5.13573 7.03101L0.279251 11.8875C0.100535 12.0725 0.00164465 12.3204 0.00388008 12.5776C0.0061155 12.8348 0.109297 13.0809 0.291203 13.2628C0.473107 13.4447 0.719181 13.5479 0.976424 13.5501C1.23367 13.5524 1.4815 13.4535 1.66653 13.2748L7.21665 7.72466C7.40058 7.54067 7.50391 7.29117 7.50391 7.03101C7.50391 6.77086 7.40058 6.52136 7.21665 6.33737L1.66653 0.787255C1.48255 0.603326 1.23305 0.5 0.972892 0.5C0.712738 0.5 0.463235 0.603326 0.279251 0.787255Z"
-                    fill="#4B4B4B"
-                  />
-                </svg>
+                <button onClick={handleDecrementYear}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="14"
+                    viewBox="0 0 8 14"
+                    fill="none"
+                    className="cursor"
+                  >
+                    <path
+                      d="M7.21684 0.787255C7.40077 0.971239 7.5041 1.22074 7.5041 1.4809C7.5041 1.74105 7.40077 1.99055 7.21684 2.17454L2.36037 7.03101L7.21684 11.8875C7.39556 12.0725 7.49445 12.3204 7.49221 12.5776C7.48998 12.8348 7.3868 13.0809 7.20489 13.2628C7.02299 13.4447 6.77691 13.5479 6.51967 13.5501C6.26243 13.5524 6.0146 13.4535 5.82956 13.2748L0.279442 7.72466C0.0955127 7.54067 -0.0078128 7.29117 -0.00781279 7.03101C-0.00781277 6.77086 0.0955127 6.52136 0.279442 6.33737L5.82956 0.787255C6.01354 0.603326 6.26305 0.5 6.5232 0.5C6.78336 0.5 7.03286 0.603326 7.21684 0.787255Z"
+                      fill="#4B4B4B"
+                    />
+                  </svg>
+                </button>
+                <button onClick={handleIncrementYear}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="14"
+                    viewBox="0 0 8 14"
+                    fill="none"
+                    onClick={handleIncrementYear}
+                  >
+                    <path
+                      d="M0.279251 0.787255C0.0953217 0.971239 -0.00800416 1.22074 -0.00800415 1.4809C-0.00800413 1.74105 0.0953217 1.99055 0.279251 2.17454L5.13573 7.03101L0.279251 11.8875C0.100535 12.0725 0.00164465 12.3204 0.00388008 12.5776C0.0061155 12.8348 0.109297 13.0809 0.291203 13.2628C0.473107 13.4447 0.719181 13.5479 0.976424 13.5501C1.23367 13.5524 1.4815 13.4535 1.66653 13.2748L7.21665 7.72466C7.40058 7.54067 7.50391 7.29117 7.50391 7.03101C7.50391 6.77086 7.40058 6.52136 7.21665 6.33737L1.66653 0.787255C1.48255 0.603326 1.23305 0.5 0.972892 0.5C0.712738 0.5 0.463235 0.603326 0.279251 0.787255Z"
+                      fill="#4B4B4B"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -97,9 +121,9 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
               {months.map((item, index) => (
                 <span
                   key={index}
-                  onClick={() => handleItemClick(index)}
+                  onClick={() => handleItemClick(item)}
                   className={`cursor-pointer px-[25px] py-[6px] rounded-md text-base font-medium ${
-                    selectedItem === index
+                    month === item
                       ? "bg-[#4A13E7]  text-white"
                       : "bg-[#4A13E7] bg-opacity-5 text-[#1E1E1E]"
                   }`}
@@ -110,7 +134,7 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
             </div>
 
             <button
-              onClick={() => handleDownload()}
+              onClick={handleSelection}
               className="bg-[#4A13E7] text-white rounded-lg w-full p-4 mt-5"
             >
               {translate("common.select_month_modal.button")}

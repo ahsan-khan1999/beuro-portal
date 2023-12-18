@@ -1,5 +1,7 @@
+import { DropDownItem } from "@/types";
 import { SupportRequestAdmin } from "@/types/admin/support-request";
 import { supportRequestData } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -9,6 +11,20 @@ export default function useSupportDetail(stage: boolean) {
     supportRequestData[0]
   );
 
+  const { t: translate } = useTranslation();
+
+  const items: DropDownItem[] = [
+    {
+      item: translate(
+        "admin.customers_details.card_content.customer_status.active"
+      ),
+    },
+    {
+      item: translate(
+        "admin.customers_details.card_content.customer_status.block"
+      ),
+    },
+  ];
   const id = router.query.supportRequest;
 
   useEffect(() => {
@@ -27,6 +43,7 @@ export default function useSupportDetail(stage: boolean) {
 
   return {
     supportDetail,
+    status: items,
     handlePreviousClick,
   };
 }

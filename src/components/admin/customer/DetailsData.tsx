@@ -5,25 +5,34 @@ import React, { useState } from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import unCheckedIcon from "@/assets/svgs/uncheck.svg";
 import checkedIcon from "@/assets/svgs/checked_icon.svg";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { DropDownItem } from "@/types";
 
 const DetailsData = ({
   customerDetail,
+  isCustomerFree,
   handlePreviousClick,
   handleAreYouSure,
 }: {
   customerDetail: CustomersAdmin;
+  isCustomerFree: boolean;
   handlePreviousClick: () => void;
   handleAreYouSure: () => void;
 }) => {
   const { t: translate } = useTranslation();
-  const [toggleSvg, setToggleSvg] = useState(true);
-  const [buttonText, setButtonText] = useState("Make Account Free");
 
-  const handleSecondSvgClick = () => {
-    setToggleSvg(false);
-    handleAreYouSure();
-    setButtonText("Make Infinite");
-  };
+  const items: DropDownItem[] = [
+    {
+      item: translate(
+        "admin.customers_details.card_content.customer_status.active"
+      ),
+    },
+    {
+      item: translate(
+        "admin.customers_details.card_content.customer_status.block"
+      ),
+    },
+  ];
 
   return (
     <>
@@ -37,15 +46,15 @@ const DetailsData = ({
           </h1>
         </div>
         <button
-          onClick={handleSecondSvgClick}
+          onClick={handleAreYouSure}
           className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
         >
-          {toggleSvg ? (
+          {!isCustomerFree ? (
             <Image src={unCheckedIcon} alt="unCheckedIcon" />
           ) : (
-            <Image src={checkedIcon} alt="unCheckedIcon" />
+            <Image src={checkedIcon} alt="CheckedIcon" />
           )}
-          {buttonText}
+          {isCustomerFree ? "Make Infinite" : "Make Account Free"}
         </button>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -87,10 +96,18 @@ const DetailsData = ({
           </h3>
         </div>
         <div className="mt-5 grid grid-cols-2 xl:grid-cols-4">
-          <h3 className="text-[#4D4D4D] ">
+          <h3 className="text-[#4D4D4D] flex items-center">
             {translate("admin.customers_details.card_content.status")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.status}
+              <DropDown
+                items={items}
+                onItemSelected={(selectedItem) => console.log(selectedItem)}
+                selectedItem={items[0].item}
+                dropDownClassName="w-[108px] border border-primary"
+                dropDownTextClassName="text-primary font-medium"
+                dropDownIconClassName="text-primary"
+                dropDownItemsContainerClassName="border border-primary"
+              />
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
