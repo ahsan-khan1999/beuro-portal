@@ -13,7 +13,7 @@ enum CheckData {
 }
 import emptyState from "@/assets/svgs/empty-state.svg";
 import ComposeMail from "./compose-mail/ComposeMail";
-import NoDataEmptyState from "./invoice-empty-state";
+import NoDataEmptyState from "../../../base-components/loadingEffect/no-data-empty-state";
 const InvoiceDetails = () => {
   const check = (Currentcomponent: JSX.Element, val: CheckData) => {
     const isData = {

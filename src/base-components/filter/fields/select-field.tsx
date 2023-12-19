@@ -32,8 +32,7 @@ export default function SelectField({
     <div className={containerClasses} ref={ref}>
       <div
         className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full"
-        onClick={handleToggle}
-      >
+        onClick={handleToggle}>
         <span className="text-[#393939] text-sm font-normal">{label}</span>
         <DropDownNonFillIcon
           label={label}
@@ -49,20 +48,18 @@ export default function SelectField({
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
+            transition={{ duration: 0.3 }}>
             <div className="flex-col space-y-2">
               {options.map((item, key) => (
                 <div
-                  className="flex justify-center hover:bg-lightGray rounded-md cursor-pointer"
-                  key={key}
-                >
+                  className="flex justify-center py-1 hover:bg-lightGray rounded-md cursor-pointer"
+                  key={key}>
                   <span
+                 
                     onClick={() => {
                       handleChange(item);
                       setIsOpen;
-                    }}
-                  >
+                    }}>
                     {item}
                   </span>
                 </div>

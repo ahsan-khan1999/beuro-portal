@@ -6,7 +6,7 @@ import { readService } from "@/api/slices/service/serviceSlice";
 import { useTranslation } from "next-i18next";
 
 const useService = () => {
-  const { service, lastPage, totalCount } = useAppSelector(state => state.service)
+  const { service, lastPage, totalCount,loading } = useAppSelector(state => state.service)
   const [filter, setFilter] = useState<FilterType>({
     sortBy: "",
     text: "",
@@ -50,7 +50,8 @@ const useService = () => {
     handleFilterChange,
     filter,
     setFilter,
-    translate
+    translate,
+    loading
   };
 };
 

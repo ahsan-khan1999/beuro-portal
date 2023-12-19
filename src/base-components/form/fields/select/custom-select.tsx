@@ -8,6 +8,9 @@ import Image from "next/image";
 import { useMemo, useRef, useState, useEffect } from "react";
 // import searchIcon from "@/assets/svgs/search.svg";
 
+import { AnimatePresence, motion } from "framer-motion";
+
+
 export const SelectBox = ({
   id,
   options,
@@ -83,8 +86,12 @@ export const SelectBox = ({
           />
         )}
       </button>
+      <AnimatePresence>
       {!disabled && isOpen && (
-        <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10">
+        <motion.ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10"  initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}>
           <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
             {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
 
@@ -104,8 +111,9 @@ export const SelectBox = ({
               {label}
             </li>
           ))}
-        </ul>
+        </motion.ul>
       )}
+      </AnimatePresence>
     </div>
   );
 };

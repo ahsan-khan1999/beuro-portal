@@ -18,31 +18,31 @@ export default function Employees() {
     handleFilterChange,
     setFilter,
     translate,
+    loading,
   } = useEmployee();
 
   const CurrentComponent = useEmptyStates(
     <TableRows employsData={currentPageRows} />,
-    currentPageRows.length > 0
+    currentPageRows.length > 0,
+    loading
   );
 
   return (
-    <>
-      <Layout>
-        <TableFunctions
-          filter={filter}
-          setFilter={setFilter}
-          handleFilterChange={handleFilterChange}
-        />
-        <TableLayout>
-          <TableHeadings />
-       {CurrentComponent}
-        </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      </Layout>
-    </>
+    <Layout>
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
+      <TableLayout>
+        <TableHeadings />
+        {CurrentComponent}
+      </TableLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
+    </Layout>
   );
 }

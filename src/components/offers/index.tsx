@@ -20,15 +20,18 @@ export default function Offers() {
     filter,
     setFilter,
     handleFilterChange,
+    loading,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
     <TableRows
-            dataToAdd={currentPageRows}
-            openModal={handleNotes}
-            handleImageUpload={handleImageUpload}
-          />,
-    currentPageRows.length > 0
+      dataToAdd={currentPageRows}
+      openModal={handleNotes}
+      handleImageUpload={handleImageUpload}
+    />,
+    currentPageRows.length > 0,
+    loading
+
   );
 
   return (
@@ -41,7 +44,7 @@ export default function Offers() {
         />
         <TableLayout>
           <TableHeading />
-         {CurrentComponent}
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

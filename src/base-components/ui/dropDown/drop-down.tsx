@@ -4,6 +4,7 @@ import { DropDownProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
+import { AnimatePresence } from "framer-motion";
 
 export const DropDown = ({
   label,
@@ -44,15 +45,13 @@ export const DropDown = ({
       className={`flex flex-col w-full gap-y-2 ${
         dropDownDisabled ? "pointer-events-none" : ""
       }`}
-      ref={dropdownRef}
-    >
+      ref={dropdownRef}>
       {label && <label className="text-sm text-gray">{label}</label>}
       <div className="relative w-full">
         <button
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
-          onClick={() => setIsOpen((prevState) => !prevState)}
-        >
+          onClick={() => setIsOpen((prevState) => !prevState)}>
           {children}
           <span className={textClasses}>{selectedItem}</span>
           <DropDownNonFillIcon
@@ -60,13 +59,15 @@ export const DropDown = ({
             className={dropDownIconClassName}
           />
         </button>
-        {isOpen && (
-          <DropDownItems
-            items={items}
-            onItemClick={toggleDropDown}
-            containerClassName={dropDownItemsContainerClassName}
-          />
-        )}
+        <AnimatePresence>
+          {isOpen && (
+            <DropDownItems
+              items={items}
+              onItemClick={toggleDropDown}
+              containerClassName={dropDownItemsContainerClassName}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

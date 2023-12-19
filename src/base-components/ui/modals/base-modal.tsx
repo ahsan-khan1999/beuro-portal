@@ -1,7 +1,8 @@
 import { IBaseModalProps } from "@/types";
 import { Backdrop } from "../backdrop/backdrop";
 import { combineClasses } from "@/utils/utility";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "@/utils/hooks";
 
 export const BaseModal = ({
   children,
@@ -14,6 +15,9 @@ export const BaseModal = ({
     defaultContainerClasses,
     containerClassName
   );
+
+  const ref = useOutsideClick<HTMLDivElement>(onClose);
+
   return (
     <Backdrop onClose={onClose}>
       <motion.div
@@ -21,8 +25,7 @@ export const BaseModal = ({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.3 }}
-        className={`${containerClasses}`}
-      >
+        className={`${containerClasses}`}>
         {children}
       </motion.div>
     </Backdrop>

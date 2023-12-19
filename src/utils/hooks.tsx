@@ -10,7 +10,8 @@ import { TranslatorFunction } from "@/types/global";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { EmptyStateType, ModalConfigType, ModalType } from "@/enums/ui";
 import { getUser } from "./auth.util";
-import NoDataEmptyState from "@/components/invoice/details/invoice-empty-state";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   callback: ButtonClickFunction
@@ -296,14 +297,24 @@ export const useClipboardCopy = <
 };
 
 export const useEmptyStates = (
-  Currentcomponent: JSX.Element,
-  condition: boolean
+  CurrentComponent: JSX.Element,
+  condition: boolean,
+  isLoading: boolean
 ) => {
-  const isEmpty: EmptyStateType = Number(condition);
+  const isEmpty: EmptyStateType = isLoading
+    ? EmptyStateType.loading
+    : condition
+    ? EmptyStateType.hasData
+    : EmptyStateType.hasNoData;
+
   const lookup = {
-    [EmptyStateType.hasData]: Currentcomponent,
+    [EmptyStateType.hasData]: CurrentComponent,
+    [EmptyStateType.loading]: <LoadingState />,
     [EmptyStateType.hasNoData]: <NoDataEmptyState />,
+    
   };
-  const data = useMemo(() => lookup[isEmpty], [isEmpty]);
+
+  const data =  useMemo(() => lookup[isEmpty], [isEmpty]);
+
   return data;
 };

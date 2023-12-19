@@ -141,6 +141,7 @@ const useContract = () => {
     handleFilterChange,
     filter,
     setFilter,
+    loading,
   };
 };
 
