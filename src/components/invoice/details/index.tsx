@@ -41,7 +41,8 @@ const InvoiceDetails = () => {
     handleInvoiceEdit,
     handleSendEmail,
     isSendEmail,
-    onNextHandle, setIsSendEmail
+    onNextHandle,
+    setIsSendEmail,
   } = useInvoiceDetail();
   const invoiceComponent = {
     Invoice: check(
@@ -78,19 +79,23 @@ const InvoiceDetails = () => {
             handleSendEmail={handleSendEmail}
           />
         </InvoiceCardLayout>
-        {
-          isSendEmail ? <ComposeMail backRouteHandler={handleSendEmail} onNextHandle={onNextHandle} /> :
-            <>
-              <div className="flex mt-[12px] mb-[18px]">
-                <DetailsSwitchBtn
-                  switchDetails={switchDetails}
-                  setSwitchDetails={setSwitchDetails}
-                />
-              </div>
+        {isSendEmail ? (
+          <ComposeMail
+            backRouteHandler={handleSendEmail}
+            onNextHandle={onNextHandle}
+          />
+        ) : (
+          <>
+            <div className="flex mt-[12px] mb-[18px]">
+              <DetailsSwitchBtn
+                switchDetails={switchDetails}
+                setSwitchDetails={setSwitchDetails}
+              />
+            </div>
 
-              {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
-            </>
-        }
+            {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
+          </>
+        )}
       </Layout>
       {renderModal()}
     </>
