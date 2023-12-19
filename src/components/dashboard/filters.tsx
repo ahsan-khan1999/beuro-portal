@@ -1,5 +1,6 @@
 import SelectField from "@/base-components/filter/fields/select-field";
 import { DashboardFiltersToggle } from "@/enums/dashboard";
+import { useOutsideClick } from "@/utils/hooks";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 
@@ -17,6 +18,7 @@ export default function DashboardFilters() {
       [type]: !isOpen[type],
     }));
   };
+
 
   return (
     <div className="flex space-x-4">
