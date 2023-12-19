@@ -25,7 +25,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -42,7 +42,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "email",
               id: "email",
               name: "email",
@@ -58,7 +58,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.phone,
-              className: "!border-dark focus:!border-primary",
+              className: "!border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -86,7 +86,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-dark  focus:!border-primary ",
+              className: "pl-4 !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               value: "When is a convenient time for a consultation?",
               id: "reason",
@@ -110,7 +110,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 8,
         id: "message",
         name: "message",

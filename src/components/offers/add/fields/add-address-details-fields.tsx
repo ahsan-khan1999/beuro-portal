@@ -52,7 +52,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
@@ -69,7 +69,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
@@ -85,7 +85,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 className: "mb-[10px]",
               },
               field: {
-                className: "pl-4 !border-dark  ",
+                className: "pl-4 !border-[#BFBFBF]  ",
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
@@ -116,7 +116,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.textArea,
-                className: "!p-4 !border-dark  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
                 rows: 8,
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
@@ -235,7 +235,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
 //               },
 //               field: {
 //                 type: Field.input,
-//                 className: "!p-4 !border-dark  focus:!border-primary ",
+//                 className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
 //                 inputType: "text",
 //                 id: `streetNumber-${index + 1}`,
 //                 name: `streetNumber-${index + 1}`,
@@ -252,7 +252,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
 //               },
 //               field: {
 //                 type: Field.input,
-//                 className: "!p-4 !border-dark  focus:!border-primary ",
+//                 className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
 //                 inputType: "text",
 //                 id: `postalCode-${index + 1}`,
 //                 name: `postalCode-${index + 1}`,
@@ -268,7 +268,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
 //                 className: "mb-[10px]",
 //               },
 //               field: {
-//                 className: "pl-4  min-h-[54px] !border-dark  ",
+//                 className: "pl-4  min-h-[54px] !border-[#BFBFBF]  ",
 //                 type: Field.select,
 //                 id: `country-${index + 1}`,
 //                 name: `country-${index + 1}`,
@@ -302,7 +302,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
 //             },
 //             field: {
 //               type: Field.textArea,
-//               className: "!p-4 !border-dark  focus:!border-primary ",
+//               className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
 //               rows: 4,
 //               id: `description-${index}`,
 //               name: `description-${index}`,

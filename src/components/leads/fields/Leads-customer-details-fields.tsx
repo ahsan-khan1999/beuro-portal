@@ -31,7 +31,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -48,7 +48,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -72,7 +72,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
@@ -90,7 +90,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.phone,
-              className: "!border-dark focus:!border-primary",
+              className: "!border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
 
@@ -109,7 +109,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !border-dark focus:!border-primary",
+              className: " !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               control,
@@ -144,7 +144,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
@@ -163,7 +163,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             field: {
               type: Field.input,
               className:
-                "!p-4  !border-dark focus:!border-primary focus:!border-primary",
+                "!p-4  !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
@@ -180,7 +180,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark",
+              className: "!p-4 !border-[#BFBFBF]",
               type: Field.select,
               id: "address.country",
               name: "address.country",

@@ -22,7 +22,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "invoiceContent.title",
                 name: "invoiceContent.title",
@@ -39,7 +39,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "invoiceContent.description",
                 name: "invoiceContent.description",
 
@@ -58,7 +58,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "invoiceContent.body",
                 name: "invoiceContent.body",
 

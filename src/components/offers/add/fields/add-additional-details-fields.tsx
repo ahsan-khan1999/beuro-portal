@@ -21,7 +21,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
 
       field: {
-        className: "!px-2 !border-dark focus:!border-primary ",
+        className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
         type: Field.select,
         id: "content",
         name: "content",
@@ -43,7 +43,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "additionalDetails",
         name: "additionalDetails",
 
