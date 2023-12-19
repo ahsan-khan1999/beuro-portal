@@ -69,6 +69,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
+  const leadID = watch("leadID");
+  
   useMemo(() => {
     if (type && customerID)
       dispatch(
@@ -80,13 +82,12 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails?.id) {
-      console.log(offerDetails,"ofer");
-      
+
       reset({
         type: offerDetails?.type,
-        customerID: offerDetails?.customerID,
+        customerID: offerDetails?.leadID?.customerID,
         leadID: offerDetails?.leadID?.id,
-        customerType: getKeyByValue(staticEnums["CustomerType"],offerDetails?.leadID?.customerDetail?.customerType),
+        customerType: getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType),
         fullName: offerDetails?.leadID?.customerDetail?.fullName,
         email: offerDetails?.leadID?.customerDetail?.email,
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
@@ -113,8 +114,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
     reset({
       ...selectedCustomers[0],
+      customerID: selectedCustomers[0]?.id,
       type: type,
       content: selectedContent,
+      leadID: ""
     });
   };
   const handleContentSelect = () => {
@@ -143,10 +146,30 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       lead,
       content,
       handleContentSelect,
+      offerDetails,
+      leadID
     },
     setValue
   );
+  useMemo(() => {
+    if (type === "New Customer") {
+      reset({
+        ...offerDetails,
+        leadID: null,
+        customerType: null,
+        fullName: null,
+        email: null,
+        phoneNumber: null,
+        mobileNumber: null,
+        address: null,
+        customerID: "",
+        type: "New Customer",
+        content: offerDetails?.content?.id,
 
+      })
+    }
+
+  }, [type]);
 
   const dateFields = AddDateFormField(register,
     append,

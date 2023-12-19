@@ -44,8 +44,7 @@ export default function CustomerFilter() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+       
         options={["1", "2", "2", "2", "2"]}
         label={translate("admin.customers_details.table_functions.sort")}
       />

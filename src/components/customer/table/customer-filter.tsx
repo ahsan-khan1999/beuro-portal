@@ -39,8 +39,7 @@ export default function CustomerFilter({
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
-        isOpen={isOpen}
-        setIsOpen={toggleHandler}
+     
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />

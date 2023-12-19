@@ -19,6 +19,7 @@ const DetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -63,7 +64,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.status")}:
             </span>
             <span className="font-medium text-base text-white px-2 py-1 text-center rounded-md  w-[70px] bg-[#45C769]">
-              {emailDetails?.status}
+              {emailDetails?.mailStatus}
             </span>
           </div>
           <div>
@@ -87,7 +88,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.send_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-              {/* {formatDateReverse(emailDetails?.createdAt as string)} */}
+              {formatDateReverse(emailDetails?.createdAt as string)}
             </span>
           </div>
           <div>
@@ -95,7 +96,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B]  text-base">
-              {/* {formatDateReverse(emailDetails?.viewedAt as string)} */}
+              {formatDateReverse(emailDetails?.viewedAt as string)}
             </span>
           </div>
         </div>

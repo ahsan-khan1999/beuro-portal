@@ -22,7 +22,7 @@ const TableRows = ({
               {item.invoiceNumber}
             </span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex">
-              {item.contractID?.offerID?.customerID?.fullName}
+              {item.contractID?.offerID?.leadID?.customerDetail?.fullName}
             </span>
             <span className="py-4 flex items-center break-all">
               {item.contractID?.offerID?.title}

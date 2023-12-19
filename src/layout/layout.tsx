@@ -27,7 +27,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <Header />
         <SideBar />
         <div className="mr-5">
-          <div className="ml-[272px] w-full mt-[90px]">{children}</div>
+          <div className="ml-[272px]  mt-[90px]">{children}</div>
         </div>
       </main>
     </>

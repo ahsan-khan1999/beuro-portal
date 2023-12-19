@@ -83,8 +83,6 @@ export default function SearchInputFiled({
             handleChange={(value) => console.log(value)}
             value=""
             dropDownIconClassName=""
-            isOpen={isOpen}
-            setIsOpen={() => setIsOpen((prev) => !prev)}
             options={[
               `${translate("dashboard_detail.input_filter.all")}`,
               `${translate("dashboard_detail.input_filter.lead")}`,

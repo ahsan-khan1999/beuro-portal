@@ -47,7 +47,6 @@ export const useContractEmail = (
     })
   }, [])
 
-  console.log(errors);
   
 
   const onContentSelect = (id: string) => {

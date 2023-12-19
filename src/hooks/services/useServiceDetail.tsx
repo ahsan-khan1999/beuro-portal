@@ -168,7 +168,6 @@ const useServiceDetail = (stage: boolean) => {
     let res;
     if (!stage) {
       res = await dispatch(createService({ data, router, setError, translate }))
-      console.log(res);
 
       if (res?.payload) handleCreateSuccess()
     } else if (stage) {

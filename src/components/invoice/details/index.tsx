@@ -79,23 +79,16 @@ const InvoiceDetails = () => {
             handleSendEmail={handleSendEmail}
           />
         </InvoiceCardLayout>
-        {isSendEmail ? (
-          <ComposeMail
-            backRouteHandler={handleSendEmail}
-            onNextHandle={onNextHandle}
-          />
-        ) : (
-          <>
-            <div className="flex mt-[12px] mb-[18px]">
-              <DetailsSwitchBtn
-                switchDetails={switchDetails}
-                setSwitchDetails={setSwitchDetails}
-              />
-            </div>
 
-            {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
-          </>
-        )}
+        <div className="flex mt-[12px] mb-[18px]">
+          <DetailsSwitchBtn
+            switchDetails={switchDetails}
+            setSwitchDetails={setSwitchDetails}
+          />
+        </div>
+
+        {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
+
       </Layout>
       {renderModal()}
     </>

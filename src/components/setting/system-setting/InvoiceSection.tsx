@@ -59,6 +59,7 @@ const InvoiceSection = ({ systemSetting, setSystemSetting }: { systemSetting: Sy
               dropDownIconClassName="custom-icon-style"
               dropDownDisabled={false}
               shouldNotSelectItem={false}
+              dropDownClassName="!h-[42px]"
             />
           </div>
         )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import LeadsDetailImgLayout from "@/layout/Leads/LeadsDetailImgLayout";
 import leadsDetailsImg1 from "@/assets/pngs/leads_detail_img1.png";
@@ -7,9 +7,9 @@ import leadsDetailsImg3 from "@/assets/pngs/leads_detail_img3.png";
 import leadsDetailsImg4 from "@/assets/pngs/leads_detail_img4.png";
 import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
-import { OffersTableRowTypes } from "@/types/offers";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { readImage } from "@/api/slices/imageSlice/image";
 
 const OfferEditImages = ({
   shareImgModal,
@@ -31,7 +31,11 @@ const OfferEditImages = ({
     leadsDetailsImg3,
     leadsDetailsImg4,
   ];
+  
+
+  const { images } = useAppSelector((state) => state.image);
   const { offerDetails } = useAppSelector((state) => state.offer);
+
 
   const { t: translate } = useTranslation();
   return (
@@ -44,16 +48,15 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${
-              offerDetails?.images?.length > 0
-                ? "cursor-pointer"
-                : "cursor-default"
-            }  `}
-            onClick={() => offerDetails?.images?.length > 0 && shareImgModal()}
+            className={`${images?.length > 0
+              ? "cursor-pointer"
+              : "cursor-default"
+              }  `}
+            onClick={() => images?.length > 0 && shareImgModal()}
           />
         </div>
         <div className="grid grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
-          {offerDetails?.images?.map((item, index) => (
+          {images?.map((item, index) => (
             <Image
               src={item}
               key={index}
@@ -67,13 +70,12 @@ const OfferEditImages = ({
 
         <div className="flex justify-between items-center mx-[13px] pb-3">
           <p
-            className={`text-[12px] font-normal text-[#4A13E7] ${
-              offerDetails?.images?.length > 0
-                ? "cursor-pointer"
-                : "cursor-default"
-            }   `}
+            className={`text-[12px] font-normal text-[#4A13E7] ${images?.length > 0
+              ? "cursor-pointer"
+              : "cursor-default"
+              }   `}
             onClick={() =>
-              offerDetails?.images?.length > 0 && handleImageSlider()
+              images?.length > 0 && handleImageSlider()
             }
           >
             {translate("offers.side_images.views")}

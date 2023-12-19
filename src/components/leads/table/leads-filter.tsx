@@ -56,8 +56,7 @@ export default function LeadsFilter({
           handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
-          isOpen={isOpen}
-          setIsOpen={toggleHandler}
+          
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />

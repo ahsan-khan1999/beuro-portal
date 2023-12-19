@@ -17,7 +17,7 @@ import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import { readImage } from "@/api/slices/imageSlice/image";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -109,7 +109,8 @@ const useOffers = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = offer?.find((item_) => item_.id === item);
+    dispatch(setImages([]))
+    const filteredLead = offer?.find((item_) => item_.id === item)
     if (filteredLead) {
       dispatch(setOfferDetails(filteredLead));
       dispatch(

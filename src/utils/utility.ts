@@ -334,6 +334,7 @@ export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY hh:mm:ss");
 }
 export function formatDateReverse(date: string) {
+  if(!date) return;
   return moment(date).format("hh:mm:ss, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
@@ -447,7 +448,6 @@ export function setAddressFieldValues(
 ) {
   if (images?.length === 0) return;
   images.forEach((element, idx) => {
-    console.log(element, "element", idx);
 
     setValue(`offerContent.address_${idx}`, element);
   });
@@ -585,7 +585,14 @@ export function calculateTax(amount: number, taxPercentage: number) {
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);
 }
+export function calculatePercentage(amount: number, totalAmount: number): number {
+  if (totalAmount === 0) {
+    return 0; // Avoid division by zero
+  }
 
+  const percentage = ((amount / totalAmount) * 100).toFixed(2);
+  return parseFloat(percentage);
+}
 export const filterService = (id: string, service: Service[]): string => {
   if (service?.length === 0 && !id) return "";
   const filteredService = service.find((item) => item.id === id);

@@ -94,7 +94,7 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
                   } py-1 px-2.5 rounded !!border !!border-lightGray`}
                 textClassName={`${!isCopied ? "text-primary" : "text-white"
                   } font-medium`}
-                buttonText={!isCopied ? translate("offers.share_images_modal.copy_button") : translate("offers.share_images_modal.copy_button")}
+                buttonText={!isCopied ? translate("offers.share_images_modal.copy_button") : translate("offers.share_images_modal.copied_button")}
                 onClick={handleCopy}
               >
                 {!isCopied && <CopyIcon />}

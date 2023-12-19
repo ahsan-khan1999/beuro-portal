@@ -53,7 +53,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     name: "address",
 
   });
-  console.log(errors);
   
   const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? 1 : addressFields?.length, append, remove, addressFields);
 

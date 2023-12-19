@@ -15,11 +15,7 @@ export const useUploadImageOffer = (handleImageSlider: Function, type: string) =
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector(state => state.image)
 
-  useEffect(() => {
-    return () => {
-      dispatch(setImages([]))
-    }
-  }, [])
+
 
   const {
     handleSubmit,

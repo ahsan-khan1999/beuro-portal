@@ -40,7 +40,6 @@ export const ImageFileUpload = ({
 
     field.onChange(res?.payload);
   };
-  console.log(field.value, "value");
 
   return (
     <label

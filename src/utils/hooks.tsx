@@ -313,8 +313,7 @@ export const useEmptyStates = (
     [EmptyStateType.hasNoData]: <NoDataEmptyState />,
     
   };
-
-  const data =  useMemo(() => lookup[isEmpty], [isEmpty]);
-
+  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
+  const data = lookup[isEmpty]
   return data;
 };
