@@ -56,7 +56,7 @@ export const YogaPdfContainer = ({ children }: MyComponentProp) => {
         transformOrigin: "top",
         height: "100vh",
       }}
-      className="py-6 overflow-y-scroll"
+      className="py-6 "
     >
       <div className="w-[1160px]">{children}</div>
     </div>
