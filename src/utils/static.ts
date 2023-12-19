@@ -26,7 +26,7 @@ import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
-  const separators = ['/', '-'];
+  const separators = ["/", "-"];
 
   for (const separator of separators) {
     const parts = dateString.split(separator);
@@ -543,129 +543,129 @@ export const countryList: countryType = {
 };
 
 export const staticEnums: Record<string, any> = {
-  "User": {
-    "role": {
-      "Admin": 0,
-      "Company": 1,
-      "Employee": 2
+  User: {
+    role: {
+      Admin: 0,
+      Company: 1,
+      Employee: 2,
     },
-    "salutation": {
-      "Mr": 0,
-      "Ms": 1,
-      "Other": 2
+    salutation: {
+      Mr: 0,
+      Ms: 1,
+      Other: 2,
     },
-    "accountStatus": {
-      "blocked": 0,
-      "active": 1,
-      "deactivated": 2
+    accountStatus: {
+      blocked: 0,
+      active: 1,
+      deactivated: 2,
     },
-    "oAuthIds": {
-      "google": "google",
-      "facebook": "facebook",
-      "apple": "apple"
+    oAuthIds: {
+      google: "google",
+      facebook: "facebook",
+      apple: "apple",
     },
-    "idVerificationStatus": {
-      "notSubmitted": 0,
-      "submittedProcessing": 1,
-      "approved": 2,
-      "rejected": 3
-    }
+    idVerificationStatus: {
+      notSubmitted: 0,
+      submittedProcessing: 1,
+      approved: 2,
+      rejected: 3,
+    },
   },
-  "OTP": {
-    "purpose": {
-      "resetPwd": 0,
-      "emailVerification": 1,
-      "phoneVerification": 2
-    }
+  OTP: {
+    purpose: {
+      resetPwd: 0,
+      emailVerification: 1,
+      phoneVerification: 2,
+    },
   },
-  "gender": {
-    "Male": 0,
-    "Female": 1,
-    "Other": 2
+  gender: {
+    Male: 0,
+    Female: 1,
+    Other: 2,
   },
-  "currency": {
-    "USD": 0,
-    "EUR": 1,
-    "CHF": 2
+  currency: {
+    USD: 0,
+    EUR: 1,
+    CHF: 2,
   },
-  "LeadStatus": {
-    "Open": 0,
-    "Close": 1,
-    "Expired": 2
+  LeadStatus: {
+    Open: 0,
+    Close: 1,
+    Expired: 2,
   },
-  "open": 0,
-  "closed": 1,
-  "expied": 2,
-  "CustomerType": {
-    "individual": 0,
-    "company": 1
+  open: 0,
+  closed: 1,
+  expied: 2,
+  CustomerType: {
+    individual: 0,
+    company: 1,
   },
-  "OfferStatus": {
-    "Open": 0,
-    "Signed": 1,
-    "Expired": 2,
-    "Rejected": 2
+  OfferStatus: {
+    Open: 0,
+    Signed: 1,
+    Expired: 2,
+    Rejected: 2,
   },
-  "EmailStatus": {
-    "Draft": 0,
-    "Sent": 1,
-    "Failed": 2
+  EmailStatus: {
+    Draft: 0,
+    Sent: 1,
+    Failed: 2,
   },
-  "TaxType": {
-    "Include": 0,
-    "Exclude": 1
+  TaxType: {
+    Include: 0,
+    Exclude: 1,
   },
-  "PaymentType": {
-    "Cash": 0,
-    "Online": 1
+  PaymentType: {
+    Cash: 0,
+    Online: 1,
   },
-  "ContractStatus": {
-    "Open": 0,
-    "Confirmed": 1,
-    "Cancelled": 2
+  ContractStatus: {
+    Open: 0,
+    Confirmed: 1,
+    Cancelled: 2,
   },
 
-  "InvoiceStatus": {
-    "Pending": 0,
-    "Overdue": 1,
-    "Paid": 2
+  InvoiceStatus: {
+    Pending: 0,
+    Overdue: 1,
+    Paid: 2,
   },
-  "Frequency": {
-    "Weekly": 0,
-    "SevenDays": 1,
-    "FourtennDays": 2,
-    "Monthly": 3,
-    "Yearly": 4
+  Frequency: {
+    Weekly: 0,
+    SevenDays: 1,
+    FourtennDays: 2,
+    Monthly: 3,
+    Yearly: 4,
   },
-  "AmountType": {
-    "Percent": 0,
-    "Amount": 1
+  AmountType: {
+    Percent: 0,
+    Amount: 1,
   },
-  "DiscountType": {
-    "Percent": 0,
-    "Amount": 1
+  DiscountType: {
+    Percent: 0,
+    Amount: 1,
   },
-  "ContractType": {
-    "indivdual": 0,
-    "comapny": 1
+  ContractType: {
+    indivdual: 0,
+    comapny: 1,
   },
-  "InvoiceType": {
-    "indivdual": 0,
-    "comapny": 1
+  InvoiceType: {
+    indivdual: 0,
+    comapny: 1,
   },
-  "FollowUp": {
-    "Status": {
-      "Upcoming": 0,
-      "Pending": 1,
-      "Overdue": 2
-    }
+  FollowUp: {
+    Status: {
+      Upcoming: 0,
+      Pending: 1,
+      Overdue: 2,
+    },
   },
-  "ContentStatus": {
-    "Open": 0,
-    "Close": 1,
-    "Expired": 2
+  ContentStatus: {
+    Open: 0,
+    Close: 1,
+    Expired: 2,
   },
-  "InvoiceOverDueLimit": {
+  InvoiceOverDueLimit: {
     "1": 1,
     "2": 2,
     "4": 4,
@@ -694,17 +694,14 @@ export const staticEnums: Record<string, any> = {
     "28": 28,
     "29": 29,
     "30": 30,
-
-
   },
-  "SettingStatus": {},
-  "Country": {
-    "Swizterland": "Swizterland",
-    "Germany": "Germany",
-    "Austria": "Austria",
-    "Italy": "Italy",
-    "France": "France",
-
+  SettingStatus: {},
+  Country: {
+    Swizterland: "Swizterland",
+    Germany: "Germany",
+    Austria: "Austria",
+    Italy: "Italy",
+    France: "France",
   },
 };
 
@@ -1023,8 +1020,6 @@ export const staticEnums: Record<string, any> = {
 //   },
 //   // Add more rows as needed
 // ];
-
-
 
 export const customersAdmin: CustomersAdmin[] = [
   {
@@ -1755,7 +1750,6 @@ export const sideBar: SideBar[] = [
         pathname: "/offers",
         query: "open",
 
-
         role: [1],
       },
       {
@@ -1791,20 +1785,20 @@ export const sideBar: SideBar[] = [
     inner: [
       {
         title: "Accepted",
-        pathname: "/contract?accepted",
-
+        query: "accepted",
+        pathname: "/contract",
         role: [1],
       },
       {
         title: "Rejected",
-        pathname: "/contract?rejected",
-
+        query: "rejected",
+        pathname: "/contract",
         role: [1],
       },
       {
         title: "Pending",
-        pathname: "/contract?pending",
-
+        query: "pending",
+        pathname: "/contract",
         role: [1],
       },
     ],
@@ -1818,20 +1812,20 @@ export const sideBar: SideBar[] = [
     inner: [
       {
         title: "Open",
-        pathname: "/invoices?open",
-
+        query: "open",
+        pathname: "/invoices",
         role: [1],
       },
       {
         title: "Overdue",
-        pathname: "/invoices?overdue",
-
+        query: "overdue",
+        pathname: "/invoices",
         role: [1],
       },
       {
         title: "Paid",
-        pathname: "/invoices?paid",
-
+        query: "paid",
+        pathname: "/invoices",
         role: [1],
       },
     ],
@@ -1908,8 +1902,6 @@ export const sideBar: SideBar[] = [
   },
 ];
 
-
-
 export const DEFAULT_CUSTOMER = {
   id: 0,
   refID: "",
@@ -1928,7 +1920,7 @@ export const DEFAULT_CUSTOMER = {
   address: {
     streetNumber: "",
     country: "",
-    postalCode: ""
+    postalCode: "",
   },
   edit: false,
   lead: {
@@ -1938,7 +1930,7 @@ export const DEFAULT_CUSTOMER = {
     status: "",
     expires: "",
   },
-}
+};
 
 export const DEFAULT_EMPLOYEE = {
   id: "001",
@@ -1951,8 +1943,8 @@ export const DEFAULT_EMPLOYEE = {
   creationDate: "2023-11-17T12:43:00.479Z",
   action: "edit",
   employeeID: "1",
-  createdBy: ""
-}
+  createdBy: "",
+};
 
 export const DEFAULT_FOLLOWUP = {
   id: "",
@@ -1971,8 +1963,8 @@ export const DEFAULT_FOLLOWUP = {
     location: "",
     type: "",
     refID: "",
-  }
-}
+  },
+};
 
 export const DEFAULT_LEAD = {
   id: "",
@@ -2004,9 +1996,7 @@ export const DEFAULT_LEAD = {
   leadStatus: "",
   images: [""],
   createdAt: "",
-
-}
-
+};
 
 export const DEFAULT_SERVICE = {
   id: "",
@@ -2015,13 +2005,10 @@ export const DEFAULT_SERVICE = {
   createdOn: "",
   price: 0,
   description: "",
-  createdAt: ""
-}
-
-
+  createdAt: "",
+};
 
 export const DEFAULT_CONTENT = {
-
   refID: "",
   contentName: "",
   id: "",
@@ -2057,11 +2044,8 @@ export const DEFAULT_CONTENT = {
     attachments: [""],
   },
   stage: 0,
-  createdBy:""
-
-}
-
-
+  createdBy: "",
+};
 
 export const DEFAULT_OFFER = {
   id: "",
@@ -2073,7 +2057,7 @@ export const DEFAULT_OFFER = {
   payment: "",
   status: "",
   type: "",
-}
+};
 
 export const DEFAULT_CONTRACT = {
   id: "",
@@ -2085,9 +2069,7 @@ export const DEFAULT_CONTRACT = {
   payment: "",
   status: "",
   type: "",
-
-
-}
+};
 
 export const DEFAULT_INVOICE = {
   id: "",
@@ -2103,4 +2085,4 @@ export const DEFAULT_INVOICE = {
   status: "",
   editNote: "",
   type: "",
-}
+};

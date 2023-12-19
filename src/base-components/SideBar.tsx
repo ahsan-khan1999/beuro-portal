@@ -18,6 +18,7 @@ import { sideBar } from "@/utils/static";
 import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
 import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
 import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequest";
+
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
@@ -82,11 +83,12 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        item.pathname &&
-                          router.push({
-                            pathname: item.pathname,
-                            query: { filter: item.query },
-                          });
+                        // item.pathname &&
+                        //   router.push({
+                        //     pathname: item.pathname,
+                        //     query: { filter: item.query },
+                        //   });
+                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
                       }}
                       className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${
                         router.pathname === item.pathname &&
@@ -117,9 +119,6 @@ const SideBar = () => {
                           ${
                             router.pathname === item.pathname && "sidebar-svg"
                           }`}
-                        onClick={() => {
-                          isOpen == index ? setIsOpen(null) : setIsOpen(index);
-                        }}
                       >
                         <svg
                           className={` `}
