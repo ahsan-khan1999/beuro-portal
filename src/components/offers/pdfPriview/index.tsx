@@ -6,18 +6,13 @@ import Page2 from "./pages/Page2";
 import { Pdf } from "@/components/pdf/pdf";
 const PdfPriview = () => {
   return (
-    <div>
+    <div className="">
       <EmailCard />
-      {/* <div className="max-w-[1440px] w-full"></div> */}
-      <Pdf />
-      {/* <div className="mt-[30px]">
-        <Page1 />
-      </div>
+      <div className="flex w-full">
 
-      <div className="mt-[30px]">
-        <Page2 />
-        <EmailButtons />
-      </div> */}
+        <Pdf />
+
+      </div>
     </div>
   );
 };

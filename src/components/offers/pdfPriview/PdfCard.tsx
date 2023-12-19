@@ -11,8 +11,7 @@ const EmailCard = () => {
   const router = useRouter();
   return (
     <EmailCardLayout>
-      <>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max">
           <div className="flex items-center">
             <Image
               src={backIcon}
@@ -57,7 +56,6 @@ const EmailCard = () => {
             </div>
           </div>
         </div>
-      </>
     </EmailCardLayout>
   );
 };

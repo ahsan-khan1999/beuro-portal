@@ -46,7 +46,7 @@ const SideBar = () => {
 
 
   return (
-    <div className="fixed left-0 min-w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll" >
+    <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll" >
       <div className="  pt-6 px-4 pb-8 flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {
