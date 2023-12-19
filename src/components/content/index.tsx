@@ -18,12 +18,13 @@ export default function Content() {
     setFilter,
     handleFilterChange,
     translate,
+    loading,
   } = useContent();
-
 
   const CurrentComponent = useEmptyStates(
     <TableRows contentData={currentPageRows} />,
-    currentPageRows.length > 0
+    currentPageRows.length > 0,
+    loading
   );
   return (
     <>
@@ -35,7 +36,7 @@ export default function Content() {
         />
         <TableLayout>
           <TableHeadings />
-         {CurrentComponent}
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

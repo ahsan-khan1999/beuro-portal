@@ -17,25 +17,28 @@ export default function Invoices() {
     handleNotes,
     renderModal,
     filter,
-    setFilter, handleFilterChange,
+    loading,
+    setFilter,
+    handleFilterChange,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
-    <TableRows
-      dataToAdd={currentPageRows}
-      handleNotes={handleNotes}
-    />,
-    currentPageRows.length > 0
+    <TableRows dataToAdd={currentPageRows} handleNotes={handleNotes} />,
+    currentPageRows.length > 0,
+    loading
   );
-
 
   return (
     <>
       <Layout>
-        <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
+        <TableFunctions
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
         <TableLayout>
           <TableHeading />
-         {CurrentComponent}
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

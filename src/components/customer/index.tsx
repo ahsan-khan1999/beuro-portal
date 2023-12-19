@@ -18,9 +18,14 @@ export default function Customers() {
     filter,
     setFilter,
     handleFilterChange,
+    loading,
   } = useCustomer();
 
-  const CurrentComponent = useEmptyStates(<TableRow currentPageRows={currentPageRows} />, currentPageRows.length > 0);
+  const CurrentComponent = useEmptyStates(
+    <TableRow currentPageRows={currentPageRows} />,
+    currentPageRows.length > 0,
+    loading
+  );
 
   return (
     <Layout>

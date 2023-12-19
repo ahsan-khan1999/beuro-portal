@@ -157,6 +157,7 @@ const useLeads = () => {
     handleFilterChange,
     filter,
     setFilter,
+    loading,
   };
 };
 

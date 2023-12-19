@@ -20,15 +20,17 @@ export default function Leads() {
     filter,
     setFilter,
     handleFilterChange,
+    loading,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
     <TableRows
-    dataToAdd={currentPageRows}
+      dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
     />,
-    currentPageRows.length > 0
+    currentPageRows.length > 0,
+    loading
   );
 
   return (
@@ -41,7 +43,7 @@ export default function Leads() {
         />
         <TableLayout>
           <TableHeadings />
-         {CurrentComponent}
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}

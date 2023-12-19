@@ -19,7 +19,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 ">
+      <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1  ">
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
           <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
           <Button

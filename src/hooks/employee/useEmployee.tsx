@@ -10,10 +10,12 @@ const useEmployee = () => {
     location: "",
     sortBy: "",
     text: "",
-    type: ""
+    type: "",
   });
-  const { employee, lastPage, totalCount } = useAppSelector(state => state.employee)
-  const dispatch = useAppDispatch()
+  const { employee, lastPage, totalCount, loading } = useAppSelector(
+    (state) => state.employee
+  );
+  const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
@@ -21,29 +23,40 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
-    
-    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-
+    dispatch(
+      readEmployee({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Employee?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(
+          res?.payload?.Employee?.slice(startIndex, startIndex + itemsPerPage)
+        );
       }
-    })
-  }, [dispatch])
+    });
+  }, [dispatch]);
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     setCurrentPageRows(employee?.slice(startIndex, startIndex + itemsPerPage));
-
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } }));
   };
 
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange,translate };
+  return {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleFilterChange,
+    translate,
+    loading
+  };
 };
 
 export default useEmployee;
