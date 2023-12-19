@@ -1,8 +1,9 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
-import React from "react";
+import React, { useState } from "react";
 import { combineClasses } from "@/utils/utility";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useOutsideClick } from "@/utils/hooks";
 
 export default function SelectField({
   title,
@@ -11,36 +12,44 @@ export default function SelectField({
   border,
   handleChange,
   value,
-  isOpen,
   dropDownIconClassName,
-  setIsOpen,
   containerClassName,
 }: OptionsFieldProps) {
   const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50 relative flex items-center`;
   const containerClasses = combineClasses(defaultClasses, containerClassName);
 
-  return (
-    <>
-      <div className={containerClasses}>
-        <div
-          className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span className="text-[#393939] text-sm font-normal">{label}</span>
-          <DropDownNonFillIcon
-            label={label}
-            isOpen={isOpen}
-            className={dropDownIconClassName + "flex my-auto"}
-          />
-        </div>
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+  const hanldeClose = () => {
+    setIsOpen(false);
+  };
+
+  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  return (
+    <div className={containerClasses} ref={ref}>
+      <div
+        className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full"
+        onClick={handleToggle}
+      >
+        <span className="text-[#393939] text-sm font-normal">{label}</span>
+        <DropDownNonFillIcon
+          label={label}
+          isOpen={isOpen}
+          className={dropDownIconClassName + "flex my-auto"}
+        />
+      </div>
+
+      <AnimatePresence>
         {isOpen && (
           <motion.div
             className="bg-white flex-col absolute top-[36px] border-[1px] border-lightGray rounded-lg p-2 w-full"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="flex-col space-y-2">
               {options.map((item, key) => (
@@ -61,7 +70,7 @@ export default function SelectField({
             </div>
           </motion.div>
         )}
-      </div>
-    </>
+      </AnimatePresence>
+    </div>
   );
 }
