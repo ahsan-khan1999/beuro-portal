@@ -22,6 +22,7 @@ export default function EmailTracker() {
       <TableRow dataToAdd={currentPageRows} />,
       currentPageRows.length > 0
     );
+
   return (
     <>
       <Layout>

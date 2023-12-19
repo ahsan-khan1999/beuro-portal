@@ -137,23 +137,7 @@ export const useEditOfferDetails = ({
         content: offerDetails?.content?.id,
 
       })
-    } else {
-      reset({
-        type: "Existing Customer",
-        leadID: offerDetails?.leadID?.id,
-        customerType: getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType),
-        fullName: offerDetails?.leadID?.customerDetail?.fullName,
-        email: offerDetails?.leadID?.customerDetail?.email,
-        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
-        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
-        content: offerDetails?.content?.id,
-        title: offerDetails?.title,
-        address: offerDetails?.leadID?.customerDetail?.address,
-        date: offerDetails?.date,
-        customerID: offerDetails?.leadID?.customerID,
-      });
     }
-
   }, [type]);
 
   const {
@@ -184,7 +168,6 @@ export const useEditOfferDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   };
-  console.log(offerDetails, "offerDetails");
 
   const offerFields = AddOfferDetailsFormField(
     register,
@@ -201,6 +184,7 @@ export const useEditOfferDetails = ({
       lead,
       content,
       handleContentSelect,
+      selectedContent,
       offerDetails,
     },
     setValue

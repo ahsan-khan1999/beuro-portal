@@ -16,6 +16,7 @@ import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
+import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 
 export const useAddServiceDetails = (onHandleNext: (currentComponent: ComponentsType) => void) => {
   const { t: translate } = useTranslation();
@@ -28,11 +29,14 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
 
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+  const { tax } = useAppSelector((state) => state.settings);
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
     dispatch(readService({ params: { filter: { paginate: 0 } } }))
+    dispatch(readTaxSettings({}));
+
   }, [])
 
   const handleBack = () => {
@@ -144,7 +148,8 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount,
-        discountDescription: offerDetails?.discountDescription
+        discountDescription: offerDetails?.discountDescription,
+        taxAmount: offerDetails?.taxAmount || 0,
 
       })
     }
@@ -158,7 +163,7 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
 
   const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType }, append, remove, serviceFields, setValue);
+  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType, tax: tax }, append, remove, serviceFields, setValue);
   const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)
 
 

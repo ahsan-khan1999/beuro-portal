@@ -8,6 +8,8 @@ import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 import { Modals } from "@/enums/follow-up";
 import { createFollowUp } from "@/api/slices/followUp/followUp";
+import { useEffect } from "react";
+import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -20,9 +22,15 @@ export const useAddFollowUp = (
   const { customer } = useAppSelector((state) => state.customer);
   const { lead } = useAppSelector((state) => state.lead);
   const { loading,error } = useAppSelector((state) => state.followUp);
+  const { followUps } = useAppSelector((state) => state.settings);
 
 
 
+  useEffect(() => {
+    dispatch(readFollowUpSettings({}))
+    
+  }, [])
+  
 
   const schema = generateAddFollowUpValidation(translate);
   const {
@@ -34,7 +42,6 @@ export const useAddFollowUp = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  console.log(errors);
 
 
   const lookUpModals = {
@@ -50,7 +57,7 @@ export const useAddFollowUp = (
     register,
     loading,
     control,
-    { customer: customer, lead: lead },
+    { customer: customer, lead: lead,followUps },
     handleModalPop,
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

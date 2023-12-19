@@ -1,4 +1,4 @@
-import {  Customers } from "@/types/customer";
+import { Customers } from "@/types/customer";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
@@ -27,15 +27,18 @@ export default function useCustomer() {
     dispatch(readCustomer({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Customer?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(res?.payload?.Customer);
       }
     })
   }, [dispatch])
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(customer?.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Customer);
+      }
+    })
 
   }, [currentPage]);
 

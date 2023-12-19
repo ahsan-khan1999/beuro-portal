@@ -14,7 +14,7 @@ import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
-import { readImage } from "@/api/slices/imageSlice/image";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 
 const useLeads = () => {
@@ -106,6 +106,8 @@ const useLeads = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
+    dispatch(setImages([]))
+
     const filteredLead = lead.find((item_) => item_.id === item)
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));

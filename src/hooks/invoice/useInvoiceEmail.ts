@@ -32,7 +32,6 @@ export const useInvoiceEmail = (
         control,
         setError,
         formState: { errors },
-        watch,
         reset
     } = useForm<FieldValues>({
         resolver: yupResolver<FieldValues>(schema),
@@ -47,7 +46,6 @@ export const useInvoiceEmail = (
         })
     }, [])
 
-    console.log(errors);
 
 
     const onContentSelect = (id: string) => {
@@ -69,7 +67,6 @@ export const useInvoiceEmail = (
         setAttachements,
         invoiceDetails
     );
-    console.log(errors);
     
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const res = await dispatch(sendInvoiceEmail({

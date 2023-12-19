@@ -19,7 +19,7 @@ const EmailDetailsData = ({
       {emailDetails && (
         <div
           className="my-5 flex flex-col gap-y-5"
-          dangerouslySetInnerHTML={{ __html: emailDetails }}
+          dangerouslySetInnerHTML={{ __html: emailDetails?.description }}
         />
       )}
     </div>

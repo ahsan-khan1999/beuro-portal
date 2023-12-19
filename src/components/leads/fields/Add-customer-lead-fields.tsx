@@ -19,7 +19,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   },
   setValue
 ) => {
-  console.log(leadDetails, "leadDetails");
 
   const { t: translate } = useTranslation();
   const formField: FormField[] = [

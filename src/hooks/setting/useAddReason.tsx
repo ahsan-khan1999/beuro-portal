@@ -38,7 +38,6 @@ export default function useAddReason() {
   useEffect(() => {
     dispatch(readFollowUpSettings({})).then((response: any) => {
       if (response?.payload) {
-        console.log(response?.payload);
 
         setToggleObj({
           isCreateFollowUpOnLeadCreation: {
@@ -112,7 +111,7 @@ export default function useAddReason() {
     let apiData = {
       isCreateFollowUpOnLeadCreation: toggleObj.isCreateFollowUpOnLeadCreation.value,
       isCreateFollowUpOnOfferExpire: toggleObj.isCreateFollowUpOnOfferExpire.value,
-      reason: data?.reason
+      reason: toggleObj?.reason
     }
     const response = await dispatch(updateFollowUpSetting({ data: apiData, router, translate }))
     if (response?.payload) handleSuccess()

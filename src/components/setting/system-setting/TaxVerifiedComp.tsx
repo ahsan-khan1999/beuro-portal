@@ -44,7 +44,6 @@ const TaxVerifiedComp = memo(({
     taxSettings.splice(index, 1)
     dispatch(setTaxSettings(taxSettings))
   }
-  console.log(systemSettings["taxType"], "systemSettings");
 
   return (
     <SettingLayout>

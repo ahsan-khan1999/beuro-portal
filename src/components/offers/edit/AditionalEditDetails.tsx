@@ -5,11 +5,15 @@ import React from "react";
 import { useRouter } from "next/router";
 import { EditComponentsType } from "./EditOffersDetailsData";
 
-const AditionalEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
+const AditionalEditDetails = ({ handleNext, handleBack }: {
+  handleNext: (currentComponent: EditComponentsType) => void,
+  handleBack: (currentComponent: EditComponentsType) => void
+
+}) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error ,translate} =
-    useOfferEditAdditionalDetails({ handleNext });
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+    useOfferEditAdditionalDetails({ handleNext,handleBack });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">

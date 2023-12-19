@@ -26,14 +26,17 @@ export const SelectBox = ({
   const [option, setOption] = useState(options);
 
   useEffect(() => {
-    if (defaultValue) field?.onChange(defaultValue);
+    setOption(options);
+    if (defaultValue) {
+      field?.onChange(defaultValue);
+    }
   }, [defaultValue]);
 
-  useMemo(() => {
-    if (options?.length > 0) {
-      setOption(options);
-    }
-  }, [options?.length]);
+  // useMemo(() => {
+  //   if (options?.length > 0) {
+  //     setOption(options);
+  //   }
+  // }, [options?.length]);
 
   const search = useRef<string>("");
 
@@ -43,6 +46,7 @@ export const SelectBox = ({
 
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
+
     setIsOpen(false);
     onItemChange && onItemChange(value, fieldIndex);
     field?.onChange(value);
@@ -50,6 +54,7 @@ export const SelectBox = ({
   };
 
   const handleChange = (value: string) => {
+    
     search.current = value;
     setOption(
       options.filter((item) =>
@@ -57,11 +62,10 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
-    success ? "pl-4 pr-10" : "pl-11 pr-4"
-  }`;
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+    }`;
   const classes = combineClasses(defaultClasses, className);
-
+    
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary ">
       <button
@@ -72,8 +76,8 @@ export const SelectBox = ({
         }}
         className={`${classes} `}
       >
-        {(field && getLabelByValue(field.value, option)) ||
-          getLabelByValue(defaultValue, option)}
+        {(field && getLabelByValue(field.value, options)) ||
+          getLabelByValue(defaultValue, options)}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
@@ -95,7 +99,7 @@ export const SelectBox = ({
               className="w-full outline-none rounded-lg p-2"
             />
           </div>
-          {option.map(({ value, label }) => (
+          {options.map(({ value, label }) => (
             <li
               key={value}
               onClick={() => selectedOptionHandler(value)}

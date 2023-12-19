@@ -28,7 +28,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px] ",
             },
             field: {
-              className: `!border-dark ${
+              className: `!px-4 !border-dark ${
                 !isUpdate && "!border-light"
               } focus:!border-primary `,
               type: Field.select,

@@ -4,6 +4,7 @@ import featureConstants from "./features-constants";
 const SERVICE_URLS = {
   // service URL's (API End-Points)
   login: "/auth/login",
+  logout: "/auth/logout",
   resetPassword: "/auth/reset-password",
   forgotPassword: "/auth/forgot-password",
   loginGoogle: "/auth/oauth/google/auth",
@@ -78,11 +79,13 @@ const SERVICE_URLS = {
   emailSettings: "/setting/mail-setting/mail-setting",
   createEmailSettings: "/setting/mail-setting/email-configration",
   composeEmail: "/contract/send-email/",
-  composeInvoiceEmail:"/invoice/invoice-collection/send-email/"
+  composeInvoiceEmail: "/invoice/invoice-collection/send-email/"
 };
 
 const login = (data) =>
   post(SERVICE_URLS.login, data, { feature: featureConstants.login });
+const logoutUser = (data) =>
+  del(SERVICE_URLS.logout, data, { feature: featureConstants.login });
 const resetPassword = ({ otp, data }) =>
   post(SERVICE_URLS.resetPassword, { otp: otp, password: data?.password }, { feature: featureConstants.login });
 const forgotPassword = (data) =>
@@ -497,6 +500,7 @@ const apiServices = {
   readMailSettings,
   createMailSettings,
   sendContractEmail,
-  sendInvoiceEmail
+  sendInvoiceEmail,
+  logoutUser
 };
 export default apiServices;

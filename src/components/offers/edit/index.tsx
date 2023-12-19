@@ -1,5 +1,5 @@
 import { Layout } from "@/layout";
-import React from "react";
+import React, { useEffect } from "react";
 import EditOffersDetailsData from "./EditOffersDetailsData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -9,6 +9,7 @@ import ShareImages from "@/base-components/ui/modals1/ShareImages";
 import useOffers from "@/hooks/offers/useOffers";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
+import { readImage } from "@/api/slices/imageSlice/image";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,10 @@ const EditOffersDetails = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
+  useEffect(() => {
+    if (offerDetails?.id) dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
+
+  }, [offerDetails?.id])
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

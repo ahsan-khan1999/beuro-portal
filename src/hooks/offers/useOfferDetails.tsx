@@ -59,16 +59,10 @@ export default function useOfferDetails() {
     if (e) {
       e.stopPropagation();
     }
-    const filteredLead = offer?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) {
-      dispatch(setOfferDetails(filteredLead[0]));
-      dispatch(readNotes({ params: { type: "offer", id: filteredLead[0]?.id } }));
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    dispatch(readNotes({ params: { type: "offer", id: offerDetails?.id } }));
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
 
-    } else {
-      dispatch(readNotes({ params: { type: "offer", id: item } }));
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-    }
+
   };
 
   // function for hnadling the add note
@@ -87,23 +81,18 @@ export default function useOfferDetails() {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = offer?.find((item_) => item_.id === item)
-    if (filteredLead) {
-      dispatch(setOfferDetails(filteredLead));
-      dispatch(readImage({ params: { type: "offerID", id: filteredLead?.id } }));
-      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
-    }
+
+    dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
 
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail)
-    // const res = await dispatch(sendOfferEmail({ data: { "offerStatus": 1, id: offerDetails?.id }, router, translate }))
-    // if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
   }
   const onSuccess = () => {
     router.push("/offers")
     dispatch(updateModalType({ type: ModalType.NONE }))
-}
+  }
 
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -152,7 +141,7 @@ export default function useOfferDetails() {
     ),
   };
 
-  
+
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -169,7 +158,7 @@ export default function useOfferDetails() {
     if (res?.payload) offerCreatedHandler()
 
   }
-  const onNextHandle = () => { 
+  const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview"
   }
   return {

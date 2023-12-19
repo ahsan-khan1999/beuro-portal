@@ -58,7 +58,6 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     trigger, 0, attachements, setAttachements, contentDetails
 
   );
-  console.log(errors);
   
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {

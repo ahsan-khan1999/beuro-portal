@@ -275,7 +275,6 @@ const ColumnsComp = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
   const handleSaveSetings = async () => {
-
     let formatObj: any = {}
     for (const [key, value] of Object.entries(columnSettings)) {
       for (let item of value) {
@@ -289,16 +288,16 @@ const ColumnsComp = () => {
 
 
       }
-      let apiData = {
-        ...formatObj,
-        isFirstColumn: mainColumns?.firstColumn,
-        isSecondColumn: mainColumns?.secondColumn,
-        isThirdColumn: mainColumns?.thirdColumn,
-        isFourthColumn: mainColumns?.fourthColumn,
-      }
-      const response = await dispatch(updateTemplateSetting({ data: apiData, translate }))
-      if (response?.payload) handleSuccess()
     }
+    let apiData = {
+      ...formatObj,
+      isFirstColumn: mainColumns?.firstColumn,
+      isSecondColumn: mainColumns?.secondColumn,
+      isThirdColumn: mainColumns?.thirdColumn,
+      isFourthColumn: mainColumns?.fourthColumn,
+    }
+    const response = await dispatch(updateTemplateSetting({ data: apiData, translate }))
+    if (response?.payload) handleSuccess()
 
 
   }
@@ -352,7 +351,7 @@ const ColumnsComp = () => {
       <Button
         id="setting"
         inputType="button"
-        className="px-4 py-2 text-white text-base font-medium rounded-md ml-[32px] bg-[#4A13E7] "
+        className="px-4 text-white text-base font-medium rounded-md ml-[32px] bg-[#4A13E7] "
         text={translate("setting.save_setting")}
         loading={loading}
         onClick={handleSaveSetings}

@@ -5,7 +5,7 @@ export interface TableRowEmailTracker {
   subject: string;
 
 
-  status: "Open" | "Pending"
+  mailStatus: string
   viewMail: {
     colorClass: string;
   };

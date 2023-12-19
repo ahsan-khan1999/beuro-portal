@@ -36,7 +36,7 @@ const TableRows = ({
           >
             <span className="py-4 rounded-md">{item.invoiceNumber}</span>
             <span className="py-4 mlg:hidden xMaxSize:block">
-              {item.invoiceID?.contractID?.offerID?.customerID?.fullName}
+              {item.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.fullName}
             </span>
             <span className="py-4">
               {item.invoiceID?.contractID?.offerID?.title}

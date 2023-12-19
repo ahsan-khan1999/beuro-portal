@@ -5,13 +5,20 @@ import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { isJSON } from "@/utils/functions";
-import { getUser } from "@/utils/auth.util";
+import { getUser, logout } from "@/utils/auth.util";
+import logoutImage from "@/assets/svgs/Group 41120.svg"
+import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
+import {  logoutUser } from "@/api/slices/authSlice/auth";
 const Header = () => {
-  // const user = isJSON(getUser())
   const { user } = useAppSelector((state) => state.auth);
-
+  const dispatch = useAppDispatch()
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    logout()
+  }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       <div className="flex items-center">
@@ -25,6 +32,7 @@ const Header = () => {
         <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
           {user?.company?.companyName}{" "}
         </span>
+
       </div>
       <div className="flex items-center">
         <div className="flex items-center pr-8">
@@ -35,14 +43,23 @@ const Header = () => {
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image src={ userIcon} alt="User Icon" className="mr-3" />
+          <Image src={userIcon} alt="User Icon" className="mr-3" />
           <div className="">
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}
             </span>
-            <span className="text-sm tracking-[0.4 px] text-[#8F8F8F] block">
-              {user?.role}
+            <span className="flex justify-between space-x-2">
+              <span className=" text-sm tracking-[0.4 px] text-[#8F8F8F] block">
+
+                {user?.role}
+              </span>
+              <span className=" px-2  cursor-pointer " onClick={handleLogout}>
+
+                <Image src={logoutImage} alt="logout" />
+              </span>
             </span>
+
+
           </div>
         </div>
       </div>

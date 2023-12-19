@@ -56,7 +56,6 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            console.log("comming");
 
             const { offerId, step, stage } = data
             let apiData = { ...data, offerId: offerId, step: step }
@@ -96,7 +95,6 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             //     setErrors(setError, transformedValidationMessages, translate);
             // } else {
             // }
-            console.log(e, "event");
 
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));

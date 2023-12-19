@@ -22,7 +22,7 @@ export default function Employees() {
 
   const CurrentComponent = useEmptyStates(
     <TableRows employsData={currentPageRows} />,
-    currentPageRows.length > 0
+    currentPageRows?.length > 0
   );
 
   return (

@@ -49,7 +49,6 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
   };
 
   const handleSelection = () => {
-    console.log(year, month);
     handleDownload({ month: month, year: year });
   };
 

@@ -30,7 +30,6 @@ export const readNotes: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
-            console.log(params, "params");
 
             const response = await apiServices.readNotes(params);
             return response?.data?.data;

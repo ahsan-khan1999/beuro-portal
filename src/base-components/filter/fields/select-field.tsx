@@ -46,7 +46,7 @@ export default function SelectField({
               {options.map((item, key) => (
                 <div
                   className="flex justify-center hover:bg-lightGray rounded-md cursor-pointer"
-                  key={key}
+                  key={item}
                 >
                   <span
                     onClick={() => {

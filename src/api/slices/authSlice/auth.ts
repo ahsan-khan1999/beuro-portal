@@ -488,6 +488,19 @@ export const sendOtpViaEmail: AsyncThunk<boolean, NextRouter, object> | any = cr
     }
   }
 );
+export const logoutUser: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
+  "user/logout",
+  async (data, thunkApi) => {
+
+
+    try {
+      apiServices.logoutUser({ data });
+      return true;
+    } catch (e: any) {
+      return false;
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -680,74 +693,7 @@ const authSlice = createSlice({
     builder.addCase(changePassword.rejected, (state) => {
       state.loading = false;
     });
-    // builder.addCase(generateOtp.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(generateOtp.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(generateOtp.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpGoogle.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpGoogle.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpGoogle.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpFacebook.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpFacebook.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpFacebook.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpInstagram.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpInstagram.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpInstagram.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(sellerDetails.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(sellerDetails.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.seller = action.payload;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(sellerDetails.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(changePassword.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(changePassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(changePassword.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(resetPassword.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(resetPassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(resetPassword.rejected, (state) => {
-    //   state.loading = false;
-    // });
+    
     builder.addCase(forgotPassword.pending, (state) => {
       state.loading = true;
     });
@@ -755,6 +701,15 @@ const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(forgotPassword.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(logoutUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(logoutUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(logoutUser.rejected, (state) => {
       state.loading = false;
     });
   },

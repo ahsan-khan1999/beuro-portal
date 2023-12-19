@@ -32,6 +32,8 @@ import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
+import { FollowUp } from "./settings";
+import { TaxSetting } from "@/api/slices/settingSlice/settings";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -404,6 +406,7 @@ export type GenerateOfferServiceFormField = (
     handleRemove?: (id: string) => void;
     generatePrice?: (index: number) => void;
     total?: Total;
+    tax?: TaxSetting[] | null
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -476,6 +479,7 @@ export type GenerateLeadsCustomerFormField = (
     content?: ContentTableRowTypes[];
     handleContentSelect?: () => void;
     selectedContent?: string;
+    leadID?: string
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -493,7 +497,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[] },
+  data: { customer: Customers[]; lead: Lead[], followUps: FollowUp | null },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];

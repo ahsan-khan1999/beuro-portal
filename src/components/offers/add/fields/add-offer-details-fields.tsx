@@ -36,12 +36,13 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     handleContentSelect,
     selectedContent,
     offerDetails,
+    leadID
   },
   setValue
 ) => {
+  
   const { t: translate } = useTranslation();
-  console.log(lead, "lad");
-
+  
   let formField: FormField[] = [
     {
       containerClass: "mt-6",
@@ -203,7 +204,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-dark  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
@@ -370,15 +371,17 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-dark  focus:!border-primary `,
+        className: `pl-4  !border-dark  focus:!border-primary `,
         type: Field.select,
         id: "customerID",
         name: "customerID",
-        options: customer?.map((item, key) => ({
+        options: customer?.map((item) => ({
           value: item.id,
           label: item.fullName,
-        })),
+          key: item.id
 
+        })),
+ 
         control,
         onItemChange: onCustomerSelect,
         value: offerDetails?.id
@@ -387,7 +390,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         setValue,
       },
     };
-
+    
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps;
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
       divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
@@ -400,7 +403,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
       Array.isArray(field?.field?.children) &&
       field?.field?.children.some((child: any) => child?.field?.id == "customerID")
   );
-
+    
   if (fieldLeadIndex !== -1 && type === "Existing Customer") {
     const leadField = {
       containerClass: "mb-0",
@@ -410,17 +413,17 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-dark  focus:!border-primary `,
+        className: `pl-4  !border-dark  focus:!border-primary `,
         type: Field.select,
         id: "leadID",
         name: "leadID",
         options: lead?.map((item) => ({
           value: item.id,
           label: item.refID,
-          key: item.id
-        })),
+        })) ,
         control,
-        value: offerDetails?.id && offerDetails?.leadID?.id || (lead?.length === 1 && customerDetails?.id) && lead[0]?.id || offerDetails?.leadID?.id,
+        // value:""
+        value: (lead?.length === 1 && offerDetails?.id) && lead[0]?.id || offerDetails?.id && offerDetails?.leadID?.id || leadID,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps;

@@ -29,7 +29,6 @@ export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, id: followUpDetails?.id, dateTime: moment(data?.dateTime).toISOString() }
     const res = await dispatch(createPostpondNotes({ data: apiData, router, setError, translate }));
-    console.log(res,"res");
     
     if (res?.payload) handleFollowUpsDetails(followUpDetails?.id)
   };

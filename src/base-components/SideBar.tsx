@@ -14,10 +14,12 @@ import { MailTrackerIcon } from "@/assets/svgs/components/sideBar/MailTracker";
 import { SettingsIcon } from "@/assets/svgs/components/sideBar/Settings";
 import { ContactSupportsIcon } from "@/assets/svgs/components/sideBar/ContactSupports";
 import { useEffect, useState } from "react";
-import { sideBar } from "@/utils/static";
+import { sideBar, staticEnums } from "@/utils/static";
 import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
 import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
 import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequest";
+import { useAppSelector } from "@/hooks/useRedux";
+import { getValueByKey } from "@/utils/auth.util";
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
@@ -39,7 +41,9 @@ export const svgs = {
 };
 
 const SideBar = () => {
-  const userRole = 0;
+  const { user } = useAppSelector(state => state.auth)
+
+  const userRole = staticEnums["User"]["role"][user?.role as string];
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
 
@@ -57,23 +61,20 @@ const SideBar = () => {
                 ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${
-                      router.pathname === item.pathname &&
+                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                       "bg-primary rounded-lg  hover:bg-primary"
-                    } ${item.className}`}>
+                      } ${item.className}`}>
                     <span
-                      className={`${
-                        router.pathname === item.pathname && "sidebar-svg"
-                      } mr-2 `}>
+                      className={`${router.pathname === item.pathname && "sidebar-svg"
+                        } mr-2 `}>
                       {item.icon && svgs[item.icon]}
                     </span>
 
                     <span
-                      className={`font-medium tracking-[0.5px] ${
-                        router.pathname === item.pathname
-                          ? "text-white"
-                          : "text-[#4B4B4B]"
-                      }`}>
+                      className={`font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                        ? "text-white"
+                        : "text-[#4B4B4B]"
+                        }`}>
                       {item.title}
                     </span>
                   </button>
@@ -87,31 +88,27 @@ const SideBar = () => {
                             query: { filter: item.query },
                           });
                       }}
-                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${
-                        router.pathname === item.pathname &&
+                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
                         "bg-primary rounded-lg hover:bg-primary"
-                      }`}>
+                        }`}>
                       <div className="flex items-center">
                         <span
-                          className={`${
-                            router.pathname === item.pathname && "sidebar-svg"
-                          } mr-2 `}>
+                          className={`${router.pathname === item.pathname && "sidebar-svg"
+                            } mr-2 `}>
                           {item.icon && svgs[item.icon]}
                         </span>
                         <span
-                          className={` font-medium tracking-[0.5px] ${
-                            router.pathname === item.pathname
-                              ? "text-white"
-                              : " text-[#4B4B4B]"
-                          }`}>
+                          className={` font-medium tracking-[0.5px] ${router.pathname === item.pathname
+                            ? "text-white"
+                            : " text-[#4B4B4B]"
+                            }`}>
                           {item.title}
                         </span>
                       </div>
                       <div
                         className={`
                           cursor-pointer  ${isOpen == index ? "rotate-180" : ""}
-                          ${
-                            router.pathname === item.pathname && "sidebar-svg"
+                          ${router.pathname === item.pathname && "sidebar-svg"
                           }`}
                         onClick={() => {
                           isOpen == index ? setIsOpen(null) : setIsOpen(index);

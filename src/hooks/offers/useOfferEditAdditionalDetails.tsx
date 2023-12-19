@@ -12,7 +12,7 @@ import { readContent, setContentDetails } from "@/api/slices/content/contentSlic
 import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 
-export const useOfferEditAdditionalDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
+export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { handleNext: (currentComponent: EditComponentsType) => void, handleBack: (currentComponent: EditComponentsType) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -37,8 +37,8 @@ export const useOfferEditAdditionalDetails = ({ handleNext }: { handleNext: (cur
     resolver: yupResolver<FieldValues>(schema),
   });
   const selectedContent = watch("content")
-  const handleBack = () => {
-    handleNext(EditComponentsType.serviceEdit)
+  const handlePrevious = () => {
+    handleBack(EditComponentsType.serviceEdit)
   }
   useMemo(() => {
     const filteredContent = content?.find(
@@ -49,7 +49,7 @@ export const useOfferEditAdditionalDetails = ({ handleNext }: { handleNext: (cur
       setValue("additionalDetails", filteredContent?.offerContent?.title);
     }
   }, [selectedContent])
-  const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handleBack, 0,
+  const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handlePrevious, 0,
     { content: content, contentDetails: contentDetails, offerDetails }, setValue, trigger);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: EditComponentsType.additionalEdit }

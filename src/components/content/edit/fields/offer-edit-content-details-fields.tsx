@@ -153,7 +153,6 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 };
 
 const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, translate: Function, append?: UseFieldArrayAppend<FieldValues, "offerContent.address">, remove?: UseFieldArrayRemove) => {
-  console.log(count, "count");
   const addressformFields = [];
   for (let i = 0; i < count; i++) {
     addressformFields.push({

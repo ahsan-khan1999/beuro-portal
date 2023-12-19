@@ -1,4 +1,5 @@
 import { CustomerTable } from "@/types/customer";
+import { formatDateTimeToDate } from "@/utils/utility";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -30,7 +31,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               {item.phoneNumber}
             </span>
             <span className="py-4 xlg:flex items-center mlg:hidden ">
-              {item.createdAt}
+              {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">
               {item.address.country}
