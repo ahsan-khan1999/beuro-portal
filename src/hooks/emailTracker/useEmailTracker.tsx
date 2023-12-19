@@ -5,7 +5,7 @@ import { FilterType } from "@/types";
 import { readEmail } from "@/api/slices/emailTracker/email";
 
 const useEmailTracker = () => {
-  const { email, lastPage, totalCount } = useAppSelector(state => state.emailSlice)
+  const { email, lastPage, totalCount,loading } = useAppSelector(state => state.emailSlice)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
@@ -52,7 +52,8 @@ const useEmailTracker = () => {
     handlePageChange,
     itemsPerPage,
     filter, setFilter,
-    handleFilterChange
+    handleFilterChange,
+    loading,
   };
 };
 

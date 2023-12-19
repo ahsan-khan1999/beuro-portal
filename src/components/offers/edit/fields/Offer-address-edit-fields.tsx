@@ -28,7 +28,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -45,7 +45,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -62,7 +62,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -83,7 +83,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
         id: "description",
         name: "description",
         rows: 8,
@@ -114,7 +114,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
@@ -131,7 +131,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "postCode",
               name: "postCode",
@@ -148,7 +148,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
               inputType: "text",
               id: "country",
               name: "country",
@@ -169,7 +169,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
         id: "description",
         rows: 8,
         name: "description",

@@ -7,7 +7,7 @@ import {
 import { FilterType } from "@/types";
 
 export default function useCustomer() {
-  const { customer, lastPage, totalCount } = useAppSelector(state => state.customer)
+  const { customer, lastPage, totalCount,loading } = useAppSelector(state => state.customer)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
@@ -54,6 +54,7 @@ export default function useCustomer() {
     handlePageChange,
     itemsPerPage,
     filter, setFilter,
-    handleFilterChange
+    handleFilterChange,
+    loading
   };
 }

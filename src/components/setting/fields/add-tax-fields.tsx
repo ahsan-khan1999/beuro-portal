@@ -18,7 +18,7 @@ export const addTaxFormField: GenerateAddTaxFormField = (
       },
       field: {
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         inputType: "text",
         id: "name",
         name: "name",
@@ -35,7 +35,7 @@ export const addTaxFormField: GenerateAddTaxFormField = (
       },
       field: {
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         inputType: "number",
         id: "taxRate",
         name: "taxRate",

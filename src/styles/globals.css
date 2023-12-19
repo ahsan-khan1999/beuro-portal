@@ -40,12 +40,13 @@ body {
 }
 .menu:hover .menuItems {
   opacity: 1;
-  transform: translateY(0);
+  /* transform: translateY(0); */
+  transition: all .5s ease-in-out !important;
 }
 
 .menuItems {
   opacity: 0;
-  transform: translateY(-100rem);
+  /* transform: translateY(-10rem); */
 }
 .sidebar-height {
   max-height: 800px;
@@ -162,6 +163,18 @@ input[type="number"] {
   border: none !important;
   border-right: 1px solid #c4c4c4 !important;
 }
+
+.react-tel-input .selected-flag{
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+}
+
+/* .react-tel-input .flag-dropdown:hover{
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+} */
+
+
 
 
 
@@ -390,4 +403,9 @@ input[type="number"] {
 
 .modal-closing {
   animation-name: modalClose;
+}
+@media (max-width: 1160px) {
+  .scalable-div {
+    transform: scale(calc(100vw / 1160));
+  }
 }

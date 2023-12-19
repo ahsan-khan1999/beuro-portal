@@ -13,7 +13,7 @@ enum CheckData {
 }
 import emptyState from "@/assets/svgs/empty-state.svg";
 import ComposeMail from "./compose-mail/ComposeMail";
-import NoDataEmptyState from "./invoice-empty-state";
+import NoDataEmptyState from "../../../base-components/loadingEffect/no-data-empty-state";
 const InvoiceDetails = () => {
   const check = (Currentcomponent: JSX.Element, val: CheckData) => {
     const isData = {
@@ -41,7 +41,8 @@ const InvoiceDetails = () => {
     handleInvoiceEdit,
     handleSendEmail,
     isSendEmail,
-    onNextHandle, setIsSendEmail
+    onNextHandle,
+    setIsSendEmail,
   } = useInvoiceDetail();
   const invoiceComponent = {
     Invoice: check(
@@ -78,7 +79,7 @@ const InvoiceDetails = () => {
             handleSendEmail={handleSendEmail}
           />
         </InvoiceCardLayout>
-        {/* <ComposeMail backRouteHandler={handleSendEmail} onNextHandle={onNextHandle} /> : */}
+
         <div className="flex mt-[12px] mb-[18px]">
           <DetailsSwitchBtn
             switchDetails={switchDetails}

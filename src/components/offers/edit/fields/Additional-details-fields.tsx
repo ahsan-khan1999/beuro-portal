@@ -17,7 +17,7 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         type: Field.select,
         value:
           "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
@@ -43,7 +43,7 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "additionlData",
         name: "additionlData",
         control,

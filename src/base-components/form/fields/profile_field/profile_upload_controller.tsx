@@ -7,15 +7,15 @@ export const ProfileControllerField = ({
   control,
   id,
   name,
-  
+  className,
+  iconClasses
 }: ProfileUploadFieldProps) => {
-
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: {error} }) => (
-        <ProfileUpload id={id} field={field} />
+      render={({ field, fieldState: { error } }) => (
+        <ProfileUpload id={id} field={field} className={className} iconClasses={iconClasses}/>
       )}
     />
   );

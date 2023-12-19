@@ -43,13 +43,11 @@ export default function useCustomerDetail(stage: boolean) {
   const { t: translate } = useTranslation();
 
   const onClose = () => {
-    setTimeout(() => {
-      dispatch(
-        updateModalType({
-          type: ModalType.NONE,
-        })
-      );
-    }, 2000);
+    dispatch(
+      updateModalType({
+        type: ModalType.NONE,
+      })
+    );
   };
   const handleCreateSuccess = () => {
     dispatch(

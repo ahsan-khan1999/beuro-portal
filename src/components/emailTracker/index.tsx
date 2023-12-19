@@ -9,31 +9,33 @@ import useEmailTracker from "@/hooks/emailTracker/useEmailTracker";
 import { useEmptyStates } from "@/utils/hooks";
 
 export default function EmailTracker() {
-  const { currentPageRows,
+  const {
+    currentPageRows,
     handlePageChange,
     totalItems,
     itemsPerPage,
     filter,
     setFilter,
-    handleFilterChange, } =
-    useEmailTracker();
+    handleFilterChange,
+    loading,
+  } = useEmailTracker();
 
-    const CurrentComponent = useEmptyStates(
-      <TableRow dataToAdd={currentPageRows} />,
-      currentPageRows.length > 0
-    );
-
+  const CurrentComponent = useEmptyStates(
+    <TableRow dataToAdd={currentPageRows} />,
+    currentPageRows?.length > 0,
+    loading
+  );
   return (
     <>
       <Layout>
-        <TableFunctions 
+        <TableFunctions
           filter={filter}
           setFilter={setFilter}
           handleFilterChange={handleFilterChange}
         />
         <TableLayout>
           <TableHeading />
-         {CurrentComponent}
+          {CurrentComponent}
         </TableLayout>
         <Pagination
           totalItems={totalItems}
@@ -41,6 +43,6 @@ export default function EmailTracker() {
           onPageChange={handlePageChange}
         />
       </Layout>
-    </> 
+    </>
   );
 }

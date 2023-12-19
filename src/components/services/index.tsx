@@ -18,11 +18,13 @@ export default function Services() {
     setFilter,
     handleFilterChange,
     translate,
+    loading
   } = useService();
 
   const CurrentComponent = useEmptyStates(
     <TableRowServices servicesData={currentPageRows} />,
-    currentPageRows.length > 0
+    currentPageRows.length > 0,
+    loading
   );
 
   return (

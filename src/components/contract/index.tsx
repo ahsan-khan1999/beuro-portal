@@ -21,6 +21,7 @@ export default function Contract() {
     handleFilterChange,
     filter,
     setFilter,
+    loading,
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
@@ -29,7 +30,8 @@ export default function Contract() {
       handleImageUpload={handleImageUpload}
       openModal={handleNotes}
     />,
-    currentPageRows.length > 0
+    currentPageRows.length > 0,
+    loading
   );
 
   return (

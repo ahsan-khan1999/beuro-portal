@@ -13,8 +13,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className:
-          "grid grid-cols-1 lg:grid-cols-2 gap-y-5   lg:gap-x-[60px] ",
+        className: "grid grid-cols-1 lg:grid-cols-2 gap-y-5   lg:gap-x-[60px] ",
         children: [
           {
             containerClass: "mb-0",
@@ -27,7 +26,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailDriver",
               name: "mailDriver",
@@ -46,7 +45,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailHost",
               name: "mailHost",
@@ -65,7 +64,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailPort",
               name: "mailPort",
@@ -84,7 +83,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailEncryption",
               name: "mailEncryption",
@@ -103,7 +102,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailUserName",
               name: "mailUserName",
@@ -122,7 +121,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailPassword",
               name: "mailPassword",
@@ -141,7 +140,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailFromAddress",
               name: "mailFromAddress",
@@ -160,7 +159,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailFromName",
               name: "mailFromName",
@@ -182,16 +181,17 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       field: {
         type: Field.span,
         id: "",
-        text: translate("setting.mail_setting.mail_form_fields.mail_description"),
-        containerClassName: ""
-      }
-
+        text: translate(
+          "setting.mail_setting.mail_form_fields.mail_description"
+        ),
+        containerClassName: "",
+      },
     },
     {
       containerClass: "mt-2",
       field: {
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         inputType: "email",
         id: "testingMail",
         name: "testingMail",

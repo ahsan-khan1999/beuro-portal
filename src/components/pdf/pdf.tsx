@@ -11,6 +11,7 @@ import {
 import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
 import { YogaPdfContainer } from "./yoga-pdf-container";
 import { ProductItemNewPage } from "./preview/productDetails/product-item-next-page";
+import { Container } from "./container";
 
 export const productItems: ProductItemProps[] = [
   {
@@ -442,7 +443,7 @@ export const Pdf = () => {
   }, []);
 
   return (
-    <YogaPdfContainer>
+    <Container>
       <PreviewCard />
       <div className="flex flex-col gap-y-[30px]">
         {newPageData.length > 0 && (
@@ -477,6 +478,6 @@ export const Pdf = () => {
       <button className="mt-[55px] w-full bg-[#45C769] rounded-[4px] shadow-md py-[10px] text-center text-white">
         Accepted
       </button>
-    </YogaPdfContainer>
+    </Container>
   );
 };

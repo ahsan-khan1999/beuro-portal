@@ -50,7 +50,7 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   fieldIndex?: number;
   onChange?: (value?: number) => void;
   percentage?: string;
-  step?: string
+  step?: string;
 }
 
 // textarea added
@@ -119,7 +119,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
-  fieldIndex?: number
+  fieldIndex?: number;
 }
 
 export interface SelectBoxProps {
@@ -129,16 +129,13 @@ export interface SelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
   svg?: string;
-  onItemChange?: (id: string, index?: number) => void
+  onItemChange?: (id: string, index?: number) => void;
   success?: boolean;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
-  fieldIndex?: number
-
+  fieldIndex?: number;
 }
-
-
 
 export interface MultiSelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
@@ -158,7 +155,7 @@ export interface MultiSelectBoxProps {
   field?: ControllerRenderProps<FieldValues, string>;
   value: string[];
   svg?: string;
-  onItemChange?: Function
+  onItemChange?: Function;
   success?: boolean;
   placeholder?: string;
   className?: string;
@@ -178,15 +175,15 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   containerClassName?: string;
   textClassName?: string;
   checked?: boolean;
-  setValue?: UseFormSetValue<FieldValues>,
+  setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 export interface DragAndDropFileFieldProps
   extends BaseFieldProps<Field.dragAndDropFileField> {
   control?: Control<FieldValues>;
-  value?: string
+  value?: string;
 }
 
 // interface for the pdf file upload
@@ -195,16 +192,15 @@ export interface DragAndDropPdfFieldProps
   control?: Control<FieldValues>;
   isOpenedFile?: boolean;
   attachements?: Attachement[];
-  setAttachements?: React.Dispatch<SetStateAction<any>>
-  isAttachement?:boolean
-
-
+  setAttachements?: React.Dispatch<SetStateAction<any>>;
+  isAttachement?: boolean;
 }
 
 // interface for the pdf file upload
 export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
+  iconClasses?: string;
 }
 
 // interface for the Image upload
@@ -212,7 +208,7 @@ export interface ImageUploadFieldProps
   extends BaseFieldProps<Field.imageUploadField> {
   control?: Control<FieldValues>;
   onClick?: Function;
-  value?: string
+  value?: string;
 }
 
 // Interface for the input field copy
@@ -244,11 +240,11 @@ export interface MultiDateProps extends BaseFieldProps<Field.phone> {
   success?: boolean;
   disabled?: boolean;
   remove?: string;
-  onRemove?: () => void
+  onRemove?: () => void;
 }
 export interface DateRangeProps {
   startDate: string;
-  endDate: string
+  endDate: string;
 }
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;
@@ -258,7 +254,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   svg?: string;
   success?: boolean;
   onRemove?: () => void;
-  dateType?: string
+  dateType?: string;
 }
 
 export interface SpanProps {
@@ -272,7 +268,7 @@ export interface SpanProps {
   dispatch?: Dispatch;
   onClick?: Function;
   id: string;
-  html?: string
+  html?: string;
 }
 
 export interface DivProps {
@@ -356,7 +352,6 @@ export type FieldProps =
   | AddFieldProps
   | ToggleButtonFormProps;
 
-
 export interface FormField {
   containerClass?: string;
   label?: LabelProps | null;
@@ -419,7 +414,7 @@ export interface FormComponentProps {
   setError?: UseFormSetError<FieldValues>;
   currentFormStage?: string;
   setCurrentFormStage?: any;
-  user?: User
+  user?: User;
 }
 
 export interface FormFooterProps {
@@ -447,10 +442,10 @@ export interface CustomHookFormProps {
 export interface HookFieldProps {
   [key: string]: JSX.Element;
 }
-export interface ToggleButtonFormProps extends BaseFieldProps<Field.toggleButton> {
+export interface ToggleButtonFormProps
+  extends BaseFieldProps<Field.toggleButton> {
   register: UseFormRegister<FieldValues>;
   className: string;
   checked: boolean;
-  onClick?: () => void
-
+  onClick?: () => void;
 }

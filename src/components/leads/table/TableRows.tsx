@@ -34,13 +34,13 @@ const TableRows = ({
             <span className="py-4 rounded-md flex items-center">
               {item?.refID}
             </span>
-            <span className=" py-4 flex items-center ">
+            <span className="py-4 flex items-center ">
               {item.customerDetail?.fullName}
             </span>
-            <span className=" py-4 flex items-center mlg:hidden maxSize:flex">
+            <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
               {item.customerDetail?.email}
             </span>
-            <span className=" py-4 flex items-center">
+            <span className="py-4 flex items-center">
               {item.customerDetail?.phoneNumber}
             </span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex ">
@@ -53,13 +53,13 @@ const TableRows = ({
               <div
                 className={`bg-[${getStatusColor(
                   item.leadStatus
-                )}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md w-[70px] text-sm`}
               >
                 {item.leadStatus}
               </div>
             </span>
             <span
-              className="py-4 flex justify-center items-center  cursor-pointer"
+              className="py-4 flex justify-center items-center cursor-pointer"
               onClick={(e) => handleImageUpload(item?.id, e)}
             >
               <svg

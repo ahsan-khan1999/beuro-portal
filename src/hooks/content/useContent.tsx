@@ -8,7 +8,7 @@ import { readContent, setContentDetails } from "@/api/slices/content/contentSlic
 import localStoreUtil from "@/utils/localstore.util";
 
 const useContent = () => {
-  const { content, lastPage, totalCount } = useAppSelector(state => state.content)
+  const { content, lastPage, totalCount,loading } = useAppSelector(state => state.content)
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
@@ -55,7 +55,8 @@ const useContent = () => {
     handleFilterChange,
     filter,
     setFilter,
-    translate
+    translate,
+    loading,
   };
 };
 

@@ -3,17 +3,15 @@ import EmailCard from "./PdfCard";
 import Page1 from "./pages/Page1";
 import EmailButtons from "./PdfButtons";
 import Page2 from "./pages/Page2";
+import { Pdf } from "@/components/pdf/pdf";
 const PdfPriview = () => {
   return (
-    <div>
+    <div className="">
       <EmailCard />
-      <div className="mt-[30px]">
-        <Page1 />
-      </div>
+      <div className="flex w-full">
 
-      <div className="mt-[30px]">
-        <Page2 />
-        {/* <EmailButtons /> */}
+        <Pdf />
+
       </div>
     </div>
   );

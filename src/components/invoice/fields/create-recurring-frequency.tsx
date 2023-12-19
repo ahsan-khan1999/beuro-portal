@@ -22,7 +22,7 @@ export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField 
             },
             field: {
                 type: Field.date,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "dateOfNextInvoice",
                 name: "dateOfNextInvoice",
                 register,

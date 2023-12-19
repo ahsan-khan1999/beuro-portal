@@ -68,4 +68,5 @@ export type ModalConfigType = {
 export enum EmptyStateType {
   hasNoData,
   hasData,
+  loading,
 }

@@ -133,6 +133,7 @@ const useInvoice = () => {
     handleFilterChange,
     filter,
     setFilter,
+    loading,
   };
 };
 
