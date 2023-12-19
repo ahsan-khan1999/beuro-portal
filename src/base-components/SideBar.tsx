@@ -18,6 +18,7 @@ import { sideBar } from "@/utils/static";
 import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
 import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
 import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequest";
+
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
@@ -43,8 +44,6 @@ const SideBar = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
 
-
-
   return (
     <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll" >
       <div className="  pt-6 px-4 pb-8 flex flex-col">
@@ -60,11 +59,13 @@ const SideBar = () => {
                     className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${
                       router.pathname === item.pathname &&
                       "bg-primary rounded-lg  hover:bg-primary"
-                    } ${item.className}`}>
+                    } ${item.className}`}
+                  >
                     <span
                       className={`${
                         router.pathname === item.pathname && "sidebar-svg"
-                      } mr-2 `}>
+                      } mr-2 `}
+                    >
                       {item.icon && svgs[item.icon]}
                     </span>
 
@@ -73,7 +74,8 @@ const SideBar = () => {
                         router.pathname === item.pathname
                           ? "text-white"
                           : "text-[#4B4B4B]"
-                      }`}>
+                      }`}
+                    >
                       {item.title}
                     </span>
                   </button>
@@ -81,21 +83,24 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        item.pathname &&
-                          router.push({
-                            pathname: item.pathname,
-                            query: { filter: item.query },
-                          });
+                        // item.pathname &&
+                        //   router.push({
+                        //     pathname: item.pathname,
+                        //     query: { filter: item.query },
+                        //   });
+                        isOpen == index ? setIsOpen(null) : setIsOpen(index);
                       }}
                       className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${
                         router.pathname === item.pathname &&
                         "bg-primary rounded-lg hover:bg-primary"
-                      }`}>
+                      }`}
+                    >
                       <div className="flex items-center">
                         <span
                           className={`${
                             router.pathname === item.pathname && "sidebar-svg"
-                          } mr-2 `}>
+                          } mr-2 `}
+                        >
                           {item.icon && svgs[item.icon]}
                         </span>
                         <span
@@ -103,7 +108,8 @@ const SideBar = () => {
                             router.pathname === item.pathname
                               ? "text-white"
                               : " text-[#4B4B4B]"
-                          }`}>
+                          }`}
+                        >
                           {item.title}
                         </span>
                       </div>
@@ -113,16 +119,15 @@ const SideBar = () => {
                           ${
                             router.pathname === item.pathname && "sidebar-svg"
                           }`}
-                        onClick={() => {
-                          isOpen == index ? setIsOpen(null) : setIsOpen(index);
-                        }}>
+                      >
                         <svg
                           className={` `}
                           xmlns="http://www.w3.org/2000/svg"
                           width="13"
                           height="8"
                           viewBox="0 0 13 8"
-                          fill="none">
+                          fill="none"
+                        >
                           <path
                             d="M0.267406 0.598758C0.438678 0.427537 0.670942 0.331351 0.913121 0.331351C1.1553 0.331351 1.38756 0.427537 1.55883 0.598758L6.07975 5.11967L10.6007 0.598758C10.7729 0.43239 11.0036 0.340333 11.2431 0.342413C11.4826 0.344494 11.7116 0.440547 11.881 0.609883C12.0503 0.779219 12.1463 1.00829 12.1484 1.24776C12.1505 1.48723 12.0585 1.71793 11.8921 1.89019L6.72546 7.05681C6.55419 7.22803 6.32193 7.32422 6.07975 7.32422C5.83757 7.32422 5.6053 7.22803 5.43403 7.05681L0.267406 1.89019C0.0961862 1.71891 0 1.48665 0 1.24447C0 1.00229 0.0961862 0.77003 0.267406 0.598758Z"
                             fill="#8F8F8F"
@@ -143,7 +148,8 @@ const SideBar = () => {
                                   pathname: it.pathname,
                                   query: { filter: it.query },
                                 })
-                              }>
+                              }
+                            >
                               {it.title}
                             </button>
                           </div>

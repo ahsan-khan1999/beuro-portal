@@ -23,7 +23,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "confirmationContent.title",
                 name: "confirmationContent.title",
@@ -40,7 +40,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "confirmationContent.description",
                 name: "confirmationContent.description",
 
@@ -59,7 +59,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "confirmationContent.body",
                 name: "confirmationContent.body",
 

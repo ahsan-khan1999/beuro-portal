@@ -5,13 +5,18 @@ import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import Image from "next/image";
 import edit_circle from "@/assets/svgs/edit_circle.svg";
 import profile from "@/assets/svgs/Group 480958610.svg";
+import { combineClasses } from "@/utils/utility";
 
 export const ProfileUpload = ({
   id,
   field,
+  className,
+  iconClasses,
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
+  className?: string;
+  iconClasses?: string;
 }) => {
   // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();
@@ -27,20 +32,25 @@ export const ProfileUpload = ({
     }
   };
 
+  console.log(className);
+
+  const defaultClasses = `relative`;
+  const classes = combineClasses(defaultClasses, className);
+
   return (
     <label htmlFor={id}>
       <div className="w-full">
         {field.value ? (
-          <div className="relative w-[241px] h-[241px] rounded-full">
+          <div className={`${classes}`}>
             <Image
               src={field.value}
               layout="responsive"
               width={241}
               height={241}
               alt="Uploaded Preview"
-              className="rounded-full !w-[241px] !h-[241px]"
+              className={`${classes}`}
             />
-            <label className="absolute right-3 bottom-3">
+            <label className={`absolute ${iconClasses}`}>
               <input
                 type="file"
                 className="hidden"
@@ -53,11 +63,10 @@ export const ProfileUpload = ({
               />
             </label>
           </div>
-
         ) : (
-          <div className="relative w-[241px] h-[241px] rounded-full">
-            <Image src={profile} alt="profile" />
-            <label className="absolute right-3 bottom-3">
+          <div className={`${classes}`}>
+            {/* <Image src={profile} alt="profile" /> */}
+            <label className={`absolute ${iconClasses}`}>
               <input
                 type="file"
                 className="hidden"

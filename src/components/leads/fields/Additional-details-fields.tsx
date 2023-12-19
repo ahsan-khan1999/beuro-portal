@@ -14,7 +14,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
       containerClass: "mb-0 mt-6",
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "additionalDetails",
         name: "additionalDetails",
         control,

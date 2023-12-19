@@ -22,7 +22,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
 
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const user: User = isJSON(getUser())
+  const user: User = isJSON(getUser());
   const schema = generateProfileSettingValidation(translate);
 
   const {
@@ -31,11 +31,11 @@ export default function useSettingProfile(handleChangePassword: Function) {
     control,
     reset,
     formState: { errors },
-    setError
+    setError,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  
+
   useEffect(() => {
     reset({
       ...user,
@@ -44,19 +44,18 @@ export default function useSettingProfile(handleChangePassword: Function) {
       taxNumber: user.company?.taxNumber,
       address: user.company?.address,
       bankDetails: user.company?.bankDetails,
-      logo: user.company?.logo
-    })
-  }, [])
+      logo: user.company?.logo,
+    });
+  }, []);
 
   const onClose = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }))
-  }
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
   const handleSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
-  }
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+  };
 
   const MODAL_CONFIG: ModalConfigType = {
-
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
@@ -65,18 +64,25 @@ export default function useSettingProfile(handleChangePassword: Function) {
         routeHandler={onClose}
       />
     ),
-
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const fields = changeProfileSettingFormField(register, loading, control, handleChangePassword, user);
+  const fields = changeProfileSettingFormField(
+    register,
+    loading,
+    control,
+    handleChangePassword,
+    user
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, logo: data?.company?.logo }
-    const res = await dispatch(updateAccountSettings({ data: apiData, router, setError, translate }))
-    if (res?.payload) handleSuccess()
+    const apiData = { ...data, logo: data?.company?.logo };
+    const res = await dispatch(
+      updateAccountSettings({ data: apiData, router, setError, translate })
+    );
+    if (res?.payload) handleSuccess();
   };
 
   return {
@@ -85,6 +91,6 @@ export default function useSettingProfile(handleChangePassword: Function) {
     errors,
     fields,
     onSubmit,
-    renderModal
+    renderModal,
   };
 }

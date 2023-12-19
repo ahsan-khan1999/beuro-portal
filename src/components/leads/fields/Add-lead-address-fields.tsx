@@ -44,7 +44,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: `streetNumber-${i}`,
                 name: `streetNumber-${i}`,
@@ -61,7 +61,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: `postalCode-${i}`,
                 name: `postalCode-${i}`,
@@ -77,7 +77,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 className: "mb-[10px]",
               },
               field: {
-                className: "pl-4 !border-dark",
+                className: "pl-4 !border-[#BFBFBF]",
                 type: Field.select,
                 id: `country-${i}`,
                 name: `country-${i}`,
@@ -108,7 +108,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.textArea,
-                className: "!p-4 !border-dark focus:!border-primary",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 rows: 8,
                 id: `description-${i}`,
                 name: `description-${i}`,

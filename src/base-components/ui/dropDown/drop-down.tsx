@@ -60,7 +60,13 @@ export const DropDown = ({
             className={dropDownIconClassName}
           />
         </button>
-        {isOpen && <DropDownItems items={items} onItemClick={toggleDropDown} containerClassName={dropDownItemsContainerClassName} />}
+        {isOpen && (
+          <DropDownItems
+            items={items}
+            onItemClick={toggleDropDown}
+            containerClassName={dropDownItemsContainerClassName}
+          />
+        )}
       </div>
     </div>
   );

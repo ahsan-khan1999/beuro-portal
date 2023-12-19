@@ -26,7 +26,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark ${
+              className: `!p-4 !border-[#BFBFBF] ${
                 !isUpdate && "!border-light"
               } focus:!border-primary `,
               inputType: "text",
@@ -47,7 +47,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             field: {
               type: Field.input,
               className:
-                "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
+                "!p-4 !!border-borderColor border border-[#BFBFBF] focus:!border-primary ",
               inputType: "number",
               id: "unit",
               name: "unit",
@@ -76,7 +76,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "number",
               id: "price",
               name: "price",
@@ -98,7 +98,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         rows: 8,
         id: "description",
         name: "description",

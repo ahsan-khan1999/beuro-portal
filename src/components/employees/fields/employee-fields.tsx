@@ -28,7 +28,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
                 }`,
               inputType: "text",
               id: "fullName",
@@ -77,7 +77,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
                 }`,
               inputType: "text",
               id: "email",
@@ -96,7 +96,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.phone,
-              className: `!h-[54px]  !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+              className: `!border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
                 }`,
               id: "phoneNumber",
               name: "phoneNumber",
@@ -115,7 +115,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.phone,
-              className: `!h-[54px] !border-dark focus:!border-primary ${!isUpdate && "!border-light"
+              className: `!border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
                 }`,
               id: "mobileNumber",
               name: "mobileNumber",

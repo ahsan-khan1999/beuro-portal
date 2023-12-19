@@ -23,7 +23,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               value: "Rahal Ahmed Ali",
               id: "selectCustomer",
@@ -41,7 +41,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "customerName",
               name: "customerName",
@@ -58,7 +58,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",
@@ -74,7 +74,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-dark  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
               value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
@@ -97,7 +97,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "offerNumber",
               name: "offerNumber",
@@ -113,7 +113,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4  !border-dark  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -131,7 +131,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "number",
               id: "phoneNumber",
               name: "phoneNumber",
@@ -148,7 +148,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "number",
               id: "mobileNumber",
               name: "mobileNumber",
@@ -165,7 +165,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "streetNumber",
               name: "streetNumber",
@@ -184,7 +184,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.input,
               className:
-                "!p-4  !border-dark focus:!border-primary focus:!border-primary",
+                "!p-4  !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
               inputType: "number",
               id: "postCode",
               name: "postCode",
@@ -203,7 +203,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.input,
               className:
-                "!p-4  !border-dark focus:!border-primary focus:!border-primary",
+                "!p-4  !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
               inputType: "text",
               id: "country",
               name: "country",
@@ -262,7 +262,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "date",
               name: "date",
               register,
@@ -278,7 +278,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-dark focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "date",
               name: "date",
               register,

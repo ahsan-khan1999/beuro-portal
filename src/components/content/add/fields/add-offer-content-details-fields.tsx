@@ -28,7 +28,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       },
       field: {
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         inputType: "text",
         id: "contentName",
         name: "contentName",
@@ -65,7 +65,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "offerContent.title",
               name: "offerContent.title",
@@ -82,7 +82,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.ckEditor,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.description",
               name: "offerContent.description",
 
@@ -99,7 +99,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.ckEditor,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.body",
               name: "offerContent.body",
 
@@ -168,7 +168,7 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
       field: {
         register,
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary w-full",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
         id: `offerContent.address.${i}.value`,
         name: `offerContent.address.${i}.value`,
         remove: i > 0 && "Remove",

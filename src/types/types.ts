@@ -19,7 +19,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from './auth';
+import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -103,6 +103,7 @@ export interface SideBarCardProps {
 export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
+  containerClassName?: string;
 }
 
 export interface successPopup {
@@ -218,6 +219,14 @@ export type GenerateChangeMailSettingFormField = (
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
+) => FormField[];
+
+// change mail setting formfield
+export type GenerateEmailTemplateFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield

@@ -43,7 +43,7 @@ export enum Field {
   textArea = "textArea",
   ckEditor = "ckEditor",
   customerInput = "customerInput",
-  inputWithCopy = 'inputWithCopy',
+  inputWithCopy = "inputWithCopy",
   creditCardNumberInput = "creditCardNumberInput",
   creditCardExpiryDateInput = "creditCardExpiryDateInput",
   password = "password",
@@ -63,8 +63,7 @@ export enum Field {
   link = "link",
   dateRange = "dateRange",
   multiSelect = "multiSelect",
-  toggleButton="toggleButton"
-
+  toggleButton = "toggleButton",
 }
 
 export enum CardType {

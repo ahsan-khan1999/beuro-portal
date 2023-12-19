@@ -23,7 +23,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "serviceName",
               name: "serviceName",
@@ -42,7 +42,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "price",
               name: "price",
@@ -61,7 +61,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "unit",
               name: "unit",
@@ -98,7 +98,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-dark focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                     inputType: "number",
                     id: "count",
                     name: "count",
@@ -117,7 +117,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-dark focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                     inputType: "text",
                     id: "totalPrice",
                     name: "totalPrice",
@@ -139,7 +139,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "description",
               name: "description",
@@ -169,7 +169,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "servcieName",
               name: "servcieName",
@@ -188,7 +188,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "price",
               name: "price",
@@ -207,7 +207,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "unit",
               name: "unit",
@@ -244,7 +244,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-dark focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                     inputType: "number",
                     id: "count",
                     name: "count",
@@ -263,7 +263,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-dark focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                     inputType: "text",
                     id: "totalPrice",
                     name: "totalPrice",
@@ -285,7 +285,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "description",
               name: "description",
@@ -317,7 +317,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.textArea,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               rows: 8,
               id: "description",
               name: "description",
