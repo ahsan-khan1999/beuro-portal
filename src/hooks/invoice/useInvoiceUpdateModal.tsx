@@ -16,7 +16,6 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error, invoiceDetails } = useAppSelector((state) => state.invoice);
   const { modal: { data } } = useAppSelector((state) => state.global);
-  console.log(data, "data");
 
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -76,7 +75,6 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     
   }, [data?.id])
 
-  console.log(errors);
 
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
     const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring }

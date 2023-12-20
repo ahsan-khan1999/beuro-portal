@@ -26,6 +26,7 @@ import {
   AddOfferServiceDetailsFormField,
 } from "@/components/offers/add/fields/add-offer-service-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 
 export const useServiceOfferEditDetail = ({
   handleNext,
@@ -46,9 +47,13 @@ export const useServiceOfferEditDetail = ({
   );
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
+  const { tax } = useAppSelector((state) => state.settings);
+
 
   useEffect(() => {
     dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readTaxSettings({}));
+
   }, []);
 
   const handleBack = () => {
@@ -112,8 +117,8 @@ export const useServiceOfferEditDetail = ({
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
         : isTax && taxType === "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+          ? calculateTax(totalPrices, data?.taxPercentage || 0)
+          : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -141,11 +146,11 @@ export const useServiceOfferEditDetail = ({
       taxAmount: taxAmount,
     });
   };
-  console.log(offerDetails);
-  
+
   useMemo(() => {
     generateGrandTotal();
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
+  
   useMemo(() => {
     if (offerDetails.id) {
       setTotal({
@@ -163,6 +168,9 @@ export const useServiceOfferEditDetail = ({
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount || 0,
         discountDescription: offerDetails?.discountDescription,
+        taxAmount: offerDetails?.taxAmount || 0,
+
+
       });
     }
     generateGrandTotal();
@@ -210,6 +218,8 @@ export const useServiceOfferEditDetail = ({
       offerDetails: offerDetails,
       taxType: taxType,
       discountType,
+      tax: tax
+
     },
     append,
     remove,

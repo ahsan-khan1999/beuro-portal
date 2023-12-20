@@ -781,6 +781,7 @@
     }
   },
   "leads": {
+    "add_new_lead": "Add New Lead",
     "main_heading": "Leads",
     "add_button": "Add New",
     "side_images_heading": "Images",
@@ -1090,7 +1091,9 @@
       "heading": "Share Images",
       "sub_heading": "Share Images on",
       "link": "Or copy link",
-      "copy_button": "Copy"
+      "copy_button": "Copy",
+      "copied_button": "Copied"
+
     },
     "are_you_modal": {
       "main_heading": "Are Your Sure",

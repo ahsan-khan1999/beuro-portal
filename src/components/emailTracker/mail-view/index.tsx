@@ -24,11 +24,7 @@ const ViewMails = () => {
   const { t: translate } = useTranslation();
   useEffect(() => {
     if (id) {
-      dispatch(readEmailDetail({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          // dispatch(setCustomerDetails(res.payload))
-        }
-      );
+      dispatch(readEmailDetail({ params: { filter: id } }))
     }
   }, [id]);
 
@@ -50,7 +46,6 @@ const ViewMails = () => {
   };
 
   const routeHandler = async () => {
-    console.log(emailDetails, "emailDetails");
 
     const res = await dispatch(
       deleteEmail({ data: emailDetails, router, translate })

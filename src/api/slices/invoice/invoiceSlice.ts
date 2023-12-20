@@ -436,7 +436,6 @@ const InvoiceSlice = createSlice({
         });
         builder.addCase(updateParentInvoice.fulfilled, (state, action) => {
             let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
-            console.log(index, "index");
 
             if (index !== -1) {
                 state.collectiveInvoice.splice(index, 1, action.payload)

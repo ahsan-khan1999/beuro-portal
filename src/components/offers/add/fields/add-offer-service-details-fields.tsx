@@ -15,6 +15,8 @@ import {
 import { OffersTableRowTypes, Total } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { getKeyByValue } from "@/utils/auth.util";
+import { TaxSetting } from '../../../../api/slices/settingSlice/settings';
+import { calculatePercentage, calculateTax } from "@/utils/utility";
 const serviceObject = {
   serviceTitle: "",
   price: 0,
@@ -42,6 +44,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     serviceDetails,
     generatePrice,
     offerDetails,
+    tax
   } = properties;
   // if(!fields) return null;
 
@@ -101,7 +104,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               },
               field: {
                 className:
-                  "!p-4 !border-dark focus:!border-primary",
+                  "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 type: Field.select,
                 id: `serviceDetail.${i}.serviceTitle`,
                 name: `serviceDetail.${i}.serviceTitle`,
@@ -143,7 +146,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                     field: {
                       type: Field.input,
-                      className: "!p-4 !border-dark focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                       inputType: "number",
                       id: `serviceDetail.${i}.price`,
                       name: `serviceDetail.${i}.price`,
@@ -161,7 +164,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                     field: {
                       type: Field.input,
-                      className: "!p-4 !border-dark focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                       inputType: "number",
                       id: `serviceDetail.${i}.count`,
                       name: `serviceDetail.${i}.count`,
@@ -189,7 +192,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                     field: {
                       type: Field.input,
-                      className: "!p-4 !border-dark focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                       inputType: "text",
                       id: `serviceDetail.${i}.unit`,
                       name: `serviceDetail.${i}.unit`,
@@ -206,7 +209,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                     field: {
                       type: Field.input,
-                      className: "!p-4 !border-dark focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                       inputType: "number",
                       id: `serviceDetail.${i}.totalPrice`,
                       name: `serviceDetail.${i}.totalPrice`,
@@ -237,7 +240,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               },
               field: {
                 type: Field.textArea,
-                className: "!p-4 !border-dark  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
                 rows: 8,
                 id: `serviceDetail.${i}.description`,
                 name: `serviceDetail.${i}.description`,
@@ -253,9 +256,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 id: "button",
                 text: "Remove",
                 inputType: "button",
-                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 0 && "hidden"
-                }`,
+                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
+                  }`,
                 onClick: () => remove(i),
               },
             },
@@ -288,6 +290,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       isTax,
       taxType,
       discountType,
+      tax
     } = properties;
     const formField: FormField[] = [
       {
@@ -314,7 +317,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                     },
                     field: {
                       type: Field.textArea,
-                      className: "!p-4 !border-dark focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                       rows: 8,
                       id: "discountDescription",
                       name: "discountDescription",
@@ -370,7 +373,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
               isTax,
               isDiscount,
               taxType,
-              discountType
+              discountType,
+              tax
             ),
           ],
         },
@@ -390,13 +394,14 @@ const generateServiceCalulationChildren = (
   isTax?: boolean,
   isDiscount?: boolean,
   taxType?: number,
-  discountType?: number
+  discountType?: number,
+  tax?: TaxSetting[] | null
 ) => {
   let field: any = {
     containerClass: "mb-0 ",
     field: {
       type: Field.span,
-      className: "! !border-dark focus:!border-primary w-full",
+      className: "! !border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
       text: `${total?.taxAmount.toFixed(2)} CHF(7.7%)`,
     },
@@ -408,17 +413,12 @@ const generateServiceCalulationChildren = (
       field: {
         type: Field.select,
         id: "taxPercentage",
-        options: [
-          { label: "10%", value: 10 },
-          { label: "20%", value: 20 },
-          { label: "30%", value: 30 },
-          { label: "40%", value: 40 },
-          { label: "50%", value: 50 },
-        ],
+        options: tax?.map((item) => ({ label: item.taxRate + "%", value: item.taxRate })) || [],
         text: "Select Tax",
         name: "taxPercentage",
         control,
         className: "h-10 !px-8",
+        value: offerDetails?.id && calculatePercentage(offerDetails?.taxAmount, offerDetails?.subTotal)
       },
     };
   }
@@ -452,7 +452,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 ",
                 field: {
                   type: Field.span,
-                  className: "!p-4 !border-dark focus:!border-primary w-full",
+                  className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
                   text: `${total?.subTotal} CHF`,
                 },
@@ -473,7 +473,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 px-0 ",
                 field: {
                   type: Field.toggleButton,
-                  className: " !border-dark focus:!border-primary ",
+                  className: " !border-[#BFBFBF] focus:!border-primary ",
                   id: "isTax",
                   name: "isTax",
                   label: "Tax%",
@@ -486,7 +486,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 border-r border-lightGray pr-8",
                 field: {
                   type: Field.span,
-                  className: "! !border-dark focus:!border-primary w-full",
+                  className: "! !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
                   text: "Tax %",
                 },
@@ -502,7 +502,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-0 ",
                       field: {
                         type: Field.radio,
-                        className: " !border-dark focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary w-full",
                         id: "taxType1",
                         text: "Sub Total",
                         name: "taxType",
@@ -520,7 +520,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-0 ",
                       field: {
                         type: Field.radio,
-                        className: " !border-dark focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary w-full",
                         id: "taxType2",
                         text: "Sub Total",
                         name: "taxType",
@@ -553,7 +553,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 px-0  ",
                 field: {
                   type: Field.toggleButton,
-                  className: " !border-dark focus:!border-primary ",
+                  className: " !border-[#BFBFBF] focus:!border-primary ",
                   id: "span-field",
                   name: "isDiscount",
                   checked: false,
@@ -566,7 +566,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 border-r border-lightGray pr-2",
                 field: {
                   type: Field.span,
-                  className: "! !border-dark focus:!border-primary w-full",
+                  className: "! !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
                   text: "Discount ",
                 },
@@ -576,7 +576,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 ",
                 field: {
                   type: Field.input,
-                  className: "!px-1 !border-dark focus:!border-primary w-full",
+                  className: "!px-1 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "discountAmount",
                   register,
                   name: "discountAmount",
@@ -597,7 +597,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-0 ",
                       field: {
                         type: Field.radio,
-                        className: " !border-dark focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary w-full",
                         id: "discountType1",
                         text: "Sub Total",
                         name: "discountType",
@@ -614,7 +614,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-0 ",
                       field: {
                         type: Field.radio,
-                        className: " !border-dark focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary w-full",
                         id: "discountType2",
                         text: "Sub Total",
                         name: "discountType",
@@ -639,7 +639,7 @@ const generateServiceCalulationChildren = (
           field: {
             type: Field.span,
             containerClassName:
-              "! !border-dark focus:!border-primary w-full text-dark font-bold ",
+              "! !border-[#BFBFBF] focus:!border-primary w-full text-dark font-bold ",
             id: "span-field",
             text: `Grand Total : ${total?.grandTotal.toFixed(2)} CHF`,
           },

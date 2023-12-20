@@ -36,7 +36,6 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  console.log(errors,"errors");
   
   useMemo(() => {
     if (contentDetails.id) {

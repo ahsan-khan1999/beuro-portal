@@ -21,7 +21,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "nameOnCard",
                 name: "nameOnCard",
@@ -40,7 +40,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "expiry",
                 name: "expiry",
@@ -70,7 +70,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "cardNumber",
                 name: "cardNumber",
@@ -87,7 +87,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-dark focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: "cvv",
                 name: "cvv",

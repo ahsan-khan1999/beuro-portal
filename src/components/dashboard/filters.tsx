@@ -26,8 +26,7 @@ export default function DashboardFilters() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen[DashboardFiltersToggle.week]}
-        setIsOpen={() => handleSelectToggle(DashboardFiltersToggle.week)}
+       
         options={[
           `${translate("dashboard_detail.options_labels.week")}`,
           `${translate("dashboard_detail.options_labels.month")}`,
@@ -40,8 +39,7 @@ export default function DashboardFilters() {
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-        isOpen={isOpen[DashboardFiltersToggle.month]}
-        setIsOpen={() => handleSelectToggle(DashboardFiltersToggle.month)}
+       
         options={[
           `${translate("dashboard_detail.months.jan")}`,
           `${translate("dashboard_detail.months.feb")}`,

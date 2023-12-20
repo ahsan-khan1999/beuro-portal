@@ -12,7 +12,7 @@ import { FilterType } from "@/types";
 import { readContract, setContractDetails } from "@/api/slices/contract/contractSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import  { readImage } from "@/api/slices/imageSlice/image";
+import  { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } = useAppSelector(state => state.contract)
@@ -44,11 +44,6 @@ const useContract = () => {
     })
   }, [query?.filter])
   useEffect(() => {
-    // localStoreUtil.remove_data("con")
-    // dispatch(setOfferDetails(DEFAULT_OFFER))
-    // dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
-    // dispatch(setLeadDetails(DEFAULT_LEAD))
-
 
     dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
@@ -96,6 +91,8 @@ const useContract = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
+    dispatch(setImages([]))
+
     const filteredLead = contract?.find((item_) => item_.id === item)
     if (filteredLead) {
       dispatch(setContractDetails(filteredLead));

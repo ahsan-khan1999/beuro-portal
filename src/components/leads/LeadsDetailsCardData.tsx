@@ -12,6 +12,9 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
+import localStoreUtil from "@/utils/localstore.util";
+import { ComponentsType } from "../offers/add/AddOffersDetailsData";
+import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -20,7 +23,7 @@ const LeadsDetailsCardData = ({
   leadDeleteHandler: Function;
   leadDetails: Lead
 }) => {
-  
+
   const router = useRouter();
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch()
@@ -41,17 +44,14 @@ const LeadsDetailsCardData = ({
 
         <div className="flex gap-[22px]">
           <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer" onClick={() => {
+            localStoreUtil.remove_data("offer")
             dispatch(setOfferDetails({
-              id:leadDetails?.id,
+              id: leadDetails?.id,
               type: "Existing Customer",
-              customerID: leadDetails?.customerID,
-              leadID: leadDetails?.id,
-              customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails?.customerDetail?.customerType),
-              fullName: leadDetails?.customerDetail?.fullName,
-              email: leadDetails?.customerDetail?.email,
-              phoneNumber: leadDetails?.customerDetail?.phoneNumber,
-              mobileNumber: leadDetails?.customerDetail?.mobileNumber,
+              leadID: { ...leadDetails, customerID: leadDetails?.customerID },
             }))
+            dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }))
+            
 
             router.push("/offers/add")
           }}>
@@ -106,7 +106,7 @@ const LeadsDetailsCardData = ({
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -24,7 +24,7 @@ export const InputField = ({
   fieldIndex,
   onChange,
   percentage,
-  step
+  step,
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${

@@ -23,7 +23,7 @@ const SettingTopDataButtons = ({
   const [activeButton, setActiveButton] = useState(0);
 
   return (
-    <SettingLayout>
+    <SettingLayout containerClassName="bg-white py-3">
       <div className="grid 2xl:grid-cols-7 xl:grid-cols-6 lg:grid-cols-3 grid-cols-2 lg:gap-y-2">
         {buttonsData.map((item, index) => (
           <div className="flex justify-center">

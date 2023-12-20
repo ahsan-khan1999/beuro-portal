@@ -26,15 +26,17 @@ const useEmailTracker = () => {
 
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.MailTracker?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(res?.payload?.MailTracker);
       }
     })
   }, [dispatch])
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(email?.slice(startIndex, startIndex + itemsPerPage));
-
+    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
+      if (response?.payload) {
+        setCurrentPageRows(response?.payload?.MailTracker);
+      }
+    })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
@@ -43,6 +45,7 @@ const useEmailTracker = () => {
   const handleFilterChange = (filter: FilterType) => {
     dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } }))
   };
+
   return {
     currentPageRows,
     totalItems,

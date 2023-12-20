@@ -3,34 +3,28 @@ export interface SystemSettingDataProps {
   currency: string;
   daysLimit: number;
   isInvoiceOverDue: boolean;
-  taxType: number
+  taxType: number;
 }
 export type Template = {
-
   [key: string]: {
     [key: string]: boolean;
   };
-
-
 };
 export type colsData = {
   title: string;
   placeholder: string;
-  data: { column: string, type: string, value: boolean },
-
+  data: { column: string; type: string; value: boolean };
 };
 export type ColumnStructure = {
   firstColumn: colsData[];
   secondColumn: colsData[];
   thirdColumn: colsData[];
   fourthColumn: colsData[];
-
-}
+};
 
 export type MainColumns = {
   [key: string]: boolean;
-
-}
+};
 
 export interface TemplateSettings {
   isFirstColumn: boolean;
@@ -67,7 +61,7 @@ export interface TemplateSettings {
   };
   company: string;
   createdAt: string;
-  createdBy: string
+  createdBy: string;
 }
 
 export interface FollowUp {
@@ -76,19 +70,18 @@ export interface FollowUp {
   company: string;
   reason: string[];
   createdAt: string;
-  isCreateFollowUpOnOfferExpire:boolean;
-  isCreateFollowUpOnLeadCreation:false
+  isCreateFollowUpOnOfferExpire: boolean;
+  isCreateFollowUpOnLeadCreation: false;
 }
 
 export interface FollowUpProp {
-  isCreateFollowUpOnLeadCreation: FolowUpTypeProps,
-  isCreateFollowUpOnOfferExpire: FolowUpTypeProps,
+  isCreateFollowUpOnLeadCreation: FolowUpTypeProps;
+  isCreateFollowUpOnOfferExpire: FolowUpTypeProps;
 }
 export interface FolowUpTypeProps {
   label: string;
-  value: boolean
+  value: boolean;
 }
-
 
 export interface EmailSetting {
   isOwnMailConfigration: boolean;
@@ -101,5 +94,4 @@ export interface EmailSetting {
   mailFromAddress: string;
   mailFromName: string;
   testingMail: string;
-
 }

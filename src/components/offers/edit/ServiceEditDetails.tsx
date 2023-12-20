@@ -8,8 +8,8 @@ import { EditComponentsType } from "./EditOffersDetailsData";
 const ServiceEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const router = useRouter()
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error,translate } =
-  useServiceOfferEditDetail({handleNext});
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+    useServiceOfferEditDetail({ handleNext });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
@@ -19,7 +19,7 @@ const ServiceEditDetails = ({ handleNext }: { handleNext: (currentComponent: Edi
         </button>
       </div>
 
-      <hr  className="opacity-20 mb-5"/>
+      <hr className="opacity-20 mb-5" />
 
       <Form
         formFields={fields}

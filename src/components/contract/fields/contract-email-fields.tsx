@@ -92,7 +92,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "description",
         name: "description",
         control,

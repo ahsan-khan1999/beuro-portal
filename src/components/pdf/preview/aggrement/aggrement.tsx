@@ -16,7 +16,7 @@ export const Aggrement = ({
       <div className="px-[80px] flex flex-col bg-white pb-[50px]">
         <ContactDetails {...contactAddress} />
         <AggrementTerms />
-        <div className="grid grid-cols-2 gap-x-[103px] mt-4">
+        <div className="flex justify-between items-center gap-x-[103px] mt-4">
           <div>
             <div className="h-[223.656px] flex flex-col justify-between">
               <div className=" pt-5">
@@ -32,7 +32,7 @@ export const Aggrement = ({
                 I share the contract with you.
               </p>
             </div>
-            <div className="flex flex-col mt-[23px]">
+            <div className="flex flex-col ">
               <span className="font-medium text-base mb-2">
                 25 December 2023
               </span>
@@ -40,7 +40,7 @@ export const Aggrement = ({
               <span className="text-base text-black font-normal ">Date</span>
             </div>
           </div>
-          <div>
+          <div className="w-[450px] h-[278px]">
             <SignaturePad />
             <div className="flex flex-col gap-y-[18px]">
               <hr />

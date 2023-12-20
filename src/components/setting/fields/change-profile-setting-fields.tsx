@@ -48,6 +48,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             containerClass: "flex justify-center items-center mb-5 col-span-1",
             field: {
               type: Field.profileUploadField,
+              iconClasses: "right-3 bottom-3",
+              className: "!h-[241px] !w-[241px] !rounded-full",
               id: "logo",
               name: "logo",
               control,
@@ -141,7 +143,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     className: "px-2 h-[42px]",
                     control,
                     country: "ch",
-                    value: user?.company?.phoneNumber
+                    value: user?.company?.phoneNumber,
                   },
                 },
                 {
@@ -158,10 +160,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     name: "mobileNumber",
                     value: user?.company?.mobileNumber,
 
-
                     control,
                     className: "px-2 h-[42px]",
-                    country: "ch"
+                    country: "ch",
                   },
                 },
                 {
@@ -220,10 +221,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
+        className:
+          "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
         children: [
           {
-            containerClass:"",
+            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.private_info")}`,
@@ -232,12 +234,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass:"border-lightGray border-b-[1px]",
+            containerClass: "border-lightGray border-b-[1px]",
 
             field: {
               type: Field.span,
-              containerClassName:
-                "  ",
+              containerClassName: "  ",
               id: "border",
             },
           },
@@ -302,8 +303,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"text",
-              placeholder:"01",
+              inputType: "text",
+              placeholder: "01",
               id: "address.city",
               name: "address.city",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
@@ -323,8 +324,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"text",
-              placeholder:"01",
+              inputType: "text",
+              placeholder: "01",
               id: "address.houseNumber",
               name: "address.houseNumber",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
@@ -416,10 +417,11 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
+        className:
+          "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
         children: [
           {
-            containerClass:"",
+            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.change_password")}`,
@@ -428,19 +430,17 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass:"border-lightGray border-b-[1px]",
+            containerClass: "border-lightGray border-b-[1px]",
 
             field: {
               type: Field.span,
-              containerClassName:
-                "  ",
+              containerClassName: "  ",
               id: "border",
             },
           },
         ],
       },
     },
-    
 
     {
       containerClass: "mb-0 ",

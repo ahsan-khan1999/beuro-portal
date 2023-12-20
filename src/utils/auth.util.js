@@ -23,6 +23,8 @@ export const logout = async () => {
     localStore.remove_data("roomToken"),
     localStore.remove_data("ChatUser"),
     localStore.remove_data("chatToken"),
+    localStore.remove_data("offer"),
+    localStore.remove_data("lead"),
     updateHeaders()
   ]
 

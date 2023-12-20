@@ -26,12 +26,11 @@ export enum ComponentsType {
 }
 
 const AddNewLeadsData = () => {
-  const { leadDetails } = useAppSelector(state => state.lead)
-  const { images } = useAppSelector(state => state.image)
-
+  const { leadDetails } = useAppSelector((state) => state.lead);
+  const { images } = useAppSelector((state) => state.image);
 
   const [tabType, setTabType] = useState<ComponentsType>(
-    leadDetails?.id && leadDetails?.stage || ComponentsType.customerAdd
+    (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
 
   useEffect(() => {
@@ -140,7 +139,9 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
+    [ModalType.IMAGE_SLIDER]: (
+      <ImageSlider onClose={onClose} details={images} />
+    ),
   };
 
   const renderModal = () => {
@@ -164,7 +165,10 @@ const AddNewLeadsData = () => {
       <AddLeadsCustomerDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addressAdd]: (
-      <AddLeadAddressDetails onHandleBack={onHandleBack} onHandleNext={handleNextTab} />
+      <AddLeadAddressDetails
+        onHandleBack={onHandleBack}
+        onHandleNext={handleNextTab}
+      />
     ),
     [ComponentsType.serviceAdd]: (
       <AddLeadServiceDetails
@@ -173,14 +177,17 @@ const AddNewLeadsData = () => {
       />
     ),
     [ComponentsType.additionalAdd]: (
-      <AddLeadAdditionalDetails onHandleNext={leadCreatedHandler} onHandleBack={onHandleBack} />
+      <AddLeadAdditionalDetails
+        onHandleNext={leadCreatedHandler}
+        onHandleBack={onHandleBack}
+      />
     ),
   };
 
   return (
-    <>
+    <div className="mt-[22px]">
       <div className="flex flex-col xl:flex-row w-full gap-6">
-        <div className="flex flex-col w-fit gap-[14px]">
+        <div className="flex flex-row flex-wrap xl:flex-col xl:flex-nowrap w-fit gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -196,7 +203,7 @@ const AddNewLeadsData = () => {
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>
       {renderModal()}
-    </>
+    </div>
   );
 };
 

@@ -179,7 +179,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     //   },
     //   field: {
     //     type: Field.date,
-    //     className: "!p-4 !border-dark focus:!border-primary ",
+    //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
     //     id: "date",
     //     name: "date",
     //     register,

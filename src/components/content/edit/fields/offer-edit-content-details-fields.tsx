@@ -29,7 +29,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
       },
       field: {
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         inputType: "text",
         id: "contentName",
         name: "contentName",
@@ -66,7 +66,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "offerContent.title",
               name: "offerContent.title",
@@ -83,7 +83,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.ckEditor,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.description",
               name: "offerContent.description",
 
@@ -100,7 +100,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.ckEditor,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.body",
               name: "offerContent.body",
 
@@ -153,7 +153,6 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 };
 
 const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, translate: Function, append?: UseFieldArrayAppend<FieldValues, "offerContent.address">, remove?: UseFieldArrayRemove) => {
-  console.log(count, "count");
   const addressformFields = [];
   for (let i = 0; i < count; i++) {
     addressformFields.push({
@@ -166,7 +165,7 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
       field: {
         register,
         type: Field.input,
-        className: "!p-4 !border-dark focus:!border-primary w-full",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
         id: `offerContent.address.${i}.value`,
         name: `offerContent.address.${i}.value`,
         remove: i > 0 && "Remove",

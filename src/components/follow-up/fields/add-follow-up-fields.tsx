@@ -7,7 +7,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead },
+  { customer, lead, followUps },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -40,7 +40,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M19.6209 12.0855C18.6404 12.0855 17.8808 11.9949 17.0386 12.685C19.0629 14.7518 18.7211 16.8117 18.7211 19.9926C18.7211 20.1607 18.4483 20.1103 21.0794 20.1103C21.7339 20.1103 22.266 19.5801 22.266 18.9284V14.7146C22.266 13.265 21.0794 12.0855 19.6209 12.0855Z" fill="#4A13E7"/>
             </svg>`,
               options: customer?.map((item) => ({
-                label: item?.fullName + " " + item?.refID,
+                label: item?.fullName + " " + `(${item?.refID})`,
                 value: item?.id.toString(),
               })),
               // onItemChange: () => onItemChange && onItemChange(Modals.customer),
@@ -141,7 +141,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         value: "Reason",
         id: "type",
         name: "type",
-        options: [{ value: "Reason", label: "Reason" }],
+        options: followUps?.reason?.map((item) => ({ label: item, value: item })) || [],
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="21" viewBox="0 0 17 21" fill="none">
         <path d="M2.29318 20.821H14.2672C15.2576 20.821 16.0633 20.0153 16.0633 19.0248V6.37227H11.8724C10.882 6.37227 10.0763 5.56658 10.0763 4.57617V0.385254H2.29318C1.30276 0.385254 0.49707 1.19095 0.49707 2.18136V19.0248C0.49707 20.0153 1.30276 20.821 2.29318 20.821ZM4.68798 8.807H11.8724C12.2033 8.807 12.4711 9.07478 12.4711 9.4057C12.4711 9.73662 12.2033 10.0044 11.8724 10.0044H4.68798C4.35706 10.0044 4.08928 9.73662 4.08928 9.4057C4.08928 9.07478 4.35706 8.807 4.68798 8.807ZM4.68798 11.2018H11.8724C12.2033 11.2018 12.4711 11.4696 12.4711 11.8005C12.4711 12.1314 12.2033 12.3992 11.8724 12.3992H4.68798C4.35706 12.3992 4.08928 12.1314 4.08928 11.8005C4.08928 11.4696 4.35706 11.2018 4.68798 11.2018ZM4.68798 13.5966H11.8724C12.2033 13.5966 12.4711 13.8644 12.4711 14.1953C12.4711 14.5262 12.2033 14.794 11.8724 14.794H4.68798C4.35706 14.794 4.08928 14.5262 4.08928 14.1953C4.08928 13.8644 4.35706 13.5966 4.68798 13.5966ZM4.68798 15.9914H9.4776C9.80852 15.9914 10.0763 16.2592 10.0763 16.5901C10.0763 16.921 9.80852 17.1888 9.4776 17.1888H4.68798C4.35706 17.1888 4.08928 16.921 4.08928 16.5901C4.08928 16.2592 4.35706 15.9914 4.68798 15.9914Z" fill="#8F8F8F"/>
       </svg>`,
