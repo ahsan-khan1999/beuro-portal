@@ -649,6 +649,7 @@ export interface PdfProps {
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
   qrCode: qrCode;
+  aggrementDetails: string
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -699,6 +700,7 @@ export interface AggrementProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   footerDetails: DocumentDetailFooterProps;
+  aggrementDetails:string
 }
 
 export interface FiltersComponentProps {

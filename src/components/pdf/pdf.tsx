@@ -112,6 +112,7 @@ export const DUMMY_DATA: PdfProps = {
     acknowledgementSlip: qrCodeAcknowledgementData,
     payableTo: qrCodePayableToData,
   },
+  aggrementDetails: ""
 };
 interface ActionType {
   payload: OffersTableRowTypes,
@@ -174,6 +175,7 @@ export const Pdf = () => {
             acknowledgementSlip: qrCodeAcknowledgementData,
             payableTo: qrCodePayableToData,
           },
+          aggrementDetails:offerDetails?.content?.offerContent?.description || ""
         }
         const distributeItems = (): ServiceList[][] => {
           const totalItems = offerDetails?.serviceDetail?.serviceDetail?.length;
@@ -224,6 +226,8 @@ export const Pdf = () => {
           contactAddress={offerData.contactAddress}
           headerDetails={offerData.headerDetails}
           footerDetails={offerData.footerDetails}
+          aggrementDetails={offerData.aggrementDetails}
+
         />
         <PaymentQRCodeDetails
           contactAddress={offerData.contactAddress}
