@@ -113,7 +113,10 @@ export const DUMMY_DATA: PdfProps = {
     payableTo: qrCodePayableToData,
   },
 };
-
+interface ActionType {
+  payload: OffersTableRowTypes,
+  type: string
+}
 export const Pdf = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA)
@@ -125,7 +128,7 @@ export const Pdf = () => {
 
   const dispatch = useAppDispatch()
   useEffect(() => {
-    if (offerID) dispatch(readOfferDetails({ params: { filter: offerID } })).then((response: any) => {
+    if (offerID) dispatch(readOfferDetails({ params: { filter: offerID } })).then((response: ActionType) => {
       if (response?.payload) {
         const offerDetails: OffersTableRowTypes = response?.payload
         let formatData: PdfProps = {
@@ -194,7 +197,7 @@ export const Pdf = () => {
     })
   }, [offerID])
 
-  
+
 
   return (
     <Container>
