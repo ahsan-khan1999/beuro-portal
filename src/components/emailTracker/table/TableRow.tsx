@@ -17,9 +17,9 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               })
             }
             key={item.id}
-            className="hover:bg-[#E9E1FF] px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 bg-white rounded-md"
           >
-            <span className="py-4 rounded-md flex items-center">
+            <span className="py-4 flex items-center">
               {item.id?.slice(0, 5)}
             </span>
             <span className="py-4 flex items-center">{item.recipient}</span>
@@ -41,8 +41,12 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${
-                  item.mailStatus === "open" ? "#45C769" :item.mailStatus === "pending"? "#FE9244":"#ff376f"
-                }] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                  item.mailStatus === "open"
+                    ? "#45C769"
+                    : item.mailStatus === "pending"
+                    ? "#FE9244"
+                    : "#ff376f"
+                }] text-white px-2 py-1 text-center rounded-md text-sm`}
               >
                 {item.mailStatus}
               </div>
@@ -74,7 +78,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               </span>
             </span>
 
-            <span className="py-4 flex justify-center items-center  rounded-md">
+            <span className="py-4 flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="8"

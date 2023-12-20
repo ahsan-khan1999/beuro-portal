@@ -31,23 +31,32 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(120px,_120px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(110px,_110px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] mt-2 rounded-md"
           >
-            <span className="py-4 rounded-md">{item.invoiceNumber}</span>
-            <span className="py-4 mlg:hidden xMaxSize:block">
-              {item.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.fullName}
+            <span className="py-4 flex items-center rounded-md">
+              {item.invoiceNumber}
             </span>
-            <span className="py-4">
+            <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
+              {
+                item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                  ?.fullName
+              }
+            </span>
+            <span className="py-4 flex items-center">
               {item.invoiceID?.contractID?.offerID?.title}
             </span>
-            <span className="py-4">{formatDateTimeToDate(item.createdAt)}</span>
-            <span className="py-4">{item.amount + " CHF"}</span>
+            <span className="py-4 flex items-center">
+              {formatDateTimeToDate(item.createdAt)}
+            </span>
+            <span className="py-4 flex items-center">
+              {item.amount + " CHF"}
+            </span>
 
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getInvoiceEmailColor(
                   item.emailStatus
-                )}] text-white px-2 w-[74px] flex justify-center items-center] py-1 text-center rounded-md text-sm`}
+                )}] text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm`}
               >
                 <span>{item.emailStatus}</span>
               </div>
@@ -66,7 +75,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                } w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
