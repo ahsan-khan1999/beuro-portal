@@ -8,10 +8,8 @@ const PdfPriview = () => {
   return (
     <div className="">
       <EmailCard />
-      <div className="flex w-full">
-
+      <div className="my-5">
         <Pdf />
-
       </div>
     </div>
   );
