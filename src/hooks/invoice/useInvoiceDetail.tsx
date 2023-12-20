@@ -36,7 +36,7 @@ export default function useInvoiceDetail() {
         if (id) {
             dispatch(readInvoiceDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
                 dispatch(readCollectiveInvoice({ params: { filter: { "invoiceStatus": "0" }, paginate: 0 } }))
-                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "1" }, paginate: 0 } }))
+                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "2" }, paginate: 0 } }))
 
 
                 dispatch(setInvoiceDetails(res.payload))

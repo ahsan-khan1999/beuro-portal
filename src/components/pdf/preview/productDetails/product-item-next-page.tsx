@@ -15,8 +15,8 @@ export const ProductItemNewPage = ({
     <div>
       <DocumentHeader {...headerDetails} />
       <div className="px-[80px] flex flex-col bg-white">
-        {serviceItem.map((item) => (
-          <ProductItem {...item} key={item.title} />
+        {serviceItem.map((item,index) => (
+          <ProductItem {...item} key={index} />
         ))}
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
       </div>

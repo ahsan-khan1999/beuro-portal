@@ -23,8 +23,8 @@ export const ProductPurchasedItemsDetails = ({
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} />
         <ProcutItemHeader />
-        {serviceItem.map((item) => (
-          <ProductItem {...item} key={item.title} />
+        {serviceItem.map((item,index) => (
+          <ProductItem {...item} key={index} />
         ))}
 
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}

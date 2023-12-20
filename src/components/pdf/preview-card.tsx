@@ -2,8 +2,8 @@ import React from "react";
 
 export const PreviewCard = () => {
   return (
-    <section className="grid grid-cols-3 mb-[33px] min-w-[1160px] w-full px-5">
-      <div className="col-span-2 flex flex-col ga-y-1">
+    <section className="grid grid-cols-3 mb-[33px]  px-5">
+      <div className="col-span-2 flex flex-col gap-y-1 ">
         <h2 className="text-2xl font-semibold text-[#393939]">
           Lorem Ipsum dollar smith emit lorem
         </h2>
@@ -14,7 +14,7 @@ export const PreviewCard = () => {
         </p>
       </div>
 
-      <div className="col-span-1 flex gap-x-[17px] justify-end">
+      <div className="col-span-1 flex gap-x-[17px] justify-end ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="52"
