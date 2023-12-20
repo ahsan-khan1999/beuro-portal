@@ -15,28 +15,28 @@ export const generateOfferServiceEditDetailsValidation = (
   return yup.object().shape({
     [ServiceOfferEditDetails.serviceName]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [ServiceOfferEditDetails.price]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [ServiceOfferEditDetails.unit]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [ServiceOfferEditDetails.count]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [ServiceOfferEditDetails.totalPrice]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [ServiceOfferEditDetails.description]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [ServiceOfferEditDetails.discountDiscription]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
   });
 };
 
@@ -45,7 +45,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [LeadsCustomerEditDetails.type]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customer]: yup
       .string().when('type', {
         is: (type: string) => type === 'Existing Customer',
@@ -59,46 +59,46 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       }),
     [EditOfferDetails.customerName]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
 
     [EditOfferDetails.email]: yup
       .string()
       .email()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
 
     [EditOfferDetails.offerTitle]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
 
 
     [EditOfferDetails.customerType]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
 
     [EditOfferDetails.phoneNumber]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
 
     [EditOfferDetails.mobileNumber]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.address]: yup.object().shape({
       [EditOfferDetails.streetNumber]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [EditOfferDetails.postCode]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [EditOfferDetails.country]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
     }),
     [EditOfferDetails.date]: yup.array().of(
       yup.object().shape({
-        "startDate": yup.string().required(translate("required")),
-        "endDate": yup.string().required(translate("required"))
-      }).required(translate("required"))
-    ).min(1).required(translate("required"))
+        "startDate": yup.string().required(translate("validationMessage.required")),
+        "endDate": yup.string().required(translate("validationMessage.required"))
+      }).required(translate("validationMessage.required"))
+    ).min(1).required(translate("validationMessage.required"))
   });
 
 };
@@ -123,10 +123,10 @@ export const generateOfferAdditionalDetailsValidation = (
   return yup.object().shape({
     [OfferAdditionalDetails.chooseFromExisting]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [OfferAdditionalDetails.additionlData]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
   });
 };
 
@@ -142,8 +142,8 @@ export const generateOfferAddressEditDetailsValidation = (
       [OfferAddressEditDetails.country]: yup.string().required(translate("validationMessages.required")),
       [OfferAddressEditDetails.description]: yup.string().notRequired(),
 
-    }).required(translate("required"))
-  ).min(1).required(translate("required"))
+    }).required(translate("validationMessages.required"))
+  ).min(1).required(translate("validationMessages.required"))
   return yup.object().shape({ "address": addressValidationSchema })
 };
 
@@ -164,8 +164,8 @@ export const generateAddfferServiceDetailsValidation = (
       [AddServiceOfferDetails.description]: yup.string().required(translate("validationMessages.required")),
 
 
-    }).required(translate("required"))
-  ).min(1).required(translate("required"))
+    }).required(translate("validationMessages.required"))
+  ).min(1).required(translate("validationMessages.required"))
   return yup.object().shape({
     "serviceDetail": serviceValidationSchema,
     [AddServiceOfferDetails.discountDiscription]: yup

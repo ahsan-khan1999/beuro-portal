@@ -2,6 +2,9 @@ import { useTranslation } from "next-i18next";
 import SettingLayout from "../SettingLayout";
 import MailSettingForm from "./mail-setting-form";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { updateEmailSetting } from "@/api/slices/settingSlice/settings";
+import { Button } from "@/base-components/ui/button/button";
 
 export const ConfigrationTabs = ({
   onHandleCreation,
@@ -9,12 +12,17 @@ export const ConfigrationTabs = ({
   onHandleCreation: Function;
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const { emailSettings, loading } = useAppSelector(state => state.settings)
   const { t: translate } = useTranslation();
+  const dispatch = useAppDispatch()
   const tabsData: string[] = [
     `${translate("setting.mail_setting.system_config")}`,
     `${translate("setting.mail_setting.own_config")}`,
   ];
-
+  const handleChangeConfig = async () => {
+    const response = await dispatch(updateEmailSetting({ data: { ...emailSettings, isOwnMailConfigration: Boolean(selectedTab) }, translate }));
+    if (response?.payload) onHandleCreation();
+  }
   return (
     <SettingLayout containerClassName="pl-[31px] shadow-0-3-10-0 bg-white py-7 pr-12">
       <div>
@@ -50,11 +58,18 @@ export const ConfigrationTabs = ({
           />
         )}
 
-        {/* {selectedTab === 0 && (
-          <button className="text-xs lg:text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-fit  lg:w-[150px]">
-            {translate("setting.save_setting")}
-          </button>
-        )} */}
+        {selectedTab === 0 && (
+          <Button
+            id="config"
+            inputType="button"
+            className="mt-5 text-xs lg:text-base font-medium text-white bg-[#4A13E7] rounded-lg px-4 w-fit  lg:w-[150px]"
+            loading={loading}
+            text={translate("setting.save_setting")}
+            onClick={handleChangeConfig}
+
+          />
+
+        )}
       </div>
     </SettingLayout>
   );

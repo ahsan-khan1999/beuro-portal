@@ -60,16 +60,15 @@ const useOffers = () => {
     dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
           setCurrentPageRows(
-            res?.payload?.Offer?.slice(startIndex, startIndex + itemsPerPage)
+            res?.payload?.Offer
           );
         }
       }
     );
   }, []);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } }));
+    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -148,8 +147,10 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(offer?.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) => {
+      setCurrentPageRows(response?.payload?.Offer);
+    })
+
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

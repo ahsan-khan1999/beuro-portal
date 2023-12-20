@@ -43,6 +43,7 @@ const InvoiceDetails = () => {
     isSendEmail,
     onNextHandle,
     setIsSendEmail,
+    handleRecurringInvoiceEdit
   } = useInvoiceDetail();
   const invoiceComponent = {
     Invoice: check(
@@ -51,6 +52,7 @@ const InvoiceDetails = () => {
         handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
         handleInvoiceEdit={handleInvoiceEdit}
+        handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
       />,
       (collectiveInvoice?.length === 0 && CheckData.nodata) || CheckData.data
     ),

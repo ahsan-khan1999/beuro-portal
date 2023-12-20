@@ -15,24 +15,24 @@ export const generateLeadsCustomerEditDetailsValidation = (
   return yup.object().shape({
     [LeadsCustomerEditDetails.name]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsCustomerEditDetails.email]: yup
       .string()
       .email()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [LeadsCustomerEditDetails.phone]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [LeadsCustomerEditDetails.mobile]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [LeadsCustomerEditDetails.address]: yup
       .object({
@@ -81,27 +81,27 @@ export const generateLeadsServiceEditDetailsValidation = (
   return yup.object().shape({
     [LeadsServiceEditDetails.requiredService]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.desireDate]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.contactAvailablity]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.flexibility]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.preferContact]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.budget]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()
@@ -121,7 +121,7 @@ export const generateAddNewLeadCustomerDetailsValidation = (
   return yup.object().shape({
     [LeadsCustomerEditDetails.type]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessage.required")),
     [LeadsCustomerEditDetails.customer]: yup.string().when("type", {
       is: (type: string) => type === "Existing Customer",
       then: () =>
@@ -129,7 +129,7 @@ export const generateAddNewLeadCustomerDetailsValidation = (
     }),
     [LeadsCustomerEditDetails.name]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessage.required")),
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -175,6 +175,6 @@ export const generateLeadAdditionalDetailsValidation = (
   return yup.object().shape({
     [LeadAdditionalDetails.additionlData]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
   });
 };

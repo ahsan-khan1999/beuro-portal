@@ -5,7 +5,7 @@ export const generateCustomerValidation = (translate: Function) => {
   return yup.object().shape({
     [CustomerDetailsFields.name]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [CustomerDetailsFields.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -22,11 +22,11 @@ export const generateCustomerValidation = (translate: Function) => {
 
     [CustomerDetailsFields.phone]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
+      
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.mobile]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
+      
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.address]: yup.object({
       [CustomerDetailsFields.streetNo]: yup

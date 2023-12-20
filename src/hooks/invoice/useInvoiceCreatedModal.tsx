@@ -33,7 +33,12 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   });
   const amount = watch("amount");
   const type = watch("type");
+  useEffect(() => {
+    setValue("type","0")
+    setValue("amount",0)
 
+  }, [])
+    
   const fields = CreateInvoiceFormField(
     register,
     loading,
@@ -69,7 +74,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, ["paymentType"]: staticEnums["PaymentType"][data.paymentType], id: invoiceDetails?.id, isInvoiceRecurring: false }
-    const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
+    const res = await dispatch(createInvoice({ data: apiData, router, setError, translate }));
     if (res?.payload) invoiceCreated();
   };
   return {

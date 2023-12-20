@@ -82,6 +82,8 @@ const TableRows = ({
                 }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
+                key={item.id}
+
               />
             </span>
 

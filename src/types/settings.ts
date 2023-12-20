@@ -95,3 +95,12 @@ export interface EmailSetting {
   mailFromName: string;
   testingMail: string;
 }
+
+export interface EmailTemplate {
+  logo: string;
+  email: string;
+  phoneNumber: string;
+  mobileNumber: string;
+  FooterColour: string;
+  textColour: string
+}
