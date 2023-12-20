@@ -5,6 +5,9 @@ import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 
+import searchIcon from "@/assets/svgs/search-icon.png";
+import Image from "next/image";
+
 export default function SelectField({
   title,
   label,
@@ -15,7 +18,7 @@ export default function SelectField({
   dropDownIconClassName,
   containerClassName,
 }: OptionsFieldProps) {
-  const defaultClasses = `border-b-[${border}px] border-slate-gray border-opacity-50 relative flex items-center`;
+  const defaultClasses = `  flex items-center`;
   const containerClasses = combineClasses(defaultClasses, containerClassName);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -29,33 +32,49 @@ export default function SelectField({
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
   return (
-    <div className={containerClasses} ref={ref}>
+    <div
+      className="relative flex items-center justify-center w-[120px] "
+      ref={ref}>
       <div
-        className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full"
+        className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full bg-primary rounded-lg max-w-[105px]"
         onClick={handleToggle}>
-        <span className="text-[#393939] text-sm font-normal">{label}</span>
+        <span className="text-white text-sm font-normal">{label}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
-          className={dropDownIconClassName + "flex my-auto"}
+          className={dropDownIconClassName + "flex my-auto "}
         />
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-white flex-col absolutez top-[36px] border-[1px] border-lightGray rounded-lg p-2 w-full"
+            className="bg-white flex-col absolute top-[36px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2  shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}>
+            <div className="flex items-center border border-lightGray rounded-md w-full  bg-[#f6f6f7]">
+              <Image
+                src={searchIcon}
+                alt={"Search Icon"}
+                className="ml-1 w-4 h-4 absolute"
+                width={24}
+                height={8}
+              />
+              <input
+                
+                placeholder="Search..."
+                className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-1 placeholder:text-sm bg-[#f6f6f7] "
+              />
+            </div>
+            <div className="mt-2 h-full max-h-[150px] min-h-fit overflow-x-hidden overflow-y-auto" id="dropdownSerchBar">
             <div className="flex-col space-y-2">
               {options.map((item, key) => (
                 <div
-                  className="flex justify-center py-1 hover:bg-lightGray rounded-md cursor-pointer"
+                  className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
                   key={key}>
                   <span
-                 
                     onClick={() => {
                       handleChange(item);
                       setIsOpen;
@@ -65,6 +84,8 @@ export default function SelectField({
                 </div>
               ))}
             </div>
+            </div>
+            
           </motion.div>
         )}
       </AnimatePresence>

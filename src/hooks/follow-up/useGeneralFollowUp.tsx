@@ -20,7 +20,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 const useGeneralFollowUp = () => {
 
     const dispatch = useAppDispatch();
-    const { followUp, followUpDetails, loading } = useAppSelector(state => state.followUp)
+    const { followUp, followUpDetails, loading, } = useAppSelector(state => state.followUp)
     const [filter, setFilter] = useState<FilterType>({
         text: ""
     });
