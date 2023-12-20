@@ -11,13 +11,15 @@ import { getUser, logout } from "@/utils/auth.util";
 import logoutImage from "@/assets/svgs/Group 41120.svg"
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import {  logoutUser } from "@/api/slices/authSlice/auth";
+import { logoutUser } from "@/api/slices/authSlice/auth";
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch()
+  const router = useRouter()
   const handleLogout = () => {
-    dispatch(logoutUser())
-    logout()
+    // dispatch(logoutUser())
+    // logout()
+    router.push({ pathname: "/pdf", query: { offerID: "65818637dcd677eea3fe1b9c" } })
   }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -37,7 +39,7 @@ const Header = () => {
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           <div className="relative menu pl-7 mr-6">
-            <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer"/>
+            <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer" />
             <FollowUpDropDown />
           </div>
           <LanguageSelector />

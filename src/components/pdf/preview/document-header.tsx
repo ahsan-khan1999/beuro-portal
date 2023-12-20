@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import umzugsLogo from "@/assets/svgs/Umzug-fuchs-logo.svg";
 import { DocumentHeaderDetailsProps } from "@/types/types";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 export const DocumentHeader = ({
   createdBy,
@@ -25,7 +26,7 @@ export const DocumentHeader = ({
           <span className="text-[#404040] text-base font-medium">
             Offer Date:
           </span>
-          <span className="text-[#000] text-base font-medium">{offerDate}</span>
+          <span className="text-[#000] text-base font-medium">{formatDateTimeToDate(offerDate)}</span>
         </div>
         <div className="flex gap-[12px] ">
           <span className="text-[#404040] text-base font-medium">

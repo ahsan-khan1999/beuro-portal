@@ -5,7 +5,7 @@ import {
   SetStateAction,
   Dispatch as stateDispatch,
 } from "react";
-import { FormField } from "./form";
+import { DateRangeProps, FormField } from "./form";
 import {
   Control,
   FieldValues,
@@ -25,11 +25,11 @@ import { NextRouter } from "next/router";
 import { Customers } from "./customer";
 import { Attachement, Status } from "./global";
 import { Employee } from "./employee";
-import { Lead } from "./leads";
+import { CustomerAddress, Lead } from "./leads";
 import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
-import { OffersTableRowTypes, Total } from "./offers";
+import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
 import { FollowUp } from "./settings";
@@ -618,11 +618,8 @@ export interface ContactDetailsProps {
 }
 export interface MovingDetailsProps {
   header: string;
-  address1: string;
-  address1Details: string;
-  address2: string;
-  address2Details: string;
-  workDates: string;
+  address: CustomerAddress[]
+  workDates: DateRangeProps[];
 }
 export interface ProductItemProps {
   title: string;
@@ -648,7 +645,7 @@ export interface PdfProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
-  serviceItem: ProductItemProps[];
+  serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
   qrCode: qrCode;
@@ -659,7 +656,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
-  serviceItem: ProductItemProps[];
+  serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
   isShowTotal: boolean;
