@@ -10,10 +10,6 @@ import { useRouter } from "next/router";
 import { OffersTableRowTypes, ServiceList } from "@/types/offers";
 import { AcknowledgementSlipProps, PayableToProps, PdfProps } from "@/types";
 
-interface ActionType {
-  payload: OffersTableRowTypes;
-  type: string;
-}
 
 export const productItems: ServiceList[] = [
   {
@@ -24,8 +20,9 @@ export const productItems: ServiceList[] = [
     count: 2,
     serviceType: "",
     totalPrice: 1000,
-    unit: "1",
+    unit: "1"
   },
+
 ];
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
@@ -79,14 +76,12 @@ export const DUMMY_DATA: PdfProps = {
   },
   movingDetails: {
     header: "Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken",
-    address: [
-      {
-        country: "",
-        description: "",
-        postalCode: "",
-        streetNumber: "",
-      },
-    ],
+    address: [{
+      country: "",
+      description: "",
+      postalCode: "",
+      streetNumber: ""
+    }],
     workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
   },
   serviceItem: productItems,
@@ -111,110 +106,93 @@ export const DUMMY_DATA: PdfProps = {
     acknowledgementSlip: qrCodeAcknowledgementData,
     payableTo: qrCodePayableToData,
   },
+  aggrementDetails: ""
 };
+interface ActionType {
+  payload: OffersTableRowTypes,
+  type: string
+}
 
 const PdfPriview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
-
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-
+  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA)
   const maxItemsFirstPage = 6;
   const maxItemsPerPage = 10;
-
+  const router = useRouter()
   const { offerID } = router.query;
 
+
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    if (offerID)
-      dispatch(readOfferDetails({ params: { filter: offerID } })).then(
-        (response: ActionType) => {
-          if (response?.payload) {
-            console.log(response?.payload)
-            const offerDetails: OffersTableRowTypes = response?.payload;
-            let formatData: PdfProps = {
-              headerDetails: {
-                offerNo: offerDetails?.offerNumber,
-                offerDate: offerDetails?.createdAt,
-                createdBy: offerDetails?.createdBy?.fullName,
-              },
-              contactAddress: {
-                address: {
-                  name: offerDetails?.leadID?.customerDetail?.fullName,
-                  city: offerDetails?.leadID?.customerDetail?.address?.country,
-                  postalCode:
-                    offerDetails?.leadID?.customerDetail?.address?.postalCode,
-                  streetWithNumber:
-                    offerDetails?.leadID?.customerDetail?.address?.streetNumber,
-                },
-                email: offerDetails?.leadID?.customerDetail?.email,
-                phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
-              },
-              movingDetails: {
-                address: offerDetails?.addressID?.address,
-                header: offerDetails?.title,
-                workDates: offerDetails?.date,
-              },
-              serviceItem: offerDetails?.serviceDetail?.serviceDetail,
-              serviceItemFooter: {
-                subTotal: offerDetails?.subTotal?.toString(),
-                tax: offerDetails?.taxAmount?.toString(),
-                discount: offerDetails?.discountAmount?.toString(),
-                grandTotal: offerDetails?.total?.toString(),
-              },
-              footerDetails: {
-                companyName: "Umzugsfuchs",
-                companyDomain: "umzugsfuchs.ch",
-                infoMail: "info@umzugsfuchs.ch",
-                firstNumber: "0782141114",
-                secondNumber: "0800400410",
-                postFinance: "PostFinance",
-                streeAdress: "St. Urbanstrasse 79,",
-                streetNumber: "4914, Roggwil",
-                lastNumber: "15-561356-9",
-              },
-              qrCode: {
-                acknowledgementSlip: qrCodeAcknowledgementData,
-                payableTo: qrCodePayableToData,
-              },
-            };
-            const distributeItems = (): ServiceList[][] => {
-              const totalItems =
-                offerDetails?.serviceDetail?.serviceDetail?.length;
-              let pages: ServiceList[][] = [];
-
-              if (totalItems > maxItemsFirstPage) {
-                pages.push(
-                  offerDetails?.serviceDetail?.serviceDetail?.slice(
-                    0,
-                    maxItemsFirstPage
-                  )
-                );
-                for (
-                  let i = maxItemsFirstPage;
-                  i < totalItems;
-                  i += maxItemsPerPage
-                ) {
-                  pages.push(
-                    offerDetails?.serviceDetail?.serviceDetail?.slice(
-                      i,
-                      i + maxItemsPerPage
-                    )
-                  );
-                }
-              } else {
-                pages.push(offerDetails?.serviceDetail?.serviceDetail);
-              }
-
-              return pages;
-            };
-
-            setNewPageData(distributeItems());
-            setOfferData(formatData);
-          }
+    if (offerID) dispatch(readOfferDetails({ params: { filter: offerID } })).then((response: ActionType) => {
+      if (response?.payload) {
+        const offerDetails: OffersTableRowTypes = response?.payload
+        let formatData: PdfProps = {
+          headerDetails: {
+            offerNo: offerDetails?.offerNumber,
+            offerDate: offerDetails?.createdAt,
+            createdBy: offerDetails?.createdBy?.fullName,
+          },
+          contactAddress: {
+            address: {
+              name: offerDetails?.leadID?.customerDetail?.fullName,
+              city: offerDetails?.leadID?.customerDetail?.address?.country,
+              postalCode: offerDetails?.leadID?.customerDetail?.address?.postalCode,
+              streetWithNumber: offerDetails?.leadID?.customerDetail?.address?.streetNumber,
+            },
+            email: offerDetails?.leadID?.customerDetail?.email,
+            phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+          },
+          movingDetails: {
+            address: offerDetails?.addressID?.address,
+            header: offerDetails?.title,
+            workDates: offerDetails?.date,
+          },
+          serviceItem: offerDetails?.serviceDetail?.serviceDetail,
+          serviceItemFooter: {
+            subTotal: offerDetails?.subTotal?.toString(),
+            tax: offerDetails?.taxAmount?.toString(),
+            discount: offerDetails?.discountAmount?.toString(),
+            grandTotal: offerDetails?.total?.toString(),
+          },
+          footerDetails: {
+            companyName: "Umzugsfuchs",
+            companyDomain: "umzugsfuchs.ch",
+            infoMail: "info@umzugsfuchs.ch",
+            firstNumber: "0782141114",
+            secondNumber: "0800400410",
+            postFinance: "PostFinance",
+            streeAdress: "St. Urbanstrasse 79,",
+            streetNumber: "4914, Roggwil",
+            lastNumber: "15-561356-9",
+          },
+          qrCode: {
+            acknowledgementSlip: qrCodeAcknowledgementData,
+            payableTo: qrCodePayableToData,
+          },
+          aggrementDetails:offerDetails?.content?.offerContent?.description || ""
         }
-      );
-  }, [offerID]);
+        const distributeItems = (): ServiceList[][] => {
+          const totalItems = offerDetails?.serviceDetail?.serviceDetail?.length;
+          let pages: ServiceList[][] = [];
+
+          if (totalItems > maxItemsFirstPage) {
+            pages.push(offerDetails?.serviceDetail?.serviceDetail?.slice(0, maxItemsFirstPage));
+            for (let i = maxItemsFirstPage; i < totalItems; i += maxItemsPerPage) {
+              pages.push(offerDetails?.serviceDetail?.serviceDetail?.slice(i, i + maxItemsPerPage));
+            }
+          } else {
+            pages.push(offerDetails?.serviceDetail?.serviceDetail);
+          }
+
+          return pages;
+        };
+
+        setNewPageData(distributeItems());
+        setOfferData(formatData)
+      }
+    })
+  }, [offerID])
 
   console.log(offerData.headerDetails)
   return (

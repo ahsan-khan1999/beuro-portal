@@ -34,7 +34,7 @@ export const ProductItemFooter = ({
             </div>
             <div className="flex justify-between">
               <span className="text-[#1E1E1E] text-base font-medium">Tax%</span>
-              <span className="text-[#1E1E1E] text-base font-medium">
+              <span className="text-[#1E1E1E] text-base font-medium ">
                 {tax}
               </span>
             </div>

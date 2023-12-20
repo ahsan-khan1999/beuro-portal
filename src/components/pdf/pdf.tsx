@@ -17,8 +17,13 @@ import { readOfferDetails } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
 import { OffersTableRowTypes, ServiceList } from "@/types/offers";
 
-
-export const Pdf = ({newPageData,offerData}: {offerData: PdfProps; newPageData: ServiceList[][]}) => {
+export const Pdf = ({
+  newPageData,
+  offerData,
+}: {
+  offerData: PdfProps;
+  newPageData: ServiceList[][];
+}) => {
   return (
     <Container>
       {/* <PreviewCard /> */}
@@ -44,6 +49,7 @@ export const Pdf = ({newPageData,offerData}: {offerData: PdfProps; newPageData: 
           contactAddress={offerData.contactAddress}
           headerDetails={offerData.headerDetails}
           footerDetails={offerData.footerDetails}
+          aggrementDetails={offerData.aggrementDetails}
         />
         <PaymentQRCodeDetails
           contactAddress={offerData.contactAddress}

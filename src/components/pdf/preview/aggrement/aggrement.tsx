@@ -9,13 +9,14 @@ export const Aggrement = ({
   contactAddress,
   footerDetails,
   headerDetails,
+  aggrementDetails
 }: AggrementProps) => {
   return (
     <div>
       <DocumentHeader {...headerDetails} />
       <div className="px-[80px] flex flex-col bg-white pb-[50px]">
         <ContactDetails {...contactAddress} />
-        <AggrementTerms />
+        <AggrementTerms aggrementDetails={aggrementDetails}/>
         <div className="flex justify-between items-center gap-x-[103px] mt-4">
           <div>
             <div className="h-[223.656px] flex flex-col justify-between">
