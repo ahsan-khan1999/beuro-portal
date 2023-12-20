@@ -24,19 +24,23 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(120px,_120px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(250px,_100%)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(120px,_120px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)] mt-2 rounded-md"
           >
-            <span className="py-4 rounded-md ">{item.invoiceNumber}</span>
-            <span className="py-4 mlg:hidden xMaxSize:block">
+            <span className="py-4 flex items-center">{item.invoiceNumber}</span>
+            <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
               {item.invoiceID?.contractID?.offerID?.customerID?.fullName}
             </span>
-            <span className="py-4">
+            <span className="py-4 flex items-center break-all">
               {item.invoiceID?.contractID?.offerID?.title}
             </span>
-            <span className="py-4">{formatDateTimeToDate(item.createdAt)}</span>
-            <span className="py-4">{item.amount + " CHF"}</span>
+            <span className="py-4 flex items-center">
+              {formatDateTimeToDate(item.createdAt)}
+            </span>
+            <span className="py-4 flex items-center">
+              {item.amount + " CHF"}
+            </span>
 
-            <span className="py-4">
+            <span className="py-4 flex items-center justify-center">
               <div
                 className={`bg-[${getInvoiceEmailColor(
                   item.emailStatus
@@ -46,7 +50,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4">
+            <span className="py-4 flex items-center">
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
                   item: item,
@@ -64,7 +68,7 @@ const TableRows = ({
                 dropDownIconClassName={"#fff"}
               />
             </span>
-            <span className="py-4 ">
+            <span className="py-4 flex items-center">
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"]).map(
                   (item) => ({ item: item })
@@ -86,7 +90,7 @@ const TableRows = ({
             </span>
 
             <span
-              className="py-4 flex justify-center itenterrounded-md"
+              className="py-4 flex justify-center items-center"
               onClick={() => router.push("/invoices/invoice-pdf-preview")}
             >
               <Image src={moreIcon} alt="moreIcon" />

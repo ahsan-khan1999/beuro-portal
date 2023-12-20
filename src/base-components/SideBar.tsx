@@ -41,14 +41,14 @@ export const svgs = {
 };
 
 const SideBar = () => {
-  const { user } = useAppSelector(state => state.auth)
+  const { user } = useAppSelector((state) => state.auth);
 
   const userRole = staticEnums["User"]["role"][user?.role as string];
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
 
   return (
-    <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll" >
+    <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll">
       <div className="  pt-6 px-4 pb-8 flex flex-col">
         <div className="space-y-3 ">
           {sideBar.map((item, index) => {
@@ -59,7 +59,8 @@ const SideBar = () => {
                 ) : !item.inner && item.role.includes(userRole) ? (
                   <button
                     onClick={() => item.pathname && router.push(item.pathname)}
-                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                    className={`hover:bg-[#E9E1FF] rounded-lg flex items-center px-3 py-2 w-full ${
+                      router.pathname === item.pathname &&
                       "bg-primary rounded-lg  hover:bg-primary"
                     } ${item.className}`}
                   >
@@ -85,14 +86,15 @@ const SideBar = () => {
                   <>
                     <button
                       onClick={() => {
-                        // item.pathname &&
-                        //   router.push({
-                        //     pathname: item.pathname,
-                        //     query: { filter: item.query },
-                        //   });
+                        item.pathname &&
+                          router.push({
+                            pathname: item.pathname,
+                            query: { filter: item.query },
+                          });
                         isOpen == index ? setIsOpen(null) : setIsOpen(index);
                       }}
-                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${router.pathname === item.pathname &&
+                      className={`hover:bg-[#E9E1FF] rounded-lg flex  justify-between items-center px-3 py-2 w-full ${
+                        router.pathname === item.pathname &&
                         "bg-primary rounded-lg hover:bg-primary"
                       }`}
                     >
@@ -117,7 +119,8 @@ const SideBar = () => {
                       <div
                         className={`
                           cursor-pointer  ${isOpen == index ? "rotate-180" : ""}
-                          ${router.pathname === item.pathname && "sidebar-svg"
+                          ${
+                            router.pathname === item.pathname && "sidebar-svg"
                           }`}
                       >
                         <svg
