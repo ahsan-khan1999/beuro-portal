@@ -2,42 +2,66 @@ import { DocumentDetailFooterProps } from "@/types/types";
 import React from "react";
 
 export const Footer = ({
-  companyDomain,
-  companyName,
-  firstNumber,
-  infoMail,
-  lastNumber,
-  postFinance,
-  secondNumber,
-  streeAdress,
-  streetNumber,
+  firstColumn,
+  fourthColumn,
+  secondColumn,
+  thirdColumn,
 }: DocumentDetailFooterProps) => {
   return (
     <div className="relative flex justify-center items-center h-[149px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
       <div className="flex justify-between gap-[60px]">
         <div>
-          <span>{companyName}</span>
+          <span>{firstColumn?.companyName}</span>
           <br />
-          <span>{companyDomain}</span>
+          <span>{firstColumn?.website}</span>
           <br />
-          <span>{infoMail}</span>
+          <span>{firstColumn?.email}</span>
           <br />
-          <span>{firstNumber}</span>
+          <span>{firstColumn?.phoneNumber}</span>
           <br />
-          <span>{secondNumber}</span>
+          <span>{firstColumn?.taxNumber}</span>
         </div>
 
+        {/* 2nd column */}
         <div className="h w-[2px] bg-[#D9D9D9] mx-4"></div>
         <div>
-          <span>{postFinance}</span>
+          <span>{secondColumn?.address?.streetNumber}</span>
           <br />
-          <span>{postFinance}</span>
+          <span>{secondColumn?.address?.postalCode}</span>
           <br />
-          <span>{streeAdress}</span>
+          <span>{secondColumn?.bankDetails?.bankName}</span>
           <br />
-          <span>{streetNumber}</span>
+          <span>{secondColumn?.bankDetails?.accountNumber}</span>
           <br />
-          <span>{lastNumber}</span>
+          <span>{secondColumn?.bankDetails?.ibanNumber}</span>
+        </div>
+
+        {/* 3rd column */}
+        <div className="h w-[2px] bg-[#D9D9D9] mx-4"></div>
+        <div>
+          <span>{thirdColumn?.address?.streetNumber}</span>
+          <br />
+          <span>{thirdColumn?.address?.postalCode}</span>
+          <br />
+          <span>{thirdColumn?.bankDetails?.bankName}</span>
+          <br />
+          <span>{thirdColumn?.bankDetails?.accountNumber}</span>
+          <br />
+          <span>{thirdColumn?.bankDetails?.ibanNumber}</span>
+        </div>
+
+        {/* fourth column */}
+        <div className="h w-[2px] bg-[#D9D9D9] mx-4"></div>
+        <div>
+          <span>{fourthColumn?.address?.streetNumber}</span>
+          <br />
+          <span>{fourthColumn?.address?.postalCode}</span>
+          <br />
+          <span>{fourthColumn?.bankDetails?.bankName}</span>
+          <br />
+          <span>{fourthColumn?.bankDetails?.accountNumber}</span>
+          <br />
+          <span>{fourthColumn?.bankDetails?.ibanNumber}</span>
         </div>
       </div>
 

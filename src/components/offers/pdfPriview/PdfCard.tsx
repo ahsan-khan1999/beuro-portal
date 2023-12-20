@@ -8,18 +8,14 @@ import printerIcon from "@/assets/svgs/printer_icon.svg";
 import { useRouter } from "next/router";
 import { IconOnlyButton } from "@/base-components/ui/button/icon-only-button";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { DocumentHeaderDetailsProps } from "@/types";
+import { EmailHeaderProps } from "@/types";
 
 const EmailCard = ({
-  status,
+  emailStatus,
   offerNo,
-}: {
-  offerNo: string;
-  status: string;
-}) => {
+}: EmailHeaderProps) => {
   const router = useRouter();
   const handleSendEmail = () => {
-    console.log("hi");
   };
   return (
     <EmailCardLayout>
@@ -73,7 +69,7 @@ const EmailCard = ({
           </span>
           <div className="border-[#FE9244] border rounded-md px-[8px] text-center w-[98px] ">
             <span className="text-[#FE9244] text-base font-medium">
-              {status}
+              {emailStatus}
             </span>
           </div>
         </div>
