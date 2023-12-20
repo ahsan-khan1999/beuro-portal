@@ -3,7 +3,7 @@ import React from "react";
 export const PreviewCard = () => {
   return (
     <section className="grid grid-cols-3 mb-[33px]  px-5">
-      <div className="col-span-2 flex flex-col ga-y-1 ">
+      <div className="col-span-2 flex flex-col gap-y-1 ">
         <h2 className="text-2xl font-semibold text-[#393939]">
           Lorem Ipsum dollar smith emit lorem
         </h2>

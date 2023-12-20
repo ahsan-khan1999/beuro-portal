@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { MyComponentProp } from '@/types'; // Assuming this is the correct path
+import React, { useEffect, useRef } from "react";
+import { MyComponentProp } from "@/types";
 
 export const Container = ({ children }: MyComponentProp) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,25 +8,34 @@ export const Container = ({ children }: MyComponentProp) => {
     if (containerRef.current) {
       const parent = containerRef.current.parentNode as HTMLElement;
       const parentWidth = parent.offsetWidth;
-      const effectiveWidth = parentWidth - 272; // Adjusting for margin-left
-  
-      // Compare effectiveWidth with the actual width of containerRef
-      const containerActualWidth = containerRef.current.offsetWidth;
-      const scale = effectiveWidth < containerActualWidth ? effectiveWidth / containerActualWidth : 1;
+
+      // scale down when parent width is less than 1160px
+      const scale = parentWidth < 1160 ? parentWidth / 1160 : 1;
       containerRef.current.style.transform = `scale(${scale})`;
+
+      // parent width > 1160px set container width to 100%
+      // scale down when parent width < 1160px
+      containerRef.current.style.width =
+        parentWidth > 1160 ? "100%" : `${Math.min(parentWidth, 1160)}px`;
     }
   };
-  
 
   useEffect(() => {
-    window.addEventListener('resize', updateScale);
+    window.addEventListener("resize", updateScale);
     updateScale();
 
-    return () => window.removeEventListener('resize', updateScale);
+    return () => window.removeEventListener("resize", updateScale);
   }, []);
 
   return (
-    <div ref={containerRef} style={{  height: '100vh', transformOrigin: 'top left', minWidth: '1440px' }}>
+    <div
+      ref={containerRef}
+      style={{
+        height: "100vh",
+        transformOrigin: "top left",
+        minWidth: "1160px",
+      }}
+    >
       {children}
     </div>
   );

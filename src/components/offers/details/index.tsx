@@ -7,24 +7,45 @@ import useOfferDetails from "@/hooks/offers/useOfferDetails";
 import ComposeMail from "../compose-mail/ComposeMail";
 
 const OfferDetails = () => {
-  const { offerDeleteHandler, offerDetails, renderModal, handleImageUpload, handleNotes, handlePaymentStatusUpdate, handleStatusUpdate, handleSendEmail, isSendEmail, setIsSendEmail ,onNextHandle} = useOfferDetails()
+  const {
+    offerDeleteHandler,
+    offerDetails,
+    renderModal,
+    handleImageUpload,
+    handleNotes,
+    handlePaymentStatusUpdate,
+    handleStatusUpdate,
+    handleSendEmail,
+    isSendEmail,
+    setIsSendEmail,
+    onNextHandle,
+  } = useOfferDetails();
+
+  console.log(offerDetails)
   return (
     <Layout>
       <DetailsCard>
-        <OfferDetailsCard offerDetails={offerDetails} offerDeleteHandler={offerDeleteHandler} handleNotes={handleNotes} handleImageUpload={handleImageUpload} handleStatusUpdate={handleStatusUpdate} handlePaymentStatusUpdate={handlePaymentStatusUpdate} handleSendEmail={handleSendEmail} isSendEmail={isSendEmail} />
+        <OfferDetailsCard
+          offerDetails={offerDetails}
+          offerDeleteHandler={offerDeleteHandler}
+          handleNotes={handleNotes}
+          handleImageUpload={handleImageUpload}
+          handleStatusUpdate={handleStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+          handleSendEmail={handleSendEmail}
+          isSendEmail={isSendEmail}
+        />
       </DetailsCard>
 
       <div className="w-full mt-7">
-        {
-          isSendEmail ?
-            <ComposeMail
-              backRouteHandler={handleSendEmail}
-              onNextHandle={onNextHandle}
-            />
-            :
-
-            <OffersDetailsData offerDetails={offerDetails} />
-        }
+        {isSendEmail ? (
+          <ComposeMail
+            backRouteHandler={handleSendEmail}
+            onNextHandle={onNextHandle}
+          />
+        ) : (
+          <OffersDetailsData offerDetails={offerDetails} />
+        )}
       </div>
       {renderModal()}
     </Layout>

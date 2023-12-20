@@ -6,7 +6,7 @@ import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
 import { useMemo, useRef, useState, useEffect } from "react";
-// import searchIcon from "@/assets/svgs/search.svg";
+import searchIcon from "@/assets/svgs/search-icon.png";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -35,11 +35,6 @@ export const SelectBox = ({
     }
   }, [defaultValue]);
 
-  // useMemo(() => {
-  //   if (options?.length > 0) {
-  //     setOption(options);
-  //   }
-  // }, [options?.length]);
 
   const search = useRef<string>("");
 
@@ -92,25 +87,31 @@ export const SelectBox = ({
       </button>
       <AnimatePresence>
       {!disabled && isOpen && (
-        <motion.ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10"  initial={{ opacity: 0, y: -20 }}
+        <motion.ul className="absolute top-[52px] w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"  initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4 }}>
-          <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
-            {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
+          <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
+          <Image
+                src={searchIcon}
+                alt={"Search Icon"}
+                className="ml-1 w-4 h-4 absolute"
+                width={24}
+                height={8}
+              />
 
             <input
               value={search.current}
               onChange={(e) => handleChange(e.target.value)}
               placeholder="Search..."
-              className="w-full outline-none rounded-lg p-2"
+              className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
             />
           </div>
           {options.map(({ value, label }) => (
             <li
               key={value}
               onClick={() => selectedOptionHandler(value)}
-              className="p-2 hover:bg-extra-light-gray cursor-pointer"
+              className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
             >
               {label}
             </li>

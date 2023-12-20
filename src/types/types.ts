@@ -415,7 +415,7 @@ export type GenerateOfferServiceFormField = (
     handleRemove?: (id: string) => void;
     generatePrice?: (index: number) => void;
     total?: Total;
-    tax?: TaxSetting[] | null
+    tax?: TaxSetting[] | null;
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -488,7 +488,7 @@ export type GenerateLeadsCustomerFormField = (
     content?: ContentTableRowTypes[];
     handleContentSelect?: () => void;
     selectedContent?: string;
-    leadID?: string
+    leadID?: string;
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -506,7 +506,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[], followUps: FollowUp | null },
+  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -618,7 +618,7 @@ export interface ContactDetailsProps {
 }
 export interface MovingDetailsProps {
   header: string;
-  address: CustomerAddress[]
+  address: CustomerAddress[];
   workDates: DateRangeProps[];
 }
 export interface ProductItemProps {
@@ -629,19 +629,44 @@ export interface ProductItemProps {
   total: string;
 }
 
+interface CompanyAddress {
+  postalCode?: string;
+  streetNumber?: string;
+}
+
+interface CompanyBankDetails {
+  bankName?: string;
+  accountNumber?: string;
+  ibanNumber?: string;
+}
+
+interface CompanyDetailsFirstColumn {
+  companyName?: string;
+  email?: string;
+  phoneNumber?: string;
+  website?: string;
+  taxNumber?: number;
+}
+
+interface CompanyDetailsSecondColumn {
+  address?: CompanyAddress;
+  bankDetails?: CompanyBankDetails;
+}
+
 export interface DocumentDetailFooterProps {
-  companyName: string;
-  companyDomain: string;
-  infoMail: string;
-  firstNumber: string;
-  secondNumber: string;
-  postFinance: string;
-  streeAdress: string;
-  streetNumber: string;
-  lastNumber: string;
+  firstColumn: CompanyDetailsFirstColumn;
+  secondColumn: CompanyDetailsSecondColumn;
+  thirdColumn: CompanyDetailsSecondColumn;
+  fourthColumn: CompanyDetailsSecondColumn;
+}
+
+export interface EmailHeaderProps {
+  offerNo: string;
+  emailStatus: string;
 }
 
 export interface PdfProps {
+  emailHeader: EmailHeaderProps;
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
@@ -649,7 +674,7 @@ export interface PdfProps {
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
   qrCode: qrCode;
-  aggrementDetails: string
+  aggrementDetails: string;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -700,7 +725,7 @@ export interface AggrementProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   footerDetails: DocumentDetailFooterProps;
-  aggrementDetails:string
+  aggrementDetails: string;
 }
 
 export interface FiltersComponentProps {

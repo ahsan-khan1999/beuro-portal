@@ -9,71 +9,105 @@ const originalStrokeWidth = 1;
 export const SignaturePad = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
-  const [signatureData, setSignatureData] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [scale, setScale] = useState(1);
 
-  useEffect(() => {
-    if (canvasRef.current) {
+  const resizeCanvas = () => {
+    if (canvasRef.current && signaturePad) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const scale = Math.min(rect.width / ow, rect.height / oh);
+
       const canvas = canvasRef.current;
-      const sigPad = new SignPad(canvas, {
+      canvas.width = ow * scale;
+      canvas.height = oh * scale;
+
+      signaturePad.minWidth = originalStrokeWidth / scale;
+      signaturePad.maxWidth = (originalStrokeWidth * 0.7) / scale;
+
+      // Redraw the signature from the existing data
+      const data = signaturePad.toData();
+      signaturePad.clear();
+      signaturePad.fromData(data);
+    }
+  };
+
+  // const resizeCanvas = () => {
+  //   if (canvasRef.current && signaturePad) {
+  //     const rect = canvasRef.current.getBoundingClientRect();
+  //     const scale = Math.min(rect.width / ow, rect.height / oh);
+  
+  //     const canvas = canvasRef.current;
+  //     canvas.width = ow * scale;
+  //     canvas.height = oh * scale;
+  
+  //     // Adjust stroke width based on scale
+  //     if (rect.width < 1160) {
+  //       // Smaller stroke width for smaller scale
+  //       signaturePad.minWidth = (originalStrokeWidth / 2) / scale;
+  //       signaturePad.maxWidth = (originalStrokeWidth * 0.2) / scale;
+  //     } else {
+  //       // Original stroke width for larger scale
+  //       signaturePad.minWidth = originalStrokeWidth / scale;
+  //       signaturePad.maxWidth = (originalStrokeWidth * 0.8) / scale;
+  //     }
+  
+  //     // Redraw the signature from the existing data
+  //     const data = signaturePad.toData();
+  //     signaturePad.clear();
+  //     signaturePad.fromData(data);
+  //   }
+  // };
+
+  // const resizeCanvas = () => {
+  //   if (canvasRef.current && signaturePad) {
+  //     const rect = canvasRef.current.getBoundingClientRect();
+  //     const scale = Math.min(rect.width / ow, rect.height / oh);
+  
+  //     const canvas = canvasRef.current;
+  //     canvas.width = ow * scale;
+  //     canvas.height = oh * scale;
+  
+  //     // Use a consistent stroke width regardless of speed
+  //     const strokeWidth = originalStrokeWidth * scale;
+  //     signaturePad.minWidth = strokeWidth;
+  //     signaturePad.maxWidth = strokeWidth;
+  
+  //     // Redraw the signature from the existing data
+  //     const data = signaturePad.toData();
+  //     signaturePad.clear();
+  //     signaturePad.fromData(data);
+  //   }
+  // };
+  
+  
+  
+  useEffect(() => {
+    if (canvasRef.current && !signaturePad) {
+      const sigPad = new SignPad(canvasRef.current, {
         backgroundColor: "rgb(255, 255, 255)",
       });
       setSignaturePad(sigPad);
-
-      const rect = canvasRef.current.getBoundingClientRect();
-      const scaleX = rect.width / ow;
-      const scaleY = rect.height / oh;
-      setScale(Math.min(scaleX, scaleY));
-
-      canvas.width = ow * scale;
-      canvas.height = oh * scale;
-      sigPad?.clear();
-
-      sigPad.minWidth = originalStrokeWidth / scale;
-      sigPad.maxWidth = (originalStrokeWidth * 0.8) / scale;
     }
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
-        const sigPad = new SignPad(canvas, {
-          backgroundColor: "rgb(255, 255, 255)",
-        });
-        setSignaturePad(sigPad);
-        const rect = canvasRef.current.getBoundingClientRect();
-        const scaleX = rect.width / ow;
-        const scaleY = rect.height / oh;
-        const newScale = Math.min(scaleX, scaleY);
-        setScale(newScale);
-
-        canvasRef.current.width = ow * newScale;
-        canvasRef.current.height = oh * newScale;
-        signaturePad?.clear();
-        sigPad.minWidth = originalStrokeWidth / newScale;
-        sigPad.maxWidth = (originalStrokeWidth * 0.8) / newScale;
-      }
-    };
-
+    resizeCanvas();
+    const handleResize = () => resizeCanvas();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [signaturePad]);
 
   const handleSave = () => {
     if (signaturePad) {
-      const dataUrl = signaturePad.toSVG({ includeBackgroundColor: false });
-      setSignatureData(dataUrl);
+      const dataUrl = signaturePad.toDataURL("image/png");
       setIsSubmitted(true);
-      //post to backend
+      // Post to backend
+      // Example: postSignatureData(dataUrl);
     }
   };
 
   const handleClear = () => {
     signaturePad?.clear();
     setIsSubmitted(false);
-    setSignatureData("");
   };
 
   return (
@@ -92,13 +126,12 @@ export const SignaturePad = () => {
         <button
           disabled={isSubmitted}
           onClick={handleClear}
-          className={`bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full`}
+          className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
         >
           Clear
         </button>
         <button
           disabled={isSubmitted}
-          id="sig-submitBtn"
           onClick={handleSave}
           className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
         >
@@ -108,3 +141,4 @@ export const SignaturePad = () => {
     </>
   );
 };
+

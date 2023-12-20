@@ -23,11 +23,11 @@ export const Layout = ({ children }: MyComponentProp) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="bg-[#F3F3F3]">
+      <main className="bg-[#F3F3F3] h-screen">
         <Header />
         <SideBar />
         <div className="mr-5">
-          <div className="ml-[272px]  mt-[90px]">{children}</div>
+          <div className="ml-[272px] mt-[90px]">{children}</div>
         </div>
       </main>
     </>
