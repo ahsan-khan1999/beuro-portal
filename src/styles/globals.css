@@ -40,17 +40,39 @@ body {
 }
 .menu:hover .menuItems {
   opacity: 1;
-  /* transform: translateY(0); */
-  transition: all 0.5s ease-in-out !important;
+  visibility: visible;
+  transition: all 0.5s ease-in-out;
 }
 
 .menuItems {
   opacity: 0;
-  /* transform: translateY(-10rem); */
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
 }
+
+#dropdownSerchBar::-webkit-scrollbar{
+  width: 2px;
+}
+
+
 .sidebar-height {
   max-height: 800px;
 }
+.hoverTransetion{
+  transition: all 0.3s ease-in-out;
+}
+
+.hoverTransetion:hover{
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* ==================== */
+
+
+/* ===================== */
+
 /* Thin scrollbar track */
 ::-webkit-scrollbar {
   width: 6px; /* Adjust the width as needed */

@@ -10,7 +10,7 @@ export const DropDownNonFillIcon = ({
   className?: string;
 }) => {
   const rotateTransform = isOpen ? "rotate(180)" : "";
-  const classes = combineClasses("text-lightGray",className);
+  const classes = combineClasses("text-white",className);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
