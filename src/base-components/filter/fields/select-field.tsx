@@ -36,9 +36,9 @@ export default function SelectField({
       className="relative flex items-center justify-center w-[120px] "
       ref={ref}>
       <div
-        className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full bg-primary rounded-lg max-w-[105px]"
+        className="flex justify-between items-center cursor-pointer px-[10px] py-[6px] w-full bg-white rounded-lg max-w-[105px]"
         onClick={handleToggle}>
-        <span className="text-white text-sm font-normal">{label}</span>
+        <span className="text-dark text-sm font-normal">{label}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
