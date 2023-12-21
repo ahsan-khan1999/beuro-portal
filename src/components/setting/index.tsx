@@ -3,7 +3,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import ChangePassword from "@/base-components/ui/modals1/ChangePassword";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppSelector } from "@/hooks/useRedux";
-import { Layout } from "@/layout";
 import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
@@ -15,7 +14,6 @@ import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const Setting = () => {
@@ -49,18 +47,22 @@ const Setting = () => {
   };
 
   const handleCreation = () => {
-    dispatch(updateModalType({type:ModalType.CREATION}));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
-
-  const router = useRouter();
-
-  
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
-    [ModalType.ADD_TAX]: <AddTax onClose={onClose} heading={translate("setting.tax_modal.add_new_tax")} />,
+    [ModalType.ADD_TAX]: (
+      <AddTax
+        onClose={onClose}
+        heading={translate("setting.tax_modal.add_new_tax")}
+      />
+    ),
     [ModalType.EXCLUSIVE_TAX]: (
-      <AddTax onClose={onClose} heading={translate("setting.tax_modal.exclusive_heading")} />
+      <AddTax
+        onClose={onClose}
+        heading={translate("setting.tax_modal.exclusive_heading")}
+      />
     ),
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
     [ModalType.CREATION]: (
@@ -74,34 +76,34 @@ const Setting = () => {
   };
   const settingsLookup = {
     0: <SettingProfile handleChangePassword={handleChangePassword} />,
-    1: <SystemSettingDetails
-      addTaxHandler={addTaxHandler}
-      exclusiveTaxHandler={exclusiveTaxHandler}
-    />,
+    1: (
+      <SystemSettingDetails
+        addTaxHandler={addTaxHandler}
+        exclusiveTaxHandler={exclusiveTaxHandler}
+      />
+    ),
     2: <Templates />,
-    3: <FollowUpSetting />
+    3: <FollowUpSetting />,
 
-    ,
     4: <Billing handleEditPayment={handleEditPayment} />,
     5: <MailSetting handleCreation={handleCreation} />,
-
-
-  }
+  };
   return (
     <>
-      <Layout>
-        <h1 className="text-[#222B45] font-normal text-xl">{translate("setting.heading")}</h1>
-        <div className="mt-[22px]">
-          <SettingTopDataButtons
-            switchDetails={switchDetails}
-            setSwitchDetails={setSwitchDetails}
-          />
-        </div>
+      <h1 className="text-[#222B45] font-normal text-xl">
+        {translate("setting.heading")}
+      </h1>
+      <div className="mt-[22px]">
+        <SettingTopDataButtons
+          switchDetails={switchDetails}
+          setSwitchDetails={setSwitchDetails}
+        />
+      </div>
 
-        <div className="mt-4">
-          {settingsLookup[switchDetails as keyof typeof settingsLookup]}
-        </div>
-      </Layout>
+      <div className="mt-4">
+        {settingsLookup[switchDetails as keyof typeof settingsLookup]}
+      </div>
+
       {renderModal()}
     </>
   );

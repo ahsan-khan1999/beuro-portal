@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableRows from "./table/TableRows";
@@ -28,7 +27,7 @@ export default function Employees() {
   );
 
   return (
-    <Layout>
+    <>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -43,6 +42,6 @@ export default function Employees() {
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
       />
-    </Layout>
+    </>
   );
 }

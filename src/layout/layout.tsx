@@ -2,7 +2,7 @@ import { Footer } from "./footer/footer";
 
 import { MyComponentProp } from "@/types";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
 import { isJSON } from "@/utils/functions";

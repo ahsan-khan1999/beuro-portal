@@ -2,12 +2,11 @@ import Customers from "@/components/customer";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { withLayout } from "@/hoc/withLayout";
 
-const Index = () => {
-  return <Customers />;
-};
+const Home = () => <Customers />;
 
-export default Index;
+export default withLayout(Home);
 
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
