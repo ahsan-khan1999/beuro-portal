@@ -9,7 +9,10 @@ export const Aggrement = ({
   contactAddress,
   footerDetails,
   headerDetails,
-  aggrementDetails
+  aggrementDetails,
+  templateSettings,
+  totalPages,
+  currPage,
 }: AggrementProps) => {
   return (
     <div>
@@ -52,7 +55,7 @@ export const Aggrement = ({
           </div>
         </div>
       </div>
-      <Footer {...footerDetails} />
+      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={currPage} />
     </div>
   );
 };

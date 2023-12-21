@@ -653,20 +653,88 @@ interface CompanyDetailsSecondColumn {
   bankDetails?: CompanyBankDetails;
 }
 
+interface CompanyDetailsThirdColumn {
+  row1?: string;
+  row2?: string;
+  row3?: string;
+  row4?: string;
+  row5?: string;
+}
+
+interface CompanyDetailsFourthColumn {
+  row1?: string;
+  row2?: string;
+  row3?: string;
+  row4?: string;
+  row5?: string;
+}
+
 export interface DocumentDetailFooterProps {
   firstColumn: CompanyDetailsFirstColumn;
   secondColumn: CompanyDetailsSecondColumn;
-  thirdColumn: CompanyDetailsSecondColumn;
-  fourthColumn: CompanyDetailsSecondColumn;
+  thirdColumn: CompanyDetailsThirdColumn;
+  fourthColumn: CompanyDetailsFourthColumn;
+  columnSettings: TemplateType | null;
+  totalPages: number;
+  currPage: number;
+}
+export interface TemplateSettigsFirstColumn {
+  isCompany: boolean;
+  isEmail: boolean;
+  isPhoneNumber: boolean;
+  isTaxNumber: boolean;
+  isWebsite: boolean;
+}
+export interface TemplateSettigsSecondColumn {
+  isAccountNumber: boolean;
+  isBankName: boolean;
+  isIBAN: boolean;
+  isPostCode: boolean;
+  isStreetNumber: boolean;
+}
+export interface TemplateSettigsThirdColumn {
+  isRow1: boolean;
+  isRow2: boolean;
+  isRow3: boolean;
+  isRow4: boolean;
+  isRow5: boolean;
+}
+export interface TemplateSettigsFourthColumn {
+  isRow1: boolean;
+  isRow2: boolean;
+  isRow3: boolean;
+  isRow4: boolean;
+  isRow5: boolean;
+}
+export interface TemplateType {
+  firstColumn: TemplateSettigsFirstColumn;
+  secondColumn: TemplateSettigsSecondColumn;
+  thirdColumn: TemplateSettigsThirdColumn;
+  fourthColumn: TemplateSettigsFourthColumn;
+  isFirstColumn: boolean;
+  isSecondColumn: boolean;
+  isThirdColumn: boolean;
+  isFourthColumn: boolean;
+}
+interface Template {
+  Template: TemplateType;
+}
+export interface CompanySettingsActionType {
+  payload: Template;
+  type: string;
 }
 
 export interface EmailHeaderProps {
   offerNo: string;
   emailStatus: string;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onDownload: () => void;
+  onPrint: () => void;
 }
 
 export interface PdfProps {
-  emailHeader: EmailHeaderProps;
+  emailHeader: Omit<EmailHeaderProps, "onEmailSend" | "onDownload" | "onPrint">;
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
@@ -679,6 +747,8 @@ export interface PdfProps {
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
+  templateSettings: TemplateType | null;
+  totalPages: number;
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -686,6 +756,9 @@ export interface PurchasedItemDetailsNextPageProps {
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
   isShowTotal: boolean;
+  templateSettings: TemplateType | null;
+  totalPages: number;
+  currPage: number;
 }
 
 interface qrCode {
@@ -726,6 +799,9 @@ export interface AggrementProps {
   contactAddress: ContactDetailsProps;
   footerDetails: DocumentDetailFooterProps;
   aggrementDetails: string;
+  templateSettings: TemplateType | null;
+  totalPages: number;
+  currPage: number;
 }
 
 export interface FiltersComponentProps {

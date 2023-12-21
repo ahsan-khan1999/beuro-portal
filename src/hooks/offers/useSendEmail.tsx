@@ -20,6 +20,8 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { updateQuery } from "@/utils/update-query";
 import { OfferEmailFormField } from "@/components/offers/compose-mail/fields";
 import localStoreUtil from "@/utils/localstore.util";
+import { CompanySettingsActionType, TemplateType } from "@/types";
+import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 
 export const useSendEmail = (
   backRouteHandler: Function,
@@ -82,16 +84,16 @@ export const useSendEmail = (
     offerDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const res = await dispatch(sendOfferEmail({
-    //     data: {
-    //         ...data, id: offerDetails?.id,
-    //         pdf: attachements?.map((item) => item.value),
+    const updatedData = {
+      ...data,
+      id: offerDetails?.id,
+      pdf: attachements?.map((item) => item.value),
+      router,
+      translate,
+      setError,
+    };
 
-    //     }, router, translate, setError
-    // }))
-    // if (res?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }))
-    
-    localStoreUtil.store_data("contractComposeEmail", data);
+    localStoreUtil.store_data("contractComposeEmail", updatedData);
 
     router.pathname = "/offers/pdf-preview";
     router.query = { offerID: offerDetails?.id };

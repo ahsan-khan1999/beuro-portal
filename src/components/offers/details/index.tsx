@@ -21,7 +21,6 @@ const OfferDetails = () => {
     onNextHandle,
   } = useOfferDetails();
 
-  console.log(offerDetails)
   return (
     <Layout>
       <DetailsCard>

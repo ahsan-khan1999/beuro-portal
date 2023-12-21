@@ -112,7 +112,7 @@ export const SignaturePad = () => {
 
   return (
     <>
-      <div className="select-none">
+      <div className="select-none mb-4">
         <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
           {!isSubmitted ? (
             <canvas ref={canvasRef} className="w-full h-full"></canvas>

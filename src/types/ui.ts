@@ -214,6 +214,8 @@ export interface BaseButtonProps extends WidgetBaseProps {
   buttonText: string;
   disabled?: boolean;
   textClassName?: string;
+  loading?: boolean;
+  loaderColor?: string;
 }
 
 export interface ButtonOnClick {

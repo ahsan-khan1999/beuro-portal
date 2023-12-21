@@ -13,10 +13,12 @@ import { EmailHeaderProps } from "@/types";
 const EmailCard = ({
   emailStatus,
   offerNo,
+  onEmailSend,
+  loading,
+  onDownload,
+  onPrint
 }: EmailHeaderProps) => {
   const router = useRouter();
-  const handleSendEmail = () => {
-  };
   return (
     <EmailCardLayout>
       <div className="flex justify-between items-center max">
@@ -25,7 +27,7 @@ const EmailCard = ({
             src={backIcon}
             alt="backIcon"
             className="cursor-pointer"
-            onClick={() => router.push("/offers/details")}
+            onClick={() => router.back()}
           />
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             Solar EEG
@@ -35,20 +37,22 @@ const EmailCard = ({
         <div className="flex items-center justify-between gap-5">
           <BaseButton
             buttonText="Send Email"
-            onClick={handleSendEmail}
+            onClick={onEmailSend}
             containerClassName="flex items-center gap-x-3 row-reverse"
             textClassName="text-[#4B4B4B] font-medium"
+            loading={loading}
+            loaderColor="#4A13E7"
           >
             <Image src={emailIcon} alt="postIcon" />
           </BaseButton>
 
           <IconOnlyButton
             icon={<Image src={downloadIcon} alt="downloadIcon" />}
-            onClick={handleSendEmail}
+            onClick={onDownload}
           />
           <IconOnlyButton
             icon={<Image src={printerIcon} alt="printerIcon" />}
-            onClick={handleSendEmail}
+            onClick={onPrint}
           />
         </div>
       </div>

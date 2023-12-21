@@ -10,6 +10,9 @@ export const ProductItemNewPage = ({
   headerDetails,
   serviceItemFooter,
   isShowTotal,
+  templateSettings,
+  totalPages,
+  currPage
 }: PurchasedItemDetailsNextPageProps) => {
   return (
     <div>
@@ -20,7 +23,7 @@ export const ProductItemNewPage = ({
         ))}
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
       </div>
-      <Footer {...footerDetails} />
+      <Footer {...footerDetails} columnSettings={templateSettings} currPage={currPage} totalPages={totalPages} />
     </div>
   );
 };
