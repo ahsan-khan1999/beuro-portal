@@ -2,13 +2,12 @@ import Dashboard from "@/components/dashboard";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { withLayout } from "@/hoc/withLayout";
 
+const Home = () => <Dashboard />;
 
-const index = () => {
-  return <Dashboard />;
-};
+export default withLayout(Home);
 
-export default index;
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
     ...(await serverSideTranslations(locale, ["common"])),

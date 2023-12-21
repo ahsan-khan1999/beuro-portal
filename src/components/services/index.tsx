@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/layout/layout";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableRowServices from "./table/TableRows";
@@ -18,7 +17,7 @@ export default function Services() {
     setFilter,
     handleFilterChange,
     translate,
-    loading
+    loading,
   } = useService();
 
   const CurrentComponent = useEmptyStates(
@@ -28,7 +27,7 @@ export default function Services() {
   );
 
   return (
-    <Layout>
+    <>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -44,6 +43,6 @@ export default function Services() {
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
       />
-    </Layout>
+    </>
   );
 }

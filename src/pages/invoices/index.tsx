@@ -2,18 +2,11 @@ import Invoices from "@/components/invoice";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { withLayout } from "@/hoc/withLayout";
 
+const Home = () => <Invoices />;
 
-
-const index = () => {
-  return (
-    <div>
-      <Invoices />
-    </div>
-  );
-};
-
-export default index;
+export default withLayout(Home);
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
     ...(await serverSideTranslations(locale, ["common"])),

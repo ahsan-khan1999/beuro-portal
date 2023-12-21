@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/layout/layout";
 import ContactSupportForm from "./ContactSupportForm";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -30,7 +29,7 @@ export default function ContactSupport() {
   };
 
   const requestSubmitHandler = () => {
-    dispatch(updateModalType({type:ModalType.CREATION}));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -46,16 +45,14 @@ export default function ContactSupport() {
 
   return (
     <>
-      <Layout>
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl text-[#222B45] ">
-            {translate("contact_support.main_heading")}
-          </h1>
-        </div>
-        <div className="flex mt-5">
-          <ContactSupportForm requestSubmitHandler={requestSubmitHandler} />
-        </div>
-      </Layout>
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl text-[#222B45] ">
+          {translate("contact_support.main_heading")}
+        </h1>
+      </div>
+      <div className="flex mt-5">
+        <ContactSupportForm requestSubmitHandler={requestSubmitHandler} />
+      </div>
 
       {renderModal()}
     </>

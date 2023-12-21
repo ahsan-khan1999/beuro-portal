@@ -330,3 +330,7 @@ export interface UsePaginationProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
 }
+
+export interface ChildrenProp {
+  children?: ReactNode;
+}

@@ -1,17 +1,13 @@
-import React from 'react'
-import Employs from '@/components/employees'
+import React from "react";
+import Employees from "@/components/employees";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { withLayout } from "@/hoc/withLayout";
 
-const index = () => {
-  return (
-    <div>
-      <Employs />
-    </div>
-  )
-}
+const Home = () => <Employees />;
 
-export default index
+export default withLayout(Home);
+
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
     ...(await serverSideTranslations(locale, ["common"])),
