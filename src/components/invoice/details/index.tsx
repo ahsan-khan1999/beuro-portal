@@ -1,5 +1,4 @@
 import { Layout } from "@/layout";
-import React, { useState } from "react";
 import InvoiceDetailsData from "./InvoiceDetailsData";
 import InvoiceCardLayout from "@/layout/invoice";
 import DetailsSwitchBtn from "./DetailsSwitchBtn";
@@ -7,27 +6,13 @@ import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
 
-enum CheckData {
-  data,
-  nodata,
-}
-import emptyState from "@/assets/svgs/empty-state.svg";
-import ComposeMail from "./compose-mail/ComposeMail";
-import NoDataEmptyState from "../../../base-components/loadingEffect/no-data-empty-state";
-const InvoiceDetails = () => {
-  const check = (Currentcomponent: JSX.Element, val: CheckData) => {
-    const isData = {
-      [CheckData.data]: Currentcomponent,
-      [CheckData.nodata]: <NoDataEmptyState />,
-    };
-    return isData[val];
-  };
+import { useEmptyStates } from "@/utils/hooks";
 
+const InvoiceDetails = () => {
   const {
     handleInvoiceCreation,
     handleNotes,
     invoiceDetails,
-    offerDeleteHandler,
     renderModal,
     setSwitchDetails,
     switchDetails,
@@ -40,31 +25,38 @@ const InvoiceDetails = () => {
     handleStopInvoiceCreation,
     handleInvoiceEdit,
     handleSendEmail,
-    isSendEmail,
-    onNextHandle,
-    setIsSendEmail,
-    handleRecurringInvoiceEdit
+    handleRecurringInvoiceEdit,
+    loading,
+
   } = useInvoiceDetail();
+
+
   const invoiceComponent = {
-    Invoice: check(
-      <InvoiceDetailsTable
+    Invoice:
+      {comp: <InvoiceDetailsTable
         collectiveInvoice={collectiveInvoice}
         handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
         handleInvoiceEdit={handleInvoiceEdit}
         handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
       />,
-      (collectiveInvoice?.length === 0 && CheckData.nodata) || CheckData.data
-    ),
-    Receipt: check(
-      <ReceiptDetailsTable
+    isData: collectiveInvoice?.length > 0
+    },
+    Receipt:{comp : <ReceiptDetailsTable
         collectiveInvoice={collectiveReciept}
         handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
         handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       />,
-      (collectiveReciept?.length === 0 && CheckData.nodata) || CheckData.data
-    ),
+      isData: collectiveReciept?.length > 0
+    },
   };
+
+  const CurrentComponent = useEmptyStates(
+    invoiceComponent[switchDetails as keyof typeof invoiceComponent].comp,
+    invoiceComponent[switchDetails as keyof typeof invoiceComponent].isData,
+    loading
+  );
+
   return (
     <>
       <Layout>
@@ -88,9 +80,7 @@ const InvoiceDetails = () => {
             setSwitchDetails={setSwitchDetails}
           />
         </div>
-
-        {invoiceComponent[switchDetails as keyof typeof invoiceComponent]}
-
+        {CurrentComponent}
       </Layout>
       {renderModal()}
     </>

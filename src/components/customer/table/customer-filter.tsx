@@ -1,4 +1,4 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
+
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
@@ -8,6 +8,7 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import CustomerFilters from "@/base-components/filter/customer-filters";
 
 export default function CustomerFilter({
   filter,
@@ -43,7 +44,7 @@ export default function CustomerFilter({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <DetailFilter
+      <CustomerFilters
         filter={filter}
         setFilter={setFilter}
         moreFilter={moreFilter}

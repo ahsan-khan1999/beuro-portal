@@ -1,4 +1,4 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
+import DetailFilter from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";

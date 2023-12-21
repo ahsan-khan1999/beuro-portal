@@ -7,13 +7,24 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import useFilter from "@/hooks/filter/hook";
+import ServicesFilter from "@/base-components/filter/services-filter";
+import ContractFilter from "@/base-components/filter/contracts-filter";
 
 export default function ContentFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { isOpen, toggleHandler } = useFilter({ filter, setFilter });
+  const {
+    isOpen,
+    toggleHandler,
+    moreFilter,
+    setMoreFilter,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleItemSelected,
+    typeList,
+  } = useFilter({ filter, setFilter });
 
   const router = useRouter();
 
@@ -29,9 +40,18 @@ export default function ContentFilters({
         handleChange={(value) => setFilter({ ...filter, sortBy: value })}
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
-       
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
+      />
+      <ContractFilter
+        filter={filter}
+        setFilter={setFilter}
+        moreFilter={moreFilter}
+        setMoreFilter={setMoreFilter}
+        handleFilterResetToInitial={handleFilterResetToInitial}
+        handleFilterReset={handleFilterReset}
+        handleItemSelected={handleItemSelected}
+        typeList={typeList}
       />
       <Button
         onClick={() => handleFilterChange(filter)}

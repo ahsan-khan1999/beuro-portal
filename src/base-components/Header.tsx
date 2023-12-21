@@ -57,14 +57,10 @@ const Header = () => {
       }
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          {
-            staticEnums["User"]["role"][user?.role as string] !== 0 &&
-            <div className="relative menu pl-7 mr-6">
-              <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer" />
-
-              <FollowUpDropDown />
-            </div>
-          }
+          <div className="relative menu mr-6">
+            <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer"/>
+            <FollowUpDropDown />
+          </div>
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">

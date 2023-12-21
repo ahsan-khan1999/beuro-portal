@@ -5,8 +5,11 @@ import InputField from "./fields/input-field";
 import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
+import { MultiDateField } from "../form/fields";
+import DatePicker from "./fields/date-picker";
+import { PriceInputField } from "./fields/price-input-field";
 
-export default function DetailFilter({
+export default function ServicesFilter({
   filter,
   moreFilter,
   setMoreFilter,
@@ -58,7 +61,7 @@ export default function DetailFilter({
             <div className="flex justify-between border-b border-lightGray pb-3">
               <span className="font-medium text-lg">Filter</span>
               <span
-                className=" text-base text-gray cursor-pointer"
+                className=" text-base text-red cursor-pointer"
                 onClick={() => handleFilterResetToInitial()}>
                 Reset All
               </span>
@@ -66,49 +69,37 @@ export default function DetailFilter({
             <div className="">
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium ">
-                    Types
+                  <label htmlFor="type" className="font-medium text-base">
+                    Date
                   </label>
                   <label
                     htmlFor="type"
-                    className="cursor-pointer text-lightGray"
+                    className="cursor-pointer text-red"
                     onClick={() => handleFilterReset("type", "None")}>
                     Reset
                   </label>
                 </div>
-                <DropDown
-                  items={typeList}
-                  onItemSelected={handleItemSelected}
-                  selectedItem={filter.type || ""}
-                  dropDownTextClassName="custom-text-style"
-                  dropDownIconClassName="custom-icon-style"
-                  dropDownDisabled={false}
-                  shouldNotSelectItem={false}
-                  dropDownClassName="my-2 border border-black h-10"
-                  key={Math.random()}
-                />
+                <div>
+                  <DatePicker label="From" label2="To" />
+                </div>
               </div>
-              <div>
-                <div className="flex justify-between">
-                  <label htmlFor="type" className=" ">
-                    Location
+              {/* Price section  */}
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between mb-2">
+                  <label htmlFor="type" className="font-medium text-base">
+                    Price
                   </label>
                   <label
                     htmlFor="type"
-                    className="cursor-pointer text-lightGray"
-                    onClick={() => handleFilterReset("location", "")}>
+                    className="cursor-pointer text-red"
+                    onClick={() => handleFilterReset("type", "None")}>
                     Reset
                   </label>
                 </div>
 
-                <InputField
-                  iconDisplay={false}
-                  handleChange={(value) => handleFilterReset("location", value)}
-                  value={filter.location || ""}
-                  textClassName="border border-black min-h-[42px]"
-                  containerClassName=" my-2"
-                />
+                <PriceInputField label="Low Price" label2="High Price" />
               </div>
+              {/* Price section  */}
             </div>
             <div>
               <BaseButton
@@ -116,7 +107,7 @@ export default function DetailFilter({
                 onClick={() => {
                   setMoreFilter(!moreFilter);
                 }}
-                containerClassName="bg-primary my-2 px-8 py-1"
+                containerClassName="bg-primary my-6 px-8 py-2"
                 textClassName="text-white"
               />
             </div>

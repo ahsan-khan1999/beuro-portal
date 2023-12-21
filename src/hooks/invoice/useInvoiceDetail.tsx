@@ -255,6 +255,6 @@ export default function useInvoiceDetail() {
         setIsSendEmail,
         isSendEmail,
         onNextHandle,
-        handleRecurringInvoiceEdit
+        loading,
     }
 }

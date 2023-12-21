@@ -1,4 +1,4 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
+import DetailFilter from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -7,7 +7,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import React from "react";
-
+import ContractFilter from "@/base-components/filter/contracts-filter";
 export default function ContractFilters({
   filter,
   setFilter,
@@ -61,7 +61,7 @@ export default function ContractFilters({
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <DetailFilter
+        <ContractFilter
           filter={filter}
           setFilter={setFilter}
           moreFilter={moreFilter}

@@ -26,6 +26,9 @@ export interface Status {
   paid?: boolean;
   active?: boolean;
   blocked?: boolean;
+  send?:boolean;
+  draft?:boolean;
+  failed:boolean
 }
 export interface CheckBoxFilterProps {
   label: string;

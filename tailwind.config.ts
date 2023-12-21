@@ -70,6 +70,7 @@ module.exports = {
         buttonHover: "#9B19E6",
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
+        lightDark:"#393939",
 
         statusColor: "#AF2626",
       },

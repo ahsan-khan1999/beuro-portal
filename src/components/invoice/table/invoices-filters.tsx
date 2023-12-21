@@ -1,4 +1,4 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
+import DetailFilter from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -6,6 +6,7 @@ import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType } from "@/types";
 import React, { SetStateAction } from "react";
 import { Button } from "@/base-components/ui/button/button";
+import InvoicesFilter from "@/base-components/filter/invoices-filter";
 
 export default function InvoicesFilters({
   filter,
@@ -59,7 +60,7 @@ export default function InvoicesFilters({
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <DetailFilter
+        <InvoicesFilter
           filter={filter}
           setFilter={setFilter}
           moreFilter={moreFilter}
