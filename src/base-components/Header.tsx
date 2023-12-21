@@ -36,7 +36,7 @@ const Header = () => {
       </div>
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          <div className="relative menu pl-7 mr-6">
+          <div className="relative menu mr-6">
             <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer"/>
             <FollowUpDropDown />
           </div>

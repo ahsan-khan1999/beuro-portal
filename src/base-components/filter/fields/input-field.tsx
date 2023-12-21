@@ -15,7 +15,7 @@ export default function InputField({
   const inputClasses = combineClasses(
     `${
       bgColor ? "bg-[#F4F4F4]" : "bg-white"
-    } w-[274px] text-sm rounded-lg  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
+    } w-full text-sm rounded-lg  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
     textClassName
   );
 

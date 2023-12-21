@@ -245,6 +245,7 @@ export default function useInvoiceDetail() {
         handleSendEmail,
         setIsSendEmail,
         isSendEmail,
-        onNextHandle
+        onNextHandle,
+        loading,
     }
 }

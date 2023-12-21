@@ -1,13 +1,14 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersComponentProps } from "@/types";
-import DetailFilter from "@/base-components/filter/detail-filter";
+import LeadsFilter from "@/base-components/filter/leads-filter";
 import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import useFilter from "@/hooks/filter/hook";
 import { useTranslation } from "next-i18next";
+import ServicesFilter from "@/base-components/filter/services-filter";
 
 export default function ServicesFilters({
   filter,
@@ -41,7 +42,7 @@ export default function ServicesFilters({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <DetailFilter
+      <ServicesFilter
         filter={filter}
         setFilter={setFilter}
         moreFilter={moreFilter}

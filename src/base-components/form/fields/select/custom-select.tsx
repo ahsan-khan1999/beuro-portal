@@ -60,12 +60,12 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${success ? "pl-4 pr-10" : "pl-11 pr-4"
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px]  flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${success ? "pl-4 pr-10" : "pl-11 pr-4"
     }`;
   const classes = combineClasses(defaultClasses, className);
     
   return (
-    <div id={id} ref={selectBoxRef} className="relative focus:border-primary ">
+    <div id={id} ref={selectBoxRef} className="relative focus:border-primary  ">
       <button
         placeholder={placeholder}
         onClick={(e) => {
@@ -87,10 +87,10 @@ export const SelectBox = ({
       </button>
       <AnimatePresence>
       {!disabled && isOpen && (
-        <motion.ul className="absolute top-[52px] w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"  initial={{ opacity: 0, y: -20 }}
+        <motion.ul className="absolute overflow-x-hidden top-[52px] h-[400px] overflow-scroll  w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"  initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4 }}>
+        transition={{ duration: 0.4 }} id="dropdownSerchBar">
           <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
           <Image
                 src={searchIcon}

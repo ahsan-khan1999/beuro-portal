@@ -1,4 +1,3 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -9,6 +8,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
+import OfferFilter from "@/base-components/filter/offer-filter";
 
 export default function OffersFilters({
   filter,
@@ -62,7 +62,7 @@ export default function OffersFilters({
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <DetailFilter
+        <OfferFilter
           filter={filter}
           setFilter={setFilter}
           moreFilter={moreFilter}
