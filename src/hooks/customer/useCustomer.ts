@@ -32,7 +32,7 @@ export default function useCustomer() {
         setCurrentPageRows(res?.payload?.Customer);
       }
     })
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
