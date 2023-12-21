@@ -5,10 +5,10 @@ export const generatePlansValidation = (translate: Function) => {
   return yup.object().shape({
     [PlanDetailFields.name]: yup.string().required("validation required"),
     [PlanDetailFields.priceMonthly]: yup
-      .string()
+      .number()
       .required("validation required"),
     [PlanDetailFields.anuallDiscount]: yup
-      .string()
+      .number()
       .required(translate("validationMessages.required")),
     [PlanDetailFields.employeeNo]: yup
       .number()
@@ -21,16 +21,16 @@ export const generatePlansValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [PlanDetailFields.accountingReports]: yup
-      .string()
+      .boolean()
       .required(translate("validationMessages.required")),
     [PlanDetailFields.customEmails]: yup
-      .string()
+      .boolean()
       .required(translate("validationMessages.required")),
     [PlanDetailFields.waterMark]: yup
-      .string()
+      .boolean()
       .required(translate("validationMessages.required")),
     [PlanDetailFields.apifeature]: yup
-      .string()
+      .boolean()
       .required(translate("validationMessages.required")),
   });
 };

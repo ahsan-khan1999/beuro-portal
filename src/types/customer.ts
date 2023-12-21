@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { FormField } from ".";
+import { FormField, User } from ".";
 import {
   FieldValues,
   SubmitHandler,
@@ -44,12 +44,16 @@ export interface Customers {
   address: CustomerAddress;
   edit?: boolean;
   lead: CustomerLeadDetail;
+  logo:string
+  plan?:string
+  createdBy?:User
 }
 
 export interface CustomerAddress {
   streetNumber: string;
   country: string;
-  postalCode: string
+  postalCode: string;
+  city?:string
 }
 
 

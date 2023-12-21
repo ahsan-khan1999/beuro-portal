@@ -15,7 +15,7 @@ import noteSlice from "../slices/noteSlice/noteSlice";
 import imageSlice from "../slices/imageSlice/image";
 import settings from "../slices/settingSlice/settings";
 import EmailSlice from '../slices/emailTracker/email';
-
+import companySlice from "../slices/company/companySlice"
 const reducer = {
   auth,
   global: globalSlice,
@@ -33,7 +33,8 @@ const reducer = {
   note: noteSlice,
   image: imageSlice,
   settings,
-  emailSlice: EmailSlice
+  emailSlice: EmailSlice,
+  company: companySlice
 
 };
 export default reducer;

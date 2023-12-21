@@ -27,7 +27,7 @@ export const SelectBox = ({
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
-
+  
   useEffect(() => {
     setOption(options);
     if (defaultValue) {
@@ -75,7 +75,7 @@ export const SelectBox = ({
         className={`${classes} `}
       >
         {(field && getLabelByValue(field.value, options)) ||
-          getLabelByValue(defaultValue, options)}
+          getLabelByValue(defaultValue, options) }
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (

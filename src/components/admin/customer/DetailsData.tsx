@@ -7,31 +7,33 @@ import unCheckedIcon from "@/assets/svgs/uncheck.svg";
 import checkedIcon from "@/assets/svgs/checked_icon.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 const DetailsData = ({
   customerDetail,
   isCustomerFree,
   handlePreviousClick,
   handleAreYouSure,
+  handleStatusChange
 }: {
   customerDetail: CustomersAdmin;
   isCustomerFree: boolean;
   handlePreviousClick: () => void;
   handleAreYouSure: () => void;
+  handleStatusChange: (value: string) => void
 }) => {
+
+
   const { t: translate } = useTranslation();
 
   const items: DropDownItem[] = [
     {
-      item: translate(
-        "admin.customers_details.card_content.customer_status.active"
-      ),
+      item: "unBlock",
     },
     {
-      item: translate(
-        "admin.customers_details.card_content.customer_status.block"
-      ),
+      item: "block",
     },
+   
   ];
 
   return (
@@ -64,7 +66,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
-              {customerDetail?.id}
+              {customerDetail?.refID}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
@@ -76,13 +78,13 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.no_of_employee")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.employsNumber}
+              {customerDetail?.employee?.refID}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.plan")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.plans}
+              {customerDetail?.company?.plan}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
@@ -91,7 +93,7 @@ const DetailsData = ({
             )}
             :
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.subscriptionDate?.toLocaleDateString()}
+              {formatDateTimeToDate(customerDetail?.createdAt)}
             </span>
           </h3>
         </div>
@@ -101,9 +103,9 @@ const DetailsData = ({
             <span className="ml-3 text-[#4B4B4B] font-medium">
               <DropDown
                 items={items}
-                onItemSelected={(selectedItem) => console.log(selectedItem)}
-                selectedItem={items[0].item}
-                dropDownClassName="w-[108px] border border-primary"
+                onItemSelected={(selectedItem) => handleStatusChange(selectedItem)}
+                selectedItem={customerDetail?.status}
+                dropDownClassName="w-[140px] border border-primary"
                 dropDownTextClassName="text-primary font-medium"
                 dropDownIconClassName="text-primary"
                 dropDownItemsContainerClassName="border border-primary"
@@ -113,7 +115,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
             {translate("admin.customers_details.card_content.company_logo")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
-              <Image src={customerDetail?.logo} alt="company logo" />
+              <Image src={customerDetail?.company?.logo} alt="company logo" height={40} width={100} />
             </span>
           </h3>
         </div>

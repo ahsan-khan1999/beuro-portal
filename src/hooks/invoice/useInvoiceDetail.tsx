@@ -20,6 +20,7 @@ import cautionIcon from "@/assets/svgs/caution.svg"
 import RecurringInvoice from '@/base-components/ui/modals1/RecurringInvoice';
 import RecurringInvoiceFrequency from '@/base-components/ui/modals1/InvoiceFrequency';
 import InvoiceUpdate from '@/base-components/ui/modals1/InvoiceUpdate';
+import RecurringInvoiceUpdate from '@/base-components/ui/modals1/RecurringInvoiceUpdate';
 export default function useInvoiceDetail() {
     const dispatch = useAppDispatch();
     const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -35,8 +36,8 @@ export default function useInvoiceDetail() {
     useEffect(() => {
         if (id) {
             dispatch(readInvoiceDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
-                dispatch(readCollectiveInvoice({ params: { filter: { "invoiceStatus": "0" }, paginate: 0 } }))
-                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "2" }, paginate: 0 } }))
+                dispatch(readCollectiveInvoice({ params: { filter: { "invoiceStatus": ["0","1"] }, paginate: 0,id:res?.payload?.id } }))
+                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "2" }, paginate: 0 ,id:res?.payload?.id} }))
 
 
                 dispatch(setInvoiceDetails(res.payload))
@@ -129,6 +130,10 @@ export default function useInvoiceDetail() {
         dispatch(updateModalType({ type: ModalType.INVOICE_UPDATE, data: item }))
     }
 
+    const handleRecurringInvoiceEdit = (item: any) => {
+        dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_UPDATE, data: item }))
+    }
+
     const MODAL_CONFIG: ModalConfigType = {
         [ModalType.CONFIRM_DELETION]: (
             <DeleteConfirmation_1
@@ -195,6 +200,10 @@ export default function useInvoiceDetail() {
             />
         ),
 
+        [ModalType.RECURRING_INVOICE_UPDATE]: (
+            <RecurringInvoiceUpdate onClose={onClose} invoiceCreated={invoiceCreated} />
+        ),
+
 
 
     };
@@ -245,6 +254,7 @@ export default function useInvoiceDetail() {
         handleSendEmail,
         setIsSendEmail,
         isSendEmail,
-        onNextHandle
+        onNextHandle,
+        handleRecurringInvoiceEdit
     }
 }

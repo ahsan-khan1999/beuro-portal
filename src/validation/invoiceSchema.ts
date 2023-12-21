@@ -6,16 +6,28 @@ export const generateCreateInvoiceValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [createInvoice.totalAmount]: yup
       .number()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
     [createInvoice.remainingAmount]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
 
     [createInvoice.paymentMethod]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
+
+
+  });
+};
+export const generateRecurringInvoiceValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    
+
+
+    [createInvoice.paymentMethod]: yup
+      .string()
+      .required(translate("validationMessage.required")),
 
 
   });
@@ -24,16 +36,16 @@ export const generateCreateRecurringInvoiceValidationSchema = (translate: Functi
   return yup.object().shape({
     [createInvoice.paymentMethod]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
   
 
     [createInvoice.date]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
     [createInvoice.frequency]: yup
       .number()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
   });
 };
@@ -45,11 +57,11 @@ export const generateRecurringInvoiceFrequencyValidationSchema = (translate: Fun
 
     [createInvoice.date]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
     [createInvoice.frequency]: yup
       .number()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
   });
 };

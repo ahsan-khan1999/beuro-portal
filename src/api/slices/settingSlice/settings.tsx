@@ -2,7 +2,7 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "@/types";
-import { EmailSetting, FollowUp, TemplateSettings } from "@/types/settings";
+import { EmailSetting, EmailTemplate, FollowUp, TemplateSettings } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
 import { saveUser } from "@/utils/auth.util";
 export interface TaxSetting {
@@ -11,6 +11,7 @@ export interface TaxSetting {
     taxRate: String;
     createdAt: string
 }
+
 interface SettingsState {
     user: User | null;
     loading: boolean;
@@ -19,7 +20,8 @@ interface SettingsState {
     systemSettings: SystemSetting | null,
     tax: TaxSetting[] | null,
     followUps: FollowUp | null,
-    emailSettings: EmailSetting | null
+    emailSettings: EmailSetting | null,
+    emailTemplate: EmailTemplate | null
 
 }
 
@@ -42,7 +44,8 @@ const initialState: SettingsState = {
     systemSettings: null,
     tax: null,
     followUps: null,
-    emailSettings: null
+    emailSettings: null,
+    emailTemplate: null
 
 }
 
@@ -209,6 +212,38 @@ export const updateEmailSetting: AsyncThunk<boolean, object, object> | any =
         }
     });
 
+
+
+
+export const updateEmailTemplateSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("add/user/email/template/setting", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.createEmailTemplateSettings(data);
+            return response?.data?.data?.MailSetting;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
+
+
+export const updateAdminSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("admin/setting", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateAdminSettings(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 const SettingSlice = createSlice({
     name: "SettingSlice",
     initialState,
@@ -356,6 +391,28 @@ const SettingSlice = createSlice({
         builder.addCase(updateEmailSetting.rejected, (state) => {
             state.loading = false
         });
+        builder.addCase(updateEmailTemplateSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateEmailTemplateSetting.fulfilled, (state, action) => {
+            state.emailTemplate = action.payload
+            state.loading = false;
+
+        });
+        builder.addCase(updateEmailTemplateSetting.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateAdminSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateAdminSetting.fulfilled, (state, action) => {
+            state.loading = false;
+
+        });
+        builder.addCase(updateAdminSetting.rejected, (state) => {
+            state.loading = false
+        });
+
 
     },
 })

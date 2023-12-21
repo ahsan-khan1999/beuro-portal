@@ -13,7 +13,7 @@ const TableFunctions = () => {
       <h1 className="text-xl text-[#222B45] ">{translate("admin.plans_management.main_heading")}</h1>
 
       <button
-        onClick={() => router.push("/admin/plans/details")}
+        onClick={() => router.push("/admin/plans/create")}
         className="py-2 px-[10px]  cursor-pointer flex items-center gap-x-2 text-[13px] font-semibold bg-primary text-white rounded-md ml-8 whitespace-nowrap"
       >
         <Image src={addIcon} alt="addIcon" />

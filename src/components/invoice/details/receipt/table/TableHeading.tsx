@@ -20,16 +20,17 @@ const TableHeading = () => {
       <span className="font-medium  text-[#8F8F8F] bg-white">
         {translate("invoice.receipt_table_heading.amount")}
       </span>
-      <span className="flex justify-center items-center font-medium text-[#8F8F8F] ">
-        {translate("invoice.receipt_table_heading.invoice")}
-      </span>
-      <span className="font-medium text-[#8F8F8F] ">
-        {translate("invoice.receipt_table_heading.payment")}
-      </span>
-
       <span className="font-medium text-[#8F8F8F] ">
         {translate("invoice.receipt_table_heading.email_status")}
       </span>
+     
+      <span className="font-medium text-[#8F8F8F] ">
+        {translate("invoice.receipt_table_heading.payment")}
+      </span>
+      <span className="flex  items-center font-medium text-[#8F8F8F] ">
+        {translate("invoice.receipt_table_heading.invoice")}
+      </span>
+    
       <span className="font-medium text-[#8F8F8F] rounded-md"></span>
     </div>
   );

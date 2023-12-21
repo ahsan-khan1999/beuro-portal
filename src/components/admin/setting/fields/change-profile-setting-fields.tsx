@@ -18,9 +18,10 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                 "flex justify-center items-center mb-5 col-span-1",
               field: {
                 type: Field.profileUploadField,
-                id: "fileUpload",
-                name: "fileUpload",
+                id: "logo",
+                name: "logo",
                 control,
+                disabled: true
               },
             },
             {
@@ -49,6 +50,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             type: Field.input,
                             id: "fullName",
                             name: "fullName",
+                            disabled: true,
                             inputType: "text",
                             placeholder: "Enter Your Name",
                             svg: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
@@ -70,7 +72,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             type: Field.input,
                             inputType: "email",
                             id: "email",
-                            value: "rahalahmed@gmail.com",
                             name: "email",
                             disabled: true,
                             className: "bg-[#F1F1F1] border-none focus-none ",
@@ -130,12 +131,12 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             text: `${translate(
                               "admin.settings.account_setting.old_password"
                             )}`,
-                            htmlFor: "oldPassword",
+                            htmlFor: "currentPassword",
                           },
                           field: {
                             type: Field.password,
-                            id: "oldPassword",
-                            name: "oldPassword",
+                            id: "currentPassword",
+                            name: "currentPassword",
                             placeholder: "************",
                             svg: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
                             <path d="M8.79605 9.38507C9.07929 9.38507 9.3089 9.15546 9.3089 8.87222C9.3089 8.58898 9.07929 8.35938 8.79605 8.35938C8.51281 8.35938 8.2832 8.58898 8.2832 8.87222C8.2832 9.15546 8.51281 9.38507 8.79605 9.38507Z" fill="#8F8F8F"/>
@@ -212,7 +213,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       )}`,
                       inputType: "submit",
                       className:
-                        "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
+                        "rounded-lg   px-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
 
                     },

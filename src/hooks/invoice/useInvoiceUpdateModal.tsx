@@ -44,6 +44,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     type,
     data
   );
+  
   useMemo(() => {
     if (type === '0') {
       if (invoiceDetails?.contractID?.offerID?.total < amount) {
@@ -70,6 +71,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   useEffect(() => {
     reset({
       amount: data?.amount,
+      type: "0",
 
     })
     
@@ -77,7 +79,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
-    const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring }
+    const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
     if (res?.payload) invoiceCreated();

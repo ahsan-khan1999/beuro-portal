@@ -116,6 +116,6 @@ export const generateValues = (data) => {
 };
 
 export const getLabelByValue = (value, list) => {
-  let filteredItem = list.filter((item) => item.value === value)
+  let filteredItem = list?.filter((item) => item.value === value)
   if (filteredItem) return filteredItem[0]?.label
 }

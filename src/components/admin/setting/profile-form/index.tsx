@@ -5,7 +5,7 @@ import React from "react";
 
 const SettingProfile = () => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error } = useSettingProfile();
+  const { fields, onSubmit, handleSubmit, errors, error, renderModal } = useSettingProfile();
   return (
     <FormCard>
       <Form
@@ -15,6 +15,7 @@ const SettingProfile = () => {
         errors={errors}
         className={`${defaultClassName}`}
       />
+      {renderModal()}
     </FormCard>
   );
 };

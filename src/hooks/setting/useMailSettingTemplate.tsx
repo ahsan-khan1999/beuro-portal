@@ -7,15 +7,14 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateEmailTemplateValidation } from "@/validation/settingSchema";
 import { EmailTemplateFormField } from "@/components/setting/mail-setting/email-template-fields";
 import {
-  readEmailSettings,
-  updateEmailSetting,
+  updateEmailTemplateSetting,
 } from "@/api/slices/settingSlice/settings";
 
-export const useMailSettingsTemplate = () => {
+export const useMailSettingsTemplate = (handleCreation: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.settings);
+  const { loading, error ,emailSettings} = useAppSelector((state) => state.settings);
 
   const schema = generateEmailTemplateValidation(translate);
   const {
@@ -30,14 +29,13 @@ export const useMailSettingsTemplate = () => {
   });
 
   useEffect(() => {
-    dispatch(readEmailSettings({})).then((response: any) => {
-      reset({ ...response?.payload });
-    });
+    reset({ ...emailSettings });
   }, []);
 
   const fields = EmailTemplateFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("data");
+    const response = await dispatch(updateEmailTemplateSetting({ data, router, setError, translate }))
+    if (response?.payload) handleCreation()
   };
   return {
     fields,

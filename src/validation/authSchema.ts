@@ -194,26 +194,6 @@ export const generateChangePasswordValidationSchema = (translate: Function) => {
   });
 };
 
-// export const generateSalutationValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.salutation]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
-
-// export const generateDobValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.dob]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
-
-// export const generateFullNameValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.fullName]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
 
 export const generateProfileChangePasswordValidationSchema = (
   translate: Function

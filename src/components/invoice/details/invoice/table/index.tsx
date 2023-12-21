@@ -4,9 +4,6 @@ import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
 import {
   InvoiceDetailsTableProps,
-  InvoiceDetailsTableRowTypes,
-  InvoiceTableRowTypes,
-  SubInvoiceTableRowTypes,
 } from "@/types/invoice";
 
 export default function InvoiceDetailsTable({
@@ -14,6 +11,7 @@ export default function InvoiceDetailsTable({
   handlePaymentStatusUpdate,
   handleInvoiceStatusUpdate,
   handleInvoiceEdit,
+  handleRecurringInvoiceEdit
 }: InvoiceDetailsTableProps) {
   return (
     <>
@@ -25,6 +23,7 @@ export default function InvoiceDetailsTable({
           handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleInvoiceEdit={handleInvoiceEdit}
+          handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
         />
       </TableLayout>
     </>

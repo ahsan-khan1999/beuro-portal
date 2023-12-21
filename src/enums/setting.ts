@@ -37,12 +37,12 @@ export enum SettingProfile {
 }
 
 export enum MailSettingsEmailTemplate {
-  UPLOAD_LOGO = "UPLOAD_LOGO",
-  EMAIL = "EMAIL",
-  PHONE_NUMBER = "PHONE_NUMBER",
-  MOBILE_NUMBER = "MOBILE_NUMBER",
-  FOOTER_COLOR = "FOOTER_COLOR",
-  TEXT_COLOR = "TEXT_COLOR",
+  UPLOAD_LOGO = "logo",
+  EMAIL = "email",
+  PHONE_NUMBER = "phoneNumber",
+  MOBILE_NUMBER = "mobileNumber",
+  FOOTER_COLOR = "FooterColour",
+  TEXT_COLOR = "textColour",
 }
 
 export enum MailSettingsComponentsType {

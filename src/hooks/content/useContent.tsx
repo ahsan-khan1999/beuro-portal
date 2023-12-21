@@ -8,7 +8,7 @@ import { readContent, setContentDetails } from "@/api/slices/content/contentSlic
 import localStoreUtil from "@/utils/localstore.util";
 
 const useContent = () => {
-  const { content, lastPage, totalCount,loading } = useAppSelector(state => state.content)
+  const { content, lastPage, totalCount, loading } = useAppSelector(state => state.content)
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
@@ -35,17 +35,18 @@ const useContent = () => {
   }, [dispatch])
   useEffect(() => {
     // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      content?.slice(startIndex, startIndex + itemsPerPage)
-    );
+    dispatch(readContent({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+      setCurrentPageRows(
+        res?.payload?.Content
+      );
+    })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContent({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readContent({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   return {
     currentPageRows,

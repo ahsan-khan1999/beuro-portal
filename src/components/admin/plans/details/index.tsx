@@ -1,11 +1,11 @@
 import { Layout } from "@/layout";
 import React from "react";
-import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
 import PlansForm from "../Form";
+import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
 
 const PlanDetails = () => {
   const {
-    planDetail,
+    planDetails,
     isUpdate,
     setIsUpdate,
     fields,
@@ -13,6 +13,7 @@ const PlanDetails = () => {
     onSubmit,
     errors,
     handlePreviousClick,
+    renderModal
   } = usePlanDetail(true);
 
   return (
@@ -20,12 +21,13 @@ const PlanDetails = () => {
       <PlansForm
         isUpdate={isUpdate}
         setIsUpdate={setIsUpdate}
-        planDetail={planDetail}
         fields={fields}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
+        planDetail={planDetails}
       />
+      {renderModal()}
     </Layout>
   );
 };

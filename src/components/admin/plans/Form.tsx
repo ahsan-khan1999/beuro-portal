@@ -13,11 +13,12 @@ const PlansForm = ({
   onSubmit,
   handleSubmit,
   errors,
+  planDetail
 }: FormDataProps) => {
   const defaultClassName = "";
   const router = useRouter();
   const { t: translate } = useTranslation();
-
+  
   return (
     <FormCard>
       <Form

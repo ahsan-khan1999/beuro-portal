@@ -48,7 +48,7 @@ const SERVICE_URLS = {
   service: "/service",
   offerService: "/offer-service",
   sendEmailOtp: "/otp/send-verify-email-link",
-  followUp: "/followup",
+  leadFollowUp: "/followup",
   postPondNotes: "/followup/postpond",
   markComplete: "/followup/complete",
   leadNotes: "/lead/note/",
@@ -79,7 +79,15 @@ const SERVICE_URLS = {
   emailSettings: "/setting/mail-setting/mail-setting",
   createEmailSettings: "/setting/mail-setting/email-configration",
   composeEmail: "/contract/send-email/",
-  composeInvoiceEmail: "/invoice/invoice-collection/send-email/"
+  composeInvoiceEmail: "/invoice/invoice-collection/send-email/",
+  emailTemplate: "/setting/mail-setting/email-template",
+
+  company: "/user/",
+  choosePlan: "/user/choose-plan/",
+  plan: "/plan",
+  adminSettings: "/setting/update-admin-password/",
+  changeStatus: "/user/change-status/"
+
 };
 
 const login = (data) =>
@@ -221,16 +229,6 @@ const updateContractPaymentStatus = (data) =>
 const deleteContract = (data) =>
   del(SERVICE_URLS.contract + `/${data?.id}`, {}, { feature: featureConstants.login });
 
-const readCompany = (data) =>
-  get(SERVICE_URLS.company, data, { feature: featureConstants.login });
-
-const createCompany = (data) =>
-  post(SERVICE_URLS.company, data, { feature: featureConstants.login });
-
-const updateCompany = (data) =>
-  put(SERVICE_URLS.company, data, { feature: featureConstants.login });
-const deleteCompany = (data) =>
-  del(SERVICE_URLS.company, data, { feature: featureConstants.login });
 
 const readInvoice = (params) =>
   get(SERVICE_URLS.invoice, params, { feature: featureConstants.login }, { detail: false });
@@ -242,20 +240,22 @@ const createInvoice = (data) =>
   post(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
 
 const updateInvoice = (data) =>
-  post(SERVICE_URLS.updateInvoiceCollection + `${data?.id}`, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.updateInvoiceCollection + `${data?.id}`, data, { feature: featureConstants.login });
 const stopRecurringInvoice = (data) =>
   put(SERVICE_URLS.invoice + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteInvoice = (data) =>
   del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
 
-const readContactSupport = (data) =>
-  get(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+const readContactSupport = (params) =>
+  get(SERVICE_URLS.contactSupport, params, { feature: featureConstants.login }, { detail: false });
+const readContactSupportDetail = (params) =>
+  get(SERVICE_URLS.contactSupport, params, { feature: featureConstants.login }, { detail: true });
 
 const createContactSupport = (data) =>
   post(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
 
 const updateContactSupport = (data) =>
-  put(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.contactSupport + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteContactSupport = (data) =>
   del(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
 
@@ -299,13 +299,13 @@ const deleteOfferService = (data) =>
   del(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
 
 const readFollowUp = (params) =>
-  get(SERVICE_URLS.followUp, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.leadFollowUp, params, { feature: featureConstants.login }, { detail: false });
 
 const readFollowUpDetail = (params) =>
-  get(SERVICE_URLS.followUp, params, { feature: featureConstants.login }, { detail: true });
+  get(SERVICE_URLS.leadFollowUp, params, { feature: featureConstants.login }, { detail: true });
 
 const createFollowUp = (data) =>
-  post(SERVICE_URLS.followUp, data, { feature: featureConstants.login });
+  post(SERVICE_URLS.leadFollowUp, data, { feature: featureConstants.login });
 
 const createPostPondNotes = (data) =>
   put(SERVICE_URLS.postPondNotes + `/${data?.id}`, data, { feature: featureConstants.login });
@@ -313,16 +313,16 @@ const markComplete = (data) =>
   put(SERVICE_URLS.markComplete + `/${data?.id}`, data, { feature: featureConstants.login });
 
 const updateFollowUp = (data) =>
-  put(SERVICE_URLS.followUp + `/${data?.id}`, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.leadFollowUp + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteFollowUp = (data) =>
-  del(SERVICE_URLS.followUp + `/${data?.id}`, {}, { feature: featureConstants.login });
+  del(SERVICE_URLS.leadFollowUp + `/${data?.id}`, {}, { feature: featureConstants.login });
 const readNotes = (params) =>
   get(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, {}, { feature: featureConstants.login }, { detail: false });
 const createNotes = (params) =>
   post(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 
 const readCollectiveInvoices = (params) =>
-  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.invoiceCollection + `/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const readCollectiveInvoicesDetails = (params) =>
   get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: true });
 
@@ -377,7 +377,49 @@ const sendContractEmail = (params) =>
   put(SERVICE_URLS.composeEmail + `${params?.id}`, params, { feature: featureConstants.login });
 const sendInvoiceEmail = (params) =>
   put(SERVICE_URLS.composeInvoiceEmail + `${params?.id}`, params, { feature: featureConstants.login });
+const createEmailTemplateSettings = (params) =>
+  post(SERVICE_URLS.emailTemplate, params, { feature: featureConstants.login });
+const readEmailTemplateSettings = (params) =>
+  get(SERVICE_URLS.emailTemplate, params, { feature: featureConstants.login });
 
+
+
+const readCompany = (params) =>
+  get(SERVICE_URLS.company, params, { feature: featureConstants.login }, { detail: false });
+
+const readCompanyDetail = (params) =>
+  get(SERVICE_URLS.company, params, { feature: featureConstants.login }, { detail: true });
+
+const createCompany = (data) =>
+  post(SERVICE_URLS.company, data, { feature: featureConstants.login });
+
+const updateCompany = (data) =>
+  put(SERVICE_URLS.company + `/${data?.id}`, data, { feature: featureConstants.login });
+const deleteCompany = (data) =>
+  del(SERVICE_URLS.company + `/${data?.id}`, {}, { feature: featureConstants.login });
+
+
+
+
+
+const readPlan = (params) =>
+  get(SERVICE_URLS.plan, params, { feature: featureConstants.login }, { detail: false });
+
+const readPlanDetail = (params) =>
+  get(SERVICE_URLS.plan, params, { feature: featureConstants.login }, { detail: true });
+
+const createPlan = (data) =>
+  post(SERVICE_URLS.plan, data, { feature: featureConstants.login });
+
+const updatePlan = (data) =>
+  put(SERVICE_URLS.plan + `/${data?.id}`, data, { feature: featureConstants.login });
+const deletePlan = (data) =>
+  del(SERVICE_URLS.plan + `/${data?.id}`, {}, { feature: featureConstants.login });
+
+const updateAdminSettings = (data) =>
+  put(SERVICE_URLS.adminSettings + `${data?.id}`, data, { feature: featureConstants.login });
+const updateUserStatus = (data) =>
+  put(SERVICE_URLS.changeStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -501,6 +543,17 @@ const apiServices = {
   createMailSettings,
   sendContractEmail,
   sendInvoiceEmail,
-  logoutUser
+  logoutUser,
+  readEmailTemplateSettings,
+  createEmailTemplateSettings,
+  readCompanyDetail,
+  readContactSupportDetail,
+  readPlan,
+  readPlanDetail,
+  createPlan,
+  updatePlan,
+  deletePlan,
+  updateAdminSettings,
+  updateUserStatus
 };
 export default apiServices;

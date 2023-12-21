@@ -8,7 +8,7 @@ import TableRow from "./table/TableRow";
 import usePlans from "@/hooks/admin/plans/usePlans";
 
 export default function Plans() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, handleFilterChange, loading, setFilter, handleDelete, renderModal } =
     usePlans();
 
   return (
@@ -16,13 +16,14 @@ export default function Plans() {
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRow currentPageRows={currentPageRows} />
+        <TableRow currentPageRows={currentPageRows} handleDelete={handleDelete} />
       </TableLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
       />
+      {renderModal()}
     </Layout>
   );
 }

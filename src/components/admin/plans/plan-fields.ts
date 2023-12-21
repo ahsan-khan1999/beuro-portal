@@ -23,15 +23,15 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.plans_name")}`,
-              htmlFor: "name",
+              htmlFor: "planName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary ",
               inputType: "text",
-              id: "name",
-              name: "name",
+              id: "planName",
+              name: "planName",
 
               placeholder: "Please Enter Your Plan Name",
               register,
@@ -42,7 +42,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.pricing")}`,
-              htmlFor: "priceMonthly",
+              htmlFor: "monthlyPrice",
               className: "mb-[10px]",
             },
             field: {
@@ -50,8 +50,8 @@ export const planDetailsFormField: GeneratePlansFormField = (
               className:
                 "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
               inputType: "text",
-              id: "priceMonthly",
-              name: "priceMonthly",
+              id: "monthlyPrice",
+              name: "monthlyPrice",
               placeholder: "Please Enter Monthly Pricing",
               register,
               disabled: isUpdate,
@@ -61,13 +61,13 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.annually_discount")}`,
-              htmlFor: "anuallDiscount",
+              htmlFor: "discount",
             },
             field: {
               type: Field.input,
               className: "!p-4    !border-dark  focus:!border-primary",
-              id: "anuallDiscount",
-              name: "anuallDiscount",
+              id: "discount",
+              name: "discount",
               inputType: "text",
 
               placeholder: "Please Enter Anually Discount",
@@ -80,15 +80,15 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.number_of_employees")}`,
-              htmlFor: "employeeNo",
+              htmlFor: "numberOfEmployees",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
-              id: "employeeNo",
-              name: "employeeNo",
+              id: "numberOfEmployees",
+              name: "numberOfEmployees",
 
               placeholder: "Enter Your Number Of Employs",
 
@@ -110,15 +110,15 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0 xl:col-span-1",
             label: {
               text: `${translate("admin.plan_details.no_of_request")}`,
-              htmlFor: "requestNo",
+              htmlFor: "numberOfRequests",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               className: "!p-4 !border-dark focus:!border-primary",
               inputType: "number",
-              id: "requestNo",
-              name: "requestNo",
+              id: "numberOfRequests",
+              name: "numberOfRequests",
 
               placeholder: "Enter Number Of Requests",
               register,
@@ -157,56 +157,113 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.accounting")}`,
-              htmlFor: "accountingReports",
+              htmlFor: "accountingReport",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "accountingReports",
-              name: "accountingReports",
+              type: Field.div,
+              id:"check",
+              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              children: [
 
-              placeholder: "Please Enter Accounting Reports",
-              register,
-              disabled: isUpdate,
+                {
+                  field: {
+                    type: Field.span,
+
+                    id: "test",
+                    name: "test",
+                    text: "Enable Reports",
+                    containerClassName:""
+                  },
+                },
+                {
+                  field: {
+                    type: Field.checkbox,
+                    className:
+                      "",
+                    id: "accountingReport",
+                    name: "accountingReport",
+                    register,
+                    description:""
+
+                  },
+                }
+              ]
             },
           },
           {
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.customize_email")}`,
-              htmlFor: "customEmails",
+              htmlFor: "customizedEmail",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className:
-                "!p-4 !!border-borderColor border border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "customEmails",
-              name: "customEmails",
-              placeholder: "Please Enter Customize Emails",
-              register,
-              disabled: isUpdate,
+              type: Field.div,
+              id:"check",
+              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              children: [
+
+                {
+                  field: {
+                    type: Field.span,
+
+                    id: "test",
+                    name: "customizedEmail",
+                    text: "Enable Customization",
+                    containerClassName:""
+                  },
+                },
+                {
+                  field: {
+                    type: Field.checkbox,
+                    className:
+                      "",
+                    id: "customizedEmail",
+                    name: "customizedEmail",
+                    register,
+                    description:""
+
+                  },
+                }
+              ]
             },
           },
           {
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.watermark")}`,
-              htmlFor: "waterMark",
+              htmlFor: "watermark",
             },
             field: {
-              type: Field.input,
-              className: "!p-4    !border-dark  focus:!border-primary",
-              id: "waterMark",
-              name: "waterMark",
-              inputType: "text",
+              type: Field.div,
+              id:"check",
+              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              children: [
 
-              placeholder: "Please Enter Water mark",
-              register,
-              disabled: isUpdate,
+                {
+                  field: {
+                    type: Field.span,
+
+                    id: "test",
+                    name: "watermark",
+                    text: "Enable Watermark",
+                    containerClassName:""
+                  },
+                },
+                {
+                  field: {
+                    type: Field.checkbox,
+                    className:
+                      "",
+                    id: "watermark",
+                    name: "watermark",
+                    register,
+                    description:""
+
+                  },
+                }
+              ]
             },
           },
 
@@ -214,20 +271,38 @@ export const planDetailsFormField: GeneratePlansFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate("admin.plan_details.api_feature")}`,
-              htmlFor: "apifeature",
+              htmlFor: "apiFeatures",
               className: "mb-[10px]",
             },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "text",
-              id: "apifeature",
-              name: "apifeature",
+             field: {
+              type: Field.div,
+              id:"check",
+              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              children: [
 
-              placeholder: "Enter Your API Feature ",
+                {
+                  field: {
+                    type: Field.span,
 
-              register,
-              disabled: isUpdate,
+                    id: "test",
+                    name: "apiFeatures",
+                    text: "Enable Api",
+                    containerClassName:""
+                  },
+                },
+                {
+                  field: {
+                    type: Field.checkbox,
+                    className:
+                      "",
+                    id: "apiFeatures",
+                    name: "apiFeatures",
+                    register,
+                    description:""
+
+                  },
+                }
+              ]
             },
           },
         ],
@@ -248,10 +323,8 @@ export const planDetailsFormField: GeneratePlansFormField = (
               text: `${translate("admin.plan_details.back_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${
-                isUpdate && "hidden"
-              }`,
-              loading,
+              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${isUpdate && "hidden"
+                }`,
             },
           },
           {
@@ -261,9 +334,8 @@ export const planDetailsFormField: GeneratePlansFormField = (
               id: "button",
               text: `${translate("admin.plan_details.save_button")}`,
               inputType: "submit",
-              className: `px-4 py-[10px] w-[152px] hover:bg-none ${
-                isUpdate && "hidden"
-              }`,
+              className: `px-4  w-[152px] hover:bg-none ${isUpdate && "hidden"
+                }`,
               loading,
             },
           },

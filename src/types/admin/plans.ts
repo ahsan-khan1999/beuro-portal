@@ -6,21 +6,22 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 
-export interface PlansAdmin {
-  id: number;
-  planName: string;
-  description: string;
-  price: string;
-  employs: number;
-  anuallyDiscount: string;
-  requestsNo: number;
-  accountingReports: string;
-  customizeEmails: string;
-  waterMark: string;
-  apiFeature: string;
+export interface Plan {
+  planName:string;
+  monthlyPrice:number;
+  discount:number;
+  numberOfEmployees:number;
+  numberOfRequests:number;
+  accountingReport:boolean;
+  customizedEmail:boolean;
+  watermark:boolean;
+  apiFeatures:boolean;
+  description:string;
+  id:string;
+  refID:string;
 }
 export interface FormDataProps {
-  planDetail: PlansAdmin;
+  planDetail: Plan | null;
   isUpdate: boolean;
   setIsUpdate: SetStateAction<any>;
   fields: FormField[];

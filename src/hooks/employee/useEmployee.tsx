@@ -27,23 +27,24 @@ const useEmployee = () => {
       readEmployee({ params: { filter: filter, page: 1, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(
-          res?.payload?.Employee?.slice(startIndex, startIndex + itemsPerPage)
+          res?.payload?.Employee
         );
       }
     });
   }, [dispatch]);
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(employee?.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) =>{
+      setCurrentPageRows(response?.payload?.Employee);
+
+    })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmployee({ params: { filter: filter, page: 1, size: 10 } }));
+    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
 
   return {

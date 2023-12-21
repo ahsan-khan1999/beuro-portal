@@ -12,11 +12,13 @@ export const ProfileUpload = ({
   field,
   className,
   iconClasses,
+  disabled
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
   className?: string;
   iconClasses?: string;
+  disabled?:boolean
 }) => {
   // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();
@@ -32,7 +34,6 @@ export const ProfileUpload = ({
     }
   };
 
-  console.log(className);
 
   const defaultClasses = `relative`;
   const classes = combineClasses(defaultClasses, className);
@@ -41,7 +42,7 @@ export const ProfileUpload = ({
     <label htmlFor={id}>
       <div className="w-full">
         {field.value ? (
-          <div className={`${classes}`}>
+          <div className={`${classes} `}>
             <Image
               src={field.value}
               layout="responsive"
@@ -50,11 +51,12 @@ export const ProfileUpload = ({
               alt="Uploaded Preview"
               className={`${classes}`}
             />
-            <label className={`absolute ${iconClasses}`}>
+            <label className={`absolute ${iconClasses} ${disabled && 'hidden'}`}>
               <input
                 type="file"
                 className="hidden"
                 onChange={handleFileSelected}
+                disabled={disabled}
               />
               <Image
                 src={edit_circle}
@@ -64,13 +66,15 @@ export const ProfileUpload = ({
             </label>
           </div>
         ) : (
-          <div className={`${classes}`}>
+          <div className={`${classes } `}>
             {/* <Image src={profile} alt="profile" /> */}
             <label className={`absolute ${iconClasses}`}>
               <input
                 type="file"
                 className="hidden"
                 onChange={handleFileSelected}
+                disabled={disabled}
+
               />
               <Image
                 src={edit_circle}
@@ -87,6 +91,8 @@ export const ProfileUpload = ({
         type="file"
         className="hidden"
         onChange={handleFileSelected}
+        disabled={disabled}
+
       />
     </label>
   );

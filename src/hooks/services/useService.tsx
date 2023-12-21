@@ -6,7 +6,7 @@ import { readService } from "@/api/slices/service/serviceSlice";
 import { useTranslation } from "next-i18next";
 
 const useService = () => {
-  const { service, lastPage, totalCount,loading } = useAppSelector(state => state.service)
+  const { service, lastPage, totalCount, loading } = useAppSelector(state => state.service)
   const [filter, setFilter] = useState<FilterType>({
     sortBy: "",
     text: "",
@@ -22,25 +22,23 @@ const useService = () => {
     dispatch(readService({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Service?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(res?.payload?.Service);
       }
     })
   }, [dispatch])
 
   useEffect(() => {
     // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      service.slice(startIndex, startIndex + itemsPerPage)
-    );
+    dispatch(readService({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+      setCurrentPageRows(res?.payload?.Service)
+    })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readService({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readService({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   return {
     currentPageRows,

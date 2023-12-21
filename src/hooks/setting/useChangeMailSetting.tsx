@@ -13,7 +13,7 @@ export const useChangeMailSetting = (handleCreation: Function, selectedTab: numb
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.settings);
+  const { loading, error,emailSettings } = useAppSelector((state) => state.settings);
 
   const schema = generateChangeMailSettingValidationSchema(translate);
   const {
@@ -28,9 +28,7 @@ export const useChangeMailSetting = (handleCreation: Function, selectedTab: numb
   });
 
   useEffect(() => {
-    dispatch(readEmailSettings({})).then((response: any) => {
-      reset({ ...response?.payload })
-    })
+      reset({ ...emailSettings })
   }, [])
 
   const fields = ChangeMailSettingFormField(register, loading);

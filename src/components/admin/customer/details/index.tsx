@@ -3,62 +3,35 @@ import DetailsCard from "@/layout/customers/DetailsCard";
 import React, { useState } from "react";
 import DetailsData from "../DetailsData";
 
-import useCustomerDetail from "@/hooks/admin/customer/useCustomerDetail";
 import CustomerDetailsData from "./customer-details-data";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useRouter } from "next/router";
-import WarningModal from "@/base-components/ui/modals1/WarningModal";
-import { useTranslation } from "next-i18next";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
 
 const CustomerDetails = () => {
   const {
-    customerDetail,
-    translate,
+    companyDetails,
     isCustomerFree,
-    modal,
     handleAreYouSure,
-    handleCreated,
-    onClose,
-    route,
     handlePreviousClick,
-  } = useCustomerDetail(true);
+    renderModal,
+    handleStatusChange
+  } = useCustomerDetailAdmin();
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.ARE_YOU_SURE_CUSTOMER]: (
-      <WarningModal handleCreated={handleCreated} onClose={onClose} />
-    ),
-    [ModalType.CREATION]: (
-      <CreationCreated
-        heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate(
-          "admin.customers_details.card_content.customer_free"
-        )}
-        onClose={onClose}
-        route={route}
-      />
-    ),
-  };
+ 
 
   return (
     <>
       <Layout>
         <DetailsCard>
           <DetailsData
-            customerDetail={customerDetail}
+            customerDetail={companyDetails}
             handlePreviousClick={handlePreviousClick}
             handleAreYouSure={handleAreYouSure}
             isCustomerFree={isCustomerFree}
+            handleStatusChange={handleStatusChange}
           />
         </DetailsCard>
         <div className="flex mt-8">
-          <CustomerDetailsData customerDetail={customerDetail} />
+          <CustomerDetailsData customerDetail={companyDetails} />
         </div>
       </Layout>
       {renderModal()}

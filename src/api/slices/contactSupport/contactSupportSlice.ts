@@ -2,33 +2,64 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
+import { Customers } from "@/types/customer";
+import { CustomersAdmin } from "@/types/admin/customer";
 // import { ContactSupportTableRowTypes } from "@/types/ContactSupport";
 
 interface ContactSupportState {
-    contactSupport: [];
+    contactSupport: ContactSupport[];
     loading: boolean;
-    error: Record<string, object>
+    error: Record<string, object>,
+    lastPage: number;
+    totalCount: number;
+    contactSupportDetails: ContactSupport | null
 }
-
+export interface ContactSupport {
+    reason: string;
+    message: string;
+    id: string;
+    createdAt: string;
+    createdBy: CustomersAdmin;
+    status: string;
+    refID:string
+}
 const initialState: ContactSupportState = {
     contactSupport: [],
     loading: false,
-    error: {}
+    error: {},
+    lastPage: 1,
+    totalCount: 10,
+    contactSupportDetails: null
 }
 
 export const readContactSupport: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("contactSupport/read", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params, router, setError, translate } = args as any;
 
         try {
-            await apiServices.readContactSupport(data);
-            return true;
+            const response = await apiServices.readContactSupport(params);
+            return response?.data?.data;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;
         }
     });
+
+export const readContactSupportDetail: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("request/read/details", async (args, thunkApi) => {
+        const { params, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.readContactSupportDetail(params);
+            return response?.data?.data.ContactSupport;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
 export const createContactSupport: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("contactSupport/create", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -77,14 +108,20 @@ const ContactSupportSlice = createSlice({
         setErrorMessage: (state, action) => {
             state.error = action.payload;
         },
+        setSupportReqDetails: (state, action) => {
+            state.contactSupportDetails = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readContactSupport.pending, (state) => {
             state.loading = true
         });
         builder.addCase(readContactSupport.fulfilled, (state, action) => {
+            state.contactSupport = action.payload?.ContactSupport;
+            state.lastPage = action.payload?.lastPage;
+            state.totalCount = action.payload?.totalCount;
             state.loading = false;
-            state.contactSupport = action.payload
+
         });
         builder.addCase(readContactSupport.rejected, (state) => {
             state.loading = false
@@ -116,9 +153,19 @@ const ContactSupportSlice = createSlice({
         builder.addCase(deleteContactSupport.rejected, (state) => {
             state.loading = false
         })
+        builder.addCase(readContactSupportDetail.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readContactSupportDetail.fulfilled, (state, action) => {
+            state.contactSupportDetails = action?.payload
+            state.loading = false;
+        });
+        builder.addCase(readContactSupportDetail.rejected, (state) => {
+            state.loading = false
+        })
 
     },
 })
 
 export default ContactSupportSlice.reducer;
-export const { setErrorMessage } = ContactSupportSlice.actions
+export const { setErrorMessage, setSupportReqDetails } = ContactSupportSlice.actions

@@ -6,23 +6,23 @@ export const generateContactSupportValidation = (translate: Function) => {
   return yup.object().shape({
     [ContactSupportFields.fullName]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     [ContactSupportFields.email]: yup
       .string()
       .email()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [ContactSupportFields.phoneNumber]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [ContactSupportFields.reasonForContact]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
 
     [ContactSupportFields.message]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate(translate("validationMessages.required"))),
   });
 };

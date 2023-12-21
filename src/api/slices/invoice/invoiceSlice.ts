@@ -3,7 +3,7 @@ import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
-import { DEFAULT_INVOICE } from "@/utils/static";
+import { DEFAULT_INVOICE, staticEnums } from "@/utils/static";
 
 interface InvoiceState {
     invoice: InvoiceTableRowTypes[];
@@ -91,7 +91,7 @@ export const updateParentInvoice: AsyncThunk<boolean, object, object> | any =
 
         try {
             const response = await apiServices.updateInvoice(data);
-            return response?.data?.data?.InvoiceCollection;
+            return response?.data?.InvoiceCollection;
         } catch (e: any) {
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -357,11 +357,20 @@ const InvoiceSlice = createSlice({
             state.loading = true
         });
         builder.addCase(updateInvoiceStatus.fulfilled, (state, action) => {
-            let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
-            if (index !== -1) {
-                state.collectiveInvoice.splice(index, 1, action.payload)
+            if (action.payload?.invoiceStatus === "Overdue" || action.payload?.invoiceStatus === "Pending") {
+                let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+                if (index !== -1) {
+                    state.collectiveInvoice.splice(index, 1, action?.payload)
+                }
+                state.loading = false;
+            } else {
+                let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+                if (index !== -1) {
+                    state.collectiveInvoice.splice(index, 1);
+                    state.collectiveReciept = [...state.collectiveReciept, action.payload]
+                }
+                state.loading = false;
             }
-            state.loading = false;
         });
         builder.addCase(updateInvoiceStatus.rejected, (state) => {
             state.loading = false
@@ -370,11 +379,20 @@ const InvoiceSlice = createSlice({
             state.loading = true
         });
         builder.addCase(updateRecieptStatus.fulfilled, (state, action) => {
-            let index = state.collectiveReciept.findIndex((item) => item.id === action.payload?.id)
-            if (index !== -1) {
-                state.collectiveReciept.splice(index, 1, action.payload)
+            if (action.payload?.invoiceStatus === "Overdue" || action.payload?.invoiceStatus === "Pending") {
+                let index = state.collectiveReciept.findIndex((item) => item.id === action.payload?.id)
+                if (index !== -1) {
+                    state.collectiveInvoice = [...state.collectiveInvoice, action.payload]
+                    state.collectiveReciept.splice(index, 1)
+                }
+                state.loading = false;
+            } else {
+                let index = state.collectiveReciept.findIndex((item) => item.id === action.payload?.id)
+                if (index !== -1) {
+                    state.collectiveInvoice = [...state.collectiveInvoice, action?.payload]
+                }
+                state.loading = false;
             }
-            state.loading = false;
         });
         builder.addCase(updateRecieptStatus.rejected, (state) => {
             state.loading = false

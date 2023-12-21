@@ -28,7 +28,6 @@ export const useAddFollowUp = (
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}))
-    
   }, [])
   
 

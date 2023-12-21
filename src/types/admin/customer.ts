@@ -1,3 +1,6 @@
+import { Customers } from "../customer";
+import { Employee } from "../employee";
+
 export interface CustomerTable {
   currentPageRows: CustomersAdmin[];
 }
@@ -9,24 +12,17 @@ export interface CustomerDetail {
 }
 
 export interface CustomersAdmin {
-  id: number;
-  logo: string;
-  companyName: string;
-  customerName: string;
+  id: string;
   email: string;
-  plans: string;
   status: string;
   role: string;
-  employsNumber: number;
-  subscriptionDate: Date | null;
-  createdOn: Date | null;
-  mobileNumber: string;
-  phoneNumber: string;
-  addressDetails: {
-    streetNo: string;
-    postCode: number;
-    country: string;
-  };
+  employee: Employee;
+  createdAt: string;
+  company: Customers;
+  fullName: string;
+  isProfileComplete: boolean;
+  isEmailVerified: boolean;
+  refID:string
 }
 export interface Address {
   streetNo: string;

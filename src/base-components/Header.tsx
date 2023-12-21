@@ -12,44 +12,59 @@ import logoutImage from "@/assets/svgs/Group 41120.svg";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
 import { logoutUser } from "@/api/slices/authSlice/auth";
+import { staticEnums } from "@/utils/static";
+import logo from "@/assets/svgs/logo.svg";
+
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    // dispatch(logoutUser())
-    // logout()
-    router.push({
-      pathname: "/pdf",
-      query: { offerID: "65818637dcd677eea3fe1b9c" },
-    });
-  };
+    dispatch(logoutUser())
+    logout()
+    // router.push({ pathname: "/pdf", query: { offerID: "65818637dcd677eea3fe1b9c" } })
+  }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
-      <div className="flex items-center">
-        {user?.company.logo && (
+      {
+        staticEnums["User"]["role"][user?.role as string] !== 0 &&
+
+        <div className="flex items-center">
           <Image
-            src={user?.company?.logo}
+            src={user?.company?.logo || ""}
             alt="Company Logo"
             className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
             height={50}
             width={150}
           />
-        )}
-        <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
-          {user?.company?.companyName}{" "}
-        </span>
-      </div>
+          <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
+            {user?.company?.companyName}{" "}
+          </span>
+
+        </div> ||
+
+        <div className="flex items-center">
+          <Image
+            src={logo}
+            alt="Company Logo"
+            className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
+            height={50}
+            width={150}
+          />
+        
+
+        </div>
+      }
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          <div className="relative menu pl-7 mr-6">
-            <Image
-              src={createOfferIcon}
-              alt="Create Offer Icon"
-              className="cursor-pointer"
-            />
-            <FollowUpDropDown />
-          </div>
+          {
+            staticEnums["User"]["role"][user?.role as string] !== 0 &&
+            <div className="relative menu pl-7 mr-6">
+              <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer" />
+
+              <FollowUpDropDown />
+            </div>
+          }
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">

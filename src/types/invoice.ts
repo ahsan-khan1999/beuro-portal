@@ -55,6 +55,7 @@ export interface SubInvoiceTableRowTypes {
   invoiceStatus: string;
   paymentType: string;
   createdAt: string;
+  isInvoiceRecurring:boolean
 }
 
 export interface InvoiceEmptyStateType {
@@ -79,4 +80,5 @@ export interface InvoiceDetailsTableProps {
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
+  handleRecurringInvoiceEdit: (item: any) => void
 }
