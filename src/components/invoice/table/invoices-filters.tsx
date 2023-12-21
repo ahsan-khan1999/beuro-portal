@@ -37,6 +37,7 @@ export default function InvoicesFilters({
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
+            key={idx}
             checkboxFilter={filter}
             setCheckBoxFilter={setFilter}
             type={"status"}
@@ -55,7 +56,6 @@ export default function InvoicesFilters({
           handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
-          
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
