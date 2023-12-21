@@ -201,6 +201,7 @@ export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
   iconClasses?: string;
+  disabled?:boolean
 }
 
 // interface for the Image upload

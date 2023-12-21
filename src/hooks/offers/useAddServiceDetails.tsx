@@ -75,10 +75,13 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
     const selectedService: Service[] = service.filter(
       (item) => item.serviceName === id
     );
+    
     if (selectedService?.length > 0) {
       dispatch(setServiceDetails(selectedService[0]));
       setValue(`serviceDetail.${index}.price`, selectedService[0].price);
       setValue(`serviceDetail.${index}.unit`, selectedService[0].unit);
+      setValue(`serviceDetail.${index}.description`, selectedService[0].description);
+
     }
   };
   const generateTotalPrice = (index: number) => {

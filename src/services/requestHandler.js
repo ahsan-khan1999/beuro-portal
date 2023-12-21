@@ -82,6 +82,12 @@ const SERVICE_URLS = {
   composeInvoiceEmail: "/invoice/invoice-collection/send-email/",
   emailTemplate: "/setting/mail-setting/email-template",
 
+  company: "/user/",
+  choosePlan: "/user/choose-plan/",
+  plan: "/plan",
+  adminSettings: "/setting/update-admin-password/",
+  changeStatus: "/user/change-status/"
+
 };
 
 const login = (data) =>
@@ -223,16 +229,6 @@ const updateContractPaymentStatus = (data) =>
 const deleteContract = (data) =>
   del(SERVICE_URLS.contract + `/${data?.id}`, {}, { feature: featureConstants.login });
 
-const readCompany = (data) =>
-  get(SERVICE_URLS.company, data, { feature: featureConstants.login });
-
-const createCompany = (data) =>
-  post(SERVICE_URLS.company, data, { feature: featureConstants.login });
-
-const updateCompany = (data) =>
-  put(SERVICE_URLS.company, data, { feature: featureConstants.login });
-const deleteCompany = (data) =>
-  del(SERVICE_URLS.company, data, { feature: featureConstants.login });
 
 const readInvoice = (params) =>
   get(SERVICE_URLS.invoice, params, { feature: featureConstants.login }, { detail: false });
@@ -250,14 +246,16 @@ const stopRecurringInvoice = (data) =>
 const deleteInvoice = (data) =>
   del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
 
-const readContactSupport = (data) =>
-  get(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+const readContactSupport = (params) =>
+  get(SERVICE_URLS.contactSupport, params, { feature: featureConstants.login }, { detail: false });
+const readContactSupportDetail = (params) =>
+  get(SERVICE_URLS.contactSupport, params, { feature: featureConstants.login }, { detail: true });
 
 const createContactSupport = (data) =>
   post(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
 
 const updateContactSupport = (data) =>
-  put(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
+  put(SERVICE_URLS.contactSupport + `/${data?.id}`, data, { feature: featureConstants.login });
 const deleteContactSupport = (data) =>
   del(SERVICE_URLS.contactSupport, data, { feature: featureConstants.login });
 
@@ -324,7 +322,7 @@ const createNotes = (params) =>
   post(SERVICE_URLS.notes + `/${params?.type}/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 
 const readCollectiveInvoices = (params) =>
-  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: false });
+  get(SERVICE_URLS.invoiceCollection + `/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const readCollectiveInvoicesDetails = (params) =>
   get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: true });
 
@@ -384,8 +382,46 @@ const createEmailTemplateSettings = (params) =>
 const readEmailTemplateSettings = (params) =>
   get(SERVICE_URLS.emailTemplate, params, { feature: featureConstants.login });
 
+
+
+const readCompany = (params) =>
+  get(SERVICE_URLS.company, params, { feature: featureConstants.login }, { detail: false });
+
+const readCompanyDetail = (params) =>
+  get(SERVICE_URLS.company, params, { feature: featureConstants.login }, { detail: true });
+
+const createCompany = (data) =>
+  post(SERVICE_URLS.company, data, { feature: featureConstants.login });
+
+const updateCompany = (data) =>
+  put(SERVICE_URLS.company + `/${data?.id}`, data, { feature: featureConstants.login });
+const deleteCompany = (data) =>
+  del(SERVICE_URLS.company + `/${data?.id}`, {}, { feature: featureConstants.login });
+
+
+
+
+
+const readPlan = (params) =>
+  get(SERVICE_URLS.plan, params, { feature: featureConstants.login }, { detail: false });
+
+const readPlanDetail = (params) =>
+  get(SERVICE_URLS.plan, params, { feature: featureConstants.login }, { detail: true });
+
+const createPlan = (data) =>
+  post(SERVICE_URLS.plan, data, { feature: featureConstants.login });
+
+const updatePlan = (data) =>
+  put(SERVICE_URLS.plan + `/${data?.id}`, data, { feature: featureConstants.login });
+const deletePlan = (data) =>
+  del(SERVICE_URLS.plan + `/${data?.id}`, {}, { feature: featureConstants.login });
+
+const updateAdminSettings = (data) =>
+  put(SERVICE_URLS.adminSettings + `${data?.id}`, data, { feature: featureConstants.login });
+const updateUserStatus = (data) =>
+  put(SERVICE_URLS.changeStatus + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
-  
+
   login,
   singUp,
   loginGoogle,
@@ -510,5 +546,14 @@ const apiServices = {
   logoutUser,
   readEmailTemplateSettings,
   createEmailTemplateSettings,
+  readCompanyDetail,
+  readContactSupportDetail,
+  readPlan,
+  readPlanDetail,
+  createPlan,
+  updatePlan,
+  deletePlan,
+  updateAdminSettings,
+  updateUserStatus
 };
 export default apiServices;

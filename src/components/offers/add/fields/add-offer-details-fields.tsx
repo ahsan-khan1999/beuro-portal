@@ -346,6 +346,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
+        value:offerDetails?.leadID?.customerDetail?.companyName || ""
       },
     };
     const divField = formField[fieldIndex]?.field as DivProps;

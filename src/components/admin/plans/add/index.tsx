@@ -3,7 +3,7 @@ import React from "react";
 import PlansForm from "../Form";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
 
-const PlanDetails = () => {
+const CreatePlan = () => {
   const {
     planDetails,
     isUpdate,
@@ -14,7 +14,7 @@ const PlanDetails = () => {
     errors,
     handlePreviousClick,
     renderModal
-  } = usePlanDetail(true);
+  } = usePlanDetail(false);
 
   return (
     <Layout>
@@ -32,4 +32,4 @@ const PlanDetails = () => {
   );
 };
 
-export default PlanDetails;
+export default CreatePlan;

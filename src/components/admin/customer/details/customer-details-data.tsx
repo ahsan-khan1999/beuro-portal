@@ -1,5 +1,6 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { CustomersAdmin } from "@/types/admin/customer";
+import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import React from "react";
 
@@ -18,7 +19,7 @@ const CustomerDetailsData = ({
               {translate("admin.customers_details.customer_details.owner_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {customerDetail?.customerName}
+              {customerDetail?.fullName}
             </div>
           </div>
           <div>
@@ -28,7 +29,7 @@ const CustomerDetailsData = ({
               )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {customerDetail?.companyName}
+              {customerDetail?.company?.companyName}
             </div>
           </div>
           <div>
@@ -46,7 +47,7 @@ const CustomerDetailsData = ({
               {translate("admin.customers_details.customer_details.created_on")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {customerDetail?.createdOn?.toLocaleDateString()}
+              {formatDateTimeToDate(customerDetail?.createdAt)}
             </div>
           </div>
           <div>
@@ -56,7 +57,7 @@ const CustomerDetailsData = ({
               )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {customerDetail?.mobileNumber}
+              {customerDetail?.company?.mobileNumber}
             </div>
           </div>
           <div>
@@ -66,7 +67,7 @@ const CustomerDetailsData = ({
               )}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {customerDetail?.phoneNumber}
+              {customerDetail?.company?.phoneNumber}
             </div>
           </div>
         </div>
@@ -83,7 +84,7 @@ const CustomerDetailsData = ({
                 )}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {customerDetail?.addressDetails?.streetNo}
+                {customerDetail?.company?.address?.streetNumber}
               </div>
             </div>
             <div>
@@ -93,7 +94,7 @@ const CustomerDetailsData = ({
                 )}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {customerDetail?.addressDetails?.postCode}
+                {customerDetail?.company?.address?.postalCode}
               </div>
             </div>
             <div>
@@ -101,7 +102,7 @@ const CustomerDetailsData = ({
                 {translate("admin.customers_details.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {customerDetail?.addressDetails?.country}
+                {customerDetail?.company?.address?.city}
               </div>
             </div>
           </div>

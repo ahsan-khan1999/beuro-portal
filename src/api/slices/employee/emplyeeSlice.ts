@@ -20,6 +20,7 @@ const initialState: EmployeeState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     employeeDetails: DEFAULT_EMPLOYEE
 
 }
@@ -147,7 +148,6 @@ const EmployeeSlice = createSlice({
         });
         builder.addCase(createEmployee.fulfilled, (state, action) => {
             state.loading = false;
-            state.employeeDetails = DEFAULT_EMPLOYEE
 
         });
         builder.addCase(createEmployee.rejected, (state) => {
@@ -158,7 +158,6 @@ const EmployeeSlice = createSlice({
         });
         builder.addCase(updateEmployee.fulfilled, (state, action) => {
             state.loading = false;
-            state.employeeDetails = DEFAULT_EMPLOYEE
         });
         builder.addCase(updateEmployee.rejected, (state) => {
             state.loading = false
@@ -168,7 +167,6 @@ const EmployeeSlice = createSlice({
         });
         builder.addCase(deleteEmployee.fulfilled, (state, action) => {
             state.loading = false;
-            state.employeeDetails = DEFAULT_EMPLOYEE;
 
         });
         builder.addCase(deleteEmployee.rejected, (state) => {

@@ -159,6 +159,9 @@ export const useEditOfferDetails = ({
       ...selectedCustomers[0],
       type: type,
       content: selectedContent,
+      customerID: selectedCustomers[0]?.id,
+      leadID: ""
+
     });
   };
   const handleContentSelect = () => {

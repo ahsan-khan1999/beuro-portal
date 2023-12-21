@@ -15,7 +15,7 @@ export enum AddFollowUp {
   title = "title",
   selectLead = "lead",
   dateAndTime = "dateTime",
-  followUpType = "reason",
+  followUpType = "type",
   addititionalDetails = "additionalDetails",
 }
 

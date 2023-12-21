@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import SettingLayout from "../SettingLayout";
 import MailSettingForm from "./mail-setting-form";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 
 const MailSetting = () => {
   const tabsData: string[] = [
     "Use Own Mail Configuration",
     // "Use System Mail Configuration",
   ];
-
+  const { modal } = useAppSelector(state => state.global)
+  const dispatch = useAppDispatch()
   // State to manage the selected tab
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -15,7 +20,26 @@ const MailSetting = () => {
   const handleTabSelect = (index: number) => {
     setSelectedTab(index);
   };
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading="Settings Updated Successful "
+        modelSubHeading="Thanks! we are happy to have you. "
+        routeHandler={onClose}
+      />
+    ),
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+  const handleCreation = () => {
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
 
+  }
   return (
     <SettingLayout>
       <div className="ml-3 mb-3">
@@ -42,7 +66,7 @@ const MailSetting = () => {
           ))}
         </div>
 
-        {selectedTab === 0 && <MailSettingForm />}
+        {selectedTab === 0 && <MailSettingForm handleCreation={handleCreation} selectedTab={1} />}
 
         {/* {selectedTab === 1 && (
           <button className="text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-[150px]">
@@ -50,6 +74,7 @@ const MailSetting = () => {
           </button>
         )} */}
       </div>
+      {renderModal()}
     </SettingLayout>
   );
 };

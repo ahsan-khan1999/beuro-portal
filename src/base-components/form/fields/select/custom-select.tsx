@@ -27,7 +27,7 @@ export const SelectBox = ({
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
-
+  
   useEffect(() => {
     setOption(options);
     if (defaultValue) {

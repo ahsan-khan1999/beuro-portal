@@ -228,6 +228,22 @@ export const updateEmailTemplateSetting: AsyncThunk<boolean, object, object> | a
             return false;
         }
     });
+
+
+
+export const updateAdminSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("admin/setting", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateAdminSettings(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 const SettingSlice = createSlice({
     name: "SettingSlice",
     initialState,
@@ -384,6 +400,16 @@ const SettingSlice = createSlice({
 
         });
         builder.addCase(updateEmailTemplateSetting.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateAdminSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateAdminSetting.fulfilled, (state, action) => {
+            state.loading = false;
+
+        });
+        builder.addCase(updateAdminSetting.rejected, (state) => {
             state.loading = false
         });
 

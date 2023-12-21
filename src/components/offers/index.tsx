@@ -29,7 +29,7 @@ export default function Offers() {
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
     />,
-    currentPageRows.length > 0,
+    currentPageRows?.length > 0,
     loading
 
   );

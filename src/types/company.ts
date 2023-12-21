@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { FormField, User } from ".";
+import { FormField } from ".";
 import {
   FieldValues,
   SubmitHandler,
@@ -7,25 +7,25 @@ import {
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
 
-export interface CustomerTable {
-  currentPageRows: Customers[];
+export interface CompanyTable {
+  currentPageRows: Company[];
 }
 
-export interface CustomerDetail {
+export interface CompanyDetail {
   date?: string;
   id?: string;
   name?: string;
   handlePreviousClick: () => void;
   handleDelete: () => void
 }
-export interface CustomerLeadDetail {
+export interface CompanyLeadDetail {
   id: string;
   name: string;
   source?: string;
   status?: string;
   expires?: string;
 }
-export interface Customers {
+export interface Company {
   id: string;
   refID: string;
   createdAt: string
@@ -43,26 +43,22 @@ export interface Customers {
   mobile: string;
   address: CustomerAddress;
   edit?: boolean;
-  lead: CustomerLeadDetail;
-  logo:string
-  plan?:string
-  createdBy?:User
+  lead: CompanyLeadDetail;
 }
 
 export interface CustomerAddress {
   streetNumber: string;
   country: string;
-  postalCode: string;
-  city?:string
+  postalCode: string
 }
 
 
 export interface CustomerField {
-  customerDetail?: Customers;
+  customerDetail?: Company;
 }
 
 export interface FormDataProps {
-  customerDetail: Customers;
+  customerDetail: Company;
   isUpdate: boolean;
   setIsUpdate: SetStateAction<any>;
   fields: FormField[];

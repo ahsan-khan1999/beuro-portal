@@ -52,11 +52,23 @@ export const generateAddReasonValidation = (translate: Function) => {
 export const generateProfileSettingValidation = (translate: Function) => {
   return yup.object().shape({
     [SettingProfile.fullName]: yup.string().required("validation required"),
-    [SettingProfile.oldPassword]: yup.string().required("validation required"),
-    [SettingProfile.newPassword]: yup.string().required("validation required"),
+    [SettingProfile.oldPassword]: yup
+      .string()
+      .required(translate("validationMessage.required"))
+      .min(6, translate("validationMessages.string.min")),
+
+    [SettingProfile.newPassword]: yup
+      .string()
+      .required(translate("validationMessage.required"))
+      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
+
+      .min(6, translate("validationMessages.string.min")),
+
     [SettingProfile.confirmNewPassword]: yup
       .string()
-      .required("validation required"),
+      .oneOf([yup.ref("newPassword")], translate("validationMessages.mixed.oneOf"))
+      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
+      .required(translate("validationMessages.required")),
   });
 };
 // Validation for add reason

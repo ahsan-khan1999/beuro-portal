@@ -17,7 +17,8 @@ export interface Employee {
   creationDate: string;
   action: string;
   createdBy: string;
-  employeeID: string
+  employeeID: string;
+  refID: string
 }
 export interface EmployeeDetail {
   date?: string;

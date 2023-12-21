@@ -315,6 +315,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
+        value:leadDetails?.customerDetail?.companyName || ""
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)

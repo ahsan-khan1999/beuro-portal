@@ -214,7 +214,13 @@ export const conditionHandlerLogin = (
       router.pathname = "/profile";
       updateQuery(router, "en");
     } else {
-      router.pathname = "/dashboard";
+      if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
+        router.pathname = "/admin/dashboard";
+
+      } else {
+
+        router.pathname = "/dashboard";
+      }
       updateQuery(router, "en");
     }
   } else {
@@ -334,7 +340,7 @@ export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY hh:mm:ss");
 }
 export function formatDateReverse(date: string) {
-  if(!date) return;
+  if (!date) return;
   return moment(date).format("hh:mm:ss, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {

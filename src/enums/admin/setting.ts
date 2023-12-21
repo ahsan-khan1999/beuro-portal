@@ -19,7 +19,7 @@ export enum AddReason {
 // setting profile enum
 export enum SettingProfile {
   fullName = "fullName",
-  oldPassword = "oldPassword",
+  oldPassword = "currentPassword",
   newPassword = "newPassword",
   confirmNewPassword = "confirmNewPassword",
   changePassword = "changePassword",

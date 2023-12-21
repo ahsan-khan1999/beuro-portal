@@ -7,15 +7,20 @@ import groupCustomerIcon from "@/assets/svgs/group_customer_icon.svg";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
+import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 const DetailsData = ({
   supportDetail,
   status,
   handlePreviousClick,
+  handleStatusUpadte
 }: {
-  supportDetail: SupportRequestAdmin;
+  supportDetail: ContactSupport | null;
   status: DropDownItem[];
   handlePreviousClick: () => void;
+  handleStatusUpadte: (value: string) => void;
+
 }) => {
   const { t: translate } = useTranslation();
 
@@ -33,7 +38,7 @@ const DetailsData = ({
           </h1>
         </div>
         <button
-          onClick={() => router.push("/admin/customers/details")}
+          onClick={() => router.push({ pathname: "/admin/customers/details", query: { customer: supportDetail?.createdBy?.id } })}
           className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
         >
           <Image src={groupCustomerIcon} alt="groupCustomerIcon" />
@@ -45,13 +50,13 @@ const DetailsData = ({
         <h3 className="text-[#4D4D4D] ">
           {translate("admin.support_requests.card_content.customer_id")}:
           <span className="text-[#4B4B4B] font-medium ml-3">
-            {supportDetail?.id}
+            {supportDetail?.createdBy?.company?.refID}
           </span>
         </h3>
         <h3 className="text-[#4D4D4D] ">
           {translate("admin.support_requests.card_content.request_date")}:
           <span className="ml-3 text-[#4B4B4B] font-medium">
-            {supportDetail?.requestDate?.toLocaleDateString()}
+            {supportDetail && formatDateTimeToDate(supportDetail?.createdAt)}
           </span>
         </h3>
         <h3 className="text-[#4D4D4D] flex items-center">
@@ -59,9 +64,9 @@ const DetailsData = ({
           <span className="ml-3 text-[#4B4B4B] font-medium">
             <DropDown
               items={status}
-              onItemSelected={(selectedItem) => console.log(selectedItem)}
-              selectedItem={status[0].item}
-              dropDownClassName="w-[108px] border border-primary"
+              onItemSelected={(selectedItem) => handleStatusUpadte(selectedItem)}
+              selectedItem={supportDetail?.status || ""}
+              dropDownClassName="px-3 border border-primary"
               dropDownTextClassName="text-primary font-medium"
               dropDownIconClassName="text-primary"
               dropDownItemsContainerClassName="border border-primary"
