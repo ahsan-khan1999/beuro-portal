@@ -294,7 +294,7 @@ const PdfPriview = () => {
       }
     })();
   }, []);
-  const totalItems = offerData.serviceItem.length;
+  const totalItems = offerData?.serviceItem?.length;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);

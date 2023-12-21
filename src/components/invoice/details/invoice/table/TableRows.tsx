@@ -12,23 +12,31 @@ import {
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
+import { updateQuery } from "@/utils/update-query";
 
 const TableRows = ({
   dataToAdd,
   handlePaymentStatusUpdate,
   handleInvoiceStatusUpdate,
   handleInvoiceEdit,
-  handleRecurringInvoiceEdit
+  handleRecurringInvoiceEdit,
 }: {
   dataToAdd: SubInvoiceTableRowTypes[];
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
-  handleRecurringInvoiceEdit: (item: any) => void
+  handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
-  const { invoiceDetails,collectiveInvoice } = useAppSelector(state => state.invoice)
-  
+  const { invoiceDetails, collectiveInvoice } = useAppSelector(
+    (state) => state.invoice
+  );
+  const handleInvoicePdfPreview = (id?: string) => {
+    router.pathname = "/invoices/invoice-pdf-preview";
+    router.query = { invoiceID: id };
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div>
       {collectiveInvoice?.map((item, index: number) => {
@@ -93,12 +101,13 @@ const TableRows = ({
                 onItemSelected={(status) =>
                   handleInvoiceStatusUpdate(item.id, status, "invoice")
                 }
-                dropDownClassName={`${staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
-                  ? "bg-[#45C769]"
-                  : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
+                dropDownClassName={`${
+                  staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
+                    ? "bg-[#45C769]"
+                    : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                  }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}
@@ -108,9 +117,9 @@ const TableRows = ({
               className="py-4 flex justify-center items-center rounded-md"
               onClick={() => {
                 if (!invoiceDetails?.isInvoiceRecurring) {
-                  handleInvoiceEdit(item)
+                  handleInvoiceEdit(item);
                 } else {
-                  handleRecurringInvoiceEdit(item)
+                  handleRecurringInvoiceEdit(item);
                 }
               }}
             >
@@ -118,7 +127,7 @@ const TableRows = ({
             </span>
             <span
               className="py-4 flex justify-center items-center rounded-md mlg:hidden xlg:flex"
-              onClick={() => router.push("/invoices/invoice-pdf-preview")}
+              onClick={() => handleInvoicePdfPreview(item?.invoiceID?.id)}
             >
               <Image src={moreIcon} alt="moreIcon" />
             </span>

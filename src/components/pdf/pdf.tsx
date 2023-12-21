@@ -8,6 +8,7 @@ import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
 import { ProductItemNewPage } from "./preview/productDetails/product-item-next-page";
 import { Container } from "./container";
 import { ServiceList } from "@/types/offers";
+import { PreviewCard } from "./preview-card";
 
 export const Pdf = ({
   newPageData,
@@ -55,7 +56,7 @@ export const Pdf = ({
           aggrementDetails={offerData.aggrementDetails}
           templateSettings={templateSettings}
           totalPages={totalPages}
-          currPage={isQr ? totalPages - 1 : totalPages}
+          currPage={totalPages}
         />
         {isQr && <PaymentQRCodeDetails
           contactAddress={offerData.contactAddress}

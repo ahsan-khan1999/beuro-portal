@@ -2,9 +2,14 @@ import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { Layout } from "@/layout";
 
 const index = () => {
-  return <DetailsPdfPriview />;
+  return (
+    <Layout>
+      <DetailsPdfPriview />
+    </Layout>
+  );
 };
 
 export default index;
