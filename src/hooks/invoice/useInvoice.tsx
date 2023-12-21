@@ -47,13 +47,12 @@ const useInvoice = () => {
     dispatch(readInvoice({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Invoice?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(res?.payload?.Invoice);
       }
     })
   }, [])
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readInvoice({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readInvoice({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -66,7 +65,7 @@ const useInvoice = () => {
       e.stopPropagation();
     }
     const filteredLead = invoice?.filter((item_) => item_.id === item)
-    
+
     if (filteredLead?.length === 1) {
       dispatch(setInvoiceDetails(filteredLead[0]));
       dispatch(readNotes({ params: { type: "invoice", id: filteredLead[0]?.id } }));
@@ -80,21 +79,7 @@ const useInvoice = () => {
     dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "invoice" } }));
   };
 
-  // function for hnadling the add note
-  // const handleImageSlider = () => {
-  //   dispatch(updateModalType({ type: ModalType.NONE }));
-  //   dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
-  // };
 
-  // const handleImageUpload = (
-  //   item: string,
-  //   e: React.MouseEvent<HTMLSpanElement>
-  // ) => {
-  //   e.stopPropagation();
-  //   const filteredLead = invoice?.filter((item_) => item_.id === item)
-  //   if (filteredLead?.length === 1) dispatch(setInvoiceDetails(filteredLead[0]));
-  //   dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
-  // };
 
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -104,10 +89,7 @@ const useInvoice = () => {
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
-    // [ModalType.UPLOAD_OFFER_IMAGE]: (
-    //   <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"}/>
-    // ),
-    // [ModalType.IMAGE_SLIDER]: <ImageSliderContract onClose={onClose} details={contractDetails}/>,
+
   };
 
   const renderModal = () => {
@@ -115,8 +97,10 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(invoice?.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+      setCurrentPageRows(res?.payload?.Invoice);
+    }
+    )
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

@@ -11,12 +11,12 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [ChangePasswordField.oldPassword]: yup
       .string()
-      .required(translate("validation required"))
+      .required(translate("validationMessage.required"))
       .min(6, translate("validationMessages.string.min")),
 
     [ChangePasswordField.newPassword]: yup
       .string()
-      .required(translate("validation required"))
+      .required(translate("validationMessage.required"))
       .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
 
       .min(6, translate("validationMessages.string.min")),
@@ -44,7 +44,7 @@ export const generateAddTaxValidationSchema = (translate: Function) => {
 // Validation for Add new note
 export const generateAddNewNoteValidation = (translate: Function) => {
   return yup.object().shape({
-    [AddNewNote.noteMessage]: yup.string().required("validation required"),
+    [AddNewNote.noteMessage]: yup.string().required(translate("validationMessage.required")),
   });
 };
 
@@ -53,12 +53,12 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
   return yup.object().shape({
     [EditPaymentDetails.nameOnCard]: yup
       .string()
-      .required("validation required"),
-    [EditPaymentDetails.expiry]: yup.string().required("validation required"),
+      .required(translate("validationMessage.required")),
+    [EditPaymentDetails.expiry]: yup.string().required(translate("validationMessage.required")),
     [EditPaymentDetails.cardNumber]: yup
       .string()
-      .required("validation required"),
-    [EditPaymentDetails.cvv]: yup.string().required("validation required"),
+      .required(translate("validationMessage.required")),
+    [EditPaymentDetails.cvv]: yup.string().required(translate("validationMessage.required")),
   });
 };
 

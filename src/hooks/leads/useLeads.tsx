@@ -21,7 +21,7 @@ const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
   const { images } = useAppSelector(state => state.image)
 
- 
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
@@ -47,9 +47,8 @@ const useLeads = () => {
     dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
           setCurrentPageRows(
-            res?.payload?.Lead?.slice(startIndex, startIndex + itemsPerPage)
+            res?.payload?.Lead
           );
         }
       }
@@ -62,7 +61,7 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } }));
+    dispatch(readLead({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
 
   // Function for close the modal
@@ -140,8 +139,11 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(lead?.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(readLead({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
+      if (response?.payload) {
+        setCurrentPageRows(response?.payload?.Lead);
+      }
+     })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

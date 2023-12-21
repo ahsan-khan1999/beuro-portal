@@ -10,24 +10,24 @@ export const generateEmployDetailsValidation = (translate: Function) => {
   return yup.object().shape({
     [EmployDetailsFields.employName]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessage.required")),
 
     [EmployDetailsFields.designation]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessage.required")),
 
     [EmployDetailsFields.email]: yup
       .string()
       .email()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
     [EmployDetailsFields.phoneNumber]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
 
     [EmployDetailsFields.mobileNumber]: yup
       .string()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
   });
 };
 
@@ -38,7 +38,7 @@ export const generateEmployeeNewPasswordValidationSchema = (
   return yup.object().shape({
     [createEMployeeNewPasswordFields.newPassword]: yup
       .string()
-      .required(translate("validation required"))
+      .required(translate("validationMessage.required"))
       .min(6, translate("validationMessages.string.min")),
 
     [createEMployeeNewPasswordFields.confirmNewPassword]: yup
@@ -55,11 +55,11 @@ export const generateEmployeePasswordResetValidationSchema = (
   return yup.object().shape({
     [employeePasswordResetFields.yourPassword]: yup
       .string()
-      .required(translate("validation required"))
+      .required(translate("validationMessage.required"))
       .min(6, translate("validationMessages.string.min")),
     [employeePasswordResetFields.newPassword]: yup
       .string()
-      .required(translate("validation required"))
+      .required(translate("validationMessage.required"))
       .min(6, translate("validationMessages.string.min")),
 
     [employeePasswordResetFields.confirmNewPassword]: yup

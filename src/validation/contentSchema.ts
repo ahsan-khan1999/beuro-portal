@@ -13,17 +13,17 @@ export const generateOfferEditContentDetailsValidation = (
   return yup.object().shape({
     [OfferEditContentDetails.contentName]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     "offerContent": yup.object().shape({
       [OfferEditContentDetails.offerTitle]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [OfferEditContentDetails.offerDescription]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [OfferEditContentDetails.emailBody]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [OfferEditContentDetails.attachments]: yup
         .array().of(yup.string().required()).required(translate("validationMessages.required")),
       [OfferEditContentDetails.address]: yup.array().of(yup.object().shape({ value: yup.string().required(translate("validationMessages.required")) })).required()
@@ -54,11 +54,11 @@ export const generateContentAddressValidationSchema = (
 };
 
 
-export const mergeSchemas = (baseSchema: yup.ObjectSchema<any>, additionalSchema: yup.ObjectSchema<any>) => {
+export const mergeSchemas = (baseSchema: yup.ObjectSchema<any>, additionalSchema: yup.ObjectSchema<any>, translate: Function) => {
   return yup.object().shape({
     [OfferEditContentDetails.contentName]: yup
       .string()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
 
     "offerContent": yup.object().shape({
       ...baseSchema.fields,
@@ -75,15 +75,15 @@ export const generateEditConfirmationContentDetailsValidation = (
     "confirmationContent": yup.object().shape({
       [EditConfirmationContentDetails.confirmationTitle]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [EditConfirmationContentDetails.confirmationDescription]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [EditConfirmationContentDetails.emailBody]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [EditConfirmationContentDetails.attachments]: yup
         .array().of(yup.string().required(translate("validationMessage.required")))
         .required(translate("validationMessage.required")),
@@ -100,15 +100,15 @@ export const generateEditInvoiceContentDetailsValidation = (
     "invoiceContent": yup.object().shape({
       [EditInvoiceContentDetails.invoiceTitle]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [EditInvoiceContentDetails.invoiceDescription]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [EditInvoiceContentDetails.emailBody]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [EditInvoiceContentDetails.attachments]: yup
         .array().of(yup.string().required(translate("validationMessage.required")))
         .required(translate("validationMessage.required")),
@@ -125,15 +125,15 @@ export const generateEditReceiptContentDetailsValidation = (
     "receiptContent": yup.object().shape({
       [ReceiptEditContentDetails.receiptTitle]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [ReceiptEditContentDetails.receiptDescription]: yup
         .string()
-        .required("validation required"),
+        .required(translate("validationMessages.required")),
 
       [ReceiptEditContentDetails.emailBody]: yup
         .string()
-        .required(translate("validation required")),
+        .required(translate("validationMessages.required")),
       [ReceiptEditContentDetails.attachments]: yup
         .array().of(yup.string().required(translate("validationMessage.required")))
         .required(translate("validationMessage.required")),

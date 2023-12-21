@@ -12,7 +12,7 @@ import {
   generateOfferDetailsValidationSchema,
 } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,

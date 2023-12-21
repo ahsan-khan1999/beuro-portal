@@ -2,12 +2,13 @@ import { Customers } from "@/types/customer";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
-  readCustomer,
+  readCustomer, setCustomerDetails,
 } from "@/api/slices/customer/customerSlice";
 import { FilterType } from "@/types";
+import { DEFAULT_CUSTOMER } from "@/utils/static";
 
 export default function useCustomer() {
-  const { customer, lastPage, totalCount,loading } = useAppSelector(state => state.customer)
+  const { customer, lastPage, totalCount, loading } = useAppSelector(state => state.customer)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
@@ -24,13 +25,14 @@ export default function useCustomer() {
   const totalItems = totalCount;
   const itemsPerPage = 10;
   useEffect(() => {
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
     dispatch(readCustomer({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Customer);
       }
     })
-  }, [dispatch])
+  }, [])
 
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
@@ -46,7 +48,7 @@ export default function useCustomer() {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readCustomer({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   return {
     currentPageRows,

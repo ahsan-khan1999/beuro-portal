@@ -6,14 +6,14 @@ export const generateServicesValidation = (translate: Function) => {
   return yup.object().shape({
     [ServicesDetailFields.serviceTitle]: yup
       .string()
-      .required("validation required"),
-    [ServicesDetailFields.unit]: yup.number().required("validation required"),
+      .required(translate("validationMessage.required")),
+    [ServicesDetailFields.unit]: yup.number().required(translate("validationMessage.required")),
     [ServicesDetailFields.price]: yup
       .number()
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
     [ServicesDetailFields.description]: yup
       .string()
 
-      .required(translate("validation required")),
+      .required(translate("validationMessage.required")),
   });
 };
