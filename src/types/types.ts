@@ -568,6 +568,11 @@ export interface FilterType {
   location?: string;
   status?: string;
 }
+
+export interface ExtraFiltersType {
+  type: string;
+  location: string;
+}
 export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
@@ -575,7 +580,6 @@ export interface FilterProps {
   setMoreFilter: React.Dispatch<SetStateAction<boolean>>;
   handleFilterResetToInitial: () => void;
   handleFilterReset: (key: keyof FilterType, value: string) => void;
-  handleItemSelected: (val: string) => void;
   typeList: ItemList[];
 }
 
