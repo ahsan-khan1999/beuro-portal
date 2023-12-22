@@ -1401,12 +1401,13 @@ export const sideBar: SideBar[] = [
     title: "Support Request",
     pathname: "/admin/support-request",
     role: [0],
-    // className:"mb-6 border-b border-[#0000001A]"
+    // className:"mb-6 border border-red-700"
   },
   {
     icon: "dummy",
-    role: [0],
-    title: "divider",
+    role: [],
+    title: "",
+ 
   },
   {
     className: " ",
