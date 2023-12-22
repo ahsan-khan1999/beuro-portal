@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { FilterProps } from "@/types";
+import { ExtraFiltersType, FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { MultiDateField } from "../form/fields";
@@ -12,9 +12,10 @@ export default function LeadsFilter({
   filter,
   moreFilter,
   setMoreFilter,
+  setFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-  handleItemSelected,
+  // handleItemSelected,
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {
@@ -22,6 +23,28 @@ export default function LeadsFilter({
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+
+
+  const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
+    type: "",
+    location: "",
+    date:""
+  });
+
+
+
+  const handleSave = () => {
+    setFilter((prev) => ({
+      ...prev,
+      type: extraFilters.type,
+      location: extraFilters.location,
+      date:extraFilters.date,
+    }));
+    hanldeClose();
+  };
+
+
+  console.log(extraFilters);
 
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -79,7 +102,7 @@ export default function LeadsFilter({
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To"/>
+                  <DatePicker label="From" label2="To" />
                 </div>
               </div>
               <div>
@@ -97,7 +120,9 @@ export default function LeadsFilter({
 
                 <InputField
                   iconDisplay={false}
-                  handleChange={(value) => handleFilterReset("location", value)}
+                  handleChange={(value) =>
+                    setExtraFilters((prev) => ({ ...prev, location: value }))
+                  }
                   value={filter.location || ""}
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
@@ -107,10 +132,8 @@ export default function LeadsFilter({
             <div>
               <BaseButton
                 buttonText="Save"
-                onClick={() => {
-                  setMoreFilter(!moreFilter);
-                }}
-                containerClassName="bg-primary my-2 px-8 py-1"
+                onClick={handleSave}
+                containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"
               />
             </div>

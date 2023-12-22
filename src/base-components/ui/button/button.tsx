@@ -15,7 +15,7 @@ export const Button = ({
   iconAlt,
 }: ButtonProps) => {
   const defaultClasses =
-    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg ";
+    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg    ";
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button

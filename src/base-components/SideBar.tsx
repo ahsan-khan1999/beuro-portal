@@ -56,7 +56,9 @@ const SideBar = () => {
     child: null,
   });
 
-  const userRole = staticEnums["User"]["role"][user?.role as string];
+  // const userRole = staticEnums["User"]["role"][user?.role as string];
+  const userRole = 0;
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
 
@@ -87,7 +89,7 @@ const SideBar = () => {
 
   return (
     <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll">
-      <div className="pt-6 px-4 pb-8 flex flex-col">
+      <div className={`pt-6 px-4 pb-8 flex flex-col `} >
         <div className="space-y-3">
           {sideBar.map((item, index) => {
             return (
@@ -183,7 +185,7 @@ const SideBar = () => {
           })}
         </div>
       </div>
-      <div className="ms-3">
+      <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "" }`}>
         <Image src={logo} alt="Logo" className="mt-auto pb-32  ml-3 " />
       </div>
     </div>

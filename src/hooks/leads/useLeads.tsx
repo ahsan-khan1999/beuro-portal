@@ -18,9 +18,10 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(state => state.lead)
-  const { images } = useAppSelector(state => state.image)
-
+  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
+    (state) => state.lead
+  );
+  const { images } = useAppSelector((state) => state.image);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
@@ -47,9 +48,7 @@ const useLeads = () => {
     dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
-          setCurrentPageRows(
-            res?.payload?.Lead
-          );
+          setCurrentPageRows(res?.payload?.Lead);
         }
       }
     );
@@ -61,7 +60,9 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readLead({ params: { filter: filter, page: currentPage, size: 10 } }));
+    dispatch(
+      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
+    );
   };
 
   // Function for close the modal
@@ -105,9 +106,9 @@ const useLeads = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(setImages([]))
+    dispatch(setImages([]));
 
-    const filteredLead = lead.find((item_) => item_.id === item)
+    const filteredLead = lead.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
       dispatch(readImage({ params: { type: "leadID", id: filteredLead?.id } }));
@@ -130,7 +131,9 @@ const useLeads = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />,
+    [ModalType.IMAGE_SLIDER]: (
+      <ImageSlider onClose={onClose} details={images} />
+    ),
   };
 
   const renderModal = () => {
@@ -139,11 +142,13 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(readLead({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
+    dispatch(
+      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((response: any) => {
       if (response?.payload) {
         setCurrentPageRows(response?.payload?.Lead);
       }
-     })
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

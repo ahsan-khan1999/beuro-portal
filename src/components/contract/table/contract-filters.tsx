@@ -31,7 +31,6 @@ export default function ContractFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -68,7 +67,6 @@ export default function ContractFilters({
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
         <Button

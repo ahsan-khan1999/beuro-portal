@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { CheckBoxType, FilterProps } from "@/types";
+import { CheckBoxType, ExtraFiltersType, FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
@@ -17,7 +17,6 @@ export default function InvoicesFilter({
   setMoreFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-  handleItemSelected,
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {
@@ -25,7 +24,6 @@ export default function InvoicesFilter({
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
-
 
   const checkbox: CheckBoxType[] = [
     { label: "Send", type: "send" },
@@ -35,6 +33,23 @@ export default function InvoicesFilter({
     },
     { label: "Failed", type: "failed" },
   ];
+
+  const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
+    type: "",
+    location: "",
+    email: "",
+    price: "",
+  });
+
+  const handleSave = () => {
+    setFilter((prev) => ({
+      ...prev,
+      type: extraFilters.type,
+      email: extraFilters.email,
+      price: extraFilters.price,
+    }));
+    hanldeClose();
+  };
 
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -79,8 +94,7 @@ export default function InvoicesFilter({
               </span>
             </div>
             <div className="">
-              
-                {/* email section  */}
+              {/* email section  */}
               <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -96,7 +110,7 @@ export default function InvoicesFilter({
                 <div className="flex items-center gap-x-3 mt-4  ">
                   {checkbox.map((item, index) => (
                     <EmailCheckField
-                    key={index}
+                      key={index}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}
                       type={"status"}
@@ -120,18 +134,15 @@ export default function InvoicesFilter({
                     Reset
                   </label>
                 </div>
-                
-                  <PriceInputField label="Low Price" label2="High Price" />
-                
+
+                <PriceInputField label="Low Price" label2="High Price" />
               </div>
               {/* Price section  */}
             </div>
             <div>
               <BaseButton
                 buttonText="Save"
-                onClick={() => {
-                  setMoreFilter(!moreFilter);
-                }}
+                onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"
               />

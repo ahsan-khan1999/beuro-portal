@@ -29,6 +29,7 @@ const useContract = () => {
     sortBy: "",
     text: "",
     type: "",
+    date:"",
     status: query?.filter as string
 
   });

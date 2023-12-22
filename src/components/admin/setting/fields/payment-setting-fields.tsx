@@ -129,7 +129,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                     text: `${translate("admin.settings.payment_setting.save_changes_button")}`,
                     inputType: "submit",
                     className:
-                      "rounded-lg   p-4 w-fit h-[50px]  text-white hover:bg-none ",
+                      "rounded-lg mt-5   p-4 w-fit h-[50px]  text-white hover:bg-none ",
                     loading,
                     id: "paymentdiv",
 

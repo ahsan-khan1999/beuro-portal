@@ -162,10 +162,10 @@ export const planDetailsFormField: GeneratePlansFormField = (
             },
             field: {
               type: Field.div,
-              id:"check",
-              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              id: "check",
+              className:
+                "flex justify-between  !px-4 py-3 border-[1px] rounded-lg !border-dark focus:!border-primary ",
               children: [
-
                 {
                   field: {
                     type: Field.span,
@@ -173,22 +173,20 @@ export const planDetailsFormField: GeneratePlansFormField = (
                     id: "test",
                     name: "test",
                     text: "Enable Reports",
-                    containerClassName:""
+                    containerClassName: "",
                   },
                 },
                 {
                   field: {
                     type: Field.checkbox,
-                    className:
-                      "",
+                    className: "",
                     id: "accountingReport",
                     name: "accountingReport",
                     register,
-                    description:""
-
+                    description: "",
                   },
-                }
-              ]
+                },
+              ],
             },
           },
           {
@@ -200,33 +198,31 @@ export const planDetailsFormField: GeneratePlansFormField = (
             },
             field: {
               type: Field.div,
-              id:"check",
-              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              id: "check",
+              className:
+                "flex justify-between items-center !!mb-0 py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary  ",
               children: [
-
+                
                 {
                   field: {
                     type: Field.span,
-
                     id: "test",
                     name: "customizedEmail",
                     text: "Enable Customization",
-                    containerClassName:""
+                    containerClassName: "mb-0",
                   },
                 },
                 {
                   field: {
                     type: Field.checkbox,
-                    className:
-                      "",
+                    className: "",
                     id: "customizedEmail",
                     name: "customizedEmail",
                     register,
-                    description:""
-
+                    description: "",
                   },
-                }
-              ]
+                },
+              ],
             },
           },
           {
@@ -235,12 +231,13 @@ export const planDetailsFormField: GeneratePlansFormField = (
               text: `${translate("admin.plan_details.watermark")}`,
               htmlFor: "watermark",
             },
+
             field: {
               type: Field.div,
-              id:"check",
-              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              id: "check",
+              className:
+                "flex justify-between py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
               children: [
-
                 {
                   field: {
                     type: Field.span,
@@ -248,22 +245,20 @@ export const planDetailsFormField: GeneratePlansFormField = (
                     id: "test",
                     name: "watermark",
                     text: "Enable Watermark",
-                    containerClassName:""
+                    containerClassName: "mb-0",
                   },
                 },
                 {
                   field: {
                     type: Field.checkbox,
-                    className:
-                      "",
+                    className: "",
                     id: "watermark",
                     name: "watermark",
                     register,
-                    description:""
-
+                    description: "",
                   },
-                }
-              ]
+                },
+              ],
             },
           },
 
@@ -274,12 +269,12 @@ export const planDetailsFormField: GeneratePlansFormField = (
               htmlFor: "apiFeatures",
               className: "mb-[10px]",
             },
-             field: {
+            field: {
               type: Field.div,
-              id:"check",
-              className: "flex justify-between  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+              id: "check",
+              className:
+                "flex justify-between py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
               children: [
-
                 {
                   field: {
                     type: Field.span,
@@ -287,22 +282,20 @@ export const planDetailsFormField: GeneratePlansFormField = (
                     id: "test",
                     name: "apiFeatures",
                     text: "Enable Api",
-                    containerClassName:""
+                    containerClassName: "",
                   },
                 },
                 {
                   field: {
                     type: Field.checkbox,
-                    className:
-                      "",
+                    className: "",
                     id: "apiFeatures",
                     name: "apiFeatures",
                     register,
-                    description:""
-
+                    description: "",
                   },
-                }
-              ]
+                },
+              ],
             },
           },
         ],
@@ -323,8 +316,9 @@ export const planDetailsFormField: GeneratePlansFormField = (
               text: `${translate("admin.plan_details.back_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${isUpdate && "hidden"
-                }`,
+              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${
+                isUpdate && "hidden"
+              }`,
             },
           },
           {
@@ -334,8 +328,9 @@ export const planDetailsFormField: GeneratePlansFormField = (
               id: "button",
               text: `${translate("admin.plan_details.save_button")}`,
               inputType: "submit",
-              className: `px-4  w-[152px] hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `px-4  w-[152px] hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },
