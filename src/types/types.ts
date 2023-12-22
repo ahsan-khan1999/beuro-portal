@@ -567,6 +567,12 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string;
+  date?: string;
+}
+
+export interface ExtraFiltersType {
+  type: string;
+  location: string;
 }
 export interface FilterProps {
   filter: FilterType;
@@ -575,7 +581,6 @@ export interface FilterProps {
   setMoreFilter: React.Dispatch<SetStateAction<boolean>>;
   handleFilterResetToInitial: () => void;
   handleFilterReset: (key: keyof FilterType, value: string) => void;
-  handleItemSelected: (val: string) => void;
   typeList: ItemList[];
 }
 
