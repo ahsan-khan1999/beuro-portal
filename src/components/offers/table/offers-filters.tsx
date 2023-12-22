@@ -32,7 +32,6 @@ export default function OffersFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -46,6 +45,8 @@ export default function OffersFilters({
             type={"status"}
             label={item.label}
             value={item.type}
+            checked
+            onChange={val => {}}
           />
         ))}
       </div>
@@ -69,14 +70,13 @@ export default function OffersFilters({
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
         <Button
           id="apply"
           inputType="button"
           text="Apply"
-          onClick={() => handleFilterChange(filter)}
+          onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         />
 

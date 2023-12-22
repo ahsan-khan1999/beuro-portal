@@ -212,7 +212,7 @@ const PdfPriview = () => {
                 },
                 columnSettings: null,
                 currPage: 1,
-                totalPages: calculateTotalPages
+                totalPages: calculateTotalPages,
               },
               qrCode: {
                 acknowledgementSlip: qrCodeAcknowledgementData,
@@ -306,11 +306,18 @@ const PdfPriview = () => {
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
   const handleEmailSend = async () => {
-    const data = await localStoreUtil.get_data("contractComposeEmail");
-    const res = await dispatch(sendOfferEmail({ data }));
-    if (res?.payload)
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-    await localStoreUtil.remove_data("contractComposeEmail");
+    try {
+      const data = await localStoreUtil.get_data("contractComposeEmail");
+      if (data) {
+        const res = await dispatch(sendOfferEmail({ data }));
+        if (res?.payload) {
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
+        await localStoreUtil.remove_data("contractComposeEmail");
+      }
+    } catch (error) {
+      console.error("Error in handleEmailSend:", error);
+    }
   };
 
   const handleDonwload = () => {

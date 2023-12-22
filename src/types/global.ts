@@ -39,8 +39,9 @@ export interface CheckFieldProps {
   checkboxFilter: FilterType;
   setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
   type: keyof FilterType;
-  defaultChecked?: string;
-  value?: string;
+  checked: boolean;
+  value: string;
+  onChange: (val: string) => void;
 }
 export interface InputFieldProps {
   value: string;

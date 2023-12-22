@@ -37,6 +37,10 @@ const useOffers = () => {
     sortBy: "",
     text: "",
     type: "",
+    date: [""],
+    email: [""],
+    payment: "",
+    price: [""],
     status: query?.filter as string,
   });
   const totalItems = totalCount;
@@ -67,7 +71,8 @@ const useOffers = () => {
       }
     );
   }, []);
-  const handleFilterChange = (filter: FilterType) => {
+  const handleFilterChange = () => {
+    console.log(filter);
     dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
   const onClose = () => {

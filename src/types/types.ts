@@ -567,7 +567,10 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string;
-  date?: string;
+  date?: string[];
+  payment?: string;
+  email?: string[];
+  price?: string[];
 }
 
 export interface ExtraFiltersType {
