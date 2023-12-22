@@ -6,27 +6,41 @@ export default function CheckField({
   checkboxFilter,
   setCheckBoxFilter,
   type,
-  defaultChecked,
+  checked,
   value,
+  onChange,
 }: CheckFieldProps) {
+  const handleChange = (e) => {
+    const isChecked = e.target.checked;
+    const newValues = isChecked
+      ? [...(checkboxFilter[type] || []), value]
+      : (checkboxFilter[type] || []).filter((item) => item !== value);
+
+    setCheckBoxFilter({ ...checkboxFilter, [type]: newValues });
+    if (onChange) {
+      onChange(value, isChecked);
+    }
+  };
+
   return (
     <>
-      <label className="custom-checkbox py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer w-fit">
+      <label
+        htmlFor={label}
+        className="custom-checkbox py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer w-fit"
+      >
         <input
           type="checkbox"
-          name="check"
-          // defaultChecked={defaultChecked === type}
+          name={label}
+          id={label}
           className="hidden"
-          onChange={(e) =>
-            setCheckBoxFilter({ ...checkboxFilter, [type]: value })
-          }
+          checked={checkboxFilter[type] && checkboxFilter[type].includes(value)}
+          onChange={handleChange}
         />
         <span className="checkbox-control"></span>
-
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type] === value ? (
+        {checkboxFilter[type] && checkboxFilter[type].includes(value) ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
@@ -63,3 +77,53 @@ export default function CheckField({
     </>
   );
 }
+
+
+// export default function CheckField({
+//   label,
+//   checkboxFilter,
+//   setCheckBoxFilter,
+//   type,
+//   checked,
+//   value,
+//   onChange,
+// }: CheckFieldProps) {
+//   const handleChange = (e) => {
+//     const isChecked = e.target.checked;
+//     const currentValues = Array.isArray(checkboxFilter[type]) ? checkboxFilter[type] : [];
+//     const newValues = isChecked
+//       ? [...currentValues, value]
+//       : currentValues.filter((item) => item !== value);
+
+//     setCheckBoxFilter({ ...checkboxFilter, [type]: newValues });
+//     if (onChange) {
+//       onChange(value, isChecked);
+//     }
+//   };
+
+//   const isChecked = Array.isArray(checkboxFilter[type]) && checkboxFilter[type].includes(value);
+
+//   return (
+//     <>
+//       <label htmlFor={label} className="custom-checkbox py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer w-fit">
+//         <input
+//           type="checkbox"
+//           name={label}
+//           id={label}
+//           className="hidden"
+//           checked={isChecked}
+//           onChange={handleChange}
+//         />
+//         <span className="checkbox-control"></span>
+//         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
+//           {label}
+//         </p>
+//         {isChecked ? (
+//           // SVG for checked state
+//         ) : (
+//           // SVG for unchecked state
+//         )}
+//       </label>
+//     </>
+//   );
+// }

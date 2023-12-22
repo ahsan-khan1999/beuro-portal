@@ -49,8 +49,7 @@ export default function useCustomer() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (filter: FilterType) => {
-    console.log(filter);
+  const handleFilterChange = () => {
     dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   return {

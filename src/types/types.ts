@@ -576,7 +576,7 @@ export interface FilterType {
 export interface ExtraFiltersType {
   type: string;
   location: string;
-  date?: string;
+  date?: string[];
   email?: string;
   price?: string;
 }
@@ -818,5 +818,5 @@ export interface AggrementProps {
 export interface FiltersComponentProps {
   filter: FilterType;
   setFilter: SetStateAction<any>;
-  handleFilterChange: (value: FilterType) => void;
+  handleFilterChange: () => void;
 }

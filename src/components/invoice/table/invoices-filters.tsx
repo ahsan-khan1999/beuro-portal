@@ -43,6 +43,8 @@ export default function InvoicesFilters({
             type={"status"}
             label={item.label}
             value={item.type}
+            checked
+            onChange={val => {}}
           />
         ))}
       </div>

@@ -6,7 +6,7 @@ import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 
@@ -30,21 +30,39 @@ export default function LeadsFilter({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    // handleItemSelected,
-    
     typeList,
   } = useFilter({ filter, setFilter });
+
+  console.log(filter);
 
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
+            key={idx}
             checkboxFilter={filter}
             setCheckBoxFilter={setFilter}
             type={"status"}
             label={item.label}
             value={item.type}
+            checked={!!filter.status && filter.status.includes(item.type)}
+            onChange={(value, isChecked) => {
+              setFilter((prev: any) => {
+                const updatedStatus = prev.status ? [...prev.status] : [];
+                if (isChecked) {
+                  if (!updatedStatus.includes(value)) {
+                    updatedStatus.push(value);
+                  }
+                } else {
+                  const index = updatedStatus.indexOf(value);
+                  if (index > -1) {
+                    updatedStatus.splice(index, 1);
+                  }
+                }
+                return { ...prev, status: updatedStatus };
+              });
+            }}
           />
         ))}
       </div>
@@ -57,7 +75,6 @@ export default function LeadsFilter({
           handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
-          
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
@@ -68,14 +85,13 @@ export default function LeadsFilter({
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          // handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
         <Button
           id="apply"
           inputType="button"
           text="Apply"
-          onClick={() => handleFilterChange(filter)}
+          onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         />
 

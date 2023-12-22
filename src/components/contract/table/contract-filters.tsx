@@ -44,6 +44,8 @@ export default function ContractFilters({
             type={"status"}
             label={item.label}
             value={item.type}
+            checked
+            onChange={val => {}}
           />
         ))}
       </div>
@@ -73,7 +75,7 @@ export default function ContractFilters({
           id="apply"
           inputType="button"
           text="Apply"
-          onClick={() => handleFilterChange(filter)}
+          onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         />
       </div>

@@ -23,7 +23,6 @@ export default function CustomerFilter({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -50,6 +49,8 @@ export default function CustomerFilter({
             type={"status"}
             label={item.label}
             value={item.type}
+            checked
+            onChange={val => {}}
           />
         ))}
       </div>
@@ -73,12 +74,11 @@ export default function CustomerFilter({
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
         typeList={typeList}
       />
 
       <Button
-        onClick={() => handleFilterChange(filter)}
+        onClick={() => handleFilterChange()}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text="Apply"
         id="apply"

@@ -41,7 +41,7 @@ export interface CheckFieldProps {
   type: keyof FilterType;
   checked: boolean;
   value: string;
-  onChange: (val: string) => void;
+  onChange: (val: string, checked: boolean) => void;
 }
 export interface InputFieldProps {
   value: string;

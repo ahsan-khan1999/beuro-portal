@@ -21,7 +21,6 @@ export default function EmployeesFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
   const router = useRouter();
@@ -49,7 +48,6 @@ export default function EmployeesFilters({
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
         typeList={typeList}
       />
 
@@ -57,7 +55,7 @@ export default function EmployeesFilters({
         id="apply"
         inputType="button"
         text="Apply"
-        onClick={() => handleFilterChange(filter)}
+        onClick={() => handleFilterChange()}
         className="flex items-center gap-x-2 py-2 mr-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       />
 
