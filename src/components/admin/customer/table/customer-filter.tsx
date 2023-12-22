@@ -1,4 +1,5 @@
-import DetailFilter from "@/base-components/filter/detail-filter";
+import CustomerFilters from "@/base-components/filter/customer-filters";
+// import DetailFilter from "@/base-components/filter/detail-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -65,7 +66,7 @@ export default function CustomerFilter({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <DetailFilter
+      <CustomerFilters
         filter={filter}
         setFilter={setFilter}
         moreFilter={moreFilter}
