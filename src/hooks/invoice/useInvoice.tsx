@@ -26,6 +26,8 @@ const useInvoice = () => {
     sortBy: "",
     text: "",
     type: "",
+    email:"",
+    price:"",
     status: query?.filter as string
 
   });

@@ -80,6 +80,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* ===================== */
 
+
+.fields > :first-child div{
+margin: 0px !important;
+}
+
 /* Thin scrollbar track */
 ::-webkit-scrollbar {
   width: 6px; /* Adjust the width as needed */

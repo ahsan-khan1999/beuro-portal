@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { FilterProps } from "@/types";
+import { ExtraFiltersType, FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
@@ -12,10 +12,10 @@ import { RadioField } from "./fields/radio-field";
 export default function ContractFilter({
   filter,
   moreFilter,
+  setFilter,
   setMoreFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-  handleItemSelected,
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {
@@ -23,6 +23,26 @@ export default function ContractFilter({
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+
+
+
+  const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
+    type: "",
+    location: "",
+    date:""
+  });
+
+
+
+  const handleSave = () => {
+    setFilter((prev) => ({
+      ...prev,
+      type: extraFilters.type,
+      location: extraFilters.location,
+      date:extraFilters.date,
+    }));
+    hanldeClose();
+  };
 
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -88,9 +108,7 @@ export default function ContractFilter({
             <div>
               <BaseButton
                 buttonText="Save"
-                onClick={() => {
-                  setMoreFilter(!moreFilter);
-                }}
+                onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"
               />

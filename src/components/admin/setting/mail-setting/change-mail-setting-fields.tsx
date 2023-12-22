@@ -252,7 +252,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
         )}`,
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         id: "save",
         loading,
       },

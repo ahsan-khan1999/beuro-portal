@@ -568,11 +568,16 @@ export interface FilterType {
   location?: string;
   status?: string;
   date?: string;
+  email?: string;
+  price?: string;
 }
 
 export interface ExtraFiltersType {
   type: string;
   location: string;
+  date?: string;
+  email?: string;
+  price?: string;
 }
 export interface FilterProps {
   filter: FilterType;

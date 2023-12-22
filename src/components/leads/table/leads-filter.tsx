@@ -1,4 +1,4 @@
-import DetailFilter from "@/base-components/filter/leads-filter";
+import LeadsFilters from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -30,7 +30,8 @@ export default function LeadsFilter({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
+    // handleItemSelected,
+    
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -60,14 +61,14 @@ export default function LeadsFilter({
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <DetailFilter
+        <LeadsFilters
           filter={filter}
           setFilter={setFilter}
           moreFilter={moreFilter}
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
+          // handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
         <Button

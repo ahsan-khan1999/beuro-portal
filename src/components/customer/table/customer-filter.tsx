@@ -23,6 +23,7 @@ export default function CustomerFilter({
     handleFilterResetToInitial,
     handleFilterReset,
     typeList,
+    
   } = useFilter({ filter, setFilter });
 
   const { t: translate } = useTranslation();

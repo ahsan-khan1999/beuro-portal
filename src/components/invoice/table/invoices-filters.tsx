@@ -30,7 +30,6 @@ export default function InvoicesFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
   return (
@@ -67,7 +66,6 @@ export default function InvoicesFilters({
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
 
