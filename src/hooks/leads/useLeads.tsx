@@ -31,9 +31,9 @@ const useLeads = () => {
     sortBy: "",
     text: "",
     type: "",
+    date: "",
     status: query?.filter as string,
   });
-
   useMemo(() => {
     setFilter({
       ...filter,

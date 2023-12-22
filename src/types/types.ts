@@ -567,6 +567,7 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string;
+  date?: string;
 }
 
 export interface ExtraFiltersType {
