@@ -56,8 +56,8 @@ const SideBar = () => {
     child: null,
   });
 
-  // const userRole = staticEnums["User"]["role"][user?.role as string];
-  const userRole = 0;
+  const userRole = staticEnums["User"]["role"][user?.role as string];
+  // const userRole = 0;
 
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);

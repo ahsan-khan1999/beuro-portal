@@ -75,15 +75,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   position: absolute;
   opacity: 0;
-  z-index: 1;
+  z-index: 999;
 }
-
 /* ===================== */
 
-
-.fields > :first-child div{
-margin: 0px !important;
-}
 
 /* Thin scrollbar track */
 ::-webkit-scrollbar {

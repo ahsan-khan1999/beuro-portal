@@ -450,7 +450,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
       field: {
         type: Field.div,
         id: "div-field1",
-        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3",
+        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3 items-center",
         children: generateDateChildren(
           register,
           count,
@@ -478,7 +478,7 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-3",
+        className: "grid grid-cols-2 gap-x-3 items-center",
         id: `date`,
         children: [
           {
@@ -490,7 +490,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
+              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.startDate`,
               name: `date.${i}.startDate`,
 
@@ -507,7 +507,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
+              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.endDate`,
               name: `date.${i}.endDate`,
               remove: i > 0 && "Remove",
@@ -521,14 +521,14 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-3 maxSize:mt-[33px]",
+    containerClass: "mb-0 mt-3 ",
     field: {
       type: Field.button,
       id: "button",
       text: "",
       inputType: "submit",
       className:
-        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px] text-white",
+        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px]   text-white",
       onClick: () => OnClick({ startDate: "", endDate: "" }),
       icon: icon,
     },
@@ -545,7 +545,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0 mt-2",
       field: {
         type: Field.button,
         id: "button",
