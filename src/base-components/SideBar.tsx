@@ -85,9 +85,14 @@ const SideBar = () => {
   };
 
   useEffect(() => {
-    const currentItem = sideBar.find(
-      (item) => item.pathname === router.pathname
-    );
+    const currentItem = sideBar.find((item) => {
+      return (
+        item.pathname &&
+        typeof item.pathname === "string" &&
+        router.pathname.startsWith(item.pathname)
+      );
+    });
+
     if (currentItem) {
       setSelected((prev) => ({
         parent: {
