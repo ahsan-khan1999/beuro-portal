@@ -33,7 +33,7 @@ export default function CheckField({
           name={label}
           id={label}
           className="hidden"
-          checked={checkboxFilter[type] && checkboxFilter[type]?.includes(value)  || false}
+          checked={ false}
           onChange={handleChange}
         />
         <span className="checkbox-control"></span>
