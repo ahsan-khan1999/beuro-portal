@@ -40,7 +40,7 @@ export default function CheckField({
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type] && checkboxFilter[type]?.includes(value) ? (
+        {checkboxFilter[type]  ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
