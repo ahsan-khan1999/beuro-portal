@@ -24,7 +24,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">{item.price}</span>
-            <span className="py-4 overflow-hidden overflow-ellipsis whitespace-nowrap flex items-center break-all">
+            <span className="break-all py-4 overflow-hidden overflow-ellipsis whitespace-nowrap flex items-center">
               {item.description}
             </span>
 
