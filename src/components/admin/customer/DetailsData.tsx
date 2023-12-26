@@ -78,7 +78,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.no_of_employee")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.employee?.refID}
+              {customerDetail?.employee?.employeeID}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">

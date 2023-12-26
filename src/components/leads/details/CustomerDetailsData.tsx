@@ -69,7 +69,7 @@ const customerDetailData = ({
                 {leadDetails?.customerDetail?.companyName}
               </div>
             </div>
-          )}
+          }
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.email_address")}
