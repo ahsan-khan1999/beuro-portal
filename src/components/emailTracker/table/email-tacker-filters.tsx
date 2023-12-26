@@ -3,7 +3,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
 import useFilter from "@/hooks/filter/hook";
 import { FiltersComponentProps } from "@/types";
-import React, { useState } from "react";
+import React from "react";
 
 export default function EmailTrackerFilters({
   filter,
@@ -17,7 +17,6 @@ export default function EmailTrackerFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
   return (
@@ -32,12 +31,11 @@ export default function EmailTrackerFilters({
           handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
           value={filter?.sortBy || ""}
           dropDownIconClassName=""
-         
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
         <Button
-          onClick={() => handleFilterChange(filter)}
+          onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           text="Apply"
           id="apply"

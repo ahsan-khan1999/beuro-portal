@@ -1,5 +1,4 @@
 import React, { SetStateAction } from "react";
-import { SearchInput } from "@/base-components/ui/searchBar/search-bar";
 import EmailTrackerFilters from "./email-tacker-filters";
 import { useTranslation } from "next-i18next";
 import { FilterType } from "@/types";
@@ -25,7 +24,7 @@ const TableFunctions = ({
       <EmailTrackerFilters
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => handleFilterChange}
       />
     </div>
   );

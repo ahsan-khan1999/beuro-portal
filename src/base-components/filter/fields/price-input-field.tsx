@@ -8,8 +8,8 @@ export const PriceInputField = ({
 }: {
   label: string;
   label2: string;
-  onLowPriceChange: (val: string) => void;
-  onHighPriceChange: (val: string) => void;
+  onLowPriceChange?: (val: string) => void;
+  onHighPriceChange?: (val: string) => void;
 }) => {
   return (
     <div className="flex items-center  gap-x-3">
@@ -24,7 +24,9 @@ export const PriceInputField = ({
             type="number"
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] px-5 py-[15px] placeholder:text-lightDark"
             placeholder="0"
-            onChange={(e) => onLowPriceChange(e.currentTarget.value)}
+            onChange={(e) =>
+              onLowPriceChange && onLowPriceChange(e.currentTarget.value)
+            }
           />
         </div>
       </div>
@@ -40,7 +42,9 @@ export const PriceInputField = ({
             type="number"
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px]  px-5 py-[15px] placeholder:text-lightDark"
             placeholder="0"
-            onChange={(e) => onHighPriceChange(e.currentTarget.value)}
+            onChange={(e) =>
+              onHighPriceChange && onHighPriceChange(e.currentTarget.value)
+            }
           />
         </div>
       </div>

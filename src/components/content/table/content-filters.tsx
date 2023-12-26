@@ -7,7 +7,6 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import useFilter from "@/hooks/filter/hook";
-import ServicesFilter from "@/base-components/filter/services-filter";
 import ContractFilter from "@/base-components/filter/contracts-filter";
 
 export default function ContentFilters({
@@ -16,13 +15,10 @@ export default function ContentFilters({
   handleFilterChange,
 }: FiltersComponentProps) {
   const {
-    isOpen,
-    toggleHandler,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -50,11 +46,10 @@ export default function ContentFilters({
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
         typeList={typeList}
       />
       <Button
-        onClick={() => handleFilterChange(filter)}
+        onClick={handleFilterChange}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text="Apply"
         id="apply"
