@@ -478,7 +478,7 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-3 items-center",
+        className: "flex flex-wrap gap-x-3 mb-3 items-center",
         id: `date`,
         children: [
           {
@@ -490,7 +490,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
+              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.startDate`,
               name: `date.${i}.startDate`,
 
@@ -507,8 +507,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
-              id: `date.${i}.endDate`,
+              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
               name: `date.${i}.endDate`,
               remove: i > 0 && "Remove",
               onRemove: () => handleRemoveDateField(i),
@@ -521,7 +520,7 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-8 ",
+    containerClass: "mb-0 mt-5 -ml-4 ",
     field: {
       type: Field.button,
       id: "button",
