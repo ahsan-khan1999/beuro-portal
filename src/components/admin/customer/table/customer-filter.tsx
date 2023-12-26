@@ -23,7 +23,6 @@ export default function CustomerFilter({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -73,7 +72,6 @@ export default function CustomerFilter({
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
         typeList={typeList}
       />
 

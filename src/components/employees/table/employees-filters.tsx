@@ -21,7 +21,7 @@ export default function EmployeesFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
+ 
     typeList,
   } = useFilter({ filter, setFilter });
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function EmployeesFilters({
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
+ 
         typeList={typeList}
       />
 

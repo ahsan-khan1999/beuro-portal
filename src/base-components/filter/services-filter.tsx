@@ -15,7 +15,6 @@ export default function ServicesFilter({
   setMoreFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-  handleItemSelected,
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {
