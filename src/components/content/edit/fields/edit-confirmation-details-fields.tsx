@@ -33,7 +33,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             {
               containerClass: "mb-0 mt-5",
               label: {
-                text: translate("content.details.confirmation_description"),
+                text: translate("content.details.Confirmation_description"),
                 htmlFor: "confirmationContent.description",
                 className: "mb-[10px]",
               },

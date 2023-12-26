@@ -106,7 +106,7 @@ export default function ServicesFilter({
                 onClick={() => {
                   setMoreFilter(!moreFilter);
                 }}
-                containerClassName="bg-primary my-6 px-8 py-2"
+                containerClassName="bg-primary my-5 px-8 py-2"
                 textClassName="text-white"
               />
             </div>

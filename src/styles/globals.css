@@ -70,7 +70,7 @@ body {
 
 /* ==================== */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  width: 376px !important;
+  width: 180px !important;
   height: 48px !important;
   cursor: pointer;
   position: absolute;
@@ -114,7 +114,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* .ck-editor {
   max-width: 904px !important;
 } */
-
+.ck-content:focus{
+  border: 1px solid #4a13e7 !important;
+}
+.ck .ck-toolbar{
+ border-bottom: none !important;
+}
 .ck-content {
   min-height: 260px !important;
   max-height: 260px !important;

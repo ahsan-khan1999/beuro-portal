@@ -185,7 +185,7 @@ const SideBar = () => {
           })}
         </div>
       </div>
-      <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "" }`}>
+      <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "mt-16" }`}>
         <Image src={logo} alt="Logo" className="mt-auto pb-32  ml-3 " />
       </div>
     </div>

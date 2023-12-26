@@ -90,7 +90,7 @@ export default function ContentFilter({
                 onClick={() => {
                   setMoreFilter(!moreFilter);
                 }}
-                containerClassName="bg-primary my-2 px-8 py-1"
+                containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"
               />
             </div>
