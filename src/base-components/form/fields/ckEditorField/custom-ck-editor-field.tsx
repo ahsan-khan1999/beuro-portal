@@ -9,7 +9,7 @@ const CustomCKEditor = ({
   trigger,
   data,
   name,
-  type
+  type,
 }: CKEditorBoxProps) => (
   <CKEditor
     id={id}

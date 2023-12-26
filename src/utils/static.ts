@@ -702,9 +702,9 @@ export const staticEnums: Record<string, any> = {
     France: "France",
   },
   SupportRequest: {
-    "pending": 0,
-    "resolved": 1
-  }
+    pending: 0,
+    resolved: 1,
+  },
 };
 
 // export const customers: Customers[] = [
@@ -1023,7 +1023,6 @@ export const staticEnums: Record<string, any> = {
 //   // Add more rows as needed
 // ];
 
-
 export const paymentsAdminData: PaymentsAdmin[] = [
   {
     id: 1,
@@ -1197,8 +1196,6 @@ export const paymentsAdminData: PaymentsAdmin[] = [
   },
 ];
 
-
-
 export const sideBar: SideBar[] = [
   {
     icon: "Dashboard",
@@ -1299,20 +1296,20 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "Accepted",
-        query: "accepted",
+        title: "Open",
+        query: "open",
         pathname: "/contract",
         role: [1],
       },
       {
-        title: "Rejected",
-        query: "rejected",
+        title: "Confirmed",
+        query: "confirmed",
         pathname: "/contract",
         role: [1],
       },
       {
-        title: "Pending",
-        query: "pending",
+        title: "Cancelled",
+        query: "cancelled",
         pathname: "/contract",
         role: [1],
       },
@@ -1407,7 +1404,6 @@ export const sideBar: SideBar[] = [
     icon: "dummy",
     role: [],
     title: "",
- 
   },
   {
     className: " ",
