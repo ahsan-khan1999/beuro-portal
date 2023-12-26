@@ -1204,7 +1204,7 @@ export const sideBar: SideBar[] = [
     icon: "Dashboard",
     title: "Dashboard",
     pathname: "/dashboard",
-    role: [1],
+    role: [1,2],
   },
   {
     icon: "Dashboard",
@@ -1216,7 +1216,7 @@ export const sideBar: SideBar[] = [
     icon: "Customers",
     title: "Customers",
     pathname: "/customers",
-    role: [1],
+    role: [1,2],
   },
   {
     icon: "Customers",
@@ -1228,35 +1228,35 @@ export const sideBar: SideBar[] = [
     icon: "Leads",
     title: "Leads",
     pathname: "/leads",
-    role: [1],
+    role: [1,2],
     inner: [
       {
         title: "Open",
         pathname: "/leads",
         query: "open",
 
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Close",
         pathname: "/leads",
         query: "close",
 
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Expire",
         pathname: "/leads",
         query: "expire",
 
-        role: [1],
+        role: [1,2],
       },
     ],
   },
   {
     icon: "Offers",
     title: "Offers",
-    role: [1],
+    role: [1,2],
     pathname: "/offers",
 
     inner: [
@@ -1265,21 +1265,21 @@ export const sideBar: SideBar[] = [
         pathname: "/offers",
         query: "open",
 
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Signed",
         pathname: "/offers",
         query: "signed",
 
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Expired",
         pathname: "/offers",
         query: "expire",
 
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Rejected",
@@ -1287,14 +1287,14 @@ export const sideBar: SideBar[] = [
 
         pathname: "/offers",
 
-        role: [1],
+        role: [1,2],
       },
     ],
   },
   {
     icon: "Contracts",
     title: "Contracts",
-    role: [1],
+    role: [1,2],
     pathname: "/contract",
 
     inner: [
@@ -1302,26 +1302,26 @@ export const sideBar: SideBar[] = [
         title: "Accepted",
         query: "accepted",
         pathname: "/contract",
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Rejected",
         query: "rejected",
         pathname: "/contract",
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Pending",
         query: "pending",
         pathname: "/contract",
-        role: [1],
+        role: [1,2],
       },
     ],
   },
   {
     icon: "Invoices",
     title: "Invoices",
-    role: [1],
+    role: [1,2],
     pathname: "/invoices",
 
     inner: [
@@ -1329,19 +1329,19 @@ export const sideBar: SideBar[] = [
         title: "Open",
         query: "open",
         pathname: "/invoices",
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Overdue",
         query: "overdue",
         pathname: "/invoices",
-        role: [1],
+        role: [1,2],
       },
       {
         title: "Paid",
         query: "paid",
         pathname: "/invoices",
-        role: [1],
+        role: [1,2],
       },
     ],
   },
@@ -1349,7 +1349,7 @@ export const sideBar: SideBar[] = [
     icon: "Services",
     title: "Services",
     pathname: "/services",
-    role: [1],
+    role: [1,2],
   },
   {
     icon: "Employees",
@@ -1361,13 +1361,13 @@ export const sideBar: SideBar[] = [
     icon: "Content",
     title: "Content",
     pathname: "/content",
-    role: [1],
+    role: [1,2],
   },
   {
     icon: "MailTracker",
     title: "Mail Tracker",
     pathname: "/email-tracker",
-    role: [1],
+    role: [1,2],
   },
   {
     icon: "Settings",

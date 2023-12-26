@@ -43,8 +43,9 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails.id) {
+      
       reset({
-        address: offerDetails?.addressID?.address
+        address: offerDetails?.addressID ? offerDetails?.addressID?.address : offerDetails?.leadID?.addressID?.address
       })
     }
   }, [offerDetails.id])

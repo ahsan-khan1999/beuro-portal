@@ -88,9 +88,9 @@ export const useSendEmail = (
       ...data,
       id: offerDetails?.id,
       pdf: attachements?.map((item) => item.value),
-      router,
-      translate,
-      setError,
+      // router,
+      // translate,
+      // setError,
     };
 
     localStoreUtil.store_data("contractComposeEmail", updatedData);

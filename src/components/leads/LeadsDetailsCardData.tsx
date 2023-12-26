@@ -45,13 +45,16 @@ const LeadsDetailsCardData = ({
         <div className="flex gap-[22px]">
           <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer" onClick={() => {
             localStoreUtil.remove_data("offer")
+
             dispatch(setOfferDetails({
               id: leadDetails?.id,
               type: "Existing Customer",
               leadID: { ...leadDetails, customerID: leadDetails?.customerID },
+              serviceDetail: { serviceDetail: leadDetails?.otherServices },
+              addressID: { address: leadDetails?.addressID?.address }
             }))
             dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }))
-            
+
 
             router.push("/offers/add")
           }}>

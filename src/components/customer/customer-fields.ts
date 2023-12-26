@@ -63,7 +63,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
           {
@@ -82,7 +81,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Email Address",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
 
@@ -154,7 +152,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
 
@@ -177,7 +174,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
           {
