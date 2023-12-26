@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import { formatDateString } from "@/utils/functions";
 import { formatDateReverse } from "@/utils/utility";
+import Link from "next/link";
 
 const DetailsData = ({
   handleConfirmDeletion,
@@ -19,7 +20,7 @@ const DetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  
+
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -56,7 +57,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.id")}
             </span>
             <span className="font-medium  text-[#4B4B4B] text-base">
-              {emailDetails?.id}
+              {emailDetails?.refID}
             </span>
           </div>
           <div>
@@ -106,30 +107,29 @@ const DetailsData = ({
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
+        {
+          emailDetails?.pdf?.map((item) => {
+            let length = item.href?.split("/")?.length -1
 
-        <div className="my-5 flex items-end">
-          <button className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
-            <Image
-              src={pdfFileIcon}
-              alt="PDF_FILE_ICON"
-              className=" mr-[11px]"
-            />
-            <span className=" text-[#BFBFBF] text-base font-normal ">
-              Latest Offer
-            </span>
-          </button>
-          &nbsp;,&nbsp;
-          <button className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center">
-            <Image
-              src={pdfFileIcon}
-              alt="PDF_FILE_ICON"
-              className=" mr-[11px]"
-            />
-            <span className=" text-[#BFBFBF] text-base font-normal ">
-              Invoice...
-            </span>
-          </button>
-        </div>
+            return (
+              <div className="my-5 flex items-end" >
+                <Link href={item.href} target="_blank" className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
+                  <Image
+                    src={pdfFileIcon}
+                    alt="PDF_FILE_ICON"
+                    className=" mr-[11px]"
+                  />
+                  <span className=" text-[#BFBFBF] text-base font-normal ">
+                    {item.href?.split("/")[length]}
+                  </span>
+                </Link>
+                &nbsp;,&nbsp;
+
+              </div>
+
+            )
+          })
+        }
       </div>
     </>
   );

@@ -13,6 +13,8 @@ import { transformAttachments } from "@/utils/utility";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import localStoreUtil from "@/utils/localstore.util";
+import { updateQuery } from "@/utils/update-query";
 
 export const useContractEmail = (
   backRouteHandler: Function,
@@ -37,6 +39,8 @@ export const useContractEmail = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  console.log(contractDetails);
+
   useEffect(() => {
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
@@ -47,7 +51,7 @@ export const useContractEmail = (
     })
   }, [])
 
-  
+
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id)
@@ -69,14 +73,29 @@ export const useContractEmail = (
     contractDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(sendContractEmail({
-      data: {
-        ...data, id: contractDetails?.id,
-        pdf: attachements?.map((item) => item.value),
 
-      }, router, translate, setError
-    }))
-    if (res?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }))
+    const updatedData = {
+      ...data,
+      id: contractDetails?.id,
+      pdf: attachements?.map((item) => item.value),
+      // router,
+      // translate,
+      // setError,
+    };
+
+    localStoreUtil.store_data("contractComposeEmail", updatedData);
+
+    router.pathname = "/contract/pdf-preview";
+    router.query = { offerID: contractDetails?.id };
+    updateQuery(router, router.locale as string);
+    // const res = await dispatch(sendContractEmail({
+    //   data: {
+    //     ...data, id: contractDetails?.id,
+    //     pdf: attachements?.map((item) => item.value),
+
+    //   }, router, translate, setError
+    // }))
+    // if (res?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }))
   };
   return {
     fields,

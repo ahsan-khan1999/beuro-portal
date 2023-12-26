@@ -8,7 +8,7 @@ import { EmployeeDetail } from "@/types/employee";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 
-const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) => {
+const DetailsData = ({ date, id, name, isUpdate,handleDelete ,refID}: EmployeeDetail) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   return (
@@ -37,7 +37,7 @@ const DetailsData = ({ date, id, name, isUpdate,handleDelete }: EmployeeDetail) 
         <div className="flex justify-between items-center max-w-[600px]">
           <h3 className="text-[#4D4D4D] ">
           {translate("employees.card_content.employee_id")}:
-            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
+            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{refID}</span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
           {translate("employees.card_content.created_by")}:

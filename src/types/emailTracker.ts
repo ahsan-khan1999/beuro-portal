@@ -12,5 +12,11 @@ export interface TableRowEmailTracker {
   createdAt: string;
   viewedAt: string;
   description: string;
-  email:string
+  email: string;
+  refID: string;
+  pdf: Pdf[]
+}
+
+interface Pdf {
+  href: string
 }
