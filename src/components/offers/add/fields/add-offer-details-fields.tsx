@@ -157,7 +157,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -176,7 +176,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "   !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",
@@ -372,7 +372,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
         type: Field.select,
         id: "customerID",
         name: "customerID",
@@ -414,7 +414,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
         type: Field.select,
         id: "leadID",
         name: "leadID",
@@ -521,7 +521,7 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-3 ",
+    containerClass: "mb-0 mt-8 ",
     field: {
       type: Field.button,
       id: "button",
@@ -545,7 +545,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-2",
+      containerClass: "mb-0 mt-5",
       field: {
         type: Field.button,
         id: "button",

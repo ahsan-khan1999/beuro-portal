@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import useFilter from "@/hooks/filter/hook";
 import ServicesFilter from "@/base-components/filter/services-filter";
 import ContractFilter from "@/base-components/filter/contracts-filter";
+import ContentFilter from "@/base-components/filter/content-filter";
 
 export default function ContentFilters({
   filter,
@@ -43,14 +44,14 @@ export default function ContentFilters({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <ContractFilter
+      <ContentFilter
         filter={filter}
         setFilter={setFilter}
         moreFilter={moreFilter}
         setMoreFilter={setMoreFilter}
         handleFilterResetToInitial={handleFilterResetToInitial}
         handleFilterReset={handleFilterReset}
-        handleItemSelected={handleItemSelected}
+ 
         typeList={typeList}
       />
       <Button
@@ -66,7 +67,7 @@ export default function ContentFilters({
         onClick={() => router.push("/content/add")}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text={translate("content.add_button")}
-        id="apply"
+        id="apply"      
         inputType="button"
         icon={plusIcon}
       />

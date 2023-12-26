@@ -30,7 +30,7 @@ export default function CustomerFilter({
   const router = useRouter();
 
   return (
-    <div className="flex gap-x-4">
+    <div className="flex gap-x-4 items-center">
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter?.text}
@@ -56,7 +56,7 @@ export default function CustomerFilter({
 
       <Button
         onClick={() => handleFilterChange(filter)}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text="Apply"
         id="apply"
         inputType="button"
@@ -65,7 +65,7 @@ export default function CustomerFilter({
 
       <Button
         onClick={() => router.push("/customers/add")}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text={translate("customers.add_button")}
         id="apply"
         inputType="button"

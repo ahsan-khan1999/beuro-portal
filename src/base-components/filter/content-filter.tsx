@@ -14,7 +14,7 @@ export default function ContentFilter({
   setMoreFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-  handleItemSelected,
+
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {
@@ -82,27 +82,7 @@ export default function ContentFilter({
                   <DatePicker label="From" label2="To" />
                 </div>
               </div>
-              <div>
-                <div className="flex justify-between mt-6">
-                  <label htmlFor="type" className=" ">
-                    Location
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("location", "")}>
-                    Reset
-                  </label>
-                </div>
-
-                <InputField
-                  iconDisplay={false}
-                  handleChange={(value) => handleFilterReset("location", value)}
-                  value={filter.location || ""}
-                  textClassName="border border-black min-h-[42px]"
-                  containerClassName=" my-2"
-                />
-              </div>
+  
             </div>
             <div>
               <BaseButton

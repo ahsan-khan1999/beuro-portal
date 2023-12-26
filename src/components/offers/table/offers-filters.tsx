@@ -32,7 +32,6 @@ export default function OffersFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
 
@@ -49,7 +48,7 @@ export default function OffersFilters({
           />
         ))}
       </div>
-      <div className="flex gap-[14px]">
+      <div className="flex gap-[14px] items-center">
         <InputField
           handleChange={(value) => setFilter({ ...filter, text: value })}
           value={filter.text}
@@ -69,7 +68,6 @@ export default function OffersFilters({
           setMoreFilter={setMoreFilter}
           handleFilterResetToInitial={handleFilterResetToInitial}
           handleFilterReset={handleFilterReset}
-          handleItemSelected={handleItemSelected}
           typeList={typeList}
         />
         <Button

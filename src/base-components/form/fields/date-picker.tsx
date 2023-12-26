@@ -54,7 +54,7 @@ export const DatePicker = ({
           // }}
           className={`${classes} relative`}
         />
-        <div className="absolute top-5 right-7">
+        <div className="absolute top-5 right-10 ">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
