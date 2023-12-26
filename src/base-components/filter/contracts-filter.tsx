@@ -103,6 +103,44 @@ export default function ContractFilter({
                   <DatePicker label="From" label2="To" />
                 </div>
               </div>
+
+              {/* payment section  */}
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    Payment
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => handleFilterReset("type", "None")}>
+                    Reset
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-10 my-5">
+                    <RadioField lable="Cash" />
+                    <RadioField lable="Online" />
+                  </div>
+              </div>
+              {/* payment section  */}
+              {/* Price section  */}
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    Price
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => handleFilterReset("type", "None")}>
+                    Reset
+                  </label>
+                </div>
+                <div>
+                  <PriceInputField label="Low Price" label2="High Price" />
+                </div>
+              </div>
+              {/* Price section  */}
              
             </div>
             <div>

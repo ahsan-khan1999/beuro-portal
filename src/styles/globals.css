@@ -70,20 +70,15 @@ body {
 
 /* ==================== */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  width: 376px;
-  height: 48px;
+  width: 376px !important;
+  height: 48px !important;
   cursor: pointer;
   position: absolute;
   opacity: 0;
   z-index: 1;
 }
-
 /* ===================== */
 
-
-.fields > :first-child div{
-margin: 0px !important;
-}
 
 /* Thin scrollbar track */
 ::-webkit-scrollbar {

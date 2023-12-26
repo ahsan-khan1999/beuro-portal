@@ -70,7 +70,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
             },
 
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0 mt-5 ",
               label: {
                 text: translate("content.details.attachments"),
                 htmlFor: "confirmationContent.attachments",

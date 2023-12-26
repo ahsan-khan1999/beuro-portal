@@ -93,7 +93,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -110,7 +110,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",

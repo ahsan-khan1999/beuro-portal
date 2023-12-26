@@ -3,6 +3,7 @@ import Loader from "../loader/loader";
 import { combineClasses } from "@/utils/utility";
 // import { ButtonSuccessIcon } from "@/assets/svgs/components/button-success-icon";
 import Image from "next/image";
+import { useRouter } from "next/router";
 export const Button = ({
   inputType,
   text,
@@ -14,8 +15,11 @@ export const Button = ({
   icon,
   iconAlt,
 }: ButtonProps) => {
+
+const router = useRouter()
+
   const defaultClasses =
-    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg    ";
+    `min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg`;
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button

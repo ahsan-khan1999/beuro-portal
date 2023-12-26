@@ -527,7 +527,7 @@ export function getOfferStatusColor(status: string) {
   )
     return "#45C769";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Expired"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Expire"]
   )
     return "#FF376F";
   else if (

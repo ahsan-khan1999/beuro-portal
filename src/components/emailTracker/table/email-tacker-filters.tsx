@@ -17,7 +17,6 @@ export default function EmailTrackerFilters({
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
-    handleItemSelected,
     typeList,
   } = useFilter({ filter, setFilter });
   return (

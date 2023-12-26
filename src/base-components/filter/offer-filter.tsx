@@ -193,40 +193,6 @@ export default function OfferFilter({
                 </div>
               </div>
               {/* email section  */}
-              {/* Price section  */}
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <PriceInputField
-                    label="Low Price"
-                    label2="High Price"
-                    onHighPriceChange={(val) =>
-                      setExtraFilters((prev) => ({
-                        ...prev,
-                        price: [val, prev.price[1]],
-                      }))
-                    }
-                    onLowPriceChange={(val) =>
-                      setExtraFilters((prev) => ({
-                        ...prev,
-                        price: [prev.price[0], val],
-                      }))
-                    }
-                  />
-                </div>
-              </div>
-              {/* Price section  */}
               <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
@@ -251,6 +217,24 @@ export default function OfferFilter({
                   containerClassName=" my-2"
                 />
               </div>
+              {/* Price section  */}
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    Price
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => handleFilterReset("type", "None")}>
+                    Reset
+                  </label>
+                </div>
+                <div>
+                  {/* <PriceInputField label="Low Price" label2="High Price" /> */}
+                </div>
+              </div>
+              {/* Price section  */}
             </div>
             <div>
               <BaseButton
