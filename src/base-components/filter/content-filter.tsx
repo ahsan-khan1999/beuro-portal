@@ -14,7 +14,6 @@ export default function ContentFilter({
   setMoreFilter,
   handleFilterReset,
   handleFilterResetToInitial,
-
   typeList,
 }: FilterProps) {
   const hanldeClose = () => {

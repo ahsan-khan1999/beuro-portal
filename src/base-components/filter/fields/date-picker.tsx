@@ -8,8 +8,8 @@ const DatePicker = ({
 }: {
   label: string;
   label2: string;
-  onChangeTo: (val: string) => void;
-  onChangeFrom: (val: string) => void;
+  onChangeTo?: (val: string) => void;
+  onChangeFrom?: (val: string) => void;
 }) => {
   return (
     <div className="flex justify-between items-center">
@@ -35,7 +35,9 @@ const DatePicker = ({
             type="date"
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
-            onChange={(e) => onChangeFrom(e.currentTarget.value)}
+            onChange={(e) =>
+              onChangeFrom && onChangeFrom(e.currentTarget.value)
+            }
           />
         </div>
       </div>
@@ -61,7 +63,9 @@ const DatePicker = ({
             type="date"
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
-            onChange={(e) => onChangeTo(e.currentTarget.value)}
+            onChange={(e) =>
+              onChangeFrom && onChangeFrom(e.currentTarget.value)
+            }
           />
         </div>
       </div>

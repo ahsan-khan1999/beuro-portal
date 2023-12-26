@@ -10,13 +10,19 @@ export default function CheckField({
   value,
   onChange,
 }: CheckFieldProps) {
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const isChecked = e.target.checked;
-    // const newValues = isChecked
-    //   ? [...(checkboxFilter[type] || []), value]
-    //   : (checkboxFilter[type] || [])?.filter((item) => item !== value);
+    const currentValues = checkboxFilter[type];
 
-    setCheckBoxFilter({ ...checkboxFilter, [type]: checkboxFilter });
+    const newValues = isChecked
+      ? Array.isArray(currentValues)
+        ? [...currentValues, value]
+        : [value]
+      : Array.isArray(currentValues)
+      ? currentValues.filter((item) => item !== value)
+      : [];
+
+    setCheckBoxFilter({ ...checkboxFilter, [type]: newValues });
     if (onChange) {
       onChange(value, isChecked);
     }
@@ -33,14 +39,19 @@ export default function CheckField({
           name={label}
           id={label}
           className="hidden"
-          checked={ false}
+          checked={
+            checkboxFilter[type] !== undefined &&
+            checkboxFilter[type]?.includes(value)
+          }
           onChange={handleChange}
         />
+
         <span className="checkbox-control"></span>
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type]  ? (
+        {checkboxFilter[type] !== undefined &&
+        checkboxFilter[type]?.includes(value) ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +88,6 @@ export default function CheckField({
     </>
   );
 }
-
 
 // export default function CheckField({
 //   label,

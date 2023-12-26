@@ -1,7 +1,6 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersComponentProps } from "@/types";
-import LeadsFilter from "@/base-components/filter/leads-filter";
 import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
@@ -37,7 +36,6 @@ export default function ServicesFilters({
         handleChange={(value) => setFilter({ ...filter, sortBy: value })}
         value=""
         dropDownIconClassName=""
-      
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
@@ -54,8 +52,8 @@ export default function ServicesFilters({
         id="apply"
         inputType="button"
         text="Apply"
-        onClick={() => console.log()}
-        className="flex items-center gap-x-2 py-2 !h-fit px-[10px] mt-0  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        onClick={handleFilterChange}
+        className="flex items-center gap-x-2 py-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       />
 
       <Button

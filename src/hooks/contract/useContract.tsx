@@ -9,29 +9,32 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
-import { readContract, setContractDetails } from "@/api/slices/contract/contractSlice";
+import {
+  readContract,
+  setContractDetails,
+} from "@/api/slices/contract/contractSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import  { readImage, setImages } from "@/api/slices/imageSlice/image";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 const useContract = () => {
-  const { lastPage, contract, loading, totalCount, contractDetails } = useAppSelector(state => state.contract)
-  const { images } = useAppSelector(state => state.image)
+  const { lastPage, contract, loading, totalCount, contractDetails } =
+    useAppSelector((state) => state.contract);
+  const { images } = useAppSelector((state) => state.image);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
 
-  const { query } = useRouter()
+  const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
     text: "",
     type: "",
-    date:[""],
-    status: query?.filter as string
-
+    date: [],
+    status: query?.filter as string,
   });
   const totalItems = totalCount;
 
@@ -41,44 +44,50 @@ const useContract = () => {
   const { modal } = useAppSelector((state) => state.global);
   useMemo(() => {
     setFilter({
-      ...filter, status: query?.filter as string
-    })
-  }, [query?.filter])
+      ...filter,
+      status: query?.filter as string,
+    });
+  }, [query?.filter]);
   useEffect(() => {
-
-    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-
+    dispatch(
+      readContract({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage));
+        setCurrentPageRows(
+          res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage)
+        );
       }
-    })
-  }, [])
+    });
+  }, []);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-  const handleNotes = (
-    item: string,
-    e?: React.MouseEvent<HTMLSpanElement>
-  ) => {
+  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
     }
-    const filteredLead = contract?.filter((item_) => item_.id === item)
+    const filteredLead = contract?.filter((item_) => item_.id === item);
     if (filteredLead?.length === 1) {
       dispatch(setContractDetails(filteredLead[0]));
-      dispatch(readNotes({ params: { type: "contract", id: filteredLead[0]?.id } }));
+      dispatch(
+        readNotes({ params: { type: "contract", id: filteredLead[0]?.id } })
+      );
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-
     }
   };
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "contract" } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: { id: id, type: "contract" },
+      })
+    );
   };
 
   // function for hnadling the add note
@@ -92,28 +101,39 @@ const useContract = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(setImages([]))
+    dispatch(setImages([]));
 
-    const filteredLead = contract?.find((item_) => item_.id === item)
+    const filteredLead = contract?.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setContractDetails(filteredLead));
-      dispatch(readImage({ params: { type: "contractID", id: filteredLead?.id } }));
+      dispatch(
+        readImage({ params: { type: "contractID", id: filteredLead?.id } })
+      );
       dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
     }
   };
 
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes handleAddNote={handleAddNote} onClose={onClose} leadDetails={contractDetails} />
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={contractDetails}
+      />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote onClose={onClose} handleNotes={handleNotes} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer onClose={onClose} handleImageSlider={handleImageSlider} type={"Contract"} />
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={handleImageSlider}
+        type={"Contract"}
+      />
     ),
-    [ModalType.IMAGE_SLIDER]: <ImageSlider onClose={onClose} details={images} />
+    [ModalType.IMAGE_SLIDER]: (
+      <ImageSlider onClose={onClose} details={images} />
+    ),
   };
 
   const renderModal = () => {

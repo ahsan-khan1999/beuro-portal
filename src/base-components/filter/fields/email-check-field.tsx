@@ -13,7 +13,7 @@ export default function EmailCheckField({
   return (
     <>
       <label
-      id={label}
+        id={label}
         className={`custom-checkbox px-[11px] py-[14px]   h-fit bg-white rounded-md relative cursor-pointer w-fit flex items-center flex-row-reverse gap-x-3 border border-lightDark ${
           checkboxFilter[type] === value ? "border-primary" : ""
         } `}
@@ -22,10 +22,13 @@ export default function EmailCheckField({
           type="checkbox"
           name={label}
           id={label}
-          // defaultChecked={defaultChecked === type}
+          checked={checked ?? false}
           className="hidden"
-          onChange={(e) => onChange(e.currentTarget.value,true)}
+          onChange={(e) =>
+            onChange && onChange(e.currentTarget.value, e.currentTarget.checked)
+          }
         />
+
         <span className="checkbox-control"></span>
 
         <p

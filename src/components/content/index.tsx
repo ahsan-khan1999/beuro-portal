@@ -16,7 +16,6 @@ export default function Content() {
     filter,
     setFilter,
     handleFilterChange,
-    translate,
     loading,
   } = useContent();
 
@@ -30,7 +29,7 @@ export default function Content() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={() => console.log()}
+        handleFilterChange={() => handleFilterChange(filter)}
       />
       <TableLayout>
         <TableHeadings />
