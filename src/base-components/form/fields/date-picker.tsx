@@ -13,11 +13,12 @@ export const DatePicker = ({
   svg,
   success,
   onRemove,
-  dateType
+  dateType,
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = `border border-borderColor rounded-lg w-full  ${success ? "pl-4 pr-10" : "pl-11 pr-4"
-    } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  const defaultClasses = `border border-borderColor rounded-lg w-full  ${
+    success ? "pl-4 pr-10" : "pl-11 pr-4"
+  } py-[10px] h-12 outline-none text-dark text-sm focus:border-primary  `;
   const classes = combineClasses(defaultClasses, className);
   return (
     <>
@@ -33,8 +34,9 @@ export const DatePicker = ({
 
         {svg && (
           <span
-            className={`mr-3 absolute  left-4 z-50 ${(inputFocus && "tests") || "test"
-              }`}
+            className={`mr-3 absolute  left-4 z-50 ${
+              (inputFocus && "tests") || "test"
+            }`}
             dangerouslySetInnerHTML={{ __html: svg }}
           />
         )}
@@ -45,8 +47,8 @@ export const DatePicker = ({
           defaultValue={value && formatDateString(value)}
           id={id}
           onBlurCapture={() => setInputFocus(false)}
-           {...register(name)}
-           min={disablePastDate()}
+          {...register(name)}
+          min={disablePastDate()}
           // style={{
           //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
           //   backgroundPosition: "4% 50%",
