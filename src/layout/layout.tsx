@@ -1,12 +1,8 @@
-import { Footer } from "./footer/footer";
-
 import { MyComponentProp } from "@/types";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
-import { isJSON } from "@/utils/functions";
-import { getCookie } from "cookies-next";
 import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
 
@@ -23,7 +19,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="bg-[#F3F3F3] h-screen">
+      <main className="bg-[#F3F3F3]">
         <Header />
         <SideBar />
         <div className="mr-5">

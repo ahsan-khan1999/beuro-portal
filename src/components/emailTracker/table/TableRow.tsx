@@ -41,7 +41,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${
-                  item.mailStatus === "open"
+                  item.mailStatus === "opend"
                     ? "#45C769"
                     : item.mailStatus === "pending"
                     ? "#FE9244"
