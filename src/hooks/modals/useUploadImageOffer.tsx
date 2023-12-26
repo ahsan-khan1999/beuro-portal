@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { Control, FieldValues, SubmitHandler, UseFormSetValue, useForm } from 'react-hook-form';
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -6,6 +6,8 @@ import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fie
 import { useEffect, useMemo } from "react";
 import { setImageFieldValues } from "@/utils/utility";
 import { createImage, setImages } from '@/api/slices/imageSlice/image';
+import { generateImageValidation } from '@/validation/modalsSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const useUploadImageOffer = (handleImageSlider: Function, type: string) => {
   const { t: translate } = useTranslation();
@@ -15,6 +17,7 @@ export const useUploadImageOffer = (handleImageSlider: Function, type: string) =
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector(state => state.image)
 
+  const schema = generateImageValidation(translate);
 
 
   const {
@@ -23,10 +26,13 @@ export const useUploadImageOffer = (handleImageSlider: Function, type: string) =
     setError,
     setValue,
     formState: { errors },
-  } = useForm();
-  const fields = ImageUploadFormField(loading, control, handleImageSlider);
+  } = useForm({
+    resolver: yupResolver(schema)
+
+  });
+  const fields = ImageUploadFormField(loading, control as Control<any>, handleImageSlider);
   useMemo(() => {
-    setImageFieldValues(setValue, images)
+    setImageFieldValues(setValue as UseFormSetValue<any>, images)
   }, [images?.length])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

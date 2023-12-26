@@ -49,6 +49,8 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
       })
     }
   }, [offerDetails.id])
+  console.log(offerDetails);
+  
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",

@@ -57,7 +57,7 @@ const customerDetailData = ({
             </div>
           </div>
           {
-            staticEnums["CustomerType"][leadDetails?.customerDetail?.customerType] === 1 &&
+            Number(leadDetails?.customerDetail?.customerType) === 1 &&
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name

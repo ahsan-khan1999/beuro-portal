@@ -74,7 +74,6 @@ const useOffers = () => {
     );
   }, []);
   const handleFilterChange = () => {
-    console.log(filter);
     dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
   const onClose = () => {

@@ -80,7 +80,7 @@ const imageSlice = createSlice({
             state.loading = true
         });
         builder.addCase(createImage.fulfilled, (state, action) => {
-            state.images = [...action.payload]
+            if (action.payload) state.images = [...action.payload]
             state.loading = false;
         });
         builder.addCase(createImage.rejected, (state) => {

@@ -602,7 +602,6 @@ export const staticEnums: Record<string, any> = {
     Open: 0,
     Signed: 1,
     Expired: 2,
-    Rejected: 2,
   },
   EmailStatus: {
     Draft: 0,
@@ -1393,7 +1392,7 @@ export const sideBar: SideBar[] = [
     icon: "ContactSupports",
     title: "Contact Supports",
     pathname: "/contact-support",
-    role: [1],
+    role: [1,2],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {

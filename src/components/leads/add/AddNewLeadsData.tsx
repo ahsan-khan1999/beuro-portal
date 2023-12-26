@@ -17,6 +17,7 @@ import { updateQuery } from "@/utils/update-query";
 import { Lead } from "@/types/leads";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { useTranslation } from "next-i18next";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 export enum ComponentsType {
   customerAdd,
@@ -119,7 +120,10 @@ const AddNewLeadsData = () => {
   };
 
   const imageUploadHandler = () => {
+    dispatch(setImages([]))
     dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
+
   };
 
   const handleImageSlider = () => {

@@ -63,3 +63,23 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
 };
 
 
+export const generateImageValidation = (translate: Function) => {
+  return yup.object().shape({
+    "upload_image1": yup.string().required(translate("validationMessages.required")),
+    "upload_image2": yup.string().notRequired(),
+    "upload_image3": yup.string().notRequired(),
+    "upload_image4": yup.string().notRequired(),
+    "upload_image5": yup.string().notRequired(),
+    "upload_image6": yup.string().notRequired(),
+    "upload_image7": yup.string().notRequired(),
+    "upload_image8": yup.string().notRequired(),
+    "upload_image9": yup.string().notRequired(),
+    "upload_image10": yup.string().notRequired(),
+    "upload_image11": yup.string().notRequired(),
+    "upload_image12": yup.string().notRequired(),
+    "upload_image13": yup.string().notRequired(),
+    "upload_image14": yup.string().notRequired(),
+    "upload_image15": yup.string().notRequired(),
+
+  });
+};

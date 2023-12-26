@@ -22,6 +22,7 @@ export default function ContactSupport() {
 
   const route = () => {
     router.push("/dashboard");
+    onClose()
   };
 
   const renderModal = () => {
