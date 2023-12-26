@@ -42,12 +42,12 @@ export default function InvoicesFilter({
   });
 
   const handleSave = () => {
-    setFilter((prev) => ({
-      ...prev,
-      type: extraFilters.type,
-      email: extraFilters.email,
-      price: extraFilters.price,
-    }));
+    // setFilter((prev) => ({
+    //   ...prev,
+    //   type: extraFilters.type,
+    //   email: extraFilters.email,
+    //   price: extraFilters.price,
+    // }));
     hanldeClose();
   };
 
@@ -116,6 +116,9 @@ export default function InvoicesFilter({
                       type={"status"}
                       label={item.label}
                       value={item.type}
+                      checked={false}
+                      onChange={() => console.log()
+                      }
                     />
                   ))}
                 </div>
@@ -135,7 +138,11 @@ export default function InvoicesFilter({
                   </label>
                 </div>
 
-                <PriceInputField label="Low Price" label2="High Price" />
+                <PriceInputField label="Low Price" label2="High Price" 
+                onHighPriceChange={() => console.log()}
+                onLowPriceChange={() => console.log()
+                }
+                />
               </div>
               {/* Price section  */}
             </div>

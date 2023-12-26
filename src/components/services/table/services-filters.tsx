@@ -54,7 +54,7 @@ export default function ServicesFilters({
         id="apply"
         inputType="button"
         text="Apply"
-        onClick={() => handleFilterChange(filter)}
+        onClick={() => console.log()}
         className="flex items-center gap-x-2 py-2 !h-fit px-[10px] mt-0  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       />
 

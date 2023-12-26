@@ -469,7 +469,7 @@ export const filterLead = (
   id: string | string[],
   service: Service[]
 ): Service | Service[] => {
-  let checkedService: Service | Service[] = DEFAULT_SERVICE;
+  let checkedService: any = DEFAULT_SERVICE;
   if (Array.isArray(id)) {
     checkedService = id.map(
       (item) => service.find((item_) => item_.id === item) || DEFAULT_SERVICE

@@ -79,7 +79,8 @@ export default function ServicesFilter({
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To" />
+                  <DatePicker label="From" label2="To" onChangeFrom={() => console.log()
+                  } onChangeTo={() => console.log()}/>
                 </div>
               </div>
               {/* Price section  */}
@@ -96,7 +97,7 @@ export default function ServicesFilter({
                   </label>
                 </div>
 
-                <PriceInputField label="Low Price" label2="High Price" />
+                <PriceInputField label="Low Price" label2="High Price" onHighPriceChange={() => console.log()} onLowPriceChange={() => console.log()}/>
               </div>
               {/* Price section  */}
             </div>

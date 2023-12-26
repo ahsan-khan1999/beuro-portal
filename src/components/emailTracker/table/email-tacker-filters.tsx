@@ -36,7 +36,7 @@ export default function EmailTrackerFilters({
           label="Sort By"
         />
         <Button
-          onClick={() => handleFilterChange(filter)}
+          onClick={() => console.log()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           text="Apply"
           id="apply"

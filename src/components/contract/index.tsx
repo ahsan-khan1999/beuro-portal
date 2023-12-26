@@ -37,7 +37,7 @@ export default function Contract() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => console.log()}
       />
       <TableLayout>
         <TableHeadings />

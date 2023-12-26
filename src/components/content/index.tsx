@@ -30,7 +30,7 @@ export default function Content() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => console.log()}
       />
       <TableLayout>
         <TableHeadings />

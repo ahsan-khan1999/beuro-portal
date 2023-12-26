@@ -29,7 +29,7 @@ export default function ContractFilter({
   const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
     type: "",
     location: "",
-    date:""
+    date:[""]
   });
 
 
@@ -87,7 +87,7 @@ export default function ContractFilter({
               </span>
             </div>
             <div className="">
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between mb-2">
                   <label htmlFor="type" className="font-medium text-base ">
                     Date
@@ -102,7 +102,7 @@ export default function ContractFilter({
                 <div>
                   <DatePicker label="From" label2="To" />
                 </div>
-              </div>
+              </div> */}
 
               {/* payment section  */}
               <div className="mt-5 mb-2">
@@ -117,14 +117,14 @@ export default function ContractFilter({
                     Reset
                   </label>
                 </div>
-                <div className="flex items-center gap-x-10 my-5">
+                {/* <div className="flex items-center gap-x-10 my-5">
                     <RadioField lable="Cash" />
                     <RadioField lable="Online" />
-                  </div>
+                  </div> */}
               </div>
               {/* payment section  */}
               {/* Price section  */}
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Price
@@ -139,7 +139,7 @@ export default function ContractFilter({
                 <div>
                   <PriceInputField label="Low Price" label2="High Price" />
                 </div>
-              </div>
+              </div> */}
               {/* Price section  */}
              
             </div>

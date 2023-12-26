@@ -25,7 +25,7 @@ const TableFunctions = ({
       <EmailTrackerFilters
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => console.log()}
       />
     </div>
   );

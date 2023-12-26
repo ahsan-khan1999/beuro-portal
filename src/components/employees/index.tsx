@@ -31,7 +31,7 @@ export default function Employees() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => console.log()}
       />
       <TableLayout>
         <TableHeadings />

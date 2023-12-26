@@ -24,7 +24,7 @@ export default function EmailCheckField({
           id={label}
           // defaultChecked={defaultChecked === type}
           className="hidden"
-          onChange={(e) => onChange(e.currentTarget.value)}
+          onChange={(e) => onChange(e.currentTarget.value,true)}
         />
         <span className="checkbox-control"></span>
 
