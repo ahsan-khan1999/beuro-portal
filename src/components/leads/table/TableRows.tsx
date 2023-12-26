@@ -38,10 +38,10 @@ const TableRows = ({
             <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
               {item.customerDetail?.email}
             </span>
-            <span className="py-4 flex items-center">
+            <span className="break-all py-4 flex items-center">
               {item.customerDetail?.phoneNumber}
             </span>
-            <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex ">
+            <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex">
               {formatDate(item.createdAt)}
             </span>
             <span className="flex items-center py-4">

@@ -24,10 +24,10 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               {item.id.substring(0, 4)}
             </span>
             <span className="py-4 flex items-center">{item.fullName}</span>
-            <span className="py-4 flex items-center break-all">
+            <span className=" break-all py-4 flex items-center ">
               {item.email}
             </span>
-            <span className="py-4 flex items-center break-all">
+            <span className=" break-all py-4 flex items-center ">
               {item.phoneNumber}
             </span>
             <span className="py-4 flex items-center">{item.designation}</span>
