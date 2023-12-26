@@ -20,7 +20,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(130px,_100%)_minmax(160px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 bg-white rounded-md"
           >
             <span className="py-4 flex items-center">
-              {item.id?.slice(0, 5)}
+              {item?.refID}
             </span>
             <span className="py-4 flex items-center">{item.recipient}</span>
             <span className="break-ll xs:block mlg:hidden xlg:hidden maxSize:flex py-4 items-center">
@@ -41,7 +41,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${
-                  item.mailStatus === "open"
+                  item.mailStatus === "opend"
                     ? "#45C769"
                     : item.mailStatus === "pending"
                     ? "#FE9244"

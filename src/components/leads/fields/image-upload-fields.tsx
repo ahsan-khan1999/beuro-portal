@@ -170,7 +170,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
 
     },
     {
-      containerClass: "flex justify-end mb-0",
+      containerClass: "flex justify-end mb-0 mt-5",
       field: {
         type: Field.button,
         id: "button",

@@ -30,6 +30,7 @@ const EmploysDetails = () => {
             name={employeeDetails?.createdBy}
             isUpdate={isUpdate}
             handleDelete={deleteHandler}
+            refID={employeeDetails?.employeeID}
           />
         </DetailsCard>
         <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">

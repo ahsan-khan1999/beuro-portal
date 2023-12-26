@@ -13,7 +13,7 @@ import { ContentIcon } from "@/assets/svgs/components/sideBar/Content";
 import { MailTrackerIcon } from "@/assets/svgs/components/sideBar/MailTracker";
 import { SettingsIcon } from "@/assets/svgs/components/sideBar/Settings";
 import { ContactSupportsIcon } from "@/assets/svgs/components/sideBar/ContactSupports";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sideBar, staticEnums } from "@/utils/static";
 import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
 import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
@@ -60,10 +60,6 @@ const SideBar = () => {
   // const userRole = 0;
 
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState<number | null>(null);
-
-  console.log(userRole);
-
   const routeChangeHandler = (item: any) => {
     let SUB_MENU: any[] | null = null;
 
@@ -74,7 +70,8 @@ const SideBar = () => {
     setSelected((prev) => ({
       parent: {
         title: item.title,
-        isActive: !prev.parent.isActive,
+        isActive:
+          prev.parent.title === item.title ? !prev.parent.isActive : true,
       },
       child: SUB_MENU,
     }));
@@ -87,9 +84,29 @@ const SideBar = () => {
     });
   };
 
+  useEffect(() => {
+    const currentItem = sideBar.find((item) => {
+      return (
+        item.pathname &&
+        typeof item.pathname === "string" &&
+        router.pathname.startsWith(item.pathname)
+      );
+    });
+
+    if (currentItem) {
+      setSelected((prev) => ({
+        parent: {
+          title: currentItem.title,
+          isActive: true,
+        },
+        child: currentItem.inner || null,
+      }));
+    }
+  }, [router.pathname]);
+
   return (
     <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll">
-      <div className={`pt-6 px-4 pb-8 flex flex-col `} >
+      <div className={`pt-6 px-4 pb-8 flex flex-col `}>
         <div className="space-y-3">
           {sideBar.map((item, index) => {
             return (
@@ -121,12 +138,26 @@ const SideBar = () => {
                         {item.title}
                       </span>
                     </div>
-
                     {item.inner && (
                       <div
                         className={`
-                  cursor-pointer ${isOpen == index ? "rotate-180" : ""}
-                  ${selected.parent.title === item.title && "sidebar-svg"}`}
+      cursor-pointer 
+      ${
+        selected.parent.title === item.title &&
+        selected.parent.isActive &&
+        selected.child &&
+        "rotate-180"
+      }
+      ${selected.parent.title === item.title && "sidebar-svg"}`}
+                        onClick={() => {
+                          if (
+                            selected.parent.title === item.title &&
+                            selected.parent.isActive &&
+                            item.inner
+                          ) {
+                            routeChangeHandler(item);
+                          }
+                        }}
                       >
                         <svg
                           className={` `}
@@ -138,7 +169,12 @@ const SideBar = () => {
                         >
                           <path
                             d="M0.267406 0.598758C0.438678 0.427537 0.670942 0.331351 0.913121 0.331351C1.1553 0.331351 1.38756 0.427537 1.55883 0.598758L6.07975 5.11967L10.6007 0.598758C10.7729 0.43239 11.0036 0.340333 11.2431 0.342413C11.4826 0.344494 11.7116 0.440547 11.881 0.609883C12.0503 0.779219 12.1463 1.00829 12.1484 1.24776C12.1505 1.48723 12.0585 1.71793 11.8921 1.89019L6.72546 7.05681C6.55419 7.22803 6.32193 7.32422 6.07975 7.32422C5.83757 7.32422 5.6053 7.22803 5.43403 7.05681L0.267406 1.89019C0.0961862 1.71891 0 1.48665 0 1.24447C0 1.00229 0.0961862 0.77003 0.267406 0.598758Z"
-                            fill="#8F8F8F"
+                            fill={
+                              selected.parent.title === item.title &&
+                              selected.parent.isActive
+                                ? "#ffffff"
+                                : "#8F8F8F"
+                            }
                           />
                         </svg>
                       </div>
@@ -185,7 +221,7 @@ const SideBar = () => {
           })}
         </div>
       </div>
-      <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "" }`}>
+      <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "mt-16" }`}>
         <Image src={logo} alt="Logo" className="mt-auto pb-32  ml-3 " />
       </div>
     </div>

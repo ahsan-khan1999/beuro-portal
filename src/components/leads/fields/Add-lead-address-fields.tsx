@@ -77,7 +77,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 className: "mb-[10px]",
               },
               field: {
-                className: "pl-4 !border-[#BFBFBF]",
+                className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
                 type: Field.select,
                 id: `country-${i}`,
                 name: `country-${i}`,

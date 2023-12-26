@@ -37,10 +37,10 @@ const useOffers = () => {
     sortBy: "",
     text: "",
     type: "",
-    date: [""],
-    email: [""],
-    payment: "",
-    price: [""],
+    // date: [""],
+    // email: [""],
+    // payment: "",
+    // price: [""],
     status: query?.filter as string,
   });
   const totalItems = totalCount;
@@ -63,6 +63,8 @@ const useOffers = () => {
 
     dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then(
       (res: any) => {
+        console.log(res,"res");
+        
         if (res?.payload) {
           setCurrentPageRows(
             res?.payload?.Offer
@@ -72,7 +74,6 @@ const useOffers = () => {
     );
   }, []);
   const handleFilterChange = () => {
-    console.log(filter);
     dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
   };
   const onClose = () => {

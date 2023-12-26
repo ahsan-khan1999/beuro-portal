@@ -50,7 +50,7 @@ const useServiceDetail = (stage: boolean) => {
   const deleteHandler = () => {
     dispatch(updateModalType({
       type: ModalType.CONFIRM_DELETION,
-      data: { refId: serviceDetails?.id }
+      data: { refId: serviceDetails?.refID,id:serviceDetails?.id }
 
     }
     ));

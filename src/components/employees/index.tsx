@@ -16,7 +16,6 @@ export default function Employees() {
     filter,
     handleFilterChange,
     setFilter,
-    translate,
     loading,
   } = useEmployee();
 
@@ -31,7 +30,7 @@ export default function Employees() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => handleFilterChange}
       />
       <TableLayout>
         <TableHeadings />

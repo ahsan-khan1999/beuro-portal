@@ -67,7 +67,11 @@ export default function useOfferDetails() {
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
+    dispatch(updateModalType({
+      type: ModalType.ADD_NOTE, data:
+
+        { id: id, type: "offer" },
+    }));
   };
 
   // function for hnadling the add note

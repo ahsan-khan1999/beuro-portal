@@ -3,7 +3,8 @@ import { Employee } from "@/types/employee";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
+import { readEmployee, setEmployeeDetails } from "@/api/slices/employee/emplyeeSlice";
+import { DEFAULT_EMPLOYEE } from "@/utils/static";
 
 const useEmployee = () => {
   const [filter, setFilter] = useState<FilterType>({
@@ -23,6 +24,7 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
+    dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE))
     dispatch(
       readEmployee({ params: { filter: filter, page: 1, size: 10 } })
     ).then((res: any) => {
@@ -34,7 +36,7 @@ const useEmployee = () => {
     });
   }, [dispatch]);
   useEffect(() => {
-    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) =>{
+    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
       setCurrentPageRows(response?.payload?.Employee);
 
     })

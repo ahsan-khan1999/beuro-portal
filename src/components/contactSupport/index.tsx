@@ -22,6 +22,7 @@ export default function ContactSupport() {
 
   const route = () => {
     router.push("/dashboard");
+    onClose()
   };
 
   const renderModal = () => {
@@ -29,6 +30,7 @@ export default function ContactSupport() {
   };
 
   const requestSubmitHandler = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 

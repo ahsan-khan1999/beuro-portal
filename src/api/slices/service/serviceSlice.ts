@@ -23,6 +23,7 @@ const initialState: ServiceState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
+    //@ts-expect-error
     serviceDetails: DEFAULT_SERVICE
 }
 

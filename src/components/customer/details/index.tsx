@@ -6,6 +6,7 @@ import SideCard from "../SideCard";
 
 import CustomerForm from "../CustomerForm";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 const CustomerDetails = () => {
   const {
@@ -25,7 +26,7 @@ const CustomerDetails = () => {
     <Layout>
       <DetailsCard>
         <DetailsData
-          date={customerDetail?.date}
+          date={formatDateTimeToDate(customerDetail?.createdAt)}
           id={customerDetail?.refID}
           name={customerDetail?.fullName}
           handlePreviousClick={handlePreviousClick}

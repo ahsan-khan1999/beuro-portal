@@ -114,7 +114,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     value: item?.serviceName,
                   })) || [],
                 control,
-                // value: "",
+                // value: "" ,
                 onItemChange: onCustomerSelect,
                 fieldIndex: i,
               },

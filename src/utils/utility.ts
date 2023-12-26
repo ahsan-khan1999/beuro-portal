@@ -469,7 +469,7 @@ export const filterLead = (
   id: string | string[],
   service: Service[]
 ): Service | Service[] => {
-  let checkedService: Service | Service[] = DEFAULT_SERVICE;
+  let checkedService: any = DEFAULT_SERVICE;
   if (Array.isArray(id)) {
     checkedService = id.map(
       (item) => service.find((item_) => item_.id === item) || DEFAULT_SERVICE
@@ -527,7 +527,7 @@ export function getOfferStatusColor(status: string) {
   )
     return "#45C769";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Expired"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Expire"]
   )
     return "#FF376F";
   else if (

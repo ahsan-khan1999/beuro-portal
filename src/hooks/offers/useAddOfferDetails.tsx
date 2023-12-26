@@ -16,9 +16,10 @@ import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
+  setCustomers,
 } from "@/api/slices/customer/customerSlice";
 import { updateQuery } from "@/utils/update-query";
-import { readLead } from "@/api/slices/lead/leadSlice";
+import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
@@ -70,7 +71,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const customerID = watch("customerID");
   const selectedContent = watch("content");
   const leadID = watch("leadID");
-  
+
   useMemo(() => {
     if (type && customerID)
       dispatch(
@@ -82,9 +83,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails?.id) {
-
+      console.log(offerDetails);
+      
       reset({
-        type: offerDetails?.type,
+        type: "Existing Customer",
         customerID: offerDetails?.leadID?.customerID,
         leadID: offerDetails?.leadID?.id,
         customerType: getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType),
@@ -192,7 +194,15 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (offerDetails?.id) {
       const apiData = { ...data, step: 1, offerId: offerDetails?.id, stage: ComponentsType.addressAdded, isLeadCreated: data?.leadID ? true : false }
       const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));
-      if (res?.payload) onHandleNext(ComponentsType.addressAdded);
+      if (res?.payload) {
+        if (data?.type === "New Customer") {
+          dispatch(setLeads([...lead, res?.payload?.leadID]))
+          dispatch(setCustomers([...customer, { ...res?.payload?.leadID?.customerDetail, id: res?.payload?.leadID?.customerID }]))
+          onHandleNext(ComponentsType.addressAdded);
+        }
+        onHandleNext(ComponentsType.addressAdded);
+
+      }
     } else {
       const apiData = { ...data, step: 1, offerId: null, stage: ComponentsType.addressAdded, isLeadCreated: data?.leadID ? true : false }
       const res = await dispatch(createOffer({ data: apiData, router, setError, translate }));

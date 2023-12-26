@@ -20,7 +20,6 @@ const initialState: EmployeeState = {
     error: {},
     lastPage: 1,
     totalCount: 10,
-    //@ts-expect-error
     employeeDetails: DEFAULT_EMPLOYEE
 
 }

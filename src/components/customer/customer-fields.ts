@@ -63,7 +63,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Your Name",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
           {
@@ -82,7 +81,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Email Address",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
 
@@ -95,7 +93,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -112,7 +110,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",
@@ -154,7 +152,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: "Please Enter Street Number",
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
 
@@ -177,7 +174,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
               register,
               disabled: isUpdate,
-              value: "",
             },
           },
           {

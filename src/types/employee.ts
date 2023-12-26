@@ -18,14 +18,14 @@ export interface Employee {
   action: string;
   createdBy: string;
   employeeID: string;
-  refID: string
 }
 export interface EmployeeDetail {
   date?: string;
   id?: string;
   name?: string;
   isUpdate: boolean;
-  handleDelete: () => void
+  handleDelete: () => void;
+  refID:string
 }
 
 export interface FormDataProps {

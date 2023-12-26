@@ -177,14 +177,14 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
 
   }
   addressformFields.push({
-    containerClass: "mb-0 mt-3 maxSize:mt-[33px]",
+    containerClass: "mb-0 mt-3 maxSize:mt-[28px]",
     field: {
       type: Field.button,
       id: "button",
       text: "",
       inputType: "button",
       className:
-        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px] text-white",
+        "rounded-lg border-[1px] border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] text-white",
       onClick: () => append && append({ address: "" }),
       icon: icon,
     },
