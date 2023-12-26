@@ -2,16 +2,14 @@ import React from "react";
 import TableLayout from "@/layout/TableLayout";
 import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
-import {
-  InvoiceDetailsTableProps,
-} from "@/types/invoice";
+import { InvoiceDetailsTableProps } from "@/types/invoice";
 
 export default function InvoiceDetailsTable({
   collectiveInvoice,
   handlePaymentStatusUpdate,
   handleInvoiceStatusUpdate,
   handleInvoiceEdit,
-  handleRecurringInvoiceEdit
+  handleRecurringInvoiceEdit,
 }: InvoiceDetailsTableProps) {
   return (
     <>

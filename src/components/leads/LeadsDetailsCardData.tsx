@@ -6,27 +6,23 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
-import { formatDate, formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
-import { getKeyByValue } from "@/utils/auth.util";
-import { staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
-import { ComponentsType } from "../offers/add/AddOffersDetailsData";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
-  leadDetails
+  leadDetails,
 }: {
   leadDeleteHandler: Function;
-  leadDetails: Lead
+  leadDetails: Lead;
 }) => {
-
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   return (
     <div className="bg-white rounded-md pt-5 pb-10">
       <div className="flex justify-between items-center  ">
@@ -42,22 +38,23 @@ const LeadsDetailsCardData = ({
           </p>
         </div>
 
-        <div className="flex gap-[22px]">
-          <div className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer" onClick={() => {
-            localStoreUtil.remove_data("offer")
+        <div className="flex items-center gap-[22px]">
+          <div
+            className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer"
+            onClick={() => {
+              localStoreUtil.remove_data("offer");
+              dispatch(setOfferDetails({
+                id: leadDetails?.id,
+                type: "Existing Customer",
+                leadID: { ...leadDetails, customerID: leadDetails?.customerID },
+                serviceDetail: { serviceDetail: leadDetails?.otherServices },
+                addressID: { address: leadDetails?.addressID?.address }
+              }))
+              dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }))
 
-            dispatch(setOfferDetails({
-              id: leadDetails?.id,
-              type: "Existing Customer",
-              leadID: { ...leadDetails, customerID: leadDetails?.customerID },
-              serviceDetail: { serviceDetail: leadDetails?.otherServices },
-              addressID: { address: leadDetails?.addressID?.address }
-            }))
-            dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }))
-
-
-            router.push("/offers/add")
-          }}>
+              router.push("/offers/add");
+            }}
+          >
             <Image src={createOfferIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
               {translate("leads.card_content.create_button")}
@@ -80,7 +77,9 @@ const LeadsDetailsCardData = ({
             <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
               {translate("leads.card_content.lead_id")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">{leadDetails.refID}</span>
+            <span className="font-medium text-[#4B4B4B] text-base">
+              {leadDetails.refID}
+            </span>
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
@@ -109,7 +108,7 @@ const LeadsDetailsCardData = ({
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
