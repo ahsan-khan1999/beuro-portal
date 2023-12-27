@@ -125,4 +125,6 @@ export interface OfferDetailCardProps {
   ) => void;
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
+  handleSendEmail: () => void;
+  isSendEmail: boolean;
 }

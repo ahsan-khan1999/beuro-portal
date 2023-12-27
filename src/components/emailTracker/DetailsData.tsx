@@ -57,7 +57,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.id")}
             </span>
             <span className="font-medium  text-[#4B4B4B] text-base">
-              {emailDetails?.refID}
+              {emailDetails?.id && emailDetails.id.slice(-5)}
             </span>
           </div>
           <div>
@@ -80,15 +80,15 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.recipient")}:
             </span>
-            <span className="font-medium text-[#4B4B4B]  text-base">
+            <span className="font-medium text-[#4B4B4B] text-base break-all">
               {emailDetails?.email}
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+            <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B]  text-base">
+            <span className="font-medium text-[#4B4B4B] text-base">
               {formatDateReverse(emailDetails?.createdAt as string)}
             </span>
           </div>
@@ -107,29 +107,31 @@ const DetailsData = ({
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
-        {
-          emailDetails?.pdf?.map((item) => {
-            let length = item.href?.split("/")?.length -1
+        {emailDetails?.pdf?.map((item) => {
+          let length = item.href?.split("/")?.length - 1;
 
-            return (
-              <div className="my-5 flex items-end" >
-                <Link href={item.href} target="_blank" className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
-                  <Image
-                    src={pdfFileIcon}
-                    alt="PDF_FILE_ICON"
-                    className=" mr-[11px]"
-                  />
-                  <span className=" text-[#BFBFBF] text-base font-normal ">
-                    {item.href?.split("/")[length]}
-                  </span>
-                </Link>
-                &nbsp;,&nbsp;
-
-              </div>
-
-            )
-          })
-        }
+          return (
+            <div className="my-5 flex items-end">
+              <Link
+                href={item.href}
+                target="_blank"
+                className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
+              >
+                <Image
+                  src={pdfFileIcon}
+                  alt="PDF_FILE_ICON"
+                  className=" mr-[11px]"
+                />
+                <span className="text-[#BFBFBF] text-base font-normal">
+                  {item.href?.length > 15
+                    ? `${item.href.slice(0, 15)}...`
+                    : item.href}
+                </span>
+              </Link>
+              &nbsp;,&nbsp;
+            </div>
+          );
+        })}
       </div>
     </>
   );
