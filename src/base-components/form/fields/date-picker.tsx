@@ -32,8 +32,8 @@ export const DatePicker = ({
           />
         )}
 
-        <div className="w-full">
-          <div className="flex border border-borderColor rounded-lg items-center">
+        <div className="w-full relative">
+          <div className="flex border border-borderColor rounded-lg items-center ">
             <input
               type={dateType}
               // value={formatDateString(value)}
@@ -44,7 +44,7 @@ export const DatePicker = ({
               min={disablePastDate()}
               className={`${classes} relative`}
             />
-            <div className=" pr-4 absolute right-2 cursor-pointer">
+            <div className="pr-4 absolute right-2 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
