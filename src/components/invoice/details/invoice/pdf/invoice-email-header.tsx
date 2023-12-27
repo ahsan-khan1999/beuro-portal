@@ -42,7 +42,10 @@ export const InvoiceEmailHeader = ({
               Send via Post
             </span>
           </div>
-          <div className="border-[#C7C7C7] border  rounded-lg px-[13px] py-[7px] flex justify-between items-center cursor-pointer">
+          <div
+            className="border-[#C7C7C7] border  rounded-lg px-[13px] py-[7px] flex justify-between items-center cursor-pointer"
+            onClick={onEmailSend}
+          >
             <Image src={emailIcon} alt="postIcon" />
             <span className="text-[#4B4B4B] text-base font-medium ml-[11px]">
               Send via Email
