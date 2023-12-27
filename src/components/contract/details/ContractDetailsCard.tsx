@@ -175,7 +175,7 @@ const ContractDetailsCard = ({
                   )}
                   selectedItem={contractDetails?.contractStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
+                  dropDownClassName={`border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-2 w-full min-w-[137px]  `}
                   dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
                 />
               )) || (

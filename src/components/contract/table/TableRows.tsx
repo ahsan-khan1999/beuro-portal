@@ -51,10 +51,10 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="flex justify-center items-center  ">
+            <span className="flex justify-center items-center   ">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md text-sm`}
+                  } text-white px-2 py-1 text-center rounded-md text-sm w-full min-w-[90px]`}
               >
                 {item.contractStatus}
               </div>
