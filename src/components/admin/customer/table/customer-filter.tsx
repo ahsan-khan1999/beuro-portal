@@ -16,10 +16,6 @@ export default function CustomerFilter({
   handleFilterChange,
 }: FiltersComponentProps) {
   const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
     typeList,
@@ -47,7 +43,6 @@ export default function CustomerFilter({
             type={"status"}
             label={item.label}
             value={item.type}
-            checked
             onChange={(val) => {}}
           />
         ))}
@@ -67,11 +62,6 @@ export default function CustomerFilter({
       <CustomerFilters
         filter={filter}
         setFilter={setFilter}
-        moreFilter={moreFilter}
-        setMoreFilter={setMoreFilter}
-        handleFilterResetToInitial={handleFilterResetToInitial}
-        handleFilterReset={handleFilterReset}
-        typeList={typeList}
       />
 
       <Button
