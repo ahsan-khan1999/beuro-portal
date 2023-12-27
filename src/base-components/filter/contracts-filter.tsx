@@ -1,49 +1,38 @@
 import React, { SetStateAction, useState } from "react";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { ExtraFiltersType, FilterProps } from "@/types";
+import { FilterProps, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
+import useFilter from "@/hooks/filter/hook";
 
-export default function ContractFilter({
-  filter,
-  moreFilter,
-  setFilter,
-  setMoreFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-  typeList,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
-  };
+export default function ContractFilter({ filter, setFilter }: FilterProps) {
+  const {
+    handleFilterResetToInitial,
+    handleFilterReset,
+    extraFilterss,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+  } = useFilter({ filter, setFilter });
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
-  const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
-    type: "",
-    location: "",
-    date:[],
+  const [moreFilter, setMoreFilter] = useState<{ date: string[] }>({
+    date: [],
   });
 
   const handleSave = () => {
     setFilter((prev) => ({
       ...prev,
-      type: extraFilters.type,
-      location: extraFilters.location,
-      date: extraFilters.date,
+      date: moreFilter.date,
     }));
-    hanldeClose();
+    handleExtraFiltersClose();
   };
 
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -68,7 +57,7 @@ export default function ContractFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
@@ -86,7 +75,7 @@ export default function ContractFilter({
               </span>
             </div>
             <div className="">
-              {/* <div className="mt-5 mb-2">
+              <div className="mt-5 mb-2">
                 <div className="flex justify-between mb-2">
                   <label htmlFor="type" className="font-medium text-base ">
                     Date
@@ -100,27 +89,25 @@ export default function ContractFilter({
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To" />
+                  <DatePicker
+                    label="From"
+                    label2="To"
+                    dateFrom={moreFilter.date[0]}
+                    dateTo={moreFilter.date[1]}
+                    onChangeFrom={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [val, prev.date[1]],
+                      }))
+                    }
+                    onChangeTo={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [prev.date[0], val],
+                      }))
+                    }
+                  />
                 </div>
-              </div> */}
-
-              {/* payment section  */}
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Payment
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}>
-                    Reset
-                  </label>
-                </div>
-                {/* <div className="flex items-center gap-x-10 my-5">
-                    <RadioField lable="Cash" />
-                    <RadioField lable="Online" />
-                  </div> */}
               </div>
             </div>
             <div>

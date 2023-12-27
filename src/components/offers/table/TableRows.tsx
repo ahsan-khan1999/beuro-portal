@@ -1,5 +1,5 @@
-import { OffersTableRowTypes } from "@/types/offers";
 import React from "react";
+import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import {
@@ -21,9 +21,12 @@ const TableRows = ({
   ) => void;
 }) => {
   const router = useRouter();
+
   return (
     <div>
       {dataToAdd?.map((item, index) => {
+        console.log(item.emailStatus);
+
         return (
           <div
             key={index}
@@ -44,7 +47,7 @@ const TableRows = ({
               <div
                 className={`bg-[${getEmailColor(
                   item.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md  w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {item.emailStatus}
               </div>
@@ -53,7 +56,7 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
-                  } text-white px-2 py-1 text-center rounded-md w-[70px] text-sm`}
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {item.paymentType}
               </div>
@@ -61,8 +64,10 @@ const TableRows = ({
 
             <span className="py-4 flex justify-center items-center">
               <div
-                className={`bg-[${getOfferStatusColor(item.offerStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md w-[70px] text-sm`}
+                style={{
+                  backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
+                }}
+                className=" text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm"
               >
                 {item.offerStatus}
               </div>

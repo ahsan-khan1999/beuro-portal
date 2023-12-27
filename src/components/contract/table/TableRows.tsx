@@ -43,11 +43,11 @@ const TableRows = ({
             <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(
-                  item.offerID?.paymentType
+                  item?.paymentType
                 )}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
-                {item.offerID?.paymentType}
+                {item?.paymentType}
               </div>
             </span>
 

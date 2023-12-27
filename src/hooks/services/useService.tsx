@@ -39,7 +39,7 @@ const useService = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (filter: FilterType) => {
+  const handleFilterChange = () => {
     dispatch(readService({ params: { filter: filter, page: currentPage, size: 10 } }))
   };
   return {

@@ -9,11 +9,6 @@ const TableFunctions = ({
   handleFilterChange,
 }: FiltersComponentProps) => {
   const { t: translate } = useTranslation();
-  function onInputChange(text: string) {}
-
-  const handleButtonClick = (key: string, value: boolean) => {
-    setFilter({ ...filter, [key]: value });
-  };
 
   return (
     <div className="flex flex-col xMaxSize:flex-row justify-between xMaxSize:items-center  gap-y-3 mb-4">

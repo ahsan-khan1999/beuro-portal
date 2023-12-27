@@ -24,7 +24,7 @@ const ViewMails = () => {
   const { t: translate } = useTranslation();
   useEffect(() => {
     if (id) {
-      dispatch(readEmailDetail({ params: { filter: id } }))
+      dispatch(readEmailDetail({ params: { filter: id } }));
     }
   }, [id]);
 
@@ -32,7 +32,7 @@ const ViewMails = () => {
     dispatch(
       updateModalType({
         type: ModalType.CONFIRM_DELETION,
-        data: { refId: emailDetails?.id },
+        data: { refId: emailDetails?.id && emailDetails.id.slice(-5) },
       })
     );
   };
@@ -46,7 +46,6 @@ const ViewMails = () => {
   };
 
   const routeHandler = async () => {
-
     const res = await dispatch(
       deleteEmail({ data: emailDetails, router, translate })
     );

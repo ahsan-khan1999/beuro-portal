@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
+import useFilter from "@/hooks/filter/hook";
 
-export default function ServicesFilter({
-  moreFilter,
-  setMoreFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
+export default function ServicesFilter({ filter, setFilter }: FilterProps) {
+  const [moreFilters, setMoreFilters] = useState<{
+    date: string[];
+    price: string[];
+  }>({
+    date: filter?.date || [],
+    price: filter.price || [],
+  });
+  const {
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+    extraFilterss,
+  } = useFilter({ filter, setFilter });
+
+  const handleSave = () => {
+    setFilter((prev) => ({ ...prev, ...moreFilters }));
+    handleExtraFiltersClose();
   };
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const handleLowPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [val, prev.price[1]],
+    }));
+  };
 
+  const handleHighPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [prev.price[0], val],
+    }));
+  };
+
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -46,7 +71,7 @@ export default function ServicesFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
@@ -78,8 +103,24 @@ export default function ServicesFilter({
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To" onChangeFrom={() => console.log()
-                  } onChangeTo={() => console.log()}/>
+                  <DatePicker
+                    label="From"
+                    label2="To"
+                    dateFrom={moreFilters.date[0]}
+                    dateTo={moreFilters.date[1]}
+                    onChangeFrom={(val) =>
+                      setMoreFilters((prev) => ({
+                        ...prev,
+                        date: [val, prev.date[1]],
+                      }))
+                    }
+                    onChangeTo={(val) =>
+                      setMoreFilters((prev) => ({
+                        ...prev,
+                        date: [prev.date[0], val],
+                      }))
+                    }
+                  />
                 </div>
               </div>
               {/* Price section  */}
@@ -97,17 +138,22 @@ export default function ServicesFilter({
                   </label>
                 </div>
 
-                <PriceInputField label="Low Price" label2="High Price" onHighPriceChange={() => console.log()} onLowPriceChange={() => console.log()}/>
+                <PriceInputField
+                  label="Low Price"
+                  label2="High Price"
+                  lowPrice={moreFilters.price[0]}
+                  highPrice={moreFilters.price[1]}
+                  onHighPriceChange={handleHighPriceChange}
+                  onLowPriceChange={handleLowPriceChange}
+                />
               </div>
               {/* Price section  */}
             </div>
             <div>
               <BaseButton
                 buttonText="Save"
-                onClick={() => {
-                  setMoreFilter(!moreFilter);
-                }}
-                containerClassName="bg-primary my-5 px-8 py-2"
+                onClick={handleSave}
+                containerClassName="bg-primary my-6 px-8 py-2"
                 textClassName="text-white"
               />
             </div>

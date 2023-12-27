@@ -57,7 +57,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.id")}
             </span>
             <span className="font-medium  text-[#4B4B4B] text-base">
-              {emailDetails?.refID}
+              {emailDetails?.id && emailDetails.id.slice(-5)}
             </span>
           </div>
           <div>
@@ -87,15 +87,15 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.recipient")}:
             </span>
-            <span className="font-medium text-[#4B4B4B]  text-base">
+            <span className="font-medium text-[#4B4B4B] text-base break-all">
               {emailDetails?.email}
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+            <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B]  text-base">
+            <span className="font-medium text-[#4B4B4B] text-base">
               {formatDateReverse(emailDetails?.createdAt as string)}
             </span>
           </div>
@@ -128,8 +128,10 @@ const DetailsData = ({
                   alt="PDF_FILE_ICON"
                   className=" mr-[11px]"
                 />
-                <span className=" text-[#BFBFBF] text-base font-normal ">
-                  {item.href?.split("/")[length]}
+                <span className="text-[#BFBFBF] text-base font-normal">
+                  {item.href?.length > 15
+                    ? `${item.href.slice(0, 15)}...`
+                    : item.href}
                 </span>
               </Link>
               &nbsp;,&nbsp;

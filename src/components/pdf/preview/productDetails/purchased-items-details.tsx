@@ -17,13 +17,14 @@ export const ProductPurchasedItemsDetails = ({
   isShowTotal,
   templateSettings,
   totalPages,
+  isOffer,
 }: PurchasedItemsDetailsProps) => {
   return (
     <div>
       <DocumentHeader {...headerDetails} />
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
-        <MovingDetails {...movingDetails} />
+        <MovingDetails {...movingDetails} isOffer={isOffer} />
         <ProcutItemHeader />
         {serviceItem?.map((item,index) => (
           <ProductItem {...item} key={index} />
