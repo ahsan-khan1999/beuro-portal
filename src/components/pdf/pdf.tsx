@@ -56,6 +56,7 @@ export const Pdf = <T,>({
           totalPages={totalPages}
           currPage={totalPages}
           isOffer={pdfData.isOffer}
+          handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
         />
         {isQr && (
           <PaymentQRCodeDetails

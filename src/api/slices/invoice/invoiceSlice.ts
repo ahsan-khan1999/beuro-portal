@@ -239,10 +239,25 @@ export const sendInvoiceEmail: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
+            alert("in")
             await apiServices.sendInvoiceEmail(data);
             return true;
         } catch (e: any) {
             setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const updateInvoiceContent: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/update/content", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.updateInvoiceContent(data);
+            return true;
+        } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
         }
@@ -470,6 +485,16 @@ const InvoiceSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(sendInvoiceEmail.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(updateInvoiceContent.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateInvoiceContent.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateInvoiceContent.rejected, (state) => {
             state.loading = false
         });
 

@@ -6,7 +6,6 @@ import { useOutsideClick } from "@/utils/hooks";
 import { PriceInputField } from "./fields/price-input-field";
 import EmailCheckField from "./fields/email-check-field";
 import useFilter from "@/hooks/filter/hook";
-import CheckField from "./fields/check-field";
 
 export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
   const {

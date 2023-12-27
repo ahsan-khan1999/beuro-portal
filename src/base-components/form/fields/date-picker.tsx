@@ -25,7 +25,7 @@ export const DatePicker = ({
       <div className={`relative w-full flex items-center`}>
         {svg && (
           <span
-            className={`mr-3 absolute  left-4 z-50 ${
+            className={`mr-3 absolute left-4 z-50 ${
               (inputFocus && "tests") || "test"
             }`}
             dangerouslySetInnerHTML={{ __html: svg }}

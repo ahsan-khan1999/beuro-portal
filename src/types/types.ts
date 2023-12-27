@@ -627,6 +627,9 @@ export interface MovingDetailsProps {
   address: CustomerAddress[];
   workDates: DateRangeProps[];
   isOffer?: boolean;
+  handleTitleUpdate?: (value: string) => void;
+  handleDescriptionUpdate?: (value: string) => void;
+
 }
 export interface ProductItemProps {
   title: string;
@@ -738,12 +741,27 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
+  
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
+  contractTitle?: string;
+
   workerName?: string;
   contentName?: string;
   contractStatus?: string;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost?: () => void;
+  onPrint: () => void;
+  onDownload: () => void;
+}
+
+export interface ContractEmailHeaderProps {
+  contractTitle: string;
+  worker: string;
+  offerNo?: string;
+  emailStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
   onSendViaPost?: () => void;
@@ -762,6 +780,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   qrCode: qrCode;
   aggrementDetails: string;
   isOffer?: boolean;
+  id?:string
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -822,10 +841,22 @@ export interface AggrementProps {
   totalPages: number;
   currPage: number;
   isOffer?: boolean;
+  handleDescriptionUpdate?: (value: string) => void
 }
 
 export interface FiltersComponentProps {
   filter: FilterType;
   setFilter: SetStateAction<any>;
   handleFilterChange: () => void;
+}
+export interface ContractEmailHeaderProps {
+  contractNo?: string;
+  contractStatus?: string;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onDownload: () => void;
+  onPrint: () => void;
+  worker: string;
+  contractTitle: string;
+
 }

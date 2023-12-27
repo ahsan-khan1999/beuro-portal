@@ -87,7 +87,9 @@ const SERVICE_URLS = {
   plan: "/plan",
   adminSettings: "/setting/update-admin-password/",
   changeStatus: "/user/change-status/",
-  addSignature: "/offer/add-signature/"
+  addSignature: "/offer/add-signature/",
+  contractContent: "/contract/",
+  invoiceContent: "/invoice/invoice-collection/update-content/"
 
 };
 
@@ -414,6 +416,8 @@ const createPlan = (data) =>
 
 const updatePlan = (data) =>
   put(SERVICE_URLS.plan + `/${data?.id}`, data, { feature: featureConstants.login });
+const choosePlan = (data) =>
+  put(SERVICE_URLS.choosePlan + `${data?.id}`, data, { feature: featureConstants.login });
 const deletePlan = (data) =>
   del(SERVICE_URLS.plan + `/${data?.id}`, {}, { feature: featureConstants.login });
 
@@ -424,6 +428,11 @@ const updateUserStatus = (data) =>
 
 const createSignature = (data) =>
   put(SERVICE_URLS.addSignature + `${data?.id}`, data, { feature: featureConstants.login });
+
+const updateContractContent = (data) =>
+  put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });
+const updateInvoiceContent = (data) =>
+  put(SERVICE_URLS.invoiceContent + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -559,6 +568,9 @@ const apiServices = {
   deletePlan,
   updateAdminSettings,
   updateUserStatus,
-  createSignature
+  createSignature,
+  choosePlan,
+  updateContractContent,
+  updateInvoiceContent
 };
 export default apiServices;

@@ -11,9 +11,11 @@ const CustomCKEditor = dynamic(
 export const AggrementTerms = ({
   aggrementDetails,
   isOffer,
+  handleDescriptionUpdate,
 }: {
   aggrementDetails: string;
   isOffer?: boolean;
+  handleDescriptionUpdate?: (value: string) => void
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(aggrementDetails);
@@ -29,12 +31,14 @@ export const AggrementTerms = ({
   };
 
   const handleSaveClick = () => {
+    handleDescriptionUpdate && handleDescriptionUpdate(editedText)
     setIsEditing(false);
     // Here, ideally, you would also handle saving editedText to a server or state management
   };
 
   const handleCancelClick = () => {
-    setEditedText(aggrementDetails); // Revert to the original text
+    setEditedText(aggrementDetails);
+     // Revert to the original text
     setIsEditing(false);
   };
 

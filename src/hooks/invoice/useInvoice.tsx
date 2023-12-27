@@ -48,13 +48,13 @@ const useInvoice = () => {
   }, [query?.filter]);
 
   useEffect(() => {
-    dispatch(
-      readInvoice({ params: { filter: filter, page: 1, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Invoice);
-      }
-    });
+    // dispatch(
+    //   readInvoice({ params: { filter: filter, page: 1, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Invoice);
+    //   }
+    // });
   }, []);
   const handleFilterChange = () => {
     console.log(filter);

@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "@/components/pricing/Cards";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readPlan } from "@/api/slices/company/companySlice";
 
 const Pricing = () => {
   const [planTime, setPlanTime] = useState("Monthly");
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(readPlan({ params: { filter: {}, page: 1, size: 10 } }))
+  }, [])
+
   return (
     <div className="flex flex-col justify-center min-h-screen">
       <div className="mx-auto max-w-[950px]   shadow-loginCard pt-[62px] pb-11 px-[52px] rounded-2xl">
@@ -20,19 +27,17 @@ const Pricing = () => {
           <div className="border-[#00000012]  border-[0.3px] bg-white rounded-full max-w-[139px] flex   items-center space-x-1 p-[3px] text-xs w-fit h-fit font-semibold filter-shadow  text-[#1E1E1EAD]">
             <span
               onClick={() => setPlanTime("Monthly")}
-              className={`px-[10px] py-[6px] ${
-                planTime.includes("Monthly") &&
+              className={`px-[10px] py-[6px] ${planTime.includes("Monthly") &&
                 " pricing-gradient text-white rounded-full"
-              }   cursor-pointer`}
+                }   cursor-pointer`}
             >
               Monthly
             </span>
             <span
               onClick={() => setPlanTime("Yearly")}
-              className={`px-[10px] py-[6px] ${
-                planTime.includes("Yearly") &&
+              className={`px-[10px] py-[6px] ${planTime.includes("Yearly") &&
                 " pricing-gradient text-white rounded-full"
-              }   cursor-pointer`}
+                }   cursor-pointer`}
             >
               Yearly
             </span>

@@ -2,7 +2,7 @@ import React from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
@@ -61,12 +61,17 @@ const LeadsDetailsCardData = ({
             </p>
           </div>
           <Image src={printerIcon} alt="printer_icon" />
+          <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
             onClick={() => leadDeleteHandler()}
+            width={16}
+            height={20}
           />
+          </span>
+          
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />

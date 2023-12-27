@@ -184,12 +184,27 @@ export const updateCompanyStatus: AsyncThunk<boolean, object, object> | any =
 
         try {
 
-         
+
             await apiServices.updateUserStatus(data);
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+
+export const chooseCompanyPlan: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("company/plan/update", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+
+            await apiServices.choosePlan(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
         }
     });
@@ -317,6 +332,15 @@ const companySlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updateCompanyStatus.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(chooseCompanyPlan.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(chooseCompanyPlan.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(chooseCompanyPlan.rejected, (state) => {
             state.loading = false
         })
     },
