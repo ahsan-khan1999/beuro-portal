@@ -88,6 +88,7 @@ interface InvoiceOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
+  createdBy: User;
 }
 
 interface InvoiceContractDetails {

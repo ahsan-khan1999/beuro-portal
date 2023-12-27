@@ -24,7 +24,7 @@ const OfferTabs = ({
     <>
       <div className="flex justify-between gap-3">
         <span
-          className={`h-fit whitespace-nowrap rounded-lg py-[11px] border px-4 w-fit text-lg font-medium flex items-center bg-white ${
+          className={`h-fit whitespace-nowrap rounded-lg py-[11px] border px-4 w-fit text-lg font-medium flex items-center bg-white min-w-[45px] ${
             isSelected
               ? "border-[#4A13E7] text-primary"
               : "border-[#EBEBEB] text-EBEBEB"
@@ -36,7 +36,7 @@ const OfferTabs = ({
           onClick={() =>
             isToggle ? handleClickScroll(name) : setTabType(selectedTab)
           }
-          className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-4 w-full text-lg font-medium flex items-center bg-white ${
+          className={`h-fit min-w-[226px] whitespace-nowrap rounded-lg py-[10px] border px-4 w-full text-lg font-medium flex items-center bg-white ${
             isSelected
               ? "border-[#4A13E7] text-primary"
               : "border-[#EBEBEB] text-EBEBEB"

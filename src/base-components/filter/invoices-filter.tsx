@@ -126,7 +126,7 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                 </div>
                 <div className="flex items-center gap-x-3 mt-4  ">
                   {checkbox.map((item, idx) => (
-                    <CheckField
+                    <EmailCheckField
                       key={idx}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}

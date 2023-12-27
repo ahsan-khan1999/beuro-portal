@@ -24,7 +24,7 @@ const AddFollowUp = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[960px] min-h-auto max-h-fit">
+        containerClassName="max-w-[960px] min-h-auto max-h-fit ">
         <AnimatePresence>
           <motion.div
             className="relative flex flex-col px-[76px] pt-[30px] pb-[47px]"

@@ -222,6 +222,7 @@ const PdfPriview = () => {
               },
               aggrementDetails:
                 offerDetails?.content?.offerContent?.description || "",
+              isOffer: true,
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
