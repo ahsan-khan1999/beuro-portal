@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
 import { CheckBoxType, FilterProps } from "@/types";
@@ -270,7 +270,8 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}>
+                    onClick={() => handleFilterReset("type", "None")}
+                  >
                     Reset
                   </label>
                 </div>

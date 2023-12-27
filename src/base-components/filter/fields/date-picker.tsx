@@ -16,10 +16,10 @@ const DatePicker = ({
   onChangeFrom: (val: string) => void;
 }) => {
   return (
-    <div className="flex justify-between items-center">
-      <div>
+    <div className="flex items-center gap-x-3">
+      <div className="w-full">
         <label htmlFor="datepicker">{label}</label>
-        <div className="relative  mt-2">
+        <div className="relative mt-2 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -38,7 +38,7 @@ const DatePicker = ({
             name="datepicker"
             type="date"
             value={dateFrom}
-            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
+            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block min-w-[170px] w-full pl-2.5 p-2.5"
             placeholder="Select date"
             onChange={(e) =>
               onChangeFrom && onChangeFrom(e.currentTarget.value)
@@ -46,7 +46,7 @@ const DatePicker = ({
           />
         </div>
       </div>
-      <div>
+      <div className="w-full">
         <label htmlFor="datepicker">{label2}</label>
         <div className="relative  mt-2">
           <svg
@@ -67,7 +67,7 @@ const DatePicker = ({
             name="datepicker"
             type="date"
             value={dateTo}
-            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
+            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block min-w-[170px] w-full pl-2.5 p-2.5"
             placeholder="Select date"
             onChange={(e) =>
               onChangeFrom && onChangeFrom(e.currentTarget.value)

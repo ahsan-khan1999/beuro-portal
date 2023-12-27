@@ -32,8 +32,8 @@ export const DatePicker = ({
           />
         )}
 
-        <div className="w-full relative">
-          <div className="flex border border-borderColor rounded-lg items-center ">
+        <div className="w-full">
+          <div className="flex border border-borderColor rounded-lg items-center">
             <input
               type={dateType}
               // value={formatDateString(value)}

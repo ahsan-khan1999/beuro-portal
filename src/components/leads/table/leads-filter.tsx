@@ -2,11 +2,10 @@ import LeadsFilters from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 
@@ -17,7 +16,6 @@ export default function LeadsFilter({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
-  // const [isOpen, setIsOpen] = useState(false);
   const checkbox: CheckBoxType[] = [
     { label: translate("leads.table_functions.open"), type: "open" },
     { label: translate("leads.table_functions.close"), type: "close" },
@@ -73,7 +71,6 @@ export default function LeadsFilter({
           text="Apply"
           onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-
         />
 
         <Button

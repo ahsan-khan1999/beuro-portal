@@ -772,8 +772,8 @@
     "button": "Done"
   },
   "contact_support": {
+    "heading": "Contact & Support",
     "main_heading": "Submit your request",
-    "form_heading": "Submit your request",
     "form_fields": {
       "full_name": "Full Name",
       "email_address": "Email Address",
@@ -1602,7 +1602,6 @@
       "link": "Or copy link",
       "copy_button": "Copy",
       "copied_button": "Copied"
-
     },
     "are_you_modal": {
       "main_heading": "Are Your Sure",

@@ -111,7 +111,6 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
               </span>
             </div>
             <div className="">
-              {/* email section  */}
               <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -139,8 +138,6 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                   ))}
                 </div>
               </div>
-              {/* email section  */}
-              {/* Price section  */}
               <div className="mt-5 mb-2">
                 <div className="flex justify-between mb-2">
                   <label htmlFor="type" className="font-medium text-base">
@@ -164,7 +161,6 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                   onLowPriceChange={handleLowPriceChange}
                 />
               </div>
-              {/* Price section  */}
             </div>
             <div>
               <BaseButton

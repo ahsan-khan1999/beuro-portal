@@ -1,45 +1,32 @@
 import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps } from "@/types";
+import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
+import InputField from "./fields/input-field";
 import useFilter from "@/hooks/filter/hook";
-export default function ContractsFilter({ filter, setFilter }: FilterProps) {
+
+export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
+  const [moreFilters, setMoreFilters] = useState<{
+    date: string[];
+    price: string[];
+  }>({
+    date: filter?.date || [],
+    price: filter.price || [],
+  });
   const {
-    extraFilterss,
     handleFilterResetToInitial,
     handleFilterReset,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
+    extraFilterss,
   } = useFilter({ filter, setFilter });
-
-  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  const [moreFilters, setMoreFilters] = useState<{
-    date: string[];
-    payment: string;
-    price: string[];
-  }>({
-    date: filter?.date || [],
-    payment: "",
-    price: [],
-  });
 
   const handleSave = () => {
     setFilter((prev) => ({ ...prev, ...moreFilters }));
     handleExtraFiltersClose();
   };
-
-  const checkbox: CheckBoxType[] = [
-    { label: "Send", type: "send" },
-    {
-      label: "Draft",
-      type: "draft",
-    },
-    { label: "Failed", type: "failed" },
-  ];
 
   const handleLowPriceChange = (val: string) => {
     setMoreFilters((prev) => ({
@@ -54,6 +41,8 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
       price: [prev.price[0], val],
     }));
   };
+
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -134,67 +123,36 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
                   />
                 </div>
               </div>
-              {/* payment section  */}
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Payment
+              <div>
+                <div className="flex justify-between mt-6">
+                  <label htmlFor="type" className=" ">
+                    Location
                   </label>
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("location", "")}
                   >
                     Reset
                   </label>
                 </div>
-                <div className="flex items-center gap-x-10 my-5">
-                    <RadioField
-                      lable="Cash"
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                      checked={moreFilters.payment === "Cash"}
-                    />
-                    <RadioField
-                      lable="Online"
-                      checked={moreFilters.payment === "Online"}
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                    />
-                  </div>
-              </div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <PriceInputField
-                    label="Low Price"
-                    label2="High Price"
-                    lowPrice={moreFilters.price[0]}
-                    highPrice={moreFilters.price[1]}
-                    onHighPriceChange={handleHighPriceChange}
-                    onLowPriceChange={handleLowPriceChange}
-                  />
-                </div>
+
+                <InputField
+                  iconDisplay={false}
+                  handleChange={(value) =>
+                    setMoreFilters((prev) => ({ ...prev, location: value }))
+                  }
+                  value={filter.location || ""}
+                  textClassName="border border-black min-h-[42px]"
+                  containerClassName=" my-2"
+                />
               </div>
             </div>
             <div>
               <BaseButton
                 buttonText="Save"
                 onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
+                containerClassName="bg-primary my-6 px-8 py-2"
                 textClassName="text-white"
               />
             </div>
