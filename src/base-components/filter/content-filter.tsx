@@ -27,6 +27,9 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
     }));
     handleExtraFiltersClose();
   };
+
+
+  console.log(moreFilter.date)
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -73,7 +76,7 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
               </span>
             </div>
             <div className="">
-              <div className="mt-5 mb-2">
+            <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Date
@@ -86,7 +89,26 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
                     Reset
                   </label>
                 </div>
-                <div>{/* <DatePicker label="From" label2="To" /> */}</div>
+                <div>
+                  <DatePicker
+                    label="From"
+                    label2="To"
+                    dateFrom={moreFilter.date[0]}
+                    dateTo={moreFilter.date[1]}
+                    onChangeFrom={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [val, prev.date[1]],
+                      }))
+                    }
+                    onChangeTo={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [prev.date[0], val],
+                      }))
+                    }
+                  />
+                </div>
               </div>
             </div>
 

@@ -8,7 +8,6 @@ import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
 import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
-import CheckField from "./fields/check-field";
 import EmailCheckField from "./fields/email-check-field";
 
 export default function OfferFilter({ filter, setFilter }: FilterProps) {

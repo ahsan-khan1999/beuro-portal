@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import printerIcon from "@/assets/svgs/printer_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useTranslation } from "next-i18next";
 
 const DetailsData = ({
@@ -11,7 +11,7 @@ const DetailsData = ({
   id,
   name,
   handlePreviousClick,
-  handleDelete
+  handleDelete,
 }: CustomerDetail) => {
   const { t: translate } = useTranslation();
   return (
@@ -27,7 +27,16 @@ const DetailsData = ({
         </div>
         <div className="flex items-center gap-x-5">
           <Image src={printerIcon} alt="printerIcon" />
-          <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={handleDelete}/>
+          <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={handleDelete}
+              width={16}
+              height={20}
+            />
+          </span>
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -38,14 +47,14 @@ const DetailsData = ({
             <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
-          {translate("customers.card_content.created_by")}:
+            {translate("customers.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
               &nbsp;&nbsp;{name}
             </span>
           </h3>
         </div>
         <h3 className="text-[#4D4D4D] mt-4">
-        {translate("customers.card_content.created_date")}:
+          {translate("customers.card_content.created_date")}:
           <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{date}</span>
         </h3>
       </div>
