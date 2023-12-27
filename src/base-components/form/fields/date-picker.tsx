@@ -41,7 +41,7 @@ export const DatePicker = ({
         )}
 
        <div >
-      <div className="flex border border-borderColor rounded-lg items-center ">
+      <div className="flex border border-borderColor rounded-lg items-center  ">
       <input
           type={dateType}
           // value={formatDateString(value)}
@@ -54,9 +54,9 @@ export const DatePicker = ({
           //   backgroundImage: 'url("@/assets/svgs/calender.svg")',
           //   backgroundPosition: "4% 50%",
           // }}
-          className={`${classes} relative`}
+          className={`${classes} relative w-full`}
         />
-        <div className=" pr-4 ">
+        <div className=" pr-4 absolute right-0">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
