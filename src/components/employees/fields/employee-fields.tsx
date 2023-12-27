@@ -28,8 +28,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
-                }`,
+              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -47,8 +48,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !!border-borderColor border border-dark focus:!border-primary ${!isUpdate && "!border-light"
-                }`,
+              className: `!p-4 !border-[#BFBFBF] border border-dark focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "designation",
               name: "designation",
@@ -77,8 +79,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.input,
-              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
-                }`,
+              className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               inputType: "text",
               id: "email",
               name: "email",
@@ -96,14 +99,15 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.phone,
-              className: `!border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
-                }`,
+              className: `!border-[#BFBFBF] focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               id: "phoneNumber",
               name: "phoneNumber",
               disabled: isUpdate,
               control,
               country: "ch",
-              value: employeeDetails && employeeDetails?.phoneNumber
+              value: employeeDetails && employeeDetails?.phoneNumber,
             },
           },
           {
@@ -115,16 +119,15 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
             field: {
               type: Field.phone,
-              className: `!border-[#BFBFBF] focus:!border-primary ${!isUpdate && "!border-light"
-                }`,
+              className: `!border-[#BFBFBF] focus:!border-primary ${
+                !isUpdate && "!border-light"
+              }`,
               id: "mobileNumber",
               name: "mobileNumber",
               disabled: isUpdate,
               control,
               country: "ch",
-              value: employeeDetails && employeeDetails?.mobileNumber
-
-
+              value: employeeDetails && employeeDetails?.mobileNumber,
             },
           },
         ],
@@ -145,8 +148,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "button",
               text: `${translate("employees.details.cancel_button")}`,
               inputType: "button",
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] w-fit h-auto text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               onClick: handleUpdateCancel,
             },
           },
@@ -157,8 +161,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "button",
               text: `${translate("employees.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },

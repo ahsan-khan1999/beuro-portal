@@ -86,7 +86,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } min-w-[90px] w-full rounded-lg px-4 py-[3px] flex items-center `}
+                }  min-w-[90px] w-full rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}
