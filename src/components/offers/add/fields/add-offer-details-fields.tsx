@@ -478,11 +478,11 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "flex flex-wrap gap-x-3 mb-3 items-center",
+        className: "flex flex-wrap gap-x-3 gap-y-3 mb-3 items-center",
         id: `date`,
         children: [
           {
-            containerClass: "mb-0 ",
+            containerClass: "mb-0",
             label: {
               text: "Start Date",
               htmlFor: `date.${i}.startDate`,
@@ -490,7 +490,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
+              className: "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.startDate`,
               name: `date.${i}.startDate`,
 
@@ -507,7 +507,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+              className: "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
               name: `date.${i}.endDate`,
               remove: i > 0 && "Remove",
               onRemove: () => handleRemoveDateField(i),
@@ -520,14 +520,14 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-5 -ml-4 ",
+    containerClass: "mb-0 mlg:mt-5 mlg:-ml-4 mt-0 -ml-0",
     field: {
       type: Field.button,
       id: "button",
       text: "",
       inputType: "submit",
       className:
-        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px]   text-white",
+        "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4 w-[40px] h-[40px]  text-white",
       onClick: () => OnClick({ startDate: "", endDate: "" }),
       icon: icon,
     },

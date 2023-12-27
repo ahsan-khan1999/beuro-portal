@@ -64,7 +64,14 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.status")}:
             </span>
-            <span className="font-medium text-base text-white px-2 py-1 text-center rounded-md  w-[70px] bg-[#45C769]">
+            <span
+              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md  min-w-[70px] bg-[${
+                emailDetails?.mailStatus === "opend"
+                  ? "#45C769"
+                  :  emailDetails?.mailStatus === "pending"
+                  ? "#FE9244"
+                  : "#ff376f"
+              }]`}>
               {emailDetails?.mailStatus}
             </span>
           </div>
@@ -115,8 +122,7 @@ const DetailsData = ({
               <Link
                 href={item.href}
                 target="_blank"
-                className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
-              >
+                className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
                 <Image
                   src={pdfFileIcon}
                   alt="PDF_FILE_ICON"
