@@ -22,13 +22,13 @@ export const ProductItemFooter = ({
       </div>
 
       <div>
-        <div className="flex gap-[77px]">
+        <div className="flex gap-[77px] w-full">
           <div className="flex flex-col gap-y-[10px] w-full">
-            <div className="flex justify-between">
+            <div className="flex justify-between w-full">
               <span className="text-[#1E1E1E] text-base font-medium">
                 Sub Total
               </span>
-              <span className="text-[#1E1E1E] text-base font-medium">
+              <span className="text-[#1E1E1E] text-base font-medium self-end">
                 {subTotal}
               </span>
             </div>

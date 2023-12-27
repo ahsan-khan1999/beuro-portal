@@ -31,7 +31,6 @@ const useLeads = () => {
     location: "",
     sortBy: "",
     text: "",
-    type: "",
     date: ["",""],
     status: query?.filter as string,
   });
@@ -66,12 +65,9 @@ const useLeads = () => {
     );
   };
 
-  // Function for close the modal
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-
-  // Function for handling the modal for exiting notes
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();

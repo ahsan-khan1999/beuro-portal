@@ -14,9 +14,6 @@ const TableFunctions = ({
   handleFilterChange: () => void;
 }) => {
   const { t: translate } = useTranslation();
-
-  function onInputChange(text: string) {}
-
   return (
     <div className="flex flex-col mlg:flex-row justify-between mlg:items-center mb-4 gap-y-3">
       <h1 className="text-xl text-[#222B45] ">

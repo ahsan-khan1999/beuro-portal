@@ -10,7 +10,7 @@ const useEmployee = () => {
     location: "",
     sortBy: "",
     text: "",
-    type: "",
+    date: [],
   });
   const { employee, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.employee

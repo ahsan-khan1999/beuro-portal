@@ -58,6 +58,98 @@ export interface OffersTableRowTypes {
   discountDescription: string;
 }
 
+interface Address {
+  country: string;
+  description: string;
+  postalCode: string;
+  streetNumber: string;
+}
+
+interface InvoiceAddressDetails {
+  address: Address[];
+}
+interface InvoiceContentDetails {
+  id: string;
+  contentName: string;
+}
+
+interface InvoiceOfferDetails {
+  id: string;
+  offerNumber: string;
+  content: ContentTableRowTypes;
+  leadID: Lead;
+  serviceDetail: OfferServiceDetails;
+  date: DateRangeProps[];
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  title: string;
+  totalPrice: number;
+  subTotal: number;
+  total: number;
+  discountAmount: number;
+  discountDescription: string;
+}
+
+interface InvoiceContractDetails {
+  id: string;
+  contractNumber: string;
+  contractStatus: string;
+  offerID: InvoiceOfferDetails;
+}
+export interface InvoiceTableRowDetailsTypes {
+  id: string;
+  refID: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  date: DateRangeProps[];
+  mobileNumber: string;
+  contractID: InvoiceContractDetails;
+  status: string;
+  editImg?: string;
+  editNote?: string;
+  customerType?: string;
+  companyName: string;
+  mobile: string;
+  address: CustomerAddress;
+  edit?: boolean;
+  leadStatus: string;
+  images: string[];
+  createdAt: string;
+  customerID: Customers;
+  type: string;
+  addressID: AddressID;
+  stage: ComponentsType;
+  desireDate: string;
+  contactAvailability: string;
+  flexibility: string;
+  preferredContact: string;
+  budget: string;
+  leadSource: string;
+  otherServices: string[];
+  requiredService: string;
+  additionalDetails: string;
+  createdBy: User;
+  discountType: 0 | 1;
+  emailStatus: "Draft" | "Sent" | "Failed";
+  isDiscount: boolean;
+  isTax: boolean;
+  invoiceNumber: string;
+  offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
+  paymentType: "Cash" | "Online";
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  title: string;
+  totalPrice: number;
+  leadID: Lead;
+  content?: ContentTableRowTypes;
+  serviceDetail: OfferServiceDetails;
+  subTotal: number;
+  total: number;
+  discountAmount: number;
+  discountDescription: string;
+}
+
 export interface OfferServiceDetails {
   id: string;
   serviceDetail: ServiceList[];

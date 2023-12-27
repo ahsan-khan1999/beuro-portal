@@ -14,15 +14,6 @@ export default function EmployeesFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -37,19 +28,10 @@ export default function EmployeesFilters({
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value=""
         dropDownIconClassName=""
-       
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <DetailFilter
-        filter={filter}
-        setFilter={setFilter}
-        moreFilter={moreFilter}
-        setMoreFilter={setMoreFilter}
-        handleFilterResetToInitial={handleFilterResetToInitial}
-        handleFilterReset={handleFilterReset}
-        typeList={typeList}
-      />
+      <DetailFilter filter={filter} setFilter={setFilter} />
 
       <Button
         id="apply"

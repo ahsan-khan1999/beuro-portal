@@ -36,7 +36,6 @@ const useOffers = () => {
     location: "",
     sortBy: "",
     text: "",
-    type: "",
     date: [""],
     email: [""],
     payment: "",
@@ -61,7 +60,7 @@ const useOffers = () => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(setLeadDetails(DEFAULT_LEAD));
 
-    dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then(
+    dispatch(readOffer({ params: { filter: '', page: 1, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
           setCurrentPageRows(

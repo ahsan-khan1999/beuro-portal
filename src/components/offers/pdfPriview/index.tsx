@@ -11,6 +11,7 @@ import { OffersTableRowTypes, ServiceList } from "@/types/offers";
 import {
   AcknowledgementSlipProps,
   CompanySettingsActionType,
+  EmailHeaderProps,
   PayableToProps,
   PdfProps,
   TemplateType,
@@ -148,6 +149,7 @@ const PdfPriview = () => {
       dispatch(readOfferDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
           if (response?.payload) {
+            console.log(response.payload);
             const offerDetails: OffersTableRowTypes = response?.payload;
             let formatData: PdfProps = {
               emailHeader: {
@@ -348,18 +350,20 @@ const PdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+  console.log(offerData);
   return (
     <>
       <EmailCard
-        {...offerData.emailHeader}
+        emailStatus={offerData?.emailHeader?.emailStatus}
+        offerNo={offerData?.emailHeader?.offerNo}
         onEmailSend={handleEmailSend}
         loading={loading}
         onDownload={handleDonwload}
         onPrint={handlePrint}
       />
       <div className="my-5">
-        <Pdf
-          offerData={offerData}
+        <Pdf<EmailHeaderProps>
+          pdfData={offerData}
           newPageData={newPageData}
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}

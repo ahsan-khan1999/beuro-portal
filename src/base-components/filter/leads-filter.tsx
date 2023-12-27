@@ -2,48 +2,45 @@ import React, { SetStateAction, useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { ExtraFiltersType, FilterProps } from "@/types";
+import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
-import { MultiDateField } from "../form/fields";
 import DatePicker from "./fields/date-picker";
+import useFilter from "@/hooks/filter/hook";
+import { date } from "yup";
 
-export default function LeadsFilter({
-  filter,
-  moreFilter,
-  setMoreFilter,
-  setFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-  // handleItemSelected,
-  typeList,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
-  };
+export default function LeadsFilter({ filter, setFilter }: FilterProps) {
+  const {
+    extraFilterss,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+  } = useFilter({ filter, setFilter });
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
-  const [extraFilters, setExtraFilters] = useState<{type: string; location: string; date: string[]}>({
-    type: "",
-    location: "",
-    date: ["",""],
+  const [moreFilter, setMoreFilter] = useState<{
+    location: string;
+    date: string[];
+  }>({
+    location: filter?.location || "",
+    date: filter?.date || ["", ""],
   });
 
   const handleSave = () => {
     setFilter((prev) => ({
       ...prev,
-      type: extraFilters.type,
-      location: extraFilters.location,
-      date: extraFilters.date,
+      location: moreFilter.location,
+      date: moreFilter.date,
     }));
-    hanldeClose();
+    handleExtraFiltersClose();
   };
 
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -68,7 +65,7 @@ export default function LeadsFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
@@ -80,7 +77,7 @@ export default function LeadsFilter({
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}
+                onClick={handleFilterResetToInitial}
               >
                 Reset All
               </span>
@@ -100,11 +97,24 @@ export default function LeadsFilter({
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To" onChangeFrom={val => setExtraFilters(prev => ({
-                    ...prev, date: [val, prev.date[1]]
-                  }))} onChangeTo={val => setExtraFilters(prev => ({
-                    ...prev, date: [prev.date[0], val]
-                  }))} />
+                  <DatePicker
+                    label="From"
+                    label2="To"
+                    dateFrom={moreFilter.date[0]}
+                    dateTo={moreFilter.date[1]}
+                    onChangeFrom={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [val, prev.date[1]],
+                      }))
+                    }
+                    onChangeTo={(val) =>
+                      setMoreFilter((prev) => ({
+                        ...prev,
+                        date: [prev.date[0], val],
+                      }))
+                    }
+                  />
                 </div>
               </div>
               <div>
@@ -124,7 +134,7 @@ export default function LeadsFilter({
                 <InputField
                   iconDisplay={false}
                   handleChange={(value) =>
-                    setExtraFilters((prev) => ({ ...prev, location: value }))
+                    setMoreFilter((prev) => ({ ...prev, location: value }))
                   }
                   value={filter.location || ""}
                   textClassName="border border-black min-h-[42px]"

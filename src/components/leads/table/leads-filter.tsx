@@ -23,17 +23,6 @@ export default function LeadsFilter({
     { label: translate("leads.table_functions.close"), type: "close" },
     { label: translate("leads.table_functions.expire"), type: "expire" },
   ];
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
-
-  console.log(filter);
 
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
@@ -46,7 +35,6 @@ export default function LeadsFilter({
             type={"status"}
             label={item.label}
             value={item.type}
-            checked={!!filter.status && filter.status.includes(item.type)}
             onChange={(value, isChecked) => {
               setFilter((prev: any) => {
                 const updatedStatus = prev.status ? [...prev.status] : [];
@@ -78,15 +66,7 @@ export default function LeadsFilter({
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <LeadsFilters
-          filter={filter}
-          setFilter={setFilter}
-          moreFilter={moreFilter}
-          setMoreFilter={setMoreFilter}
-          handleFilterResetToInitial={handleFilterResetToInitial}
-          handleFilterReset={handleFilterReset}
-          typeList={typeList}
-        />
+        <LeadsFilters filter={filter} setFilter={setFilter} />
         <Button
           id="apply"
           inputType="button"

@@ -3,11 +3,15 @@ import React from "react";
 const DatePicker = ({
   label,
   label2,
+  dateTo,
+  dateFrom,
   onChangeTo,
   onChangeFrom,
 }: {
   label: string;
   label2: string;
+  dateTo: string;
+  dateFrom: string;
   onChangeTo: (val: string) => void;
   onChangeFrom: (val: string) => void;
 }) => {
@@ -33,6 +37,7 @@ const DatePicker = ({
             id="datepicker"
             name="datepicker"
             type="date"
+            value={dateFrom}
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
             onChange={(e) => onChangeFrom(e.currentTarget.value)}
@@ -59,6 +64,7 @@ const DatePicker = ({
             id="datepicker"
             name="datepicker"
             type="date"
+            value={dateTo}
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
             onChange={(e) => onChangeTo(e.currentTarget.value)}

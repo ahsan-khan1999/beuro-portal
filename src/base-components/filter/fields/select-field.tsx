@@ -77,7 +77,7 @@ export default function SelectField({
                   <span
                     onClick={() => {
                       handleChange(item);
-                      setIsOpen;
+                      setIsOpen(false);
                     }}>
                     {item}
                   </span>

@@ -8,31 +8,54 @@ import { useOutsideClick } from "@/utils/hooks";
 import { MultiDateField } from "../form/fields";
 import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
+import useFilter from "@/hooks/filter/hook";
 
-export default function ServicesFilter({
-  filter,
-  moreFilter,
-  setMoreFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-  handleItemSelected,
-  typeList,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
+export default function ServicesFilter({ filter, setFilter }: FilterProps) {
+  const [moreFilters, setMoreFilters] = useState<{
+    date: string[];
+    price: string[];
+  }>({
+    date: filter?.date || [],
+    price: filter.price || [],
+  });
+  const {
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+    extraFilterss,
+  } = useFilter({ filter, setFilter });
+
+  const handleSave = () => {
+    setFilter((prev) => ({ ...prev, ...moreFilters }));
+    handleExtraFiltersClose();
   };
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const handleLowPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [val, prev.price[1]],
+    }));
+  };
 
+  const handleHighPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [prev.price[0], val],
+    }));
+  };
+
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
         viewBox="0 0 18 18"
-        fill="none">
+        fill="none"
+      >
         <g clipPath="url(#clip0_702_12694)">
           <path
             d="M7.43477 0.291992C6.32977 0.291992 5.39477 1.00599 5.03777 1.99199H0.634766V3.69199H5.03777C5.38627 4.67799 6.32127 5.39199 7.43477 5.39199C8.83727 5.39199 9.98477 4.24449 9.98477 2.84199C9.98477 1.43949 8.83727 0.291992 7.43477 0.291992ZM11.6848 1.99199V3.69199H17.6348V1.99199H11.6848ZM11.6848 6.24199C10.5798 6.24199 9.64477 6.95599 9.28777 7.94199H0.634766V9.64199H9.28777C9.63627 10.628 10.5713 11.342 11.6848 11.342C13.0873 11.342 14.2348 10.1945 14.2348 8.79199C14.2348 7.38949 13.0873 6.24199 11.6848 6.24199ZM15.9348 7.94199V9.64199H17.6348V7.94199H15.9348ZM4.88477 12.192C3.77977 12.192 2.84477 12.906 2.48777 13.892H0.634766V15.592H2.48777C2.83627 16.578 3.77127 17.292 4.88477 17.292C6.28727 17.292 7.43477 16.1445 7.43477 14.742C7.43477 13.3395 6.28727 12.192 4.88477 12.192ZM9.13477 13.892V15.592H17.6348V13.892H9.13477Z"
@@ -51,18 +74,20 @@ export default function ServicesFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}>
+            transition={{ duration: 0.4 }}
+          >
             <div className="flex justify-between border-b border-lightGray pb-3">
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}>
+                onClick={() => handleFilterResetToInitial()}
+              >
                 Reset All
               </span>
             </div>
@@ -75,12 +100,30 @@ export default function ServicesFilter({
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}>
+                    onClick={() => handleFilterReset("type", "None")}
+                  >
                     Reset
                   </label>
                 </div>
                 <div>
-                  <DatePicker label="From" label2="To" />
+                  <DatePicker
+                    label="From"
+                    label2="To"
+                    dateFrom={moreFilters.date[0]}
+                    dateTo={moreFilters.date[1]}
+                    onChangeFrom={(val) =>
+                      setMoreFilters((prev) => ({
+                        ...prev,
+                        date: [val, prev.date[1]],
+                      }))
+                    }
+                    onChangeTo={(val) =>
+                      setMoreFilters((prev) => ({
+                        ...prev,
+                        date: [prev.date[0], val],
+                      }))
+                    }
+                  />
                 </div>
               </div>
               {/* Price section  */}
@@ -92,21 +135,27 @@ export default function ServicesFilter({
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}>
+                    onClick={() => handleFilterReset("type", "None")}
+                  >
                     Reset
                   </label>
                 </div>
 
-                <PriceInputField label="Low Price" label2="High Price" />
+                <PriceInputField
+                  label="Low Price"
+                  label2="High Price"
+                  lowPrice={moreFilters.price[0]}
+                  highPrice={moreFilters.price[1]}
+                  onHighPriceChange={handleHighPriceChange}
+                  onLowPriceChange={handleLowPriceChange}
+                />
               </div>
               {/* Price section  */}
             </div>
             <div>
               <BaseButton
                 buttonText="Save"
-                onClick={() => {
-                  setMoreFilter(!moreFilter);
-                }}
+                onClick={handleSave}
                 containerClassName="bg-primary my-6 px-8 py-2"
                 textClassName="text-white"
               />

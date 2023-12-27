@@ -62,8 +62,6 @@ const SideBar = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<number | null>(null);
 
-  console.log(userRole);
-
   const routeChangeHandler = (item: any) => {
     let SUB_MENU: any[] | null = null;
 

@@ -573,7 +573,7 @@ export interface FilterType {
   price?: string[];
 }
 
-export interface ExtraFiltersType {
+export interface MoreFilterType {
   type: string;
   location: string;
   date?: string[];
@@ -583,11 +583,6 @@ export interface ExtraFiltersType {
 export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
-  moreFilter: boolean;
-  setMoreFilter: React.Dispatch<SetStateAction<boolean>>;
-  handleFilterResetToInitial: () => void;
-  handleFilterReset: (key: keyof FilterType, value: string) => void;
-  typeList: ItemList[];
 }
 
 interface ItemList {
@@ -631,6 +626,7 @@ export interface MovingDetailsProps {
   header: string;
   address: CustomerAddress[];
   workDates: DateRangeProps[];
+  isOffer?: boolean;
 }
 export interface ProductItemProps {
   title: string;
@@ -736,16 +732,27 @@ export interface CompanySettingsActionType {
 }
 
 export interface EmailHeaderProps {
-  offerNo: string;
-  emailStatus: string;
+  offerNo?: string;
+  emailStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
 }
+export interface InvoiceEmailHeaderProps {
+  contractId?: string;
+  workerName?: string;
+  contentName?: string;
+  contractStatus?: string;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost?: () => void;
+  onPrint: () => void;
+  onDownload: () => void;
+}
 
-export interface PdfProps {
-  emailHeader: Omit<EmailHeaderProps, "onEmailSend" | "onDownload" | "onPrint">;
+export interface PdfProps<T = EmailHeaderProps> {
+  emailHeader: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
@@ -754,6 +761,7 @@ export interface PdfProps {
   footerDetails: DocumentDetailFooterProps;
   qrCode: qrCode;
   aggrementDetails: string;
+  isOffer?: boolean;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -813,6 +821,7 @@ export interface AggrementProps {
   templateSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
+  isOffer?: boolean;
 }
 
 export interface FiltersComponentProps {
