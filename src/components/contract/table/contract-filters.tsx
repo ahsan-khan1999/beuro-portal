@@ -54,7 +54,7 @@ export default function ContractFilters({
           />
         ))}
       </div>
-      <div className="flex gap-x-4">
+      <div className="flex gap-x-4 items-center">
         <InputField
           handleChange={(value) => setFilter({ ...filter, text: value })}
           value={filter.text}

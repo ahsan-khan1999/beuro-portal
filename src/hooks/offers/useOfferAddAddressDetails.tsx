@@ -43,11 +43,14 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails.id) {
+      
       reset({
-        address: offerDetails?.addressID?.address
+        address: offerDetails?.addressID ? offerDetails?.addressID?.address : offerDetails?.leadID?.addressID?.address
       })
     }
   }, [offerDetails.id])
+  console.log(offerDetails);
+  
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",

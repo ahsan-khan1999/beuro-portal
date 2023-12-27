@@ -40,7 +40,8 @@ export default function CustomerFilter({
 
       <Button
         onClick={() => handleFilterChange()}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+
         text="Apply"
         id="apply"
         inputType="button"
@@ -49,7 +50,7 @@ export default function CustomerFilter({
 
       <Button
         onClick={() => router.push("/customers/add")}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+        className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text={translate("customers.add_button")}
         id="apply"
         inputType="button"

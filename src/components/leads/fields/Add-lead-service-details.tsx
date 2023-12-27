@@ -29,7 +29,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -53,7 +53,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "desireDate",
               name: "desireDate",
               register,
@@ -69,7 +69,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "contactAvailability",
               value:
@@ -96,7 +96,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "flexibility",
               value: (leadDetails?.id && leadDetails?.flexibility) || "",
@@ -143,7 +143,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
@@ -169,7 +169,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "budget",
               name: "budget",
@@ -196,7 +196,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
@@ -220,7 +220,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-0 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "otherServices",
               name: "otherServices",
               value: (leadDetails?.id && leadDetails?.otherServices) || [""],

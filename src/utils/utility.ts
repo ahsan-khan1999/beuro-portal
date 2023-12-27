@@ -216,9 +216,7 @@ export const conditionHandlerLogin = (
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
-
       } else {
-
         router.pathname = "/dashboard";
       }
       updateQuery(router, "en");
@@ -228,7 +226,6 @@ export const conditionHandlerLogin = (
     updateQuery(router, "en");
   }
 };
-
 
 export const conditionHandlerProfile = (
   router: NextRouter,
@@ -454,7 +451,6 @@ export function setAddressFieldValues(
 ) {
   if (images?.length === 0) return;
   images.forEach((element, idx) => {
-
     setValue(`offerContent.address_${idx}`, element);
   });
 }
@@ -469,7 +465,7 @@ export const filterLead = (
   id: string | string[],
   service: Service[]
 ): Service | Service[] => {
-  let checkedService: Service | Service[] = DEFAULT_SERVICE;
+  let checkedService: any = DEFAULT_SERVICE;
   if (Array.isArray(id)) {
     checkedService = id.map(
       (item) => service.find((item_) => item_.id === item) || DEFAULT_SERVICE
@@ -497,14 +493,16 @@ export function getFileNameFromUrl(url: string) {
 }
 
 export function getEmailColor(status: string) {
-  if (staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Draft"])
+  if (
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
+  )
     return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Sent"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
     return "#4A13E7";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["PaymentType"]["Failed"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
   )
     return "#FF0000";
   else return "#FF376F";
@@ -591,7 +589,10 @@ export function calculateTax(amount: number, taxPercentage: number) {
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);
 }
-export function calculatePercentage(amount: number, totalAmount: number): number {
+export function calculatePercentage(
+  amount: number,
+  totalAmount: number
+): number {
   if (totalAmount === 0) {
     return 0; // Avoid division by zero
   }

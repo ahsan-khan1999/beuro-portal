@@ -58,21 +58,14 @@ export default function useContractDetail() {
     if (e) {
       e.stopPropagation();
     }
-    const filteredLead = contract?.filter((item_) => item_.id === item)
-    if (filteredLead?.length === 1) {
-      dispatch(setContractDetails(filteredLead[0]));
-      dispatch(readNotes({ params: { type: "contract", id: filteredLead[0]?.id } }));
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    dispatch(readNotes({ params: { type: "contract", id: contractDetails?.id } }));
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
 
-    } else {
-      dispatch(readNotes({ params: { type: "contract", id: item } }));
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-    }
   };
 
   // function for hnadling the add note
   const handleAddNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
+    dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "contract" } }));
   };
 
   // function for hnadling the add note
@@ -86,18 +79,14 @@ export default function useContractDetail() {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    const filteredLead = contract?.find((item_) => item_.id === item)
-    if (filteredLead) {
-      dispatch(setContractDetails(filteredLead));
-      dispatch(readImage({ params: { type: "contractID", id: filteredLead?.id } }));
-      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
-    }
+    dispatch(readImage({ params: { type: "contractID", id: contractDetails?.id } }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
 
   const onSuccess = () => {
     router.push("/contract")
     dispatch(updateModalType({ type: ModalType.NONE }))
-}
+  }
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (

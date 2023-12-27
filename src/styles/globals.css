@@ -70,12 +70,12 @@ body {
 
 /* ==================== */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  width: 376px;
-  height: 48px;
+  width: 180px !important;
+  height: 48px !important;
   cursor: pointer;
   position: absolute;
   opacity: 0;
-  z-index: 999;
+  z-index: 1;
 }
 /* ===================== */
 
@@ -114,7 +114,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* .ck-editor {
   max-width: 904px !important;
 } */
-
+.ck-content:focus{
+  border: 1px solid #4a13e7 !important;
+}
+.ck .ck-toolbar{
+ border-bottom: none !important;
+}
 .ck-content {
   min-height: 260px !important;
   max-height: 260px !important;

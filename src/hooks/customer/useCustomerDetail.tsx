@@ -121,14 +121,15 @@ export default function useCustomerDetail(stage: boolean) {
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
-          dispatch(setCustomerDetails(res.payload));
+          reset({ ...res?.payload });
+          dispatch(setCustomerDetails({...res?.payload}));
         }
       );
     }
   }, [id]);
-  useMemo(() => {
-    if (customerDetails && stage) reset({ ...customerDetails });
-  }, [customerDetails.id]);
+  // useMemo(() => {
+  //   if (customerDetails && stage) reset({ ...customerDetails });
+  // }, [customerDetails.id]);
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);

@@ -13,7 +13,7 @@ const customerDetailData = ({
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const { leadDetails } = useAppSelector(state => state.lead)
+  const { leadDetails } = useAppSelector((state) => state.lead);
 
   const { t: translate } = useTranslation();
   return (
@@ -45,7 +45,10 @@ const customerDetailData = ({
               {translate("leads.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {getKeyByValue(staticEnums["CustomerType"],leadDetails?.customerDetail?.customerType)}
+              {getKeyByValue(
+                staticEnums["CustomerType"],
+                leadDetails?.customerDetail?.customerType
+              )}
             </div>
           </div>
           <div>
@@ -57,7 +60,7 @@ const customerDetailData = ({
             </div>
           </div>
           {
-            staticEnums["CustomerType"][leadDetails?.customerDetail?.customerType] === 1 &&
+            Number(leadDetails?.customerDetail?.customerType) === 1 &&
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name
@@ -71,8 +74,10 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {leadDetails?.customerDetail?.email}
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium overflow-hidden whitespace-nowrap">
+              <span className="overflow-hidden text-overflow-ellipsis">
+                {leadDetails?.customerDetail?.email}
+              </span>
             </div>
           </div>
           <div>
@@ -112,7 +117,6 @@ const customerDetailData = ({
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {leadDetails?.customerDetail?.address?.postalCode}
-
               </div>
             </div>
             <div>
@@ -121,7 +125,6 @@ const customerDetailData = ({
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
                 {leadDetails?.customerDetail?.address?.country}
-
               </div>
             </div>
           </div>

@@ -20,3 +20,4 @@ const MailSettingForm = ({ handleCreation, selectedTab }: { handleCreation: () =
 };
 
 export default MailSettingForm;
+  

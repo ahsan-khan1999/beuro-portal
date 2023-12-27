@@ -5,11 +5,10 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
 import useFilter from "@/hooks/filter/hook";
-import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
-import { Status } from "@/types/global";
+import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 
 export default function CustomerFilter({
   filter,
@@ -41,7 +40,6 @@ export default function CustomerFilter({
   return (
     <div className="flex space-x-4">
       <div className="flex gap-x-4 w-full xl:w-fit">
-
         {checkbox.map((item, idx) => (
           <CheckField
             checkboxFilter={filter}
@@ -50,7 +48,7 @@ export default function CustomerFilter({
             label={item.label}
             value={item.type}
             checked
-            onChange={val => {}}
+            onChange={(val) => {}}
           />
         ))}
       </div>
@@ -63,7 +61,6 @@ export default function CustomerFilter({
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
-
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
@@ -85,8 +82,6 @@ export default function CustomerFilter({
         inputType="button"
         name=""
       />
-
-
     </div>
   );
 }

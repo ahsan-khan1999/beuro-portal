@@ -55,7 +55,7 @@ export default function OffersFilters({
           />
         ))}
       </div>
-      <div className="flex gap-[14px]">
+      <div className="flex gap-[14px] items-center">
         <InputField
           handleChange={(value) => setFilter({ ...filter, text: value })}
           value={filter.text}

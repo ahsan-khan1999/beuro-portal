@@ -54,7 +54,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("services.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.id}
+              &nbsp;&nbsp;{serviceDetail?.refID}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">

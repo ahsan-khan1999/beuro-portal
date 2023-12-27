@@ -157,7 +157,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -176,7 +176,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !h-12  !border-[#BFBFBF]  focus:!border-primary",
+              className: "   !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",
@@ -372,7 +372,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
         type: Field.select,
         id: "customerID",
         name: "customerID",
@@ -414,7 +414,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
         type: Field.select,
         id: "leadID",
         name: "leadID",
@@ -478,7 +478,7 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-3 items-center",
+        className: "flex flex-wrap gap-x-3 mb-3 items-center",
         id: `date`,
         children: [
           {
@@ -490,7 +490,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
+              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.startDate`,
               name: `date.${i}.startDate`,
 
@@ -507,8 +507,7 @@ export const generateDateChildren = (
             },
             field: {
               type: Field.date,
-              className: "!py-4 !pr-6 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
-              id: `date.${i}.endDate`,
+              className: "!py-4 !pr-2 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
               name: `date.${i}.endDate`,
               remove: i > 0 && "Remove",
               onRemove: () => handleRemoveDateField(i),
@@ -521,7 +520,7 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mb-0 mt-3 ",
+    containerClass: "mb-0 mt-5 -ml-4 ",
     field: {
       type: Field.button,
       id: "button",
@@ -545,7 +544,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-2",
+      containerClass: "mb-0 mt-5",
       field: {
         type: Field.button,
         id: "button",

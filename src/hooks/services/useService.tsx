@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Service } from "@/types/service";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
-import { readService } from "@/api/slices/service/serviceSlice";
+import { readService, setServiceDetails } from "@/api/slices/service/serviceSlice";
 import { useTranslation } from "next-i18next";
+import { DEFAULT_SERVICE } from "@/utils/static";
 
 const useService = () => {
   const { service, lastPage, totalCount, loading } = useAppSelector(state => state.service)
@@ -19,6 +20,7 @@ const useService = () => {
   const totalItems = lastPage;
   const itemsPerPage = 10;
   useEffect(() => {
+
     dispatch(readService({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
       if (res?.payload) {

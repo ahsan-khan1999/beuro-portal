@@ -1,11 +1,8 @@
-import React, { SetStateAction, useState } from "react";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
 import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
-import { MultiDateField } from "../form/fields";
 import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";

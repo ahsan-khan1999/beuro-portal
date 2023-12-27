@@ -36,8 +36,8 @@ export default function useInvoiceDetail() {
     useEffect(() => {
         if (id) {
             dispatch(readInvoiceDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
-                dispatch(readCollectiveInvoice({ params: { filter: { "invoiceStatus": ["0","1"] }, paginate: 0,id:res?.payload?.id } }))
-                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "2" }, paginate: 0 ,id:res?.payload?.id} }))
+                dispatch(readCollectiveInvoice({ params: { filter: { "invoiceStatus": ["0", "1"] }, paginate: 0, id: res?.payload?.id } }))
+                dispatch(readCollectiveReciept({ params: { filter: { "invoiceStatus": "2" }, paginate: 0, id: res?.payload?.id } }))
 
 
                 dispatch(setInvoiceDetails(res.payload))
@@ -97,20 +97,13 @@ export default function useInvoiceDetail() {
         if (e) {
             e.stopPropagation();
         }
-        const filteredLead = invoice?.filter((item_) => item_.id === item)
-        if (filteredLead?.length === 1) {
-            dispatch(setInvoiceDetails(filteredLead[0]));
-            dispatch(readNotes({ params: { type: "invoice", id: filteredLead[0]?.id } }));
-            dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+        dispatch(readNotes({ params: { type: "invoice", id: invoiceDetails?.id } }));
+        dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
 
-        } else {
-            dispatch(readNotes({ params: { type: "invoice", id: item } }));
-            dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-        }
     };
 
     const handleAddNote = (id: string) => {
-        dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: id }));
+        dispatch(updateModalType({ type: ModalType.ADD_NOTE, data: { id: id, type: "invoice" } }));
     };
     const handleRecurringSuccess = async () => {
         const res = await dispatch(stopRecurringInvoices({ data: { isInvoiceRecurring: false, id: invoiceDetails?.id } }))

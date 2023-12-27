@@ -26,7 +26,7 @@ export default function LeadsFilter({
 
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
-      <div className="flex gap-[14px]">
+      <div className="flex gap-[14px] items-center">
         {checkbox.map((item, idx) => (
           <CheckField
             key={idx}
@@ -72,13 +72,14 @@ export default function LeadsFilter({
           inputType="button"
           text="Apply"
           onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+          className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+
         />
 
         <Button
           inputType="button"
           onClick={() => router.push("/leads/add")}
-          className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+          className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           icon={addIcon}
           text="Add New"
           id="add"

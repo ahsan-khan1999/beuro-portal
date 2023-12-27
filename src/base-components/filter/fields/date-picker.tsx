@@ -40,7 +40,9 @@ const DatePicker = ({
             value={dateFrom}
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
-            onChange={(e) => onChangeFrom(e.currentTarget.value)}
+            onChange={(e) =>
+              onChangeFrom && onChangeFrom(e.currentTarget.value)
+            }
           />
         </div>
       </div>
@@ -67,7 +69,9 @@ const DatePicker = ({
             value={dateTo}
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] pl-2.5 p-2.5"
             placeholder="Select date"
-            onChange={(e) => onChangeTo(e.currentTarget.value)}
+            onChange={(e) =>
+              onChangeFrom && onChangeFrom(e.currentTarget.value)
+            }
           />
         </div>
       </div>

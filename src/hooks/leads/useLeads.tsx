@@ -59,7 +59,6 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = () => {
-    console.log(filter)
     dispatch(
       readLead({ params: { filter: filter, page: currentPage, size: 10 } })
     );

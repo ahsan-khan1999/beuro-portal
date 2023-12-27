@@ -23,7 +23,7 @@ const TableFunctions = ({
       <ServicesFilters
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={() => handleFilterChange}
       />
     </div>
   );

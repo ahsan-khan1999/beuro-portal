@@ -26,9 +26,9 @@ export interface Status {
   paid?: boolean;
   active?: boolean;
   blocked?: boolean;
-  send?:boolean;
-  draft?:boolean;
-  failed:boolean
+  send?: boolean;
+  draft?: boolean;
+  failed: boolean;
 }
 export interface CheckBoxFilterProps {
   label: string;
@@ -40,8 +40,9 @@ export interface CheckFieldProps {
   setCheckBoxFilter: React.Dispatch<React.SetStateAction<any>>;
   type: keyof FilterType;
   value: string;
-  onChange: (val: string, checked: boolean) => void;
+  onChange?: (val: string, checked: boolean) => void;
 }
+
 export interface InputFieldProps {
   value: string;
   handleChange: (value: string) => void;

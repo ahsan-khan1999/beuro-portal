@@ -42,6 +42,7 @@ export default function EmailCheckField({
           checked={isCheckboxChecked}
           onChange={handleChange}
         />
+
         <span className="checkbox-control"></span>
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
