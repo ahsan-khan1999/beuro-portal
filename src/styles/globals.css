@@ -66,14 +66,17 @@ body {
 }
 
 /* ==================== */
-input[type="date"],
-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   width: 180px !important;
   height: 48px !important;
   cursor: pointer;
   position: absolute;
   opacity: 0;
   z-index: 1;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
 }
 /* ===================== */
 
