@@ -8,19 +8,31 @@ import TableFunctions from "./table/TableFunctions";
 import { FollowUpsTableProps } from "@/types/follow-up";
 
 const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal ,handleFilterChange} =
-    useFollowUps();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleDeleteFollowUp,
+    renderModal,
+    handleFilterChange,
+  } = useFollowUps();
 
   return (
     <>
-      <TableFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange}/>
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <TableLayout>
         <TableHeading />
         <TableRows
           currentPageRows={currentPageRows}
           handleFollowUpsDetails={handleFollowUpsDetails}
           handleFollowUpsDelete={handleDeleteFollowUp}
-
         />
       </TableLayout>
       <Pagination

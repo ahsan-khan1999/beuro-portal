@@ -83,13 +83,17 @@ export const SelectBox = ({
         )}
       </button>
       <AnimatePresence>
-      {!disabled && isOpen && (
-        <motion.ul className="absolute overflow-x-hidden top-[52px] max-h-[400px] h-fit overflow-scroll  w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"  initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4 }} id="dropdownSerchBar">
-          <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
-          <Image
+        {!disabled && isOpen && (
+          <motion.ul
+            className="absolute overflow-x-hidden top-[52px] max-h-[400px] h-fit overflow-scroll  w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            id="dropdownSerchBar"
+          >
+            <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
+              <Image
                 src={searchIcon}
                 alt={"Search Icon"}
                 className="ml-1 w-4 h-4 absolute"
