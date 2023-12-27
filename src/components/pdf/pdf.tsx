@@ -1,27 +1,26 @@
 import { ProductPurchasedItemsDetails } from "./preview/productDetails/purchased-items-details";
 import { Aggrement } from "./preview/aggrement/aggrement";
-import {
-  PdfProps,
-  TemplateType,
-} from "@/types/types";
+import { InvoiceEmailHeaderProps, PdfProps, TemplateType } from "@/types/types";
 import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
 import { ProductItemNewPage } from "./preview/productDetails/product-item-next-page";
 import { Container } from "./container";
 import { ServiceList } from "@/types/offers";
 import { PreviewCard } from "./preview-card";
 
-export const Pdf = ({
+export const Pdf = <T,>({
   newPageData,
-  offerData,
+  pdfData,
   templateSettings,
   isQr,
-  totalPages
+  totalPages,
+  isOffer,
 }: {
-  offerData: PdfProps;
+  pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
   templateSettings: TemplateType | null;
   isQr?: boolean;
   totalPages: number;
+  isOffer?: boolean;
 }) => {
   return (
     <Container>
@@ -29,20 +28,21 @@ export const Pdf = ({
       <div className="flex flex-col gap-y-[30px]">
         {newPageData.length > 0 && (
           <ProductPurchasedItemsDetails
-            {...offerData}
+            {...pdfData}
             serviceItem={newPageData[0]}
             isShowTotal={newPageData.length === 1}
             templateSettings={templateSettings}
             totalPages={totalPages}
+            isOffer={isOffer}
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (
           <ProductItemNewPage
             key={index}
             serviceItem={pageItems}
-            footerDetails={offerData.footerDetails}
-            headerDetails={offerData.headerDetails}
-            serviceItemFooter={offerData.serviceItemFooter}
+            footerDetails={pdfData.footerDetails}
+            headerDetails={pdfData.headerDetails}
+            serviceItemFooter={pdfData.serviceItemFooter}
             isShowTotal={index === newPageData.length - 2}
             templateSettings={templateSettings}
             totalPages={totalPages}
@@ -50,19 +50,22 @@ export const Pdf = ({
           />
         ))}
         <Aggrement
-          contactAddress={offerData.contactAddress}
-          headerDetails={offerData.headerDetails}
-          footerDetails={offerData.footerDetails}
-          aggrementDetails={offerData.aggrementDetails}
+          contactAddress={pdfData?.contactAddress}
+          headerDetails={pdfData?.headerDetails}
+          footerDetails={pdfData?.footerDetails}
+          aggrementDetails={pdfData?.aggrementDetails}
           templateSettings={templateSettings}
           totalPages={totalPages}
           currPage={totalPages}
+          isOffer={isOffer}
         />
-        {isQr && <PaymentQRCodeDetails
-          contactAddress={offerData.contactAddress}
-          headerDetails={offerData.headerDetails}
-          qrCode={offerData.qrCode}
-        />}
+        {isQr && (
+          <PaymentQRCodeDetails
+            contactAddress={pdfData.contactAddress}
+            headerDetails={pdfData.headerDetails}
+            qrCode={pdfData.qrCode}
+          />
+        )}
       </div>
 
       {/* <button className="mt-[55px] w-full bg-[#45C769] rounded-[4px] shadow-md py-[10px] text-center text-white">

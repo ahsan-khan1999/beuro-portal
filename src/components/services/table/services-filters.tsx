@@ -14,15 +14,6 @@ export default function ServicesFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -39,20 +30,12 @@ export default function ServicesFilters({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <ServicesFilter
-        filter={filter}
-        setFilter={setFilter}
-        moreFilter={moreFilter}
-        setMoreFilter={setMoreFilter}
-        handleFilterResetToInitial={handleFilterResetToInitial}
-        handleFilterReset={handleFilterReset}
-        typeList={typeList}
-      />
+      <ServicesFilter filter={filter} setFilter={setFilter} />
       <Button
         id="apply"
         inputType="button"
         text="Apply"
-        onClick={handleFilterChange}
+        onClick={() => handleFilterChange()}
         className="flex items-center gap-x-2 py-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       />
 

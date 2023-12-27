@@ -5,41 +5,38 @@ import { CheckBoxType, FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import EmailCheckField from "./fields/email-check-field";
 import { PriceInputField } from "./fields/price-input-field";
 import { RadioField } from "./fields/radio-field";
+import useFilter from "@/hooks/filter/hook";
+import CheckField from "./fields/check-field";
 
-export default function OfferFilter({
-  filter,
-  setFilter,
-  moreFilter,
-  setMoreFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-  typeList,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
-  };
+export default function OfferFilter({ filter, setFilter }: FilterProps) {
+  const {
+    extraFilterss,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+  } = useFilter({ filter, setFilter });
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
-  const [extraFilters, setExtraFilters] = useState<{
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const [moreFilters, setMoreFilters] = useState<{
     date: string[];
     payment: string;
     email: string[];
     price: string[];
     location: string;
   }>({
-    date: ["", ""],
+    date: filter?.date || [],
     payment: "",
-    email: ["Send", "Draft", "Failed"],
-    price: ["", ""],
+    email: [],
+    price: [],
     location: "",
   });
 
   const handleSave = () => {
-    hanldeClose();
-    setFilter((prev) => ({ ...prev, ...extraFilters }));
+    setFilter((prev) => ({ ...prev, ...moreFilters }));
+    handleExtraFiltersClose();
   };
 
   const checkbox: CheckBoxType[] = [
@@ -51,10 +48,30 @@ export default function OfferFilter({
     { label: "Failed", type: "failed" },
   ];
 
+  const handleEmailChange = (value: string, isChecked: boolean) => {
+    const updatedEmails = isChecked
+      ? [...moreFilters.email, value]
+      : moreFilters.email.filter((email) => email !== value);
+
+    setMoreFilters({ ...moreFilters, email: updatedEmails });
+  };
+  const handleLowPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [val, prev.price[1]],
+    }));
+  };
+
+  const handleHighPriceChange = (val: string) => {
+    setMoreFilters((prev) => ({
+      ...prev,
+      price: [prev.price[0], val],
+    }));
+  };
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -79,7 +96,7 @@ export default function OfferFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
@@ -114,14 +131,16 @@ export default function OfferFilter({
                   <DatePicker
                     label="From"
                     label2="To"
+                    dateFrom={moreFilters.date[0]}
+                    dateTo={moreFilters.date[1]}
                     onChangeFrom={(val) =>
-                      setExtraFilters((prev) => ({
+                      setMoreFilters((prev) => ({
                         ...prev,
                         date: [val, prev.date[1]],
                       }))
                     }
                     onChangeTo={(val) =>
-                      setExtraFilters((prev) => ({
+                      setMoreFilters((prev) => ({
                         ...prev,
                         date: [prev.date[0], val],
                       }))
@@ -148,13 +167,15 @@ export default function OfferFilter({
                     <RadioField
                       lable="Cash"
                       onChange={(val) =>
-                        setExtraFilters((prev) => ({ ...prev, payment: val }))
+                        setMoreFilters((prev) => ({ ...prev, payment: val }))
                       }
+                      checked={moreFilters.payment === "Cash"}
                     />
                     <RadioField
                       lable="Online"
+                      checked={moreFilters.payment === "Online"}
                       onChange={(val) =>
-                        setExtraFilters((prev) => ({ ...prev, payment: val }))
+                        setMoreFilters((prev) => ({ ...prev, payment: val }))
                       }
                     />
                   </div>
@@ -176,23 +197,46 @@ export default function OfferFilter({
                   </label>
                 </div>
                 <div className="flex items-center gap-x-3 my-5">
-                  {checkbox.map((item, index) => (
-                    <EmailCheckField
-                      key={index}
+                  {checkbox.map((item, idx) => (
+                    <CheckField
+                      key={idx}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}
-                      type={"status"}
+                      type={"email"}
                       label={item.label}
                       value={item.type}
-                      checked={true}
-                      onChange={(val) =>
-                        setExtraFilters((prev) => ({ ...prev, email: [val] }))
-                      }
+                      onChange={handleEmailChange}
                     />
                   ))}
                 </div>
               </div>
               {/* email section  */}
+              {/* Price section  */}
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    Price
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => handleFilterReset("type", "None")}
+                  >
+                    Reset
+                  </label>
+                </div>
+                <div>
+                  <PriceInputField
+                    label="Low Price"
+                    label2="High Price"
+                    lowPrice={moreFilters.price[0]}
+                    highPrice={moreFilters.price[1]}
+                    onHighPriceChange={handleHighPriceChange}
+                    onLowPriceChange={handleLowPriceChange}
+                  />
+                </div>
+              </div>
+              {/* Price section  */}
               <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
@@ -210,7 +254,7 @@ export default function OfferFilter({
                 <InputField
                   iconDisplay={false}
                   handleChange={(value) =>
-                    setExtraFilters((prev) => ({ ...prev, location: value }))
+                    setMoreFilters((prev) => ({ ...prev, location: value }))
                   }
                   value={filter.location || ""}
                   textClassName="border border-black min-h-[42px]"

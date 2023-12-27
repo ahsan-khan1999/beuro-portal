@@ -15,16 +15,6 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-
-  } = useFilter({ filter, setFilter });
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -40,18 +30,12 @@ export default function CustomerFilter({
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
         value={filter?.sortBy || ""}
         dropDownIconClassName=""
-
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
       <CustomerFilters
         filter={filter}
         setFilter={setFilter}
-        moreFilter={moreFilter}
-        setMoreFilter={setMoreFilter}
-        handleFilterResetToInitial={handleFilterResetToInitial}
-        handleFilterReset={handleFilterReset}
-        typeList={typeList}
       />
 
       <Button

@@ -56,7 +56,8 @@ const useInvoice = () => {
       }
     });
   }, []);
-  const handleFilterChange = (filter: FilterType) => {
+  const handleFilterChange = () => {
+    console.log(filter);
     dispatch(
       readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
     );
