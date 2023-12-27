@@ -28,7 +28,10 @@ const TableRows = ({
           >
             <span className="py-4 flex items-center">{item.invoiceNumber}</span>
             <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
-              {item.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.fullName}
+              {
+                item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                  ?.fullName
+              }
             </span>
             <span className="py-4 flex items-center break-all">
               {item.invoiceID?.contractID?.offerID?.title}
@@ -63,12 +66,12 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] w-full rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
             </span>
-            <span className="py-4 flex items-center">
+            <span className="py-4 flex items-center ">
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"]).map(
                   (item) => ({ item: item })
@@ -83,11 +86,10 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[90px] w-full rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}
-
               />
             </span>
 
