@@ -1,5 +1,5 @@
-import { ExtraFiltersType, FilterType } from "@/types";
-import { SetStateAction, useState } from "react";
+import { FilterType } from "@/types";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const typeList = [
   {
@@ -18,13 +18,20 @@ export default function useFilter({
   setFilter,
 }: {
   filter: FilterType;
-  setFilter: SetStateAction<any>;
+  setFilter: Dispatch<SetStateAction<FilterType>>;
 }) {
-  const [moreFilter, setMoreFilter] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [extraFilterss, setExtraFilters] = useState(false);
+
+  const handleExtraFilterToggle = () => {
+    setExtraFilters((prev) => !prev);
+  };
+
+  const handleExtraFiltersClose = () => {
+    setExtraFilters(false);
+  };
 
   const handleFilterReset = (key: keyof FilterType, value: string) => {
-    setFilter({ ...filter, [key]: value });
+    setFilter((prev) => ({ ...prev, [key]: value }));
   };
   const handleFilterResetToInitial = () => {
     setFilter({
@@ -36,18 +43,13 @@ export default function useFilter({
     });
   };
 
-  const toggleHandler = () => setIsOpen((prev) => !prev);
-
   return {
-    moreFilter,
-    setMoreFilter,
-    filter,
+    extraFilterss,
+    typeList,
     setFilter,
-    isOpen,
-    setIsOpen,
-    toggleHandler,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
     handleFilterReset,
     handleFilterResetToInitial,
-    typeList,
   };
 }

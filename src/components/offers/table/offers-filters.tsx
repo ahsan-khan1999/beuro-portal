@@ -25,28 +25,33 @@ export default function OffersFilters({
     { label: translate("offers.table_functions.rejected"), type: "rejected" },
   ];
 
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
-
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
+            key={idx}
             checkboxFilter={filter}
             setCheckBoxFilter={setFilter}
             type={"status"}
             label={item.label}
             value={item.type}
-            checked
-            onChange={val => {}}
+            onChange={(value, isChecked) => {
+              setFilter((prev: any) => {
+                const updatedStatus = prev.status ? [...prev.status] : [];
+                if (isChecked) {
+                  if (!updatedStatus.includes(value)) {
+                    updatedStatus.push(value);
+                  }
+                } else {
+                  const index = updatedStatus.indexOf(value);
+                  if (index > -1) {
+                    updatedStatus.splice(index, 1);
+                  }
+                }
+                return { ...prev, status: updatedStatus };
+              });
+            }}
           />
         ))}
       </div>
@@ -59,19 +64,10 @@ export default function OffersFilters({
           handleChange={(value) => setFilter({ ...filter, sortBy: value })}
           value=""
           dropDownIconClassName=""
-         
           options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
           label="Sort By"
         />
-        <OfferFilter
-          filter={filter}
-          setFilter={setFilter}
-          moreFilter={moreFilter}
-          setMoreFilter={setMoreFilter}
-          handleFilterResetToInitial={handleFilterResetToInitial}
-          handleFilterReset={handleFilterReset}
-          typeList={typeList}
-        />
+        <OfferFilter filter={filter} setFilter={setFilter} />
         <Button
           id="apply"
           inputType="button"

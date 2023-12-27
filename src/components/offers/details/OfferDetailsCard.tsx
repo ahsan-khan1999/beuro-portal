@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
@@ -11,24 +11,21 @@ import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { staticEnums } from '../../../utils/static';
+import { staticEnums } from "../../../utils/static";
 
-interface OfferDetailCardProps {
-  offerDetails: OffersTableRowTypes
-  offerDeleteHandler: () => void
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
-  handleImageUpload: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void
-  handleStatusUpdate: (id: string) => void
-  handlePaymentStatusUpdate: (id: string) => void;
-  handleSendEmail: () => void;
-  isSendEmail: boolean
-
-}
 import { useTranslation } from "next-i18next";
-import { OffersTableRowTypes } from "@/types/offers";
+import { OfferDetailCardProps } from "@/types/offers";
 
-const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload, handleNotes, handleStatusUpdate, handlePaymentStatusUpdate, handleSendEmail, isSendEmail }: OfferDetailCardProps) => {
-
+const OfferDetailsCard = ({
+  offerDetails,
+  offerDeleteHandler,
+  handleImageUpload,
+  handleNotes,
+  handleStatusUpdate,
+  handlePaymentStatusUpdate,
+  handleSendEmail,
+  isSendEmail,
+}: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -48,7 +45,12 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
         </div>
 
         <div className="flex gap-[22px]">
-          <div className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && 'hidden'}`} onClick={handleSendEmail}>
+          <div
+            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${
+              isSendEmail && "hidden"
+            }`}
+            onClick={handleSendEmail}
+          >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
               {translate("offers.card_content.send_button")}
@@ -162,10 +164,10 @@ const OfferDetailsCard = ({ offerDetails, offerDeleteHandler, handleImageUpload,
                 dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
               />
             )) || (
-                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
-                  {offerDetails?.offerStatus}
-                </span>
-              )}
+              <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                {offerDetails?.offerStatus}
+              </span>
+            )}
           </div>
 
           <div className="flex justify-between items-center">

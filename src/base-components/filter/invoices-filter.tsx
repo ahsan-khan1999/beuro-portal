@@ -1,29 +1,24 @@
 import React, { SetStateAction, useState } from "react";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { CheckBoxType, ExtraFiltersType, FilterProps } from "@/types";
+import { CheckBoxType, FilterProps, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
-import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
 import EmailCheckField from "./fields/email-check-field";
+import useFilter from "@/hooks/filter/hook";
+import CheckField from "./fields/check-field";
 
-export default function InvoicesFilter({
-  filter,
-  moreFilter,
-  setFilter,
-  setMoreFilter,
-  handleFilterReset,
-  handleFilterResetToInitial,
-  typeList,
-}: FilterProps) {
-  const hanldeClose = () => {
-    setMoreFilter(false);
-  };
+export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
+  const {
+    extraFilterss,
+    handleExtraFilterToggle,
+    handleExtraFiltersClose,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    typeList,
+  } = useFilter({ filter, setFilter });
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   const checkbox: CheckBoxType[] = [
     { label: "Send", type: "send" },
@@ -34,28 +29,46 @@ export default function InvoicesFilter({
     { label: "Failed", type: "failed" },
   ];
 
-  const [extraFilters, setExtraFilters] = useState<ExtraFiltersType>({
-    type: "",
-    location: "",
-    email: [],
-    price: [],
+  const [moreFilter, setMoreFilter] = useState<{
+    email: string[];
+    price: string[];
+  }>({
+    email: filter.email || [],
+    price: filter.price || [],
   });
 
   const handleSave = () => {
     setFilter((prev) => ({
       ...prev,
-      type: extraFilters.type,
-      email: extraFilters.email,
-      price: extraFilters.price,
-      location: extraFilters.location,
+      email: moreFilter.email,
+      price: moreFilter.price,
     }));
-    hanldeClose();
+    handleExtraFiltersClose();
+  };
+  const handleEmailChange = (value: string, isChecked: boolean) => {
+    const updatedEmails = isChecked
+      ? [...moreFilter.email, value]
+      : moreFilter.email.filter((email) => email !== value);
+
+    setMoreFilter({ ...moreFilter, email: updatedEmails });
+  };
+  const handleLowPriceChange = (val: string) => {
+    setMoreFilter((prev) => ({
+      ...prev,
+      price: [val, prev.price[1]],
+    }));
   };
 
+  const handleHighPriceChange = (val: string) => {
+    setMoreFilter((prev) => ({
+      ...prev,
+      price: [prev.price[0], val],
+    }));
+  };
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
-        onClick={() => setMoreFilter(!moreFilter)}
+        onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -80,7 +93,7 @@ export default function InvoicesFilter({
         </defs>
       </svg>
       <AnimatePresence>
-        {moreFilter && (
+        {extraFilterss && (
           <motion.div
             className="absolute right-0 top-10 bg-white p-5 min-w-[400px] rounded-lg shadow-lg"
             initial={{ opacity: 0, y: -20 }}
@@ -113,17 +126,15 @@ export default function InvoicesFilter({
                   </label>
                 </div>
                 <div className="flex items-center gap-x-3 mt-4  ">
-                  {checkbox.map((item, index) => (
-                    <EmailCheckField
-                      key={index}
+                  {checkbox.map((item, idx) => (
+                    <CheckField
+                      key={idx}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}
-                      type={"status"}
+                      type={"email"}
                       label={item.label}
                       value={item.type}
-                      checked={false}
-                      onChange={() => console.log()
-                      }
+                      onChange={handleEmailChange}
                     />
                   ))}
                 </div>
@@ -144,10 +155,13 @@ export default function InvoicesFilter({
                   </label>
                 </div>
 
-                <PriceInputField label="Low Price" label2="High Price" 
-                onHighPriceChange={() => console.log()}
-                onLowPriceChange={() => console.log()
-                }
+                <PriceInputField
+                  label="Low Price"
+                  label2="High Price"
+                  lowPrice={moreFilter.price[0]}
+                  highPrice={moreFilter.price[1]}
+                  onHighPriceChange={handleHighPriceChange}
+                  onLowPriceChange={handleLowPriceChange}
                 />
               </div>
               {/* Price section  */}

@@ -5,45 +5,51 @@ import { FilterType } from "@/types";
 import { readEmail } from "@/api/slices/emailTracker/email";
 
 const useEmailTracker = () => {
-  const { email, lastPage, totalCount,loading } = useAppSelector(state => state.emailSlice)
+  const { email, lastPage, totalCount, loading } = useAppSelector(
+    (state) => state.emailSlice
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sortBy: "",
     text: "",
-    type: ""
+    type: "",
   });
 
   const [currentPageRows, setCurrentPageRows] =
     useState<TableRowEmailTracker[]>(email);
   const dispatch = useAppDispatch();
 
-
   const totalItems = totalCount;
   const itemsPerPage = 10;
   useEffect(() => {
-    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.MailTracker);
+    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          setCurrentPageRows(res?.payload?.MailTracker);
+        }
       }
-    })
-  }, [dispatch])
+    );
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
+    dispatch(
+      readEmail({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((response: any) => {
       if (response?.payload) {
         setCurrentPageRows(response?.payload?.MailTracker);
       }
-    })
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmail({ params: { filter: filter, page:currentPage, size: 10 } }))
+    dispatch(
+      readEmail({ params: { filter: filter, page: currentPage, size: 10 } })
+    );
   };
 
   return {
@@ -51,7 +57,8 @@ const useEmailTracker = () => {
     totalItems,
     handlePageChange,
     itemsPerPage,
-    filter, setFilter,
+    filter,
+    setFilter,
     handleFilterChange,
     loading,
   };
