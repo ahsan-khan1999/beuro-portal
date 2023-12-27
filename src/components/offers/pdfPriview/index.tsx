@@ -222,6 +222,7 @@ const PdfPriview = () => {
               },
               aggrementDetails:
                 offerDetails?.content?.offerContent?.description || "",
+              isOffer: true,
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
@@ -310,13 +311,13 @@ const PdfPriview = () => {
   const handleEmailSend = async () => {
     try {
       const data = await localStoreUtil.get_data("contractComposeEmail");
-      
-      if (data) {
-        let apiData = {...data}
-        // delete apiData["id"]
-        delete apiData["content"]
 
-        const res = await dispatch(sendOfferEmail({ data:apiData }));
+      if (data) {
+        let apiData = { ...data };
+        // delete apiData["id"]
+        delete apiData["content"];
+
+        const res = await dispatch(sendOfferEmail({ data: apiData }));
         if (res?.payload) {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }

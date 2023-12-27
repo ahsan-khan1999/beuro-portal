@@ -1,13 +1,12 @@
-import DetailFilter from "@/base-components/filter/leads-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { FiltersComponentProps } from "@/types";
 import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import EmployeesFilter from "@/base-components/filter/employees-filter";
 
 export default function EmployeesFilters({
   filter,
@@ -31,7 +30,7 @@ export default function EmployeesFilters({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <DetailFilter filter={filter} setFilter={setFilter} />
+      <EmployeesFilter filter={filter} setFilter={setFilter} />
 
       <Button
         id="apply"

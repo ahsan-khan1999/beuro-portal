@@ -6,8 +6,6 @@ import { Button } from "@/base-components/ui/button/button";
 import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import useFilter from "@/hooks/filter/hook";
-import ContractFilter from "@/base-components/filter/contracts-filter";
 import ContentFilter from "@/base-components/filter/content-filter";
 
 export default function ContentFilters({
@@ -15,14 +13,6 @@ export default function ContentFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
-
   const router = useRouter();
 
   const { t: translate } = useTranslation();
@@ -40,15 +30,7 @@ export default function ContentFilters({
         options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
         label="Sort By"
       />
-      <ContentFilter
-        filter={filter}
-        setFilter={setFilter}
-        moreFilter={moreFilter}
-        setMoreFilter={setMoreFilter}
-        handleFilterResetToInitial={handleFilterResetToInitial}
-        handleFilterReset={handleFilterReset}
-        typeList={typeList}
-      />
+      <ContentFilter filter={filter} setFilter={setFilter} />
       <Button
         onClick={handleFilterChange}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
@@ -62,7 +44,7 @@ export default function ContentFilters({
         onClick={() => router.push("/content/add")}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text={translate("content.add_button")}
-        id="apply"      
+        id="apply"
         inputType="button"
         icon={plusIcon}
       />

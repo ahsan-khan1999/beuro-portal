@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
 import { CheckBoxType, FilterProps } from "@/types";
@@ -9,6 +9,7 @@ import { PriceInputField } from "./fields/price-input-field";
 import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
 import CheckField from "./fields/check-field";
+import EmailCheckField from "./fields/email-check-field";
 
 export default function OfferFilter({ filter, setFilter }: FilterProps) {
   const {
@@ -163,7 +164,6 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   </label>
                 </div>
                 <div className="flex items-center gap-x-10 my-5">
-                  <div className="flex items-center gap-x-10 my-5">
                     <RadioField
                       lable="Cash"
                       onChange={(val) =>
@@ -179,7 +179,6 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                       }
                     />
                   </div>
-                </div>
               </div>
               {/* payment section  */}
               {/* email section  */}
@@ -198,7 +197,7 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                 </div>
                 <div className="flex items-center gap-x-3 my-5">
                   {checkbox.map((item, idx) => (
-                    <CheckField
+                    <EmailCheckField
                       key={idx}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}
@@ -270,7 +269,8 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}>
+                    onClick={() => handleFilterReset("type", "None")}
+                  >
                     Reset
                   </label>
                 </div>

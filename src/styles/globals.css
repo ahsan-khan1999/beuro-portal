@@ -50,23 +50,20 @@ body {
   transition: all 0.5s ease-in-out;
 }
 
-#dropdownSerchBar::-webkit-scrollbar{
+#dropdownSerchBar::-webkit-scrollbar {
   width: 2px;
 }
-
 
 .sidebar-height {
   max-height: 800px;
 }
-.hoverTransetion{
+.hoverTransetion {
   transition: all 0.3s ease-in-out;
 }
 
-.hoverTransetion:hover{
+.hoverTransetion:hover {
   transition: all 0.3s ease-in-out;
 }
-
-
 
 /* ==================== */
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -77,8 +74,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   z-index: 1;
 }
-/* ===================== */
 
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+/* ===================== */
 
 /* Thin scrollbar track */
 ::-webkit-scrollbar {
@@ -114,11 +114,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* .ck-editor {
   max-width: 904px !important;
 } */
-.ck-content:focus{
+.ck-content:focus {
   border: 1px solid #4a13e7 !important;
 }
-.ck .ck-toolbar{
- border-bottom: none !important;
+.ck .ck-toolbar {
+  border-bottom: none !important;
 }
 .ck-content {
   min-height: 260px !important;

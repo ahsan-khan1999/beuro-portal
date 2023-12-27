@@ -32,7 +32,7 @@ export default function EmailCheckField({
     <>
       <label
         htmlFor={label}
-        className="custom-checkbox py-2 pl-[10px] pr-[22px] h-fit bg-white rounded-md relative cursor-pointer w-fit"
+        className={`custom-checkbox flex flex-row-reverse justify-center items-center gap-2 border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-fit ${checkboxFilter?.[type]?.includes(value) ? "border-primary" : ""}`}
       >
         <input
           type="checkbox"
@@ -49,10 +49,10 @@ export default function EmailCheckField({
         </p>
         {checkboxFilter[type] && checkboxFilter?.[type]?.includes(value) ? (
           <svg
-            className="absolute top-1 right-1"
+            className=" top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="13"
+            width="16"
+            height="16"
             viewBox="0 0 14 13"
             fill="none"
           >
@@ -63,10 +63,10 @@ export default function EmailCheckField({
           </svg>
         ) : (
           <svg
-            className="absolute top-1 right-1"
+            className=" top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="13"
+            width="16"
+            height="16"
             viewBox="0 0 14 13"
             fill="none"
           >

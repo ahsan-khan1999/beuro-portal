@@ -262,8 +262,13 @@
       "confirm": "Confirm"
     }
   },
-
+  "request_modal": {
+    "main_heading": "Your Request has been sent",
+    "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
+    "button": "Done"
+  },
   "contact_support": {
+    "heading": "Contact & Support",
     "main_heading": "Submit your request",
     "form_fields": {
       "full_name": "Full Name",
@@ -272,11 +277,6 @@
       "reason": "Reson for Contact",
       "message": "Your Message",
       "request_button": "Submit Request"
-    },
-    "request_modal": {
-      "main_heading": "Your Request has been sent",
-      "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
-      "button": "Done"
     }
   },
   "email_tracker": {
@@ -1093,7 +1093,6 @@
       "link": "Or copy link",
       "copy_button": "Copy",
       "copied_button": "Copied"
-
     },
     "are_you_modal": {
       "main_heading": "Are Your Sure",

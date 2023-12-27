@@ -88,66 +88,62 @@ export default function ServicesFilter({ filter, setFilter }: FilterProps) {
                 Reset All
               </span>
             </div>
-            <div className="">
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Date
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <DatePicker
-                    label="From"
-                    label2="To"
-                    dateFrom={moreFilters.date[0]}
-                    dateTo={moreFilters.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
-                  />
-                </div>
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  Date
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => handleFilterReset("type", "None")}
+                >
+                  Reset
+                </label>
               </div>
-              {/* Price section  */}
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between mb-2">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-
-                <PriceInputField
-                  label="Low Price"
-                  label2="High Price"
-                  lowPrice={moreFilters.price[0]}
-                  highPrice={moreFilters.price[1]}
-                  onHighPriceChange={handleHighPriceChange}
-                  onLowPriceChange={handleLowPriceChange}
+              <div>
+                <DatePicker
+                  label="From"
+                  label2="To"
+                  dateFrom={moreFilters.date[0]}
+                  dateTo={moreFilters.date[1]}
+                  onChangeFrom={(val) =>
+                    setMoreFilters((prev) => ({
+                      ...prev,
+                      date: [val, prev.date[1]],
+                    }))
+                  }
+                  onChangeTo={(val) =>
+                    setMoreFilters((prev) => ({
+                      ...prev,
+                      date: [prev.date[0], val],
+                    }))
+                  }
                 />
               </div>
-              {/* Price section  */}
+            </div>
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between mb-2">
+                <label htmlFor="type" className="font-medium text-base">
+                  Price
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => handleFilterReset("type", "None")}
+                >
+                  Reset
+                </label>
+              </div>
+
+              <PriceInputField
+                label="Low Price"
+                label2="High Price"
+                lowPrice={moreFilters.price[0]}
+                highPrice={moreFilters.price[1]}
+                onHighPriceChange={handleHighPriceChange}
+                onLowPriceChange={handleLowPriceChange}
+              />
             </div>
             <div>
               <BaseButton

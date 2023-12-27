@@ -5,7 +5,6 @@ import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
-import useFilter from "@/hooks/filter/hook";
 import { useTranslation } from "next-i18next";
 import ServicesFilter from "@/base-components/filter/services-filter";
 

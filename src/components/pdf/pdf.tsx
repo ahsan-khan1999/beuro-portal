@@ -13,14 +13,12 @@ export const Pdf = <T,>({
   templateSettings,
   isQr,
   totalPages,
-  isOffer,
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
   templateSettings: TemplateType | null;
   isQr?: boolean;
   totalPages: number;
-  isOffer?: boolean;
 }) => {
   return (
     <Container>
@@ -33,7 +31,7 @@ export const Pdf = <T,>({
             isShowTotal={newPageData.length === 1}
             templateSettings={templateSettings}
             totalPages={totalPages}
-            isOffer={isOffer}
+            isOffer={pdfData.isOffer}
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (
@@ -57,7 +55,7 @@ export const Pdf = <T,>({
           templateSettings={templateSettings}
           totalPages={totalPages}
           currPage={totalPages}
-          isOffer={isOffer}
+          isOffer={pdfData.isOffer}
         />
         {isQr && (
           <PaymentQRCodeDetails

@@ -1,5 +1,8 @@
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import {
+  readInvoiceDetails,
+  sendInvoiceEmail,
+} from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
 import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
@@ -26,6 +29,8 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import { InvoiceCardContentProps } from "@/types/invoice";
+import { ContentTableRowTypes } from "@/types/content";
+import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 
 export const productItems: ServiceList[] = [
   {
@@ -131,10 +136,14 @@ interface ActionType {
 
 const DetailsPdfPriview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [invoiceData, setInvoiceData] = useState<PdfProps<InvoiceEmailHeaderProps>>(DUMMY_DATA);
+  const [invoiceData, setInvoiceData] =
+    useState<PdfProps<InvoiceEmailHeaderProps>>(DUMMY_DATA);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+  const [email, setEmail] = useState<
+    ContentTableRowTypes["invoiceContent"] & { email: string }
+  >();
 
   const {
     auth: { user },
@@ -252,7 +261,7 @@ const DetailsPdfPriview = () => {
               aggrementDetails:
                 invoiceDetails?.contractID.offerID.content?.confirmationContent
                   ?.description || "",
-              isOffer: !!invoiceDetails?.contractID?.id,
+              isOffer: false,
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
@@ -291,6 +300,10 @@ const DetailsPdfPriview = () => {
 
             setNewPageData(distributeItems());
             setInvoiceData(formatData);
+            setEmail({
+              ...invoiceDetails?.contractID?.offerID?.content?.invoiceContent,
+              email: invoiceDetails.contractID.offerID.createdBy.email,
+            });
           }
         }
       );
@@ -342,13 +355,26 @@ const DetailsPdfPriview = () => {
     // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
-
+  console.log(email);
   const handleEmailSend = async () => {
-    const data = await localStoreUtil.get_data("contractComposeEmail");
-    const res = await dispatch(sendOfferEmail({ data }));
-    if (res?.payload)
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-    await localStoreUtil.remove_data("contractComposeEmail");
+    console.log("hi");
+    if (email) {
+      const data = {
+        id: invoiceID,
+        email: email.email,
+        subject: email.title,
+        description: email.description,
+        pdf: email.attachments,
+      };
+      const res = await dispatch(sendInvoiceEmail({ data }));
+      if (res?.payload)
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+    }
+    // const data = await localStoreUtil.get_data("contractComposeEmail");
+    // const res = await dispatch(sendOfferEmail({ data }));
+    // if (res?.payload)
+    //   dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+    // await localStoreUtil.remove_data("contractComposeEmail");
   };
 
   const handleDonwload = () => {
@@ -379,20 +405,9 @@ const DetailsPdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
-      {/* <PdfCard />
-      <div className=" flex flex-col">
-      <Page1 />
-      </div>
-      <div className="mt-[30px]">
-      <Page2 />
-      </div>
-      <div className="mt-[30px]">
-      <Page3 />
-      <PdfButtons />
-    </div> */}
-      {/* <PdfCard /> */}
       <InvoiceEmailHeader
         {...invoiceData?.emailHeader}
         contentName={invoiceData?.emailHeader.contentName}
@@ -401,10 +416,6 @@ const DetailsPdfPriview = () => {
         onDownload={handleDonwload}
         onPrint={handlePrint}
       />
-      {/* <Page1 /> */}
-
-      {/* <Page2 /> */}
-      {/* <DocumentHeader /> */}
       <div className="my-5">
         <Pdf<InvoiceEmailHeaderProps>
           pdfData={invoiceData}
