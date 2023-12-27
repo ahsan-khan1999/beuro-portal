@@ -246,7 +246,8 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
         router.query.otp
       );
-
+      setToken(response?.headers?.accesstoken);
+      setRefreshToken(response?.headers?.refreshtoken);
       saveUser(response.data.data.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       // conditionHandlerLogin(router, response);

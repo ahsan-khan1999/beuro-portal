@@ -414,6 +414,8 @@ const createPlan = (data) =>
 
 const updatePlan = (data) =>
   put(SERVICE_URLS.plan + `/${data?.id}`, data, { feature: featureConstants.login });
+const choosePlan = (data) =>
+  put(SERVICE_URLS.choosePlan + `${data?.id}`, data, { feature: featureConstants.login });
 const deletePlan = (data) =>
   del(SERVICE_URLS.plan + `/${data?.id}`, {}, { feature: featureConstants.login });
 
@@ -559,6 +561,7 @@ const apiServices = {
   deletePlan,
   updateAdminSettings,
   updateUserStatus,
-  createSignature
+  createSignature,
+  choosePlan
 };
 export default apiServices;
