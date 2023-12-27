@@ -22,7 +22,7 @@ export default function ContactSupport() {
 
   const route = () => {
     router.push("/dashboard");
-    onClose()
+    onClose();
   };
 
   const renderModal = () => {
@@ -49,7 +49,7 @@ export default function ContactSupport() {
     <>
       <div className="flex justify-between items-center">
         <h1 className="text-xl text-[#222B45] ">
-          {translate("contact_support.main_heading")}
+          {translate("contact_support.heading")}
         </h1>
       </div>
       <div className="flex mt-5">

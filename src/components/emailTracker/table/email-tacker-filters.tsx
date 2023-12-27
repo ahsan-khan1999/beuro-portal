@@ -1,7 +1,6 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
-import useFilter from "@/hooks/filter/hook";
 import { FiltersComponentProps } from "@/types";
 import React from "react";
 
@@ -10,15 +9,6 @@ export default function EmailTrackerFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    isOpen,
-    toggleHandler,
-    moreFilter,
-    setMoreFilter,
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">

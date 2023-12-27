@@ -1,36 +1,24 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps } from "@/types";
+import { CheckBoxType, FilterProps, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
-import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
+import EmailCheckField from "./fields/email-check-field";
 import useFilter from "@/hooks/filter/hook";
-export default function ContractsFilter({ filter, setFilter }: FilterProps) {
+import CheckField from "./fields/check-field";
+
+export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
   const {
     extraFilterss,
-    handleFilterResetToInitial,
-    handleFilterReset,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
+    handleFilterResetToInitial,
+    handleFilterReset,
+    typeList,
   } = useFilter({ filter, setFilter });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  const [moreFilters, setMoreFilters] = useState<{
-    date: string[];
-    payment: string;
-    price: string[];
-  }>({
-    date: filter?.date || [],
-    payment: "",
-    price: [],
-  });
-
-  const handleSave = () => {
-    setFilter((prev) => ({ ...prev, ...moreFilters }));
-    handleExtraFiltersClose();
-  };
 
   const checkbox: CheckBoxType[] = [
     { label: "Send", type: "send" },
@@ -41,15 +29,38 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
     { label: "Failed", type: "failed" },
   ];
 
+  const [moreFilter, setMoreFilter] = useState<{
+    email: string[];
+    price: string[];
+  }>({
+    email: filter.email || [],
+    price: filter.price || [],
+  });
+
+  const handleSave = () => {
+    setFilter((prev) => ({
+      ...prev,
+      email: moreFilter.email,
+      price: moreFilter.price,
+    }));
+    handleExtraFiltersClose();
+  };
+  const handleEmailChange = (value: string, isChecked: boolean) => {
+    const updatedEmails = isChecked
+      ? [...moreFilter.email, value]
+      : moreFilter.email.filter((email) => email !== value);
+
+    setMoreFilter({ ...moreFilter, email: updatedEmails });
+  };
   const handleLowPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
+    setMoreFilter((prev) => ({
       ...prev,
       price: [val, prev.price[1]],
     }));
   };
 
   const handleHighPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
+    setMoreFilter((prev) => ({
       ...prev,
       price: [prev.price[0], val],
     }));
@@ -100,10 +111,11 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
               </span>
             </div>
             <div className="">
-              <div className="mt-5 mb-2">
+              {/* email section  */}
+              <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Date
+                    Email
                   </label>
                   <label
                     htmlFor="type"
@@ -113,60 +125,24 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
                     Reset
                   </label>
                 </div>
-                <div>
-                  <DatePicker
-                    label="From"
-                    label2="To"
-                    dateFrom={moreFilters.date[0]}
-                    dateTo={moreFilters.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
-                  />
+                <div className="flex items-center gap-x-3 mt-4  ">
+                  {checkbox.map((item, idx) => (
+                    <CheckField
+                      key={idx}
+                      checkboxFilter={filter}
+                      setCheckBoxFilter={setFilter}
+                      type={"email"}
+                      label={item.label}
+                      value={item.type}
+                      onChange={handleEmailChange}
+                    />
+                  ))}
                 </div>
               </div>
-              {/* payment section  */}
+              {/* email section  */}
+              {/* Price section  */}
               <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Payment
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-10 my-5">
-                    <RadioField
-                      lable="Cash"
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                      checked={moreFilters.payment === "Cash"}
-                    />
-                    <RadioField
-                      lable="Online"
-                      checked={moreFilters.payment === "Online"}
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                    />
-                  </div>
-              </div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
+                <div className="flex justify-between mb-2">
                   <label htmlFor="type" className="font-medium text-base">
                     Price
                   </label>
@@ -178,17 +154,17 @@ export default function ContractsFilter({ filter, setFilter }: FilterProps) {
                     Reset
                   </label>
                 </div>
-                <div>
-                  <PriceInputField
-                    label="Low Price"
-                    label2="High Price"
-                    lowPrice={moreFilters.price[0]}
-                    highPrice={moreFilters.price[1]}
-                    onHighPriceChange={handleHighPriceChange}
-                    onLowPriceChange={handleLowPriceChange}
-                  />
-                </div>
+
+                <PriceInputField
+                  label="Low Price"
+                  label2="High Price"
+                  lowPrice={moreFilter.price[0]}
+                  highPrice={moreFilter.price[1]}
+                  onHighPriceChange={handleHighPriceChange}
+                  onLowPriceChange={handleLowPriceChange}
+                />
               </div>
+              {/* Price section  */}
             </div>
             <div>
               <BaseButton

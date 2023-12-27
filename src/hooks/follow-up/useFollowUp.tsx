@@ -12,8 +12,12 @@ const useFollowUps = () => {
     text: "",
   });
   const dispatch = useAppDispatch();
-  const { followUp, totalCount, loading } = useAppSelector(state => state.followUp)
-  const { modal: { data } } = useAppSelector((state) => state.global);
+  const { followUp, totalCount, loading } = useAppSelector(
+    (state) => state.followUp
+  );
+  const {
+    modal: { data },
+  } = useAppSelector((state) => state.global);
   const { modal } = useAppSelector((state) => state.global);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -22,47 +26,47 @@ const useFollowUps = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    if (followUp?.length === 0) dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage));
-      }
-    })
-  }, [dispatch])
+    if (followUp?.length === 0)
+      dispatch(
+        readFollowUp({ params: { filter: filter, page: 1, size: 10 } })
+      ).then((res: any) => {
+        if (res?.payload) {
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          setCurrentPageRows(
+            res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage)
+          );
+        }
+      });
+  }, [dispatch]);
   useEffect(() => {
     // Update rows for the current page
     const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(
-      followUp.slice(startIndex, startIndex + itemsPerPage)
-    );
+    setCurrentPageRows(followUp.slice(startIndex, startIndex + itemsPerPage));
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = () => {
-    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
+    dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   };
   const handleDeleteFollowUp = (id: string) => {
-    dispatch(updateModalType({
-      type: ModalType.INFO_DELETED,
-      data: id
-
-    }
-    ));
-
-  }
+    dispatch(
+      updateModalType({
+        type: ModalType.INFO_DELETED,
+        data: id,
+      })
+    );
+  };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const routeHandler = async () => {
-    const response = await dispatch(deleteFollowUp({ data: { id: data } }))
+    const response = await dispatch(deleteFollowUp({ data: { id: data } }));
     if (response?.payload)
-      dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }))
-
-  }
+      dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
+  };
   const MODAL_CONFIG: ModalConfigType = {
-
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
@@ -75,7 +79,17 @@ const useFollowUps = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  return { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleDeleteFollowUp, renderModal, handleFilterChange };
+  return {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleDeleteFollowUp,
+    renderModal,
+    handleFilterChange,
+  };
 };
 
 export default useFollowUps;

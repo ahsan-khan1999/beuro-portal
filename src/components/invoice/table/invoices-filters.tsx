@@ -1,8 +1,6 @@
-import DetailFilter from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType } from "@/types";
 import React, { SetStateAction } from "react";
 import { Button } from "@/base-components/ui/button/button";

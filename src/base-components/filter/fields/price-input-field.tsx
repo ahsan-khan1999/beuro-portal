@@ -27,7 +27,7 @@ export const PriceInputField = ({
             name="number"
             type="number"
             value={lowPrice}
-            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] px-5 py-[15px] placeholder:text-lightDark"
+            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px] px-5 py-[14px] h-[42px] placeholder:text-lightDark"
             placeholder="0"
             onChange={(e) =>
               onLowPriceChange && onLowPriceChange(e.currentTarget.value)
@@ -46,7 +46,7 @@ export const PriceInputField = ({
             name="number"
             type="number"
             value={highPrice}
-            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px]  px-5 py-[15px] placeholder:text-lightDark"
+            className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block w-[170px]  px-5 py-[14px] h-[42px] placeholder:text-lightDark"
             placeholder="0"
             onChange={(e) =>
               onHighPriceChange && onHighPriceChange(e.currentTarget.value)
