@@ -33,8 +33,8 @@ const VerifyEmail = () => {
         dispatch(sendOtpViaEmail({}))
     }
     const handleRouteChange = () => {
-        conditionHandlerProfile(router, user)
-
+        // conditionHandlerProfile(router, user)
+        router.push("/login")
     }
     return (
         <div className="min-h-screen flex justify-center items-center">

@@ -2,10 +2,11 @@ import PdfPriview from "@/components/contract/pdf-preview";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
+import { Layout } from "@/layout";
 
 
 const index = () => {
-  return <PdfPriview />;
+  return  <Layout><PdfPriview /></Layout>;
 };
 
 export default index;

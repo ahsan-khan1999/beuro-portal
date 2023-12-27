@@ -201,7 +201,7 @@ const DetailsPdfPriview = () => {
               },
               movingDetails: {
                 address:
-                  invoiceDetails?.contractID.offerID.leadID.addressID.address,
+                  invoiceDetails?.contractID?.offerID?.leadID?.addressID?.address,
                 header: invoiceDetails?.contractID?.offerID?.title,
                 workDates: invoiceDetails?.contractID?.offerID?.date,
               },

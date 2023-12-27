@@ -11,7 +11,9 @@ export interface contractTableTypes {
   offerID: ContractOfferDetails;
   createdAt: string;
   contractStatus: "Open" | "Confirmed" | "Cancelled";
-  paymentType:string
+  paymentType:string;
+  title:string;
+  additionalDetails:string
 }
 export interface ContractOfferDetails {
   refID: string;

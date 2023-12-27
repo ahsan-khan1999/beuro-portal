@@ -87,7 +87,9 @@ const SERVICE_URLS = {
   plan: "/plan",
   adminSettings: "/setting/update-admin-password/",
   changeStatus: "/user/change-status/",
-  addSignature: "/offer/add-signature/"
+  addSignature: "/offer/add-signature/",
+  contractContent: "/contract/",
+  invoiceContent: "/invoice/invoice-collection/update-content/"
 
 };
 
@@ -426,6 +428,11 @@ const updateUserStatus = (data) =>
 
 const createSignature = (data) =>
   put(SERVICE_URLS.addSignature + `${data?.id}`, data, { feature: featureConstants.login });
+
+const updateContractContent = (data) =>
+  put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });
+const updateInvoiceContent = (data) =>
+  put(SERVICE_URLS.invoiceContent + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -562,6 +569,8 @@ const apiServices = {
   updateAdminSettings,
   updateUserStatus,
   createSignature,
-  choosePlan
+  choosePlan,
+  updateContractContent,
+  updateInvoiceContent
 };
 export default apiServices;

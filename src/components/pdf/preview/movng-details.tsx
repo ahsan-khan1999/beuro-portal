@@ -9,6 +9,7 @@ export const MovingDetails = ({
   address,
   workDates,
   isOffer,
+  handleTitleUpdate
 }: MovingDetailsProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
@@ -20,6 +21,7 @@ export const MovingDetails = ({
 
   const handleSaveClick = () => {
     setIsEditing(false);
+    handleTitleUpdate && handleTitleUpdate(tempText)
     setText(tempText);
   };
 
@@ -31,11 +33,10 @@ export const MovingDetails = ({
     <>
       {!isOffer ? (
         <div
-          className={`mb-[10px] ${
-            isEditing
+          className={`mb-[10px] ${isEditing
               ? "border border-[#4B4B4B] p-2 rounded-md flex justify-between"
               : ""
-          }`}
+            }`}
         >
           <div className="flex gap-[10px]">
             {isEditing ? (
