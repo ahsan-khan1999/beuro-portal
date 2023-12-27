@@ -175,6 +175,20 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
         }
     });
 
+export const signOffer: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
+        const { offerDetails: data, router, translate } = args as any;
+
+        try {
+            await apiServices.createSignature(data);
+           
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            // setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 
 const OfferSlice = createSlice({
     name: "OfferSlice",
@@ -279,6 +293,15 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updatePaymentStatus.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(signOffer.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(signOffer.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(signOffer.rejected, (state) => {
             state.loading = false
         });
 
