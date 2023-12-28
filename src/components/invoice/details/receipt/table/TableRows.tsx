@@ -45,9 +45,10 @@ const TableRows = ({
 
             <span className="py-4 flex items-center justify-center">
               <div
-                className={`bg-[${getInvoiceEmailColor(
-                  item.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center`}
+                style={{
+                  backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
+                }}
+                className=" text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
               >
                 {item.emailStatus}
               </div>
@@ -66,7 +67,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] w-full rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
@@ -86,7 +87,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] w-full rounded-lg px-4 py-[3px] flex items-center `}
+                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}

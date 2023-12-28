@@ -63,7 +63,7 @@ const useOffers = () => {
     // dispatch(readOffer({ params: { filter: '', page: 1, size: 10 } })).then(
     //   (res: any) => {
     //     console.log(res,"res");
-        
+
     //     if (res?.payload) {
     //       setCurrentPageRows(
     //         res?.payload?.Offer
@@ -73,7 +73,7 @@ const useOffers = () => {
     // );
   }, []);
   const handleFilterChange = () => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
+    dispatch(readOffer({ params: { filter: {} } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -113,8 +113,8 @@ const useOffers = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(setImages([]))
-    const filteredLead = offer?.find((item_) => item_.id === item)
+    dispatch(setImages([]));
+    const filteredLead = offer?.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setOfferDetails(filteredLead));
       dispatch(
@@ -152,10 +152,11 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) => {
+    dispatch(
+      readOffer({ params: { filter: {} } })
+    ).then((response: any) => {
       setCurrentPageRows(response?.payload?.Offer);
-    })
-
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
@@ -172,7 +173,7 @@ const useOffers = () => {
     handleFilterChange,
     filter,
     setFilter,
-    loading
+    loading,
   };
 };
 

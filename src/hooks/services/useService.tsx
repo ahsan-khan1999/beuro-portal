@@ -21,7 +21,7 @@ const useService = () => {
   const itemsPerPage = 10;
   useEffect(() => {
 
-    dispatch(readService({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+    dispatch(readService({ params: { filter: {} } })).then((res: any) => {
 
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Service);
@@ -31,7 +31,7 @@ const useService = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(readService({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+    dispatch(readService({ params: { filter: {} } })).then((res: any) => {
       setCurrentPageRows(res?.payload?.Service)
     })
   }, [currentPage]);
@@ -40,7 +40,7 @@ const useService = () => {
     setCurrentPage(page);
   };
   const handleFilterChange = () => {
-    dispatch(readService({ params: { filter: filter, page: currentPage, size: 10 } }))
+    dispatch(readService({ params: { filter: {} } }))
   };
   return {
     currentPageRows,

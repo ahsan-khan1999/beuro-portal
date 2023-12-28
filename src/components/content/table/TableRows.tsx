@@ -22,15 +22,26 @@ const TableRows = ({
               })
             }
             key={item.id}
-            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(250px,_100%)_minmax(150px,_150px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(80px,_80px),minmax(0px,_250px)_minmax(180px,_100%)_minmax(200px,_200px)_minmax(60px,_60px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(70px,_70px)] mlg:grid-cols-[minmax(80px,_80px),minmax(0px,_250px)_minmax(180px,_100%)_minmax(200px,_200px)_minmax(60px,_60px)] mt-2 bg-white rounded-md"
           >
             <span className="py-4 rounded-md flex items-center">
               {item.refID}
             </span>
-            <span className="py-4 flex items-center">{item.contentName}</span>
-            <span className="py-4 flex items-center break-all">
-              {item.offerContent.title}
+            <span className="py-4 flex items-center ">
+              {item.contentName.slice(0, 10)}
             </span>
+            <span
+              className="py-4 flex items-center break-all"
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {item.offerContent.title.length > 30
+                ? `${item.offerContent.title.slice(0, 30)}...`
+                : item.offerContent.title}
+            </span>
+
             <span className="py-4 flex items-center">
               {formatDateString(item?.createdAt)}
             </span>

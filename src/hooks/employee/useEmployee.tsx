@@ -26,7 +26,7 @@ const useEmployee = () => {
   useEffect(() => {
     dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE))
     dispatch(
-      readEmployee({ params: { filter: filter, page: 1, size: 10 } })
+      readEmployee({ params: { filter: {} } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(
@@ -36,7 +36,7 @@ const useEmployee = () => {
     });
   }, [dispatch]);
   useEffect(() => {
-    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
+    dispatch(readEmployee({ params: { filter: {} } })).then((response: any) => {
       setCurrentPageRows(response?.payload?.Employee);
 
     })
@@ -46,7 +46,7 @@ const useEmployee = () => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } }));
+    dispatch(readEmployee({ params: { filter: {} } }));
   };
 
   return {

@@ -40,6 +40,8 @@ const TableRows = ({
   return (
     <div>
       {collectiveInvoice?.map((item, index: number) => {
+        console.log(item.emailStatus);
+
         return (
           <div
             key={index}
@@ -66,9 +68,10 @@ const TableRows = ({
 
             <span className="py-4 flex justify-center items-center">
               <div
-                className={`bg-[${getInvoiceEmailColor(
-                  item.emailStatus
-                )}] text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm`}
+                style={{
+                  backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
+                }}
+                className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px]"
               >
                 <span>{item.emailStatus}</span>
               </div>
@@ -87,7 +90,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
@@ -107,7 +110,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}
