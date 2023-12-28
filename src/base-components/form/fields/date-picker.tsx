@@ -23,6 +23,15 @@ export const DatePicker = ({
   return (
     <>
       <div className={`relative w-full flex items-center`}>
+        {remove && (
+          <div
+            className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+            onClick={onRemove}
+          >
+            {remove}
+          </div>
+        )}
+
         {svg && (
           <span
             className={`mr-3 absolute left-4 z-50 ${
