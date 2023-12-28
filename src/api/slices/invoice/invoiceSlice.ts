@@ -239,7 +239,6 @@ export const sendInvoiceEmail: AsyncThunk<boolean, object, object> | any =
         const { data, router, setError, translate } = args as any;
 
         try {
-            alert("in")
             await apiServices.sendInvoiceEmail(data);
             return true;
         } catch (e: any) {

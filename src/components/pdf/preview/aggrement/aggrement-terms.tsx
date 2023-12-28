@@ -18,6 +18,10 @@ export const AggrementTerms = ({
   handleDescriptionUpdate?: (value: string) => void
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [error, setError] = useState({
+    aggrement: null
+  });
+
   const [editedText, setEditedText] = useState(aggrementDetails);
 
   useEffect(() => {
@@ -31,6 +35,7 @@ export const AggrementTerms = ({
   };
 
   const handleSaveClick = () => {
+    if (!editedText) return;
     handleDescriptionUpdate && handleDescriptionUpdate(editedText)
     setIsEditing(false);
     // Here, ideally, you would also handle saving editedText to a server or state management
@@ -38,7 +43,7 @@ export const AggrementTerms = ({
 
   const handleCancelClick = () => {
     setEditedText(aggrementDetails);
-     // Revert to the original text
+    // Revert to the original text
     setIsEditing(false);
   };
 
@@ -71,7 +76,9 @@ export const AggrementTerms = ({
                 onChange={(event, editor) => {
                   setEditedText(editor.getData());
                 }}
+
               />
+              { }
               <div className="flex gap-[19px] justify-end mt-4">
                 <button
                   onClick={handleCancelClick}
