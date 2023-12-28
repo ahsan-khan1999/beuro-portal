@@ -30,10 +30,8 @@ const useContract = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
     sort: "",
     text: "",
-    type: "",
     date: {
       $gte: "",
       $lte: "",
@@ -53,18 +51,18 @@ const useContract = () => {
   //   });
   // }, [query?.filter]);
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
 
-    dispatch(readContract({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(
-          res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage)
-        );
-      }
-    });
+    // dispatch(readContract({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     const startIndex = (currentPage - 1) * itemsPerPage;
+    //     setCurrentPageRows(
+    //       res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage)
+    //     );
+    //   }
+    // });
   }, []);
   const handleFilterChange = (filter: FilterType) => {
     dispatch(readContract({ params: { filter: {} } }));
@@ -147,8 +145,17 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(contract?.slice(startIndex, startIndex + itemsPerPage));
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+
+    dispatch(readContract({ params: queryParams })).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(
+          res?.payload?.Contract
+        );
+      }
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

@@ -35,8 +35,8 @@ export default function PaymentsFilter({
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-       
-        options={["1", "2", "2", "2", "2"]}
+
+        options={[{ label: "1", value: "1" }, { label: "2", value: "2" }, { label: "2", value: "2" }, { label: "2", value: "2" }, { label: "2", value: "2" }]}
         label="Sort By"
       />
     </div>

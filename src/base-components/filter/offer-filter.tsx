@@ -181,7 +181,7 @@ export default function OfferFilter({
                 </div>
               </div>
               {/* payment section  */}
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Payment
@@ -210,10 +210,10 @@ export default function OfferFilter({
                     }
                   />
                 </div>
-              </div>
+              </div> */}
               {/* payment section  */}
               {/* email section  */}
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Email
@@ -239,10 +239,10 @@ export default function OfferFilter({
                     />
                   ))}
                 </div>
-              </div>
+              </div> */}
               {/* email section  */}
               {/* Price section  */}
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Price
@@ -265,9 +265,9 @@ export default function OfferFilter({
                     onLowPriceChange={handleLowPriceChange}
                   />
                 </div>
-              </div>
+              </div> */}
               {/* Price section  */}
-              <div>
+              {/* <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
                     Location
@@ -290,7 +290,7 @@ export default function OfferFilter({
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

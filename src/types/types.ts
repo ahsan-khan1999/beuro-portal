@@ -612,6 +612,7 @@ export interface DocumentHeaderDetailsProps {
   offerNo: string;
   offerDate: string;
   createdBy: string;
+  logo:string
 }
 
 export interface ProductItemFooterProps {
@@ -790,6 +791,8 @@ export interface PdfProps<T = EmailHeaderProps> {
   aggrementDetails: string;
   isOffer?: boolean;
   id?: string;
+  signature?:string;
+
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -851,6 +854,7 @@ export interface AggrementProps {
   currPage: number;
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
+  signature?:string
 }
 
 export interface FiltersComponentProps {

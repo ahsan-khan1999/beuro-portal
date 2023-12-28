@@ -80,6 +80,7 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
+    logo:""
   },
   contactAddress: {
     address: {
@@ -172,6 +173,7 @@ const PdfPriview = () => {
                 offerNo: contractDetails?.offerID?.offerNumber,
                 offerDate: contractDetails?.offerID?.createdAt,
                 createdBy: contractDetails?.offerID?.createdBy?.fullName,
+                logo:contractDetails?.offerID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {

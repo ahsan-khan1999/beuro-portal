@@ -87,6 +87,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
+    logo:""
   },
   contactAddress: {
     address: {
@@ -184,6 +185,7 @@ const DetailsPdfPriview = () => {
                 offerNo: invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
                 offerDate: invoiceDetails?.invoiceID?.createdAt,
                 createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                logo:invoiceDetails?.invoiceID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {

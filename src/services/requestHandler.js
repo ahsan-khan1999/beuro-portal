@@ -91,7 +91,8 @@ const SERVICE_URLS = {
   changeStatus: "/user/change-status/",
   addSignature: "/offer/add-signature/",
   contractContent: "/contract/",
-  invoiceContent: "/invoice/invoice-collection/update-content/"
+  invoiceContent: "/invoice/invoice-collection/update-content/",
+  acceptOffer: "/offer/add-signature/"
 
 };
 
@@ -435,6 +436,9 @@ const updateContractContent = (data) =>
   put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });
 const updateInvoiceContent = (data) =>
   put(SERVICE_URLS.invoiceContent + `${data?.id}`, data, { feature: featureConstants.login });
+
+const acceptOffer = (data) =>
+  put(SERVICE_URLS.acceptOffer + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -573,6 +577,7 @@ const apiServices = {
   createSignature,
   choosePlan,
   updateContractContent,
-  updateInvoiceContent
+  updateInvoiceContent,
+  acceptOffer
 };
 export default apiServices;

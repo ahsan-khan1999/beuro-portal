@@ -34,17 +34,17 @@ const useContent = () => {
   useEffect(() => {
     localStoreUtil.remove_data("content");
     dispatch(setContentDetails(DEFAULT_CONTENT));
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readContent({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(
-          res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
-        );
-      }
-    });
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+    // dispatch(readContent({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     const startIndex = (currentPage - 1) * itemsPerPage;
+    //     setCurrentPageRows(
+    //       res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
+    //     );
+    //   }
+    // });
   }, []);
   useEffect(() => {
     // Update rows for the current page

@@ -162,7 +162,7 @@ export default function ContractsFilter({
                 </div>
               </div>
               {/* payment section  */}
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Payment
@@ -215,7 +215,7 @@ export default function ContractsFilter({
                     onLowPriceChange={handleLowPriceChange}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

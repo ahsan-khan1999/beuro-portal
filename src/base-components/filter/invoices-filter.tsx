@@ -150,7 +150,7 @@ export default function InvoicesFilter({
                   ))}
                 </div>
               </div>
-              <div className="mt-5 mb-2">
+              {/* <div className="mt-5 mb-2">
                 <div className="flex justify-between mb-2">
                   <label htmlFor="type" className="font-medium text-base">
                     Price
@@ -172,7 +172,7 @@ export default function InvoicesFilter({
                   onHighPriceChange={handleHighPriceChange}
                   onLowPriceChange={handleLowPriceChange}
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

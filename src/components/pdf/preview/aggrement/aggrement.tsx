@@ -15,7 +15,8 @@ export const Aggrement = ({
   totalPages,
   currPage,
   isOffer,
-  handleDescriptionUpdate
+  handleDescriptionUpdate,
+  signature
 }: AggrementProps) => {
   return (
     <div>
@@ -50,7 +51,7 @@ export const Aggrement = ({
               </div>
             </div>
             <div className="w-[450px] h-[278px]">
-              <SignaturePad />
+              <SignaturePad signature={signature}/>
               <div className="flex flex-col gap-y-[18px]">
                 <hr />
                 <span className="text-base text-black font-normal">
