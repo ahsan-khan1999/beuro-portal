@@ -741,14 +741,27 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
-  contractTitle?: string;
-  worker?: string
+  
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
+  contractTitle?: string;
+
   workerName?: string;
   contentName?: string;
   contractStatus?: string;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost?: () => void;
+  onPrint: () => void;
+  onDownload: () => void;
+}
+
+export interface ContractEmailHeaderProps {
+  contractTitle: string;
+  worker: string;
+  offerNo?: string;
+  emailStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
   onSendViaPost?: () => void;

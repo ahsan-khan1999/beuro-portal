@@ -60,17 +60,17 @@ const useOffers = () => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(setLeadDetails(DEFAULT_LEAD));
 
-    dispatch(readOffer({ params: { filter: '', page: 1, size: 10 } })).then(
-      (res: any) => {
-        console.log(res,"res");
+    // dispatch(readOffer({ params: { filter: '', page: 1, size: 10 } })).then(
+    //   (res: any) => {
+    //     console.log(res,"res");
         
-        if (res?.payload) {
-          setCurrentPageRows(
-            res?.payload?.Offer
-          );
-        }
-      }
-    );
+    //     if (res?.payload) {
+    //       setCurrentPageRows(
+    //         res?.payload?.Offer
+    //       );
+    //     }
+    //   }
+    // );
   }, []);
   const handleFilterChange = () => {
     dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));

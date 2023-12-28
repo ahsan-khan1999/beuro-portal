@@ -1,7 +1,9 @@
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import {
+  readCollectiveInvoiceDetails,
   readInvoiceDetails,
   sendInvoiceEmail,
+  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
 import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
@@ -160,7 +162,7 @@ const DetailsPdfPriview = () => {
 
   useEffect(() => {
     if (invoiceID) {
-      dispatch(readInvoiceDetails({ params: { filter: invoiceID } })).then(
+      dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } })).then(
         (response: ActionType) => {
           if (response?.payload) {
             console.log(response);
@@ -169,10 +171,12 @@ const DetailsPdfPriview = () => {
             let formatData: PdfProps<InvoiceEmailHeaderProps> = {
               emailHeader: {
                 contractId: invoiceDetails.contractID.contractNumber,
-                workerName: "Talha",
+                workerName: invoiceDetails?.contractID?.offerID?.createdBy?.fullName,
                 contractStatus: invoiceDetails.contractID.contractStatus,
                 contentName:
                   invoiceDetails.contractID.offerID.content.contentName,
+                contractTitle: invoiceDetails?.title,
+
               },
               headerDetails: {
                 offerNo: invoiceDetails?.contractID.offerID.offerNumber,
@@ -204,6 +208,9 @@ const DetailsPdfPriview = () => {
                   invoiceDetails?.contractID?.offerID?.leadID?.addressID?.address,
                 header: invoiceDetails?.contractID?.offerID?.title,
                 workDates: invoiceDetails?.contractID?.offerID?.date,
+                handleTitleUpdate: handleTitleUpdate,
+                handleDescriptionUpdate: handleDescriptionUpdate
+
               },
               serviceItem:
                 invoiceDetails?.contractID?.offerID?.serviceDetail
@@ -405,7 +412,27 @@ const DetailsPdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+  const handleTitleUpdate = async (value: string) => {
+    const apiData = {
+      id: invoiceID,
+      title: value,
+      additionalDetails: invoiceData?.aggrementDetails
+    }
+    const response = await dispatch(updateInvoiceContent({ data: apiData }))
+    if (response?.payload) return true
+    else return false
+  }
+  const handleDescriptionUpdate = async (value: string) => {
+    const apiData = {
+      id: invoiceID,
+      title: invoiceData?.emailHeader?.contractTitle,
+      additionalDetails: value
+    }
 
+    const response = await dispatch(updateInvoiceContent({ data: apiData }))
+    if (response?.payload) return true
+    else return false
+  }
   return (
     <>
       <InvoiceEmailHeader

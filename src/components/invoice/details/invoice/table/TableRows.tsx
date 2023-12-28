@@ -127,7 +127,7 @@ const TableRows = ({
             </span>
             <span
               className="py-4 flex justify-center items-center rounded-md mlg:hidden xlg:flex"
-              onClick={() => handleInvoicePdfPreview(item?.invoiceID?.id)}
+              onClick={() => handleInvoicePdfPreview(item?.id)}
             >
               <Image src={moreIcon} alt="moreIcon" />
             </span>

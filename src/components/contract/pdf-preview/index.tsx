@@ -11,6 +11,7 @@ import { OffersTableRowTypes, ServiceList } from "@/types/offers";
 import {
   AcknowledgementSlipProps,
   CompanySettingsActionType,
+  ContractEmailHeaderProps,
   EmailHeaderProps,
   PayableToProps,
   PdfProps,
@@ -132,7 +133,7 @@ interface ActionType {
 const PdfPriview = () => {
 
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
+  const [offerData, setOfferData] = useState<PdfProps<ContractEmailHeaderProps>>(DUMMY_DATA);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
@@ -157,7 +158,7 @@ const PdfPriview = () => {
         (response: ActionType) => {
           if (response?.payload) {
             const contractDetails: contractTableTypes = response?.payload;
-            let formatData: PdfProps = {
+            let formatData: PdfProps<ContractEmailHeaderProps> = {
               id: contractDetails?.id,
               emailHeader: {
                 offerNo: contractDetails?.contractNumber,
