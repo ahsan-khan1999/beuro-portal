@@ -26,9 +26,10 @@ const AddFollowUp = ({
         onClose={onClose}
         containerClassName="max-w-[960px] min-h-auto max-h-fit ">
         <AnimatePresence>
-          <motion.div
+        <div  >
+        <motion.div
             className="relative flex flex-col px-[76px] pt-[30px] pb-[47px]"
-            ref={ref}>
+            >
             <Image
               src={crossIcon}
               alt="cross_icon"
@@ -50,6 +51,7 @@ const AddFollowUp = ({
               errors={errors}
             />
           </motion.div>
+        </div>
         </AnimatePresence>
       </BaseModal>
     </>

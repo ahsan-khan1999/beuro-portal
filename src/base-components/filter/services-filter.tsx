@@ -168,7 +168,7 @@ export default function ServicesFilter({
               <BaseButton
                 buttonText="Save"
                 onClick={handleSave}
-                containerClassName="bg-primary my-6 px-8 py-2"
+                containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
                 textClassName="text-white"
               />
             </div>

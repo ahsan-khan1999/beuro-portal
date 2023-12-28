@@ -87,7 +87,7 @@ const OfferDetailsCard = ({
               {translate("offers.card_content.offer_title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B] flex">
+            <span className="text-base font-medium text-[#4B4B4B] flex overflow-clip text-ellipsis">
               {offerDetails?.title}
             </span>
           </div>

@@ -26,7 +26,7 @@ const TableFunctions = ({
             setFilter={setFilter}
             handleFilterChange={handleFilterChange}
           />
-        </div>
+        </div>    
       </div>
     </div>
   );

@@ -78,7 +78,7 @@ export default function SearchInputFiled({
             </div>
           )}
         </div>
-        <div className="absolute right-0 border-l border-[#BFBFBF] z-50">
+        <div className="absolute right-0 border-l border-[#BFBFBF] z-0  ">
           <SelectField
             handleChange={(value) => console.log(value)}
             value=""

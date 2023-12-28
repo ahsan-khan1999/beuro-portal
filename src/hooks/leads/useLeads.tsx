@@ -147,9 +147,7 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(
-      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((response: any) => {
+    dispatch(readLead({ params: { filter: {} } })).then((response: any) => {
       if (response?.payload) {
         setCurrentPageRows(response?.payload?.Lead);
       }

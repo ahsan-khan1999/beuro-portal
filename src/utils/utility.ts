@@ -368,12 +368,12 @@ export function formatDateTimeToTime(date: string) {
 }
 
 export function getStatusColor(status: string) {
-  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"])
+  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
     return "#FE9244";
   else if (
-    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
-    return "#FE9244";
+    return "#4A13E7";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]
   )
@@ -592,10 +592,12 @@ export function getInvoiceStatusColor(status: string) {
 }
 
 export function getInvoiceEmailColor(status: string) {
-  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Draft"])
+  if (
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
+  )
     return "#FF376F";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Send"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
     return "#4A13E7";
   else if (

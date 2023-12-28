@@ -48,9 +48,7 @@ const useEmailTracker = () => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(
-      readEmail({ params: { filter: filter, page: currentPage, size: 10 } })
-    );
+    dispatch(readEmail({ params: { filter: {} } }));
   };
 
   return {

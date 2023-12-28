@@ -13,7 +13,7 @@ export const BaseButton = ({
   loaderColor,
 }: BaseButtonProps) => {
   const defaultClasses =
-    "bg-white border border-lightGray py-2 px-3 rounded-lg";
+    "bg-white hover:bg-buttonHover border border-lightGray py-2 px-3 rounded-lg";
   const defaultTextClassName = "font-medium text-dark";
 
   const containerClasses = combineClasses(defaultClasses, containerClassName);

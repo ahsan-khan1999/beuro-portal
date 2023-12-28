@@ -67,7 +67,7 @@ const useContract = () => {
     });
   }, []);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } }));
+    dispatch(readContract({ params: { filter: {} } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));

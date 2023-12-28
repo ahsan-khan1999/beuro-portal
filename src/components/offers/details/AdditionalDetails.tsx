@@ -34,7 +34,7 @@ const AdditionalDetails = ({ offerDetails }: { offerDetails: OffersTableRowTypes
       <hr className="opacity-20 mb-5" />
 
       <div className="py-[25px] px-[30px]">
-        <div className="w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6  text-[#4B4B4B] font-normal text-base" dangerouslySetInnerHTML={{ __html: offerDetails?.additionalDetails }} />
+        <div className="w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6  text-[#4B4B4B] font-normal text-base break-all" dangerouslySetInnerHTML={{ __html: offerDetails?.additionalDetails }} />
 
       </div>
     </LeadsCardLayout>

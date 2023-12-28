@@ -11,7 +11,7 @@ import Image from "next/image";
 import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import moment from "moment";
 import { getDaysDifference } from "@/utils/utility";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence,motion } from "framer-motion";
 
 const FollowUpDropDown = () => {
   const {
@@ -25,7 +25,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 "   >
+      <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 !z-50 "   >
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
           <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
           <Button
@@ -40,7 +40,11 @@ const FollowUpDropDown = () => {
           {followUp?.map((item, index) => {
             let days = getDaysDifference(item.createdAt);
             return (
-              <div
+              <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
                 key={index}
                 onClick={() => handleFollowUpsDetails(item.id)}
                 className={`pt-[10px] px-4 cursor-pointer ${
@@ -108,7 +112,7 @@ const FollowUpDropDown = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </AnimatePresence>

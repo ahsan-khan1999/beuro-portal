@@ -38,11 +38,13 @@ export default function Invoices() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
       {renderModal()}
     </>
   );

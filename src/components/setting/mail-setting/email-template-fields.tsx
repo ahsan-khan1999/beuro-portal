@@ -13,6 +13,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         htmlFor: "logo",
         className: "mb-[10px] text-sm font-normal text-[#393939]",
       },
+      containerClass:"!w-[187px]",
       field: {
         type: Field.profileUploadField,
         id: "logo",
