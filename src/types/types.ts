@@ -421,7 +421,8 @@ export type GenerateOfferServiceFormField = (
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
   fields?: object[],
-  setValue?: SetFieldValue<FieldValues>
+  setValue?: SetFieldValue<FieldValues>,
+  watch?:UseFormWatch<FieldValues>
 ) => FormField[];
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
@@ -755,6 +756,7 @@ export interface InvoiceEmailHeaderProps {
   onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
+  title:string
 }
 
 export interface ContractEmailHeaderProps {
@@ -767,6 +769,7 @@ export interface ContractEmailHeaderProps {
   onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
+  
 }
 
 export interface PdfProps<T = EmailHeaderProps> {

@@ -63,6 +63,7 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
   });
 
   const isTax = watch("isTax");
+
   const isDiscount = watch("isDiscount");
   const taxType = watch("taxType");
   const discountType = watch("discountType");
@@ -164,7 +165,7 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
 
   });
 
-  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
+  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue,watch);
 
   const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType, tax: tax }, append, remove, serviceFields, setValue);
   const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)

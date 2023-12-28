@@ -55,7 +55,7 @@ export interface SubInvoiceTableRowTypes {
   invoiceStatus: string;
   paymentType: string;
   createdAt: string;
-  isInvoiceRecurring:boolean
+  isInvoiceRecurring:boolean;
 }
 
 export interface InvoiceEmptyStateType {
@@ -81,4 +81,37 @@ export interface InvoiceDetailsTableProps {
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
   handleRecurringInvoiceEdit: (item: any) => void
+}
+
+
+
+
+export interface PdfSubInvoiceTypes {
+  id: string;
+  emailStatus: string;
+  invoiceID: InvoiceTableRowTypesPdf;
+  invoiceNumber: string;
+  paymentType: string;
+  createdAt: string;
+title?:string;
+  additionalDetails?:string
+}
+
+
+
+export interface InvoiceTableRowTypesPdf {
+  id: string;
+  invoiceNumber: string;
+  paidAmount: string;
+  remainingAmount: string;
+  totalEmail: string;
+  sentEmail: string;
+  createdAt: string;
+  contractID: contractTableTypes;
+  invoiceTitle: string;
+  totalPrice: string;
+  emailStatus: string;
+  invoiceStatus: string;
+  isInvoiceRecurring: boolean;
+  createdBy:User
 }

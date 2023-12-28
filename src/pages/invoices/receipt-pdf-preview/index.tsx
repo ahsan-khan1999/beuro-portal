@@ -2,13 +2,16 @@ import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
+import { Layout } from "@/layout";
 
 
 const index = () => {
   return (
-    <div>
+    <Layout>
+
       <DetailsPdfPriview />
-    </div>
+    </Layout>
+
   );
 };
 

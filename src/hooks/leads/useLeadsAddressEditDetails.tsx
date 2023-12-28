@@ -42,7 +42,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     loading,
     control,
     handleBack,
-    leadDetails?.addressID?.address?.length
+    leadDetails?.addressID?.address?.length || 1
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {

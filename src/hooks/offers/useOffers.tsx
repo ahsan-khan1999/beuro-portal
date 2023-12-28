@@ -36,10 +36,10 @@ const useOffers = () => {
     location: "",
     sortBy: "",
     text: "",
-    date: [""],
-    email: [""],
-    payment: "",
-    price: [""],
+    // date: [""],
+    // email: [""],
+    // payment: "",
+    // price: [""],
     status: query?.filter as string,
   });
   const totalItems = totalCount;

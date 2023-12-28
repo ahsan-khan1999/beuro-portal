@@ -7,6 +7,7 @@ import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { updateQuery } from "@/utils/update-query";
 
 const TableRows = ({
   collectiveInvoice,
@@ -18,6 +19,11 @@ const TableRows = ({
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
+  const handleReceiptPreview = (id?: string) => {
+    router.pathname = "/invoices/receipt-pdf-preview";
+    router.query = { invoiceID: id };
+    updateQuery(router, router.locale as string);
+  };
   return (
     <div>
       {collectiveInvoice?.map((item, index: number) => {
@@ -95,7 +101,7 @@ const TableRows = ({
 
             <span
               className="py-4 flex justify-center items-center"
-              onClick={() => router.push("/invoices/invoice-pdf-preview")}
+              onClick={() => handleReceiptPreview(item?.id)}
             >
               <Image src={moreIcon} alt="moreIcon" />
             </span>

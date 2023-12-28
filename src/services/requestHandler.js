@@ -61,6 +61,8 @@ const SERVICE_URLS = {
   contractStatus: "/contract/updateContractStatus/",
   contractPaymentStatus: "/contract/update-payment-status/",
   invoiceCollection: "/invoice/invoice-collection",
+  invoiceCollectionDetail: "/invoice/invoice-collection/read",
+
   createRecurringInvoice: "/invoice/invoice-collection/create-recurring-invoice/",
   updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
   updateInvoiceStatus: "/invoice/invoice-collection/update-invoiceCollection-status/",
@@ -327,7 +329,7 @@ const createNotes = (params) =>
 const readCollectiveInvoices = (params) =>
   get(SERVICE_URLS.invoiceCollection + `/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const readCollectiveInvoicesDetails = (params) =>
-  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: true });
+  get(SERVICE_URLS.invoiceCollectionDetail, params, { feature: featureConstants.login }, { detail: true });
 
 const createRecurringInvoiceCollection = (data) =>
   post(SERVICE_URLS.createRecurringInvoice + `${data?.id}`, data, { feature: featureConstants.login });
