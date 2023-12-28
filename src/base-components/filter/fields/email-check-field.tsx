@@ -24,15 +24,22 @@ export default function EmailCheckField({
     onChange?.(value, isChecked);
   };
 
-  const isCheckboxChecked = Array.isArray(checkboxFilter[type])
-    ? checkboxFilter?.[type]?.includes(value)
-    : false;
+  const isCheckboxChecked = (() => {
+    const filterValue = checkboxFilter[type];
+
+    if (Array.isArray(filterValue)) {
+      return filterValue.includes(value);
+    }
+    return false;
+  })();
 
   return (
     <>
       <label
         htmlFor={label}
-        className={`custom-checkbox flex flex-row-reverse justify-center items-center gap-2 border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-fit ${checkboxFilter?.[type]?.includes(value) ? "border-primary" : ""}`}
+        className={`custom-checkbox flex flex-row-reverse justify-center items-center gap-2 border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-fit ${
+          isCheckboxChecked ? "border-primary" : ""
+        }`}
       >
         <input
           type="checkbox"
@@ -47,7 +54,7 @@ export default function EmailCheckField({
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type] && checkboxFilter?.[type]?.includes(value) ? (
+        {isCheckboxChecked ? (
           <svg
             className=" top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"

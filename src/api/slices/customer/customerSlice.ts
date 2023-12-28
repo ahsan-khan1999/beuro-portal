@@ -36,6 +36,7 @@ export const readCustomer: AsyncThunk<boolean, object, object> | any =
         const { params, router, setError, translate } = args as any;
 
         try {
+            console.log(params)
             const response = await apiServices.readCustomer(params);
             return response?.data?.data;
         } catch (e: any) {

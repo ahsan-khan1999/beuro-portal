@@ -12,6 +12,7 @@ import {
   Errors,
   FieldProps,
   FieldType,
+  FilterType,
   FormField,
   User,
 } from "@/types";
@@ -54,6 +55,25 @@ export function isFieldType(type: any): type is FieldType {
     type
   );
 }
+export const areFiltersEmpty = (filter: FilterType) => {
+  return Object.values(filter).every((value) => {
+    if (Array.isArray(value)) {
+      return value.length === 0;
+    } else if (value === undefined) {
+      return true;
+    }
+    return value === "";
+  });
+};
+
+export const formatDateForDatePicker = (isoDateString: string) => {
+  const date = new Date(isoDateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // getMonth() returns 0-11
+  const day = date.getDate().toString().padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
 
 export function formatStrings(str: string, replaceValues: string[]): string {
   let formattedString = str;

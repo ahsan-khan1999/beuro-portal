@@ -16,6 +16,7 @@ import {
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import { areFiltersEmpty } from "@/utils/utility";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -30,11 +31,14 @@ const useContract = () => {
 
   const [filter, setFilter] = useState<FilterType>({
     location: "",
-    sortBy: "",
+    sort: "",
     text: "",
     type: "",
-    date: [],
-    status: query?.filter as string,
+    date: {
+      $gte: "",
+      $lte: "",
+    },
+    status: undefined,
   });
   const totalItems = totalCount;
 
@@ -42,16 +46,18 @@ const useContract = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  useMemo(() => {
-    setFilter({
-      ...filter,
-      status: query?.filter as string,
-    });
-  }, [query?.filter]);
+  // useMemo(() => {
+  //   setFilter({
+  //     ...filter,
+  //     status: query?.filter as string,
+  //   });
+  // }, [query?.filter]);
   useEffect(() => {
-    dispatch(
-      readContract({ params: { filter: filter, page: 1, size: 10 } })
-    ).then((res: any) => {
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+
+    dispatch(readContract({ params: queryParams })).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(

@@ -558,31 +558,39 @@ export interface LoaderType {
 
 export interface CheckBoxType {
   label: string;
-  type: keyof Status;
+  type: string;
 }
 
 export interface FilterType {
   text: string;
-  sortBy?: string;
+  sort?: string;
   type?: string;
   location?: string;
-  status?: string;
-  date?: string[];
+  status?: string[];
+  date?: {
+    $gte?: string | null;
+    $lte?: string | null;
+  };
   payment?: string;
   email?: string[];
   price?: string[];
 }
 
 export interface MoreFilterType {
-  type: string;
-  location: string;
-  date?: string[];
+  type?: string;
+  location?: string;
+  date?: {
+    $gte?: string;
+    $lte?: string;
+  };
   email?: string[];
   price?: string[];
+  payment?: string;
 }
 export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
+  onFilterChange: (filters: FilterType) => void;
 }
 
 interface ItemList {
@@ -629,7 +637,6 @@ export interface MovingDetailsProps {
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
-
 }
 export interface ProductItemProps {
   title: string;
@@ -741,7 +748,6 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
-  
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
@@ -780,7 +786,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   qrCode: qrCode;
   aggrementDetails: string;
   isOffer?: boolean;
-  id?:string
+  id?: string;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -841,13 +847,13 @@ export interface AggrementProps {
   totalPages: number;
   currPage: number;
   isOffer?: boolean;
-  handleDescriptionUpdate?: (value: string) => void
+  handleDescriptionUpdate?: (value: string) => void;
 }
 
 export interface FiltersComponentProps {
   filter: FilterType;
   setFilter: SetStateAction<any>;
-  handleFilterChange: () => void;
+  handleFilterChange: (filter: FilterType) => void;
 }
 export interface ContractEmailHeaderProps {
   contractNo?: string;
@@ -858,5 +864,4 @@ export interface ContractEmailHeaderProps {
   onPrint: () => void;
   worker: string;
   contractTitle: string;
-
 }

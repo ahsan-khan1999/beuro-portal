@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import { areFiltersEmpty } from "@/utils/utility";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
@@ -29,28 +30,36 @@ const useLeads = () => {
 
   const [filter, setFilter] = useState<FilterType>({
     location: "",
-    sortBy: "",
+    sort: "",
     text: "",
-    date: ["",""],
-    status: query?.filter as string,
+    date: {
+      $gte: "",
+      $lte: "",
+    },
+    status: undefined,
   });
-  useMemo(() => {
-    setFilter({
-      ...filter,
-      status: query?.filter as string,
-    });
-  }, [query?.filter]);
+  // useMemo(() => {
+  //   setFilter({
+  //     ...filter,
+  //     status: query?.filter as string[],
+  //   });
+  // }, [query?.filter]);
   useEffect(() => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Lead);
-        }
+
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: null, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+
+    dispatch(
+      readLead({ params: { filter: queryParams, page: 1, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Lead);
       }
-    );
+    });
   }, []);
 
   const totalItems = totalCount;
@@ -58,9 +67,9 @@ const useLeads = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const handleFilterChange = () => {
+  const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
+      readLead({ params: { filter: query, page: currentPage, size: 10 } })
     );
   };
 

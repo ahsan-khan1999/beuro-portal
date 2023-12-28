@@ -24,10 +24,14 @@ export default function CheckField({
     onChange?.(value, isChecked);
   };
 
-  const isCheckboxChecked = Array.isArray(checkboxFilter[type])
-    ? checkboxFilter?.[type]?.includes(value)
-    : false;
+  const isCheckboxChecked = (() => {
+    const filterValue = checkboxFilter[type];
 
+    if (Array.isArray(filterValue)) {
+      return filterValue.includes(value);
+    }
+    return false;
+  })();
   return (
     <>
       <label
@@ -47,7 +51,7 @@ export default function CheckField({
         <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
           {label}
         </p>
-        {checkboxFilter[type] && checkboxFilter?.[type]?.includes(value) ? (
+        {isCheckboxChecked ? (
           <svg
             className="absolute top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"

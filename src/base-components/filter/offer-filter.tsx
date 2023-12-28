@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { CheckBoxType, FilterProps } from "@/types";
+import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
@@ -9,33 +9,47 @@ import { PriceInputField } from "./fields/price-input-field";
 import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
 import EmailCheckField from "./fields/email-check-field";
+import { formatDateForDatePicker } from "@/utils/utility";
 
-export default function OfferFilter({ filter, setFilter }: FilterProps) {
+export default function OfferFilter({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
   const {
     extraFilterss,
-    handleFilterResetToInitial,
     handleFilterReset,
+    handleFilterResetToInitial,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
+    moreFilter,
+    setMoreFilter,
   } = useFilter({ filter, setFilter });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  const [moreFilters, setMoreFilters] = useState<{
-    date: string[];
-    payment: string;
-    email: string[];
-    price: string[];
-    location: string;
-  }>({
-    date: filter?.date || [],
-    payment: "",
-    email: [],
-    price: [],
-    location: "",
-  });
+  // const [moreFilter, setMoreFilter] = useState<MoreFilerType>({
+  //   $gte: "",
+  //   $lte: "",
+  //   payment: "",
+  //   email: [],
+  //   price: [],
+  //   location: "",
+  // });
 
   const handleSave = () => {
-    setFilter((prev) => ({ ...prev, ...moreFilters }));
+    setFilter((prev: any) => {
+      const updatedFilters = {
+        ...prev,
+        $gte: moreFilter.date && moreFilter.date.$gte,
+        $lte: moreFilter.date && moreFilter.date.$lte,
+        payment: moreFilter.payment,
+        email: moreFilter.email,
+        price: moreFilter.price,
+        location: moreFilter.location,
+      };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
+    });
     handleExtraFiltersClose();
   };
 
@@ -49,23 +63,45 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
   ];
 
   const handleEmailChange = (value: string, isChecked: boolean) => {
-    const updatedEmails = isChecked
-      ? [...moreFilters.email, value]
-      : moreFilters.email.filter((email) => email !== value);
+    if (moreFilter.email) {
+      const updatedEmails = isChecked
+        ? [...moreFilter.email, value]
+        : moreFilter.email.filter((email) => email !== value);
 
-    setMoreFilters({ ...moreFilters, email: updatedEmails });
+      setMoreFilter({ ...moreFilter, email: updatedEmails });
+    }
   };
   const handleLowPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
-      ...prev,
-      price: [val, prev.price[1]],
-    }));
+    if (moreFilter.price) {
+      setMoreFilter((prev) => {
+        if (prev.price) {
+          return {
+            ...prev,
+            price: [val, prev.price[1]],
+          };
+        } else {
+          return prev;
+        }
+      });
+    }
   };
 
   const handleHighPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
+    setMoreFilter((prev) => {
+      if (prev.price) {
+        return {
+          ...prev,
+          price: [prev.price[0], val],
+        };
+      } else return prev;
+    });
+  };
+
+  const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
+    const dateTime = new Date(val);
+    setMoreFilter((prev) => ({
       ...prev,
-      price: [prev.price[0], val],
+      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
     }));
   };
   return (
@@ -108,7 +144,7 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}
+                onClick={handleFilterResetToInitial}
               >
                 Reset All
               </span>
@@ -122,7 +158,9 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => {
+                      handleFilterReset("date", { $gte: "", $lte: "" });
+                    }}
                   >
                     Reset
                   </label>
@@ -131,20 +169,14 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <DatePicker
                     label="From"
                     label2="To"
-                    dateFrom={moreFilters.date[0]}
-                    dateTo={moreFilters.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
+                    dateFrom={formatDateForDatePicker(
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                    )}
+                    dateTo={formatDateForDatePicker(
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                    )}
+                    onChangeFrom={(val) => handleDateChange("$gte", val)}
+                    onChangeTo={(val) => handleDateChange("$lte", val)}
                   />
                 </div>
               </div>
@@ -157,27 +189,27 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("payment", "")}
                   >
                     Reset
                   </label>
                 </div>
                 <div className="flex items-center gap-x-10 my-5">
-                    <RadioField
-                      lable="Cash"
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                      checked={moreFilters.payment === "Cash"}
-                    />
-                    <RadioField
-                      lable="Online"
-                      checked={moreFilters.payment === "Online"}
-                      onChange={(val) =>
-                        setMoreFilters((prev) => ({ ...prev, payment: val }))
-                      }
-                    />
-                  </div>
+                  <RadioField
+                    lable="Cash"
+                    onChange={(val) =>
+                      setMoreFilter((prev) => ({ ...prev, payment: val }))
+                    }
+                    checked={moreFilter.payment === "Cash"}
+                  />
+                  <RadioField
+                    lable="Online"
+                    checked={moreFilter.payment === "Online"}
+                    onChange={(val) =>
+                      setMoreFilter((prev) => ({ ...prev, payment: val }))
+                    }
+                  />
+                </div>
               </div>
               {/* payment section  */}
               {/* email section  */}
@@ -189,7 +221,7 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("email", [])}
                   >
                     Reset
                   </label>
@@ -198,7 +230,7 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   {checkbox.map((item, idx) => (
                     <EmailCheckField
                       key={idx}
-                      checkboxFilter={filter}
+                      checkboxFilter={moreFilter as unknown as FilterType}
                       setCheckBoxFilter={setFilter}
                       type={"email"}
                       label={item.label}
@@ -218,7 +250,7 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("price", ["0", "0"])}
                   >
                     Reset
                   </label>
@@ -227,8 +259,8 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                   <PriceInputField
                     label="Low Price"
                     label2="High Price"
-                    lowPrice={moreFilters.price[0]}
-                    highPrice={moreFilters.price[1]}
+                    lowPrice={moreFilter.price && moreFilter.price[0]}
+                    highPrice={moreFilter.price && moreFilter.price[1]}
                     onHighPriceChange={handleHighPriceChange}
                     onLowPriceChange={handleLowPriceChange}
                   />
@@ -252,32 +284,13 @@ export default function OfferFilter({ filter, setFilter }: FilterProps) {
                 <InputField
                   iconDisplay={false}
                   handleChange={(value) =>
-                    setMoreFilters((prev) => ({ ...prev, location: value }))
+                    setMoreFilter((prev) => ({ ...prev, location: value }))
                   }
-                  value={filter.location || ""}
+                  value={moreFilter.location || ""}
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />
               </div>
-              {/* Price section  */}
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  {/* <PriceInputField label="Low Price" label2="High Price" /> */}
-                </div>
-              </div>
-              {/* Price section  */}
             </div>
             <div>
               <BaseButton

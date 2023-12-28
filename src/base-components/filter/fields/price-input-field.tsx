@@ -10,8 +10,8 @@ export const PriceInputField = ({
 }: {
   label: string;
   label2: string;
-  lowPrice: string;
-  highPrice: string;
+  lowPrice?: string;
+  highPrice?: string;
   onLowPriceChange: (val: string) => void;
   onHighPriceChange: (val: string) => void;
 }) => {

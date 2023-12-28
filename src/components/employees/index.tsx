@@ -30,7 +30,7 @@ export default function Employees() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={() => handleFilterChange}
+        handleFilterChange={handleFilterChange}
       />
       <TableLayout>
         <TableHeadings />

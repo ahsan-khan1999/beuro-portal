@@ -15,11 +15,9 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const {
-    handleFilterResetToInitial,
-    handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
+  const { handleFilterResetToInitial, handleFilterReset, typeList } = useFilter(
+    { filter, setFilter }
+  );
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -54,24 +52,30 @@ export default function CustomerFilter({
       />
       <SelectField
         handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
-        value={filter?.sortBy || ""}
+        value={filter?.sort || ""}
         dropDownIconClassName=""
-        options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
+        options={[
+          { label: "Date", value: "createdAt" },
+          { label: "Latest", value: "-createdAt" },
+          { label: "Oldest", value: "createdAt" },
+          { label: "A - Z", value: "title" },
+        ]}
         label="Sort By"
       />
       <CustomerFilters
         filter={filter}
         setFilter={setFilter}
+        onFilterChange={handleFilterChange}
       />
 
-      <Button
+      {/* <Button
         onClick={() => handleFilterChange()}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text="Apply"
         id="apply"
         inputType="button"
         name=""
-      />
+      /> */}
     </div>
   );
 }

@@ -6,16 +6,23 @@ import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import InputField from "./fields/input-field";
 import useFilter from "@/hooks/filter/hook";
+import { formatDateForDatePicker } from "@/utils/utility";
 
-export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
-  const [moreFilters, setMoreFilters] = useState<{
-    date: string[];
-    price: string[];
-  }>({
-    date: filter?.date || [],
-    price: filter.price || [],
-  });
+export default function EmployeesFilter({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
+  // const [moreFilter, setMoreFilter] = useState<{
+  //   date: string[];
+  //   price: string[];
+  // }>({
+  //   $gte: '',
+  //   price: filter.price || [],
+  // });
   const {
+    moreFilter,
+    setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
     handleExtraFilterToggle,
@@ -24,24 +31,25 @@ export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
   } = useFilter({ filter, setFilter });
 
   const handleSave = () => {
-    setFilter((prev) => ({ ...prev, ...moreFilters }));
+    setFilter((prev: any) => {
+      const updatedFilters = {
+        ...prev,
+        $gte: moreFilter.date && moreFilter.date.$gte,
+        $lte: moreFilter.date && moreFilter.date.$lte,
+        price: moreFilter.price,
+      };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
+    });
     handleExtraFiltersClose();
   };
-
-  const handleLowPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
+  const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
+    const dateTime = new Date(val);
+    setMoreFilter((prev) => ({
       ...prev,
-      price: [val, prev.price[1]],
+      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
     }));
   };
-
-  const handleHighPriceChange = (val: string) => {
-    setMoreFilters((prev) => ({
-      ...prev,
-      price: [prev.price[0], val],
-    }));
-  };
-
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -83,7 +91,7 @@ export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}
+                onClick={handleFilterResetToInitial}
               >
                 Reset All
               </span>
@@ -97,7 +105,9 @@ export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => {
+                      handleFilterReset("date", { $gte: "", $lte: "" });
+                    }}
                   >
                     Reset
                   </label>
@@ -106,20 +116,14 @@ export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
                   <DatePicker
                     label="From"
                     label2="To"
-                    dateFrom={moreFilters.date[0]}
-                    dateTo={moreFilters.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilters((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
+                    dateFrom={formatDateForDatePicker(
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                    )}
+                    dateTo={formatDateForDatePicker(
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                    )}
+                    onChangeFrom={(val) => handleDateChange("$gte", val)}
+                    onChangeTo={(val) => handleDateChange("$lte", val)}
                   />
                 </div>
               </div>
@@ -140,9 +144,9 @@ export default function EmployeesFilter({ filter, setFilter }: FilterProps) {
                 <InputField
                   iconDisplay={false}
                   handleChange={(value) =>
-                    setMoreFilters((prev) => ({ ...prev, location: value }))
+                    setMoreFilter((prev) => ({ ...prev, location: value }))
                   }
-                  value={filter.location || ""}
+                  value={moreFilter.location || ""}
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />

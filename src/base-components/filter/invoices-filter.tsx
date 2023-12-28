@@ -1,15 +1,22 @@
 import React, { SetStateAction, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps, MoreFilterType } from "@/types";
+import { CheckBoxType, FilterProps, FilterType, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { PriceInputField } from "./fields/price-input-field";
 import EmailCheckField from "./fields/email-check-field";
 import useFilter from "@/hooks/filter/hook";
+import { staticEnums } from "@/utils/static";
 
-export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
+export default function InvoicesFilter({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
   const {
     extraFilterss,
+    moreFilter,
+    setMoreFilter,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
     handleFilterResetToInitial,
@@ -20,48 +27,54 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   const checkbox: CheckBoxType[] = [
-    { label: "Send", type: "send" },
+    { label: "Send", type: `${staticEnums.EmailStatus.Sent}` },
     {
       label: "Draft",
-      type: "draft",
+      type: `${staticEnums.EmailStatus.Draft}`,
     },
-    { label: "Failed", type: "failed" },
+    { label: "Failed", type: `${staticEnums.EmailStatus.Failed}` },
   ];
 
-  const [moreFilter, setMoreFilter] = useState<{
-    email: string[];
-    price: string[];
-  }>({
-    email: filter.email || [],
-    price: filter.price || [],
-  });
+  // const [moreFilter, setMoreFilter] = useState<{
+  //   email: string[];
+  //   price: string[];
+  // }>({
+  //   email: filter.email || [],
+  //   price: filter.price || [],
+  // });
 
   const handleSave = () => {
-    setFilter((prev) => ({
-      ...prev,
-      email: moreFilter.email,
-      price: moreFilter.price,
-    }));
+    setFilter((prev: any) => {
+      const updatedFilters = {
+        ...prev,
+        email: moreFilter.email,
+        price: moreFilter.price,
+      };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
+    });
     handleExtraFiltersClose();
   };
   const handleEmailChange = (value: string, isChecked: boolean) => {
-    const updatedEmails = isChecked
-      ? [...moreFilter.email, value]
-      : moreFilter.email.filter((email) => email !== value);
+    if (moreFilter.email) {
+      const updatedEmails = isChecked
+        ? [...moreFilter.email, value]
+        : moreFilter.email.filter((email) => email !== value);
 
-    setMoreFilter({ ...moreFilter, email: updatedEmails });
+      setMoreFilter({ ...moreFilter, email: updatedEmails });
+    }
   };
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
       ...prev,
-      price: [val, prev.price[1]],
+      price: prev.price && [val, prev.price[1]],
     }));
   };
 
   const handleHighPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
       ...prev,
-      price: [prev.price[0], val],
+      price: prev.price && [prev.price[0], val],
     }));
   };
   return (
@@ -118,7 +131,7 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("email", [])}
                   >
                     Reset
                   </label>
@@ -127,7 +140,7 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                   {checkbox.map((item, idx) => (
                     <EmailCheckField
                       key={idx}
-                      checkboxFilter={filter}
+                      checkboxFilter={moreFilter as unknown as FilterType}
                       setCheckBoxFilter={setFilter}
                       type={"email"}
                       label={item.label}
@@ -145,7 +158,7 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("price", ["", ""])}
                   >
                     Reset
                   </label>
@@ -154,8 +167,8 @@ export default function InvoicesFilter({ filter, setFilter }: FilterProps) {
                 <PriceInputField
                   label="Low Price"
                   label2="High Price"
-                  lowPrice={moreFilter.price[0]}
-                  highPrice={moreFilter.price[1]}
+                  lowPrice={moreFilter.price && moreFilter.price[0]}
+                  highPrice={moreFilter.price && moreFilter.price[1]}
                   onHighPriceChange={handleHighPriceChange}
                   onLowPriceChange={handleLowPriceChange}
                 />

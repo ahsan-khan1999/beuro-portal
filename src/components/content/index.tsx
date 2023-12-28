@@ -29,7 +29,7 @@ export default function Content() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={() => handleFilterChange(filter)}
+        handleFilterChange={handleFilterChange}
       />
       <TableLayout>
         <TableHeadings />

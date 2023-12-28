@@ -13,6 +13,7 @@ import {
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { areFiltersEmpty } from "@/utils/utility";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -27,12 +28,12 @@ const useInvoice = () => {
 
   const [filter, setFilter] = useState<FilterType>({
     location: "",
-    sortBy: "",
+    sort: "",
     text: "",
     type: "",
     email: [],
     price: [],
-    status: query?.filter as string,
+    status: [],
   });
   const totalItems = totalCount;
 
@@ -40,26 +41,26 @@ const useInvoice = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  useMemo(() => {
-    setFilter({
-      ...filter,
-      status: query?.filter as string,
-    });
-  }, [query?.filter]);
+  // useMemo(() => {
+  //   setFilter({
+  //     ...filter,
+  //     status: query?.filter as string,
+  //   });
+  // }, [query?.filter]);
 
   useEffect(() => {
-    // dispatch(
-    //   readInvoice({ params: { filter: filter, page: 1, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Invoice);
-    //   }
-    // });
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+    dispatch(readInvoice({ params: queryParams })).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Invoice);
+      }
+    });
   }, []);
-  const handleFilterChange = () => {
-    console.log(filter);
+  const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
+      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
     );
   };
   const onClose = () => {
@@ -108,9 +109,10 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+    dispatch(readInvoice({ params: queryParams })).then((res: any) => {
       setCurrentPageRows(res?.payload?.Invoice);
     });
   }, [currentPage]);

@@ -18,7 +18,7 @@ const InvoiceDetailsData = ({
   handleRecurringInvoiceCreation,
   handleEditInvoiceFrequencyCreation,
   handleStopInvoiceCreation,
-  handleSendEmail
+  handleSendEmail,
 }: InvoiceCardContentProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -39,9 +39,6 @@ const InvoiceDetailsData = ({
         </div>
         {(!invoiceDetails?.isInvoiceRecurring && (
           <div className="flex space-x-2">
-           
-
-
             <Button
               className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
               inputType="button"
@@ -60,23 +57,23 @@ const InvoiceDetailsData = ({
             />
           </div>
         )) || (
-            <div className="flex space-x-2">
-              <Button
-                className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
-                inputType="button"
-                text="Edit Frequency"
-                onClick={handleEditInvoiceFrequencyCreation}
-                id="freq"
-              />
-              <Button
-                className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
-                inputType="button"
-                text="Stop"
-                onClick={handleStopInvoiceCreation}
-                id="freq"
-              />
-            </div>
-          )}
+          <div className="flex space-x-2">
+            <Button
+              className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+              inputType="button"
+              text="Edit Frequency"
+              onClick={handleEditInvoiceFrequencyCreation}
+              id="freq"
+            />
+            <Button
+              className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+              inputType="button"
+              text="Stop"
+              onClick={handleStopInvoiceCreation}
+              id="freq"
+            />
+          </div>
+        )}
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 

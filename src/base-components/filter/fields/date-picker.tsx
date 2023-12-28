@@ -10,8 +10,8 @@ const DatePicker = ({
 }: {
   label: string;
   label2: string;
-  dateTo: string;
-  dateFrom: string;
+  dateTo?: string;
+  dateFrom?: string;
   onChangeTo: (val: string) => void;
   onChangeFrom: (val: string) => void;
 }) => {
@@ -41,7 +41,7 @@ const DatePicker = ({
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block min-w-[170px] w-full pl-2.5 p-2.5"
             placeholder="Select date"
             onChange={(e) =>
-              onChangeFrom && onChangeFrom(e.currentTarget.value)
+              onChangeFrom && onChangeFrom(e.target.value)
             }
           />
         </div>
@@ -69,9 +69,7 @@ const DatePicker = ({
             value={dateTo}
             className="bg-gray-50 border border-lightDark text-lightDark text-sm rounded-lg focus:outline-primary focus:outline block min-w-[170px] w-full pl-2.5 p-2.5"
             placeholder="Select date"
-            onChange={(e) =>
-              onChangeFrom && onChangeFrom(e.currentTarget.value)
-            }
+            onChange={(e) => onChangeTo && onChangeTo(e.target.value)}
           />
         </div>
       </div>

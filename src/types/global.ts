@@ -46,6 +46,7 @@ export interface CheckFieldProps {
 export interface InputFieldProps {
   value: string;
   handleChange: (value: string) => void;
+  onEnterPress?: () => void;
   containerClassName?: string;
   textClassName?: string;
   bgColor?: boolean;
@@ -58,7 +59,7 @@ export interface OptionsFieldProps {
   label?: string;
   border?: number;
   handleChange: (value: string) => void;
-  options: string[];
+  options: { label: string; value: string }[];
   dropDownIconClassName: string;
   containerClassName?: string;
 }
