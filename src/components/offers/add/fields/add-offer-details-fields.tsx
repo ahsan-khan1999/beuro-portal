@@ -478,7 +478,7 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "flex flex-wrap gap-x-3 gap-y-3 mb-3 items-center",
+        className: "grid grid-cols-2 gap-x-3",
         id: `date`,
         children: [
           {
