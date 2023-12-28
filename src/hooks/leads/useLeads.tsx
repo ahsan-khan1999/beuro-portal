@@ -31,7 +31,7 @@ const useLeads = () => {
     location: "",
     sortBy: "",
     text: "",
-    date: ["",""],
+    date: ["", ""],
     status: query?.filter as string,
   });
   useMemo(() => {
@@ -44,13 +44,11 @@ const useLeads = () => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-    dispatch(readLead({ params: { filter: filter, page: 1, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Lead);
-        }
+    dispatch(readLead({ params: { filter: {} } })).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Lead);
       }
-    );
+    });
   }, []);
 
   const totalItems = totalCount;
@@ -59,9 +57,7 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = () => {
-    dispatch(
-      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
-    );
+    dispatch(readLead({ params: { filter: {} } }));
   };
 
   const onClose = () => {
@@ -138,9 +134,7 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(
-      readLead({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((response: any) => {
+    dispatch(readLead({ params: { filter: {} } })).then((response: any) => {
       if (response?.payload) {
         setCurrentPageRows(response?.payload?.Lead);
       }

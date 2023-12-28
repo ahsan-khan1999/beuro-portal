@@ -28,7 +28,7 @@ export default function useCustomer() {
   useEffect(() => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(
-      readCustomer({ params: { filter: filter, page: 1, size: 10 } })
+      readCustomer({ params: { filter: {}} })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Customer);
@@ -38,7 +38,7 @@ export default function useCustomer() {
 
   useEffect(() => {
     dispatch(
-      readCustomer({ params: { filter: filter, page: currentPage, size: 10 } })
+      readCustomer({ params: { filter:{} } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Customer);
@@ -50,7 +50,7 @@ export default function useCustomer() {
     setCurrentPage(page);
   };
   const handleFilterChange = () => {
-    dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } }))
+    dispatch(readCustomer({ params: { filter: {} } }))
   };
   return {
     currentPageRows,

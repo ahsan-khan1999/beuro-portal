@@ -59,7 +59,7 @@ const useInvoice = () => {
   const handleFilterChange = () => {
     console.log(filter);
     dispatch(
-      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
+      readInvoice({ params: { filter: {} } })
     );
   };
   const onClose = () => {
@@ -109,7 +109,7 @@ const useInvoice = () => {
 
   useEffect(() => {
     dispatch(
-      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
+      readInvoice({ params: { filter: {} } })
     ).then((res: any) => {
       setCurrentPageRows(res?.payload?.Invoice);
     });

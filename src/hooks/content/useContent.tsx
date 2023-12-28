@@ -26,7 +26,7 @@ const useContent = () => {
   useEffect(() => {
     localStoreUtil.remove_data("content")
     dispatch(setContentDetails(DEFAULT_CONTENT))
-    dispatch(readContent({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
+    dispatch(readContent({ params: { filter: {}} })).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage));
@@ -35,7 +35,7 @@ const useContent = () => {
   }, [dispatch])
   useEffect(() => {
     // Update rows for the current page
-    dispatch(readContent({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+    dispatch(readContent({ params: { filter: {} } })).then((res: any) => {
       setCurrentPageRows(
         res?.payload?.Content
       );
@@ -46,7 +46,7 @@ const useContent = () => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContent({ params: { filter: filter, page: currentPage, size: 10 } }))
+    dispatch(readContent({ params: { filter: {} } }))
   };
   return {
     currentPageRows,

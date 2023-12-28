@@ -50,7 +50,7 @@ const useContract = () => {
   }, [query?.filter]);
   useEffect(() => {
     dispatch(
-      readContract({ params: { filter: filter, page: 1, size: 10 } })
+      readContract({ params: { filter: {} } })
     ).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -61,7 +61,7 @@ const useContract = () => {
     });
   }, []);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: filter, page: 1, size: 10 } }));
+    dispatch(readContract({ params: { filter: {} } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));

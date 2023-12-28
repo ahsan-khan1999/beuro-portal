@@ -7,16 +7,16 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 
 const index = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   useEffect(() => {
     localStoreUtil.get_data("offer").then((result) => {
-      if (result) dispatch(setOfferDetails(result))
-    })
+      if (result) dispatch(setOfferDetails(result));
+    });
     return () => {
       // localStoreUtil.remove_data("lead")
       // dispatch(setLeadDetails(DEFAULT_LEAD))
-    }
-  }, [])
+    };
+  }, []);
   return (
     <div>
       <OfferAddDetails />

@@ -6,10 +6,10 @@ import { User } from ".";
 export interface Lead {
   id: string;
   refID: string;
-  customerDetail: Customers
+  customerDetail: Customers;
   lead: CustomerLeadDetail;
-  leadStatus: string;
-  customerID:string
+  leadStatus: "Open" | "Close" | "Expired";
+  customerID: string;
   images: string[];
   createdAt: string;
   type: string;
@@ -24,14 +24,14 @@ export interface Lead {
   otherServices: string[];
   requiredService: string;
   additionalDetails: string;
-  createdBy: User
+  createdBy: User;
 }
 interface CustomerDetails {
-  Customer: Customers
+  Customer: Customers;
 }
 export interface AddressID {
-  id: string,
-  address: CustomerAddress[]
+  id: string;
+  address: CustomerAddress[];
 }
 
 export interface CustomerLeadDetail {
@@ -45,15 +45,13 @@ export interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string;
-  description: string
+  description: string;
 }
-
 
 export interface LeadService {
   description: string;
   id: string;
-  price: number
+  price: number;
   serviceName: string;
-  unit: number
+  unit: number;
 }
-

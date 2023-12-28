@@ -16,13 +16,22 @@ export const DatePicker = ({
   dateType,
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = `  rounded-lg ${
+  const defaultClasses = ` w-full rounded-lg ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   } py-[10px] outline-none text-dark text-sm focus:border-primary`;
   const classes = combineClasses(defaultClasses, className);
   return (
     <>
       <div className={`relative w-full flex items-center`}>
+        {remove && (
+          <div
+            className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+            onClick={onRemove}
+          >
+            {remove}
+          </div>
+        )}
+
         {svg && (
           <span
             className={`mr-3 absolute left-4 z-50 ${
@@ -44,7 +53,7 @@ export const DatePicker = ({
               min={disablePastDate()}
               className={`${classes} relative`}
             />
-            <div className="pr-4 absolute right-2 cursor-pointer">
+            <div className="absolute right-2 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

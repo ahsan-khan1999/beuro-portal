@@ -48,14 +48,14 @@ export interface SubInvoiceTableRowTypes {
   id: string;
   amount: number;
   dateOfNextInvoice: string;
-  emailStatus: string;
+  emailStatus: "Pending" | "Sent" | "Failed";
   frequency: string;
   invoiceID: InvoiceTableRowTypes;
   invoiceNumber: string;
   invoiceStatus: string;
   paymentType: string;
   createdAt: string;
-  isInvoiceRecurring:boolean
+  isInvoiceRecurring: boolean;
 }
 
 export interface InvoiceEmptyStateType {
@@ -72,7 +72,7 @@ export interface InvoiceCardContentProps {
   handleRecurringInvoiceCreation: () => void;
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
-  handleSendEmail: () => void
+  handleSendEmail: () => void;
 }
 
 export interface InvoiceDetailsTableProps {
@@ -80,5 +80,5 @@ export interface InvoiceDetailsTableProps {
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
-  handleRecurringInvoiceEdit: (item: any) => void
+  handleRecurringInvoiceEdit: (item: any) => void;
 }
