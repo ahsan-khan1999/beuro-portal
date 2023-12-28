@@ -40,6 +40,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   },
   setValue
 ) => {
+  console.log(type,"offer type");
+  
   
   const { t: translate } = useTranslation();
   

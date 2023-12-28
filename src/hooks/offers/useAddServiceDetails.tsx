@@ -61,6 +61,8 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
     resolver: yupResolver<FieldValues>(schema),
 
   });
+  const type = watch("type");
+  console.log(type,"3434");
 
   const isTax = watch("isTax");
   const isDiscount = watch("isDiscount");
@@ -145,6 +147,7 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
         grandTotal: offerDetails?.total,
       });
       reset({
+        // type: "New Customer",
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
@@ -164,7 +167,7 @@ export const useAddServiceDetails = (onHandleNext: (currentComponent: Components
 
   });
 
-  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
+  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service,type, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue);
 
   const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType, tax: tax }, append, remove, serviceFields, setValue);
   const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)
