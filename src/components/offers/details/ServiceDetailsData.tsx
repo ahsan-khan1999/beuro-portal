@@ -117,7 +117,7 @@ const ServiceDetailsData = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.serviceTitle}
               </span>
-              <span className="text-base font-medium text-[#4B4B4B]">
+              <span className="text-base font-medium text-[#4B4B4B] break-all mr-2">
                 {item?.description}
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">

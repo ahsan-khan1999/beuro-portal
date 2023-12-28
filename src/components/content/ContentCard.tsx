@@ -36,7 +36,7 @@ const ContentCard = ({
         />
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="grid lg:flex justify-between items-start gap-y-3">
+      <div className="grid lg:flex justify-between flex-wrap items-start gap-y-3 gap-x-3">
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">S.no:</span>
           <span className="text-[#4B4B4B] text-base font-medium">

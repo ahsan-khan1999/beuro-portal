@@ -40,7 +40,7 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               Offer Title
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium overflow-clip text-ellipsis ">
               {offerDetails?.title}
 
             </div>

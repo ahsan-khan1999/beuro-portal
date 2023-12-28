@@ -73,7 +73,7 @@ const useOffers = () => {
     // );
   }, []);
   const handleFilterChange = () => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
+    dispatch(readOffer({ params: { filter: {} } }));
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -152,7 +152,7 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) => {
+    dispatch(readOffer({ params: { filter: {} } })).then((response:any) => {
       setCurrentPageRows(response?.payload?.Offer);
     })
 

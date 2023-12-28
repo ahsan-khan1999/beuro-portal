@@ -1,9 +1,7 @@
 import { IBaseModalProps } from "@/types";
 import { Backdrop } from "../backdrop/backdrop";
 import { combineClasses } from "@/utils/utility";
-import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@/utils/hooks";
-
+import { motion } from "framer-motion";
 export const BaseModal = ({
   children,
   onClose,
@@ -15,8 +13,6 @@ export const BaseModal = ({
     defaultContainerClasses,
     containerClassName
   );
-
-  const ref = useOutsideClick<HTMLDivElement>(onClose);
 
   return (
     <Backdrop onClose={onClose}>

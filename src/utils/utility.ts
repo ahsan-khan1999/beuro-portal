@@ -353,7 +353,7 @@ export function getStatusColor(status: string) {
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"]
   )
-    return "#FE9244";
+    return "#4A13E7";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]
   )

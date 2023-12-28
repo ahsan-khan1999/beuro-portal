@@ -49,7 +49,7 @@ export default function SelectField({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-white flex-col absolute top-[36px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2  shadow-lg"
+            className="bg-white flex-col absolute   top-[36px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2  shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

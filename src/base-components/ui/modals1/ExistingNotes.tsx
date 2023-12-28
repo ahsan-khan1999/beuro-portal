@@ -12,6 +12,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
 import { useEmptyStates } from "@/utils/hooks";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -102,9 +103,9 @@ const ExistingNotes = ({
               ))}
             </>
           ) : (
-           <div className="flex justify-center items-center">
-             <NoDataEmptyState />
-           </div>
+            <div className="flex justify-center items-center">
+              <NoDataEmptyState />
+            </div>
           )}
         </div>
       </BaseModal>

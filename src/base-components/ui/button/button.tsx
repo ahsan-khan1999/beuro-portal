@@ -25,7 +25,7 @@ const router = useRouter()
     <button
       type={inputType}
       disabled={loading}
-      className={`${classes} flex justify-center`}
+      className={`${classes}   flex justify-center`}
     >
       <Loader
         height="50"
@@ -37,7 +37,7 @@ const router = useRouter()
   ) : (
     <button
       type={inputType}
-      className={`${classes} ${
+      className={`${classes} hover:bg-buttonHover hover:text-white text-dark  ${
         success && "flex items-center gap-x-2 "
       } flex items-center justify-center `}
       onClick={() => {

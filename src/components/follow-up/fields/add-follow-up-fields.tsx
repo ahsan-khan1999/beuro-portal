@@ -106,7 +106,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             },
             field: {
               type: Field.date,
-              className: `!py-4 !border-[#BFBFBF] focus:!border-primary`,
+              className: `!py-4 !border-[#BFBFBF] focus:!border-primary !w-full`,
               id: "dateTime",
               name: "dateTime",
               value: "22:10:06,  12 September 2023",
