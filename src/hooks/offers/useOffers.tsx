@@ -34,16 +34,16 @@ const useOffers = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
+    // location: "",
     sort: "",
     text: "",
     date: {
       $gte: "",
       $lte: "",
     },
-    email: [],
-    payment: "",
-    price: [],
+    // email: [],
+    // payment: "",
+    // price: [],
     status: undefined,
   });
   const totalItems = totalCount;
@@ -64,14 +64,14 @@ const useOffers = () => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(setLeadDetails(DEFAULT_LEAD));
 
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readOffer({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Offer);
-      }
-    });
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+    // dispatch(readOffer({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Offer);
+    //   }
+    // });
   }, []);
   const handleFilterChange = (query: FilterType) => {
     dispatch(

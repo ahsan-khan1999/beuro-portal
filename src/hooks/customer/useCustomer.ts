@@ -15,7 +15,7 @@ export default function useCustomer() {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
+    // location: "",
     sort: "",
     text: "",
     type: "",
@@ -28,15 +28,15 @@ export default function useCustomer() {
   const itemsPerPage = 10;
   useEffect(() => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: null, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: null, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
 
-    dispatch(readCustomer({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Customer);
-      }
-    });
+    // dispatch(readCustomer({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Customer);
+    //   }
+    // });
   }, []);
 
   useEffect(() => {

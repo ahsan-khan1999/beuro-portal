@@ -56,6 +56,7 @@ export interface OffersTableRowTypes {
   total: number;
   discountAmount: number;
   discountDescription: string;
+  signature?: string
 }
 
 interface Address {

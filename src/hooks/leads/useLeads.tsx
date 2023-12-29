@@ -29,7 +29,6 @@ const useLeads = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
     sort: "",
     text: "",
     date: {
@@ -49,17 +48,17 @@ const useLeads = () => {
     dispatch(setLeadDetails(DEFAULT_LEAD));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
 
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: null, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: null, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
 
-    dispatch(
-      readLead({ params: { filter: queryParams, page: 1, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Lead);
-      }
-    });
+    // dispatch(
+    //   readLead({ params: { filter: queryParams, page: 1, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Lead);
+    //   }
+    // });
   }, []);
 
   const totalItems = totalCount;

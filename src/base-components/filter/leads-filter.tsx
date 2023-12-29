@@ -128,7 +128,7 @@ export default function LeadsFilter({
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
                     Location
@@ -151,7 +151,7 @@ export default function LeadsFilter({
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

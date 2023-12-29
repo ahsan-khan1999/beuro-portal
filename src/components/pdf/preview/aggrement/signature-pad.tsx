@@ -1,16 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import SignPad from "signature_pad";
 import { SignatureSubmittedSuccessFully } from "./signature-submitted-success";
+import localStoreUtil from "@/utils/localstore.util";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import { Button } from "@/base-components/ui/button/button";
+import Image from "next/image";
 
 const ow = 383;
 const oh = 153;
 const originalStrokeWidth = 1;
 
-export const SignaturePad = () => {
+export const SignaturePad = ({ signature }: { signature?: string }) => {
+  const dispatch = useAppDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const { loading } = useAppSelector(state => state.global)
   const resizeCanvas = () => {
     if (canvasRef.current && signaturePad) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -30,56 +36,10 @@ export const SignaturePad = () => {
     }
   };
 
-  // const resizeCanvas = () => {
-  //   if (canvasRef.current && signaturePad) {
-  //     const rect = canvasRef.current.getBoundingClientRect();
-  //     const scale = Math.min(rect.width / ow, rect.height / oh);
-  
-  //     const canvas = canvasRef.current;
-  //     canvas.width = ow * scale;
-  //     canvas.height = oh * scale;
-  
-  //     // Adjust stroke width based on scale
-  //     if (rect.width < 1160) {
-  //       // Smaller stroke width for smaller scale
-  //       signaturePad.minWidth = (originalStrokeWidth / 2) / scale;
-  //       signaturePad.maxWidth = (originalStrokeWidth * 0.2) / scale;
-  //     } else {
-  //       // Original stroke width for larger scale
-  //       signaturePad.minWidth = originalStrokeWidth / scale;
-  //       signaturePad.maxWidth = (originalStrokeWidth * 0.8) / scale;
-  //     }
-  
-  //     // Redraw the signature from the existing data
-  //     const data = signaturePad.toData();
-  //     signaturePad.clear();
-  //     signaturePad.fromData(data);
-  //   }
-  // };
 
-  // const resizeCanvas = () => {
-  //   if (canvasRef.current && signaturePad) {
-  //     const rect = canvasRef.current.getBoundingClientRect();
-  //     const scale = Math.min(rect.width / ow, rect.height / oh);
-  
-  //     const canvas = canvasRef.current;
-  //     canvas.width = ow * scale;
-  //     canvas.height = oh * scale;
-  
-  //     // Use a consistent stroke width regardless of speed
-  //     const strokeWidth = originalStrokeWidth * scale;
-  //     signaturePad.minWidth = strokeWidth;
-  //     signaturePad.maxWidth = strokeWidth;
-  
-  //     // Redraw the signature from the existing data
-  //     const data = signaturePad.toData();
-  //     signaturePad.clear();
-  //     signaturePad.fromData(data);
-  //   }
-  // };
-  
-  
-  
+
+
+
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
       const sigPad = new SignPad(canvasRef.current, {
@@ -96,10 +56,21 @@ export const SignaturePad = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [signaturePad]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (signaturePad) {
+      const formdata = new FormData();
+
       const dataUrl = signaturePad.toDataURL("image/png");
-      setIsSubmitted(true);
+      fetch(dataUrl).then((res) => res.blob()).then(async (blob) => {
+        formdata.append("file", blob as any)
+        const res = await dispatch(uploadFileToFirebase(formdata));
+        if (res?.payload) {
+          localStoreUtil.store_data("signature", res?.payload)
+          setIsSubmitted(true);
+        }
+      })
+
+
       // Post to backend
       // Example: postSignatureData(dataUrl);
     }
@@ -111,6 +82,7 @@ export const SignaturePad = () => {
   };
 
   return (
+    !signature &&
     <>
       <div className="select-none mb-4">
         <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
@@ -130,15 +102,23 @@ export const SignaturePad = () => {
         >
           Clear
         </button>
-        <button
-          disabled={isSubmitted}
+        <Button
+          id="signature"
+          inputType="button"
           onClick={handleSave}
-          className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
-        >
-          Submit
-        </button>
+          disabled={isSubmitted}
+          loading={loading}
+          text="Submit"
+          className="bg-[#393939]  text-center text-white rounded-md shadow-md w-full"
+        />
+
       </div>
-    </>
+    </> ||
+    <div className="select-none mb-4">
+      <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
+        {signature && <Image src={signature} alt="signature" height={177} width={446}/>}
+      </div>
+    </div>
   );
 };
 

@@ -21,7 +21,6 @@ const useService = () => {
       $gte: "",
       $lte: "",
     },
-    price: [],
   });
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,15 +31,15 @@ const useService = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
 
-    dispatch(readService({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Service);
-      }
-    });
+    // dispatch(readService({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Service);
+    //   }
+    // });
   }, []);
 
   useEffect(() => {

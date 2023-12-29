@@ -27,12 +27,11 @@ const useInvoice = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
     sort: "",
     text: "",
-    type: "",
+    // type: "",
     email: [],
-    price: [],
+    // price: [],
     status: [],
   });
   const totalItems = totalCount;
@@ -49,14 +48,14 @@ const useInvoice = () => {
   // }, [query?.filter]);
 
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readInvoice({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Invoice);
-      }
-    });
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+    // dispatch(readInvoice({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Invoice);
+    //   }
+    // });
   }, []);
   const handleFilterChange = (query: FilterType) => {
     dispatch(

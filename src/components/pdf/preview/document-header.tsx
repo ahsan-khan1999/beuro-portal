@@ -8,10 +8,11 @@ export const DocumentHeader = ({
   createdBy,
   offerDate,
   offerNo,
+  logo
 }: DocumentHeaderDetailsProps) => {
   return (
     <div className="flex justify-between items-center h-[173px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
-      <Image src={umzugsLogo} alt="umzugsLogo" />
+      <Image src={logo} alt="umzugsLogo" height={75} width={185} />
 
       <div className="flex flex-col gap-[6px]">
         <div className="flex gap-[30px]">

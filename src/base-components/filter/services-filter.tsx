@@ -141,7 +141,7 @@ export default function ServicesFilter({
                 />
               </div>
             </div>
-            <div className="mt-5 mb-2">
+            {/* <div className="mt-5 mb-2">
               <div className="flex justify-between mb-2">
                 <label htmlFor="type" className="font-medium text-base">
                   Price
@@ -163,7 +163,7 @@ export default function ServicesFilter({
                 onHighPriceChange={handleHighPriceChange}
                 onLowPriceChange={handleLowPriceChange}
               />
-            </div>
+            </div> */}
             <div>
               <BaseButton
                 buttonText="Save"
