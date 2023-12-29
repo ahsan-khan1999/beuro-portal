@@ -28,7 +28,13 @@ const OfferDetailsCard = ({
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const handleDonwload = () => {
+    window.open(offerDetails?.attachement)
+  };
+  const handlePrint = () => {
+    window.open(offerDetails?.attachement)
 
+  };
   return (
     <>
       <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -46,9 +52,8 @@ const OfferDetailsCard = ({
 
         <div className="flex gap-[22px]">
           <div
-            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${
-              isSendEmail && "hidden"
-            }`}
+            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
+              }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -59,11 +64,11 @@ const OfferDetailsCard = ({
           <Image
             src={PDFIcon}
             alt="PDFIcon"
-            onClick={() => router.push("/offers/pdf-preview")}
+            onClick={() => router.push({ pathname: "/offers/pdf-preview", query: { offerID: offerDetails?.id } })}
             className="cursor-pointer"
           />
-          <Image src={downloadIcon} alt="downloadIcon" />
-          <Image src={printerIcon} alt="printerIcon" />
+          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload} />
+          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint} />
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -117,7 +122,7 @@ const OfferDetailsCard = ({
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item) => `${item?.startDate} to ${item?.endDate}`
+                  (item) => `${item?.startDate} to ${item?.endDate}, `
                 )}
               </span>
             </div>
@@ -164,10 +169,10 @@ const OfferDetailsCard = ({
                 dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
               />
             )) || (
-              <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
-                {offerDetails?.offerStatus}
-              </span>
-            )}
+                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                  {offerDetails?.offerStatus}
+                </span>
+              )}
           </div>
 
           <div className="flex justify-between items-center">

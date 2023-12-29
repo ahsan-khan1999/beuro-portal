@@ -150,9 +150,9 @@ const PdfPriview = () => {
       dispatch(readOfferDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
           if (response?.payload) {
-            console.log(response.payload);
             const offerDetails: OffersTableRowTypes = response?.payload;
             let formatData: PdfProps = {
+              attachement: offerDetails?.attachement,
               emailHeader: {
                 offerNo: offerDetails?.offerNumber,
                 emailStatus: offerDetails?.emailStatus,
@@ -332,12 +332,12 @@ const PdfPriview = () => {
   };
 
   const handleDonwload = () => {
-    console.log("download");
+    window.open(offerData?.attachement)
   };
   const handlePrint = () => {
-    console.log("print");
-  };
+    window.open(offerData?.attachement)
 
+  };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

@@ -56,7 +56,7 @@ const InvoiceDetails = () => {
     invoiceComponent[switchDetails as keyof typeof invoiceComponent].isData,
     loading
   );
-
+  
   return (
     <>
       <Layout>
