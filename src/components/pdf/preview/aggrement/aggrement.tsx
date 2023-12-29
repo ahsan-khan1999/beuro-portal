@@ -50,7 +50,7 @@ export const Aggrement = ({
                 <span className="text-base text-black font-normal ">Date</span>
               </div>
             </div>
-            <div className="w-[450px] h-[278px]">
+            <div className="w-[450px] h-[278px] flex flex-col justify-end mt-5">
               <SignaturePad signature={signature}/>
               <div className="flex flex-col gap-y-[18px]">
                 <hr />
