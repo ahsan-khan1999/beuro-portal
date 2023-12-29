@@ -9,17 +9,18 @@ import {
 import { useTranslation } from "next-i18next";
 import { DEFAULT_SERVICE } from "@/utils/static";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useService = () => {
   const { service, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.service
   );
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
     date: {
-      $gte: "",
-      $lte: "",
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
     },
   });
   const dispatch = useAppDispatch();
@@ -31,24 +32,9 @@ const useService = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-
-    // dispatch(readService({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Service);
-    //   }
-    // });
-  }, []);
-
-  useEffect(() => {
-    // Update rows for the current page
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-
-    dispatch(readService({ params: queryParams })).then((res: any) => {
+    dispatch(
+      readService({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Service);
       }
@@ -60,8 +46,12 @@ const useService = () => {
   };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readService({ params: { filter: query, page: currentPage, size: 10 } })
-    );
+      readService({ params: { filter: query, page: 1, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Service);
+      }
+    });
   };
   return {
     currentPageRows,

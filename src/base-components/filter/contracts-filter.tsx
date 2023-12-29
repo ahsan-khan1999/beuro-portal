@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps } from "@/types";
+import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
@@ -8,11 +8,18 @@ import { PriceInputField } from "./fields/price-input-field";
 import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 export default function ContractsFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters: FilterType = {
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  };
   const {
     extraFilterss,
     moreFilter,
@@ -21,25 +28,9 @@ export default function ContractsFilter({
     handleFilterReset,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  // const [moreFilter, setMoreFilter] = useState<{
-  //   $gte: string;
-  //   $lte: string;
-  //   payment: string;
-  //   price: string[];
-  // }>({
-  //   $gte: "",
-  //   $lte: "",
-  //   payment: "",
-  //   price: [],
-  // });
-
-  // const handleSave = () => {
-  //   setFilter((prev: any) => ({ ...prev, ...moreFilter }));
-  //   handleExtraFiltersClose();
-  // };
 
   const handleSave = () => {
     setFilter((prev: any) => {
@@ -47,23 +38,12 @@ export default function ContractsFilter({
         ...prev,
         $gte: moreFilter.date && moreFilter.date.$gte,
         $lte: moreFilter.date && moreFilter.date.$lte,
-        payment: moreFilter.payment,
-        price: moreFilter.price,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
     });
     handleExtraFiltersClose();
   };
-
-  const checkbox: CheckBoxType[] = [
-    { label: "Send", type: "send" },
-    {
-      label: "Draft",
-      type: "draft",
-    },
-    { label: "Failed", type: "failed" },
-  ];
 
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
@@ -82,7 +62,7 @@ export default function ContractsFilter({
     const dateTime = new Date(val);
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
   return (
@@ -140,7 +120,10 @@ export default function ContractsFilter({
                     htmlFor="type"
                     className="cursor-pointer text-red"
                     onClick={() => {
-                      handleFilterReset("date", { $gte: "", $lte: "" });
+                      handleFilterReset("date", {
+                        $gte: FiltersDefaultValues.$gte,
+                        $lte: FiltersDefaultValues.$lte,
+                      });
                     }}
                   >
                     Reset
@@ -151,10 +134,12 @@ export default function ContractsFilter({
                     label="From"
                     label2="To"
                     dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

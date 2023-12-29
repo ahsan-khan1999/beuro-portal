@@ -10,6 +10,7 @@ import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
 import EmailCheckField from "./fields/email-check-field";
 import { formatDateForDatePicker } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function OfferFilter({
   filter,
@@ -18,8 +19,8 @@ export default function OfferFilter({
 }: FilterProps) {
   const moreFilters = {
     date: {
-      $gte: "2000-01-01T00:00:00Z",
-      $lte: "5000-01-01T00:00:00Z",
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
     },
   };
   const {
@@ -45,50 +46,6 @@ export default function OfferFilter({
     });
     handleExtraFiltersClose();
   };
-
-  const checkbox: CheckBoxType[] = [
-    { label: "Send", type: "send" },
-    {
-      label: "Draft",
-      type: "draft",
-    },
-    { label: "Failed", type: "failed" },
-  ];
-
-  // const handleEmailChange = (value: string, isChecked: boolean) => {
-  //   if (moreFilter.email) {
-  //     const updatedEmails = isChecked
-  //       ? [...moreFilter.email, value]
-  //       : moreFilter.email.filter((email) => email !== value);
-
-  //     setMoreFilter({ ...moreFilter, email: updatedEmails });
-  //   }
-  // };
-  // const handleLowPriceChange = (val: string) => {
-  //   if (moreFilter.price) {
-  //     setMoreFilter((prev) => {
-  //       if (prev.price) {
-  //         return {
-  //           ...prev,
-  //           price: [val, prev.price[1]],
-  //         };
-  //       } else {
-  //         return prev;
-  //       }
-  //     });
-  //   }
-  // };
-
-  // const handleHighPriceChange = (val: string) => {
-  //   setMoreFilter((prev) => {
-  //     if (prev.price) {
-  //       return {
-  //         ...prev,
-  //         price: [prev.price[0], val],
-  //       };
-  //     } else return prev;
-  //   });
-  // };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
     const dateTime = new Date(val);
@@ -153,8 +110,8 @@ export default function OfferFilter({
                     className="cursor-pointer text-red"
                     onClick={() => {
                       handleFilterReset("date", {
-                        $gte: "01/01/2000",
-                        $lte: "01/01/5000",
+                        $gte: FiltersDefaultValues.$gte,
+                        $lte: FiltersDefaultValues.$lte,
                       });
                     }}
                   >
@@ -167,11 +124,11 @@ export default function OfferFilter({
                     label2="To"
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        "01/01/2000"
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
                       (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        "01/01/5000"
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

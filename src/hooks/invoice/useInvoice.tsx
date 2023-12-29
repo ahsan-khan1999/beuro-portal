@@ -14,6 +14,7 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -27,12 +28,10 @@ const useInvoice = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
-    // type: "",
-    email: [],
-    // price: [],
-    status: [],
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    email: FiltersDefaultValues.None,
+    status: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
 
@@ -46,21 +45,12 @@ const useInvoice = () => {
   //     status: query?.filter as string,
   //   });
   // }, [query?.filter]);
-
-  useEffect(() => {
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-    // dispatch(readInvoice({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Invoice);
-    //   }
-    // });
-  }, []);
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
-    );
+      readInvoice({ params: { filter: query, page: 1, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
+    });
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -108,10 +98,9 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readInvoice({ params: queryParams })).then((res: any) => {
+    dispatch(
+      readInvoice({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       setCurrentPageRows(res?.payload?.Invoice);
     });
   }, [currentPage]);

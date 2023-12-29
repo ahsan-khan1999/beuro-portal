@@ -38,7 +38,6 @@ export default function LeadsFilter({
     setFilter((prev: any) => {
       const updatedFilter = {
         ...prev,
-        location: moreFilter.location,
         date: {
           $gte: moreFilter.date && moreFilter.date.$gte,
           $lte: moreFilter.date && moreFilter.date.$lte,
@@ -113,7 +112,10 @@ export default function LeadsFilter({
                     htmlFor="type"
                     className="cursor-pointer text-red"
                     onClick={() => {
-                      handleFilterReset("date", { $gte: "", $lte: "" });
+                      handleFilterReset("date", {
+                        $gte: FiltersDefaultValues.$gte,
+                        $lte: FiltersDefaultValues.$lte,
+                      });
                     }}
                   >
                     Reset
@@ -124,10 +126,12 @@ export default function LeadsFilter({
                     label="From"
                     label2="To"
                     dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

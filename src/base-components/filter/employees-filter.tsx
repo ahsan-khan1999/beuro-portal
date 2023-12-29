@@ -7,19 +7,19 @@ import DatePicker from "./fields/date-picker";
 import InputField from "./fields/input-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function EmployeesFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
-  // const [moreFilter, setMoreFilter] = useState<{
-  //   date: string[];
-  //   price: string[];
-  // }>({
-  //   $gte: '',
-  //   price: filter.price || [],
-  // });
+  const moreFilters = {
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  };
   const {
     moreFilter,
     setMoreFilter,
@@ -28,18 +28,19 @@ export default function EmployeesFilter({
     handleExtraFilterToggle,
     handleExtraFiltersClose,
     extraFilterss,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const handleSave = () => {
     setFilter((prev: any) => {
-      const updatedFilters = {
+      const updatedFilter = {
         ...prev,
-        $gte: moreFilter.date && moreFilter.date.$gte,
-        $lte: moreFilter.date && moreFilter.date.$lte,
-        price: moreFilter.price,
+        date: {
+          $gte: moreFilter.date && moreFilter.date.$gte,
+          $lte: moreFilter.date && moreFilter.date.$lte,
+        },
       };
-      onFilterChange(updatedFilters);
-      return updatedFilters;
+      onFilterChange(updatedFilter);
+      return updatedFilter;
     });
     handleExtraFiltersClose();
   };
@@ -47,7 +48,7 @@ export default function EmployeesFilter({
     const dateTime = new Date(val);
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
@@ -106,7 +107,10 @@ export default function EmployeesFilter({
                     htmlFor="type"
                     className="cursor-pointer text-red"
                     onClick={() => {
-                      handleFilterReset("date", { $gte: "", $lte: "" });
+                      handleFilterReset("date", {
+                        $gte: FiltersDefaultValues.$gte,
+                        $lte: FiltersDefaultValues.$lte,
+                      });
                     }}
                   >
                     Reset
@@ -117,10 +121,12 @@ export default function EmployeesFilter({
                     label="From"
                     label2="To"
                     dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

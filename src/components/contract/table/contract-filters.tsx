@@ -4,15 +4,17 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useRef } from "react";
 import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
+import { FiltersDefaultValues } from "@/enums/static";
 export default function ContractFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -42,11 +44,14 @@ export default function ContractFilters({
           updatedStatus.splice(index, 1);
         }
       }
-      const updatedFilter = { ...prev, status: updatedStatus };
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
   };
+
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
@@ -58,8 +63,16 @@ export default function ContractFilters({
     });
   };
 
-  const handleEnterPress = () => {
-    handleFilterChange(filter);
+  const handlePressEnter = () => {
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
   };
 
   return (
@@ -81,9 +94,10 @@ export default function ContractFilters({
       </div>
       <div className="flex gap-x-4 items-center">
         <InputField
-          handleChange={(value) => handleInputChange(value)}
-          value={filter.text}
-          onEnterPress={handleEnterPress}
+          handleChange={(value) => {}}
+          // value={filter.text}
+          onEnterPress={handlePressEnter}
+          ref={inputRef}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
