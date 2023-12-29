@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import { contractTableTypes } from "./contract";
+import { User } from ".";
 
 // Inovice table layout
 export interface InvoiceTableRowTypes {
@@ -48,14 +49,14 @@ export interface SubInvoiceTableRowTypes {
   id: string;
   amount: number;
   dateOfNextInvoice: string;
-  emailStatus: string;
+  emailStatus: "Pending" | "Sent" | "Failed";
   frequency: string;
   invoiceID: InvoiceTableRowTypes;
   invoiceNumber: string;
   invoiceStatus: string;
   paymentType: string;
   createdAt: string;
-  isInvoiceRecurring:boolean
+  isInvoiceRecurring: boolean;
 }
 
 export interface InvoiceEmptyStateType {
@@ -72,7 +73,7 @@ export interface InvoiceCardContentProps {
   handleRecurringInvoiceCreation: () => void;
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
-  handleSendEmail: () => void
+  handleSendEmail: () => void;
 }
 
 export interface InvoiceDetailsTableProps {
@@ -80,5 +81,33 @@ export interface InvoiceDetailsTableProps {
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
-  handleRecurringInvoiceEdit: (item: any) => void
+  handleRecurringInvoiceEdit: (item: any) => void;
+}
+
+export interface PdfSubInvoiceTypes {
+  id: string;
+  emailStatus: string;
+  invoiceID: InvoiceTableRowTypesPdf;
+  invoiceNumber: string;
+  paymentType: string;
+  createdAt: string;
+  title?: string;
+  additionalDetails?: string;
+}
+
+export interface InvoiceTableRowTypesPdf {
+  id: string;
+  invoiceNumber: string;
+  paidAmount: string;
+  remainingAmount: string;
+  totalEmail: string;
+  sentEmail: string;
+  createdAt: string;
+  contractID: contractTableTypes;
+  invoiceTitle: string;
+  totalPrice: string;
+  emailStatus: string;
+  invoiceStatus: string;
+  isInvoiceRecurring: boolean;
+  createdBy: User;
 }

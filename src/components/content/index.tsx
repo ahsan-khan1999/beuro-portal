@@ -29,17 +29,19 @@ export default function Content() {
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
-        handleFilterChange={() => handleFilterChange(filter)}
+        handleFilterChange={handleFilterChange}
       />
       <TableLayout>
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </>
   );
 }

@@ -2,16 +2,24 @@ import React, { SetStateAction, useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { FilterProps } from "@/types";
+import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
 import { date } from "yup";
+import { formatDateForDatePicker } from "@/utils/utility";
 
-export default function LeadsFilter({ filter, setFilter }: FilterProps) {
+
+export default function LeadsFilter({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
   const {
     extraFilterss,
+    moreFilter,
+    setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
     handleExtraFilterToggle,
@@ -20,25 +28,32 @@ export default function LeadsFilter({ filter, setFilter }: FilterProps) {
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
-  const [moreFilter, setMoreFilter] = useState<{
-    location: string;
-    date: string[];
-  }>({
-    location: filter?.location || "",
-    date: filter?.date || ["", ""],
-  });
-
   const handleSave = () => {
-    setFilter((prev) => ({
-      ...prev,
-      location: moreFilter.location,
-      date: moreFilter.date,
-    }));
+    setFilter((prev: any) => {
+      const updatedFilter = {
+        ...prev,
+        location: moreFilter.location,
+        date: {
+          $gte: moreFilter.date && moreFilter.date.$gte,
+          $lte: moreFilter.date && moreFilter.date.$lte,
+        },
+      };
+      onFilterChange(updatedFilter);
+      return updatedFilter;
+    });
     handleExtraFiltersClose();
   };
 
+  const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
+    const dateTime = new Date(val);
+    setMoreFilter((prev) => ({
+      ...prev,
+      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+    }));
+  };
+
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
+    <div className="relative flex my-auto" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +106,9 @@ export default function LeadsFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => {
+                      handleFilterReset("date", { $gte: "", $lte: "" });
+                    }}
                   >
                     Reset
                   </label>
@@ -100,24 +117,18 @@ export default function LeadsFilter({ filter, setFilter }: FilterProps) {
                   <DatePicker
                     label="From"
                     label2="To"
-                    dateFrom={moreFilter.date[0]}
-                    dateTo={moreFilter.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilter((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilter((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
+                    dateFrom={formatDateForDatePicker(
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                    )}
+                    dateTo={formatDateForDatePicker(
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                    )}
+                    onChangeFrom={(val) => handleDateChange("$gte", val)}
+                    onChangeTo={(val) => handleDateChange("$lte", val)}
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
                     Location
@@ -136,11 +147,11 @@ export default function LeadsFilter({ filter, setFilter }: FilterProps) {
                   handleChange={(value) =>
                     setMoreFilter((prev) => ({ ...prev, location: value }))
                   }
-                  value={filter.location || ""}
+                  value={moreFilter.location || ""}
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

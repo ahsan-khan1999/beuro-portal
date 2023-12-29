@@ -62,7 +62,7 @@ export interface ContractOfferDetails {
   title: string;
   totalPrice: number;
   leadID: Lead;
-  content?: ContentTableRowTypes;
+  content: ContentTableRowTypes;
   serviceDetail: OfferServiceDetails;
   subTotal: number;
   total: number;

@@ -2,15 +2,23 @@ import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import React from "react";
 
 export default function InputField({
   value,
   handleChange,
+  onEnterPress,
   textClassName,
   containerClassName,
   iconDisplay,
   bgColor,
 }: InputFieldProps) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && onEnterPress) {
+      onEnterPress();
+    }
+  };
+
   const inputClasses = combineClasses(
     `${
       bgColor ? "bg-[#F4F4F4]" : "bg-white"
@@ -27,10 +35,11 @@ export default function InputField({
         <input
           id="searchBar"
           type="text"
-          defaultValue={value}
+          value={value}
           placeholder="Search..."
           className={inputClasses}
           onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         {iconDisplay && (
           <div

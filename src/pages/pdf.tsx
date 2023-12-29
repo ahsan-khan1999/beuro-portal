@@ -1,9 +1,9 @@
-import { Pdf } from "@/components/pdf/pdf";
+import SignPdfPreview from "@/components/offers/pdfPriview/sign-pdf-preview";
 
 export default function () {
   return (
     <div className="flex justify-center ">
-      {/* <Pdf /> */}
+      <SignPdfPreview />
     </div>
   );
 }

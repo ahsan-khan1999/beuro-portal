@@ -8,7 +8,7 @@ export default function useSupportRequest() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
-    sortBy: "",
+    sort: "",
     text: "",
     type: ""
   });

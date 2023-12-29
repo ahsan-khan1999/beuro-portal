@@ -23,6 +23,8 @@ export const useAddLeadAddressDetails = (
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { customerDetails } = useAppSelector((state) => state.customer);
+
   const [addressCount, setAddressCount] = useState(leadDetails?.addressID?.address?.length || 1);
   const schema = generateLeadsAddressEditDetailsValidation(
     translate,
@@ -47,7 +49,7 @@ export const useAddLeadAddressDetails = (
   });
   useMemo(() => {
     if (leadDetails.id) {
-      reset(transformAddressFormValues(leadDetails?.addressID?.address));
+      reset(transformAddressFormValues(leadDetails?.addressID?.address ? leadDetails?.addressID?.address : [leadDetails?.customerDetail?.address]));
     }
   }, [leadDetails.id]);
 

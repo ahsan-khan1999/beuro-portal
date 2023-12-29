@@ -14,8 +14,7 @@ export default function SearchInputFiled({
   bgColor,
 }: InputFieldProps) {
   const inputClasses = combineClasses(
-    `${
-      bgColor ? "bg-[#F4F4F4]" : "bg-white"
+    `${bgColor ? "bg-[#F4F4F4]" : "bg-white"
     } w-[274px] text-sm rounded-lg pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
     textClassName
   );
@@ -39,9 +38,8 @@ export default function SearchInputFiled({
           />
           {iconDisplay && (
             <div
-              className={`absolute top-1/2 ${
-                router.pathname.includes("dashboard") ? "left-0" : ""
-              }  transform -translate-y-1/2`}
+              className={`absolute top-1/2 ${router.pathname.includes("dashboard") ? "left-0" : ""
+                }  transform -translate-y-1/2`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,19 +76,21 @@ export default function SearchInputFiled({
             </div>
           )}
         </div>
-        <div className="absolute right-0 border-l border-[#BFBFBF] z-50">
+        <div className="absolute right-0 border-l border-[#BFBFBF] z-0  ">
           <SelectField
             handleChange={(value) => console.log(value)}
             value=""
             dropDownIconClassName=""
             options={[
-              `${translate("dashboard_detail.input_filter.all")}`,
-              `${translate("dashboard_detail.input_filter.lead")}`,
-              `${translate("dashboard_detail.input_filter.offer")}`,
-              `${translate("dashboard_detail.input_filter.contract")}`,
-              `${translate("dashboard_detail.input_filter.invoice")}`,
-              `${translate("dashboard_detail.input_filter.receipt")}`,
-              `${translate("dashboard_detail.input_filter.customer")}`,
+
+              { label: translate("dashboard_detail.input_filter.all"), value: "all" },
+              { label: translate("dashboard_detail.input_filter.lead"), value: "lead" },
+              { label: translate("dashboard_detail.input_filter.offer"), value: "offer" },
+              { label: translate("dashboard_detail.input_filter.contract"), value: "contract" },
+              { label: translate("dashboard_detail.input_filter.invoice"), value: "invoice" },
+              { label: translate("dashboard_detail.input_filter.receipt"), value: "receipt" },
+              { label: translate("dashboard_detail.input_filter.customer"), value: "customer" },
+
             ]}
             label={translate("dashboard_detail.input_filter.all")}
             containerClassName="w-[91px] "

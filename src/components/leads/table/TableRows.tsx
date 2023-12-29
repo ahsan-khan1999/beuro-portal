@@ -19,6 +19,8 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item: Lead, index: number) => {
+        console.log(item.leadStatus);
+
         return (
           <div
             onClick={() =>
@@ -49,9 +51,10 @@ const TableRows = ({
             </span>
             <span className={`py-4 flex items-center`}>
               <div
-                className={`bg-[${getStatusColor(
-                  item.leadStatus
-                )}] text-white px-2 py-1 text-center rounded-md w-[70px] text-sm`}
+                style={{
+                  backgroundColor: `${getStatusColor(item.leadStatus)}`,
+                }}
+                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {item.leadStatus}
               </div>

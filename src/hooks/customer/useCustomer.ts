@@ -7,6 +7,7 @@ import {
 } from "@/api/slices/customer/customerSlice";
 import { FilterType } from "@/types";
 import { DEFAULT_CUSTOMER } from "@/utils/static";
+import { areFiltersEmpty } from "@/utils/utility";
 
 export default function useCustomer() {
   const { customer, lastPage, totalCount, loading } = useAppSelector(
@@ -14,8 +15,8 @@ export default function useCustomer() {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
-    sortBy: "",
+    // location: "",
+    sort: "",
     text: "",
     type: "",
   });
@@ -27,19 +28,23 @@ export default function useCustomer() {
   const itemsPerPage = 10;
   useEffect(() => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-    dispatch(
-      readCustomer({ params: { filter: filter, page: 1, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Customer);
-      }
-    });
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: null, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+
+    // dispatch(readCustomer({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Customer);
+    //   }
+    // });
   }, []);
 
   useEffect(() => {
-    dispatch(
-      readCustomer({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: null, page: currentPage, size: 10 }
+      : { filter: filter, page: currentPage, size: 10 };
+
+    dispatch(readCustomer({ params: queryParams })).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Customer);
       }
@@ -49,8 +54,10 @@ export default function useCustomer() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = () => {
-    dispatch(readCustomer({ params: { filter: filter, page: currentPage, size: 10 } }))
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(
+      readCustomer({ params: { filter: query, page: currentPage, size: 10 } })
+    );
   };
   return {
     currentPageRows,

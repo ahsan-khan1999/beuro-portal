@@ -26,6 +26,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { readContractDetails, sendContractEmail, updateContractContent } from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
+import { updateQuery } from "@/utils/update-query";
 
 export const productItems: ServiceList[] = [
   {
@@ -79,6 +80,7 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
+    logo:""
   },
   contactAddress: {
     address: {
@@ -171,6 +173,7 @@ const PdfPriview = () => {
                 offerNo: contractDetails?.offerID?.offerNumber,
                 offerDate: contractDetails?.offerID?.createdAt,
                 createdBy: contractDetails?.offerID?.createdBy?.fullName,
+                logo:contractDetails?.offerID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {
@@ -186,7 +189,7 @@ const PdfPriview = () => {
               },
               movingDetails: {
                 address: contractDetails?.offerID?.addressID?.address,
-                header: contractDetails?.offerID?.title,
+                header: contractDetails?.title,
                 workDates: contractDetails?.offerID?.date,
                 handleTitleUpdate: handleTitleUpdate,
                 handleDescriptionUpdate: handleDescriptionUpdate,
@@ -375,7 +378,6 @@ const PdfPriview = () => {
     const apiData = {
       id: offerID,
       title: value,
-      additionalDetails: offerData?.aggrementDetails
     }
     const response = await dispatch(updateContractContent({ data: apiData }))
     if (response?.payload) return true
@@ -384,7 +386,6 @@ const PdfPriview = () => {
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: offerID,
-      title: offerData?.emailHeader?.contractTitle,
       additionalDetails: value
     }
     console.log(offerData, "data");
@@ -392,6 +393,10 @@ const PdfPriview = () => {
     const response = await dispatch(updateContractContent({ data: apiData }))
     if (response?.payload) return true
     else return false
+  }
+  const handleSendByPost = () => {
+    router.pathname = "/contract"
+    updateQuery(router, router.locale as string)
   }
   return (
     <>
@@ -404,6 +409,8 @@ const PdfPriview = () => {
         onPrint={handlePrint}
         contractTitle={offerData?.emailHeader?.contractTitle || ""}
         worker={offerData?.emailHeader?.worker || ""}
+        onSendViaPost={handleSendByPost}
+
       />
       <div className="my-5">
         <Pdf<EmailHeaderProps>

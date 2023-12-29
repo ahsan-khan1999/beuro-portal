@@ -17,7 +17,7 @@ export default function usePlans() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
-    sortBy: "",
+    sort: "",
     text: "",
     type: ""
   });

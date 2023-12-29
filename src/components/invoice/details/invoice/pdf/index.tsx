@@ -30,9 +30,10 @@ import { useEffect, useMemo, useState } from "react";
 import { InvoiceEmailHeader } from "./invoice-email-header";
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
-import { InvoiceCardContentProps } from "@/types/invoice";
+import { InvoiceCardContentProps, PdfSubInvoiceTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
 import { ContentTableRowTypes } from "@/types/content";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
+import { updateQuery } from "@/utils/update-query";
 
 export const productItems: ServiceList[] = [
   {
@@ -86,6 +87,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
+    logo:""
   },
   contactAddress: {
     address: {
@@ -132,7 +134,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
   aggrementDetails: "",
 };
 interface ActionType {
-  payload: InvoiceTableRowDetailsTypes;
+  payload: PdfSubInvoiceTypes;
   type: string;
 }
 
@@ -165,72 +167,74 @@ const DetailsPdfPriview = () => {
       dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } })).then(
         (response: ActionType) => {
           if (response?.payload) {
-            console.log(response);
-            const invoiceDetails: InvoiceTableRowDetailsTypes =
+            const invoiceDetails: PdfSubInvoiceTypes =
               response?.payload;
+              console.log(invoiceDetails,"invoiceDetails");
+              
             let formatData: PdfProps<InvoiceEmailHeaderProps> = {
               emailHeader: {
-                contractId: invoiceDetails.contractID.contractNumber,
-                workerName: invoiceDetails?.contractID?.offerID?.createdBy?.fullName,
-                contractStatus: invoiceDetails.contractID.contractStatus,
+                contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+                workerName: invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.fullName,
+                contractStatus: invoiceDetails?.invoiceID?.contractID?.contractStatus,
                 contentName:
-                  invoiceDetails.contractID.offerID.content.contentName,
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.content?.contentName,
                 contractTitle: invoiceDetails?.title,
 
               },
               headerDetails: {
-                offerNo: invoiceDetails?.contractID.offerID.offerNumber,
-                offerDate: invoiceDetails?.createdAt,
-                createdBy: invoiceDetails?.createdBy?.fullName,
+                offerNo: invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
+                offerDate: invoiceDetails?.invoiceID?.createdAt,
+                createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                logo:invoiceDetails?.invoiceID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {
-                  name: invoiceDetails?.contractID.offerID.leadID.customerDetail
+                  name: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                     .fullName,
-                  city: invoiceDetails?.contractID.offerID.leadID
+                  city: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
                     ?.customerDetail?.address?.country,
                   postalCode:
-                    invoiceDetails?.contractID?.offerID?.leadID?.customerDetail
+                    invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                       ?.address?.postalCode,
                   streetWithNumber:
-                    invoiceDetails?.contractID?.offerID?.leadID?.customerDetail
+                    invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                       ?.address?.streetNumber,
                 },
                 email:
-                  invoiceDetails?.contractID.offerID.leadID?.customerDetail
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                     ?.email,
                 phone:
-                  invoiceDetails?.contractID.offerID.leadID?.customerDetail
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                     ?.phoneNumber,
               },
               movingDetails: {
                 address:
-                  invoiceDetails?.contractID?.offerID?.leadID?.addressID?.address,
-                header: invoiceDetails?.contractID?.offerID?.title,
-                workDates: invoiceDetails?.contractID?.offerID?.date,
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.addressID?.address,
+                header: invoiceDetails?.invoiceID?.contractID?.offerID?.title,
+                workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
                 handleTitleUpdate: handleTitleUpdate,
                 handleDescriptionUpdate: handleDescriptionUpdate
 
               },
               serviceItem:
-                invoiceDetails?.contractID?.offerID?.serviceDetail
+                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
                   ?.serviceDetail,
               serviceItemFooter: {
                 subTotal:
-                  invoiceDetails?.contractID?.offerID?.subTotal?.toString(),
-                tax: invoiceDetails?.contractID?.offerID?.taxAmount?.toString(),
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
+                tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
                 discount:
-                  invoiceDetails?.contractID?.offerID?.discountAmount?.toString(),
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
                 grandTotal:
-                  invoiceDetails?.contractID?.offerID?.total?.toString(),
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
               },
               footerDetails: {
                 firstColumn: {
-                  companyName: invoiceDetails.createdBy?.company?.companyName,
-                  email: invoiceDetails?.createdBy.email,
-                  phoneNumber: invoiceDetails.createdBy?.company?.phoneNumber,
-                  taxNumber: invoiceDetails.createdBy?.company?.taxNumber,
-                  website: invoiceDetails.createdBy?.company?.website,
+                  companyName: invoiceDetails?.invoiceID.createdBy?.company?.companyName,
+                  email: invoiceDetails?.invoiceID?.createdBy.email,
+                  phoneNumber: invoiceDetails?.invoiceID.createdBy?.company?.phoneNumber,
+                  taxNumber: invoiceDetails?.invoiceID.createdBy?.company?.taxNumber,
+                  website: invoiceDetails?.invoiceID.createdBy?.company?.website,
                 },
                 secondColumn: {
                   address: {
@@ -266,19 +270,18 @@ const DetailsPdfPriview = () => {
                 payableTo: qrCodePayableToData,
               },
               aggrementDetails:
-                invoiceDetails?.contractID.offerID.content?.confirmationContent
-                  ?.description || "",
+                invoiceDetails?.additionalDetails || "",
               isOffer: false,
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
-                invoiceDetails?.contractID?.offerID?.serviceDetail
+                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
                   ?.serviceDetail?.length;
               let pages: ServiceList[][] = [];
 
               if (totalItems > maxItemsFirstPage) {
                 pages.push(
-                  invoiceDetails?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
                     0,
                     maxItemsFirstPage
                   )
@@ -289,7 +292,7 @@ const DetailsPdfPriview = () => {
                   i += maxItemsPerPage
                 ) {
                   pages.push(
-                    invoiceDetails?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
+                    invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
                       i,
                       i + maxItemsPerPage
                     )
@@ -297,7 +300,7 @@ const DetailsPdfPriview = () => {
                 }
               } else {
                 pages.push(
-                  invoiceDetails?.contractID?.offerID?.serviceDetail
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
                     ?.serviceDetail
                 );
               }
@@ -308,8 +311,8 @@ const DetailsPdfPriview = () => {
             setNewPageData(distributeItems());
             setInvoiceData(formatData);
             setEmail({
-              ...invoiceDetails?.contractID?.offerID?.content?.invoiceContent,
-              email: invoiceDetails.contractID.offerID.createdBy.email,
+              ...invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent,
+              email: invoiceDetails?.invoiceID.contractID?.offerID?.createdBy?.email,
             });
           }
         }
@@ -362,9 +365,7 @@ const DetailsPdfPriview = () => {
     // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
-  console.log(email);
   const handleEmailSend = async () => {
-    console.log("hi");
     if (email) {
       const data = {
         id: invoiceID,
@@ -377,11 +378,7 @@ const DetailsPdfPriview = () => {
       if (res?.payload)
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
     }
-    // const data = await localStoreUtil.get_data("contractComposeEmail");
-    // const res = await dispatch(sendOfferEmail({ data }));
-    // if (res?.payload)
-    //   dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-    // await localStoreUtil.remove_data("contractComposeEmail");
+   
   };
 
   const handleDonwload = () => {
@@ -395,7 +392,7 @@ const DetailsPdfPriview = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/offers");
+    router.push("/invoices");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -416,7 +413,6 @@ const DetailsPdfPriview = () => {
     const apiData = {
       id: invoiceID,
       title: value,
-      additionalDetails: invoiceData?.aggrementDetails
     }
     const response = await dispatch(updateInvoiceContent({ data: apiData }))
     if (response?.payload) return true
@@ -425,13 +421,16 @@ const DetailsPdfPriview = () => {
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: invoiceID,
-      title: invoiceData?.emailHeader?.contractTitle,
       additionalDetails: value
     }
 
     const response = await dispatch(updateInvoiceContent({ data: apiData }))
     if (response?.payload) return true
     else return false
+  }
+  const handleSendByPost = () => {
+    router.pathname = "/invoices"
+    updateQuery(router, router.locale as string)
   }
   return (
     <>
@@ -442,6 +441,8 @@ const DetailsPdfPriview = () => {
         loading={loading}
         onDownload={handleDonwload}
         onPrint={handlePrint}
+        onSendViaPost={handleSendByPost}
+        title={router.pathname?.includes("receipt") ?  "Receipt Details" : "Invoice Details"}
       />
       <div className="my-5">
         <Pdf<InvoiceEmailHeaderProps>

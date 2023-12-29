@@ -602,6 +602,7 @@ export const staticEnums: Record<string, any> = {
     Open: 0,
     Signed: 1,
     Expired: 2,
+    Rejected: 3,
   },
   EmailStatus: {
     Draft: 0,

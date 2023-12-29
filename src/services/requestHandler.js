@@ -61,6 +61,8 @@ const SERVICE_URLS = {
   contractStatus: "/contract/updateContractStatus/",
   contractPaymentStatus: "/contract/update-payment-status/",
   invoiceCollection: "/invoice/invoice-collection",
+  invoiceCollectionDetail: "/invoice/invoice-collection/read",
+
   createRecurringInvoice: "/invoice/invoice-collection/create-recurring-invoice/",
   updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
   updateInvoiceStatus: "/invoice/invoice-collection/update-invoiceCollection-status/",
@@ -89,7 +91,8 @@ const SERVICE_URLS = {
   changeStatus: "/user/change-status/",
   addSignature: "/offer/add-signature/",
   contractContent: "/contract/",
-  invoiceContent: "/invoice/invoice-collection/update-content/"
+  invoiceContent: "/invoice/invoice-collection/update-content/",
+  acceptOffer: "/offer/add-signature/"
 
 };
 
@@ -327,7 +330,7 @@ const createNotes = (params) =>
 const readCollectiveInvoices = (params) =>
   get(SERVICE_URLS.invoiceCollection + `/${params?.id}`, params, { feature: featureConstants.login }, { detail: false });
 const readCollectiveInvoicesDetails = (params) =>
-  get(SERVICE_URLS.invoiceCollection, params, { feature: featureConstants.login }, { detail: true });
+  get(SERVICE_URLS.invoiceCollectionDetail, params, { feature: featureConstants.login }, { detail: true });
 
 const createRecurringInvoiceCollection = (data) =>
   post(SERVICE_URLS.createRecurringInvoice + `${data?.id}`, data, { feature: featureConstants.login });
@@ -433,6 +436,9 @@ const updateContractContent = (data) =>
   put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });
 const updateInvoiceContent = (data) =>
   put(SERVICE_URLS.invoiceContent + `${data?.id}`, data, { feature: featureConstants.login });
+
+const acceptOffer = (data) =>
+  put(SERVICE_URLS.acceptOffer + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -571,6 +577,7 @@ const apiServices = {
   createSignature,
   choosePlan,
   updateContractContent,
-  updateInvoiceContent
+  updateInvoiceContent,
+  acceptOffer
 };
 export default apiServices;

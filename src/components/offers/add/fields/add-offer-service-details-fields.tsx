@@ -18,6 +18,7 @@ import { staticEnums } from "@/utils/static";
 import { getKeyByValue } from "@/utils/auth.util";
 import { TaxSetting } from "../../../../api/slices/settingSlice/settings";
 import { calculatePercentage, calculateTax } from "@/utils/utility";
+import { useState } from "react";
 const serviceObject = {
   serviceTitle: "",
   price: 0,
@@ -48,6 +49,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     offerDetails,
     tax,
   } = properties;
+
+  const [isNewService, setIsNewService] = useState(true);
+
   // if(!fields) return null;
   console.log(type, "New Customer");
 

@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { FilterProps, MoreFilterType } from "@/types";
+import { FilterProps, FilterType, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import useFilter from "@/hooks/filter/hook";
 
-export default function CustomerFilters({ filter, setFilter }: FilterProps) {
+export default function CustomerFilters({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
   const {
     extraFilterss,
     typeList,
+    moreFilter,
+    setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
     handleExtraFilterToggle,
@@ -19,17 +25,16 @@ export default function CustomerFilters({ filter, setFilter }: FilterProps) {
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
-  const [moreFilter, setMoreFilter] = useState<MoreFilterType>({
-    type: filter?.type || "All",
-    location: filter?.location || "",
-  });
-
   const handleSave = () => {
-    setFilter((prev) => ({
-      ...prev,
-      type: moreFilter.type,
-      location: moreFilter.location,
-    }));
+    setFilter((prev: FilterType) => {
+      const updatedFilter = {
+        ...prev,
+        type: moreFilter.type,
+        location: moreFilter.location,
+      };
+      onFilterChange(updatedFilter);
+      return updatedFilter;
+    });
     handleExtraFiltersClose();
   };
 
@@ -73,7 +78,7 @@ export default function CustomerFilters({ filter, setFilter }: FilterProps) {
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}
+                onClick={handleFilterResetToInitial}
               >
                 Reset All
               </span>
@@ -87,14 +92,14 @@ export default function CustomerFilters({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => handleFilterReset("type", "All")}
                   >
                     Reset
                   </label>
                 </div>
                 <div className="mt-3">
                   <DropDown
-                    selectedItem={moreFilter.type}
+                    selectedItem={moreFilter.type || ""}
                     items={typeList}
                     onItemSelected={(data) =>
                       setMoreFilter((prev) => ({ ...prev, type: data }))
@@ -102,7 +107,7 @@ export default function CustomerFilters({ filter, setFilter }: FilterProps) {
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <div className="flex justify-between mt-6">
                   <label htmlFor="type" className=" ">
                     Location
@@ -121,11 +126,11 @@ export default function CustomerFilters({ filter, setFilter }: FilterProps) {
                   handleChange={(value) =>
                     setMoreFilter((prev) => ({ ...prev, location: value }))
                   }
-                  value={filter.location || ""}
+                  value={moreFilter.location || ""}
                   textClassName="border border-black min-h-[42px]"
                   containerClassName=" my-2"
                 />
-              </div>
+              </div> */}
             </div>
             <div>
               <BaseButton

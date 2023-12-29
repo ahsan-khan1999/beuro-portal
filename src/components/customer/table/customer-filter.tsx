@@ -1,8 +1,7 @@
-
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import useFilter from "@/hooks/filter/hook";
-import { FiltersComponentProps } from "@/types";
+import { FilterType, FiltersComponentProps } from "@/types";
 import React from "react";
 import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
@@ -15,38 +14,57 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const handleInputChange = (value: string) => {
+    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+  };
+  const hanldeSortChange = (value: string) => {
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  const onEnterPress = () => {
+    handleFilterChange(filter);
+  };
 
   return (
     <div className="flex gap-x-4 items-center">
       <InputField
-        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
+        handleChange={(value) => handleInputChange(value)}
         value={filter?.text}
         iconDisplay={true}
+        onEnterPress={onEnterPress}
       />
       <SelectField
-        handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
-        value={filter?.sortBy || ""}
+        handleChange={(value) => hanldeSortChange(value)}
+        value={filter?.sort || ""}
         dropDownIconClassName=""
-        options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
+        options={[
+          { label: "Date", value: "createdAt" },
+          { label: "Latest", value: "-createdAt" },
+          { label: "Oldest", value: "createdAt" },
+          { label: "A - Z", value: "title" },
+        ]}
         label="Sort By"
       />
       <CustomerFilters
         filter={filter}
         setFilter={setFilter}
+        onFilterChange={handleFilterChange}
       />
 
-      <Button
-        onClick={() => handleFilterChange()}
+      {/* <Button
+        onClick={() => handleFilterChange(filter)}
         className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-
         text="Apply"
         id="apply"
         inputType="button"
         name=""
-      />
+      /> */}
 
       <Button
         onClick={() => router.push("/customers/add")}

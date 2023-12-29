@@ -92,8 +92,17 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               id: "reason",
               name: "reason",
               options: [
-                { value: "Individual", label: "Individual" },
-                { value: "Random", label: "Random" },
+                { value: "General Inquiry", label: "General Inquiry" },
+                { value: "Account Assistance", label: "Account Assistance" },
+                { value: "Billing or Payment Issues", label: "Billing or Payment Issues" },
+                { value: "Technical Support", label: "Technical Support" },
+                { value: "Feedback or Suggestions", label: "Feedback or Suggestions" },
+                { value: "Report a Bug or Error", label: "Report a Bug or Error" },
+                { value: "Website Feedback", label: "Website Feedback" },
+                { value: "Complaint", label: "Complaint" },
+                { value: "Other", label: "Other" },
+
+
               ],
               control,
             },

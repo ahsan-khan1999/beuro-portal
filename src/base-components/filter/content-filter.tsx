@@ -5,31 +5,49 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
+import { formatDateForDatePicker } from "@/utils/utility";
 
-export default function ContentFilter({ filter, setFilter }: FilterProps) {
+export default function ContentFilter({
+  filter,
+  setFilter,
+  onFilterChange,
+}: FilterProps) {
   const {
     extraFilterss,
+    moreFilter,
+    setMoreFilter,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
     handleFilterReset,
     handleFilterResetToInitial,
   } = useFilter({ filter, setFilter });
 
-  const [moreFilter, setMoreFilter] = useState<{ date: string[] }>({
-    date: [],
-  });
+  // const [moreFilter, setMoreFilter] = useState<{ date: string[] }>({
+  //   date: [],
+  // });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const handleSave = () => {
-    setFilter((prev) => ({
-      ...prev,
-      date: moreFilter.date,
-    }));
+    setFilter((prev: any) => {
+      const updatedFilters = {
+        ...prev,
+        $gte: moreFilter.date && moreFilter.date.$gte,
+        $lte: moreFilter.date && moreFilter.date.$lte,
+      };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
+    });
     handleExtraFiltersClose();
   };
 
+  const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
+    const dateTime = new Date(val);
+    setMoreFilter((prev) => ({
+      ...prev,
+      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+    }));
+  };
 
-  console.log(moreFilter.date)
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -70,13 +88,13 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
               <span className="font-medium text-lg">Filter</span>
               <span
                 className=" text-base text-red cursor-pointer"
-                onClick={() => handleFilterResetToInitial()}
+                onClick={handleFilterResetToInitial}
               >
                 Reset All
               </span>
             </div>
             <div className="">
-            <div className="mt-5 mb-2">
+              <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Date
@@ -84,7 +102,9 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("type", "None")}
+                    onClick={() => {
+                      handleFilterReset("date", { $gte: "", $lte: "" });
+                    }}
                   >
                     Reset
                   </label>
@@ -93,20 +113,14 @@ export default function ContentFilter({ filter, setFilter }: FilterProps) {
                   <DatePicker
                     label="From"
                     label2="To"
-                    dateFrom={moreFilter.date[0]}
-                    dateTo={moreFilter.date[1]}
-                    onChangeFrom={(val) =>
-                      setMoreFilter((prev) => ({
-                        ...prev,
-                        date: [val, prev.date[1]],
-                      }))
-                    }
-                    onChangeTo={(val) =>
-                      setMoreFilter((prev) => ({
-                        ...prev,
-                        date: [prev.date[0], val],
-                      }))
-                    }
+                    dateFrom={formatDateForDatePicker(
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                    )}
+                    dateTo={formatDateForDatePicker(
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                    )}
+                    onChangeFrom={(val) => handleDateChange("$gte", val)}
+                    onChangeTo={(val) => handleDateChange("$lte", val)}
                   />
                 </div>
               </div>

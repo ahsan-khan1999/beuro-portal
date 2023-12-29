@@ -1,9 +1,9 @@
-import { FilterType } from "@/types";
+import { FilterType, MoreFilterType } from "@/types";
 import { Dispatch, SetStateAction, useState } from "react";
 
 const typeList = [
   {
-    item: "None",
+    item: "All",
   },
   {
     item: "Individual",
@@ -22,6 +22,18 @@ export default function useFilter({
 }) {
   const [extraFilterss, setExtraFilters] = useState(false);
 
+  const [moreFilter, setMoreFilter] = useState<MoreFilterType>({
+    type: filter?.type || "All",
+    location: filter?.location || "",
+    date: {
+      $gte: "",
+      $lte: "",
+    },
+    payment: "",
+    email: [],
+    price: ["0", "0"],
+  });
+
   const handleExtraFilterToggle = () => {
     setExtraFilters((prev) => !prev);
   };
@@ -30,22 +42,37 @@ export default function useFilter({
     setExtraFilters(false);
   };
 
-  const handleFilterReset = (key: keyof FilterType, value: string) => {
-    setFilter((prev) => ({ ...prev, [key]: value }));
+  const handleFilterReset = (
+    key: keyof FilterType,
+    value: string | string[] | {}
+  ) => {
+    setMoreFilter((prev) => ({ ...prev, [key]: value }));
   };
   const handleFilterResetToInitial = () => {
-    setFilter({
-      text: "",
-      sortBy: "",
-      type: "None",
+    setMoreFilter({
+      type: "All",
       location: "",
-      status: "",
+      date: {
+        $gte: "",
+        $lte: "",
+      },
+      payment: "",
+      email: [],
+      price: ["0", "0"],
     });
+    // setFilter({
+    //   text: "",
+    //   sort: "",
+    //   type: "",
+    //   location: "",
+    // });
   };
 
   return {
     extraFilterss,
     typeList,
+    moreFilter,
+    setMoreFilter,
     setFilter,
     handleExtraFilterToggle,
     handleExtraFiltersClose,

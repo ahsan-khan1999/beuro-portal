@@ -2,12 +2,13 @@ import LeadsFilters from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { CheckBoxType, FiltersComponentProps } from "@/types";
+import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
+import { staticEnums } from "@/utils/static";
 
 export default function LeadsFilter({
   filter,
@@ -17,10 +18,52 @@ export default function LeadsFilter({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const checkbox: CheckBoxType[] = [
-    { label: translate("leads.table_functions.open"), type: "open" },
-    { label: translate("leads.table_functions.close"), type: "close" },
-    { label: translate("leads.table_functions.expire"), type: "expire" },
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
   ];
+
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setFilter((prev: FilterType) => {
+      const updatedStatus = prev.status ? [...prev.status] : [];
+      if (isChecked) {
+        if (!updatedStatus.includes(value)) {
+          updatedStatus.push(value);
+        }
+      } else {
+        const index = updatedStatus.indexOf(value);
+        if (index > -1) {
+          updatedStatus.splice(index, 1);
+        }
+      }
+      const updatedFilter = { ...prev, status: updatedStatus };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+  const handleInputChange = (value: string) => {
+    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+  };
+  const hanldeSortChange = (value: string) => {
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  const handleEnterPress = () => {
+    handleFilterChange(filter);
+  };
 
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
@@ -33,45 +76,42 @@ export default function LeadsFilter({
             type={"status"}
             label={item.label}
             value={item.type}
-            onChange={(value, isChecked) => {
-              setFilter((prev: any) => {
-                const updatedStatus = prev.status ? [...prev.status] : [];
-                if (isChecked) {
-                  if (!updatedStatus.includes(value)) {
-                    updatedStatus.push(value);
-                  }
-                } else {
-                  const index = updatedStatus.indexOf(value);
-                  if (index > -1) {
-                    updatedStatus.splice(index, 1);
-                  }
-                }
-                return { ...prev, status: updatedStatus };
-              });
-            }}
+            onChange={(value, isChecked) =>
+              handleStatusChange(value, isChecked)
+            }
           />
         ))}
       </div>
       <div className="flex gap-x-4">
         <InputField
-          handleChange={(value) => setFilter({ ...filter, text: value })}
+          handleChange={(value) => handleInputChange(value)}
           value={filter.text}
+          onEnterPress={handleEnterPress}
         />
         <SelectField
-          handleChange={(value) => setFilter({ ...filter, sortBy: value })}
+          handleChange={(value) => hanldeSortChange(value)}
           value=""
           dropDownIconClassName=""
-          options={["Date", "Latest", "Oldest", "A - Z", "Expiring Soon"]}
+          options={[
+            { label: "Date", value: "createdAt" },
+            { label: "Latest", value: "-createdAt" },
+            { label: "Oldest", value: "createdAt" },
+            { label: "A - Z", value: "title" },
+          ]}
           label="Sort By"
         />
-        <LeadsFilters filter={filter} setFilter={setFilter} />
-        <Button
+        <LeadsFilters
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+        />
+        {/* <Button
           id="apply"
           inputType="button"
           text="Apply"
           onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        />
+        /> */}
 
         <Button
           inputType="button"

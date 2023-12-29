@@ -20,9 +20,9 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    dispatch(logoutUser())
-    logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "658be0d123a6935d90e3f033" } })
+    // dispatch(logoutUser())
+    // logout()
+    router.push({ pathname: "/pdf", query: { offerID: "658d94b79984b29b2333ac15" } })
   }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

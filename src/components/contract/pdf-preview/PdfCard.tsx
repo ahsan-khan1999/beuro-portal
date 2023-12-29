@@ -19,7 +19,8 @@ const PdfCard = ({
   onDownload,
   onPrint,
   worker,
-  contractTitle
+  contractTitle,
+  onSendViaPost
 
 }: ContractEmailHeaderProps) => {
   const router = useRouter();
@@ -35,14 +36,14 @@ const PdfCard = ({
               src={backIcon}
               alt="backIcon"
               className="cursor-pointer"
-              onClick={() => router.push("/contract/compose-mail")}
+              onClick={() => router.push("/contract")}
             />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
               {translate("contracts.pdf_card_details.heading")}
             </h1>
           </div>
           <div className="flex items-center justify-between gap-5">
-            <div className="border-[#C7C7C7] border  rounded-lg px-[13px] py-[7px] flex justify-between items-center cursor-pointer">
+            <div className="border-[#C7C7C7] border  rounded-lg px-[13px] py-[7px] flex justify-between items-center cursor-pointer" onClick={onSendViaPost}>
               <Image src={postIcon} alt="postIcon" />
               <span className="text-[#4B4B4B] text-base font-medium ml-[11px]">
                 {translate("contracts.pdf_card_details.send_via_post")}
@@ -64,11 +65,14 @@ const PdfCard = ({
               src={downloadIcon}
               alt="downloadIcon"
               className="cursor-pointer"
+              onClick={onDownload}
             />
             <Image
               src={printerIcon}
               alt="printerIcon"
               className="cursor-pointer"
+              onClick={onPrint}
+
             />
           </div>
         </div>

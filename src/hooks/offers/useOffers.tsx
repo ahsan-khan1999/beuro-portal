@@ -18,6 +18,7 @@ import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import { areFiltersEmpty } from "@/utils/utility";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -33,14 +34,17 @@ const useOffers = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
-    sortBy: "",
+    // location: "",
+    sort: "",
     text: "",
-    date: [""],
-    email: [""],
-    payment: "",
-    price: [""],
-    status: query?.filter as string,
+    date: {
+      $gte: "",
+      $lte: "",
+    },
+    // email: [],
+    // payment: "",
+    // price: [],
+    status: undefined,
   });
   const totalItems = totalCount;
 
@@ -48,32 +52,31 @@ const useOffers = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  useMemo(() => {
-    setFilter({
-      ...filter,
-      status: query?.filter as string,
-    });
-  }, [query?.filter]);
+  // useMemo(() => {
+  //   setFilter({
+  //     ...filter,
+  //     status: query?.filter as string,
+  //   });
+  // }, [query?.filter]);
   useEffect(() => {
     localStoreUtil.remove_data("offer");
     dispatch(setOfferDetails(DEFAULT_OFFER));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(setLeadDetails(DEFAULT_LEAD));
 
-    // dispatch(readOffer({ params: { filter: '', page: 1, size: 10 } })).then(
-    //   (res: any) => {
-    //     console.log(res,"res");
-        
-    //     if (res?.payload) {
-    //       setCurrentPageRows(
-    //         res?.payload?.Offer
-    //       );
-    //     }
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+    // dispatch(readOffer({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Offer);
     //   }
-    // );
+    // });
   }, []);
-  const handleFilterChange = () => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } }));
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(
+      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
+    );
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -113,8 +116,8 @@ const useOffers = () => {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-    dispatch(setImages([]))
-    const filteredLead = offer?.find((item_) => item_.id === item)
+    dispatch(setImages([]));
+    const filteredLead = offer?.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setOfferDetails(filteredLead));
       dispatch(
@@ -152,10 +155,12 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then((response:any) => {
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+    dispatch(readOffer({ params: queryParams })).then((response: any) => {
       setCurrentPageRows(response?.payload?.Offer);
-    })
-
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
@@ -172,7 +177,7 @@ const useOffers = () => {
     handleFilterChange,
     filter,
     setFilter,
-    loading
+    loading,
   };
 };
 

@@ -3,15 +3,21 @@ import { Employee } from "@/types/employee";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { readEmployee, setEmployeeDetails } from "@/api/slices/employee/emplyeeSlice";
+import {
+  readEmployee,
+  setEmployeeDetails,
+} from "@/api/slices/employee/emplyeeSlice";
 import { DEFAULT_EMPLOYEE } from "@/utils/static";
+import { areFiltersEmpty } from "@/utils/utility";
 
 const useEmployee = () => {
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
-    sortBy: "",
+    sort: "",
     text: "",
-    date: [],
+    date: {
+      $gte: "",
+      $lte: "",
+    },
   });
   const { employee, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.employee
@@ -24,29 +30,36 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
-    dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE))
-    dispatch(
-      readEmployee({ params: { filter: filter, page: 1, size: 10 } })
-    ).then((res: any) => {
+    // dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE));
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+
+    // dispatch(readEmployee({ params: queryParams })).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Employee);
+    //   }
+    // });
+  }, []);
+  useEffect(() => {
+    const queryParams = areFiltersEmpty(filter)
+      ? { filter: {}, page: 1, size: 10 }
+      : { filter: filter, page: 1, size: 10 };
+
+    dispatch(readEmployee({ params: queryParams })).then((res: any) => {
       if (res?.payload) {
-        setCurrentPageRows(
-          res?.payload?.Employee
-        );
+        setCurrentPageRows(res?.payload?.Employee);
       }
     });
-  }, [dispatch]);
-  useEffect(() => {
-    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })).then((response: any) => {
-      setCurrentPageRows(response?.payload?.Employee);
-
-    })
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmployee({ params: { filter: filter, page: currentPage, size: 10 } }));
+    dispatch(
+      readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
+    );
   };
 
   return {
@@ -58,7 +71,7 @@ const useEmployee = () => {
     setFilter,
     handleFilterChange,
     translate,
-    loading
+    loading,
   };
 };
 

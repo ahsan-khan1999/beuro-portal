@@ -177,11 +177,11 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-        const { offerDetails: data, router, translate } = args as any;
+        const { data, router, translate } = args as any;
 
         try {
             await apiServices.createSignature(data);
-           
+
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));

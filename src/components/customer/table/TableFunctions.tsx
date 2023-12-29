@@ -11,7 +11,7 @@ const TableFunctions = ({
 }: {
   filter: FilterType;
   setFilter: SetStateAction<any>;
-  handleFilterChange: () => void;
+  handleFilterChange: (query: FilterType) => void;
 }) => {
   const { t: translate } = useTranslation();
   return (

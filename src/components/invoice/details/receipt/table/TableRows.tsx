@@ -7,6 +7,7 @@ import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { updateQuery } from "@/utils/update-query";
 
 const TableRows = ({
   collectiveInvoice,
@@ -18,6 +19,11 @@ const TableRows = ({
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
+  const handleReceiptPreview = (id?: string) => {
+    router.pathname = "/invoices/receipt-pdf-preview";
+    router.query = { invoiceID: id };
+    updateQuery(router, router.locale as string);
+  };
   return (
     <div>
       {collectiveInvoice?.map((item, index: number) => {
@@ -45,9 +51,10 @@ const TableRows = ({
 
             <span className="py-4 flex items-center justify-center">
               <div
-                className={`bg-[${getInvoiceEmailColor(
-                  item.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center`}
+                style={{
+                  backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
+                }}
+                className=" text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
               >
                 {item.emailStatus}
               </div>
@@ -66,7 +73,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] w-full rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
               />
@@ -86,7 +93,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] w-full rounded-lg px-4 py-[3px] flex items-center `}
+                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}
@@ -95,7 +102,7 @@ const TableRows = ({
 
             <span
               className="py-4 flex justify-center items-center"
-              onClick={() => router.push("/invoices/invoice-pdf-preview")}
+              onClick={() => handleReceiptPreview(item?.id)}
             >
               <Image src={moreIcon} alt="moreIcon" />
             </span>
