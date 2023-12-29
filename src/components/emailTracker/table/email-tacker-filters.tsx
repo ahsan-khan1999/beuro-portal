@@ -14,7 +14,7 @@ export default function EmailTrackerFilters({
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
-  const hanldeSortChange = (value: string) => {
+   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
