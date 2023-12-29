@@ -81,7 +81,7 @@ export const forgotPassword: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.forgotPassword(data);
       thunkApi.dispatch(setErrorMessage(response?.data?.message));
-      return response;
+      return true;
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);
 
@@ -246,8 +246,7 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
         router.query.otp
       );
-      setToken(response?.headers?.accesstoken);
-      setRefreshToken(response?.headers?.refreshtoken);
+     
       saveUser(response.data.data.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       // conditionHandlerLogin(router, response);

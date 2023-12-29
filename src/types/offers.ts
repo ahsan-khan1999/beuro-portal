@@ -57,6 +57,7 @@ export interface OffersTableRowTypes {
   discountAmount: number;
   discountDescription: string;
   signature?: string
+  attachement?:string
 }
 
 interface Address {
@@ -204,7 +205,7 @@ export interface OffersActivityDataTypes {
 
 export interface OffersDiscountDataTypes {
   discountTitle: string;
-  discountPrice: string;
+  discountPrice: number;
   discountPercentage: string;
   discountDate: string;
 }
@@ -221,4 +222,24 @@ export interface OfferDetailCardProps {
   handlePaymentStatusUpdate: (id: string) => void;
   handleSendEmail: () => void;
   isSendEmail: boolean;
+}
+
+
+export interface OfferActivity {
+  id: string;
+  offerNumber: string;
+  offer: string;
+  discount: Discounts[];
+  activity: Activity[]
+
+}
+export interface Discounts {
+  totalPrice: number;
+  amount: number | null;
+  percentage: number | null;
+  dateTime: string
+}
+export interface Activity {
+  editedBy: string;
+  dateTime: string
 }

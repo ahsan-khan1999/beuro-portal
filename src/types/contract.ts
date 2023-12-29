@@ -13,7 +13,8 @@ export interface contractTableTypes {
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   paymentType:string;
   title:string;
-  additionalDetails:string
+  additionalDetails:string;
+  attachement?:string
 }
 export interface ContractOfferDetails {
   refID: string;

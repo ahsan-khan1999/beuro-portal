@@ -37,10 +37,10 @@ const useOffers = () => {
     // location: "",
     sort: "",
     text: "",
-    date: {
-      $gte: "",
-      $lte: "",
-    },
+    // date: {
+    //   $gte: "",
+    //   $lte: "",
+    // },
     // email: [],
     // payment: "",
     // price: [],

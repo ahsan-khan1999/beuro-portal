@@ -93,6 +93,7 @@ export interface PdfSubInvoiceTypes {
   createdAt: string;
   title?: string;
   additionalDetails?: string;
+  attachement?:string
 }
 
 export interface InvoiceTableRowTypesPdf {

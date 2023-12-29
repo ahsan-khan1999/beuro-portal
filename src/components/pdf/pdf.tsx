@@ -57,6 +57,8 @@ export const Pdf = <T,>({
           currPage={totalPages}
           isOffer={pdfData.isOffer}
           handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
+          signature={pdfData?.signature}
+
         />
         {isQr && (
           <PaymentQRCodeDetails
