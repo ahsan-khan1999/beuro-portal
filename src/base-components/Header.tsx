@@ -20,9 +20,9 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    // dispatch(logoutUser())
-    // logout()
-    router.push({ pathname: "/pdf", query: { offerID: "658d94b79984b29b2333ac15" } })
+    dispatch(logoutUser())
+    logout()
+    // router.push({ pathname: "/pdf", query: { offerID: "658d94b79984b29b2333ac15", action: "Reject" } })
   }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -51,14 +51,14 @@ const Header = () => {
             height={50}
             width={150}
           />
-        
+
 
         </div>
       }
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           <div className="relative menu mr-6">
-            <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer"/>
+            <Image src={createOfferIcon} alt="Create Offer Icon" className="cursor-pointer" />
             <FollowUpDropDown />
           </div>
           <LanguageSelector />

@@ -28,7 +28,13 @@ const ContractDetailsCard = ({
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const handleDonwload = () => {
+    window.open(contractDetails?.attachement)
+  };
+  const handlePrint = () => {
+    window.open(contractDetails?.attachement)
 
+  };
   return (
     <ContractCardLayout>
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -58,10 +64,10 @@ const ContractDetailsCard = ({
             src={PDFIcon}
             alt="PDFIcon"
             className="cursor-pointer"
-            onClick={() => router.push("/contract/pdf-preview")}
+            onClick={() => router.push({pathname:"/contract/pdf-preview",query: { offerID: contractDetails?.id }})}
           />
-          <Image src={downloadIcon} alt="downloadIcon" />
-          <Image src={printerIcon} alt="printerIcon" />
+          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload}/>
+          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint}/>
           <Image
             src={deleteIcon}
             alt="deleteIcon"

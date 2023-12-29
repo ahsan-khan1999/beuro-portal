@@ -794,6 +794,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   isOffer?: boolean;
   id?: string;
   signature?:string;
+  attachement?:string
 
 }
 

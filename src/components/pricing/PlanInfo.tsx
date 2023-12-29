@@ -4,10 +4,10 @@ import diamondIcon from "@/assets/svgs/diamond-plan-icon.svg";
 import { Plan } from '@/types/admin/plans';
 import { Button } from '@/base-components/ui/button/button';
 
-export default function PlanInfo({ plan, handleChoosePlan, loading }: { plan: Plan[], handleChoosePlan: Function, loading: boolean }) {
+export default function PlanInfo({ plan, handleChoosePlan, loading, planTime }: { plan: Plan[], handleChoosePlan: Function, loading: boolean, planTime: number }) {
     return (
         <div className="grid xl:grid-cols-3 xl:gap-x-5 xl:gap-y-0 gap-y-8 mt-8">
-            {plan?.map((item, index) => {
+            {Array.isArray(plan) && plan?.toReversed()?.map((item, index) => {
                 return (
                     <div
                         key={index}
@@ -34,17 +34,14 @@ export default function PlanInfo({ plan, handleChoosePlan, loading }: { plan: Pl
                                     <span className="text-[#000000] text-lg font-medium group-hover:text-white">
                                         CHF
                                         <span className=" text-[26px]  group-hover:text-white">
-                                            {/* {planTime.includes("Monthly")
+                                            {planTime === 0
                                                 ? item?.monthlyPrice
-                                                : item?.monthlyPrice} */}
-                                            {item?.monthlyPrice}
+                                                : item?.yearlyPrice}
                                         </span>
                                     </span>
                                     <span className="font-medium text-sm text-[#8F8F8F] group-hover:text-white">
-                                        {/* {planTime.includes("Monthly")
-                                            ? "/" + "Month"
-                                            : "/" + "Year"} */}
-                                        {"/" + "Month"}
+
+                                        {planTime === 0 ? "/" + "Month" : "/" + "Year"}
                                     </span>
                                 </div>
                                 <p className="text-dark text-xs group-hover:text-white mb-8">
