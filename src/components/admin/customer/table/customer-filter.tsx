@@ -15,9 +15,14 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { handleFilterResetToInitial, handleFilterReset, typeList } = useFilter(
-    { filter, setFilter }
-  );
+  const moreFilters = {
+    text: "",
+  };
+  const { handleFilterResetToInitial, handleFilterReset } = useFilter({
+    filter,
+    setFilter,
+    moreFilters,
+  });
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -47,7 +52,7 @@ export default function CustomerFilter({
       </div>
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
-        value={filter?.text}
+        value={filter?.text || ""}
         iconDisplay={true}
       />
       <SelectField

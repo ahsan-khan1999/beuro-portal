@@ -16,6 +16,12 @@ export default function OfferFilter({
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters = {
+    date: {
+      $gte: "2000-01-01T00:00:00Z",
+      $lte: "5000-01-01T00:00:00Z",
+    },
+  };
   const {
     extraFilterss,
     handleFilterReset,
@@ -24,28 +30,15 @@ export default function OfferFilter({
     handleExtraFiltersClose,
     moreFilter,
     setMoreFilter,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  // const [moreFilter, setMoreFilter] = useState<MoreFilerType>({
-  //   $gte: "",
-  //   $lte: "",
-  //   payment: "",
-  //   email: [],
-  //   price: [],
-  //   location: "",
-  // });
 
   const handleSave = () => {
-    setFilter((prev: any) => {
+    setFilter((prev: FilterType) => {
       const updatedFilters = {
         ...prev,
-        $gte: moreFilter.date && moreFilter.date.$gte,
-        $lte: moreFilter.date && moreFilter.date.$lte,
-        payment: moreFilter.payment,
-        email: moreFilter.email,
-        price: moreFilter.price,
-        location: moreFilter.location,
+        date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -62,46 +55,46 @@ export default function OfferFilter({
     { label: "Failed", type: "failed" },
   ];
 
-  const handleEmailChange = (value: string, isChecked: boolean) => {
-    if (moreFilter.email) {
-      const updatedEmails = isChecked
-        ? [...moreFilter.email, value]
-        : moreFilter.email.filter((email) => email !== value);
+  // const handleEmailChange = (value: string, isChecked: boolean) => {
+  //   if (moreFilter.email) {
+  //     const updatedEmails = isChecked
+  //       ? [...moreFilter.email, value]
+  //       : moreFilter.email.filter((email) => email !== value);
 
-      setMoreFilter({ ...moreFilter, email: updatedEmails });
-    }
-  };
-  const handleLowPriceChange = (val: string) => {
-    if (moreFilter.price) {
-      setMoreFilter((prev) => {
-        if (prev.price) {
-          return {
-            ...prev,
-            price: [val, prev.price[1]],
-          };
-        } else {
-          return prev;
-        }
-      });
-    }
-  };
+  //     setMoreFilter({ ...moreFilter, email: updatedEmails });
+  //   }
+  // };
+  // const handleLowPriceChange = (val: string) => {
+  //   if (moreFilter.price) {
+  //     setMoreFilter((prev) => {
+  //       if (prev.price) {
+  //         return {
+  //           ...prev,
+  //           price: [val, prev.price[1]],
+  //         };
+  //       } else {
+  //         return prev;
+  //       }
+  //     });
+  //   }
+  // };
 
-  const handleHighPriceChange = (val: string) => {
-    setMoreFilter((prev) => {
-      if (prev.price) {
-        return {
-          ...prev,
-          price: [prev.price[0], val],
-        };
-      } else return prev;
-    });
-  };
+  // const handleHighPriceChange = (val: string) => {
+  //   setMoreFilter((prev) => {
+  //     if (prev.price) {
+  //       return {
+  //         ...prev,
+  //         price: [prev.price[0], val],
+  //       };
+  //     } else return prev;
+  //   });
+  // };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
     const dateTime = new Date(val);
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
   return (
@@ -159,7 +152,10 @@ export default function OfferFilter({
                     htmlFor="type"
                     className="cursor-pointer text-red"
                     onClick={() => {
-                      handleFilterReset("date", { $gte: "", $lte: "" });
+                      handleFilterReset("date", {
+                        $gte: "01/01/2000",
+                        $lte: "01/01/5000",
+                      });
                     }}
                   >
                     Reset
@@ -170,10 +166,12 @@ export default function OfferFilter({
                     label="From"
                     label2="To"
                     dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                        "01/01/2000"
                     )}
                     dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                        "01/01/5000"
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

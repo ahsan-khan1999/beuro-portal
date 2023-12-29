@@ -1,38 +1,18 @@
 import { FilterType, MoreFilterType } from "@/types";
 import { Dispatch, SetStateAction, useState } from "react";
 
-const typeList = [
-  {
-    item: "All",
-  },
-  {
-    item: "Individual",
-  },
-  {
-    item: "Company",
-  },
-];
-
 export default function useFilter({
   filter,
   setFilter,
+  moreFilters,
 }: {
   filter: FilterType;
   setFilter: Dispatch<SetStateAction<FilterType>>;
+  moreFilters: MoreFilterType;
 }) {
   const [extraFilterss, setExtraFilters] = useState(false);
 
-  const [moreFilter, setMoreFilter] = useState<MoreFilterType>({
-    type: filter?.type || "All",
-    location: filter?.location || "",
-    date: {
-      $gte: "",
-      $lte: "",
-    },
-    payment: "",
-    email: [],
-    price: ["0", "0"],
-  });
+  const [moreFilter, setMoreFilter] = useState<MoreFilterType>(moreFilters);
 
   const handleExtraFilterToggle = () => {
     setExtraFilters((prev) => !prev);
@@ -49,28 +29,11 @@ export default function useFilter({
     setMoreFilter((prev) => ({ ...prev, [key]: value }));
   };
   const handleFilterResetToInitial = () => {
-    setMoreFilter({
-      type: "All",
-      location: "",
-      date: {
-        $gte: "",
-        $lte: "",
-      },
-      payment: "",
-      email: [],
-      price: ["0", "0"],
-    });
-    // setFilter({
-    //   text: "",
-    //   sort: "",
-    //   type: "",
-    //   location: "",
-    // });
+    setMoreFilter(moreFilters);
   };
 
   return {
     extraFilterss,
-    typeList,
     moreFilter,
     setMoreFilter,
     setFilter,

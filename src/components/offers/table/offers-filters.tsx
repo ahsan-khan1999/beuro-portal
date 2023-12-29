@@ -5,11 +5,12 @@ import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function OffersFilters({
   filter,
@@ -18,6 +19,7 @@ export default function OffersFilters({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -38,6 +40,26 @@ export default function OffersFilters({
     },
   ];
 
+  // const handleStatusChange = (value: string, isChecked: boolean) => {
+  //   setFilter((prev: FilterType) => {
+  //     const updatedStatus = prev.status ? [...prev.status] : [];
+  //     if (isChecked) {
+  //       if (!updatedStatus.includes(value)) {
+  //         updatedStatus.push(value);
+  //       }
+  //     } else {
+  //       const index = updatedStatus.indexOf(value);
+  //       if (index > -1) {
+  //         updatedStatus.splice(index, 1);
+  //       }
+  //     }
+  //     const status = updatedStatus.length > 0 ? updatedStatus : "";
+  //     const updatedFilter = { ...prev, status: status };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
@@ -51,7 +73,9 @@ export default function OffersFilters({
           updatedStatus.splice(index, 1);
         }
       }
-      const updatedFilter = { ...prev, status: updatedStatus };
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -68,8 +92,16 @@ export default function OffersFilters({
     });
   };
 
-  const handleEnterPress = () => {
-    handleFilterChange(filter);
+  const handlePressEnter = () => {
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
   };
 
   return (
@@ -91,9 +123,10 @@ export default function OffersFilters({
       </div>
       <div className="flex gap-[14px] items-center">
         <InputField
-          handleChange={(value) => handleInputChange(value)}
-          value={filter?.text}
-          onEnterPress={handleEnterPress}
+          handleChange={(value) => {}}
+          // value={filter?.text || ""}
+          onEnterPress={handlePressEnter}
+          ref={inputRef}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

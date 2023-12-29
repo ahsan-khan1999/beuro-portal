@@ -595,6 +595,7 @@ export const staticEnums: Record<string, any> = {
   closed: 1,
   expied: 2,
   CustomerType: {
+    none: "None",
     individual: 0,
     company: 1,
   },

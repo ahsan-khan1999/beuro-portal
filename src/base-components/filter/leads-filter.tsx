@@ -9,13 +9,19 @@ import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
 import { date } from "yup";
 import { formatDateForDatePicker } from "@/utils/utility";
-
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function LeadsFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters = {
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  };
   const {
     extraFilterss,
     moreFilter,
@@ -24,7 +30,7 @@ export default function LeadsFilter({
     handleFilterReset,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 

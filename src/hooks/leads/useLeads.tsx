@@ -17,6 +17,7 @@ import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
@@ -29,13 +30,13 @@ const useLeads = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
     date: {
-      $gte: "",
-      $lte: "",
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
     },
-    status: undefined,
+    status: FiltersDefaultValues.None,
   });
   // useMemo(() => {
   //   setFilter({
@@ -67,8 +68,12 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    dispatch(readLead({ params: { filter: query, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Lead);
+        }
+      }
     );
   };
 

@@ -5,10 +5,11 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { staticEnums } from "@/utils/static";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function LeadsFilter({
   filter,
@@ -17,6 +18,7 @@ export default function LeadsFilter({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
   const checkbox: CheckBoxType[] = [
     {
       label: translate("leads.table_functions.open"),
@@ -45,7 +47,9 @@ export default function LeadsFilter({
           updatedStatus.splice(index, 1);
         }
       }
-      const updatedFilter = { ...prev, status: updatedStatus };
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -61,8 +65,16 @@ export default function LeadsFilter({
     });
   };
 
-  const handleEnterPress = () => {
-    handleFilterChange(filter);
+  const handlePressEnter = () => {
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
   };
 
   return (
@@ -84,9 +96,10 @@ export default function LeadsFilter({
       </div>
       <div className="flex gap-x-4">
         <InputField
-          handleChange={(value) => handleInputChange(value)}
-          value={filter.text}
-          onEnterPress={handleEnterPress}
+          handleChange={(value) => {}}
+          // value={filter.text}
+          onEnterPress={handlePressEnter}
+          ref={inputRef}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

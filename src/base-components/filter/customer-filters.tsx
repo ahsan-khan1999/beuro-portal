@@ -6,22 +6,46 @@ import { FilterProps, FilterType, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import useFilter from "@/hooks/filter/hook";
+import { FiltersDefaultValues } from "@/enums/static";
+import { staticEnums } from "@/utils/static";
+const typeList = [
+  {
+    item: "All",
+    value: "None",
+  },
+  {
+    item: "Individual",
+    value: staticEnums.CustomerType.individual,
+  },
+  {
+    item: "Company",
+    value: staticEnums.CustomerType.company,
+  },
+];
+
+const map: Record<string, string> = {
+  [staticEnums.CustomerType.none]: "All",
+  [staticEnums.CustomerType.individual]: "Individual",
+  [staticEnums.CustomerType.company]: "Company",
+};
 
 export default function CustomerFilters({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters = {
+    type: FiltersDefaultValues.None,
+  };
   const {
     extraFilterss,
-    typeList,
     moreFilter,
     setMoreFilter,
     handleFilterResetToInitial,
     handleFilterReset,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
@@ -30,7 +54,6 @@ export default function CustomerFilters({
       const updatedFilter = {
         ...prev,
         type: moreFilter.type,
-        location: moreFilter.location,
       };
       onFilterChange(updatedFilter);
       return updatedFilter;
@@ -99,10 +122,12 @@ export default function CustomerFilters({
                 </div>
                 <div className="mt-3">
                   <DropDown
-                    selectedItem={moreFilter.type || ""}
+                    selectedItem={
+                      (moreFilter.type && map[moreFilter.type]) || ""
+                    }
                     items={typeList}
-                    onItemSelected={(data) =>
-                      setMoreFilter((prev) => ({ ...prev, type: data }))
+                    onItemSelected={(value) =>
+                      setMoreFilter((prev) => ({ ...prev, type: value }))
                     }
                   />
                 </div>
