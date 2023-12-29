@@ -18,6 +18,7 @@ import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
 import { readImage } from '@/api/slices/imageSlice/image';
 import ImagesUploadOffer from '@/base-components/ui/modals1/ImageUploadOffer';
 import { updateQuery } from '@/utils/update-query';
+import localStoreUtil from '@/utils/localstore.util';
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -31,6 +32,8 @@ export default function useOfferDetails() {
 
 
   useEffect(() => {
+     localStoreUtil.remove_data("contractComposeEmail");
+
     if (id) {
       dispatch(readOfferDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
         dispatch(setOfferDetails(res.payload))

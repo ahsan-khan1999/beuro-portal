@@ -16,6 +16,7 @@ import ImageSlider from '@/base-components/ui/modals1/ImageSlider';
 import CreationCreated from '@/base-components/ui/modals1/CreationCreated';
 import { staticEnums } from '@/utils/static';
 import { readImage } from '@/api/slices/imageSlice/image';
+import localStoreUtil from '@/utils/localstore.util';
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -30,6 +31,8 @@ export default function useContractDetail() {
 
 
   useEffect(() => {
+     localStoreUtil.remove_data("contractComposeEmail");
+
     if (id) {
       dispatch(readContractDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
         dispatch(setContractDetails(res.payload))

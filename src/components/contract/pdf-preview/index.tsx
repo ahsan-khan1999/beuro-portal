@@ -131,7 +131,10 @@ interface ActionType {
   type: string;
 }
 
-
+let contractPdfInfo = {
+  subject: "",
+  description: ""
+}
 const PdfPriview = () => {
 
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
@@ -224,11 +227,7 @@ const PdfPriview = () => {
                 },
                 thirdColumn: {},
                 fourthColumn: {
-                  row1: "row 1",
-                  row2: "row 2",
-                  row3: "row 3",
-                  row4: "row 4",
-                  row5: "row 5",
+
                 },
                 columnSettings: null,
                 currPage: 1,
@@ -275,6 +274,7 @@ const PdfPriview = () => {
 
             setNewPageData(distributeItems());
             setOfferData(formatData);
+            contractPdfInfo = { ...contractPdfInfo, subject: contractDetails?.title, description: contractDetails?.additionalDetails }
           }
         }
       );
@@ -328,18 +328,21 @@ const PdfPriview = () => {
 
   const handleEmailSend = async () => {
     try {
-      const data = await localStoreUtil.get_data("contractComposeEmail");
-
-      if (data) {
-        let apiData = { ...data };
-        // delete apiData["id"]
-        delete apiData["content"];
-
-        const res = await dispatch(sendContractEmail({ data: apiData }));
+      const localStorageContractData = await localStoreUtil.get_data("contractComposeEmail");
+      console.log(localStorageContractData,"localStorageContractData");
+      
+      const data = {
+        id: contractDetails?.id,
+        email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+        subject: contractPdfInfo?.subject,
+        description: contractPdfInfo?.description,
+        pdf:  localStorageContractData?.pdf
+      };
+      if (localStorageContractData) {
+        const res = await dispatch(sendContractEmail({ data: data }));
         if (res?.payload) {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
-        await localStoreUtil.remove_data("contractComposeEmail");
       }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
@@ -381,7 +384,10 @@ const PdfPriview = () => {
       title: value,
     }
     const response = await dispatch(updateContractContent({ data: apiData }))
-    if (response?.payload) return true
+    if (response?.payload) {
+      contractPdfInfo = { ...contractPdfInfo, subject: value }
+      return true
+    }
     else return false
   }
   const handleDescriptionUpdate = async (value: string) => {
@@ -392,7 +398,11 @@ const PdfPriview = () => {
     console.log(offerData, "data");
 
     const response = await dispatch(updateContractContent({ data: apiData }))
-    if (response?.payload) return true
+    if (response?.payload) {
+      contractPdfInfo = { ...contractPdfInfo, description: value }
+
+      return true
+    }
     else return false
   }
   const handleSendByPost = () => {

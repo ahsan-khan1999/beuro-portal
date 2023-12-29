@@ -324,7 +324,6 @@ const PdfPriview = () => {
         if (res?.payload) {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
-        await localStoreUtil.remove_data("contractComposeEmail");
       }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);

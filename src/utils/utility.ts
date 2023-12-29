@@ -407,11 +407,11 @@ export function formatDateTimeToTime(date: string) {
 
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
-    return "#FE9244";
+    return "#4A13E7";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
-    return "#4A13E7";
+    return "#FE9244";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]
   )

@@ -95,7 +95,7 @@ export const MovingDetails = ({
             key={index}
           >
             <span>Address {++index}:</span>
-            <span className="text-[#141414] text-base font-normal max-w-[850px]">
+            <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
                   country: item.country,

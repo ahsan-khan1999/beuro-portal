@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { IconOnlyButton } from "@/base-components/ui/button/icon-only-button";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailHeaderProps } from "@/types";
+import { EmailIcon } from "@/assets/svgs/components/email-icon";
 
 const EmailCard = ({
   emailStatus,
@@ -38,12 +39,12 @@ const EmailCard = ({
           <BaseButton
             buttonText="Send Email"
             onClick={onEmailSend}
-            containerClassName="flex items-center gap-x-3 row-reverse"
-            textClassName="text-[#4B4B4B] font-medium"
+            containerClassName="flex items-center group gap-x-3 row-reverse"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-white"
             loading={loading}
             loaderColor="#4A13E7"
           >
-            <Image src={emailIcon} alt="postIcon" />
+          <EmailIcon className="text-primary group-hover:text-white"/>
           </BaseButton>
 
           <IconOnlyButton
