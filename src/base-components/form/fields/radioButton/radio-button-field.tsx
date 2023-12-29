@@ -20,6 +20,7 @@ export const RadioButtonField = ({
   //   if (value && setValue) setValue(name, value)
 
   // }, [value])
+console.log(value,"value");
 
   return (
     <div className="flex gap-x-2 items-center  bg-white">
