@@ -51,7 +51,7 @@ export const PasswordField = ({
         {...register(name)}
         placeholder={placeholder}
         disabled={disabled}
-        className={`${defaultClasses} ${className}`}
+        className={`${defaultClasses} ${className} !pr-[41px]`}
       />
 
       {isButton ? (
