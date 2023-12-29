@@ -64,7 +64,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
             containerClass: "inline-flex mb-0",
             field: {
               type: Field.checkbox,
-              id: "",
+              id: "rememberMe",
               name: "rememberMe",
               register,
               description: "",

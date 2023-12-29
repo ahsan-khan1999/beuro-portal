@@ -42,7 +42,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
 ) => {
   const {
     service,
-    type,
+
     onCustomerSelect,
     serviceDetails,
     generatePrice,
@@ -53,7 +53,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   const [isNewService, setIsNewService] = useState(true);
 
   // if(!fields) return null;
-  console.log(type, "New Customer");
 
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
@@ -86,7 +85,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       id: "type",
                       name: "type",
                       register,
-                      checked: type === "New Service",
+                     
                     },
                   },
                   {
@@ -98,7 +97,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       id: "type",
                       name: "type",
                       register,
-                      checked: type === "Existing Service",
+                    
                     },
                   },
                 ],
@@ -279,34 +278,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
       }
     );
   }
-  if (type === "New Service") {
-    const customerField = {
-      
-        containerClass: "col-span-2",
-        label: {
-          text: "Service Title/Product",
-          htmlFor: `serviceDetail.${0}.count`,
-          className: "mb-[10px]",
-        },
-        field: {
-          type: Field.input,
-          className:
-            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-          inputType: "number",
-          id: `serviceDetail.${0}.count`,
-          name: `serviceDetail.${0}.count`,
-          placeholder: "please add new service title/product",
-          register,
-          // onChange: () => generatePrice && generatePrice(i),
-        },
-      
-    };
-    
-    const divFieldCustomer = formField[0]?.field as DivProps;
-    if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-      divFieldCustomer.children.splice(1, 1, customerField as any);
-    }
-  }
+
   return formField;
 };
 
