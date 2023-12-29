@@ -83,8 +83,7 @@ export const Aggrement = ({
               </div>
 
             </div>
-            <div className="grid grid-cols-2 gap-x-[103px] mt-4">
-
+            <div className="grid grid-cols-2 gap-x-[103px] mt-4 items-center">
               <div className="flex flex-col  ">
                 <span className="font-medium text-base mb-2">
                   25 December 2023
@@ -92,7 +91,7 @@ export const Aggrement = ({
                 <hr className="mb-[17px]" />
                 <span className="text-base text-black font-normal ">Date</span>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col mt-8 ">
                 <div className="flex flex-col gap-y-[18px] ">
                   <hr />
                   <span className="text-base text-black font-normal">
