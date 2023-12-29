@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
     readOfferDetails,
     sendOfferEmail,
+    updateOfferStatus,
 } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
 import { OffersTableRowTypes, ServiceList } from "@/types/offers";
@@ -22,6 +23,9 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { SignPdf } from "@/components/pdf/sign-pdf";
+import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
+import { staticEnums } from "@/utils/static";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 export const productItems: ServiceList[] = [
     {
@@ -75,7 +79,7 @@ export const DUMMY_DATA: PdfProps = {
         offerNo: "O-4040 Umzugsfuchs",
         offerDate: "22.09.2023",
         createdBy: "Heiniger Michèle",
-        logo:""
+        logo: ""
     },
     contactAddress: {
         address: {
@@ -144,10 +148,11 @@ const SignPdfPreview = () => {
     const maxItemsPerPage = 10;
 
     const router = useRouter();
-    const { offerID } = router.query;
+    const { offerID, action } = router.query;
 
     useEffect(() => {
         if (offerID) {
+
             dispatch(readOfferDetails({ params: { filter: offerID } })).then(
                 (response: ActionType) => {
                     if (response?.payload) {
@@ -262,6 +267,7 @@ const SignPdfPreview = () => {
                 }
             );
         }
+
     }, [offerID]);
 
     useEffect(() => {
@@ -339,25 +345,7 @@ const SignPdfPreview = () => {
     const onClose = () => {
         dispatch(updateModalType({ type: ModalType.NONE }));
     };
-    const onSuccess = () => {
-        router.push("/offers");
-        dispatch(updateModalType({ type: ModalType.NONE }));
-    };
-
-    const MODAL_CONFIG: ModalConfigType = {
-        [ModalType.EMAIL_CONFIRMATION]: (
-            <CreationCreated
-                onClose={onClose}
-                heading="Email Sent Successfully "
-                subHeading="Thanks for updating offer we are happy to have you. "
-                route={onSuccess}
-            />
-        ),
-    };
-    const renderModal = () => {
-        return MODAL_CONFIG[modal.type] || null;
-    };
-    console.log(offerData);
+    
     return (
         <>
 
@@ -367,9 +355,9 @@ const SignPdfPreview = () => {
                     newPageData={newPageData}
                     templateSettings={templateSettings}
                     totalPages={calculateTotalPages}
+                    action={action as string}
                 />
             </div>
-            {renderModal()}
         </>
     );
 };

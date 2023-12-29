@@ -32,7 +32,8 @@ export const InvoiceEmailHeader = ({
             src={backIcon}
             alt="backIcon"
             className="cursor-pointer"
-            onClick={() => router.push("/invoices")}
+            onClick={() => router.back()}
+
           />
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             {title}
@@ -92,11 +93,11 @@ export const InvoiceEmailHeader = ({
             Contract Status:
           </span>
           <div
-            className={`border rounded-lg px-[8px] w-[68px] ${contractStatus === "Open" ? "border-[#FE9244]" : ""
+            className={`border rounded-lg px-[8px]  ${ "border-[#FE9244]"
               }`}
           >
             <span
-              className={`text-base font-medium ${contractStatus === "Open" ? "text-[#FE9244]" : ""
+              className={`text-base font-medium ${ "text-[#FE9244]"
                 }`}
             >
               {contractStatus}

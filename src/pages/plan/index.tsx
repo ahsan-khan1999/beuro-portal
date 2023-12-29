@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readPlan } from "@/api/slices/company/companySlice";
 
 const Pricing = () => {
-  const [planTime, setPlanTime] = useState("Monthly");
+  const [planTime, setPlanTime] = useState(0);
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(readPlan({ params: { filter: {}, page: 1, size: 10 } }))
@@ -26,16 +26,16 @@ const Pricing = () => {
 
           <div className="border-[#00000012]  border-[0.3px] bg-white rounded-full max-w-[139px] flex   items-center space-x-1 p-[3px] text-xs w-fit h-fit font-semibold filter-shadow  text-[#1E1E1EAD]">
             <span
-              onClick={() => setPlanTime("Monthly")}
-              className={`px-[10px] py-[6px] ${planTime.includes("Monthly") &&
+              onClick={() => setPlanTime(0)}
+              className={`px-[10px] py-[6px] ${planTime === 0 &&
                 " pricing-gradient text-white rounded-full"
                 }   cursor-pointer`}
             >
               Monthly
             </span>
             <span
-              onClick={() => setPlanTime("Yearly")}
-              className={`px-[10px] py-[6px] ${planTime.includes("Yearly") &&
+              onClick={() => setPlanTime(1)}
+              className={`px-[10px] py-[6px] ${planTime === 1 &&
                 " pricing-gradient text-white rounded-full"
                 }   cursor-pointer`}
             >
@@ -43,7 +43,7 @@ const Pricing = () => {
             </span>
           </div>
         </div>
-        <Cards planTime={planTime} setPlanTime={setPlanTime} />
+        <Cards planTime={planTime}  />
       </div>
     </div>
   );

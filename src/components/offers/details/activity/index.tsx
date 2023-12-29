@@ -3,57 +3,35 @@ import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
 import { OffersActivityDataTypes } from "@/types/offers";
+import { useAppSelector } from "@/hooks/useRedux";
+import { formatDateTimeToDate, formatDateTimeToTime } from '../../../../utils/utility';
 
 const Activity = () => {
-  const activityData: OffersActivityDataTypes[] = [
-    {
-      activityName: "Ahmed",
-      activityMode: "edited Offer:",
-      activeTime: "13:30:20",
-      activeDate: "12/09/2023",
-    },
-    {
-      activityName: "Ahmed",
-      activityMode: "edited Offer:",
-      activeTime: "13:30:20",
-      activeDate: "12/09/2023",
-    },
-    {
-      activityName: "Ahmed",
-      activityMode: "edited Offer:",
-      activeTime: "13:30:20",
-      activeDate: "12/09/2023",
-    },
-    {
-      activityName: "Ahmed",
-      activityMode: "edited Offer:",
-      activeTime: "13:30:20",
-      activeDate: "12/09/2023",
-    },
-  ];
+  const { offerActivity } = useAppSelector(state => state.offer)
+  const activityData: OffersActivityDataTypes[] | null = offerActivity && offerActivity?.activity?.map((item) => ({ activeTime: formatDateTimeToTime(item?.dateTime), activeDate: formatDateTimeToDate(item?.dateTime), activityMode: "edited Offer:", activityName: item?.editedBy }))
 
   return (
     <>
-      {activityData.map((item, index) => (
-        <div key={index} className="flex flex-col bg-white rounded-b-lg">
+      {activityData?.map((item, index) => (
+        <div key={index} className="flex flex-col bg-white rounded-b-lg ">
           <div className="pl-[30px] pr-[11px] py-[11px]">
             <div className="flex gap-[5px]">
               <span className="text-[#4B4B4B] font-normal text-[14px]">
-                {item.activityName}
+                {item?.activityName}
               </span>
               <span className="text-[#8F8F8F] font-normal text-[14px]">
-                {item.activityMode}
+                {item?.activityMode}
               </span>
             </div>
 
             <div className="mt-2 flex justify-between">
               <span className="text-[#4B4B4B] font-normal text-[14px] flex items-center ">
                 <Image src={timeIcon} alt="timeIcon" className="mr-3" />
-                {item.activeTime}
+                {item?.activeTime}
               </span>
               <span className="text-[#4B4B4B] font-normal text-[14px] flex items-center">
                 <Image src={calenderIcon} alt="calenderIcon" className="mr-3" />
-                {item.activeDate}
+                {item?.activeDate}
               </span>
             </div>
           </div>

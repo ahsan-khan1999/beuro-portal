@@ -80,7 +80,7 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo:""
+    logo: ""
   },
   contactAddress: {
     address: {
@@ -162,6 +162,7 @@ const PdfPriview = () => {
             const contractDetails: contractTableTypes = response?.payload;
             let formatData: PdfProps<ContractEmailHeaderProps> = {
               id: contractDetails?.id,
+              attachement: contractDetails?.attachement,
               emailHeader: {
                 offerNo: contractDetails?.contractNumber,
                 emailStatus: contractDetails?.contractStatus,
@@ -173,7 +174,7 @@ const PdfPriview = () => {
                 offerNo: contractDetails?.offerID?.offerNumber,
                 offerDate: contractDetails?.offerID?.createdAt,
                 createdBy: contractDetails?.offerID?.createdBy?.fullName,
-                logo:contractDetails?.offerID?.createdBy?.company?.logo
+                logo: contractDetails?.offerID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {
@@ -346,12 +347,12 @@ const PdfPriview = () => {
   };
 
   const handleDonwload = () => {
-    console.log("download");
+    window.open(offerData?.attachement)
   };
   const handlePrint = () => {
-    console.log("print");
-  };
+    window.open(offerData?.attachement)
 
+  };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -395,8 +396,7 @@ const PdfPriview = () => {
     else return false
   }
   const handleSendByPost = () => {
-    router.pathname = "/contract"
-    updateQuery(router, router.locale as string)
+    router.back()
   }
   return (
     <>
