@@ -36,7 +36,8 @@ const PdfCard = ({
               src={backIcon}
               alt="backIcon"
               className="cursor-pointer"
-              onClick={() => router.push("/contract")}
+              onClick={() => router.back()}
+
             />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
               {translate("contracts.pdf_card_details.heading")}
@@ -105,7 +106,7 @@ const PdfCard = ({
               {translate("contracts.pdf_card_details.contract_status")}:
             </span>
 
-            <div className="border-[#FE9244] border rounded-lg px-[8px] w-[68px]">
+            <div className="border-[#FE9244] border rounded-lg px-[8px] ">
               <span className="text-[#FE9244] text-base font-medium">{contractStatus}</span>
             </div>
           </div>

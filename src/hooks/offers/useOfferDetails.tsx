@@ -1,4 +1,4 @@
-import { deleteOffer, readOfferDetails, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
+import { deleteOffer, readOfferActivity, readOfferDetails, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
 import { ModalConfigType, ModalType } from '@/enums/ui';
@@ -22,7 +22,7 @@ import { updateQuery } from '@/utils/update-query';
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { offerDetails, loading, offer } = useAppSelector((state) => state.offer);
+  const { offerDetails, loading, offerActivity } = useAppSelector((state) => state.offer);
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(false)
   const { t: translate } = useTranslation()
@@ -35,6 +35,8 @@ export default function useOfferDetails() {
       dispatch(readOfferDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
         dispatch(setOfferDetails(res.payload))
       })
+
+      dispatch(readOfferActivity({ params: { filter: id } }))
     }
   }, [id]);
   const onClose = () => {
@@ -176,6 +178,7 @@ export default function useOfferDetails() {
     handleSendEmail,
     setIsSendEmail,
     isSendEmail,
-    onNextHandle
+    onNextHandle,
+    offerActivity
   }
 }

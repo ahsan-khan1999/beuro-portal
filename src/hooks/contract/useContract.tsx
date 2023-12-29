@@ -32,10 +32,10 @@ const useContract = () => {
   const [filter, setFilter] = useState<FilterType>({
     sort: "",
     text: "",
-    date: {
-      $gte: "",
-      $lte: "",
-    },
+    // date: {
+    //   $gte: "",
+    //   $lte: "",
+    // },
     status: undefined,
   });
   const totalItems = totalCount;

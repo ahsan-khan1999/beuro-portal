@@ -87,7 +87,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo:""
+    logo: ""
   },
   contactAddress: {
     address: {
@@ -169,9 +169,9 @@ const DetailsPdfPriview = () => {
           if (response?.payload) {
             const invoiceDetails: PdfSubInvoiceTypes =
               response?.payload;
-              console.log(invoiceDetails,"invoiceDetails");
-              
+
             let formatData: PdfProps<InvoiceEmailHeaderProps> = {
+              attachement: invoiceDetails?.attachement,
               emailHeader: {
                 contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
                 workerName: invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.fullName,
@@ -185,7 +185,7 @@ const DetailsPdfPriview = () => {
                 offerNo: invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
                 offerDate: invoiceDetails?.invoiceID?.createdAt,
                 createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-                logo:invoiceDetails?.invoiceID?.createdBy?.company?.logo
+                logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo
               },
               contactAddress: {
                 address: {
@@ -378,14 +378,15 @@ const DetailsPdfPriview = () => {
       if (res?.payload)
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
     }
-   
+
   };
 
   const handleDonwload = () => {
-    console.log("download");
+    window.open(invoiceData?.attachement)
   };
   const handlePrint = () => {
-    console.log("print");
+    window.open(invoiceData?.attachement)
+
   };
 
   const onClose = () => {
@@ -429,8 +430,7 @@ const DetailsPdfPriview = () => {
     else return false
   }
   const handleSendByPost = () => {
-    router.pathname = "/invoices"
-    updateQuery(router, router.locale as string)
+    router.back()
   }
   return (
     <>
@@ -442,7 +442,7 @@ const DetailsPdfPriview = () => {
         onDownload={handleDonwload}
         onPrint={handlePrint}
         onSendViaPost={handleSendByPost}
-        title={router.pathname?.includes("receipt") ?  "Receipt Details" : "Invoice Details"}
+        title={router.pathname?.includes("receipt") ? "Receipt Details" : "Invoice Details"}
       />
       <div className="my-5">
         <Pdf<InvoiceEmailHeaderProps>

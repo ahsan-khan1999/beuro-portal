@@ -655,7 +655,6 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
               className:
                 "w-[175px] bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
               onClick: onClick,
-              loading,
             },
           },
           {
