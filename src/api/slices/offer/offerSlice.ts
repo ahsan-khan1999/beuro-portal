@@ -1,7 +1,7 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { OffersTableRowTypes } from "@/types/offers";
+import { OfferActivity, OffersTableRowTypes } from "@/types/offers";
 import { DEFAULT_OFFER, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
@@ -14,7 +14,8 @@ interface OfferState {
     error: Record<string, object>,
     lastPage: number,
     totalCount: number,
-    offerDetails: OffersTableRowTypes
+    offerDetails: OffersTableRowTypes,
+    offerActivity: OfferActivity | null
 }
 
 const initialState: OfferState = {
@@ -24,7 +25,8 @@ const initialState: OfferState = {
     lastPage: 1,
     totalCount: 10,
     //@ts-expect-error
-    offerDetails: DEFAULT_OFFER
+    offerDetails: DEFAULT_OFFER,
+    offerActivity: null
 }
 
 export const readOffer: AsyncThunk<boolean, object, object> | any =
@@ -189,6 +191,20 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/activity", async (args, thunkApi) => {
+        const { params, router, translate } = args as any;
+
+        try {
+            const response = await apiServices.readOfferActivity(params);
+
+            return response?.data?.data?.OfferActivity;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            // setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 
 const OfferSlice = createSlice({
     name: "OfferSlice",
@@ -302,6 +318,17 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(signOffer.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(readOfferActivity.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readOfferActivity.fulfilled, (state, action) => {
+            state.offerActivity = action?.payload
+            state.loading = false;
+        });
+        builder.addCase(readOfferActivity.rejected, (state) => {
             state.loading = false
         });
 

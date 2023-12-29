@@ -225,6 +225,7 @@ const PdfPriview = () => {
               aggrementDetails:
                 offerDetails?.content?.offerContent?.description || "",
               isOffer: true,
+              signature: offerDetails?.signature
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
