@@ -21,7 +21,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         id: "div-field",
         className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
-          { containerClass:"mb-0",
+          {
+            containerClass: "mb-0",
             label: {
               text: `${translate("customers.details.customer_type")}`,
               htmlFor: "select",
@@ -47,7 +48,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
           },
           {
-            containerClass:"mb-0 w-full xl:col-span-2",
+            containerClass: "mb-0 w-full xl:col-span-2",
             label: {
               text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
@@ -73,7 +74,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4    !border-[#BFBFBF]  focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
@@ -93,11 +94,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: "  !border-[#BFBFBF]  focus:!border-primary",
+              className:
+                "!p-4 !border-[#BFBFBF] focus:!border-primary cursor-default",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
               control,
+              disabled: isUpdate,
               value: customerDetails && customerDetails.phoneNumber,
             },
           },
@@ -110,7 +113,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: "  !border-[#BFBFBF]  focus:!border-primary",
+              className: " !p-4 !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",
@@ -123,7 +126,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass:"my-5",
+      containerClass: "my-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "name",
@@ -164,8 +167,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className:
-                "!p-4  !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
+              className: "!p-4  !border-[#BFBFBF] focus:!border-primary",
 
               inputType: "text",
               id: "address.postalCode",
@@ -184,7 +186,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-[#BFBFBF]",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               type: Field.select,
               id: "address.country",
               name: "address.country",
@@ -214,7 +216,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px] text-dark hover:bg-none ${
                 isUpdate && "hidden"
               }`,
             },
@@ -254,8 +256,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
       field: {
         type: Field.input,
-        className:
-          "!p-4 !!border-borderColor border border-dark focus:!border-primary",
+        className: "!p-4 border border-[#BFBFBF] focus:!border-primary",
         inputType: "text",
         id: "companyName",
         name: "companyName",

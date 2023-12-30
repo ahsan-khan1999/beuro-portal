@@ -15,7 +15,8 @@ const ContractDetails = () => {
     handleNotes,
     handlePaymentStatusUpdate,
     handleStatusUpdate,
-    handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle
+    handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle,
+    loading
   } = useContractDetail();
 
   return (
@@ -39,7 +40,7 @@ const ContractDetails = () => {
             onNextHandle={onNextHandle}
           />
           :
-          <ContractDetailsData />}
+          <ContractDetailsData loading={loading}/>}
 
       {renderModal()}
     </Layout>

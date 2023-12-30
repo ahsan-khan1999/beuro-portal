@@ -5,6 +5,7 @@ import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
 import ServicesForm from "../ServicesForm";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const ServicesDetails = () => {
   const {
@@ -16,7 +17,8 @@ const ServicesDetails = () => {
     onSubmit,
     errors,
     deleteHandler,
-    renderModal
+    renderModal,
+    loading,
   } = useServiceDetail(true);
   return (
     <Layout>
@@ -27,8 +29,10 @@ const ServicesDetails = () => {
           deleteHandler={deleteHandler}
         />
       </DetailsCard>
-      <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
-        <div className="xl:col-span-2">
+      <div className="w-full mt-8">
+        {loading ? (
+          <LoadingState />
+        ) : (
           <ServicesForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}
@@ -38,11 +42,11 @@ const ServicesDetails = () => {
             onSubmit={onSubmit}
             errors={errors}
           />
-        </div>
-        <div className="xl:col-span-1">
-          <SideCard />
-        </div>
+        )}
       </div>
+      {/* <div className="xl:col-span-1">
+          <SideCard />
+        </div> */}
 
       {renderModal()}
     </Layout>

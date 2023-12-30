@@ -10,12 +10,12 @@ const DeleteConfirmation_2 = ({
   onClose,
   modelHeading,
   routeHandler,
-  loading
+  loading,
 }: {
   onClose: () => void;
   modelHeading: string;
   routeHandler: Function;
-  loading: boolean
+  loading: boolean;
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -46,14 +46,19 @@ const DeleteConfirmation_2 = ({
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
               {translate("email_tracker.email_delete_modal.cancel_button")}
-            </button >
+            </button>
 
-            <Button id="Delete" inputType="submit" loading={loading} text={translate("email_tracker.email_delete_modal.delete_button")} onClick={routeHandler}
-              className=" px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
+            <Button
+              id="Delete"
+              inputType="submit"
+              loading={loading}
+              text={translate("email_tracker.email_delete_modal.delete_button")}
+              onClick={routeHandler}
+              className=" px-[25px] !text-white bg-[#FF0000] rounded-md"
             />
-          </div >
-        </div >
-      </BaseModal >
+          </div>
+        </div>
+      </BaseModal>
     </>
   );
 };

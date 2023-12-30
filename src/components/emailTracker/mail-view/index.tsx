@@ -13,6 +13,7 @@ import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
 import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
 import { CustomerPromiseActionType } from "@/types/customer";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 const ViewMails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
@@ -87,8 +88,14 @@ const ViewMails = () => {
             emailDetails={emailDetails}
           />
         </DetailsCard>
-        <div className="flex mt-7">
-          <EmailDetailsData emailDetails={emailDetails} />
+        <div className="mt-7">
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <LoadingState />
+            </div>
+          ) : (
+            <EmailDetailsData emailDetails={emailDetails} />
+          )}
         </div>
       </Layout>
       {renderModal()}

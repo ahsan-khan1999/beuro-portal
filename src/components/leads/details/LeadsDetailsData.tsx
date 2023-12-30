@@ -12,6 +12,7 @@ import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export enum ComponentsType {
   customer,
@@ -24,7 +25,7 @@ export enum ComponentsType {
   additionalEdit,
 }
 
-const LeadsDetailsData = () => {
+const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
   const [tabType, setTabType] = useState<number>(0);
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { images } = useAppSelector((state) => state.image);
@@ -165,9 +166,13 @@ const LeadsDetailsData = () => {
       </div>
 
       <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
-        {renderComponent.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+        {loading ? (
+          <LoadingState />
+        ) : (
+          renderComponent.map((component, index) => (
+            <React.Fragment key={index}>{component}</React.Fragment>
+          ))
+        )}
       </div>
     </div>
   );

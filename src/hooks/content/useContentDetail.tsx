@@ -69,7 +69,8 @@ const useContentDetail = () => {
   return {
     contentDetails,
     contentDeleteHandler,
-    renderModal
+    renderModal,
+    loading
   };
 };
 export default useContentDetail;

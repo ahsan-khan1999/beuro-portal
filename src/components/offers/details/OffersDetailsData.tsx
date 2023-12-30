@@ -8,6 +8,7 @@ import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export enum ComponentsType {
   customer,
@@ -18,8 +19,10 @@ export enum ComponentsType {
 
 const OffersDetailsData = ({
   offerDetails,
+  loading,
 }: {
   offerDetails: OffersTableRowTypes;
+  loading: boolean;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
 
@@ -112,9 +115,13 @@ const OffersDetailsData = ({
         </div>
       </div>
       <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
-        {componentArray.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+        {loading ? (
+          <LoadingState />
+        ) : (
+          componentArray.map((component, index) => (
+            <React.Fragment key={index}>{component}</React.Fragment>
+          ))
+        )}
       </div>
     </div>
   );
