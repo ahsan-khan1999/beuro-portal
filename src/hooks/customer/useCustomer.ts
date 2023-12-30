@@ -18,7 +18,7 @@ export default function useCustomer() {
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
-    type: FiltersDefaultValues.None,
+    // type: FiltersDefaultValues.None,
   });
 
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
