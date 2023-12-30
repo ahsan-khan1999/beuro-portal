@@ -67,11 +67,11 @@ export default function CustomerFilter({
         ]}
         label="Sort By"
       />
-      <CustomerFilters
+      {/* <CustomerFilters
         filter={filter}
         setFilter={setFilter}
         onFilterChange={handleFilterChange}
-      />
+      /> */}
 
       {/* <Button
         onClick={() => handleFilterChange()}
