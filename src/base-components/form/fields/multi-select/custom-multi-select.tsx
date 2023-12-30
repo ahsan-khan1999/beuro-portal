@@ -3,6 +3,7 @@ import { MultiSelectBoxProps, SelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useRef, useState, useEffect } from "react";
 
 export const MultiSelectBox = ({
@@ -100,29 +101,37 @@ export const MultiSelectBox = ({
           />
         )}
       </div>
-      {!disabled && isOpen && (
-        <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10">
-          <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
-            <input
-              value={search.current}
-              onChange={(e) => handleChange(e.target.value)}
-              placeholder="Search..."
-              className="w-full outline-none rounded-lg p-2 focus:border-primary focus:outline"
-            />
-          </div>
-          {option.map(({ value, label }) => (
-            <li
-              key={value}
-              onClick={() => selectedOptionHandler(value)}
-              className={`p-2 hover:bg-extra-light-gray cursor-pointer ${
-                selectedOptions.includes(value) ? "bg-gray-200" : ""
-              }`}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
-      )}
+      <AnimatePresence>
+        {!disabled && isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="absolute overflow-x-hidden top-[52px] max-h-[180px] h-fit overflow-y-scroll w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-10"
+          >
+            <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
+              <input
+                value={search.current}
+                onChange={(e) => handleChange(e.target.value)}
+                placeholder="Search..."
+                className="w-full outline-none rounded-lg p-2 focus:border-primary focus:outline"
+              />
+            </div>
+            {option.map(({ value, label }) => (
+              <li
+                key={value}
+                onClick={() => selectedOptionHandler(value)}
+                className={`p-2 hover:bg-extra-light-gray cursor-pointer ${
+                  selectedOptions.includes(value) ? "bg-gray-200" : ""
+                }`}
+              >
+                {label}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

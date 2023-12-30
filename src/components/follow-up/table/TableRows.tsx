@@ -8,7 +8,7 @@ import { StatusColors } from "@/enums/follow-up";
 const TableRows = ({
   currentPageRows,
   handleFollowUpsDetails,
-  handleFollowUpsDelete
+  handleFollowUpsDelete,
 }: FollowUpsTable) => {
   return (
     <div>
@@ -16,38 +16,48 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="border border-[#4A13E7]  shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2 bg-white rounded-md p-4"
+            className="hover:bg-[#E9E1FF] bg-white border border-[#4A13E7] rounded-md shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2rounded-md p-4"
           >
-            <span className=" bg-white rounded-md flex items-center ">
-              {item.customer?.refID}
-            </span>
-            <span className=" bg-white  flex items-center">
+            <span className="flex items-center ">{item.customer?.refID}</span>
+            <span className=" flex items-center">
               {item.customer?.fullName}
             </span>
-            <span className=" bg-white flex items-center">
+            <span className="flex items-center">
               {moment(item.dateTime).format("DD/MM/YYYY hh:mm")}
             </span>
-            <span className=" bg-white flex items-center">{item.title}</span>
+            <span className="flex items-center">{item.title}</span>
 
-            <span className=" bg-white flex items-center justify-center ">
+            <span className="flex items-center justify-center ">
               <div
-                className={`bg-[${StatusColors[item.status]}] text-white px-2 py-1 text-center rounded-md  text-sm `}
+                className={`bg-[${
+                  StatusColors[item.status]
+                }] text-white px-2 py-1 text-center rounded-md  text-sm `}
               >
                 {item.status}
               </div>
             </span>
-            <span className=" flex justify-center items-center  bg-white cursor-pointer"
+            <span
+              className=" flex justify-center items-center cursor-pointer"
               onClick={() => handleFollowUpsDelete(item.id)}
-
             >
-              <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.20059 1.93699H10.6988H10.6989C11.3492 1.93713 11.8966 2.42616 11.9805 3.07732L11.9805 3.07735C12.0608 3.7025 11.6904 4.29409 11.1048 4.48994V12.2172C11.1048 12.7019 10.9297 13.1599 10.62 13.4904C10.62 13.4904 10.6199 13.4904 10.6199 13.4905L10.5469 13.4221L9.20059 1.93699ZM9.20059 1.93699V1.64138V1.64118V1.93699ZM5.09285 0.290422H5.09245V0.390422L5.09285 0.290422ZM5.09285 0.290422H7.86396H5.09285ZM1.85203 12.2172C1.85203 12.7019 2.02716 13.1599 2.33682 13.4903L3.75623 1.64118V1.64147V1.93699H2.25797H2.25795C1.60762 1.93713 1.06018 2.42616 0.976347 3.07732L0.976344 3.07735C0.896001 3.7025 1.26639 4.29409 1.85203 4.48994V12.2172ZM4.58056 1.64118H4.58057L4.58055 1.63992C4.57881 1.50165 4.63241 1.36883 4.72876 1.27161L4.7288 1.27157C4.82493 1.17447 4.95549 1.12134 5.0907 1.1237L5.0907 1.12372H5.09245H7.86437V1.12373L7.86612 1.1237C8.00133 1.12134 8.13189 1.17447 8.22802 1.27157L8.22809 1.27165C8.32439 1.3687 8.37801 1.50162 8.37627 1.63993L8.37626 1.63992V1.64118V1.93699H4.58056V1.64118ZM8.32002 5.18907C8.09103 5.18907 7.90785 5.37694 7.90785 5.60572V11.5904C7.90785 11.819 8.091 12.007 8.32002 12.007C8.54903 12.007 8.73218 11.819 8.73218 11.5904V5.60572C8.73218 5.37694 8.54901 5.18907 8.32002 5.18907ZM4.63663 5.18907C4.40764 5.18907 4.22446 5.37694 4.22446 5.60572V11.5904C4.22446 11.819 4.40761 12.007 4.63663 12.007C4.86564 12.007 5.04879 11.819 5.04879 11.5904V5.60572C5.04879 5.37694 4.86562 5.18907 4.63663 5.18907ZM9.43153 13.178H3.52529C3.05703 13.178 2.67636 12.7685 2.67636 12.2172V4.54352H10.2805V12.2172C10.2805 12.7685 9.89979 13.178 9.43153 13.178ZM2.25797 2.77029H10.6988C10.9526 2.77029 11.1607 2.97934 11.1607 3.24025C11.1607 3.50117 10.9526 3.71022 10.6988 3.71022H2.25797C2.00421 3.71022 1.79608 3.50117 1.79608 3.24025C1.79608 2.97934 2.00421 2.77029 2.25797 2.77029ZM6.47811 5.18907C6.24912 5.18907 6.06594 5.37694 6.06594 5.60572V11.5904C6.06594 11.819 6.24909 12.007 6.47811 12.007C6.70712 12.007 6.89027 11.819 6.89027 11.5904V5.60572C6.89027 5.37694 6.7071 5.18907 6.47811 5.18907Z" fill="#ED2F2F" stroke="#ED2F2F" stroke-width="0.2" />
+              <svg
+                width="13"
+                height="15"
+                viewBox="0 0 13 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.20059 1.93699H10.6988H10.6989C11.3492 1.93713 11.8966 2.42616 11.9805 3.07732L11.9805 3.07735C12.0608 3.7025 11.6904 4.29409 11.1048 4.48994V12.2172C11.1048 12.7019 10.9297 13.1599 10.62 13.4904C10.62 13.4904 10.6199 13.4904 10.6199 13.4905L10.5469 13.4221L9.20059 1.93699ZM9.20059 1.93699V1.64138V1.64118V1.93699ZM5.09285 0.290422H5.09245V0.390422L5.09285 0.290422ZM5.09285 0.290422H7.86396H5.09285ZM1.85203 12.2172C1.85203 12.7019 2.02716 13.1599 2.33682 13.4903L3.75623 1.64118V1.64147V1.93699H2.25797H2.25795C1.60762 1.93713 1.06018 2.42616 0.976347 3.07732L0.976344 3.07735C0.896001 3.7025 1.26639 4.29409 1.85203 4.48994V12.2172ZM4.58056 1.64118H4.58057L4.58055 1.63992C4.57881 1.50165 4.63241 1.36883 4.72876 1.27161L4.7288 1.27157C4.82493 1.17447 4.95549 1.12134 5.0907 1.1237L5.0907 1.12372H5.09245H7.86437V1.12373L7.86612 1.1237C8.00133 1.12134 8.13189 1.17447 8.22802 1.27157L8.22809 1.27165C8.32439 1.3687 8.37801 1.50162 8.37627 1.63993L8.37626 1.63992V1.64118V1.93699H4.58056V1.64118ZM8.32002 5.18907C8.09103 5.18907 7.90785 5.37694 7.90785 5.60572V11.5904C7.90785 11.819 8.091 12.007 8.32002 12.007C8.54903 12.007 8.73218 11.819 8.73218 11.5904V5.60572C8.73218 5.37694 8.54901 5.18907 8.32002 5.18907ZM4.63663 5.18907C4.40764 5.18907 4.22446 5.37694 4.22446 5.60572V11.5904C4.22446 11.819 4.40761 12.007 4.63663 12.007C4.86564 12.007 5.04879 11.819 5.04879 11.5904V5.60572C5.04879 5.37694 4.86562 5.18907 4.63663 5.18907ZM9.43153 13.178H3.52529C3.05703 13.178 2.67636 12.7685 2.67636 12.2172V4.54352H10.2805V12.2172C10.2805 12.7685 9.89979 13.178 9.43153 13.178ZM2.25797 2.77029H10.6988C10.9526 2.77029 11.1607 2.97934 11.1607 3.24025C11.1607 3.50117 10.9526 3.71022 10.6988 3.71022H2.25797C2.00421 3.71022 1.79608 3.50117 1.79608 3.24025C1.79608 2.97934 2.00421 2.77029 2.25797 2.77029ZM6.47811 5.18907C6.24912 5.18907 6.06594 5.37694 6.06594 5.60572V11.5904C6.06594 11.819 6.24909 12.007 6.47811 12.007C6.70712 12.007 6.89027 11.819 6.89027 11.5904V5.60572C6.89027 5.37694 6.7071 5.18907 6.47811 5.18907Z"
+                  fill="#ED2F2F"
+                  stroke="#ED2F2F"
+                  stroke-width="0.2"
+                />
               </svg>
-
             </span>
-            <span className=" flex justify-center items-center bg-white cursor-pointer"
+            <span
+              className=" flex justify-center items-centercursor-pointer"
               onClick={() => handleFollowUpsDetails(item.id)}
-
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
