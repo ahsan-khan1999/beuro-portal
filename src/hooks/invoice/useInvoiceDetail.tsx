@@ -162,7 +162,7 @@ export default function useInvoiceDetail() {
             <CreationCreated
                 onClose={onClose}
                 heading="Successful "
-                subHeading="Your customer is now totally free."
+                subHeading="Thanks for updating offer we are happy to have you."
                 route={route}
             />
         ),

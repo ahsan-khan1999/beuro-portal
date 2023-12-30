@@ -77,7 +77,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex items-center">
+            <span className="py-4 flex items-center mx-2">
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
                   item: item,
@@ -95,7 +95,7 @@ const TableRows = ({
                 dropDownIconClassName={"#fff"}
               />
             </span>
-            <span className="py-4 flex items-center">
+            <span className="py-4 flex items-center mx-1">
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"]).map(
                   (item) => ({ item: item })
