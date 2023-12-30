@@ -508,8 +508,10 @@ export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
   createAsyncThunk(
     "read/dashboard",
     async (data, thunkApi) => {
+      const { params, router, setError, translate } = data as any;
+
       try {
-        const response = await apiServices.readDashboard(data);
+        const response = await apiServices.readDashboard(params);
 
         return response?.data?.data;
       } catch (e: any) {
