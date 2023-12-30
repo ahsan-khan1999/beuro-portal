@@ -16,7 +16,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_200px)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(130px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_200px)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(130px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(150px,_250px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 rounded-md"
           >
             <span className="py-4 flex items-center">{item.invoiceNumber}</span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex">
@@ -41,24 +41,20 @@ const TableRows = ({
               </div>
             </span>
             <span className="py-4 flex justify-center items-center">
-              <div className="flex rounded-md w-fit">
+              <div className="flex justify-center items-center rounded-md w-full">
                 <div
-                  className={`${
-                    parseInt(item.paidAmount) > parseInt(item.totalPrice)
-                      ? "w-2/3"
-                      : "w-1/3"
-                  } bg-[#4A13E7] text-white pl-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm w-full`}
+                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
                 >
-                  {item.paidAmount}
+                  {!Number.isInteger(item?.paidAmount)
+                    ? item?.paidAmount?.toFixed(2)
+                    : item?.paidAmount}
                 </div>
                 <div
-                  className={`${
-                    parseInt(item.paidAmount) <= parseInt(item.totalEmail)
-                      ? "w-2/3"
-                      : "w-1/3"
-                  } bg-[#EDE7FD] text-[#393939] pr-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
+                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
                 >
-                  {item.remainingAmount}
+                  {!Number.isInteger(item?.remainingAmount)
+                    ? item?.remainingAmount?.toFixed(2)
+                    : item?.remainingAmount}
                 </div>
               </div>
             </span>
