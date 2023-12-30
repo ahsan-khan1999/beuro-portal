@@ -214,7 +214,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
 
       field: {
         type: Field.div,
-        id:"divfield",
+        id: "divfield",
         children: [
           {
             containerClass: "mb-3",
@@ -224,8 +224,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
                 "admin.settings.mail_setting.mail_form_fields.mail_heading"
               )}`,
               containerClassName: "text-[14px] font-normal ",
-        id:"spanfield",
-
+              id: "spanfield",
             },
           },
           {
@@ -241,10 +240,10 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           },
         ],
       },
-    },                    
+    },
 
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
         text: `${translate(
@@ -255,7 +254,6 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
         id: "save",
         loading,
-        
       },
     },
   ];

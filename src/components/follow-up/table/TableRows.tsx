@@ -1,8 +1,6 @@
 import React from "react";
 import { FollowUps, FollowUpsTable } from "@/types/follow-up";
 import moment from "moment";
-import Image from "next/image";
-import deleteIcon from "@/assets/svgs/Vector-delete.svg";
 import { StatusColors } from "@/enums/follow-up";
 
 const TableRows = ({
