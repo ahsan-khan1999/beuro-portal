@@ -148,7 +148,8 @@ export interface AuthState {
   [AuthenticationState.google]: boolean | null;
   [AuthenticationState.fb]: boolean | null;
   [AuthenticationState.apple]: boolean | null;
-  dashboard: Dashboard | null
+  dashboard: Dashboard | null;
+  adminDashboard: AdminDashboard | null
 }
 export interface Dashboard {
   Lead: Lead;
@@ -157,6 +158,20 @@ export interface Dashboard {
   Sales: Invoice;
   leadSource: LeadSource[]
 
+}
+export interface AdminDashboard {
+  Customer: Customer;
+  Offer: Offer;
+  Contract: Contract;
+  Sales: Invoice;
+  leadSource: LeadSource[]
+
+}
+
+interface Customer {
+  _id: string;
+  totalCustomers: number;
+  filterCustomers: number
 }
 interface Lead {
   _id: string;
