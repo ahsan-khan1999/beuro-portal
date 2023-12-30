@@ -28,7 +28,7 @@ const useService = () => {
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
   const { t: translate } = useTranslation();
 
-  const totalItems = lastPage;
+  const totalItems = totalCount;
   const itemsPerPage = 10;
 
   useEffect(() => {
