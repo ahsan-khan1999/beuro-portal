@@ -113,23 +113,18 @@ export default function useCustomerDetail(stage: boolean) {
     setError,
     watch,
     setValue,
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   const customerType = watch("customerType");
   useEffect(() => {
     if (id) {
-      dispatch(readCustomerDetail({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          reset({ ...res?.payload });
-          dispatch(setCustomerDetails({...res?.payload}));
-        }
-      );
+      dispatch(readCustomerDetail({ params: { filter: id } }))
     }
   }, [id]);
-  // useMemo(() => {
-  //   if (customerDetails && stage) reset({ ...customerDetails });
-  // }, [customerDetails.id]);
+  useMemo(() => {
+    if (customerDetails && stage) reset({ ...customerDetails });
+  }, [customerDetails.id]);
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);
@@ -171,10 +166,10 @@ export default function useCustomerDetail(stage: boolean) {
       updateCustomer({ data, router, setError, translate })
     );
     if (res?.payload) {
-      dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+      // dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       onClose();
-      (router.pathname = "/customers"), (router.query = {});
-      updateQuery(router, router.locale as string);
+      // (router.pathname = "/customers"), (router.query = {});
+      // updateQuery(router, router.locale as string);
     } else {
       onClose();
     }

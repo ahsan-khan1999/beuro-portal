@@ -13,70 +13,19 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import MainCalender from "./calendar";
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
-
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readDashboard } from "@/api/slices/authSlice/auth";
+import { Dashboard, FilterType } from "@/types";
+import { FiltersDefaultValues } from "@/enums/static";
+interface ActionType {
+  type: string;
+  payload: Dashboard
+}
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
-  const dashboardCards = [
-    {
-      icon: leadsIcon,
-      alt: "leads icon",
-      title: `${translate("dashboard_detail.cards_title.lead")}`,
-      subTitle: "2378 Leads",
-      id: "202504 ",
-      salePercent: "+4.5%",
-      backgroundColor: "bg-gradient",
-      chartPointColor: "#5114EA",
-      open: "2782 Open",
-      closed: "2782 Close",
-      expired: "2782 Expired",
-      route: () => router.push("/leads"),
-    },
-    {
-      icon: offersIcon,
-      alt: "offers icon",
-      title: `${translate("dashboard_detail.cards_title.offer")}`,
-      subTitle: "2378 Offers",
-      id: "202326 ",
-      salePercent: "-4.5%",
-      backgroundColor: "bg-dashboardCard2-gradient",
-      chartPointColor: "#FC3576",
-      open: "2782 Open",
-      closed: "2782 Signed",
-      expired: "2782 Expired",
-      route: () => router.push("/offers"),
-    },
-    {
-      icon: contractsIcon,
-      alt: "contracts icon",
-      title: `${translate("dashboard_detail.cards_title.contracts")}`,
-      subTitle: "2378 Contracts",
-      id: "202505 ",
-      salePercent: "+4.5%",
-      backgroundColor: "bg-dashboardCard3-gradient",
-      chartPointColor: "#FE8D46",
-      open: "2782 Open",
-      closed: "2782 Confirmed",
-      expired: "2782 Cancelled",
-      route: () => router.push("/contract"),
-    },
-    {
-      icon: salesIcon,
-      alt: "sales icon",
-      title: `${translate("dashboard_detail.cards_title.sales")}`,
-      subTitle: "2378 Sales",
-      id: "202705 ",
-      salePercent: "+4.5%",
-      backgroundColor: "bg-gradient",
-      chartPointColor: "#5114EA",
-      open: "2782 Open",
-      closed: "2782 Overdue",
-      expired: "2782 Paid",
-      route: () => router.push("/dashboard"),
-    },
-  ];
-  // Sample data for the pie chart
-  const data = {
+  const { dashboard } = useAppSelector(state => state.auth)
+  const [pieData, setPieData] = useState({
     datasets: [
       {
         data: [40, 10, 10, 10, 15, 15],
@@ -98,14 +47,101 @@ const AdminDashboard = () => {
       `${translate("dashboard_detail.charts_labels.pinterest")}`,
       `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
-  };
-
-  const [filter, setFilter] = useState({
-    text: "",
-    sortBy: "",
-    type: "None",
-    location: "",
+  })
+  const [filter, setFilter] = useState<FilterType>({
+    month: 1,
   });
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(readDashboard({ params: { filter: filter } })).then((response: ActionType) => {
+      if (response?.payload) {
+        setPieData({
+          datasets: [
+            {
+              data: response?.payload?.leadSource?.map((item) => item?.totalLeadSource),
+              backgroundColor: [
+                "#FE9244",
+                "#FF376F",
+                "#4A13E7",
+                "#45C769",
+                "#7B18FF",
+                "#221177",
+              ],
+            },
+          ],
+          labels: response?.payload?.leadSource?.map((item) => item?._id)
+        })
+      }
+    })
+  }, [])
+
+  const dashboardCards = [
+    {
+      icon: leadsIcon,
+      alt: "leads icon",
+      title: `${translate("dashboard_detail.cards_title.lead")}`,
+      subTitle: dashboard?.Lead?.totalLeads + " Leads",
+      id: dashboard?.Lead?.filterCount,
+      salePercent: "+" + dashboard?.Lead?.percentage + "%",
+      backgroundColor: "bg-gradient",
+      chartPointColor: "#5114EA",
+      open: dashboard?.Lead?.opened + " Open",
+      closed: dashboard?.Lead?.closed + " Close",
+      expired: dashboard?.Lead?.expired + " Expired",
+      route: () => router.push("/leads"),
+    },
+    {
+      icon: offersIcon,
+      alt: "offers icon",
+      title: `${translate("dashboard_detail.cards_title.offer")}`,
+      subTitle: dashboard?.Offer?.totalOffers + "Offers",
+      id: dashboard?.Offer?.filterCount,
+      salePercent: "+" + dashboard?.Offer?.percentage + "%",
+      backgroundColor: "bg-dashboardCard2-gradient",
+      chartPointColor: "#FC3576",
+      open: dashboard?.Offer?.opened + " Open",
+      closed: dashboard?.Offer?.signed + " Signed",
+      expired: dashboard?.Offer?.expired + " Expired",
+      route: () => router.push("/offers"),
+    },
+    {
+      icon: contractsIcon,
+      alt: "contracts icon",
+      title: `${translate("dashboard_detail.cards_title.contracts")}`,
+      subTitle: dashboard?.Contract?.totalContract + " Contracts",
+      id: dashboard?.Contract?.filterCount,
+      salePercent: "+" + dashboard?.Contract?.percentage + "%",
+      backgroundColor: "bg-dashboardCard3-gradient",
+      chartPointColor: "#FE8D46",
+      open: dashboard?.Contract?.opened + " Open",
+      closed: dashboard?.Contract?.confirmed + " Confirmed",
+      expired: dashboard?.Contract?.cancelled + " Cancelled",
+      route: () => router.push("/contract"),
+    },
+    {
+      icon: salesIcon,
+      alt: "sales icon",
+      title: `${translate("dashboard_detail.cards_title.sales")}`,
+      subTitle: dashboard?.Sales?.totalSales + " Sales",
+      id: dashboard?.Sales?.filterCount,
+      salePercent: "+" + dashboard?.Sales?.percentage + "%",
+      backgroundColor: "bg-gradient",
+      chartPointColor: "#5114EA",
+      open: dashboard?.Sales?.pending + " Open",
+      closed: dashboard?.Sales?.overdue + " Overdue",
+      expired: dashboard?.Sales?.paid + " Paid",
+      route: () => router.push("/dashboard"),
+    },
+  ];
+  // Sample data for the pie chart
+
+
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(
+      readDashboard({ params: { filter: { month: query?.month } } })
+    );
+  };
+  console.log(pieData);
 
   return (
     <>
@@ -123,7 +159,7 @@ const AdminDashboard = () => {
         textClassName="ml-4 w-full focus:outline-none border-[#BFBFBF] py-0 rounded-none "
       />
 
-      <DashboardFunctions />
+      <DashboardFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
 
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
         {dashboardCards.map((item, index) => {
@@ -134,7 +170,7 @@ const AdminDashboard = () => {
               backgroundColor={item.backgroundColor}
               title={item.title}
               subTitle={item.subTitle}
-              id={item.id}
+              id={item?.id?.toString() as string}
               salePercent={item.salePercent}
               chartPointColor={item.chartPointColor}
               open={item.open}
@@ -149,12 +185,12 @@ const AdminDashboard = () => {
         <MainCalender />
 
       </div> */}
-      <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] ">
+      <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
         <div className="hidden 2xl:block">
           <FollowUpNotificationBar />
         </div>
         <ActivitiesNotificationBar />
-        <PieChart data={data} />
+        <PieChart data={pieData} />
       </div>
     </>
   );

@@ -23,10 +23,9 @@ const useEmailTracker = () => {
   const totalItems = totalCount;
   const itemsPerPage = 10;
   useEffect(() => {
-    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then(
+    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
           setCurrentPageRows(res?.payload?.MailTracker);
         }
       }
@@ -37,10 +36,9 @@ const useEmailTracker = () => {
     setCurrentPage(page);
   };
   const handleFilterChange = (query: FilterType) => {
-    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then(
+    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
           setCurrentPageRows(res?.payload?.MailTracker);
         }
       }

@@ -52,7 +52,7 @@ const useContract = () => {
   //   });
   // }, [query?.filter]);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: filter } })).then((res: any) => {
+    dispatch(readContract({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Contract);
       }
@@ -137,7 +137,7 @@ const useContract = () => {
 
   useEffect(() => {
     dispatch(
-      readContract({ params: { filter: filter, page: 1, size: 10 } })
+      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Contract);

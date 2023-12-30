@@ -32,7 +32,7 @@ const useEmployee = () => {
 
   useEffect(() => {
     dispatch(
-      readEmployee({ params: { filter: filter, page: 1, size: 10 } })
+      readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Employee);
@@ -45,7 +45,7 @@ const useEmployee = () => {
   };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readEmployee({ params: { filter: query, page: 1, size: 10 } })
+      readEmployee({ params: { filter: query, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Employee);
