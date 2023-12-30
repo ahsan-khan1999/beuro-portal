@@ -46,14 +46,14 @@ const TableRows = ({
                   className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
                 >
                   {!Number.isInteger(item?.paidAmount)
-                    ? item?.paidAmount?.toFixed(2)
+                    ? Number(item?.paidAmount)?.toFixed(2)
                     : item?.paidAmount}
                 </div>
                 <div
                   className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.remainingAmount)
-                    ? item?.remainingAmount?.toFixed(2)
+                    ? Number(item?.remainingAmount)?.toFixed(2)
                     : item?.remainingAmount}
                 </div>
               </div>
