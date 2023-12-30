@@ -6,11 +6,13 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
-    text: "",
+    text: FiltersDefaultValues.None,
   });
+  
   const dispatch = useAppDispatch();
   const { followUp, totalCount, loading } = useAppSelector(
     (state) => state.followUp
@@ -89,7 +91,7 @@ const useFollowUps = () => {
     handleDeleteFollowUp,
     renderModal,
     handleFilterChange,
-    loading
+    loading,
   };
 };
 

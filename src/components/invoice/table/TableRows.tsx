@@ -41,13 +41,13 @@ const TableRows = ({
               </div>
             </span>
             <span className="py-4 flex justify-center items-center">
-              <div className="flex rounded-md !min-w-[110px]">
+              <div className="flex rounded-md !min-w-[90px]">
                 <div
                   className={`${
                     parseInt(item.paidAmount) > parseInt(item.totalPrice)
                       ? "w-2/3"
                       : "w-1/3"
-                  } bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
+                  } bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm w-full`}
                 >
                   {item.paidAmount}
                 </div>
@@ -56,7 +56,7 @@ const TableRows = ({
                     parseInt(item.paidAmount) <= parseInt(item.totalEmail)
                       ? "w-2/3"
                       : "w-1/3"
-                  } bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
+                  } bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm w-full`}
                 >
                   {item.remainingAmount.toString().slice(0, 4)}
                 </div>
