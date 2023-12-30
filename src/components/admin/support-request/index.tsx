@@ -8,12 +8,16 @@ import TableRow from "./table/TableRow";
 import useSupportRequest from "@/hooks/admin/support-request/useSupportRequest";
 
 export default function SupportRequest() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,filter,setFilter,handleFilterChange } =
     useSupportRequest();
 
   return (
     <Layout>
-      <TableFunctions />
+      <TableFunctions
+       filter={filter}
+       setFilter={setFilter}
+       handleFilterChange={handleFilterChange} 
+      />
       <TableLayout>
         <TableHeading />
         <TableRow currentPageRows={currentPageRows} />
