@@ -329,11 +329,10 @@ const PdfPriview = () => {
   const handleEmailSend = async () => {
     try {
       const localStorageContractData = await localStoreUtil.get_data("contractComposeEmail");
-      console.log(localStorageContractData,"localStorageContractData");
       
       const data = {
         id: contractDetails?.id,
-        email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+        email: localStorageContractData?.email,
         subject: contractPdfInfo?.subject,
         description: contractPdfInfo?.description,
         pdf:  localStorageContractData?.pdf

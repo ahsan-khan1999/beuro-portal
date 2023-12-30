@@ -73,7 +73,8 @@ export const useContractEmail = (
     contractDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
+    console.log(data,"Data");
+    
     const updatedData = {
       ...data,
       id: contractDetails?.id,
