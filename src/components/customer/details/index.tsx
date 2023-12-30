@@ -7,6 +7,7 @@ import SideCard from "../SideCard";
 import CustomerForm from "../CustomerForm";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import { formatDateTimeToDate } from "@/utils/utility";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const CustomerDetails = () => {
   const {
@@ -20,6 +21,7 @@ const CustomerDetails = () => {
     handlePreviousClick,
     deleteHandler,
     renderModal,
+    loading,
   } = useCustomerDetail(true);
 
   return (
@@ -33,8 +35,10 @@ const CustomerDetails = () => {
           handleDelete={deleteHandler}
         />
       </DetailsCard>
-      <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
-        <div className="xl:col-span-2">
+      {loading ? (
+        <LoadingState />
+      ) : (
+        <div className="w-full mt-8 ">
           <CustomerForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}
@@ -45,11 +49,8 @@ const CustomerDetails = () => {
             errors={errors}
           />
         </div>
-        <div className="xl:col-span-1">
-          <SideCard customerDetail={customerDetail} />
-        </div>
-      </div>
-      {renderModal()} 
+      )}
+      {renderModal()}
     </Layout>
   );
 };

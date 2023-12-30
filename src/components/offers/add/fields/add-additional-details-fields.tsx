@@ -48,9 +48,8 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value:
-          (contentDetails?.id && contentDetails?.offerContent?.title) ||
-          offerDetails?.additionalDetails,
+        value: 
+          (contentDetails?.id && contentDetails?.offerContent?.title)
       },
     },
     {

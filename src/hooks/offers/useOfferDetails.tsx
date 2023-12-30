@@ -182,6 +182,7 @@ export default function useOfferDetails() {
     setIsSendEmail,
     isSendEmail,
     onNextHandle,
-    offerActivity
+    offerActivity,
+    loading
   }
 }

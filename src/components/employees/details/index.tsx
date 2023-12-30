@@ -5,6 +5,7 @@ import DetailsData from "../DetailsData";
 import SideCard from "../SideCard";
 import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 import EmployeeForm from "../EmployeeForm";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const EmploysDetails = () => {
   const {
@@ -18,6 +19,7 @@ const EmploysDetails = () => {
     handleSubmit,
     errors,
     deleteHandler,
+    loading,
   } = useEmployeeDetail(true);
 
   return (
@@ -33,8 +35,10 @@ const EmploysDetails = () => {
             refID={employeeDetails?.employeeID}
           />
         </DetailsCard>
-        <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-5 xl:grid-cols-3">
-          <div className="xl:col-span-2">
+        <div className="w-full mt-8 ">
+          {loading ? (
+            <LoadingState />
+          ) : (
             <EmployeeForm
               isUpdate={isUpdate}
               setIsUpdate={setIsUpdate}
@@ -44,11 +48,11 @@ const EmploysDetails = () => {
               onSubmit={onSubmit}
               errors={errors}
             />
-          </div>
-          <div className="xl:col-span-1">
-            <SideCard />
-          </div>
+          )}
         </div>
+        {/* <div className="xl:col-span-1">
+            <SideCard />
+          </div> */}
       </Layout>
 
       {renderModal()}

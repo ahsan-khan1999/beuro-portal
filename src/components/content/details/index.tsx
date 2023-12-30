@@ -5,7 +5,7 @@ import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
 
 const ContentDetails = () => {
-  const { contentDetails, contentDeleteHandler, renderModal } =
+  const { contentDetails, contentDeleteHandler, renderModal, loading } =
     useContentDetail();
   return (
     <Layout>
@@ -13,7 +13,7 @@ const ContentDetails = () => {
         contentDetails={contentDetails}
         contentDeleteHandler={contentDeleteHandler}
       />
-      <ContentDetailsData contentDetails={contentDetails} />
+      <ContentDetailsData contentDetails={contentDetails} loading={loading}/>
       {renderModal()}
     </Layout>
   );

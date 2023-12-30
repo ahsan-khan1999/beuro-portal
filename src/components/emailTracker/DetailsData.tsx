@@ -7,7 +7,7 @@ import backIcon from "@/assets/svgs/back_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { formatDateString } from "@/utils/functions";
+import { formatDateString, isNumber } from "@/utils/functions";
 import { formatDateReverse } from "@/utils/utility";
 import Link from "next/link";
 
@@ -65,13 +65,12 @@ const DetailsData = ({
               {translate("email_tracker.card_content.status")}:
             </span>
             <span
-              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md  min-w-[70px] bg-[${
-                emailDetails?.mailStatus === "opend"
+              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md  min-w-[70px] bg-[${emailDetails?.mailStatus === "opend"
                   ? "#45C769"
-                  :  emailDetails?.mailStatus === "pending"
-                  ? "#FE9244"
-                  : "#ff376f"
-              }]`}>
+                  : emailDetails?.mailStatus === "pending"
+                    ? "#FE9244"
+                    : "#FF376F"
+                }]`}>
               {emailDetails?.mailStatus}
             </span>
           </div>
@@ -120,7 +119,7 @@ const DetailsData = ({
           return (
             <div className="my-5 flex items-end">
               <Link
-                href={item.href}
+                href={item?.href || ""}
                 target="_blank"
                 className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
                 <Image
@@ -129,9 +128,10 @@ const DetailsData = ({
                   className=" mr-[11px]"
                 />
                 <span className="text-[#BFBFBF] text-base font-normal">
-                  {item.href?.length > 15
+                  {/* {item.href?.length > 15
                     ? `${item.href.slice(0, 15)}...`
-                    : item.href}
+                    : item.href} */}
+                  { item.href?.split("/")[length - 1]}
                 </span>
               </Link>
               &nbsp;,&nbsp;

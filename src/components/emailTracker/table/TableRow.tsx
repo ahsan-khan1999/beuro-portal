@@ -15,7 +15,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             onClick={() =>
               router.push({
                 pathname: "/email-tracker/view-mail",
-                query: { email: item.id },
+                query: { email: item?.id },
               })
             }
             key={item.id}
@@ -42,13 +42,12 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             </div>
             <span className="py-4 flex justify-center items-center">
               <div
-                className={`bg-[${
-                  item.mailStatus === "opend"
+                className={`${item?.mailStatus === "failed" && 'bg-[#FF376F]'} bg-[${item.mailStatus === "opend"
                     ? "#45C769"
                     : item.mailStatus === "pending"
-                    ? "#FE9244"
-                    : "#ff376f"
-                }] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px]`}
+                      ? "#FE9244"
+                      : ""
+                  }] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px]`}
               >
                 {item.mailStatus}
               </div>

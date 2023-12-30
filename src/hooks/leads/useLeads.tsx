@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { FilterType } from "@/types";
@@ -151,18 +151,25 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(readLead({
-      params: {
-        filter: filter,
-        page: currentPage,
-        size: 10,
-      }
-    })).then((response: any) => {
-      if (response?.payload) {
-        setCurrentPageRows(response?.payload?.Lead);
-      }
-    });
-  }, [currentPage]);
+    if (query?.filter) {
+      const statusValue = staticEnums["LeadStatus"][query?.filter as string];
+      setFilter({
+        ...filter,
+        status: [statusValue?.toString()]
+      });
+      dispatch(readLead({ params: { filter: { ...filter, status: [staticEnums["LeadStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+        }
+      );
+    } else {
+      dispatch(readLead({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+        }
+      );
+    }
+  }, [currentPage,query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

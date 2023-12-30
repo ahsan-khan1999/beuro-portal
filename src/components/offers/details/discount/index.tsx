@@ -7,17 +7,18 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { formatDateTimeToDate } from "@/utils/utility";
 
 const Discounts = () => {
-  
-  const { offerActivity } = useAppSelector(state => state.offer)
-  const discountData: OffersDiscountDataTypes[] | null = offerActivity && offerActivity?.discount?.map((item) => ({
-    discountTitle: "Price",
-    discountPrice: item.totalPrice,
-    discountPercentage: item.totalPrice+" "+ item.percentage,
-    discountDate: formatDateTimeToDate(item?.dateTime),
-  }))
+  const { offerActivity } = useAppSelector((state) => state.offer);
+  const discountData: OffersDiscountDataTypes[] | null =
+    offerActivity &&
+    offerActivity?.discount?.map((item) => ({
+      discountTitle: "Price",
+      discountPrice: item.totalPrice,
+      discountPercentage: item.totalPrice + " " + item.percentage,
+      discountDate: formatDateTimeToDate(item?.dateTime),
+    }));
 
   return (
-    <div className="flex flex-col bg-white rounded-b-lg">
+    <div className="flex flex-col bg-white rounded-b-lg h-[300px] overflow-y-auto">
       {/* first item */}
       {/* <div className="flex flex-col gap-[3px] pl-[28px] pr-[21px] py-3">
         <span className="text-[#4B4B4B] text-[12px] font-normal">Discount</span>
@@ -30,8 +31,6 @@ const Discounts = () => {
           </button>
         </div>
       </div> */}
-
-      <hr className="opacity-20 mx-[11px]" />
 
       {/* Items from discountData */}
       {discountData?.map((item, index) => (

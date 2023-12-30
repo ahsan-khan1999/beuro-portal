@@ -74,6 +74,7 @@ export default function useCustomer() {
         setCurrentPageRows(res?.payload?.Customer);
       }
     });
+    
   };
   return {
     currentPageRows,

@@ -186,7 +186,8 @@ const useServiceDetail = (stage: boolean) => {
     errors,
     handleUpdateCancel,
     renderModal,
-    deleteHandler
+    deleteHandler,
+    loading
   };
 };
 export default useServiceDetail;

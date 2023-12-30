@@ -1,5 +1,6 @@
 import { readCompany, setCompanyDetails } from "@/api/slices/company/companySlice";
 import { readCustomer, setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
 import { CustomersAdmin } from "@/types/admin/customer";
@@ -11,11 +12,16 @@ import { useEffect, useState } from "react";
 export default function useCustomer() {
   const { company, lastPage, totalCount, loading } = useAppSelector(state => state.company)
   const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [filter, setFilter] = useState<FilterType>({
+  //   location: "",
+  //   sort: "",
+  //   text: "",
+  //   type: ""
+  // });
   const [filter, setFilter] = useState<FilterType>({
-    location: "",
-    sort: "",
-    text: "",
-    type: ""
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    // type: FiltersDefaultValues.None,
   });
 
   const [currentPageRows, setCurrentPageRows] =
@@ -46,8 +52,17 @@ export default function useCustomer() {
       }
     })
   };
-  const handleFilterChange = (filter: FilterType) => {
-    dispatch(readCompany({ params: { filter: filter, page: currentPage, size: 10 } }))
+  const handleFilterChange = (query: FilterType) => {
+    console.log(query,"query");
+    
+    dispatch(readCompany({ params: { filter: query, page: currentPage, size: 10 } }))
+    .then((res: any) => { 
+      console.log(res,"response");
+      
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.User);
+      }
+    });
   };
   return {
     currentPageRows,

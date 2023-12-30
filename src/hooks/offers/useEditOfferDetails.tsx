@@ -212,13 +212,15 @@ export const useEditOfferDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = {
+    const apiData:any = {
       ...data,
       step: 1,
       offerId: offerDetails?.id,
       stage: EditComponentsType.addressEdit,
       isLeadCreated: data?.leadID ? true : false,
     };
+    if (!apiData?.isLeadCreated) delete apiData["leadID"]
+
     const res = await dispatch(
       createOffer({ data: apiData, router, setError, translate })
     );

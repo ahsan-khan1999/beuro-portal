@@ -30,7 +30,9 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
             <span className=" break-all py-4 flex items-center ">
               {item.phoneNumber}
             </span>
-            <span className="py-4 flex items-center">{item.designation}</span>
+            <span className="break-all py-4 flex items-center">
+              {item.designation.slice(0, 10)}...
+            </span>
             <span className="py-4 flex items-center">
               {moment(item?.creationDate).format("DD/MM/YYYY")}
             </span>

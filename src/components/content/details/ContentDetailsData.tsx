@@ -12,6 +12,7 @@ import EditReceiptContentDetails from "../edit/ReceiptContentDetails";
 import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export enum ComponentsType {
   offerContent,
@@ -26,8 +27,10 @@ export enum ComponentsType {
 
 const ContentDetailsData = ({
   contentDetails,
+  loading,
 }: {
   contentDetails: ContentTableRowTypes;
+  loading: boolean;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
   const [data, setData] = useState<{
@@ -203,9 +206,13 @@ const ContentDetailsData = ({
       </div>
 
       <div className="flex flex-col gap-y-5 w-full h-[600px] xl:mt-0 mt-4 overflow-scroll">
-        {renderComponent.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+        {loading ? (
+          <LoadingState />
+        ) : (
+          renderComponent.map((component, index) => (
+            <React.Fragment key={index}>{component}</React.Fragment>
+          ))
+        )}
       </div>
     </div>
   );

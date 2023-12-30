@@ -91,6 +91,7 @@ export default function useCustomerDetailAdmin() {
     onClose,
     route,
     renderModal,
-    handleStatusChange
+    handleStatusChange,
+    loading
   };
 }

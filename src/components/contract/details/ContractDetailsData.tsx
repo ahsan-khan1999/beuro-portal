@@ -7,6 +7,7 @@ import ServiceDetailsData from "./ServiceDetailsData";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export enum ComponentsType {
   customer,
@@ -15,7 +16,7 @@ export enum ComponentsType {
   additional,
 }
 
-const ContractDetailsData = () => {
+const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { t: translate } = useTranslation();
@@ -105,9 +106,13 @@ const ContractDetailsData = () => {
       </div>
 
       <div className="flex flex-col gap-y-5 w-full h-[480px] xl:mt-0 mt-4 overflow-y-scroll">
-        {componentArray.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+        {loading ? (
+          <LoadingState />
+        ) : (
+          componentArray.map((component, index) => (
+            <React.Fragment key={index}>{component}</React.Fragment>
+          ))
+        )}
       </div>
     </div>
   );

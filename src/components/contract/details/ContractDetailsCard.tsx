@@ -101,7 +101,7 @@ const ContractDetailsCard = ({
               {translate("contracts.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
-              {contractDetails.offerID?.customerID?.fullName}
+              {contractDetails.offerID?.createdBy?.fullName}
             </span>
           </div>
         </div>

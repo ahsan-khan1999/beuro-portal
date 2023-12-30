@@ -1,20 +1,20 @@
 import CustomerFilters from "@/base-components/filter/customer-filters";
-// import DetailFilter from "@/base-components/filter/detail-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
+import { FiltersDefaultValues } from "@/enums/static";
 import useFilter from "@/hooks/filter/hook";
-import { CheckBoxType, FiltersComponentProps } from "@/types";
+import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function CustomerFilter({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const moreFilters = {
     text: "",
   };
@@ -36,27 +36,73 @@ export default function CustomerFilter({
       type: "blocked",
     },
   ];
+  const onEnterPress = () => {
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      console.log(updatedValue);
+      
+      return updatedValue;
+    });
+  };
+  const hanldeSortChange = (value: string) => {
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setFilter((prev: FilterType) => {
+      const updatedStatus = prev.status ? [...prev.status] : [];
+      if (isChecked) {
+        if (!updatedStatus.includes(value)) {
+          updatedStatus.push(value);
+        }
+      } else {
+        const index = updatedStatus.indexOf(value);
+        if (index > -1) {
+          updatedStatus.splice(index, 1);
+        }
+      }
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex space-x-4">
       <div className="flex gap-x-4 w-full xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
+          key={idx}
             checkboxFilter={filter}
             setCheckBoxFilter={setFilter}
             type={"status"}
             label={item.label}
             value={item.type}
-            onChange={(val) => {}}
+            onChange={(value, isChecked) =>
+              handleStatusChange(value, isChecked)
+            }
           />
         ))}
       </div>
       <InputField
-        handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
-        value={filter?.text || ""}
+        handleChange={(value) => {}}
+        ref={inputRef}
+        // value={filter?.text || ""}
         iconDisplay={true}
+        onEnterPress={onEnterPress}
       />
       <SelectField
-        handleChange={(value) => setFilter({ ...filter, ["sortBy"]: value })}
+        handleChange={(value) => hanldeSortChange(value)}
         value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[

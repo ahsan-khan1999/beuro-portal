@@ -12,13 +12,13 @@ export const ProfileUpload = ({
   field,
   className,
   iconClasses,
-  disabled
+  disabled,
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
   className?: string;
   iconClasses?: string;
-  disabled?:boolean
+  disabled?: boolean;
 }) => {
   // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();
@@ -33,7 +33,6 @@ export const ProfileUpload = ({
       field.onChange(res?.payload);
     }
   };
-
 
   const defaultClasses = `relative`;
   const classes = combineClasses(defaultClasses, className);
@@ -51,7 +50,9 @@ export const ProfileUpload = ({
               alt="Uploaded Preview"
               className={`${classes}`}
             />
-            <label className={`absolute ${iconClasses} ${disabled && 'hidden'}`}>
+            <label
+              className={`absolute ${iconClasses} ${disabled && "hidden"}`}
+            >
               <input
                 type="file"
                 className="hidden"
@@ -66,7 +67,7 @@ export const ProfileUpload = ({
             </label>
           </div>
         ) : (
-          <div className={`${classes } `}>
+          <div className={`${classes} cursor-pointer`}>
             {/* <Image src={profile} alt="profile" /> */}
             <label className={`absolute ${iconClasses}`}>
               <input
@@ -74,13 +75,8 @@ export const ProfileUpload = ({
                 className="hidden"
                 onChange={handleFileSelected}
                 disabled={disabled}
-
               />
-              <Image
-                src={edit_circle}
-                alt="editIcon"
-                className="cursor-pointer"
-              />
+              <Image src={edit_circle} alt="editIcon" />
             </label>
           </div>
         )}
@@ -92,7 +88,6 @@ export const ProfileUpload = ({
         className="hidden"
         onChange={handleFileSelected}
         disabled={disabled}
-
       />
     </label>
   );

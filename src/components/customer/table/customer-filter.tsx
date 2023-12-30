@@ -1,6 +1,5 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { FilterType, FiltersComponentProps } from "@/types";
 import React, { useRef } from "react";
 import plusIcon from "@/assets/svgs/plus_icon.svg";

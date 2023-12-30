@@ -5,6 +5,7 @@ import DetailsData from "../DetailsData";
 
 import CustomerDetailsData from "./customer-details-data";
 import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const CustomerDetails = () => {
   const {
@@ -13,10 +14,9 @@ const CustomerDetails = () => {
     handleAreYouSure,
     handlePreviousClick,
     renderModal,
-    handleStatusChange
+    handleStatusChange,
+    loading,
   } = useCustomerDetailAdmin();
-
- 
 
   return (
     <>
@@ -30,8 +30,12 @@ const CustomerDetails = () => {
             handleStatusChange={handleStatusChange}
           />
         </DetailsCard>
-        <div className="flex mt-8">
-          <CustomerDetailsData customerDetail={companyDetails} />
+        <div className="mt-8">
+          {loading ? (
+            <LoadingState />
+          ) : (
+            <CustomerDetailsData customerDetail={companyDetails} />
+          )}
         </div>
       </Layout>
       {renderModal()}

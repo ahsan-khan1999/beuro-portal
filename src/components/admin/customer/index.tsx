@@ -6,11 +6,25 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/admin/customer/useCustomer";
-
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Customers() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, handleFilterChange, loading, setFilter } =
-    useCustomer();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    handleFilterChange,
+    loading,
+    setFilter,
+  } = useCustomer();
+
+  const CurrentComponent = useEmptyStates(
+    <TableRow currentPageRows={currentPageRows} />,
+    currentPageRows.length > 0,
+    loading
+  );
 
   return (
     <Layout>
@@ -21,13 +35,16 @@ export default function Customers() {
       />
       <TableLayout>
         <TableHeading />
-        <TableRow currentPageRows={currentPageRows} />
+        {CurrentComponent}
       </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
+
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </Layout>
   );
 }

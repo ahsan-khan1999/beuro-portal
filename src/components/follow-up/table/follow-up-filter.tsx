@@ -4,7 +4,15 @@ import useFilter from "@/hooks/filter/hook";
 import { FilterType } from "@/types";
 import React, { SetStateAction } from "react";
 
-export default function FollowUpFilter({ filter, setFilter, handleFilterChange }: { filter: FilterType, setFilter: SetStateAction<any>, handleFilterChange: () => void }) {
+export default function FollowUpFilter({
+  filter,
+  setFilter,
+  handleFilterChange,
+}: {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: () => void;
+}) {
   //@ts-expect-error
   const { handleFilterReset } = useFilter(filter, setFilter);
   return (
@@ -22,7 +30,6 @@ export default function FollowUpFilter({ filter, setFilter, handleFilterChange }
         onClick={handleFilterChange}
         className="!h-[36px]  px-5 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
       />
-
     </div>
   );
 }
