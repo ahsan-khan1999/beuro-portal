@@ -108,7 +108,7 @@ export const SelectBox = ({
                 className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
               />
             </div>
-            {options.map(({ value, label }) => (
+            {option.map(({ value, label }) => (
               <li
                 key={value}
                 onClick={() => selectedOptionHandler(value)}
