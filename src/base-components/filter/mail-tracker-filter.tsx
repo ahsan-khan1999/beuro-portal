@@ -1,21 +1,25 @@
 import React, { SetStateAction, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps, MoreFilterType } from "@/types";
+import { CheckBoxType, FilterProps, FilterType, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";
 import CheckField from "./fields/check-field";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
+
+  const moreFilters: FilterType = {
+    email: FiltersDefaultValues.None,
+  };
   const {
     extraFilterss,
     handleExtraFilterToggle,
     handleExtraFiltersClose,
     handleFilterResetToInitial,
     handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
@@ -32,7 +36,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
     email: string[];
     price: string[];
   }>({
-    email: filter.email || [],
+    email: filter.email as string[] || [],
     price: filter.price || [],
   });
 
