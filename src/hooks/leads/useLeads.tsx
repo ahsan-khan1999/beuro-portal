@@ -68,7 +68,7 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(readLead({ params: { filter: query, page: 1, size: 10 } })).then(
+    dispatch(readLead({ params: { filter: query, page: currentPage, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
           setCurrentPageRows(res?.payload?.Lead);
@@ -151,7 +151,13 @@ const useLeads = () => {
 
   useEffect(() => {
     // Update rows for the current page
-    dispatch(readLead({ params: { filter: {} } })).then((response: any) => {
+    dispatch(readLead({
+      params: {
+        filter: filter,
+        page: currentPage,
+        size: 10,
+      }
+    })).then((response: any) => {
       if (response?.payload) {
         setCurrentPageRows(response?.payload?.Lead);
       }

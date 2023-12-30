@@ -33,7 +33,7 @@ const useService = () => {
 
   useEffect(() => {
     dispatch(
-      readService({ params: { filter: filter, page: 1, size: 10 } })
+      readService({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Service);
@@ -46,7 +46,7 @@ const useService = () => {
   };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readService({ params: { filter: query, page: 1, size: 10 } })
+      readService({ params: { filter: query, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Service);

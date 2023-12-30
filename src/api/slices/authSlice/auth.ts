@@ -32,6 +32,7 @@ const initialState: AuthState = {
   google: false,
   fb: false,
   apple: false,
+  dashboard: null
 };
 
 export const loginUser: AsyncThunk<boolean, object, object> | any =
@@ -246,7 +247,7 @@ export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
         router.query.otp
       );
-     
+
       saveUser(response.data.data.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       // conditionHandlerLogin(router, response);
@@ -501,6 +502,22 @@ export const logoutUser: AsyncThunk<boolean, NextRouter, object> | any = createA
     }
   }
 );
+
+
+export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "read/dashboard",
+    async (data, thunkApi) => {
+      try {
+        const response = await apiServices.readDashboard(data);
+
+        return response?.data?.data;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
+    }
+  );
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -693,7 +710,7 @@ const authSlice = createSlice({
     builder.addCase(changePassword.rejected, (state) => {
       state.loading = false;
     });
-    
+
     builder.addCase(forgotPassword.pending, (state) => {
       state.loading = true;
     });
@@ -710,6 +727,17 @@ const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(logoutUser.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readDashboard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readDashboard.fulfilled, (state, action) => {
+      if (action?.payload) state.dashboard = action?.payload
+      state.loading = false;
+    });
+    builder.addCase(readDashboard.rejected, (state) => {
       state.loading = false;
     });
   },
