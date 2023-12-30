@@ -25,7 +25,7 @@ const TableRows = ({
     updateQuery(router, router.locale as string);
   };
   return (
-    <div>
+    <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div

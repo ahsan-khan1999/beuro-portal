@@ -15,7 +15,7 @@ interface InvoiceState {
     collectiveInvoice: SubInvoiceTableRowTypes[],
     collectiveInvoiceDetails: SubInvoiceTableRowTypes,
     collectiveReciept: SubInvoiceTableRowTypes[],
-
+    invoiceInfo: { subject: string, description: string }
 
 }
 
@@ -30,7 +30,11 @@ const initialState: InvoiceState = {
     collectiveInvoice: [],
     //@ts-expect-error
     collectiveInvoiceDetails: DEFAULT_INVOICE,
-    collectiveReciept: []
+    collectiveReciept: [],
+    invoiceInfo: {
+        subject: "",
+        description: ""
+    }
 
 }
 
@@ -271,6 +275,9 @@ const InvoiceSlice = createSlice({
         setInvoiceDetails: (state, action) => {
             state.invoiceDetails = action.payload;
         },
+        setInvoiceInfo: (state, action) => {
+            state.invoiceInfo = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readInvoice.pending, (state) => {
@@ -502,4 +509,4 @@ const InvoiceSlice = createSlice({
 })
 
 export default InvoiceSlice.reducer;
-export const { setErrorMessage, setInvoiceDetails } = InvoiceSlice.actions
+export const { setErrorMessage, setInvoiceDetails,setInvoiceInfo } = InvoiceSlice.actions

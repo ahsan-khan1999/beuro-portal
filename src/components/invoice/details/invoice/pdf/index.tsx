@@ -3,6 +3,7 @@ import {
   readCollectiveInvoiceDetails,
   readInvoiceDetails,
   sendInvoiceEmail,
+  setInvoiceInfo,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
@@ -137,22 +138,37 @@ interface ActionType {
   payload: PdfSubInvoiceTypes;
   type: string;
 }
-
+interface EmailData {
+  subject: string;
+  description: string;
+  email: string;
+  pdf: string[]
+}
+let invoiceInfoObj = {
+  subject: "",
+  description: ""
+}
 const DetailsPdfPriview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
+  // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>(DUMMY_DATA);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
   const [email, setEmail] = useState<
-    ContentTableRowTypes["invoiceContent"] & { email: string }
-  >();
+    EmailData
+  >({
+    description: "",
+    email: "",
+    pdf: [""],
+    subject: ""
+  });
 
   const {
     auth: { user },
     global: { modal },
-    invoice: { error, loading },
+    invoice: { error, loading, invoiceInfo },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
@@ -210,7 +226,7 @@ const DetailsPdfPriview = () => {
               movingDetails: {
                 address:
                   invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.addressID?.address,
-                header: invoiceDetails?.invoiceID?.contractID?.offerID?.title,
+                header: invoiceDetails?.title as string,
                 workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
                 handleTitleUpdate: handleTitleUpdate,
                 handleDescriptionUpdate: handleDescriptionUpdate
@@ -248,18 +264,10 @@ const DetailsPdfPriview = () => {
                   },
                 },
                 thirdColumn: {
-                  row1: "row 1",
-                  row2: "row 2",
-                  row3: "row 3",
-                  row4: "row 4",
-                  row5: "row 5",
+
                 },
                 fourthColumn: {
-                  row1: "row 1",
-                  row2: "row 2",
-                  row3: "row 3",
-                  row4: "row 4",
-                  row5: "row 5",
+
                 },
                 columnSettings: null,
                 currPage: 1,
@@ -311,9 +319,12 @@ const DetailsPdfPriview = () => {
             setNewPageData(distributeItems());
             setInvoiceData(formatData);
             setEmail({
-              ...invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent,
-              email: invoiceDetails?.invoiceID.contractID?.offerID?.createdBy?.email,
+              subject: invoiceDetails?.title as string,
+              description: invoiceDetails?.additionalDetails as string,
+              email: invoiceDetails?.invoiceID.contractID?.offerID?.leadID?.customerDetail?.email,
+              pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments
             });
+            invoiceInfoObj = { ...invoiceInfoObj, subject: invoiceDetails?.title as string, description: invoiceDetails?.additionalDetails as string }
           }
         }
       );
@@ -370,10 +381,11 @@ const DetailsPdfPriview = () => {
       const data = {
         id: invoiceID,
         email: email.email,
-        subject: email.title,
-        description: email.description,
-        pdf: email.attachments,
+        subject: invoiceInfoObj?.subject,
+        description: invoiceInfoObj?.description,
+        pdf: email?.pdf
       };
+
       const res = await dispatch(sendInvoiceEmail({ data }));
       if (res?.payload)
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
@@ -416,7 +428,10 @@ const DetailsPdfPriview = () => {
       title: value,
     }
     const response = await dispatch(updateInvoiceContent({ data: apiData }))
-    if (response?.payload) return true
+    if (response?.payload) {
+      invoiceInfoObj = { ...invoiceInfoObj, subject: value }
+      return true
+    }
     else return false
   }
   const handleDescriptionUpdate = async (value: string) => {
@@ -426,7 +441,10 @@ const DetailsPdfPriview = () => {
     }
 
     const response = await dispatch(updateInvoiceContent({ data: apiData }))
-    if (response?.payload) return true
+    if (response?.payload) {
+      invoiceInfoObj = { ...invoiceInfoObj, description: value }
+      return true
+    }
     else return false
   }
   const handleSendByPost = () => {
