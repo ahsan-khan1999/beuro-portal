@@ -16,7 +16,8 @@ export const Aggrement = ({
   currPage,
   isOffer,
   handleDescriptionUpdate,
-  signature
+  signature,
+  isCanvas
 }: AggrementProps) => {
   return (
     <div>
@@ -24,7 +25,7 @@ export const Aggrement = ({
       <div className="px-[80px] flex flex-col bg-white pb-[50px]">
         <ContactDetails {...contactAddress} />
         {!isOffer && <hr className="mb-9" />}
-        <AggrementTerms aggrementDetails={aggrementDetails} isOffer={isOffer} handleDescriptionUpdate={handleDescriptionUpdate}/>
+        <AggrementTerms aggrementDetails={aggrementDetails} isOffer={isOffer} handleDescriptionUpdate={handleDescriptionUpdate} />
         {isOffer && (
           <div className="flex justify-between items-center gap-x-[103px] mt-4">
             <div>
@@ -51,13 +52,16 @@ export const Aggrement = ({
               </div>
             </div>
             <div className="w-[450px] h-[278px] flex flex-col justify-end mt-5">
-              <SignaturePad signature={signature}/>
-              <div className="flex flex-col gap-y-[18px]">
-                <hr />
-                <span className="text-base text-black font-normal">
-                  Signature
-                </span>
-              </div>
+              {
+                isCanvas &&
+                <SignaturePad signature={signature} isCanvas={isCanvas} /> ||
+                <div className="flex flex-col gap-y-[18px]">
+                  <hr />
+                  <span className="text-base text-black font-normal">
+                    Signature
+                  </span>
+                </div>
+              }
             </div>
           </div>
         )}

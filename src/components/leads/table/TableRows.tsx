@@ -19,7 +19,6 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item: Lead, index: number) => {
-        console.log(item.leadStatus);
 
         return (
           <div

@@ -130,6 +130,7 @@ export const SignPdf = <T,>({
                     isOffer={pdfData.isOffer}
                     handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
                     signature={pdfData?.signature}
+                    isCanvas={true}
                 />
                 {isQr && (
                     <PaymentQRCodeDetails

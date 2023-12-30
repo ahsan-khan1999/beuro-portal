@@ -39,7 +39,6 @@ export const useContractEmail = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  console.log(contractDetails);
 
   useEffect(() => {
     reset({
@@ -73,7 +72,6 @@ export const useContractEmail = (
     contractDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data,"Data");
     
     const updatedData = {
       ...data,

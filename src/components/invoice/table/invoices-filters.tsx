@@ -19,7 +19,7 @@ export default function InvoicesFilters({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const checkbox: CheckBoxType[] = [
-    { label: "Open", type: `${staticEnums.InvoiceStatus.Pending}` },
+    { label: "Pending", type: `${staticEnums.InvoiceStatus.Pending}` },
     { label: "Overdue", type: `${staticEnums.InvoiceStatus.Overdue}` },
     { label: "Paid", type: `${staticEnums.InvoiceStatus.Paid}` },
   ];

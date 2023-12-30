@@ -11,7 +11,7 @@ const ow = 383;
 const oh = 153;
 const originalStrokeWidth = 1;
 
-export const SignaturePad = ({ signature }: { signature?: string }) => {
+export const SignaturePad = ({ signature, isCanvas }: { signature?: string, isCanvas?: boolean }) => {
   const dispatch = useAppDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
@@ -58,17 +58,21 @@ export const SignaturePad = ({ signature }: { signature?: string }) => {
 
   const handleSave = async () => {
     if (signaturePad) {
-      const formdata = new FormData();
+      const canvasData = signaturePad.toData();
+      if (canvasData?.length > 0) {
 
-      const dataUrl = signaturePad.toDataURL("image/png");
-      fetch(dataUrl).then((res) => res.blob()).then(async (blob) => {
-        formdata.append("file", blob as any)
-        const res = await dispatch(uploadFileToFirebase(formdata));
-        if (res?.payload) {
-          localStoreUtil.store_data("signature", res?.payload)
-          setIsSubmitted(true);
-        }
-      })
+        const formdata = new FormData();
+
+        const dataUrl = signaturePad.toDataURL("image/png");
+        fetch(dataUrl).then((res) => res.blob()).then(async (blob) => {
+          formdata.append("file", blob as any)
+          const res = await dispatch(uploadFileToFirebase(formdata));
+          if (res?.payload) {
+            localStoreUtil.store_data("signature", res?.payload)
+            setIsSubmitted(true);
+          }
+        })
+      }
 
 
       // Post to backend
@@ -116,7 +120,7 @@ export const SignaturePad = ({ signature }: { signature?: string }) => {
     </> ||
     <div className="select-none mb-4">
       <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
-        {signature && <Image src={signature} alt="signature" height={177} width={446}/>}
+        {signature && <Image src={signature} alt="signature" height={177} width={446} />}
       </div>
     </div>
   );

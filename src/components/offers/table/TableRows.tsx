@@ -25,7 +25,6 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index) => {
-        console.log(item.emailStatus);
 
         return (
           <div

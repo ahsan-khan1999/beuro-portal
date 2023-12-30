@@ -443,7 +443,6 @@ const updateInvoiceContent = (data) =>
 const acceptOffer = (data) =>
   put(SERVICE_URLS.acceptOffer + `${data?.id}`, data, { feature: featureConstants.login });
 const readOfferActivity = (params) => {
-  console.log(params, "paar");
   return get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: true });
 }
 const readAllOfferActivity = (params) =>

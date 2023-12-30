@@ -21,7 +21,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const handleAddAddressField = () => {
-    console.log();
     
   }
   const schema = generateOfferEditContentDetailsValidation(translate);

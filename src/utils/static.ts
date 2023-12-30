@@ -1231,21 +1231,21 @@ export const sideBar: SideBar[] = [
       {
         title: "Open",
         pathname: "/leads",
-        query: "open",
+        query: "Open",
 
         role: [1, 2],
       },
       {
         title: "Close",
         pathname: "/leads",
-        query: "close",
+        query: "Close",
 
         role: [1, 2],
       },
       {
         title: "Expire",
         pathname: "/leads",
-        query: "expire",
+        query: "Expire",
 
         role: [1, 2],
       },
@@ -1261,27 +1261,27 @@ export const sideBar: SideBar[] = [
       {
         title: "Open",
         pathname: "/offers",
-        query: "open",
+        query: "Open",
 
         role: [1, 2],
       },
       {
         title: "Signed",
         pathname: "/offers",
-        query: "signed",
+        query: "Signed",
 
         role: [1, 2],
       },
       {
         title: "Expired",
         pathname: "/offers",
-        query: "expire",
+        query: "Expired",
 
         role: [1, 2],
       },
       {
         title: "Rejected",
-        query: "rejected",
+        query: "Rejected",
 
         pathname: "/offers",
 
@@ -1298,19 +1298,19 @@ export const sideBar: SideBar[] = [
     inner: [
       {
         title: "Open",
-        query: "open",
+        query: "Open",
         pathname: "/contract",
         role: [1, 2],
       },
       {
         title: "Confirmed",
-        query: "confirmed",
+        query: "Confirmed",
         pathname: "/contract",
         role: [1, 2],
       },
       {
         title: "Cancelled",
-        query: "cancelled",
+        query: "Cancelled",
         pathname: "/contract",
         role: [1, 2],
       },
@@ -1324,20 +1324,20 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "Open",
-        query: "open",
+        title: "Pending",
+        query: "Pending",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
         title: "Overdue",
-        query: "overdue",
+        query: "Overdue",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
         title: "Paid",
-        query: "paid",
+        query: "Paid",
         pathname: "/invoices",
         role: [1, 2],
       },

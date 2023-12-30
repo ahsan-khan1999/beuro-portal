@@ -20,7 +20,7 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-
+    
   const checkbox: CheckBoxType[] = [
     {
       label: translate("offers.table_functions.open"),

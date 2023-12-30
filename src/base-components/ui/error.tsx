@@ -6,8 +6,7 @@ export default function Error({ error }: any) {
 
     const { t: translate } = useTranslation(["common"])
     return (
-        <div className={`mt-4  text-red ${error && 'flex justify-between border-[1px] border-red rounded-lg p-2'}`}>
-            {/* <Image src={error} alt='error' height={50} width={50} /> */}
+        <div className={`mt-4  text-red ${error && ' flex  justify-between border-[1px] border-red rounded-lg p-2'}`}>
             {setErrorMessage(error, translate)}
         </div>
     )

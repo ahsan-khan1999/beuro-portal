@@ -18,6 +18,7 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { staticEnums } from "@/utils/static";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -45,12 +46,7 @@ const useContract = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  // useMemo(() => {
-  //   setFilter({
-  //     ...filter,
-  //     status: query?.filter as string,
-  //   });
-  // }, [query?.filter]);
+
   const handleFilterChange = (filter: FilterType) => {
     dispatch(readContract({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
       if (res?.payload) {
@@ -136,14 +132,28 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Contract);
-      }
-    });
-  }, [currentPage]);
+
+
+    if (query?.filter) {
+      const statusValue = staticEnums["ContractStatus"][query?.filter as string];
+      setFilter({
+        ...filter,
+        status: [statusValue?.toString()]
+      });
+      dispatch(readContract({ params: { filter: { ...filter, status: [staticEnums["ContractStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+        }
+      );
+    } else {
+      dispatch(readContract({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+        }
+      );
+    }
+
+  }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

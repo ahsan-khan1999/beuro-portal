@@ -156,7 +156,6 @@ const SignPdfPreview = () => {
             dispatch(readOfferDetails({ params: { filter: offerID } })).then(
                 (response: ActionType) => {
                     if (response?.payload) {
-                        console.log(response.payload);
                         const offerDetails: OffersTableRowTypes = response?.payload;
                         let formatData: PdfProps = {
                             signature: offerDetails?.signature,

@@ -28,12 +28,15 @@ export const SelectBox = ({
   const [option, setOption] = useState(options);
 
   useEffect(() => {
-    setOption(options);
+    // setOption(options);
     if (defaultValue) {
       field?.onChange(defaultValue);
     }
   }, [defaultValue]);
-
+  useEffect(() => {
+    setOption(options);
+  }, [options])
+  
   const search = useRef<string>("");
 
   const toggleDropDown = () => {
@@ -52,7 +55,7 @@ export const SelectBox = ({
     search.current = value;
     setOption(
       options.filter((item) =>
-        item.value?.toLowerCase()?.includes(value?.toLowerCase())
+        item.label?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
   };
@@ -71,8 +74,8 @@ export const SelectBox = ({
         }}
         className={`${classes} `}
       >
-        {(field && getLabelByValue(field.value, options)) ||
-          getLabelByValue(defaultValue, options)}
+        {(field && getLabelByValue(field.value, option)) ||
+          getLabelByValue(defaultValue, option)}
 
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
