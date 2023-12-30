@@ -148,8 +148,60 @@ export interface AuthState {
   [AuthenticationState.google]: boolean | null;
   [AuthenticationState.fb]: boolean | null;
   [AuthenticationState.apple]: boolean | null;
+  dashboard: Dashboard | null
 }
+export interface Dashboard {
+  Lead: Lead;
+  Offer: Offer;
+  Contract: Contract;
+  Sales: Invoice;
+  LeadSource: LeadSource[]
 
+}
+interface Lead {
+  _id: string;
+  totalLeads: number;
+  filterCount: number;
+  percentage: number;
+  opened: number;
+  closed: number;
+  expired: number;
+
+
+}
+interface Offer {
+  _id: string;
+  totalOffers: number;
+  filterCount: number;
+  percentage: number;
+  opened: number;
+  signed: number;
+  expired: number;
+  rejected: number
+}
+interface Contract {
+  _id: string;
+  totalContract: number;
+  filterCount: number;
+  percentage: number;
+  opened: number;
+  confirmed: number;
+  cancelled: number;
+}
+interface Invoice {
+  _id: string;
+  totalSales: number;
+  filterCount: number;
+  percentage: number;
+  pending: number;
+  overdue: number;
+  paid: number;
+}
+interface LeadSource {
+  _id: string;
+  totalLeadSource: number;
+  filterCount: number
+}
 export interface RemoveOAuth {
   router: NextRouter;
   translate: Function;

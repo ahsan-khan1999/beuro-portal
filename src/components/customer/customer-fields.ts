@@ -24,7 +24,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
           { containerClass:"mb-0",
             label: {
               text: `${translate("customers.details.customer_type")}`,
-              htmlFor: "select",
+              htmlFor: "customerType",
               className: "mb-[10px] ",
             },
             field: {
@@ -126,7 +126,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       containerClass:"my-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
-        htmlFor: "name",
+        htmlFor: "div",
         className: "mb-[10px] text-[#8F8F8F]",
       },
 
@@ -262,8 +262,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         disabled: isUpdate,
-        value: customerDetails && customerDetails?.companyName,
-        setValue: setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)

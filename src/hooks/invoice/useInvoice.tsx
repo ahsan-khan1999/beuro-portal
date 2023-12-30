@@ -47,7 +47,7 @@ const useInvoice = () => {
   // }, [query?.filter]);
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readInvoice({ params: { filter: query, page: 1, size: 10 } })
+      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
     });
@@ -99,7 +99,7 @@ const useInvoice = () => {
 
   useEffect(() => {
     dispatch(
-      readInvoice({ params: { filter: filter, page: 1, size: 10 } })
+      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       setCurrentPageRows(res?.payload?.Invoice);
     });

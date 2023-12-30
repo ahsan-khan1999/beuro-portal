@@ -71,7 +71,7 @@ const useOffers = () => {
     // });
   }, []);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(readOffer({ params: { filter: query, page: 1, size: 10 } })).then(
+    dispatch(readOffer({ params: { filter: query, page: currentPage, size: 10 } })).then(
       (res: any) => {
         if (res?.payload) {
           setCurrentPageRows(res?.payload?.Offer);
@@ -159,7 +159,7 @@ const useOffers = () => {
     // const queryParams = areFiltersEmpty(filter)
     //   ? { filter: {}, page: 1, size: 10 }
     //   : { filter: filter, page: 1, size: 10 };
-    dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then(
+    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then(
       (response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       }

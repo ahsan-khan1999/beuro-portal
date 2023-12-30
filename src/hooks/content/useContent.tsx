@@ -38,12 +38,11 @@ const useContent = () => {
   }, []);
   useEffect(() => {
     dispatch(
-      readContent({ params: { filter: filter, page: 1, size: 10 } })
+      readContent({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(
-          res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
+          res?.payload?.Content
         );
       }
     });
@@ -54,12 +53,11 @@ const useContent = () => {
   };
   const handleFilterChange = (filter: FilterType) => {
     dispatch(
-      readContent({ params: { filter: filter, page: 1, size: 10 } })
+      readContent({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(
-          res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
+          res?.payload?.Content
         );
       }
     });

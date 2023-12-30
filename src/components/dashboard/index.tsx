@@ -13,30 +13,43 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import MainCalender from "./calendar";
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readDashboard } from "@/api/slices/authSlice/auth";
+import { FilterType } from "@/types";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const { dashboard } = useAppSelector(state => state.auth)
+  const [filter, setFilter] = useState<FilterType>({
+    month: 1,
+  });
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(readDashboard(filter))
+  }, [])
+
   const dashboardCards = [
     {
       icon: leadsIcon,
       alt: "leads icon",
       title: `${translate("dashboard_detail.cards_title.lead")}`,
-      subTitle: "2378 Leads",
-      id: "202504 ",
-      salePercent: "+4.5%",
+      subTitle: dashboard?.Lead?.totalLeads + " Leads",
+      id: dashboard?.Lead?.filterCount,
+      salePercent: dashboard?.Lead?.percentage + "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: "2782 Open",
-      closed: "2782 Close",
-      expired: "2782 Expired",
+      open: dashboard?.Lead?.opened + " Open",
+      closed: dashboard?.Lead?.closed + " Close",
+      expired: dashboard?.Lead?.expired + " Expired",
       route: () => router.push("/leads"),
     },
     {
       icon: offersIcon,
       alt: "offers icon",
       title: `${translate("dashboard_detail.cards_title.offer")}`,
-      subTitle: "2378 Offers",
+      subTitle: dashboard?.Offer?.totalOffers+ "Offers",
       id: "202326 ",
       salePercent: "-4.5%",
       backgroundColor: "bg-dashboardCard2-gradient",
@@ -100,12 +113,7 @@ const AdminDashboard = () => {
     ],
   };
 
-  const [filter, setFilter] = useState({
-    text: "",
-    sortBy: "",
-    type: "None",
-    location: "",
-  });
+
 
   return (
     <>
@@ -134,7 +142,7 @@ const AdminDashboard = () => {
               backgroundColor={item.backgroundColor}
               title={item.title}
               subTitle={item.subTitle}
-              id={item.id}
+              id={item?.id?.toString() as string}
               salePercent={item.salePercent}
               chartPointColor={item.chartPointColor}
               open={item.open}

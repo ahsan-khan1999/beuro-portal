@@ -93,7 +93,8 @@ const SERVICE_URLS = {
   contractContent: "/contract/",
   invoiceContent: "/invoice/invoice-collection/update-content/",
   acceptOffer: "/offer/add-signature/",
-  offerActivity: "/offer/activity/"
+  offerActivity: "/offer/activity/",
+  dashbaord: "/dashboard/company"
 
 };
 
@@ -446,6 +447,8 @@ const readOfferActivity = (params) => {
 }
 const readAllOfferActivity = (params) =>
   get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: false });
+const readDashboard = (params) =>
+  get(SERVICE_URLS.dashbaord, params, { feature: featureConstants.login }, { detail: false });
 const apiServices = {
 
   login,
@@ -586,6 +589,7 @@ const apiServices = {
   updateContractContent,
   updateInvoiceContent,
   acceptOffer,
-  readAllOfferActivity, readOfferActivity
+  readAllOfferActivity, readOfferActivity,
+  readDashboard
 };
 export default apiServices;

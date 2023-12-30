@@ -422,7 +422,7 @@ export type GenerateOfferServiceFormField = (
   handleRemoveAddress: UseFieldArrayRemove,
   fields?: object[],
   setValue?: SetFieldValue<FieldValues>,
-  watch?:UseFormWatch<FieldValues>
+  watch?: UseFormWatch<FieldValues>
 ) => FormField[];
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
@@ -575,6 +575,7 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
+  month?: number
 }
 
 export interface MoreFilterType {
@@ -614,7 +615,7 @@ export interface DocumentHeaderDetailsProps {
   offerNo: string;
   offerDate: string;
   createdBy: string;
-  logo:string
+  logo: string
 }
 
 export interface ProductItemFooterProps {
@@ -765,7 +766,7 @@ export interface InvoiceEmailHeaderProps {
   onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
-  title:string
+  title: string
 }
 
 export interface ContractEmailHeaderProps {
@@ -778,7 +779,7 @@ export interface ContractEmailHeaderProps {
   onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
-  
+
 }
 
 export interface PdfProps<T = EmailHeaderProps> {
@@ -793,8 +794,8 @@ export interface PdfProps<T = EmailHeaderProps> {
   aggrementDetails: string;
   isOffer?: boolean;
   id?: string;
-  signature?:string;
-  attachement?:string
+  signature?: string;
+  attachement?: string
 
 }
 
@@ -857,7 +858,7 @@ export interface AggrementProps {
   currPage: number;
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
-  signature?:string
+  signature?: string
 }
 
 export interface FiltersComponentProps {
