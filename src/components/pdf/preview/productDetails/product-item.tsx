@@ -12,7 +12,7 @@ export const ProductItem = ({
     <div className="flex justify-between items-center">
       <div className="flex flex-col gap-[4px] max-w-[466px]">
         <span className="text-base font-normal text-[#000]">{serviceTitle}</span>
-        <span className="text-[#404040] text-[14px] font-normal">
+        <span className="text-[#404040] text-[14px] font-normal break-all">
           {description}
         </span>
       </div>

@@ -6,6 +6,7 @@ import useFollowUps from "@/hooks/follow-up/useFollowUp";
 import TableRows from "./table/TableRows";
 import TableFunctions from "./table/TableFunctions";
 import { FollowUpsTableProps } from "@/types/follow-up";
+import { useEmptyStates } from "@/utils/hooks";
 
 const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
   const {
@@ -18,7 +19,18 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
     handleDeleteFollowUp,
     renderModal,
     handleFilterChange,
+    loading,
   } = useFollowUps();
+
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+      currentPageRows={currentPageRows}
+      handleFollowUpsDetails={handleFollowUpsDetails}
+      handleFollowUpsDelete={handleDeleteFollowUp}
+    />,
+    currentPageRows.length > 0,
+    loading
+  );
 
   return (
     <>
@@ -29,17 +41,15 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
       />
       <TableLayout>
         <TableHeading />
-        <TableRows
-          currentPageRows={currentPageRows}
-          handleFollowUpsDetails={handleFollowUpsDetails}
-          handleFollowUpsDelete={handleDeleteFollowUp}
-        />
+        {CurrentComponent}
       </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
       {renderModal()}
     </>
   );

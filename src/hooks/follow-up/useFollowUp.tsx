@@ -89,6 +89,7 @@ const useFollowUps = () => {
     handleDeleteFollowUp,
     renderModal,
     handleFilterChange,
+    loading
   };
 };
 
