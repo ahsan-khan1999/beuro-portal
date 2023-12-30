@@ -32,7 +32,8 @@ const initialState: AuthState = {
   google: false,
   fb: false,
   apple: false,
-  dashboard: null
+  dashboard: null,
+  adminDashboard: null
 };
 
 export const loginUser: AsyncThunk<boolean, object, object> | any =
@@ -520,6 +521,23 @@ export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
       }
     }
   );
+
+export const readAdminDashboard: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "read/dashboard/admin",
+    async (data, thunkApi) => {
+      const { params, router, setError, translate } = data as any;
+
+      try {
+        const response = await apiServices.readAdminDashboard(params);
+
+        return response?.data?.data;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
+    }
+  );
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -740,6 +758,17 @@ const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(readDashboard.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readAdminDashboard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readAdminDashboard.fulfilled, (state, action) => {
+      if (action?.payload) state.adminDashboard = action?.payload
+      state.loading = false;
+    });
+    builder.addCase(readAdminDashboard.rejected, (state) => {
       state.loading = false;
     });
   },

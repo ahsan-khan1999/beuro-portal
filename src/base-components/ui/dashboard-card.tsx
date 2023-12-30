@@ -40,7 +40,7 @@ const DashboardCard = ({
       existingChart.destroy();
     }
     //@ts-expect-error
-    const ctx = document.getElementById(id).getContext("2d");
+    const ctx = document?.getElementById(id)?.getContext("2d");
 
     const wavesChart2 = new Chart(ctx, {
       type: "line",

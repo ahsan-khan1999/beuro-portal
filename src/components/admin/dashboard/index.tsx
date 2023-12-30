@@ -1,5 +1,5 @@
 import { Layout } from "@/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
@@ -10,10 +10,43 @@ import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
 import customersIcon from "@/assets/svgs/customers-card.svg";
 import { useTranslation } from "next-i18next";
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
-
+import { Dashboard, FilterType } from "@/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readAdminDashboard, readDashboard } from "@/api/slices/authSlice/auth";
+interface ActionType {
+  type: string;
+  payload: Dashboard
+}
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
-
+  const dispatch = useAppDispatch()
+  const { adminDashboard } = useAppSelector(state => state.auth)
+  const [filter, setFilter] = useState<FilterType>({
+    month: 1,
+  });
+  const [pieData, setPieData] = useState({
+    datasets: [
+      {
+        data: [40, 10, 10, 10, 15, 15],
+        backgroundColor: [
+          "#FE9244",
+          "#FF376F",
+          "#4A13E7",
+          "#45C769",
+          "#7B18FF",
+          "#221177",
+        ],
+      },
+    ],
+    labels: [
+      `${translate("dashboard_detail.charts_labels.website")}`,
+      `${translate("dashboard_detail.charts_labels.google")}`,
+      `${translate("dashboard_detail.charts_labels.facebook")}`,
+      `${translate("dashboard_detail.charts_labels.insta")}`,
+      `${translate("dashboard_detail.charts_labels.pinterest")}`,
+      `${translate("dashboard_detail.charts_labels.whatsapp")}`,
+    ],
+  })
   const dashboardCards = [
     {
       icon: activeSubscribersIcon,
@@ -37,12 +70,21 @@ const AdminDashboard = () => {
       icon: customersIcon,
       alt: "customers icon",
       title: `${translate("admin.overview.customers")}`,
-      id: "202505 ",
+      id: adminDashboard?.Customer?.filterCustomers,
       salePercent: "+4.5%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
     },
   ];
+
+  useEffect(() => {
+    dispatch(readAdminDashboard({ params: { filter: filter } }))
+  }, [])
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(
+      readAdminDashboard({ params: { filter: { month: query?.month } } })
+    );
+  };
   // Sample data for the pie chart
   const data = {
     datasets: [
@@ -90,12 +132,7 @@ const AdminDashboard = () => {
       },
     ],
   };
-  const [filter, setFilter] = useState({
-    text: "",
-    sortBy: "",
-    type: "None",
-    location: "",
-  });
+
   return (
     <Layout>
       <div className="p-9 bg-gradient rounded-lg">
@@ -110,7 +147,7 @@ const AdminDashboard = () => {
         containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
         textClassName="ml-4 w-full  focus:outline-none pr-2 border-[#BFBFBF] py-0 rounded-none "
       />
-      <DashboardFunctions />
+      <DashboardFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
 
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
         {dashboardCards.map((item, index) => {

@@ -1,9 +1,10 @@
 import SelectField from "@/base-components/filter/fields/select-field";
 import { DashboardFiltersToggle } from "@/enums/dashboard";
+import { FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 
-export default function DashboardFilters() {
+export default function DashboardFilters({ filter, handleFilterChange, setFilter }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
 
   const [isOpen, setIsOpen] = useState({

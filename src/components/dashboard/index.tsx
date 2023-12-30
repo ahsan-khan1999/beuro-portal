@@ -141,7 +141,6 @@ const AdminDashboard = () => {
       readDashboard({ params: { filter: { month: query?.month } } })
     );
   };
-  console.log(pieData);
 
   return (
     <>

@@ -36,8 +36,10 @@ export default function ContractsFilter({
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
-        $gte: moreFilter.date && moreFilter.date.$gte,
-        $lte: moreFilter.date && moreFilter.date.$lte,
+        date: {
+          $gte: moreFilter.date && moreFilter.date.$gte,
+          $lte: moreFilter.date && moreFilter.date.$lte,
+        }
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -135,11 +137,11 @@ export default function ContractsFilter({
                     label2="To"
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
+                      FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
                       (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
+                      FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}
