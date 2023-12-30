@@ -1,30 +1,14 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  AddOfferDetailsServiceSubmitFormField,
-  AddOfferServiceDetailsDescriptionFormField,
-  AddOfferServiceDetailsFormField,
-} from "@/components/offers/add/fields/add-offer-service-details-fields";
-import {
-  generateAddfferServiceDetailsValidation,
-  generateOfferDiscountValidation,
-  mergeOfferSchemas,
-} from "@/validation/offersSchema";
+import { AddOfferDetailsServiceSubmitFormField, AddOfferServiceDetailsDescriptionFormField, AddOfferServiceDetailsFormField } from "@/components/offers/add/fields/add-offer-service-details-fields";
+import { generateAddfferServiceDetailsValidation, generateOfferDiscountValidation, mergeOfferSchemas } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
-import {
-  readService,
-  setServiceDetails,
-} from "@/api/slices/service/serviceSlice";
+import { readService, setServiceDetails } from "@/api/slices/service/serviceSlice";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { FormField } from "@/types";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
@@ -34,36 +18,33 @@ import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 
-export const useAddServiceDetails = (
-  onHandleNext: (currentComponent: ComponentsType) => void
-) => {
+export const useAddServiceDetails = (onHandleNext: (currentComponent: ComponentsType) => void) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
     grandTotal: 0,
-    taxAmount: 0,
-  });
+    taxAmount: 0
+  })
 
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
-  );
+  const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
   const { tax } = useAppSelector((state) => state.settings);
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readService({ params: { filter: { paginate: 0 } } }))
     dispatch(readTaxSettings({}));
-  }, []);
+
+  }, [])
 
   const handleBack = () => {
-    onHandleNext(ComponentsType.addressAdded);
-  };
+    onHandleNext(ComponentsType.addressAdded)
+  }
   const handleNext = () => {
-    onHandleNext(ComponentsType.additionalAdded);
-  };
+    onHandleNext(ComponentsType.additionalAdded)
+  }
   const schema = generateAddfferServiceDetailsValidation(translate);
   const {
     register,
@@ -78,9 +59,8 @@ export const useAddServiceDetails = (
     trigger,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+
   });
-  // const type = watch("type");
-  // console.log(type,"3434");
 
   const isTax = watch("isTax");
 
@@ -90,20 +70,19 @@ export const useAddServiceDetails = (
   const discountAmount = watch("discountAmount");
   const taxPercentage = watch("taxPercentage");
 
+
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
     const selectedService: Service[] = service.filter(
       (item) => item.serviceName === id
     );
-
+    
     if (selectedService?.length > 0) {
       dispatch(setServiceDetails(selectedService[0]));
       setValue(`serviceDetail.${index}.price`, selectedService[0].price);
       setValue(`serviceDetail.${index}.unit`, selectedService[0].unit);
-      setValue(
-        `serviceDetail.${index}.description`,
-        selectedService[0].description
-      );
+      setValue(`serviceDetail.${index}.description`, selectedService[0].description);
+
     }
   };
   const generateTotalPrice = (index: number) => {
@@ -124,12 +103,7 @@ export const useAddServiceDetails = (
         (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
         0
       ) || 0;
-    let taxAmount =
-      isTax && taxType === "0"
-        ? calculateTax(totalPrices, 7.7)
-        : isTax && taxType === "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+    let taxAmount = isTax && taxType === "0" ? calculateTax(totalPrices, 7.7) : isTax && taxType === "1" ? calculateTax(totalPrices, data?.taxPercentage || 0) : 0;
 
     let discount = 0;
 
@@ -180,90 +154,40 @@ export const useAddServiceDetails = (
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription,
         taxAmount: offerDetails?.taxAmount || 0,
-      });
+
+      })
     }
-    generateGrandTotal();
-  }, [offerDetails.id]);
-  const {
-    fields: serviceFields,
-    append,
-    remove,
-  } = useFieldArray({
+    generateGrandTotal()
+  }, [offerDetails.id])
+  const { fields: serviceFields, append, remove } = useFieldArray({
     control,
     name: "serviceDetail",
+
   });
 
-  const fields = AddOfferServiceDetailsFormField(
-    register,
-    loading,
-    control,
-    () => console.log(),
-    serviceFields?.length === 0 ? 1 : serviceFields?.length,
-    {
-      service: service,
-      onCustomerSelect: onServiceSelect,
-      serviceDetails: serviceDetails,
-      generatePrice: generateTotalPrice,
-      offerDetails,
-    },
-    append,
-    remove,
-    serviceFields,
-    setValue,
-    watch
-  );
+  const fields = AddOfferServiceDetailsFormField(register, loading, control, () => console.log(), serviceFields?.length === 0 ? 1 : serviceFields?.length, { service: service, onCustomerSelect: onServiceSelect, serviceDetails: serviceDetails, generatePrice: generateTotalPrice, offerDetails }, append, remove, serviceFields, setValue,watch);
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
-    register,
-    loading,
-    control,
-    () => console.log(),
-    serviceFields?.length,
-    {
-      service: service,
-      total: total,
-      generateTotal: generateGrandTotal,
-      isTax,
-      isDiscount,
-      offerDetails: offerDetails,
-      taxType: taxType,
-      discountType,
-      tax: tax,
-    },
-    append,
-    remove,
-    serviceFields,
-    setValue
-  );
-  const submitFields = AddOfferDetailsServiceSubmitFormField(
-    loading,
-    handleBack
-  );
+  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(register, loading, control, () => console.log(), serviceFields?.length, { service: service, total: total, generateTotal: generateGrandTotal, isTax, isDiscount, offerDetails: offerDetails, taxType: taxType, discountType, tax: tax }, append, remove, serviceFields, setValue);
+  const submitFields = AddOfferDetailsServiceSubmitFormField(loading, handleBack)
+
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData: typeof data = {
-      ...data,
-      step: 3,
-      id: offerDetails?.id,
-      stage: ComponentsType.additionalAdded,
-      taxAmount: total?.taxAmount,
-      taxType: Number(data?.taxType),
-      discountType: Number(data?.discountType),
-    };
+    const apiData: typeof data = { ...data, step: 3, id: offerDetails?.id, stage: ComponentsType.additionalAdded, taxAmount: total?.taxAmount, taxType: Number(data?.taxType), discountType: Number(data?.discountType) }
     if (!apiData?.isDiscount) {
-      delete apiData["discountAmount"];
-      delete apiData["discountType"];
+      delete apiData["discountAmount"]
+      delete apiData["discountType"]
       delete apiData["discountDescription"];
+
+
     }
     if (!apiData?.isTax) {
-      delete apiData["taxAmount"];
-      delete apiData["taxType"];
+      delete apiData["taxAmount"]
+      delete apiData["taxType"]
     }
 
-    const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
-    );
-    if (response?.payload) handleNext();
+    const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+    if (response?.payload) handleNext()
+
   };
 
   return {
@@ -273,6 +197,6 @@ export const useAddServiceDetails = (
     handleSubmit,
     errors,
     error,
-    translate,
+    translate
   };
 };

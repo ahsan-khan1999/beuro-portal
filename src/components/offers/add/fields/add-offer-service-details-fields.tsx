@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import {
-  DivProps,
   FormField,
   GenerateOfferServiceFormField,
   GenerateOffersFormField,
@@ -42,7 +41,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
 ) => {
   const {
     service,
-
     onCustomerSelect,
     serviceDetails,
     generatePrice,
@@ -68,7 +66,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               containerClass: "mb-0 col-span-1",
               label: {
                 text: "Service Type",
-                htmlFor: "type",
+                htmlFor: `serviceDetail.${i}.serviceType`,
                 className: "mb-[10px]",
               },
               field: {
@@ -82,10 +80,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       type: Field.radio,
                       value: "New Service",
                       label: "New Service",
-                      id: "type",
-                      name: "type",
+                      id: `serviceDetail.${i}.serviceType`,
+                      name: `serviceDetail.${i}.serviceType`,
                       register,
-                     
                     },
                   },
                   {
@@ -94,10 +91,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       type: Field.radio,
                       value: "Existing Service",
                       label: "Existing Service",
-                      id: "type",
-                      name: "type",
+                      id: `serviceDetail.${i}.serviceType`,
+                      name: `serviceDetail.${i}.serviceType`,
                       register,
-                    
                     },
                   },
                 ],
@@ -278,7 +274,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
       }
     );
   }
-
   return formField;
 };
 
