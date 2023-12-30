@@ -35,7 +35,6 @@ export default function Payments() {
   const handleDownload = (date: GetYearAndMonth) => {
     dispatch(updateModalType({type: ModalType.NONE}));
     dispatch(updateModalType({type: ModalType.DOWNLOAD_MODAL}));
-    console.log(date)
   };
 
   const route = () => {

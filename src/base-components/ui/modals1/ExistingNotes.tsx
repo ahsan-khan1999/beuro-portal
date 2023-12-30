@@ -30,7 +30,6 @@ const ExistingNotes = ({
   const { notes } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
 
-  console.log(notes);
 
   return (
     <BaseModal

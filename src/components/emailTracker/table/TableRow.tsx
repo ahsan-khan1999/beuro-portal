@@ -9,7 +9,6 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
-        console.log(item.refID);
 
         return (
           <div

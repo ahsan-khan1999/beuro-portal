@@ -208,11 +208,7 @@ const PdfPriview = () => {
                 },
                 thirdColumn: {},
                 fourthColumn: {
-                  row1: "row 1",
-                  row2: "row 2",
-                  row3: "row 3",
-                  row4: "row 4",
-                  row5: "row 5",
+                 
                 },
                 columnSettings: null,
                 currPage: 1,
@@ -358,7 +354,6 @@ const PdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  console.log(offerData);
   return (
     <>
       <EmailCard

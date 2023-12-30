@@ -394,7 +394,6 @@ const PdfPriview = () => {
       id: offerID,
       additionalDetails: value
     }
-    console.log(offerData, "data");
 
     const response = await dispatch(updateContractContent({ data: apiData }))
     if (response?.payload) {

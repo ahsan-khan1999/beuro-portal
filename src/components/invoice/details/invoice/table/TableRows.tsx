@@ -40,7 +40,6 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-        console.log(item.emailStatus);
 
         return (
           <div

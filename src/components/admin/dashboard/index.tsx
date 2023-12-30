@@ -158,7 +158,7 @@ const AdminDashboard = () => {
               alt={item.alt}
               backgroundColor={item.backgroundColor}
               title={item.title}
-              id={item.id}
+              id={item.id as string}
               salePercent={item.salePercent}
               chartPointColor={item.chartPointColor}
             />

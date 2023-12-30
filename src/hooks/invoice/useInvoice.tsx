@@ -15,6 +15,7 @@ import {
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { staticEnums } from "@/utils/static";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -98,12 +99,25 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      readInvoice({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      setCurrentPageRows(res?.payload?.Invoice);
-    });
-  }, [currentPage]);
+    if (query?.filter) {
+      const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
+      setFilter({
+        ...filter,
+        status: [statusValue?.toString()]
+      });
+      dispatch(readInvoice({ params: { filter: { ...filter, status: [staticEnums["InvoiceStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+        }
+      );
+    } else {
+      dispatch(readInvoice({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+        }
+      );
+    }
+  }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

@@ -61,8 +61,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }));
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }));
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const type = watch("type");
@@ -83,7 +83,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (offerDetails?.id) {
-      console.log(offerDetails);
 
       reset({
         type: "Existing Customer",
@@ -128,7 +127,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       leadID: "",
     });
   };
-  const handleContentSelect = () => {};
+  const handleContentSelect = () => { };
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent

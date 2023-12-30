@@ -858,7 +858,8 @@ export interface AggrementProps {
   currPage: number;
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
-  signature?: string
+  signature?: string;
+  isCanvas?: boolean
 }
 
 export interface FiltersComponentProps {

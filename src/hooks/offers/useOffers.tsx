@@ -1,4 +1,4 @@
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER, staticEnums } from "@/utils/static";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
@@ -49,12 +49,16 @@ const useOffers = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  // useMemo(() => {
-  //   setFilter({
-  //     ...filter,
-  //     status: query?.filter as string,
-  //   });
-  // }, [query?.filter]);
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(readOffer({ params: { filter: query, page: currentPage, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Offer);
+        }
+      }
+    );
+  };
+
   useEffect(() => {
     localStoreUtil.remove_data("offer");
     dispatch(setOfferDetails(DEFAULT_OFFER));
@@ -70,15 +74,7 @@ const useOffers = () => {
     //   }
     // });
   }, []);
-  const handleFilterChange = (query: FilterType) => {
-    dispatch(readOffer({ params: { filter: query, page: currentPage, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Offer);
-        }
-      }
-    );
-  };
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -156,15 +152,26 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-    dispatch(readOffer({ params: { filter: filter, page: currentPage, size: 10 } })).then(
-      (response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-      }
-    );
-  }, [currentPage]);
+
+    if (query?.filter) {
+      const statusValue = staticEnums["OfferStatus"][query?.filter as string];
+      setFilter({
+        ...filter,
+        status: [statusValue?.toString()]
+      });
+      dispatch(readOffer({ params: { filter: { ...filter, status: [staticEnums["OfferStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+        }
+      );
+    } else {
+      dispatch(readOffer({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
+        (response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+        }
+      );
+    }
+  }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

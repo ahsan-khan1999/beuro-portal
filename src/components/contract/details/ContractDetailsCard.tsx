@@ -151,6 +151,7 @@ const ContractDetailsCard = ({
               {contractDetails.offerID?.offerStatus}
             </span>
           </div>
+          
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("contracts.card_content.payment_method")}:
