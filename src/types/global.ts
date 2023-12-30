@@ -62,6 +62,7 @@ export interface OptionsFieldProps {
   options: { label: string; value: string }[];
   dropDownIconClassName: string;
   containerClassName?: string;
+  isSearch?:boolean
 }
 
 export interface GlobalApiResponseType {

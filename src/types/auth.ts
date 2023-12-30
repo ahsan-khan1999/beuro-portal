@@ -155,7 +155,7 @@ export interface Dashboard {
   Offer: Offer;
   Contract: Contract;
   Sales: Invoice;
-  LeadSource: LeadSource[]
+  leadSource: LeadSource[]
 
 }
 interface Lead {
