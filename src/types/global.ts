@@ -44,7 +44,7 @@ export interface CheckFieldProps {
 }
 
 export interface InputFieldProps {
-  value: string;
+  value?: string;
   handleChange: (value: string) => void;
   onEnterPress?: () => void;
   containerClassName?: string;

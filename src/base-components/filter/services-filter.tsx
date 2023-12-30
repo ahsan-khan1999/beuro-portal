@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { FilterProps } from "@/types";
+import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function ServicesFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
-  // const [moreFilter, setMoreFilter] = useState<{
-  //   date: string[];
-  //   price: string[];
-  // }>({
-
-  //   price: filter.price || [],
-  // });
+  const moreFilters = {
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  };
   const {
     moreFilter,
     setMoreFilter,
@@ -28,15 +28,13 @@ export default function ServicesFilter({
     handleExtraFilterToggle,
     handleExtraFiltersClose,
     extraFilterss,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const handleSave = () => {
-    setFilter((prev: any) => {
+    setFilter((prev: FilterType) => {
       const updatedFilters = {
         ...prev,
-        $gte: moreFilter.date && moreFilter.date.$gte,
-        $lte: moreFilter.date && moreFilter.date.$lte,
-        price: moreFilter.price,
+        date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -62,7 +60,7 @@ export default function ServicesFilter({
     const dateTime = new Date(val);
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
@@ -120,7 +118,10 @@ export default function ServicesFilter({
                   htmlFor="type"
                   className="cursor-pointer text-red"
                   onClick={() => {
-                    handleFilterReset("date", { $gte: "", $lte: "" });
+                    handleFilterReset("date", {
+                      $gte: FiltersDefaultValues.$gte,
+                      $lte: FiltersDefaultValues.$lte,
+                    });
                   }}
                 >
                   Reset
@@ -131,10 +132,12 @@ export default function ServicesFilter({
                   label="From"
                   label2="To"
                   dateFrom={formatDateForDatePicker(
-                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                      FiltersDefaultValues.$gte
                   )}
                   dateTo={formatDateForDatePicker(
-                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                      FiltersDefaultValues.$lte
                   )}
                   onChangeFrom={(val) => handleDateChange("$gte", val)}
                   onChangeTo={(val) => handleDateChange("$lte", val)}

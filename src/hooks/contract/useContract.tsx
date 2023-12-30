@@ -17,6 +17,7 @@ import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -30,13 +31,13 @@ const useContract = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
     // date: {
-    //   $gte: "",
-    //   $lte: "",
+    //   $gte: FiltersDefaultValues.None,
+    //   $lte: FiltersDefaultValues.None,
     // },
-    status: undefined,
+    status: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
 
@@ -50,22 +51,12 @@ const useContract = () => {
   //     status: query?.filter as string,
   //   });
   // }, [query?.filter]);
-  useEffect(() => {
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-
-    // dispatch(readContract({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     const startIndex = (currentPage - 1) * itemsPerPage;
-    //     setCurrentPageRows(
-    //       res?.payload?.Contract?.slice(startIndex, startIndex + itemsPerPage)
-    //     );
-    //   }
-    // });
-  }, []);
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: {} } }));
+    dispatch(readContract({ params: { filter: filter } })).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Contract);
+      }
+    });
   };
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -145,15 +136,11 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-
-    dispatch(readContract({ params: queryParams })).then((res: any) => {
+    dispatch(
+      readContract({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
-        setCurrentPageRows(
-          res?.payload?.Contract
-        );
+        setCurrentPageRows(res?.payload?.Contract);
       }
     });
   }, [currentPage]);

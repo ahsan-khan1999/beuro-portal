@@ -563,28 +563,30 @@ export interface CheckBoxType {
 }
 
 export interface FilterType {
-  text: string;
+  text?: string;
   sort?: string;
   type?: string;
   location?: string;
-  status?: string[];
-  date?: {
-    $gte?: string | null;
-    $lte?: string | null;
-  };
-  payment?: string;
-  email?: string[];
-  price?: string[];
-}
-
-export interface MoreFilterType {
-  type?: string;
-  location?: string;
+  status?: string[] | string;
   date?: {
     $gte?: string;
     $lte?: string;
   };
-  email?: string[];
+  payment?: string;
+  email?: string[] | string;
+  price?: string[];
+}
+
+export interface MoreFilterType {
+  text?: string;
+  type?: string;
+  location?: string;
+  sort?: string;
+  date?: {
+    $gte?: string;
+    $lte?: string;
+  };
+  email?: string[] | string;
   price?: string[];
   payment?: string;
 }

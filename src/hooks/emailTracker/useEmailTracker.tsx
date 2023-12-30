@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readEmail } from "@/api/slices/emailTracker/email";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useEmailTracker = () => {
   const { email, lastPage, totalCount, loading } = useAppSelector(
@@ -11,8 +12,8 @@ const useEmailTracker = () => {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
   });
 
   const [currentPageRows, setCurrentPageRows] =
@@ -22,33 +23,28 @@ const useEmailTracker = () => {
   const totalItems = totalCount;
   const itemsPerPage = 10;
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readEmail({ params: queryParams })).then((res: any) => {
-      if (res?.payload) {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        setCurrentPageRows(res?.payload?.MailTracker);
+    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          setCurrentPageRows(res?.payload?.MailTracker);
+        }
       }
-    });
-  }, []);
-
-  useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readEmail({ params: queryParams })).then((response: any) => {
-      if (response?.payload) {
-        setCurrentPageRows(response?.payload?.MailTracker);
-      }
-    });
+    );
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (filter: FilterType) => {
-    dispatch(readEmail({ params: { filter: {} } }));
+  const handleFilterChange = (query: FilterType) => {
+    dispatch(readEmail({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          setCurrentPageRows(res?.payload?.MailTracker);
+        }
+      }
+    );
   };
 
   return {

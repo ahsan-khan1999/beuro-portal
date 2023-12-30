@@ -28,6 +28,7 @@ import { Service } from "@/types/service";
 import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -66,7 +67,44 @@ export const areFiltersEmpty = (filter: FilterType) => {
   });
 };
 
+//filtering filter
+
+// export const cleanFilter = (filterObj: FilterType): FilterType => {
+//   // Define cleanedFilter with the same type as FilterType
+//   const cleanedFilter: Partial<FilterType> = {};
+
+//   for (const key in filterObj) {
+//     const value = filterObj[key as keyof FilterType];
+
+//     // Check for non-empty strings and arrays
+//     if ((typeof value === 'string' && value !== '') ||
+//         (Array.isArray(value) && value.length > 0)) {
+//       cleanedFilter[key as keyof FilterType] = value;
+//     }
+
+//     // Check for the date object with non-default and non-empty dates
+//     if (key === 'date' && typeof value === 'object' && value !== null) {
+//       const { $gte, $lte } = value;
+//       const dateFilter: FilterType['date'] = {};
+
+//       if ($gte && $gte !== '01/01/2000') dateFilter.$gte = $gte;
+//       if ($lte && $lte !== '01/01/5000') dateFilter.$lte = $lte;
+
+//       // If both $gte and $lte are empty or default, remove the date key
+//       if (Object.keys(dateFilter).length !== 0) {
+//         cleanedFilter.date = dateFilter;
+//       }
+//     }
+//   }
+//   return cleanedFilter as FilterType;
+// };
+
 export const formatDateForDatePicker = (isoDateString: string) => {
+  if (
+    isoDateString === FiltersDefaultValues.$gte ||
+    isoDateString === FiltersDefaultValues.$lte
+  )
+    return "";
   const date = new Date(isoDateString);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0"); // getMonth() returns 0-11

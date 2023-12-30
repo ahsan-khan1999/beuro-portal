@@ -1,14 +1,16 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
+import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function EmailTrackerFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
@@ -21,16 +23,25 @@ export default function EmailTrackerFilters({
   };
 
   const handleEnterPress = () => {
-    handleFilterChange(filter);
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
   };
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
         <InputField
-          handleChange={(value) => handleInputChange(value)}
-          value={filter?.text}
+          handleChange={(value) => {}}
+          // value={filter?.text}
           iconDisplay={true}
           onEnterPress={handleEnterPress}
+          ref={inputRef}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

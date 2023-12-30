@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { FilterProps } from "@/types";
+import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function ContentFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters: FilterType = {
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  };
   const {
     extraFilterss,
     moreFilter,
@@ -20,11 +27,7 @@ export default function ContentFilter({
     handleExtraFiltersClose,
     handleFilterReset,
     handleFilterResetToInitial,
-  } = useFilter({ filter, setFilter });
-
-  // const [moreFilter, setMoreFilter] = useState<{ date: string[] }>({
-  //   date: [],
-  // });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const handleSave = () => {
@@ -103,7 +106,10 @@ export default function ContentFilter({
                     htmlFor="type"
                     className="cursor-pointer text-red"
                     onClick={() => {
-                      handleFilterReset("date", { $gte: "", $lte: "" });
+                      handleFilterReset("date", {
+                        $gte: FiltersDefaultValues.$gte,
+                        $lte: FiltersDefaultValues.$lte,
+                      });
                     }}
                   >
                     Reset
@@ -114,10 +120,12 @@ export default function ContentFilter({
                     label="From"
                     label2="To"
                     dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) || ""
+                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) || ""
+                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}

@@ -10,17 +10,18 @@ import {
 } from "@/api/slices/content/contentSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useContent = () => {
   const { content, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.content
   );
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
     date: {
-      $gte: "",
-      $lte: "",
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
     },
   });
   const dispatch = useAppDispatch();
@@ -34,24 +35,11 @@ const useContent = () => {
   useEffect(() => {
     localStoreUtil.remove_data("content");
     dispatch(setContentDetails(DEFAULT_CONTENT));
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-    // dispatch(readContent({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     const startIndex = (currentPage - 1) * itemsPerPage;
-    //     setCurrentPageRows(
-    //       res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
-    //     );
-    //   }
-    // });
   }, []);
   useEffect(() => {
-    // Update rows for the current page
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readContent({ params: queryParams })).then((res: any) => {
+    dispatch(
+      readContent({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         const startIndex = (currentPage - 1) * itemsPerPage;
         setCurrentPageRows(
@@ -66,8 +54,15 @@ const useContent = () => {
   };
   const handleFilterChange = (filter: FilterType) => {
     dispatch(
-      readContent({ params: { filter: filter, page: currentPage, size: 10 } })
-    );
+      readContent({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        setCurrentPageRows(
+          res?.payload?.Content?.slice(startIndex, startIndex + itemsPerPage)
+        );
+      }
+    });
   };
   return {
     currentPageRows,

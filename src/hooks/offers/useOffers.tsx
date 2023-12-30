@@ -19,6 +19,7 @@ import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -34,17 +35,13 @@ const useOffers = () => {
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
-    // location: "",
-    sort: "",
-    text: "",
-    // date: {
-    //   $gte: "",
-    //   $lte: "",
-    // },
-    // email: [],
-    // payment: "",
-    // price: [],
-    status: undefined,
+    text: FiltersDefaultValues.None,
+    sort: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+    status: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
 
@@ -74,8 +71,12 @@ const useOffers = () => {
     // });
   }, []);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
+    dispatch(readOffer({ params: { filter: query, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Offer);
+        }
+      }
     );
   };
   const onClose = () => {
@@ -155,12 +156,14 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-    dispatch(readOffer({ params: queryParams })).then((response: any) => {
-      setCurrentPageRows(response?.payload?.Offer);
-    });
+    // const queryParams = areFiltersEmpty(filter)
+    //   ? { filter: {}, page: 1, size: 10 }
+    //   : { filter: filter, page: 1, size: 10 };
+    dispatch(readOffer({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+      }
+    );
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

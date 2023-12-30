@@ -9,14 +9,15 @@ import {
 } from "@/api/slices/employee/emplyeeSlice";
 import { DEFAULT_EMPLOYEE } from "@/utils/static";
 import { areFiltersEmpty } from "@/utils/utility";
+import { FiltersDefaultValues } from "@/enums/static";
 
 const useEmployee = () => {
   const [filter, setFilter] = useState<FilterType>({
-    sort: "",
-    text: "",
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
     date: {
-      $gte: "",
-      $lte: "",
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
     },
   });
   const { employee, lastPage, totalCount, loading } = useAppSelector(
@@ -30,23 +31,9 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
-    // dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE));
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-
-    // dispatch(readEmployee({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Employee);
-    //   }
-    // });
-  }, []);
-  useEffect(() => {
-    const queryParams = areFiltersEmpty(filter)
-      ? { filter: {}, page: 1, size: 10 }
-      : { filter: filter, page: 1, size: 10 };
-
-    dispatch(readEmployee({ params: queryParams })).then((res: any) => {
+    dispatch(
+      readEmployee({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Employee);
       }
@@ -56,10 +43,14 @@ const useEmployee = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (filter: FilterType) => {
+  const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
-    );
+      readEmployee({ params: { filter: query, page: 1, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Employee);
+      }
+    });
   };
 
   return {

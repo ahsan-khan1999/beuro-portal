@@ -7,12 +7,18 @@ import { PriceInputField } from "./fields/price-input-field";
 import EmailCheckField from "./fields/email-check-field";
 import useFilter from "@/hooks/filter/hook";
 import { staticEnums } from "@/utils/static";
+import { FiltersDefaultValues } from "@/enums/static";
+import CheckField from "./fields/check-field";
 
 export default function InvoicesFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const moreFilters: FilterType = {
+    email: FiltersDefaultValues.None,
+  };
+
   const {
     extraFilterss,
     moreFilter,
@@ -21,8 +27,7 @@ export default function InvoicesFilter({
     handleExtraFiltersClose,
     handleFilterResetToInitial,
     handleFilterReset,
-    typeList,
-  } = useFilter({ filter, setFilter });
+  } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
@@ -35,35 +40,72 @@ export default function InvoicesFilter({
     { label: "Failed", type: `${staticEnums.EmailStatus.Failed}` },
   ];
 
-  // const [moreFilter, setMoreFilter] = useState<{
-  //   email: string[];
-  //   price: string[];
-  // }>({
-  //   email: filter.email || [],
-  //   price: filter.price || [],
-  // });
-
   const handleSave = () => {
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
         email: moreFilter.email,
-        price: moreFilter.price,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
     });
     handleExtraFiltersClose();
   };
-  const handleEmailChange = (value: string, isChecked: boolean) => {
-    if (moreFilter.email) {
-      const updatedEmails = isChecked
-        ? [...moreFilter.email, value]
-        : moreFilter.email.filter((email) => email !== value);
+  // const handleEmailChange = (value: string, isChecked: boolean) => {
+  //   console.log(value);
+  //   if (moreFilter.email) {
+  //     const updatedEmails = isChecked
+  //       ? [...moreFilter.email, value]
+  //       : moreFilter.email.filter((email) => email !== value);
 
-      setMoreFilter({ ...moreFilter, email: updatedEmails });
-    }
+  //     setMoreFilter({ ...moreFilter, email: updatedEmails });
+  //   }
+  // };
+
+  // const handleStatusChange = (value: string, isChecked: boolean) => {
+  //   setMoreFilter((prev: FilterType) => {
+  //     const email = prev.email === FiltersDefaultValues.None;
+  //     let updatedStatus = prev.email;
+  //     if (prev?.email && !email) {
+  //       updatedStatus = [...prev.email];
+  //     } else updatedStatus = [];
+  //     if (isChecked) {
+  //       if (!updatedStatus.includes(value)) {
+  //         updatedStatus.push(value);
+  //       }
+  //     } else {
+  //       const index = updatedStatus.indexOf(value);
+  //       if (index > -1) {
+  //         updatedStatus.splice(index, 1);
+  //       }
+  //     }
+  //     const emailStatus =
+  //       updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+  //     const updatedFilter = { ...prev, email: emailStatus };
+  //     return updatedFilter;
+  //   });
+  // };
+
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.email !== FiltersDefaultValues.None ? prev.email : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const emailStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+      return { ...prev, email: emailStatus };
+    });
   };
+
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
       ...prev,
@@ -131,7 +173,9 @@ export default function InvoicesFilter({
                   <label
                     htmlFor="type"
                     className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("email", [])}
+                    onClick={() =>
+                      handleFilterReset("email", FiltersDefaultValues.None)
+                    }
                   >
                     Reset
                   </label>
@@ -141,11 +185,13 @@ export default function InvoicesFilter({
                     <EmailCheckField
                       key={idx}
                       checkboxFilter={moreFilter as unknown as FilterType}
-                      setCheckBoxFilter={setFilter}
+                      setCheckBoxFilter={setMoreFilter}
                       type={"email"}
                       label={item.label}
                       value={item.type}
-                      onChange={handleEmailChange}
+                      onChange={(value, isChecked) =>
+                        handleStatusChange(value, isChecked)
+                      }
                     />
                   ))}
                 </div>

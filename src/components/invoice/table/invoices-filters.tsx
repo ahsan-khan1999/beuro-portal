@@ -2,10 +2,11 @@ import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType } from "@/types";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useRef } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { staticEnums } from "@/utils/static";
+import { FiltersDefaultValues } from "@/enums/static";
 
 export default function InvoicesFilters({
   filter,
@@ -16,6 +17,7 @@ export default function InvoicesFilters({
   setFilter: SetStateAction<any>;
   handleFilterChange: (value: FilterType) => void;
 }) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const checkbox: CheckBoxType[] = [
     { label: "Open", type: `${staticEnums.InvoiceStatus.Pending}` },
     { label: "Overdue", type: `${staticEnums.InvoiceStatus.Overdue}` },
@@ -35,7 +37,9 @@ export default function InvoicesFilters({
           updatedStatus.splice(index, 1);
         }
       }
-      const updatedFilter = { ...prev, status: updatedStatus };
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -51,8 +55,16 @@ export default function InvoicesFilters({
     });
   };
 
-  const handleEnterPress = () => {
-    handleFilterChange(filter);
+  const handlePressEnter = () => {
+    let inputValue = inputRef?.current?.value;
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
   };
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
@@ -74,9 +86,10 @@ export default function InvoicesFilters({
 
       <div className="flex gap-x-4 items-center">
         <InputField
-          handleChange={(value) => handleInputChange(value)}
-          value={filter?.text}
-          onEnterPress={handleEnterPress}
+          handleChange={(value) => {}}
+          // value={filter?.text}
+          onEnterPress={handlePressEnter}
+          ref={inputRef}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
