@@ -227,5 +227,6 @@ export default function useCustomerDetail(stage: boolean) {
     deleteHandler,
     renderModal,
     handleCreateSuccess,
+    loading
   };
 }

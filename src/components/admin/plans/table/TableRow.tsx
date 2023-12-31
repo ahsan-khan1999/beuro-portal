@@ -4,25 +4,33 @@ import { useRouter } from "next/router";
 import React from "react";
 import moreInfoIcon from "@/assets/svgs/entity_more_info.svg";
 
-const TableRow = ({ currentPageRows, handleDelete }: { currentPageRows: Plan[], handleDelete: (index: string) => void }) => {
+const TableRow = ({
+  currentPageRows,
+  handleDelete,
+}: {
+  currentPageRows: Plan[];
+  handleDelete: (index: string) => void;
+}) => {
   const router = useRouter();
   return (
     <div>
       {currentPageRows?.map((item, index) => {
         return (
           <div
-
             key={index}
             className="hover:bg-[#E9E1FF] bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(400px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(180px,_100%)_minmax(70px,_70px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100px)_minmax(200px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(50px,_50px)] mt-2  rounded-md"
           >
-            <span className="py-4  rounded-md ">{item?.refID}</span>
-            <span className="py-4 ">{item?.planName}</span>
-            <span className="py-4  ">{item?.description}</span>
-            <span className="py-4  ">{item?.monthlyPrice}</span>
-            <span className="py-4  flex justify-center items-center">
+            <span className="py-4 flex items-center">{item?.refID}</span>
+            <span className="py-4 flex items-center">{item?.planName  }</span>
+            <span className="py-4 flex items-center">{item?.description}</span>
+            <span className="py-4 flex items-center">{item?.monthlyPrice}</span>
+            <span className="py-4 flex justify-center items-center">
               {item?.numberOfEmployees}
             </span>
-            <span className="py-4  flex justify-center items-center" onClick={() => handleDelete(item?.refID)}>
+            <span
+              className="py-4  flex justify-center items-center"
+              onClick={() => handleDelete(item?.refID)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="41"
@@ -47,14 +55,14 @@ const TableRow = ({ currentPageRows, handleDelete }: { currentPageRows: Plan[], 
                 />
               </svg>
             </span>
-            <span className="py-4  flex justify-center items-center"
+            <span
+              className="py-4  flex justify-center items-center"
               onClick={() =>
                 router.push({
                   pathname: "/admin/plans/details",
                   query: { plans: item.id },
                 })
               }
-
             >
               <Image src={moreInfoIcon} alt="moreInfoIcon" />
             </span>

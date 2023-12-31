@@ -114,6 +114,7 @@ export default function usePlanDetail(stage: boolean) {
     errors,
     handlePreviousClick,
     handleUpdateCancel,
-    renderModal
+    renderModal,
+    loading
   };
 }

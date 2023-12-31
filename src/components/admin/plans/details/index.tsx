@@ -2,6 +2,7 @@ import { Layout } from "@/layout";
 import React from "react";
 import PlansForm from "../Form";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const PlanDetails = () => {
   const {
@@ -13,20 +14,26 @@ const PlanDetails = () => {
     onSubmit,
     errors,
     handlePreviousClick,
-    renderModal
+    renderModal,
+    loading,
   } = usePlanDetail(true);
 
   return (
     <Layout>
-      <PlansForm
-        isUpdate={isUpdate}
-        setIsUpdate={setIsUpdate}
-        fields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        planDetail={planDetails}
-      />
+      {loading ? (
+        <LoadingState />
+      ) : (
+        <PlansForm
+          isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          fields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          planDetail={planDetails}
+        />
+      )}
+
       {renderModal()}
     </Layout>
   );

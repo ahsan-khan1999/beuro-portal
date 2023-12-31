@@ -4,7 +4,6 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { DropDownItem } from "@/types";
-import { SupportRequestAdmin } from "@/types/admin/support-request";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -77,6 +76,7 @@ export default function useSupportDetail() {
     status: items,
     handlePreviousClick,
     handleStatusUpadte,
-    renderModal
+    renderModal,
+    loading
   };
 }

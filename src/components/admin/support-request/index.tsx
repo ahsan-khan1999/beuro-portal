@@ -6,23 +6,37 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useSupportRequest from "@/hooks/admin/support-request/useSupportRequest";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function SupportRequest() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
-    useSupportRequest();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    loading,
+  } = useSupportRequest();
+
+  const CurrentComponent = useEmptyStates(
+    <TableRow currentPageRows={currentPageRows} />,
+    currentPageRows.length > 0,
+    loading
+  );
 
   return (
     <Layout>
       <TableFunctions />
       <TableLayout>
         <TableHeading />
-        <TableRow currentPageRows={currentPageRows} />
+        {CurrentComponent}
       </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </Layout>
   );
 }

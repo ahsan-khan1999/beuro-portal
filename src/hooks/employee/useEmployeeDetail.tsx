@@ -22,7 +22,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 const useEmployeeDetail = (stage: boolean) => {
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
-  const { modal } = useAppSelector((state) => state.global);
+  const { modal,  } = useAppSelector((state) => state.global);
   const { employeeDetails } = useAppSelector((state) => state.employee);
 
   const router = useRouter();
@@ -173,7 +173,8 @@ const useEmployeeDetail = (stage: boolean) => {
     handlePreviousClick,
     handleUpdateCancel,
     deleteHandler,
-    translate
+    translate,
+    loading
   };
 };
 export default useEmployeeDetail;

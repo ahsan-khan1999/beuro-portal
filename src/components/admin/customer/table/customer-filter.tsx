@@ -1,9 +1,7 @@
 import CustomerFilters from "@/base-components/filter/customer-filters";
-// import DetailFilter from "@/base-components/filter/detail-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
 import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -37,19 +35,17 @@ export default function CustomerFilter({
     },
   ];
   return (
-    <div className="flex space-x-4">
-      <div className="flex gap-x-4 w-full xl:w-fit">
-        {checkbox.map((item, idx) => (
-          <CheckField
-            checkboxFilter={filter}
-            setCheckBoxFilter={setFilter}
-            type={"status"}
-            label={item.label}
-            value={item.type}
-            onChange={(val) => {}}
-          />
-        ))}
-      </div>
+    <div className="flex items-center space-x-4">
+      {checkbox.map((item, idx) => (
+        <CheckField
+          checkboxFilter={filter}
+          setCheckBoxFilter={setFilter}
+          type={"status"}
+          label={item.label}
+          value={item.type}
+          onChange={(val) => {}}
+        />
+      ))}
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter?.text || ""}

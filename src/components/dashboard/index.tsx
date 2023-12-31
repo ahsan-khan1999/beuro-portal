@@ -143,7 +143,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <>
+    <div className="mb-10">
       <div className="p-9 bg-gradient rounded-lg">
         <h1 className="font-medium text-[28px] tracking-[0.5px] text-white">
           {translate("dashboard_detail.main_heading")}
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
         <ActivitiesNotificationBar />
         <PieChart data={pieData} />
       </div>
-    </>
+    </div>
   );
 };
 
