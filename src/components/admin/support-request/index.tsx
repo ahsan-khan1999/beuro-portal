@@ -10,11 +10,7 @@ import { useEmptyStates } from "@/utils/hooks";
 
 export default function SupportRequest() {
   const {
-    currentPageRows,
-    handlePageChange,
-    totalItems,
-    itemsPerPage,
-    loading,
+    currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleFilterChange,loading
   } = useSupportRequest();
 
   const CurrentComponent = useEmptyStates(
@@ -25,7 +21,11 @@ export default function SupportRequest() {
 
   return (
     <Layout>
-      <TableFunctions />
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <TableLayout>
         <TableHeading />
         {CurrentComponent}

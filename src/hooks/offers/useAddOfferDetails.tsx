@@ -192,13 +192,14 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (offerDetails?.id) {
-      const apiData = {
+      const apiData: any = {
         ...data,
         step: 1,
         offerId: offerDetails?.id,
         stage: ComponentsType.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
+      if (!apiData?.isLeadCreated) delete apiData["leadID"]
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
       );

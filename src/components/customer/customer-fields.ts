@@ -35,7 +35,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map(
+              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
                 (item, key) => ({
                   value: item,
                   label: item,
@@ -95,7 +95,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.phone,
               className:
-                "!p-4 !border-[#BFBFBF] focus:!border-primary cursor-default",
+                " !border-[#BFBFBF] focus:!border-primary cursor-default",
               id: "phoneNumber",
               name: "phoneNumber",
               country: "ch",
@@ -113,7 +113,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: " !p-4 !border-[#BFBFBF]  focus:!border-primary",
+              className: "  !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",

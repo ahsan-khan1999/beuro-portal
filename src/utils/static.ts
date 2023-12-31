@@ -1245,7 +1245,7 @@ export const sideBar: SideBar[] = [
       {
         title: "Expire",
         pathname: "/leads",
-        query: "Expire",
+        query: "Expired",
 
         role: [1, 2],
       },

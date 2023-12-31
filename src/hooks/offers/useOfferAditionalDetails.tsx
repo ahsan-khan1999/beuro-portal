@@ -12,7 +12,7 @@ import { DEFAULT_CONTENT } from "@/utils/static";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 
-export const useOfferAditionalDetails = (onHandleNext: (currentComponent: ComponentsType) => void,onHandleBack: (currentComponent: ComponentsType) => void) => {
+export const useOfferAditionalDetails = (onHandleNext: (currentComponent: ComponentsType) => void, onHandleBack: (currentComponent: ComponentsType) => void) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -48,8 +48,9 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
       (item) => item.id === selectedContent
     );
     if (filteredContent) {
+      
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.title);
+      setValue("additionalDetails",  filteredContent?.offerContent?.title);
     }
   }, [selectedContent])
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handleBack, 0,
