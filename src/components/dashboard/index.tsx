@@ -186,9 +186,9 @@ const AdminDashboard = () => {
       </div> */}
       <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
         <div className="hidden 2xl:block">
-          <FollowUpNotificationBar />
+          <FollowUpNotificationBar dashboard={dashboard}/>
         </div>
-        <ActivitiesNotificationBar />
+        <ActivitiesNotificationBar dashboard={dashboard}/>
         <PieChart data={pieData} />
       </div>
     </div>

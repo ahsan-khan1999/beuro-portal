@@ -199,6 +199,9 @@ export default function useContractDetail() {
   const onNextHandle = () => {
     router.pathname = "/contract/pdf-preview";
   };
+  const handleViewPdf = () => {
+    window.open(contractDetails?.attachement as string)
+  }
   return {
     contractDetails,
     renderModal,
@@ -212,5 +215,6 @@ export default function useContractDetail() {
     onNextHandle,
     handleSendEmail,
     loading,
+    handleViewPdf
   };
 }

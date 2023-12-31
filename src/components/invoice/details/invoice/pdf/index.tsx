@@ -3,6 +3,7 @@ import {
   readCollectiveInvoiceDetails,
   readInvoiceDetails,
   sendInvoiceEmail,
+  sendOfferByPost,
   setInvoiceInfo,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
@@ -418,6 +419,17 @@ const DetailsPdfPriview = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Status Update Successful "
+        subHeading="Thanks for updating offer we are happy to have you. "
+        route={() => {
+          dispatch(updateModalType({ type: ModalType.NONE }));
+          router.back()
+        }}
+      />
+    ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -447,8 +459,14 @@ const DetailsPdfPriview = () => {
     }
     else return false
   }
-  const handleSendByPost = () => {
-    router.back()
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: invoiceID
+
+    }
+    const response = await dispatch(sendOfferByPost({ data: apiData }))
+    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
   }
   return (
     <>

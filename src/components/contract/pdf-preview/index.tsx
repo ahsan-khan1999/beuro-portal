@@ -24,7 +24,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { readContractDetails, sendContractEmail, updateContractContent } from "@/api/slices/contract/contractSlice";
+import { readContractDetails, sendContractEmail, sendOfferByPost, updateContractContent } from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
 import { updateQuery } from "@/utils/update-query";
 
@@ -329,13 +329,13 @@ const PdfPriview = () => {
   const handleEmailSend = async () => {
     try {
       const localStorageContractData = await localStoreUtil.get_data("contractComposeEmail");
-      
+
       const data = {
         id: contractDetails?.id,
         email: localStorageContractData?.email,
         subject: contractPdfInfo?.subject,
         description: contractPdfInfo?.description,
-        pdf:  localStorageContractData?.pdf
+        pdf: localStorageContractData?.pdf
       };
       if (localStorageContractData) {
         const res = await dispatch(sendContractEmail({ data: data }));
@@ -372,6 +372,17 @@ const PdfPriview = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading="Status Update Successful "
+        subHeading="Thanks for updating offer we are happy to have you. "
+        route={() => {
+          dispatch(updateModalType({ type: ModalType.NONE }));
+          router.back()
+        }}
+      />
+    ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -403,8 +414,14 @@ const PdfPriview = () => {
     }
     else return false
   }
-  const handleSendByPost = () => {
-    router.back()
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: offerID
+
+    }
+    const response = await dispatch(sendOfferByPost({ data: apiData }))
+    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
   }
   return (
     <>

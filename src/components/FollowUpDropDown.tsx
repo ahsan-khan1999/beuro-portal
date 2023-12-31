@@ -83,7 +83,7 @@ const FollowUpDropDown = () => {
                           className="mr-[10px]"
                         />
                         <span className="text-[#4B4B4B] text-[13px] ">
-                          {item.customer?.refID}
+                          {item?.customer?.refID}
                         </span>
                       </div>
                       {days > 0 && (

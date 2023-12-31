@@ -20,6 +20,7 @@ const OfferDetails = () => {
     setIsSendEmail,
     onNextHandle,
     loading,
+    handleSendByPost
   } = useOfferDetails();
 
   return (
@@ -34,6 +35,9 @@ const OfferDetails = () => {
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleSendEmail={handleSendEmail}
           isSendEmail={isSendEmail}
+          handleSendByPost={handleSendByPost}
+          loading={loading}
+
         />
       </DetailsCard>
 

@@ -95,7 +95,10 @@ const SERVICE_URLS = {
   acceptOffer: "/offer/add-signature/",
   offerActivity: "/offer/activity/",
   dashbaord: "/dashboard/company",
-  adminDashboard:"/dashboard/admin"
+  adminDashboard: "/dashboard/admin",
+  sendByPost: "/offer/send-By-Post/",
+  contractSendByPost: "/contract/send-By-Post/",
+  invoiceSendByPost:"/invoice/invoice-collection/send-By-Post/"
 
 };
 
@@ -451,6 +454,15 @@ const readDashboard = (params) =>
   get(SERVICE_URLS.dashbaord, params, { feature: featureConstants.login }, { detail: false });
 const readAdminDashboard = (params) =>
   get(SERVICE_URLS.adminDashboard, params, { feature: featureConstants.login }, { detail: false });
+
+const offerSendByPost = (data) =>
+  put(SERVICE_URLS.sendByPost + `${data?.id}`, data, { feature: featureConstants.login });
+
+const contractSendByPost = (data) =>
+  put(SERVICE_URLS.contractSendByPost + `${data?.id}`, data, { feature: featureConstants.login });
+
+const invoiceSendByPost = (data) =>
+  put(SERVICE_URLS.invoiceSendByPost + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -593,6 +605,9 @@ const apiServices = {
   acceptOffer,
   readAllOfferActivity, readOfferActivity,
   readDashboard,
-  readAdminDashboard
+  readAdminDashboard,
+  offerSendByPost,
+  contractSendByPost,
+  invoiceSendByPost
 };
 export default apiServices;

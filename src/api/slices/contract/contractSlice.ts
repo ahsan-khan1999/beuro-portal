@@ -153,6 +153,20 @@ export const updateContractContent: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/post/", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.contractSendByPost(data);
+            return response?.data?.Contract;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const ContractSlice = createSlice({
     name: "ContractSlice",
     initialState,
@@ -245,6 +259,18 @@ const ContractSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updateContractContent.rejected, (state) => {
+            state.loading = false
+        })
+
+
+        builder.addCase(sendOfferByPost.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(sendOfferByPost.fulfilled, (state, action) => {
+            if (action?.payload) state.contractDetails = action?.payload
+            state.loading = false;
+        });
+        builder.addCase(sendOfferByPost.rejected, (state) => {
             state.loading = false
         })
 

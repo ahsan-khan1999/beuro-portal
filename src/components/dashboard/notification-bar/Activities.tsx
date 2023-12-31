@@ -2,58 +2,11 @@ import Image from "next/image";
 import React from "react";
 import timeIcon from "@/assets/svgs/time.svg";
 import { useTranslation } from "next-i18next";
+import { Dashboard } from "@/types";
+import { formatDateTimeToDate, formatDateTimeToTime } from "@/utils/utility";
 
-const ActivitiesNotificationBar = () => {
-  const followUp = [
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-    {
-      name: "Hassam Ud dien",
-      description: "Converted Offer to Contract",
-      time: "14:20:05",
-      date: "12/09/2023",
-      id1: "A-2000",
-      id2: "A-2000",
-    },
-  ];
+const ActivitiesNotificationBar = ({ dashboard }: { dashboard: Dashboard | null }) => {
+  const followUp = dashboard?.activity?.offerActivity?.map((item) => ({ name: item?.editedBy, description: item?.message, time: formatDateTimeToTime(item?.dateTime), date: formatDateTimeToDate(item?.dateTime), id1: item?.offerNumber, id2: item?.contractNumber }))
 
   const { t: translate } = useTranslation();
   return (
@@ -65,7 +18,7 @@ const ActivitiesNotificationBar = () => {
       <hr className="opacity-10" />
 
       <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar pl-5 pr-[5px] pb-[14px] mr-1">
-        {followUp.map((item, index) => {
+        {followUp?.map((item, index) => {
           return (
             <div
               key={index}
@@ -117,11 +70,11 @@ const ActivitiesNotificationBar = () => {
             </div>
           );
         })}
-        <div className="flex justify-center py-4">
+        {/* <div className="flex justify-center py-4">
           <button className=" text-primary w-fit text-sm font-medium ">
             {translate("dashboard_detail.view_all")}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

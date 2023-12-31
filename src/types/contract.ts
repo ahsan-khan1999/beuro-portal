@@ -14,7 +14,8 @@ export interface contractTableTypes {
   paymentType:string;
   title:string;
   additionalDetails:string;
-  attachement?:string
+  attachement?:string;
+  emailStatus:string
 }
 export interface ContractOfferDetails {
   refID: string;

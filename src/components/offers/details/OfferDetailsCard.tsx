@@ -12,9 +12,13 @@ import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "../../../utils/static";
+import postIcon from "@/assets/svgs/post_icon.svg";
 
 import { useTranslation } from "next-i18next";
 import { OfferDetailCardProps } from "@/types/offers";
+import { Button } from "@/base-components/ui/button/button";
+import { PostIcon } from "@/assets/svgs/components/post-icon";
+import { BaseButton } from "@/base-components/ui/button/base-button";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -25,6 +29,8 @@ const OfferDetailsCard = ({
   handlePaymentStatusUpdate,
   handleSendEmail,
   isSendEmail,
+  handleSendByPost,
+  loading
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -51,13 +57,25 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="flex gap-[22px]">
+
+          <BaseButton
+            buttonText="Send Via Post"
+            onClick={handleSendByPost}
+            containerClassName="flex items-center group gap-x-3 row-reverse"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            loading={loading}
+            loaderColor="#4A13E7"
+          >
+            <PostIcon className="text-primary group-hover:text-primary" />
+          </BaseButton>
+
           <div
             className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
               }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
+            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] flex items-center ">
               {translate("offers.card_content.send_button")}
             </p>
           </div>

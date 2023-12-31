@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import { InvoiceEmailHeaderProps } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
+import { useTranslation } from "next-i18next";
+import { PostIcon } from "@/assets/svgs/components/post-icon";
 
 export const InvoiceEmailHeader = ({
   contentName,
@@ -21,9 +23,10 @@ export const InvoiceEmailHeader = ({
   onEmailSend,
   onPrint,
   onSendViaPost,
-  title
+  title,
 }: InvoiceEmailHeaderProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation()
   return (
     <PdfCardLayout>
       <div className="flex justify-between items-center">
@@ -40,12 +43,16 @@ export const InvoiceEmailHeader = ({
           </h1>
         </div>
         <div className="flex items-center justify-between gap-5">
-          <div className="border-[#C7C7C7] border  rounded-lg px-[13px] py-[7px] flex justify-between items-center cursor-pointer" onClick={onSendViaPost}>
-            {/* <Image src={postIcon} alt="postIcon" /> */}
-            <span className="text-[#4B4B4B] text-base font-medium ml-[11px]">
-              Send via Post
-            </span>
-          </div>
+          <BaseButton
+            buttonText={translate("contracts.pdf_card_details.send_via_post")}
+            onClick={onSendViaPost}
+            containerClassName="flex items-center group gap-x-3 row-reverse"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            loading={loading}
+            loaderColor="#4A13E7"
+          >
+            <PostIcon className="text-primary group-hover:text-primary" />
+          </BaseButton>
           <BaseButton
             buttonText="Send Via Email"
             onClick={onEmailSend}
@@ -54,7 +61,7 @@ export const InvoiceEmailHeader = ({
             loading={loading}
             loaderColor="#4A13E7"
           >
-           <EmailIcon className="text-primary group-hover:text-white"/>
+            <EmailIcon className="text-primary group-hover:text-white" />
           </BaseButton>
 
           <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={onDownload} />
@@ -93,11 +100,11 @@ export const InvoiceEmailHeader = ({
             Contract Status:
           </span>
           <div
-            className={`border rounded-lg px-[8px]  ${ "border-[#FE9244]"
+            className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"
               }`}
           >
             <span
-              className={`text-base font-medium ${ "text-[#FE9244]"
+              className={`text-base font-medium ${"text-[#FE9244]"
                 }`}
             >
               {contractStatus}

@@ -763,10 +763,10 @@ export interface InvoiceEmailHeaderProps {
   contractStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
-  onSendViaPost?: () => void;
+  onSendViaPost: () => void;
   onPrint: () => void;
   onDownload: () => void;
-  title: string
+  title: string;
 }
 
 export interface ContractEmailHeaderProps {
@@ -776,7 +776,7 @@ export interface ContractEmailHeaderProps {
   emailStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
-  onSendViaPost?: () => void;
+  onSendViaPost: () => void;
   onPrint: () => void;
   onDownload: () => void;
 
