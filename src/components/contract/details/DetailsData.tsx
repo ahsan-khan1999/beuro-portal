@@ -9,8 +9,10 @@ import { formatDateToCustomString } from "@/utils/functions";
 
 const DetailsData = ({
   contractDetails,
+  handleViewPdf
 }: {
   contractDetails: contractTableTypes;
+  handleViewPdf: () => void
 }) => {
   return (
     <ContractCardLayout>
@@ -36,7 +38,9 @@ const DetailsData = ({
         <Image
           src={colorFullPDFIcon}
           alt="colorFullPDFIcon"
-          className="mr-[68px]"
+          className="mr-[68px] cursor-pointer"
+          onClick={handleViewPdf}
+          
         />
       </div>
     </ContractCardLayout>

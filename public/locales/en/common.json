@@ -1060,7 +1060,7 @@
         "unit": "Unit",
         "count": "Count",
         "total_price": "Total Price",
-        "grand_toal": " Grand  Total",
+        "grand_total": " Grand  Total",
         "sub_total": "Sub Total",
         "tax": "Tax%"
       },

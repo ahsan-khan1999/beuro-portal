@@ -265,6 +265,20 @@ export const updateInvoiceContent: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/post/", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.invoiceSendByPost(data);
+            return response?.data?.InvoiceCollection;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const InvoiceSlice = createSlice({
     name: "InvoiceSlice",
     initialState,
@@ -504,9 +518,20 @@ const InvoiceSlice = createSlice({
             state.loading = false
         });
 
+        builder.addCase(sendOfferByPost.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(sendOfferByPost.fulfilled, (state, action) => {
+            // if(action?.payload) state.collectiveInvoiceDetails  =action?.payload
+            state.loading = false;
+        });
+        builder.addCase(sendOfferByPost.rejected, (state) => {
+            state.loading = false
+        });
+
 
     },
 })
 
 export default InvoiceSlice.reducer;
-export const { setErrorMessage, setInvoiceDetails,setInvoiceInfo } = InvoiceSlice.actions
+export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo } = InvoiceSlice.actions

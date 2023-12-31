@@ -18,7 +18,8 @@ export interface FollowUps {
   isPostponed:boolean;
   postPonedNote:string;
   completeRemarks:string
-  createdAt:string
+  createdAt:string;
+  refID:string
 }
 
 // follow up table is here

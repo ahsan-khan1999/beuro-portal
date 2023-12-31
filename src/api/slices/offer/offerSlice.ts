@@ -144,6 +144,20 @@ export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/post/", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.offerSendByPost(data);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/notes", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -329,6 +343,17 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(readOfferActivity.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(sendOfferByPost.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(sendOfferByPost.fulfilled, (state, action) => {
+            if (action?.payload) state.offerDetails = action?.payload
+            state.loading = false;
+        });
+        builder.addCase(sendOfferByPost.rejected, (state) => {
             state.loading = false
         });
 

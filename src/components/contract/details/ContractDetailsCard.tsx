@@ -64,10 +64,10 @@ const ContractDetailsCard = ({
             src={PDFIcon}
             alt="PDFIcon"
             className="cursor-pointer"
-            onClick={() => router.push({pathname:"/contract/pdf-preview",query: { offerID: contractDetails?.id }})}
+            onClick={() => router.push({ pathname: "/contract/pdf-preview", query: { offerID: contractDetails?.id } })}
           />
-          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload}/>
-          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint}/>
+          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload} />
+          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint} />
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -140,9 +140,21 @@ const ContractDetailsCard = ({
               </span>
             </div>
           </div>
+
         </div>
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
+          <div className="flex items-center  gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              Email Status
+            </span>
+            <div>
+            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
+              {contractDetails?.emailStatus}
+            </span>
+            </div>
+          </div>
+
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.offer_status")}:
@@ -151,7 +163,7 @@ const ContractDetailsCard = ({
               {contractDetails.offerID?.offerStatus}
             </span>
           </div>
-          
+
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("contracts.card_content.payment_method")}:
@@ -176,20 +188,20 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                <DropDown
-                  items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
-                  )}
-                  selectedItem={contractDetails?.contractStatus}
-                  onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-2 w-full min-w-[137px]  `}
-                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
-                />
-              )) || (
-                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
-                  {contractDetails?.contractStatus}
-                </span>
-              )}
+                  <DropDown
+                    items={Object.keys(staticEnums["ContractStatus"]).map(
+                      (item) => ({ item: item })
+                    )}
+                    selectedItem={contractDetails?.contractStatus}
+                    onItemSelected={handleStatusUpdate}
+                    dropDownClassName={`border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-2 w-full min-w-[137px]  `}
+                    dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                  />
+                )) || (
+                  <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                    {contractDetails?.contractStatus}
+                  </span>
+                )}
             </span>
           </div>
 
@@ -217,6 +229,7 @@ const ContractDetailsCard = ({
               />
             </div>
           </div>
+
         </div>
       </div>
     </ContractCardLayout>

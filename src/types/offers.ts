@@ -57,7 +57,7 @@ export interface OffersTableRowTypes {
   discountAmount: number;
   discountDescription: string;
   signature?: string
-  attachement?:string
+  attachement?: string
 }
 
 interface Address {
@@ -222,6 +222,8 @@ export interface OfferDetailCardProps {
   handlePaymentStatusUpdate: (id: string) => void;
   handleSendEmail: () => void;
   isSendEmail: boolean;
+  handleSendByPost: () => void;
+  loading:boolean
 }
 
 

@@ -1,4 +1,4 @@
-import { deleteOffer, readOfferActivity, readOfferDetails, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
+import { deleteOffer, readOfferActivity, readOfferDetails, sendOfferByPost, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
 import { ModalConfigType, ModalType } from '@/enums/ui';
@@ -32,7 +32,7 @@ export default function useOfferDetails() {
 
 
   useEffect(() => {
-     localStoreUtil.remove_data("contractComposeEmail");
+    localStoreUtil.remove_data("contractComposeEmail");
 
     if (id) {
       dispatch(readOfferDetails({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
@@ -170,6 +170,15 @@ export default function useOfferDetails() {
   const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview"
   }
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: offerDetails?.id
+
+    }
+    const response = await dispatch(sendOfferByPost({ data: apiData }))
+    if (response?.payload) offerCreatedHandler()
+  }
   return {
     offerDetails,
     renderModal,
@@ -183,6 +192,7 @@ export default function useOfferDetails() {
     isSendEmail,
     onNextHandle,
     offerActivity,
-    loading
+    loading,
+    handleSendByPost
   }
 }

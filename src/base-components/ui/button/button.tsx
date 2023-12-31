@@ -38,8 +38,8 @@ export const Button = ({
   ) : (
     <button
       type={inputType}
-      className={`${classes} hover:bg-buttonHover hover:text-white text-dark  ${success && "flex items-center gap-x-2 "
-        } flex items-center justify-center `}
+      className={` hover:bg-buttonHover hover:text-white text-dark  ${success && "flex items-center gap-x-2  " 
+        } flex items-center justify-center ${classes}`}
       onClick={() => {
         onClick && onClick();
       }}

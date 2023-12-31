@@ -157,17 +157,51 @@ export interface Dashboard {
   Contract: Contract;
   Sales: Invoice;
   leadSource: LeadSource[]
-
+  followUp: FollowUp[];
+  activity: Activity;
 }
 export interface AdminDashboard {
   Customer: Customer;
   Offer: Offer;
   Contract: Contract;
   Sales: Invoice;
-  leadSource: LeadSource[]
+  leadSource: LeadSource[];
+
 
 }
-
+interface FollowUp {
+  additionalDetails: string;
+  company: string;
+  createdAt: string;
+  createdBy: string;
+  customer: string;
+  dateTime: string;
+  isCompleted: boolean;
+  isDeleted: boolean;
+  isPostponed: boolean;
+  lead: string;
+  refID: string;
+  status: string;
+  title: string;
+  type: string;
+  updatedAt: string;
+  _id: string
+}
+interface Activity {
+  company: string;
+  createdAt: string;
+  isDeleted: boolean;
+  updatedAt: string;
+  _id: string;
+  offerActivity: OfferActivity[]
+}
+interface OfferActivity {
+  contractNumber: string;
+  dateTime: string;
+  editedBy: string;
+  message: string;
+  offerNumber: string
+}
 interface Customer {
   _id: string;
   totalCustomers: number;

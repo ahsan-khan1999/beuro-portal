@@ -16,7 +16,8 @@ const ContractDetails = () => {
     handlePaymentStatusUpdate,
     handleStatusUpdate,
     handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle,
-    loading
+    loading,
+    handleViewPdf
   } = useContractDetail();
 
   return (
@@ -31,7 +32,7 @@ const ContractDetails = () => {
         handleSendEmail={handleSendEmail}
       />
       <div className="my-4">
-        <DetailsData contractDetails={contractDetails} />
+        <DetailsData contractDetails={contractDetails} handleViewPdf={handleViewPdf}/>
       </div>
       {
         isSendEmail ?
