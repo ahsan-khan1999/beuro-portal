@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import SelectField from "./select-field";
+import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "@/hooks/useOutSideClick";
+import Image from "next/image";
 
 export default function SearchInputFiled({
   value,
@@ -12,10 +15,12 @@ export default function SearchInputFiled({
   containerClassName,
   iconDisplay,
   bgColor,
+  options,
 }: InputFieldProps) {
   const inputClasses = combineClasses(
-    `${bgColor ? "bg-[#F4F4F4]" : "bg-white"
-    } w-[274px] text-sm rounded-lg pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
+    `${
+      bgColor ? "bg-[#F4F4F4]" : "bg-white"
+    } w-[274px] text-sm rounded-lg pl-7 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
     textClassName
   );
 
@@ -24,8 +29,18 @@ export default function SearchInputFiled({
   const { t: translate } = useTranslation();
   const containerClasses = combineClasses("min-w-[274px]", containerClassName);
   const router = useRouter();
+  const handleInputFocus = () => {
+    setIsOpen(true);
+  };
+
+  const hanldeClose = () => {
+    setIsOpen(false);
+  };
+
+  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} ref={ref}>
       <div className="relative flex justify-between w-full">
         <div>
           <input
@@ -35,11 +50,13 @@ export default function SearchInputFiled({
             placeholder="Search..."
             className={inputClasses}
             onChange={(e) => handleChange(e.target.value)}
+            onFocus={handleInputFocus}
           />
           {iconDisplay && (
             <div
-              className={`absolute top-1/2 ${router.pathname.includes("dashboard") ? "left-0" : ""
-                }  transform -translate-y-1/2`}
+              className={`absolute top-1/2 ${
+                router.pathname.includes("dashboard") ? "left-4" : ""
+              }  transform -translate-y-1/2`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +92,51 @@ export default function SearchInputFiled({
               </svg>
             </div>
           )}
+
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                className="bg-white flex-col absolute top-[56px] h-auto border-[1px] border-lightGray rounded-lg w-full right-0 py-4 px-3 shadow-lg"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="mt-2 h-full" id="dropdownSerchBar">
+                  <div className="flex-col space-y-[10px]">
+                    {options.map(({ icon, id, service, userName }, idx) => (
+                      <div
+                        className="flex justify-start px-4 py-3 border border-[#BFBFBF] rounded-lg hover:bg-[#eaebec] cursor-pointer mr-1 hoverTransetion"
+                        key={idx}
+                        onClick={() => {
+                          // handleChange(value);
+                          setIsOpen(false);
+                        }}
+                      >
+                        <div className="flex items-center gap-x-4">
+                          <Image
+                            src={icon}
+                            alt="userName"
+                            width={15}
+                            height={21}
+                          />
+                          <span className="text-[#1E1E1E] font-medium text-base">
+                            {id}
+                          </span>
+                          <span className="text-[#393939] font-normal text-base">
+                            {userName}
+                          </span>
+                          <span className="text-[#393939] font-normal text-base">
+                            {service}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         <div className="absolute right-0 border-l border-[#BFBFBF] z-0  ">
           <SelectField
@@ -82,18 +144,37 @@ export default function SearchInputFiled({
             value=""
             dropDownIconClassName=""
             options={[
-
-              { label: translate("dashboard_detail.input_filter.all"), value: "all" },
-              { label: translate("dashboard_detail.input_filter.lead"), value: "lead" },
-              { label: translate("dashboard_detail.input_filter.offer"), value: "offer" },
-              { label: translate("dashboard_detail.input_filter.contract"), value: "contract" },
-              { label: translate("dashboard_detail.input_filter.invoice"), value: "invoice" },
-              { label: translate("dashboard_detail.input_filter.receipt"), value: "receipt" },
-              { label: translate("dashboard_detail.input_filter.customer"), value: "customer" },
-
+              {
+                label: translate("dashboard_detail.input_filter.all"),
+                value: "all",
+              },
+              {
+                label: translate("dashboard_detail.input_filter.lead"),
+                value: "lead",
+              },
+              {
+                label: translate("dashboard_detail.input_filter.offer"),
+                value: "offer",
+              },
+              // {
+              //   label: translate("dashboard_detail.input_filter.contract"),
+              //   value: "contract",
+              // },
+              // {
+              //   label: "Sales",
+              //   value: "Sales",
+              // },
+              // {
+              //   label: translate("dashboard_detail.input_filter.receipt"),
+              //   value: "receipt",
+              // },
+              // {
+              //   label: translate("dashboard_detail.input_filter.customer"),
+              //   value: "customer",
+              // },
             ]}
             label={translate("dashboard_detail.input_filter.all")}
-            containerClassName="w-[91px] "
+            containerClassName="w-[91px]"
           />
         </div>
       </div>

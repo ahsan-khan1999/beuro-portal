@@ -8,7 +8,9 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   control,
   onClick,
   count,
-  { content, contentDetails, offerDetails }
+  { content, contentDetails, offerDetails, onContentSelect },
+  setValue,
+  trigger
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -32,6 +34,8 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
           })) || [],
         control,
         value: (offerDetails?.id && offerDetails?.content?.id) || "",
+        onItemChange: onContentSelect,
+        trigger
       },
     },
     {
@@ -48,8 +52,8 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value: 
-          (contentDetails?.id && contentDetails?.offerContent?.title)
+        value: contentDetails?.id && contentDetails?.offerContent?.title || offerDetails?.additionalDetails,
+        trigger
       },
     },
     {

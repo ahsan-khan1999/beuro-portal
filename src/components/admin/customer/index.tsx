@@ -22,7 +22,7 @@ export default function Customers() {
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} />,
-    currentPageRows.length > 0,
+    currentPageRows?.length > 0,
     loading
   );
 
@@ -38,7 +38,7 @@ export default function Customers() {
         {CurrentComponent}
       </TableLayout>
 
-      {currentPageRows.length > 0 && (
+      {currentPageRows?.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}

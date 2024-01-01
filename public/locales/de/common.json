@@ -1678,7 +1678,7 @@
     "customers_details": {
       "main_heading": "Customer Management",
       "table_functions": {
-        "active": "Ative",
+        "active": "Active",
         "block": "Blocked",
         "sort": "Sort By"
       },

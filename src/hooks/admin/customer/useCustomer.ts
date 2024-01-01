@@ -1,5 +1,11 @@
-import { readCompany, setCompanyDetails } from "@/api/slices/company/companySlice";
-import { readCustomer, setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import {
+  readCompany,
+  setCompanyDetails,
+} from "@/api/slices/company/companySlice";
+import {
+  readCustomer,
+  setCustomerDetails,
+} from "@/api/slices/customer/customerSlice";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
@@ -10,55 +16,50 @@ import { DEFAULT_CUSTOMER } from "@/utils/static";
 import { useEffect, useState } from "react";
 
 export default function useCustomer() {
-  const { company, lastPage, totalCount, loading } = useAppSelector(state => state.company)
+  const { company, lastPage, totalCount, loading } = useAppSelector(
+    (state) => state.company
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [filter, setFilter] = useState<FilterType>({
-  //   location: "",
-  //   sort: "",
-  //   text: "",
-  //   type: ""
-  // });
+
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
-    // type: FiltersDefaultValues.None,
+    status: FiltersDefaultValues.None,
   });
 
   const [currentPageRows, setCurrentPageRows] =
     useState<CustomersAdmin[]>(company);
   const dispatch = useAppDispatch();
 
-
   const totalItems = totalCount;
   const itemsPerPage = 10;
-  useEffect(() => {
-    dispatch(setCompanyDetails(DEFAULT_CUSTOMER))
-    dispatch(readCompany({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
 
+  useEffect(() => {
+    dispatch(setCompanyDetails(DEFAULT_CUSTOMER));
+    dispatch(
+      readCompany({ params: { filter: filter, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
       }
-    })
-  }, [])
-
- 
+    });
+  }, []);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    dispatch(readCompany({ params: { filter: filter, page: page, size: 10 } })).then((res: any) => {
-
+    dispatch(
+      readCompany({ params: { filter: filter, page: page, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
       }
-    })
+    });
   };
   const handleFilterChange = (query: FilterType) => {
-    console.log(query,"query");
-    
-    dispatch(readCompany({ params: { filter: query, page: currentPage, size: 10 } }))
-    .then((res: any) => { 
-      console.log(res,"response");
-      
+    console.log(query);
+    dispatch(
+      readCompany({ params: { filter: query, page: 1, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
       }
@@ -69,8 +70,9 @@ export default function useCustomer() {
     totalItems,
     handlePageChange,
     itemsPerPage,
-    filter, setFilter,
+    filter,
+    setFilter,
     handleFilterChange,
-    loading
+    loading,
   };
 }

@@ -20,7 +20,9 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
   const { content, contentDetails } = useAppSelector((state) => state.content);
 
   useEffect(() => {
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }))
+    setValue("additionalDetails", offerDetails?.additionalDetails);
+
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
 
   const schema = generateOfferAdditionalDetailsValidation(translate);
@@ -44,9 +46,10 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent) {
+    if (filteredContent && selectedContent !== offerDetails?.content?.id) {
       dispatch(setContentDetails(filteredContent))
       setValue("additionalDetails", filteredContent?.offerContent?.title);
+
     }
   }, [selectedContent])
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handlePrevious, 0,

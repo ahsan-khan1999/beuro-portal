@@ -1,4 +1,3 @@
-import { Layout } from "@/layout";
 import React, { useEffect, useState } from "react";
 import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
@@ -11,20 +10,23 @@ import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import MainCalender from "./calendar";
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
 import { Dashboard, FilterType } from "@/types";
-import { FiltersDefaultValues } from "@/enums/static";
+import customerIcon from "@/assets/pngs/customers.png";
+import leadsPngIcon from "@/assets/pngs/leads.png";
+import offersPngIcon from "@/assets/pngs/offers.png";
+import invoiceIcon from "@/assets/pngs/invoice.png";
+
 interface ActionType {
   type: string;
-  payload: Dashboard
+  payload: Dashboard;
 }
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
-  const { dashboard } = useAppSelector(state => state.auth)
+  const { dashboard } = useAppSelector((state) => state.auth);
   const [pieData, setPieData] = useState({
     datasets: [
       {
@@ -47,33 +49,37 @@ const AdminDashboard = () => {
       `${translate("dashboard_detail.charts_labels.pinterest")}`,
       `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
-  })
+  });
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(readDashboard({ params: { filter: filter } })).then((response: ActionType) => {
-      if (response?.payload) {
-        setPieData({
-          datasets: [
-            {
-              data: response?.payload?.leadSource?.map((item) => item?.totalLeadSource),
-              backgroundColor: [
-                "#FE9244",
-                "#FF376F",
-                "#4A13E7",
-                "#45C769",
-                "#7B18FF",
-                "#221177",
-              ],
-            },
-          ],
-          labels: response?.payload?.leadSource?.map((item) => item?._id)
-        })
+    dispatch(readDashboard({ params: { filter: filter } })).then(
+      (response: ActionType) => {
+        if (response?.payload) {
+          setPieData({
+            datasets: [
+              {
+                data: response?.payload?.leadSource?.map(
+                  (item) => item?.totalLeadSource
+                ),
+                backgroundColor: [
+                  "#FE9244",
+                  "#FF376F",
+                  "#4A13E7",
+                  "#45C769",
+                  "#7B18FF",
+                  "#221177",
+                ],
+              },
+            ],
+            labels: response?.payload?.leadSource?.map((item) => item?._id),
+          });
+        }
       }
-    })
-  }, [])
+    );
+  }, []);
 
   const dashboardCards = [
     {
@@ -135,11 +141,8 @@ const AdminDashboard = () => {
   ];
   // Sample data for the pie chart
 
-
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readDashboard({ params: { filter: { month: query?.month } } })
-    );
+    dispatch(readDashboard({ params: { filter: { month: query?.month } } }));
   };
 
   return (
@@ -154,11 +157,41 @@ const AdminDashboard = () => {
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
-        containerClassName="py-4 pl-4 max-w-[400px] mlg:max-w-[642px]  rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
-        textClassName="ml-4 w-full focus:outline-none border-[#BFBFBF] py-0 rounded-none "
+        containerClassName="py-4 max-w-[400px] mlg:max-w-[642px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        textClassName="ml-4 w-fullfocus:outline-none border-[#BFBFBF] py-0 rounded-none "
+        options={[
+          {
+            icon: customerIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: leadsPngIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: offersPngIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: invoiceIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+        ]}
       />
 
-      <DashboardFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
+      <DashboardFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
 
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
         {dashboardCards.map((item, index) => {
@@ -186,9 +219,9 @@ const AdminDashboard = () => {
       </div> */}
       <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
         <div className="hidden 2xl:block">
-          <FollowUpNotificationBar dashboard={dashboard}/>
+          <FollowUpNotificationBar dashboard={dashboard} />
         </div>
-        <ActivitiesNotificationBar dashboard={dashboard}/>
+        <ActivitiesNotificationBar dashboard={dashboard} />
         <PieChart data={pieData} />
       </div>
     </div>

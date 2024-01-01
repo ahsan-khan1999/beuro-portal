@@ -13,14 +13,18 @@ import SearchInputFiled from "@/base-components/filter/fields/search-input-field
 import { Dashboard, FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readAdminDashboard, readDashboard } from "@/api/slices/authSlice/auth";
+import customerIcon from "@/assets/pngs/customers.png";
+import leadsPngIcon from "@/assets/pngs/leads.png";
+import offersPngIcon from "@/assets/pngs/offers.png";
+import invoiceIcon from "@/assets/pngs/invoice.png";
 interface ActionType {
   type: string;
-  payload: Dashboard
+  payload: Dashboard;
 }
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
-  const dispatch = useAppDispatch()
-  const { adminDashboard } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch();
+  const { adminDashboard } = useAppSelector((state) => state.auth);
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });
@@ -46,7 +50,7 @@ const AdminDashboard = () => {
       `${translate("dashboard_detail.charts_labels.pinterest")}`,
       `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
-  })
+  });
   const dashboardCards = [
     {
       icon: activeSubscribersIcon,
@@ -78,8 +82,8 @@ const AdminDashboard = () => {
   ];
 
   useEffect(() => {
-    dispatch(readAdminDashboard({ params: { filter: filter } }))
-  }, [])
+    dispatch(readAdminDashboard({ params: { filter: filter } }));
+  }, []);
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readAdminDashboard({ params: { filter: { month: query?.month } } })
@@ -144,10 +148,40 @@ const AdminDashboard = () => {
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
-        containerClassName="p-4 max-w-[463px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
+        containerClassName="py-4 max-w-[400px] mlg:max-w-[642px] rounded-lg mt-[-30px] bg-white shadow-dashboardSearch flex space-x-1 items-center mx-auto"
         textClassName="ml-4 w-full  focus:outline-none pr-2 border-[#BFBFBF] py-0 rounded-none "
+        options={[
+          {
+            icon: customerIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: leadsPngIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: offersPngIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+          {
+            icon: invoiceIcon,
+            id: "V-2000",
+            userName: "Mateen",
+            service: "Umzug Cleaning Service",
+          },
+        ]}
       />
-      <DashboardFunctions filter={filter} setFilter={setFilter} handleFilterChange={handleFilterChange} />
+      <DashboardFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
 
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
         {dashboardCards.map((item, index) => {
@@ -165,7 +199,7 @@ const AdminDashboard = () => {
           );
         })}
       </div>
-      <div className="mt-[60px] grid-cols-1 grid lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5">
+      <div className="my-[60px] grid-cols-1 grid lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5">
         <div className="xl:col-span-2">
           <WavesChart datatest={datatest} />
         </div>

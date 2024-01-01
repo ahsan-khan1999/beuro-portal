@@ -15,25 +15,35 @@ export default function CustomerFilter({
   handleFilterChange,
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const moreFilters = {
-    text: "",
-  };
-  const { handleFilterResetToInitial, handleFilterReset } = useFilter({
-    filter,
-    setFilter,
-    moreFilters,
-  });
+  // const moreFilters: FilterType = {
+  //   text: FiltersDefaultValues.None,
+  //   status: FiltersDefaultValues.None,
+  //   sort: FiltersDefaultValues.None,
+  // };
+  // const {
+  //   handleFilterResetToInitial,
+  //   handleFilterReset,
+  //   extraFilterss,
+  //   handleExtraFilterToggle,
+  //   moreFilter,
+  //   handleExtraFiltersClose,
+  //   setMoreFilter,
+  // } = useFilter({
+  //   filter,
+  //   setFilter,
+  //   moreFilters,
+  // });
 
   const { t: translate } = useTranslation();
   const router = useRouter();
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("admin.customers_details.table_functions.active")}`,
-      type: "active",
+      type: "1",
     },
     {
       label: `${translate("admin.customers_details.table_functions.block")}`,
-      type: "blocked",
+      type: "0",
     },
   ];
   const onEnterPress = () => {
@@ -44,8 +54,6 @@ export default function CustomerFilter({
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
-      console.log(updatedValue);
-      
       return updatedValue;
     });
   };
@@ -82,7 +90,7 @@ export default function CustomerFilter({
       <div className="flex gap-x-4 w-full xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
-          key={idx}
+            key={idx}
             checkboxFilter={filter}
             setCheckBoxFilter={setFilter}
             type={"status"}
