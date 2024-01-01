@@ -3,6 +3,7 @@ import { combineClasses } from "@/utils/utility";
 import Loader from "../loader/loader";
 
 export const BaseButton = ({
+  id,
   children,
   buttonText,
   containerClassName,
@@ -23,6 +24,7 @@ export const BaseButton = ({
       className={`${containerClasses}`}
       onClick={onClick}
       disabled={disabled}
+      id={id}
     >
       {loading ? (
         <Loader

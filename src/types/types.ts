@@ -759,13 +759,13 @@ export interface EmailHeaderProps {
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
   contractTitle?: string;
-
+  activeButtonId: string | null;
   workerName?: string;
   contentName?: string;
   contractStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
-  onSendViaPost?: () => void;
+  onSendViaPost: () => void;
   onPrint: () => void;
   onDownload: () => void;
   title: string;
@@ -777,8 +777,9 @@ export interface ContractEmailHeaderProps {
   offerNo?: string;
   emailStatus?: string;
   loading?: boolean;
+  activeButtonId: string | null;
   onEmailSend: () => void;
-  onSendViaPost?: () => void;
+  onSendViaPost: () => void;
   onPrint: () => void;
   onDownload: () => void;
 }

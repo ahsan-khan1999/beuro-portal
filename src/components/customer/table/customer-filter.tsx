@@ -56,7 +56,7 @@ export default function CustomerFilter({
           { label: "Date", value: "createdAt" },
           { label: "Latest", value: "-createdAt" },
           { label: "Oldest", value: "createdAt" },
-          { label: "A - Z", value: "title" },
+          { label: "A - Z", value: "fullName" },
         ]}
         label="Sort By"
       />

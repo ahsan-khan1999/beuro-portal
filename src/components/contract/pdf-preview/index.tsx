@@ -24,7 +24,12 @@ import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { readContractDetails, sendContractEmail, sendOfferByPost, updateContractContent } from "@/api/slices/contract/contractSlice";
+import {
+  readContractDetails,
+  sendContractEmail,
+  sendOfferByPost,
+  updateContractContent,
+} from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
 import { updateQuery } from "@/utils/update-query";
 
@@ -80,7 +85,7 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo: ""
+    logo: "",
   },
   contactAddress: {
     address: {
@@ -133,13 +138,17 @@ interface ActionType {
 
 let contractPdfInfo = {
   subject: "",
-  description: ""
-}
+  description: "",
+};
 const PdfPriview = () => {
-
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps<ContractEmailHeaderProps>>(DUMMY_DATA);
+  const [offerData, setOfferData] =
+    useState<PdfProps<ContractEmailHeaderProps>>(DUMMY_DATA);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
+    null
+  );
+
+  const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
 
@@ -156,7 +165,6 @@ const PdfPriview = () => {
   const router = useRouter();
   const { offerID } = router.query;
 
-
   useEffect(() => {
     if (offerID) {
       dispatch(readContractDetails({ params: { filter: offerID } })).then(
@@ -170,26 +178,30 @@ const PdfPriview = () => {
                 offerNo: contractDetails?.contractNumber,
                 emailStatus: contractDetails?.contractStatus,
                 contractTitle: contractDetails?.title,
-                worker: contractDetails?.offerID?.createdBy?.fullName
-
+                worker: contractDetails?.offerID?.createdBy?.fullName,
               },
               headerDetails: {
                 offerNo: contractDetails?.offerID?.offerNumber,
                 offerDate: contractDetails?.offerID?.createdAt,
                 createdBy: contractDetails?.offerID?.createdBy?.fullName,
-                logo: contractDetails?.offerID?.createdBy?.company?.logo
+                logo: contractDetails?.offerID?.createdBy?.company?.logo,
               },
               contactAddress: {
                 address: {
-                  name: contractDetails?.offerID?.leadID?.customerDetail?.fullName,
-                  city: contractDetails?.offerID?.leadID?.customerDetail?.address?.country,
+                  name: contractDetails?.offerID?.leadID?.customerDetail
+                    ?.fullName,
+                  city: contractDetails?.offerID?.leadID?.customerDetail
+                    ?.address?.country,
                   postalCode:
-                    contractDetails?.offerID?.leadID?.customerDetail?.address?.postalCode,
+                    contractDetails?.offerID?.leadID?.customerDetail?.address
+                      ?.postalCode,
                   streetWithNumber:
-                    contractDetails?.offerID?.leadID?.customerDetail?.address?.streetNumber,
+                    contractDetails?.offerID?.leadID?.customerDetail?.address
+                      ?.streetNumber,
                 },
                 email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-                phone: contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
+                phone:
+                  contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
               },
               movingDetails: {
                 address: contractDetails?.offerID?.addressID?.address,
@@ -197,9 +209,9 @@ const PdfPriview = () => {
                 workDates: contractDetails?.offerID?.date,
                 handleTitleUpdate: handleTitleUpdate,
                 handleDescriptionUpdate: handleDescriptionUpdate,
-
               },
-              serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
+              serviceItem:
+                contractDetails?.offerID?.serviceDetail?.serviceDetail,
               serviceItemFooter: {
                 subTotal: contractDetails?.offerID?.subTotal?.toString(),
                 tax: contractDetails?.offerID?.taxAmount?.toString(),
@@ -226,9 +238,7 @@ const PdfPriview = () => {
                   },
                 },
                 thirdColumn: {},
-                fourthColumn: {
-
-                },
+                fourthColumn: {},
                 columnSettings: null,
                 currPage: 1,
                 totalPages: calculateTotalPages,
@@ -237,8 +247,7 @@ const PdfPriview = () => {
                 acknowledgementSlip: qrCodeAcknowledgementData,
                 payableTo: qrCodePayableToData,
               },
-              aggrementDetails:
-                contractDetails?.additionalDetails || "",
+              aggrementDetails: contractDetails?.additionalDetails || "",
               isOffer: false,
             };
             const distributeItems = (): ServiceList[][] => {
@@ -266,7 +275,9 @@ const PdfPriview = () => {
                   );
                 }
               } else {
-                pages.push(contractDetails?.offerID?.serviceDetail?.serviceDetail);
+                pages.push(
+                  contractDetails?.offerID?.serviceDetail?.serviceDetail
+                );
               }
 
               return pages;
@@ -274,7 +285,11 @@ const PdfPriview = () => {
 
             setNewPageData(distributeItems());
             setOfferData(formatData);
-            contractPdfInfo = { ...contractPdfInfo, subject: contractDetails?.title, description: contractDetails?.additionalDetails }
+            contractPdfInfo = {
+              ...contractPdfInfo,
+              subject: contractDetails?.title,
+              description: contractDetails?.additionalDetails,
+            };
           }
         }
       );
@@ -327,15 +342,18 @@ const PdfPriview = () => {
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
   const handleEmailSend = async () => {
+    setActiveButtonId("email");
     try {
-      const localStorageContractData = await localStoreUtil.get_data("contractComposeEmail");
+      const localStorageContractData = await localStoreUtil.get_data(
+        "contractComposeEmail"
+      );
 
       const data = {
         id: contractDetails?.id,
         email: localStorageContractData?.email,
         subject: contractPdfInfo?.subject,
         description: contractPdfInfo?.description,
-        pdf: localStorageContractData?.pdf
+        pdf: localStorageContractData?.pdf,
       };
       if (localStorageContractData) {
         const res = await dispatch(sendContractEmail({ data: data }));
@@ -349,11 +367,10 @@ const PdfPriview = () => {
   };
 
   const handleDonwload = () => {
-    window.open(offerData?.attachement)
+    window.open(offerData?.attachement);
   };
   const handlePrint = () => {
-    window.open(offerData?.attachement)
-
+    window.open(offerData?.attachement);
   };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -379,50 +396,48 @@ const PdfPriview = () => {
         subHeading="Thanks for updating offer we are happy to have you. "
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back()
+          router.back();
         }}
       />
     ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-
   };
   const handleTitleUpdate = async (value: string) => {
     const apiData = {
       id: offerID,
       title: value,
-    }
-    const response = await dispatch(updateContractContent({ data: apiData }))
+    };
+    const response = await dispatch(updateContractContent({ data: apiData }));
     if (response?.payload) {
-      contractPdfInfo = { ...contractPdfInfo, subject: value }
-      return true
-    }
-    else return false
-  }
+      contractPdfInfo = { ...contractPdfInfo, subject: value };
+      return true;
+    } else return false;
+  };
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: offerID,
-      additionalDetails: value
-    }
+      additionalDetails: value,
+    };
 
-    const response = await dispatch(updateContractContent({ data: apiData }))
+    const response = await dispatch(updateContractContent({ data: apiData }));
     if (response?.payload) {
-      contractPdfInfo = { ...contractPdfInfo, description: value }
+      contractPdfInfo = { ...contractPdfInfo, description: value };
 
-      return true
-    }
-    else return false
-  }
+      return true;
+    } else return false;
+  };
   const handleSendByPost = async () => {
+    setActiveButtonId("post");
     const apiData = {
       emailStatus: 2,
-      id: offerID
-
-    }
-    const response = await dispatch(sendOfferByPost({ data: apiData }))
-    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
-  }
+      id: offerID,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
   return (
     <>
       <EmailCard
@@ -435,7 +450,7 @@ const PdfPriview = () => {
         contractTitle={offerData?.emailHeader?.contractTitle || ""}
         worker={offerData?.emailHeader?.worker || ""}
         onSendViaPost={handleSendByPost}
-
+        activeButtonId={activeButtonId}
       />
       <div className="my-5">
         <Pdf<EmailHeaderProps>
