@@ -84,7 +84,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType).map((item, key) => ({
+                Object.keys(staticEnums.CustomerType)?.slice(1)?.map((item, key) => ({
                   value: item,
                   label: item,
                 })) || [],

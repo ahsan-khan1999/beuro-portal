@@ -19,7 +19,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "./auth";
+import { User } from './auth';
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -32,7 +32,7 @@ import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
-import { FollowUp } from "./settings";
+import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 export interface SideBar {
@@ -228,8 +228,8 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  emailSettings: EmailSetting | null,
   control?: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield
@@ -270,7 +270,7 @@ export type GenerateContactSupportFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  user?: User
 ) => FormField[];
 
 // content formfield
@@ -755,6 +755,7 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
+  handleSendByPost: () => void
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
