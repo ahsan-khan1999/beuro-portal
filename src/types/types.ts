@@ -578,6 +578,7 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
+  month?:number
 }
 
 export interface MoreFilterType {
@@ -861,6 +862,7 @@ export interface AggrementProps {
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
+  isCanvas?:boolean
 }
 
 export interface FiltersComponentProps {

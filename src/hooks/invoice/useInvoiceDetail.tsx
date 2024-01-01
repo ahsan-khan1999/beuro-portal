@@ -209,10 +209,10 @@ export default function useInvoiceDetail() {
     const handleInvoiceStatusUpdate = async (id: string, status: string, type: string) => {
         if (type === "invoice") {
             const res = await dispatch(updateInvoiceStatus({ data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] } }))
-            if (res?.payload) offerCreatedHandler()
+            if (res?.payload) dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } })), offerCreatedHandler()
         } else {
             const res = await dispatch(updateRecieptStatus({ data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] } }))
-            if (res?.payload) offerCreatedHandler()
+            if (res?.payload) dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } })), offerCreatedHandler()
         }
 
     }

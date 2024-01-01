@@ -52,7 +52,7 @@ export interface InputFieldProps {
   textClassName?: string;
   bgColor?: boolean;
   iconDisplay?: boolean;
-  options: {
+  options?: {
     icon: StaticImageData;
     id: string;
     userName: string;

@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
-import { createInvoice, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { createInvoice, readInvoiceDetails, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
@@ -34,11 +34,11 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const amount = watch("amount");
   const type = watch("type");
   useEffect(() => {
-    setValue("type","0")
+    setValue("type", "0")
     setValue("amount",0)
 
   }, [])
-    
+
   const fields = CreateInvoiceFormField(
     register,
     loading,
@@ -50,32 +50,32 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   useMemo(() => {
     if (type === '0') {
       if (invoiceDetails?.contractID?.offerID?.total < amount) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
-        setValue("amount", invoiceDetails?.contractID?.offerID?.total)
+        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - amount)
+        setValue("amount", invoiceDetails?.remainingAmount + invoiceDetails?.paidAmount)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
+        setValue("remainingAmount", invoiceDetails?.remainingAmount)
       }
     }
     else if (type === '1') {
-      if (invoiceDetails?.contractID?.offerID?.total < calculateTax(invoiceDetails?.contractID?.offerID?.total, amount)) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      if (Number(invoiceDetails?.remainingAmount) < calculateTax(Number(invoiceDetails?.remainingAmount), amount)) {
+        setValue("remainingAmount", invoiceDetails?.remainingAmount)
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - calculateTax(invoiceDetails?.contractID?.offerID?.total, amount))
+        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - calculateTax(Number(invoiceDetails?.remainingAmount), amount))
       }
     } else {
-      setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      setValue("remainingAmount", invoiceDetails?.remainingAmount)
 
     }
   }, [amount, type])
-  
+
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, ["paymentType"]: staticEnums["PaymentType"][data.paymentType], id: invoiceDetails?.id, isInvoiceRecurring: false }
     const res = await dispatch(createInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload) invoiceCreated();
+    if (res?.payload)  invoiceCreated();
   };
   return {
     error,

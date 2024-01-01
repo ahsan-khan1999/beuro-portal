@@ -47,6 +47,7 @@ export default function ContentFilters({
         // value={filter?.text}
         onEnterPress={handlePressEnter}
         ref={inputRef}
+        options={[]}
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
