@@ -94,6 +94,12 @@ export interface EmailSetting {
   mailFromAddress: string;
   mailFromName: string;
   testingMail: string;
+  logo: string;
+  email: string;
+  phoneNumber: string;
+  mobileNumber: string;
+  FooterColour: string;
+  textColour: string
 }
 
 export interface EmailTemplate {

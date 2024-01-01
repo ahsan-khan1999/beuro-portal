@@ -67,7 +67,7 @@ export default function useCustomerDetail(stage: boolean) {
     dispatch(
       updateModalType({
         type: ModalType.UPDATE_SUCCESS,
-        data: data,
+        data: JSON.parse(JSON.stringify(data)),
       })
     );
   };
@@ -166,10 +166,10 @@ export default function useCustomerDetail(stage: boolean) {
       updateCustomer({ data, router, setError, translate })
     );
     if (res?.payload) {
-      // dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       onClose();
-      // (router.pathname = "/customers"), (router.query = {});
-      // updateQuery(router, router.locale as string);
+      (router.pathname = "/customers"), (router.query = {});
+      updateQuery(router, router.locale as string);
     } else {
       onClose();
     }
