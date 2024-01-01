@@ -34,6 +34,7 @@ import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
 import { FollowUp } from "./settings";
 import { TaxSetting } from "@/api/slices/settingSlice/settings";
+import { ServiceType } from "@/enums/offers";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -420,6 +421,8 @@ export type GenerateOfferServiceFormField = (
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],
   setValue?: SetFieldValue<FieldValues>,
   watch?: UseFormWatch<FieldValues>
@@ -575,7 +578,6 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
-  month?: number
 }
 
 export interface MoreFilterType {
@@ -615,7 +617,7 @@ export interface DocumentHeaderDetailsProps {
   offerNo: string;
   offerDate: string;
   createdBy: string;
-  logo: string
+  logo: string;
 }
 
 export interface ProductItemFooterProps {
@@ -763,7 +765,7 @@ export interface InvoiceEmailHeaderProps {
   contractStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
-  onSendViaPost: () => void;
+  onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
   title: string;
@@ -776,10 +778,9 @@ export interface ContractEmailHeaderProps {
   emailStatus?: string;
   loading?: boolean;
   onEmailSend: () => void;
-  onSendViaPost: () => void;
+  onSendViaPost?: () => void;
   onPrint: () => void;
   onDownload: () => void;
-
 }
 
 export interface PdfProps<T = EmailHeaderProps> {
@@ -795,8 +796,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   isOffer?: boolean;
   id?: string;
   signature?: string;
-  attachement?: string
-
+  attachement?: string;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -859,7 +859,6 @@ export interface AggrementProps {
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
-  isCanvas?: boolean
 }
 
 export interface FiltersComponentProps {

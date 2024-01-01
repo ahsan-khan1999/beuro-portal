@@ -178,6 +178,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;
   onClick?: () => void;
+  onChange?: (value: string) => void;
 }
 
 export interface DragAndDropFileFieldProps

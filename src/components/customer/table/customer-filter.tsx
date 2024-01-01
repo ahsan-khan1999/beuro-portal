@@ -39,10 +39,6 @@ export default function CustomerFilter({
       return updatedValue;
     });
   };
-
-  const inputValue =
-    filter.text === FiltersDefaultValues.None ? "" : filter.text;
-
   return (
     <div className="flex gap-x-4 items-center">
       <InputField

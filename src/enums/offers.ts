@@ -37,7 +37,7 @@ export enum OfferAddressEditDetails {
   postCode = "postalCode",
   country = "country",
   description = "description",
-  address="address"
+  address = "address",
 }
 
 // enum for add service offer details
@@ -50,10 +50,15 @@ export enum AddServiceOfferDetails {
   totalPrice = "totalPrice",
   description = "description",
   discountDiscription = "discountDescription",
-  discountType="discountType",
-  isDiscount="isDiscount",
-  discountAmount="discountAmount",
-  isTax="isTax",
-  taxType="taxType",
-  taxAmount="taxAmount"
+  discountType = "discountType",
+  isDiscount = "isDiscount",
+  discountAmount = "discountAmount",
+  isTax = "isTax",
+  taxType = "taxType",
+  taxAmount = "taxAmount",
+}
+
+export enum ServiceType {
+  NEW_SERVICE,
+  EXISTING_SERVICE,
 }
