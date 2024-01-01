@@ -2,6 +2,7 @@ import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
 import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
+import { StaticImageData } from "next/image";
 
 export interface GlobalState {
   loading: boolean;
@@ -51,6 +52,12 @@ export interface InputFieldProps {
   textClassName?: string;
   bgColor?: boolean;
   iconDisplay?: boolean;
+  options: {
+    icon: StaticImageData;
+    id: string;
+    userName: string;
+    service: string;
+  }[];
 }
 
 export interface OptionsFieldProps {
@@ -62,7 +69,7 @@ export interface OptionsFieldProps {
   options: { label: string; value: string }[];
   dropDownIconClassName: string;
   containerClassName?: string;
-  isSearch?:boolean
+  isSearch?: boolean;
 }
 
 export interface GlobalApiResponseType {

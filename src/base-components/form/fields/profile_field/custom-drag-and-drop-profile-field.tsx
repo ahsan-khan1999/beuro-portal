@@ -48,7 +48,7 @@ export const ProfileUpload = ({
               width={241}
               height={241}
               alt="Uploaded Preview"
-              className={`${classes}`}
+              className={`${classes} object-contain`}
             />
             <label
               className={`absolute ${iconClasses} ${disabled && "hidden"}`}

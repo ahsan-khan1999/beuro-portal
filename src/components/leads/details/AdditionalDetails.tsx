@@ -32,9 +32,9 @@ const AdditionalDetails = ({
         </button>
       </div>
 
-      <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 mt-6">
+      <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 mt-6 break-all">
         <div
-          className="text-[#4B4B4B] font-normal text-base"
+          className="text-[#4B4B4B] font-normal text-base "
           dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }}
         />
       </div>

@@ -19,7 +19,6 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item: Lead, index: number) => {
-
         return (
           <div
             onClick={() =>
@@ -33,7 +32,7 @@ const TableRows = ({
             className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(50px,_50px),minmax(130px,_130px)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(120px,_100%)_minmax(80px,_100%)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(150px,_100%)_minmax(110px,_110%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(50px,_50px),minmax(120px,_120px)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mt-2 rounded-md"
           >
             <span className="py-4 flex items-center">{item?.refID}</span>
-            <span className="py-4 flex items-center ">
+            <span className="break-all py-4 flex items-center ">
               {item.customerDetail?.fullName}
             </span>
             <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
