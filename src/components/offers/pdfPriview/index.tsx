@@ -4,6 +4,7 @@ import { Pdf } from "@/components/pdf/pdf";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   readOfferDetails,
+  sendOfferByPost,
   sendOfferEmail,
 } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
@@ -208,7 +209,7 @@ const PdfPriview = () => {
                 },
                 thirdColumn: {},
                 fourthColumn: {
-                 
+
                 },
                 columnSettings: null,
                 currPage: 1,
@@ -325,7 +326,16 @@ const PdfPriview = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: offerID
 
+    }
+    const response = await dispatch(sendOfferByPost({ data: apiData }))
+    if (response?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+
+  }
   const handleDonwload = () => {
     window.open(offerData?.attachement)
   };
@@ -363,6 +373,7 @@ const PdfPriview = () => {
         loading={loading}
         onDownload={handleDonwload}
         onPrint={handlePrint}
+        handleSendByPost={handleSendByPost}
       />
       <div className="my-5">
         <Pdf<EmailHeaderProps>
