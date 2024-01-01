@@ -17,7 +17,7 @@ export default function SelectField({
   value,
   dropDownIconClassName,
   containerClassName,
-  isSearch
+  isSearch,
 }: OptionsFieldProps) {
   const defaultClasses = `  flex items-center`;
   const containerClasses = combineClasses(defaultClasses, containerClassName);
@@ -58,8 +58,7 @@ export default function SelectField({
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            {
-              isSearch   &&
+            {isSearch && (
               <div className="flex items-center border border-lightGray rounded-md w-full  bg-[#f6f6f7]">
                 <Image
                   src={searchIcon}
@@ -73,7 +72,7 @@ export default function SelectField({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-1 placeholder:text-sm bg-[#f6f6f7] "
                 />
               </div>
-            }
+            )}
             <div
               className="mt-2 h-full max-h-[150px] min-h-fit overflow-x-hidden overflow-y-auto"
               id="dropdownSerchBar"
@@ -83,15 +82,12 @@ export default function SelectField({
                   <div
                     className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
                     key={idx}
+                    onClick={() => {
+                      handleChange(value);
+                      setIsOpen(false);
+                    }}
                   >
-                    <span
-                      onClick={() => {
-                        handleChange(value);
-                        setIsOpen(false);
-                      }}
-                    >
-                      {label}
-                    </span>
+                    <span>{label}</span>
                   </div>
                 ))}
               </div>

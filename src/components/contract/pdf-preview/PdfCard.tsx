@@ -22,8 +22,8 @@ const PdfCard = ({
   onPrint,
   worker,
   contractTitle,
-  onSendViaPost
-
+  onSendViaPost,
+  activeButtonId,
 }: ContractEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -52,7 +52,7 @@ const PdfCard = ({
               onClick={onSendViaPost}
               containerClassName="flex items-center group gap-x-3 row-reverse"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-              loading={loading}
+              loading={loading && activeButtonId === 'post'}
               loaderColor="#4A13E7"
             >
               <PostIcon className="text-primary group-hover:text-primary" />
@@ -63,7 +63,7 @@ const PdfCard = ({
               onClick={onEmailSend}
               containerClassName="flex items-center group gap-x-3 row-reverse"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-              loading={loading}
+              loading={loading && activeButtonId === 'email'}
               loaderColor="#4A13E7"
             >
               <EmailIcon className="text-primary group-hover:text-primary" />

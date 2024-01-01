@@ -19,7 +19,7 @@ export default function FollowUpFilter({
     <div className="flex">
       <InputField
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
-        value={filter.text}
+        // value={filter.text}
         iconDisplay={false}
         bgColor={true}
       />

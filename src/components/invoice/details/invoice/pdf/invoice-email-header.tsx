@@ -24,9 +24,10 @@ export const InvoiceEmailHeader = ({
   onPrint,
   onSendViaPost,
   title,
+  activeButtonId,
 }: InvoiceEmailHeaderProps) => {
   const router = useRouter();
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   return (
     <PdfCardLayout>
       <div className="flex justify-between items-center">
@@ -35,20 +36,18 @@ export const InvoiceEmailHeader = ({
             src={backIcon}
             alt="backIcon"
             className="cursor-pointer"
-            onClick={() => router.back()}
-
+            onClick={router.back}
           />
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-            {title}
-          </h1>
+          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">{title}</h1>
         </div>
         <div className="flex items-center justify-between gap-5">
           <BaseButton
+            id="sendPostButton"
             buttonText={translate("contracts.pdf_card_details.send_via_post")}
             onClick={onSendViaPost}
             containerClassName="flex items-center group gap-x-3 row-reverse"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-            loading={loading}
+            loading={loading && activeButtonId === "post"}
             loaderColor="#4A13E7"
           >
             <PostIcon className="text-primary group-hover:text-primary" />
@@ -58,14 +57,24 @@ export const InvoiceEmailHeader = ({
             onClick={onEmailSend}
             containerClassName="flex items-center gap-x-3 row-reverse group"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-white"
-            loading={loading}
+            loading={loading && activeButtonId === "email"}
             loaderColor="#4A13E7"
           >
             <EmailIcon className="text-primary group-hover:text-white" />
           </BaseButton>
 
-          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={onDownload} />
-          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={onPrint} />
+          <Image
+            src={downloadIcon}
+            alt="downloadIcon"
+            className="cursor-pointer"
+            onClick={onDownload}
+          />
+          <Image
+            src={printerIcon}
+            alt="printerIcon"
+            className="cursor-pointer"
+            onClick={onPrint}
+          />
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -99,14 +108,8 @@ export const InvoiceEmailHeader = ({
           <span className="text-[#4D4D4D] text-base font-normal">
             Contract Status:
           </span>
-          <div
-            className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"
-              }`}
-          >
-            <span
-              className={`text-base font-medium ${"text-[#FE9244]"
-                }`}
-            >
+          <div className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"}`}>
+            <span className={`text-base font-medium ${"text-[#FE9244]"}`}>
               {contractStatus}
             </span>
           </div>

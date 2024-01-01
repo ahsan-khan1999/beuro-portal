@@ -212,6 +212,7 @@ export interface BaseCardProps extends WidgetBaseProps {}
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {
+  id?: string;
   onClick: ButtonClickFunction;
   buttonText: string;
   disabled?: boolean;

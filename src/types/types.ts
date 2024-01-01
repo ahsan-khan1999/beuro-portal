@@ -19,7 +19,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "./auth";
+import { User } from './auth';
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -32,8 +32,9 @@ import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
-import { FollowUp } from "./settings";
+import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { TaxSetting } from "@/api/slices/settingSlice/settings";
+import { ServiceType } from "@/enums/offers";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -227,8 +228,8 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  emailSettings: EmailSetting | null,
   control?: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield
@@ -269,7 +270,7 @@ export type GenerateContactSupportFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
+  user?: User
 ) => FormField[];
 
 // content formfield
@@ -420,6 +421,8 @@ export type GenerateOfferServiceFormField = (
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],
   setValue?: SetFieldValue<FieldValues>,
   watch?: UseFormWatch<FieldValues>
@@ -575,7 +578,6 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
-  month?: number
 }
 
 export interface MoreFilterType {
@@ -615,7 +617,7 @@ export interface DocumentHeaderDetailsProps {
   offerNo: string;
   offerDate: string;
   createdBy: string;
-  logo: string
+  logo: string;
 }
 
 export interface ProductItemFooterProps {
@@ -753,11 +755,12 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
+  handleSendByPost: () => void
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
   contractTitle?: string;
-
+  activeButtonId: string | null;
   workerName?: string;
   contentName?: string;
   contractStatus?: string;
@@ -775,11 +778,11 @@ export interface ContractEmailHeaderProps {
   offerNo?: string;
   emailStatus?: string;
   loading?: boolean;
+  activeButtonId: string | null;
   onEmailSend: () => void;
   onSendViaPost: () => void;
   onPrint: () => void;
   onDownload: () => void;
-
 }
 
 export interface PdfProps<T = EmailHeaderProps> {
@@ -795,8 +798,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   isOffer?: boolean;
   id?: string;
   signature?: string;
-  attachement?: string
-
+  attachement?: string;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
@@ -859,7 +861,6 @@ export interface AggrementProps {
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
-  isCanvas?: boolean
 }
 
 export interface FiltersComponentProps {

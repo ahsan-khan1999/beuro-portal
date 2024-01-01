@@ -5,6 +5,7 @@ import { SignaturePad } from "./signature-pad";
 import { Footer } from "../../footer";
 import { AggrementProps } from "@/types/types";
 import { EditableAggrement } from "./editable-aggrement";
+import moment from "moment";
 
 export const Aggrement = ({
   contactAddress,
@@ -19,6 +20,7 @@ export const Aggrement = ({
   signature,
   isCanvas
 }: AggrementProps) => {
+  const date = moment(new Date()).format("DD/MMMM/YY")
   return (
     <div>
       <DocumentHeader {...headerDetails} />
@@ -32,11 +34,11 @@ export const Aggrement = ({
               <div className="h-[223.656px] flex flex-col justify-between">
                 <div className=" pt-5">
                   <span className="text-[#000] text-base font-medium">
-                    Gültigkeit der Offerte:
+                    Validity of the offer:
                   </span>
 
                   <p className="text-[#000] text-[14px] font-normal">
-                    3 Monate ab Erstellung der Offerte
+                    3 months from preparation of the offer
                   </p>
                 </div>
                 <p className="text-[18px] text-black font-medium pb-[43px]">
@@ -45,7 +47,7 @@ export const Aggrement = ({
               </div>
               <div className="flex flex-col ">
                 <span className="font-medium text-base mb-2">
-                  25 December 2023
+                  {date}
                 </span>
                 <hr className="mb-[17px]" />
                 <span className="text-base text-black font-normal ">Date</span>
@@ -72,11 +74,11 @@ export const Aggrement = ({
                 <div className="h-[223.656px] flex flex-col justify-between">
                   <div className=" pt-5">
                     <span className="text-[#000] text-base font-medium">
-                      Gültigkeit der Offerte:
+                      Validity of the offer:
                     </span>
 
                     <p className="text-[#000] text-[14px] font-normal">
-                      3 Monate ab Erstellung der Offerte
+                      3 months from preparation of the offer
                     </p>
                   </div>
                   <p className="text-[18px] text-black font-medium pb-[43px]">
@@ -90,7 +92,8 @@ export const Aggrement = ({
             <div className="grid grid-cols-2 gap-x-[103px] mt-4 items-center">
               <div className="flex flex-col  ">
                 <span className="font-medium text-base mb-2">
-                  25 December 2023
+                  {date}
+
                 </span>
                 <hr className="mb-[17px]" />
                 <span className="text-base text-black font-normal ">Date</span>

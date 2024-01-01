@@ -31,7 +31,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     (state) => state.customer
   );
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: { paginate: 0 } } }));
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const onCancel = () => {
@@ -55,7 +55,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const customerType = watch("customerType");
 
   const type = watch("type");
-  
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.filter((item) => item.id === id);
@@ -71,7 +71,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (leadDetails.id) {
-      
+
       reset({
         fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,

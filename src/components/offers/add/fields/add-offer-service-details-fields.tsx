@@ -18,6 +18,7 @@ import { getKeyByValue } from "@/utils/auth.util";
 import { TaxSetting } from "../../../../api/slices/settingSlice/settings";
 import { calculatePercentage, calculateTax } from "@/utils/utility";
 import { useState } from "react";
+import { ServiceType } from "@/enums/offers";
 const serviceObject = {
   serviceTitle: "",
   price: 0,
@@ -36,6 +37,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   properties,
   append,
   remove,
+  serviceType,
+  onServiceChange,
   fields,
   setValue
 ) => {
@@ -47,8 +50,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     offerDetails,
     tax,
   } = properties;
-
-  const [isNewService, setIsNewService] = useState(true);
 
   // if(!fields) return null;
 
@@ -83,6 +84,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       id: `serviceDetail.${i}.serviceType`,
                       name: `serviceDetail.${i}.serviceType`,
                       register,
+                      onChange: (val) => onServiceChange(i, ServiceType.NEW_SERVICE),
                     },
                   },
                   {
@@ -94,12 +96,13 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       id: `serviceDetail.${i}.serviceType`,
                       name: `serviceDetail.${i}.serviceType`,
                       register,
+                      onChange: (val) => onServiceChange(i, ServiceType.EXISTING_SERVICE),
                     },
                   },
                 ],
               },
             },
-            {
+            serviceType[i] === ServiceType.EXISTING_SERVICE && {
               containerClass: "mb-0 col-span-2",
               label: {
                 text: "Service Title/Product",
@@ -120,6 +123,24 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 // value: "" ,
                 onItemChange: onCustomerSelect,
                 fieldIndex: i,
+              },
+            },
+            serviceType[i] === ServiceType.NEW_SERVICE && {
+              containerClass:
+                "mb-0  row-start-1 col-start-2 col-end-4 col-span-2",
+              label: {
+                text: "Service Title/Product",
+                htmlFor: `serviceDetail.${i}.serviceTitle`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.input,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                inputType: "text",
+                id: `serviceDetail.${i}.serviceTitle`,
+                name: `serviceDetail.${i}.serviceTitle`,
+                placeholder: "Enter Service Name",
+                register,
               },
             },
           ],
@@ -287,6 +308,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
     properties,
     append,
     remove,
+    serviceType,
+    onServiceChange,
     fields,
     setValue
   ) => {

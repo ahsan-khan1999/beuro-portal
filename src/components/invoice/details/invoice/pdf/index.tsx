@@ -30,9 +30,11 @@ import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { InvoiceEmailHeader } from "./invoice-email-header";
-import Page1 from "./pages/Page1";
-import Page2 from "./pages/Page2";
-import { InvoiceCardContentProps, PdfSubInvoiceTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
+import {
+  InvoiceCardContentProps,
+  PdfSubInvoiceTypes,
+  SubInvoiceTableRowTypes,
+} from "@/types/invoice";
 import { ContentTableRowTypes } from "@/types/content";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateQuery } from "@/utils/update-query";
@@ -89,7 +91,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo: ""
+    logo: "",
   },
   contactAddress: {
     address: {
@@ -143,12 +145,12 @@ interface EmailData {
   subject: string;
   description: string;
   email: string;
-  pdf: string[]
+  pdf: string[];
 }
 let invoiceInfoObj = {
   subject: "",
-  description: ""
-}
+  description: "",
+};
 const DetailsPdfPriview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   // const [emailData, setEmailData] = useState({ subject: "", description: "" })
@@ -157,14 +159,13 @@ const DetailsPdfPriview = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
-  const [email, setEmail] = useState<
-    EmailData
-  >({
+  const [email, setEmail] = useState<EmailData>({
     description: "",
     email: "",
     pdf: [""],
-    subject: ""
+    subject: "",
   });
+  const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   const {
     auth: { user },
@@ -181,154 +182,162 @@ const DetailsPdfPriview = () => {
 
   useEffect(() => {
     if (invoiceID) {
-      dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } })).then(
-        (response: ActionType) => {
-          if (response?.payload) {
-            const invoiceDetails: PdfSubInvoiceTypes =
-              response?.payload;
+      dispatch(
+        readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+      ).then((response: ActionType) => {
+        if (response?.payload) {
+          const invoiceDetails: PdfSubInvoiceTypes = response?.payload;
 
-            let formatData: PdfProps<InvoiceEmailHeaderProps> = {
-              attachement: invoiceDetails?.attachement,
-              emailHeader: {
-                contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
-                workerName: invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.fullName,
-                contractStatus: invoiceDetails?.invoiceID?.contractID?.contractStatus,
-                contentName:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.content?.contentName,
-                contractTitle: invoiceDetails?.title,
-
+          let formatData: PdfProps<InvoiceEmailHeaderProps> = {
+            attachement: invoiceDetails?.attachement,
+            emailHeader: {
+              contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+              workerName:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
+                  ?.fullName,
+              contractStatus:
+                invoiceDetails?.invoiceID?.contractID?.contractStatus,
+              contentName:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.content
+                  ?.contentName,
+              contractTitle: invoiceDetails?.title,
+            },
+            headerDetails: {
+              offerNo:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
+              offerDate: invoiceDetails?.invoiceID?.createdAt,
+              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+              logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
+            },
+            contactAddress: {
+              address: {
+                name: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  ?.customerDetail.fullName,
+                city: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  ?.customerDetail?.address?.country,
+                postalCode:
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                    ?.customerDetail?.address?.postalCode,
+                streetWithNumber:
+                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                    ?.customerDetail?.address?.streetNumber,
               },
-              headerDetails: {
-                offerNo: invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-                offerDate: invoiceDetails?.invoiceID?.createdAt,
-                createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-                logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo
+              email:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  ?.customerDetail?.email,
+              phone:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  ?.customerDetail?.phoneNumber,
+            },
+            movingDetails: {
+              address:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  ?.addressID?.address,
+              header: invoiceDetails?.title as string,
+              workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
+              handleTitleUpdate: handleTitleUpdate,
+              handleDescriptionUpdate: handleDescriptionUpdate,
+            },
+            serviceItem:
+              invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
+                ?.serviceDetail,
+            serviceItemFooter: {
+              subTotal:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
+              tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+              discount:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
+              grandTotal:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
+            },
+            footerDetails: {
+              firstColumn: {
+                companyName:
+                  invoiceDetails?.invoiceID.createdBy?.company?.companyName,
+                email: invoiceDetails?.invoiceID?.createdBy.email,
+                phoneNumber:
+                  invoiceDetails?.invoiceID.createdBy?.company?.phoneNumber,
+                taxNumber:
+                  invoiceDetails?.invoiceID.createdBy?.company?.taxNumber,
+                website: invoiceDetails?.invoiceID.createdBy?.company?.website,
               },
-              contactAddress: {
+              secondColumn: {
                 address: {
-                  name: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-                    .fullName,
-                  city: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
-                    ?.customerDetail?.address?.country,
-                  postalCode:
-                    invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-                      ?.address?.postalCode,
-                  streetWithNumber:
-                    invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-                      ?.address?.streetNumber,
+                  postalCode: user?.company.address.postalCode,
+                  streetNumber: user?.company.address.streetNumber,
                 },
-                email:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-                    ?.email,
-                phone:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-                    ?.phoneNumber,
+                bankDetails: {
+                  accountNumber: user?.company.bankDetails.accountNumber,
+                  bankName: user?.company.bankDetails.bankName,
+                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                },
               },
-              movingDetails: {
-                address:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.addressID?.address,
-                header: invoiceDetails?.title as string,
-                workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
-                handleTitleUpdate: handleTitleUpdate,
-                handleDescriptionUpdate: handleDescriptionUpdate
+              thirdColumn: {},
+              fourthColumn: {},
+              columnSettings: null,
+              currPage: 1,
+              totalPages: calculateTotalPages,
+            },
+            qrCode: {
+              acknowledgementSlip: qrCodeAcknowledgementData,
+              payableTo: qrCodePayableToData,
+            },
+            aggrementDetails: invoiceDetails?.additionalDetails || "",
+            isOffer: false,
+          };
+          const distributeItems = (): ServiceList[][] => {
+            const totalItems =
+              invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
+                ?.serviceDetail?.length;
+            let pages: ServiceList[][] = [];
 
-              },
-              serviceItem:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
-                  ?.serviceDetail,
-              serviceItemFooter: {
-                subTotal:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-                tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
-                discount:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
-                grandTotal:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
-              },
-              footerDetails: {
-                firstColumn: {
-                  companyName: invoiceDetails?.invoiceID.createdBy?.company?.companyName,
-                  email: invoiceDetails?.invoiceID?.createdBy.email,
-                  phoneNumber: invoiceDetails?.invoiceID.createdBy?.company?.phoneNumber,
-                  taxNumber: invoiceDetails?.invoiceID.createdBy?.company?.taxNumber,
-                  website: invoiceDetails?.invoiceID.createdBy?.company?.website,
-                },
-                secondColumn: {
-                  address: {
-                    postalCode: user?.company.address.postalCode,
-                    streetNumber: user?.company.address.streetNumber,
-                  },
-                  bankDetails: {
-                    accountNumber: user?.company.bankDetails.accountNumber,
-                    bankName: user?.company.bankDetails.bankName,
-                    ibanNumber: user?.company.bankDetails.ibanNumber,
-                  },
-                },
-                thirdColumn: {
-
-                },
-                fourthColumn: {
-
-                },
-                columnSettings: null,
-                currPage: 1,
-                totalPages: calculateTotalPages,
-              },
-              qrCode: {
-                acknowledgementSlip: qrCodeAcknowledgementData,
-                payableTo: qrCodePayableToData,
-              },
-              aggrementDetails:
-                invoiceDetails?.additionalDetails || "",
-              isOffer: false,
-            };
-            const distributeItems = (): ServiceList[][] => {
-              const totalItems =
-                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
-                  ?.serviceDetail?.length;
-              let pages: ServiceList[][] = [];
-
-              if (totalItems > maxItemsFirstPage) {
+            if (totalItems > maxItemsFirstPage) {
+              pages.push(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
+                  0,
+                  maxItemsFirstPage
+                )
+              );
+              for (
+                let i = maxItemsFirstPage;
+                i < totalItems;
+                i += maxItemsPerPage
+              ) {
                 pages.push(
                   invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
-                    0,
-                    maxItemsFirstPage
+                    i,
+                    i + maxItemsPerPage
                   )
                 );
-                for (
-                  let i = maxItemsFirstPage;
-                  i < totalItems;
-                  i += maxItemsPerPage
-                ) {
-                  pages.push(
-                    invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.slice(
-                      i,
-                      i + maxItemsPerPage
-                    )
-                  );
-                }
-              } else {
-                pages.push(
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
-                    ?.serviceDetail
-                );
               }
+            } else {
+              pages.push(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
+                  ?.serviceDetail
+              );
+            }
 
-              return pages;
-            };
+            return pages;
+          };
 
-            setNewPageData(distributeItems());
-            setInvoiceData(formatData);
-            setEmail({
-              subject: invoiceDetails?.title as string,
-              description: invoiceDetails?.additionalDetails as string,
-              email: invoiceDetails?.invoiceID.contractID?.offerID?.leadID?.customerDetail?.email,
-              pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments
-            });
-            invoiceInfoObj = { ...invoiceInfoObj, subject: invoiceDetails?.title as string, description: invoiceDetails?.additionalDetails as string }
-          }
+          setNewPageData(distributeItems());
+          setInvoiceData(formatData);
+          setEmail({
+            subject: invoiceDetails?.title as string,
+            description: invoiceDetails?.additionalDetails as string,
+            email:
+              invoiceDetails?.invoiceID.contractID?.offerID?.leadID
+                ?.customerDetail?.email,
+            pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.attachments,
+          });
+          invoiceInfoObj = {
+            ...invoiceInfoObj,
+            subject: invoiceDetails?.title as string,
+            description: invoiceDetails?.additionalDetails as string,
+          };
         }
-      );
+      });
     }
   }, [invoiceID]);
 
@@ -366,8 +375,8 @@ const DetailsPdfPriview = () => {
       }
     })();
   }, []);
-  // const totalItems = offerData.serviceItem.length;
-  const totalItems = 34;
+  const totalItems = invoiceData?.serviceItem?.length;
+  // const totalItems = 34;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
@@ -378,28 +387,37 @@ const DetailsPdfPriview = () => {
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
   const handleEmailSend = async () => {
+    setActiveButtonId("email");
     if (email) {
       const data = {
         id: invoiceID,
         email: email.email,
         subject: invoiceInfoObj?.subject,
         description: invoiceInfoObj?.description,
-        pdf: email?.pdf
+        pdf: email?.pdf,
       };
 
       const res = await dispatch(sendInvoiceEmail({ data }));
       if (res?.payload)
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
     }
-
+  };
+  const handleSendByPost = async () => {
+    setActiveButtonId("post");
+    const apiData = {
+      emailStatus: 2,
+      id: invoiceID,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleDonwload = () => {
-    window.open(invoiceData?.attachement)
+    window.open(invoiceData?.attachement);
   };
   const handlePrint = () => {
-    window.open(invoiceData?.attachement)
-
+    window.open(invoiceData?.attachement);
   };
 
   const onClose = () => {
@@ -426,7 +444,7 @@ const DetailsPdfPriview = () => {
         subHeading="Thanks for updating offer we are happy to have you. "
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back()
+          router.back();
         }}
       />
     ),
@@ -438,36 +456,32 @@ const DetailsPdfPriview = () => {
     const apiData = {
       id: invoiceID,
       title: value,
-    }
-    const response = await dispatch(updateInvoiceContent({ data: apiData }))
+    };
+    const response = await dispatch(updateInvoiceContent({ data: apiData }));
     if (response?.payload) {
-      invoiceInfoObj = { ...invoiceInfoObj, subject: value }
-      return true
-    }
-    else return false
-  }
+      invoiceInfoObj = { ...invoiceInfoObj, subject: value };
+      return true;
+    } else return false;
+  };
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: invoiceID,
-      additionalDetails: value
-    }
+      additionalDetails: value,
+    };
 
-    const response = await dispatch(updateInvoiceContent({ data: apiData }))
+    const response = await dispatch(updateInvoiceContent({ data: apiData }));
     if (response?.payload) {
-      invoiceInfoObj = { ...invoiceInfoObj, description: value }
-      return true
-    }
-    else return false
-  }
-  const handleSendByPost = async () => {
-    const apiData = {
-      emailStatus: 2,
-      id: invoiceID
+      invoiceInfoObj = { ...invoiceInfoObj, description: value };
+      return true;
+    } else return false;
+  };
 
+  //resetting active button state
+  useEffect(() => {
+    if (!loading) {
+      setActiveButtonId(null);
     }
-    const response = await dispatch(sendOfferByPost({ data: apiData }))
-    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
-  }
+  }, [loading]);
   return (
     <>
       <InvoiceEmailHeader
@@ -478,7 +492,12 @@ const DetailsPdfPriview = () => {
         onDownload={handleDonwload}
         onPrint={handlePrint}
         onSendViaPost={handleSendByPost}
-        title={router.pathname?.includes("receipt") ? "Receipt Details" : "Invoice Details"}
+        activeButtonId={activeButtonId}
+        title={
+          router.pathname?.includes("receipt")
+            ? "Receipt Details"
+            : "Invoice Details"
+        }
       />
       <div className="my-5">
         <Pdf<InvoiceEmailHeaderProps>

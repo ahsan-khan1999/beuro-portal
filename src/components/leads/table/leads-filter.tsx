@@ -109,7 +109,7 @@ export default function LeadsFilter({
             { label: "Date", value: "createdAt" },
             { label: "Latest", value: "-createdAt" },
             { label: "Oldest", value: "createdAt" },
-            { label: "A - Z", value: "title" },
+            { label: "A - Z", value: "customerDetail.fullName" },
           ]}
           label="Sort By"
         />

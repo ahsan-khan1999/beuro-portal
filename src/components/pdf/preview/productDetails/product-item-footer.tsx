@@ -10,14 +10,14 @@ export const ProductItemFooter = ({
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
       <div className="flex flex-col">
         <span className="text-base font-medium text-[#000]">
-          Konditionen Schätzofferte Umzug
+          Conditions for moving estimates
         </span>
 
         <span className="text-[#404040] font-normal mt-[10px]">
-          Vielen Dank für Ihr Interesse an unseren Dienstleistungen. <br />
-          Sie finden nachfolgend weitere Informationen bezüglich der Richtlinien{" "}
-          <br /> und Bedingungen. Bitte nehmen Sie sich Zeit, um die
-          nachfolgenden <br /> Geschäftsbedingungen zu verstehen.
+          Thank you for your interest in our services. <br />
+          Below you will find further information regarding the guidelines{" "}
+          <br /> and conditions.  Please take the time to understand the following
+          <br /> terms and conditions below.
         </span>
       </div>
 
