@@ -269,8 +269,8 @@ export type GenerateContactSupportFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  user?:User
-  ) => FormField[];
+  user?: User
+) => FormField[];
 
 // content formfield
 export type GenerateContentFormField = (
@@ -753,6 +753,7 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
+  handleSendByPost: () => void
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;

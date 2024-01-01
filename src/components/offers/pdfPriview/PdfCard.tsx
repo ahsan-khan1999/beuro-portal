@@ -10,6 +10,7 @@ import { IconOnlyButton } from "@/base-components/ui/button/icon-only-button";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailHeaderProps } from "@/types";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
+import { PostIcon } from "@/assets/svgs/components/post-icon";
 
 const EmailCard = ({
   emailStatus,
@@ -17,7 +18,9 @@ const EmailCard = ({
   onEmailSend,
   loading,
   onDownload,
-  onPrint
+  onPrint,
+  handleSendByPost
+
 }: EmailHeaderProps) => {
   const router = useRouter();
   return (
@@ -36,15 +39,26 @@ const EmailCard = ({
         </div>
 
         <div className="flex items-center justify-between gap-5">
+
+          <BaseButton
+            buttonText="Send By Post"
+            onClick={handleSendByPost}
+            containerClassName="flex items-center group gap-x-3 row-reverse"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            loading={loading}
+            loaderColor="#4A13E7"
+          >
+            <PostIcon className="text-primary group-hover:text-primary" />
+          </BaseButton>
           <BaseButton
             buttonText="Send Email"
             onClick={onEmailSend}
             containerClassName="flex items-center group gap-x-3 row-reverse"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-white"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             loading={loading}
             loaderColor="#4A13E7"
           >
-          <EmailIcon className="text-primary group-hover:text-white"/>
+            <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
 
           <IconOnlyButton
