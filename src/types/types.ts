@@ -19,7 +19,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "./auth";
+import { User } from './auth';
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -32,7 +32,7 @@ import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
-import { FollowUp } from "./settings";
+import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { TaxSetting } from "@/api/slices/settingSlice/settings";
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -227,8 +227,8 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
+  emailSettings: EmailSetting | null,
   control?: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield
@@ -269,8 +269,8 @@ export type GenerateContactSupportFormField = (
   loader: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  trigger?: UseFormTrigger<FieldValues>
-) => FormField[];
+  user?:User
+  ) => FormField[];
 
 // content formfield
 export type GenerateContentFormField = (

@@ -6,7 +6,8 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
   register,
   loading,
   control,
-  onClick
+  onClick,
+  user
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -31,6 +32,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "fullName",
               placeholder: "Rahal",
               register,
+              disabled:true
             },
           },
           {
@@ -48,6 +50,8 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "email",
               placeholder: "rahal.ahmad@gmail.com",
               register,
+              disabled:true
+
             },
           },
           {

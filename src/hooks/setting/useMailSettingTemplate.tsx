@@ -14,7 +14,7 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error ,emailSettings} = useAppSelector((state) => state.settings);
+  const { loading, error, emailSettings } = useAppSelector((state) => state.settings);
 
   const schema = generateEmailTemplateValidation(translate);
   const {
@@ -23,6 +23,7 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     control,
     setError,
     reset,
+    trigger,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -32,7 +33,7 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     reset({ ...emailSettings });
   }, []);
 
-  const fields = EmailTemplateFormField(register, loading, control);
+  const fields = EmailTemplateFormField(register, loading, emailSettings, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(updateEmailTemplateSetting({ data, router, setError, translate }))
     if (response?.payload) handleCreation()

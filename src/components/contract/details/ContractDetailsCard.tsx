@@ -155,14 +155,14 @@ const ContractDetailsCard = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-[11px]">
+          {/* <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.offer_status")}:
             </span>
             <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
               {contractDetails.offerID?.offerStatus}
             </span>
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base ">
@@ -194,7 +194,7 @@ const ContractDetailsCard = ({
                     )}
                     selectedItem={contractDetails?.contractStatus}
                     onItemSelected={handleStatusUpdate}
-                    dropDownClassName={`border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-2 w-full min-w-[137px]  `}
+                    dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
                     dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
                   />
                 )) || (

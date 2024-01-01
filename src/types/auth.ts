@@ -157,8 +157,8 @@ export interface Dashboard {
   Contract: Contract;
   Sales: Invoice;
   leadSource: LeadSource[]
-  followUp: FollowUp[];
-  activity: Activity;
+  FollowUp: FollowUp[];
+  Activity: Activity;
 }
 export interface AdminDashboard {
   Customer: Customer;

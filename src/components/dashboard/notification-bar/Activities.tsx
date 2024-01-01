@@ -6,7 +6,7 @@ import { Dashboard } from "@/types";
 import { formatDateTimeToDate, formatDateTimeToTime } from "@/utils/utility";
 
 const ActivitiesNotificationBar = ({ dashboard }: { dashboard: Dashboard | null }) => {
-  const followUp = dashboard?.activity?.offerActivity?.map((item) => ({ name: item?.editedBy, description: item?.message, time: formatDateTimeToTime(item?.dateTime), date: formatDateTimeToDate(item?.dateTime), id1: item?.offerNumber, id2: item?.contractNumber }))
+  const followUp = dashboard?.Activity?.offerActivity?.map((item) => ({ name: item?.editedBy, description: item?.message, time: formatDateTimeToTime(item?.dateTime), date: formatDateTimeToDate(item?.dateTime), id1: item?.offerNumber, id2: item?.contractNumber }))
 
   const { t: translate } = useTranslation();
   return (

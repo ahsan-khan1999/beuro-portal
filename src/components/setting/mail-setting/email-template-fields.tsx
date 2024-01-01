@@ -4,7 +4,8 @@ import { FormField, GenerateEmailTemplateFormField } from "@/types";
 export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
   register,
   loading,
-  control
+  emailSettings,
+  control,
 ) => {
   const formField: FormField[] = [
     {
@@ -13,7 +14,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         htmlFor: "logo",
         className: "mb-[10px] text-sm font-normal text-[#393939]",
       },
-      containerClass:"!w-[187px]",
+      containerClass: "!w-[187px]",
       field: {
         type: Field.profileUploadField,
         id: "logo",
@@ -72,7 +73,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "!border-[#BFBFBF] focus:!border-primary",
               control,
               country: "ch",
-              value: "+49 324 3455 34",
+              value: emailSettings?.phoneNumber || ""
             },
           },
           {
@@ -89,7 +90,8 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "!border-[#BFBFBF] focus:!border-primary",
               control,
               country: "ch",
-              value: "088 46546 45",
+              value: emailSettings?.mobileNumber || ""
+
             },
           },
         ],
