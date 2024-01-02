@@ -36,7 +36,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
                 onClick: () =>
                   onHandleBack && onHandleBack(ComponentsType.serviceAdd),
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]  text-dark hover:bg-none",
               },
             },
             {

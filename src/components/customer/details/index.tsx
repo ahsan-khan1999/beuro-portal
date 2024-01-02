@@ -2,8 +2,6 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import DetailsData from "../DetailsData";
-import SideCard from "../SideCard";
-
 import CustomerForm from "../CustomerForm";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import { formatDateTimeToDate } from "@/utils/utility";

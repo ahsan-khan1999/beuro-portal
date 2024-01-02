@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -42,7 +41,9 @@ export const useServiceOfferEditDetail = ({
     taxAmount: 0,
   });
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>([ServiceType.EXISTING_SERVICE]);
+  const [serviceType, setServiceType] = useState<ServiceType[]>([
+    ServiceType.EXISTING_SERVICE,
+  ]);
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -104,22 +105,10 @@ export const useServiceOfferEditDetail = ({
     offerDetails?.serviceDetail?.serviceDetail?.forEach((element, index) => {
       setValue(`serviceDetail.${index}.price`, element.price);
       setValue(`serviceDetail.${index}.unit`, element.unit);
-      setValue(
-        `serviceDetail.${index}.description`,
-        element.description
-      );
-      setValue(
-        `serviceDetail.${index}.count`,
-        element.count
-      );
-      setValue(
-        `serviceDetail.${index}.totalPrice`,
-        element.totalPrice
-      );
-    })
-
-
-
+      setValue(`serviceDetail.${index}.description`, element.description);
+      setValue(`serviceDetail.${index}.count`, element.count);
+      setValue(`serviceDetail.${index}.totalPrice`, element.totalPrice);
+    });
   };
   const generateTotalPrice = (index: number) => {
     const data = getValues();
@@ -144,8 +133,8 @@ export const useServiceOfferEditDetail = ({
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
         : isTax && taxType === "1"
-          ? calculateTax(totalPrices, data?.taxPercentage || 0)
-          : 0;
+        ? calculateTax(totalPrices, data?.taxPercentage || 0)
+        : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -209,7 +198,6 @@ export const useServiceOfferEditDetail = ({
     name: "serviceDetail",
   });
 
-
   useMemo(() => {
     const currentLength = serviceType.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
@@ -227,21 +215,23 @@ export const useServiceOfferEditDetail = ({
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
-    const updatedService = serviceType.map((type, i) => (i === index ? newServiceType : type));
+    const updatedService = serviceType.map((type, i) =>
+      i === index ? newServiceType : type
+    );
     setServiceType(updatedService);
-    
-    const fieldNamePrefix = 'serviceDetail';
+
+    const fieldNamePrefix = "serviceDetail";
     if (newServiceType === ServiceType.NEW_SERVICE) {
       reset({
-        [`serviceDetail.${index}.serviceTitle`]: '',
-        [`serviceDetail.${index}.price`]: '',
-        [`serviceDetail.${index}.count`]: '',
-        [`serviceDetail.${index}.unit`]: '',
-        [`serviceDetail.${index}.totalPrice`]: '',
-        [`serviceDetail.${index}.description`]: '',
-      })
+        [`serviceDetail.${index}.serviceTitle`]: "",
+        [`serviceDetail.${index}.price`]: "",
+        [`serviceDetail.${index}.count`]: "",
+        [`serviceDetail.${index}.unit`]: "",
+        [`serviceDetail.${index}.totalPrice`]: "",
+        [`serviceDetail.${index}.description`]: "",
+      });
     } else {
-      onServiceSelectType()
+      onServiceSelectType();
     }
   };
 
