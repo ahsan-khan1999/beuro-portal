@@ -3,13 +3,15 @@ import React from "react";
 
 const TableLayout = ({ children }: detailScreenCardsLayout) => {
   return (
-    <div className="overflow-hidden">
-      <p className="text-[16px] lg:hidden block mb-2">
-        <span className="text-red-600  font-bold">Note: </span>Drag to scroll on
+    <div className="overflow-x-hidden">
+      <p className="text-[16px] mlg:hidden block mb-2 mt-3">
+        <span className="text-red-600 font-bold">Note: </span>Drag to scroll on
         the table
       </p>
 
-      <div className="overflow-x-auto rounded-md ">{children}</div>
+      <div className="min-w-full overflow-x-scroll">
+        <div className="xs:w-[1120px] md:w-auto rounded-md">{children}</div>
+      </div>
     </div>
   );
 };

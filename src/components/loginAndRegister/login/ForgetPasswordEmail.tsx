@@ -8,7 +8,7 @@ import useFrogetPassword from "@/hooks/auth/useFrogetPassword";
 
 const ForgetPasswordEmail = () => {
   const defaultClassName = "mt-[30px]  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useFrogetPassword();
+  const { fields, onSubmit, handleSubmit, errors, error,renderModal } = useFrogetPassword();
 
   return (
     <div className="w-[50%] px-7 flex flex-col justify-between">
@@ -32,6 +32,7 @@ const ForgetPasswordEmail = () => {
         </div>
       </div>
       <EntryLinks />
+      {renderModal()}
     </div>
   );
 };

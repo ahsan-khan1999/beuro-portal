@@ -1,28 +1,30 @@
 import localStore from "./localstore.util";
 import { updateHeaders } from "../services/HttpProvider";
 import { setCookie, getCookie, deleteCookie } from 'cookies-next';
-export const getToken = () => getCookie("kaufestoken");
-export const getRefreshToken = () => getCookie("kaufesrefreshtoken");
+export const getToken = () => getCookie("buroToken");
+export const getRefreshToken = () => getCookie("buroRefreshToken");
 
-export const setToken = (token) => setCookie("kaufestoken", token);
+export const setToken = (token) => setCookie("buroToken", token, { httpOnly: false, sameSite: true, secure: false });
 export const setRefreshToken = (token) =>
-  setCookie("kaufesrefreshtoken", token);
+  setCookie("buroRefreshToken", token,{ httpOnly: false, sameSite: true, secure: false });
 
 export const setUserRole = (token) =>
-  localStore.store_data("kaufesuserRole", token);
-export const getUser = () => getCookie("kaufesuser");
+  localStore.store_data("buroUserRole", token);
+export const getUser = () => getCookie("buroUser");
 
-export const saveUser = (user) => setCookie("kaufesuser", user);
+export const saveUser = (user) => setCookie("buroUser", user);
 
 export const logout = async () => {
-  Promise.all[deleteCookie("kaufestoken"),
-    deleteCookie("kaufesrefreshtoken"),
-    deleteCookie("kaufesuser"),
-    localStore.remove_data("kaufesuserRole"),
+  Promise.all[deleteCookie("buroToken"),
+    deleteCookie("buroRefreshToken"),
+    deleteCookie("buroUser"),
+    localStore.remove_data("buroUserRole"),
     localStore.remove_data("fcm"),
     localStore.remove_data("roomToken"),
     localStore.remove_data("ChatUser"),
     localStore.remove_data("chatToken"),
+    localStore.remove_data("offer"),
+    localStore.remove_data("lead"),
     updateHeaders()
   ]
 
@@ -112,3 +114,8 @@ export const generateValues = (data) => {
   }
   return option;
 };
+
+export const getLabelByValue = (value, list) => {
+  let filteredItem = list?.filter((item) => item.value === value)
+  if (filteredItem) return filteredItem[0]?.label
+}

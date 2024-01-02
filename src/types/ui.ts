@@ -2,8 +2,10 @@ import { StaticImageData } from "next/image";
 import { User } from "./auth";
 import { Country, State } from "@/enums/auth";
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { Field } from "@/enums";
+import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
+import { Field } from "@/enums/form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -12,6 +14,7 @@ export interface ContainerProps {
 }
 export interface DropDownItem {
   item: string;
+  value?: string;
 }
 export interface DropDownProps {
   [DropDownKeys.LABEL]?: string;
@@ -21,14 +24,17 @@ export interface DropDownProps {
   [DropDownKeys.CHILDREN]?: React.ReactElement<SVGElement>;
   [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_TEXT_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_ICON_CLASS_NAME]?: string;
   [DropDownKeys.DROP_DOWN_DISABLED]?: boolean;
+  [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
 }
 
 export interface DropDownItemsProps {
   items: DropDownItem[];
   onItemClick: (data: string) => void;
+  containerClassName?: string;
 }
 export interface SearchInputProps {
   onInputChange: (value: string) => void;
@@ -45,7 +51,7 @@ export interface ButtonProps {
   type?: Field.button;
   name?: string;
   inputType: "submit" | "button";
-  text: string;
+  text?: string;
   className?: string;
   loading?: boolean | null;
   success?: boolean;
@@ -53,6 +59,20 @@ export interface ButtonProps {
   loaderColor?: string;
   icon?: any;
   iconAlt?: any;
+  id: string;
+  disabled?:boolean
+}
+
+// Add field interface
+export interface AddFieldProps {
+  text?: string;
+  className?: string;
+  onClick?: Function;
+  icon?: any;
+  iconAlt?: any;
+  type?: Field.button;
+  name: string;
+  id: string;
 }
 
 export interface Image {
@@ -192,10 +212,13 @@ export interface BaseCardProps extends WidgetBaseProps {}
 
 export type ButtonClickFunction = () => void;
 export interface BaseButtonProps extends WidgetBaseProps {
+  id?: string;
   onClick: ButtonClickFunction;
   buttonText: string;
   disabled?: boolean;
   textClassName?: string;
+  loading?: boolean;
+  loaderColor?: string;
 }
 
 export interface ButtonOnClick {
@@ -255,4 +278,62 @@ export interface IconOnlyButtonProps {
   onClick: () => void;
   disabled?: boolean;
   buttonClassName?: string;
+}
+// sliderBase props
+interface SliderBaseProps {
+  goToNext: () => void;
+  goToPrev: () => void;
+}
+
+// types for slider
+export interface MainImageSliderProps extends SliderBaseProps {
+  imageSrc: string;
+  handleMouseMove?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+  handleMouseLeave?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+}
+
+interface SliderImagesData {
+  imageSrc: string;
+}
+
+// slider image props
+export interface SliderImagesDataProps {
+  noOfThumbNails: number;
+  images: SliderImagesData[];
+}
+
+export interface ThumbnailSliderProps extends SliderBaseProps {
+  sliderImages: SliderImagesData[];
+  thumbnailStartIndex: number;
+  noOfThumbnails: number;
+  selectImage: (index: number) => void;
+}
+
+export interface ThumbnailProps {
+  imageSrc: string;
+  onClick: () => void;
+  index: number;
+}
+
+export interface ImageSliderHook {
+  selectedImage: string;
+  thumbnailStartIndex: number;
+  goToNext: () => void;
+  goToPrev: () => void;
+  selectImage: (index: number) => void;
+  handleMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleMouseLeave: (event: React.MouseEvent<HTMLDivElement>) => void;
+}
+export interface UsePaginationProps {
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+}
+
+export interface ChildrenProp {
+  children?: ReactNode;
 }

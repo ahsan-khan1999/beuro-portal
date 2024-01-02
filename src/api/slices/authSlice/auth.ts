@@ -14,16 +14,16 @@ import {
   User,
 } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
-import { conditionHandler, setErrors } from "@/utils/utility";
-import { SignUpPayload } from "@/types/registeration";
-import { saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
-import { SalutationValue } from "@/enums";
+import { conditionHandlerLogin, conditionHandlerRegistration, senitizePhone, setErrors } from "@/utils/utility";
+import { getUser, saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
 import { formatDateString, isJSON } from "@/utils/functions";
-import { NextRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import { SalutationValue } from "@/enums/form";
+import { NextRouter } from "next/dist/client/router";
+import { staticEnums } from "@/utils/static";
 
 const initialState: AuthState = {
-  user: null,
+  user: undefined,
   userRole: null,
   loading: false,
   error: null,
@@ -32,6 +32,8 @@ const initialState: AuthState = {
   google: false,
   fb: false,
   apple: false,
+  dashboard: null,
+  adminDashboard: null
 };
 
 export const loginUser: AsyncThunk<boolean, object, object> | any =
@@ -45,7 +47,7 @@ export const loginUser: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response);
+      conditionHandlerLogin(router, response);
 
       return true;
     } catch (e: any) {
@@ -65,7 +67,7 @@ export const resetPassword: AsyncThunk<boolean, object, object> | any =
         data,
       });
 
-      router.pathname = "/passwordChangedSuccess";
+      router.pathname = "/login";
       updateQuery(router, "en");
 
       return true;
@@ -81,7 +83,7 @@ export const forgotPassword: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.forgotPassword(data);
       thunkApi.dispatch(setErrorMessage(response?.data?.message));
-      return response;
+      return true;
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);
 
@@ -97,7 +99,9 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
       const response: ApiResponseType = await apiServices.singUp(data);
 
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response);
+      // conditionHandlerRegistration(router, response);
+      router.pathname = "/login-success";
+      updateQuery(router, router.locale as string)
 
       saveUser(response.data.data.User);
 
@@ -112,25 +116,19 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      console.log("responivess");
+      const user = isJSON(getUser())
 
-      // let apiData = {
-      //   ...data,
-      //   salutation: SalutationValue[data?.salutation],
-      //   dob: formatDateString(data?.dob)
-      // }
-      // const response: ApiResponseTypePut = await apiServices.profileStep1(apiData);
-      // thunkApi.dispatch(setErrorMessage(null))
-
-      // thunkApi.dispatch(setUser(response.data.User));
-      // saveUser(response.data.User);
+      const response = await apiServices.profileStep1(data);
+      thunkApi.dispatch(setErrorMessage(null))
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
 
       nextFormHandler();
 
       return true;
     } catch (e: any) {
-      // setErrors(setError, e?.data.data, translate)
-      // thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate)
+      thunkApi.dispatch(setErrorMessage(e?.data?.message))
 
       return false;
     }
@@ -139,25 +137,22 @@ export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      // let apiData = {
-      //   ...data,
-      //   phoneNumber: data?.phoneNumber?.includes("+")
-      //     ? data?.phoneNumber
-      //     : "+" + data?.phoneNumber,
-      // };
-      // const response: ApiResponseTypePut = await apiServices.profileStep2(
-      //   apiData
-      // );
-      // thunkApi.dispatch(setErrorMessage(null));
+      const user = isJSON(getUser())
 
-      // thunkApi.dispatch(setUser(response.data.User));
-      // saveUser(response.data.User);
+      const response = await apiServices.profileStep2(
+        { address: { ...data } }
+      );
+
+      thunkApi.dispatch(setErrorMessage(null));
+
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
       nextFormHandler();
 
       return true;
     } catch (e: any) {
-      // setErrors(setError, e?.data.data, translate);
-      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
@@ -166,16 +161,22 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      // const response: ApiResponseTypePut = await apiServices.profileStep3(data);
-      // thunkApi.dispatch(setUser(response.data.User));
-      // thunkApi.dispatch(setErrorMessage(null));
+      const user = isJSON(getUser())
 
-      // saveUser(response.data.User);
+      let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
+
+      const response = await apiServices.profileStep3({ bankDetails: { ...apiData } });
+
+      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
+      saveUser({ ...user, "company": { ...response?.data?.Company } });
+
+      thunkApi.dispatch(setErrorMessage(null));
+
       nextFormHandler();
       return true;
     } catch (e: any) {
-      // setErrors(setError, e?.data.data, translate);
-      // thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
@@ -195,7 +196,7 @@ export const signUpGoogle: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
 
-      conditionHandler(router, response);
+      // conditionHandler(router, response);
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -218,7 +219,7 @@ export const signUpFacebook: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response);
+      // conditionHandler(router, response);
 
       return true;
     } catch (e: any) {
@@ -243,23 +244,23 @@ export const userDetails: AsyncThunk<boolean, object, object> | any =
 export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
   createAsyncThunk("verify/otp", async (router: NextRouter, thunkApi) => {
     try {
+
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
-        router.asPath?.split("=")[1]
+        router.query.otp
       );
-      setToken(response.headers.accesstoken);
-      setRefreshToken(response.headers.refreshtoken);
-      const user = isJSON(getCookie("kaufesuser"));
-      let newUser = { ...user, isEmailVerified: true };
-      saveUser(newUser);
-      thunkApi.dispatch(setUser(newUser));
-      if (user?.isProfileComplete) {
-        router.pathname = "/";
-        updateQuery(router, "en");
-      } else if (!user?.isProfileComplete) {
-        router.pathname = "/register/profiledetails";
-        updateQuery(router, "en");
-      }
-      return true;
+
+      saveUser(response.data.data.User);
+      thunkApi.dispatch(setUser(response.data.data.User));
+      // conditionHandlerLogin(router, response);
+
+      // if (response.data.data.User?.isProfileComplete) {
+      //   router.pathname = "/dashboard";
+      //   updateQuery(router, "en");
+      // } else if (!response.data.data.User?.isProfileComplete) {
+      //   router.pathname = "/profile";
+      //   updateQuery(router, "en");
+      // }
+      return response.data.data.User;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
@@ -297,15 +298,15 @@ export const updateProfile: AsyncThunk<boolean, object, object> | any =
             field === "salutation"
               ? SalutationValue[data["salutation"]]
               : field === "phoneNumber"
-              ? data?.[field]?.includes("+")
-                ? data?.[field]
-                : "+" + data?.[field]
-              : field === "password"
-              ? {
-                  currentPassword: data?.["currentPassword"],
-                  newPassword: data?.["newPassword"],
-                }
-              : data?.[field],
+                ? data?.[field]?.includes("+")
+                  ? data?.[field]
+                  : "+" + data?.[field]
+                : field === "password"
+                  ? {
+                    currentPassword: data?.["currentPassword"],
+                    newPassword: data?.["newPassword"],
+                  }
+                  : data?.[field],
         },
       });
       thunkApi.dispatch(setUser(response.data.User));
@@ -354,7 +355,7 @@ export const connectGoogle: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -376,7 +377,7 @@ export const disConnectGoogle: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -399,7 +400,7 @@ export const connectFacebook: AsyncThunk<boolean, object, object> | any =
       saveUser(response?.data?.data?.User);
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -423,7 +424,7 @@ export const disConnectFacebook: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setUser(response.data.data.User));
       thunkApi.dispatch(setErrorMessage(null));
       // router.query = {}
-      conditionHandler(router, response, true);
+      // conditionHandler(router, response, true);
 
       return true;
     } catch (e: any) {
@@ -474,6 +475,69 @@ export const changePassword: AsyncThunk<boolean, NextRouter, object> | any =
 //     Cookies.remove("kaufestoken");
 //   }
 // );
+export const sendOtpViaEmail: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
+  "send/otp/email",
+  async (data, thunkApi) => {
+
+
+    try {
+      await apiServices.sendEmailOtp({ data });
+
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      return false;
+    }
+  }
+);
+export const logoutUser: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
+  "user/logout",
+  async (data, thunkApi) => {
+
+
+    try {
+      apiServices.logoutUser({ data });
+      return true;
+    } catch (e: any) {
+      return false;
+    }
+  }
+);
+
+
+export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "read/dashboard",
+    async (data, thunkApi) => {
+      const { params, router, setError, translate } = data as any;
+
+      try {
+        const response = await apiServices.readDashboard(params);
+
+        return response?.data?.data;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
+    }
+  );
+
+export const readAdminDashboard: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk(
+    "read/dashboard/admin",
+    async (data, thunkApi) => {
+      const { params, router, setError, translate } = data as any;
+
+      try {
+        const response = await apiServices.readAdminDashboard(params);
+
+        return response?.data?.data;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        return false;
+      }
+    }
+  );
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -520,6 +584,15 @@ const authSlice = createSlice({
       if (action?.payload) state.user = action.payload.user;
     });
     builder.addCase(signUp.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpViaEmail.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(sendOtpViaEmail.fulfilled, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpViaEmail.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(updateProfileStep1.pending, (state) => {
@@ -657,74 +730,7 @@ const authSlice = createSlice({
     builder.addCase(changePassword.rejected, (state) => {
       state.loading = false;
     });
-    // builder.addCase(generateOtp.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(generateOtp.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(generateOtp.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpGoogle.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpGoogle.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpGoogle.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpFacebook.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpFacebook.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpFacebook.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(signUpInstagram.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpInstagram.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(signUpInstagram.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(sellerDetails.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(sellerDetails.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.seller = action.payload;
-    //   if (action?.payload?.user) state.user = action?.payload?.user;
-    // });
-    // builder.addCase(sellerDetails.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(changePassword.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(changePassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(changePassword.rejected, (state) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(resetPassword.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(resetPassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // });
-    // builder.addCase(resetPassword.rejected, (state) => {
-    //   state.loading = false;
-    // });
+
     builder.addCase(forgotPassword.pending, (state) => {
       state.loading = true;
     });
@@ -732,6 +738,37 @@ const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(forgotPassword.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(logoutUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(logoutUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(logoutUser.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readDashboard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readDashboard.fulfilled, (state, action) => {
+      if (action?.payload) state.dashboard = action?.payload
+      state.loading = false;
+    });
+    builder.addCase(readDashboard.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readAdminDashboard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readAdminDashboard.fulfilled, (state, action) => {
+      if (action?.payload) state.adminDashboard = action?.payload
+      state.loading = false;
+    });
+    builder.addCase(readAdminDashboard.rejected, (state) => {
       state.loading = false;
     });
   },

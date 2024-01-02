@@ -1,9 +1,10 @@
-import { DropDownFillIcon } from "@/assets/svgs/components/drop-down-icon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DropDownItems } from "./drop-down-items";
 import { DropDownProps } from "@/types";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
+import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
+import { AnimatePresence } from "framer-motion";
 
 export const DropDown = ({
   label,
@@ -13,6 +14,7 @@ export const DropDown = ({
   children,
   dropDownClassName,
   dropDownTextClassName,
+  dropDownItemsContainerClassName,
   dropDownIconClassName,
   dropDownDisabled = false,
   shouldNotSelectItem = false,
@@ -25,21 +27,28 @@ export const DropDown = ({
     !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
-
+  useEffect(() => {
+    setSelectedItem(defaultSelectedItem);
+  }, [defaultSelectedItem]);
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
     "flex items-center justify-between bg-white px-4 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
-    `text-sm font-medium text-dark ${dropDownDisabled ? 'text-lightGray': ''}`,
+    `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
     dropDownTextClassName
   );
 
   return (
-    <div className={`flex flex-col w-full gap-y-2 ${dropDownDisabled ? 'pointer-events-none' : ''}`} ref={dropdownRef}>
+    <div
+      className={`flex flex-col gap-y-2 min-w-[90px] w-full${
+        dropDownDisabled ? "pointer-events-none" : ""
+      }`}
+      ref={dropdownRef}
+    >
       {label && <label className="text-sm text-gray">{label}</label>}
-      <div className="relative w-full">
+      <div className="relative min-w-[90px] w-full">
         <button
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
@@ -47,9 +56,20 @@ export const DropDown = ({
         >
           {children}
           <span className={textClasses}>{selectedItem}</span>
-          <DropDownFillIcon isOpen={isOpen} className={dropDownIconClassName} />
+          <DropDownNonFillIcon
+            isOpen={isOpen}
+            className={dropDownIconClassName}
+          />
         </button>
-        {isOpen && <DropDownItems items={items} onItemClick={toggleDropDown} />}
+        <AnimatePresence>
+          {isOpen && (
+            <DropDownItems
+              items={items}
+              onItemClick={toggleDropDown}
+              containerClassName={dropDownItemsContainerClassName}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

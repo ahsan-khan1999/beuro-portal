@@ -14,12 +14,12 @@ const Company = ({
   register,
   control,
   currentFormStage,
+  user
 }: FormComponentProps) => {
-  const { loading } = useAppSelector((state) => state.auth);
-  console.log(onSubmit);
-
-  const fields = detailScreensFormField(register, loading, control);
-
+  const { loading} = useAppSelector((state) => state.auth);
+  
+  const fields = detailScreensFormField(register, loading, control,user);
+  
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">

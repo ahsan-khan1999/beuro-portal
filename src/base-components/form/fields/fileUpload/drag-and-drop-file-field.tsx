@@ -7,15 +7,18 @@ export const DragAndDropFileField = ({
   control,
   id,
   name,
+  value
 }: DragAndDropFileFieldProps) => {
 
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: {error} }) => (
-        <ImageFileUpload id={id} field={field} />
-      )}
+      render={({ field, fieldState: { error } }) => {
+        return (
+          <ImageFileUpload id={id} field={field} value={value}/>
+        )
+      }}
     />
   );
 };

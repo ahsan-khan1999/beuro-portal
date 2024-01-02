@@ -3,6 +3,7 @@ import Loader from "../loader/loader";
 import { combineClasses } from "@/utils/utility";
 // import { ButtonSuccessIcon } from "@/assets/svgs/components/button-success-icon";
 import Image from "next/image";
+import { useRouter } from "next/router";
 export const Button = ({
   inputType,
   text,
@@ -13,15 +14,19 @@ export const Button = ({
   loaderColor,
   icon,
   iconAlt,
+  disabled
 }: ButtonProps) => {
+
+  const router = useRouter()
+
   const defaultClasses =
-    "min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg ";
+    `min-w-fit px-4 bg-primary hover:bg-buttonHover  text-white !h-[50px] font-medium rounded-lg`;
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button
       type={inputType}
-      disabled={loading}
-      className={`${classes} flex justify-center`}
+      disabled={loading && disabled}
+      className={`${classes}   flex justify-center`}
     >
       <Loader
         height="50"
@@ -33,12 +38,13 @@ export const Button = ({
   ) : (
     <button
       type={inputType}
-      className={`${classes} ${
-        success && "flex items-center gap-x-2 "
-      } flex items-center justify-center `}
+      className={` hover:bg-buttonHover hover:text-white text-dark  ${success && "flex items-center gap-x-2  " 
+        } flex items-center justify-center ${classes}`}
       onClick={() => {
         onClick && onClick();
       }}
+      disabled={ disabled || false}
+
     >
       {icon && <Image src={icon} alt={iconAlt} className="mr-1 " />}{" "}
       {success ? "Geändert" : text}

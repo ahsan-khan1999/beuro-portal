@@ -12,16 +12,21 @@ import {
   FieldError,
   UseFormSetError,
 } from "react-hook-form";
-import { ButtonProps } from "./ui";
-import { CardType, Field, Salutation } from "@/enums";
+import { AddFieldProps, ButtonProps } from "./ui";
 import { Dispatch } from "@reduxjs/toolkit";
 import { StaticImageData } from "next/image";
+import React, { ReactNode, SetStateAction } from "react";
+import { CardType, Field, Salutation } from "@/enums/form";
+import { User } from ".";
+import { Attachement } from "./global";
 
 interface BaseFieldProps<T extends Field> {
   type: T;
   id: string;
   name: string;
   className?: string;
+  text?: string;
+  fileSupported?: string;
 }
 
 export interface LabelProps {
@@ -39,7 +44,40 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
   svg?: string;
-  alt: string;
+  img?: boolean;
+  remove?: string;
+  onRemove?: () => void;
+  fieldIndex?: number;
+  onChange?: (value?: number) => void;
+  percentage?: string;
+  step?: string;
+}
+
+// textarea added
+export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
+  register: UseFormRegister<FieldValues>;
+  rows?: number;
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
+// ckEditor is added
+export interface CKEditorProps extends BaseFieldProps<Field.ckEditor> {
+  value?: string;
+  control: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+}
+
+// CKEditorBoxProps added
+export interface CKEditorBoxProps {
+  id: string;
+  data?: string;
+  field: ControllerRenderProps<FieldValues, string>;
+  trigger?: UseFormTrigger<FieldValues>;
+  name?: string;
+  type: string;
 }
 
 export interface CreditCardInputProps
@@ -60,8 +98,11 @@ export interface PasswordInputProps extends BaseFieldProps<Field.password> {
   value?: string;
   register: UseFormRegister<FieldValues>;
   placeholder?: string;
-  svg?: SVGElement;
-  alt?: string;
+  disabled?: boolean;
+  isButton?: boolean;
+  onClick?: Function;
+  svg: string;
+  alt: string;
 }
 
 export interface OptionType {
@@ -73,8 +114,12 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
   value: string;
+  svg?: string;
+  onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
+  disabled?: boolean;
+  fieldIndex?: number;
 }
 
 export interface SelectBoxProps {
@@ -83,10 +128,39 @@ export interface SelectBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
   value: string;
-  placeholder: string;
+  svg?: string;
+  onItemChange?: (id: string, index?: number) => void;
+  success?: boolean;
+  placeholder?: string;
   className?: string;
+  disabled?: boolean;
+  fieldIndex?: number;
 }
 
+export interface MultiSelectProps extends BaseFieldProps<Field.select> {
+  control?: Control<FieldValues>;
+  options: OptionType[];
+  value: string[];
+  svg?: string;
+  onItemChange?: () => void;
+  trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
+  disabled?: boolean;
+}
+
+export interface MultiSelectBoxProps {
+  id: string;
+  options: OptionType[];
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  value: string[];
+  svg?: string;
+  onItemChange?: Function;
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+}
 export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   register: UseFormRegister<FieldValues>;
   description: string;
@@ -97,14 +171,58 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
-  value?: string | number;
+  value?: string;
   containerClassName?: string;
   textClassName?: string;
+  checked?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+  disabled?: boolean;
+  onClick?: () => void;
+  onChange?: (value: string) => void;
 }
 
 export interface DragAndDropFileFieldProps
   extends BaseFieldProps<Field.dragAndDropFileField> {
   control?: Control<FieldValues>;
+  value?: string;
+}
+
+// interface for the pdf file upload
+export interface DragAndDropPdfFieldProps
+  extends BaseFieldProps<Field.dragAndDropPdfField> {
+  control?: Control<FieldValues>;
+  isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: React.Dispatch<SetStateAction<any>>;
+  isAttachement?: boolean;
+}
+
+// interface for the pdf file upload
+export interface ProfileUploadFieldProps
+  extends BaseFieldProps<Field.profileUploadField> {
+  control?: Control<FieldValues>;
+  iconClasses?: string;
+  disabled?:boolean
+}
+
+// interface for the Image upload
+export interface ImageUploadFieldProps
+  extends BaseFieldProps<Field.imageUploadField> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
+  value?: string;
+}
+
+// Interface for the input field copy
+export interface InputWithCopyProps
+  extends BaseFieldProps<Field.inputWithCopy> {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  control: Control<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
@@ -116,11 +234,29 @@ export interface PhoneProps extends BaseFieldProps<Field.phone> {
   success?: boolean;
   disabled?: boolean;
 }
-
+export interface MultiDateProps extends BaseFieldProps<Field.phone> {
+  value?: DateRangeProps;
+  control?: Control<FieldValues>;
+  watch?: UseFormWatch<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  success?: boolean;
+  disabled?: boolean;
+  remove?: string;
+  onRemove?: () => void;
+}
+export interface DateRangeProps {
+  startDate: string;
+  endDate: string;
+}
 export interface DatePickerProps extends BaseFieldProps<Field.date> {
   register: UseFormRegister<FieldValues>;
   value?: string;
   className?: string;
+  remove?: string;
+  svg?: string;
+  success?: boolean;
+  onRemove?: () => void;
+  dateType?: string;
 }
 
 export interface SpanProps {
@@ -133,6 +269,8 @@ export interface SpanProps {
   name?: string;
   dispatch?: Dispatch;
   onClick?: Function;
+  id: string;
+  html?: string;
 }
 
 export interface DivProps {
@@ -141,6 +279,7 @@ export interface DivProps {
   children: FormField[];
   className?: string;
   errors?: Record<string, any>;
+  id: string;
 }
 
 interface LinkImage {
@@ -166,7 +305,9 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
-  | Field.creditCardNumberInput
+  | Field.textArea
+  | Field.ckEditor
+  // | Field.creditCardNumberInput
   | Field.creditCardExpiryDateInput
   | Field.password
   | Field.select
@@ -175,12 +316,23 @@ export type FieldType =
   | Field.checkbox
   | Field.radio
   | Field.dragAndDropFileField
+  | Field.dragAndDropPdfField
+  | Field.profileUploadField
+  | Field.imageUploadField
   | Field.span
   | Field.div
   | Field.button
-  | Field.link;
+  | Field.link
+  | Field.multiSelect
+  | Field.addField
+  | Field.toggleButton;
+
 export type FieldProps =
   | InputProps
+  | TextAreaProps
+  | CKEditorProps
+  | InputWithCopyProps
+  | CKEditorBoxProps
   | CreditCardInputProps
   | CreditCardExpiryDateInputProps
   | PasswordInputProps
@@ -190,10 +342,17 @@ export type FieldProps =
   | CheckBoxProps
   | RadioButtonProps
   | DragAndDropFileFieldProps
+  | DragAndDropPdfFieldProps
+  | ProfileUploadFieldProps
+  | ImageUploadFieldProps
   | SpanProps
   | DivProps
   | ButtonProps
-  | LinkProps;
+  | AddFieldProps
+  | LinkProps
+  | MultiSelectProps
+  | AddFieldProps
+  | ToggleButtonFormProps;
 
 export interface FormField {
   containerClass?: string;
@@ -203,8 +362,11 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  textArea: React.FC<TextAreaProps>;
+  ckEditor: React.FC<CKEditorProps>;
+  // ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
-  creditCardNumberInput: React.FC<CreditCardInputProps>;
+  // creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
   select: React.FC<SelectProps>;
@@ -213,10 +375,17 @@ export interface FieldComponents {
   checkbox: React.FC<CheckBoxProps>;
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
+  dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
+  profileUploadField: React.FC<ProfileUploadFieldProps>;
+  imageUploadField: React.FC<ImageUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
+  addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
+  dateRange: React.FC<MultiDateProps>;
+  multiSelect: React.FC<MultiSelectProps>;
+  toggleButton: React.FC<ToggleButtonFormProps>;
 }
 
 export interface FormProps {
@@ -247,6 +416,7 @@ export interface FormComponentProps {
   setError?: UseFormSetError<FieldValues>;
   currentFormStage?: string;
   setCurrentFormStage?: any;
+  user?: User;
 }
 
 export interface FormFooterProps {
@@ -265,4 +435,19 @@ export type CreditCardIconsType = Record<CardType, StaticImageData>;
 export interface GetCreditCardIconProps {
   cardType: DetectedCardInfo | null;
   icons: Record<CardType, StaticImageData>;
+}
+
+export interface CustomHookFormProps {
+  children: ReactNode;
+  className?: string;
+}
+export interface HookFieldProps {
+  [key: string]: JSX.Element;
+}
+export interface ToggleButtonFormProps
+  extends BaseFieldProps<Field.toggleButton> {
+  register: UseFormRegister<FieldValues>;
+  className: string;
+  checked: boolean;
+  onClick?: () => void;
 }

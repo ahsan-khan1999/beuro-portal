@@ -32,6 +32,7 @@ export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePag
   // Calculate the range of page numbers to show.
   const startPage = Math.max(2, currentPage - Math.floor(PAGE_LIMIT / 2));
   const endPage = Math.min(totalPages - 1, startPage + PAGE_LIMIT - 1);
+
   const pagesToShow = [
     1,
     ...Array.from(
@@ -40,12 +41,15 @@ export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePag
     ),
     totalPages,
   ];
+  const uniquePagesToShow = [...new Set(pagesToShow)];
 
+
+  
   return {
     currentPage,
     isFirst,
-    isLast,
-    pagesToShow,
+    isLast: totalPages < currentPage ? true:isLast,
+    pagesToShow: totalPages > 0 ?uniquePagesToShow: [],
     dots,
     handlePrevClick,
     handleNextClick,

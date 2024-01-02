@@ -4,6 +4,8 @@ import { FlagIcon } from "./flag-icon";
 import { Language, LanguageName } from "@/types";
 import Image from "next/image";
 import checkIcon from "@/assets/svgs/check-fill-green.svg";
+import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "@/utils/hooks";
 
 const DUMMY_LIST = [
   {
@@ -59,6 +61,13 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+
+  const hanldeClose = () => {
+    setIsOpen(false);
+  };
+
+  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
   //#region might be needed in future
   // const LANGUAGE_SELECTOR_ID = "language-selector";
@@ -143,7 +152,7 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
     // </div>
     //#endregion
 
-    <div className="relative flex items-center justify-center ">
+    <div className="relative flex items-center justify-center " ref={ref}>
       <FlagIcon
         countryCode="en"
         // countryCode={selectedLanguage?.code}
@@ -151,8 +160,7 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center ml-2 text-dark font-medium"
-        ref={dropdownRef}
-      >
+        ref={dropdownRef}>
         English
         {/* {selectedLanguage?.name} */}
         {/* <svg
@@ -187,13 +195,12 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
           </g>
         </svg> */}
         <svg
-          className={`ml-2  ${isOpen ? "rotate-180" : ""} `}
+          className={`ml-2  ${isOpen ? "rotate-180" : ""} ` }
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="11"
           viewBox="0 0 16 11"
-          fill="none"
-        >
+          fill="none">
           <path
             d="M1.64648 2L7.64648 8L13.6465 2"
             stroke="#8F8F8F"
@@ -202,8 +209,14 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
           />
         </svg>
       </button>
+      <AnimatePresence>
       {isOpen && (
-        <div className="absolute flex flex-col top-[42px] right-0 text-dark bg-white  rounded-lg  p-4 w-[241px] z-[999999] shadow-languagesDropDown">
+        <motion.div
+          className="absolute flex flex-col top-[42px] right-0 text-dark bg-white  rounded-lg  p-4 w-[241px] z-[999999] shadow-languagesDropDown"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}>
           {languages.map((language, index) => {
             return (
               <button
@@ -220,8 +233,7 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
                     : "text-dark"
                 }   text-left items-center flex justify-between hover:bg-gray-100 ${
                   index % 2 === 0 ? "rounded-r" : "rounded-l"
-                }`}
-              >
+                }`}>
                 <div className="flex items-center">
                   <FlagIcon countryCode={language.code} />
                   <span className="truncate ml-3">{language.name}</span>
@@ -232,8 +244,9 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
               </button>
             );
           })}
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   );
 };

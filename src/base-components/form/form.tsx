@@ -6,7 +6,8 @@ import { combineClasses } from "@/utils/utility";
 
 export const Form = React.memo(
   ({ formFields, handleSubmit, onSubmit, errors, className }: FormProps) => {
-    const renderField = (fieldData: FormField, error: string) => {
+    const renderField = (fieldData: FormField, error: string, errors?: Record<string, any>
+    ) => {
       if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
         return null;
       }
@@ -17,12 +18,15 @@ export const Form = React.memo(
         errors
       );
     };
+      
     return (
       <form className={className} onSubmit={handleSubmit(onSubmit)}>
-        {formFields.map((fieldData, index) => {
+        {formFields?.map((fieldData, index) => {
           const fieldName = fieldData?.field?.name;
+
           const error =
             errors && fieldName ? errors[fieldName]?.message : undefined;
+
           const containerClasses = combineClasses(
             `flex flex-col  `,
             fieldData?.containerClass
@@ -32,7 +36,7 @@ export const Form = React.memo(
             fieldData?.label?.className
           );
           return (
-            <div key={index} className={`${containerClasses}`}>
+            <div key={index} className={`${containerClasses }`}>
               {fieldData.label && (
                 <label
                   htmlFor={fieldData.label.htmlFor}
@@ -41,7 +45,7 @@ export const Form = React.memo(
                   {fieldData?.label?.text}
                 </label>
               )}
-              {renderField(fieldData, error)}
+              {renderField(fieldData, error, errors)}
             </div>
           );
         })}

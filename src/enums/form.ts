@@ -1,4 +1,3 @@
-
 export enum BaseFormFields {
   id = "id",
   email = "email",
@@ -7,43 +6,44 @@ export enum BaseFormFields {
   salutation = "salutation",
   fullName = "fullName",
   userName = "userName",
-  dob = 'dob',
-  phone = 'phone',
-  otp = 'otp',
+  dob = "dob",
+  phone = "phone",
+  otp = "otp",
   streetAddress = "streetAddress",
-  additionalAddress = 'additionalAddress',
+  additionalAddress = "additionalAddress",
   houseNo = "houseNumber",
   postalCode = "postalCode",
   city = "city",
-  state = 'state',
+  state = "state",
   country = "country",
   poBox = "poBox",
-  emailAddress = "emailAddress"
-
+  emailAddress = "emailAddress",
 }
 
 export enum FormStages {
-  PersonalDetails = 'personalDetails',
-  LoginAndContacts = 'loginAndContactDetails',
-  AddressDetails = 'addressDetails',
+  PersonalDetails = "personalDetails",
+  LoginAndContacts = "loginAndContactDetails",
+  AddressDetails = "addressDetails",
 }
 
 export enum Salutation {
-  default = 'other',
-  male = 'Mr',
-  female = 'Ms'
+  default = "other",
+  male = "Mr",
+  female = "Ms",
 }
 
 export enum SalutationValue {
   "other" = 2,
   "Ms" = 1,
-  "Mr" = 0
+  "Mr" = 0,
 }
-
 
 export enum Field {
   input = "input",
+  textArea = "textArea",
+  ckEditor = "ckEditor",
   customerInput = "customerInput",
+  inputWithCopy = "inputWithCopy",
   creditCardNumberInput = "creditCardNumberInput",
   creditCardExpiryDateInput = "creditCardExpiryDateInput",
   password = "password",
@@ -53,10 +53,17 @@ export enum Field {
   checkbox = "checkbox",
   radio = "radio",
   dragAndDropFileField = "dragAndDropFileField",
+  dragAndDropPdfField = "dragAndDropPdfField",
+  profileUploadField = "profileUploadField",
+  imageUploadField = "imageUploadField",
   span = "span",
   div = "div",
   button = "button",
+  addField = "addField",
   link = "link",
+  dateRange = "dateRange",
+  multiSelect = "multiSelect",
+  toggleButton = "toggleButton",
 }
 
 export enum CardType {

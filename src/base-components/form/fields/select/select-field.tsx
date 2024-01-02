@@ -9,7 +9,11 @@ export const SelectField = ({
   control,
   name,
   trigger,
+  svg,
+  onItemChange,
   className,
+  disabled,
+  fieldIndex,
 }: SelectProps) => {
   return (
     <Controller
@@ -19,11 +23,16 @@ export const SelectField = ({
       render={({ field, fieldState: { error } }) => (
         <SelectBox
           id={id}
+          svg={svg}
+          onItemChange={onItemChange}
           options={options}
           value={defaultValue}
           field={field}
           trigger={trigger}
           className={className}
+          disabled={disabled}
+          key={id}
+          fieldIndex={fieldIndex}
         />
       )}
     />

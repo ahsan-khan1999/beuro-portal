@@ -1,154 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { Layout } from "@/layout/layout";
+import React from "react";
 import TableLayout from "@/layout/TableLayout";
-import TableHeadingLeads from "@/components/leads/TableHeadingLeads";
-import TableRowLeads from "@/components/leads/TableRowLeads";
-
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import { TableRowTypes } from "@/types";
-import TableFunctions from "./TableFunctions";
+import TableFunctions from "./table/TableFunctions";
+import TableRows from "./table/TableRows";
+import TableHeadings from "./table/TableHeadings";
+import useLeads from "@/hooks/leads/useLeads";
+import { useEmptyStates } from "@/utils/hooks";
 
 export default function Leads() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<TableRowTypes[]>([]);
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    handleNotes,
+    handleImageUpload,
+    renderModal,
+    filter,
+    setFilter,
+    handleFilterChange,
+    loading,
+  } = useLeads();
 
-  const dataToAdd: TableRowTypes[] = [
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Close",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Expired",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    {
-      id: 1,
-      name: "Rahal Ahmed",
-      email: "Test12@gmail.com",
-      phone: "+49 302 1231234",
-      date: "25/08/2023",
-      location: "Islamabad",
-      status: "Open",
-    },
-    // Add more rows as needed
-  ];
-
-  const totalItems = dataToAdd.length;
-  const itemsPerPage = 10;
-
-  useEffect(() => {
-    // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(dataToAdd.slice(startIndex, startIndex + itemsPerPage));
-  }, [currentPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  const CurrentComponent = useEmptyStates(
+    <TableRows
+      dataToAdd={currentPageRows}
+      openModal={handleNotes}
+      handleImageUpload={handleImageUpload}
+    />,
+    currentPageRows.length > 0,
+    loading
+  );
 
   return (
-    <Layout>
-      <TableFunctions />
-      <TableLayout>
-        <TableHeadingLeads />
-        <TableRowLeads dataToAdd={currentPageRows} />
-      </TableLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
+    <>
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
       />
-    </Layout>
+      <TableLayout>
+        <TableHeadings />
+        {CurrentComponent}
+      </TableLayout>
+      {currentPageRows.length > 0 && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
+      {renderModal()}
+    </>
   );
 }

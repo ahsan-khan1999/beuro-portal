@@ -4,35 +4,16 @@ export const enum Fields {
   description = "description",
 }
 export enum CustomerDetailsFields {
-  Name = "Name",
+  name = "name",
   companyName = "companyName",
   customerType = "customerType",
   email = "email",
   phone = "phone",
   mobile = "mobile",
-  streetNo = "streetNo",
+  street = "street",
   postCode = "postCode",
   country = "country",
-}
-
-
-
-// Services detail enum
-export enum ServicesDetailFields {
-  serviceTitle = "serviceTitle",
-  unit = "unit",
-  price = "price",
-  description = "description"
-}
-
-// contact-support enum
-export enum ContactSupportFields {
-  firstName = "firstName",
-  lastName = "lastName",
-  email = "email",
-  mobileNumber = "mobileNumber",
-  reasonForContact = "reasonForContact",
-  message = "message",
+  address = "address"
 }
 
 // export * from './registration';

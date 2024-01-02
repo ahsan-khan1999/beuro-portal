@@ -4,32 +4,43 @@ import {
   FieldComponents,
   FieldProps,
   FieldType,
+  FormField,
   GetCreditCardIconProps,
 } from "@/types";
 import {
   InputField,
+  TextAreaField,
+  CkEditor,
   PasswordField,
   SelectField,
   TelephoneInputField,
   SpanField,
   CheckBox,
   DragAndDropFileField,
+  DragAndDropPdfField,
+  ImageUploadField,
+  MultiDateField,
+  MultiSelectField,
+  AddFiled,
+  ToggleButton
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
-import { CreditCardNumberField } from "./fields/credit-card-number-field";
+// import { CreditCardNumberField } from "./fields/credit-card-number-field";
 // import { CardType } from "@/enums";
-import Image from "next/image";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
+import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
+  textArea: TextAreaField,
+  ckEditor: CkEditor,
   customerInput: CustomerInputField,
-  creditCardNumberInput: CreditCardNumberField,
+  // creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,
   select: SelectField,
@@ -38,10 +49,19 @@ const fieldComponents: FieldComponents = {
   checkbox: CheckBox,
   radio: RadioButtonField,
   dragAndDropFileField: DragAndDropFileField,
+  dragAndDropPdfField: DragAndDropPdfField,
+  profileUploadField: ProfileControllerField,
+  imageUploadField: ImageUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
+  addField: AddFiled,
   link: LinkField,
+  dateRange: MultiDateField,
+  multiSelect: MultiSelectField,
+  toggleButton: ToggleButton,
+
+
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -50,8 +70,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
   error?: string,
   errors?: Record<string, any>
 ): JSX.Element => {
-  // const Component = fieldComponents[type] as React.FC<Record<string, any>>;
-  const Component = fieldComponents[type];
+  const Component = fieldComponents[type] as React.FC<Record<string, any>>;
 
   return (
     <>
@@ -64,7 +83,8 @@ export const getTypedFieldComponent = <T extends FieldProps>(
 export function isFieldType(type: any): type is FieldType {
   return [
     "input",
-    "creditCardNumberInput",
+    "textArea",
+    "ckEditor",
     "creditCardExpiryDateInput",
     "password",
     "select",
@@ -73,10 +93,17 @@ export function isFieldType(type: any): type is FieldType {
     "checkbox",
     "radio",
     "dragAndDropFileField",
+    "dragAndDropPdfField",
+    "profileUploadField",
+    "imageUploadField",
     "span",
     "div",
     "button",
     "link",
+    "dateRange",
+    "multiSelect",
+    "addField",
+    "toggleButton"
   ].includes(type);
 }
 
@@ -128,3 +155,20 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
 //     />
 //   );
 // };
+
+
+export const renderField = (
+  fieldData: FormField,
+  error: string,
+  errors?: Record<string, any>
+) => {
+  if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
+    return null;
+  }
+  return getTypedFieldComponent(
+    fieldData?.field?.type,
+    fieldData?.field,
+    error,
+    errors
+  );
+};

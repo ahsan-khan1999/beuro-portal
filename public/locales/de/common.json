@@ -1,0 +1,1995 @@
+{
+  "home": {
+    "header": {
+      "privacy": {
+        "title": "Datenschutz & Politik"
+      },
+      "contact": {
+        "title": "Kontakt"
+      },
+      "help": {
+        "title": "Hilfe",
+        "link": ""
+      },
+      "notification": {
+        "title": "Benachrichtigungen",
+        "link": ""
+      },
+      "chat": {
+        "title": "Nachrichten",
+        "link": ""
+      },
+      "my_account": {
+        "title": "Mein Konto",
+        "link": ""
+      },
+      "sign_in": {
+        "title": "Eintragen",
+        "link": ""
+      },
+      "login_with": {
+        "title": "oder Anmeldung mit",
+        "link": ""
+      },
+      "join_now": {
+        "title": "Jetzt teilnehmen",
+        "link": ""
+      },
+      "language": {
+        "title": "Sprache"
+      },
+      "blog": {
+        "title": "Blog"
+      },
+      "user_options": {
+        "edit": "bearbeiten",
+        "edit_profile": "Profil bearbeiten",
+        "my_Ads": "Meine Inserate",
+        "favorites": "Favoriten",
+        "setting": "Einstellungen",
+        "help": "Hilfe",
+        "logout": "Abmelden"
+      },
+      "navbar": {
+        "locaton_place_holder": { "title": "Ort suchen" },
+        "category_placeholder": { "title": "Alle Kategorien" },
+        "name_placeHolder": { "title": "Suche Name" },
+        "place_advert": { "title": "Anzeige aufgeben" }
+      }
+    },
+    "app_section": {
+      "title": "Ihr Schweizer Marktplatz zum Kaufen und Verkaufen'",
+      "button": { "title": "Jetzt herunterladen" }
+    },
+    "populor_categories": { "title": "Beliebte Kategorien" },
+    "premium_artical": {
+      "title": "Schreiben Sie anstelle von 'unsere Premiumartikel'"
+    },
+    "place_advert_banner": {
+      "title": "Für Rubrik 'Den richtigen Kunden erreichen",
+      "description": "Sie möchten in der Schweiz online kaufen und verkaufen? Kaufes ist die ultimative Plattform für den Online-Verkauf in der Schweiz und bringt Sie mit Ihren idealen Kunden zusammen. Dank unserer fortschrittlichen Suchfunktion und benutzerfreundlichen Oberfläche wird das Verkaufen und Kaufen so einfach wie nie zuvor. Beginnen Sie heute damit, mit Ihren Wunschkunden in Kontakt zu treten!",
+      "button": "Schalten Sie Ihre Anzeige"
+    },
+    "latest_artical": { "title": "Neueste Empfehlungen" },
+    "our_partner_banner": {
+      "title": "(Unser Partnerbereich)",
+
+      "partners": {
+        "1": {
+          "logo": "offerten",
+          "image": "offertenImage",
+          "description_01": "Kaufes ist stolz darauf, Partner von Offerten 365 zu sein, einem führenden Schweizer Unternehmen für Umzugs- und Reinigungsdienstleistungen. Egal, ob Sie Hilfe beim Verpacken, Verladen, Umziehen, Entladen oder Reinigen benötigen. ",
+          "description_02": "Offerten 365 bietet alles, was Sie brauchen. Ihr Engagement für die Kundenzufriedenheit macht sie zum idealen Partner von Kaufes. Wir empfehlen Offerten 365 für professionelle Umzugs- und Reinigungsdienstleistungen in der Schweiz.",
+
+          "button": "Mehr finden",
+          "link": "https://offerten-365.ch/"
+        }
+      }
+    },
+    "blogs": {
+      "section_title": {
+        "title": "Lesen Sie unsere inspirierenden Blogs",
+        "button": "Alle anzeigen"
+      },
+      "blogs": []
+    },
+    "mobile_app_section": {
+      "title": "Mit unserer App können Sie jederzeit und überall kaufen und verkaufen!",
+      "description": "Laden Sie die Kaufes-App herunter und erleben Sie das ultimative Kauf- und Verkaufserlebnis auf mobilen Geräten. Sie wurde entwickelt, um Zeit zu sparen und den Kauf und Verkauf zu vereinfachen."
+    },
+    "footer": {
+      "address": {
+        "title": "Street Name, Sector City, State",
+        "populor_categories": {
+          "title": "Populäre Kategorien",
+          "categories": []
+        },
+        "information": {
+          "title": "INFORMATIONEN",
+          "pages": {
+            "1": { "title": "Kontakt", "link": "/contact" },
+            "2": { "title": "Hilfe", "link": "/help" },
+            "3": {
+              "title": "Datenschutzbestimmungen",
+              "link": "/privacy-policy"
+            }
+          }
+        },
+        "downloadApp": {
+          "title": "APP HERUNTERLADEN"
+        },
+        "copyright": "Kaufes. Alle Rechte vorbehalten"
+      }
+    }
+  },
+  "contact": {
+    "how_to_contact": {
+      "title": "Wie können Sie uns kontaktieren?",
+      "description_01": "Sie haben eine Frage oder ein Anliegen? Zögern Sie nicht, uns per E-Mail zu kontaktieren: help@kaufes.ch. Unser Expertenteam wird Ihnen innerhalb von 24-48 Stunden oder sogar noch früher antworten. ",
+      "description_02": "Wenn Sie sofortige Hilfe benötigen, nutzen Sie unsere 24/7-Live-Chat-Funktion auf unserer Website. Sie können uns auch telefonisch unter 02323433455 erreichen, um direkt mit einem unserer Mitarbeiter zu sprechen."
+    },
+    "via_email": {
+      "title": "Senden Sie uns eine E-Mail",
+      "description": "Wenn Sie Unterstützung bei der Nutzung der Plattform, dem Kauf von Produkten oder dem Verkauf von Waren über Kausef benötigen, können Sie uns eine E-Mail an help@kaufes.ch schicken. Wir werden uns innerhalb von 48 Stunden oder weniger um Ihr Anliegen kümmern.",
+      "email": "help@kaufes.ch"
+    },
+    "via_call": {
+      "title": "Rufen Sie uns an",
+      "description": "Möchten Sie mit einem unserer tatkräftigen Teammitglieder sprechen? Zögern Sie nicht! Unsere Kundendienstmitarbeiter sind immer bereit, Ihnen bei allen Fragen und Überlegungen zu helfen, die Sie haben. Bitte rufen Sie uns an.",
+      "phone": "+41 781840692"
+    },
+    "via_social_media": {
+      "title": "Verbinden Sie sich mit uns über soziale Medien",
+      "description": "Werden Sie Teil der Gemeinschaft von Millionen von Menschen in den sozialen Medien! Folgen Sie uns auf unseren Social-Media-Kanälen, um über die neuesten Nachrichten, Aktionen und Produktangebote informiert zu werden."
+    },
+    "contact_form": {
+      "title": "Erreichen Sie uns",
+      "description": "Unser Support-Team steht Ihnen rund um die Uhr zur Verfügung, um Ihre Fragen zu beantworten.",
+      "message": "Hinterlassen Sie eine Nachricht",
+      "labels": {
+        "name": { "title": "Ihr Name" },
+        "email": { "title": "Ihre E-Mail" },
+        "message": { "title": "Ihre Nachricht" }
+      },
+      "button": "Nachricht senden"
+    }
+  },
+  "privacy": {
+    "header": {
+      "title": "Datenschutzbestimmungen",
+      "updated_at": "Aktualisiert 3. Januar 2022"
+    },
+    "acceptance": {
+      "title": "1. AKZEPTANZ",
+      "description": "Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen."
+    },
+    "content_policy": {
+      "title": "2. BESCHREIBUNG DES DIENSTES UND DER INHALTSPOLITIK",
+      "description": "Kaufes ist nicht verantwortlich für Verweise und Links zu Websites von Dritten. Jegliche Haftung für solche Websites wird abgelehnt. Die Nutzer sind für den Zugang zu oder die Nutzung von Plattformen Dritter auf eigenes Risiko verantwortlich."
+    },
+    "buying": {
+      "title": "3. KAUFEN AUF KAUFES",
+      "description": "Alle Bilder, Videos und Medien, die auf dem Kausef gezeigt werden, gehören zu dieser spezifischen Plattform und sind somit urheberrechtlich geschützt. Für die Vervielfältigung jeglicher Aspekte muss im Voraus die schriftliche Genehmigung der Urheberrechtsinhaber eingeholt werden.."
+    },
+    "selling": {
+      "title": "4. VERKAUF AUF KAUFES",
+      "description_01": "Haftungsansprüche gegen den Autor, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen, durch Missbrauch der Verbindung oder durch technische Störungen verursacht wurden, sind grundsätzlich ausgeschlossen. Alle Angebote sind freibleibend und unverbindlich.",
+      "description_02": "Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen."
+    },
+    "premium": {
+      "title": "5. PREMIUM-ANZEIGEN",
+      "description_01": "Die Schweiz regelt den Datenschutz im Rahmen des Datenschutzgesetzes, das garantiert, dass personenbezogene Daten nicht für rechtliche Angelegenheiten zugänglich sind. Die von der Website gesammelten Verbraucherdaten werden gemäß Artikel 13 der Schweizerischen Bundesverfassung verarbeitet, der Ihr Recht auf Privatsphäre garantiert.",
+      "description_02": "Seit 1993 verbietet das Bundesgesetz über den Datenschutz und die Datensicherheit die Bearbeitung privater Daten ohne den ausdrücklichen Auftrag der Datenverantwortlichen."
+    },
+    "right": {
+      "title": "6. Recht auf Meinungs- und Pressefreiheit",
+      "description": "Da die Verfassung das Recht des Einzelnen auf freie Meinungsäußerung schützt, ist der Sprecher Eigentümer seiner Äußerungen und wird in der Regel von der Regierung respektiert. Die Veröffentlichung durchgesickerter Informationen ist nach Schweizer Bundesrecht ebenfalls verboten."
+    },
+    "ip": {
+      "title": "7. Ip-Adressen sind privat",
+      "description_01": "Das Schweizerische Bundesgericht hat im Jahr 2010 IP-Adressen als vertrauliche Daten eingestuft. Gemäss der früheren Rechtsprechung ist die Verfolgung der Internetnutzung von Einzelpersonen ohne deren ausdrückliche Zustimmung in hohem Masse illegal.",
+      "description_02": "Die Nichtnutzung der veröffentlichten Informationen, Missbrauch des Anschlusses oder technische Störungen sind ausgeschlossen. Alle Angebote sind freibleibend.",
+      "description_03": "Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen."
+    },
+    "questions": {
+      "title": "Haben Sie noch Fragen?",
+      "description": "Sie können nicht finden, was Sie suchen? Bitte chatten Sie mit unserem Support-Team.",
+      "button": "Kontakt"
+    }
+  },
+
+  "register": {
+    "main_heading": "Konto erstellen",
+    "sub_heading": "Kostenlos anmelden! Bitte geben Sie Ihre Daten ein",
+    "email_label": "Email",
+    "password_label": "Passwort",
+    "confirm_password_label": "Bestätigen Sie Ihr Passwort",
+    "email_placeholder": "Geben Sie Ihr Email",
+    "password_placeholder": "Geben Sie Ihr Password",
+    "confirm_password_placeholder": "Geben Sie Ihr Password",
+    "button": "Konto erstellen",
+    "have_an_account": "Sie haben bereits ein Konto?",
+    "login": "Anmeldung",
+    "or_login": "oder Anmeldung mit"
+  },
+  "login": {
+    "main_heading": "Willkommen zurück",
+    "sub_heading": "Geben Sie Ihre Kontodaten ein",
+    "email_label": "Email",
+    "password_label": "Passwort",
+    "email_placeholder": "Geben Sie Ihr Email",
+    "password_placeholder": "Geben Sie Ihr Password",
+    "button": "Anmeldung",
+    "dont_have_an_account": "Sie haben noch kein Konto?",
+    "create": "Konto erstellen",
+    "or_login": "oder Anmeldung mit",
+    "remember_me": "Erinnern Sie sich an mich",
+    "forgot_password": "Passwort vergessen"
+  },
+  "account_type": {
+    "main_heading": "Konto-Typ",
+    "sub_heading": "Wählen Sie Ihren Kontotyp",
+    "business_heading": "Geschäftskonto",
+    "business_desc": "Für Unternehmen und Privatpersonen, die Produkte oder Dienstleistungen online über unsere Plattform verkaufen möchten.",
+    "button": "Next",
+    "private_heading": "Privates Konto",
+    "private_desc": "Für Privatpersonen, die Produkte oder Dienstleistungen online über unsere Plattform kaufen möchten."
+  },
+  "private": {
+    "main_heading": "Persönliche Angaben",
+    "sub_heading": "Geben Sie Ihre persönlichen Daten ein",
+    "fname_label": "Vorname",
+    "lname_label": "Nachname",
+    "phone_label": "Rufnummer",
+    "home_label": "Wohnanschrift",
+    "street_label": "Straße und Hausnummer",
+    "country_label": "Land",
+    "state_label": "Staat",
+    "city_label": "Stadt",
+    "zip_label": "Postleitzahl",
+    "fname_placeholder": "Vorname",
+    "lname_placeholder": "Nachname",
+    "phone_placeholder": "Rufnummer",
+    "street_placeholder": "Straße und Hausnummer",
+    "zip_placeholder": "Postleitzahl",
+    "button_back": "Zurück",
+    "button_next": "Weiter"
+  },
+  "business": {
+    "main_heading": "Geschäftliche Details",
+    "sub_heading": "Geben Sie Ihre Unternehmensdaten ein",
+    "logo_label": "Logo hochladen",
+    "logo_text": "Uplaod Bilder",
+    "file_label": "JPG, JPEG, PNG Min: 400px, Max: 1024px",
+    "business_name_label": "Name des Unternehmens",
+    "website_label": "Website Link",
+    "website_link_placeholder": "https://",
+    "business_location": "Wirtschaftsstandort",
+    "business_name_placeholder": "Name des Unternehmens",
+    "website_placeholder": "Website Link",
+    "business_placeholder": "Ort suchen",
+    "button_back": "Zurück",
+    "button_next": "Konto erstellen"
+  },
+  "phone_verification": {
+    "title": "Überprüfen Sie Ihre Telefonnummer",
+    "description": "Vielen Dank für Ihre Registrierung! Um Ihre Telefonnummer zu überprüfen, geben Sie bitte das (OTP) ein, das wir Ihnen an Ihre Telefonnummer geschickt haben.",
+    "label": "OTP eingeben",
+    "button": "Überprüfen Sie",
+    "notrecieve": "Nicht erhalten?",
+    "sendagain": "Erneut senden"
+  },
+  "email_verification": {
+    "title": "Überprüfen Sie Ihre E-Mail-Adresse",
+    "description": "Vielen Dank für die Registrierung! Bitte geben Sie das OTP ein, das wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder wenden Sie sich an den Support, wenn Sie die E-Mail nicht erhalten haben.",
+    "label": "OTP eingeben",
+    "button": "Überprüfen Sie",
+    "notrecieve": "Nicht erhalten?",
+    "sendagain": "Erneut senden"
+  },
+  "reset_password": {
+    "title": "Passowrd zurücksetzen",
+    "description": "Geben Sie Ihre Kontodaten ein",
+    "label": "Passwort",
+    "label2": "Bestätigen Sie Ihr Passwort",
+    "placeholder1": "Geben Sie Ihr Passwort ein",
+    "placeholder2": "Geben Sie Ihr Passwort erneut ein",
+    "button": "Zurücksetzen",
+    "dont_have_an_account": "Sie haben noch kein Konto?",
+    "create": "Konto erstellen",
+    "or_login": "oder Anmeldung mit"
+  },
+  "forogt_password": {
+    "title": "Passwort vergessen",
+    "description": "Geben Sie Ihre Kontodaten ein",
+    "label": "Email",
+    "placeholder1": "Geben Sie Ihr Email",
+    "button": "Einreichen",
+    "backLogin": "Zurück zu Login",
+    "dont_have_an_account": "Sie haben noch kein Konto?",
+    "create": "Konto erstellen",
+    "or_login": "oder Anmeldung mit"
+  },
+  "dashboard_details": {
+    "title": "Mein Konto",
+    "menu": {
+      "1": {
+        "title": "Mein Profil",
+        "image_button": "Ändern Sie",
+        "file": "JPG, JPEG, PNG",
+        "size": "Min: 400px, Max: 1024px",
+        "fname_label": "Vorname",
+        "lname_label": "Nachname",
+        "email_label": "Email Adresse",
+        "verification_req": "Erforderliche Überprüfungen",
+        "shre_email": "Wir werden Ihre email niemals an Dritte weitergeben.",
+        "shre_phone": "Wir geben Ihr Telefon niemals an Dritte weiter.",
+
+        "phone_label": "Rufnummer",
+        "home_label": "Wohnanschrift",
+        "street_label": "Straße und Hausnummer",
+        "country_label": "Land",
+        "state_label": "Staat",
+        "city_label": "Stadt",
+        "zip_label": "Postleitzahl",
+        "business_information": "Geschäftliche Informationen",
+
+        "business_name_label": "Name des Unternehmens",
+        "website_label": "Website Link",
+        "website_link_placeholder": "https://",
+        "business_location": "Wirtschaftsstandort",
+        "button": "Speichern Sie"
+      },
+      "2": {
+        "title": "Meine Inserate",
+        "type1": "Festpreis",
+        "type2": "Aktionen",
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "pending": "Pendelnd",
+        "pause": "Pause",
+        "sold": "Verkauft",
+        "rejected": "Abgelehnt",
+        "expired": "Abgelaufen",
+        "button": "Mehr laden",
+        "ad": "ad",
+        "price": "Preis",
+        "date": "Datum",
+        "highest_bid": "Höchstes Gebot",
+        "bids": "Gebote",
+        "no_action": "Keine Maßnahme angegeben"
+      },
+      "3": { "title": "Favoriten" },
+      "4": {
+        "title": "Einstellungen",
+        "current": "Aktuelles Passwort",
+        "new": "Neues Passwort",
+        "confirm": "Bestätigen Sie Ihr Passwort",
+        "button": "Speichern Sie"
+      },
+      "5": { "title": "Hilfe" }
+    }
+  },
+  "place_advert": {
+    "title": "Inserate einfügen",
+    "tab1": "Wählen Sie eine Kategorie",
+    "tab2": "Details zur Anzeige",
+    "adtitile": "Einen Titel hinzufügen",
+    "adsub": "Nennen Sie die wichtigsten Merkmale Ihres Artikels (z. B. Marke, Modell, Alter, Typ)",
+    "addesc": "Beschreibung",
+    "addescsub": "Nennen Sie die wichtigsten Merkmale Ihres Artikels (z. B. Marke, Modell, Alter, Typ)",
+    "condition": "Zustand",
+    "new": "Neu",
+    "used": "Gebraucht",
+    "spec": "Spezifikationen",
+    "pricing": "Preise festlegen",
+    "fixed": "Festpreis",
+    "auction": "Auktion",
+    "price": "Preis",
+    "startingbid": "Startgebot",
+    "closeingbid": "Schlussgebot",
+    "biduntill": "Gebot bis",
+    "location": "Standort festlegen",
+    "street_label": "Straße",
+    "ad_location": "Standort",
+    "country_label": "Land",
+    "state_label": "Staat",
+    "city_label": "Stadt",
+    "postal_label": "Postleitzahl",
+    "uplaod_media": "Medien hochladen",
+    "uplaod_thumb": "Thumbnail hochladen",
+    "uplaod_thumb_sub": "Laden Sie ein Bild von Ihrem Produkt hoch.",
+    "uplaod_thumb_text": "Thumbnail hochladen",
+    "uplaod_images": "Bilder hochladen",
+    "uplaod_image_sub": "Hochladen von bis zu 12 Bildern mit einer maximalen Größe von 5 MB",
+    "uplaod_video": "Video hochladen",
+    "uplaod_video_sub": "Laden Sie ein Video von Ihrem Produkt hoch, das maximal 50 MB groß ist Dateityp mp4.",
+    "uplaod_video_text": "Video hochladen",
+    "reivew_contact": "Kontaktinformationen überprüfen",
+    "show_contact": "Meine Kontaktdaten in dieser Anzeige anzeigen",
+    "fname_label": "Vorname",
+    "lname_label": "Nachname",
+    "email_label": "Email Adresse",
+    "phone_label": "Rufnummer",
+    "button": "Weiter"
+  },
+  "help": {
+    "title": "Hilfe",
+    "heading": "Hilfe",
+    "sub_heading": "Häufig gestellte Fragen",
+    "questions": {
+      "1": {
+        "title": "Was ist Kaufes und wie funktioniert es?",
+        "description": "Kaufes ist ein Online-Marktplatz, auf dem Sie Nebenerzeugnisse und Dienstleistungen kaufen und verkaufen können. Um Kaufes zu nutzen, müssen Sie ein Konto erstellen und Ihre Waren zum Verkauf anbieten oder die Angebote durchsuchen, um Artikel zum Kauf zu finden."
+      },
+      "2": {
+        "title": "Wie kann ich ein Konto bei Kaufes erstellen?",
+        "description": "Um ein Konto bei Kaufes zu erstellen, gehen Sie auf die Homepage und klicken Sie auf die Schaltfläche Mein Konto. Klicken Sie dann auf die Schaltfläche Registrieren und geben Sie Ihre Daten ein, z. B. Ihren Namen, Ihre E-Mail-Adresse und Ihr Passwort."
+      },
+      "3": {
+        "title": "Wie kann ich bei Kaufes nach Artikeln suchen?",
+        "description": "Sie können nach Artikeln auf Kaufes suchen, indem Sie in der Suchleiste oben auf der Seite Stichworte eingeben. Sie können auch durch Kategorien blättern oder Filter verwenden, um Ihre Suchergebnisse einzugrenzen."
+      },
+      "4": {
+        "title": "Wie gebe ich eine Anzeige bei Kaufes auf?",
+        "description": "Um eine Anzeige bei Kaufes aufzugeben, loggen Sie sich in Ihr Konto ein und klicken Sie auf die Schaltfläche Artikel jetzt verkaufen. Geben Sie dann die Details Ihres Artikels ein, wie Titel, Beschreibung und Preis, und laden Sie Fotos hoch."
+      },
+      "5": {
+        "title": "Wie kann ich einen Artikel bei Kaufes kaufen?",
+        "description": "Um einen Artikel bei Kaufes zu kaufen, suchen Sie den gewünschten Artikel und klicken Sie ihn an, um weitere Details zu sehen. Klicken Sie dann auf die Schaltfläche Verkäufer kontaktieren, um mit dem Verkäufer in Kontakt zu treten und die Zahlung und Lieferung zu vereinbaren."
+      },
+      "6": {
+        "title": "Wie kann ich eine Zahlung bei Kaufes vornehmen?",
+        "description": "Um einen Artikel bei Kaufes zu kaufen, suchen Sie den gewünschten Artikel und klicken Sie ihn an, um weitere Details anzuzeigen. Klicken Sie dann auf die Schaltfläche Verkäufer kontaktieren, um mit dem Verkäufer in Kontakt zu treten und die Zahlung und Lieferung zu vereinbaren."
+      }
+    },
+    "still_questions": {
+      "title": "Haben Sie noch Fragen?",
+      "description": "Sie können nicht finden, was Sie suchen? Bitte chatten Sie mit unserem Support-Team.",
+      "button": "Kontakt"
+    }
+  },
+
+  "advert": {
+    "category": "Kategorien",
+    "filter": "Filtern",
+    "clearlocation": "Standort löschen",
+    "type": "Anzeige Typ",
+    "condition": "Zustand",
+    "sort": "Sortieren",
+    "button": "Mehr laden",
+    "fixed": "Festpreis",
+    "auction": "Auktion",
+    "new": "Neu",
+    "used": "Gebraucht",
+    "low": "Preis (niedrig)",
+    "high": "Preis (Hoch)",
+    "none": "None",
+    "advert_label": "Advert",
+    "tags": "Stichworte",
+    "price": "Preis",
+    "any": "Jede",
+    "save": "Speichern Sie",
+    "apply": "Bewerbung"
+  },
+  "profile": {
+    "contact": "Kontakt",
+    "active": "Aktive Anzeigen",
+    "sold": "Verkaufte Artikel",
+    "all": "Alle Inserate",
+    "fixed": "Festpreis",
+    "auction": "Auktion",
+    "button": "Mehr laden"
+  },
+  "advertStatus": {
+    "active": { "label": "aktiv", "value": "1" },
+    "expired": { "label": "Abgelaufen", "value": "5" },
+    "inactive": { "label": "Abgelaufen", "value": "3" },
+    "paused": { "label": "Abgelaufen", "value": "4" },
+    "pending": { "label": "anhängig", "value": "0" },
+    "rejected": { "label": "abgelehnt", "value": "6" },
+    "sold": { "label": "verkauft", "value": "2" }
+  },
+  "advert_labels": {
+    "pending": "Ihre Anzeige wird derzeit geprüft. Sie erhalten eine Benachrichtigung, wenn Ihre Anzeige genehmigt wurde.",
+    "active": "Ihre Anzeige ist jetzt live. ",
+    "paused": "Ihre Anzeige ist jetzt pausiert.",
+    "inactive": "Ihre Anzeige ist jetzt inaktiv. ",
+    "sold": "Ihre Anzeige ist jetzt verkauft. ",
+    "rejected": "Ihre Anzeige ist jetzt abgelehnt, ",
+    "expired": "Ihre Anzeige ist jetzt abgelaufen, "
+  },
+  "chat": {
+    "chat_not_found": "Kein Chatraum gefunden",
+    "please_initiate": "Bitte erst den Chat einleiten",
+    "back": "Zurückgehen"
+  },
+  "blogs": {
+    "title": "Blogs",
+    "sub": "Kuratierte Einkaufsartikel",
+    "Products": {
+      "title": "Produkte"
+    },
+    "Real Estate": {
+      "title": "Liegenschaften"
+    },
+    "Shopping": {
+      "title": "Einkaufen"
+    },
+    "Technology": {
+      "title": "Technologie"
+    },
+    "read": "Mehr lesen",
+    "button": "laden mehr",
+    "view": "Alle anzeigen",
+    "related": "Verwandte Blogs"
+  },
+  "advert_details": {
+    "home": "Home",
+    "member": "Mitglied seit",
+    "contact": "Kontakt",
+    "chat": "Chatten",
+    "location": "Standort",
+    "location_des": "Lorem Ipsum ist einfach der Blindtext der Druck- und Setzindustrie. Lorem Ipsum ist seit den 1500er Jahren der Standard-Blindtext der Industrie, HH SZ",
+    "details": "Einzelheiten",
+    "featured": "Ausgewählt",
+    "condition": "Zustand",
+    "price": "Preis",
+    "date": "Datum",
+    "desc": "Beschreibung",
+    "high": "Höchstes Gebot",
+    "bids": "Gebote",
+    "enter": "Eingabe",
+    "more": "oder mehr",
+    "time": "Verbleibende Zeit",
+    "place": "Ort GebotI"
+  },
+  "toast": {
+    "login": "Bitte anmelden",
+    "file": "Bitte wählen Sie ein gültiges Dateiformat"
+  },
+  "validationMessages": {
+    "required": "Dieses Feld ist erforderlich",
+    "nonexistent": "nonexistent",
+    "already_exists": "{0} mit diesem {1} existiert bereits",
+    "not_found": "not_found:{0}:{1}",
+    "password_length_error": "Das Passwort muss größer als 6 sein",
+    "password_missing_lower": "password_missing_lower",
+    "password_missing_upper": "password_missing_upper",
+    "password_missing_number": "password_missing_number",
+    "password_missing_special": "password_missing_special",
+    "invalid_datatype": "invalid_datatype:{0}:{1}",
+    "invalid_format": "Ungültiges Format",
+    "invalid_option": "Bitte wählen Sie eine gültige Option",
+    "length_error": "length_error:{0}:{1}",
+    "length_max": "{0} has max length of {1}",
+    "length_min": "{0} has min length of {1}",
+    "auth_invalid_credentials": "Ungültige Berechtigungsnachweise",
+    "otp_invalid": "Ungültige Otp",
+    "mail_sent_maybe": "E-Mail gesendet",
+    "server_error": "Interner Serverfehler : 500",
+    "oauth_account_in_use": "Bereits verwendetes Konto",
+    "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
+    "mixed": {
+      "required": "Dieses Feld ist erforderlich",
+      "oneOf": "Passwort muss übereinstimmen ",
+      "notOneOf": "Passwort muss different"
+    },
+    "string": {
+      "email": "Bitte geben Sie eine gültige Email ein",
+      "min": "Bitte geben Sie einen gültigen Wert ein"
+    },
+    "array": {
+      "min": "Mindestens 1 ist erforderlich"
+    },
+    "user_profile_already_complete": "Benutzerprofil ist bereits ausgefüllt"
+  },
+  "my_selling": {
+    "tab_menu": {
+      "drafts": "Drafts",
+      "sellings": "Sellings",
+      "sold": "Sold",
+      "payments": "Payments"
+    },
+    "drop_down_status": {
+      "label": "Status",
+      "default": "Default",
+      "completed": "Completed",
+      "not_completed": "Not Completed"
+    },
+    "drop_down_continue_editing": {
+      "continue_editing": "Continue Editing",
+      "item_details": "Item Details",
+      "category_and_specifications": "Category and Specifications",
+      "offer_type_and_price": "Offer Type & Price",
+      "delivery": "Delivery"
+    }
+  },
+  "my_buying": {
+    "tab_menu": {
+      "bid": "Am Bieten",
+      "proposal": "Preisvorschläge",
+      "purchased": "Gekauft"
+    },
+    "drop_down_status": {
+      "label": "Status",
+      "default": "Default",
+      "completed": "Completed",
+      "not_completed": "Not Completed"
+    },
+    "drop_down_continue_editing": {
+      "continue_editing": "Continue Editing",
+      "item_details": "Item Details",
+      "category_and_specifications": "Category and Specifications",
+      "offer_type_and_price": "Offer Type & Price",
+      "delivery": "Delivery"
+    }
+  },
+  "user_profile": {
+    "tab_menu": {
+      "openOffer": "offene Angebote",
+      "evaluation": "Bewertung",
+      "buyerReviews": "Käufer Bewertungen",
+      "sellerRatings": "Verkäufer Bewertungen"
+    }
+  },
+  "buyNow": {
+    "tab": {
+      "delivery": "Lieferung",
+      "payment": "Zahlungen",
+      "confirmation": "Bestätigung"
+    }
+  },
+  "payment": {
+    "tab": {
+      "delivery": "Lieferung",
+      "payment": "Zahlungen",
+      "evaluation": "Bewertung"
+    }
+  },
+  "my_favourite": {
+    "tab_menu": {
+      "offer": "OFFERS",
+      "seller": "SELLERS"
+    }
+  },
+
+  "questions": {
+    "tab_menu": {
+      "buying": "Buying",
+      "selling": "Selling"
+    }
+  },
+  "sidebar": {
+    "customer": {
+      "dashboard": "Dashboard",
+      "customers": "Customers",
+      "leads": {
+        "leads": "Leads",
+        "open": "Open",
+        "close": "Close",
+        "expire": "Expire"
+      },
+      "offers": {
+        "offers": "Offers",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "contracts": {
+        "contracts": "Contracts",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "invoices": {
+        "invoices": "Invoices",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "services": "Services",
+      "employees": "Employees",
+      "content": "Content",
+      "mail_tracker": "Mail Tracker",
+      "settings": "Settings",
+      "contact_supports": "Contact Supports"
+    },
+    "admin": {
+      "dashboard": "Dashboard",
+      "customers": "Customers",
+      "plans": "Plans",
+      "payments": "Payments",
+      "contact_supports": "Contact Supports",
+      "Settings": "Settings"
+    }
+  },
+  "customers": {
+    "title": "Customers",
+    "add_button": "Add New",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "created_on": "Created On",
+      "location": "Location",
+      "type": "Type",
+      "edit": "Edit"
+    },
+
+    "card_content": {
+      "heading": "Customers Details",
+      "customer_id": "Customer ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+
+    "details": {
+      "add_customer_heading": "Add new Customer",
+      "heading": "Customer Details",
+      "edit_button": "Edit Details",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "company_name": "Company Name",
+      "save_button": "Save"
+    },
+
+    "side_bar_details": {
+      "heading": "Details",
+      "lead_id": "Lead ID",
+      "name": "Name",
+      "lead_source": "Lead Source",
+      "lead_status": "Lead Status",
+      "lead_expire": "Lead Expire"
+    },
+
+    "customer_cretaed_modal": {
+      "main_heading": "Customer Created Successful ",
+      "sub_heading": "Thanks for creating Customer we are happy to have you. ",
+      "button": "Done"
+    },
+
+    "are_you_sure_modal": {
+      "main_heading": "Are You Sure",
+      "sub_heading": "You want to leave this page without saving changes.",
+      "cancel_button": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "request_modal": {
+    "main_heading": "Your Request has been sent",
+    "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
+    "button": "Done"
+  },
+  "contact_support": {
+    "heading": "Contact & Support",
+    "main_heading": "Submit your request",
+    "form_fields": {
+      "full_name": "Full Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "reason": "Reson for Contact",
+      "message": "Your Message",
+      "request_button": "Submit Request"
+    }
+  },
+  "email_tracker": {
+    "main_heading": "Email Tracker",
+    "email_detail_heading": "Email",
+    "table_functions": {
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
+    "table_headings": {
+      "id": "ID",
+      "recipient": "Recipient",
+      "subject": "Subject",
+      "send_at": "Send at",
+      "viewed_at": "Viewd at",
+      "status": "Status",
+      "view_mail": "View Mail"
+    },
+    "card_content": {
+      "main_heading": "Email Details",
+      "id": "ID",
+      "status": "Status",
+      "subject": "Subject",
+      "recipient": "Recipient",
+      "send_at": "Send At",
+      "viewed_at": "Viewd At",
+      "attachments": "Attachments"
+    },
+    "email_confirmation_modal": {
+      "main_heading": "Please confirm Email ID No.",
+      "sub_heading": "Enter Your Email ID No.",
+      "cancel_button": "Cancel",
+      "confirm_button": "Confirm"
+    },
+    "email_delete_modal": {
+      "heading": "Are you sure you want to delete this Email?",
+      "cancel_button": "Cancel",
+      "delete_button": "Delete"
+    }
+  },
+  "services": {
+    "main_heading": "Services",
+    "add_button": "Add New",
+    "add_service_heading": "Add new Service",
+    "table_headings": {
+      "id": "ID",
+      "service": "Service",
+      "created_on": "Created On",
+      "price": "Price",
+      "description": "Description",
+      "edit": "Edit"
+    },
+    "card_content": {
+      "main_heading": "Services/Product Details",
+      "customer_id": "Customer ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+    "detail": {
+      "main_heading": "Services/Product Details",
+      "edit_button": "Edit Details",
+      "title": "Service/product Name",
+      "unit": "Unit",
+      "price": "Price",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save"
+    }
+  },
+  "employees": {
+    "main_heading": "Employees",
+    "add_button": "Add New",
+    "add_new_employee": "Add Employee",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "designation": "Designation",
+      "created_on": "Created On",
+      "edit": "Edit"
+    },
+    "card_content": {
+      "heading": "Employees Details",
+      "employee_id": "Employee ID",
+      "created_by": "Created by",
+      "created_date": "Created Date"
+    },
+    "details": {
+      "main_heading": "Employee Details",
+      "edit_button": "Edit Details",
+      "edit_password": "Edit Password",
+      "full_name": "Full Name",
+      "designation": "Designation",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save"
+    },
+    "edit_password_modal": {
+      "heading": "Reset Password",
+      "your_password": "Your Password",
+      "new_pasword": "Create New Password",
+      "confirm_password": "Confirm New Password",
+      "submit_button": "Submit"
+    },
+    "password_changed_modal": {
+      "main_heading": "Password has been changes successfully",
+      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "button": "Done"
+    },
+    "link_send_modal": {
+      "main_heading": "Link Send to Employ Email",
+      "sub_heading": "Thanks for signing up to Buro we are happy to have you. Please take a second to make sure we have your correct email address.",
+      "button": "Done"
+    },
+    "create_new_password_modal": {
+      "main_heading": "Create New Password",
+      "your_mail": "Your Mail",
+      "create_new_password": "Create New Password",
+      "confirm_password": "Confirm New Password",
+      "submit_button": "Submit"
+    },
+    "password_set_modal": {
+      "main_heading": "Your Password set Successfully",
+      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "button": "Done"
+    }
+  },
+  "setting": {
+    "heading": "Setting",
+    "save_setting": "Save Setting",
+    "steps_heading": {
+      "account_setting": "Account Setting",
+      "system_setting": "System Setting",
+      "templates": "Templates",
+      "follow_up_setting": "Follow Up Setting",
+      "billing": "Billing",
+      "mail_setting": "Mail Setting"
+    },
+    "account_setting": {
+      "public_info": "Public Information",
+      "full_name": "Full Name",
+      "email": "Email",
+      "company_name": "Company Name",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "website": "Website",
+      "mwst_number": "MWST Number (Optional)",
+      "private_info": "Private Information",
+      "street_address": "Street Address",
+      "post_code": "Post Code",
+      "country": "Country",
+      "city": "city",
+      "houseNumber": "houseNumber",
+
+      "bank_name": "Bank Name",
+      "account_no": "Account No",
+      "iban_number": "Iban Number",
+      "change_password": "Change Password",
+      "change": "Change",
+      "restore_button": "Restore Default",
+      "save_changes_button": "Save Changes"
+    },
+    "change_password_modal": {
+      "old_password": "Old Password",
+      "new_pasword": "Create New Password",
+      "confirm_password": "Confirm Password",
+      "change_button": "Change"
+    },
+    "system_setting": {
+      "tax": "Tax",
+      "add_button": "Add New",
+      "invoice_over_due": "Invoice Over Due",
+      "invoice_days_limit": "Invoice Over Due Days Limit",
+      "currency": "Currency",
+      "connect_with_buro": "Connect With Buro",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our help center",
+      "allowed_domain": "Allowed Domain",
+      "add_domain": "Enter Domain",
+
+      "security_token": "Security Token",
+
+      "tabs_tax": {
+        "no_tax": "No Tax",
+        "inclusive_tax": "Inclusive Tax",
+        "exclusive_tax": "Exclusive Tax"
+      }
+    },
+    "tax_modal": {
+      "exclusive_heading": "Exclusive Tax",
+      "add_new_tax": "Add New Tax",
+      "name": "Name",
+      "tax_rate": "Tax Rate",
+      "button": "Add Tax"
+    },
+    "templates": {
+      "heading": "Current PDF Design Templates",
+      "change_button": "Change",
+
+      "first_col_heading": {
+        "heading": "First Column",
+        "company_name": "Company Name",
+        "email": "Email",
+        "phone_number": "Phone Number",
+        "website": "Website",
+        "mwst_number": "MWST Number"
+      },
+      "second_column": {
+        "heading": "Second Column",
+        "street_no": "Street No",
+        "post_code": "Post Code",
+        "bank_name": "Bank Name",
+        "account_number": "Account Number",
+        "iban_number": "IBAN Number"
+      },
+      "third_column": {
+        "third_column_heading": "Third Column",
+        "fourth_column_heading": "Fourth Column",
+        "row_one": "Row 1",
+        "row_two": "Row 2",
+        "row_three": "Row 3",
+        "row_fourth": "Row 4",
+        "row_fifth": "Row 5"
+      }
+    },
+    "follow_up_setting": {
+      "on_offer_expire": "Create Follow Up On Offer Expire",
+      "on_lead_create": "Create Follow Up On Lead Creation",
+      "add_follow_up": {
+        "heading": "Follow Up Reasons",
+        "add_label": "Add Reasons",
+        "add_button": "Add Reason"
+      }
+    },
+    "billing": {
+      "heading": "Current Plan",
+      "payment_method": "Payment Method",
+      "next_renew": "Next Renew 24 september 2018",
+      "card_type": "Visa",
+      "package_name": "Silver",
+      "package_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's",
+      "request_services": {
+        "heading": "Request",
+        "managers": "Managers",
+        "account_reports": "Account Reports",
+        "customize_email": "Customize Email",
+        "watermark": "With Watermark",
+        "features": "API Features",
+        "change_button": "Change Membership"
+      },
+      "payment_history": {
+        "main_heading": "Payment History",
+        "setting": "Setting",
+        "amount": "Amount",
+        "date": "Date",
+        "status": "Status"
+      },
+      "upgrade_card": {
+        "heading": "Upgrade To Gold Membership!",
+        "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "button": "Upgrade"
+      },
+      "edit_payment_modal": {
+        "heading": "Edit Payment Details",
+        "sub_heading": "We automatically bill on the 1st of each month",
+        "package_name": "Silver",
+        "name": "Name on card",
+        "expire": "Expire",
+        "card_number": "Card Number",
+        "cvv": "CVV",
+        "cancel_button": "Cancel",
+        "save_changes_button": "Save Changes"
+      }
+    },
+    "mail_setting": {
+      "system_config": "Use System Mail Configuration",
+      "own_config": "Use Own Mail Configuration",
+      "mail_form_fields": {
+        "mail_driver": "Mail Driver",
+        "mail_host": "Mail Host",
+        "mail_port": "Mail Port",
+        "mail_encryption": "Mail Encryption",
+        "mail_user": "Mail Username",
+        "mail_password": "Mail Password",
+        "mail_address": "Mail From Address",
+        "mail_name": "Mail From Name",
+        "email": "Email",
+        "mail_description": "Enter The Email To Receive The Testing Email Of Mail Configuration."
+      }
+    }
+  },
+  "invoice": {
+    "main_heading": "Invoice",
+    "table_functions": {
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "price": "Total Price",
+      "email_status": "Email Status",
+      "paid": "Paid",
+      "status": "Status",
+      "notes": "Notes"
+    },
+    "card_content": {
+      "heading": "Invoice Details",
+      "invoice_id": "Invoice ID",
+      "title": "Invoice Title",
+      "total_amount": "Total Amount",
+      "contract_id": "Contarct ID",
+      "worker": "Worker",
+      "status": "Email Status",
+      "paid_amount": "Paid Amount",
+      "offer_id": "Offer ID",
+      "created_date": "Creation Date",
+      "notes": "Notes",
+      "unpaid_amount": "Unpaid Amount"
+    },
+    "invoice_table_heading": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "issue_date": "Issue Date",
+      "amount": "Amount",
+      "email_status": "Email Status",
+      "payment": "Payment",
+      "status": "Status"
+    },
+    "receipt_table_heading": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Invoice Title",
+      "paid_date": "Paid Date",
+      "amount": "Amount",
+      "invoice": "Invoice",
+      "email_status": "Email Status",
+      "payment": "Payment"
+    },
+    "create_invoice_modal": {
+      "total_amount": "Total Amount",
+      "remaining_amount": "Remaining Amount",
+      "enter_amount": "Enter the amount",
+      "amount": "Amount",
+      "percentage": "Percentage",
+      "payment_method": "Payment Method",
+      "mark_it_recuring": "Mark it Recuring",
+      "date_of_invoice": "Date of next invoice",
+      "frequency": "Frequency",
+      "button": "Save",
+      "update_invoice": "Edit Invoice",
+
+      "recurring_button": "Create Recurring Invoice"
+    },
+    "invoice_created_modal": {
+      "main_heading": "Invoice Created Successful ",
+      "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
+      "button": "Preview PDF"
+    }
+  },
+  "contracts": {
+    "main_heading": "Contarcts",
+    "table_functions": {
+      "open": "Open",
+      "confirm": "Confirmed",
+      "cancel": "Cancelled"
+    },
+    "table_headings": {
+      "id": "ID",
+      "title": "Contract Title",
+      "customer": "Customer",
+      "total_price": "Total Price",
+      "created_on": "Created On",
+      "payment": "Payment",
+      "status": "Status",
+      "images": "Images",
+      "notes": "Notes"
+    },
+    "card_content": {
+      "heading": "Offer Details",
+      "confirm_button": "Send Confirmation",
+      "contract_id": "Contarct ID",
+      "offer_title": "Offer Title",
+      "worker": "Worker",
+      "offer_id": "Offer ID",
+      "created_date": "Creation Date",
+      "service_date": "Service Date",
+      "offer_status": "Offer Status",
+      "payment_method": "Payment Method",
+      "contract_status": "Contarct Status",
+      "notes": "Notes",
+      "images": "Images"
+    },
+    "tabs_headings": {
+      "offer_details": "Offer Details",
+      "address_details": "Address Details",
+      "service_details": "Service Details",
+      "additional_details": "Additional Details"
+    },
+    "customer_details": {
+      "heading": "Offer Details",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country"
+    },
+    "address_details": {
+      "main_heading": "Additional Details",
+      "heading": "Address 1 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description"
+    },
+    "service_details": {
+      "heading": "Service/Product Details",
+      "title": "Service/Product Title",
+      "description": "Description",
+      "price": "Price(CHF)",
+      "unit": "Unit",
+      "count": "Count",
+      "total_price": "Total Price",
+      "sub_total": "Sub Total",
+      "tax": "Tax(%)"
+    },
+    "additional_details": {
+      "heading": "Additional Details"
+    },
+    "contract_email_preview": {
+      "heading": "Contract Email Preview",
+      "email": "Email",
+      "content": "Content",
+      "subject": "Subject",
+      "description": "Description",
+      "attachments": "Attachments",
+      "back_button": "Back",
+      "next_button": "Next"
+    },
+    "pdf_card_details": {
+      "heading": "Contract Details",
+      "send_via_post": "Send via Post",
+      "send_via_email": "Send via Email",
+      "contract_id": "Contarct ID",
+      "worker": "Worker",
+      "content_name": "Content Name",
+      "contract_status": "Contarct Status"
+    }
+  },
+  "content": {
+    "main_heading": "Content",
+    "add_button": "Add New",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "title": "Content Title",
+      "created_on": "Created On",
+      "edit": "Edit"
+    },
+    "tabs_headings": {
+      "offer_content": "Offers Content",
+      "confirmation_content": "Confirmation Content",
+      "invoice_content": "Invoice Content",
+      "receipt_content": "Receipt Content"
+    },
+    "details": {
+      "offer_heading": "Offer Content",
+      "confirmation_heading": "Confirmation Content",
+      "invoice_heading": "Invoice Content",
+      "receipt_heading": "Receipt Content",
+      "edit_button": "Edit Details",
+      "content_name": "Content Name",
+      "address_labels": "Address Labels",
+      "offer_title": "Offer Content",
+      "offer_description": "Offer Description",
+      "email_body": "Email Body",
+      "confirmation_title": "Confirmation Title",
+      "Confirmation_description": "Confirmation Description",
+      "invoice_title": "Invoice Title",
+      "invoice_description": "Invoice Description",
+      "receipt_title": "Receipt Title",
+      "receipt_description": "Receipt Description",
+      "attachments": "Attachments",
+      "cancel_button": "Cancel",
+      "next_button": "Next",
+      "save_changes_button": "Save Changes",
+      "save_button": "Save",
+      "back_button": "Back"
+    },
+    "content_created_modal": {
+      "main_heading": "Content Created Successful ",
+      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "button": "Done"
+    }
+  },
+  "leads": {
+    "add_new_lead": "Add New Lead",
+    "main_heading": "Leads",
+    "add_button": "Add New",
+    "side_images_heading": "Images",
+    "table_functions": {
+      "open": "Open Leads",
+      "close": "Close Leads",
+      "expire": "Expire Leads"
+    },
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "desire_date": "Desire Date",
+      "location": "Location",
+      "status": "Status",
+      "images": "Images",
+      "note": "Notes"
+    },
+
+    "card_content": {
+      "heading": "Leads Details",
+      "create_button": "Create Offer",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "created_date": "Creation Date",
+      "created_by": "Created by"
+    },
+    "tabs_headings": {
+      "customer": "Customer Details",
+      "address": "Address Details",
+      "service": "Service Details",
+      "additional": "Additional Details"
+    },
+    "customer_details": {
+      "heading": "Customer Details",
+      "edit_button": "Edit Details",
+      "customer": "Customer",
+      "customer_type": "Customer Type",
+      "full_name": "Full Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next"
+    },
+    "address_details": {
+      "main_heading": "Address Details",
+      "edit_button": "Edit Details",
+      "heading": "Address 1 Details",
+      "sub_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next",
+      "back_button": "Back"
+    },
+    "service_details": {
+      "heading": "Service/Product Details",
+      "edit_button": "Edit Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date",
+      "flexibility": "Flexibility",
+      "availability": "Contact Availability",
+      "prefer_contact": "Preferred Contact",
+      "budget": "Budget",
+      "lead_source": "Lead Source",
+      "other_services": "Other Services",
+      "save_changes_button": "Save Changes",
+      "cancel_button": "Cancel",
+      "next_button": "Next",
+      "back_button": "Back"
+    },
+    "additional": {
+      "heading": "Additional Details",
+      "edit_button": "Edit Details",
+      "save_changes_button": "Save Changes",
+      "next_button": "Next",
+      "cancel_button": "Cancel",
+      "back_button": "Back",
+      "save_button": "Save"
+    },
+    "confirm_lead_modal": {
+      "main_heading": "Please confirm Lead ID",
+      "sub_heading": "Enter Lead ID",
+      "cancel_button": "Cancel",
+      "confirm_button": "Confirm"
+    },
+    "leads_created_modal": {
+      "main_heading": "Lead Created Successful",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
+      "add_button": "Add Images",
+      "without_images": "Continue without Images"
+    }
+  },
+
+  "common": {
+    "image_upload_heading": "Drop or Attach your files here",
+    "notes_modal": {
+      "heading": "Notes",
+      "button": "Add New Note"
+    },
+    "add_note_modal": {
+      "heading": "Add Notes",
+      "label": "Add your Note",
+      "button": "Save"
+    },
+    "images_modal": {
+      "heading": "Images",
+      "title": "7 images uploaded",
+      "sub_title": "Images should be max 20, file size up to 10MB",
+      "image_slider_heading": "Image Name"
+    },
+    "delete_modal": {
+      "heading": "Are you sure you want to delete this Image?",
+      "cancel_button": "Cancel",
+      "delete_button": "Delete"
+    },
+    "are_you_sure_modal": {
+      "title": "Are You Sure",
+      "sub_heading": "You want yo make this account free",
+      "cancel_button": "Cancel",
+      "yes_button": "Yes",
+      "confirm_heading": "Please confirm Company",
+      "company_name": "Enter Company Neme",
+      "confirm_button": "Confirm",
+      "success": "Successful",
+      "success_heading": "Your customer is now totally free.",
+      "finish_button": "Finish"
+    },
+    "select_month_modal": {
+      "heading": "Select Month",
+      "button": "Download",
+      "description": "Select the month and the option to download your payment history data",
+      "months": {
+        "jan": "JAN",
+        "feb": "FEB",
+        "mar": "MAR",
+        "apr": "APR",
+        "may": "MAY",
+        "jun": "JUN",
+        "jul": "JUL",
+        "aug": "AUG",
+        "sep": "SEP",
+        "oct": "OCT",
+        "nov": "NOV",
+        "dec": "DEC"
+      }
+    },
+    "download_modal": {
+      "heading": " Download Successful ",
+      "sub_heading": "Great job on successfully downloading your payment history!",
+      "button": "Done"
+    },
+    "PDF_HEADER": {
+      "offer_no": "OFFER NO",
+      "offer_date": "OFFER DATE",
+      "created_by": "CREATED BY",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "PDF_FOOTER": {
+      "sub_total": "Sub Total",
+      "tax": "Tax%",
+      "discount": "Discount",
+      "grand_toal": " Grand Total"
+    },
+    "PDF_BUTTONS": {
+      "back_button": "Back",
+      "send_via_email": "Send via Email",
+      "send_via_post": "Send via Post"
+    }
+  },
+  "offers": {
+    "main_heading": "Offers",
+    "add_button": "Add New",
+    "table_functions": {
+      "open": "Open",
+      "signed": "Signed",
+      "expire": "Expired",
+      "rejected": "Rejected"
+    },
+    "detail_buttons": {
+      "activity": "Activity",
+      "discount": "Discount"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Customer",
+      "title": "Offer Title",
+      "total_price": "Total Price",
+      "created_on": "Created On",
+      "email": "Email",
+      "payment": "Payment",
+      "status": "Status",
+      "images": "Images",
+      "note": "Notes"
+    },
+    "card_content": {
+      "main_heading": "Offer Details",
+      "send_button": "Send Email",
+      "offer_id": "Offer ID",
+      "offer_title": "Offer Title",
+      "worker": "Worker",
+      "created_date": "Creation Date",
+      "service_date": "Service Date",
+      "email_status": "Email Status",
+      "payment_method": "Payment Method",
+      "status": "Status",
+      "notes": "Notes",
+      "images": "Images"
+    },
+    "tabs_heading": {
+      "offer": "Offer Details",
+      "address": "Address Details",
+      "service": "Service Details",
+      "additional": "Additional Details"
+    },
+    "offer_details": {
+      "heading": "Offer Details",
+      "edit_button": "Edit Details",
+      "customer_type": "Customer Type",
+      "full_name": "Your Name",
+      "company_name": "Company Name",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "customer_address": "Customer Address",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "select_customer": "Select Customer",
+      "customer_name": "Customer Name",
+      "email": "Email",
+      "offer_title": "Offer Title",
+      "offer_number": "Offer Number",
+      "date": "Date",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "next_button": "Next"
+    },
+    "address_details": {
+      "main_heading": "Address Details",
+      "edit_button": "Edit Details",
+      "heading": "Address 1 Details",
+      "grand_total": "Grand Total",
+      "sub_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "add_button": "Add New Address",
+      "back_button": "Back",
+      "next_button": "Next"
+    },
+    "service_details": {
+      "main_heading": "Service/Product Details",
+      "edit_button": "Edit Details",
+      "detail_headings": {
+        "title": "Service/Product Title",
+        "description": "Description",
+        "price": "Price(CHF)",
+        "unit": "Unit",
+        "count": "Count",
+        "total_price": "Total Price",
+        "grand_total": "Grand Total",
+        "sub_total": "Sub Total",
+        "tax": "Tax%"
+      },
+      "service_name": "Service Name",
+      "service_type": "Service Type",
+      "discount_description": "Discount Description",
+      "add_button": "Add New Service",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "back_button": "Back",
+      "next_button": "Next"
+    },
+    "additional_details": {
+      "main_heading": "Additional Details",
+      "edit_button": "Edit Details",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
+      "choose": "Choose From Existing",
+      "add_new": "Add New",
+      "back_button": "Back"
+    },
+    "side_images": {
+      "heading": "Images",
+      "views": "View More",
+      "upload_button": "Upload"
+    },
+    "share_images_modal": {
+      "heading": "Share Images",
+      "sub_heading": "Share Images on",
+      "link": "Or copy link",
+      "copy_button": "Copy",
+      "copied_button": "Copied"
+    },
+    "are_you_modal": {
+      "main_heading": "Are Your Sure",
+      "sub_heading": "A record already exist for this customer. Do you still want to create new offer?",
+      "yes_button": "Yes",
+      "cancel_button": "Cancel"
+    },
+    "offer_created_modal": {
+      "main_heading": "Offer Created Successful ",
+      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "button": "Done"
+    }
+  },
+  "pdf_preview": {
+    "card_content": {
+      "heading": "Solar EEG",
+      "send_mail": "Send Email",
+      "offer_id": "Offer ID",
+      "email_status": "Email Status"
+    },
+    "pdf_header": {
+      "offer_no": "OFFER NO",
+      "Offer_date": "OFFER DATE",
+      "created_by": "CREATED BY"
+    },
+    "email": "EMAIL",
+    "phone": "PHONE",
+    "address_one": "ADDRESS 1",
+    "address_two": "ADDRESS 2",
+    "work_date": "WORK DATE",
+    "sub_total": "Sub Total",
+    "tax": "Tax%",
+    "place": "Placeee - Date",
+    "signature": "SIgnature",
+    "discount": "Discount",
+    "service_headings": {
+      "product": "Service / Product",
+      "price": "PRICE",
+      "unit": "UNIT",
+      "count": "COUNT",
+      "total": "TOTAL"
+    }
+  },
+  "admin": {
+    "main_heading": "Super Admin",
+    "overview": {
+      "main_heading": "Overview",
+      "subscriber": "Active Sucbscribers",
+      "companies": "Pending Companies",
+      "customers": "Customers",
+      "plans": "Plans",
+      "sales_report": {
+        "heading": "Saleas Rport",
+        "twelve_months": "12 Months",
+        "six": "6 Months",
+        "thirty_day": "30 Days",
+        "seven_days": "7 Days"
+      },
+      "months_name": {
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec",
+        "jan": "Jan"
+      }
+    },
+    "customers_details": {
+      "main_heading": "Customer Management",
+      "table_functions": {
+        "active": "Active",
+        "block": "Blocked",
+        "sort": "Sort By"
+      },
+      "table_headings": {
+        "id": "ID",
+        "logo": "Logo",
+        "company_name": "Company Name",
+        "customer_name": "Customer Name",
+        "email": "Email",
+        "plans": "Plans",
+        "status": "Status",
+        "login": "Login"
+      },
+      "card_content": {
+        "main_heading": "Customer Details",
+        "make_button": "Make Infinite",
+        "customer_id": "Customer ID",
+        "role": "Role",
+        "no_of_employee": "No of Employees",
+        "plan": "Plan",
+        "subscription_date": "Subscription Date",
+        "status": "Status",
+        "company_logo": "Company Logo",
+        "customer_status": {
+          "active": "Active",
+          "block": "Block"
+        },
+        "customer_free": "Your customer is now totally free."
+      },
+      "customer_details": {
+        "owner_name": "Owner Name",
+        "company_name": "Company Name",
+        "email_address": "Email Address",
+        "created_on": "Created On",
+        "mobile_number": "Mobile Number",
+        "phone_number": "Phone Number",
+        "sub_heading": "Address Details",
+        "street_no": "Street No",
+        "post_code": "Post Code",
+        "country": "Country"
+      }
+    },
+    "plans_management": {
+      "main_heading": "Plans Management",
+      "add_button": "Add New",
+      "id": "ID",
+      "plan_name": "Plans",
+      "description": "Description",
+      "price": "Price",
+      "employees": "Employees",
+      "delete": "Delete"
+    },
+    "plan_details": {
+      "detail_heading": "Plan Details",
+      "add_heading": "Add new plan",
+      "plans_name": "Plan Name",
+      "pricing": "Pricing Monthly",
+      "annually_discount": "Annually Discount(%)",
+      "number_of_employees": "No of employees",
+      "no_of_request": "No of Requests",
+      "description": "Description",
+      "accounting": "Accounting Reports",
+      "customize_email": "Customize Emails",
+      "watermark": "Watermark",
+      "api_feature": "API Feature",
+      "back_button": "Back",
+      "edit_button": "Edit",
+      "save_button": "Save"
+    },
+    "payment_history": {
+      "heading": "Payment History",
+      "table_headings": {
+        "id": "ID",
+        "company_name": "Company Name",
+        "owner_name": "Owner Name",
+        "plans": "Plans",
+        "pricing": "Pricing",
+        "payments": "Payments",
+        "subscribed_at": "Subscribed at",
+        "status": "Status"
+      }
+    },
+    "support_requests": {
+      "heading": "Support Request",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Customer Name",
+        "email_address": "Email Address",
+        "phone_number": "Phone Number",
+        "request_date": "Request Date",
+        "status": "Status"
+      },
+      "card_content": {
+        "heading": "Request Details",
+        "button": "Customer Details",
+        "customer_id": "Customer ID",
+        "request_date": "Request Date",
+        "status": "Status"
+      },
+      "details": {
+        "name": "Name",
+        "company_name": "Company Name",
+        "email_address": "Email Address",
+        "mobile_number": "Mobile Number",
+        "reason_of_contact": "Reason of contact",
+        "message": "Message"
+      }
+    },
+    "settings": {
+      "main_heading": "Account Setting",
+      "tabs_heading": {
+        "account": "Account Setting",
+        "payment": "Payment Setting",
+        "mail": "Mail setting"
+      },
+      "account_setting": {
+        "full_name": "Full Name",
+        "email": "Email",
+        "update_password": "Update Password",
+        "old_password": "Old Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "save_changes_button": "Save Changes"
+      },
+      "payment_setting": {
+        "heading": "Stripe Setting",
+        "pub_key": "Publishable Key*",
+        "search_key": "Search Key*",
+        "test_mode": "Test Mode",
+        "active": "Ative",
+        "save_changes_button": "Save Changes"
+      },
+      "mail_setting": {
+        "heading": "Use Own Mail Configuration",
+        "mail_form_fields": {
+          "mail_driver": "Mail Driver",
+          "mail_host": "Mail Host",
+          "mail_port": "Mail Port",
+          "mail_encryption": "Mail Encryption",
+          "mail_user": "Mail Username",
+          "mail_password": "Mail Password",
+          "mail_from_address": "Mail From Address",
+          "mail_from_name": "Mail From Name",
+          "email": "Email",
+          "mail_heading": "Enter The Email To Receive The Testing Email Of Mail Configuration.",
+          "save_button": "Save"
+        }
+      }
+    }
+  },
+  "follow_up": {
+    "save_button": "Save",
+    "next_button": "Next",
+    "main_heading": "Details",
+    "add_postponed_note_heading": "Add a postponed Note",
+    "add_remarks_heading": "Add Remarks",
+    "post_pond_button": "PostPoned",
+    "mark_as_complete": "Mark as Complete",
+    "completed_button": "Completed",
+    "customer_detail_heading": "Customer Details",
+    "follow_up_detail_heading": "Follow up Details",
+    "additional_detail_heading": "Additional Details",
+    "lead_detail_heading": "Lead Details",
+    "address_detail_heading": "Address Details",
+    "customer_details": {
+      "name": "Name",
+      "customer_type": "Customer Type",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_details": "Address Details"
+    },
+    "follow_details": {
+      "title": "Title/Subject",
+      "date_and_time": "Follow up Date ad Time",
+      "follow_up_type": "Follow up tpe"
+    },
+    "lead_details": {
+      "required_service": "Required Service",
+      "desire_date": "Desire Date and time",
+      "flexibility": "Flexibility",
+      "budget": "Budget"
+    },
+    "address_details": {
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country",
+      "description": "Description"
+    },
+    "all_follow_ups": {
+      "heading": "All Follow ups",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Customer Name",
+        "follow_up_date": "Follow Up Date and Time",
+        "title": "Subject/Title",
+        "status": "Status",
+        "delete": "Delete",
+        "details": "Details"
+      }
+    },
+    "add_follow_up": {
+      "heading": "Add Follow up",
+      "select_customer": "Select Customer",
+      "title": "Enter Title",
+      "select_lead": "Select Lead",
+      "follow_up_date": "Follow Up Date and Time",
+      "follow_up_type": "Follow up type",
+      "additional_details": "Additional Details"
+    },
+    "customer_details_modal": {
+      "heading": "Customer Details",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "customer_type": "Customer Type",
+      "email_address": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_one_heading": "Address 1 Details",
+      "address_two_heading": "Address 2 Details",
+      "street_no": "Street No",
+      "post_code": "Post Code",
+      "country": "Country"
+    },
+    "all_customer_details": {
+      "heading": "All Customers",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "created_on": "Created On",
+        "location": "Location",
+        "type": "Type"
+      }
+    },
+    "all_leads_details": {
+      "heading": "All Leads",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "desire_date": "Desire Date",
+        "location": "Location",
+        "status": "Status"
+      }
+    },
+    "service_details": {
+      "heading": "Service Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date",
+      "availability": "Contact Availability",
+      "flexibility": "Flexibility",
+      "prefer_contact": "Preferred Contact",
+      "budget": "Budget",
+      "lead_source": "Lead Source",
+      "other_services": "Other Services",
+      "Additional_details": "Additional Details"
+    }
+  },
+  "dashboard_detail": {
+    "main_heading": "Customer Dashboard",
+    "overview": "Overview",
+    "sales_heading": "Sales Report",
+    "lead_source": "Lead Source",
+    "plans": "Plans",
+    "activity": "Activity",
+    "view_all": "View all",
+    "follow_up_heading": "Follow Ups",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "options_labels": {
+      "week": "Weekly",
+      "month": "Monthly",
+      "year": "Yearly"
+    },
+    "cards_title": {
+      "lead": "Leads",
+      "offer": "Offers",
+      "contracts": "Contracts",
+      "sales": "Sales"
+    },
+    "charts_labels": {
+      "website": "Website",
+      "google": "Google",
+      "facebook": "Facebook",
+      "insta": "Instagram",
+      "pinterest": "Pintterest",
+      "whatsapp": "Whatsapp"
+    },
+    "input_filter": {
+      "all": "All",
+      "lead": "Lead",
+      "offer": "Offer",
+      "contract": "Contract",
+      "invoice": "Invoice",
+      "receipt": "Receipt",
+      "customer": "Customer"
+    }
+  }
+}

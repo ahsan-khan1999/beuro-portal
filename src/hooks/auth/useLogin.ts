@@ -8,31 +8,31 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 
 export const useLoginForm = () => {
-    const { t: translate } = useTranslation()
-    const router = useRouter()
-    const dispatch = useAppDispatch()
-    const { loading, error } = useAppSelector(state => state.auth)
+  const { t: translate } = useTranslation();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.auth);
 
-    const schema = generateLoginValidation(translate)
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schema),
-    });
-    const fields = generateLoginFormField(register, loading)
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        dispatch(loginUser({ data, router, setError, translate }))
-
-    };
-    return {
-        fields,
-        onSubmit,
-        handleSubmit,
-        errors,
-        error
-    }
-}
-
+  const schema = generateLoginValidation(translate);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver<FieldValues>(schema),
+  });
+  const fields = generateLoginFormField(register, loading);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    dispatch(loginUser({ data, router, setError, translate }));
+    // router.push("/dashboard")
+  };
+  return {
+    fields,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+  };
+};

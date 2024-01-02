@@ -1,21 +1,40 @@
 import { DropDownItemsProps } from "@/types";
+import { combineClasses } from "@/utils/utility";
+import { motion } from "framer-motion";
 
-export const DropDownItems = ({ items, onItemClick }: DropDownItemsProps) => {
+export const DropDownItems = ({
+  items,
+  onItemClick,
+  containerClassName,
+}: DropDownItemsProps) => {
   const handleItemClick = (item: string) => {
     onItemClick(item);
   };
+
+  const containerDefaultClasses =
+    "absolute z-10 w-full border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto";
+  const containerClasses = combineClasses(
+    containerDefaultClasses,
+    containerClassName
+  );
   return (
-    <ul className="absolute w-full border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg">
-      {items.map(({ item }, idx) => (
+    <motion.ul
+      className={containerClasses}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+    >
+      {items.map(({ item, value }, idx) => (
         <li
           key={idx}
           role="menuitem"
-          className="text-gray font-medium hover:bg-borderColor cursor-pointer px-4 py-2"
-          onClick={() => handleItemClick(item)}
+          className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-4 py-2"
+          onClick={() => handleItemClick(`${item}` || "")}
         >
           {item}
         </li>
       ))}
-    </ul>
+    </motion.ul>
   );
 };

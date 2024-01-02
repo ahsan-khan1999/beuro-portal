@@ -1,107 +1,112 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateRegistrationFormField } from "@/types";
+import { FormField, GenerateContactSupportFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
-export const ContactSupportFormField: GenerateRegistrationFormField = (
+export const ContactSupportFormField: GenerateContactSupportFormField = (
   register,
   loading,
   control,
+  onClick,
+  user
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
-        className: "grid grid-cols-3 gap-x-3 ",
+        id: "div-field",
+        className: "grid grid-cols-2 lg:grid-cols-3 gap-x-3 ",
         children: [
           {
+            containerClass: "mb-0",
             label: {
-              text: "First Name",
-              htmlFor: "firstName",
+              text: `${translate("contact_support.form_fields.full_name")}`,
+              htmlFor: "fullName",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
-              id: "firstName",
-              name: "firstName",
+              id: "fullName",
+              name: "fullName",
               placeholder: "Rahal",
               register,
+              disabled:true
             },
           },
           {
+            containerClass: "mb-0",
             label: {
-              text: "Last Name",
-              htmlFor: "firstName",
+              text: `${translate("contact_support.form_fields.email_address")}`,
+              htmlFor: "email",
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
-              inputType: "text",
-              id: "lastName",
-              name: "lastName",
-              placeholder: "Ahmad",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              inputType: "email",
+              id: "email",
+              name: "email",
+              placeholder: "rahal.ahmad@gmail.com",
               register,
+              disabled:true
+
             },
           },
           {
-            label: { text: "Email Address", htmlFor: "email" },
+            containerClass: "mb-0 mt-5 lg:mt-0",
+            label: {
+              text: `${translate("contact_support.form_fields.phone_number")}`,
+              htmlFor: "phoneNumber",
+            },
             field: {
-              type: Field.input,
-              className: "!p-4    !border-dark  focus:!border-primary",
-              id: "email",
-              name: "email",
-              inputType: "email",
-              placeholder: "rahal.ahmad@gmail.com",
-              register,
+              type: Field.phone,
+              className: "!border-[#BFBFBF] focus:!border-primary",
+              id: "phoneNumber",
+              name: "phoneNumber",
+              country: "ch",
+              control,
+              value: "",
+              disabled: false,
             },
           },
-
         ],
       },
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "mt-[25px]",
       field: {
         type: Field.div,
-        className: "flex justify-between items-center gap-3",
+        id: "div-field",
+        className: "grid grid-cols-3",
         children: [
           {
-            containerClass: "mb-0 w-[33%]",
+            containerClass: "mb-0 col-span-2",
             label: {
-              text: "Mobile Number",
-              htmlFor: "mobileNumber",
+              text: `${translate("contact_support.form_fields.reason")}`,
+              htmlFor: "reason",
               className: "mb-[10px]",
             },
             field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "number",
-              id: "mobileNumber",
-              name: "mobileNumber",
-              placeholder: "- - - - - - - - - - - - - - - - - - -",
-
-              register,
-            },
-          },
-
-          {
-            containerClass: "mb-0 w-[67%]",
-            label: {
-              text: "Reason for Contact",
-              htmlFor: "select",
-              className: "mb-[10px]",
-            },
-            field: {
-              className: "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
-              placeholder: "When is a convenient time for a consultation?",
+              className: "pl-4 !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
-              id: "reasonForContact",
-              name: "reasonForContact",
+              value: "",
+              id: "reason",
+              name: "reason",
               options: [
-                { value: "Individual", label: "Individual" },
-                { value: "Random", label: "Random" },
+                { value: "General Inquiry", label: "General Inquiry" },
+                { value: "Account Assistance", label: "Account Assistance" },
+                { value: "Billing or Payment Issues", label: "Billing or Payment Issues" },
+                { value: "Technical Support", label: "Technical Support" },
+                { value: "Feedback or Suggestions", label: "Feedback or Suggestions" },
+                { value: "Report a Bug or Error", label: "Report a Bug or Error" },
+                { value: "Website Feedback", label: "Website Feedback" },
+                { value: "Complaint", label: "Complaint" },
+                { value: "Other", label: "Other" },
+
+
               ],
               control,
             },
@@ -109,49 +114,34 @@ export const ContactSupportFormField: GenerateRegistrationFormField = (
         ],
       },
     },
-
     {
-      containerClass: "mt-5",
+      containerClass: "mb-0 mt-[22px]",
+      label: {
+        text: `${translate("contact_support.form_fields.message")}`,
+        htmlFor: "message",
+        className: "mb-[10px]",
+      },
       field: {
-        type: Field.div,
-        className: "w-full",
-        children: [
-          {
-            label: {
-              text: "Your Message",
-              htmlFor: "message",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary",
-              inputType: "text",
-              id: "message",
-              name: "message",
-              placeholder: "Type your message here",
-              register,
-            },
-          },
-        ],
+        type: Field.textArea,
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+        rows: 8,
+        id: "message",
+        name: "message",
+        placeholder: "Type your message here",
+        register,
       },
     },
 
     {
+      containerClass: "mt-[30px]",
       field: {
-        type: Field.div,
-        children: [
-
-          {
-            field: {
-              type: Field.button,
-              text: "Submit Request",
-              inputType: "submit",
-              className:
-                "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-              loading,
-            },
-          },
-        ],
+        type: Field.button,
+        id: "button",
+        text: `${translate("contact_support.form_fields.request_button")}`,
+        inputType: "submit",
+        className:
+          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        loading,
       },
     },
   ];

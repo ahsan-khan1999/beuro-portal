@@ -1,6 +1,6 @@
 // import { InputSuccessIcon } from "@/assets/svgs/components/input-succes-icon";
 import { PhoneProps } from "@/types";
-import { useEffect } from "react";
+import { combineClasses } from "@/utils/utility";
 import { Controller } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -13,37 +13,33 @@ export const TelephoneInputField = ({
   watch,
   value,
   success,
-  disabled
+  disabled,
+  className,
 }: PhoneProps) => {
-  // const updatedValue = watch!(name, value);
-  // useEffect(() => setValue &&setValue(name, value), [])
-
+  const classes = combineClasses(
+    "!w-full !h-[48px] !border-0 !rounded-lg",
+    className
+  );
   return (
-    // <PhoneInput
-    //   country={country}
-    //   onChange={(value) => setValue!(name, value)}
-    //   value={updatedValue}
-    //   placeholder="+41 - _ _  _ _ _  _ _ _ _"
-    //   containerClass="!border-2 !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary"
-    //   inputClass="!w-full !h-12 !border-0 !rounded-lg"
-    // />
     <Controller
       control={control}
       name={name}
       defaultValue={value}
-
       render={({ field: { onChange } }) => {
         return (
           <div className="relative w-full">
             <PhoneInput
               country={country}
-              onChange={(value) => onChange(value)}
+              onChange={(value) => {
+                const numberWithPlus = "+" + value;
+                onChange(numberWithPlus);
+              }}
               inputProps={{ name: name }}
               placeholder="+41 - _ _  _ _ _  _ _ _ _"
               value={value}
-              containerClass="!border-2 !rounded-lg !border-lightGray !border-dark-gray focus-within:!border-primary "
-              inputClass="!w-full !h-12 !border-0 !rounded-lg"
-              onlyCountries={["ch", "de", "at", "fr", "it","pk"]}
+              containerClass="!border !rounded-lg !border-lightGray focus-within:!border-primary "
+              inputClass={classes}
+              onlyCountries={["ch", "de", "at", "fr", "it", "pk"]}
               disabled={disabled}
             />
             {/* {success && (
@@ -55,7 +51,5 @@ export const TelephoneInputField = ({
     />
   );
 };
-
-
 
 // const value = watch!(name, defaultValue);

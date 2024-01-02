@@ -1,10 +1,14 @@
 // import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
+import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
+import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
-// import searchIcon from "@/assets/svgs/search.svg";
+import { useMemo, useRef, useState, useEffect } from "react";
+import searchIcon from "@/assets/svgs/search-icon.png";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 export const SelectBox = ({
   id,
@@ -12,19 +16,27 @@ export const SelectBox = ({
   value: defaultValue,
   field,
   trigger,
+  svg,
+  success,
   placeholder,
   className,
+  onItemChange,
+  disabled,
+  fieldIndex,
 }: SelectBoxProps) => {
-  console.log(className, "1243");
-  defaultValue = "Please select a value";
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
-  useMemo(() => {
-    if (options.length > 0) {
-      setOption(options);
-    }
-  }, [options.length]);
 
+  useEffect(() => {
+    // setOption(options);
+    if (defaultValue) {
+      field?.onChange(defaultValue);
+    }
+  }, [defaultValue]);
+  useEffect(() => {
+    setOption(options);
+  }, [options])
+  
   const search = useRef<string>("");
 
   const toggleDropDown = () => {
@@ -34,6 +46,7 @@ export const SelectBox = ({
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     setIsOpen(false);
+    onItemChange && onItemChange(value, fieldIndex);
     field?.onChange(value);
     trigger?.(field?.name);
   };
@@ -42,64 +55,74 @@ export const SelectBox = ({
     search.current = value;
     setOption(
       options.filter((item) =>
-        item.value?.toLowerCase()?.includes(value?.toLowerCase())
+        item.label?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
   };
-  const defaultClasses =
-    "h-[42px] placeholder:text-dark px-4 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full";
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+    success ? "pl-4 pr-10" : "pl-11 pr-4"
+  }`;
   const classes = combineClasses(defaultClasses, className);
 
   return (
-    <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
+    <div id={id} ref={selectBoxRef} className="relative focus:border-primary  ">
       <button
         placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={classes}
+        className={`${classes} `}
       >
-        {(field && field.value) || defaultValue}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="9"
-          viewBox="0 0 14 9"
-          fill="none"
-        >
-          <path
-            d="M1.93359 1.4209L7.43359 7.4209L12.9336 1.4209"
-            stroke="#4B4B4B"
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
-        </svg>
-        {/* <ArrowIcon isOpen={isOpen} /> */}
-      </button>
-      {isOpen && (
-        <ul className="absolute top-[52px] w-full bg-white border-2 border-lightGray border-t-0 rounded-br-lg rounded-bl-lg rounded-lg z-[1]">
-          <div className="flex border-y-2 border-lightGray rounded-lg  w-full">
-            {/* <Image src={searchIcon} alt={"Search Icon"} className="ml-3" /> */}
+        {(field && getLabelByValue(field.value, option)) ||
+          getLabelByValue(defaultValue, option)}
 
-            <input
-              value={search.current}
-              onChange={(e) => handleChange(e.target.value)}
-              placeholder="Search..."
-              className="w-full px-2 py-3 outline-none rounded-lg "
-            />
-          </div>
-          {option.map(({ value, label }) => (
-            <li
-              key={value}
-              onClick={() => selectedOptionHandler(value)}
-              className="p-2 hover:bg-extra-light-gray cursor-pointer"
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
-      )}
+        {!disabled && <ArrowIcon isOpen={isOpen} />}
+        {svg && (
+          <span
+            className={`mr-3 absolute left-4 ${(isOpen && "tests") || "test"}`}
+            dangerouslySetInnerHTML={{ __html: svg }}
+          />
+        )}
+      </button>
+      <AnimatePresence>
+        {!disabled && isOpen && (
+          <motion.ul
+            className="absolute overflow-x-hidden top-[52px] max-h-[180px] h-fit overflow-scroll  w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            id="dropdownSerchBar"
+          >
+            <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
+              <Image
+                src={searchIcon}
+                alt={"Search Icon"}
+                className="ml-1 w-4 h-4 absolute"
+                width={24}
+                height={8}
+              />
+
+              <input
+                value={search.current}
+                onChange={(e) => handleChange(e.target.value)}
+                placeholder="Search..."
+                className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
+              />
+            </div>
+            {option.map(({ value, label }) => (
+              <li
+                key={value}
+                onClick={() => selectedOptionHandler(value)}
+                className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+              >
+                {label}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

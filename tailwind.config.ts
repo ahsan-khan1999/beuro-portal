@@ -2,21 +2,29 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
-    screens: {
-      xxs: "300px",
-      xs: "475px",
-      sm: "640px",
-      md: "768px",
-      850: "850px",
-      lg: "1024px",
-      xl: "1160px",
-    },
+    // screens: {
+    //   // xxs: "300px",
+    //   // xs: "475px",
+    //   // sm: "640px",
+    //   // md: "768px",
+    //   // 850: "850px",
+    //   // lg: "1024px",
+    //   // xl: "1160px",
+    //   maxSize: '1440px',
+    // },
     fontFamily: {
       sans: ["Poppins", "Graphik", "sans-serif"],
     },
     extend: {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
+      },
+      screens: {
+        xs: "375px",
+        mlg: "1090px",
+        xlg: "1200px",
+        maxSize: "1280px",
+        xMaxSize: "1400px"
       },
       margin: {
         "60px": "3.75rem",
@@ -62,6 +70,7 @@ module.exports = {
         buttonHover: "#9B19E6",
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
+        lightDark:"#393939",
 
         statusColor: "#AF2626",
       },
@@ -81,12 +90,18 @@ module.exports = {
         notificationsDropdownShadow: `0px 0px 30px ${theme(
           "colors.shadowColor"
         )}`,
+        dashboardSearch: `0px 0px 8px 0px rgba(0, 0, 0, 0.22)`,
       }),
       backgroundImage: {
         "our-partner-background": "url('/assets/our-partners-bg.png')",
         "login-background": "url('/src/assets/login-bg.png')",
         "gradient-pricingCards":
           "linear-gradient(180deg, #4A13E7 12.45%, #7B18FF 63.46%)",
+        gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",
+        "dashboardCard2-gradient":
+          "linear-gradient(90deg, #B503FE -18.73%, #FF376F 91.94%)",
+        "dashboardCard3-gradient":
+          "linear-gradient(90deg, #FF3671 0.03%, #FE9841 100.05%)",
       },
       // background: {
       //   gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",

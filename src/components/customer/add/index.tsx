@@ -1,55 +1,47 @@
 import { Layout } from "@/layout";
-
 import React, { useState } from "react";
-
-import CustomerForm from "../Form";
 import { tabArrayTypes } from "@/types";
 import TabSection from "@/base-components/ui/tab";
+import { useRouter } from "next/router";
+import AddCustomerForm from "../add-customer-form";
+import { useTranslation } from "next-i18next";
+type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddCustomer = () => {
-  const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
+  const [tabType, setTabType] = useState<string>("Customer Details");
+  const router = useRouter();
+  const handleCancel = () => {
+    router.push("/customers");
+  };
 
   const tabSection: tabArrayTypes[] = [
     {
       name: "Customer Details",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Security Settings",
-      content: "Security Settings",
-    },
-    {
-      name: "Address Settings",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Payments Settings",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Social Media Links",
-      content: <CustomerForm />,
-    },
-    {
-      name: "Notification Preferences",
-      content: <CustomerForm />,
+      content: <AddCustomerForm handleCancel={handleCancel} />,
+      icon: "",
     },
   ];
+
+  const componentLookup: ComponentLookupType = {
+    "Customer Details": <AddCustomerForm handleCancel={handleCancel} />,
+  };
+
   return (
     <Layout>
-      <h1 className="text-[#222B45] text-xl mb-5">Add new Customer </h1>
+      <h1 className="text-[#222B45] text-xl mb-5">
+        {translate("customers.details.add_customer_heading")}
+      </h1>
 
-      <div className="flex ">
-        <div className="space-y-4 mr-6">
+      <div className="flex flex-col xl:flex-row gap-4">
+        <div className="space-y-4 w-fit">
           <TabSection
             tabsArray={tabSection}
             setTabType={setTabType}
             tabType={tabType}
           />
         </div>
-        {tabSection.map((item, index) => {
-          return index == tabType && item.content;
-        })}
+        {componentLookup[tabType]}
       </div>
     </Layout>
   );

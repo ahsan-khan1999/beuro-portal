@@ -13,11 +13,13 @@ import {
   ResetPasswordFields,
   ChangePasswordFields,
 } from "@/enums/registration";
-import { CustomerDetailsFields, ContactSupportFields, ServicesDetailFields } from "@/enums";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
 export const generateValidation = (translate: Function) => {
   return yup.object().shape({
+    [RegisterationFields.fullName]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     [RegisterationFields.email]: yup
       .string()
       .email()
@@ -46,127 +48,34 @@ export const generateLoginValidation = (translate: Function) => {
   });
 };
 
-export const generateCustomerValidation = (translate: Function) => {
-  return yup.object().shape({
-    [CustomerDetailsFields.firstName]: yup
-      .string()
-      .required("validation required"),
-    [CustomerDetailsFields.lastName]: yup
-      .string()
-      .required("validation required"),
-    [CustomerDetailsFields.customerType]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.email]: yup
-      .string()
-      .email()
-      .required(translate("validationMessages.required")),
-
-    [CustomerDetailsFields.phone]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.mobile]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.streetNo]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.postalCode]: yup
-      .number()
-      .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.country]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-  });
-};
-
-// generateServiceValidation here
-export const generateServicesValidation = (translate: Function) => {
-  return yup.object().shape({
-    [ServicesDetailFields.serviceTitle]: yup
-      .string()
-      .required("validation required"),
-    [ServicesDetailFields.unit]: yup
-      .string()
-      .required("validation required"),
-    [ServicesDetailFields.price]: yup
-      .string()
-      .required(translate("validation required")),
-    [ServicesDetailFields.description]: yup
-      .string()
-      .email()
-      .required(translate("validation required")),
-  });
-};
-
-// Generate Customer-support validation here
-export const generateContactSupportValidation = (translate: Function) => {
-  return yup.object().shape({
-    [ContactSupportFields.firstName]: yup
-      .string()
-      .required("validation required"),
-
-    [ContactSupportFields.lastName]: yup
-      .string()
-      .required("validation required"),
-
-    [ContactSupportFields.email]: yup
-      .string()
-      .email()
-      .required(translate("validation required")),
-
-    [ContactSupportFields.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validation required")),
-
-    [ContactSupportFields.reasonForContact]: yup
-      .string()
-      .required(translate("validation required")),
-
-    [ContactSupportFields.message]: yup
-      .string()
-      .required(translate("validation required")),
-  });
-};
-
-
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
     [CompanyFields.name]: yup.string().required("tdguy"),
     [CompanyFields.phoneNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mobileNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.websiteUrl]: yup
       .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mwstNumber]: yup
       .number()
-      .min(11, translate("validationMessages.string.min"))
       .required(translate("validationMessages.required")),
-    [CompanyFields.companyLogo]: yup.object(),
+    [CompanyFields.companyLogo]: yup.string().required(),
   });
 };
 export const detailLocationValidation = (translate: Function) => {
   return yup.object().shape({
     [LocationFields.streetNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.houseNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.postalCode]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [LocationFields.city]: yup
       .string()
@@ -182,12 +91,10 @@ export const detailBankValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [BankFields.accountNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
     [BankFields.ibanNumber]: yup
-      .number()
-      .min(11, translate("validationMessages.string.min"))
+      .string()
       .required(translate("validationMessages.required")),
   });
 };
@@ -287,26 +194,6 @@ export const generateChangePasswordValidationSchema = (translate: Function) => {
   });
 };
 
-// export const generateSalutationValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.salutation]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
-
-// export const generateDobValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.dob]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
-
-// export const generateFullNameValidationSchema = (translate: Function) => {
-//     return yup.object().shape({
-//         [PersonalDetailsProfile.fullName]: yup.string().required(translate("validationMessages.required")),
-
-//     });
-// }
 
 export const generateProfileChangePasswordValidationSchema = (
   translate: Function

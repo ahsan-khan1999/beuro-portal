@@ -14,7 +14,6 @@ export const setLocalizeContent = (obj, store) => {
     return obj.en;
     // return obj[store.get("language")];
   } catch (error) {
-    console.log(error,"error");
     return { en: "", az: "", ru: "" };
   }
 };

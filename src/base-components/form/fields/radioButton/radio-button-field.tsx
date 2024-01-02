@@ -1,5 +1,6 @@
-import {  RadioButtonProps } from "@/types";
+import { RadioButtonProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
+import React, { useEffect } from "react";
 
 export const RadioButtonField = ({
   id,
@@ -8,20 +9,44 @@ export const RadioButtonField = ({
   register,
   className,
   label,
+  checked,
+  setValue,
+  disabled,
+  onClick,
+  onChange,
 }: RadioButtonProps) => {
   const defaultClasses = `border-2 border-lightGray rounded-lg w-5 h-5 px-4 py-3 text-primary bg-secondary  cursor-pointer`;
   const classes = combineClasses(defaultClasses, className);
+  // useEffect(() => {
+  //   if (value && setValue) setValue(name, value)
+
+  // }, [value])
+  const { onChange: registerOnChange } = register(name);
+  const conditionalOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e.target.value);
+    } else {
+      registerOnChange(e);
+    }
+  };
   return (
-    <div className="flex gap-x-2 items-center p-4 bg-white border border-borderColor rounded-lg">
+    <div className="flex gap-x-2 items-center  bg-white">
       <input
         id={id}
-        type='radio'
-        defaultValue={value}
+        type="radio"
+        // defaultValue={value}
+        checked={checked}
         {...register(name)}
         className={`${classes}`}
+        value={value}
+        disabled={disabled}
+        // onChangeCapture={() => {
+        //   console.log("change");
+        //   onClick && onClick()
+        // }}
+        onChange={conditionalOnChange}
       />
-      <span>{label}</span>
+      <span className="ms-0 text-sm">{label}</span>
     </div>
-   
   );
 };

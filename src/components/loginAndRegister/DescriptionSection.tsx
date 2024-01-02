@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import betterManagementIcon from "@/assets/pngs/better-management.png";
+import betterManagementIcon from "@/assets/pngs/forget-pasword-img.png";
 const DescriptionSection = () => {
   return (
     <div
