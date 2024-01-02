@@ -139,8 +139,6 @@ const AdminDashboard = () => {
       route: () => router.push("/dashboard"),
     },
   ];
-  // Sample data for the pie chart
-
   const handleFilterChange = (query: FilterType) => {
     dispatch(readDashboard({ params: { filter: { month: query?.month } } }));
   };

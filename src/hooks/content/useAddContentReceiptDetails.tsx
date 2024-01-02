@@ -13,8 +13,14 @@ import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
-  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.receiptContent?.attachments) || [])
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contentDetails?.id &&
+      transformAttachments(contentDetails?.receiptContent?.attachments)) ||
+      []
+  );
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -34,22 +40,33 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const handleSuccess = () =>{
-    router.push("/content")
-  }
+  const handleSuccess = () => {
+    router.push("/content");
+  };
   useMemo(() => {
     if (contentDetails.id) {
       reset({
         title: contentDetails?.receiptContent?.title,
-        attachments:  contentDetails?.receiptContent?.attachments?.length > 0 && contentDetails?.receiptContent?.attachments[0] || null
-      })
+        attachments:
+          (contentDetails?.receiptContent?.attachments?.length > 0 &&
+            contentDetails?.receiptContent?.attachments[0]) ||
+          null,
+      });
     }
-
-  }, [contentDetails.id])
-  const fields = AddReceiptContentDetailsFormField(register, loading, control, handleBack,trigger, 0, attachements, setAttachements, contentDetails
+  }, [contentDetails.id]);
+  const fields = AddReceiptContentDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack,
+    trigger,
+    0,
+    attachements,
+    setAttachements,
+    contentDetails
   );
-  
-  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
       receiptContent: {
@@ -61,11 +78,12 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
       step: 4,
       stage: ComponentsType.addReceiptContent,
       contentId: contentDetails?.id,
-      id: contentDetails?.id
-    }
-    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
-    if (res?.payload) onHandleNext()
-    
+      id: contentDetails?.id,
+    };
+    const res = await dispatch(
+      updateContent({ data: apiData, router, setError, translate })
+    );
+    if (res?.payload) onHandleNext();
   };
   return {
     fields,
@@ -74,6 +92,6 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

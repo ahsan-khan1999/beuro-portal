@@ -100,10 +100,12 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType)?.slice(1)?.map((item, key) => ({
-                  value: item,
-                  label: item,
-                })) || [],
+                Object.keys(staticEnums.CustomerType)
+                  ?.slice(1)
+                  ?.map((item, key) => ({
+                    value: item,
+                    label: item,
+                  })) || [],
 
               control,
               value:
@@ -163,8 +165,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -185,8 +187,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
@@ -438,7 +440,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           (lead?.length === 1 && offerDetails?.id && lead[0]?.id) ||
           (offerDetails?.id && offerDetails?.leadID?.id) ||
           leadID,
-        disabled: offerDetails?.leadID?.id ? true : false
+        disabled: offerDetails?.leadID?.id ? true : false,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps;
@@ -508,7 +510,6 @@ export const generateDateChildren = (
                 "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               id: `date.${i}.startDate`,
               name: `date.${i}.startDate`,
-
               register,
               dateType: "date",
             },
@@ -536,14 +537,14 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "-mb-8 mt-3 mlg:mt-0",
+    containerClass: "-mb-7 mt-3 mlg:mt-0",
     field: {
       type: Field.button,
       id: "button",
       text: "",
       inputType: "submit",
       className:
-        "rounded-lg border !border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] !h-[54px] text-white",
+        "rounded-lg border !border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] !h-[48px] text-white",
       onClick: () => OnClick({ startDate: "", endDate: "" }),
       icon: icon,
     },

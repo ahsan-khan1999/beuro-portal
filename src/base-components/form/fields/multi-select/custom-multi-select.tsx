@@ -69,7 +69,7 @@ export const MultiSelectBox = ({
     );
   };
 
-  const defaultClasses = `cursor-pointer placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white  rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `cursor-pointer placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
   const classes = combineClasses(defaultClasses, className);

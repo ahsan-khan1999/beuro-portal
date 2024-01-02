@@ -42,13 +42,13 @@ export const DropDown = ({
 
   return (
     <div
-      className={`flex flex-col gap-y-2 min-w-[90px] w-full${
+      className={`flex flex-col gap-y-2 w-full${
         dropDownDisabled ? "pointer-events-none" : ""
       }`}
       ref={dropdownRef}
     >
       {label && <label className="text-sm text-gray">{label}</label>}
-      <div className="relative min-w-[90px] w-full">
+      <div className="relative w-full">
         <button
           aria-expanded={isOpen}
           className={`${buttonClasses}`}

@@ -5,23 +5,22 @@ import React from "react";
 
 const AddConfirmationContentDetails = ({
   onHandleNext,
-  onHandleBack
+  onHandleBack,
 }: {
   onHandleNext: Function;
   onHandleBack: Function;
-
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error,translate } =
-    useAddContentConfirmationDetails(onHandleNext,onHandleBack);
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+    useAddContentConfirmationDetails(onHandleNext, onHandleBack);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] ">
+      <div className="flex justify-between items-center pb-[26px] border-b border-[#000] border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("content.tabs_headings.confirmation_content")}
         </h2>
       </div>
-      <hr className="opacity-20 mb-5" />
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

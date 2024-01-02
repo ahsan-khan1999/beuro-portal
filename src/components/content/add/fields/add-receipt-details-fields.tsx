@@ -9,13 +9,14 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
   onClick,
   trigger,
   count,
-  attachements, setAttachements, contentDetails
+  attachements,
+  setAttachements,
+  contentDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
-
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -52,7 +53,9 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.description
+              value:
+                contentDetails?.id &&
+                contentDetails?.receiptContent?.description,
             },
           },
 
@@ -70,8 +73,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body
-
+              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
@@ -91,13 +93,12 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements,
-              setAttachements
+              setAttachements,
             },
           },
         ],
-      }
+      },
     },
-
 
     {
       containerClass: "mt-6",

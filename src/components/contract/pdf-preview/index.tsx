@@ -376,7 +376,7 @@ const PdfPriview = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/offers");
+    router.push("/contract");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

@@ -27,8 +27,8 @@ const TableRows = ({
             <span className="py-4 rounded-md flex items-center">
               {item.refID}
             </span>
-            <span className="py-4 flex items-center ">
-              {item.contentName.slice(0, 10)}
+            <span className="break-all py-4 flex items-center">
+              {item.contentName}
             </span>
             <span
               className="py-4 flex items-center break-all"

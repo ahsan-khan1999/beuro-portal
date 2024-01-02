@@ -736,6 +736,7 @@
   },
   "content": {
     "main_heading": "Content",
+    "create_content":"Create Content",
     "add_button": "Add New",
     "table_headings": {
       "id": "ID",
