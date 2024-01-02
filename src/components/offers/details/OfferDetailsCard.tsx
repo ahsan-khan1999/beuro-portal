@@ -30,16 +30,15 @@ const OfferDetailsCard = ({
   handleSendEmail,
   isSendEmail,
   handleSendByPost,
-  loading
+  loading,
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const handleDonwload = () => {
-    window.open(offerDetails?.attachement)
+    window.open(offerDetails?.attachement);
   };
   const handlePrint = () => {
-    window.open(offerDetails?.attachement)
-
+    window.open(offerDetails?.attachement);
   };
   return (
     <>
@@ -57,7 +56,6 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="flex gap-[22px]">
-
           <BaseButton
             buttonText="Send Via Post"
             onClick={handleSendByPost}
@@ -70,8 +68,9 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
-              }`}
+            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${
+              isSendEmail && "hidden"
+            }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -82,11 +81,26 @@ const OfferDetailsCard = ({
           <Image
             src={PDFIcon}
             alt="PDFIcon"
-            onClick={() => router.push({ pathname: "/offers/pdf-preview", query: { offerID: offerDetails?.id } })}
+            onClick={() =>
+              router.push({
+                pathname: "/offers/pdf-preview",
+                query: { offerID: offerDetails?.id },
+              })
+            }
             className="cursor-pointer"
           />
-          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload} />
-          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint} />
+          <Image
+            src={downloadIcon}
+            alt="downloadIcon"
+            className="cursor-pointer"
+            onClick={handleDonwload}
+          />
+          <Image
+            src={printerIcon}
+            alt="printerIcon"
+            className="cursor-pointer"
+            onClick={handlePrint}
+          />
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -176,21 +190,25 @@ const OfferDetailsCard = ({
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
-            {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
-              <DropDown
-                items={Object.keys(staticEnums["OfferStatus"]).map((item) => ({
-                  item: item,
-                }))}
-                selectedItem={offerDetails?.offerStatus}
-                onItemSelected={handleStatusUpdate}
-                dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
-              />
-            )) || (
+            <span>
+              {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
+                <DropDown
+                  items={Object.keys(staticEnums["OfferStatus"]).map(
+                    (item) => ({
+                      item: item,
+                    })
+                  )}
+                  selectedItem={offerDetails?.offerStatus}
+                  onItemSelected={handleStatusUpdate}
+                  dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
+                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                />
+              )) || (
                 <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
                   {offerDetails?.offerStatus}
                 </span>
               )}
+            </span>
           </div>
 
           <div className="flex justify-between items-center">
