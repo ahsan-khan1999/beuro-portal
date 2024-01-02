@@ -35,8 +35,8 @@ export const SelectBox = ({
   }, [defaultValue]);
   useEffect(() => {
     setOption(options);
-  }, [options])
-  
+  }, [options]);
+
   const search = useRef<string>("");
 
   const toggleDropDown = () => {

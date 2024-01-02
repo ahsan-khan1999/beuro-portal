@@ -146,6 +146,10 @@ const useContract = () => {
         }
       );
     } else {
+      setFilter({
+        ...filter,
+        status: "None"
+      });
       dispatch(readContract({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
         (response: any) => {
           if (response?.payload) setCurrentPageRows(response?.payload?.Contract);

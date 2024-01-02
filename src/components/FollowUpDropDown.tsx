@@ -11,7 +11,7 @@ import Image from "next/image";
 import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import moment from "moment";
 import { getDaysDifference } from "@/utils/utility";
-import { AnimatePresence,motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const FollowUpDropDown = () => {
   const {
@@ -25,7 +25,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 !z-50 "   >
+      <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 !z-50 ">
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
           <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
           <Button
@@ -41,15 +41,16 @@ const FollowUpDropDown = () => {
             let days = getDaysDifference(item.createdAt);
             return (
               <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
                 key={index}
                 onClick={() => handleFollowUpsDetails(item.id)}
                 className={`pt-[10px] px-4 cursor-pointer ${
                   (index == 0 || index == 1) && "bg-primary"
-                } bg-opacity-10 `}>
+                } bg-opacity-10 `}
+              >
                 <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
                   <Image
                     src={followUpIcon}
@@ -99,7 +100,8 @@ const FollowUpDropDown = () => {
                       {days > 0 ? (
                         <div
                           className="flex items-center absolute right-5"
-                          onClick={(e) => handleDeleteFollowUp(item.id, e)}>
+                          onClick={(e) => handleDeleteFollowUp(item.id, e)}
+                        >
                           <div className="ml-2 border-2 border-red rounded-md p-1">
                             <Image
                               src={deleteIcon}
@@ -116,13 +118,16 @@ const FollowUpDropDown = () => {
             );
           })}
         </AnimatePresence>
-        <div className="flex justify-center py-4">
-          <button
-            className=" text-primary w-fit text-sm font-medium "
-            onClick={() => handleFollowUps()}>
-            View All
-          </button>
-        </div>
+        {followUp?.length > 0 && (
+          <div className="flex justify-center py-4">
+            <button
+              className=" text-primary w-fit text-sm font-medium "
+              onClick={() => handleFollowUps()}
+            >
+              View All
+            </button>
+          </div>
+        )}
       </div>
 
       {renderModal()}

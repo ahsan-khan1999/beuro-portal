@@ -84,10 +84,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType)?.slice(1)?.map((item, key) => ({
-                  value: item,
-                  label: item,
-                })) || [],
+                Object.keys(staticEnums.CustomerType)
+                  ?.slice(1)
+                  ?.map((item, key) => ({
+                    value: item,
+                    label: item,
+                  })) || [],
 
               control,
               value:
@@ -348,7 +350,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
         type: Field.select,
         id: "customerID",
         name: "customerID",

@@ -13,7 +13,9 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   data
 ) => {
   const { t: translate } = useTranslation();
-  const totalAmount = Number(invoiceDetails?.paidAmount) + Number(invoiceDetails?.remainingAmount)
+  const totalAmount =
+    Number(invoiceDetails?.paidAmount) +
+    Number(invoiceDetails?.remainingAmount);
   const formField: FormField[] = [
     {
       field: {
@@ -35,9 +37,9 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "totalAmount",
               name: "totalAmount",
-              value: totalAmount?.toString(),
+              value: invoiceDetails?.contractID?.offerID?.total?.toString(),
               register,
-              disabled: true
+              disabled: true,
             },
           },
           {
@@ -56,7 +58,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "remainingAmount",
               name: "remainingAmount",
-              disabled: true,
+              value: totalAmount?.toString(),
               register,
             },
           },
@@ -87,26 +89,24 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: '0',
+                    value: "0",
                     label: "Amount",
                     id: "type",
                     name: "type",
                     register,
-                    className: "text-sm"
-
+                    className: "text-sm",
                   },
                 },
                 {
                   containerClass: "mb-0",
                   field: {
                     type: Field.radio,
-                    value: '1',
+                    value: "1",
                     label: "Percentage",
                     id: "type",
                     name: "type",
                     register,
-                    className: "text-sm"
-
+                    className: "text-sm",
                   },
                 },
               ],
@@ -117,7 +117,6 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     },
 
     {
-
       containerClass: "mb-0",
 
       field: {
@@ -129,7 +128,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         name: "amount",
         // placeholder: "20000 CHF",
         register,
-        percentage: type === "1" && "%" || ""
+        percentage: (type === "1" && "%") || "",
       },
     },
 

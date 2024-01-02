@@ -98,7 +98,9 @@ const SERVICE_URLS = {
   adminDashboard: "/dashboard/admin",
   sendByPost: "/offer/send-By-Post/",
   contractSendByPost: "/contract/send-By-Post/",
-  invoiceSendByPost:"/invoice/invoice-collection/send-By-Post/"
+  invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
+
+  readOfferPublic: "/offer/public-read/"
 
 };
 
@@ -463,6 +465,10 @@ const contractSendByPost = (data) =>
 
 const invoiceSendByPost = (data) =>
   put(SERVICE_URLS.invoiceSendByPost + `${data?.id}`, data, { feature: featureConstants.login });
+
+;
+const readOfferDetailPublic = (params) =>
+  get(SERVICE_URLS.readOfferPublic, params, { feature: featureConstants.login }, { detail: true });
 const apiServices = {
 
   login,
@@ -608,6 +614,7 @@ const apiServices = {
   readAdminDashboard,
   offerSendByPost,
   contractSendByPost,
-  invoiceSendByPost
+  invoiceSendByPost,
+  readOfferDetailPublic
 };
 export default apiServices;

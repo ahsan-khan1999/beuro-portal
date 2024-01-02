@@ -163,6 +163,10 @@ const useLeads = () => {
         }
       );
     } else {
+      setFilter({
+        ...filter,
+        status: "None"
+      });
       dispatch(readLead({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
         (response: any) => {
           if (response?.payload) setCurrentPageRows(response?.payload?.Lead);

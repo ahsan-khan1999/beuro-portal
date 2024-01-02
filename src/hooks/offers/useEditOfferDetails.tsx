@@ -83,7 +83,10 @@ export const useEditOfferDetails = ({
           reset({
             type: "Existing Customer",
             leadID: res?.payload?.leadID?.id,
-            customerType: getKeyByValue(staticEnums["CustomerType"], res?.payload?.leadID?.customerDetail?.customerType),
+            customerType: getKeyByValue(
+              staticEnums["CustomerType"],
+              res?.payload?.leadID?.customerDetail?.customerType
+            ),
             fullName: res?.payload?.leadID?.customerDetail?.fullName,
             email: res?.payload?.leadID?.customerDetail?.email,
             phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
@@ -104,11 +107,9 @@ export const useEditOfferDetails = ({
   const customerID = watch("customerID");
   const selectedContent = watch("content");
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {  },paginate: 0 } }))
-    dispatch(readContent({ params: { filter: {  } ,paginate: 0} }));
-
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
-
 
   useMemo(() => {
     if (type && customerID) {
@@ -118,7 +119,6 @@ export const useEditOfferDetails = ({
         })
       );
     }
-
   }, [customerID]);
 
   useMemo(() => {
@@ -135,8 +135,7 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-
-      })
+      });
     }
   }, [type]);
 
@@ -160,8 +159,7 @@ export const useEditOfferDetails = ({
       type: type,
       content: selectedContent,
       customerID: selectedCustomers[0]?.id,
-      leadID: ""
-
+      leadID: "",
     });
   };
   const handleContentSelect = () => {
@@ -212,25 +210,33 @@ export const useEditOfferDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData:any = {
+    const apiData: any = {
       ...data,
       step: 1,
       offerId: offerDetails?.id,
       stage: EditComponentsType.addressEdit,
       isLeadCreated: data?.leadID ? true : false,
     };
-    if (!apiData?.isLeadCreated) delete apiData["leadID"]
+    if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
     const res = await dispatch(
       createOffer({ data: apiData, router, setError, translate })
     );
     if (res?.payload) {
       if (data?.type === "New Customer") {
-        dispatch(setLeads([...lead, res?.payload?.leadID]))
-        dispatch(setCustomers([...customer, { ...res?.payload?.leadID?.customerDetail, id: res?.payload?.leadID?.customerID }]))
+        dispatch(setLeads([...lead, res?.payload?.leadID]));
+        dispatch(
+          setCustomers([
+            ...customer,
+            {
+              ...res?.payload?.leadID?.customerDetail,
+              id: res?.payload?.leadID?.customerID,
+            },
+          ])
+        );
       }
-      handleNext(EditComponentsType.addressEdit)
-    };
+      handleNext(EditComponentsType.addressEdit);
+    }
   };
 
   return {

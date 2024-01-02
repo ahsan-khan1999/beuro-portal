@@ -12,7 +12,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   contentDetails,
   onContentSelect,
   attachements, setAttachements,
-  details
+  invoiceDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -49,14 +49,13 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
             },
             field: {
               className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
-              type: Field.input,
+              type: Field.select,
               id: "content",
               name: "content",
-              inputType: "text",
-              // options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
-              register,
-              // onItemChange: onContentSelect,
-              // value: details?.content?.offerContent?.title
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              control,
+              onItemChange: onContentSelect,
+              value: contentDetails?.id || ""
             },
           },
         ],
@@ -96,7 +95,8 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "description",
         name: "description",
         control,
-        value: details?.contractID?.offerID?.content?.invoiceContent?.description
+        value: contentDetails?.id && contentDetails?.receiptContent?.description || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.description
+
 
       },
     },

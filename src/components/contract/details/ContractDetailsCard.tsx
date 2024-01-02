@@ -24,16 +24,15 @@ const ContractDetailsCard = ({
   handlePaymentStatusUpdate,
   handleStatusUpdate,
   offerDeleteHandler,
-  handleSendEmail
+  handleSendEmail,
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const handleDonwload = () => {
-    window.open(contractDetails?.attachement)
+    window.open(contractDetails?.attachement);
   };
   const handlePrint = () => {
-    window.open(contractDetails?.attachement)
-
+    window.open(contractDetails?.attachement);
   };
   return (
     <ContractCardLayout>
@@ -64,10 +63,25 @@ const ContractDetailsCard = ({
             src={PDFIcon}
             alt="PDFIcon"
             className="cursor-pointer"
-            onClick={() => router.push({ pathname: "/contract/pdf-preview", query: { offerID: contractDetails?.id } })}
+            onClick={() =>
+              router.push({
+                pathname: "/contract/pdf-preview",
+                query: { offerID: contractDetails?.id },
+              })
+            }
           />
-          <Image src={downloadIcon} alt="downloadIcon" className="cursor-pointer" onClick={handleDonwload} />
-          <Image src={printerIcon} alt="printerIcon" className="cursor-pointer" onClick={handlePrint} />
+          <Image
+            src={downloadIcon}
+            alt="downloadIcon"
+            className="cursor-pointer"
+            onClick={handleDonwload}
+          />
+          <Image
+            src={printerIcon}
+            alt="printerIcon"
+            className="cursor-pointer"
+            onClick={handlePrint}
+          />
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -140,7 +154,6 @@ const ContractDetailsCard = ({
               </span>
             </div>
           </div>
-
         </div>
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
@@ -149,9 +162,9 @@ const ContractDetailsCard = ({
               Email Status
             </span>
             <div>
-            <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
-              {contractDetails?.emailStatus}
-            </span>
+              <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
+                {contractDetails?.emailStatus}
+              </span>
             </div>
           </div>
 
@@ -188,20 +201,20 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                  <DropDown
-                    items={Object.keys(staticEnums["ContractStatus"]).map(
-                      (item) => ({ item: item })
-                    )}
-                    selectedItem={contractDetails?.contractStatus}
-                    onItemSelected={handleStatusUpdate}
-                    dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                    dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
-                  />
-                )) || (
-                  <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
-                    {contractDetails?.contractStatus}
-                  </span>
-                )}
+                <DropDown
+                  items={Object.keys(staticEnums["ContractStatus"]).map(
+                    (item) => ({ item: item })
+                  )}
+                  selectedItem={contractDetails?.contractStatus}
+                  onItemSelected={handleStatusUpdate}
+                  dropDownClassName="border border-[#FF0000] min-w-[138px] rounded-lg px-4 py-[3px] flex items-center"
+                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                />
+              )) || (
+                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                  {contractDetails?.contractStatus}
+                </span>
+              )}
             </span>
           </div>
 
@@ -229,7 +242,6 @@ const ContractDetailsCard = ({
               />
             </div>
           </div>
-
         </div>
       </div>
     </ContractCardLayout>

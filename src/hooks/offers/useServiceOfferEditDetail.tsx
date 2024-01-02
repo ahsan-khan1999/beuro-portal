@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -42,7 +41,9 @@ export const useServiceOfferEditDetail = ({
     taxAmount: 0,
   });
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>([ServiceType.EXISTING_SERVICE]);
+  const [serviceType, setServiceType] = useState<ServiceType[]>([
+    ServiceType.EXISTING_SERVICE,
+  ]);
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -100,24 +101,23 @@ export const useServiceOfferEditDetail = ({
     }
   };
 
-  const onServiceSelectType = () => {
-    offerDetails?.serviceDetail?.serviceDetail?.forEach((element, index) => {
-      setValue(`serviceDetail.${index}.price`, element.price);
-      setValue(`serviceDetail.${index}.unit`, element.unit);
-      setValue(
-        `serviceDetail.${index}.description`,
-        element.description
-      );
-      setValue(
-        `serviceDetail.${index}.count`,
-        element.count
-      );
-      setValue(
-        `serviceDetail.${index}.totalPrice`,
-        element.totalPrice
-      );
-    })
+  const onServiceSelectType = (index: number) => {
 
+    setValue(`serviceDetail.${index}.price`, offerDetails?.serviceDetail?.serviceDetail[index]?.price);
+    setValue(`serviceDetail.${index}.unit`, offerDetails?.serviceDetail?.serviceDetail[index]?.unit);
+    setValue(
+      `serviceDetail.${index}.description`,
+      offerDetails?.serviceDetail?.serviceDetail[index]?.description
+    );
+    setValue(
+      `serviceDetail.${index}.count`,
+      offerDetails?.serviceDetail?.serviceDetail[index]?.count
+    );
+    setValue(
+      `serviceDetail.${index}.totalPrice`,
+      offerDetails?.serviceDetail?.serviceDetail[index]?.totalPrice
+    );
+    setValue(`serviceDetail.${index}.serviceTitle`, offerDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle);
 
 
   };
@@ -144,8 +144,8 @@ export const useServiceOfferEditDetail = ({
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
         : isTax && taxType === "1"
-          ? calculateTax(totalPrices, data?.taxPercentage || 0)
-          : 0;
+        ? calculateTax(totalPrices, data?.taxPercentage || 0)
+        : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -209,7 +209,6 @@ export const useServiceOfferEditDetail = ({
     name: "serviceDetail",
   });
 
-
   useMemo(() => {
     const currentLength = serviceType.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
@@ -218,7 +217,7 @@ export const useServiceOfferEditDetail = ({
       setServiceType([
         ...serviceType,
         ...new Array(newLength - currentLength).fill(
-          ServiceType.EXISTING_SERVICE
+          ServiceType.NEW_SERVICE
         ),
       ]);
     } else if (newLength < currentLength) {
@@ -227,21 +226,32 @@ export const useServiceOfferEditDetail = ({
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
-    const updatedService = serviceType.map((type, i) => (i === index ? newServiceType : type));
+    const updatedService = serviceType.map((type, i) =>
+      i === index ? newServiceType : type
+    );
     setServiceType(updatedService);
-    
+
     const fieldNamePrefix = 'serviceDetail';
-    if (newServiceType === ServiceType.NEW_SERVICE) {
-      reset({
-        [`serviceDetail.${index}.serviceTitle`]: '',
-        [`serviceDetail.${index}.price`]: '',
-        [`serviceDetail.${index}.count`]: '',
-        [`serviceDetail.${index}.unit`]: '',
-        [`serviceDetail.${index}.totalPrice`]: '',
-        [`serviceDetail.${index}.description`]: '',
-      })
-    } else {
-      onServiceSelectType()
+    if (newServiceType === ServiceType.NEW_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "New Service") {
+      onServiceSelectType(index)
+    } else if(newServiceType === ServiceType.EXISTING_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "New Service"){
+      setValue(`serviceDetail.${index}.serviceTitle`, '')
+      setValue(`serviceDetail.${index}.price`, ``)
+      setValue(`serviceDetail.${index}.count`, ``)
+      setValue(`serviceDetail.${index}.unit`, ``)
+      setValue(`serviceDetail.${index}.totalPrice`, ``)
+      setValue(`serviceDetail.${index}.description`, ``)
+    } else if (newServiceType === ServiceType.EXISTING_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "Existing Service") {
+      onServiceSelectType(index)
+
+    } else if (newServiceType === ServiceType.NEW_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "Existing Service"){
+
+      setValue(`serviceDetail.${index}.serviceTitle`, '')
+      setValue(`serviceDetail.${index}.price`, ``)
+      setValue(`serviceDetail.${index}.count`, ``)
+      setValue(`serviceDetail.${index}.unit`, ``)
+      setValue(`serviceDetail.${index}.totalPrice`, ``)
+      setValue(`serviceDetail.${index}.description`, ``)
     }
   };
 

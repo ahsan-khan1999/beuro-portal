@@ -82,7 +82,7 @@ export const forgotPassword: AsyncThunk<boolean, object, object> | any =
     const { translate, data, setError } = args as any;
     try {
       const response = await apiServices.forgotPassword(data);
-      thunkApi.dispatch(setErrorMessage(response?.data?.message));
+      // thunkApi.dispatch(setErrorMessage(response?.data?.message));
       return true;
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);

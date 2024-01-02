@@ -53,6 +53,19 @@ export const readOfferDetails: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const readOfferPublicDetails: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/read/details/public", async (args, thunkApi) => {
+        const { params } = args as any;
+
+        try {
+            const response = await apiServices.readOfferDetail(params);
+            return response?.data?.data.Offer;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 export const createOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/create", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -354,6 +367,17 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(sendOfferByPost.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(readOfferPublicDetails.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readOfferPublicDetails.fulfilled, (state, action) => {
+            state.offerDetails = action.payload;
+            state.loading = false;
+        });
+        builder.addCase(readOfferPublicDetails.rejected, (state) => {
             state.loading = false
         });
 

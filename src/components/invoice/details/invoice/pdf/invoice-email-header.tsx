@@ -56,11 +56,11 @@ export const InvoiceEmailHeader = ({
             buttonText="Send Via Email"
             onClick={onEmailSend}
             containerClassName="flex items-center gap-x-3 row-reverse group"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-white"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             loading={loading && activeButtonId === "email"}
             loaderColor="#4A13E7"
           >
-            <EmailIcon className="text-primary group-hover:text-white" />
+            <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
 
           <Image

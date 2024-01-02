@@ -1,4 +1,5 @@
 import { ProductItemFooterProps } from "@/types/types";
+import { useTranslation } from "next-i18next";
 
 export const ProductItemFooter = ({
   subTotal,
@@ -6,6 +7,7 @@ export const ProductItemFooter = ({
   grandTotal,
   tax,
 }: ProductItemFooterProps) => {
+  const { t: translation } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
       <div className="flex flex-col">
@@ -16,42 +18,40 @@ export const ProductItemFooter = ({
         <span className="text-[#404040] font-normal mt-[10px]">
           Thank you for your interest in our services. <br />
           Below you will find further information regarding the guidelines{" "}
-          <br /> and conditions.  Please take the time to understand the following
+          <br /> and conditions. Please take the time to understand the
+          following
           <br /> terms and conditions below.
         </span>
       </div>
 
       <div>
-        <div className="flex gap-[77px] w-full">
-          <div className="flex flex-col gap-y-[10px] w-full">
-            <div className="flex justify-between w-full">
-              <span className="text-[#1E1E1E] text-base font-medium">
-                Sub Total
-              </span>
-              <span className="text-[#1E1E1E] text-base font-medium self-end">
-                {subTotal}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[#1E1E1E] text-base font-medium">Tax%</span>
-              <span className="text-[#1E1E1E] text-base font-medium ">
-                {tax}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-[#1E1E1E] text-base font-medium">
-                Discount:
-              </span>
-              <span className="text-[#1E1E1E] text-base font-medium">
-                {discount}
-              </span>
-            </div>
+        <div className="flex flex-col gap-y-[10px] pr-3 w-full">
+          <div className="flex justify-between w-full">
+            <span className="text-[#1E1E1E] text-base font-medium">
+              {translation("pdf.sub_total")}:
+            </span>
+            <span className="text-[#1E1E1E] text-base font-medium self-end">
+              {subTotal}
+            </span>
           </div>
-          <div className="flex flex-col gap-[10px]"></div>
+          <div className="flex justify-between">
+            <span className="text-[#1E1E1E] text-base font-medium">
+              {translation("pdf.tax")}:
+            </span>
+            <span className="text-[#1E1E1E] text-base font-medium ">{tax}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-[#1E1E1E] text-base font-medium">
+              {translation("pdf.discount")}:
+            </span>
+            <span className="text-[#1E1E1E] text-base font-medium">
+              {discount}
+            </span>
+          </div>
         </div>
         <div className="flex justify-between items-center bg-[#404F6A] rounded-[4px] px-[10px] py-[8px] gap-[55px] mt-[10px]">
           <span className="text-base font-semibold text-[#fff]">
-            Grand Total:
+            {translation("pdf.grand_total")}:
           </span>
           <span className="text-base font-semibold text-[#fff]">
             {grandTotal}

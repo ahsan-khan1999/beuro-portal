@@ -1,4 +1,3 @@
-import { CustomerPromiseActionType, Customers } from "@/types/customer";
 import { useTranslation } from "next-i18next";
 import { useRouter, NextRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
@@ -119,7 +118,7 @@ export default function useCustomerDetail(stage: boolean) {
   const customerType = watch("customerType");
   useEffect(() => {
     if (id) {
-      dispatch(readCustomerDetail({ params: { filter: id } }))
+      dispatch(readCustomerDetail({ params: { filter: id } }));
     }
   }, [id]);
   useMemo(() => {
@@ -227,6 +226,6 @@ export default function useCustomerDetail(stage: boolean) {
     deleteHandler,
     renderModal,
     handleCreateSuccess,
-    loading
+    loading,
   };
 }

@@ -86,7 +86,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               name: "offerContent.description",
 
               control,
-              value: contentDetails?.id && contentDetails?.offerContent?.description
+              value: contentDetails?.id && contentDetails?.offerContent?.description || ""
             },
           },
           {
@@ -104,7 +104,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-              value: contentDetails?.id && contentDetails?.offerContent?.body
+              value: contentDetails?.id && contentDetails?.offerContent?.body || ""
 
             },
           },

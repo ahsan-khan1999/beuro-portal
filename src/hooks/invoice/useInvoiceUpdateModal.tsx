@@ -46,28 +46,31 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   );
 
   useMemo(() => {
+    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
     if (type === '0') {
-      if (invoiceDetails?.contractID?.offerID?.total < amount) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
-        setValue("amount", invoiceDetails?.contractID?.offerID?.total)
+      if (remainingAmount < amount) {
+        setValue("amount", remainingAmount)
+        setValue("remainingAmount", remainingAmount - amount)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
+        setValue("remainingAmount", remainingAmount - amount)
       }
     }
     else if (type === '1') {
-      if (invoiceDetails?.contractID?.offerID?.total < calculateTax(invoiceDetails?.contractID?.offerID?.total, amount)) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      if (Number(remainingAmount) < calculateTax(Number(remainingAmount), amount)) {
+        setValue("remainingAmount", remainingAmount)
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - calculateTax(invoiceDetails?.contractID?.offerID?.total, amount))
+        setValue("remainingAmount", Number(remainingAmount) - calculateTax(Number(remainingAmount), amount))
       }
     } else {
-      setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      setValue("remainingAmount", remainingAmount)
 
     }
   }, [amount, type])
+
+
   useEffect(() => {
     reset({
       amount: data?.amount,

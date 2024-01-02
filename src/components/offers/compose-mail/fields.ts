@@ -49,14 +49,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
             },
             field: {
               className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
-              type: Field.input,
+              type: Field.select,
               id: "content",
               name: "content",
-              inputType: "text",
-              // options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
-              register,
-              // onItemChange: onContentSelect,
-              // value: offerDetails?.content?.offerContent?.title
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              control,
+              onItemChange: onContentSelect,
+              value: contentDetails?.id || ""
             },
           },
         ],
@@ -96,7 +95,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         id: "description",
         name: "description",
         control,
-        value: offerDetails?.content?.offerContent?.description
+        value: contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.content?.offerContent?.description
 
       },
     },

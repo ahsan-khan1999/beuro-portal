@@ -165,6 +165,10 @@ const useOffers = () => {
         }
       );
     } else {
+      setFilter({
+        ...filter,
+        status: "None"
+      });
       dispatch(readOffer({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
         (response: any) => {
           if (response?.payload) setCurrentPageRows(response?.payload?.Offer);

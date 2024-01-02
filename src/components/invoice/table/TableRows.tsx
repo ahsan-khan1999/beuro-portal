@@ -59,7 +59,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
@@ -67,7 +67,7 @@ const TableRows = ({
               >
                 {item.invoiceStatus}
               </div>
-            </span>
+            </span> */}
             <span
               onClick={(e) => handleNotes(item?.id, e)}
               className="py-4 cursor-pointer flex justify-center items-center   "

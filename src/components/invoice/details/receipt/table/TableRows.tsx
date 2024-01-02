@@ -20,7 +20,7 @@ const TableRows = ({
 }) => {
   const router = useRouter();
   const handleReceiptPreview = (id?: string) => {
-    router.pathname = "/invoices/receipt-pdf-preview";
+    router.pathname = "/invoices/receipt-email";
     router.query = { invoiceID: id };
     updateQuery(router, router.locale as string);
   };

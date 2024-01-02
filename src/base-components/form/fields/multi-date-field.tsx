@@ -2,10 +2,8 @@ import { Controller } from "react-hook-form";
 import { DateRangeValueProps, MultiDateProps, PhoneProps } from "@/types";
 //@ts-expect-error
 import { DateRange } from "react-date-range";
-
 import moment from "moment";
 import { useEffect, useState } from "react";
-
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 

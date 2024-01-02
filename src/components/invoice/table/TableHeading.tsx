@@ -23,9 +23,9 @@ const TableHeading = () => {
       <span className="flex justify-center items-center font-medium text-[#8F8F8F]  ">
         {translate("invoice.table_headings.paid")}
       </span>
-      <span className="flex justify-center items-center font-medium text-[#8F8F8F]  ">
+      {/* <span className="flex justify-center items-center font-medium text-[#8F8F8F]  ">
         {translate("invoice.table_headings.status")}
-      </span>
+      </span> */}
 
       <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
         {translate("invoice.table_headings.notes")}

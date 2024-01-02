@@ -1,7 +1,6 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import FormCard from "@/layout/customers/FormCard";
-import { CustomerField, Customers, FormDataProps } from "@/types/customer";
+import { FormDataProps } from "@/types/customer";
 import Image from "next/image";
 import React, { SetStateAction } from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";

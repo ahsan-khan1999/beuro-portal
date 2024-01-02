@@ -5,17 +5,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
-import { Controller, useForm } from "react-hook-form";
-import { DatePicker } from "@/base-components/form/fields";
-import { Button } from "@/base-components/ui/button/button";
-import icon from "@/assets/svgs/Vector.svg"
-import { AddOfferDetailsDateFormField } from "./fields/add-offer-details-fields";
-import { Field } from "@/enums/form";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error , translate} =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddOfferDetails(onHandleNext);
   return (
     <FormCard>
@@ -30,7 +24,9 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
             className="cursor-pointer"
             onClick={() => router.push("/offers")}
           />
-          <p className="font-medium text-[24px] leading-6 ">{translate("offers.offer_details.heading")}</p>
+          <p className="font-medium text-[24px] leading-6 ">
+            {translate("offers.offer_details.heading")}
+          </p>
         </div>
         <button
           onClick={() => router.push("/offers")}
@@ -40,7 +36,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
         </button>
       </div>
       <hr className="opacity-20 mb-5" />
-     
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -48,9 +44,6 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-    
-
-
     </FormCard>
   );
 };

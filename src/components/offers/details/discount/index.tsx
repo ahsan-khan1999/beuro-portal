@@ -5,6 +5,7 @@ import calenderIcon from "@/assets/svgs/calender_with_point.svg";
 import { OffersDiscountDataTypes } from "@/types/offers";
 import { useAppSelector } from "@/hooks/useRedux";
 import { formatDateTimeToDate } from "@/utils/utility";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const Discounts = () => {
   const { offerActivity } = useAppSelector((state) => state.offer);
@@ -18,9 +19,11 @@ const Discounts = () => {
     }));
 
   return (
-    <div className="flex flex-col bg-white rounded-b-lg h-[300px] overflow-y-auto">
-      {/* first item */}
-      {/* <div className="flex flex-col gap-[3px] pl-[28px] pr-[21px] py-3">
+    <>
+      {discountData && discountData?.length > 0 ? (
+        <div className="flex flex-col bg-white rounded-b-lg h-[300px] overflow-y-auto">
+          {/* first item */}
+          {/* <div className="flex flex-col gap-[3px] pl-[28px] pr-[21px] py-3">
         <span className="text-[#4B4B4B] text-[12px] font-normal">Discount</span>
         <div className="flex gap-3">
           <span className="text-[#4B4B4B] text-[13px] font-medium border border-[#C7C7C7] rounded-md px-2 py-1 w-full">
@@ -32,35 +35,41 @@ const Discounts = () => {
         </div>
       </div> */}
 
-      {/* Items from discountData */}
-      {discountData?.map((item, index) => (
-        <div key={index}>
-          <div className="pl-[28px] pr-[11px] py-2 flex flex-col gap-[6px]">
-            <div className="flex gap-1">
-              <span className="text-[#8F8F8F] font-normal text-[13px]">
-                {item?.discountTitle}
-              </span>
-              <span className="text-[#4B4B4B] font-normal text-[13px]">
-                {item?.discountPrice}
-              </span>
+          {/* Items from discountData */}
+          {discountData?.map((item, index) => (
+            <div key={index}>
+              <div className="pl-[28px] pr-[11px] py-2 flex flex-col gap-[6px]">
+                <div className="flex gap-1">
+                  <span className="text-[#8F8F8F] font-normal text-[13px]">
+                    {item?.discountTitle}
+                  </span>
+                  <span className="text-[#4B4B4B] font-normal text-[13px]">
+                    {item?.discountPrice}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="flex gap-[10px] items-center text-[#4B4B4B] font-normal text-[13px]">
+                    <Image src={priceTaga} alt="priceTaga" />
+                    {item?.discountPercentage}
+                  </span>
+                  <span className="flex gap-[10px] items-center text-[#4B4B4B] font-normal text-[13px]">
+                    <Image src={calenderIcon} alt="calenderIcon" />
+                    {item?.discountDate}
+                  </span>
+                </div>
+              </div>
+              {index !== discountData.length - 1 && (
+                <hr className="opacity-20 mx-[11px]" />
+              )}
             </div>
-            <div className="flex justify-between">
-              <span className="flex gap-[10px] items-center text-[#4B4B4B] font-normal text-[13px]">
-                <Image src={priceTaga} alt="priceTaga" />
-                {item?.discountPercentage}
-              </span>
-              <span className="flex gap-[10px] items-center text-[#4B4B4B] font-normal text-[13px]">
-                <Image src={calenderIcon} alt="calenderIcon" />
-                {item?.discountDate}
-              </span>
-            </div>
-          </div>
-          {index !== discountData.length - 1 && (
-            <hr className="opacity-20 mx-[11px]" />
-          )}
+          ))}
         </div>
-      ))}
-    </div>
+      ) : (
+        <div className="bg-white -mt-6 py-4">
+          <NoDataEmptyState />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -14,10 +14,18 @@ import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
-  let [addressCount, setAddressCount] = useState<number>(contentDetails?.id && contentDetails?.offerContent?.address?.length || 1)
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
+  let [addressCount, setAddressCount] = useState<number>(
+    (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
+  );
 
-  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.invoiceContent?.attachments) || [])
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contentDetails?.id &&
+      transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
+      []
+  );
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -26,8 +34,8 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     onHandleNext(ComponentsType.addConfirmationContent);
   };
   const handleAddAddressField = () => {
-    setAddressCount(addressCount + 1)
-  }
+    setAddressCount(addressCount + 1);
+  };
 
   const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {
@@ -45,20 +53,24 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     if (contentDetails.id) {
       reset({
         title: contentDetails?.invoiceContent?.title,
-        attachments: contentDetails?.offerContent?.attachments?.length > 0 && contentDetails?.offerContent?.attachments[0]
-      })
+        attachments:
+          contentDetails?.offerContent?.attachments?.length > 0 &&
+          contentDetails?.offerContent?.attachments[0],
+      });
     }
-
-  }, [contentDetails.id])
+  }, [contentDetails.id]);
   const fields = AddContentInvoiceDetailsFormField(
     register,
     loading,
     control,
     backHandle,
-    trigger, 0, attachements, setAttachements, contentDetails
-
+    trigger,
+    0,
+    attachements,
+    setAttachements,
+    contentDetails
   );
-  
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
@@ -71,11 +83,12 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
       step: 3,
       stage: ComponentsType.addReceiptContent,
       contentId: contentDetails?.id,
-      id: contentDetails?.id
-    }
-    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
+      id: contentDetails?.id,
+    };
+    const res = await dispatch(
+      updateContent({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) onHandleNext(ComponentsType.addReceiptContent);
-
   };
   return {
     fields,
@@ -84,6 +97,6 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

@@ -111,6 +111,10 @@ const useInvoice = () => {
         }
       );
     } else {
+      setFilter({
+        ...filter,
+        status: "None"
+      });
       dispatch(readInvoice({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
         (response: any) => {
           if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);

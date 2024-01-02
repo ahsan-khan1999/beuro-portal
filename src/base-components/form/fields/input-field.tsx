@@ -72,6 +72,7 @@ export const InputField = ({
           disabled={disabled}
           key={id}
           step={step}
+          min={0}
           // onChangeCapture={}
           //@ts-expect-error
           onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}

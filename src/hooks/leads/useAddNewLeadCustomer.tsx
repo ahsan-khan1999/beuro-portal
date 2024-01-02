@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -71,19 +70,20 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   useMemo(() => {
     if (leadDetails.id) {
-
       reset({
         fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,
         customer: leadDetails.customerID,
 
-        customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails.customerDetail?.customerType),
+        customerType: getKeyByValue(
+          staticEnums["CustomerType"],
+          leadDetails.customerDetail?.customerType
+        ),
         email: leadDetails.customerDetail?.email,
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
-
       });
     }
   }, [leadDetails.id]);
@@ -106,14 +106,23 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (leadDetails?.id) {
-      const apiData = { ...data, step: 1, leadId: leadDetails?.id, stage: ComponentsType.addressAdd }
+      const apiData = {
+        ...data,
+        step: 1,
+        leadId: leadDetails?.id,
+        stage: ComponentsType.addressAdd,
+      };
 
-      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+      const res = await dispatch(
+        createLead({ data: apiData, router, setError, translate })
+      );
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     } else {
-      const apiData = { ...data, step: 1, stage: ComponentsType.addressAdd }
+      const apiData = { ...data, step: 1, stage: ComponentsType.addressAdd };
 
-      const res = await dispatch(createLead({ data: apiData, router, setError, translate }));
+      const res = await dispatch(
+        createLead({ data: apiData, router, setError, translate })
+      );
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     }
   };
