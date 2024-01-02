@@ -104,7 +104,7 @@ export default function SearchInputFiled({
               >
                 <div className="mt-2 h-full" id="dropdownSerchBar">
                   <div className="flex-col space-y-[10px]">
-                    {options.map(({ icon, id, service, userName }, idx) => (
+                    {options?.map(({ icon, id, service, userName }, idx) => (
                       <div
                         className="flex justify-start px-4 py-3 border border-[#BFBFBF] rounded-lg hover:bg-[#eaebec] cursor-pointer mr-1 hoverTransetion"
                         key={idx}

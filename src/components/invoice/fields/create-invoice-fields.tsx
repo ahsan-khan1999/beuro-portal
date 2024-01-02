@@ -13,6 +13,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
   data
 ) => {
   const { t: translate } = useTranslation();
+  const totalAmount = Number(invoiceDetails?.paidAmount) + Number(invoiceDetails?.remainingAmount)
   const formField: FormField[] = [
     {
       field: {
@@ -34,7 +35,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "totalAmount",
               name: "totalAmount",
-              value: invoiceDetails?.contractID?.offerID?.total?.toString(),
+              value: totalAmount?.toString(),
               register,
               disabled: true
             },
@@ -55,7 +56,6 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "remainingAmount",
               name: "remainingAmount",
-              value: invoiceDetails?.remainingAmount,
               disabled: true,
               register,
             },

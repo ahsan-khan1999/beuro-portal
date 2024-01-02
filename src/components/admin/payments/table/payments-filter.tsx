@@ -30,7 +30,7 @@ export default function PaymentsFilter({
           />
         </svg>
       </button>
-      <InputField handleChange={(value) => console.log(value)} value="" />
+      <InputField handleChange={(value) => console.log(value)} value="" options={[]}/>
       <SelectField
         handleChange={(value) => console.log(value)}
         value=""

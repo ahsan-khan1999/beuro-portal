@@ -108,6 +108,7 @@ export default function CustomerFilter({
         // value={filter?.text || ""}
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        options={[]}
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}

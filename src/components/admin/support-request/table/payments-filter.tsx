@@ -40,6 +40,7 @@ export default function PaymentsFilter({
         // value=""
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        options={[]}
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}

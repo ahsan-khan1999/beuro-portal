@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
-import { createInvoice, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { createInvoice, readInvoiceDetails, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
@@ -44,7 +44,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     type,
     data
   );
-  
+
   useMemo(() => {
     if (type === '0') {
       if (invoiceDetails?.contractID?.offerID?.total < amount) {
@@ -74,7 +74,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
       type: "0",
 
     })
-    
+
   }, [data?.id])
 
 
@@ -82,7 +82,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload) invoiceCreated();
+    if (res?.payload)  invoiceCreated();
   };
   return {
     error,

@@ -57,23 +57,23 @@ const InvoiceDetailsData = ({
             />
           </div>
         )) || (
-          <div className="flex space-x-2">
-            <Button
-              className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
-              inputType="button"
-              text="Edit Frequency"
-              onClick={handleEditInvoiceFrequencyCreation}
-              id="freq"
-            />
-            <Button
-              className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
-              inputType="button"
-              text="Stop"
-              onClick={handleStopInvoiceCreation}
-              id="freq"
-            />
-          </div>
-        )}
+            <div className="flex space-x-2">
+              <Button
+                className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                inputType="button"
+                text="Edit Frequency"
+                onClick={handleEditInvoiceFrequencyCreation}
+                id="freq"
+              />
+              <Button
+                className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                inputType="button"
+                text="Stop"
+                onClick={handleStopInvoiceCreation}
+                id="freq"
+              />
+            </div>
+          )}
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
@@ -163,7 +163,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total}
+              {invoiceDetails?.paidAmount + invoiceDetails?.remainingAmount}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
