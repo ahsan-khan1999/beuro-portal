@@ -22,7 +22,7 @@ const OfferEditDetails = ({
           {translate("offers.offer_details.heading")}
         </h2>
         <button
-          onClick={() => router.push("/offers/details")}
+          onClick={() => router.back()}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("offers.offer_details.cancel_button")}

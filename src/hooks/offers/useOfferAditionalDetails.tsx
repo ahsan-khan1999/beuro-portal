@@ -21,7 +21,9 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
 
 
   useEffect(() => {
-    dispatch(readContent({ params: { filter: { paginate: 0 } } }))
+    setValue("additionalDetails", offerDetails?.additionalDetails);
+
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
 
   const schema = generateOfferAdditionalDetailsValidation(translate);
@@ -47,10 +49,12 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent) {
-      
+    if (filteredContent && selectedContent !== offerDetails?.content?.id) {
+
+
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails",  filteredContent?.offerContent?.title);
+      setValue("additionalDetails", filteredContent?.offerContent?.title);
+
     }
   }, [selectedContent])
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handleBack, 0,

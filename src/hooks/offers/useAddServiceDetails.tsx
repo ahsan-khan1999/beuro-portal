@@ -130,8 +130,8 @@ export const useAddServiceDetails = (
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
         : isTax && taxType === "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+          ? calculateTax(totalPrices, data?.taxPercentage || 0)
+          : 0;
 
     let discount = 0;
 
@@ -209,13 +209,33 @@ export const useAddServiceDetails = (
       setServiceType(serviceType.slice(0, newLength));
     }
   }, [serviceFields?.length]);
+  const onServiceSelectType = () => {
+    offerDetails?.serviceDetail?.serviceDetail?.forEach((element, index) => {
+      setValue(`serviceDetail.${index}.price`, element.price);
+      setValue(`serviceDetail.${index}.unit`, element.unit);
+      setValue(
+        `serviceDetail.${index}.description`,
+        element.description
+      );
+      setValue(
+        `serviceDetail.${index}.count`,
+        element.count
+      );
+      setValue(
+        `serviceDetail.${index}.totalPrice`,
+        element.totalPrice
+      );
+    })
 
+
+
+  };
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
     const updatedService = serviceType.map((type, i) => (i === index ? newServiceType : type));
     setServiceType(updatedService);
 
     const fieldNamePrefix = 'serviceDetail';
-    if(newServiceType === ServiceType.NEW_SERVICE){
+    if (newServiceType === ServiceType.NEW_SERVICE) {
       reset({
         [`serviceDetail.${index}.serviceTitle`]: '',
         [`serviceDetail.${index}.price`]: '',
@@ -224,6 +244,8 @@ export const useAddServiceDetails = (
         [`serviceDetail.${index}.totalPrice`]: '',
         [`serviceDetail.${index}.description`]: '',
       })
+    } else {
+      onServiceSelectType()
     }
   };
 

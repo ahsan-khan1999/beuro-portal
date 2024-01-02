@@ -26,6 +26,7 @@ const serviceObject = {
   count: 0,
   description: "",
   totalPrice: "",
+  serviceType:"Existing Service"
 };
 
 export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
@@ -120,7 +121,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     value: item?.serviceName,
                   })) || [],
                 control,
-                // value: "" ,
+                value: offerDetails?.serviceDetail?.serviceDetail[i]?.serviceTitle,
                 onItemChange: onCustomerSelect,
                 fieldIndex: i,
               },
@@ -284,9 +285,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 id: "button",
                 text: "Remove",
                 inputType: "button",
-                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 0 && "hidden"
-                }`,
+                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
+                  }`,
                 onClick: () => remove(i),
               },
             },
@@ -438,7 +438,7 @@ const generateServiceCalulationChildren = (
       text: `${total?.taxAmount.toFixed(2)} CHF(7.7%)`,
     },
   };
-
+  
   if (String(taxType) === "1" && isTax) {
     field = {
       containerClass: "w-[112px]",
@@ -518,7 +518,6 @@ const generateServiceCalulationChildren = (
                   label: "Tax%",
                   checked: false,
                   register,
-                  value: false,
                 },
               },
               {
