@@ -1482,5 +1482,30 @@
       "receipt": "Receipt",
       "customer": "Customer"
     }
+  },
+  "pdf": {
+    "offer_number": "Offer No",
+    "offer_date": "Offer Date",
+    "created_by": "Created By",
+    "email": "Email",
+    "phone": "Phone",
+    "service": "Service/Product",
+    "price": "Price",
+    "unit": "Unit",
+    "count": "Count",
+    "total": "Total",
+    "sub_total": "Sub Total",
+    "tax": "Tax%",
+    "discount": "Discount",
+    "grand_total": " Grand Total",
+    "validate_heading": "Validity of the offer",
+    "validate_des": "3 months from preparation of the offer",
+    "share_des": "I share the contract with you.",
+    "date": "Date",
+    "signature": "Signature",
+    "page": "Page",
+    "receipt_slip": "Receipt slip",
+    "payment_part": "Payment Part",
+    "account": "Account / Payable to"
   }
 }

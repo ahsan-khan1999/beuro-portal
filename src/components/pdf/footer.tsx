@@ -1,4 +1,5 @@
 import { DocumentDetailFooterProps } from "@/types/types";
+import { useTranslation } from "next-i18next";
 import React, { useMemo } from "react";
 
 export const Footer = ({
@@ -37,6 +38,8 @@ export const Footer = ({
       showThirdColumnBorder,
     };
   }, [isFirstColumn, isSecondColumn, isThirdColumn, isFourthColumn]);
+
+  const { t: translation } = useTranslation();
 
   return (
     <div className="relative flex items-center justify-between h-[149px] px-4  w-full bg-[#EEEEEE]">
@@ -123,9 +126,11 @@ export const Footer = ({
 
       <div className="s self-end">
         <span className="text-[#1E1E1E] text-[14px] font-medium mr-[10px]">
-          Page
+          {translation("pdf.page")}
         </span>
-        <span className="text-[#1E1E1E] text-[14px] font-medium">{currPage}/{totalPages}</span>
+        <span className="text-[#1E1E1E] text-[14px] font-medium">
+          {currPage}/{totalPages}
+        </span>
       </div>
     </div>
   );
