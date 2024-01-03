@@ -9,7 +9,6 @@ export default function PaymentsFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onEnterPress = () => {

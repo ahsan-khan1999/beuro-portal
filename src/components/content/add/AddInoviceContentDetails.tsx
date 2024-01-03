@@ -9,14 +9,15 @@ const AddInoviceContentDetails = ({
   onHandleNext: Function;
 }) => {
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error,translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddContentInvoiceDetails(onHandleNext);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] ">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("content.tabs_headings.invoice_content")}</h2>
+      <div className="flex justify-between items-center pb-[26px] border-b border-[#000] border-opacity-20">
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("content.tabs_headings.invoice_content")}
+        </h2>
       </div>
-      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

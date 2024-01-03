@@ -120,10 +120,9 @@ const AddNewLeadsData = () => {
   };
 
   const imageUploadHandler = () => {
-    dispatch(setImages([]))
+    dispatch(setImages([]));
     dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
     // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
-
   };
 
   const handleImageSlider = () => {
@@ -204,7 +203,9 @@ const AddNewLeadsData = () => {
           ))}
         </div>
 
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        <div className="w-full break-all">
+          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
       </div>
       {renderModal()}
     </div>

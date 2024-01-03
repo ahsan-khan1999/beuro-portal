@@ -30,7 +30,6 @@ const PdfCard = ({
 
   return (
     <PdfCardLayout>
-
       <div className=" rounded-md bg-white py-[20px] px-[20px] w-full h-fit ">
         <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#e5]">
           <div className="flex items-center">
@@ -39,20 +38,18 @@ const PdfCard = ({
               alt="backIcon"
               className="cursor-pointer"
               onClick={() => router.back()}
-
             />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
               {translate("contracts.pdf_card_details.heading")}
             </h1>
           </div>
           <div className="flex items-center justify-between gap-5">
-
             <BaseButton
               buttonText={translate("contracts.pdf_card_details.send_via_post")}
               onClick={onSendViaPost}
               containerClassName="flex items-center group gap-x-3 row-reverse"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-              loading={loading && activeButtonId === 'post'}
+              loading={loading && activeButtonId === "post"}
               loaderColor="#4A13E7"
             >
               <PostIcon className="text-primary group-hover:text-primary" />
@@ -63,12 +60,11 @@ const PdfCard = ({
               onClick={onEmailSend}
               containerClassName="flex items-center group gap-x-3 row-reverse"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-              loading={loading && activeButtonId === 'email'}
+              loading={loading && activeButtonId === "email"}
               loaderColor="#4A13E7"
             >
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
-
 
             <Image
               src={downloadIcon}
@@ -81,7 +77,6 @@ const PdfCard = ({
               alt="printerIcon"
               className="cursor-pointer"
               onClick={onPrint}
-
             />
           </div>
         </div>
@@ -91,14 +86,18 @@ const PdfCard = ({
               {translate("contracts.pdf_card_details.contract_id")}:
             </span>
             &nbsp;
-            <span className="text-[#4B4B4B] text-base font-medium">{contractNo}</span>
+            <span className="text-[#4B4B4B] text-base font-medium">
+              {contractNo}
+            </span>
           </div>
           <div>
             <span className="text-[#4D4D4D] text-base font-normal">
               {translate("contracts.pdf_card_details.worker")}:
             </span>
             &nbsp;
-            <span className="text-[#4B4B4B] text-base font-medium">{worker}</span>
+            <span className="text-[#4B4B4B] text-base font-medium">
+              {worker}
+            </span>
           </div>
           <div>
             <span className="text-[#4D4D4D] text-base font-normal">
@@ -115,7 +114,9 @@ const PdfCard = ({
             </span>
 
             <div className="border-[#FE9244] border rounded-lg px-[8px] ">
-              <span className="text-[#FE9244] text-base font-medium">{contractStatus}</span>
+              <span className="text-[#FE9244] text-base font-medium">
+                {contractStatus}
+              </span>
             </div>
           </div>
         </div>

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import Image from "next/image";
 import edit_circle from "@/assets/svgs/edit_circle.svg";
-import profile from "@/assets/svgs/Group 480958610.svg";
 import { combineClasses } from "@/utils/utility";
 
 export const ProfileUpload = ({

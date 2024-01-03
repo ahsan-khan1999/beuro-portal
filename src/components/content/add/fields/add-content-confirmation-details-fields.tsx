@@ -8,7 +8,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
     const formField: FormField[] = [
 
       {
-        containerClass: "mt-5",
+        containerClass: "",
         field: {
           type: Field.div,
           id: "div-field",

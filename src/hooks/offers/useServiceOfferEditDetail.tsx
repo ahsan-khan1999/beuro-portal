@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -42,7 +41,9 @@ export const useServiceOfferEditDetail = ({
     taxAmount: 0,
   });
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>([ServiceType.EXISTING_SERVICE]);
+  const [serviceType, setServiceType] = useState<ServiceType[]>([
+    ServiceType.EXISTING_SERVICE,
+  ]);
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -101,7 +102,6 @@ export const useServiceOfferEditDetail = ({
   };
 
   const onServiceSelectType = (index: number) => {
-    console.log("in",offerDetails?.serviceDetail?.serviceDetail[index]);
 
     setValue(`serviceDetail.${index}.price`, offerDetails?.serviceDetail?.serviceDetail[index]?.price);
     setValue(`serviceDetail.${index}.unit`, offerDetails?.serviceDetail?.serviceDetail[index]?.unit);
@@ -144,8 +144,8 @@ export const useServiceOfferEditDetail = ({
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
         : isTax && taxType === "1"
-          ? calculateTax(totalPrices, data?.taxPercentage || 0)
-          : 0;
+        ? calculateTax(totalPrices, data?.taxPercentage || 0)
+        : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
@@ -209,7 +209,6 @@ export const useServiceOfferEditDetail = ({
     name: "serviceDetail",
   });
 
-
   useMemo(() => {
     const currentLength = serviceType.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
@@ -227,7 +226,9 @@ export const useServiceOfferEditDetail = ({
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
-    const updatedService = serviceType.map((type, i) => (i === index ? newServiceType : type));
+    const updatedService = serviceType.map((type, i) =>
+      i === index ? newServiceType : type
+    );
     setServiceType(updatedService);
 
     const fieldNamePrefix = 'serviceDetail';

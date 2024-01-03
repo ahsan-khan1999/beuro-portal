@@ -6,15 +6,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
-import { createInvoice, readInvoiceDetails, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
+import {
+  createInvoice,
+  readInvoiceDetails,
+  updateInvoice,
+  updateParentInvoice,
+} from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const router = useRouter();
-  const { loading, error, invoiceDetails } = useAppSelector((state) => state.invoice);
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
 
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -26,8 +33,9 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     control,
     watch,
     formState: { errors },
-    setError, setValue,
-    reset
+    setError,
+    setValue,
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
@@ -46,7 +54,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     control,
     false,
     invoiceDetails,
-    type,
+    type
   );
   useMemo(() => {
     const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
@@ -71,13 +79,19 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
       setValue("remainingAmount", remainingAmount)
 
     }
-  }, [amount, type])
-
+  }, [amount, type]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, ["paymentType"]: staticEnums["PaymentType"][data.paymentType], id: invoiceDetails?.id, isInvoiceRecurring: false }
-    const res = await dispatch(createInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload)  invoiceCreated();
+    const apiData = {
+      ...data,
+      ["paymentType"]: staticEnums["PaymentType"][data.paymentType],
+      id: invoiceDetails?.id,
+      isInvoiceRecurring: false,
+    };
+    const res = await dispatch(
+      createInvoice({ data: apiData, router, setError, translate })
+    );
+    if (res?.payload) invoiceCreated();
   };
   return {
     error,
@@ -85,6 +99,6 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     errors,
     fields,
     onSubmit,
-    translate
+    translate,
   };
 }

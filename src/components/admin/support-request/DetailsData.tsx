@@ -14,13 +14,12 @@ const DetailsData = ({
   supportDetail,
   status,
   handlePreviousClick,
-  handleStatusUpadte
+  handleStatusUpadte,
 }: {
   supportDetail: ContactSupport | null;
   status: DropDownItem[];
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
-
 }) => {
   const { t: translate } = useTranslation();
 
@@ -38,7 +37,12 @@ const DetailsData = ({
           </h1>
         </div>
         <button
-          onClick={() => router.push({ pathname: "/admin/customers/details", query: { customer: supportDetail?.createdBy?.id } })}
+          onClick={() =>
+            router.push({
+              pathname: "/admin/customers/details",
+              query: { customer: supportDetail?.createdBy?.id },
+            })
+          }
           className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
         >
           <Image src={groupCustomerIcon} alt="groupCustomerIcon" />
@@ -64,11 +68,13 @@ const DetailsData = ({
           <span className="ml-3 text-[#4B4B4B] font-medium">
             <DropDown
               items={status}
-              onItemSelected={(selectedItem) => handleStatusUpadte(selectedItem)}
+              onItemSelected={(selectedItem) =>
+                handleStatusUpadte(selectedItem)
+              }
               selectedItem={supportDetail?.status || ""}
               dropDownClassName="px-3 border border-primary"
               dropDownTextClassName="text-primary font-medium"
-              dropDownIconClassName="text-primary"
+              dropDownIconClassName="text-primary ml-2"
               dropDownItemsContainerClassName="border border-primary"
             />
           </span>

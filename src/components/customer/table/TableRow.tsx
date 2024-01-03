@@ -28,7 +28,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
             <span className="py-4 flex items-center break-all">
               {item.phoneNumber}
             </span>
-            <span className="py-4 xlg:flex items-center mlg:hidden ">
+            <span className="py-4 xlg:flex items-center mlg:hidden">
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">

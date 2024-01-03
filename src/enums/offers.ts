@@ -19,6 +19,7 @@ export enum EditOfferDetails {
   customerType = "customerType",
   phoneNumber = "phoneNumber",
   mobileNumber = "mobileNumber",
+  content = "content",
   streetNumber = "streetNumber",
   postCode = "postalCode",
   country = "country",

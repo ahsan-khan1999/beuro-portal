@@ -3,7 +3,6 @@ import { useEditOfferDetails } from "@/hooks/offers/useEditOfferDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
-
 import { EditComponentsType } from "./EditOffersDetailsData";
 
 const OfferEditDetails = ({
