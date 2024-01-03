@@ -35,14 +35,14 @@ const ServiceDetailsData = ({
     <LeadsCardLayout>
       <div
         className="flex justify-between items-center pb-5 "
-        id="Service Details"
+        id={translate("leads.tabs_headings.service")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("leads.service_details.heading")}
         </h2>
         <button
           onClick={() => onClick(2, ComponentsType.serviceEdit)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <Image src={editIcon} alt="editIcon" />
           {translate("leads.service_details.edit_button")}

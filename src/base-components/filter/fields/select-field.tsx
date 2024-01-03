@@ -33,18 +33,18 @@ export default function SelectField({
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
   return (
     <div
-      className="relative flex items-center justify-center w-[120px] "
+      className="relative flex items-center justify-center min-w-[120px] w-fit"
       ref={ref}
     >
       <div
-        className="flex justify-between items-center cursor-pointer px-[10px] py-2 w-full bg-white rounded-lg max-w-[105px]"
+        className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg min-w-[105px] w-fit"
         onClick={handleToggle}
       >
         <span className="text-dark text-sm font-normal">{label}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
-          className={dropDownIconClassName + "flex my-auto "}
+          className={dropDownIconClassName + "flex my-auto ml-1"}
         />
       </div>
 

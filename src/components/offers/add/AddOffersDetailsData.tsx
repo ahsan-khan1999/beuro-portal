@@ -153,9 +153,9 @@ const EditOffersDetailsData = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 xMaxSize:grid-cols-4 xMaxSize:gap-x-6 gap-y-6">
+      <div className="grid grid-cols-1 xLarge:grid-cols-4 xLarge:gap-x-6 gap-y-6">
         <div className="col-span-1">
-          <div className="flex items-center flex-wrap xMaxSize:flex-col gap-[14px]">
+          <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
             {tabSection.map((item, index) => (
               <OfferTabs
                 isSelected={tabType === index}

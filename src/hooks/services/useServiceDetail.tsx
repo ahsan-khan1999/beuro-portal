@@ -6,9 +6,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "next-i18next";
 import { NextRouter, useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import { FieldValues, SubmitHandler, UseFormSetError, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  UseFormSetError,
+  useForm,
+} from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { createService, deleteService, readServiceDetail, setServiceDetails, updateService } from "@/api/slices/service/serviceSlice";
+import {
+  createService,
+  deleteService,
+  readServiceDetail,
+  setServiceDetails,
+  updateService,
+} from "@/api/slices/service/serviceSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
@@ -21,56 +32,64 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 const useServiceDetail = (stage: boolean) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { serviceDetails, loading } = useAppSelector(state => state.service)
-  const { modal: { data } } = useAppSelector((state) => state.global);
+  const { serviceDetails, loading } = useAppSelector((state) => state.service);
+  const {
+    modal: { data },
+  } = useAppSelector((state) => state.global);
 
-  const { modal } = useAppSelector(state => state.global)
+  const { modal } = useAppSelector((state) => state.global);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
   const id = router.query.service;
   const onClose = () => {
-    dispatch(updateModalType({
-      type: ModalType.NONE,
-    }));
+    dispatch(
+      updateModalType({
+        type: ModalType.NONE,
+      })
+    );
   };
   const handleUpdateConfirm = (data: any) => {
-    dispatch(updateService({ data, router, setError, translate }))
+    dispatch(updateService({ data, router, setError, translate }));
   };
   const handleCreateSuccess = () => {
-    dispatch(updateModalType({
-      type: ModalType.CREATE_SUCCESS,
-    }));
+    dispatch(
+      updateModalType({
+        type: ModalType.CREATE_SUCCESS,
+      })
+    );
   };
   const handleUpdate = (data: any) => {
-    dispatch(updateModalType({
-      type: ModalType.UPDATE_SUCCESS,
-      data: data
-    }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPDATE_SUCCESS,
+        data: data,
+      })
+    );
   };
 
   const deleteHandler = () => {
-    dispatch(updateModalType({
-      type: ModalType.CONFIRM_DELETION,
-      data: { refId: serviceDetails?.refID,id:serviceDetails?.id }
-
-    }
-    ));
+    dispatch(
+      updateModalType({
+        type: ModalType.CONFIRM_DELETION,
+        data: { refId: serviceDetails?.refID, id: serviceDetails?.id },
+      })
+    );
   };
 
-
   const handleDelete = () => {
-    dispatch(updateModalType({
-      type:
-        ModalType.INFO_DELETED
-    }));
+    dispatch(
+      updateModalType({
+        type: ModalType.INFO_DELETED,
+      })
+    );
   };
 
   const routeHandler = () => {
-    dispatch(deleteService({ serviceDetails, router, setError, translate }))
+    dispatch(deleteService({ serviceDetails, router, setError, translate }));
   };
   const changeRouterHandler = () => {
-    router.pathname = "/services"
-    updateQuery(router, router.locale as string)
-    onClose()
+    router.pathname = "/services";
+    updateQuery(router, router.locale as string);
+    onClose();
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -104,19 +123,18 @@ const useServiceDetail = (stage: boolean) => {
         modelHeading="Are You Sure? "
         modelSubHeading="You want to update this record  "
         cancelHandler={onClose}
-        confirmHandler={() => confrimUpdate({ data, router, setError, translate })}
+        confirmHandler={() =>
+          confrimUpdate({ data, router, setError, translate })
+        }
         loading={loading}
       />
     ),
-
   };
   const renderModal = () => {
-
     return MODAL_CONFIG[modal.type] || null;
   };
 
   const { t: translate } = useTranslation();
-
 
   const schema = generateServicesValidation(translate);
 
@@ -125,21 +143,21 @@ const useServiceDetail = (stage: boolean) => {
     handleSubmit,
     reset,
     formState: { errors },
-    setError
+    setError,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
     if (id) {
-      dispatch(readServiceDetail({ params: { filter: id } })).then((res: CustomerPromiseActionType) => {
-        dispatch(setServiceDetails(res.payload))
-        if (serviceDetails && stage) reset({ ...res.payload })
-
-      })
+      dispatch(readServiceDetail({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setServiceDetails(res.payload));
+          if (serviceDetails && stage) reset({ ...res.payload });
+        }
+      );
     }
   }, [id]);
-
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);
@@ -151,30 +169,41 @@ const useServiceDetail = (stage: boolean) => {
     isUpdate,
     handleUpdateCancel
   );
-  const confrimUpdate = async ({ data, router, setError, translate }: { data: any, router: NextRouter, setError: UseFormSetError<FieldValues>, translate: Function }) => {
-    let res = await dispatch(updateService({ data, router, setError, translate }))
+  const confrimUpdate = async ({
+    data,
+    router,
+    setError,
+    translate,
+  }: {
+    data: any;
+    router: NextRouter;
+    setError: UseFormSetError<FieldValues>;
+    translate: Function;
+  }) => {
+    let res = await dispatch(
+      updateService({ data, router, setError, translate })
+    );
     if (res?.payload) {
-      dispatch(setServiceDetails(DEFAULT_SERVICE))
-      onClose()
-      router.pathname = "/services",
-        router.query = {}
-      updateQuery(router, router.locale as string)
+      dispatch(setServiceDetails(DEFAULT_SERVICE));
+      onClose();
+      (router.pathname = "/services"), (router.query = {});
+      updateQuery(router, router.locale as string);
     } else {
-      onClose()
-
+      onClose();
     }
-  }
+  };
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let res;
     if (!stage) {
-      res = await dispatch(createService({ data, router, setError, translate }))
+      res = await dispatch(
+        createService({ data, router, setError, translate })
+      );
 
-      if (res?.payload) handleCreateSuccess()
+      if (res?.payload) handleCreateSuccess();
     } else if (stage) {
-      handleUpdate(data)
+      handleUpdate(data);
     }
   };
-
 
   return {
     serviceDetails,
@@ -187,7 +216,7 @@ const useServiceDetail = (stage: boolean) => {
     handleUpdateCancel,
     renderModal,
     deleteHandler,
-    loading
+    loading,
   };
 };
 export default useServiceDetail;

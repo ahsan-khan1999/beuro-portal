@@ -20,7 +20,7 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-    
+
   const checkbox: CheckBoxType[] = [
     {
       label: translate("offers.table_functions.open"),
@@ -138,7 +138,7 @@ export default function OffersFilters({
             { label: "Oldest", value: "createdAt" },
             { label: "A - Z", value: "title" },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         <OfferFilter
           filter={filter}
@@ -158,7 +158,7 @@ export default function OffersFilters({
           onClick={() => router.push("/offers/add")}
           className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           icon={addIcon}
-          text="Add New"
+          text={translate("offers.add_button")}
           id="add"
         />
       </div>

@@ -199,7 +199,7 @@
     "title": "Kunden",
     "add_button": "Neu hinzufügen",
     "table_headings": {
-      "id": "AUSWEIS",
+      "id": "ID",
       "name": "Name",
       "email": "Email",
       "phone": "Telefon",
@@ -398,1024 +398,1107 @@
       "main_heading": "Ihr Passwort wurde erfolgreich festgelegt",
       "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
       "button": "Fertig"
+    }
+  },
+  "setting": {
+    "heading": "Einstellung",
+    "save_setting": "Einstellung speichern",
+    "steps_heading": {
+      "account_setting": "Kontoeinstellung",
+      "system_setting": "Systemeinstellung",
+      "templates": "Vorlagen",
+      "follow_up_setting": "Nachverfolgungseinstellung",
+      "billing": "Abrechnung",
+      "mail_setting": "Mail-Einstellung"
     },
-    "setting": {
-      "heading": "Einstellung",
-      "save_setting": "Einstellung speichern",
-      "steps_heading": {
-        "account_setting": "Kontoeinstellung",
-        "system_setting": "Systemeinstellung",
-        "templates": "Vorlagen",
-        "follow_up_setting": "Nachverfolgungseinstellung",
-        "billing": "Abrechnung",
-        "mail_setting": "Mail-Einstellung"
+    "account_setting": {
+      "public_info": "Öffentliche Informationen",
+      "full_name": "Vollständiger Name",
+      "email": "E-Mail",
+      "company_name": "Firmenname",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "website": "Webseite",
+      "mwst_number": "MWST-Nummer (Optional)",
+      "private_info": "Private Informationen",
+      "street_address": "Straßenadresse",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "bank_name": "Bankname",
+      "account_no": "Kontonummer",
+      "iban_number": "IBAN-Nummer",
+      "change_password": "Passwort ändern",
+      "change": "Ändern",
+      "restore_button": "Standard wiederherstellen",
+      "save_changes_button": "Änderungen speichern"
+    },
+    "change_password_modal": {
+      "old_password": "Altes Passwort",
+      "new_pasword": "Neues Passwort erstellen",
+      "confirm_password": "Passwort bestätigen",
+      "change_button": "Ändern"
+    },
+    "system_setting": {
+      "tax": "Steuer",
+      "add_button": "Neu hinzufügen",
+      "invoice_over_due": "Rechnung überfällig",
+      "invoice_days_limit": "Frist für überfällige Rechnungen",
+      "currency": "Währung",
+      "connect_with_buro": "Mit Buro verbinden",
+      "description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's besuchen unsere",
+      "allowed_domain": "Erlaubte Domäne",
+      "security_token": "Sicherheitstoken",
+      "tabs_tax": {
+        "no_tax": "Keine Steuer",
+        "inclusive_tax": "Inklusive Steuer",
+        "exclusive_tax": "Exklusive Steuer"
+      }
+    },
+    "tax_modal": {
+      "exclusive_heading": "Exklusive Steuer",
+      "add_new_tax": "Neue Steuer hinzufügen",
+      "name": "Name",
+      "tax_rate": "Steuerquote (%)",
+      "button": "Steuer hinzufügen"
+    },
+    "templates": {
+      "heading": "Aktuelle PDF-Designvorlagen",
+      "change_button": "Ändern",
+      "first_col_heading": {
+        "heading": "Erste Spalte",
+        "company_name": "Firmenname",
+        "email": "E-Mail",
+        "phone_number": "Telefonnummer",
+        "website": "Webseite",
+        "mwst_number": "MWST-Nummer"
+      },
+      "second_column": {
+        "heading": "Zweite Spalte",
+        "street_no": "Straßennummer",
+        "post_code": "Postleitzahl",
+        "bank_name": "Bankname",
+        "account_number": "Kontonummer",
+        "iban_number": "IBAN-Nummer"
+      },
+      "third_column": {
+        "third_column_heading": "Dritte Spalte",
+        "fourth_column_heading": "Vierte Spalte",
+        "row_one": "Zeile 1",
+        "row_two": "Zeile 2",
+        "row_three": "Zeile 3",
+        "row_fourth": "Zeile 4",
+        "row_fifth": "Zeile 5"
+      }
+    },
+    "follow_up_setting": {
+      "on_offer_expire": "Nachverfolgung bei Ablauf des Angebots erstellen",
+      "on_lead_create": "Nachverfolgung bei Lead-Erstellung erstellen",
+      "add_follow_up": {
+        "heading": "Gründe für die Nachverfolgung",
+        "add_label": "Gründe hinzufügen",
+        "add_button": "Grund hinzufügen"
+      }
+    },
+    "billing": {
+      "heading": "Aktueller Plan",
+      "payment_method": "Zahlungsmethode",
+      "next_renew": "Nächste Erneuerung 24. September 2018",
+      "card_type": "Visa",
+      "package_name": "Silber",
+      "package_description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's",
+      "request_services": {
+        "heading": "Anfrage",
+        "managers": "Manager",
+        "account_reports": "Kontoauszüge",
+        "customize_email": "E-Mail anpassen",
+        "watermark": "Mit Wasserzeichen",
+        "features": "API-Funktionen",
+        "change_button": "Mitgliedschaft ändern"
+      },
+      "payment_history": {
+        "main_heading": "Zahlungsverlauf",
+        "setting": "Einstellung",
+        "amount": "Betrag",
+        "date": "Datum",
+        "status": "Status"
+      },
+      "upgrade_card": {
+        "heading": "Auf Gold-Mitgliedschaft upgraden!",
+        "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "button": "Upgraden"
+      },
+      "edit_payment_modal": {
+        "heading": "Zahlungsdetails bearbeiten",
+        "sub_heading": "Wir stellen automatisch am 1. jeden Monats in Rechnung",
+        "package_name": "Silber",
+        "name": "Name auf der Karte",
+        "expire": "Ablaufdatum",
+        "card_number": "Kartennummer",
+        "cvv": "CVV",
+        "cancel_button": "Abbrechen",
+        "save_changes_button": "Änderungen speichern"
+      }
+    },
+    "mail_setting": {
+      "system_config": "System-Mail-Konfiguration verwenden",
+      "own_config": "Eigene Mail-Konfiguration verwenden",
+      "mail_form_fields": {
+        "mail_driver": "Mail-Treiber",
+        "mail_host": "Mail-Host",
+        "mail_port": "Mail-Port",
+        "mail_encryption": "Mail-Verschlüsselung",
+        "mail_user": "Mail-Benutzername",
+        "mail_password": "Mail-Passwort",
+        "mail_address": "Mail-Absenderadresse",
+        "mail_name": "Mail-Absendername",
+        "email": "E-Mail",
+        "mail_description": "Geben Sie die E-Mail-Adresse ein, um die Test-E-Mail der Mail-Konfiguration zu erhalten."
+      }
+    }
+  },
+  "invoice": {
+    "main_heading": "Rechnung",
+    "table_functions": {
+      "open": "Öffnen",
+      "overdue": "Überfällig",
+      "paid": "Bezahlt"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Kunde",
+      "title": "Rechnungstitel",
+      "price": "Gesamtpreis",
+      "email_status": "E-Mail-Status",
+      "paid": "Bezahlt",
+      "status": "Status",
+      "notes": "Notizen",
+      "edit": "bearbeiten"
+    },
+    "card_content": {
+      "heading": "Rechnungsdetails",
+      "invoice_id": "Rechnungs-ID",
+      "title": "Rechnungstitel",
+      "total_amount": "Gesamtbetrag",
+      "contract_id": "Vertrags-ID",
+      "worker": "Arbeiter",
+      "status": "E-Mail-Status",
+      "paid_amount": "Bezahlter Betrag",
+      "offer_id": "Angebots-ID",
+      "created_date": "Erstellungsdatum",
+      "notes": "Notizen",
+      "unpaid_amount": "Unbezahlter Betrag",
+      "create_invoice_button": "Rechnung erstellen",
+      "recurring_invoice_button": "Wiederkehrende Rechnung"
+    },
+    "invoice_table_heading": {
+      "id": "ID",
+      "customer": "Kunde",
+      "title": "Rechnungstitel",
+      "issue_date": "Ausstellungsdatum",
+      "amount": "Betrag",
+      "email_status": "E-Mail-Status",
+      "payment": "Zahlung",
+      "status": "Status"
+    },
+    "receipt_table_heading": {
+      "id": "ID",
+      "customer": "Kunde",
+      "title": "Rechnungstitel",
+      "paid_date": "Zahlungsdatum",
+      "amount": "Betrag",
+      "invoice": "Rechnung",
+      "email_status": "E-Mail-Status",
+      "payment": "Zahlung"
+    },
+    "create_invoice_modal": {
+      "total_amount": "Gesamtbetrag",
+      "remaining_amount": "Verbleibender Betrag",
+      "enter_amount": "Betrag eingeben",
+      "amount": "Betrag",
+      "percentage": "Prozentsatz",
+      "payment_method": "Zahlungsmethode",
+      "mark_it_recuring": "Als wiederkehrend markieren",
+      "date_of_invoice": "Datum der nächsten Rechnung",
+      "frequency": "Häufigkeit",
+      "update_invoice": "Rechnung bearbeiten",
+      "button": "Rechnung erstellen",
+      "recurring_button": "Wiederkehrende Rechnung erstellen"
+    },
+    "invoice_created_modal": {
+      "main_heading": "Rechnung erfolgreich erstellt",
+      "sub_heading": "Danke, dass Sie eine Rechnung erstellt haben. Wir freuen uns, Sie zu haben.",
+      "button": "PDF-Vorschau"
+    }
+  },
+  "contracts": {
+    "main_heading": "Verträge",
+    "table_functions": {
+      "open": "Öffnen",
+      "confirm": "Bestätigt",
+      "cancel": "Abgebrochen"
+    },
+    "table_headings": {
+      "id": "ID",
+      "title": "Vertragstitel",
+      "customer": "Kunde",
+      "total_price": "Gesamtpreis",
+      "created_on": "Erstellt am",
+      "payment": "Zahlung",
+      "status": "Status",
+      "images": "Bilder",
+      "notes": "Notizen",
+      "edit": "Bearbeiten"
+    },
+    "card_content": {
+      "heading": "Vertragsdetails",
+      "confirm_button": "Bestätigung senden",
+      "contract_id": "Vertrags-ID",
+      "offer_title": "Angebotstitel",
+      "worker": "Arbeiter",
+      "offer_id": "Angebots-ID",
+      "created_date": "Erstellungsdatum",
+      "service_date": "Service-Datum",
+      "offer_status": "Angebotsstatus",
+      "payment_method": "Zahlungsmethode",
+      "contract_status": "Vertragsstatus",
+      "notes": "Notizen",
+      "images": "Bilder"
+    },
+    "tabs_headings": {
+      "offer_details": "Angebotsdetails",
+      "address_details": "Adressdetails",
+      "service_details": "Service-Details",
+      "additional_details": "Zusätzliche Details"
+    },
+    "customer_details": {
+      "heading": "Angebotsdetails",
+      "customer_type": "Kundentyp",
+      "full_name": "Vollständiger Name",
+      "company_name": "Firmenname",
+      "email_address": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "address_details": "Adressdetails",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land"
+    },
+    "address_details": {
+      "main_heading": "Adressdetails",
+      "heading": "Adressdetails 1",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "description": "Beschreibung"
+    },
+    "service_details": {
+      "heading": "Service-/Produktdetails",
+      "title": "Service-/Produktname",
+      "description": "Beschreibung",
+      "price": "Preis(CHF)",
+      "unit": "Einheit",
+      "count": "Anzahl",
+      "total_price": "Gesamtpreis",
+      "sub_total": "Zwischensumme",
+      "tax": "Steuer(%)"
+    },
+    "additional_details": {
+      "heading": "Zusätzliche Details"
+    },
+    "contract_email_preview": {
+      "heading": "Vertrags-E-Mail-Vorschau",
+      "email": "E-Mail",
+      "content": "Inhalt",
+      "subject": "Betreff",
+      "description": "Beschreibung",
+      "attachments": "Anhänge",
+      "back_button": "Zurück",
+      "next_button": "Weiter"
+    },
+    "pdf_card_details": {
+      "heading": "Vertragsdetails",
+      "send_via_post": "Per Post senden",
+      "send_via_email": "Per E-Mail senden",
+      "contract_id": "Vertrags-ID",
+      "worker": "Arbeiter",
+      "content_name": "Inhaltsname",
+      "contract_status": "Vertragsstatus"
+    }
+  },
+  "content": {
+    "main_heading": "Inhalt",
+    "create_content": "Inhalt erstellen",
+    "add_button": "Neu hinzufügen",
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "title": "Inhaltstitel",
+      "created_on": "Erstellt am",
+      "edit": "Bearbeiten"
+    },
+    "tabs_headings": {
+      "offer_content": "Angebotsinhalt",
+      "confirmation_content": "Bestätigungsinhalt",
+      "invoice_content": "Rechnungsinhalt",
+      "receipt_content": "Quittungsinhalt"
+    },
+    "details": {
+      "offer_heading": "Angebotsinhalt",
+      "confirmation_heading": "Bestätigungsinhalt",
+      "invoice_heading": "Rechnungsinhalt",
+      "receipt_heading": "Quittungsinhalt",
+      "edit_button": "Details bearbeiten",
+      "content_name": "Inhaltsname",
+      "address_labels": "Adressetiketten",
+      "offer_title": "Angebotstitel",
+      "offer_description": "Angebotsbeschreibung",
+      "email_body": "E-Mail-Text",
+      "confirmation_title": "Bestätigungstitel",
+      "Confirmation_description": "Bestätigungsbeschreibung",
+      "invoice_title": "Rechnungstitel",
+      "invoice_description": "Rechnungsbeschreibung",
+      "receipt_title": "Quittungstitel",
+      "receipt_description": "Quittungsbeschreibung",
+      "attachments": "Anhänge",
+      "back_button": "Zurück",
+      "next_button": "Weiter",
+      "cancel_button": "Abbrechen",
+      "save_changes_button": "Änderungen speichern",
+      "save_button": "Speichern"
+    },
+    "content_created_modal": {
+      "main_heading": "Inhalt erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für das Erstellen des Angebots. Wir freuen uns, Sie dabei zu haben.",
+      "button": "Fertig"
+    }
+  },
+  "leads": {
+    "add_new_lead": "Neuen Lead hinzufügen",
+    "main_heading": "Leads",
+    "add_button": "Neu hinzufügen",
+    "side_images_heading": "Bilder",
+    "table_functions": {
+      "open": "Leads öffnen",
+      "close": "Leads schließen",
+      "expire": "Leads ablaufen"
+    },
+    "table_headings": {
+      "id": "ID",
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "desire_date": "Wunschdatum",
+      "location": "Standort",
+      "status": "Status",
+      "images": "Bilder",
+      "note": "Notizen",
+      "edit": "bearbeiten"
+    },
+    "card_content": {
+      "heading": "Lead Details",
+      "create_button": "Angebot erstellen",
+      "lead_id": "Lead-ID",
+      "status": "Status",
+      "created_date": "Erstellungsdatum",
+      "created_by": "Erstellt von"
+    },
+    "tabs_headings": {
+      "customer": "Kundendetails",
+      "address": "Adressdetails",
+      "service": "Servicedetails",
+      "additional": "Zusätzliche Details"
+    },
+    "customer_details": {
+      "heading": "Kundendetails",
+      "edit_button": "Details bearbeiten",
+      "customer": "Kunde",
+      "customer_type": "Kundentyp",
+      "full_name": "Vollständiger Name",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "company_name": "Firmenname",
+      "email_address": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "address_details": "Adressdetails",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "cancel_button": "Abbrechen",
+      "save_changes_button": "Änderungen speichern",
+      "next_button": "Weiter"
+    },
+    "address_details": {
+      "main_heading": "Adressdetails",
+      "edit_button": "Details bearbeiten",
+      "heading": "Adressdetails 1",
+      "sub_heading": "Adressdetails 2",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "description": "Beschreibung",
+      "cancel_button": "Abbrechen",
+      "save_changes_button": "Änderungen speichern",
+      "next_button": "Weiter",
+      "back_button": "Zurück"
+    },
+    "service_details": {
+      "heading": "Service-/Produktdetails",
+      "edit_button": "Details bearbeiten",
+      "required_service": "Benötigter Service",
+      "desire_date": "Wunschdatum",
+      "flexibility": "Flexibilität",
+      "availability": "Verfügbarkeit für Kontakt",
+      "prefer_contact": "Bevorzugte Kontaktaufnahme",
+      "budget": "Budget",
+      "lead_source": "Leadquelle",
+      "other_services": "Andere Dienste",
+      "save_changes_button": "Änderungen speichern",
+      "cancel_button": "Abbrechen",
+      "next_button": "Weiter",
+      "back_button": "Zurück"
+    },
+    "additional": {
+      "heading": "Zusätzliche Details",
+      "edit_button": "Details bearbeiten",
+      "save_changes_button": "Änderungen speichern",
+      "next_button": "Weiter",
+      "cancel_button": "Abbrechen",
+      "back_button": "Zurück",
+      "save_button": "Speichern"
+    },
+    "confirm_lead_modal": {
+      "main_heading": "Bitte Lead-ID bestätigen",
+      "sub_heading": "Lead-ID eingeben",
+      "cancel_button": "Abbrechen",
+      "confirm_button": "Bestätigen"
+    },
+    "leads_created_modal": {
+      "main_heading": "Lead erfolgreich erstellt",
+      "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
+      "add_button": "Bilder hinzufügen",
+      "without_images": "Ohne Bilder fortfahren"
+    }
+  },
+  "common": {
+    "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
+    "sort_button": "Sortieren nach",
+    "notes_modal": {
+      "heading": "Notizen",
+      "button": "Neue Notiz hinzufügen"
+    },
+    "add_note_modal": {
+      "heading": "Notizen hinzufügen",
+      "label": "Ihre Notiz hinzufügen",
+      "button": "Speichern"
+    },
+    "images_modal": {
+      "heading": "Bilder",
+      "title": "7 Bilder hochgeladen",
+      "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
+      "image_slider_heading": "Bildname"
+    },
+    "delete_modal": {
+      "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
+      "cancel_button": "Abbrechen",
+      "delete_button": "Löschen"
+    },
+    "are_you_sure_modal": {
+      "title": "Sind Sie sicher",
+      "sub_heading": "Sie wollen dieses Konto kostenlos machen",
+      "cancel_button": "Abbrechen",
+      "yes_button": "Ja",
+      "confirm_heading": "Bitte bestätigen Sie das Unternehmen",
+      "company_name": "Firmenname eingeben",
+      "confirm_button": "Bestätigen",
+      "success": "Erfolgreich",
+      "success_heading": "Ihr Kunde ist jetzt völlig kostenlos.",
+      "finish_button": "Fertigstellen"
+    },
+    "select_month_modal": {
+      "heading": "Monat auswählen",
+      "button": "Herunterladen",
+      "description": "Wählen Sie den Monat und die Option, um Ihre Zahlungshistorie herunterzuladen",
+      "months": {
+        "jan": "JAN",
+        "feb": "FEB",
+        "mar": "MÄR",
+        "apr": "APR",
+        "may": "MAI",
+        "jun": "JUN",
+        "jul": "JUL",
+        "aug": "AUG",
+        "sep": "SEP",
+        "oct": "OKT",
+        "nov": "NOV",
+        "dec": "DEZ"
+      }
+    },
+    "download_modal": {
+      "heading": "Download erfolgreich",
+      "sub_heading": "Großartige Arbeit beim erfolgreichen Herunterladen Ihrer Zahlungshistorie!",
+      "button": "Fertig"
+    },
+    "PDF_HEADER": {
+      "offer_no": "ANGEBOTS-NR",
+      "offer_date": "ANGEBOTSDATUM",
+      "created_by": "ERSTELLT VON",
+      "email": "E-Mail",
+      "phone": "Telefon"
+    },
+    "PDF_FOOTER": {
+      "sub_total": "Zwischensumme",
+      "tax": "Steuer%",
+      "discount": "Rabatt",
+      "grand_toal": "Gesamtsumme"
+    },
+    "PDF_BUTTONS": {
+      "back_button": "Zurück",
+      "send_via_email": "Per E-Mail senden",
+      "send_via_post": "Per Post senden"
+    }
+  },
+  "offers": {
+    "main_heading": "Angebote",
+    "add_button": "Neu Hinzufügen",
+    "table_functions": {
+      "open": "Öffnen",
+      "signed": "Unterzeichnet",
+      "expire": "Abgelaufen",
+      "rejected": "Abgelehnt"
+    },
+    "table_headings": {
+      "id": "ID",
+      "customer": "Kunde",
+      "title": "Angebotstitel",
+      "total_price": "Gesamtpreis",
+      "created_on": "Erstellt am",
+      "email": "E-Mail",
+      "payment": "Zahlung",
+      "status": "Status",
+      "images": "Bilder",
+      "note": "Notizen",
+      "edit": "bearbeiten"
+    },
+    "card_content": {
+      "main_heading": "Angebotsdetails",
+      "send_button": "E-Mail senden",
+      "offer_id": "Angebots-ID",
+      "offer_title": "Angebotstitel",
+      "worker": "Mitarbeiter",
+      "created_date": "Erstellungsdatum",
+      "service_date": "Servicedatum",
+      "email_status": "E-Mail-Status",
+      "payment_method": "Zahlungsmethode",
+      "status": "Status",
+      "notes": "Notizen",
+      "images": "Bilder"
+    },
+    "tabs_heading": {
+      "offer": "Angebotsdetails",
+      "address": "Adressdetails",
+      "service": "Service-Details",
+      "additional": "Zusätzliche Details"
+    },
+    "detail_buttons": {
+      "activity": "Aktivität",
+      "discount": "Rabatt"
+    },
+    "offer_details": {
+      "heading": "Angebotsdetails",
+      "edit_button": "Details bearbeiten",
+      "customer_type": "Kundentyp",
+      "full_name": "Ihr Name",
+      "company_name": "Firmenname",
+      "email_address": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "customer_address": "Kundenadresse",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "select_customer": "Kunden auswählen",
+      "customer_name": "Kundenname",
+      "email": "E-Mail",
+      "offer_title": "Angebotstitel",
+      "offer_number": "Angebotsnummer",
+      "date": "Datum",
+      "cancel_button": "Abbrechen",
+      "save_button": "Speichern",
+      "next_button": "Weiter"
+    },
+    "address_details": {
+      "main_heading": "Adressdetails",
+      "edit_button": "Details bearbeiten",
+      "heading": "Details zu Adresse 1",
+      "sub_heading": "Details zu Adresse 2",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "description": "Beschreibung",
+      "cancel_button": "Abbrechen",
+      "save_button": "Speichern",
+      "add_button": "Neue Adresse hinzufügen",
+      "back_button": "Zurück",
+      "next_button": "Weiter"
+    },
+    "service_details": {
+      "main_heading": "Service-/Produktdetails",
+      "edit_button": "Details bearbeiten",
+      "price": "Preis",
+      "detail_headings": {
+        "title": "Service-/Produkttitel",
+        "description": "Beschreibung",
+        "price": "Preis (CHF)",
+        "unit": "Einheit",
+        "count": "Anzahl",
+        "total_price": "Gesamtpreis",
+        "grand_total": "Gesamtsumme",
+        "sub_total": "Zwischensumme",
+        "tax": "Steuer%"
+      },
+      "service_name": "Dienstname",
+      "service_type": "Diensttyp",
+      "discount_description": "Rabattbeschreibung",
+      "add_button": "Neuen Service hinzufügen",
+      "cancel_button": "Abbrechen",
+      "save_button": "Speichern",
+      "back_button": "Zurück",
+      "next_button": "Weiter"
+    },
+    "additional_details": {
+      "main_heading": "Zusätzliche Details",
+      "edit_button": "Details bearbeiten",
+      "cancel_button": "Abbrechen",
+      "save_button": "Speichern",
+      "choose": "Aus Vorhandenem auswählen",
+      "add_new": "Neu hinzufügen",
+      "back_button": "Zurück"
+    },
+    "side_images": {
+      "heading": "Bilder",
+      "views": "Mehr anzeigen",
+      "upload_button": "Hochladen"
+    },
+    "share_images_modal": {
+      "heading": "Bilder teilen",
+      "sub_heading": "Bilder auf teilen",
+      "link": "Oder Link kopieren",
+      "copy_button": "Kopieren",
+      "copied_button": "Kopiert"
+    },
+    "are_you_modal": {
+      "main_heading": "Sind Sie sicher",
+      "sub_heading": "Ein Datensatz existiert bereits für diesen Kunden. Möchten Sie trotzdem ein neues Angebot erstellen?",
+      "yes_button": "Ja",
+      "cancel_button": "Abbrechen"
+    },
+    "offer_created_modal": {
+      "main_heading": "Angebot erfolgreich erstellt",
+      "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
+      "button": "Fertig"
+    }
+  },
+  "pdf_preview": {
+    "card_content": {
+      "heading": "Solar EEG",
+      "send_mail": "E-Mail senden",
+      "offer_id": "Angebots-ID",
+      "email_status": "E-Mail-Status"
+    },
+    "pdf_header": {
+      "offer_no": "ANGEBOTS-NR",
+      "Offer_date": "ANGEBOTSDATUM",
+      "created_by": "ERSTELLT VON"
+    },
+    "email": "E-MAIL",
+    "phone": "TELEFON",
+    "address_one": "ADRESSE 1",
+    "address_two": "ADRESSE 2",
+    "work_date": "ARBEITSDATUM",
+    "sub_total": "Zwischensumme",
+    "tax": "Steuer%",
+    "place": "Ort - Datum",
+    "signature": "Unterschrift",
+    "discount": "Rabatt",
+    "service_headings": {
+      "product": "Service / Produkt",
+      "price": "PREIS",
+      "unit": "EINHEIT",
+      "count": "ANZAHL",
+      "total": "GESAMT"
+    }
+  },
+  "admin": {
+    "main_heading": "Super Admin",
+    "overview": {
+      "main_heading": "Übersicht",
+      "subscriber": "Aktive Abonnenten",
+      "companies": "Anstehende Unternehmen",
+      "customers": "Kunden",
+      "plans": "Pläne",
+      "sales_report": {
+        "heading": "Verkaufsbericht",
+        "twelve_months": "12 Monate",
+        "six": "6 Monate",
+        "thirty_day": "30 Tage",
+        "seven_days": "7 Tage"
+      },
+      "months_name": {
+        "feb": "Feb",
+        "mar": "Mär",
+        "apr": "Apr",
+        "may": "Mai",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Okt",
+        "nov": "Nov",
+        "dec": "Dez",
+        "jan": "Jan"
+      }
+    },
+    "customers_details": {
+      "main_heading": "Kundenmanagement",
+      "table_functions": {
+        "active": "Aktiv",
+        "block": "Blockiert",
+        "sort": "Sortieren nach"
+      },
+      "table_headings": {
+        "id": "ID",
+        "logo": "Logo",
+        "company_name": "Firmenname",
+        "customer_name": "Kundenname",
+        "email": "E-Mail",
+        "plans": "Pläne",
+        "status": "Status",
+        "login": "Anmelden"
+      },
+      "card_content": {
+        "main_heading": "Kundendetails",
+        "make_button": "Unendlich machen",
+        "customer_id": "Kunden-ID",
+        "role": "Rolle",
+        "no_of_employee": "Anzahl der Mitarbeiter",
+        "plan": "Plan",
+        "subscription_date": "Abonnementdatum",
+        "status": "Status",
+        "company_logo": "Firmenlogo",
+        "customer_status": {
+          "active": "Aktiv",
+          "block": "Blockieren"
+        },
+        "customer_free": "Ihr Kunde ist jetzt völlig frei."
+      },
+      "customer_details": {
+        "owner_name": "Inhabername",
+        "company_name": "Firmenname",
+        "email_address": "E-Mail-Adresse",
+        "created_on": "Erstellt am",
+        "mobile_number": "Handynummer",
+        "phone_number": "Telefonnummer",
+        "sub_heading": "Adressdetails",
+        "street_no": "Straßennummer",
+        "post_code": "Postleitzahl",
+        "country": "Land"
+      }
+    },
+    "plans_management": {
+      "main_heading": "Pläne Verwaltung",
+      "add_button": "Neu hinzufügen",
+      "id": "ID",
+      "plan_name": "Pläne",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "employees": "Mitarbeiter",
+      "delete": "Löschen"
+    },
+    "plan_details": {
+      "detail_heading": "Pläne Details",
+      "add_heading": "Neuen Plan hinzufügen",
+      "plans_name": "Planname",
+      "pricing": "Preisgestaltung Monatlich",
+      "annually_discount": "Jährlicher Rabatt(%)",
+      "number_of_employees": "Anzahl der Mitarbeiter",
+      "no_of_request": "Anzahl der Anfragen",
+      "description": "Beschreibung",
+      "accounting": "Buchhaltungsberichte",
+      "customize_email": "E-Mails anpassen",
+      "watermark": "Wasserzeichen",
+      "api_feature": "API-Funktion",
+      "back_button": "Zurück",
+      "edit_button": "Bearbeiten",
+      "save_button": "Speichern"
+    },
+    "payment_history": {
+      "heading": "Zahlungshistorie",
+      "table_headings": {
+        "id": "ID",
+        "company_name": "Firmenname",
+        "owner_name": "Name des Inhabers",
+        "plans": "Pläne",
+        "pricing": "Preisgestaltung",
+        "payments": "Zahlungen",
+        "subscribed_at": "Abonniert am",
+        "status": "Status"
+      }
+    },
+    "support_requests": {
+      "heading": "Supportanfragen",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Kundenname",
+        "email_address": "E-Mail-Adresse",
+        "phone_number": "Telefonnummer",
+        "request_date": "Anfragedatum",
+        "status": "Status"
+      },
+      "card_content": {
+        "heading": "Anfragedetails",
+        "button": "Kundendetails",
+        "customer_id": "Kunden-ID",
+        "request_date": "Anfragedatum",
+        "status": "Status"
+      },
+      "details": {
+        "name": "Name",
+        "company_name": "Firmenname",
+        "email_address": "E-Mail-Adresse",
+        "mobile_number": "Handynummer",
+        "reason_of_contact": "Kontaktgrund",
+        "message": "Nachricht"
+      }
+    },
+    "settings": {
+      "main_heading": "Kontoeinstellung",
+      "tabs_heading": {
+        "account": "Kontoeinstellung",
+        "payment": "Zahlungseinstellung",
+        "mail": "Mail-Einstellung"
       },
       "account_setting": {
-        "public_info": "Öffentliche Informationen",
         "full_name": "Vollständiger Name",
         "email": "E-Mail",
-        "company_name": "Firmenname",
-        "phone_number": "Telefonnummer",
-        "mobile_number": "Handynummer",
-        "website": "Webseite",
-        "mwst_number": "MWST-Nummer (Optional)",
-        "private_info": "Private Informationen",
-        "street_address": "Straßenadresse",
-        "post_code": "Postleitzahl",
-        "country": "Land",
-        "bank_name": "Bankname",
-        "account_no": "Kontonummer",
-        "iban_number": "IBAN-Nummer",
-        "change_password": "Passwort ändern",
-        "change": "Ändern",
-        "restore_button": "Standard wiederherstellen",
+        "update_password": "Passwort aktualisieren",
+        "old_password": "Altes Passwort",
+        "new_password": "Neues Passwort",
+        "confirm_password": "Passwort bestätigen",
         "save_changes_button": "Änderungen speichern"
       },
-      "change_password_modal": {
-        "old_password": "Altes Passwort",
-        "new_pasword": "Neues Passwort erstellen",
-        "confirm_password": "Passwort bestätigen",
-        "change_button": "Ändern"
+      "payment_setting": {
+        "heading": "Stripe-Einstellung",
+        "pub_key": "Öffentlicher Schlüssel*",
+        "search_key": "Suchschlüssel*",
+        "test_mode": "Testmodus",
+        "active": "Aktiv",
+        "save_changes_button": "Änderungen speichern"
       },
-      "system_setting": {
-        "tax": "Steuer",
-        "add_button": "Neu hinzufügen",
-        "invoice_over_due": "Rechnung überfällig",
-        "invoice_days_limit": "Frist für überfällige Rechnungen",
-        "currency": "Währung",
-        "connect_with_buro": "Mit Buro verbinden",
-        "description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's besuchen unsere",
-        "allowed_domain": "Erlaubte Domäne",
-        "security_token": "Sicherheitstoken",
-        "tabs_tax": {
-          "no_tax": "Keine Steuer",
-          "inclusive_tax": "Inklusive Steuer",
-          "exclusive_tax": "Exklusive Steuer"
-        }
-      },
-      "tax_modal": {
-        "exclusive_heading": "Exklusive Steuer",
-        "add_new_tax": "Neue Steuer hinzufügen",
-        "name": "Name",
-        "tax_rate": "Steuerquote (%)",
-        "button": "Steuer hinzufügen"
-      },
-      "templates": {
-        "heading": "Aktuelle PDF-Designvorlagen",
-        "change_button": "Ändern",
-        "first_col_heading": {
-          "heading": "Erste Spalte",
-          "company_name": "Firmenname",
+      "mail_setting": {
+        "heading": "Eigene Mail-Konfiguration verwenden",
+        "mail_form_fields": {
+          "mail_driver": "Mail-Treiber",
+          "mail_host": "Mail-Host",
+          "mail_port": "Mail-Port",
+          "mail_encryption": "Mail-Verschlüsselung",
+          "mail_user": "E-Mail Benutzername",
+          "mail_password": "E-Mail Passwort",
+          "mail_from_address": "Absenderadresse",
+          "mail_from_name": "Name des Absenders",
           "email": "E-Mail",
-          "phone_number": "Telefonnummer",
-          "website": "Webseite",
-          "mwst_number": "MWST-Nummer"
-        },
-        "second_column": {
-          "heading": "Zweite Spalte",
-          "street_no": "Straßennummer",
-          "post_code": "Postleitzahl",
-          "bank_name": "Bankname",
-          "account_number": "Kontonummer",
-          "iban_number": "IBAN-Nummer"
-        },
-        "third_column": {
-          "third_column_heading": "Dritte Spalte",
-          "fourth_column_heading": "Vierte Spalte",
-          "row_one": "Zeile 1",
-          "row_two": "Zeile 2",
-          "row_three": "Zeile 3",
-          "row_fourth": "Zeile 4",
-          "row_fifth": "Zeile 5"
-        }
-      },
-      "follow_up_setting": {
-        "on_offer_expire": "Nachverfolgung bei Ablauf des Angebots erstellen",
-        "on_lead_create": "Nachverfolgung bei Lead-Erstellung erstellen",
-        "add_follow_up": {
-          "heading": "Gründe für die Nachverfolgung",
-          "add_label": "Gründe hinzufügen",
-          "add_button": "Grund hinzufügen"
-        }
-      },
-      "billing": {
-        "heading": "Aktueller Plan",
-        "payment_method": "Zahlungsmethode",
-        "next_renew": "Nächste Erneuerung 24. September 2018",
-        "card_type": "Visa",
-        "package_name": "Silber",
-        "package_description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's",
-        "request_services": {
-          "heading": "Anfrage",
-          "managers": "Manager",
-          "account_reports": "Kontoauszüge",
-          "customize_email": "E-Mail anpassen",
-          "watermark": "Mit Wasserzeichen",
-          "features": "API-Funktionen",
-          "change_button": "Mitgliedschaft ändern"
-        },
-        "payment_history": {
-          "main_heading": "Zahlungsverlauf",
-          "setting": "Einstellung",
-          "amount": "Betrag",
-          "date": "Datum",
-          "status": "Status"
-        },
-        "upgrade_card": {
-          "heading": "Auf Gold-Mitgliedschaft upgraden!",
-          "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen. smith amit dolem isplum sumip alpsum Lorem ipsum.",
-          "button": "Upgraden"
-        },
-        "edit_payment_modal": {
-          "heading": "Zahlungsdetails bearbeiten",
-          "sub_heading": "Wir stellen automatisch am 1. jeden Monats in Rechnung",
-          "package_name": "Silber",
-          "name": "Name auf der Karte",
-          "expire": "Ablaufdatum",
-          "card_number": "Kartennummer",
-          "cvv": "CVV",
-          "cancel_button": "Abbrechen",
-          "save_changes_button": "Änderungen speichern"
-        },
-        "mail_setting": {
-          "system_config": "System-Mail-Konfiguration verwenden",
-          "own_config": "Eigene Mail-Konfiguration verwenden",
-          "mail_form_fields": {
-            "mail_driver": "Mail-Treiber",
-            "mail_host": "Mail-Host",
-            "mail_port": "Mail-Port",
-            "mail_encryption": "Mail-Verschlüsselung",
-            "mail_user": "Mail-Benutzername",
-            "mail_password": "Mail-Passwort",
-            "mail_address": "Mail-Absenderadresse",
-            "mail_name": "Mail-Absendername",
-            "email": "E-Mail",
-            "mail_description": "Geben Sie die E-Mail-Adresse ein, um die Test-E-Mail der Mail-Konfiguration zu erhalten."
-          }
-        },
-        "invoice": {
-          "main_heading": "Rechnung",
-          "table_functions": {
-            "open": "Öffnen",
-            "overdue": "Überfällig",
-            "paid": "Bezahlt"
-          },
-          "table_headings": {
-            "id": "ID",
-            "customer": "Kunde",
-            "title": "Rechnungstitel",
-            "price": "Gesamtpreis",
-            "email_status": "E-Mail-Status",
-            "paid": "Bezahlt",
-            "status": "Status",
-            "notes": "Notizen"
-          },
-          "card_content": {
-            "heading": "Rechnungsdetails",
-            "invoice_id": "Rechnungs-ID",
-            "title": "Rechnungstitel",
-            "total_amount": "Gesamtbetrag",
-            "contract_id": "Vertrags-ID",
-            "worker": "Arbeiter",
-            "status": "E-Mail-Status",
-            "paid_amount": "Bezahlter Betrag",
-            "offer_id": "Angebots-ID",
-            "created_date": "Erstellungsdatum",
-            "notes": "Notizen",
-            "unpaid_amount": "Unbezahlter Betrag"
-          },
-          "invoice_table_heading": {
-            "id": "ID",
-            "customer": "Kunde",
-            "title": "Rechnungstitel",
-            "issue_date": "Ausstellungsdatum",
-            "amount": "Betrag",
-            "email_status": "E-Mail-Status",
-            "payment": "Zahlung",
-            "status": "Status"
-          },
-          "receipt_table_heading": {
-            "id": "ID",
-            "customer": "Kunde",
-            "title": "Rechnungstitel",
-            "paid_date": "Zahlungsdatum",
-            "amount": "Betrag",
-            "invoice": "Rechnung",
-            "email_status": "E-Mail-Status",
-            "payment": "Zahlung"
-          },
-          "create_invoice_modal": {
-            "total_amount": "Gesamtbetrag",
-            "remaining_amount": "Verbleibender Betrag",
-            "enter_amount": "Betrag eingeben",
-            "amount": "Betrag",
-            "percentage": "Prozentsatz",
-            "payment_method": "Zahlungsmethode",
-            "mark_it_recuring": "Als wiederkehrend markieren",
-            "date_of_invoice": "Datum der nächsten Rechnung",
-            "frequency": "Häufigkeit",
-            "update_invoice": "Rechnung bearbeiten",
-            "button": "Rechnung erstellen",
-            "recurring_button": "Wiederkehrende Rechnung erstellen"
-          },
-          "invoice_created_modal": {
-            "main_heading": "Rechnung erfolgreich erstellt",
-            "sub_heading": "Danke, dass Sie eine Rechnung erstellt haben. Wir freuen uns, Sie zu haben.",
-            "button": "PDF-Vorschau"
-          }
-        },
-        "contracts": {
-          "main_heading": "Verträge",
-          "table_functions": {
-            "open": "Öffnen",
-            "confirm": "Bestätigt",
-            "cancel": "Abgebrochen"
-          },
-          "table_headings": {
-            "id": "ID",
-            "title": "Vertragstitel",
-            "customer": "Kunde",
-            "total_price": "Gesamtpreis",
-            "created_on": "Erstellt am",
-            "payment": "Zahlung",
-            "status": "Status",
-            "images": "Bilder",
-            "notes": "Notizen"
-          },
-          "card_content": {
-            "heading": "Vertragsdetails",
-            "confirm_button": "Bestätigung senden",
-            "contract_id": "Vertrags-ID",
-            "offer_title": "Angebotstitel",
-            "contract_email_preview": {
-              "heading": "Vertrags-E-Mail Vorschau",
-              "email": "E-Mail",
-              "content": "Inhalt",
-              "subject": "Betreff",
-              "description": "Beschreibung",
-              "attachments": "Anhänge",
-              "back_button": "Zurück",
-              "next_button": "Weiter"
-            },
-            "pdf_card_details": {
-              "heading": "Vertragsdetails",
-              "send_via_post": "Per Post senden",
-              "send_via_email": "Per E-Mail senden",
-              "contract_id": "Vertrags-ID",
-              "worker": "Arbeiter",
-              "content_name": "Inhaltsname",
-              "contract_status": "Vertragsstatus"
-            },
-            "content": {
-              "main_heading": "Inhalt",
-              "add_button": "Neu hinzufügen",
-              "table_headings": {
-                "id": "ID",
-                "name": "Name",
-                "title": "Inhaltstitel",
-                "created_on": "Erstellt am",
-                "edit": "Bearbeiten"
-              },
-              "tabs_headings": {
-                "offer_content": "Angebotsinhalt",
-                "confirmation_content": "Bestätigungsinhalt",
-                "invoice_content": "Rechnungsinhalt",
-                "receipt_content": "Quittungsinhalt"
-              },
-              "details": {
-                "offer_heading": "Angebotsinhalt",
-                "confirmation_heading": "Bestätigungsinhalt",
-                "invoice_heading": "Rechnungsinhalt",
-                "receipt_heading": "Quittungsinhalt",
-                "edit_button": "Details bearbeiten",
-                "content_name": "Inhaltsname",
-                "address_labels": "Adressetiketten",
-                "offer_title": "Angebotstitel",
-                "offer_description": "Angebotsbeschreibung",
-                "email_body": "E-Mail-Inhalt",
-                "confirmation_title": "Bestätigungstitel",
-                "Confirmation_description": "Bestätigungsbeschreibung",
-                "invoice_title": "Rechnungstitel",
-                "invoice_description": "Rechnungsbeschreibung",
-                "receipt_title": "Quittungstitel",
-                "receipt_description": "Quittungsbeschreibung",
-                "attachments": "Anhänge",
-                "back_button": "Zurück",
-                "next_button": "Weiter",
-                "cancel_button": "Abbrechen",
-                "save_changes_button": "Änderungen speichern",
-                "save_button": "Speichern"
-              },
-              "content_created_modal": {
-                "main_heading": "Inhalt erfolgreich erstellt",
-                "sub_heading": "Danke für das Erstellen des Angebots, wir freuen uns, Sie zu haben.",
-                "button": "Fertig"
-              }
-            },
-            "leads": {
-              "add_new_lead": "Neuen Lead hinzufügen",
-              "main_heading": "Leads",
-              "add_button": "Neu hinzufügen",
-              "side_images_heading": "Bilder",
-              "table_functions": {
-                "open": "Leads öffnen",
-                "close": "Leads schließen",
-                "expire": "Leads ablaufen"
-              },
-              "table_headings": {
-                "id": "ID",
-                "name": "Name",
-                "email": "E-Mail",
-                "phone": "Telefon",
-                "desire_date": "Wunschdatum",
-                "location": "Standort",
-                "status": "Status",
-                "images": "Bilder",
-                "note": "Notizen"
-              },
-              "card_content": {
-                "heading": "Lead Details",
-                "create_button": "Angebot erstellen",
-                "lead_id": "Lead-ID",
-                "status": "Status",
-                "created_date": "Erstellungsdatum",
-                "created_by": "Erstellt von"
-              },
-              "tabs_headings": {
-                "customer": "Kundendetails",
-                "address": "Adressdetails",
-                "service": "Servicedetails",
-                "additional": "Zusätzliche Details"
-              },
-              "customer_details": {
-                "heading": "Kundendetails",
-                "edit_button": "Details bearbeiten",
-                "customer": "Kunde",
-                "customer_type": "Kundentyp",
-                "full_name": "Vollständiger Name",
-                "first_name": "Vorname",
-                "last_name": "Nachname",
-                "company_name": "Firmenname",
-                "email_address": "E-Mail-Adresse",
-                "phone_number": "Telefonnummer",
-                "mobile_number": "Handynummer",
-                "address_details": "Adressdetails",
-                "street_no": "Straßennummer",
-                "post_code": "Postleitzahl",
-                "country": "Land",
-                "cancel_button": "Abbrechen",
-                "save_changes_button": "Änderungen speichern",
-                "next_button": "Weiter"
-              },
-              "address_details": {
-                "main_heading": "Adressdetails",
-                "edit_button": "Details bearbeiten",
-                "heading": "Adressdetails 1",
-                "sub_heading": "Adressdetails 2",
-                "street_no": "Straßennummer",
-                "post_code": "Postleitzahl",
-                "country": "Land",
-                "description": "Beschreibung",
-                "cancel_button": "Abbrechen",
-                "save_changes_button": "Änderungen speichern",
-                "next_button": "Weiter",
-                "back_button": "Zurück"
-              },
-              "service_details": {
-                "heading": "Service-/Produktdetails",
-                "edit_button": "Details bearbeiten",
-                "required_service": "Benötigter Service",
-                "desire_date": "Wunschdatum",
-                "flexibility": "Flexibilität",
-                "availability": "Verfügbarkeit für Kontakt",
-                "prefer_contact": "Bevorzugte Kontaktaufnahme",
-                "budget": "Budget",
-                "lead_source": "Leadquelle",
-                "other_services": "Andere Dienste",
-                "save_changes_button": "Änderungen speichern",
-                "cancel_button": "Abbrechen",
-                "next_button": "Weiter",
-                "back_button": "Zurück"
-              },
-              "additional": {
-                "heading": "Zusätzliche Details",
-                "edit_button": "Details bearbeiten",
-                "save_changes_button": "Änderungen speichern",
-                "next_button": "Weiter",
-                "cancel_button": "Abbrechen",
-                "back_button": "Zurück",
-                "save_button": "Speichern"
-              },
-              "confirm_lead_modal": {
-                "main_heading": "Bitte Lead-ID bestätigen",
-                "sub_heading": "Lead-ID eingeben",
-                "cancel_button": "Abbrechen",
-                "confirm_button": "Bestätigen"
-              },
-              "leads_created_modal": {
-                "main_heading": "Lead erfolgreich erstellt",
-                "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
-                "add_button": "Bilder hinzufügen",
-                "without_images": "Ohne Bilder fortfahren"
-              }
-            },
-            "common": {
-              "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
-              "notes_modal": {
-                "heading": "Notizen",
-                "button": "Neue Notiz hinzufügen"
-              },
-              "add_note_modal": {
-                "heading": "Notizen hinzufügen",
-                "label": "Ihre Notiz hinzufügen",
-                "button": "Speichern"
-              },
-              "images_modal": {
-                "heading": "Bilder",
-                "title": "7 Bilder hochgeladen",
-                "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
-                "image_slider_heading": "Bildname"
-              },
-              "delete_modal": {
-                "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
-                "cancel_button": "Abbrechen",
-                "delete_button": "Löschen"
-              },
-              "are_you_sure_modal": {
-                "title": "Sind Sie sicher",
-                "sub_heading": "Sie wollen dieses Konto kostenlos machen",
-                "cancel_button": "Abbrechen",
-                "yes_button": "Ja",
-                "confirm_heading": "Bitte bestätigen Sie das Unternehmen",
-                "company_name": "Firmenname eingeben",
-                "confirm_button": "Bestätigen",
-                "success": "Erfolgreich",
-                "success_heading": "Ihr Kunde ist jetzt völlig kostenlos.",
-                "finish_button": "Fertigstellen"
-              },
-              "select_month_modal": {
-                "heading": "Monat auswählen",
-                "button": "Herunterladen",
-                "description": "Wählen Sie den Monat und die Option, um Ihre Zahlungshistorie herunterzuladen",
-                "months": {
-                  "jan": "JAN",
-                  "feb": "FEB",
-                  "mar": "MÄR",
-                  "apr": "APR",
-                  "may": "MAI",
-                  "jun": "JUN",
-                  "jul": "JUL",
-                  "aug": "AUG",
-                  "sep": "SEP",
-                  "oct": "OKT",
-                  "nov": "NOV",
-                  "dec": "DEZ"
-                }
-              },
-              "download_modal": {
-                "heading": "Download erfolgreich",
-                "sub_heading": "Großartige Arbeit beim erfolgreichen Herunterladen Ihrer Zahlungshistorie!",
-                "button": "Fertig"
-              },
-              "PDF_HEADER": {
-                "offer_no": "ANGEBOTS-NR",
-                "offer_date": "ANGEBOTSDATUM",
-                "created_by": "ERSTELLT VON",
-                "email": "E-Mail",
-                "phone": "Telefon"
-              },
-              "PDF_FOOTER": {
-                "sub_total": "Zwischensumme",
-                "tax": "Steuer%",
-                "discount": "Rabatt",
-                "grand_toal": "Gesamtsumme"
-              },
-              "PDF_BUTTONS": {
-                "back_button": "Zurück",
-                "send_via_email": "Per E-Mail senden",
-                "send_via_post": "Per Post senden"
-              }
-            },
-            "offers": {
-              "main_heading": "Angebote",
-              "add_button": "Neu Hinzufügen",
-              "table_functions": {
-                "open": "Öffnen",
-                "signed": "Unterzeichnet",
-                "expire": "Abgelaufen",
-                "rejected": "Abgelehnt"
-              },
-              "table_headings": {
-                "id": "ID",
-                "customer": "Kunde",
-                "title": "Angebotstitel",
-                "total_price": "Gesamtpreis",
-                "created_on": "Erstellt am",
-                "email": "E-Mail",
-                "payment": "Zahlung",
-                "status": "Status",
-                "images": "Bilder",
-                "note": "Notizen"
-              },
-              "card_content": {
-                "main_heading": "Angebotsdetails",
-                "send_button": "E-Mail senden",
-                "offer_id": "Angebots-ID",
-                "offer_title": "Angebotstitel",
-                "worker": "Mitarbeiter",
-                "created_date": "Erstellungsdatum",
-                "service_date": "Servicedatum",
-                "email_status": "E-Mail-Status",
-                "payment_method": "Zahlungsmethode",
-                "status": "Status",
-                "notes": "Notizen",
-                "images": "Bilder"
-              },
-              "tabs_heading": {
-                "offer": "Angebotsdetails",
-                "address": "Adressdetails",
-                "service": "Service-/Produktdetails",
-                "additional": "Zusätzliche Details"
-              },
-              "detail_buttons": {
-                "activity": "Aktivität",
-                "discount": "Rabatt"
-              },
-              "offer_details": {
-                "heading": "Angebotsdetails",
-                "edit_button": "Details bearbeiten",
-                "customer_type": "Kundentyp",
-                "full_name": "Ihr Name",
-                "company_name": "Firmenname",
-                "email_address": "E-Mail-Adresse",
-                "phone_number": "Telefonnummer",
-                "mobile_number": "Handynummer",
-                "customer_address": "Kundenadresse",
-                "street_no": "Straßennummer",
-                "post_code": "Postleitzahl",
-                "country": "Land",
-                "select_customer": "Kunden auswählen",
-                "customer_name": "Kundenname",
-                "email": "E-Mail",
-                "offer_title": "Angebotstitel",
-                "offer_number": "Angebotsnummer",
-                "date": "Datum",
-                "cancel_button": "Abbrechen",
-                "save_button": "Speichern",
-                "next_button": "Weiter"
-              },
-              "address_details": {
-                "main_heading": "Adressdetails",
-                "edit_button": "Details bearbeiten",
-                "heading": "Details zu Adresse 1",
-                "sub_heading": "Details zu Adresse 2",
-                "street_no": "Straßennummer",
-                "post_code": "Postleitzahl",
-                "country": "Land",
-                "description": "Beschreibung",
-                "cancel_button": "Abbrechen",
-                "save_button": "Speichern",
-                "add_button": "Neue Adresse hinzufügen",
-                "back_button": "Zurück",
-                "next_button": "Weiter"
-              },
-              "service_details": {
-                "main_heading": "Service-/Produktdetails",
-                "edit_button": "Details bearbeiten",
-                "price": "Preis",
-                "detail_headings": {
-                  "title": "Service-/Produkttitel",
-                  "description": "Beschreibung",
-                  "price": "Preis (CHF)",
-                  "unit": "Einheit",
-                  "count": "Anzahl",
-                  "total_price": "Gesamtpreis",
-                  "grand_total": "Gesamtsumme",
-                  "sub_total": "Zwischensumme",
-                  "tax": "Steuer%"
-                },
-                "service_name": "Dienstname",
-                "service_type": "Diensttyp",
-                "discount_description": "Rabattbeschreibung",
-                "add_button": "Neuen Service hinzufügen",
-                "cancel_button": "Abbrechen",
-                "save_button": "Speichern",
-                "back_button": "Zurück",
-                "next_button": "Weiter"
-              },
-              "additional_details": {
-                "main_heading": "Zusätzliche Details",
-                "edit_button": "Details bearbeiten",
-                "cancel_button": "Abbrechen",
-                "save_button": "Speichern",
-                "choose": "Aus Vorhandenem auswählen",
-                "add_new": "Neu hinzufügen",
-                "back_button": "Zurück"
-              },
-              "side_images": {
-                "heading": "Bilder",
-                "views": "Mehr anzeigen",
-                "upload_button": "Hochladen"
-              },
-              "share_images_modal": {
-                "heading": "Bilder teilen",
-                "sub_heading": "Bilder auf teilen",
-                "link": "Oder Link kopieren",
-                "copy_button": "Kopieren",
-                "copied_button": "Kopiert"
-              },
-              "are_you_modal": {
-                "main_heading": "Sind Sie sicher",
-                "sub_heading": "Ein Datensatz existiert bereits für diesen Kunden. Möchten Sie trotzdem ein neues Angebot erstellen?",
-                "yes_button": "Ja",
-                "cancel_button": "Abbrechen"
-              },
-              "offer_created_modal": {
-                "main_heading": "Angebot erfolgreich erstellt",
-                "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
-                "button": "Fertig"
-              },
-              "pdf_preview": {
-                "card_content": {
-                  "heading": "Solar EEG",
-                  "send_mail": "E-Mail senden",
-                  "offer_id": "Angebots-ID",
-                  "email_status": "E-Mail-Status"
-                },
-                "pdf_header": {
-                  "offer_no": "ANGEBOTS-NR",
-                  "Offer_date": "ANGEBOTSDATUM",
-                  "created_by": "ERSTELLT VON"
-                },
-                "email": "E-MAIL",
-                "phone": "TELEFON",
-                "address_one": "ADRESSE 1",
-                "address_two": "ADRESSE 2",
-                "work_date": "ARBEITSDATUM",
-                "sub_total": "Zwischensumme",
-                "tax": "Steuer%",
-                "place": "Ort - Datum",
-                "signature": "Unterschrift",
-                "discount": "Rabatt",
-                "service_headings": {
-                  "product": "Service / Produkt",
-                  "price": "PREIS",
-                  "unit": "EINHEIT",
-                  "count": "ANZAHL",
-                  "total": "GESAMT"
-                }
-              },
-              "admin": {
-                "main_heading": "Super Admin",
-                "overview": {
-                  "main_heading": "Übersicht",
-                  "subscriber": "Aktive Abonnenten",
-                  "companies": "Anstehende Unternehmen",
-                  "customers": "Kunden",
-                  "plans": "Pläne",
-                  "sales_report": {
-                    "heading": "Verkaufsbericht",
-                    "twelve_months": "12 Monate",
-                    "six": "6 Monate",
-                    "thirty_day": "30 Tage",
-                    "seven_days": "7 Tage"
-                  },
-                  "months_name": {
-                    "feb": "Feb",
-                    "mar": "Mär",
-                    "apr": "Apr",
-                    "may": "Mai",
-                    "jun": "Jun",
-                    "jul": "Jul",
-                    "aug": "Aug",
-                    "sep": "Sep",
-                    "oct": "Okt",
-                    "nov": "Nov",
-                    "dec": "Dez",
-                    "jan": "Jan"
-                  }
-                },
-                "customers_details": {
-                  "main_heading": "Kundenmanagement",
-                  "table_functions": {
-                    "active": "Aktiv",
-                    "block": "Blockiert",
-                    "sort": "Sortieren nach"
-                  },
-                  "table_headings": {
-                    "id": "ID",
-                    "logo": "Logo",
-                    "company_name": "Firmenname",
-                    "customer_name": "Kundenname",
-                    "email": "E-Mail",
-                    "plans": "Pläne",
-                    "status": "Status",
-                    "login": "Anmelden"
-                  },
-                  "card_content": {
-                    "main_heading": "Kundendetails",
-                    "make_button": "Unendlich machen",
-                    "customer_id": "Kunden-ID",
-                    "role": "Rolle",
-                    "no_of_employee": "Anzahl der Mitarbeiter",
-                    "plan": "Plan",
-                    "subscription_date": "Abonnementdatum",
-                    "status": "Status",
-                    "company_logo": "Firmenlogo",
-                    "customer_status": {
-                      "active": "Aktiv",
-                      "block": "Blockieren"
-                    },
-                    "customer_free": "Ihr Kunde ist jetzt völlig frei."
-                  },
-                  "customer_details": {
-                    "owner_name": "Inhabername",
-                    "company_name": "Firmenname",
-                    "email_address": "E-Mail-Adresse",
-                    "created_on": "Erstellt am",
-                    "mobile_number": "Handynummer",
-                    "phone_number": "Telefonnummer",
-                    "sub_heading": "Adressdetails",
-                    "street_no": "Straßennummer",
-                    "post_code": "Postleitzahl",
-                    "country": "Land"
-                  },
-                  "plans_management": {
-                    "main_heading": "Pläne Verwaltung",
-                    "add_button": "Neu hinzufügen",
-                    "id": "ID",
-                    "plan_name": "Pläne",
-                    "description": "Beschreibung",
-                    "price": "Preis",
-                    "employees": "Mitarbeiter",
-                    "delete": "Löschen"
-                  },
-                  "plan_details": {
-                    "detail_heading": "Pläne Details",
-                    "add_heading": "Neuen Plan hinzufügen",
-                    "plans_name": "Planname",
-                    "pricing": "Preisgestaltung Monatlich",
-                    "annually_discount": "Jährlicher Rabatt(%)",
-                    "number_of_employees": "Anzahl der Mitarbeiter",
-                    "no_of_request": "Anzahl der Anfragen",
-                    "description": "Beschreibung",
-                    "accounting": "Buchhaltungsberichte",
-                    "customize_email": "E-Mails anpassen",
-                    "watermark": "Wasserzeichen",
-                    "api_feature": "API-Funktion",
-                    "back_button": "Zurück",
-                    "edit_button": "Bearbeiten",
-                    "save_button": "Speichern"
-                  },
-                  "payment_history": {
-                    "heading": "Zahlungshistorie",
-                    "table_headings": {
-                      "id": "ID",
-                      "company_name": "Firmenname",
-                      "owner_name": "Name des Inhabers",
-                      "plans": "Pläne",
-                      "pricing": "Preisgestaltung",
-                      "payments": "Zahlungen",
-                      "subscribed_at": "Abonniert am",
-                      "status": "Status"
-                    }
-                  },
-                  "support_requests": {
-                    "heading": "Supportanfragen",
-                    "table_headings": {
-                      "id": "ID",
-                      "customer_name": "Kundenname",
-                      "email_address": "E-Mail-Adresse",
-                      "phone_number": "Telefonnummer",
-                      "request_date": "Anfragedatum",
-                      "status": "Status"
-                    },
-                    "card_content": {
-                      "heading": "Anfragedetails",
-                      "button": "Kundendetails",
-                      "customer_id": "Kunden-ID",
-                      "request_date": "Anfragedatum",
-                      "status": "Status"
-                    },
-                    "details": {
-                      "name": "Name",
-                      "company_name": "Firmenname",
-                      "email_address": "E-Mail-Adresse",
-                      "mobile_number": "Handynummer",
-                      "reason_of_contact": "Kontaktgrund",
-                      "message": "Nachricht"
-                    }
-                  },
-                  "settings": {
-                    "main_heading": "Kontoeinstellung",
-                    "tabs_heading": {
-                      "account": "Kontoeinstellung",
-                      "payment": "Zahlungseinstellung",
-                      "mail": "Mail-Einstellung"
-                    },
-                    "account_setting": {
-                      "full_name": "Vollständiger Name",
-                      "email": "E-Mail",
-                      "update_password": "Passwort aktualisieren",
-                      "old_password": "Altes Passwort",
-                      "new_password": "Neues Passwort",
-                      "confirm_password": "Passwort bestätigen",
-                      "save_changes_button": "Änderungen speichern"
-                    },
-                    "payment_setting": {
-                      "heading": "Stripe-Einstellung",
-                      "pub_key": "Öffentlicher Schlüssel*",
-                      "search_key": "Suchschlüssel*",
-                      "test_mode": "Testmodus",
-                      "active": "Aktiv",
-                      "save_changes_button": "Änderungen speichern"
-                    },
-                    "mail_setting": {
-                      "heading": "Eigene Mail-Konfiguration verwenden",
-                      "mail_form_fields": {
-                        "mail_driver": "Mail-Treiber",
-                        "mail_host": "Mail-Host",
-                        "mail_port": "Mail-Port",
-                        "mail_encryption": "Mail-Verschlüsselung",
-                        "mail_user": "E-Mail Benutzername",
-                        "mail_password": "E-Mail Passwort",
-                        "mail_from_address": "Absenderadresse",
-                        "mail_from_name": "Name des Absenders",
-                        "email": "E-Mail",
-                        "mail_heading": "Geben Sie die E-Mail ein, um die Test-E-Mail der Mail-Konfiguration zu erhalten.",
-                        "save_button": "Speichern"
-                      },
-                      "follow_up": {
-                        "save_button": "Speichern",
-                        "next_button": "Weiter",
-                        "main_heading": "Details",
-                        "add_postponed_note_heading": "Eine verschobene Notiz hinzufügen",
-                        "add_remarks_heading": "Bemerkungen hinzufügen",
-                        "post_pond_button": "Verschieben",
-                        "mark_as_complete": "Als erledigt markieren",
-                        "completed_button": "Abgeschlossen",
-                        "customer_detail_heading": "Kundendetails",
-                        "follow_up_detail_heading": "Details zur Nachverfolgung",
-                        "additional_detail_heading": "Zusätzliche Details",
-                        "lead_detail_heading": "Lead-Details",
-                        "address_detail_heading": "Adressdetails",
-                        "customer_details": {
-                          "name": "Name",
-                          "customer_type": "Kundentyp",
-                          "email_address": "E-Mail-Adresse",
-                          "phone_number": "Telefonnummer",
-                          "mobile_number": "Handynummer",
-                          "address_details": "Adressdetails"
-                        },
-                        "follow_details": {
-                          "title": "Titel/Betreff",
-                          "date_and_time": "Datum und Uhrzeit der Nachverfolgung",
-                          "follow_up_type": "Art der Nachverfolgung"
-                        },
-                        "lead_details": {
-                          "required_service": "Benötigter Service",
-                          "desire_date": "Wunschdatum und -zeit",
-                          "flexibility": "Flexibilität",
-                          "budget": "Budget"
-                        },
-                        "address_details": {
-                          "street_no": "Straßennummer",
-                          "post_code": "Postleitzahl",
-                          "country": "Land",
-                          "description": "Beschreibung"
-                        },
-                        "all_follow_ups": {
-                          "heading": "Alle Nachverfolgungen",
-                          "table_headings": {
-                            "id": "ID",
-                            "customer_name": "Kundenname",
-                            "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
-                            "title": "Betreff/Titel",
-                            "status": "Status",
-                            "delete": "Löschen",
-                            "details": "Details"
-                          }
-                        },
-                        "add_follow_up": {
-                          "heading": "Nachverfolgung hinzufügen",
-                          "select_customer": "Kunden auswählen",
-                          "title": "Titel eingeben",
-                          "select_lead": "Lead auswählen",
-                          "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
-                          "follow_up_type": "Art der Nachverfolgung",
-                          "additional_details": "Zusätzliche Details"
-                        },
-                        "customer_details_modal": {
-                          "heading": "Kundendetails",
-                          "first_name": "Vorname",
-                          "last_name": "Nachname",
-                          "customer_type": "Kundentyp",
-                          "email_address": "E-Mail-Adresse",
-                          "phone_number": "Telefonnummer",
-                          "mobile_number": "Handynummer",
-                          "address_one_heading": "Adresse 1 Details",
-                          "address_two_heading": "Adresse 2 Details",
-                          "street_no": "Straßennummer",
-                          "post_code": "Postleitzahl",
-                          "country": "Land"
-                        },
-                        "all_customer_details": {
-                          "heading": "Alle Kunden",
-                          "table_headings": {
-                            "id": "ID",
-                            "name": "Name",
-                            "email": "E-Mail",
-                            "phone": "Telefon",
-                            "created_on": "Erstellt am",
-                            "location": "Standort",
-                            "type": "Typ"
-                          }
-                        },
-                        "all_leads_details": {
-                          "heading": "Alle Leads",
-                          "table_headings": {
-                            "id": "ID",
-                            "name": "Name",
-                            "email": "E-Mail",
-                            "phone": "Telefon",
-                            "desire_date": "Wunschdatum",
-                            "location": "Ort",
-                            "status": "Status"
-                          }
-                        },
-                        "service_details": {
-                          "heading": "Service-Details",
-                          "required_service": "Benötigter Service",
-                          "desire_date": "Wunschdatum",
-                          "availability": "Kontaktverfügbarkeit",
-                          "flexibility": "Flexibilität",
-                          "prefer_contact": "Bevorzugter Kontakt",
-                          "budget": "Budget",
-                          "lead_source": "Lead-Quelle",
-                          "other_services": "Andere Dienste",
-                          "Additional_details": "Zusätzliche Details"
-                        }
-                      },
-                      "dashboard_detail": {
-                        "main_heading": "Kunden-Dashboard",
-                        "overview": "Überblick",
-                        "sales_heading": "Verkaufsbericht",
-                        "plans": "Pläne",
-                        "lead_source": "Lead-Quelle",
-                        "activity": "Aktivität",
-                        "view_all": "Alle anzeigen",
-                        "follow_up_heading": "Nachfassungen",
-                        "months": {
-                          "jan": "Januar",
-                          "feb": "Februar",
-                          "mar": "März",
-                          "apr": "April",
-                          "may": "Mai",
-                          "jun": "Juni",
-                          "jul": "Juli",
-                          "aug": "August",
-                          "sep": "September",
-                          "oct": "Oktober",
-                          "nov": "November",
-                          "dec": "Dezember"
-                        },
-                        "options_labels": {
-                          "week": "Wöchentlich",
-                          "month": "Monatlich",
-                          "year": "Jährlich"
-                        },
-                        "cards_title": {
-                          "lead": "Leads",
-                          "offer": "Angebote",
-                          "contracts": "Verträge",
-                          "sales": "Verkäufe"
-                        },
-                        "charts_labels": {
-                          "website": "Webseite",
-                          "google": "Google",
-                          "facebook": "Facebook",
-                          "insta": "Instagram",
-                          "pinterest": "Pinterest",
-                          "whatsapp": "WhatsApp"
-                        },
-                        "input_filter": {
-                          "all": "Alle",
-                          "lead": "Lead",
-                          "offer": "Angebot",
-                          "contract": "Vertrag",
-                          "invoice": "Rechnung",
-                          "receipt": "Quittung",
-                          "customer": "Kunde"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+          "mail_heading": "Geben Sie die E-Mail ein, um die Test-E-Mail der Mail-Konfiguration zu erhalten.",
+          "save_button": "Speichern"
         }
       }
     }
+  },
+  "follow_up": {
+    "save_button": "Speichern",
+    "next_button": "Weiter",
+    "main_heading": "Details",
+    "add_postponed_note_heading": "Eine verschobene Notiz hinzufügen",
+    "add_remarks_heading": "Bemerkungen hinzufügen",
+    "post_pond_button": "Verschieben",
+    "mark_as_complete": "Als erledigt markieren",
+    "completed_button": "Abgeschlossen",
+    "customer_detail_heading": "Kundendetails",
+    "follow_up_detail_heading": "Details zur Nachverfolgung",
+    "additional_detail_heading": "Zusätzliche Details",
+    "lead_detail_heading": "Lead-Details",
+    "address_detail_heading": "Adressdetails",
+    "customer_details": {
+      "name": "Name",
+      "customer_type": "Kundentyp",
+      "email_address": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "address_details": "Adressdetails"
+    },
+    "follow_details": {
+      "title": "Titel/Betreff",
+      "date_and_time": "Datum und Uhrzeit der Nachverfolgung",
+      "follow_up_type": "Art der Nachverfolgung"
+    },
+    "lead_details": {
+      "required_service": "Benötigter Service",
+      "desire_date": "Wunschdatum und -zeit",
+      "flexibility": "Flexibilität",
+      "budget": "Budget"
+    },
+    "address_details": {
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land",
+      "description": "Beschreibung"
+    },
+    "all_follow_ups": {
+      "heading": "Alle Nachverfolgungen",
+      "table_headings": {
+        "id": "ID",
+        "customer_name": "Kundenname",
+        "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
+        "title": "Betreff/Titel",
+        "status": "Status",
+        "delete": "Löschen",
+        "details": "Details"
+      }
+    },
+    "add_follow_up": {
+      "heading": "Nachverfolgung hinzufügen",
+      "select_customer": "Kunden auswählen",
+      "title": "Titel eingeben",
+      "select_lead": "Lead auswählen",
+      "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
+      "follow_up_type": "Art der Nachverfolgung",
+      "additional_details": "Zusätzliche Details"
+    },
+    "customer_details_modal": {
+      "heading": "Kundendetails",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "customer_type": "Kundentyp",
+      "email_address": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "address_one_heading": "Adresse 1 Details",
+      "address_two_heading": "Adresse 2 Details",
+      "street_no": "Straßennummer",
+      "post_code": "Postleitzahl",
+      "country": "Land"
+    },
+    "all_customer_details": {
+      "heading": "Alle Kunden",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "created_on": "Erstellt am",
+        "location": "Standort",
+        "type": "Typ"
+      }
+    },
+    "all_leads_details": {
+      "heading": "Alle Leads",
+      "table_headings": {
+        "id": "ID",
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "desire_date": "Wunschdatum",
+        "location": "Ort",
+        "status": "Status"
+      }
+    },
+    "service_details": {
+      "heading": "Service-Details",
+      "required_service": "Benötigter Service",
+      "desire_date": "Wunschdatum",
+      "availability": "Kontaktverfügbarkeit",
+      "flexibility": "Flexibilität",
+      "prefer_contact": "Bevorzugter Kontakt",
+      "budget": "Budget",
+      "lead_source": "Lead-Quelle",
+      "other_services": "Andere Dienste",
+      "Additional_details": "Zusätzliche Details"
+    }
+  },
+  "dashboard_detail": {
+    "main_heading": "Kunden-Dashboard",
+    "overview": "Überblick",
+    "sales_heading": "Verkaufsbericht",
+    "plans": "Pläne",
+    "lead_source": "Lead-Quelle",
+    "activity": "Aktivität",
+    "view_all": "Alle anzeigen",
+    "follow_up_heading": "Nachfassungen",
+    "months": {
+      "jan": "Januar",
+      "feb": "Februar",
+      "mar": "März",
+      "apr": "April",
+      "may": "Mai",
+      "jun": "Juni",
+      "jul": "Juli",
+      "aug": "August",
+      "sep": "September",
+      "oct": "Oktober",
+      "nov": "November",
+      "dec": "Dezember"
+    },
+    "options_labels": {
+      "week": "Wöchentlich",
+      "month": "Monatlich",
+      "year": "Jährlich"
+    },
+    "cards_title": {
+      "lead": "Leads",
+      "offer": "Angebote",
+      "contracts": "Verträge",
+      "sales": "Verkäufe"
+    },
+    "charts_labels": {
+      "website": "Webseite",
+      "google": "Google",
+      "facebook": "Facebook",
+      "insta": "Instagram",
+      "pinterest": "Pinterest",
+      "whatsapp": "WhatsApp"
+    },
+    "input_filter": {
+      "all": "Alle",
+      "lead": "Lead",
+      "offer": "Angebot",
+      "contract": "Vertrag",
+      "invoice": "Rechnung",
+      "receipt": "Quittung",
+      "customer": "Kunde"
+    }
+  },
+  "pdf": {
+    "offer_number": "Angebot Nr.",
+    "offer_date": "Angebotsdatum",
+    "created_by": "Erstellt von",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "service": "Dienstleistung/Produkt",
+    "price": "Preis",
+    "unit": "Einheit",
+    "count": "Anzahl",
+    "total": "Gesamt",
+    "sub_total": "Zwischensumme",
+    "tax": "Steuern",
+    "discount": "Rabatt",
+    "grand_total": "Gesamtsumme",
+    "validate_heading": "Gültigkeit des Angebots",
+    "validate_des": "3 Monate ab Erstellung des Angebots",
+    "share_des": "Ich teile den Vertrag mit Ihnen.",
+    "date": "Datum",
+    "signature": "Unterschrift",
+    "page": "Seite",
+    "receipt_slip": "Quittungsschein",
+    "payment_part": "Zahlungsteil",
+    "account": "Konto / Zahlbar an"
   }
 }

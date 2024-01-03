@@ -58,7 +58,7 @@ export default function ServicesFilters({
           { label: "Oldest", value: "createdAt" },
           { label: "A - Z", value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       <ServicesFilter
         filter={filter}
