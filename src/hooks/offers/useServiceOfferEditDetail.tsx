@@ -42,7 +42,7 @@ export const useServiceOfferEditDetail = ({
   });
 
   const [serviceType, setServiceType] = useState<ServiceType[]>([
-    ServiceType.EXISTING_SERVICE,
+    ServiceType.NEW_SERVICE,
   ]);
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
@@ -139,7 +139,8 @@ export const useServiceOfferEditDetail = ({
         (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
         0
       ) || 0;
-
+        console.log(taxType,"taxType");
+        
     let taxAmount =
       isTax && taxType === "0"
         ? calculateTax(totalPrices, 7.7)
@@ -217,7 +218,7 @@ export const useServiceOfferEditDetail = ({
       setServiceType([
         ...serviceType,
         ...new Array(newLength - currentLength).fill(
-          ServiceType.NEW_SERVICE
+          ServiceType.EXISTING_SERVICE
         ),
       ]);
     } else if (newLength < currentLength) {

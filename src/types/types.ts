@@ -387,6 +387,7 @@ export type GenerateOffersFormField = (
     handleRemove?: (id: string) => void;
     onContentSelect?: () => void;
     offerDetails?: OffersTableRowTypes;
+    selectedContent?:string
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
