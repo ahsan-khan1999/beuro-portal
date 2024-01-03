@@ -49,11 +49,11 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent && selectedContent !== offerDetails?.content?.id) {
-
-
+    if (filteredContent ) {
       dispatch(setContentDetails(filteredContent))
       setValue("additionalDetails", filteredContent?.offerContent?.title);
+
+    }else{
 
     }
   }, [selectedContent])

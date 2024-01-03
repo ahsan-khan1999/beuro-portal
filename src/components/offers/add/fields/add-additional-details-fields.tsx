@@ -52,7 +52,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value: selectedContent === offerDetails?.content?.id && offerDetails?.additionalDetails || contentDetails?.offerContent?.description,
+        value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
         trigger
       },
     },

@@ -4,14 +4,14 @@ import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { useRouter } from 'next/router';
-import { sendOtpViaEmail, verifyOtp } from '@/api/slices/authSlice/auth';
+import { sendOtpViaEmail, setErrorMessage, verifyOtp } from '@/api/slices/authSlice/auth';
 import { BaseButton } from '@/base-components/ui/button/base-button';
 import {  conditionHandlerProfile } from '@/utils/utility';
 import { isJSON } from '@/utils/functions';
 import { getUser } from '@/utils/auth.util';
 const data = {
     heading: " We are verifying your email ",
-    description: "We have sent you the link to reset the password by e-mail! Please take a second to make sure we have your correct email address"
+    description: "Please continue! Please take a second to make sure we have your correct email address"
 }
 const VerifyEmail = () => {
     const router = useRouter()
@@ -24,6 +24,7 @@ const VerifyEmail = () => {
         if (otp) {
         dispatch(verifyOtp(router)).then((response: any) => {
             if (response?.payload) {
+                dispatch(setErrorMessage(null));
                 setIsContinue(true)
             }
         })

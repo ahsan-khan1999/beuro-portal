@@ -45,7 +45,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   });
 
   useMemo(() => {
-    if (contentDetails.id) {
+    if (contentDetails?.id) {
       reset({
         contentName: contentDetails?.contentName,
         offerContent: {
@@ -57,7 +57,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
 
     }
 
-  }, [contentDetails.id]);
+  }, [contentDetails?.id]);
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "offerContent.address",
@@ -68,11 +68,11 @@ export const useOfferContentEditDetails = (onClick: Function) => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
-      contentName: data.contentName,
+      contentName: data?.contentName,
       offerContent: {
-        body: data.offerContent.body,
-        description: data.offerContent.description,
-        title: data.offerContent.title,
+        body: data?.offerContent.body,
+        description: data?.offerContent.description,
+        title: data?.offerContent.title,
         attachments: attachements?.map((item) => item.value),
         address: data?.offerContent?.address?.map((item: any) => item.value)
 
@@ -89,7 +89,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
         contentId: contentDetails?.id,
       }
       const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
-      if (res?.payload) onClick(0, ComponentsType.offerContent);
+      // if (res?.payload) onClick(0, ComponentsType.offerContent);
     }
   };
 
