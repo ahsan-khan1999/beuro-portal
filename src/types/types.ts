@@ -703,7 +703,7 @@ export interface DocumentDetailFooterProps {
   columnSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
-  emailTemplateSettings: EmailTemplate | null
+  emailTemplateSettings?: EmailTemplate | null
 }
 export interface TemplateSettigsFirstColumn {
   isCompanyName: boolean;
@@ -808,7 +808,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
   templateSettings: TemplateType | null;
   totalPages: number;
-  emailTemplateSettings: EmailTemplate | null
+  emailTemplateSettings?: EmailTemplate | null
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -868,7 +868,7 @@ export interface AggrementProps {
   isCanvas?: boolean;
   setIsSignatureDone?: SetStateAction<boolean>,
   isSignatureDone?: boolean;
-  emailTemplateSettings: EmailTemplate | null,
+  emailTemplateSettings?: EmailTemplate | null,
   setOfferSignature?: SetStateAction<any>
 
 }
