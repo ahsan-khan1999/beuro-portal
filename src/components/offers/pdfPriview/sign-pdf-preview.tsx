@@ -4,6 +4,7 @@ import { Pdf } from "@/components/pdf/pdf";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
     readOfferDetails,
+    readOfferPublicDetails,
     sendOfferEmail,
     updateOfferStatus,
 } from "@/api/slices/offer/offerSlice";
@@ -153,7 +154,7 @@ const SignPdfPreview = () => {
     useEffect(() => {
         if (offerID) {
 
-            dispatch(readOfferDetails({ params: { filter: offerID } })).then(
+            dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
                 (response: ActionType) => {
                     if (response?.payload) {
                         const offerDetails: OffersTableRowTypes = response?.payload;
@@ -228,6 +229,7 @@ const SignPdfPreview = () => {
                             aggrementDetails:
                                 offerDetails?.content?.offerContent?.description || "",
                             isOffer: true,
+                            
                         };
                         const distributeItems = (): ServiceList[][] => {
                             const totalItems =

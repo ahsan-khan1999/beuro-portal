@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import SignPad from "signature_pad";
 import { SignatureSubmittedSuccessFully } from "./signature-submitted-success";
 import localStoreUtil from "@/utils/localstore.util";
@@ -11,7 +11,11 @@ const ow = 383;
 const oh = 153;
 const originalStrokeWidth = 1;
 
-export const SignaturePad = ({ signature, isCanvas }: { signature?: string, isCanvas?: boolean }) => {
+export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
+  isSignatureDone }: {
+    signature?: string, isCanvas?: boolean, setIsSignatureDone?: SetStateAction<boolean>,
+    isSignatureDone?: boolean
+  }) => {
   const dispatch = useAppDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
@@ -39,6 +43,7 @@ export const SignaturePad = ({ signature, isCanvas }: { signature?: string, isCa
 
 
 
+  console.log(signature,"signature");
 
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
@@ -70,6 +75,8 @@ export const SignaturePad = ({ signature, isCanvas }: { signature?: string, isCa
           if (res?.payload) {
             localStoreUtil.store_data("signature", res?.payload)
             setIsSubmitted(true);
+            //@ts-expect-error
+            setIsSignatureDone && setIsSignatureDone(true)
           }
         })
       }
@@ -84,7 +91,8 @@ export const SignaturePad = ({ signature, isCanvas }: { signature?: string, isCa
     signaturePad?.clear();
     setIsSubmitted(false);
   };
-
+  console.log(signature);
+  
   return (
     !signature &&
     <>

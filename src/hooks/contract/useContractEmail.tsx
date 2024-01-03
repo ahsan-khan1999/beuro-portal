@@ -41,6 +41,8 @@ export const useContractEmail = (
   });
 
   useEffect(() => {
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
+
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.confirmationContent?.title,
@@ -53,11 +55,21 @@ export const useContractEmail = (
 
 
   const onContentSelect = (id: string) => {
-    const selectedContent = content.find((item) => item.id === id)
+    const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
-      dispatch(setContentDetails(selectedContent))
+      reset({
+        email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+        content: selectedContent?.id,
+        subject: selectedContent?.confirmationContent?.title,
+        description: selectedContent?.confirmationContent?.description,
+        pdf: selectedContent?.confirmationContent?.attachments,
+      });
+      setAttachements(transformAttachments(
+        selectedContent?.confirmationContent?.attachments as string[]
+      ) || [])
+      dispatch(setContentDetails(selectedContent));
     }
-  }
+  };
   const fields = ContractEmailPreviewFormField(
     register,
     loading,
@@ -72,7 +84,7 @@ export const useContractEmail = (
     contractDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    
+
     const updatedData = {
       ...data,
       id: contractDetails?.id,

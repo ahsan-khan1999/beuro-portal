@@ -16,6 +16,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { SetStateAction, useState } from "react";
 
 export const SignPdf = <T,>({
     newPageData,
@@ -36,7 +37,8 @@ export const SignPdf = <T,>({
     const { loading } = useAppSelector(state => state.offer)
     const { modal } = useAppSelector(state => state.global)
     const router = useRouter();
-
+    const { action: pdfAction } = router.query
+    const [isSignatureDone, setIsSignatureDone] = useState(false)
     const acceptOffer = async () => {
         const signature = await localStoreUtil.get_data("signature")
         if (!signature) return;
@@ -45,7 +47,7 @@ export const SignPdf = <T,>({
             id: pdfData?.id
         }
         const response = await dispatch(signOffer({ data }))
-        if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
+        if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
     }
     const rejectOffer = () => {
         dispatch(updateModalType({ type: ModalType.UPDATE_SUCCESS }))
@@ -130,7 +132,9 @@ export const SignPdf = <T,>({
                     isOffer={pdfData.isOffer}
                     handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
                     signature={pdfData?.signature}
-                    isCanvas={true}
+                    isCanvas={action === "Reject" ? false : true}
+                    setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
+                    isSignatureDone={isSignatureDone}
                 />
                 {isQr && (
                     <PaymentQRCodeDetails
@@ -141,10 +145,22 @@ export const SignPdf = <T,>({
                 )}
             </div>
             {
-                !pdfData?.signature &&
+                (!pdfData?.signature && isSignatureDone) &&
                 <Button
-                    className={`mt-[55px] w-full ${action === "Accept"? 'bg-[#45C769]' : 'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
+                    className={`mt-[55px] w-full ${action === "Accept" ? 'bg-[#45C769]' : 'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
                     onClick={action === "Accept" ? acceptOffer : rejectOffer}
+                    inputType="button"
+                    id="acceptOffer"
+                    loading={loading}
+                    text={action}
+                />
+            }
+
+            {
+                (!pdfData?.signature && action === "Reject") &&
+                <Button
+                    className={`mt-[55px] w-full ${'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
+                    onClick={rejectOffer}
                     inputType="button"
                     id="acceptOffer"
                     loading={loading}

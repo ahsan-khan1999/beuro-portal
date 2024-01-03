@@ -37,6 +37,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     setValue("type", "0")
     setValue("amount",0)
 
+
   }, [])
 
   const fields = CreateInvoiceFormField(
@@ -48,25 +49,26 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     type,
   );
   useMemo(() => {
+    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
     if (type === '0') {
-      if (invoiceDetails?.contractID?.offerID?.total < amount) {
-        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - amount)
-        setValue("amount", invoiceDetails?.remainingAmount + invoiceDetails?.paidAmount)
+      if (remainingAmount < amount) {
+        setValue("amount", remainingAmount)
+        setValue("remainingAmount", remainingAmount - amount)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.remainingAmount)
+        setValue("remainingAmount", remainingAmount - amount)
       }
     }
     else if (type === '1') {
-      if (Number(invoiceDetails?.remainingAmount) < calculateTax(Number(invoiceDetails?.remainingAmount), amount)) {
-        setValue("remainingAmount", invoiceDetails?.remainingAmount)
+      if (Number(remainingAmount) < calculateTax(Number(remainingAmount), amount)) {
+        setValue("remainingAmount", remainingAmount)
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - calculateTax(Number(invoiceDetails?.remainingAmount), amount))
+        setValue("remainingAmount", Number(remainingAmount) - calculateTax(Number(remainingAmount), amount))
       }
     } else {
-      setValue("remainingAmount", invoiceDetails?.remainingAmount)
+      setValue("remainingAmount", remainingAmount)
 
     }
   }, [amount, type])

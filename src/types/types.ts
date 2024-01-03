@@ -364,7 +364,7 @@ export type GenerateInvoiceEmailFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: InvoiceTableRowTypes
+  details?: SubInvoiceTableRowTypes
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
@@ -578,7 +578,7 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
-  month?:number
+  month?: number
 }
 
 export interface MoreFilterType {
@@ -862,7 +862,9 @@ export interface AggrementProps {
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
-  isCanvas?:boolean
+  isCanvas?: boolean;
+  setIsSignatureDone?: SetStateAction<boolean>,
+  isSignatureDone?: boolean
 }
 
 export interface FiltersComponentProps {

@@ -292,6 +292,9 @@ const InvoiceSlice = createSlice({
         setInvoiceInfo: (state, action) => {
             state.invoiceInfo = action.payload;
         },
+        setCollectiveInvoiceDetails: (state, action) => {
+            state.collectiveInvoiceDetails = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readInvoice.pending, (state) => {
@@ -534,4 +537,4 @@ const InvoiceSlice = createSlice({
 })
 
 export default InvoiceSlice.reducer;
-export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo } = InvoiceSlice.actions
+export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo,setCollectiveInvoiceDetails } = InvoiceSlice.actions

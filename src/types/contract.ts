@@ -70,6 +70,7 @@ export interface ContractOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
+  signature?:string
 }
 
 export interface ContractDetailCardProps {

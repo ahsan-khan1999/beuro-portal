@@ -12,7 +12,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   contentDetails,
   onContentSelect,
   attachements, setAttachements,
-  details
+  contractDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -49,14 +49,13 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             },
             field: {
               className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
-              type: Field.input,
+              type: Field.select,
               id: "content",
               name: "content",
-              inputType: "text",
-              // options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
-              register,
-              // onItemChange: onContentSelect,
-              // value: details?.content?.offerContent?.title
+              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              control,
+              onItemChange: onContentSelect,
+              value: contentDetails?.id || ""
             },
           },
         ],
@@ -96,7 +95,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
-        value: details?.offerID?.content?.confirmationContent?.description
+        value: contentDetails?.id && contentDetails?.confirmationContent?.description || contractDetails?.offerID?.content?.confirmationContent?.description
+
 
       },
     },

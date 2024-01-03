@@ -163,7 +163,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails?.paidAmount + invoiceDetails?.remainingAmount}
+              {invoiceDetails?.contractID?.offerID?.total}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
@@ -179,7 +179,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.unpaid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.remainingAmount} CHF
+              {invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)} CHF
             </span>
           </div>
         </div>

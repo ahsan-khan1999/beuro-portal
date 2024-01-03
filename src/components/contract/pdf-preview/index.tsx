@@ -249,6 +249,7 @@ const PdfPriview = () => {
               },
               aggrementDetails: contractDetails?.additionalDetails || "",
               isOffer: false,
+              signature:contractDetails?.offerID?.signature
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =
@@ -376,7 +377,7 @@ const PdfPriview = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/offers");
+    router.push("/contract");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

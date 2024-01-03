@@ -284,6 +284,7 @@ const DetailsPdfPriview = () => {
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: false,
+            signature:invoiceDetails?.invoiceID?.contractID?.offerID?.signature
           };
           const distributeItems = (): ServiceList[][] => {
             const totalItems =

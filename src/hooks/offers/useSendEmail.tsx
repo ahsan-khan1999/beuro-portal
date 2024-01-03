@@ -40,7 +40,7 @@ export const useSendEmail = (
       transformAttachments(
         offerDetails?.content?.offerContent?.attachments as string[]
       )) ||
-      []
+    []
   );
 
   const schema = generateContractEmailValidationSchema(translate);
@@ -55,18 +55,30 @@ export const useSendEmail = (
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
-      content: offerDetails?.content?.offerContent?.title,
+      content: offerDetails?.content?.id,
       subject: offerDetails?.content?.offerContent?.title,
       description: offerDetails?.content?.offerContent?.description,
       pdf: offerDetails?.content?.offerContent?.attachments,
     });
+
   }, []);
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
+      reset({
+        email: offerDetails?.leadID?.customerDetail?.email,
+        content: selectedContent?.id,
+        subject: selectedContent?.offerContent?.title,
+        description: selectedContent?.offerContent?.description,
+        pdf: selectedContent?.offerContent?.attachments,
+      });
+      setAttachements(transformAttachments(
+        selectedContent?.offerContent?.attachments as string[]
+      ) || [])
       dispatch(setContentDetails(selectedContent));
     }
   };

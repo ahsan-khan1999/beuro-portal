@@ -1,4 +1,5 @@
 import { Form } from "@/base-components/form/form";
+import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import React from "react";

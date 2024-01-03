@@ -58,6 +58,7 @@ export const Pdf = <T,>({
           isOffer={pdfData.isOffer}
           handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
           signature={pdfData?.signature}
+          isCanvas={true}
 
         />
         {isQr && (

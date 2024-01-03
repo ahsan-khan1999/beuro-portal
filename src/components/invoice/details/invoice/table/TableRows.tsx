@@ -32,7 +32,7 @@ const TableRows = ({
     (state) => state.invoice
   );
   const handleInvoicePdfPreview = (id?: string) => {
-    router.pathname = "/invoices/invoice-pdf-preview";
+    router.pathname = "/invoices/compose-mail";
     router.query = { invoiceID: id };
     updateQuery(router, router.locale as string);
   };

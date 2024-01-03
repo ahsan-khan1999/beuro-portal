@@ -26,7 +26,7 @@ export const useInvoiceEmail = (
     const dispatch = useAppDispatch();
     const { loading, error, collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
     const { content, contentDetails } = useAppSelector((state) => state.content);
-    const [attachements, setAttachements] = useState<Attachement[]>(collectiveInvoiceDetails?.id && transformAttachments(collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments as string[]) || [])
+    const [attachements, setAttachements] = useState<Attachement[]>(collectiveInvoiceDetails?.id && transformAttachments(collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments as string[]) || [])
     const { invoiceID } = router.query
     const schema = generateContractEmailValidationSchema(translate);
     const {
@@ -50,14 +50,14 @@ export const useInvoiceEmail = (
             dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } })).then((res: any) => {
                 dispatch(setCollectiveInvoiceDetails(res?.payload)) 
                 setAttachements(transformAttachments(
-                    res?.payload?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments as string[]
+                    res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments as string[]
                 ) || [])               
                 reset({
                     email: res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
                     content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
-                    subject: res?.payload?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title,
-                    description: res?.payload?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.description,
-                    pdf: res?.payload?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments
+                    subject: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.title,
+                    description: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.description,
+                    pdf: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments
                 })
             })
         }
@@ -72,12 +72,12 @@ export const useInvoiceEmail = (
             reset({
                 email: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
                 content: selectedContent?.id,
-                subject: selectedContent?.invoiceContent?.title,
-                description: selectedContent?.invoiceContent?.description,
-                pdf: selectedContent?.invoiceContent?.attachments,
+                subject: selectedContent?.receiptContent?.title,
+                description: selectedContent?.receiptContent?.description,
+                pdf: selectedContent?.receiptContent?.attachments,
             });
             setAttachements(transformAttachments(
-                selectedContent?.invoiceContent?.attachments as string[]
+                selectedContent?.receiptContent?.attachments as string[]
             ) || [])
             dispatch(setContentDetails(selectedContent));
         }
