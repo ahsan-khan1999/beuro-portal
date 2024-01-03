@@ -111,7 +111,6 @@
     "create": "Create Account",
     "or_login": "or login with"
   },
-
   "toast": {
     "login": "Please login",
     "file": "Please Select a valid file format"
@@ -154,7 +153,6 @@
     },
     "user_profile_already_complete": "User Profile is already completed"
   },
-
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
@@ -199,7 +197,6 @@
       "Settings": "Settings"
     }
   },
-
   "customers": {
     "title": "Customers",
     "add_button": "Add New",
@@ -539,7 +536,6 @@
         "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
         "button": "Upgrade"
       },
-
       "edit_payment_modal": {
         "heading": "Edit Payment Details",
         "sub_heading": "We automatically bill on the 1st of each month",
@@ -584,7 +580,8 @@
       "email_status": "Email Status",
       "paid": "Paid",
       "status": "Status",
-      "notes": "Notes"
+      "notes": "Notes",
+      "edit": "Edit"
     },
     "card_content": {
       "heading": "Invoice Details",
@@ -598,7 +595,9 @@
       "offer_id": "Offer ID",
       "created_date": "Creation Date",
       "notes": "Notes",
-      "unpaid_amount": "Unpaid Amount"
+      "unpaid_amount": "Unpaid Amount",
+      "create_invoice_button": "Create Invoice",
+      "recurring_invoice_button": "Recurring Invoice"
     },
     "invoice_table_heading": {
       "id": "ID",
@@ -656,7 +655,8 @@
       "payment": "Payment",
       "status": "Status",
       "images": "Images",
-      "notes": "Notes"
+      "notes": "Notes",
+      "edit": "Edit"
     },
     "card_content": {
       "heading": "Contract Details",
@@ -736,7 +736,7 @@
   },
   "content": {
     "main_heading": "Content",
-    "create_content":"Create Content",
+    "create_content": "Create Content",
     "add_button": "Add New",
     "table_headings": {
       "id": "ID",
@@ -800,9 +800,9 @@
       "location": "Location",
       "status": "Status",
       "images": "Images",
-      "note": "Notes"
+      "note": "Notes",
+      "edit": "Edit"
     },
-
     "card_content": {
       "heading": "Leads Details",
       "create_button": "Create Offer",
@@ -889,9 +889,9 @@
       "without_images": "Continue without Images"
     }
   },
-
   "common": {
     "image_upload_heading": "Drop or Attach your files here",
+    "sort_button": "Sort By",
     "notes_modal": {
       "heading": "Notes",
       "button": "Add New Note"
@@ -986,7 +986,8 @@
       "payment": "Payment",
       "status": "Status",
       "images": "Images",
-      "note": "Notes"
+      "note": "Notes",
+      "edit": "Edit"
     },
     "card_content": {
       "main_heading": "Offer Details",

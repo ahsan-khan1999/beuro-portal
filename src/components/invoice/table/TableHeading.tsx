@@ -31,7 +31,7 @@ const TableHeading = () => {
         {translate("invoice.table_headings.notes")}
       </span>
       <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
-        Eidt
+        {translate("invoice.table_headings.edit")}
       </span>
     </div>
   );

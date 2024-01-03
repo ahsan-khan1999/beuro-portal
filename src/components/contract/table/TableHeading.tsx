@@ -36,7 +36,7 @@ const TableHeadings = () => {
         {translate("contracts.table_headings.notes")}
       </span>
       <span className="font-medium text-[#8F8F8F] flex items-center justify-center">
-        Edit
+        {translate("contracts.table_headings.edit")}
       </span>
     </div>
   );

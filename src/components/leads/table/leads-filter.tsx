@@ -111,7 +111,7 @@ export default function LeadsFilter({
             { label: "Oldest", value: "createdAt" },
             { label: "A - Z", value: "customerDetail.fullName" },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         <LeadsFilters
           filter={filter}
@@ -131,7 +131,7 @@ export default function LeadsFilter({
           onClick={() => router.push("/leads/add")}
           className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           icon={addIcon}
-          text="Add New"
+          text={translate("leads.add_button")}
           id="add"
         />
       </div>

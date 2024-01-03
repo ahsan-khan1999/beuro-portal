@@ -35,7 +35,9 @@ const TableHeadings = () => {
       <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
         {translate("offers.table_headings.note")}
       </span>
-      <span className="font-medium text-[#8F8F8F]">Edit</span>
+      <span className="font-medium text-[#8F8F8F]">
+        {translate("offers.table_headings.edit")}
+      </span>
     </div>
   );
 };
