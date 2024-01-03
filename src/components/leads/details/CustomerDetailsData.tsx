@@ -59,8 +59,7 @@ const customerDetailData = ({
               {leadDetails?.customerDetail?.fullName}
             </div>
           </div>
-          {
-            Number(leadDetails?.customerDetail?.customerType) === 1 &&
+          {Number(leadDetails?.customerDetail?.customerType) === 1 && (
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name
@@ -69,13 +68,13 @@ const customerDetailData = ({
                 {leadDetails?.customerDetail?.companyName}
               </div>
             </div>
-          }
+          )}
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium overflow-hidden whitespace-nowrap">
-              <span className="overflow-hidden text-overflow-ellipsis">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap">
+              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis">
                 {leadDetails?.customerDetail?.email}
               </span>
             </div>

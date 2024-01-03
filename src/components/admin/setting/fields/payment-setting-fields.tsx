@@ -29,7 +29,9 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                     id: "paymentspan",
 
                     type: Field.span,
-                    text: `${translate("admin.settings.payment_setting.heading")}`,
+                    text: `${translate(
+                      "admin.settings.payment_setting.heading"
+                    )}`,
                     containerClassName:
                       "text-[20px] text-[#222B45] font-normal ",
                   },
@@ -45,12 +47,14 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: `${translate("admin.settings.payment_setting.pub_key")}`,
+                          text: `${translate(
+                            "admin.settings.payment_setting.pub_key"
+                          )}`,
                           htmlFor: "publishableKey",
                         },
                         field: {
                           className:
-                            "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                           type: Field.input,
                           id: "publishableKey",
                           name: "publishableKey",
@@ -62,12 +66,14 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: `${translate("admin.settings.payment_setting.search_key")}`,
+                          text: `${translate(
+                            "admin.settings.payment_setting.search_key"
+                          )}`,
                           htmlFor: "searchKey",
                         },
                         field: {
                           className:
-                            "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                           type: Field.input,
                           id: "searchKey",
                           name: "searchKey",
@@ -77,15 +83,17 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                         },
                       },
                       {
-                        containerClass: "mb-0 ",
+                        containerClass: "mb-0",
                         label: {
-                          text: `${translate("admin.settings.payment_setting.test_mode")}`,
+                          text: `${translate(
+                            "admin.settings.payment_setting.test_mode"
+                          )}`,
                           htmlFor: "testMode",
                           className: "mb-[10px]",
                         },
                         field: {
                           className:
-                            "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                           type: Field.select,
                           value: "False",
                           id: "testMode",
@@ -100,13 +108,15 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       {
                         containerClass: "mb-0",
                         label: {
-                          text: `${translate("admin.settings.payment_setting.active")}`,
+                          text: `${translate(
+                            "admin.settings.payment_setting.active"
+                          )}`,
                           htmlFor: "active",
                           className: "mb-[10px]",
                         },
                         field: {
                           className:
-                            "!p-4 !h-[54px] !border-dark  focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                           type: Field.select,
                           value: "True",
                           id: "active",
@@ -123,16 +133,17 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                 },
 
                 {
-                  containerClass: "mb-0",
+                  containerClass: "mb-0 mt-5",
                   field: {
                     type: Field.button,
-                    text: `${translate("admin.settings.payment_setting.save_changes_button")}`,
+                    text: `${translate(
+                      "admin.settings.payment_setting.save_changes_button"
+                    )}`,
                     inputType: "submit",
                     className:
-                      "rounded-lg mt-5   p-4 w-fit h-[50px]  text-white hover:bg-none ",
+                      "rounded-lg p-4 w-fit h-[50px] text-white hover:bg-none ",
                     loading,
                     id: "paymentdiv",
-
                   },
                 },
               ],

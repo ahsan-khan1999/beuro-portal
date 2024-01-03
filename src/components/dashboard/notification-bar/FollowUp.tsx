@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import followUpIcon from "@/assets/svgs/follow-up.svg";
 import idIcon from "@/assets/svgs/id.svg";
 import Image from "next/image";
 import timeIcon from "@/assets/svgs/time.svg";
@@ -85,10 +84,6 @@ export const FollowUpNotificationBar = ({
     dispatch(updateModalType({ type: ModalType.ADD_REMARKS }));
   };
 
-  const handleAddFollowUp = () => {
-    dispatch(updateModalType(ModalType.ADD_FOLLOW_UP));
-  };
-
   const handleAllCustomers = () => {
     dispatch(updateModalType(ModalType.ALL_CUSTOMERS_LIST));
   };
@@ -162,6 +157,7 @@ export const FollowUpNotificationBar = ({
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       <div className="bg-white rounded-[20px] h-[397.089px]">

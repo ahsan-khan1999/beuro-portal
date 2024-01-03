@@ -21,7 +21,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                 id: "logo",
                 name: "logo",
                 control,
-                disabled: true
+                disabled: true,
               },
             },
             {
@@ -74,7 +74,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             id: "email",
                             name: "email",
                             disabled: true,
-                            className: "bg-[#F1F1F1] border-none focus-none ",
+                            className: "bg-[#F1F1F1] border-none focus-none",
                             svg: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11" fill="none">
                     <path d="M12.3107 0.703125H1.21449C0.563394 0.703125 0.03125 1.23293 0.03125 1.88637V8.98582C0.03125 9.6395 0.563736 10.1691 1.21449 10.1691H12.3107C12.9618 10.1691 13.4939 9.63926 13.4939 8.98582V1.88637C13.4939 1.23277 12.9615 0.703125 12.3107 0.703125ZM12.129 1.49195C11.7464 1.87577 7.25284 6.384 7.06823 6.56922C6.91404 6.72388 6.61121 6.72399 6.45694 6.56922L1.39619 1.49195H12.129ZM0.820078 8.84081V2.03138L4.21375 5.4361L0.820078 8.84081ZM1.39619 9.38024L4.77064 5.9948L5.89827 7.12611C6.36036 7.5897 7.16499 7.58952 7.62693 7.12611L8.75456 5.99482L12.129 9.38024H1.39619ZM12.7051 8.84081L9.31142 5.4361L12.7051 2.03138V8.84081Z" fill="#8F8F8F"/>
                   </svg>
@@ -87,32 +87,32 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                   },
 
                   {
-                    containerClass: "mt-[26px] mb-[21px]",
+                    containerClass: "mt-[26px] mb-5",
                     field: {
                       type: Field.div,
-                      className: "flex gap-x-4 items-center relative w-full ",
                       id: "div-field",
+                      className:
+                        "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)] gap-x-2 items-center ",
                       children: [
                         {
-                          containerClass: "mb-0",
+                          containerClass: "",
                           field: {
                             type: Field.span,
                             text: `${translate(
                               "admin.settings.account_setting.update_password"
                             )}`,
                             containerClassName:
-                              "text-[14px] text-[#393939] font-normal ",
-                            id: "paymentdiv",
-
+                              " text-[14px] text-[#393939] font-normal ",
+                            id: "info",
                           },
                         },
                         {
+                          containerClass: "border-lightGray border-b-[1px]",
+
                           field: {
                             type: Field.span,
-                            containerClassName:
-                              " absolute top-3 bg-[#BFBFBF] w-[87%]  mx-auto h-[1px]",
-                            id: "paymentdiv",
-
+                            containerClassName: "  ",
+                            id: "border",
                           },
                         },
                       ],
@@ -215,7 +215,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       className:
                         "rounded-lg   px-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
-
                     },
                   },
                 ],
