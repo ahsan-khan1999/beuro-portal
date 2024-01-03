@@ -113,7 +113,7 @@ const EditOffersDetailsData = ({
   };
 
   return (
-    <div className="grid grid-cols-1 xMaxSize:grid-cols-4 xMaxSize:gap-x-6 ">
+    <div className="grid grid-cols-1 xMaxSize:grid-cols-4 xMaxSize:gap-x-6">
       <div className="col-span-1 flex flex-row xMaxSize:flex-col gap-4 w-full">
         <div className="flex flex-col gap-y-[14px]">
           {tabSection.map((item, index) => (

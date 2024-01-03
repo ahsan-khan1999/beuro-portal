@@ -20,7 +20,8 @@ const Login = () => {
             {translate("login.main_heading")}
           </h1>
           <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
-            Manage your business with us
+          {translate("login.sub_heading")}
+
           </span>
           <Error error={error} />
 

@@ -94,7 +94,7 @@ const ContractDetailsCard = ({
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2">
           <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("contracts.card_content.contract_id")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -102,16 +102,16 @@ const ContractDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B] flex">
+            <span className="text-base font-medium text-[#4B4B4B]">
               {contractDetails.offerID?.title}
             </span>
           </div>
-          <div className="flex gap-[10p x]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+          <div className="flex gap-[10px]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -122,7 +122,7 @@ const ContractDetailsCard = ({
 
         <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)] gap-y-2">
           <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("contracts.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4A13E7]">
@@ -130,7 +130,7 @@ const ContractDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.created_date")}:
             </span>
             <div>
@@ -140,7 +140,7 @@ const ContractDetailsCard = ({
             </div>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.service_date")}:
             </span>
             <div>
@@ -158,7 +158,7 @@ const ContractDetailsCard = ({
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
           <div className="flex items-center  gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               Email Status
             </span>
             <div>
@@ -207,11 +207,11 @@ const ContractDetailsCard = ({
                   )}
                   selectedItem={contractDetails?.contractStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName="border border-[#FF0000] min-w-[138px] rounded-lg px-4 py-[3px] flex items-center"
+                  dropDownClassName="border border-[#FF0000] rounded-lg px-4 py-[3px] flex items-center"
                   dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
                 />
               )) || (
-                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                <span className="border border-[#FF0000] w-auto rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
                   {contractDetails?.contractStatus}
                 </span>
               )}

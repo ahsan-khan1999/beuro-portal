@@ -2,7 +2,11 @@ import { Field } from "@/enums/form";
 import { FormField, ImageUploadFormFieldType } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control, onClick) => {
+export const ImageUploadFormField: ImageUploadFormFieldType = (
+  loading,
+  control,
+  onClick
+) => {
   const { t: translate } = useTranslation();
 
   const formField: FormField[] = [
@@ -11,7 +15,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-5 gap-x-2",
+        className: "grid grid-cols-5 gap-2",
         children: [
           {
             field: {
@@ -21,7 +25,6 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               name: "upload_image1",
               control,
               onClick: onClick,
-              
             },
           },
           {
@@ -31,7 +34,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image2",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -41,7 +44,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image3",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -51,7 +54,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image4",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -61,7 +64,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image5",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -71,7 +74,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image6",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -81,7 +84,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image7",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -91,7 +94,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image8",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -101,7 +104,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image9",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -111,7 +114,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image10",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
 
@@ -122,7 +125,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image11",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -132,7 +135,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image12",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -142,7 +145,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image13",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -152,7 +155,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image14",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -162,12 +165,11 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image15",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
-        ]
-      }
-
+        ],
+      },
     },
     {
       containerClass: "flex justify-end mb-0 mt-5",
@@ -181,7 +183,6 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
         loading,
       },
     },
-
   ];
 
   return formField;

@@ -13,7 +13,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
+        className: "grid grid-cols-1 md:grid-cols-2 gap-x-[60px] gap-y-[25px]",
         children: [
           {
             containerClass: "mb-0",
@@ -26,7 +26,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailDriver",
               name: "mailDriver",
@@ -45,7 +45,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailHost",
               name: "mailHost",
@@ -53,16 +53,6 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               register,
             },
           },
-        ],
-      },
-    },
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -74,7 +64,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailPort",
               name: "mailPort",
@@ -93,7 +83,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailEncryption",
               name: "mailEncryption",
@@ -101,16 +91,6 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               register,
             },
           },
-        ],
-      },
-    },
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -122,7 +102,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailUsername",
               name: "mailUsername",
@@ -141,7 +121,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailPassword",
               name: "mailPassword",
@@ -149,17 +129,6 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               register,
             },
           },
-        ],
-      },
-    },
-
-    {
-      containerClass: "mt-[25px]",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 gap-x-[60px] ",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -171,7 +140,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailFormAddress",
               name: "mailFormAddress",
@@ -190,7 +159,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mailFormName",
               name: "mailFormName",
@@ -223,14 +192,14 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               text: `${translate(
                 "admin.settings.mail_setting.mail_form_fields.mail_heading"
               )}`,
-              containerClassName: "text-[14px] font-normal ",
+              containerClassName: "text-[14px] font-normal",
               id: "spanfield",
             },
           },
           {
             field: {
               type: Field.input,
-              className: "!p-4 !border-dark focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "mail",
               name: "mail",
@@ -250,8 +219,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
           "admin.settings.mail_setting.mail_form_fields.save_button"
         )}`,
         inputType: "submit",
-        className:
-          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+        className: "rounded-lg p-4 w-[152px] h-[50px] text-white hover:bg-none",
         id: "save",
         loading,
       },

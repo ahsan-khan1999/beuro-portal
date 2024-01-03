@@ -10,9 +10,7 @@ import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
-import { useEmptyStates } from "@/utils/hooks";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -27,9 +25,8 @@ const ExistingNotes = ({
     | contractTableTypes
     | InvoiceTableRowTypes;
 }) => {
-  const { notes } = useAppSelector((state) => state.note);
+  const { notes, loading } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
-
 
   return (
     <BaseModal
@@ -76,7 +73,7 @@ const ExistingNotes = ({
             />
           </svg>
         </span>
-        {notes?.length > 0 ? (
+        {notes && notes?.length > 0 ? (
           <>
             {notes?.map((item, key) => (
               <div

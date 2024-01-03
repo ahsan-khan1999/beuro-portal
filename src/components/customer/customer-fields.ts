@@ -35,12 +35,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
-                (item, key) => ({
+              options: Object.keys(staticEnums.CustomerType)
+                ?.slice(1)
+                .map((item, key) => ({
                   value: item,
                   label: item,
-                })
-              ),
+                })),
 
               control,
               disabled: isUpdate,
@@ -74,7 +74,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
@@ -126,7 +126,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass: "my-5",
+      containerClass: "mt-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "div",
@@ -227,7 +227,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "button",
               text: `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+              className: `rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,
