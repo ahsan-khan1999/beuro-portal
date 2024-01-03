@@ -46,14 +46,15 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent && selectedContent !== offerDetails?.content?.id) {
+    if (filteredContent ) {
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.title);
+      setValue("additionalDetails", filteredContent?.offerContent?.description);
 
     }
   }, [selectedContent])
+
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handlePrevious, 0,
-    { content: content, contentDetails: contentDetails, offerDetails }, setValue, trigger);
+    { content: content, contentDetails: contentDetails, offerDetails, selectedContent }, setValue, trigger);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: EditComponentsType.additionalEdit }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));

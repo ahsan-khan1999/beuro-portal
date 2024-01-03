@@ -47,7 +47,7 @@ export const useContractEmail = (
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.confirmationContent?.title,
       subject: contractDetails?.offerID?.content?.confirmationContent?.title,
-      description: contractDetails?.offerID?.content?.confirmationContent?.description,
+      description: contractDetails?.offerID?.content?.confirmationContent?.body,
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments
     })
   }, [])
@@ -61,7 +61,7 @@ export const useContractEmail = (
         email: contractDetails?.offerID?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
         subject: selectedContent?.confirmationContent?.title,
-        description: selectedContent?.confirmationContent?.description,
+        description: selectedContent?.confirmationContent?.body,
         pdf: selectedContent?.confirmationContent?.attachments,
       });
       setAttachements(transformAttachments(

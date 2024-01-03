@@ -100,7 +100,7 @@ const SERVICE_URLS = {
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
 
-  readOfferPublic: "/offer/public-read/"
+  readOfferPublic: "/offer/public-read"
 
 };
 
@@ -437,8 +437,8 @@ const updateAdminSettings = (data) =>
 const updateUserStatus = (data) =>
   put(SERVICE_URLS.changeStatus + `${data?.id}`, data, { feature: featureConstants.login });
 
-const createSignature = (data) =>
-  put(SERVICE_URLS.addSignature + `${data?.id}`, data, { feature: featureConstants.login });
+const createSignature = (data,formData) =>
+  put(SERVICE_URLS.addSignature + `${data?.id}`, formData, { feature: featureConstants.login });
 
 const updateContractContent = (data) =>
   put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });

@@ -36,7 +36,7 @@ const CustomerDetails = () => {
       {loading ? (
         <LoadingState />
       ) : (
-        <div className="w-full mt-8 ">
+        <div className="w-full my-8">
           <CustomerForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}

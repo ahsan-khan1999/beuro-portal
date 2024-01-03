@@ -95,7 +95,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.confirmationContent?.description || contractDetails?.offerID?.content?.confirmationContent?.description
+        value: contentDetails?.id && contentDetails?.confirmationContent?.body || contractDetails?.offerID?.content?.confirmationContent?.body
 
 
       },

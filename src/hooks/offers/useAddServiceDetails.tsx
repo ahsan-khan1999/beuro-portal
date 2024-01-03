@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -16,8 +15,6 @@ import {
 } from "@/components/offers/add/fields/add-offer-service-details-fields";
 import {
   generateAddfferServiceDetailsValidation,
-  generateOfferDiscountValidation,
-  mergeOfferSchemas,
 } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
@@ -26,8 +23,6 @@ import {
   setServiceDetails,
 } from "@/api/slices/service/serviceSlice";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
-import { FormField } from "@/types";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
@@ -46,7 +41,7 @@ export const useAddServiceDetails = (
     taxAmount: 0,
   });
   const [serviceType, setServiceType] = useState<ServiceType[]>([
-    ServiceType.EXISTING_SERVICE,
+    ServiceType.NEW_SERVICE,
   ]);
 
   const dispatch = useAppDispatch();

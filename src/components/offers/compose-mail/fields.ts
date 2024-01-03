@@ -95,7 +95,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.content?.offerContent?.description
+        value: contentDetails?.id && contentDetails?.offerContent?.body || offerDetails?.content?.offerContent?.body
 
       },
     },

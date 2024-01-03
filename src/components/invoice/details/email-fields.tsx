@@ -95,7 +95,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.receiptContent?.description || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.description
+        value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
 
 
       },

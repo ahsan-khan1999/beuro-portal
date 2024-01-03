@@ -13,7 +13,7 @@ const OfferDetailsData = ({
   return (
     <div
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
-      id="Offer Details"
+      id={translate("contracts.tabs_headings.offer_details")}
     >
       <h2 className="text-[#393939] text-lg font-medium">
         {translate("contracts.customer_details.heading")}

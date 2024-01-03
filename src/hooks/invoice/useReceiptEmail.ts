@@ -56,7 +56,7 @@ export const useInvoiceEmail = (
                     email: res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
                     content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
                     subject: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.title,
-                    description: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.description,
+                    description: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body,
                     pdf: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments
                 })
             })
@@ -73,7 +73,7 @@ export const useInvoiceEmail = (
                 email: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
                 content: selectedContent?.id,
                 subject: selectedContent?.receiptContent?.title,
-                description: selectedContent?.receiptContent?.description,
+                description: selectedContent?.receiptContent?.body,
                 pdf: selectedContent?.receiptContent?.attachments,
             });
             setAttachements(transformAttachments(

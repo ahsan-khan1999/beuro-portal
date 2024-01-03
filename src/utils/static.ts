@@ -611,8 +611,9 @@ export const staticEnums: Record<string, any> = {
     Post: 2,
   },
   TaxType: {
-    Include: 0,
-    Exclude: 1,
+    Inclusive: 0,
+    Exclusive: 1,
+    NoTax: 2
   },
   PaymentType: {
     Cash: 0,

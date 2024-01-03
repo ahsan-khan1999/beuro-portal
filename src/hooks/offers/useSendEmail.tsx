@@ -60,7 +60,7 @@ export const useSendEmail = (
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
       subject: offerDetails?.content?.offerContent?.title,
-      description: offerDetails?.content?.offerContent?.description,
+      description: offerDetails?.content?.offerContent?.body,
       pdf: offerDetails?.content?.offerContent?.attachments,
     });
 
@@ -73,7 +73,7 @@ export const useSendEmail = (
         email: offerDetails?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
         subject: selectedContent?.offerContent?.title,
-        description: selectedContent?.offerContent?.description,
+        description: selectedContent?.offerContent?.body,
         pdf: selectedContent?.offerContent?.attachments,
       });
       setAttachements(transformAttachments(

@@ -52,7 +52,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType).map(
+              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
                 (item, key) => ({
                   value: item,
                   label: item,

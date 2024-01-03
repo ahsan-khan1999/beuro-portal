@@ -30,6 +30,7 @@ export default function useFrogetPassword() {
   });
   const onClick = () => {
     router.push("/login")
+    onClose()
   }
   const fields = generateResetPassowrdFormField(register, loading, onClick);
   const onClose = () => {

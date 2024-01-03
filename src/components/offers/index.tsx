@@ -49,7 +49,7 @@ export default function Offers() {
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
         />
-      )}    
+      )}
 
       {renderModal()}
     </>

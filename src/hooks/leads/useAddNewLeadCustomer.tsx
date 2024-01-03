@@ -111,9 +111,9 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         step: 1,
         leadId: leadDetails?.id,
         stage: ComponentsType.addressAdd,
+
       };
       if (leadDetails?.customerID) apiData = { ...apiData, customerID: leadDetails?.customerID }
-
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );

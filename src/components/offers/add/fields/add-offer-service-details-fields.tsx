@@ -288,9 +288,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 id: "button",
                 text: "Remove",
                 inputType: "button",
-                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 0 && "hidden"
-                }`,
+                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
+                  }`,
                 onClick: () => remove(i),
               },
             },
@@ -464,6 +463,7 @@ const generateServiceCalulationChildren = (
       },
     };
   }
+  console.log(isTax, "taxType", taxType);
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
@@ -517,7 +517,7 @@ const generateServiceCalulationChildren = (
                 field: {
                   type: Field.toggleButton,
                   className: " !border-[#BFBFBF] focus:!border-primary ",
-                  id: "isTax",
+                  id: "span-field",
                   name: "isTax",
                   label: "Tax%",
                   checked: false,

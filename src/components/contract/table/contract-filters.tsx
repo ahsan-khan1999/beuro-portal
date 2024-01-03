@@ -109,7 +109,7 @@ export default function ContractFilters({
             { label: "Oldest", value: "createdAt" },
             { label: "A - Z", value: "title" },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         <ContractFilter
           filter={filter}

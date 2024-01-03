@@ -7,6 +7,7 @@ import { Button } from "@/base-components/ui/button/button";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
 
 export default function InvoicesFilters({
   filter,
@@ -18,6 +19,7 @@ export default function InvoicesFilters({
   handleFilterChange: (value: FilterType) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t: translate } = useTranslation();
   const checkbox: CheckBoxType[] = [
     { label: "Pending", type: `${staticEnums.InvoiceStatus.Pending}` },
     { label: "Overdue", type: `${staticEnums.InvoiceStatus.Overdue}` },
@@ -101,7 +103,7 @@ export default function InvoicesFilters({
             { label: "Oldest", value: "createdAt" },
             { label: "A - Z", value: "title" },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         <InvoicesFilter
           filter={filter}

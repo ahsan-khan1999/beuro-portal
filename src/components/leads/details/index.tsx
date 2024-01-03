@@ -7,7 +7,8 @@ import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
 
 const LeadsDetails = () => {
-  const { renderModal, leadDeleteHandler, leadDetails, loading } = useLeadDetail();
+  const { renderModal, leadDeleteHandler, leadDetails, loading } =
+    useLeadDetail();
   return (
     <>
       <Layout>
@@ -17,7 +18,7 @@ const LeadsDetails = () => {
             leadDetails={leadDetails}
           />
         </DetailsCard>
-        <LeadsDetailsData loading={loading}/>
+        <LeadsDetailsData loading={loading} />
       </Layout>
 
       {renderModal()}

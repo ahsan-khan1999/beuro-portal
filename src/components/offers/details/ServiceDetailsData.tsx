@@ -68,7 +68,7 @@ const ServiceDetailsData = ({
     <LeadsCardLayout>
       <div
         className="flex justify-between pb-5 border-b border-[#e5e5e5]"
-        id="Service Details"
+        id={translate("offers.tabs_heading.service")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("offers.service_details.main_heading")}
@@ -80,7 +80,7 @@ const ServiceDetailsData = ({
               query: { offer: offerDetails?.id },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <Image src={editIcon} alt="editIcon" />
           {translate("offers.service_details.edit_button")}

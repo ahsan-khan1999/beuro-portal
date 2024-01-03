@@ -1,7 +1,7 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { OfferActivity, OffersTableRowTypes } from "@/types/offers";
+import { OfferActivity, OffersTableRowTypes, PublicOffersTableRowTypes } from "@/types/offers";
 import { DEFAULT_OFFER, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
@@ -15,7 +15,8 @@ interface OfferState {
     lastPage: number,
     totalCount: number,
     offerDetails: OffersTableRowTypes,
-    offerActivity: OfferActivity | null
+    offerActivity: OfferActivity | null,
+    publicOffer: PublicOffersTableRowTypes | null
 }
 
 const initialState: OfferState = {
@@ -59,8 +60,8 @@ export const readOfferPublicDetails: AsyncThunk<boolean, object, object> | any =
         const { params } = args as any;
 
         try {
-            const response = await apiServices.readOfferDetail(params);
-            return response?.data?.data.Offer;
+            const response = await apiServices.readOfferDetailPublic(params);
+            return response?.data?.data;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -206,10 +207,10 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-        const { data, router, translate } = args as any;
+        const { data, router, translate,formData } = args as any;
 
         try {
-            await apiServices.createSignature(data);
+            await apiServices.createSignature(data,formData);
 
             return true;
         } catch (e: any) {
@@ -374,7 +375,7 @@ const OfferSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readOfferPublicDetails.fulfilled, (state, action) => {
-            state.offerDetails = action.payload;
+            state.publicOffer = action.payload;
             state.loading = false;
         });
         builder.addCase(readOfferPublicDetails.rejected, (state) => {

@@ -1,8 +1,9 @@
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
-import { DateRangeProps, User } from ".";
+import { DateRangeProps, TemplateType, User } from ".";
 import { ContentTableRowTypes } from "./content";
+import { EmailTemplate, Template, TemplateSettings } from "./settings";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -57,7 +58,16 @@ export interface OffersTableRowTypes {
   discountAmount: number;
   discountDescription: string;
   signature?: string
-  attachement?: string
+  attachement?: string;
+
+}
+
+
+export interface PublicOffersTableRowTypes {
+  Offer: OffersTableRowTypes
+  Template: TemplateType;
+  Mail: EmailTemplate
+
 }
 
 interface Address {
@@ -223,7 +233,7 @@ export interface OfferDetailCardProps {
   handleSendEmail: () => void;
   isSendEmail: boolean;
   handleSendByPost: () => void;
-  loading:boolean
+  loading: boolean
 }
 
 

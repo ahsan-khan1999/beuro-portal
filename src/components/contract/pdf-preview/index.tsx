@@ -124,6 +124,7 @@ export const DUMMY_DATA: PdfProps = {
     columnSettings: null,
     currPage: 0,
     totalPages: 0,
+    emailTemplateSettings: null
   },
   qrCode: {
     acknowledgementSlip: qrCodeAcknowledgementData,
@@ -249,7 +250,7 @@ const PdfPriview = () => {
               },
               aggrementDetails: contractDetails?.additionalDetails || "",
               isOffer: false,
-              signature:contractDetails?.offerID?.signature
+              signature: contractDetails?.offerID?.signature
             };
             const distributeItems = (): ServiceList[][] => {
               const totalItems =

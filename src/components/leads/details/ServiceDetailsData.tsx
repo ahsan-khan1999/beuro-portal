@@ -15,14 +15,18 @@ const ServiceDetailsData = ({
   onClick,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-
 }) => {
-  const { leadDetails } = useAppSelector(state => state.lead)
-  const { service } = useAppSelector(state => state.service)
+  const { leadDetails } = useAppSelector((state) => state.lead);
+  const { service } = useAppSelector((state) => state.service);
 
-
-  let requiredService = filterLead(leadDetails?.requiredService, service) as Service
-  let otherServices = filterLead(leadDetails?.otherServices, service) as Service[]
+  let requiredService = filterLead(
+    leadDetails?.requiredService,
+    service
+  ) as Service;
+  let otherServices = filterLead(
+    leadDetails?.otherServices,
+    service
+  ) as Service[];
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -31,14 +35,14 @@ const ServiceDetailsData = ({
     <LeadsCardLayout>
       <div
         className="flex justify-between items-center pb-5 "
-        id="Service Details"
+        id={translate("leads.tabs_headings.service")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("leads.service_details.heading")}
         </h2>
         <button
           onClick={() => onClick(2, ComponentsType.serviceEdit)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <Image src={editIcon} alt="editIcon" />
           {translate("leads.service_details.edit_button")}
@@ -111,10 +115,11 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.other_services")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              {
-                Array.isArray(otherServices) && otherServices?.map((item) => item.serviceName + ", ")
-              }
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap">
+              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis">
+                {Array.isArray(otherServices) &&
+                  otherServices?.map((item) => item.serviceName + ", ")}
+              </span>
             </div>
           </div>
         </div>

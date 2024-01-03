@@ -14,8 +14,10 @@ const TableFunctions = ({
 }) => {
   const { t: translate } = useTranslation();
   return (
-    <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">{translate("admin.support_requests.heading")}</h1>
+    <div className="flex justify-between flex-wrap items-center mb-4">
+      <h1 className="text-xl text-[#222B45] mb-2 mr-3">
+        {translate("admin.support_requests.heading")}
+      </h1>
       <CustomerFilter
         filter={filter}
         setFilter={setFilter}

@@ -31,7 +31,7 @@ const CustomerForm = ({
           <BaseButton
             buttonText={translate("customers.details.edit_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
           >
             <Image src={editInfo} alt="editInfo" />
           </BaseButton>
@@ -39,7 +39,7 @@ const CustomerForm = ({
           <BaseButton
             buttonText={translate("customers.details.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
           />
         )}
       </div>
