@@ -12,9 +12,9 @@ const oh = 153;
 const originalStrokeWidth = 1;
 
 export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
-  isSignatureDone }: {
+  isSignatureDone, setOfferSignature }: {
     signature?: string, isCanvas?: boolean, setIsSignatureDone?: SetStateAction<boolean>,
-    isSignatureDone?: boolean
+    isSignatureDone?: boolean, setOfferSignature?: SetStateAction<any>
   }) => {
   const dispatch = useAppDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,7 +43,6 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
 
 
 
-  console.log(signature,"signature");
 
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
@@ -66,24 +65,16 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
 
-        const formdata = new FormData();
+        const svgContent = signaturePad.toDataURL("image/svg+xml");
+        const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+        const file = new File([blob], 'signature.svg', { type: 'image/svg+xml' });
+        localStoreUtil.store_data('signature', file);
+        setOfferSignature && setOfferSignature(file)
+        setIsSubmitted(true);
 
-        const dataUrl = signaturePad.toDataURL("image/png");
-        fetch(dataUrl).then((res) => res.blob()).then(async (blob) => {
-          formdata.append("file", blob as any)
-          const res = await dispatch(uploadFileToFirebase(formdata));
-          if (res?.payload) {
-            localStoreUtil.store_data("signature", res?.payload)
-            setIsSubmitted(true);
-            //@ts-expect-error
-            setIsSignatureDone && setIsSignatureDone(true)
-          }
-        })
+        //@ts-expect-error
+        setIsSignatureDone && setIsSignatureDone(true);
       }
-
-
-      // Post to backend
-      // Example: postSignatureData(dataUrl);
     }
   };
 
@@ -92,7 +83,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     setIsSubmitted(false);
   };
   console.log(signature);
-  
+
   return (
     !signature &&
     <>

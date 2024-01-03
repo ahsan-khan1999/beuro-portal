@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useState } from "react";
+import { EmailTemplate } from "@/types/settings";
 
 export const SignPdf = <T,>({
     newPageData,
@@ -24,29 +25,33 @@ export const SignPdf = <T,>({
     templateSettings,
     isQr,
     totalPages,
-    action
+    action,
+    emailTemplateSettings,
 }: {
     pdfData: PdfProps<T>;
     newPageData: ServiceList[][];
     templateSettings: TemplateType | null;
     isQr?: boolean;
     totalPages: number;
-    action?: string
+    action?: string;
+    emailTemplateSettings: EmailTemplate | null,
 }) => {
     const dispatch = useAppDispatch()
     const { loading } = useAppSelector(state => state.offer)
+    const [offerSignature, setOfferSignature] = useState({});
+
     const { modal } = useAppSelector(state => state.global)
     const router = useRouter();
     const { action: pdfAction } = router.query
     const [isSignatureDone, setIsSignatureDone] = useState(false)
     const acceptOffer = async () => {
-        const signature = await localStoreUtil.get_data("signature")
-        if (!signature) return;
+        if (!offerSignature) return;
+        const formData = new FormData()
+        formData.append("signature",offerSignature as any)
         const data = {
-            signature: signature,
             id: pdfData?.id
         }
-        const response = await dispatch(signOffer({ data }))
+        const response = await dispatch(signOffer({ data,formData }))
         if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
     }
     const rejectOffer = () => {
@@ -106,6 +111,7 @@ export const SignPdf = <T,>({
                         templateSettings={templateSettings}
                         totalPages={totalPages}
                         isOffer={pdfData.isOffer}
+                        emailTemplateSettings={emailTemplateSettings}
                     />
                 )}
                 {newPageData.slice(1).map((pageItems, index) => (
@@ -135,6 +141,9 @@ export const SignPdf = <T,>({
                     isCanvas={action === "Reject" ? false : true}
                     setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
                     isSignatureDone={isSignatureDone}
+                    emailTemplateSettings={emailTemplateSettings}
+                    setOfferSignature={setOfferSignature}
+
                 />
                 {isQr && (
                     <PaymentQRCodeDetails

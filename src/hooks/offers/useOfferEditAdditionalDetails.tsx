@@ -48,7 +48,7 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     );
     if (filteredContent ) {
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.title);
+      setValue("additionalDetails", filteredContent?.offerContent?.description);
 
     }
   }, [selectedContent])

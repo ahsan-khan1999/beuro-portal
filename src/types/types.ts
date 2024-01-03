@@ -387,7 +387,7 @@ export type GenerateOffersFormField = (
     handleRemove?: (id: string) => void;
     onContentSelect?: () => void;
     offerDetails?: OffersTableRowTypes;
-    selectedContent?:string
+    selectedContent?: string
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
@@ -703,9 +703,10 @@ export interface DocumentDetailFooterProps {
   columnSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
+  emailTemplateSettings: EmailTemplate | null
 }
 export interface TemplateSettigsFirstColumn {
-  isCompany: boolean;
+  isCompanyName: boolean;
   isEmail: boolean;
   isPhoneNumber: boolean;
   isTaxNumber: boolean;
@@ -807,6 +808,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
   templateSettings: TemplateType | null;
   totalPages: number;
+  emailTemplateSettings: EmailTemplate | null
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -865,7 +867,10 @@ export interface AggrementProps {
   signature?: string;
   isCanvas?: boolean;
   setIsSignatureDone?: SetStateAction<boolean>,
-  isSignatureDone?: boolean
+  isSignatureDone?: boolean;
+  emailTemplateSettings: EmailTemplate | null,
+  setOfferSignature?: SetStateAction<any>
+
 }
 
 export interface FiltersComponentProps {

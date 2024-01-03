@@ -126,13 +126,13 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       leadID: "",
     });
   };
-  const handleContentSelect = () => {};
+  const handleContentSelect = () => { };
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    console.log(filteredContent,"filteredContent");
-    
+    console.log(filteredContent, "filteredContent");
+
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   }, [selectedContent]);
@@ -200,6 +200,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         stage: ComponentsType.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
+
       if (!apiData?.isLeadCreated) delete apiData["leadID"];
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
@@ -221,13 +222,15 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         onHandleNext(ComponentsType.addressAdded);
       }
     } else {
-      const apiData = {
+      const apiData: any = {
         ...data,
         step: 1,
         offerId: null,
         stage: ComponentsType.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
+      if (!apiData?.isLeadCreated) delete apiData["leadID"];
+
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
       );

@@ -9,7 +9,7 @@ import {
     updateOfferStatus,
 } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
-import { OffersTableRowTypes, ServiceList } from "@/types/offers";
+import { OffersTableRowTypes, PublicOffersTableRowTypes, ServiceList } from "@/types/offers";
 import {
     AcknowledgementSlipProps,
     CompanySettingsActionType,
@@ -27,6 +27,7 @@ import { SignPdf } from "@/components/pdf/sign-pdf";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import { staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { EmailTemplate } from "@/types/settings";
 
 export const productItems: ServiceList[] = [
     {
@@ -119,6 +120,7 @@ export const DUMMY_DATA: PdfProps = {
         columnSettings: null,
         currPage: 0,
         totalPages: 0,
+        emailTemplateSettings:null,
     },
     qrCode: {
         acknowledgementSlip: qrCodeAcknowledgementData,
@@ -127,14 +129,19 @@ export const DUMMY_DATA: PdfProps = {
     aggrementDetails: "",
 };
 interface ActionType {
-    payload: OffersTableRowTypes;
+    payload: PublicOffersTableRowTypes;
     type: string;
 }
 
 const SignPdfPreview = () => {
     const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
     const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
+    
     const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
+        null
+    );
+
+    const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
         null
     );
 
@@ -157,61 +164,61 @@ const SignPdfPreview = () => {
             dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
                 (response: ActionType) => {
                     if (response?.payload) {
-                        const offerDetails: OffersTableRowTypes = response?.payload;
+                        const offerDetails: PublicOffersTableRowTypes = response?.payload;
                         let formatData: PdfProps = {
-                            signature: offerDetails?.signature,
-                            id: offerDetails?.id,
+                            signature: offerDetails?.Offer?.signature,
+                            id: offerDetails?.Offer?.id,
                             emailHeader: {
-                                offerNo: offerDetails?.offerNumber,
-                                emailStatus: offerDetails?.emailStatus,
+                                offerNo: offerDetails?.Offer?.offerNumber,
+                                emailStatus: offerDetails?.Offer?.emailStatus,
                             },
                             headerDetails: {
-                                offerNo: offerDetails?.offerNumber,
-                                offerDate: offerDetails?.createdAt,
-                                createdBy: offerDetails?.createdBy?.fullName,
-                                logo: offerDetails?.createdBy?.company?.logo
+                                offerNo: offerDetails?.Offer?.offerNumber,
+                                offerDate: offerDetails?.Offer?.createdAt,
+                                createdBy: offerDetails?.Offer?.createdBy?.fullName,
+                                logo: offerDetails?.Offer?.createdBy?.company?.logo
                             },
                             contactAddress: {
                                 address: {
-                                    name: offerDetails?.leadID?.customerDetail?.fullName,
-                                    city: offerDetails?.leadID?.customerDetail?.address?.country,
+                                    name: offerDetails?.Offer?.leadID?.customerDetail?.fullName,
+                                    city: offerDetails?.Offer?.leadID?.customerDetail?.address?.country,
                                     postalCode:
-                                        offerDetails?.leadID?.customerDetail?.address?.postalCode,
+                                        offerDetails?.Offer?.leadID?.customerDetail?.address?.postalCode,
                                     streetWithNumber:
-                                        offerDetails?.leadID?.customerDetail?.address?.streetNumber,
+                                        offerDetails?.Offer?.leadID?.customerDetail?.address?.streetNumber,
                                 },
-                                email: offerDetails?.leadID?.customerDetail?.email,
-                                phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+                                email: offerDetails?.Offer?.leadID?.customerDetail?.email,
+                                phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
                             },
                             movingDetails: {
-                                address: offerDetails?.addressID?.address,
-                                header: offerDetails?.title,
-                                workDates: offerDetails?.date,
+                                address: offerDetails?.Offer?.addressID?.address,
+                                header: offerDetails?.Offer?.title,
+                                workDates: offerDetails?.Offer?.date,
                             },
-                            serviceItem: offerDetails?.serviceDetail?.serviceDetail,
+                            serviceItem: offerDetails?.Offer?.serviceDetail?.serviceDetail,
                             serviceItemFooter: {
-                                subTotal: offerDetails?.subTotal?.toString(),
-                                tax: offerDetails?.taxAmount?.toString(),
-                                discount: offerDetails?.discountAmount?.toString(),
-                                grandTotal: offerDetails?.total?.toString(),
+                                subTotal: offerDetails?.Offer?.subTotal?.toString(),
+                                tax: offerDetails?.Offer?.taxAmount?.toString(),
+                                discount: offerDetails?.Offer?.discountAmount?.toString(),
+                                grandTotal: offerDetails?.Offer?.total?.toString(),
                             },
                             footerDetails: {
                                 firstColumn: {
-                                    companyName: offerDetails?.createdBy?.company?.companyName,
-                                    email: offerDetails?.createdBy?.email,
-                                    phoneNumber: offerDetails?.createdBy?.company?.phoneNumber,
-                                    taxNumber: offerDetails?.createdBy?.company?.taxNumber,
-                                    website: offerDetails?.createdBy?.company?.website,
+                                    companyName: offerDetails?.Offer?.createdBy?.company?.companyName,
+                                    email: offerDetails?.Offer?.createdBy?.email,
+                                    phoneNumber: offerDetails?.Offer?.createdBy?.company?.phoneNumber,
+                                    taxNumber: offerDetails?.Offer?.createdBy?.company?.taxNumber,
+                                    website: offerDetails?.Offer?.createdBy?.company?.website,
                                 },
                                 secondColumn: {
                                     address: {
-                                        postalCode: offerDetails?.createdBy?.company.address.postalCode,
-                                        streetNumber: offerDetails?.createdBy?.company.address.streetNumber,
+                                        postalCode: offerDetails?.Offer?.createdBy?.company.address.postalCode,
+                                        streetNumber: offerDetails?.Offer?.createdBy?.company.address.streetNumber,
                                     },
                                     bankDetails: {
-                                        accountNumber: offerDetails?.createdBy?.company.bankDetails.accountNumber,
-                                        bankName: offerDetails?.createdBy?.company.bankDetails.bankName,
-                                        ibanNumber: offerDetails?.createdBy?.company.bankDetails.ibanNumber,
+                                        accountNumber: offerDetails?.Offer?.createdBy?.company.bankDetails.accountNumber,
+                                        bankName: offerDetails?.Offer?.createdBy?.company.bankDetails.bankName,
+                                        ibanNumber: offerDetails?.Offer?.createdBy?.company.bankDetails.ibanNumber,
                                     },
                                 },
                                 thirdColumn: {},
@@ -227,18 +234,18 @@ const SignPdfPreview = () => {
                                 payableTo: qrCodePayableToData,
                             },
                             aggrementDetails:
-                                offerDetails?.content?.offerContent?.description || "",
+                                offerDetails?.Offer?.content?.offerContent?.description || "",
                             isOffer: true,
-                            
+
                         };
                         const distributeItems = (): ServiceList[][] => {
                             const totalItems =
-                                offerDetails?.serviceDetail?.serviceDetail?.length;
+                                offerDetails?.Offer?.serviceDetail?.serviceDetail?.length;
                             let pages: ServiceList[][] = [];
 
                             if (totalItems > maxItemsFirstPage) {
                                 pages.push(
-                                    offerDetails?.serviceDetail?.serviceDetail?.slice(
+                                    offerDetails?.Offer?.serviceDetail?.serviceDetail?.slice(
                                         0,
                                         maxItemsFirstPage
                                     )
@@ -249,14 +256,14 @@ const SignPdfPreview = () => {
                                     i += maxItemsPerPage
                                 ) {
                                     pages.push(
-                                        offerDetails?.serviceDetail?.serviceDetail?.slice(
+                                        offerDetails?.Offer?.serviceDetail?.serviceDetail?.slice(
                                             i,
                                             i + maxItemsPerPage
                                         )
                                     );
                                 }
                             } else {
-                                pages.push(offerDetails?.serviceDetail?.serviceDetail);
+                                pages.push(offerDetails?.Offer?.serviceDetail?.serviceDetail);
                             }
 
                             return pages;
@@ -264,6 +271,41 @@ const SignPdfPreview = () => {
 
                         setNewPageData(distributeItems());
                         setOfferData(formatData);
+                        if (offerDetails?.Template) {
+                            const {
+                                firstColumn,
+                                fourthColumn,
+                                isFirstColumn,
+                                isFourthColumn,
+                                isSecondColumn,
+                                isThirdColumn,
+                                secondColumn,
+                                thirdColumn,
+                            }: TemplateType = offerDetails?.Template;
+
+                            setTemplateSettings(() => ({
+                                firstColumn,
+                                secondColumn,
+                                thirdColumn,
+                                fourthColumn,
+                                isFirstColumn,
+                                isFourthColumn,
+                                isSecondColumn,
+                                isThirdColumn,
+                            }))
+                        }
+                        if (offerDetails?.Mail) {
+                            setEmailTemplateSettings({
+                                email: offerDetails?.Mail?.email,
+                                FooterColour: offerDetails?.Mail?.FooterColour,
+                                logo: offerDetails?.Mail?.logo,
+                                mobileNumber: offerDetails?.Mail?.mobileNumber,
+                                phoneNumber: offerDetails?.Mail?.phoneNumber,
+                                textColour: offerDetails?.Mail?.textColour,
+
+
+                            })
+                        }
                     }
                 }
             );
@@ -271,40 +313,7 @@ const SignPdfPreview = () => {
 
     }, [offerID]);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const response: CompanySettingsActionType = await dispatch(
-                    getTemplateSettings()
-                );
-                if (response?.payload?.Template) {
-                    const {
-                        firstColumn,
-                        fourthColumn,
-                        isFirstColumn,
-                        isFourthColumn,
-                        isSecondColumn,
-                        isThirdColumn,
-                        secondColumn,
-                        thirdColumn,
-                    }: TemplateType = response.payload.Template;
 
-                    setTemplateSettings(() => ({
-                        firstColumn,
-                        secondColumn,
-                        thirdColumn,
-                        fourthColumn,
-                        isFirstColumn,
-                        isFourthColumn,
-                        isSecondColumn,
-                        isThirdColumn,
-                    }));
-                }
-            } catch (error) {
-                console.error("Error fetching template settings:", error);
-            }
-        })();
-    }, []);
     const totalItems = offerData?.serviceItem?.length;
 
     const calculateTotalPages = useMemo(() => {
@@ -346,7 +355,7 @@ const SignPdfPreview = () => {
     const onClose = () => {
         dispatch(updateModalType({ type: ModalType.NONE }));
     };
-    
+
     return (
         <>
 
@@ -357,6 +366,7 @@ const SignPdfPreview = () => {
                     templateSettings={templateSettings}
                     totalPages={calculateTotalPages}
                     action={action as string}
+                    emailTemplateSettings={emailTemplateSettings}
                 />
             </div>
         </>

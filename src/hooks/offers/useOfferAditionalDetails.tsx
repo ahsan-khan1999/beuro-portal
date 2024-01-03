@@ -50,8 +50,9 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
       (item) => item.id === selectedContent
     );
     if (filteredContent ) {
+      
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.title);
+      setValue("additionalDetails", filteredContent?.offerContent?.description);
 
     }else{
 

@@ -31,7 +31,7 @@ const PieChart = ({ data }) => {
       ?.classList.add("chart-legend-custom-padding");
     // Clean up the chart when the component is unmounted
     return () => {
-      myPieChart.destroy();
+      myPieChart?.destroy();
     };
   }, [data]);
 

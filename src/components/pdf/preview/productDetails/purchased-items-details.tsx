@@ -18,6 +18,7 @@ export const ProductPurchasedItemsDetails = ({
   templateSettings,
   totalPages,
   isOffer,
+  emailTemplateSettings
 }: PurchasedItemsDetailsProps) => {
   return (
     <div>
@@ -32,7 +33,7 @@ export const ProductPurchasedItemsDetails = ({
 
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
       </div>
-      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} />
+      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} emailTemplateSettings={emailTemplateSettings}/>
     </div>
   );
 };
