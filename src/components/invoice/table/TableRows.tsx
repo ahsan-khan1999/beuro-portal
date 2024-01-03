@@ -1,7 +1,6 @@
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import React from "react";
 import { useRouter } from "next/router";
-import { getInvoiceStatusColor } from "@/utils/utility";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -16,7 +15,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_200px)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(130px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(150px,_250px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_200px)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(70px,_70px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_100%)_minmax(150px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(200px,_200px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 rounded-md"
           >
             <span className="py-4 flex items-center">{item.invoiceNumber}</span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex">
