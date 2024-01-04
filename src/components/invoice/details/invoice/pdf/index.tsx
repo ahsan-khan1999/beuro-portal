@@ -207,7 +207,7 @@ const DetailsPdfPriview = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
               offerDate: invoiceDetails?.invoiceID?.createdAt,
               createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-              logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
+              logo: invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.logo,
             },
             contactAddress: {
               address: {
@@ -284,7 +284,7 @@ const DetailsPdfPriview = () => {
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: false,
-            signature:invoiceDetails?.invoiceID?.contractID?.offerID?.signature
+            signature: invoiceDetails?.invoiceID?.contractID?.offerID?.signature
           };
           const distributeItems = (): ServiceList[][] => {
             const totalItems =
@@ -389,19 +389,27 @@ const DetailsPdfPriview = () => {
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
   const handleEmailSend = async () => {
     setActiveButtonId("email");
-    if (email) {
+    try {
+      const localStorageContractData = await localStoreUtil.get_data(
+        "contractComposeEmail"
+      );
+
       const data = {
         id: invoiceID,
-        email: email.email,
+        email: localStorageContractData?.email,
         subject: invoiceInfoObj?.subject,
         description: invoiceInfoObj?.description,
-        pdf: email?.pdf,
+        pdf: localStorageContractData?.pdf,
       };
-
-      const res = await dispatch(sendInvoiceEmail({ data }));
-      if (res?.payload)
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      if (localStorageContractData) {
+        const res = await dispatch(sendInvoiceEmail({ data }));
+        if (res?.payload)
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } catch (error) {
+      console.error("Error in handleEmailSend:", error);
     }
+
   };
   const handleSendByPost = async () => {
     setActiveButtonId("post");
