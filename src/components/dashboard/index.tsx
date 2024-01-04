@@ -50,6 +50,7 @@ const AdminDashboard = () => {
       `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
   });
+
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });

@@ -161,7 +161,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "button",
               text: `${translate("employees.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${
+              className: `rounded-lg px-4 w-fit h-auto text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,

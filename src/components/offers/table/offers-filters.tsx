@@ -105,7 +105,7 @@ export default function OffersFilters({
   };
 
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col xLarge:flex-row xLarge:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField

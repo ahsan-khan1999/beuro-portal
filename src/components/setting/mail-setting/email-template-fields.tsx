@@ -1,16 +1,20 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateEmailTemplateFormField } from "@/types";
+import { useTranslation } from "next-i18next";
 
 export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
   register,
   loading,
   emailSettings,
-  control,
+  control
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       label: {
-        text: "Change the logo",
+        text: `${translate(
+          "setting.mail_setting.template_form_fields.change_logo"
+        )}`,
         htmlFor: "logo",
         className: "mb-[10px] text-sm font-normal text-[#393939]",
       },
@@ -29,7 +33,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
       containerClass: "mt-[35px]",
       field: {
         type: Field.span,
-        text: "Contact settings(Footer)",
+        text: `${translate(
+          "setting.mail_setting.template_form_fields.contact_setting_heading"
+        )}`,
         name: Field.span,
         containerClassName: "text-[#4B4B4B] text-base font-medium",
         id: "",
@@ -45,7 +51,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Email",
+              text: `${translate(
+                "setting.mail_setting.template_form_fields.email"
+              )}`,
               htmlFor: "email",
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
@@ -62,7 +70,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Phone Number",
+              text: `${translate(
+                "setting.mail_setting.template_form_fields.phone_number"
+              )}`,
               htmlFor: "phoneNumber",
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
@@ -73,13 +83,15 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "!border-[#BFBFBF] focus:!border-primary",
               control,
               country: "ch",
-              value: emailSettings?.phoneNumber || ""
+              value: emailSettings?.phoneNumber || "",
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Mobile Number",
+              text: `${translate(
+                "setting.mail_setting.template_form_fields.mobile_number"
+              )}`,
               htmlFor: "mobileNumber",
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
@@ -90,8 +102,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "!border-[#BFBFBF] focus:!border-primary",
               control,
               country: "ch",
-              value: emailSettings?.mobileNumber || ""
-
+              value: emailSettings?.mobileNumber || "",
             },
           },
         ],
@@ -102,7 +113,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
       containerClass: "my-8",
       field: {
         type: Field.span,
-        text: "Color settings",
+        text: `${translate(
+          "setting.mail_setting.template_form_fields.color_setting"
+        )}`,
         name: Field.span,
         containerClassName: "text-[#4B4B4B] text-base font-medium",
         id: "",
@@ -118,7 +131,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Footer Color",
+              text: `${translate(
+                "setting.mail_setting.template_form_fields.footer_color"
+              )}`,
               htmlFor: "FooterColour",
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
@@ -135,7 +150,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Text Color(Footer)",
+              text: `${translate(
+                "setting.mail_setting.template_form_fields.text_color"
+              )}`,
               htmlFor: "textColour",
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
@@ -158,7 +175,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Save Setting",
+        text: `${translate(
+          "setting.mail_setting.template_form_fields.save_setting"
+        )}`,
         inputType: "submit",
         className:
           "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",

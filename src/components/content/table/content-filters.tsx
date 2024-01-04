@@ -59,7 +59,7 @@ export default function ContentFilters({
           { label: "Oldest", value: "createdAt" },
           { label: "A - Z", value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       <ContentFilter
         filter={filter}

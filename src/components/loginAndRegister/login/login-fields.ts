@@ -1,18 +1,19 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateCompanyProfileFormField, GenerateRegistrationFormField, GenerateResetPasswordFormField } from "@/types";
-import bankNameIcon from "@/assets/svgs/bank-name.svg";
-import NameIcon from "@/assets/svgs/name-input.svg";
-import phoneIcon from "@/assets/svgs/phone-number.svg";
-import websiteIcon from "@/assets/svgs/website-input.svg";
-import mwstIcon from "@/assets/svgs/mwst-number.svg";
-import locationIcon from "@/assets/svgs/location.svg";
-import postalCodeIcon from "@/assets/svgs/postal-code.svg";
+import {
+  FormField,
+  GenerateCompanyProfileFormField,
+  GenerateRegistrationFormField,
+  GenerateResetPasswordFormField,
+} from "@/types";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
+import { useTransition } from "react";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
   loading
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-5",
@@ -81,7 +82,6 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
               containerClassName: "inline-flex font-medium text-gray",
               linkClassName: "text-sm font-medium text-primary",
               id: "",
-
             },
           },
         ],
@@ -111,7 +111,6 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         containerClassName: "text-[14px] text-dark  ",
         linkClassName: "  text-primary",
         id: "",
-
       },
     },
   ];
@@ -122,18 +121,19 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
   register,
   loading,
   control,
-  user,
+  user
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Company Name",
+              text: `${translate("login_detail.company_details.company_name")}`,
               htmlFor: "Company Name Input",
               className: "mb-[10px]",
             },
@@ -148,12 +148,12 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user?.company?.companyName
+              value: user?.company?.companyName,
             },
           },
           {
             label: {
-              text: "Phone Number",
+              text: `${translate("login_detail.company_details.phone_number")}`,
               htmlFor: "Phone Number Input",
               className: "mb-[10px]",
             },
@@ -163,12 +163,14 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "phoneNumber",
               control,
               country: "ch",
-              value: user && user?.company?.phoneNumber
+              value: user && user?.company?.phoneNumber,
             },
           },
           {
             label: {
-              text: "Mobile Number",
+              text: `${translate(
+                "login_detail.company_details.mobile_number"
+              )}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -179,13 +181,12 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               control,
               country: "ch",
               value: user && user?.company?.mobileNumber,
-              className: "h-42"
-
+              className: "h-42",
             },
           },
           {
             label: {
-              text: "Website",
+              text: `${translate("login_detail.company_details.website")}`,
               htmlFor: "website",
               className: "mb-[10px]",
             },
@@ -205,14 +206,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user?.company?.website
-
+              value: user?.company?.website,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "MwST Number",
+              text: `${translate("login_detail.company_details.mwst_number")}`,
               htmlFor: "taxNumber",
               className: "mb-[10px]",
             },
@@ -238,13 +238,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.taxNumber?.toString()
+              value: user && user?.company?.taxNumber?.toString(),
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Upload Company Logo",
+              text: `${translate("login_detail.company_details.upload_logo")}`,
               htmlFor: "logo",
               className: "mb-[10px]",
             },
@@ -253,8 +253,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "logo",
               type: Field.dragAndDropFileField,
               control,
-              value: user && user?.company?.logo
-
+              value: user && user?.company?.logo,
             },
           },
         ],
@@ -266,10 +265,10 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Next",
+        text: `${translate("login_detail.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg  w-[160px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg  min-w-[160px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },
@@ -284,17 +283,17 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
   user,
   setCurrentFormStage
 ) => {
-
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Street Number",
+              text: `${translate("login_detail.location_details.street_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -320,12 +319,12 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.streetNumber
+              value: user && user?.company?.address?.streetNumber,
             },
           },
           {
             label: {
-              text: "House Number",
+              text: `${translate("login_detail.location_details.house_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -351,13 +350,13 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.houseNumber
+              value: user && user?.company?.address?.houseNumber,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Postcode",
+              text: `${translate("login_detail.location_details.post_code")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -382,13 +381,13 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.postalCode
+              value: user && user?.company?.address?.postalCode,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "City",
+              text: `${translate("login_detail.location_details.City")}`,
               htmlFor: "text",
               className: "mb-[10px]",
             },
@@ -414,8 +413,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.city
-
+              value: user && user?.company?.address?.city,
             },
           },
         ],
@@ -431,21 +429,22 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("login_detail.back_button")}`,
               inputType: "button",
-              onClick: () => setCurrentFormStage && setCurrentFormStage("companyDetails"),
+              onClick: () =>
+                setCurrentFormStage && setCurrentFormStage("companyDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 min-w-[153px] w-fit h-[50px]   text-[#B3B3B3] hover:bg-none",
             },
           },
           {
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: `${translate("login_detail.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg   px-4 w-[160px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg  px-4 min-w-[160px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },
@@ -465,17 +464,18 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
   // trigger,
   // router
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Choose currency",
+              text: `${translate("login_detail.bank_details.choose_currency")}`,
               htmlFor: "select",
               className: "mb-[10px]",
             },
@@ -483,23 +483,19 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
               type: Field.select,
               id: "1",
               name: "currency",
-              options: Object.keys(staticEnums["currency"]).map((item) => (
-                {
-                  label: item,
-                  
-                  value: item,
+              options: Object.keys(staticEnums["currency"]).map((item) => ({
+                label: item,
 
-                }
-              )),
+                value: item,
+              })),
               control,
               value: user && user?.company?.bankDetails?.currency,
-              className: "h-[42px] !px-4"
-
+              className: "h-[42px] !px-4",
             },
           },
           {
             label: {
-              text: "Bank name",
+              text: `${translate("login_detail.bank_details.bank_name")}`,
               htmlFor: "name",
               className: "mb-[10px]",
             },
@@ -520,13 +516,12 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.bankName,
-
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Account no",
+              text: `${translate("login_detail.bank_details.account_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -547,13 +542,12 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.accountNumber,
-
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Iban Number",
+              text: `${translate("login_detail.bank_details.iban_number")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -574,7 +568,6 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.ibanNumber,
-
             },
           },
         ],
@@ -591,21 +584,22 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("login_detail.back_button")}`,
               inputType: "button",
-              onClick: () => setCurrentFormStage && setCurrentFormStage("locationDetails"),
+              onClick: () =>
+                setCurrentFormStage && setCurrentFormStage("locationDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 min-w-[153px] w-fit h-[50px]   text-[#B3B3B3] hover:bg-none",
             },
           },
           {
             field: {
               type: Field.button,
               id: "button",
-              text: "Lets finish",
+              text: `${translate("login_detail.finish_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg   px-4 w-[180px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[180px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

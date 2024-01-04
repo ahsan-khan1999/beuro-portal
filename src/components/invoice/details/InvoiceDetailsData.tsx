@@ -25,7 +25,7 @@ const InvoiceDetailsData = ({
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 ">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 mb-5">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -75,9 +75,8 @@ const InvoiceDetailsData = ({
           </div>
         )}
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3">
+      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-20 pt-4">
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">

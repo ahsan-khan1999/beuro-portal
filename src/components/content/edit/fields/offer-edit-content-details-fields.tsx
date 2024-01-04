@@ -1,7 +1,12 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
-import icon from "@/assets/svgs/Vector.svg"
-import { FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormRegister } from "react-hook-form";
+import icon from "@/assets/svgs/Vector.svg";
+import {
+  FieldValues,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
+  UseFormRegister,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
 export const OfferEditContentDetailsFormField: GenerateContentFormField = (
@@ -45,8 +50,9 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         type: Field.div,
         id: "div-field",
         className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children: (count) && generateAddressChildren(register, count, translate, append, remove),
-
+        children:
+          count &&
+          generateAddressChildren(register, count, translate, append, remove),
       },
     },
 
@@ -105,8 +111,12 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
+<<<<<<< HEAD
               value: contentDetails?.id && contentDetails?.offerContent?.body || ""
 
+=======
+              value: contentDetails?.id && contentDetails?.offerContent?.body,
+>>>>>>> 63931e3c797362c772874b66c9ad21cb674280c1
             },
           },
 
@@ -127,10 +137,10 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               control,
               attachements: attachements,
               setAttachements: setAttachements,
-              isAttachement: true
+              isAttachement: true,
             },
           },
-        ]
+        ],
       },
     },
 
@@ -139,7 +149,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Next",
+        text: `${translate("common.next_button")}`,
         inputType: "submit",
         className:
           "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
@@ -151,7 +161,13 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   return formField;
 };
 
-const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: number, translate: Function, append?: UseFieldArrayAppend<FieldValues, "offerContent.address">, remove?: UseFieldArrayRemove) => {
+const generateAddressChildren = (
+  register: UseFormRegister<FieldValues>,
+  count: number,
+  translate: Function,
+  append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
+  remove?: UseFieldArrayRemove
+) => {
   const addressformFields = [];
   for (let i = 0; i < count; i++) {
     addressformFields.push({
@@ -168,12 +184,9 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
         id: `offerContent.address.${i}.value`,
         name: `offerContent.address.${i}.value`,
         remove: i > 0 && "Remove",
-        onRemove: () => (i > 0 && remove) && remove(i),
-
-
+        onRemove: () => i > 0 && remove && remove(i),
       },
-    })
-
+    });
   }
   addressformFields.push({
     containerClass: "mb-0 mt-3 maxSize:mt-[28px]",
@@ -188,5 +201,5 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
       icon: icon,
     },
   });
-  return addressformFields
+  return addressformFields;
 };

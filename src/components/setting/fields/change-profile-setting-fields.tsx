@@ -13,25 +13,29 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-4 mt-6",
+      containerClass: "my-5 ",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex ",
+        className:
+          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center ",
         children: [
           {
+            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.public_info")}`,
-              containerClassName: "text-[14px] text-[#393939] font-normal ",
-              id: "",
+              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              id: "info",
             },
           },
           {
+            containerClass: "border-lightGray border-b-[1px]",
+
             field: {
               type: Field.span,
-              containerClassName: "bg-[#BFBFBF]  w-full h-[5px]",
-              id: "",
+              containerClassName: "  ",
+              id: "border",
             },
           },
         ],
@@ -222,7 +226,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)] gap-x-4 items-center ",
+          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center ",
         children: [
           {
             containerClass: "",
@@ -298,8 +302,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: `${translate("setting.account_setting.city")}`,
-              htmlFor: "company.address.city",
+              text: `${translate("setting.account_setting.country")}`,
+              htmlFor: "address.address.city",
             },
             field: {
               type: Field.input,
@@ -319,8 +323,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: `${translate("setting.account_setting.houseNumber")}`,
-              htmlFor: "company.address.houseNumber",
+              text: `${translate("setting.account_setting.house_no")}`,
+              htmlFor: "address.address.houseNumber",
             },
             field: {
               type: Field.input,
@@ -413,7 +417,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       },
     },
     {
-      containerClass: "mt-5 ",
+      containerClass: "mt-5 mb-[14px]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -480,7 +484,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               text: `${translate("setting.account_setting.restore_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px] text-dark hover:bg-none",
             },
           },
           {
@@ -493,7 +497,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-fit h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

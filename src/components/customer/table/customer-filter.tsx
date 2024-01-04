@@ -42,7 +42,6 @@ export default function CustomerFilter({
     });
   };
 
-
   return (
     <div className="flex gap-x-4 items-center">
       <InputField
@@ -62,7 +61,7 @@ export default function CustomerFilter({
           { label: "Oldest", value: "createdAt" },
           { label: "A - Z", value: "fullName" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       {/* <CustomerFilters
         filter={filter}

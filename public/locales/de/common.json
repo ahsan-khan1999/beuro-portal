@@ -27,6 +27,43 @@
     "remember_me": "Erinnern Sie sich an mich",
     "forgot_password": "Passwort vergessen"
   },
+  "login_detail": {
+    "back_button": "Zurück",
+    "next_button": "Weiter",
+    "finish_button": "Abschließen",
+    "tabs_heading": {
+      "company": "Unternehmensdetails",
+      "location": "Standortdetails",
+      "bank": "Bankdetails"
+    },
+    "company_details": {
+      "heading": "Erzählen Sie uns etwas über Ihr Unternehmen",
+      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
+      "company_name": "Firmenname",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "website": "Webseite",
+      "mwst_number": "MwSt-Nummer",
+      "upload_logo": "Firmenlogo hochladen"
+    },
+    "location_details": {
+      "heading": "Erzählen Sie uns etwas über Ihren Standort",
+      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
+      "street_no": "Straßennummer",
+      "house_no": "Hausnummer",
+      "post_code": "Postleitzahl",
+      "City": "Stadt"
+    },
+    "bank_details": {
+      "heading": "Fahren Sie mit Ihrer Bank fort",
+      "sub_heading": "Erzählen Sie uns etwas über Ihr Unternehmen, Lorem ipsum Dollar Smith.",
+      "choose_currency": "Währung auswählen",
+      "optional": "Optional",
+      "bank_name": "Bankname",
+      "account_no": "Kontonummer",
+      "iban_number": "IBAN-Nummer"
+    }
+  },
   "account_type": {
     "main_heading": "Konto-Typ",
     "sub_heading": "Wählen Sie Ihren Kontotyp",
@@ -288,7 +325,8 @@
       "send_at": "Abschicken an",
       "viewed_at": "Gesehen bei",
       "status": "Status",
-      "view_mail": "Mail ansehen"
+      "view_mail": "Mail ansehen",
+      "edit": "Bearbeiten"
     },
     "card_content": {
       "main_heading": "E-Mail-Details",
@@ -316,6 +354,7 @@
     "main_heading": "Dienstleistungen",
     "add_button": "Neu hinzufügen",
     "add_service_heading": "Neuen Service hinzufügen",
+    "service_detail_tab": "Service-Details",
     "table_headings": {
       "id": "ID",
       "service": "Dienstleistung",
@@ -346,6 +385,7 @@
     "main_heading": "Mitarbeiter",
     "add_button": "Neu hinzufügen",
     "add_new_employee": "Mitarbeiter hinzufügen",
+    "employee_tab": "Mitarbeiter Details",
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -428,6 +468,7 @@
       "street_address": "Straßenadresse",
       "post_code": "Postleitzahl",
       "country": "Land",
+      "house_no": "Hausnummer",
       "bank_name": "Bankname",
       "account_no": "Kontonummer",
       "iban_number": "IBAN-Nummer",
@@ -544,6 +585,20 @@
       }
     },
     "mail_setting": {
+      "email_config": "E-Mail-Konfiguration",
+      "email_templates": "E-Mail-Vorlagen",
+      "template_form_fields": {
+        "heading": "Logo-Einstellung",
+        "change_logo": "Logo ändern",
+        "contact_setting_heading": "Kontakteinstellungen (Fußzeile)",
+        "email": "E-Mail",
+        "phone_number": "Telefonnummer",
+        "mobile_number": "Handynummer",
+        "color_setting": "Farbeinstellungen",
+        "footer_color": "Footer-Farbe",
+        "text_color": "Textfarbe (Fußzeile)",
+        "save_setting": "Einstellung speichern"
+      },
       "system_config": "System-Mail-Konfiguration verwenden",
       "own_config": "Eigene Mail-Konfiguration verwenden",
       "mail_form_fields": {
@@ -733,6 +788,13 @@
     "main_heading": "Inhalt",
     "create_content": "Inhalt erstellen",
     "add_button": "Neu hinzufügen",
+    "content_card_detail": {
+      "heading": "Inhaltsdetails",
+      "s_no": "Nr.",
+      "title": "Titel des Inhalts",
+      "worker": "Bearbeiter",
+      "created_date": "Erstellungsdatum"
+    },
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -885,7 +947,12 @@
     }
   },
   "common": {
+    "next_button": "Weiter",
+    "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
+    "note": "Hinweis",
+    "search": "Suche...",
+    "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
     "notes_modal": {
       "heading": "Notizen",
@@ -1492,7 +1559,7 @@
     "count": "Anzahl",
     "total": "Gesamt",
     "sub_total": "Zwischensumme",
-    "tax": "Steuern",
+    "tax": "Steuer%",
     "discount": "Rabatt",
     "grand_total": "Gesamtsumme",
     "validate_heading": "Gültigkeit des Angebots",
@@ -1503,6 +1570,9 @@
     "page": "Seite",
     "receipt_slip": "Quittungsschein",
     "payment_part": "Zahlungsteil",
-    "account": "Konto / Zahlbar an"
+    "account": "Konto / Zahlbar an",
+    "condition_for_moving": "Bedingungen für Umzugsschätzungen",
+    "thanks_message": "Vielen Dank für Ihr Interesse an unseren Dienstleistungen.",
+    "pdf_description": "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen."
   }
 }
