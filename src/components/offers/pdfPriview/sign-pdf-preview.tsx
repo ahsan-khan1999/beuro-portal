@@ -81,7 +81,8 @@ export const DUMMY_DATA: PdfProps = {
         offerNo: "O-4040 Umzugsfuchs",
         offerDate: "22.09.2023",
         createdBy: "Heiniger Michèle",
-        logo: ""
+        logo: "",
+        emailTemplateSettings: null
     },
     contactAddress: {
         address: {
@@ -178,7 +179,8 @@ const SignPdfPreview = () => {
                                 offerNo: offerDetails?.Offer?.offerNumber,
                                 offerDate: offerDetails?.Offer?.createdAt,
                                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
-                                logo: offerDetails?.Mail?.logo
+                                logo: offerDetails?.Mail?.logo,
+                                emailTemplateSettings: offerDetails?.Mail
                             },
                             contactAddress: {
                                 address: {

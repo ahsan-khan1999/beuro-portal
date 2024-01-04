@@ -8,7 +8,7 @@ import {
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
+import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { Pdf } from "@/components/pdf/pdf";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   AcknowledgementSlipProps,
   CompanySettingsActionType,
+  EmailSettingsActionType,
   InvoiceEmailHeaderProps,
   PayableToProps,
   PdfProps,
@@ -38,6 +39,7 @@ import {
 import { ContentTableRowTypes } from "@/types/content";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateQuery } from "@/utils/update-query";
+import { EmailTemplate } from "@/types/settings";
 
 export const productItems: ServiceList[] = [
   {
@@ -92,6 +94,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
     logo: "",
+    emailTemplateSettings: null
   },
   contactAddress: {
     address: {
@@ -159,6 +162,9 @@ const DetailsPdfPriview = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+  const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
+    null
+  );
   const [email, setEmail] = useState<EmailData>({
     description: "",
     email: "",
@@ -207,7 +213,8 @@ const DetailsPdfPriview = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
               offerDate: invoiceDetails?.invoiceID?.createdAt,
               createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-              logo: invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.logo,
+              logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
+              emailTemplateSettings: emailTemplateSettings
             },
             contactAddress: {
               address: {
@@ -253,13 +260,13 @@ const DetailsPdfPriview = () => {
             footerDetails: {
               firstColumn: {
                 companyName:
-                  invoiceDetails?.invoiceID.createdBy?.company?.companyName,
-                email: invoiceDetails?.invoiceID?.createdBy.email,
+                  user?.company?.companyName,
+                email: user?.email,
                 phoneNumber:
-                  invoiceDetails?.invoiceID.createdBy?.company?.phoneNumber,
+                  user?.company?.phoneNumber,
                 taxNumber:
-                  invoiceDetails?.invoiceID.createdBy?.company?.taxNumber,
-                website: invoiceDetails?.invoiceID.createdBy?.company?.website,
+                  user?.company?.taxNumber,
+                website: user?.company?.website,
               },
               secondColumn: {
                 address: {
@@ -348,6 +355,9 @@ const DetailsPdfPriview = () => {
         const response: CompanySettingsActionType = await dispatch(
           getTemplateSettings()
         );
+        const emailTemplate: EmailSettingsActionType = await dispatch(
+          readEmailSettings()
+        );
         if (response?.payload?.Template) {
           const {
             firstColumn,
@@ -359,6 +369,7 @@ const DetailsPdfPriview = () => {
             secondColumn,
             thirdColumn,
           }: TemplateType = response.payload.Template;
+          console.log(response.payload.Template, "");
 
           setTemplateSettings(() => ({
             firstColumn,
@@ -370,6 +381,18 @@ const DetailsPdfPriview = () => {
             isSecondColumn,
             isThirdColumn,
           }));
+        }
+        if (emailTemplate?.payload) {
+          setEmailTemplateSettings({
+            ...emailTemplateSettings,
+            logo: emailTemplate?.payload?.logo,
+            FooterColour: emailTemplate?.payload?.FooterColour,
+            email: emailTemplate?.payload?.email,
+            mobileNumber: emailTemplate?.payload?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.phoneNumber,
+            textColour: emailTemplate?.payload?.textColour,
+
+          })
         }
       } catch (error) {
         console.error("Error fetching template settings:", error);
@@ -515,6 +538,8 @@ const DetailsPdfPriview = () => {
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}
           isQr={true}
+          emailTemplateSettings={emailTemplateSettings}
+
         />
       </div>
       {renderModal()}

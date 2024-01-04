@@ -135,6 +135,8 @@ export const SignPdf = <T,>({
                         templateSettings={templateSettings}
                         totalPages={totalPages}
                         currPage={index + 2}
+                        emailTemplateSettings={emailTemplateSettings}
+
                     />
                 ))}
                 <Aggrement

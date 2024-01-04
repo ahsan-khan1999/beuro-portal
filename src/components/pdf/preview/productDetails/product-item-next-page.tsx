@@ -12,11 +12,12 @@ export const ProductItemNewPage = ({
   isShowTotal,
   templateSettings,
   totalPages,
-  currPage
+  currPage,
+  emailTemplateSettings
 }: PurchasedItemDetailsNextPageProps) => {
   return (
     <div>
-      <DocumentHeader {...headerDetails} />
+      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
       <div className="px-[80px] flex flex-col bg-white">
         {serviceItem.map((item,index) => (
           <ProductItem {...item} key={index} />

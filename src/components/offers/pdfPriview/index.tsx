@@ -77,7 +77,8 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo: ""
+    logo: "",
+    emailTemplateSettings: null
   },
   contactAddress: {
     address: {
@@ -167,7 +168,8 @@ const PdfPriview = () => {
                 offerNo: offerDetails?.offerNumber,
                 offerDate: offerDetails?.createdAt,
                 createdBy: offerDetails?.createdBy?.fullName,
-                logo: offerDetails?.createdBy?.company?.logo
+                logo: offerDetails?.createdBy?.company?.logo,
+                emailTemplateSettings: emailTemplateSettings
               },
               contactAddress: {
                 address: {
@@ -300,15 +302,17 @@ const PdfPriview = () => {
             isThirdColumn,
           }));
         }
-        if (emailTemplate?.payload?.Mail) {
+        console.log(emailTemplate);
+        
+        if (emailTemplate?.payload) {
           setEmailTemplateSettings({
             ...emailTemplateSettings,
-            logo: emailTemplate?.payload?.Mail?.logo,
-            FooterColour: emailTemplate?.payload?.Mail?.FooterColour,
-            email: emailTemplate?.payload?.Mail?.email,
-            mobileNumber: emailTemplate?.payload?.Mail?.mobileNumber,
-            phoneNumber: emailTemplate?.payload?.Mail?.phoneNumber,
-            textColour: emailTemplate?.payload?.Mail?.textColour,
+            logo: emailTemplate?.payload?.logo,
+            FooterColour: emailTemplate?.payload?.FooterColour,
+            email: emailTemplate?.payload?.email,
+            mobileNumber: emailTemplate?.payload?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.phoneNumber,
+            textColour: emailTemplate?.payload?.textColour,
 
           })
         }
@@ -401,8 +405,8 @@ const PdfPriview = () => {
           newPageData={newPageData}
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}
-          // emailTemplateSettings={emailTemplateSettings}
-          
+          emailTemplateSettings={emailTemplateSettings}
+
         />
       </div>
       {renderModal()}

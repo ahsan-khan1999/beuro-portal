@@ -49,7 +49,7 @@ const Header = () => {
         )}
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          {user?.role === "Company" && (
+          {user?.role !== "Admin" && (
             <div className="relative menu mr-6">
               <Image
                 src={createOfferIcon}

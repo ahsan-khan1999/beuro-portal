@@ -271,7 +271,7 @@ export const conditionHandlerLogin = (
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
       updateQuery(router, router?.locale as string);
-    } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 2 && !response?.data?.data?.User?.plan?.id) {
+    } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 && !response?.data?.data?.User?.plan?.id) {
       router.pathname = "/plan";
       updateQuery(router, router?.locale as string);
 
