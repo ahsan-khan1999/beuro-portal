@@ -271,7 +271,7 @@ export const conditionHandlerLogin = (
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
       updateQuery(router, "en");
-    }else if(staticEnums["User"]["role"][response?.data?.data?.User?.role] === 2 && !response?.data?.data?.User?.plan?.id){
+    } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 2 && !response?.data?.data?.User?.plan?.id) {
       router.pathname = "/plan";
       updateQuery(router, "en");
 
@@ -723,3 +723,20 @@ export function dataURLtoBlob(dataURL: any) {
 
   return new Blob([u8arr], { type: mime });
 }
+
+export const smoothScrollToSection = (target: string) => {
+  const element = document.querySelector(target);
+
+  if (!element) {
+    console.error(`Element with selector ${target} not found`);
+    return;
+  }
+
+  const headerOffset = 100; // Adjust this value according to your page layout
+  const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+  const offsetPosition = elementPosition - headerOffset;
+
+  console.log(offsetPosition, "offsetPosition");
+
+  window.scrollTo(0,offsetPosition);
+};

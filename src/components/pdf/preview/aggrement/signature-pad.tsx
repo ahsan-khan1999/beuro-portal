@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import Image from "next/image";
-import { dataURLtoBlob } from "@/utils/utility";
+import { dataURLtoBlob, smoothScrollToSection } from "@/utils/utility";
 
 const ow = 383;
 const oh = 153;
@@ -63,65 +63,68 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
 
   const handleSave = async () => {
     if (signaturePad) {
+
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
         const formdata = new FormData()
         const svgContent = signaturePad.toDataURL("image/png");
         const blob = dataURLtoBlob(svgContent);
-          const file = new File([blob], 'signature.png', { type: 'image/png' });
-          localStoreUtil.store_data('signature', file);
-          setOfferSignature && setOfferSignature(file)
-          setIsSubmitted(true);
+        const file = new File([blob], 'signature.png', { type: 'image/png' });
+        localStoreUtil.store_data('signature', file);
+        setOfferSignature && setOfferSignature(file)
+        setIsSubmitted(true);
+        //@ts-expect-error
+        setIsSignatureDone && setIsSignatureDone(true);
+        smoothScrollToSection("#acceptOffer")
+        // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
 
-          //@ts-expect-error
-          setIsSignatureDone && setIsSignatureDone(true);
-        }
       }
-    };
+    }
+  };
 
-    const handleClear = () => {
-      signaturePad?.clear();
-      setIsSubmitted(false);
-    };
+  const handleClear = () => {
+    signaturePad?.clear();
+    setIsSubmitted(false);
+  };
 
-    return (
-      !signature &&
-      <>
-        <div className="select-none mb-4">
-          <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
-            {!isSubmitted ? (
-              <canvas ref={canvasRef} className="w-full h-full"></canvas>
-            ) : (
-              <SignatureSubmittedSuccessFully />
-            )}
-          </div>
-        </div>
-
-        <div className="flex justify-between gap-x-3 my-2">
-          <button
-            disabled={isSubmitted}
-            onClick={handleClear}
-            className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
-          >
-            Clear
-          </button>
-          <Button
-            id="signature"
-            inputType="button"
-            onClick={handleSave}
-            disabled={isSubmitted}
-            loading={loading}
-            text="Submit"
-            className="bg-[#393939]  text-center text-white rounded-md shadow-md w-full"
-          />
-
-        </div>
-      </> ||
+  return (
+    !signature &&
+    <>
       <div className="select-none mb-4">
         <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
-          {signature && <Image src={signature} alt="signature" height={177} width={446} />}
+          {!isSubmitted ? (
+            <canvas ref={canvasRef} className="w-full h-full"></canvas>
+          ) : (
+            <SignatureSubmittedSuccessFully />
+          )}
         </div>
       </div>
-    );
-  };
+
+      <div className="flex justify-between gap-x-3 my-2">
+        <button
+          disabled={isSubmitted}
+          onClick={handleClear}
+          className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
+        >
+          Clear
+        </button>
+        <Button
+          id="signature"
+          inputType="button"
+          onClick={handleSave}
+          disabled={isSubmitted}
+          loading={loading}
+          text="Submit"
+          className="bg-[#393939]  text-center text-white rounded-md shadow-md w-full"
+        />
+
+      </div>
+    </> ||
+    <div className="select-none mb-4">
+      <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
+        {signature && <Image src={signature} alt="signature" height={177} width={446} />}
+      </div>
+    </div>
+  );
+};
 
