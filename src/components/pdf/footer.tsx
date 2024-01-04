@@ -123,10 +123,10 @@ export const Footer = ({
       </div>
 
       <div className="s self-end">
-        <span className="text-[#1E1E1E] text-[14px] font-medium mr-[10px]">
+        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium mr-[10px]`}>
           {translation("pdf.page")}
         </span>
-        <span className="text-[#1E1E1E] text-[14px] font-medium">
+        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium`}>
           {currPage}/{totalPages}
         </span>
       </div>

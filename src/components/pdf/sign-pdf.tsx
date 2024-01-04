@@ -18,6 +18,9 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
+import { BASEURL } from "@/services/HttpProvider";
+import axios from "axios";
+import { getRefreshToken, getToken } from "@/utils/auth.util";
 
 export const SignPdf = <T,>({
     newPageData,
@@ -46,12 +49,16 @@ export const SignPdf = <T,>({
     const [isSignatureDone, setIsSignatureDone] = useState(false)
     const acceptOffer = async () => {
         if (!offerSignature) return;
+
+        console.log(offerSignature, "offerSignature");
+
         const formData = new FormData()
-        formData.append("signature",offerSignature as any)
+        formData.append("signature", new Blob([offerSignature as any], { type: "image/png" }));
+
         const data = {
             id: pdfData?.id
         }
-        const response = await dispatch(signOffer({ data,formData }))
+        const response = await dispatch(signOffer({ data, formData }))
         if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
     }
     const rejectOffer = () => {

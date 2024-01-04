@@ -447,14 +447,14 @@ const generateServiceCalulationChildren = (
       containerClass: "w-[112px]",
       field: {
         type: Field.select,
-        id: "taxPercentage",
+        id: "taxAmount",
         options:
           tax?.map((item) => ({
             label: item.taxRate + "%",
             value: item.taxRate,
           })) || [],
         text: "Select Tax",
-        name: "taxPercentage",
+        name: "taxAmount",
         control,
         className: "h-10 !px-8",
         value:
@@ -463,7 +463,6 @@ const generateServiceCalulationChildren = (
       },
     };
   }
-  console.log(isTax, "taxType", taxType);
 
   const calculationFields = {
     containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
@@ -538,7 +537,7 @@ const generateServiceCalulationChildren = (
                 field: {
                   type: Field.div,
                   className: "",
-                  id: "4",
+                  id: "100",
                   children: [
                     {
                       containerClass: "mb-0 ",
@@ -549,9 +548,9 @@ const generateServiceCalulationChildren = (
                         id: "taxType1",
                         text: "Sub Total",
                         name: "taxType",
-                        label: "Include",
+                        label: "Inclusive",
                         register,
-                        checked: isTax && taxType == 0 ? false : true,
+                        checked: isTax && taxType == 0 ? true : false,
                         value: 0,
                         setValue,
                         disabled: !isTax,
@@ -567,7 +566,7 @@ const generateServiceCalulationChildren = (
                         id: "taxType2",
                         text: "Sub Total",
                         name: "taxType",
-                        label: "Exclude",
+                        label: "Exclusive",
                         register,
                         checked: isTax && taxType == 1 ? true : false,
                         value: 1,
@@ -647,8 +646,8 @@ const generateServiceCalulationChildren = (
                         name: "discountType",
                         label: "Percent",
                         register,
-                        checked: isDiscount && discountType == 1 ? true : false,
-                        value: 1,
+                        checked: isDiscount && discountType == 0 ? true : false,
+                        value: 0,
                         setValue,
                         disabled: !isDiscount,
                         // onClick: generateTotal
@@ -664,10 +663,10 @@ const generateServiceCalulationChildren = (
                         text: "Sub Total",
                         name: "discountType",
                         label: "Amount",
-                        checked: isDiscount && discountType == 0 ? true : false,
+                        checked: isDiscount && discountType == 1 ? true : false,
 
                         register,
-                        value: 0,
+                        value: 1,
                         setValue,
                         disabled: !isDiscount,
                         // onClick: generateTotal

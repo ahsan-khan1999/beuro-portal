@@ -40,13 +40,13 @@ export const useAddServiceDetails = (
     grandTotal: 0,
     taxAmount: 0,
   });
-  const [serviceType, setServiceType] = useState<ServiceType[]>([
-    ServiceType.NEW_SERVICE,
-  ]);
 
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
+  );
+  const [serviceType, setServiceType] = useState<ServiceType[]>(
+    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE),
   );
   const { tax } = useAppSelector((state) => state.settings);
 
@@ -121,25 +121,25 @@ export const useAddServiceDetails = (
         (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
         0
       ) || 0;
+
     let taxAmount =
-      isTax && taxType === "0"
+      isTax && taxType == "0"
         ? calculateTax(totalPrices, 7.7)
-        : isTax && taxType === "1"
+        : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
-
     let discount = 0;
 
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(
         totalPrices,
         discountAmount,
-        !!+discountType
+        !+discountType
       );
-      if (!!+discountType && discountAmount > 100) {
+      if (!+discountType && discountAmount > 100) {
         setValue("discountAmount", 100);
         console.warn("Percentage should not be greater than 100%");
-      } else if (!+discountType && discountAmount > totalPrices) {
+      } else if (!!+discountType && discountAmount > totalPrices) {
         setValue("discountAmount", totalPrices);
         console.warn("Amount should not be greater than total price");
       }
@@ -311,7 +311,8 @@ export const useAddServiceDetails = (
       step: 3,
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
-      taxAmount: total?.taxAmount,
+      taxAmount: !data?.taxType ? 7.7 : data?.taxAmount,
+
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

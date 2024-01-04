@@ -86,9 +86,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.description",
               name: "offerContent.description",
-
               control,
-              value: contentDetails?.id && contentDetails?.offerContent?.description
+              value: contentDetails?.id && contentDetails?.offerContent?.description || ""
             },
           },
           {
@@ -106,7 +105,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-              value: contentDetails?.id && contentDetails?.offerContent?.body
+              value: contentDetails?.id && contentDetails?.offerContent?.body || ""
 
             },
           },

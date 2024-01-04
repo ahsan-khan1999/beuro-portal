@@ -149,7 +149,11 @@
     "array": {
       "min": "Mindestens 1 ist erforderlich"
     },
-    "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt"
+    "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
+    "offer_not_open":"ZurückgehenDieses Angebot ist bereits geschlossen oder unterzeichnet",
+    "value_max":"value_max"
+
+
   },
   "sidebar": {
     "customer": {

@@ -13,7 +13,7 @@ const ContentDetails = () => {
         contentDetails={contentDetails}
         contentDeleteHandler={contentDeleteHandler}
       />
-      <ContentDetailsData contentDetails={contentDetails} loading={loading}/>
+      <ContentDetailsData />
       {renderModal()}
     </Layout>
   );

@@ -91,7 +91,7 @@ export default function useDetail() {
       setCurrentFormStage(nextStage);
     }
     else {
-      router.pathname = "/plan";
+      router.pathname = "/login";
       updateQuery(router, "en");
     }
   };

@@ -19,7 +19,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logoutUser())
     logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "6592953c530c9747beda44c1", action: "Reject" } })
+    // router.push({ pathname: "/pdf", query: { offerID: "658d8994abcc68be30e4c67a", action: "Accept" } })
   }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -37,16 +37,16 @@ const Header = () => {
           </span>
         </div>
       )) || (
-        <div className="flex items-center">
-          <Image
-            src={logo}
-            alt="Company Logo"
-            className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
-            height={50}
-            width={150}
-          />
-        </div>
-      )}
+          <div className="flex items-center">
+            <Image
+              src={logo}
+              alt="Company Logo"
+              className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
+              height={50}
+              width={150}
+            />
+          </div>
+        )}
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           {user?.role === "Company" && (

@@ -7,6 +7,10 @@ import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import axios from "axios";
+import { BASEURL } from "@/services/HttpProvider";
+import { getRefreshToken, getToken } from "@/utils/auth.util";
+import toast from 'react-hot-toast';
 
 interface OfferState {
     offer: OffersTableRowTypes[];
@@ -86,6 +90,8 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
 
             return response?.data?.data?.Offer;
         } catch (e: any) {
+            toast.error(e?.data?.data?.message)
+            
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;
@@ -111,7 +117,8 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             //     setErrors(setError, transformedValidationMessages, translate);
             // } else {
             // }
-
+            
+            toast.error(e?.data?.message)
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -207,14 +214,30 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-        const { data, router, translate,formData } = args as any;
+        const { data, router, translate, formData } = args as any;
 
         try {
-            await apiServices.createSignature(data,formData);
+            const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
+
+            const response = await axios.put(
+                BASEURL + `/offer/add-signature/${data?.id}`,
+                formData,
+                {
+                    headers: {
+                        Accept: "multipart/form-data",
+                        "Content-Type": "multipart/form-data",
+                        "Access-Control-Allow-Origin": "*",
+                        accessToken: authToken,
+                        refreshToken: refreshToken,
+
+                    },
+                }
+            );
 
             return true;
         } catch (e: any) {
-            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            toast.error(e?.response?.data?.message)
+            thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
             // setErrors(setError, e?.data.data, translate);
             return false;
         }

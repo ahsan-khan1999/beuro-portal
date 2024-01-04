@@ -12,7 +12,7 @@ const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
   });
-  
+
   const dispatch = useAppDispatch();
   const { followUp, totalCount, loading } = useAppSelector(
     (state) => state.followUp
@@ -27,23 +27,17 @@ const useFollowUps = () => {
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
+  
   useEffect(() => {
-    if (followUp?.length === 0)
-      dispatch(
-        readFollowUp({ params: { filter: filter, page: 1, size: 10 } })
-      ).then((res: any) => {
-        if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
-          setCurrentPageRows(
-            res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage)
-          );
-        }
-      });
-  }, [dispatch]);
-  useEffect(() => {
-    // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(followUp.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(
+      readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(
+          res?.payload?.FollowUp
+        );
+      }
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {

@@ -41,14 +41,14 @@ export const useServiceOfferEditDetail = ({
     taxAmount: 0,
   });
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>([
-    ServiceType.NEW_SERVICE,
-  ]);
+
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
-
+  const [serviceType, setServiceType] = useState<ServiceType[]>(
+    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE),
+  );
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
 
@@ -76,6 +76,7 @@ export const useServiceOfferEditDetail = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  console.log(errors, "errors");
 
   const isTax = watch("isTax");
   const isDiscount = watch("isDiscount");
@@ -139,26 +140,25 @@ export const useServiceOfferEditDetail = ({
         (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
         0
       ) || 0;
-        console.log(taxType,"taxType");
-        
+
     let taxAmount =
-      isTax && taxType === "0"
+      isTax && taxType == "0"
         ? calculateTax(totalPrices, 7.7)
-        : isTax && taxType === "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+        : isTax && taxType == "1"
+          ? calculateTax(totalPrices, data?.taxPercentage || 0)
+          : 0;
     let discount = 0;
 
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(
         totalPrices,
         discountAmount,
-        !!+discountType
+        !+discountType
       );
-      if (!!+discountType && discountAmount > 100) {
+      if (!+discountType && discountAmount > 100) {
         setValue("discountAmount", 100);
         console.warn("Percentage should not be greater than 100%");
-      } else if (!+discountType && discountAmount > totalPrices) {
+      } else if (!!+discountType && discountAmount > totalPrices) {
         setValue("discountAmount", totalPrices);
         console.warn("Amount should not be greater than total price");
       }
@@ -176,6 +176,8 @@ export const useServiceOfferEditDetail = ({
   };
 
   useMemo(() => {
+
+
     generateGrandTotal();
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
 
@@ -188,6 +190,7 @@ export const useServiceOfferEditDetail = ({
         subTotal: offerDetails.subTotal,
         grandTotal: offerDetails.total,
       });
+
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
         isTax: offerDetails?.isTax,
@@ -235,7 +238,7 @@ export const useServiceOfferEditDetail = ({
     const fieldNamePrefix = 'serviceDetail';
     if (newServiceType === ServiceType.NEW_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "New Service") {
       onServiceSelectType(index)
-    } else if(newServiceType === ServiceType.EXISTING_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "New Service"){
+    } else if (newServiceType === ServiceType.EXISTING_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "New Service") {
       setValue(`serviceDetail.${index}.serviceTitle`, '')
       setValue(`serviceDetail.${index}.price`, ``)
       setValue(`serviceDetail.${index}.count`, ``)
@@ -245,7 +248,7 @@ export const useServiceOfferEditDetail = ({
     } else if (newServiceType === ServiceType.EXISTING_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "Existing Service") {
       onServiceSelectType(index)
 
-    } else if (newServiceType === ServiceType.NEW_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "Existing Service"){
+    } else if (newServiceType === ServiceType.NEW_SERVICE && offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType == "Existing Service") {
 
       setValue(`serviceDetail.${index}.serviceTitle`, '')
       setValue(`serviceDetail.${index}.price`, ``)
@@ -307,12 +310,14 @@ export const useServiceOfferEditDetail = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data?.taxType);
+
     const apiData: typeof data = {
       ...data,
       step: 3,
       id: offerDetails?.id,
       stage: EditComponentsType.additionalEdit,
-      taxAmount: total?.taxAmount,
+      taxAmount: !data?.taxType ? 7.7 : data?.taxAmount,
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

@@ -50,7 +50,8 @@ export const useOfferContentEditDetails = (onClick: Function) => {
         contentName: contentDetails?.contentName,
         offerContent: {
           ...contentDetails?.offerContent,
-          address: contentDetails?.offerContent?.address?.map((item) => ({ value: item }))
+          address: contentDetails?.offerContent?.address?.map((item) => ({ value: item })),
+
         }
 
       })
@@ -88,8 +89,8 @@ export const useOfferContentEditDetails = (onClick: Function) => {
         ...apiData,
         contentId: contentDetails?.id,
       }
-      const res = await dispatch(createContent({ data: apiData, router, setError, translate }));
-      // if (res?.payload) onClick(0, ComponentsType.offerContent);
+      const res = await dispatch(createContent({ data: apiData, router, setError, translate,isUpdate:true }));
+      if (res?.payload) onClick(0, ComponentsType.offerContent);
     }
   };
 

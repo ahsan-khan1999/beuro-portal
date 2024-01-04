@@ -18,6 +18,7 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
 } from "react-hook-form";
+import { Plan } from "./admin/plans";
 
 export interface User {
   [UserResponse.id]: string;
@@ -45,6 +46,7 @@ export interface User {
   [UserResponse.oAuthIds]: UserOAuth;
   [UserResponse._isSocialLogin]: boolean;
   [UserResponse.isCommercialSellerRequested]: boolean;
+  plan:Plan
 }
 // [AddressType.primary]:{}
 

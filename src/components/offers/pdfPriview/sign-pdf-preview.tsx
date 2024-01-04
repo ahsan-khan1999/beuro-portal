@@ -165,6 +165,7 @@ const SignPdfPreview = () => {
                 (response: ActionType) => {
                     if (response?.payload) {
                         const offerDetails: PublicOffersTableRowTypes = response?.payload;
+                        
                         let formatData: PdfProps = {
                             signature: offerDetails?.Offer?.signature,
                             id: offerDetails?.Offer?.id,
@@ -176,7 +177,7 @@ const SignPdfPreview = () => {
                                 offerNo: offerDetails?.Offer?.offerNumber,
                                 offerDate: offerDetails?.Offer?.createdAt,
                                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
-                                logo: offerDetails?.Offer?.createdBy?.company?.logo
+                                logo: offerDetails?.Mail?.logo
                             },
                             contactAddress: {
                                 address: {
