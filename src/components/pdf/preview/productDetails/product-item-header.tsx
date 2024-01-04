@@ -10,15 +10,12 @@ export const ProcutItemHeader = () => {
         </span>
         <div className="col-span-1 flex justify-between">
           <span className="text-base font-medium text-white">
-            {" "}
             {translation("pdf.price")}
           </span>
           <span className="text-base font-medium text-white">
-            {" "}
             {translation("pdf.unit")}
           </span>
           <span className="text-base font-medium text-white">
-            {" "}
             {translation("pdf.count")}
           </span>
           <span className="text-base font-medium text-white pr-[46px]">

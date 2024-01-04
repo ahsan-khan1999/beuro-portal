@@ -27,6 +27,43 @@
     "remember_me": "Remember me",
     "forgot_password": "Forgot Password"
   },
+  "login_detail": {
+    "back_button": "Back",
+    "next_button": "Next",
+    "finish_button": "Lets Finish",
+    "tabs_heading": {
+      "company": "Company Details",
+      "location": "Location Details",
+      "bank": "Bank Details"
+    },
+    "company_details": {
+      "heading": "Tell Us About Your Company",
+      "sub_heading": "Lorem ipsum dollar smith amit dolem isplum sumip alpsum .",
+      "company_name": "Company Name",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "website": "Website",
+      "mwst_number": "MwST Number",
+      "upload_logo": "Upload Company Logo"
+    },
+    "location_details": {
+      "heading": "Tell Us About Your Location",
+      "sub_heading": "Lorem ipsum dollar smith amit dolem isplum sumip alpsum .",
+      "street_no": "Street Number",
+      "house_no": "House Number",
+      "post_code": "Post Code",
+      "City": "City"
+    },
+    "bank_details": {
+      "heading": "Procced with your bank",
+      "sub_heading": "Tell us about your company, Lorem ipsum dollar smith.",
+      "choose_currency": "Choose currency",
+      "optional": "Optional",
+      "bank_name": "Bank Name",
+      "account_no": "Account No",
+      "iban_number": "Iban Number"
+    }
+  },
   "account_type": {
     "main_heading": "Account Type",
     "sub_heading": "Choose your account type",
@@ -291,7 +328,8 @@
       "send_at": "Send at",
       "viewed_at": "Viewd at",
       "status": "Status",
-      "view_mail": "View Mail"
+      "view_mail": "View Mail",
+      "edit":"Edit"
     },
     "card_content": {
       "main_heading": "Email Details",
@@ -552,19 +590,19 @@
       }
     },
     "mail_setting": {
-      "email_config":"Email Configuration",
-      "email_templates":"Email template",
+      "email_config": "Email Configuration",
+      "email_templates": "Email template",
       "template_form_fields": {
-        "heading":"Logo Setting",
-        "change_logo":"Change the logo",
-        "contact_setting_heading":"Contact settings(Footer)",
-        "email":"Email",
-        "phone_number":"Phone Number",
-        "mobile_number":"Mobile Number",
-        "color_setting":"Color Settings",
-        "footer_color":"Footer Color",
-        "text_color":"Text Color(Footer)",
-        "save_setting":"Save Setting"
+        "heading": "Logo Setting",
+        "change_logo": "Change the logo",
+        "contact_setting_heading": "Contact settings(Footer)",
+        "email": "Email",
+        "phone_number": "Phone Number",
+        "mobile_number": "Mobile Number",
+        "color_setting": "Color Settings",
+        "footer_color": "Footer Color",
+        "text_color": "Text Color(Footer)",
+        "save_setting": "Save Setting"
       },
       "system_config": "Use System Mail Configuration",
       "own_config": "Use Own Mail Configuration",
@@ -915,6 +953,7 @@
   },
   "common": {
     "next_button": "Next",
+    "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
     "note": "Note",
     "search": "Search...",

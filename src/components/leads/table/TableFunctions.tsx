@@ -11,7 +11,7 @@ const TableFunctions = ({
   const { t: translate } = useTranslation();
 
   return (
-    <div className="flex flex-col xMaxSize:flex-row justify-between xMaxSize:items-center  gap-y-3 mb-4">
+    <div className="flex flex-col xLarge:flex-row justify-between xLarge:items-center gap-y-3 mb-4">
       <h1 className="text-xl text-[#222B45]">
         {translate("leads.main_heading")}
       </h1>

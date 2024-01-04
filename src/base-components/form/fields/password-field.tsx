@@ -3,6 +3,7 @@ import { PasswordInputProps } from "@/types";
 import eyeOpen from "@/assets/pngs/eye-open.png";
 import eyeClose from "@/assets/pngs/eye-close.png";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 export const PasswordField = ({
   id,
@@ -20,6 +21,7 @@ export const PasswordField = ({
 }: PasswordInputProps) => {
   const [showPass, setShowPass] = useState<boolean>(false);
   const [inputFocus, setInputFocus] = useState(false);
+  const { t: translate } = useTranslation();
 
   const defaultClasses = ` w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
@@ -55,10 +57,13 @@ export const PasswordField = ({
       />
 
       {isButton ? (
-        <span onClick={() => {
-          onClick && onClick();
-        }} className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default">
-         Change
+        <span
+          onClick={() => {
+            onClick && onClick();
+          }}
+          className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default"
+        >
+          {translate("common.change_button")}
         </span>
       ) : (
         <Image

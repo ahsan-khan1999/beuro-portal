@@ -27,6 +27,43 @@
     "remember_me": "Erinnern Sie sich an mich",
     "forgot_password": "Passwort vergessen"
   },
+  "login_detail": {
+    "back_button": "Zurück",
+    "next_button": "Weiter",
+    "finish_button": "Abschließen",
+    "tabs_heading": {
+      "company": "Unternehmensdetails",
+      "location": "Standortdetails",
+      "bank": "Bankdetails"
+    },
+    "company_details": {
+      "heading": "Erzählen Sie uns etwas über Ihr Unternehmen",
+      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
+      "company_name": "Firmenname",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "website": "Webseite",
+      "mwst_number": "MwSt-Nummer",
+      "upload_logo": "Firmenlogo hochladen"
+    },
+    "location_details": {
+      "heading": "Erzählen Sie uns etwas über Ihren Standort",
+      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
+      "street_no": "Straßennummer",
+      "house_no": "Hausnummer",
+      "post_code": "Postleitzahl",
+      "City": "Stadt"
+    },
+    "bank_details": {
+      "heading": "Fahren Sie mit Ihrer Bank fort",
+      "sub_heading": "Erzählen Sie uns etwas über Ihr Unternehmen, Lorem ipsum Dollar Smith.",
+      "choose_currency": "Währung auswählen",
+      "optional": "Optional",
+      "bank_name": "Bankname",
+      "account_no": "Kontonummer",
+      "iban_number": "IBAN-Nummer"
+    }
+  },
   "account_type": {
     "main_heading": "Konto-Typ",
     "sub_heading": "Wählen Sie Ihren Kontotyp",
@@ -284,7 +321,8 @@
       "send_at": "Abschicken an",
       "viewed_at": "Gesehen bei",
       "status": "Status",
-      "view_mail": "Mail ansehen"
+      "view_mail": "Mail ansehen",
+      "edit": "Bearbeiten"
     },
     "card_content": {
       "main_heading": "E-Mail-Details",
@@ -906,6 +944,7 @@
   },
   "common": {
     "next_button": "Weiter",
+    "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
     "note": "Hinweis",
     "search": "Suche...",

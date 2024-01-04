@@ -28,5 +28,6 @@ export enum Modals {
 export enum StatusColors {
   "Upcoming" = "#4A13E7",
   "Pending" = "#FE9244",
-  "Overdue" = "#FF376F"
+  "Overdue" = "#FF376F",
+  "complete" = "#45C769",
 }

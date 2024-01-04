@@ -417,7 +417,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       },
     },
     {
-      containerClass: "mt-5 ",
+      containerClass: "mt-5 mb-[14px]",
       field: {
         type: Field.div,
         id: "div-field",

@@ -4,6 +4,7 @@ import { detailLocationFormField } from "../login/login-fields";
 import { FormComponentProps } from "@/types";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DetailScreensCard } from "@/layout/detailScreensCard";
+import { useTranslation } from "next-i18next";
 
 const Location = ({
   onSubmit,
@@ -14,7 +15,7 @@ const Location = ({
   currentFormStage,
 
   setCurrentFormStage,
-  user
+  user,
 }: FormComponentProps) => {
   const { loading } = useAppSelector((state) => state.auth);
   const fields = detailLocationFormField(
@@ -24,6 +25,8 @@ const Location = ({
     user,
     setCurrentFormStage
   );
+
+  const { t: translate } = useTranslation();
   return (
     <DetailScreensCard currentFormStage={currentFormStage}>
       <div className="px-[52px] pt-[52px] pb-11">
@@ -31,10 +34,10 @@ const Location = ({
           onClick={() => setCurrentFormStage("companyDetails")}
           className="text-[#000] text-[26px] font-medium tracking-[-0.2px] mb-3"
         >
-          Tell Us About Your Location
+          {translate("login_detail.location_details.heading")}
         </h1>
         <p className="text-xs text-dark tracking-[0.36px] mb-[56px]">
-          Lorem ipsum dollar smith amit dolem isplum sumip alpsum .
+          {translate("login_detail.location_details.ssub_heading")}
         </p>
         <Form
           formFields={fields}

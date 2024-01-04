@@ -28,7 +28,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(150px,_150px)_minmax(240px,_100%)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(65px,_65px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(70px,_70px),minmax(140px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(120px,_120px)_minmax(150px,_100%)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(300px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(70px,_70px),minmax(110px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(110px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(130px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(80px,_80px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)] mt-2 rounded-md"
           >
             <span className="py-4 flex items-center">{item.offerNumber}</span>
             <span className="break-all py-4 flex items-center">
@@ -37,8 +37,10 @@ const TableRows = ({
             <span className="break-all hidden py-4 xs:flex mlg:hidden xlg:hidden maxSize:hidden xMaxSize:flex items-center">
               {item?.title}
             </span>
-            <span className="py-4 flex items-center">{item.total}</span>
-            <span className="py-4 flex items-center">
+            <span className="py-4 flex items-center break-all">
+              {item.total}
+            </span>
+            <span className="py-4 flex items-center mlg:hidden xlg:hidden maxSize:flex">
               {formatDateString(item.createdAt)}
             </span>
             <span className="py-4 flex justify-center items-center">

@@ -51,7 +51,6 @@ const AdminDashboard = () => {
     ],
   });
 
-  
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });
