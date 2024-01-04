@@ -111,12 +111,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-<<<<<<< HEAD
               value: contentDetails?.id && contentDetails?.offerContent?.body || ""
 
-=======
-              value: contentDetails?.id && contentDetails?.offerContent?.body,
->>>>>>> 63931e3c797362c772874b66c9ad21cb674280c1
             },
           },
 
