@@ -19,7 +19,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logoutUser())
     logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "658ad0399838fceac5a2d3e2", action: "Accept" } })
+    // router.push({ pathname: "/pdf", query: { offerID: "658aaaef06c2ed854367834e", action: "Accept" } })
   }
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

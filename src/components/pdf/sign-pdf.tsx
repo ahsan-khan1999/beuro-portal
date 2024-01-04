@@ -148,7 +148,7 @@ export const SignPdf = <T,>({
                     isOffer={pdfData.isOffer}
                     handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
                     signature={pdfData?.signature}
-                    isCanvas={action === "Reject" ? false : true}
+                    isCanvas={action === "Reject" ? false : pdfData?.isCanvas}
                     setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
                     isSignatureDone={isSignatureDone}
                     emailTemplateSettings={emailTemplateSettings}

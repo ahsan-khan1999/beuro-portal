@@ -802,6 +802,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   id?: string;
   signature?: string;
   attachement?: string;
+  isCanvas?:boolean
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {

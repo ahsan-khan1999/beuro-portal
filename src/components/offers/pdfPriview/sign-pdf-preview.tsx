@@ -120,7 +120,7 @@ export const DUMMY_DATA: PdfProps = {
         columnSettings: null,
         currPage: 0,
         totalPages: 0,
-        emailTemplateSettings:null,
+        emailTemplateSettings: null,
     },
     qrCode: {
         acknowledgementSlip: qrCodeAcknowledgementData,
@@ -136,7 +136,7 @@ interface ActionType {
 const SignPdfPreview = () => {
     const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
     const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
-    
+
     const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
         null
     );
@@ -165,8 +165,9 @@ const SignPdfPreview = () => {
                 (response: ActionType) => {
                     if (response?.payload) {
                         const offerDetails: PublicOffersTableRowTypes = response?.payload;
-                        
+
                         let formatData: PdfProps = {
+                            isCanvas: true,
                             signature: offerDetails?.Offer?.signature,
                             id: offerDetails?.Offer?.id,
                             emailHeader: {
