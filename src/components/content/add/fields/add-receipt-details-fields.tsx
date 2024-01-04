@@ -115,7 +115,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.back_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
               onClick: onClick,
             },
           },
@@ -127,7 +127,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] !mt-5 h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit !mt-5 h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },

@@ -9,7 +9,7 @@ export const ProductItem = ({
   totalPrice,
 }: ServiceList) => (
   <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3">
-    <div className="grid grid-cols-3 items-center">
+    <div className="grid grid-cols-3 gap-x-2 items-center">
       <div className="col-span-2 flex flex-col gap-y-1 pl-3">
         <span className="text-base font-normal text-[#000]">
           {serviceTitle}

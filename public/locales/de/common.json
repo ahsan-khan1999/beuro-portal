@@ -312,6 +312,7 @@
     "main_heading": "Dienstleistungen",
     "add_button": "Neu hinzufügen",
     "add_service_heading": "Neuen Service hinzufügen",
+    "service_detail_tab": "Service-Details",
     "table_headings": {
       "id": "ID",
       "service": "Dienstleistung",
@@ -342,6 +343,7 @@
     "main_heading": "Mitarbeiter",
     "add_button": "Neu hinzufügen",
     "add_new_employee": "Mitarbeiter hinzufügen",
+    "employee_tab": "Mitarbeiter Details",
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -424,6 +426,7 @@
       "street_address": "Straßenadresse",
       "post_code": "Postleitzahl",
       "country": "Land",
+      "house_no": "Hausnummer",
       "bank_name": "Bankname",
       "account_no": "Kontonummer",
       "iban_number": "IBAN-Nummer",
@@ -540,6 +543,20 @@
       }
     },
     "mail_setting": {
+      "email_config": "E-Mail-Konfiguration",
+      "email_templates": "E-Mail-Vorlagen",
+      "template_form_fields": {
+        "heading": "Logo-Einstellung",
+        "change_logo": "Logo ändern",
+        "contact_setting_heading": "Kontakteinstellungen (Fußzeile)",
+        "email": "E-Mail",
+        "phone_number": "Telefonnummer",
+        "mobile_number": "Handynummer",
+        "color_setting": "Farbeinstellungen",
+        "footer_color": "Footer-Farbe",
+        "text_color": "Textfarbe (Fußzeile)",
+        "save_setting": "Einstellung speichern"
+      },
       "system_config": "System-Mail-Konfiguration verwenden",
       "own_config": "Eigene Mail-Konfiguration verwenden",
       "mail_form_fields": {
@@ -729,6 +746,13 @@
     "main_heading": "Inhalt",
     "create_content": "Inhalt erstellen",
     "add_button": "Neu hinzufügen",
+    "content_card_detail": {
+      "heading": "Inhaltsdetails",
+      "s_no": "Nr.",
+      "title": "Titel des Inhalts",
+      "worker": "Bearbeiter",
+      "created_date": "Erstellungsdatum"
+    },
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -881,7 +905,11 @@
     }
   },
   "common": {
+    "next_button": "Weiter",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
+    "note": "Hinweis",
+    "search": "Suche...",
+    "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
     "notes_modal": {
       "heading": "Notizen",
@@ -1488,7 +1516,7 @@
     "count": "Anzahl",
     "total": "Gesamt",
     "sub_total": "Zwischensumme",
-    "tax": "Steuern",
+    "tax": "Steuer%",
     "discount": "Rabatt",
     "grand_total": "Gesamtsumme",
     "validate_heading": "Gültigkeit des Angebots",
@@ -1499,6 +1527,9 @@
     "page": "Seite",
     "receipt_slip": "Quittungsschein",
     "payment_part": "Zahlungsteil",
-    "account": "Konto / Zahlbar an"
+    "account": "Konto / Zahlbar an",
+    "condition_for_moving": "Bedingungen für Umzugsschätzungen",
+    "thanks_message": "Vielen Dank für Ihr Interesse an unseren Dienstleistungen.",
+    "pdf_description": "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen."
   }
 }
