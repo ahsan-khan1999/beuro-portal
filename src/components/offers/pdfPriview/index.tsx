@@ -401,7 +401,7 @@ const PdfPriview = () => {
           newPageData={newPageData}
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}
-          emailTemplateSettings={emailTemplateSettings}
+          // emailTemplateSettings={emailTemplateSettings}
           
         />
       </div>

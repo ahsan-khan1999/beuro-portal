@@ -14,14 +14,14 @@ export const Pdf = <T,>({
   templateSettings,
   isQr,
   totalPages,
-  emailTemplateSettings
+  // emailTemplateSettings
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
   templateSettings: TemplateType | null;
   isQr?: boolean;
   totalPages: number;
-  emailTemplateSettings: EmailTemplate | null,
+  // emailTemplateSettings: EmailTemplate | null,
 
 
 }) => {
