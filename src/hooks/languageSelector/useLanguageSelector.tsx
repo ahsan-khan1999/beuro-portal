@@ -12,14 +12,7 @@ const DUMMY_LIST = [
     code: "de",
     name: "German",
   },
-  {
-    code: "ch",
-    name: "Deutsch",
-  },
-  {
-    code: "it",
-    name: "Italian",
-  },
+ 
 ];
 
 export const useLanguageSeleclor = () => {

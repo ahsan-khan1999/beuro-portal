@@ -267,13 +267,13 @@ export const conditionHandlerLogin = (
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
       router.pathname = "/login-success";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 2 && !response?.data?.data?.User?.plan?.id) {
       router.pathname = "/plan";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
 
     }
     else {
@@ -282,7 +282,7 @@ export const conditionHandlerLogin = (
       } else {
         router.pathname = "/dashboard";
       }
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     }
   } else {
     router.query = {};

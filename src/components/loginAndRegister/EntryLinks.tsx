@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useRouter } from "next/router";
 
 const EntryLinks = () => {
   const [language, setLanguage] = useState("English");
-
+  const router = useRouter()
   const handleLanguageSelected = (selectedItem: string) => {
     setLanguage(selectedItem);
+    const updatedQuery = {
+      ...router.query,
+    };
+    const routeWithQuery = {
+      pathname: `${router.pathname}`,
+      query: updatedQuery,
+    };
+    router.push(routeWithQuery, undefined, {
+      locale: selectedItem == "English" ? "en" : "de",
+    });
   };
 
   return (
