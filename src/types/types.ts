@@ -750,6 +750,10 @@ export interface CompanySettingsActionType {
   payload: Template;
   type: string;
 }
+export interface EmailSettingsActionType {
+  payload: { Mail: EmailSetting };
+  type: string;
+}
 
 export interface EmailHeaderProps {
   offerNo?: string;
@@ -802,7 +806,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   id?: string;
   signature?: string;
   attachement?: string;
-  isCanvas?:boolean
+  isCanvas?: boolean
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {

@@ -13,15 +13,17 @@ import {
   AcknowledgementSlipProps,
   CompanySettingsActionType,
   EmailHeaderProps,
+  EmailSettingsActionType,
   PayableToProps,
   PdfProps,
   TemplateType,
 } from "@/types";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
+import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { EmailTemplate } from "@/types/settings";
 
 export const productItems: ServiceList[] = [
   {
@@ -130,6 +132,9 @@ const PdfPriview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
+    null
+  );
+  const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
     null
   );
 
@@ -269,6 +274,9 @@ const PdfPriview = () => {
         const response: CompanySettingsActionType = await dispatch(
           getTemplateSettings()
         );
+        const emailTemplate: EmailSettingsActionType = await dispatch(
+          readEmailSettings()
+        );
         if (response?.payload?.Template) {
           const {
             firstColumn,
@@ -291,6 +299,18 @@ const PdfPriview = () => {
             isSecondColumn,
             isThirdColumn,
           }));
+        }
+        if (emailTemplate?.payload?.Mail) {
+          setEmailTemplateSettings({
+            ...emailTemplateSettings,
+            logo: emailTemplate?.payload?.Mail?.logo,
+            FooterColour: emailTemplate?.payload?.Mail?.FooterColour,
+            email: emailTemplate?.payload?.Mail?.email,
+            mobileNumber: emailTemplate?.payload?.Mail?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.Mail?.phoneNumber,
+            textColour: emailTemplate?.payload?.Mail?.textColour,
+
+          })
         }
       } catch (error) {
         console.error("Error fetching template settings:", error);
@@ -381,6 +401,8 @@ const PdfPriview = () => {
           newPageData={newPageData}
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}
+          emailTemplateSettings={emailTemplateSettings}
+          
         />
       </div>
       {renderModal()}

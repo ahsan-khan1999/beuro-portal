@@ -47,7 +47,7 @@ export const useServiceOfferEditDetail = ({
     (state) => state.offer
   );
   const [serviceType, setServiceType] = useState<ServiceType[]>(
-    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE),
+    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE)|| [ServiceType.EXISTING_SERVICE],
   );
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
@@ -214,7 +214,7 @@ export const useServiceOfferEditDetail = ({
   });
 
   useMemo(() => {
-    const currentLength = serviceType.length;
+    const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
 
     if (newLength > currentLength) {
