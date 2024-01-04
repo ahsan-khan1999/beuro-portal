@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
+const { hostname } = require('os');
 const { i18n } = require("./next-i18next.config");
 
 const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
+    domains:["kaufes-dev-v2.s3.me-south-1.amazonaws.com"],
     remotePatterns: [
       {
         protocol: "https",
@@ -18,6 +20,7 @@ const nextConfig = {
         protocol: "http",
         hostname: "test.com",
       },
+   
     ],
   },
 

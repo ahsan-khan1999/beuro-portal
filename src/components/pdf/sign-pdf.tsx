@@ -18,6 +18,10 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
+import { BASEURL } from "@/services/HttpProvider";
+import axios from "axios";
+import { getRefreshToken, getToken } from "@/utils/auth.util";
+import toast from "react-hot-toast";
 
 export const SignPdf = <T,>({
     newPageData,
@@ -38,21 +42,27 @@ export const SignPdf = <T,>({
 }) => {
     const dispatch = useAppDispatch()
     const { loading } = useAppSelector(state => state.offer)
-    const [offerSignature, setOfferSignature] = useState({});
+    const [offerSignature, setOfferSignature] = useState<string | null>(null);
 
     const { modal } = useAppSelector(state => state.global)
     const router = useRouter();
     const { action: pdfAction } = router.query
     const [isSignatureDone, setIsSignatureDone] = useState(false)
     const acceptOffer = async () => {
-        if (!offerSignature) return;
+
+        if (!offerSignature) {
+            toast.error("please sign first")
+            return
+        };
+
         const formData = new FormData()
-        formData.append("signature",offerSignature as any)
+        formData.append("signature", new Blob([offerSignature as any], { type: "image/png" }));
+
         const data = {
             id: pdfData?.id
         }
-        const response = await dispatch(signOffer({ data,formData }))
-        if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
+        const response = await dispatch(signOffer({ data, formData }))
+        if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) } setOfferSignature(null)
     }
     const rejectOffer = () => {
         dispatch(updateModalType({ type: ModalType.UPDATE_SUCCESS }))
@@ -125,6 +135,8 @@ export const SignPdf = <T,>({
                         templateSettings={templateSettings}
                         totalPages={totalPages}
                         currPage={index + 2}
+                        emailTemplateSettings={emailTemplateSettings}
+
                     />
                 ))}
                 <Aggrement
@@ -138,7 +150,7 @@ export const SignPdf = <T,>({
                     isOffer={pdfData.isOffer}
                     handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
                     signature={pdfData?.signature}
-                    isCanvas={action === "Reject" ? false : true}
+                    isCanvas={action === "Reject" ? false : pdfData?.isCanvas}
                     setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
                     isSignatureDone={isSignatureDone}
                     emailTemplateSettings={emailTemplateSettings}
@@ -154,7 +166,7 @@ export const SignPdf = <T,>({
                 )}
             </div>
             {
-                (!pdfData?.signature && isSignatureDone) &&
+                (!pdfData?.signature) &&
                 <Button
                     className={`mt-[55px] w-full ${action === "Accept" ? 'bg-[#45C769]' : 'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
                     onClick={action === "Accept" ? acceptOffer : rejectOffer}

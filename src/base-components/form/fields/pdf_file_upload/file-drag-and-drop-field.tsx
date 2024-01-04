@@ -98,7 +98,7 @@ export const PdfFileUpload = ({
             {attachements &&
               attachements?.map((item, index) => (
                 <div
-                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 ${
+                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                     isOpenedFile ? "cursor-pointer" : "cursor-default"
                   }`}
                   key={index}

@@ -23,12 +23,18 @@ export const RadioButtonField = ({
   // }, [value])
   const { onChange: registerOnChange } = register(name);
   const conditionalOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("true1");
+    
     if (onChange) {
+      console.log("true");
       onChange(e.target.value);
     } else {
+      console.log("false");
+
       registerOnChange(e);
     }
   };
+
   return (
     <div className="flex gap-x-2 items-center  bg-white">
       <input

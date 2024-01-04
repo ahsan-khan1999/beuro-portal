@@ -23,6 +23,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const user: User = isJSON(getUser());
+
   const schema = generateProfileSettingValidation(translate);
 
   const {
@@ -39,12 +40,6 @@ export default function useSettingProfile(handleChangePassword: Function) {
   useEffect(() => {
     reset({
       ...user,
-      companyName: user.company?.companyName,
-      website: user.company?.website,
-      taxNumber: user.company?.taxNumber,
-      address: user.company?.address,
-      bankDetails: user.company?.bankDetails,
-      logo: user.company?.logo,
     });
   }, []);
 
@@ -78,9 +73,9 @@ export default function useSettingProfile(handleChangePassword: Function) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const apiData = { ...data, logo: data?.company?.logo };
+    const apiData = { ...data,   ...data?.company };
     const res = await dispatch(
-      updateAccountSettings({ data: data, router, setError, translate })
+      updateAccountSettings({ data: apiData, router, setError, translate })
     );
     if (res?.payload) handleSuccess();
   };

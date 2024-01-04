@@ -13,6 +13,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export enum ComponentsType {
   offerContent,
@@ -25,14 +26,10 @@ export enum ComponentsType {
   editReceiptContent,
 }
 
-const ContentDetailsData = ({
-  contentDetails,
-  loading,
-}: {
-  contentDetails: ContentTableRowTypes;
-  loading: boolean;
-}) => {
+const ContentDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
+  const { contentDetails ,loading} = useAppSelector((state) => state.content);
+
   const [data, setData] = useState<{
     index: number;
     component: ComponentsType;

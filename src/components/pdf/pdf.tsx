@@ -6,6 +6,7 @@ import { ProductItemNewPage } from "./preview/productDetails/product-item-next-p
 import { Container } from "./container";
 import { ServiceList } from "@/types/offers";
 import { PreviewCard } from "./preview-card";
+import { EmailTemplate } from "@/types/settings";
 
 export const Pdf = <T,>({
   newPageData,
@@ -13,13 +14,18 @@ export const Pdf = <T,>({
   templateSettings,
   isQr,
   totalPages,
+  emailTemplateSettings
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
   templateSettings: TemplateType | null;
   isQr?: boolean;
   totalPages: number;
+  emailTemplateSettings: EmailTemplate | null,
+
+
 }) => {
+  
   return (
     <Container>
       {/* <PreviewCard /> */}
@@ -32,6 +38,7 @@ export const Pdf = <T,>({
             templateSettings={templateSettings}
             totalPages={totalPages}
             isOffer={pdfData.isOffer}
+            emailTemplateSettings={emailTemplateSettings}
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (
@@ -45,6 +52,8 @@ export const Pdf = <T,>({
             templateSettings={templateSettings}
             totalPages={totalPages}
             currPage={index + 2}
+            emailTemplateSettings={emailTemplateSettings}
+
           />
         ))}
         <Aggrement
@@ -58,7 +67,8 @@ export const Pdf = <T,>({
           isOffer={pdfData.isOffer}
           handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
           signature={pdfData?.signature}
-          isCanvas={true}
+          isCanvas={pdfData?.isCanvas}
+          emailTemplateSettings={emailTemplateSettings}
 
         />
         {isQr && (
@@ -66,6 +76,7 @@ export const Pdf = <T,>({
             contactAddress={pdfData.contactAddress}
             headerDetails={pdfData.headerDetails}
             qrCode={pdfData.qrCode}
+            
           />
         )}
       </div>

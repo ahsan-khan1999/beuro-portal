@@ -81,7 +81,8 @@ export const DUMMY_DATA: PdfProps = {
         offerNo: "O-4040 Umzugsfuchs",
         offerDate: "22.09.2023",
         createdBy: "Heiniger Michèle",
-        logo: ""
+        logo: "",
+        emailTemplateSettings: null
     },
     contactAddress: {
         address: {
@@ -120,7 +121,7 @@ export const DUMMY_DATA: PdfProps = {
         columnSettings: null,
         currPage: 0,
         totalPages: 0,
-        emailTemplateSettings:null,
+        emailTemplateSettings: null,
     },
     qrCode: {
         acknowledgementSlip: qrCodeAcknowledgementData,
@@ -136,7 +137,7 @@ interface ActionType {
 const SignPdfPreview = () => {
     const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
     const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
-    
+
     const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
         null
     );
@@ -165,7 +166,9 @@ const SignPdfPreview = () => {
                 (response: ActionType) => {
                     if (response?.payload) {
                         const offerDetails: PublicOffersTableRowTypes = response?.payload;
+
                         let formatData: PdfProps = {
+                            isCanvas: true,
                             signature: offerDetails?.Offer?.signature,
                             id: offerDetails?.Offer?.id,
                             emailHeader: {
@@ -176,7 +179,8 @@ const SignPdfPreview = () => {
                                 offerNo: offerDetails?.Offer?.offerNumber,
                                 offerDate: offerDetails?.Offer?.createdAt,
                                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
-                                logo: offerDetails?.Offer?.createdBy?.company?.logo
+                                logo: offerDetails?.Mail?.logo,
+                                emailTemplateSettings: offerDetails?.Mail
                             },
                             contactAddress: {
                                 address: {

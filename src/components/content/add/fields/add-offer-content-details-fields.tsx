@@ -185,7 +185,7 @@ const generateAddressChildren = (register: UseFormRegister<FieldValues>, count: 
       text: "",
       inputType: "button",
       className:
-        "rounded-lg border-[1px] border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] text-white",
+        "rounded-lg border-[1px] border-[#BFBFBF] bg-[#fff] m-1 p-4 min-w-[40px] w-fit text-white",
       onClick: () => append && append({ address: "" }),
       icon: icon,
     },

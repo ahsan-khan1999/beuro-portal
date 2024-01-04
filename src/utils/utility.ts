@@ -267,17 +267,22 @@ export const conditionHandlerLogin = (
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
       router.pathname = "/login-success";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
-      updateQuery(router, "en");
-    } else {
+      updateQuery(router, router?.locale as string);
+    } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 && !response?.data?.data?.User?.plan?.id) {
+      router.pathname = "/plan";
+      updateQuery(router, router?.locale as string);
+
+    }
+    else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
       } else {
         router.pathname = "/dashboard";
       }
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     }
   } else {
     router.query = {};
@@ -704,4 +709,34 @@ export const calculateDiscount = (
   } else {
     return Math.min(discount, amount);
   }
+};
+export function dataURLtoBlob(dataURL: any) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
+}
+
+export const smoothScrollToSection = (target: string) => {
+  const element = document.querySelector(target);
+
+  if (!element) {
+    console.error(`Element with selector ${target} not found`);
+    return;
+  }
+
+  const headerOffset = 100; // Adjust this value according to your page layout
+  const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+  const offsetPosition = elementPosition - headerOffset;
+
+  console.log(offsetPosition, "offsetPosition");
+
+  window.scrollTo(0,offsetPosition);
 };

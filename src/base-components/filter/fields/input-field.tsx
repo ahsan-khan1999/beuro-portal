@@ -43,7 +43,7 @@ const InputField = forwardRef(
             id="searchBar"
             type="text"
             value={value}
-            placeholder="Search..."
+            placeholder={translate("common.search")}
             className={inputClasses}
             onChange={(e) => handleChange(e.target.value)}
             onKeyDown={handleKeyDown}

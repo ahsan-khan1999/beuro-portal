@@ -620,6 +620,7 @@ export interface DocumentHeaderDetailsProps {
   offerDate: string;
   createdBy: string;
   logo: string;
+  emailTemplateSettings: EmailTemplate | null
 }
 
 export interface ProductItemFooterProps {
@@ -750,6 +751,10 @@ export interface CompanySettingsActionType {
   payload: Template;
   type: string;
 }
+export interface EmailSettingsActionType {
+  payload: EmailSetting;
+  type: string;
+}
 
 export interface EmailHeaderProps {
   offerNo?: string;
@@ -802,13 +807,14 @@ export interface PdfProps<T = EmailHeaderProps> {
   id?: string;
   signature?: string;
   attachement?: string;
+  isCanvas?: boolean
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
   templateSettings: TemplateType | null;
   totalPages: number;
-  emailTemplateSettings?: EmailTemplate | null
+  emailTemplateSettings: EmailTemplate | null
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -819,6 +825,8 @@ export interface PurchasedItemDetailsNextPageProps {
   templateSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
+  emailTemplateSettings: EmailTemplate | null
+
 }
 
 interface qrCode {

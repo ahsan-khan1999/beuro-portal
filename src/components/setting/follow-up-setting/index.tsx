@@ -17,40 +17,62 @@ import { FollowUpProp } from "@/types/settings";
 
 const FollowUpSetting = () => {
   const defaultClassName = "mt-0  ";
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-
-  const { loading, followUps } = useAppSelector(state => state.settings)
-  const { toggleObj, setToggleObj, fields, onSubmit, handleSubmit, errors, error, handleRemoveReason, handleSaveSetings, renderModal, translate } = useAddReason();
-
-
-
+  const { loading, followUps } = useAppSelector((state) => state.settings);
+  const {
+    toggleObj,
+    setToggleObj,
+    fields,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    handleRemoveReason,
+    handleSaveSetings,
+    renderModal,
+    translate,
+  } = useAddReason();
 
   return (
     <>
       <section className="rounded-md bg-white pl-[32px] pr-[37px] py-5 w-full h-fit">
-        {Object.keys(toggleObj)?.slice(0, 2)?.map((item, index) => (
-          <div
-            className={`border rounded-md p-4 flex justify-between items-center mb-4 ${toggleObj[item as keyof FollowUpProp]?.value ? "border-[#4A13E7]" : "border-[#BFBFBF]"
+        {Object.keys(toggleObj)
+          ?.slice(0, 2)
+          ?.map((item, index) => (
+            <div
+              className={`border rounded-md p-4 flex justify-between items-center mb-4 ${
+                toggleObj[item as keyof FollowUpProp]?.value
+                  ? "border-[#4A13E7]"
+                  : "border-[#BFBFBF]"
               }`}
-            key={index}
-          >
-            <span
-              className={`text-base font-medium ${toggleObj[item as keyof FollowUpProp].value ? "text-[#4A13E7]" : "text-[#4B4B4B]"
-                }`}
+              key={index}
             >
-              {toggleObj[item as keyof FollowUpProp]?.label}
-            </span>
+              <span
+                className={`text-base font-medium ${
+                  toggleObj[item as keyof FollowUpProp].value
+                    ? "text-[#4A13E7]"
+                    : "text-[#4B4B4B]"
+                }`}
+              >
+                {toggleObj[item as keyof FollowUpProp]?.label}
+              </span>
 
-            <ToggleButton
-              key={toggleObj[item as keyof FollowUpProp].label}
-              isChecked={toggleObj[item as keyof FollowUpProp].value}
-              onChange={(checked) => setToggleObj({ ...toggleObj, [item]: { label: toggleObj[item as keyof FollowUpProp]?.label, value: checked.target.checked } })
-              }
-            />
-          </div>
-        ))}
-
+              <ToggleButton
+                key={toggleObj[item as keyof FollowUpProp].label}
+                isChecked={toggleObj[item as keyof FollowUpProp].value}
+                onChange={(checked) =>
+                  setToggleObj({
+                    ...toggleObj,
+                    [item]: {
+                      label: toggleObj[item as keyof FollowUpProp]?.label,
+                      value: checked.target.checked,
+                    },
+                  })
+                }
+              />
+            </div>
+          ))}
       </section>
 
       <section className="grid grid-cols-3 mt-3 gap-x-2 gap-y-2 xl:gap-y-0">
@@ -76,10 +98,11 @@ const FollowUpSetting = () => {
           >
             {toggleObj?.reason?.map((item, index) => (
               <div
-                className={`flex justify-between py-3 ${index === toggleObj?.reason?.length - 1
-                  ? "rounded-md"
-                  : "border-b border-[#BFBFBF]"
-                  }`}
+                className={`flex justify-between py-3 ${
+                  index === toggleObj?.reason?.length - 1
+                    ? "rounded-md"
+                    : "border-b border-[#BFBFBF]"
+                }`}
                 key={index}
               >
                 <span className="text-base font-medium text-[#4B4B4B]">
@@ -99,11 +122,10 @@ const FollowUpSetting = () => {
       <Button
         id="setting"
         inputType="button"
-        className="mt-5 px-4  text-white text-base font-medium rounded-md  bg-[#4A13E7] "
+        className="mt-5 px-4 text-white text-base font-medium rounded-md  bg-[#4A13E7] "
         text={translate("setting.save_setting")}
         loading={loading}
         onClick={handleSaveSetings}
-
       />
       {renderModal()}
     </>

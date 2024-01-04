@@ -20,9 +20,10 @@ export const ProductPurchasedItemsDetails = ({
   isOffer,
   emailTemplateSettings
 }: PurchasedItemsDetailsProps) => {
+  
   return (
     <div>
-      <DocumentHeader {...headerDetails} />
+      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} isOffer={isOffer} />

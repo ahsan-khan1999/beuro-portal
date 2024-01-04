@@ -78,7 +78,7 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col xLarge:flex-row xLarge:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px] items-center">
         {checkbox.map((item, idx) => (
           <CheckField

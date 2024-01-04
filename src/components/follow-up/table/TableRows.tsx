@@ -11,6 +11,8 @@ const TableRows = ({
   return (
     <div>
       {currentPageRows?.map((item: FollowUps, index: number) => {
+        console.log(item.status);
+
         return (
           <div
             key={index}
@@ -29,7 +31,7 @@ const TableRows = ({
               <div
                 className={`bg-[${
                   StatusColors[item.status]
-                }] text-white px-2 py-1 text-center rounded-md  text-sm `}
+                }] text-white px-2 py-1 text-center rounded-md text-sm`}
               >
                 {item.status}
               </div>

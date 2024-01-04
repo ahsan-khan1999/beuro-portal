@@ -13,15 +13,17 @@ import {
   AcknowledgementSlipProps,
   CompanySettingsActionType,
   EmailHeaderProps,
+  EmailSettingsActionType,
   PayableToProps,
   PdfProps,
   TemplateType,
 } from "@/types";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
+import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { EmailTemplate } from "@/types/settings";
 
 export const productItems: ServiceList[] = [
   {
@@ -75,7 +77,8 @@ export const DUMMY_DATA: PdfProps = {
     offerNo: "O-4040 Umzugsfuchs",
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
-    logo: ""
+    logo: "",
+    emailTemplateSettings: null
   },
   contactAddress: {
     address: {
@@ -132,6 +135,9 @@ const PdfPriview = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+  const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
+    null
+  );
 
   const {
     auth: { user },
@@ -162,7 +168,8 @@ const PdfPriview = () => {
                 offerNo: offerDetails?.offerNumber,
                 offerDate: offerDetails?.createdAt,
                 createdBy: offerDetails?.createdBy?.fullName,
-                logo: offerDetails?.createdBy?.company?.logo
+                logo: offerDetails?.createdBy?.company?.logo,
+                emailTemplateSettings: emailTemplateSettings
               },
               contactAddress: {
                 address: {
@@ -269,6 +276,9 @@ const PdfPriview = () => {
         const response: CompanySettingsActionType = await dispatch(
           getTemplateSettings()
         );
+        const emailTemplate: EmailSettingsActionType = await dispatch(
+          readEmailSettings()
+        );
         if (response?.payload?.Template) {
           const {
             firstColumn,
@@ -291,6 +301,20 @@ const PdfPriview = () => {
             isSecondColumn,
             isThirdColumn,
           }));
+        }
+        console.log(emailTemplate);
+        
+        if (emailTemplate?.payload) {
+          setEmailTemplateSettings({
+            ...emailTemplateSettings,
+            logo: emailTemplate?.payload?.logo,
+            FooterColour: emailTemplate?.payload?.FooterColour,
+            email: emailTemplate?.payload?.email,
+            mobileNumber: emailTemplate?.payload?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.phoneNumber,
+            textColour: emailTemplate?.payload?.textColour,
+
+          })
         }
       } catch (error) {
         console.error("Error fetching template settings:", error);
@@ -381,6 +405,8 @@ const PdfPriview = () => {
           newPageData={newPageData}
           templateSettings={templateSettings}
           totalPages={calculateTotalPages}
+          emailTemplateSettings={emailTemplateSettings}
+
         />
       </div>
       {renderModal()}

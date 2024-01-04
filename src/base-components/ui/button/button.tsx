@@ -14,7 +14,8 @@ export const Button = ({
   loaderColor,
   icon,
   iconAlt,
-  disabled
+  disabled,
+  id
 }: ButtonProps) => {
 
   const router = useRouter()
@@ -24,6 +25,7 @@ export const Button = ({
   const classes = combineClasses(defaultClasses, className);
   return loading ? (
     <button
+      id={id}
       type={inputType}
       disabled={loading && disabled}
       className={`${classes}   flex justify-center`}
@@ -37,13 +39,15 @@ export const Button = ({
     </button>
   ) : (
     <button
+      id={id}
+
       type={inputType}
-      className={` hover:bg-buttonHover hover:text-white text-dark  ${success && "flex items-center gap-x-2  " 
+      className={` hover:bg-buttonHover hover:text-white text-dark  ${success && "flex items-center gap-x-2  "
         } flex items-center justify-center ${classes}`}
       onClick={() => {
         onClick && onClick();
       }}
-      disabled={ disabled || false}
+      disabled={disabled || false}
 
     >
       {icon && <Image src={icon} alt={iconAlt} className="mr-1 " />}{" "}

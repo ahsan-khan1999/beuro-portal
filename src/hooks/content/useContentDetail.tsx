@@ -17,7 +17,7 @@ const useContentDetail = () => {
   const { t: translate } = useTranslation()
   const { modal } = useAppSelector((state) => state.global);
   const { contentDetails, loading } = useAppSelector((state) => state.content);
-  const id = router.query.content;
+  const id = router.query?.content;
 
 
   useEffect(() => {

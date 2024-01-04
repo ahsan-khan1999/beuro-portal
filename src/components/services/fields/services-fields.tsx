@@ -123,7 +123,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               text: `${translate("services.detail.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none ${
+              className: `rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none ${
                 isUpdate && "hidden"
               }`,
             },
@@ -135,7 +135,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               id: "button",
               text: `${translate("services.detail.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,

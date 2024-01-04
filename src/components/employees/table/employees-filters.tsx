@@ -60,7 +60,7 @@ export default function EmployeesFilters({
           { label: "Oldest", value: "createdAt" },
           { label: "A - Z", value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       <EmployeesFilter
         filter={filter}

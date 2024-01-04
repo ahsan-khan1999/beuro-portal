@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import Image from "next/image";
+import { dataURLtoBlob, smoothScrollToSection } from "@/utils/utility";
 
 const ow = 383;
 const oh = 153;
@@ -62,18 +63,21 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
 
   const handleSave = async () => {
     if (signaturePad) {
+
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
-
-        const svgContent = signaturePad.toDataURL("image/svg+xml");
-        const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-        const file = new File([blob], 'signature.svg', { type: 'image/svg+xml' });
+        const formdata = new FormData()
+        const svgContent = signaturePad.toDataURL("image/png");
+        const blob = dataURLtoBlob(svgContent);
+        const file = new File([blob], 'signature.png', { type: 'image/png' });
         localStoreUtil.store_data('signature', file);
         setOfferSignature && setOfferSignature(file)
         setIsSubmitted(true);
-
         //@ts-expect-error
         setIsSignatureDone && setIsSignatureDone(true);
+        smoothScrollToSection("#acceptOffer")
+        // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
+
       }
     }
   };
@@ -82,7 +86,6 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     signaturePad?.clear();
     setIsSubmitted(false);
   };
-  console.log(signature);
 
   return (
     !signature &&

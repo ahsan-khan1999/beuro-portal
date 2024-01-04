@@ -31,7 +31,7 @@ const PdfCard = ({
   return (
     <PdfCardLayout>
       <div className=" rounded-md bg-white py-[20px] px-[20px] w-full h-fit ">
-        <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#e5]">
+        <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-20">
           <div className="flex items-center">
             <Image
               src={backIcon}
