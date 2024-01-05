@@ -24,6 +24,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { EmailTemplate } from "@/types/settings";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export const productItems: ServiceList[] = [
   {
@@ -138,7 +139,9 @@ const PdfPriview = () => {
   const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
     null
   );
-
+  const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
+    null
+  );
   const {
     auth: { user },
     global: { modal },
@@ -153,133 +156,15 @@ const PdfPriview = () => {
   const { offerID } = router.query;
 
   useEffect(() => {
-    if (offerID) {
-      dispatch(readOfferDetails({ params: { filter: offerID } })).then(
-        (response: ActionType) => {
-          if (response?.payload) {
-            const offerDetails: OffersTableRowTypes = response?.payload;
-            let formatData: PdfProps = {
-              attachement: offerDetails?.attachement,
-              emailHeader: {
-                offerNo: offerDetails?.offerNumber,
-                emailStatus: offerDetails?.emailStatus,
-              },
-              headerDetails: {
-                offerNo: offerDetails?.offerNumber,
-                offerDate: offerDetails?.createdAt,
-                createdBy: offerDetails?.createdBy?.fullName,
-                logo: offerDetails?.createdBy?.company?.logo,
-                emailTemplateSettings: emailTemplateSettings
-              },
-              contactAddress: {
-                address: {
-                  name: offerDetails?.leadID?.customerDetail?.fullName,
-                  city: offerDetails?.leadID?.customerDetail?.address?.country,
-                  postalCode:
-                    offerDetails?.leadID?.customerDetail?.address?.postalCode,
-                  streetWithNumber:
-                    offerDetails?.leadID?.customerDetail?.address?.streetNumber,
-                },
-                email: offerDetails?.leadID?.customerDetail?.email,
-                phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
-              },
-              movingDetails: {
-                address: offerDetails?.addressID?.address,
-                header: offerDetails?.title,
-                workDates: offerDetails?.date,
-              },
-              serviceItem: offerDetails?.serviceDetail?.serviceDetail,
-              serviceItemFooter: {
-                subTotal: offerDetails?.subTotal?.toString(),
-                tax: offerDetails?.taxAmount?.toString(),
-                discount: offerDetails?.discountAmount?.toString(),
-                grandTotal: offerDetails?.total?.toString(),
-              },
-              footerDetails: {
-                firstColumn: {
-                  companyName: user?.company?.companyName,
-                  email: user?.email,
-                  phoneNumber: user?.company?.phoneNumber,
-                  taxNumber: user?.company?.taxNumber,
-                  website: user?.company?.website,
-                },
-                secondColumn: {
-                  address: {
-                    postalCode: user?.company.address.postalCode,
-                    streetNumber: user?.company.address.streetNumber,
-                  },
-                  bankDetails: {
-                    accountNumber: user?.company.bankDetails.accountNumber,
-                    bankName: user?.company.bankDetails.bankName,
-                    ibanNumber: user?.company.bankDetails.ibanNumber,
-                  },
-                },
-                thirdColumn: {},
-                fourthColumn: {
-
-                },
-                columnSettings: null,
-                currPage: 1,
-                totalPages: calculateTotalPages,
-              },
-              qrCode: {
-                acknowledgementSlip: qrCodeAcknowledgementData,
-                payableTo: qrCodePayableToData,
-              },
-              aggrementDetails:
-                offerDetails?.content?.offerContent?.description || "",
-              isOffer: true,
-              signature: offerDetails?.signature
-            };
-            const distributeItems = (): ServiceList[][] => {
-              const totalItems =
-                offerDetails?.serviceDetail?.serviceDetail?.length;
-              let pages: ServiceList[][] = [];
-
-              if (totalItems > maxItemsFirstPage) {
-                pages.push(
-                  offerDetails?.serviceDetail?.serviceDetail?.slice(
-                    0,
-                    maxItemsFirstPage
-                  )
-                );
-                for (
-                  let i = maxItemsFirstPage;
-                  i < totalItems;
-                  i += maxItemsPerPage
-                ) {
-                  pages.push(
-                    offerDetails?.serviceDetail?.serviceDetail?.slice(
-                      i,
-                      i + maxItemsPerPage
-                    )
-                  );
-                }
-              } else {
-                pages.push(offerDetails?.serviceDetail?.serviceDetail);
-              }
-
-              return pages;
-            };
-
-            setNewPageData(distributeItems());
-            setOfferData(formatData);
-          }
-        }
-      );
-    }
-  }, [offerID]);
-
-  useEffect(() => {
     (async () => {
-      try {
-        const response: CompanySettingsActionType = await dispatch(
+      if (offerID) {
+
+        const [template, emailTemplate, offerData] = await Promise.all([dispatch(
           getTemplateSettings()
-        );
-        const emailTemplate: EmailSettingsActionType = await dispatch(
+        ), dispatch(
           readEmailSettings()
-        );
-        if (response?.payload?.Template) {
+        ), dispatch(readOfferDetails({ params: { filter: offerID } }))])
+        if (template?.payload?.Template) {
           const {
             firstColumn,
             fourthColumn,
@@ -289,7 +174,7 @@ const PdfPriview = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-          }: TemplateType = response.payload.Template;
+          }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
             firstColumn,
@@ -302,11 +187,8 @@ const PdfPriview = () => {
             isThirdColumn,
           }));
         }
-        console.log(emailTemplate);
-        
         if (emailTemplate?.payload) {
           setEmailTemplateSettings({
-            ...emailTemplateSettings,
             logo: emailTemplate?.payload?.logo,
             FooterColour: emailTemplate?.payload?.FooterColour,
             email: emailTemplate?.payload?.email,
@@ -316,11 +198,120 @@ const PdfPriview = () => {
 
           })
         }
-      } catch (error) {
-        console.error("Error fetching template settings:", error);
+        if (offerData?.payload) {
+          const offerDetails: OffersTableRowTypes = offerData?.payload;
+          let formatData: PdfProps = {
+            attachement: offerDetails?.attachement,
+            emailHeader: {
+              offerNo: offerDetails?.offerNumber,
+              emailStatus: offerDetails?.emailStatus,
+            },
+            headerDetails: {
+              offerNo: offerDetails?.offerNumber,
+              offerDate: offerDetails?.createdAt,
+              createdBy: offerDetails?.createdBy?.fullName,
+              logo: offerDetails?.createdBy?.company?.logo,
+              emailTemplateSettings: emailTemplate?.payload
+            },
+            contactAddress: {
+              address: {
+                name: offerDetails?.leadID?.customerDetail?.fullName,
+                city: offerDetails?.leadID?.customerDetail?.address?.country,
+                postalCode:
+                  offerDetails?.leadID?.customerDetail?.address?.postalCode,
+                streetWithNumber:
+                  offerDetails?.leadID?.customerDetail?.address?.streetNumber,
+              },
+              email: offerDetails?.leadID?.customerDetail?.email,
+              phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+            },
+            movingDetails: {
+              address: offerDetails?.addressID?.address,
+              header: offerDetails?.title,
+              workDates: offerDetails?.date,
+            },
+            serviceItem: offerDetails?.serviceDetail?.serviceDetail,
+            serviceItemFooter: {
+              subTotal: offerDetails?.subTotal?.toString(),
+              tax: offerDetails?.taxAmount?.toString(),
+              discount: offerDetails?.discountAmount?.toString(),
+              grandTotal: offerDetails?.total?.toString(),
+            },
+            footerDetails: {
+              firstColumn: {
+                companyName: user?.company?.companyName,
+                email: user?.email,
+                phoneNumber: user?.company?.phoneNumber,
+                taxNumber: user?.company?.taxNumber,
+                website: user?.company?.website,
+              },
+              secondColumn: {
+                address: {
+                  postalCode: user?.company.address.postalCode,
+                  streetNumber: user?.company.address.streetNumber,
+                },
+                bankDetails: {
+                  accountNumber: user?.company.bankDetails.accountNumber,
+                  bankName: user?.company.bankDetails.bankName,
+                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                },
+              },
+              thirdColumn: {},
+              fourthColumn: {
+
+              },
+              columnSettings: null,
+              currPage: 1,
+              totalPages: calculateTotalPages,
+            },
+            qrCode: {
+              acknowledgementSlip: qrCodeAcknowledgementData,
+              payableTo: qrCodePayableToData,
+            },
+            aggrementDetails:
+              offerDetails?.content?.offerContent?.description || "",
+            isOffer: true,
+            signature: offerDetails?.signature
+          };
+          const distributeItems = (): ServiceList[][] => {
+            const totalItems =
+              offerDetails?.serviceDetail?.serviceDetail?.length;
+            let pages: ServiceList[][] = [];
+
+            if (totalItems > maxItemsFirstPage) {
+              pages.push(
+                offerDetails?.serviceDetail?.serviceDetail?.slice(
+                  0,
+                  maxItemsFirstPage
+                )
+              );
+              for (
+                let i = maxItemsFirstPage;
+                i < totalItems;
+                i += maxItemsPerPage
+              ) {
+                pages.push(
+                  offerDetails?.serviceDetail?.serviceDetail?.slice(
+                    i,
+                    i + maxItemsPerPage
+                  )
+                );
+              }
+            } else {
+              pages.push(offerDetails?.serviceDetail?.serviceDetail);
+            }
+
+            return pages;
+          };
+
+          setNewPageData(distributeItems());
+          setOfferData(formatData);
+        }
       }
-    })();
-  }, []);
+    })()
+
+
+  }, [offerID]);
   const totalItems = offerData?.serviceItem?.length;
 
   const calculateTotalPages = useMemo(() => {
@@ -334,6 +325,8 @@ const PdfPriview = () => {
 
   const handleEmailSend = async () => {
     try {
+      setActiveButtonId("email");
+
       const data = await localStoreUtil.get_data("contractComposeEmail");
 
       if (data) {
@@ -351,6 +344,8 @@ const PdfPriview = () => {
     }
   };
   const handleSendByPost = async () => {
+    setActiveButtonId("post");
+
     const apiData = {
       emailStatus: 2,
       id: offerID
@@ -390,26 +385,36 @@ const PdfPriview = () => {
   };
   return (
     <>
-      <EmailCard
-        emailStatus={offerData?.emailHeader?.emailStatus}
-        offerNo={offerData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        handleSendByPost={handleSendByPost}
-      />
-      <div className="my-5">
-        <Pdf<EmailHeaderProps>
-          pdfData={offerData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          emailTemplateSettings={emailTemplateSettings}
+      {
+        loading ? <LoadingState /> :
 
-        />
-      </div>
-      {renderModal()}
+
+          <>
+            <EmailCard
+              emailStatus={offerData?.emailHeader?.emailStatus}
+              offerNo={offerData?.emailHeader?.offerNo}
+              onEmailSend={handleEmailSend}
+              loading={loading}
+              onDownload={handleDonwload}
+              onPrint={handlePrint}
+              handleSendByPost={handleSendByPost}
+              activeButtonId={activeButtonId}
+
+            />
+            <div className="my-5">
+              <Pdf<EmailHeaderProps>
+                pdfData={offerData}
+                newPageData={newPageData}
+                templateSettings={templateSettings}
+                totalPages={calculateTotalPages}
+                emailTemplateSettings={emailTemplateSettings}
+
+              />
+            </div>
+            {renderModal()}
+          </>
+      }
+
     </>
   );
 };

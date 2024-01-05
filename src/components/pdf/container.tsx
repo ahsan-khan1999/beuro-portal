@@ -10,13 +10,13 @@ export const Container = ({ children }: MyComponentProp) => {
       const parentWidth = parent.offsetWidth;
 
       // scale down when parent width is less than 1160px
-      const scale = parentWidth < 600 ? parentWidth / 600 : 1;
+      const scale = parentWidth < 1160 ? parentWidth / 1160 : 1;
       containerRef.current.style.transform = `scale(${scale})`;
 
       // parent width > 1160px set container width to 100%
       // scale down when parent width < 1160px
       containerRef.current.style.width =
-        parentWidth > 600 ? "100%" : `${Math.min(parentWidth, 600)}px`;
+        parentWidth > 1160 ? "100%" : `${Math.min(parentWidth, 1160)}px`;
     }
   };
 

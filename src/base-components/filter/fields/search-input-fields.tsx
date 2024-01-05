@@ -46,6 +46,7 @@ export default function SearchInputFiled({
           <input
             id="searchBar"
             type="text"
+            disabled
             value={value}
             placeholder="Search..."
             className={inputClasses}
@@ -93,7 +94,7 @@ export default function SearchInputFiled({
             </div>
           )}
 
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {isOpen && (
               <motion.div
                 className="bg-white flex-col absolute top-[56px] h-auto border-[1px] border-lightGray rounded-lg w-full right-0 py-4 px-3 shadow-lg"
@@ -136,7 +137,7 @@ export default function SearchInputFiled({
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
         </div>
         <div className="absolute right-0 border-l border-[#BFBFBF] z-0  ">
           <SelectField

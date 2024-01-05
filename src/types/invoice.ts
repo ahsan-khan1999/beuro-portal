@@ -17,6 +17,7 @@ export interface InvoiceTableRowTypes {
   emailStatus: string;
   invoiceStatus: string;
   isInvoiceRecurring: boolean;
+  invoiceCreatedAmount: number
 }
 
 // Inovice details table
@@ -93,7 +94,7 @@ export interface PdfSubInvoiceTypes {
   createdAt: string;
   title?: string;
   additionalDetails?: string;
-  attachement?:string
+  attachement?: string
 }
 
 export interface InvoiceTableRowTypesPdf {

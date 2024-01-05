@@ -40,6 +40,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateQuery } from "@/utils/update-query";
 import { EmailTemplate } from "@/types/settings";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export const productItems: ServiceList[] = [
   {
@@ -187,12 +188,50 @@ const DetailsPdfPriview = () => {
   const { invoiceID } = router.query;
 
   useEffect(() => {
-    if (invoiceID) {
-      dispatch(
-        readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
-      ).then((response: ActionType) => {
-        if (response?.payload) {
-          const invoiceDetails: PdfSubInvoiceTypes = response?.payload;
+
+    (async () => {
+      if (invoiceID) {
+        const [template, emailTemplate, offerData] = await Promise.all([dispatch(
+          getTemplateSettings()
+        ), dispatch(
+          readEmailSettings()
+        ), dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } }))])
+        if (template?.payload?.Template) {
+          const {
+            firstColumn,
+            fourthColumn,
+            isFirstColumn,
+            isFourthColumn,
+            isSecondColumn,
+            isThirdColumn,
+            secondColumn,
+            thirdColumn,
+          }: TemplateType = template.payload.Template;
+
+          setTemplateSettings(() => ({
+            firstColumn,
+            secondColumn,
+            thirdColumn,
+            fourthColumn,
+            isFirstColumn,
+            isFourthColumn,
+            isSecondColumn,
+            isThirdColumn,
+          }));
+        }
+        if (emailTemplate?.payload) {
+          setEmailTemplateSettings({
+            logo: emailTemplate?.payload?.logo,
+            FooterColour: emailTemplate?.payload?.FooterColour,
+            email: emailTemplate?.payload?.email,
+            mobileNumber: emailTemplate?.payload?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.phoneNumber,
+            textColour: emailTemplate?.payload?.textColour,
+
+          })
+        }
+        if (offerData?.payload) {
+          const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -214,7 +253,7 @@ const DetailsPdfPriview = () => {
               offerDate: invoiceDetails?.invoiceID?.createdAt,
               createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
               logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
-              emailTemplateSettings: emailTemplateSettings
+              emailTemplateSettings: emailTemplate?.payload
             },
             contactAddress: {
               address: {
@@ -290,8 +329,9 @@ const DetailsPdfPriview = () => {
               payableTo: qrCodePayableToData,
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
-            isOffer: false,
-            signature: invoiceDetails?.invoiceID?.contractID?.offerID?.signature
+            isOffer: true,
+            signature: invoiceDetails?.invoiceID?.contractID?.offerID?.signature,
+            isCanvas:false
           };
           const distributeItems = (): ServiceList[][] => {
             const totalItems =
@@ -341,64 +381,17 @@ const DetailsPdfPriview = () => {
           });
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.title as string,
-            description: invoiceDetails?.additionalDetails as string,
+            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title as string,
+            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.body as string,
           };
         }
-      });
-    }
+
+      }
+    })()
+
   }, [invoiceID]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response: CompanySettingsActionType = await dispatch(
-          getTemplateSettings()
-        );
-        const emailTemplate: EmailSettingsActionType = await dispatch(
-          readEmailSettings()
-        );
-        if (response?.payload?.Template) {
-          const {
-            firstColumn,
-            fourthColumn,
-            isFirstColumn,
-            isFourthColumn,
-            isSecondColumn,
-            isThirdColumn,
-            secondColumn,
-            thirdColumn,
-          }: TemplateType = response.payload.Template;
-          console.log(response.payload.Template, "");
 
-          setTemplateSettings(() => ({
-            firstColumn,
-            secondColumn,
-            thirdColumn,
-            fourthColumn,
-            isFirstColumn,
-            isFourthColumn,
-            isSecondColumn,
-            isThirdColumn,
-          }));
-        }
-        if (emailTemplate?.payload) {
-          setEmailTemplateSettings({
-            ...emailTemplateSettings,
-            logo: emailTemplate?.payload?.logo,
-            FooterColour: emailTemplate?.payload?.FooterColour,
-            email: emailTemplate?.payload?.email,
-            mobileNumber: emailTemplate?.payload?.mobileNumber,
-            phoneNumber: emailTemplate?.payload?.phoneNumber,
-            textColour: emailTemplate?.payload?.textColour,
-
-          })
-        }
-      } catch (error) {
-        console.error("Error fetching template settings:", error);
-      }
-    })();
-  }, []);
   const totalItems = invoiceData?.serviceItem?.length;
   // const totalItems = 34;
 
@@ -420,8 +413,8 @@ const DetailsPdfPriview = () => {
       const data = {
         id: invoiceID,
         email: localStorageContractData?.email,
-        subject: invoiceInfoObj?.subject,
-        description: invoiceInfoObj?.description,
+        subject: localStorageContractData?.subject,
+        description: localStorageContractData?.description,
         pdf: localStorageContractData?.pdf,
       };
       if (localStorageContractData) {
@@ -516,34 +509,40 @@ const DetailsPdfPriview = () => {
   }, [loading]);
   return (
     <>
-      <InvoiceEmailHeader
-        {...invoiceData?.emailHeader}
-        contentName={invoiceData?.emailHeader.contentName}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        title={
-          router.pathname?.includes("receipt")
-            ? "Receipt Details"
-            : "Invoice Details"
-        }
-      />
-      <div className="my-5">
-        <Pdf<InvoiceEmailHeaderProps>
-          pdfData={invoiceData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          isQr={true}
-          emailTemplateSettings={emailTemplateSettings}
+      {
+        loading ? <LoadingState /> :
+          <>
+            <InvoiceEmailHeader
+              {...invoiceData?.emailHeader}
+              contentName={invoiceData?.emailHeader.contentName}
+              onEmailSend={handleEmailSend}
+              loading={loading}
+              onDownload={handleDonwload}
+              onPrint={handlePrint}
+              onSendViaPost={handleSendByPost}
+              activeButtonId={activeButtonId}
+              title={
+                router.pathname?.includes("receipt")
+                  ? "Receipt Details"
+                  : "Invoice Details"
+              }
+            />
+            <div className="my-5">
+              <Pdf<InvoiceEmailHeaderProps>
+                pdfData={invoiceData}
+                newPageData={newPageData}
+                templateSettings={templateSettings}
+                totalPages={calculateTotalPages}
+                isQr={true}
+                emailTemplateSettings={emailTemplateSettings}
 
-        />
-      </div>
-      {renderModal()}
+              />
+            </div>
+            {renderModal()}
+          </>
+      }
     </>
+
   );
 };
 

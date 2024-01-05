@@ -1,6 +1,6 @@
 import { Form } from "@/base-components/form/form";
 import { useContractEmail } from "@/hooks/contract/useContractEmail";
-import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
+import { useReceiptEmail } from "@/hooks/invoice/useReceiptEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import React from "react";
 
@@ -13,7 +13,7 @@ const ComposeMail = ({
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useInvoiceEmail(backRouteHandler, onNextHandle);
+    useReceiptEmail(backRouteHandler, onNextHandle);
   return (
     <ContractFormCard>
       <h2 className="text-[#393939] text-lg font-medium">

@@ -373,14 +373,14 @@ const OfferSlice = createSlice({
         });
 
         builder.addCase(readOfferActivity.pending, (state) => {
-            state.loading = true
+            // state.loading = true
         });
         builder.addCase(readOfferActivity.fulfilled, (state, action) => {
             state.offerActivity = action?.payload
-            state.loading = false;
+            // state.loading = false;
         });
         builder.addCase(readOfferActivity.rejected, (state) => {
-            state.loading = false
+            // state.loading = false
         });
 
         builder.addCase(sendOfferByPost.pending, (state) => {

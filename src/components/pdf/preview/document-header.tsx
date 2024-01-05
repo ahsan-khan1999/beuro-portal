@@ -13,12 +13,12 @@ export const DocumentHeader = ({
   emailTemplateSettings
 }: DocumentHeaderDetailsProps) => {
   const { t: translation } = useTranslation();
-    
+  
   return (
     <div className="grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
       <div className="col-span-3">
-        
-        <Image src={emailTemplateSettings?.logo || ""} alt="umzugsLogo" height={75} width={185} />
+      
+        {emailTemplateSettings && <Image src={emailTemplateSettings?.logo} alt="umzugsLogo" height={75} width={185} />}
       </div>
 
       <div className="flex flex-col gap-[6px] col-span-1">

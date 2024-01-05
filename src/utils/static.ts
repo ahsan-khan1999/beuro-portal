@@ -1201,50 +1201,50 @@ export const paymentsAdminData: PaymentsAdmin[] = [
 export const sideBar: SideBar[] = [
   {
     icon: "Dashboard",
-    title: "Dashboard",
+    title: "sidebar.customer.dashboard",
     pathname: "/dashboard",
     role: [1, 2],
   },
   {
     icon: "Dashboard",
-    title: "Dashboard",
+    title: "sidebar.admin.dashboard",
     pathname: "/admin/dashboard",
     role: [0],
   },
   {
     icon: "Customers",
-    title: "Customers",
+    title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
   },
   {
     icon: "Customers",
-    title: "Customers",
+    title: "sidebar.admin.customers",
     pathname: "/admin/customers",
     role: [0],
   },
   {
     icon: "Leads",
-    title: "Leads",
+    title: "sidebar.customer.leads.leads",
     pathname: "/leads",
     role: [1, 2],
     inner: [
       {
-        title: "Open",
+        title: "sidebar.customer.leads.open",
         pathname: "/leads",
         query: "Open",
 
         role: [1, 2],
       },
       {
-        title: "Close",
+        title: "sidebar.customer.leads.close",
         pathname: "/leads",
         query: "Close",
 
         role: [1, 2],
       },
       {
-        title: "Expire",
+        title: "sidebar.customer.leads.expire",
         pathname: "/leads",
         query: "Expired",
 
@@ -1260,7 +1260,7 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "Open",
+        title: "Accepted",
         pathname: "/offers",
         query: "Open",
 
