@@ -763,7 +763,9 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
-  handleSendByPost: () => void
+  handleSendByPost: () => void;
+  activeButtonId: string | null;
+
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;

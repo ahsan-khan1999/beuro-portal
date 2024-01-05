@@ -34,6 +34,7 @@ import {
 import { contractTableTypes } from "@/types/contract";
 import { updateQuery } from "@/utils/update-query";
 import { EmailTemplate } from "@/types/settings";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export const productItems: ServiceList[] = [
   {
@@ -173,148 +174,14 @@ const PdfPriview = () => {
   const { offerID } = router.query;
 
   useEffect(() => {
-    if (offerID) {
-      dispatch(readContractDetails({ params: { filter: offerID } })).then(
-        (response: ActionType) => {
-          if (response?.payload) {
-            const contractDetails: contractTableTypes = response?.payload;
-            let formatData: PdfProps<ContractEmailHeaderProps> = {
-              id: contractDetails?.id,
-              attachement: contractDetails?.attachement,
-              emailHeader: {
-                offerNo: contractDetails?.contractNumber,
-                emailStatus: contractDetails?.contractStatus,
-                contractTitle: contractDetails?.title,
-                worker: contractDetails?.offerID?.createdBy?.fullName,
-              },
-              headerDetails: {
-                offerNo: contractDetails?.offerID?.offerNumber,
-                offerDate: contractDetails?.offerID?.createdAt,
-                createdBy: contractDetails?.offerID?.createdBy?.fullName,
-                logo: contractDetails?.offerID?.createdBy?.company?.logo,
-                emailTemplateSettings: emailTemplateSettings
-              },
-              contactAddress: {
-                address: {
-                  name: contractDetails?.offerID?.leadID?.customerDetail
-                    ?.fullName,
-                  city: contractDetails?.offerID?.leadID?.customerDetail
-                    ?.address?.country,
-                  postalCode:
-                    contractDetails?.offerID?.leadID?.customerDetail?.address
-                      ?.postalCode,
-                  streetWithNumber:
-                    contractDetails?.offerID?.leadID?.customerDetail?.address
-                      ?.streetNumber,
-                },
-                email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-                phone:
-                  contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
-              },
-              movingDetails: {
-                address: contractDetails?.offerID?.addressID?.address,
-                header: contractDetails?.title,
-                workDates: contractDetails?.offerID?.date,
-                handleTitleUpdate: handleTitleUpdate,
-                handleDescriptionUpdate: handleDescriptionUpdate,
-              },
-              serviceItem:
-                contractDetails?.offerID?.serviceDetail?.serviceDetail,
-              serviceItemFooter: {
-                subTotal: contractDetails?.offerID?.subTotal?.toString(),
-                tax: contractDetails?.offerID?.taxAmount?.toString(),
-                discount: contractDetails?.offerID?.discountAmount?.toString(),
-                grandTotal: contractDetails?.offerID?.total?.toString(),
-              },
-              footerDetails: {
-                firstColumn: {
-                  companyName: user?.company?.companyName,
-                  email: user?.email,
-                  phoneNumber: user?.company?.phoneNumber,
-                  taxNumber: user?.company?.taxNumber,
-                  website: user?.company?.website,
-                },
-                secondColumn: {
-                  address: {
-                    postalCode: user?.company.address.postalCode,
-                    streetNumber: user?.company.address.streetNumber,
-                  },
-                  bankDetails: {
-                    accountNumber: user?.company.bankDetails.accountNumber,
-                    bankName: user?.company.bankDetails.bankName,
-                    ibanNumber: user?.company.bankDetails.ibanNumber,
-                  },
-                },
-                thirdColumn: {},
-                fourthColumn: {},
-                columnSettings: null,
-                currPage: 1,
-                totalPages: calculateTotalPages,
-              },
-              qrCode: {
-                acknowledgementSlip: qrCodeAcknowledgementData,
-                payableTo: qrCodePayableToData,
-              },
-              aggrementDetails: contractDetails?.additionalDetails || "",
-              isOffer: false,
-              signature: contractDetails?.offerID?.signature
-            };
-            const distributeItems = (): ServiceList[][] => {
-              const totalItems =
-                contractDetails?.offerID?.serviceDetail?.serviceDetail?.length;
-              let pages: ServiceList[][] = [];
-
-              if (totalItems > maxItemsFirstPage) {
-                pages.push(
-                  contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
-                    0,
-                    maxItemsFirstPage
-                  )
-                );
-                for (
-                  let i = maxItemsFirstPage;
-                  i < totalItems;
-                  i += maxItemsPerPage
-                ) {
-                  pages.push(
-                    contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
-                      i,
-                      i + maxItemsPerPage
-                    )
-                  );
-                }
-              } else {
-                pages.push(
-                  contractDetails?.offerID?.serviceDetail?.serviceDetail
-                );
-              }
-
-              return pages;
-            };
-
-            setNewPageData(distributeItems());
-            setOfferData(formatData);
-            contractPdfInfo = {
-              ...contractPdfInfo,
-              subject: contractDetails?.offerID?.content?.confirmationContent?.title,
-              description: contractDetails?.offerID?.content?.confirmationContent?.body,
-            };
-          }
-        }
-      );
-    }
-  }, [offerID]);
-
-  useEffect(() => {
     (async () => {
-      try {
-        const response: CompanySettingsActionType = await dispatch(
+      if (offerID) {
+        const [template, emailTemplate, offerData] = await Promise.all([dispatch(
           getTemplateSettings()
-        );
-        const emailTemplate: EmailSettingsActionType = await dispatch(
+        ), dispatch(
           readEmailSettings()
-        );
-        if (response?.payload?.Template) {
+        ), dispatch(readContractDetails({ params: { filter: offerID } }))])
+        if (template?.payload?.Template) {
           const {
             firstColumn,
             fourthColumn,
@@ -324,7 +191,7 @@ const PdfPriview = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-          }: TemplateType = response.payload.Template;
+          }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
             firstColumn,
@@ -339,7 +206,6 @@ const PdfPriview = () => {
         }
         if (emailTemplate?.payload) {
           setEmailTemplateSettings({
-            ...emailTemplateSettings,
             logo: emailTemplate?.payload?.logo,
             FooterColour: emailTemplate?.payload?.FooterColour,
             email: emailTemplate?.payload?.email,
@@ -349,11 +215,137 @@ const PdfPriview = () => {
 
           })
         }
-      } catch (error) {
-        console.error("Error fetching template settings:", error);
+        if (offerData?.payload) {
+          const contractDetails: contractTableTypes = offerData?.payload;
+          let formatData: PdfProps<ContractEmailHeaderProps> = {
+            id: contractDetails?.id,
+            attachement: contractDetails?.attachement,
+            emailHeader: {
+              offerNo: contractDetails?.contractNumber,
+              emailStatus: contractDetails?.contractStatus,
+              contractTitle: contractDetails?.title,
+              worker: contractDetails?.offerID?.createdBy?.fullName,
+            },
+            headerDetails: {
+              offerNo: contractDetails?.offerID?.offerNumber,
+              offerDate: contractDetails?.offerID?.createdAt,
+              createdBy: contractDetails?.offerID?.createdBy?.fullName,
+              logo: contractDetails?.offerID?.createdBy?.company?.logo,
+              emailTemplateSettings: emailTemplate?.payload
+            },
+            contactAddress: {
+              address: {
+                name: contractDetails?.offerID?.leadID?.customerDetail
+                  ?.fullName,
+                city: contractDetails?.offerID?.leadID?.customerDetail
+                  ?.address?.country,
+                postalCode:
+                  contractDetails?.offerID?.leadID?.customerDetail?.address
+                    ?.postalCode,
+                streetWithNumber:
+                  contractDetails?.offerID?.leadID?.customerDetail?.address
+                    ?.streetNumber,
+              },
+              email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+              phone:
+                contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
+            },
+            movingDetails: {
+              address: contractDetails?.offerID?.addressID?.address,
+              header: contractDetails?.title,
+              workDates: contractDetails?.offerID?.date,
+              handleTitleUpdate: handleTitleUpdate,
+              handleDescriptionUpdate: handleDescriptionUpdate,
+            },
+            serviceItem:
+              contractDetails?.offerID?.serviceDetail?.serviceDetail,
+            serviceItemFooter: {
+              subTotal: contractDetails?.offerID?.subTotal?.toString(),
+              tax: contractDetails?.offerID?.taxAmount?.toString(),
+              discount: contractDetails?.offerID?.discountAmount?.toString(),
+              grandTotal: contractDetails?.offerID?.total?.toString(),
+            },
+            footerDetails: {
+              firstColumn: {
+                companyName: user?.company?.companyName,
+                email: user?.email,
+                phoneNumber: user?.company?.phoneNumber,
+                taxNumber: user?.company?.taxNumber,
+                website: user?.company?.website,
+              },
+              secondColumn: {
+                address: {
+                  postalCode: user?.company.address.postalCode,
+                  streetNumber: user?.company.address.streetNumber,
+                },
+                bankDetails: {
+                  accountNumber: user?.company.bankDetails.accountNumber,
+                  bankName: user?.company.bankDetails.bankName,
+                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                },
+              },
+              thirdColumn: {},
+              fourthColumn: {},
+              columnSettings: null,
+              currPage: 1,
+              totalPages: calculateTotalPages,
+            },
+            qrCode: {
+              acknowledgementSlip: qrCodeAcknowledgementData,
+              payableTo: qrCodePayableToData,
+            },
+            aggrementDetails: contractDetails?.additionalDetails || "",
+            isOffer: true,
+            signature: contractDetails?.offerID?.signature,
+            isCanvas: false
+          };
+          const distributeItems = (): ServiceList[][] => {
+            const totalItems =
+              contractDetails?.offerID?.serviceDetail?.serviceDetail?.length;
+            let pages: ServiceList[][] = [];
+
+            if (totalItems > maxItemsFirstPage) {
+              pages.push(
+                contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
+                  0,
+                  maxItemsFirstPage
+                )
+              );
+              for (
+                let i = maxItemsFirstPage;
+                i < totalItems;
+                i += maxItemsPerPage
+              ) {
+                pages.push(
+                  contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
+                    i,
+                    i + maxItemsPerPage
+                  )
+                );
+              }
+            } else {
+              pages.push(
+                contractDetails?.offerID?.serviceDetail?.serviceDetail
+              );
+            }
+
+            return pages;
+          };
+
+          setNewPageData(distributeItems());
+          setOfferData(formatData);
+          contractPdfInfo = {
+            ...contractPdfInfo,
+            subject: contractDetails?.offerID?.content?.confirmationContent?.title,
+            description: contractDetails?.offerID?.content?.confirmationContent?.body,
+          };
+        }
+
       }
-    })();
-  }, []);
+    })()
+  }, [offerID]);
+
+
   const totalItems = offerData?.serviceItem?.length;
 
   const calculateTotalPages = useMemo(() => {
@@ -371,13 +363,12 @@ const PdfPriview = () => {
       const localStorageContractData = await localStoreUtil.get_data(
         "contractComposeEmail"
       );
-        console.log(localStorageContractData,"contractComposeEmail");
-        
+
       const data = {
         id: contractDetails?.id,
         email: localStorageContractData?.email,
-        subject: contractPdfInfo?.subject,
-        description: contractPdfInfo?.description,
+        subject: localStorageContractData?.subject,
+        description: localStorageContractData?.description,
         pdf: localStorageContractData?.pdf,
       };
       if (localStorageContractData) {
@@ -465,28 +456,33 @@ const PdfPriview = () => {
   };
   return (
     <>
-      <EmailCard
-        contractStatus={offerData?.emailHeader?.emailStatus}
-        contractNo={offerData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        contractTitle={offerData?.emailHeader?.contractTitle || ""}
-        worker={offerData?.emailHeader?.worker || ""}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-      />
-      <div className="my-5">
-        <Pdf<EmailHeaderProps>
-          pdfData={offerData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          emailTemplateSettings={emailTemplateSettings}
-        />
-      </div>
-      {renderModal()}
+      {
+        loading ? <LoadingState /> :
+          <>
+            <EmailCard
+              contractStatus={offerData?.emailHeader?.emailStatus}
+              contractNo={offerData?.emailHeader?.offerNo}
+              onEmailSend={handleEmailSend}
+              loading={loading}
+              onDownload={handleDonwload}
+              onPrint={handlePrint}
+              contractTitle={offerData?.emailHeader?.contractTitle || ""}
+              worker={offerData?.emailHeader?.worker || ""}
+              onSendViaPost={handleSendByPost}
+              activeButtonId={activeButtonId}
+            />
+            <div className="my-5">
+              <Pdf<EmailHeaderProps>
+                pdfData={offerData}
+                newPageData={newPageData}
+                templateSettings={templateSettings}
+                totalPages={calculateTotalPages}
+                emailTemplateSettings={emailTemplateSettings}
+              />
+            </div>
+            {renderModal()}
+          </>
+      }
     </>
   );
 };

@@ -17,7 +17,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 import { CustomerPromiseActionType } from "@/types/customer";
 
-export const useInvoiceEmail = (
+export const useReceiptEmail = (
     backRouteHandler: Function,
     onNextHandle: Function
 ) => {
@@ -57,7 +57,8 @@ export const useInvoiceEmail = (
                     content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
                     subject: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.title,
                     description: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body,
-                    pdf: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments
+                    pdf: res?.payload?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments,
+                    
                 })
             })
         }
