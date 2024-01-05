@@ -55,7 +55,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id || ""
+              value: contentDetails?.id || contractDetails?.offerID?.content?.id
             },
           },
         ],
