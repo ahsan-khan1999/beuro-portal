@@ -8,7 +8,7 @@ import { ServiceList } from "@/types/offers";
 import { PreviewCard } from "./preview-card";
 import { Button } from "@/base-components/ui/button/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { signOffer, updateOfferStatus } from "@/api/slices/offer/offerSlice";
+import { rejectOfferPublic, signOffer, updateOfferStatus } from "@/api/slices/offer/offerSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
@@ -64,9 +64,14 @@ export const SignPdf = <T,>({
         const response = await dispatch(signOffer({ data, formData }))
         if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) } setOfferSignature(null)
     }
-    const rejectOffer = () => {
-        dispatch(updateModalType({ type: ModalType.UPDATE_SUCCESS }))
+    const rejectOffer = async () => {
+        const params = {
+            id: pdfData?.id
+        }
+        const response = await dispatch(rejectOfferPublic({ params }))
+        if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) } setOfferSignature(null)
     }
+    
 
     const renderModal = () => {
         return MODAL_CONFIG[modal.type] || null;
@@ -110,7 +115,8 @@ export const SignPdf = <T,>({
         ),
     };
     return (
-        <Container>
+        // <Container>
+        <>
             {/* <PreviewCard /> */}
             <div className="flex flex-col gap-y-[30px]">
                 {newPageData.length > 0 && (
@@ -166,7 +172,7 @@ export const SignPdf = <T,>({
                 )}
             </div>
             {
-                (!pdfData?.signature) &&
+                (!pdfData?.signature && action === "Accept") &&
                 <Button
                     className={`mt-[55px] w-full ${action === "Accept" ? 'bg-[#45C769]' : 'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
                     onClick={action === "Accept" ? acceptOffer : rejectOffer}
@@ -190,6 +196,6 @@ export const SignPdf = <T,>({
             }
 
             {renderModal()}
-        </Container>
+        </>
     );
 };

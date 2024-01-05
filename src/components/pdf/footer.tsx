@@ -44,11 +44,11 @@ export const Footer = ({
 
   return (
     <div className={`relative flex items-center justify-between h-[149px] px-4  w-full bg-[${"#" + emailTemplateSettings?.FooterColour}]`}>
-      <div className="flex justify-center gap-[60px] w-full">
+      <div className="flex justify-center gap-[20px] w-full">
         {isFirstColumn && (
           <div
             className={`flex flex-col justify-center ${showFirstColumnBorder
-              ? "pr-[60px] border-r-2 border-[#D9D9D9]"
+              ? "pr-[20px] border-r-2 border-[#D9D9D9]"
               : ""
               }`}
           >
@@ -72,7 +72,7 @@ export const Footer = ({
         {isSecondColumn && (
           <div
             className={`flex flex-col ${showSecondColumnBorder
-              ? "pr-[60px] border-r-2 border-[#D9D9D9]"
+              ? "pr-[20px] border-r-2  border-[#D9D9D9]"
               : ""
               }`}
           >
@@ -98,7 +98,7 @@ export const Footer = ({
         {isThirdColumn && (
           <div
             className={`flex flex-col justify-center ${showThirdColumnBorder
-              ? "pr-[60px] border-r-2 border-[#D9D9D9]"
+              ? "pr-[20px] border-r-2 border-[#D9D9D9]"
               : ""
               }`}
           >

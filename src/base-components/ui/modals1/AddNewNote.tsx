@@ -10,11 +10,10 @@ const AddNewNote = ({
   handleNotes,
 }: {
   onClose: () => void;
-  handleNotes: (id: string) => void
-
+  handleNotes: (id: string) => void;
 }) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
-    useAddNewNote({handleNotes});
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+    useAddNewNote({ handleNotes });
 
   return (
     <>
@@ -31,7 +30,7 @@ const AddNewNote = ({
           />
           <div className="flex justify-between items-center mb-[19px] ml-[38px]">
             <p className="text-2xl font-medium text-[#000]">
-              Add Notes
+              {translate("common.add_note")}
             </p>
           </div>
           <hr className="opacity-10 mb-[30px]" />

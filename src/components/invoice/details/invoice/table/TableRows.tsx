@@ -40,15 +40,12 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(110px,_110px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(220px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(60px,_60px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(60px,_60px)_minmax(80px,_80px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(110px,_110px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(60px,_60px)_minmax(80px,_80px)] mt-2 rounded-md"
           >
-            <span className="py-4 flex items-center rounded-md">
-              {item.invoiceNumber}
-            </span>
+            <span className="py-4 flex items-center">{item.invoiceNumber}</span>
             <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
               {
                 item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
@@ -116,7 +113,7 @@ const TableRows = ({
               />
             </span>
             <span
-              className="py-4 flex justify-center items-center rounded-md"
+              className="py-4 flex justify-center items-center"
               onClick={() => {
                 if (!invoiceDetails?.isInvoiceRecurring) {
                   handleInvoiceEdit(item);
@@ -128,7 +125,7 @@ const TableRows = ({
               <Image src={toggleIcon} alt="moreIcon" />
             </span>
             <span
-              className="py-4 flex justify-center items-center rounded-md mlg:hidden xlg:flex"
+              className="py-4 flex justify-center items-center mlg:hidden xlg:flex"
               onClick={() => handleInvoicePdfPreview(item?.id)}
             >
               <Image src={moreIcon} alt="moreIcon" />

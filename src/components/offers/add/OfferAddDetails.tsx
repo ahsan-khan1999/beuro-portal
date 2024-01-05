@@ -14,7 +14,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
         id="Customer Details"
       >
         <div className="flex items-center gap-x-[26px]">
@@ -35,7 +35,6 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
           {translate("offers.offer_details.cancel_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
 
       <Form
         formFields={fields}

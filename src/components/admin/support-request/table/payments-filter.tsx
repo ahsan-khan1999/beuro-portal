@@ -2,6 +2,7 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
+import { useTranslation } from "next-i18next";
 import React, { useRef, useState } from "react";
 
 export default function PaymentsFilter({
@@ -10,6 +11,7 @@ export default function PaymentsFilter({
   handleFilterChange,
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t: translate } = useTranslation();
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
@@ -51,7 +53,7 @@ export default function PaymentsFilter({
           { label: "Oldest", value: "createdAt" },
           { label: "A - Z", value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
     </div>
   );

@@ -100,7 +100,9 @@ const SERVICE_URLS = {
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
 
-  readOfferPublic: "/offer/public-read"
+  readOfferPublic: "/offer/public-read",
+  rejectOfferPublic: "/offer/reject-offer",
+  updateDiscount: "/offer/update-discount/"
 
 };
 
@@ -437,7 +439,7 @@ const updateAdminSettings = (data) =>
 const updateUserStatus = (data) =>
   put(SERVICE_URLS.changeStatus + `${data?.id}`, data, { feature: featureConstants.login });
 
-const createSignature = (data,formData) =>
+const createSignature = (data, formData) =>
   put(SERVICE_URLS.addSignature + `${data?.id}`, formData, { feature: featureConstants.login });
 
 const updateContractContent = (data) =>
@@ -469,6 +471,11 @@ const invoiceSendByPost = (data) =>
 ;
 const readOfferDetailPublic = (params) =>
   get(SERVICE_URLS.readOfferPublic, params, { feature: featureConstants.login }, { detail: true });
+const rejectOfferPublic = (data) =>
+  put(SERVICE_URLS.rejectOfferPublic + `/${data?.id}`, data, { feature: featureConstants.login });
+
+const updateDiscounts = (data) =>
+  put(SERVICE_URLS.updateDiscount + `${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -615,6 +622,8 @@ const apiServices = {
   offerSendByPost,
   contractSendByPost,
   invoiceSendByPost,
-  readOfferDetailPublic
+  readOfferDetailPublic,
+  rejectOfferPublic,
+  updateDiscounts
 };
 export default apiServices;

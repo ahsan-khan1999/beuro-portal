@@ -20,7 +20,8 @@ const OfferDetails = () => {
     setIsSendEmail,
     onNextHandle,
     loading,
-    handleSendByPost
+    handleSendByPost,
+    handleUpdateDiscount
   } = useOfferDetails();
 
   return (
@@ -48,7 +49,7 @@ const OfferDetails = () => {
             onNextHandle={onNextHandle}
           />
         ) : (
-          <OffersDetailsData offerDetails={offerDetails} loading={loading} />
+          <OffersDetailsData offerDetails={offerDetails} loading={loading} handleUpdateDiscount={handleUpdateDiscount}/>
         )}
       </div>
       {renderModal()}

@@ -15,7 +15,11 @@ const CustomCKEditor = ({
     id={id}
     editor={ClassicEditor}
     data={data}
-    onReady={(editor) => {}}
+    key={data}
+    onReady={(editor) => {
+      field.onChange(field.value);
+
+    }}
     onChange={(event, editor) => {
       field.onChange(editor.getData());
     }}
@@ -24,6 +28,7 @@ const CustomCKEditor = ({
     onError={(error, errorDetails) => {
       trigger?.(field.name);
     }}
+    
     config={{
       toolbar: {
         items: [

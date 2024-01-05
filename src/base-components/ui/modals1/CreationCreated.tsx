@@ -36,7 +36,7 @@ const CreationCreated = ({
             onClick={route}
             className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
-            Done
+            {translate("common.done_button")}
           </button>
         </div>
       </BaseModal>

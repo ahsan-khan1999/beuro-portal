@@ -3,7 +3,7 @@ import DetailsSwitchBtn from "./DetailsSwitchBtn";
 import Activity from "./activity";
 import Discounts from "./discount";
 
-const SwitchedComp = () => {
+const SwitchedComp = ({ handleUpdateDiscount }: { handleUpdateDiscount: (discount: number) => void }) => {
   const [switchDetails, setSwitchDetails] = useState("Activity");
 
   return (
@@ -13,7 +13,7 @@ const SwitchedComp = () => {
         setSwitchDetails={setSwitchDetails}
       />
 
-      {switchDetails.includes("Activity") ? <Activity /> : <Discounts />}
+      {switchDetails.includes("Activity") ? <Activity /> : <Discounts handleUpdateDiscount={handleUpdateDiscount} />}
     </>
   );
 };

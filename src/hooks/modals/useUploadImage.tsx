@@ -1,5 +1,11 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
-import { Control, FieldValues, SubmitHandler, UseFormSetValue, useForm } from "react-hook-form";
+import {
+  Control,
+  FieldValues,
+  SubmitHandler,
+  UseFormSetValue,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -17,7 +23,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { error, leadDetails } = useAppSelector((state) => state.lead);
-  const { images, loading } = useAppSelector(state => state.image)
+  const { images, loading } = useAppSelector((state) => state.image);
 
   const schema = generateImageValidation(translate);
   const {
@@ -27,25 +33,30 @@ export const useUploadImage = (handleImageSlider: Function) => {
     setValue,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  }
+    resolver: yupResolver(schema),
+  });
+
+  const fields = ImageUploadFormField(
+    loading,
+    control as Control<any>,
+    handleImageSlider
   );
 
-  const fields = ImageUploadFormField(loading, control as Control<any>, handleImageSlider);
-
-
-
-
   useMemo(() => {
-    if (leadDetails?.id) setImageFieldValues(setValue as UseFormSetValue<any>, images)
-  }, [leadDetails?.id, images?.length])
-
-
+    if (leadDetails?.id)
+      setImageFieldValues(setValue as UseFormSetValue<any>, images);
+  }, [leadDetails?.id, images?.length]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)?.filter(value => value);
-    const apiData = { images: filteredList, id: leadDetails?.id, type: "leadID" }
-    const response = await dispatch(createImage({ data: apiData, router, setError, translate }));
+    const filteredList = Object.values(data)?.filter((value) => value);
+    const apiData = {
+      images: filteredList,
+      id: leadDetails?.id,
+      type: "leadID",
+    };
+    const response = await dispatch(
+      createImage({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) handleImageSlider();
   };
   return {

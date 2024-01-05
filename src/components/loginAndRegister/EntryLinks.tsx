@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const EntryLinks = () => {
   const [language, setLanguage] = useState("English");
-  const router = useRouter()
+  const { t: translate } = useTranslation();
+  const router = useRouter();
   const handleLanguageSelected = (selectedItem: string) => {
     setLanguage(selectedItem);
     const updatedQuery = {
@@ -21,7 +23,7 @@ const EntryLinks = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 items-center gap-x-[18px] px-7">
+    <div className="grid grid-cols-[minmax(110px,_110px)_minmax(160px,_160px)_minmax(120px,_120px)] gap-x-3 items-center px-7">
       <DropDown
         items={[{ item: "English" }, { item: "German" }]}
         onItemSelected={handleLanguageSelected}
@@ -35,13 +37,13 @@ const EntryLinks = () => {
 
       <div className="flex justify-center">
         <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
-          Privacy Policy
+          {translate("common.privacy")}
         </Link>
       </div>
 
       <div className="flex justify-center">
         <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
-          Copyright 2024
+          {translate("common.copy_right")}
         </Link>
       </div>
     </div>

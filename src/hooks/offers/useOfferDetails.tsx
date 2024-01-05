@@ -1,4 +1,4 @@
-import { deleteOffer, readOfferActivity, readOfferDetails, sendOfferByPost, sendOfferEmail, setOfferDetails, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
+import { deleteOffer, readOfferActivity, readOfferDetails, sendOfferByPost, sendOfferEmail, setOfferDetails, updateOfferDiscount, updateOfferStatus, updatePaymentStatus } from '@/api/slices/offer/offerSlice';
 import DeleteConfirmation_1 from '@/base-components/ui/modals1/DeleteConfirmation_1';
 import DeleteConfirmation_2 from '@/base-components/ui/modals1/DeleteConfirmation_2';
 import { ModalConfigType, ModalType } from '@/enums/ui';
@@ -19,6 +19,7 @@ import { readImage } from '@/api/slices/imageSlice/image';
 import ImagesUploadOffer from '@/base-components/ui/modals1/ImageUploadOffer';
 import { updateQuery } from '@/utils/update-query';
 import localStoreUtil from '@/utils/localstore.util';
+import toast from 'react-hot-toast';
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -135,7 +136,7 @@ export default function useOfferDetails() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
+        heading="Operation Successful "
         subHeading="Thanks for updating offer we are happy to have you. "
         route={onClose}
       />
@@ -179,6 +180,14 @@ export default function useOfferDetails() {
     const response = await dispatch(sendOfferByPost({ data: apiData }))
     if (response?.payload) offerCreatedHandler()
   }
+  const handleUpdateDiscount = async (discount: number) => {
+    if (discount < 1) toast.error("Negative values are not applicable for discounts");
+    else {
+      const response = await dispatch(updateOfferDiscount({ params: { discountAmount: Number(discount), id: offerDetails?.id } }))
+      if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
+
+    }
+  }
   return {
     offerDetails,
     renderModal,
@@ -193,6 +202,7 @@ export default function useOfferDetails() {
     onNextHandle,
     offerActivity,
     loading,
-    handleSendByPost
+    handleSendByPost,
+    handleUpdateDiscount
   }
 }

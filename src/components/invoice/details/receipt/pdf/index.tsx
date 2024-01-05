@@ -156,7 +156,7 @@ let invoiceInfoObj = {
   subject: "",
   description: "",
 };
-const DetailsPdfPriview = () => {
+const ReceiptPdfPreview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
@@ -378,12 +378,12 @@ const DetailsPdfPriview = () => {
               invoiceDetails?.invoiceID.contractID?.offerID?.leadID
                 ?.customerDetail?.email,
             pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments,
+              ?.receiptContent?.attachments,
           });
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title as string,
-            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.body as string,
+            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.title as string,
+            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body as string,
           };
         }
 
@@ -427,9 +427,9 @@ const DetailsPdfPriview = () => {
         let apiData = {
           email: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
           content: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.id,
-          subject: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title,
-          description: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.body,
-          pdf: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments,
+          subject: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.title,
+          description: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body,
+          pdf: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.attachments,
           id: collectiveInvoiceDetails?.invoiceID?.contractID?.id
         }
         const res = await dispatch(sendInvoiceEmail({ apiData }));
@@ -564,4 +564,4 @@ const DetailsPdfPriview = () => {
   );
 };
 
-export default DetailsPdfPriview;
+export default ReceiptPdfPreview;

@@ -166,7 +166,6 @@ export const useEditOfferDetails = ({
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    console.log(filteredContent, "filteredContent");
 
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);

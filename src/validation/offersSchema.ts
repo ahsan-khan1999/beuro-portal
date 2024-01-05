@@ -107,7 +107,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
               .required(translate("validationMessages.required")),
             endDate: yup
               .string()
-              .required(translate("validationMessages.required")),
+              .notRequired(),
           })
           .required(translate("validationMessages.required"))
       )

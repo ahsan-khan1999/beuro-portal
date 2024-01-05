@@ -8,7 +8,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   control,
   onClick,
   count,
-  { content, contentDetails, offerDetails, onContentSelect ,selectedContent},
+  { content, contentDetails, offerDetails, onContentSelect, selectedContent },
   setValue,
   trigger
 ) => {
@@ -21,7 +21,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         htmlFor: "content",
         className: "mb-[10px]",
       },
-
+      //@ts-expect-error
       field: {
         className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
         type: Field.select,
@@ -33,9 +33,9 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             value: item.id,
           })) || [],
         control,
-        value: (offerDetails?.id && offerDetails?.content?.id) || "",
+        // value: (offerDetails?.id && offerDetails?.content?.id) || "",
         onItemChange: onContentSelect,
-        trigger
+        trigger,
       },
     },
     {
@@ -52,7 +52,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
+        // value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
         trigger
       },
     },
@@ -68,7 +68,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.button,
               id: "buttonBack",
-              text: "Back",
+              text: `${translate("common.back_button")}`,
               inputType: "button",
               className:
                 "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",
@@ -84,7 +84,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
               inputType: "submit",
               className:
                 "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
-              loading
+              loading,
             },
           },
         ],

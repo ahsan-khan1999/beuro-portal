@@ -21,6 +21,7 @@ import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequ
 import { useAppSelector } from "@/hooks/useRedux";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
@@ -44,7 +45,7 @@ export const svgs = {
 
 const SideBar = () => {
   const { user } = useAppSelector((state) => state.auth);
-
+  const { t: translation } = useTranslation();
   const [selected, setSelected] = useState<{
     parent: { title: string; isActive: boolean };
     child: any[] | null;
@@ -134,7 +135,7 @@ const SideBar = () => {
                           selected.parent.title === item.title && "text-white"
                         }`}
                       >
-                        {item.title}
+                        {translation(item.title)}
                       </span>
                     </div>
                     {item.inner && (
@@ -207,7 +208,7 @@ const SideBar = () => {
                                       : ""
                                   }`}
                                 >
-                                  {it.title}
+                                  {translation(it.title)}
                                 </Link>
                               </motion.div>
                             );

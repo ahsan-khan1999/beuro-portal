@@ -66,7 +66,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "New Customer",
-                    label: "New Customer",
+                    label: `${translate("offers.offer_details.new_customer")}`,
                     id: "type",
                     name: "type",
                     register,
@@ -78,7 +78,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "Existing Customer",
-                    label: "Existing Customer",
+                    label: `${translate("offers.offer_details.exit_customer")}`,
                     id: "type",
                     name: "type",
                     register,
@@ -125,7 +125,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "fullName",
               name: "fullName",
 
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate("offers.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerDetail?.fullName
             },
@@ -141,7 +141,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "email",
               inputType: "text",
 
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate("offers.placeholders.email")}`,
               register,
               value: offerDetails && offerDetails.customerID?.email,
             },
@@ -187,7 +187,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
                   : customerDetails && customerDetails?.mobileNumber,
             },
           },
@@ -238,7 +238,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "title",
               name: "title",
-              placeholder: "Offer Title",
+              placeholder: `${translate("offers.placeholders.offer_title")}`,
               register,
             },
           },
@@ -272,7 +272,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "address.streetNumber",
               name: "address.streetNumber",
 
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate("offers.placeholders.street")}`,
               register,
               value:
                 offerDetails && offerDetails?.customerID?.address?.streetNumber,
@@ -293,7 +293,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate("offers.placeholders.post_code")}`,
 
               register,
               value:
@@ -440,7 +440,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           (lead?.length === 1 && offerDetails?.id && lead[0]?.id) ||
           (offerDetails?.id && offerDetails?.leadID?.id) ||
           leadID,
-        disabled: offerDetails?.leadID?.id ? true : false,
+        // disabled: offerDetails?.leadID?.id ? true : false,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps;

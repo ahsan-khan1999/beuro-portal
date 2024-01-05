@@ -176,10 +176,10 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Save",
+        text: `${translate("common.save_button")}`,
         inputType: "submit",
         className:
-          " rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
         loading,
       },
     },

@@ -10,12 +10,19 @@ import { useEmptyStates } from "@/utils/hooks";
 
 export default function SupportRequest() {
   const {
-    currentPageRows, handlePageChange, totalItems, itemsPerPage, filter, setFilter, handleFilterChange,loading
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    filter,
+    setFilter,
+    handleFilterChange,
+    loading,
   } = useSupportRequest();
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} />,
-    currentPageRows.length > 0,
+    currentPageRows?.length > 0,
     loading
   );
 
@@ -30,7 +37,7 @@ export default function SupportRequest() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
+      {currentPageRows?.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}

@@ -385,7 +385,7 @@ export type GenerateOffersFormField = (
     leadDetails?: Lead;
     service?: Service[];
     handleRemove?: (id: string) => void;
-    onContentSelect?: () => void;
+    onContentSelect?: (id:string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string
   },
@@ -763,7 +763,9 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
-  handleSendByPost: () => void
+  handleSendByPost: () => void;
+  activeButtonId: string | null;
+
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;

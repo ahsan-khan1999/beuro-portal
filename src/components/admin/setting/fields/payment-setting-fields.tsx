@@ -59,7 +59,9 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                           id: "publishableKey",
                           name: "publishableKey",
                           inputType: "text",
-                          placeholder: "Enter Your Publishable Key",
+                          placeholder: `${translate(
+                            "admin.settings.placeholders.publish_key"
+                          )}`,
                           register,
                         },
                       },
@@ -78,7 +80,9 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                           id: "searchKey",
                           name: "searchKey",
                           inputType: "text",
-                          placeholder: "Enter Your Search Key",
+                          placeholder: `${translate(
+                            "admin.settings.placeholders.search_key"
+                          )}`,
                           register,
                         },
                       },

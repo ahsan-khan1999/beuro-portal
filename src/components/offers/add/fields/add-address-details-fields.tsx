@@ -4,10 +4,8 @@ import {
   GenerateLeadAddressFormField,
   GenerateOffersFormField,
 } from "@/types";
-import { ComponentsType } from "../AddOffersDetailsData";
 import { staticEnums } from "@/utils/static";
 import icon from "@/assets/svgs/Vector.svg";
-import { Fields } from "@/enums";
 import { useTranslation } from "next-i18next";
 export const addressObject = {
   streetNumber: "",
@@ -52,7 +50,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
@@ -121,7 +119,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
                 placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s.",
                 register,
               },
             },
@@ -130,7 +128,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Remove",
+                text: `${translate("common.remove_button")}`,
                 inputType: "button",
                 className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
                   i === 0 && "hidden"
@@ -156,10 +154,10 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           field: {
             type: Field.button,
             id: "button",
-            text: `${translate("offers.address_details.back_button")}`,
+            text: `${translate("common.back_button")}`,
             inputType: "button",
             className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+              "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
             onClick: onHandleBack && onHandleBack,
           },
         },
@@ -168,10 +166,10 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           field: {
             type: Field.button,
             id: "button",
-            text: `${translate("offers.address_details.next_button")}`,
+            text: `${translate("common.next_button")}`,
             inputType: "submit",
             className:
-              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
+              "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
             loading,
           },
         },

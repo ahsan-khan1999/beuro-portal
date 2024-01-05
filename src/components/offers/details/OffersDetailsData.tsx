@@ -19,10 +19,11 @@ export enum ComponentsType {
 
 const OffersDetailsData = ({
   offerDetails,
-  loading,
+  loading,handleUpdateDiscount
 }: {
   offerDetails: OffersTableRowTypes;
   loading: boolean;
+  handleUpdateDiscount: (discount: number) => void
 }) => {
   const [tabType, setTabType] = useState<number>(0);
 
@@ -111,7 +112,7 @@ const OffersDetailsData = ({
           ))}
         </div>
         <div className="w-full">
-          <SwitchedComp />
+          <SwitchedComp handleUpdateDiscount={handleUpdateDiscount}/>
         </div>
       </div>
       <div className="col-span-3 flex flex-col gap-y-5 w-full h-[680px] xl:mt-0 mt-5 overflow-scroll">
