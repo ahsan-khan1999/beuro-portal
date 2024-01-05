@@ -28,6 +28,7 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import { staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { EmailTemplate } from "@/types/settings";
+import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 
 export const productItems: ServiceList[] = [
     {
@@ -361,7 +362,7 @@ const SignPdfPreview = () => {
     };
 
     return (
-        <>
+        <YogaPdfContainer>
 
             <div className="my-5">
                 <SignPdf<EmailHeaderProps>
@@ -373,7 +374,7 @@ const SignPdfPreview = () => {
                     emailTemplateSettings={emailTemplateSettings}
                 />
             </div>
-        </>
+        </YogaPdfContainer>
     );
 };
 

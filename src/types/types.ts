@@ -385,7 +385,7 @@ export type GenerateOffersFormField = (
     leadDetails?: Lead;
     service?: Service[];
     handleRemove?: (id: string) => void;
-    onContentSelect?: () => void;
+    onContentSelect?: (id:string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string
   },

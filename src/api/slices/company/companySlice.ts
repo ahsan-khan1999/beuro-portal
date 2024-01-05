@@ -11,6 +11,7 @@ import { ModalType } from "@/enums/ui";
 import { Company } from "@/types/company";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { Plan } from "@/types/admin/plans";
+import toast from "react-hot-toast";
 
 
 
@@ -173,6 +174,7 @@ export const deletePlan: AsyncThunk<boolean, object, object> | any =
             await apiServices.deletePlan(data);
             return true;
         } catch (e: any) {
+            toast.error(e?.data?.message)
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;

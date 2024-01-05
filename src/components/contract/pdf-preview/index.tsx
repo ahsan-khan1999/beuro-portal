@@ -35,6 +35,7 @@ import { contractTableTypes } from "@/types/contract";
 import { updateQuery } from "@/utils/update-query";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 
 export const productItems: ServiceList[] = [
   {
@@ -377,6 +378,20 @@ const PdfPriview = () => {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
       }
+      else {
+        let apiData = {
+          email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+          content: contractDetails?.offerID?.content?.id,
+          subject: contractDetails?.offerID?.content?.confirmationContent?.title,
+          description: contractDetails?.offerID?.content?.confirmationContent?.body,
+          pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
+          id: contractDetails?.id
+        }
+        const res = await dispatch(sendContractEmail({ data: apiData }));
+        if (res?.payload) {
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
+      }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }
@@ -471,15 +486,19 @@ const PdfPriview = () => {
               onSendViaPost={handleSendByPost}
               activeButtonId={activeButtonId}
             />
-            <div className="my-5">
-              <Pdf<EmailHeaderProps>
-                pdfData={offerData}
-                newPageData={newPageData}
-                templateSettings={templateSettings}
-                totalPages={calculateTotalPages}
-                emailTemplateSettings={emailTemplateSettings}
-              />
-            </div>
+            <YogaPdfContainer>
+
+              <div className="my-5">
+                <Pdf<EmailHeaderProps>
+                  pdfData={offerData}
+                  newPageData={newPageData}
+                  templateSettings={templateSettings}
+                  totalPages={calculateTotalPages}
+                  emailTemplateSettings={emailTemplateSettings}
+                />
+              </div>
+            </YogaPdfContainer>
+
             {renderModal()}
           </>
       }

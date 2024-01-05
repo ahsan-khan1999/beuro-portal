@@ -106,7 +106,7 @@ export const useReceiptEmail = (
 
         localStoreUtil.store_data("contractComposeEmail", updatedData);
 
-        router.pathname = "/invoices/invoice-pdf-preview";
+        router.pathname = "/invoices/receipt-pdf-preview";
         router.query = { invoiceID: collectiveInvoiceDetails?.id };
         updateQuery(router, router.locale as string);
     };

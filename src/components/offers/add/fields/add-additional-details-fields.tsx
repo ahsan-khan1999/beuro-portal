@@ -33,7 +33,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             value: item.id,
           })) || [],
         control,
-        value: (offerDetails?.id && offerDetails?.content?.id) || "",
+        // value: (offerDetails?.id && offerDetails?.content?.id) || "",
         onItemChange: onContentSelect,
         trigger
       },
@@ -52,7 +52,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "additionalDetails",
 
         control,
-        value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
+        // value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
         trigger
       },
     },

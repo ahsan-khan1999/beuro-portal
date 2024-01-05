@@ -187,7 +187,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
                   : customerDetails && customerDetails?.mobileNumber,
             },
           },
@@ -440,7 +440,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           (lead?.length === 1 && offerDetails?.id && lead[0]?.id) ||
           (offerDetails?.id && offerDetails?.leadID?.id) ||
           leadID,
-        disabled: offerDetails?.leadID?.id ? true : false,
+        // disabled: offerDetails?.leadID?.id ? true : false,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps;

@@ -3,9 +3,9 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 export default function () {
   return (
-    <div className="flex justify-center ">
+    <>
       <SignPdfPreview />
-    </div>
+    </>
   );
 }
 

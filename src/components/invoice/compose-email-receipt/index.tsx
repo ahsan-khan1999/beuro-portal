@@ -23,23 +23,20 @@ const ReceiptEmail = () => {
 
   return (
     <>
-      {
-        
-        // loading ? <LoadingState /> :
-          <Layout>
-            <InvoiceCardLayout>
-              <MailDetailsCard />
 
-            </InvoiceCardLayout>
+      <Layout>
+        <InvoiceCardLayout>
+          <MailDetailsCard />
 
-            <div className="flex mt-[12px] mb-[18px]">
-              <ComposeMail
-                backRouteHandler={backRouteHandler}
-                onNextHandle={onNextHandle}
-              />
-            </div>
-          </Layout>
-      }
+        </InvoiceCardLayout>
+
+        <div className="flex mt-[12px] mb-[18px]">
+          <ComposeMail
+            backRouteHandler={backRouteHandler}
+            onNextHandle={onNextHandle}
+          />
+        </div>
+      </Layout>
     </>
 
 

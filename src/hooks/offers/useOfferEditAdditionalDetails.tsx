@@ -21,6 +21,8 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
 
   useEffect(() => {
     setValue("additionalDetails", offerDetails?.additionalDetails);
+    setValue("content", offerDetails?.content?.id);
+
 
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
@@ -35,6 +37,7 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     watch,
     setValue,
     trigger,
+    reset
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -42,19 +45,36 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
   const handlePrevious = () => {
     handleBack(EditComponentsType.serviceEdit)
   }
-  useMemo(() => {
+  // useMemo(() => {
+  //   const filteredContent = content?.find(
+  //     (item) => item.id === selectedContent
+  //   );
+  //   if (filteredContent ) {
+  //     dispatch(setContentDetails(filteredContent))
+  //     setValue("additionalDetails", filteredContent?.offerContent?.description);
+
+  //   }
+  // }, [selectedContent])
+
+  const onContentSelect = (id:string) => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent ) {
+    console.log(filteredContent,"filteredContent",selectedContent);
+    
+    if (filteredContent) {
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.description);
+      reset({
+        additionalDetails: filteredContent?.offerContent?.description,
+        content: id
+
+      })
+      // setValue("additionalDetails", filteredContent?.offerContent?.description);
 
     }
-  }, [selectedContent])
-
+  }
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handlePrevious, 0,
-    { content: content, contentDetails: contentDetails, offerDetails, selectedContent }, setValue, trigger);
+    { content: content, contentDetails: contentDetails, offerDetails, onContentSelect, selectedContent }, setValue, trigger);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: EditComponentsType.additionalEdit }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));

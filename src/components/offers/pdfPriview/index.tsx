@@ -25,6 +25,8 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { Container } from "@/components/pdf/container";
+import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 
 export const productItems: ServiceList[] = [
   {
@@ -145,7 +147,7 @@ const PdfPriview = () => {
   const {
     auth: { user },
     global: { modal },
-    offer: { error, loading },
+    offer: { error, loading, offerDetails },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
@@ -338,6 +340,19 @@ const PdfPriview = () => {
         if (res?.payload) {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
+      } else {
+        let apiData = {
+          email: offerDetails?.leadID?.customerDetail?.email,
+          content: offerDetails?.content?.id,
+          subject: offerDetails?.content?.offerContent?.title,
+          description: offerDetails?.content?.offerContent?.body,
+          pdf: offerDetails?.content?.offerContent?.attachments,
+          id:offerDetails?.id
+        }
+        const res = await dispatch(sendOfferEmail({ data: apiData }));
+        if (res?.payload) {
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
       }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
@@ -389,7 +404,7 @@ const PdfPriview = () => {
         loading ? <LoadingState /> :
 
 
-          <>
+          <div className="">
             <EmailCard
               emailStatus={offerData?.emailHeader?.emailStatus}
               offerNo={offerData?.emailHeader?.offerNo}
@@ -401,18 +416,22 @@ const PdfPriview = () => {
               activeButtonId={activeButtonId}
 
             />
-            <div className="my-5">
-              <Pdf<EmailHeaderProps>
-                pdfData={offerData}
-                newPageData={newPageData}
-                templateSettings={templateSettings}
-                totalPages={calculateTotalPages}
-                emailTemplateSettings={emailTemplateSettings}
+            <YogaPdfContainer>
 
-              />
-            </div>
+              <div className="flex justify-center my-5">
+                <Pdf<EmailHeaderProps>
+                  pdfData={offerData}
+                  newPageData={newPageData}
+                  templateSettings={templateSettings}
+                  totalPages={calculateTotalPages}
+                  emailTemplateSettings={emailTemplateSettings}
+
+                />
+              </div>
+            </YogaPdfContainer>
+
             {renderModal()}
-          </>
+          </div>
       }
 
     </>

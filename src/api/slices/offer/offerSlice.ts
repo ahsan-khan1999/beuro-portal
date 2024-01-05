@@ -71,6 +71,18 @@ export const readOfferPublicDetails: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const rejectOfferPublic: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/reject/public", async (args, thunkApi) => {
+        const { params } = args as any;
+
+        try {
+            await apiServices.rejectOfferPublic(params);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 export const createOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/create", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -91,7 +103,7 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
             return response?.data?.data?.Offer;
         } catch (e: any) {
             toast.error(e?.data?.data?.message)
-            
+
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;
@@ -117,7 +129,7 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             //     setErrors(setError, transformedValidationMessages, translate);
             // } else {
             // }
-            
+
             toast.error(e?.data?.message)
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -256,7 +268,18 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/discount", async (args, thunkApi) => {
+        const { params } = args as any;
 
+        try {
+            const response = await apiServices.updateDiscounts(params);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const OfferSlice = createSlice({
     name: "OfferSlice",
     initialState,
@@ -402,6 +425,26 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(readOfferPublicDetails.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(rejectOfferPublic.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(rejectOfferPublic.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(rejectOfferPublic.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(updateOfferDiscount.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateOfferDiscount.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action?.payload) state.offerDetails = action?.payload
+        });
+        builder.addCase(updateOfferDiscount.rejected, (state) => {
             state.loading = false
         });
 
