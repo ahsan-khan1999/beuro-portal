@@ -1,16 +1,20 @@
 {
   "register": {
-    "main_heading": "Create Account",
-    "sub_heading": "Join free! Please enter your details",
+    "main_heading": "Sign in to Büro-365",
+    "sub_heading": "Manage your business with us",
+    "full_name": "Full Name",
     "email_label": "Email",
     "password_label": "Password",
     "confirm_password_label": "Confirm Password",
+    "full_name_placeholder": "Enter Your Full Name",
     "email_placeholder": "Enter Your Email",
     "password_placeholder": "Enter Your Password",
-    "confirm_password_placeholder": "Enter Your Password",
-    "button": "Create Account",
+    "confirm_password_placeholder": "Confirm Your Password",
+    "agreed": "By creating an account your agreeing to our",
+    "terms_policy": "Privacy Policy",
+    "button": "Sign Up",
     "have_an_account": "Already have an account ?",
-    "login": "Login",
+    "sign_in": "Sign In",
     "or_login": "or login with"
   },
   "login": {
@@ -18,9 +22,10 @@
     "sub_heading": "Enter your account details",
     "email_label": "Email",
     "password_label": "Password",
-    "email_placeholder": "Enter Your Email",
+    "email_placeholder": "Please enter an email address",
     "password_placeholder": "Enter Your Password",
     "button": "Login",
+    "sign_up_button": "Sign Up",
     "dont_have_an_account": "Dont have an account ?",
     "create": "Create Account",
     "or_login": "or login with",
@@ -119,27 +124,29 @@
   },
   "email_verification": {
     "title": "Verify your email address",
+    "first_sub_heading": "An email has been send to",
+    "end_sub_heading": "Click the link in email to verify your email address",
     "description": "Thanks for registering! Please enter OTP that we sent to your email address to complete registration. Check your spam folder or contact support if you haven't received the email.",
     "label": "Enter OTP",
-    "button": "Verify",
+    "login": "Login",
     "notrecieve": "Did not recieve?",
-    "sendagain": "Send Again"
+    "sendagain": "Resend Link?"
   },
   "reset_password": {
-    "title": "Reset Passowrd",
-    "description": "Enter your account details",
-    "label": "Password",
+    "title": "Create New Password",
+    "description": "Manage your business with us",
+    "label": "New Password",
     "label2": "Confirm Password",
-    "placeholder1": "Enter your Password",
-    "placeholder2": "Enter your Password Again",
-    "button": "Reset",
+    "placeholder1": "Enter Your Password",
+    "placeholder2": "Confirm Your Password",
+    "button": "Submit",
     "dont_have_an_account": "Dont have an account ?",
     "create": "Create Account",
     "or_login": "or login with"
   },
   "forgot_password": {
     "title": "Forgot Password",
-    "description": "Enter your account details",
+    "description": "Manage your business with us",
     "label": "Email",
     "placeholder1": "Enter your Email",
     "button": "Submit",
@@ -173,7 +180,7 @@
     "server_error": "Internal Server Error : 500",
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
-    "value_max":"value_max",
+    "value_max": "value_max",
     "mail_sent_maybe": "Email Sent",
 
     "mixed": {
@@ -189,7 +196,7 @@
       "min": "Minimum 1 is required"
     },
     "user_profile_already_complete": "User Profile is already completed",
-    "offer_not_open":"This offer is already closed or signed"
+    "offer_not_open": "This offer is already closed or signed"
   },
   "sidebar": {
     "customer": {
@@ -237,6 +244,7 @@
   },
   "customers": {
     "title": "Customers",
+    "tab_heading": "Customer Details",
     "add_button": "Add New",
     "table_headings": {
       "id": "ID",
@@ -273,6 +281,13 @@
       "save_changes_button": "Save Changes",
       "company_name": "Company Name",
       "save_button": "Save"
+    },
+
+    "add_customer_placeholders": {
+      "name": "Please Enter Your Name",
+      "email": "Please Enter Your Email Address",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code"
     },
 
     "side_bar_details": {
@@ -330,7 +345,7 @@
       "viewed_at": "Viewd at",
       "status": "Status",
       "view_mail": "View Mail",
-      "edit":"Edit"
+      "edit": "Edit"
     },
     "card_content": {
       "main_heading": "Email Details",
@@ -953,6 +968,7 @@
     }
   },
   "common": {
+    "apply_button": "Apply",
     "next_button": "Next",
     "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
@@ -960,6 +976,10 @@
     "search": "Search...",
     "drag_table": "Drag to scroll on the table",
     "sort_button": "Sort By",
+    "privacy": "Privacy Policy",
+    "copy_right": "Copyright 2024",
+    "better_management": "Better management",
+    "better_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     "notes_modal": {
       "heading": "Notes",
       "button": "Add New Note"
@@ -1255,7 +1275,8 @@
       },
       "card_content": {
         "main_heading": "Customer Details",
-        "make_button": "Make Infinite",
+        "make_button_unchecked": "Make Infinite Free",
+        "make_button_checked": "Make Infinite",
         "customer_id": "Customer ID",
         "role": "Role",
         "no_of_employee": "No of Employees",
@@ -1391,6 +1412,10 @@
     }
   },
   "follow_up": {
+    "heading": "Follow Up",
+    "add_button": "Add Follow Up",
+    "upcoming_follow_up": "Up coming follow up",
+    "view_all": "View all",
     "save_button": "Save",
     "next_button": "Next",
     "main_heading": "Details",
@@ -1404,6 +1429,21 @@
     "additional_detail_heading": "Additional Details",
     "lead_detail_heading": "Lead Details",
     "address_detail_heading": "Address Details",
+    "follow_up_details": {
+      "remark": "Your Remarks",
+      "postpond_note": "Your Postponed Note",
+      "id": "ID",
+      "name": "Name",
+      "customer_type": "Customer Type",
+      "email": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_detail": "Address Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date and time",
+      "flexibility": "Flexibility",
+      "budget": "Budget"
+    },
     "customer_details": {
       "name": "Name",
       "customer_type": "Customer Type",
@@ -1580,5 +1620,24 @@
     "condition_for_moving": "Conditions for moving estimates",
     "thanks_message": "Thank you for your interest in our services.",
     "pdf_description": "Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below."
+  },
+  "pricing_details": {
+    "heading": "Let's start with us",
+    "sub_heading": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "button": "Choose Plan",
+    "packages": {
+      "silver": "Silver",
+      "gold": "Gold",
+      "diamond": "Diamond",
+      "description": "Lorem ipsum dollar smith sil dolem isplum sumip alpsum.",
+      "request": "Requests",
+      "employees": "Employees",
+      "accounting": "Accounting Reports",
+      "customized": "Customized Emails",
+      "watermark": "With Watermark",
+      "features": "API Features"
+    }
   }
 }

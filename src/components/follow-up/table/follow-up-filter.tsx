@@ -2,6 +2,7 @@ import InputField from "@/base-components/filter/fields/input-field";
 import { Button } from "@/base-components/ui/button/button";
 import useFilter from "@/hooks/filter/hook";
 import { FilterType } from "@/types";
+import { useTranslation } from "next-i18next";
 import React, { SetStateAction } from "react";
 
 export default function FollowUpFilter({
@@ -15,6 +16,7 @@ export default function FollowUpFilter({
 }) {
   //@ts-expect-error
   const { handleFilterReset } = useFilter(filter, setFilter);
+  const { t: translate } = useTranslation();
   return (
     <div className="flex">
       <InputField
@@ -24,7 +26,7 @@ export default function FollowUpFilter({
         bgColor={true}
       />
       <Button
-        text="Apply"
+        text={translate("common.apply_button")}
         id="Apply"
         inputType="submit"
         onClick={handleFilterChange}

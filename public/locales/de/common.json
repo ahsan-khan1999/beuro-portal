@@ -1,26 +1,31 @@
 {
   "register": {
-    "main_heading": "Konto erstellen",
-    "sub_heading": "Kostenlos anmelden! Bitte geben Sie Ihre Daten ein",
+    "main_heading": "Anmelden bei Büro-365",
+    "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
+    "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
     "password_label": "Passwort",
-    "confirm_password_label": "Bestätigen Sie Ihr Passwort",
-    "email_placeholder": "Ihre E-Mail eingeben",
-    "password_placeholder": "Ihr Passwort eingeben",
-    "confirm_password_placeholder": "Ihr Passwort eingeben",
-    "button": "Konto erstellen",
-    "have_an_account": "Sie haben bereits ein Konto?",
-    "login": "Anmeldung",
-    "or_login": "oder Anmeldung mit"
+    "confirm_password_label": "Passwort bestätigen",
+    "full_name_placeholder": "Geben Sie Ihren vollständigen Namen ein",
+    "email_placeholder": "Geben Sie Ihre E-Mail ein",
+    "password_placeholder": "Geben Sie Ihr Passwort ein",
+    "confirm_password_placeholder": "Bestätigen Sie Ihr Passwort",
+    "agreed": "Durch die Erstellung eines Kontos stimmen Sie unseren",
+    "terms_policy": "Datenschutzbestimmungen",
+    "button": "Registrieren",
+    "have_an_account": "Haben Sie bereits ein Konto?",
+    "sign_in": "Anmelden",
+    "or_login": "oder einloggen mit"
   },
   "login": {
     "main_heading": "Willkommen zurück",
     "sub_heading": "Geben Sie Ihre Kontodaten ein",
     "email_label": "E-Mail",
     "password_label": "Passwort",
-    "email_placeholder": "Ihre E-Mail eingeben",
+    "email_placeholder": "Bitte geben Sie eine E-Mail-Adresse ein",
     "password_placeholder": "Ihr Passwort eingeben",
     "button": "Anmeldung",
+    "sign_up_button": "Registrieren",
     "dont_have_an_account": "Sie haben noch kein Konto?",
     "create": "Konto erstellen",
     "or_login": "oder Anmeldung mit",
@@ -118,28 +123,30 @@
     "sendagain": "Erneut senden"
   },
   "email_verification": {
-    "title": "Überprüfen Sie Ihre E-Mail Adresse",
-    "description": "Vielen Dank für die Registrierung! Bitte geben Sie das OTP ein, das wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Support, wenn Sie die E-Mail nicht erhalten haben.",
+    "title": "Bestätigen Sie Ihre E-Mail-Adresse",
+    "first_sub_heading": "Eine E-Mail wurde gesendet an",
+    "end_sub_heading": "Klicken Sie auf den Link in der E-Mail, um Ihre E-Mail-Adresse zu bestätigen",
+    "description": "Vielen Dank für die Registrierung! Bitte geben Sie den OTP ein, den wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Support, wenn Sie die E-Mail nicht erhalten haben.",
     "label": "OTP eingeben",
-    "button": "Überprüfen Sie",
+    "login": "Anmelden",
     "notrecieve": "Nicht erhalten?",
-    "sendagain": "Erneut senden"
+    "sendagain": "Link erneut senden?"
   },
   "reset_password": {
-    "title": "Passowrd zurücksetzen",
-    "description": "Geben Sie Ihre Kontodaten ein",
-    "label": "Passwort",
+    "title": "Neues Passwort erstellen",
+    "description": "Verwalten Sie Ihr Unternehmen mit uns",
+    "label": "Neues Passwort",
     "label2": "Passwort bestätigen",
     "placeholder1": "Geben Sie Ihr Passwort ein",
-    "placeholder2": "Geben Sie Ihr Passwort erneut ein",
-    "button": "Zurücksetzen",
-    "dont_have_an_account": "Haben Sie kein Konto?",
+    "placeholder2": "Bestätigen Sie Ihr Passwort",
+    "button": "Absenden",
+    "dont_have_an_account": "Sie haben noch kein Konto?",
     "create": "Konto erstellen",
-    "or_login": "oder loggen Sie sich ein mit"
+    "or_login": "oder einloggen mit"
   },
   "forgot_password": {
     "title": "Passwort vergessen",
-    "description": "Geben Sie Ihre Kontodetails ein",
+    "description": "Verwalten Sie Ihr Unternehmen mit uns",
     "label": "E-Mail",
     "placeholder1": "Ihre E-Mail eingeben",
     "button": "Einreichen",
@@ -187,10 +194,8 @@
       "min": "Mindestens 1 ist erforderlich"
     },
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
-    "offer_not_open":"ZurückgehenDieses Angebot ist bereits geschlossen oder unterzeichnet",
-    "value_max":"value_max"
-
-
+    "offer_not_open": "ZurückgehenDieses Angebot ist bereits geschlossen oder unterzeichnet",
+    "value_max": "value_max"
   },
   "sidebar": {
     "customer": {
@@ -238,6 +243,7 @@
   },
   "customers": {
     "title": "Kunden",
+    "tab_heading": "Kunden Details",
     "add_button": "Neu hinzufügen",
     "table_headings": {
       "id": "ID",
@@ -272,6 +278,12 @@
       "save_changes_button": "Änderungen speichern",
       "company_name": "Firmenname",
       "save_button": "Speichern Sie"
+    },
+    "add_customer_placeholders": {
+      "name": "Bitte geben Sie Ihren Namen ein",
+      "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+      "street": "Bitte geben Sie die Straßennummer ein",
+      "post_code": "Bitte geben Sie Ihre Postleitzahl ein"
     },
     "side_bar_details": {
       "heading": "Einzelheiten",
@@ -947,6 +959,7 @@
     }
   },
   "common": {
+    "apply_button": "Anwenden",
     "next_button": "Weiter",
     "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
@@ -954,6 +967,10 @@
     "search": "Suche...",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
+    "privacy": "Datenschutzbestimmungen",
+    "copy_right": "Urheberrecht 2024",
+    "better_management": "Besseres Management",
+    "better_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     "notes_modal": {
       "heading": "Notizen",
       "button": "Neue Notiz hinzufügen"
@@ -1249,7 +1266,8 @@
       },
       "card_content": {
         "main_heading": "Kundendetails",
-        "make_button": "Unendlich machen",
+        "make_button_unchecked": "Unendlich frei erstellen",
+        "make_button_checked": "Unendlich erstellen",
         "customer_id": "Kunden-ID",
         "role": "Rolle",
         "no_of_employee": "Anzahl der Mitarbeiter",
@@ -1385,6 +1403,10 @@
     }
   },
   "follow_up": {
+    "heading": "Nachverfolgung",
+    "add_button": "Nachverfolgung hinzufügen",
+    "upcoming_follow_up": "Bevorstehende Nachverfolgung",
+    "view_all": "Alle anzeigen",
     "save_button": "Speichern",
     "next_button": "Weiter",
     "main_heading": "Details",
@@ -1398,6 +1420,21 @@
     "additional_detail_heading": "Zusätzliche Details",
     "lead_detail_heading": "Lead-Details",
     "address_detail_heading": "Adressdetails",
+    "follow_up_details": {
+      "remark": "Ihre Bemerkungen",
+      "postpond_note": "Ihre verschobene Notiz",
+      "id": "ID",
+      "name": "Name",
+      "customer_type": "Kundentyp",
+      "email": "E-Mail-Adresse",
+      "phone_number": "Telefonnummer",
+      "mobile_number": "Handynummer",
+      "address_detail": "Adressdetails",
+      "required_service": "Benötigter Service",
+      "desire_date": "Gewünschtes Datum und Uhrzeit",
+      "flexibility": "Flexibilität",
+      "budget": "Budget"
+    },
     "customer_details": {
       "name": "Name",
       "customer_type": "Kundentyp",
@@ -1574,5 +1611,24 @@
     "condition_for_moving": "Bedingungen für Umzugsschätzungen",
     "thanks_message": "Vielen Dank für Ihr Interesse an unseren Dienstleistungen.",
     "pdf_description": "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen."
+  },
+  "pricing_details": {
+    "heading": "Starten Sie mit uns",
+    "sub_heading": "Sie können jedes der angebotenen Pakete einen Monat lang kostenlos testen. Smith Amit Dolemm Isplum Sumip Alpsum Lorem Ipsum.",
+    "monthly": "Monatlich",
+    "yearly": "Jährlich",
+    "button": "Plan wählen",
+    "packages": {
+      "silver": "Silber",
+      "gold": "Gold",
+      "diamond": "Diamant",
+      "description": "Lorem Ipsum Dollar Smith Sil Dolemm Isplum Sumip Alpsum.",
+      "request": "Anfragen",
+      "employees": "Mitarbeiter",
+      "accounting": "Buchhaltungsberichte",
+      "customized": "Individuelle E-Mails",
+      "watermark": "Mit Wasserzeichen",
+      "features": "API-Funktionen"
+    }
   }
 }

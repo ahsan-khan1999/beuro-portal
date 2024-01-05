@@ -92,7 +92,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       type: Field.div,
                       id: "div-field",
                       className:
-                        "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)] gap-x-2 items-center ",
+                        "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-2 items-center ",
                       children: [
                         {
                           containerClass: "",

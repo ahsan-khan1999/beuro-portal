@@ -17,7 +17,7 @@ const TableHeading = () => {
       <span className="py-4 font-medium text-[#8F8F8F]">
         {translate("follow_up.all_follow_ups.table_headings.title")}
       </span>
-      <span className="py-4 font-medium text-[#8F8F8F] flex justify-center items-center">
+      <span className="py-4 font-medium text-[#8F8F8F] flex justify-center ">
         {translate("follow_up.all_follow_ups.table_headings.status")}
       </span>
       <span className="py-4 font-medium text-[#8F8F8F] ">
