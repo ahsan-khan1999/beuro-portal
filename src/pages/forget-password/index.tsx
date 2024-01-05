@@ -15,4 +15,3 @@ const Index = () => {
 };
 
 export default Index;
-{translate("email_verification.login")}
