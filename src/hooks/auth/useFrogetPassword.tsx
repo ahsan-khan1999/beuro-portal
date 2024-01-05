@@ -59,6 +59,7 @@ export default function useFrogetPassword() {
     errors,
     fields,
     onSubmit,
-    renderModal
+    renderModal,
+    translate
   };
 }

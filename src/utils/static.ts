@@ -613,7 +613,7 @@ export const staticEnums: Record<string, any> = {
   TaxType: {
     Inclusive: 0,
     Exclusive: 1,
-    NoTax: 2
+    NoTax: 2,
   },
   PaymentType: {
     Cash: 0,
@@ -1254,63 +1254,58 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Offers",
-    title: "Offers",
+    title: "sidebar.customer.offers.offers",
     role: [1, 2],
     pathname: "/offers",
 
     inner: [
       {
-        title: "Accepted",
+        title: "sidebar.customer.offers.accepted",
         pathname: "/offers",
         query: "Open",
-
         role: [1, 2],
       },
       {
-        title: "Signed",
+        title: "sidebar.customer.offers.signed",
         pathname: "/offers",
         query: "Signed",
-
         role: [1, 2],
       },
       {
-        title: "Expired",
+        title: "sidebar.customer.offers.expired",
         pathname: "/offers",
         query: "Expired",
-
         role: [1, 2],
       },
       {
-        title: "Rejected",
+        title: "sidebar.customer.offers.rejected",
         query: "Rejected",
-
         pathname: "/offers",
-
         role: [1, 2],
       },
     ],
   },
   {
     icon: "Contracts",
-    title: "Contracts",
+    title: "sidebar.customer.contracts.contracts",
     role: [1, 2],
     pathname: "/contract",
 
     inner: [
       {
-        title: "Open",
+        title: "sidebar.customer.contracts.open",
         query: "Open",
         pathname: "/contract",
         role: [1, 2],
       },
       {
-        title: "Confirmed",
+        title: "sidebar.customer.contracts.confirmed",
         query: "Confirmed",
         pathname: "/contract",
         role: [1, 2],
       },
       {
-        title: "Cancelled",
+        title: "sidebar.customer.contracts.cancelled",
         query: "Cancelled",
         pathname: "/contract",
         role: [1, 2],
@@ -1319,25 +1314,25 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Invoices",
-    title: "Invoices",
+    title: "sidebar.customer.invoices.invoices",
     role: [1, 2],
     pathname: "/invoices",
 
     inner: [
       {
-        title: "Pending",
+        title: "sidebar.customer.invoices.pending",
         query: "Pending",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
-        title: "Overdue",
+        title: "sidebar.customer.invoices.overdue",
         query: "Overdue",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
-        title: "Paid",
+        title: "sidebar.customer.invoices.paid",
         query: "Paid",
         pathname: "/invoices",
         role: [1, 2],
@@ -1346,31 +1341,31 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Services",
-    title: "Services",
+    title: "sidebar.customer.services",
     pathname: "/services",
     role: [1, 2],
   },
   {
     icon: "Employees",
-    title: "Employees",
+    title: "sidebar.customer.employees",
     pathname: "/employees",
     role: [1],
   },
   {
     icon: "Content",
-    title: "Content",
+    title: "sidebar.customer.content",
     pathname: "/content",
     role: [1, 2],
   },
   {
     icon: "MailTracker",
-    title: "Mail Tracker",
+    title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     role: [1, 2],
   },
   {
     icon: "Settings",
-    title: "Settings",
+    title: "sidebar.customer.settings",
     pathname: "/setting",
     role: [1],
     className: "",
@@ -1378,26 +1373,26 @@ export const sideBar: SideBar[] = [
 
   {
     icon: "plans",
-    title: "Plans",
+    title: "sidebar.admin.plans",
     pathname: "/admin/plans",
     role: [0],
   },
   {
     icon: "payment",
-    title: "Payment",
+    title: "sidebar.admin.payments",
     pathname: "/admin/payments",
     role: [],
   },
   {
     icon: "ContactSupports",
-    title: "Contact Supports",
+    title: "sidebar.customer.contact_supports",
     pathname: "/contact-support",
     role: [1, 2],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {
     icon: "ContactSupports",
-    title: "Support Request",
+    title: "sidebar.admin.support_requests",
     pathname: "/admin/support-request",
     role: [0],
     // className:"mb-6 border border-red-700"
@@ -1410,7 +1405,7 @@ export const sideBar: SideBar[] = [
   {
     className: " ",
     icon: "setting",
-    title: "Settings",
+    title: "sidebar.admin.Settings",
     pathname: "/admin/settings",
     role: [0],
   },

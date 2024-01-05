@@ -32,5 +32,6 @@ export default function useRegistration() {
     handleSubmit,
     errors,
     error,
+    translate
   };
 }

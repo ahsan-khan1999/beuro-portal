@@ -37,7 +37,7 @@ const TableRows = ({
               </div>
             </span>
             <span
-              className=" flex justify-center items-center cursor-pointer"
+              className="flex justify-center items-center cursor-pointer"
               onClick={() => handleFollowUpsDelete(item.id)}
             >
               <svg
@@ -56,7 +56,7 @@ const TableRows = ({
               </svg>
             </span>
             <span
-              className=" flex justify-center items-centercursor-pointer"
+              className="flex justify-center items-centercursor-pointer"
               onClick={() => handleFollowUpsDetails(item.id)}
             >
               <svg

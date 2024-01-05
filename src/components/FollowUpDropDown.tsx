@@ -5,9 +5,7 @@ import timeIcon from "@/assets/svgs/time.svg";
 import idIcon from "@/assets/svgs/id.svg";
 import dateIcon from "@/assets/svgs/Vector-date.svg";
 import deleteIcon from "@/assets/svgs/Vector-delete.svg";
-
 import Image from "next/image";
-
 import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import moment from "moment";
 import { getDaysDifference } from "@/utils/utility";
@@ -21,18 +19,21 @@ const FollowUpDropDown = () => {
     handleFollowUpsDetails,
     renderModal,
     handleDeleteFollowUp,
+    translate,
   } = useGeneralFollowUp();
 
   return (
     <>
       <div className="  bg-white rounded-md shadow-followUp w-[440px] absolute top-7 menuItems right-0 mt-1 !z-50 ">
         <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
-          <h1 className="text-[#222B45] text-lg font-medium ">Follow Up</h1>
+          <h1 className="text-[#222B45] text-lg font-medium ">
+            {translate("follow_up.heading")}
+          </h1>
           <Button
             onClick={() => handleAddFollowUp()}
             id="button"
             inputType="button"
-            text="Add Follow Up"
+            text={translate("follow_up.add_button")}
             className="text-white text-[13px] font-semibold rounded-md !h-8"
           />
         </div>
@@ -60,7 +61,7 @@ const FollowUpDropDown = () => {
                   <div>
                     <div>
                       <span className="text-dark text-sm">
-                        Up coming Follow up:
+                        {translate("follow_up.upcoming_follow_up")}:
                       </span>
                       <span className="text-dark text-sm font-medium">
                         {item.title}
@@ -83,14 +84,14 @@ const FollowUpDropDown = () => {
                           alt="Id Icon"
                           className="mr-[10px]"
                         />
-                        <span className="text-[#4B4B4B] text-[13px] ">
+                        <span className="text-[#4B4B4B] text-[13px]">
                           {item?.customer?.refID}
                         </span>
                       </div>
                       {days > 0 && (
                         <div className="flex items-center">
                           <div className="ml-2 flex space-x-2">
-                            <Image src={dateIcon} alt="Id Icon" className="" />
+                            <Image src={dateIcon} alt="Id Icon" />
                             <span className="text-[#4B4B4B] text-[13px] ">
                               {days + " Day"}
                             </span>
@@ -124,7 +125,7 @@ const FollowUpDropDown = () => {
               className=" text-primary w-fit text-sm font-medium "
               onClick={() => handleFollowUps()}
             >
-              View All
+              {translate("follow_up.view_all")}
             </button>
           </div>
         )}

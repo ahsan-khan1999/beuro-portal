@@ -7,8 +7,9 @@ import { Form } from "@/base-components/form/form";
 import useResetPassword from "@/hooks/auth/useResetPassword";
 
 const ResetPassword = () => {
-  const defaultClassName = "mt-[30px]  ";
-  const { fields, onSubmit, handleSubmit, errors, error } = useResetPassword();
+  const defaultClassName = "mt-[30px]";
+  const { fields, onSubmit, handleSubmit, errors, error, translate } =
+    useResetPassword();
 
   return (
     <div className="w-[50%] px-7 flex flex-col justify-between">
@@ -16,10 +17,10 @@ const ResetPassword = () => {
       <div className="px-[32px] flex flex-col justify-center pt-3 ">
         <div className=" max-w-[384px] w-full  ">
           <h1 className="font-semibold text-dark text-[26px] text-center">
-            Create New Password
+            {translate("reset_password.title")}
           </h1>
           <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
-            Manage your business with us
+            {translate("reset_password.description")}
           </span>
 
           <Form

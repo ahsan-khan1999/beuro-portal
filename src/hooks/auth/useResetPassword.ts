@@ -36,5 +36,6 @@ export default function useResetPassword() {
     errors,
     fields,
     onSubmit,
+    translate
   };
 }

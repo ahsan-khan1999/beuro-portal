@@ -61,7 +61,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "fullName",
               name: "fullName",
 
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.name"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -79,7 +81,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "email",
               inputType: "email",
 
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.email"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -152,7 +156,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "address.streetNumber",
               name: "address.streetNumber",
 
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.street"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -167,12 +173,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-[#BFBFBF] focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
 
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.post_code"
+              )}`,
 
               register,
               disabled: isUpdate,

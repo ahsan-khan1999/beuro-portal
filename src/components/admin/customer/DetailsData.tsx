@@ -14,16 +14,14 @@ const DetailsData = ({
   isCustomerFree,
   handlePreviousClick,
   handleAreYouSure,
-  handleStatusChange
+  handleStatusChange,
 }: {
   customerDetail: CustomersAdmin;
   isCustomerFree: boolean;
   handlePreviousClick: () => void;
   handleAreYouSure: () => void;
-  handleStatusChange: (value: string) => void
+  handleStatusChange: (value: string) => void;
 }) => {
-
-
   const { t: translate } = useTranslation();
 
   const items: DropDownItem[] = [
@@ -33,7 +31,6 @@ const DetailsData = ({
     {
       item: "block",
     },
-   
   ];
 
   return (
@@ -56,7 +53,13 @@ const DetailsData = ({
           ) : (
             <Image src={checkedIcon} alt="CheckedIcon" />
           )}
-          {isCustomerFree ? "Make Infinite" : "Make Account Free"}
+          {isCustomerFree
+            ? `${translate(
+                "admin.customers_details.card_content.make_button_checked"
+              )}`
+            : `${translate(
+                "admin.customers_details.card_content.make_button_unchecked"
+              )}`}
         </button>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
@@ -103,7 +106,9 @@ const DetailsData = ({
             <span className="ml-3 text-[#4B4B4B] font-medium">
               <DropDown
                 items={items}
-                onItemSelected={(selectedItem) => handleStatusChange(selectedItem)}
+                onItemSelected={(selectedItem) =>
+                  handleStatusChange(selectedItem)
+                }
                 selectedItem={customerDetail?.status}
                 dropDownClassName="w-[140px] border border-primary"
                 dropDownTextClassName="text-primary font-medium"
@@ -115,7 +120,12 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
             {translate("admin.customers_details.card_content.company_logo")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
-              <Image src={customerDetail?.company?.logo} alt="company logo" height={40} width={100} />
+              <Image
+                src={customerDetail?.company?.logo}
+                alt="company logo"
+                height={40}
+                width={100}
+              />
             </span>
           </h3>
         </div>

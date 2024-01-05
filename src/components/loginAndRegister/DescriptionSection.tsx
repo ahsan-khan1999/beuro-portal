@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import betterManagementIcon from "@/assets/pngs/forget-pasword-img.png";
+import { useTranslation } from "next-i18next";
 const DescriptionSection = () => {
+  const { t: translate } = useTranslation();
   return (
     <div
       className="w-[50%] flex flex-col justify-center  px-8"
@@ -17,12 +19,10 @@ const DescriptionSection = () => {
         className="mx-auto"
       />
       <h2 className="font-semibold text-white text-[32px] text-center">
-        Better management
+        {translate("common.better_management")}
       </h2>
       <p className="text-white text-xs mt-2 text-center">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation
+        {translate("common.better_description")}
       </p>
     </div>
   );

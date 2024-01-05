@@ -140,7 +140,7 @@ const SystemSettingDetails = ({
           inputType="button"
           className="text-white text-base font-medium px-6  bg-[#4A13E7] rounded-md"
           loading={loading}
-          text={translate("Setting.save_setting")}
+          text={translate("setting.save_setting")}
           onClick={handleSettingUpdate}
         />
       </div>

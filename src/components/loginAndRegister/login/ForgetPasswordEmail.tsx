@@ -8,7 +8,15 @@ import useFrogetPassword from "@/hooks/auth/useFrogetPassword";
 
 const ForgetPasswordEmail = () => {
   const defaultClassName = "mt-[30px]  ";
-  const { fields, onSubmit, handleSubmit, errors, error,renderModal } = useFrogetPassword();
+  const {
+    fields,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    renderModal,
+    translate,
+  } = useFrogetPassword();
 
   return (
     <div className="w-[50%] px-7 flex flex-col justify-between">
@@ -16,10 +24,10 @@ const ForgetPasswordEmail = () => {
       <div className="px-[32px] flex flex-col justify-center pt-3 ">
         <div className=" max-w-[384px] w-full  ">
           <h1 className="font-semibold text-dark text-[26px] text-center">
-            Forget Password
+            {translate("forgot_password.title")}
           </h1>
           <span className="mt-3 text-xs text-[#8F8F8F] flex justify-center">
-            Manage your business with us
+            {translate("forgot_password.description")}
           </span>
 
           <Form
