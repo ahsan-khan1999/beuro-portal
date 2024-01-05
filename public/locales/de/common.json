@@ -209,22 +209,24 @@
       },
       "offers": {
         "offers": "Angebote",
-        "accepted": "Angenommen",
-        "rejected": "Abgelehnt",
-        "pending": "Anhängig"
+        "accepted": "Akzeptiert",
+        "signed": "Unterschrieben",
+        "expired": "Abgelaufen",
+        "rejected": "Abgelehnt"
       },
       "contracts": {
         "contracts": "Verträge",
-        "accepted": "Angenommen",
-        "rejected": "Abgelehnt",
-        "pending": "Anhängig"
+        "open": "Offen",
+        "confirmed": "Bestätigt",
+        "cancelled": "Abgebrochen"
       },
       "invoices": {
         "invoices": "Rechnungen",
-        "accepted": "Angenommen",
-        "rejected": "Abgelehnt",
-        "pending": "Anhängig"
+        "pending": "Ausstehend",
+        "overdue": "Überfällig",
+        "paid": "Bezahlt"
       },
+
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
       "content": "Inhalt",
@@ -233,11 +235,11 @@
       "contact_supports": "Kontakt Supports"
     },
     "admin": {
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Dashboard",
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "contact_supports": "Kontakt Supports",
+      "support_requests": "Support-Anfragen",
       "Settings": "Einstellungen"
     }
   },
@@ -669,7 +671,8 @@
       "amount": "Betrag",
       "email_status": "E-Mail-Status",
       "payment": "Zahlung",
-      "status": "Status"
+      "status": "Status",
+      "edit": "bearbeiten"
     },
     "receipt_table_heading": {
       "id": "ID",
@@ -967,8 +970,13 @@
     }
   },
   "common": {
+    "done_button": "Fertig",
+    "save_button": "Speichern",
+    "add_note": "Notizen hinzufügen",
+    "remove_button": "Entfernen",
     "apply_button": "Anwenden",
     "next_button": "Weiter",
+    "back_button": "Zurück",
     "cancel_button": "Abbrechen",
     "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
@@ -1102,6 +1110,8 @@
       "discount": "Rabatt"
     },
     "offer_details": {
+      "new_customer": "Neuer Kunde",
+      "exit_customer": "Bestehender Kunde",
       "heading": "Angebotsdetails",
       "edit_button": "Details bearbeiten",
       "customer_type": "Kundentyp",
@@ -1142,8 +1152,12 @@
     "service_details": {
       "main_heading": "Service-/Produktdetails",
       "edit_button": "Details bearbeiten",
+      "add_new_service": "Neuen Service hinzufügen",
       "price": "Preis",
+      "discount_decription": "Rabattbeschreibung",
       "detail_headings": {
+        "new_service": "Neuer Service",
+        "exit_service": "Bestehender Service",
         "title": "Service-/Produkttitel",
         "description": "Beschreibung",
         "price": "Preis (CHF)",
@@ -1152,10 +1166,15 @@
         "total_price": "Gesamtpreis",
         "grand_total": "Gesamtsumme",
         "sub_total": "Zwischensumme",
-        "tax": "Steuer%"
+        "tax": "Steuer%",
+        "discount": "Rabatt",
+        "Inclusive": "Inklusive",
+        "exclusive": "Exklusive",
+        "percent": "Prozent",
+        "amount": "Betrag"
       },
-      "service_name": "Dienstname",
-      "service_type": "Diensttyp",
+      "service_name": "Servicename",
+      "service_type": "Serviceart",
       "discount_description": "Rabattbeschreibung",
       "add_button": "Neuen Service hinzufügen",
       "cancel_button": "Abbrechen",
@@ -1163,6 +1182,7 @@
       "back_button": "Zurück",
       "next_button": "Weiter"
     },
+
     "additional_details": {
       "main_heading": "Zusätzliche Details",
       "edit_button": "Details bearbeiten",
@@ -1194,6 +1214,15 @@
       "main_heading": "Angebot erfolgreich erstellt",
       "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "Fertig"
+    },
+    "placeholders": {
+      "name": "Bitte geben Sie Ihren Namen ein",
+      "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+      "offer_title": "Bitte geben Sie Ihren Angebotsnamen ein",
+      "street": "Bitte geben Sie die Straßennummer ein",
+      "post_code": "Bitte geben Sie Ihre Postleitzahl ein",
+      "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie. Lorem Ipsum ist seit den 1500er Jahren der Standard-Blindtext der Industrie.",
+      "service_title": "Bitte geben Sie Ihren Servicenamen ein"
     }
   },
   "pdf_preview": {
@@ -1371,6 +1400,19 @@
     },
     "settings": {
       "main_heading": "Kontoeinstellung",
+      "placeholders": {
+        "publish_key": "Bitte geben Sie Ihren veröffentlichten Schlüssel ein",
+        "search_key": "Bitte geben Sie Ihren Suchschlüssel ein",
+        "mail_driver": "Mail-Treiber",
+        "mail_host": "Mail-Host",
+        "mail_port": "Mail-Port",
+        "mail_encryption": "Mail-Verschlüsselung",
+        "mail_user": "Mail-Benutzername",
+        "mail_password": "Mail-Passwort",
+        "mail_address": "Mail-Von-Adresse",
+        "mail_name": "Mail-Von-Name",
+        "email_from_address": "Mail-Von-Adresse"
+      },
       "tabs_heading": {
         "account": "Kontoeinstellung",
         "payment": "Zahlungseinstellung",

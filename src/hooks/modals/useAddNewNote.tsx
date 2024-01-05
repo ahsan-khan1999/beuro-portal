@@ -41,5 +41,6 @@ export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => vo
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

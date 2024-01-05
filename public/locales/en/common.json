@@ -211,20 +211,21 @@
       "offers": {
         "offers": "Offers",
         "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "signed": "Signed",
+        "expired": "Expired",
+        "rejected": "Rejected"
       },
       "contracts": {
         "contracts": "Contracts",
-        "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "open": "Open",
+        "confirmed": "Confirmed",
+        "cancelled": "Cacelled"
       },
       "invoices": {
         "invoices": "Invoices",
-        "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "pending": "Pending",
+        "overdue": "Overdue",
+        "paid": "Paid"
       },
       "services": "Services",
       "employees": "Employees",
@@ -238,7 +239,7 @@
       "customers": "Customers",
       "plans": "Plans",
       "payments": "Payments",
-      "contact_supports": "Contact Supports",
+      "support_requests": "Support Requests",
       "Settings": "Settings"
     }
   },
@@ -678,7 +679,8 @@
       "amount": "Amount",
       "email_status": "Email Status",
       "payment": "Payment",
-      "status": "Status"
+      "status": "Status",
+      "edit": "Edit"
     },
     "receipt_table_heading": {
       "id": "ID",
@@ -977,8 +979,13 @@
     }
   },
   "common": {
+    "done_button": "Done",
+    "save_button": "Save",
+    "add_note":"Add Notes",
+    "remove_button": "Remove",
     "apply_button": "Apply",
     "next_button": "Next",
+    "back_button": "Back",
     "cancel_button": "Cancel",
     "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
@@ -1112,6 +1119,8 @@
       "discount": "Discount"
     },
     "offer_details": {
+      "new_customer": "New Customer",
+      "exit_customer": "Existing Customer",
       "heading": "Offer Details",
       "edit_button": "Edit Details",
       "customer_type": "Customer Type",
@@ -1152,17 +1161,26 @@
     "service_details": {
       "main_heading": "Service/Product Details",
       "edit_button": "Edit Details",
+      "add_new_service": "Add New Service",
       "price": "Price",
+      "discount_decription": "Discount Description",
       "detail_headings": {
+        "new_service": "New Service",
+        "exit_service": "Existing Service",
         "title": "Service/Product Title",
         "description": "Description",
         "price": "Price(CHF)",
         "unit": "Unit",
         "count": "Count",
         "total_price": "Total Price",
-        "grand_total": " Grand  Total",
+        "grand_total": " Grand Total",
         "sub_total": "Sub Total",
-        "tax": "Tax%"
+        "tax": "Tax%",
+        "discount": "Discount",
+        "Inclusive": "Inclusive",
+        "exclusive": "Exclusive",
+        "percent": "Percent",
+        "amount": "Amount"
       },
       "service_name": "Service Name",
       "service_type": "Service Type",
@@ -1204,6 +1222,15 @@
       "main_heading": "Offer Created Successful ",
       "sub_heading": "Thanks for creating offer we are happy to have you. ",
       "button": "Done"
+    },
+    "placeholders": {
+      "name": "Please Enter Your Name",
+      "email": "Please Enter Your Email Address",
+      "offer_title": "Please Enter Your Offer Title",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code",
+      "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s.",
+      "service_title": "Please Enter Your service Name"
     }
   },
   "pdf_preview": {
@@ -1381,6 +1408,19 @@
     },
     "settings": {
       "main_heading": "Account Setting",
+      "placeholders": {
+        "publish_key": "Please Enter Your Publishable Key",
+        "search_key": "Please Enter Your Search Key",
+        "mail_driver": "Mail Driver",
+        "mail_host": "Mail Host",
+        "mail_port": "Mail Port",
+        "mail_encryption": "Mail Encryption",
+        "mail_user": "Mail Username",
+        "mail_password": "Mail Password",
+        "mail_address": "Mail From Address",
+        "mail_name": "Mail From Name",
+        "email_from_address": "Mail From Address"
+      },
       "tabs_heading": {
         "account": "Account Setting",
         "payment": "Payment Setting",

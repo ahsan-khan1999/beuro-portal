@@ -14,15 +14,13 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
             key={item.id}
             className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(200px,_100%)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(150px,_150px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(150px,_100%)_minmax(80px,_80px)] xlg:grid-cols-[minmax(80px,_80px),minmax(200px,_100%)_minmax(200px,_200px)_minmax(140px,_140px)_minmax(180px,_100%)_minmax(80px,_80px)] mt-2 bg-white rounded-md"
           >
-            <span className="py-4 flex items-center">
-              {item?.refID}
-            </span>
+            <span className="py-4 flex items-center">{item?.refID}</span>
             <span className="py-4 flex items-center">{item.serviceName}</span>
             <span className="py-4 flex items-center">
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">{item.price}</span>
-            <span className="break-all py-4 overflow-hidden overflow-ellipsis whitespace-nowrap flex items-center">
+            <span className="break-all py-4 overflow-hidden overflow-ellipsis whitespace-nowrap flex items-center mr-1">
               {item.description}
             </span>
 
