@@ -896,6 +896,8 @@
       "additional": "Additional Details"
     },
     "customer_details": {
+      "new_customer": "New Customer",
+      "exit_customer": "Existing Customer",
       "heading": "Customer Details",
       "edit_button": "Edit Details",
       "customer": "Customer",
@@ -914,6 +916,13 @@
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
       "next_button": "Next"
+    },
+
+    "placeholders": {
+      "name": "Please Enter Your Name",
+      "email": "Please Enter Your Email Address",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code"
     },
     "address_details": {
       "main_heading": "Address Details",
@@ -970,6 +979,7 @@
   "common": {
     "apply_button": "Apply",
     "next_button": "Next",
+    "cancel_button": "Cancel",
     "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
     "note": "Note",

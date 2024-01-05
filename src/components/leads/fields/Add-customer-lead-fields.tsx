@@ -44,7 +44,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "New Customer",
-                    label: "New Customer",
+                    label: `${translate(
+                      "leads.customer_details.new_customer"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -59,7 +61,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "Existing Customer",
-                    label: "Existing Customer",
+                    label: `${translate(
+                      "leads.customer_details.exit_customer"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -114,7 +118,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "fullName",
               name: "fullName",
 
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate("leads.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
             },
@@ -133,7 +137,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               name: "email",
               inputType: "text",
 
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate("leads.placeholders.email")}`,
               register,
               value: leadDetails && leadDetails.customerDetail?.email,
             },
@@ -207,7 +211,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "address.streetNumber",
               name: "address.streetNumber",
 
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate("leads.placeholders.street")}`,
               register,
               value:
                 leadDetails &&
@@ -230,7 +234,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate("leads.placeholders.post_code")}`,
 
               register,
               value:
@@ -272,10 +276,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("common.cancel_button")}`,
               inputType: "button",
               onClick: onCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px] text-dark hover:bg-none `,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none `,
             },
           },
           {
@@ -284,7 +288,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "button",
               text: translate("leads.customer_details.next_button"),
               inputType: "submit",
-              className: `rounded-lg  px-4 w-[152px] h-[50px] text-white hover:bg-none`,
+              className: `rounded-lg  px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none`,
               loading,
             },
           },

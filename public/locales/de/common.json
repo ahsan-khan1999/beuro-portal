@@ -887,6 +887,8 @@
       "additional": "Zusätzliche Details"
     },
     "customer_details": {
+      "new_customer": "Neuer Kunde",
+      "exit_customer": "Bestehender Kunde",
       "heading": "Kundendetails",
       "edit_button": "Details bearbeiten",
       "customer": "Kunde",
@@ -905,6 +907,12 @@
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
       "next_button": "Weiter"
+    },
+    "placeholders": {
+      "name": "Bitte geben Sie Ihren Namen ein",
+      "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+      "street": "Bitte geben Sie die Straßennummer ein",
+      "post_code": "Bitte geben Sie Ihre Postleitzahl ein"
     },
     "address_details": {
       "main_heading": "Adressdetails",
@@ -961,6 +969,7 @@
   "common": {
     "apply_button": "Anwenden",
     "next_button": "Weiter",
+    "cancel_button": "Abbrechen",
     "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
     "note": "Hinweis",
@@ -1083,9 +1092,9 @@
       "images": "Bilder"
     },
     "tabs_heading": {
-      "offer": "Angebotsdetails",
-      "address": "Adressdetails",
-      "service": "Service-Details",
+      "offer": "Angebots Details",
+      "address": "Adress Details",
+      "service": "Service Details",
       "additional": "Zusätzliche Details"
     },
     "detail_buttons": {
