@@ -296,8 +296,8 @@ const PdfPriview = () => {
             setOfferData(formatData);
             contractPdfInfo = {
               ...contractPdfInfo,
-              subject: contractDetails?.title,
-              description: contractDetails?.additionalDetails,
+              subject: contractDetails?.offerID?.content?.confirmationContent?.title,
+              description: contractDetails?.offerID?.content?.confirmationContent?.body,
             };
           }
         }
@@ -371,7 +371,8 @@ const PdfPriview = () => {
       const localStorageContractData = await localStoreUtil.get_data(
         "contractComposeEmail"
       );
-
+        console.log(localStorageContractData,"contractComposeEmail");
+        
       const data = {
         id: contractDetails?.id,
         email: localStorageContractData?.email,
