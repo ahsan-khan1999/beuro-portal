@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
@@ -11,6 +11,8 @@ import { staticEnums } from "@/utils/static";
 import logo from "@/assets/svgs/logo.svg";
 import { logout } from "@/utils/auth.util";
 import { logoutUser } from "@/api/slices/authSlice/auth";
+import { readSystemSettings } from "@/api/slices/settingSlice/settings";
+import localStoreUtil from "@/utils/localstore.util";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -21,6 +23,10 @@ const Header = () => {
     logout()
     // router.push({ pathname: "/pdf", query: { offerID: "659828f81be5e74b2d7fd105", action: "Reject" } })
   }
+  useEffect(() => {
+    dispatch(readSystemSettings())
+  }, [])
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (

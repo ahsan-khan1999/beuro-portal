@@ -27,6 +27,7 @@ const InvoiceDetails = () => {
     handleSendEmail,
     handleRecurringInvoiceEdit,
     loading,
+    systemSettings
 
   } = useInvoiceDetail();
 
@@ -71,6 +72,7 @@ const InvoiceDetails = () => {
             handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
             handleStopInvoiceCreation={handleStopInvoiceCreation}
             handleSendEmail={handleSendEmail}
+            currency={systemSettings?.currency}
           />
         </InvoiceCardLayout>
 

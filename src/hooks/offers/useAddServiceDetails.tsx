@@ -40,6 +40,8 @@ export const useAddServiceDetails = (
     grandTotal: 0,
     taxAmount: 0,
   });
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
 
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
@@ -292,6 +294,7 @@ export const useAddServiceDetails = (
       taxType: taxType,
       discountType,
       tax: tax,
+      currency: systemSettings?.currency
     },
     append,
     remove,
@@ -340,5 +343,6 @@ export const useAddServiceDetails = (
     errors,
     error,
     translate,
+    systemSettings
   };
 };

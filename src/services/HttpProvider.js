@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
+import toast from 'react-hot-toast';
 
 const STAGING_API_URL = "https://staging.buero-365.cloudmeshsolutions.com/api";
 export const GOOGLE_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
@@ -43,7 +44,10 @@ export async function request({ method, url, data, headers }) {
   let response;
   try {
     response = await promise;
+
   } catch (error) {
+    toast.error(error?.response?.data?.message)
+
     if (error?.response?.data?.code === 401) {
       logout();
       window.location = "/";
@@ -61,7 +65,10 @@ export async function newRequest({ method, url, data, headers }) {
   let response;
   try {
     response = await promise;
+
   } catch (error) {
+    toast.error(error?.response?.data?.message)
+
     if (error?.response?.data?.code === 401) {
       logout();
       window.location = "/";

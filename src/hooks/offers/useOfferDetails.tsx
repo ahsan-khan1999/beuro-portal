@@ -25,6 +25,8 @@ export default function useOfferDetails() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails, loading, offerActivity } = useAppSelector((state) => state.offer);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(false)
   const { t: translate } = useTranslation()
@@ -181,7 +183,7 @@ export default function useOfferDetails() {
     if (response?.payload) offerCreatedHandler()
   }
   const handleUpdateDiscount = async (discount: number) => {
-    if (discount < 1) toast.error("Negative values are not applicable for discounts");
+    if (discount < 0) toast.error("Negative values are not applicable for discounts");
     else {
       const response = await dispatch(updateOfferDiscount({ params: { discountAmount: Number(discount), id: offerDetails?.id } }))
       if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
@@ -203,6 +205,7 @@ export default function useOfferDetails() {
     offerActivity,
     loading,
     handleSendByPost,
-    handleUpdateDiscount
+    handleUpdateDiscount,
+    systemSettings
   }
 }

@@ -32,7 +32,7 @@ const ImagesUploadOffer = ({
 
           <div className="flex flex-col gap-y-2 my-5 border-t border-[#000] border-opacity-20 pt-5">
             <h2 className="text-base font-medium text-[#393939]">
-              7 images uploaded
+              15 images can be uploaded
             </h2>
             <p className="text-xs font-normal text-[#8F8F8F]">
               Images should be max 20, file size up to 10MB.
