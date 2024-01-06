@@ -78,6 +78,7 @@ const TableRows = ({
                   } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
+                dropDownItemsContainerClassName="w-full"
               />
             </span>
             <span className="py-4 flex items-center mx-2">
@@ -97,6 +98,7 @@ const TableRows = ({
                   }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
+                dropDownItemsContainerClassName="w-full"
                 key={item.id}
               />
             </span>

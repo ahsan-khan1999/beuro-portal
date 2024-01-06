@@ -9,10 +9,12 @@ import logoutImage from "@/assets/svgs/Group 41120.svg";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import logo from "@/assets/svgs/logo.svg";
-import { logout } from "@/utils/auth.util";
+import { getUser, logout } from "@/utils/auth.util";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
+import { isJSON } from "@/utils/functions";
+import { User } from "@/types";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -24,7 +26,10 @@ const Header = () => {
     // router.push({ pathname: "/pdf", query: { offerID: "659828f81be5e74b2d7fd105", action: "Reject" } })
   }
   useEffect(() => {
-    dispatch(readSystemSettings())
+    const user: User = isJSON(getUser())
+    if (user?.role !== "Admin") {
+      dispatch(readSystemSettings())
+    }
   }, [])
 
   return (

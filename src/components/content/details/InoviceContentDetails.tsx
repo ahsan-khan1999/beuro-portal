@@ -38,7 +38,7 @@ const InoviceContentDetails = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.invoice_title")}
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
             {contentDetail?.invoiceContent?.title}
           </p>
         </div>
@@ -49,7 +49,7 @@ const InoviceContentDetails = ({
           </p>
 
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.invoiceContent?.description,
             }}
@@ -60,7 +60,7 @@ const InoviceContentDetails = ({
             {translate("content.details.email_body")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.invoiceContent?.body,
             }}

@@ -44,7 +44,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.address_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {item?.streetNumber}
               </div>
             </div>
@@ -52,7 +52,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.address_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {item?.postalCode}
               </div>
             </div>
@@ -60,7 +60,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.address_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {item?.country}
               </div>
             </div>
@@ -70,7 +70,7 @@ const AddressDetailsData = ({
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("leads.address_details.description")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 break-all text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 break-all text-[#4B4B4B] font-medium min-h-[58px]">
               {item?.description}
             </div>
           </div>
