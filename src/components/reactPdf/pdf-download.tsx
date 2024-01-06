@@ -1,15 +1,11 @@
 import dynamic from "next/dynamic";
-import { ReactPdf } from "./react-pdf";
 
-// Dynamically import BlobProvider with SSR disabled
-const BlobProvider = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
-  { ssr: false }
-);
+import PDF from "./pdf-layout";
+import { BlobProvider } from "@react-pdf/renderer";
 
-export const DownloadPdf = () => {
+const DownloadPdf = () => {
   return (
-    <BlobProvider document={<ReactPdf />}>
+    <BlobProvider document={<PDF />}>
       {({ url, loading, error }) => {
         if (loading) {
           return <div>Loading...</div>;
@@ -29,3 +25,5 @@ export const DownloadPdf = () => {
     </BlobProvider>
   );
 };
+
+export default DownloadPdf;
