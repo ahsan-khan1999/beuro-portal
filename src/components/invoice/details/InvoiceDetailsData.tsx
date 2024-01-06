@@ -19,6 +19,7 @@ const InvoiceDetailsData = ({
   handleEditInvoiceFrequencyCreation,
   handleStopInvoiceCreation,
   handleSendEmail,
+  currency
 }: InvoiceCardContentProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -170,7 +171,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.paid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.paidAmount} CHF
+              {invoiceDetails?.paidAmount} {currency}
             </span>
           </div>
           <div className="flex gap-x-[10px] pt-3">
@@ -180,7 +181,7 @@ const InvoiceDetailsData = ({
             <span className="text-[#393939] font-medium text-base">
               {invoiceDetails?.contractID?.offerID?.total -
                 Number(invoiceDetails?.paidAmount)}{" "}
-              CHF
+              {currency}
             </span>
           </div>
         </div>

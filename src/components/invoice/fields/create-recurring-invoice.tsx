@@ -30,7 +30,7 @@ export const CreateRecurringInvoiceFormField: GenerateInvoiceFormField = (
                             containerClassName:
                                 "!p-4 rounded-lg !border-[1px] !border-[#8F8F8F] focus:!border-primary  text-[#8F8F8F] text-[16px] font-normal",
                             id: "totalAmount",
-                            text: `${invoiceDetails?.contractID?.offerID?.total} CHF`
+                            text: `${invoiceDetails?.contractID?.offerID?.total}`
                             // value: invoiceDetails?.contractID?.offerID?.total?.toString(),
                             // register,
                             // disabled: true

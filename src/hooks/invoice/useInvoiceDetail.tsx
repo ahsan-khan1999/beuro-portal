@@ -27,6 +27,8 @@ export default function useInvoiceDetail() {
     const [isSendEmail, setIsSendEmail] = useState(false)
 
     const { modal } = useAppSelector((state) => state.global);
+    const { systemSettings } = useAppSelector((state) => state.settings);
+
     const { invoiceDetails, loading, invoice, collectiveInvoice, collectiveReciept } = useAppSelector((state) => state.invoice);
     const { t: translate } = useTranslation()
     const router = useRouter();
@@ -250,5 +252,6 @@ export default function useInvoiceDetail() {
         onNextHandle,
         handleRecurringInvoiceEdit,
         loading,
+        systemSettings
     }
 }

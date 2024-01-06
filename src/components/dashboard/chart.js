@@ -53,7 +53,9 @@ const PieChart = ({ data }) => {
         data.datasets[0].data.length === 0 ? (
           <NoDataEmptyState />
         ) : (
-          <canvas className="asd" id="myPieChart" />
+          <div className="w-fit h-fit">
+            <canvas className="asd" id="myPieChart" />
+          </div>
         )}
       </div>
     </div>

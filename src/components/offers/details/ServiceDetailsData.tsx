@@ -10,8 +10,10 @@ import TableLayout from "@/layout/TableLayout";
 
 const ServiceDetailsData = ({
   offerDetails,
+  currency
 }: {
   offerDetails: OffersTableRowTypes;
+  currency?: string
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -96,7 +98,7 @@ const ServiceDetailsData = ({
               {translate("offers.service_details.detail_headings.description")}
             </span>
             <span>
-              {translate("offers.service_details.detail_headings.price")}
+              {translate("offers.service_details.detail_headings.price")}({currency})
             </span>
             <span>
               {translate("offers.service_details.detail_headings.unit")}
@@ -167,7 +169,7 @@ const ServiceDetailsData = ({
                 :
               </span>
               <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-                {offerDetails?.total} CHF
+                {offerDetails?.total} {currency}
               </span>
             </div>
           </div>

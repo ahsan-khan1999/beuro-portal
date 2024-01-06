@@ -66,14 +66,14 @@ export default function useLeadDetail() {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Lead ID"
-        subHeading="Enter Lead ID"
+        modelHeading={translate("common.modals.lead_confirm")}
+        subHeading={translate("common.modals.lead_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Lead?"
+        modelHeading={translate("common.modals.delete_lead")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -87,6 +87,6 @@ export default function useLeadDetail() {
     renderModal,
     leadDeleteHandler,
     leadDetails,
-    loading
+    loading,
   };
 }

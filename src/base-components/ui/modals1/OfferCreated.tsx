@@ -4,8 +4,15 @@ import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useRouter } from "next/router";
 import { CreateSuccessProps } from "@/types/global";
+import { useTranslation } from "next-i18next";
 
-const RecordCreateSuccess = ({ onClose, modelHeading, modelSubHeading, routeHandler }: CreateSuccessProps) => {
+const RecordCreateSuccess = ({
+  onClose,
+  modelHeading,
+  modelSubHeading,
+  routeHandler,
+}: CreateSuccessProps) => {
+  const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
@@ -26,7 +33,7 @@ const RecordCreateSuccess = ({ onClose, modelHeading, modelSubHeading, routeHand
             onClick={routeHandler}
             className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-[66px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
-            Done
+            {translate("common.done_button")}
           </button>
         </div>
       </BaseModal>

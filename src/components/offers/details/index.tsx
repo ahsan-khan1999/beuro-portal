@@ -21,7 +21,8 @@ const OfferDetails = () => {
     onNextHandle,
     loading,
     handleSendByPost,
-    handleUpdateDiscount
+    handleUpdateDiscount,
+    systemSettings
   } = useOfferDetails();
 
   return (
@@ -49,7 +50,7 @@ const OfferDetails = () => {
             onNextHandle={onNextHandle}
           />
         ) : (
-          <OffersDetailsData offerDetails={offerDetails} loading={loading} handleUpdateDiscount={handleUpdateDiscount}/>
+          <OffersDetailsData offerDetails={offerDetails} loading={loading} handleUpdateDiscount={handleUpdateDiscount} currency={systemSettings?.currency} />
         )}
       </div>
       {renderModal()}

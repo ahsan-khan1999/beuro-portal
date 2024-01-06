@@ -119,14 +119,14 @@ const useEmployeeDetail = (stage: boolean) => {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Employee ID"
-        subHeading="Employee ID"
+        modelHeading={translate("common.modals.employee_confirm")}
+        subHeading={translate("common.modals.employee_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Employee?"
+        modelHeading={translate("common.modals.delete_employee")}
         routeHandler={routeHandler}
         loading={loading}
       />

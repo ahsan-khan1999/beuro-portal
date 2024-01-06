@@ -6,8 +6,10 @@ import React from "react";
 
 const ServiceDetailsData = ({
   contractDetails,
+  currency
 }: {
   contractDetails: contractTableTypes;
+  currency?: string
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -92,7 +94,7 @@ const ServiceDetailsData = ({
               </span>
 
               <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-                {contractDetails?.offerID?.total} CHF
+                {contractDetails?.offerID?.total} {currency}
               </span>
             </div>
           </div>

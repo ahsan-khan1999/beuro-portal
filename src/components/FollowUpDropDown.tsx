@@ -37,98 +37,102 @@ const FollowUpDropDown = () => {
             className="text-white text-[13px] font-semibold rounded-md !h-8"
           />
         </div>
-        <AnimatePresence>
-          {followUp?.map((item, index) => {
-            let days = getDaysDifference(item.createdAt);
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                key={index}
-                onClick={() => handleFollowUpsDetails(item.id)}
-                className={`pt-[10px] px-4 cursor-pointer max-h-[300px] overflow-y-scroll ${
-                  (index == 0 || index == 1) && "bg-primary"
-                } bg-opacity-10 `}
-              >
-                <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
-                  <Image
-                    src={followUpIcon}
-                    alt="Follow Up Icon"
-                    className="mr-6"
-                  />
-                  <div>
+        <div className="max-h-[450px] overflow-y-auto">
+          <AnimatePresence>
+            {followUp?.map((item, index) => {
+              let days = getDaysDifference(item.createdAt);
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  key={index}
+                  onClick={() => handleFollowUpsDetails(item.id)}
+                  className={`relative pt-[10px] px-4 cursor-pointer max-h-[300px] overflow-y-scroll ${
+                    (index == 0 || index == 1) && "bg-primary"
+                  } bg-opacity-10 `}
+                >
+                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+                    <Image
+                      src={followUpIcon}
+                      alt="Follow Up Icon"
+                      className="mr-6"
+                    />
                     <div>
-                      <span className="text-dark text-sm">
-                        {translate("follow_up.upcoming_follow_up")}:
-                      </span>
-                      <span className="text-dark text-sm font-medium">
-                        {item.title}
-                      </span>
-                    </div>
-                    <div className="flex items-center mt-1">
-                      <div className="flex items-center mr-7">
-                        <Image
-                          src={timeIcon}
-                          alt="Time Icon"
-                          className="mr-[10px]"
-                        />
-                        <span className="text-[#4B4B4B] text-[13px] ">
-                          {moment(item.dateTime).format("DD/MM/YYYY hh:mm:ss")}
+                      <div>
+                        <span className="text-dark text-sm">
+                          {translate("follow_up.upcoming_follow_up")}:
+                        </span>
+                        <span className="text-dark text-sm font-medium">
+                          {item.title}
                         </span>
                       </div>
-                      <div className="flex items-center">
-                        <Image
-                          src={idIcon}
-                          alt="Id Icon"
-                          className="mr-[10px]"
-                        />
-                        <span className="text-[#4B4B4B] text-[13px]">
-                          {item?.customer?.refID}
-                        </span>
-                      </div>
-                      {days > 0 && (
+                      <div className="flex items-center mt-1">
+                        <div className="flex items-center mr-7">
+                          <Image
+                            src={timeIcon}
+                            alt="Time Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-[13px] ">
+                            {moment(item.dateTime).format(
+                              "DD/MM/YYYY hh:mm:ss"
+                            )}
+                          </span>
+                        </div>
                         <div className="flex items-center">
-                          <div className="ml-2 flex space-x-2">
-                            <Image src={dateIcon} alt="Id Icon" />
-                            <span className="text-[#4B4B4B] text-[13px] ">
-                              {days + " Day"}
-                            </span>
-                          </div>
+                          <Image
+                            src={idIcon}
+                            alt="Id Icon"
+                            className="mr-[10px]"
+                          />
+                          <span className="text-[#4B4B4B] text-[13px]">
+                            {item?.customer?.refID}
+                          </span>
                         </div>
-                      )}
-                      {days > 0 ? (
-                        <div
-                          className="flex items-center absolute right-5"
-                          onClick={(e) => handleDeleteFollowUp(item.id, e)}
-                        >
-                          <div className="ml-2 border-2 border-red rounded-md p-1">
-                            <Image
-                              src={deleteIcon}
-                              alt="Id Icon"
-                              className=""
-                            />
+                        {days > 0 && (
+                          <div className="flex items-center">
+                            <div className="ml-2 flex space-x-2">
+                              <Image src={dateIcon} alt="Id Icon" />
+                              <span className="text-[#4B4B4B] text-[13px]">
+                                {days + " Day"}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      ) : null}
+                        )}
+                        {days > 0 ? (
+                          <div
+                            className="flex items-center absolute right-5"
+                            onClick={(e) => handleDeleteFollowUp(item.id, e)}
+                          >
+                            <div className="ml-2 border-2 border-red rounded-md p-1">
+                              <Image
+                                src={deleteIcon}
+                                alt="Id Icon"
+                                className=""
+                              />
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-        {followUp?.length > 0 && (
-          <div className="flex justify-center py-4">
-            <button
-              className=" text-primary w-fit text-sm font-medium "
-              onClick={() => handleFollowUps()}
-            >
-              {translate("follow_up.view_all")}
-            </button>
-          </div>
-        )}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+          {followUp?.length > 0 && (
+            <div className="flex justify-center py-4">
+              <button
+                className=" text-primary w-fit text-sm font-medium "
+                onClick={() => handleFollowUps()}
+              >
+                {translate("follow_up.view_all")}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {renderModal()}

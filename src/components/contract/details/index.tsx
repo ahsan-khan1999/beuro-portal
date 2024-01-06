@@ -17,7 +17,8 @@ const ContractDetails = () => {
     handleStatusUpdate,
     handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle,
     loading,
-    handleViewPdf
+    handleViewPdf,
+    
   } = useContractDetail();
 
   return (

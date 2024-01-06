@@ -9,7 +9,8 @@ export const MovingDetails = ({
   address,
   workDates,
   isOffer,
-  handleTitleUpdate
+  handleTitleUpdate,
+  addressLabels
 }: MovingDetailsProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
@@ -94,7 +95,7 @@ export const MovingDetails = ({
             className="flex gap-x-[30px] pb-2 border-b-2 border-[#8C8C8C] border-opacity-50 mt-2"
             key={index}
           >
-            <span>Address {++index}:</span>
+            <span>{addressLabels && addressLabels[index] || `Address ${++index}`}:</span>
             <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({

@@ -1,5 +1,6 @@
 import { Customers } from "../customer";
 import { Employee } from "../employee";
+import { Plan } from "./plans";
 
 export interface CustomerTable {
   currentPageRows: CustomersAdmin[];
@@ -22,7 +23,8 @@ export interface CustomersAdmin {
   fullName: string;
   isProfileComplete: boolean;
   isEmailVerified: boolean;
-  refID:string
+  refID:string;
+  plan:Plan
 }
 export interface Address {
   streetNo: string;

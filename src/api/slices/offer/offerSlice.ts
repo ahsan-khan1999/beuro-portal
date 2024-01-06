@@ -102,7 +102,6 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
 
             return response?.data?.data?.Offer;
         } catch (e: any) {
-            toast.error(e?.data?.data?.message)
 
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -130,7 +129,6 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             // } else {
             // }
 
-            toast.error(e?.data?.message)
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -231,7 +229,7 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
         try {
             const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
 
-            const response = await axios.put(
+            await axios.put(
                 BASEURL + `/offer/add-signature/${data?.id}`,
                 formData,
                 {

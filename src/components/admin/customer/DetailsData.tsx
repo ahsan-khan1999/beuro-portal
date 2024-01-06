@@ -69,7 +69,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
-              {customerDetail?.refID}
+              {customerDetail?.company?.refID}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
@@ -81,13 +81,13 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.no_of_employee")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.employee?.employeeID}
+              {customerDetail?.plan?.numberOfEmployees}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.plan")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.company?.plan}
+              {customerDetail?.plan?.planName}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">
@@ -96,7 +96,7 @@ const DetailsData = ({
             )}
             :
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {formatDateTimeToDate(customerDetail?.createdAt)}
+              {formatDateTimeToDate(customerDetail?.plan?.createdAt)}
             </span>
           </h3>
         </div>
@@ -113,7 +113,7 @@ const DetailsData = ({
                 dropDownClassName="w-[140px] border border-primary"
                 dropDownTextClassName="text-primary font-medium"
                 dropDownIconClassName="text-primary"
-                dropDownItemsContainerClassName="border border-primary"
+                dropDownItemsContainerClassName="border border-primary w-full"
               />
             </span>
           </h3>

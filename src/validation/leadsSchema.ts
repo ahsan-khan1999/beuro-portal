@@ -146,12 +146,10 @@ export const generateAddNewLeadCustomerDetailsValidation = (
 
     [LeadsCustomerEditDetails.phone]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validationMessages.required")),
+      .notRequired(),
     [LeadsCustomerEditDetails.mobile]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate("validationMessages.required")),
+      .notRequired(),
     [LeadsCustomerEditDetails.address]: yup
       .object({
         [LeadsCustomerEditDetails.streetNo]: yup

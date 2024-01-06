@@ -30,6 +30,7 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 
 const useServiceDetail = (stage: boolean) => {
+  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { serviceDetails, loading } = useAppSelector((state) => state.service);
@@ -91,20 +92,19 @@ const useServiceDetail = (stage: boolean) => {
     updateQuery(router, router.locale as string);
     onClose();
   };
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Service ID"
-        subHeading="Service ID"
+        modelHeading={translate("common.modals.service_confirm")}
+        subHeading={translate("common.modals.service_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Service?"
+        modelHeading={translate("common.modals.delete_service")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -112,16 +112,16 @@ const useServiceDetail = (stage: boolean) => {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Service Created Successful "
-        modelSubHeading="Thanks for creating Service we are happy to have you. "
+        modelHeading={translate("common.modals.created_service")}
+        modelSubHeading={translate("common.modals.service_created_des")}
         routeHandler={changeRouterHandler}
       />
     ),
     [ModalType.UPDATE_SUCCESS]: (
       <RecordUpdateSuccess
         onClose={onClose}
-        modelHeading="Are You Sure? "
-        modelSubHeading="You want to update this record  "
+        modelHeading={translate("common.modals.are_sure")}
+        modelSubHeading={translate("common.modals.delete_record")}
         cancelHandler={onClose}
         confirmHandler={() =>
           confrimUpdate({ data, router, setError, translate })
@@ -133,8 +133,6 @@ const useServiceDetail = (stage: boolean) => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
-  const { t: translate } = useTranslation();
 
   const schema = generateServicesValidation(translate);
 

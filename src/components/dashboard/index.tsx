@@ -18,6 +18,7 @@ import customerIcon from "@/assets/pngs/customers.png";
 import leadsPngIcon from "@/assets/pngs/leads.png";
 import offersPngIcon from "@/assets/pngs/offers.png";
 import invoiceIcon from "@/assets/pngs/invoice.png";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 interface ActionType {
   type: string;
@@ -55,6 +56,7 @@ const AdminDashboard = () => {
     month: 1,
   });
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
       (response: ActionType) => {
@@ -140,6 +142,7 @@ const AdminDashboard = () => {
       route: () => router.push("/dashboard"),
     },
   ];
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(readDashboard({ params: { filter: { month: query?.month } } }));
   };
@@ -186,43 +189,49 @@ const AdminDashboard = () => {
         ]}
       />
 
-      <DashboardFunctions
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-      />
+      {dashboard !== null ? (
+        <>
+          <DashboardFunctions
+            filter={filter}
+            setFilter={setFilter}
+            handleFilterChange={handleFilterChange}
+          />
 
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
-        {dashboardCards.map((item, index) => {
-          return (
-            <DashboardCard
-              icon={item.icon}
-              alt={item.alt}
-              backgroundColor={item.backgroundColor}
-              title={item.title}
-              subTitle={item.subTitle}
-              id={item?.id?.toString() as string}
-              salePercent={item.salePercent}
-              chartPointColor={item.chartPointColor}
-              open={item.open}
-              closed={item.closed}
-              expired={item.expired}
-              route={item.route}
-            />
-          );
-        })}
-      </div>
-      {/* <div className="mt-[51px] grid grid-cols-1  gap-x-[18px]">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
+            {dashboardCards.map((item, index) => {
+              return (
+                <DashboardCard
+                  icon={item.icon}
+                  alt={item.alt}
+                  backgroundColor={item.backgroundColor}
+                  title={item.title}
+                  subTitle={item.subTitle}
+                  id={item?.id?.toString() as string}
+                  salePercent={item.salePercent}
+                  chartPointColor={item.chartPointColor}
+                  open={item.open}
+                  closed={item.closed}
+                  expired={item.expired}
+                  route={item.route}
+                />
+              );
+            })}
+          </div>
+          {/* <div className="mt-[51px] grid grid-cols-1  gap-x-[18px]">
         <MainCalender />
 
       </div> */}
-      <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
-        <div className="hidden 2xl:block">
-          <FollowUpNotificationBar dashboard={dashboard} />
-        </div>
-        <ActivitiesNotificationBar dashboard={dashboard} />
-        <PieChart data={pieData} />
-      </div>
+          <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
+            <div className="hidden 2xl:block">
+              <FollowUpNotificationBar dashboard={dashboard} />
+            </div>
+            <ActivitiesNotificationBar dashboard={dashboard} />
+            <PieChart data={pieData} />
+          </div>
+        </>
+      ) : (
+        <LoadingState />
+      )}
     </div>
   );
 };
