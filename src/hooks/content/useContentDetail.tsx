@@ -58,14 +58,14 @@ const useContentDetail = () => {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading={translate("common.content_confirmation")}
-        subHeading={translate("common.content_ID")}
+        modelHeading={translate("common.modals.content_confirmation")}
+        subHeading={translate("common.modals.content_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading={translate("common.delete_content")}
+        modelHeading={translate("common.modals.delete_content")}
         routeHandler={routeHandler}
         loading={loading}
       />
