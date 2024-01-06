@@ -115,14 +115,14 @@ export default function useContractDetail() {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Contract ID"
-        subHeading="Enter Contract ID"
+        modelHeading={translate("common.modals.contract_confirm")}
+        subHeading={translate("common.modals.contract_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Contract?"
+        modelHeading={translate("common.modals.delete_contract")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -150,16 +150,16 @@ export default function useContractDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.update_contract_heading")}
+        subHeading={translate("common.modals.update_des")}
         route={onClose}
       />
     ),
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.contract_done")}
         route={onSuccess}
       />
     ),
@@ -200,8 +200,8 @@ export default function useContractDetail() {
     router.pathname = "/contract/pdf-preview";
   };
   const handleViewPdf = () => {
-    window.open(contractDetails?.attachement as string)
-  }
+    window.open(contractDetails?.attachement as string);
+  };
   return {
     contractDetails,
     renderModal,
@@ -215,6 +215,6 @@ export default function useContractDetail() {
     onNextHandle,
     handleSendEmail,
     loading,
-    handleViewPdf
+    handleViewPdf,
   };
 }

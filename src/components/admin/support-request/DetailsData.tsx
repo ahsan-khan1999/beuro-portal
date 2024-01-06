@@ -75,7 +75,7 @@ const DetailsData = ({
               dropDownClassName="px-3 border border-primary"
               dropDownTextClassName="text-primary font-medium"
               dropDownIconClassName="text-primary ml-2"
-              dropDownItemsContainerClassName="border border-primary"
+              dropDownItemsContainerClassName="border border-primary w-full"
             />
           </span>
         </h3>

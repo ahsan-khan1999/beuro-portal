@@ -178,14 +178,14 @@ export default function useCustomerDetail(stage: boolean) {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Customer ID"
-        subHeading="Customer ID"
+        modelHeading={translate("common.modals.customer_confirm")}
+        subHeading={translate("common.modals.customer_ID")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Customer?"
+        modelHeading={translate("common.modals.customer_delete")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -193,16 +193,16 @@ export default function useCustomerDetail(stage: boolean) {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Customer Created Successful "
-        modelSubHeading="Thanks for creating Customer we are happy to have you. "
+        modelHeading={translate("common.modals.customer_created")}
+        modelSubHeading={translate("common.modals.customer_created_des")}
         routeHandler={changeRouterHandler}
       />
     ),
     [ModalType.UPDATE_SUCCESS]: (
       <RecordUpdateSuccess
         onClose={onClose}
-        modelHeading="Are You Sure? "
-        modelSubHeading="You want to leave this page without saving changes. "
+        modelHeading={translate("common.modals.are_sure")}
+        modelSubHeading={translate("common.modals.leave_page")}
         cancelHandler={handleUpdateCancle}
         confirmHandler={() => test({ data, router, setError, translate })}
         loading={loading}

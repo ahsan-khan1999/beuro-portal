@@ -6,7 +6,7 @@ export const generatePlansValidation = (translate: Function) => {
     [PlanDetailFields.name]: yup.string().required("validation required"),
     [PlanDetailFields.priceMonthly]: yup
       .number()
-      .required("validation required"),
+      .required(translate("validationMessages.required")),
     [PlanDetailFields.anuallDiscount]: yup
       .number()
       .required(translate("validationMessages.required")),
