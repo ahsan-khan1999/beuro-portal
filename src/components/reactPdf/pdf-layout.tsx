@@ -306,13 +306,22 @@ const PDF = () => (
           offerDate={PDF_DATA.header.offerDate}
           createdBy={PDF_DATA.header.createdBy}
         />
-        <View style={{ position: "absolute", top: 120 }}>
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
           <ContactAddress
             company={PDF_DATA.contactAddress.company}
             createdBy={PDF_DATA.contactAddress.createdBy}
             customerDetail={PDF_DATA.contactAddress.customerDetail}
           />
           <AdditionalDetails {...PDF_DATA.additionalDetails} />
+
+          <Footer {...PDF_DATA.footer} />
         </View>
       </Page>
     </Document>
