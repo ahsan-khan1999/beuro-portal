@@ -1,3 +1,15 @@
+// export interface PDFResponse {
+//   header: HeaderProps;
+//   contactAddress: ContactAddressProps;
+//   addressDetails: AddressDetailsProps;
+//   serviceDetails: ServiceDetailProps[];
+//   footer: FooterProps;
+//   createdBy: CreatedByProps;
+//   additionalDetails: AdditionalDetailsProps;
+//   qrDetails: QRDetailsProps;
+//   offerID: OfferDetails;
+// }
+
 export interface PDFResponse {
   header: HeaderProps;
   contactAddress: ContactAddressProps;
@@ -6,36 +18,39 @@ export interface PDFResponse {
   footer: FooterProps;
   createdBy: CreatedByProps;
   additionalDetails: AdditionalDetailsProps;
-  qrDetails: QRDetailsProps;
+  qrDetails: QRCodeProps;
   offerID: OfferDetails;
 }
 
-export interface QRDetailsProps {
-  bankSideDetails: BankSideDetailsProps;
-  qrSideDetails: QRSideDetailsProps;
+
+export interface QRCodeProps {
+  bank: BankSideDetailsProps;
+  qr: QRSideDetailsProps;
 }
 
 export interface BankSideDetailsProps {
   heading: string;
   account: string;
-  iban_number: string;
-  bank_name: string;
-  company_address: string;
+  ibanNumber: string;
+  bankName: string;
+  companyAddress: string;
   street: string;
-  reference_number: string;
+  referenceNumber: string;
   payable: string;
-  payable_name: string;
-  payable_address: string;
-  payable_street: string;
+  payableName: string;
+  payableAddress: string;
+  payableStreet: string;
   currency: string;
   amount: string;
 }
 
 export interface QRSideDetailsProps {
   heading: string;
+  qrCodeImage: string;
   currency: string;
-  amount: String;
+  amount: string;
 }
+
 export interface HeaderProps {
   companyLogo?: string;
   offerNumber?: string;
