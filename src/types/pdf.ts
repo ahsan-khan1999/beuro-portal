@@ -5,6 +5,7 @@ export interface PDFResponse {
   serviceDetails: ServiceDetailProps[];
   footer: FooterProps;
   createdBy: CreatedByProps;
+  additionalDetails: AdditionalDetailsProps;
 }
 export interface HeaderProps {
   companyLogo?: string;
@@ -76,4 +77,9 @@ export interface ServiceDetailProps {
 export interface BankDetailsProps {
   bankName?: string;
   ibanNumber?: string;
+}
+
+export interface AdditionalDetailsProps {
+  heading: string;
+  description: string;
 }
