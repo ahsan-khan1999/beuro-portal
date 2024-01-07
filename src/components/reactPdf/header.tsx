@@ -1,29 +1,40 @@
+import { HeaderProps } from "@/types/pdf";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
-import { styles } from "./style-sheet";
-import { PdfHeader } from "./react-pdf";
 
 export const Header = ({
   companyLogo,
   offerNumber,
   offerDate,
   createdBy,
-}: PdfHeader) => (
-  <View style={styles.header}>
-    {/* <View style={styles.logoSection}> */}
-      {/* <Image source={companyLogo} /> */}
-    {/* </View> */}
-    <View style={styles.infoSection}>
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Offer No:</Text>
-        <Text style={styles.value}>{offerNumber}</Text>
+}: HeaderProps) => (
+  <View
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      backgroundColor: "#EEE",
+      padding: 20,
+    }}
+    fixed
+  >
+    <View>
+      <Image
+        src={"/assets/images/logo.png"}
+        style={{ width: 182, height: 73 }}
+      />
+    </View>
+    <View>
+      <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
+        <Text style={{ width: 100 }}>Offer No:</Text>
+        <Text>{offerNumber}</Text>
       </View>
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Offer Date:</Text>
-        <Text style={styles.value}>{offerDate}</Text>
+      <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
+        <Text style={{ width: 100 }}>Offer Date:</Text>
+        <Text>{offerDate}</Text>
       </View>
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Created By:</Text>
-        <Text style={styles.value}>{createdBy}</Text>
+      <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
+        <Text style={{ width: 100 }}>Created By:</Text>
+        <Text>{createdBy}</Text>
       </View>
     </View>
   </View>
