@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
   },
   shareHeading: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "medium",
+    color: "#000",
     marginTop: 30,
     marginBottom: 50,
   },
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     fontSize: 16,
     fontWeight: 400,
+    color: "#000",
   },
 });
 

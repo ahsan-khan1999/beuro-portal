@@ -23,8 +23,33 @@ export const ContactAddress = ({
       >{`${customerDetail?.address?.postalCode} ${customerDetail?.address?.country}`}</Text>
     </View>
     <View style={rightColumn}>
-      <Text style={textBase}>Email: {email}</Text>
-      <Text style={[textBase, greyText]}>Phone: {phoneNumber}</Text>
+      <View style={{ display: "flex", flexDirection: "row", marginBottom: 6 }}>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "medium",
+            color: "#404040",
+            marginRight: 21,
+          }}
+        >
+          Email:
+        </Text>
+        <Text style={textBase}>{email}</Text>
+      </View>
+
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "medium",
+            color: "#404040",
+            marginRight: 21,
+          }}
+        >
+          Phone:
+        </Text>
+        <Text style={textBase}>{phoneNumber}</Text>
+      </View>
     </View>
   </View>
 );

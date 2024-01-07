@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    columnGap: 20
+    columnGap: 20,
   },
   leftColumn: {
     flexDirection: "column",
@@ -28,11 +28,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   text: {
-    fontSize: 12,
+    fontSize: 16,
+    fontWeight: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 12,
+    fontSize: 16,
+    fontWeight: "bold",
     color: "#FFFFFF",
   },
   subSection: {
@@ -43,6 +45,8 @@ const styles = StyleSheet.create({
   discountDescription: {
     marginTop: 10,
     color: "#404040",
+    fontWeight: "normal",
+    fontSize: 14,
   },
 });
 
@@ -56,19 +60,22 @@ export const ServicesTotalAmount = ({
   <View style={styles.container}>
     <View style={styles.contentContainer}>
       <View style={styles.leftColumn}>
+        <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          Konditionen Schätzofferte Umzug
+        </Text>
         <Text style={styles.discountDescription}>{discountDescription}</Text>
       </View>
       <View style={styles.rightColumn}>
         <View style={styles.subSection}>
-          <Text style={styles.text}>Sub Total</Text>
+          <Text style={styles.text}>Sub Total: </Text>
           <Text style={styles.text}>{subTotal}</Text>
         </View>
         <View style={styles.subSection}>
-          <Text style={styles.text}>Tax%</Text>
+          <Text style={styles.text}>Tax%: </Text>
           <Text style={styles.text}>{taxAmount} CHF (7.7%)</Text>
         </View>
         <View style={styles.subSection}>
-          <Text style={styles.text}>Discount:</Text>
+          <Text style={styles.text}>Discount: </Text>
           <Text style={styles.text}>{discountAmount} CHF</Text>
         </View>
         <View style={styles.totalSection}>
