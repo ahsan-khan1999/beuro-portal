@@ -26,8 +26,7 @@ const Header = () => {
     // router.push({ pathname: "/pdf", query: { offerID: "659828f81be5e74b2d7fd105", action: "Reject" } })
   }
   useEffect(() => {
-    const user: User = isJSON(getUser())
-    if (user?.role !== "Admin") {
+    if (user && user?.role !== "Admin") {
       dispatch(readSystemSettings())
     }
   }, [])
