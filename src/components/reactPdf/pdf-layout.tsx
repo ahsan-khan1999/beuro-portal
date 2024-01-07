@@ -197,6 +197,14 @@ export const PDF_DATA: PDFResponse = {
     description:
       "Banküberweisung: Sie können den Betrag auf unser angegebenes Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).",
   },
+  offerID: {
+    discountAmount: "65675",
+    discountDescription:
+      "This is discount description, This is discount description, , This is discount description, This is discount description",
+    subTotal: "555",
+    taxAmount: "7.7",
+    total: "3456",
+  },
 };
 
 // export const A4_WIDTH = 595; // 72dpi
@@ -265,6 +273,7 @@ import { ContactAddress } from "./contact-address";
 import { AddressDetails } from "./address-details";
 import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
+import { ServicesTotalAmount } from "./services-total-ammount";
 
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
@@ -294,18 +303,14 @@ const PDF = () => (
           {PDF_DATA.serviceDetails.map((item, index) => (
             <ServiceTableRow {...item} count={`${index + 1}`} key={index} />
           ))}
+          <ServicesTotalAmount {...PDF_DATA.offerID} />
         </View>
         <Footer {...PDF_DATA.footer} />
       </Page>
 
-      {/* additional details */}
-      <Page size="A4" style={styles.body}>
-        <Header
-          companyLogo={PDF_DATA.header.companyLogo}
-          offerNumber={PDF_DATA.header.offerNumber}
-          offerDate={PDF_DATA.header.offerDate}
-          createdBy={PDF_DATA.header.createdBy}
-        />
+      {/* Additional details */}
+      <Page style={styles.body}>
+        <Header {...PDF_DATA.header} />
         <View
           style={{
             position: "absolute",
@@ -320,9 +325,8 @@ const PDF = () => (
             customerDetail={PDF_DATA.contactAddress.customerDetail}
           />
           <AdditionalDetails {...PDF_DATA.additionalDetails} />
-
-          <Footer {...PDF_DATA.footer} />
         </View>
+        <Footer {...PDF_DATA.footer} />
       </Page>
     </Document>
   </PDFViewer>

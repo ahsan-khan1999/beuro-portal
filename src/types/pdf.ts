@@ -6,6 +6,7 @@ export interface PDFResponse {
   footer: FooterProps;
   createdBy: CreatedByProps;
   additionalDetails: AdditionalDetailsProps;
+  offerID: OfferDetails;
 }
 export interface HeaderProps {
   companyLogo?: string;
@@ -82,4 +83,16 @@ export interface BankDetailsProps {
 export interface AdditionalDetailsProps {
   heading: string;
   description: string;
+}
+
+export interface OfferDetails {
+  subTotal: string;
+  taxAmount: string;
+  discountAmount: string;
+  discountDescription: string;
+  total: string;
+}
+
+export interface ServicesTotalAmountProps {
+  offerID: OfferDetails;
 }
