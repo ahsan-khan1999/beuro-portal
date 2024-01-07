@@ -834,7 +834,7 @@ export interface PurchasedItemDetailsNextPageProps {
 
 }
 
-interface qrCode {
+export interface qrCode {
   acknowledgementSlip: AcknowledgementSlipProps;
   payableTo: PayableToProps;
 }

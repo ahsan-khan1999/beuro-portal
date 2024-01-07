@@ -1,3 +1,4 @@
+import { ServiceList } from "@/types/offers";
 import { ServiceDetailProps } from "@/types/pdf";
 import { View, Text } from "@react-pdf/renderer";
 import { StyleSheet } from "@react-pdf/renderer";
@@ -53,24 +54,26 @@ const styles = StyleSheet.create({
 });
 
 export const ServiceTableRow = ({
+  count,
   description,
   price,
+  serviceTitle,
+  serviceType,
+  totalPrice,
   unit,
-  count,
-  total,
-}: ServiceDetailProps) => {
+}: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
         <View style={styles.description}>
-          <Text style={styles.descriptionTextTitle}>{description}</Text>
+          <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
           <Text style={styles.descriptionText}>{description}</Text>
         </View>
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>{price}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
-          <Text style={styles.headerText}>{total}</Text>
+          <Text style={styles.headerText}>{totalPrice}</Text>
         </View>
       </View>
     </View>

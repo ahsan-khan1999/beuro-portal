@@ -91,13 +91,10 @@ const stylesheet: HtmlStyles = {
   },
 };
 
-export const AdditionalDetails = ({
-  heading,
-  description,
-}: AdditionalDetailsProps) => (
+export const AdditionalDetails = ({description}: {description?: string}) => (
   <View style={styles.borderDiv}>
     <View style={styles.container}>
-      <Html stylesheet={stylesheet}>{description}</Html>
+      <Html stylesheet={stylesheet}>{description || ""}</Html>
 
       <View style={{}}>
         <Text style={styles.shareHeading}>I share the contract with you.</Text>
