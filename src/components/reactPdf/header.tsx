@@ -23,8 +23,9 @@ export const Header = ({
   >
     <View>
       <Image
-        src={"/assets/images/logo.png"}
+        src={logo}
         style={{ width: 182, height: 73 }}
+
       />
     </View>
     <View>

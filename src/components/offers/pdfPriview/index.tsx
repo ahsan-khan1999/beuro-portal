@@ -27,6 +27,10 @@ import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
+const OfferPdf = dynamic(() => import("../offer-pdf-preview"), { ssr: false });
+
+import { useOfferPdfDownload } from "@/hooks/offers/useOfferPdf";
+import dynamic from "next/dynamic";
 
 export const productItems: ServiceList[] = [
   {
@@ -133,18 +137,11 @@ interface ActionType {
 }
 
 const PdfPriview = () => {
-  const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
-  const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
-    null
-  );
 
-  const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
-    null
-  );
-  const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
-    null
-  );
+
+  const { offerData, activeButtonId, setActiveButtonId } = useOfferPdfDownload();
+
+
   const {
     auth: { user },
     global: { modal },
@@ -152,180 +149,10 @@ const PdfPriview = () => {
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  const maxItemsFirstPage = 6;
-  const maxItemsPerPage = 10;
-
   const router = useRouter();
   const { offerID } = router.query;
 
-  useEffect(() => {
-    (async () => {
-      if (offerID) {
 
-        const [template, emailTemplate, offerData] = await Promise.all([dispatch(
-          getTemplateSettings()
-        ), dispatch(
-          readEmailSettings()
-        ), dispatch(readOfferDetails({ params: { filter: offerID } }))])
-        if (template?.payload?.Template) {
-          const {
-            firstColumn,
-            fourthColumn,
-            isFirstColumn,
-            isFourthColumn,
-            isSecondColumn,
-            isThirdColumn,
-            secondColumn,
-            thirdColumn,
-          }: TemplateType = template.payload.Template;
-
-          setTemplateSettings(() => ({
-            firstColumn,
-            secondColumn,
-            thirdColumn,
-            fourthColumn,
-            isFirstColumn,
-            isFourthColumn,
-            isSecondColumn,
-            isThirdColumn,
-          }));
-        }
-        if (emailTemplate?.payload) {
-          setEmailTemplateSettings({
-            logo: emailTemplate?.payload?.logo,
-            FooterColour: emailTemplate?.payload?.FooterColour,
-            email: emailTemplate?.payload?.email,
-            mobileNumber: emailTemplate?.payload?.mobileNumber,
-            phoneNumber: emailTemplate?.payload?.phoneNumber,
-            textColour: emailTemplate?.payload?.textColour,
-
-          })
-        }
-        if (offerData?.payload) {
-          const offerDetails: OffersTableRowTypes = offerData?.payload;
-          let formatData: PdfProps = {
-            attachement: offerDetails?.attachement,
-            emailHeader: {
-              offerNo: offerDetails?.offerNumber,
-              emailStatus: offerDetails?.emailStatus,
-            },
-            headerDetails: {
-              offerNo: offerDetails?.offerNumber,
-              offerDate: offerDetails?.createdAt,
-              createdBy: offerDetails?.createdBy?.fullName,
-              logo: offerDetails?.createdBy?.company?.logo,
-              emailTemplateSettings: emailTemplate?.payload
-            },
-            contactAddress: {
-              address: {
-                name: offerDetails?.leadID?.customerDetail?.fullName,
-                city: offerDetails?.leadID?.customerDetail?.address?.country,
-                postalCode:
-                  offerDetails?.leadID?.customerDetail?.address?.postalCode,
-                streetWithNumber:
-                  offerDetails?.leadID?.customerDetail?.address?.streetNumber,
-              },
-              email: offerDetails?.leadID?.customerDetail?.email,
-              phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
-            },
-            movingDetails: {
-              address: offerDetails?.addressID?.address,
-              header: offerDetails?.title,
-              workDates: offerDetails?.date,
-              addressLabels:offerDetails?.content?.offerContent?.address
-            },
-            serviceItem: offerDetails?.serviceDetail?.serviceDetail,
-            serviceItemFooter: {
-              subTotal: offerDetails?.subTotal?.toString(),
-              tax: offerDetails?.taxAmount?.toString(),
-              discount: offerDetails?.discountAmount?.toString(),
-              grandTotal: offerDetails?.total?.toString(),
-            },
-            footerDetails: {
-              firstColumn: {
-                companyName: user?.company?.companyName,
-                email: user?.email,
-                phoneNumber: user?.company?.phoneNumber,
-                taxNumber: user?.company?.taxNumber,
-                website: user?.company?.website,
-              },
-              secondColumn: {
-                address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
-                },
-                bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
-                },
-              },
-              thirdColumn: {},
-              fourthColumn: {
-
-              },
-              columnSettings: null,
-              currPage: 1,
-              totalPages: calculateTotalPages,
-            },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
-            },
-            aggrementDetails:
-              offerDetails?.content?.offerContent?.description || "",
-            isOffer: true,
-            signature: offerDetails?.signature
-          };
-          const distributeItems = (): ServiceList[][] => {
-            const totalItems =
-              offerDetails?.serviceDetail?.serviceDetail?.length;
-            let pages: ServiceList[][] = [];
-
-            if (totalItems > maxItemsFirstPage) {
-              pages.push(
-                offerDetails?.serviceDetail?.serviceDetail?.slice(
-                  0,
-                  maxItemsFirstPage
-                )
-              );
-              for (
-                let i = maxItemsFirstPage;
-                i < totalItems;
-                i += maxItemsPerPage
-              ) {
-                pages.push(
-                  offerDetails?.serviceDetail?.serviceDetail?.slice(
-                    i,
-                    i + maxItemsPerPage
-                  )
-                );
-              }
-            } else {
-              pages.push(offerDetails?.serviceDetail?.serviceDetail);
-            }
-
-            return pages;
-          };
-
-          setNewPageData(distributeItems());
-          setOfferData(formatData);
-        }
-      }
-    })()
-
-
-  }, [offerID]);
-  const totalItems = offerData?.serviceItem?.length;
-
-  const calculateTotalPages = useMemo(() => {
-    const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
-    const remainingItems = totalItems - itemsOnFirstPage;
-    const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
-
-    // Add 1 for the first page and 1 for the last page
-    return 1 + 1 + additionalPages;
-  }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
   const handleEmailSend = async () => {
     try {
@@ -349,7 +176,7 @@ const PdfPriview = () => {
           subject: offerDetails?.content?.offerContent?.title,
           description: offerDetails?.content?.offerContent?.body,
           pdf: offerDetails?.content?.offerContent?.attachments,
-          id:offerDetails?.id
+          id: offerDetails?.id
         }
         const res = await dispatch(sendOfferEmail({ data: apiData }));
         if (res?.payload) {
@@ -373,10 +200,10 @@ const PdfPriview = () => {
 
   }
   const handleDonwload = () => {
-    window.open(offerData?.attachement)
+    window.open(offerDetails?.attachement)
   };
   const handlePrint = () => {
-    window.open(offerData?.attachement)
+    window.open(offerDetails?.attachement)
 
   };
   const onClose = () => {
@@ -418,7 +245,11 @@ const PdfPriview = () => {
               activeButtonId={activeButtonId}
 
             />
-            <YogaPdfContainer>
+            <div className="flex justify-center my-5">
+
+              <OfferPdf offerData={offerData} />
+            </div>
+            {/* <YogaPdfContainer>
 
               <div className="flex justify-center my-5">
                 <Pdf<EmailHeaderProps>
@@ -430,7 +261,7 @@ const PdfPriview = () => {
 
                 />
               </div>
-            </YogaPdfContainer>
+            </YogaPdfContainer> */}
 
             {renderModal()}
           </div>
