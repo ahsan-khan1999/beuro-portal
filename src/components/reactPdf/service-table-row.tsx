@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F7F8",
     paddingVertical: 8,
     borderRadius: 4,
-    marginBottom: 12,
+    marginBottom: 16,
     marginHorizontal: 20,
   },
   headerRow: {
