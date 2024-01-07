@@ -51,6 +51,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     generatePrice,
     offerDetails,
     tax,
+    currency
   } = properties;
 
   // if(!fields) return null;
@@ -347,6 +348,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       taxType,
       discountType,
       tax,
+      currency
     } = properties;
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
@@ -437,7 +439,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
               isDiscount,
               taxType,
               discountType,
-              tax
+              tax,
+              currency
             ),
           ],
         },
@@ -458,7 +461,8 @@ const generateServiceCalulationChildren = (
   isDiscount?: boolean,
   taxType?: number,
   discountType?: number,
-  tax?: TaxSetting[] | null
+  tax?: TaxSetting[] | null,
+  currency?:string
 ) => {
   const { t: translate } = useTranslation();
   let field: any = {
@@ -467,7 +471,7 @@ const generateServiceCalulationChildren = (
       type: Field.span,
       className: "! !border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
-      text: `${total?.taxAmount.toFixed(2)} CHF(7.7%)`,
+      text: `${total?.taxAmount.toFixed(2)} ${currency}(7.7%)`,
     },
   };
 
@@ -527,7 +531,7 @@ const generateServiceCalulationChildren = (
                   className:
                     "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
-                  text: `${total?.subTotal} CHF`,
+                  text: `${total?.subTotal} ${currency}`,
                 },
               },
             ],
@@ -732,7 +736,7 @@ const generateServiceCalulationChildren = (
             id: "span-field",
             text: `${translate(
               "offers.service_details.detail_headings.grand_total"
-            )} : ${total?.grandTotal.toFixed(2)} CHF`,
+            )} : ${total?.grandTotal.toFixed(2)} ${currency}`,
           },
         },
       ],

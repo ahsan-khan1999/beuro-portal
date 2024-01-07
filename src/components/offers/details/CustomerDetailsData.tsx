@@ -44,9 +44,9 @@ const CustomerDetailsData = ({
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mb-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Offer Title
+              {translate("offers.offer_details.offer_title")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium overflow-clip text-ellipsis ">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium overflow-clip text-ellipsis min-h-[58px]">
               {offerDetails?.title}
             </div>
           </div>
@@ -55,7 +55,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {getKeyByValue(
                 staticEnums["CustomerType"],
                 offerDetails?.leadID?.customerDetail?.customerType
@@ -66,7 +66,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.fullName}
             </div>
           </div>
@@ -75,9 +75,9 @@ const CustomerDetailsData = ({
           ] === 1 && (
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Company Name
+                {translate("offers.offer_details.company_name")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {offerDetails?.leadID?.customerDetail?.companyName}
               </div>
             </div>
@@ -86,7 +86,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.email}
             </div>
           </div>
@@ -94,7 +94,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.phone_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.phoneNumber}
             </div>
           </div>
@@ -102,7 +102,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.mobile_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.mobileNumber}
             </div>
           </div>
@@ -117,7 +117,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {offerDetails?.leadID?.customerDetail?.address?.streetNumber}
               </div>
             </div>
@@ -125,7 +125,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {offerDetails?.leadID?.customerDetail?.address?.postalCode}
               </div>
             </div>
@@ -133,7 +133,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {offerDetails?.leadID?.customerDetail?.address?.country}
               </div>
             </div>

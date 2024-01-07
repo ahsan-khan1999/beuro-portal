@@ -14,10 +14,10 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { User } from "@/types";
-import userImage from "@/assets/svgs/Group 480958610.svg"
+import userImage from "@/assets/svgs/Group 480958610.svg";
 export default function useSettingProfile() {
   const router = useRouter();
-  const user: User = isJSON(getUser())
+  const user: User = isJSON(getUser());
   const { loading, error } = useAppSelector((state) => state.settings);
   const { modal } = useAppSelector((state) => state.global);
 
@@ -31,7 +31,7 @@ export default function useSettingProfile() {
     control,
     formState: { errors },
     reset,
-    setError
+    setError,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -40,9 +40,9 @@ export default function useSettingProfile() {
     reset({
       fullName: user?.fullName,
       email: user?.email,
-      logo: userImage
-    })
-  }, [])
+      logo: userImage,
+    });
+  }, []);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -51,8 +51,8 @@ export default function useSettingProfile() {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Settings Updated Successful "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.admin_setting_des")}
         routeHandler={onClose}
       />
     ),
@@ -63,8 +63,16 @@ export default function useSettingProfile() {
   const fields = changeProfileSettingFormField(register, loading, control);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(updateAdminSetting({ data: { ...data, id: user?.id }, router, setError, translate }));
-    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+    const response = await dispatch(
+      updateAdminSetting({
+        data: { ...data, id: user?.id },
+        router,
+        setError,
+        translate,
+      })
+    );
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
   return {
@@ -73,6 +81,6 @@ export default function useSettingProfile() {
     errors,
     fields,
     onSubmit,
-    renderModal
+    renderModal,
   };
 }

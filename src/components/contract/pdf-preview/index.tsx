@@ -257,6 +257,7 @@ const PdfPriview = () => {
               workDates: contractDetails?.offerID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
+            
             },
             serviceItem:
               contractDetails?.offerID?.serviceDetail?.serviceDetail,

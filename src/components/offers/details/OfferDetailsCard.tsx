@@ -57,7 +57,7 @@ const OfferDetailsCard = ({
 
         <div className="flex gap-[22px]">
           <BaseButton
-            buttonText="Send Via Post"
+            buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
             containerClassName="flex items-center group gap-x-3 row-reverse"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
@@ -183,6 +183,7 @@ const OfferDetailsCard = ({
                 onItemSelected={handlePaymentStatusUpdate}
                 dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
                 dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownItemsContainerClassName="w-full"
               />
             </span>
           </div>

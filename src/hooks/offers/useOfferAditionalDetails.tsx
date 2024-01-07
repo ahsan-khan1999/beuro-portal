@@ -18,13 +18,14 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
   const { content, contentDetails } = useAppSelector((state) => state.content);
-
-
   useEffect(() => {
-    setValue("additionalDetails", offerDetails?.additionalDetails);
 
+    // setValue("additionalDetails", offerDetails?.additionalDetails || "<p>asd</p>");
+    setValue("content", offerDetails?.content?.id);
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
+  
+
 
   const schema = generateOfferAdditionalDetailsValidation(translate);
   const {
@@ -40,26 +41,27 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  useMemo(() => {
+    setValue("additionalDetails", offerDetails?.additionalDetails);
+  }, [offerDetails?.additionalDetails])
+
   const selectedContent = watch("content")
   const handleBack = () => {
     onHandleBack(ComponentsType.serviceAdded)
   }
-
-  useMemo(() => {
+  const onContentSelect = (id: string) => {
     const filteredContent = content?.find(
-      (item) => item.id === selectedContent
+      (item) => item.id === id
     );
-    if (filteredContent ) {
-      
+    if (filteredContent) {
       dispatch(setContentDetails(filteredContent))
       setValue("additionalDetails", filteredContent?.offerContent?.description);
-
-    }else{
+      trigger("additionalDetails")
 
     }
-  }, [selectedContent])
+  }
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handleBack, 0,
-    { content: content, contentDetails: contentDetails, offerDetails,selectedContent }, setValue, trigger);
+    { content: content, contentDetails: contentDetails, offerDetails, onContentSelect, selectedContent }, setValue, trigger);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: ComponentsType.additionalAdded }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));

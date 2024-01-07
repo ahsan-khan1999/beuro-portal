@@ -138,6 +138,7 @@ const PdfPriview = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
     null
   );
@@ -231,6 +232,7 @@ const PdfPriview = () => {
               address: offerDetails?.addressID?.address,
               header: offerDetails?.title,
               workDates: offerDetails?.date,
+              addressLabels:offerDetails?.content?.offerContent?.address
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {

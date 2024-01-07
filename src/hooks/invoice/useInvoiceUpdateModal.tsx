@@ -20,6 +20,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
+  let taxPercentage = 0
 
   const {
     register,
@@ -47,28 +48,33 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
   useMemo(() => {
     const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
+    taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {
-        setValue("amount", remainingAmount)
+        setValue("amount", invoiceDetails?.paidAmount)
         setValue("remainingAmount", remainingAmount - amount)
+
+      } else if (invoiceDetails?.paidAmount === amount) {
+        setValue("remainingAmount", remainingAmount)
 
       } else {
         setValue("remainingAmount", remainingAmount - amount)
+
       }
     }
     else if (type === '1') {
-      if (Number(remainingAmount) < calculateTax(Number(remainingAmount), amount)) {
+      if (Number(remainingAmount) < taxPercentage) {
         setValue("remainingAmount", remainingAmount)
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", Number(remainingAmount) - calculateTax(Number(remainingAmount), amount))
+        setValue("remainingAmount", Number(remainingAmount) - taxPercentage)
       }
     } else {
       setValue("remainingAmount", remainingAmount)
 
     }
-  }, [amount, type])
+  }, [amount, type]);
 
 
   useEffect(() => {
@@ -85,7 +91,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload)  invoiceCreated();
+    if (res?.payload) invoiceCreated();
   };
   return {
     error,

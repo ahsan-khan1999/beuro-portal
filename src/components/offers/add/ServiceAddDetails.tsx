@@ -8,7 +8,7 @@ import { ComponentsType } from "./AddOffersDetailsData";
 const ServiceAddDetails = ({ onHandleNext }: { onHandleNext: (currentComponent: ComponentsType) => void }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate ,systemSettings} =
     useAddServiceDetails(onHandleNext);
   return (
     <FormCard>

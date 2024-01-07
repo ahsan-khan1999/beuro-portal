@@ -14,21 +14,22 @@ const CustomCKEditor = ({
   <CKEditor
     id={id}
     editor={ClassicEditor}
-    data={data}
+    data={field.value || data}
     key={data}
     onReady={(editor) => {
+      console.log(field.value,"field.value");
       field.onChange(field.value);
 
     }}
     onChange={(event, editor) => {
       field.onChange(editor.getData());
     }}
-    onBlur={(event, editor) => {}}
-    onFocus={(event, editor) => {}}
+    onBlur={(event, editor) => { }}
+    onFocus={(event, editor) => { }}
     onError={(error, errorDetails) => {
       trigger?.(field.name);
     }}
-    
+
     config={{
       toolbar: {
         items: [

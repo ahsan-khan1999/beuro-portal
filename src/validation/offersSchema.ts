@@ -76,11 +76,11 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
 
     [EditOfferDetails.phoneNumber]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [EditOfferDetails.mobileNumber]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [EditOfferDetails.content]: yup
       .string()

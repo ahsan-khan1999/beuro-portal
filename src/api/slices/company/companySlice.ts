@@ -174,7 +174,6 @@ export const deletePlan: AsyncThunk<boolean, object, object> | any =
             await apiServices.deletePlan(data);
             return true;
         } catch (e: any) {
-            toast.error(e?.data?.message)
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;

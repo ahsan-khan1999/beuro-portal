@@ -56,7 +56,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.required_service")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {requiredService?.serviceName}
             </div>
           </div>
@@ -64,7 +64,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.desire_date")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
@@ -72,7 +72,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.flexibility")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.flexibility}
             </div>
           </div>
@@ -80,7 +80,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.availability")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.contactAvailability}
             </div>
           </div>
@@ -88,7 +88,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.prefer_contact")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.preferredContact}
             </div>
           </div>
@@ -96,7 +96,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.budget")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.budget}
             </div>
           </div>
@@ -107,7 +107,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.lead_source")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.leadSource}
             </div>
           </div>
@@ -115,8 +115,8 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.other_services")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap">
-              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
+              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis ">
                 {Array.isArray(otherServices) &&
                   otherServices?.map((item) => item.serviceName + ", ")}
               </span>

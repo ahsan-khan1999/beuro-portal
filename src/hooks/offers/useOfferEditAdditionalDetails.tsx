@@ -41,35 +41,23 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  useMemo(() => {
+    setValue("additionalDetails", offerDetails?.additionalDetails);
+  }, [offerDetails?.additionalDetails])
   const selectedContent = watch("content")
   const handlePrevious = () => {
     handleBack(EditComponentsType.serviceEdit)
   }
-  // useMemo(() => {
-  //   const filteredContent = content?.find(
-  //     (item) => item.id === selectedContent
-  //   );
-  //   if (filteredContent ) {
-  //     dispatch(setContentDetails(filteredContent))
-  //     setValue("additionalDetails", filteredContent?.offerContent?.description);
 
-  //   }
-  // }, [selectedContent])
 
-  const onContentSelect = (id:string) => {
+  const onContentSelect = (id: string) => {
     const filteredContent = content?.find(
-      (item) => item.id === selectedContent
+      (item) => item.id === id
     );
-    console.log(filteredContent,"filteredContent",selectedContent);
-    
     if (filteredContent) {
       dispatch(setContentDetails(filteredContent))
-      reset({
-        additionalDetails: filteredContent?.offerContent?.description,
-        content: id
-
-      })
-      // setValue("additionalDetails", filteredContent?.offerContent?.description);
+      setValue("additionalDetails", filteredContent?.offerContent?.description);
+      trigger("additionalDetails")
 
     }
   }

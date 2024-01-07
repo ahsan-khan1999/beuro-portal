@@ -34,6 +34,8 @@ export const useServiceOfferEditDetail = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const { t: translate } = useTranslation();
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
@@ -47,7 +49,7 @@ export const useServiceOfferEditDetail = ({
     (state) => state.offer
   );
   const [serviceType, setServiceType] = useState<ServiceType[]>(
-    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE)|| [ServiceType.EXISTING_SERVICE],
+    offerDetails?.serviceDetail?.serviceDetail?.map((item) => item.serviceType === "New Service" ? ServiceType.NEW_SERVICE : ServiceType.EXISTING_SERVICE) || [ServiceType.EXISTING_SERVICE],
   );
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
@@ -76,7 +78,6 @@ export const useServiceOfferEditDetail = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  console.log(errors, "errors");
 
   const isTax = watch("isTax");
   const isDiscount = watch("isDiscount");
@@ -296,6 +297,8 @@ export const useServiceOfferEditDetail = ({
       taxType: taxType,
       discountType,
       tax: tax,
+      currency: systemSettings?.currency
+
     },
     append,
     remove,
@@ -345,5 +348,6 @@ export const useServiceOfferEditDetail = ({
     errors,
     error,
     translate,
+    systemSettings
   };
 };

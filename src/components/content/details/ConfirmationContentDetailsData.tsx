@@ -38,7 +38,7 @@ const ConfirmationContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.confirmation_title")}
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
             {contentDetail?.confirmationContent?.title}
           </p>
         </div>
@@ -48,7 +48,7 @@ const ConfirmationContentDetailsData = ({
             {translate("content.details.Confirmation_description")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.confirmationContent?.description,
             }}
@@ -59,7 +59,7 @@ const ConfirmationContentDetailsData = ({
             {translate("content.details.email_body")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.confirmationContent?.body,
             }}

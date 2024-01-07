@@ -36,7 +36,7 @@ const ServiceEditDetails = ({
         className={`${defaultClassName}`}
       />
       {
-        errors?.taxAmount && <span className="mt-[3px] text-red text-sm">{translate(errors?.taxAmount?.message as any) }</span>
+        errors?.taxAmount && <span className="mt-[3px] text-red text-sm">{translate(errors?.taxAmount?.message as any)}</span>
       }
     </FormCard>
   );

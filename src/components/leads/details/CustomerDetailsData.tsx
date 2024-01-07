@@ -44,7 +44,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {getKeyByValue(
                 staticEnums["CustomerType"],
                 leadDetails?.customerDetail?.customerType
@@ -55,7 +55,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.customerDetail?.fullName}
             </div>
           </div>
@@ -64,7 +64,7 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 Company Name
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.companyName}
               </div>
             </div>
@@ -73,7 +73,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
               <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis">
                 {leadDetails?.customerDetail?.email}
               </span>

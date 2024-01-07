@@ -47,7 +47,7 @@ const OfferContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.content_name")}
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
             {contentDetail?.contentName}
           </p>
         </div>
@@ -59,7 +59,7 @@ const OfferContentDetailsData = ({
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
             {contentDetail?.offerContent?.address?.map((item, key) => (
               <span
-                className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+                className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
                 key={key}
               >
                 {item}
@@ -72,7 +72,7 @@ const OfferContentDetailsData = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.offer_title")}
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
             {contentDetail?.offerContent?.title}
           </p>
         </div>
@@ -82,7 +82,7 @@ const OfferContentDetailsData = ({
             {translate("content.details.offer_description")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.offerContent?.description,
             }}
@@ -93,7 +93,7 @@ const OfferContentDetailsData = ({
             {translate("content.details.email_body")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"
+            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.offerContent?.body,
             }}
