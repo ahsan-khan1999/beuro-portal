@@ -3,6 +3,7 @@ export interface PDFResponse {
   contactAddress: ContactAddressProps;
   addressDetails: AddressDetailsProps;
   serviceDetails: ServiceDetailProps[];
+  additionalDetails: AdditionalDetailsProps;
 }
 export interface HeaderProps {
   companyLogo: string;
@@ -48,10 +49,15 @@ export interface AddressDetailsProps {
   dates: DateRangeProps[];
 }
 
-export interface ServiceDetailProps {
+export interface  ServiceDetailProps {
   description: string;
   price: string;
   unit: string;
   count: string;
   total: string;
+}
+
+export interface AdditionalDetailsProps {
+  heading: string;
+  description: string;
 }

@@ -14,6 +14,7 @@ import { PDFResponse } from "@/types/pdf";
 import { AddressDetails } from "./address-details";
 import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
+import { AdditionalDetails } from "./additional-details";
 
 Font.register({
   family: "Poppins",
@@ -115,7 +116,8 @@ export const PDF_DATA: PDFResponse = {
   serviceDetails: [
     {
       count: "10",
-      description: "This is dummy description This is dummy description This is dummy description This is dummy description",
+      description:
+        "This is dummy description This is dummy description This is dummy description This is dummy description",
       price: "345",
       total: "3450",
       unit: "std",
@@ -163,6 +165,11 @@ export const PDF_DATA: PDFResponse = {
       unit: "std",
     },
   ],
+  additionalDetails: {
+    heading: "Zahlungsarten",
+    description:
+      "Banküberweisung: Sie können den Betrag auf unser angegebenes Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).",
+  },
 };
 
 export const A4_WIDTH = 595; // 72dpi
@@ -199,6 +206,24 @@ const PDFLayout = () => {
             {PDF_DATA.serviceDetails.map((item, index) => (
               <ServiceTableRow {...item} key={index} />
             ))}
+          </View>
+        </Page>
+
+        {/* additional details */}
+        <Page size="A4" style={styles.body}>
+          <Header
+            companyLogo={PDF_DATA.header.companyLogo}
+            offerNumber={PDF_DATA.header.offerNumber}
+            offerDate={PDF_DATA.header.offerDate}
+            createdBy={PDF_DATA.header.createdBy}
+          />
+          <View style={{ position: "absolute", top: 120 }}>
+            <ContactAddress
+              company={PDF_DATA.contactAddress.company}
+              createdBy={PDF_DATA.contactAddress.createdBy}
+              customerDetail={PDF_DATA.contactAddress.customerDetail}
+            />
+            <AdditionalDetails {...PDF_DATA.additionalDetails} />
           </View>
         </Page>
       </Document>
