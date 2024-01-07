@@ -31,6 +31,7 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
+    dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE))
     dispatch(
       readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {

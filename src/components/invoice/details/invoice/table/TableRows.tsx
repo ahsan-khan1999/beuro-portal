@@ -31,6 +31,7 @@ const TableRows = ({
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
+  const { systemSettings } = useAppSelector(state => state.settings)
   const handleInvoicePdfPreview = (id?: string) => {
     router.pathname = "/invoices/compose-mail";
     router.query = { invoiceID: id };
@@ -59,7 +60,7 @@ const TableRows = ({
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">
-              {item.amount + " CHF"}
+              {item.amount + " " + systemSettings?.currency}
             </span>
 
             <span className="py-4 flex justify-center items-center">
@@ -82,11 +83,10 @@ const TableRows = ({
                 onItemSelected={(status) =>
                   handlePaymentStatusUpdate(item.id, status, "invoice")
                 }
-                dropDownClassName={`${
-                  staticEnums["PaymentType"][item.paymentType] === 0
-                    ? "bg-[#45C769]"
-                    : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownClassName={`${staticEnums["PaymentType"][item.paymentType] === 0
+                  ? "bg-[#45C769]"
+                  : "bg-[#4A13E7]"
+                  } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 dropDownItemsContainerClassName="w-full"
@@ -101,13 +101,12 @@ const TableRows = ({
                 onItemSelected={(status) =>
                   handleInvoiceStatusUpdate(item.id, status, "invoice")
                 }
-                dropDownClassName={`${
-                  staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
-                    ? "bg-[#45C769]"
-                    : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
+                dropDownClassName={`${staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
+                  ? "bg-[#45C769]"
+                  : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center`}
+                  }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 key={item.id}

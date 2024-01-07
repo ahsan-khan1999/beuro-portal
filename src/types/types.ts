@@ -33,7 +33,7 @@ import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
-import { TaxSetting } from "@/api/slices/settingSlice/settings";
+import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -385,7 +385,7 @@ export type GenerateOffersFormField = (
     leadDetails?: Lead;
     service?: Service[];
     handleRemove?: (id: string) => void;
-    onContentSelect?: (id:string) => void;
+    onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string
   },
@@ -418,6 +418,7 @@ export type GenerateOfferServiceFormField = (
     generatePrice?: (index: number) => void;
     total?: Total;
     tax?: TaxSetting[] | null;
+    currency?:string
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -449,7 +450,8 @@ export type GenerateLeadsFormField = (
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
   service?: Service[],
-  leadDetails?: Lead
+  leadDetails?: Lead,
+  systemSettings?:SystemSetting | null
 ) => FormField[];
 export type GenerateCustomerLeadFormField = (
   register: UseFormRegister<FieldValues>,
@@ -647,6 +649,7 @@ export interface MovingDetailsProps {
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
+  addressLabels?: string[]
 }
 export interface ProductItemProps {
   title: string;

@@ -29,7 +29,7 @@ export default function useContractDetail() {
   const { modal } = useAppSelector((state) => state.global);
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(false);
-
+  const { systemSettings } = useAppSelector(state => state.settings)
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
@@ -216,5 +216,6 @@ export default function useContractDetail() {
     handleSendEmail,
     loading,
     handleViewPdf,
+    systemSettings
   };
 }

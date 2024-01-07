@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: "row",
-    maxWidth: 595,
+    maxWidth: 575,
     width: "100%",
-    columnGap: 20,
+    columnGap: 60,
   },
   description: {
     color: "#000",
@@ -23,25 +23,25 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     display: "flex",
     flexDirection: "column",
-    maxWidth: 250,
-    width: "100%",
+    width: 230,
   },
   descriptionTextTitle: {
     color: "#000",
     fontSize: 12,
     fontWeight: "medium",
-    width: 250,
+    width: 230,
+    textAlign: "justify",
   },
   descriptionText: {
     color: "#000",
     fontSize: 12,
     fontWeight: "medium",
-    width: 250,
+    width: 230,
+    textAlign: "justify",
   },
   priceHeader: {
     flexDirection: "row",
-    maxWidth: 345,
-    width: "100%",
+    width: 345,
   },
   headerText: {
     color: "#000",

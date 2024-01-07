@@ -777,7 +777,7 @@
       "heading": "Service/Product Details",
       "title": "Service/Product Title",
       "description": "Description",
-      "price": "Price(CHF)",
+      "price": "Price",
       "unit": "Unit",
       "count": "Count",
       "total_price": "Total Price",
@@ -1051,7 +1051,7 @@
     },
     "images_modal": {
       "heading": "Images",
-      "title": "7 images uploaded",
+      "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
       "image_slider_heading": "Image Name"
     },
@@ -1213,7 +1213,7 @@
         "exit_service": "Existing Service",
         "title": "Service/Product Title",
         "description": "Description",
-        "price": "Price(CHF)",
+        "price": "Price ",
         "unit": "Unit",
         "count": "Count",
         "total_price": "Total Price",

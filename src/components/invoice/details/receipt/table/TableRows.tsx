@@ -8,6 +8,7 @@ import { staticEnums } from "@/utils/static";
 import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { updateQuery } from "@/utils/update-query";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const TableRows = ({
   collectiveInvoice,
@@ -19,6 +20,8 @@ const TableRows = ({
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
+  const { systemSettings } = useAppSelector(state => state.settings)
+
   const handleReceiptPreview = (id?: string) => {
     router.pathname = "/invoices/receipt-email";
     router.query = { invoiceID: id };
@@ -46,7 +49,7 @@ const TableRows = ({
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center mlg:hidden xlg:flex">
-              {item.amount + " CHF"}
+              {item.amount + " " + systemSettings?.currency}
             </span>
 
             <span className="py-4 flex items-center justify-center">
@@ -69,11 +72,10 @@ const TableRows = ({
                 onItemSelected={(status) =>
                   handlePaymentStatusUpdate(item.id, status, "reciept")
                 }
-                dropDownClassName={`${
-                  staticEnums["PaymentType"][item.paymentType] === 0
+                dropDownClassName={`${staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
+                  } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 dropDownItemsContainerClassName="w-full"
@@ -88,13 +90,12 @@ const TableRows = ({
                 onItemSelected={(status) =>
                   handleInvoiceStatusUpdate(item.id, status, "reciept")
                 }
-                dropDownClassName={`${
-                  staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
+                dropDownClassName={`${staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
                     ? "bg-[#45C769]"
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
-                    ? "bg-[#4A13E7]"
-                    : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
+                      ? "bg-[#4A13E7]"
+                      : "bg-red"
+                  }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 dropDownItemsContainerClassName="w-full"

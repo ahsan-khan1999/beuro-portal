@@ -21,6 +21,8 @@ import { readCustomer } from "@/api/slices/customer/customerSlice";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { useTranslation } from "next-i18next";
+import { getUser } from "@/utils/auth.util";
+import { isJSON } from "@/utils/functions";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +30,7 @@ const useGeneralFollowUp = () => {
   const { followUp, followUpDetails, loading } = useAppSelector(
     (state) => state.followUp
   );
+  const user  = isJSON(getUser())
   const [filter, setFilter] = useState<FilterType>({
     text: "",
   });
@@ -44,7 +47,7 @@ const useGeneralFollowUp = () => {
   });
 
   useEffect(() => {
-    if (followUp?.length === 0)
+    if (user?.role !== "Admin")
       dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   }, [dispatch]);
   const onClose = () => {

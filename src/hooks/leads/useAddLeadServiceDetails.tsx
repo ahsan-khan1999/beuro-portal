@@ -23,6 +23,8 @@ export const useAddLeadServiceDetails = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const { service } = useAppSelector((state) => state.service);
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
@@ -57,7 +59,8 @@ export const useAddLeadServiceDetails = ({
     onHandleBack,
     trigger,
     service,
-    leadDetails
+    leadDetails,
+    systemSettings
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalAdd }

@@ -17,10 +17,10 @@ export const ContactAddress = ({
   <View style={container}>
     <View style={leftColumn}>
       <Text style={textBase}>{customerDetail.fullName}</Text>
-      <Text style={textBase}>{customerDetail.address.streetNumber}</Text>
+      <Text style={textBase}>{customerDetail?.address?.streetNumber}</Text>
       <Text
         style={textBase}
-      >{`${customerDetail.address.postalCode} ${customerDetail.address.country}`}</Text>
+      >{`${customerDetail?.address?.postalCode} ${customerDetail?.address?.country}`}</Text>
     </View>
     <View style={rightColumn}>
       <Text style={textBase}>Email: {email}</Text>

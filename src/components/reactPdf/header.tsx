@@ -34,7 +34,7 @@ export const Header = ({
       </View>
       <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
         <Text style={{ width: 100 }}>Created By:</Text>
-        <Text>{createdBy}</Text>
+        <Text>{createdBy?.fullName}</Text>
       </View>
     </View>
   </View>

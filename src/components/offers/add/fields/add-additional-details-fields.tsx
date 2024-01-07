@@ -21,7 +21,6 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         htmlFor: "content",
         className: "mb-[10px]",
       },
-      //@ts-expect-error
       field: {
         className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
         type: Field.select,
@@ -33,7 +32,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             value: item.id,
           })) || [],
         control,
-        // value: (offerDetails?.id && offerDetails?.content?.id) || "",
+        value: selectedContent || "",
         onItemChange: onContentSelect,
         trigger,
       },

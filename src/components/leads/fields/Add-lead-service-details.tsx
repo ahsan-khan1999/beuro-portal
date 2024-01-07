@@ -10,7 +10,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   onHandleBack,
   trigger,
   service,
-  leadDetails
+  leadDetails, systemSettings
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -177,12 +177,12 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
 
               options: [
                 {
-                  value: "Less then 1000CHF",
-                  label: "Less then 1000CHF",
+                  value: `Less then 1000${systemSettings?.currency}`,
+                  label: `Less then 1000${systemSettings?.currency}`,
                 },
                 {
-                  value: "Less then 500CHF",
-                  label: "Less then 500CHF",
+                  value: `Less then 500${systemSettings?.currency}`,
+                  label: `Less then 500${systemSettings?.currency}`,
                 },
               ],
               control,

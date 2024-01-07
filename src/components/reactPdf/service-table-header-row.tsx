@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: "row",
-    columnGap: 20,
+    columnGap: 60,
     maxWidth: 595,
     width: "100%",
   },
@@ -21,13 +21,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "medium",
     paddingLeft: 12,
-    maxWidth: 250,
-    width: "100%",
+    width: 230,
   },
   priceHeader: {
     flexDirection: "row",
-    maxWidth: 345,
-    width: "100%",
+    width: 345,
   },
   headerText: {
     color: "white",

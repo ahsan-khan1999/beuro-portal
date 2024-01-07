@@ -22,6 +22,8 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   const handleBack = () => {
     onClick(2, ComponentsType.service);
   };
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
@@ -54,7 +56,8 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     handleBack,
     trigger,
     service,
-    leadDetails
+    leadDetails,
+    systemSettings
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
