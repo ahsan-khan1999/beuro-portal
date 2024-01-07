@@ -58,7 +58,7 @@ export const {
 } = StyleSheet.create({
   container: {
     display: "flex",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     flexDirection: "row",
     marginTop: 5,
     padding: 20,
@@ -73,6 +73,7 @@ export const {
   textBase: {
     color: "#000",
     fontSize: 16,
+    fontWeight: "medium",
   },
   textSmall: {
     color: "#000",

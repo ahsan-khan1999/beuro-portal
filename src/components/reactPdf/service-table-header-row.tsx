@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "white",
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: "medium",
     paddingLeft: 12,
     width: 230,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "white",
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: "medium",
     width: 86.25,
   },

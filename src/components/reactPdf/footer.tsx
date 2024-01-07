@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "#EEEEEE",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
     position: "absolute",
     fontSize: 12,
@@ -21,9 +21,12 @@ const styles = StyleSheet.create({
   footerSection: {
     borderRight: 1,
     borderColor: "#D9D9D9",
+    paddingRight: 10,
   },
   footerText: {
-    fontSize: 10,
+    fontSize: 14,
+    color: "#000",
+    fontWeight: "normal",
     marginBottom: 2,
   },
   pageNumberContainer: {
@@ -34,8 +37,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   pageNumberText: {
-    fontSize: 10,
-    color: "#1E1E1E",
+    fontSize: 14,
+    fontWeight: "medium",
+    color: "#000",
   },
 });
 
@@ -64,14 +68,14 @@ export const Footer = ({
       <Text style={styles.footerText}>{company.taxNumber}</Text>
     </View>
     <View style={styles.footerSection}>
-      <Text style={styles.pageNumberText}>Row 1 </Text>
+      <Text style={styles.pageNumberText}>Row 1</Text>
       <Text style={styles.pageNumberText}>Row 2</Text>
       <Text style={styles.pageNumberText}>Row 3</Text>
       <Text style={styles.pageNumberText}>Row 4</Text>
       <Text style={styles.pageNumberText}>Row 5</Text>
     </View>
     <View style={styles.footerSection}>
-      <Text style={styles.pageNumberText}>Row 1 </Text>
+      <Text style={styles.pageNumberText}>Row 1</Text>
       <Text style={styles.pageNumberText}>Row 2</Text>
       <Text style={styles.pageNumberText}>Row 3</Text>
       <Text style={styles.pageNumberText}>Row 4</Text>

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#000",
     paddingBottom: 3,
     borderBottomWidth: 3,
     marginBottom: 8,
@@ -37,6 +38,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dateText: {
+    fontSize: 16,
+    fontWeight: "medium",
+    color: "#000",
   },
   datesColumn: {
     display: "flex",
@@ -48,12 +52,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   dateBlock: {},
-  addressItemText: {
-    fontStyle: "bold",
-    fontSize: 16,
-    fontWeight: 600,
-    color: "#000",
-  },
 });
 
 export const AddressDetails = ({
@@ -67,8 +65,16 @@ export const AddressDetails = ({
     {addresses.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
-          <Text style={styles.addressItemText}>Address {index + 1}:</Text>
-          <Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "#000",
+            }}
+          >
+            Address {index + 1}:
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
             {address.description && `, ${address.description}`}
           </Text>
@@ -77,7 +83,15 @@ export const AddressDetails = ({
     ))}
 
     <View style={styles.dateRow}>
-      <Text style={styles.addressItemText}>Work Dates:</Text>
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: "bold",
+          color: "#000",
+        }}
+      >
+        Work Dates:
+      </Text>
       <View style={styles.datesColumn}>
         {dates.map((date, index) => (
           <Text style={styles.dateText} key={index}>
