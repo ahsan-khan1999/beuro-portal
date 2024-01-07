@@ -1,17 +1,21 @@
-// import {
-//   Document,
-//   Page,
-//   Text,
-//   View,
-//   Image,
-//   PDFViewer,
-//   StyleSheet,
-//   Font,
-// } from "@react-pdf/renderer";
-// import { Header } from "./header";
-// import { ContactAddress } from "./contact-address";
 import { PDFResponse } from "@/types/pdf";
 import { AdditionalDetails } from "./additional-details";
+import {
+  Document,
+  Font,
+  PDFViewer,
+  Page,
+  StyleSheet,
+  View,
+} from "@react-pdf/renderer";
+import { Header } from "./header";
+import { Footer } from "./footer";
+import { ContactAddress } from "./contact-address";
+import { AddressDetails } from "./address-details";
+import { ServiceTableHederRow } from "./service-table-header-row";
+import { ServiceTableRow } from "./service-table-row";
+import { ServicesTotalAmount } from "./services-total-ammount";
+import { QRCode } from "./qr-code";
 
 Font.register({
   family: "Poppins",
@@ -195,7 +199,7 @@ export const PDF_DATA: PDFResponse = {
   additionalDetails: {
     heading: "Zahlungsarten",
     description:
-      "Banküberweisung: Sie können den Betrag auf unser angegebenes Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).",
+      "<h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p>",
   },
 
   offerID: {
@@ -230,75 +234,6 @@ export const PDF_DATA: PDFResponse = {
     },
   },
 };
-
-// export const A4_WIDTH = 595; // 72dpi
-// export const A4_HEIGHT = 842; // 72dpi
-
-// const styles = StyleSheet.create({
-//   body: {
-//     fontFamily: "Poppins",
-//     fontWeight: 400,
-//     fontSize: 16,
-//     paddingBottom: 30,
-//   },
-// });
-
-// const PDFLayout = () => {
-//   return (
-//     <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
-//       {/* <Document>
-//         <Page size="A4" style={styles.body}>
-//           <Header
-//             companyLogo={PDF_DATA.header.companyLogo}
-//             offerNumber={PDF_DATA.header.offerNumber}
-//             offerDate={PDF_DATA.header.offerDate}
-//             createdBy={PDF_DATA.header.createdBy}
-//           />
-//           <View style={{ position: "absolute", top: 120 }}>
-//             <ContactAddress
-//               company={PDF_DATA.contactAddress.company}
-//               createdBy={PDF_DATA.contactAddress.createdBy}
-//               customerDetail={PDF_DATA.contactAddress.customerDetail}
-//             />
-//             <AddressDetails {...PDF_DATA.addressDetails} />
-//             <ServiceTableHederRow />
-//             {PDF_DATA.serviceDetails.map((item, index) => (
-//               <ServiceTableRow {...item} count={`${index + 1}`} key={index} />
-//             ))}
-//             <Footer
-//               {...PDF_DATA.footer}
-//               pages="10"
-//               createdBy={PDF_DATA.createdBy}
-//             />
-//           </View>
-//         </Page>
-//       </Document> */}
-
-//       <Quixote />
-//     </PDFViewer>
-//   );
-// };
-
-// export default PDFLayout;
-
-import ReactPDF, {
-  Document,
-  Font,
-  Image,
-  PDFViewer,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
-import { Header } from "./header";
-import { Footer } from "./footer";
-import { ContactAddress } from "./contact-address";
-import { AddressDetails } from "./address-details";
-import { ServiceTableHederRow } from "./service-table-header-row";
-import { ServiceTableRow } from "./service-table-row";
-import { ServicesTotalAmount } from "./services-total-ammount";
-import { QRCode } from "./qr-code";
 
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi

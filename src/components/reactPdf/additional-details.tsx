@@ -1,6 +1,8 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
+import Html, { HtmlStyles } from "react-pdf-html";
+
 const styles = StyleSheet.create({
   borderDiv: {
     borderTop: 3,
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    gap: 20,
+    rowGap: 60
   },
   heading: {
     marginBottom: 2,
@@ -58,33 +60,55 @@ const styles = StyleSheet.create({
   },
 });
 
+const stylesheet: HtmlStyles = {
+  // clear margins for all <p> tags
+  p: {
+    margin: 0,
+  },
+  h1: {
+    margin: 0,
+    padding: 0,
+  },
+  h2: {
+    margin: 0,
+    padding: 0,
+  },
+  h3: {
+    margin: 0,
+    padding: 0,
+  },
+  h4: {
+    margin: 0,
+    padding: 0,
+  },
+  h5: {
+    margin: 0,
+    padding: 0,
+  },
+  h6: {
+    margin: 0,
+    padding: 0,
+  },
+};
+
 export const AdditionalDetails = ({
   heading,
   description,
 }: AdditionalDetailsProps) => (
   <View style={styles.borderDiv}>
     <View style={styles.container}>
-      <View>
-        <Text style={styles.heading}>{heading}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
-      <View>
-        <Text style={styles.heading}>{heading}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
-      <View>
-        <Text style={styles.heading}>{heading}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
+      <Html stylesheet={stylesheet}>{description}</Html>
 
-      <Text style={styles.shareHeading}>I share the contract with you.</Text>
+      <View style={{}}>
+        <Text style={styles.shareHeading}>I share the contract with you.</Text>
 
-      <View style={styles.dateContainer}>
-        <View style={styles.innerDate}>
-          <Text style={styles.dateText}>Date</Text>
-        </View>
-        <View style={styles.signature}>
-          <Text style={styles.dateText}>Signature</Text>
+        <View style={styles.dateContainer}>
+          <View style={styles.innerDate}>
+            <Text style={styles.dateText}>Date</Text>
+          </View>
+          <View style={styles.signature}>
+            <Text style={styles.dateText}>Signature</Text>
+          </View>
         </View>
       </View>
     </View>
