@@ -197,6 +197,7 @@ export const PDF_DATA: PDFResponse = {
     description:
       "Banküberweisung: Sie können den Betrag auf unser angegebenes Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).",
   },
+
   offerID: {
     discountAmount: "65675",
     discountDescription:
@@ -204,6 +205,28 @@ export const PDF_DATA: PDFResponse = {
     subTotal: "555",
     taxAmount: "7.7",
     total: "3456",
+  },
+  qrDetails: {
+    bankSideDetails: {
+      heading: "Empfangsschenin",
+      account: "Konto/ Zahlbar an",
+      iban_number: "CH48 0900 0000 1556 1356 9",
+      bank_name: "Rahal GmbH",
+      company_address: "St.Urbanstrasse 79",
+      street: "4914 Roggwil",
+      reference_number: "27 12323 0000 0000 0006 22926",
+      payable: "Zahlbar durch",
+      payable_name: "Rahal GmbH",
+      payable_address: "St. Urbanstrasse  79",
+      payable_street: "4914 Roggwill BE",
+      currency: "CHF",
+      amount: "12221",
+    },
+    qrSideDetails: {
+      heading: "Zahlteil",
+      currency:"CHF",
+      amount: "23232"
+    }
   },
 };
 
@@ -274,6 +297,7 @@ import { AddressDetails } from "./address-details";
 import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
+import { QRDetails } from "./qr-code";
 
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
@@ -327,6 +351,33 @@ const PDF = () => (
           <AdditionalDetails {...PDF_DATA.additionalDetails} />
         </View>
         <Footer {...PDF_DATA.footer} />
+      </Page>
+      {/* QR code screen */}
+      <Page size="A4" style={styles.body}>
+        <Header
+          companyLogo={PDF_DATA.header.companyLogo}
+          offerNumber={PDF_DATA.header.offerNumber}
+          offerDate={PDF_DATA.header.offerDate}
+          createdBy={PDF_DATA.header.createdBy}
+        />
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
+          <ContactAddress
+            company={PDF_DATA.contactAddress.company}
+            createdBy={PDF_DATA.contactAddress.createdBy}
+            customerDetail={PDF_DATA.contactAddress.customerDetail}
+          />
+
+          <QRDetails {...PDF_DATA.qrDetails}/>
+
+          {/* <Footer {...PDF_DATA.footer} /> */}
+        </View>
       </Page>
     </Document>
   </PDFViewer>
