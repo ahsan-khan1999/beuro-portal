@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface PDFResponse {
   header: HeaderProps;
   contactAddress: ContactAddressProps;
@@ -6,6 +8,34 @@ export interface PDFResponse {
   footer: FooterProps;
   createdBy: CreatedByProps;
   additionalDetails: AdditionalDetailsProps;
+  qrDetails: QRDetailsProps;
+}
+
+export interface QRDetailsProps {
+  bankSideDetails: BankSideDetailsProps;
+  qrSideDetails: QRSideDetailsProps;
+}
+
+export interface BankSideDetailsProps {
+  heading: string;
+  account: string;
+  iban_number: string;
+  bank_name: string;
+  company_address: string;
+  street: string;
+  reference_number: string;
+  payable: string;
+  payable_name: string;
+  payable_address: string;
+  payable_street: string;
+  currency: string;
+  amount: string;
+}
+
+export interface QRSideDetailsProps {
+  heading: string;
+  currency: string;
+  amount: String;
 }
 export interface HeaderProps {
   companyLogo?: string;
