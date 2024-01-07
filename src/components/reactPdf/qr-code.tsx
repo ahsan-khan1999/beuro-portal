@@ -1,3 +1,4 @@
+import { qrCode } from "@/types";
 import { QRCodeProps } from "@/types/pdf";
 import { Text, View, Image, StyleSheet } from "@react-pdf/renderer";
 
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
   },
 });
-export const QRCode = ({ bank, qr }: QRCodeProps) => {
+export const QRCode = ({ acknowledgementSlip, payableTo }: Partial<qrCode>) => {
   return (
     <View style={styles.container}>
       <View style={styles.borderContainer}>
@@ -88,10 +89,18 @@ export const QRCode = ({ bank, qr }: QRCodeProps) => {
           <View style={styles.qrLeftColumn}>
             <Text style={styles.sectionHeading}>{"Empfangsschenin"}</Text>
             <Text style={styles.infoTitleText}>Konto/ Zahlbar an</Text>
-            <Text style={styles.infoText}>{bank.ibanNumber}</Text>
-            <Text style={styles.infoText}>{bank.bankName}</Text>
-            <Text style={styles.infoText}>{bank.companyAddress}</Text>
-            <Text style={styles.infoText}>{bank.street}</Text>
+            <Text style={styles.infoText}>
+              {acknowledgementSlip?.accountDetails?.accountNumber}
+            </Text>
+            <Text style={styles.infoText}>
+              {acknowledgementSlip?.accountDetails?.name}
+            </Text>
+            <Text style={styles.infoText}>
+              {acknowledgementSlip?.accountDetails?.city}
+            </Text>
+            <Text style={styles.infoText}>
+              {acknowledgementSlip?.accountDetails?.street}
+            </Text>
             {/* <View style={styles.additionalInfo}>
               <Text style={styles.additionalInfoText}>
                 Zusätzliche Informationen
@@ -102,57 +111,96 @@ export const QRCode = ({ bank, qr }: QRCodeProps) => {
             </View> */}
             <View style={{ marginTop: 36 }}>
               <Text style={styles.infoTitleText}>Zahlbar durch</Text>
-              <Text style={styles.infoText}>{bank.payableName}</Text>
-              <Text style={styles.infoText}>{bank.payableAddress}</Text>
-              <Text style={styles.infoText}>{bank.payableStreet}</Text>
+              <Text style={styles.infoText}>
+                {acknowledgementSlip?.payableByDetails?.name}
+              </Text>
+              <Text style={styles.infoText}>
+                {acknowledgementSlip?.payableByDetails?.city}
+              </Text>
+              <Text style={styles.infoText}>
+                {acknowledgementSlip?.payableByDetails?.street}
+              </Text>
               <View
                 style={{ marginTop: 24, flexDirection: "row", columnGap: 16 }}
               >
                 <View style={{ flexDirection: "column", rowGap: 4 }}>
                   <Text style={styles.infoText}>Währung</Text>
-                  <Text style={styles.infoText}>{bank.currency}</Text>
+                  <Text style={styles.infoText}>
+                    {acknowledgementSlip?.currency}
+                  </Text>
                 </View>
                 <View style={{ flexDirection: "column", rowGap: 4 }}>
                   <Text style={styles.infoText}>Betrag</Text>
-                  <Text style={styles.infoText}>{bank.amount}</Text>
+                  <Text style={styles.infoText}>
+                    {acknowledgementSlip?.amount}
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
 
           <View style={styles.qrSection}>
-            <Text style={styles.sectionHeading}>{qr.heading}</Text>
+            <Text style={styles.sectionHeading}>{"Zahlteil"}</Text>
             <View style={{ marginTop: 30 }}>
               <Image src="/assets/images/qr.png" />
             </View>
-            <View style={styles.currencyAmountSection}>
-              <Text style={styles.currencyAmountText}>
-                Währung: {qr.currency}
-              </Text>
-              <Text style={styles.currencyAmountText}>Betrag: {qr.amount}</Text>
+
+            <View
+              style={{ marginTop: 24, flexDirection: "row", columnGap: 16 }}
+            >
+              <View style={{ flexDirection: "column", rowGap: 4 }}>
+                <Text style={styles.infoText}>Währung</Text>
+                <Text style={styles.infoText}>
+                  {acknowledgementSlip?.currency}
+                </Text>
+              </View>
+              <View style={{ flexDirection: "column", rowGap: 4 }}>
+                <Text style={styles.infoText}>Betrag</Text>
+                <Text style={styles.infoText}>
+                  {acknowledgementSlip?.amount}
+                </Text>
+              </View>
             </View>
           </View>
+
           <View style={styles.rightSection}>
-            <Text style={styles.sectionHeading}>{bank.heading}</Text>
-            <Text style={styles.infoText}>Konto/ Zahlbar an</Text>
-            <Text style={styles.infoText}>{bank.ibanNumber}</Text>
-            <Text style={styles.infoText}>{bank.bankName}</Text>
-            <Text style={styles.infoText}>{bank.companyAddress}</Text>
-            <Text style={styles.infoText}>{bank.street}</Text>
+            <Text style={styles.sectionHeading}>Konto / Zahlbar an</Text>
+            <Text style={styles.infoText}>
+              {payableTo?.accountDetails.accountNumber}
+            </Text>
+            <Text style={styles.infoText}>
+              {payableTo?.accountDetails.name}
+            </Text>
+            <Text style={styles.infoText}>
+              {payableTo?.accountDetails.city}
+            </Text>
+            <Text style={styles.infoText}>
+              {payableTo?.accountDetails.street}
+            </Text>
             <View style={styles.additionalInfo}>
               <Text style={styles.additionalInfoText}>
                 Zusätzliche Informationen
               </Text>
               <Text style={styles.additionalInfoText}>
-                {bank.referenceNumber}
+                {payableTo?.referenceNumber}
               </Text>
             </View>
             <Text style={styles.infoText}>Zahlbar durch</Text>
-            <Text style={styles.infoText}>{bank.payableName}</Text>
-            <Text style={styles.infoText}>{bank.payableAddress}</Text>
-            <Text style={styles.infoText}>{bank.payableStreet}</Text>
-            <Text style={styles.infoText}>Währung: {bank.currency}</Text>
-            <Text style={styles.infoText}>Betrag: {bank.amount}</Text>
+            <Text style={styles.infoText}>
+              {payableTo?.payableByDetails.name}
+            </Text>
+            <Text style={styles.infoText}>
+              {payableTo?.payableByDetails.city}
+            </Text>
+            <Text style={styles.infoText}>
+              {payableTo?.payableByDetails.street}
+            </Text>
+            <Text style={styles.infoText}>
+              Währung: {acknowledgementSlip?.currency}
+            </Text>
+            <Text style={styles.infoText}>
+              Betrag: {acknowledgementSlip?.amount}
+            </Text>
           </View>
         </View>
       </View>

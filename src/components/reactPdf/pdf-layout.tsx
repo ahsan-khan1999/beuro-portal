@@ -16,6 +16,7 @@ import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { QRCode } from "./qr-code";
+import { usePdfDownload } from "@/hooks/contract/usePdfDownload";
 
 Font.register({
   family: "Poppins",
@@ -238,71 +239,76 @@ export const PDF_DATA: PDFResponse = {
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const PDF = () => (
-  <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
-    <Document>
-      <Page style={styles.body}>
-        <Header {...PDF_DATA.header} />
-        <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 120,
-          }}
-        >
-          <ContactAddress
-            company={PDF_DATA.contactAddress.company}
-            createdBy={PDF_DATA.contactAddress.createdBy}
-            customerDetail={PDF_DATA.contactAddress.customerDetail}
+const PDF = () => {
+  const { offerData } = usePdfDownload("65983c34c2849172189b40d1");
+  console.log(offerData);
+
+  const headerDetails = offerData?.headerDetails;
+  const { address, header, workDates } = offerData?.movingDetails || {};
+  const contactAddress = offerData?.contactAddress;
+  const serviceItem = offerData?.serviceItem;
+  const serviceItemFooter = offerData?.serviceItemFooter;
+  const aggrementDetails = offerData?.aggrementDetails;
+  const qrCode = offerData?.qrCode;
+  // const dates = offerData?.
+  // console.log(addresses);
+
+  return (
+    <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
+      <Document>
+        <Page style={styles.body}>
+          <Header {...headerDetails} />
+          <View
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 120,
+            }}
+          >
+            <ContactAddress {...{ ...contactAddress }} />
+
+            <AddressDetails {...{ address, header, workDates }} />
+
+            <ServiceTableHederRow />
+            {serviceItem?.map((item, index) => (
+              <ServiceTableRow {...item} key={index} />
+            ))}
+            <ServicesTotalAmount {...serviceItemFooter} />
+          </View>
+          <Footer {...PDF_DATA.footer} />
+        </Page>
+
+        {/* Additional details */}
+        <Page style={styles.body}>
+          <Header {...headerDetails} />
+          <View
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 120,
+            }}
+          >
+            <ContactAddress {...{ ...contactAddress }} />
+            <AdditionalDetails description={aggrementDetails} />
+          </View>
+          <Footer {...PDF_DATA.footer} />
+        </Page>
+
+        {/* QR code screen */}
+        <Page size="A4" style={styles.body}>
+          <QRCode
+            acknowledgementSlip={qrCode?.acknowledgementSlip}
+            payableTo={qrCode?.payableTo}
           />
-
-          <AddressDetails {...PDF_DATA.addressDetails} />
-
-          <ServiceTableHederRow />
-          {PDF_DATA.serviceDetails.map((item, index) => (
-            <ServiceTableRow {...item} count={`${index + 1}`} key={index} />
-          ))}
-          <ServicesTotalAmount {...PDF_DATA.offerID} />
-        </View>
-        <Footer {...PDF_DATA.footer} />
-      </Page>
-
-      {/* Additional details */}
-      <Page style={styles.body}>
-        <Header {...PDF_DATA.header} />
-        <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 120,
-          }}
-        >
-          <ContactAddress
-            company={PDF_DATA.contactAddress.company}
-            createdBy={PDF_DATA.contactAddress.createdBy}
-            customerDetail={PDF_DATA.contactAddress.customerDetail}
-          />
-          <AdditionalDetails {...PDF_DATA.additionalDetails} />
-        </View>
-        <Footer {...PDF_DATA.footer} />
-      </Page>
-
-      {/* QR code screen */}
-      <Page size="A4" style={styles.body}>
-        <QRCode {...PDF_DATA.qrDetails} />
-      </Page>
-    </Document>
-  </PDFViewer>
-);
+        </Page>
+      </Document>
+    </PDFViewer>
+  );
+};
 
 export default PDF;
-
-// Font.register({
-//   family: "Oswald",
-//   src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
-// });
 
 const styles = StyleSheet.create({
   body: {

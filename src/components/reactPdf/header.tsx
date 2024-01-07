@@ -1,12 +1,15 @@
+import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderProps } from "@/types/pdf";
+import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
-  companyLogo,
-  offerNumber,
-  offerDate,
   createdBy,
-}: HeaderProps) => (
+  emailTemplateSettings,
+  logo,
+  offerDate,
+  offerNo,
+}: Partial<DocumentHeaderDetailsProps>) => (
   <View
     style={{
       display: "flex",
@@ -44,7 +47,7 @@ export const Header = ({
           Offer No:
         </Text>
         <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {offerNumber}
+          {offerNo}
         </Text>
       </View>
       <View
@@ -66,7 +69,7 @@ export const Header = ({
           Offer Date:
         </Text>
         <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {offerDate}
+          {formatDateTimeToDate(offerDate || "")}
         </Text>
       </View>
       <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
@@ -81,7 +84,7 @@ export const Header = ({
           Created By:
         </Text>
         <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {createdBy?.fullName}
+          {createdBy}
         </Text>
       </View>
     </View>

@@ -1,5 +1,7 @@
+import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
+import { useTranslation } from "next-i18next";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,11 +15,11 @@ const styles = StyleSheet.create({
   },
   leftColumn: {
     flexDirection: "column",
-    width: "65%",
+    width: "60%",
   },
   rightColumn: {
     flexDirection: "column",
-    width: "35%",
+    width: "40%",
   },
   totalSection: {
     backgroundColor: "#404F6A",
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
+    columnGap: 16,
   },
   text: {
     fontSize: 16,
@@ -51,19 +54,22 @@ const styles = StyleSheet.create({
 });
 
 export const ServicesTotalAmount = ({
-  discountAmount,
-  discountDescription,
+  discount,
+  grandTotal,
   subTotal,
-  taxAmount,
-  total,
-}: OfferDetails) => (
-  <View style={styles.container}>
+  tax,
+}: Partial<ProductItemFooterProps>) => {
+ const {t: translate} = useTranslation();
+ 
+ return <View style={styles.container}>
     <View style={styles.contentContainer}>
       <View style={styles.leftColumn}>
         <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          Konditionen Schätzofferte Umzug
+          {translate("pdf.condition_for_moving")}
         </Text>
-        <Text style={styles.discountDescription}>{discountDescription}</Text>
+        <Text style={styles.discountDescription}>
+          {translate("pdf.pdf_description")}
+        </Text>
       </View>
       <View style={styles.rightColumn}>
         <View style={styles.subSection}>
@@ -72,17 +78,17 @@ export const ServicesTotalAmount = ({
         </View>
         <View style={styles.subSection}>
           <Text style={styles.text}>Tax%: </Text>
-          <Text style={styles.text}>{taxAmount} CHF (7.7%)</Text>
+          <Text style={styles.text}>{tax} CHF (7.7%)</Text>
         </View>
         <View style={styles.subSection}>
           <Text style={styles.text}>Discount: </Text>
-          <Text style={styles.text}>{discountAmount} CHF</Text>
+          <Text style={styles.text}>{discount} CHF</Text>
         </View>
         <View style={styles.totalSection}>
           <Text style={styles.whiteText}>Grand Total:</Text>
-          <Text style={styles.whiteText}>{total} CHF</Text>
+          <Text style={styles.whiteText}>{grandTotal} CHF</Text>
         </View>
       </View>
     </View>
   </View>
-);
+};

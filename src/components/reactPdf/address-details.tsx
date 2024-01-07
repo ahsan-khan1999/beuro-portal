@@ -1,6 +1,8 @@
 import { AddressDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { A4_WIDTH } from "./pdf-layout";
+import { CustomerAddress } from "@/types/leads";
+import { MovingDetailsProps } from "@/types";
 
 // Define your styles
 const styles = StyleSheet.create({
@@ -55,14 +57,14 @@ const styles = StyleSheet.create({
 });
 
 export const AddressDetails = ({
-  title,
-  addresses,
-  dates,
-}: AddressDetailsProps) => (
+  address,
+  header,
+  workDates,
+}: Partial<MovingDetailsProps>) => (
   <View style={styles.container}>
-    <Text style={styles.header}>{title}</Text>
+    <Text style={styles.header}>{header}</Text>
 
-    {addresses.map((address, index) => (
+    {address?.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
           <Text
@@ -93,7 +95,7 @@ export const AddressDetails = ({
         Work Dates:
       </Text>
       <View style={styles.datesColumn}>
-        {dates.map((date, index) => (
+        {workDates?.map((date, index) => (
           <Text style={styles.dateText} key={index}>
             {`${date.startDate} to ${date.endDate},`}
           </Text>
