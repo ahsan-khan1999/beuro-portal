@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const DetailsSwitchBtn = ({
@@ -7,6 +8,7 @@ const DetailsSwitchBtn = ({
   switchDetails: string;
   setSwitchDetails: (item: string) => void;
 }) => {
+  const { t: translate } = useTranslation();
   return (
     <div className="flex gap-[2px]">
       <button
@@ -17,7 +19,7 @@ const DetailsSwitchBtn = ({
         }`}
         onClick={() => setSwitchDetails("Invoice")}
       >
-        Invoice
+        {translate("switch_tabs.invoice")}
       </button>
       <button
         className={`bg-white px-[55px] py-[12px] text-base font-medium border-b-[3px] ${
@@ -27,7 +29,7 @@ const DetailsSwitchBtn = ({
         }`}
         onClick={() => setSwitchDetails("Receipt")}
       >
-        Receipt
+        {translate("switch_tabs.receipt")}
       </button>
     </div>
   );

@@ -8,7 +8,10 @@ import {
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
-import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
+import {
+  getTemplateSettings,
+  readEmailSettings,
+} from "@/api/slices/settingSlice/settings";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { Pdf } from "@/components/pdf/pdf";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -42,6 +45,7 @@ import { updateQuery } from "@/utils/update-query";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
+import { useTranslation } from "next-i18next";
 
 export const productItems: ServiceList[] = [
   {
@@ -96,7 +100,7 @@ export const DUMMY_DATA: PdfProps<InvoiceEmailHeaderProps> = {
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
     logo: "",
-    emailTemplateSettings: null
+    emailTemplateSettings: null,
   },
   contactAddress: {
     address: {
@@ -164,9 +168,8 @@ const DetailsPdfPriview = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
-  const [emailTemplateSettings, setEmailTemplateSettings] = useState<EmailTemplate | null>(
-    null
-  );
+  const [emailTemplateSettings, setEmailTemplateSettings] =
+    useState<EmailTemplate | null>(null);
   const [email, setEmail] = useState<EmailData>({
     description: "",
     email: "",
@@ -174,7 +177,7 @@ const DetailsPdfPriview = () => {
     subject: "",
   });
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
-
+  const { t: translate } = useTranslation();
   const {
     auth: { user },
     global: { modal },
@@ -189,14 +192,15 @@ const DetailsPdfPriview = () => {
   const { invoiceID } = router.query;
 
   useEffect(() => {
-
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData] = await Promise.all([dispatch(
-          getTemplateSettings()
-        ), dispatch(
-          readEmailSettings()
-        ), dispatch(readCollectiveInvoiceDetails({ params: { filter: invoiceID } }))])
+        const [template, emailTemplate, offerData] = await Promise.all([
+          dispatch(getTemplateSettings()),
+          dispatch(readEmailSettings()),
+          dispatch(
+            readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+          ),
+        ]);
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -228,8 +232,7 @@ const DetailsPdfPriview = () => {
             mobileNumber: emailTemplate?.payload?.mobileNumber,
             phoneNumber: emailTemplate?.payload?.phoneNumber,
             textColour: emailTemplate?.payload?.textColour,
-
-          })
+          });
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
@@ -254,7 +257,7 @@ const DetailsPdfPriview = () => {
               offerDate: invoiceDetails?.invoiceID?.createdAt,
               createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
               logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
-              emailTemplateSettings: emailTemplate?.payload
+              emailTemplateSettings: emailTemplate?.payload,
             },
             contactAddress: {
               address: {
@@ -299,13 +302,10 @@ const DetailsPdfPriview = () => {
             },
             footerDetails: {
               firstColumn: {
-                companyName:
-                  user?.company?.companyName,
+                companyName: user?.company?.companyName,
                 email: user?.email,
-                phoneNumber:
-                  user?.company?.phoneNumber,
-                taxNumber:
-                  user?.company?.taxNumber,
+                phoneNumber: user?.company?.phoneNumber,
+                taxNumber: user?.company?.taxNumber,
                 website: user?.company?.website,
               },
               secondColumn: {
@@ -331,8 +331,9 @@ const DetailsPdfPriview = () => {
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
-            signature: invoiceDetails?.invoiceID?.contractID?.offerID?.signature,
-            isCanvas: false
+            signature:
+              invoiceDetails?.invoiceID?.contractID?.offerID?.signature,
+            isCanvas: false,
           };
           const distributeItems = (): ServiceList[][] => {
             const totalItems =
@@ -382,16 +383,15 @@ const DetailsPdfPriview = () => {
           });
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title as string,
-            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.body as string,
+            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.title as string,
+            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.body as string,
           };
         }
-
       }
-    })()
-
+    })();
   }, [invoiceID]);
-
 
   const totalItems = invoiceData?.serviceItem?.length;
   // const totalItems = 34;
@@ -422,16 +422,24 @@ const DetailsPdfPriview = () => {
         const res = await dispatch(sendInvoiceEmail({ data }));
         if (res?.payload)
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
-      else {
+      } else {
         let apiData = {
-          email: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.email,
-          content: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.id,
-          subject: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.title,
-          description: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.body,
-          pdf: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content?.invoiceContent?.attachments,
-          id: collectiveInvoiceDetails?.invoiceID?.contractID?.id
-        }
+          email:
+            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+              ?.customerDetail?.email,
+          content:
+            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.id,
+          subject:
+            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.title,
+          description:
+            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.body,
+          pdf: collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+            ?.invoiceContent?.attachments,
+          id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
+        };
         const res = await dispatch(sendInvoiceEmail({ apiData }));
         if (res?.payload)
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
@@ -439,7 +447,6 @@ const DetailsPdfPriview = () => {
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }
-
   };
   const handleSendByPost = async () => {
     setActiveButtonId("post");
@@ -471,16 +478,16 @@ const DetailsPdfPriview = () => {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
           router.back();
@@ -523,44 +530,42 @@ const DetailsPdfPriview = () => {
   }, [loading]);
   return (
     <>
-      {
-        loading ? <LoadingState /> :
-          <>
-            <InvoiceEmailHeader
-              {...invoiceData?.emailHeader}
-              contentName={invoiceData?.emailHeader.contentName}
-              onEmailSend={handleEmailSend}
-              loading={loading}
-              onDownload={handleDonwload}
-              onPrint={handlePrint}
-              onSendViaPost={handleSendByPost}
-              activeButtonId={activeButtonId}
-              title={
-                router.pathname?.includes("receipt")
-                  ? "Receipt Details"
-                  : "Invoice Details"
-              }
-            />
-            <YogaPdfContainer>
+      {loading ? (
+        <LoadingState />
+      ) : (
+        <>
+          <InvoiceEmailHeader
+            {...invoiceData?.emailHeader}
+            contentName={invoiceData?.emailHeader.contentName}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            title={
+              router.pathname?.includes("receipt")
+                ? `${translate("invoice.invoice_details")}`
+                : `${translate("invoice.receipt_details")}`
+            }
+          />
+          <YogaPdfContainer>
+            <div className="my-5">
+              <Pdf<InvoiceEmailHeaderProps>
+                pdfData={invoiceData}
+                newPageData={newPageData}
+                templateSettings={templateSettings}
+                totalPages={calculateTotalPages}
+                isQr={true}
+                emailTemplateSettings={emailTemplateSettings}
+              />
+            </div>
+          </YogaPdfContainer>
 
-              <div className="my-5">
-                <Pdf<InvoiceEmailHeaderProps>
-                  pdfData={invoiceData}
-                  newPageData={newPageData}
-                  templateSettings={templateSettings}
-                  totalPages={calculateTotalPages}
-                  isQr={true}
-                  emailTemplateSettings={emailTemplateSettings}
-
-                />
-              </div>
-            </YogaPdfContainer>
-
-            {renderModal()}
-          </>
-      }
+          {renderModal()}
+        </>
+      )}
     </>
-
   );
 };
 
