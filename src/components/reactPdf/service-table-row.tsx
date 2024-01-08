@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: 230,
+    rowGap: 4,
   },
   descriptionTextTitle: {
     color: "#000",
@@ -50,6 +51,12 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     width: 86.25,
   },
+  headerTextTotal: {
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "bold",
+    width: 86.25,
+  },
 });
 
 export const ServiceTableRow = ({
@@ -70,7 +77,7 @@ export const ServiceTableRow = ({
           <Text style={styles.headerText}>{price}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
-          <Text style={styles.headerText}>{total}</Text>
+          <Text style={styles.headerTextTotal}>{total}</Text>
         </View>
       </View>
     </View>

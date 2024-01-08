@@ -10,6 +10,7 @@ import useFilter from "@/hooks/filter/hook";
 import { date } from "yup";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
 
 export default function LeadsFilter({
   filter,
@@ -33,7 +34,7 @@ export default function LeadsFilter({
   } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-
+  const { t: translate } = useTranslation();
   const handleSave = () => {
     setFilter((prev: any) => {
       const updatedFilter = {
@@ -58,7 +59,7 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="relative flex my-auto" ref={ref}>
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -94,19 +95,21 @@ export default function LeadsFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
                 className=" text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
             <div className="">
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Date
+                    {translate("filters.extra_filters.date")}
                   </label>
                   <label
                     htmlFor="type"
@@ -118,13 +121,13 @@ export default function LeadsFilter({
                       });
                     }}
                   >
-                    Reset
+                    {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
                 <div>
                   <DatePicker
-                    label="From"
-                    label2="To"
+                    label={translate("filters.extra_filters.from")}
+                    label2={translate("filters.extra_filters.to")}
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
                         FiltersDefaultValues.$gte
@@ -165,7 +168,7 @@ export default function LeadsFilter({
             </div>
             <div>
               <BaseButton
-                buttonText="Save"
+                buttonText={translate("common.save_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"

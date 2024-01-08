@@ -9,6 +9,7 @@ import useFilter from "@/hooks/filter/hook";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import CheckField from "./fields/check-field";
+import { useTranslation } from "next-i18next";
 
 export default function InvoicesFilter({
   filter,
@@ -30,14 +31,20 @@ export default function InvoicesFilter({
   } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-
+  const { t: translate } = useTranslation();
   const checkbox: CheckBoxType[] = [
-    { label: "Send", type: `${staticEnums.EmailStatus.Sent}` },
     {
-      label: "Draft",
+      label: `${translate("filters.extra_filters.send")}`,
+      type: `${staticEnums.EmailStatus.Sent}`,
+    },
+    {
+      label: `${translate("filters.extra_filters.draft")}`,
       type: `${staticEnums.EmailStatus.Draft}`,
     },
-    { label: "Failed", type: `${staticEnums.EmailStatus.Failed}` },
+    {
+      label: `${translate("filters.extra_filters.failed")}`,
+      type: `${staticEnums.EmailStatus.Failed}`,
+    },
   ];
 
   const handleSave = () => {
@@ -156,19 +163,21 @@ export default function InvoicesFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
                 className=" text-base text-red cursor-pointer"
                 onClick={() => handleFilterResetToInitial()}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
             <div className="">
               <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Email
+                    {translate("filters.extra_filters.email")}
                   </label>
                   <label
                     htmlFor="type"
@@ -177,7 +186,7 @@ export default function InvoicesFilter({
                       handleFilterReset("email", FiltersDefaultValues.None)
                     }
                   >
-                    Reset
+                    {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
                 <div className="flex items-center gap-x-3 mt-4  ">
@@ -222,7 +231,7 @@ export default function InvoicesFilter({
             </div>
             <div>
               <BaseButton
-                buttonText="Save"
+                buttonText={translate("common.save_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"

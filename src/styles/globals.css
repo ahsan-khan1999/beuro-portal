@@ -207,6 +207,12 @@ input[type="number"] {
   border-bottom-left-radius: 8px !important;
 }
 
+/* multi-select scroll bar */
+.multiSelectScrol::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 /* .react-tel-input .flag-dropdown:hover{
   border-top-left-radius: 8px !important;
   border-bottom-left-radius: 8px !important;

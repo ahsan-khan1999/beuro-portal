@@ -13,7 +13,7 @@
     "agreed": "Durch die Erstellung eines Kontos stimmen Sie unseren",
     "terms_policy": "Datenschutzbestimmungen",
     "button": "Registrieren",
-    "have_an_account": "Haben Sie bereits ein Konto?",
+    "have_an_account": "Bereits einen Account?",
     "sign_in": "Anmelden",
     "or_login": "oder einloggen mit"
   },
@@ -23,13 +23,13 @@
     "email_label": "E-Mail",
     "password_label": "Passwort",
     "email_placeholder": "Bitte geben Sie eine E-Mail-Adresse ein",
-    "password_placeholder": "Ihr Passwort eingeben",
-    "button": "Anmeldung",
+    "password_placeholder": "Geben Sie Ihr Passwort ein",
+    "button": "Anmelden",
     "sign_up_button": "Registrieren",
-    "dont_have_an_account": "Sie haben noch kein Konto?",
+    "dont_have_an_account": "Noch kein Konto?",
     "create": "Konto erstellen",
-    "or_login": "oder Anmeldung mit",
-    "remember_me": "Erinnern Sie sich an mich",
+    "or_login": "oder einloggen mit",
+    "remember_me": "Erinnere dich an mich",
     "forgot_password": "Passwort vergessen"
   },
   "login_detail": {
@@ -70,46 +70,46 @@
     }
   },
   "account_type": {
-    "main_heading": "Konto-Typ",
+    "main_heading": "Kontotyp",
     "sub_heading": "Wählen Sie Ihren Kontotyp",
     "business_heading": "Geschäftskonto",
-    "business_desc": "Konzipiert für Unternehmen und Privatpersonen, die Produkte oder Dienstleistungen online über unsere Plattform verkaufen möchten.",
+    "business_desc": "Für Unternehmen und Einzelpersonen, die Produkte oder Dienstleistungen über unsere Plattform verkaufen möchten.",
     "button": "Weiter",
     "private_heading": "Privatkonto",
-    "private_desc": "Konzipiert für Privatpersonen, die Produkte oder Dienstleistungen online über unsere Plattform kaufen möchten."
+    "private_desc": "Für Einzelpersonen, die Produkte oder Dienstleistungen über unsere Plattform kaufen möchten."
   },
   "private": {
     "main_heading": "Persönliche Angaben",
     "sub_heading": "Geben Sie Ihre persönlichen Daten ein",
     "fname_label": "Vorname",
     "lname_label": "Nachname",
-    "phone_label": "Rufnummer",
-    "home_label": "Wohnanschrift",
-    "street_label": "Straße Adresse",
+    "phone_label": "Telefonnummer",
+    "home_label": "Privatadresse",
+    "street_label": "Straßenadresse",
     "country_label": "Land",
-    "state_label": "Staat",
+    "state_label": "Bundesland/Region",
     "city_label": "Stadt",
     "zip_label": "Postleitzahl",
     "fname_placeholder": "Vorname",
     "lname_placeholder": "Nachname",
-    "phone_placeholder": "Rufnummer",
-    "street_placeholder": "Straße Adresse",
+    "phone_placeholder": "Telefonnummer",
+    "street_placeholder": "Straßenadresse",
     "zip_placeholder": "Postleitzahl",
     "button_back": "Zurück",
     "button_next": "Weiter"
   },
   "business": {
-    "main_heading": "Geschäftliche Details",
-    "sub_heading": "Geben Sie Ihre Unternehmensdaten ein",
+    "main_heading": "Geschäftsangaben",
+    "sub_heading": "Geben Sie Ihre Geschäftsdaten ein",
     "logo_label": "Logo hochladen",
     "logo_text": "Bilder hochladen",
     "file_label": "JPG, JPEG, PNG Min: 400px, Max: 1024px",
-    "business_name_label": "Geschäftlicher Name",
-    "website_label": "Website Link",
+    "business_name_label": "Firmenname",
+    "website_label": "Website-Link",
     "website_link_placeholder": "https://",
-    "business_location": "Wirtschaftsstandort",
-    "business_name_placeholder": "Geschäftlicher Name",
-    "website_placeholder": "Website Link",
+    "business_location": "Unternehmensstandort",
+    "business_name_placeholder": "Firmenname",
+    "website_placeholder": "Website-Link",
     "business_placeholder": "Ort suchen",
     "button_back": "Zurück",
     "button_next": "Konto erstellen"
@@ -199,18 +199,18 @@
   },
   "sidebar": {
     "customer": {
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Übersicht",
       "customers": "Kunden",
       "leads": {
-        "leads": "Führt",
-        "open": "Öffnen Sie",
-        "close": "Schließen Sie",
-        "expire": "Ablaufen"
+        "leads": "Interessenten",
+        "open": "Offen",
+        "close": "Geschlossen",
+        "expire": "Abgelaufen"
       },
       "offers": {
         "offers": "Angebote",
         "accepted": "Akzeptiert",
-        "signed": "Unterschrieben",
+        "signed": "Unterzeichnet",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
       },
@@ -226,23 +226,23 @@
         "overdue": "Überfällig",
         "paid": "Bezahlt"
       },
-
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
       "content": "Inhalt",
-      "mail_tracker": "Mail Tracker",
+      "mail_tracker": "Mail-Verfolgung",
       "settings": "Einstellungen",
-      "contact_supports": "Kontakt Supports"
+      "contact_supports": "Kontaktiere den Support"
     },
     "admin": {
-      "dashboard": "Dashboard",
+      "dashboard": "Übersicht",
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "support_requests": "Support-Anfragen",
+      "support_requests": "Supportanfragen",
       "Settings": "Einstellungen"
     }
   },
+
   "customers": {
     "title": "Kunden",
     "tab_heading": "Kunden Details",
@@ -1009,6 +1009,8 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?"
     },
+    "true": "Wahr",
+    "false": "Falsch",
     "done_button": "Fertig",
     "save_button": "Speichern",
     "add_note": "Notizen hinzufügen",
@@ -1297,6 +1299,19 @@
   },
   "admin": {
     "main_heading": "Super-Administrator",
+    "chart_list": {
+      "silver": "Silber",
+      "gold": "Gold",
+      "diamond": "Diamant",
+      "infinite": "Unendlich"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mär",
+      "apr": "Apr"
+    },
+
     "overview": {
       "main_heading": "Übersicht",
       "subscriber": "Aktive Abonnenten",
@@ -1383,10 +1398,10 @@
       "delete": "Löschen"
     },
     "plan_details": {
-      "detail_heading": "Pläne Details",
+      "detail_heading": "Plan Details",
       "add_heading": "Neuen Plan hinzufügen",
       "plans_name": "Planname",
-      "pricing": "Preisgestaltung Monatlich",
+      "pricing": "Preisgestaltung monatlich",
       "annually_discount": "Jährlicher Rabatt(%)",
       "number_of_employees": "Anzahl der Mitarbeiter",
       "no_of_request": "Anzahl der Anfragen",
@@ -1397,8 +1412,13 @@
       "api_feature": "API-Funktion",
       "back_button": "Zurück",
       "edit_button": "Bearbeiten",
-      "save_button": "Speichern"
+      "save_button": "Speichern",
+      "enable_reports": "Berichte aktivieren",
+      "enable_cus": "Anpassung aktivieren",
+      "enable_watermark": "Wasserzeichen aktivieren",
+      "enable_api": "API aktivieren"
     },
+
     "payment_history": {
       "heading": "Zahlungshistorie",
       "table_headings": {
@@ -1624,7 +1644,7 @@
     }
   },
   "dashboard_detail": {
-    "main_heading": "Kunden-Dashboard",
+    "main_heading": "Kunden-Übersicht",
     "overview": "Überblick",
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",
@@ -1652,10 +1672,20 @@
       "year": "Jährlich"
     },
     "cards_title": {
-      "lead": "Leads",
+      "leads": "Führt",
       "offer": "Angebote",
       "contracts": "Verträge",
       "sales": "Verkäufe"
+    },
+    "cards_status": {
+      "open": "Offen",
+      "close": "Geschlossen",
+      "expire": "Abgelaufen",
+      "signed": "Unterzeichnet",
+      "confirm": "Bestätigt",
+      "cancel": "Abgebrochen",
+      "overdue": "Überfällig",
+      "paid": "Bezahlt"
     },
     "charts_labels": {
       "website": "Webseite",
@@ -1720,6 +1750,33 @@
       "customized": "Individuelle E-Mails",
       "watermark": "Mit Wasserzeichen",
       "features": "API-Funktionen"
+    }
+  },
+  "empty_state": {
+    "heading": "Keine Daten gefunden",
+    "description": "Hoppla ... diese Informationen sind momentan nicht verfügbar"
+  },
+  "filters": {
+    "sort_by": {
+      "date": "Datum",
+      "latest": "Neueste",
+      "oldest": "Älteste",
+      "a_z": "A - Z"
+    },
+    "extra_filters": {
+      "heading": "Filter",
+      "reset_all": "Alle zurücksetzen",
+      "reset": "Zurücksetzen",
+      "date": "Datum",
+      "from": "Von",
+      "to": "Bis",
+      "email": "E-Mail",
+      "send": "Senden",
+      "draft": "Entwurf",
+      "failed": "Fehlgeschlagen",
+      "pending": "Ausstehend",
+      "overdue": "Überfällig",
+      "paid": "Bezahlt"
     }
   }
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 interface DashboardCard {
   icon: string | StaticImport;
@@ -31,8 +32,14 @@ const DashboardCard = ({
   expired,
   route,
 }: DashboardCard) => {
+  const { t: translate } = useTranslation();
   const datatest2 = {
-    labels: ["Jan", "Feb", "Mar", "Apr"],
+    labels: [
+      `${translate("admin.months.jan")}`,
+      `${translate("admin.months.feb")}`,
+      `${translate("admin.months.mar")}`,
+      `${translate("admin.months.apr")}`,
+    ],
     datasets: [
       {
         label: "",
@@ -87,7 +94,6 @@ const DashboardCard = ({
       className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
-      
         <Image src={icon} alt={alt} />
         <div className="ml-2 space-y-1">
           <h3 className="text-xlMonthly text-white font-semibold ">{title}</h3>
