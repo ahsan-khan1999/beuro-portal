@@ -9,84 +9,87 @@ export const Header = ({
   logo,
   offerDate,
   offerNo,
-}: Partial<DocumentHeaderDetailsProps>) => (
-  <View
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      backgroundColor: "#EEE",
-      padding: 20,
-    }}
-    fixed
-  >
-    <View>
-      <Image
-        src={"/assets/images/logo.png"}
-        style={{ width: 182, height: 73 }}
-      />
+}: Partial<DocumentHeaderDetailsProps>) => {
+  const fomrattedDate = formatDateTimeToDate(offerDate || "");
+  return (
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "#EEE",
+        padding: 20,
+      }}
+      fixed
+    >
+      <View>
+        <Image
+          src={"/assets/images/logo.png"}
+          style={{ width: 182, height: 73 }}
+        />
+      </View>
+      <View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            rowGap: 10,
+            marginBottom: 6,
+          }}
+        >
+          <Text
+            style={{
+              width: 100,
+              fontSize: 16,
+              fontWeight: "medium",
+              color: "#404040",
+            }}
+          >
+            Offer No:
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+            {offerNo}
+          </Text>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            rowGap: 10,
+            marginBottom: 6,
+          }}
+        >
+          <Text
+            style={{
+              width: 100,
+              fontSize: 16,
+              fontWeight: "medium",
+              color: "#404040",
+            }}
+          >
+            Offer Date:
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+            {formatDateTimeToDate(offerDate || "")}
+          </Text>
+        </View>
+        <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
+          <Text
+            style={{
+              width: 100,
+              fontSize: 16,
+              fontWeight: "medium",
+              color: "#404040",
+            }}
+          >
+            Created By:
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+            {createdBy}
+          </Text>
+        </View>
+      </View>
     </View>
-    <View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          rowGap: 10,
-          marginBottom: 6,
-        }}
-      >
-        <Text
-          style={{
-            width: 100,
-            fontSize: 16,
-            fontWeight: "medium",
-            color: "#404040",
-          }}
-        >
-          Offer No:
-        </Text>
-        <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {offerNo}
-        </Text>
-      </View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          rowGap: 10,
-          marginBottom: 6,
-        }}
-      >
-        <Text
-          style={{
-            width: 100,
-            fontSize: 16,
-            fontWeight: "medium",
-            color: "#404040",
-          }}
-        >
-          Offer Date:
-        </Text>
-        <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {formatDateTimeToDate(offerDate || "")}
-        </Text>
-      </View>
-      <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
-        <Text
-          style={{
-            width: 100,
-            fontSize: 16,
-            fontWeight: "medium",
-            color: "#404040",
-          }}
-        >
-          Created By:
-        </Text>
-        <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-          {createdBy}
-        </Text>
-      </View>
-    </View>
-  </View>
-);
+  );
+};
