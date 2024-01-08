@@ -279,6 +279,20 @@ export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const readQRCode: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/qr/code", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.readInvoiceQRCode(data);
+            return response?.data?.data?.qrcode;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const InvoiceSlice = createSlice({
     name: "InvoiceSlice",
     initialState,
@@ -532,9 +546,19 @@ const InvoiceSlice = createSlice({
             state.loading = false
         });
 
+        builder.addCase(readQRCode.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readQRCode.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(readQRCode.rejected, (state) => {
+            state.loading = false
+        });
+
 
     },
 })
 
 export default InvoiceSlice.reducer;
-export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo,setCollectiveInvoiceDetails } = InvoiceSlice.actions
+export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo, setCollectiveInvoiceDetails } = InvoiceSlice.actions

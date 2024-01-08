@@ -102,6 +102,7 @@ export interface InvoiceTableRowTypesPdf {
   id: string;
   invoiceNumber: string;
   paidAmount: string;
+  invoiceCreatedAmount: string;
   remainingAmount: string;
   totalEmail: string;
   sentEmail: string;

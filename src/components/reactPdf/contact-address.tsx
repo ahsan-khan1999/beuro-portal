@@ -8,19 +8,18 @@ import {
   textBase,
   textSmall,
 } from "./style-sheet";
+import { ContactDetailsProps } from "@/types";
 
 export const ContactAddress = ({
-  customerDetail,
-  createdBy: { email },
-  company: { phoneNumber },
-}: ContactAddressProps) => (
+  address,
+  email,
+  phone,
+}: Partial<ContactDetailsProps>) => (
   <View style={container}>
     <View style={leftColumn}>
-      <Text style={textBase}>{customerDetail.fullName}</Text>
-      <Text style={textBase}>{customerDetail?.address?.streetNumber}</Text>
-      <Text
-        style={textBase}
-      >{`${customerDetail?.address?.postalCode} ${customerDetail?.address?.country}`}</Text>
+      <Text style={textBase}>{address?.name}</Text>
+      <Text style={textBase}>{address?.streetWithNumber}</Text>
+      <Text style={textBase}>{`${address?.postalCode} ${address?.city}`}</Text>
     </View>
     <View style={rightColumn}>
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 6 }}>
@@ -48,7 +47,7 @@ export const ContactAddress = ({
         >
           Phone:
         </Text>
-        <Text style={textBase}>{phoneNumber}</Text>
+        <Text style={textBase}>{phone}</Text>
       </View>
     </View>
   </View>

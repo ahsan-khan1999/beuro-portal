@@ -17,7 +17,6 @@ const CustomCKEditor = ({
     data={field.value || data}
     key={data}
     onReady={(editor) => {
-      console.log(field.value,"field.value");
       field.onChange(field.value);
 
     }}

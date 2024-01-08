@@ -61,7 +61,7 @@ export const useSendEmail = (
       content: offerDetails?.content?.id,
       subject: offerDetails?.content?.offerContent?.title,
       description: offerDetails?.content?.offerContent?.body,
-      pdf: offerDetails?.content?.offerContent?.attachments,
+      attachments: offerDetails?.content?.offerContent?.attachments,
     });
 
   }, []);
@@ -74,7 +74,7 @@ export const useSendEmail = (
         content: selectedContent?.id,
         subject: selectedContent?.offerContent?.title,
         description: selectedContent?.offerContent?.body,
-        pdf: selectedContent?.offerContent?.attachments,
+        attachments: selectedContent?.offerContent?.attachments,
       });
       setAttachements(transformAttachments(
         selectedContent?.offerContent?.attachments as string[]
@@ -99,7 +99,7 @@ export const useSendEmail = (
     const updatedData = {
       ...data,
       id: offerDetails?.id,
-      pdf: attachements?.map((item) => item.value),
+      attachments: attachements?.map((item) => item.value),
       // router,
       // translate,
       // setError,

@@ -1,5 +1,6 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import { useState, useMemo } from "react";
 
 import Html, { HtmlStyles } from "react-pdf-html";
 
@@ -49,8 +50,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopStyle: "solid",
     borderTopColor: "#000",
-    width: "40%",
+    // width: "40%",
   },
+
 
   dateText: {
     paddingTop: 12,
@@ -91,26 +93,49 @@ const stylesheet: HtmlStyles = {
   },
 };
 
-export const AdditionalDetails = ({
-  heading,
-  description,
-}: AdditionalDetailsProps) => (
-  <View style={styles.borderDiv}>
-    <View style={styles.container}>
-      <Html stylesheet={stylesheet}>{description}</Html>
+export const AdditionalDetails = ({ description, signature }: { description?: string, signature?: any }) => {
+  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
 
-      <View style={{}}>
-        <Text style={styles.shareHeading}>I share the contract with you.</Text>
+  const onFileChange = () => {
 
-        <View style={styles.dateContainer}>
-          <View style={styles.innerDate}>
-            <Text style={styles.dateText}>Date</Text>
-          </View>
-          <View style={styles.signature}>
-            <Text style={styles.dateText}>Signature</Text>
+    if (signature) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader?.result);
+      };
+      reader.readAsDataURL(signature);
+    }
+  };
+  useMemo(() => signature && onFileChange(), [signature])
+  return (
+
+    <View style={styles.borderDiv}>
+      <View style={styles.container}>
+        <Html stylesheet={stylesheet}>{description || ""}</Html>
+
+        <View style={{}}>
+          <Text style={styles.shareHeading}>I share the contract with you.</Text>
+
+          <View style={styles.dateContainer}>
+            <View style={styles.innerDate}>
+              <Text style={styles.dateText}>Date</Text>
+            </View>
+
+            <View style={{ width: "40%" }}>
+              {
+                signature &&
+                <Image src={imageSrc as string} style={{ height: "100px", width: "100px" }} />
+
+              }
+              <View style={styles.signature}>
+
+                <Text style={styles.dateText}>Signature</Text>
+
+              </View>
+            </View>
           </View>
         </View>
       </View>
     </View>
-  </View>
-);
+  )
+};

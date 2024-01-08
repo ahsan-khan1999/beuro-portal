@@ -736,7 +736,12 @@ export const smoothScrollToSection = (target: string) => {
   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
   const offsetPosition = elementPosition - headerOffset;
 
-  console.log(offsetPosition, "offsetPosition");
 
   window.scrollTo(0,offsetPosition);
 };
+
+export function blobToFile(blob: any, fileName: string) {
+  const options = { type: blob.type };
+  const file = new File([blob], fileName, options);
+  return file;
+}

@@ -126,7 +126,7 @@ export const useAddServiceDetails = (
 
     let taxAmount =
       isTax && taxType == "0"
-        ? calculateTax(totalPrices, 7.7)
+        ? calculateTax(totalPrices, 8.1)
         : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
@@ -207,7 +207,6 @@ export const useAddServiceDetails = (
     }
   }, [serviceFields?.length]);
   const onServiceSelectType = (index: number) => {
-    console.log("in", offerDetails?.serviceDetail?.serviceDetail[index]);
 
     setValue(`serviceDetail.${index}.price`, offerDetails?.serviceDetail?.serviceDetail[index]?.price);
     setValue(`serviceDetail.${index}.unit`, offerDetails?.serviceDetail?.serviceDetail[index]?.unit);
@@ -314,7 +313,7 @@ export const useAddServiceDetails = (
       step: 3,
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
-      taxAmount: !data?.taxType ? 7.7 : data?.taxAmount,
+      taxAmount: !data?.taxType ? 8.1 : data?.taxAmount,
 
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),

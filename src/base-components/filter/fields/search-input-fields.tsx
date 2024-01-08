@@ -48,7 +48,7 @@ export default function SearchInputFiled({
             type="text"
             disabled
             value={value}
-            placeholder="Search..."
+            placeholder={translate("common.search")}
             className={inputClasses}
             onChange={(e) => handleChange(e.target.value)}
             onFocus={handleInputFocus}

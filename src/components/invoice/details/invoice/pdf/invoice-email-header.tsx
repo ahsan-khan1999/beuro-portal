@@ -38,7 +38,9 @@ export const InvoiceEmailHeader = ({
             className="cursor-pointer"
             onClick={router.back}
           />
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">{title}</h1>
+          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+            {translate(title)}
+          </h1>
         </div>
         <div className="flex items-center justify-between gap-5">
           <BaseButton
@@ -53,7 +55,7 @@ export const InvoiceEmailHeader = ({
             <PostIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
           <BaseButton
-            buttonText="Send Via Email"
+            buttonText={translate("contracts.pdf_card_details.send_via_email")}
             onClick={onEmailSend}
             containerClassName="flex items-center gap-x-3 row-reverse group"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
@@ -81,7 +83,7 @@ export const InvoiceEmailHeader = ({
       <div className="flex justify-between items-center">
         <div>
           <span className="text-[#4D4D4D] text-base font-normal">
-            Contract ID:
+            {translate("contracts.pdf_card_details.contract_id")}:
           </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
@@ -89,7 +91,9 @@ export const InvoiceEmailHeader = ({
           </span>
         </div>
         <div>
-          <span className="text-[#4D4D4D] text-base font-normal">Worker:</span>
+          <span className="text-[#4D4D4D] text-base font-normal">
+            {translate("contracts.pdf_card_details.worker")}:
+          </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
             {workerName}
@@ -97,7 +101,7 @@ export const InvoiceEmailHeader = ({
         </div>
         <div>
           <span className="text-[#4D4D4D] text-base font-normal">
-            Content Name:
+            {translate("contracts.pdf_card_details.content_name")}:
           </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
@@ -106,7 +110,7 @@ export const InvoiceEmailHeader = ({
         </div>
         <div className="flex items-center gap-[11px]">
           <span className="text-[#4D4D4D] text-base font-normal">
-            Contract Status:
+            {translate("contracts.pdf_card_details.contract_status")}:
           </span>
           <div className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"}`}>
             <span className={`text-base font-medium ${"text-[#FE9244]"}`}>

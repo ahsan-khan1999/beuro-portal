@@ -56,7 +56,6 @@ export default function useCustomer() {
     });
   };
   const handleFilterChange = (query: FilterType) => {
-    console.log(query);
     dispatch(
       readCompany({ params: { filter: query, page: 1, size: 10 } })
     ).then((res: any) => {

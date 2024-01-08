@@ -22,9 +22,9 @@ import { ServiceType } from "@/enums/offers";
 import { useTranslation } from "next-i18next";
 const serviceObject = {
   serviceTitle: "",
-  price: 0,
+  price: "",
   unit: "",
-  count: 0,
+  count: "",
   description: "",
   totalPrice: "",
   serviceType: "Existing Service",
@@ -471,7 +471,7 @@ const generateServiceCalulationChildren = (
       type: Field.span,
       className: "! !border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
-      text: `${total?.taxAmount.toFixed(2)} ${currency}(7.7%)`,
+      text: `${total?.taxAmount.toFixed(2)} ${currency}(8.1%)`,
     },
   };
 

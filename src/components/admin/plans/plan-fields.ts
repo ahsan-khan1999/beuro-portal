@@ -172,7 +172,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
 
                     id: "test",
                     name: "test",
-                    text: "Enable Reports",
+                    text: `${translate("admin.plan_details.enable_reports")}`,
                     containerClassName: "",
                   },
                 },
@@ -202,13 +202,12 @@ export const planDetailsFormField: GeneratePlansFormField = (
               className:
                 "flex justify-between items-center !!mb-0 py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary  ",
               children: [
-                
                 {
                   field: {
                     type: Field.span,
                     id: "test",
                     name: "customizedEmail",
-                    text: "Enable Customization",
+                    text: `${translate("admin.plan_details.enable_cus")}`,
                     containerClassName: "mb-0",
                   },
                 },
@@ -244,7 +243,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
 
                     id: "test",
                     name: "watermark",
-                    text: "Enable Watermark",
+                    text: `${translate("admin.plan_details.enable_watermark")}`,
                     containerClassName: "mb-0",
                   },
                 },
@@ -281,7 +280,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
 
                     id: "test",
                     name: "apiFeatures",
-                    text: "Enable Api",
+                    text: `${translate("admin.plan_details.enable_apisur")}`,
                     containerClassName: "",
                   },
                 },

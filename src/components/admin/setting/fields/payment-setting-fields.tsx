@@ -103,8 +103,14 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                           id: "testMode",
                           name: "testMode",
                           options: [
-                            { value: "True", label: "True" },
-                            { value: "False", label: "False" },
+                            {
+                              value: "True",
+                              label: `${translate("common.true")}`,
+                            },
+                            {
+                              value: "False",
+                              label: `${translate("common.false")}`,
+                            },
                           ],
                           control,
                         },
@@ -126,8 +132,14 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                           id: "active",
                           name: "active",
                           options: [
-                            { value: "True", label: "True" },
-                            { value: "False", label: "False" },
+                            {
+                              value: "True",
+                              label: `${translate("common.true")}`,
+                            },
+                            {
+                              value: "False",
+                              label: `${translate("common.false")}`,
+                            },
                           ],
                           control,
                         },

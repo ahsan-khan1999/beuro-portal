@@ -639,6 +639,8 @@
   },
   "invoice": {
     "main_heading": "Invoice",
+    "invoice_details":"Invoice Details",
+    "receipt_details":"Receipt Details",
     "table_functions": {
       "open": "Open",
       "overdue": "Overdue",
@@ -656,6 +658,7 @@
       "edit": "Edit"
     },
     "card_content": {
+      "invoice_number":"Invoice Number",
       "heading": "Invoice Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
@@ -946,6 +949,7 @@
       "required_service": "Required Service",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
+      "days": "Days",
       "availability": "Contact Availability",
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",
@@ -980,8 +984,8 @@
   },
   "common": {
     "modals": {
-      "admin_setting":"Settings Updated Successfully",
-      "admin_setting_des":"Thanks! we are happy to have you.",
+      "admin_setting": "Settings Updated Successfully",
+      "admin_setting_des": "Thanks! we are happy to have you.",
       "plan_created": "Record Created Successfully",
       "plan_record_des": "Thanks! we are happy to have you. ",
       "update_setting": "Settings Updated Successfully",
@@ -1022,6 +1026,8 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "true": "True",
+    "false": "False",
     "done_button": "Done",
     "save_button": "Save",
     "add_note": "Add Notes",
@@ -1309,6 +1315,18 @@
   },
   "admin": {
     "main_heading": "Super Admin",
+    "chart_list": {
+      "silver": "Silver",
+      "gold": "Gold",
+      "diamond": "Diamond",
+      "infinite": "Infinite"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr"
+    },
     "overview": {
       "main_heading": "Overview",
       "subscriber": "Active Sucbscribers",
@@ -1409,7 +1427,11 @@
       "api_feature": "API Feature",
       "back_button": "Back",
       "edit_button": "Edit",
-      "save_button": "Save"
+      "save_button": "Save",
+      "enable_reports": "Enable Reports",
+      "enable_cus": "Enable Customization",
+      "enable_watermark": "Enable Watermark",
+      "enable_api": "Enable Api"
     },
     "payment_history": {
       "heading": "Payment History",
@@ -1664,10 +1686,21 @@
       "year": "Yearly"
     },
     "cards_title": {
-      "lead": "Leads",
+      "leads": "Leads",
       "offer": "Offers",
       "contracts": "Contracts",
       "sales": "Sales"
+    },
+
+    "cards_status": {
+      "open": "Open",
+      "close": "Close",
+      "expire": "Expired",
+      "signed": "Signed",
+      "confirm": "Confirmed",
+      "cancel": "Cancelled",
+      "overdue": "Overdue",
+      "paid": "Paid"
     },
     "charts_labels": {
       "website": "Website",
@@ -1733,5 +1766,53 @@
       "watermark": "With Watermark",
       "features": "API Features"
     }
+  },
+  "empty_state": {
+    "heading": "No Data Found",
+    "description": "Whoops ... this information is not avilable for a moment"
+  },
+  "filters": {
+    "sort_by": {
+      "date": "Date",
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "a_z": "A -Z"
+    },
+    "extra_filters": {
+      "heading": "Filter",
+      "reset_all": "Reset All",
+      "reset": "Reset",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "email": "Email",
+      "send": "Send",
+      "draft": "Draft",
+      "failed": "Failed",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    }
+  },
+  "global_search": {
+    "customer":"Customer",
+    "customer_id": "Customer ID",
+    "phone": "Phone No",
+    "created_date": "Creation Date",
+    "name": "Name",
+    "mobile_number": "Mobile No",
+    "address": "Address",
+    "email": "Email Address",
+    "created_by": "Created By",
+    "notes": "Notes",
+    "paid_amount": "Paid Amount",
+    "unpaid_amount": "Unpaid Amount"
+  },
+  "switch_tabs": {
+    "invoice": "Invoice",
+    "receipt": "Receipt",
+    "offer": "Offers",
+    "contract": "Contracts",
+    "invoices": "Invoices"
   }
 }

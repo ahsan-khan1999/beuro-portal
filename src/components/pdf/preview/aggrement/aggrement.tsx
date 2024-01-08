@@ -25,7 +25,7 @@ export const Aggrement = ({
   setIsSignatureDone,
   isSignatureDone,
   emailTemplateSettings,
-  setOfferSignature
+  setOfferSignature,
 }: AggrementProps) => {
 
   const date = moment(new Date()).format("DD/MMMM/YY")

@@ -49,7 +49,7 @@ const FollowUpDropDown = () => {
                   transition={{ duration: 0.4 }}
                   key={index}
                   onClick={() => handleFollowUpsDetails(item.id)}
-                  className={`relative pt-[10px] px-4 cursor-pointer max-h-[300px] overflow-y-scroll ${
+                  className={`relative pt-[10px] px-4 cursor-pointer ${
                     (index == 0 || index == 1) && "bg-primary"
                   } bg-opacity-10 `}
                 >

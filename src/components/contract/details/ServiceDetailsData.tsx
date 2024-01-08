@@ -81,7 +81,7 @@ const ServiceDetailsData = ({
                   {translate("contracts.service_details.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractDetails?.offerID?.taxAmount} (7.7%)
+                  {contractDetails?.offerID?.taxAmount} (8.1%)
                 </span>
               </div>
             </div>

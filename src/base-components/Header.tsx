@@ -23,14 +23,13 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logoutUser())
     logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "659828f81be5e74b2d7fd105", action: "Reject" } })
+    // router.push({ pathname: "/pdf", query: { offerID: "659c0aa1999a1969e899aea2", action: "Accept" } })
   }
   useEffect(() => {
-    const user: User = isJSON(getUser())
-    if (user?.role !== "Admin") {
+    if (user && user?.role !== "Admin") {
       dispatch(readSystemSettings())
     }
-  }, [])
+  }, [user])
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

@@ -18,7 +18,7 @@ const ContractDetails = () => {
     handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle,
     loading,
     handleViewPdf,
-    
+
   } = useContractDetail();
 
   return (
@@ -33,7 +33,9 @@ const ContractDetails = () => {
         handleSendEmail={handleSendEmail}
       />
       <div className="my-4">
-        <DetailsData contractDetails={contractDetails} handleViewPdf={handleViewPdf}/>
+        {contractDetails?.signedContracts && contractDetails?.signedContracts?.length > 0 &&
+          <DetailsData contractDetails={contractDetails} handleViewPdf={handleViewPdf} />
+        }
       </div>
       {
         isSendEmail ?
@@ -42,7 +44,7 @@ const ContractDetails = () => {
             onNextHandle={onNextHandle}
           />
           :
-          <ContractDetailsData loading={loading}/>}
+          <ContractDetailsData loading={loading} />}
 
       {renderModal()}
     </Layout>

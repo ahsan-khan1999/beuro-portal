@@ -190,6 +190,7 @@ const ContractDetailsCard = ({
                 onItemSelected={handlePaymentStatusUpdate}
                 dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
                 dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownItemsContainerClassName="w-full"
               />
             </span>
           </div>

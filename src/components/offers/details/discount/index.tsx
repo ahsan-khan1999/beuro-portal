@@ -21,7 +21,7 @@ const Discounts = ({ handleUpdateDiscount }: { handleUpdateDiscount: (discount: 
     offerActivity?.discount?.map((item) => ({
       discountTitle: "Price",
       discountPrice: item.totalPrice,
-      discountPercentage: item.totalPrice + " " + item.percentage,
+      discountPercentage: item.amount + " " + item.percentage,
       discountDate: formatDateTimeToDate(item?.dateTime),
     }));
 

@@ -68,20 +68,21 @@ const ServiceDetailsData = ({
               {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("leads.service_details.flexibility")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.flexibility}
-            </div>
-          </div>
+
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.availability")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.contactAvailability}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("leads.service_details.flexibility")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              {leadDetails?.flexibility+" "}{translate("leads.service_details.days")}
             </div>
           </div>
           <div>

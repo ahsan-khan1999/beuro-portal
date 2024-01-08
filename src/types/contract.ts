@@ -11,12 +11,20 @@ export interface contractTableTypes {
   offerID: ContractOfferDetails;
   createdAt: string;
   contractStatus: "Open" | "Confirmed" | "Cancelled";
-  paymentType:string;
-  title:string;
-  additionalDetails:string;
-  attachement?:string;
-  emailStatus:string
+  paymentType: string;
+  title: string;
+  additionalDetails: string;
+  attachement?: string;
+  emailStatus: string;
+  signedContracts?: signedContracts[]
 }
+
+export interface signedContracts {
+  createdAt: string;
+  link: string;
+  status: number
+}
+
 export interface ContractOfferDetails {
   refID: string;
   id: string;
@@ -70,7 +78,7 @@ export interface ContractOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?:string
+  signature?: string
 }
 
 export interface ContractDetailCardProps {

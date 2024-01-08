@@ -13,9 +13,9 @@ const oh = 153;
 const originalStrokeWidth = 1;
 
 export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
-  isSignatureDone, setOfferSignature }: {
+  isSignatureDone, setOfferSignature, handleSignature }: {
     signature?: string, isCanvas?: boolean, setIsSignatureDone?: SetStateAction<boolean>,
-    isSignatureDone?: boolean, setOfferSignature?: SetStateAction<any>
+    isSignatureDone?: boolean, setOfferSignature?: SetStateAction<any>, handleSignature?: (sign: any) => void
   }) => {
   const dispatch = useAppDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -70,8 +70,8 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         const svgContent = signaturePad.toDataURL("image/png");
         const blob = dataURLtoBlob(svgContent);
         const file = new File([blob], 'signature.png', { type: 'image/png' });
-        localStoreUtil.store_data('signature', file);
         setOfferSignature && setOfferSignature(file)
+        if (handleSignature) handleSignature(file)
         setIsSubmitted(true);
         //@ts-expect-error
         setIsSignatureDone && setIsSignatureDone(true);
