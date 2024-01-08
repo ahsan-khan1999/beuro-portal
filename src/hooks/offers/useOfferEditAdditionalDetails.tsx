@@ -44,6 +44,8 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
   useMemo(() => {
     setValue("additionalDetails", offerDetails?.additionalDetails);
   }, [offerDetails?.additionalDetails])
+
+
   const selectedContent = watch("content")
   const handlePrevious = () => {
     handleBack(EditComponentsType.serviceEdit)

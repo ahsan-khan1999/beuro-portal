@@ -20,7 +20,7 @@ import {
 } from "@/types";
 import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType } from "@/api/slices/globalSlice/global";
+import { updateModalType, uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { EmailTemplate } from "@/types/settings";
@@ -28,6 +28,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 const OfferPdf = dynamic(() => import("../offer-pdf-preview"), { ssr: false });
+const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
 
 import { useOfferPdfDownload } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
@@ -140,11 +141,11 @@ const PdfPriview = () => {
 
 
   const { offerData, activeButtonId, setActiveButtonId } = useOfferPdfDownload();
-
+  const [offerPdfFile, setOfferPdfFile] = useState(null)
 
   const {
     auth: { user },
-    global: { modal },
+    global: { modal, loading: loadingGlobal },
     offer: { error, loading, offerDetails },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
@@ -156,13 +157,16 @@ const PdfPriview = () => {
 
   const handleEmailSend = async () => {
     try {
+      const formData = new FormData()
       setActiveButtonId("email");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
 
-      if (data) {
-        let apiData = { ...data };
+      if (data && offerPdfFile) {
         // delete apiData["id"]
+        formData.append("file", offerPdfFile as any)
+        const fileUrl = await dispatch(uploadFileToFirebase(formData))
+        let apiData = { ...data, pdf: fileUrl?.payload };
         delete apiData["content"];
 
         const res = await dispatch(sendOfferEmail({ data: apiData }));
@@ -175,7 +179,7 @@ const PdfPriview = () => {
           content: offerDetails?.content?.id,
           subject: offerDetails?.content?.offerContent?.title,
           description: offerDetails?.content?.offerContent?.body,
-          pdf: offerDetails?.content?.offerContent?.attachments,
+          attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id
         }
         const res = await dispatch(sendOfferEmail({ data: apiData }));
@@ -229,27 +233,40 @@ const PdfPriview = () => {
   };
   return (
     <>
-      {
-        loading ? <LoadingState /> :
+      <div className="">
+        <EmailCard
+          emailStatus={offerData?.emailHeader?.emailStatus}
+          offerNo={offerData?.emailHeader?.offerNo}
+          onEmailSend={handleEmailSend}
+          loading={loading && loadingGlobal}
+          onDownload={handleDonwload}
+          onPrint={handlePrint}
+          handleSendByPost={handleSendByPost}
+          activeButtonId={activeButtonId}
 
-
-          <div className="">
-            <EmailCard
-              emailStatus={offerData?.emailHeader?.emailStatus}
-              offerNo={offerData?.emailHeader?.offerNo}
-              onEmailSend={handleEmailSend}
-              loading={loading}
-              onDownload={handleDonwload}
-              onPrint={handlePrint}
-              handleSendByPost={handleSendByPost}
-              activeButtonId={activeButtonId}
-
-            />
+        />
+        {
+          loading || loadingGlobal ? <LoadingState /> :
             <div className="flex justify-center my-5">
 
               <OfferPdf offerData={offerData} />
+              <OfferPdfDownload offerData={offerData} offerPdfFile={offerPdfFile} setOfferPdfFile={setOfferPdfFile} />
+
             </div>
-            {/* <YogaPdfContainer>
+
+        }
+        {renderModal()}
+      </div>
+
+    </>
+  );
+};
+
+export default PdfPriview;
+
+
+
+{/* <YogaPdfContainer>
 
               <div className="flex justify-center my-5">
                 <Pdf<EmailHeaderProps>
@@ -262,13 +279,3 @@ const PdfPriview = () => {
                 />
               </div>
             </YogaPdfContainer> */}
-
-            {renderModal()}
-          </div>
-      }
-
-    </>
-  );
-};
-
-export default PdfPriview;

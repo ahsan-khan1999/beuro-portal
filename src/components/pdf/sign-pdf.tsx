@@ -22,6 +22,9 @@ import { BASEURL } from "@/services/HttpProvider";
 import axios from "axios";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
 import toast from "react-hot-toast";
+const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), { ssr: false });
+import dynamic from "next/dynamic";
+
 
 export const SignPdf = <T,>({
     newPageData,
@@ -43,6 +46,7 @@ export const SignPdf = <T,>({
     const dispatch = useAppDispatch()
     const { loading } = useAppSelector(state => state.offer)
     const [offerSignature, setOfferSignature] = useState<string | null>(null);
+    // const [instance, updateInstance] = usePDF({ document: <OfferSignedPdf offerData={pdfData} signature={offerSignature} /> });
 
     const { modal } = useAppSelector(state => state.global)
     const router = useRouter();
@@ -71,7 +75,7 @@ export const SignPdf = <T,>({
         const response = await dispatch(rejectOfferPublic({ params }))
         if (response?.payload) { localStoreUtil.remove_data("signature"), dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) } setOfferSignature(null)
     }
-    
+
 
     const renderModal = () => {
         return MODAL_CONFIG[modal.type] || null;
@@ -94,6 +98,14 @@ export const SignPdf = <T,>({
         router.push("/login");
         dispatch(updateModalType({ type: ModalType.NONE }));
     };
+
+    const handleSignature = (sign: any) => {
+        // updateInstance(<OfferSignedPdf offerData={pdfData} signature={sign} />)
+        // // const signature = new Blob([offerSignature as any], { type: "image/png" })
+        // console.log(instance, "instance");
+
+
+    }
     const MODAL_CONFIG: ModalConfigType = {
         [ModalType.UPDATE_SUCCESS]: (
             <RecordUpdateSuccess
@@ -117,6 +129,8 @@ export const SignPdf = <T,>({
     return (
         // <Container>
         <>
+
+
             {/* <PreviewCard /> */}
             <div className="flex flex-col gap-y-[30px]">
                 {newPageData.length > 0 && (
@@ -161,6 +175,7 @@ export const SignPdf = <T,>({
                     isSignatureDone={isSignatureDone}
                     emailTemplateSettings={emailTemplateSettings}
                     setOfferSignature={setOfferSignature}
+                    handleSignature={handleSignature}
 
                 />
                 {isQr && (
@@ -171,29 +186,9 @@ export const SignPdf = <T,>({
                     />
                 )}
             </div>
-            {
-                (!pdfData?.signature && action === "Accept") &&
-                <Button
-                    className={`mt-[55px] w-full ${action === "Accept" ? 'bg-[#45C769]' : 'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
-                    onClick={action === "Accept" ? acceptOffer : rejectOffer}
-                    inputType="button"
-                    id="acceptOffer"
-                    loading={loading}
-                    text={action}
-                />
-            }
+          
 
-            {
-                (!pdfData?.signature && action === "Reject") &&
-                <Button
-                    className={`mt-[55px] w-full ${'bg-red'} rounded-[4px] shadow-md  text-center text-white`}
-                    onClick={rejectOffer}
-                    inputType="button"
-                    id="acceptOffer"
-                    loading={loading}
-                    text={action}
-                />
-            }
+            <OfferSignedPdf offerData={pdfData} signature={offerSignature} />
 
             {renderModal()}
         </>

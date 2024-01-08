@@ -418,7 +418,7 @@ export type GenerateOfferServiceFormField = (
     generatePrice?: (index: number) => void;
     total?: Total;
     tax?: TaxSetting[] | null;
-    currency?:string
+    currency?: string
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -451,7 +451,7 @@ export type GenerateLeadsFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   service?: Service[],
   leadDetails?: Lead,
-  systemSettings?:SystemSetting | null
+  systemSettings?: SystemSetting | null
 ) => FormField[];
 export type GenerateCustomerLeadFormField = (
   register: UseFormRegister<FieldValues>,
@@ -882,7 +882,8 @@ export interface AggrementProps {
   setIsSignatureDone?: SetStateAction<boolean>,
   isSignatureDone?: boolean;
   emailTemplateSettings?: EmailTemplate | null,
-  setOfferSignature?: SetStateAction<any>
+  setOfferSignature?: SetStateAction<any>,
+  handleSignature?: (sign: any) => void
 
 }
 

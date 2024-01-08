@@ -24,7 +24,7 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
     setValue("content", offerDetails?.content?.id);
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
-  
+
 
 
   const schema = generateOfferAdditionalDetailsValidation(translate);
@@ -41,8 +41,11 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  // useMemo(() => {
+  //   setValue("additionalDetails", offerDetails?.content?.offerContent?.description);
+  // }, [offerDetails?.content?.id])
   useMemo(() => {
-    setValue("additionalDetails", offerDetails?.additionalDetails);
+    setValue("additionalDetails", offerDetails?.additionalDetails || offerDetails?.content?.offerContent?.description);
   }, [offerDetails?.additionalDetails])
 
   const selectedContent = watch("content")
