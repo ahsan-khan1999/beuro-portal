@@ -4,7 +4,7 @@ import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
 import { GlobalSearch } from "@/components/globalSearch";
 
-const Home = () => <GlobalSearch />;
+const Home = () => <></>;
 
 export default withLayout(Home);
 
