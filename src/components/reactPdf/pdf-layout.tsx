@@ -1,4 +1,3 @@
-import { PDFResponse } from "@/types/pdf";
 import { AdditionalDetails } from "./additional-details";
 import {
   Document,
@@ -16,7 +15,7 @@ import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { QRCode } from "./qr-code";
-import { usePdfDownload } from "@/hooks/contract/usePdfDownload";
+import { PdfPreviewProps } from "@/types";
 
 Font.register({
   family: "Poppins",
@@ -59,202 +58,30 @@ Font.register({
   ],
 });
 
-export const PDF_DATA: PDFResponse = {
-  header: {
-    companyLogo: "",
-    offerNumber: "R-2004",
-    offerDate: "2012-1-1",
-    createdBy: {
-      fullName: "Talha R",
-    },
-  },
-  contactAddress: {
-    company: {
-      phoneNumber: "+923088924153",
-      bankDetails: {},
-      address: {},
-    },
-    createdBy: {
-      email: "talha@cloudmeshsoltuions.com",
-    },
-    customerDetail: {
-      address: {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-      },
-      fullName: "Talha Nazir R",
-    },
-  },
-  addressDetails: {
-    addresses: [
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 1",
-      },
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 2",
-      },
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 3",
-      },
-    ],
-    dates: [
-      {
-        endDate: "2022-33-21",
-        startDate: "2021-4-02",
-      },
-      {
-        endDate: "2022-33-21",
-        startDate: "2021-4-02",
-      },
-    ],
-    title: "This is dummy Title",
-  },
-  serviceDetails: [
-    {
-      count: "1",
-      description:
-        "This is dummy description This is dummy description This is dummy description This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "2",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "3",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-  ],
-  createdBy: {
-    email: "talha@gmail.com",
-  },
-  footer: {
-    company: {
-      address: {
-        city: "Islamabad",
-        country: "Pakistan",
-        houseNumber: "3rd Floor",
-        postalCode: "13150",
-        streetNumber: "24A",
-      },
-      bankDetails: {
-        bankName: "Meezan Bank",
-        ibanNumber: "PKMZ1234567890987",
-      },
-      companyName: "CMS",
-      mobileNumber: "+923088922423",
-      phoneNumber: "+155433455",
-      taxNumber: "R-5555",
-      website: "https://cloudmeshsolutions.com",
-    },
-    createdBy: {
-      email: "talha@cloudmeshsolutions.com",
-    },
-  },
-  additionalDetails: {
-    heading: "Zahlungsarten",
-    description:
-      "<h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p>",
-  },
-
-  offerID: {
-    discountAmount: "65675",
-    discountDescription:
-      "This is discount description, This is discount description, , This is discount description, This is discount description",
-    subTotal: "555",
-    taxAmount: "7.7",
-    total: "3456",
-  },
-  qrDetails: {
-    bank: {
-      heading: "Empfangsschenin",
-      account: "Konto/ Zahlbar an",
-      ibanNumber: "CH48 0900 0000 1556 1356 9",
-      bankName: "Rahal GmbH",
-      companyAddress: "St.Urbanstrasse 79",
-      street: "4914 Roggwil",
-      referenceNumber: "27 12323 0000 0000 0006 22926",
-      payable: "Zahlbar durch",
-      payableName: "Rahal GmbH",
-      payableAddress: "St. Urbanstrasse  79",
-      payableStreet: "4914 Roggwill BE",
-      currency: "CHF",
-      amount: "12221",
-    },
-    qr: {
-      heading: "Zahlteil",
-      currency: "CHF",
-      amount: "23232",
-      qrCodeImage: "",
-    },
-  },
-};
-
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const PDF = () => {
-  const { offerData } = usePdfDownload("65983c34c2849172189b40d1");
-
-  const headerDetails = offerData?.headerDetails;
-  const { address, header, workDates } = offerData?.movingDetails || {};
-  const contactAddress = offerData?.contactAddress;
-  const serviceItem = offerData?.serviceItem;
-  const serviceItemFooter = offerData?.serviceItemFooter;
-  const aggrementDetails = offerData?.aggrementDetails;
-  const qrCode = offerData?.qrCode;
-  // const dates = offerData?.
+const PDF = ({
+  data,
+  templateSettings,
+  emailTemplateSettings,
+}: PdfPreviewProps) => {
+  const headerDetails = data?.headerDetails;
+  const { address, header, workDates } = data?.movingDetails || {};
+  const contactAddress = data?.contactAddress;
+  const serviceItem = data?.serviceItem;
+  const serviceItemFooter = data?.serviceItemFooter;
+  const aggrementDetails = data?.aggrementDetails;
+  const qrCode = data?.qrCode;
+  const footerDetails = data?.footerDetails;
 
   return (
-    <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
+    <PDFViewer
+      showToolbar={false}
+      style={{ width: "100%", minHeight: 800, height: "100%" }}
+    >
       <Document>
-        <Page style={styles.body}>
+        <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
           <View
             style={{
@@ -274,7 +101,13 @@ const PDF = () => {
             ))}
             <ServicesTotalAmount {...serviceItemFooter} />
           </View>
-          <Footer {...PDF_DATA.footer} />
+          <Footer
+            {...{
+              documentDetails: footerDetails,
+              emailTemplateSettings,
+              templateSettings,
+            }}
+          />
         </Page>
 
         {/* Additional details */}
@@ -291,7 +124,13 @@ const PDF = () => {
             <ContactAddress {...{ ...contactAddress }} />
             <AdditionalDetails description={aggrementDetails} />
           </View>
-          <Footer {...PDF_DATA.footer} />
+          <Footer
+            {...{
+              documentDetails: footerDetails,
+              emailTemplateSettings,
+              templateSettings,
+            }}
+          />
         </Page>
 
         {/* QR code screen */}
@@ -310,7 +149,7 @@ export default PDF;
 
 const styles = StyleSheet.create({
   body: {
-    paddingBottom: 95,
+    paddingBottom: 140,
   },
   pageNumber: {
     position: "absolute",

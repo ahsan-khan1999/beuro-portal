@@ -18,19 +18,27 @@ import {
   PdfProps,
   TemplateType,
 } from "@/types";
-import { getTemplateSettings, readEmailSettings } from "@/api/slices/settingSlice/settings";
+import {
+  getTemplateSettings,
+  readEmailSettings,
+} from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType, uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
-const OfferPdf = dynamic(() => import("../offer-pdf-preview"), { ssr: false });
-const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
+const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), { ssr: false });
+const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
+  ssr: false,
+});
 
-import { useOfferPdfDownload } from "@/hooks/offers/useOfferPdf";
+import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 
 export const productItems: ServiceList[] = [
@@ -86,7 +94,7 @@ export const DUMMY_DATA: PdfProps = {
     offerDate: "22.09.2023",
     createdBy: "Heiniger Michèle",
     logo: "",
-    emailTemplateSettings: null
+    emailTemplateSettings: null,
   },
   contactAddress: {
     address: {
@@ -132,91 +140,25 @@ export const DUMMY_DATA: PdfProps = {
   },
   aggrementDetails: "",
 };
-interface ActionType {
-  payload: OffersTableRowTypes;
-  type: string;
-}
 
 const PdfPriview = () => {
-
-
-  const { offerData, activeButtonId, setActiveButtonId } = useOfferPdfDownload();
-  const [offerPdfFile, setOfferPdfFile] = useState(null)
-
   const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    offer: { error, loading, offerDetails },
-  } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
-
-  const router = useRouter();
-  const { offerID } = router.query;
-
-
-
-  const handleEmailSend = async () => {
-    try {
-      const formData = new FormData()
-      setActiveButtonId("email");
-
-      const data = await localStoreUtil.get_data("contractComposeEmail");
-
-      if (data && offerPdfFile) {
-        // delete apiData["id"]
-        formData.append("file", offerPdfFile as any)
-        const fileUrl = await dispatch(uploadFileToFirebase(formData))
-        let apiData = { ...data, pdf: fileUrl?.payload };
-        delete apiData["content"];
-
-        const res = await dispatch(sendOfferEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
-      } else {
-        let apiData = {
-          email: offerDetails?.leadID?.customerDetail?.email,
-          content: offerDetails?.content?.id,
-          subject: offerDetails?.content?.offerContent?.title,
-          description: offerDetails?.content?.offerContent?.body,
-          attachments: offerDetails?.content?.offerContent?.attachments,
-          id: offerDetails?.id
-        }
-        const res = await dispatch(sendOfferEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
-      }
-    } catch (error) {
-      console.error("Error in handleEmailSend:", error);
-    }
-  };
-  const handleSendByPost = async () => {
-    setActiveButtonId("post");
-
-    const apiData = {
-      emailStatus: 2,
-      id: offerID
-
-    }
-    const response = await dispatch(sendOfferByPost({ data: apiData }))
-    if (response?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-
-  }
-  const handleDonwload = () => {
-    window.open(offerDetails?.attachement)
-  };
-  const handlePrint = () => {
-    window.open(offerDetails?.attachement)
-
-  };
-  const onClose = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-  };
-  const onSuccess = () => {
-    router.push("/offers");
-    dispatch(updateModalType({ type: ModalType.NONE }));
-  };
+    offerData,
+    activeButtonId,
+    emailTemplateSettings,
+    templateSettings,
+    modal,
+    loading,
+    loadingGlobal,
+    pdfFile,
+    setPdfFile,
+    handleDonwload,
+    handleEmailSend,
+    handlePrint,
+    handleSendByPost,
+    onClose,
+    onSuccess,
+  } = useOfferPdf();
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -233,40 +175,21 @@ const PdfPriview = () => {
   };
   return (
     <>
-      <div className="">
-        <EmailCard
-          emailStatus={offerData?.emailHeader?.emailStatus}
-          offerNo={offerData?.emailHeader?.offerNo}
-          onEmailSend={handleEmailSend}
-          loading={loading && loadingGlobal}
-          onDownload={handleDonwload}
-          onPrint={handlePrint}
-          handleSendByPost={handleSendByPost}
-          activeButtonId={activeButtonId}
-
-        />
-        {
-          loading || loadingGlobal ? <LoadingState /> :
-            <div className="flex justify-center my-5">
-
-              <OfferPdf offerData={offerData} />
-              <OfferPdfDownload offerData={offerData} offerPdfFile={offerPdfFile} setOfferPdfFile={setOfferPdfFile} />
-
-            </div>
-
-        }
-        {renderModal()}
-      </div>
-
-    </>
-  );
-};
-
-export default PdfPriview;
-
-
-
-{/* <YogaPdfContainer>
+      {loading ? (
+        <LoadingState />
+      ) : (
+        <div className="">
+          <EmailCard
+            emailStatus={offerData?.emailHeader?.emailStatus}
+            offerNo={offerData?.emailHeader?.offerNo}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            handleSendByPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+          />
+          {/* <YogaPdfContainer>
 
               <div className="flex justify-center my-5">
                 <Pdf<EmailHeaderProps>
@@ -279,3 +202,31 @@ export default PdfPriview;
                 />
               </div>
             </YogaPdfContainer> */}
+
+          {loading || loadingGlobal ? (
+            <LoadingState />
+          ) : (
+            <div className="flex justify-center my-5">
+              <OfferPdf
+                data={offerData}
+                emailTemplateSettings={emailTemplateSettings}
+                templateSettings={templateSettings}
+              />
+              <OfferPdfDownload
+                data={offerData}
+                templateSettings={templateSettings}
+                emailTemplateSettings={emailTemplateSettings}
+                pdfFile={pdfFile}
+                setPdfFile={setPdfFile}
+              />
+            </div>
+          )}
+
+          {renderModal()}
+        </div>
+      )}
+    </>
+  );
+};
+
+export default PdfPriview;

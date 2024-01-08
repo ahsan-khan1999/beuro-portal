@@ -1,14 +1,12 @@
-import { PDFResponse } from "@/types/pdf";
 import {
   BlobProvider,
   Document,
   Font,
-  PDFViewer,
   Page,
   StyleSheet,
   View,
 } from "@react-pdf/renderer";
-import { EmailHeaderProps, PdfPreviewProps, PdfProps } from "@/types";
+import { PdfPreviewProps } from "@/types";
 import { Header } from "@/components/reactPdf/header";
 import { ContactAddress } from "@/components/reactPdf/contact-address";
 import { AddressDetails } from "@/components/reactPdf/address-details";
@@ -60,12 +58,13 @@ Font.register({
   ],
 });
 
-const OfferPdfDownload = ({
+const PdfDownload = ({
   data,
   templateSettings,
   emailTemplateSettings,
   pdfFile,
   setPdfFile,
+  fileName,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -74,6 +73,8 @@ const OfferPdfDownload = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+
+  console.log({data, pdfFile, setPdfFile})
 
   return (
     <div className="download-link">
@@ -136,7 +137,7 @@ const OfferPdfDownload = ({
       >
         {({ blob, url, loading, error }) => {
           if (blob && !pdfFile) {
-            setPdfFile(blobToFile(blob, "offer.pdf"));
+            setPdfFile(blobToFile(blob, fileName || "output.pdf"));
           }
           return <></>;
         }}
@@ -145,19 +146,10 @@ const OfferPdfDownload = ({
   );
 };
 
-export default OfferPdfDownload;
+export default PdfDownload;
 
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
-  },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
   },
 });

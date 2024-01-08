@@ -6,14 +6,26 @@ import {
   TemplateType,
 } from "@/types";
 import { EmailTemplate } from "@/types/settings";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
   getTemplateSettings,
   readEmailSettings,
 } from "@/api/slices/settingSlice/settings";
-import { readContractDetails } from "@/api/slices/contract/contractSlice";
+import {
+  readContractDetails,
+  sendContractEmail,
+  updateContractContent,
+} from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
+import { useRouter } from "next/router";
+import localStoreUtil from "@/utils/localstore.util";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
+import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -52,21 +64,33 @@ let contractPdfInfo = {
   description: "",
 };
 
-export const usePdfDownload = (offerID: string) => {
-  const [offerData, setOfferData] =
+export const useContractPdf = () => {
+  // const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
+  const [contractData, setContractData] =
     useState<PdfProps<ContractEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
+
+  const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
+    null
+  );
+  const [pdfFile, setPdfFile] = useState(null);
+
   const {
     auth: { user },
-    global: { modal },
+    global: { modal, loading: loadingGlobal },
     contract: { error, loading, contractDetails },
   } = useAppSelector((state) => state);
-
   const dispatch = useAppDispatch();
+
+  const maxItemsFirstPage = 6;
+  const maxItemsPerPage = 10;
+
+  const router = useRouter();
+  const { offerID } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -148,8 +172,8 @@ export const usePdfDownload = (offerID: string) => {
               address: contractDetails?.offerID?.addressID?.address,
               header: contractDetails?.title,
               workDates: contractDetails?.offerID?.date,
-              handleTitleUpdate: () => {},
-              handleDescriptionUpdate: () => {},
+              handleTitleUpdate: handleTitleUpdate,
+              handleDescriptionUpdate: handleDescriptionUpdate,
             },
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
@@ -181,7 +205,7 @@ export const usePdfDownload = (offerID: string) => {
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
-              totalPages: 10,
+              totalPages: calculateTotalPages,
             },
             qrCode: {
               acknowledgementSlip: qrCodeAcknowledgementData,
@@ -192,8 +216,41 @@ export const usePdfDownload = (offerID: string) => {
             signature: contractDetails?.offerID?.signature,
             isCanvas: false,
           };
+          // const distributeItems = (): ServiceList[][] => {
+          //   const totalItems =
+          //     contractDetails?.offerID?.serviceDetail?.serviceDetail?.length;
+          //   let pages: ServiceList[][] = [];
 
-          setOfferData(formatData);
+          //   if (totalItems > maxItemsFirstPage) {
+          //     pages.push(
+          //       contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
+          //         0,
+          //         maxItemsFirstPage
+          //       )
+          //     );
+          //     for (
+          //       let i = maxItemsFirstPage;
+          //       i < totalItems;
+          //       i += maxItemsPerPage
+          //     ) {
+          //       pages.push(
+          //         contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
+          //           i,
+          //           i + maxItemsPerPage
+          //         )
+          //       );
+          //     }
+          //   } else {
+          //     pages.push(
+          //       contractDetails?.offerID?.serviceDetail?.serviceDetail
+          //     );
+          //   }
+
+          //   return pages;
+          // };
+
+          // setNewPageData(distributeItems());
+          setContractData(formatData);
           contractPdfInfo = {
             ...contractPdfInfo,
             subject:
@@ -205,5 +262,120 @@ export const usePdfDownload = (offerID: string) => {
       }
     })();
   }, [offerID]);
-  return { offerData };
+
+  const totalItems = contractData?.serviceItem?.length ?? 0;
+
+  const calculateTotalPages = useMemo(() => {
+    const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
+    const remainingItems = totalItems - itemsOnFirstPage;
+    const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
+
+    // Add 1 for the first page and 1 for the last page
+    return 1 + 1 + additionalPages;
+  }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
+
+  const handleEmailSend = async () => {
+    try {
+      const formData = new FormData();
+      setActiveButtonId("email");
+
+      const data = await localStoreUtil.get_data("contractComposeEmail");
+      if (data && pdfFile) {
+        formData.append("file", pdfFile as any);
+        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+        let apiData = { ...data, pdf: fileUrl?.payload };
+
+        delete apiData["content"];
+        const res = await dispatch(sendContractEmail({ data: apiData }));
+        if (res?.payload) {
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
+      } else {
+        let apiData = {
+          email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+          content: contractDetails?.offerID?.content?.id,
+          subject:
+            contractDetails?.offerID?.content?.confirmationContent?.title,
+          description:
+            contractDetails?.offerID?.content?.confirmationContent?.body,
+          attachments:
+            contractDetails?.offerID?.content?.confirmationContent?.attachments,
+          id: contractDetails?.id,
+        };
+        const res = await dispatch(sendContractEmail({ data: apiData }));
+        if (res?.payload) {
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
+      }
+    } catch (error) {
+      console.error("Error in handleEmailSend:", error);
+    }
+  };
+  const handleDonwload = () => {
+    window.open(contractData?.attachement);
+  };
+  const handlePrint = () => {
+    window.open(contractData?.attachement);
+  };
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+  const onSuccess = () => {
+    router.push("/contract");
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const handleTitleUpdate = async (value: string) => {
+    const apiData = {
+      id: offerID,
+      title: value,
+    };
+    const response = await dispatch(updateContractContent({ data: apiData }));
+    if (response?.payload) {
+      contractPdfInfo = { ...contractPdfInfo, subject: value };
+      return true;
+    } else return false;
+  };
+  const handleDescriptionUpdate = async (value: string) => {
+    const apiData = {
+      id: offerID,
+      additionalDetails: value,
+    };
+
+    const response = await dispatch(updateContractContent({ data: apiData }));
+    if (response?.payload) {
+      contractPdfInfo = { ...contractPdfInfo, description: value };
+
+      return true;
+    } else return false;
+  };
+  const handleSendByPost = async () => {
+    setActiveButtonId("post");
+    const apiData = {
+      emailStatus: 2,
+      id: offerID,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+  return {
+    contractData,
+    modal,
+    loading,
+    activeButtonId,
+    router,
+    templateSettings,
+    emailTemplateSettings,
+    pdfFile,
+    loadingGlobal,
+    setPdfFile,
+    dispatch,
+    onClose,
+    onSuccess,
+    handleDonwload,
+    handleEmailSend,
+    handlePrint,
+    handleSendByPost,
+  };
 };

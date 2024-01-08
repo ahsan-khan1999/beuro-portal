@@ -76,7 +76,7 @@ export const AddressDetails = ({
           >
             Address {index + 1}:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
             {address.description && `, ${address.description}`}
           </Text>
