@@ -1,30 +1,37 @@
+import {
+  DocumentDetailFooterProps,
+  PdfPreviewFooterProps,
+  TemplateType,
+} from "@/types";
 import { FooterProps } from "@/types/pdf";
+import { insertBreaks } from "@/utils/functions";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
+import { useMemo } from "react";
 
 const styles = StyleSheet.create({
   footerContainer: {
     width: 595,
-    height: 95,
+    paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#EEEEEE",
-    justifyContent: "space-around",
-    alignItems: "center",
+    justifyContent: "center",
+    alignItems: "stretch",
     position: "absolute",
-    fontSize: 12,
+    backgroundColor: "#EEEEEE",
+    columnGap: 16,
     bottom: 0,
     left: 0,
     right: 0,
-    textAlign: "center",
-    color: "grey",
+    textAlign: "left",
+    paddingHorizontal: 30,
   },
   footerSection: {
     borderRight: 1,
     borderColor: "#D9D9D9",
-    paddingRight: 10,
+    width: "25%",
   },
   footerText: {
-    fontSize: 14,
+    fontSize: 12,
     color: "#000",
     fontWeight: "normal",
     marginBottom: 2,
@@ -44,42 +51,138 @@ const styles = StyleSheet.create({
 });
 
 export const Footer = ({
-  company,
-  createdBy: { email },
-  pages,
-}: FooterProps) => (
-  <View style={styles.footerContainer} fixed>
-    <View style={styles.footerSection}>
-      <Text style={styles.footerText}>{company.companyName}</Text>
-      <Text style={styles.footerText}>{company.website}</Text>
-      <Text style={styles.footerText}>{email}</Text>
-      <Text style={styles.footerText}>{company.mobileNumber}</Text>
-      <Text style={styles.footerText}>{company.phoneNumber}</Text>
+  documentDetails,
+  emailTemplateSettings,
+  templateSettings,
+}: PdfPreviewFooterProps) => {
+  const { companyName, email, phoneNumber, taxNumber, website } =
+    documentDetails?.firstColumn ?? {};
+  const { address, bankDetails } = documentDetails?.secondColumn ?? {};
+  const {
+    row1: c3Row1,
+    row2: c3Row2,
+    row3: c3Row3,
+    row4: c3Row4,
+    row5: c3Row5,
+  } = documentDetails?.thirdColumn ?? {};
+  const {
+    row1: c4Row1,
+    row2: c4Row2,
+    row3: c4Row3,
+    row4: c4Row4,
+    row5: c4Row5,
+  } = documentDetails?.fourthColumn ?? {};
+  const ibanNumber = insertBreaks(bankDetails?.ibanNumber, 16);
+  const { FooterColour, textColour } = emailTemplateSettings ?? {};
+  const {
+    isFirstColumn,
+    isFourthColumn,
+    isSecondColumn,
+    isThirdColumn,
+    firstColumn,
+    secondColumn,
+    thirdColumn,
+    fourthColumn,
+  } = templateSettings ?? {};
+
+  const { isCompanyName, isEmail, isPhoneNumber, isTaxNumber, isWebsite } =
+    firstColumn ?? {};
+  const { isAccountNumber, isBankName, isIBAN, isPostCode, isStreetNumber } =
+    secondColumn ?? {};
+  const {
+    isRow1: isC3Row1,
+    isRow2: isC3Row2,
+    isRow3: isC3Row3,
+    isRow4: isC3Row4,
+    isRow5: isC3Row5,
+  } = thirdColumn ?? {};
+  const {
+    isRow1: isC4Row1,
+    isRow2: isC4Row2,
+    isRow3: isC4Row3,
+    isRow4: isC4Row4,
+    isRow5: isC4Row5,
+  } = fourthColumn ?? {};
+
+  console.log(templateSettings);
+
+  if (FooterColour) styles.footerContainer.backgroundColor = `#${FooterColour}`;
+  if (textColour) styles.footerText.color = `#${textColour}`;
+
+  const {
+    showFirstColumnBorder,
+    showSecondColumnBorder,
+    showThirdColumnBorder,
+  } = useMemo(() => {
+    const showFirstColumnBorder =
+      isFirstColumn && (isSecondColumn || isThirdColumn || isFourthColumn);
+    const showSecondColumnBorder =
+      isSecondColumn && (isThirdColumn || isFourthColumn);
+    const showThirdColumnBorder = isThirdColumn && isFourthColumn;
+    return {
+      showFirstColumnBorder,
+      showSecondColumnBorder,
+      showThirdColumnBorder,
+    };
+  }, [isFirstColumn, isSecondColumn, isThirdColumn, isFourthColumn]);
+
+  const getFooterSectionStyle = (showBorder?: boolean) => {
+    return {
+      ...styles.footerSection,
+      borderRight: showBorder ? 1 : 0,
+    };
+  };
+
+  return (
+    <View style={styles.footerContainer} fixed>
+      {isFirstColumn && (
+        <View style={getFooterSectionStyle(showFirstColumnBorder)}>
+          {isCompanyName && (
+            <Text style={styles.footerText}>{companyName}</Text>
+          )}
+          {isWebsite && <Text style={styles.footerText}>{website}</Text>}
+          {isEmail && <Text style={styles.footerText}>{email}</Text>}
+          {isPhoneNumber && (
+            <Text style={styles.footerText}>{phoneNumber}</Text>
+          )}
+          {isTaxNumber && <Text style={styles.footerText}>{taxNumber}</Text>}
+        </View>
+      )}
+      {isSecondColumn && (
+        <View style={getFooterSectionStyle(showSecondColumnBorder)}>
+          {isBankName && (
+            <Text style={styles.footerText}>{bankDetails?.bankName}</Text>
+          )}
+          {isAccountNumber && (
+            <Text style={styles.footerText}>{bankDetails?.accountNumber}</Text>
+          )}
+          {isIBAN && <Text style={styles.footerText}>{ibanNumber}</Text>}
+          {isStreetNumber && (
+            <Text style={styles.footerText}>{`${address?.streetNumber},`}</Text>
+          )}
+          {isPostCode && (
+            <Text style={styles.footerText}>{`${address?.postalCode}`}</Text>
+          )}
+        </View>
+      )}
+      {isThirdColumn && (
+        <View style={getFooterSectionStyle(showThirdColumnBorder)}>
+          {isC3Row1 && <Text style={styles.footerText}>{c3Row1}</Text>}
+          {isC3Row2 && <Text style={styles.footerText}>{c3Row2}</Text>}
+          {isC3Row3 && <Text style={styles.footerText}>{c3Row3}</Text>}
+          {isC3Row4 && <Text style={styles.footerText}>{c3Row4}</Text>}
+          {isC3Row5 && <Text style={styles.footerText}>{c3Row5}</Text>}
+        </View>
+      )}
+      {isFourthColumn && (
+        <View style={getFooterSectionStyle(false)}>
+          {isC4Row1 && <Text style={styles.footerText}>{c4Row1}</Text>}
+          {isC4Row2 && <Text style={styles.footerText}>{c4Row2}</Text>}
+          {isC4Row3 && <Text style={styles.footerText}>{c4Row3}</Text>}
+          {isC4Row4 && <Text style={styles.footerText}>{c4Row4}</Text>}
+          {isC4Row5 && <Text style={styles.footerText}>{c4Row5}</Text>}
+        </View>
+      )}
     </View>
-    <View style={styles.footerSection}>
-      <Text style={styles.footerText}>{company.bankDetails.bankName}</Text>
-      <Text style={styles.footerText}>{company.bankDetails.ibanNumber}</Text>
-      <Text
-        style={styles.footerText}
-      >{`${company.address.streetNumber}, ${company.address.houseNumber}`}</Text>
-      <Text
-        style={styles.footerText}
-      >{`${company.address.postalCode}, ${company.address.city}`}</Text>
-      <Text style={styles.footerText}>{company.taxNumber}</Text>
-    </View>
-    <View style={styles.footerSection}>
-      <Text style={styles.pageNumberText}>Row 1</Text>
-      <Text style={styles.pageNumberText}>Row 2</Text>
-      <Text style={styles.pageNumberText}>Row 3</Text>
-      <Text style={styles.pageNumberText}>Row 4</Text>
-      <Text style={styles.pageNumberText}>Row 5</Text>
-    </View>
-    <View style={styles.footerSection}>
-      <Text style={styles.pageNumberText}>Row 1</Text>
-      <Text style={styles.pageNumberText}>Row 2</Text>
-      <Text style={styles.pageNumberText}>Row 3</Text>
-      <Text style={styles.pageNumberText}>Row 4</Text>
-      <Text style={styles.pageNumberText}>Row 5</Text>
-    </View>
-  </View>
-);
+  );
+};

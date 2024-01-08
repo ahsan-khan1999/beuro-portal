@@ -19,7 +19,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from './auth';
+import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -229,7 +229,7 @@ export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   emailSettings: EmailSetting | null,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield
@@ -387,7 +387,7 @@ export type GenerateOffersFormField = (
     handleRemove?: (id: string) => void;
     onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
-    selectedContent?: string
+    selectedContent?: string;
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
@@ -418,7 +418,7 @@ export type GenerateOfferServiceFormField = (
     generatePrice?: (index: number) => void;
     total?: Total;
     tax?: TaxSetting[] | null;
-    currency?:string
+    currency?: string;
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -451,7 +451,7 @@ export type GenerateLeadsFormField = (
   trigger?: UseFormTrigger<FieldValues>,
   service?: Service[],
   leadDetails?: Lead,
-  systemSettings?:SystemSetting | null
+  systemSettings?: SystemSetting | null
 ) => FormField[];
 export type GenerateCustomerLeadFormField = (
   register: UseFormRegister<FieldValues>,
@@ -581,7 +581,7 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
-  month?: number
+  month?: number;
 }
 
 export interface MoreFilterType {
@@ -622,7 +622,7 @@ export interface DocumentHeaderDetailsProps {
   offerDate: string;
   createdBy: string;
   logo: string;
-  emailTemplateSettings: EmailTemplate | null
+  emailTemplateSettings: EmailTemplate | null;
 }
 
 export interface ProductItemFooterProps {
@@ -649,7 +649,7 @@ export interface MovingDetailsProps {
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
-  addressLabels?: string[]
+  addressLabels?: string[];
 }
 export interface ProductItemProps {
   title: string;
@@ -707,7 +707,7 @@ export interface DocumentDetailFooterProps {
   columnSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
-  emailTemplateSettings?: EmailTemplate | null
+  emailTemplateSettings?: EmailTemplate | null;
 }
 export interface TemplateSettigsFirstColumn {
   isCompanyName: boolean;
@@ -768,7 +768,6 @@ export interface EmailHeaderProps {
   onPrint: () => void;
   handleSendByPost: () => void;
   activeButtonId: string | null;
-
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
@@ -812,14 +811,26 @@ export interface PdfProps<T = EmailHeaderProps> {
   id?: string;
   signature?: string;
   attachement?: string;
-  isCanvas?: boolean
+  isCanvas?: boolean;
+}
+
+export interface PdfPreviewProps {
+  data: PdfProps<ContractEmailHeaderProps>;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
+}
+
+export interface PdfPreviewFooterProps {
+  documentDetails?: DocumentDetailFooterProps;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
   templateSettings: TemplateType | null;
   totalPages: number;
-  emailTemplateSettings: EmailTemplate | null
+  emailTemplateSettings: EmailTemplate | null;
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -830,8 +841,7 @@ export interface PurchasedItemDetailsNextPageProps {
   templateSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
-  emailTemplateSettings: EmailTemplate | null
-
+  emailTemplateSettings: EmailTemplate | null;
 }
 
 export interface qrCode {
@@ -879,11 +889,10 @@ export interface AggrementProps {
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
   isCanvas?: boolean;
-  setIsSignatureDone?: SetStateAction<boolean>,
+  setIsSignatureDone?: SetStateAction<boolean>;
   isSignatureDone?: boolean;
-  emailTemplateSettings?: EmailTemplate | null,
-  setOfferSignature?: SetStateAction<any>
-
+  emailTemplateSettings?: EmailTemplate | null;
+  setOfferSignature?: SetStateAction<any>;
 }
 
 export interface FiltersComponentProps {

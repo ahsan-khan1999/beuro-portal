@@ -1,5 +1,4 @@
 import { PDFResponse } from "@/types/pdf";
-import { AdditionalDetails } from "./additional-details";
 import {
   Document,
   Font,
@@ -8,15 +7,18 @@ import {
   StyleSheet,
   View,
 } from "@react-pdf/renderer";
-import { Header } from "./header";
-import { Footer } from "./footer";
-import { ContactAddress } from "./contact-address";
-import { AddressDetails } from "./address-details";
-import { ServiceTableHederRow } from "./service-table-header-row";
-import { ServiceTableRow } from "./service-table-row";
-import { ServicesTotalAmount } from "./services-total-ammount";
-import { QRCode } from "./qr-code";
-import { EmailHeaderProps, PdfPreviewProps, PdfProps } from "@/types";
+import { Header } from "../reactPdf/header";
+import { ContactAddress } from "../reactPdf/contact-address";
+import { AddressDetails } from "../reactPdf/address-details";
+import { ServiceTableHederRow } from "../reactPdf/service-table-header-row";
+import { ServiceTableRow } from "../reactPdf/service-table-row";
+import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
+import { Footer } from "../reactPdf/footer";
+import { AdditionalDetails } from "../reactPdf/additional-details";
+import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
+import { EmailTemplate } from "@/types/settings";
+import { useEffect, useState } from "react";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 Font.register({
   family: "Poppins",
@@ -236,32 +238,29 @@ export const PDF_DATA: PDFResponse = {
   },
 };
 
-export const A4_WIDTH = 595; // 72dpi 595
+export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const PDF = ({
-  data,
-  templateSettings,
+const OfferPdf = ({
+  offerData,
   emailTemplateSettings,
-}: PdfPreviewProps) => {
-  console.log(data);
-
-  const headerDetails = data?.headerDetails;
-  const { address, header, workDates } = data?.movingDetails || {};
-  const contactAddress = data?.contactAddress;
-  const serviceItem = data?.serviceItem;
-  const serviceItemFooter = data?.serviceItemFooter;
-  const aggrementDetails = data?.aggrementDetails;
-  const qrCode = data?.qrCode;
-  const footerDetails = data?.footerDetails;
-
+  templateSettings,
+}: {
+  offerData?: PdfProps<EmailHeaderProps>;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
+}) => {
+  const headerDetails = offerData?.headerDetails;
+  const { address, header, workDates } = offerData?.movingDetails || {};
+  const contactAddress = offerData?.contactAddress;
+  const serviceItem = offerData?.serviceItem;
+  const serviceItemFooter = offerData?.serviceItemFooter;
+  const aggrementDetails = offerData?.aggrementDetails;
+  const footerDetails = offerData?.footerDetails;
   return (
-    <PDFViewer
-      showToolbar={false}
-      style={{ width: "100%", minHeight: 800, height: "100%" }}
-    >
+    <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
       <Document>
-        <Page style={styles.body} dpi={72}>
+        <Page style={styles.body}>
           <Header {...headerDetails} />
           <View
             style={{
@@ -282,11 +281,9 @@ const PDF = ({
             <ServicesTotalAmount {...serviceItemFooter} />
           </View>
           <Footer
-            {...{
-              documentDetails: footerDetails,
-              emailTemplateSettings,
-              templateSettings,
-            }}
+            documentDetails={footerDetails}
+            emailTemplateSettings={emailTemplateSettings}
+            templateSettings={templateSettings}
           />
         </Page>
 
@@ -305,19 +302,9 @@ const PDF = ({
             <AdditionalDetails description={aggrementDetails} />
           </View>
           <Footer
-            {...{
-              documentDetails: footerDetails,
-              emailTemplateSettings,
-              templateSettings,
-            }}
-          />
-        </Page>
-
-        {/* QR code screen */}
-        <Page size="A4" style={styles.body}>
-          <QRCode
-            acknowledgementSlip={qrCode?.acknowledgementSlip}
-            payableTo={qrCode?.payableTo}
+            documentDetails={footerDetails}
+            emailTemplateSettings={emailTemplateSettings}
+            templateSettings={templateSettings}
           />
         </Page>
       </Document>
@@ -325,7 +312,7 @@ const PDF = ({
   );
 };
 
-export default PDF;
+export default OfferPdf;
 
 const styles = StyleSheet.create({
   body: {
