@@ -5,24 +5,25 @@
 
     const DownloadPdf = () => {
     return (
-        <BlobProvider document={<PDF />}>
-        {({ url, loading, error }) => {
-            if (loading) {
-            return <div>Loading...</div>;
-            }
+        // <BlobProvider document={<PDF />}>
+        // {({ url, loading, error }) => {
+        //     if (loading) {
+        //     return <div>Loading...</div>;
+        //     }
 
-            if (error) {
-            console.error(error);
-            return <div>Error generating PDF</div>;
-            }
+        //     if (error) {
+        //     console.error(error);
+        //     return <div>Error generating PDF</div>;
+        //     }
 
-            return (
-            <a href={url || "#"} target="_blank" rel="noopener noreferrer">
-                Download PDF
-            </a>
-            );
-        }}
-        </BlobProvider>
+        //     return (
+        //     <a href={url || "#"} target="_blank" rel="noopener noreferrer">
+        //         Download PDF
+        //     </a>
+        //     );
+        // }}
+        // </BlobProvider>
+        <></>
     );
     };
 

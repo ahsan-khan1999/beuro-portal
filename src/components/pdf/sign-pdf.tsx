@@ -175,7 +175,6 @@ export const SignPdf = <T,>({
                     isSignatureDone={isSignatureDone}
                     emailTemplateSettings={emailTemplateSettings}
                     setOfferSignature={setOfferSignature}
-                    handleSignature={handleSignature}
 
                 />
                 {isQr && (

@@ -26,7 +26,6 @@ export const Aggrement = ({
   isSignatureDone,
   emailTemplateSettings,
   setOfferSignature,
-  handleSignature
 }: AggrementProps) => {
 
   const date = moment(new Date()).format("DD/MMMM/YY")
@@ -70,7 +69,7 @@ export const Aggrement = ({
             <div className="w-[450px] h-[278px] flex flex-col justify-end mt-5">
               {
                 isCanvas &&
-                <SignaturePad signature={signature} isCanvas={isCanvas} isSignatureDone={isSignatureDone} setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>} setOfferSignature={setOfferSignature} handleSignature={handleSignature}/> ||
+                <SignaturePad signature={signature} isCanvas={isCanvas} isSignatureDone={isSignatureDone} setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>} setOfferSignature={setOfferSignature} /> ||
                 <div className="flex flex-col gap-y-[18px]">
                   {signature && <Image src={signature} alt="signature" height={177} width={446} />}
 

@@ -10,7 +10,6 @@ import {
     usePDF,
     BlobProvider
 } from "@react-pdf/renderer";
-import { usePdfDownload } from "@/hooks/contract/usePdfDownload";
 import { Header } from "../reactPdf/header";
 import { ContactAddress } from "../reactPdf/contact-address";
 import { AddressDetails } from "../reactPdf/address-details";
@@ -287,7 +286,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                     ))}
                     <ServicesTotalAmount {...serviceItemFooter} />
                 </View>
-                <Footer {...PDF_DATA.footer} />
+                {/* <Footer {...PDF_DATA.footer} /> */}
             </Page>
 
             {/* Additional details */}
@@ -304,7 +303,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                     <ContactAddress {...{ ...contactAddress }} />
                     <AdditionalDetails description={aggrementDetails} signature={signature} />
                 </View>
-                <Footer {...PDF_DATA.footer} />
+                {/* <Footer {...PDF_DATA.footer} /> */}
             </Page>
 
 
@@ -369,7 +368,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                                 ))}
                                 <ServicesTotalAmount {...serviceItemFooter} />
                             </View>
-                            <Footer {...PDF_DATA.footer} />
+                            {/* <Footer {...PDF_DATA.footer} /> */}
                         </Page>
 
                         {/* Additional details */}
@@ -386,7 +385,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                                 <ContactAddress {...{ ...contactAddress }} />
                                 <AdditionalDetails description={aggrementDetails} signature={signature} />
                             </View>
-                            <Footer {...PDF_DATA.footer} />
+                            {/* <Footer {...PDF_DATA.footer} /> */}
                         </Page>
 
 
