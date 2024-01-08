@@ -11,6 +11,7 @@ import { useMemo } from "react";
 const styles = StyleSheet.create({
   footerContainer: {
     width: 595,
+    height: 130,
     paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
@@ -73,6 +74,7 @@ export const Footer = ({
     row5: c4Row5,
   } = documentDetails?.fourthColumn ?? {};
   const ibanNumber = insertBreaks(bankDetails?.ibanNumber, 16);
+  const accountNumber = insertBreaks(bankDetails?.accountNumber, 16);
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
   const {
     isFirstColumn,
@@ -103,8 +105,6 @@ export const Footer = ({
     isRow4: isC4Row4,
     isRow5: isC4Row5,
   } = fourthColumn ?? {};
-
-  console.log(templateSettings);
 
   if (FooterColour) styles.footerContainer.backgroundColor = `#${FooterColour}`;
   if (textColour) styles.footerText.color = `#${textColour}`;
@@ -154,7 +154,7 @@ export const Footer = ({
             <Text style={styles.footerText}>{bankDetails?.bankName}</Text>
           )}
           {isAccountNumber && (
-            <Text style={styles.footerText}>{bankDetails?.accountNumber}</Text>
+            <Text style={styles.footerText}>{accountNumber}</Text>
           )}
           {isIBAN && <Text style={styles.footerText}>{ibanNumber}</Text>}
           {isStreetNumber && (

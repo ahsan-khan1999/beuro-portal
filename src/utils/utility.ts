@@ -740,3 +740,9 @@ export const smoothScrollToSection = (target: string) => {
 
   window.scrollTo(0,offsetPosition);
 };
+
+export function blobToFile(blob: any, fileName: string) {
+  const options = { type: blob.type };
+  const file = new File([blob], fileName, options);
+  return file;
+}

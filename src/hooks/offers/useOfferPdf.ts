@@ -20,7 +20,10 @@ import {
 } from "@/types";
 import { OffersTableRowTypes, ServiceList } from "@/types/offers";
 import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType } from "@/api/slices/globalSlice/global";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
@@ -71,9 +74,10 @@ export const useOfferPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+  const [pdfFile, setPdfFile] = useState(null);
   const {
     auth: { user },
-    global: { modal },
+    global: { modal, loading: loadingGlobal },
     offer: { error, loading, offerDetails },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
@@ -221,13 +225,16 @@ export const useOfferPdf = () => {
 
   const handleEmailSend = async () => {
     try {
+      const formData = new FormData();
       setActiveButtonId("email");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
 
-      if (data) {
-        let apiData = { ...data };
+      if (data && pdfFile) {
         // delete apiData["id"]
+        formData.append("file", pdfFile as any);
+        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+        let apiData = { ...data, pdf: fileUrl?.payload };
         delete apiData["content"];
 
         const res = await dispatch(sendOfferEmail({ data: apiData }));
@@ -240,7 +247,7 @@ export const useOfferPdf = () => {
           content: offerDetails?.content?.id,
           subject: offerDetails?.content?.offerContent?.title,
           description: offerDetails?.content?.offerContent?.body,
-          pdf: offerDetails?.content?.offerContent?.attachments,
+          attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id,
         };
         const res = await dispatch(sendOfferEmail({ data: apiData }));
@@ -284,6 +291,9 @@ export const useOfferPdf = () => {
     activeButtonId,
     modal,
     loading,
+    loadingGlobal,
+    pdfFile,
+    setPdfFile,
     handleEmailSend,
     handleDonwload,
     handleSendByPost,

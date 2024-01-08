@@ -20,7 +20,10 @@ import {
 import { contractTableTypes } from "@/types/contract";
 import { useRouter } from "next/router";
 import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType } from "@/api/slices/globalSlice/global";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 
@@ -74,10 +77,11 @@ export const useContractPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+  const [pdfFile, setPdfFile] = useState(null);
 
   const {
     auth: { user },
-    global: { modal },
+    global: { modal, loading: loadingGlobal },
     contract: { error, loading, contractDetails },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
@@ -271,21 +275,18 @@ export const useContractPdf = () => {
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
   const handleEmailSend = async () => {
-    setActiveButtonId("email");
     try {
-      const localStorageContractData = await localStoreUtil.get_data(
-        "contractComposeEmail"
-      );
+      const formData = new FormData();
+      setActiveButtonId("email");
 
-      const data = {
-        id: contractDetails?.id,
-        email: localStorageContractData?.email,
-        subject: localStorageContractData?.subject,
-        description: localStorageContractData?.description,
-        pdf: localStorageContractData?.pdf,
-      };
-      if (localStorageContractData) {
-        const res = await dispatch(sendContractEmail({ data: data }));
+      const data = await localStoreUtil.get_data("contractComposeEmail");
+      if (data && pdfFile) {
+        formData.append("file", pdfFile as any);
+        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+        let apiData = { ...data, pdf: fileUrl?.payload };
+
+        delete apiData["content"];
+        const res = await dispatch(sendContractEmail({ data: apiData }));
         if (res?.payload) {
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
@@ -297,8 +298,8 @@ export const useContractPdf = () => {
             contractDetails?.offerID?.content?.confirmationContent?.title,
           description:
             contractDetails?.offerID?.content?.confirmationContent?.body,
-          pdf: contractDetails?.offerID?.content?.confirmationContent
-            ?.attachments,
+          attachments:
+            contractDetails?.offerID?.content?.confirmationContent?.attachments,
           id: contractDetails?.id,
         };
         const res = await dispatch(sendContractEmail({ data: apiData }));
@@ -366,6 +367,9 @@ export const useContractPdf = () => {
     router,
     templateSettings,
     emailTemplateSettings,
+    pdfFile,
+    loadingGlobal,
+    setPdfFile,
     dispatch,
     onClose,
     onSuccess,

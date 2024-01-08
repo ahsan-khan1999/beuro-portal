@@ -29,6 +29,7 @@ import { staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export const productItems: ServiceList[] = [
     {
@@ -362,19 +363,20 @@ const SignPdfPreview = () => {
     };
 
     return (
-        <YogaPdfContainer>
+        loading ? <LoadingState /> :
+            <YogaPdfContainer>
 
-            <div className="my-5">
-                <SignPdf<EmailHeaderProps>
-                    pdfData={offerData}
-                    newPageData={newPageData}
-                    templateSettings={templateSettings}
-                    totalPages={calculateTotalPages}
-                    action={action as string}
-                    emailTemplateSettings={emailTemplateSettings}
-                />
-            </div>
-        </YogaPdfContainer>
+                <div className="my-5">
+                    <SignPdf<EmailHeaderProps>
+                        pdfData={offerData}
+                        newPageData={newPageData}
+                        templateSettings={templateSettings}
+                        totalPages={calculateTotalPages}
+                        action={action as string}
+                        emailTemplateSettings={emailTemplateSettings}
+                    />
+                </div>
+            </YogaPdfContainer>
     );
 };
 

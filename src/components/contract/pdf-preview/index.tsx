@@ -42,6 +42,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import dynamic from "next/dynamic";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
+import OfferPdf from "@/components/offers/offer-pdf-preview";
 
 export const productItems: ServiceList[] = [
   {
@@ -157,7 +158,9 @@ const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   { ssr: false }
 );
-
+const PdfDownload = dynamic(() => import("@/components/reactPdf/generate-Pdf-Download"), {
+  ssr: false,
+});
 
 const PdfPriview = () => {
   const {
@@ -168,6 +171,9 @@ const PdfPriview = () => {
     router,
     templateSettings,
     emailTemplateSettings,
+    loadingGlobal,
+    pdfFile,
+    setPdfFile,
     dispatch,
     handleDonwload,
     handleEmailSend,
@@ -202,12 +208,6 @@ const PdfPriview = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const pdfPreviewdata: PdfPreviewProps = {
-    data: contractData,
-    templateSettings,
-    emailTemplateSettings,
-  }
-
   return (
     <>
       {loading ? (
@@ -226,20 +226,25 @@ const PdfPriview = () => {
             onSendViaPost={handleSendByPost}
             activeButtonId={activeButtonId}
           />
-          {/* <YogaPdfContainer>
 
-              <div className="my-5">
-                <Pdf<EmailHeaderProps>
-                  pdfData={offerData}
-                  newPageData={newPageData}
-                  templateSettings={templateSettings}
-                  totalPages={calculateTotalPages}
-                  emailTemplateSettings={emailTemplateSettings}
-                />
-              </div>
-            </YogaPdfContainer> */}
-
-          <ContractPdfPreview {...pdfPreviewdata} />
+          {loading || loadingGlobal ? (
+            <LoadingState />
+          ) : (
+            <div className="flex justify-center my-5">
+              <ContractPdfPreview
+                data={contractData}
+                emailTemplateSettings={emailTemplateSettings}
+                templateSettings={templateSettings}
+              />
+              <PdfDownload
+                data={contractData}
+                templateSettings={templateSettings}
+                emailTemplateSettings={emailTemplateSettings}
+                pdfFile={pdfFile}
+                setPdfFile={setPdfFile}
+              />
+            </div>
+          )}
 
           {renderModal()}
         </>

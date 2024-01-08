@@ -23,14 +23,20 @@ import {
   readEmailSettings,
 } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType } from "@/api/slices/globalSlice/global";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
-const OfferPdf = dynamic(() => import("../offer-pdf-preview"), { ssr: false });
+const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), { ssr: false });
+const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
+  ssr: false,
+});
 
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
@@ -143,6 +149,9 @@ const PdfPriview = () => {
     templateSettings,
     modal,
     loading,
+    loadingGlobal,
+    pdfFile,
+    setPdfFile,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -180,13 +189,6 @@ const PdfPriview = () => {
             handleSendByPost={handleSendByPost}
             activeButtonId={activeButtonId}
           />
-          <div className="flex justify-center my-5">
-            <OfferPdf
-              offerData={offerData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-            />
-          </div>
           {/* <YogaPdfContainer>
 
               <div className="flex justify-center my-5">
@@ -200,6 +202,25 @@ const PdfPriview = () => {
                 />
               </div>
             </YogaPdfContainer> */}
+
+          {loading || loadingGlobal ? (
+            <LoadingState />
+          ) : (
+            <div className="flex justify-center my-5">
+              <OfferPdf
+                data={offerData}
+                emailTemplateSettings={emailTemplateSettings}
+                templateSettings={templateSettings}
+              />
+              <OfferPdfDownload
+                data={offerData}
+                templateSettings={templateSettings}
+                emailTemplateSettings={emailTemplateSettings}
+                pdfFile={pdfFile}
+                setPdfFile={setPdfFile}
+              />
+            </div>
+          )}
 
           {renderModal()}
         </div>

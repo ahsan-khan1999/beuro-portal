@@ -630,6 +630,9 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
+  invoiceCreatedAmount?: string;
+  invoicePaidAmount?: string;
+  isInvoice?: boolean;
 }
 
 export interface ContactDetailsProps {
@@ -815,9 +818,12 @@ export interface PdfProps<T = EmailHeaderProps> {
 }
 
 export interface PdfPreviewProps {
-  data: PdfProps<ContractEmailHeaderProps>;
+  data?: PdfProps<ContractEmailHeaderProps>;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
+  pdfFile?: any;
+  setPdfFile?: SetStateAction<any>;
+  fileName?: string;
 }
 
 export interface PdfPreviewFooterProps {
