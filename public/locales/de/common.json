@@ -631,6 +631,8 @@
   },
   "invoice": {
     "main_heading": "Rechnung",
+    "invoice_details": "Rechnungsdetails",
+    "receipt_details": "Belegdetails",
     "table_functions": {
       "open": "Öffnen",
       "overdue": "Überfällig",
@@ -648,6 +650,7 @@
       "edit": "bearbeiten"
     },
     "card_content": {
+      "invoice_number": "Rechnungsnummer",
       "heading": "Rechnungsdetails",
       "invoice_id": "Rechnungs-ID",
       "title": "Rechnungstitel",
@@ -1778,5 +1781,26 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     }
+  },
+  "global_search": {
+    "customer": "Kunde",
+    "customer_id": "Kunden-ID",
+    "phone": "Telefonnummer",
+    "created_date": "Erstellungsdatum",
+    "name": "Name",
+    "mobile_number": "Handynummer",
+    "address": "Adresse",
+    "email": "E-Mail-Adresse",
+    "created_by": "Erstellt von",
+    "notes": "Notizen",
+    "paid_amount": "Bezahlter Betrag",
+    "unpaid_amount": "Ausstehender Betrag"
+  },
+  "switch_tabs": {
+    "invoice": "Rechnung",
+    "receipt": "Quittung",
+    "offer": "Angebote",
+    "contract": "Verträge",
+    "invoices": "Rechnungen"
   }
 }

@@ -639,6 +639,8 @@
   },
   "invoice": {
     "main_heading": "Invoice",
+    "invoice_details":"Invoice Details",
+    "receipt_details":"Receipt Details",
     "table_functions": {
       "open": "Open",
       "overdue": "Overdue",
@@ -656,6 +658,7 @@
       "edit": "Edit"
     },
     "card_content": {
+      "invoice_number":"Invoice Number",
       "heading": "Invoice Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
@@ -1789,5 +1792,26 @@
       "overdue": "Overdue",
       "paid": "Paid"
     }
+  },
+  "global_search": {
+    "customer":"Customer",
+    "customer_id": "Customer ID",
+    "phone": "Phone No",
+    "created_date": "Creation Date",
+    "name": "Name",
+    "mobile_number": "Mobile No",
+    "address": "Address",
+    "email": "Email Address",
+    "created_by": "Created By",
+    "notes": "Notes",
+    "paid_amount": "Paid Amount",
+    "unpaid_amount": "Unpaid Amount"
+  },
+  "switch_tabs": {
+    "invoice": "Invoice",
+    "receipt": "Receipt",
+    "offer": "Offers",
+    "contract": "Contracts",
+    "invoices": "Invoices"
   }
 }
