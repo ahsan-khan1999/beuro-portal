@@ -946,6 +946,7 @@
       "required_service": "Required Service",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
+      "days": "Days",
       "availability": "Contact Availability",
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",

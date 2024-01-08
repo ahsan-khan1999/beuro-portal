@@ -129,6 +129,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         // placeholder: "20000 CHF",
         register,
         percentage: (type === "1" && "%") || "",
+        step:"0.01"
       },
     },
 

@@ -223,6 +223,8 @@ export default function useOfferDetails() {
       );
       if (response?.payload)
         dispatch(updateModalType({ type: ModalType.CREATION }));
+        dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
+
     }
   };
   return {

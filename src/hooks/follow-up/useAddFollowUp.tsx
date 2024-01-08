@@ -1,4 +1,4 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
+import { loginUser, readDashboard } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -21,7 +21,7 @@ export const useAddFollowUp = (
   const dispatch = useAppDispatch();
   const { customer } = useAppSelector((state) => state.customer);
   const { lead } = useAppSelector((state) => state.lead);
-  const { loading,error } = useAppSelector((state) => state.followUp);
+  const { loading, error } = useAppSelector((state) => state.followUp);
   const { followUps } = useAppSelector((state) => state.settings);
 
 
@@ -29,7 +29,7 @@ export const useAddFollowUp = (
   useEffect(() => {
     dispatch(readFollowUpSettings({}))
   }, [])
-  
+
 
   const schema = generateAddFollowUpValidation(translate);
   const {
@@ -56,12 +56,16 @@ export const useAddFollowUp = (
     register,
     loading,
     control,
-    { customer: customer, lead: lead,followUps },
+    { customer: customer, lead: lead, followUps },
     handleModalPop,
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(createFollowUp({ data, router, setError, translate }));
-    if (response?.payload) handleFollowUps();
+    if (response?.payload) {
+      handleFollowUps();
+      if (router.pathname === "/dashboard") dispatch(readDashboard({ params: { filter: { month: 1 } } }))
+
+    }
 
 
   };

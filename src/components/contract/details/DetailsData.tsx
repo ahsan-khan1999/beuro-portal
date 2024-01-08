@@ -6,6 +6,8 @@ import colorFullPDFIcon from "@/assets/svgs/color_pdf_icon.svg";
 import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { contractTableTypes } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
+import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
+import { staticEnums } from "@/utils/static";
 
 const DetailsData = ({
   contractDetails,
@@ -14,7 +16,7 @@ const DetailsData = ({
   contractDetails: contractTableTypes;
   handleViewPdf: () => void
 }) => {
-  return  (
+  return (
     <ContractCardLayout>
       {
         contractDetails?.signedContracts?.map((item) => (
@@ -36,13 +38,12 @@ const DetailsData = ({
                 {formatDateToCustomString(item?.createdAt)}
               </span>
             </div>
-            <div className="cursor-pointer" onClick={() => {
+            <div className="cursor-pointer mb-1" onClick={() => {
               window.open(item?.link)
             }}>
-              <Image
-                src={colorFullPDFIcon}
-                alt="colorFullPDFIcon"
-                className="mr-[68px] "
+              <PdfIcon
+                className="mr-[68px]"
+                pathClass={item?.status == 1 ? "#4A13E7":"#4A13E7"}
               />
             </div>
           </div>

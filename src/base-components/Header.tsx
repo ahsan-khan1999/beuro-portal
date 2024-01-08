@@ -21,15 +21,15 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    // dispatch(logoutUser())
-    // logout()
-    router.push({ pathname: "/pdf", query: { offerID: "659bef55a6ba5c8e01d0c5e7", action: "Accept" } })
+    dispatch(logoutUser())
+    logout()
+    // router.push({ pathname: "/pdf", query: { offerID: "659bef55a6ba5c8e01d0c5e7", action: "Accept" } })
   }
   useEffect(() => {
     if (user && user?.role !== "Admin") {
       dispatch(readSystemSettings())
     }
-  }, [])
+  }, [user])
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

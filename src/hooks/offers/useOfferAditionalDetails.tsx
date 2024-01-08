@@ -37,13 +37,10 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
     watch,
     setValue,
     trigger,
-    getValues
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  // useMemo(() => {
-  //   setValue("additionalDetails", offerDetails?.content?.offerContent?.description);
-  // }, [offerDetails?.content?.id])
+
   useMemo(() => {
     setValue("additionalDetails", offerDetails?.additionalDetails || offerDetails?.content?.offerContent?.description);
   }, [offerDetails?.additionalDetails])

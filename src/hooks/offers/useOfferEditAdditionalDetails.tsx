@@ -42,7 +42,7 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     resolver: yupResolver<FieldValues>(schema),
   });
   useMemo(() => {
-    setValue("additionalDetails", offerDetails?.additionalDetails);
+    setValue("additionalDetails", offerDetails?.additionalDetails || offerDetails?.content?.offerContent?.description);
   }, [offerDetails?.additionalDetails])
 
 
