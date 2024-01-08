@@ -33,6 +33,7 @@ const EntryLinks = () => {
         dropDownDisabled={false}
         shouldNotSelectItem={false}
         dropDownClassName="!h-[42px]"
+        dropDownItemsContainerClassName="w-full"
       />
 
       <div className="flex justify-center">

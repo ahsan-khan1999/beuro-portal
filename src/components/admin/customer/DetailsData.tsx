@@ -44,7 +44,7 @@ const DetailsData = ({
             {translate("admin.customers_details.card_content.main_heading")}
           </h1>
         </div>
-        <button
+        {/* <button
           onClick={handleAreYouSure}
           className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
         >
@@ -60,7 +60,7 @@ const DetailsData = ({
             : `${translate(
                 "admin.customers_details.card_content.make_button_unchecked"
               )}`}
-        </button>
+        </button> */}
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 

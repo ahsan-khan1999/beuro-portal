@@ -88,57 +88,89 @@ const AdminDashboard = () => {
     {
       icon: leadsIcon,
       alt: "leads icon",
-      title: `${translate("dashboard_detail.cards_title.lead")}`,
-      subTitle: dashboard?.Lead?.totalLeads + " Leads",
+      title: `${translate("dashboard_detail.cards_title.leads")}`,
+      subTitle:
+        dashboard?.Lead?.totalLeads +
+        ` ${translate("dashboard_detail.cards_title.leads")}`,
       id: dashboard?.Lead?.filterCount,
       salePercent: "+" + dashboard?.Lead?.percentage + "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: dashboard?.Lead?.opened + " Open",
-      closed: dashboard?.Lead?.closed + " Close",
-      expired: dashboard?.Lead?.expired + " Expired",
+      open:
+        dashboard?.Lead?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Lead?.closed +
+        ` ${translate("dashboard_detail.cards_status.close")}`,
+      expired:
+        dashboard?.Lead?.expired +
+        ` ${translate("dashboard_detail.cards_status.expire")}`,
       route: () => router.push("/leads"),
     },
     {
       icon: offersIcon,
       alt: "offers icon",
       title: `${translate("dashboard_detail.cards_title.offer")}`,
-      subTitle: dashboard?.Offer?.totalOffers + "Offers",
+      subTitle:
+        dashboard?.Offer?.totalOffers +
+        ` ${translate("dashboard_detail.cards_title.offer")}`,
       id: dashboard?.Offer?.filterCount,
       salePercent: "+" + dashboard?.Offer?.percentage + "%",
       backgroundColor: "bg-dashboardCard2-gradient",
       chartPointColor: "#FC3576",
-      open: dashboard?.Offer?.opened + " Open",
-      closed: dashboard?.Offer?.signed + " Signed",
-      expired: dashboard?.Offer?.expired + " Expired",
+      open:
+        dashboard?.Offer?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Offer?.signed +
+        ` ${translate("dashboard_detail.cards_status.signed")}`,
+      expired:
+        dashboard?.Offer?.expired +
+        ` ${translate("dashboard_detail.cards_status.expire")}`,
       route: () => router.push("/offers"),
     },
     {
       icon: contractsIcon,
       alt: "contracts icon",
       title: `${translate("dashboard_detail.cards_title.contracts")}`,
-      subTitle: dashboard?.Contract?.totalContract + " Contracts",
+      subTitle:
+        dashboard?.Contract?.totalContract +
+        ` ${translate("dashboard_detail.cards_title.contracts")}`,
       id: dashboard?.Contract?.filterCount,
       salePercent: "+" + dashboard?.Contract?.percentage + "%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
-      open: dashboard?.Contract?.opened + " Open",
-      closed: dashboard?.Contract?.confirmed + " Confirmed",
-      expired: dashboard?.Contract?.cancelled + " Cancelled",
+      open:
+        dashboard?.Contract?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Contract?.confirmed +
+        ` ${translate("dashboard_detail.cards_status.confirm")}`,
+      expired:
+        dashboard?.Contract?.cancelled +
+        ` ${translate("dashboard_detail.cards_status.cancel")}`,
       route: () => router.push("/contract"),
     },
     {
       icon: salesIcon,
       alt: "sales icon",
       title: `${translate("dashboard_detail.cards_title.sales")}`,
-      subTitle: dashboard?.Sales?.totalSales + " Sales",
+      subTitle:
+        dashboard?.Sales?.totalSales +
+        ` ${translate("dashboard_detail.cards_title.sales")}`,
       id: dashboard?.Sales?.filterCount,
       salePercent: "+" + dashboard?.Sales?.percentage + "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: dashboard?.Sales?.pending + " Open",
-      closed: dashboard?.Sales?.overdue + " Overdue",
-      expired: dashboard?.Sales?.paid + " Paid",
+      open:
+        dashboard?.Sales?.pending +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Sales?.overdue +
+        ` ${translate("dashboard_detail.cards_status.overdue")}`,
+      expired:
+        dashboard?.Sales?.paid +
+        ` ${translate("dashboard_detail.cards_status.paid")}`,
       route: () => router.push("/dashboard"),
     },
   ];

@@ -264,7 +264,6 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
     const router = useRouter();
     const dispatch = useAppDispatch()
     const { action: pdfAction } = router.query
-    console.log(pdfAction, "pdfAction");
 
     const pdfDoc = (
         <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>

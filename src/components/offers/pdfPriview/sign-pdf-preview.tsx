@@ -352,10 +352,8 @@ const SignPdfPreview = () => {
     };
 
     const handleDonwload = () => {
-        console.log("download");
     };
     const handlePrint = () => {
-        console.log("print");
     };
 
     const onClose = () => {

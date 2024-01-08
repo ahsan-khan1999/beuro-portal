@@ -11,7 +11,6 @@ const TableRows = ({
   return (
     <div>
       {currentPageRows?.map((item: FollowUps, index: number) => {
-        console.log(item.status);
 
         return (
           <div

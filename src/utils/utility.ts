@@ -736,7 +736,6 @@ export const smoothScrollToSection = (target: string) => {
   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
   const offsetPosition = elementPosition - headerOffset;
 
-  console.log(offsetPosition, "offsetPosition");
 
   window.scrollTo(0,offsetPosition);
 };

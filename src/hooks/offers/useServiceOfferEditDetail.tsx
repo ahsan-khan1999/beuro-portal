@@ -144,7 +144,7 @@ export const useServiceOfferEditDetail = ({
 
     let taxAmount =
       isTax && taxType == "0"
-        ? calculateTax(totalPrices, 7.7)
+        ? calculateTax(totalPrices, 8.1)
         : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
@@ -313,14 +313,13 @@ export const useServiceOfferEditDetail = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data?.taxType);
 
     const apiData: typeof data = {
       ...data,
       step: 3,
       id: offerDetails?.id,
       stage: EditComponentsType.additionalEdit,
-      taxAmount: !data?.taxType ? 7.7 : data?.taxAmount,
+      taxAmount: !data?.taxType ? 8.1 : data?.taxAmount,
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

@@ -18,53 +18,7 @@ const ServiceDetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  // const serviceHeading: string[] = [
-  //   `${translate("offers.service_details.detail_headings.title")}`,
-  //   `${translate("offers.service_details.detail_headings.description")}`,
-  //   `${translate("offers.service_details.detail_headings.price")}`,
-  //   `${translate("offers.service_details.detail_headings.unit")}`,
-  //   `${translate("offers.service_details.detail_headings.count")}`,
-  //   `${translate("offers.service_details.detail_headings.total_price")}`,
-  // ];
-
-  // const serviceData: serviceData[] = [
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  // ];
+  
 
   return (
     <LeadsCardLayout>
@@ -154,7 +108,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.taxAmount} (7.7%)
+                  {offerDetails?.taxAmount} (8.1%)
                 </span>
               </div>
             </div>

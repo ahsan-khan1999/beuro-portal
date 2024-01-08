@@ -28,7 +28,6 @@ const DetailsData = ({ date, id, name, isUpdate,handleDelete ,refID}: EmployeeDe
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-          <Image src={printerIcon} alt="printerIcon" />
           <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" onClick={handleDelete}/>
         </div>
       </div>

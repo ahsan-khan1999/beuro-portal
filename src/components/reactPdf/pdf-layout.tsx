@@ -241,7 +241,6 @@ export const A4_HEIGHT = 842; // 72dpi
 
 const PDF = () => {
   const { offerData } = usePdfDownload("65983c34c2849172189b40d1");
-  console.log(offerData);
 
   const headerDetails = offerData?.headerDetails;
   const { address, header, workDates } = offerData?.movingDetails || {};
@@ -251,7 +250,6 @@ const PDF = () => {
   const aggrementDetails = offerData?.aggrementDetails;
   const qrCode = offerData?.qrCode;
   // const dates = offerData?.
-  // console.log(addresses);
 
   return (
     <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>

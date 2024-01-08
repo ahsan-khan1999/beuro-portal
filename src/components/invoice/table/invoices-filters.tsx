@@ -21,9 +21,18 @@ export default function InvoicesFilters({
   const inputRef = useRef<HTMLInputElement>(null);
   const { t: translate } = useTranslation();
   const checkbox: CheckBoxType[] = [
-    { label: "Pending", type: `${staticEnums.InvoiceStatus.Pending}` },
-    { label: "Overdue", type: `${staticEnums.InvoiceStatus.Overdue}` },
-    { label: "Paid", type: `${staticEnums.InvoiceStatus.Paid}` },
+    {
+      label: `${translate("filters.extra_filters.pending")}`,
+      type: `${staticEnums.InvoiceStatus.Pending}`,
+    },
+    {
+      label: `${translate("filters.extra_filters.overdue")}`,
+      type: `${staticEnums.InvoiceStatus.Overdue}`,
+    },
+    {
+      label: `${translate("filters.extra_filters.paid")}`,
+      type: `${staticEnums.InvoiceStatus.Paid}`,
+    },
   ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
@@ -98,10 +107,19 @@ export default function InvoicesFilters({
           value=""
           dropDownIconClassName=""
           options={[
-            { label: "Date", value: "createdAt" },
-            { label: "Latest", value: "-createdAt" },
-            { label: "Oldest", value: "createdAt" },
-            { label: "A - Z", value: "title" },
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
           ]}
           label={translate("common.sort_button")}
         />

@@ -96,23 +96,28 @@ const AdminDashboard = () => {
         backgroundColor: ["#FE9244", "#FF376F", "#4A13E7", "#45C769"],
       },
     ],
-    labels: ["Silver", "Gold", "Diamond", "Infinite"],
+    labels: [
+      `${translate("admin.chart_list.silver")}`,
+      `${translate("admin.chart_list.gold")}`,
+      `${translate("admin.chart_list.diamond")}`,
+      `${translate("admin.chart_list.infinite")}`,
+    ],
   };
 
   const datatest = {
     labels: [
       `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
+      `${translate("admin.overview.months_name.feb")}`,
+      `${translate("admin.overview.months_name.mar")}`,
+      `${translate("admin.overview.months_name.apr")}`,
+      `${translate("admin.overview.months_name.may")}`,
+      `${translate("admin.overview.months_name.jun")}`,
+      `${translate("admin.overview.months_name.jul")}`,
+      `${translate("admin.overview.months_name.aug")}`,
+      `${translate("admin.overview.months_name.sep")}`,
+      `${translate("admin.overview.months_name.oct")}`,
+      `${translate("admin.overview.months_name.nov")}`,
+      `${translate("admin.overview.months_name.dec")}`,
     ],
     datasets: [
       {

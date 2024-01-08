@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: 230,
+    rowGap: 4,
   },
   descriptionTextTitle: {
     color: "#000",
@@ -49,6 +50,12 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 16,
     fontWeight: "normal",
+    width: 86.25,
+  },
+  headerTextTotal: {
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "bold",
     width: 86.25,
   },
 });

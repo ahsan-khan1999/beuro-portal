@@ -60,7 +60,6 @@ const LeadsDetailsCardData = ({
               {translate("leads.card_content.create_button")}
             </p>
           </div>
-          <Image src={printerIcon} alt="printer_icon" />
           <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}

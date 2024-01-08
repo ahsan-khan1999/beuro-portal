@@ -102,7 +102,10 @@ const SERVICE_URLS = {
 
   readOfferPublic: "/offer/public-read",
   rejectOfferPublic: "/offer/reject-offer",
-  updateDiscount: "/offer/update-discount/"
+  updateDiscount: "/offer/update-discount/",
+  readContractQrCode: "/contract/generate-QrCode/",
+  readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf/",
+
 
 };
 
@@ -476,6 +479,12 @@ const rejectOfferPublic = (data) =>
 
 const updateDiscounts = (data) =>
   put(SERVICE_URLS.updateDiscount + `${data?.id}`, data, { feature: featureConstants.login });
+
+const readContractQRCode = (params) =>
+  get(SERVICE_URLS.readContractQrCode, params, { feature: featureConstants.login }, { detail: true });
+
+const readInvoiceQRCode = (params) =>
+  get(SERVICE_URLS.readInvoiceQrCode, params, { feature: featureConstants.login }, { detail: true });
 const apiServices = {
 
   login,
@@ -624,6 +633,8 @@ const apiServices = {
   invoiceSendByPost,
   readOfferDetailPublic,
   rejectOfferPublic,
-  updateDiscounts
+  updateDiscounts,
+  readContractQRCode,
+  readInvoiceQRCode
 };
 export default apiServices;

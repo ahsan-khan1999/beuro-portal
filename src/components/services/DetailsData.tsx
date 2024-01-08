@@ -39,7 +39,6 @@ const DetailsData = ({
           </h1>
         </div>
         <div className="flex items-center gap-5">
-          <Image src={printerIcon} alt="printerIcon" />
           <Image
             src={deleteIcon}
             alt="deleteIcon"

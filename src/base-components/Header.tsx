@@ -23,7 +23,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logoutUser())
     logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "659bef55a6ba5c8e01d0c5e7", action: "Accept" } })
+    // router.push({ pathname: "/pdf", query: { offerID: "659c0aa1999a1969e899aea2", action: "Accept" } })
   }
   useEffect(() => {
     if (user && user?.role !== "Admin") {
