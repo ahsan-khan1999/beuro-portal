@@ -834,7 +834,8 @@ export interface PdfPreviewProps {
   pdfFile?: any;
   setPdfFile?: SetStateAction<any>;
   fileName?: string;
-  systemSetting?: SystemSetting | null
+  qrCode?: string;
+  systemSetting?: SystemSetting | null;
 }
 
 export interface PdfPreviewFooterProps {

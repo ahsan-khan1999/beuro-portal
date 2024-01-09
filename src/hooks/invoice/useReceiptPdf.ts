@@ -9,6 +9,10 @@ import {
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
+import {
+  getTemplateSettings,
+  readEmailSettings,
+} from "@/api/slices/settingSlice/settings";
 import { ModalType } from "@/enums/ui";
 import {
   AcknowledgementSlipProps,
@@ -18,20 +22,12 @@ import {
   TemplateType,
 } from "@/types";
 import { ServiceList } from "@/types/offers";
-import { EmailTemplate } from "@/types/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
+import { EmailTemplate } from "@/types/settings";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
-import {
-  SystemSetting,
-  getTemplateSettings,
-  readEmailSettings,
-  readSystemSettings,
-} from "@/api/slices/settingSlice/settings";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
-import { useTranslation } from "next-i18next";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -65,44 +61,32 @@ const qrCodePayableToData: PayableToProps = {
   },
   additionalInformation: "R-2000 Umzugsfuchs",
 };
-
-interface EmailData {
-  subject: string;
-  description: string;
-  email: string;
-  pdf: string[];
-}
 let invoiceInfoObj = {
   subject: "",
   description: "",
 };
-
-export const useInvoicePdf = () => {
-  const { t: translate } = useTranslation();
-  // const [emailData, setEmailData] = useState({ subject: "", description: "" })
-  const [invoiceData, setInvoiceData] =
+export const useReceiptPdf = () => {
+  const [receiptData, setReceiptData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
-
-  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
-    null
-  );
-  const [qrCode, setQrCode] = useState('');
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState(null);
 
-  const { loading, collectiveInvoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+  
+
+
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
+  const { loading, collectiveInvoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
   const { user } = useAppSelector((state) => state.auth);
-
   const dispatch = useAppDispatch();
 
   const maxItemsFirstPage = 6;
@@ -111,24 +95,20 @@ export const useInvoicePdf = () => {
   const router = useRouter();
   const { invoiceID } = router.query;
 
-
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData, qrCode, settings] =
-          await Promise.all([
-            dispatch(getTemplateSettings()),
-            dispatch(readEmailSettings()),
-            dispatch(
-              readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
-            ),
-            dispatch(readQRCode({ params: { filter: invoiceID } })),
-            dispatch(readSystemSettings()),
-          ]);
-          if(qrCode?.payload){
-            setQrCode(qrCode.payload)
-          }
-
+        const [template, emailTemplate, offerData, qrCode] = await Promise.all([
+          dispatch(getTemplateSettings()),
+          dispatch(readEmailSettings()),
+          dispatch(
+            readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+          ),
+          dispatch(readQRCode({ params: { filter: invoiceID } })),
+        ]);
+        if (qrCode?.payload) {
+            setQrCodeUrl(qrCode.payload);
+        }
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -164,6 +144,7 @@ export const useInvoicePdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
+
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
@@ -226,11 +207,6 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
-              invoiceCreatedAmount:
-                invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
-              invoicePaidAmount:
-                invoiceDetails?.invoiceID?.paidAmount.toString(),
-              isInvoice: true,
             },
             footerDetails: {
               firstColumn: {
@@ -251,13 +227,7 @@ export const useInvoicePdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {
-                row1: "Standorte",
-                row2: "bern-Solothurn",
-                row3: "Aargau-Luzern",
-                row4: "Basel-Zürich",
-                row5: "",
-              },
+              thirdColumn: {},
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
@@ -274,23 +244,21 @@ export const useInvoicePdf = () => {
             isCanvas: false,
           };
 
-          setInvoiceData(formatData);
+          setReceiptData(formatData);
+
           invoiceInfoObj = {
             ...invoiceInfoObj,
             subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.title as string,
+              ?.receiptContent?.title as string,
             description: invoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.body as string,
+              ?.receiptContent?.body as string,
           };
-        }
-        if (settings?.payload?.Setting) {
-          setSystemSettings({ ...settings?.payload?.Setting });
         }
       }
     })();
   }, [invoiceID]);
 
-  const totalItems = invoiceData?.serviceItem?.length || 0;
+  const totalItems = receiptData?.serviceItem?.length || 0;
   // const totalItems = 34;
 
   const calculateTotalPages = useMemo(() => {
@@ -304,20 +272,22 @@ export const useInvoicePdf = () => {
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
-      setActiveButtonId("email");
 
-      const data = await localStoreUtil.get_data("invoiceComposeEmail");
+      setActiveButtonId("email");
+      const data = await localStoreUtil.get_data("receiptEmailCompose");
+
       if (data && pdfFile) {
         formData.append("file", pdfFile as any);
         const fileUrl = await dispatch(uploadFileToFirebase(formData));
-        let apiData = { ...data, pdf: fileUrl?.payload };
-
+        let apiData = {
+          ...data,
+          pdf: fileUrl?.payload,
+        };
         delete apiData["content"];
         const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-        if (res?.payload) {
-          // await localStoreUtil.remove_data("invoiceComposeEmail");
+        if (res?.payload)
+          //   await localStoreUtil.remove_data("receiptEmailCompose");
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
       } else {
         let apiData = {
           email:
@@ -328,13 +298,13 @@ export const useInvoicePdf = () => {
               ?.id,
           subject:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.title,
+              ?.receiptContent?.title,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.body,
-          attachmetns:
+              ?.receiptContent?.body,
+          attachments:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments,
+              ?.receiptContent?.attachments,
           id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
         };
         const res = await dispatch(sendInvoiceEmail({ apiData }));
@@ -357,10 +327,10 @@ export const useInvoicePdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(invoiceData?.attachement);
+    window.open(receiptData?.attachement);
   };
   const handlePrint = () => {
-    window.open(invoiceData?.attachement);
+    window.open(receiptData?.attachement);
   };
 
   const onClose = () => {
@@ -403,25 +373,23 @@ export const useInvoicePdf = () => {
   }, [loading]);
 
   return {
-    invoiceData,
-    emailTemplateSettings,
+    receiptData,
     templateSettings,
+    emailTemplateSettings,
+    loadingGlobal,
+    loading,
+    modal,
     activeButtonId,
     pdfFile,
     router,
-    modal,
-    loadingGlobal,
-    loading,
-    translate,
-    systemSetting,
-    qrCode,
+    qrCodeUrl,
     setPdfFile,
-    dispatch,
     handleEmailSend,
     handleSendByPost,
-    handlePrint,
     handleDonwload,
+    handlePrint,
     onClose,
     onSuccess,
+    dispatch,
   };
 };

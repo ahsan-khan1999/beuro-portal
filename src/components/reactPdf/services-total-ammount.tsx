@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#404040",
     fontWeight: "normal",
-    fontSize: 14,
+    fontSize: 12,
   },
 });
 

@@ -72,12 +72,12 @@ export const {
   },
   textBase: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "medium",
   },
   textSmall: {
     color: "#000",
-    fontSize: 14,
+    fontSize: 12,
   },
   greyText: {
     color: "#404040",

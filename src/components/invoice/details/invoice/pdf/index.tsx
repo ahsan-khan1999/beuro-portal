@@ -5,13 +5,14 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
+import { useId } from "react";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   { ssr: false }
 );
 const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
+  () => import("@/components/reactPdf/generate-merged-pdf-download"),
   {
     ssr: false,
   }
@@ -28,6 +29,9 @@ const DetailsPdfPriview = () => {
     modal,
     loadingGlobal,
     loading,
+    translate,
+    systemSetting,
+    qrCode,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -36,9 +40,9 @@ const DetailsPdfPriview = () => {
     onClose,
     onSuccess,
     setPdfFile,
-    translate,
-    systemSetting
   } = useInvoicePdf();
+
+  const randomId = useId();
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -85,38 +89,26 @@ const DetailsPdfPriview = () => {
                 : "Invoice Details"
             }
           />
-          {/* <YogaPdfContainer>
-
-              <div className="my-5">
-                <Pdf<InvoiceEmailHeaderProps>
-                  pdfData={invoiceData}
-                  newPageData={newPageData}
-                  templateSettings={templateSettings}
-                  totalPages={calculateTotalPages}
-                  isQr={true}
-                  emailTemplateSettings={emailTemplateSettings}
-
-                />
-              </div>
-            </YogaPdfContainer> */}
-
-          <div className="flex justify-center my-5">
-            <InvoicePdfPreview
-              data={invoiceData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              systemSetting={systemSetting}
-            />
-            <PdfDownload
-              data={invoiceData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              fileName="invoice.pdf"
-              systemSetting={systemSetting}
-            />
-          </div>
+        
+            <>
+              <InvoicePdfPreview
+                data={invoiceData}
+                emailTemplateSettings={emailTemplateSettings}
+                templateSettings={templateSettings}
+                qrCode={qrCode}
+                systemSetting={systemSetting}
+              />
+              <PdfDownload
+                data={invoiceData}
+                templateSettings={templateSettings}
+                emailTemplateSettings={emailTemplateSettings}
+                pdfFile={pdfFile}
+                setPdfFile={setPdfFile}
+                fileName={`invoice-${randomId}.pdf`}
+                qrCode={qrCode}
+                systemSetting={systemSetting}
+              />
+            </>
 
           {renderModal()}
         </>

@@ -268,11 +268,11 @@ export const updateInvoiceContent: AsyncThunk<boolean, object, object> | any =
 
 export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/post/", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params, router, setError, translate } = args as any;
 
         try {
 
-            const response = await apiServices.invoiceSendByPost(data);
+            const response = await apiServices.invoiceSendByPost(params);
             return response?.data?.InvoiceCollection;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -282,11 +282,10 @@ export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
 
 export const readQRCode: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("invoice/qr/code", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
-
+        const { params, router, setError, translate } = args as any;
         try {
 
-            const response = await apiServices.readInvoiceQRCode(data);
+            const response = await apiServices.readInvoiceQRCode(params);
             return response?.data?.data?.qrcode;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));

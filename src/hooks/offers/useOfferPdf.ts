@@ -152,7 +152,7 @@ export const useOfferPdf = () => {
               offerNo: offerDetails?.offerNumber,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
-              logo: offerDetails?.createdBy?.company?.logo,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
             },
             contactAddress: {
