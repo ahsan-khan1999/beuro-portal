@@ -65,6 +65,7 @@ const PDF = ({
   data,
   templateSettings,
   emailTemplateSettings,
+  isQr,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -133,13 +134,14 @@ const PDF = ({
           />
         </Page>
 
-        {/* QR code screen */}
-        <Page size="A4" style={styles.body}>
-          <QRCode
-            acknowledgementSlip={qrCode?.acknowledgementSlip}
-            payableTo={qrCode?.payableTo}
-          />
-        </Page>
+        {isQr && (
+          <Page size="A4" style={styles.body}>
+            <QRCode
+              acknowledgementSlip={qrCode?.acknowledgementSlip}
+              payableTo={qrCode?.payableTo}
+            />
+          </Page>
+        )}
       </Document>
     </PDFViewer>
   );

@@ -16,6 +16,7 @@ import { ServicesTotalAmount } from "@/components/reactPdf/services-total-ammoun
 import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
+import { QRCode } from "./qr-code";
 
 Font.register({
   family: "Poppins",
@@ -65,6 +66,7 @@ const PdfDownload = ({
   pdfFile,
   setPdfFile,
   fileName,
+  isQr,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -73,68 +75,130 @@ const PdfDownload = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const qrCode = data?.qrCode;
 
-  console.log({data, pdfFile, setPdfFile})
+  console.log(isQr)
+
+  let document = !isQr ? (
+    <Document>
+      <Page style={styles.body} dpi={72}>
+        <Header {...headerDetails} />
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
+          <ContactAddress {...{ ...contactAddress }} />
+
+          <AddressDetails {...{ address, header, workDates }} />
+
+          <ServiceTableHederRow />
+          {serviceItem?.map((item, index) => (
+            <ServiceTableRow {...item} key={index} />
+          ))}
+          <ServicesTotalAmount {...serviceItemFooter} />
+        </View>
+        <Footer
+          {...{
+            documentDetails: footerDetails,
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+
+      {/* Additional details */}
+      <Page style={styles.body}>
+        <Header {...headerDetails} />
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
+          <ContactAddress {...{ ...contactAddress }} />
+          <AdditionalDetails description={aggrementDetails} />
+        </View>
+        <Footer
+          {...{
+            documentDetails: footerDetails,
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+    </Document>
+  ) : (
+    <Document>
+      <Page style={styles.body} dpi={72}>
+        <Header {...headerDetails} />
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
+          <ContactAddress {...{ ...contactAddress }} />
+
+          <AddressDetails {...{ address, header, workDates }} />
+
+          <ServiceTableHederRow />
+          {serviceItem?.map((item, index) => (
+            <ServiceTableRow {...item} key={index} />
+          ))}
+          <ServicesTotalAmount {...serviceItemFooter} />
+        </View>
+        <Footer
+          {...{
+            documentDetails: footerDetails,
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+
+      {/* Additional details */}
+      <Page style={styles.body}>
+        <Header {...headerDetails} />
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 120,
+          }}
+        >
+          <ContactAddress {...{ ...contactAddress }} />
+          <AdditionalDetails description={aggrementDetails} />
+        </View>
+        <Footer
+          {...{
+            documentDetails: footerDetails,
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+
+      <Page size="A4" style={styles.body}>
+        <QRCode
+          acknowledgementSlip={qrCode?.acknowledgementSlip}
+          payableTo={qrCode?.payableTo}
+        />
+      </Page>
+    </Document>
+  );
 
   return (
     <div className="download-link">
-      <BlobProvider
-        document={
-          <Document>
-            <Page style={styles.body} dpi={72}>
-              <Header {...headerDetails} />
-              <View
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  top: 120,
-                }}
-              >
-                <ContactAddress {...{ ...contactAddress }} />
-
-                <AddressDetails {...{ address, header, workDates }} />
-
-                <ServiceTableHederRow />
-                {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index} />
-                ))}
-                <ServicesTotalAmount {...serviceItemFooter} />
-              </View>
-              <Footer
-                {...{
-                  documentDetails: footerDetails,
-                  emailTemplateSettings,
-                  templateSettings,
-                }}
-              />
-            </Page>
-
-            {/* Additional details */}
-            <Page style={styles.body}>
-              <Header {...headerDetails} />
-              <View
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  top: 120,
-                }}
-              >
-                <ContactAddress {...{ ...contactAddress }} />
-                <AdditionalDetails description={aggrementDetails} />
-              </View>
-              <Footer
-                {...{
-                  documentDetails: footerDetails,
-                  emailTemplateSettings,
-                  templateSettings,
-                }}
-              />
-            </Page>
-          </Document>
-        }
-      >
+      <BlobProvider document={document}>
         {({ blob, url, loading, error }) => {
           if (blob && !pdfFile) {
             setPdfFile(blobToFile(blob, fileName || "output.pdf"));

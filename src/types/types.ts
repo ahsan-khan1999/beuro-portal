@@ -824,6 +824,7 @@ export interface PdfPreviewProps {
   pdfFile?: any;
   setPdfFile?: SetStateAction<any>;
   fileName?: string;
+  isQr?: boolean;
 }
 
 export interface PdfPreviewFooterProps {
