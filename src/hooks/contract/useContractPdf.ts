@@ -9,6 +9,7 @@ import { EmailTemplate } from "@/types/settings";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
 } from "@/api/slices/settingSlice/settings";
@@ -78,7 +79,9 @@ export const useContractPdf = () => {
     null
   );
   const [pdfFile, setPdfFile] = useState(null);
-
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -95,10 +98,12 @@ export const useContractPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData,settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(readContractDetails({ params: { filter: offerID } })),
+          dispatch(readSystemSettings())
+
         ]);
         if (template?.payload?.Template) {
           const {
@@ -259,6 +264,9 @@ export const useContractPdf = () => {
               contractDetails?.offerID?.content?.confirmationContent?.body,
           };
         }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting })
+        }
       }
     })();
   }, [offerID]);
@@ -377,5 +385,6 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
+    systemSetting
   };
 };

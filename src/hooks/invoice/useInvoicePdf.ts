@@ -24,8 +24,10 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { useTranslation } from "next-i18next";
@@ -75,7 +77,7 @@ let invoiceInfoObj = {
 };
 
 export const useInvoicePdf = () => {
-  const {t:translate} = useTranslation()
+  const { t: translate } = useTranslation()
   // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
@@ -84,6 +86,10 @@ export const useInvoicePdf = () => {
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
+
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
   const [email, setEmail] = useState<EmailData>({
     description: "",
     email: "",
@@ -93,11 +99,11 @@ export const useInvoicePdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState(null);
 
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    invoice: { error, loading, collectiveInvoiceDetails },
-  } = useAppSelector((state) => state);
+
+  const { loading, collectiveInvoiceDetails } = useAppSelector(state => state.invoice)
+  const { modal, loading: loadingGlobal } = useAppSelector(state => state.global)
+  const { user } = useAppSelector(state => state.auth)
+
   const dispatch = useAppDispatch();
 
   const maxItemsFirstPage = 6;
@@ -109,12 +115,14 @@ export const useInvoicePdf = () => {
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData,settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(
             readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
           ),
+          dispatch(readSystemSettings())
+
         ]);
         if (template?.payload?.Template) {
           const {
@@ -274,6 +282,9 @@ export const useInvoicePdf = () => {
               ?.invoiceContent?.body as string,
           };
         }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting })
+        }
       }
     })();
   }, [invoiceID]);
@@ -408,6 +419,7 @@ export const useInvoicePdf = () => {
     handleDonwload,
     onClose,
     onSuccess,
-    translate
+    translate,
+    systemSetting
   };
 };

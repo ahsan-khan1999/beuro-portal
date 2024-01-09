@@ -4,8 +4,10 @@ import {
   sendOfferEmail,
 } from "@/api/slices/offer/offerSlice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -75,11 +77,15 @@ export const useOfferPdf = () => {
     null
   );
   const [pdfFile, setPdfFile] = useState(null);
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    offer: { error, loading, offerDetails },
-  } = useAppSelector((state) => state);
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+
+
+
+
+  const { loading, offerDetails } = useAppSelector(state => state.offer)
+  const { modal, loading: loadingGlobal } = useAppSelector(state => state.global)
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -88,10 +94,11 @@ export const useOfferPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData, settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(readOfferDetails({ params: { filter: offerID } })),
+          dispatch(readSystemSettings())
         ]);
         if (template?.payload?.Template) {
           const {
@@ -125,6 +132,10 @@ export const useOfferPdf = () => {
             phoneNumber: emailTemplate?.payload?.phoneNumber,
             textColour: emailTemplate?.payload?.textColour,
           });
+        }
+        
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting })
         }
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
@@ -160,8 +171,8 @@ export const useOfferPdf = () => {
               address: offerDetails?.addressID?.address,
               header: offerDetails?.title,
               workDates: offerDetails?.date,
-              handleTitleUpdate: () => {},
-              handleDescriptionUpdate: () => {},
+              handleTitleUpdate: () => { },
+              handleDescriptionUpdate: () => { },
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
@@ -219,6 +230,7 @@ export const useOfferPdf = () => {
               ?.body as string,
           };
         }
+
       }
     })();
   }, [offerID]);
@@ -300,5 +312,6 @@ export const useOfferPdf = () => {
     handlePrint,
     onClose,
     onSuccess,
+    systemSetting
   };
 };

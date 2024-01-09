@@ -61,6 +61,7 @@ export const ServicesTotalAmount = ({
   invoiceCreatedAmount,
   invoicePaidAmount,
   isInvoice,
+  systemSettings
 }: Partial<ProductItemFooterProps>) => {
   const { t: translate } = useTranslation();
 
@@ -68,7 +69,7 @@ export const ServicesTotalAmount = ({
   if (invoiceCreatedAmount) {
     dueAmount = Number(grandTotal) - Number(invoiceCreatedAmount);
   }
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -87,30 +88,30 @@ export const ServicesTotalAmount = ({
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Tax%: </Text>
-            <Text style={styles.text}>{tax} CHF (8.1%)</Text>
+            <Text style={styles.text}>{tax}  (8.1%)</Text>
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Discount: </Text>
-            <Text style={styles.text}>{discount} CHF</Text>
+            <Text style={styles.text}>{discount} </Text>
           </View>
           {!isInvoice ? (
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Grand Total:</Text>
-              <Text style={styles.whiteText}>{grandTotal} CHF</Text>
+              <Text style={styles.whiteText}>{grandTotal} {systemSettings?.currency}</Text>
             </View>
           ) : (
             <View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>Grand Total:</Text>
-                <Text style={styles.text}>{grandTotal} CHF</Text>
+                <Text style={styles.text}>{grandTotal} {systemSettings?.currency}</Text>
               </View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>Paid Amount:</Text>
-                <Text style={styles.text}>{invoicePaidAmount} CHF</Text>
+                <Text style={styles.text}>{invoicePaidAmount} </Text>
               </View>
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>Due Amount:</Text>
-                <Text style={styles.whiteText}>{dueAmount} CHF</Text>
+                <Text style={styles.whiteText}>{dueAmount} </Text>
               </View>
             </View>
           )}

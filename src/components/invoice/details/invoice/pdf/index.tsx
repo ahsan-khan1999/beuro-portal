@@ -36,7 +36,8 @@ const DetailsPdfPriview = () => {
     onClose,
     onSuccess,
     setPdfFile,
-    translate
+    translate,
+    systemSetting
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -106,6 +107,7 @@ const DetailsPdfPriview = () => {
                 data={invoiceData}
                 emailTemplateSettings={emailTemplateSettings}
                 templateSettings={templateSettings}
+                systemSetting={systemSetting}
               />
               <PdfDownload
                 data={invoiceData}
@@ -114,6 +116,7 @@ const DetailsPdfPriview = () => {
                 pdfFile={pdfFile}
                 setPdfFile={setPdfFile}
                 fileName="invoice.pdf"
+                systemSetting={systemSetting}
               />
             </div>
           )}

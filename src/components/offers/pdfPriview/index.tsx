@@ -33,10 +33,8 @@ import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
-const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), { ssr: false });
-const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
-  ssr: false,
-});
+const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), { ssr: false, loading: () => <LoadingState /> });
+const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
 
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
@@ -158,6 +156,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
+    systemSetting
   } = useOfferPdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -211,6 +210,7 @@ const PdfPriview = () => {
                 data={offerData}
                 emailTemplateSettings={emailTemplateSettings}
                 templateSettings={templateSettings}
+                systemSetting={systemSetting}
               />
               <OfferPdfDownload
                 data={offerData}
@@ -218,6 +218,8 @@ const PdfPriview = () => {
                 emailTemplateSettings={emailTemplateSettings}
                 pdfFile={pdfFile}
                 setPdfFile={setPdfFile}
+                systemSetting={systemSetting}
+
               />
             </div>
           )}

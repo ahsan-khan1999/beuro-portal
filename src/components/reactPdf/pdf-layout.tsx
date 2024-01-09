@@ -65,6 +65,7 @@ const PDF = ({
   data,
   templateSettings,
   emailTemplateSettings,
+  systemSetting
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -74,10 +75,10 @@ const PDF = ({
   const aggrementDetails = data?.aggrementDetails;
   const qrCode = data?.qrCode;
   const footerDetails = data?.footerDetails;
-
+  
   return (
     <PDFViewer
-      showToolbar={true}
+      showToolbar={false}
       style={{ width: "100%", minHeight: 800, height: "100%" }}
     >
       <Document>
@@ -99,7 +100,7 @@ const PDF = ({
             {serviceItem?.map((item, index) => (
               <ServiceTableRow {...item} key={index} />
             ))}
-            <ServicesTotalAmount {...serviceItemFooter} />
+            <ServicesTotalAmount {...serviceItemFooter} systemSettings={systemSetting}/>
           </View>
           <Footer
             {...{

@@ -31,6 +31,7 @@ import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 Font.register({
     family: "Poppins",
@@ -253,9 +254,9 @@ export const PDF_DATA: PDFResponse = {
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const OfferSignedPdf = ({ offerData, signature, templateSettings, emailTemplateSettings }: {
+const OfferSignedPdf = ({ offerData, signature, templateSettings, emailTemplateSettings, systemSettings }: {
     offerData?: PdfProps<EmailHeaderProps>, signature: any, templateSettings: TemplateType | null;
-    emailTemplateSettings: EmailTemplate | null;
+    emailTemplateSettings: EmailTemplate | null; systemSettings: SystemSetting | null
 }) => {
     const { loading: offerLoading } = useAppSelector(state => state.offer)
     const headerDetails = offerData?.headerDetails;
@@ -288,7 +289,7 @@ const OfferSignedPdf = ({ offerData, signature, templateSettings, emailTemplateS
                     {serviceItem?.map((item, index) => (
                         <ServiceTableRow {...item} key={index} />
                     ))}
-                    <ServicesTotalAmount {...serviceItemFooter} />
+                    <ServicesTotalAmount {...serviceItemFooter} systemSettings={systemSettings}/>
                 </View>
                 <Footer documentDetails={offerData?.footerDetails} emailTemplateSettings={emailTemplateSettings} templateSettings={templateSettings} />
             </Page>

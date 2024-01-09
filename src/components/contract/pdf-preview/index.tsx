@@ -181,6 +181,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
+    systemSetting
   } = useContractPdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -235,6 +236,7 @@ const PdfPriview = () => {
                 data={contractData}
                 emailTemplateSettings={emailTemplateSettings}
                 templateSettings={templateSettings}
+                systemSetting={systemSetting}
               />
               <PdfDownload
                 data={contractData}
@@ -242,6 +244,7 @@ const PdfPriview = () => {
                 emailTemplateSettings={emailTemplateSettings}
                 pdfFile={pdfFile}
                 setPdfFile={setPdfFile}
+                systemSetting={systemSetting}
               />
             </div>
           )}
