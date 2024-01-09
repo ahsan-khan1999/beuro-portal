@@ -65,6 +65,8 @@ const PdfDownload = ({
   pdfFile,
   setPdfFile,
   fileName,
+  qrCode: remotePdfFile,
+  systemSetting
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -73,8 +75,6 @@ const PdfDownload = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
-
-  console.log({data, pdfFile, setPdfFile})
 
   return (
     <div className="download-link">

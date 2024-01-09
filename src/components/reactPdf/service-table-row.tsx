@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F7F8",
     paddingVertical: 8,
     borderRadius: 4,
-    marginBottom: 16,
+    marginBottom: 12,
     marginHorizontal: 20,
   },
   headerRow: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "normal",
     width: 230,
     textAlign: "justify",
@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "normal",
     width: 86.25,
   },
   headerTextTotal: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     width: 86.25,
   },

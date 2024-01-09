@@ -29,6 +29,7 @@ import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 export const useAddServiceDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
@@ -126,7 +127,7 @@ export const useAddServiceDetails = (
 
     let taxAmount =
       isTax && taxType == "0"
-        ? calculateTax(totalPrices, 8.1)
+        ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
@@ -313,7 +314,7 @@ export const useAddServiceDetails = (
       step: 3,
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
-      taxAmount: !data?.taxType ? 8.1 : data?.taxAmount,
+      taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
 
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),

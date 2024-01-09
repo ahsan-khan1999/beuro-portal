@@ -101,20 +101,40 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
       },
     },
 
+    // {
+    //   containerClass: " mt-5",
+    //   label: {
+    //     text: `${translate("contracts.contract_email_preview.attachments")}`,
+    //     htmlFor: "attachments",
+    //     className: "mb-[10px]",
+    //   },
+    //   field: {
+    //     type: Field.dragAndDropPdfField,
+    //     id: "attachments",
+    //     isOpenedFile: false,
+    //     text: "Drop or Attach your files here",
+    //     fileSupported: "Files supported: PDF,JPG, PNG,GIF",
+    //     name: "attachments",
+    //     control,
+    //     attachements,
+    //     setAttachements
+    //   },
+    // },
+
     {
       containerClass: " mt-5",
       label: {
         text: `${translate("contracts.contract_email_preview.attachments")}`,
-        htmlFor: "pdf",
+        htmlFor: "attachments",
         className: "mb-[10px]",
       },
       field: {
         type: Field.dragAndDropPdfField,
-        id: "pdf",
+        id: "attachments",
         isOpenedFile: false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
-        name: "pdf",
+        name: "attachments",
         control,
         attachements,
         setAttachements

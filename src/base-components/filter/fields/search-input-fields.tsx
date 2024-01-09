@@ -149,14 +149,14 @@ export default function SearchInputFiled({
                 label: translate("dashboard_detail.input_filter.all"),
                 value: "all",
               },
-              {
-                label: translate("dashboard_detail.input_filter.lead"),
-                value: "lead",
-              },
-              {
-                label: translate("dashboard_detail.input_filter.offer"),
-                value: "offer",
-              },
+              // {
+              //   label: translate("dashboard_detail.input_filter.lead"),
+              //   value: "lead",
+              // },
+              // {
+              //   label: translate("dashboard_detail.input_filter.offer"),
+              //   value: "offer",
+              // },
               // {
               //   label: translate("dashboard_detail.input_filter.contract"),
               //   value: "contract",

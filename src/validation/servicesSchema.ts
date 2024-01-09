@@ -7,7 +7,7 @@ export const generateServicesValidation = (translate: Function) => {
     [ServicesDetailFields.serviceTitle]: yup
       .string()
       .required(translate("validationMessage.required")),
-    [ServicesDetailFields.unit]: yup.number().required(translate("validationMessage.required")),
+    [ServicesDetailFields.unit]: yup.string().required(translate("validationMessage.required")),
     [ServicesDetailFields.price]: yup
       .number()
       .required(translate("validationMessage.required")),

@@ -134,7 +134,7 @@ export const useInvoiceEmail = (
 
     delete updatedData["pdf"];
 
-    localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+    await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
 
     router.pathname = "/invoices/invoice-pdf-preview";
     router.query = { invoiceID: collectiveInvoiceDetails?.id };

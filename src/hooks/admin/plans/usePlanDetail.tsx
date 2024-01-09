@@ -78,7 +78,7 @@ export default function usePlanDetail(stage: boolean) {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading={translate("common.modals.plan_record")}
+        modelHeading={translate("common.modals.plan_created")}
         modelSubHeading={translate("common.modals.plan_record_des")}
         routeHandler={handleOnSave}
       />

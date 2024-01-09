@@ -10,7 +10,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   onHandleBack,
   trigger,
   service,
-  leadDetails, systemSettings
+  leadDetails,
+  systemSettings
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -78,11 +79,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Morning(9am to 12am)",
-                  label: "Morning(9am to 12am)",
+                  label: `${translate("common.morning")}(9am to 12am)`,
                 },
                 {
                   value: "Morning(1pm to 10pm)",
-                  label: "Morning(1pm to 10pm)",
+                  label: `${translate("common.morning")}(9am to 12am)`,
                 },
               ],
               control,
@@ -104,31 +105,31 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "1",
-                  label: "1 days",
+                  label: `1 ${translate("common.days")}`,
                 },
                 {
                   value: "2",
-                  label: "2 days",
+                  label: `2 ${translate("common.days")}`,
                 },
                 {
                   value: "3",
-                  label: "3 days",
+                  label: `3 ${translate("common.days")}`,
                 },
                 {
                   value: "4",
-                  label: "4 days",
+                  label: `4 ${translate("common.days")}`,
                 },
                 {
                   value: "5",
-                  label: "5 days",
+                  label: `5 ${translate("common.days")}`,
                 },
                 {
                   value: "6",
-                  label: "6 days",
+                  label: `6 ${translate("common.days")}`,
                 },
                 {
                   value: "7",
-                  label: "7 days",
+                  label: `7 ${translate("common.days")}`,
                 },
               ],
               control,
@@ -151,11 +152,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Via Email",
-                  label: "Via Email",
+                  label: `${translate("common.via_email")}`,
                 },
                 {
                   value: "Via What'sapp",
-                  label: "Via What'sapp",
+                  label: `${translate("common.via_whatsapp")}`,
                 },
               ],
               control,
@@ -177,12 +178,16 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
 
               options: [
                 {
-                  value: `Less then 1000${systemSettings?.currency}`,
-                  label: `Less then 1000${systemSettings?.currency}`,
+                  value: `Less then 1000 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 1000${
+                    systemSettings?.currency
+                  }`,
                 },
                 {
-                  value: `Less then 500${systemSettings?.currency}`,
-                  label: `Less then 500${systemSettings?.currency}`,
+                  value: `Less then 500 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 500${
+                    systemSettings?.currency
+                  }`,
                 },
               ],
               control,
@@ -203,8 +208,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
               options: [
-                { value: "Whats'app", label: "What'sapp" },
-                { value: "Facebook", label: "Facebook" },
+                {
+                  value: "Whats'app",
+                  label: `${translate("common.whatsapp")}`,
+                },
+                { value: "Facebook", label: `${translate("facebook")}` },
               ],
               control,
             },
@@ -255,7 +263,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               onClick: () =>
                 onHandleBack && onHandleBack(ComponentsType.addressAdd),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
             },
           },
           {
@@ -266,7 +274,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

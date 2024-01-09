@@ -20,6 +20,7 @@ import { calculatePercentage, calculateTax } from "@/utils/utility";
 import { useState } from "react";
 import { ServiceType } from "@/enums/offers";
 import { useTranslation } from "next-i18next";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 const serviceObject = {
   serviceTitle: "",
   price: "",
@@ -51,7 +52,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     generatePrice,
     offerDetails,
     tax,
-    currency
+    currency,
   } = properties;
 
   // if(!fields) return null;
@@ -232,7 +233,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     containerClass: "mb-0 ",
                     label: {
                       text: `${translate(
-                        "offers.service_details.detail_headings.count"
+                        "offers.service_details.detail_headings.unit"
                       )}`,
                       htmlFor: `serviceDetail.${i}.unit`,
                       className: "mb-[10px]",
@@ -348,7 +349,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       taxType,
       discountType,
       tax,
-      currency
+      currency,
     } = properties;
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
@@ -462,22 +463,22 @@ const generateServiceCalulationChildren = (
   taxType?: number,
   discountType?: number,
   tax?: TaxSetting[] | null,
-  currency?:string
+  currency?: string
 ) => {
   const { t: translate } = useTranslation();
   let field: any = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0 w-full",
     field: {
       type: Field.span,
-      className: "! !border-[#BFBFBF] focus:!border-primary w-full",
+      className: "!border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
-      text: `${total?.taxAmount.toFixed(2)} ${currency}(8.1%)`,
+      text: `${total?.taxAmount.toFixed(2)} ${currency}(${TAX_PERCENTAGE}%)`,
     },
   };
 
   if (String(taxType) === "1" && isTax) {
     field = {
-      containerClass: "w-[112px]",
+      containerClass: "w-full",
       field: {
         type: Field.select,
         id: "taxAmount",
@@ -507,17 +508,16 @@ const generateServiceCalulationChildren = (
       children: [
         {
           containerClass: "pb-2 border-b border-lightGray",
-
           field: {
             type: Field.div,
-            className: "flex  mx-10 space-x-5",
+            className: "flex mx-10 space-x-5",
             id: "div2",
             children: [
               {
                 containerClass: "mb-0 pr-2 border-r border-lightGray",
                 field: {
                   type: Field.span,
-                  className: "!p-4  w-full ",
+                  className: "!p-4  w-full",
                   id: "span-field",
                   text: `${translate(
                     "offers.service_details.detail_headings.sub_total"
@@ -540,14 +540,13 @@ const generateServiceCalulationChildren = (
 
         {
           containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
-
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {
-                containerClass: "mb-0 px-0 ",
+                containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
                   className: " !border-[#BFBFBF] focus:!border-primary ",
@@ -561,7 +560,7 @@ const generateServiceCalulationChildren = (
                 },
               },
               {
-                containerClass: "mb-0 border-r border-lightGray pr-8",
+                containerClass: "mb-0 border-r border-lightGray pr-[36px]",
                 field: {
                   type: Field.span,
                   className: "! !border-[#BFBFBF] focus:!border-primary w-full",
@@ -579,7 +578,7 @@ const generateServiceCalulationChildren = (
                   id: "100",
                   children: [
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-0",
                       field: {
                         type: Field.radio,
                         className:
@@ -627,14 +626,13 @@ const generateServiceCalulationChildren = (
 
         {
           containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
-
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {
-                containerClass: "mb-0 px-0  ",
+                containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
                   className: "!border-[#BFBFBF] focus:!border-primary ",
@@ -659,11 +657,11 @@ const generateServiceCalulationChildren = (
               },
 
               {
-                containerClass: "mb-0 ",
+                containerClass: "mb-0 w-full",
                 field: {
                   type: Field.input,
                   className:
-                    "!px-1 !border-[#BFBFBF] focus:!border-primary w-full",
+                    "!px-2 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "discountAmount",
                   register,
                   name: "discountAmount",
@@ -728,7 +726,7 @@ const generateServiceCalulationChildren = (
           },
         },
         {
-          containerClass: "mb-0 pt-2",
+          containerClass: "mb-0 mt-3 ml-[35px]",
           field: {
             type: Field.span,
             containerClassName:

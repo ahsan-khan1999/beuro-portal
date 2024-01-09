@@ -53,6 +53,19 @@ export const generateAddReasonValidation = (translate: Function) => {
   });
 };
 
+export const generateQRCodeValdiation = (translate: Function) => {
+  return yup.object().shape({
+    "qrSettings": yup.array().of(yup.object().shape({
+      "companyName": yup.string().required(translate("validationMessages.required")),
+      "ibanNo": yup.string().required(translate("validationMessages.required")),
+      "streetNumber": yup.string().required(translate("validationMessages.required")),
+      "postalCode": yup.string().required(translate("validationMessages.required")),
+      "city": yup.string().required(translate("validationMessages.required")),
+    })).min(1).required(translate("validationMessages.required"))
+
+  })
+};
+
 // Validation for add reason
 export const generateProfileSettingValidation = (translate: Function) => {
   return yup.object().shape({

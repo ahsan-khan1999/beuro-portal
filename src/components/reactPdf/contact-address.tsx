@@ -25,7 +25,7 @@ export const ContactAddress = ({
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 6 }}>
         <Text
           style={{
-            fontSize: 16,
+            fontSize: 12,
             fontWeight: "medium",
             color: "#404040",
             marginRight: 21,
@@ -39,7 +39,7 @@ export const ContactAddress = ({
       <View style={{ display: "flex", flexDirection: "row" }}>
         <Text
           style={{
-            fontSize: 16,
+            fontSize: 12,
             fontWeight: "medium",
             color: "#404040",
             marginRight: 21,

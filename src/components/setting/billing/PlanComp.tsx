@@ -14,7 +14,7 @@ const PlanComp = () => {
 
   const planData: PlanData[] = [
     {
-      title:`${translate("setting.billing.request_services.managers")}`,
+      title: `${translate("setting.billing.request_services.managers")}`,
       status: "Not Included",
     },
     {
@@ -37,14 +37,14 @@ const PlanComp = () => {
 
   return (
     <SettingLayout>
-      <div className="mx-4 mb-4 ">
+      <div className="px-8 py-6 bg-white">
         <div className="flex justify-between mt-3 ">
           <span className="text-[#4B4B4B] font-normal text-lg">
             {translate("setting.billing.heading")}
           </span>
           <span className="text-sm font-medium text-[#8F8F8F]">
-            <strong className="text-lg font-medium text-black">CHF0</strong>
-            /Month
+            <strong className="text-lg font-medium text-black">CHF0</strong>/
+            {translate("common.month")}
           </span>
         </div>
 
@@ -52,18 +52,21 @@ const PlanComp = () => {
           <div className="flex flex-col">
             <article className="flex gap-x-2">
               <Image src={silvreIcon} alt="silvreIcon" />
-              <span className="text-lg text-black font-medium"> {translate("setting.billing.package_name")}</span>
+              <span className="text-lg text-black font-medium">
+                {" "}
+                {translate("setting.billing.package_name")}
+              </span>
             </article>
 
             <p className="mt-[25px] text-sm font-normal tetx-[#4B4B4B]">
-            {translate("setting.billing.package_description")}
+              {translate("setting.billing.package_description")}
             </p>
           </div>
 
           <div>
             <section>
               <span className="text-[#4B4B4B] font-normal text-xs">
-              {translate("setting.billing.request_services.heading")}:
+                {translate("setting.billing.request_services.heading")}:
               </span>
               <div>
                 <p
@@ -95,7 +98,7 @@ const PlanComp = () => {
 
             <button className="border border-[#BFBFBF] rounded-lg p-4 text-center mt-[30px] w-full">
               <span className="text-[#393939] font-medium text-base">
-              {translate("setting.billing.request_services.change_button")}
+                {translate("setting.billing.request_services.change_button")}
               </span>
             </button>
           </div>

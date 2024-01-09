@@ -1,6 +1,5 @@
 import { AddressDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import { A4_WIDTH } from "./pdf-layout";
 import { CustomerAddress } from "@/types/leads";
 import { MovingDetailsProps } from "@/types";
 
@@ -69,14 +68,14 @@ export const AddressDetails = ({
         <View style={styles.addressText}>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: "bold",
               color: "#000",
             }}
           >
             Address {index + 1}:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
             {address.description && `, ${address.description}`}
           </Text>
@@ -87,7 +86,7 @@ export const AddressDetails = ({
     <View style={styles.dateRow}>
       <Text
         style={{
-          fontSize: 16,
+          fontSize: 12,
           fontWeight: "bold",
           color: "#000",
         }}

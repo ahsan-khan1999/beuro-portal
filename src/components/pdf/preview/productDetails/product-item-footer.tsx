@@ -6,6 +6,7 @@ export const ProductItemFooter = ({
   discount,
   grandTotal,
   tax,
+  systemSettings
 }: ProductItemFooterProps) => {
   const { t: translate } = useTranslation();
   return (
@@ -52,7 +53,7 @@ export const ProductItemFooter = ({
             {translate("pdf.grand_total")}:
           </span>
           <span className="text-base font-semibold text-[#fff]">
-            {grandTotal}
+            {grandTotal}{" "+systemSettings?.currency}
           </span>
         </div>
       </div>

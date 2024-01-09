@@ -48,7 +48,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               type: Field.input,
               className:
                 "!p-4 !!border-borderColor border border-[#BFBFBF] focus:!border-primary ",
-              inputType: "number",
+              inputType: "text",
               id: "unit",
               name: "unit",
               placeholder: "Std. ",

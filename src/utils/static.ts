@@ -1260,7 +1260,7 @@ export const sideBar: SideBar[] = [
 
     inner: [
       {
-        title: "sidebar.customer.offers.accepted",
+        title: "sidebar.customer.offers.open",
         pathname: "/offers",
         query: "Open",
         role: [1, 2],

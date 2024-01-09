@@ -1,3 +1,4 @@
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
@@ -31,12 +32,12 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#404040",
     fontWeight: "normal",
-    fontSize: 14,
+    fontSize: 12,
   },
 });
 
@@ -61,8 +62,9 @@ export const ServicesTotalAmount = ({
   invoiceCreatedAmount,
   invoicePaidAmount,
   isInvoice,
+  systemSettings
 }: Partial<ProductItemFooterProps>) => {
-  const { t: translate } = useTranslation();
+  const { t: translate } = useTranslation(["common"]);
 
   let dueAmount = 0;
   if (invoiceCreatedAmount) {
@@ -74,10 +76,10 @@ export const ServicesTotalAmount = ({
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
           <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-            {translate("pdf.condition_for_moving")}
+            Conditions for moving estimates
           </Text>
           <Text style={styles.discountDescription}>
-            {translate("pdf.pdf_description")}
+            Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.
           </Text>
         </View>
         <View style={styles.rightColumn}>
@@ -87,30 +89,30 @@ export const ServicesTotalAmount = ({
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Tax%: </Text>
-            <Text style={styles.text}>{tax} CHF (8.1%)</Text>
+            <Text style={styles.text}>{tax}  ({TAX_PERCENTAGE}%)</Text>
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Discount: </Text>
-            <Text style={styles.text}>{discount} CHF</Text>
+            <Text style={styles.text}>{discount} </Text>
           </View>
           {!isInvoice ? (
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Grand Total:</Text>
-              <Text style={styles.whiteText}>{grandTotal} CHF</Text>
+              <Text style={styles.whiteText}>{grandTotal} {systemSettings?.currency}</Text>
             </View>
           ) : (
             <View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>Grand Total:</Text>
-                <Text style={styles.text}>{grandTotal} CHF</Text>
+                <Text style={styles.text}>{grandTotal} {systemSettings?.currency}</Text>
               </View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>Paid Amount:</Text>
-                <Text style={styles.text}>{invoicePaidAmount} CHF</Text>
+                <Text style={styles.text}>{invoicePaidAmount} </Text>
               </View>
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>Due Amount:</Text>
-                <Text style={styles.whiteText}>{dueAmount} CHF</Text>
+                <Text style={styles.whiteText}>{dueAmount} </Text>
               </View>
             </View>
           )}

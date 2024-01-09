@@ -18,45 +18,50 @@ import { User } from "@/types";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    dispatch(logoutUser())
-    logout()
+    dispatch(logoutUser());
+    logout();
     // router.push({ pathname: "/pdf", query: { offerID: "659c0aa1999a1969e899aea2", action: "Accept" } })
-  }
+  };
   useEffect(() => {
-    if (user && user?.role !== "Admin") {
+    if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings())
     }
-  }, [user])
+  }, [user]);
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
         <div className="flex items-center">
-          <Image
-            src={user?.company?.logo || ""}
-            alt="Company Logo"
-            className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-            height={50}
-            width={150}
-          />
+          {user?.company?.logo && (
+            <Image
+              src={user?.company?.logo}
+              alt="Company Logo"
+              className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+              height={50}
+              width={150}
+            />
+          )}
+
           <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
             {user?.company?.companyName}{" "}
           </span>
         </div>
       )) || (
-          <div className="flex items-center">
-            <Image
-              src={logo}
-              alt="Company Logo"
-              className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
-              height={50}
-              width={150}
-            />
-          </div>
-        )}
+        <div className="flex items-center">
+          <Image
+            src={logo}
+            alt="Company Logo"
+            className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
+            height={50}
+            width={150}
+          />
+        </div>
+      )}
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && (

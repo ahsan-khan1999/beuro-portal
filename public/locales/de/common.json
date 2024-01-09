@@ -209,7 +209,7 @@
       },
       "offers": {
         "offers": "Angebote",
-        "accepted": "Akzeptiert",
+        "open": "Öffnen",
         "signed": "Unterzeichnet",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
@@ -371,9 +371,10 @@
     "service_detail_tab": "Service-Details",
     "table_headings": {
       "id": "ID",
-      "service": "Dienstleistung",
+      "service": "Service",
       "created_on": "Erstellt am",
       "price": "Preis",
+      "unit": "Einheit",
       "description": "Beschreibung",
       "edit": "Bearbeiten"
     },
@@ -467,7 +468,8 @@
       "templates": "Vorlagen",
       "follow_up_setting": "Nachverfolgungseinstellung",
       "billing": "Abrechnung",
-      "mail_setting": "Mail-Einstellung"
+      "mail_setting": "Mail-Einstellung",
+      "qr_settings":"QR-Einstellungen"
     },
     "account_setting": {
       "public_info": "Öffentliche Informationen",
@@ -975,6 +977,8 @@
   },
   "common": {
     "modals": {
+      "email_config_created": "E-Mail-Konfiguration erfolgreich erstellt",
+      "email_config_des": "Vielen Dank für die Erstellung der E-Mail-Konfiguration.",
       "update_setting": "Einstellungen erfolgreich aktualisiert",
       "setting_update_des": "Vielen Dank! Wir freuen uns, Sie als Kunden zu haben.",
       "employee_confirm": "Bitte bestätigen Sie die Mitarbeiter-ID",
@@ -1011,8 +1015,26 @@
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
       "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
-      "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?"
+      "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
+      "plan_created":"Datensatz erfolgreich erstellt",
+      "plan_record_des":"Danke! Wir freuen uns, dass Sie da sind."
     },
+    "online": "Online",
+    "cash": "Barzahlung",
+    "start_date": "Startdatum",
+    "end_date": "Enddatum",
+    "month": "Monat",
+    "name": "Name",
+    "tax": "Steuersatz (%)",
+    "action": "Aktion",
+    "help": "Hilfezentrum",
+    "via_email": "Über E-Mail",
+    "via_whatsapp": "Über WhatsApp",
+    "less_then": "Weniger als",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
+    "morning": "Morgen",
+    "days": "Tage",
     "true": "Wahr",
     "false": "Falsch",
     "done_button": "Fertig",
@@ -1046,7 +1068,8 @@
       "heading": "Bilder",
       "title": "15 Bilder können hochgeladen werden",
       "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
-      "image_slider_heading": "Bildname"
+      "image_slider_heading": "Bildname",
+      "drop_attach": "Datei hier ablegen oder anhängen"
     },
     "delete_modal": {
       "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
@@ -1109,6 +1132,8 @@
     }
   },
   "offers": {
+    "customer_type": "Kundentyp",
+    "customer": "Kunde",
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
@@ -1146,9 +1171,9 @@
       "images": "Bilder"
     },
     "tabs_heading": {
-      "offer": "Angebots Details",
-      "address": "Adress Details",
-      "service": "Service Details",
+      "offer": "Angebotsdetails",
+      "address": "Adressdetails",
+      "service": "Servicedetails",
       "additional": "Zusätzliche Details"
     },
     "detail_buttons": {
@@ -1263,6 +1288,7 @@
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
+      "company_name": "Bitte geben Sie den Firmennamen ein",
       "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
       "offer_title": "Bitte geben Sie Ihren Angebotsnamen ein",
       "street": "Bitte geben Sie die Straßennummer ein",
@@ -1689,7 +1715,9 @@
       "confirm": "Bestätigt",
       "cancel": "Abgebrochen",
       "overdue": "Überfällig",
-      "paid": "Bezahlt"
+      "paid": "Bezahlt",
+      "pending":"Anhängig"
+
     },
     "charts_labels": {
       "website": "Webseite",

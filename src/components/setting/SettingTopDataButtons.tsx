@@ -17,6 +17,8 @@ const SettingTopDataButtons = ({
     `${translate("setting.steps_heading.follow_up_setting")}`,
     `${translate("setting.steps_heading.billing")}`,
     `${translate("setting.steps_heading.mail_setting")}`,
+    // `${translate("setting.steps_heading.qr_settings")}`,
+
   ];
 
   // State to track the active button index (set to 0 for the first item by default)

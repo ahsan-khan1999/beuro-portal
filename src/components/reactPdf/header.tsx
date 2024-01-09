@@ -11,6 +11,7 @@ export const Header = ({
   offerNo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
+  console.log(logo)
   return (
     <View
       style={{
@@ -25,7 +26,7 @@ export const Header = ({
     >
       <View>
         <Image
-          src={"/assets/images/logo.png"}
+          src={logo}
           style={{ width: 182, height: 73 }}
         />
       </View>
@@ -41,14 +42,14 @@ export const Header = ({
           <Text
             style={{
               width: 100,
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: "medium",
               color: "#404040",
             }}
           >
             Offer No:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
             {offerNo}
           </Text>
         </View>
@@ -63,14 +64,14 @@ export const Header = ({
           <Text
             style={{
               width: 100,
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: "medium",
               color: "#404040",
             }}
           >
             Offer Date:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
             {formatDateTimeToDate(offerDate || "")}
           </Text>
         </View>
@@ -78,14 +79,14 @@ export const Header = ({
           <Text
             style={{
               width: 100,
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: "medium",
               color: "#404040",
             }}
           >
             Created By:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
             {createdBy}
           </Text>
         </View>

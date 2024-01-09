@@ -79,5 +79,6 @@ export const useUploadImageOffer = (
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

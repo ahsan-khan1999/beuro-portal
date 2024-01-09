@@ -25,7 +25,7 @@ const RecordCreateSuccess = ({
             {modelHeading}
           </p>
 
-          <span className="text-[#1E1E1E] font-normal text-[14px] mt-[6px]">
+          <span className="text-[#1E1E1E] font-normal text-[14px] text-center mt-[6px]">
             {modelSubHeading}
           </span>
 
