@@ -1019,6 +1019,8 @@
       "plan_created":"Datensatz erfolgreich erstellt",
       "plan_record_des":"Danke! Wir freuen uns, dass Sie da sind."
     },
+    "online": "Online",
+    "cash": "Barzahlung",
     "start_date": "Startdatum",
     "end_date": "Enddatum",
     "month": "Monat",

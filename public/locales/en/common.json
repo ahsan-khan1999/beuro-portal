@@ -1031,6 +1031,8 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "online":"Online",
+    "cash":"Cash",
     "start_date":"Start Date",
     "end_date":"End Date",
     "month": "Month",
