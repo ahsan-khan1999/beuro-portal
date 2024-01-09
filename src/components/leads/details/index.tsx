@@ -10,7 +10,7 @@ const LeadsDetails = () => {
   const { renderModal, leadDeleteHandler, leadDetails, loading } =
     useLeadDetail();
   return (
-    <>
+    <div className="mb-5">
       <Layout>
         <DetailsCard>
           <LeadsDetailsCardData
@@ -22,7 +22,7 @@ const LeadsDetails = () => {
       </Layout>
 
       {renderModal()}
-    </>
+    </div>
   );
 };
 

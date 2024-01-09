@@ -66,7 +66,7 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading ? (
+      {loading || loadingGlobal ? (
         <LoadingState />
       ) : (
         <>
@@ -99,27 +99,24 @@ const DetailsPdfPriview = () => {
                 />
               </div>
             </YogaPdfContainer> */}
-          {loading || loadingGlobal ? (
-            <LoadingState />
-          ) : (
-            <div className="flex justify-center my-5">
-              <InvoicePdfPreview
-                data={invoiceData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-              />
-              <PdfDownload
-                data={invoiceData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                fileName="invoice.pdf"
-                systemSetting={systemSetting}
-              />
-            </div>
-          )}
+
+          <div className="flex justify-center my-5">
+            <InvoicePdfPreview
+              data={invoiceData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+            />
+            <PdfDownload
+              data={invoiceData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              fileName="invoice.pdf"
+              systemSetting={systemSetting}
+            />
+          </div>
 
           {renderModal()}
         </>

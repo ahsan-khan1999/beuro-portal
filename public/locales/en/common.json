@@ -210,7 +210,7 @@
       },
       "offers": {
         "offers": "Offers",
-        "accepted": "Accepted",
+        "open": "Open",
         "signed": "Signed",
         "expired": "Expired",
         "rejected": "Rejected"
@@ -380,6 +380,7 @@
       "service": "Service",
       "created_on": "Created On",
       "price": "Price",
+      "unit": "Unit",
       "description": "Description",
       "edit": "Edit"
     },
@@ -641,8 +642,8 @@
   },
   "invoice": {
     "main_heading": "Invoice",
-    "invoice_details":"Invoice Details",
-    "receipt_details":"Receipt Details",
+    "invoice_details": "Invoice Details",
+    "receipt_details": "Receipt Details",
     "table_functions": {
       "open": "Open",
       "overdue": "Overdue",
@@ -660,7 +661,7 @@
       "edit": "Edit"
     },
     "card_content": {
-      "invoice_number":"Invoice Number",
+      "invoice_number": "Invoice Number",
       "heading": "Invoice Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
@@ -986,6 +987,8 @@
   },
   "common": {
     "modals": {
+      "email_config_created": "Email Configration Created Successfully",
+      "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
       "admin_setting_des": "Thanks! we are happy to have you.",
       "plan_created": "Record Created Successfully",
@@ -1028,6 +1031,20 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "start_date":"Start Date",
+    "end_date":"End Date",
+    "month": "Month",
+    "name": "Name",
+    "tax": "Tax Rate (%)",
+    "action": "Action",
+    "help": "help Center",
+    "via_email": "Via Email",
+    "via_whatsapp": "Via What'sapp",
+    "less_then": "Less then",
+    "whatsapp": "Whats'app",
+    "facebook": "Facebook",
+    "morning": "Morning",
+    "days": "days",
     "true": "True",
     "false": "False",
     "done_button": "Done",
@@ -1061,7 +1078,8 @@
       "heading": "Images",
       "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
-      "image_slider_heading": "Image Name"
+      "image_slider_heading": "Image Name",
+      "drop_attach": "Drop or attach your file here"
     },
     "delete_modal": {
       "heading": "Are you sure you want to delete this Image?",
@@ -1124,6 +1142,8 @@
     }
   },
   "offers": {
+    "customer_type":"Customer Type",
+    "customer":"Customer",
     "main_heading": "Offers",
     "add_button": "Add New",
     "table_functions": {
@@ -1277,6 +1297,7 @@
     },
     "placeholders": {
       "name": "Please Enter Your Name",
+      "company_name": "Please Enter Company Name",
       "email": "Please Enter Your Email Address",
       "offer_title": "Please Enter Your Offer Title",
       "street": "Please Enter Street Number",
@@ -1702,7 +1723,8 @@
       "confirm": "Confirmed",
       "cancel": "Cancelled",
       "overdue": "Overdue",
-      "paid": "Paid"
+      "paid": "Paid",
+      "pending":"Pending"
     },
     "charts_labels": {
       "website": "Website",
@@ -1797,7 +1819,7 @@
     }
   },
   "global_search": {
-    "customer":"Customer",
+    "customer": "Customer",
     "customer_id": "Customer ID",
     "phone": "Phone No",
     "created_date": "Creation Date",

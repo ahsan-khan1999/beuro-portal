@@ -11,16 +11,11 @@ import { useTranslation } from "next-i18next";
 import OffersDetailsTable from "./details/offers";
 import useOffers from "@/hooks/offers/useOffers";
 import ContractDetailsTable from "./details/contracts";
+import { TabsComponent } from "@/enums/global-search";
 
-export const GlobalSearch = ({
-  filter,
-  setFilter,
-  handleFilterChange,
-}: FiltersComponentProps) => {
+export const GlobalSearch = () => {
   const { t: translate } = useTranslation();
-  const [switchDetails, setSwitchDetails] = useState(
-    `${translate("switch_tabs.offer")}`
-  );
+  const [switchDetails, setSwitchDetails] = useState(TabsComponent.offer);
 
   const {
     collectiveInvoice,
@@ -32,18 +27,18 @@ export const GlobalSearch = ({
     loading,
   } = useInvoiceDetail();
 
-  const { currentPageRows } = useOffers();
-
-  const globalSearchComponent = {
-    Offers: {
+  const { currentPageRows, filter, setFilter, handleFilterChange } =
+    useOffers();
+  const globalSearchComponent: { [key in TabsComponent]: any } = {
+    [TabsComponent.offer]: {
       comp: <OffersDetailsTable />,
       isData: currentPageRows?.length > 0,
     },
-    Contracts: {
+    [TabsComponent.contract]: {
       comp: <ContractDetailsTable />,
       isData: currentPageRows?.length > 0,
     },
-    invoice: {
+    [TabsComponent.invoices]: {
       comp: (
         <InvoiceDetailsTable
           collectiveInvoice={collectiveInvoice}
@@ -55,7 +50,7 @@ export const GlobalSearch = ({
       ),
       isData: collectiveInvoice?.length > 0,
     },
-    Receipt: {
+    [TabsComponent.receipt]: {
       comp: (
         <ReceiptDetailsTable
           collectiveInvoice={collectiveReciept}
@@ -68,20 +63,22 @@ export const GlobalSearch = ({
   };
 
   const CurrentComponent = useEmptyStates(
-    globalSearchComponent[switchDetails as keyof typeof globalSearchComponent]
-      ?.comp,
-    globalSearchComponent[switchDetails as keyof typeof globalSearchComponent]
-      ?.isData,
+    globalSearchComponent[switchDetails]?.comp,
+    globalSearchComponent[switchDetails]?.isData,
     loading
   );
 
+  const handleSwitchDetail = (index: number) => {
+    setSwitchDetails(index);
+  };
+
   return (
     <>
-      <GlobalCardDetails translate={translate}/>
+      <GlobalCardDetails translate={translate} />
       <div className="flex flex-col xlg:flex-row xlg:justify-between xlg:items-center gap-y-4 mt-4 mb-5">
         <SwitchTabs
           switchDetails={switchDetails}
-          setSwitchDetails={setSwitchDetails}
+          onSwitchDetail={handleSwitchDetail}
         />
         <GlobalSearchFilter
           filter={filter}

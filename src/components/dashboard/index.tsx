@@ -164,7 +164,7 @@ const AdminDashboard = () => {
       chartPointColor: "#5114EA",
       open:
         dashboard?.Sales?.pending +
-        ` ${translate("dashboard_detail.cards_status.open")}`,
+        ` ${translate("dashboard_detail.cards_status.pending")}`,
       closed:
         dashboard?.Sales?.overdue +
         ` ${translate("dashboard_detail.cards_status.overdue")}`,
@@ -233,6 +233,7 @@ const AdminDashboard = () => {
             {dashboardCards.map((item, index) => {
               return (
                 <DashboardCard
+                  key={index}
                   icon={item.icon}
                   alt={item.alt}
                   backgroundColor={item.backgroundColor}

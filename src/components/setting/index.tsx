@@ -69,8 +69,8 @@ const Setting = () => {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Configration Created Successfully"
-        subHeading="Thanks for created email configration."
+        heading={translate("common.modals.email_config_created")}
+        subHeading={translate("common.modals.email_config_des")}
         route={onClose}
       />
     ),
@@ -91,7 +91,7 @@ const Setting = () => {
     6: <QRSettings handleCreation={handleCreation} />
   };
   return (
-    <>
+    <div className="mb-5">
       <h1 className="text-[#222B45] font-normal text-xl">
         {translate("setting.heading")}
       </h1>
@@ -107,7 +107,7 @@ const Setting = () => {
       </div>
 
       {renderModal()}
-    </>
+    </div>
   );
 };
 

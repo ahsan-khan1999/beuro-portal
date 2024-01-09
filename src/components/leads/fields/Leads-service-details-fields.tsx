@@ -29,7 +29,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -69,7 +70,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailability",
               value:
@@ -96,7 +98,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "flexibility",
               value: (leadDetails?.id && leadDetails?.flexibility) || "",
@@ -104,31 +107,31 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "1",
-                  label: "1 days",
+                  label: `1 ${translate("common.days")}`,
                 },
                 {
                   value: "2",
-                  label: "2 days",
+                  label: `2 ${translate("common.days")}`,
                 },
                 {
                   value: "3",
-                  label: "3 days",
+                  label: `3 ${translate("common.days")}`,
                 },
                 {
                   value: "4",
-                  label: "4 days",
+                  label: `4 ${translate("common.days")}`,
                 },
                 {
                   value: "5",
-                  label: "5 days",
+                  label: `5 ${translate("common.days")}`,
                 },
                 {
                   value: "6",
-                  label: "6 days",
+                  label: `6 ${translate("common.days")}`,
                 },
                 {
                   value: "7",
-                  label: "7 days",
+                  label: `7 ${translate("common.days")}`,
                 },
               ],
               control,
@@ -144,7 +147,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
 
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
@@ -170,7 +174,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
@@ -197,7 +202,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
@@ -221,7 +227,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
               value: (leadDetails?.id && leadDetails?.otherServices) || [""],
@@ -255,7 +262,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               inputType: "button",
               onClick: () => onHandleBack && onHandleBack(),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
             },
           },
           {
@@ -266,7 +273,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

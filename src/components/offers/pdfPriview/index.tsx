@@ -174,7 +174,7 @@ const PdfPriview = () => {
   };
   return (
     <>
-      {loading ? (
+      {loading || loadingGlobal ? (
         <LoadingState />
       ) : (
         <div className="">
@@ -202,27 +202,24 @@ const PdfPriview = () => {
               </div>
             </YogaPdfContainer> */}
 
-          {loading || loadingGlobal ? (
-            <LoadingState />
-          ) : (
-            <div className="flex justify-center my-5">
-              <OfferPdf
-                data={offerData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-              />
-              <OfferPdfDownload
-                data={offerData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
 
-              />
-            </div>
-          )}
+          <div className="flex justify-center my-5">
+            <OfferPdf
+              data={offerData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+            />
+            <OfferPdfDownload
+              data={offerData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+
+            />
+          </div>
 
           {renderModal()}
         </div>

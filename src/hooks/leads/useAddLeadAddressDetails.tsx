@@ -25,7 +25,9 @@ export const useAddLeadAddressDetails = (
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customerDetails } = useAppSelector((state) => state.customer);
 
-  const [addressCount, setAddressCount] = useState(leadDetails?.addressID?.address?.length || 1);
+  const [addressCount, setAddressCount] = useState(
+    leadDetails?.addressID?.address?.length || 1
+  );
   const schema = generateLeadsAddressEditDetailsValidation(
     translate,
     addressCount
@@ -49,7 +51,13 @@ export const useAddLeadAddressDetails = (
   });
   useMemo(() => {
     if (leadDetails.id) {
-      reset(transformAddressFormValues(leadDetails?.addressID?.address ? leadDetails?.addressID?.address : [leadDetails?.customerDetail?.address]));
+      reset(
+        transformAddressFormValues(
+          leadDetails?.addressID?.address
+            ? leadDetails?.addressID?.address
+            : [leadDetails?.customerDetail?.address]
+        )
+      );
     }
   }, [leadDetails.id]);
 
@@ -64,8 +72,15 @@ export const useAddLeadAddressDetails = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { address: senitizeDataForm(data).slice(0, addressCount), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceAdd }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    const apiData = {
+      address: senitizeDataForm(data).slice(0, addressCount),
+      step: 2,
+      id: leadDetails?.id,
+      stage: ComponentsType.serviceAdd,
+    };
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) onHandleNext(ComponentsType.serviceAdd);
   };
 

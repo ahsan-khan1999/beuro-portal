@@ -7,10 +7,10 @@ import React from "react";
 
 const ServiceDetailsData = ({
   contractDetails,
-  currency
+  currency,
 }: {
   contractDetails: contractTableTypes;
-  currency?: string
+  currency?: string;
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -91,7 +91,7 @@ const ServiceDetailsData = ({
 
             <div className="grid grid-cols-2 mt-3">
               <span className="text-[#1E1E1E] text-base font-semibold">
-                Grand Total:
+                {translate("pdf.grand_total")}:
               </span>
 
               <span className="text-[#1E1E1E] text-base font-semibold ml-5">

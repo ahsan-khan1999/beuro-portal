@@ -211,7 +211,7 @@ const PdfPriview = () => {
 
   return (
     <>
-      {loading ? (
+      {loading || loadingGlobal ? (
         <LoadingState />
       ) : (
         <>
@@ -228,26 +228,23 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-          {loading || loadingGlobal ? (
-            <LoadingState />
-          ) : (
-            <div className="flex justify-center my-5">
-              <ContractPdfPreview
-                data={contractData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-              />
-              <PdfDownload
-                data={contractData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
-              />
-            </div>
-          )}
+
+          <div className="flex justify-center my-5">
+            <ContractPdfPreview
+              data={contractData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+            />
+            <PdfDownload
+              data={contractData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+            />
+          </div>
 
           {renderModal()}
         </>

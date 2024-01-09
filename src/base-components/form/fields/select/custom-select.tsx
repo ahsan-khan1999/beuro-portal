@@ -98,7 +98,7 @@ export const SelectBox = ({
             <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
               <Image
                 src={searchIcon}
-                alt={"Search Icon"}
+                alt="Search Icon"
                 className="ml-1 w-4 h-4 absolute"
                 width={24}
                 height={8}
