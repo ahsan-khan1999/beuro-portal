@@ -233,6 +233,7 @@ const AdminDashboard = () => {
             {dashboardCards.map((item, index) => {
               return (
                 <DashboardCard
+                  key={index}
                   icon={item.icon}
                   alt={item.alt}
                   backgroundColor={item.backgroundColor}
