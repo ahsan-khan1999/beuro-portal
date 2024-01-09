@@ -25,7 +25,7 @@ const LeadsDetailsCardData = ({
   const dispatch = useAppDispatch();
   return (
     <div className="bg-white rounded-md pt-5 pb-10">
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -33,7 +33,7 @@ const LeadsDetailsCardData = ({
             className="cursor-pointer"
             onClick={() => router.push("/leads")}
           />
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("leads.card_content.heading")}
           </p>
         </div>
@@ -43,14 +43,19 @@ const LeadsDetailsCardData = ({
             className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer"
             onClick={() => {
               localStoreUtil.remove_data("offer");
-              dispatch(setOfferDetails({
-                id: leadDetails?.id,
-                type: "Existing Customer",
-                leadID: { ...leadDetails, customerID: leadDetails?.customerID },
-                serviceDetail: { serviceDetail: leadDetails?.otherServices },
-                addressID: { address: leadDetails?.addressID?.address }
-              }))
-              dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }))
+              dispatch(
+                setOfferDetails({
+                  id: leadDetails?.id,
+                  type: "Existing Customer",
+                  leadID: {
+                    ...leadDetails,
+                    customerID: leadDetails?.customerID,
+                  },
+                  serviceDetail: { serviceDetail: leadDetails?.otherServices },
+                  addressID: { address: leadDetails?.addressID?.address },
+                })
+              );
+              dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
 
               router.push("/offers/add");
             }}
@@ -61,16 +66,15 @@ const LeadsDetailsCardData = ({
             </p>
           </div>
           <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
-          <Image
-            src={deleteIcon}
-            alt="deleteIcon"
-            className="cursor-pointer"
-            onClick={() => leadDeleteHandler()}
-            width={16}
-            height={20}
-          />
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={() => leadDeleteHandler()}
+              width={16}
+              height={20}
+            />
           </span>
-          
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />

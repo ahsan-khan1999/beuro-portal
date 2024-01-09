@@ -60,7 +60,7 @@ export const ImageUpload = ({
         onDrop={handleDrop}
       >
         {field.value ? (
-          <div className="relative ">
+          <div className="relative">
             <Image
               src={field.value}
               width={100}
@@ -83,7 +83,7 @@ export const ImageUpload = ({
               width={32}
               height={26}
             />
-            <p className="text-dark  text-xs mt-[10px] ">
+            <p className="text-dark  text-xs mt-[10px] overflow-y-clip">
               {translate("common.images_modal.drop_attach")}
             </p>
           </>

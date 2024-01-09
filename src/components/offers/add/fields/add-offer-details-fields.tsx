@@ -90,7 +90,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           },
           {
             label: {
-              text: "Customer Type",
+              text: `${translate("offers.customer_type")}`,
               htmlFor: "customerType",
               className: "mb-[10px]",
             },
@@ -133,7 +133,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
           {
             containerClass: "mb-5",
-            label: { text: "Email Address", htmlFor: "email" },
+            label: {
+              text: `${translate("follow_up.follow_up_details.email")}`,
+              htmlFor: "email",
+            },
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
@@ -178,7 +181,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.phone,
-              className: "   !border-[#BFBFBF]  focus:!border-primary",
+              className: "!border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               country: "ch",
@@ -204,7 +207,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0 col-span-1",
             label: {
-              text: "Content ",
+              text: `${translate("sidebar.customer.content")}`,
               htmlFor: "content",
               className: "mb-[10px]",
             },
@@ -228,7 +231,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           {
             containerClass: "mb-0 col-span-2",
             label: {
-              text: "Offer Title",
+              text: `${translate("contracts.card_content.offer_title")}`,
               htmlFor: "title",
               className: "mb-[10px]",
             },
@@ -341,14 +344,13 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     const companyNameField = {
       containerClass: "mb-0",
       label: {
-        text: "Company Name",
+        text: `${translate("login_detail.company_details.company_name")}`,
         htmlFor: "companyName",
         className: "mb-[10px]",
       },
       field: {
         type: Field.input,
-        className:
-          "!p-4 !!border-borderColor border border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         inputType: "text",
         id: "companyName",
         name: "companyName",
@@ -378,7 +380,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     const customerField = {
       containerClass: "mb-0",
       label: {
-        text: "Customer",
+        text: `${translate("offers.customer")}`,
         htmlFor: "customerID",
         className: "mb-[10px]",
       },
@@ -487,6 +489,7 @@ export const generateDateChildren = (
   handleRemoveDateField: UseFieldArrayRemove,
   offerDetails: OffersTableRowTypes
 ) => {
+  const { t: translate } = useTranslation();
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
     dateformFields.push({
@@ -500,7 +503,7 @@ export const generateDateChildren = (
           {
             containerClass: "mb-0",
             label: {
-              text: "Start Date",
+              text: `${translate("common.start_date")}`,
               htmlFor: `date.${i}.startDate`,
               className: "mb-[10px]",
             },
@@ -517,7 +520,7 @@ export const generateDateChildren = (
           {
             containerClass: "mb-0 ",
             label: {
-              text: "End Date",
+              text: `${translate("common.end_date")}`,
               htmlFor: `date.${i}.endDate`,
               className: "mb-[10px]",
             },

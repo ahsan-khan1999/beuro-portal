@@ -15,7 +15,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     <FormCard>
       <div
         className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
-        id="Customer Details"
+        id={translate("offers.tabs_heading.offer")}
       >
         <div className="flex items-center gap-x-[26px]">
           <Image

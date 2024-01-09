@@ -371,9 +371,10 @@
     "service_detail_tab": "Service-Details",
     "table_headings": {
       "id": "ID",
-      "service": "Dienstleistung",
+      "service": "Service",
       "created_on": "Erstellt am",
       "price": "Preis",
+      "unit": "Einheit",
       "description": "Beschreibung",
       "edit": "Bearbeiten"
     },
@@ -975,6 +976,8 @@
   },
   "common": {
     "modals": {
+      "email_config_created": "E-Mail-Konfiguration erfolgreich erstellt",
+      "email_config_des": "Vielen Dank für die Erstellung der E-Mail-Konfiguration.",
       "update_setting": "Einstellungen erfolgreich aktualisiert",
       "setting_update_des": "Vielen Dank! Wir freuen uns, Sie als Kunden zu haben.",
       "employee_confirm": "Bitte bestätigen Sie die Mitarbeiter-ID",
@@ -1013,6 +1016,13 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?"
     },
+    "start_date": "Startdatum",
+    "end_date": "Enddatum",
+    "month": "Monat",
+    "name": "Name",
+    "tax": "Steuersatz (%)",
+    "action": "Aktion",
+    "help": "Hilfezentrum",
     "via_email": "Über E-Mail",
     "via_whatsapp": "Über WhatsApp",
     "less_then": "Weniger als",
@@ -1117,6 +1127,8 @@
     }
   },
   "offers": {
+    "customer_type": "Kundentyp",
+    "customer": "Kunde",
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
@@ -1154,9 +1166,9 @@
       "images": "Bilder"
     },
     "tabs_heading": {
-      "offer": "Angebots Details",
-      "address": "Adress Details",
-      "service": "Service Details",
+      "offer": "Angebotsdetails",
+      "address": "Adressdetails",
+      "service": "Servicedetails",
       "additional": "Zusätzliche Details"
     },
     "detail_buttons": {

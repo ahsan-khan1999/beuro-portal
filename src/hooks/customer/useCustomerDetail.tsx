@@ -185,7 +185,7 @@ export default function useCustomerDetail(stage: boolean) {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading={translate("common.modals.customer_delete")}
+        modelHeading={translate("common.modals.delete_customer")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -193,7 +193,7 @@ export default function useCustomerDetail(stage: boolean) {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading={translate("common.modals.customer_created")}
+        modelHeading={translate("common.modals.created_customer")}
         modelSubHeading={translate("common.modals.customer_created_des")}
         routeHandler={changeRouterHandler}
       />

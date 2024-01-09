@@ -80,7 +80,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "email",
-
               placeholder: `${translate(
                 "customers.add_customer_placeholders.email"
               )}`,

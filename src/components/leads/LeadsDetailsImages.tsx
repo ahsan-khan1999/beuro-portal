@@ -10,7 +10,7 @@ const LeadsDetailsImages = ({ images }: { images: string[] }) => {
 
   return (
     <LeadsDetailImgLayout>
-      <div className="flex flex-col">
+      <div className="flex flex-col pb-1">
         <p className="text-lg font-normal text-[#4A13E7] ml-6 my-4">
           {translate("leads.side_images_heading")}
         </p>

@@ -380,6 +380,7 @@
       "service": "Service",
       "created_on": "Created On",
       "price": "Price",
+      "unit": "Unit",
       "description": "Description",
       "edit": "Edit"
     },
@@ -984,6 +985,8 @@
   },
   "common": {
     "modals": {
+      "email_config_created": "Email Configration Created Successfully",
+      "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
       "admin_setting_des": "Thanks! we are happy to have you.",
       "plan_created": "Record Created Successfully",
@@ -1026,6 +1029,13 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "start_date":"Start Date",
+    "end_date":"End Date",
+    "month": "Month",
+    "name": "Name",
+    "tax": "Tax Rate (%)",
+    "action": "Action",
+    "help": "help Center",
     "via_email": "Via Email",
     "via_whatsapp": "Via What'sapp",
     "less_then": "Less then",
@@ -1067,7 +1077,7 @@
       "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
       "image_slider_heading": "Image Name",
-      "drop_attach":"Drop or attach your file here"
+      "drop_attach": "Drop or attach your file here"
     },
     "delete_modal": {
       "heading": "Are you sure you want to delete this Image?",
@@ -1130,6 +1140,8 @@
     }
   },
   "offers": {
+    "customer_type":"Customer Type",
+    "customer":"Customer",
     "main_heading": "Offers",
     "add_button": "Add New",
     "table_functions": {

@@ -108,8 +108,8 @@ const SystemSettingDetails = ({
       </div>
 
       <SettingLayout>
-        <div className="my-3 ">
-          <p className="text-[#393939] font-normal text-[18px] my-3">
+        <div className="pt-[27px] pl-[31px] pr-6 pb-[35px] bg-white">
+          <p className="text-[#393939] font-normal text-lg mb-3">
             {translate("setting.system_setting.currency")}
           </p>
           <DropDown
@@ -123,6 +123,7 @@ const SystemSettingDetails = ({
             dropDownDisabled={false}
             shouldNotSelectItem={false}
             dropDownClassName="!h-[42px]"
+            dropDownItemsContainerClassName="w-full"
           />
         </div>
       </SettingLayout>
