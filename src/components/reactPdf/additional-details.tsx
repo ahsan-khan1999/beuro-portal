@@ -15,7 +15,13 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    rowGap: 60
+    rowGap: 60,
+    '> *': {
+      // Styles for direct children (Text elements) of the container
+      // Add your specific styles for the Text elements here
+      fontSize: 10,
+      color: "blue",
+    },
   },
   heading: {
     marginBottom: 2,
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
 
   dateText: {
     paddingTop: 12,
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 400,
     color: "#000",
   },
@@ -66,30 +72,43 @@ const stylesheet: HtmlStyles = {
   // clear margins for all <p> tags
   p: {
     margin: 0,
+    fontSize:12
   },
   h1: {
     margin: 0,
     padding: 0,
+    fontSize:16
+
   },
   h2: {
     margin: 0,
     padding: 0,
+    fontSize:16
+
   },
   h3: {
     margin: 0,
     padding: 0,
+    fontSize:16
+
   },
   h4: {
     margin: 0,
     padding: 0,
+    fontSize:13
+
   },
   h5: {
     margin: 0,
     padding: 0,
+    fontSize:12
+
   },
   h6: {
     margin: 0,
     padding: 0,
+    fontSize:12
+
   },
 };
 
