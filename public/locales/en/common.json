@@ -473,7 +473,9 @@
       "templates": "Templates",
       "follow_up_setting": "Follow Up Setting",
       "billing": "Billing",
-      "mail_setting": "Mail Setting"
+      "mail_setting": "Mail Setting",
+      "qr_settings":"QR Settings"
+
     },
     "account_setting": {
       "public_info": "Public Information",

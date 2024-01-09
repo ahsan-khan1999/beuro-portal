@@ -467,7 +467,8 @@
       "templates": "Vorlagen",
       "follow_up_setting": "Nachverfolgungseinstellung",
       "billing": "Abrechnung",
-      "mail_setting": "Mail-Einstellung"
+      "mail_setting": "Mail-Einstellung",
+      "qr_settings":"QR-Einstellungen"
     },
     "account_setting": {
       "public_info": "Öffentliche Informationen",

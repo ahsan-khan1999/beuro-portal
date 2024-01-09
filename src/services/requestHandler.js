@@ -106,6 +106,9 @@ const SERVICE_URLS = {
   readContractQrCode: "/contract/generate-QrCode/",
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf/",
 
+  settingsQrCode: "/setting/qrcode/qrCode-setting",
+
+
 
 };
 
@@ -485,6 +488,12 @@ const readContractQRCode = (params) =>
 
 const readInvoiceQRCode = (params) =>
   get(SERVICE_URLS.readInvoiceQrCode, params, { feature: featureConstants.login }, { detail: true });
+
+
+const readSettingsQrCode = (params) =>
+  get(SERVICE_URLS.settingsQrCode, params, { feature: featureConstants.login }, { detail: false });
+const createSettingsQrCode = (data) =>
+  post(SERVICE_URLS.settingsQrCode, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -635,6 +644,8 @@ const apiServices = {
   rejectOfferPublic,
   updateDiscounts,
   readContractQRCode,
-  readInvoiceQRCode
+  readInvoiceQRCode,
+  readSettingsQrCode,
+  createSettingsQrCode
 };
 export default apiServices;

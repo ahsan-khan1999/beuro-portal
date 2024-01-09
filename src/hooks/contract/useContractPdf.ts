@@ -12,6 +12,7 @@ import {
   SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import {
   readContractDetails,
@@ -98,7 +99,7 @@ export const useContractPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData,settings] = await Promise.all([
+        const [template, emailTemplate, offerData, settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(readContractDetails({ params: { filter: offerID } })),
@@ -206,7 +207,13 @@ export const useContractPdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,

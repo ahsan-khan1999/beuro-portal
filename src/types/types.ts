@@ -225,6 +225,15 @@ export type GenerateChangeMailSettingFormField = (
 ) => FormField[];
 
 // change mail setting formfield
+export type GenerateQRCodeSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  append: UseFieldArrayAppend<FieldValues, "qrSettings">,
+  onRemove: UseFieldArrayRemove,
+  count: number
+) => FormField[];
+
+// change mail setting formfield
 export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

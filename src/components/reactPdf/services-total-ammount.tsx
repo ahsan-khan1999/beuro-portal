@@ -1,3 +1,4 @@
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
@@ -63,22 +64,22 @@ export const ServicesTotalAmount = ({
   isInvoice,
   systemSettings
 }: Partial<ProductItemFooterProps>) => {
-  const { t: translate } = useTranslation();
+  const { t: translate } = useTranslation(["common"]);
 
   let dueAmount = 0;
   if (invoiceCreatedAmount) {
     dueAmount = Number(grandTotal) - Number(invoiceCreatedAmount);
   }
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
           <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-            {translate("pdf.condition_for_moving")}
+            Conditions for moving estimates
           </Text>
           <Text style={styles.discountDescription}>
-            {translate("pdf.pdf_description")}
+            Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.
           </Text>
         </View>
         <View style={styles.rightColumn}>
@@ -88,7 +89,7 @@ export const ServicesTotalAmount = ({
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Tax%: </Text>
-            <Text style={styles.text}>{tax}  (8.1%)</Text>
+            <Text style={styles.text}>{tax}  ({TAX_PERCENTAGE}%)</Text>
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Discount: </Text>

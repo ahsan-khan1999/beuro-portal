@@ -15,6 +15,7 @@ import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
+import QRSettings from "./qr-settings";
 
 const Setting = () => {
   const { t: translate } = useTranslation();
@@ -87,6 +88,7 @@ const Setting = () => {
 
     4: <Billing handleEditPayment={handleEditPayment} />,
     5: <MailSetting handleCreation={handleCreation} />,
+    6: <QRSettings handleCreation={handleCreation} />
   };
   return (
     <>

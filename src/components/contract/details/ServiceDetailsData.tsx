@@ -1,5 +1,6 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import TableLayout from "@/layout/TableLayout";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { contractTableTypes } from "@/types/contract";
 import { useTranslation } from "next-i18next";
 import React from "react";
@@ -81,7 +82,7 @@ const ServiceDetailsData = ({
                   {translate("contracts.service_details.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractDetails?.offerID?.taxAmount} (8.1%)
+                  {contractDetails?.offerID?.taxAmount} ({TAX_PERCENTAGE}%)
                 </span>
               </div>
             </div>

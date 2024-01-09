@@ -27,6 +27,7 @@ import {
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 export const useServiceOfferEditDetail = ({
   handleNext,
@@ -144,7 +145,7 @@ export const useServiceOfferEditDetail = ({
 
     let taxAmount =
       isTax && taxType == "0"
-        ? calculateTax(totalPrices, 8.1)
+        ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
@@ -319,7 +320,7 @@ export const useServiceOfferEditDetail = ({
       step: 3,
       id: offerDetails?.id,
       stage: EditComponentsType.additionalEdit,
-      taxAmount: !data?.taxType ? 8.1 : data?.taxAmount,
+      taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

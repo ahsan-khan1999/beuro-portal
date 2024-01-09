@@ -7,6 +7,7 @@ import { OffersTableRowTypes } from "@/types/offers";
 import { filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 const ServiceDetailsData = ({
   offerDetails,
@@ -108,7 +109,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.taxAmount} (8.1%)
+                  {offerDetails?.taxAmount} ({TAX_PERCENTAGE}%)
                 </span>
               </div>
             </div>

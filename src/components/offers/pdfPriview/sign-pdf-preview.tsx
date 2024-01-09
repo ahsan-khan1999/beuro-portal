@@ -229,7 +229,13 @@ const SignPdfPreview = () => {
                                         ibanNumber: offerDetails?.Offer?.createdBy?.company.bankDetails.ibanNumber,
                                     },
                                 },
-                                thirdColumn: {},
+                                thirdColumn: {
+                                    row1: "Standorte",
+                                    row2: "bern-Solothurn",
+                                    row3: "Aargau-Luzern",
+                                    row4: "Basel-Zürich",
+                                    row5: "",
+                                },
                                 fourthColumn: {
 
                                 },

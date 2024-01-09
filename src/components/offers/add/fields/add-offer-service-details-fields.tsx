@@ -20,6 +20,7 @@ import { calculatePercentage, calculateTax } from "@/utils/utility";
 import { useState } from "react";
 import { ServiceType } from "@/enums/offers";
 import { useTranslation } from "next-i18next";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 const serviceObject = {
   serviceTitle: "",
   price: "",
@@ -471,7 +472,7 @@ const generateServiceCalulationChildren = (
       type: Field.span,
       className: "! !border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
-      text: `${total?.taxAmount.toFixed(2)} ${currency}(8.1%)`,
+      text: `${total?.taxAmount.toFixed(2)} ${currency}(${TAX_PERCENTAGE}%)`,
     },
   };
 

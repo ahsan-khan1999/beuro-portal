@@ -115,7 +115,7 @@ export const useInvoicePdf = () => {
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData,settings] = await Promise.all([
+        const [template, emailTemplate, offerData, settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(
@@ -247,7 +247,13 @@ export const useInvoicePdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
