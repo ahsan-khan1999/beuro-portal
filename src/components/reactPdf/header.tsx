@@ -11,6 +11,7 @@ export const Header = ({
   offerNo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
+  console.log(logo)
   return (
     <View
       style={{
@@ -25,7 +26,7 @@ export const Header = ({
     >
       <View>
         <Image
-          src={"/assets/images/logo.png"}
+          src={logo}
           style={{ width: 182, height: 73 }}
         />
       </View>

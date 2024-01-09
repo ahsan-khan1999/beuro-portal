@@ -18,15 +18,17 @@ import { User } from "@/types";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    dispatch(logoutUser())
-    logout()
-    // router.push({ pathname: "/pdf", query: { offerID: "659c0aa1999a1969e899aea2", action: "Accept" } })
+    // dispatch(logoutUser())
+    // logout()
+    router.push({ pathname: "/pdf", query: { offerID: "659c0aa1999a1969e899aea2", action: "Accept" } })
   }
   useEffect(() => {
-    if (user && user?.role !== "Admin") {
+    if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings())
     }
   }, [user])

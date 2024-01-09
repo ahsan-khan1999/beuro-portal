@@ -12,7 +12,7 @@ const InvoicePdfPreview = dynamic(
   { ssr: false }
 );
 const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
+  () => import("@/components/reactPdf/generate-merged-pdf-download"),
   {
     ssr: false,
   }
@@ -29,6 +29,9 @@ const DetailsPdfPriview = () => {
     modal,
     loadingGlobal,
     loading,
+    translate,
+    systemSetting,
+    qrCode,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -37,7 +40,6 @@ const DetailsPdfPriview = () => {
     onClose,
     onSuccess,
     setPdfFile,
-    translate,
   } = useInvoicePdf();
 
   const randomId = useId();
@@ -95,7 +97,8 @@ const DetailsPdfPriview = () => {
                 data={invoiceData}
                 emailTemplateSettings={emailTemplateSettings}
                 templateSettings={templateSettings}
-                isQr={true}
+                qrCode={qrCode}
+                systemSetting={systemSetting}
               />
               <PdfDownload
                 data={invoiceData}
@@ -104,7 +107,8 @@ const DetailsPdfPriview = () => {
                 pdfFile={pdfFile}
                 setPdfFile={setPdfFile}
                 fileName={`invoice-${randomId}.pdf`}
-                isQr={true}
+                qrCode={qrCode}
+                systemSetting={systemSetting}
               />
             </>
           )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useId, useMemo, useState } from "react";
 import EmailCard from "./PdfCard";
 import { Pdf } from "@/components/pdf/pdf";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -158,9 +158,12 @@ const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   { ssr: false }
 );
-const PdfDownload = dynamic(() => import("@/components/reactPdf/generate-Pdf-Download"), {
-  ssr: false,
-});
+const PdfDownload = dynamic(
+  () => import("@/components/reactPdf/generate-merged-pdf-download"),
+  {
+    ssr: false,
+  }
+);
 
 const PdfPriview = () => {
   const {
@@ -173,6 +176,7 @@ const PdfPriview = () => {
     emailTemplateSettings,
     loadingGlobal,
     pdfFile,
+    qrCodeUrl,
     setPdfFile,
     dispatch,
     handleDonwload,
@@ -181,7 +185,10 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
+    systemSetting,
   } = useContractPdf();
+
+  const randomId = useId();
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -235,6 +242,8 @@ const PdfPriview = () => {
                 data={contractData}
                 emailTemplateSettings={emailTemplateSettings}
                 templateSettings={templateSettings}
+                systemSetting={systemSetting}
+                qrCode={qrCodeUrl}
               />
               <PdfDownload
                 data={contractData}
@@ -242,6 +251,9 @@ const PdfPriview = () => {
                 emailTemplateSettings={emailTemplateSettings}
                 pdfFile={pdfFile}
                 setPdfFile={setPdfFile}
+                systemSetting={systemSetting}
+                qrCode={qrCodeUrl}
+                fileName={`invoice-${randomId}.pdf`}
               />
             </div>
           )}

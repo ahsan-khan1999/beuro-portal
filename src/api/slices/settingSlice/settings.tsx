@@ -257,6 +257,9 @@ const SettingSlice = createSlice({
         setFollowUpSettings: (state, action) => {
             state.followUps = action.payload;
         },
+        setSystemSettings: (state, action) => {
+            state.systemSettings = action.payload;
+        },
 
     },
     extraReducers(builder) {
@@ -418,4 +421,4 @@ const SettingSlice = createSlice({
 })
 
 export default SettingSlice.reducer;
-export const { setErrorMessage, setTaxSettings, setFollowUpSettings } = SettingSlice.actions
+export const { setErrorMessage, setTaxSettings, setFollowUpSettings,setSystemSettings } = SettingSlice.actions

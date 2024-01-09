@@ -9,11 +9,14 @@ import { EmailTemplate } from "@/types/settings";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import {
   readContractDetails,
+  readQRCode,
   sendContractEmail,
   updateContractContent,
 } from "@/api/slices/contract/contractSlice";
@@ -78,7 +81,10 @@ export const useContractPdf = () => {
     null
   );
   const [pdfFile, setPdfFile] = useState(null);
-
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -95,11 +101,18 @@ export const useContractPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(readContractDetails({ params: { filter: offerID } })),
-        ]);
+        const [template, emailTemplate, offerData, qrCode, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(readContractDetails({ params: { filter: offerID } })),
+            dispatch(readQRCode({ params: { filter: offerID } })),
+            dispatch(readSystemSettings()),
+          ]);
+
+        if (qrCode?.payload) {
+          setQrCodeUrl(qrCode?.payload);
+        }
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -259,6 +272,9 @@ export const useContractPdf = () => {
               contractDetails?.offerID?.content?.confirmationContent?.body,
           };
         }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting });
+        }
       }
     })();
   }, [offerID]);
@@ -369,6 +385,7 @@ export const useContractPdf = () => {
     emailTemplateSettings,
     pdfFile,
     loadingGlobal,
+    qrCodeUrl,
     setPdfFile,
     dispatch,
     onClose,
@@ -377,5 +394,6 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
+    systemSetting,
   };
 };

@@ -4,6 +4,7 @@ import { AddressID, Lead } from "./leads";
 import { DateRangeProps, TemplateType, User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { EmailTemplate, Template, TemplateSettings } from "./settings";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -66,7 +67,8 @@ export interface OffersTableRowTypes {
 export interface PublicOffersTableRowTypes {
   Offer: OffersTableRowTypes
   Template: TemplateType;
-  Mail: EmailTemplate
+  Mail: EmailTemplate;
+  setting:SystemSetting
 
 }
 

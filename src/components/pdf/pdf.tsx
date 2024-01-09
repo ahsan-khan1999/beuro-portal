@@ -25,7 +25,7 @@ export const Pdf = <T,>({
 
 
 }) => {
-  
+
   return (
     <Container>
       {/* <PreviewCard /> */}
@@ -54,6 +54,7 @@ export const Pdf = <T,>({
             currPage={index + 2}
             emailTemplateSettings={emailTemplateSettings}
 
+
           />
         ))}
         <Aggrement
@@ -76,7 +77,7 @@ export const Pdf = <T,>({
             contactAddress={pdfData.contactAddress}
             headerDetails={pdfData.headerDetails}
             qrCode={pdfData.qrCode}
-            
+
           />
         )}
       </div>

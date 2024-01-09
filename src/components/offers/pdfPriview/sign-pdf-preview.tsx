@@ -18,7 +18,7 @@ import {
     PdfProps,
     TemplateType,
 } from "@/types";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
+import { SystemSetting, getTemplateSettings } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -148,11 +148,13 @@ const SignPdfPreview = () => {
         null
     );
 
-    const {
-        auth: { user },
-        global: { modal },
-        offer: { error, loading },
-    } = useAppSelector((state) => state);
+    const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+        null
+    );
+
+
+
+    const { loading } = useAppSelector(state => state.offer)
     const dispatch = useAppDispatch();
 
     const maxItemsFirstPage = 6;
@@ -312,6 +314,9 @@ const SignPdfPreview = () => {
 
                             })
                         }
+                        if (offerDetails?.setting) {
+                            setSystemSettings({ ...offerDetails?.setting })
+                        }
                     }
                 }
             );
@@ -372,6 +377,7 @@ const SignPdfPreview = () => {
                         totalPages={calculateTotalPages}
                         action={action as string}
                         emailTemplateSettings={emailTemplateSettings}
+                        systemSettings={systemSetting}
                     />
                 </div>
             </YogaPdfContainer>

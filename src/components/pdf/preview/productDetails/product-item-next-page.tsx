@@ -13,7 +13,8 @@ export const ProductItemNewPage = ({
   templateSettings,
   totalPages,
   currPage,
-  emailTemplateSettings
+  emailTemplateSettings,
+  systemSettings
 }: PurchasedItemDetailsNextPageProps) => {
   return (
     <div>
@@ -22,7 +23,7 @@ export const ProductItemNewPage = ({
         {serviceItem.map((item,index) => (
           <ProductItem {...item} key={index} />
         ))}
-        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
+        {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings}/>}
       </div>
       <Footer {...footerDetails} columnSettings={templateSettings} currPage={currPage} totalPages={totalPages} />
     </div>

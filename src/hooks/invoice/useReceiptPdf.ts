@@ -4,6 +4,7 @@ import {
 } from "@/api/slices/globalSlice/global";
 import {
   readCollectiveInvoiceDetails,
+  readQRCode,
   sendInvoiceEmail,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
@@ -75,6 +76,7 @@ export const useReceiptPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState(null);
 
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -91,13 +93,17 @@ export const useReceiptPdf = () => {
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData, qrCode] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(
             readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
           ),
+          dispatch(readQRCode({ params: { filter: invoiceID } })),
         ]);
+        if (qrCode?.payload) {
+            setQrCodeUrl(qrCode.payload);
+        }
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -275,8 +281,8 @@ export const useReceiptPdf = () => {
         delete apiData["content"];
         const res = await dispatch(sendInvoiceEmail({ data: apiData }));
         if (res?.payload)
-        //   await localStoreUtil.remove_data("receiptEmailCompose");
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          //   await localStoreUtil.remove_data("receiptEmailCompose");
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
       } else {
         let apiData = {
           email:
@@ -371,6 +377,7 @@ export const useReceiptPdf = () => {
     activeButtonId,
     pdfFile,
     router,
+    qrCodeUrl,
     setPdfFile,
     handleEmailSend,
     handleSendByPost,
