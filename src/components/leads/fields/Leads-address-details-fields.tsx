@@ -121,10 +121,10 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
           field: {
             type: Field.button,
             id: "button",
-            text: "Cancel",
+            text: `${translate("common.cancel_button")}`,
             inputType: "button",
             className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+              "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
             onClick: () => handleBack && handleBack(),
           },
         },
@@ -136,7 +136,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
             text: `${translate("leads.address_details.save_changes_button")}`,
             inputType: "submit",
             className:
-              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
+              "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
             loading,
           },
         },

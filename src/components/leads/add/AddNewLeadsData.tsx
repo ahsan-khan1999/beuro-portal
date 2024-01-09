@@ -199,6 +199,7 @@ const AddNewLeadsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={index}
             />
           ))}
         </div>

@@ -1013,6 +1013,13 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?"
     },
+    "via_email": "Über E-Mail",
+    "via_whatsapp": "Über WhatsApp",
+    "less_then": "Weniger als",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
+    "morning": "Morgen",
+    "days": "Tage",
     "true": "Wahr",
     "false": "Falsch",
     "done_button": "Fertig",
@@ -1046,7 +1053,8 @@
       "heading": "Bilder",
       "title": "15 Bilder können hochgeladen werden",
       "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
-      "image_slider_heading": "Bildname"
+      "image_slider_heading": "Bildname",
+      "drop_attach": "Datei hier ablegen oder anhängen"
     },
     "delete_modal": {
       "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
@@ -1263,6 +1271,7 @@
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
+      "company_name": "Bitte geben Sie den Firmennamen ein",
       "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
       "offer_title": "Bitte geben Sie Ihren Angebotsnamen ein",
       "street": "Bitte geben Sie die Straßennummer ein",

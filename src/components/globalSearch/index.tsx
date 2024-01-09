@@ -29,7 +29,7 @@ export const GlobalSearch = () => {
 
   const { currentPageRows, filter, setFilter, handleFilterChange } =
     useOffers();
-  const globalSearchComponent = {
+  const globalSearchComponent: { [key in TabsComponent]: any } = {
     [TabsComponent.offer]: {
       comp: <OffersDetailsTable />,
       isData: currentPageRows?.length > 0,

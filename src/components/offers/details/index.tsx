@@ -22,7 +22,7 @@ const OfferDetails = () => {
     loading,
     handleSendByPost,
     handleUpdateDiscount,
-    systemSettings
+    systemSettings,
   } = useOfferDetails();
 
   return (
@@ -39,7 +39,6 @@ const OfferDetails = () => {
           isSendEmail={isSendEmail}
           handleSendByPost={handleSendByPost}
           loading={loading}
-
         />
       </DetailsCard>
 
@@ -50,7 +49,12 @@ const OfferDetails = () => {
             onNextHandle={onNextHandle}
           />
         ) : (
-          <OffersDetailsData offerDetails={offerDetails} loading={loading} handleUpdateDiscount={handleUpdateDiscount} currency={systemSettings?.currency} />
+          <OffersDetailsData
+            offerDetails={offerDetails}
+            loading={loading}
+            handleUpdateDiscount={handleUpdateDiscount}
+            currency={systemSettings?.currency}
+          />
         )}
       </div>
       {renderModal()}
