@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   header: {
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#000",
     paddingBottom: 3,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dateText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "medium",
     color: "#000",
   },

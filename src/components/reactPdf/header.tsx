@@ -12,6 +12,9 @@ export const Header = ({
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   console.log(logo)
+  const { FooterColour, textColour } = emailTemplateSettings ?? {};
+  // if (FooterColour) styles.footerContainer.backgroundColor = ;
+  //   if (textColour) styles.footerText.color = `#${textColour}`;
   return (
     <View
       style={{
@@ -19,7 +22,7 @@ export const Header = ({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#EEE",
+        backgroundColor: `#${FooterColour}`,
         padding: 20,
       }}
       fixed
@@ -44,12 +47,12 @@ export const Header = ({
               width: 100,
               fontSize: 12,
               fontWeight: "medium",
-              color: "#404040",
+              color: `#${textColour}`,
             }}
           >
             Offer No:
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: `#${textColour}` }}>
             {offerNo}
           </Text>
         </View>
@@ -66,12 +69,12 @@ export const Header = ({
               width: 100,
               fontSize: 12,
               fontWeight: "medium",
-              color: "#404040",
+              color: `#${textColour}`,
             }}
           >
             Offer Date:
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: `#${textColour}` }}>
             {formatDateTimeToDate(offerDate || "")}
           </Text>
         </View>
@@ -81,12 +84,12 @@ export const Header = ({
               width: 100,
               fontSize: 12,
               fontWeight: "medium",
-              color: "#404040",
+              color: `#${textColour}`,
             }}
           >
             Created By:
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000" }}>
+          <Text style={{ fontSize: 12, fontWeight: "medium", color: `#${textColour}` }}>
             {createdBy}
           </Text>
         </View>
