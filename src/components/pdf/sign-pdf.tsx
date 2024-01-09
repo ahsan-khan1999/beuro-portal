@@ -187,7 +187,7 @@ export const SignPdf = <T,>({
             </div>
           
 
-            <OfferSignedPdf offerData={pdfData} signature={offerSignature} />
+            <OfferSignedPdf offerData={pdfData} signature={offerSignature}  templateSettings={templateSettings} emailTemplateSettings={emailTemplateSettings}/>
 
             {renderModal()}
         </>

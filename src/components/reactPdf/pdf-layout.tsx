@@ -77,7 +77,7 @@ const PDF = ({
 
   return (
     <PDFViewer
-      showToolbar={false}
+      showToolbar={true}
       style={{ width: "100%", minHeight: 800, height: "100%" }}
     >
       <Document>

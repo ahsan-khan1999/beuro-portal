@@ -18,7 +18,7 @@ import { ServiceTableRow } from "../reactPdf/service-table-row";
 import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
 import { Footer } from "../reactPdf/footer";
 import { AdditionalDetails } from "../reactPdf/additional-details";
-import { EmailHeaderProps, PdfProps } from "@/types";
+import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import Link from "next/link";
 import { useMemo } from "react";
 import { Button } from "@/base-components/ui/button/button";
@@ -30,6 +30,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { blobToFile } from "@/utils/utility";
+import { EmailTemplate } from "@/types/settings";
 
 Font.register({
     family: "Poppins",
@@ -252,7 +253,10 @@ export const PDF_DATA: PDFResponse = {
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHeaderProps>, signature: any }) => {
+const OfferSignedPdf = ({ offerData, signature, templateSettings, emailTemplateSettings }: {
+    offerData?: PdfProps<EmailHeaderProps>, signature: any, templateSettings: TemplateType | null;
+    emailTemplateSettings: EmailTemplate | null;
+}) => {
     const { loading: offerLoading } = useAppSelector(state => state.offer)
     const headerDetails = offerData?.headerDetails;
     const { address, header, workDates } = offerData?.movingDetails || {};
@@ -286,7 +290,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                     ))}
                     <ServicesTotalAmount {...serviceItemFooter} />
                 </View>
-                {/* <Footer {...PDF_DATA.footer} /> */}
+                <Footer documentDetails={offerData?.footerDetails} emailTemplateSettings={emailTemplateSettings} templateSettings={templateSettings} />
             </Page>
 
             {/* Additional details */}
@@ -303,7 +307,8 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
                     <ContactAddress {...{ ...contactAddress }} />
                     <AdditionalDetails description={aggrementDetails} signature={signature} />
                 </View>
-                {/* <Footer {...PDF_DATA.footer} /> */}
+                <Footer documentDetails={offerData?.footerDetails} emailTemplateSettings={emailTemplateSettings} templateSettings={templateSettings} />
+
             </Page>
 
 
@@ -346,50 +351,7 @@ const OfferSignedPdf = ({ offerData, signature }: { offerData?: PdfProps<EmailHe
         <div className="download-link">
             <BlobProvider
                 document={
-                    <Document>
-
-                        <Page style={styles.body}>
-                            <Header {...headerDetails} />
-                            <View
-                                style={{
-                                    position: "absolute",
-                                    left: 0,
-                                    right: 0,
-                                    top: 120,
-                                }}
-                            >
-                                <ContactAddress {...{ ...contactAddress }} />
-
-                                <AddressDetails {...{ address, header, workDates }} />
-
-                                <ServiceTableHederRow />
-                                {serviceItem?.map((item, index) => (
-                                    <ServiceTableRow {...item} key={index} />
-                                ))}
-                                <ServicesTotalAmount {...serviceItemFooter} />
-                            </View>
-                            {/* <Footer {...PDF_DATA.footer} /> */}
-                        </Page>
-
-                        {/* Additional details */}
-                        <Page style={styles.body}>
-                            <Header {...headerDetails} />
-                            <View
-                                style={{
-                                    position: "absolute",
-                                    left: 0,
-                                    right: 0,
-                                    top: 120,
-                                }}
-                            >
-                                <ContactAddress {...{ ...contactAddress }} />
-                                <AdditionalDetails description={aggrementDetails} signature={signature} />
-                            </View>
-                            {/* <Footer {...PDF_DATA.footer} /> */}
-                        </Page>
-
-
-                    </Document>
+                    pdfDoc
                 }
 
             >
