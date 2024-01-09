@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   pageNumberText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "medium",
     color: "#000",
   },

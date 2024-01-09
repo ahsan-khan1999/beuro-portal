@@ -56,7 +56,7 @@ const PdfCard = ({
             </BaseButton>
 
             <BaseButton
-              buttonText="Send Via Email"
+              buttonText={translate("common.PDF_BUTTONS.send_via_email")}
               onClick={onEmailSend}
               containerClassName="flex items-center group gap-x-3 row-reverse"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"

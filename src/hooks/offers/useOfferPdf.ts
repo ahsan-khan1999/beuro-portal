@@ -4,8 +4,10 @@ import {
   sendOfferEmail,
 } from "@/api/slices/offer/offerSlice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -75,11 +77,15 @@ export const useOfferPdf = () => {
     null
   );
   const [pdfFile, setPdfFile] = useState(null);
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    offer: { error, loading, offerDetails },
-  } = useAppSelector((state) => state);
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+
+
+
+
+  const { loading, offerDetails } = useAppSelector(state => state.offer)
+  const { modal, loading: loadingGlobal } = useAppSelector(state => state.global)
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -88,10 +94,11 @@ export const useOfferPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData, settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(readOfferDetails({ params: { filter: offerID } })),
+          dispatch(readSystemSettings())
         ]);
         if (template?.payload?.Template) {
           const {
@@ -126,6 +133,10 @@ export const useOfferPdf = () => {
             textColour: emailTemplate?.payload?.textColour,
           });
         }
+        
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting })
+        }
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
           let formatData: PdfProps<ContractEmailHeaderProps> = {
@@ -141,7 +152,7 @@ export const useOfferPdf = () => {
               offerNo: offerDetails?.offerNumber,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
-              logo: offerDetails?.createdBy?.company?.logo,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
             },
             contactAddress: {
@@ -160,8 +171,8 @@ export const useOfferPdf = () => {
               address: offerDetails?.addressID?.address,
               header: offerDetails?.title,
               workDates: offerDetails?.date,
-              handleTitleUpdate: () => {},
-              handleDescriptionUpdate: () => {},
+              handleTitleUpdate: () => { },
+              handleDescriptionUpdate: () => { },
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
@@ -194,7 +205,13 @@ export const useOfferPdf = () => {
                     offerDetails?.createdBy?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1:"Standorte",
+                row2:"bern-Solothurn",
+                row3:"Aargau-Luzern",
+                row4:"Basel-Zürich",
+                row5:"",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
@@ -219,6 +236,7 @@ export const useOfferPdf = () => {
               ?.body as string,
           };
         }
+
       }
     })();
   }, [offerID]);
@@ -300,5 +318,6 @@ export const useOfferPdf = () => {
     handlePrint,
     onClose,
     onSuccess,
+    systemSetting
   };
 };

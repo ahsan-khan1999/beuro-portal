@@ -15,6 +15,7 @@ import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
+import QRSettings from "./qr-settings";
 
 const Setting = () => {
   const { t: translate } = useTranslation();
@@ -68,8 +69,8 @@ const Setting = () => {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Configration Created Successfully"
-        subHeading="Thanks for created email configration."
+        heading={translate("common.modals.email_config_created")}
+        subHeading={translate("common.modals.email_config_des")}
         route={onClose}
       />
     ),
@@ -87,9 +88,10 @@ const Setting = () => {
 
     4: <Billing handleEditPayment={handleEditPayment} />,
     5: <MailSetting handleCreation={handleCreation} />,
+    6: <QRSettings handleCreation={handleCreation} />
   };
   return (
-    <>
+    <div className="mb-5">
       <h1 className="text-[#222B45] font-normal text-xl">
         {translate("setting.heading")}
       </h1>
@@ -105,7 +107,7 @@ const Setting = () => {
       </div>
 
       {renderModal()}
-    </>
+    </div>
   );
 };
 

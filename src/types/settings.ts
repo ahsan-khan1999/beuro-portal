@@ -110,3 +110,12 @@ export interface EmailTemplate {
   FooterColour: string;
   textColour: string
 }
+
+
+export interface QRSettings {
+  companyName: string;
+  ibanNo: string;
+  streetNumber: string;
+  postalCode: string;
+  city: string;
+}

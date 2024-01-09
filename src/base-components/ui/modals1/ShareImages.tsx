@@ -33,8 +33,8 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
     gmailIncon,
     messengerIcon,
   ];
-  const { handleCopy, inputRef, isCopied } = useClipboardCopy()
-  const router = useRouter()
+  const { handleCopy, inputRef, isCopied } = useClipboardCopy();
+  const router = useRouter();
 
   const { t: translate } = useTranslation();
 
@@ -64,7 +64,11 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
             <div className="grid grid-cols-5 gap-y-6 gap-x-[25px] mt-5 mb-4">
               {imgSource.map((src, index) => (
                 <div key={index} className="flex justify-center items-center">
-                  <Image src={src} alt={src} className="cursor-pointer w-full" />
+                  <Image
+                    src={src}
+                    alt="source"
+                    className="cursor-pointer w-full"
+                  />
                 </div>
               ))}
             </div>
@@ -88,21 +92,26 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
                 />
               </span>
 
-
               <BaseButton
-                containerClassName={`flex gap-x-1 ${!isCopied ? "bg-lighttest-gray" : "bg-primary"
-                  } py-1 px-2.5 rounded !!border !!border-lightGray`}
-                textClassName={`${!isCopied ? "text-primary" : "text-white"
-                  } font-medium`}
-                buttonText={!isCopied ? translate("offers.share_images_modal.copy_button") : translate("offers.share_images_modal.copied_button")}
+                containerClassName={`flex gap-x-1 ${
+                  !isCopied ? "bg-lighttest-gray" : "bg-primary"
+                } py-1 px-2.5 rounded !!border !!border-lightGray`}
+                textClassName={`${
+                  !isCopied ? "text-primary" : "text-white"
+                } font-medium`}
+                buttonText={
+                  !isCopied
+                    ? translate("offers.share_images_modal.copy_button")
+                    : translate("offers.share_images_modal.copied_button")
+                }
                 onClick={handleCopy}
               >
                 {!isCopied && <CopyIcon />}
               </BaseButton>
-            </div >
-          </div >
-        </div >
-      </BaseModal >
+            </div>
+          </div>
+        </div>
+      </BaseModal>
     </>
   );
 };

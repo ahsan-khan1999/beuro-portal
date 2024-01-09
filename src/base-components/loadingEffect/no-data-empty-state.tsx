@@ -7,7 +7,7 @@ export default function NoDataEmptyState() {
   const { t: translate } = useTranslation();
   return (
     <div className="w-full mt-6 flex flex-col gap-y-4 justify-center items-center rounded-lg ">
-      <Image src={emptyState} alt={""} width={165} height={165} />
+      <Image src={emptyState} alt="empty state" width={165} height={165} />
       <h1 className="text-dark font-semibold text-xl">
         {translate("empty_state.heading")}
       </h1>

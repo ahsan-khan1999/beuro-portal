@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
   heading: {
     marginBottom: 2,
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 14,
   },
   description: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "normal",
   },
   shareHeading: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "medium",
     color: "#000",
     marginTop: 30,

@@ -24,6 +24,7 @@ import { getRefreshToken, getToken } from "@/utils/auth.util";
 import toast from "react-hot-toast";
 const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), { ssr: false });
 import dynamic from "next/dynamic";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 
 export const SignPdf = <T,>({
@@ -34,6 +35,7 @@ export const SignPdf = <T,>({
     totalPages,
     action,
     emailTemplateSettings,
+    systemSettings
 }: {
     pdfData: PdfProps<T>;
     newPageData: ServiceList[][];
@@ -42,6 +44,7 @@ export const SignPdf = <T,>({
     totalPages: number;
     action?: string;
     emailTemplateSettings: EmailTemplate | null,
+    systemSettings: SystemSetting | null
 }) => {
     const dispatch = useAppDispatch()
     const { loading } = useAppSelector(state => state.offer)
@@ -142,6 +145,9 @@ export const SignPdf = <T,>({
                         totalPages={totalPages}
                         isOffer={pdfData.isOffer}
                         emailTemplateSettings={emailTemplateSettings}
+                    systemSettings={systemSettings}
+
+                        
                     />
                 )}
                 {newPageData.slice(1).map((pageItems, index) => (
@@ -156,6 +162,8 @@ export const SignPdf = <T,>({
                         totalPages={totalPages}
                         currPage={index + 2}
                         emailTemplateSettings={emailTemplateSettings}
+                    systemSettings={systemSettings}
+
 
                     />
                 ))}
@@ -175,7 +183,7 @@ export const SignPdf = <T,>({
                     isSignatureDone={isSignatureDone}
                     emailTemplateSettings={emailTemplateSettings}
                     setOfferSignature={setOfferSignature}
-
+                    systemSettings={systemSettings}
                 />
                 {isQr && (
                     <PaymentQRCodeDetails
@@ -185,9 +193,9 @@ export const SignPdf = <T,>({
                     />
                 )}
             </div>
-          
 
-            <OfferSignedPdf offerData={pdfData} signature={offerSignature} />
+
+            <OfferSignedPdf offerData={pdfData} signature={offerSignature} templateSettings={templateSettings} emailTemplateSettings={emailTemplateSettings} systemSettings={systemSettings}/>
 
             {renderModal()}
         </>

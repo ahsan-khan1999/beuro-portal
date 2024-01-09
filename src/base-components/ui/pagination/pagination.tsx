@@ -43,10 +43,14 @@ export const Pagination = React.memo(
           if (index > 0 && pageNumber - array[index - 1] > 1) {
             return (
               <React.Fragment key={pageNumber}>
-                <span className="flex justify-center items-center text-gray">
+                <span
+                  className="flex justify-center items-center text-gray"
+                  key={`dots-${pageNumber}`}
+                >
                   {dots}
                 </span>
                 <PageNumber
+                  key={pageNumber}
                   currentPage={currentPage}
                   pageNumber={pageNumber}
                   handlePageClick={handlePageClick}
@@ -56,6 +60,7 @@ export const Pagination = React.memo(
           } else {
             return (
               <PageNumber
+                key={pageNumber}
                 currentPage={currentPage}
                 pageNumber={pageNumber}
                 handlePageClick={handlePageClick}

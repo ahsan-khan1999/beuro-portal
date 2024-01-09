@@ -4,6 +4,7 @@ import {
 } from "@/api/slices/globalSlice/global";
 import {
   readCollectiveInvoiceDetails,
+  readQRCode,
   sendInvoiceEmail,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
@@ -24,8 +25,10 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { useTranslation } from "next-i18next";
@@ -75,7 +78,7 @@ let invoiceInfoObj = {
 };
 
 export const useInvoicePdf = () => {
-  const {t:translate} = useTranslation()
+  const { t: translate } = useTranslation();
   // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
@@ -84,20 +87,22 @@ export const useInvoicePdf = () => {
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
-  const [email, setEmail] = useState<EmailData>({
-    description: "",
-    email: "",
-    pdf: [""],
-    subject: "",
-  });
+
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+  const [qrCode, setQrCode] = useState('');
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState(null);
 
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    invoice: { error, loading, collectiveInvoiceDetails },
-  } = useAppSelector((state) => state);
+  const { loading, collectiveInvoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
+  const { modal, loading: loadingGlobal } = useAppSelector(
+    (state) => state.global
+  );
+  const { user } = useAppSelector((state) => state.auth);
+
   const dispatch = useAppDispatch();
 
   const maxItemsFirstPage = 6;
@@ -106,16 +111,24 @@ export const useInvoicePdf = () => {
   const router = useRouter();
   const { invoiceID } = router.query;
 
+
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(
-            readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
-          ),
-        ]);
+        const [template, emailTemplate, offerData, qrCode, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(
+              readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+            ),
+            dispatch(readQRCode({ params: { filter: invoiceID } })),
+            dispatch(readSystemSettings()),
+          ]);
+          if(qrCode?.payload){
+            setQrCode(qrCode.payload)
+          }
+
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -151,8 +164,6 @@ export const useInvoicePdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
-
-          console.log(invoiceDetails);
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
@@ -172,7 +183,7 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
               offerDate: invoiceDetails?.invoiceID?.createdAt,
               createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-              logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
             },
             contactAddress: {
@@ -217,7 +228,8 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
               invoiceCreatedAmount:
                 invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
-              invoicePaidAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
+              invoicePaidAmount:
+                invoiceDetails?.invoiceID?.paidAmount.toString(),
               isInvoice: true,
             },
             footerDetails: {
@@ -239,7 +251,13 @@ export const useInvoicePdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
@@ -257,15 +275,6 @@ export const useInvoicePdf = () => {
           };
 
           setInvoiceData(formatData);
-          setEmail({
-            subject: invoiceDetails?.title as string,
-            description: invoiceDetails?.additionalDetails as string,
-            email:
-              invoiceDetails?.invoiceID.contractID?.offerID?.leadID
-                ?.customerDetail?.email,
-            pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments,
-          });
           invoiceInfoObj = {
             ...invoiceInfoObj,
             subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content
@@ -273,6 +282,9 @@ export const useInvoicePdf = () => {
             description: invoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body as string,
           };
+        }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting });
         }
       }
     })();
@@ -303,7 +315,7 @@ export const useInvoicePdf = () => {
         delete apiData["content"];
         const res = await dispatch(sendInvoiceEmail({ data: apiData }));
         if (res?.payload) {
-          await localStoreUtil.remove_data("invoiceComposeEmail");
+          // await localStoreUtil.remove_data("invoiceComposeEmail");
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
       } else {
@@ -400,6 +412,9 @@ export const useInvoicePdf = () => {
     modal,
     loadingGlobal,
     loading,
+    translate,
+    systemSetting,
+    qrCode,
     setPdfFile,
     dispatch,
     handleEmailSend,
@@ -408,6 +423,5 @@ export const useInvoicePdf = () => {
     handleDonwload,
     onClose,
     onSuccess,
-    translate
   };
 };

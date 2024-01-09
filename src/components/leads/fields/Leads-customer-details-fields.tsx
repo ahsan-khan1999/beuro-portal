@@ -1,5 +1,10 @@
 import { Field } from "@/enums/form";
-import { DivProps, FormField, GenerateCustomerLeadFormField, GenerateLeadsFormField } from "@/types";
+import {
+  DivProps,
+  FormField,
+  GenerateCustomerLeadFormField,
+  GenerateLeadsFormField,
+} from "@/types";
 import { getKeyByValue, getValueByKey } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -52,15 +57,21 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
-                (item, key) => ({
+              options: Object.keys(staticEnums.CustomerType)
+                ?.slice(1)
+                .map((item, key) => ({
                   value: item,
                   label: item,
-                })
-              ),
+                })),
 
               control,
-              value: leadDetails?.id && getKeyByValue(staticEnums["CustomerType"],leadDetails.customerDetail?.customerType) || ""
+              value:
+                (leadDetails?.id &&
+                  getKeyByValue(
+                    staticEnums["CustomerType"],
+                    leadDetails.customerDetail?.customerType
+                  )) ||
+                "",
             },
           },
 
@@ -95,9 +106,9 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               name: "phoneNumber",
 
               control,
-              value: leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
-              country: 'ch'
-
+              value:
+                leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
+              country: "ch",
             },
           },
           {
@@ -113,9 +124,9 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               id: "mobileNumber",
               name: "mobileNumber",
               control,
-              value: leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
-              country: 'ch'
-
+              value:
+                leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
+              country: "ch",
             },
           },
         ],
@@ -189,7 +200,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 label: item,
               })),
               control,
-              value: leadDetails?.id && leadDetails?.customerDetail?.address?.country || ""
+              value:
+                (leadDetails?.id &&
+                  leadDetails?.customerDetail?.address?.country) ||
+                "",
             },
           },
         ],
@@ -207,10 +221,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("common.cancel_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
               onClick: onClick,
             },
           },
@@ -224,7 +238,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
               loading,
             },
           },
@@ -245,23 +259,22 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
     const companyNameField = {
       containerClass: "mb-0",
       label: {
-        text: "Company Name",
+        text: `${translate("login_detail.company_details.company_name")}`,
         htmlFor: "companyName",
         className: "mb-[10px]",
       },
       field: {
         type: Field.input,
         className:
-          "!p-4 !!border-borderColor border border-dark focus:!border-primary",
+          "!p-4 !border-[#BFBFBF] border border-dark focus:!border-primary",
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "Please Enter Company Name",
+        placeholder: `${translate("placeholders.company_name")}`,
         register,
         disabled: false,
         value: leadDetails?.id && leadDetails?.customerDetail?.companyName,
-        setValue: setValue
-
+        setValue: setValue,
       },
     };
     // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
