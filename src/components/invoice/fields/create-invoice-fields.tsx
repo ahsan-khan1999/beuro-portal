@@ -90,7 +90,9 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                   field: {
                     type: Field.radio,
                     value: "0",
-                    label: "Amount",
+                    label: `${translate(
+                      "invoice.create_invoice_modal.amount"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -102,7 +104,9 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                   field: {
                     type: Field.radio,
                     value: "1",
-                    label: "Percentage",
+                    label: `${translate(
+                      "invoice.create_invoice_modal.percentage"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -129,7 +133,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         // placeholder: "20000 CHF",
         register,
         percentage: (type === "1" && "%") || "",
-        step:"0.01"
+        step: "0.01",
       },
     },
 
@@ -149,8 +153,8 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
         name: "paymentType",
 
         options: [
-          { value: "Online", label: "Online" },
-          { value: "Cash", label: "Cash" },
+          { value: "Online", label: `${translate("common.online")}` },
+          { value: "Cash", label: `${translate("common.cash")}` },
         ],
         control,
       },

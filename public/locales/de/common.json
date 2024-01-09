@@ -1016,6 +1016,8 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?"
     },
+    "online": "Online",
+    "cash": "Barzahlung",
     "start_date": "Startdatum",
     "end_date": "Enddatum",
     "month": "Monat",

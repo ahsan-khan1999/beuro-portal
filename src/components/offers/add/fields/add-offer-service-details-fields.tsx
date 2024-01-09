@@ -656,7 +656,7 @@ const generateServiceCalulationChildren = (
               },
 
               {
-                containerClass: "mb-0 ",
+                containerClass: "mb-0 w-full",
                 field: {
                   type: Field.input,
                   className:
