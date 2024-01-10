@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     rowGap: 60,
-    '> *': {
+    "> *": {
       // Styles for direct children (Text elements) of the container
       // Add your specific styles for the Text elements here
       fontSize: 10,
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     // width: "40%",
   },
 
-
   dateText: {
     paddingTop: 12,
     fontSize: 12,
@@ -69,54 +68,69 @@ const styles = StyleSheet.create({
 });
 
 const stylesheet: HtmlStyles = {
-  // clear margins for all <p> tags
   p: {
     margin: 0,
-    fontSize:12
+    fontSize: 12,
   },
   h1: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 18,
+    fontWeight: 700,
+    fontStyle: "bold",
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 16,
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 14,
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize:13
-
+    fontSize: 12,
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize:12
-
+    fontSize: 10,
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize:12
-
+    fontSize: 8,
+    fontWeight: 600,
+    fontStyle: "semibold",
+  },
+  ul: {
+    fontSize: 8,
+    fontWeight: 400,
+    fontStyle: "normal",
   },
 };
 
-export const AdditionalDetails = ({ description, signature }: { description?: string, signature?: any }) => {
+export const AdditionalDetails = ({
+  description,
+  signature,
+}: {
+  description?: string;
+  signature?: any;
+}) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
 
   const onFileChange = () => {
-
     if (signature) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -125,15 +139,16 @@ export const AdditionalDetails = ({ description, signature }: { description?: st
       reader.readAsDataURL(signature);
     }
   };
-  useMemo(() => signature && onFileChange(), [signature])
+  useMemo(() => signature && onFileChange(), [signature]);
   return (
-
     <View style={styles.borderDiv}>
       <View style={styles.container}>
         <Html stylesheet={stylesheet}>{description || ""}</Html>
 
         <View style={{}}>
-          <Text style={styles.shareHeading}>I share the contract with you.</Text>
+          <Text style={styles.shareHeading}>
+            I share the contract with you.
+          </Text>
 
           <View style={styles.dateContainer}>
             <View style={styles.innerDate}>
@@ -141,20 +156,19 @@ export const AdditionalDetails = ({ description, signature }: { description?: st
             </View>
 
             <View style={{ width: "40%" }}>
-              {
-                signature &&
-                <Image src={imageSrc as string} style={{ height: "100px", width: "100px" }} />
-
-              }
+              {signature && (
+                <Image
+                  src={imageSrc as string}
+                  style={{ height: "100px", width: "100px" }}
+                />
+              )}
               <View style={styles.signature}>
-
                 <Text style={styles.dateText}>Signature</Text>
-
               </View>
             </View>
           </View>
         </View>
       </View>
     </View>
-  )
+  );
 };

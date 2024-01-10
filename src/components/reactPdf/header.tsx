@@ -6,15 +6,11 @@ import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 export const Header = ({
   createdBy,
   emailTemplateSettings,
-  logo,
   offerDate,
   offerNo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
-  console.log(logo)
-  const { FooterColour, textColour } = emailTemplateSettings ?? {};
-  // if (FooterColour) styles.footerContainer.backgroundColor = ;
-  //   if (textColour) styles.footerText.color = `#${textColour}`;
+  const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
   return (
     <View
       style={{
