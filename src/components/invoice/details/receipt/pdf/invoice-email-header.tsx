@@ -53,7 +53,7 @@ export const InvoiceEmailHeader = ({
             <PostIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
           <BaseButton
-            buttonText="Send Via Email"
+            buttonText={translate("contracts.pdf_card_details.send_via_email")}
             onClick={onEmailSend}
             containerClassName="flex items-center gap-x-3 row-reverse group"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
@@ -81,7 +81,7 @@ export const InvoiceEmailHeader = ({
       <div className="flex justify-between items-center">
         <div>
           <span className="text-[#4D4D4D] text-base font-normal">
-            Contract ID:
+            {translate("invoice.receipt_card.contract_id")}:
           </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
@@ -89,7 +89,9 @@ export const InvoiceEmailHeader = ({
           </span>
         </div>
         <div>
-          <span className="text-[#4D4D4D] text-base font-normal">Worker:</span>
+          <span className="text-[#4D4D4D] text-base font-normal">
+            {translate("invoice.receipt_card.worker")}:
+          </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
             {workerName}
@@ -97,7 +99,7 @@ export const InvoiceEmailHeader = ({
         </div>
         <div>
           <span className="text-[#4D4D4D] text-base font-normal">
-            Content Name:
+            {translate("invoice.receipt_card.content_name")}:
           </span>
           &nbsp;
           <span className="text-[#4B4B4B] text-base font-medium">
@@ -106,7 +108,7 @@ export const InvoiceEmailHeader = ({
         </div>
         <div className="flex items-center gap-[11px]">
           <span className="text-[#4D4D4D] text-base font-normal">
-            Contract Status:
+            {translate("invoice.receipt_card.contract_status")}:
           </span>
           <div className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"}`}>
             <span className={`text-base font-medium ${"text-[#FE9244]"}`}>

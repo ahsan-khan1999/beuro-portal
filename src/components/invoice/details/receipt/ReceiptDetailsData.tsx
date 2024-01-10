@@ -3,9 +3,11 @@ import backIcon from "@/assets/svgs/back_icon.svg";
 import editIcon from "@/assets/svgs/Edit_note.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const ReceiptDetailsData = () => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -17,7 +19,7 @@ const ReceiptDetailsData = () => {
             className="cursor-pointer"
           />
           <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            Receipt details
+            {translate("invoice.receipt_details")}
           </p>
         </div>
       </div>
@@ -26,7 +28,7 @@ const ReceiptDetailsData = () => {
         <div className="flex justify-between items-center">
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Receipt ID:
+              {translate("invoice.receipt_card.receipt_id")}:
             </span>
             <span className="text-base text-[#393939] font-medium">
               Q-2000-3
@@ -34,7 +36,7 @@ const ReceiptDetailsData = () => {
           </div>
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Receipt Title:
+              {translate("invoice.receipt_card.receipt_title")}:
             </span>
             <span className="text-base text-[#393939] font-medium">
               Office Cleaning Munich Lorem Ipsum dollar
@@ -42,7 +44,7 @@ const ReceiptDetailsData = () => {
           </div>
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Worker:
+              {translate("invoice.receipt_card.worker")}:
             </span>
             <span className="text-base text-[#393939] font-medium">
               Rahal AHmad
@@ -52,13 +54,13 @@ const ReceiptDetailsData = () => {
         <div className="flex gap-[208px] items-center">
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Contract ID:
+              {translate("invoice.receipt_card.contract_id")}:
             </span>
             <span className="text-base text-[#4A13E7] font-medium">V-2000</span>
           </div>
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Total Amount:
+              {translate("invoice.receipt_card.total_amount")}:
             </span>
             <span className="text-base text-[#393939] font-medium">
               20000 CHF
@@ -68,13 +70,13 @@ const ReceiptDetailsData = () => {
         <div className="flex justify-between items-center">
           <div className="flex gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Offer ID:ReceiptDetailsData
+              {translate("invoice.receipt_card.offer_id")}:ReceiptDetailsData
             </span>
             <span className="text-base text-[#4A13E7] font-medium">A-2000</span>
           </div>
           <div className="flex  items-center gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Payment Status:
+              {translate("invoice.receipt_card.payment_status")}:
             </span>
             <span className="text-base text-[#45C769] font-medium border border-[#45C769] rounded-md px-[13px] py-[4px]">
               5 Paid
@@ -82,7 +84,7 @@ const ReceiptDetailsData = () => {
           </div>
           <div className="flex  items-center gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Email Status:
+              {translate("invoice.receipt_card.email_status")}:
             </span>
             <span className="text-base text-[#FE9244] font-medium border border-[#FE9244] rounded-md px-[13px] py-[4px]">
               3/5 Send
@@ -90,7 +92,7 @@ const ReceiptDetailsData = () => {
           </div>
           <div className="flex items-center gap-[13px]">
             <span className="text-base font-normal text-[#4D4D4D]">
-              Worker:
+              {translate("invoice.receipt_card.worker")}:
             </span>
             <Image src={editIcon} alt="editIcon" />
           </div>

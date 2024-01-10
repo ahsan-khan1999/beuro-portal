@@ -560,7 +560,7 @@ const generateServiceCalulationChildren = (
                 },
               },
               {
-                containerClass: "mb-0 border-r border-lightGray pr-[36px]",
+                containerClass: "mb-0 border-r border-lightGray pr-[2px]",
                 field: {
                   type: Field.span,
                   className: "! !border-[#BFBFBF] focus:!border-primary w-full",
