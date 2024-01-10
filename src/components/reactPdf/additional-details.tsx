@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: 35,
   },
   container: {
+    fontFamily: "Poppins",
     display: "flex",
     flexDirection: "column",
     rowGap: 60,
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
   },
   shareHeading: {
     fontSize: 14,
+    fontWeight: "medium",
     color: "#000",
     marginTop: 30,
     marginBottom: 50,
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
   dateText: {
     paddingTop: 12,
     fontSize: 12,
+    fontWeight: 400,
     color: "#000",
   },
 });
@@ -72,44 +75,32 @@ const stylesheet: HtmlStyles = {
   h1: {
     margin: 0,
     padding: 0,
-    fontSize: 18,
-    fontWeight: 700,
-    fontStyle: "bold",
+    fontSize: 16,
   },
   h2: {
     margin: 0,
     padding: 0,
     fontSize: 16,
-    fontWeight: 600,
-    fontStyle: "semibold",
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 14,
-    fontWeight: 600,
-    fontStyle: "semibold",
+    fontSize: 16,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
-    fontWeight: 600,
-    fontStyle: "semibold",
+    fontSize: 13,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize: 10,
-    fontWeight: 600,
-    fontStyle: "semibold",
+    fontSize: 12,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 8,
-    fontWeight: 600,
-    fontStyle: "semibold",
+    fontSize: 12,
   },
 };
 
@@ -121,7 +112,7 @@ export const AdditionalDetails = ({
   signature?: any;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-console.log(description)
+  console.log(description);
   const onFileChange = () => {
     if (signature) {
       const reader = new FileReader();
@@ -135,7 +126,9 @@ console.log(description)
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html>{description || ""}</Html>
+        <Html stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+          {description || ""}
+        </Html>
 
         <View style={{}}>
           <Text style={styles.shareHeading}>
@@ -144,7 +137,7 @@ console.log(description)
 
           <View style={styles.dateContainer}>
             <View style={styles.innerDate}>
-              <Text style={styles.dateText}>Date</Text>
+              <Text style={styles.dateText}>Datum</Text>
             </View>
 
             <View style={{ width: "40%" }}>

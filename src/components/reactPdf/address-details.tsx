@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 600,
+    fontStyle: "semibold",
     color: "#000",
     paddingBottom: 3,
     borderBottomWidth: 3,
@@ -68,14 +69,23 @@ export const AddressDetails = ({
         <View style={styles.addressText}>
           <Text
             style={{
-              fontSize: 12,
-              fontWeight: "bold",
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
               color: "#000",
             }}
           >
-            Address {index + 1}:
+            Adresse {index + 1}:
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: "medium",
+              color: "#000",
+              width: 450,
+              textAlign: "justify",
+            }}
+          >
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
             {address.description && ` _ ${address.description}`}
           </Text>
@@ -86,12 +96,13 @@ export const AddressDetails = ({
     <View style={styles.dateRow}>
       <Text
         style={{
-          fontSize: 12,
-          fontWeight: "bold",
+          fontSize: 10,
+          fontWeight: 500,
+          fontStyle: "medium",
           color: "#000",
         }}
       >
-        Work Dates:
+        Arbeitstermine:
       </Text>
       <View style={styles.datesColumn}>
         {workDates?.map((date, index) => (

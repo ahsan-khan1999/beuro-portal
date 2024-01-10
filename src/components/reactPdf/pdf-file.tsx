@@ -30,14 +30,14 @@ Font.register({
       fontWeight: 400,
     },
     {
-      src: "/assets/fonts/Poppins-Light.ttf",
-      fontStyle: "light",
-      fontWeight: 300,
-    },
-    {
       src: "/assets/fonts/Poppins-Medium.ttf",
       fontStyle: "medium",
       fontWeight: 500,
+    },
+    {
+      src: "/assets/fonts/Poppins-Light.ttf",
+      fontStyle: "light",
+      fontWeight: 300,
     },
     {
       src: "/assets/fonts/Poppins-SemiBold.ttf",
@@ -137,5 +137,14 @@ const styles = StyleSheet.create({
   body: {
     paddingBottom: 140,
     fontFamily: "Poppins",
+  },
+  pageNumber: {
+    position: "absolute",
+    fontSize: 12,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
   },
 });
