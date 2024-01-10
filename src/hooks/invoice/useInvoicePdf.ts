@@ -93,7 +93,7 @@ export const useInvoicePdf = () => {
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
-  const [qrCode, setQrCode] = useState('');
+  const [qrCode, setQrCode] = useState("");
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState(null);
 
@@ -112,7 +112,6 @@ export const useInvoicePdf = () => {
 
   const router = useRouter();
   const { invoiceID } = router.query;
-
 
   useEffect(() => {
     (async () => {

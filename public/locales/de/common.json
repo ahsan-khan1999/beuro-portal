@@ -469,7 +469,7 @@
       "follow_up_setting": "Nachverfolgungseinstellung",
       "billing": "Abrechnung",
       "mail_setting": "Mail-Einstellung",
-      "qr_settings":"QR-Einstellungen"
+      "qr_settings": "QR-Einstellungen"
     },
     "account_setting": {
       "public_info": "Öffentliche Informationen",
@@ -735,6 +735,7 @@
       "offer_title": "Angebotstitel",
       "worker": "Arbeiter",
       "offer_id": "Angebots-ID",
+      "email_status": "E-Mail-Status",
       "created_date": "Erstellungsdatum",
       "service_date": "Service-Datum",
       "offer_status": "Angebotsstatus",
@@ -1016,8 +1017,8 @@
       "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
-      "plan_created":"Datensatz erfolgreich erstellt",
-      "plan_record_des":"Danke! Wir freuen uns, dass Sie da sind."
+      "plan_created": "Datensatz erfolgreich erstellt",
+      "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind."
     },
     "online": "Online",
     "cash": "Barzahlung",
@@ -1716,8 +1717,7 @@
       "cancel": "Abgebrochen",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
-      "pending":"Anhängig"
-
+      "pending": "Anhängig"
     },
     "charts_labels": {
       "website": "Webseite",
@@ -1743,6 +1743,8 @@
     "created_by": "Erstellt von",
     "email": "E-Mail",
     "phone": "Telefon",
+    "address": "Adresse",
+    "work_date": "Arbeitstermine",
     "service": "Dienstleistung/Produkt",
     "price": "Preis",
     "unit": "Einheit",
@@ -1752,6 +1754,8 @@
     "tax": "Steuer%",
     "discount": "Rabatt",
     "grand_total": "Gesamtsumme",
+    "paid_amount": "Bezahlter Betrag",
+    "due_amount": "Ausstehender Betrag",
     "validate_heading": "Gültigkeit des Angebots",
     "validate_des": "3 Monate ab Erstellung des Angebots",
     "share_des": "Ich teile den Vertrag mit Ihnen.",
