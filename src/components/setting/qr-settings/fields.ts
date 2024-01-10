@@ -16,7 +16,6 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
     const { t: translate } = useTranslation();
     let formField: FormField[] = [];
     let totalCount = count
-    // const currentValues = getValues()
     for (let i = 0; i < count; i++) {
         let indexValue = i;
         formField.push(
