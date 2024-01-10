@@ -45,7 +45,7 @@ const generateMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
     };
 
     fetchAndMergePDFs();
-  }, []);
+  }, [pdfProps]);
 
   useEffect(() => {
     if (mergedPdf) {
