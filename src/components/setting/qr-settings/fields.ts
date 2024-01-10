@@ -44,6 +44,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                             // checked: true,
                                             name: `QrCodeDetail.${i}.QrCodeStatus`,
                                             register,
+                                            fieldIndex: i,
                                             onChange: () => handleOnChangeStatus && handleOnChangeStatus(i?.toString(), "1")
 
 
