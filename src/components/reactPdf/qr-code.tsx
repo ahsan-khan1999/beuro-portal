@@ -35,17 +35,17 @@ const styles = StyleSheet.create({
   sectionHeading: {
     fontStyle: "normal",
     fontWeight: 600,
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 3,
   },
   infoTitleText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 500,
-    fontStyle: "normal",
+    fontStyle: "medium",
     marginBottom: 4,
   },
   infoText: {
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: 400,
     fontStyle: "normal",
     marginBottom: 6,
@@ -79,6 +79,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 48,
     paddingLeft: 40,
+  },
+  currencyHeading: {
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
   },
 });
 export const QRCode = ({ acknowledgementSlip, payableTo }: Partial<qrCode>) => {
@@ -124,13 +129,13 @@ export const QRCode = ({ acknowledgementSlip, payableTo }: Partial<qrCode>) => {
                 style={{ marginTop: 24, flexDirection: "row", columnGap: 16 }}
               >
                 <View style={{ flexDirection: "column", rowGap: 4 }}>
-                  <Text style={styles.infoText}>Währung</Text>
+                  <Text style={styles.currencyHeading}>Währung</Text>
                   <Text style={styles.infoText}>
                     {acknowledgementSlip?.currency}
                   </Text>
                 </View>
                 <View style={{ flexDirection: "column", rowGap: 4 }}>
-                  <Text style={styles.infoText}>Betrag</Text>
+                  <Text style={styles.currencyHeading}>Betrag</Text>
                   <Text style={styles.infoText}>
                     {acknowledgementSlip?.amount}
                   </Text>
@@ -149,13 +154,13 @@ export const QRCode = ({ acknowledgementSlip, payableTo }: Partial<qrCode>) => {
               style={{ marginTop: 24, flexDirection: "row", columnGap: 16 }}
             >
               <View style={{ flexDirection: "column", rowGap: 4 }}>
-                <Text style={styles.infoText}>Währung</Text>
+                <Text style={styles.currencyHeading}>Währung</Text>
                 <Text style={styles.infoText}>
                   {acknowledgementSlip?.currency}
                 </Text>
               </View>
               <View style={{ flexDirection: "column", rowGap: 4 }}>
-                <Text style={styles.infoText}>Betrag</Text>
+                <Text style={styles.currencyHeading}>Betrag</Text>
                 <Text style={styles.infoText}>
                   {acknowledgementSlip?.amount}
                 </Text>

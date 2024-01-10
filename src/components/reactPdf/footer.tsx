@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     color: "#000",
     marginBottom: 2,
-  },  
+  },
   pageNumberContainer: {
     position: "absolute",
     bottom: 5,
