@@ -194,15 +194,15 @@
       "min": "Mindestens 1 ist erforderlich"
     },
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
-    "offer_not_open": "ZurückgehenDieses Angebot ist bereits geschlossen oder unterzeichnet",
+    "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
     "value_max": "value_max"
   },
   "sidebar": {
     "customer": {
-      "dashboard": "Übersicht",
+      "dashboard": "Armaturenbrett",
       "customers": "Kunden",
       "leads": {
-        "leads": "Interessenten",
+        "leads": "Führt",
         "open": "Offen",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
@@ -229,12 +229,12 @@
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
       "content": "Inhalt",
-      "mail_tracker": "Mail-Verfolgung",
+      "mail_tracker": "Mail-Verfolger",
       "settings": "Einstellungen",
-      "contact_supports": "Kontaktiere den Support"
+      "contact_supports": "Kontakt zum Support"
     },
     "admin": {
-      "dashboard": "Übersicht",
+      "dashboard": "Armaturenbrett",
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
@@ -289,11 +289,11 @@
     },
     "side_bar_details": {
       "heading": "Einzelheiten",
-      "lead_id": "Leitende ID",
+      "lead_id": "Blei ID",
       "name": "Name",
       "lead_source": "Bleiquelle",
-      "lead_status": "Führen Status",
-      "lead_expire": "Lead ablaufen"
+      "lead_status": "Blei Status",
+      "lead_expire": "Blei ablaufen"
     },
     "customer_cretaed_modal": {
       "main_heading": "Kunde erfolgreich erstellt ",
@@ -325,7 +325,7 @@
     }
   },
   "email_tracker": {
-    "main_heading": "E-Mail-Tracker",
+    "main_heading": "E-Mail-Verfolger",
     "email_detail_heading": "E-Mail",
     "table_functions": {
       "open": "Öffnen Sie",
@@ -367,11 +367,12 @@
   "services": {
     "main_heading": "Dienstleistungen",
     "add_button": "Neu hinzufügen",
-    "add_service_heading": "Neuen Service hinzufügen",
-    "service_detail_tab": "Service-Details",
+    "heading": "Dienste Details",
+    "add_service_heading": "Neuen Dienst hinzufügen",
+    "service_detail_tab": "Dienstdetails",
     "table_headings": {
       "id": "ID",
-      "service": "Service",
+      "service": "Dienst",
       "created_on": "Erstellt am",
       "price": "Preis",
       "unit": "Einheit",
@@ -553,7 +554,7 @@
     },
     "follow_up_setting": {
       "on_offer_expire": "Nachverfolgung bei Ablauf des Angebots erstellen",
-      "on_lead_create": "Nachverfolgung bei Lead-Erstellung erstellen",
+      "on_lead_create": "Nachverfolgung bei Blei-Erstellung erstellen",
       "add_follow_up": {
         "heading": "Gründe für die Nachverfolgung",
         "add_label": "Gründe hinzufügen",
@@ -635,6 +636,18 @@
     "main_heading": "Rechnung",
     "invoice_details": "Rechnungsdetails",
     "receipt_details": "Belegdetails",
+    "receipt_card": {
+      "receipt_id": "Quittung ID",
+      "receipt_title": "Titel der Quittung",
+      "worker": "Arbeiter",
+      "content_name": "Inhalt Name",
+      "contract_status": "Kontarkt Status",
+      "contract_id": "Kontrakt-ID",
+      "total_amount": "Gesamtbetrag",
+      "offer_id": "Angebot ID",
+      "payment_status": "Zahlungsstatus",
+      "email_status": "E-Mail-Status"
+    },
     "table_functions": {
       "open": "Öffnen",
       "overdue": "Überfällig",
@@ -661,7 +674,7 @@
       "worker": "Arbeiter",
       "status": "E-Mail-Status",
       "paid_amount": "Bezahlter Betrag",
-      "offer_id": "Angebots-ID",
+      "offer_id": "Angebote-ID",
       "created_date": "Erstellungsdatum",
       "notes": "Notizen",
       "unpaid_amount": "Unbezahlter Betrag",
@@ -732,23 +745,23 @@
       "heading": "Vertragsdetails",
       "confirm_button": "Bestätigung senden",
       "contract_id": "Vertrags-ID",
-      "offer_title": "Angebotstitel",
+      "offer_title": "Angebotetitel",
       "worker": "Arbeiter",
-      "offer_id": "Angebots-ID",
+      "offer_id": "Angebote-ID",
       "email_status": "E-Mail-Status",
       "created_date": "Erstellungsdatum",
-      "service_date": "Service-Datum",
-      "offer_status": "Angebotsstatus",
+      "service_date": "Dienst-Datum",
+      "offer_status": "Angebotestatus",
       "payment_method": "Zahlungsmethode",
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
       "images": "Bilder"
     },
     "tabs_headings": {
-      "offer_details": "Angebotsdetails",
+      "offer_details": "Angebotedetails",
       "address_details": "Adressdetails",
-      "service_details": "Service-Details",
-      "additional_details": "Zusätzliche Details"
+      "service_details": "Dienstdetails",
+      "additional_details": "Zusätzlichedetails"
     },
     "customer_details": {
       "heading": "Angebotsdetails",
@@ -772,8 +785,8 @@
       "description": "Beschreibung"
     },
     "service_details": {
-      "heading": "Service-/Produktdetails",
-      "title": "Service-/Produktname",
+      "heading": "Dienst-/Produktdetails",
+      "title": "Dienst-/Produktname",
       "description": "Beschreibung",
       "price": "Preis",
       "unit": "Einheit",
@@ -783,7 +796,7 @@
       "tax": "Steuer(%)"
     },
     "additional_details": {
-      "heading": "Zusätzliche Details"
+      "heading": "Zusätzlichedetails"
     },
     "contract_email_preview": {
       "heading": "Vertrags-E-Mail-Vorschau",
@@ -811,7 +824,7 @@
     "add_button": "Neu hinzufügen",
     "content_card_detail": {
       "heading": "Inhaltsdetails",
-      "s_no": "Nr.",
+      "s_no": "Nr",
       "title": "Titel des Inhalts",
       "worker": "Bearbeiter",
       "created_date": "Erstellungsdatum"
@@ -824,21 +837,21 @@
       "edit": "Bearbeiten"
     },
     "tabs_headings": {
-      "offer_content": "Angebotsinhalt",
+      "offer_content": "Angeboteinhalt",
       "confirmation_content": "Bestätigungsinhalt",
       "invoice_content": "Rechnungsinhalt",
       "receipt_content": "Quittungsinhalt"
     },
     "details": {
-      "offer_heading": "Angebotsinhalt",
+      "offer_heading": "Angeboteinhalt",
       "confirmation_heading": "Bestätigungsinhalt",
       "invoice_heading": "Rechnungsinhalt",
       "receipt_heading": "Quittungsinhalt",
       "edit_button": "Details bearbeiten",
       "content_name": "Inhaltsname",
       "address_labels": "Adressetiketten",
-      "offer_title": "Angebotstitel",
-      "offer_description": "Angebotsbeschreibung",
+      "offer_title": "Angebotetitel",
+      "offer_description": "Angebotebeschreibung",
       "email_body": "E-Mail-Text",
       "confirmation_title": "Bestätigungstitel",
       "Confirmation_description": "Bestätigungsbeschreibung",
@@ -860,14 +873,14 @@
     }
   },
   "leads": {
-    "add_new_lead": "Neuen Lead hinzufügen",
+    "add_new_lead": "Neuen Blei hinzufügen",
     "main_heading": "Führt",
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Leads öffnen",
-      "close": "Leads schließen",
-      "expire": "Leads ablaufen"
+      "open": "Führt öffnen",
+      "close": "Führt schließen",
+      "expire": "Führt ablaufen"
     },
     "table_headings": {
       "id": "ID",
@@ -882,9 +895,9 @@
       "edit": "bearbeiten"
     },
     "card_content": {
-      "heading": "Lead Details",
+      "heading": "Führendetails",
       "create_button": "Angebot erstellen",
-      "lead_id": "Lead-ID",
+      "lead_id": "Blei-ID",
       "status": "Status",
       "created_date": "Erstellungsdatum",
       "created_by": "Erstellt von"
@@ -892,8 +905,8 @@
     "tabs_headings": {
       "customer": "Kundendetails",
       "address": "Adressdetails",
-      "service": "Servicedetails",
-      "additional": "Zusätzliche Details"
+      "service": "Dienstdetails",
+      "additional": "Zusätzlichedetails"
     },
     "customer_details": {
       "new_customer": "Neuer Kunde",
@@ -938,16 +951,16 @@
       "back_button": "Zurück"
     },
     "service_details": {
-      "heading": "Service-/Produktdetails",
+      "heading": "Dienst-/Produktdetails",
       "edit_button": "Details bearbeiten",
-      "required_service": "Benötigter Service",
+      "required_service": "Benötigter Dienst",
       "desire_date": "Wunschdatum",
       "days": "Tage",
       "flexibility": "Flexibilität",
       "availability": "Verfügbarkeit für Kontakt",
       "prefer_contact": "Bevorzugte Kontaktaufnahme",
       "budget": "Budget",
-      "lead_source": "Leadquelle",
+      "lead_source": "Bleiquelle",
       "other_services": "Andere Dienste",
       "save_changes_button": "Änderungen speichern",
       "cancel_button": "Abbrechen",
@@ -964,13 +977,13 @@
       "save_button": "Speichern"
     },
     "confirm_lead_modal": {
-      "main_heading": "Bitte Lead-ID bestätigen",
-      "sub_heading": "Lead-ID eingeben",
+      "main_heading": "Bitte Blei-ID bestätigen",
+      "sub_heading": "Blei-ID eingeben",
       "cancel_button": "Abbrechen",
       "confirm_button": "Bestätigen"
     },
     "leads_created_modal": {
-      "main_heading": "Lead erfolgreich erstellt",
+      "main_heading": "Blei erfolgreich erstellt",
       "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
       "add_button": "Bilder hinzufügen",
       "without_images": "Ohne Bilder fortfahren"
@@ -978,6 +991,14 @@
   },
   "common": {
     "modals": {
+      "stop_reccuring": "Sie möchten diese wiederkehrende Rechnung stoppen",
+      "invoice_created": "Rechnung erfolgreich erstellt",
+      "confirm_invoice_id": "Bitte Rechnungs-ID bestätigen",
+      "enter_invoice_id": "Rechnungs-ID eingeben",
+      "delete_invoice": "Sind Sie sicher, dass Sie diese Rechnung löschen möchten?",
+      "delete_follow_up": "Sind Sie sicher, dass Sie dieses FollowUp löschen möchten?",
+      "offer_update": "Erfolgreich aktualisiertes Angebot",
+      "reject_offer": "Sind Sie sicher, dass Sie dieses Angebot ablehnen wollen?",
       "email_config_created": "E-Mail-Konfiguration erfolgreich erstellt",
       "email_config_des": "Vielen Dank für die Erstellung der E-Mail-Konfiguration.",
       "update_setting": "Einstellungen erfolgreich aktualisiert",
@@ -985,9 +1006,9 @@
       "employee_confirm": "Bitte bestätigen Sie die Mitarbeiter-ID",
       "employee_ID": "Mitarbeiter-ID",
       "delete_employee": "Sind Sie sicher, dass Sie diesen Mitarbeiter löschen möchten?",
-      "service_confirm": "Bitte bestätigen Sie die Service-ID",
-      "service_ID": "Service-ID",
-      "delete_service": "Sind Sie sicher, dass Sie diesen Service löschen möchten?",
+      "service_confirm": "Bitte bestätigen Sie die Dienst-ID",
+      "service_ID": "Dienst-ID",
+      "delete_service": "Sind Sie sicher, dass Sie diesen Dienst löschen möchten?",
       "created_service": "Dienst erfolgreich erstellt",
       "service_created_des": "Vielen Dank für die Erstellung des Dienstes. Wir freuen uns, Sie als Kunden zu haben.",
       "delete_record": "Möchten Sie diesen Datensatz aktualisieren?",
@@ -997,9 +1018,9 @@
       "delete_contract": "Sind Sie sicher, dass Sie diesen Vertrag löschen möchten?",
       "update_contract_heading": "Status erfolgreich aktualisiert",
       "update_des": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
-      "lead_confirm": "Bitte bestätigen Sie die Lead-ID",
+      "lead_confirm": "Bitte bestätigen Sie die Blei-ID",
       "lead_ID": "Lead-ID eingeben",
-      "delete_lead": "Sind Sie sicher, dass Sie diesen Lead löschen möchten?",
+      "delete_lead": "Sind Sie sicher, dass Sie diesen Blei löschen möchten?",
       "customer_confirm": "Bitte bestätigen Sie die Kunden-ID",
       "customer_ID": "Kunden-ID",
       "delete_customer": "Sind Sie sicher, dass Sie diesen Kunden löschen möchten?",
@@ -1007,19 +1028,22 @@
       "customer_created_des": "Vielen Dank für die Erstellung des Kunden. Wir freuen uns, Sie als Kunden zu haben.",
       "are_sure": "Sind Sie sicher?",
       "leave_page": "Möchten Sie diese Seite verlassen, ohne Änderungen zu speichern?",
-      "offer_delete": "Bitte bestätigen Sie die Angebots-ID",
-      "offer_ID": "Angebots-ID eingeben",
+      "offer_delete": "Bitte bestätigen Sie die Angebote-ID",
+      "offer_ID": "Angebote-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "offer_created": "Vorgang erfolgreich",
-      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
+      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "offer_email_sent": "E-Mail erfolgreich gesendet",
-      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
+      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind."
     },
+    "remove": "entfernen",
+    "drop_or_attach": "Hier können Sie Ihre Datei ablegen oder anhängen",
+    "file_support": "Unterstützte Dateien: PDF, JPG, PNG, GIF",
     "online": "Online",
     "cash": "Barzahlung",
     "start_date": "Startdatum",
@@ -1031,10 +1055,15 @@
     "help": "Hilfezentrum",
     "via_email": "Über E-Mail",
     "via_whatsapp": "Über WhatsApp",
+    "via_fb": "Über Facebook",
+    "via_insta": "Über Instagram",
     "less_then": "Weniger als",
     "whatsapp": "WhatsApp",
     "facebook": "Facebook",
+    "insta": "Instagram",
     "morning": "Morgen",
+    "afternoon": "Nachmittag",
+    "evening": "Abend",
     "days": "Tage",
     "true": "Wahr",
     "false": "Falsch",
@@ -1114,8 +1143,8 @@
       "button": "Fertig"
     },
     "PDF_HEADER": {
-      "offer_no": "ANGEBOTS-NR",
-      "offer_date": "ANGEBOTSDATUM",
+      "offer_no": "ANGEBOTE-NR",
+      "offer_date": "ANGEBOTEDATUM",
       "created_by": "ERSTELLT VON",
       "email": "E-Mail",
       "phone": "Telefon"
@@ -1160,11 +1189,11 @@
       "main_heading": "Angebotsdetails",
       "send_button": "E-Mail senden",
       "send_via_post": "Per Post senden",
-      "offer_id": "Angebots-ID",
-      "offer_title": "Angebotstitel",
+      "offer_id": "Angebote-ID",
+      "offer_title": "Angebotetitel",
       "worker": "Arbeiter",
       "created_date": "Erstellungsdatum",
-      "service_date": "Service-Datum",
+      "service_date": "Dienst-Datum",
       "email_status": "E-Mail-Status",
       "payment_method": "Zahlungsmethode",
       "status": "Status",
@@ -1172,10 +1201,10 @@
       "images": "Bilder"
     },
     "tabs_heading": {
-      "offer": "Angebotsdetails",
+      "offer": "Angebotedetails",
       "address": "Adressdetails",
-      "service": "Servicedetails",
-      "additional": "Zusätzliche Details"
+      "service": "Dienstdetails",
+      "additional": "Zusätzlichedetails"
     },
     "detail_buttons": {
       "activity": "Aktivität",
@@ -1199,8 +1228,8 @@
       "select_customer": "Kunden auswählen",
       "customer_name": "Kundenname",
       "email": "E-Mail",
-      "offer_title": "Angebotstitel",
-      "offer_number": "Angebotsnummer",
+      "offer_title": "Angebotetitel",
+      "offer_number": "Angebotenummer",
       "date": "Datum",
       "cancel_button": "Abbrechen",
       "save_button": "Speichern",
@@ -1222,15 +1251,15 @@
       "next_button": "Weiter"
     },
     "service_details": {
-      "main_heading": "Service-/Produktdetails",
+      "main_heading": "Dienst-/Produktdetails",
       "edit_button": "Details bearbeiten",
-      "add_new_service": "Neuen Service hinzufügen",
+      "add_new_service": "Neuen Dienst hinzufügen",
       "price": "Preis",
       "discount_decription": "Rabattbeschreibung",
       "detail_headings": {
-        "new_service": "Neuer Service",
-        "exit_service": "Bestehender Service",
-        "title": "Service-/Produkttitel",
+        "new_service": "Neuer Dienst",
+        "exit_service": "Bestehender Dienst",
+        "title": "Dienst-/Produkttitel",
         "description": "Beschreibung",
         "price": "Preis ",
         "unit": "Einheit",
@@ -1245,10 +1274,10 @@
         "percent": "Prozent",
         "amount": "Betrag"
       },
-      "service_name": "Servicename",
-      "service_type": "Serviceart",
+      "service_name": "Dienstname",
+      "service_type": "Dienstart",
       "discount_description": "Rabattbeschreibung",
-      "add_button": "Neuen Service hinzufügen",
+      "add_button": "Neuen Dienst hinzufügen",
       "cancel_button": "Abbrechen",
       "save_button": "Speichern",
       "back_button": "Zurück",
@@ -1283,31 +1312,31 @@
       "cancel_button": "Abbrechen"
     },
     "offer_created_modal": {
-      "main_heading": "Angebot erfolgreich erstellt",
-      "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
+      "main_heading": "Angebote erfolgreich erstellt",
+      "sub_heading": "Danke, dass Sie ein Angebote erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "Fertig"
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
       "company_name": "Bitte geben Sie den Firmennamen ein",
       "email": "Bitte geben Sie Ihre E-Mail-Adresse ein",
-      "offer_title": "Bitte geben Sie Ihren Angebotsnamen ein",
+      "offer_title": "Bitte geben Sie Ihren Angebotenamen ein",
       "street": "Bitte geben Sie die Straßennummer ein",
       "post_code": "Bitte geben Sie Ihre Postleitzahl ein",
       "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie. Lorem Ipsum ist seit den 1500er Jahren der Standard-Blindtext der Industrie.",
-      "service_title": "Bitte geben Sie Ihren Servicenamen ein"
+      "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
     }
   },
   "pdf_preview": {
     "card_content": {
       "heading": "Solar EEG",
       "send_mail": "E-Mail senden",
-      "offer_id": "Angebots-ID",
+      "offer_id": "Angebote-ID",
       "email_status": "E-Mail-Status"
     },
     "pdf_header": {
-      "offer_no": "ANGEBOTS-NR",
-      "Offer_date": "ANGEBOTSDATUM",
+      "offer_no": "ANGEBOTE-NR",
+      "Offer_date": "ANGEBOTEDATUM",
       "created_by": "ERSTELLT VON"
     },
     "email": "E-MAIL",
@@ -1321,7 +1350,7 @@
     "signature": "Unterschrift",
     "discount": "Rabatt",
     "service_headings": {
-      "product": "Service / Produkt",
+      "product": "Dienst / Produkt",
       "price": "PREIS",
       "unit": "EINHEIT",
       "count": "ANZAHL",
@@ -1560,7 +1589,7 @@
     "customer_detail_heading": "Kundendetails",
     "follow_up_detail_heading": "Details zur Nachverfolgung",
     "additional_detail_heading": "Zusätzliche Details",
-    "lead_detail_heading": "Lead-Details",
+    "lead_detail_heading": "Blei-Details",
     "address_detail_heading": "Adressdetails",
     "follow_up_details": {
       "remark": "Ihre Bemerkungen",
@@ -1572,7 +1601,7 @@
       "phone_number": "Telefonnummer",
       "mobile_number": "Handynummer",
       "address_detail": "Adressdetails",
-      "required_service": "Benötigter Service",
+      "required_service": "Benötigter Dienst",
       "desire_date": "Gewünschtes Datum und Uhrzeit",
       "flexibility": "Flexibilität",
       "budget": "Budget"
@@ -1591,7 +1620,7 @@
       "follow_up_type": "Art der Nachverfolgung"
     },
     "lead_details": {
-      "required_service": "Benötigter Service",
+      "required_service": "Benötigter Dienst",
       "desire_date": "Wunschdatum und -zeit",
       "flexibility": "Flexibilität",
       "budget": "Budget"
@@ -1618,7 +1647,7 @@
       "heading": "Nachverfolgung hinzufügen",
       "select_customer": "Kunden auswählen",
       "title": "Titel eingeben",
-      "select_lead": "Lead auswählen",
+      "select_lead": "Blei auswählen",
       "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
       "follow_up_type": "Art der Nachverfolgung",
       "additional_details": "Zusätzliche Details"
@@ -1650,7 +1679,7 @@
       }
     },
     "all_leads_details": {
-      "heading": "Alle Leads",
+      "heading": "Alle Führt",
       "table_headings": {
         "id": "ID",
         "name": "Name",
@@ -1663,23 +1692,23 @@
     },
     "service_details": {
       "heading": "Service-Details",
-      "required_service": "Benötigter Service",
+      "required_service": "Benötigter Dienst",
       "desire_date": "Wunschdatum",
       "availability": "Kontaktverfügbarkeit",
       "flexibility": "Flexibilität",
       "prefer_contact": "Bevorzugter Kontakt",
       "budget": "Budget",
-      "lead_source": "Lead-Quelle",
+      "lead_source": "Bleiquelle",
       "other_services": "Andere Dienste",
       "Additional_details": "Zusätzliche Details"
     }
   },
   "dashboard_detail": {
-    "main_heading": "Kunden-Übersicht",
+    "main_heading": "Kunden-Armaturenbrett",
     "overview": "Überblick",
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",
-    "lead_source": "Lead-Quelle",
+    "lead_source": "Bleiquelle",
     "activity": "Aktivität",
     "view_all": "Alle anzeigen",
     "follow_up_heading": "Nachfassungen",
@@ -1729,8 +1758,8 @@
     },
     "input_filter": {
       "all": "Alle",
-      "lead": "Lead",
-      "offer": "Angebot",
+      "lead": "Blei",
+      "offer": "Angebote",
       "contract": "Vertrag",
       "invoice": "Rechnung",
       "receipt": "Quittung",
@@ -1738,8 +1767,8 @@
     }
   },
   "pdf": {
-    "offer_number": "Angebot Nr.",
-    "offer_date": "Angebotsdatum",
+    "offer_number": "Angebote Nr.",
+    "offer_date": "Angebotedatum",
     "created_by": "Erstellt von",
     "email": "E-Mail",
     "phone": "Telefon",
@@ -1835,5 +1864,19 @@
     "offer": "Angebote",
     "contract": "Verträge",
     "invoices": "Rechnungen"
+  },
+  "countries": {
+    "swiz": "Swizterland",
+    "ger": "Deutschland",
+    "aust": "Österreich",
+    "ita": "Italien",
+    "fran": "Frankreich"
+  },
+  "offer_pdf_card": {
+    "offer_detail": "Angebot Details",
+    "send_post": "Per Post versenden",
+    "send_email": "E-Mail senden",
+    "offer_id": "Angebot ID",
+    "email_status": "E-Mail-Status"
   }
 }

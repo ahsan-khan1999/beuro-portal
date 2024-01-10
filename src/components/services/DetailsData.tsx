@@ -11,9 +11,8 @@ import { useTranslation } from "next-i18next";
 const DetailsData = ({
   serviceDetail,
   isUpdate,
-  deleteHandler
-}: 
-{
+  deleteHandler,
+}: {
   serviceDetail: Service;
   isUpdate: boolean;
   deleteHandler: () => void;
@@ -34,7 +33,7 @@ const DetailsData = ({
           )}
           <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
             {isUpdate
-              ? "Services Details"
+              ? `${translate("services.heading")}`
               : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
