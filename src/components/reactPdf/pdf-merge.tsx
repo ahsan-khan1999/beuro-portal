@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { PdfFile } from "./pdf-file";
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument } from "pdf-lib";
 import { PdfPreviewProps } from "@/types";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { mergePDFs } from "@/utils/utility";
 
-export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
-  const mergedPdf = await PDFDocument.create();
+import PdfFile from './pdf-file';
 
-  for (const blob of pdfBlobs) {
-    const arrayBuffer = blob instanceof ArrayBuffer ? blob : await blob.arrayBuffer();
-    const pdfDoc = await PDFDocument.load(arrayBuffer);
-    const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-    copiedPages.forEach(page => mergedPdf.addPage(page));
-  }
-
-  mergedPdf.setTitle(fileName || "PDF File");
-
-  const pdfBytes = await mergedPdf.save();
-  return new Blob([pdfBytes], { type: "application/pdf" });
-};
 
 export const Merger = (pdfProps: PdfPreviewProps) => {
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
-  const remotePdfUrl = pdfProps.qrCode || "";
 
   useEffect(() => {
     const fetchAndMergePDFs = async () => {
       try {
         const localPdfBlob = await reactPdf(<PdfFile {...pdfProps} />).toBlob();
-        const remotePdfResponse = await fetch(remotePdfUrl);
-        const remotePdfBlob = await remotePdfResponse.blob();
-        const mergedPdfBytes = await mergePDFs([localPdfBlob, remotePdfBlob], pdfProps.fileName);
-        const url = URL.createObjectURL(new Blob([mergedPdfBytes], { type: "application/pdf" }));
+        // const remotePdfResponse = await fetch(remotePdfUrl);
+        // const remotePdfBlob = await remotePdfResponse.blob();
+        const blobArray = [localPdfBlob];
+        if (pdfProps.remoteFileBlob) {
+          blobArray.push(pdfProps.remoteFileBlob);
+        }
+        const mergedPdfBytes = await mergePDFs(blobArray, pdfProps.fileName);
+        const url = URL.createObjectURL(
+          new Blob([mergedPdfBytes], { type: "application/pdf" })
+        );
         setMergedPdfUrl(url);
       } catch (err) {
         console.error("Error merging PDFs:", err);
@@ -44,7 +36,7 @@ export const Merger = (pdfProps: PdfPreviewProps) => {
     return () => {
       mergedPdfUrl && URL.revokeObjectURL(mergedPdfUrl);
     };
-  }, [pdfProps, remotePdfUrl]);
+  }, [pdfProps]);
 
   return !mergedPdfUrl ? (
     <LoadingState />
@@ -54,7 +46,7 @@ export const Merger = (pdfProps: PdfPreviewProps) => {
       src={mergedPdfUrl}
       title="Merged PDF Document"
       width="100%"
-      style={{ border: 'none' }}
+      style={{ border: "none" }}
     />
   );
 };

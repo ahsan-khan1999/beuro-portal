@@ -29,6 +29,7 @@ import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
+import { PDFDocument } from "pdf-lib";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -745,3 +746,24 @@ export function blobToFile(blob: any, fileName: string) {
   const file = new File([blob], fileName, options);
   return file;
 }
+
+
+export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
+  const mergedPdf = await PDFDocument.create();
+
+  for (const blob of pdfBlobs) {
+    const arrayBuffer =
+      blob instanceof ArrayBuffer ? blob : await blob.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const copiedPages = await mergedPdf.copyPages(
+      pdfDoc,
+      pdfDoc.getPageIndices()
+    );
+    copiedPages.forEach((page) => mergedPdf.addPage(page));
+  }
+
+  mergedPdf.setTitle(fileName || "PDF File");
+
+  const pdfBytes = await mergedPdf.save();
+  return new Blob([pdfBytes], { type: "application/pdf" });
+};

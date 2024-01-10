@@ -57,7 +57,7 @@ Font.register({
   ],
 });
 
-export const PdfFile = ({
+const PdfFile = ({
   data,
   templateSettings,
   emailTemplateSettings,
@@ -148,3 +148,5 @@ const styles = StyleSheet.create({
     color: "grey",
   },
 });
+
+export default PdfFile;

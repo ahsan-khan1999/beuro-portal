@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { PdfFile } from "./pdf-file";
 import { PDFDocument } from "pdf-lib";
 import { PdfPreviewProps } from "@/types";
 import { blobToFile } from "@/utils/utility";
 
-const mergePDFs = async (pdfBlobs: Blob[]) => {
+import PdfFile from './pdf-file';
+
+const mergePDFs = async (pdfBlobs: Blob[]): Promise<Blob> => {
   const mergedPdf = await PDFDocument.create();
 
   for (const blob of pdfBlobs) {
@@ -23,20 +24,26 @@ const mergePDFs = async (pdfBlobs: Blob[]) => {
   return new Blob([pdfBytes], { type: "application/pdf" });
 };
 
-const generateMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
+const useMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
+  const [mergedFile, setMergedFile] = useState<File | null>(null);
+
   useEffect(() => {
     const remotePdfUrl = pdfProps.qrCode || "";
     const fetchAndMergePDFs = async () => {
       try {
         const localPdfBlob = await reactPdf(<PdfFile {...pdfProps} />).toBlob();
-        const remotePdfResponse = await fetch(remotePdfUrl);
-        const remotePdfBlob = await remotePdfResponse.blob();
-        const mergedPdfBytes = await mergePDFs([localPdfBlob, remotePdfBlob]);
-        const convertedBlob = new Blob([mergedPdfBytes], {
+        // const remotePdfResponse = await fetch(remotePdfUrl);
+        // const remotePdfBlob = await remotePdfResponse.blob();
+        const blobArray = [localPdfBlob];
+        if (pdfProps.remoteFileBlob) {
+          blobArray.push(pdfProps.remoteFileBlob);
+        }
+        const mergedPdfBlob = await mergePDFs(blobArray);
+        const convertedBlob = new Blob([mergedPdfBlob], {
           type: "application/pdf",
         });
 
-        pdfProps.setPdfFile(
+        setMergedFile(
           blobToFile(convertedBlob, pdfProps.fileName || "output.pdf")
         );
       } catch (err) {
@@ -45,9 +52,9 @@ const generateMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
     };
 
     fetchAndMergePDFs();
-  }, []);
+  }, [pdfProps]);
 
-  return <></>;
+  return { mergedFile };
 };
 
-export default generateMergedPdfDownload;
+export default useMergedPdfDownload;

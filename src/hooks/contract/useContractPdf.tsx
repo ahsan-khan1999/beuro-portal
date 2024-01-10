@@ -30,7 +30,13 @@ import {
 import { ModalType } from "@/enums/ui";
 import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
-import { calculateTax } from "@/utils/utility";
+import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
+
+import { pdf as reactPdf } from "@react-pdf/renderer";
+// import { PdfFile } from "@/components/reactPdf/pdf-file";
+import dynamic from "next/dynamic";
+
+const PdfFile = dynamic(() => import("@/components/reactPdf/pdf-file"));
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -81,11 +87,14 @@ export const useContractPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
-  const [pdfFile, setPdfFile] = useState(null);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
+  const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
+
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -192,7 +201,10 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: calculateTax(contractDetails?.offerID?.subTotal,Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(
+                contractDetails?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
             },
@@ -382,6 +394,40 @@ export const useContractPdf = () => {
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
+  useEffect(() => {
+    const fetchQrCode = async () => {
+      const remotePdfResponse = await fetch(qrCodeUrl);
+      const remotePdfBlob = await remotePdfResponse.blob();
+
+      // const blobArray: any[] = [];
+      // const localPdfBlob = await reactPdf(
+      //   <PdfFile
+      //     data={contractData}
+      //     emailTemplateSettings={emailTemplateSettings}
+      //     templateSettings={templateSettings}
+      //   />
+      // ).toBlob();
+      // blobArray.push(localPdfBlob)
+
+      // if (remotePdfBlob) {
+      //   // setRemoteFileBlob(remotePdfBlob);
+      //   blobArray.push(remotePdfBlob);
+      // }
+      // if(blobArray.length > 0){
+      //   const mergedPdfBlob = await mergePDFs(blobArray, "talha");
+      //   const convertedBlob = new Blob([mergedPdfBlob], {
+      //     type: "application/pdf",
+      //   });
+      // const url = URL.createObjectURL(convertedBlob);
+      // setMergedPdfUrl(url);
+      // setPdfFile(blobToFile(convertedBlob, "talha" || "output.pdf"))
+      setRemoteFileBlob(remotePdfBlob);
+    };
+
+    fetchQrCode();
+  }, [qrCodeUrl]);
+
   return {
     contractData,
     modal,
@@ -393,6 +439,8 @@ export const useContractPdf = () => {
     pdfFile,
     loadingGlobal,
     qrCodeUrl,
+    remoteFileBlob,
+    mergedPdfUrl,
     setPdfFile,
     dispatch,
     onClose,

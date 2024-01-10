@@ -642,7 +642,7 @@ export interface ProductItemFooterProps {
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isInvoice?: boolean;
-  systemSettings?: SystemSetting | null
+  systemSettings?: SystemSetting | null;
 }
 
 export interface ContactDetailsProps {
@@ -835,6 +835,7 @@ export interface PdfPreviewProps {
   setPdfFile?: SetStateAction<any>;
   fileName?: string;
   qrCode?: string;
+  remoteFileBlob?: Blob | null;
   systemSetting?: SystemSetting | null;
 }
 
@@ -850,7 +851,6 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -863,7 +863,6 @@ export interface PurchasedItemDetailsNextPageProps {
   currPage: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 
 export interface qrCode {
@@ -915,7 +914,7 @@ export interface AggrementProps {
   isSignatureDone?: boolean;
   emailTemplateSettings?: EmailTemplate | null;
   setOfferSignature?: SetStateAction<any>;
-  systemSettings?: SystemSetting | null
+  systemSettings?: SystemSetting | null;
 }
 
 export interface FiltersComponentProps {
