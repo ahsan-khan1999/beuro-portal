@@ -65,7 +65,6 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
 }: PdfPreviewProps) => {
-  const [loading, setLoading] = useState(false)
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
@@ -73,17 +72,12 @@ const OfferPdfPreview = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
-  useEffect(() => {
-    setLoading(true)
-  }, [])
+
   
   return (
-    loading ? <LoadingState /> :
       <PDFViewer height={1000} style={{ width: "100%" }} >
          <Document title={data?.headerDetails?.offerNo || ""} onRender={(file) => {
-          console.log(file, "file");
-          setLoading(false)
-
+       
         }}>
           <Page style={styles.body} dpi={72}>
             <Header {...headerDetails} />

@@ -77,7 +77,7 @@ export const AddressDetails = ({
           </Text>
           <Text style={{ fontSize: 12, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-            {address.description && `, ${address.description}`}
+            {address.description && ` _ ${address.description}`}
           </Text>
         </View>
       </View>

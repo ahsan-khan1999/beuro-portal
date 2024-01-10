@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: "25%",
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 10,
     color: "#000",
     fontWeight: "normal",
     marginBottom: 2,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   pageNumberText: {
     fontSize: 12,
     fontWeight: "medium",
-    color: "#000",
+    color: "#fff",
   },
 });
 
