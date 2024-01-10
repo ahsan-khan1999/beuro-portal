@@ -234,26 +234,25 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-        
-            <div className="flex justify-center my-5">
-              <ContractPdfPreview
-                data={contractData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-              />
-              <PdfDownload
-                data={contractData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-                fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
-              />
-            </div>
+          <div className="flex justify-center my-5">
+            <ContractPdfPreview
+              data={contractData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+            />
+            <PdfDownload
+              data={contractData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+              fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
+            />
+          </div>
           {renderModal()}
         </>
       )}

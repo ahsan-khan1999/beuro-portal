@@ -13,10 +13,11 @@ const styles = StyleSheet.create({
     paddingTop: 35,
   },
   container: {
+    fontFamily: "Poppins",
     display: "flex",
     flexDirection: "column",
     rowGap: 60,
-    '> *': {
+    "> *": {
       // Styles for direct children (Text elements) of the container
       // Add your specific styles for the Text elements here
       fontSize: 10,
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginBottom: 2,
-    fontWeight: "bold",
     fontSize: 14,
   },
   description: {
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     // width: "40%",
   },
 
-
   dateText: {
     paddingTop: 12,
     fontSize: 12,
@@ -69,54 +68,52 @@ const styles = StyleSheet.create({
 });
 
 const stylesheet: HtmlStyles = {
-  // clear margins for all <p> tags
   p: {
     margin: 0,
-    fontSize:12
+    fontSize: 12,
   },
   h1: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 16,
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 16,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 16,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize:13
-
+    fontSize: 13,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize:12
-
+    fontSize: 12,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize:12
-
+    fontSize: 12,
   },
 };
 
-export const AdditionalDetails = ({ description, signature }: { description?: string, signature?: any }) => {
+export const AdditionalDetails = ({
+  description,
+  signature,
+}: {
+  description?: string;
+  signature?: any;
+}) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-
+  console.log(description);
   const onFileChange = () => {
-
     if (signature) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -125,36 +122,38 @@ export const AdditionalDetails = ({ description, signature }: { description?: st
       reader.readAsDataURL(signature);
     }
   };
-  useMemo(() => signature && onFileChange(), [signature])
+  useMemo(() => signature && onFileChange(), [signature]);
   return (
-
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html stylesheet={stylesheet}>{description || ""}</Html>
+        <Html stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+          {description || ""}
+        </Html>
 
         <View style={{}}>
-          <Text style={styles.shareHeading}>I share the contract with you.</Text>
+          <Text style={styles.shareHeading}>
+            I share the contract with you.
+          </Text>
 
           <View style={styles.dateContainer}>
             <View style={styles.innerDate}>
-              <Text style={styles.dateText}>Date</Text>
+              <Text style={styles.dateText}>Datum</Text>
             </View>
 
             <View style={{ width: "40%" }}>
-              {
-                signature &&
-                <Image src={imageSrc as string} style={{ height: "100px", width: "100px" }} />
-
-              }
+              {signature && (
+                <Image
+                  src={imageSrc as string}
+                  style={{ height: "100px", width: "100px" }}
+                />
+              )}
               <View style={styles.signature}>
-
                 <Text style={styles.dateText}>Signature</Text>
-
               </View>
             </View>
           </View>
         </View>
       </View>
     </View>
-  )
+  );
 };

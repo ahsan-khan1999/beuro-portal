@@ -70,7 +70,6 @@ let contractPdfInfo = {
 };
 
 export const useContractPdf = () => {
-  // const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   const [contractData, setContractData] =
     useState<PdfProps<ContractEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(

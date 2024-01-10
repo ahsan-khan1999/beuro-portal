@@ -32,8 +32,9 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 12,
-    fontWeight: "medium",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
@@ -47,10 +48,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   discountDescription: {
-    marginTop: 10,
+    marginTop: 6,
     color: "#404040",
-    fontWeight: "normal",
-    fontSize: 12,
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
   },
 });
 
@@ -62,7 +64,7 @@ export const ServicesTotalAmount = ({
   invoiceCreatedAmount,
   invoicePaidAmount,
   isInvoice,
-  systemSettings
+  systemSettings,
 }: Partial<ProductItemFooterProps>) => {
   const { t: translate } = useTranslation(["common"]);
 
@@ -75,43 +77,58 @@ export const ServicesTotalAmount = ({
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-            Conditions for moving estimates
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: "#000",
+            }}
+          >
+            Bedingungen für Umzugsschätzungen
           </Text>
           <Text style={styles.discountDescription}>
-            Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.
+            Unten finden Sie weitere Informationen zu den Richtlinien und
+            Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden
+            Geschäftsbedingungen zu verstehen.
           </Text>
         </View>
         <View style={styles.rightColumn}>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Sub Total: </Text>
+            <Text style={styles.text}>Zwischensumme: </Text>
             <Text style={styles.text}>{subTotal}</Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Tax%: </Text>
-            <Text style={styles.text}>{tax}  ({TAX_PERCENTAGE}%)</Text>
+            <Text style={styles.text}>Steuer%: </Text>
+            <Text style={styles.text}>
+              {tax} ({TAX_PERCENTAGE}%)
+            </Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Discount: </Text>
+            <Text style={styles.text}>Rabatt: </Text>
             <Text style={styles.text}>{discount} </Text>
           </View>
           {!isInvoice ? (
             <View style={styles.totalSection}>
-              <Text style={styles.whiteText}>Grand Total:</Text>
-              <Text style={styles.whiteText}>{grandTotal} {systemSettings?.currency}</Text>
+              <Text style={styles.whiteText}>Gesamtsumme:</Text>
+              <Text style={styles.whiteText}>
+                {grandTotal} {systemSettings?.currency}
+              </Text>
             </View>
           ) : (
             <View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>Grand Total:</Text>
-                <Text style={styles.text}>{grandTotal} {systemSettings?.currency}</Text>
+                <Text style={styles.text}>
+                  {grandTotal} {systemSettings?.currency}
+                </Text>
               </View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>Paid Amount:</Text>
+                <Text style={styles.text}>Bezahlter Betrag:</Text>
                 <Text style={styles.text}>{invoicePaidAmount} </Text>
               </View>
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Due Amount:</Text>
+                <Text style={styles.whiteText}>Ausstehender Betrag:</Text>
                 <Text style={styles.whiteText}>{dueAmount} </Text>
               </View>
             </View>

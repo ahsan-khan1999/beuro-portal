@@ -16,25 +16,37 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "stretch",
+    alignItems: "center",
     position: "absolute",
     backgroundColor: "#EEEEEE",
-    columnGap: 16,
     bottom: 0,
     left: 0,
     right: 0,
     textAlign: "left",
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
+  },
+  firstColumnFooterSection: {
+    borderRight: 1,
+    borderColor: "#D9D9D9",
+    width: "25%",
+    paddingHorizontal: 8,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   footerSection: {
     borderRight: 1,
     borderColor: "#D9D9D9",
     width: "25%",
+    paddingHorizontal: 8,
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "left",
   },
   footerText: {
-    fontSize: 10,
+    fontSize: 8,
+    fontWeight: 400,
+    fontStyle: "normal",
     color: "#000",
-    fontWeight: "normal",
     marginBottom: 2,
   },
   pageNumberContainer: {
@@ -132,11 +144,25 @@ export const Footer = ({
       borderRight: showBorder ? 1 : 0,
     };
   };
+  const getFirstColumnFooterSection = (showBorder?: boolean) => {
+    return {
+      ...styles.firstColumnFooterSection,
+      borderRight: showBorder ? 1 : 0,
+    };
+  };
+  const shouldAlignRight =
+    showFirstColumnBorder && !showSecondColumnBorder && !showThirdColumnBorder;
 
   return (
     <View style={styles.footerContainer} fixed>
       {isFirstColumn && (
-        <View style={getFooterSectionStyle(showFirstColumnBorder)}>
+        <View
+          style={{
+            ...getFirstColumnFooterSection(showFirstColumnBorder),
+            width: "30%",
+            textAlign: shouldAlignRight ? "right" : "left",
+          }}
+        >
           {isCompanyName && (
             <Text style={styles.footerText}>{companyName}</Text>
           )}
@@ -149,7 +175,12 @@ export const Footer = ({
         </View>
       )}
       {isSecondColumn && (
-        <View style={getFooterSectionStyle(showSecondColumnBorder)}>
+        <View
+          style={{
+            ...getFooterSectionStyle(showSecondColumnBorder),
+            width: "30%",
+          }}
+        >
           {isBankName && (
             <Text style={styles.footerText}>{bankDetails?.bankName}</Text>
           )}
