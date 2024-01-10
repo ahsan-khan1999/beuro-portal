@@ -135,7 +135,7 @@ export const useOfferPdf = () => {
             textColour: emailTemplate?.payload?.textColour,
           });
         }
-        
+
         if (settings?.payload?.Setting) {
           setSystemSettings({ ...settings?.payload?.Setting })
         }
@@ -179,7 +179,7 @@ export const useOfferPdf = () => {
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: offerDetails?.subTotal?.toString(),
-              tax: calculateTax(offerDetails?.subTotal,Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(offerDetails?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               grandTotal: offerDetails?.total?.toString(),
             },
@@ -208,11 +208,11 @@ export const useOfferPdf = () => {
                 },
               },
               thirdColumn: {
-                row1:"Standorte",
-                row2:"bern-Solothurn",
-                row3:"Aargau-Luzern",
-                row4:"Basel-Zürich",
-                row5:"",
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
               },
               fourthColumn: {},
               columnSettings: null,
@@ -249,11 +249,12 @@ export const useOfferPdf = () => {
       setActiveButtonId("email");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
-
-      if (data && pdfFile) {
+      if (!pdfFile) return;
+      formData.append("file", pdfFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (data) {
         // delete apiData["id"]
-        formData.append("file", pdfFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+
         let apiData = { ...data, pdf: fileUrl?.payload };
         delete apiData["content"];
 
@@ -269,6 +270,8 @@ export const useOfferPdf = () => {
           description: offerDetails?.content?.offerContent?.body,
           attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id,
+          pdf: fileUrl?.payload
+          // pdf: res?.payload
         };
         const res = await dispatch(sendOfferEmail({ data: apiData }));
         if (res?.payload) {

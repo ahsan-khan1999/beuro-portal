@@ -15,3 +15,10 @@ const Index = () => {
 };
 
 export default Index;
+
+
+export const getStaticProps = async ({ locale }: Locale) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

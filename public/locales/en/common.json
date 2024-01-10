@@ -475,8 +475,7 @@
       "follow_up_setting": "Follow Up Setting",
       "billing": "Billing",
       "mail_setting": "Mail Setting",
-      "qr_settings":"QR Settings"
-
+      "qr_settings": "QR Settings"
     },
     "account_setting": {
       "public_info": "Public Information",
@@ -743,6 +742,7 @@
       "contract_id": "Contarct ID",
       "offer_title": "Offer Title",
       "worker": "Worker",
+      "email_status": "Email Status",
       "offer_id": "Offer ID",
       "created_date": "Creation Date",
       "service_date": "Service Date",
@@ -1031,10 +1031,10 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
-    "online":"Online",
-    "cash":"Cash",
-    "start_date":"Start Date",
-    "end_date":"End Date",
+    "online": "Online",
+    "cash": "Cash",
+    "start_date": "Start Date",
+    "end_date": "End Date",
     "month": "Month",
     "name": "Name",
     "tax": "Tax Rate (%)",
@@ -1144,8 +1144,8 @@
     }
   },
   "offers": {
-    "customer_type":"Customer Type",
-    "customer":"Customer",
+    "customer_type": "Customer Type",
+    "customer": "Customer",
     "main_heading": "Offers",
     "add_button": "Add New",
     "table_functions": {
@@ -1726,7 +1726,7 @@
       "cancel": "Cancelled",
       "overdue": "Overdue",
       "paid": "Paid",
-      "pending":"Pending"
+      "pending": "Pending"
     },
     "charts_labels": {
       "website": "Website",
@@ -1752,6 +1752,8 @@
     "created_by": "Created By",
     "email": "Email",
     "phone": "Phone",
+    "address": "Address",
+    "work_date": "Work Dates",
     "service": "Service/Product",
     "price": "Price",
     "unit": "Unit",
@@ -1761,6 +1763,8 @@
     "tax": "Tax%",
     "discount": "Discount",
     "grand_total": " Grand Total",
+    "paid_amount": "Paid Amount",
+    "due_amount": "Due Amount",
     "validate_heading": "Validity of the offer",
     "validate_des": "3 months from preparation of the offer",
     "share_des": "I share the contract with you.",

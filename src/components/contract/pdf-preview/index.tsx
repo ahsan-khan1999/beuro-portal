@@ -154,15 +154,27 @@ let contractPdfInfo = {
   description: "",
 };
 
+// const ContractPdfPreview = dynamic(
+//   () => import("@/components/reactPdf/pdf-layout"),
+//   { ssr: false }
+// );
 const ContractPdfPreview = dynamic(
-  () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false }
+  () => import("@/components/reactPdf/offer-pdf-preview"),
+  { ssr: false, loading: () => <LoadingState /> }
 );
+
+// const PdfDownload = dynamic(
+//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
+//   {
+//     ssr: false,
+//   }
+// );
+
+// const PdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
+
 const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-merged-pdf-download"),
-  {
-    ssr: false,
-  }
+  () => import("@/components/reactPdf/generate-Pdf-Download"),
+  { ssr: false }
 );
 
 const PdfPriview = () => {
@@ -234,26 +246,25 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-        
-            <div className="flex justify-center my-5">
-              <ContractPdfPreview
-                data={contractData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-              />
-              <PdfDownload
-                data={contractData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-                fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
-              />
-            </div>
+          <div className="flex justify-center my-5">
+            <ContractPdfPreview
+              data={contractData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+            />
+            <PdfDownload
+              data={contractData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+              fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
+            />
+          </div>
           {renderModal()}
         </>
       )}

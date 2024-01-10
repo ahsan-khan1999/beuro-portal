@@ -70,7 +70,6 @@ let contractPdfInfo = {
 };
 
 export const useContractPdf = () => {
-  // const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   const [contractData, setContractData] =
     useState<PdfProps<ContractEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
@@ -193,7 +192,7 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: calculateTax(contractDetails?.offerID?.subTotal,Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(contractDetails?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
             },
@@ -302,11 +301,13 @@ export const useContractPdf = () => {
     try {
       const formData = new FormData();
       setActiveButtonId("email");
-
+      console.log(pdfFile,"pdfFile");
+      
+      if (!pdfFile) return;
       const data = await localStoreUtil.get_data("contractComposeEmail");
-      if (data && pdfFile) {
-        formData.append("file", pdfFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      formData.append("file", pdfFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (data) {
         let apiData = { ...data, pdf: fileUrl?.payload };
 
         delete apiData["content"];
@@ -325,6 +326,7 @@ export const useContractPdf = () => {
           attachments:
             contractDetails?.offerID?.content?.confirmationContent?.attachments,
           id: contractDetails?.id,
+          pdf: fileUrl?.payload
         };
         const res = await dispatch(sendContractEmail({ data: apiData }));
         if (res?.payload) {

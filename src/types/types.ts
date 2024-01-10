@@ -12,6 +12,7 @@ import {
   SetFieldValue,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
+  UseFormGetValues,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -19,7 +20,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "./auth";
+import { User } from './auth';
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -230,7 +231,9 @@ export type GenerateQRCodeSettingFormField = (
   loader: boolean,
   append: UseFieldArrayAppend<FieldValues, "QrCodeDetail">,
   onRemove: UseFieldArrayRemove,
-  count: number
+  count: number,
+  user: User,
+  handleOnChangeStatus?: (index?:string ,value?: string) => void
 ) => FormField[];
 
 // change mail setting formfield
