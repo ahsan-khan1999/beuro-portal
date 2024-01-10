@@ -23,6 +23,7 @@ export const Header = ({
         alignItems: "center",
         backgroundColor: `#${FooterColour}`,
         padding: 20,
+        fontFamily: 'Poppins',
       }}
       fixed
     >

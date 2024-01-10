@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { pdf as reactPdf } from "@react-pdf/renderer";
 import { PdfFile } from "./pdf-file";
 import { PDFDocument } from "pdf-lib";
 import { PdfPreviewProps } from "@/types";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { blobToFile } from "@/utils/utility";
 
 const mergePDFs = async (pdfBlobs: Blob[]) => {
@@ -25,8 +24,6 @@ const mergePDFs = async (pdfBlobs: Blob[]) => {
 };
 
 const generateMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
-  const [mergedPdf, setMergedPdf] = useState<Blob>();
-
   useEffect(() => {
     const remotePdfUrl = pdfProps.qrCode || "";
     const fetchAndMergePDFs = async () => {
@@ -35,24 +32,19 @@ const generateMergedPdfDownload = (pdfProps: PdfPreviewProps) => {
         const remotePdfResponse = await fetch(remotePdfUrl);
         const remotePdfBlob = await remotePdfResponse.blob();
         const mergedPdfBytes = await mergePDFs([localPdfBlob, remotePdfBlob]);
-        const convertToBlob = new Blob([mergedPdfBytes], {
+        const convertedBlob = new Blob([mergedPdfBytes], {
           type: "application/pdf",
         });
-        setMergedPdf(convertToBlob);
+
+        pdfProps.setPdfFile(
+          blobToFile(convertedBlob, pdfProps.fileName || "output.pdf")
+        );
       } catch (err) {
         console.error("Error merging PDFs:", err);
       }
     };
 
     fetchAndMergePDFs();
-  }, []);
-
-  useEffect(() => {
-    if (mergedPdf) {
-      pdfProps.setPdfFile(
-        blobToFile(mergedPdf, pdfProps.fileName || "output.pdf")
-      );
-    }
   }, []);
 
   return <></>;
