@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../useRedux';
 import { generateQRCodeValdiation } from '@/validation/settingSchema';
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -24,27 +24,33 @@ export default function useQRSettings({ handleCreation }: { handleCreation: Func
         setError,
         reset,
         formState: { errors },
-        setValue
+        setValue,
+        getValues
     } = useForm<FieldValues>({
         resolver: yupResolver<FieldValues>(schema),
     });
+    useEffect(() => {
+        dispatch(readQrCodeSettings({}))
+
+
+    }, [])
     const {
         fields: qrSettingsArray,
         append,
         remove,
     } = useFieldArray({
         control,
-        name: "qrSettings",
+        name: "QrCodeDetail",
     });
-    useEffect(() => {
-        dispatch(readQrCodeSettings({})).then((response: any) => {
-            reset({ ...response?.payload })
-        })
-    }, [])
+    console.log(getValues());
 
-    const fields = QRCodeSettingsFields(register, loading, append, remove, qrSettingsArray?.length === 0 ? 1 : qrSettingsArray?.length);
+    useMemo(() => {
+        reset({ QrCodeDetail: qrSettings?.QrCodeDetail })
+    }, [qrSettings])
 
-    const buttonField = QRCodeSettingsAddField(register, loading, append, remove, qrSettingsArray?.length === 0 ? 1 : qrSettingsArray?.length);
+    const fields = QRCodeSettingsFields(register, loading, append, remove, qrSettingsArray?.length);
+
+    const buttonField = QRCodeSettingsAddField(register, loading, append, remove, qrSettingsArray?.length);
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const response = await dispatch(createQrCodeSetting({ data: [...data?.qrSettings], router, setError, translate }));
         if (response?.payload) handleCreation();

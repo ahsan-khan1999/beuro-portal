@@ -32,6 +32,8 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { useTranslation } from "next-i18next";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -125,9 +127,9 @@ export const useInvoicePdf = () => {
             dispatch(readQRCode({ params: { filter: invoiceID } })),
             dispatch(readSystemSettings()),
           ]);
-          if(qrCode?.payload){
-            setQrCode(qrCode.payload)
-          }
+        if (qrCode?.payload) {
+          setQrCode(qrCode.payload)
+        }
 
         if (template?.payload?.Template) {
           const {
@@ -221,7 +223,8 @@ export const useInvoicePdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
