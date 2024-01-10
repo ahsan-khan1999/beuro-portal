@@ -228,7 +228,7 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateQRCodeSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  append: UseFieldArrayAppend<FieldValues, "qrSettings">,
+  append: UseFieldArrayAppend<FieldValues, "QrCodeDetail">,
   onRemove: UseFieldArrayRemove,
   count: number
 ) => FormField[];
