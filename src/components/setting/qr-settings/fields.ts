@@ -26,7 +26,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                 containerClass: "",
                 field: {
                     type: Field.div,
-                    id: `qrSettings.${i}`,
+                    id: `QrCodeDetail_${i}`,
                     children: [
                         {
                             containerClass: "mt-6",
@@ -38,14 +38,16 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                     {
                                         containerClass: "mb-0",
                                         field: {
-                                            text: `Company Information ${++i}`,
-                                            id: `qrSettings`,
-                                            type:Field.span
+                                            id: `QrCodeDetail.${i}.QrCodeStatus`,
+                                            type: Field.radio,
+                                            label: `Company Information ${++i}`,
+                                            checked: true,
+                                            name: `QrCodeDetail.${i}.QrCodeStatus`,
+                                            register
 
                                         },
-                                        
-                                    },
 
+                                    },
                                 ],
                             },
 
@@ -55,21 +57,21 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                             field: {
                                 type: Field.div,
                                 id: "div-field",
-                                className: "grid grid-cols-2 lg:grid-cols-2 gap-y-5   lg:gap-x-5 ",
+                                className: "grid grid-cols-3 lg:grid-cols-3 gap-y-5   lg:gap-x-5 ",
                                 children: [
                                     {
                                         containerClass: "mb-0",
                                         label: {
                                             text: "Company Name",
-                                            htmlFor: `qrSettings.${i}.companyName`,
+                                            htmlFor: `QrCodeDetail.${i}.companyName`,
                                             className: "mb-[10px]",
                                         },
                                         field: {
                                             type: Field.input,
                                             className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                                             inputType: "text",
-                                            id: `qrSettings.${i}.companyName`,
-                                            name: `qrSettings.${i}.companyName`,
+                                            id: `QrCodeDetail.${i}.companyName`,
+                                            name: `QrCodeDetail.${i}.companyName`,
                                             placeholder: `${translate(
                                                 "admin.settings.placeholders.mail_driver"
                                             )}`,
@@ -80,17 +82,36 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                         containerClass: "mb-0",
                                         label: {
                                             text: "Iban No",
-                                            htmlFor: `qrSettings.${i}.ibanNo`,
+                                            htmlFor: `QrCodeDetail.${i}.ibanNumber`,
                                             className: "mb-[10px]",
                                         },
                                         field: {
                                             type: Field.input,
                                             className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                                             inputType: "text",
-                                            id: `qrSettings.${i}.ibanNo`,
-                                            name: `qrSettings.${i}.ibanNo`,
+                                            id: `QrCodeDetail.${i}.ibanNumber`,
+                                            name: `QrCodeDetail.${i}.ibanNumber`,
                                             placeholder: `${translate(
                                                 "admin.settings.placeholders.mail_host"
+                                            )}`,
+                                            register,
+                                        },
+                                    },
+                                    {
+                                        containerClass: "mb-0",
+                                        label: {
+                                            text: "House Number",
+                                            htmlFor: `QrCodeDetail.${i}.address.houseNumber`,
+                                            className: "mb-[10px]",
+                                        },
+                                        field: {
+                                            type: Field.input,
+                                            className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                                            inputType: "text",
+                                            id: `QrCodeDetail.${i}.address.houseNumber`,
+                                            name: `QrCodeDetail.${i}.address.houseNumber`,
+                                            placeholder: `${translate(
+                                                "admin.settings.placeholders.mail_port"
                                             )}`,
                                             register,
                                         },
@@ -110,15 +131,15 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                         containerClass: "mb-0",
                                         label: {
                                             text: "Street Number",
-                                            htmlFor: `qrSettings.${i}.streetNumber`,
+                                            htmlFor: `QrCodeDetail.${i}.address.streetNumber`,
                                             className: "mb-[10px]",
                                         },
                                         field: {
                                             type: Field.input,
                                             className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                                             inputType: "text",
-                                            id: `qrSettings.${i}.streetNumber`,
-                                            name: `qrSettings.${i}.streetNumber`,
+                                            id: `QrCodeDetail.${i}.address.streetNumber`,
+                                            name: `QrCodeDetail.${i}.address.streetNumber`,
                                             placeholder: `${translate(
                                                 "admin.settings.placeholders.mail_port"
                                             )}`,
@@ -129,15 +150,15 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                         containerClass: "mb-0",
                                         label: {
                                             text: "Postal Code",
-                                            htmlFor: `qrSettings.${i}.postalCode`,
+                                            htmlFor: `QrCodeDetail.${i}.address.postalCode`,
                                             className: "mb-[10px]",
                                         },
                                         field: {
                                             type: Field.input,
                                             className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                                             inputType: "text",
-                                            id: `qrSettings.${i}.postalCode`,
-                                            name: `qrSettings.${i}.postalCode`,
+                                            id: `QrCodeDetail.${i}.address.postalCode`,
+                                            name: `QrCodeDetail.${i}.address.postalCode`,
                                             placeholder: `${translate(
                                                 "admin.settings.placeholders.mail_encryption"
                                             )}`,
@@ -148,15 +169,15 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                         containerClass: "mb-0",
                                         label: {
                                             text: "City",
-                                            htmlFor: `qrSettings.${i}.city`,
+                                            htmlFor: `QrCodeDetail.${i}.address.city`,
                                             className: "mb-[10px]",
                                         },
                                         field: {
                                             type: Field.input,
                                             className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                                             inputType: "text",
-                                            id: `qrSettings.${i}.city`,
-                                            name: `qrSettings.${i}.city`,
+                                            id: `QrCodeDetail.${i}.address.city`,
+                                            name: `QrCodeDetail.${i}.address.city`,
                                             placeholder: `${translate(
                                                 "admin.settings.placeholders.mail_user"
                                             )}`,
@@ -164,6 +185,21 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                                         },
                                     },
                                 ],
+                            },
+
+                        },
+                        {
+                            containerClass: " flex justify-end mt-6",
+                            field: {
+                                type: Field.button,
+                                id: "div-field",
+                                className:
+                                    `rounded-lg px-4 w-[152px] h-[50px] !bg-red  text-white hover:bg-none ${i <= 1 && "hidden"}`,
+                                inputType: "button",
+                                text: "Remove",
+                                onClick: () => remove(i),
+
+
                             },
 
                         },
@@ -222,19 +258,7 @@ export const QRCodeSettingsAddField: GenerateQRCodeSettingFormField = (
                             className: "flex  justify-between space-x-3",
                             id: "div",
                             children: [
-                                {
-                                    containerClass: "mb-0 mt-[30px]",
-                                    field: {
-                                        type: Field.button,
-                                        id: "button",
-                                        text: `Delete`,
-                                        inputType: "button",
-                                        className:
-                                            `rounded-lg px-4 w-[152px] h-[50px] !bg-red  text-white hover:bg-none ${count === 1 && "hidden"}`,
-                                        loading,
-                                        onClick: () => remove(--count)
-                                    },
-                                },
+                              
                                 {
                                     containerClass: "mb-0 mt-[30px]",
                                     field: {

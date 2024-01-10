@@ -72,7 +72,7 @@ export const PdfFile = ({
   const footerDetails = data?.footerDetails;
 
   return (
-    <Document language="de">
+    <Document title={headerDetails?.offerNo}>
       <Page style={styles.body} dpi={72}>
         <Header {...headerDetails} />
         <View

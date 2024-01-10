@@ -29,6 +29,8 @@ import {
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { calculateTax } from "@/utils/utility";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -190,7 +192,7 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: contractDetails?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(contractDetails?.offerID?.subTotal,Number(TAX_PERCENTAGE))?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
             },

@@ -15,6 +15,8 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { useEffect, useState } from "react";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 Font.register({
   family: "Poppins",
@@ -71,66 +73,68 @@ const OfferPdfPreview = ({
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
 
+  
   return (
-    <PDFViewer height={1000} style={{ width: "100%" }}>
-      <Document>
-        <Page style={styles.body} dpi={72}>
-          <Header {...headerDetails} />
-          <View
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: 120,
-            }}
-          >
-            <ContactAddress {...{ ...contactAddress }} />
+      <PDFViewer height={1000} style={{ width: "100%" }} >
+         <Document title={data?.headerDetails?.offerNo || ""} onRender={(file) => {
+       
+        }}>
+          <Page style={styles.body} dpi={72}>
+            <Header {...headerDetails} />
+            <View
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 120,
+              }}
+            >
+              <ContactAddress {...{ ...contactAddress }} />
 
-            <AddressDetails {...{ address, header, workDates }} />
+              <AddressDetails {...{ address, header, workDates }} />
 
-            <ServiceTableHederRow />
-            {serviceItem?.map((item, index) => (
-              <ServiceTableRow {...item} key={index} />
-            ))}
-            <ServicesTotalAmount
-              {...serviceItemFooter}
-              systemSettings={systemSetting}
+              <ServiceTableHederRow />
+              {serviceItem?.map((item, index) => (
+                <ServiceTableRow {...item} key={index} />
+              ))}
+              <ServicesTotalAmount
+                {...serviceItemFooter}
+                systemSettings={systemSetting}
+              />
+            </View>
+            <Footer
+              {...{
+                documentDetails: footerDetails,
+                emailTemplateSettings,
+                templateSettings,
+              }}
             />
-          </View>
-          <Footer
-            {...{
-              documentDetails: footerDetails,
-              emailTemplateSettings,
-              templateSettings,
-            }}
-          />
-        </Page>
+          </Page>
 
-        {/* Additional details */}
-        <Page style={styles.body}>
-          <Header {...headerDetails} />
-          {/* <View
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: 120,
-            }}
-          >
-            <ContactAddress {...{ ...contactAddress }} />
-            <AdditionalDetails description={aggrementDetails} />
-          </View>
-          */}
-          <Footer
-            {...{
-              documentDetails: footerDetails,
-              emailTemplateSettings,
-              templateSettings,
-            }}
-          />
-        </Page>
-      </Document>
-    </PDFViewer>
+          {/* Additional details */}
+          <Page style={styles.body}>
+            <Header {...headerDetails} />
+            <View
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 120,
+              }}
+            >
+              <ContactAddress {...{ ...contactAddress }} />
+              <AdditionalDetails description={aggrementDetails} />
+            </View>
+            <Footer
+              {...{
+                documentDetails: footerDetails,
+                emailTemplateSettings,
+                templateSettings,
+              }}
+            />
+          </Page>
+        </Document>
+      </PDFViewer>
   );
 };
 

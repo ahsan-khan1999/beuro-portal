@@ -2,7 +2,7 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "@/types";
-import { EmailSetting, EmailTemplate, FollowUp, QRSettings, TemplateSettings } from "@/types/settings";
+import { CompanyQrSettings, EmailSetting, EmailTemplate, FollowUp, QRSettings, TemplateSettings } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
 import { saveUser } from "@/utils/auth.util";
 export interface TaxSetting {
@@ -22,7 +22,7 @@ interface SettingsState {
     followUps: FollowUp | null,
     emailSettings: EmailSetting | null,
     emailTemplate: EmailTemplate | null,
-    qrSettings: QRSettings | null
+    qrSettings: CompanyQrSettings | null
 
 }
 

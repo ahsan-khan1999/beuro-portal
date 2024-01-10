@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginBottom: 2,
-    fontWeight: "bold",
     fontSize: 14,
   },
   description: {
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
   },
   shareHeading: {
     fontSize: 14,
-    fontWeight: "medium",
     color: "#000",
     marginTop: 30,
     marginBottom: 50,
@@ -62,7 +60,6 @@ const styles = StyleSheet.create({
   dateText: {
     paddingTop: 12,
     fontSize: 12,
-    fontWeight: 400,
     color: "#000",
   },
 });
@@ -114,11 +111,6 @@ const stylesheet: HtmlStyles = {
     fontWeight: 600,
     fontStyle: "semibold",
   },
-  ul: {
-    fontSize: 8,
-    fontWeight: 400,
-    fontStyle: "normal",
-  },
 };
 
 export const AdditionalDetails = ({
@@ -129,7 +121,7 @@ export const AdditionalDetails = ({
   signature?: any;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-
+console.log(description)
   const onFileChange = () => {
     if (signature) {
       const reader = new FileReader();
@@ -143,7 +135,7 @@ export const AdditionalDetails = ({
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html stylesheet={stylesheet}>{description || ""}</Html>
+        <Html>{description || ""}</Html>
 
         <View style={{}}>
           <Text style={styles.shareHeading}>
