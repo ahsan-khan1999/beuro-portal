@@ -43,6 +43,7 @@ import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import dynamic from "next/dynamic";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import OfferPdf from "@/components/offers/offer-pdf-preview";
+import { useTranslation } from "next-i18next";
 
 export const productItems: ServiceList[] = [
   {
@@ -189,21 +190,21 @@ const PdfPriview = () => {
   } = useContractPdf();
 
   const randomId = useId();
-
+  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.update_contract_heading")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
           router.back();
@@ -234,26 +235,25 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-        
-            <div className="flex justify-center my-5">
-              <ContractPdfPreview
-                data={contractData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-              />
-              <PdfDownload
-                data={contractData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
-                qrCode={qrCodeUrl}
-                fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
-              />
-            </div>
+          <div className="flex justify-center my-5">
+            <ContractPdfPreview
+              data={contractData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+            />
+            <PdfDownload
+              data={contractData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+              qrCode={qrCodeUrl}
+              fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
+            />
+          </div>
           {renderModal()}
         </>
       )}

@@ -93,7 +93,10 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.description",
               name: "offerContent.description",
               control,
-              value: contentDetails?.id && contentDetails?.offerContent?.description || ""
+              value:
+                (contentDetails?.id &&
+                  contentDetails?.offerContent?.description) ||
+                "",
             },
           },
           {
@@ -111,8 +114,9 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-              value: contentDetails?.id && contentDetails?.offerContent?.body || ""
-
+              value:
+                (contentDetails?.id && contentDetails?.offerContent?.body) ||
+                "",
             },
           },
 
@@ -128,8 +132,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.attachments",
               name: "offerContent.attachments",
               isOpenedFile: false,
-              text: "Drop or attach your file here",
-              fileSupported: "Files supported: PDF, JPG, PNG, GIF",
+              text: `${translate("common.drop_or_attach")}`,
+              fileSupported: `${translate("common.file_support")}`,
               control,
               attachements: attachements,
               setAttachements: setAttachements,
@@ -179,7 +183,7 @@ const generateAddressChildren = (
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
         id: `offerContent.address.${i}.value`,
         name: `offerContent.address.${i}.value`,
-        remove: i > 0 && "Remove",
+        remove: i > 0 && `${translate("common.remove")}`,
         onRemove: () => i > 0 && remove && remove(i),
       },
     });

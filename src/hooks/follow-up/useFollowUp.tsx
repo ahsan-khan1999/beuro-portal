@@ -7,6 +7,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
@@ -21,21 +22,18 @@ const useFollowUps = () => {
     modal: { data },
   } = useAppSelector((state) => state.global);
   const { modal } = useAppSelector((state) => state.global);
-
+  const { t: translate } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<FollowUps[]>([]);
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
-  
   useEffect(() => {
     dispatch(
       readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
-        setCurrentPageRows(
-          res?.payload?.FollowUp
-        );
+        setCurrentPageRows(res?.payload?.FollowUp);
       }
     });
   }, [currentPage]);
@@ -66,7 +64,7 @@ const useFollowUps = () => {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this FollowUp?"
+        modelHeading={translate("common.modals.delete_follow_up")}
         routeHandler={routeHandler}
         loading={loading}
       />

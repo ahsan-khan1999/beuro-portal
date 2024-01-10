@@ -41,7 +41,6 @@ const ContentCard = ({
       <div className="grid lg:flex justify-between flex-wrap items-start gap-y-3 gap-x-3">
         <div className="flex gap-[6px]">
           <span className="text-[#4D4D4D] text-base font-normal">
-            {" "}
             {translate("content.content_card_detail.s_no")}:
           </span>
           <span className="text-[#4B4B4B] text-base font-medium">

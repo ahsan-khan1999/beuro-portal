@@ -697,11 +697,11 @@ export const staticEnums: Record<string, any> = {
   },
   SettingStatus: {},
   Country: {
-    Swizterland: "Swizterland",
-    Germany: "Germany",
-    Austria: "Austria",
-    Italy: "Italy",
-    France: "France",
+    Swizterland: "countries.swiz",
+    Germany: "countries.ger",
+    Austria: "countries.aust",
+    Italy: "countries.ita",
+    France: "countries.fran",
   },
   SupportRequest: {
     pending: 0,

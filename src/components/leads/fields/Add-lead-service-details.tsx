@@ -79,11 +79,15 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Morning(9am to 12am)",
-                  label: `${translate("common.morning")}(9am to 12am)`,
+                  label: `${translate("common.morning")}(9am to 12pm)`,
                 },
                 {
-                  value: "Morning(1pm to 10pm)",
-                  label: `${translate("common.morning")}(9am to 12am)`,
+                  value: "Afternoon(1pm to 5pm)",
+                  label: `${translate("common.afternoon")}(1am to 5pm)`,
+                },
+                {
+                  value: "Evening(6pm to 8pm)",
+                  label: `${translate("common.evening")}(6pm to 8pm)`,
                 },
               ],
               control,
@@ -158,6 +162,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via What'sapp",
                   label: `${translate("common.via_whatsapp")}`,
                 },
+                {
+                  value: "Via Facebook",
+                  label: `${translate("common.via_fb")}`,
+                },
+                {
+                  value: "Via Instagram",
+                  label: `${translate("common.via_insta")}`,
+                },
               ],
               control,
             },
@@ -178,14 +190,26 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
 
               options: [
                 {
+                  value: `Less then 500 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 500${
+                    systemSettings?.currency
+                  }`,
+                },
+                {
                   value: `Less then 1000 ${systemSettings?.currency}`,
                   label: `${translate("common.less_then")} 1000${
                     systemSettings?.currency
                   }`,
                 },
                 {
-                  value: `Less then 500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 500${
+                  value: `Less then 1500 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 1500${
+                    systemSettings?.currency
+                  }`,
+                },
+                {
+                  value: `Less then 2000 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 2000${
                     systemSettings?.currency
                   }`,
                 },
@@ -212,7 +236,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Whats'app",
                   label: `${translate("common.whatsapp")}`,
                 },
-                { value: "Facebook", label: `${translate("facebook")}` },
+                { value: "Facebook", label: `${translate("common.facebook")}` },
+                { value: "Instagram", label: `${translate("common.insta")}` },
               ],
               control,
             },
