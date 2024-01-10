@@ -10,45 +10,45 @@ import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 
 Font.register({
-    family: "Poppins",
-    fonts: [
-      {
-        src: "/assets/fonts/Poppins-Thin.ttf",
-        fontStyle: "thin",
-        fontWeight: 100,
-      },
-      {
-        src: "/assets/fonts/Poppins-Regular.ttf",
-        fontStyle: "normal",
-        fontWeight: 400,
-      },
-      {
-        src: "/assets/fonts/Poppins-Medium.ttf",
-        fontStyle: "medium",
-        fontWeight: 500,
-      },
-      {
-        src: "/assets/fonts/Poppins-Light.ttf",
-        fontStyle: "light",
-        fontWeight: 300,
-      },
-      {
-        src: "/assets/fonts/Poppins-SemiBold.ttf",
-        fontStyle: "semibold",
-        fontWeight: 600,
-      },
-      {
-        src: "/assets/fonts/Poppins-Bold.ttf",
-        fontStyle: "bold",
-        fontWeight: 700,
-      },
-      {
-        src: "/assets/fonts/Poppins-Black.ttf",
-        fontStyle: "black",
-        fontWeight: 800,
-      },
-    ],
-  });
+  family: "Poppins",
+  fonts: [
+    {
+      src: "/assets/fonts/Poppins-Thin.ttf",
+      fontStyle: "thin",
+      fontWeight: 100,
+    },
+    {
+      src: "/assets/fonts/Poppins-Regular.ttf",
+      fontStyle: "normal",
+      fontWeight: 400,
+    },
+    {
+      src: "/assets/fonts/Poppins-Medium.ttf",
+      fontStyle: "medium",
+      fontWeight: 500,
+    },
+    {
+      src: "/assets/fonts/Poppins-Light.ttf",
+      fontStyle: "light",
+      fontWeight: 300,
+    },
+    {
+      src: "/assets/fonts/Poppins-SemiBold.ttf",
+      fontStyle: "semibold",
+      fontWeight: 600,
+    },
+    {
+      src: "/assets/fonts/Poppins-Bold.ttf",
+      fontStyle: "bold",
+      fontWeight: 700,
+    },
+    {
+      src: "/assets/fonts/Poppins-Black.ttf",
+      fontStyle: "black",
+      fontWeight: 800,
+    },
+  ],
+});
 
 export const PdfFile = ({
   data,
@@ -130,6 +130,7 @@ export const PdfFile = ({
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 140,
+    fontFamily: "Poppins",
   },
   pageNumber: {
     position: "absolute",

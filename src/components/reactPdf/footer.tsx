@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     width: "25%",
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
     color: "#000",
-    fontWeight: "normal",
     marginBottom: 2,
-  },
+  },  
   pageNumberContainer: {
     position: "absolute",
     bottom: 5,
