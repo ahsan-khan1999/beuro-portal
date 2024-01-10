@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 const stylesheet: HtmlStyles = {
   p: {
     margin: 0,
-    fontSize: 12,
+    fontSize: 10,
   },
   h1: {
     margin: 0,
@@ -112,7 +112,6 @@ export const AdditionalDetails = ({
   signature?: any;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  console.log(description);
   const onFileChange = () => {
     if (signature) {
       const reader = new FileReader();

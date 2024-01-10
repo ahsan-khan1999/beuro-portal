@@ -120,6 +120,7 @@ const OfferPdfPreview = ({
               left: 0,
               right: 0,
               top: 120,
+              fontFamily: 'Poppins',
             }}
           >
             <ContactAddress {...{ ...contactAddress }} />
