@@ -54,8 +54,8 @@ export default function useSettingProfile(handleChangePassword: Function) {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Settings Updated Successful "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.email_sent_des")}
         routeHandler={onClose}
       />
     ),
@@ -73,7 +73,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data,   ...data?.company };
+    const apiData = { ...data, ...data?.company };
     const res = await dispatch(
       updateAccountSettings({ data: apiData, router, setError, translate })
     );

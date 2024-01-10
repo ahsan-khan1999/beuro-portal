@@ -157,10 +157,10 @@ export default function useInvoiceDetail() {
 
   let modalInfo = {
     image: cautionIcon,
-    heading: "Are You Sure",
-    text: "You want you want to stop this recurring invoice",
-    noButton: "Cancel",
-    yesButton: "Yes",
+    heading: `${translate("common.modals.are_sure")}`,
+    text: `${translate("common.modals.stop_reccuring")}`,
+    noButton: `${translate("common.cancel_button")}`,
+    yesButton: `${translate("common.are_you_sure_modal.yes_button")}`,
     onSuccess: handleRecurringSuccess,
     loading: loading,
   };
@@ -179,14 +179,14 @@ export default function useInvoiceDetail() {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Invoice ID"
-        subHeading="Enter Invoice ID"
+        modelHeading={translate("common.modals.confirm_invoice_id")}
+        subHeading={translate("common.modals.enter_invoice_id")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Invoice?"
+        modelHeading={translate("common.modals.delete_invoice")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -211,8 +211,8 @@ export default function useInvoiceDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Successful "
-        subHeading="Thanks for updating offer we are happy to have you."
+        heading={translate("common.modals.invoice_created")}
+        subHeading={translate("common.modals.admin_setting_des")}
         route={route}
       />
     ),
@@ -231,8 +231,8 @@ export default function useInvoiceDetail() {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),

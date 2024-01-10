@@ -68,8 +68,8 @@ const SystemSettingDetails = ({
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Settings Updated Successful "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.email_sent_des")}
         routeHandler={onClose}
       />
     ),
