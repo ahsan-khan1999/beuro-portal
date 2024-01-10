@@ -251,7 +251,7 @@ const PdfPriview = () => {
                 setPdfFile={setPdfFile}
                 systemSetting={systemSetting}
                 qrCode={qrCodeUrl}
-                fileName={`invoice-${randomId}.pdf`}
+                fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
               />
             </div>
           {renderModal()}

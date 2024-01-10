@@ -27,6 +27,8 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -177,7 +179,7 @@ export const useOfferPdf = () => {
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: offerDetails?.subTotal?.toString(),
-              tax: offerDetails?.taxAmount?.toString(),
+              tax: calculateTax(offerDetails?.subTotal,Number(TAX_PERCENTAGE))?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               grandTotal: offerDetails?.total?.toString(),
             },

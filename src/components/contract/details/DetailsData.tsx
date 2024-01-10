@@ -43,7 +43,7 @@ const DetailsData = ({
             }}>
               <PdfIcon
                 className="mr-[68px]"
-                pathClass={item?.status == 1 ? "#4A13E7":"#4A13E7"}
+                pathClass={item?.status == 0 ? "#4A13E7" : item?.status === 1 ? "#45C769" : "#FF0000"}
               />
             </div>
           </div>

@@ -119,3 +119,9 @@ export interface QRSettings {
   postalCode: string;
   city: string;
 }
+
+export interface CompanyQrSettings {
+  id: string;
+  createdAt: string;
+  QrCodeDetail: QRSettings[]
+}

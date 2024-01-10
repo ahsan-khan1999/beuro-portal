@@ -28,6 +28,8 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { EmailTemplate } from "@/types/settings";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -77,7 +79,7 @@ export const useReceiptPdf = () => {
   const [pdfFile, setPdfFile] = useState(null);
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  
+
 
 
   const { modal, loading: loadingGlobal } = useAppSelector(
@@ -107,7 +109,7 @@ export const useReceiptPdf = () => {
           dispatch(readQRCode({ params: { filter: invoiceID } })),
         ]);
         if (qrCode?.payload) {
-            setQrCodeUrl(qrCode.payload);
+          setQrCodeUrl(qrCode.payload);
         }
         if (template?.payload?.Template) {
           const {
@@ -202,7 +204,8 @@ export const useReceiptPdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
