@@ -337,7 +337,6 @@ const SignPdfPreview = () => {
             if (offerDetails?.setting) {
               setSystemSettings({ ...offerDetails?.setting });
             }
-            smoothScrollToSection("#acceptOffer");
           }
         }
       );
