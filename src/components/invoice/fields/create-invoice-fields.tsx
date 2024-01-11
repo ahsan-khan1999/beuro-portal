@@ -60,6 +60,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               name: "remainingAmount",
               value: totalAmount?.toString(),
               register,
+              disabled:true
             },
           },
         ],

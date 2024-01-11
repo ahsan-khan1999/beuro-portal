@@ -17,7 +17,7 @@ export interface InvoiceTableRowTypes {
   emailStatus: string;
   invoiceStatus: string;
   isInvoiceRecurring: boolean;
-  invoiceCreatedAmount: number
+  invoiceCreatedAmount: number; createdBy: User
 }
 
 // Inovice details table
@@ -75,7 +75,7 @@ export interface InvoiceCardContentProps {
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
-  currency?:string
+  currency?: string
 }
 
 export interface InvoiceDetailsTableProps {
