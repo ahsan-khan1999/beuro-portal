@@ -202,7 +202,7 @@
       "dashboard": "Armaturenbrett",
       "customers": "Kunden",
       "leads": {
-        "leads": "Führt",
+        "leads": "Lead",
         "open": "Offen",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
@@ -231,7 +231,7 @@
       "content": "Inhalt",
       "mail_tracker": "Mail-Verfolger",
       "settings": "Einstellungen",
-      "contact_supports": "Kontakt zum Unterstützung"
+      "contact_supports": "Kontakt Support"
     },
     "admin": {
       "dashboard": "Armaturenbrett",
