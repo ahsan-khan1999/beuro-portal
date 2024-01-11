@@ -34,7 +34,9 @@ import toast from "react-hot-toast";
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { offerDetails, loading, offerActivity } = useAppSelector((state) => state.offer);
+  const { offerDetails, loading, offerActivity } = useAppSelector(
+    (state) => state.offer
+  );
   const { systemSettings } = useAppSelector((state) => state.settings);
 
   const { images } = useAppSelector((state) => state.image);
@@ -113,6 +115,7 @@ export default function useOfferDetails() {
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
   };
+
   const onSuccess = () => {
     router.push("/offers");
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -176,6 +179,8 @@ export default function useOfferDetails() {
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
+  
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -202,9 +207,11 @@ export default function useOfferDetails() {
     );
     if (res?.payload) offerCreatedHandler();
   };
+
   const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview";
   };
+
   const handleSendByPost = async () => {
     const apiData = {
       emailStatus: 2,
@@ -213,8 +220,10 @@ export default function useOfferDetails() {
     const response = await dispatch(sendOfferByPost({ data: apiData }));
     if (response?.payload) offerCreatedHandler();
   };
+
   const handleUpdateDiscount = async (discount: number) => {
-    if (discount < 0) toast.error("Negative values are not applicable for discounts");
+    if (discount < 0)
+      toast.error("Negative values are not applicable for discounts");
     else {
       const response = await dispatch(
         updateOfferDiscount({
@@ -223,8 +232,7 @@ export default function useOfferDetails() {
       );
       if (response?.payload)
         dispatch(updateModalType({ type: ModalType.CREATION }));
-        dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
-
+      dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
     }
   };
   return {
@@ -243,6 +251,6 @@ export default function useOfferDetails() {
     loading,
     handleSendByPost,
     handleUpdateDiscount,
-    systemSettings
-  }
+    systemSettings,
+  };
 }

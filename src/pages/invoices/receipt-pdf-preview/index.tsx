@@ -5,14 +5,11 @@ import DetailsPdfPriview from "@/components/invoice/details/invoice/pdf";
 import { Layout } from "@/layout";
 import ReceiptPdfPreview from "@/components/invoice/details/receipt/pdf";
 
-
 const index = () => {
   return (
     <Layout>
-
       <ReceiptPdfPreview />
     </Layout>
-
   );
 };
 
@@ -21,4 +18,4 @@ export const getStaticProps = async ({ locale }: Locale) => ({
   props: {
     ...(await serverSideTranslations(locale, ["common"])),
   },
-});  
+});
