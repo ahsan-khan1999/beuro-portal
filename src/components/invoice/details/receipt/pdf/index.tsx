@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 // );
 
 const InvoicePdfPreview = dynamic(
-  () => import("@/components/reactPdf/offer-pdf-preview"),
+  () => import("@/components/reactPdf/pdf-layout"),
   { ssr: false, loading: () => <LoadingState /> }
 );
 
@@ -39,9 +39,8 @@ const ReceiptPdfPreview = () => {
     templateSettings,
     activeButtonId,
     router,
-    pdfFile,
-    qrCodeUrl,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -50,9 +49,6 @@ const ReceiptPdfPreview = () => {
     onSuccess,
     dispatch,
   } = useReceiptPdf();
-  const randomId = useId();
-  
-
 
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
@@ -101,23 +97,10 @@ const ReceiptPdfPreview = () => {
                 : "Invoice Details"
             }
           />
-          <>
-            <InvoicePdfPreview
-              data={receiptData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              qrCode={qrCodeUrl}
-            />
-            {/* <PdfDownload
-              data={receiptData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              fileName={`receipt-${randomId}.pdf`}
-              qrCode={qrCodeUrl}
-            /> */}
-          </>
+          <InvoicePdfPreview
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
           {renderModal()}
         </>
       )}

@@ -106,12 +106,6 @@ const PdfPriview = () => {
           />
 
           <ContractPdfPreview
-            data={contractData}
-            emailTemplateSettings={emailTemplateSettings}
-            templateSettings={templateSettings}
-            systemSetting={systemSetting}
-            qrCode={qrCodeUrl}
-            remoteFileBlob={remoteFileBlob}
             mergedPdfFileUrl={mergedPdfUrl}
             isPdfRendering={isPdfRendering}
           />

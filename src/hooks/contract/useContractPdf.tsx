@@ -115,10 +115,8 @@ export const useContractPdf = () => {
             dispatch(readQRCode({ params: { filter: offerID } })),
             dispatch(readSystemSettings()),
           ]);
-        if (qrCode?.payload || true) {
-          setQrCodeUrl(
-            "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Umzugsfuchs/QRCode/V-2053%20Umzugsfuchs.pdf"
-          );
+        if (qrCode?.payload) {
+          setQrCodeUrl(qrCode.payload);
         }
         if (template?.payload?.Template) {
           const {
@@ -338,7 +336,8 @@ export const useContractPdf = () => {
     ]
   );
 
-  const { mergedFile, mergedPdfUrl, isPdfRendering } = useMergedPdfDownload(contractDataProps);
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(contractDataProps);
 
   const handleEmailSend = async () => {
     try {
