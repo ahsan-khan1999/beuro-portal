@@ -58,7 +58,7 @@ export const generateQRCodeValdiation = (translate: Function) => {
     "QrCodeDetail": yup.array().of(yup.object().shape({
       "companyName": yup.string().required(translate("validationMessages.required")),
       "ibanNumber": yup.string().required(translate("validationMessages.required")),
-      "QrCodeStatus": yup.number().required(translate("validationMessages.required")),
+      "QrCodeStatus": yup.number().notRequired(),
       "address": yup.object().shape({
         "houseNumber": yup.string().required(translate("validationMessages.required")),
         "streetNumber": yup.string().required(translate("validationMessages.required")),

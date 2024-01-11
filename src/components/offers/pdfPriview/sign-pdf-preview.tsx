@@ -30,6 +30,7 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { smoothScrollToSection } from "@/utils/utility";
 
 export const productItems: ServiceList[] = [
     {
@@ -323,6 +324,11 @@ const SignPdfPreview = () => {
                         if (offerDetails?.setting) {
                             setSystemSettings({ ...offerDetails?.setting })
                         }
+                        smoothScrollToSection("#acceptOffer")
+                        // window.scroll({
+                        //     top: document.body.scrollHeight,
+                        //     behavior: 'smooth' // Optional: adds a smooth scrolling effect
+                        //   });
                     }
                 }
             );

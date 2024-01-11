@@ -51,7 +51,7 @@ export const AggrementTerms = ({
     <div>
       {isOffer ? (
         <div
-          className="flex flex-col gap-1"
+          className="html-content flex flex-col gap-1"
           dangerouslySetInnerHTML={{ __html: aggrementDetails }}
         />
       ) : (
@@ -59,7 +59,7 @@ export const AggrementTerms = ({
           {!isEditing ? (
             <div className="flex gap-[10px] items-center">
               <span
-                className="text-[#000] text-base font-medium"
+                className="html-content text-[#000] text-base font-medium"
                 dangerouslySetInnerHTML={{ __html: editedText }}
               />
               <Image

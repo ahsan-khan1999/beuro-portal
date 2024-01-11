@@ -1050,7 +1050,8 @@
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
-      "delete_content": "Are you sure want to delete this content?"
+      "delete_content": "Are you sure want to delete this content?",
+      "update_success":"Congratulations! Your update was successful."
     },
     "remove": "Remove",
     "drop_or_attach": "Drop or attach your file here",
@@ -1092,6 +1093,7 @@
     "search": "Search...",
     "drag_table": "Drag to scroll on the table",
     "sort_button": "Sort By",
+    "source":"Lead Source",
     "privacy": "Privacy Policy",
     "copy_right": "Copyright 2024",
     "better_management": "Better management",
@@ -1850,7 +1852,8 @@
       "failed": "Failed",
       "pending": "Pending",
       "overdue": "Overdue",
-      "paid": "Paid"
+      "paid": "Paid",
+      "leadSource":"Lead Source"
     }
   },
   "global_search": {

@@ -39,8 +39,8 @@ export const SignaturePad = () => {
   };
 
   return (
-    <>
-      <div>
+    <div id="sign">
+      <div >
         <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
           {!isSubmitted ? (
             <canvas ref={canvasRef} className="w-full h-full"></canvas>
@@ -50,7 +50,7 @@ export const SignaturePad = () => {
         </div>
         {signatureData && (
           <div className="flex flex-col items-center justify-center h-full">
-            <div dangerouslySetInnerHTML={{ __html: signatureData }} />
+            <div className="html-content" dangerouslySetInnerHTML={{ __html: signatureData }} />
           </div>
         )}
       </div>
@@ -70,6 +70,6 @@ export const SignaturePad = () => {
           Submit
         </button>
       </div>
-    </>
+    </div>
   );
 };

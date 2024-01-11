@@ -724,22 +724,34 @@ export function dataURLtoBlob(dataURL: any) {
   return new Blob([u8arr], { type: mime });
 }
 
-export const smoothScrollToSection = (target: string) => {
+// export const smoothScrollToSection = (target: string) => {
+//   const element = document.querySelector(target);
+
+//   if (!element) {
+//     console.error(`Element with selector ${target} not found`);
+//     return;
+//   }
+
+//   const headerOffset = 100; // Adjust this value according to your page layout
+//   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+//   const offsetPosition = elementPosition - headerOffset;
+
+
+//   window.scrollTo(0,offsetPosition);
+// };
+
+
+export const smoothScrollToSection = (target:string) => {
   const element = document.querySelector(target);
-
-  if (!element) {
-    console.error(`Element with selector ${target} not found`);
-    return;
-  }
-
   const headerOffset = 100; // Adjust this value according to your page layout
-  const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+  const elementPosition = element?.getBoundingClientRect().top || 0;
   const offsetPosition = elementPosition - headerOffset;
 
-
-  window.scrollTo(0,offsetPosition);
+  window.scrollBy({
+    top: offsetPosition,
+    behavior: "smooth",
+  });
 };
-
 export function blobToFile(blob: any, fileName: string) {
   const options = { type: blob.type };
   const file = new File([blob], fileName, options);

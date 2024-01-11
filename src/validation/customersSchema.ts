@@ -34,7 +34,6 @@ export const generateCustomerValidation = (translate: Function) => {
         .required(translate("validationMessages.required")),
       [CustomerDetailsFields.postCode]: yup
         .string()
-        .max(4, 'Max length is 4 characters')
         .required(translate("validationMessages.required")),
       [CustomerDetailsFields.country]: yup
         .string()

@@ -43,7 +43,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const type = watch("type");
   useEffect(() => {
     setValue("type", "0")
-    setValue("amount", 0)
+    // setValue("amount", 0)
 
 
   }, [])
@@ -57,15 +57,15 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     type
   );
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
+    const remainingAmount = invoiceDetails?.invoiceCreatedAmount - Number(invoiceDetails?.paidAmount)
     taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {
         setValue("amount", remainingAmount)
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("remainingAmount", remainingAmount - (amount || 0))
 
       } else {
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("remainingAmount", remainingAmount - (amount || 0))
       }
     }
     else if (type === '1') {

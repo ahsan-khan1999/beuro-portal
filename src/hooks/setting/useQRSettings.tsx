@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import  { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../useRedux';
 import { generateQRCodeValdiation } from '@/validation/settingSchema';
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -65,7 +65,8 @@ export default function useQRSettings({ handleCreation }: { handleCreation: Func
 
     const buttonField = QRCodeSettingsAddField(register, loading, append, remove, qrSettingsArray?.length, user as User);
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const response = await dispatch(createQrCodeSetting({ data, router, setError, translate }));
+        const apiData = data?.QrCodeDetail?.map((item: any) => ({ ...item, "QrCodeStatus": !item?.QrCodeStatus ? 0 : item?.QrCodeStatus }))
+        const response = await dispatch(createQrCodeSetting({ data: { QrCodeDetail: apiData }, router, setError, translate }));
         if (response?.payload) handleCreation();
     };
     return {
@@ -87,7 +88,8 @@ export const getQrObject = (user: User) => {
             postalCode: user?.company?.address?.postalCode,
             city: user?.company?.address?.city
 
-        }
+        },
+        QrCodeStatus: 0
 
     }
 }

@@ -41,7 +41,7 @@ const AdditionalDetails = ({
 
       <div className="py-[25px] px-[30px]">
         <div
-          className="w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
+          className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
           dangerouslySetInnerHTML={{ __html: offerDetails?.additionalDetails }}
         />
       </div>

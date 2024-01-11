@@ -47,7 +47,7 @@ const useGeneralFollowUp = () => {
   });
 
   useEffect(() => {
-    if (user?.role !== "Admin")
+    if (user?.role !== "Admin" &&followUp?.length === 0)
       dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   }, [dispatch]);
   const onClose = () => {
@@ -98,7 +98,7 @@ const useGeneralFollowUp = () => {
 
   const handleAddFollowUp = () => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
-    dispatch(readLead({ params: { filter: {}, paginate: 0 } }));
+    // dispatch(readLead({ params: { filter: {}, paginate: 0 } }));
 
     dispatch(updateModalType({ type: ModalType.ADD_FOLLOW_UP }));
   };
