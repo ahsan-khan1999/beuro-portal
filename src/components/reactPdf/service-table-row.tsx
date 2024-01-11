@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 230,
-    textAlign: "justify",
   },
   descriptionText: {
     color: "#404040",
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontStyle: "normal",
     width: 230,
-    textAlign: "justify",
   },
   priceHeader: {
     flexDirection: "row",

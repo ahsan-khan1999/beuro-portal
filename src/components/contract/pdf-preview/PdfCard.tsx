@@ -66,7 +66,7 @@ const PdfCard = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
-            <Image
+            {/* <Image
               src={downloadIcon}
               alt="downloadIcon"
               className="cursor-pointer"
@@ -77,7 +77,7 @@ const PdfCard = ({
               alt="printerIcon"
               className="cursor-pointer"
               onClick={onPrint}
-            />
+            /> */}
           </div>
         </div>
         <div className="flex flex-col xl:flex-row justify-between xl:flex-wrap gap-y-2 mt-5">
