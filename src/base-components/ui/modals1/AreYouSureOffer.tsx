@@ -11,9 +11,15 @@ interface AreYouSureInfo {
   noButton: string;
   yesButton: string;
   onSuccess: () => void;
-  loading: boolean
+  loading: boolean;
 }
-const AreYouSureOffer = ({ onClose, info }: { onClose: () => void, info: AreYouSureInfo }) => {
+const AreYouSureOffer = ({
+  onClose,
+  info,
+}: {
+  onClose: () => void;
+  info: AreYouSureInfo;
+}) => {
   const { t: translate } = useTranslation();
   return (
     <>
@@ -31,11 +37,14 @@ const AreYouSureOffer = ({ onClose, info }: { onClose: () => void, info: AreYouS
             {info.text}
           </span>
           <div className="flex gap-[36px] mt-[32px] mb-[67px]">
-            <button className="p-4 text-[#fff] w-[177px] bg-[#4A13E7] rounded-md" onClick={onClose}>
+            <button
+              className="p-4 text-[#fff] min-w-[177px] w-fit bg-[#4A13E7] rounded-md"
+              onClick={onClose}
+            >
               {info.noButton}
             </button>
             <Button
-              className=" px-[25px] w-[177px] text-[#fff] bg-[#BFBFBF] rounded-md"
+              className=" px-[25px] min-w-[177px] w-fit text-[#fff] bg-[#BFBFBF] rounded-md"
               id="yes"
               inputType="button"
               onClick={info.onSuccess}

@@ -10,6 +10,7 @@ export const useMergedPdfDownload = ({
   systemSetting,
   data,
   remoteFileBlob,
+  fileName,
 }: PdfPreviewProps) => {
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
@@ -35,13 +36,13 @@ export const useMergedPdfDownload = ({
           blobArray.push(remoteFileBlob);
         }
         if (blobArray.length > 0) {
-          const mergedPdfBlob = await mergePDFs(blobArray);
+          const mergedPdfBlob = await mergePDFs(blobArray, fileName);
           const convertedBlob = new Blob([mergedPdfBlob], {
             type: "application/pdf",
           });
           const url = URL.createObjectURL(convertedBlob);
 
-          setMergedFile(blobToFile(convertedBlob, "talha" || "output.pdf"));
+          setMergedFile(blobToFile(convertedBlob, data?.emailHeader?.offerNo || "output.pdf"));
           setMergedPdfUrl(url);
         }
       } catch (err) {

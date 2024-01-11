@@ -28,7 +28,7 @@ const EmailConfirmation = ({
       <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
         <Image
           src={mailPopIcon}
-          alt="Email Popup Image"
+          alt="Email Popup"
           className="mb-9 mx-auto"
         />
         <h1 className="font-medium text-2xl text-[#000000] mb-3 text-center">

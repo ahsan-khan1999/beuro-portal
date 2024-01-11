@@ -295,7 +295,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                rows: 8,
+                rows: 2,
                 id: `serviceDetail.${i}.description`,
                 name: `serviceDetail.${i}.description`,
                 placeholder: `${translate(

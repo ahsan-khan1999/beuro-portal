@@ -1,5 +1,6 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 
 import Html, { HtmlStyles } from "react-pdf-html";
@@ -103,7 +104,6 @@ const stylesheet: HtmlStyles = {
     fontSize: 12,
   },
 };
-
 export const AdditionalDetails = ({
   description,
   signature,
@@ -121,6 +121,8 @@ export const AdditionalDetails = ({
       reader.readAsDataURL(signature);
     }
   };
+  const isContract = window.location.pathname.includes("contract");
+
   useMemo(() => signature && onFileChange(), [signature]);
   return (
     <View style={styles.borderDiv}>
@@ -129,29 +131,31 @@ export const AdditionalDetails = ({
           {description || ""}
         </Html>
 
-        <View style={{}}>
-          <Text style={styles.shareHeading}>
-            I share the contract with you.
-          </Text>
+        {!isContract && (
+          <View style={{}}>
+            <Text style={styles.shareHeading}>
+              I share the contract with you.
+            </Text>
 
-          <View style={styles.dateContainer}>
-            <View style={styles.innerDate}>
-              <Text style={styles.dateText}>Datum</Text>
-            </View>
+            <View style={styles.dateContainer}>
+              <View style={styles.innerDate}>
+                <Text style={styles.dateText}>Datum</Text>
+              </View>
 
-            <View style={{ width: "40%" }}>
-              {signature && (
-                <Image
-                  src={imageSrc as string}
-                  style={{ height: "100px", width: "100px" }}
-                />
-              )}
-              <View style={styles.signature}>
-                <Text style={styles.dateText}>Signature</Text>
+              <View style={{ width: "40%" }}>
+                {signature && (
+                  <Image
+                    src={imageSrc as string}
+                    style={{ height: "100px", width: "100px" }}
+                  />
+                )}
+                <View style={styles.signature}>
+                  <Text style={styles.dateText}>Signature</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        )}
       </View>
     </View>
   );

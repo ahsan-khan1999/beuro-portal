@@ -314,7 +314,7 @@ export const useContractPdf = () => {
     }
   }, [qrCodeUrl]);
 
-  const fileName = "`${contractData?.emailHeader?.contractNo}.pdf`";
+  const fileName = contractData?.emailHeader?.offerNo;
   const contractDataProps = useMemo(
     () => ({
       emailTemplateSettings,

@@ -174,7 +174,7 @@ export const useInvoicePdf = () => {
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
-              contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+              contractId: invoiceDetails?.invoiceNumber,
               workerName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
                   ?.fullName,
@@ -320,7 +320,7 @@ export const useInvoicePdf = () => {
     }
   }, [qrCodeUrl]);
 
-  const fileName = "`${contractData?.emailHeader?.contractNo}.pdf`";
+  const fileName = invoiceData?.emailHeader?.contractId;
   const contractDataProps = useMemo(
     () => ({
       emailTemplateSettings,

@@ -126,7 +126,7 @@
     "title": "Bestätigen Sie Ihre E-Mail-Adresse",
     "first_sub_heading": "Eine E-Mail wurde gesendet an",
     "end_sub_heading": "Klicken Sie auf den Link in der E-Mail, um Ihre E-Mail-Adresse zu bestätigen",
-    "description": "Vielen Dank für die Registrierung! Bitte geben Sie den OTP ein, den wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Support, wenn Sie die E-Mail nicht erhalten haben.",
+    "description": "Vielen Dank für die Registrierung! Bitte geben Sie den OTP ein, den wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Unterstützung, wenn Sie die E-Mail nicht erhalten haben.",
     "label": "OTP eingeben",
     "login": "Anmelden",
     "notrecieve": "Nicht erhalten?",
@@ -231,14 +231,14 @@
       "content": "Inhalt",
       "mail_tracker": "Mail-Verfolger",
       "settings": "Einstellungen",
-      "contact_supports": "Kontakt zum Support"
+      "contact_supports": "Kontakt zum Unterstützung"
     },
     "admin": {
       "dashboard": "Armaturenbrett",
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "support_requests": "Supportanfragen",
+      "support_requests": "Unterstützunganfragen",
       "Settings": "Einstellungen"
     }
   },
@@ -630,6 +630,15 @@
         "email": "E-Mail",
         "mail_description": "Geben Sie die E-Mail-Adresse ein, um die Test-E-Mail der Mail-Konfiguration zu erhalten."
       }
+    },
+    "qr_settings": {
+      "company_info": "Informationen zum Unternehmen",
+      "company_name": "Firmenname",
+      "iban_number": "Iban Nein",
+      "house_no": "Hausnummer",
+      "street_no": "Straße Nummer",
+      "post_code": "Postleitzahl",
+      "city": "Stadt"
     }
   },
   "invoice": {
@@ -991,6 +1000,11 @@
   },
   "common": {
     "modals": {
+      "verifying_email": "Wir verifizieren Ihre E-Mail",
+      "verifying_des": "Bitte fahren Sie fort! Bitte nehmen Sie sich einen Moment Zeit, um sicherzustellen, dass wir Ihre korrekte E-Mail-Adresse haben",
+      "verify_email": "E-Mail Adresse überprüfen",
+      "verify_email_des1": "Eine E-Mail wurde gesendet an ",
+      "verify_email_des2": "Klicken Sie auf den Link in der E-Mail, um Ihre E-Mail-Adresse zu bestätigen.",
       "stop_reccuring": "Sie möchten diese wiederkehrende Rechnung stoppen",
       "invoice_created": "Rechnung erfolgreich erstellt",
       "confirm_invoice_id": "Bitte Rechnungs-ID bestätigen",
@@ -1041,6 +1055,9 @@
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind."
     },
+    "upload_img": "Bilder hochladen",
+    "resend_button": "Erneut senden?",
+    "continue": "Weiter",
     "remove": "entfernen",
     "drop_or_attach": "Hier können Sie Ihre Datei ablegen oder anhängen",
     "file_support": "Unterstützte Dateien: PDF, JPG, PNG, GIF",
@@ -1236,6 +1253,7 @@
       "next_button": "Weiter"
     },
     "address_details": {
+      "add_new_address": "Neue Adresse hinzufügen",
       "main_heading": "Adressdetails",
       "edit_button": "Details bearbeiten",
       "address": "Adresse",
@@ -1493,7 +1511,7 @@
       }
     },
     "support_requests": {
-      "heading": "Supportanfragen",
+      "heading": "Unterstützunganfragen",
       "table_headings": {
         "id": "ID",
         "customer_name": "Kundenname",

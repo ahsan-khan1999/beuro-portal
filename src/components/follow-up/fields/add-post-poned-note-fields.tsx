@@ -27,7 +27,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-dark  focus:!border-primary ",
-        rows: 8,
+        rows: 2,
         id: "postPonedNote",
         name: "postPonedNote",
         placeholder:

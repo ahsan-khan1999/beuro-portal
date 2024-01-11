@@ -12,6 +12,7 @@ const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
 
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
+import { useTranslation } from "next-i18next";
 
 const PdfPriview = () => {
   const {
@@ -32,13 +33,13 @@ const PdfPriview = () => {
     onSuccess,
     systemSetting,
   } = useOfferPdf();
-
+  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
@@ -62,6 +63,20 @@ const PdfPriview = () => {
             handleSendByPost={handleSendByPost}
             activeButtonId={activeButtonId}
           />
+          {/* <YogaPdfContainer>
+
+              <div className="flex justify-center my-5">
+                <Pdf<EmailHeaderProps>
+                  pdfData={offerData}
+                  newPageData={newPageData}
+                  templateSettings={templateSettings}
+                  totalPages={calculateTotalPages}
+                  emailTemplateSettings={emailTemplateSettings}
+
+                />
+              </div>
+            </YogaPdfContainer> */}
+
           <div className="flex justify-center my-5">
             <OfferPdf
               data={offerData}

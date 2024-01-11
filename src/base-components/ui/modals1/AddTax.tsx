@@ -5,7 +5,13 @@ import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import useAddTax from "@/hooks/modals/useAddTax";
 
-const AddTax = ({ onClose, heading }: { onClose: () => void; heading:string}) => {
+const AddTax = ({
+  onClose,
+  heading,
+}: {
+  onClose: () => void;
+  heading: string;
+}) => {
   const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error } = useAddTax(onClose);
   return (
@@ -21,7 +27,7 @@ const AddTax = ({ onClose, heading }: { onClose: () => void; heading:string}) =>
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mb-[50px]">
+          <p className="text-[#000] font-medium text-2xl mb-[50px]">
             {heading}
           </p>
 
