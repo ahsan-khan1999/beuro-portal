@@ -37,6 +37,7 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { smoothScrollToSection } from "@/utils/utility";
 
 export const productItems: ServiceList[] = [
   {
@@ -167,7 +168,7 @@ const SignPdfPreview = () => {
   const router = useRouter();
   const { offerID, action } = router.query;
 
-  useEffect(() => { 
+  useEffect(() => {
     if (offerID) {
       dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
@@ -336,6 +337,7 @@ const SignPdfPreview = () => {
             if (offerDetails?.setting) {
               setSystemSettings({ ...offerDetails?.setting });
             }
+            smoothScrollToSection("#acceptOffer");
           }
         }
       );

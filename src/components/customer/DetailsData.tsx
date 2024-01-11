@@ -26,7 +26,7 @@ const DetailsData = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-          <Image src={printerIcon} alt="printerIcon" />
+          {/* <Image src={printerIcon} alt="printerIcon" /> */}
           <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}

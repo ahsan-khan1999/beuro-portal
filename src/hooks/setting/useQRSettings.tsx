@@ -99,8 +99,17 @@ export default function useQRSettings({
     user as User
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = data?.QrCodeDetail?.map((item: any) => ({
+      ...item,
+      QrCodeStatus: !item?.QrCodeStatus ? 0 : item?.QrCodeStatus,
+    }));
     const response = await dispatch(
-      createQrCodeSetting({ data, router, setError, translate })
+      createQrCodeSetting({
+        data: { QrCodeDetail: apiData },
+        router,
+        setError,
+        translate,
+      })
     );
     if (response?.payload) handleCreation();
   };
@@ -123,5 +132,6 @@ export const getQrObject = (user: User) => {
       postalCode: user?.company?.address?.postalCode,
       city: user?.company?.address?.city,
     },
+    QrCodeStatus: 0,
   };
 };

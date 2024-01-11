@@ -160,62 +160,14 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       },
     },
 
-    // {
-    //   containerClass: "mb-0 mt-[17px]",
-    //   field: {
-    //     className: "text-[#4B4B4B] text-[14px] font-normal",
-    //     type: Field.checkbox,
-    //     id: "isInvoiceRecurring",
-    //     name: "isInvoiceRecurring",
-    //     description: `${translate(
-    //       "invoice.create_invoice_modal.mark_it_recuring"
-    //     )}`,
-    //     register,
-    //   },
-    // },
 
-    // {
-    //   containerClass: `mt-4  ${!markItRecuring && "hidden"}`,
-    //   label: {
-    //     text: `${translate("invoice.create_invoice_modal.date_of_invoice")}`,
-    //     htmlFor: "date",
-    //     className: "mb-[12px]",
-    //   },
-    //   field: {
-    //     type: Field.date,
-    //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-    //     id: "date",
-    //     name: "date",
-    //     register,
-    //     dateType:"datetime-local"
-
-    //   },
-    // },
-    // {
-    //   containerClass: `mb-0 mt-4 ${!markItRecuring && "hidden"}`,
-    //   label: {
-    //     text: `${translate("invoice.create_invoice_modal.frequency")}`,
-    //     htmlFor: "frequency",
-    //     className: "mb-[12px]",
-    //   },
-    //   field: {
-    //     className:
-    //       "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-    //     value: " ",
-    //     type: Field.select,
-    //     id: "frequency",
-    //     name: "frequency",
-    //     options: [{ value: "200GHZ", label: "200GHZ" }],
-    //     control,
-    //   },
-    // },
 
     {
       containerClass: "mb-0 mt-[13px]",
       field: {
         type: Field.button,
         id: "button",
-        text: `${translate("invoice.create_invoice_modal.button")}`,
+        text: data ? `${translate("invoice.create_invoice_modal.update_invoice")}` : `${translate("invoice.create_invoice_modal.button")}`,
         inputType: "submit",
         className: "hover:bg-none",
         loading,

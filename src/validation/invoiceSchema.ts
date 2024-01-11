@@ -6,16 +6,16 @@ export const generateCreateInvoiceValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [createInvoice.totalAmount]: yup
       .number()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
     [createInvoice.remainingAmount]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
 
     [createInvoice.paymentMethod]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
 
   });
@@ -27,7 +27,7 @@ export const generateRecurringInvoiceValidationSchema = (translate: Function) =>
 
     [createInvoice.paymentMethod]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
 
   });
@@ -36,16 +36,16 @@ export const generateCreateRecurringInvoiceValidationSchema = (translate: Functi
   return yup.object().shape({
     [createInvoice.paymentMethod]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
   
 
     [createInvoice.date]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
     [createInvoice.frequency]: yup
       .number()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
   });
 };
@@ -57,11 +57,11 @@ export const generateRecurringInvoiceFrequencyValidationSchema = (translate: Fun
 
     [createInvoice.date]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
     [createInvoice.frequency]: yup
       .number()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
 
   });
 };

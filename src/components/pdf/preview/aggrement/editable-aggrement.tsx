@@ -68,7 +68,7 @@ export const EditableAggrement = ({
           />
         </div>
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: editedText }}></div>
+        <div className="html-content" dangerouslySetInnerHTML={{ __html: editedText }}></div>
       )}
 
       {isEditing && (

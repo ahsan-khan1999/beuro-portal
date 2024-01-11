@@ -257,7 +257,9 @@ export type GenerateAddReasonFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  control?:Control,
+  reason?:string
 ) => FormField[];
 
 // change/Reset password formfield
@@ -525,7 +527,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null },
+  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -594,6 +596,7 @@ export interface FilterType {
   email?: string[] | string;
   price?: string[];
   month?: number;
+  leadSource?:string[] | string
 }
 
 export interface MoreFilterType {
@@ -608,6 +611,9 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
+  leadSource?:string[] | string
+
+
 }
 export interface FilterProps {
   filter: FilterType;

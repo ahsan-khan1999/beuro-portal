@@ -1053,7 +1053,9 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
       "plan_created": "Datensatz erfolgreich erstellt",
-      "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind."
+      "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
+      "update_success":"Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
+
     },
     "upload_img": "Bilder hochladen",
     "resend_button": "Erneut senden?",
@@ -1098,6 +1100,8 @@
     "search": "Suche...",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
+    "source":"Bleiquelle",
+
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
     "better_management": "Besseres Management",
@@ -1859,7 +1863,9 @@
       "failed": "Fehlgeschlagen",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
-      "paid": "Bezahlt"
+      "paid": "Bezahlt",
+      "leadSource":"Bleiquelle"
+
     }
   },
   "global_search": {

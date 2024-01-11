@@ -7,7 +7,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps },
+  { customer, lead, followUps,onCustomerSelect },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -43,7 +43,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
                 label: item?.fullName + " " + `(${item?.refID})`,
                 value: item?.id.toString(),
               })),
-              // onItemChange: () => onItemChange && onItemChange(Modals.customer),
+              onItemChange: () => onItemChange && onItemChange(),
               control,
             },
           },

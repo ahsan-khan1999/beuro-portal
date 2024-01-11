@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
@@ -79,12 +80,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               name: "contactAvailability",
               options: [
                 {
-                  value: "Morning(9am to 12am)",
-                  label: "Morning(9am to 12am)",
+                  value: "Morning(8am to  12pm)",
+                  label: "Morning(8am to  12pm)",
                 },
                 {
-                  value: "Morning(1pm to 10pm)",
-                  label: "Morning(1pm to 10pm)",
+                  value: "Evening(5pm to 8pm)",
+                  label: "Evening(5pm to 8pm)",
+                },
+                {
+                  value: "Night(9pm to 12am)",
+                  label: "Night(9pm to 12am)",
                 },
               ],
               control,
@@ -162,6 +167,11 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via What'sapp",
                   label: "Via What'sapp",
                 },
+                {
+                  value: "Via Phone Call",
+                  label: "Via Phone Call",
+                },
+              
               ],
               control,
             },
@@ -182,6 +192,18 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               value: (leadDetails?.id && leadDetails?.budget) || "",
 
               options: [
+                {
+                  value: `Less then 5000${systemSettings?.currency}`,
+                  label: `Less then 5000${systemSettings?.currency}`,
+                },
+                {
+                  value: `Less then 2500${systemSettings?.currency}`,
+                  label: `Less then 2500${systemSettings?.currency}`,
+                },
+                {
+                  value: `Less then 1500${systemSettings?.currency}`,
+                  label: `Less then 1500${systemSettings?.currency}`,
+                },
                 {
                   value: `Less then 1000${systemSettings?.currency}`,
                   label: `Less then 1000${systemSettings?.currency}`,
@@ -209,10 +231,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: [
-                { value: "Whats'app", label: "What'sapp" },
-                { value: "Facebook", label: "Facebook" },
-              ],
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item })),
               control,
             },
           },

@@ -211,7 +211,7 @@ export default function useInvoiceDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.invoice_created")}
+        heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.admin_setting_des")}
         route={route}
       />

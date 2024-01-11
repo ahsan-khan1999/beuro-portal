@@ -10,6 +10,9 @@ import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import SelectField from "./fields/select-field";
+import { staticEnums } from "@/utils/static";
+import EmailCheckField from "./fields/email-check-field";
 export default function ContractsFilter({
   filter,
   setFilter,
@@ -41,6 +44,7 @@ export default function ContractsFilter({
           $gte: moreFilter.date && moreFilter.date.$gte,
           $lte: moreFilter.date && moreFilter.date.$lte,
         },
+        leadSource: moreFilter?.leadSource
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -68,6 +72,27 @@ export default function ContractsFilter({
       date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
+
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.leadSource !== FiltersDefaultValues.None ? prev.leadSource : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const emailStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+      return { ...prev, leadSource: emailStatus };
+    });
+  };
+
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -140,11 +165,11 @@ export default function ContractsFilter({
                     label2={translate("filters.extra_filters.to")}
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
+                      FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
                       (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
+                      FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}
@@ -206,6 +231,59 @@ export default function ContractsFilter({
                   />
                 </div>
               </div> */}
+            </div>
+
+            <div className="">
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    {translate("filters.extra_filters.leadSource")}
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => {
+                      handleFilterReset("leadSource", "None");
+                    }}
+                  >
+                    {translate("filters.extra_filters.reset")}
+                  </label>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mt-4  ">
+
+                  {
+                    Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                      <EmailCheckField
+                        key={idx}
+                        checkboxFilter={moreFilter as unknown as FilterType}
+                        setCheckBoxFilter={setMoreFilter}
+                        type={"leadSource"}
+                        label={item}
+                        value={item}
+                        onChange={(value, isChecked) =>
+                          handleStatusChange(value, isChecked)
+                        }
+                      />
+                    ))
+                  }
+
+                  {/* <SelectField
+                    handleChange={(value) => handleLeadSourceChange(value)}
+                    value={moreFilter?.leadSource || ""}
+                    dropDownIconClassName=""
+                    options={
+                      Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item }))
+                    }
+                    label={translate("common.source")}
+
+                    containerClassName="!w-full flex justify-normal"
+                  /> */}
+                </div>
+                <div>
+
+                </div>
+              </div>
+
             </div>
             <div>
               <BaseButton
