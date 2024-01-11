@@ -4,6 +4,7 @@ import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { UpdateSuccessProps } from "@/types/global";
 import { Button } from "../button/button";
+import { useTranslation } from "next-i18next";
 
 const RecordUpdateSuccess = ({
   onClose,
@@ -13,6 +14,7 @@ const RecordUpdateSuccess = ({
   confirmHandler,
   loading,
 }: UpdateSuccessProps) => {
+  const { t: translate } = useTranslation();
   return (
     <>
       <BaseModal
@@ -31,17 +33,17 @@ const RecordUpdateSuccess = ({
           <div className="flex justify-between space-x-4 mt-[32px] mb-5 lg:mb-[68px]">
             <button
               onClick={cancelHandler}
-              className="bg-[#BFBFBF] cursor-pointer  px-5 w-[150px] rounded-lg p-4 text-white text-base font-medium"
+              className="bg-[#BFBFBF] cursor-pointer px-5 min-w-[150px] w-fit rounded-lg p-4 text-white text-base font-medium"
             >
-              Cancel
+              {translate("common.cancel_button")}
             </button>
             <Button
               id="confirm"
               inputType="button"
               loading={loading}
               onClick={confirmHandler}
-              text="Confirm"
-              className="bg-[#4A13E7] cursor-pointer   px-5 w-[150px] rounded-lg  text-white text-base font-medium"
+              text={translate("leads.confirm_lead_modal.confirm_button")}
+              className="bg-[#4A13E7] cursor-pointer px-5 min-w-[150px] w-fit rounded-lg  text-white text-base font-medium"
             />
           </div>
         </div>

@@ -30,6 +30,7 @@ import { EmailTemplate } from "@/types/settings";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
 import { calculateTax } from "@/utils/utility";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -76,11 +77,12 @@ export const useReceiptPdf = () => {
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
-  const [pdfFile, setPdfFile] = useState(null);
+
+  // const [pdfFile, setPdfFile] = useState(null);
+  // const [qrCodeUrl, setQrCodeUrl] = useState("");
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-
-
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
@@ -150,7 +152,7 @@ export const useReceiptPdf = () => {
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
-              contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+              contractId: invoiceDetails?.invoiceNumber,
               workerName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
                   ?.fullName,
@@ -204,7 +206,10 @@ export const useReceiptPdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: calculateTax(invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
 
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
@@ -272,6 +277,40 @@ export const useReceiptPdf = () => {
     // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
+
+  useEffect(() => {
+    if (qrCodeUrl) {
+      (async () => {
+        const remotePdfResponse = await fetch(qrCodeUrl);
+        const remotePdfBlob = await remotePdfResponse.blob();
+        setRemoteFileBlob(remotePdfBlob);
+      })();
+    }
+  }, [qrCodeUrl]);
+
+  const fileName = receiptData?.emailHeader?.contractId;
+  const receiptDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: receiptData,
+      fileName,
+      qrCode: qrCodeUrl,
+      remoteFileBlob,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      receiptData,
+      fileName,
+      qrCodeUrl,
+      remoteFileBlob,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(receiptDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
@@ -279,8 +318,8 @@ export const useReceiptPdf = () => {
       setActiveButtonId("email");
       const data = await localStoreUtil.get_data("receiptEmailCompose");
 
-      if (data && pdfFile) {
-        formData.append("file", pdfFile as any);
+      if (data && mergedFile) {
+        formData.append("file", mergedFile as any);
         const fileUrl = await dispatch(uploadFileToFirebase(formData));
         let apiData = {
           ...data,
@@ -383,10 +422,9 @@ export const useReceiptPdf = () => {
     loading,
     modal,
     activeButtonId,
-    pdfFile,
     router,
-    qrCodeUrl,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     handleEmailSend,
     handleSendByPost,
     handleDonwload,

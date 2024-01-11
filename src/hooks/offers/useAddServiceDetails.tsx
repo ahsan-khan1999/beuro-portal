@@ -25,7 +25,7 @@ import {
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
-import { calculateDiscount, calculateTax } from "@/utils/utility";
+import { calculateDiscount, calculatePercentage, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
@@ -56,7 +56,7 @@ export const useAddServiceDetails = (
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
 
@@ -176,11 +176,13 @@ export const useAddServiceDetails = (
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
-        taxType: staticEnums["TaxType"][offerDetails?.taxType],
+        taxType: staticEnums["TaxType"][offerDetails?.taxType] ,
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount || 0,
+        taxAmount: offerDetails?.taxAmount ,
       });
+    } else {
+      // setValue("taxType",systemSettings?.taxType)
     }
     generateGrandTotal();
   }, [offerDetails.id]);
@@ -277,6 +279,7 @@ export const useAddServiceDetails = (
     setValue,
     watch
   );
+  console.log(offerDetails, "offerDetails");
 
   const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
     register,

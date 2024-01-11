@@ -30,7 +30,11 @@ import {
 import { ModalType } from "@/enums/ui";
 import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
-import { calculateTax } from "@/utils/utility";
+import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
+
+import { pdf as reactPdf } from "@react-pdf/renderer";
+// import { PdfFile } from "@/components/reactPdf/pdf-file";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -81,11 +85,12 @@ export const useContractPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
-  const [pdfFile, setPdfFile] = useState(null);
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
+
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -110,9 +115,8 @@ export const useContractPdf = () => {
             dispatch(readQRCode({ params: { filter: offerID } })),
             dispatch(readSystemSettings()),
           ]);
-
         if (qrCode?.payload) {
-          setQrCodeUrl(qrCode?.payload);
+          setQrCodeUrl(qrCode.payload);
         }
         if (template?.payload?.Template) {
           const {
@@ -192,7 +196,10 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: calculateTax(contractDetails?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(
+                contractDetails?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
             },
@@ -297,15 +304,50 @@ export const useContractPdf = () => {
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
+  useEffect(() => {
+    if (qrCodeUrl) {
+      (async () => {
+        const remotePdfResponse = await fetch(qrCodeUrl);
+        const remotePdfBlob = await remotePdfResponse.blob();
+        setRemoteFileBlob(remotePdfBlob);
+      })();
+    }
+  }, [qrCodeUrl]);
+
+  const fileName = contractData?.emailHeader?.offerNo;
+  const contractDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: contractData,
+      fileName,
+      qrCode: qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      contractData,
+      fileName,
+      qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(contractDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
       setActiveButtonId("email");
-      console.log(pdfFile,"pdfFile");
-      
-      if (!pdfFile) return;
+      console.log(mergedFile, "pdfFile");
+
+      if (!mergedFile) return;
       const data = await localStoreUtil.get_data("contractComposeEmail");
-      formData.append("file", pdfFile as any);
+      formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
       if (data) {
         let apiData = { ...data, pdf: fileUrl?.payload };
@@ -326,7 +368,7 @@ export const useContractPdf = () => {
           attachments:
             contractDetails?.offerID?.content?.confirmationContent?.attachments,
           id: contractDetails?.id,
-          pdf: fileUrl?.payload
+          pdf: fileUrl?.payload,
         };
         const res = await dispatch(sendContractEmail({ data: apiData }));
         if (res?.payload) {
@@ -385,6 +427,7 @@ export const useContractPdf = () => {
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   return {
     contractData,
     modal,
@@ -393,10 +436,11 @@ export const useContractPdf = () => {
     router,
     templateSettings,
     emailTemplateSettings,
-    pdfFile,
     loadingGlobal,
     qrCodeUrl,
-    setPdfFile,
+    remoteFileBlob,
+    mergedPdfUrl,
+    isPdfRendering,
     dispatch,
     onClose,
     onSuccess,

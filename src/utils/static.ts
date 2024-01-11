@@ -707,6 +707,21 @@ export const staticEnums: Record<string, any> = {
     pending: 0,
     resolved: 1,
   },
+  RejectReason: {
+    "Cost Concerns": "Cost Concerns",
+    "Hidden Fees": "Hidden Fees",
+    "Service Scope": "Service Scope",
+    "Negative Reviews": "Negative Reviews",
+    "Unreliable Schedule": "Unreliable Schedule",
+    "Customer Service": "Customer Service",
+    "Inadequate Equipment": "Inadequate Equipment",
+    "Other": "Other"
+  },
+  LeadSource: {
+    Umzugsfuchs: "Umzugsfuchs",
+    Webvermarktung: "Webvermarktung",
+    "Offerten-365": "Offerten-365"
+  }
 };
 
 // export const customers: Customers[] = [

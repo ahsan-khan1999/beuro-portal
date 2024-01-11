@@ -342,11 +342,12 @@ const OfferSignedPdf = ({ offerData, signature, templateSettings, emailTemplateS
         if (response?.payload) { dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
     }
     const rejectOffer = async () => {
-        const params = {
-            id: offerData?.id
-        }
-        const response = await dispatch(rejectOfferPublic({ params }))
-        if (response?.payload) { dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS })) }
+        dispatch(updateModalType({ type: ModalType.REJECT_OFFER }))
+        // const params = {
+        //     id: offerData?.id
+        // }
+        // const response = await dispatch(rejectOfferPublic({ params }))
+        // if (response?.payload) { dispatch(updateModalType({ type: ModalType.REJECT_OFFER })) }
     }
     return (
         <div className="download-link">

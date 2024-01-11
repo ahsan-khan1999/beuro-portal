@@ -25,7 +25,7 @@ export const generateOfferEditContentDetailsValidation = (
         .string()
         .required(translate("validationMessages.required")),
       [OfferEditContentDetails.attachments]: yup
-        .array().of(yup.string().required()).required(translate("validationMessages.required")),
+        .array().of(yup.string().notRequired()).notRequired(),
       [OfferEditContentDetails.address]: yup.array().of(yup.object().shape({ value: yup.string().required(translate("validationMessages.required")) })).required()
     })
 
@@ -85,8 +85,8 @@ export const generateEditConfirmationContentDetailsValidation = (
         .string()
         .required(translate("validationMessages.required")),
       [EditConfirmationContentDetails.attachments]: yup
-        .array().of(yup.string().required(translate("validationMessage.required")))
-        .required(translate("validationMessage.required")),
+        .array().of(yup.string().notRequired())
+        .notRequired(),
     }).required()
 
   });
@@ -110,8 +110,8 @@ export const generateEditInvoiceContentDetailsValidation = (
         .string()
         .required(translate("validationMessages.required")),
       [EditInvoiceContentDetails.attachments]: yup
-        .array().of(yup.string().required(translate("validationMessage.required")))
-        .required(translate("validationMessage.required")),
+        .array().of(yup.string().notRequired())
+        .notRequired(),
     })
 
   });
@@ -135,8 +135,8 @@ export const generateEditReceiptContentDetailsValidation = (
         .string()
         .required(translate("validationMessages.required")),
       [ReceiptEditContentDetails.attachments]: yup
-        .array().of(yup.string().required(translate("validationMessage.required")))
-        .required(translate("validationMessage.required")),
+        .array().of(yup.string().notRequired())
+        .notRequired(),
     })
   });
 };

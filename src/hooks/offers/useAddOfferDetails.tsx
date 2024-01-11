@@ -76,7 +76,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, paginate: 0 } },
+          params: { filter: { customerID: customerID },paginate: 0 },
         })
       );
   }, [customerID]);

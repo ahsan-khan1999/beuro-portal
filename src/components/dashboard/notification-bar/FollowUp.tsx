@@ -177,7 +177,7 @@ export const FollowUpNotificationBar = ({
                 >
                   <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
                     <div
-                      className="mr-6"
+                      className=" mr-6"
                       dangerouslySetInnerHTML={{ __html: item.svg }}
                     />
                     <div>

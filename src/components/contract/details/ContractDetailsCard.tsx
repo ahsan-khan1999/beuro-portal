@@ -70,7 +70,7 @@ const ContractDetailsCard = ({
               })
             }
           />
-          <Image
+          {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
             className="cursor-pointer"
@@ -81,7 +81,7 @@ const ContractDetailsCard = ({
             alt="printerIcon"
             className="cursor-pointer"
             onClick={handlePrint}
-          />
+          /> */}
           <Image
             src={deleteIcon}
             alt="deleteIcon"
