@@ -156,7 +156,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.textArea,
         className: `!py-4 !border-[#BFBFBF] focus:!border-primary`,
-        rows: 8,
+        rows: 2,
         id: "additionalDetails",
         name: "additionalDetails",
         placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",

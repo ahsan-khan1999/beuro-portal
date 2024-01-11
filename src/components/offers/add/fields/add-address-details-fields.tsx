@@ -87,10 +87,12 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
-                options: Object.keys(staticEnums.Country).map((item) => ({
-                  value: item,
-                  label: item,
-                })),
+                options: Object.entries(staticEnums.Country).map(
+                  ([key, val]) => ({
+                    value: key,
+                    label: `${translate(val as string)}`,
+                  })
+                ),
                 control,
                 value: "",
               },
@@ -115,7 +117,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
-                rows: 8,
+                rows: 2,
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
                 placeholder:
@@ -147,45 +149,71 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex space-x-[18px] ",
+      className: "flex justify-between",
       children: [
         {
-          containerClass: "mb-0",
           field: {
-            type: Field.button,
-            id: "button",
-            text: `${translate("common.back_button")}`,
-            inputType: "button",
-            className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
-            onClick: onHandleBack && onHandleBack,
+            className: "flex gap-x-[18px]",
+            type: Field.div,
+            id: "div-field",
+            children: [
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("common.back_button")}`,
+                  inputType: "button",
+                  className:
+                    "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
+                  onClick: onHandleBack && onHandleBack,
+                },
+              },
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("common.next_button")}`,
+                  inputType: "submit",
+                  className:
+                    "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  loading,
+                },
+              },
+            ],
           },
         },
         {
           containerClass: "mb-0",
           field: {
-            type: Field.button,
-            id: "button",
-            text: `${translate("common.next_button")}`,
-            inputType: "submit",
-            className:
-              "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-            loading,
-          },
-        },
-
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            className: ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 px-4   h-[40px] text-white hover-bg-none`,
-            onClick: () =>
-              handleAddNewAddress && handleAddNewAddress(addressObject),
-            icon: icon,
-            name: "",
-
-            // icon
+            type: Field.div,
+            id: "div-field",
+            className: " flex items-center gap-x-[18px]",
+            children: [
+              {
+                containerClass: "mb-0 pr-2 mt-2",
+                field: {
+                  type: Field.span,
+                  id: "span-field",
+                  text: `${translate(
+                    "offers.address_details.add_new_address"
+                  )}`,
+                },
+              },
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  className: `rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 px-4   h-[40px] text-white hover-bg-none`,
+                  onClick: () =>
+                    handleAddNewAddress && handleAddNewAddress(addressObject),
+                  icon: icon,
+                  name: "",
+                },
+              },
+            ],
           },
         },
       ],

@@ -638,6 +638,15 @@
         "email": "Email",
         "mail_description": "Enter The Email To Receive The Testing Email Of Mail Configuration."
       }
+    },
+    "qr_settings": {
+      "company_info": "Company Information",
+      "company_name": "Company Name",
+      "iban_number": "Iban No",
+      "house_no": "House Number",
+      "street_no": "Street Number",
+      "post_code": "Postal Code",
+      "city": "City"
     }
   },
   "invoice": {
@@ -1000,14 +1009,19 @@
   },
   "common": {
     "modals": {
-      "stop_reccuring":"You want you want to stop this recurring invoice",
-      "invoice_created":"Invoice Created Successfully",
-      "confirm_invoice_id":"Please confirm Invoice ID",
-      "enter_invoice_id":"Enter Invoice ID",
-      "delete_invoice":"Are you sure you want to delete this Invoice?",
-      "delete_follow_up":"Are you sure you want to delete this FollowUp?",
-      "offer_update":"Offer Updated Successfully",
-      "reject_offer":"Are you sure you want to reject this offer.",
+      "verifying_email": "We are verifying your email",
+      "verifying_des": "Please continue! Please take a second to make sure we have your correct email address",
+      "verify_email": "Verify Email address",
+      "verify_email_des1": "An email has been send to ",
+      "verify_email_des2": "Click the link in email to verify your email address",
+      "stop_reccuring": "You want you want to stop this recurring invoice",
+      "invoice_created": "Invoice Created Successfully",
+      "confirm_invoice_id": "Please confirm Invoice ID",
+      "enter_invoice_id": "Enter Invoice ID",
+      "delete_invoice": "Are you sure you want to delete this Invoice?",
+      "delete_follow_up": "Are you sure you want to delete this FollowUp?",
+      "offer_update": "Offer Updated Successfully",
+      "reject_offer": "Are you sure you want to reject this offer.",
       "email_config_created": "Email Configration Created Successfully",
       "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
@@ -1052,6 +1066,9 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "upload_img":"Upload Images",
+    "resend_button": "Resend?",
+    "continue": "Continue",
     "remove": "Remove",
     "drop_or_attach": "Drop or attach your file here",
     "file_support": "Files supported: PDF, JPG, PNG, GIF",
@@ -1247,6 +1264,7 @@
       "next_button": "Next"
     },
     "address_details": {
+      "add_new_address": "Add New Address",
       "main_heading": "Address Details",
       "edit_button": "Edit Details",
       "address": "Address",
