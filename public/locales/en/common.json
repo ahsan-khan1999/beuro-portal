@@ -373,6 +373,7 @@
   "services": {
     "main_heading": "Services",
     "add_button": "Add New",
+    "heading": "Services Details",
     "add_service_heading": "Add new Service",
     "service_detail_tab": "Service Details",
     "table_headings": {
@@ -643,6 +644,18 @@
     "main_heading": "Invoice",
     "invoice_details": "Invoice Details",
     "receipt_details": "Receipt Details",
+    "receipt_card": {
+      "receipt_id": "Receipt ID",
+      "receipt_title": "Receipt Title",
+      "worker": "Worker",
+      "content_name": "Content Name",
+      "contract_status": "Contarct Status",
+      "contract_id": "Contarct ID",
+      "total_amount": "Total Amount",
+      "offer_id": "Offer ID",
+      "payment_status": "Payment Status",
+      "email_status": "Email Status"
+    },
     "table_functions": {
       "open": "Open",
       "overdue": "Overdue",
@@ -987,6 +1000,14 @@
   },
   "common": {
     "modals": {
+      "stop_reccuring":"You want you want to stop this recurring invoice",
+      "invoice_created":"Invoice Created Successfully",
+      "confirm_invoice_id":"Please confirm Invoice ID",
+      "enter_invoice_id":"Enter Invoice ID",
+      "delete_invoice":"Are you sure you want to delete this Invoice?",
+      "delete_follow_up":"Are you sure you want to delete this FollowUp?",
+      "offer_update":"Offer Updated Successfully",
+      "reject_offer":"Are you sure you want to reject this offer.",
       "email_config_created": "Email Configration Created Successfully",
       "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
@@ -1031,6 +1052,9 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?"
     },
+    "remove": "Remove",
+    "drop_or_attach": "Drop or attach your file here",
+    "file_support": "Files supported: PDF, JPG, PNG, GIF",
     "online": "Online",
     "cash": "Cash",
     "start_date": "Start Date",
@@ -1042,10 +1066,15 @@
     "help": "help Center",
     "via_email": "Via Email",
     "via_whatsapp": "Via What'sapp",
+    "via_fb": "Via Facebook",
+    "via_insta": "Via Instagram",
     "less_then": "Less then",
     "whatsapp": "Whats'app",
     "facebook": "Facebook",
+    "insta": "Instagram",
     "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
     "days": "days",
     "true": "True",
     "false": "False",
@@ -1844,5 +1873,19 @@
     "offer": "Offers",
     "contract": "Contracts",
     "invoices": "Invoices"
+  },
+  "countries": {
+    "swiz": "Swizterland",
+    "ger": "Germany",
+    "aust": "Austria",
+    "ita": "Italy",
+    "fran": "France"
+  },
+  "offer_pdf_card": {
+    "offer_detail": "offer Details",
+    "send_post": "Send By Post",
+    "send_email": "Send Email",
+    "offer_id": "Offer ID",
+    "email_status": "Email Status"
   }
 }

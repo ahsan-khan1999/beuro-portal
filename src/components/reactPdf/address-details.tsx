@@ -87,7 +87,7 @@ export const AddressDetails = ({
             }}
           >
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-            {address.description && ` _ ${address.description}`}
+            {address.description && ` - ${address.description}`}
           </Text>
         </View>
       </View>

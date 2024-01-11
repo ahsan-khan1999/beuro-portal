@@ -316,10 +316,12 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "address.country",
               name: "address.country",
 
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: item,
-              })),
+              options: Object.entries(staticEnums.Country).map(
+                ([key, val]) => ({
+                  value: key,
+                  label: `${translate(val as string)}`,
+                })
+              ),
               control,
               value:
                 (offerDetails && offerDetails?.customerID?.address?.country) ||
@@ -529,7 +531,7 @@ export const generateDateChildren = (
               className:
                 "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
               name: `date.${i}.endDate`,
-              remove: i > 0 && "Remove",
+              remove: i > 0 && `${translate("common.remove")}`,
               onRemove: () => handleRemoveDateField(i),
               register,
               dateType: "date",
@@ -586,6 +588,7 @@ export const AddOfferDetailsDateFormField = (
   count: number,
   handleRemoveDateField: UseFieldArrayRemove
 ) => {
+  const { t: translate } = useTranslation();
   const dateField = {
     containerClass: "mb-0 ",
     label: {
@@ -618,7 +621,7 @@ export const AddOfferDetailsDateFormField = (
       className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
       id: `date.endDate`,
       name: `date.endDate`,
-      remove: "Remove",
+      remove: `${translate("common.remove")}`,
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",

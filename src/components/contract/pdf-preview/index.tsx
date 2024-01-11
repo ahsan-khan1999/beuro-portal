@@ -5,10 +5,11 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import dynamic from "next/dynamic";
-import useMergedPdfDownload from "@/components/reactPdf/generate-merged-pdf-download";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 import { PdfPreviewProps } from "@/types";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
-import { RenderPdf } from "./render-pdf";
+import OfferPdf from "@/components/offers/offer-pdf-preview";
+import { useTranslation } from "next-i18next";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -43,11 +44,10 @@ const PdfPriview = () => {
     templateSettings,
     emailTemplateSettings,
     loadingGlobal,
-    pdfFile,
     qrCodeUrl,
-    mergedPdfUrl,
     remoteFileBlob,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     dispatch,
     handleDonwload,
     handleEmailSend,
@@ -60,20 +60,21 @@ const PdfPriview = () => {
 
   const randomId = useId();
 
+  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.update_contract_heading")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
           router.back();
@@ -84,34 +85,6 @@ const PdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
-  const fileName = "`${contractData?.emailHeader?.contractNo}.pdf`";
-  const contractDataProps = useMemo(
-    () => ({
-      emailTemplateSettings,
-      templateSettings,
-      data: contractData,
-      fileName,
-      qrCode: qrCodeUrl,
-      remoteFileBlob,
-      systemSetting,
-    }),
-    [
-      emailTemplateSettings,
-      templateSettings,
-      contractData,
-      fileName,
-      qrCodeUrl,
-      remoteFileBlob,
-      systemSetting,
-    ]
-  );
-
-  const { mergedFile } = useMergedPdfDownload(contractDataProps);
-
-  useEffect(() => {
-    if (mergedFile) setPdfFile(mergedFile);
-  }, [mergedFile]);
 
   return (
     <>
@@ -132,37 +105,16 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-          <div className="flex justify-center my-5">
-            {/* {mergedPdfUrl ? (
-              <iframe
-                height="1000"
-                src={mergedPdfUrl}
-                width="100%"
-                style={{ border: "none" }}
-              />
-            ) : (
-              <LoadingState />
-            )} */}
-            <ContractPdfPreview
-              data={contractData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              systemSetting={systemSetting}
-              qrCode={qrCodeUrl}
-              remoteFileBlob={remoteFileBlob}
-            />
-            {/* <PdfDownload
-              data={contractData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              systemSetting={systemSetting}
-              qrCode={qrCodeUrl}
-              fileName={`${contractData?.emailHeader?.contractNo}.pdf`}
-            /> */}
-          </div>
-          {/* {mergedPdfUrl && <RenderPdf mergedPdfUrl={mergedPdfUrl} />} */}
+          <ContractPdfPreview
+            data={contractData}
+            emailTemplateSettings={emailTemplateSettings}
+            templateSettings={templateSettings}
+            systemSetting={systemSetting}
+            qrCode={qrCodeUrl}
+            remoteFileBlob={remoteFileBlob}
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
           {renderModal()}
         </>
       )}

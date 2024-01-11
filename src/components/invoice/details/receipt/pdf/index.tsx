@@ -6,6 +6,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useId } from "react";
+import { useTranslation } from "next-i18next";
 
 // const InvoicePdfPreview = dynamic(
 //   () => import("@/components/reactPdf/pdf-layout"),
@@ -50,21 +51,24 @@ const ReceiptPdfPreview = () => {
     dispatch,
   } = useReceiptPdf();
   const randomId = useId();
+  
 
+
+  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Status Update Successful "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.update_contract_heading")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
           router.back();
@@ -97,19 +101,6 @@ const ReceiptPdfPreview = () => {
                 : "Invoice Details"
             }
           />
-          {/* <YogaPdfContainer>
-            <div className="my-5">
-              <Pdf<InvoiceEmailHeaderProps>
-                pdfData={receiptData}
-                newPageData={newPageData}
-                templateSettings={templateSettings}
-                totalPages={calculateTotalPages}
-                isQr={true}
-                emailTemplateSettings={emailTemplateSettings}
-              />
-            </div>
-          </YogaPdfContainer> */}
-
           <>
             <InvoicePdfPreview
               data={receiptData}
@@ -117,7 +108,7 @@ const ReceiptPdfPreview = () => {
               templateSettings={templateSettings}
               qrCode={qrCodeUrl}
             />
-            <PdfDownload
+            {/* <PdfDownload
               data={receiptData}
               templateSettings={templateSettings}
               emailTemplateSettings={emailTemplateSettings}
@@ -125,7 +116,7 @@ const ReceiptPdfPreview = () => {
               setPdfFile={setPdfFile}
               fileName={`receipt-${randomId}.pdf`}
               qrCode={qrCodeUrl}
-            />
+            /> */}
           </>
           {renderModal()}
         </>
