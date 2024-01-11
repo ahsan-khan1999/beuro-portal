@@ -82,7 +82,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.flexibility")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.flexibility+" "}{translate("leads.service_details.days")}
+              {leadDetails?.flexibility || ""+" "}{translate("leads.service_details.days")}
             </div>
           </div>
           <div>

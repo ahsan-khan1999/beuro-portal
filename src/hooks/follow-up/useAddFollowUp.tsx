@@ -8,8 +8,9 @@ import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 import { Modals } from "@/enums/follow-up";
 import { createFollowUp } from "@/api/slices/followUp/followUp";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
+import { readLead } from "@/api/slices/lead/leadSlice";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -37,11 +38,12 @@ export const useAddFollowUp = (
     handleSubmit,
     control,
     setError,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
+  const customerID = watch("customer")
 
   const lookUpModals = {
     [Modals.customer]: () => handleAllCustomers(),
@@ -51,13 +53,22 @@ export const useAddFollowUp = (
   const handleModalPop = (item: Modals) => {
     lookUpModals[item]();
   };
+  
+  useMemo(() => {
+    if (customerID) {
+      dispatch(
+        readLead({
+          params: { filter: { customerID: customerID, paginate: 0 } },
+        })
+      );
+    }
+  }, [customerID])
 
   const fields = AddFollowUpFormField(
     register,
     loading,
     control,
     { customer: customer, lead: lead, followUps },
-    handleModalPop,
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(createFollowUp({ data, router, setError, translate }));

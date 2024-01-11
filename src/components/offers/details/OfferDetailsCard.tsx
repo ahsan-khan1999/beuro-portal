@@ -89,7 +89,7 @@ const OfferDetailsCard = ({
             }
             className="cursor-pointer"
           />
-          <Image
+          {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
             className="cursor-pointer"
@@ -100,7 +100,7 @@ const OfferDetailsCard = ({
             alt="printerIcon"
             className="cursor-pointer"
             onClick={handlePrint}
-          />
+          /> */}
           <Image
             src={deleteIcon}
             alt="deleteIcon"

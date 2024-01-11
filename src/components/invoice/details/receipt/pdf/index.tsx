@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 // );
 
 const InvoicePdfPreview = dynamic(
-  () => import("@/components/reactPdf/offer-pdf-preview"),
+  () => import("@/components/reactPdf/pdf-layout"),
   { ssr: false, loading: () => <LoadingState /> }
 );
 
@@ -39,9 +39,8 @@ const ReceiptPdfPreview = () => {
     templateSettings,
     activeButtonId,
     router,
-    pdfFile,
-    qrCodeUrl,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -50,7 +49,7 @@ const ReceiptPdfPreview = () => {
     onSuccess,
     dispatch,
   } = useReceiptPdf();
-  const randomId = useId();
+
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -94,40 +93,14 @@ const ReceiptPdfPreview = () => {
             activeButtonId={activeButtonId}
             title={
               router.pathname?.includes("receipt")
-                ? "Receipt Details"
-                : "Invoice Details"
+                ? `${translate("invoice.receipt_details")}`
+                : `${translate("invoice.invoice_details")}`
             }
           />
-          {/* <YogaPdfContainer>
-            <div className="my-5">
-              <Pdf<InvoiceEmailHeaderProps>
-                pdfData={receiptData}
-                newPageData={newPageData}
-                templateSettings={templateSettings}
-                totalPages={calculateTotalPages}
-                isQr={true}
-                emailTemplateSettings={emailTemplateSettings}
-              />
-            </div>
-          </YogaPdfContainer> */}
-
-          <>
-            <InvoicePdfPreview
-              data={receiptData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              qrCode={qrCodeUrl}
-            />
-            <PdfDownload
-              data={receiptData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              fileName={`receipt-${randomId}.pdf`}
-              qrCode={qrCodeUrl}
-            />
-          </>
+          <InvoicePdfPreview
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
           {renderModal()}
         </>
       )}

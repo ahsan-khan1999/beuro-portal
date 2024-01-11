@@ -153,9 +153,9 @@ const EditOffersDetailsData = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 xLarge:grid-cols-4 xLarge:gap-x-6 gap-y-6">
+      <div className="grid grid-cols-1 xLarge:grid-cols-4 gap-y-6">
         <div className="col-span-1">
-          <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
+          <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-fit">
             {tabSection.map((item, index) => (
               <OfferTabs
                 isSelected={tabType === index}
@@ -171,7 +171,7 @@ const EditOffersDetailsData = () => {
           </div>
         </div>
 
-        <div className="col-span-3">
+        <div className="col-span-3 w-full">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

@@ -461,3 +461,67 @@ input[type="number"] {
     transform: scale(calc(100vw / 1160));
   }
 }
+
+
+
+
+@media (max-width: 767px) {
+ 
+  .html-content > h2 {
+    color: #1c1c1c;
+    font-size: 20px !important;
+    /* font-family: ; */
+    font-weight: 700;
+    margin-bottom: 8px !important;
+  }
+
+  .html-content > h3 {
+    color: #1c1c1c;
+    font-size: 20px !important;
+    /* font-family: ; */
+    font-weight: 700;
+    margin-bottom: 24px !important;
+  }
+
+  .html-content > h4 {
+    color: #1c1c1c;
+    font-size: 16px !important;
+    /* font-family: ; */
+    font-weight: 600;
+    margin-bottom: 8px !important;
+  }
+  .html-content > p {
+    color: #505050;
+    margin-bottom: 22px;
+  }
+  .html-content > p > a {
+    text-decoration: underline !important;
+  }
+}
+.html-content > h2 {
+  color: #1c1c1c;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.html-content > h3 {
+  color: #1c1c1c;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.html-content > h4 {
+  color: #1c1c1c;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.html-content > p {
+  color: #505050;
+  margin-bottom: 22px;
+}
+.html-content > p > a {
+  text-decoration: underline !important;
+}

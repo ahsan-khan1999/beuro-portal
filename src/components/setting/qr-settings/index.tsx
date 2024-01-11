@@ -5,20 +5,22 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
-    const defaultClassName = "";
-    const { fields, onSubmit, handleSubmit, errors, error } = useQRSettings({handleCreation});
-    return (
-        <FormCard>
-            <Form
-                formFields={fields}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                errors={errors}
-                className={`${defaultClassName}`}
-            />
-            {/* {renderModal()} */}
-        </FormCard>
-    );
+  const defaultClassName = "";
+  const { fields, onSubmit, handleSubmit, errors, error } = useQRSettings({
+    handleCreation,
+  });
+  return (
+    <FormCard>
+      <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
+      {/* {renderModal()} */}
+    </FormCard>
+  );
 };
 
 export default QRSettings;

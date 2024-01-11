@@ -11,7 +11,7 @@ import { useMemo } from "react";
 const styles = StyleSheet.create({
   footerContainer: {
     width: 595,
-    height: 130,
+    height: 90,
     paddingVertical: 10,
     display: "flex",
     flexDirection: "row",

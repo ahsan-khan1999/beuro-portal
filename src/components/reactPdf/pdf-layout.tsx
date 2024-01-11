@@ -1,9 +1,18 @@
-import { PdfPreviewProps } from "@/types";
 import { Merger } from "./pdf-merge";
 
-const PDF = (data: PdfPreviewProps) => {
-
-  return <Merger {...{...data}} />;
+const PDF = ({
+  mergedPdfFileUrl,
+  isPdfRendering,
+}: {
+  mergedPdfFileUrl: string | null;
+  isPdfRendering?: boolean;
+}) => {
+  return (
+    <Merger
+      isPdfRendering={isPdfRendering}
+      mergedPdfFileUrl={mergedPdfFileUrl}
+    />
+  );
 };
 
 export default PDF;

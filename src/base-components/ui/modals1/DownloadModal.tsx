@@ -35,7 +35,7 @@ const DownloadModal = ({
 
           <button
             onClick={() => route()}
-            className="bg-[#4A13E7] cursor-pointer mt-[30px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
+            className="bg-[#4A13E7] cursor-pointer mt-[30px] max-w-[384px] rounded-lg p-4 text-white text-base font-medium"
           >
             {button}
           </button>

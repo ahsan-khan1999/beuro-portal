@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { useTranslation } from "next-i18next";
+import { staticEnums } from "@/utils/static";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
@@ -191,27 +192,23 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: `Less then 500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 500${
-                    systemSettings?.currency
-                  }`,
+                  label: `${translate("common.less_then")} 500${systemSettings?.currency
+                    }`,
                 },
                 {
                   value: `Less then 1000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 1000${
-                    systemSettings?.currency
-                  }`,
+                  label: `${translate("common.less_then")} 1000${systemSettings?.currency
+                    }`,
                 },
                 {
                   value: `Less then 1500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 1500${
-                    systemSettings?.currency
-                  }`,
+                  label: `${translate("common.less_then")} 1500${systemSettings?.currency
+                    }`,
                 },
                 {
                   value: `Less then 2000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 2000${
-                    systemSettings?.currency
-                  }`,
+                  label: `${translate("common.less_then")} 2000${systemSettings?.currency
+                    }`,
                 },
               ],
               control,
@@ -231,14 +228,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: [
-                {
-                  value: "Whats'app",
-                  label: `${translate("common.whatsapp")}`,
-                },
-                { value: "Facebook", label: `${translate("common.facebook")}` },
-                { value: "Instagram", label: `${translate("common.insta")}` },
-              ],
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item })),
+
               control,
             },
           },
@@ -256,7 +247,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "otherServices",
               name: "otherServices",
-              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              value: (leadDetails?.id && leadDetails?.otherServices),
               options:
                 service?.map((item) => ({
                   label: item.serviceName,

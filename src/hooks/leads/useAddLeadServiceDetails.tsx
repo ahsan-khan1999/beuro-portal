@@ -29,7 +29,7 @@ export const useAddLeadServiceDetails = ({
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readService({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const {

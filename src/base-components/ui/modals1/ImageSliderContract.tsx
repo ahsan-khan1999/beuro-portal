@@ -4,12 +4,21 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Slider } from "../slider/slider";
 import { contractTableTypes } from "@/types/contract";
+import { useTranslation } from "next-i18next";
 
-const ImageSliderContract = ({ onClose, details }: { onClose: () => void, details: contractTableTypes }) => {
+const ImageSliderContract = ({
+  onClose,
+  details,
+}: {
+  onClose: () => void;
+  details: contractTableTypes;
+}) => {
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
-    images: details?.offerID?.images?.map((item) => ({ imageSrc: item }))
+    images: details?.offerID?.images?.map((item) => ({ imageSrc: item })),
   };
+
+  const { t: translate } = useTranslation();
 
   return (
     <>
@@ -26,7 +35,7 @@ const ImageSliderContract = ({ onClose, details }: { onClose: () => void, detail
           />
 
           <p className="text-[24px] leading-6 font-medium text-[#000] mb-5">
-            Uploaded Images
+            {translate("common.upload_img")}
           </p>
 
           <hr className="opacity-25 mb-6" />

@@ -98,7 +98,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
         field: {
           type: Field.textArea,
           className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-          rows: 8,
+          rows: 2,
           id: `description-${i}`,
           name: `description-${i}`,
           placeholder:

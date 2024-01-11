@@ -11,8 +11,10 @@ export default function EmailVarficiation() {
   const { t: translate } = useTranslation();
 
   const data = {
-    heading: " Verify Email address",
-    description: `An email has been send to ${user?.email} Click the link in email to verify your email address`,
+    heading: `${translate("common.modals.verify_email")}`,
+    description: `${translate("common.modals.verify_email_des1")} ${
+      user?.email
+    } ${translate("common.modals.verify_email_des2")}`,
   };
   return <EmailConfirmation data={data} />;
 }

@@ -11,12 +11,12 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [ChangePasswordField.oldPassword]: yup
       .string()
-      .required(translate("validationMessage.required"))
+      .required(translate("validationMessages.required"))
       .min(6, translate("validationMessages.string.min")),
 
     [ChangePasswordField.newPassword]: yup
       .string()
-      .required(translate("validationMessage.required"))
+      .required(translate("validationMessages.required"))
       .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
 
       .min(6, translate("validationMessages.string.min")),
@@ -44,7 +44,13 @@ export const generateAddTaxValidationSchema = (translate: Function) => {
 // Validation for Add new note
 export const generateAddNewNoteValidation = (translate: Function) => {
   return yup.object().shape({
-    [AddNewNote.noteMessage]: yup.string().required(translate("validationMessage.required")),
+    [AddNewNote.noteMessage]: yup.string().required(translate("validationMessages.required")),
+  });
+};
+
+export const generateRejectOfferValidation = (translate: Function) => {
+  return yup.object().shape({
+    "reason": yup.string().required(translate("validationMessages.required")),
   });
 };
 
@@ -53,12 +59,12 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
   return yup.object().shape({
     [EditPaymentDetails.nameOnCard]: yup
       .string()
-      .required(translate("validationMessage.required")),
-    [EditPaymentDetails.expiry]: yup.string().required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
+    [EditPaymentDetails.expiry]: yup.string().required(translate("validationMessages.required")),
     [EditPaymentDetails.cardNumber]: yup
       .string()
-      .required(translate("validationMessage.required")),
-    [EditPaymentDetails.cvv]: yup.string().required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
+    [EditPaymentDetails.cvv]: yup.string().required(translate("validationMessages.required")),
   });
 };
 

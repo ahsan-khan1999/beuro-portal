@@ -19,7 +19,7 @@ export default function SelectField({
   isSearch,
 }: OptionsFieldProps) {
   const defaultClasses = ` flex items-center`;
-  const containerClasses = combineClasses(defaultClasses, containerClassName);
+  const containerClasses = combineClasses("relative flex items-center justify-center min-w-[120px] w-fit", containerClassName);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export default function SelectField({
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
   return (
     <div
-      className="relative flex items-center justify-center min-w-[120px] w-fit"
+      className={containerClasses}
       ref={ref}
     >
       <div

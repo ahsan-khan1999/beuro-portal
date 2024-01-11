@@ -1,17 +1,13 @@
 import { Layout } from "@/layout";
 import React from "react";
 import ComposeMail from "./ComposeMail";
-
-import { useRouter } from "next/router";
 import InvoiceCardLayout from "@/layout/invoice";
-import InvoiceDetailsData from "../details/InvoiceDetailsData";
-import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
 import MailDetailsCard from "./MailDetailsCard";
-import { useAppSelector } from "@/hooks/useRedux";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 
 const ReceiptEmail = () => {
-  const router = useRouter();
+  const { loading, activeButtonId, router, handleEmailSend, handleSendByPost } =
+    useReceiptPdf();
 
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
@@ -19,15 +15,17 @@ const ReceiptEmail = () => {
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
-  const { loading } = useAppSelector(state => state.invoice)
 
   return (
     <>
-
       <Layout>
         <InvoiceCardLayout>
-          <MailDetailsCard />
-
+          <MailDetailsCard
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+          />
         </InvoiceCardLayout>
 
         <div className="flex mt-[12px] mb-[18px]">
@@ -38,8 +36,6 @@ const ReceiptEmail = () => {
         </div>
       </Layout>
     </>
-
-
   );
 };
 

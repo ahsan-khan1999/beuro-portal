@@ -99,7 +99,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-        rows: 8,
+        rows: 2,
         id: "description",
         name: "description",
         placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",

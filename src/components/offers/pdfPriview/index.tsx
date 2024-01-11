@@ -2,11 +2,17 @@ import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
-const OfferPdf = dynamic(() => import("@/components/reactPdf/offer-pdf-preview"), { ssr: false, loading: () => <LoadingState /> });
-const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
+const OfferPdf = dynamic(
+  () => import("@/components/reactPdf/offer-pdf-preview"),
+  { ssr: false, loading: () => <LoadingState /> }
+);
+const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
+  ssr: false,
+});
 
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
+import { useTranslation } from "next-i18next";
 
 const PdfPriview = () => {
   const {
@@ -25,15 +31,15 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
-    systemSetting
+    systemSetting,
   } = useOfferPdf();
-
+  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),
@@ -71,23 +77,22 @@ const PdfPriview = () => {
               </div>
             </YogaPdfContainer> */}
 
-       
-            <div className="flex justify-center my-5">
-              <OfferPdf
-                data={offerData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-                systemSetting={systemSetting}
-              />
-              <OfferPdfDownload
-                data={offerData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                systemSetting={systemSetting}
-              />
-            </div>
+          <div className="flex justify-center my-5">
+            <OfferPdf
+              data={offerData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+            />
+            <OfferPdfDownload
+              data={offerData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+            />
+          </div>
 
           {renderModal()}
         </div>

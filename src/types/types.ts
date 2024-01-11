@@ -20,7 +20,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from './auth';
+import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -233,7 +233,7 @@ export type GenerateQRCodeSettingFormField = (
   onRemove: UseFieldArrayRemove,
   count: number,
   user: User,
-  handleOnChangeStatus?: (index?:string ,value?: string) => void
+  handleOnChangeStatus?: (index?: string, value?: string) => void
 ) => FormField[];
 
 // change mail setting formfield
@@ -257,7 +257,9 @@ export type GenerateAddReasonFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  control?:Control,
+  reason?:string
 ) => FormField[];
 
 // change/Reset password formfield
@@ -525,7 +527,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null },
+  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -594,6 +596,7 @@ export interface FilterType {
   email?: string[] | string;
   price?: string[];
   month?: number;
+  leadSource?:string[] | string
 }
 
 export interface MoreFilterType {
@@ -608,6 +611,9 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
+  leadSource?:string[] | string
+
+
 }
 export interface FilterProps {
   filter: FilterType;
@@ -645,7 +651,7 @@ export interface ProductItemFooterProps {
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isInvoice?: boolean;
-  systemSettings?: SystemSetting | null
+  systemSettings?: SystemSetting | null;
 }
 
 export interface ContactDetailsProps {
@@ -838,7 +844,10 @@ export interface PdfPreviewProps {
   setPdfFile?: SetStateAction<any>;
   fileName?: string;
   qrCode?: string;
+  remoteFileBlob?: Blob | null;
   systemSetting?: SystemSetting | null;
+  mergedPdfFileUrl?: string | null;
+  isPdfRendering?: boolean;
 }
 
 export interface PdfPreviewFooterProps {
@@ -853,7 +862,6 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -866,7 +874,6 @@ export interface PurchasedItemDetailsNextPageProps {
   currPage: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 
 export interface qrCode {
@@ -918,7 +925,7 @@ export interface AggrementProps {
   isSignatureDone?: boolean;
   emailTemplateSettings?: EmailTemplate | null;
   setOfferSignature?: SetStateAction<any>;
-  systemSettings?: SystemSetting | null
+  systemSettings?: SystemSetting | null;
 }
 
 export interface FiltersComponentProps {
@@ -935,4 +942,10 @@ export interface ContractEmailHeaderProps {
   onPrint: () => void;
   worker: string;
   contractTitle: string;
+}
+export interface InvoiceEmailCardProps {
+  activeButtonId: string | null;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost: () => void;
 }

@@ -295,7 +295,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                rows: 8,
+                rows: 2,
                 id: `serviceDetail.${i}.description`,
                 name: `serviceDetail.${i}.description`,
                 placeholder: `${translate(
@@ -381,7 +381,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       type: Field.textArea,
                       className:
                         "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                      rows: 8,
+                      rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
                       placeholder: `${translate(
@@ -413,10 +413,10 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                           },
                         },
                         {
-                          containerClass: "mb-0 pr-2 mt-2",
+                          containerClass: "mb-0 pr-2 mt-2 mb-5",
                           field: {
                             type: Field.span,
-                            className: "!p-4  w-full ",
+                            className: "!p-4  w-full",
                             id: "span-field",
                             text: `${translate(
                               "offers.service_details.add_new_service"
@@ -560,7 +560,7 @@ const generateServiceCalulationChildren = (
                 },
               },
               {
-                containerClass: "mb-0 border-r border-lightGray pr-[2px]",
+                containerClass: "mb-0",
                 field: {
                   type: Field.span,
                   className: "! !border-[#BFBFBF] focus:!border-primary w-full",
@@ -625,7 +625,7 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
+          containerClass: "mb-0 py-2 space-x-5 border-b  border-lightGray",
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
@@ -645,10 +645,10 @@ const generateServiceCalulationChildren = (
               },
 
               {
-                containerClass: "mb-0 border-r border-lightGray pr-2",
+                containerClass: "mb-0",
                 field: {
                   type: Field.span,
-                  className: "!border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!border-[#BFBFBF] focus:!border-primary",
                   id: "span-field",
                   text: `${translate(
                     "offers.service_details.detail_headings.discount"
