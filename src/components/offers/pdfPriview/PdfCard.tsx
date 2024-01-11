@@ -61,7 +61,7 @@ const EmailCard = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
-
+{/* 
           <IconOnlyButton
             icon={<Image src={downloadIcon} alt="downloadIcon" />}
             onClick={onDownload}
@@ -69,7 +69,7 @@ const EmailCard = ({
           <IconOnlyButton
             icon={<Image src={printerIcon} alt="printerIcon" />}
             onClick={onPrint}
-          />
+          /> */}
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />

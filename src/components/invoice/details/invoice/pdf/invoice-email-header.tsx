@@ -65,7 +65,7 @@ export const InvoiceEmailHeader = ({
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
 
-          <Image
+          {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
             className="cursor-pointer"
@@ -76,7 +76,7 @@ export const InvoiceEmailHeader = ({
             alt="printerIcon"
             className="cursor-pointer"
             onClick={onPrint}
-          />
+          /> */}
         </div>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
