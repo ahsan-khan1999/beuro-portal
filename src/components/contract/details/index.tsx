@@ -15,10 +15,12 @@ const ContractDetails = () => {
     handleNotes,
     handlePaymentStatusUpdate,
     handleStatusUpdate,
-    handleSendEmail, isSendEmail, setIsSendEmail, onNextHandle,
+    handleSendEmail,
+    isSendEmail,
+    setIsSendEmail,
+    onNextHandle,
     loading,
     handleViewPdf,
-
   } = useContractDetail();
 
   return (
@@ -33,18 +35,22 @@ const ContractDetails = () => {
         handleSendEmail={handleSendEmail}
       />
       <div className="my-4">
-        {contractDetails?.signedContracts && contractDetails?.signedContracts?.length > 0 &&
-          <DetailsData contractDetails={contractDetails} handleViewPdf={handleViewPdf} />
-        }
+        {contractDetails?.signedContracts &&
+          contractDetails?.signedContracts?.length > 0 && (
+            <DetailsData
+              contractDetails={contractDetails}
+              handleViewPdf={handleViewPdf}
+            />
+          )}
       </div>
-      {
-        isSendEmail ?
-          <ComposeMail
-            backRouteHandler={handleSendEmail}
-            onNextHandle={onNextHandle}
-          />
-          :
-          <ContractDetailsData loading={loading} />}
+      {isSendEmail ? (
+        <ComposeMail
+          backRouteHandler={handleSendEmail}
+          onNextHandle={onNextHandle}
+        />
+      ) : (
+        <ContractDetailsData loading={loading} />
+      )}
 
       {renderModal()}
     </Layout>

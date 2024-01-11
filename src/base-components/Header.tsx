@@ -29,7 +29,7 @@ const Header = () => {
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
-      dispatch(readSystemSettings())
+      dispatch(readSystemSettings());
     }
   }, [user]);
 

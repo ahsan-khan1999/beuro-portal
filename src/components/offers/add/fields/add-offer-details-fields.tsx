@@ -440,9 +440,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
         control,
         // value:""
-        value:
-          (lead?.length === 1 && offerDetails?.id && lead[0]?.id) ||
-          (offerDetails?.id && offerDetails?.leadID?.id) ||
+        value:offerDetails?.id && offerDetails?.leadID?.id ||
+          (lead && lead?.length > 0 &&  lead[0]?.id) ||
           leadID,
         // disabled: offerDetails?.leadID?.id ? true : false,
       },

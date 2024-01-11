@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   readInvoice,
+  sendOfferByPost,
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
@@ -35,9 +36,9 @@ const useInvoice = () => {
     status: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
-
   const itemsPerPage = 10;
 
+  const [isSendEmail, setIsSendEmail] = useState(false);
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   // useMemo(() => {
@@ -53,9 +54,11 @@ const useInvoice = () => {
       if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
     });
   };
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+  
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -103,29 +106,62 @@ const useInvoice = () => {
       const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
       setFilter({
         ...filter,
-        status: [statusValue?.toString()]
+        status: [statusValue?.toString()],
       });
-      dispatch(readInvoice({ params: { filter: { ...filter, status: [staticEnums["InvoiceStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-        }
-      );
+      dispatch(
+        readInvoice({
+          params: {
+            filter: {
+              ...filter,
+              status: [staticEnums["InvoiceStatus"][query?.filter as string]],
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+      });
     } else {
       setFilter({
         ...filter,
-        status: "None"
+        status: "None",
       });
-      dispatch(readInvoice({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-        }
-      );
+      dispatch(
+        readInvoice({
+          params: {
+            filter: { ...filter, status: "None" },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+      });
     }
   }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
+  const invoiceCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: invoiceDetails?.id,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload) invoiceCreatedHandler();
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -138,6 +174,10 @@ const useInvoice = () => {
     filter,
     setFilter,
     loading,
+    isSendEmail,
+    handleSendEmail,
+    handleSendByPost,
+    invoiceDetails,
   };
 };
 

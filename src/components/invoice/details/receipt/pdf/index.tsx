@@ -93,8 +93,8 @@ const ReceiptPdfPreview = () => {
             activeButtonId={activeButtonId}
             title={
               router.pathname?.includes("receipt")
-                ? "Receipt Details"
-                : "Invoice Details"
+                ? `${translate("invoice.receipt_details")}`
+                : `${translate("invoice.invoice_details")}`
             }
           />
           <InvoicePdfPreview

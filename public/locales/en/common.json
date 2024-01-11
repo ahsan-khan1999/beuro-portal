@@ -1064,9 +1064,10 @@
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
-      "delete_content": "Are you sure want to delete this content?"
+      "delete_content": "Are you sure want to delete this content?",
+      "update_success": "Congratulations! Your update was successful."
     },
-    "upload_img":"Upload Images",
+    "upload_img": "Upload Images",
     "resend_button": "Resend?",
     "continue": "Continue",
     "remove": "Remove",
@@ -1109,6 +1110,7 @@
     "search": "Search...",
     "drag_table": "Drag to scroll on the table",
     "sort_button": "Sort By",
+    "source": "Lead Source",
     "privacy": "Privacy Policy",
     "copy_right": "Copyright 2024",
     "better_management": "Better management",
@@ -1351,7 +1353,7 @@
       "offer_title": "Please Enter Your Offer Title",
       "street": "Please Enter Street Number",
       "post_code": "Please Enter Your Post Code",
-      "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s.",
+      "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "service_title": "Please Enter Your service Name"
     }
   },
@@ -1868,7 +1870,8 @@
       "failed": "Failed",
       "pending": "Pending",
       "overdue": "Overdue",
-      "paid": "Paid"
+      "paid": "Paid",
+      "leadSource": "Lead Source"
     }
   },
   "global_search": {

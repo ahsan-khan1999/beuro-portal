@@ -200,7 +200,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center !!mb-0 py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary  ",
+                "flex justify-between items-center !!mb-0 py-3  !px-4  border rounded-lg !border-dark focus:!border-primary  ",
               children: [
                 {
                   field: {
@@ -235,7 +235,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+                "flex justify-between py-3 !px-4 border rounded-lg !border-dark focus:!border-primary ",
               children: [
                 {
                   field: {
@@ -272,7 +272,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between py-3  !px-4  border-[1px] rounded-lg !border-dark focus:!border-primary ",
+                "flex justify-between py-3 !px-4 border rounded-lg !border-dark focus:!border-primary ",
               children: [
                 {
                   field: {
@@ -280,7 +280,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
 
                     id: "test",
                     name: "apiFeatures",
-                    text: `${translate("admin.plan_details.enable_apisur")}`,
+                    text: `${translate("admin.plan_details.enable_api")}`,
                     containerClassName: "",
                   },
                 },
@@ -315,7 +315,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               text: `${translate("admin.plan_details.back_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `px-4 py-[10px] w-[92px] font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${
+              className: `px-4 py-[10px] min-w-[92px] w-fit font-medium border border-[#C7C7C7] hover:bg-none bg-white text-dark ${
                 isUpdate && "hidden"
               }`,
             },
@@ -327,7 +327,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               id: "button",
               text: `${translate("admin.plan_details.save_button")}`,
               inputType: "submit",
-              className: `px-4  w-[152px] hover:bg-none ${
+              className: `px-4 min-w-[152px] w-fit hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,

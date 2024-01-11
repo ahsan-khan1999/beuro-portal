@@ -284,7 +284,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   field: {
                     type: Field.button,
                     id: "div-field",
-                    className: `rounded-lg px-4 w-[152px] h-[50px] !bg-red  text-white hover:bg-none ${
+                    className: `rounded-lg px-4 min-w-[132px] w-fit !h-[40px] !bg-red text-white hover:bg-none ${
                       i < 1 && "hidden"
                     }`,
                     inputType: "button",

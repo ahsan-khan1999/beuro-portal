@@ -643,8 +643,8 @@
   },
   "invoice": {
     "main_heading": "Rechnung",
-    "invoice_details": "Rechnungsdetails",
-    "receipt_details": "Belegdetails",
+    "invoice_details": "Details der Rechnung",
+    "receipt_details": "Details der Quittung",
     "receipt_card": {
       "receipt_id": "Quittung ID",
       "receipt_title": "Titel der Quittung",
@@ -1053,7 +1053,8 @@
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
       "plan_created": "Datensatz erfolgreich erstellt",
-      "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind."
+      "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
+      "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
     "upload_img": "Bilder hochladen",
     "resend_button": "Erneut senden?",
@@ -1098,6 +1099,8 @@
     "search": "Suche...",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
+    "source": "Bleiquelle",
+
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
     "better_management": "Besseres Management",
@@ -1341,7 +1344,7 @@
       "offer_title": "Bitte geben Sie Ihren Angebotenamen ein",
       "street": "Bitte geben Sie die Straßennummer ein",
       "post_code": "Bitte geben Sie Ihre Postleitzahl ein",
-      "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie. Lorem Ipsum ist seit den 1500er Jahren der Standard-Blindtext der Industrie.",
+      "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie.",
       "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
     }
   },
@@ -1859,7 +1862,8 @@
       "failed": "Fehlgeschlagen",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
-      "paid": "Bezahlt"
+      "paid": "Bezahlt",
+      "leadSource": "Bleiquelle"
     }
   },
   "global_search": {

@@ -32,6 +32,7 @@ const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), {
 import dynamic from "next/dynamic";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
+import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
 
 export const SignPdf = <T,>({
   newPageData,
@@ -116,7 +117,7 @@ export const SignPdf = <T,>({
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
   const onSuccess = () => {
-    router.push("/login");
+    router.push("https://buero-365.com/");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -138,6 +139,14 @@ export const SignPdf = <T,>({
     ),
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.offer_created")}
+        modelSubHeading={translate("common.modals.admin_setting_des")}
+        routeHandler={onSuccess}
+      />
+    ),
+    [ModalType.REJECT_OFFER]: (
+      <RejectOffer
         onClose={onClose}
         modelHeading={translate("common.modals.offer_update")}
         modelSubHeading={translate("common.modals.admin_setting_des")}

@@ -21,6 +21,6 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
 
     [ContractEmailPreview.fileUpload]: yup
       .array().of(yup.string()
-        .required(translate("validationMessages.required")))
+        .notRequired()).notRequired()
   });
 };
