@@ -82,7 +82,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       );
   }, [customerID]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (offerDetails?.id) {
       reset({
         type: "Existing Customer",
@@ -170,19 +170,33 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        title:null
+        title: null
       });
-    }else if(type === "Existing Customer"){
+    } else if (type === "Existing Customer" && offerDetails?.id) {
+      reset({
+        type: "Existing Customer",
+        customerID: offerDetails?.leadID?.customerID,
+        leadID: offerDetails?.leadID?.id,
+        customerType: getKeyByValue(
+          staticEnums["CustomerType"],
+          offerDetails?.leadID?.customerDetail?.customerType
+        ),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title: offerDetails?.title,
+        address: offerDetails?.leadID?.customerDetail?.address,
+        date: offerDetails?.date,
+      });
+    } else if(type === "Existing Customer" && !offerDetails?.id){
       dispatch(setLeads([]))
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
-      setValue("content",null)
-      setValue("title",null)
-      setValue("leadID",null)
-
-
-
-      
-    } 
+      setValue("content", null)
+      setValue("title", null)
+      setValue("leadID", null)
+    }
   }, [type]);
 
   const dateFields = AddDateFormField(
