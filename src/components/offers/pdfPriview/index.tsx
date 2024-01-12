@@ -63,36 +63,22 @@ const PdfPriview = () => {
             handleSendByPost={handleSendByPost}
             activeButtonId={activeButtonId}
           />
-          {/* <YogaPdfContainer>
 
-              <div className="flex justify-center my-5">
-                <Pdf<EmailHeaderProps>
-                  pdfData={offerData}
-                  newPageData={newPageData}
-                  templateSettings={templateSettings}
-                  totalPages={calculateTotalPages}
-                  emailTemplateSettings={emailTemplateSettings}
-
-                />
-              </div>
-            </YogaPdfContainer> */}
-
-          <div className="flex justify-center my-5">
-            <OfferPdf
-              data={offerData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              systemSetting={systemSetting}
-            />
-            <OfferPdfDownload
-              data={offerData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              systemSetting={systemSetting}
-            />
-          </div>
+          <OfferPdf
+            data={offerData}
+            emailTemplateSettings={emailTemplateSettings}
+            templateSettings={templateSettings}
+            systemSetting={systemSetting}
+            showContractSign={true}
+          />
+          <OfferPdfDownload
+            data={offerData}
+            templateSettings={templateSettings}
+            emailTemplateSettings={emailTemplateSettings}
+            pdfFile={pdfFile}
+            setPdfFile={setPdfFile}
+            systemSetting={systemSetting}
+          />
 
           {renderModal()}
         </div>

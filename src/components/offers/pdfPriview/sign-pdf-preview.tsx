@@ -1,89 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react";
-import EmailCard from "./PdfCard";
-import { Pdf } from "@/components/pdf/pdf";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
-  readOfferDetails,
   readOfferPublicDetails,
   sendOfferEmail,
-  updateOfferStatus,
 } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
-import {
-  OffersTableRowTypes,
-  PublicOffersTableRowTypes,
-  ServiceList,
-} from "@/types/offers";
-import {
-  AcknowledgementSlipProps,
-  CompanySettingsActionType,
-  EmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
-import {
-  SystemSetting,
-  getTemplateSettings,
-} from "@/api/slices/settingSlice/settings";
+import { PublicOffersTableRowTypes, ServiceList } from "@/types/offers";
+import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { ModalType } from "@/enums/ui";
 import { SignPdf } from "@/components/pdf/sign-pdf";
-import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
-import { staticEnums } from "@/utils/static";
-import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
-
-export const productItems: ServiceList[] = [
-  {
-    serviceTitle: "3 Mitarbeiter ohne Farzeung",
-    description:
-      "Arbeit nach Aufwand. Mindestbetrag 4 Stunden. Nur die grossen.",
-    price: 150,
-    count: 2,
-    serviceType: "",
-    totalPrice: 1000,
-    unit: "1",
-  },
-];
-
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 
 export const DUMMY_DATA: PdfProps = {
   emailHeader: { emailStatus: "pending", offerNo: "23-A" },
@@ -116,7 +48,7 @@ export const DUMMY_DATA: PdfProps = {
     ],
     workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
   },
-  serviceItem: productItems,
+  serviceItem: [],
   serviceItemFooter: {
     subTotal: "2000CHF",
     tax: "100CHF (7.7%)",
@@ -133,10 +65,6 @@ export const DUMMY_DATA: PdfProps = {
     totalPages: 0,
     emailTemplateSettings: null,
   },
-  qrCode: {
-    acknowledgementSlip: qrCodeAcknowledgementData,
-    payableTo: qrCodePayableToData,
-  },
   aggrementDetails: "",
 };
 interface ActionType {
@@ -146,7 +74,7 @@ interface ActionType {
 
 const SignPdfPreview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
+  const [offerData, setOfferData] = useState<PdfProps | null>(null);
 
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
@@ -260,10 +188,6 @@ const SignPdfPreview = () => {
                 currPage: 1,
                 totalPages: calculateTotalPages,
               },
-              qrCode: {
-                acknowledgementSlip: qrCodeAcknowledgementData,
-                payableTo: qrCodePayableToData,
-              },
               aggrementDetails:
                 offerDetails?.Offer?.content?.offerContent?.description || "",
               isOffer: true,
@@ -343,7 +267,7 @@ const SignPdfPreview = () => {
     }
   }, [offerID]);
 
-  const totalItems = offerData?.serviceItem?.length;
+  const totalItems = offerData?.serviceItem?.length || 0;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
@@ -384,19 +308,21 @@ const SignPdfPreview = () => {
   return loading ? (
     <LoadingState />
   ) : (
-    <YogaPdfContainer>
-      <div className="my-5">
-        <SignPdf<EmailHeaderProps>
-          pdfData={offerData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          action={action as string}
-          emailTemplateSettings={emailTemplateSettings}
-          systemSettings={systemSetting}
-        />
-      </div>
-    </YogaPdfContainer>
+    offerData && (
+      <YogaPdfContainer>
+        <div className="my-5">
+          <SignPdf<EmailHeaderProps>
+            pdfData={offerData}
+            newPageData={newPageData}
+            templateSettings={templateSettings}
+            totalPages={calculateTotalPages}
+            action={action as string}
+            emailTemplateSettings={emailTemplateSettings}
+            systemSettings={systemSetting}
+          />
+        </div>
+      </YogaPdfContainer>
+    )
   );
 };
 

@@ -75,7 +75,11 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         setIsSubmitted(true);
         //@ts-expect-error
         setIsSignatureDone && setIsSignatureDone(true);
-        smoothScrollToSection("#acceptOffer")
+        // smoothScrollToSection("#acceptOffer")
+
+        // Function to handle scrolling
+
+       
         // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
 
       }

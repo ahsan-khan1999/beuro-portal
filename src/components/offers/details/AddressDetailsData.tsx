@@ -27,7 +27,7 @@ const AddressDetailsData = ({
           onClick={() =>
             router.push({
               pathname: "/offers/edit",
-              query: { offer: offerDetails?.id },
+              query: { offer: offerDetails?.id, tab: 1 },
             })
           }
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
