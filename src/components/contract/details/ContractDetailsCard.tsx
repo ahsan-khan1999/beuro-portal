@@ -52,10 +52,10 @@ const ContractDetailsCard = ({
         <div className="flex gap-x-[22px]">
           <button
             onClick={handleSendEmail}
-            className="w-fit border-[1px] border-[#C7C7C7] rounded-lg flex  items-center px-4 py-[6px] "
+            className="w-fit border-[1px] border-primary rounded-lg flex items-center px-4 py-[6px]"
           >
             <Image src={cofirmation_icon} alt="create_offer_icon" />
-            <span className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
+            <span className="font-medium text-[16px] text-primary ml-[10px]">
               {translate("contracts.card_content.confirm_button")}
             </span>
           </button>
