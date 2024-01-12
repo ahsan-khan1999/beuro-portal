@@ -24,6 +24,19 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
+        containerClass: "mb-0 relative -top-4 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: "Remove",
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 1 && "hidden"
+          }`,
+          onClick: handleRemoveAddress && handleRemoveAddress,
+        },
+      },
+      {
         containerClass: "mt-6 ",
         label: {
           text: translate("leads.address_details.heading"),
@@ -117,19 +130,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 register,
               },
             },
-            {
-              containerClass: "mb-0 absolute -top-44 right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: "Remove",
-                inputType: "button",
-                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 1 && "hidden"
-                }`,
-                onClick: handleRemoveAddress && handleRemoveAddress,
-              },
-            },
           ],
         },
       }
@@ -141,46 +141,54 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex space-x-[18px] ",
+      className: "flex justify-between",
       children: [
         {
+          field: {
+            className: "flex gap-x-[18px]",
+            type: Field.div,
+            id: "div-field",
+            children: [
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.back_button")}`,
+                  inputType: "button",
+                  className:
+                    "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+                  onClick: () =>
+                    onHandleBack && onHandleBack(ComponentsType.customerAdd),
+                },
+              },
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.next_button")}`,
+                  inputType: "submit",
+                  className:
+                    "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
+                  loading,
+                },
+              },
+            ],
+          },
+        },
+        {
           containerClass: "mb-0",
           field: {
             type: Field.button,
             id: "button",
-            text: `${translate("leads.address_details.back_button")}`,
+            text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
-            className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-            onClick: () =>
-              onHandleBack && onHandleBack(ComponentsType.customerAdd),
-          },
-        },
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            text: `${translate("leads.address_details.next_button")}`,
-            inputType: "submit",
-            className:
-              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
-            loading,
-          },
-        },
-
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            className: ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4   h-[40px] text-white hover-bg-none ${
+            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
               count === 2 && "hidden"
             }`,
             onClick: handleAddNewAddress && handleAddNewAddress,
-            icon: icon,
-            name: "",
-            // icon
+            loading,
           },
         },
       ],

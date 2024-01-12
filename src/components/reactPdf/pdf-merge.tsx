@@ -1,4 +1,5 @@
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useEffect } from "react";
 
 export const Merger = ({
   mergedPdfFileUrl,
@@ -7,6 +8,13 @@ export const Merger = ({
   mergedPdfFileUrl: string | null;
   isPdfRendering?: boolean;
 }) => {
+  useEffect(() => {
+    const downloadButton = document.getElementById("download");
+    if (downloadButton) {
+      downloadButton.setAttribute("download", "desiredFilename.pdf");
+    }
+  }, []);
+
   return isPdfRendering ? (
     <LoadingState />
   ) : (
@@ -19,7 +27,12 @@ export const Merger = ({
       //   style={{ border: "none" }}
       // />
 
-      <embed src={mergedPdfFileUrl} width={"100%"} height={"700px"} />
+      <embed
+        src={mergedPdfFileUrl}
+        width={"100%"}
+        height={"700px"}
+        title="PDF"
+      />
     )
   );
 };

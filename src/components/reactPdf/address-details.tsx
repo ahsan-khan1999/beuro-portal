@@ -79,8 +79,9 @@ export const AddressDetails = ({
           </Text>
           <Text
             style={{
-              fontSize: 12,
-              fontWeight: "medium",
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
               color: "#000",
               width: 450,
               textAlign: "justify",

@@ -374,7 +374,7 @@ const OfferSignedPdf = ({
     // if (response?.payload) { dispatch(updateModalType({ type: ModalType.REJECT_OFFER })) }
   };
   return (
-    <div className="download-link">
+    <div className="download-link" id="gohere">
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
