@@ -198,7 +198,7 @@ const ContentDetailsData = () => {
         ))}
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[600px] xl:mt-0 mt-4 overflow-scroll">
+      <div className="flex flex-col gap-y-5 w-full h-screen xl:mt-0 mt-4 overflow-scroll">
         {
           // loading ? (
           //   <LoadingState />
