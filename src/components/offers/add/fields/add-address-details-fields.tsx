@@ -30,6 +30,19 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 0; i < count; i++) {
     formField.push(
       {
+        containerClass: "mb-0 relative -top-4 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove_button")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
+            i === 0 && "hidden"
+          }`,
+          onClick: () => handleRemoveAddress && handleRemoveAddress(i),
+        },
+      },
+      {
         containerClass: "mt-6 ",
         label: {
           text: `Address ${i} Details`,
@@ -101,14 +114,14 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
         },
       },
       {
-        containerClass: "mt-6",
+        containerClass: "mt-6 relative",
         field: {
           type: Field.div,
           id: "div-field",
           className: "grid grid-cols-1 relative w-full space-x-[18px] ",
           children: [
             {
-              containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
+              containerClass: "mt-5 mb-0 pb-10 border-b-2 border-lightGray",
               label: {
                 text: translate("offers.address_details.description"),
                 htmlFor: `address.${i}.description`,
@@ -116,26 +129,13 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.textArea,
-                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 rows: 2,
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
                 placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s.",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 register,
-              },
-            },
-            {
-              containerClass: "mb-0 absolute -top-44 right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: `${translate("common.remove_button")}`,
-                inputType: "button",
-                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
-                  i === 0 && "hidden"
-                }`,
-                onClick: () => handleRemoveAddress && handleRemoveAddress(i),
               },
             },
           ],
@@ -187,33 +187,15 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
         {
           containerClass: "mb-0",
           field: {
-            type: Field.div,
-            id: "div-field",
-            className: " flex items-center gap-x-[18px]",
-            children: [
-              {
-                containerClass: "mb-0 pr-2 mt-2",
-                field: {
-                  type: Field.span,
-                  id: "span-field",
-                  text: `${translate(
-                    "offers.address_details.add_new_address"
-                  )}`,
-                },
-              },
-              {
-                containerClass: "mb-0",
-                field: {
-                  type: Field.button,
-                  id: "button",
-                  className: `rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 px-4   h-[40px] text-white hover-bg-none`,
-                  onClick: () =>
-                    handleAddNewAddress && handleAddNewAddress(addressObject),
-                  icon: icon,
-                  name: "",
-                },
-              },
-            ],
+            type: Field.button,
+            id: "button",
+            text: `${translate("offers.address_details.add_new_address")}`,
+            inputType: "button",
+            className:
+              "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+            onClick: () =>
+              handleAddNewAddress && handleAddNewAddress(addressObject),
+            loading,
           },
         },
       ],

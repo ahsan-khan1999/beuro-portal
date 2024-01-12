@@ -440,8 +440,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
         control,
         // value:""
-        value:offerDetails?.id && offerDetails?.leadID?.id ||
-          (lead && lead?.length > 0 &&  lead[0]?.id) ||
+        value:
+          (offerDetails?.id && offerDetails?.leadID?.id) ||
+          (lead && lead?.length > 0 && lead[0]?.id) ||
           leadID,
         // disabled: offerDetails?.leadID?.id ? true : false,
       },
@@ -498,11 +499,11 @@ export const generateDateChildren = (
 
       field: {
         type: Field.div,
-        className: "grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-5",
+        className: "grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-5 mb-5",
         id: `date`,
         children: [
           {
-            containerClass: "mb-0",
+            containerClass: "mb-0 ",
             label: {
               text: `${translate("common.start_date")}`,
               htmlFor: `date.${i}.startDate`,
@@ -541,7 +542,7 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "-mb-7 mt-3 mlg:mt-0",
+    containerClass: "-mb-4 mlg:mt-0",
     field: {
       type: Field.button,
       id: "button",
@@ -565,14 +566,14 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-10",
+      containerClass: "mb-0 mt-5",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("offers.offer_details.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
+          "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
         loading,
       },
     },
