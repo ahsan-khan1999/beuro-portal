@@ -11,13 +11,15 @@ export const Merger = ({
     <LoadingState />
   ) : (
     mergedPdfFileUrl && (
-      <iframe
-        height="670"
-        src={mergedPdfFileUrl}
-        title="Merged PDF Document"
-        width="100%"
-        style={{ border: "none" }}
-      />
+      // <iframe
+      //   height="670"
+      //   src={mergedPdfFileUrl}
+      //   title="Merged PDF Document"
+      //   width="100%"
+      //   style={{ border: "none" }}
+      // />
+
+      <embed src={mergedPdfFileUrl} width={"100%"} height={"700px"} />
     )
   );
 };

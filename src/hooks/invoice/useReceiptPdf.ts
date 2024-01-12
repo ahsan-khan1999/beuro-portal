@@ -241,10 +241,6 @@ export const useReceiptPdf = () => {
               currPage: 1,
               totalPages: calculateTotalPages,
             },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
-            },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
             signature:

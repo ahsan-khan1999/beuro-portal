@@ -20,7 +20,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
 import { BASEURL } from "@/services/HttpProvider";
 import axios from "axios";
@@ -154,6 +154,20 @@ export const SignPdf = <T,>({
       />
     ),
   };
+  useEffect(() => {
+    // Function to handle scrolling
+    const scrollToElement = () => {
+        const element = document.getElementById('signature');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const timer = setTimeout(scrollToElement, 100);
+    return () => clearTimeout(timer);
+}, []);
+
+
   return (
     // <Container>
     <>
@@ -206,13 +220,6 @@ export const SignPdf = <T,>({
           setOfferSignature={setOfferSignature}
           systemSettings={systemSettings}
         />
-        {isQr && (
-          <PaymentQRCodeDetails
-            contactAddress={pdfData.contactAddress}
-            headerDetails={pdfData.headerDetails}
-            qrCode={pdfData.qrCode}
-          />
-        )}
       </div>
 
       <OfferSignedPdf
@@ -221,6 +228,7 @@ export const SignPdf = <T,>({
         templateSettings={templateSettings}
         emailTemplateSettings={emailTemplateSettings}
         systemSettings={systemSettings}
+        showContractSign={!!offerSignature}
       />
 
       {renderModal()}

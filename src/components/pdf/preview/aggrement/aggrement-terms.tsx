@@ -77,7 +77,6 @@ export const AggrementTerms = ({
                   setEditedText(editor.getData());
                 }}
               />
-              {}
               <div className="flex gap-[19px] justify-end mt-4">
                 <button
                   onClick={handleCancelClick}

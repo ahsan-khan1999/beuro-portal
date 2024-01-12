@@ -20,7 +20,7 @@ export const ProductPurchasedItemsDetails = ({
   isOffer,
   emailTemplateSettings,
   systemSettings
-}: PurchasedItemsDetailsProps) => {
+}: Partial<PurchasedItemsDetailsProps>) => {
   
   return (
     <div>

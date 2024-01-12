@@ -234,10 +234,6 @@ export const useContractPdf = () => {
               currPage: 1,
               totalPages: calculateTotalPages,
             },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
-            },
             aggrementDetails: contractDetails?.additionalDetails || "",
             isOffer: true,
             signature: contractDetails?.offerID?.signature,
@@ -434,11 +430,7 @@ export const useContractPdf = () => {
     loading,
     activeButtonId,
     router,
-    templateSettings,
-    emailTemplateSettings,
     loadingGlobal,
-    qrCodeUrl,
-    remoteFileBlob,
     mergedPdfUrl,
     isPdfRendering,
     dispatch,
@@ -448,6 +440,5 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
-    systemSetting,
   };
 };
