@@ -58,7 +58,7 @@ export const useContractEmail = (
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
-      subject: contractDetails?.offerID?.content?.confirmationContent?.title,
+      subject: contractDetails?.title,
       description: contractDetails?.offerID?.content?.confirmationContent?.body,
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
     });

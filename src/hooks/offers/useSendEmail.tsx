@@ -55,11 +55,11 @@ export const useSendEmail = (
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
-    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
+    // dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
-      subject: offerDetails?.content?.offerContent?.title,
+      subject: offerDetails?.title,
       description: offerDetails?.content?.offerContent?.body,
       attachments: offerDetails?.content?.offerContent?.attachments,
     });

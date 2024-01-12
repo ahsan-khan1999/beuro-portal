@@ -43,7 +43,7 @@ const TableRows = ({
               }
             </span>
             <span className="py-4 flex items-center break-all">
-              {item.invoiceID?.contractID?.offerID?.title}
+              {item?.title}
             </span>
             <span className="py-4 flex items-center">
               {formatDateTimeToDate(item.createdAt)}

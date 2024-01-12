@@ -632,7 +632,6 @@ export const staticEnums: Record<string, any> = {
   },
   Frequency: {
     Weekly: 0,
-    SevenDays: 1,
     FourtennDays: 2,
     Monthly: 3,
     Yearly: 4,

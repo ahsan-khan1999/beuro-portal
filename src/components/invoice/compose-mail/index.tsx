@@ -7,33 +7,29 @@ import { useRouter } from "next/router";
 import InvoiceCardLayout from "@/layout/invoice";
 import InvoiceDetailsData from "../details/InvoiceDetailsData";
 import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
+import { useAppSelector } from "@/hooks/useRedux";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const InvoiceEmail = () => {
   const router = useRouter();
 
-  const onNextHandle = () => {
-    router.push("/contract/pdf-preview");
-  };
-  const backRouteHandler = () => {
-    router.push("/contract/details");
-  };
 
+  const { loading } = useAppSelector(state => state.invoice)
   return (
-    <>
-      <Layout>
-        <InvoiceCardLayout>
-          <MailDetailsCard />
+    <Layout>
 
-        </InvoiceCardLayout>
+      <InvoiceCardLayout>
+        <MailDetailsCard />
 
-        <div className="flex mt-[12px] mb-[18px]">
-          <ComposeMail
-            backRouteHandler={backRouteHandler}
-            onNextHandle={onNextHandle}
-          />
-        </div>
-      </Layout>
-    </>
+      </InvoiceCardLayout>
+
+      <div className="flex mt-[12px] mb-[18px]">
+        <ComposeMail
+
+        />
+      </div>
+
+    </Layout>
 
 
   );

@@ -26,7 +26,7 @@ import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
-import { staticEnums } from "../../utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -56,6 +56,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     watch,
     reset,
     setValue,
+    resetField,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -76,7 +77,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID },paginate: 0 },
+          params: { filter: { customerID: customerID }, paginate: 0 },
         })
       );
   }, [customerID]);
@@ -169,8 +170,22 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        title:null
       });
-    }
+    }else{
+      // reset({
+
+      // })
+      dispatch(setLeads([]))
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
+      setValue("content",null)
+      setValue("title",null)
+      setValue("leadID",null)
+
+
+
+      
+    } 
   }, [type]);
 
   const dateFields = AddDateFormField(
