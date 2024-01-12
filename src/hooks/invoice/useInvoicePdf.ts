@@ -271,10 +271,6 @@ export const useInvoicePdf = () => {
               currPage: 1,
               totalPages: calculateTotalPages,
             },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
-            },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
             signature:
@@ -448,10 +444,7 @@ export const useInvoicePdf = () => {
 
   return {
     invoiceData,
-    emailTemplateSettings,
-    templateSettings,
     activeButtonId,
-    mergedFile,
     mergedPdfUrl,
     isPdfRendering,
     router,
@@ -459,7 +452,6 @@ export const useInvoicePdf = () => {
     loadingGlobal,
     loading,
     translate,
-    systemSetting,
     dispatch,
     handleEmailSend,
     handleSendByPost,

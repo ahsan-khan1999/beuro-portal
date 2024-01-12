@@ -7,7 +7,7 @@ export const ProductItemFooter = ({
   grandTotal,
   tax,
   systemSettings
-}: ProductItemFooterProps) => {
+}: Partial<ProductItemFooterProps>) => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">

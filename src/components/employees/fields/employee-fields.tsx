@@ -68,7 +68,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-4",
+        className: "grid grid-cols-2 mlg:grid-cols-3 gap-4",
         children: [
           {
             containerClass: "mb-0",

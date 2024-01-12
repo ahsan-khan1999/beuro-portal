@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {  generateRecurringInvoiceFrequencyValidationSchema } from "@/validation/invoiceSchema";
-import {  updateInvoice } from "@/api/slices/invoice/invoiceSlice";
+import {  readInvoiceDetails, updateInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { CreateRecurringInvoiceFrequencyFormField } from "@/components/invoice/fields/create-recurring-frequency";
 
 export default function useRecurringInvoiceFrequency(invoiceCreated: () => void) {
@@ -38,7 +38,10 @@ export default function useRecurringInvoiceFrequency(invoiceCreated: () => void)
         const apiData = { ...data, id: invoiceDetails?.id, isInvoiceRecurring: true }
         const res = await dispatch(updateInvoice({ data: apiData, router, setError, translate }));
 
-        if (res?.payload) invoiceCreated();
+        if (res?.payload) {
+            dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))
+            
+            invoiceCreated()};
     };
     return {
         error,

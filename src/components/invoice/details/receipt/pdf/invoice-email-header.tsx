@@ -29,94 +29,101 @@ export const InvoiceEmailHeader = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   return (
-    <PdfCardLayout>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <Image
-            src={backIcon}
-            alt="backIcon"
-            className="cursor-pointer"
-            onClick={router.back}
-          />
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">{title}</h1>
-        </div>
-        <div className="flex items-center justify-between gap-5">
-          <BaseButton
-            id="sendPostButton"
-            buttonText={translate("contracts.pdf_card_details.send_via_post")}
-            onClick={onSendViaPost}
-            containerClassName="flex items-center group gap-x-3 row-reverse"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-            loading={loading && activeButtonId === "post"}
-            loaderColor="#4A13E7"
-          >
-            <PostIcon className="text-primary group-hover:text-primary" />
-          </BaseButton>
-          <BaseButton
-            buttonText={translate("contracts.pdf_card_details.send_via_email")}
-            onClick={onEmailSend}
-            containerClassName="flex items-center gap-x-3 row-reverse group"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
-            loading={loading && activeButtonId === "email"}
-            loaderColor="#4A13E7"
-          >
-            <EmailIcon className="text-primary group-hover:text-primary" />
-          </BaseButton>
+    <div className="mb-5">
+      <PdfCardLayout>
+        <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
+          <div className="flex items-center">
+            <Image
+              src={backIcon}
+              alt="backIcon"
+              className="cursor-pointer"
+              onClick={router.back}
+            />
+            <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+              {title}
+            </h1>
+          </div>
+          <div className="flex items-center justify-between gap-5">
+            <BaseButton
+              id="sendPostButton"
+              buttonText={translate("contracts.pdf_card_details.send_via_post")}
+              onClick={onSendViaPost}
+              containerClassName="flex items-center group gap-x-3 row-reverse"
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+              loading={loading && activeButtonId === "post"}
+              loaderColor="#4A13E7"
+            >
+              <PostIcon className="text-primary group-hover:text-primary" />
+            </BaseButton>
+            <BaseButton
+              buttonText={translate(
+                "contracts.pdf_card_details.send_via_email"
+              )}
+              onClick={onEmailSend}
+              containerClassName="flex items-center gap-x-3 row-reverse group"
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+              loading={loading && activeButtonId === "email"}
+              loaderColor="#4A13E7"
+            >
+              <EmailIcon className="text-primary group-hover:text-primary" />
+            </BaseButton>
 
-          <Image
-            src={downloadIcon}
-            alt="downloadIcon"
-            className="cursor-pointer"
-            onClick={onDownload}
-          />
-          <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-            onClick={onPrint}
-          />
-        </div>
-      </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex justify-between items-center">
-        <div>
-          <span className="text-[#4D4D4D] text-base font-normal">
-            {translate("invoice.receipt_card.contract_id")}:
-          </span>
-          &nbsp;
-          <span className="text-[#4B4B4B] text-base font-medium">
-            {contractId}
-          </span>
-        </div>
-        <div>
-          <span className="text-[#4D4D4D] text-base font-normal">
-            {translate("invoice.receipt_card.worker")}:
-          </span>
-          &nbsp;
-          <span className="text-[#4B4B4B] text-base font-medium">
-            {workerName}
-          </span>
-        </div>
-        <div>
-          <span className="text-[#4D4D4D] text-base font-normal">
-            {translate("invoice.receipt_card.content_name")}:
-          </span>
-          &nbsp;
-          <span className="text-[#4B4B4B] text-base font-medium">
-            {contentName}
-          </span>
-        </div>
-        <div className="flex items-center gap-[11px]">
-          <span className="text-[#4D4D4D] text-base font-normal">
-            {translate("invoice.receipt_card.contract_status")}:
-          </span>
-          <div className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"}`}>
-            <span className={`text-base font-medium ${"text-[#FE9244]"}`}>
-              {contractStatus}
-            </span>
+            <Image
+              src={downloadIcon}
+              alt="downloadIcon"
+              className="cursor-pointer"
+              onClick={onDownload}
+            />
+            <Image
+              src={printerIcon}
+              alt="printerIcon"
+              className="cursor-pointer"
+              onClick={onPrint}
+            />
           </div>
         </div>
-      </div>
-    </PdfCardLayout>
+        <div className="flex justify-between items-center mt-5">
+          <div>
+            <span className="text-[#4D4D4D] text-base font-normal">
+              {translate("invoice.receipt_card.contract_id")}:
+            </span>
+            &nbsp;
+            <span className="text-[#4B4B4B] text-base font-medium">
+              {contractId}
+            </span>
+          </div>
+          <div>
+            <span className="text-[#4D4D4D] text-base font-normal">
+              {translate("invoice.receipt_card.worker")}:
+            </span>
+            &nbsp;
+            <span className="text-[#4B4B4B] text-base font-medium">
+              {workerName}
+            </span>
+          </div>
+          <div>
+            <span className="text-[#4D4D4D] text-base font-normal">
+              {translate("invoice.receipt_card.content_name")}:
+            </span>
+            &nbsp;
+            <span className="text-[#4B4B4B] text-base font-medium">
+              {contentName}
+            </span>
+          </div>
+          <div className="flex items-center gap-[11px]">
+            <span className="text-[#4D4D4D] text-base font-normal">
+              {translate("invoice.receipt_card.contract_status")}:
+            </span>
+            <div
+              className={`border rounded-lg px-[8px]  ${"border-[#FE9244]"}`}
+            >
+              <span className={`text-base font-medium ${"text-[#FE9244]"}`}>
+                {contractStatus}
+              </span>
+            </div>
+          </div>
+        </div>
+      </PdfCardLayout>
+    </div>
   );
 };

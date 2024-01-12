@@ -45,6 +45,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
+        companyName:leadDetails?.customerDetail?.companyName
       })
     }
   }, [leadDetails.id]);

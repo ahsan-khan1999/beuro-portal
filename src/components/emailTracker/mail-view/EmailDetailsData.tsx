@@ -18,7 +18,7 @@ const EmailDetailsData = ({
 
       {emailDetails && (
         <div
-          className="html-content my-5 flex flex-col gap-y-5"
+          className="html-content my-5 flex flex-col gap-y-5 break-all"
           dangerouslySetInnerHTML={{ __html: emailDetails?.description }}
         />
       )}

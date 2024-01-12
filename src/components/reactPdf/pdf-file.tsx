@@ -127,8 +127,6 @@ const PdfFile = ({
           }}
         />
       </Page>
-
-      {/* merge here remote pdf file */}
     </Document>
   );
 };
@@ -136,7 +134,6 @@ const PdfFile = ({
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 100,
-    fontFamily: "Poppins",
   },
 });
 

@@ -42,7 +42,7 @@ export const useMergedPdfDownload = ({
           });
           const url = URL.createObjectURL(convertedBlob);
 
-          setMergedFile(blobToFile(convertedBlob, data?.emailHeader?.offerNo || "output.pdf"));
+          setMergedFile(blobToFile(convertedBlob, fileName || "output.pdf"));
           setMergedPdfUrl(url);
         }
       } catch (err) {

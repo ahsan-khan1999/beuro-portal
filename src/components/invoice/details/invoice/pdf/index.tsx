@@ -33,15 +33,11 @@ const DetailsPdfPriview = () => {
   const {
     activeButtonId,
     invoiceData,
-    emailTemplateSettings,
     router,
-    templateSettings,
     modal,
     loadingGlobal,
     loading,
     translate,
-    systemSetting,
-    mergedFile,
     mergedPdfUrl,
     isPdfRendering,
     handleDonwload,
@@ -52,8 +48,6 @@ const DetailsPdfPriview = () => {
     onClose,
     onSuccess,
   } = useInvoicePdf();
-
-  const randomId = useId();
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -94,11 +88,7 @@ const DetailsPdfPriview = () => {
             onPrint={handlePrint}
             onSendViaPost={handleSendByPost}
             activeButtonId={activeButtonId}
-            title={
-              router.pathname?.includes("receipt")
-                ? "Receipt Details"
-                : "Invoice Details"
-            }
+            title={translate("invoice.invoice_details")}
           />
 
           <InvoicePdfPreview

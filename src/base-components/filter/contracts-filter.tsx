@@ -267,17 +267,7 @@ export default function ContractsFilter({
                     ))
                   }
 
-                  {/* <SelectField
-                    handleChange={(value) => handleLeadSourceChange(value)}
-                    value={moreFilter?.leadSource || ""}
-                    dropDownIconClassName=""
-                    options={
-                      Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item }))
-                    }
-                    label={translate("common.source")}
 
-                    containerClassName="!w-full flex justify-normal"
-                  /> */}
                 </div>
                 <div>
 

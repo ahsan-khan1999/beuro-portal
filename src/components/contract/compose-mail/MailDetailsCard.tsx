@@ -15,7 +15,7 @@ const MailDetailsCard = () => {
 
   return (
     <ContractCardLayout>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -40,19 +40,18 @@ const MailDetailsCard = () => {
           <Image src={deleteIcon} alt="deleteIcon" className="cursor-pointer" />
         </div>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mt-5">
         {/* first div is here */}
         <div className="grid grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)]">
           <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
+            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
               Contract ID:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">V-2000</span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base  font-normal text-[#4D4D4D]">
               Offer Title:
             </span>
 
@@ -61,7 +60,7 @@ const MailDetailsCard = () => {
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base  font-normal text-[#4D4D4D]">
               Worker:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
