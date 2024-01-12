@@ -27,20 +27,20 @@ const EmailCard = ({
   const { t: translate } = useTranslation();
   return (
     <EmailCardLayout>
-      <div className="flex justify-between items-center max">
-        <div className="flex items-center">
+      <div className="flex flex-col mlg:flex-row justify-between gap-y-3 border-b border-[#000] border-opacity-20 pb-5">
+        <div className="flex items-center gap-x-6">
           <Image
             src={backIcon}
             alt="backIcon"
             className="cursor-pointer"
             onClick={() => router.back()}
           />
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+          <h1 className="text-[#4B4B4B] text-2xl font-medium">
             {translate("offer_pdf_card.offer_detail")}
           </h1>
         </div>
 
-        <div className="flex items-center justify-between gap-5">
+        <div className="flex items-center gap-5">
           <BaseButton
             buttonText={translate("offer_pdf_card.send_post")}
             onClick={handleSendByPost}
@@ -61,7 +61,7 @@ const EmailCard = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
-{/* 
+          {/* 
           <IconOnlyButton
             icon={<Image src={downloadIcon} alt="downloadIcon" />}
             onClick={onDownload}
@@ -72,8 +72,7 @@ const EmailCard = ({
           /> */}
         </div>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="flex">
+      <div className="flex mt-5">
         <div className="flex items-center gap-3 mr-[56px]">
           <span className="text-[#4D4D4D] text-base font-normal">
             {translate("offer_pdf_card.offer_id")}:

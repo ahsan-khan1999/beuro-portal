@@ -21,21 +21,21 @@ const MailDetailsCard = ({
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
   return (
-    <ContractCardLayout>
-      <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
-        <div className="flex items-center">
+    <>
+      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-20 gap-y-3 pb-5">
+        <div className="flex items-center gap-x-6">
           <Image
             src={backIcon}
             alt="back_icon"
             className="cursor-pointer"
             onClick={() => router.back()}
           />
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl">
             {translate("invoice.receipt_details")}
           </p>
         </div>
 
-        <div className="flex items-center justify-between gap-5">
+        <div className="flex items-center gap-5">
           <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={onSendViaPost}
@@ -73,7 +73,7 @@ const MailDetailsCard = ({
 
       <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
         <div className="flex justify-between">
-          <div className="flex gap-[10px]">
+          <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("invoice.card_content.invoice_number")}:
             </span>
@@ -81,8 +81,8 @@ const MailDetailsCard = ({
               {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+          <div className="flex gap-2">
+            <span className="text-base font-normal text-[#4D4D4D] break-all">
               {translate("content.details.receipt_title")}:
             </span>
 
@@ -92,7 +92,7 @@ const MailDetailsCard = ({
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <div className="flex gap-[10px]">
+          <div className="flex gap-2">
             <span className="text-base  font-normal text-[#4D4D4D]">
               {translate("contracts.table_headings.status")}:
             </span>
@@ -101,8 +101,8 @@ const MailDetailsCard = ({
               {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
             </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+          <div className="flex gap-2">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -114,7 +114,7 @@ const MailDetailsCard = ({
           </div>
         </div>
       </div>
-    </ContractCardLayout>
+    </>
   );
 };
 
