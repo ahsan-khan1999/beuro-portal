@@ -73,7 +73,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const selectedContent = watch("content");
   const leadID = watch("leadID");
 
-  useMemo(() => {
+  useEffect(() => {
     if (type && customerID)
       dispatch(
         readLead({
@@ -172,10 +172,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         content: offerDetails?.content?.id,
         title:null
       });
-    }else{
-      // reset({
-
-      // })
+    }else if(type === "Existing Customer"){
       dispatch(setLeads([]))
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
       setValue("content",null)
