@@ -76,7 +76,6 @@ const OfferPdfPreview = ({
     <PDFViewer height={1000} style={{ width: "100%" }}>
       <Document
         title={data?.headerDetails?.offerNo || ""}
-        onRender={(file) => {}}
       >
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
