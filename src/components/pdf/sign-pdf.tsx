@@ -210,7 +210,7 @@ export const SignPdf = <T,>({
           <PaymentQRCodeDetails
             contactAddress={pdfData.contactAddress}
             headerDetails={pdfData.headerDetails}
-            qrCode={pdfData.qrCode}
+            // qrCode={pdfData.qrCode}
           />
         )}
       </div>
