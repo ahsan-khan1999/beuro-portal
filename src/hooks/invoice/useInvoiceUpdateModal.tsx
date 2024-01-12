@@ -47,7 +47,8 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   );
 
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.invoiceCreatedAmount  - Number(invoiceDetails?.paidAmount)
+    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
+
     taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {

@@ -119,7 +119,7 @@ const EditOffersDetailsData = ({
   return (
     <div className="grid grid-cols-1 xMaxSize:grid-cols-4 xMaxSize:gap-x-6">
       <div className="col-span-1 flex flex-row xMaxSize:flex-col gap-4 w-full">
-        <div className="flex flex-col gap-y-[14px] w-fit">
+        <div className="flex flex-col gap-y-[14px] w-fit sticky">
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
@@ -141,7 +141,7 @@ const EditOffersDetailsData = ({
         />
       </div>
 
-      <div className="col-span-3 mt-[14px] h-[750px] overflow-scroll">
+      <div className="col-span-3 mt-[14px] h-screen overflow-scroll">
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>
     </div>

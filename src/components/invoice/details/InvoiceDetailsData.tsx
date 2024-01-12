@@ -120,7 +120,7 @@ const InvoiceDetailsData = ({
                 {translate("invoice.card_content.worker")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                {invoiceDetails.contractID?.offerID?.customerID?.fullName}
+                {invoiceDetails.createdBy?.fullName}
               </span>
             </div>
             <div className="flex gap-2">
