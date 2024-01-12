@@ -89,7 +89,7 @@ const Setting = () => {
 
     4: <Billing handleEditPayment={handleEditPayment} />,
     5: <MailSetting handleCreation={handleCreation} />,
-    6: <QRSettings handleCreation={handleCreation} />
+    6: <QRSettings handleCreation={handleCreation} />,
   };
   return (
     <div className="mb-5">
