@@ -16,6 +16,7 @@ import SettingProfile from "./profile-form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
 import QRSettings from "./qr-settings";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 const Setting = () => {
   const { t: translate } = useTranslation();
@@ -48,7 +49,7 @@ const Setting = () => {
   };
 
   const handleCreation = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -66,12 +67,12 @@ const Setting = () => {
       />
     ),
     [ModalType.EDIT_PAYMENT_METHOD]: <EditPaymentDetails onClose={onClose} />,
-    [ModalType.CREATION]: (
-      <CreationCreated
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
         onClose={onClose}
-        heading={translate("common.modals.email_config_created")}
-        subHeading={translate("common.modals.email_config_des")}
-        route={onClose}
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.email_sent_des")}
+        routeHandler={onClose}
       />
     ),
   };
