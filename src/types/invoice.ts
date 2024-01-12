@@ -17,7 +17,10 @@ export interface InvoiceTableRowTypes {
   emailStatus: string;
   invoiceStatus: string;
   isInvoiceRecurring: boolean;
-  invoiceCreatedAmount: number; createdBy: User
+  invoiceCreatedAmount: number; createdBy: User;
+  title: string;
+  isInvoiceRecurring2: boolean
+
 }
 
 // Inovice details table
@@ -58,6 +61,7 @@ export interface SubInvoiceTableRowTypes {
   paymentType: string;
   createdAt: string;
   isInvoiceRecurring: boolean;
+  title: string;
 }
 
 export interface InvoiceEmptyStateType {

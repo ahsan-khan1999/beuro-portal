@@ -92,7 +92,10 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload) invoiceCreated();
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))  
+      
+      invoiceCreated();}
   };
   return {
     error,

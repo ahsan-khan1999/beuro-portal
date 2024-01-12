@@ -117,7 +117,7 @@ export const SignPdf = <T,>({
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
   const onSuccess = () => {
-    router.push("https://buero-365.com/");
+    router.push("https://staging.buero365.cloudmeshsolutions.com/");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

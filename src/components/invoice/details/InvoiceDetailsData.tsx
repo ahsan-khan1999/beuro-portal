@@ -38,7 +38,7 @@ const InvoiceDetailsData = ({
             {translate("invoice.card_content.heading")}
           </p>
         </div>
-        {(!invoiceDetails?.isInvoiceRecurring && (
+        {(!invoiceDetails?.isInvoiceRecurring2 && (
           <div className="flex space-x-2">
             <Button
               className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
@@ -66,13 +66,13 @@ const InvoiceDetailsData = ({
               onClick={handleEditInvoiceFrequencyCreation}
               id="freq"
             />
-            <Button
+         {!(!invoiceDetails?.isInvoiceRecurring && invoiceDetails?.isInvoiceRecurring2) &&  <Button
               className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
               inputType="button"
               text="Stop"
               onClick={handleStopInvoiceCreation}
               id="freq"
-            />
+            />}
           </div>
         )}
       </div>
@@ -111,7 +111,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.title")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails.contractID?.offerID?.title}
+              {invoiceDetails?.title}
             </span>
           </div>
           <div className="flex gap-[44px] items-center">

@@ -54,7 +54,7 @@ const TableRows = ({
               }
             </span>
             <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
-              {item.invoiceID?.contractID?.offerID?.title}
+              {item?.title}
             </span>
             <span className="py-4 flex items-center mlg:hidden xLarge:flex">
               {formatDateTimeToDate(item.createdAt)}
