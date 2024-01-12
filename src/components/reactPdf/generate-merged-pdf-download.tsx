@@ -46,7 +46,7 @@ export const useMergedPdfDownload = ({
           console.log(convertedBlob.name)
           
 
-          setMergedFile(blobToFile(convertedBlob, fileName || "output.pdf"));
+          setMergedFile(blobToFile(convertedBlob, `${fileName}.pdf` || "output.pdf"));
           setMergedPdfUrl(url);
         }
       } catch (err) {
