@@ -18,6 +18,7 @@ import {
   readContractDetails,
   readQRCode,
   sendContractEmail,
+  sendOfferByPost,
   updateContractContent,
 } from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
@@ -28,7 +29,6 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
 

@@ -4,7 +4,7 @@ import React from "react";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
-import { filterService } from "@/utils/utility";
+import { calculateTax, filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
@@ -108,7 +108,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.taxAmount} ({TAX_PERCENTAGE}%)
+                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
                 </span>
               </div>
             </div>
