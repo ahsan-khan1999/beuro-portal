@@ -8,6 +8,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
 import { FilterProps, FilterType } from "@/types";
+import EmailCheckField from "./fields/email-check-field";
 
 export default function OfferFilter({
   filter,
