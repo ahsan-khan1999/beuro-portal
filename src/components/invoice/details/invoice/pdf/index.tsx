@@ -49,8 +49,6 @@ const DetailsPdfPriview = () => {
     onSuccess,
   } = useInvoicePdf();
 
-  const randomId = useId();
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated

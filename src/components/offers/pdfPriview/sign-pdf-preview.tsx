@@ -5,18 +5,9 @@ import {
   sendOfferEmail,
 } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
-import {
-  PublicOffersTableRowTypes,
-  ServiceList,
-} from "@/types/offers";
-import {
-  EmailHeaderProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
-import {
-  SystemSetting,
-} from "@/api/slices/settingSlice/settings";
+import { PublicOffersTableRowTypes, ServiceList } from "@/types/offers";
+import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
@@ -25,7 +16,6 @@ import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
-
 
 export const DUMMY_DATA: PdfProps = {
   emailHeader: { emailStatus: "pending", offerNo: "23-A" },
@@ -84,7 +74,7 @@ interface ActionType {
 
 const SignPdfPreview = () => {
   const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
-  const [offerData, setOfferData] = useState<PdfProps>(DUMMY_DATA);
+  const [offerData, setOfferData] = useState<PdfProps | null>(null);
 
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
@@ -277,7 +267,7 @@ const SignPdfPreview = () => {
     }
   }, [offerID]);
 
-  const totalItems = offerData?.serviceItem?.length;
+  const totalItems = offerData?.serviceItem?.length || 0;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
@@ -318,19 +308,21 @@ const SignPdfPreview = () => {
   return loading ? (
     <LoadingState />
   ) : (
-    <YogaPdfContainer>
-      <div className="my-5">
-        <SignPdf<EmailHeaderProps>
-          pdfData={offerData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          action={action as string}
-          emailTemplateSettings={emailTemplateSettings}
-          systemSettings={systemSetting}
-        />
-      </div>
-    </YogaPdfContainer>
+    offerData && (
+      <YogaPdfContainer>
+        <div className="my-5">
+          <SignPdf<EmailHeaderProps>
+            pdfData={offerData}
+            newPageData={newPageData}
+            templateSettings={templateSettings}
+            totalPages={calculateTotalPages}
+            action={action as string}
+            emailTemplateSettings={emailTemplateSettings}
+            systemSettings={systemSetting}
+          />
+        </div>
+      </YogaPdfContainer>
+    )
   );
 };
 

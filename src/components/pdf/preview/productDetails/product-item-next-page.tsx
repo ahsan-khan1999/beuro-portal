@@ -15,12 +15,12 @@ export const ProductItemNewPage = ({
   currPage,
   emailTemplateSettings,
   systemSettings
-}: PurchasedItemDetailsNextPageProps) => {
+}: Partial<PurchasedItemDetailsNextPageProps>) => {
   return (
     <div>
       <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
       <div className="px-[80px] flex flex-col bg-white">
-        {serviceItem.map((item,index) => (
+        {serviceItem?.map((item,index) => (
           <ProductItem {...item} key={index} />
         ))}
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings}/>}

@@ -847,6 +847,7 @@ export interface PdfPreviewProps {
   systemSetting?: SystemSetting | null;
   mergedPdfFileUrl?: string | null;
   isPdfRendering?: boolean;
+  showContractSign?: boolean;
 }
 
 export interface PdfPreviewFooterProps {

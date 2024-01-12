@@ -11,7 +11,7 @@ export const MovingDetails = ({
   isOffer,
   handleTitleUpdate,
   addressLabels
-}: MovingDetailsProps) => {
+}: Partial<MovingDetailsProps>) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
   const [tempText, setTempText] = useState(text);

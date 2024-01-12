@@ -72,6 +72,7 @@ const stylesheet: HtmlStyles = {
   p: {
     margin: 0,
     fontSize: 10,
+    color: '#505050',
   },
   h1: {
     margin: 0,
@@ -103,13 +104,20 @@ const stylesheet: HtmlStyles = {
     padding: 0,
     fontSize: 12,
   },
+  ul: {},
+  li: {
+    fontSize: 10,
+    marginLeft: 0,
+  },
 };
 export const AdditionalDetails = ({
   description,
   signature,
+  showContractSign
 }: {
   description?: string;
   signature?: any;
+  showContractSign?: boolean;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const onFileChange = () => {
@@ -121,7 +129,6 @@ export const AdditionalDetails = ({
       reader.readAsDataURL(signature);
     }
   };
-  const isContract = window.location.pathname.includes("contract");
 
   useMemo(() => signature && onFileChange(), [signature]);
   return (
@@ -130,15 +137,14 @@ export const AdditionalDetails = ({
         <Html stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
           {description || ""}
         </Html>
-
-        {!isContract && (
+        {showContractSign && (
           <View style={{}}>
             <Text style={styles.shareHeading}>
               I share the contract with you.
             </Text>
 
-            <View style={styles.dateContainer}>
-              <View style={styles.innerDate}>
+            <View style={{...styles.dateContainer}}>
+              <View style={{...styles.innerDate, marginTop: signature ? 100 : 0}}>
                 <Text style={styles.dateText}>Datum</Text>
               </View>
 

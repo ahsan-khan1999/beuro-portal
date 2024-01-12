@@ -22,6 +22,7 @@ const EditOffersDetailsData = ({
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
+  tab,
 }: {
   shareImgModal: Function;
   handleImagesUpload: (
@@ -29,9 +30,10 @@ const EditOffersDetailsData = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
+  tab?: EditComponentsType;
 }) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
-    EditComponentsType.offerEdit
+    tab || EditComponentsType.offerEdit
   );
   const router = useRouter();
   const { t: translate } = useTranslation();

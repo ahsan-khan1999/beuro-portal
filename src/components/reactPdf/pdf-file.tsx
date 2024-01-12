@@ -127,8 +127,6 @@ const PdfFile = ({
           }}
         />
       </Page>
-
-      {/* merge here remote pdf file */}
     </Document>
   );
 };

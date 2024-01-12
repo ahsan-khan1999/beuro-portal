@@ -1,17 +1,12 @@
-import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
-import EmailCheckField from "./fields/email-check-field";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { FilterProps, FilterType } from "@/types";
 
 export default function OfferFilter({
   filter,

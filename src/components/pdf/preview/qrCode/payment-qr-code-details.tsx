@@ -7,7 +7,7 @@ import { QrCodeDetails } from "./qr-code-details";
 export const PaymentQRCodeDetails = ({
   contactAddress,
   headerDetails,
-}: PaymentQrCodeDetailsProps) => {
+}: Partial<PaymentQrCodeDetailsProps>) => {
   return (
     <div>
       <DocumentHeader {...headerDetails} />

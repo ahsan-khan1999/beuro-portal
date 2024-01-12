@@ -9,6 +9,7 @@ import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useRouter } from "next/router";
 
 export enum ComponentsType {
   customer,

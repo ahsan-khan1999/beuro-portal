@@ -624,6 +624,10 @@ export const staticEnums: Record<string, any> = {
     Confirmed: 1,
     Cancelled: 2,
   },
+  ContractSignedStatus: {
+    Deprecated: 0,
+    Active: 1,
+  },
 
   InvoiceStatus: {
     Pending: 0,
@@ -715,13 +719,13 @@ export const staticEnums: Record<string, any> = {
     "Unreliable Schedule": "Unreliable Schedule",
     "Customer Service": "Customer Service",
     "Inadequate Equipment": "Inadequate Equipment",
-    "Other": "Other"
+    Other: "Other",
   },
   LeadSource: {
     Umzugsfuchs: "Umzugsfuchs",
     Webvermarktung: "Webvermarktung",
-    "Offerten-365": "Offerten-365"
-  }
+    "Offerten-365": "Offerten-365",
+  },
 };
 
 // export const customers: Customers[] = [

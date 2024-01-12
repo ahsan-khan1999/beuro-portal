@@ -74,7 +74,7 @@ export const ServicesTotalAmount = ({
   }
 
   return (
-    <View style={styles.container} fixed>
+    <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
           <Text

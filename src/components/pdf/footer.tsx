@@ -11,7 +11,7 @@ export const Footer = ({
   totalPages,
   currPage,
   emailTemplateSettings
-}: DocumentDetailFooterProps) => {
+}: Partial<DocumentDetailFooterProps>) => {
   const {
     firstColumn: firstColumnSettings,
     secondColumn: secondColumnSettings,
@@ -102,22 +102,22 @@ export const Footer = ({
               : ""
               }`}
           >
-            {thirdColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row1}</span>}
-            {thirdColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row2}</span>}
-            {thirdColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row3}</span>}
-            {thirdColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row4}</span>}
-            {thirdColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row5}</span>}
+            {thirdColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row1}</span>}
+            {thirdColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row2}</span>}
+            {thirdColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row3}</span>}
+            {thirdColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row4}</span>}
+            {thirdColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row5}</span>}
           </div>
         )}
 
         {/* fourth column */}
         {isFourthColumn && (
           <div className="flex flex-col">
-            {fourthColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row1}</span>}
-            {fourthColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row2}</span>}
-            {fourthColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row3}</span>}
-            {fourthColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row4}</span>}
-            {fourthColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row5}</span>}
+            {fourthColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row1}</span>}
+            {fourthColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row2}</span>}
+            {fourthColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row3}</span>}
+            {fourthColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row4}</span>}
+            {fourthColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row5}</span>}
           </div>
         )}
       </div>

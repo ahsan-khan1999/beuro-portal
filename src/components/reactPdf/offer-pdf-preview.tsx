@@ -15,8 +15,6 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
-import { useEffect, useState } from "react";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 Font.register({
   family: "Poppins",
@@ -64,6 +62,7 @@ const OfferPdfPreview = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
+  showContractSign,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -120,11 +119,14 @@ const OfferPdfPreview = ({
               left: 0,
               right: 0,
               top: 120,
-              fontFamily: 'Poppins',
+              fontFamily: "Poppins",
             }}
           >
             <ContactAddress {...{ ...contactAddress }} />
-            <AdditionalDetails description={aggrementDetails} />
+            <AdditionalDetails
+              description={aggrementDetails}
+              showContractSign={showContractSign}
+            />
           </View>
           <Footer
             {...{

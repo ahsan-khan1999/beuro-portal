@@ -1,36 +1,14 @@
-import React, { useEffect, useId, useMemo, useState } from "react";
 import EmailCard from "./PdfCard";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import dynamic from "next/dynamic";
-import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
-import { PdfPreviewProps } from "@/types";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
-import OfferPdf from "@/components/offers/offer-pdf-preview";
 import { useTranslation } from "next-i18next";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false }
-);
-// const ContractPdfPreview = dynamic(
-//   () => import("@/components/reactPdf/offer-pdf-preview"),
-//   { ssr: false, loading: () => <LoadingState /> }
-// );
-
-// const PdfDownload = dynamic(
-//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
-//   {
-//     ssr: false,
-//   }
-// );
-
-// const PdfDownload = dynamic(() => import("./generate-offer-pdf"), { ssr: false });
-
-const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
   { ssr: false }
 );
 
@@ -41,11 +19,7 @@ const PdfPriview = () => {
     modal,
     activeButtonId,
     router,
-    templateSettings,
-    emailTemplateSettings,
     loadingGlobal,
-    qrCodeUrl,
-    remoteFileBlob,
     mergedPdfUrl,
     isPdfRendering,
     dispatch,
@@ -55,10 +29,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
-    systemSetting,
   } = useContractPdf();
-
-  const randomId = useId();
 
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
