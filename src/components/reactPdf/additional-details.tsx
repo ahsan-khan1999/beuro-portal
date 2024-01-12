@@ -72,7 +72,7 @@ const stylesheet: HtmlStyles = {
   p: {
     margin: 0,
     fontSize: 10,
-    color: '#505050',
+    color: "#272727",
   },
   h1: {
     margin: 0,
@@ -82,38 +82,57 @@ const stylesheet: HtmlStyles = {
   h2: {
     margin: 0,
     padding: 0,
-    fontSize: 16,
+    fontSize: 14,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 16,
+    fontSize: 12,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize: 13,
+    fontSize: 12,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 10,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 10,
   },
-  ul: {},
+  ul: { marginLeft: 26 },
   li: {
     fontSize: 10,
     marginLeft: 0,
+    listStyle: "outside",
   },
+  blockquote: {
+    borderLeft: 5,
+    borderColor: "#ccc",
+    borderStyle: "solid",
+    marginLeft: 0,
+    marginRight: 0,
+    overflow: "hidden",
+    paddingLeft: "20px",
+
+    "blockqoute p": {
+      margin: 0,
+    },
+  },
+  strong: {
+    fontSize: 14,
+    fontWeight: 700,
+    fontStyle: 'bold'
+  }
 };
 export const AdditionalDetails = ({
   description,
   signature,
-  showContractSign
+  showContractSign,
 }: {
   description?: string;
   signature?: any;
@@ -143,8 +162,10 @@ export const AdditionalDetails = ({
               I share the contract with you.
             </Text>
 
-            <View style={{...styles.dateContainer}}>
-              <View style={{...styles.innerDate, marginTop: signature ? 100 : 0}}>
+            <View style={{ ...styles.dateContainer }}>
+              <View
+                style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
+              >
                 <Text style={styles.dateText}>Datum</Text>
               </View>
 
