@@ -155,15 +155,14 @@ export const SignPdf = <T,>({
     ),
   };
   useEffect(() => {
-    // Function to handle scrolling
     const scrollToElement = () => {
-      const element = document.getElementById('signature');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }
+        const element = document.getElementById('gohere');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
     };
 
-    const timer = setTimeout(scrollToElement, 100);
+    const timer = setTimeout(scrollToElement, 400);
     return () => clearTimeout(timer);
   }, []);
 
