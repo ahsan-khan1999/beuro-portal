@@ -22,12 +22,10 @@ const TableRows = ({
               })
             }
             key={item.id}
-            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(0px,_250px)_minmax(180px,_100%)_minmax(200px,_200px)_minmax(90px,_90px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_300px)_minmax(350px,_100%)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(0px,_250px)_minmax(180px,_100%)_minmax(200px,_200px)_minmax(90px,_90px)] mt-2 bg-white rounded-md items-center"
           >
             <span className="py-4 flex items-center">{item.refID}</span>
-            <span className="break-all py-4 flex items-center">
-              {item.contentName}
-            </span>
+            <span className="py-4 truncate">{item.contentName}</span>
             <span className="py-4 flex items-center break-all">
               {item.offerContent.title}
             </span>

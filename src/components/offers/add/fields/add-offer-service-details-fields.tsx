@@ -791,7 +791,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
                 text: `${translate("common.next_button")}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg bg-[#4A13E7] px-4  min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                 loading,
               },
             },

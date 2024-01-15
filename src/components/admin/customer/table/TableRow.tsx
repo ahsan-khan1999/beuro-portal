@@ -16,11 +16,9 @@ const TableRow = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(60px,_60px),minmax(80px,_80px)_minmax(200px,_200px)_minmax(160px,_160px)_minmax(300px,_100%)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(70px,_70px)_minmax(150px,_100%)_minmax(160px,_160px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(50px,_50px),minmax(70px,_70px)_minmax(180px,_180px)_minmax(180px,_180px)_minmax(120px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] items-center bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(60px,_60px),minmax(80px,_80px)_minmax(200px,_200px)_minmax(160px,_160px)_minmax(300px,_100%)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(70px,_70px)_minmax(150px,_100%)_minmax(160px,_160px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(50px,_50px),minmax(70px,_70px)_minmax(180px,_180px)_minmax(180px,_180px)_minmax(120px,_100%)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2 rounded-md"
           >
-            <span className="py-4 flex items-center">
-              {item?.company?.refID}
-            </span>
+            <span className="py-4">{item?.company?.refID}</span>
             <span className="py-4 flex items-center justify-center">
               {/* <Image
                 src={item?.company?.logo}
@@ -29,18 +27,12 @@ const TableRow = ({
                 width={35}
               /> */}
             </span>
-            <span className="py-4 flex items-center">
-              {item?.company?.companyName}
-            </span>
-            <span className="break-all py-4 flex items-center">
-              {item?.fullName.slice(0, 12)}...
-            </span>
-            <span className="break-all xs:flex mlg:hidden xlg:flex py-4 items-center">
+            <span className="py-4 truncate">{item?.company?.companyName}</span>
+            <span className="py-4 truncate">{item?.fullName}</span>
+            <span className="truncate xs:block mlg:hidden xlg:block py-4">
               {item?.email}
             </span>
-            <span className="py-4 flex items-center">
-              {item?.company?.plan}
-            </span>
+            <span className="py-4 truncate">{item?.company?.plan}</span>
             <span className="py-4 flex items-center justify-center">
               <div
                 className={`${

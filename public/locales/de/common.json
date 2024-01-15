@@ -996,7 +996,7 @@
       "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
       "add_button": "Bilder hinzufügen",
       "without_images": "Ohne Bilder fortfahren"
-    }
+    } 
   },
   "common": {
     "modals": {
@@ -1058,6 +1058,7 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
+    "add_new_date": "Neues Datum hinzufügen",
     "add_company_info": "Unternehmensinformationen hinzufügen",
     "add_new_address": "Neue Adresse hinzufügen",
     "upload_img": "Bilder hochladen",
