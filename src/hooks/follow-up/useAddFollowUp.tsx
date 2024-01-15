@@ -25,12 +25,9 @@ export const useAddFollowUp = (
   const { loading, error } = useAppSelector((state) => state.followUp);
   const { followUps } = useAppSelector((state) => state.settings);
 
-
-
   useEffect(() => {
-    dispatch(readFollowUpSettings({}))
-  }, [])
-
+    dispatch(readFollowUpSettings({}));
+  }, []);
 
   const schema = generateAddFollowUpValidation(translate);
   const {
@@ -43,7 +40,7 @@ export const useAddFollowUp = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const customerID = watch("customer")
+  const customerID = watch("customer");
 
   const lookUpModals = {
     [Modals.customer]: () => handleAllCustomers(),
@@ -53,7 +50,7 @@ export const useAddFollowUp = (
   const handleModalPop = (item: Modals) => {
     lookUpModals[item]();
   };
-  
+
   useMemo(() => {
     if (customerID) {
       dispatch(
@@ -62,23 +59,22 @@ export const useAddFollowUp = (
         })
       );
     }
-  }, [customerID])
+  }, [customerID]);
 
-  const fields = AddFollowUpFormField(
-    register,
-    loading,
-    control,
-    { customer: customer, lead: lead, followUps },
-  );
+  const fields = AddFollowUpFormField(register, loading, control, {
+    customer: customer,
+    lead: lead,
+    followUps,
+  });
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(createFollowUp({ data, router, setError, translate }));
+    const response = await dispatch(
+      createFollowUp({ data, router, setError, translate })
+    );
     if (response?.payload) {
       handleFollowUps();
-      if (router.pathname === "/dashboard") dispatch(readDashboard({ params: { filter: { month: 1 } } }))
-
+      if (router.pathname === "/dashboard")
+        dispatch(readDashboard({ params: { filter: { month: 1 } } }));
     }
-
-
   };
   return {
     fields,
@@ -89,6 +85,6 @@ export const useAddFollowUp = (
     error,
     customer,
     lead,
-    translate
+    translate,
   };
 };

@@ -77,7 +77,6 @@ export const SelectBox = ({
       >
         {(field && getLabelByValue(field.value, option)) ||
           getLabelByValue(defaultValue, option)}
-
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span

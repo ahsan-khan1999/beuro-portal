@@ -105,15 +105,17 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
+
     if (leadDetails?.id) {
       let apiData: any = {
         ...data,
         step: 1,
         leadId: leadDetails?.id,
         stage: ComponentsType.addressAdd,
-
       };
-      if (leadDetails?.customerID) apiData = { ...apiData, customerID: leadDetails?.customerID }
+      if (leadDetails?.customerID)
+        apiData = { ...apiData, customerID: leadDetails?.customerID };
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );

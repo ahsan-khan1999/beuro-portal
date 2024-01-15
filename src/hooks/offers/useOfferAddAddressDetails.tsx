@@ -1,16 +1,21 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from "react";
 import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
-import { addressObject } from '../../components/offers/add/fields/add-address-details-fields';
+import { addressObject } from "../../components/offers/add/fields/add-address-details-fields";
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -43,22 +48,21 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
-
   });
 
   useEffect(() => {
     if (offerDetails.id) {
-
       reset({
-        address: offerDetails?.addressID ? offerDetails?.addressID?.address : offerDetails?.leadID?.addressID?.address
-      })
+        address: offerDetails?.addressID
+          ? offerDetails?.addressID?.address
+          : offerDetails?.leadID?.addressID?.address,
+      });
     }
   }, [offerDetails?.id])
 
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",
-
   });
 
   const handleFieldTypeChange = (index: number) => {
@@ -83,6 +87,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

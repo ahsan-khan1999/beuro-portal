@@ -256,7 +256,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       //@ts-expect-error
       field?.field?.children.some((child) => child?.field?.id == "fullName")
   );
-    
+
   if (fieldIndex !== -1 && customerType === "company") {
     const companyNameField = {
       containerClass: "mb-0",

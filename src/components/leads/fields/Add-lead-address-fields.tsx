@@ -85,7 +85,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         }
       },
       {
-        containerClass: "mb-0 relative -top-4 right-0 float-right",
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
         field: {
           type: Field.button,
           id: "button",
