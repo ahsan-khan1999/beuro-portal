@@ -75,7 +75,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "contactAvailability",
               value:
-                (leadDetails?.id && leadDetails?.contactAvailability) || "",
+                (leadDetails?.id && leadDetails?.contactAvailability) || "Morning(9am to 12am)",
               name: "contactAvailability",
               options: [
                 {
@@ -187,7 +187,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || "",
+              value: (leadDetails?.id && leadDetails?.budget) || `Less then 5000 ${systemSettings?.currency||""}`,
 
               options: [
                 {
@@ -208,6 +208,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                 {
                   value: `Less then 2000 ${systemSettings?.currency}`,
                   label: `${translate("common.less_then")} 2000${systemSettings?.currency
+                    }`,
+                },
+                {
+                  value: `Less then 5000 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 5000${systemSettings?.currency
                     }`,
                 },
               ],

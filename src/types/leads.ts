@@ -46,6 +46,7 @@ export interface CustomerAddress {
   country: string;
   postalCode: string;
   description: string;
+  label:string
 }
 
 export interface LeadService {

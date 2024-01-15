@@ -325,7 +325,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               control,
               value:
                 (offerDetails && offerDetails?.customerID?.address?.country) ||
-                "",
+                Object.keys(staticEnums.Country)[0],
             },
           },
         ],

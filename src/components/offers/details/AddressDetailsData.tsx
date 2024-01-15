@@ -40,9 +40,7 @@ const AddressDetailsData = ({
       {offerDetails?.addressID?.address?.map((item, index) => (
         <div className="my-5" key={index}>
           <h4 className="text-[#8F8F8F] mb-[10px]">
-            {" "}
-            {translate("offers.address_details.address")} {++index}{" "}
-            {translate("offers.address_details.details")}
+            {item?.label}
           </h4>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>

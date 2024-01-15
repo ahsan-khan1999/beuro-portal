@@ -14,55 +14,65 @@ import { addressObject } from '../../components/offers/add/fields/add-address-de
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
+
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+
+  const [addressType, setAddressType] = useState(
+    offerDetails?.addressID ? Array.from(offerDetails?.addressID?.address, () => (false)) : Array.from(offerDetails?.leadID?.addressID?.address, () => (false)) || [false],
+
+  )
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdded)
   }
-  const [addressCount, setAddressCount] = useState(offerDetails?.id && offerDetails?.addressID?.address?.length || 1)
 
   const schema = generateOfferAddressEditDetailsValidation(translate);
-  const handleAddNewAddress = () => {
-    setAddressCount(addressCount + 1)
-  }
-  const handleRemoveNewAddress = () => {
-    setAddressCount(addressCount - 1)
-  }
+
   const {
     register,
     handleSubmit,
     control,
     setError,
     reset,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
 
   });
 
-  useMemo(() => {
+  useEffect(() => {
     if (offerDetails.id) {
-      
+      console.log(offerDetails, "offerDetails");
+
       reset({
         address: offerDetails?.addressID ? offerDetails?.addressID?.address : offerDetails?.leadID?.addressID?.address
       })
     }
-  }, [offerDetails.id])
-  
+  }, [offerDetails?.id])
+
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",
 
   });
-  
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? 1 : addressFields?.length, append, remove, addressFields);
+
+  const handleFieldTypeChange = (index: number) => {
+    let address = [...addressType];
+    address[index] = !address[index]
+    setAddressType(address)
+  }
+
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? addressType?.length : addressFields?.length, append, remove, addressFields, handleFieldTypeChange, addressType, setValue, getValues);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 2, id: offerDetails?.id, stage: ComponentsType.serviceAdded }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
-
     if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
+
 
   };
   return {

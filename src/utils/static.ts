@@ -724,6 +724,8 @@ export const staticEnums: Record<string, any> = {
     Umzugsfuchs: "Umzugsfuchs",
     Webvermarktung: "Webvermarktung",
     "Offerten-365": "Offerten-365",
+    "Umzugshero": "Umzugshero",
+
   },
 };
 

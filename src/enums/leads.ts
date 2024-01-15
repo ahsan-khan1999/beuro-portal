@@ -34,6 +34,7 @@ export enum LeadsAddressEditDetails {
   postCode = "postalCode",
   country = "country",
   description = "description",
+  addressLabel = "label"
 }
 
 // Add new customer lead details

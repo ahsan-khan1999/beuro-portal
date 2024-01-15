@@ -390,6 +390,8 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
       postalCode: inputObject[`postalCode-${i}`] || "",
       country: inputObject[`country-${i}`] || "",
       description: inputObject[`description-${i}`] || "",
+      label: inputObject[`label-${i}`] || "",
+
     };
     outputArray.push(addressObj);
   }

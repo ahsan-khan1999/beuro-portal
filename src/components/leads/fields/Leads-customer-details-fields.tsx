@@ -205,7 +205,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               value:
                 (leadDetails?.id &&
                   leadDetails?.customerDetail?.address?.country) ||
-                "",
+                  Object.keys(staticEnums.Country)[0],
             },
           },
         ],
