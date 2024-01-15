@@ -28,7 +28,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         field: {
           type: Field.button,
           id: "button",
-          text: "Remove",
+          text: `${translate("common.remove")}`,
           inputType: "button",
           className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
             i === 1 && "hidden"
@@ -126,7 +126,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `description-${i}`,
                 name: `description-${i}`,
                 placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 register,
               },
             },
@@ -157,7 +157,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                   text: `${translate("leads.address_details.back_button")}`,
                   inputType: "button",
                   className:
-                    "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
+                    "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
                   onClick: () =>
                     onHandleBack && onHandleBack(ComponentsType.customerAdd),
                 },
@@ -170,7 +170,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                   text: `${translate("leads.address_details.next_button")}`,
                   inputType: "submit",
                   className:
-                    "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
+                    "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                   loading,
                 },
               },
