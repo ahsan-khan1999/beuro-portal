@@ -193,7 +193,7 @@ export const useReceiptPdf = () => {
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID?.contractID?.offerID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,

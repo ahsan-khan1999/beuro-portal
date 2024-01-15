@@ -22,7 +22,8 @@ const ComposeMail = () => {
 
       <ContractFormCard>
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("contracts.contract_email_preview.heading")}
+        {translate("invoice.receipt_card.invoice_email_preview")}
+
         </h2>
 
         <hr className="opacity-20 mt-[25px] mb-5" />

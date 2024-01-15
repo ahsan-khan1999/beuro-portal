@@ -203,7 +203,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               })),
               control,
               disabled: isUpdate,
-              value: "",
+              value: Object.keys(staticEnums.Country)[0],
             },
           },
         ],

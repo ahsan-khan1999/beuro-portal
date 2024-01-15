@@ -75,7 +75,7 @@ export const AddressDetails = ({
               color: "#000",
             }}
           >
-            Adresse {index + 1}:
+            {address?.label}:
           </Text>
           <Text
             style={{

@@ -37,7 +37,7 @@ const AddressDetailsData = ({
       {leadDetails?.addressID?.address?.map((item, key) => (
         <div className="mt-5">
           <h4 className="text-[#8F8F8F] mb-[10px]">
-            {translate("leads.address_details.heading")}
+            {item?.label}
           </h4>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>

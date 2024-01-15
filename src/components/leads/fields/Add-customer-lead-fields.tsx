@@ -262,9 +262,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (leadDetails &&
-                  leadDetails?.customerDetail?.address?.country) ||
-                "Swizterland",
+                leadDetails && leadDetails?.customerDetail?.address?.country || Object.keys(staticEnums.Country)[0],
             },
           },
         ],

@@ -43,7 +43,7 @@ export const useReceiptEmail = (
         collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
           ?.receiptContent?.attachments as string[]
       )) ||
-      []
+    []
   );
   const { invoiceID } = router.query;
   const schema = generateContractEmailValidationSchema(translate);
@@ -58,10 +58,10 @@ export const useReceiptEmail = (
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
-    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+    if (content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
-  useMemo(() => {
+  useEffect(() => {
     if (invoiceID) {
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
@@ -110,6 +110,7 @@ export const useReceiptEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
+  
   const fields = InvoiceEmailPreviewFormField(
     register,
     loading,

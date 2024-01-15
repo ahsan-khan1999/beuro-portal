@@ -258,8 +258,8 @@ export type GenerateAddReasonFormField = (
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function,
-  control?:Control,
-  reason?:string
+  control?: Control,
+  reason?: string
 ) => FormField[];
 
 // change/Reset password formfield
@@ -490,7 +490,11 @@ export type GenerateLeadAddressFormField = (
   count: number,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
-  fields?: object[]
+  fields?: object[],
+  handleFieldTypeChange?: (index: number) => void,
+  addressType?:boolean[],
+  setValue?:UseFormSetValue<FieldValues>,
+  getValues?:UseFormGetValues<FieldValues>
 ) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
@@ -596,7 +600,7 @@ export interface FilterType {
   email?: string[] | string;
   price?: string[];
   month?: number;
-  leadSource?:string[] | string
+  leadSource?: string[] | string
 }
 
 export interface MoreFilterType {
@@ -611,7 +615,7 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
-  leadSource?:string[] | string
+  leadSource?: string[] | string
 
 
 }

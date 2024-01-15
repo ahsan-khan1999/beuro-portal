@@ -69,6 +69,10 @@ export const generateLeadsAddressEditDetailsValidation = (
       [`${LeadsAddressEditDetails.description}-${index + 1}`]: yup
         .string()
         .required(translate("validationMessages.required")),
+      [`${LeadsAddressEditDetails.addressLabel}-${index + 1}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+
     };
   }).reduce((acc, obj) => ({ ...acc, ...obj }), {});
   return yup.object().shape(addressSchema);

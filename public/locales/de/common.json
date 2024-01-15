@@ -224,7 +224,9 @@
         "invoices": "Rechnungen",
         "pending": "Ausstehend",
         "overdue": "Überfällig",
-        "paid": "Bezahlt"
+        "paid": "Bezahlt",
+        "open": "Open"
+
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -655,7 +657,9 @@
       "total_amount": "Gesamtbetrag",
       "offer_id": "Angebot ID",
       "payment_status": "Zahlungsstatus",
-      "email_status": "E-Mail-Status"
+      "email_status": "E-Mail-Status",
+      "invoice_email_preview":"E-Mail-Rechnungsvorschau",
+      "receipt_email_preview":"E-Mail-Vorschau der Quittung"
     },
     "table_functions": {
       "open": "Öffnen",
@@ -675,6 +679,7 @@
     },
     "card_content": {
       "invoice_number": "Rechnungsnummer",
+      "receipt_number": "Quittungsnummer",
       "heading": "Rechnungsdetails",
       "invoice_id": "Rechnungs-ID",
       "title": "Rechnungstitel",
@@ -948,8 +953,8 @@
     "address_details": {
       "main_heading": "Adressdetails",
       "edit_button": "Details bearbeiten",
-      "heading": "Adressdetails 1",
-      "sub_heading": "Adressdetails 2",
+      "heading": "Adressdetails ",
+      "sub_heading": "Adressdetails ",
       "street_no": "Strasse+Nr",
       "post_code": "plz+ort",
       "country": "Land",
@@ -1868,7 +1873,8 @@
       "pending": "Ausstehend",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
-      "leadSource": "Leadquelle"
+      "leadSource": "Leadquelle",
+      "open":"Öffnen Sie"
     }
   },
   "global_search": {

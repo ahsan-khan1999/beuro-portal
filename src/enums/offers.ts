@@ -39,6 +39,8 @@ export enum OfferAddressEditDetails {
   country = "country",
   description = "description",
   address = "address",
+  label = "label",
+  type="type"
 }
 
 // enum for add service offer details

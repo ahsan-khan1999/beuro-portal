@@ -633,6 +633,7 @@ export const staticEnums: Record<string, any> = {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
+    Open:3
   },
   Frequency: {
     Weekly: 0,
@@ -724,6 +725,8 @@ export const staticEnums: Record<string, any> = {
     Umzugsfuchs: "Umzugsfuchs",
     Webvermarktung: "Webvermarktung",
     "Offerten-365": "Offerten-365",
+    "Umzugshero": "Umzugshero",
+
   },
 };
 
@@ -1340,6 +1343,12 @@ export const sideBar: SideBar[] = [
       {
         title: "sidebar.customer.invoices.pending",
         query: "Pending",
+        pathname: "/invoices",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.invoices.open",
+        query: "Open",
         pathname: "/invoices",
         role: [1, 2],
       },
