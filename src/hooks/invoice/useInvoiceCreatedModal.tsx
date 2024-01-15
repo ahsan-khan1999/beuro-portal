@@ -93,7 +93,11 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     const res = await dispatch(
       createInvoice({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) invoiceCreated();
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))  
+      invoiceCreated();
+    
+    }
   };
   return {
     error,

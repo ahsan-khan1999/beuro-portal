@@ -88,11 +88,7 @@ const DetailsPdfPriview = () => {
             onPrint={handlePrint}
             onSendViaPost={handleSendByPost}
             activeButtonId={activeButtonId}
-            title={
-              router.pathname?.includes("receipt")
-                ? "Receipt Details"
-                : "Invoice Details"
-            }
+            title={translate("invoice.invoice_details")}
           />
 
           <InvoicePdfPreview

@@ -16,7 +16,6 @@ const DetailsData = ({
   contractDetails: contractTableTypes;
   handleViewPdf: () => void;
 }) => {
-  console.log(contractDetails);
 
   const colorPicker = {
     [staticEnums.ContractSignedStatus.Deprecated]: "#FF0000",

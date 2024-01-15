@@ -6,7 +6,7 @@ import React from "react";
 
 const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error } = useQRSettings({
+  const { fields, onSubmit, handleSubmit, errors, error,renderModal } = useQRSettings({
     handleCreation,
   });
   return (
@@ -18,7 +18,7 @@ const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {/* {renderModal()} */}
+      {renderModal()}
     </FormCard>
   );
 };

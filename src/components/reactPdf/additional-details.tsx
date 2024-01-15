@@ -159,7 +159,7 @@ export const AdditionalDetails = ({
         {showContractSign && (
           <View style={{}}>
             <Text style={styles.shareHeading}>
-              I share the contract with you.
+              Ich teile den Vertrag mit Ihnen.
             </Text>
 
             <View style={{ ...styles.dateContainer }}>

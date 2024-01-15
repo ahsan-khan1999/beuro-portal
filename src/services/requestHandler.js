@@ -64,7 +64,7 @@ const SERVICE_URLS = {
   invoiceCollectionDetail: "/invoice/invoice-collection/read",
 
   createRecurringInvoice: "/invoice/invoice-collection/create-recurring-invoice/",
-  updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
+  updateRecurringInvoice: "/invoice/update-recurring-invoice/",
   updateInvoiceStatus: "/invoice/invoice-collection/update-invoiceCollection-status/",
   createInvoice: "/invoice/invoice-collection/",
   updateInvoicePaymentStatus: "/invoice/invoice-collection/update-payment-status/",

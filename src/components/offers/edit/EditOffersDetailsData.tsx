@@ -119,32 +119,36 @@ const EditOffersDetailsData = ({
   };
 
   return (
-    <div className="grid grid-cols-1 xMaxSize:grid-cols-4 xMaxSize:gap-x-6">
-      <div className="col-span-1 flex flex-row xMaxSize:flex-col gap-4 w-full">
-        <div className="flex flex-col gap-y-[14px] w-fit sticky">
-          {tabSection.map((item, index) => (
-            <OfferTabs
-              isSelected={tabType === index}
-              setTabType={setTabType}
-              isToggle={false}
-              tabType={tabType}
-              name={item.name}
-              index={index + 1}
-              icon={item.icon}
-              selectedTab={index}
-            />
-          ))}
+    <div className="overflow-hidden">
+      <div className="grid grid-cols-1 xLarge:grid-cols-4 gap-y-6">
+        <div className="col-span-1 xLarge:fixed">
+          <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-fit mb-5">
+            {tabSection.map((item, index) => (
+              <OfferTabs
+                isSelected={tabType === index}
+                setTabType={setTabType}
+                isToggle={false}
+                tabType={tabType}
+                name={item.name}
+                index={index + 1}
+                icon={item.icon}
+                selectedTab={index}
+              />
+            ))}
+          </div>
+          <OfferEditImages
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleImagesUpload}
+            tabType={tabType}
+            handleImageSlider={handleImageSlider}
+          />
         </div>
-        <OfferEditImages
-          shareImgModal={shareImgModal}
-          handleImagesUpload={handleImagesUpload}
-          tabType={tabType}
-          handleImageSlider={handleImageSlider}
-        />
-      </div>
 
-      <div className="col-span-3 mt-[14px] h-screen overflow-scroll">
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        <div className="overflow-y-auto xLarge:col-start-2 col-span-3 w-full">
+          <div className="max-h-[650px] xLarge:max-h-full">
+            {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+          </div>
+        </div>
       </div>
     </div>
   );

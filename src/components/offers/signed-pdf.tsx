@@ -377,25 +377,16 @@ const OfferSignedPdf = ({
     <div className="download-link" id="gohere">
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
-          return pdfAction === "Reject" ? (
+          return (
             <Button
-              className={`mt-[55px] w-full ${"bg-red"} rounded-[4px] shadow-md  text-center text-white`}
-              onClick={rejectOffer}
+              className={`mt-[55px] w-full ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"} rounded-[4px] shadow-md  text-center text-white`}
+              onClick={() => pdfAction === "Reject" ? rejectOffer() : acceptOffer(blob)}
               inputType="button"
-              id="acceptOffer"
+              id="signature"
               loading={offerLoading}
               text={pdfAction as string}
             />
-          ) : pdfAction === "Accept" ? (
-            <Button
-              className={`mt-[55px] w-full ${"bg-[#45C769]"} rounded-[4px] shadow-md  text-center text-white`}
-              onClick={() => acceptOffer(blob)}
-              inputType="button"
-              id="acceptOffer"
-              loading={offerLoading}
-              text={pdfAction}
-            />
-          ) : null;
+          )
         }}
       </BlobProvider>
     </div>

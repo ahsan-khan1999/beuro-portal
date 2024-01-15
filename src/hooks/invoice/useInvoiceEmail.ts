@@ -36,14 +36,14 @@ export const useInvoiceEmail = (
   const { loading, error, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
-  const { content, contentDetails } = useAppSelector((state) => state.content);
+  const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
         collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
           ?.invoiceContent?.attachments as string[]
       )) ||
-      []
+    []
   );
   const { invoiceID } = router.query;
   const schema = generateContractEmailValidationSchema(translate);
@@ -57,12 +57,11 @@ export const useInvoiceEmail = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useEffect(() => {
-    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
-  }, []);
 
-  useMemo(() => {
+
+  useEffect(() => {
     if (invoiceID) {
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
@@ -79,8 +78,7 @@ export const useInvoiceEmail = (
               ?.email,
           content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
           subject:
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.title,
+            res?.payload?.title,
           description:
             res?.payload?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body,
@@ -148,5 +146,8 @@ export const useInvoiceEmail = (
     errors,
     error,
     translate,
+    loadingContent,
+    loading
+
   };
 };

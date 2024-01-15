@@ -35,7 +35,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "hamzaicp54@gmail.com",
+              placeholder: "email@domain.com",
               register,
 
             },
@@ -95,7 +95,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
+        // value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
 
 
       },

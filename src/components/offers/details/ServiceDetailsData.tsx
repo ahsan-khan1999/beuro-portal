@@ -4,22 +4,20 @@ import React from "react";
 import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
-import { filterService } from "@/utils/utility";
+import { calculateTax, filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 const ServiceDetailsData = ({
   offerDetails,
-  currency
+  currency,
 }: {
   offerDetails: OffersTableRowTypes;
-  currency?: string
+  currency?: string;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
-  
 
   return (
     <LeadsCardLayout>
@@ -49,11 +47,12 @@ const ServiceDetailsData = ({
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("offers.service_details.detail_headings.title")}
             </span>
-            <span className="text-[14px] font-medium text-[#8F8F8F]">
+            <span className="text-[14px] font-medium text-[#8F8F8F] mx-2   ">
               {translate("offers.service_details.detail_headings.description")}
             </span>
             <span>
-              {translate("offers.service_details.detail_headings.price")}({currency})
+              {translate("offers.service_details.detail_headings.price")}(
+              {currency})
             </span>
             <span>
               {translate("offers.service_details.detail_headings.unit")}
@@ -74,7 +73,7 @@ const ServiceDetailsData = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.serviceTitle}
               </span>
-              <span className="text-base font-medium text-[#4B4B4B] break-all mr-2">
+              <span className="text-base font-medium text-[#4B4B4B] break-all mx-2">
                 {item?.description}
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -109,7 +108,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.taxAmount} ({TAX_PERCENTAGE}%)
+                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
                 </span>
               </div>
             </div>

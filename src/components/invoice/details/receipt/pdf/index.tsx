@@ -91,11 +91,7 @@ const ReceiptPdfPreview = () => {
             onPrint={handlePrint}
             onSendViaPost={handleSendByPost}
             activeButtonId={activeButtonId}
-            title={
-              router.pathname?.includes("receipt")
-                ? `${translate("invoice.receipt_details")}`
-                : `${translate("invoice.invoice_details")}`
-            }
+            title={translate("invoice.receipt_details")}
           />
           <InvoicePdfPreview
             mergedPdfFileUrl={mergedPdfUrl}
