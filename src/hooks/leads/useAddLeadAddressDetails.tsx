@@ -24,7 +24,7 @@ export const useAddLeadAddressDetails = (
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customerDetails } = useAppSelector((state) => state.customer);
-  const [addressType, setAddressType] = useState([false, false])
+  const [addressType, setAddressType] = useState([false, false]);
 
   const [addressCount, setAddressCount] = useState(
     leadDetails?.addressID?.address?.length || 1
@@ -34,10 +34,8 @@ export const useAddLeadAddressDetails = (
     addressCount
   );
 
-
   const handleRemoveNewAddress = () => {
     setAddressCount(addressCount - 1);
-
   };
   const {
     register,
@@ -47,14 +45,14 @@ export const useAddLeadAddressDetails = (
     reset,
     formState: { errors, isValid },
     getValues,
-    setValue
+    setValue,
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  
+
   const handleAddNewAddress = () => {
     setAddressCount(addressCount + 1);
-    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`)
+    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`);
   };
   useMemo(() => {
     if (leadDetails.id) {
@@ -62,30 +60,30 @@ export const useAddLeadAddressDetails = (
         transformAddressFormValues(
           leadDetails?.addressID?.address
             ? leadDetails?.addressID?.address
-            : [{...leadDetails?.customerDetail?.address,label:"Address 1"}]
+            : [{ ...leadDetails?.customerDetail?.address, label: "Address 1" }]
         )
       );
     } else {
       reset(
-        transformAddressFormValues(
-          [{
+        transformAddressFormValues([
+          {
             label: "Address 1",
             country: "Switerland",
             postalCode: "",
-            streetNumber: ""
-          }]
-        )
+            streetNumber: "",
+          },
+        ])
       );
     }
   }, [leadDetails.id]);
 
   const handleFieldTypeChange = (index: number) => {
     let address = [...addressType];
-    address[index - 1] = !address[index - 1]
+    address[index - 1] = !address[index - 1];
     console.log(address, "address");
 
-    setAddressType(address)
-  }
+    setAddressType(address);
+  };
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

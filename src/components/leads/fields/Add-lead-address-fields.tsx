@@ -27,19 +27,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
 
   for (let i = 1; i <= count; i++) {
     formField.push(
-
-
       {
         containerClass: "",
         field: {
           type: Field.div,
-          className: "flex  space-x-2",
+          className: "flex space-x-2",
           id: `address-labels-${i}`,
           children: [
-            !(addressType && !addressType[i - 1]) &&
-            ({
+            (!(addressType && !addressType[i - 1]) && {
               containerClass: "",
-
               field: {
                 type: Field.input,
                 className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
@@ -49,10 +45,8 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
                 value: `Address ${i}`,
-
-
               },
-            }) || ({
+            }) || {
               containerClass: "",
 
               field: {
@@ -63,12 +57,11 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
                 value: `Address ${i}`,
-                disabled:true,
-                className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
-
-
+                disabled: true,
+                className:
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
               },
-            }),
+            },
             {
               containerClass: "",
               field: {
@@ -77,12 +70,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `addressLabel-${i}`,
                 inputType: "button",
                 icon: editIcon,
-                onClick: () => handleFieldTypeChange && handleFieldTypeChange(i)
-
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
               },
             },
-          ]
-        }
+          ],
+        },
       },
       {
         containerClass: "mb-0 relative -top-1 right-0 float-right",
@@ -91,8 +84,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           id: "button",
           text: `${translate("common.remove")}`,
           inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 1 && "hidden"
-            }`,
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 1 && "hidden"
+          }`,
           onClick: handleRemoveAddress && handleRemoveAddress,
         },
       },
@@ -244,8 +238,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: "button",
             text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
-            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${count === 2 && "hidden"
-              }`,
+            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
+              count === 2 && "hidden"
+            }`,
             onClick: handleAddNewAddress && handleAddNewAddress,
             loading,
           },
