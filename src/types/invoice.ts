@@ -93,6 +93,8 @@ export interface InvoiceDetailsTableProps {
 export interface PdfSubInvoiceTypes {
   id: string;
   emailStatus: string;
+  invoiceStatus: string;
+  amount: string;
   invoiceID: InvoiceTableRowTypesPdf;
   invoiceNumber: string;
   paymentType: string;

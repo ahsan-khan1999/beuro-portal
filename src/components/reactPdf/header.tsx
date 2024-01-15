@@ -13,8 +13,6 @@ export const Header = ({
   const { t: translate } = useTranslation();
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
-  // if (FooterColour) styles.footerContainer.backgroundColor = ;
-  //   if (textColour) styles.footerText.color = `#${textColour}`;
   return (
     <View
       style={{

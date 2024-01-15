@@ -259,37 +259,37 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
             containerClass: "  mt-6",
             field: {
               type: Field.div,
-              id: "div",
-              className: "grid grid-cols-2 ",
+              id: "div-field",
+              className: "grid grid-cols-2",
               children: [
                 {
                   containerClass: `hidden  ${
                     i === totalCount - 1 && "!flex"
                   }  mb-0 col-span-1 mt-5 `,
+
                   field: {
-                    type: Field.span,
+                    type: Field.button,
                     id: "button",
-                    text: "",
-                    html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
-                                    </svg>
-                                    `,
-                    containerClassName:
-                      "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[50px] h-[50px] text-white hover-bg-none cursor-pointer flex justify-center items-center",
+                    text: `${translate("common.add_company_info")}`,
+                    inputType: "button",
+                    className:
+                      "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                     onClick: () => append(getQrObject(user)),
+                    loading,
                   },
                 },
                 {
                   containerClass: "absolute right-[50px]  mt-6",
                   field: {
                     type: Field.button,
-                    id: "div-field",
+                    id: "button",
                     className: `rounded-lg px-4 min-w-[132px] w-fit !h-[40px] !bg-red text-white hover:bg-none ${
                       i < 1 && "hidden"
                     }`,
                     inputType: "button",
                     text: `${translate("common.remove")}`,
                     onClick: () => remove(i),
+                    loading,
                   },
                 },
               ],

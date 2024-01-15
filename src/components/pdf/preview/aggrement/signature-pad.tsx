@@ -8,8 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 import Image from "next/image";
 import { dataURLtoBlob, smoothScrollToSection } from "@/utils/utility";
 
-const ow = 383;
-const oh = 153;
+const ow = 442;
+const oh = 173;
 const originalStrokeWidth = 1;
 
 export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
@@ -31,8 +31,11 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
       canvas.width = ow * scale;
       canvas.height = oh * scale;
 
-      signaturePad.minWidth = originalStrokeWidth / scale;
-      signaturePad.maxWidth = (originalStrokeWidth * 0.7) / scale;
+      const adjustedScale = scale < 1 ? (scale * 2) * 3  : scale;
+      const scaledStrokeWidth = originalStrokeWidth / adjustedScale;
+      
+      signaturePad.minWidth = scaledStrokeWidth;
+      signaturePad.maxWidth = (scaledStrokeWidth * 0.7);
 
       // Redraw the signature from the existing data
       const data = signaturePad.toData();

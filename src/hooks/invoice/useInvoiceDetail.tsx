@@ -31,6 +31,7 @@ import RecurringInvoice from "@/base-components/ui/modals1/RecurringInvoice";
 import RecurringInvoiceFrequency from "@/base-components/ui/modals1/InvoiceFrequency";
 import InvoiceUpdate from "@/base-components/ui/modals1/InvoiceUpdate";
 import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoiceUpdate";
+import { readContent } from "@/api/slices/content/contentSlice";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -52,6 +53,7 @@ export default function useInvoiceDetail() {
 
   useEffect(() => {
     if (id) {
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(readInvoiceDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(

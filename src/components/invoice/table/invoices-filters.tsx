@@ -26,6 +26,10 @@ export default function InvoicesFilters({
       type: `${staticEnums.InvoiceStatus.Pending}`,
     },
     {
+      label: `${translate("filters.extra_filters.open")}`,
+      type: `${staticEnums.InvoiceStatus.Open}`,
+    },
+    {
       label: `${translate("filters.extra_filters.overdue")}`,
       type: `${staticEnums.InvoiceStatus.Overdue}`,
     },
@@ -33,6 +37,7 @@ export default function InvoicesFilters({
       label: `${translate("filters.extra_filters.paid")}`,
       type: `${staticEnums.InvoiceStatus.Paid}`,
     },
+
   ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {

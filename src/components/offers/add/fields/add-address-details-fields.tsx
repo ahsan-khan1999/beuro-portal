@@ -6,6 +6,8 @@ import {
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import icon from "@/assets/svgs/Vector.svg";
+import editIcon from "@/assets/svgs/name-input.svg";
+
 import { useTranslation } from "next-i18next";
 export const addressObject = {
   streetNumber: "",
@@ -21,34 +23,93 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   count,
   handleAddNewAddress,
   handleRemoveAddress,
-  fields
+  fields,
+  handleFieldTypeChange,
+  addressType,
+  setValue,
+  getValues
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
-
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
     formField.push(
       {
-        containerClass: "mb-0 relative -top-4 right-0 float-right",
+        containerClass: "",
+        field: {
+          type: Field.div,
+          className: "flex  space-x-2",
+          id: `address-labels-${i}`,
+          children: [
+            !(addressType && !addressType[i]) &&
+            ({
+              containerClass: "",
+
+              field: {
+                type: Field.input,
+                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+                inputType: "text",
+                id: `address.${i}.label`,
+                name: `address.${i}.label`,
+                register,
+                value: `Address ${i}`,
+                setValue
+
+
+              },
+            }) || ({
+              containerClass: "",
+
+              field: {
+                type: Field.input,
+                inputType: "text",
+                id: `address.${i}.label`,
+                name: `address.${i}.label`,
+                register,
+                value: `Address ${i}`,
+                disabled: true,
+                className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
+                setValue
+
+              },
+            }),
+            {
+              containerClass: "",
+              field: {
+                type: Field.button,
+                className: "bg-white hover:bg-white",
+                id: `address.${i}.type`,
+                name:`address.${i}.type`,
+                inputType: "button",
+                icon: editIcon,
+                onClick: () => handleFieldTypeChange && handleFieldTypeChange(i)
+
+              },
+            },
+          ]
+        }
+      },
+
+
+      {
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
         field: {
           type: Field.button,
           id: "button",
           text: `${translate("common.remove_button")}`,
           inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
-            i === 0 && "hidden"
-          }`,
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${i === 0 && "hidden"
+            }`,
           onClick: () => handleRemoveAddress && handleRemoveAddress(i),
         },
       },
       {
         containerClass: "mt-6 ",
-        label: {
-          text: `Address ${i} Details`,
-          htmlFor: `address-${i}-details`,
-          className: "mb-[10px] text-[#8F8F8F]",
-        },
+        // label: {
+        //   text: `Address ${i} Details`,
+        //   htmlFor: `address-${i}-details`,
+        //   className: "mb-[10px] text-[#8F8F8F]",
+        // },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
@@ -107,7 +168,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                   })
                 ),
                 control,
-                value: "",
+                value: Object.keys(staticEnums.Country)[0],
               },
             },
           ],
@@ -149,7 +210,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex justify-between",
+      className: "flex flex-col lg:flex-row gap-y-5 justify-between",
       children: [
         {
           field: {

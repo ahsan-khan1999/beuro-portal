@@ -1,22 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
-import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import { BaseButton } from "@/base-components/ui/button/base-button";
-import { PostIcon } from "@/assets/svgs/components/post-icon";
-import { InvoiceEmailCardProps } from "@/types";
-import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
-import { EmailIcon } from "@/assets/svgs/components/email-icon";
 
-const MailDetailsCard = ({
-  loading,
-  onEmailSend,
-  onSendViaPost,
-  activeButtonId,
-}: InvoiceEmailCardProps) => {
+
+const MailDetailsCard = () => {
   const router = useRouter();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
@@ -36,7 +26,7 @@ const MailDetailsCard = ({
         </div>
 
         <div className="flex items-center gap-5">
-          <BaseButton
+          {/* <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={onSendViaPost}
             containerClassName="flex items-center group gap-x-3 row-reverse"
@@ -56,7 +46,7 @@ const MailDetailsCard = ({
             loaderColor="#4A13E7"
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
-          </BaseButton>
+          </BaseButton> */}
           {/* <Image
             src={PDFIcon}
             alt="PDFIcon"
@@ -75,7 +65,7 @@ const MailDetailsCard = ({
         <div className="flex justify-between">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
-              {translate("invoice.card_content.invoice_number")}:
+              {translate("invoice.card_content.receipt_number")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}

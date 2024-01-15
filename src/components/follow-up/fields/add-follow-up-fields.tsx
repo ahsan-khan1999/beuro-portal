@@ -7,7 +7,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps,onCustomerSelect },
+  { customer, lead, followUps, onCustomerSelect },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -17,7 +17,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         id: "div-field",
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-[41px] gap-y-5",
+        className: "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5",
         children: [
           {
             containerClass: "mb-0",
@@ -69,7 +69,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               register,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -96,7 +95,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               control,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {

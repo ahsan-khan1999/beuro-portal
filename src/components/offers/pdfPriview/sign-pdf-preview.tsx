@@ -16,6 +16,7 @@ import { EmailTemplate } from "@/types/settings";
 import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
+import { Container } from "@/components/pdf/container";
 
 export const DUMMY_DATA: PdfProps = {
   emailHeader: { emailStatus: "pending", offerNo: "23-A" },
@@ -44,6 +45,7 @@ export const DUMMY_DATA: PdfProps = {
         description: "",
         postalCode: "",
         streetNumber: "",
+        label:""
       },
     ],
     workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
@@ -309,8 +311,8 @@ const SignPdfPreview = () => {
     <LoadingState />
   ) : (
     offerData && (
-      <YogaPdfContainer>
-        <div className="my-5">
+      <Container>
+        <div className="my-0">
           <SignPdf<EmailHeaderProps>
             pdfData={offerData}
             newPageData={newPageData}
@@ -321,7 +323,7 @@ const SignPdfPreview = () => {
             systemSettings={systemSetting}
           />
         </div>
-      </YogaPdfContainer>
+      </Container>
     )
   );
 };

@@ -111,9 +111,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.body",
               name: "offerContent.body",
-
               control,
-
               value:
                 (contentDetails?.id && contentDetails?.offerContent?.body) ||
                 "",
@@ -152,7 +150,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         text: `${translate("common.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
         loading,
       },
     },
@@ -189,16 +187,15 @@ const generateAddressChildren = (
     });
   }
   addressformFields.push({
-    containerClass: "mb-0 mt-3 maxSize:mt-[28px]",
+    containerClass: "mb-0 mt-8",
     field: {
       type: Field.button,
       id: "button",
-      text: "",
+      text: `${translate("common.add_new_address")}`,
       inputType: "button",
       className:
-        "rounded-lg border-[1px] border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] text-white",
+        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
       onClick: () => append && append({ address: "" }),
-      icon: icon,
     },
   });
   return addressformFields;
