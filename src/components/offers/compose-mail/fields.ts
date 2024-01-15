@@ -35,7 +35,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "hamzaicp54@gmail.com",
+              placeholder: "email@domain.com",
               register,
 
             },

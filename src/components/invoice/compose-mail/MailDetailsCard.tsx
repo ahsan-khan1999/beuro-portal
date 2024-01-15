@@ -39,12 +39,12 @@ const MailDetailsCard = () => {
             </div>
             <div className="flex gap-[10px]">
               <span className="text-base  font-normal text-[#4D4D4D] break-all">
-                {translate("contracts.card_content.offer_title")}:
+                {translate("invoice.table_headings.title")}:
               </span>
 
               <span className="text-base font-medium text-[#4B4B4B] flex">
                 {
-                  collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
+                  collectiveInvoiceDetails
                     ?.title
                 }
               </span>

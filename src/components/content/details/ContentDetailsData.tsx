@@ -202,16 +202,10 @@ const ContentDetailsData = () => {
         ))}
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[650px] xl:mt-0 mt-4 overflow-scroll">
-        {
-          // loading ? (
-          //   <LoadingState />
-          // ) : (
-          renderComponent.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
-          // )
-        }
+      <div className="flex flex-col gap-y-5 w-full h-screen xl:mt-0 mt-4 overflow-scroll">
+        {renderComponent.map((component, index) => (
+          <React.Fragment key={index}>{component}</React.Fragment>
+        ))}
       </div>
     </div>
   );

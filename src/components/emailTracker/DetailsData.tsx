@@ -20,7 +20,7 @@ const DetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
+  
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -110,8 +110,8 @@ const DetailsData = ({
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
-        {emailDetails?.pdf?.map((item) => {
-          let length = item.href?.split("/")?.length - 1;
+        {emailDetails?.attachments?.map((item) => {
+          let length = item?.href?.split("/")?.length - 1;
 
           return (
             <div className="my-5 flex items-end">

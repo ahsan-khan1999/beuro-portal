@@ -35,7 +35,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "hamzaicp54@gmail.com",
+              placeholder: "email@domain.com",
               register,
 
             },

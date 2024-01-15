@@ -2,11 +2,12 @@ import { ContactDetailsProps } from "@/types/types";
 import { useTranslation } from "next-i18next";
 
 export const ContactDetails = ({
-  address: { city, name, postalCode, streetWithNumber },
+  address,
   email,
   phone,
-}: ContactDetailsProps) => {
+}: Partial<ContactDetailsProps>) => {
   const { t: translation } = useTranslation();
+  const { city, name, postalCode, streetWithNumber } = address || {};
   return (
     <div className="grid grid-cols-4 items-center mt-5 mb-[37px]">
       <div className="flex flex-col gap-[4px] col-span-3">

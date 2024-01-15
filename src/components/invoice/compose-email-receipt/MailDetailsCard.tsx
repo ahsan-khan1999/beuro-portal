@@ -31,7 +31,7 @@ const MailDetailsCard = ({
             onClick={() => router.back()}
           />
           <p className="font-medium text-2xl">
-            {translate("invoice.invoice_details")}
+            {translate("invoice.receipt_details")}
           </p>
         </div>
 
@@ -57,7 +57,7 @@ const MailDetailsCard = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
-          <Image
+          {/* <Image
             src={PDFIcon}
             alt="PDFIcon"
             onClick={() =>
@@ -67,7 +67,7 @@ const MailDetailsCard = ({
               })
             }
             className="cursor-pointer"
-          />
+          /> */}
         </div>
       </div>
 
@@ -83,11 +83,11 @@ const MailDetailsCard = ({
           </div>
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D] break-all">
-              {translate("contracts.card_content.offer_title")}:
+              {translate("content.details.receipt_title")}:
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
-              {collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.title}
+              {collectiveInvoiceDetails?.title}
             </span>
           </div>
         </div>

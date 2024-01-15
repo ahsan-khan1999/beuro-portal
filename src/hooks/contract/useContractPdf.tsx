@@ -18,6 +18,7 @@ import {
   readContractDetails,
   readQRCode,
   sendContractEmail,
+  sendOfferByPost,
   updateContractContent,
 } from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
@@ -28,7 +29,6 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
 
@@ -234,10 +234,6 @@ export const useContractPdf = () => {
               currPage: 1,
               totalPages: calculateTotalPages,
             },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
-            },
             aggrementDetails: contractDetails?.additionalDetails || "",
             isOffer: true,
             signature: contractDetails?.offerID?.signature,
@@ -345,10 +341,11 @@ export const useContractPdf = () => {
       setActiveButtonId("email");
       console.log(mergedFile, "pdfFile");
 
-      if (!mergedFile) return;
       const data = await localStoreUtil.get_data("contractComposeEmail");
+      if (!mergedFile) return;
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      console.log(fileUrl)
       if (data) {
         let apiData = { ...data, pdf: fileUrl?.payload };
 
@@ -434,11 +431,7 @@ export const useContractPdf = () => {
     loading,
     activeButtonId,
     router,
-    templateSettings,
-    emailTemplateSettings,
     loadingGlobal,
-    qrCodeUrl,
-    remoteFileBlob,
     mergedPdfUrl,
     isPdfRendering,
     dispatch,
@@ -448,6 +441,5 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
-    systemSetting,
   };
 };

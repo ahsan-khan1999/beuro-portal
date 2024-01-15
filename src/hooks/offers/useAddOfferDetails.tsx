@@ -26,7 +26,7 @@ import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
-import { staticEnums } from "../../utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -56,6 +56,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     watch,
     reset,
     setValue,
+    resetField,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -72,16 +73,16 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const selectedContent = watch("content");
   const leadID = watch("leadID");
 
-  useMemo(() => {
+  useEffect(() => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID },paginate: 0 },
+          params: { filter: { customerID: customerID }, paginate: 0 },
         })
       );
   }, [customerID]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (offerDetails?.id) {
       reset({
         type: "Existing Customer",
@@ -169,7 +170,32 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        title: null
       });
+    } else if (type === "Existing Customer" && offerDetails?.id) {
+      reset({
+        type: "Existing Customer",
+        customerID: offerDetails?.leadID?.customerID,
+        leadID: offerDetails?.leadID?.id,
+        customerType: getKeyByValue(
+          staticEnums["CustomerType"],
+          offerDetails?.leadID?.customerDetail?.customerType
+        ),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title: offerDetails?.title,
+        address: offerDetails?.leadID?.customerDetail?.address,
+        date: offerDetails?.date,
+      });
+    } else if(type === "Existing Customer" && !offerDetails?.id){
+      dispatch(setLeads([]))
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
+      setValue("content", null)
+      setValue("title", null)
+      setValue("leadID", null)
     }
   }, [type]);
 

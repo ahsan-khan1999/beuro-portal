@@ -40,9 +40,13 @@ export const useMergedPdfDownload = ({
           const convertedBlob = new Blob([mergedPdfBlob], {
             type: "application/pdf",
           });
+
           const url = URL.createObjectURL(convertedBlob);
 
-          setMergedFile(blobToFile(convertedBlob, data?.emailHeader?.offerNo || "output.pdf"));
+          console.log(convertedBlob.name)
+          
+
+          setMergedFile(blobToFile(convertedBlob, `${fileName}.pdf` || "output.pdf"));
           setMergedPdfUrl(url);
         }
       } catch (err) {

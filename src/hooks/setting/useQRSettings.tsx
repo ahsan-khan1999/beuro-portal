@@ -19,6 +19,9 @@ import {
   readQrCodeSettings,
 } from "@/api/slices/settingSlice/settings";
 import { User } from "@/types";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 export default function useQRSettings({
   handleCreation,
@@ -30,6 +33,7 @@ export default function useQRSettings({
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
+  const { modal } = useAppSelector((state) => state.global);
 
   const schema = generateQRCodeValdiation(translate);
   const {
@@ -90,6 +94,25 @@ export default function useQRSettings({
     handleOnChangeStatus
   );
 
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+  const handleSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+  };
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.email_sent_des")}
+        routeHandler={onClose}
+      />
+    ),
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
   const buttonField = QRCodeSettingsAddField(
     register,
     loading,
@@ -111,7 +134,7 @@ export default function useQRSettings({
         translate,
       })
     );
-    if (response?.payload) handleCreation();
+    if (response?.payload) handleSuccess();
   };
   return {
     fields: [...fields, ...buttonField],
@@ -120,6 +143,7 @@ export default function useQRSettings({
     handleSubmit,
     errors,
     error,
+    renderModal
   };
 }
 export const getQrObject = (user: User) => {

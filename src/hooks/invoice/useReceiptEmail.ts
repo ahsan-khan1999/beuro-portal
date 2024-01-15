@@ -79,8 +79,7 @@ export const useReceiptEmail = (
               ?.email,
           content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
           subject:
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.title,
+            res?.payload?.title,
           description:
             res?.payload?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,

@@ -827,7 +827,6 @@ export interface PdfProps<T = EmailHeaderProps> {
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
-  qrCode: qrCode;
   aggrementDetails: string;
   isOffer?: boolean;
   id?: string;
@@ -848,6 +847,7 @@ export interface PdfPreviewProps {
   systemSetting?: SystemSetting | null;
   mergedPdfFileUrl?: string | null;
   isPdfRendering?: boolean;
+  showContractSign?: boolean;
 }
 
 export interface PdfPreviewFooterProps {
@@ -904,7 +904,6 @@ export interface PayableToProps extends QRCodeBaseProps {
 export interface PaymentQrCodeDetailsProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
-  qrCode: qrCode;
 }
 export interface QrCodeDetailsProps {
   qrCode: qrCode;

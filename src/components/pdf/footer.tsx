@@ -11,7 +11,9 @@ export const Footer = ({
   totalPages,
   currPage,
   emailTemplateSettings
-}: DocumentDetailFooterProps) => {
+}: Partial<DocumentDetailFooterProps>) => {
+  const textColor = "#" + emailTemplateSettings?.textColour;
+
   const {
     firstColumn: firstColumnSettings,
     secondColumn: secondColumnSettings,
@@ -53,17 +55,32 @@ export const Footer = ({
               }`}
           >
             {firstColumnSettings?.isCompanyName && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.companyName}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.companyName}</span>
             )}
             {firstColumnSettings?.isWebsite && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.website}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.website}</span>
             )}
-            {firstColumnSettings?.isEmail && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.email}</span>}
+            {firstColumnSettings?.isEmail && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.email}</span>}
             {firstColumnSettings?.isPhoneNumber && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.phoneNumber}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.phoneNumber}</span>
             )}
             {firstColumnSettings?.isTaxNumber && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.taxNumber}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{firstColumn?.taxNumber}</span>
             )}
           </div>
         )}
@@ -77,19 +94,34 @@ export const Footer = ({
               }`}
           >
             {secondColumnSettings?.isStreetNumber && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.address?.streetNumber}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.address?.streetNumber}</span>
             )}
             {secondColumnSettings?.isPostCode && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.address?.postalCode}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.address?.postalCode}</span>
             )}
             {secondColumnSettings?.isBankName && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.bankName}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.bankName}</span>
             )}
             {secondColumnSettings?.isAccountNumber && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.accountNumber}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.accountNumber}</span>
             )}
             {secondColumnSettings?.isIBAN && (
-              <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.ibanNumber}</span>
+              <span
+            style={{ color: textColor }}
+              
+              className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{secondColumn?.bankDetails?.ibanNumber}</span>
             )}
           </div>
         )}
@@ -102,31 +134,67 @@ export const Footer = ({
               : ""
               }`}
           >
-            {thirdColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row1}</span>}
-            {thirdColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row2}</span>}
-            {thirdColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row3}</span>}
-            {thirdColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row4}</span>}
-            {thirdColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn.row5}</span>}
+            {thirdColumnSettings?.isRow1 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row1}</span>}
+            {thirdColumnSettings?.isRow2 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row2}</span>}
+            {thirdColumnSettings?.isRow3 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row3}</span>}
+            {thirdColumnSettings?.isRow4 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row4}</span>}
+            {thirdColumnSettings?.isRow5 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{thirdColumn?.row5}</span>}
           </div>
         )}
 
         {/* fourth column */}
         {isFourthColumn && (
           <div className="flex flex-col">
-            {fourthColumnSettings?.isRow1 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row1}</span>}
-            {fourthColumnSettings?.isRow2 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row2}</span>}
-            {fourthColumnSettings?.isRow3 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row3}</span>}
-            {fourthColumnSettings?.isRow4 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row4}</span>}
-            {fourthColumnSettings?.isRow5 && <span className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn.row5}</span>}
+            {fourthColumnSettings?.isRow1 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row1}</span>}
+            {fourthColumnSettings?.isRow2 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row2}</span>}
+            {fourthColumnSettings?.isRow3 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row3}</span>}
+            {fourthColumnSettings?.isRow4 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row4}</span>}
+            {fourthColumnSettings?.isRow5 && <span
+            style={{ color: textColor }}
+            
+            className={`text-[${'#' + emailTemplateSettings?.textColour}]`}>{fourthColumn?.row5}</span>}
           </div>
         )}
       </div>
 
       <div className="s self-end">
-        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium mr-[10px]`}>
+        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium mr-[10px]`}
+            style={{ color: textColor }}
+        
+        >
           {translation("pdf.page")}
         </span>
-        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium`}>
+        <span className={`text-[${'#' + emailTemplateSettings?.textColour}] text-[14px] font-medium`}
+            style={{ color: textColor }}
+        
+        >
           {currPage}/{totalPages}
         </span>
       </div>

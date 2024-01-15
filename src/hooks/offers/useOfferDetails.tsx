@@ -30,6 +30,7 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { updateQuery } from "@/utils/update-query";
 import localStoreUtil from "@/utils/localstore.util";
 import toast from "react-hot-toast";
+import { readContent } from "@/api/slices/content/contentSlice";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -49,6 +50,7 @@ export default function useOfferDetails() {
     localStoreUtil.remove_data("contractComposeEmail");
 
     if (id) {
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
       dispatch(readOfferDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setOfferDetails(res.payload));

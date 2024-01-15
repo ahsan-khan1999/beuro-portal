@@ -38,13 +38,13 @@ const EntryLinks = () => {
       />
 
       <div className="flex justify-center">
-        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
           {translate("common.privacy")}
         </Link>
       </div>
 
       <div className="flex justify-center">
-        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
           {translate("common.copy_right")}
         </Link>
       </div>

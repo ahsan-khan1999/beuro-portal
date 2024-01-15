@@ -22,7 +22,7 @@ const AdditionalDetails = ({
         <div
           className="html-content text-[#4B4B4B] font-normal text-base"
           dangerouslySetInnerHTML={{
-            __html: contractDetails?.offerID?.additionalDetails,
+            __html: contractDetails?.additionalDetails,
           }}
         />
       </div>

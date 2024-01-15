@@ -50,7 +50,7 @@ export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField 
         field: {
           type: Field.button,
           id: "button",
-          text: `${translate("invoice.create_invoice_modal.recurring_button")}`,
+          text: translate("invoice.create_invoice_modal.update_invoice"),
           inputType: "submit",
           className: "hover:bg-none",
           loading,

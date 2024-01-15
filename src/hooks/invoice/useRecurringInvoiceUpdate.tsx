@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema, generateRecurringInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
-import { createInvoice, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { createInvoice, readInvoiceDetails, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
@@ -47,7 +47,10 @@ export default function useRecurringInvoiceUpdateModal(invoiceCreated: Function)
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
     const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring }
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload) invoiceCreated();
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))
+      
+      invoiceCreated();}
   };
   return {
     error,
