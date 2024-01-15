@@ -30,7 +30,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 0; i < count; i++) {
     formField.push(
       {
-        containerClass: "mb-0 relative -top-4 right-0 float-right",
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
         field: {
           type: Field.button,
           id: "button",
@@ -149,7 +149,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex justify-between",
+      className: "flex flex-col lg:flex-row gap-y-5 justify-between",
       children: [
         {
           field: {

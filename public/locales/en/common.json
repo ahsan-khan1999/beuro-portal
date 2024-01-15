@@ -1067,6 +1067,8 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
+    "add_company_info": "Add Company Information",
+    "add_new_address": "Add New Address",
     "upload_img": "Upload Images",
     "resend_button": "Resend?",
     "continue": "Continue",

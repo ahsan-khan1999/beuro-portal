@@ -122,7 +122,7 @@ const EditOffersDetailsData = ({
     <div className="overflow-hidden">
       <div className="grid grid-cols-1 xLarge:grid-cols-4 gap-y-6">
         <div className="col-span-1 xLarge:fixed">
-          <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-fit mb-5">
+          <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
             {tabSection.map((item, index) => (
               <OfferTabs
                 isSelected={tabType === index}

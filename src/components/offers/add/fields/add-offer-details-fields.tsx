@@ -168,8 +168,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -190,8 +190,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
@@ -399,9 +399,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: offerDetails?.id
-          ? offerDetails?.leadID?.customerID
-          : "",
+        value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },
     };
@@ -440,8 +438,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
         control,
         // value:""
-        value: offerDetails?.id && offerDetails?.leadID?.id ||
-          (lead && lead?.length > 0 && lead?.at(0)?.id || leadID) ||
+        value:
+          (offerDetails?.id && offerDetails?.leadID?.id) ||
+          (lead && lead?.length > 0 && lead?.at(0)?.id) ||
+          leadID ||
           leadID,
         // disabled: offerDetails?.leadID?.id ? true : false,
       },
@@ -545,12 +545,11 @@ export const generateDateChildren = (
     field: {
       type: Field.button,
       id: "button",
-      text: "",
+      text: "Add New Date",
       inputType: "submit",
       className:
-        "rounded-lg border !border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] !h-[48px] text-white",
+        "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
       onClick: () => OnClick({ startDate: "", endDate: "" }),
-      icon: icon,
     },
   });
   return dateformFields;

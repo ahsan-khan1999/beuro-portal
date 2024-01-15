@@ -259,9 +259,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   label: `${translate(val as string)}`,
                 })
               ),
+
               control,
               value:
-                leadDetails && leadDetails?.customerDetail?.address?.country,
+                (leadDetails &&
+                  leadDetails?.customerDetail?.address?.country) ||
+                "Swizterland",
             },
           },
         ],
