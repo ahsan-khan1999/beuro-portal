@@ -61,7 +61,7 @@ export const useInvoiceEmail = (
 
   useEffect(() => {
     if (invoiceID) {
-      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+      if(content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {

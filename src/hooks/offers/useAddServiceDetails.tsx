@@ -56,7 +56,7 @@ export const useAddServiceDetails = (
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
-    dispatch(readService({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readService({ params: { filter: { "sort": "-createdAt" }, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
 
@@ -176,10 +176,10 @@ export const useAddServiceDetails = (
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
-        taxType: staticEnums["TaxType"][offerDetails?.taxType] ,
+        taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount ,
+        taxAmount: offerDetails?.taxAmount,
       });
     } else {
       // setValue("taxType",systemSettings?.taxType)

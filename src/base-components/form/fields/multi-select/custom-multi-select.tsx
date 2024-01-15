@@ -86,13 +86,13 @@ export const MultiSelectBox = ({
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <div onClick={() => setIsOpen(!isOpen)} className={classes}>
         <div
-          className="flex flex-wrap overflow-x-auto multiSelectScrol"
+          className="flex overflow-x-auto multiSelectScrol truncate"
           onWheel={handleDivScroll}
         >
           {selectedOptions.map((selectedValue) => (
             <span
               key={selectedValue}
-              className="m-1 p-2 bg-gray-200 rounded flex-shrink-0"
+              className="m-1 p-2 bg-gray-200 rounded flex-shrink-0 "
             >
               {getLabelByValue(selectedValue, options)}
 

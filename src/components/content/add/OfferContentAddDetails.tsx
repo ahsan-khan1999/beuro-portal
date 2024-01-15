@@ -13,10 +13,11 @@ const OfferContentAddDetails = ({
     useAddOfferContentDetails(onHandleNext);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] ">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("content.tabs_headings.offer_content")}</h2>
+      <div className="flex justify-between items-center pb-[26px] border-b border-b-[#000] border-opacity-20">
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("content.tabs_headings.offer_content")}
+        </h2>
       </div>
-      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

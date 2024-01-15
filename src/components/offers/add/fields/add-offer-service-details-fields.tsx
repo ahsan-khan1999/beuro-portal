@@ -62,6 +62,19 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   for (let i = 0; i < count; i++) {
     formField.push(
       {
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove_button")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 0 && "hidden"
+          }`,
+          onClick: () => remove(i),
+        },
+      },
+      {
         //@ts-expect-error
         field: {
           type: Field.div,
@@ -304,19 +317,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 register,
               },
             },
-            {
-              containerClass: "mb-0 absolute -top-[248px] right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: `${translate("common.remove_button")}`,
-                inputType: "button",
-                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 0 && "hidden"
-                }`,
-                onClick: () => remove(i),
-              },
-            },
           ],
         },
       }
@@ -390,40 +390,56 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       register,
                     },
                   },
+                  // {
+                  //   containerClass: "grid col-span-2",
+                  //   field: {
+                  //     type: Field.div,
+                  //     id: "div-field",
+                  //     className: "flex space-x-3 mt-3",
+                  //     children: [
+                  //       {
+                  //         containerClass: "mb-0 col-span-1 ",
+                  //         field: {
+                  //           type: Field.span,
+                  //           id: "button",
+                  //           text: "",
+                  //           html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  //         <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
+                  //         </svg>
+                  //         `,
+                  //           containerClassName:
+                  //             "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
+                  //           onClick: () => append(serviceObject),
+                  //         },
+                  //       },
+                  //       {
+                  //         containerClass: "mb-0 pr-2 mt-2 mb-5",
+                  //         field: {
+                  //           type: Field.span,
+                  //           className: "!p-4  w-full",
+                  //           id: "span-field",
+                  //           text: `${translate(
+                  //             "offers.service_details.add_new_service"
+                  //           )}`,
+                  //         },
+                  //       },
+                  //     ],
+                  //   },
+                  // },
+
                   {
-                    containerClass: "grid col-span-2",
+                    containerClass: "mb-4 mt-5",
                     field: {
-                      type: Field.div,
-                      id: "div-field",
-                      className: "flex space-x-3 mt-3",
-                      children: [
-                        {
-                          containerClass: "mb-0 col-span-1 ",
-                          field: {
-                            type: Field.span,
-                            id: "button",
-                            text: "",
-                            html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
-                          </svg>
-                          `,
-                            containerClassName:
-                              "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
-                            onClick: () => append(serviceObject),
-                          },
-                        },
-                        {
-                          containerClass: "mb-0 pr-2 mt-2 mb-5",
-                          field: {
-                            type: Field.span,
-                            className: "!p-4  w-full",
-                            id: "span-field",
-                            text: `${translate(
-                              "offers.service_details.add_new_service"
-                            )}`,
-                          },
-                        },
-                      ],
+                      type: Field.button,
+                      id: "button",
+                      text: `${translate(
+                        "offers.service_details.add_new_service"
+                      )}`,
+                      inputType: "button",
+                      className:
+                        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                      onClick: () => append(serviceObject),
+                      loading,
                     },
                   },
                 ],
@@ -749,14 +765,14 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-10",
+        containerClass: "mt-[30px]",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px] ",
+          className: "flex space-x-[18px]",
           children: [
             {
-              containerClass: "mb-0 mt-[30px]",
+              containerClass: "mb-0",
               field: {
                 type: Field.button,
                 id: "buttonBack",
@@ -768,14 +784,14 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
               },
             },
             {
-              containerClass: "mb-0 mt-[30px]",
+              containerClass: "mb-0 ",
               field: {
                 type: Field.button,
                 id: "button",
                 text: `${translate("common.next_button")}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg bg-[#4A13E7] px-4  min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                 loading,
               },
             },

@@ -68,7 +68,7 @@ export const InvoiceEmailHeader = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
-            <Image
+            {/* <Image
               src={downloadIcon}
               alt="downloadIcon"
               className="cursor-pointer"
@@ -79,7 +79,7 @@ export const InvoiceEmailHeader = ({
               alt="printerIcon"
               className="cursor-pointer"
               onClick={onPrint}
-            />
+            /> */}
           </div>
         </div>
         <div className="flex justify-between items-center mt-5">

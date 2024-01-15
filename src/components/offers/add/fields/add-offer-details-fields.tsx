@@ -168,8 +168,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -190,8 +190,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
@@ -325,7 +325,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               control,
               value:
                 (offerDetails && offerDetails?.customerID?.address?.country) ||
-                "",
+                Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -399,9 +399,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: offerDetails?.id
-          ? offerDetails?.leadID?.customerID
-          : "",
+        value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },
     };
@@ -440,8 +438,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         })),
         control,
         // value:""
-        value: offerDetails?.id && offerDetails?.leadID?.id ||
-          (lead && lead?.length > 0 && lead?.at(0)?.id || leadID) ||
+        value:
+          (offerDetails?.id && offerDetails?.leadID?.id) ||
+          (lead && lead?.length > 0 && lead?.at(0)?.id) ||
+          leadID ||
           leadID,
         // disabled: offerDetails?.leadID?.id ? true : false,
       },
@@ -494,15 +494,15 @@ export const generateDateChildren = (
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
     dateformFields.push({
-      containerClass: "mb-0 ",
+      containerClass: "mb-0",
 
       field: {
         type: Field.div,
-        className: "grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-5 mb-5",
+        className: "grid grid-cols-2 gap-x-3 mt-5",
         id: `date`,
         children: [
           {
-            containerClass: "mb-0 ",
+            containerClass: "mb-0",
             label: {
               text: `${translate("common.start_date")}`,
               htmlFor: `date.${i}.startDate`,
@@ -541,16 +541,15 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "-mb-4 mlg:mt-0",
+    containerClass: "mt-[50px]",
     field: {
       type: Field.button,
       id: "button",
-      text: "",
+      text: `${translate("common.add_new_date")}`,
       inputType: "submit",
       className:
-        "rounded-lg border !border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] !h-[48px] text-white",
+        "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
       onClick: () => OnClick({ startDate: "", endDate: "" }),
-      icon: icon,
     },
   });
   return dateformFields;
@@ -565,7 +564,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: "mb-0 mt-[30px]",
       field: {
         type: Field.button,
         id: "button",

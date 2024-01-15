@@ -148,6 +148,7 @@ export const useReceiptPdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
+          console.log(invoiceDetails)
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -193,7 +194,7 @@ export const useReceiptPdf = () => {
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID?.contractID?.offerID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
@@ -215,6 +216,11 @@ export const useReceiptPdf = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
+              invoicePaidAmount:
+                invoiceDetails?.invoiceID?.paidAmount.toString(),
+              isShowExtraAmount: true,
+              invoiceAmount: invoiceDetails?.amount.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
             },
             footerDetails: {
               firstColumn: {

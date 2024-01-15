@@ -28,7 +28,7 @@ export const ContactAddress = ({
             fontSize: 10,
             fontWeight: 400,
             fontStyle: "normal",
-            color: "#404040",
+            color: "#000",
             width: 50,
           }}
         >
@@ -43,7 +43,7 @@ export const ContactAddress = ({
             fontSize: 10,
             fontWeight: 400,
             fontStyle: "normal",
-            color: "#404040",
+            color: "#000",
             width: 50,
           }}
         >

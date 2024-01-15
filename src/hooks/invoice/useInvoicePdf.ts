@@ -17,7 +17,6 @@ import {
   PdfProps,
   TemplateType,
 } from "@/types";
-import { ServiceList } from "@/types/offers";
 import { EmailTemplate } from "@/types/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
@@ -30,51 +29,11 @@ import {
   readEmailSettings,
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { useTranslation } from "next-i18next";
 import { calculateTax } from "@/utils/utility";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
-
-interface EmailData {
-  subject: string;
-  description: string;
-  email: string;
-  pdf: string[];
-}
 let invoiceInfoObj = {
   subject: "",
   description: "",
@@ -94,9 +53,6 @@ export const useInvoicePdf = () => {
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
-  // const [qrCode, setQrCode] = useState("");
-  // const [pdfFile, setPdfFile] = useState(null);
-
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
@@ -133,7 +89,7 @@ export const useInvoicePdf = () => {
             dispatch(readSystemSettings()),
           ]);
         if (qrCode?.payload) {
-          setQrCodeUrl(qrCode.payload)
+          setQrCodeUrl(qrCode.payload);
         }
 
         if (template?.payload?.Template) {
@@ -171,6 +127,7 @@ export const useInvoicePdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
+          console.log(invoiceDetails)
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
@@ -215,7 +172,7 @@ export const useInvoicePdf = () => {
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID?.contractID?.offerID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
@@ -228,7 +185,10 @@ export const useInvoicePdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: calculateTax(invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+              tax: calculateTax(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
 
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
@@ -238,7 +198,9 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
-              isInvoice: true,
+              isShowExtraAmount: true,
+              invoiceAmount: invoiceDetails?.amount.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
             },
             footerDetails: {
               firstColumn: {
@@ -338,8 +300,8 @@ export const useInvoicePdf = () => {
     ]
   );
 
-  const { mergedFile, mergedPdfUrl, isPdfRendering } = useMergedPdfDownload(contractDataProps);
-
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(contractDataProps);
 
   const handleEmailSend = async () => {
     try {

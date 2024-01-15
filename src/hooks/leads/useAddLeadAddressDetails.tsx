@@ -24,6 +24,7 @@ export const useAddLeadAddressDetails = (
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customerDetails } = useAppSelector((state) => state.customer);
+  const [addressType, setAddressType] = useState([false, false]);
 
   const [addressCount, setAddressCount] = useState(
     leadDetails?.addressID?.address?.length || 1
@@ -33,9 +34,6 @@ export const useAddLeadAddressDetails = (
     addressCount
   );
 
-  const handleAddNewAddress = () => {
-    setAddressCount(addressCount + 1);
-  };
   const handleRemoveNewAddress = () => {
     setAddressCount(addressCount - 1);
   };
@@ -46,21 +44,46 @@ export const useAddLeadAddressDetails = (
     setError,
     reset,
     formState: { errors, isValid },
+    getValues,
+    setValue,
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const handleAddNewAddress = () => {
+    setAddressCount(addressCount + 1);
+    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`);
+  };
   useMemo(() => {
     if (leadDetails.id) {
       reset(
         transformAddressFormValues(
           leadDetails?.addressID?.address
             ? leadDetails?.addressID?.address
-            : [leadDetails?.customerDetail?.address]
+            : [{ ...leadDetails?.customerDetail?.address, label: "Address 1" }]
         )
+      );
+    } else {
+      reset(
+        transformAddressFormValues([
+          {
+            label: "Address 1",
+            country: "Switerland",
+            postalCode: "",
+            streetNumber: "",
+          },
+        ])
       );
     }
   }, [leadDetails.id]);
 
+  const handleFieldTypeChange = (index: number) => {
+    let address = [...addressType];
+    address[index - 1] = !address[index - 1];
+    console.log(address, "address");
+
+    setAddressType(address);
+  };
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
@@ -68,7 +91,10 @@ export const useAddLeadAddressDetails = (
     onHandleBack,
     addressCount,
     handleAddNewAddress,
-    handleRemoveNewAddress
+    handleRemoveNewAddress,
+    [],
+    handleFieldTypeChange,
+    addressType
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -78,6 +104,7 @@ export const useAddLeadAddressDetails = (
       id: leadDetails?.id,
       stage: ComponentsType.serviceAdd,
     };
+
     const response = await dispatch(
       updateLead({ data: apiData, router, setError, translate })
     );
