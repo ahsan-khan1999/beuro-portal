@@ -149,6 +149,8 @@ export const AdditionalDetails = ({
     }
   };
 
+  console.log(description)
+
   useMemo(() => signature && onFileChange(), [signature]);
   return (
     <View style={styles.borderDiv}>

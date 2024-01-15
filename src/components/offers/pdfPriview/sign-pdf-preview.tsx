@@ -311,7 +311,7 @@ const SignPdfPreview = () => {
   ) : (
     offerData && (
       <Container>
-        <div className="my-5">
+        <div className="my-0">
           <SignPdf<EmailHeaderProps>
             pdfData={offerData}
             newPageData={newPageData}

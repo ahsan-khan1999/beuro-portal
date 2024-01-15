@@ -88,8 +88,12 @@ const PdfFile = ({
           <AddressDetails {...{ address, header, workDates }} />
 
           <ServiceTableHederRow />
-          {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index} />
+          {serviceItem?.map((item, index, arr) => (
+            <ServiceTableRow
+              {...item}
+              key={index}
+              pagebreak={index === arr.length - 1}
+            />
           ))}
           <ServicesTotalAmount
             {...serviceItemFooter}

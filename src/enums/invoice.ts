@@ -5,5 +5,5 @@ export enum createInvoice {
   paymentMethod = "paymentType",
   date = "dateOfNextInvoice",
   frequency = "frequency",
-  isInvoiceRecurring = "isInvoiceRecurring"
+  isInvoiceRecurring = "isInvoiceRecurring",
 }

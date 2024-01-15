@@ -108,7 +108,7 @@ export const AddressDetails = ({
       <View style={styles.datesColumn}>
         {workDates?.map((date, index) => (
           <Text style={styles.dateText} key={index}>
-            {`${date.startDate} to ${date.endDate},`}
+            {`${date.startDate}${date.endDate ? (' to ' + date.endDate + ',') : ''}`}
           </Text>
         ))}
       </View>
