@@ -33,7 +33,7 @@ export const Container = ({ children }: MyComponentProp) => {
       style={{
         height: "100vh",
         transformOrigin: "top left",
-        minWidth: "600px",
+        minWidth: "1100px",
       }}
     >
       {children}
