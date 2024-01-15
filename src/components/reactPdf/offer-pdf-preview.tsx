@@ -73,7 +73,7 @@ const OfferPdfPreview = ({
   const footerDetails = data?.footerDetails;
 
   return (
-    <PDFViewer height={1000} style={{ width: "100%" }}>
+    <PDFViewer height={750} style={{ width: "100%" }}>
       <Document
         title={data?.headerDetails?.offerNo || ""}
       >
@@ -144,7 +144,7 @@ export default OfferPdfPreview;
 
 const styles = StyleSheet.create({
   body: {
-    paddingBottom: 140,
+    paddingBottom: 100,
     fontFamily: "Poppins",
   },
 });

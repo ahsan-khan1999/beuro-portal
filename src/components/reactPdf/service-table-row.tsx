@@ -74,10 +74,11 @@ export const ServiceTableRow = ({
   serviceTitle,
   serviceType,
   totalPrice,
+  pagebreak,
   unit,
 }: Partial<ServiceList>) => {
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
         <View style={styles.description}>
           <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>

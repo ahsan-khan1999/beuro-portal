@@ -1,6 +1,7 @@
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
+import { staticEnums } from "@/utils/static";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
 
@@ -63,15 +64,15 @@ export const ServicesTotalAmount = ({
   tax,
   invoiceCreatedAmount,
   invoicePaidAmount,
-  isInvoice,
+  isShowExtraAmount,
   systemSettings,
+  invoiceAmount,
+  invoiceStatus
 }: Partial<ProductItemFooterProps>) => {
-  const { t: translate } = useTranslation(["common"]);
 
-  let dueAmount = 0;
-  if (invoiceCreatedAmount) {
-    dueAmount = Number(grandTotal) - Number(invoiceCreatedAmount);
-  }
+  const isPaid = invoiceStatus === staticEnums["InvoiceStatus"][2];
+  const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
+
 
   return (
     <View style={styles.container}>
@@ -108,7 +109,7 @@ export const ServicesTotalAmount = ({
             <Text style={styles.text}>Rabatt: </Text>
             <Text style={styles.text}>{discount} </Text>
           </View>
-          {!isInvoice ? (
+          {!isShowExtraAmount ? (
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Gesamtsumme:</Text>
               <Text style={styles.whiteText}>
@@ -118,18 +119,18 @@ export const ServicesTotalAmount = ({
           ) : (
             <View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>Grand Total:</Text>
+                <Text style={styles.text}>Gesamtsumme:</Text>
                 <Text style={styles.text}>
                   {grandTotal} {systemSettings?.currency}
                 </Text>
               </View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>Bezahlter Betrag:</Text>
-                <Text style={styles.text}>{invoicePaidAmount} </Text>
+                <Text style={styles.text}>{!isPaid ? 'Fälliger Betrag' : 'Bezahlt'}:</Text>
+                <Text style={styles.text}>{invoiceAmount} </Text>
               </View>
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Ausstehender Betrag:</Text>
-                <Text style={styles.whiteText}>{dueAmount} </Text>
+                <Text style={styles.whiteText}>Unbezahlter Betrag:</Text>
+                <Text style={styles.whiteText}>{unPaidAmount} </Text>
               </View>
             </View>
           )}

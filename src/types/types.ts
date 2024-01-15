@@ -36,6 +36,7 @@ import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { staticEnums } from "@/utils/static";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -652,9 +653,11 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
+  invoiceStatus?: keyof typeof staticEnums["InvoiceStatus"];
+  invoiceAmount?: string;
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
-  isInvoice?: boolean;
+  isShowExtraAmount?: boolean;
   systemSettings?: SystemSetting | null;
 }
 
