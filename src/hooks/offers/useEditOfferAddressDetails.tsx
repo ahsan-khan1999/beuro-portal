@@ -17,7 +17,9 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
   const [addressType, setAddressType] = useState(
-    offerDetails?.addressID ? Array.from(offerDetails?.addressID?.address, () => (false)) : Array.from(offerDetails?.leadID?.addressID?.address, () => (false)) || [false],
+    offerDetails?.addressID ?
+      Array.from(offerDetails?.addressID?.address, () => (false)) :
+      offerDetails?.leadID?.addressID?.address ? Array.from(offerDetails?.leadID?.addressID?.address, () => (false)) : [false] || [false],
 
   )
   const handleBack = () => {

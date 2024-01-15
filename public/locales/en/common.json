@@ -225,7 +225,9 @@
         "invoices": "Invoices",
         "pending": "Pending",
         "overdue": "Overdue",
-        "paid": "Paid"
+        "paid": "Paid",
+        "open": "Open"
+
       },
       "services": "Services",
       "employees": "Employees",
@@ -663,7 +665,10 @@
       "total_amount": "Total Amount",
       "offer_id": "Offer ID",
       "payment_status": "Payment Status",
-      "email_status": "Email Status"
+      "email_status": "Email Status",
+      "invoice_email_preview":"Invoice Email Preview",
+      "receipt_email_preview":"Receipt Email Preview"
+
     },
     "table_functions": {
       "open": "Open",
@@ -683,6 +688,8 @@
     },
     "card_content": {
       "invoice_number": "Invoice Number",
+      "receipt_number": "Receipt Number",
+
       "heading": "Invoice Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
@@ -1871,7 +1878,9 @@
       "pending": "Pending",
       "overdue": "Overdue",
       "paid": "Paid",
-      "leadSource": "Lead Source"
+      "leadSource": "Lead Source",
+      "open":"Open"
+
     }
   },
   "global_search": {
