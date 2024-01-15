@@ -44,6 +44,7 @@ export const DUMMY_DATA: PdfProps = {
         description: "",
         postalCode: "",
         streetNumber: "",
+        label:""
       },
     ],
     workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
