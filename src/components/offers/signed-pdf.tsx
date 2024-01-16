@@ -40,10 +40,6 @@ import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { RefObject } from "@fullcalendar/core/preact.js";
 import { AggrementSignature } from "../reactPdf/aggrement-signature";
-<<<<<<< HEAD
-
-=======
->>>>>>> dddd80101134657c04185074ee67c229e016cc95
 
 Font.register({
   family: "Poppins",
@@ -223,7 +219,7 @@ const OfferSignedPdf = ({
           return (
             <div className=" ">
             <Button
-              className={`mt-[55px]   ${
+              className={`mt-[55px] w-full  ${
                 pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
               } rounded-[4px] shadow-md  text-center text-white`}
               onClick={() =>

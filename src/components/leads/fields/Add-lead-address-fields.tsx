@@ -6,9 +6,8 @@ import {
 } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { staticEnums } from "@/utils/static";
-import icon from "@/assets/svgs/Vector.svg";
 import { useTranslation } from "next-i18next";
-import editIcon from "@/assets/svgs/name-input.svg";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -71,7 +70,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 value: `Address ${i}`,
                 disabled: true,
                 className:
-                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
               },
             },
             {
