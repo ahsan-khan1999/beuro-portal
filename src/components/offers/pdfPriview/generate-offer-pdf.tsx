@@ -136,7 +136,7 @@ const OfferPdfDownload = ({
                 <ContactAddress {...{ ...contactAddress }} />
                 <AdditionalDetails
                   description={aggrementDetails}
-                  showContractSign={showContractSign}
+                  
                 />
               </View>
               <Footer

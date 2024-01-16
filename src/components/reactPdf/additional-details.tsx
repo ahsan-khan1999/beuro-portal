@@ -126,17 +126,15 @@ const stylesheet: HtmlStyles = {
   strong: {
     fontSize: 14,
     fontWeight: 700,
-    fontStyle: 'bold'
-  }
+    fontStyle: "bold",
+  },
 };
 export const AdditionalDetails = ({
   description,
   signature,
-  showContractSign,
 }: {
   description?: string;
   signature?: any;
-  showContractSign?: boolean;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const onFileChange = () => {
@@ -149,8 +147,6 @@ export const AdditionalDetails = ({
     }
   };
 
-  console.log(description)
-
   useMemo(() => signature && onFileChange(), [signature]);
   return (
     <View style={styles.borderDiv}>
@@ -158,33 +154,6 @@ export const AdditionalDetails = ({
         <Html  stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
           {description || ""}
         </Html>
-        {showContractSign && (
-          <View style={{}}>
-            <Text style={styles.shareHeading}>
-              Ich teile den Vertrag mit Ihnen.
-            </Text>
-
-            <View style={{ ...styles.dateContainer }}>
-              <View
-                style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
-              >
-                <Text style={styles.dateText}>Datum</Text>
-              </View>
-
-              <View style={{ width: "40%" }}>
-                {signature && (
-                  <Image
-                    src={imageSrc as string}
-                    style={{ height: "100px", width: "100px" }}
-                  />
-                )}
-                <View style={styles.signature}>
-                  <Text style={styles.dateText}>Signature</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        )}
       </View>
     </View>
   );
