@@ -42,19 +42,21 @@ const VerifyEmail = () => {
     router.push("/login");
   };
 
-  const data = {
-    heading: `${translate("common.modals.verifying_email")}`,
-    description: `${translate("common.modals.verifying_des")}`,
-  };
+  // const data = {
+  //   heading: `${translate("common.modals.verifying_email")}`,
+  //   description: `${translate("common.modals.verifying_des")}`,
+  // };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="relative shadow-emailPopup rounded-2xl bg-white pt-11 pb-[60px] px-[90px] max-w-[625px]">
         <Image src={mailPopIcon} alt="Email Popup " className="mb-9 mx-auto" />
         <h1 className="font-medium text-2xl text-[#000000] mb-3 text-center">
-          {data.heading}
+          {translate("common.modals.verifying_email")}
         </h1>
-        <p className="text-sm text-dark mb-8 text-center">{data.description}</p>
+        <p className="text-sm text-dark mb-8 text-center">
+          {translate("common.modals.verifying_des")}
+        </p>
         <div className="flex justify-center space-x-3">
           <BaseButton
             buttonText={translate("common.resend_button")}

@@ -7,7 +7,7 @@ const AddNewLeads = () => {
   const { t: translate } = useTranslation();
   return (
     <Layout>
-      <p className="mt-5 font-normal text-[20px] leading-6 text-[#222B45]">
+      <p className="mt-5 font-normal text-xl text-[#222B45]">
         {translate("leads.add_new_lead")}
       </p>
       <AddNewLeadsData />

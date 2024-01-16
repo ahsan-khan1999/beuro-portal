@@ -10,7 +10,7 @@ export const SpanField: React.FC<SpanProps> = ({
   linkClassName,
   dispatch,
   onClick,
-  html
+  html,
 }) => {
   const linkClasses = combineClasses("text-secondary", linkClassName);
   return dispatch ? (
@@ -23,26 +23,23 @@ export const SpanField: React.FC<SpanProps> = ({
         {linkText}
       </span>
     </span>
-  ) : html ?
+  ) : html ? (
     <span
       className={`${containerClassName || ""}`}
       onClick={() => onClick && onClick()}
       dangerouslySetInnerHTML={{ __html: html }}
+    ></span>
+  ) : (
+    <span
+      className={`${containerClassName || ""}`}
+      onClick={() => onClick && onClick()}
     >
-
-    </span> :
-
-    (
-      <span
-        className={`${containerClassName || ""}`}
-        onClick={() => onClick && onClick()}
-      >
-        {text}
-        {linkText && (
-          <Link className={`${linkClasses} `} href={linkHref ? linkHref : "/"}>
-            {linkText}
-          </Link>
-        )}
-      </span>
-    );
+      {text}
+      {linkText && (
+        <Link className={`${linkClasses} `} href={linkHref ? linkHref : "/"}>
+          {linkText}
+        </Link>
+      )}
+    </span>
+  );
 };

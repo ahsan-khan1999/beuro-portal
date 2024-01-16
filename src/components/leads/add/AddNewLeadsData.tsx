@@ -189,8 +189,8 @@ const AddNewLeadsData = () => {
 
   return (
     <div className="mt-[22px]">
-      <div className="flex flex-col xl:flex-row w-full gap-6">
-        <div className="flex flex-row flex-wrap xl:flex-col xl:flex-nowrap w-fit gap-[14px]">
+      <div className=" relative flex flex-col xl:flex-row w-full gap-6">
+        <div className="sticky top-0 flex flex-row flex-wrap xl:flex-col xl:flex-nowrap w-fit gap-[14px] ">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -204,10 +204,11 @@ const AddNewLeadsData = () => {
           ))}
         </div>
 
-        <div className="w-full break-all">
+        <div className="w-full overflow-y-auto">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>
+
       {renderModal()}
     </div>
   );

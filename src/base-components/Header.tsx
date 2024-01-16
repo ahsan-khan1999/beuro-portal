@@ -25,7 +25,10 @@ const Header = () => {
   const handleLogout = () => {
     // dispatch(logoutUser());
     // logout();
-    router.push({ pathname: "/pdf", query: { offerID: "65a523c960fb493125ebd88f", action: "Accept" } })
+    router.push({
+      pathname: "/pdf",
+      query: { offerID: "65a523c960fb493125ebd88f", action: "Accept" },
+    });
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
