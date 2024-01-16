@@ -39,7 +39,7 @@ import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { RefObject } from "@fullcalendar/core/preact.js";
-
+import { AggrementSignature } from "../reactPdf/aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -115,7 +115,7 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
-
+  
   const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
@@ -153,21 +153,22 @@ const OfferSignedPdf = ({
       {/* Additional details */}
       <Page style={styles.body}>
         <Header {...headerDetails} />
-        <View
+        {/* <View
           style={{
             position: "absolute",
             left: 0,
             right: 0,
             top: 120,
           }}
-        >
-          <ContactAddress {...{ ...contactAddress }} />
-          <AdditionalDetails
-            description={aggrementDetails}
-            signature={signature}
-            // showContractSign={showContractSign}
-          />
-        </View>
+        > */}
+        <ContactAddress {...{ ...contactAddress }} />
+        <AdditionalDetails
+          description={aggrementDetails}
+          signature={signature}
+          // showContractSign={showContractSign}
+        />
+        <AggrementSignature showContractSign={true} signature={signature} />
+        {/* </View> */}
         <Footer
           documentDetails={offerData?.footerDetails}
           emailTemplateSettings={emailTemplateSettings}
@@ -216,9 +217,9 @@ const OfferSignedPdf = ({
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
-            <div className="flex justify-center ">
+            <div className=" ">
             <Button
-              className={`mt-[55px]  w-[1040px] ${
+              className={`mt-[55px] w-full  ${
                 pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
               } rounded-[4px] shadow-md  text-center text-white`}
               onClick={() =>

@@ -146,7 +146,6 @@ export const useReceiptPdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
-          console.log(invoiceDetails)
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -169,7 +168,7 @@ export const useReceiptPdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType:"receipt"
+              fileType: "receipt"
 
             },
             contactAddress: {
@@ -241,7 +240,13 @@ export const useReceiptPdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
@@ -341,7 +346,7 @@ export const useReceiptPdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.title   + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,
