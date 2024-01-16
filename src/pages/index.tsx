@@ -16,7 +16,7 @@ export default function Home() {
   
   useEffect(() => {
     
-    if (user && staticEnums["User"]["role"][user?.role] === 0) router.push("/dashboard-admin")
+    if (user && staticEnums["User"]["role"][user?.role] === 0) router.push("/dashboard/admin")
     if (user && user?.isEmailVerified && user?.isProfileComplete && (staticEnums["User"]["role"][user?.role] === 1 || staticEnums["User"]["role"][user?.role] === 2)) router.push("/dashboard") 
   }, [])
 
