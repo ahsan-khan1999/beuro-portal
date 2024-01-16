@@ -15,6 +15,7 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { AggrementSignature } from "./aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -74,9 +75,7 @@ const OfferPdfPreview = ({
 
   return (
     <PDFViewer height={750} style={{ width: "100%" }}>
-      <Document
-        title={data?.headerDetails?.offerNo || ""}
-      >
+      <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
           <View
@@ -92,8 +91,12 @@ const OfferPdfPreview = ({
             <AddressDetails {...{ address, header, workDates }} />
 
             <ServiceTableHederRow />
-            {serviceItem?.map((item, index) => (
-              <ServiceTableRow {...item} key={index} />
+            {serviceItem?.map((item, index, arr) => (
+              <ServiceTableRow
+                {...item}
+                key={index}
+                pagebreak={index === arr.length - 1}
+              />
             ))}
             <ServicesTotalAmount
               {...serviceItemFooter}
@@ -110,9 +113,9 @@ const OfferPdfPreview = ({
         </Page>
 
         {/* Additional details */}
-        <Page style={{ paddingBottom: 140 }}>
-          <Header {...headerDetails} />
-          <View
+        <Page style={{ paddingBottom: 145 }}>
+            <Header {...headerDetails} />
+          {/* <View
             style={{
               position: "absolute",
               left: 0,
@@ -120,13 +123,11 @@ const OfferPdfPreview = ({
               top: 120,
               fontFamily: "Poppins",
             }}
-          >
-            <ContactAddress {...{ ...contactAddress }} />
-            <AdditionalDetails
-              description={aggrementDetails}
-              showContractSign={showContractSign}
-            />
-          </View>
+          > */}
+          <ContactAddress {...{ ...contactAddress }} />
+          <AdditionalDetails description={aggrementDetails} />
+          <AggrementSignature showContractSign={showContractSign} />
+          {/* </View> */}
           <Footer
             {...{
               documentDetails: footerDetails,

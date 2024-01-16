@@ -20,7 +20,13 @@ import { Footer } from "../reactPdf/footer";
 import { AdditionalDetails } from "../reactPdf/additional-details";
 import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import Link from "next/link";
-import { useMemo } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 import { Button } from "@/base-components/ui/button/button";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
@@ -32,6 +38,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
+import { RefObject } from "@fullcalendar/core/preact.js";
 
 Font.register({
   family: "Poppins",
@@ -74,201 +81,28 @@ Font.register({
   ],
 });
 
-export const PDF_DATA: PDFResponse = {
-  header: {
-    companyLogo: "",
-    offerNumber: "R-2004",
-    offerDate: "2012-1-1",
-    createdBy: {
-      fullName: "Talha R",
-    },
-  },
-  contactAddress: {
-    company: {
-      phoneNumber: "+923088924153",
-      bankDetails: {},
-      address: {},
-    },
-    createdBy: {
-      email: "talha@cloudmeshsoltuions.com",
-    },
-    customerDetail: {
-      address: {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-      },
-      fullName: "Talha Nazir R",
-    },
-  },
-  addressDetails: {
-    addresses: [
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 1",
-      },
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 2",
-      },
-      {
-        country: "Pakistan",
-        postalCode: "13150",
-        streetNumber: "24A",
-        description: "This is description 3",
-      },
-    ],
-    dates: [
-      {
-        endDate: "2022-33-21",
-        startDate: "2021-4-02",
-      },
-      {
-        endDate: "2022-33-21",
-        startDate: "2021-4-02",
-      },
-    ],
-    title: "This is dummy Title",
-  },
-  serviceDetails: [
-    {
-      count: "1",
-      description:
-        "This is dummy description This is dummy description This is dummy description This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "2",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "3",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-    {
-      count: "10",
-      description: "This is dummy description",
-      price: "345",
-      total: "3450",
-      unit: "std",
-    },
-  ],
-  createdBy: {
-    email: "talha@gmail.com",
-  },
-  footer: {
-    company: {
-      address: {
-        city: "Islamabad",
-        country: "Pakistan",
-        houseNumber: "3rd Floor",
-        postalCode: "13150",
-        streetNumber: "24A",
-      },
-      bankDetails: {
-        bankName: "Meezan Bank",
-        ibanNumber: "PKMZ1234567890987",
-      },
-      companyName: "CMS",
-      mobileNumber: "+923088922423",
-      phoneNumber: "+155433455",
-      taxNumber: "R-5555",
-      website: "https://cloudmeshsolutions.com",
-    },
-    createdBy: {
-      email: "talha@cloudmeshsolutions.com",
-    },
-  },
-  additionalDetails: {
-    heading: "Zahlungsarten",
-    description:
-      "<h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p><h5>Banküberweisung:</h5><p>Sie können den <br> Betrag auf unser <em>angegebenes</em> Bankkonto überweisen. Bitte beachten Sie, dass die Zahlung rechtzeitig vor dem Umzugstermin eingehen muss (mindestens einen Tag vorher).</p>",
-  },
-
-  offerID: {
-    discountAmount: "65675",
-    discountDescription:
-      "This is discount description, This is discount description, , This is discount description, This is discount description",
-    subTotal: "555",
-    taxAmount: "7.7",
-    total: "3456",
-  },
-  qrDetails: {
-    bank: {
-      heading: "Empfangsschenin",
-      account: "Konto/ Zahlbar an",
-      ibanNumber: "CH48 0900 0000 1556 1356 9",
-      bankName: "Rahal GmbH",
-      companyAddress: "St.Urbanstrasse 79",
-      street: "4914 Roggwil",
-      referenceNumber: "27 12323 0000 0000 0006 22926",
-      payable: "Zahlbar durch",
-      payableName: "Rahal GmbH",
-      payableAddress: "St. Urbanstrasse  79",
-      payableStreet: "4914 Roggwill BE",
-      currency: "CHF",
-      amount: "12221",
-    },
-    qr: {
-      heading: "Zahlteil",
-      currency: "CHF",
-      amount: "23232",
-      qrCodeImage: "",
-    },
-  },
-};
-
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-const OfferSignedPdf = ({
-  offerData,
-  signature,
-  templateSettings,
-  emailTemplateSettings,
-  systemSettings,
-  showContractSign,
-}: {
+interface SignPdfProps {
   offerData?: PdfProps<EmailHeaderProps>;
   signature: any;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
   showContractSign?: boolean;
-}) => {
+  onComponentMounted: () => void;
+}
+
+const OfferSignedPdf = ({
+  emailTemplateSettings,
+  signature,
+  systemSettings,
+  templateSettings,
+  offerData,
+  showContractSign,
+  onComponentMounted,
+}: SignPdfProps) => {
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = offerData?.headerDetails;
   const { address, header, workDates } = offerData?.movingDetails || {};
@@ -279,6 +113,8 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
+
+  const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
     <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
@@ -327,7 +163,7 @@ const OfferSignedPdf = ({
           <AdditionalDetails
             description={aggrementDetails}
             signature={signature}
-            showContractSign={showContractSign}
+            // showContractSign={showContractSign}
           />
         </View>
         <Footer
@@ -367,26 +203,30 @@ const OfferSignedPdf = ({
   };
   const rejectOffer = async () => {
     dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
-    // const params = {
-    //     id: offerData?.id
-    // }
-    // const response = await dispatch(rejectOfferPublic({ params }))
-    // if (response?.payload) { dispatch(updateModalType({ type: ModalType.REJECT_OFFER })) }
   };
+
+  useEffect(() => {
+    if (onComponentMounted) onComponentMounted();
+  }, []);
+
   return (
-    <div className="download-link" id="gohere">
+    <div className="download-link w-full" id="gohere">
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
             <Button
-              className={`mt-[55px] w-full ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"} rounded-[4px] shadow-md  text-center text-white`}
-              onClick={() => pdfAction === "Reject" ? rejectOffer() : acceptOffer(blob)}
+              className={`mt-[55px] w-full ${
+                pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
+              } rounded-[4px] shadow-md  text-center text-white`}
+              onClick={() =>
+                pdfAction === "Reject" ? rejectOffer() : acceptOffer(blob)
+              }
               inputType="button"
               id="signature"
               loading={offerLoading}
               text={pdfAction as string}
             />
-          )
+          );
         }}
       </BlobProvider>
     </div>

@@ -745,8 +745,8 @@ export function dataURLtoBlob(dataURL: any) {
 
 
 export const smoothScrollToSection = (target:string) => {
-  const element = document.querySelector(target);
-  const headerOffset = 100; // Adjust this value according to your page layout
+  const element = document.getElementById(target);
+  const headerOffset = 100;
   const elementPosition = element?.getBoundingClientRect().top || 0;
   const offsetPosition = elementPosition - headerOffset;
 
