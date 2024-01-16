@@ -40,7 +40,10 @@ import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { RefObject } from "@fullcalendar/core/preact.js";
 import { AggrementSignature } from "../reactPdf/aggrement-signature";
+<<<<<<< HEAD
 
+=======
+>>>>>>> dddd80101134657c04185074ee67c229e016cc95
 
 Font.register({
   family: "Poppins",
@@ -154,20 +157,22 @@ const OfferSignedPdf = ({
       {/* Additional details */}
       <Page style={styles.body}>
         <Header {...headerDetails} />
-        <View
+        {/* <View
           style={{
             position: "absolute",
             left: 0,
             right: 0,
             top: 120,
           }}
-        >
-          <ContactAddress {...{ ...contactAddress }} />
-          <AggrementSignature
-            signature={signature}
-            showContractSign={showContractSign}
-          />
-        </View>
+        > */}
+        <ContactAddress {...{ ...contactAddress }} />
+        <AdditionalDetails
+          description={aggrementDetails}
+          signature={signature}
+          // showContractSign={showContractSign}
+        />
+        <AggrementSignature showContractSign={true} signature={signature} />
+        {/* </View> */}
         <Footer
           documentDetails={offerData?.footerDetails}
           emailTemplateSettings={emailTemplateSettings}

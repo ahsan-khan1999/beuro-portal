@@ -63,7 +63,6 @@ export const AddressDetails = ({
 }: Partial<MovingDetailsProps>) => (
   <View style={styles.container}>
     <Text style={styles.header}>{header}</Text>
-
     {address?.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
