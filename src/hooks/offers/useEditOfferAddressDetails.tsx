@@ -41,9 +41,13 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   });
 
   useEffect(() => {
+    console.log(offerDetails, "offerDetails");
+
     if (offerDetails.id) {
       reset({
-        address: offerDetails?.addressID?.address
+        address: offerDetails?.addressID
+          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
+          : offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
       })
     }
   }, [offerDetails.id])
