@@ -15,13 +15,15 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] items-center bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_200px)_minmax(250px,_100%)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(80px,_80px),minmax(130px,_130px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(80px,_80px)_minmax(90px,_890px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(150px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_4fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(130px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(80px,_80px),minmax(130px,_130px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(100px,_5fr)_minmax(150px,_4fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
-            <span className="py-4 truncate mlg:hidden xlg:block mr-1">
+            <span className="py-4 truncate mr-1">
               {item.contractID?.offerID?.leadID?.customerDetail?.fullName}
             </span>
-            <span className="py-4 mr-1 truncate">{item?.title}</span>
+            <span className="py-4 mr-1 mlg:hidden xlg:block truncate">
+              {item?.title}
+            </span>
             <span className="py-4 truncate">
               {item.contractID?.offerID?.total}
             </span>
@@ -108,7 +110,7 @@ const TableRows = ({
               </svg>
             </span>
             <span
-              className="py-4 cursor-pointer flex justify-center items-center"
+              className="py-4 cursor-pointer flex justify-center items-center "
               onClick={() =>
                 router.push({
                   pathname: "/invoices/details",

@@ -1,6 +1,7 @@
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
+import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
@@ -70,7 +71,8 @@ export const ServicesTotalAmount = ({
   invoiceStatus
 }: Partial<ProductItemFooterProps>) => {
 
-  const isPaid = invoiceStatus === staticEnums["InvoiceStatus"][2];
+  const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
 
 
@@ -97,12 +99,12 @@ export const ServicesTotalAmount = ({
         <View style={styles.rightColumn}>
           <View style={styles.subSection}>
             <Text style={styles.text}>Zwischensumme: </Text>
-            <Text style={styles.text}>{subTotal}</Text>
+            <Text style={styles.text}>{Number(subTotal).toFixed(2)}</Text>
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Steuer%: </Text>
             <Text style={styles.text}>
-              {tax} ({TAX_PERCENTAGE}%)
+              {Number(tax).toFixed(2)} ({TAX_PERCENTAGE}%)
             </Text>
           </View>
           <View style={styles.subSection}>
@@ -113,7 +115,7 @@ export const ServicesTotalAmount = ({
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Gesamtsumme:</Text>
               <Text style={styles.whiteText}>
-                {grandTotal} {systemSettings?.currency}
+                {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
               </Text>
             </View>
           ) : (
@@ -121,16 +123,16 @@ export const ServicesTotalAmount = ({
               <View style={styles.subSection}>
                 <Text style={styles.text}>Gesamtsumme:</Text>
                 <Text style={styles.text}>
-                  {grandTotal} {systemSettings?.currency}
+                  {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
               </View>
               <View style={styles.subSection}>
                 <Text style={styles.text}>{!isPaid ? 'Fälliger Betrag' : 'Bezahlt'}:</Text>
-                <Text style={styles.text}>{invoiceAmount} </Text>
+                <Text style={styles.text}>{Number(invoiceAmount).toFixed(2)} </Text>
               </View>
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>Unbezahlter Betrag:</Text>
-                <Text style={styles.whiteText}>{unPaidAmount} </Text>
+                <Text style={styles.whiteText}>{unPaidAmount.toFixed(2)} </Text>
               </View>
             </View>
           )}

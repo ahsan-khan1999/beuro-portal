@@ -87,9 +87,7 @@ export const useReceiptPdf = () => {
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const { loading, collectiveInvoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
+  const { loading, collectiveInvoiceDetails } = useAppSelector(state => state.invoice);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -148,7 +146,6 @@ export const useReceiptPdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
-          console.log(invoiceDetails)
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -166,11 +163,13 @@ export const useReceiptPdf = () => {
             },
             headerDetails: {
               offerNo:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-              offerDate: invoiceDetails?.invoiceID?.createdAt,
-              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                invoiceDetails?.invoiceNumber,
+              offerDate: invoiceDetails?.createdAt,
+              createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType: "receipt"
+
             },
             contactAddress: {
               address: {
@@ -241,7 +240,13 @@ export const useReceiptPdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
@@ -341,8 +346,7 @@ export const useReceiptPdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.title,
+            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,
@@ -371,7 +375,18 @@ export const useReceiptPdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(receiptData?.attachement);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(receiptData?.attachement);

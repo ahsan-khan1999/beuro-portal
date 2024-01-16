@@ -79,7 +79,7 @@ export const useReceiptEmail = (
               ?.email,
           content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
           subject:
-            res?.payload?.title,
+            res?.payload?.title + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             res?.payload?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,
@@ -98,7 +98,7 @@ export const useReceiptEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.receiptContent?.title,
+        subject: selectedContent?.receiptContent?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.receiptContent?.body,
         pdf: selectedContent?.receiptContent?.attachments,
       });
@@ -110,7 +110,7 @@ export const useReceiptEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
-  
+
   const fields = InvoiceEmailPreviewFormField(
     register,
     loading,

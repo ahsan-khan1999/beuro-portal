@@ -11,14 +11,9 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
       {employsData?.map((item: any) => {
         return (
           <div
-            onClick={() =>
-              router.push({
-                pathname: "/employees/details",
-                query: { employee: item.id },
-              })
-            }
+          
             key={item.id}
-            className="hover:bg-[#E9E1FF] px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(150px,_150px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(80px,_80px),minmax(200px,_200px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(140px,_140px)_minmax(80px,_80px)] mt-2 bg-white rounded-md items-center"
+            className="hover:bg-[#E9E1FF] px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(150px,_150px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(80px,_80px),minmax(200px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(140px,_140px)_minmax(80px,_80px)] mt-2 bg-white rounded-md items-center"
           >
             <span className="py-4 truncate">{item?.employeeID}</span>
             <span className="py-4 truncate">{item.fullName}</span>
@@ -29,7 +24,7 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               {moment(item?.creationDate).format("DD/MM/YYYY")}
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center cursor-pointer">
               <div
                 onClick={() =>
                   router.push({

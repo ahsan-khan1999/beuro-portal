@@ -5,8 +5,7 @@ import {
   GenerateOffersFormField,
 } from "@/types";
 import { staticEnums } from "@/utils/static";
-import icon from "@/assets/svgs/Vector.svg";
-import editIcon from "@/assets/svgs/name-input.svg";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 import { useTranslation } from "next-i18next";
 export const addressObject = {
@@ -33,16 +32,29 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   const { t: translate } = useTranslation();
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
+    let valueIndex = i
     formField.push(
       {
-        containerClass: "",
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove_button")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
+            i === 0 && "hidden"
+          }`,
+          onClick: () => handleRemoveAddress && handleRemoveAddress(i),
+        },
+      },
+      {
+        containerClass: "mt-2",
         field: {
           type: Field.div,
           className: "flex  space-x-2",
           id: `address-labels-${i}`,
           children: [
-            !(addressType && !addressType[i]) &&
-            ({
+            (!(addressType && !addressType[i]) && {
               containerClass: "",
 
               field: {
@@ -52,12 +64,12 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${i}`,
+                value: `Address ${++valueIndex}`,
                 setValue
 
 
               },
-            }) || ({
+            }) || {
               containerClass: "",
 
               field: {
@@ -66,43 +78,30 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${i}`,
+                value: `Address ${++valueIndex}`,
                 disabled: true,
-                className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
-                setValue
-
+                className:
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+                setValue,
               },
-            }),
+            },
             {
               containerClass: "",
               field: {
                 type: Field.button,
                 className: "bg-white hover:bg-white",
                 id: `address.${i}.type`,
-                name:`address.${i}.type`,
+                name: `address.${i}.type`,
                 inputType: "button",
                 icon: editIcon,
-                onClick: () => handleFieldTypeChange && handleFieldTypeChange(i)
-
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
               },
             },
-          ]
-        }
-      },
-
-
-      {
-        containerClass: "mb-0 relative -top-1 right-0 float-right",
-        field: {
-          type: Field.button,
-          id: "button",
-          text: `${translate("common.remove_button")}`,
-          inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${i === 0 && "hidden"
-            }`,
-          onClick: () => handleRemoveAddress && handleRemoveAddress(i),
+          ],
         },
       },
+
       {
         containerClass: "mt-6 ",
         // label: {
@@ -256,7 +255,6 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
             onClick: () =>
               handleAddNewAddress && handleAddNewAddress(addressObject),
-            loading,
           },
         },
       ],

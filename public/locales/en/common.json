@@ -182,6 +182,7 @@
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
     "value_max": "value_max",
     "mail_sent_maybe": "Email Sent",
+    "value_min": "{0} Minimum {1} ",
 
     "mixed": {
       "required": "This is required field ",
@@ -227,7 +228,6 @@
         "overdue": "Overdue",
         "paid": "Paid",
         "open": "Open"
-
       },
       "services": "Services",
       "employees": "Employees",
@@ -666,9 +666,8 @@
       "offer_id": "Offer ID",
       "payment_status": "Payment Status",
       "email_status": "Email Status",
-      "invoice_email_preview":"Invoice Email Preview",
-      "receipt_email_preview":"Receipt Email Preview"
-
+      "invoice_email_preview": "Invoice Email Preview",
+      "receipt_email_preview": "Receipt Email Preview"
     },
     "table_functions": {
       "open": "Open",
@@ -1074,7 +1073,7 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
-    "add_new_date":"Add New Date",
+    "add_new_date": "Add New Date",
     "add_company_info": "Add Company Information",
     "add_new_address": "Add New Address",
     "upload_img": "Upload Images",
@@ -1882,8 +1881,7 @@
       "overdue": "Overdue",
       "paid": "Paid",
       "leadSource": "Lead Source",
-      "open":"Open"
-
+      "open": "Open"
     }
   },
   "global_search": {

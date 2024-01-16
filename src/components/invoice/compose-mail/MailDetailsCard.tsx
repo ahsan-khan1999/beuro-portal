@@ -5,11 +5,16 @@ import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { getInvoiceStatusColor } from "@/utils/utility";
+import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
 
 const MailDetailsCard = () => {
   const router = useRouter();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
+  const color = getInvoiceStatusColor(
+    collectiveInvoiceDetails?.invoiceStatus
+  )
   return (
     <ContractCardLayout>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
@@ -23,6 +28,20 @@ const MailDetailsCard = () => {
           <p className="font-medium text-2xl ml-[27px]">
             {translate("invoice.card_content.heading")}
           </p>
+        </div>
+        <div className="flex items-center gap-5">
+
+          <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            className="cursor-pointer"
+            onClick={() =>
+              router.push({
+                pathname: "/invoices/invoice-pdf-preview/",
+                query: { invoiceID: collectiveInvoiceDetails?.id },
+              })
+            }
+          />
         </div>
       </div>
 
@@ -56,7 +75,7 @@ const MailDetailsCard = () => {
                 {translate("invoice.table_headings.status")}
               </span>
 
-              <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4  ">
+              <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}>
                 {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
               </span>
             </div>

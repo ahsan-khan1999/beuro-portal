@@ -69,13 +69,13 @@ const PdfCard = ({
                 <EmailIcon className="text-primary group-hover:text-primary" />
               </BaseButton>
 
-              {/* <Image
+              <Image
               src={downloadIcon}
               alt="downloadIcon"
               className="cursor-pointer"
               onClick={onDownload}
             />
-            <Image
+            {/* <Image
               src={printerIcon}
               alt="printerIcon"
               className="cursor-pointer"

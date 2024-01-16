@@ -493,9 +493,9 @@ export type GenerateLeadAddressFormField = (
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[],
   handleFieldTypeChange?: (index: number) => void,
-  addressType?:boolean[],
-  setValue?:UseFormSetValue<FieldValues>,
-  getValues?:UseFormGetValues<FieldValues>
+  addressType?: boolean[],
+  setValue?: UseFormSetValue<FieldValues>,
+  getValues?: UseFormGetValues<FieldValues>
 ) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
@@ -646,6 +646,7 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
+  fileType?: "contract" | "invoice" | "receipt"
 }
 
 export interface ProductItemFooterProps {

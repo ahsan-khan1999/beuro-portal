@@ -181,6 +181,8 @@
     "oauth_account_in_use": "Bereits verwendetes Konto",
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mail_sent_maybe": "E-Mail gesendet",
+    "value_min": "{0} Minimum {1} ",
+
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -225,7 +227,7 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Open"
+        "open": "Öffnen Sie"
 
       },
       "services": "Dienstleistungen",
@@ -275,7 +277,7 @@
       "phone_number": "Rufnummer",
       "mobile_number": "Mobilnummer",
       "address_details": "Angaben zur Adresse",
-      "street_no": "Straße Nr.",
+      "street_no": "Strasse+Nr",
       "post_code": "plz+ort",
       "country": "Land",
       "cancel_button": "Abbrechen",
@@ -658,8 +660,8 @@
       "offer_id": "Angebot ID",
       "payment_status": "Zahlungsstatus",
       "email_status": "E-Mail-Status",
-      "invoice_email_preview":"E-Mail-Rechnungsvorschau",
-      "receipt_email_preview":"E-Mail-Vorschau der Quittung"
+      "invoice_email_preview": "E-Mail-Rechnungsvorschau",
+      "receipt_email_preview": "E-Mail-Vorschau der Quittung"
     },
     "table_functions": {
       "open": "Öffnen",
@@ -1001,14 +1003,14 @@
       "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
       "add_button": "Bilder hinzufügen",
       "without_images": "Ohne Bilder fortfahren"
-    } 
+    }
   },
   "common": {
     "modals": {
-      "admin_setting": "Einstellungen erfolgreich aktualisiert",
-      "admin_setting_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "verifying_email": "Wir verifizieren Ihre E-Mail",
       "verifying_des": "Bitte fahren Sie fort! Bitte nehmen Sie sich einen Moment Zeit, um sicherzustellen, dass wir Ihre korrekte E-Mail-Adresse haben",
+      "admin_setting": "Einstellungen erfolgreich aktualisiert",
+      "admin_setting_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "verify_email": "E-Mail Adresse überprüfen",
       "verify_email_des1": "Eine E-Mail wurde gesendet an ",
       "verify_email_des2": "Klicken Sie auf den Link in der E-Mail, um Ihre E-Mail-Adresse zu bestätigen.",
@@ -1874,7 +1876,7 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquelle",
-      "open":"Öffnen Sie"
+      "open": "Öffnen Sie"
     }
   },
   "global_search": {

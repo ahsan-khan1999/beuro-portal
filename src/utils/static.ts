@@ -633,7 +633,7 @@ export const staticEnums: Record<string, any> = {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
-    Open:3
+    Open: 3
   },
   Frequency: {
     Weekly: 0,
@@ -1622,3 +1622,11 @@ export const DEFAULT_INVOICE = {
   editNote: "",
   type: "",
 };
+
+
+export const HeaderLabel = {
+  "contract": "Verträge",
+  "invoice": "Rechnung",
+  "receipt": "Quittung"
+}
+

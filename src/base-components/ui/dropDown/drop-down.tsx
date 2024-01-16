@@ -33,7 +33,7 @@ export const DropDown = ({
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
-    "flex items-center justify-between bg-white px-4 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "flex items-center justify-center bg-white px-1 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
     `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
@@ -56,10 +56,12 @@ export const DropDown = ({
         >
           {children}
           <span className={textClasses}>{selectedItem}</span>
-          <DropDownNonFillIcon
-            isOpen={isOpen}
-            className={dropDownIconClassName}
-          />
+          <div>
+            <DropDownNonFillIcon
+              isOpen={isOpen}
+              className={dropDownIconClassName}
+            />
+          </div>
         </button>
         <AnimatePresence>
           {isOpen && (
