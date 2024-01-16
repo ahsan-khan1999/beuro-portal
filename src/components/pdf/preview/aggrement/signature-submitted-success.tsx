@@ -20,6 +20,9 @@ export const SignatureSubmittedSuccessFully = () => {
       <span className="text-[32px] font-semibold text-[#393939]">
         Submitted
       </span>
+      <span className="text-[16px] font-bold text-[#393939]">
+        Now accept this offer!
+      </span>
     </div>
   );
 };

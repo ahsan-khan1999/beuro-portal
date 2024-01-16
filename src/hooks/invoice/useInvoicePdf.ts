@@ -4,6 +4,7 @@ import {
 } from "@/api/slices/globalSlice/global";
 import {
   readCollectiveInvoiceDetails,
+  readQRCode,
   sendInvoiceEmail,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
@@ -16,7 +17,6 @@ import {
   PdfProps,
   TemplateType,
 } from "@/types";
-import { ServiceList } from "@/types/offers";
 import { EmailTemplate } from "@/types/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
@@ -24,58 +24,23 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { useTranslation } from "next-i18next";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
-
-interface EmailData {
-  subject: string;
-  description: string;
-  email: string;
-  pdf: string[];
-}
 let invoiceInfoObj = {
   subject: "",
   description: "",
 };
 
 export const useInvoicePdf = () => {
-  const {t:translate} = useTranslation()
+  const { t: translate } = useTranslation();
   // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
@@ -84,20 +49,24 @@ export const useInvoicePdf = () => {
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
-  const [email, setEmail] = useState<EmailData>({
-    description: "",
-    email: "",
-    pdf: [""],
-    subject: "",
-  });
-  const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
-  const [pdfFile, setPdfFile] = useState(null);
 
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    invoice: { error, loading, collectiveInvoiceDetails },
-  } = useAppSelector((state) => state);
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
+
+  const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
+
+  const { loading, collectiveInvoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
+  const { modal, loading: loadingGlobal } = useAppSelector(
+    (state) => state.global
+  );
+  const { user } = useAppSelector((state) => state.auth);
+
   const dispatch = useAppDispatch();
 
   const maxItemsFirstPage = 6;
@@ -109,13 +78,20 @@ export const useInvoicePdf = () => {
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(
-            readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
-          ),
-        ]);
+        const [template, emailTemplate, offerData, qrCode, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(
+              readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+            ),
+            dispatch(readQRCode({ params: { filter: invoiceID } })),
+            dispatch(readSystemSettings()),
+          ]);
+        if (qrCode?.payload) {
+          setQrCodeUrl(qrCode.payload);
+        }
+
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -152,16 +128,15 @@ export const useInvoicePdf = () => {
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
 
-          console.log(invoiceDetails);
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
-              contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+              contractId: invoiceDetails?.invoiceNumber,
               workerName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
                   ?.fullName,
               contractStatus:
-                invoiceDetails?.invoiceID?.contractID?.contractStatus,
+                invoiceDetails?.invoiceStatus,
               contentName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.content
                   ?.contentName,
@@ -169,11 +144,12 @@ export const useInvoicePdf = () => {
             },
             headerDetails: {
               offerNo:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-              offerDate: invoiceDetails?.invoiceID?.createdAt,
-              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
-              logo: invoiceDetails?.invoiceID?.createdBy?.company?.logo,
+                invoiceDetails?.invoiceNumber,
+              offerDate: invoiceDetails?.createdAt,
+              createdBy: invoiceDetails?.createdBy?.fullName,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType: "invoice"
             },
             contactAddress: {
               address: {
@@ -197,7 +173,7 @@ export const useInvoicePdf = () => {
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID?.contractID?.offerID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
@@ -210,15 +186,22 @@ export const useInvoicePdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
+
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
               invoiceCreatedAmount:
                 invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
-              invoicePaidAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
-              isInvoice: true,
+              invoicePaidAmount:
+                invoiceDetails?.invoiceID?.paidAmount.toString(),
+              isShowExtraAmount: true,
+              invoiceAmount: invoiceDetails?.amount.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
             },
             footerDetails: {
               firstColumn: {
@@ -239,15 +222,17 @@ export const useInvoicePdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
               totalPages: calculateTotalPages,
-            },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
@@ -257,15 +242,6 @@ export const useInvoicePdf = () => {
           };
 
           setInvoiceData(formatData);
-          setEmail({
-            subject: invoiceDetails?.title as string,
-            description: invoiceDetails?.additionalDetails as string,
-            email:
-              invoiceDetails?.invoiceID.contractID?.offerID?.leadID
-                ?.customerDetail?.email,
-            pdf: invoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments,
-          });
           invoiceInfoObj = {
             ...invoiceInfoObj,
             subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content
@@ -273,6 +249,9 @@ export const useInvoicePdf = () => {
             description: invoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body as string,
           };
+        }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting });
         }
       }
     })();
@@ -289,21 +268,57 @@ export const useInvoicePdf = () => {
     // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
+
+  useEffect(() => {
+    if (qrCodeUrl) {
+      (async () => {
+        const remotePdfResponse = await fetch(qrCodeUrl);
+        const remotePdfBlob = await remotePdfResponse.blob();
+        setRemoteFileBlob(remotePdfBlob);
+      })();
+    }
+  }, [qrCodeUrl]);
+
+  const fileName = invoiceData?.emailHeader?.contractId;
+  const contractDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: invoiceData,
+      fileName,
+      qrCode: qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      invoiceData,
+      fileName,
+      qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(contractDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
       setActiveButtonId("email");
 
       const data = await localStoreUtil.get_data("invoiceComposeEmail");
-      if (data && pdfFile) {
-        formData.append("file", pdfFile as any);
+      if (data && mergedFile) {
+        formData.append("file", mergedFile as any);
         const fileUrl = await dispatch(uploadFileToFirebase(formData));
         let apiData = { ...data, pdf: fileUrl?.payload };
 
         delete apiData["content"];
         const res = await dispatch(sendInvoiceEmail({ data: apiData }));
         if (res?.payload) {
-          await localStoreUtil.remove_data("invoiceComposeEmail");
+          // await localStoreUtil.remove_data("invoiceComposeEmail");
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
       } else {
@@ -315,8 +330,7 @@ export const useInvoicePdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.title,
+            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body,
@@ -345,7 +359,18 @@ export const useInvoicePdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(invoiceData?.attachement);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(invoiceData?.attachement);
@@ -392,15 +417,14 @@ export const useInvoicePdf = () => {
 
   return {
     invoiceData,
-    emailTemplateSettings,
-    templateSettings,
     activeButtonId,
-    pdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     router,
     modal,
     loadingGlobal,
     loading,
-    setPdfFile,
+    translate,
     dispatch,
     handleEmailSend,
     handleSendByPost,
@@ -408,6 +432,5 @@ export const useInvoicePdf = () => {
     handleDonwload,
     onClose,
     onSuccess,
-    translate
   };
 };

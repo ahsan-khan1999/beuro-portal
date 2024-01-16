@@ -169,6 +169,7 @@ export default function OffersFilters({
           icon={addIcon}
           text={translate("offers.add_button")}
           id="add"
+          iconAlt="add button"
         />
       </div>
     </div>

@@ -25,13 +25,14 @@ export const ContactAddress = ({
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 6 }}>
         <Text
           style={{
-            fontSize: 16,
-            fontWeight: "medium",
-            color: "#404040",
-            marginRight: 21,
+            fontSize: 10,
+            fontWeight: 400,
+            fontStyle: "normal",
+            color: "#000",
+            width: 50,
           }}
         >
-          Email:
+          E-Mail:
         </Text>
         <Text style={textBase}>{email}</Text>
       </View>
@@ -39,13 +40,14 @@ export const ContactAddress = ({
       <View style={{ display: "flex", flexDirection: "row" }}>
         <Text
           style={{
-            fontSize: 16,
-            fontWeight: "medium",
-            color: "#404040",
-            marginRight: 21,
+            fontSize: 10,
+            fontWeight: 400,
+            fontStyle: "normal",
+            color: "#000",
+            width: 50,
           }}
         >
-          Phone:
+          Telefon:
         </Text>
         <Text style={textBase}>{phone}</Text>
       </View>

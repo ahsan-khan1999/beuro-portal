@@ -1,78 +1,129 @@
 import React from "react";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
-import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
-import printerIcon from "@/assets/svgs/printer_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
-import writeIcon from "@/assets/svgs/write_icon.svg";
-import imageIcon from "@/assets/svgs/edit_image.svg";
-import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
+import { getInvoiceStatusColor } from "@/utils/utility";
+import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
+
 
 const MailDetailsCard = () => {
   const router = useRouter();
-  const { collectiveInvoiceDetails } = useAppSelector(state => state.invoice)
+  const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
+  const { t: translate } = useTranslation();
+  const color = getInvoiceStatusColor(
+    collectiveInvoiceDetails?.invoiceStatus
+  )
+  console.log(color, "color");
+
   return (
-    <ContractCardLayout>
-      <div className="flex justify-between items-center  ">
-        <div className="flex items-center">
+    <>
+      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-20 gap-y-3 pb-5">
+        <div className="flex items-center gap-x-6">
           <Image
             src={backIcon}
             alt="back_icon"
             className="cursor-pointer"
             onClick={() => router.back()}
           />
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
-            Invoice details
+          <p className="font-medium text-2xl">
+            {translate("invoice.receipt_details")}
           </p>
         </div>
 
-      </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
+        <div className="flex items-center gap-5">
 
-      <div className="flex flex-col gap-4">
-        {/* first div is here */}
-        <div className="grid grid-cols-[minmax(350px,_350px)_minmax(200px,_100%)_minmax(150px,_230px)_minmax(230px,_230px)]">
-          <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
-              Invoice Number:
+          <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            className="cursor-pointer"
+            onClick={() =>
+              router.push({
+                pathname: "/invoices/receipt-pdf-preview",
+                query: { invoiceID: collectiveInvoiceDetails?.id },
+              })
+            }
+          />
+          {/* <BaseButton
+            buttonText={translate("offers.card_content.send_via_post")}
+            onClick={onSendViaPost}
+            containerClassName="flex items-center group gap-x-3 row-reverse"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            loading={loading}
+            loaderColor="#4A13E7"
+          >
+            <PostIcon className="text-primary group-hover:text-primary" />
+          </BaseButton>
+
+          <BaseButton
+            buttonText={translate("contracts.pdf_card_details.send_via_email")}
+            onClick={onEmailSend}
+            containerClassName="flex items-center gap-x-3 row-reverse group"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            loading={loading && activeButtonId === "email"}
+            loaderColor="#4A13E7"
+          >
+            <EmailIcon className="text-primary group-hover:text-primary" />
+          </BaseButton> */}
+          {/* <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            onClick={() =>
+              router.push({
+                pathname: "/invoices/receipt-pdf-preview",
+                query: { invoiceID: collectiveInvoiceDetails?.id },
+              })
+            }
+            className="cursor-pointer"
+          /> */}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+              {translate("invoice.card_content.receipt_number")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">{collectiveInvoiceDetails?.invoiceID?.invoiceNumber}</span>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
+            </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
-              Offer Title:
+          <div className="flex gap-2">
+            <span className="text-base font-normal text-[#4D4D4D] break-all">
+              {translate("content.details.receipt_title")}:
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
-              {collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.title}
-            </span>
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
-              Status
-            </span>
-
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4  ">
-              {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
-            </span>
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
-              Worker:
-            </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
-            {collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.fullName}
-
+              {collectiveInvoiceDetails?.title}
             </span>
           </div>
         </div>
-        {/* Secod div is here */}
-       
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2">
+            <span className="text-base  font-normal text-[#4D4D4D]">
+              {translate("contracts.table_headings.status")}:
+            </span>
+
+            <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}>
+              {collectiveInvoiceDetails?.invoiceStatus}
+            </span>
+          </div>
+          <div className="flex gap-2">
+            <span className="text-base font-normal text-[#4D4D4D]">
+              {translate("contracts.card_content.worker")}:
+            </span>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {
+                collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
+                  ?.createdBy?.fullName
+              }
+            </span>
+          </div>
+        </div>
       </div>
-    </ContractCardLayout>
+    </>
   );
 };
 

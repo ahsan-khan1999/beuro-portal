@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
@@ -29,7 +30,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
@@ -69,7 +71,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "contactAvailability",
               value:
@@ -77,12 +80,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               name: "contactAvailability",
               options: [
                 {
-                  value: "Morning(9am to 12am)",
-                  label: "Morning(9am to 12am)",
+                  value: "Morning(8am to  12pm)",
+                  label: "Morning(8am to  12pm)",
                 },
                 {
-                  value: "Morning(1pm to 10pm)",
-                  label: "Morning(1pm to 10pm)",
+                  value: "Evening(5pm to 8pm)",
+                  label: "Evening(5pm to 8pm)",
+                },
+                {
+                  value: "Night(9pm to 12am)",
+                  label: "Night(9pm to 12am)",
                 },
               ],
               control,
@@ -96,7 +103,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "flexibility",
               value: (leadDetails?.id && leadDetails?.flexibility) || "",
@@ -104,31 +112,31 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "1",
-                  label: "1 days",
+                  label: `1 ${translate("common.days")}`,
                 },
                 {
                   value: "2",
-                  label: "2 days",
+                  label: `2 ${translate("common.days")}`,
                 },
                 {
                   value: "3",
-                  label: "3 days",
+                  label: `3 ${translate("common.days")}`,
                 },
                 {
                   value: "4",
-                  label: "4 days",
+                  label: `4 ${translate("common.days")}`,
                 },
                 {
                   value: "5",
-                  label: "5 days",
+                  label: `5 ${translate("common.days")}`,
                 },
                 {
                   value: "6",
-                  label: "6 days",
+                  label: `6 ${translate("common.days")}`,
                 },
                 {
                   value: "7",
-                  label: "7 days",
+                  label: `7 ${translate("common.days")}`,
                 },
               ],
               control,
@@ -144,7 +152,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
 
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
@@ -158,6 +167,11 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via What'sapp",
                   label: "Via What'sapp",
                 },
+                {
+                  value: "Via Phone Call",
+                  label: "Via Phone Call",
+                },
+              
               ],
               control,
             },
@@ -170,13 +184,26 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "budget",
               name: "budget",
               value: (leadDetails?.id && leadDetails?.budget) || "",
 
               options: [
+                {
+                  value: `Less then 5000${systemSettings?.currency}`,
+                  label: `Less then 5000${systemSettings?.currency}`,
+                },
+                {
+                  value: `Less then 2500${systemSettings?.currency}`,
+                  label: `Less then 2500${systemSettings?.currency}`,
+                },
+                {
+                  value: `Less then 1500${systemSettings?.currency}`,
+                  label: `Less then 1500${systemSettings?.currency}`,
+                },
                 {
                   value: `Less then 1000${systemSettings?.currency}`,
                   label: `Less then 1000${systemSettings?.currency}`,
@@ -197,16 +224,14 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: [
-                { value: "Whats'app", label: "What'sapp" },
-                { value: "Facebook", label: "Facebook" },
-              ],
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item })),
               control,
             },
           },
@@ -221,7 +246,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
               value: (leadDetails?.id && leadDetails?.otherServices) || [""],
@@ -255,7 +281,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               inputType: "button",
               onClick: () => onHandleBack && onHandleBack(),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
             },
           },
           {
@@ -266,7 +292,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

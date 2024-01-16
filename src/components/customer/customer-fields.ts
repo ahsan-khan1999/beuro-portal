@@ -80,7 +80,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "email",
-
               placeholder: `${translate(
                 "customers.add_customer_placeholders.email"
               )}`,
@@ -204,7 +203,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               })),
               control,
               disabled: isUpdate,
-              value: "",
+              value: Object.keys(staticEnums.Country)[0],
             },
           },
         ],

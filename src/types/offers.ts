@@ -4,6 +4,8 @@ import { AddressID, Lead } from "./leads";
 import { DateRangeProps, TemplateType, User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { EmailTemplate, Template, TemplateSettings } from "./settings";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
+import { InvoiceTableRowTypes } from "./invoice";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -57,17 +59,15 @@ export interface OffersTableRowTypes {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?: string
+  signature?: string;
   attachement?: string;
-
 }
 
-
 export interface PublicOffersTableRowTypes {
-  Offer: OffersTableRowTypes
+  Offer: OffersTableRowTypes;
   Template: TemplateType;
-  Mail: EmailTemplate
-
+  Mail: EmailTemplate;
+  setting: SystemSetting;
 }
 
 interface Address {
@@ -175,6 +175,7 @@ export interface ServiceList {
   serviceType: string;
   description: string;
   count: number;
+  pagebreak: boolean;
 }
 export interface EmailStatus {
   Pending: number;
@@ -233,25 +234,30 @@ export interface OfferDetailCardProps {
   handleSendEmail: () => void;
   isSendEmail: boolean;
   handleSendByPost: () => void;
-  loading: boolean
+  loading: boolean;
 }
-
 
 export interface OfferActivity {
   id: string;
   offerNumber: string;
   offer: string;
   discount: Discounts[];
-  activity: Activity[]
-
+  activity: Activity[];
 }
 export interface Discounts {
   totalPrice: number;
   amount: number | null;
   percentage: number | null;
-  dateTime: string
+  dateTime: string;
 }
 export interface Activity {
   editedBy: string;
-  dateTime: string
+  dateTime: string;
+}
+
+export interface InvoiceDetailCardProps {
+  handleSendEmail: () => void;
+  isSendEmail: boolean;
+  handleSendByPost: () => void;
+  loading: boolean;
 }

@@ -26,7 +26,7 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
     control,
     setError,
     formState: { errors },
-    reset
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -39,16 +39,22 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
   useMemo(() => {
     if (leadDetails.id) {
       reset({
-        ...leadDetails
-      })
+        ...leadDetails,
+      });
     }
-  }, [leadDetails.id])
-  
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 4, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onClick(3, ComponentsType.additional);
+  }, [leadDetails.id]);
 
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = {
+      ...data,
+      step: 4,
+      id: leadDetails?.id,
+      stage: ComponentsType.additionalEdit,
+    };
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
+    if (response?.payload) onClick(3, ComponentsType.additional);
   };
   return {
     fields,
@@ -57,6 +63,6 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

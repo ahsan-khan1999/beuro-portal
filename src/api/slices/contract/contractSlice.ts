@@ -170,11 +170,11 @@ export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
 
 export const readQRCode: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("contract/qr/code", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params, router, setError, translate } = args as any;
 
         try {
 
-            const response = await apiServices.readContractQRCode(data);
+            const response = await apiServices.readContractQRCode(params);
             return response?.data?.data?.qrcode;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));

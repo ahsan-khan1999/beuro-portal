@@ -26,12 +26,13 @@ export const Aggrement = ({
   isSignatureDone,
   emailTemplateSettings,
   setOfferSignature,
+  systemSettings
 }: AggrementProps) => {
 
   const date = moment(new Date()).format("DD/MMMM/YY")
   const { t: translation } = useTranslation();
   return (
-    <div>
+    <div id="signature">
       <DocumentHeader {...headerDetails} />
       <div className="px-[80px] flex flex-col bg-white pb-[50px]">
         <ContactDetails {...contactAddress} />

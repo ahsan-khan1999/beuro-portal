@@ -37,7 +37,7 @@ const Location = ({
           {translate("login_detail.location_details.heading")}
         </h1>
         <p className="text-xs text-dark tracking-[0.36px] mb-[56px]">
-          {translate("login_detail.location_details.ssub_heading")}
+          {translate("login_detail.location_details.sub_heading")}
         </p>
         <Form
           formFields={fields}

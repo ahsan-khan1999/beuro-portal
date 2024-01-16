@@ -10,34 +10,31 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
       {currentPageRows?.map((item, index) => {
         return (
           <div
-            onClick={() =>
-              router.push({
-                pathname: "/customers/details",
-                query: { customer: item.id },
-              })
-            }
-            key={index}
-            className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow grid gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(150px,_150px)_minmax(300px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_90px)_minmax(110px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_90px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(120px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(80px,_80px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(150px,_150px)_minmax(150px,_100%)_minmax(140px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] mt-2 rounded-md"
-          >
-            <span className="py-4 flex items-center">{item.refID}</span>
-            <span className="py-4 flex items-center break-all">
-              {item.fullName}
-            </span>
 
-            <span className="py-4 flex items-center break-all">
-              {item.email}
-            </span>
-            <span className="py-4 flex items-center break-all">
-              {item.phoneNumber}
-            </span>
-            <span className="py-4 xlg:flex items-center mlg:hidden">
+            key={index}
+            className="hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow grid gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(300px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)] mt-2 rounded-md items-center"
+          >
+            <span className="py-4 truncate">{item.refID}</span>
+            <span className="py-4 truncate">{item.fullName}</span>
+
+            <span className="py-4 truncate">{item.email}</span>
+            <span className="py-4 truncate">{item.phoneNumber}</span>
+            <span className="py-4 maxSize:flex items-center mlg:hidden">
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">
               {item.address.country}
             </span>
             <span className="py-4 flex items-center"> {item.customerType}</span>
-            <span className="flex justify-center items-center">
+            <span className="flex justify-center items-center cursor-pointer"
+
+              onClick={() =>
+                router.push({
+                  pathname: "/customers/details",
+                  query: { customer: item.id },
+                })
+              }
+            >
               <div className="p-[5px] rounded-md border border-[#8F8F8F] border-opacity-10 w-[27px] h-[27px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

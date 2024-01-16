@@ -1,6 +1,5 @@
 import { AddressDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import { A4_WIDTH } from "./pdf-layout";
 import { CustomerAddress } from "@/types/leads";
 import { MovingDetailsProps } from "@/types";
 
@@ -10,8 +9,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   header: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 14,
+    fontWeight: 600,
+    fontStyle: "semibold",
     color: "#000",
     paddingBottom: 3,
     borderBottomWidth: 3,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dateText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "medium",
     color: "#000",
   },
@@ -63,22 +63,31 @@ export const AddressDetails = ({
 }: Partial<MovingDetailsProps>) => (
   <View style={styles.container}>
     <Text style={styles.header}>{header}</Text>
-
     {address?.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
           <Text
             style={{
-              fontSize: 16,
-              fontWeight: "bold",
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
               color: "#000",
             }}
           >
-            Address {index + 1}:
+            {address?.label}:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000", width: 450, textAlign: 'justify' }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: "#000",
+              width: 450,
+              textAlign: "justify",
+            }}
+          >
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-            {address.description && `, ${address.description}`}
+            {address.description && ` - ${address.description}`}
           </Text>
         </View>
       </View>
@@ -87,17 +96,18 @@ export const AddressDetails = ({
     <View style={styles.dateRow}>
       <Text
         style={{
-          fontSize: 16,
-          fontWeight: "bold",
+          fontSize: 10,
+          fontWeight: 500,
+          fontStyle: "medium",
           color: "#000",
         }}
       >
-        Work Dates:
+        Arbeitstermine:
       </Text>
       <View style={styles.datesColumn}>
         {workDates?.map((date, index) => (
           <Text style={styles.dateText} key={index}>
-            {`${date.startDate} to ${date.endDate},`}
+            {`${date.startDate}${date.endDate ? (' to ' + date.endDate + ',') : ''}`}
           </Text>
         ))}
       </View>

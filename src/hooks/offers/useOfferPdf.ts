@@ -4,8 +4,10 @@ import {
   sendOfferEmail,
 } from "@/api/slices/offer/offerSlice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -25,39 +27,9 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 let contractPdfInfo = {
   subject: "",
   description: "",
@@ -75,11 +47,15 @@ export const useOfferPdf = () => {
     null
   );
   const [pdfFile, setPdfFile] = useState(null);
-  const {
-    auth: { user },
-    global: { modal, loading: loadingGlobal },
-    offer: { error, loading, offerDetails },
-  } = useAppSelector((state) => state);
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+
+
+
+
+  const { loading, offerDetails } = useAppSelector(state => state.offer)
+  const { modal, loading: loadingGlobal } = useAppSelector(state => state.global)
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -88,10 +64,11 @@ export const useOfferPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
+        const [template, emailTemplate, offerData, settings] = await Promise.all([
           dispatch(getTemplateSettings()),
           dispatch(readEmailSettings()),
           dispatch(readOfferDetails({ params: { filter: offerID } })),
+          dispatch(readSystemSettings())
         ]);
         if (template?.payload?.Template) {
           const {
@@ -126,6 +103,10 @@ export const useOfferPdf = () => {
             textColour: emailTemplate?.payload?.textColour,
           });
         }
+
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting })
+        }
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
           let formatData: PdfProps<ContractEmailHeaderProps> = {
@@ -141,7 +122,7 @@ export const useOfferPdf = () => {
               offerNo: offerDetails?.offerNumber,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
-              logo: offerDetails?.createdBy?.company?.logo,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
             },
             contactAddress: {
@@ -160,13 +141,13 @@ export const useOfferPdf = () => {
               address: offerDetails?.addressID?.address,
               header: offerDetails?.title,
               workDates: offerDetails?.date,
-              handleTitleUpdate: () => {},
-              handleDescriptionUpdate: () => {},
+              handleTitleUpdate: () => { },
+              handleDescriptionUpdate: () => { },
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: offerDetails?.subTotal?.toString(),
-              tax: offerDetails?.taxAmount?.toString(),
+              tax: calculateTax(offerDetails?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               grandTotal: offerDetails?.total?.toString(),
             },
@@ -194,15 +175,17 @@ export const useOfferPdf = () => {
                     offerDetails?.createdBy?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
               totalPages: 10,
-            },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
             },
             aggrementDetails: offerDetails?.additionalDetails || "",
             isOffer: true,
@@ -219,6 +202,7 @@ export const useOfferPdf = () => {
               ?.body as string,
           };
         }
+
       }
     })();
   }, [offerID]);
@@ -229,11 +213,12 @@ export const useOfferPdf = () => {
       setActiveButtonId("email");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
-
-      if (data && pdfFile) {
+      if (!pdfFile) return;
+      formData.append("file", pdfFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (data) {
         // delete apiData["id"]
-        formData.append("file", pdfFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+
         let apiData = { ...data, pdf: fileUrl?.payload };
         delete apiData["content"];
 
@@ -245,10 +230,12 @@ export const useOfferPdf = () => {
         let apiData = {
           email: offerDetails?.leadID?.customerDetail?.email,
           content: offerDetails?.content?.id,
-          subject: offerDetails?.content?.offerContent?.title,
+          subject: offerDetails?.title +" "+ offerDetails?.offerNumber+ " " + offerDetails?.createdBy?.company?.companyName,
           description: offerDetails?.content?.offerContent?.body,
           attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id,
+          pdf: fileUrl?.payload
+          // pdf: res?.payload
         };
         const res = await dispatch(sendOfferEmail({ data: apiData }));
         if (res?.payload) {
@@ -271,7 +258,19 @@ export const useOfferPdf = () => {
       dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
   };
   const handleDonwload = () => {
-    window.open(offerDetails?.attachement);
+    if (pdfFile) {
+      const url = URL.createObjectURL(pdfFile);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${offerDetails?.offerNumber + "-" + offerDetails?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
+
   };
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
@@ -300,5 +299,6 @@ export const useOfferPdf = () => {
     handlePrint,
     onClose,
     onSuccess,
+    systemSetting
   };
 };

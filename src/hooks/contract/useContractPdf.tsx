@@ -9,12 +9,16 @@ import { EmailTemplate } from "@/types/settings";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import {
   readContractDetails,
+  readQRCode,
   sendContractEmail,
+  sendOfferByPost,
   updateContractContent,
 } from "@/api/slices/contract/contractSlice";
 import { contractTableTypes } from "@/types/contract";
@@ -25,7 +29,12 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
+
+import { pdf as reactPdf } from "@react-pdf/renderer";
+// import { PdfFile } from "@/components/reactPdf/pdf-file";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -65,7 +74,6 @@ let contractPdfInfo = {
 };
 
 export const useContractPdf = () => {
-  // const [newPageData, setNewPageData] = useState<ServiceList[][]>([]);
   const [contractData, setContractData] =
     useState<PdfProps<ContractEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
@@ -77,8 +85,12 @@ export const useContractPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
-  const [pdfFile, setPdfFile] = useState(null);
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
 
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
@@ -95,11 +107,17 @@ export const useContractPdf = () => {
   useEffect(() => {
     (async () => {
       if (offerID) {
-        const [template, emailTemplate, offerData] = await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(readContractDetails({ params: { filter: offerID } })),
-        ]);
+        const [template, emailTemplate, offerData, qrCode, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(readContractDetails({ params: { filter: offerID } })),
+            dispatch(readQRCode({ params: { filter: offerID } })),
+            dispatch(readSystemSettings()),
+          ]);
+        if (qrCode?.payload) {
+          setQrCodeUrl(qrCode.payload);
+        }
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -145,11 +163,12 @@ export const useContractPdf = () => {
               worker: contractDetails?.offerID?.createdBy?.fullName,
             },
             headerDetails: {
-              offerNo: contractDetails?.offerID?.offerNumber,
-              offerDate: contractDetails?.offerID?.createdAt,
+              offerNo: contractDetails?.contractNumber,
+              offerDate: contractDetails?.createdAt,
               createdBy: contractDetails?.offerID?.createdBy?.fullName,
-              logo: contractDetails?.offerID?.createdBy?.company?.logo,
+              logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType: "contract"
             },
             contactAddress: {
               address: {
@@ -178,7 +197,10 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: contractDetails?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(
+                contractDetails?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
             },
@@ -201,15 +223,17 @@ export const useContractPdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
               totalPages: calculateTotalPages,
-            },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
             },
             aggrementDetails: contractDetails?.additionalDetails || "",
             isOffer: true,
@@ -259,6 +283,9 @@ export const useContractPdf = () => {
               contractDetails?.offerID?.content?.confirmationContent?.body,
           };
         }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting });
+        }
       }
     })();
   }, [offerID]);
@@ -274,15 +301,53 @@ export const useContractPdf = () => {
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
+  useEffect(() => {
+    if (qrCodeUrl) {
+      (async () => {
+        const remotePdfResponse = await fetch(qrCodeUrl);
+        const remotePdfBlob = await remotePdfResponse.blob();
+        setRemoteFileBlob(remotePdfBlob);
+      })();
+    }
+  }, [qrCodeUrl]);
+
+  const fileName = contractData?.emailHeader?.offerNo;
+  const contractDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: contractData,
+      fileName,
+      qrCode: qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      contractData,
+      fileName,
+      qrCodeUrl,
+      remoteFileBlob,
+      systemSetting,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(contractDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
       setActiveButtonId("email");
+      console.log(mergedFile, "pdfFile");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
-      if (data && pdfFile) {
-        formData.append("file", pdfFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (!mergedFile) return;
+      formData.append("file", mergedFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      console.log(fileUrl)
+      if (data) {
         let apiData = { ...data, pdf: fileUrl?.payload };
 
         delete apiData["content"];
@@ -295,12 +360,13 @@ export const useContractPdf = () => {
           email: contractDetails?.offerID?.leadID?.customerDetail?.email,
           content: contractDetails?.offerID?.content?.id,
           subject:
-            contractDetails?.offerID?.content?.confirmationContent?.title,
+            contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
           description:
             contractDetails?.offerID?.content?.confirmationContent?.body,
           attachments:
             contractDetails?.offerID?.content?.confirmationContent?.attachments,
           id: contractDetails?.id,
+          pdf: fileUrl?.payload,
         };
         const res = await dispatch(sendContractEmail({ data: apiData }));
         if (res?.payload) {
@@ -312,7 +378,20 @@ export const useContractPdf = () => {
     }
   };
   const handleDonwload = () => {
-    window.open(contractData?.attachement);
+    // window.open(contractData?.attachement);
+
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${contractDetails?.contractNumber + "-" + contractDetails?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(contractData?.attachement);
@@ -359,17 +438,16 @@ export const useContractPdf = () => {
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   return {
     contractData,
     modal,
     loading,
     activeButtonId,
     router,
-    templateSettings,
-    emailTemplateSettings,
-    pdfFile,
     loadingGlobal,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     dispatch,
     onClose,
     onSuccess,

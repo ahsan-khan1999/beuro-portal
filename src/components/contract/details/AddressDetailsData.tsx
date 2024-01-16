@@ -55,7 +55,7 @@ const AddressDetailsData = ({
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("contracts.address_details.description")}
             </label>
-            <div className="h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="min-h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all">
               {item.description}
             </div>
           </div>

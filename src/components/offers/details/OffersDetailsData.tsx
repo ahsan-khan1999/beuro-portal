@@ -9,6 +9,7 @@ import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useRouter } from "next/router";
 
 export enum ComponentsType {
   customer,
@@ -102,7 +103,7 @@ const OffersDetailsData = ({
   return (
     <div className="grid grid-cols-1 xl:grid-cols-4 xl:gap-x-6 ">
       <div className="col-span-1 flex flex-row xl:flex-col gap-4 w-full">
-        <div className="flex flex-col gap-y-[14px]">
+        <div className="flex flex-col gap-y-[14px] w-full">
           {tabSection.map((item, index) => (
             <DetailsTab
               key={index}

@@ -1,54 +1,64 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderProps } from "@/types/pdf";
+import { HeaderLabel } from "@/utils/static";
 import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
+import { useTranslation } from "next-i18next";
 
 export const Header = ({
   createdBy,
   emailTemplateSettings,
-  logo,
   offerDate,
   offerNo,
+  fileType
 }: Partial<DocumentHeaderDetailsProps>) => {
+  const { t: translate } = useTranslation();
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
+  const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
   return (
     <View
       style={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#EEE",
+        backgroundColor: `#${FooterColour}`,
         padding: 20,
+        fontFamily: 'Poppins',
       }}
       fixed
     >
-      <View>
-        <Image
-          src={"/assets/images/logo.png"}
-          style={{ width: 182, height: 73 }}
-        />
+      <View style={{ width: "65%" }}>
+        <Image src={logo} style={{ width: 182, height: 73 }} />
       </View>
-      <View>
+      <View style={{ width: "35%" }}>
         <View
           style={{
             display: "flex",
             flexDirection: "row",
-            rowGap: 10,
+            rowGap: 4,
             marginBottom: 6,
           }}
         >
           <Text
             style={{
-              width: 100,
-              fontSize: 16,
-              fontWeight: "medium",
-              color: "#404040",
+              width: 90,
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: `#${textColour}`,
             }}
           >
-            Offer No:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} Nr:
+
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: `#${textColour}`,
+            }}
+          >
             {offerNo}
           </Text>
         </View>
@@ -62,30 +72,46 @@ export const Header = ({
         >
           <Text
             style={{
-              width: 100,
-              fontSize: 16,
-              fontWeight: "medium",
-              color: "#404040",
+              width: 90,
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: `#${textColour}`,
             }}
           >
-            Offer Date:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} datum:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: `#${textColour}`,
+            }}
+          >
             {formatDateTimeToDate(offerDate || "")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
           <Text
             style={{
-              width: 100,
-              fontSize: 16,
-              fontWeight: "medium",
-              color: "#404040",
+              width: 90,
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: `#${textColour}`,
             }}
           >
-            Created By:
+            Erstellt von:
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: `#${textColour}`,
+            }}
+          >
             {createdBy}
           </Text>
         </View>

@@ -2,7 +2,7 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "@/types";
-import { EmailSetting, EmailTemplate, FollowUp, TemplateSettings } from "@/types/settings";
+import { CompanyQrSettings, EmailSetting, EmailTemplate, FollowUp, QRSettings, TemplateSettings } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
 import { saveUser } from "@/utils/auth.util";
 export interface TaxSetting {
@@ -21,7 +21,8 @@ interface SettingsState {
     tax: TaxSetting[] | null,
     followUps: FollowUp | null,
     emailSettings: EmailSetting | null,
-    emailTemplate: EmailTemplate | null
+    emailTemplate: EmailTemplate | null,
+    qrSettings: CompanyQrSettings | null
 
 }
 
@@ -45,7 +46,8 @@ const initialState: SettingsState = {
     tax: null,
     followUps: null,
     emailSettings: null,
-    emailTemplate: null
+    emailTemplate: null,
+    qrSettings: null
 
 }
 
@@ -244,6 +246,32 @@ export const updateAdminSetting: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const readQrCodeSettings: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("user/qrcode/setting/read", async (args, thunkApi) => {
+
+        try {
+            const response = await apiServices.readSettingsQrCode({});
+            return response?.data?.data?.QrCode;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const createQrCodeSetting: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("create/qrcode/setting", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            await apiServices.createSettingsQrCode(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
 const SettingSlice = createSlice({
     name: "SettingSlice",
     initialState,
@@ -256,6 +284,9 @@ const SettingSlice = createSlice({
         },
         setFollowUpSettings: (state, action) => {
             state.followUps = action.payload;
+        },
+        setSystemSettings: (state, action) => {
+            state.systemSettings = action.payload;
         },
 
     },
@@ -413,9 +444,32 @@ const SettingSlice = createSlice({
             state.loading = false
         });
 
+        builder.addCase(readQrCodeSettings.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readQrCodeSettings.fulfilled, (state, action) => {
+            state.qrSettings = action.payload
+            state.loading = false;
+
+        });
+        builder.addCase(readQrCodeSettings.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(createQrCodeSetting.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(createQrCodeSetting.fulfilled, (state, action) => {
+            state.loading = false;
+
+        });
+        builder.addCase(createQrCodeSetting.rejected, (state) => {
+            state.loading = false
+        });
+
 
     },
 })
 
 export default SettingSlice.reducer;
-export const { setErrorMessage, setTaxSettings, setFollowUpSettings } = SettingSlice.actions
+export const { setErrorMessage, setTaxSettings, setFollowUpSettings, setSystemSettings } = SettingSlice.actions

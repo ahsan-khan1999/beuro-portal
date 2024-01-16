@@ -6,8 +6,8 @@ import {
 } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { staticEnums } from "@/utils/static";
-import icon from "@/assets/svgs/Vector.svg";
 import { useTranslation } from "next-i18next";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -16,7 +16,10 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   onHandleBack,
   count,
   handleAddNewAddress,
-  handleRemoveAddress
+  handleRemoveAddress,
+  fields,
+  handleFieldTypeChange,
+  addressType
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
@@ -24,12 +27,75 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
-        containerClass: "mt-6 ",
-        label: {
-          text: translate("leads.address_details.heading"),
-          htmlFor: `address-${i}-details`,
-          className: "mb-[10px] text-[#8F8F8F]",
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 1 && "hidden"
+          }`,
+          onClick: handleRemoveAddress && handleRemoveAddress,
         },
+      },
+      {
+        containerClass: "mt-2",
+        field: {
+          type: Field.div,
+          className: "flex  space-x-2",
+          id: `address-labels-${i}`,
+          children: [
+            (!(addressType && !addressType[i - 1]) && {
+              containerClass: "",
+              field: {
+                type: Field.input,
+                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+                inputType: "text",
+                id: `label-${i}`,
+                name: `label-${i}`,
+                placeholder: `Zweibrückenstraße, ${i}`,
+                register,
+                value: `Address ${i}`,
+              },
+            }) || {
+              containerClass: "",
+              field: {
+                type: Field.input,
+                inputType: "text",
+                id: `label-${i}`,
+                name: `label-${i}`,
+                placeholder: `Zweibrückenstraße, ${i}`,
+                register,
+                value: `Address ${i}`,
+                disabled: true,
+                className:
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+              },
+            },
+            {
+              containerClass: "",
+              field: {
+                type: Field.button,
+                className: "bg-white hover:bg-white",
+                id: `addressLabel-${i}`,
+                inputType: "button",
+                icon: editIcon,
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
+              },
+            },
+          ],
+        },
+      },
+
+      {
+        containerClass: "mt-6 ",
+        // label: {
+        //   text: `${translate("leads.address_details.heading")} ${i}`,
+        //   htmlFor: `address-${i}-details`,
+        //   className: "mb-[10px] text-[#8F8F8F]",
+        // },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
@@ -86,7 +152,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                   label: item,
                 })),
                 control,
-                value: "",
+                value: Object.keys(staticEnums.Country)[0],
               },
             },
           ],
@@ -109,25 +175,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-                rows: 8,
+                rows: 2,
                 id: `description-${i}`,
                 name: `description-${i}`,
                 placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 register,
-              },
-            },
-            {
-              containerClass: "mb-0 absolute -top-44 right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: "Remove",
-                inputType: "button",
-                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 1 && "hidden"
-                }`,
-                onClick: handleRemoveAddress && handleRemoveAddress,
               },
             },
           ],
@@ -141,46 +194,54 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex space-x-[18px] ",
+      className: "flex justify-between",
       children: [
         {
+          field: {
+            className: "flex gap-x-[18px]",
+            type: Field.div,
+            id: "div-field",
+            children: [
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.back_button")}`,
+                  inputType: "button",
+                  className:
+                    "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
+                  onClick: () =>
+                    onHandleBack && onHandleBack(ComponentsType.customerAdd),
+                },
+              },
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.next_button")}`,
+                  inputType: "submit",
+                  className:
+                    "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  loading,
+                },
+              },
+            ],
+          },
+        },
+        {
           containerClass: "mb-0",
           field: {
             type: Field.button,
             id: "button",
-            text: `${translate("leads.address_details.back_button")}`,
+            text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
-            className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-            onClick: () =>
-              onHandleBack && onHandleBack(ComponentsType.customerAdd),
-          },
-        },
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            text: `${translate("leads.address_details.next_button")}`,
-            inputType: "submit",
-            className:
-              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
-            loading,
-          },
-        },
-
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            className: ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4   h-[40px] text-white hover-bg-none ${
+            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
               count === 2 && "hidden"
             }`,
             onClick: handleAddNewAddress && handleAddNewAddress,
-            icon: icon,
-            name: "",
-            // icon
+            loading,
           },
         },
       ],

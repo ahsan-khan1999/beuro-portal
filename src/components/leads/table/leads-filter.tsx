@@ -145,6 +145,7 @@ export default function LeadsFilter({
           icon={addIcon}
           text={translate("leads.add_button")}
           id="add"
+          iconAlt="add button"
         />
       </div>
     </div>

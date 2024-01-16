@@ -16,7 +16,7 @@ const DetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-20 pb-5">
         <div className="flex items-center">
           <div onClick={handlePreviousClick} className="cursor-pointer">
             <Image src={backIcon} alt="backIcon" />
@@ -26,7 +26,7 @@ const DetailsData = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-          <Image src={printerIcon} alt="printerIcon" />
+          {/* <Image src={printerIcon} alt="printerIcon" /> */}
           <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}
@@ -39,19 +39,20 @@ const DetailsData = ({
           </span>
         </div>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>
-        <div className="flex justify-between items-center max-w-[600px]">
-          <h3 className="text-[#4D4D4D] ">
+        <div className="grid grid-cols-1 maxSize:grid-cols-[minmax(200px,_1fr)_minmax(300px,_3fr)] items-center mt-5 gap-y-4">
+          <h3 className="text-[#4D4D4D]">
             {translate("customers.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
           </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("customers.card_content.created_by")}:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{name}
+          <div className="text-[#4D4D4D] flex gap-x-2">
+            <span className="min-w-[100px]">
+              {translate("customers.card_content.created_by")}:
             </span>
-          </h3>
+            <div className="text-[#4B4B4B] font-medium truncate mr-1">
+              {name}
+            </div>
+          </div>
         </div>
         <h3 className="text-[#4D4D4D] mt-4">
           {translate("customers.card_content.created_date")}:

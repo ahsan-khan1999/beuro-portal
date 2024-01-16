@@ -11,30 +11,42 @@ import { useMemo } from "react";
 const styles = StyleSheet.create({
   footerContainer: {
     width: 595,
-    height: 130,
+    height: 90,
     paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "stretch",
+    alignItems: "center",
     position: "absolute",
     backgroundColor: "#EEEEEE",
-    columnGap: 16,
     bottom: 0,
     left: 0,
     right: 0,
     textAlign: "left",
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
+  },
+  firstColumnFooterSection: {
+    borderRight: 1,
+    borderColor: "#D9D9D9",
+    width: "25%",
+    paddingHorizontal: 8,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   footerSection: {
     borderRight: 1,
     borderColor: "#D9D9D9",
     width: "25%",
+    paddingHorizontal: 8,
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "left",
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 8,
+    fontWeight: 400,
+    fontStyle: "normal",
     color: "#000",
-    fontWeight: "normal",
     marginBottom: 2,
   },
   pageNumberContainer: {
@@ -45,9 +57,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   pageNumberText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "medium",
-    color: "#000",
+    color: "#fff",
   },
 });
 
@@ -132,11 +144,25 @@ export const Footer = ({
       borderRight: showBorder ? 1 : 0,
     };
   };
+  const getFirstColumnFooterSection = (showBorder?: boolean) => {
+    return {
+      ...styles.firstColumnFooterSection,
+      borderRight: showBorder ? 1 : 0,
+    };
+  };
+  const shouldAlignRight =
+    showFirstColumnBorder && !showSecondColumnBorder && !showThirdColumnBorder;
 
   return (
     <View style={styles.footerContainer} fixed>
       {isFirstColumn && (
-        <View style={getFooterSectionStyle(showFirstColumnBorder)}>
+        <View
+          style={{
+            ...getFirstColumnFooterSection(showFirstColumnBorder),
+            width: "30%",
+            textAlign: shouldAlignRight ? "right" : "left",
+          }}
+        >
           {isCompanyName && (
             <Text style={styles.footerText}>{companyName}</Text>
           )}
@@ -149,7 +175,12 @@ export const Footer = ({
         </View>
       )}
       {isSecondColumn && (
-        <View style={getFooterSectionStyle(showSecondColumnBorder)}>
+        <View
+          style={{
+            ...getFooterSectionStyle(showSecondColumnBorder),
+            width: "30%",
+          }}
+        >
           {isBankName && (
             <Text style={styles.footerText}>{bankDetails?.bankName}</Text>
           )}

@@ -6,7 +6,8 @@ export const ProductItemFooter = ({
   discount,
   grandTotal,
   tax,
-}: ProductItemFooterProps) => {
+  systemSettings
+}: Partial<ProductItemFooterProps>) => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
@@ -52,7 +53,7 @@ export const ProductItemFooter = ({
             {translate("pdf.grand_total")}:
           </span>
           <span className="text-base font-semibold text-[#fff]">
-            {grandTotal}
+            {grandTotal}{" "+systemSettings?.currency}
           </span>
         </div>
       </div>

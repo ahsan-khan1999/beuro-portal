@@ -65,6 +65,8 @@ const PdfDownload = ({
   pdfFile,
   setPdfFile,
   fileName,
+  qrCode: remotePdfFile,
+  systemSetting
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -74,14 +76,12 @@ const PdfDownload = ({
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
 
-  console.log({data, pdfFile, setPdfFile})
-
   return (
     <div className="download-link">
       <BlobProvider
         document={
           <Document>
-            <Page style={styles.body} dpi={72}>
+            <Page style={{...styles.body, minHeight: "100%"}} dpi={72}>
               <Header {...headerDetails} />
               <View
                 style={{
@@ -151,5 +151,6 @@ export default PdfDownload;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
+    height: '895px'
   },
 });

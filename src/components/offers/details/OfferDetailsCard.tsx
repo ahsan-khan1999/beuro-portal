@@ -42,7 +42,7 @@ const OfferDetailsCard = ({
   };
   return (
     <>
-      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
+      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -89,7 +89,7 @@ const OfferDetailsCard = ({
             }
             className="cursor-pointer"
           />
-          <Image
+          {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
             className="cursor-pointer"
@@ -100,7 +100,7 @@ const OfferDetailsCard = ({
             alt="printerIcon"
             className="cursor-pointer"
             onClick={handlePrint}
-          />
+          /> */}
           <Image
             src={deleteIcon}
             alt="deleteIcon"

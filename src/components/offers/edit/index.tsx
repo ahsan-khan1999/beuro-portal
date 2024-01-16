@@ -1,6 +1,6 @@
 import { Layout } from "@/layout";
 import React, { useEffect } from "react";
-import EditOffersDetailsData from "./EditOffersDetailsData";
+import EditOffersDetailsData, { EditComponentsType } from "./EditOffersDetailsData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -10,6 +10,7 @@ import useOffers from "@/hooks/offers/useOffers";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { useRouter } from "next/router";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,12 @@ const EditOffersDetails = () => {
 
   // const { handleImagesUpload } = useOffers();
   // const handleImagesUpload = () => {};
+  const router = useRouter();
+  let tab: EditComponentsType | undefined;
+
+  if(router.query?.tab){
+    tab = +(router.query?.tab);
+  }
 
   return (
     <>
@@ -69,6 +76,7 @@ const EditOffersDetails = () => {
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImageUpload}
           handleImageSlider={handleImageSlider}
+          tab={tab}
         />
       </Layout>
 

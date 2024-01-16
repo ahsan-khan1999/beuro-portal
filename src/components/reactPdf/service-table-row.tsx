@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F7F8",
     paddingVertical: 8,
     borderRadius: 4,
-    marginBottom: 16,
+    marginBottom: 12,
     marginHorizontal: 20,
   },
   headerRow: {
@@ -29,17 +29,17 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 16,
-    fontWeight: "normal",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 230,
-    textAlign: "justify",
   },
   descriptionText: {
     color: "#404040",
-    fontSize: 14,
-    fontWeight: "normal",
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
     width: 230,
-    textAlign: "justify",
   },
   priceHeader: {
     flexDirection: "row",
@@ -48,13 +48,20 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#000",
-    fontSize: 16,
-    fontWeight: "normal",
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
     width: 86.25,
+  },
+  headerTotal: {
+    color: "#000",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
   },
   headerTextTotal: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     width: 86.25,
   },
@@ -67,10 +74,11 @@ export const ServiceTableRow = ({
   serviceTitle,
   serviceType,
   totalPrice,
+  pagebreak,
   unit,
 }: Partial<ServiceList>) => {
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
         <View style={styles.description}>
           <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
@@ -80,7 +88,7 @@ export const ServiceTableRow = ({
           <Text style={styles.headerText}>{price}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
-          <Text style={styles.headerText}>{totalPrice}</Text>
+          <Text style={styles.headerTotal}>{totalPrice}</Text>
         </View>
       </View>
     </View>

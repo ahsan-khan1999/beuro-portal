@@ -25,10 +25,11 @@ import {
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
-import { calculateDiscount, calculateTax } from "@/utils/utility";
+import { calculateDiscount, calculatePercentage, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
 export const useAddServiceDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
@@ -55,7 +56,7 @@ export const useAddServiceDetails = (
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readService({ params: { filter: { "sort": "-createdAt" }, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
 
@@ -126,7 +127,7 @@ export const useAddServiceDetails = (
 
     let taxAmount =
       isTax && taxType == "0"
-        ? calculateTax(totalPrices, 8.1)
+        ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && taxType == "1"
           ? calculateTax(totalPrices, data?.taxPercentage || 0)
           : 0;
@@ -178,8 +179,10 @@ export const useAddServiceDetails = (
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount,
         discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount || 0,
+        taxAmount: offerDetails?.taxAmount,
       });
+    } else {
+      // setValue("taxType",systemSettings?.taxType)
     }
     generateGrandTotal();
   }, [offerDetails.id]);
@@ -276,6 +279,7 @@ export const useAddServiceDetails = (
     setValue,
     watch
   );
+  console.log(offerDetails, "offerDetails");
 
   const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
     register,
@@ -313,7 +317,7 @@ export const useAddServiceDetails = (
       step: 3,
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
-      taxAmount: !data?.taxType ? 8.1 : data?.taxAmount,
+      taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
 
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),

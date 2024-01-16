@@ -35,7 +35,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "hamzaicp54@gmail.com",
+              placeholder: "email@domain.com",
               register,
 
             },
@@ -95,26 +95,46 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
+        // value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
 
 
       },
     },
 
+    // {
+    //   containerClass: " mt-5",
+    //   label: {
+    //     text: `${translate("contracts.contract_email_preview.attachments")}`,
+    //     htmlFor: "attachments",
+    //     className: "mb-[10px]",
+    //   },
+    //   field: {
+    //     type: Field.dragAndDropPdfField,
+    //     id: "attachments",
+    //     isOpenedFile: false,
+    //     text: "Drop or Attach your files here",
+    //     fileSupported: "Files supported: PDF,JPG, PNG,GIF",
+    //     name: "attachments",
+    //     control,
+    //     attachements,
+    //     setAttachements
+    //   },
+    // },
+
     {
       containerClass: " mt-5",
       label: {
         text: `${translate("contracts.contract_email_preview.attachments")}`,
-        htmlFor: "pdf",
+        htmlFor: "attachments",
         className: "mb-[10px]",
       },
       field: {
         type: Field.dragAndDropPdfField,
-        id: "pdf",
+        id: "attachments",
         isOpenedFile: false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
-        name: "pdf",
+        name: "attachments",
         control,
         attachements,
         setAttachements

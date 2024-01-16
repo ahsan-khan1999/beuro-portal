@@ -68,13 +68,13 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(readLead({ params: { filter: query, page: currentPage, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Lead);
-        }
+    dispatch(
+      readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Lead);
       }
-    );
+    });
   };
 
   const onClose = () => {
@@ -155,25 +155,40 @@ const useLeads = () => {
       const statusValue = staticEnums["LeadStatus"][query?.filter as string];
       setFilter({
         ...filter,
-        status: [statusValue?.toString()]
+        status: [statusValue?.toString()],
       });
-      dispatch(readLead({ params: { filter: { ...filter, status: [staticEnums["LeadStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-        }
-      );
+      dispatch(
+        readLead({
+          params: {
+            filter: {
+              ...filter,
+              status: [staticEnums["LeadStatus"][query?.filter as string]],
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+      });
     } else {
       setFilter({
         ...filter,
-        status: "None"
+        status: "None",
       });
-      dispatch(readLead({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-        }
-      );
+      dispatch(
+        readLead({
+          params: {
+            filter: { ...filter, status: "None" },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+      });
     }
-  }, [currentPage,query?.filter]);
+  }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

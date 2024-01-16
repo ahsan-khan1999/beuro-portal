@@ -62,7 +62,7 @@ const customerDetailData = ({
           {Number(leadDetails?.customerDetail?.customerType) === 1 && (
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Company Name
+                {translate("login_detail.company_details.company_name")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.companyName}

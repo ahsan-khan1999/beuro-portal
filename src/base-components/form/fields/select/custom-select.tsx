@@ -9,6 +9,7 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 export const SelectBox = ({
   id,
@@ -63,7 +64,7 @@ export const SelectBox = ({
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
   const classes = combineClasses(defaultClasses, className);
-
+  const { t: translate } = useTranslation();
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary  ">
       <button
@@ -76,7 +77,6 @@ export const SelectBox = ({
       >
         {(field && getLabelByValue(field.value, option)) ||
           getLabelByValue(defaultValue, option)}
-
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span
@@ -98,7 +98,7 @@ export const SelectBox = ({
             <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
               <Image
                 src={searchIcon}
-                alt={"Search Icon"}
+                alt="Search Icon"
                 className="ml-1 w-4 h-4 absolute"
                 width={24}
                 height={8}

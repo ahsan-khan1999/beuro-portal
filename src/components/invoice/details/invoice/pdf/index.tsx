@@ -5,29 +5,41 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
+import { useId } from "react";
+
+// const InvoicePdfPreview = dynamic(
+//   () => import("@/components/reactPdf/pdf-layout"),
+//   { ssr: false }
+// );
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false }
+  { ssr: false, loading: () => <LoadingState /> }
 );
+
+// const PdfDownload = dynamic(
+//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
+//   {
+//     ssr: false,
+//   }
+// );
+
 const PdfDownload = dynamic(
   () => import("@/components/reactPdf/generate-Pdf-Download"),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 );
 
 const DetailsPdfPriview = () => {
   const {
     activeButtonId,
     invoiceData,
-    emailTemplateSettings,
-    pdfFile,
     router,
-    templateSettings,
     modal,
     loadingGlobal,
     loading,
+    translate,
+    mergedPdfUrl,
+    isPdfRendering,
     handleDonwload,
     handleEmailSend,
     handlePrint,
@@ -35,8 +47,6 @@ const DetailsPdfPriview = () => {
     dispatch,
     onClose,
     onSuccess,
-    setPdfFile,
-    translate
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -65,7 +75,7 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading ? (
+      {loading || loadingGlobal ? (
         <LoadingState />
       ) : (
         <>
@@ -78,45 +88,13 @@ const DetailsPdfPriview = () => {
             onPrint={handlePrint}
             onSendViaPost={handleSendByPost}
             activeButtonId={activeButtonId}
-            title={
-              router.pathname?.includes("receipt")
-                ? "Receipt Details"
-                : "Invoice Details"
-            }
+            title={translate("invoice.invoice_details")}
           />
-          {/* <YogaPdfContainer>
 
-              <div className="my-5">
-                <Pdf<InvoiceEmailHeaderProps>
-                  pdfData={invoiceData}
-                  newPageData={newPageData}
-                  templateSettings={templateSettings}
-                  totalPages={calculateTotalPages}
-                  isQr={true}
-                  emailTemplateSettings={emailTemplateSettings}
-
-                />
-              </div>
-            </YogaPdfContainer> */}
-          {loading || loadingGlobal ? (
-            <LoadingState />
-          ) : (
-            <div className="flex justify-center my-5">
-              <InvoicePdfPreview
-                data={invoiceData}
-                emailTemplateSettings={emailTemplateSettings}
-                templateSettings={templateSettings}
-              />
-              <PdfDownload
-                data={invoiceData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                pdfFile={pdfFile}
-                setPdfFile={setPdfFile}
-                fileName="invoice.pdf"
-              />
-            </div>
-          )}
+          <InvoicePdfPreview
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
 
           {renderModal()}
         </>

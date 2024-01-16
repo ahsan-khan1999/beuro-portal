@@ -27,7 +27,7 @@ const AdditionalDetails = ({
           onClick={() =>
             router.push({
               pathname: "/offers/edit",
-              query: { offer: offerDetails?.id },
+              query: { offer: offerDetails?.id, tab: 3 },
             })
           }
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
@@ -41,7 +41,7 @@ const AdditionalDetails = ({
 
       <div className="py-[25px] px-[30px]">
         <div
-          className="w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
+          className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
           dangerouslySetInnerHTML={{ __html: offerDetails?.additionalDetails }}
         />
       </div>

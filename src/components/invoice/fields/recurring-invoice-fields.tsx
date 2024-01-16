@@ -36,7 +36,7 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
               name: "totalAmount",
               value: invoiceDetails?.contractID?.offerID?.total?.toString(),
               register,
-              disabled: true
+              disabled: true,
             },
           },
           {
@@ -64,8 +64,6 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
       },
     },
 
-    
-
     {
       containerClass: "mb-0 mt-4",
       label: {
@@ -82,21 +80,19 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
         name: "paymentType",
 
         options: [
-          { value: "Online", label: "Online" },
-          { value: "Cash", label: "Cash" },
+          { value: "Online", label: `${translate("common.online")}` },
+          { value: "Cash", label: `${translate("common.cash")}` },
         ],
         control,
       },
     },
-
-   
 
     {
       containerClass: "mb-0 mt-[13px]",
       field: {
         type: Field.button,
         id: "button",
-        text: `${translate("invoice.create_invoice_modal.button")}`,
+        text: `${translate("invoice.create_invoice_modal.update_invoice")}`,
         inputType: "submit",
         className: "hover:bg-none",
         loading,

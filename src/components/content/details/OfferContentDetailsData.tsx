@@ -82,7 +82,7 @@ const OfferContentDetailsData = ({
             {translate("content.details.offer_description")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.offerContent?.description,
             }}
@@ -93,7 +93,7 @@ const OfferContentDetailsData = ({
             {translate("content.details.email_body")}
           </p>
           <div
-            className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
             dangerouslySetInnerHTML={{
               __html: contentDetail?.offerContent?.body,
             }}

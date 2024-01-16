@@ -91,6 +91,7 @@ export default function CustomerFilter({
         id="apply"
         inputType="button"
         icon={plusIcon}
+        iconAlt="button"
       />
     </div>
   );

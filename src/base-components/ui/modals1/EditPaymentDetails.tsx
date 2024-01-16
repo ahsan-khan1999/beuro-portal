@@ -8,7 +8,8 @@ import useEditPayment from "@/hooks/modals/useEditPayment";
 
 const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error,translate } = useEditPayment(onClose);
+  const { fields, onSubmit, handleSubmit, errors, error, translate } =
+    useEditPayment(onClose);
   return (
     <>
       <BaseModal
@@ -27,7 +28,7 @@ const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
           </p>
 
           <p className="text-sm font-normal text-[#1E1E1E] ">
-          {translate("setting.billing.edit_payment_modal.sub_heading")}
+            {translate("setting.billing.edit_payment_modal.sub_heading")}
           </p>
 
           <section
@@ -39,12 +40,14 @@ const EditPaymentDetails = ({ onClose }: { onClose: () => void }) => {
           >
             <div className="flex gap-x-2">
               <Image src={silverIcon} alt="silverIcon" />
-              <span className="text-lg text-white font-medium">Silver</span>
+              <span className="text-lg text-white font-medium">
+                {translate("admin.chart_list.silver")}
+              </span>
             </div>
 
             <span className="text-sm font-medium text-[#fff]">
-              <strong className="text-lg font-medium text-white">CHF0</strong>
-              /Month
+              <strong className="text-lg font-medium text-white">CHF0</strong>/{" "}
+              {translate("common.month")}
             </span>
           </section>
 

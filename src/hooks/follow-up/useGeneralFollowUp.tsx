@@ -26,11 +26,11 @@ import { isJSON } from "@/utils/functions";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
-  const {t: translate} = useTranslation()
+  const { t: translate } = useTranslation();
   const { followUp, followUpDetails, loading } = useAppSelector(
     (state) => state.followUp
   );
-  const user  = isJSON(getUser())
+  const user = isJSON(getUser());
   const [filter, setFilter] = useState<FilterType>({
     text: "",
   });
@@ -47,7 +47,7 @@ const useGeneralFollowUp = () => {
   });
 
   useEffect(() => {
-    if (user?.role !== "Admin")
+    if (user?.role !== "Admin" &&followUp?.length === 0)
       dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   }, [dispatch]);
   const onClose = () => {
@@ -98,7 +98,7 @@ const useGeneralFollowUp = () => {
 
   const handleAddFollowUp = () => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
-    dispatch(readLead({ params: { filter: {}, paginate: 0 } }));
+    // dispatch(readLead({ params: { filter: {}, paginate: 0 } }));
 
     dispatch(updateModalType({ type: ModalType.ADD_FOLLOW_UP }));
   };
@@ -178,7 +178,7 @@ const useGeneralFollowUp = () => {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this FollowUp?"
+        modelHeading={translate("common.modals.delete_follow_up")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -196,7 +196,7 @@ const useGeneralFollowUp = () => {
     handleFollowUps,
     followUpDetails,
     handleDeleteFollowUp,
-    translate
+    translate,
   };
 };
 

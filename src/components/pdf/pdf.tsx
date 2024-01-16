@@ -14,18 +14,15 @@ export const Pdf = <T,>({
   templateSettings,
   isQr,
   totalPages,
-  emailTemplateSettings
+  emailTemplateSettings,
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
   templateSettings: TemplateType | null;
   isQr?: boolean;
   totalPages: number;
-  emailTemplateSettings: EmailTemplate | null,
-
-
+  emailTemplateSettings: EmailTemplate | null;
 }) => {
-  
   return (
     <Container>
       {/* <PreviewCard /> */}
@@ -53,7 +50,6 @@ export const Pdf = <T,>({
             totalPages={totalPages}
             currPage={index + 2}
             emailTemplateSettings={emailTemplateSettings}
-
           />
         ))}
         <Aggrement
@@ -65,18 +61,18 @@ export const Pdf = <T,>({
           totalPages={totalPages}
           currPage={totalPages}
           isOffer={pdfData.isOffer}
-          handleDescriptionUpdate={pdfData.movingDetails?.handleDescriptionUpdate}
+          handleDescriptionUpdate={
+            pdfData.movingDetails?.handleDescriptionUpdate
+          }
           signature={pdfData?.signature}
           isCanvas={pdfData?.isCanvas}
           emailTemplateSettings={emailTemplateSettings}
-
         />
         {isQr && (
           <PaymentQRCodeDetails
             contactAddress={pdfData.contactAddress}
             headerDetails={pdfData.headerDetails}
-            qrCode={pdfData.qrCode}
-            
+            // qrCode={pdfData.qrCode}
           />
         )}
       </div>

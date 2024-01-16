@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const EntryLinks = () => {
-  const [language, setLanguage] = useState("English");
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const [language, setLanguage] = useState(router?.locale == "en" ? "English":"German");
+  const { t: translate } = useTranslation();
   const handleLanguageSelected = (selectedItem: string) => {
     setLanguage(selectedItem);
     const updatedQuery = {
@@ -21,6 +21,7 @@ const EntryLinks = () => {
       locale: selectedItem == "English" ? "en" : "de",
     });
   };
+  
 
   return (
     <div className="grid grid-cols-[minmax(110px,_110px)_minmax(160px,_160px)_minmax(120px,_120px)] gap-x-3 items-center px-7">
@@ -37,13 +38,13 @@ const EntryLinks = () => {
       />
 
       <div className="flex justify-center">
-        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
           {translate("common.privacy")}
         </Link>
       </div>
 
       <div className="flex justify-center">
-        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
           {translate("common.copy_right")}
         </Link>
       </div>

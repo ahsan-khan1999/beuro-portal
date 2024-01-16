@@ -13,18 +13,32 @@ export const ProductItemNewPage = ({
   templateSettings,
   totalPages,
   currPage,
-  emailTemplateSettings
-}: PurchasedItemDetailsNextPageProps) => {
+  emailTemplateSettings,
+  systemSettings,
+}: Partial<PurchasedItemDetailsNextPageProps>) => {
   return (
     <div>
-      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
-      <div className="px-[80px] flex flex-col bg-white">
-        {serviceItem.map((item,index) => (
+      <DocumentHeader
+        {...headerDetails}
+        emailTemplateSettings={emailTemplateSettings}
+      />
+      <div className="px-[80px] flex flex-col bg-white py-2">
+        {serviceItem?.map((item, index) => (
           <ProductItem {...item} key={index} />
         ))}
-        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
+        {isShowTotal && (
+          <ProductItemFooter
+            {...serviceItemFooter}
+            systemSettings={systemSettings}
+          />
+        )}
       </div>
-      <Footer {...footerDetails} columnSettings={templateSettings} currPage={currPage} totalPages={totalPages} />
+      <Footer
+        {...footerDetails}
+        columnSettings={templateSettings}
+        currPage={currPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

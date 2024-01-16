@@ -13,10 +13,9 @@ const RecurringInvoiceUpdate = ({
   onClose: () => void;
   invoiceCreated: Function;
 }) => {
-  
   const defaultClassName = "mt-0  ";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
-  useRecurringInvoiceUpdateModal(invoiceCreated);
+    useRecurringInvoiceUpdateModal(invoiceCreated);
   return (
     <>
       <BaseModal
@@ -30,7 +29,7 @@ const RecurringInvoiceUpdate = ({
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
           />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mb-5">
+          <p className="text-[#000] font-medium text2xl mb-5">
             {translate("invoice.create_invoice_modal.update_invoice")}
           </p>
 

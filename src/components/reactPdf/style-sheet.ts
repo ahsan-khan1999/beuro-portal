@@ -58,7 +58,6 @@ export const {
 } = StyleSheet.create({
   container: {
     display: "flex",
-    justifyContent: "space-between",
     flexDirection: "row",
     marginTop: 5,
     padding: 20,
@@ -66,18 +65,21 @@ export const {
   leftColumn: {
     display: "flex",
     flexDirection: "column",
+    width: "65%",
   },
   rightColumn: {
     flexDirection: "column",
+    width: "35%",
   },
   textBase: {
     color: "#000",
-    fontSize: 16,
-    fontWeight: "medium",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
   },
   textSmall: {
     color: "#000",
-    fontSize: 14,
+    fontSize: 12,
   },
   greyText: {
     color: "#404040",

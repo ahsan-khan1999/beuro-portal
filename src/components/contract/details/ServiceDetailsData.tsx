@@ -1,15 +1,17 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import TableLayout from "@/layout/TableLayout";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { contractTableTypes } from "@/types/contract";
+import { calculateTax } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import React from "react";
 
 const ServiceDetailsData = ({
   contractDetails,
-  currency
+  currency,
 }: {
   contractDetails: contractTableTypes;
-  currency?: string
+  currency?: string;
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -81,7 +83,8 @@ const ServiceDetailsData = ({
                   {translate("contracts.service_details.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractDetails?.offerID?.taxAmount} (8.1%)
+                {calculateTax(contractDetails?.offerID?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
+
                 </span>
               </div>
             </div>
@@ -90,7 +93,7 @@ const ServiceDetailsData = ({
 
             <div className="grid grid-cols-2 mt-3">
               <span className="text-[#1E1E1E] text-base font-semibold">
-                Grand Total:
+                {translate("pdf.grand_total")}:
               </span>
 
               <span className="text-[#1E1E1E] text-base font-semibold ml-5">

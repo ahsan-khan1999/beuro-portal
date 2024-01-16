@@ -27,26 +27,12 @@ const SideCard = ({ customerDetail }: { customerDetail: Customers }) => {
             {translate("customers.side_bar_details.lead_expire")}:
           </span>
         </div>
-        <div className='flex flex-col space-y-4'>
-          <span>
-            {customerDetail?.lead?.id}
-          </span>
-          <span>
-            {customerDetail?.lead?.name}
-
-          </span>
-          <span>
-            {customerDetail?.lead?.source}
-
-          </span>
-          <span>
-            {customerDetail?.lead?.status}
-
-          </span>
-          <span>
-            {customerDetail?.lead?.expires}
-
-          </span>
+        <div className="flex flex-col space-y-4">
+          <span>{customerDetail?.lead?.id}</span>
+          <span>{customerDetail?.lead?.name}</span>
+          <span>{customerDetail?.lead?.source}</span>
+          <span>{customerDetail?.lead?.status}</span>
+          <span>{customerDetail?.lead?.expires}</span>
         </div>
       </div>
     </div>

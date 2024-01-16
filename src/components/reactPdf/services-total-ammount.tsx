@@ -1,5 +1,8 @@
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
 
@@ -31,12 +34,13 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 16,
-    fontWeight: "medium",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
@@ -46,10 +50,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   discountDescription: {
-    marginTop: 10,
+    marginTop: 6,
     color: "#404040",
-    fontWeight: "normal",
-    fontSize: 14,
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
   },
 });
 
@@ -60,57 +65,74 @@ export const ServicesTotalAmount = ({
   tax,
   invoiceCreatedAmount,
   invoicePaidAmount,
-  isInvoice,
+  isShowExtraAmount,
+  systemSettings,
+  invoiceAmount,
+  invoiceStatus
 }: Partial<ProductItemFooterProps>) => {
-  const { t: translate } = useTranslation();
 
-  let dueAmount = 0;
-  if (invoiceCreatedAmount) {
-    dueAmount = Number(grandTotal) - Number(invoiceCreatedAmount);
-  }
+  const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+
+  const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
+
 
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
-          <Text style={{ fontSize: 16, fontWeight: "medium", color: "#000" }}>
-            {translate("pdf.condition_for_moving")}
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: "#000",
+            }}
+          >
+            Bedingungen für Umzugsschätzungen
           </Text>
           <Text style={styles.discountDescription}>
-            {translate("pdf.pdf_description")}
+            Unten finden Sie weitere Informationen zu den Richtlinien und
+            Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden
+            Geschäftsbedingungen zu verstehen.
           </Text>
         </View>
         <View style={styles.rightColumn}>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Sub Total: </Text>
-            <Text style={styles.text}>{subTotal}</Text>
+            <Text style={styles.text}>Zwischensumme: </Text>
+            <Text style={styles.text}>{Number(subTotal).toFixed(2)}</Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Tax%: </Text>
-            <Text style={styles.text}>{tax} CHF (8.1%)</Text>
+            <Text style={styles.text}>Steuer%: </Text>
+            <Text style={styles.text}>
+              {Number(tax).toFixed(2)} ({TAX_PERCENTAGE}%)
+            </Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Discount: </Text>
-            <Text style={styles.text}>{discount} CHF</Text>
+            <Text style={styles.text}>Rabatt: </Text>
+            <Text style={styles.text}>{discount} </Text>
           </View>
-          {!isInvoice ? (
+          {!isShowExtraAmount ? (
             <View style={styles.totalSection}>
-              <Text style={styles.whiteText}>Grand Total:</Text>
-              <Text style={styles.whiteText}>{grandTotal} CHF</Text>
+              <Text style={styles.whiteText}>Gesamtsumme:</Text>
+              <Text style={styles.whiteText}>
+                {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
+              </Text>
             </View>
           ) : (
             <View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>Grand Total:</Text>
-                <Text style={styles.text}>{grandTotal} CHF</Text>
+                <Text style={styles.text}>Gesamtsumme:</Text>
+                <Text style={styles.text}>
+                  {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
+                </Text>
               </View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>Paid Amount:</Text>
-                <Text style={styles.text}>{invoicePaidAmount} CHF</Text>
+                <Text style={styles.text}>{!isPaid ? 'Fälliger Betrag' : 'Bezahlt'}:</Text>
+                <Text style={styles.text}>{Number(invoiceAmount).toFixed(2)} </Text>
               </View>
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Due Amount:</Text>
-                <Text style={styles.whiteText}>{dueAmount} CHF</Text>
+                <Text style={styles.whiteText}>Unbezahlter Betrag:</Text>
+                <Text style={styles.whiteText}>{unPaidAmount.toFixed(2)} </Text>
               </View>
             </View>
           )}
