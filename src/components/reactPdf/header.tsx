@@ -25,10 +25,10 @@ export const Header = ({
       }}
       fixed
     >
-      <View style={{ width: "70%" }}>
+      <View style={{ width: "65%" }}>
         <Image src={logo} style={{ width: 182, height: 73 }} />
       </View>
-      <View style={{ width: "30%" }}>
+      <View style={{ width: "35%" }}>
         <View
           style={{
             display: "flex",

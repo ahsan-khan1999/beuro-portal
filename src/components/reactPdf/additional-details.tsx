@@ -1,5 +1,5 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
-import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
 });
 
 const stylesheet: HtmlStyles = {
+  body: {
+    fontFamily: 'Poppins',
+  },
   p: {
     margin: 0,
     fontSize: 10,
@@ -129,6 +132,7 @@ const stylesheet: HtmlStyles = {
     fontStyle: "bold",
   },
 };
+
 export const AdditionalDetails = ({
   description,
   signature,
@@ -151,9 +155,10 @@ export const AdditionalDetails = ({
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+        <Html resetStyles={true} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
           {description || ""}
         </Html>
+        {/* <Text>K für Ihren Umzug (Fixpreis):</Text> */}
       </View>
     </View>
   );

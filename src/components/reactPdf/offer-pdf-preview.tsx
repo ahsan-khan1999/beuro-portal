@@ -5,6 +5,7 @@ import {
   PDFViewer,
   Page,
   StyleSheet,
+  Text,
   View,
 } from "@react-pdf/renderer";
 import { Header } from "./header";
@@ -113,7 +114,7 @@ const OfferPdfPreview = ({
         </Page>
 
         {/* Additional details */}
-        <Page style={{ paddingBottom: 145 }}>
+        <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
           <View style={{marginBottom: 10}} fixed>
             <Header {...headerDetails} />
           </View>
@@ -129,6 +130,9 @@ const OfferPdfPreview = ({
           <ContactAddress {...{ ...contactAddress }} />
           <AdditionalDetails description={aggrementDetails} />
           <AggrementSignature showContractSign={showContractSign} />
+
+
+          {/* <Text>Angebot für Ihren Umzug</Text> */}
           {/* </View> */}
           <Footer
             {...{

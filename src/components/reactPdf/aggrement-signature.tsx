@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     width: 595,
     justifyContent: "space-between",
     position: "absolute",
-    bottom: 90,
+    bottom: 100,
     left: 0,
     right: 0,
     paddingHorizontal: 20,
@@ -70,9 +70,9 @@ export const AggrementSignature = ({
     <View style={styles.wrapper}>
       {showContractSign && (
         <View style={{}}>
-          <Text style={styles.shareHeading}>
+          {/* <Text style={styles.shareHeading}>
             Ich teile den Vertrag mit Ihnen.
-          </Text>
+          </Text> */}
 
           <View style={{ ...styles.dateContainer }}>
             <View
