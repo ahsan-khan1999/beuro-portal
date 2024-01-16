@@ -46,6 +46,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     data
   );
 
+
   useMemo(() => {
     const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
 
@@ -89,13 +90,18 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
-    const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
+    const apiData = {
+      ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false,
+      amount: data?.type === "1" ? taxPercentage : data?.amount
+
+    }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
     if (res?.payload) {
-      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))  
-      
-      invoiceCreated();}
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))
+
+      invoiceCreated();
+    }
   };
   return {
     error,

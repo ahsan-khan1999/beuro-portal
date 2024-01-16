@@ -12,6 +12,8 @@ import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { useTranslation } from "next-i18next";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
+import { useAppSelector } from "@/hooks/useRedux";
+import { getInvoiceStatusColor } from "@/utils/utility";
 
 export const InvoiceEmailHeader = ({
   contentName,
@@ -28,6 +30,10 @@ export const InvoiceEmailHeader = ({
 }: InvoiceEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
+  const color = getInvoiceStatusColor(
+    collectiveInvoiceDetails?.invoiceStatus
+  )
   return (
     <PdfCardLayout>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
@@ -68,13 +74,13 @@ export const InvoiceEmailHeader = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
+            <Image
+              src={downloadIcon}
+              alt="downloadIcon"
+              className="cursor-pointer"
+              onClick={onDownload}
+            />
             {/* <Image
-            src={downloadIcon}
-            alt="downloadIcon"
-            className="cursor-pointer"
-            onClick={onDownload}
-          />
-          <Image
             src={printerIcon}
             alt="printerIcon"
             className="cursor-pointer"
@@ -83,46 +89,49 @@ export const InvoiceEmailHeader = ({
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 xMaxSize:grid-cols-2 gap-y-3 gap-x-5 mt-5">
-        <div className="flex justify-between items-center">
-          <div className="space-x-2">
-            <span className="text-[#4D4D4D] text-base font-normal">
-              {translate("contracts.pdf_card_details.contract_id")}:
+      <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
+        <div className="flex justify-between">
+          <div>
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+              {translate("invoice.card_content.invoice_number")}:
             </span>
-            &nbsp;
-            <span className="text-[#4B4B4B] text-base font-medium">
-              {contractId}
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
             </span>
           </div>
-          <div className="space-x-2">
-            <span className="text-[#4D4D4D] text-base font-normal">
-              {translate("contracts.pdf_card_details.worker")}:
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[#4D4D4D] break-all">
+              {translate("invoice.table_headings.title")}:
             </span>
-            &nbsp;
-            <span className="text-[#4B4B4B] text-base font-medium">
-              {workerName}
+
+            <span className="text-base font-medium text-[#4B4B4B] flex">
+              {
+                collectiveInvoiceDetails
+                  ?.title
+              }
             </span>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <div className="space-x-2">
-            <span className="text-[#4D4D4D] text-base font-normal">
-              {translate("contracts.pdf_card_details.content_name")}:
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              {translate("invoice.table_headings.status")}
             </span>
-            &nbsp;
-            <span className="text-[#4B4B4B] text-base font-medium break-all">
-              {contentName}
+
+            <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}>
+              {collectiveInvoiceDetails?.invoiceStatus}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[#4D4D4D] text-base font-normal">
-              {translate("contracts.pdf_card_details.contract_status")}:
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              {translate("invoice.card_content.worker")}:
             </span>
-            <div className={`border rounded-lg px-[8px] ${"border-[#FE9244]"}`}>
-              <span className={`text-base font-medium ${"text-[#FE9244]"}`}>
-                {contractStatus}
-              </span>
-            </div>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {
+                collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
+                  ?.createdBy?.fullName
+              }
+            </span>
           </div>
         </div>
       </div>

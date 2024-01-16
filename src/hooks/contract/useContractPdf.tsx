@@ -168,7 +168,7 @@ export const useContractPdf = () => {
               createdBy: contractDetails?.offerID?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType:"contract"
+              fileType: "contract"
             },
             contactAddress: {
               address: {
@@ -360,7 +360,7 @@ export const useContractPdf = () => {
           email: contractDetails?.offerID?.leadID?.customerDetail?.email,
           content: contractDetails?.offerID?.content?.id,
           subject:
-            contractDetails?.offerID?.content?.confirmationContent?.title,
+            contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
           description:
             contractDetails?.offerID?.content?.confirmationContent?.body,
           attachments:
@@ -378,7 +378,20 @@ export const useContractPdf = () => {
     }
   };
   const handleDonwload = () => {
-    window.open(contractData?.attachement);
+    // window.open(contractData?.attachement);
+
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${contractDetails?.contractNumber + "-" + contractDetails?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(contractData?.attachement);

@@ -14,10 +14,13 @@ export const DocumentHeader = ({
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { t: translation } = useTranslation();
   const textColor = "#" + emailTemplateSettings?.textColour;
+  const backgroundColor = "#" + emailTemplateSettings?.FooterColour;
+
 
   return (
     <div
-      className={`grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full !bg-[#${emailTemplateSettings?.FooterColour}]`}
+      className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full `}
+      style={{backgroundColor:backgroundColor}}
     >
       <div className="col-span-3">
         {emailTemplateSettings && (

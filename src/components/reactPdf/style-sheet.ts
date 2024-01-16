@@ -65,11 +65,11 @@ export const {
   leftColumn: {
     display: "flex",
     flexDirection: "column",
-    width: "70%",
+    width: "65%",
   },
   rightColumn: {
     flexDirection: "column",
-    width: "30%",
+    width: "35%",
   },
   textBase: {
     color: "#000",

@@ -59,7 +59,8 @@ export const useSendEmail = (
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
-      subject: offerDetails?.title,
+      subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+
       description: offerDetails?.content?.offerContent?.body,
       attachments: offerDetails?.content?.offerContent?.attachments,
     });
@@ -72,7 +73,7 @@ export const useSendEmail = (
       reset({
         email: offerDetails?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.offerContent?.title,
+        subject: selectedContent?.offerContent?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
         description: selectedContent?.offerContent?.body,
         attachments: selectedContent?.offerContent?.attachments,
       });

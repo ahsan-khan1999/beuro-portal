@@ -45,7 +45,7 @@ export const DUMMY_DATA: PdfProps = {
         description: "",
         postalCode: "",
         streetNumber: "",
-        label:""
+        label: "",
       },
     ],
     workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
@@ -280,49 +280,20 @@ const SignPdfPreview = () => {
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
-  const handleEmailSend = async () => {
-    try {
-      const data = await localStoreUtil.get_data("contractComposeEmail");
-
-      if (data) {
-        let apiData = { ...data };
-        // delete apiData["id"]
-        delete apiData["content"];
-
-        const res = await dispatch(sendOfferEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
-        await localStoreUtil.remove_data("contractComposeEmail");
-      }
-    } catch (error) {
-      console.error("Error in handleEmailSend:", error);
-    }
-  };
-
-  const handleDonwload = () => {};
-  const handlePrint = () => {};
-
-  const onClose = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-  };
-
   return loading ? (
     <LoadingState />
   ) : (
     offerData && (
       <Container>
-        <div className="my-0">
-          <SignPdf<EmailHeaderProps>
-            pdfData={offerData}
-            newPageData={newPageData}
-            templateSettings={templateSettings}
-            totalPages={calculateTotalPages}
-            action={action as string}
-            emailTemplateSettings={emailTemplateSettings}
-            systemSettings={systemSetting}
-          />
-        </div>
+        <SignPdf<EmailHeaderProps>
+          pdfData={offerData}
+          newPageData={newPageData}
+          templateSettings={templateSettings}
+          totalPages={calculateTotalPages}
+          action={action as string}
+          emailTemplateSettings={emailTemplateSettings}
+          systemSettings={systemSetting}
+        />
       </Container>
     )
   );

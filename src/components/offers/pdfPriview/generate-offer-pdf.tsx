@@ -66,6 +66,8 @@ const OfferPdfDownload = ({
   emailTemplateSettings,
   pdfFile,
   setPdfFile,
+  systemSetting,
+  showContractSign
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -79,7 +81,14 @@ const OfferPdfDownload = ({
     <div className="download-link">
       <BlobProvider
         document={
-          <Document>
+          <Document
+            title={data?.headerDetails?.offerNo || ""}
+          // onRender={(blob) => {
+          //   if(!pdfFile){
+          //     setPdfFile(blobToFile(blob, "offer.pdf"));
+          //   }
+          // }}
+          >
             <Page style={styles.body} dpi={72}>
               <Header {...headerDetails} />
               <View
@@ -98,7 +107,10 @@ const OfferPdfDownload = ({
                 {serviceItem?.map((item, index) => (
                   <ServiceTableRow {...item} key={index} />
                 ))}
-                <ServicesTotalAmount {...serviceItemFooter} />
+                <ServicesTotalAmount
+                  {...serviceItemFooter}
+                  systemSettings={systemSetting}
+                />
               </View>
               <Footer
                 {...{
@@ -110,7 +122,7 @@ const OfferPdfDownload = ({
             </Page>
 
             {/* Additional details */}
-            <Page style={styles.body}>
+            <Page style={{ paddingBottom: 140 }}>
               <Header {...headerDetails} />
               <View
                 style={{
@@ -118,10 +130,14 @@ const OfferPdfDownload = ({
                   left: 0,
                   right: 0,
                   top: 120,
+                  fontFamily: "Poppins",
                 }}
               >
                 <ContactAddress {...{ ...contactAddress }} />
-                <AdditionalDetails description={aggrementDetails} />
+                <AdditionalDetails
+                  description={aggrementDetails}
+                  
+                />
               </View>
               <Footer
                 {...{
@@ -136,7 +152,7 @@ const OfferPdfDownload = ({
       >
         {({ blob, url, loading, error }) => {
           if (blob && !pdfFile) {
-            setPdfFile(blobToFile(blob, "offer.pdf"));
+            setPdfFile(blobToFile(blob, `${headerDetails?.offerNo}.pdf`));
           }
           return <></>;
         }}

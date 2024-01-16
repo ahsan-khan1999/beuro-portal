@@ -61,7 +61,7 @@ export const useInvoiceEmail = (
 
   useEffect(() => {
     if (invoiceID) {
-      if(content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+      if (content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
@@ -78,7 +78,7 @@ export const useInvoiceEmail = (
               ?.email,
           content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
           subject:
-            res?.payload?.title,
+            res?.payload?.title + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             res?.payload?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body,
@@ -97,7 +97,7 @@ export const useInvoiceEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title,
+        subject: selectedContent?.invoiceContent?.title  + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.invoiceContent?.body,
         pdf: selectedContent?.invoiceContent?.attachments,
       });

@@ -275,7 +275,7 @@
       "phone_number": "Rufnummer",
       "mobile_number": "Mobilnummer",
       "address_details": "Angaben zur Adresse",
-      "street_no": "Straße Nr.",
+      "street_no": "Strasse+Nr",
       "post_code": "plz+ort",
       "country": "Land",
       "cancel_button": "Abbrechen",

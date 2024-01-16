@@ -4,12 +4,19 @@ import backIcon from "@/assets/svgs/back_icon.svg";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { getInvoiceStatusColor } from "@/utils/utility";
+import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
 
 
 const MailDetailsCard = () => {
   const router = useRouter();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
+  const color = getInvoiceStatusColor(
+    collectiveInvoiceDetails?.invoiceStatus
+  )
+  console.log(color, "color");
+
   return (
     <>
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-20 gap-y-3 pb-5">
@@ -26,6 +33,18 @@ const MailDetailsCard = () => {
         </div>
 
         <div className="flex items-center gap-5">
+
+          <Image
+            src={PDFIcon}
+            alt="PDFIcon"
+            className="cursor-pointer"
+            onClick={() =>
+              router.push({
+                pathname: "/invoices/receipt-pdf-preview",
+                query: { invoiceID: collectiveInvoiceDetails?.id },
+              })
+            }
+          />
           {/* <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={onSendViaPost}
@@ -87,8 +106,8 @@ const MailDetailsCard = () => {
               {translate("contracts.table_headings.status")}:
             </span>
 
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4">
-              {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
+            <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}>
+              {collectiveInvoiceDetails?.invoiceStatus}
             </span>
           </div>
           <div className="flex gap-2">

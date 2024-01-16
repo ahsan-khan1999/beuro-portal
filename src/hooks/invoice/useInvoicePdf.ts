@@ -127,7 +127,7 @@ export const useInvoicePdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
-          console.log(invoiceDetails)
+
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
@@ -136,7 +136,7 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
                   ?.fullName,
               contractStatus:
-                invoiceDetails?.invoiceID?.contractID?.contractStatus,
+                invoiceDetails?.invoiceStatus,
               contentName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.content
                   ?.contentName,
@@ -149,7 +149,7 @@ export const useInvoicePdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType:"invoice"
+              fileType: "invoice"
             },
             contactAddress: {
               address: {
@@ -330,8 +330,7 @@ export const useInvoicePdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.title,
+            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.body,
@@ -360,7 +359,18 @@ export const useInvoicePdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(invoiceData?.attachement);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(invoiceData?.attachement);
