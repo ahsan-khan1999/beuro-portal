@@ -1,6 +1,7 @@
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
+import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
@@ -70,7 +71,8 @@ export const ServicesTotalAmount = ({
   invoiceStatus
 }: Partial<ProductItemFooterProps>) => {
 
-  const isPaid = invoiceStatus === staticEnums["InvoiceStatus"][2];
+  const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
 
 

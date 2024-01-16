@@ -166,11 +166,13 @@ export const useReceiptPdf = () => {
             },
             headerDetails: {
               offerNo:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-              offerDate: invoiceDetails?.invoiceID?.createdAt,
-              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                invoiceDetails?.invoiceNumber,
+              offerDate: invoiceDetails?.createdAt,
+              createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType:"receipt"
+
             },
             contactAddress: {
               address: {

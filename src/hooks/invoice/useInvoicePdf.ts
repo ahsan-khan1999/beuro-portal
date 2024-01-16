@@ -144,11 +144,12 @@ export const useInvoicePdf = () => {
             },
             headerDetails: {
               offerNo:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-              offerDate: invoiceDetails?.invoiceID?.createdAt,
-              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                invoiceDetails?.invoiceNumber,
+              offerDate: invoiceDetails?.createdAt,
+              createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType:"invoice"
             },
             contactAddress: {
               address: {

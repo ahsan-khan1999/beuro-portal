@@ -33,6 +33,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   const { t: translate } = useTranslation();
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
+    let valueIndex = i
     formField.push(
       {
         containerClass: "",
@@ -52,7 +53,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${i}`,
+                value: `Address ${++valueIndex}`,
                 setValue
 
 
@@ -66,7 +67,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${i}`,
+                value: `Address ${++valueIndex}`,
                 disabled: true,
                 className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
                 setValue
@@ -256,7 +257,6 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
             onClick: () =>
               handleAddNewAddress && handleAddNewAddress(addressObject),
-            loading,
           },
         },
       ],
