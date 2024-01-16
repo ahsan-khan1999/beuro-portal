@@ -114,7 +114,9 @@ const OfferPdfPreview = ({
 
         {/* Additional details */}
         <Page style={{ paddingBottom: 145 }}>
+          <View style={{marginBottom: 10}} fixed>
             <Header {...headerDetails} />
+          </View>
           {/* <View
             style={{
               position: "absolute",
