@@ -15,6 +15,7 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { blobToFile } from "@/utils/utility";
 
 Font.register({
   family: "Poppins",
@@ -63,6 +64,8 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
   showContractSign,
+  pdfFile,
+  setPdfFile,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -76,6 +79,11 @@ const OfferPdfPreview = ({
     <PDFViewer height={750} style={{ width: "100%" }}>
       <Document
         title={data?.headerDetails?.offerNo || ""}
+        // onRender={(blob) => {
+        //   if(!pdfFile){
+        //     setPdfFile(blobToFile(blob, "offer.pdf"));
+        //   }
+        // }}
       >
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />

@@ -61,12 +61,12 @@ const EmailCard = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
-          {/* 
+          
           <IconOnlyButton
             icon={<Image src={downloadIcon} alt="downloadIcon" />}
             onClick={onDownload}
           />
-          <IconOnlyButton
+          {/* <IconOnlyButton
             icon={<Image src={printerIcon} alt="printerIcon" />}
             onClick={onPrint}
           /> */}

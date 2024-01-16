@@ -230,7 +230,7 @@ export const useOfferPdf = () => {
         let apiData = {
           email: offerDetails?.leadID?.customerDetail?.email,
           content: offerDetails?.content?.id,
-          subject: offerDetails?.content?.offerContent?.title,
+          subject: offerDetails?.title +" "+ offerDetails?.offerNumber+ " " + offerDetails?.createdBy?.company?.companyName,
           description: offerDetails?.content?.offerContent?.body,
           attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id,
@@ -258,7 +258,19 @@ export const useOfferPdf = () => {
       dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
   };
   const handleDonwload = () => {
-    window.open(offerDetails?.attachement);
+    if (pdfFile) {
+      const url = URL.createObjectURL(pdfFile);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${offerDetails?.offerNumber + "-" + offerDetails?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
+
   };
   const handlePrint = () => {
     window.open(offerDetails?.attachement);

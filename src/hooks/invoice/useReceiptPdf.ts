@@ -87,9 +87,7 @@ export const useReceiptPdf = () => {
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const { loading, collectiveInvoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
+  const { loading, collectiveInvoiceDetails } = useAppSelector(state => state.invoice);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -343,8 +341,7 @@ export const useReceiptPdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.title,
+            collectiveInvoiceDetails?.title   + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,
@@ -373,7 +370,18 @@ export const useReceiptPdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(receiptData?.attachement);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(receiptData?.attachement);

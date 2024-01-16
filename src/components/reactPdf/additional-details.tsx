@@ -1,5 +1,5 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
-import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image, PDFViewer } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 
@@ -155,7 +155,7 @@ export const AdditionalDetails = ({
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+        <Html  stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
           {description || ""}
         </Html>
         {showContractSign && (

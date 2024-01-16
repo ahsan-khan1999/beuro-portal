@@ -70,6 +70,8 @@ const PdfPriview = () => {
             templateSettings={templateSettings}
             systemSetting={systemSetting}
             showContractSign={true}
+            pdfFile={pdfFile}
+            setPdfFile={setPdfFile}
           />
           <OfferPdfDownload
             data={offerData}
@@ -78,6 +80,8 @@ const PdfPriview = () => {
             pdfFile={pdfFile}
             setPdfFile={setPdfFile}
             systemSetting={systemSetting}
+            showContractSign={true}
+
           />
 
           {renderModal()}
