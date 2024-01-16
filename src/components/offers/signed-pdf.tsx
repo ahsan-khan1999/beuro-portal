@@ -216,9 +216,9 @@ const OfferSignedPdf = ({
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
-            <div className="flex justify-center ">
+            <div className=" ">
             <Button
-              className={`mt-[55px]  w-[1040px] ${
+              className={`mt-[55px]   ${
                 pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
               } rounded-[4px] shadow-md  text-center text-white`}
               onClick={() =>
@@ -229,7 +229,6 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
-            <a target="_blank" href={url}>link</a>
             </div>
           );
         }}

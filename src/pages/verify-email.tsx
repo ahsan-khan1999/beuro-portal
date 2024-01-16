@@ -9,6 +9,8 @@ import {
   setErrorMessage,
   verifyOtp,
 } from "@/api/slices/authSlice/auth";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Locale } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { conditionHandlerProfile } from "@/utils/utility";
 import { isJSON } from "@/utils/functions";
@@ -79,3 +81,10 @@ const VerifyEmail = () => {
 };
 
 export default VerifyEmail;
+
+
+export const getStaticProps = async ({ locale }: Locale) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
