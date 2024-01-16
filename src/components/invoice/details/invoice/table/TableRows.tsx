@@ -95,7 +95,7 @@ const TableRows = ({
             </span>
             <span className="py-4 flex items-center mx-1">
               <DropDown
-                items={Object.keys(staticEnums["InvoiceStatus"]).map(
+                items={Object.keys(staticEnums["InvoiceStatus"])?.slice(0,-1)?.map(
                   (item) => ({ item: item })
                 )}
                 selectedItem={item.invoiceStatus}
