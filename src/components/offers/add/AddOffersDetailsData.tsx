@@ -171,7 +171,7 @@ const EditOffersDetailsData = () => {
           </div>
         </div>
 
-        <div className="overflow-y-auto xLarge:col-start-2 col-span-3 w-full ">
+        <div className="overflow-y-auto xLarge:col-start-2 col-span-3 w-full">
           <div className="max-h-[650px] xLarge:max-h-full">
             {componentsLookUp[tabType as keyof typeof componentsLookUp]}
           </div>
