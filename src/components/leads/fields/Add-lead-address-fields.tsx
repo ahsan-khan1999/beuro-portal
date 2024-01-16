@@ -28,10 +28,23 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
-        containerClass: "",
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 1 && "hidden"
+          }`,
+          onClick: handleRemoveAddress && handleRemoveAddress,
+        },
+      },
+      {
+        containerClass: "mt-2",
         field: {
           type: Field.div,
-          className: "flex space-x-2",
+          className: "flex  space-x-2",
           id: `address-labels-${i}`,
           children: [
             (!(addressType && !addressType[i - 1]) && {
@@ -48,7 +61,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
             }) || {
               containerClass: "",
-
               field: {
                 type: Field.input,
                 inputType: "text",
@@ -77,19 +89,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           ],
         },
       },
-      {
-        containerClass: "mb-0 relative -top-1 right-0 float-right",
-        field: {
-          type: Field.button,
-          id: "button",
-          text: `${translate("common.remove")}`,
-          inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-            i === 1 && "hidden"
-          }`,
-          onClick: handleRemoveAddress && handleRemoveAddress,
-        },
-      },
+
       {
         containerClass: "mt-6 ",
         // label: {

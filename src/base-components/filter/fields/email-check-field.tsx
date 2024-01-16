@@ -37,7 +37,7 @@ export default function EmailCheckField({
     <>
       <label
         htmlFor={label}
-        className={`custom-checkbox flex flex-row-reverse justify-center items-center gap-2 border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-fit ${
+        className={`custom-checkbox flex flex-row-reverse justify-center items-center gap-2 border border-dark py-[14px] pl-[10px] pr-[22px] h-fit w-full bg-white rounded-md   cursor-pointer w-fit ${
           isCheckboxChecked ? "border-primary" : ""
         }`}
       >
