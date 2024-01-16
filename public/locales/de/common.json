@@ -181,6 +181,8 @@
     "oauth_account_in_use": "Bereits verwendetes Konto",
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mail_sent_maybe": "E-Mail gesendet",
+    "value_min": "{0} Minimum {1} ",
+
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
