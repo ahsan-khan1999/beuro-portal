@@ -62,6 +62,7 @@ const PdfFile = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
+
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -70,7 +71,6 @@ const PdfFile = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
-
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>

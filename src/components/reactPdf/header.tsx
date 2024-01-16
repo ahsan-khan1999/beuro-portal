@@ -1,5 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderProps } from "@/types/pdf";
+import { HeaderLabel } from "@/utils/static";
 import { formatDate, formatDateTimeToDate } from "@/utils/utility";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
@@ -9,6 +10,7 @@ export const Header = ({
   emailTemplateSettings,
   offerDate,
   offerNo,
+  fileType
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { t: translate } = useTranslation();
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
@@ -46,7 +48,8 @@ export const Header = ({
               color: `#${textColour}`,
             }}
           >
-            Angebot Nr:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} Nr:
+
           </Text>
           <Text
             style={{
@@ -76,7 +79,7 @@ export const Header = ({
               color: `#${textColour}`,
             }}
           >
-            Angebotsdatum:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} datum:
           </Text>
           <Text
             style={{

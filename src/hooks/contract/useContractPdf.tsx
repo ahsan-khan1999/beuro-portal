@@ -163,11 +163,12 @@ export const useContractPdf = () => {
               worker: contractDetails?.offerID?.createdBy?.fullName,
             },
             headerDetails: {
-              offerNo: contractDetails?.offerID?.offerNumber,
-              offerDate: contractDetails?.offerID?.createdAt,
+              offerNo: contractDetails?.contractNumber,
+              offerDate: contractDetails?.createdAt,
               createdBy: contractDetails?.offerID?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType:"contract"
             },
             contactAddress: {
               address: {
