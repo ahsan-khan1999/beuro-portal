@@ -39,6 +39,7 @@ import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { RefObject } from "@fullcalendar/core/preact.js";
+import { AggrementSignature } from "../reactPdf/aggrement-signature";
 
 
 Font.register({
@@ -115,7 +116,7 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
-
+  
   const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
@@ -162,10 +163,9 @@ const OfferSignedPdf = ({
           }}
         >
           <ContactAddress {...{ ...contactAddress }} />
-          <AdditionalDetails
-            description={aggrementDetails}
+          <AggrementSignature
             signature={signature}
-            // showContractSign={showContractSign}
+            showContractSign={showContractSign}
           />
         </View>
         <Footer
@@ -229,6 +229,7 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
+            <a target="_blank" href={url}>link</a>
             </div>
           );
         }}
