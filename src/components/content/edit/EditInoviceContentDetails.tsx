@@ -14,13 +14,18 @@ const EditInoviceContentDetails = ({
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useEditInvoiceContentDetails( onClick);
+    useEditInvoiceContentDetails(onClick);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20 ">
-        <h2 className="text-[#393939] text-lg font-medium">Invoice Content</h2>
-        <button onClick={() => onClick(2, ComponentsType.invoiceContent)} className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9">
-        {translate("content.details.cancel_button")}
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("content.details.invoice_heading")}
+        </h2>
+        <button
+          onClick={() => onClick(2, ComponentsType.invoiceContent)}
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
+        >
+          {translate("content.details.cancel_button")}
         </button>
       </div>
       <Form

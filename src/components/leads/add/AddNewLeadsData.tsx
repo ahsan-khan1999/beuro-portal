@@ -188,33 +188,32 @@ const AddNewLeadsData = () => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 xLarge:grid-cols-4 gap-y-6">
-        <div className="col-span-1 xLarge:fixed w-fit">
-          <p className="my-5 font-normal text-xl text-[#222B45]">
-            {translate("leads.add_new_lead")}
-          </p>
-          <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
-            {tabSection.map((item, index) => (
-              <DetailsTab
-                isSelected={tabType === index}
-                setTabType={setTabType}
-                tabType={tabType}
-                name={item.name}
-                icon={item.icon}
-                selectedTab={index}
-                key={index}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="overflow-y-auto xLarge:col-start-2 col-span-3 w-full break-all xLarge:mt-[65px]">
-          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+    <>
+      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
+        <p className="mb-5 font-normal text-xl text-[#222B45]">
+          {translate("leads.add_new_lead")}
+        </p>
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+              key={index}
+            />
+          ))}
         </div>
       </div>
+
+      <div className="overflow-y-auto w-full break-all xLarge:mt-[145px] flex">
+        <div className="max-w-[270px] w-full hidden xLarge:block"></div>
+        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      </div>
       {renderModal()}
-    </div>
+    </>
   );
 };
 
