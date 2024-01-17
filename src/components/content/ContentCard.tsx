@@ -17,7 +17,7 @@ const ContentCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   return (
-    <div className="rounded-md bg-white p-5 w-full min-h-[149px] ">
+    <div className="rounded-md bg-white w-full">
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
         <div className="flex items-center">
           <Image

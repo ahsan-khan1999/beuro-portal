@@ -120,7 +120,7 @@ const EditOffersDetailsData = ({
 
   return (
     <>
-      <div className="xLarge:fixed mb-5 ">
+      <div className="xLarge:fixed mb-5">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
           {tabSection.map((item, index) => (
             <OfferTabs

@@ -25,31 +25,38 @@ const ContractDetails = () => {
 
   return (
     <Layout>
-      <CardDetailsData
-        contractDetails={contractDetails}
-        offerDeleteHandler={offerDeleteHandler}
-        handleImageUpload={handleImageUpload}
-        handleNotes={handleNotes}
-        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-        handleStatusUpdate={handleStatusUpdate}
-        handleSendEmail={handleSendEmail}
-      />
-      <div className="my-4">
-        {contractDetails?.signedContracts &&
-          contractDetails?.signedContracts?.length > 0 && (
-            <DetailsData
-              contractDetails={contractDetails}
-              handleViewPdf={handleViewPdf}
-            />
-          )}
+      <div className=" 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[360px]">
+        <div className="bg-white rounded-md px-5 pt-5 pb-10">
+          <CardDetailsData
+            contractDetails={contractDetails}
+            offerDeleteHandler={offerDeleteHandler}
+            handleImageUpload={handleImageUpload}
+            handleNotes={handleNotes}
+            handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+            handleStatusUpdate={handleStatusUpdate}
+            handleSendEmail={handleSendEmail}
+          />
+        </div>
+        <div className="my-4">
+          {contractDetails?.signedContracts &&
+            contractDetails?.signedContracts?.length > 0 && (
+              <DetailsData
+                contractDetails={contractDetails}
+                handleViewPdf={handleViewPdf}
+              />
+            )}
+        </div>
       </div>
+
       {isSendEmail ? (
         <ComposeMail
           backRouteHandler={handleSendEmail}
           onNextHandle={onNextHandle}
         />
       ) : (
-        <ContractDetailsData loading={loading} />
+        <div className="2xl:mt-[460px] w-full xl:block">
+          <ContractDetailsData loading={loading} />
+        </div>
       )}
 
       {renderModal()}

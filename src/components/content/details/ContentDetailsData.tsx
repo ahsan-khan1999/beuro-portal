@@ -187,27 +187,31 @@ const ContentDetailsData = () => {
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row gap-x-6 mt-6">
-      <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-fit">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            key={index}
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
+    <>
+      <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
+        <div className="flex flex-row flex-wrap maxSize:flex-col maxSize:flex-nowrap w-full gap-[14px] mb-5 maxSize:mb-0">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              key={index}
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
       </div>
-
-      <div className="flex flex-col gap-y-5 w-full h-screen xl:mt-0 mt-4 overflow-scroll">
-        {renderComponent.map((component, index) => (
-          <React.Fragment key={index}>{component}</React.Fragment>
-        ))}
+      <div className="overflow-y-auto w-full break-all flex">
+        <div className="max-w-[270px] w-full hidden maxSize:block"></div>
+        <div className="flex flex-col gap-y-5 w-full">
+          {renderComponent.map((component, index) => (
+            <div key={index}>{component}</div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

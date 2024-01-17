@@ -24,7 +24,7 @@ const LeadsDetailsCardData = ({
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   return (
-    <div className="bg-white rounded-md">
+    <div className="bg-white rounded-md w-full">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Image
@@ -51,7 +51,9 @@ const LeadsDetailsCardData = ({
                     ...leadDetails,
                     customerID: leadDetails?.customerID,
                   },
-                  serviceDetail: { serviceDetail: leadDetails?.otherServices },
+                  serviceDetail: {
+                    serviceDetail: leadDetails?.otherServices,
+                  },
                   addressID: { address: leadDetails?.addressID?.address },
                 })
               );
