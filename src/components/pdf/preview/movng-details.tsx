@@ -113,7 +113,12 @@ export const MovingDetails = ({
           <div className="flex gap-[30px] mb-[46px] mt-2" key={index}>
             <span className="min-w-[100px]">Work Dates:</span>
             <span className="text-[#000] text-base font-normal">
-              {item.startDate + " to " + item?.endDate}
+
+              {
+                item?.endDate &&
+                item.startDate + " to " + item?.endDate + ", "||
+                item.startDate
+              }
             </span>
           </div>
         ))}
