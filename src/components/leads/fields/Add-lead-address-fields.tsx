@@ -56,7 +56,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `label-${i}`,
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
-                value: `Address ${i}`,
+                // value: `Address ${i}`,
               },
             }) || {
               containerClass: "",
@@ -67,7 +67,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `label-${i}`,
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
-                value: `Address ${i}`,
+                // value: `Address ${i}`,
                 disabled: true,
                 className:
                   "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",

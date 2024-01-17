@@ -10,10 +10,14 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
-import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
+import {
+  getValueForKeyInArray,
+  senitizeDataForm,
+  transformAddressFormValues,
+} from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const useAddLeadAddressDetails = (
   onHandleBack: (currentComponent: ComponentsType) => void,
@@ -54,28 +58,92 @@ export const useAddLeadAddressDetails = (
     setAddressCount(addressCount + 1);
     setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`);
   };
-  useMemo(() => {
-    if (leadDetails.id) {
-      reset(
-        transformAddressFormValues(
-          leadDetails?.addressID?.address
-            ? leadDetails?.addressID?.address
-            : [{ ...leadDetails?.customerDetail?.address, label: "Address 1" }]
-        )
-      );
-    } else {
-      reset(
-        transformAddressFormValues([
-          {
-            label: "Address 1",
-            country: "Switerland",
-            postalCode: "",
-            streetNumber: "",
-          },
-        ])
-      );
-    }
-  }, [leadDetails.id]);
+  // useMemo(() => {
+  //   if (leadDetails.id) {
+  //     let label = getValueForKeyInArray(
+  //       "label",
+  //       leadDetails?.addressID?.address
+  //     );
+  //     if (!label) {
+  //       label = `Address ${addressCount}`;
+  //     }
+  //     if (leadDetails?.addressID?.address)
+  //       reset(
+  //         transformAddressFormValues(
+  //           leadDetails?.addressID?.address
+  //             ? leadDetails?.addressID?.address
+  //             : [
+  //                 {
+  //                   ...leadDetails?.customerDetail?.address,
+  //                   label: label,
+  //                 },
+  //               ]
+  //         )
+  //       );
+  //   } else {
+  //     reset(
+  //       transformAddressFormValues([
+  //         {
+  //           label: "",
+  //           country: "Switerland",
+  //           postalCode: "",
+  //           streetNumber: "dd",
+  //         },
+  //       ])
+  //     );
+  //   }
+  // }, [leadDetails.id]);
+
+  // useEffect(() => {
+  //   if (leadDetails.id) {
+  //     let label = getValueForKeyInArray(
+  //       "label",
+  //       leadDetails?.addressID?.address
+  //     );
+  //     if (!label) {
+  //       label = `Address ${addressCount}`;
+  //     }
+  //     if (leadDetails?.addressID?.address)
+  //       reset(
+  //         transformAddressFormValues(
+  //           leadDetails?.addressID?.address
+  //             ? leadDetails?.addressID?.address
+  //             : [
+  //                 {
+  //                   ...leadDetails?.customerDetail?.address,
+  //                   'streetNumber-1': label,
+  //                 },
+  //               ]
+  //         )
+  //       );
+  //   } else {
+  //     reset(
+  //       transformAddressFormValues([
+  //         {
+  //           label: "",
+  //           country: "Switerland",
+  //           postalCode: "",
+  //           streetNumber: "dd",
+  //         },
+  //       ])
+  //     );
+  //   }
+  // });
+
+  useEffect(() => {
+    reset(
+      transformAddressFormValues(
+        leadDetails?.addressID?.address
+          ? leadDetails?.addressID?.address
+          : [
+              {
+                ...leadDetails?.customerDetail?.address,
+                'label-1': 'label',
+              },
+            ]
+      )
+    );
+  })
 
   const handleFieldTypeChange = (index: number) => {
     let address = [...addressType];
@@ -95,6 +163,8 @@ export const useAddLeadAddressDetails = (
     handleFieldTypeChange,
     addressType
   );
+
+  console.log(fields);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
