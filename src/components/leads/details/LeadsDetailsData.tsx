@@ -165,7 +165,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
         <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
+      <div className="col-span-3 flex flex-col gap-y-5 w-full h-screen xl:mt-0 mt-5 overflow-scroll">
         {loading ? (
           <LoadingState />
         ) : (
