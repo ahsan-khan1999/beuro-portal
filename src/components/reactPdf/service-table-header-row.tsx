@@ -4,16 +4,17 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   headerContainer: {
+    width: 555,
     backgroundColor: "#40506A",
     paddingVertical: 8,
     borderRadius: 4,
     marginBottom: 12,
     marginHorizontal: 20,
+    paddingHorizontal: 12,
   },
   headerRow: {
     flexDirection: "row",
-    columnGap: 60,
-    maxWidth: 595,
+    maxWidth: 531,
     width: "100%",
   },
   headerTitle: {
@@ -21,19 +22,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    paddingLeft: 12,
     width: 230,
   },
   priceHeader: {
     flexDirection: "row",
-    width: 345,
+    width: 300,
   },
   headerText: {
     color: "white",
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 86.25,
+    width: 75,
   },
 });
 

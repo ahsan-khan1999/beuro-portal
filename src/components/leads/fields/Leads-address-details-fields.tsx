@@ -6,7 +6,7 @@ import {
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import editIcon from "@/assets/svgs/name-input.svg";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -32,8 +32,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
           className: "flex  space-x-2 ",
           id: `address-labels-${i}`,
           children: [
-            !(addressType && !addressType[i - 1]) &&
-            ({
+            (!(addressType && !addressType[i - 1]) && {
               containerClass: "mt-2",
 
               field: {
@@ -45,10 +44,8 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
                 value: `Address ${i}`,
-
-
               },
-            }) || ({
+            }) || {
               containerClass: "",
 
               field: {
@@ -59,12 +56,11 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
                 value: `Address ${i}`,
-                disabled:true,
-                className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto",
-
-
+                disabled: true,
+                className:
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
               },
-            }),
+            },
             {
               containerClass: "",
               field: {
@@ -73,12 +69,12 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `addressLabel-${i}`,
                 inputType: "button",
                 icon: editIcon,
-                onClick: () => handleFieldTypeChange && handleFieldTypeChange(i)
-
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
               },
             },
-          ]
-        }
+          ],
+        },
       },
       {
         containerClass: "mt-6",

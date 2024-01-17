@@ -105,7 +105,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
 
     if (leadDetails?.id) {
       let apiData: any = {
