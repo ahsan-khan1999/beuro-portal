@@ -20,7 +20,7 @@ export const DocumentHeader = ({
   return (
     <div
       className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full `}
-      // style={{backgroundColor:backgroundColor}}
+      // style={{backgroundColor:"#fff"}}
     >
       <div className="col-span-3">
         {emailTemplateSettings && (
