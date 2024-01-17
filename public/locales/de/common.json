@@ -228,7 +228,6 @@
         "overdue": "Überfällig",
         "paid": "Bezahlt",
         "open": "Öffnen Sie"
-
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -953,7 +952,7 @@
       "post_code": "Bitte geben Sie Ihre plz+ort ein"
     },
     "address_details": {
-      "main_heading": "Adressdetails",
+      "main_heading": "Adresse Details",
       "edit_button": "Details bearbeiten",
       "heading": "Adressdetails ",
       "sub_heading": "Adressdetails ",
@@ -1065,6 +1064,7 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
+    "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
     "add_company_info": "Unternehmensinformationen hinzufügen",
     "add_new_address": "Neue Adresse hinzufügen",

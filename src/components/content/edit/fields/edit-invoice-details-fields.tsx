@@ -23,7 +23,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
         className: "grid grid-cols-1 gap-4",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.invoice_title"),
               htmlFor: "invoiceContent.title",

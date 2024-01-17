@@ -150,7 +150,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
         text: `${translate("content.details.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },
@@ -187,7 +187,7 @@ const generateAddressChildren = (
     });
   }
   addressformFields.push({
-    containerClass: "mb-0 mt-3 maxSize:mt-[28px]",
+    containerClass: "mb-0 mt-8",
     field: {
       type: Field.button,
       id: "button",
