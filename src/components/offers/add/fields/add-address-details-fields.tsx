@@ -11,7 +11,7 @@ import { useTranslation } from "next-i18next";
 export const addressObject = {
   streetNumber: "",
   postalCode: "",
-  country: "",
+  country: "Swizterland",
   description: "",
 };
 export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (

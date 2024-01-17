@@ -1073,6 +1073,7 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
+    "address": "Address",
     "add_new_date": "Add New Date",
     "add_company_info": "Add Company Information",
     "add_new_address": "Add New Address",
@@ -1834,7 +1835,10 @@
     "account": "Account / Payable to",
     "condition_for_moving": "Conditions for moving estimates",
     "thanks_message": "Thank you for your interest in our services.",
-    "pdf_description": "Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below."
+    "pdf_description": "Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.",
+    "submit":"Submit",
+    "clear":"Clear"
+
   },
   "pricing_details": {
     "heading": "Let's start with us",

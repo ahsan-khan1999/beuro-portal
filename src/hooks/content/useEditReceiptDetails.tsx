@@ -15,14 +15,19 @@ import { updateContent } from "@/api/slices/content/contentSlice";
 export const useEditReceiptDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
-  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.receiptContent?.attachments) || [])
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contentDetails?.id &&
+      transformAttachments(contentDetails?.receiptContent?.attachments)) ||
+      []
+  );
   const dispatch = useAppDispatch();
-
 
   const handleBack = () => {
     onClick(3, ComponentsType.receiptContent);
-  }
+  };
 
   const schema = generateEditReceiptContentDetailsValidation(translate);
   const {
@@ -41,12 +46,21 @@ export const useEditReceiptDetails = (onClick: Function) => {
       reset({
         receiptContent: {
           ...contentDetails?.receiptContent,
-        }
-      })
+        },
+      });
     }
-
-  }, [contentDetails.id])
-  const fields = EditReceiptContentDetailsFormField(register, loading, control, handleBack, trigger, 0, attachements, setAttachements, contentDetails);
+  }, [contentDetails.id]);
+  const fields = EditReceiptContentDetailsFormField(
+    register,
+    loading,
+    control,
+    handleBack,
+    trigger,
+    0,
+    attachements,
+    setAttachements,
+    contentDetails
+  );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
@@ -59,11 +73,12 @@ export const useEditReceiptDetails = (onClick: Function) => {
       step: 4,
       stage: ComponentsType.receiptContent,
       contentId: contentDetails?.id,
-      id: contentDetails?.id
-    }
-    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
+      id: contentDetails?.id,
+    };
+    const res = await dispatch(
+      updateContent({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) onClick(3, ComponentsType.receiptContent);
-
   };
   return {
     fields,
@@ -72,6 +87,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

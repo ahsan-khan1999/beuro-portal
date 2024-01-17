@@ -7,11 +7,11 @@ import Html, { HtmlStyles } from "react-pdf-html";
 
 const styles = StyleSheet.create({
   borderDiv: {
-    borderTop: 3,
-    borderTopColor: "#000",
+    // borderTop: 3,
+    // borderTopColor: "#000",
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 35,
+    paddingTop: 15,
   },
   container: {
     fontFamily: "Poppins",
@@ -107,7 +107,7 @@ const stylesheet: HtmlStyles = {
     padding: 0,
     fontSize: 10,
   },
-  ul: { marginLeft: 26 },
+  ul: { marginLeft: 16 },
   li: {
     fontSize: 10,
     marginLeft: 0,

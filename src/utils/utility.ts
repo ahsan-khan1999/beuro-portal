@@ -755,6 +755,7 @@ export const smoothScrollToSection = (target:string) => {
     behavior: "smooth",
   });
 };
+
 export function blobToFile(blob: any, fileName: string) {
   const options = { type: blob.type };
   const file = new File([blob], fileName, options);
