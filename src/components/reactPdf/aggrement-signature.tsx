@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopStyle: "solid",
     borderTopColor: "#000",
-    // width: "40%",
+    width: "40%",
   },
   signature: {
     borderTopWidth: 1,
