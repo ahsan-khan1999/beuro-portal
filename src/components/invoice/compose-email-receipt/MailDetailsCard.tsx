@@ -15,7 +15,6 @@ const MailDetailsCard = () => {
   const color = getInvoiceStatusColor(
     collectiveInvoiceDetails?.invoiceStatus
   )
-  console.log(color, "color");
 
   return (
     <>
