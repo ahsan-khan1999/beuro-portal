@@ -21,7 +21,7 @@ export const MovingDetails = ({
   };
 
   const handleSaveClick = () => {
-    if(!tempText) return;
+    if (!tempText) return;
     setIsEditing(false);
     handleTitleUpdate && handleTitleUpdate(tempText)
     setText(tempText);
@@ -95,7 +95,7 @@ export const MovingDetails = ({
             className="flex gap-x-[30px] pb-2 border-b-2 border-[#8C8C8C] border-opacity-50 mt-2"
             key={index}
           >
-            <span>{addressLabels && addressLabels[index] || `Address ${++index}`}:</span>
+            <span className="min-w-[100px]">{item?.label}:</span>
             <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
@@ -110,8 +110,8 @@ export const MovingDetails = ({
         ))}
 
         {workDates?.map((item, index) => (
-          <div className="flex gap-[20px] mb-[46px] mt-2" key={index}>
-            <span>Work Dates:</span>
+          <div className="flex gap-[30px] mb-[46px] mt-2" key={index}>
+            <span className="min-w-[100px]">Work Dates:</span>
             <span className="text-[#000] text-base font-normal">
               {item.startDate + " to " + item?.endDate}
             </span>

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     fontStyle: "semibold",
     color: "#000",
     paddingBottom: 3,
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     marginBottom: 8,
   },
   addressRow: {
@@ -31,16 +31,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     display: "flex",
     flexDirection: "row",
-    columnGap: 30,
+    columnGap: 2,
   },
   dateRow: {
     display: "flex",
     flexDirection: "row",
-    columnGap: 16,
+    columnGap: 2,
     marginTop: 8,
   },
   dateText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "medium",
     color: "#000",
   },
@@ -72,6 +72,7 @@ export const AddressDetails = ({
               fontWeight: 500,
               fontStyle: "medium",
               color: "#000",
+              width: 90,
             }}
           >
             {address?.label}:
@@ -82,8 +83,6 @@ export const AddressDetails = ({
               fontWeight: 400,
               fontStyle: "normal",
               color: "#000",
-              width: 450,
-              textAlign: "justify",
             }}
           >
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
@@ -100,6 +99,7 @@ export const AddressDetails = ({
           fontWeight: 500,
           fontStyle: "medium",
           color: "#000",
+          width: 90,
         }}
       >
         Arbeitstermine:

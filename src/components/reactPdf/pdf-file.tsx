@@ -120,7 +120,7 @@ const PdfFile = ({
             top: 120,
           }}
         >
-          <ContactAddress {...{ ...contactAddress }} />
+          {/* <ContactAddress {...{ ...contactAddress }} /> */}
           <AdditionalDetails description={aggrementDetails} />
         </View>
         <Footer
