@@ -5,23 +5,23 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   headerContainer: {
+    width: 555,
     backgroundColor: "#F6F7F8",
     paddingVertical: 8,
     borderRadius: 4,
     marginBottom: 12,
     marginHorizontal: 20,
+    paddingHorizontal: 12,
   },
   headerRow: {
     flexDirection: "row",
-    maxWidth: 575,
-    width: "100%",
-    columnGap: 60,
+    width: 531,
+    columnGap: 1,
   },
   description: {
     color: "#000",
     fontSize: 12,
     fontWeight: "medium",
-    paddingLeft: 12,
     display: "flex",
     flexDirection: "column",
     width: 230,
@@ -44,27 +44,28 @@ const styles = StyleSheet.create({
   priceHeader: {
     flexDirection: "row",
     alignItems: "center",
-    width: 345,
+    width: 300,
   },
   headerText: {
     color: "#000",
     fontSize: 10,
     fontWeight: 400,
     fontStyle: "normal",
-    width: 86.25,
+    width: 75,
   },
   headerTotal: {
     color: "#000",
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
+    width: 75,
   },
-  headerTextTotal: {
-    color: "#000",
-    fontSize: 12,
-    fontWeight: "bold",
-    width: 86.25,
-  },
+  // headerTextTotal: {
+  //   color: "#000",
+  //   fontSize: 12,
+  //   fontWeight: "bold",
+  //   width: 100,
+  // },
 });
 
 export const ServiceTableRow = ({
