@@ -23,9 +23,9 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = () => {
-    dispatch(logoutUser());
-    logout();
-    // router.push({ pathname: "/pdf", query: { offerID: "65a78aef70caa25d4bd31b11", action: "Accept" } })
+    // dispatch(logoutUser());
+    // logout();
+    router.push({ pathname: "/pdf", query: { offerID: "65a523c960fb493125ebd88f", action: "Accept" } })
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
