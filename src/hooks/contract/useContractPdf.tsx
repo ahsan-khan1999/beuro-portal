@@ -340,13 +340,11 @@ export const useContractPdf = () => {
     try {
       const formData = new FormData();
       setActiveButtonId("email");
-      console.log(mergedFile, "pdfFile");
 
       const data = await localStoreUtil.get_data("contractComposeEmail");
       if (!mergedFile) return;
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
-      console.log(fileUrl)
       if (data) {
         let apiData = { ...data, pdf: fileUrl?.payload };
 

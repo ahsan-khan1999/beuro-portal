@@ -279,7 +279,6 @@ export const useAddServiceDetails = (
     setValue,
     watch
   );
-  console.log(offerDetails, "offerDetails");
 
   const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
     register,

@@ -9,7 +9,7 @@ const AddLeadsCustomerDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "";
+  const defaultClassName = "pt-5";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewLeadCustomer(onHandleNext);
   const router = useRouter();

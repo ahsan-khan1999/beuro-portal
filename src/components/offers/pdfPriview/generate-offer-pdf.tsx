@@ -18,6 +18,7 @@ import { ServicesTotalAmount } from "@/components/reactPdf/services-total-ammoun
 import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
+import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -122,23 +123,24 @@ const OfferPdfDownload = ({
             </Page>
 
             {/* Additional details */}
-            <Page style={{ paddingBottom: 140 }}>
-              <Header {...headerDetails} />
-              <View
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  top: 120,
-                  fontFamily: "Poppins",
-                }}
-              >
-                <ContactAddress {...{ ...contactAddress }} />
-                <AdditionalDetails
-                  description={aggrementDetails}
-                  
-                />
+            <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+              <View style={{ marginBottom: 10 }} fixed>
+                <Header {...headerDetails} />
               </View>
+              {/* <View
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 120,
+              fontFamily: "Poppins",
+            }}
+          > */}
+              {/* <ContactAddress {...{ ...contactAddress }} /> */}
+              <AdditionalDetails description={aggrementDetails} />
+              <AggrementSignature showContractSign={showContractSign} />
+
+              {/* </View> */}
               <Footer
                 {...{
                   documentDetails: footerDetails,
