@@ -107,7 +107,7 @@ const stylesheet: HtmlStyles = {
     padding: 0,
     fontSize: 10,
   },
-  ul: { marginLeft: 26 },
+  ul: { marginLeft: 16 },
   li: {
     fontSize: 10,
     marginLeft: 0,

@@ -150,25 +150,19 @@ const OfferSignedPdf = ({
         />
       </Page>
 
-      {/* Additional details */}
-      <Page style={styles.body}>
+      <Page  style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+      <View style={{marginBottom: 10}} fixed>
+
         <Header {...headerDetails} />
-        {/* <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 120,
-          }}
-        > */}
+        </View>
+
+     
         <ContactAddress {...{ ...contactAddress }} />
         <AdditionalDetails
           description={aggrementDetails}
           signature={signature}
-          // showContractSign={showContractSign}
         />
         <AggrementSignature showContractSign={true} signature={signature} />
-        {/* </View> */}
         <Footer
           documentDetails={offerData?.footerDetails}
           emailTemplateSettings={emailTemplateSettings}
@@ -230,6 +224,7 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
+            <a href={url}>href</a>
             </div>
           );
         }}
@@ -243,14 +238,16 @@ export default OfferSignedPdf;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
+    fontFamily: "Poppins",
+
   },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
-  },
+  // pageNumber: {
+  //   position: "absolute",
+  //   fontSize: 12,
+  //   bottom: 30,
+  //   left: 0,
+  //   right: 0,
+  //   textAlign: "center",
+  //   color: "grey",
+  // },
 });
