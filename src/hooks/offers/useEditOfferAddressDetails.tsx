@@ -41,9 +41,20 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   });
 
   useEffect(() => {
+    console.log(offerDetails, "offerDetails");
+
     if (offerDetails.id) {
       reset({
-        address: offerDetails?.addressID?.address
+        address: offerDetails?.addressID
+          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
+          : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
+            addressType?.map((item, index) => ({
+              streetNumber: "",
+              postalCode: "",
+              country: "Swizterland",
+              description: "",
+              label: `Address ${++index}`
+            })),
       })
     }
   }, [offerDetails.id])

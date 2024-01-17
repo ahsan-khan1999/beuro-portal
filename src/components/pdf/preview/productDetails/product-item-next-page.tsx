@@ -38,6 +38,7 @@ export const ProductItemNewPage = ({
         columnSettings={templateSettings}
         currPage={currPage}
         totalPages={totalPages}
+        emailTemplateSettings={emailTemplateSettings}
       />
     </div>
   );

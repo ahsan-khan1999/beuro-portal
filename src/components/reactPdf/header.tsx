@@ -21,7 +21,7 @@ export const Header = ({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: `#${FooterColour}`,
+        // backgroundColor: `#${FooterColour}`,
         padding: 20,
         fontFamily: 'Poppins',
       }}
@@ -45,7 +45,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} Nr:
@@ -56,7 +56,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 500,
               fontStyle: "medium",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             {offerNo}
@@ -76,7 +76,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} datum:
@@ -86,7 +86,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 500,
               fontStyle: "medium",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             {formatDateTimeToDate(offerDate || "")}
@@ -99,7 +99,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             Erstellt von:
@@ -109,7 +109,7 @@ export const Header = ({
               fontSize: 10,
               fontWeight: 500,
               fontStyle: "medium",
-              color: `#${textColour}`,
+              // color: `#${textColour}`,
             }}
           >
             {createdBy}
