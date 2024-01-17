@@ -3,7 +3,7 @@ import axios from "axios";
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
 import toast from 'react-hot-toast';
 
-const STAGING_API_URL = "https://new.buero-365.com/api";
+const STAGING_API_URL = "https://www.staging.buero-365.cloudmeshsolutions.com/api";
 export const GOOGLE_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
 export const FB_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/login/oauth/facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
 export const DOMAIN = "https://new.buero-365.com/"
