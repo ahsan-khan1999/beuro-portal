@@ -183,7 +183,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "grid grid-cols-3 gap-x-3 ",
+          className: "grid grid-cols xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
@@ -555,7 +555,7 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
+          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray",
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
@@ -565,7 +565,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
-                  className: " !border-[#BFBFBF] focus:!border-primary ",
+                  className: " !border-[#BFBFBF] focus:!border-primary",
                   id: "span-field",
                   name: "isTax",
                   label: `${translate(
@@ -576,10 +576,10 @@ const generateServiceCalulationChildren = (
                 },
               },
               {
-                containerClass: "mb-0",
+                containerClass: "mb-0 min-w-[70px]",
                 field: {
                   type: Field.span,
-                  className: "! !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!border-[#BFBFBF] focus:!border-primary ",
                   id: "span-field",
                   text: `${translate(
                     "offers.service_details.detail_headings.tax"
@@ -594,11 +594,10 @@ const generateServiceCalulationChildren = (
                   id: "100",
                   children: [
                     {
-                      containerClass: "mb-0",
+                      containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "taxType1",
                         text: "Sub Total",
                         name: "taxType",
@@ -614,11 +613,10 @@ const generateServiceCalulationChildren = (
                       },
                     },
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "taxType2",
                         text: "Sub Total",
                         name: "taxType",
@@ -641,7 +639,7 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5 border-b  border-lightGray",
+          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray",
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
@@ -661,7 +659,7 @@ const generateServiceCalulationChildren = (
               },
 
               {
-                containerClass: "mb-0",
+                containerClass: "mb-0 min-w-[80px]",
                 field: {
                   type: Field.span,
                   className: "!border-[#BFBFBF] focus:!border-primary",
@@ -676,8 +674,7 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 w-full",
                 field: {
                   type: Field.input,
-                  className:
-                    "!px-2 !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
                   id: "discountAmount",
                   register,
                   name: "discountAmount",
@@ -695,11 +692,10 @@ const generateServiceCalulationChildren = (
                   id: "4",
                   children: [
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary",
                         id: "discountType1",
                         text: "Sub Total",
                         name: "discountType",
@@ -715,11 +711,10 @@ const generateServiceCalulationChildren = (
                       },
                     },
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "discountType2",
                         text: "Sub Total",
                         name: "discountType",
