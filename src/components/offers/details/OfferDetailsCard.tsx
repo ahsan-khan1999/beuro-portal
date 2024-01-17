@@ -154,7 +154,7 @@ const OfferDetailsCard = ({
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item) => `${item?.startDate} to ${item?.endDate}, `
+                  (item) => `${item?.startDate} ${item?.endDate && `to ${item?.endDate} ,`}  `
                 )}
               </span>
             </div>
