@@ -224,7 +224,6 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
-            <a href={url}>href</a>
             </div>
           );
         }}
