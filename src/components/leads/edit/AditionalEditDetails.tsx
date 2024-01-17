@@ -14,7 +14,7 @@ const AditionalEditDetails = ({
     useLeadAdditionalDetails(onClick);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-[#e5e5e5]">
+      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("leads.additional.heading")}
         </h2>

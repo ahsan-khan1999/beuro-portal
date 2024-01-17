@@ -51,7 +51,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    console.log(offerDetails, "offerDetails");
     if (offerDetails.id) {
 
       reset({

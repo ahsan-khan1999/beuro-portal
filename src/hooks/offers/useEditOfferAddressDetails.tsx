@@ -41,7 +41,6 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   });
 
   useEffect(() => {
-    console.log(offerDetails, "offerDetails");
 
     if (offerDetails.id) {
       reset({

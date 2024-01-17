@@ -12,7 +12,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
         return (
           <div
             key={item.id}
-            className="hover:bg-[#E9E1FF] px-6  items-center shadow-tableRow xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_200px)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(200px,_100%)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(100px,_100%)_minmax(90px,_90px)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_100%)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_100%)_minmax(90px,_90px)] mt-2 bg-white rounded-md"
+            className="hover:bg-[#E9E1FF] px-6  items-center shadow-tableRow xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(200px,_3fr)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(100px,_100%)_minmax(90px,_90px)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)_minmax(90px,_90px)] mt-2 bg-white rounded-md"
           >
             <span className="py-4 truncate">{item?.refID}</span>
             <span className="py-4 truncate">{item.serviceName}</span>
