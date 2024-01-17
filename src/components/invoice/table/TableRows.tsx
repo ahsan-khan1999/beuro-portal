@@ -43,14 +43,14 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div className="flex justify-center items-center rounded-md w-full">
                 <div
-                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm truncate`}
+                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
                 >
                   {!Number.isInteger(item?.paidAmount)
                     ? Number(item?.paidAmount)?.toFixed(2)
                     : item?.paidAmount}
                 </div>
                 <div
-                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm truncate`}
+                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm `}
                 >
                   {!Number.isInteger(item?.remainingAmount)
                     ? Number(item?.remainingAmount)?.toFixed(2)
