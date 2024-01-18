@@ -61,6 +61,7 @@ export interface OffersTableRowTypes {
   discountDescription: string;
   signature?: string;
   attachement?: string;
+  isNoteCreated:boolean
 }
 
 export interface PublicOffersTableRowTypes {

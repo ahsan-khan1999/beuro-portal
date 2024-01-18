@@ -148,13 +148,13 @@ const OfferSignedPdf = ({
         />
       </Page>
 
-      <Page  style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
-      <View style={{marginBottom: 10}} fixed>
+      <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+        <View style={{ marginBottom: 10 }} fixed>
 
-        <Header {...headerDetails} />
+          <Header {...headerDetails} />
         </View>
 
-     
+
         <ContactAddress {...{ ...contactAddress }} />
         <AdditionalDetails
           description={aggrementDetails}
@@ -213,9 +213,8 @@ const OfferSignedPdf = ({
         {({ blob, url, loading, error }) => {
           return (
             <Button
-              className={`mt-[55px] w-full  ${
-                pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
-              } rounded-[4px] shadow-md  text-center text-white`}
+              className={`mt-[55px] w-full  ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
+                } rounded-[4px] shadow-md  text-center text-white`}
               onClick={() =>
                 pdfAction === "Reject" ? rejectOffer() : acceptOffer(blob)
               }
@@ -224,6 +223,7 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
+
           );
         }}
       </BlobProvider>

@@ -47,7 +47,6 @@ const ContractDetails = () => {
             )}
         </div>
       </div>
-
       {isSendEmail ? (
         <ComposeMail
           backRouteHandler={handleSendEmail}
@@ -58,6 +57,7 @@ const ContractDetails = () => {
           <ContractDetailsData loading={loading} />
         </div>
       )}
+
 
       {renderModal()}
     </Layout>

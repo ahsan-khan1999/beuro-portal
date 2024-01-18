@@ -353,7 +353,9 @@ export type GenerateOfferFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: OffersTableRowTypes
+  details?: OffersTableRowTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>
 ) => FormField[];
 export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
@@ -366,7 +368,9 @@ export type GenerateContractFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: contractTableTypes
+  details?: contractTableTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>
 ) => FormField[];
 export type GenerateInvoiceEmailFormField = (
   register: UseFormRegister<FieldValues>,
@@ -379,7 +383,9 @@ export type GenerateInvoiceEmailFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: SubInvoiceTableRowTypes
+  details?: SubInvoiceTableRowTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (

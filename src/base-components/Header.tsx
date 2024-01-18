@@ -26,7 +26,7 @@ const Header = () => {
     await dispatch(logoutUser());
     logout();
     router.push("/")
-    // router.push({ pathname: "/pdf", query: { offerID: "65a6acac0b4f1c87686342b1", action: "Accept" } })
+    // router.push({ pathname: "/pdf", query: { offerID: "65a9290dae93a8c5b8e0612b", action: "Accept" } })
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {

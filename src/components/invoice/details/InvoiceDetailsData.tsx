@@ -10,6 +10,7 @@ import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
 import { useTranslation } from "next-i18next";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -146,13 +147,14 @@ const InvoiceDetailsData = ({
               </span>
             </div>
             <div
-              className="flex gap-2 items-center"
+              className="flex gap-2 items-center cursor-pointer"
               onClick={(e) => handleNotes(invoiceDetails?.id, e)}
             >
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.notes")}:
               </span>
-              <Image src={editIcon} alt="editIcon" className="cursor-pointer" />
+              <WriteIcon pathClass={invoiceDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"} />
+
             </div>
           </div>
         </div>

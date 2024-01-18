@@ -17,6 +17,7 @@ import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -245,18 +246,23 @@ const ContractDetailsCard = ({
           </div>
 
           <div className="flex justify-between">
-            <div className="flex items-center gap-[11px]">
+            
+            <div className="flex items-center gap-[11px] cursor-pointer"
+            onClick={(e) => handleNotes(contractDetails?.id, e)}
+            >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.notes")}:
               </span>
-              <Image
+              {/* <Image
                 src={writeIcon}
                 alt="writeIcon"
                 className="cursor-pointer"
                 onClick={(e) => handleNotes(contractDetails?.id, e)}
-              />
+              /> */}
+              <WriteIcon pathClass={contractDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"} />
+
             </div>
-            <div className="flex items-center gap-[11px]">
+            <div className="flex items-center gap-[11px] ">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>

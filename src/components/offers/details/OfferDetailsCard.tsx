@@ -20,6 +20,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { getOfferStatusColor, getPaymentTypeColor } from "@/utils/utility";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -69,9 +70,8 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${
-              isSendEmail && "hidden"
-            }`}
+            className={`w-fit border-[1px] border-[#C7C7C7] rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
+              }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -156,8 +156,7 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item) =>
-                    `${item?.startDate} ${
-                      item?.endDate && `to ${item?.endDate} ,`
+                    `${item?.startDate} ${item?.endDate && `to ${item?.endDate} ,`
                     }  `
                 )}
               </span>
@@ -220,32 +219,29 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                <span
-                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getOfferStatusColor(
-                      offerDetails?.offerStatus
-                    )}`,
-                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                  }}
-                >
-                  {offerDetails?.offerStatus}
-                </span>
-              )}
+                  <span
+                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                    style={{
+                      borderColor: `${getOfferStatusColor(
+                        offerDetails?.offerStatus
+                      )}`,
+                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                    }}
+                  >
+                    {offerDetails?.offerStatus}
+                  </span>
+                )}
             </span>
           </div>
 
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-[11px] ">
+            <div className="flex items-center gap-[11px] cursor-pointer"
+              onClick={(e) => handleNotes(offerDetails?.id, e)}
+            >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.notes")}:
               </span>
-              <Image
-                src={writeIcon}
-                alt="writeIcon"
-                className="cursor-pointer"
-                onClick={(e) => handleNotes(offerDetails?.id, e)}
-              />
+              <WriteIcon pathClass={offerDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"} />
             </div>
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">

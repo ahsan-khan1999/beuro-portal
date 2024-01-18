@@ -226,7 +226,7 @@ export const generateAddfferServiceDetailsValidation = (
       .when("isDiscount", {
         is: (isDiscount: boolean) => isDiscount,
         then: () =>
-          yup.string().required(translate("validationMessages.required")),
+          yup.string().notRequired(),
       }),
     [AddServiceOfferDetails.isDiscount]: yup
       .boolean()
