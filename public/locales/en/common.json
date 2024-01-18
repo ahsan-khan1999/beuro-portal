@@ -1922,5 +1922,7 @@
     "send_email": "Send Email",
     "offer_id": "Offer ID",
     "email_status": "Email Status"
-  }
+  },
+  "Pending":"Draft",
+  "Sent":"Sent"
 }

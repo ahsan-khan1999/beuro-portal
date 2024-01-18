@@ -562,7 +562,7 @@ export function getEmailColor(status: string) {
   if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
