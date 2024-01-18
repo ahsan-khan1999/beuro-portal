@@ -38,7 +38,7 @@ const ContractDetailsCard = ({
   };
   return (
     <>
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
         <div className="flex items-center">
           <Image
             src={backIcon}

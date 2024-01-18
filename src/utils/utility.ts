@@ -583,6 +583,7 @@ export function getPaymentTypeColor(status: string) {
     return "#FE9244";
   else return "#FF376F";
 }
+
 export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
@@ -649,6 +650,16 @@ export function getInvoiceEmailColor(status: string) {
   )
     return "#FF0000";
   else return "#FF376F";
+}
+
+export function getMailStatusColor(status: string) {
+  if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
+    return "#FF376F";
+  else if (
+    staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["pending"]
+  )
+    return "#FE9244";
+  else return "#45C769";
 }
 
 export function calculateTax(amount: number, taxPercentage: number) {

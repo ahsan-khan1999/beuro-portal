@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import { formatDateString, isNumber } from "@/utils/functions";
-import { formatDateReverse } from "@/utils/utility";
+import { formatDateReverse, getMailStatusColor } from "@/utils/utility";
 import Link from "next/link";
 
 const DetailsData = ({
@@ -59,17 +59,15 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.status")}:
             </span>
-            <span
-              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md min-w-[70px] bg-[${
-                emailDetails?.mailStatus === "opend"
-                  ? "#45C769"
-                  : emailDetails?.mailStatus === "pending"
-                  ? "#FF0000"
-                  : "#FF376F"
-              }]`}
-            >
-              {translate(emailDetails?.mailStatus || "")}
-            </span>
+            {emailDetails?.mailStatus && (
+              <span
+                className={`font-medium text-base text-white px-2 py-1 text-center rounded-md min-w-[70px] bg-[${getMailStatusColor(
+                  emailDetails?.mailStatus || ""
+                )}]`}
+              >
+                {translate(emailDetails?.mailStatus || "")}
+              </span>
+            )}
           </div>
           <div>
             <span className="font-normal text-[#4D4D4D]  text-base mr-5">
@@ -96,10 +94,10 @@ const DetailsData = ({
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+            <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B]  text-base">
+            <span className="font-medium text-[#4B4B4B] text-base">
               {formatDateReverse(emailDetails?.viewedAt as string)}
             </span>
           </div>
@@ -119,7 +117,7 @@ const DetailsData = ({
                 <Link
                   href={item?.href || ""}
                   target="_blank"
-                  className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
+                  className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
                 >
                   <Image
                     src={pdfFileIcon}

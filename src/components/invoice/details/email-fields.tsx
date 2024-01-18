@@ -1,5 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField, GenerateInvoiceEmailFormField } from "@/types";
+import {
+  FormField,
+  GenerateContractFormField,
+  GenerateInvoiceEmailFormField,
+} from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
@@ -11,7 +15,8 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   content,
   contentDetails,
   onContentSelect,
-  attachements, setAttachements,
+  attachements,
+  setAttachements,
   invoiceDetails
 ) => {
   const { t: translate } = useTranslation();
@@ -37,7 +42,6 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               name: "email",
               placeholder: "email@domain.com",
               register,
-
             },
           },
           {
@@ -48,14 +52,18 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              options:
+                content?.map((item) => ({
+                  label: item.contentName,
+                  value: item.id,
+                })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id || ""
+              value: contentDetails?.id || "",
             },
           },
         ],
@@ -78,7 +86,6 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
-
       },
     },
 
@@ -96,8 +103,6 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         name: "description",
         control,
         // value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
-
-
       },
     },
 
@@ -137,7 +142,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         name: "attachments",
         control,
         attachements,
-        setAttachements
+        setAttachements,
       },
     },
 

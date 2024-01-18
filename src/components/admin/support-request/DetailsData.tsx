@@ -72,7 +72,7 @@ const DetailsData = ({
                 handleStatusUpadte(selectedItem)
               }
               selectedItem={supportDetail?.status || ""}
-              dropDownClassName="px-3 border border-primary"
+              dropDownClassName="px-3 border border-primary justify-between"
               dropDownTextClassName="text-primary font-medium"
               dropDownIconClassName="text-primary ml-2"
               dropDownItemsContainerClassName="border border-primary w-full"

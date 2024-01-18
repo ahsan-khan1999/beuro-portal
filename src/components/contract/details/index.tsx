@@ -5,6 +5,7 @@ import DetailsData from "./DetailsData";
 import ContractDetailsData from "./ContractDetailsData";
 import useContractDetail from "@/hooks/contract/useContractDetail";
 import ComposeMail from "../compose-mail/ComposeMail";
+import MailDetailsCard from "../compose-mail/MailDetailsCard";
 
 const ContractDetails = () => {
   const {
@@ -56,10 +57,25 @@ const ContractDetails = () => {
       </div>
 
       {isSendEmail ? (
-        <ComposeMail
-          backRouteHandler={handleSendEmail}
-          onNextHandle={onNextHandle}
-        />
+        <>
+          <div className="bg-white rounded-md px-5 pt-5 pb-10">
+            <CardDetailsData
+              contractDetails={contractDetails}
+              offerDeleteHandler={offerDeleteHandler}
+              handleImageUpload={handleImageUpload}
+              handleNotes={handleNotes}
+              handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+              handleStatusUpdate={handleStatusUpdate}
+              handleSendEmail={handleSendEmail}
+            />
+          </div>
+          <div className="mt-5">
+            <ComposeMail
+              backRouteHandler={handleSendEmail}
+              onNextHandle={onNextHandle}
+            />
+          </div>
+        </>
       ) : (
         <div
           className={`${

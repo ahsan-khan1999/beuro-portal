@@ -52,8 +52,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className:
-                "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",

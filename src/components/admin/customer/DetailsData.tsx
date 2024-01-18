@@ -110,7 +110,7 @@ const DetailsData = ({
                   handleStatusChange(selectedItem)
                 }
                 selectedItem={customerDetail?.status}
-                dropDownClassName="w-[140px] border border-primary"
+                dropDownClassName="w-[140px] border border-primary justify-between"
                 dropDownTextClassName="text-primary font-medium"
                 dropDownIconClassName="text-primary"
                 dropDownItemsContainerClassName="border border-primary w-full"
