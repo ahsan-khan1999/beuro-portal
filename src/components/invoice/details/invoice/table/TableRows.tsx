@@ -12,6 +12,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -27,6 +28,7 @@ const TableRows = ({
   handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
@@ -69,7 +71,7 @@ const TableRows = ({
                 }}
                 className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px]"
               >
-                <span>{item.emailStatus}</span>
+                {translate(item?.emailStatus)}
               </div>
             </span>
 
@@ -86,7 +88,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
@@ -107,7 +109,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-1 py-[3px] flex items-center`}
+                }  min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 key={item.id}
                 dropDownIconClassName={`text-[#fff]`}

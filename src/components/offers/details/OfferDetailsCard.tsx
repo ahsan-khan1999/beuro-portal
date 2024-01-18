@@ -19,7 +19,11 @@ import { OfferDetailCardProps } from "@/types/offers";
 import { Button } from "@/base-components/ui/button/button";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { getOfferStatusColor, getPaymentTypeColor } from "@/utils/utility";
+import {
+  getEmailColor,
+  getOfferStatusColor,
+  getPaymentTypeColor,
+} from "@/utils/utility";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -113,7 +117,7 @@ const OfferDetailsCard = ({
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-1">
           <div>
-            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("offers.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -130,7 +134,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -170,8 +174,15 @@ const OfferDetailsCard = ({
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
             </span>
-            <span className="text-base font-medium text-[#FE9244] border border-[#FE9244] rounded-lg px-4 py-[3px] ">
-              {offerDetails?.emailStatus}
+            <span
+              className={`text-base font-medium border border-[${getEmailColor(
+                offerDetails?.emailStatus
+              )}] rounded-lg px-4 py-[3px]`}
+              style={{
+                color: `${getEmailColor(offerDetails?.emailStatus)}`,
+              }}
+            >
+              {translate(offerDetails?.emailStatus)}
             </span>
           </div>
           <div className="flex items-center gap-[11px]">
@@ -187,7 +198,7 @@ const OfferDetailsCard = ({
                 onItemSelected={handlePaymentStatusUpdate}
                 dropDownClassName={`border border-[${getPaymentTypeColor(
                   offerDetails?.paymentType
-                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName={`text-[${getPaymentTypeColor(
                   offerDetails?.paymentType
                 )}] text-base font-medium me-1`}
@@ -214,7 +225,7 @@ const OfferDetailsCard = ({
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getOfferStatusColor(
                     offerDetails?.offerStatus
-                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
                   dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}

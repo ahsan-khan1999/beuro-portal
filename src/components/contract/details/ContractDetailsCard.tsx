@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import {
   formatDateTimeToDate,
   getContractStatusColor,
+  getEmailColor,
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { ContractDetailCardProps } from "@/types/contract";
@@ -158,14 +159,19 @@ const ContractDetailsCard = ({
         </div>
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
-          <div className="flex items-center  gap-[10px]">
+          <div className="flex items-center gap-[10px]">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.email_status")}:
             </span>
-            <div>
-              <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
-                {contractDetails?.emailStatus}
-              </span>
+            <div
+              className={`text-base font-medium border border-[${getEmailColor(
+                contractDetails?.emailStatus
+              )}] rounded-lg px-4 py-[3px] cursor-default`}
+              style={{
+                color: `${getEmailColor(contractDetails?.emailStatus)}`,
+              }}
+            >
+              {translate(contractDetails?.emailStatus)}
             </div>
           </div>
 

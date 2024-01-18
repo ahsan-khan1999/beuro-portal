@@ -272,12 +272,13 @@ export const conditionHandlerLogin = (
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
       updateQuery(router, router?.locale as string);
-    } else if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 && !response?.data?.data?.User?.plan?.id) {
+    } else if (
+      staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 &&
+      !response?.data?.data?.User?.plan?.id
+    ) {
       router.pathname = "/plan";
       updateQuery(router, router?.locale as string);
-
-    }
-    else {
+    } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
       } else {
@@ -391,7 +392,6 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
       country: inputObject[`country-${i}`] || "",
       description: inputObject[`description-${i}`] || "",
       label: inputObject[`label-${i}`] || "",
-
     };
     outputArray.push(addressObj);
   }
@@ -638,9 +638,7 @@ export function getInvoiceStatusColor(status: string) {
 }
 
 export function getInvoiceEmailColor(status: string) {
-  if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
-  )
+  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"])
     return "#FF376F";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
@@ -649,7 +647,7 @@ export function getInvoiceEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else return "#FF376F";
 }
 
@@ -714,7 +712,7 @@ export const calculateDiscount = (
   }
 };
 export function dataURLtoBlob(dataURL: any) {
-  const arr = dataURL.split(',');
+  const arr = dataURL.split(",");
   const mime = arr[0].match(/:(.*?);/)[1];
   const bstr = atob(arr[1]);
   let n = bstr.length;
@@ -739,12 +737,10 @@ export function dataURLtoBlob(dataURL: any) {
 //   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 //   const offsetPosition = elementPosition - headerOffset;
 
-
 //   window.scrollTo(0,offsetPosition);
 // };
 
-
-export const smoothScrollToSection = (target:string) => {
+export const smoothScrollToSection = (target: string) => {
   const element = document.getElementById(target);
   const headerOffset = 100;
   const elementPosition = element?.getBoundingClientRect().top || 0;
@@ -761,7 +757,6 @@ export function blobToFile(blob: any, fileName: string) {
   const file = new File([blob], fileName, options);
   return file;
 }
-
 
 export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
   const mergedPdf = await PDFDocument.create();

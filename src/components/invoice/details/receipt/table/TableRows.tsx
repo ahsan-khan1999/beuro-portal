@@ -6,6 +6,7 @@ import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { updateQuery } from "@/utils/update-query";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   collectiveInvoice,
@@ -17,6 +18,7 @@ const TableRows = ({
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { systemSettings } = useAppSelector((state) => state.settings);
 
   const handleReceiptPreview = (id?: string) => {
@@ -56,7 +58,7 @@ const TableRows = ({
                 }}
                 className=" text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
               >
-                {item.emailStatus}
+                {translate(item?.emailStatus)}
               </div>
             </span>
 
@@ -73,7 +75,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
@@ -94,7 +96,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center `}
+                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
