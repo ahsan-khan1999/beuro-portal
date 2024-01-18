@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   innerDate: {
-    borderTopWidth: 2,
+    borderTopWidth: 1,
     borderTopStyle: "solid",
     borderTopColor: "#000",
     width: "40%",
   },
   signature: {
-    borderTopWidth: 2,
+    borderTopWidth: 1,
     borderTopStyle: "solid",
     borderTopColor: "#000",
     // width: "40%",

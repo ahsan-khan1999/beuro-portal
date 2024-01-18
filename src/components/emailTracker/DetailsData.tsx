@@ -20,7 +20,7 @@ const DetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  
+
   return (
     <>
       <div className="flex justify-between items-center  ">
@@ -60,13 +60,12 @@ const DetailsData = ({
               {translate("email_tracker.card_content.status")}:
             </span>
             <span
-              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md  min-w-[70px] bg-[${
-                emailDetails?.mailStatus === "opend"
+              className={`font-medium text-base text-white px-2 py-1 text-center rounded-md  min-w-[70px] bg-[${emailDetails?.mailStatus === "opend"
                   ? "#45C769"
                   : emailDetails?.mailStatus === "pending"
-                  ? "#FE9244"
-                  : "#FF376F"
-              }]`}
+                    ? "#FE9244"
+                    : "#FF376F"
+                }]`}
             >
               {emailDetails?.mailStatus}
             </span>
@@ -110,32 +109,31 @@ const DetailsData = ({
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
-        {emailDetails?.attachments?.map((item) => {
-          let length = item?.href?.split("/")?.length - 1;
+        <div className="my-5 flex items-end">
+          {emailDetails?.attachments?.map((item) => {
+            let length = item?.href?.split("/")?.length - 1;
 
-          return (
-            <div className="my-5 flex items-end">
-              <Link
-                href={item?.href || ""}
-                target="_blank"
-                className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
-              >
-                <Image
-                  src={pdfFileIcon}
-                  alt="PDF_FILE_ICON"
-                  className=" mr-[11px]"
-                />
-                <span className="text-[#BFBFBF] text-base font-normal">
-                  {/* {item.href?.length > 15
-                    ? `${item.href.slice(0, 15)}...`
-                    : item.href} */}
-                  {item.href?.split("/")[length - 1]}
-                </span>
-              </Link>
-              &nbsp;,&nbsp;
-            </div>
-          );
-        })}
+            return (
+              <>
+                <Link
+                  href={item?.href || ""}
+                  target="_blank"
+                  className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
+                >
+                  <Image
+                    src={pdfFileIcon}
+                    alt="PDF_FILE_ICON"
+                    className=" mr-[11px]"
+                  />
+                  <span className="text-[#BFBFBF] text-base font-normal">
+                    {item.href?.split("/")[length]}
+                  </span>
+                </Link>
+                &nbsp;&nbsp;
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

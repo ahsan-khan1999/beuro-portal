@@ -130,12 +130,10 @@ const OfferPdfPreview = ({
               fontFamily: "Poppins",
             }}
           > */}
-          <ContactAddress {...{ ...contactAddress }} />
+          {/* <ContactAddress {...{ ...contactAddress }} /> */}
           <AdditionalDetails description={aggrementDetails} />
           <AggrementSignature showContractSign={showContractSign} />
 
-
-          {/* <Text>Angebot für Ihren Umzug</Text> */}
           {/* </View> */}
           <Footer
             {...{

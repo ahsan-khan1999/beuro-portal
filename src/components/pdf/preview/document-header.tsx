@@ -20,7 +20,7 @@ export const DocumentHeader = ({
   return (
     <div
       className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full `}
-      style={{backgroundColor:backgroundColor}}
+      // style={{backgroundColor:"#fff"}}
     >
       <div className="col-span-3">
         {emailTemplateSettings && (
@@ -38,13 +38,13 @@ export const DocumentHeader = ({
         <div className="flex gap-[30px]">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
           >
             {translation("pdf.offer_number")}:
           </span>
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
 
           >
             {offerNo}
@@ -53,14 +53,14 @@ export const DocumentHeader = ({
         <div className="flex gap-[15px] ">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
 
           >
             {translation("pdf.offer_date")}:
           </span>
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
 
           >
             {formatDateTimeToDate(offerDate || "")}
@@ -69,14 +69,14 @@ export const DocumentHeader = ({
         <div className="flex gap-[12px] ">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
 
           >
             {translation("pdf.created_by")}:
           </span>
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
-            style={{ color: textColor }}
+            // style={{ color: textColor }}
 
           >
             {createdBy}

@@ -7,6 +7,7 @@ import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import Image from "next/image";
 import { dataURLtoBlob, smoothScrollToSection } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const ow = 442;
 const oh = 173;
@@ -18,6 +19,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     isSignatureDone?: boolean, setOfferSignature?: SetStateAction<any>, handleSignature?: (sign: any) => void
   }) => {
   const dispatch = useAppDispatch()
+  const {t:translate} = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -113,7 +115,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
           onClick={handleClear}
           className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
         >
-          Clear
+          {translate("pdf.clear")}
         </button>
         <Button
           id="signature"
@@ -121,7 +123,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
           onClick={handleSave}
           disabled={isSubmitted}
           loading={loading}
-          text="Submit"
+          text={translate("pdf.submit")}
           className="bg-[#393939]  text-center text-white rounded-md shadow-md w-full"
         />
 

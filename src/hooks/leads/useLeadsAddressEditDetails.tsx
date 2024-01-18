@@ -45,7 +45,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   const handleFieldTypeChange = (index: number) => {
     let address = [...addressType];
     address[index - 1] = !address[index - 1]
-    console.log(address, "address");
 
     setAddressType(address)
   }

@@ -83,7 +83,7 @@ export const ImageUpload = ({
               width={32}
               height={26}
             />
-            <p className="text-dark  text-xs mt-[10px] overflow-y-clip">
+            <p className="text-dark text-center text-xs mt-[10px] overflow-y-clip">
               {translate("common.images_modal.drop_attach")}
             </p>
           </>

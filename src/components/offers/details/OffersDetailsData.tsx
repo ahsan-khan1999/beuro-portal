@@ -121,7 +121,7 @@ const OffersDetailsData = ({
         </div>
       </div>
       <div className="overflow-y-auto w-full break-all flex">
-        <div className="max-w-[270px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[320px] w-full hidden 2xl:block"></div>
         {loading ? (
           <LoadingState />
         ) : (

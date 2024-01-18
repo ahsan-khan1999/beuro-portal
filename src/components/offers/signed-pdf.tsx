@@ -82,7 +82,6 @@ Font.register({
   ],
 });
 
-
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
@@ -115,7 +114,7 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
-  
+
   const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
@@ -150,25 +149,19 @@ const OfferSignedPdf = ({
         />
       </Page>
 
-      {/* Additional details */}
-      <Page style={styles.body}>
+      <Page  style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+      <View style={{marginBottom: 10}} fixed>
+
         <Header {...headerDetails} />
-        {/* <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 120,
-          }}
-        > */}
+        </View>
+
+     
         <ContactAddress {...{ ...contactAddress }} />
         <AdditionalDetails
           description={aggrementDetails}
           signature={signature}
-          // showContractSign={showContractSign}
         />
         <AggrementSignature showContractSign={true} signature={signature} />
-        {/* </View> */}
         <Footer
           documentDetails={offerData?.footerDetails}
           emailTemplateSettings={emailTemplateSettings}
@@ -213,11 +206,13 @@ const OfferSignedPdf = ({
   }, []);
 
   return (
-    <div className="download-link w-full" id="gohere">
+    <div
+      className="download-link flex justify-center max-w-[1040px] w-full"
+      id="gohere"
+    >
       <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
-            <div className=" ">
             <Button
               className={`mt-[55px] w-full  ${
                 pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
@@ -230,7 +225,6 @@ const OfferSignedPdf = ({
               loading={offerLoading}
               text={pdfAction as string}
             />
-            </div>
           );
         }}
       </BlobProvider>
@@ -243,14 +237,6 @@ export default OfferSignedPdf;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
-  },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
+    fontFamily: "Poppins",
   },
 });

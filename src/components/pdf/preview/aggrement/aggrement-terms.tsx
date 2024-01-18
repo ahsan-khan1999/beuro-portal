@@ -51,7 +51,7 @@ export const AggrementTerms = ({
     <div>
       {isOffer ? (
         <div
-          className="html-content flex flex-col gap-1"
+          className="html-content flex flex-col gap-1 max-w-[1160px]"
           dangerouslySetInnerHTML={{ __html: aggrementDetails }}
         />
       ) : (
