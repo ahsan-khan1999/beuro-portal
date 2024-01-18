@@ -384,7 +384,6 @@ export interface FieldComponents {
   button: React.FC<ButtonProps>;
   addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
-  dateRange: React.FC<MultiDateProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
 }

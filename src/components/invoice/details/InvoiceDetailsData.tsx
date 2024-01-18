@@ -163,7 +163,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total}
+              {invoiceDetails?.contractID?.offerID?.total?.toFixed(2)}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
@@ -171,7 +171,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.paid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.paidAmount} {currency}
+              {Number(invoiceDetails?.paidAmount)?.toFixed(2)} {currency}
             </span>
           </div>
           <div className="flex gap-x-[10px] pt-3">
@@ -179,8 +179,8 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.unpaid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total -
-                Number(invoiceDetails?.paidAmount)}{" "}
+              {(invoiceDetails?.contractID?.offerID?.total -
+                Number(invoiceDetails?.paidAmount))?.toFixed(2)}{" "}
               {currency}
             </span>
           </div>
