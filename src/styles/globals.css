@@ -152,6 +152,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+.selectScrollBar::-webkit-scrollbar {
+  width: 15px;
+}
 /* Custom CSS to style the scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
@@ -205,6 +208,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 6px;
   height: 8px;
 }
+.select_scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
 
 .custom-scrollbar::-webkit-scrollbar-thumb,
 .dashboard_scrollbar::-webkit-scrollbar-thumb {
@@ -253,7 +259,7 @@ input[type="number"] {
 
 /* multi-select scroll bar */
 .multiSelectScrol::-webkit-scrollbar {
-  width: 0;
+  width: 4px;
   height: 0;
 }
 
