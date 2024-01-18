@@ -32,7 +32,7 @@ const Header = () => {
       dispatch(readSystemSettings());
     }
   }, [user]);
-
+ 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
