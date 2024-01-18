@@ -2,20 +2,23 @@ import React from "react";
 import Image from "next/image";
 import backIcon from "@/assets/svgs/back_icon.svg";
 import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
-import printerIcon from "@/assets/svgs/printer_icon.svg";
 import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
-import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { useRouter } from "next/router";
-import { formatDateTimeToDate } from "@/utils/utility";
+import {
+  formatDateTimeToDate,
+  getContractStatusColor,
+  getEmailColor,
+  getPaymentTypeColor,
+} from "@/utils/utility";
 import { ContractDetailCardProps } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -35,8 +38,8 @@ const ContractDetailsCard = ({
     window.open(contractDetails?.attachement);
   };
   return (
-    <ContractCardLayout>
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
+    <>
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
         <div className="flex items-center">
           <Image
             src={backIcon}
@@ -157,14 +160,19 @@ const ContractDetailsCard = ({
         </div>
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_300px)_minmax(350px,_350px)_minmax(200px,_100%)] gap-y-2">
-          <div className="flex items-center  gap-[10px]">
+          <div className="flex items-center gap-[10px]">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.email_status")}:
             </span>
-            <div>
-              <span className="text-base font-medium text-[#4A13E7] border border-[#4A13E7] rounded-lg px-4 py-[3px] cursor-default">
-                {contractDetails?.emailStatus}
-              </span>
+            <div
+              className={`text-base font-medium border border-[${getEmailColor(
+                contractDetails?.emailStatus
+              )}] rounded-lg px-4 py-[3px] cursor-default`}
+              style={{
+                color: `${getEmailColor(contractDetails?.emailStatus)}`,
+              }}
+            >
+              {translate(contractDetails?.emailStatus)}
             </div>
           </div>
 
@@ -188,9 +196,16 @@ const ContractDetailsCard = ({
                 }))}
                 selectedItem={contractDetails?.paymentType}
                 onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownClassName={`border border-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownTextClassName={`text-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}] text-base font-medium me-1`}
                 dropDownItemsContainerClassName="w-full"
+                dropDownIconClassName={`text-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}]`}
               />
             </span>
           </div>
@@ -208,11 +223,28 @@ const ContractDetailsCard = ({
                   )}
                   selectedItem={contractDetails?.contractStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName="border border-[#FF0000] rounded-lg px-4 py-[3px] flex items-center"
-                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                  dropDownClassName={`border border-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}] rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}] text-base font-medium me-1`}
+                  dropDownIconClassName={`text-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}]`}
                 />
               )) || (
-                <span className="border border-[#FF0000] w-auto rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                <span
+                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}`,
+                    color: `${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}`,
+                  }}
+                >
                   {contractDetails?.contractStatus}
                 </span>
               )}
@@ -220,18 +252,23 @@ const ContractDetailsCard = ({
           </div>
 
           <div className="flex justify-between">
-            <div className="flex items-center gap-[11px]">
+            
+            <div className="flex items-center gap-[11px] cursor-pointer"
+            onClick={(e) => handleNotes(contractDetails?.id, e)}
+            >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.notes")}:
               </span>
-              <Image
+              {/* <Image
                 src={writeIcon}
                 alt="writeIcon"
                 className="cursor-pointer"
                 onClick={(e) => handleNotes(contractDetails?.id, e)}
-              />
+              /> */}
+              <WriteIcon pathClass={contractDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"} />
+
             </div>
-            <div className="flex items-center gap-[11px]">
+            <div className="flex items-center gap-[11px] ">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>
@@ -245,7 +282,7 @@ const ContractDetailsCard = ({
           </div>
         </div>
       </div>
-    </ContractCardLayout>
+    </>
   );
 };
 

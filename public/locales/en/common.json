@@ -1073,6 +1073,8 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
+
+    "offer_mail_preview": "Offer Email Preview",
     "address": "Address",
     "add_new_date": "Add New Date",
     "add_company_info": "Add Company Information",
@@ -1092,6 +1094,8 @@
     "tax": "Tax Rate (%)",
     "action": "Action",
     "help": "help Center",
+    "via_post": "Via Post",
+    "via_phone": "Via Phone Call",
     "via_email": "Via Email",
     "via_whatsapp": "Via What'sapp",
     "via_fb": "Via Facebook",
@@ -1836,9 +1840,8 @@
     "condition_for_moving": "Conditions for moving estimates",
     "thanks_message": "Thank you for your interest in our services.",
     "pdf_description": "Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.",
-    "submit":"Submit",
-    "clear":"Clear"
-
+    "submit": "Submit",
+    "clear": "Clear"
   },
   "pricing_details": {
     "heading": "Let's start with us",
@@ -1922,5 +1925,7 @@
     "send_email": "Send Email",
     "offer_id": "Offer ID",
     "email_status": "Email Status"
-  }
+  },
+  "Pending":"Draft",
+  "Sent":"Sent"
 }

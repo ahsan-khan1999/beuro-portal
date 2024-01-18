@@ -1,18 +1,21 @@
 import axios from "axios";
 
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
-const STAGING_API_URL = "https://staging.buero-365.cloudmeshsolutions.com/api";
+const STAGING_API_URL = "https://www.staging.buero-365.cloudmeshsolutions.com/api";
 export const GOOGLE_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
 export const FB_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/login/oauth/facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
-export const DOMAIN = "https://staging.buero-365.cloudmeshsolutions.com/"
+export const DOMAIN = "https://new.buero-365.com/"
 export const GOOGLE_CONNECT_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
 export const FB_CONNECT_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
 export const BASEURL = STAGING_API_URL;
-export const TAX_PERCENTAGE = "8.1"
+export const TAX_PERCENTAGE = "8.1";
 export async function getApiRequestHeader() {
-  const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
+  const [authToken, refreshToken] = await Promise.all([
+    getToken(),
+    getRefreshToken(),
+  ]);
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -44,9 +47,8 @@ export async function request({ method, url, data, headers }) {
   let response;
   try {
     response = await promise;
-
   } catch (error) {
-    toast.error(error?.response?.data?.message)
+    toast.error(error?.response?.data?.message);
 
     if (error?.response?.data?.code === 401) {
       logout();
@@ -65,9 +67,8 @@ export async function newRequest({ method, url, data, headers }) {
   let response;
   try {
     response = await promise;
-
   } catch (error) {
-    toast.error(error?.response?.data?.message)
+    toast.error(error?.response?.data?.message);
 
     if (error?.response?.data?.code === 401) {
       logout();
@@ -109,10 +110,13 @@ export async function get(url, params, featureAndAction, config) {
   const { filter, ...otherParams } = params;
   let queryParams = {};
   if (config.detail) {
-
     url = `${url}/${filter}`;
-    return request({ method: "get", url: url, data: { featureAndAction }, ...config });
-
+    return request({
+      method: "get",
+      url: url,
+      data: { featureAndAction },
+      ...config,
+    });
   }
 
   if (filter && !url.includes("filter")) {
@@ -130,7 +134,12 @@ export async function get(url, params, featureAndAction, config) {
 
   const queryString = new URLSearchParams(queryParams).toString();
   const fullUrl = queryString ? `${url}?${queryString}` : url;
-  return request({ method: "get", url: fullUrl, data: { featureAndAction }, ...config });
+  return request({
+    method: "get",
+    url: fullUrl,
+    data: { featureAndAction },
+    ...config,
+  });
 }
 
 export async function del(url, params, config) {
@@ -160,13 +169,6 @@ export const independentRequest = async (url, method, data) => {
   const payload = response;
   return payload;
 };
-
-
-
-
-
-
-
 
 // dispatch(readCustomerDetail({ params: { filter: "65436739f4a8c09ef4669708" } }))
 // dispatch(readCustomer({ params: { filter: { sortBy: "desc", name: "test", type: "none" }, page: 1, size: 10 } }))

@@ -11,12 +11,12 @@ const OfferEditDetails = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = " ";
+  const defaultClassName = "pt-5";
   const { fields, control, onSubmit, handleSubmit, errors, translate } =
     useEditOfferDetails({ handleNext });
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 ">
+      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("offers.offer_details.heading")}
         </h2>
@@ -28,7 +28,6 @@ const OfferEditDetails = ({
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

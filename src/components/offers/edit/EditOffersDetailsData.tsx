@@ -120,7 +120,7 @@ const EditOffersDetailsData = ({
 
   return (
     <>
-      <div className="xLarge:fixed mb-5 ">
+      <div className="xLarge:fixed mb-5">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
           {tabSection.map((item, index) => (
             <OfferTabs
@@ -143,7 +143,7 @@ const EditOffersDetailsData = ({
         />
       </div>
 
-      <div className="overflow-y-auto w-full break-all flex">
+      <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>

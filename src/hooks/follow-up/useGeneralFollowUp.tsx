@@ -21,8 +21,8 @@ import { readCustomer } from "@/api/slices/customer/customerSlice";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { useTranslation } from "next-i18next";
-import { getUser } from "@/utils/auth.util";
 import { isJSON } from "@/utils/functions";
+import { getUser } from "@/utils/auth.util";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();

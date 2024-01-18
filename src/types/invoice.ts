@@ -19,7 +19,8 @@ export interface InvoiceTableRowTypes {
   isInvoiceRecurring: boolean;
   invoiceCreatedAmount: number; createdBy: User;
   title: string;
-  isInvoiceRecurring2: boolean
+  isInvoiceRecurring2: boolean;
+  isNoteCreated:boolean
 
 }
 

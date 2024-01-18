@@ -147,7 +147,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
       },
       field: {
         className:
-          "!p-4 !h-[54px] !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
         type: Field.select,
         value: data ? data?.paymentType : "",
         id: "paymentType",
