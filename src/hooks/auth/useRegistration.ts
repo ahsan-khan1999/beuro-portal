@@ -4,12 +4,13 @@ import { generateValidation } from "@/validation/authSchema";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateFormField } from "@/components/loginAndRegister/registration/registration-form-fields";
-import { signUp } from "@/api/slices/authSlice/auth";
+import { setErrorMessage, signUp } from "@/api/slices/authSlice/auth";
 import { useAppDispatch, useAppSelector } from "../useRedux";
+import { useEffect } from "react";
 
 export default function useRegistration() {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state: any) => state.auth);
+  const { loading, error } = useAppSelector(state => state.auth);
   const { t: translate } = useTranslation();
   const router = useRouter();
   const schema = generateValidation(translate);
@@ -21,7 +22,11 @@ export default function useRegistration() {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  useEffect(() => {
+    dispatch(setErrorMessage(null));
 
+  }, [])
+  
   const fields = generateFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(signUp({ data, router, setError, translate }));

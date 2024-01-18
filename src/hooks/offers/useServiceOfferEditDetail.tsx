@@ -139,10 +139,11 @@ export const useServiceOfferEditDetail = ({
     const data = getValues();
     const totalPrices =
       data?.serviceDetail?.reduce(
-        (acc: number, element: any) => acc + parseInt(element.totalPrice, 10),
+        (acc: number, element: any) => acc + parseInt(element.totalPrice || 0, 10),
         0
-      ) || 0;
-
+      );
+      // console.log(isDiscount ,"isDiscount", discountAmount);
+      
     let taxAmount =
       isTax && taxType == "0"
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
@@ -165,6 +166,8 @@ export const useServiceOfferEditDetail = ({
         console.warn("Amount should not be greater than total price");
       }
     } else {
+      console.log("going else");
+      
       setValue("discountAmount", 0);
     }
 

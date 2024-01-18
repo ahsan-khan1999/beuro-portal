@@ -38,7 +38,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
-import { RefObject } from "@fullcalendar/core/preact.js";
 import { AggrementSignature } from "../reactPdf/aggrement-signature";
 
 Font.register({

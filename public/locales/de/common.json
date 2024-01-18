@@ -1918,5 +1918,7 @@
     "send_email": "E-Mail senden",
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
-  }
+  },
+  "Pending":"Entwurf",
+  "Sent":"Gesendet"
 }
