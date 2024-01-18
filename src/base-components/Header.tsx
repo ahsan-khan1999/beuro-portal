@@ -22,9 +22,10 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const handleLogout = () => {
-    dispatch(logoutUser());
+  const handleLogout = async() => {
+    await dispatch(logoutUser());
     logout();
+    router.push("/")
     // router.push({ pathname: "/pdf", query: { offerID: "65a6acac0b4f1c87686342b1", action: "Accept" } })
   };
   useEffect(() => {
