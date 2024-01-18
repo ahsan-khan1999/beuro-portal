@@ -19,6 +19,7 @@ import { OfferDetailCardProps } from "@/types/offers";
 import { Button } from "@/base-components/ui/button/button";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
+import { getOfferStatusColor, getPaymentTypeColor } from "@/utils/utility";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -50,7 +51,7 @@ const OfferDetailsCard = ({
             className="cursor-pointer"
             onClick={() => router.push("/offers")}
           />
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("offers.card_content.main_heading")}
           </p>
         </div>
@@ -112,7 +113,7 @@ const OfferDetailsCard = ({
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-1">
           <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
+            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
               {translate("offers.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -120,7 +121,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base  font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_title")}:
             </span>
 
@@ -129,7 +130,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base  font-normal text-[#4D4D4D]">
               {translate("offers.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -140,7 +141,7 @@ const OfferDetailsCard = ({
 
         <div className="grid gap-y-1 mlg:grid-cols-2 xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
           <div>
-            <span className="text-base  font-normal text-[4D4D4D] mr-[10px]">
+            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
               {translate("offers.card_content.created_date")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
@@ -148,13 +149,16 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
+            <span className="text-base  font-normal text-[#4D4D4D]">
               {translate("offers.card_content.service_date")}:
             </span>
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item) => `${item?.startDate} ${item?.endDate && `to ${item?.endDate} ,`}  `
+                  (item) =>
+                    `${item?.startDate} ${
+                      item?.endDate && `to ${item?.endDate} ,`
+                    }  `
                 )}
               </span>
             </div>
@@ -170,8 +174,8 @@ const OfferDetailsCard = ({
               {offerDetails?.emailStatus}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base  ">
+          <div className="flex items-center gap-[11px]">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.payment_method")}:
             </span>
             <span>
@@ -181,9 +185,16 @@ const OfferDetailsCard = ({
                 }))}
                 selectedItem={offerDetails?.paymentType}
                 onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownClassName={`border border-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownTextClassName={`text-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}] text-base font-medium me-1`}
                 dropDownItemsContainerClassName="w-full"
+                dropDownIconClassName={`text-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}]`}
               />
             </span>
           </div>
@@ -201,11 +212,23 @@ const OfferDetailsCard = ({
                   )}
                   selectedItem={offerDetails?.offerStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                  dropDownTextClassName="text-[#FF0000] text-base font-medium me-1"
+                  dropDownClassName={`border border-[${getOfferStatusColor(
+                    offerDetails?.offerStatus
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getOfferStatusColor(
+                    offerDetails?.offerStatus
+                  )}] text-base font-medium me-1`}
                 />
               )) || (
-                <span className="border border-[#FF0000] w-fit rounded-lg px-4 py-[3px] flex items-center text-[#FF0000] text-base font-medium ">
+                <span
+                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getOfferStatusColor(
+                      offerDetails?.offerStatus
+                    )}`,
+                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                  }}
+                >
                   {offerDetails?.offerStatus}
                 </span>
               )}

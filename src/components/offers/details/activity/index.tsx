@@ -24,7 +24,7 @@ const Activity = () => {
   return (
     <>
       {activityData && activityData?.length > 0 ? (
-        <div className="h-[300px] overflow-y-auto">
+        <div className="max-h-[300px] overflow-y-auto">
           {activityData?.map((item, index) => (
             <div key={index} className="flex flex-col bg-white rounded-b-lg ">
               <div className="pl-[30px] pr-[11px] py-[11px]">

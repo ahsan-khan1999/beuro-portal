@@ -633,7 +633,7 @@ export const staticEnums: Record<string, any> = {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
-    Open: 3
+    Open: 3,
   },
   Frequency: {
     Weekly: 0,
@@ -725,8 +725,8 @@ export const staticEnums: Record<string, any> = {
     Umzugsfuchs: "Umzugsfuchs",
     Webvermarktung: "Webvermarktung",
     "Offerten-365": "Offerten-365",
-    "Umzugshero": "Umzugshero",
-
+    Umzugshero: "Umzugshero",
+    "Via Call": "Via Call",
   },
 };
 
@@ -1623,10 +1623,8 @@ export const DEFAULT_INVOICE = {
   type: "",
 };
 
-
 export const HeaderLabel = {
-  "contract": "Verträge",
-  "invoice": "Rechnung",
-  "receipt": "Quittung"
-}
-
+  contract: "Verträge",
+  invoice: "Rechnung",
+  receipt: "Quittung",
+};
