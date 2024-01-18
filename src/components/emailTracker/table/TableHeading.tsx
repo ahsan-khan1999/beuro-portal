@@ -8,10 +8,10 @@ const TableHeading = () => {
       <span className="font-medium text-[#8F8F8F]">
         {translate("email_tracker.table_headings.id")}
       </span>
-      <span className="font-medium text-[#8F8F8F]  ">
+      <span className="font-medium text-[#8F8F8F] ">
         {translate("email_tracker.table_headings.recipient")}
       </span>
-      <span className="xs:block mlg:hidden xlg:hidden maxSize:block font-medium text-[#8F8F8F]">
+      <span className="xs:block mlg:hidden xlg:hidden maxSize:block font-medium text-[#8F8F8F] mr-1">
         {translate("email_tracker.table_headings.subject")}
       </span>
       <span className="font-medium text-[#8F8F8F] ">

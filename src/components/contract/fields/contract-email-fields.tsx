@@ -39,7 +39,6 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               name: "email",
               placeholder: "email@domain.com",
               register,
-
             },
           },
           {
@@ -86,11 +85,15 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              options:
+                content?.map((item) => ({
+                  label: item.contentName,
+                  value: item.id,
+                })) || [],
               control,
               onItemChange: onContentSelect,
               value: contentDetails?.id && contentDetails?.id || contractDetails?.offerID?.content?.id || ""
@@ -191,7 +194,6 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
-
       },
     },
 
@@ -208,9 +210,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.confirmationContent?.body || contractDetails?.offerID?.content?.confirmationContent?.body
-
-
+        value:
+          (contentDetails?.id && contentDetails?.confirmationContent?.body) ||
+          contractDetails?.offerID?.content?.confirmationContent?.body,
       },
     },
 
@@ -230,7 +232,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         name: "pdf",
         control,
         attachements,
-        setAttachements
+        setAttachements,
       },
     },
 

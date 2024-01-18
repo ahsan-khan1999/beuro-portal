@@ -188,7 +188,7 @@ const AddNewLeadsData = () => {
   };
 
   return (
-    <>
+    <div className="h-full">
       <div className="xLarge:fixed mb-5 xLarge:-mt-12">
         <p className="mb-5 font-normal text-xl text-[#222B45]">
           {translate("leads.add_new_lead")}
@@ -208,12 +208,12 @@ const AddNewLeadsData = () => {
         </div>
       </div>
 
-      <div className="overflow-y-auto w-full break-all xLarge:mt-[145px] flex">
+      <div className="w-full break-all xLarge:mt-[145px] flex">
         <div className="max-w-[270px] w-full hidden xLarge:block"></div>
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>
       {renderModal()}
-    </>
+    </div>
   );
 };
 

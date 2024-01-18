@@ -165,7 +165,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
         <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="overflow-y-auto w-full break-all flex">
+      <div className="w-full break-all flex">
         <div className="max-w-[320px] w-full hidden xlg:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">

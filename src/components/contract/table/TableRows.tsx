@@ -7,6 +7,7 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { formatDateString } from "@/utils/functions";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -21,6 +22,7 @@ const TableRows = ({
   ) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
@@ -46,7 +48,7 @@ const TableRows = ({
                   item?.emailStatus
                 )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
-                {item?.emailStatus}
+                {translate(item?.emailStatus)}
               </div>
             </span>
             <span className="flex justify-center items-center">

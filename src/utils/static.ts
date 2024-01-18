@@ -591,6 +591,12 @@ export const staticEnums: Record<string, any> = {
     Close: 1,
     Expired: 2,
   },
+
+  mailStatus: {
+    opend: 0,
+    pending: 1,
+    failed: 2,
+  },
   open: 0,
   closed: 1,
   expied: 2,

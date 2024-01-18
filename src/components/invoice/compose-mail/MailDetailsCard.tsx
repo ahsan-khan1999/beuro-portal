@@ -12,11 +12,9 @@ const MailDetailsCard = () => {
   const router = useRouter();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
-  const color = getInvoiceStatusColor(
-    collectiveInvoiceDetails?.invoiceStatus
-  )
+  const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
   return (
-    <ContractCardLayout>
+    <>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
         <div className="flex items-center">
           <Image
@@ -30,7 +28,6 @@ const MailDetailsCard = () => {
           </p>
         </div>
         <div className="flex items-center gap-5">
-
           <Image
             src={PDFIcon}
             alt="PDFIcon"
@@ -62,10 +59,7 @@ const MailDetailsCard = () => {
               </span>
 
               <span className="text-base font-medium text-[#4B4B4B] flex">
-                {
-                  collectiveInvoiceDetails
-                    ?.title
-                }
+                {collectiveInvoiceDetails?.title}
               </span>
             </div>
           </div>
@@ -75,7 +69,9 @@ const MailDetailsCard = () => {
                 {translate("invoice.table_headings.status")}
               </span>
 
-              <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}>
+              <span
+                className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
+              >
                 {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
               </span>
             </div>
@@ -93,7 +89,7 @@ const MailDetailsCard = () => {
           </div>
         </div>
       </div>
-    </ContractCardLayout>
+    </>
   );
 };
 

@@ -22,7 +22,7 @@ const TableRows = ({
   ) => void;
 }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   return (
     <div>
       {dataToAdd?.map((item, index) => {
@@ -66,7 +66,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
                 }}
-                className=" text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm"
+                className="text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm"
               >
                 {item.offerStatus}
               </div>

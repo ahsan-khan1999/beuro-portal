@@ -1,5 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField, GenerateOfferFormField } from "@/types";
+import {
+  FormField,
+  GenerateContractFormField,
+  GenerateOfferFormField,
+} from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const OfferEmailFormField: GenerateOfferFormField = (
@@ -39,7 +43,6 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               name: "email",
               placeholder: "email@domain.com",
               register,
-
             },
           },
           {
@@ -86,11 +89,15 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              options:
+                content?.map((item) => ({
+                  label: item.contentName,
+                  value: item.id,
+                })) || [],
               control,
               onItemChange: onContentSelect,
               value: contentDetails?.id && contentDetails?.id || offerDetails?.content?.id || ""
@@ -191,7 +198,6 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
-
       },
     },
 
@@ -208,8 +214,9 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.offerContent?.body || offerDetails?.content?.offerContent?.body
-
+        value:
+          (contentDetails?.id && contentDetails?.offerContent?.body) ||
+          offerDetails?.content?.offerContent?.body,
       },
     },
 
@@ -229,7 +236,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         name: "attachments",
         control,
         attachements,
-        setAttachements
+        setAttachements,
       },
     },
 
