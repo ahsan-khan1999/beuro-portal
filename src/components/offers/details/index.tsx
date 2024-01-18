@@ -1,11 +1,9 @@
 import { Layout } from "@/layout";
 import React from "react";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import OfferDetailsCard from "./OfferDetailsCard";
 import OffersDetailsData from "./OffersDetailsData";
 import useOfferDetails from "@/hooks/offers/useOfferDetails";
 import ComposeMail from "../compose-mail/ComposeMail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const OfferDetails = () => {
   const {
@@ -28,41 +26,42 @@ const OfferDetails = () => {
 
   return (
     <Layout>
-      {
-        loading ? <LoadingState /> :
-          <>
-            <DetailsCard>
-              <OfferDetailsCard
-                offerDetails={offerDetails}
-                offerDeleteHandler={offerDeleteHandler}
-                handleNotes={handleNotes}
-                handleImageUpload={handleImageUpload}
-                handleStatusUpdate={handleStatusUpdate}
-                handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-                handleSendEmail={handleSendEmail}
-                isSendEmail={isSendEmail}
-                handleSendByPost={handleSendByPost}
-                loading={loading}
-              />
-            </DetailsCard>
+      {/* {loading ? (
+        <LoadingState />
+      ) : ( */}
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[280px]">
+        <OfferDetailsCard
+          offerDetails={offerDetails}
+          offerDeleteHandler={offerDeleteHandler}
+          handleNotes={handleNotes}
+          handleImageUpload={handleImageUpload}
+          handleStatusUpdate={handleStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+          handleSendEmail={handleSendEmail}
+          isSendEmail={isSendEmail}
+          handleSendByPost={handleSendByPost}
+          loading={loading}
+        />
+      </div>
+      <div className="2xl:mt-[375px] w-full 2xl:block">
+        {isSendEmail ? (
+          <div className="mt-5">
+            <ComposeMail
+              backRouteHandler={handleSendEmail}
+              onNextHandle={onNextHandle}
+            />
+          </div>
+        ) : (
+          <OffersDetailsData
+            offerDetails={offerDetails}
+            loading={loading}
+            handleUpdateDiscount={handleUpdateDiscount}
+            currency={systemSettings?.currency}
+          />
+        )}
+      </div>
 
-            <div className="w-full mt-7">
-              {isSendEmail ? (
-                <ComposeMail
-                  backRouteHandler={handleSendEmail}
-                  onNextHandle={onNextHandle}
-                />
-              ) : (
-                <OffersDetailsData
-                  offerDetails={offerDetails}
-                  loading={loading}
-                  handleUpdateDiscount={handleUpdateDiscount}
-                  currency={systemSettings?.currency}
-                />
-              )}
-            </div>
-          </>
-      }
+      {/* )} */}
       {renderModal()}
     </Layout>
   );

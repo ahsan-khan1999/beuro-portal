@@ -16,7 +16,8 @@ export interface contractTableTypes {
   additionalDetails: string;
   attachement?: string;
   emailStatus: string;
-  signedContracts?: signedContracts[]
+  signedContracts?: signedContracts[];
+  isNoteCreated:boolean
 }
 
 export interface signedContracts {

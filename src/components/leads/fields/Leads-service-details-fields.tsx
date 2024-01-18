@@ -161,17 +161,20 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Via Email",
-                  label: "Via Email",
+                  label: `${translate("common.via_email")}`,
                 },
                 {
                   value: "Via What'sapp",
-                  label: "Via What'sapp",
+                  label: `${translate("common.via_whatsapp")}`,
                 },
                 {
                   value: "Via Phone Call",
-                  label: "Via Phone Call",
+                  label: `${translate("common.via_phone")}`,
                 },
-              
+                {
+                  value: "Via Post",
+                  label: `${translate("common.via_post")}`,
+                },
               ],
               control,
             },
@@ -225,13 +228,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({ label: item, value: item })),
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({
+                label: item,
+                value: item,
+              })),
               control,
             },
           },

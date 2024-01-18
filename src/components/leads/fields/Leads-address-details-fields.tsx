@@ -24,6 +24,36 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   const formField: FormField[] = [];
 
   for (let i = 1; i <= count; i++) {
+    const isEditable = addressType && addressType[i];
+    const inputField: FormField = isEditable
+      ? {
+          //editable address
+          containerClass: "",
+          field: {
+            type: Field.input,
+            className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            inputType: "text",
+            id: `address.${i}.label`,
+            name: `address.${i}.label`,
+            register,
+            // value: `Address ${i + 1}`,
+          },
+        }
+      : {
+          //non-editable address
+          containerClass: "",
+          field: {
+            type: Field.input,
+            inputType: "text",
+            id: `address.${i}.label`,
+            name: `address.${i}.label`,
+            register,
+            // value: `Address ${i + 1}`,
+            disabled: true,
+            className:
+              "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+          },
+        };
     formField.push(
       {
         containerClass: "",
@@ -32,35 +62,37 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
           className: "flex  space-x-2 ",
           id: `address-labels-${i}`,
           children: [
-            (!(addressType && !addressType[i - 1]) && {
-              containerClass: "mt-2",
+            // (!(addressType && !addressType[i - 1]) && {
+            //   containerClass: "mt-2",
 
-              field: {
-                type: Field.input,
-                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
-                inputType: "text",
-                id: `label-${i}`,
-                name: `label-${i}`,
-                placeholder: `Zweibrückenstraße, ${i}`,
-                register,
-                value: `Address ${i}`,
-              },
-            }) || {
-              containerClass: "",
+            //   field: {
+            //     type: Field.input,
+            //     className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            //     inputType: "text",
+            //     id: `label-${i}`,
+            //     name: `label-${i}`,
+            //     placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${i}`,
+            //   },
+            // }) || {
+            //   containerClass: "",
 
-              field: {
-                type: Field.input,
-                inputType: "text",
-                id: `label-${i}`,
-                name: `label-${i}`,
-                placeholder: `Zweibrückenstraße, ${i}`,
-                register,
-                value: `Address ${i}`,
-                disabled: true,
-                className:
-                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
-              },
-            },
+            //   field: {
+            //     type: Field.input,
+            //     inputType: "text",
+            //     id: `label-${i}`,
+            //     name: `label-${i}`,
+            //     placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${i}`,
+            //     disabled: true,
+            //     className:
+            //       "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+            //   },
+            // },
+            inputField,
+
             {
               containerClass: "",
               field: {

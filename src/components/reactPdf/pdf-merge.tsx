@@ -25,9 +25,9 @@ export const Merger = ({
       <embed
         src={mergedPdfFileUrl}
         width={"100%"}
-        height={"700px"}
         title="PDF"
         id="downloadButton"
+        style={{height:"100vh"}}
       />
     )
   );

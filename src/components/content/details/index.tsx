@@ -9,11 +9,15 @@ const ContentDetails = () => {
     useContentDetail();
   return (
     <Layout>
-      <ContentCard
-        contentDetails={contentDetails}
-        contentDeleteHandler={contentDeleteHandler}
-      />
-      <ContentDetailsData />
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 maxSize:fixed maxSize:-mt-[190px] contentCalWidth z-10">
+        <ContentCard
+          contentDetails={contentDetails}
+          contentDeleteHandler={contentDeleteHandler}
+        />
+      </div>
+      <div className="maxSize:mt-[290px] w-full maxSize:block">
+        <ContentDetailsData />
+      </div>
       {renderModal()}
     </Layout>
   );

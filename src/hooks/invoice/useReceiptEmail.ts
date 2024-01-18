@@ -36,6 +36,8 @@ export const useReceiptEmail = (
   const { loading, error, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
@@ -122,7 +124,9 @@ export const useReceiptEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
+    isMoreEmail,
+    setIsMoreEmail
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

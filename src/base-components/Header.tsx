@@ -22,17 +22,18 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const handleLogout = () => {
-    // dispatch(logoutUser());
-    // logout();
-    router.push({ pathname: "/pdf", query: { offerID: "65a6acac0b4f1c87686342b1", action: "Accept" } })
+  const handleLogout = async() => {
+    await dispatch(logoutUser());
+    logout();
+    router.push("/")
+    // router.push({ pathname: "/pdf", query: { offerID: "65a9290dae93a8c5b8e0612b", action: "Accept" } })
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
     }
   }, [user]);
-
+ 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (

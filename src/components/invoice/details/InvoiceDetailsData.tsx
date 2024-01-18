@@ -10,6 +10,7 @@ import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
 import { useTranslation } from "next-i18next";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -146,13 +147,14 @@ const InvoiceDetailsData = ({
               </span>
             </div>
             <div
-              className="flex gap-2 items-center"
+              className="flex gap-2 items-center cursor-pointer"
               onClick={(e) => handleNotes(invoiceDetails?.id, e)}
             >
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.notes")}:
               </span>
-              <Image src={editIcon} alt="editIcon" className="cursor-pointer" />
+              <WriteIcon pathClass={invoiceDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"} />
+
             </div>
           </div>
         </div>
@@ -163,7 +165,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total}
+              {invoiceDetails?.contractID?.offerID?.total?.toFixed(2)}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
@@ -171,7 +173,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.paid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.paidAmount} {currency}
+              {Number(invoiceDetails?.paidAmount)?.toFixed(2)} {currency}
             </span>
           </div>
           <div className="flex gap-x-[10px] pt-3">
@@ -179,8 +181,8 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.unpaid_amount")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total -
-                Number(invoiceDetails?.paidAmount)}{" "}
+              {(invoiceDetails?.contractID?.offerID?.total -
+                Number(invoiceDetails?.paidAmount))?.toFixed(2)}{" "}
               {currency}
             </span>
           </div>

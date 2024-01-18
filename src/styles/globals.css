@@ -152,14 +152,64 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+.selectScrollBar::-webkit-scrollbar {
+  width: 15px;
+}
 /* Custom CSS to style the scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
 }
 
+.scrollhost::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollhost ::-moz-scrollbar {
+  display: none;
+}
+
+.scrollhost {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-color: transparent transparent; /*just hides the scrollbar for firefox */
+}
+
+.calWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.contentCalWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1280px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.offerCardCalWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1536px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 .dashboard_scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 8px;
+}
+.select_scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb,
@@ -209,7 +259,7 @@ input[type="number"] {
 
 /* multi-select scroll bar */
 .multiSelectScrol::-webkit-scrollbar {
-  width: 0;
+  width: 4px;
   height: 0;
 }
 

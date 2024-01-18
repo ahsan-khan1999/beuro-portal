@@ -13,7 +13,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { SignPdf } from "@/components/pdf/sign-pdf";
 import { EmailTemplate } from "@/types/settings";
-import { YogaPdfContainer } from "@/components/pdf/yoga-pdf-container";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
 import { Container } from "@/components/pdf/container";

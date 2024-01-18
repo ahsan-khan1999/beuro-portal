@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import toggleIcon from "@/assets/svgs/edit_info.svg";
-import moreIcon from "@/assets/svgs/entity_more_info.svg";
 import { SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
 import {
@@ -13,6 +12,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -28,6 +28,7 @@ const TableRows = ({
   handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
@@ -70,7 +71,7 @@ const TableRows = ({
                 }}
                 className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px]"
               >
-                <span>{item.emailStatus}</span>
+                {translate(item?.emailStatus)}
               </div>
             </span>
 
@@ -87,17 +88,17 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={"#fff"}
+                dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
               />
             </span>
             <span className="py-4 flex items-center mx-1">
               <DropDown
-                items={Object.keys(staticEnums["InvoiceStatus"])?.slice(0,-1)?.map(
-                  (item) => ({ item: item })
-                )}
+                items={Object.keys(staticEnums["InvoiceStatus"])
+                  ?.slice(0, -1)
+                  ?.map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
                 onItemSelected={(status) =>
                   handleInvoiceStatusUpdate(item.id, status, "invoice")
@@ -108,10 +109,10 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-1 py-[3px] flex items-center`}
+                }  min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName="#fff"
                 key={item.id}
+                dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
               />
             </span>
@@ -131,7 +132,18 @@ const TableRows = ({
               className="py-4 flex justify-center items-center"
               onClick={() => handleInvoicePdfPreview(item?.id)}
             >
-              <Image src={moreIcon} alt="moreIcon" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="8"
+                height="15"
+                viewBox="0 0 8 15"
+                fill="#0000FF"
+              >
+                <path
+                  d="M0.461667 14.0074C0.291259 13.8244 0.206055 13.6078 0.206055 13.3575C0.206055 13.1072 0.291259 12.8908 0.461667 12.7084L5.45463 7.34757L0.444626 1.96849C0.285579 1.79773 0.206055 1.58427 0.206055 1.32813C0.206055 1.07198 0.291259 0.852424 0.461667 0.669462C0.632076 0.4865 0.833839 0.39502 1.06696 0.39502C1.30008 0.39502 1.50161 0.4865 1.67157 0.669462L7.39729 6.83528C7.46545 6.90846 7.51385 6.98775 7.54247 7.07313C7.5711 7.15851 7.58519 7.24999 7.58474 7.34757C7.58474 7.44515 7.57042 7.53663 7.54179 7.62201C7.51316 7.7074 7.465 7.78668 7.39729 7.85986L1.65453 14.0257C1.49548 14.1964 1.29939 14.2818 1.06628 14.2818C0.833157 14.2818 0.631621 14.1903 0.461667 14.0074Z"
+                  fill="#0000FF"
+                />
+              </svg>
             </span>
           </div>
         );

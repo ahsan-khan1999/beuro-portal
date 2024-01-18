@@ -42,7 +42,7 @@ export interface OffersTableRowTypes {
   additionalDetails: string;
   createdBy: User;
   discountType: 0 | 1;
-  emailStatus: "Draft" | "Sent" | "Failed";
+  emailStatus: "Pending" | "Sent" | "Failed";
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
@@ -61,6 +61,7 @@ export interface OffersTableRowTypes {
   discountDescription: string;
   signature?: string;
   attachement?: string;
+  isNoteCreated:boolean
 }
 
 export interface PublicOffersTableRowTypes {
