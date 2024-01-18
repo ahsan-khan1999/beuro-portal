@@ -149,7 +149,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
-        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5 xlg:mb-0">
+        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -168,7 +168,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
       <div className="overflow-y-auto w-full break-all flex">
         <div className="max-w-[320px] w-full hidden xlg:block"></div>
         {loading ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center w-full">
             <LoadingState />
           </div>
         ) : (

@@ -7,7 +7,11 @@ import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
-import { formatDateTimeToDate, getContractStatusColor } from "@/utils/utility";
+import {
+  formatDateTimeToDate,
+  getContractStatusColor,
+  getPaymentTypeColor,
+} from "@/utils/utility";
 import { ContractDetailCardProps } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -185,9 +189,16 @@ const ContractDetailsCard = ({
                 }))}
                 selectedItem={contractDetails?.paymentType}
                 onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownClassName={`border border-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownTextClassName={`text-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}] text-base font-medium me-1`}
                 dropDownItemsContainerClassName="w-full"
+                dropDownIconClassName={`text-[${getPaymentTypeColor(
+                  contractDetails?.paymentType
+                )}]`}
               />
             </span>
           </div>
@@ -205,12 +216,15 @@ const ContractDetailsCard = ({
                   )}
                   selectedItem={contractDetails?.contractStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-${getContractStatusColor(
+                  dropDownClassName={`border border-[${getContractStatusColor(
                     contractDetails?.contractStatus
-                  )} rounded-lg px-4 py-[3px] flex items-center`}
-                  dropDownTextClassName={`text-${getContractStatusColor(
+                  )}] rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getContractStatusColor(
                     contractDetails?.contractStatus
-                  )} text-base font-medium me-1`}
+                  )}] text-base font-medium me-1`}
+                  dropDownIconClassName={`text-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}]`}
                 />
               )) || (
                 <span

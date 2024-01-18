@@ -19,7 +19,7 @@ import { OfferDetailCardProps } from "@/types/offers";
 import { Button } from "@/base-components/ui/button/button";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { getOfferStatusColor } from "@/utils/utility";
+import { getOfferStatusColor, getPaymentTypeColor } from "@/utils/utility";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -155,7 +155,10 @@ const OfferDetailsCard = ({
             <div className="flex gap-1">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item) => `${item?.startDate} ${item?.endDate && `to ${item?.endDate} ,`}  `
+                  (item) =>
+                    `${item?.startDate} ${
+                      item?.endDate && `to ${item?.endDate} ,`
+                    }  `
                 )}
               </span>
             </div>
@@ -171,8 +174,8 @@ const OfferDetailsCard = ({
               {offerDetails?.emailStatus}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base  ">
+          <div className="flex items-center gap-[11px]">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.payment_method")}:
             </span>
             <span>
@@ -182,9 +185,16 @@ const OfferDetailsCard = ({
                 }))}
                 selectedItem={offerDetails?.paymentType}
                 onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName="border border-[#45C769] w-fit rounded-lg px-4 py-[3px] flex items-center"
-                dropDownTextClassName="text-[#45C769] text-base font-medium me-1"
+                dropDownClassName={`border border-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                dropDownTextClassName={`text-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}] text-base font-medium me-1`}
                 dropDownItemsContainerClassName="w-full"
+                dropDownIconClassName={`text-[${getPaymentTypeColor(
+                  offerDetails?.paymentType
+                )}]`}
               />
             </span>
           </div>
@@ -202,12 +212,12 @@ const OfferDetailsCard = ({
                   )}
                   selectedItem={offerDetails?.offerStatus}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border !border-${getOfferStatusColor(
+                  dropDownClassName={`border border-[${getOfferStatusColor(
                     offerDetails?.offerStatus
-                  )} w-fit rounded-lg px-4 py-[3px] flex items-center`}
-                  dropDownTextClassName={`!text-${getOfferStatusColor(
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
-                  )} text-base font-medium me-1`}
+                  )}] text-base font-medium me-1`}
                 />
               )) || (
                 <span
