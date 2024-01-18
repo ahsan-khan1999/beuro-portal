@@ -18,9 +18,9 @@ import {
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect, useMemo, useState } from "react";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useAddLeadAddressDetails = (
-  onHandleBack: (currentComponent: ComponentsType) => void,
   onHandleNext: (currentComponent: ComponentsType) => void
 ) => {
   const { t: translate } = useTranslation();
@@ -33,14 +33,8 @@ export const useAddLeadAddressDetails = (
   const [addressCount, setAddressCount] = useState(
     leadDetails?.addressID?.address?.length || 1
   );
-  const schema = generateLeadsAddressEditDetailsValidation(
-    translate,
-    addressCount
-  );
+  const schema = generateLeadsAddressEditDetailsValidation(translate);
 
-  const handleRemoveNewAddress = () => {
-    setAddressCount(addressCount - 1);
-  };
   const {
     register,
     handleSubmit,
@@ -54,121 +48,64 @@ export const useAddLeadAddressDetails = (
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const handleAddNewAddress = () => {
-    setAddressCount(addressCount + 1);
-    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`);
-  };
-  // useMemo(() => {
-  //   if (leadDetails.id) {
-  //     let label = getValueForKeyInArray(
-  //       "label",
-  //       leadDetails?.addressID?.address
-  //     );
-  //     if (!label) {
-  //       label = `Address ${addressCount}`;
-  //     }
-  //     if (leadDetails?.addressID?.address)
-  //       reset(
-  //         transformAddressFormValues(
-  //           leadDetails?.addressID?.address
-  //             ? leadDetails?.addressID?.address
-  //             : [
-  //                 {
-  //                   ...leadDetails?.customerDetail?.address,
-  //                   label: label,
-  //                 },
-  //               ]
-  //         )
-  //       );
-  //   } else {
-  //     reset(
-  //       transformAddressFormValues([
-  //         {
-  //           label: "",
-  //           country: "Switerland",
-  //           postalCode: "",
-  //           streetNumber: "dd",
-  //         },
-  //       ])
-  //     );
-  //   }
-  // }, [leadDetails.id]);
-
-  // useEffect(() => {
-  //   if (leadDetails.id) {
-  //     let label = getValueForKeyInArray(
-  //       "label",
-  //       leadDetails?.addressID?.address
-  //     );
-  //     if (!label) {
-  //       label = `Address ${addressCount}`;
-  //     }
-  //     if (leadDetails?.addressID?.address)
-  //       reset(
-  //         transformAddressFormValues(
-  //           leadDetails?.addressID?.address
-  //             ? leadDetails?.addressID?.address
-  //             : [
-  //                 {
-  //                   ...leadDetails?.customerDetail?.address,
-  //                   'streetNumber-1': label,
-  //                 },
-  //               ]
-  //         )
-  //       );
-  //   } else {
-  //     reset(
-  //       transformAddressFormValues([
-  //         {
-  //           label: "",
-  //           country: "Switerland",
-  //           postalCode: "",
-  //           streetNumber: "dd",
-  //         },
-  //       ])
-  //     );
-  //   }
-  // });
-  
   useEffect(() => {
-    reset(
-      transformAddressFormValues(
-        leadDetails?.addressID?.address
-          ? leadDetails?.addressID?.address
-          : [
-              {
-                ...leadDetails?.customerDetail?.address,
-                'label-1': 'label',
-              },
-            ]
-      )
-    );
-  })
+    if (leadDetails?.id) {
+      console.log(leadDetails);
+      reset({
+        address: leadDetails?.addressID
+          ? leadDetails?.addressID?.address?.map((item, index) => ({
+              ...item,
+              label: item?.label ? item?.label : `Address ${++index}`,
+            }))
+          : [{ label: `Address ${addressCount}` }],
+      });
+    }
+  }, [leadDetails?.id]);
+
+  const {
+    append,
+    fields: addressFields,
+    remove,
+  } = useFieldArray({ control, name: "address" });
+
+  useMemo(() => {
+    if (addressFields.length === 0) return;
+    setAddressCount(addressFields.length);
+  }, [addressFields]);
 
   const handleFieldTypeChange = (index: number) => {
-    let address = [...addressType];
-    address[index - 1] = !address[index - 1];
+    const updatedAddressType = [...addressType];
+    updatedAddressType[index] = !updatedAddressType[index];
+    setAddressType(updatedAddressType);
+  };
 
-    setAddressType(address);
+  const handleBack = () => {
+    onHandleNext(ComponentsType.customerAdd);
   };
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
     control,
-    onHandleBack,
+    handleBack,
     addressCount,
-    handleAddNewAddress,
-    handleRemoveNewAddress,
-    [],
+    append,
+    remove,
+    addressFields,
     handleFieldTypeChange,
-    addressType
+    addressType,
+    setValue
   );
 
-  console.log(fields);
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // const apiData = {
+    //   address: senitizeDataForm(data).slice(0, addressCount),
+    //   step: 2,
+    //   id: leadDetails?.id,
+    //   stage: ComponentsType.serviceAdd,
+    // };
+
     const apiData = {
-      address: senitizeDataForm(data).slice(0, addressCount),
+      ...data,
       step: 2,
       id: leadDetails?.id,
       stage: ComponentsType.serviceAdd,

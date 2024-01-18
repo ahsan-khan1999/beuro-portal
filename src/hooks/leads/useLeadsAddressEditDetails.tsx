@@ -1,15 +1,16 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
+import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 
 export const useLeadsAddressEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -25,7 +26,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     onClick(1, ComponentsType.address);
   };
 
-  const schema = generateLeadsAddressEditDetailsValidation(translate, leadDetails?.addressID?.address?.length);
+  const schema = generateLeadsAddressEditDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -37,41 +38,67 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useMemo(() => {
-    if (leadDetails.id) {
-      reset(transformAddressFormValues(leadDetails?.addressID?.address));
+  useEffect(() => {
+    if (leadDetails?.id) {
+      console.log(leadDetails);
+      reset({
+        address: leadDetails?.addressID
+          ? leadDetails?.addressID?.address?.map((item, index) => ({
+              ...item,
+              label: item?.label ? item?.label : `Address ${++index}`,
+            }))
+          : [{ label: `Address ${addressCount}` }],
+      });
     }
-  }, [leadDetails.id]);
+  }, [leadDetails?.id]);
+
+  const {
+    append,
+    fields: addressFields,
+    remove,
+  } = useFieldArray({ control, name: "address" });
+
+  useMemo(() => {
+    if (addressFields.length === 0) return;
+    setAddressCount(addressFields.length);
+  }, [addressFields]);
+
   const handleFieldTypeChange = (index: number) => {
-    let address = [...addressType];
-    address[index - 1] = !address[index - 1]
-
-    setAddressType(address)
-  }
-  const handleRemoveNewAddress = () => {
-    setAddressCount(addressCount - 1);
-
+    const updatedAddressType = [...addressType];
+    updatedAddressType[index] = !updatedAddressType[index];
+    setAddressType(updatedAddressType);
   };
-  const handleAddNewAddress = () => {
-    setAddressCount(addressCount + 1);
-    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`)
-  };
-  const fields = LeadsAddressDetailsFormField(
+  
+  // const fields = LeadsAddressDetailsFormField(
+  //   register,
+  //   loading,
+  //   control,
+  //   handleBack,
+  //   leadDetails?.addressID?.address?.length || 1,
+  //   append,
+  //   remove,
+  //   [],
+  //   handleFieldTypeChange,
+  //   addressType
+  // );
+
+  const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    leadDetails?.addressID?.address?.length || 1,
-    handleAddNewAddress,
-    handleRemoveNewAddress,
-    [],
+    addressCount,
+    append,
+    remove,
+    addressFields,
     handleFieldTypeChange,
-    addressType
+    addressType,
+    setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
-      address: senitizeDataForm(data),
+      ...data,
       step: 2,
       id: leadDetails?.id,
       stage: ComponentsType.serviceEdit,

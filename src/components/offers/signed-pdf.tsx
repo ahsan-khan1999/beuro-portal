@@ -149,13 +149,11 @@ const OfferSignedPdf = ({
         />
       </Page>
 
-      <Page  style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
-      <View style={{marginBottom: 10}} fixed>
-
-        <Header {...headerDetails} />
+      <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
+        <View style={{ marginBottom: 10 }} fixed>
+          <Header {...headerDetails} />
         </View>
 
-     
         <ContactAddress {...{ ...contactAddress }} />
         <AdditionalDetails
           description={aggrementDetails}
