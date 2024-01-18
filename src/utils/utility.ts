@@ -751,6 +751,16 @@ export function dataURLtoBlob(dataURL: any) {
 //   window.scrollTo(0,offsetPosition);
 // };
 
+export const getValueForKeyInArray = (key: string, array?: any) => {
+  if (array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].hasOwnProperty(key)) {
+        return array[i][key];
+      }
+    }
+  } else return null;
+};
+
 export const smoothScrollToSection = (target: string) => {
   const element = document.getElementById(target);
   const headerOffset = 100;
