@@ -31,12 +31,12 @@ const AddNewLeadsData = () => {
   const { images } = useAppSelector((state) => state.image);
 
   const [tabType, setTabType] = useState<ComponentsType>(
-    (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    (leadDetails?.id && leadDetails?.stage) || ComponentsType.serviceAdd
   );
 
   useEffect(() => {
     setTabType(
-      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.serviceAdd
     );
   }, [leadDetails?.id]);
 
