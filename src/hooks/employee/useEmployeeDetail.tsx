@@ -24,6 +24,7 @@ import { updateQuery } from "@/utils/update-query";
 import { CustomerPromiseActionType } from "@/types/customer";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 const useEmployeeDetail = (stage: boolean) => {
   const dispatch = useDispatch();
@@ -140,6 +141,14 @@ const useEmployeeDetail = (stage: boolean) => {
     [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
       <PasswordChangeSuccessfully onClose={onClose} />
     ),
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.offer_created")}
+        modelSubHeading={translate("common.modals.update_success")}
+        routeHandler={handleUpdateSuccess}
+      />
+    ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -164,7 +173,7 @@ const useEmployeeDetail = (stage: boolean) => {
       res = await dispatch(
         updateEmployee({ data, router, setError, translate })
       );
-      if (res.payload) handleUpdateSuccess();
+      if (res.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };
 

@@ -172,6 +172,9 @@ export const generateOfferAddressEditDetailsValidation = (
             .string()
             .required(translate("validationMessages.required")),
           [OfferAddressEditDetails.description]: yup.string().notRequired(),
+          [OfferAddressEditDetails.label]: yup.string().required(translate("validationMessages.required")),
+          [OfferAddressEditDetails.type]: yup.string().notRequired(),
+
         })
         .required(translate("validationMessages.required"))
     )

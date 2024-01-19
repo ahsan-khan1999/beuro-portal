@@ -24,7 +24,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
           className: "grid grid-cols-1 gap-4",
           children: [
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.confirmation_title"),
                 htmlFor: "confirmationContent.title",

@@ -19,7 +19,6 @@ export const ProfileUpload = ({
   iconClasses?: string;
   disabled?: boolean;
 }) => {
-  console.log(field?.value);
   
   // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();

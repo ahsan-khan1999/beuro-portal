@@ -93,7 +93,10 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.description",
               name: "offerContent.description",
               control,
-              value: contentDetails?.id && contentDetails?.offerContent?.description || ""
+              value:
+                (contentDetails?.id &&
+                  contentDetails?.offerContent?.description) ||
+                "",
             },
           },
           {
@@ -108,11 +111,10 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "offerContent.body",
               name: "offerContent.body",
-
               control,
-
-              value: contentDetails?.id && contentDetails?.offerContent?.body || ""
-
+              value:
+                (contentDetails?.id && contentDetails?.offerContent?.body) ||
+                "",
             },
           },
 
@@ -128,8 +130,8 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.attachments",
               name: "offerContent.attachments",
               isOpenedFile: false,
-              text: "Drop or attach your file here",
-              fileSupported: "Files supported: PDF, JPG, PNG, GIF",
+              text: `${translate("common.drop_or_attach")}`,
+              fileSupported: `${translate("common.file_support")}`,
               control,
               attachements: attachements,
               setAttachements: setAttachements,
@@ -148,7 +150,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
         text: `${translate("common.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
         loading,
       },
     },
@@ -179,22 +181,21 @@ const generateAddressChildren = (
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
         id: `offerContent.address.${i}.value`,
         name: `offerContent.address.${i}.value`,
-        remove: i > 0 && "Remove",
+        remove: i > 0 && `${translate("common.remove")}`,
         onRemove: () => i > 0 && remove && remove(i),
       },
     });
   }
   addressformFields.push({
-    containerClass: "mb-0 mt-3 maxSize:mt-[28px]",
+    containerClass: "mb-0 mt-8",
     field: {
       type: Field.button,
       id: "button",
-      text: "",
+      text: `${translate("common.add_new_address")}`,
       inputType: "button",
       className:
-        "rounded-lg border-[1px] border-[#BFBFBF] bg-[#fff] m-1 p-4 w-[40px] text-white",
+        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
       onClick: () => append && append({ address: "" }),
-      icon: icon,
     },
   });
   return addressformFields;

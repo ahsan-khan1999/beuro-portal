@@ -20,7 +20,7 @@ const AddLeadAddressDetails = ({
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
         id="Address Details"
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -33,8 +33,6 @@ const AddLeadAddressDetails = ({
           {translate("leads.address_details.cancel_button")}
         </button>
       </div>
-
-      <hr className="opacity-20 mb-5" />
 
       <Form
         formFields={fields || []}

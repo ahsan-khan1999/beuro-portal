@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
 import { ComponentsType } from "../add/AddNewLeadsData";
 import { useTranslation } from "next-i18next";
+import { staticEnums } from "@/utils/static";
 
 export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   register,
@@ -74,16 +75,20 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "contactAvailability",
               value:
-                (leadDetails?.id && leadDetails?.contactAvailability) || "",
+                (leadDetails?.id && leadDetails?.contactAvailability) || "Morning(9am to 12am)",
               name: "contactAvailability",
               options: [
                 {
                   value: "Morning(9am to 12am)",
-                  label: `${translate("common.morning")}(9am to 12am)`,
+                  label: `${translate("common.morning")}(9am to 12pm)`,
                 },
                 {
-                  value: "Morning(1pm to 10pm)",
-                  label: `${translate("common.morning")}(9am to 12am)`,
+                  value: "Afternoon(1pm to 5pm)",
+                  label: `${translate("common.afternoon")}(1am to 5pm)`,
+                },
+                {
+                  value: "Evening(6pm to 8pm)",
+                  label: `${translate("common.evening")}(6pm to 8pm)`,
                 },
               ],
               control,
@@ -158,6 +163,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via What'sapp",
                   label: `${translate("common.via_whatsapp")}`,
                 },
+                {
+                  value: "Via Facebook",
+                  label: `${translate("common.via_fb")}`,
+                },
+                {
+                  value: "Via Instagram",
+                  label: `${translate("common.via_insta")}`,
+                },
               ],
               control,
             },
@@ -174,9 +187,15 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || "",
+              value: (leadDetails?.id && leadDetails?.budget) || `Less then 5000 ${systemSettings?.currency||""}`,
 
               options: [
+                {
+                  value: `Less then 500 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 500${
+                    systemSettings?.currency
+                  }`,
+                },
                 {
                   value: `Less then 1000 ${systemSettings?.currency}`,
                   label: `${translate("common.less_then")} 1000${
@@ -184,10 +203,21 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   }`,
                 },
                 {
-                  value: `Less then 500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 500${
+                  value: `Less then 1500 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 1500${
                     systemSettings?.currency
                   }`,
+                },
+                {
+                  value: `Less then 2000 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 2000${
+                    systemSettings?.currency
+                  }`,
+                },
+                {
+                  value: `Less then 5000 ${systemSettings?.currency}`,
+                  label: `${translate("common.less_then")} 5000${systemSettings?.currency
+                    }`,
                 },
               ],
               control,
@@ -207,13 +237,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: [
-                {
-                  value: "Whats'app",
-                  label: `${translate("common.whatsapp")}`,
-                },
-                { value: "Facebook", label: `${translate("facebook")}` },
-              ],
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({
+                label: item,
+                value: item,
+              })),
+
               control,
             },
           },
@@ -228,10 +256,10 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              value: leadDetails?.id && leadDetails?.otherServices,
               options:
                 service?.map((item) => ({
                   label: item.serviceName,

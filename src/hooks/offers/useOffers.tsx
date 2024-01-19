@@ -42,6 +42,8 @@ const useOffers = () => {
       $lte: FiltersDefaultValues.$lte,
     },
     status: FiltersDefaultValues.None,
+    leadSource: FiltersDefaultValues.None
+
   });
   const totalItems = totalCount;
 

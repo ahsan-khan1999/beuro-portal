@@ -99,8 +99,7 @@ export const checkPaidOrUnpaid = (text) => {
     return "green";
   } else if (text == "partial") {
     return "#970165";
-  }
-  else {
+  } else {
     return "red";
   }
 };
@@ -122,43 +121,37 @@ export const unautherizeUser = () => {
   logout();
 };
 
-
 export const filterComponentData = (componetcms, slugname, lang) => {
-
-  const Component = componetcms?.filter(
-    (item) => item?.slug === slugname
-  );
+  const Component = componetcms?.filter((item) => item?.slug === slugname);
   if (Component?.length < 1) {
-    return []
+    return [];
   }
-  let data = []
+  let data = [];
   Object.keys(Component[0]?.content)?.map((item) => {
     if (item?.includes(lang)) {
-      data = Component[0]?.content[item]
-
+      data = Component[0]?.content[item];
     }
-  })
-  return data
-
-}
+  });
+  return data;
+};
 
 export const isValidTimeOrDateFormat = (str) => {
   const timeRegex = /^([0-1]?[0-9]|2[0-3]):\s?[0-5][0-9]:\s?[0-5][0-9]$/;
   const dateRegex = /^\d{1,2}\.\s[a-zA-Z]+\s\d{4}$/;
 
   if (timeRegex.test(str)) {
-      return true;
+    return true;
   } else if (dateRegex.test(str)) {
-      return false;
+    return false;
   }
   return false;
-}
+};
 
 export function formatDateString(dateString) {
   const date = new Date(dateString);
   const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(date.getUTCDate()).padStart(2, '0');
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
   // const hours = String(date.getUTCHours()).padStart(2, '0');
   // const minutes = String(date.getUTCMinutes()).padStart(2, '0');
   // const seconds = String(date.getUTCSeconds()).padStart(2, '0');
@@ -168,20 +161,31 @@ export function formatDateString(dateString) {
 
 export function formatDateToCustomString(dateString, ShowUTC = true) {
   const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-      'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const dateObj = new Date(dateString);
   const day = dateObj.getUTCDate();
   const month = months[dateObj.getUTCMonth()];
   const year = dateObj.getUTCFullYear();
-  const hours = String(dateObj.getUTCHours()).padStart(2, '0');
-  const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
+  const hours = String(dateObj.getUTCHours()).padStart(2, "0");
+  const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
 
-  return `${day} ${month} ${year}, ${hours}:${minutes} ${ShowUTC && 'UTC' || ''}`;
+  return `${day} ${month} ${year}, ${hours}:${minutes} ${
+    (ShowUTC && "UTC") || ""
+  }`;
 }
-
 
 export const generateUniqueId = () => {
   return new Date().getTime().toString();
@@ -196,10 +200,40 @@ export function isJSON(str) {
 }
 
 export const insertBreaks = (str, n) => {
-  let result = '';
+  let result = "";
   while (str?.length > 0) {
-    result += str.substring(0, n) + '\n';
-    str = str.substring(n);
+    result += str.substring(0, n);
+    break;
+    // str = str.substring(n);
   }
   return result;
+};
+
+export const smoothScrollTo = (elementId, duration = 1000) => {
+  const targetElement = document.getElementById(elementId);
+  if (!targetElement) return;
+
+  const targetPosition = targetElement.getBoundingClientRect().top;
+  const startPosition = window.scrollY;
+  const distance = targetPosition - startPosition;
+  let startTime = null;
+
+  const animation = (currentTime) => {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+
+    window.scrollTo(0, run);
+
+    if (timeElapsed < duration) requestAnimationFrame(animation);
+  }
+
+  const easeInOutCubic = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t * t + b;
+    t -= 2;
+    return (c / 2) * (t * t * t + 2) + b;
+  }
+
+  requestAnimationFrame(animation);
 }

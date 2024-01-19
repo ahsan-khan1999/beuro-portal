@@ -24,19 +24,17 @@ const TableRow = ({
               })
             }
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(200px,_100%)_minmax(340px,_100%)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px),minmax(180px,_100%)_minmax(200px,_200px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] items-center bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(200px,_100%)_minmax(340px,_100%)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px),minmax(180px,_100%)_minmax(200px,_200px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] mt-2 rounded-md"
           >
-            <span className="py-4 flex items-center">{item?.refID}</span>
-            <span className="py-4 flex items-center">
-              {item?.createdBy?.fullName.slice(0, 12)}
-            </span>
-            <span className="break-all py-4 flex items-center mlg:hidden xlg:flex">
+            <span className="py-4 truncate">{item?.refID}</span>
+            <span className="py-4 truncate">{item?.createdBy?.fullName}</span>
+            <span className="truncate py-4 block mlg:hidden xlg:block">
               {item?.createdBy?.email}
             </span>
-            <span className="py-4 flex items-center">
-              {item?.createdBy?.company?.mobileNumber.slice(0, 14)}
+            <span className="py-4 truncate">
+              {item?.createdBy?.company?.mobileNumber}
             </span>
-            <span className="py-4 flex items-center">
+            <span className="py-4 truncate">
               {formatDateTimeToDate(item?.createdAt)}
             </span>
             <span className="py-4 flex justify-center items-center">
@@ -48,7 +46,7 @@ const TableRow = ({
                 {item?.status}
               </div>
             </span>
-            <span className="py-4  flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <Image src={moreInfoIcon} alt="moreInfoIcon" />
             </span>
           </div>

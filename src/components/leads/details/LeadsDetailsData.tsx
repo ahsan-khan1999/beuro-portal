@@ -149,7 +149,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-4 xl:gap-x-6 mt-6">
       <div className="col-span-1 flex flex-row xl:flex-col gap-4 w-full">
-        <div className="flex flex-col gap-y-[14px]">
+        <div className="flex flex-col gap-y-[14px] w-full">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -165,7 +165,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
         <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
+      <div className="col-span-3 flex flex-col gap-y-5 w-full h-screen xl:mt-0 mt-5 overflow-scroll">
         {loading ? (
           <LoadingState />
         ) : (

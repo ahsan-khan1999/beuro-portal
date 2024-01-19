@@ -13,7 +13,7 @@ const AditionalEditDetails = ({
   handleBack: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
+  const defaultClassName = "pt-5";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useOfferEditAdditionalDetails({ handleNext, handleBack });
   return (
@@ -29,8 +29,6 @@ const AditionalEditDetails = ({
           {translate("offers.additional_details.cancel_button")}
         </button>
       </div>
-
-      <hr className="opacity-20 mb-5" />
 
       <Form
         formFields={fields}

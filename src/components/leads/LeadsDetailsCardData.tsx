@@ -24,7 +24,7 @@ const LeadsDetailsCardData = ({
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   return (
-    <div className="bg-white rounded-md pt-5 pb-10">
+    <div className="bg-white rounded-md">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Image

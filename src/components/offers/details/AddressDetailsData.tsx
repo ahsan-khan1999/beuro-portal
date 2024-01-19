@@ -27,7 +27,7 @@ const AddressDetailsData = ({
           onClick={() =>
             router.push({
               pathname: "/offers/edit",
-              query: { offer: offerDetails?.id },
+              query: { offer: offerDetails?.id, tab: 1 },
             })
           }
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
@@ -40,9 +40,7 @@ const AddressDetailsData = ({
       {offerDetails?.addressID?.address?.map((item, index) => (
         <div className="my-5" key={index}>
           <h4 className="text-[#8F8F8F] mb-[10px]">
-            {" "}
-            {translate("offers.address_details.address")} {++index}{" "}
-            {translate("offers.address_details.details")}
+            {item?.label}
           </h4>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>

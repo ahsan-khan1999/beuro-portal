@@ -18,6 +18,7 @@ import { ServicesTotalAmount } from "@/components/reactPdf/services-total-ammoun
 import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
+import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -66,6 +67,8 @@ const OfferPdfDownload = ({
   emailTemplateSettings,
   pdfFile,
   setPdfFile,
+  systemSetting,
+  showContractSign
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -79,7 +82,14 @@ const OfferPdfDownload = ({
     <div className="download-link">
       <BlobProvider
         document={
-          <Document>
+          <Document
+            title={data?.headerDetails?.offerNo || ""}
+          // onRender={(blob) => {
+          //   if(!pdfFile){
+          //     setPdfFile(blobToFile(blob, "offer.pdf"));
+          //   }
+          // }}
+          >
             <Page style={styles.body} dpi={72}>
               <Header {...headerDetails} />
               <View
@@ -98,7 +108,10 @@ const OfferPdfDownload = ({
                 {serviceItem?.map((item, index) => (
                   <ServiceTableRow {...item} key={index} />
                 ))}
-                <ServicesTotalAmount {...serviceItemFooter} />
+                <ServicesTotalAmount
+                  {...serviceItemFooter}
+                  systemSettings={systemSetting}
+                />
               </View>
               <Footer
                 {...{
@@ -110,19 +123,24 @@ const OfferPdfDownload = ({
             </Page>
 
             {/* Additional details */}
-            <Page style={styles.body}>
-              <Header {...headerDetails} />
-              <View
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  top: 120,
-                }}
-              >
-                <ContactAddress {...{ ...contactAddress }} />
-                <AdditionalDetails description={aggrementDetails} />
+            <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+              <View style={{ marginBottom: 10 }} fixed>
+                <Header {...headerDetails} />
               </View>
+              {/* <View
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 120,
+              fontFamily: "Poppins",
+            }}
+          > */}
+              {/* <ContactAddress {...{ ...contactAddress }} /> */}
+              <AdditionalDetails description={aggrementDetails} />
+              <AggrementSignature showContractSign={showContractSign} />
+
+              {/* </View> */}
               <Footer
                 {...{
                   documentDetails: footerDetails,
@@ -136,7 +154,7 @@ const OfferPdfDownload = ({
       >
         {({ blob, url, loading, error }) => {
           if (blob && !pdfFile) {
-            setPdfFile(blobToFile(blob, "offer.pdf"));
+            setPdfFile(blobToFile(blob, `${headerDetails?.offerNo}.pdf`));
           }
           return <></>;
         }}

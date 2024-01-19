@@ -29,6 +29,7 @@ import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
+import { PDFDocument } from "pdf-lib";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -389,6 +390,8 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
       postalCode: inputObject[`postalCode-${i}`] || "",
       country: inputObject[`country-${i}`] || "",
       description: inputObject[`description-${i}`] || "",
+      label: inputObject[`label-${i}`] || "",
+
     };
     outputArray.push(addressObj);
   }
@@ -724,20 +727,33 @@ export function dataURLtoBlob(dataURL: any) {
   return new Blob([u8arr], { type: mime });
 }
 
-export const smoothScrollToSection = (target: string) => {
-  const element = document.querySelector(target);
+// export const smoothScrollToSection = (target: string) => {
+//   const element = document.querySelector(target);
 
-  if (!element) {
-    console.error(`Element with selector ${target} not found`);
-    return;
-  }
+//   if (!element) {
+//     console.error(`Element with selector ${target} not found`);
+//     return;
+//   }
 
-  const headerOffset = 100; // Adjust this value according to your page layout
-  const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+//   const headerOffset = 100; // Adjust this value according to your page layout
+//   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+//   const offsetPosition = elementPosition - headerOffset;
+
+
+//   window.scrollTo(0,offsetPosition);
+// };
+
+
+export const smoothScrollToSection = (target:string) => {
+  const element = document.getElementById(target);
+  const headerOffset = 100;
+  const elementPosition = element?.getBoundingClientRect().top || 0;
   const offsetPosition = elementPosition - headerOffset;
 
-
-  window.scrollTo(0,offsetPosition);
+  window.scrollBy({
+    top: offsetPosition,
+    behavior: "smooth",
+  });
 };
 
 export function blobToFile(blob: any, fileName: string) {
@@ -745,3 +761,24 @@ export function blobToFile(blob: any, fileName: string) {
   const file = new File([blob], fileName, options);
   return file;
 }
+
+
+export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
+  const mergedPdf = await PDFDocument.create();
+
+  for (const blob of pdfBlobs) {
+    const arrayBuffer =
+      blob instanceof ArrayBuffer ? blob : await blob.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const copiedPages = await mergedPdf.copyPages(
+      pdfDoc,
+      pdfDoc.getPageIndices()
+    );
+    copiedPages.forEach((page) => mergedPdf.addPage(page));
+  }
+
+  mergedPdf.setTitle(fileName || "PDF File");
+
+  const pdfBytes = await mergedPdf.save();
+  return new Blob([pdfBytes], { type: "application/pdf" });
+};

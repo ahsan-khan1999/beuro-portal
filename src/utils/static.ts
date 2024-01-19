@@ -624,15 +624,19 @@ export const staticEnums: Record<string, any> = {
     Confirmed: 1,
     Cancelled: 2,
   },
+  ContractSignedStatus: {
+    Deprecated: 0,
+    Active: 1,
+  },
 
   InvoiceStatus: {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
+    Open: 3
   },
   Frequency: {
     Weekly: 0,
-    SevenDays: 1,
     FourtennDays: 2,
     Monthly: 3,
     Yearly: 4,
@@ -697,15 +701,32 @@ export const staticEnums: Record<string, any> = {
   },
   SettingStatus: {},
   Country: {
-    Swizterland: "Swizterland",
-    Germany: "Germany",
-    Austria: "Austria",
-    Italy: "Italy",
-    France: "France",
+    Swizterland: "countries.swiz",
+    Germany: "countries.ger",
+    Austria: "countries.aust",
+    Italy: "countries.ita",
+    France: "countries.fran",
   },
   SupportRequest: {
     pending: 0,
     resolved: 1,
+  },
+  RejectReason: {
+    "Cost Concerns": "Cost Concerns",
+    "Hidden Fees": "Hidden Fees",
+    "Service Scope": "Service Scope",
+    "Negative Reviews": "Negative Reviews",
+    "Unreliable Schedule": "Unreliable Schedule",
+    "Customer Service": "Customer Service",
+    "Inadequate Equipment": "Inadequate Equipment",
+    Other: "Other",
+  },
+  LeadSource: {
+    Umzugsfuchs: "Umzugsfuchs",
+    Webvermarktung: "Webvermarktung",
+    "Offerten-365": "Offerten-365",
+    "Umzugshero": "Umzugshero",
+
   },
 };
 
@@ -1326,6 +1347,12 @@ export const sideBar: SideBar[] = [
         role: [1, 2],
       },
       {
+        title: "sidebar.customer.invoices.open",
+        query: "Open",
+        pathname: "/invoices",
+        role: [1, 2],
+      },
+      {
         title: "sidebar.customer.invoices.overdue",
         query: "Overdue",
         pathname: "/invoices",
@@ -1595,3 +1622,11 @@ export const DEFAULT_INVOICE = {
   editNote: "",
   type: "",
 };
+
+
+export const HeaderLabel = {
+  "contract": "Verträge",
+  "invoice": "Rechnung",
+  "receipt": "Quittung"
+}
+

@@ -5,23 +5,23 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   headerContainer: {
+    width: 555,
     backgroundColor: "#F6F7F8",
     paddingVertical: 8,
     borderRadius: 4,
     marginBottom: 12,
     marginHorizontal: 20,
+    paddingHorizontal: 12,
   },
   headerRow: {
     flexDirection: "row",
-    maxWidth: 575,
-    width: "100%",
-    columnGap: 60,
+    width: 531,
+    columnGap: 1,
   },
   description: {
     color: "#000",
     fontSize: 12,
     fontWeight: "medium",
-    paddingLeft: 12,
     display: "flex",
     flexDirection: "column",
     width: 230,
@@ -29,35 +29,43 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 12,
-    fontWeight: "normal",
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 230,
-    textAlign: "justify",
   },
   descriptionText: {
     color: "#404040",
-    fontSize: 14,
-    fontWeight: "normal",
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
     width: 230,
-    textAlign: "justify",
   },
   priceHeader: {
     flexDirection: "row",
     alignItems: "center",
-    width: 345,
+    width: 300,
   },
   headerText: {
     color: "#000",
-    fontSize: 12,
-    fontWeight: "normal",
-    width: 86.25,
+    fontSize: 10,
+    fontWeight: 400,
+    fontStyle: "normal",
+    width: 75,
   },
-  headerTextTotal: {
+  headerTotal: {
     color: "#000",
-    fontSize: 12,
-    fontWeight: "bold",
-    width: 86.25,
+    fontSize: 10,
+    fontWeight: 500,
+    fontStyle: "medium",
+    width: 75,
   },
+  // headerTextTotal: {
+  //   color: "#000",
+  //   fontSize: 12,
+  //   fontWeight: "bold",
+  //   width: 100,
+  // },
 });
 
 export const ServiceTableRow = ({
@@ -67,10 +75,11 @@ export const ServiceTableRow = ({
   serviceTitle,
   serviceType,
   totalPrice,
+  pagebreak,
   unit,
 }: Partial<ServiceList>) => {
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
         <View style={styles.description}>
           <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
@@ -80,7 +89,7 @@ export const ServiceTableRow = ({
           <Text style={styles.headerText}>{price}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
-          <Text style={styles.headerText}>{totalPrice}</Text>
+          <Text style={styles.headerTotal}>{totalPrice}</Text>
         </View>
       </View>
     </View>

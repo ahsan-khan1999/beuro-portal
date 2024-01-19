@@ -28,6 +28,9 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { EmailTemplate } from "@/types/settings";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
+import { calculateTax } from "@/utils/utility";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -74,18 +77,17 @@ export const useReceiptPdf = () => {
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
-  const [pdfFile, setPdfFile] = useState(null);
+
+  // const [pdfFile, setPdfFile] = useState(null);
+  // const [qrCodeUrl, setQrCodeUrl] = useState("");
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  
-
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const { loading, collectiveInvoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
+  const { loading, collectiveInvoiceDetails } = useAppSelector(state => state.invoice);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -107,7 +109,7 @@ export const useReceiptPdf = () => {
           dispatch(readQRCode({ params: { filter: invoiceID } })),
         ]);
         if (qrCode?.payload) {
-            setQrCodeUrl(qrCode.payload);
+          setQrCodeUrl(qrCode.payload);
         }
         if (template?.payload?.Template) {
           const {
@@ -148,7 +150,7 @@ export const useReceiptPdf = () => {
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
-              contractId: invoiceDetails?.invoiceID?.contractID?.contractNumber,
+              contractId: invoiceDetails?.invoiceNumber,
               workerName:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
                   ?.fullName,
@@ -161,11 +163,13 @@ export const useReceiptPdf = () => {
             },
             headerDetails: {
               offerNo:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.offerNumber,
-              offerDate: invoiceDetails?.invoiceID?.createdAt,
-              createdBy: invoiceDetails?.invoiceID?.createdBy?.fullName,
+                invoiceDetails?.invoiceNumber,
+              offerDate: invoiceDetails?.createdAt,
+              createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              fileType: "receipt"
+
             },
             contactAddress: {
               address: {
@@ -189,7 +193,7 @@ export const useReceiptPdf = () => {
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID?.contractID?.offerID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
@@ -202,11 +206,20 @@ export const useReceiptPdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+              tax: calculateTax(
+                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal,
+                Number(TAX_PERCENTAGE)
+              )?.toString(),
+
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
               grandTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
+              invoicePaidAmount:
+                invoiceDetails?.invoiceID?.paidAmount.toString(),
+              isShowExtraAmount: true,
+              invoiceAmount: invoiceDetails?.amount.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
             },
             footerDetails: {
               firstColumn: {
@@ -227,15 +240,17 @@ export const useReceiptPdf = () => {
                   ibanNumber: user?.company.bankDetails.ibanNumber,
                 },
               },
-              thirdColumn: {},
+              thirdColumn: {
+                row1: "Standorte",
+                row2: "bern-Solothurn",
+                row3: "Aargau-Luzern",
+                row4: "Basel-Zürich",
+                row5: "",
+              },
               fourthColumn: {},
               columnSettings: null,
               currPage: 1,
               totalPages: calculateTotalPages,
-            },
-            qrCode: {
-              acknowledgementSlip: qrCodeAcknowledgementData,
-              payableTo: qrCodePayableToData,
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
@@ -269,6 +284,40 @@ export const useReceiptPdf = () => {
     // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
+
+  useEffect(() => {
+    if (qrCodeUrl) {
+      (async () => {
+        const remotePdfResponse = await fetch(qrCodeUrl);
+        const remotePdfBlob = await remotePdfResponse.blob();
+        setRemoteFileBlob(remotePdfBlob);
+      })();
+    }
+  }, [qrCodeUrl]);
+
+  const fileName = receiptData?.emailHeader?.contractId;
+  const receiptDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: receiptData,
+      fileName,
+      qrCode: qrCodeUrl,
+      remoteFileBlob,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      receiptData,
+      fileName,
+      qrCodeUrl,
+      remoteFileBlob,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(receiptDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
@@ -276,8 +325,8 @@ export const useReceiptPdf = () => {
       setActiveButtonId("email");
       const data = await localStoreUtil.get_data("receiptEmailCompose");
 
-      if (data && pdfFile) {
-        formData.append("file", pdfFile as any);
+      if (data && mergedFile) {
+        formData.append("file", mergedFile as any);
         const fileUrl = await dispatch(uploadFileToFirebase(formData));
         let apiData = {
           ...data,
@@ -297,8 +346,7 @@ export const useReceiptPdf = () => {
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.id,
           subject:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.title,
+            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
               ?.receiptContent?.body,
@@ -327,7 +375,18 @@ export const useReceiptPdf = () => {
   };
 
   const handleDonwload = () => {
-    window.open(receiptData?.attachement);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+    }
   };
   const handlePrint = () => {
     window.open(receiptData?.attachement);
@@ -380,10 +439,9 @@ export const useReceiptPdf = () => {
     loading,
     modal,
     activeButtonId,
-    pdfFile,
     router,
-    qrCodeUrl,
-    setPdfFile,
+    mergedPdfUrl,
+    isPdfRendering,
     handleEmailSend,
     handleSendByPost,
     handleDonwload,

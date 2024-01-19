@@ -31,6 +31,7 @@ import RecurringInvoice from "@/base-components/ui/modals1/RecurringInvoice";
 import RecurringInvoiceFrequency from "@/base-components/ui/modals1/InvoiceFrequency";
 import InvoiceUpdate from "@/base-components/ui/modals1/InvoiceUpdate";
 import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoiceUpdate";
+import { readContent } from "@/api/slices/content/contentSlice";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -52,6 +53,7 @@ export default function useInvoiceDetail() {
 
   useEffect(() => {
     if (id) {
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(readInvoiceDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(
@@ -157,10 +159,10 @@ export default function useInvoiceDetail() {
 
   let modalInfo = {
     image: cautionIcon,
-    heading: "Are You Sure",
-    text: "You want you want to stop this recurring invoice",
-    noButton: "Cancel",
-    yesButton: "Yes",
+    heading: `${translate("common.modals.are_sure")}`,
+    text: `${translate("common.modals.stop_reccuring")}`,
+    noButton: `${translate("common.cancel_button")}`,
+    yesButton: `${translate("common.are_you_sure_modal.yes_button")}`,
     onSuccess: handleRecurringSuccess,
     loading: loading,
   };
@@ -179,14 +181,14 @@ export default function useInvoiceDetail() {
       <DeleteConfirmation_1
         onClose={onClose}
         handleDelete={handleDelete}
-        modelHeading="Please confirm Invoice ID"
-        subHeading="Enter Invoice ID"
+        modelHeading={translate("common.modals.confirm_invoice_id")}
+        subHeading={translate("common.modals.enter_invoice_id")}
       />
     ),
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this Invoice?"
+        modelHeading={translate("common.modals.delete_invoice")}
         routeHandler={routeHandler}
         loading={loading}
       />
@@ -211,8 +213,8 @@ export default function useInvoiceDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Successful "
-        subHeading="Thanks for updating offer we are happy to have you."
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.admin_setting_des")}
         route={route}
       />
     ),
@@ -231,8 +233,8 @@ export default function useInvoiceDetail() {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
-        heading="Email Sent Successfully "
-        subHeading="Thanks for updating offer we are happy to have you. "
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
     ),

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 
@@ -15,7 +15,11 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [addressType, setAddressType] = useState([false, false])
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const [addressCount, setAddressCount] = useState(
+    leadDetails?.addressID?.address?.length || 1
+  );
 
   const handleBack = () => {
     onClick(1, ComponentsType.address);
@@ -29,6 +33,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setError,
     formState: { errors },
     reset,
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -37,13 +42,33 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
       reset(transformAddressFormValues(leadDetails?.addressID?.address));
     }
   }, [leadDetails.id]);
+  const handleFieldTypeChange = (index: number) => {
+    let address = [...addressType];
+    address[index - 1] = !address[index - 1]
+
+    setAddressType(address)
+  }
+  const handleRemoveNewAddress = () => {
+    setAddressCount(addressCount - 1);
+
+  };
+  const handleAddNewAddress = () => {
+    setAddressCount(addressCount + 1);
+    setValue(`label-${addressCount + 1}`, `Address ${addressCount + 1}`)
+  };
   const fields = LeadsAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    leadDetails?.addressID?.address?.length || 1
+    leadDetails?.addressID?.address?.length || 1,
+    handleAddNewAddress,
+    handleRemoveNewAddress,
+    [],
+    handleFieldTypeChange,
+    addressType
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       address: senitizeDataForm(data),

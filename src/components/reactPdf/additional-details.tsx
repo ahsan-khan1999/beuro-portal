@@ -1,22 +1,24 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
-import { Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
+import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 
 import Html, { HtmlStyles } from "react-pdf-html";
 
 const styles = StyleSheet.create({
   borderDiv: {
-    borderTop: 3,
-    borderTopColor: "#000",
+    // borderTop: 3,
+    // borderTopColor: "#000",
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 35,
+    paddingTop: 15,
   },
   container: {
+    fontFamily: "Poppins",
     display: "flex",
     flexDirection: "column",
     rowGap: 60,
-    '> *': {
+    "> *": {
       // Styles for direct children (Text elements) of the container
       // Add your specific styles for the Text elements here
       fontSize: 10,
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginBottom: 2,
-    fontWeight: "bold",
     fontSize: 14,
   },
   description: {
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
     // width: "40%",
   },
 
-
   dateText: {
     paddingTop: 12,
     fontSize: 12,
@@ -69,54 +69,79 @@ const styles = StyleSheet.create({
 });
 
 const stylesheet: HtmlStyles = {
-  // clear margins for all <p> tags
+  body: {
+    fontFamily: 'Poppins',
+  },
   p: {
     margin: 0,
-    fontSize:12
+    fontSize: 10,
+    color: "#272727",
   },
   h1: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 16,
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 14,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize:16
-
+    fontSize: 12,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize:13
-
+    fontSize: 12,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize:12
-
+    fontSize: 10,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize:12
+    fontSize: 10,
+  },
+  ul: { marginLeft: 16 },
+  li: {
+    fontSize: 10,
+    marginLeft: 0,
+    listStyle: "outside",
+  },
+  blockquote: {
+    borderLeft: 5,
+    borderColor: "#ccc",
+    borderStyle: "solid",
+    marginLeft: 0,
+    marginRight: 0,
+    overflow: "hidden",
+    paddingLeft: "20px",
 
+    "blockqoute p": {
+      margin: 0,
+    },
+  },
+  strong: {
+    fontSize: 14,
+    fontWeight: 700,
+    fontStyle: "bold",
   },
 };
 
-export const AdditionalDetails = ({ description, signature }: { description?: string, signature?: any }) => {
+export const AdditionalDetails = ({
+  description,
+  signature,
+}: {
+  description?: string;
+  signature?: any;
+}) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-
   const onFileChange = () => {
-
     if (signature) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -125,36 +150,15 @@ export const AdditionalDetails = ({ description, signature }: { description?: st
       reader.readAsDataURL(signature);
     }
   };
-  useMemo(() => signature && onFileChange(), [signature])
-  return (
 
+  useMemo(() => signature && onFileChange(), [signature]);
+  return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html stylesheet={stylesheet}>{description || ""}</Html>
-
-        <View style={{}}>
-          <Text style={styles.shareHeading}>I share the contract with you.</Text>
-
-          <View style={styles.dateContainer}>
-            <View style={styles.innerDate}>
-              <Text style={styles.dateText}>Date</Text>
-            </View>
-
-            <View style={{ width: "40%" }}>
-              {
-                signature &&
-                <Image src={imageSrc as string} style={{ height: "100px", width: "100px" }} />
-
-              }
-              <View style={styles.signature}>
-
-                <Text style={styles.dateText}>Signature</Text>
-
-              </View>
-            </View>
-          </View>
-        </View>
+        <Html resetStyles={true} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+          {description || ""}
+        </Html>
       </View>
     </View>
-  )
+  );
 };

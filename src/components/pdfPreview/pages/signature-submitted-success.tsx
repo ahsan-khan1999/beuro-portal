@@ -18,7 +18,7 @@ export const SignatureSubmittedSuccessFully = () => {
         />
       </svg>
       <span className="text-[32px] font-semibold text-[#393939]">
-        Submitted
+        Please accept the offer
       </span>
     </div>
   );

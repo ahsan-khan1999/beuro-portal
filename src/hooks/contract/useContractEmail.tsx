@@ -36,7 +36,7 @@ export const useContractEmail = (
         contractDetails?.offerID?.content?.confirmationContent
           ?.attachments as string[]
       )) ||
-      []
+    []
   );
 
   const schema = generateContractEmailValidationSchema(translate);
@@ -58,7 +58,7 @@ export const useContractEmail = (
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
-      subject: contractDetails?.offerID?.content?.confirmationContent?.title,
+      subject: contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
       description: contractDetails?.offerID?.content?.confirmationContent?.body,
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
     });
@@ -70,7 +70,7 @@ export const useContractEmail = (
       reset({
         email: contractDetails?.offerID?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.confirmationContent?.title,
+        subject: selectedContent?.confirmationContent?.title  +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.confirmationContent?.body,
         pdf: selectedContent?.confirmationContent?.attachments,
       });

@@ -5,6 +5,7 @@ import {
   PDFViewer,
   Page,
   StyleSheet,
+  Text,
   View,
 } from "@react-pdf/renderer";
 import { Header } from "./header";
@@ -15,6 +16,8 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { blobToFile } from "@/utils/utility";
+import { AggrementSignature } from "./aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -30,14 +33,14 @@ Font.register({
       fontWeight: 400,
     },
     {
-      src: "/assets/fonts/Poppins-Medium.ttf",
-      fontStyle: "medium",
-      fontWeight: 500,
-    },
-    {
       src: "/assets/fonts/Poppins-Light.ttf",
       fontStyle: "light",
       fontWeight: 300,
+    },
+    {
+      src: "/assets/fonts/Poppins-Medium.ttf",
+      fontStyle: "medium",
+      fontWeight: 500,
     },
     {
       src: "/assets/fonts/Poppins-SemiBold.ttf",
@@ -62,6 +65,9 @@ const OfferPdfPreview = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
+  showContractSign,
+  pdfFile,
+  setPdfFile,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -72,8 +78,8 @@ const OfferPdfPreview = ({
   const footerDetails = data?.footerDetails;
 
   return (
-    <PDFViewer height={1000} style={{ width: "100%" }}>
-      <Document>
+    <PDFViewer height={750} style={{ width: "100%" }}>
+      <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
           <View
@@ -89,8 +95,12 @@ const OfferPdfPreview = ({
             <AddressDetails {...{ address, header, workDates }} />
 
             <ServiceTableHederRow />
-            {serviceItem?.map((item, index) => (
-              <ServiceTableRow {...item} key={index} />
+            {serviceItem?.map((item, index, arr) => (
+              <ServiceTableRow
+                {...item}
+                key={index}
+                pagebreak={index === arr.length - 1}
+              />
             ))}
             <ServicesTotalAmount
               {...serviceItemFooter}
@@ -107,19 +117,24 @@ const OfferPdfPreview = ({
         </Page>
 
         {/* Additional details */}
-        <Page style={styles.body}>
-          <Header {...headerDetails} />
-          <View
+        <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+          <View style={{marginBottom: 10}} fixed>
+            <Header {...headerDetails} />
+          </View>
+          {/* <View
             style={{
               position: "absolute",
               left: 0,
               right: 0,
               top: 120,
+              fontFamily: "Poppins",
             }}
-          >
-            <ContactAddress {...{ ...contactAddress }} />
-            <AdditionalDetails description={aggrementDetails} />
-          </View>
+          > */}
+          {/* <ContactAddress {...{ ...contactAddress }} /> */}
+          <AdditionalDetails description={aggrementDetails} />
+          <AggrementSignature showContractSign={showContractSign} />
+
+          {/* </View> */}
           <Footer
             {...{
               documentDetails: footerDetails,
@@ -137,15 +152,7 @@ export default OfferPdfPreview;
 
 const styles = StyleSheet.create({
   body: {
-    paddingBottom: 140,
-  },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
+    paddingBottom: 100,
+    fontFamily: "Poppins",
   },
 });

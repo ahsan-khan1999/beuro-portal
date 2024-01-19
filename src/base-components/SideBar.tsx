@@ -117,7 +117,7 @@ const SideBar = () => {
                       pathname: item.pathname,
                     }}
                     onClick={() => routeChangeHandler(item)}
-                    className={`hover:bg-[#E9E1FF] rounded-lg flex justify-between items-center px-3 py-2 w-full ${
+                    className={`hover:bg-[#E9E1FF] rounded-lg flex justify-between items-center px-3 py-2 w-full break-all ${
                       selected.parent.title === item.title &&
                       "bg-primary rounded-lg hover:bg-primary"
                     }`}

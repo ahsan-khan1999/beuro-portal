@@ -6,13 +6,19 @@ import {
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
   handleBack,
-  count
+  count,
+  handleAddNewAddress,
+  handleRemoveAddress,
+  fields,
+  handleFieldTypeChange,
+  addressType
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [];
@@ -20,12 +26,64 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
   for (let i = 1; i <= count; i++) {
     formField.push(
       {
-        containerClass: "mt-6",
-        label: {
-          text: translate("leads.address_details.heading"),
-          htmlFor: `address-${i}-details`,
-          className: "mb-[10px] text-[#8F8F8F]",
+        containerClass: "",
+        field: {
+          type: Field.div,
+          className: "flex  space-x-2 ",
+          id: `address-labels-${i}`,
+          children: [
+            (!(addressType && !addressType[i - 1]) && {
+              containerClass: "mt-2",
+
+              field: {
+                type: Field.input,
+                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+                inputType: "text",
+                id: `label-${i}`,
+                name: `label-${i}`,
+                placeholder: `Zweibrückenstraße, ${i}`,
+                register,
+                value: `Address ${i}`,
+              },
+            }) || {
+              containerClass: "",
+
+              field: {
+                type: Field.input,
+                inputType: "text",
+                id: `label-${i}`,
+                name: `label-${i}`,
+                placeholder: `Zweibrückenstraße, ${i}`,
+                register,
+                value: `Address ${i}`,
+                disabled: true,
+                className:
+                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+              },
+            },
+            {
+              containerClass: "",
+              field: {
+                type: Field.button,
+                className: "bg-white hover:bg-white",
+                id: `addressLabel-${i}`,
+                inputType: "button",
+                icon: editIcon,
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
+              },
+            },
+          ],
         },
+      },
+      {
+        containerClass: "mt-6",
+        // label: {
+        //   text: `${translate("leads.address_details.heading")} ${i}`,
+
+        //   htmlFor: `address-${i}-details`,
+        //   className: "mb-[10px] text-[#8F8F8F]",
+        // },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
@@ -82,7 +140,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                   label: item,
                 })),
                 control,
-                value: "",
+                value: Object.keys(staticEnums.Country)[0],
               },
             },
           ],
@@ -98,7 +156,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
         field: {
           type: Field.textArea,
           className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-          rows: 8,
+          rows: 2,
           id: `description-${i}`,
           name: `description-${i}`,
           placeholder:

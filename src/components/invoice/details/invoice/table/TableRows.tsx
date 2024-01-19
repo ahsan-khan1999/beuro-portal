@@ -44,19 +44,19 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_170px)_minmax(300px,_100%)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_100%)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_100%)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_100px)_minmax(100px,_100%)_minmax(80px,_80px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(80px,_80px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(100px,_100%)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(110px,_110px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] items-center bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(170px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_100%)_minmax(90px,_90px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_100%)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(70px,_4fr)_minmax(140px,_3fr)_minmax(80px,_80px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(80px,_80px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(130px,_3fr)_minmax(170px,_170px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(40px,_40px)] mt-2 rounded-md"
           >
-            <span className="py-4 flex items-center">{item.invoiceNumber}</span>
-            <span className="break-all py-4 flex items-center">
+            <span className="py-4 truncate">{item.invoiceNumber}</span>
+            <span className="py-4 truncate">
               {
                 item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
                   ?.fullName
               }
             </span>
-            <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
-              {item.invoiceID?.contractID?.offerID?.title}
+            <span className=" py-4 mlg:hidden maxSize:block truncate mr-1">
+              {item?.title}
             </span>
-            <span className="py-4 flex items-center mlg:hidden xLarge:flex">
+            <span className="py-4 truncate mlg:hidden xLarge:block">
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">
@@ -87,7 +87,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center`}
+                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={"#fff"}
                 dropDownItemsContainerClassName="w-full"
@@ -95,7 +95,7 @@ const TableRows = ({
             </span>
             <span className="py-4 flex items-center mx-1">
               <DropDown
-                items={Object.keys(staticEnums["InvoiceStatus"]).map(
+                items={Object.keys(staticEnums["InvoiceStatus"])?.slice(0,-1)?.map(
                   (item) => ({ item: item })
                 )}
                 selectedItem={item.invoiceStatus}
@@ -108,9 +108,9 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center`}
+                }  min-w-[90px] rounded-lg px-1 py-[3px] flex items-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={"#fff"}
+                dropDownIconClassName="#fff"
                 key={item.id}
                 dropDownItemsContainerClassName="w-full"
               />

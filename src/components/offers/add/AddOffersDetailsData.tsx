@@ -152,31 +152,31 @@ const EditOffersDetailsData = () => {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-1 xLarge:grid-cols-4 xLarge:gap-x-6 gap-y-6">
-        <div className="col-span-1">
-          <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
-            {tabSection.map((item, index) => (
-              <OfferTabs
-                isSelected={tabType === index}
-                isToggle={true}
-                setTabType={setTabType}
-                tabType={tabType}
-                name={item.name}
-                index={index + 1}
-                icon={item.icon}
-                selectedTab={index}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="col-span-3">
-          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+    <div>
+      <div className="xLarge:fixed mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
+          {tabSection.map((item, index) => (
+            <OfferTabs
+              isSelected={tabType === index}
+              isToggle={true}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              index={index + 1}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
         </div>
       </div>
+
+      <div className="overflow-y-auto w-full break-all flex">
+        <div className="max-w-[330px] w-full hidden xLarge:block"></div>
+        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+      </div>
+
       {renderModal()}
-    </>
+    </div>
   );
 };
 

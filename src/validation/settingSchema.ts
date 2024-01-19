@@ -55,12 +55,16 @@ export const generateAddReasonValidation = (translate: Function) => {
 
 export const generateQRCodeValdiation = (translate: Function) => {
   return yup.object().shape({
-    "qrSettings": yup.array().of(yup.object().shape({
+    "QrCodeDetail": yup.array().of(yup.object().shape({
       "companyName": yup.string().required(translate("validationMessages.required")),
-      "ibanNo": yup.string().required(translate("validationMessages.required")),
-      "streetNumber": yup.string().required(translate("validationMessages.required")),
-      "postalCode": yup.string().required(translate("validationMessages.required")),
-      "city": yup.string().required(translate("validationMessages.required")),
+      "ibanNumber": yup.string().required(translate("validationMessages.required")),
+      "QrCodeStatus": yup.number().notRequired(),
+      "address": yup.object().shape({
+        "houseNumber": yup.string().required(translate("validationMessages.required")),
+        "streetNumber": yup.string().required(translate("validationMessages.required")),
+        "postalCode": yup.string().required(translate("validationMessages.required")),
+        "city": yup.string().required(translate("validationMessages.required")),
+      }).required(translate("validationMessages.required"))
     })).min(1).required(translate("validationMessages.required"))
 
   })

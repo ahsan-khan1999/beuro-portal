@@ -7,7 +7,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps },
+  { customer, lead, followUps, onCustomerSelect },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -17,7 +17,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         id: "div-field",
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-[41px] gap-y-5",
+        className: "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5",
         children: [
           {
             containerClass: "mb-0",
@@ -43,7 +43,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
                 label: item?.fullName + " " + `(${item?.refID})`,
                 value: item?.id.toString(),
               })),
-              // onItemChange: () => onItemChange && onItemChange(Modals.customer),
+              onItemChange: () => onItemChange && onItemChange(),
               control,
             },
           },
@@ -69,7 +69,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               register,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -96,7 +95,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               control,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -156,7 +154,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.textArea,
         className: `!py-4 !border-[#BFBFBF] focus:!border-primary`,
-        rows: 8,
+        rows: 2,
         id: "additionalDetails",
         name: "additionalDetails",
         placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",

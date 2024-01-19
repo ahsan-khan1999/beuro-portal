@@ -36,7 +36,6 @@ const DetailsData = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
-         
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -66,7 +65,8 @@ const DetailsData = ({
                   : emailDetails?.mailStatus === "pending"
                     ? "#FE9244"
                     : "#FF376F"
-                }]`}>
+                }]`}
+            >
               {emailDetails?.mailStatus}
             </span>
           </div>
@@ -104,36 +104,36 @@ const DetailsData = ({
           </div>
         </div>
 
-        <div className="my-5">
+        <div className="mt-5">
           <span className="text-[#4B4B4B] text-lg  font-semibold ">
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
-        {emailDetails?.pdf?.map((item) => {
-          let length = item.href?.split("/")?.length - 1;
+        <div className="my-5 flex items-end">
+          {emailDetails?.attachments?.map((item) => {
+            let length = item?.href?.split("/")?.length - 1;
 
-          return (
-            <div className="my-5 flex items-end">
-              <Link
-                href={item?.href || ""}
-                target="_blank"
-                className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center">
-                <Image
-                  src={pdfFileIcon}
-                  alt="PDF_FILE_ICON"
-                  className=" mr-[11px]"
-                />
-                <span className="text-[#BFBFBF] text-base font-normal">
-                  {/* {item.href?.length > 15
-                    ? `${item.href.slice(0, 15)}...`
-                    : item.href} */}
-                  { item.href?.split("/")[length - 1]}
-                </span>
-              </Link>
-              &nbsp;,&nbsp;
-            </div>
-          );
-        })}
+            return (
+              <>
+                <Link
+                  href={item?.href || ""}
+                  target="_blank"
+                  className="border-[1px] py-2 px-[10px]  rounded-lg border-[#C7C7C7] flex items-center"
+                >
+                  <Image
+                    src={pdfFileIcon}
+                    alt="PDF_FILE_ICON"
+                    className=" mr-[11px]"
+                  />
+                  <span className="text-[#BFBFBF] text-base font-normal">
+                    {item.href?.split("/")[length]}
+                  </span>
+                </Link>
+                &nbsp;&nbsp;
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

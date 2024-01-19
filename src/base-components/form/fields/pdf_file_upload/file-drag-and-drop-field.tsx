@@ -78,7 +78,7 @@ export const PdfFileUpload = ({
             <span className="text-[#4B4B4B] text-center font-medium text-[10px] mt-3 mb-2">
               {text}
             </span>
-            <span className="text-[#8F8F8F] font-normal text-[12px]">
+            <span className="text-[#8F8F8F] font-normal text-center text-[12px]">
               {fileSupported}
             </span>
           </div>
@@ -94,7 +94,7 @@ export const PdfFileUpload = ({
 
       <div className="col-span-2">
         <div className="col-span-2">
-          <div className="grid grid-cols-3 gap-x-4 gap-y-3">
+          <div className="grid mlg:grid-cols-2 xLarge:grid-cols-3 gap-x-4 gap-y-3">
             {attachements &&
               attachements?.map((item, index) => (
                 <div

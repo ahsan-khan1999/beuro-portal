@@ -12,6 +12,7 @@ import {
   SetFieldValue,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
+  UseFormGetValues,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -35,6 +36,7 @@ import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { staticEnums } from "@/utils/static";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -228,9 +230,11 @@ export type GenerateChangeMailSettingFormField = (
 export type GenerateQRCodeSettingFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  append: UseFieldArrayAppend<FieldValues, "qrSettings">,
+  append: UseFieldArrayAppend<FieldValues, "QrCodeDetail">,
   onRemove: UseFieldArrayRemove,
-  count: number
+  count: number,
+  user: User,
+  handleOnChangeStatus?: (index?: string, value?: string) => void
 ) => FormField[];
 
 // change mail setting formfield
@@ -254,7 +258,9 @@ export type GenerateAddReasonFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  control?: Control,
+  reason?: string
 ) => FormField[];
 
 // change/Reset password formfield
@@ -485,7 +491,11 @@ export type GenerateLeadAddressFormField = (
   count: number,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
-  fields?: object[]
+  fields?: object[],
+  handleFieldTypeChange?: (index: number) => void,
+  addressType?: boolean[],
+  setValue?: UseFormSetValue<FieldValues>,
+  getValues?: UseFormGetValues<FieldValues>
 ) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
@@ -522,7 +532,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null },
+  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -591,6 +601,7 @@ export interface FilterType {
   email?: string[] | string;
   price?: string[];
   month?: number;
+  leadSource?: string[] | string
 }
 
 export interface MoreFilterType {
@@ -605,6 +616,9 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
+  leadSource?: string[] | string
+
+
 }
 export interface FilterProps {
   filter: FilterType;
@@ -632,6 +646,7 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
+  fileType?: "contract" | "invoice" | "receipt"
 }
 
 export interface ProductItemFooterProps {
@@ -639,10 +654,12 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
+  invoiceStatus?: keyof typeof staticEnums["InvoiceStatus"];
+  invoiceAmount?: string;
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
-  isInvoice?: boolean;
-  systemSettings?: SystemSetting | null
+  isShowExtraAmount?: boolean;
+  systemSettings?: SystemSetting | null;
 }
 
 export interface ContactDetailsProps {
@@ -818,7 +835,6 @@ export interface PdfProps<T = EmailHeaderProps> {
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
-  qrCode: qrCode;
   aggrementDetails: string;
   isOffer?: boolean;
   id?: string;
@@ -835,7 +851,11 @@ export interface PdfPreviewProps {
   setPdfFile?: SetStateAction<any>;
   fileName?: string;
   qrCode?: string;
+  remoteFileBlob?: Blob | null;
   systemSetting?: SystemSetting | null;
+  mergedPdfFileUrl?: string | null;
+  isPdfRendering?: boolean;
+  showContractSign?: boolean;
 }
 
 export interface PdfPreviewFooterProps {
@@ -850,7 +870,6 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -863,7 +882,6 @@ export interface PurchasedItemDetailsNextPageProps {
   currPage: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-
 }
 
 export interface qrCode {
@@ -894,7 +912,6 @@ export interface PayableToProps extends QRCodeBaseProps {
 export interface PaymentQrCodeDetailsProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
-  qrCode: qrCode;
 }
 export interface QrCodeDetailsProps {
   qrCode: qrCode;
@@ -915,7 +932,7 @@ export interface AggrementProps {
   isSignatureDone?: boolean;
   emailTemplateSettings?: EmailTemplate | null;
   setOfferSignature?: SetStateAction<any>;
-  systemSettings?: SystemSetting | null
+  systemSettings?: SystemSetting | null;
 }
 
 export interface FiltersComponentProps {
@@ -932,4 +949,10 @@ export interface ContractEmailHeaderProps {
   onPrint: () => void;
   worker: string;
   contractTitle: string;
+}
+export interface InvoiceEmailCardProps {
+  activeButtonId: string | null;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost: () => void;
 }

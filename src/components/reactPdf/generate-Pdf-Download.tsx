@@ -81,7 +81,7 @@ const PdfDownload = ({
       <BlobProvider
         document={
           <Document>
-            <Page style={styles.body} dpi={72}>
+            <Page style={{...styles.body, minHeight: "100%"}} dpi={72}>
               <Header {...headerDetails} />
               <View
                 style={{
@@ -151,5 +151,6 @@ export default PdfDownload;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
+    height: '895px'
   },
 });

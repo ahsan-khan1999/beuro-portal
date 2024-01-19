@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferAddressDetailsFormField } from "@/components/offers/edit/fields/Offer-address-edit-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 
@@ -16,6 +16,12 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+  const [addressType, setAddressType] = useState(
+    offerDetails?.addressID ?
+      Array.from(offerDetails?.addressID?.address, () => (false)) :
+      offerDetails?.leadID?.addressID?.address ? Array.from(offerDetails?.leadID?.addressID?.address, () => (false)) : [false] || [false],
+
+  )
   const handleBack = () => {
     handleNext(EditComponentsType.offerEdit)
   }
@@ -28,16 +34,26 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
     control,
     setError,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  useMemo(() => {
+  useEffect(() => {
+
     if (offerDetails.id) {
-      // reset(transformAddressFormValues(offerDetails?.addressID?.address))
       reset({
-        address: offerDetails?.addressID?.address
+        address: offerDetails?.addressID
+          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
+          : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
+            addressType?.map((item, index) => ({
+              streetNumber: "",
+              postalCode: "",
+              country: "Swizterland",
+              description: "",
+              label: `Address ${++index}`
+            })),
       })
     }
   }, [offerDetails.id])
@@ -47,8 +63,13 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
 
   });
 
+  const handleFieldTypeChange = (index: number) => {
+    let address = [...addressType];
+    address[index] = !address[index]
+    setAddressType(address)
+  }
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? addressType?.length : addressFields?.length, append, remove, addressFields, handleFieldTypeChange, addressType, setValue);
 
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? 1 : addressFields?.length, append, remove, addressFields);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 2, id: offerDetails?.id, stage: EditComponentsType.serviceEdit }
