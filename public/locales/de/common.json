@@ -1064,6 +1064,7 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
+    "mail": "Mail",
     "offer_mail_preview": "E-Mail-Vorschau anbieten",
     "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
@@ -1919,6 +1920,6 @@
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
   },
-  "Pending":"Entwurf",
-  "Sent":"Gesendet"
+  "Pending": "Entwurf",
+  "Sent": "Gesendet"
 }

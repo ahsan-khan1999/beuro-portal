@@ -145,6 +145,8 @@ const SignPdfPreview = () => {
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
+                discountType:offerDetails?.Offer?.discountType,
+                taxType:offerDetails?.Offer?.taxType
               },
               footerDetails: {
                 firstColumn: {

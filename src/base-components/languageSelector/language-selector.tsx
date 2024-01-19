@@ -62,7 +62,7 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
                 <button
                   key={language.code}
                   onClick={() => handleLanguageChange(language)}
-                  className={`  ${index !== 0 && "pt-3"} 
+                  className={`${index !== 0 && "pt-3"} 
                 ${
                   index !== languages.length - 1 &&
                   "pb-3 border-b border-[#EEEEEE]"

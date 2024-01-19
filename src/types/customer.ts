@@ -6,6 +6,7 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
+import { Plan } from "./admin/plans";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -45,7 +46,7 @@ export interface Customers {
   edit?: boolean;
   lead: CustomerLeadDetail;
   logo:string
-  plan?:string
+  plan?:Plan
   createdBy?:User
 }
 

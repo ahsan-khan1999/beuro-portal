@@ -566,11 +566,11 @@ export function getEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
-    return "#4A13E7";
+    return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
   )
-    return "#FF0000";
+    return "#4A13E7";
   else return "#FF376F";
 }
 
@@ -635,7 +635,7 @@ export function getInvoiceStatusColor(status: string) {
     staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Paid"]
   )
     return "#45C769";
-  else return "#FF376F";
+  else return "#4A13E7";
 }
 
 export function getInvoiceEmailColor(status: string) {
@@ -673,7 +673,6 @@ export function calculatePercentage(
   if (totalAmount === 0) {
     return 0; // Avoid division by zero
   }
-
   const percentage = ((amount / totalAmount) * 100).toFixed(2);
   return parseFloat(percentage);
 }

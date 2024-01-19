@@ -17,11 +17,11 @@ export interface InvoiceTableRowTypes {
   emailStatus: string;
   invoiceStatus: string;
   isInvoiceRecurring: boolean;
-  invoiceCreatedAmount: number; createdBy: User;
+  invoiceCreatedAmount: number;
+  createdBy: User;
   title: string;
   isInvoiceRecurring2: boolean;
-  isNoteCreated:boolean
-
+  isNoteCreated: boolean;
 }
 
 // Inovice details table
@@ -55,6 +55,9 @@ export interface SubInvoiceTableRowTypes {
   amount: number;
   dateOfNextInvoice: string;
   emailStatus: "Pending" | "Sent" | "Failed";
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
   frequency: string;
   invoiceID: InvoiceTableRowTypes;
   invoiceNumber: string;
@@ -80,7 +83,7 @@ export interface InvoiceCardContentProps {
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
-  currency?: string
+  currency?: string;
 }
 
 export interface InvoiceDetailsTableProps {
@@ -103,7 +106,7 @@ export interface PdfSubInvoiceTypes {
   title?: string;
   additionalDetails?: string;
   attachement?: string;
-  createdBy: User
+  createdBy: User;
 }
 
 export interface InvoiceTableRowTypesPdf {

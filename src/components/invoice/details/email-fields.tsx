@@ -18,7 +18,8 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   attachements, setAttachements,
   invoiceDetails,
   isMoreEmail,
-  setIsMoreEmail
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -60,6 +61,9 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
                     }
                   },
@@ -73,6 +77,9 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
                     }
                   },
@@ -106,7 +113,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
           isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
-              text: `CC`,
+              text: `Cc`,
               htmlFor: "cc",
               className: "mb-[10px]",
             },

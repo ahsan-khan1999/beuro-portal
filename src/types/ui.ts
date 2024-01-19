@@ -60,7 +60,7 @@ export interface ButtonProps {
   icon?: any;
   iconAlt?: any;
   id: string;
-  disabled?:boolean
+  disabled?: boolean;
 }
 
 // Add field interface

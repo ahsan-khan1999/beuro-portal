@@ -18,7 +18,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   attachements, setAttachements,
   offerDetails,
   isMoreEmail,
-  setIsMoreEmail
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -60,6 +61,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "")
+                      }
+
                       setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
                     }
                   },
@@ -73,6 +78,9 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
                     }
                   },
@@ -106,7 +114,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
           isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
-              text: `CC`,
+              text: `Cc`,
               htmlFor: "cc",
               className: "mb-[10px]",
             },

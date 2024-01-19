@@ -1,12 +1,11 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import { OffersTableRowTypes } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const CustomerDetailsData = ({
   offerDetails,
@@ -32,9 +31,9 @@ const CustomerDetailsData = ({
               query: { offer: offerDetails?.id, tab: 0 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.offer_details.edit_button")}
         </button>
       </div>
@@ -46,7 +45,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.offer_title")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium overflow-clip text-ellipsis min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium overflow-clip text-ellipsis min-h-[58px]">
               {offerDetails?.title}
             </div>
           </div>
@@ -55,7 +54,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
               {getKeyByValue(
                 staticEnums["CustomerType"],
                 offerDetails?.leadID?.customerDetail?.customerType
@@ -66,7 +65,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.fullName}
             </div>
           </div>
@@ -77,7 +76,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.company_name")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {offerDetails?.leadID?.customerDetail?.companyName}
               </div>
             </div>
@@ -86,7 +85,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
               {offerDetails?.leadID?.customerDetail?.email}
             </div>
           </div>
