@@ -10,6 +10,9 @@ export interface contractTableTypes {
   contractNumber: string;
   offerID: ContractOfferDetails;
   createdAt: string;
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   paymentType: string;
   title: string;
@@ -17,13 +20,13 @@ export interface contractTableTypes {
   attachement?: string;
   emailStatus: string;
   signedContracts?: signedContracts[];
-  isNoteCreated:boolean
+  isNoteCreated: boolean;
 }
 
 export interface signedContracts {
   createdAt: string;
   link: string;
-  status: number
+  status: number;
 }
 
 export interface ContractOfferDetails {
@@ -79,7 +82,7 @@ export interface ContractOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?: string
+  signature?: string;
 }
 
 export interface ContractDetailCardProps {
@@ -92,5 +95,5 @@ export interface ContractDetailCardProps {
   ) => void;
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
-  handleSendEmail: () => void
+  handleSendEmail: () => void;
 }

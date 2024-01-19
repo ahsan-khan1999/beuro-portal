@@ -566,11 +566,11 @@ export function getEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
-    return "#4A13E7";
+    return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
   )
-    return "#FF0000";
+    return "#4A13E7";
   else return "#FF376F";
 }
 
