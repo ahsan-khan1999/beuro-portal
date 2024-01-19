@@ -83,6 +83,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
               placeholder: "100CHF",
               register,
               disabled: isUpdate,
+              step:"0.01"
             },
           },
         ],
