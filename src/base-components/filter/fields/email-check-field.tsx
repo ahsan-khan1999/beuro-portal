@@ -37,9 +37,8 @@ export default function EmailCheckField({
     <>
       <label
         htmlFor={label}
-        className={`custom-checkbox flex flex-row-reverse justify-between items-center border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-full ${
-          isCheckboxChecked ? "border-primary" : ""
-        }`}
+        className={`custom-checkbox flex flex-row-reverse justify-between items-center border border-dark py-[14px] pl-[10px] pr-[22px] h-fit bg-white rounded-md   cursor-pointer w-full ${isCheckboxChecked ? "border-primary" : ""
+          }`}
       >
         <input
           type="checkbox"
@@ -51,7 +50,8 @@ export default function EmailCheckField({
         />
 
         <span className="checkbox-control"></span>
-        <p className="text-[13px] font-medium text-[#393939] whitespace-nowrap">
+        <div className="flex justify-between flex-row-reverse space-2">
+        <p className=" text-[13px] font-medium text-[#393939] whitespace-nowrap ms-2">
           {label}
         </p>
         {isCheckboxChecked ? (
@@ -69,6 +69,7 @@ export default function EmailCheckField({
             />
           </svg>
         ) : (
+
           <svg
             className=" top-1 right-1"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +87,9 @@ export default function EmailCheckField({
               fill="black"
             />
           </svg>
+
         )}
+        </div>
       </label>
     </>
   );

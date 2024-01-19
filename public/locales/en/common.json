@@ -1073,7 +1073,7 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
-
+    "mail": "Mail",
     "offer_mail_preview": "Offer Email Preview",
     "address": "Address",
     "add_new_date": "Add New Date",
@@ -1926,6 +1926,6 @@
     "offer_id": "Offer ID",
     "email_status": "Email Status"
   },
-  "Pending":"Draft",
-  "Sent":"Sent"
+  "Pending": "Draft",
+  "Sent": "Sent"
 }

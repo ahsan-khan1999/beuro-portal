@@ -13,7 +13,7 @@ export type Template = {
 export type colsData = {
   title: string;
   placeholder: string;
-  data: { column: string; type: string; value: boolean };
+  data: { column: string; type: string; value: boolean, text: string,textType:string };
 };
 export type ColumnStructure = {
   firstColumn: colsData[];
@@ -37,6 +37,11 @@ export interface TemplateSettings {
     isPhoneNumber: boolean;
     isTaxNumber: boolean;
     isWebsite: boolean;
+    companyName: string;
+    email: string;
+    phoneNumber: string;
+    taxNumber: string;
+    website: string;
   };
   secondColumn: {
     isStreetNumber: boolean;
@@ -44,6 +49,12 @@ export interface TemplateSettings {
     isBankName: boolean;
     isAccountNumber: boolean;
     isIBAN: boolean;
+
+    streetNumber: string;
+    postCode: string;
+    bankName: string;
+    accountNumber: string;
+    iban: string
   };
   thirdColumn: {
     isRow1: boolean;
@@ -51,6 +62,12 @@ export interface TemplateSettings {
     isRow3: boolean;
     isRow4: boolean;
     isRow5: boolean;
+    row1: string;
+    row2: string;
+    row3: string;
+    row4: string;
+    row5: string;
+
   };
   fourthColumn: {
     isRow1: boolean;
@@ -58,6 +75,11 @@ export interface TemplateSettings {
     isRow3: boolean;
     isRow4: boolean;
     isRow5: boolean;
+    row1: string;
+    row2: string;
+    row3: string;
+    row4: string;
+    row5: string;
   };
   company: string;
   createdAt: string;

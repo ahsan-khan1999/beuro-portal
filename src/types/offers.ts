@@ -6,6 +6,7 @@ import { ContentTableRowTypes } from "./content";
 import { EmailTemplate, Template, TemplateSettings } from "./settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { InvoiceTableRowTypes } from "./invoice";
+import { staticEnums } from "@/utils/static";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -41,7 +42,10 @@ export interface OffersTableRowTypes {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: 0 | 1;
+  discountType: keyof typeof staticEnums["DiscountType"];
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
   emailStatus: "Pending" | "Sent" | "Failed";
   isDiscount: boolean;
   isTax: boolean;
@@ -61,7 +65,7 @@ export interface OffersTableRowTypes {
   discountDescription: string;
   signature?: string;
   attachement?: string;
-  isNoteCreated:boolean
+  isNoteCreated: boolean;
 }
 
 export interface PublicOffersTableRowTypes {

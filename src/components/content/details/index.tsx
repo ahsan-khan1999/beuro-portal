@@ -9,7 +9,7 @@ const ContentDetails = () => {
     useContentDetail();
   return (
     <Layout>
-      <div className="bg-white rounded-md px-5 pt-5 pb-10 maxSize:fixed maxSize:-mt-[190px] contentCalWidth z-10">
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 maxSize:fixed maxSize:-mt-[208px] maxSize:border-t-[14px] border-t-defaultBackground contentCalWidth z-10">
         <ContentCard
           contentDetails={contentDetails}
           contentDeleteHandler={contentDeleteHandler}

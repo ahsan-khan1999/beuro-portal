@@ -69,7 +69,7 @@ const ServiceDetailsData = ({
           )}
 
           <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-3">
               <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate("contracts.service_details.sub_total")}
@@ -78,13 +78,20 @@ const ServiceDetailsData = ({
                   {contractDetails?.offerID?.subTotal}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 ml-5">
+              <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
-                  {translate("contracts.service_details.tax")}
+                  {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                {calculateTax(contractDetails?.offerID?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
-
+                  {calculateTax(contractDetails?.offerID?.total, Number(contractDetails?.offerID?.taxAmount))} ({contractDetails?.offerID?.taxAmount}%)
+                </span>
+              </div>
+              <div className="flex flex-col gap-2 ml-5">
+                <span className="text-[#4D4D4D] text-[14px] font-normal">
+                  {translate("offers.service_details.detail_headings.discount")}
+                </span>
+                <span className="text-[#4B4B4B] text-base font-medium">
+                  {contractDetails?.offerID?.discountType === "Amount" ? contractDetails?.offerID?.discountAmount : calculateTax(contractDetails?.offerID?.total, Number(contractDetails?.offerID?.discountAmount))}
                 </span>
               </div>
             </div>

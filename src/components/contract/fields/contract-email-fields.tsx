@@ -14,7 +14,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   attachements, setAttachements,
   contractDetails,
   isMoreEmail,
-  setIsMoreEmail
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -56,6 +57,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
                     }
                   },
@@ -69,6 +73,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
                     }
                   },
@@ -102,7 +109,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
           isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
-              text: `CC`,
+              text: `Cc`,
               htmlFor: "cc",
               className: "mb-[10px]",
             },

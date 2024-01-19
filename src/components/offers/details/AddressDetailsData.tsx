@@ -1,10 +1,9 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const AddressDetailsData = ({
   offerDetails,
@@ -30,18 +29,16 @@ const AddressDetailsData = ({
               query: { offer: offerDetails?.id, tab: 1 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.address_details.edit_button")}
         </button>
       </div>
       <hr className="opacity-20 mb-5" />
       {offerDetails?.addressID?.address?.map((item, index) => (
         <div className="my-5" key={index}>
-          <h4 className="text-[#8F8F8F] mb-[10px]">
-            {item?.label}
-          </h4>
+          <h4 className="text-[#8F8F8F] mb-[10px]">{item?.label}</h4>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">

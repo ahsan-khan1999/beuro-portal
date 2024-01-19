@@ -1,10 +1,9 @@
 import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ReceiptContentDetails = ({
   contentDetail,
@@ -26,9 +25,9 @@ const ReceiptContentDetails = ({
         </h2>
         <button
           onClick={() => onClick(3, ComponentsType.editReceiptContent)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="edit" />
+          <EditIcon />
           {translate("content.details.edit_button")}
         </button>
       </div>

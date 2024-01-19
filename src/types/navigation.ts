@@ -6,10 +6,15 @@ export interface Locale {
     locale: string
 }
 
+export enum FlagType {
+    en = "en",
+    de = "de",
+}
+
 export interface FlagIconProps {
-    countryCode?: string;
+    countryCode?: FlagType;
 }
 export interface Language {
-    code: string;
+    code: FlagType;
     name: string;
 }

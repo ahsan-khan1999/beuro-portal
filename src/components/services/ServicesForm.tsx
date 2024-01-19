@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceForm = ({
   isUpdate,
@@ -30,15 +31,15 @@ const ServiceForm = ({
           <BaseButton
             buttonText={translate("services.detail.edit_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
           >
-            <Image src={editInfo} alt="editInfo" />
+            <EditIcon />
           </BaseButton>
         ) : (
           <BaseButton
             buttonText={translate("services.detail.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
           ></BaseButton>
         )}
       </div>

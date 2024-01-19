@@ -1,10 +1,9 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const AdditionalDetails = ({
   offerDetails,
@@ -30,9 +29,9 @@ const AdditionalDetails = ({
               query: { offer: offerDetails?.id, tab: 3 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.additional_details.edit_button")}
         </button>
       </div>

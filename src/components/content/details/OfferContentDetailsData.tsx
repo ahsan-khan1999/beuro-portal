@@ -1,10 +1,9 @@
 import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
-import Image from "next/image";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const OfferContentDetailsData = ({
   onClick,
@@ -35,9 +34,9 @@ const OfferContentDetailsData = ({
         </h2>
         <button
           onClick={() => onClick(0, ComponentsType.editOfferContent)}
-          className="flex gap-x-4 items-center text-[#532d2d] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex gap-x-4 items-center text-[#532d2d] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("content.details.edit_button")}
         </button>
       </div>

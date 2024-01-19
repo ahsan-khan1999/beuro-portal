@@ -173,7 +173,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   label: `${translate("common.via_insta")}`,
                 },
                 {
-                  value: "Via Instagram",
+                  value: "Via Post",
                   label: `${translate("common.via_post")}`,
                 },
               ],
