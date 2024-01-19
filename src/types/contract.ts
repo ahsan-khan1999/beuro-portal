@@ -1,3 +1,4 @@
+import { staticEnums } from "@/utils/static";
 import { DateRangeProps, User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
@@ -62,7 +63,7 @@ export interface ContractOfferDetails {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: keyof typeof staticEnums["DiscountType"];;
+  discountType: keyof typeof staticEnums["DiscountType"];
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;
