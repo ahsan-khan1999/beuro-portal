@@ -23,16 +23,16 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               {moment(item?.creationDate).format("DD/MM/YYYY")}
             </span>
 
-            <span className="py-4 flex justify-center items-center cursor-pointer">
-              <div
-                onClick={() =>
-                  router.push({
-                    pathname: "/employees/details",
-                    query: { employee: item.id },
-                  })
-                }
-                className="cursor-pointer"
-              >
+            <span
+              onClick={() =>
+                router.push({
+                  pathname: "/employees/details",
+                  query: { employee: item.id },
+                })
+              }
+              className="flex justify-center items-center cursor-pointer"
+            >
+              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"

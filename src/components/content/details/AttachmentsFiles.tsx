@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
 import { getFileNameFromUrl } from "@/utils/utility";
 import Link from "next/link";
+import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 const AttachmentsFiles = ({ fileName }: { fileName: string }) => {
   return (
@@ -20,7 +20,7 @@ const AttachmentsFiles = ({ fileName }: { fileName: string }) => {
         locale={false}
         download
       >
-        <Image src={downloadIcon} alt="downloadIcon" />
+        <DownloadIcon />
       </Link>
     </div>
   );

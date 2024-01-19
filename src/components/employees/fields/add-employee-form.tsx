@@ -5,8 +5,15 @@ import React from "react";
 
 const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate,renderModal ,translate} =
-    useEmployeeDetail(false);
+  const {
+    fields,
+    onSubmit,
+    handleSubmit,
+    errors,
+    isUpdate,
+    renderModal,
+    translate,
+  } = useEmployeeDetail(false);
 
   return (
     <div
@@ -22,7 +29,7 @@ const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
         <BaseButton
           buttonText={translate("employees.details.cancel_button")}
           onClick={handleCancel}
-          containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[161px] w-full"
         ></BaseButton>
       </div>
       <Form

@@ -12,14 +12,13 @@ const DUMMY_LIST = [
     code: "de",
     name: "German",
   },
- 
 ];
 
 export const useLanguageSeleclor = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [languages, setLanguages] = useState<Language[]>([]);
-  const router = useRouter()
+  const router = useRouter();
   const dropdownRef = useRef<HTMLButtonElement>(null);
 
   const selectedLanguage = DUMMY_LIST.find(
@@ -39,8 +38,7 @@ export const useLanguageSeleclor = () => {
     router.push(routeWithQuery, undefined, {
       locale: language?.code,
     });
-  }
-
+  };
 
   useEffect(() => {
     setLanguages(DUMMY_LIST as Language[]);

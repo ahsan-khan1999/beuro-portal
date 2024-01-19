@@ -34,7 +34,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 })
               }
             >
-              <div className="p-[5px] rounded-md w-[27px] h-[27px]">
+              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"

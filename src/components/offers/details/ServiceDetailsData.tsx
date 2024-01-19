@@ -1,13 +1,12 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
 import { calculateTax, filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceDetailsData = ({
   offerDetails,
@@ -35,9 +34,9 @@ const ServiceDetailsData = ({
               query: { offer: offerDetails?.id, tab: 2 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.service_details.edit_button")}
         </button>
       </div>
@@ -108,7 +107,8 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
+                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} (
+                  {TAX_PERCENTAGE}%)
                 </span>
               </div>
             </div>

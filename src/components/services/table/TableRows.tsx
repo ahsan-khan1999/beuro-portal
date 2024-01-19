@@ -22,7 +22,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
             <span className="py-4 mr-1 truncate">{item.description}</span>
 
             <span
-              className="py-4 flex justify-center items-center cursor-pointer"
+              className="flex justify-center items-center cursor-pointer"
               onClick={() =>
                 router.push({
                   pathname: "/services/details",
@@ -30,7 +30,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                 })
               }
             >
-              <span className="flex justify-center items-center">
+              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"
@@ -43,7 +43,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                     fill="#4A13E7"
                   />
                 </svg>
-              </span>
+              </div>
             </span>
           </div>
         );
