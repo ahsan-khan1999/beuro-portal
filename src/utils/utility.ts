@@ -635,7 +635,7 @@ export function getInvoiceStatusColor(status: string) {
     staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Paid"]
   )
     return "#45C769";
-  else return "#FF376F";
+  else return "#4A13E7";
 }
 
 export function getInvoiceEmailColor(status: string) {
