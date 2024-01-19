@@ -34,7 +34,7 @@ const Discounts = ({
   return (
     <>
       {discountData && discountData?.length > 0 ? (
-        <div className="flex flex-col bg-white rounded-b-lg max-h-[300px] overflow-y-auto">
+        <div className="flex flex-col bg-white rounded-b-lg max-h-[300px] overflow-y-auto 2xl:max-w-[244px] w-full">
           <div className="flex flex-col gap-[3px] pl-[28px] pr-[21px] py-3">
             <span className="text-[#4B4B4B] text-[12px] font-normal">
               Discount
