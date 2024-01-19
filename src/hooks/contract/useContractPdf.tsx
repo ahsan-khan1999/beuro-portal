@@ -197,12 +197,11 @@ export const useContractPdf = () => {
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
-              tax: calculateTax(
-                contractDetails?.offerID?.subTotal,
-                Number(TAX_PERCENTAGE)
-              )?.toString(),
+              tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
+              discountType:contractDetails?.offerID?.discountType,
+              taxType:contractDetails?.offerID?.taxType
             },
             footerDetails: {
               firstColumn: {

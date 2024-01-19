@@ -59,7 +59,7 @@ export interface ContractOfferDetails {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: 0 | 1;
+  discountType: keyof typeof staticEnums["DiscountType"];;
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;

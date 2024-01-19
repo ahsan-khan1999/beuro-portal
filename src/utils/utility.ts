@@ -673,7 +673,6 @@ export function calculatePercentage(
   if (totalAmount === 0) {
     return 0; // Avoid division by zero
   }
-
   const percentage = ((amount / totalAmount) * 100).toFixed(2);
   return parseFloat(percentage);
 }

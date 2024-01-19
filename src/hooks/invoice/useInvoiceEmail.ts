@@ -56,6 +56,7 @@ export const useInvoiceEmail = (
     setError,
     formState: { errors },
     reset,
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -124,7 +125,8 @@ export const useInvoiceEmail = (
     setAttachements,
     collectiveInvoiceDetails,
     isMoreEmail,
-    setIsMoreEmail
+    setIsMoreEmail,
+    setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

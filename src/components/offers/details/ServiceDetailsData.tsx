@@ -92,7 +92,7 @@ const ServiceDetailsData = ({
           ))}
 
           <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-3">
               <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate(
@@ -103,14 +103,23 @@ const ServiceDetailsData = ({
                   {offerDetails?.subTotal}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 ml-5">
+              <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
+                  {calculateTax(offerDetails?.total, Number(offerDetails?.taxAmount))} ({offerDetails?.taxAmount}%)
                 </span>
               </div>
+              <div className="flex flex-col gap-2 ml-5">
+                <span className="text-[#4D4D4D] text-[14px] font-normal">
+                  {translate("offers.service_details.detail_headings.discount")}
+                </span>
+                <span className="text-[#4B4B4B] text-base font-medium">
+                  {offerDetails?.discountType === "Amount" ? offerDetails?.discountAmount: calculateTax(offerDetails?.total, Number(offerDetails?.discountAmount))} 
+                </span>
+              </div>
+              
             </div>
 
             <hr className="opacity-20 mt-2" />

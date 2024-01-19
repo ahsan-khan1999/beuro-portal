@@ -48,7 +48,7 @@ export const useContractEmail = (
     setError,
     formState: { errors },
     watch,
-    reset,
+    reset,setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -96,7 +96,9 @@ export const useContractEmail = (
     setAttachements,
     contractDetails,
     moreEmail,
-    setMoreEmail
+    setMoreEmail,
+    setValue
+
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedData = {

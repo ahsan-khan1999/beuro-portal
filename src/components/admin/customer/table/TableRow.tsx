@@ -1,4 +1,5 @@
 import { CustomersAdmin } from "@/types/admin/customer";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -18,19 +19,19 @@ const TableRow = ({
           >
             <span className="py-4">{item?.company?.refID}</span>
             <span className="py-4 flex items-center justify-center">
-              {/* <Image
+              <Image
                 src={item?.company?.logo}
                 alt="company logo"
                 height={35}
                 width={35}
-              /> */}
+              />
             </span>
             <span className="py-4 truncate">{item?.company?.companyName}</span>
             <span className="py-4 truncate">{item?.fullName}</span>
             <span className="truncate xs:block mlg:hidden xlg:block py-4">
               {item?.email}
             </span>
-            <span className="py-4 truncate">{item?.company?.plan}</span>
+            <span className="py-4 truncate">{item?.plan?.planName}</span>
             <span className="py-4 flex items-center justify-center">
               <div
                 className={`${

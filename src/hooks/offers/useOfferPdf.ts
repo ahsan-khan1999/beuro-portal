@@ -147,9 +147,11 @@ export const useOfferPdf = () => {
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: offerDetails?.subTotal?.toString(),
-              tax: calculateTax(offerDetails?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+              tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               grandTotal: offerDetails?.total?.toString(),
+              discountType:offerDetails?.discountType,
+              taxType:offerDetails?.taxType
             },
             footerDetails: {
               firstColumn: {

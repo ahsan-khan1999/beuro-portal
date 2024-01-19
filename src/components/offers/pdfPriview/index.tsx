@@ -62,6 +62,7 @@ const PdfPriview = () => {
             onPrint={handlePrint}
             handleSendByPost={handleSendByPost}
             activeButtonId={activeButtonId}
+            offerId={offerData?.id}
           />
 
           <OfferPdf

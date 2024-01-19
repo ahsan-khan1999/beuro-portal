@@ -22,6 +22,7 @@ const EmailCard = ({
   onPrint,
   handleSendByPost,
   activeButtonId,
+  offerId
 }: EmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -33,7 +34,12 @@ const EmailCard = ({
             src={backIcon}
             alt="backIcon"
             className="cursor-pointer"
-            onClick={() => router.back()}
+            onClick={() => {
+              router.push({
+                pathname: "/offers/details",
+                query: { offer: offerId },
+              })
+            }}
           />
           <h1 className="text-[#4B4B4B] text-2xl font-medium">
             {translate("offer_pdf_card.offer_detail")}
@@ -61,7 +67,7 @@ const EmailCard = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
-          
+
           <IconOnlyButton
             icon={<Image src={downloadIcon} alt="downloadIcon" />}
             onClick={onDownload}

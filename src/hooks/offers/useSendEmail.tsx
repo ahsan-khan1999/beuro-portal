@@ -52,6 +52,7 @@ export const useSendEmail = (
     setError,
     reset,
     formState: { errors },
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -97,7 +98,8 @@ export const useSendEmail = (
     setAttachements,
     offerDetails,
     isMoreEmail,
-    setIsMoreEmail
+    setIsMoreEmail,
+    setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedData = {
