@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import {
   getContractStatusColor,
   getEmailColor,
+  getMailStatusColor,
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { formatDateString } from "@/utils/functions";
@@ -29,7 +30,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_100%)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(110px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(160px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(150px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.contractNumber}</span>
             <span className="py-4 truncate">
@@ -38,8 +39,10 @@ const TableRows = ({
             <span className="mr-1 truncate hidden xs:block mlg:hidden xlg:hidden maxSize:block xMaxSize:block py-4">
               {item?.title}
             </span>
-            <span className="py-4 truncate">{item.offerID?.total}</span>
-            <span className="py-4 mlg:hidden xlg:hidden maxSize:hidden xLarge:block">
+            <span className="py-4 truncate mlg:hidden xlg:block">
+              {item.offerID?.total}
+            </span>
+            <span className="py-4 mlg:hidden xLarge:block">
               {formatDateString(item.createdAt)}
             </span>
             <span className="flex justify-center items-center">
@@ -145,6 +148,30 @@ const TableRows = ({
                 <path
                   d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
                   fill={item?.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                />
+              </svg>
+            </span>
+
+            <span className="py-4 flex justify-center items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="29"
+                viewBox="0 0 29 29"
+                fill="none"
+              >
+                <path
+                  opacity="1"
+                  d="M1.12891 4.34055C1.12891 2.59917 2.54057 1.1875 4.28195 1.1875H24.7768C26.5181 1.1875 27.9298 2.59917 27.9298 4.34055V24.8354C27.9298 26.5767 26.5181 27.9884 24.7768 27.9884H4.28195C2.54057 27.9884 1.12891 26.5767 1.12891 24.8354V4.34055Z"
+                  stroke={`${getMailStatusColor(item?.mail?.mailStatus)}`}
+                />
+                <path
+                  d="M14.4499 16.1375C15.3211 16.1375 16.0273 15.4299 16.0273 14.557C16.0273 13.6842 15.3211 12.9766 14.4499 12.9766C13.5788 12.9766 12.8726 13.6842 12.8726 14.557C12.8726 15.4299 13.5788 16.1375 14.4499 16.1375Z"
+                  fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
+                />
+                <path
+                  d="M6.66915 15.0562C7.70759 16.36 10.7966 19.837 14.4508 19.837C18.1051 19.837 21.1941 16.3602 22.2325 15.0562C22.4559 14.7664 22.4559 14.3581 22.2325 14.0817C21.1941 12.7778 18.1051 9.30082 14.4508 9.30082C10.7966 9.28765 7.70759 12.7646 6.66915 14.0685C6.43255 14.3583 6.43255 14.7664 6.66915 15.0562ZM14.4508 11.3949C16.1991 11.3949 17.6056 12.8041 17.6056 14.5558C17.6056 16.3075 16.1991 17.7167 14.4508 17.7167C12.7026 17.7167 11.2961 16.3075 11.2961 14.5558C11.2961 12.8041 12.7026 11.3949 14.4508 11.3949Z"
+                  fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                 />
               </svg>
             </span>
