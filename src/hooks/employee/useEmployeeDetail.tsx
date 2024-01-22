@@ -84,6 +84,7 @@ const useEmployeeDetail = (stage: boolean) => {
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
     updateQuery(router, router.locale as string);
+    onClose()
   };
   const handleCreateSuccess = (email: string) => {
     dispatch(

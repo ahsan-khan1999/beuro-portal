@@ -183,7 +183,7 @@
     "value_max": "value_max",
     "mail_sent_maybe": "Email Sent",
     "value_min": "{0} Minimum {1} ",
-
+    "employee_creation_limit_reached":"You are running out of your plan!",
     "mixed": {
       "required": "This is required field ",
       "oneOf": "Password must match ",
