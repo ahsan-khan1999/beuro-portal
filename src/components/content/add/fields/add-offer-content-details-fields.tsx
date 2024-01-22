@@ -42,18 +42,18 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
       },
     },
 
-    {
-      containerClass: "mt-5",
-      //@ts-expect-error
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children:
-          count &&
-          generateAddressChildren(register, count, translate, append, remove),
-      },
-    },
+    // {
+    //   containerClass: "mt-5",
+    //   //@ts-expect-error
+    //   field: {
+    //     type: Field.div,
+    //     id: "div-field",
+    //     className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
+    //     children:
+    //       count &&
+    //       generateAddressChildren(register, count, translate, append, remove),
+    //   },
+    // },
     {
       containerClass: "mt-5",
       field: {
@@ -91,10 +91,10 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               name: "offerContent.description",
 
               control,
-              value:
-                (contentDetails?.id &&
-                  contentDetails?.offerContent?.description) ||
-                "",
+              // value:
+              //   (contentDetails?.id &&
+              //     contentDetails?.offerContent?.description) ||
+              //   "",
             },
           },
           {
@@ -112,9 +112,9 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-              value:
-                (contentDetails?.id && contentDetails?.offerContent?.body) ||
-                "",
+              // value:
+              //   (contentDetails?.id && contentDetails?.offerContent?.body) ||
+              //   "",
             },
           },
 

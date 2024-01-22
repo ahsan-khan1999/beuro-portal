@@ -64,14 +64,11 @@ export const createContent: AsyncThunk<boolean, object, object> | any =
             let apiData = { ...data, contentId: contentId, step: step }
 
             const response = await apiServices.createContent(apiData);
-            if (!isUpdate) {
                 let objectToUpdate = { ...response?.data?.data?.Content, type: apiData?.type, stage: stage }
-                localStoreUtil.store_data("content", objectToUpdate)
                 thunkApi.dispatch(setContentDetails(objectToUpdate));
-            } else {
-                thunkApi.dispatch(setContentDetails(data));
+                localStoreUtil.store_data("content", objectToUpdate)
+                // thunkApi.dispatch(setContentDetails(data));
 
-            }
 
 
             return response?.data?.data?.Content;
@@ -125,8 +122,8 @@ export const updateContent: AsyncThunk<boolean, object, object> | any =
             const contentData = await localStoreUtil.get_data("content")
             let objectToUpdate = { ...response?.data?.Content, type: contentData?.type, stage: stage }
 
-            localStoreUtil.store_data("content", objectToUpdate)
             thunkApi.dispatch(setContentDetails(objectToUpdate));
+            localStoreUtil.store_data("content", objectToUpdate)
 
 
             return response?.data?.Content;
