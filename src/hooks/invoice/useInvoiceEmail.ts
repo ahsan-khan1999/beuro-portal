@@ -36,6 +36,8 @@ export const useInvoiceEmail = (
   const { loading, error, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+
   const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
@@ -54,6 +56,7 @@ export const useInvoiceEmail = (
     setError,
     formState: { errors },
     reset,
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -97,7 +100,7 @@ export const useInvoiceEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title  + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        subject: selectedContent?.invoiceContent?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.invoiceContent?.body,
         pdf: selectedContent?.invoiceContent?.attachments,
       });
@@ -120,7 +123,10 @@ export const useInvoiceEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
+    isMoreEmail,
+    setIsMoreEmail,
+    setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

@@ -30,6 +30,7 @@ export const useContractEmail = (
     (state) => state.contract
   );
   const { content, contentDetails } = useAppSelector((state) => state.content);
+  const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false })
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contractDetails?.id &&
       transformAttachments(
@@ -47,7 +48,7 @@ export const useContractEmail = (
     setError,
     formState: { errors },
     watch,
-    reset,
+    reset,setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -58,7 +59,7 @@ export const useContractEmail = (
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
-      subject: contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
+      subject: contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
       description: contractDetails?.offerID?.content?.confirmationContent?.body,
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
     });
@@ -70,7 +71,7 @@ export const useContractEmail = (
       reset({
         email: contractDetails?.offerID?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.confirmationContent?.title  +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
+        subject: selectedContent?.confirmationContent?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.confirmationContent?.body,
         pdf: selectedContent?.confirmationContent?.attachments,
       });
@@ -93,7 +94,11 @@ export const useContractEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    contractDetails
+    contractDetails,
+    moreEmail,
+    setMoreEmail,
+    setValue
+
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedData = {

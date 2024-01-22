@@ -1,5 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField, GenerateOfferFormField } from "@/types";
+import {
+  FormField,
+  GenerateContractFormField,
+  GenerateOfferFormField,
+} from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const OfferEmailFormField: GenerateOfferFormField = (
@@ -11,8 +15,12 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   content,
   contentDetails,
   onContentSelect,
-  attachements, setAttachements,
-  offerDetails
+  attachements,
+  setAttachements,
+  offerDetails,
+  isMoreEmail,
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -20,10 +28,11 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3 gap-y-5 xl:gap-y-0",
+        className:
+          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
-            containerClass: "mb-0 col-span-1",
+            containerClass: "mb-0 col-span-4",
             label: {
               text: `${translate("contracts.contract_email_preview.email")}`,
               htmlFor: "email",
@@ -37,25 +46,148 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               name: "email",
               placeholder: "email@domain.com",
               register,
-
             },
           },
           {
-            containerClass: "col-span-2",
+            containerClass: "col-span-1 flex my-auto ",
+            field: {
+              type: Field.div,
+              className: "flex space-x-2 items-center",
+              id: "text",
+              children: [
+                {
+                  containerClass: "mb-0  ",
+                  field: {
+                    type: Field.span,
+                    text: `Cc`,
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    id: "cc",
+                    onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "");
+                      }
+
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isCc: !isMoreEmail?.isCc,
+                      });
+                    },
+                  },
+                },
+
+                {
+                  containerClass: "mb-0  ",
+                  field: {
+                    type: Field.span,
+                    text: `Bcc`,
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    id: "bcc",
+                    onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "");
+                      }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isBcc: !isMoreEmail?.isBcc,
+                      });
+                    },
+                  },
+                },
+              ],
+            },
+          },
+
+          {
+            containerClass: "col-span-7",
             label: {
               text: `${translate("contracts.contract_email_preview.content")}`,
               htmlFor: "content",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary ",
               type: Field.select,
               id: "content",
               name: "content",
-              options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
+              options:
+                content?.map((item) => ({
+                  label: item.contentName,
+                  value: item.id,
+                })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id || ""
+              value:
+                (contentDetails?.id && contentDetails?.id) ||
+                offerDetails?.content?.id ||
+                "",
+            },
+          },
+          (isMoreEmail?.isCc && {
+            containerClass: "mb-0 mt-5 col-span-4",
+            label: {
+              text: `Cc`,
+              htmlFor: "cc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "cc",
+              name: "cc",
+              placeholder: "email@domain.com",
+              register,
+            },
+          }) || {
+            containerClass: "hidden",
+            label: {
+              text: `Cc`,
+              htmlFor: "cc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "cc",
+              name: "cc",
+              placeholder: "email@domain.com",
+              register,
+            },
+          },
+          (isMoreEmail?.isBcc && {
+            containerClass: "mb-0 mt-5 col-span-4",
+            label: {
+              text: `Bcc`,
+              htmlFor: "bcc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "bcc",
+              name: "bcc",
+              placeholder: "email@domain.com",
+              register,
+            },
+          }) || {
+            containerClass: "hidden",
+            label: {
+              text: `Bcc`,
+              htmlFor: "bcc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "bcc",
+              name: "bcc",
+              placeholder: "email@domain.com",
+              register,
             },
           },
         ],
@@ -78,7 +210,6 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
-
       },
     },
 
@@ -91,12 +222,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "description",
         name: "description",
         control,
-        value: contentDetails?.id && contentDetails?.offerContent?.body || offerDetails?.content?.offerContent?.body
-
+        value:
+          (contentDetails?.id && contentDetails?.offerContent?.body) ||
+          offerDetails?.content?.offerContent?.body,
       },
     },
 
@@ -116,7 +248,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         name: "attachments",
         control,
         attachements,
-        setAttachements
+        setAttachements,
       },
     },
 

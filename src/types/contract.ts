@@ -1,3 +1,4 @@
+import { staticEnums } from "@/utils/static";
 import { DateRangeProps, User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
@@ -10,19 +11,23 @@ export interface contractTableTypes {
   contractNumber: string;
   offerID: ContractOfferDetails;
   createdAt: string;
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   paymentType: string;
   title: string;
   additionalDetails: string;
   attachement?: string;
   emailStatus: string;
-  signedContracts?: signedContracts[]
+  signedContracts?: signedContracts[];
+  isNoteCreated: boolean;
 }
 
 export interface signedContracts {
   createdAt: string;
   link: string;
-  status: number
+  status: number;
 }
 
 export interface ContractOfferDetails {
@@ -58,7 +63,7 @@ export interface ContractOfferDetails {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: 0 | 1;
+  discountType: keyof typeof staticEnums["DiscountType"];
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;
@@ -78,7 +83,7 @@ export interface ContractOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?: string
+  signature?: string;
 }
 
 export interface ContractDetailCardProps {
@@ -91,5 +96,5 @@ export interface ContractDetailCardProps {
   ) => void;
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
-  handleSendEmail: () => void
+  handleSendEmail: () => void;
 }

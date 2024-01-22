@@ -1,4 +1,6 @@
+import { formatDateTimeToDate } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
+import moment from "moment";
 import { useMemo, useState } from "react";
 
 const styles = StyleSheet.create({
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     color: "#000",
   },
-
 });
 export const AggrementSignature = ({
   showContractSign,
@@ -65,6 +66,7 @@ export const AggrementSignature = ({
   };
 
   useMemo(() => signature && onFileChange(), [signature]);
+  const date = moment(new Date()).format("DD/MMMM/YY");
 
   return (
     <View style={styles.wrapper}>
@@ -78,6 +80,9 @@ export const AggrementSignature = ({
             <View
               style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
             >
+              {signature && <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
+                {date}
+              </Text>}
               <Text style={styles.dateText}>Datum</Text>
             </View>
 

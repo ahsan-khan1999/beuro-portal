@@ -95,30 +95,37 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   ];
 
   return (
-    <div className="flex w-full flex-col xl:flex-row gap-x-6">
-      <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-fit">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
+    <>
+      <div className="2xl:fixed mb-5">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0 ">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[550px] xl:mt-0 mt-4 overflow-y-scroll">
+      <div className="overflow-y-auto w-full break-all flex">
+        <div className="max-w-[260px] w-full hidden 2xl:block"></div>
         {loading ? (
-          <LoadingState />
+          <div className="flex justify-center items-center w-full">
+            <LoadingState />
+          </div>
         ) : (
-          componentArray.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
+          <div className="flex flex-col gap-y-5 w-full">
+            {componentArray.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

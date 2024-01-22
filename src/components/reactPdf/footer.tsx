@@ -69,24 +69,32 @@ export const Footer = ({
   templateSettings,
 }: PdfPreviewFooterProps) => {
   const { companyName, email, phoneNumber, taxNumber, website } =
-    documentDetails?.firstColumn ?? {};
-  const { address, bankDetails } = documentDetails?.secondColumn ?? {};
+  templateSettings?.firstColumn ?? {};
+  const address = {
+    streetNumber:templateSettings?.secondColumn?.streetNumber,
+    postalCode:templateSettings?.secondColumn?.postCode,
+  }
+  const bankDetails = {
+    bankName:templateSettings?.secondColumn?.bankName,
+  }
+  // const { address, bankDetails } = documentDetails?.secondColumn ?? {};
   const {
     row1: c3Row1,
     row2: c3Row2,
     row3: c3Row3,
     row4: c3Row4,
     row5: c3Row5,
-  } = documentDetails?.thirdColumn ?? {};
+  } = templateSettings?.thirdColumn ?? {};
   const {
     row1: c4Row1,
     row2: c4Row2,
     row3: c4Row3,
     row4: c4Row4,
     row5: c4Row5,
-  } = documentDetails?.fourthColumn ?? {};
-  const ibanNumber = insertBreaks(bankDetails?.ibanNumber, 16);
-  const accountNumber = insertBreaks(bankDetails?.accountNumber, 16);
+  } = templateSettings?.fourthColumn ?? {};
+  const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 16);
+  const accountNumber = insertBreaks(templateSettings?.secondColumn?.accountNumber, 16);
+  
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
   const {
     isFirstColumn,

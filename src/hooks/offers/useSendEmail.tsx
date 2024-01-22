@@ -33,6 +33,7 @@ export const useSendEmail = (
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -51,6 +52,7 @@ export const useSendEmail = (
     setError,
     reset,
     formState: { errors },
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -94,7 +96,10 @@ export const useSendEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    offerDetails
+    offerDetails,
+    isMoreEmail,
+    setIsMoreEmail,
+    setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedData = {

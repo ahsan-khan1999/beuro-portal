@@ -23,7 +23,7 @@ const EditInoviceContentDetails = ({
         </h2>
         <button
           onClick={() => onClick(2, ComponentsType.invoiceContent)}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-2 px-9"
         >
           {translate("content.details.cancel_button")}
         </button>

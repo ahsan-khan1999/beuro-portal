@@ -182,6 +182,7 @@
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mail_sent_maybe": "E-Mail gesendet",
     "value_min": "{0} Minimum {1} ",
+    "employee_creation_limit_reached":"Ihr Plan läuft aus!",
 
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
@@ -312,7 +313,7 @@
   },
   "request_modal": {
     "main_heading": "Ihre Anfrage wurde gesendet",
-    "sub_heading": "Vielen Dank für Ihre Anfrage an Buro, wir freuen uns, dass Sie dabei sind. 3",
+    "sub_heading": "Vielen Dank für Ihre Anfrage an Buro, wir freuen uns, dass Sie dabei sind.",
     "button": "Erledigt"
   },
   "contact_support": {
@@ -1006,9 +1007,13 @@
   },
   "common": {
     "modals": {
+      "update_password": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
+      "invoice_update": "Vielen Dank für die Aktualisierung der Rechnung, wir sind froh, dass wir Sie haben.",
+      "receipt_update": "Vielen Dank für die Aktualisierung der Quittung, wir sind froh, Sie zu haben.",
       "verifying_email": "Wir verifizieren Ihre E-Mail",
       "verifying_des": "Bitte fahren Sie fort! Bitte nehmen Sie sich einen Moment Zeit, um sicherzustellen, dass wir Ihre korrekte E-Mail-Adresse haben",
       "admin_setting": "Einstellungen erfolgreich aktualisiert",
+      "setting_update": "Vielen Dank für die Aktualisierung der Einstellungen, wir freuen uns, dass Sie dabei sind.",
       "admin_setting_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "verify_email": "E-Mail Adresse überprüfen",
       "verify_email_des1": "Eine E-Mail wurde gesendet an ",
@@ -1049,7 +1054,7 @@
       "created_customer": "Kunde erfolgreich erstellt",
       "customer_created_des": "Vielen Dank für die Erstellung des Kunden. Wir freuen uns, Sie als Kunden zu haben.",
       "are_sure": "Sind Sie sicher?",
-      "leave_page": "Möchten Sie diese Seite verlassen, ohne Änderungen zu speichern?",
+      "leave_page": "Sie möchten diese Änderungen speichern?",
       "offer_delete": "Bitte bestätigen Sie die Angebote-ID",
       "offer_ID": "Angebote-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
@@ -1057,6 +1062,7 @@
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "offer_email_sent": "E-Mail erfolgreich gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
       "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
@@ -1064,6 +1070,10 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
+    "discount": "Rabatt",
+    "update": "Update",
+    "mail": "Mail",
+    "offer_mail_preview": "E-Mail-Vorschau anbieten",
     "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
     "add_company_info": "Unternehmensinformationen hinzufügen",
@@ -1083,6 +1093,8 @@
     "tax": "Steuersatz (%)",
     "action": "Aktion",
     "help": "Hilfezentrum",
+    "via_phone": "Per Telefonanruf",
+    "via_post": "Über Post",
     "via_email": "Über E-Mail",
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",
@@ -1830,8 +1842,8 @@
     "condition_for_moving": "Bedingungen für Umzugsschätzungen",
     "thanks_message": "Vielen Dank für Ihr Interesse an unseren Dienstleistungen.",
     "pdf_description": "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen.",
-    "submit":"Einreichen",
-    "clear":"Klar"
+    "submit": "Einreichen",
+    "clear": "Klar"
   },
   "pricing_details": {
     "heading": "Starten Sie mit uns",
@@ -1915,5 +1927,7 @@
     "send_email": "E-Mail senden",
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
-  }
+  },
+  "Pending": "Entwurf",
+  "Sent": "Gesendet"
 }

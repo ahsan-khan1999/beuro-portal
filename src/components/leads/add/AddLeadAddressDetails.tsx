@@ -14,7 +14,7 @@ const AddLeadAddressDetails = ({
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, translate } =
-    useAddLeadAddressDetails(onHandleBack, onHandleNext);
+    useAddLeadAddressDetails(onHandleBack);
   const router = useRouter();
 
   return (
@@ -28,7 +28,7 @@ const AddLeadAddressDetails = ({
         </h2>
         <button
           onClick={() => router.push("/leads")}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("leads.address_details.cancel_button")}
         </button>

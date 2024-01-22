@@ -1,13 +1,12 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
 import { calculateTax, filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceDetailsData = ({
   offerDetails,
@@ -35,9 +34,9 @@ const ServiceDetailsData = ({
               query: { offer: offerDetails?.id, tab: 2 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.service_details.edit_button")}
         </button>
       </div>
@@ -92,7 +91,7 @@ const ServiceDetailsData = ({
           ))}
 
           <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-3">
               <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate(
@@ -103,14 +102,23 @@ const ServiceDetailsData = ({
                   {offerDetails?.subTotal}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 ml-5">
+              <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {calculateTax(offerDetails?.total, Number(TAX_PERCENTAGE))} ({TAX_PERCENTAGE}%)
+                  {calculateTax(offerDetails?.total, Number(offerDetails?.taxAmount))} ({offerDetails?.taxAmount}%)
                 </span>
               </div>
+              <div className="flex flex-col gap-2 ml-5">
+                <span className="text-[#4D4D4D] text-[14px] font-normal">
+                  {translate("offers.service_details.detail_headings.discount")}
+                </span>
+                <span className="text-[#4B4B4B] text-base font-medium">
+                  {offerDetails?.discountType === "Amount" ? offerDetails?.discountAmount: calculateTax(offerDetails?.total, Number(offerDetails?.discountAmount))} 
+                </span>
+              </div>
+              
             </div>
 
             <hr className="opacity-20 mt-2" />

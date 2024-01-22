@@ -97,7 +97,10 @@ const ContentAddDetailsData = () => {
       <AddInoviceContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addReceiptContent]: (
-      <AddReceiptContentDetails onHandleNext={handleNextTab} />
+      <AddReceiptContentDetails 
+      onHandleBack={onHandleBack}
+      
+      onHandleNext={handleNextTab} />
     ),
   };
 
@@ -183,12 +186,13 @@ const ContentAddDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={item.name}
             />
           ))}
         </div>
       </div>
       <div
-        className="overflow-y-auto w-full break-all xLarge:mt-[145px] flex"
+        className="w-full break-all xLarge:mt-[145px] flex"
         ref={ref}
       >
         <div className="max-w-[300px] w-full hidden xLarge:block"></div>

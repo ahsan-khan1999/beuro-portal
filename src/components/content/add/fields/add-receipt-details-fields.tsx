@@ -53,9 +53,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.receiptContent?.description,
+             
             },
           },
 
@@ -73,7 +71,6 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 

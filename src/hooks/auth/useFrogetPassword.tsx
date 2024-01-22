@@ -40,7 +40,7 @@ export default function useFrogetPassword() {
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.offer_email_sent")}
-        modelSubHeading={translate("common.modals.email_sent_des")}
+        modelSubHeading={translate("common.modals.update_password")}
         routeHandler={onClick}
       />
     ),

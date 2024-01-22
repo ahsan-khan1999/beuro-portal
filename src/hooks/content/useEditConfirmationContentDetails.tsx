@@ -8,7 +8,7 @@ import { EditConfirmationContentDetailsFormField } from "@/components/content/ed
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 import { Attachement } from "@/types/global";
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
 import { transformAttachments } from "@/utils/utility";
 
@@ -37,7 +37,7 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  useMemo(() => {
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         confirmationContent: {
@@ -46,7 +46,7 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
       })
     }
 
-  }, [contentDetails.id])
+  }, [contentDetails?.id])
   const fields = EditConfirmationContentDetailsFormField(
     register,
     loading,

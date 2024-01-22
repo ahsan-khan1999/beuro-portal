@@ -8,6 +8,7 @@ import { ComponentsType } from "../add/AddNewLeadsData";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -19,24 +20,56 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   handleRemoveAddress,
   fields,
   handleFieldTypeChange,
-  addressType
+  addressType,
+  setValue
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
-
-  for (let i = 1; i <= count; i++) {
+  if (!fields) return null;
+  for (let i = 0; i < count; i++) {
+    const isEditable = addressType && addressType[i];
+    const inputField: FormField = isEditable ? {
+      //editable address
+      containerClass: "",
+      field: {
+        type: Field.input,
+        className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+        inputType: "text",
+        id: `address.${i}.label`,
+        name: `address.${i}.label`,
+        register,
+        value: `Address ${i + 1}`,
+        setValue,
+      },
+    } : {
+      //non-editable address
+      containerClass: "",
+      field: {
+        type: Field.input,
+        inputType: "text",
+        id: `address.${i}.label`,
+        name: `address.${i}.label`,
+        register,
+        value: `Address ${i + 1}`,
+        disabled: true,
+        className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+        setValue,
+      },
+    };
     formField.push(
       {
         containerClass: "mb-0 relative -top-1 right-0 float-right",
         field: {
           type: Field.button,
           id: "button",
-          text: `${translate("common.remove")}`,
+          text: `${translate("common.remove_button")}`,
           inputType: "button",
           className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-            i === 1 && "hidden"
+            i === 0 && "hidden"
           }`,
-          onClick: handleRemoveAddress && handleRemoveAddress,
+          onClick: () => {
+            handleRemoveAddress && handleRemoveAddress(i)
+          },
         },
       },
       {
@@ -46,39 +79,43 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           className: "flex  space-x-2",
           id: `address-labels-${i}`,
           children: [
-            (!(addressType && !addressType[i - 1]) && {
-              containerClass: "",
-              field: {
-                type: Field.input,
-                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
-                inputType: "text",
-                id: `label-${i}`,
-                name: `label-${i}`,
-                placeholder: `Zweibrückenstraße, ${i}`,
-                register,
-                value: `Address ${i}`,
-              },
-            }) || {
-              containerClass: "",
-              field: {
-                type: Field.input,
-                inputType: "text",
-                id: `label-${i}`,
-                name: `label-${i}`,
-                placeholder: `Zweibrückenstraße, ${i}`,
-                register,
-                value: `Address ${i}`,
-                disabled: true,
-                className:
-                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
-              },
-            },
+            // (!(addressType && !addressType[i - 1]) && {
+            //   containerClass: "",
+            //   field: {
+            //     type: Field.input,
+            //     className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            //     inputType: "text",
+            //     id: `address.${i}.label`,
+            //     name: `address.${i}.label`,
+            //     // placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${++valueIndex}`,
+            //     setValue,
+            //   },
+            // }) || {
+            //   containerClass: "",
+            //   field: {
+            //     type: Field.input,
+            //     inputType: "text",
+            //     id: `address.${i}.label`,
+            //     name: `address.${i}.label`,
+            //     // placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${++valueIndex}`,
+            //     disabled: true,
+            //     className:
+            //       "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+            //     setValue,
+            //   },
+            // },
+            inputField,
             {
               containerClass: "",
               field: {
                 type: Field.button,
                 className: "bg-white hover:bg-white",
-                id: `addressLabel-${i}`,
+                id: `address.${i}.type`,
+                name: `address.${i}.type`,
                 inputType: "button",
                 icon: editIcon,
                 onClick: () =>
@@ -105,15 +142,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0 ",
               label: {
                 text: translate("leads.address_details.street_no"),
-                htmlFor: `streetNumber-${i}`,
+                htmlFor: `address.${i}.streetNumber`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
-                id: `streetNumber-${i}`,
-                name: `streetNumber-${i}`,
+                id: `address.${i}.streetNumber`,
+                name: `address.${i}.streetNumber`,
                 placeholder: `Zweibrückenstraße, ${i}`,
                 register,
               },
@@ -122,15 +159,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0 ",
               label: {
                 text: translate("leads.address_details.post_code"),
-                htmlFor: `postalCode-${i}`,
+                htmlFor: `address.${i}.postalCode`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
-                id: `postalCode-${i}`,
-                name: `postalCode-${i}`,
+                id: `address.${i}.postalCode`,
+                name: `address.${i}.postalCode`,
                 placeholder: `123${i}`,
                 register,
               },
@@ -139,14 +176,14 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.country"),
-                htmlFor: "address.country",
+                htmlFor: `address.${i}.country`,
                 className: "mb-[10px]",
               },
               field: {
                 className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
                 type: Field.select,
-                id: `country-${i}`,
-                name: `country-${i}`,
+                id: `address.${i}.country`,
+                name: `address.${i}.country`,
                 options: Object.keys(staticEnums.Country).map((item) => ({
                   value: item,
                   label: item,
@@ -169,15 +206,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mt-5 mb-0 pb-10 border-b-2 border-lightGray",
               label: {
                 text: translate("leads.address_details.description"),
-                htmlFor: `description-${i}`,
+                htmlFor: `address.${i}.description`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.textArea,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 rows: 2,
-                id: `description-${i}`,
-                name: `description-${i}`,
+                id: `address.${i}.description`,
+                name: `address.${i}.description`,
                 placeholder:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 register,
@@ -211,8 +248,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                   inputType: "button",
                   className:
                     "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
-                  onClick: () =>
-                    onHandleBack && onHandleBack(ComponentsType.customerAdd),
+                  onClick: onHandleBack && onHandleBack,
                 },
               },
               {
@@ -240,7 +276,11 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
               count === 2 && "hidden"
             }`,
-            onClick: handleAddNewAddress && handleAddNewAddress,
+            onClick: () => {
+              
+              handleAddNewAddress && handleAddNewAddress(addressObject);
+              
+            },
             loading,
           },
         },

@@ -69,7 +69,7 @@ const SystemSettingDetails = ({
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.admin_setting")}
-        modelSubHeading={translate("common.modals.email_sent_des")}
+        modelSubHeading={translate("common.modals.setting_update")}
         routeHandler={onClose}
       />
     ),
@@ -122,7 +122,7 @@ const SystemSettingDetails = ({
             dropDownIconClassName="custom-icon-style"
             dropDownDisabled={false}
             shouldNotSelectItem={false}
-            dropDownClassName="!h-[42px]"
+            dropDownClassName="!h-[42px] justify-between"
             dropDownItemsContainerClassName="w-full"
           />
         </div>

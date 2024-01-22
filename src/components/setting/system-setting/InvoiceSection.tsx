@@ -85,7 +85,7 @@ const InvoiceSection = ({
                 dropDownIconClassName="custom-icon-style"
                 dropDownDisabled={false}
                 shouldNotSelectItem={false}
-                dropDownClassName="!h-[42px]"
+                dropDownClassName="!h-[42px] justify-between"
                 dropDownItemsContainerClassName="w-full"
               />
             </motion.div>

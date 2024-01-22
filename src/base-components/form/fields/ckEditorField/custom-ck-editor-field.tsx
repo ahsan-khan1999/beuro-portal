@@ -14,7 +14,7 @@ const CustomCKEditor = ({
   <CKEditor
     id={id}
     editor={ClassicEditor}
-    data={field.value || data}
+    data={field.value}
     key={data}
     onReady={(editor) => {
       field.onChange(field.value);
@@ -30,6 +30,7 @@ const CustomCKEditor = ({
     }}
 
     config={{
+      language:"de",
       toolbar: {
         items: [
           "undo",
@@ -44,7 +45,8 @@ const CustomCKEditor = ({
           "|",
           "bold",
           "italic",
-          // "strikethrough",
+          // "underline",
+          "strikethrough",
           // "subscript",
           // "superscript",
           // "code",

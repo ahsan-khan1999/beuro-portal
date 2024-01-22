@@ -24,7 +24,7 @@ const AditionalEditDetails = ({
         </h2>
         <button
           onClick={() => router.back()}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("offers.additional_details.cancel_button")}
         </button>

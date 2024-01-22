@@ -71,7 +71,7 @@ const Setting = () => {
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.admin_setting")}
-        modelSubHeading={translate("common.modals.email_sent_des")}
+        modelSubHeading={translate("common.modals.setting_update")}
         routeHandler={onClose}
       />
     ),

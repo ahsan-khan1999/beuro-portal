@@ -75,7 +75,8 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "contactAvailability",
               value:
-                (leadDetails?.id && leadDetails?.contactAvailability) || "Morning(9am to 12am)",
+                (leadDetails?.id && leadDetails?.contactAvailability) ||
+                "Morning(9am to 12am)",
               name: "contactAvailability",
               options: [
                 {
@@ -171,6 +172,10 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via Instagram",
                   label: `${translate("common.via_insta")}`,
                 },
+                {
+                  value: "Via Post",
+                  label: `${translate("common.via_post")}`,
+                },
               ],
               control,
             },
@@ -187,7 +192,9 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "budget",
               name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || `Less then 5000 ${systemSettings?.currency||""}`,
+              value:
+                (leadDetails?.id && leadDetails?.budget) ||
+                `Less then 5000 ${systemSettings?.currency || ""}`,
 
               options: [
                 {
@@ -216,8 +223,9 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                 },
                 {
                   value: `Less then 5000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 5000${systemSettings?.currency
-                    }`,
+                  label: `${translate("common.less_then")} 5000${
+                    systemSettings?.currency
+                  }`,
                 },
               ],
               control,
