@@ -94,6 +94,7 @@ const DetailsData = ({
               {emailDetails?.subject}
             </span>
           </div>
+
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.recipient")}:
@@ -102,6 +103,28 @@ const DetailsData = ({
               {emailDetails?.email}
             </span>
           </div>
+          {
+            emailDetails?.cc &&
+            <div>
+              <span className="font-normal text-[#4D4D4D] text-base mr-5">
+                Cc:
+              </span>
+              <span className="font-medium text-[#4B4B4B] text-base break-all">
+                {emailDetails?.cc}
+              </span>
+            </div>
+          }
+          {
+            emailDetails?.bcc &&
+            <div>
+              <span className="font-normal text-[#4D4D4D] text-base mr-5">
+                Bcc:
+              </span>
+              <span className="font-medium text-[#4B4B4B] text-base break-all">
+                {emailDetails?.bcc}
+              </span>
+            </div>
+          }
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:
@@ -115,7 +138,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-              {formatDateReverse(emailDetails?.viewedAt as string)}
+              {formatDateReverse(emailDetails?.viewedAt as string) || "-"}
             </span>
           </div>
         </div>

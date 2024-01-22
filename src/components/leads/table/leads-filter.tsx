@@ -96,7 +96,7 @@ export default function LeadsFilter({
       </div>
       <div className="flex gap-x-4">
         <InputField
-          handleChange={(value) => {}}
+          handleChange={(value) => { }}
           // value={filter.text}
           onEnterPress={handlePressEnter}
           ref={inputRef}
