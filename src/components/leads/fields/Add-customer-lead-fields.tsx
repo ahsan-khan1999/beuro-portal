@@ -50,10 +50,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked:
-                      (leadDetails?.id &&
-                        leadDetails?.type === "New Customer") ||
-                      type === "New Customer",
+                    checked: type === "New Customer",
                   },
                 },
                 {
@@ -68,8 +65,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     name: "type",
                     register,
                     checked:
-                      (leadDetails?.id &&
-                        leadDetails?.type === "Existing Customer") ||
+                     
                       type === "Existing Customer",
                   },
                 },
@@ -97,12 +93,11 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (leadDetails &&
+                (leadDetails?.id &&
                   getKeyByValue(
                     staticEnums["CustomerType"],
                     leadDetails.customerDetail?.customerType
-                  )) ||
-                "",
+                  )) || customerType,
             },
           },
           {

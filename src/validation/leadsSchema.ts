@@ -151,7 +151,7 @@ export const generateAddNewLeadCustomerDetailsValidation = (
   return yup.object().shape({
     [LeadsCustomerEditDetails.type]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customer]: yup.string().when("type", {
       is: (type: string) => type === "Existing Customer",
       then: () =>
@@ -159,7 +159,7 @@ export const generateAddNewLeadCustomerDetailsValidation = (
     }),
     [LeadsCustomerEditDetails.name]: yup
       .string()
-      .required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),

@@ -199,7 +199,7 @@ const useServiceDetail = (stage: boolean) => {
 
       if (res?.payload) handleCreateSuccess();
     } else if (stage) {
-      handleUpdate(data);
+      handleUpdate({...data});
     }
   };
 
