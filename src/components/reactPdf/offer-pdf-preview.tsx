@@ -5,7 +5,6 @@ import {
   PDFViewer,
   Page,
   StyleSheet,
-  Text,
   View,
 } from "@react-pdf/renderer";
 import { Header } from "./header";
@@ -66,8 +65,6 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
   showContractSign,
-  pdfFile,
-  setPdfFile,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};

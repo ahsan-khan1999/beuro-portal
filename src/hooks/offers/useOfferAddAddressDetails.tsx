@@ -52,7 +52,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     if (offerDetails.id) {
-
       reset({
         address: offerDetails?.addressID
           ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))

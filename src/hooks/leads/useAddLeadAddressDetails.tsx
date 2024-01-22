@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
   SubmitHandler,
+  UseFieldArrayRemove,
   useFieldArray,
   useForm,
 } from "react-hook-form";
@@ -71,7 +72,7 @@ export const useAddLeadAddressDetails = (
   useMemo(() => {
     if (addressFields.length === 0) return;
     setAddressCount(addressFields.length);
-  }, [addressFields]);
+  }, [addressFields.length]);
 
   const handleFieldTypeChange = (index: number) => {
     const updatedAddressType = [...addressType];
@@ -82,6 +83,7 @@ export const useAddLeadAddressDetails = (
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdd);
   };
+
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

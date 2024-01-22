@@ -65,8 +65,6 @@ const useOffers = () => {
     });
   };
 
-  console.log(currentPageRows);
-
   useEffect(() => {
     localStoreUtil.remove_data("offer");
     dispatch(setOfferDetails(DEFAULT_OFFER));
