@@ -2,6 +2,8 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import userIcon from "@/assets/svgs/Group 48095860.svg";
+
 
 const TableRow = ({
   currentPageRows,
@@ -20,10 +22,10 @@ const TableRow = ({
             <span className="py-4">{item?.company?.refID}</span>
             <span className="py-4 flex items-center justify-center">
               <Image
-                src={item?.company?.logo}
+                src={item?.company?.logo || userIcon}
                 alt="company logo"
-                height={35}
-                width={35}
+                height={40}
+                width={50}
               />
             </span>
             <span className="py-4 truncate">{item?.company?.companyName}</span>

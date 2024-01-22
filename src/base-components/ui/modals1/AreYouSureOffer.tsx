@@ -38,13 +38,13 @@ const AreYouSureOffer = ({
           </span>
           <div className="flex gap-[36px] mt-[32px] mb-[67px]">
             <button
-              className="p-4 text-[#fff] min-w-[177px] w-fit bg-[#4A13E7] rounded-md"
+              className="p-4 !h-[50px] text-[#fff] min-w-[177px] w-fit bg-[#4A13E7] hover:bg-buttonHover rounded-md"
               onClick={onClose}
             >
               {info.noButton}
             </button>
             <Button
-              className=" px-[25px] min-w-[177px] w-fit text-[#fff] bg-[#BFBFBF] rounded-md"
+              className="p-4 min-w-[177px] w-fit text-[#fff] bg-[#BFBFBF] rounded-md"
               id="yes"
               inputType="button"
               onClick={info.onSuccess}

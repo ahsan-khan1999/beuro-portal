@@ -14,7 +14,7 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
       containerClass: "mb-0 ",
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
         rows: 2,
         id: "completeRemarks",
         name: "completeRemarks",

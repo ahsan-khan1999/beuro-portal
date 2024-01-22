@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import {
   formatDateTimeToDate,
@@ -100,12 +100,17 @@ const ContractDetailsCard = ({
             className="cursor-pointer"
             onClick={handlePrint}
           /> */}
-          <Image
-            src={deleteIcon}
-            alt="deleteIcon"
-            className="cursor-pointer"
-            onClick={offerDeleteHandler}
-          />
+
+          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={offerDeleteHandler}
+              width={16}
+              height={20}
+            />
+          </span>
         </div>
       </div>
 
@@ -179,16 +184,18 @@ const ContractDetailsCard = ({
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.email_status")}:
             </span>
-            <div
-              className={`text-base font-medium border border-[${getEmailColor(
-                contractDetails?.emailStatus
-              )}] rounded-lg px-4 py-[3px] cursor-default`}
-              style={{
-                color: `${getEmailColor(contractDetails?.emailStatus)}`,
-              }}
-            >
-              {translate(contractDetails?.emailStatus)}
-            </div>
+            {contractDetails?.emailStatus && (
+              <div
+                className={`text-base font-medium border border-[${getEmailColor(
+                  contractDetails?.emailStatus
+                )}] rounded-lg px-4 py-[3px] cursor-default`}
+                style={{
+                  color: `${getEmailColor(contractDetails?.emailStatus)}`,
+                }}
+              >
+                {translate(contractDetails?.emailStatus)}
+              </div>
+            )}
           </div>
 
           {/* <div className="flex items-center gap-[11px]">
@@ -204,25 +211,29 @@ const ContractDetailsCard = ({
             <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("contracts.card_content.payment_method")}:
             </span>
-            <span>
-              <DropDown
-                items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
-                  item: item,
-                }))}
-                selectedItem={contractDetails?.paymentType}
-                onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName={`border border-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
-                dropDownTextClassName={`text-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}] text-base font-medium me-1`}
-                dropDownItemsContainerClassName="w-full"
-                dropDownIconClassName={`text-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}]`}
-              />
-            </span>
+            {contractDetails?.paymentType && (
+              <span>
+                <DropDown
+                  items={Object.keys(staticEnums["PaymentType"]).map(
+                    (item) => ({
+                      item: item,
+                    })
+                  )}
+                  selectedItem={contractDetails?.paymentType}
+                  onItemSelected={handlePaymentStatusUpdate}
+                  dropDownClassName={`border border-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-full"
+                  dropDownIconClassName={`text-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}]`}
+                />
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">

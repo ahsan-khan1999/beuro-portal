@@ -1,42 +1,52 @@
 import React from "react";
 import Image from "next/image";
-import backIcon from "@/assets/svgs/back_icon.svg";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
-
+import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 
 const MailDetailsCard = () => {
   const router = useRouter();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
-  const color = getInvoiceStatusColor(
-    collectiveInvoiceDetails?.invoiceStatus
-  )
+  const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
 
   return (
     <>
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-20 gap-y-3 pb-5">
         <div className="flex items-center gap-x-6">
-          <Image
-            src={backIcon}
-            alt="back_icon"
-            className="cursor-pointer"
-            onClick={() => router.back()}
-          />
+          <span className="cursor-pointer" onClick={() => router.back()}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="41"
+              height="40"
+              viewBox="0 0 41 40"
+              fill="none"
+            >
+              <rect
+                x="0.750977"
+                y="0.5"
+                width="39.2105"
+                height="39"
+                rx="7.5"
+                fill="white"
+                stroke="#4A13E7"
+              />
+              <path
+                d="M23.7911 13.2658C23.975 13.4498 24.0783 13.6993 24.0783 13.9594C24.0783 14.2196 23.975 14.4691 23.7911 14.6531L18.9346 19.5095L23.7911 24.366C23.9698 24.551 24.0687 24.7989 24.0664 25.0561C24.0642 25.3134 23.961 25.5594 23.7791 25.7413C23.5972 25.9232 23.3511 26.0264 23.0939 26.0287C22.8366 26.0309 22.5888 25.932 22.4038 25.7533L16.8537 20.2032C16.6697 20.0192 16.5664 19.7697 16.5664 19.5095C16.5664 19.2494 16.6697 18.9999 16.8537 18.8159L22.4038 13.2658C22.5878 13.0818 22.8373 12.9785 23.0974 12.9785C23.3576 12.9785 23.6071 13.0818 23.7911 13.2658Z"
+                fill="#4A13E7"
+              />
+            </svg>
+          </span>
           <p className="font-medium text-2xl">
             {translate("invoice.receipt_details")}
           </p>
         </div>
 
         <div className="flex items-center gap-5">
-
-          <Image
-            src={PDFIcon}
-            alt="PDFIcon"
-            className="cursor-pointer"
+          <PrimaryPDF
             onClick={() =>
               router.push({
                 pathname: "/invoices/receipt-pdf-preview",
@@ -105,7 +115,9 @@ const MailDetailsCard = () => {
               {translate("contracts.table_headings.status")}:
             </span>
 
-            <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}>
+            <span
+              className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
+            >
               {collectiveInvoiceDetails?.invoiceStatus}
             </span>
           </div>

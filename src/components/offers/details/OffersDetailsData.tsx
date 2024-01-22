@@ -116,12 +116,12 @@ const OffersDetailsData = ({
             />
           ))}
         </div>
-        <div className="w-full mt-5">
+        <div className="w-full mt-5 mb-10">
           <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} />
         </div>
       </div>
       <div className="w-full break-all flex">
-        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[380px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />

@@ -61,7 +61,7 @@ export const useServiceOfferEditDetail = ({
 
   useEffect(() => {
     dispatch(
-      readService({ params: { filter: { sort: "-createdAt" }, paginate: 0 } })
+      readService({ params: { filter: {  }, paginate: 0 } })
     );
     dispatch(readTaxSettings({}));
   }, []);

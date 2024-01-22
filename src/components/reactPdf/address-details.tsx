@@ -75,7 +75,7 @@ export const AddressDetails = ({
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
-      {/* {address?.map((address, index) => (
+      {address?.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
           <Text
@@ -103,9 +103,9 @@ export const AddressDetails = ({
           </Text>
         </View>
       </View>
-    ))} */}
+    ))}
 
-      <View style={{ flexDirection: "column" }}>
+      {/* <View style={{ flexDirection: "column" }}>
         {address?.map((address, index) => (
           // <View
           //   style={{ display: "flex", flexDirection: "row", }}
@@ -168,7 +168,7 @@ export const AddressDetails = ({
             </GridItem>
           </Row>
         ))}
-      </View>
+      </View> */}
 
       <View style={styles.dateRow}>
         <Text

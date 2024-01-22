@@ -1,11 +1,13 @@
-export const DownloadIcon = () => {
+export const DownloadIcon = ({ onClick }: { onClick: () => void }) => {
   return (
     <svg
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       width="41"
       height="41"
       viewBox="0 0 41 41"
       fill="none"
+      className="cursor-pointer"
     >
       <rect
         x="1.14062"

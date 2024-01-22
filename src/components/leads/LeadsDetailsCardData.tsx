@@ -83,7 +83,7 @@ const LeadsDetailsCardData = ({
               {translate("leads.card_content.create_button")}
             </p>
           </div>
-          <span className="border-red border w-10 h-10 rounded-lg flex items-center justify-center ">
+          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}
               alt="deleteIcon"
