@@ -36,14 +36,14 @@ export const useServiceOfferEditDetail = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const { t: translate } = useTranslation();
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
     grandTotal: 0,
     taxAmount: 0,
   });
+
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
@@ -58,7 +58,6 @@ export const useServiceOfferEditDetail = ({
   );
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
-  const [disAmount, setDisAmount] = useState("");
 
   useEffect(() => {
     dispatch(
@@ -171,16 +170,16 @@ export const useServiceOfferEditDetail = ({
       } else if (!!+discountType && discountAmount > totalPrices) {
         setValue("discountAmount", totalPrices);
         console.info("Amount should not be greater than total price");
-      } else if(!!+discountType && discountAmount === ''){
-        console.log('here')
+      } else if (!!+discountType && discountAmount === "") {
+        console.log("here");
       }
     } else {
       setValue("discountAmount", prevDisAmount);
     }
     const grandTotal = totalPrices + taxAmount - discount;
 
-    if(discountAmount === ''){
-      setValue("discountAmount", '');
+    if (discountAmount === "") {
+      setValue("discountAmount", "");
     }
     prevDisAmount = discountAmount === "" || discount === 0 ? "" : discount;
     setTotal({
@@ -240,7 +239,6 @@ export const useServiceOfferEditDetail = ({
       ]);
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
-      setDisAmount(discountAmount);
     }
   }, [serviceFields?.length]);
 
@@ -342,7 +340,7 @@ export const useServiceOfferEditDetail = ({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData: typeof data = {
       ...data,
-      discountAmount: +(data.discountAmount),
+      discountAmount: +data.discountAmount,
       step: 3,
       id: offerDetails?.id,
       stage: EditComponentsType.additionalEdit,
