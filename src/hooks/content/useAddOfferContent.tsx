@@ -57,19 +57,19 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  useMemo(() => {
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         contentName: contentDetails?.contentName,
         offerContent: {
           ...contentDetails?.offerContent,
-          address: contentDetails?.offerContent?.address?.map((item) => ({
-            value: item,
-          })),
+          // address: contentDetails?.offerContent?.address?.map((item) => ({
+          //   value: item,
+          // })),
         },
       });
     }
-  }, [contentDetails.id]);
+  }, [contentDetails?.id]);
   const {
     fields: addressFields,
     append,
@@ -102,7 +102,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
         title: data.offerContent.title,
         attachments: attachements?.map((item) => item.value),
         // address: transformFieldsToValues(data.offerContent, addressField),
-        address: data?.offerContent?.address?.map((item: any) => item.value),
+        // address: data?.offerContent?.address?.map((item: any) => item.value),
       },
       step: 1,
       stage: ComponentsType.addConfirmationContent,
@@ -113,11 +113,13 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
         ...apiData,
         contentId: contentDetails?.id,
       };
+      
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
       if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
     } else {
+
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
