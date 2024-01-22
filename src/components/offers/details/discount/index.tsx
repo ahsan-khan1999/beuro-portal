@@ -91,7 +91,7 @@ const Discounts = ({
           ))}
         </div>
       ) : (
-        <div className="bg-white -mt-8 pt-4 max-h-[270px]">
+        <div className="bg-white -mt-8 pt-4 2xl:max-h-[270px]">
           <NoDataEmptyState />
         </div>
       )}
