@@ -183,6 +183,7 @@ const ContentAddDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={item.name}
             />
           ))}
         </div>

@@ -66,8 +66,8 @@ export const createContent: AsyncThunk<boolean, object, object> | any =
             const response = await apiServices.createContent(apiData);
             if (!isUpdate) {
                 let objectToUpdate = { ...response?.data?.data?.Content, type: apiData?.type, stage: stage }
-                localStoreUtil.store_data("content", objectToUpdate)
                 thunkApi.dispatch(setContentDetails(objectToUpdate));
+                localStoreUtil.store_data("content", objectToUpdate)
             } else {
                 thunkApi.dispatch(setContentDetails(data));
 
@@ -125,8 +125,8 @@ export const updateContent: AsyncThunk<boolean, object, object> | any =
             const contentData = await localStoreUtil.get_data("content")
             let objectToUpdate = { ...response?.data?.Content, type: contentData?.type, stage: stage }
 
-            localStoreUtil.store_data("content", objectToUpdate)
             thunkApi.dispatch(setContentDetails(objectToUpdate));
+            localStoreUtil.store_data("content", objectToUpdate)
 
 
             return response?.data?.Content;
