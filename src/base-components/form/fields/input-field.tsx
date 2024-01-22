@@ -29,8 +29,9 @@ export const InputField = ({
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const { t: translate } = useTranslation();
-  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${success ? "pl-4 pr-10" : "pl-11 pr-4"
-    } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
+    success ? "pl-4 pr-10" : "pl-11 pr-4"
+  } py-[10px] outline-none text-dark text-sm focus:border-primary`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
 

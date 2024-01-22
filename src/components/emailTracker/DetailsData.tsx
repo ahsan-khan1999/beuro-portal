@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
@@ -52,14 +52,16 @@ const DetailsData = ({
             {translate("email_tracker.card_content.main_heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
             onClick={() => handleConfirmDeletion()}
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div className="xl:w-11/12 w-full">
