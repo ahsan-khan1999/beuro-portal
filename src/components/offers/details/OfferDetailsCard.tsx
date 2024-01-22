@@ -185,39 +185,45 @@ const OfferDetailsCard = ({
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
             </span>
-            <span
-              className={`text-base font-medium border border-[${getEmailColor(
-                offerDetails?.emailStatus
-              )}] rounded-lg px-4 py-[3px]`}
-              style={{
-                color: `${getEmailColor(offerDetails?.emailStatus)}`,
-              }}
-            >
-              {translate(offerDetails?.emailStatus)}
-            </span>
+            {offerDetails?.emailStatus && (
+              <span
+                className={`text-base font-medium border border-[${getEmailColor(
+                  offerDetails?.emailStatus
+                )}] rounded-lg px-4 py-[3px]`}
+                style={{
+                  color: `${getEmailColor(offerDetails?.emailStatus)}`,
+                }}
+              >
+                {translate(offerDetails?.emailStatus)}
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.payment_method")}:
             </span>
             <span>
-              <DropDown
-                items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
-                  item: item,
-                }))}
-                selectedItem={offerDetails?.paymentType}
-                onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName={`border border-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName={`text-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}] text-base font-medium me-1`}
-                dropDownItemsContainerClassName="w-full"
-                dropDownIconClassName={`text-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}]`}
-              />
+              {offerDetails?.paymentType && (
+                <DropDown
+                  items={Object.keys(staticEnums["PaymentType"]).map(
+                    (item) => ({
+                      item: item,
+                    })
+                  )}
+                  selectedItem={offerDetails?.paymentType}
+                  onItemSelected={handlePaymentStatusUpdate}
+                  dropDownClassName={`border border-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName={`text-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-full"
+                  dropDownIconClassName={`text-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}]`}
+                />
+              )}
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
