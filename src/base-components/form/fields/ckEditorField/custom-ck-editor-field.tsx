@@ -30,6 +30,7 @@ const CustomCKEditor = ({
     }}
 
     config={{
+      language:"de",
       toolbar: {
         items: [
           "undo",

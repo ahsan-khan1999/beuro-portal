@@ -439,7 +439,6 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       className:
                         "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                       onClick: () => append(serviceObject),
-                      loading,
                     },
                   },
                 ],
