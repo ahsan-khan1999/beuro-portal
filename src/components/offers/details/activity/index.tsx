@@ -58,7 +58,7 @@ const Activity = () => {
           </div>
         ))
       ) : (
-        <div className="-mt-6 pt-4">
+        <div className="-mt-8 pt-4 max-h-[270px]">
           <NoDataEmptyState />
         </div>
       )}
