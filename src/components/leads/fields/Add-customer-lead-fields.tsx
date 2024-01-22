@@ -44,7 +44,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "New Customer",
-                    label: "New Customer",
+                    label: `${translate(
+                      "leads.customer_details.new_customer"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -59,7 +61,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "Existing Customer",
-                    label: "Existing Customer",
+                    label: `${translate(
+                      "leads.customer_details.exit_customer"
+                    )}`,
                     id: "type",
                     name: "type",
                     register,
@@ -84,10 +88,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType)?.slice(1)?.map((item, key) => ({
-                  value: item,
-                  label: item,
-                })) || [],
+                Object.keys(staticEnums.CustomerType)
+                  ?.slice(1)
+                  ?.map((item, key) => ({
+                    value: item,
+                    label: item,
+                  })) || [],
 
               control,
               value:
@@ -112,7 +118,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "fullName",
               name: "fullName",
 
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate("leads.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
             },
@@ -126,12 +132,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "text",
 
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate("leads.placeholders.email")}`,
               register,
               value: leadDetails && leadDetails.customerDetail?.email,
             },
@@ -205,7 +211,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "address.streetNumber",
               name: "address.streetNumber",
 
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate("leads.placeholders.street")}`,
               register,
               value:
                 leadDetails &&
@@ -228,7 +234,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate("leads.placeholders.post_code")}`,
 
               register,
               value:
@@ -247,13 +253,16 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: item,
-              })),
+              options: Object.entries(staticEnums.Country).map(
+                ([key, val]) => ({
+                  value: key,
+                  label: `${translate(val as string)}`,
+                })
+              ),
+
               control,
               value:
-                leadDetails && leadDetails?.customerDetail?.address?.country,
+                leadDetails && leadDetails?.customerDetail?.address?.country || Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -270,10 +279,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Cancel",
+              text: `${translate("common.cancel_button")}`,
               inputType: "button",
               onClick: onCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px] text-dark hover:bg-none `,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none `,
             },
           },
           {
@@ -282,7 +291,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "button",
               text: translate("leads.customer_details.next_button"),
               inputType: "submit",
-              className: `rounded-lg  px-4 w-[152px] h-[50px] text-white hover:bg-none`,
+              className: `rounded-lg  px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none`,
               loading,
             },
           },
@@ -304,7 +313,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     const companyNameField = {
       containerClass: "mb-0",
       label: {
-        text: "Company Name",
+        text: `${translate("login_detail.company_details.company_name")}`,
         htmlFor: "companyName",
         className: "mb-[10px]",
       },
@@ -343,12 +352,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     const customerField = {
       containerClass: "mb-0",
       label: {
-        text: "Customer",
+        text: `${translate("offers.customer")}`,
         htmlFor: "customerID",
         className: "mb-[10px]",
       },
       field: {
-        className: `pl-4 !min-h-[54px] !border-[#BFBFBF]  focus:!border-primary `,
+        className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
         type: Field.select,
         id: "customerID",
         name: "customerID",

@@ -6,8 +6,12 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
   register,
   loading,
   control,
-  onClick
-  , trigger, count, attachements, setAttachements, contentDetails
+  onClick,
+  trigger,
+  count,
+  attachements,
+  setAttachements,
+  contentDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -19,7 +23,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
         className: "grid grid-cols-1 gap-4",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.invoice_title"),
               htmlFor: "invoiceContent.title",
@@ -49,8 +53,9 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.description",
 
               control,
-              value: contentDetails?.id && contentDetails?.invoiceContent?.description
-
+              value:
+                contentDetails?.id &&
+                contentDetails?.invoiceContent?.description,
             },
           },
 
@@ -68,7 +73,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.invoiceContent?.body
+              value: contentDetails?.id && contentDetails?.invoiceContent?.body,
             },
           },
 
@@ -89,13 +94,11 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               control,
               attachements,
               setAttachements,
-              isAttachement: true
-
+              isAttachement: true,
             },
           },
-
         ],
-      }
+      },
     },
 
     {
@@ -113,9 +116,9 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.cancel_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
               loading,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -126,7 +129,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

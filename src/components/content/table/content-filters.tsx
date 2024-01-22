@@ -54,12 +54,18 @@ export default function ContentFilters({
         value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[
-          { label: "Date", value: "createdAt" },
-          { label: "Latest", value: "-createdAt" },
-          { label: "Oldest", value: "createdAt" },
-          { label: "A - Z", value: "title" },
+          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
+          {
+            label: `${translate("filters.sort_by.latest")}`,
+            value: "-createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.oldest")}`,
+            value: "createdAt",
+          },
+          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       <ContentFilter
         filter={filter}

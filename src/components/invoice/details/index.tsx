@@ -27,27 +27,31 @@ const InvoiceDetails = () => {
     handleSendEmail,
     handleRecurringInvoiceEdit,
     loading,
-
+    systemSettings,
   } = useInvoiceDetail();
 
-
   const invoiceComponent = {
-    Invoice:
-      {comp: <InvoiceDetailsTable
-        collectiveInvoice={collectiveInvoice}
-        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
-        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-        handleInvoiceEdit={handleInvoiceEdit}
-        handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
-      />,
-    isData: collectiveInvoice?.length > 0
+    Invoice: {
+      comp: (
+        <InvoiceDetailsTable
+          collectiveInvoice={collectiveInvoice}
+          handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+          handleInvoiceEdit={handleInvoiceEdit}
+          handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+        />
+      ),
+      isData: collectiveInvoice?.length > 0,
     },
-    Receipt:{comp : <ReceiptDetailsTable
-        collectiveInvoice={collectiveReciept}
-        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
-        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-      />,
-      isData: collectiveReciept?.length > 0
+    Receipt: {
+      comp: (
+        <ReceiptDetailsTable
+          collectiveInvoice={collectiveReciept}
+          handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+        />
+      ),
+      isData: collectiveReciept?.length > 0,
     },
   };
 
@@ -56,7 +60,7 @@ const InvoiceDetails = () => {
     invoiceComponent[switchDetails as keyof typeof invoiceComponent].isData,
     loading
   );
-  
+
   return (
     <>
       <Layout>
@@ -71,6 +75,7 @@ const InvoiceDetails = () => {
             handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
             handleStopInvoiceCreation={handleStopInvoiceCreation}
             handleSendEmail={handleSendEmail}
+            currency={systemSettings?.currency}
           />
         </InvoiceCardLayout>
 

@@ -3,6 +3,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { Button } from "@/base-components/ui/button/button";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
+import { useTranslation } from "next-i18next";
 import React, { useRef } from "react";
 
 export default function EmailTrackerFilters({
@@ -11,10 +12,12 @@ export default function EmailTrackerFilters({
   handleFilterChange,
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t: translate } = useTranslation();
+
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
-   const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -48,12 +51,21 @@ export default function EmailTrackerFilters({
           value={filter?.sort || ""}
           dropDownIconClassName=""
           options={[
-            { label: "Date", value: "createdAt" },
-            { label: "Latest", value: "-createdAt" },
-            { label: "Oldest", value: "createdAt" },
-            { label: "A - Z", value: "title" },
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         {/* <Button
           onClick={() => handleFilterChange()}

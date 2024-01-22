@@ -21,6 +21,8 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
 
   useEffect(() => {
     setValue("additionalDetails", offerDetails?.additionalDetails);
+    setValue("content", offerDetails?.content?.id);
+
 
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
   }, [])
@@ -35,25 +37,34 @@ export const useOfferEditAdditionalDetails = ({ handleNext, handleBack }: { hand
     watch,
     setValue,
     trigger,
+    reset
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  useMemo(() => {
+    setValue("additionalDetails", offerDetails?.additionalDetails || offerDetails?.content?.offerContent?.description);
+  }, [offerDetails?.additionalDetails])
+
+
   const selectedContent = watch("content")
   const handlePrevious = () => {
     handleBack(EditComponentsType.serviceEdit)
   }
-  useMemo(() => {
+
+
+  const onContentSelect = (id: string) => {
     const filteredContent = content?.find(
-      (item) => item.id === selectedContent
+      (item) => item.id === id
     );
-    if (filteredContent && selectedContent !== offerDetails?.content?.id) {
+    if (filteredContent) {
       dispatch(setContentDetails(filteredContent))
-      setValue("additionalDetails", filteredContent?.offerContent?.title);
+      setValue("additionalDetails", filteredContent?.offerContent?.description);
+      trigger("additionalDetails")
 
     }
-  }, [selectedContent])
+  }
   const fields = AddOfferAdditionalDetailsFormField(register, loading, control, handlePrevious, 0,
-    { content: content, contentDetails: contentDetails, offerDetails }, setValue, trigger);
+    { content: content, contentDetails: contentDetails, offerDetails, onContentSelect, selectedContent }, setValue, trigger);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 4, id: offerDetails?.id, stage: EditComponentsType.additionalEdit }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));

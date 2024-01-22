@@ -1,23 +1,24 @@
 import { Layout } from "@/layout";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import LeadsDetailsCardData from "../LeadsDetailsCardData";
 import LeadsDetailsData from "./LeadsDetailsData";
-
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
 
 const LeadsDetails = () => {
-  const { renderModal, leadDeleteHandler, leadDetails, loading } = useLeadDetail();
+  const { renderModal, leadDeleteHandler, leadDetails, loading } =
+    useLeadDetail();
   return (
     <>
       <Layout>
-        <DetailsCard>
+        <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[230px] calWidth z-10">
           <LeadsDetailsCardData
             leadDeleteHandler={leadDeleteHandler}
             leadDetails={leadDetails}
           />
-        </DetailsCard>
-        <LeadsDetailsData loading={loading}/>
+        </div>
+        <div className="xlg:mt-[330px] w-full xlg:block">
+          <LeadsDetailsData loading={loading} />
+        </div>
       </Layout>
 
       {renderModal()}

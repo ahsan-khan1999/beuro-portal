@@ -6,10 +6,7 @@ const ContentAddDetails = () => {
   return (
     <>
       <Layout>
-        <p className="text-xl font-normal text-[#222B45]">Create Content</p>
-        <div className="mt-4">
-          <ContentAddDetailsData />
-        </div>
+        <ContentAddDetailsData />
       </Layout>
     </>
   );

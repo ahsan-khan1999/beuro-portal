@@ -21,10 +21,12 @@ module.exports = {
       },
       screens: {
         xs: "375px",
+        md: "900px",
         mlg: "1090px",
         xlg: "1200px",
         maxSize: "1280px",
-        xMaxSize: "1400px"
+        xMaxSize: "1400px",
+        xLarge: "1460px",
       },
       margin: {
         "60px": "3.75rem",
@@ -70,9 +72,10 @@ module.exports = {
         buttonHover: "#9B19E6",
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
-        lightDark:"#393939",
+        lightDark: "#393939",
 
         statusColor: "#AF2626",
+        defaultBackground: '#f3f3f3',
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

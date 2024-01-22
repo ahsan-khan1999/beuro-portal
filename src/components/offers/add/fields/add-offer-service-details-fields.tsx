@@ -19,14 +19,16 @@ import { TaxSetting } from "../../../../api/slices/settingSlice/settings";
 import { calculatePercentage, calculateTax } from "@/utils/utility";
 import { useState } from "react";
 import { ServiceType } from "@/enums/offers";
+import { useTranslation } from "next-i18next";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 const serviceObject = {
   serviceTitle: "",
-  price: 0,
+  price: "",
   unit: "",
-  count: 0,
+  count: "",
   description: "",
   totalPrice: "",
-  serviceType:"Existing Service"
+  serviceType: "Existing Service",
 };
 
 export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
@@ -50,13 +52,28 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
     generatePrice,
     offerDetails,
     tax,
+    currency,
   } = properties;
 
   // if(!fields) return null;
 
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
     formField.push(
+      {
+        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove_button")}`,
+          inputType: "button",
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 0 && "hidden"
+          }`,
+          onClick: () => remove(i),
+        },
+      },
       {
         //@ts-expect-error
         field: {
@@ -67,7 +84,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
             {
               containerClass: "mb-0 col-span-1",
               label: {
-                text: "Service Type",
+                text: `${translate("offers.service_details.service_type")}`,
                 htmlFor: `serviceDetail.${i}.serviceType`,
                 className: "mb-[10px]",
               },
@@ -81,11 +98,14 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     field: {
                       type: Field.radio,
                       value: "New Service",
-                      label: "New Service",
+                      label: `${translate(
+                        "offers.service_details.detail_headings.new_service"
+                      )}`,
                       id: `serviceDetail.${i}.serviceType`,
                       name: `serviceDetail.${i}.serviceType`,
                       register,
-                      onChange: (val) => onServiceChange(i, ServiceType.NEW_SERVICE),
+                      onChange: (val) =>
+                        onServiceChange(i, ServiceType.NEW_SERVICE),
                     },
                   },
                   {
@@ -93,11 +113,14 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     field: {
                       type: Field.radio,
                       value: "Existing Service",
-                      label: "Existing Service",
+                      label: `${translate(
+                        "offers.service_details.detail_headings.exit_service"
+                      )}`,
                       id: `serviceDetail.${i}.serviceType`,
                       name: `serviceDetail.${i}.serviceType`,
                       register,
-                      onChange: (val) => onServiceChange(i, ServiceType.EXISTING_SERVICE),
+                      onChange: (val) =>
+                        onServiceChange(i, ServiceType.EXISTING_SERVICE),
                     },
                   },
                 ],
@@ -106,7 +129,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
             serviceType[i] === ServiceType.EXISTING_SERVICE && {
               containerClass: "mb-0 col-span-2",
               label: {
-                text: "Service Title/Product",
+                text: `${translate(
+                  "offers.service_details.detail_headings.title"
+                )}`,
                 htmlFor: `serviceDetail.${i}.serviceTitle`,
                 className: "mb-[10px]",
               },
@@ -121,7 +146,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     value: item?.serviceName,
                   })) || [],
                 control,
-                value: offerDetails?.serviceDetail?.serviceDetail[i]?.serviceTitle,
+                value:
+                  offerDetails?.serviceDetail?.serviceDetail[i]?.serviceTitle,
                 onItemChange: onCustomerSelect,
                 fieldIndex: i,
               },
@@ -130,7 +156,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               containerClass:
                 "mb-0  row-start-1 col-start-2 col-end-4 col-span-2",
               label: {
-                text: "Service Title/Product",
+                text: `${translate(
+                  "offers.service_details.detail_headings.title"
+                )}`,
                 htmlFor: `serviceDetail.${i}.serviceTitle`,
                 className: "mb-[10px]",
               },
@@ -140,7 +168,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 inputType: "text",
                 id: `serviceDetail.${i}.serviceTitle`,
                 name: `serviceDetail.${i}.serviceTitle`,
-                placeholder: "Enter Service Name",
+                placeholder: `${translate(
+                  "offers.placeholders.service_title"
+                )}`,
                 register,
               },
             },
@@ -153,7 +183,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "grid grid-cols-3 gap-x-3 ",
+          className: "grid grid-cols xl:grid-cols-3 gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
@@ -165,7 +195,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                   {
                     containerClass: "mb-0 col-span-2",
                     label: {
-                      text: "Price",
+                      text: `${translate("offers.service_details.price")}`,
                       htmlFor: `serviceDetail.${i}.price`,
                       className: "mb-[10px]",
                     },
@@ -184,7 +214,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                   {
                     containerClass: "mb-0 col-span-1",
                     label: {
-                      text: "Count",
+                      text: `${translate(
+                        "offers.service_details.detail_headings.count"
+                      )}`,
                       htmlFor: `serviceDetail.${i}.count`,
                       className: "mb-[10px]",
                     },
@@ -213,7 +245,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                   {
                     containerClass: "mb-0 ",
                     label: {
-                      text: "Unit",
+                      text: `${translate(
+                        "offers.service_details.detail_headings.unit"
+                      )}`,
                       htmlFor: `serviceDetail.${i}.unit`,
                       className: "mb-[10px]",
                     },
@@ -231,7 +265,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                   {
                     containerClass: "mb-0 ",
                     label: {
-                      text: "Total Price",
+                      text: `${translate(
+                        "offers.service_details.detail_headings.total_price"
+                      )}`,
                       htmlFor: `serviceDetail.${i}.totalPrice`,
                       className: "mb-[10px]",
                     },
@@ -263,31 +299,22 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
             {
               containerClass: "mt-5 mb-0 pb-10  border-b-2 border-lightGray",
               label: {
-                text: "Description",
+                text: `${translate(
+                  "offers.service_details.detail_headings.description"
+                )}`,
                 htmlFor: `serviceDetail.${i}.description`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.textArea,
-                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
-                rows: 8,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                rows: 2,
                 id: `serviceDetail.${i}.description`,
                 name: `serviceDetail.${i}.description`,
-                placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+                placeholder: `${translate(
+                  "offers.placeholders.address_description"
+                )}`,
                 register,
-              },
-            },
-            {
-              containerClass: "mb-0 absolute -top-60 right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: "Remove",
-                inputType: "button",
-                className: `rounded-none  p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
-                  }`,
-                onClick: () => remove(i),
               },
             },
           ],
@@ -322,7 +349,9 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       taxType,
       discountType,
       tax,
+      currency,
     } = properties;
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
         containerClass: "mt-[30px]",
@@ -342,7 +371,9 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                   {
                     containerClass: "mb-0",
                     label: {
-                      text: "Discount Description",
+                      text: `${translate(
+                        "offers.service_details.discount_description"
+                      )}`,
                       htmlFor: "discountDescription",
                       className: "mb-[10px] flex",
                     },
@@ -350,46 +381,65 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       type: Field.textArea,
                       className:
                         "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                      rows: 8,
+                      rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
-                      placeholder:
-                        "Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyalesl...",
+                      placeholder: `${translate(
+                        "offers.placeholders.address_description"
+                      )}`,
                       register,
                     },
                   },
+                  // {
+                  //   containerClass: "grid col-span-2",
+                  //   field: {
+                  //     type: Field.div,
+                  //     id: "div-field",
+                  //     className: "flex space-x-3 mt-3",
+                  //     children: [
+                  //       {
+                  //         containerClass: "mb-0 col-span-1 ",
+                  //         field: {
+                  //           type: Field.span,
+                  //           id: "button",
+                  //           text: "",
+                  //           html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  //         <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
+                  //         </svg>
+                  //         `,
+                  //           containerClassName:
+                  //             "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
+                  //           onClick: () => append(serviceObject),
+                  //         },
+                  //       },
+                  //       {
+                  //         containerClass: "mb-0 pr-2 mt-2 mb-5",
+                  //         field: {
+                  //           type: Field.span,
+                  //           className: "!p-4  w-full",
+                  //           id: "span-field",
+                  //           text: `${translate(
+                  //             "offers.service_details.add_new_service"
+                  //           )}`,
+                  //         },
+                  //       },
+                  //     ],
+                  //   },
+                  // },
+
                   {
-                    containerClass: "grid col-span-2",
+                    containerClass: "mb-4 mt-5",
                     field: {
-                      type: Field.div,
-                      id: "div-field",
-                      className: "flex space-x-3 mt-3",
-                      children: [
-                        {
-                          containerClass: "mb-0 col-span-1 ",
-                          field: {
-                            type: Field.span,
-                            id: "button",
-                            text: "",
-                            html: `<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.3723 8.19773H10.0498V0.875271C10.0498 0.500809 9.74629 0.197266 9.37183 0.197266C8.99736 0.197266 8.69382 0.500809 8.69382 0.875271V8.19773H1.37136C0.996902 8.19773 0.693359 8.50127 0.693359 8.87573C0.693359 9.25019 0.996902 9.55374 1.37136 9.55374H8.69382V16.8762C8.69382 17.2507 8.99736 17.5542 9.37183 17.5542C9.74629 17.5542 10.0498 17.2507 10.0498 16.8762V9.55374H17.3723C17.7467 9.55374 18.0503 9.25019 18.0503 8.87573C18.0503 8.50127 17.7467 8.19773 17.3723 8.19773Z" fill="#4B4B4B"/>
-                          </svg>
-                          `,
-                            containerClassName:
-                              "rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] p-2  w-[40px] h-[40px] text-white hover-bg-none cursor-pointer",
-                            onClick: () => append(serviceObject),
-                          },
-                        },
-                        {
-                          containerClass: "mb-0 pr-2 mt-2",
-                          field: {
-                            type: Field.span,
-                            className: "!p-4  w-full ",
-                            id: "span-field",
-                            text: "Add New Service",
-                          },
-                        },
-                      ],
+                      type: Field.button,
+                      id: "button",
+                      text: `${translate(
+                        "offers.service_details.add_new_service"
+                      )}`,
+                      inputType: "button",
+                      className:
+                        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                      onClick: () => append(serviceObject),
+                      loading,
                     },
                   },
                 ],
@@ -406,7 +456,8 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
               isDiscount,
               taxType,
               discountType,
-              tax
+              tax,
+              currency
             ),
           ],
         },
@@ -427,31 +478,33 @@ const generateServiceCalulationChildren = (
   isDiscount?: boolean,
   taxType?: number,
   discountType?: number,
-  tax?: TaxSetting[] | null
+  tax?: TaxSetting[] | null,
+  currency?: string
 ) => {
+  const { t: translate } = useTranslation();
   let field: any = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0 w-full",
     field: {
       type: Field.span,
-      className: "! !border-[#BFBFBF] focus:!border-primary w-full",
+      className: "!border-[#BFBFBF] focus:!border-primary w-full",
       id: "span-field",
-      text: `${total?.taxAmount.toFixed(2)} CHF(7.7%)`,
+      text: `${total?.taxAmount.toFixed(2)} ${currency}(${TAX_PERCENTAGE}%)`,
     },
   };
-  
+
   if (String(taxType) === "1" && isTax) {
     field = {
-      containerClass: "w-[112px]",
+      containerClass: "w-full",
       field: {
         type: Field.select,
-        id: "taxPercentage",
+        id: "taxAmount",
         options:
           tax?.map((item) => ({
             label: item.taxRate + "%",
             value: item.taxRate,
           })) || [],
         text: "Select Tax",
-        name: "taxPercentage",
+        name: "taxAmount",
         control,
         className: "h-10 !px-8",
         value:
@@ -471,19 +524,20 @@ const generateServiceCalulationChildren = (
       children: [
         {
           containerClass: "pb-2 border-b border-lightGray",
-
           field: {
             type: Field.div,
-            className: "flex  mx-10 space-x-5",
+            className: "flex mx-10 space-x-5",
             id: "div2",
             children: [
               {
                 containerClass: "mb-0 pr-2 border-r border-lightGray",
                 field: {
                   type: Field.span,
-                  className: "!p-4  w-full ",
+                  className: "!p-4  w-full",
                   id: "span-field",
-                  text: "Sub Total",
+                  text: `${translate(
+                    "offers.service_details.detail_headings.sub_total"
+                  )}`,
                 },
               },
               {
@@ -493,7 +547,7 @@ const generateServiceCalulationChildren = (
                   className:
                     "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
-                  text: `${total?.subTotal} CHF`,
+                  text: `${total?.subTotal} ${currency}`,
                 },
               },
             ],
@@ -501,32 +555,35 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
-
+          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray",
           field: {
             type: Field.div,
             className: "flex space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {
-                containerClass: "mb-0 px-0 ",
+                containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
-                  className: " !border-[#BFBFBF] focus:!border-primary ",
-                  id: "isTax",
+                  className: " !border-[#BFBFBF] focus:!border-primary",
+                  id: "span-field",
                   name: "isTax",
-                  label: "Tax%",
+                  label: `${translate(
+                    "offers.service_details.detail_headings.tax"
+                  )}`,
                   checked: false,
                   register,
                 },
               },
               {
-                containerClass: "mb-0 border-r border-lightGray pr-8",
+                containerClass: "mb-0 min-w-[70px]",
                 field: {
                   type: Field.span,
-                  className: "! !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!border-[#BFBFBF] focus:!border-primary ",
                   id: "span-field",
-                  text: "Tax %",
+                  text: `${translate(
+                    "offers.service_details.detail_headings.tax"
+                  )}`,
                 },
               },
               field,
@@ -534,21 +591,21 @@ const generateServiceCalulationChildren = (
                 field: {
                   type: Field.div,
                   className: "",
-                  id: "4",
+                  id: "100",
                   children: [
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "taxType1",
                         text: "Sub Total",
                         name: "taxType",
-                        label: "Include",
+                        label: `${translate(
+                          "offers.service_details.detail_headings.Inclusive"
+                        )}`,
                         register,
                         checked: isTax && taxType == 0 ? true : false,
-
                         value: 0,
                         setValue,
                         disabled: !isTax,
@@ -556,18 +613,18 @@ const generateServiceCalulationChildren = (
                       },
                     },
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "taxType2",
                         text: "Sub Total",
                         name: "taxType",
-                        label: "Exclude",
+                        label: `${translate(
+                          "offers.service_details.detail_headings.exclusive"
+                        )}`,
                         register,
                         checked: isTax && taxType == 1 ? true : false,
-
                         value: 1,
                         setValue,
                         disabled: !isTax,
@@ -582,18 +639,17 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5  border-b  border-lightGray",
-
+          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray",
           field: {
             type: Field.div,
-            className: "flex   space-x-5 !h-[45px]",
+            className: "flex space-x-5 !h-[45px]",
             id: "div3",
             children: [
               {
-                containerClass: "mb-0 px-0  ",
+                containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
-                  className: " !border-[#BFBFBF] focus:!border-primary ",
+                  className: "!border-[#BFBFBF] focus:!border-primary ",
                   id: "span-field",
                   name: "isDiscount",
                   checked: false,
@@ -603,21 +659,22 @@ const generateServiceCalulationChildren = (
               },
 
               {
-                containerClass: "mb-0 border-r border-lightGray pr-2",
+                containerClass: "mb-0 min-w-[80px]",
                 field: {
                   type: Field.span,
-                  className: "! !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!border-[#BFBFBF] focus:!border-primary",
                   id: "span-field",
-                  text: "Discount ",
+                  text: `${translate(
+                    "offers.service_details.detail_headings.discount"
+                  )}`,
                 },
               },
 
               {
-                containerClass: "mb-0 ",
+                containerClass: "mb-0 w-full",
                 field: {
                   type: Field.input,
-                  className:
-                    "!px-1 !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
                   id: "discountAmount",
                   register,
                   name: "discountAmount",
@@ -635,37 +692,39 @@ const generateServiceCalulationChildren = (
                   id: "4",
                   children: [
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary",
                         id: "discountType1",
                         text: "Sub Total",
                         name: "discountType",
-                        label: "Percent",
+                        label: `${translate(
+                          "offers.service_details.detail_headings.percent"
+                        )}`,
                         register,
-                        checked: isDiscount && discountType == 1 ? true : false,
-                        value: 1,
+                        checked: isDiscount && discountType == 0 ? true : false,
+                        value: 0,
                         setValue,
                         disabled: !isDiscount,
                         // onClick: generateTotal
                       },
                     },
                     {
-                      containerClass: "mb-0 ",
+                      containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className:
-                          " !border-[#BFBFBF] focus:!border-primary w-full",
+                        className: " !border-[#BFBFBF] focus:!border-primary ",
                         id: "discountType2",
                         text: "Sub Total",
                         name: "discountType",
-                        label: "Amount",
-                        checked: isDiscount && discountType == 0 ? true : false,
+                        label: `${translate(
+                          "offers.service_details.detail_headings.amount"
+                        )}`,
+                        checked: isDiscount && discountType == 1 ? true : false,
 
                         register,
-                        value: 0,
+                        value: 1,
                         setValue,
                         disabled: !isDiscount,
                         // onClick: generateTotal
@@ -678,13 +737,15 @@ const generateServiceCalulationChildren = (
           },
         },
         {
-          containerClass: "mb-0 pt-2",
+          containerClass: "mb-0 mt-3 ml-[35px]",
           field: {
             type: Field.span,
             containerClassName:
-              "! !border-[#BFBFBF] focus:!border-primary w-full text-dark font-bold ",
+              "!!border-[#BFBFBF] focus:!border-primary w-full text-dark font-bold",
             id: "span-field",
-            text: `Grand Total : ${total?.grandTotal.toFixed(2)} CHF`,
+            text: `${translate(
+              "offers.service_details.detail_headings.grand_total"
+            )} : ${total?.grandTotal.toFixed(2)} ${currency}`,
           },
         },
       ],
@@ -696,35 +757,36 @@ const generateServiceCalulationChildren = (
 
 export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionFormField =
   (loading, OnClick) => {
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-10",
+        containerClass: "mt-[30px]",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px] ",
+          className: "flex space-x-[18px]",
           children: [
             {
-              containerClass: "mb-0 mt-[30px]",
+              containerClass: "mb-0",
               field: {
                 type: Field.button,
                 id: "buttonBack",
-                text: "Back",
+                text: `${translate("common.back_button")}`,
                 inputType: "button",
                 className:
-                  "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] w-[152px] h-[50px] text-black hover-bg-none",
+                  "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] min-w-[152px] w-fit h-[50px] text-black hover-bg-none",
                 onClick: OnClick,
               },
             },
             {
-              containerClass: "mb-0 mt-[30px]",
+              containerClass: "mb-0 ",
               field: {
                 type: Field.button,
                 id: "button",
-                text: "Next",
+                text: `${translate("common.next_button")}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
+                  "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
                 loading,
               },
             },

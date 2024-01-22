@@ -20,6 +20,7 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { t: translate } = useTranslation();
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     const elements = document.querySelectorAll("[data-scroll-target]");
@@ -31,7 +32,10 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   const componentArray = [
     <OfferDetailsData contractDetails={contractDetails} />,
     <AddressDetailsData contractDetails={contractDetails} />,
-    <ServiceDetailsData contractDetails={contractDetails} />,
+    <ServiceDetailsData
+      contractDetails={contractDetails}
+      currency={systemSettings?.currency}
+    />,
     <AdditionalDetails contractDetails={contractDetails} />,
   ];
 
@@ -91,30 +95,37 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   ];
 
   return (
-    <div className="flex w-full flex-col xl:flex-row gap-x-6">
-      <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-full xl:w-fit">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
+    <>
+      <div className="2xl:fixed mb-5">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 2xl:mb-0">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[480px] xl:mt-0 mt-4 overflow-y-scroll">
+      <div className="overflow-y-auto w-full break-all flex">
+        <div className="max-w-[260px] w-full hidden 2xl:block"></div>
         {loading ? (
-          <LoadingState />
+          <div className="flex justify-center items-center w-full">
+            <LoadingState />
+          </div>
         ) : (
-          componentArray.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
+          <div className="flex flex-col gap-y-5 w-full">
+            {componentArray.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import {
   SetFieldValue,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
+  UseFormGetValues,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -19,7 +20,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from './auth';
+import { User } from "./auth";
 import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
@@ -33,8 +34,9 @@ import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
-import { TaxSetting } from "@/api/slices/settingSlice/settings";
+import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
+import { staticEnums } from "@/utils/static";
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
@@ -225,11 +227,22 @@ export type GenerateChangeMailSettingFormField = (
 ) => FormField[];
 
 // change mail setting formfield
+export type GenerateQRCodeSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  append: UseFieldArrayAppend<FieldValues, "QrCodeDetail">,
+  onRemove: UseFieldArrayRemove,
+  count: number,
+  user: User,
+  handleOnChangeStatus?: (index?: string, value?: string) => void
+) => FormField[];
+
+// change mail setting formfield
 export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   emailSettings: EmailSetting | null,
-  control?: Control<FieldValues>,
+  control?: Control<FieldValues>
 ) => FormField[];
 
 // edit payment details formfield
@@ -245,7 +258,9 @@ export type GenerateAddReasonFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  control?: Control,
+  reason?: string
 ) => FormField[];
 
 // change/Reset password formfield
@@ -338,7 +353,10 @@ export type GenerateOfferFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: OffersTableRowTypes
+  details?: OffersTableRowTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
 export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
@@ -351,7 +369,11 @@ export type GenerateContractFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: contractTableTypes
+  details?: contractTableTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
+
 ) => FormField[];
 export type GenerateInvoiceEmailFormField = (
   register: UseFormRegister<FieldValues>,
@@ -364,7 +386,11 @@ export type GenerateInvoiceEmailFormField = (
   onContentSelect?: (id: string) => void,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  details?: InvoiceTableRowTypes
+  details?: SubInvoiceTableRowTypes,
+  moreEmail?: { isCc: boolean, isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
+
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
@@ -385,8 +411,9 @@ export type GenerateOffersFormField = (
     leadDetails?: Lead;
     service?: Service[];
     handleRemove?: (id: string) => void;
-    onContentSelect?: () => void;
+    onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
+    selectedContent?: string;
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
@@ -417,6 +444,7 @@ export type GenerateOfferServiceFormField = (
     generatePrice?: (index: number) => void;
     total?: Total;
     tax?: TaxSetting[] | null;
+    currency?: string;
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -448,7 +476,8 @@ export type GenerateLeadsFormField = (
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
   service?: Service[],
-  leadDetails?: Lead
+  leadDetails?: Lead,
+  systemSettings?: SystemSetting | null
 ) => FormField[];
 export type GenerateCustomerLeadFormField = (
   register: UseFormRegister<FieldValues>,
@@ -473,7 +502,11 @@ export type GenerateLeadAddressFormField = (
   count: number,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
-  fields?: object[]
+  fields?: object[],
+  handleFieldTypeChange?: (index: number) => void,
+  addressType?: boolean[],
+  setValue?: UseFormSetValue<FieldValues>,
+  getValues?: UseFormGetValues<FieldValues>
 ) => FormField[] | null;
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
@@ -510,7 +543,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null },
+  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -578,7 +611,8 @@ export interface FilterType {
   payment?: string;
   email?: string[] | string;
   price?: string[];
-  month?:number
+  month?: number;
+  leadSource?: string[] | string;
 }
 
 export interface MoreFilterType {
@@ -593,6 +627,9 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
+  leadSource?: string[] | string
+
+
 }
 export interface FilterProps {
   filter: FilterType;
@@ -619,6 +656,8 @@ export interface DocumentHeaderDetailsProps {
   offerDate: string;
   createdBy: string;
   logo: string;
+  emailTemplateSettings: EmailTemplate | null;
+  fileType?: "contract" | "invoice" | "receipt"
 }
 
 export interface ProductItemFooterProps {
@@ -626,6 +665,15 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
+  invoiceStatus?: keyof typeof staticEnums["InvoiceStatus"];
+  invoiceAmount?: string;
+  invoiceCreatedAmount?: string;
+  invoicePaidAmount?: string;
+  isShowExtraAmount?: boolean;
+  systemSettings?: SystemSetting | null;
+  discountType?:keyof typeof staticEnums["DiscountType"];
+  taxType?:keyof typeof staticEnums["TaxType"];
+
 }
 
 export interface ContactDetailsProps {
@@ -645,6 +693,7 @@ export interface MovingDetailsProps {
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
+  addressLabels?: string[];
 }
 export interface ProductItemProps {
   title: string;
@@ -702,13 +751,19 @@ export interface DocumentDetailFooterProps {
   columnSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
+  emailTemplateSettings?: EmailTemplate | null;
 }
 export interface TemplateSettigsFirstColumn {
-  isCompany: boolean;
+  isCompanyName: boolean;
   isEmail: boolean;
   isPhoneNumber: boolean;
   isTaxNumber: boolean;
   isWebsite: boolean;
+  companyName: string;
+  email: string;
+  phoneNumber: string;
+  taxNumber: string;
+  website: string;
 }
 export interface TemplateSettigsSecondColumn {
   isAccountNumber: boolean;
@@ -716,6 +771,11 @@ export interface TemplateSettigsSecondColumn {
   isIBAN: boolean;
   isPostCode: boolean;
   isStreetNumber: boolean;
+  streetNumber: string;
+  postCode: string;
+  bankName: string;
+  accountNumber: string;
+  iban: string
 }
 export interface TemplateSettigsThirdColumn {
   isRow1: boolean;
@@ -723,6 +783,12 @@ export interface TemplateSettigsThirdColumn {
   isRow3: boolean;
   isRow4: boolean;
   isRow5: boolean;
+  row1: string;
+  row2: string;
+  row3: string;
+  row4: string;
+  row5: string;
+
 }
 export interface TemplateSettigsFourthColumn {
   isRow1: boolean;
@@ -730,6 +796,12 @@ export interface TemplateSettigsFourthColumn {
   isRow3: boolean;
   isRow4: boolean;
   isRow5: boolean;
+  row1: string;
+  row2: string;
+  row3: string;
+  row4: string;
+  row5: string;
+
 }
 export interface TemplateType {
   firstColumn: TemplateSettigsFirstColumn;
@@ -748,6 +820,10 @@ export interface CompanySettingsActionType {
   payload: Template;
   type: string;
 }
+export interface EmailSettingsActionType {
+  payload: EmailSetting;
+  type: string;
+}
 
 export interface EmailHeaderProps {
   offerNo?: string;
@@ -756,7 +832,9 @@ export interface EmailHeaderProps {
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
-  handleSendByPost: () => void
+  handleSendByPost: () => void;
+  activeButtonId: string | null;
+  offerId?:string
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
@@ -794,18 +872,41 @@ export interface PdfProps<T = EmailHeaderProps> {
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
-  qrCode: qrCode;
   aggrementDetails: string;
   isOffer?: boolean;
   id?: string;
   signature?: string;
   attachement?: string;
+  isCanvas?: boolean;
+}
+
+export interface PdfPreviewProps {
+  data?: PdfProps<ContractEmailHeaderProps>;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
+  pdfFile?: any;
+  setPdfFile?: SetStateAction<any>;
+  fileName?: string;
+  qrCode?: string;
+  remoteFileBlob?: Blob | null;
+  systemSetting?: SystemSetting | null;
+  mergedPdfFileUrl?: string | null;
+  isPdfRendering?: boolean;
+  showContractSign?: boolean;
+}
+
+export interface PdfPreviewFooterProps {
+  documentDetails?: DocumentDetailFooterProps;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
 }
 
 export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   isShowTotal: boolean;
   templateSettings: TemplateType | null;
   totalPages: number;
+  emailTemplateSettings: EmailTemplate | null;
+  systemSettings?: SystemSetting | null;
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -816,9 +917,11 @@ export interface PurchasedItemDetailsNextPageProps {
   templateSettings: TemplateType | null;
   totalPages: number;
   currPage: number;
+  emailTemplateSettings: EmailTemplate | null;
+  systemSettings?: SystemSetting | null;
 }
 
-interface qrCode {
+export interface qrCode {
   acknowledgementSlip: AcknowledgementSlipProps;
   payableTo: PayableToProps;
 }
@@ -846,7 +949,6 @@ export interface PayableToProps extends QRCodeBaseProps {
 export interface PaymentQrCodeDetailsProps {
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
-  qrCode: qrCode;
 }
 export interface QrCodeDetailsProps {
   qrCode: qrCode;
@@ -862,7 +964,12 @@ export interface AggrementProps {
   isOffer?: boolean;
   handleDescriptionUpdate?: (value: string) => void;
   signature?: string;
-  isCanvas?:boolean
+  isCanvas?: boolean;
+  setIsSignatureDone?: SetStateAction<boolean>;
+  isSignatureDone?: boolean;
+  emailTemplateSettings?: EmailTemplate | null;
+  setOfferSignature?: SetStateAction<any>;
+  systemSettings?: SystemSetting | null;
 }
 
 export interface FiltersComponentProps {
@@ -879,4 +986,10 @@ export interface ContractEmailHeaderProps {
   onPrint: () => void;
   worker: string;
   contractTitle: string;
+}
+export interface InvoiceEmailCardProps {
+  activeButtonId: string | null;
+  loading?: boolean;
+  onEmailSend: () => void;
+  onSendViaPost: () => void;
 }

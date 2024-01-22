@@ -1,30 +1,33 @@
 import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
-import Image from "next/image";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
 import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const InoviceContentDetails = ({
   contentDetail,
-  onClick
+  onClick,
 }: {
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
   const { t: translate } = useTranslation();
-  
 
   return (
-    <div className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit" id="Invoice Content">
+    <div
+      className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit"
+      id={translate("content.tabs_headings.invoice_content")}
+    >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("content.details.invoice_heading")}</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("content.details.invoice_heading")}
+        </h2>
         <button
           onClick={() => onClick(2, ComponentsType.editInvoiceContent)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("content.details.edit_button")}
         </button>
       </div>
@@ -34,29 +37,39 @@ const InoviceContentDetails = ({
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.invoice_title")}
           </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
             {contentDetail?.invoiceContent?.title}
           </p>
         </div>
 
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
-          {translate("content.details.invoice_description")}
+            {translate("content.details.invoice_description")}
           </p>
-          
-          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.invoiceContent?.description }} />
+
+          <div
+            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+            dangerouslySetInnerHTML={{
+              __html: contentDetail?.invoiceContent?.description,
+            }}
+          />
         </div>
         <div className="flex flex-col mt-5">
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
-          {translate("content.details.email_body")}
+            {translate("content.details.email_body")}
           </p>
-          <div className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base" dangerouslySetInnerHTML={{ __html: contentDetail?.invoiceContent?.body }} />
+          <div
+            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+            dangerouslySetInnerHTML={{
+              __html: contentDetail?.invoiceContent?.body,
+            }}
+          />
         </div>
 
         {/* attachments is here */}
         <div className="mt-5 w-full xl:w-[90%]">
           <span className="text-[#1E1E1E] font-normal text-[14px] ">
-          {translate("content.details.attachments")}
+            {translate("content.details.attachments")}
           </span>
           <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
             {contentDetail?.invoiceContent?.attachments?.map((item, index) => (

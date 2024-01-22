@@ -120,10 +120,9 @@ const AddNewLeadsData = () => {
   };
 
   const imageUploadHandler = () => {
-    dispatch(setImages([]))
+    dispatch(setImages([]));
     dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
     // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
-
   };
 
   const handleImageSlider = () => {
@@ -189,9 +188,12 @@ const AddNewLeadsData = () => {
   };
 
   return (
-    <div className="mt-[22px]">
-      <div className="flex flex-col xl:flex-row w-full gap-6">
-        <div className="flex flex-row flex-wrap xl:flex-col xl:flex-nowrap w-fit gap-[14px]">
+    <div className="h-full">
+      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
+        <p className="mb-5 font-normal text-xl text-[#222B45]">
+          {translate("leads.add_new_lead")}
+        </p>
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -200,10 +202,14 @@ const AddNewLeadsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={index}
             />
           ))}
         </div>
+      </div>
 
+      <div className="w-full break-all xLarge:mt-[145px] flex">
+        <div className="max-w-[270px] w-full hidden xLarge:block"></div>
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>
       {renderModal()}

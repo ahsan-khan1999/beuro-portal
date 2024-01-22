@@ -20,6 +20,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
+  let taxPercentage = 0
 
   const {
     register,
@@ -45,29 +46,39 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     data
   );
 
+
   useMemo(() => {
+    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
+
+    taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
-      if (invoiceDetails?.contractID?.offerID?.total < amount) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
-        setValue("amount", invoiceDetails?.contractID?.offerID?.total)
+      if (remainingAmount < amount) {
+        setValue("amount", invoiceDetails?.paidAmount)
+        setValue("remainingAmount", remainingAmount - amount)
+
+      } else if (invoiceDetails?.paidAmount === amount) {
+        setValue("remainingAmount", remainingAmount)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - amount)
+        setValue("remainingAmount", remainingAmount - amount)
+
       }
     }
     else if (type === '1') {
-      if (invoiceDetails?.contractID?.offerID?.total < calculateTax(invoiceDetails?.contractID?.offerID?.total, amount)) {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      if (Number(remainingAmount) < taxPercentage) {
+        setValue("remainingAmount", remainingAmount)
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total - calculateTax(invoiceDetails?.contractID?.offerID?.total, amount))
+        setValue("remainingAmount", Number(remainingAmount) - taxPercentage)
       }
     } else {
-      setValue("remainingAmount", invoiceDetails?.contractID?.offerID?.total)
+      setValue("remainingAmount", remainingAmount)
 
     }
-  }, [amount, type])
+  }, [amount, type]);
+
+
   useEffect(() => {
     reset({
       amount: data?.amount,
@@ -79,10 +90,18 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
-    const apiData = { ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false }
+    const apiData = {
+      ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false,
+      amount: data?.type === "1" ? taxPercentage : data?.amount
+
+    }
 
     const res = await dispatch(updateParentInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload)  invoiceCreated();
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))
+
+      invoiceCreated();
+    }
   };
   return {
     error,

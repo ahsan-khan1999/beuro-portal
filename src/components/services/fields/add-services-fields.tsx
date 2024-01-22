@@ -25,7 +25,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
         <BaseButton
           buttonText={translate("services.detail.cancel_button")}
           onClick={handleCancel}
-          containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[161px] w-full"
         ></BaseButton>
       </div>
       <Form

@@ -1,5 +1,3 @@
-
-
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -8,20 +6,25 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generatePlansValidation } from "@/validation/admin/plansSchema";
 import { planDetailsFormField } from "@/components/admin/plans/plan-fields";
-import { createPlan, readPlanDetail, setPlanDetails, updatePlan } from "@/api/slices/company/companySlice";
+import {
+  createPlan,
+  readPlanDetail,
+  setPlanDetails,
+  updatePlan,
+} from "@/api/slices/company/companySlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import RecordCreateSuccess from '@/base-components/ui/modals1/OfferCreated';
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export default function usePlanDetail(stage: boolean) {
   const { t: translate } = useTranslation();
   const { loading, planDetails } = useAppSelector((state) => state.company);
-  const { modal } = useAppSelector(state => state.global)
+  const { modal } = useAppSelector((state) => state.global);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
 
@@ -34,7 +37,7 @@ export default function usePlanDetail(stage: boolean) {
     control,
     reset,
     formState: { errors },
-    setError
+    setError,
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -44,7 +47,7 @@ export default function usePlanDetail(stage: boolean) {
       dispatch(readPlanDetail({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setPlanDetails(res.payload));
-          reset({ ...res?.payload })
+          reset({ ...res?.payload });
         }
       );
     }
@@ -62,10 +65,9 @@ export default function usePlanDetail(stage: boolean) {
     control
   );
   const handleOnSave = () => {
-    router.push("/admin/plans")
+    router.push("/admin/plans");
     dispatch(updateModalType({ type: ModalType.NONE }));
-
-  }
+  };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -76,12 +78,11 @@ export default function usePlanDetail(stage: boolean) {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Record Created Successful "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.plan_created")}
+        modelSubHeading={translate("common.modals.plan_record_des")}
         routeHandler={handleOnSave}
       />
     ),
-    
   };
 
   const renderModal = () => {
@@ -89,16 +90,19 @@ export default function usePlanDetail(stage: boolean) {
   };
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (stage) {
-      const response = await dispatch(updatePlan({ data, router, setError, translate }))
-      if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
-
+      const response = await dispatch(
+        updatePlan({ data, router, setError, translate })
+      );
+      if (response?.payload)
+        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     } else {
-      const response = await dispatch(createPlan({ data, router, setError, translate }))
-      if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
+      const response = await dispatch(
+        createPlan({ data, router, setError, translate })
+      );
+      if (response?.payload)
+        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
-
   };
-
 
   const handlePreviousClick = () => {
     router.push("/admin/support-request");
@@ -115,6 +119,6 @@ export default function usePlanDetail(stage: boolean) {
     handlePreviousClick,
     handleUpdateCancel,
     renderModal,
-    loading
+    loading,
   };
 }

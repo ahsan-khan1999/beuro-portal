@@ -17,7 +17,7 @@ export const PdfFileUpload = ({
   isOpenedFile,
   attachements,
   setAttachements,
-  isAttachement
+  isAttachement,
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
@@ -26,12 +26,11 @@ export const PdfFileUpload = ({
   isOpenedFile?: boolean;
   attachements?: Attachement[];
   setAttachements?: React.Dispatch<SetStateAction<any>>;
-  isAttachement?:boolean
-
+  isAttachement?: boolean;
 }) => {
   const router = useRouter();
   const formdata = new FormData();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -49,25 +48,29 @@ export const PdfFileUpload = ({
       formdata.append("file", file);
 
       // Store the file name locally
-      const response = await dispatch(uploadFileToFirebase(formdata))
+      const response = await dispatch(uploadFileToFirebase(formdata));
       if (response?.payload) {
-        setAttachements && setAttachements(attachements && [...attachements, { name: file?.name, value: response?.payload }])
+        setAttachements &&
+          setAttachements(
+            attachements && [
+              ...attachements,
+              { name: file?.name, value: response?.payload },
+            ]
+          );
         field.onChange([response?.payload]);
-
       }
-
     }
   };
 
   const handleDeleteFile = (index: number) => {
-    const list = attachements && [...attachements]
-    list?.splice(index, 1)
-    setAttachements && setAttachements(list)
+    const list = attachements && [...attachements];
+    list?.splice(index, 1);
+    setAttachements && setAttachements(list);
     // field.onChange();
   };
 
   return (
-    <div className="flex ">
+    <div className="grid grid-cols-3 gap-x-3">
       <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
         <div className="flex gap-3">
           <div className="flex flex-col items-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto cursor-pointer px-[25px] pt-6 pb-3">
@@ -75,7 +78,7 @@ export const PdfFileUpload = ({
             <span className="text-[#4B4B4B] text-center font-medium text-[10px] mt-3 mb-2">
               {text}
             </span>
-            <span className="text-[#8F8F8F] font-normal text-[12px]">
+            <span className="text-[#8F8F8F] font-normal text-center text-[12px]">
               {fileSupported}
             </span>
           </div>
@@ -89,30 +92,36 @@ export const PdfFileUpload = ({
         />
       </label>
 
-      <div className="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 mr-4">
-        {attachements &&
-          attachements?.map((item, index) => (
-            <div
-              className={`relative flex flex-col gap-3  h-fit border border-[#EBEBEB] rounded-md px-3 py-2 ${isOpenedFile ? "cursor-pointer" : "cursor-default"
-                }`}
-              key={index}
-              onClick={() =>
-                isOpenedFile && router.push("/content/pdf-preview")
-              }
-            >
-              <div className="flex items-center gap-3">
-                <Image
-                  src={deletePdfIcon}
-                  alt="deletePdfIcon"
-                  className={`absolute -right-1 -top-1 ${isOpenedFile ? "cursor-pointer" : "cursor-pointer"
-                    } `}
-                  onClick={() => handleDeleteFile(index)}
-                />
-                <Image src={pdfIcon} alt="pdfIcon" />
-                <span>{item?.name}</span>
-              </div>
-            </div>
-          ))}
+      <div className="col-span-2">
+        <div className="col-span-2">
+          <div className="grid mlg:grid-cols-2 xLarge:grid-cols-3 gap-x-4 gap-y-3">
+            {attachements &&
+              attachements?.map((item, index) => (
+                <div
+                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                    isOpenedFile ? "cursor-pointer" : "cursor-default"
+                  }`}
+                  key={index}
+                  onClick={() =>
+                    isOpenedFile && router.push("/content/pdf-preview")
+                  }
+                >
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={deletePdfIcon}
+                      alt="deletePdfIcon"
+                      className={`absolute -right-1 -top-1 ${
+                        isOpenedFile ? "cursor-pointer" : "cursor-pointer"
+                      } `}
+                      onClick={() => handleDeleteFile(index)}
+                    />
+                    <Image src={pdfIcon} alt="pdfIcon" />
+                    <span>{item?.name.slice(0, 20)}...</span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

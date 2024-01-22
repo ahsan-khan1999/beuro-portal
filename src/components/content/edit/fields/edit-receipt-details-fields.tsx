@@ -9,7 +9,9 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
   onClick,
   trigger,
   count,
-  attachements, setAttachements, contentDetails
+  attachements,
+  setAttachements,
+  contentDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -21,7 +23,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
         className: "grid grid-cols-1 gap-4",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.receipt_title"),
               htmlFor: "receiptContent.title",
@@ -51,7 +53,9 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.description
+              value:
+                contentDetails?.id &&
+                contentDetails?.receiptContent?.description,
             },
           },
 
@@ -69,8 +73,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body
-
+              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
@@ -91,12 +94,11 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               control,
               attachements,
               setAttachements,
-              isAttachement: true
-
+              isAttachement: true,
             },
           },
         ],
-      }
+      },
     },
 
     {
@@ -104,7 +106,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center gap-x-[18px]",
         children: [
           {
             containerClass: "mb-0",
@@ -114,7 +116,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.cancel_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
               onClick: onClick,
             },
           },
@@ -126,7 +128,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

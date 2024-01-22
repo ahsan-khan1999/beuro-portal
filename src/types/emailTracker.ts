@@ -4,8 +4,7 @@ export interface TableRowEmailTracker {
   recipient: string;
   subject: string;
 
-
-  mailStatus: string
+  mailStatus: "open" | "failed" | "pending";
   viewMail: {
     colorClass: string;
   };
@@ -14,9 +13,10 @@ export interface TableRowEmailTracker {
   description: string;
   email: string;
   refID: string;
-  pdf: Pdf[]
+  pdf: string;
+  attachments: Pdf[];
 }
 
 interface Pdf {
-  href: string
+  href: string;
 }

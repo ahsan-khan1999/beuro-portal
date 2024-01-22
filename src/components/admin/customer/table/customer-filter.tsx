@@ -1,9 +1,7 @@
-import CustomerFilters from "@/base-components/filter/customer-filters";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersDefaultValues } from "@/enums/static";
-import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -51,12 +49,14 @@ export default function CustomerFilter({
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
     });
   };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -64,6 +64,7 @@ export default function CustomerFilter({
       return updatedFilter;
     });
   };
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
@@ -87,7 +88,7 @@ export default function CustomerFilter({
 
   return (
     <div className="flex space-x-4">
-      <div className="flex gap-x-4 w-full xl:w-fit">
+      <div className="flex gap-x-4 xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
             key={idx}
@@ -115,12 +116,18 @@ export default function CustomerFilter({
         value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[
-          { label: "Date", value: "createdAt" },
-          { label: "Latest", value: "-createdAt" },
-          { label: "Oldest", value: "createdAt" },
-          { label: "A - Z", value: "title" },
+          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
+          {
+            label: `${translate("filters.sort_by.latest")}`,
+            value: "-createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.oldest")}`,
+            value: "createdAt",
+          },
+          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       {/* <CustomerFilters
         filter={filter}

@@ -24,7 +24,7 @@ export default function Plans() {
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} handleDelete={handleDelete} />,
-    currentPageRows.length > 0,
+    currentPageRows?.length > 0,
     loading
   );
 
@@ -35,7 +35,7 @@ export default function Plans() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
+      {currentPageRows?.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}

@@ -178,7 +178,8 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;
   onClick?: () => void;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, index?: number) => void;
+  fieldIndex?: number
 }
 
 export interface DragAndDropFileFieldProps
@@ -202,7 +203,7 @@ export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
   iconClasses?: string;
-  disabled?:boolean
+  disabled?: boolean
 }
 
 // interface for the Image upload
@@ -383,7 +384,6 @@ export interface FieldComponents {
   button: React.FC<ButtonProps>;
   addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
-  dateRange: React.FC<MultiDateProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
 }

@@ -7,12 +7,13 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
   });
-  
+
   const dispatch = useAppDispatch();
   const { followUp, totalCount, loading } = useAppSelector(
     (state) => state.followUp
@@ -21,29 +22,20 @@ const useFollowUps = () => {
     modal: { data },
   } = useAppSelector((state) => state.global);
   const { modal } = useAppSelector((state) => state.global);
-
+  const { t: translate } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<FollowUps[]>([]);
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
   useEffect(() => {
-    if (followUp?.length === 0)
-      dispatch(
-        readFollowUp({ params: { filter: filter, page: 1, size: 10 } })
-      ).then((res: any) => {
-        if (res?.payload) {
-          const startIndex = (currentPage - 1) * itemsPerPage;
-          setCurrentPageRows(
-            res?.payload?.FollowUp?.slice(startIndex, startIndex + itemsPerPage)
-          );
-        }
-      });
-  }, [dispatch]);
-  useEffect(() => {
-    // Update rows for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    setCurrentPageRows(followUp.slice(startIndex, startIndex + itemsPerPage));
+    dispatch(
+      readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.FollowUp);
+      }
+    });
   }, [currentPage]);
 
   const handlePageChange = (page: number) => {
@@ -72,7 +64,7 @@ const useFollowUps = () => {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this FollowUp?"
+        modelHeading={translate("common.modals.delete_follow_up")}
         routeHandler={routeHandler}
         loading={loading}
       />

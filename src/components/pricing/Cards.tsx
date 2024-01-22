@@ -11,15 +11,17 @@ import { getUser } from "@/utils/auth.util";
 import { useRouter } from "next/router";
 
 const Cards = ({ planTime }: { planTime: number }) => {
-  const { plan, loading } = useAppSelector(state => state.company)
-  const user = isJSON(getUser())
-  const router = useRouter()
-  const dispatch = useAppDispatch()
+  const { plan, loading } = useAppSelector((state) => state.company);
+  const user = isJSON(getUser());
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleChoosePlan = async (planID: string) => {
-    const response = await dispatch(chooseCompanyPlan({ data: { plan: planID, id: user?.id } }))
-    if (response?.payload) router.push("/dashboard")
-  }
+    const response = await dispatch(
+      chooseCompanyPlan({ data: { plan: planID, id: user?.id } })
+    );
+    if (response?.payload) router.push("/dashboard");
+  };
 
   const CurrentComponent = useEmptyStates(
     <PlanInfo
@@ -32,9 +34,7 @@ const Cards = ({ planTime }: { planTime: number }) => {
     loading
   );
 
-  return (
-    CurrentComponent
-  );
+  return CurrentComponent;
 };
 
 export default Cards;

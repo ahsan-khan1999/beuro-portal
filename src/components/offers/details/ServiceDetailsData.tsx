@@ -1,74 +1,28 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { OffersTableRowTypes } from "@/types/offers";
-import { filterService } from "@/utils/utility";
+import { calculateTax, filterService } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
+import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceDetailsData = ({
   offerDetails,
+  currency,
 }: {
   offerDetails: OffersTableRowTypes;
+  currency?: string;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
-  // const serviceHeading: string[] = [
-  //   `${translate("offers.service_details.detail_headings.title")}`,
-  //   `${translate("offers.service_details.detail_headings.description")}`,
-  //   `${translate("offers.service_details.detail_headings.price")}`,
-  //   `${translate("offers.service_details.detail_headings.unit")}`,
-  //   `${translate("offers.service_details.detail_headings.count")}`,
-  //   `${translate("offers.service_details.detail_headings.total_price")}`,
-  // ];
-
-  // const serviceData: serviceData[] = [
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  //   {
-  //     title: `2 Mitarbeiter  Lorem ipsum dorl`,
-  //     description: `Kostenübernahme bei lore
-  //     Ipsum dollar smith emit em..`,
-  //     price: "1000",
-  //     unit: "Std.",
-  //     count: "2",
-  //     total_price: "2000CHF",
-  //   },
-  // ];
 
   return (
     <LeadsCardLayout>
       <div
         className="flex justify-between pb-5 border-b border-[#e5e5e5]"
-        id="Service Details"
+        id={translate("offers.tabs_heading.service")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("offers.service_details.main_heading")}
@@ -77,12 +31,12 @@ const ServiceDetailsData = ({
           onClick={() =>
             router.push({
               pathname: "/offers/edit",
-              query: { offer: offerDetails?.id },
+              query: { offer: offerDetails?.id, tab: 2 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.service_details.edit_button")}
         </button>
       </div>
@@ -92,11 +46,12 @@ const ServiceDetailsData = ({
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("offers.service_details.detail_headings.title")}
             </span>
-            <span className="text-[14px] font-medium text-[#8F8F8F]">
+            <span className="text-[14px] font-medium text-[#8F8F8F] mx-2   ">
               {translate("offers.service_details.detail_headings.description")}
             </span>
             <span>
-              {translate("offers.service_details.detail_headings.price")}
+              {translate("offers.service_details.detail_headings.price")}(
+              {currency})
             </span>
             <span>
               {translate("offers.service_details.detail_headings.unit")}
@@ -117,7 +72,7 @@ const ServiceDetailsData = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.serviceTitle}
               </span>
-              <span className="text-base font-medium text-[#4B4B4B] break-all mr-2">
+              <span className="text-base font-medium text-[#4B4B4B] break-all mx-2">
                 {item?.description}
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -136,7 +91,7 @@ const ServiceDetailsData = ({
           ))}
 
           <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-3">
               <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate(
@@ -147,14 +102,23 @@ const ServiceDetailsData = ({
                   {offerDetails?.subTotal}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 ml-5">
+              <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
                 <span className="text-[#4D4D4D] text-[14px] font-normal">
                   {translate("offers.service_details.detail_headings.tax")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.taxAmount} (7.7%)
+                  {calculateTax(offerDetails?.total, Number(offerDetails?.taxAmount))} ({offerDetails?.taxAmount}%)
                 </span>
               </div>
+              <div className="flex flex-col gap-2 ml-5">
+                <span className="text-[#4D4D4D] text-[14px] font-normal">
+                  {translate("offers.service_details.detail_headings.discount")}
+                </span>
+                <span className="text-[#4B4B4B] text-base font-medium">
+                  {offerDetails?.discountType === "Amount" ? offerDetails?.discountAmount: calculateTax(offerDetails?.total, Number(offerDetails?.discountAmount))} 
+                </span>
+              </div>
+              
             </div>
 
             <hr className="opacity-20 mt-2" />
@@ -167,7 +131,7 @@ const ServiceDetailsData = ({
                 :
               </span>
               <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-                {offerDetails?.total} CHF
+                {offerDetails?.total} {currency}
               </span>
             </div>
           </div>

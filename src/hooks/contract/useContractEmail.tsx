@@ -7,7 +7,10 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
 import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
 import { useEffect, useMemo, useState } from "react";
-import { readContent, setContentDetails } from "@/api/slices/content/contentSlice";
+import {
+  readContent,
+  setContentDetails,
+} from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
@@ -23,9 +26,19 @@ export const useContractEmail = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, contractDetails } = useAppSelector((state) => state.contract);
+  const { loading, error, contractDetails } = useAppSelector(
+    (state) => state.contract
+  );
   const { content, contentDetails } = useAppSelector((state) => state.content);
-  const [attachements, setAttachements] = useState<Attachement[]>(contractDetails?.id && transformAttachments(contractDetails?.offerID?.content?.confirmationContent?.attachments as string[]) || [])
+  const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false })
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contractDetails?.id &&
+      transformAttachments(
+        contractDetails?.offerID?.content?.confirmationContent
+          ?.attachments as string[]
+      )) ||
+    []
+  );
 
   const schema = generateContractEmailValidationSchema(translate);
   const {
@@ -35,29 +48,41 @@ export const useContractEmail = (
     setError,
     formState: { errors },
     watch,
-    reset
+    reset,setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-      content: contractDetails?.offerID?.content?.confirmationContent?.title,
-      subject: contractDetails?.offerID?.content?.confirmationContent?.title,
-      description: contractDetails?.offerID?.content?.confirmationContent?.description,
-      pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments
-    })
-  }, [])
-
-
+      content: contractDetails?.offerID?.content?.id,
+      subject: contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+      description: contractDetails?.offerID?.content?.confirmationContent?.body,
+      pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
+    });
+  }, []);
 
   const onContentSelect = (id: string) => {
-    const selectedContent = content.find((item) => item.id === id)
+    const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
-      dispatch(setContentDetails(selectedContent))
+      reset({
+        email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+        content: selectedContent?.id,
+        subject: selectedContent?.confirmationContent?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.confirmationContent?.body,
+        pdf: selectedContent?.confirmationContent?.attachments,
+      });
+      setAttachements(
+        transformAttachments(
+          selectedContent?.confirmationContent?.attachments as string[]
+        ) || []
+      );
+      dispatch(setContentDetails(selectedContent));
     }
-  }
+  };
   const fields = ContractEmailPreviewFormField(
     register,
     loading,
@@ -69,18 +94,23 @@ export const useContractEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    contractDetails
+    contractDetails,
+    moreEmail,
+    setMoreEmail,
+    setValue
+
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    
     const updatedData = {
       ...data,
       id: contractDetails?.id,
-      pdf: attachements?.map((item) => item.value),
+      attachments: attachements?.map((item) => item.value),
       // router,
       // translate,
       // setError,
-    };
+    } as { [key: string]: any };
+
+    delete updatedData["pdf"];
 
     localStoreUtil.store_data("contractComposeEmail", updatedData);
 
@@ -103,6 +133,6 @@ export const useContractEmail = (
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

@@ -11,10 +11,11 @@ const TableRows = ({
   return (
     <div>
       {currentPageRows?.map((item: FollowUps, index: number) => {
+
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white border border-[#4A13E7] rounded-md shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2rounded-md p-4"
+            className="hover:bg-[#E9E1FF] bg-white border border-[#4A13E7] rounded-md shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2 p-4"
           >
             <span className="flex items-center ">{item.customer?.refID}</span>
             <span className=" flex items-center">
@@ -29,13 +30,13 @@ const TableRows = ({
               <div
                 className={`bg-[${
                   StatusColors[item.status]
-                }] text-white px-2 py-1 text-center rounded-md  text-sm `}
+                }] text-white px-2 py-1 text-center rounded-md text-sm`}
               >
                 {item.status}
               </div>
             </span>
             <span
-              className=" flex justify-center items-center cursor-pointer"
+              className="flex justify-center items-center cursor-pointer"
               onClick={() => handleFollowUpsDelete(item.id)}
             >
               <svg
@@ -54,7 +55,7 @@ const TableRows = ({
               </svg>
             </span>
             <span
-              className=" flex justify-center items-centercursor-pointer"
+              className="flex justify-center items-centercursor-pointer"
               onClick={() => handleFollowUpsDetails(item.id)}
             >
               <svg

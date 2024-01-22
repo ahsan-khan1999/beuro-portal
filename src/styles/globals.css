@@ -152,14 +152,64 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+.selectScrollBar::-webkit-scrollbar {
+  width: 15px;
+}
 /* Custom CSS to style the scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
 }
 
+.scrollhost::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollhost ::-moz-scrollbar {
+  display: none;
+}
+
+.scrollhost {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-color: transparent transparent; /*just hides the scrollbar for firefox */
+}
+
+.calWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.contentCalWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1280px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.offerCardCalWidth {
+  max-width: calc(100% - 292px);
+  width: 100%;
+
+  @media (max-width: 1536px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 .dashboard_scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 8px;
+}
+.select_scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb,
@@ -205,6 +255,12 @@ input[type="number"] {
 .react-tel-input .selected-flag {
   border-top-left-radius: 8px !important;
   border-bottom-left-radius: 8px !important;
+}
+
+/* multi-select scroll bar */
+.multiSelectScrol::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
 }
 
 /* .react-tel-input .flag-dropdown:hover{
@@ -454,4 +510,86 @@ input[type="number"] {
   .scalable-div {
     transform: scale(calc(100vw / 1160));
   }
+}
+
+@media (max-width: 767px) {
+  .html-content > h2 {
+    color: #1c1c1c;
+    font-size: 20px !important;
+    /* font-family: ; */
+    font-weight: 700;
+    margin-bottom: 8px !important;
+  }
+
+  .html-content > h3 {
+    color: #1c1c1c;
+    font-size: 20px !important;
+    /* font-family: ; */
+    font-weight: 700;
+    margin-bottom: 24px !important;
+  }
+
+  .html-content > h4 {
+    color: #1c1c1c;
+    font-size: 16px !important;
+    /* font-family: ; */
+    font-weight: 600;
+    margin-bottom: 8px !important;
+  }
+  .html-content > p {
+    color: #505050;
+    margin-bottom: 12px;
+  }
+  .html-content > p > a {
+    text-decoration: underline !important;
+  }
+}
+.html-content > h1 {
+  font-size: 18px;
+  margin: 0px;
+}
+.html-content > h2 {
+  font-size: 18px;
+  margin: 0px;
+}
+
+.html-content > h3 {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.html-content > h4 {
+  font-size: 14px;
+}
+.html-content > p {
+  color: #272727;
+  margin: 0;
+  font-size: 14px;
+}
+.html-content > p > a {
+  text-decoration: underline !important;
+}
+.html-content > ul {
+  margin-left: 54px;
+}
+.html-content > ul > li {
+  list-style: outside;
+  font-size: 13px;
+}
+
+.html-content > blockquote {
+  border-left: 5px solid #ccc;
+  font-style: italic;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  padding-left: 1rem;
+}
+
+.html-content > blockquote::before {
+  font-weight: bold;
+}
+
+.html-content > blockquote > p {
+  margin: 0;
 }

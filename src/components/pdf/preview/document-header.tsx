@@ -3,37 +3,82 @@ import React from "react";
 import umzugsLogo from "@/assets/svgs/Umzug-fuchs-logo.svg";
 import { DocumentHeaderDetailsProps } from "@/types/types";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 export const DocumentHeader = ({
   createdBy,
   offerDate,
   offerNo,
-  logo
-}: DocumentHeaderDetailsProps) => {
-  return (
-    <div className="flex justify-between items-center h-[173px] px-[74px] py-[27px] w-full bg-[#EEEEEE]">
-      <Image src={logo} alt="umzugsLogo" height={75} width={185} />
+  logo,
+  emailTemplateSettings,
+}: Partial<DocumentHeaderDetailsProps>) => {
+  const { t: translation } = useTranslation();
+  const textColor = "#" + emailTemplateSettings?.textColour;
+  const backgroundColor = "#" + emailTemplateSettings?.FooterColour;
 
-      <div className="flex flex-col gap-[6px]">
+
+  return (
+    <div
+      className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full `}
+      // style={{backgroundColor:"#fff"}}
+    >
+      <div className="col-span-3">
+        {emailTemplateSettings && (
+          <Image
+            src={emailTemplateSettings?.logo}
+            alt="umzugsLogo"
+            height={75}
+            width={185}
+            style={{ height: "75px", width: "185px" }}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col gap-[6px] col-span-1">
         <div className="flex gap-[30px]">
-          <span className="text-[#404040] text-base font-medium">
-            Offer No:
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+          >
+            {translation("pdf.offer_number")}:
           </span>
-          <span className="text-[#000] text-base font-medium">
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+
+          >
             {offerNo}
           </span>
         </div>
         <div className="flex gap-[15px] ">
-          <span className="text-[#404040] text-base font-medium">
-            Offer Date:
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+
+          >
+            {translation("pdf.offer_date")}:
           </span>
-          <span className="text-[#000] text-base font-medium">{formatDateTimeToDate(offerDate)}</span>
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+
+          >
+            {formatDateTimeToDate(offerDate || "")}
+          </span>
         </div>
         <div className="flex gap-[12px] ">
-          <span className="text-[#404040] text-base font-medium">
-            Created By:
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+
+          >
+            {translation("pdf.created_by")}:
           </span>
-          <span className="text-[#000] text-base font-medium">
+          <span
+            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            // style={{ color: textColor }}
+
+          >
             {createdBy}
           </span>
         </div>

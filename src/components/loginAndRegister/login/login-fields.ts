@@ -1,28 +1,29 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateCompanyProfileFormField, GenerateRegistrationFormField, GenerateResetPasswordFormField } from "@/types";
-import bankNameIcon from "@/assets/svgs/bank-name.svg";
-import NameIcon from "@/assets/svgs/name-input.svg";
-import phoneIcon from "@/assets/svgs/phone-number.svg";
-import websiteIcon from "@/assets/svgs/website-input.svg";
-import mwstIcon from "@/assets/svgs/mwst-number.svg";
-import locationIcon from "@/assets/svgs/location.svg";
-import postalCodeIcon from "@/assets/svgs/postal-code.svg";
+import {
+  FormField,
+  GenerateCompanyProfileFormField,
+  GenerateRegistrationFormField,
+  GenerateResetPasswordFormField,
+} from "@/types";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
+import { useTransition } from "react";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
   loading
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       containerClass: "mb-5",
-      label: { text: "Email", htmlFor: "email" },
+      label: { text: `${translate("login.email_label")}`, htmlFor: "email" },
       field: {
         type: Field.input,
         id: "email",
         name: "email",
         inputType: "email",
-        placeholder: "Please enter an email address",
+        placeholder: `${translate("login.email_placeholder")}`,
         svg: `<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.4318 0.550781H1.33559C0.684487 0.550781 0.152344 1.08058 0.152344 1.73402V8.83348C0.152344 9.48716 0.684829 10.0167 1.33559 10.0167H12.4318C13.0829 10.0167 13.615 9.48692 13.615 8.83348V1.73402C13.615 1.08043 13.0826 0.550781 12.4318 0.550781ZM12.2501 1.33961C11.8675 1.72343 7.37394 6.23166 7.18932 6.41688C7.03514 6.57154 6.7323 6.57165 6.57804 6.41688L1.51728 1.33961H12.2501ZM0.941172 8.68847V1.87904L4.33484 5.28375L0.941172 8.68847ZM1.51728 9.22789L4.89173 5.84245L6.01936 6.97376C6.48146 7.43736 7.28609 7.43718 7.74803 6.97376L8.87566 5.84248L12.2501 9.22789H1.51728ZM12.8262 8.68847L9.43252 5.28375L12.8262 1.87904V8.68847Z" fill="#8F8F8F"/>
 </svg>
@@ -33,7 +34,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
     {
       containerClass: "mb-[22px]",
       label: {
-        text: "Password",
+        text: `${translate("login.password_label")}`,
         htmlFor: "password",
         className: "mb-[10px]",
       },
@@ -41,7 +42,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "password",
         name: "password",
-        placeholder: "Password",
+        placeholder: `${translate("login.password_placeholder")}`,
         svg: `<svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.80777 9.76447C9.09101 9.76447 9.32062 9.53486 9.32062 9.25162C9.32062 8.96838 9.09101 8.73877 8.80777 8.73877C8.52453 8.73877 8.29492 8.96838 8.29492 9.25162C8.29492 9.53486 8.52453 9.76447 8.80777 9.76447Z" fill="#8F8F8F"/>
 <path d="M11.1156 9.66194C11.3988 9.66194 11.6284 9.43234 11.6284 9.14909V7.25156C11.6284 6.12042 10.7082 5.20017 9.57703 5.20017H8.96066V3.3915C8.96066 1.73062 7.58028 0.379395 5.88357 0.379395C4.18687 0.379395 2.80649 1.73062 2.80649 3.3915V5.20017H2.19202C1.06088 5.20017 0.140625 6.12042 0.140625 7.25156V11.4569C0.140625 12.588 1.06088 13.5083 2.19202 13.5083H9.57703C10.7082 13.5083 11.6284 12.588 11.6284 11.4569C11.6284 11.1737 11.3988 10.9441 11.1156 10.9441C10.8323 10.9441 10.6027 11.1737 10.6027 11.4569C10.6027 12.0225 10.1426 12.4826 9.57703 12.4826H2.19202C1.62645 12.4826 1.16632 12.0225 1.16632 11.4569V7.25156C1.16632 6.68599 1.62645 6.22586 2.19202 6.22586H9.57703C10.1426 6.22586 10.6027 6.68599 10.6027 7.25156V9.14909C10.6027 9.43234 10.8323 9.66194 11.1156 9.66194ZM7.93496 5.20017H3.83218V3.3915C3.83218 2.29619 4.75244 1.40509 5.88357 1.40509C7.01471 1.40509 7.93496 2.29619 7.93496 3.3915V5.20017Z" fill="#8F8F8F"/>
@@ -68,7 +69,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
               name: "rememberMe",
               register,
               description: "",
-              label: "Remember me",
+              label: `${translate("login.remember_me")}`,
             },
           },
           {
@@ -76,12 +77,11 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
             field: {
               type: Field.span,
               name: "",
-              linkText: "Forget Password?",
+              linkText: `${translate("login.forgot_password")}`,
               linkHref: "/forget-password",
               containerClassName: "inline-flex font-medium text-gray",
               linkClassName: "text-sm font-medium text-primary",
               id: "",
-
             },
           },
         ],
@@ -94,7 +94,7 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Login",
+        text: `${translate("login.button")}`,
         inputType: "submit",
         className: "rounded-lg justify-center text-white ",
         loading,
@@ -104,14 +104,13 @@ export const generateLoginFormField: GenerateRegistrationFormField = (
       containerClass: "flex mb-0 justify-center mt-6",
       field: {
         type: Field.span,
-        text: "Don't have an account?",
+        text: `${translate("login.dont_have_an_account")}`,
         name: Field.span,
-        linkText: " Sign Up",
+        linkText: ` ${translate("login.sign_up_button")}`,
         linkHref: "/registration",
         containerClassName: "text-[14px] text-dark  ",
-        linkClassName: "  text-primary",
+        linkClassName: "text-primary",
         id: "",
-
       },
     },
   ];
@@ -122,18 +121,19 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
   register,
   loading,
   control,
-  user,
+  user
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Company Name",
+              text: `${translate("login_detail.company_details.company_name")}`,
               htmlFor: "Company Name Input",
               className: "mb-[10px]",
             },
@@ -148,12 +148,12 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user?.company?.companyName
+              value: user?.company?.companyName,
             },
           },
           {
             label: {
-              text: "Phone Number",
+              text: `${translate("login_detail.company_details.phone_number")}`,
               htmlFor: "Phone Number Input",
               className: "mb-[10px]",
             },
@@ -163,12 +163,14 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "phoneNumber",
               control,
               country: "ch",
-              value: user && user?.company?.phoneNumber
+              value: user && user?.company?.phoneNumber,
             },
           },
           {
             label: {
-              text: "Mobile Number",
+              text: `${translate(
+                "login_detail.company_details.mobile_number"
+              )}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -179,13 +181,12 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               control,
               country: "ch",
               value: user && user?.company?.mobileNumber,
-              className: "h-42"
-
+              className: "h-42",
             },
           },
           {
             label: {
-              text: "Website",
+              text: `${translate("login_detail.company_details.website")}`,
               htmlFor: "website",
               className: "mb-[10px]",
             },
@@ -205,14 +206,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user?.company?.website
-
+              value: user?.company?.website,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "MwST Number",
+              text: `${translate("login_detail.company_details.mwst_number")}`,
               htmlFor: "taxNumber",
               className: "mb-[10px]",
             },
@@ -238,13 +238,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.taxNumber?.toString()
+              value: user && user?.company?.taxNumber?.toString(),
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Upload Company Logo",
+              text: `${translate("login_detail.company_details.upload_logo")}`,
               htmlFor: "logo",
               className: "mb-[10px]",
             },
@@ -253,8 +253,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               name: "logo",
               type: Field.dragAndDropFileField,
               control,
-              value: user && user?.company?.logo
-
+              value: user && user?.company?.logo,
             },
           },
         ],
@@ -266,10 +265,10 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Next",
+        text: `${translate("login_detail.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg  w-[160px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg  min-w-[160px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },
@@ -284,17 +283,17 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
   user,
   setCurrentFormStage
 ) => {
-
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Street Number",
+              text: `${translate("login_detail.location_details.street_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -320,12 +319,12 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.streetNumber
+              value: user && user?.company?.address?.streetNumber,
             },
           },
           {
             label: {
-              text: "House Number",
+              text: `${translate("login_detail.location_details.house_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -351,13 +350,13 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.houseNumber
+              value: user && user?.company?.address?.houseNumber,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Postcode",
+              text: `${translate("login_detail.location_details.post_code")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -382,13 +381,13 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.postalCode
+              value: user && user?.company?.address?.postalCode,
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "City",
+              text: `${translate("login_detail.location_details.City")}`,
               htmlFor: "text",
               className: "mb-[10px]",
             },
@@ -414,8 +413,7 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
 </svg>
 `,
               register,
-              value: user && user?.company?.address?.city
-
+              value: user && user?.company?.address?.city,
             },
           },
         ],
@@ -431,21 +429,22 @@ export const detailLocationFormField: GenerateCompanyProfileFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("login_detail.back_button")}`,
               inputType: "button",
-              onClick: () => setCurrentFormStage && setCurrentFormStage("companyDetails"),
+              onClick: () =>
+                setCurrentFormStage && setCurrentFormStage("companyDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 min-w-[153px] w-fit h-[50px]   text-[#B3B3B3] hover:bg-none",
             },
           },
           {
             field: {
               type: Field.button,
               id: "button",
-              text: "Next",
+              text: `${translate("login_detail.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg   px-4 w-[160px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg  px-4 min-w-[160px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },
@@ -465,17 +464,18 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
   // trigger,
   // router
 ) => {
+  const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-x-6 ",
+        className: "grid grid-cols-2 gap-x-6 gap-y-5",
         children: [
           {
             label: {
-              text: "Choose currency",
+              text: `${translate("login_detail.bank_details.choose_currency")}`,
               htmlFor: "select",
               className: "mb-[10px]",
             },
@@ -483,23 +483,19 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
               type: Field.select,
               id: "1",
               name: "currency",
-              options: Object.keys(staticEnums["currency"]).map((item) => (
-                {
-                  label: item,
-                  
-                  value: item,
+              options: Object.keys(staticEnums["currency"]).map((item) => ({
+                label: item,
 
-                }
-              )),
+                value: item,
+              })),
               control,
               value: user && user?.company?.bankDetails?.currency,
-              className: "h-[42px] !px-4"
-
+              className: "h-[42px] !px-4",
             },
           },
           {
             label: {
-              text: "Bank name",
+              text: `${translate("login_detail.bank_details.bank_name")}`,
               htmlFor: "name",
               className: "mb-[10px]",
             },
@@ -520,13 +516,12 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.bankName,
-
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Account no",
+              text: `${translate("login_detail.bank_details.account_no")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -547,13 +542,12 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.accountNumber,
-
             },
           },
           {
             containerClass: "mb-0",
             label: {
-              text: "Iban Number",
+              text: `${translate("login_detail.bank_details.iban_number")}`,
               htmlFor: "number",
               className: "mb-[10px]",
             },
@@ -574,7 +568,6 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
 `,
               register,
               value: user && user?.company?.bankDetails?.ibanNumber,
-
             },
           },
         ],
@@ -591,21 +584,22 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back",
+              text: `${translate("login_detail.back_button")}`,
               inputType: "button",
-              onClick: () => setCurrentFormStage && setCurrentFormStage("locationDetails"),
+              onClick: () =>
+                setCurrentFormStage && setCurrentFormStage("locationDetails"),
               className:
-                "rounded-lg border border-[#E9E9E9] bg-white p-4 w-[153px] h-[50px]   text-[#B3B3B3] hover:bg-none",
+                "rounded-lg border border-[#E9E9E9] bg-white p-4 min-w-[153px] w-fit h-[50px]   text-[#B3B3B3] hover:bg-none",
             },
           },
           {
             field: {
               type: Field.button,
               id: "button",
-              text: "Lets finish",
+              text: `${translate("login_detail.finish_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg   px-4 w-[180px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[180px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },
@@ -622,16 +616,20 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
   loading,
   onClick
 ) => {
+  const { t: translate } = useTranslation();
   const formFields: FormField[] = [
     {
       containerClass: "mb-8",
-      label: { text: "Enter Your Email", htmlFor: "email" },
+      label: {
+        text: `${translate("forgot_password.label")}`,
+        htmlFor: "email",
+      },
       field: {
         type: Field.input,
         id: "email",
         name: "email",
         inputType: "email",
-        placeholder: "User@example.com",
+        placeholder: `${translate("forgot_password.placeholder1")}`,
         svg: `<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.4318 0.550781H1.33559C0.684487 0.550781 0.152344 1.08058 0.152344 1.73402V8.83348C0.152344 9.48716 0.684829 10.0167 1.33559 10.0167H12.4318C13.0829 10.0167 13.615 9.48692 13.615 8.83348V1.73402C13.615 1.08043 13.0826 0.550781 12.4318 0.550781ZM12.2501 1.33961C11.8675 1.72343 7.37394 6.23166 7.18932 6.41688C7.03514 6.57154 6.7323 6.57165 6.57804 6.41688L1.51728 1.33961H12.2501ZM0.941172 8.68847V1.87904L4.33484 5.28375L0.941172 8.68847ZM1.51728 9.22789L4.89173 5.84245L6.01936 6.97376C6.48146 7.43736 7.28609 7.43718 7.74803 6.97376L8.87566 5.84248L12.2501 9.22789H1.51728ZM12.8262 8.68847L9.43252 5.28375L12.8262 1.87904V8.68847Z" fill="#8F8F8F"/>
 </svg>
@@ -650,10 +648,10 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Back To Login",
+              text: `${translate("forgot_password.backLogin")}`,
               inputType: "button",
               className:
-                "w-[175px] bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
+                "min-w-[175px] w-fit bg-white text-[#BFBFBF] border border-[#BFBFBF] hover:bg-none",
               onClick: onClick,
             },
           },
@@ -662,9 +660,9 @@ export const generateResetPassowrdFormField: GenerateResetPasswordFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: "Submit",
+              text: `${translate("forgot_password.button")}`,
               inputType: "submit",
-              className: "w-[190px]",
+              className: "min-w-[190px] w-fit",
               loading,
             },
           },
@@ -679,11 +677,12 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
   register,
   loading
 ) => {
+  const { t: translate } = useTranslation();
   const formFields: FormField[] = [
     {
       containerClass: "mb-5",
       label: {
-        text: "New Password",
+        text: `${translate("reset_password.label")}`,
         htmlFor: "password",
         className: "mb-[10px]",
       },
@@ -691,7 +690,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "password",
         name: "password",
-        placeholder: "Enter Your Password",
+        placeholder: `${translate("reset_password.placeholder1")}`,
         svg: `<svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.80777 9.76447C9.09101 9.76447 9.32062 9.53486 9.32062 9.25162C9.32062 8.96838 9.09101 8.73877 8.80777 8.73877C8.52453 8.73877 8.29492 8.96838 8.29492 9.25162C8.29492 9.53486 8.52453 9.76447 8.80777 9.76447Z" fill="#8F8F8F"/>
 <path d="M11.1156 9.66194C11.3988 9.66194 11.6284 9.43234 11.6284 9.14909V7.25156C11.6284 6.12042 10.7082 5.20017 9.57703 5.20017H8.96066V3.3915C8.96066 1.73062 7.58028 0.379395 5.88357 0.379395C4.18687 0.379395 2.80649 1.73062 2.80649 3.3915V5.20017H2.19202C1.06088 5.20017 0.140625 6.12042 0.140625 7.25156V11.4569C0.140625 12.588 1.06088 13.5083 2.19202 13.5083H9.57703C10.7082 13.5083 11.6284 12.588 11.6284 11.4569C11.6284 11.1737 11.3988 10.9441 11.1156 10.9441C10.8323 10.9441 10.6027 11.1737 10.6027 11.4569C10.6027 12.0225 10.1426 12.4826 9.57703 12.4826H2.19202C1.62645 12.4826 1.16632 12.0225 1.16632 11.4569V7.25156C1.16632 6.68599 1.62645 6.22586 2.19202 6.22586H9.57703C10.1426 6.22586 10.6027 6.68599 10.6027 7.25156V9.14909C10.6027 9.43234 10.8323 9.66194 11.1156 9.66194ZM7.93496 5.20017H3.83218V3.3915C3.83218 2.29619 4.75244 1.40509 5.88357 1.40509C7.01471 1.40509 7.93496 2.29619 7.93496 3.3915V5.20017Z" fill="#8F8F8F"/>
@@ -707,7 +706,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
     {
       containerClass: "mb-0",
       label: {
-        text: "Confirm Password",
+        text: `${translate("reset_password.label2")}`,
         htmlFor: "confirmPassword",
         className: "mb-[10px]",
       },
@@ -715,7 +714,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
         type: Field.password,
         id: "confirmPassword",
         name: "confirmPassword",
-        placeholder: "Confirm Your Password",
+        placeholder: `${translate("reset_password.placeholder2")}`,
         svg: `<svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.80777 9.76447C9.09101 9.76447 9.32062 9.53486 9.32062 9.25162C9.32062 8.96838 9.09101 8.73877 8.80777 8.73877C8.52453 8.73877 8.29492 8.96838 8.29492 9.25162C8.29492 9.53486 8.52453 9.76447 8.80777 9.76447Z" fill="#8F8F8F"/>
 <path d="M11.1156 9.66194C11.3988 9.66194 11.6284 9.43234 11.6284 9.14909V7.25156C11.6284 6.12042 10.7082 5.20017 9.57703 5.20017H8.96066V3.3915C8.96066 1.73062 7.58028 0.379395 5.88357 0.379395C4.18687 0.379395 2.80649 1.73062 2.80649 3.3915V5.20017H2.19202C1.06088 5.20017 0.140625 6.12042 0.140625 7.25156V11.4569C0.140625 12.588 1.06088 13.5083 2.19202 13.5083H9.57703C10.7082 13.5083 11.6284 12.588 11.6284 11.4569C11.6284 11.1737 11.3988 10.9441 11.1156 10.9441C10.8323 10.9441 10.6027 11.1737 10.6027 11.4569C10.6027 12.0225 10.1426 12.4826 9.57703 12.4826H2.19202C1.62645 12.4826 1.16632 12.0225 1.16632 11.4569V7.25156C1.16632 6.68599 1.62645 6.22586 2.19202 6.22586H9.57703C10.1426 6.22586 10.6027 6.68599 10.6027 7.25156V9.14909C10.6027 9.43234 10.8323 9.66194 11.1156 9.66194ZM7.93496 5.20017H3.83218V3.3915C3.83218 2.29619 4.75244 1.40509 5.88357 1.40509C7.01471 1.40509 7.93496 2.29619 7.93496 3.3915V5.20017Z" fill="#8F8F8F"/>
@@ -733,7 +732,7 @@ export const generateChangePassowrdFormField: GenerateRegistrationFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: "Submit",
+        text: `${translate("reset_password.button")}`,
         inputType: "submit",
         className: "mt-8 rounded-lg",
         loading,

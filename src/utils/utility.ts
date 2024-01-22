@@ -29,6 +29,7 @@ import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
+import { PDFDocument } from "pdf-lib";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -267,17 +268,23 @@ export const conditionHandlerLogin = (
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
       router.pathname = "/login-success";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
+    } else if (
+      staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 &&
+      !response?.data?.data?.User?.plan?.id
+    ) {
+      router.pathname = "/plan";
+      updateQuery(router, router?.locale as string);
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
       } else {
         router.pathname = "/dashboard";
       }
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     }
   } else {
     router.query = {};
@@ -384,6 +391,7 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
       postalCode: inputObject[`postalCode-${i}`] || "",
       country: inputObject[`country-${i}`] || "",
       description: inputObject[`description-${i}`] || "",
+      label: inputObject[`label-${i}`] || "",
     };
     outputArray.push(addressObj);
   }
@@ -554,15 +562,15 @@ export function getEmailColor(status: string) {
   if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
-    return "#4A13E7";
+    return "#FE9244";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
   )
-    return "#FF0000";
+    return "#4A13E7";
   else return "#FF376F";
 }
 
@@ -575,6 +583,7 @@ export function getPaymentTypeColor(status: string) {
     return "#FE9244";
   else return "#FF376F";
 }
+
 export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
@@ -626,13 +635,11 @@ export function getInvoiceStatusColor(status: string) {
     staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Paid"]
   )
     return "#45C769";
-  else return "#FF376F";
+  else return "#4A13E7";
 }
 
 export function getInvoiceEmailColor(status: string) {
-  if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
-  )
+  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"])
     return "#FF376F";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
@@ -641,8 +648,18 @@ export function getInvoiceEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else return "#FF376F";
+}
+
+export function getMailStatusColor(status: string) {
+  if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
+    return "#FF376F";
+  else if (
+    staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["pending"]
+  )
+    return "#FE9244";
+  else return "#45C769";
 }
 
 export function calculateTax(amount: number, taxPercentage: number) {
@@ -656,7 +673,6 @@ export function calculatePercentage(
   if (totalAmount === 0) {
     return 0; // Avoid division by zero
   }
-
   const percentage = ((amount / totalAmount) * 100).toFixed(2);
   return parseFloat(percentage);
 }
@@ -704,4 +720,80 @@ export const calculateDiscount = (
   } else {
     return Math.min(discount, amount);
   }
+};
+export function dataURLtoBlob(dataURL: any) {
+  const arr = dataURL.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
+}
+
+// export const smoothScrollToSection = (target: string) => {
+//   const element = document.querySelector(target);
+
+//   if (!element) {
+//     console.error(`Element with selector ${target} not found`);
+//     return;
+//   }
+
+//   const headerOffset = 100; // Adjust this value according to your page layout
+//   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+//   const offsetPosition = elementPosition - headerOffset;
+
+//   window.scrollTo(0,offsetPosition);
+// };
+
+export const getValueForKeyInArray = (key: string, array?: any) => {
+  if (array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].hasOwnProperty(key)) {
+        return array[i][key];
+      }
+    }
+  } else return null;
+};
+
+export const smoothScrollToSection = (target: string) => {
+  const element = document.getElementById(target);
+  const headerOffset = 100;
+  const elementPosition = element?.getBoundingClientRect().top || 0;
+  const offsetPosition = elementPosition - headerOffset;
+
+  window.scrollBy({
+    top: offsetPosition,
+    behavior: "smooth",
+  });
+};
+
+export function blobToFile(blob: any, fileName: string) {
+  const options = { type: blob.type };
+  const file = new File([blob], fileName, options);
+  return file;
+}
+
+export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
+  const mergedPdf = await PDFDocument.create();
+
+  for (const blob of pdfBlobs) {
+    const arrayBuffer =
+      blob instanceof ArrayBuffer ? blob : await blob.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const copiedPages = await mergedPdf.copyPages(
+      pdfDoc,
+      pdfDoc.getPageIndices()
+    );
+    copiedPages.forEach((page) => mergedPdf.addPage(page));
+  }
+
+  mergedPdf.setTitle(fileName || "PDF File");
+
+  const pdfBytes = await mergedPdf.save();
+  return new Blob([pdfBytes], { type: "application/pdf" });
 };

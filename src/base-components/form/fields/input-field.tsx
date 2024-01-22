@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { InputEmail } from "@/assets/svgs/components/inputEmail";
 import addtionalDetailImg from "@/assets/pngs/addtional_details.png";
+import { useTranslation } from "next-i18next";
 
 export const InputField = ({
   id,
@@ -27,6 +28,7 @@ export const InputField = ({
   step,
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
+  const { t: translate } = useTranslation();
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
@@ -72,6 +74,7 @@ export const InputField = ({
           disabled={disabled}
           key={id}
           step={step}
+          min={0}
           // onChangeCapture={}
           //@ts-expect-error
           onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}

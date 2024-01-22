@@ -33,6 +33,7 @@ export const useSendEmail = (
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -40,7 +41,7 @@ export const useSendEmail = (
       transformAttachments(
         offerDetails?.content?.offerContent?.attachments as string[]
       )) ||
-      []
+    []
   );
 
   const schema = generateContractEmailValidationSchema(translate);
@@ -51,22 +52,36 @@ export const useSendEmail = (
     setError,
     reset,
     formState: { errors },
+    setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
+    // dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
-      content: offerDetails?.content?.offerContent?.title,
-      subject: offerDetails?.content?.offerContent?.title,
-      description: offerDetails?.content?.offerContent?.description,
-      pdf: offerDetails?.content?.offerContent?.attachments,
+      content: offerDetails?.content?.id,
+      subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+
+      description: offerDetails?.content?.offerContent?.body,
+      attachments: offerDetails?.content?.offerContent?.attachments,
     });
+
   }, []);
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
+      reset({
+        email: offerDetails?.leadID?.customerDetail?.email,
+        content: selectedContent?.id,
+        subject: selectedContent?.offerContent?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+        description: selectedContent?.offerContent?.body,
+        attachments: selectedContent?.offerContent?.attachments,
+      });
+      setAttachements(transformAttachments(
+        selectedContent?.offerContent?.attachments as string[]
+      ) || [])
       dispatch(setContentDetails(selectedContent));
     }
   };
@@ -81,13 +96,16 @@ export const useSendEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    offerDetails
+    offerDetails,
+    isMoreEmail,
+    setIsMoreEmail,
+    setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedData = {
       ...data,
       id: offerDetails?.id,
-      pdf: attachements?.map((item) => item.value),
+      attachments: attachements?.map((item) => item.value),
       // router,
       // translate,
       // setError,

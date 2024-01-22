@@ -7,7 +7,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps },
+  { customer, lead, followUps, onCustomerSelect },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -17,7 +17,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         id: "div-field",
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-[41px] gap-y-5",
+        className: "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5",
         children: [
           {
             containerClass: "mb-0",
@@ -43,7 +43,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
                 label: item?.fullName + " " + `(${item?.refID})`,
                 value: item?.id.toString(),
               })),
-              // onItemChange: () => onItemChange && onItemChange(Modals.customer),
+              onItemChange: () => onItemChange && onItemChange(),
               control,
             },
           },
@@ -69,7 +69,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               register,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -96,7 +95,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               control,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -106,11 +104,10 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             },
             field: {
               type: Field.date,
-              className: `!py-4 !border-[#BFBFBF] focus:!border-primary !w-full`,
+              className: `!py-4  !border-[#BFBFBF] focus:!border-primary !w-full`,
               id: "dateTime",
               name: "dateTime",
-              value: "22:10:06,  12 September 2023",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M8.83764 11.6513C9.39544 11.6513 9.84763 11.1992 9.84763 10.6413C9.84763 10.0835 9.39544 9.63135 8.83764 9.63135C8.27983 9.63135 7.82764 10.0835 7.82764 10.6413C7.82764 11.1992 8.27983 11.6513 8.83764 11.6513Z" fill="#8F8F8F"/>
               <path d="M10.6894 14.5128C10.6894 13.4918 9.85875 12.6611 8.83775 12.6611C7.81674 12.6611 6.98608 13.4918 6.98608 14.5128V14.6811H10.6894V14.5128Z" fill="#8F8F8F"/>
               <path d="M0.219238 15.3879C0.219238 16.4089 1.04989 17.2396 2.0709 17.2396H15.6049C16.6259 17.2396 17.4565 16.4089 17.4565 15.3879V7.07227H0.219238V15.3879ZM5.97623 14.5126C5.97623 13.4632 6.54442 12.5444 7.38898 12.0463C7.03589 11.6824 6.81789 11.1868 6.81789 10.6409C6.81789 9.5271 7.72406 8.62093 8.83789 8.62093C9.95172 8.62093 10.8579 9.5271 10.8579 10.6409C10.8579 11.1868 10.6399 11.6824 10.2868 12.0463C11.1314 12.5444 11.6996 13.4632 11.6996 14.5126V15.1859C11.6996 15.4648 11.4734 15.6909 11.1946 15.6909H6.48123C6.20233 15.6909 5.97623 15.4648 5.97623 15.1859V14.5126Z" fill="#8F8F8F"/>
@@ -157,7 +154,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         type: Field.textArea,
         className: `!py-4 !border-[#BFBFBF] focus:!border-primary`,
-        rows: 8,
+        rows: 2,
         id: "additionalDetails",
         name: "additionalDetails",
         placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",

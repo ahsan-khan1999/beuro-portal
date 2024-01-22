@@ -30,7 +30,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailDriver",
               name: "mailDriver",
-              placeholder: "Mail Driver",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_driver"
+              )}`,
               register,
             },
           },
@@ -38,7 +40,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate(
-                "setting.mail_setting.mail_form_fields.mail_driver"
+                "setting.mail_setting.mail_form_fields.mail_host"
               )}`,
               htmlFor: "mailHost",
               className: "mb-[10px]",
@@ -49,7 +51,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailHost",
               name: "mailHost",
-              placeholder: "Mail Host",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_host"
+              )}`,
               register,
             },
           },
@@ -68,7 +72,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailPort",
               name: "mailPort",
-              placeholder: "Mail Port",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_port"
+              )}`,
               register,
             },
           },
@@ -87,7 +93,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailEncryption",
               name: "mailEncryption",
-              placeholder: "Mail Encryption",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_encryption"
+              )}`,
               register,
             },
           },
@@ -106,7 +114,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailUserName",
               name: "mailUserName",
-              placeholder: "Mail Username",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_user"
+              )}`,
               register,
             },
           },
@@ -125,7 +135,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailPassword",
               name: "mailPassword",
-              placeholder: "Mail Password",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_password"
+              )}`,
               register,
             },
           },
@@ -144,7 +156,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailFromAddress",
               name: "mailFromAddress",
-              placeholder: "Mail From Address",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_address"
+              )}`,
               register,
             },
           },
@@ -163,7 +177,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailFromName",
               name: "mailFromName",
-              placeholder: "Mail From Name",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_name"
+              )}`,
               register,
             },
           },
@@ -195,7 +211,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
         inputType: "email",
         id: "testingMail",
         name: "testingMail",
-        placeholder: "Mail From Address",
+        placeholder: `${translate(
+          "admin.settings.placeholders.email_from_address"
+        )}`,
         register,
       },
     },

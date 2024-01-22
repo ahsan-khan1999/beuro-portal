@@ -68,7 +68,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-4",
+        className: "grid grid-cols-2 mlg:grid-cols-3 gap-4",
         children: [
           {
             containerClass: "mb-0",
@@ -161,7 +161,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "button",
               text: `${translate("employees.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg px-4  w-fit h-auto  text-white hover:bg-none ${
+              className: `rounded-lg px-4 w-fit h-auto text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,

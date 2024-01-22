@@ -1,12 +1,16 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { OfferActivity, OffersTableRowTypes } from "@/types/offers";
+import { OfferActivity, OffersTableRowTypes, PublicOffersTableRowTypes } from "@/types/offers";
 import { DEFAULT_OFFER, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import axios from "axios";
+import { BASEURL } from "@/services/HttpProvider";
+import { getRefreshToken, getToken } from "@/utils/auth.util";
+import toast from 'react-hot-toast';
 
 interface OfferState {
     offer: OffersTableRowTypes[];
@@ -15,7 +19,8 @@ interface OfferState {
     lastPage: number,
     totalCount: number,
     offerDetails: OffersTableRowTypes,
-    offerActivity: OfferActivity | null
+    offerActivity: OfferActivity | null,
+    publicOffer: PublicOffersTableRowTypes | null
 }
 
 const initialState: OfferState = {
@@ -53,6 +58,31 @@ export const readOfferDetails: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const readOfferPublicDetails: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/read/details/public", async (args, thunkApi) => {
+        const { params } = args as any;
+
+        try {
+            const response = await apiServices.readOfferDetailPublic(params);
+            return response?.data?.data;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+export const rejectOfferPublic: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/reject/public", async (args, thunkApi) => {
+        const { params } = args as any;
+
+        try {
+            await apiServices.rejectOfferPublic(params);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 export const createOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/create", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -72,6 +102,7 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
 
             return response?.data?.data?.Offer;
         } catch (e: any) {
+
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
             return false;
@@ -193,14 +224,30 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-        const { data, router, translate } = args as any;
+        const { data, router, translate, formData } = args as any;
 
         try {
-            await apiServices.createSignature(data);
+            const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
+
+            await axios.put(
+                BASEURL + `/offer/add-signature/${data?.id}`,
+                formData,
+                {
+                    headers: {
+                        Accept: "multipart/form-data",
+                        "Content-Type": "multipart/form-data",
+                        "Access-Control-Allow-Origin": "*",
+                        accessToken: authToken,
+                        refreshToken: refreshToken,
+
+                    },
+                }
+            );
 
             return true;
         } catch (e: any) {
-            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            toast.error(e?.response?.data?.message)
+            thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
             // setErrors(setError, e?.data.data, translate);
             return false;
         }
@@ -219,7 +266,18 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/discount", async (args, thunkApi) => {
+        const { params } = args as any;
 
+        try {
+            const response = await apiServices.updateDiscounts(params);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const OfferSlice = createSlice({
     name: "OfferSlice",
     initialState,
@@ -336,14 +394,14 @@ const OfferSlice = createSlice({
         });
 
         builder.addCase(readOfferActivity.pending, (state) => {
-            state.loading = true
+            // state.loading = true
         });
         builder.addCase(readOfferActivity.fulfilled, (state, action) => {
             state.offerActivity = action?.payload
-            state.loading = false;
+            // state.loading = false;
         });
         builder.addCase(readOfferActivity.rejected, (state) => {
-            state.loading = false
+            // state.loading = false
         });
 
         builder.addCase(sendOfferByPost.pending, (state) => {
@@ -354,6 +412,37 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(sendOfferByPost.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(readOfferPublicDetails.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readOfferPublicDetails.fulfilled, (state, action) => {
+            state.publicOffer = action.payload;
+            state.loading = false;
+        });
+        builder.addCase(readOfferPublicDetails.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(rejectOfferPublic.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(rejectOfferPublic.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(rejectOfferPublic.rejected, (state) => {
+            state.loading = false
+        });
+
+        builder.addCase(updateOfferDiscount.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateOfferDiscount.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action?.payload) state.offerDetails = action?.payload
+        });
+        builder.addCase(updateOfferDiscount.rejected, (state) => {
             state.loading = false
         });
 

@@ -108,7 +108,7 @@ export const updateInvoice: AsyncThunk<boolean, object, object> | any =
 
         try {
             const response = await apiServices.updateInvoiceCollection(data);
-            return response?.data?.InvoiceCollection;
+            return response?.data?.Invoice;
         } catch (e: any) {
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -268,12 +268,25 @@ export const updateInvoiceContent: AsyncThunk<boolean, object, object> | any =
 
 export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/post/", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { params, router, setError, translate } = args as any;
 
         try {
 
-            const response = await apiServices.invoiceSendByPost(data);
+            const response = await apiServices.invoiceSendByPost(params);
             return response?.data?.InvoiceCollection;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const readQRCode: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/qr/code", async (args, thunkApi) => {
+        const { params, router, setError, translate } = args as any;
+        try {
+
+            const response = await apiServices.readInvoiceQRCode(params);
+            return response?.data?.data?.qrcode;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -291,6 +304,9 @@ const InvoiceSlice = createSlice({
         },
         setInvoiceInfo: (state, action) => {
             state.invoiceInfo = action.payload;
+        },
+        setCollectiveInvoiceDetails: (state, action) => {
+            state.collectiveInvoiceDetails = action.payload;
         },
     },
     extraReducers(builder) {
@@ -334,10 +350,10 @@ const InvoiceSlice = createSlice({
             state.loading = true
         });
         builder.addCase(updateInvoice.fulfilled, (state, action) => {
-            let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
-            if (index !== -1) {
-                state.collectiveInvoice.splice(index, 1, action.payload)
-            }
+            // let index = state.collectiveInvoice.findIndex((item) => item.id === action.payload?.id)
+            // if (index !== -1) {
+            //     state.collectiveInvoice.splice(index, 1, action.payload)
+            // }
             state.loading = false;
         });
         builder.addCase(updateInvoice.rejected, (state) => {
@@ -438,7 +454,7 @@ const InvoiceSlice = createSlice({
         builder.addCase(createRecuringInvoice.fulfilled, (state, action) => {
             if (action.payload) {
                 state.collectiveInvoice = [...state.collectiveInvoice, action.payload]
-                state.invoiceDetails = { ...state.invoiceDetails, isInvoiceRecurring: true }
+                state.invoiceDetails = { ...action.payload?.invoiceID }
 
             }
             state.loading = false;
@@ -529,9 +545,19 @@ const InvoiceSlice = createSlice({
             state.loading = false
         });
 
+        builder.addCase(readQRCode.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readQRCode.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(readQRCode.rejected, (state) => {
+            state.loading = false
+        });
+
 
     },
 })
 
 export default InvoiceSlice.reducer;
-export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo } = InvoiceSlice.actions
+export const { setErrorMessage, setInvoiceDetails, setInvoiceInfo, setCollectiveInvoiceDetails } = InvoiceSlice.actions

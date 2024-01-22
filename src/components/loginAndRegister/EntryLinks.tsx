@@ -1,19 +1,53 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const EntryLinks = () => {
+  const router = useRouter();
+  const [language, setLanguage] = useState(router?.locale == "en" ? "English":"German");
+  const { t: translate } = useTranslation();
+  const handleLanguageSelected = (selectedItem: string) => {
+    setLanguage(selectedItem);
+    const updatedQuery = {
+      ...router.query,
+    };
+    const routeWithQuery = {
+      pathname: `${router.pathname}`,
+      query: updatedQuery,
+    };
+    router.push(routeWithQuery, undefined, {
+      locale: selectedItem == "English" ? "en" : "de",
+    });
+  };
+  
+
   return (
-    <div className="space-x-[18px] flex items-center justify-center    ">
-      <select className="text-xs text-[#8F8F8F] focus:outline-none">
-        <option>English</option>
-        <option>German</option>
-      </select>
-      <Link href={""} className="text-xs text-[#8F8F8F]">
-        Privacy Policy
-      </Link>
-      <Link href={""} className="text-xs text-[#8F8F8F]">
-        Copyright 2023
-      </Link>
+    <div className="grid grid-cols-[minmax(110px,_110px)_minmax(160px,_160px)_minmax(120px,_120px)] gap-x-3 items-center px-7">
+      <DropDown
+        items={[{ item: "English" }, { item: "German" }]}
+        onItemSelected={handleLanguageSelected}
+        selectedItem={language}
+        dropDownTextClassName="custom-text-style"
+        dropDownIconClassName="custom-icon-style"
+        dropDownDisabled={false}
+        shouldNotSelectItem={false}
+        dropDownClassName="!h-[42px]"
+        dropDownItemsContainerClassName="w-full"
+      />
+
+      <div className="flex justify-center">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
+          {translate("common.privacy")}
+        </Link>
+      </div>
+
+      <div className="flex justify-center">
+        <Link href="https://staging.buero365.cloudmeshsolutions.com/" className="text-xs text-[#8F8F8F]">
+          {translate("common.copy_right")}
+        </Link>
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const AddService = () => {
 
   const tabSection: tabArrayTypes[] = [
     {
-      name: "Service Details",
+      name: `${translate("services.service_detail_tab")}`,
       content: <AddServiceForm handleCancel={handleCancel} />,
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
         tabType ? "#4A13E7" : "#1E1E1E"

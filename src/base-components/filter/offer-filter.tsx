@@ -1,16 +1,14 @@
-import React, { useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
-import EmailCheckField from "./fields/email-check-field";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
+import { staticEnums } from "@/utils/static";
+import { FilterProps, FilterType } from "@/types";
+import EmailCheckField from "./fields/email-check-field";
 
 export default function OfferFilter({
   filter,
@@ -34,12 +32,14 @@ export default function OfferFilter({
   } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const { t: translate } = useTranslation();
 
   const handleSave = () => {
     setFilter((prev: FilterType) => {
       const updatedFilters = {
         ...prev,
         date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
+        leadSource: moreFilter?.leadSource,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -53,6 +53,25 @@ export default function OfferFilter({
       ...prev,
       date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
+  };
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.leadSource !== FiltersDefaultValues.None ? prev.leadSource : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const emailStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+      return { ...prev, leadSource: emailStatus };
+    });
   };
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -91,19 +110,21 @@ export default function OfferFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
                 className=" text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
             <div className="">
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Date
+                    {translate("filters.extra_filters.date")}
                   </label>
                   <label
                     htmlFor="type"
@@ -115,13 +136,13 @@ export default function OfferFilter({
                       });
                     }}
                   >
-                    Reset
+                    {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
                 <div>
                   <DatePicker
-                    label="From"
-                    label2="To"
+                    label={translate("filters.extra_filters.from")}
+                    label2={translate("filters.extra_filters.to")}
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
                         FiltersDefaultValues.$gte
@@ -247,9 +268,42 @@ export default function OfferFilter({
                 />
               </div> */}
             </div>
+            <div className="">
+              <div className="mt-5 mb-2">
+                <div className="flex justify-between">
+                  <label htmlFor="type" className="font-medium text-base">
+                    {translate("filters.extra_filters.leadSource")}
+                  </label>
+                  <label
+                    htmlFor="type"
+                    className="cursor-pointer text-red"
+                    onClick={() => {
+                      handleFilterReset("leadSource", "None");
+                    }}
+                  >
+                    {translate("filters.extra_filters.reset")}
+                  </label>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mt-4">
+                  {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                    <EmailCheckField
+                      key={idx}
+                      checkboxFilter={moreFilter as unknown as FilterType}
+                      setCheckBoxFilter={setMoreFilter}
+                      type={"leadSource"}
+                      label={item}
+                      value={item}
+                      onChange={(value, isChecked) =>
+                        handleStatusChange(value, isChecked)
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
             <div>
               <BaseButton
-                buttonText="Save"
+                buttonText={translate("common.save_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"

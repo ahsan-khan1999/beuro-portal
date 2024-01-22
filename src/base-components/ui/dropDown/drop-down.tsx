@@ -33,7 +33,7 @@ export const DropDown = ({
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
-    "flex items-center justify-between bg-white px-4 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "flex items-center bg-white px-3 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
     `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
@@ -42,13 +42,13 @@ export const DropDown = ({
 
   return (
     <div
-      className={`flex flex-col gap-y-2 min-w-[90px] w-full${
+      className={`flex flex-col gap-y-2 w-full ${
         dropDownDisabled ? "pointer-events-none" : ""
       }`}
       ref={dropdownRef}
     >
       {label && <label className="text-sm text-gray">{label}</label>}
-      <div className="relative min-w-[90px] w-full">
+      <div className="relative w-full">
         <button
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
@@ -56,10 +56,12 @@ export const DropDown = ({
         >
           {children}
           <span className={textClasses}>{selectedItem}</span>
-          <DropDownNonFillIcon
-            isOpen={isOpen}
-            className={dropDownIconClassName}
-          />
+          <div>
+            <DropDownNonFillIcon
+              isOpen={isOpen}
+              className={dropDownIconClassName}
+            />
+          </div>
         </button>
         <AnimatePresence>
           {isOpen && (

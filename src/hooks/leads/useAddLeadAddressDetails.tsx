@@ -10,13 +10,17 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
-import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
+import {
+  getValueForKeyInArray,
+  senitizeDataForm,
+  transformAddressFormValues,
+} from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useAddLeadAddressDetails = (
-  onHandleBack: (currentComponent: ComponentsType) => void,
   onHandleNext: (currentComponent: ComponentsType) => void
 ) => {
   const { t: translate } = useTranslation();
@@ -24,19 +28,13 @@ export const useAddLeadAddressDetails = (
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customerDetails } = useAppSelector((state) => state.customer);
+  const [addressType, setAddressType] = useState([false, false]);
 
-  const [addressCount, setAddressCount] = useState(leadDetails?.addressID?.address?.length || 1);
-  const schema = generateLeadsAddressEditDetailsValidation(
-    translate,
-    addressCount
+  const [addressCount, setAddressCount] = useState(
+    leadDetails?.addressID?.address?.length || 1
   );
+  const schema = generateLeadsAddressEditDetailsValidation(translate);
 
-  const handleAddNewAddress = () => {
-    setAddressCount(addressCount + 1);
-  };
-  const handleRemoveNewAddress = () => {
-    setAddressCount(addressCount - 1);
-  };
   const {
     register,
     handleSubmit,
@@ -44,28 +42,78 @@ export const useAddLeadAddressDetails = (
     setError,
     reset,
     formState: { errors, isValid },
+    getValues,
+    setValue,
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useMemo(() => {
-    if (leadDetails.id) {
-      reset(transformAddressFormValues(leadDetails?.addressID?.address ? leadDetails?.addressID?.address : [leadDetails?.customerDetail?.address]));
-    }
-  }, [leadDetails.id]);
 
+  useEffect(() => {
+    if (leadDetails?.id) {
+      console.log(leadDetails);
+      reset({
+        address: leadDetails?.addressID
+          ? leadDetails?.addressID?.address?.map((item, index) => ({
+              ...item,
+              label: item?.label ? item?.label : `Address ${++index}`,
+            }))
+          : [{ label: `Address ${addressCount}` }],
+      });
+    }
+  }, [leadDetails?.id]);
+
+  const {
+    append,
+    fields: addressFields,
+    remove,
+  } = useFieldArray({ control, name: "address" });
+
+  useMemo(() => {
+    if (addressFields.length === 0) return;
+    setAddressCount(addressFields.length);
+  }, [addressFields]);
+
+  const handleFieldTypeChange = (index: number) => {
+    const updatedAddressType = [...addressType];
+    updatedAddressType[index] = !updatedAddressType[index];
+    setAddressType(updatedAddressType);
+  };
+
+  const handleBack = () => {
+    onHandleNext(ComponentsType.customerAdd);
+  };
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
     control,
-    onHandleBack,
+    handleBack,
     addressCount,
-    handleAddNewAddress,
-    handleRemoveNewAddress
+    append,
+    remove,
+    addressFields,
+    handleFieldTypeChange,
+    addressType,
+    setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { address: senitizeDataForm(data).slice(0, addressCount), step: 2, id: leadDetails?.id, stage: ComponentsType.serviceAdd }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    // const apiData = {
+    //   address: senitizeDataForm(data).slice(0, addressCount),
+    //   step: 2,
+    //   id: leadDetails?.id,
+    //   stage: ComponentsType.serviceAdd,
+    // };
+
+    const apiData = {
+      ...data,
+      step: 2,
+      id: leadDetails?.id,
+      stage: ComponentsType.serviceAdd,
+    };
+
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) onHandleNext(ComponentsType.serviceAdd);
   };
 

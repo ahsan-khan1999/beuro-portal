@@ -1,5 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContractFormField, GenerateInvoiceEmailFormField } from "@/types";
+import {
+  FormField,
+  GenerateContractFormField,
+  GenerateInvoiceEmailFormField,
+} from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
@@ -12,7 +16,10 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   contentDetails,
   onContentSelect,
   attachements, setAttachements,
-  details
+  invoiceDetails,
+  isMoreEmail,
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -20,10 +27,10 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 xl:grid-cols-3 gap-x-3 gap-y-5 xl:gap-y-0",
+        className: "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
-            containerClass: "mb-0 col-span-1",
+            containerClass: "mb-0 col-span-4",
             label: {
               text: `${translate("contracts.contract_email_preview.email")}`,
               htmlFor: "email",
@@ -35,30 +42,149 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "hamzaicp54@gmail.com",
+              placeholder: "email@domain.com",
               register,
-
             },
           },
           {
-            containerClass: "col-span-2",
+            containerClass: "col-span-1 flex my-auto ",
+            field: {
+              type: Field.div,
+              className: "flex space-x-2 items-center",
+              id: "text",
+              children: [
+                {
+                  containerClass: "mb-0  ",
+                  field: {
+                    type: Field.span,
+                    text: `Cc`,
+                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    id: "cc",
+                    onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "")
+                      }
+                      setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
+                    }
+                  },
+                },
+
+                {
+                  containerClass: "mb-0  ",
+                  field: {
+                    type: Field.span,
+                    text: `Bcc`,
+                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    id: "bcc",
+                    onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "")
+                      }
+                      setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
+                    }
+                  },
+                },
+              ]
+            }
+          },
+
+          {
+            containerClass: "col-span-7",
             label: {
               text: `${translate("contracts.contract_email_preview.content")}`,
               htmlFor: "content",
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[54px] !border-[#EBEBEB]  focus:!border-primary ",
-              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ",
+              type: Field.select,
               id: "content",
               name: "content",
-              inputType: "text",
-              // options: content?.map((item) => ({ label: item.contentName, value: item.id })) || [],
-              register,
-              // onItemChange: onContentSelect,
-              // value: details?.content?.offerContent?.title
+              options:
+                content?.map((item) => ({
+                  label: item.contentName,
+                  value: item.id,
+                })) || [],
+              control,
+              onItemChange: onContentSelect,
+              value: contentDetails?.id && contentDetails?.id || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.id || ""
             },
           },
+          isMoreEmail?.isCc && {
+            containerClass: "mb-0 mt-5 col-span-4",
+            label: {
+              text: `Cc`,
+              htmlFor: "cc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "cc",
+              name: "cc",
+              placeholder:
+                "email@domain.com",
+              register,
+
+            },
+          } || {
+            containerClass: "hidden",
+            label: {
+              text: `Cc`,
+              htmlFor: "cc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "cc",
+              name: "cc",
+              placeholder:
+                "email@domain.com",
+              register,
+
+            },
+          },
+          isMoreEmail?.isBcc && {
+            containerClass: "mb-0 mt-5 col-span-4",
+            label: {
+              text: `Bcc`,
+              htmlFor: "bcc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "bcc",
+              name: "bcc",
+              placeholder:
+                "email@domain.com",
+              register,
+
+            },
+          }
+          || {
+            containerClass: "hidden",
+            label: {
+              text: `Bcc`,
+              htmlFor: "bcc",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "email",
+              id: "bcc",
+              name: "bcc",
+              placeholder:
+                "email@domain.com",
+              register,
+
+            },
+          }
         ],
       },
     },
@@ -79,7 +205,6 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         placeholder:
           "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
         register,
-
       },
     },
 
@@ -96,28 +221,47 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "description",
         name: "description",
         control,
-        value: details?.contractID?.offerID?.content?.invoiceContent?.description
-
+        // value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
       },
     },
+
+    // {
+    //   containerClass: " mt-5",
+    //   label: {
+    //     text: `${translate("contracts.contract_email_preview.attachments")}`,
+    //     htmlFor: "attachments",
+    //     className: "mb-[10px]",
+    //   },
+    //   field: {
+    //     type: Field.dragAndDropPdfField,
+    //     id: "attachments",
+    //     isOpenedFile: false,
+    //     text: "Drop or Attach your files here",
+    //     fileSupported: "Files supported: PDF,JPG, PNG,GIF",
+    //     name: "attachments",
+    //     control,
+    //     attachements,
+    //     setAttachements
+    //   },
+    // },
 
     {
       containerClass: " mt-5",
       label: {
         text: `${translate("contracts.contract_email_preview.attachments")}`,
-        htmlFor: "pdf",
+        htmlFor: "attachments",
         className: "mb-[10px]",
       },
       field: {
         type: Field.dragAndDropPdfField,
-        id: "pdf",
+        id: "attachments",
         isOpenedFile: false,
         text: "Drop or Attach your files here",
         fileSupported: "Files supported: PDF,JPG, PNG,GIF",
-        name: "pdf",
+        name: "attachments",
         control,
         attachements,
-        setAttachements
+        setAttachements,
       },
     },
 

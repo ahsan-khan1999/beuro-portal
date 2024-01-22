@@ -13,7 +13,7 @@ const AddressDetailsData = ({
   return (
     <div
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
-      id="Address Details"
+      id={translate("contracts.tabs_headings.address_details")}
     >
       <h2 className="text-[#393939] text-lg font-medium">
         {translate("contracts.address_details.main_heading")}
@@ -55,7 +55,7 @@ const AddressDetailsData = ({
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("contracts.address_details.description")}
             </label>
-            <div className="h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="min-h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all">
               {item.description}
             </div>
           </div>

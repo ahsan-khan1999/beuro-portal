@@ -64,7 +64,7 @@ const SERVICE_URLS = {
   invoiceCollectionDetail: "/invoice/invoice-collection/read",
 
   createRecurringInvoice: "/invoice/invoice-collection/create-recurring-invoice/",
-  updateRecurringInvoice: "/invoice/invoice-collection/update-recurring-invoice/",
+  updateRecurringInvoice: "/invoice/update-recurring-invoice/",
   updateInvoiceStatus: "/invoice/invoice-collection/update-invoiceCollection-status/",
   createInvoice: "/invoice/invoice-collection/",
   updateInvoicePaymentStatus: "/invoice/invoice-collection/update-payment-status/",
@@ -98,7 +98,17 @@ const SERVICE_URLS = {
   adminDashboard: "/dashboard/admin",
   sendByPost: "/offer/send-By-Post/",
   contractSendByPost: "/contract/send-By-Post/",
-  invoiceSendByPost:"/invoice/invoice-collection/send-By-Post/"
+  invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
+
+  readOfferPublic: "/offer/public-read",
+  rejectOfferPublic: "/offer/reject-offer",
+  updateDiscount: "/offer/update-discount/",
+  readContractQrCode: "/contract/generate-QrCode",
+  readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
+
+  settingsQrCode: "/setting/qrcode/qrCode-setting",
+
+
 
 };
 
@@ -435,8 +445,8 @@ const updateAdminSettings = (data) =>
 const updateUserStatus = (data) =>
   put(SERVICE_URLS.changeStatus + `${data?.id}`, data, { feature: featureConstants.login });
 
-const createSignature = (data) =>
-  put(SERVICE_URLS.addSignature + `${data?.id}`, data, { feature: featureConstants.login });
+const createSignature = (data, formData) =>
+  put(SERVICE_URLS.addSignature + `${data?.id}`, formData, { feature: featureConstants.login });
 
 const updateContractContent = (data) =>
   put(SERVICE_URLS.contractContent + `${data?.id}`, data, { feature: featureConstants.login });
@@ -463,6 +473,27 @@ const contractSendByPost = (data) =>
 
 const invoiceSendByPost = (data) =>
   put(SERVICE_URLS.invoiceSendByPost + `${data?.id}`, data, { feature: featureConstants.login });
+
+;
+const readOfferDetailPublic = (params) =>
+  get(SERVICE_URLS.readOfferPublic, params, { feature: featureConstants.login }, { detail: true });
+const rejectOfferPublic = (data) =>
+  put(SERVICE_URLS.rejectOfferPublic + `/${data?.id}`, data, { feature: featureConstants.login });
+
+const updateDiscounts = (data) =>
+  put(SERVICE_URLS.updateDiscount + `${data?.id}`, data, { feature: featureConstants.login });
+
+const readContractQRCode = (params) =>
+  get(SERVICE_URLS.readContractQrCode, params, { feature: featureConstants.login }, { detail: true });
+
+const readInvoiceQRCode = (params) =>
+  get(SERVICE_URLS.readInvoiceQrCode, params, { feature: featureConstants.login }, { detail: true });
+
+
+const readSettingsQrCode = (params) =>
+  get(SERVICE_URLS.settingsQrCode, params, { feature: featureConstants.login }, { detail: false });
+const createSettingsQrCode = (data) =>
+  post(SERVICE_URLS.settingsQrCode, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -608,6 +639,13 @@ const apiServices = {
   readAdminDashboard,
   offerSendByPost,
   contractSendByPost,
-  invoiceSendByPost
+  invoiceSendByPost,
+  readOfferDetailPublic,
+  rejectOfferPublic,
+  updateDiscounts,
+  readContractQRCode,
+  readInvoiceQRCode,
+  readSettingsQrCode,
+  createSettingsQrCode
 };
 export default apiServices;

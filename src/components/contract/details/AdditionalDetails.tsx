@@ -12,7 +12,7 @@ const AdditionalDetails = ({
   return (
     <div
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
-      id="Additional Details"
+      id={translate("contracts.tabs_headings.additional_details")}
     >
       <h2 className="text-[#393939] text-lg font-medium border-b border-[#BFBFBF] pb-6">
         {translate("contracts.additional_details.heading")}
@@ -20,9 +20,9 @@ const AdditionalDetails = ({
 
       <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 mt-6 break-all">
         <div
-          className="text-[#4B4B4B] font-normal text-base"
+          className="html-content text-[#4B4B4B] font-normal text-base"
           dangerouslySetInnerHTML={{
-            __html: contractDetails?.offerID?.additionalDetails,
+            __html: contractDetails?.additionalDetails,
           }}
         />
       </div>

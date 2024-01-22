@@ -6,28 +6,36 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
-import { createInvoice, readInvoiceDetails, updateInvoice, updateParentInvoice } from "@/api/slices/invoice/invoiceSlice";
+import {
+  createInvoice,
+  readInvoiceDetails,
+  updateInvoice,
+  updateParentInvoice,
+} from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const router = useRouter();
-  const { loading, error, invoiceDetails } = useAppSelector((state) => state.invoice);
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
 
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
-
+  let taxPercentage = 0
   const {
     register,
     handleSubmit,
     control,
     watch,
     formState: { errors },
-    setError, setValue,
-    reset
+    setError,
+    setValue,
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
@@ -35,7 +43,8 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const type = watch("type");
   useEffect(() => {
     setValue("type", "0")
-    setValue("amount",0)
+    // setValue("amount", 0)
+
 
   }, [])
 
@@ -45,37 +54,50 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     control,
     false,
     invoiceDetails,
-    type,
+    type
   );
   useMemo(() => {
+    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
+    taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
-      if (invoiceDetails?.contractID?.offerID?.total < amount) {
-        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - amount)
-        setValue("amount", invoiceDetails?.remainingAmount + invoiceDetails?.paidAmount)
+      if (remainingAmount < amount) {
+        setValue("amount", remainingAmount)
+        setValue("remainingAmount", (remainingAmount - (amount || 0)).toFixed(2))
 
       } else {
-        setValue("remainingAmount", invoiceDetails?.remainingAmount)
+        setValue("remainingAmount", (remainingAmount - (amount || 0)).toFixed(2))
       }
     }
     else if (type === '1') {
-      if (Number(invoiceDetails?.remainingAmount) < calculateTax(Number(invoiceDetails?.remainingAmount), amount)) {
-        setValue("remainingAmount", invoiceDetails?.remainingAmount)
+      if (Number(remainingAmount) < taxPercentage) {
+        setValue("remainingAmount", remainingAmount.toFixed(2))
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", Number(invoiceDetails?.remainingAmount) - calculateTax(Number(invoiceDetails?.remainingAmount), amount))
+        setValue("remainingAmount", (Number(remainingAmount) - taxPercentage).toFixed(2))
       }
     } else {
-      setValue("remainingAmount", invoiceDetails?.remainingAmount)
+      setValue("remainingAmount", remainingAmount.toFixed(2))
 
     }
-  }, [amount, type])
-
+  }, [amount, type]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, ["paymentType"]: staticEnums["PaymentType"][data.paymentType], id: invoiceDetails?.id, isInvoiceRecurring: false }
-    const res = await dispatch(createInvoice({ data: apiData, router, setError, translate }));
-    if (res?.payload)  invoiceCreated();
+    const apiData = {
+      ...data,
+      ["paymentType"]: staticEnums["PaymentType"][data.paymentType],
+      id: invoiceDetails?.id,
+      isInvoiceRecurring: false,
+      amount: data?.type === "1" ? taxPercentage : data?.amount
+    };
+    const res = await dispatch(
+      createInvoice({ data: apiData, router, setError, translate })
+    );
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))  
+      invoiceCreated();
+    
+    }
   };
   return {
     error,
@@ -83,6 +105,6 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     errors,
     fields,
     onSubmit,
-    translate
+    translate,
   };
 }

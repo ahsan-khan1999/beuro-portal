@@ -19,7 +19,8 @@ export interface Plan {
   description:string;
   id:string;
   refID:string;
-  yearlyPrice:number
+  yearlyPrice:number;
+  createdAt:string
 }
 export interface FormDataProps {
   planDetail: Plan | null;

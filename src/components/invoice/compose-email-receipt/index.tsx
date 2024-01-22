@@ -1,0 +1,33 @@
+import { Layout } from "@/layout";
+import React from "react";
+import ComposeMail from "./ComposeMail";
+import InvoiceCardLayout from "@/layout/invoice";
+import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
+import MailDetailsCard from "./MailDetailsCard";
+
+const ReceiptEmail = () => {
+
+  return (
+    <>
+      <Layout>
+        <InvoiceCardLayout>
+          {/* <MailDetailsCard
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+          /> */}
+          <MailDetailsCard />
+        </InvoiceCardLayout>
+
+        <div className="flex mt-[12px] mb-[18px]">
+          <ComposeMail
+           
+          />
+        </div>
+      </Layout>
+    </>
+  );
+};
+
+export default ReceiptEmail;

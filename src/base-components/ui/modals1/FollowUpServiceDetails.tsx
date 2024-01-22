@@ -81,7 +81,6 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
 
             <section className="flex flex-col gap-y-[10px]">
               <p className="text-sm font-normal ">
-                {" "}
                 {translate("follow_up.additional_detail_heading")}
               </p>
               <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">

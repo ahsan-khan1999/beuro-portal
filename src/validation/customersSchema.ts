@@ -11,7 +11,7 @@ export const generateCustomerValidation = (translate: Function) => {
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.companyName]: yup
       .string().when('customerType', {
-        is: (customerType:string) => customerType === 'company' ,
+        is: (customerType: string) => customerType === 'company',
         then: () => yup.string().required(translate("validationMessages.required")),
       }),
 
@@ -22,19 +22,18 @@ export const generateCustomerValidation = (translate: Function) => {
 
     [CustomerDetailsFields.phone]: yup
       .string()
-      
+
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.mobile]: yup
       .string()
-      
-      .required(translate("validationMessages.required")),
+
+      .notRequired(),
     [CustomerDetailsFields.address]: yup.object({
       [CustomerDetailsFields.streetNo]: yup
         .string()
         .required(translate("validationMessages.required")),
       [CustomerDetailsFields.postCode]: yup
         .string()
-        .max(4, 'Max length is 4 characters')
         .required(translate("validationMessages.required")),
       [CustomerDetailsFields.country]: yup
         .string()

@@ -167,6 +167,20 @@ export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const readQRCode: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("contract/qr/code", async (args, thunkApi) => {
+        const { params, router, setError, translate } = args as any;
+
+        try {
+
+            const response = await apiServices.readContractQRCode(params);
+            return response?.data?.data?.qrcode;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const ContractSlice = createSlice({
     name: "ContractSlice",
     initialState,
@@ -271,6 +285,15 @@ const ContractSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(sendOfferByPost.rejected, (state) => {
+            state.loading = false
+        })
+        builder.addCase(readQRCode.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(readQRCode.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(readQRCode.rejected, (state) => {
             state.loading = false
         })
 

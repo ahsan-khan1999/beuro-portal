@@ -17,7 +17,7 @@ const AddCustomer = () => {
 
   const tabSection: tabArrayTypes[] = [
     {
-      name: "Customer Details",
+      name: `${translate("customers.tab_heading")}`,
       content: <AddCustomerForm handleCancel={handleCancel} />,
       icon: "",
     },

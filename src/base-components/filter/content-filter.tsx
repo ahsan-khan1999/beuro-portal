@@ -7,6 +7,7 @@ import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
 
 export default function ContentFilter({
   filter,
@@ -28,7 +29,7 @@ export default function ContentFilter({
     handleFilterReset,
     handleFilterResetToInitial,
   } = useFilter({ filter, setFilter, moreFilters });
-
+  const { t: translate } = useTranslation();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const handleSave = () => {
     setFilter((prev: any) => {
@@ -37,8 +38,7 @@ export default function ContentFilter({
         date: {
           $gte: moreFilter.date && moreFilter.date.$gte,
           $lte: moreFilter.date && moreFilter.date.$lte,
-
-        }
+        },
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -91,19 +91,21 @@ export default function ContentFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
                 className=" text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
             <div className="">
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Date
+                    {translate("filters.extra_filters.date")}
                   </label>
                   <label
                     htmlFor="type"
@@ -115,20 +117,20 @@ export default function ContentFilter({
                       });
                     }}
                   >
-                    Reset
+                    {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
                 <div>
                   <DatePicker
-                    label="From"
-                    label2="To"
+                    label={translate("filters.extra_filters.from")}
+                    label2={translate("filters.extra_filters.to")}
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
                       (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}
@@ -139,7 +141,7 @@ export default function ContentFilter({
 
             <div>
               <BaseButton
-                buttonText="Save"
+                buttonText={translate("common.save_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"

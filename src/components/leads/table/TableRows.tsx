@@ -21,30 +21,24 @@ const TableRows = ({
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div
-            onClick={() =>
-              router.push({
-                pathname: "/leads/details",
-                query: { lead: item?.id },
-              })
-            }
             // onClick={() => router.push("/leads/details")}
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white cursor-pointer px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(50px,_50px),minmax(130px,_130px)_minmax(300px,_100%)_minmax(150px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(120px,_100%)_minmax(80px,_100%)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(150px,_100%)_minmax(110px,_110%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(50px,_50px),minmax(120px,_120px)_minmax(150px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(40px,_40px)] mt-2 rounded-md"
+            className="items-center hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(100px,4fr)_minmax(150px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
-            <span className="py-4 flex items-center">{item?.refID}</span>
-            <span className="break-all py-4 flex items-center ">
+            <span className="py-4 truncate">{item?.refID}</span>
+            <span className="py-4 truncate">
               {item.customerDetail?.fullName}
             </span>
-            <span className="break-all py-4 flex items-center mlg:hidden maxSize:flex">
+            <span className="py-4 maxSize:block truncate">
               {item.customerDetail?.email}
             </span>
-            <span className="break-all py-4 flex items-center">
+            <span className="py-4 mlg:hidden xlg:block truncate">
               {item.customerDetail?.phoneNumber}
             </span>
-            <span className="py-4 flex items-center mlg:hidden xlg:flex maxSize:hidden xMaxSize:flex">
+            <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
               {formatDate(item.createdAt)}
             </span>
-            <span className="flex items-center py-4">
+            <span className="py-4 truncate">
               {item.customerDetail?.address?.country}
             </span>
             <span className={`py-4 flex items-center`}>
@@ -75,7 +69,7 @@ const TableRows = ({
                   height="31"
                   rx="7.5"
                   fill="white"
-                  stroke="#C7C7C7"
+                  stroke="#4A13E7"
                 />
                 <path
                   d="M15.4044 22.0518H12.1297C11.1072 22.0518 10.2753 21.2199 10.2753 20.1974V11.7908C10.2753 10.7683 11.1072 9.93645 12.1297 9.93645H20.5362C21.5588 9.93645 22.3906 10.7683 22.3906 11.7908V15.1624C22.3906 15.5038 22.6674 15.7805 23.0088 15.7805C23.3501 15.7805 23.6269 15.5038 23.6269 15.1624V11.7908C23.6269 10.0867 22.2405 8.7002 20.5362 8.7002H12.1297C10.4255 8.7002 9.03906 10.0867 9.03906 11.7908V20.1974C9.03906 21.9016 10.4255 23.288 12.1297 23.288H15.4044C15.7458 23.288 16.0225 23.0113 16.0225 22.6699C16.0225 22.3285 15.7458 22.0518 15.4044 22.0518Z"
@@ -114,7 +108,7 @@ const TableRows = ({
                   height="31"
                   rx="7.5"
                   fill="white"
-                  stroke="#C7C7C7"
+                  stroke="#4A13E7"
                 />
                 <path
                   d="M20.0838 15.499C20.0838 15.1576 19.8071 14.8809 19.4657 14.8809H13.0991C12.7577 14.8809 12.481 15.1576 12.481 15.499C12.481 15.8404 12.7577 16.1171 13.0991 16.1171H19.4657C19.8071 16.1171 20.0838 15.8404 20.0838 15.499Z"
@@ -140,7 +134,7 @@ const TableRows = ({
             </span>
 
             <span
-              className="py-4 flex justify-center items-center"
+              className="flex justify-center items-center cursor-pointer"
               onClick={() =>
                 router.push({
                   pathname: "/leads/details",
@@ -148,18 +142,20 @@ const TableRows = ({
                 })
               }
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="8"
-                height="15"
-                viewBox="0 0 8 15"
-                fill="none"
-              >
-                <path
-                  d="M0.461667 14.0655C0.291259 13.8825 0.206055 13.6659 0.206055 13.4156C0.206055 13.1653 0.291259 12.9489 0.461667 12.7665L5.45463 7.40568L0.444626 2.0266C0.285579 1.85583 0.206055 1.64238 0.206055 1.38623C0.206055 1.13008 0.291259 0.91053 0.461667 0.727568C0.632076 0.544606 0.833839 0.453125 1.06696 0.453125C1.30008 0.453125 1.50161 0.544606 1.67157 0.727568L7.39729 6.89338C7.46545 6.96657 7.51385 7.04585 7.54247 7.13123C7.5711 7.21662 7.58519 7.3081 7.58474 7.40568C7.58474 7.50326 7.57042 7.59474 7.54179 7.68012C7.51316 7.7655 7.465 7.84478 7.39729 7.91797L1.65453 14.0838C1.49548 14.2545 1.29939 14.3399 1.06628 14.3399C0.833157 14.3399 0.631621 14.2485 0.461667 14.0655Z"
-                  fill="black"
-                />
-              </svg>
+              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="8"
+                  height="15"
+                  viewBox="0 0 8 15"
+                  fill="#4A13E7"
+                >
+                  <path
+                    d="M0.461667 14.0655C0.291259 13.8825 0.206055 13.6659 0.206055 13.4156C0.206055 13.1653 0.291259 12.9489 0.461667 12.7665L5.45463 7.40568L0.444626 2.0266C0.285579 1.85583 0.206055 1.64238 0.206055 1.38623C0.206055 1.13008 0.291259 0.91053 0.461667 0.727568C0.632076 0.544606 0.833839 0.453125 1.06696 0.453125C1.30008 0.453125 1.50161 0.544606 1.67157 0.727568L7.39729 6.89338C7.46545 6.96657 7.51385 7.04585 7.54247 7.13123C7.5711 7.21662 7.58519 7.3081 7.58474 7.40568C7.58474 7.50326 7.57042 7.59474 7.54179 7.68012C7.51316 7.7655 7.465 7.84478 7.39729 7.91797L1.65453 14.0838C1.49548 14.2545 1.29939 14.3399 1.06628 14.3399C0.833157 14.3399 0.631621 14.2485 0.461667 14.0655Z"
+                    fill="#4A13E7"
+                  />
+                </svg>
+              </div>
             </span>
           </div>
         );

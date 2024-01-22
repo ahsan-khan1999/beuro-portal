@@ -34,6 +34,7 @@ export enum SettingProfile {
   accountNumber = "accountNumber",
   IBAN_number = "ibanNumber",
   changePassword = "changePassword",
+  email="email"
 }
 
 export enum MailSettingsEmailTemplate {

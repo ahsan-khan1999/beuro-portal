@@ -14,16 +14,21 @@ const CustomCKEditor = ({
   <CKEditor
     id={id}
     editor={ClassicEditor}
-    data={data}
-    onReady={(editor) => {}}
+    data={field.value}
+    key={data}
+    onReady={(editor) => {
+      field.onChange(field.value);
+
+    }}
     onChange={(event, editor) => {
       field.onChange(editor.getData());
     }}
-    onBlur={(event, editor) => {}}
-    onFocus={(event, editor) => {}}
+    onBlur={(event, editor) => { }}
+    onFocus={(event, editor) => { }}
     onError={(error, errorDetails) => {
       trigger?.(field.name);
     }}
+
     config={{
       toolbar: {
         items: [
@@ -39,7 +44,8 @@ const CustomCKEditor = ({
           "|",
           "bold",
           "italic",
-          // "strikethrough",
+          // "underline",
+          "strikethrough",
           // "subscript",
           // "superscript",
           // "code",

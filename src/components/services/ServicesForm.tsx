@@ -1,11 +1,11 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import FormCard from "@/layout/customers/FormCard";
 import { FormDataProps } from "@/types/service";
 import Image from "next/image";
-import React, { SetStateAction } from "react";
+import React from "react";
 import editInfo from "@/assets/svgs/edit-customer-details.svg";
 import { useTranslation } from "next-i18next";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceForm = ({
   isUpdate,
@@ -19,9 +19,10 @@ const ServiceForm = ({
   const { t: translate } = useTranslation();
   return (
     <div
-    className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
-      !isUpdate ? "border-primary" : "border-none"
-    } h-fit`}>
+      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+        !isUpdate ? "border-primary" : "border-none"
+      } h-fit`}
+    >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("services.detail.main_heading")}
@@ -30,15 +31,15 @@ const ServiceForm = ({
           <BaseButton
             buttonText={translate("services.detail.edit_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex gap-x-3 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
           >
-            <Image src={editInfo} alt="editInfo" />
+            <EditIcon />
           </BaseButton>
         ) : (
           <BaseButton
             buttonText={translate("services.detail.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
           ></BaseButton>
         )}
       </div>

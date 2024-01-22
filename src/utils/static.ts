@@ -591,6 +591,12 @@ export const staticEnums: Record<string, any> = {
     Close: 1,
     Expired: 2,
   },
+
+  mailStatus: {
+    opend: 0,
+    pending: 1,
+    failed: 2,
+  },
   open: 0,
   closed: 1,
   expied: 2,
@@ -611,8 +617,9 @@ export const staticEnums: Record<string, any> = {
     Post: 2,
   },
   TaxType: {
-    Include: 0,
-    Exclude: 1,
+    Inclusive: 0,
+    Exclusive: 1,
+    NoTax: 2,
   },
   PaymentType: {
     Cash: 0,
@@ -623,15 +630,19 @@ export const staticEnums: Record<string, any> = {
     Confirmed: 1,
     Cancelled: 2,
   },
+  ContractSignedStatus: {
+    Deprecated: 0,
+    Active: 1,
+  },
 
   InvoiceStatus: {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
+    Open: 3,
   },
   Frequency: {
     Weekly: 0,
-    SevenDays: 1,
     FourtennDays: 2,
     Monthly: 3,
     Yearly: 4,
@@ -696,15 +707,32 @@ export const staticEnums: Record<string, any> = {
   },
   SettingStatus: {},
   Country: {
-    Swizterland: "Swizterland",
-    Germany: "Germany",
-    Austria: "Austria",
-    Italy: "Italy",
-    France: "France",
+    Swizterland: "countries.swiz",
+    Germany: "countries.ger",
+    Austria: "countries.aust",
+    Italy: "countries.ita",
+    France: "countries.fran",
   },
   SupportRequest: {
     pending: 0,
     resolved: 1,
+  },
+  RejectReason: {
+    "Cost Concerns": "Cost Concerns",
+    "Hidden Fees": "Hidden Fees",
+    "Service Scope": "Service Scope",
+    "Negative Reviews": "Negative Reviews",
+    "Unreliable Schedule": "Unreliable Schedule",
+    "Customer Service": "Customer Service",
+    "Inadequate Equipment": "Inadequate Equipment",
+    Other: "Other",
+  },
+  LeadSource: {
+    Umzugsfuchs: "Umzugsfuchs",
+    Webvermarktung: "Webvermarktung",
+    "Offerten-365": "Offerten-365",
+    Umzugshero: "Umzugshero",
+    "Via Call": "Via Call",
   },
 };
 
@@ -1200,50 +1228,50 @@ export const paymentsAdminData: PaymentsAdmin[] = [
 export const sideBar: SideBar[] = [
   {
     icon: "Dashboard",
-    title: "Dashboard",
+    title: "sidebar.customer.dashboard",
     pathname: "/dashboard",
     role: [1, 2],
   },
   {
     icon: "Dashboard",
-    title: "Dashboard",
+    title: "sidebar.admin.dashboard",
     pathname: "/admin/dashboard",
     role: [0],
   },
   {
     icon: "Customers",
-    title: "Customers",
+    title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
   },
   {
     icon: "Customers",
-    title: "Customers",
+    title: "sidebar.admin.customers",
     pathname: "/admin/customers",
     role: [0],
   },
   {
     icon: "Leads",
-    title: "Leads",
+    title: "sidebar.customer.leads.leads",
     pathname: "/leads",
     role: [1, 2],
     inner: [
       {
-        title: "Open",
+        title: "sidebar.customer.leads.open",
         pathname: "/leads",
         query: "Open",
 
         role: [1, 2],
       },
       {
-        title: "Close",
+        title: "sidebar.customer.leads.close",
         pathname: "/leads",
         query: "Close",
 
         role: [1, 2],
       },
       {
-        title: "Expire",
+        title: "sidebar.customer.leads.expire",
         pathname: "/leads",
         query: "Expired",
 
@@ -1253,63 +1281,58 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Offers",
-    title: "Offers",
+    title: "sidebar.customer.offers.offers",
     role: [1, 2],
     pathname: "/offers",
 
     inner: [
       {
-        title: "Open",
+        title: "sidebar.customer.offers.open",
         pathname: "/offers",
         query: "Open",
-
         role: [1, 2],
       },
       {
-        title: "Signed",
+        title: "sidebar.customer.offers.signed",
         pathname: "/offers",
         query: "Signed",
-
         role: [1, 2],
       },
       {
-        title: "Expired",
+        title: "sidebar.customer.offers.expired",
         pathname: "/offers",
         query: "Expired",
-
         role: [1, 2],
       },
       {
-        title: "Rejected",
+        title: "sidebar.customer.offers.rejected",
         query: "Rejected",
-
         pathname: "/offers",
-
         role: [1, 2],
       },
     ],
   },
   {
     icon: "Contracts",
-    title: "Contracts",
+    title: "sidebar.customer.contracts.contracts",
     role: [1, 2],
     pathname: "/contract",
 
     inner: [
       {
-        title: "Open",
+        title: "sidebar.customer.contracts.open",
         query: "Open",
         pathname: "/contract",
         role: [1, 2],
       },
       {
-        title: "Confirmed",
+        title: "sidebar.customer.contracts.confirmed",
         query: "Confirmed",
         pathname: "/contract",
         role: [1, 2],
       },
       {
-        title: "Cancelled",
+        title: "sidebar.customer.contracts.cancelled",
         query: "Cancelled",
         pathname: "/contract",
         role: [1, 2],
@@ -1318,25 +1341,31 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Invoices",
-    title: "Invoices",
+    title: "sidebar.customer.invoices.invoices",
     role: [1, 2],
     pathname: "/invoices",
 
     inner: [
       {
-        title: "Pending",
+        title: "sidebar.customer.invoices.pending",
         query: "Pending",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
-        title: "Overdue",
+        title: "sidebar.customer.invoices.open",
+        query: "Open",
+        pathname: "/invoices",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.invoices.overdue",
         query: "Overdue",
         pathname: "/invoices",
         role: [1, 2],
       },
       {
-        title: "Paid",
+        title: "sidebar.customer.invoices.paid",
         query: "Paid",
         pathname: "/invoices",
         role: [1, 2],
@@ -1345,31 +1374,31 @@ export const sideBar: SideBar[] = [
   },
   {
     icon: "Services",
-    title: "Services",
+    title: "sidebar.customer.services",
     pathname: "/services",
     role: [1, 2],
   },
   {
     icon: "Employees",
-    title: "Employees",
+    title: "sidebar.customer.employees",
     pathname: "/employees",
     role: [1],
   },
   {
     icon: "Content",
-    title: "Content",
+    title: "sidebar.customer.content",
     pathname: "/content",
     role: [1, 2],
   },
   {
     icon: "MailTracker",
-    title: "Mail Tracker",
+    title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     role: [1, 2],
   },
   {
     icon: "Settings",
-    title: "Settings",
+    title: "sidebar.customer.settings",
     pathname: "/setting",
     role: [1],
     className: "",
@@ -1377,26 +1406,26 @@ export const sideBar: SideBar[] = [
 
   {
     icon: "plans",
-    title: "Plans",
+    title: "sidebar.admin.plans",
     pathname: "/admin/plans",
     role: [0],
   },
   {
     icon: "payment",
-    title: "Payment",
+    title: "sidebar.admin.payments",
     pathname: "/admin/payments",
     role: [],
   },
   {
     icon: "ContactSupports",
-    title: "Contact Supports",
+    title: "sidebar.customer.contact_supports",
     pathname: "/contact-support",
     role: [1, 2],
     // className:"mb-6 border-b border-[#0000001A]"
   },
   {
     icon: "ContactSupports",
-    title: "Support Request",
+    title: "sidebar.admin.support_requests",
     pathname: "/admin/support-request",
     role: [0],
     // className:"mb-6 border border-red-700"
@@ -1409,7 +1438,7 @@ export const sideBar: SideBar[] = [
   {
     className: " ",
     icon: "setting",
-    title: "Settings",
+    title: "sidebar.admin.Settings",
     pathname: "/admin/settings",
     role: [0],
   },
@@ -1598,4 +1627,10 @@ export const DEFAULT_INVOICE = {
   status: "",
   editNote: "",
   type: "",
+};
+
+export const HeaderLabel = {
+  contract: "Verträge",
+  invoice: "Rechnung",
+  receipt: "Quittung",
 };

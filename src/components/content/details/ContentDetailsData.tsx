@@ -13,6 +13,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export enum ComponentsType {
   offerContent,
@@ -25,14 +26,10 @@ export enum ComponentsType {
   editReceiptContent,
 }
 
-const ContentDetailsData = ({
-  contentDetails,
-  loading,
-}: {
-  contentDetails: ContentTableRowTypes;
-  loading: boolean;
-}) => {
+const ContentDetailsData = () => {
   const [tabType, setTabType] = useState<number>(0);
+  const { contentDetails, loading } = useAppSelector((state) => state.content);
+
   const [data, setData] = useState<{
     index: number;
     component: ComponentsType;
@@ -190,31 +187,31 @@ const ContentDetailsData = ({
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row gap-x-6 mt-6">
-      <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-full xl:w-fit">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            key={index}
-            isSelected={tabType === index}
-            setTabType={setTabType}
-            tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
-          />
-        ))}
+    <>
+      <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
+        <div className="flex flex-row flex-wrap maxSize:flex-col maxSize:flex-nowrap w-full gap-[14px] mb-5 maxSize:mb-0">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              key={index}
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+            />
+          ))}
+        </div>
       </div>
-
-      <div className="flex flex-col gap-y-5 w-full h-[600px] xl:mt-0 mt-4 overflow-scroll">
-        {loading ? (
-          <LoadingState />
-        ) : (
-          renderComponent.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
-        )}
+      <div className="w-full break-all flex">
+        <div className="max-w-[300px] w-full hidden maxSize:block"></div>
+        <div className="flex flex-col gap-y-5 w-full">
+          {renderComponent.map((component, index) => (
+            <div key={index}>{component}</div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

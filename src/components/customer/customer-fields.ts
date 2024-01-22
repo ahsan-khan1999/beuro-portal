@@ -35,12 +35,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
-                (item, key) => ({
+              options: Object.keys(staticEnums.CustomerType)
+                ?.slice(1)
+                .map((item, key) => ({
                   value: item,
                   label: item,
-                })
-              ),
+                })),
 
               control,
               disabled: isUpdate,
@@ -61,7 +61,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "fullName",
               name: "fullName",
 
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.name"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -74,12 +76,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
-
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.email"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -126,7 +129,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass: "my-5",
+      containerClass: "mt-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "div",
@@ -152,7 +155,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "address.streetNumber",
               name: "address.streetNumber",
 
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.street"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -167,12 +172,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-[#BFBFBF] focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
 
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.post_code"
+              )}`,
 
               register,
               disabled: isUpdate,
@@ -196,7 +203,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               })),
               control,
               disabled: isUpdate,
-              value: "",
+              value: Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -216,7 +223,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px] text-dark hover:bg-none ${
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] h-[50px] text-dark hover:bg-none ${
                 isUpdate && "hidden"
               }`,
             },
@@ -227,7 +234,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "button",
               text: `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,

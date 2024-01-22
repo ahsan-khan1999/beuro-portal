@@ -8,6 +8,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import { updateContactSupport } from "../contactSupport/contactSupportSlice";
 
 interface ContentState {
     content: ContentTableRowTypes[];
@@ -56,19 +57,50 @@ export const readContentDetails: AsyncThunk<boolean, object, object> | any =
     });
 export const createContent: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("content/create", async (args, thunkApi) => {
-        const { data, router, setError, translate } = args as any;
+        const { data, router, setError, translate, isUpdate } = args as any;
 
         try {
             const { contentId, step, stage } = data
             let apiData = { ...data, contentId: contentId, step: step }
 
             const response = await apiServices.createContent(apiData);
-            let objectToUpdate = { ...response?.data?.data?.Content, type: apiData?.type, stage: stage }
-            localStoreUtil.store_data("content", objectToUpdate)
-            thunkApi.dispatch(setContentDetails(objectToUpdate));
+            if (!isUpdate) {
+                let objectToUpdate = { ...response?.data?.data?.Content, type: apiData?.type, stage: stage }
+                localStoreUtil.store_data("content", objectToUpdate)
+                thunkApi.dispatch(setContentDetails(objectToUpdate));
+            } else {
+                thunkApi.dispatch(setContentDetails(data));
+
+            }
 
 
             return response?.data?.data?.Content;
+        } catch (e: any) {
+            // if (Array.isArray(e?.data?.data?.offerContent.address)) {
+            //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.offerContent.address)
+            //     setErrors(setError, transformedValidationMessages, translate);
+            //     setErrors(setError, e?.data?.data, translate);
+
+            // } 
+            setErrors(setError, e?.data?.data, translate);
+
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const updateContentInfo: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("content/udpate/info", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const { contentId, step, stage } = data
+            let apiData = { ...data, contentId: contentId, step: step }
+
+            await apiServices.createContent(apiData);
+
+
+            return true;
         } catch (e: any) {
             // if (Array.isArray(e?.data?.data?.offerContent.address)) {
             //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.offerContent.address)
@@ -161,6 +193,15 @@ const contentSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(createContent.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateContentInfo.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateContentInfo.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateContentInfo.rejected, (state) => {
             state.loading = false
         });
         builder.addCase(updateContent.pending, (state) => {

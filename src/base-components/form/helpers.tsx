@@ -19,7 +19,6 @@ import {
   DragAndDropFileField,
   DragAndDropPdfField,
   ImageUploadField,
-  MultiDateField,
   MultiSelectField,
   AddFiled,
   ToggleButton
@@ -57,7 +56,6 @@ const fieldComponents: FieldComponents = {
   button: Button,
   addField: AddFiled,
   link: LinkField,
-  dateRange: MultiDateField,
   multiSelect: MultiSelectField,
   toggleButton: ToggleButton,
 
@@ -100,7 +98,6 @@ export function isFieldType(type: any): type is FieldType {
     "div",
     "button",
     "link",
-    "dateRange",
     "multiSelect",
     "addField",
     "toggleButton"

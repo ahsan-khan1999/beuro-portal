@@ -18,10 +18,13 @@ export const ProductPurchasedItemsDetails = ({
   templateSettings,
   totalPages,
   isOffer,
-}: PurchasedItemsDetailsProps) => {
+  emailTemplateSettings,
+  systemSettings
+}: Partial<PurchasedItemsDetailsProps>) => {
+  
   return (
     <div>
-      <DocumentHeader {...headerDetails} />
+      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} isOffer={isOffer} />
@@ -30,9 +33,9 @@ export const ProductPurchasedItemsDetails = ({
           <ProductItem {...item} key={index} />
         ))}
 
-        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
+        {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings}/>}
       </div>
-      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} />
+      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} emailTemplateSettings={emailTemplateSettings}/>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import imageUpload from "@/assets/svgs/img_upload.svg";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { readImage } from "@/api/slices/imageSlice/image";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const OfferEditImages = ({
   shareImgModal,
@@ -31,11 +32,9 @@ const OfferEditImages = ({
     leadsDetailsImg3,
     leadsDetailsImg4,
   ];
-  
 
   const { images } = useAppSelector((state) => state.image);
   const { offerDetails } = useAppSelector((state) => state.offer);
-
 
   const { t: translate } = useTranslation();
   return (
@@ -48,35 +47,38 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${images?.length > 0
-              ? "cursor-pointer"
-              : "cursor-default"
-              }  `}
+            className={`${
+              images?.length > 0 ? "cursor-pointer" : "cursor-default"
+            }  `}
             onClick={() => images?.length > 0 && shareImgModal()}
           />
         </div>
-        <div className="grid grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
-          {images?.map((item, index) => (
-            <Image
-              src={item}
-              key={index}
-              alt="leads_images"
-              className="w-auto h-auto rounded-lg"
-              height={106}
-              width={106}
-            />
-          ))}
-        </div>
+
+        {images?.length > 0 ? (
+          <div className="grid grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
+            {images?.map((item, index) => (
+              <Image
+                src={item}
+                key={index}
+                alt="leads_images"
+                className="w-auto h-auto rounded-lg"
+                height={106}
+                width={106}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="-mt-6 pb-4">
+            <NoDataEmptyState />
+          </div>
+        )}
 
         <div className="flex justify-between items-center mx-[13px] pb-3">
           <p
-            className={`text-[12px] font-normal text-[#4A13E7] ${images?.length > 0
-              ? "cursor-pointer"
-              : "cursor-default"
-              }   `}
-            onClick={() =>
-              images?.length > 0 && handleImageSlider()
-            }
+            className={`text-[12px] font-normal text-[#4A13E7] ${
+              images?.length > 0 ? "cursor-pointer" : "cursor-default"
+            }   `}
+            onClick={() => images?.length > 0 && handleImageSlider()}
           >
             {translate("offers.side_images.views")}
           </p>

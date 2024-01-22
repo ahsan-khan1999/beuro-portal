@@ -6,7 +6,6 @@ import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import CustomerFilters from "@/base-components/filter/customer-filters";
 import { FiltersDefaultValues } from "@/enums/static";
 
 export default function CustomerFilter({
@@ -17,9 +16,11 @@ export default function CustomerFilter({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  };
+
+  // const handleInputChange = (value: string) => {
+  //   setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+  // };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -33,12 +34,14 @@ export default function CustomerFilter({
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
     });
   };
+
   return (
     <div className="flex gap-x-4 items-center">
       <InputField
@@ -53,12 +56,18 @@ export default function CustomerFilter({
         value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[
-          { label: "Date", value: "createdAt" },
-          { label: "Latest", value: "-createdAt" },
-          { label: "Oldest", value: "createdAt" },
-          { label: "A - Z", value: "fullName" },
+          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
+          {
+            label: `${translate("filters.sort_by.latest")}`,
+            value: "-createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.oldest")}`,
+            value: "createdAt",
+          },
+          { label: `${translate("filters.sort_by.a_z")}`, value: "fullName" },
         ]}
-        label="Sort By"
+        label={translate("common.sort_button")}
       />
       {/* <CustomerFilters
         filter={filter}
@@ -82,6 +91,7 @@ export default function CustomerFilter({
         id="apply"
         inputType="button"
         icon={plusIcon}
+        iconAlt="button"
       />
     </div>
   );

@@ -78,7 +78,7 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col xLarge:flex-row xLarge:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px] items-center">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -106,12 +106,24 @@ export default function LeadsFilter({
           value=""
           dropDownIconClassName=""
           options={[
-            { label: "Date", value: "createdAt" },
-            { label: "Latest", value: "-createdAt" },
-            { label: "Oldest", value: "createdAt" },
-            { label: "A - Z", value: "customerDetail.fullName" },
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetail.fullName",
+            },
           ]}
-          label="Sort By"
+          label={translate("common.sort_button")}
         />
         <LeadsFilters
           filter={filter}
@@ -131,8 +143,9 @@ export default function LeadsFilter({
           onClick={() => router.push("/leads/add")}
           className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           icon={addIcon}
-          text="Add New"
+          text={translate("leads.add_button")}
           id="add"
+          iconAlt="add button"
         />
       </div>
     </div>

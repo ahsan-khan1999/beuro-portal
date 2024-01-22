@@ -9,13 +9,14 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
   onClick,
   trigger,
   count,
-  attachements, setAttachements, contentDetails
+  attachements,
+  setAttachements,
+  contentDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
-
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -52,7 +53,9 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.description
+              value:
+                contentDetails?.id &&
+                contentDetails?.receiptContent?.description,
             },
           },
 
@@ -70,8 +73,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body
-
+              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
@@ -91,13 +93,12 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               fileSupported: "Files supported: PDF, JPG, PNG, GIF",
               control,
               attachements,
-              setAttachements
+              setAttachements,
             },
           },
         ],
-      }
+      },
     },
-
 
     {
       containerClass: "mt-6",
@@ -107,14 +108,14 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
         className: "flex items-center space-x-[18px] ",
         children: [
           {
-            containerClass: "mb-0",
+            containerClass: "mb-0 ",
             field: {
               type: Field.button,
               id: "button",
               text: `${translate("content.details.back_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
               onClick: onClick,
             },
           },
@@ -126,7 +127,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] !mt-5 h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

@@ -147,9 +147,9 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-4 xl:gap-x-6 mt-6">
-      <div className="col-span-1 flex flex-row xl:flex-col gap-4 w-full">
-        <div className="flex flex-col gap-y-[14px]">
+    <div className="mt-6">
+      <div className="xlg:fixed mb-5">
+        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -165,13 +165,18 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
         <LeadsDetailsImages images={images} />
       </div>
 
-      <div className="col-span-3 flex flex-col gap-y-5 w-full h-[530px] xl:mt-0 mt-5 overflow-scroll">
+      <div className="w-full break-all flex">
+        <div className="max-w-[320px] w-full hidden xlg:block"></div>
         {loading ? (
-          <LoadingState />
+          <div className="flex justify-center items-center w-full">
+            <LoadingState />
+          </div>
         ) : (
-          renderComponent.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
+          <div className="flex flex-col gap-y-5 w-full">
+            {renderComponent.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
         )}
       </div>
     </div>
