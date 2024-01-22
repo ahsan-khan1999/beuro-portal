@@ -281,6 +281,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       name: `serviceDetail.${i}.totalPrice`,
                       placeholder: "1000CHF",
                       register,
+                      step: "0.01",
+
                     },
                   },
                 ],
@@ -683,6 +685,8 @@ const generateServiceCalulationChildren = (
                   value: offerDetails?.id && offerDetails?.discountAmount,
                   disabled: !isDiscount,
                   setValue,
+                  step: "0.01",
+
                   // onChange: generateTotal
                 },
               },
