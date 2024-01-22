@@ -11,15 +11,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
-import {
-  getValueForKeyInArray,
-  senitizeDataForm,
-  transformAddressFormValues,
-} from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect, useMemo, useState } from "react";
-import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useAddLeadAddressDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
@@ -110,7 +104,7 @@ export const useAddLeadAddressDetails = (
       ...data,
       step: 2,
       id: leadDetails?.id,
-      stage: ComponentsType.serviceAdd,
+      stage: ComponentsType.addressAdd,
     };
 
     const response = await dispatch(

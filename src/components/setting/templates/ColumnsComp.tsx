@@ -106,7 +106,6 @@ const ColumnsComp = () => {
     thirdColumn: templateSettings?.isThirdColumn || false,
     fourthColumn: templateSettings?.isFourthColumn || false,
   });
-  console.log(templateSettings,"templateSettings");
   
   const [columnSettings, setColumnSettings] = useState<ColumnStructure>({
     firstColumn: [
@@ -172,7 +171,7 @@ const ColumnsComp = () => {
           column: "firstColumn",
           type: "isWebsite",
           value: templateSettings?.firstColumn?.isTaxNumber || false,
-          text: templateSettings?.firstColumn?.taxNumber || "",
+          text: templateSettings?.firstColumn?.taxNumber?.toString() || "",
           textType:"taxNumber"
 
 
@@ -464,7 +463,7 @@ const ColumnsComp = () => {
           [key]: {
             ...formatObj[key],
             [item.data.type]: item.data.value,
-            [item.data.textType]: item.data.text,
+            [item.data.textType]: item.data.text?.toString(),
 
           },
         };

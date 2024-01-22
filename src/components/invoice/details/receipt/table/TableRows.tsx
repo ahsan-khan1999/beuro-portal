@@ -36,7 +36,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] bg-white px-6 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] mt-2 rounded-md"
+            className="hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
@@ -132,7 +132,7 @@ const TableRows = ({
             </span>
 
             <span
-              className="flex justify-center items-center"
+              className="flex justify-center items-center cursor-pointer"
               onClick={() => handleReceiptPreview(item?.id)}
             >
               <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
