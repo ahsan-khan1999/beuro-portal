@@ -153,7 +153,7 @@ const OfferSignedPdf = ({
           <Header {...headerDetails} />
         </View>
 
-        <ContactAddress {...{ ...contactAddress }} />
+        {/* <ContactAddress {...{ ...contactAddress }} /> */}
         <AdditionalDetails
           description={aggrementDetails}
           signature={signature}
