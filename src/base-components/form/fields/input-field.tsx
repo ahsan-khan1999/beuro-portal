@@ -31,7 +31,7 @@ export const InputField = ({
   const { t: translate } = useTranslation();
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  } py-[10px] outline-none text-dark text-sm focus:border-primary`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
 

@@ -15,7 +15,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   content,
   contentDetails,
   onContentSelect,
-  attachements, setAttachements,
+  attachements,
+  setAttachements,
   offerDetails,
   isMoreEmail,
   setIsMoreEmail,
@@ -27,7 +28,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
+        className:
+          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
             containerClass: "mb-0 col-span-4",
@@ -58,15 +60,19 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                   field: {
                     type: Field.span,
                     text: `Cc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("cc", "")
+                        setValue("cc", "");
                       }
 
-                      setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isCc: !isMoreEmail?.isCc,
+                      });
+                    },
                   },
                 },
 
@@ -75,18 +81,22 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                   field: {
                     type: Field.span,
                     text: `Bcc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("bcc", "")
+                        setValue("bcc", "");
                       }
-                      setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isBcc: !isMoreEmail?.isBcc,
+                      });
+                    },
                   },
                 },
-              ]
-            }
+              ],
+            },
           },
 
           {
@@ -108,10 +118,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id && contentDetails?.id || offerDetails?.content?.id || ""
+              value:
+                (contentDetails?.id && contentDetails?.id) ||
+                offerDetails?.content?.id ||
+                "",
             },
           },
-          isMoreEmail?.isCc && {
+          (isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Cc`,
@@ -124,12 +137,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          } || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Cc`,
@@ -142,13 +153,11 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
           },
-          isMoreEmail?.isBcc && {
+          (isMoreEmail?.isBcc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Bcc`,
@@ -161,13 +170,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
-          || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Bcc`,
@@ -180,12 +186,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
+          },
         ],
       },
     },
@@ -218,7 +222,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "description",
         name: "description",
         control,

@@ -134,7 +134,7 @@ const DetailsData = ({
               />
             </span>
           </h3>
-          <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
+          <h3 className="text-[#4D4D4D] flex items-center">
             {translate("admin.customers_details.card_content.company_logo")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
               <Image

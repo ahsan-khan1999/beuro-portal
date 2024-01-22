@@ -1,10 +1,10 @@
 import React from "react";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { EmployeeDetail } from "@/types/employee";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const DetailsData = ({
   date,
@@ -52,14 +52,16 @@ const DetailsData = ({
             {translate("employees.card_content.heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
             onClick={handleDelete}
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>

@@ -1,5 +1,5 @@
 import React from "react";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
@@ -55,14 +55,16 @@ const DetailsData = ({
               : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
-        <div className="flex items-center gap-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             onClick={deleteHandler}
             className="cursor-pointer"
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
       <hr className="w-full h-[1px] text-black opacity-10 my-5" />
       <div>

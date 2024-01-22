@@ -80,11 +80,13 @@ const MailDetailsCard = () => {
                 {translate("invoice.table_headings.status")}
               </span>
 
-              <span
-                className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
-              >
-                {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
-              </span>
+              {collectiveInvoiceDetails?.invoiceID?.invoiceStatus && (
+                <span
+                  className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
+                >
+                  {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
+                </span>
+              )}
             </div>
             <div className="flex gap-[10px]">
               <span className="text-base  font-normal text-[4D4D4D]">

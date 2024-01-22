@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import colorFullEmailIcon from "@/assets/svgs/color_ful_input_email.svg";
-import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -18,7 +17,6 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
-import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -117,12 +115,17 @@ const OfferDetailsCard = ({
             className="cursor-pointer"
             onClick={handlePrint}
           /> */}
-          <Image
-            src={deleteIcon}
-            alt="deleteIcon"
-            className="cursor-pointer"
-            onClick={offerDeleteHandler}
-          />
+
+          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={offerDeleteHandler}
+              width={16}
+              height={20}
+            />
+          </span>
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-5">
