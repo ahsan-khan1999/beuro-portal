@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
   SubmitHandler,
+  UseFieldArrayRemove,
   useFieldArray,
   useForm,
 } from "react-hook-form";
@@ -76,6 +77,7 @@ export const useAddLeadAddressDetails = (
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdd);
   };
+
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

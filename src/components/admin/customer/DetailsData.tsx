@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
 import { formatDateTimeToDate } from "@/utils/utility";
+import userIcon from "@/assets/svgs/Group 48095860.svg";
 
 const DetailsData = ({
   customerDetail,
@@ -134,11 +135,11 @@ const DetailsData = ({
               />
             </span>
           </h3>
-          <h3 className="text-[#4D4D4D] ml-[80px] flex items-center">
+          <h3 className="text-[#4D4D4D] flex items-center">
             {translate("admin.customers_details.card_content.company_logo")}:
             <span className="text-[#4B4B4B] font-medium ml-3">
               <Image
-                src={customerDetail?.company?.logo}
+                src={customerDetail?.company?.logo || userIcon}
                 alt="company logo"
                 height={40}
                 width={100}

@@ -13,7 +13,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
       containerClass: `mb-0`,
       field: {
         type: Field.date,
-        className: `!p-4 !border-dark focus:!border-primary`,
+        className: `!p-4 !border-[#BFBFBF] focus:!border-primary`,
         id: "dateTime",
         name: "dateTime",
         value: "12/12/2023",
@@ -26,7 +26,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
       containerClass: "mt-3 mb-0 ",
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
         rows: 2,
         id: "postPonedNote",
         name: "postPonedNote",

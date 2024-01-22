@@ -27,9 +27,11 @@ export const DropDown = ({
     !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
+
   useEffect(() => {
     setSelectedItem(defaultSelectedItem);
   }, [defaultSelectedItem]);
+  
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =

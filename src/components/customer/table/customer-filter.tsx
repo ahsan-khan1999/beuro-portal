@@ -48,8 +48,9 @@ export default function CustomerFilter({
         handleChange={(value) => {}}
         ref={inputRef}
         // value={inputValue || ""}
-        iconDisplay={true}
+        iconDisplay={false}
         onEnterPress={onEnterPress}
+        
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
