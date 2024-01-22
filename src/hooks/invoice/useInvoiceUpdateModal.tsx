@@ -92,7 +92,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
     const apiData = {
       ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false,
-      amount: data?.type === "1" ? taxPercentage : data?.amount
+      amount: reqData?.type === "1" ? calculateTax(Number(reqData?.remainingAmount),reqData?.amount) : reqData?.amount
 
     }
 

@@ -107,10 +107,12 @@ const stylesheet: HtmlStyles = {
     padding: 0,
     fontSize: 10,
   },
-  ul: { marginLeft: 16 },
+  ul: { marginLeft: 0 },
   li: {
     fontSize: 10,
     marginLeft: 0,
+    marginRight: 10,
+
     listStyle: "outside",
   },
   blockquote: {
@@ -155,7 +157,7 @@ export const AdditionalDetails = ({
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html resetStyles={true} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
+        <Html resetStyles={false} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
           {description || ""}
         </Html>
       </View>
