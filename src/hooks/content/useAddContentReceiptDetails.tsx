@@ -11,7 +11,7 @@ import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
-export const useAddContentReceiptDetails = (onHandleNext: Function) => {
+export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -25,7 +25,7 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   const dispatch = useAppDispatch();
 
   const handleBack = () => {
-    onHandleNext(ComponentsType.addInvoiceContent);
+    onHandleBack(ComponentsType.addInvoiceContent);
   };
 
   const schema = generateEditReceiptContentDetailsValidation(translate);
@@ -46,11 +46,13 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   useEffect(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.receiptContent?.title,
-        attachments:
-          (contentDetails?.receiptContent?.attachments?.length > 0 &&
-            contentDetails?.receiptContent?.attachments[0]) ||
-          null,
+        receiptContent:{
+          ...contentDetails?.receiptContent,
+          // attachments:
+          //   (contentDetails?.receiptContent?.attachments?.length > 0 &&
+          //     contentDetails?.receiptContent?.attachments[0]) ||
+          //   null,
+        }
       });
     }
   }, [contentDetails.id]);

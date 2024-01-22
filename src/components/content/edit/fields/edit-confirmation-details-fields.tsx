@@ -54,9 +54,9 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 name: "confirmationContent.description",
 
                 control,
-                value:
-                  contentDetails?.id &&
-                  contentDetails?.confirmationContent?.description,
+                // value:
+                //   contentDetails?.id &&
+                //   contentDetails?.confirmationContent?.description,
               },
             },
 
@@ -74,9 +74,9 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 name: "confirmationContent.body",
 
                 control,
-                value:
-                  contentDetails?.id &&
-                  contentDetails?.confirmationContent?.body,
+                // value:
+                //   contentDetails?.id &&
+                //   contentDetails?.confirmationContent?.body,
               },
             },
 

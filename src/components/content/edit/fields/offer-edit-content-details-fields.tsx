@@ -43,18 +43,18 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
       },
     },
 
-    {
-      containerClass: "mt-5",
-      //@ts-expect-error
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children:
-          count &&
-          generateAddressChildren(register, count, translate, append, remove),
-      },
-    },
+    // {
+    //   containerClass: "mt-5",
+    //   //@ts-expect-error
+    //   field: {
+    //     type: Field.div,
+    //     id: "div-field",
+    //     className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
+    //     children:
+    //       count &&
+    //       generateAddressChildren(register, count, translate, append, remove),
+    //   },
+    // },
 
     {
       containerClass: "mt-5",
@@ -93,10 +93,10 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.description",
               name: "offerContent.description",
               control,
-              value:
-                (contentDetails?.id &&
-                  contentDetails?.offerContent?.description) ||
-                "",
+              // value:
+              //   (contentDetails?.id &&
+              //     contentDetails?.offerContent?.description) ||
+              //   "",
             },
           },
           {
@@ -112,9 +112,9 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
               id: "offerContent.body",
               name: "offerContent.body",
               control,
-              value:
-                (contentDetails?.id && contentDetails?.offerContent?.body) ||
-                "",
+              // value:
+              //   (contentDetails?.id && contentDetails?.offerContent?.body) ||
+              //   "",
             },
           },
 
@@ -143,15 +143,37 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-6",
+      containerClass: "mt-6",
       field: {
-        type: Field.button,
-        id: "button",
-        text: `${translate("common.next_button")}`,
-        inputType: "submit",
-        className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-        loading,
+        type: Field.div,
+        id: "div-field",
+        className: "flex items-center space-x-[18px] ",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: `${translate("content.details.cancel_button")}`,
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
+              onClick: OnClick,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: `${translate("content.details.save_changes_button")}`,
+              inputType: "submit",
+              className:
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];
@@ -186,17 +208,17 @@ const generateAddressChildren = (
       },
     });
   }
-  addressformFields.push({
-    containerClass: "mb-0 mt-8",
-    field: {
-      type: Field.button,
-      id: "button",
-      text: `${translate("common.add_new_address")}`,
-      inputType: "button",
-      className:
-        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-      onClick: () => append && append({ address: "" }),
-    },
-  });
+  // addressformFields.push({
+  //   containerClass: "mb-0 mt-8",
+  //   field: {
+  //     type: Field.button,
+  //     id: "button",
+  //     text: `${translate("common.add_new_address")}`,
+  //     inputType: "button",
+  //     className:
+  //       "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+  //     onClick: () => append && append({ address: "" }),
+  //   },
+  // });
   return addressformFields;
 };

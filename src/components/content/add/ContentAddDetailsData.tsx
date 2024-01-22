@@ -97,7 +97,10 @@ const ContentAddDetailsData = () => {
       <AddInoviceContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addReceiptContent]: (
-      <AddReceiptContentDetails onHandleNext={handleNextTab} />
+      <AddReceiptContentDetails 
+      onHandleBack={onHandleBack}
+      
+      onHandleNext={handleNextTab} />
     ),
   };
 

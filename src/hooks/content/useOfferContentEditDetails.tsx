@@ -16,7 +16,7 @@ import {
   mergeSchemas,
 } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import {
   generateAddressFields,
   setAddressFieldValues,
@@ -45,9 +45,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
       []
   );
 
-  const backHandle = () => {
-    onClick(0, ComponentsType.offerContent);
-  };
+ 
   const handleAddAddressField = () => {
     setAddressCount(addressCount + 1);
   };
@@ -65,8 +63,10 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
-  useMemo(() => {
+  const handleBack = () => {
+   onClick(0, ComponentsType.offerContent)
+  };
+  useEffect(() => {
     if (contentDetails?.id) {
       reset({
         contentName: contentDetails?.contentName,
@@ -92,7 +92,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     register,
     loading,
     control,
-    handleAddAddressField,
+    handleBack,
     trigger,
     addressFields?.length === 0 ? 1 : addressFields?.length,
     attachements,

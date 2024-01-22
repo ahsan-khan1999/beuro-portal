@@ -54,9 +54,9 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
       reset({
         invoiceContent: {
           ...contentDetails?.invoiceContent,
-          attachments:
-            contentDetails?.offerContent?.attachments?.length > 0 &&
-            contentDetails?.offerContent?.attachments[0] || null,
+          // attachments:
+          //   contentDetails?.offerContent?.attachments?.length > 0 &&
+          //   contentDetails?.offerContent?.attachments[0] || null,
         }
       });
     }
