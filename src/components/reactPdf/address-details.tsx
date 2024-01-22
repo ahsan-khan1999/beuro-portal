@@ -140,7 +140,7 @@ export const AddressDetails = ({
           //     </Text>
           //   </View>
           // </View>
-          <Row>
+          <Row key={index}>
             <GridItem width={labelWidth}>
               <Text
                 style={{
@@ -148,7 +148,6 @@ export const AddressDetails = ({
                   fontWeight: 500,
                   fontStyle: "medium",
                   color: "#000",
-                  backgroundColor: "#ccc",
                 }}
               >
                 {address?.label}
