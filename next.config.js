@@ -16,7 +16,16 @@ const nextConfig = {
       },
     ],
   },
-
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Exclude fs module from @react-pdf/pdfkit
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
 }
 
 module.exports = withBundleAnalyzer(nextConfig)

@@ -107,6 +107,18 @@ export const useServiceOfferEditDetail = ({
         `serviceDetail.${index}.description`,
         selectedService[0].description
       );
+      setValue(
+        `serviceDetail.${index}.discount`,
+        0
+      );
+      setValue(
+        `serviceDetail.${index}.totalPrice`,
+        0
+      );
+      setValue(
+        `serviceDetail.${index}.count`,
+        0
+      );
     }
   };
 
@@ -135,13 +147,17 @@ export const useServiceOfferEditDetail = ({
       `serviceDetail.${index}.serviceTitle`,
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
     );
+    setValue(
+      `serviceDetail.${index}.discount`,
+      offerDetails?.serviceDetail?.serviceDetail[index]?.discount
+    );
   };
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
       let totalPrice =
         (Number(data?.serviceDetail[index]?.price) *
-          Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount));
+          Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount || 0));
 
       if (data?.serviceDetail[index]?.discount > totalPrice) {
         setValue(`serviceDetail.${index}.totalPrice`, 0);
@@ -167,9 +183,8 @@ export const useServiceOfferEditDetail = ({
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && String(taxType) === "1"
           ? calculateTax(totalPrices, data?.taxAmount || 0)
-          :100;
+          :0;
     let discount = 0;
-    console.log(data?.taxAmount,"data?.taxAmount",taxAmount);
     
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
@@ -274,6 +289,8 @@ export const useServiceOfferEditDetail = ({
       setValue(`serviceDetail.${index}.unit`, ``);
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
+      setValue(`serviceDetail.${index}.discount`, ``);
+
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
@@ -291,6 +308,8 @@ export const useServiceOfferEditDetail = ({
       setValue(`serviceDetail.${index}.unit`, ``);
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
+      setValue(`serviceDetail.${index}.discount`, ``);
+
     }
   };
 

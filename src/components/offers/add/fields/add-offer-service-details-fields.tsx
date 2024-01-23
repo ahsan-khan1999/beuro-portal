@@ -184,14 +184,14 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "grid grid-cols xl:grid-cols-3 gap-x-3 gap-y-5",
+          className: "flex gap-x-3 gap-y-5",
           children: [
             {
               containerClass: "mb-0 col-span-1",
               field: {
                 type: Field.div,
                 id: "div-field",
-                className: "mb-0 grid grid-cols-3 gap-3",
+                className: "mb-0 grid grid-cols-5 gap-3",
                 children: [
                   {
                     containerClass: "mb-0 col-span-1",
@@ -254,16 +254,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       onChange: () => generatePrice && generatePrice(i),
                     },
                   },
-                ],
-              },
-            },
-            {
-              containerClass: "mb-0 col-span-2",
-              field: {
-                type: Field.div,
-                id: "div-field",
-                className: "mb-0 grid grid-cols-2 gap-3",
-                children: [
                   {
                     containerClass: "mb-0 ",
                     label: {
@@ -307,6 +297,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 ],
               },
             },
+         
           ],
         },
       },

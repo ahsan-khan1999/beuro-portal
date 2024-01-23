@@ -2,6 +2,7 @@ import { PdfPreviewProps } from "@/types";
 import {
   Document,
   Font,
+  PDFViewer,
   Page,
   StyleSheet,
   Text,
