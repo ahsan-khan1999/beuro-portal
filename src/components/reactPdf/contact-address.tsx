@@ -22,7 +22,7 @@ export const ContactAddress = ({
       <Text style={textBase}>{`${address?.postalCode} ${address?.city}`}</Text>
     </View>
     <View style={rightColumn}>
-      <View style={{ display: "flex", flexDirection: "row", marginBottom: 6 }}>
+      <View style={{ display: "flex", flexDirection: "row" }}>
         <Text
           style={{
             fontSize: 10,
