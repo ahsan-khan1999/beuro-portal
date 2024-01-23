@@ -46,6 +46,7 @@ export const ServiceTableHederRow = () => {
           <Text style={styles.headerText}>{"Preis"}</Text>
           <Text style={styles.headerText}>{"Einheit"}</Text>
           <Text style={styles.headerText}>{"Anzahl"}</Text>
+          <Text style={styles.headerText}>{"Rabatt"}</Text>
           <Text style={styles.headerText}>{"Gesamt"}</Text>
         </View>
       </View>

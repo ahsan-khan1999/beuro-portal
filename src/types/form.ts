@@ -53,6 +53,14 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   step?: string;
 }
 
+export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
 // textarea added
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
   register: UseFormRegister<FieldValues>;
@@ -306,6 +314,7 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
+  | Field.colorPicker
   | Field.textArea
   | Field.ckEditor
   // | Field.creditCardNumberInput
@@ -330,6 +339,7 @@ export type FieldType =
 
 export type FieldProps =
   | InputProps
+  | ColorPickerProps
   | TextAreaProps
   | CKEditorProps
   | InputWithCopyProps
@@ -363,6 +373,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  colorPicker: React.FC<ColorPickerProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
   // ckEditorBox: React.FC<CKEditorBoxProps>;

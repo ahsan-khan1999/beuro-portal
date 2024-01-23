@@ -2,6 +2,7 @@ import { PdfPreviewProps } from "@/types";
 import {
   Document,
   Font,
+  PDFViewer,
   Page,
   StyleSheet,
   Text,
@@ -137,7 +138,10 @@ const PdfFile = ({
 
 const styles = StyleSheet.create({
   body: {
+    fontFamily: 'Poppins',
     paddingBottom: 100,
+    fontFamily: "Poppins",
+    
   },
 });
 

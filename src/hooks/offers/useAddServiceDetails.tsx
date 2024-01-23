@@ -90,7 +90,7 @@ export const useAddServiceDetails = (
   const taxType = watch("taxType");
   const discountType = watch("discountType");
   const discountAmount = watch("discountAmount");
-  const taxPercentage = watch("taxPercentage");
+  const taxPercentage = watch("taxAmount");
 
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
@@ -106,14 +106,27 @@ export const useAddServiceDetails = (
         `serviceDetail.${index}.description`,
         selectedService[0].description
       );
+      setValue(
+        `serviceDetail.${index}.discount`,
+        0
+      );
+      setValue(
+        `serviceDetail.${index}.totalPrice`,
+        0
+      );
+      setValue(
+        `serviceDetail.${index}.count`,
+        0
+      );
+      
     }
   };
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
       let totalPrice =
-        Number(data?.serviceDetail[index]?.price) *
-        Number(data?.serviceDetail[index]?.count);
+        (Number(data?.serviceDetail[index]?.price) *
+          Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount || 0));
       setValue(`serviceDetail.${index}.totalPrice`, totalPrice);
       generateGrandTotal();
     }, 10);
@@ -128,11 +141,11 @@ export const useAddServiceDetails = (
     );
 
     let taxAmount =
-      isTax && taxType == "0"
+      isTax && String(taxType) == "0"
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
-        : isTax && taxType == "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+        : isTax && String(taxType) == "1"
+          ? calculateTax(totalPrices, data?.taxAmount || 0)
+          : 0;
     let discount = 0;
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
@@ -167,13 +180,13 @@ export const useAddServiceDetails = (
 
   useMemo(() => {
     if (offerDetails.id) {
-      setTotal({
-        taxAmount: Number(
-          (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
-        ),
-        subTotal: offerDetails?.subTotal,
-        grandTotal: offerDetails?.total,
-      });
+      // setTotal({
+      //   taxAmount: Number(
+      //     (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
+      //   ),
+      //   subTotal: offerDetails?.subTotal,
+      //   grandTotal: offerDetails?.total,
+      // });
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
         isTax: offerDetails?.isTax,
@@ -182,12 +195,12 @@ export const useAddServiceDetails = (
         taxType: staticEnums["TaxType"][offerDetails?.taxType],
         discountAmount: offerDetails?.discountAmount || "",
         discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount,
+        taxAmount: offerDetails?.taxAmount || 0,
       });
     } else {
       // setValue("taxType",systemSettings?.taxType)
     }
-    generateGrandTotal();
+    // generateGrandTotal();
   }, [offerDetails.id]);
 
   const {
@@ -240,6 +253,10 @@ export const useAddServiceDetails = (
       `serviceDetail.${index}.serviceTitle`,
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
     );
+    setValue(
+      `serviceDetail.${index}.discount`,
+      offerDetails?.serviceDetail?.serviceDetail[index]?.discount
+    );
   };
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
     const updatedService = serviceType.map((type, i) =>
@@ -251,13 +268,13 @@ export const useAddServiceDetails = (
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
+      "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
+      "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -265,16 +282,18 @@ export const useAddServiceDetails = (
       setValue(`serviceDetail.${index}.unit`, ``);
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
+      setValue(`serviceDetail.${index}.discount`, ``);
+
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
+      "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
+      "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -282,6 +301,8 @@ export const useAddServiceDetails = (
       setValue(`serviceDetail.${index}.unit`, ``);
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
+      setValue(`serviceDetail.${index}.discount`, ``);
+
     }
   };
 

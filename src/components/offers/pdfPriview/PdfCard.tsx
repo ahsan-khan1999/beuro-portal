@@ -60,7 +60,7 @@ const EmailCard = ({
             </svg>
           </span>
           <h1 className="text-[#4B4B4B] text-2xl font-medium">
-            {translate("offer_pdf_card.offer_detail")}
+            {translate("offers.card_content.main_heading")}
           </h1>
         </div>
 

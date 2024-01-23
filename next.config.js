@@ -21,10 +21,8 @@ const nextConfig = {
         fs: false,
       };
     }
-
     return config;
   },
-
 }
 
 module.exports = nextConfig

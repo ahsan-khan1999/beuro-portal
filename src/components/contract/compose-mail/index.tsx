@@ -11,6 +11,7 @@ const ContractMail = () => {
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
   };
+  
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
