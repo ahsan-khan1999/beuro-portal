@@ -198,7 +198,9 @@
     },
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
-    "value_max": "value_max"
+    "value_max": "value_max",
+    "discountLessThanTotalPrice":"muss geringer sein als der Gesamtpreis"
+
   },
   "sidebar": {
     "customer": {

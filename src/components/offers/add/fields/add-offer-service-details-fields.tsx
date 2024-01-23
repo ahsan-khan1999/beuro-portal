@@ -29,6 +29,7 @@ const serviceObject = {
   description: "",
   totalPrice: "",
   serviceType: "Existing Service",
+  discount:0
 };
 
 export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
@@ -193,7 +194,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                 className: "mb-0 grid grid-cols-3 gap-3",
                 children: [
                   {
-                    containerClass: "mb-0 col-span-2",
+                    containerClass: "mb-0 col-span-1",
                     label: {
                       text: `${translate("offers.service_details.price")}`,
                       htmlFor: `serviceDetail.${i}.price`,
@@ -206,7 +207,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       inputType: "number",
                       id: `serviceDetail.${i}.price`,
                       name: `serviceDetail.${i}.price`,
-                      placeholder: "10000 CHF",
+                      placeholder: "10000",
                       register,
                       onChange: () => generatePrice && generatePrice(i),
                     },
@@ -227,6 +228,27 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       inputType: "number",
                       id: `serviceDetail.${i}.count`,
                       name: `serviceDetail.${i}.count`,
+                      placeholder: "10",
+                      register,
+                      onChange: () => generatePrice && generatePrice(i),
+                    },
+                  },
+                  {
+                    containerClass: "mb-0 col-span-1",
+                    label: {
+                      text: `${translate(
+                        "offers.service_details.detail_headings.discount"
+                      )}`,
+                      htmlFor: `serviceDetail.${i}.discount`,
+                      className: "mb-[10px]",
+                    },
+                    field: {
+                      type: Field.input,
+                      className:
+                        "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                      inputType: "number",
+                      id: `serviceDetail.${i}.discount`,
+                      name: `serviceDetail.${i}.discount`,
                       placeholder: "10",
                       register,
                       onChange: () => generatePrice && generatePrice(i),

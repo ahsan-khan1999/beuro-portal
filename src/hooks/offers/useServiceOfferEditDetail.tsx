@@ -61,7 +61,7 @@ export const useServiceOfferEditDetail = ({
 
   useEffect(() => {
     dispatch(
-      readService({ params: { filter: {  }, paginate: 0 } })
+      readService({ params: { filter: {}, paginate: 0 } })
     );
     dispatch(readTaxSettings({}));
   }, []);
@@ -91,7 +91,7 @@ export const useServiceOfferEditDetail = ({
   const taxType = watch("taxType");
   const discountType = watch("discountType");
   const discountAmount = watch("discountAmount");
-  const taxPercentage = watch("taxPercentage");
+  const taxPercentage = watch("taxAmount");
 
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
@@ -140,9 +140,16 @@ export const useServiceOfferEditDetail = ({
     const data = getValues();
     setTimeout(() => {
       let totalPrice =
-        Number(data?.serviceDetail[index]?.price) *
-        Number(data?.serviceDetail[index]?.count);
-      setValue(`serviceDetail.${index}.totalPrice`, totalPrice);
+        (Number(data?.serviceDetail[index]?.price) *
+          Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount));
+
+      if (data?.serviceDetail[index]?.discount > totalPrice) {
+        setValue(`serviceDetail.${index}.totalPrice`, 0);
+
+      }else{
+        setValue(`serviceDetail.${index}.totalPrice`, totalPrice);
+
+      }
       generateGrandTotal();
     }, 10);
   };
@@ -159,9 +166,11 @@ export const useServiceOfferEditDetail = ({
       isTax && taxType == "0"
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && taxType == "1"
-        ? calculateTax(totalPrices, data?.taxPercentage || 0)
-        : 0;
+          ? calculateTax(totalPrices, data?.taxAmount || 0)
+          : 0;
     let discount = 0;
+    console.log(taxAmount,"taxAmount",isTax,"isTax",taxType,"data",data);
+    
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
       if (!+discountType && discountAmount > 100) {
@@ -195,10 +204,11 @@ export const useServiceOfferEditDetail = ({
 
   useMemo(() => {
     if (offerDetails.id) {
+      const tax = calculateTax(offerDetails?.subTotal, offerDetails?.taxAmount )
+      console.log(tax,"tax");
+      
       setTotal({
-        taxAmount: Number(
-          (offerDetails.total - offerDetails.subTotal).toFixed(2)
-        ),
+        taxAmount: tax,
         subTotal: offerDetails.subTotal,
         grandTotal: offerDetails.total,
       });
@@ -252,13 +262,13 @@ export const useServiceOfferEditDetail = ({
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
+      "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
+      "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -269,13 +279,13 @@ export const useServiceOfferEditDetail = ({
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
+      "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
+      "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
