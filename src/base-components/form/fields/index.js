@@ -1,4 +1,5 @@
 export { InputField } from "./input-field";
+export { ColorPicker } from './color-picker';
 export { SelectField } from "./select/select-field";
 export { TelephoneInputField } from "./telephone-input-field";
 export { PasswordField } from "./password-field";

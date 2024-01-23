@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -23,6 +23,8 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     control,
     setError,
     reset,
+    setValue,
+    watch,
     trigger,
     formState: { errors },
   } = useForm<FieldValues>({
@@ -37,9 +39,15 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     register,
     loading,
     emailSettings,
-    control
+    control,
+    setValue,
+    {
+      textColor: emailSettings?.textColour,
+      footerColor: emailSettings?.FooterColour,
+    }
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     const response = await dispatch(
       updateEmailTemplateSetting({ data, router, setError, translate })
     );

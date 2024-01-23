@@ -6,7 +6,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
   register,
   loading,
   emailSettings,
-  control
+  control,
+  setValue,
+  data,
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -138,13 +140,14 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.input,
+              type: Field.colorPicker,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "text",
               id: "FooterColour",
               name: "FooterColour",
               placeholder: "45Dkk6",
               register,
+              setValue,
+              value: data?.footerColor,
             },
           },
           {
@@ -157,13 +160,14 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.input,
+              type: Field.colorPicker,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "text",
               id: "textColour",
               name: "textColour",
               placeholder: "45Dkk6",
+              value: data?.textColor,
               register,
+              setValue
             },
           },
         ],
