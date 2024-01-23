@@ -204,7 +204,7 @@
   },
   "sidebar": {
     "customer": {
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Dashboard",
       "customers": "Kunden",
       "leads": {
         "leads": "Lead",

@@ -61,7 +61,7 @@ export const detailScreensValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.mwstNumber]: yup
-      .number()
+      .string()
       .required(translate("validationMessages.required")),
     [CompanyFields.companyLogo]: yup.string().required(),
   });

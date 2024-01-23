@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
-const { hostname } = require('os');
 const { i18n } = require("./next-i18next.config");
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+
 const nextConfig = {
   reactStrictMode: true,
   i18n,
@@ -28,4 +25,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withBundleAnalyzer(nextConfig)
+module.exports = nextConfig
