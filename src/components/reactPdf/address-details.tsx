@@ -4,6 +4,7 @@ import { CustomerAddress } from "@/types/leads";
 import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 // Define your styles
 const styles = StyleSheet.create({
@@ -180,13 +181,13 @@ export const AddressDetails = ({
             width: "20%",
           }}
         >
-          Arbeitstermine:
+          Auftragsdatum:
         </Text>
         <View style={styles.datesColumn}>
           {workDates?.map((date, index) => (
             <Text style={styles.dateText} key={index}>
-              {`${date.startDate}${
-                date.endDate ? " to " + date.endDate + "," : ""
+              {`${formatDateTimeToDate(date.startDate)}${
+                date.endDate ? " bis " + formatDateTimeToDate(date.endDate) + (workDates?.length -1 != index &&", " || "." ): workDates?.length -1 != index &&", " || "."
               }`}
             </Text>
           ))}

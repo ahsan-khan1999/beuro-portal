@@ -407,7 +407,7 @@ export function formatDateReverse(date: string) {
   return moment(date).format("hh:mm:ss, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
-  return moment(date).format("YYYY-MM-DD");
+  return moment(date).format("DD-MM-YYYY");
 }
 export function formatDateTimeToTime(date: string) {
   return moment(date).format("hh:mm: A");

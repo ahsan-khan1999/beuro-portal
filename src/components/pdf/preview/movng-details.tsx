@@ -1,5 +1,5 @@
 import { MovingDetailsProps } from "@/types/types";
-import { formatAddress } from "@/utils/utility";
+import { formatAddress, formatDateTimeToDate } from "@/utils/utility";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -111,14 +111,11 @@ export const MovingDetails = ({
 
         {workDates?.map((item, index) => (
           <div className="flex gap-[30px] mb-[46px] mt-2" key={index}>
-            <span className="min-w-[100px]">Work Dates:</span>
+            <span className="min-w-[100px]">Auftragsdatum:</span>
             <span className="text-[#000] text-base font-normal">
 
-              {
-                item?.endDate &&
-                item.startDate + " to " + item?.endDate + ", "||
-                item.startDate
-              }
+              {`${formatDateTimeToDate(item.startDate)}${item.endDate ? " bis " + formatDateTimeToDate(item.endDate) + (workDates?.length - 1 != index && ", " || ".") : workDates?.length - 1 != index && ", " || "."
+                }`}
             </span>
           </div>
         ))}
