@@ -151,6 +151,8 @@ export default PdfDownload;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
-    height: '895px'
+    height: '895px',
+    fontFamily: "Poppins",
+
   },
 });

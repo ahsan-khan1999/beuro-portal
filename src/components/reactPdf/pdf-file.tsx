@@ -139,6 +139,8 @@ const PdfFile = ({
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 100,
+    fontFamily: "Poppins",
+    
   },
 });
 
