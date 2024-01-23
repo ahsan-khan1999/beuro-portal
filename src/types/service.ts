@@ -16,6 +16,7 @@ export interface Service {
   description: string;
   createdAt: string;
   refID:string
+  discount:number
 
 }
 

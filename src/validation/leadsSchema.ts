@@ -131,7 +131,7 @@ export const generateLeadsServiceEditDetailsValidation = (
 
     [LeadsServiceEditDetails.budget]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()

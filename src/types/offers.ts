@@ -181,6 +181,7 @@ export interface ServiceList {
   description: string;
   count: number;
   pagebreak: boolean;
+  discount:number
 }
 export interface EmailStatus {
   Pending: number;

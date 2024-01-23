@@ -21,7 +21,8 @@ import {
   ImageUploadField,
   MultiSelectField,
   AddFiled,
-  ToggleButton
+  ToggleButton,
+  ColorPicker,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -36,6 +37,7 @@ import { ProfileControllerField } from "./fields/profile_field/profile_upload_co
 
 const fieldComponents: FieldComponents = {
   input: InputField,
+  colorPicker: ColorPicker,
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
@@ -81,6 +83,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
 export function isFieldType(type: any): type is FieldType {
   return [
     "input",
+    "colorPicker",
     "textArea",
     "ckEditor",
     "creditCardExpiryDateInput",

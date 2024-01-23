@@ -77,6 +77,7 @@ export const ServiceTableRow = ({
   totalPrice,
   pagebreak,
   unit,
+  discount
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
@@ -89,6 +90,7 @@ export const ServiceTableRow = ({
           <Text style={styles.headerText}>{price}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
+          <Text style={styles.headerTotal}>{discount}</Text>
           <Text style={styles.headerTotal}>{totalPrice}</Text>
         </View>
       </View>
