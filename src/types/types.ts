@@ -242,7 +242,9 @@ export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   emailSettings: EmailSetting | null,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  setValue?: UseFormSetValue<FieldValues>,
+  data?: any,
 ) => FormField[];
 
 // edit payment details formfield
