@@ -68,9 +68,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
           id: "button",
           text: `${translate("common.remove_button")}`,
           inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-            i === 0 && "hidden"
-          }`,
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
+            }`,
           onClick: () => remove(i),
         },
       },
@@ -208,6 +207,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       name: `serviceDetail.${i}.price`,
                       placeholder: "10000 CHF",
                       register,
+                      step: "0.01",
+
                       onChange: () => generatePrice && generatePrice(i),
                     },
                   },
@@ -280,6 +281,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       name: `serviceDetail.${i}.totalPrice`,
                       placeholder: "1000CHF",
                       register,
+                      step: "0.01",
+
                     },
                   },
                 ],
@@ -681,6 +684,8 @@ const generateServiceCalulationChildren = (
                   value: offerDetails?.id && offerDetails?.discountAmount,
                   disabled: !isDiscount,
                   setValue,
+                  step: "0.01",
+
                   // onChange: generateTotal
                 },
               },
