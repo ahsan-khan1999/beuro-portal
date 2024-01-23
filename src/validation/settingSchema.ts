@@ -93,7 +93,7 @@ export const generateProfileSettingValidation = (translate: Function) => {
         .string()
         .required(translate("validationMessages.required")),
       [SettingProfile.mwstNumber]: yup
-        .number()
+        .string()
         .required(translate("validationMessages.required")),
       address: yup.object().shape({
         [SettingProfile.streetAddress]: yup
