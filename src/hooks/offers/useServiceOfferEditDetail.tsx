@@ -158,7 +158,7 @@ export const useServiceOfferEditDetail = ({
     const data = getValues();
     const totalPrices = data?.serviceDetail?.reduce(
       (acc: number, element: any) =>
-        acc + parseInt(element.totalPrice || 0, 10),
+        acc + parseInt(element.totalPrice || 0),
       0
     );
 
@@ -167,9 +167,9 @@ export const useServiceOfferEditDetail = ({
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && String(taxType) === "1"
           ? calculateTax(totalPrices, data?.taxAmount || 0)
-          : 0;
+          :100;
     let discount = 0;
-    console.log(data?.taxAmount,"data?.taxAmount",totalPrices,"totalPrices");
+    console.log(data?.taxAmount,"data?.taxAmount",taxAmount);
     
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
@@ -204,9 +204,7 @@ export const useServiceOfferEditDetail = ({
 
   useMemo(() => {
     if (offerDetails.id) {
-      const tax = calculateTax(offerDetails?.subTotal, offerDetails?.taxAmount )
-      console.log(tax,"tax");
-      
+      // const tax = calculateTax(offerDetails?.subTotal, offerDetails?.taxAmount )
       // setTotal({
       //   taxAmount: tax,
       //   subTotal: offerDetails.subTotal,
@@ -224,7 +222,7 @@ export const useServiceOfferEditDetail = ({
         taxAmount: offerDetails?.taxAmount || 0,
       });
     }
-    generateGrandTotal();
+    // generateGrandTotal();
   }, [offerDetails.id]);
 
   const {

@@ -528,9 +528,9 @@ const generateServiceCalulationChildren = (
         name: "taxAmount",
         control,
         className: "h-10 !px-8",
-        value:
-          offerDetails?.id &&
-          calculatePercentage(offerDetails?.taxAmount, offerDetails?.subTotal),
+        // value:
+        //   offerDetails?.id &&
+        //   calculatePercentage(offerDetails?.taxAmount, offerDetails?.subTotal),
       },
     };
   }
