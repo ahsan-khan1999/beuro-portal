@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import { Language } from "@/types";
+import { FlagType, Language } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-const DUMMY_LIST = [
+const FLAG_LIST = [
   {
-    code: "en",
+    code: FlagType.en,
     name: "English",
   },
   {
-    code: "de",
+    code: FlagType.de,
     name: "German",
   },
  
@@ -22,7 +22,7 @@ export const useLanguageSeleclor = () => {
   const router = useRouter()
   const dropdownRef = useRef<HTMLButtonElement>(null);
 
-  const selectedLanguage = DUMMY_LIST.find(
+  const selectedLanguage = FLAG_LIST.find(
     (language) => language.code === i18n.language
   );
 
@@ -43,7 +43,7 @@ export const useLanguageSeleclor = () => {
 
 
   useEffect(() => {
-    setLanguages(DUMMY_LIST as Language[]);
+    setLanguages(FLAG_LIST);
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {

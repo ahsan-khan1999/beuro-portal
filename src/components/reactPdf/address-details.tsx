@@ -72,7 +72,7 @@ export const AddressDetails = ({
               fontWeight: 500,
               fontStyle: "medium",
               color: "#000",
-              width: 90,
+              width: '20%',
             }}
           >
             {address?.label}:
@@ -83,6 +83,7 @@ export const AddressDetails = ({
               fontWeight: 400,
               fontStyle: "normal",
               color: "#000",
+              width: '80%'
             }}
           >
             {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
@@ -99,7 +100,7 @@ export const AddressDetails = ({
           fontWeight: 500,
           fontStyle: "medium",
           color: "#000",
-          width: 90,
+          width: '20%',
         }}
       >
         Arbeitstermine:
