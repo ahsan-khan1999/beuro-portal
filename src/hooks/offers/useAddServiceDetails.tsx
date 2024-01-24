@@ -127,7 +127,7 @@ export const useAddServiceDetails = (
       let totalPrice =
         (Number(data?.serviceDetail[index]?.price) *
           Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount || 0));
-      setValue(`serviceDetail.${index}.totalPrice`, totalPrice);
+      setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
       generateGrandTotal();
     }, 10);
   };

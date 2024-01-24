@@ -193,7 +193,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         ],
       },
     },
-
+   
     {
       containerClass: "mb-0 mt-5",
       label: {

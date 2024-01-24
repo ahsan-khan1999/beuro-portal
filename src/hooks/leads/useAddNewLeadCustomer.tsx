@@ -57,17 +57,21 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+      });
+
+    }
   };
- 
+
   useEffect(() => {
     if (leadDetails.id) {
       reset({

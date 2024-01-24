@@ -176,10 +176,15 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
+    
   };
 
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
   
@@ -254,5 +259,6 @@ export default function useOfferDetails() {
     handleSendByPost,
     handleUpdateDiscount,
     systemSettings,
+    handleUpdateAdditionalDetailsModal
   };
 }

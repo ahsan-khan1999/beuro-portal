@@ -22,6 +22,7 @@ const ContractDetails = () => {
     onNextHandle,
     loading,
     handleViewPdf,
+    handleUpdateAdditionalDetailsModal
   } = useContractDetail();
 
   return (
@@ -36,6 +37,7 @@ const ContractDetails = () => {
           handleStatusUpdate={handleStatusUpdate}
           handleSendEmail={handleSendEmail}
           isSendEmail={isSendEmail}
+          handleUpdateAdditionalDetailsModal={handleUpdateAdditionalDetailsModal}
         />
       </div>
 
@@ -51,6 +53,8 @@ const ContractDetails = () => {
               handleStatusUpdate={handleStatusUpdate}
               handleSendEmail={handleSendEmail}
               isSendEmail={isSendEmail}
+          handleUpdateAdditionalDetailsModal={handleUpdateAdditionalDetailsModal}
+
             />
           </div>
           <div className="mt-5">
