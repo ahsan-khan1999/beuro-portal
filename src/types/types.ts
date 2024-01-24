@@ -659,7 +659,8 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt"
+  fileType?: "contract" | "invoice" | "receipt";
+  companyName?:string
 }
 
 export interface ProductItemFooterProps {
@@ -675,6 +676,7 @@ export interface ProductItemFooterProps {
   systemSettings?: SystemSetting | null;
   discountType?:keyof typeof staticEnums["DiscountType"];
   taxType?:keyof typeof staticEnums["TaxType"];
+  serviceDiscountSum?:number
 
 }
 

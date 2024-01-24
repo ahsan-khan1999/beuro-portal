@@ -65,12 +65,12 @@ export const {
   leftColumn: {
     display: "flex",
     flexDirection: "column",
-    rowGap: 4,
+    rowGap: 0,
     width: "60%",
   },
   rightColumn: {
     flexDirection: "column",
-    rowGap: 4,
+    rowGap: 0,
     width: "40%",
   },
   textBase: {

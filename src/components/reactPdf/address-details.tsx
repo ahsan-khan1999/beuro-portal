@@ -72,7 +72,6 @@ export const AddressDetails = ({
 
   const labelWidth = MaxLength * 5;
 
-  console.log(labelWidth, MaxLength);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
@@ -178,7 +177,7 @@ export const AddressDetails = ({
             fontWeight: 500,
             fontStyle: "medium",
             color: "#000",
-            width: "20%",
+            width: "25%",
           }}
         >
           Auftragsdatum:

@@ -38,7 +38,6 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
   });
 
   useEffect(() => {
-    console.log(contentDetails, "contentDetails");
 
     if (contentDetails.id) {
       reset({

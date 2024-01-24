@@ -71,7 +71,8 @@ export const ServicesTotalAmount = ({
   invoiceAmount,
   invoiceStatus,
   discountType,
-  taxType
+  taxType,
+  serviceDiscountSum
 }: Partial<ProductItemFooterProps>) => {
 
   const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
@@ -79,7 +80,8 @@ export const ServicesTotalAmount = ({
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
   const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
   const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
-  
+
+
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -113,7 +115,7 @@ export const ServicesTotalAmount = ({
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Rabatt: </Text>
-            <Text style={styles.text}>{calculatedDiscount} </Text>
+            <Text style={styles.text}>{serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || calculatedDiscount} </Text>
           </View>
           {!isShowExtraAmount ? (
             <View style={styles.totalSection}>

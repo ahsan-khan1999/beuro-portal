@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
-export const useSyncState = function (initialValue) {
-  const [value, updateValue] = useState(initialValue);
+// export const useSyncState = function (initialValue) {
+//   const [value, updateValue] = useState(initialValue);
 
-  let current = value;
+//   let current = value;
 
-  const get = () => current;
+//   const get = () => current;
 
-  const set = (newValue) => {
-    current = newValue;
-    updateValue(newValue);
-    return current;
-  };
+//   const set = (newValue) => {
+//     current = newValue;
+//     updateValue(newValue);
+//     return current;
+//   };
 
-  return {
-    get,
-    set,
-  };
-};
+//   return {
+//     get,
+//     set,
+//   };
+// };
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;

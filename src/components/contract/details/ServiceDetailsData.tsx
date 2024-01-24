@@ -14,6 +14,10 @@ const ServiceDetailsData = ({
   currency?: string;
 }) => {
   const { t: translate } = useTranslation();
+  const totalDiscount = contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+    const price = service?.discount || 0;
+    return acc + price;
+  }, 0)
   return (
     <div
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] w-full h-fit "
@@ -100,7 +104,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.discount")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractDetails?.offerID?.discountType === "Amount" ? contractDetails?.offerID?.discountAmount : calculateTax(contractDetails?.offerID?.total, Number(contractDetails?.offerID?.discountAmount))}
+                  {contractDetails?.offerID?.discountType === "Amount" ? (contractDetails?.offerID?.discountAmount + totalDiscount) : (calculateTax(contractDetails?.offerID?.subTotal, Number(contractDetails?.offerID?.discountAmount)) + totalDiscount)}
                 </span>
               </div>
             </div>
