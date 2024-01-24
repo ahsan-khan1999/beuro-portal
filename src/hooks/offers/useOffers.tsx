@@ -1,4 +1,9 @@
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, DEFAULT_OFFER, staticEnums } from "@/utils/static";
+import {
+  DEFAULT_CUSTOMER,
+  DEFAULT_LEAD,
+  DEFAULT_OFFER,
+  staticEnums,
+} from "@/utils/static";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
@@ -42,8 +47,7 @@ const useOffers = () => {
       $lte: FiltersDefaultValues.$lte,
     },
     status: FiltersDefaultValues.None,
-    leadSource: FiltersDefaultValues.None
-
+    leadSource: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
 
@@ -52,13 +56,13 @@ const useOffers = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const handleFilterChange = (query: FilterType) => {
-    dispatch(readOffer({ params: { filter: query, page: currentPage, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Offer);
-        }
+    dispatch(
+      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Offer);
       }
-    );
+    });
   };
 
   useEffect(() => {
@@ -154,28 +158,42 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-
     if (query?.filter) {
       const statusValue = staticEnums["OfferStatus"][query?.filter as string];
       setFilter({
         ...filter,
-        status: [statusValue?.toString()]
+        status: [statusValue?.toString()],
       });
-      dispatch(readOffer({ params: { filter: { ...filter, status: [staticEnums["OfferStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-        }
-      );
+      dispatch(
+        readOffer({
+          params: {
+            filter: {
+              ...filter,
+              status: [staticEnums["OfferStatus"][query?.filter as string]],
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+      });
     } else {
       setFilter({
         ...filter,
-        status: "None"
+        status: "None",
       });
-      dispatch(readOffer({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-        }
-      );
+      dispatch(
+        readOffer({
+          params: {
+            filter: { ...filter, status: "None" },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+      });
     }
   }, [currentPage, query?.filter]);
 

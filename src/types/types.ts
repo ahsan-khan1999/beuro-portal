@@ -242,7 +242,9 @@ export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   emailSettings: EmailSetting | null,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  setValue?: UseFormSetValue<FieldValues>,
+  data?: any,
 ) => FormField[];
 
 // edit payment details formfield
@@ -355,7 +357,8 @@ export type GenerateOfferFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: OffersTableRowTypes,
   moreEmail?: { isCc: boolean, isBcc: boolean },
-  setMoreEmail?: SetStateAction<any>
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
 export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
@@ -370,7 +373,9 @@ export type GenerateContractFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: contractTableTypes,
   moreEmail?: { isCc: boolean, isBcc: boolean },
-  setMoreEmail?: SetStateAction<any>
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
+
 ) => FormField[];
 export type GenerateInvoiceEmailFormField = (
   register: UseFormRegister<FieldValues>,
@@ -385,7 +390,9 @@ export type GenerateInvoiceEmailFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: SubInvoiceTableRowTypes,
   moreEmail?: { isCc: boolean, isBcc: boolean },
-  setMoreEmail?: SetStateAction<any>
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
+
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
@@ -607,7 +614,7 @@ export interface FilterType {
   email?: string[] | string;
   price?: string[];
   month?: number;
-  leadSource?: string[] | string
+  leadSource?: string[] | string;
 }
 
 export interface MoreFilterType {
@@ -652,7 +659,8 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt"
+  fileType?: "contract" | "invoice" | "receipt";
+  companyName?:string
 }
 
 export interface ProductItemFooterProps {
@@ -666,6 +674,10 @@ export interface ProductItemFooterProps {
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
   systemSettings?: SystemSetting | null;
+  discountType?:keyof typeof staticEnums["DiscountType"];
+  taxType?:keyof typeof staticEnums["TaxType"];
+  serviceDiscountSum?:number
+
 }
 
 export interface ContactDetailsProps {
@@ -751,6 +763,11 @@ export interface TemplateSettigsFirstColumn {
   isPhoneNumber: boolean;
   isTaxNumber: boolean;
   isWebsite: boolean;
+  companyName: string;
+  email: string;
+  phoneNumber: string;
+  taxNumber: string;
+  website: string;
 }
 export interface TemplateSettigsSecondColumn {
   isAccountNumber: boolean;
@@ -758,6 +775,11 @@ export interface TemplateSettigsSecondColumn {
   isIBAN: boolean;
   isPostCode: boolean;
   isStreetNumber: boolean;
+  streetNumber: string;
+  postCode: string;
+  bankName: string;
+  accountNumber: string;
+  iban: string
 }
 export interface TemplateSettigsThirdColumn {
   isRow1: boolean;
@@ -765,6 +787,12 @@ export interface TemplateSettigsThirdColumn {
   isRow3: boolean;
   isRow4: boolean;
   isRow5: boolean;
+  row1: string;
+  row2: string;
+  row3: string;
+  row4: string;
+  row5: string;
+
 }
 export interface TemplateSettigsFourthColumn {
   isRow1: boolean;
@@ -772,6 +800,12 @@ export interface TemplateSettigsFourthColumn {
   isRow3: boolean;
   isRow4: boolean;
   isRow5: boolean;
+  row1: string;
+  row2: string;
+  row3: string;
+  row4: string;
+  row5: string;
+
 }
 export interface TemplateType {
   firstColumn: TemplateSettigsFirstColumn;
@@ -804,6 +838,7 @@ export interface EmailHeaderProps {
   onPrint: () => void;
   handleSendByPost: () => void;
   activeButtonId: string | null;
+  offerId?:string
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;

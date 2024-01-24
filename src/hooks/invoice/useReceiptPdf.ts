@@ -206,10 +206,8 @@ export const useReceiptPdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: calculateTax(
-                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal,
-                Number(TAX_PERCENTAGE)
-              )?.toString(),
+              tax:
+                invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
 
               discount:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
@@ -220,6 +218,12 @@ export const useReceiptPdf = () => {
               isShowExtraAmount: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              discountType: invoiceDetails?.invoiceID?.contractID?.offerID?.discountType,
+              taxType: invoiceDetails?.invoiceID?.contractID?.offerID?.taxType,
+              serviceDiscountSum: invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              }, 0)
             },
             footerDetails: {
               firstColumn: {

@@ -3,6 +3,7 @@ import { ProductItemFooterProps } from "@/types";
 import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
+import { calculatePercentage, calculateTax } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
 
@@ -68,12 +69,17 @@ export const ServicesTotalAmount = ({
   isShowExtraAmount,
   systemSettings,
   invoiceAmount,
-  invoiceStatus
+  invoiceStatus,
+  discountType,
+  taxType,
+  serviceDiscountSum
 }: Partial<ProductItemFooterProps>) => {
 
   const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
 
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
+  const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
+  const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
 
 
   return (
@@ -102,14 +108,14 @@ export const ServicesTotalAmount = ({
             <Text style={styles.text}>{Number(subTotal).toFixed(2)}</Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Steuer%: </Text>
+            <Text style={styles.text}>Steuer: </Text>
             <Text style={styles.text}>
-              {Number(tax).toFixed(2)} ({TAX_PERCENTAGE}%)
+              {Number(calculatedTax).toFixed(2)}  ({tax}%)
             </Text>
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>Rabatt: </Text>
-            <Text style={styles.text}>{discount} </Text>
+            <Text style={styles.text}>{serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || calculatedDiscount} </Text>
           </View>
           {!isShowExtraAmount ? (
             <View style={styles.totalSection}>

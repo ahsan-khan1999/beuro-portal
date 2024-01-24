@@ -67,8 +67,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       type: type,
     });
   };
-
-  useMemo(() => {
+ 
+  useEffect(() => {
     if (leadDetails.id) {
       reset({
         fullName: leadDetails.customerDetail?.fullName,

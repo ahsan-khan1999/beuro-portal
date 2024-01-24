@@ -13,6 +13,7 @@ import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { useEmptyStates } from "@/utils/hooks";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { BaseButton } from "../button/base-button";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -22,10 +23,10 @@ const ExistingNotes = ({
   handleAddNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
-  | Lead
-  | OffersTableRowTypes
-  | contractTableTypes
-  | InvoiceTableRowTypes;
+    | Lead
+    | OffersTableRowTypes
+    | contractTableTypes
+    | InvoiceTableRowTypes;
 }) => {
   const { notes, loading } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
@@ -79,9 +80,10 @@ const ExistingNotes = ({
           <>
             {notes?.map((item, key) => (
               <div
-                className={` mb-[10px]  ${notes?.length - 1 !== key &&
+                className={` mb-[10px]  ${
+                  notes?.length - 1 !== key &&
                   "border-b-[1px] border-lightGray "
-                  }pb-3 `}
+                }pb-3 `}
                 key={key}
               >
                 <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
@@ -112,8 +114,7 @@ const ExistingNotes = ({
     </BaseModal>,
     notes?.length > 0,
     loading
-  )
-
+  );
 
   return (
     <BaseModal
@@ -131,16 +132,38 @@ const ExistingNotes = ({
           <p className="text-2xl font-medium text-[#000]">
             {translate("common.notes_modal.heading")}
           </p>
-          <div className="flex justify-between items-center gap-[10px] ">
-            <Image
-              src={addNewNote}
-              alt="request_submitted"
+          <div className="flex justify-between items-center gap-[10px]">
+            {/* <svg
               onClick={() => handleAddNote(leadDetails?.id)}
-              className="cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              width="41"
+              height="41"
+              viewBox="0 0 41 41"
+              fill="none"
+            >
+              <rect
+                x="1.12305"
+                y="0.670898"
+                width="39"
+                height="39"
+                rx="7.5"
+                fill="white"
+                stroke="#4A13E7"
+              />
+              <path
+                d="M28.6242 19.4926H21.3018V12.1702C21.3018 11.7957 20.9982 11.4922 20.6238 11.4922C20.2493 11.4922 19.9458 11.7957 19.9458 12.1702V19.4926H12.6233C12.2489 19.4926 11.9453 19.7962 11.9453 20.1707C11.9453 20.5451 12.2489 20.8487 12.6233 20.8487H19.9458V28.1711C19.9458 28.5456 20.2493 28.8491 20.6238 28.8491C20.9982 28.8491 21.3018 28.5456 21.3018 28.1711V20.8487H28.6242C28.9987 20.8487 29.3022 20.5451 29.3022 20.1707C29.3022 19.7962 28.9987 19.4926 28.6242 19.4926Z"
+                fill="#4A13E7"
+              />
+            </svg> */}
+            <BaseButton
+              onClick={() => handleAddNote(leadDetails?.id)}
+              buttonText={translate("common.notes_modal.button")}
+              containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
+              textClassName="text-white font-medium"
             />
-            <p className="text-[#4B4B4B] text-base">
+            {/* <p className="text-[#4B4B4B] text-base">
               {translate("common.notes_modal.button")}
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -160,14 +183,15 @@ const ExistingNotes = ({
             />
           </svg>
         </span>
-       
+
         {notes && notes?.length > 0 ? (
           <>
             {notes?.map((item, key) => (
               <div
-                className={` mb-[10px]  ${notes?.length - 1 !== key &&
+                className={` mb-[10px]  ${
+                  notes?.length - 1 !== key &&
                   "border-b-[1px] border-lightGray "
-                  }pb-3 `}
+                }pb-3 `}
                 key={key}
               >
                 <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
@@ -196,7 +220,7 @@ const ExistingNotes = ({
         )}
       </div>
     </BaseModal>
-  )
+  );
 };
 
 export default ExistingNotes;

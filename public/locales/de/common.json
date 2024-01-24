@@ -182,6 +182,7 @@
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mail_sent_maybe": "E-Mail gesendet",
     "value_min": "{0} Minimum {1} ",
+    "employee_creation_limit_reached":"Ihr Plan läuft aus!",
 
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
@@ -197,11 +198,13 @@
     },
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
-    "value_max": "value_max"
+    "value_max": "value_max",
+    "discountLessThanTotalPrice":"muss geringer sein als der Gesamtpreis"
+
   },
   "sidebar": {
     "customer": {
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Dashboard",
       "customers": "Kunden",
       "leads": {
         "leads": "Lead",
@@ -211,7 +214,7 @@
       },
       "offers": {
         "offers": "Angebote",
-        "open": "Öffnen",
+        "open": "Offen",
         "signed": "Unterzeichnet",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
@@ -227,7 +230,7 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Öffnen Sie"
+        "open": "Offen"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -312,7 +315,7 @@
   },
   "request_modal": {
     "main_heading": "Ihre Anfrage wurde gesendet",
-    "sub_heading": "Vielen Dank für Ihre Anfrage an Buro, wir freuen uns, dass Sie dabei sind. 3",
+    "sub_heading": "Vielen Dank für Ihre Anfrage an Buro, wir freuen uns, dass Sie dabei sind.",
     "button": "Erledigt"
   },
   "contact_support": {
@@ -331,7 +334,7 @@
     "main_heading": "E-Mail-Verfolger",
     "email_detail_heading": "E-Mail",
     "table_functions": {
-      "open": "Öffnen Sie",
+      "open": "Offen Sie",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -663,7 +666,7 @@
       "receipt_email_preview": "E-Mail-Vorschau der Quittung"
     },
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -740,7 +743,7 @@
   "contracts": {
     "main_heading": "Verträge",
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "confirm": "Bestätigt",
       "cancel": "Abgebrochen"
     },
@@ -770,7 +773,9 @@
       "payment_method": "Zahlungsmethode",
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
-      "images": "Bilder"
+      "images": "Bilder",
+      "to":"bis"
+
     },
     "tabs_headings": {
       "offer_details": "Angebotedetails",
@@ -893,9 +898,9 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Lead öffnen",
-      "close": "Lead schließen",
-      "expire": "Lead ablaufen"
+      "open": "Lead offen",
+      "close": "Lead geschlossen",
+      "expire": "Lead abgelaufen"
     },
     "table_headings": {
       "id": "ID",
@@ -1006,9 +1011,13 @@
   },
   "common": {
     "modals": {
+      "update_password": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
+      "invoice_update": "Vielen Dank für die Aktualisierung der Rechnung, wir sind froh, dass wir Sie haben.",
+      "receipt_update": "Vielen Dank für die Aktualisierung der Quittung, wir sind froh, Sie zu haben.",
       "verifying_email": "Wir verifizieren Ihre E-Mail",
       "verifying_des": "Bitte fahren Sie fort! Bitte nehmen Sie sich einen Moment Zeit, um sicherzustellen, dass wir Ihre korrekte E-Mail-Adresse haben",
       "admin_setting": "Einstellungen erfolgreich aktualisiert",
+      "setting_update": "Vielen Dank für die Aktualisierung der Einstellungen, wir freuen uns, dass Sie dabei sind.",
       "admin_setting_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "verify_email": "E-Mail Adresse überprüfen",
       "verify_email_des1": "Eine E-Mail wurde gesendet an ",
@@ -1049,7 +1058,7 @@
       "created_customer": "Kunde erfolgreich erstellt",
       "customer_created_des": "Vielen Dank für die Erstellung des Kunden. Wir freuen uns, Sie als Kunden zu haben.",
       "are_sure": "Sind Sie sicher?",
-      "leave_page": "Möchten Sie diese Seite verlassen, ohne Änderungen zu speichern?",
+      "leave_page": "Sie möchten diese Änderungen speichern?",
       "offer_delete": "Bitte bestätigen Sie die Angebote-ID",
       "offer_ID": "Angebote-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
@@ -1057,6 +1066,7 @@
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "offer_email_sent": "E-Mail erfolgreich gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
       "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
@@ -1064,6 +1074,9 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
     },
+    "discount": "Rabatt",
+    "update": "Update",
+    "mail": "Mail",
     "offer_mail_preview": "E-Mail-Vorschau anbieten",
     "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
@@ -1202,7 +1215,7 @@
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "signed": "Unterzeichnet",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
@@ -1881,7 +1894,7 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquelle",
-      "open": "Öffnen Sie"
+      "open": "Offen Sie"
     }
   },
   "global_search": {
@@ -1919,6 +1932,6 @@
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
   },
-  "Pending":"Entwurf",
-  "Sent":"Gesendet"
+  "Pending": "Entwurf",
+  "Sent": "Gesendet"
 }

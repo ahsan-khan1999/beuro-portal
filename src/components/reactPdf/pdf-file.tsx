@@ -2,6 +2,7 @@ import { PdfPreviewProps } from "@/types";
 import {
   Document,
   Font,
+  PDFViewer,
   Page,
   StyleSheet,
   Text,
@@ -92,7 +93,8 @@ const PdfFile = ({
             <ServiceTableRow
               {...item}
               key={index}
-              pagebreak={index === arr.length - 1}
+              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
             />
           ))}
           <ServicesTotalAmount
@@ -137,7 +139,9 @@ const PdfFile = ({
 
 const styles = StyleSheet.create({
   body: {
+    fontFamily: 'Poppins',
     paddingBottom: 100,
+    
   },
 });
 

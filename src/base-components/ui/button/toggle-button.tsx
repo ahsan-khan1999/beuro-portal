@@ -1,7 +1,12 @@
 import { ToggleButtonProps } from "@/types";
 
-export const ToggleButton = ({ onChange, isChecked, key, disabled }: ToggleButtonProps) => {
-  const disabledClass = disabled ? 'bg-borderColor' : 'bg-lightGray';
+export const ToggleButton = ({
+  onChange,
+  isChecked,
+  key,
+  disabled,
+}: ToggleButtonProps) => {
+  const disabledClass = disabled ? "bg-borderColor" : "bg-lightGray";
   return (
     <input
       className={`h-[26px] w-11 px-[2px] flex-shrink-0 appearance-none rounded-full ${disabledClass} 

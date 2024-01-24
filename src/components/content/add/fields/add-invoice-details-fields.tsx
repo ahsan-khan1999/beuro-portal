@@ -53,9 +53,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.invoiceContent?.description,
+            
             },
           },
 
@@ -73,7 +71,6 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.invoiceContent?.body,
             },
           },
 

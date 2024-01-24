@@ -97,7 +97,7 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
   return (
     <>
       <div className="2xl:fixed mb-5">
-        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 2xl:mb-0">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0 ">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}

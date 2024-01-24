@@ -10,7 +10,7 @@ const LeadsDetails = () => {
   return (
     <>
       <Layout>
-        <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[230px] calWidth z-10">
+        <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[250px] maxSize:border-t-[14px] border-t-defaultBackground calWidth z-10">
           <LeadsDetailsCardData
             leadDeleteHandler={leadDeleteHandler}
             leadDetails={leadDetails}

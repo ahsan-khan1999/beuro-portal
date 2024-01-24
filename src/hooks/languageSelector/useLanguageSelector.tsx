@@ -12,14 +12,13 @@ const FLAG_LIST = [
     code: FlagType.de,
     name: "German",
   },
- 
 ];
 
 export const useLanguageSeleclor = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [languages, setLanguages] = useState<Language[]>([]);
-  const router = useRouter()
+  const router = useRouter();
   const dropdownRef = useRef<HTMLButtonElement>(null);
 
   const selectedLanguage = FLAG_LIST.find(
@@ -39,8 +38,7 @@ export const useLanguageSeleclor = () => {
     router.push(routeWithQuery, undefined, {
       locale: language?.code,
     });
-  }
-
+  };
 
   useEffect(() => {
     setLanguages(FLAG_LIST);

@@ -8,7 +8,7 @@ import { AddContentConfirmationDetailsFormField } from "@/components/content/add
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { Attachement } from "@/types/global";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
@@ -36,16 +36,19 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  
-  useMemo(() => {
+
+  useEffect(() => {
+
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.confirmationContent?.title,
-        attachments: contentDetails?.confirmationContent?.attachments?.length > 0 && contentDetails?.confirmationContent?.attachments[0] || null
+        confirmationContent: {
+          ...contentDetails?.confirmationContent,
+          // attachments: contentDetails?.confirmationContent?.attachments?.length > 0 && contentDetails?.confirmationContent?.attachments[0] || null
+        }
       })
     }
 
-  }, [contentDetails.id])
+  }, [contentDetails?.id])
   const fields = AddContentConfirmationDetailsFormField(
     register,
     loading,
@@ -53,7 +56,7 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
     backHandle,
     trigger, 0, attachements, setAttachements, contentDetails
   );
-  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
       confirmationContent: {
@@ -69,7 +72,7 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function, onHandl
     }
     const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
     if (res?.payload) onHandleNext(ComponentsType.addInvoiceContent);
-    
+
   };
   return {
     fields,

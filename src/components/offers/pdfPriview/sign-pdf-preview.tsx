@@ -118,6 +118,7 @@ const SignPdfPreview = () => {
                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
+                companyName:offerDetails?.Offer?.createdBy?.company?.companyName,
               },
               contactAddress: {
                 address: {
@@ -145,7 +146,14 @@ const SignPdfPreview = () => {
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
+                discountType: offerDetails?.Offer?.discountType,
+                taxType: offerDetails?.Offer?.taxType,
+                serviceDiscountSum: offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+                  const price = service?.discount || 0;
+                  return acc + price;
+                }, 0)
               },
+              
               footerDetails: {
                 firstColumn: {
                   companyName:

@@ -5,7 +5,6 @@ import {
   PDFViewer,
   Page,
   StyleSheet,
-  Text,
   View,
 } from "@react-pdf/renderer";
 import { Header } from "./header";
@@ -66,8 +65,6 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
   showContractSign,
-  pdfFile,
-  setPdfFile,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -78,7 +75,7 @@ const OfferPdfPreview = ({
   const footerDetails = data?.footerDetails;
 
   return (
-    <PDFViewer  style={{ width: "100%",height:"100vh" }}>
+    <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
@@ -99,7 +96,7 @@ const OfferPdfPreview = ({
               <ServiceTableRow
                 {...item}
                 key={index}
-                pagebreak={index === arr.length - 1}
+                pagebreak={arr.length === 1 ? false : index === arr.length - 1}
               />
             ))}
             <ServicesTotalAmount
@@ -118,7 +115,7 @@ const OfferPdfPreview = ({
 
         {/* Additional details */}
         <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
-          <View style={{marginBottom: 10}} fixed>
+          <View style={{ marginBottom: 10 }} fixed>
             <Header {...headerDetails} />
           </View>
           {/* <View

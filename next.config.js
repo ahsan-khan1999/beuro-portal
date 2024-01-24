@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { hostname } = require('os');
 const { i18n } = require("./next-i18next.config");
 
 const nextConfig = {
@@ -12,18 +11,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "kaufes-dev-v2.s3.me-south-1.amazonaws.com",
       },
-      {
-        protocol: "http",
-        hostname: "abc.com",
-      },
-      {
-        protocol: "http",
-        hostname: "test.com",
-      },
-   
     ],
   },
-
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Exclude fs module from @react-pdf/pdfkit
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
 }
 
 module.exports = nextConfig

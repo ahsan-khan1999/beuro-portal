@@ -39,6 +39,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         name: `address.${i}.label`,
         register,
         value: `Address ${i + 1}`,
+        setValue,
       },
     } : {
       //non-editable address
@@ -52,6 +53,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         value: `Address ${i + 1}`,
         disabled: true,
         className: "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+        setValue,
       },
     };
     formField.push(

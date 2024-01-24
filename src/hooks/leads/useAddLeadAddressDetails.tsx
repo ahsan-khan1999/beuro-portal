@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
   SubmitHandler,
+  UseFieldArrayRemove,
   useFieldArray,
   useForm,
 } from "react-hook-form";
@@ -44,7 +45,6 @@ export const useAddLeadAddressDetails = (
 
   useEffect(() => {
     if (leadDetails?.id) {
-      console.log(leadDetails);
       reset({
         address: leadDetails?.addressID
           ? leadDetails?.addressID?.address?.map((item, index) => ({
@@ -76,6 +76,7 @@ export const useAddLeadAddressDetails = (
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdd);
   };
+
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

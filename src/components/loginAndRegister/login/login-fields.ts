@@ -218,7 +218,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "taxNumber",
               name: "taxNumber",
               placeholder: "Enter Your MwST Number",

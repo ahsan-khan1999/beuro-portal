@@ -33,6 +33,7 @@ const PdfPriview = () => {
     onSuccess,
     systemSetting,
   } = useOfferPdf();
+  
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -62,6 +63,7 @@ const PdfPriview = () => {
             onPrint={handlePrint}
             handleSendByPost={handleSendByPost}
             activeButtonId={activeButtonId}
+            offerId={offerData?.id}
           />
 
           <OfferPdf

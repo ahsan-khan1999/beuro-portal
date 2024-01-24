@@ -37,7 +37,7 @@ export default function useCustomer() {
   useEffect(() => {
     dispatch(setCompanyDetails(DEFAULT_CUSTOMER));
     dispatch(
-      readCompany({ params: { filter: filter, page: 1, size: 10 } })
+      readCompany({ params: { filter: { ...filter, "role": "1" }, page: 1, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
@@ -48,7 +48,7 @@ export default function useCustomer() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     dispatch(
-      readCompany({ params: { filter: filter, page: page, size: 10 } })
+      readCompany({ params: { filter: { ...filter, "role": "1" }, page: page, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
@@ -57,7 +57,7 @@ export default function useCustomer() {
   };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readCompany({ params: { filter: query, page: 1, size: 10 } })
+      readCompany({ params: { filter: { ...query, "role": "1" }, page: 1, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);

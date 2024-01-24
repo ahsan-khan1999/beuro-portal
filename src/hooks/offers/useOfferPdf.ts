@@ -147,9 +147,15 @@ export const useOfferPdf = () => {
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
               subTotal: offerDetails?.subTotal?.toString(),
-              tax: calculateTax(offerDetails?.subTotal, Number(TAX_PERCENTAGE))?.toString(),
+              tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               grandTotal: offerDetails?.total?.toString(),
+              discountType: offerDetails?.discountType,
+              taxType: offerDetails?.taxType,
+              serviceDiscountSum: offerDetails?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              }, 0)
             },
             footerDetails: {
               firstColumn: {
@@ -230,7 +236,7 @@ export const useOfferPdf = () => {
         let apiData = {
           email: offerDetails?.leadID?.customerDetail?.email,
           content: offerDetails?.content?.id,
-          subject: offerDetails?.title +" "+ offerDetails?.offerNumber+ " " + offerDetails?.createdBy?.company?.companyName,
+          subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
           description: offerDetails?.content?.offerContent?.body,
           attachments: offerDetails?.content?.offerContent?.attachments,
           id: offerDetails?.id,

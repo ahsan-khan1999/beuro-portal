@@ -106,7 +106,10 @@ const OfferPdfDownload = ({
 
                 <ServiceTableHederRow />
                 {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index} />
+                  <ServiceTableRow {...item} key={index}
+                    pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
+                  />
                 ))}
                 <ServicesTotalAmount
                   {...serviceItemFooter}
@@ -168,14 +171,8 @@ export default OfferPdfDownload;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
+    fontFamily: "Poppins",
+
   },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
-  },
+
 });

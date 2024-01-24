@@ -181,9 +181,10 @@
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
     "value_max": "value_max",
+    
     "mail_sent_maybe": "Email Sent",
     "value_min": "{0} Minimum {1} ",
-
+    "employee_creation_limit_reached":"You are running out of your plan!",
     "mixed": {
       "required": "This is required field ",
       "oneOf": "Password must match ",
@@ -197,7 +198,8 @@
       "min": "Minimum 1 is required"
     },
     "user_profile_already_complete": "User Profile is already completed",
-    "offer_not_open": "This offer is already closed or signed"
+    "offer_not_open": "This offer is already closed or signed",
+    "discountLessThanTotalPrice":"must be less than total price"
   },
   "sidebar": {
     "customer": {
@@ -317,7 +319,7 @@
   },
   "request_modal": {
     "main_heading": "Your Request has been sent",
-    "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
+    "sub_heading": "Thanks for sending your request to Buro we are happy to have you.",
     "button": "Done"
   },
   "contact_support": {
@@ -778,7 +780,8 @@
       "payment_method": "Payment Method",
       "contract_status": "Contarct Status",
       "notes": "Notes",
-      "images": "Images"
+      "images": "Images",
+      "to":"to"
     },
     "tabs_headings": {
       "offer_details": "Offer Details",
@@ -1015,6 +1018,9 @@
   },
   "common": {
     "modals": {
+      "update_password":"Thanks for updating password, we are happy to have you.",
+      "invoice_update":"Thanks for updating invoice, we are happy to have you.",
+      "receipt_update":"Thanks for updating receipt, we are happy to have you.",
       "verifying_email": "We are verifying your email",
       "verifying_des": "Please continue! Please take a second to make sure we have your correct email address",
       "verify_email": "Verify Email address",
@@ -1031,6 +1037,7 @@
       "email_config_created": "Email Configration Created Successfully",
       "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
+      "setting_update":"Thanks for updating settings we are happy to have you.",
       "admin_setting_des": "Thanks! we are happy to have you.",
       "plan_created": "Record Created Successfully",
       "plan_record_des": "Thanks! we are happy to have you. ",
@@ -1060,7 +1067,7 @@
       "created_customer": "Customer Created Successfully",
       "customer_created_des": "Thanks for creating Customer we are happy to have you. ",
       "are_sure": "Are You Sure?",
-      "leave_page": "You want to leave this page without saving changes. ",
+      "leave_page": "You want to save these changes?",
       "offer_delete": "Please confirm Offer ID",
       "offer_ID": "Enter Offer ID",
       "are_you_delete": "Are you sure you want to delete this Offer?",
@@ -1068,12 +1075,15 @@
       "offer_created_des": "Thanks for updating offer we are happy to have you. ",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
+      "updating_contract":"Thanks for updating contract we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
-
+    "discount":"Discount",
+    "update":"Update",
+    "mail": "Mail",
     "offer_mail_preview": "Offer Email Preview",
     "address": "Address",
     "add_new_date": "Add New Date",
@@ -1926,6 +1936,6 @@
     "offer_id": "Offer ID",
     "email_status": "Email Status"
   },
-  "Pending":"Draft",
-  "Sent":"Sent"
+  "Pending": "Draft",
+  "Sent": "Sent"
 }

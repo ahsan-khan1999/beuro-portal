@@ -14,7 +14,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   attachements, setAttachements,
   contractDetails,
   isMoreEmail,
-  setIsMoreEmail
+  setIsMoreEmail,
+  setValue
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -56,6 +57,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("cc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
                     }
                   },
@@ -69,6 +73,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
+                      if (setValue) {
+                        setValue("bcc", "")
+                      }
                       setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
                     }
                   },
@@ -102,7 +109,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
           isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
-              text: `CC`,
+              text: `Cc`,
               htmlFor: "cc",
               className: "mb-[10px]",
             },
@@ -243,20 +250,20 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: `${translate(
-                "contracts.contract_email_preview.back_button"
-              )}`,
-              inputType: "button",
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              onClick: onBack,
-            },
-          },
+          // {
+          //   containerClass: "mb-0",
+          //   field: {
+          //     type: Field.button,
+          //     id: "button",
+          //     text: `${translate(
+          //       "contracts.contract_email_preview.back_button"
+          //     )}`,
+          //     inputType: "button",
+          //     className:
+          //       "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+          //     onClick: onBack,
+          //   },
+          // },
           {
             containerClass: "mb-0",
             field: {
