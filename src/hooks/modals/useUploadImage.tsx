@@ -17,6 +17,8 @@ import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { createImage, readImage } from "@/api/slices/imageSlice/image";
 import { generateImageValidation } from "@/validation/modalsSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 export const useUploadImage = (handleImageSlider: Function) => {
   const { t: translate } = useTranslation();
@@ -41,7 +43,9 @@ export const useUploadImage = (handleImageSlider: Function) => {
     control as Control<any>,
     handleImageSlider
   );
-
+  const handleOnClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }))
+  }
   useMemo(() => {
     if (leadDetails?.id)
       setImageFieldValues(setValue as UseFormSetValue<any>, images);
@@ -57,7 +61,9 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const response = await dispatch(
       createImage({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) handleImageSlider();
+    if (response?.payload && response?.payload?.length > 0) handleImageSlider();
+    else handleOnClose()
+
   };
   return {
     fields,

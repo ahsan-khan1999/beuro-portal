@@ -71,7 +71,7 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
 
 export const generateImageValidation = (translate: Function) => {
   return yup.object().shape({
-    "upload_image1": yup.string().required(translate("validationMessages.required")),
+    "upload_image1": yup.string().notRequired(),
     "upload_image2": yup.string().notRequired(),
     "upload_image3": yup.string().notRequired(),
     "upload_image4": yup.string().notRequired(),

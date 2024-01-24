@@ -40,7 +40,7 @@ const OfferDetailsCard = ({
     window.open(offerDetails?.attachement);
   };
   return (
-    <>
+    <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div
           onClick={() => router.push("/offers")}
@@ -85,8 +85,9 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
-              }`}
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
+              isSendEmail && "hidden"
+            }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -94,9 +95,7 @@ const OfferDetailsCard = ({
               {translate("offers.card_content.send_button")}
             </p>
           </div>
-          {
-
-            isSendEmail &&
+          {isSendEmail && (
             <PrimaryPDF
               onClick={() =>
                 router.push({
@@ -105,7 +104,7 @@ const OfferDetailsCard = ({
                 })
               }
             />
-          }
+          )}
           {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
@@ -160,26 +159,31 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div 
-        
-        className="grid gap-y-1 mlg:grid-cols-2 xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
-          <div>
-            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
+        <div className="grid gap-y-1 mlg:grid-cols-2 xl:grid-cols-[minmax(350px,_3fr)_minmax(450px,_100%)]">
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {formatDateString(offerDetails?.createdAt)}
             </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+          <div className="flex gap-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("offers.card_content.service_date")}:
             </span>
-            <div className="">
+            <div>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item,index) =>
-                    `${formatDateTimeToDate(item.startDate)}${item.endDate ? ` ${translate("contracts.card_content.to")} ` + formatDateTimeToDate(item.endDate) + (offerDetails?.date?.length - 1 != index && ", " || ".") : offerDetails?.date?.length - 1 != index && ", " || "."
+                  (item, index) =>
+                    `${formatDateTimeToDate(item.startDate)}${
+                      item.endDate
+                        ? ` ${translate("contracts.card_content.to")} ` +
+                          formatDateTimeToDate(item.endDate) +
+                          ((offerDetails?.date?.length - 1 != index && ", ") ||
+                            ".")
+                        : (offerDetails?.date?.length - 1 != index && ", ") ||
+                          "."
                     }`
                 )}
               </span>
@@ -255,18 +259,18 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                  <span
-                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                    style={{
-                      borderColor: `${getOfferStatusColor(
-                        offerDetails?.offerStatus
-                      )}`,
-                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                    }}
-                  >
-                    {offerDetails?.offerStatus}
-                  </span>
-                )}
+                <span
+                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getOfferStatusColor(
+                      offerDetails?.offerStatus
+                    )}`,
+                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                  }}
+                >
+                  {offerDetails?.offerStatus}
+                </span>
+              )}
             </span>
           </div>
 
@@ -329,7 +333,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

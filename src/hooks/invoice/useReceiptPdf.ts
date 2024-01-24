@@ -183,7 +183,9 @@ export const useReceiptPdf = () => {
                 streetWithNumber:
                   invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
                     ?.customerDetail?.address?.streetNumber,
+
               },
+              gender: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.gender?.toString(),
               email:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
                   ?.customerDetail?.email,

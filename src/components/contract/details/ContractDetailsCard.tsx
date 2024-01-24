@@ -16,6 +16,8 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import { Button } from "@/base-components/ui/button/button";
+import { BaseButton } from "@/base-components/ui/button/base-button";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -25,7 +27,8 @@ const ContractDetailsCard = ({
   handleStatusUpdate,
   offerDeleteHandler,
   handleSendEmail,
-  isSendEmail
+  isSendEmail,
+  handleUpdateAdditionalDetailsModal
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -36,7 +39,7 @@ const ContractDetailsCard = ({
     window.open(contractDetails?.attachement);
   };
   return (
-    <>
+    <div className="min-h-[218px]">
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
         <div className="flex items-center">
           <span
@@ -80,15 +83,17 @@ const ContractDetailsCard = ({
               {translate("contracts.card_content.confirm_button")}
             </span>
           </button>
-
-          {isSendEmail && <PrimaryPDF
-            onClick={() =>
-              router.push({
-                pathname: "/contract/pdf-preview",
-                query: { offerID: contractDetails?.id },
-              })
-            }
-          />}
+       
+          {isSendEmail && (
+            <PrimaryPDF
+              onClick={() =>
+                router.push({
+                  pathname: "/contract/pdf-preview",
+                  query: { offerID: contractDetails?.id },
+                })
+              }
+            />
+          )}
           {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
@@ -125,7 +130,7 @@ const ContractDetailsCard = ({
               {contractDetails.contractNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_title")}:
             </span>
@@ -134,7 +139,7 @@ const ContractDetailsCard = ({
               {contractDetails.offerID?.title}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.worker")}:
             </span>
@@ -144,16 +149,16 @@ const ContractDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)] gap-y-2">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_3fr)_minmax(450px,_100%)] gap-y-2">
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4A13E7]">
               {contractDetails.offerID?.offerNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          {/* <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.created_date")}:
             </span>
@@ -162,16 +167,26 @@ const ContractDetailsCard = ({
                 {formatDateToCustomString(contractDetails.createdAt)}
               </span>
             </div>
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base font-normal text-[#4D4D4D]">
+          </div> */}
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("contracts.card_content.service_date")}:
             </span>
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${item.endDate ? ` ${translate("contracts.card_content.to")} ` + formatDateTimeToDate(item.endDate) + (contractDetails?.offerID?.date?.length - 1 != index && ", " || ".") : contractDetails?.offerID?.date?.length - 1 != index && ", " || "."
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                        ".")
+                      : (contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                      "."
                     }`
                 )}
               </span>
@@ -344,7 +359,7 @@ const ContractDetailsCard = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

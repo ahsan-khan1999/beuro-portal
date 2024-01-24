@@ -1,10 +1,12 @@
 import { CustomerTable } from "@/types/customer";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React from "react";
 
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
+  const { t: translate } = useTranslation()
   return (
     <>
       {currentPageRows?.map((item, index) => {
@@ -22,7 +24,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center">
-              {item.address.country}
+              {translate(`countries.${item?.address?.country}`)}
             </span>
             <span className="py-4 flex items-center"> {item.customerType}</span>
             <span

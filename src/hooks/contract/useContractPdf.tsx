@@ -186,6 +186,8 @@ export const useContractPdf = () => {
               email: contractDetails?.offerID?.leadID?.customerDetail?.email,
               phone:
                 contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
+              gender: contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
+
             },
             movingDetails: {
               address: contractDetails?.offerID?.addressID?.address,
@@ -200,9 +202,9 @@ export const useContractPdf = () => {
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
-              discountType:contractDetails?.offerID?.discountType,
-              taxType:contractDetails?.offerID?.taxType,
-              serviceDiscountSum:contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+              discountType: contractDetails?.offerID?.discountType,
+              taxType: contractDetails?.offerID?.taxType,
+              serviceDiscountSum: contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
               }, 0)
@@ -361,7 +363,7 @@ export const useContractPdf = () => {
           email: contractDetails?.offerID?.leadID?.customerDetail?.email,
           content: contractDetails?.offerID?.content?.id,
           subject:
-            contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
+            contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
           description:
             contractDetails?.offerID?.content?.confirmationContent?.body,
           attachments:

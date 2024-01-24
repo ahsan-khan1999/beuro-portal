@@ -163,6 +163,7 @@ export default function useContractDetail() {
         route={onSuccess}
       />
     ),
+   
   };
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
@@ -202,6 +203,10 @@ export default function useContractDetail() {
   const handleViewPdf = () => {
     window.open(contractDetails?.attachement as string);
   };
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS}));
+  };
+
   return {
     contractDetails,
     renderModal,
@@ -216,6 +221,7 @@ export default function useContractDetail() {
     handleSendEmail,
     loading,
     handleViewPdf,
-    systemSettings
+    systemSettings,
+    handleUpdateAdditionalDetailsModal
   };
 }

@@ -29,7 +29,7 @@ const OfferDetails = () => {
       {/* {loading ? (
         <LoadingState />
       ) : ( */}
-      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[294px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[314px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
         <OfferDetailsCard
           offerDetails={offerDetails}
           offerDeleteHandler={offerDeleteHandler}
@@ -43,7 +43,7 @@ const OfferDetails = () => {
           loading={loading}
         />
       </div>
-      <div className="2xl:mt-[375px] w-full 2xl:block">
+      <div className="2xl:mt-[395px] w-full 2xl:block">
         {isSendEmail ? (
           <div className="mt-5">
             <ComposeMail

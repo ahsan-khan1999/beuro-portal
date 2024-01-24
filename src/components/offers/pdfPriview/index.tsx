@@ -44,6 +44,14 @@ const PdfPriview = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
+    ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;

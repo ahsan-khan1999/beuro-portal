@@ -136,6 +136,8 @@ export const useOfferPdf = () => {
               },
               email: offerDetails?.leadID?.customerDetail?.email,
               phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+              gender:offerDetails?.leadID?.customerDetail?.gender?.toString()
+
             },
             movingDetails: {
               address: offerDetails?.addressID?.address,
@@ -261,7 +263,7 @@ export const useOfferPdf = () => {
     };
     const response = await dispatch(sendOfferByPost({ data: apiData }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
   const handleDonwload = () => {
     if (pdfFile) {
