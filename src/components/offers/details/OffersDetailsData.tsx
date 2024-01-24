@@ -116,7 +116,7 @@ const OffersDetailsData = ({
             />
           ))}
         </div>
-        <div className="w-full mt-5 mb-10">
+        <div className="w-full mt-5">
           <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} />
         </div>
       </div>
