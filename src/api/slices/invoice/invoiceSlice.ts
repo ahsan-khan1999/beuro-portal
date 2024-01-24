@@ -268,11 +268,11 @@ export const updateInvoiceContent: AsyncThunk<boolean, object, object> | any =
 
 export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("offer/post/", async (args, thunkApi) => {
-        const { params, router, setError, translate } = args as any;
+        const { data, router, setError, translate } = args as any;
 
         try {
 
-            const response = await apiServices.invoiceSendByPost(params);
+            const response = await apiServices.invoiceSendByPost(data);
             return response?.data?.InvoiceCollection;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));

@@ -6,9 +6,9 @@ import {
   readCollectiveInvoiceDetails,
   readQRCode,
   sendInvoiceEmail,
+  sendOfferByPost,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
-import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import {
   getTemplateSettings,
   readEmailSettings,
@@ -402,7 +402,7 @@ export const useReceiptPdf = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/invoices");
+    // router.push("/invoices");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
