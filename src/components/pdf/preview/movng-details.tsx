@@ -111,7 +111,7 @@ export const MovingDetails = ({
 
         {workDates?.map((item, index) => (
           <div className="flex gap-[30px] mb-[46px] mt-2" key={index}>
-            <span className="min-w-[100px]">Auftragsdatum:</span>
+            <span className="min-w-[200px]">Auftragsdatum:</span>
             <span className="text-[#000] text-base font-normal">
 
               {`${formatDateTimeToDate(item.startDate)}${item.endDate ? " bis " + formatDateTimeToDate(item.endDate) + (workDates?.length - 1 != index && ", " || ".") : workDates?.length - 1 != index && ", " || "."

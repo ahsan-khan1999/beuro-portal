@@ -72,7 +72,6 @@ export const AddressDetails = ({
 
   const labelWidth = MaxLength * 5;
 
-  console.log(labelWidth, MaxLength);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>

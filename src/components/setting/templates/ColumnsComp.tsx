@@ -45,7 +45,6 @@ const Column = ({
   ) => void;
 
 }) => {
-  console.log(data,"data");
   
   return (
     <section className="px-[30px] pt-[20px] pb-[25px] rounded-md bg-white mb-6">

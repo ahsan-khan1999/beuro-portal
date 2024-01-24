@@ -675,6 +675,7 @@ export interface ProductItemFooterProps {
   systemSettings?: SystemSetting | null;
   discountType?:keyof typeof staticEnums["DiscountType"];
   taxType?:keyof typeof staticEnums["TaxType"];
+  serviceDiscountSum?:number
 
 }
 
