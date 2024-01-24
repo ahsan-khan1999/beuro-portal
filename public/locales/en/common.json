@@ -181,10 +181,10 @@
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
     "value_max": "value_max",
-    
+
     "mail_sent_maybe": "Email Sent",
     "value_min": "{0} Minimum {1} ",
-    "employee_creation_limit_reached":"You are running out of your plan!",
+    "employee_creation_limit_reached": "You are running out of your plan!",
     "mixed": {
       "required": "This is required field ",
       "oneOf": "Password must match ",
@@ -199,7 +199,7 @@
     },
     "user_profile_already_complete": "User Profile is already completed",
     "offer_not_open": "This offer is already closed or signed",
-    "discountLessThanTotalPrice":"must be less than total price"
+    "discountLessThanTotalPrice": "must be less than total price"
   },
   "sidebar": {
     "customer": {
@@ -274,6 +274,7 @@
       "heading": "Customer Details",
       "edit_button": "Edit Details",
       "customer_type": "Customer Type",
+      "gender": "Gender",
       "full_name": "Full Name",
       "email_address": "Email Address",
       "phone_number": "Phone Number",
@@ -781,7 +782,7 @@
       "contract_status": "Contarct Status",
       "notes": "Notes",
       "images": "Images",
-      "to":"to"
+      "to": "to"
     },
     "tabs_headings": {
       "offer_details": "Offer Details",
@@ -1018,9 +1019,9 @@
   },
   "common": {
     "modals": {
-      "update_password":"Thanks for updating password, we are happy to have you.",
-      "invoice_update":"Thanks for updating invoice, we are happy to have you.",
-      "receipt_update":"Thanks for updating receipt, we are happy to have you.",
+      "update_password": "Thanks for updating password, we are happy to have you.",
+      "invoice_update": "Thanks for updating invoice, we are happy to have you.",
+      "receipt_update": "Thanks for updating receipt, we are happy to have you.",
       "verifying_email": "We are verifying your email",
       "verifying_des": "Please continue! Please take a second to make sure we have your correct email address",
       "verify_email": "Verify Email address",
@@ -1037,7 +1038,7 @@
       "email_config_created": "Email Configration Created Successfully",
       "email_config_des": "Thanks for created email configration.",
       "admin_setting": "Settings Updated Successfully",
-      "setting_update":"Thanks for updating settings we are happy to have you.",
+      "setting_update": "Thanks for updating settings we are happy to have you.",
       "admin_setting_des": "Thanks! we are happy to have you.",
       "plan_created": "Record Created Successfully",
       "plan_record_des": "Thanks! we are happy to have you. ",
@@ -1075,14 +1076,14 @@
       "offer_created_des": "Thanks for updating offer we are happy to have you. ",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
-      "updating_contract":"Thanks for updating contract we are happy to have you.",
+      "updating_contract": "Thanks for updating contract we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful."
     },
-    "discount":"Discount",
-    "update":"Update",
+    "discount": "Discount",
+    "update": "Update",
     "mail": "Mail",
     "offer_mail_preview": "Offer Email Preview",
     "address": "Address",
@@ -1923,11 +1924,11 @@
     "invoices": "Invoices"
   },
   "countries": {
-    "swiz": "Swizterland",
-    "ger": "Germany",
-    "aust": "Austria",
-    "ita": "Italy",
-    "fran": "France"
+    "Swizterland": "Swizterland",
+    "Germany": "Germany",
+    "Austria": "Austria",
+    "Italy": "Italy",
+    "France": "France"
   },
   "offer_pdf_card": {
     "offer_detail": "offer Details",
@@ -1937,5 +1938,9 @@
     "email_status": "Email Status"
   },
   "Pending": "Draft",
-  "Sent": "Sent"
+  "Sent": "Sent",
+  "gender": {
+    "Mr": "Mr",
+    "Mrs": "Mrs"
+  }
 }

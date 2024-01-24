@@ -717,6 +717,10 @@ export const staticEnums: Record<string, any> = {
     pending: 0,
     resolved: 1,
   },
+  Gender: {
+    Mr: 0,
+    Mrs: 1,
+  },
   RejectReason: {
     "Cost Concerns": "Cost Concerns",
     "Hidden Fees": "Hidden Fees",
@@ -1634,3 +1638,8 @@ export const HeaderLabel = {
   invoice: "Rechnung",
   receipt: "Quittung",
 };
+
+export const GenderLabel = {
+  Mr: "Herr",
+  Mrs: "Frau",
+}

@@ -3,6 +3,7 @@ import { formatAddress, formatDateTimeToDate } from "@/utils/utility";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import React, { useState } from "react";
 import Image from "next/image";
+import { Country } from "@/components/reactPdf/address-details";
 
 export const MovingDetails = ({
   header,
@@ -99,7 +100,7 @@ export const MovingDetails = ({
             <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
-                  country: item.country,
+                  country: Country[item?.country as keyof typeof Country],
                   postalCode: item.postalCode,
                   streetNumber: item.streetNumber,
                 })}

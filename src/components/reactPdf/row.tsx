@@ -3,7 +3,7 @@ import { GUTTER } from './grid-item';
 
 export const Row = ({ children }: any) => {
   return (
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: GUTTER }}>
+    <View style={{ flexDirection: 'row', marginBottom: GUTTER, width: 595 }}>
       {children}
     </View>
   );

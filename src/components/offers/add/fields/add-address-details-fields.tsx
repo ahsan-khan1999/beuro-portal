@@ -160,12 +160,10 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
-                options: Object.entries(staticEnums.Country).map(
-                  ([key, val]) => ({
-                    value: key,
-                    label: `${translate(val as string)}`,
-                  })
-                ),
+                options: Object.keys(staticEnums.Country).map((item) => ({
+                  value: item,
+                  label: translate(`countries.${item}`),
+                })),
                 control,
                 value: Object.keys(staticEnums.Country)[0],
               },

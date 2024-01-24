@@ -100,6 +100,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         title: offerDetails?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+
+
       });
     }
   }, [offerDetails?.id]);
@@ -114,18 +117,24 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if(selectedCustomers){
 
-    reset({
-      ...selectedCustomers[0],
-      customerID: selectedCustomers[0]?.id,
-      type: type,
-      content: selectedContent,
-      leadID: "",
-    });
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
+  
+      reset({
+        ...selectedCustomers,
+        customerID: selectedCustomers?.id,
+        type: type,
+        content: selectedContent,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+
+      });
+
+    }
   };
   const handleContentSelect = () => { };
   useMemo(() => {
@@ -170,7 +179,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        title: null
+        title: null,
+        gender:null
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {
       reset({
@@ -189,6 +199,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         title: offerDetails?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+
+
       });
     } else if(type === "Existing Customer" && !offerDetails?.id){
       dispatch(setLeads([]))

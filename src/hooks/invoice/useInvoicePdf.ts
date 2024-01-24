@@ -6,9 +6,9 @@ import {
   readCollectiveInvoiceDetails,
   readQRCode,
   sendInvoiceEmail,
+  sendOfferByPost,
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
-import { sendOfferByPost } from "@/api/slices/offer/offerSlice";
 import { ModalType } from "@/enums/ui";
 import {
   AcknowledgementSlipProps,
@@ -170,6 +170,8 @@ export const useInvoicePdf = () => {
               phone:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
                   ?.customerDetail?.phoneNumber,
+              gender: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.gender?.toString(),
+
             },
             movingDetails: {
               address:
@@ -186,7 +188,7 @@ export const useInvoicePdf = () => {
             serviceItemFooter: {
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
-              tax: 
+              tax:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
 
               discount:
@@ -200,8 +202,8 @@ export const useInvoicePdf = () => {
               isShowExtraAmount: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
-              discountType:invoiceDetails?.invoiceID?.contractID?.offerID?.discountType,
-              taxType:invoiceDetails?.invoiceID?.contractID?.offerID?.taxType,
+              discountType: invoiceDetails?.invoiceID?.contractID?.offerID?.discountType,
+              taxType: invoiceDetails?.invoiceID?.contractID?.offerID?.taxType,
               serviceDiscountSum: invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;

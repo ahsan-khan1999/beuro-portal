@@ -97,5 +97,6 @@ export interface ContractDetailCardProps {
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
   handleSendEmail: () => void;
-  isSendEmail:boolean
+  isSendEmail: boolean;
+  handleUpdateAdditionalDetailsModal: () => void
 }
