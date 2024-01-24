@@ -69,13 +69,14 @@ export const AddressDetails = ({
     if (labelLength > MaxLength) MaxLength = labelLength;
   }
 
-  const labelWidth = MaxLength * 5;
+  const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 5;
+  const valueWidth = 595 - labelWidth;
 
   console.log(labelWidth, MaxLength);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
-      {address?.map((address, index) => (
+      {/* {address?.map((address, index) => (
       <View style={styles.addressRow} key={index}>
         <View style={styles.addressText}>
           <Text
@@ -103,75 +104,78 @@ export const AddressDetails = ({
           </Text>
         </View>
       </View>
-    ))}
+    ))} */}
 
-      {/* <View style={{ flexDirection: "column" }}>
-        {address?.map((address, index) => (
-          // <View
-          //   style={{ display: "flex", flexDirection: "row", }}
-          //   key={index}
-          // >
-          //   <View style={{overflow: 'hidden', maxWidth: 200}}>
-          //     <Text
-          //       style={{
-          //         fontSize: 10,
-          //         fontWeight: 500,
-          //         fontStyle: "medium",
-          //         color: "#000",width: (labelWidth - 100),
-          //         overflow: 'hidden',
-          //         backgroundColor: '#ccc',
+      {
+        <View style={{ flexDirection: "column" }}>
+          {address?.map((address, index) => (
+            // <View
+            //   style={{ display: "flex", flexDirection: "row", }}
+            //   key={index}
+            // >
+            //   <View style={{overflow: 'hidden', maxWidth: 200}}>
+            //     <Text
+            //       style={{
+            //         fontSize: 10,
+            //         fontWeight: 500,
+            //         fontStyle: "medium",
+            //         color: "#000",width: (labelWidth - 100),
+            //         overflow: 'hidden',
+            //         backgroundColor: '#ccc',
 
-          //       }}
-          //     >
-          //       {address?.label}
-          //     </Text>
-          //   </View>
-          //   <View>
-          //     <Text
-          //       style={{
-          //         fontSize: 10,
-          //         fontWeight: 400,
-          //         fontStyle: "normal",
-          //         color: "#000",
-          //       }}
-          //     >
-          //       {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-          //       {address.description && ` - ${address.description}`}
-          //     </Text>
-          //   </View>
-          // </View>
-          <Row key={index}>
-            <GridItem width={labelWidth}>
-              <Text
-                style={{
-                  fontSize: 10,
-                  fontWeight: 500,
-                  fontStyle: "medium",
-                  color: "#000",
-                }}
-              >
-                {address?.label}
-              </Text>
-            </GridItem>
-            <GridItem flex>
-              <Text
-                style={{
-                  fontSize: 10,
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  color: "#000",
-                }}
-              >
-                {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-                {address.description && ` - ${address.description}`}
-              </Text>
-            </GridItem>
-          </Row>
-        ))}
-      </View> */}
+            //       }}
+            //     >
+            //       {address?.label}
+            //     </Text>
+            //   </View>
+            //   <View>
+            //     <Text
+            //       style={{
+            //         fontSize: 10,
+            //         fontWeight: 400,
+            //         fontStyle: "normal",
+            //         color: "#000",
+            //       }}
+            //     >
+            //       {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
+            //       {address.description && ` - ${address.description}`}
+            //     </Text>
+            //   </View>
+            // </View>
+            <Row key={index}>
+              <GridItem width={labelWidth}>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 500,
+                    fontStyle: "medium",
+                    color: "#000",
+                  }}
+                >
+                  {address?.label}
+                </Text>
+              </GridItem>
+              <GridItem width={valueWidth}>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 400,
+                      fontStyle: "normal",
+                      color: "#000",
+                      paddingRight: 30
+                    }}
+                  >
+                    {`${address.streetNumber}, ${address.postalCode}, ${address.country}`}
+                    {address.description && ` - ${address.description}`}
+                  </Text>
+              </GridItem>
+            </Row>
+          ))}
+        </View>
+      }
 
-      <View style={styles.dateRow}>
-        <Text
+      {/* <View style={styles.dateRow}> */}
+      {/* <Text
           style={{
             fontSize: 10,
             fontWeight: 500,
@@ -181,8 +185,23 @@ export const AddressDetails = ({
           }}
         >
           Arbeitstermine:
-        </Text>
-        <View style={styles.datesColumn}>
+        </Text> */}
+      <Row>
+        <GridItem width={labelWidth}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontStyle: "medium",
+              color: "#000",
+            }}
+          >
+            Arbeitstermine
+          </Text>
+        </GridItem>
+
+        {/* <View style={styles.datesColumn}> */}
+        <GridItem width={valueWidth}>
           {workDates?.map((date, index) => (
             <Text style={styles.dateText} key={index}>
               {`${date.startDate}${
@@ -190,8 +209,10 @@ export const AddressDetails = ({
               }`}
             </Text>
           ))}
-        </View>
-      </View>
+        </GridItem>
+        {/* </View> */}
+      </Row>
+      {/* </View> */}
     </View>
   );
 };
