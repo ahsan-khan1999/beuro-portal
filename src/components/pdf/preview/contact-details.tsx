@@ -1,3 +1,4 @@
+import { Country } from "@/components/reactPdf/address-details";
 import { ContactDetailsProps } from "@/types/types";
 import { useTranslation } from "next-i18next";
 
@@ -16,7 +17,7 @@ export const ContactDetails = ({
           {streetWithNumber}
         </span>
         <span className="text-[#000] text-base font-medium">
-          {postalCode} {city}
+          {postalCode} {Country[city as keyof typeof Country]}
         </span>
       </div>
 

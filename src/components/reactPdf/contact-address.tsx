@@ -9,6 +9,7 @@ import {
   textSmall,
 } from "./style-sheet";
 import { ContactDetailsProps } from "@/types";
+import { Country } from "./address-details";
 
 export const ContactAddress = ({
   address,
@@ -19,7 +20,7 @@ export const ContactAddress = ({
     <View style={leftColumn}>
       <Text style={textBase}>Herr/Frau {address?.name}</Text>
       <Text style={textBase}>{address?.streetWithNumber}</Text>
-      <Text style={textBase}>{`${address?.postalCode} ${address?.city}`}</Text>
+      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country]}`}</Text>
     </View>
     <View style={rightColumn}>
       <View style={{ display: "flex", flexDirection: "row" }}>

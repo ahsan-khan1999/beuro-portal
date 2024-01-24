@@ -274,6 +274,7 @@
       "heading": "Details zum Kunden",
       "edit_button": "Details bearbeiten",
       "customer_type": "Kunde Typ",
+      "gender":"Geschlecht",
       "full_name": "Vollständiger Name",
       "email_address": "E-Mail Adresse",
       "phone_number": "Rufnummer",
@@ -1919,11 +1920,11 @@
     "invoices": "Rechnungen"
   },
   "countries": {
-    "swiz": "Swizterland",
-    "ger": "Deutschland",
-    "aust": "Österreich",
-    "ita": "Italien",
-    "fran": "Frankreich"
+    "Swizterland": "Schweiz",
+    "Germany": "Deutschland",
+    "Austria": "Österreich",
+    "Italy": "Italien",
+    "France": "Frankreich"
   },
   "offer_pdf_card": {
     "offer_detail": "Angebot Details",
@@ -1933,5 +1934,9 @@
     "email_status": "E-Mail-Status"
   },
   "Pending": "Entwurf",
-  "Sent": "Gesendet"
+  "Sent": "Gesendet",
+  "gender": {
+    "Mr": "Herr",
+    "Mrs": "Frau"
+  }
 }

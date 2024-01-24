@@ -261,7 +261,7 @@ export const useOfferPdf = () => {
     };
     const response = await dispatch(sendOfferByPost({ data: apiData }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
   const handleDonwload = () => {
     if (pdfFile) {

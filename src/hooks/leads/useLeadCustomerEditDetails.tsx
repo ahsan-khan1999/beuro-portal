@@ -9,6 +9,7 @@ import { generateLeadsCustomerEditDetailsValidation } from "@/validation/leadsSc
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { useMemo } from "react";
 import { createLead } from "@/api/slices/lead/leadSlice";
+import { staticEnums } from "@/utils/static";
 
 export const useLeadCustomerEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -45,7 +46,8 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
-        companyName:leadDetails?.customerDetail?.companyName
+        companyName:leadDetails?.customerDetail?.companyName,
+        gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender]
       })
     }
   }, [leadDetails.id]);

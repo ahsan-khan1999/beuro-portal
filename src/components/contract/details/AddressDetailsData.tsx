@@ -46,7 +46,7 @@ const AddressDetailsData = ({
                 {translate("contracts.address_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {item.country}
+                {translate(`countries.${item.country}`)}
               </div>
             </div>
           </div>

@@ -46,6 +46,9 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
     [LeadsCustomerEditDetails.type]: yup
       .string()
       .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.gender]: yup
+      .number()
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customer]: yup.string().when("type", {
       is: (type: string) => type === "Existing Customer",
       then: () =>
@@ -203,7 +206,7 @@ export const generateAddfferServiceDetailsValidation = (
             .number()
             .required(translate("validationMessages.required"))
             .typeError(translate("validationMessages.invalid_format"))
-            ,
+          ,
           [AddServiceOfferDetails.unit]: yup
             .string()
             .required(translate("validationMessages.required")),
@@ -216,12 +219,12 @@ export const generateAddfferServiceDetailsValidation = (
             .notRequired()
             .lessThan(yup.ref(AddServiceOfferDetails.totalPrice), translate("validationMessages.discountLessThanTotalPrice"))
             .typeError(translate("validationMessages.invalid_format"))
-            ,
+          ,
           [AddServiceOfferDetails.totalPrice]: yup
             .number()
             .required(translate("validationMessages.required"))
             .typeError(translate("validationMessages.invalid_format"))
-            ,
+          ,
           [AddServiceOfferDetails.description]: yup
             .string()
             .required(translate("validationMessages.required")),
