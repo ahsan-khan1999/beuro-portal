@@ -65,7 +65,6 @@ const DetailsPdfPriview = () => {
         subHeading={translate("common.modals.invoice_update")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back();
         }}
       />
     ),
