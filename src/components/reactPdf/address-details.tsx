@@ -70,7 +70,7 @@ export const AddressDetails = ({
     if (labelLength > MaxLength) MaxLength = labelLength;
   }
 
-  const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 5;
+  const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 6;
   const valueWidth = 595 - labelWidth;
 
   return (
@@ -156,18 +156,18 @@ export const AddressDetails = ({
                 </Text>
               </GridItem>
               <GridItem width={valueWidth}>
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 400,
-                      fontStyle: "normal",
-                      color: "#000",
-                      paddingRight: 30
-                    }}
-                  >
-                    {`${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-                    {address.description && ` - ${address.description}`}
-                  </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 400,
+                    fontStyle: "normal",
+                    color: "#000",
+                    paddingRight: 30,
+                  }}
+                >
+                  {`${address.streetNumber}, ${address.postalCode}, ${address.country}`}
+                  {address.description && ` - ${address.description}`}
+                </Text>
               </GridItem>
             </Row>
           ))}
@@ -202,13 +202,18 @@ export const AddressDetails = ({
 
         {/* <View style={styles.datesColumn}> */}
         <GridItem width={valueWidth}>
-          {workDates?.map((date, index) => (
-            <Text style={styles.dateText} key={index}>
-              {`${formatDateTimeToDate(date.startDate)}${
-                date.endDate ? " bis " + formatDateTimeToDate(date.endDate) + (workDates?.length -1 != index &&", " || "." ): workDates?.length -1 != index &&", " || "."
-              }`}
-            </Text>
-          ))}
+          <Text style={{ ...styles.dateText, paddingRight: 30 }}>
+            {workDates?.map(
+              (date, index) =>
+                `${formatDateTimeToDate(date.startDate)}${
+                  date.endDate
+                    ? " bis " +
+                      formatDateTimeToDate(date.endDate) +
+                      ((workDates?.length - 1 != index && ", ") || ".")
+                    : (workDates?.length - 1 != index && ", ") || "."
+                }`
+            )}
+          </Text>
         </GridItem>
         {/* </View> */}
       </Row>
