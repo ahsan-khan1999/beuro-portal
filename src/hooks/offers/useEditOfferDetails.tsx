@@ -96,6 +96,9 @@ export const useEditOfferDetails = ({
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.leadID?.customerID,
+            gender: staticEnums["Gender"][res?.payload?.leadID?.customerDetail?.gender]
+
+
           });
         }
       );
@@ -135,6 +138,7 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        gender:null
       });
     } else {
       reset({
@@ -153,6 +157,8 @@ export const useEditOfferDetails = ({
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         customerID: offerDetails?.leadID?.customerID,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+
       })
     }
   }, [type]);

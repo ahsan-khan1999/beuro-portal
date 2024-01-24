@@ -100,6 +100,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         title: offerDetails?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+
+
       });
     }
   }, [offerDetails?.id]);
@@ -170,7 +173,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        title: null
+        title: null,
+        gender:null
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {
       reset({
@@ -189,6 +193,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         title: offerDetails?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+
+
       });
     } else if(type === "Existing Customer" && !offerDetails?.id){
       dispatch(setLeads([]))

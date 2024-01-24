@@ -186,7 +186,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `address.${i}.country`,
                 options: Object.keys(staticEnums.Country).map((item) => ({
                   value: item,
-                  label: item,
+                  label: translate(`countries.${item}`),
                 })),
                 control,
                 value: Object.keys(staticEnums.Country)[0],

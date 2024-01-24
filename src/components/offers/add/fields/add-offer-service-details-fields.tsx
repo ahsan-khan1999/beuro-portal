@@ -252,6 +252,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       name: `serviceDetail.${i}.discount`,
                       placeholder: "10",
                       register,
+                      step: "0.01",
+
                       onChange: () => generatePrice && generatePrice(i),
                     },
                   },
@@ -294,6 +296,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       placeholder: "1000CHF",
                       register,
                       step: "0.01",
+                      disabled:true
 
                     },
                   },

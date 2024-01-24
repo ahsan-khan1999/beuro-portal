@@ -84,6 +84,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
+        gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
+
       });
     }
   }, [leadDetails.id]);

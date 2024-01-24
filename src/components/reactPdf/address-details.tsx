@@ -5,6 +5,7 @@ import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 // Define your styles
 const styles = StyleSheet.create({
@@ -72,7 +73,6 @@ export const AddressDetails = ({
 
   const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 6;
   const valueWidth = 595 - labelWidth;
-
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
@@ -165,7 +165,7 @@ export const AddressDetails = ({
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${address.country}`}
+                  {`${address.streetNumber}, ${address.postalCode}, ${Country[address.country as keyof typeof Country]}`}
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
@@ -205,12 +205,11 @@ export const AddressDetails = ({
           <Text style={{ ...styles.dateText, paddingRight: 30 }}>
             {workDates?.map(
               (date, index) =>
-                `${formatDateTimeToDate(date.startDate)}${
-                  date.endDate
-                    ? " bis " +
-                      formatDateTimeToDate(date.endDate) +
-                      ((workDates?.length - 1 != index && ", ") || ".")
-                    : (workDates?.length - 1 != index && ", ") || "."
+                `${formatDateTimeToDate(date.startDate)}${date.endDate
+                  ? " bis " +
+                  formatDateTimeToDate(date.endDate) +
+                  ((workDates?.length - 1 != index && ", ") || ".")
+                  : (workDates?.length - 1 != index && ", ") || "."
                 }`
             )}
           </Text>
@@ -221,3 +220,12 @@ export const AddressDetails = ({
     </View>
   );
 };
+
+
+export const Country = {
+  "Swizterland": "Schweiz",
+  "Germany": "Deutschland",
+  "Austria": "Österreich",
+  "Italy": "Italien",
+  "France": "Frankreich"
+}
