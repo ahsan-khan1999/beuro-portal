@@ -198,11 +198,13 @@
     },
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
-    "value_max": "value_max"
+    "value_max": "value_max",
+    "discountLessThanTotalPrice":"muss geringer sein als der Gesamtpreis"
+
   },
   "sidebar": {
     "customer": {
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Dashboard",
       "customers": "Kunden",
       "leads": {
         "leads": "Lead",
@@ -212,7 +214,7 @@
       },
       "offers": {
         "offers": "Angebote",
-        "open": "Öffnen",
+        "open": "Offen",
         "signed": "Unterzeichnet",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
@@ -228,7 +230,7 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Öffnen Sie"
+        "open": "Offen"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -332,7 +334,7 @@
     "main_heading": "E-Mail-Verfolger",
     "email_detail_heading": "E-Mail",
     "table_functions": {
-      "open": "Öffnen Sie",
+      "open": "Offen Sie",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -664,7 +666,7 @@
       "receipt_email_preview": "E-Mail-Vorschau der Quittung"
     },
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -741,7 +743,7 @@
   "contracts": {
     "main_heading": "Verträge",
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "confirm": "Bestätigt",
       "cancel": "Abgebrochen"
     },
@@ -771,7 +773,9 @@
       "payment_method": "Zahlungsmethode",
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
-      "images": "Bilder"
+      "images": "Bilder",
+      "to":"bis"
+
     },
     "tabs_headings": {
       "offer_details": "Angebotedetails",
@@ -894,9 +898,9 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Lead öffnen",
-      "close": "Lead schließen",
-      "expire": "Lead ablaufen"
+      "open": "Lead offen",
+      "close": "Lead geschlossen",
+      "expire": "Lead abgelaufen"
     },
     "table_headings": {
       "id": "ID",
@@ -1211,7 +1215,7 @@
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
-      "open": "Öffnen",
+      "open": "Offen",
       "signed": "Unterzeichnet",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
@@ -1890,7 +1894,7 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquelle",
-      "open": "Öffnen Sie"
+      "open": "Offen Sie"
     }
   },
   "global_search": {

@@ -43,7 +43,6 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-        console.log(dataToAdd);
 
         return (
           <div
@@ -84,8 +83,10 @@ const TableRows = ({
                   item: item,
                 }))}
                 selectedItem={item.paymentType}
-                onItemSelected={(status) =>
+                onItemSelected={(status) =>{
+                  
                   handlePaymentStatusUpdate(item.id, status, "invoice")
+                }
                 }
                 dropDownClassName={`${
                   staticEnums["PaymentType"][item.paymentType] === 0
@@ -103,8 +104,12 @@ const TableRows = ({
                   ?.slice(0, -1)
                   ?.map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={(status) =>
-                  handleInvoiceStatusUpdate(item.id, status, "invoice")
+                onItemSelected={(status) =>{
+                  if(item.invoiceStatus !== status){
+                    handleInvoiceStatusUpdate(item.id, status, "invoice")
+                  }
+
+                }
                 }
                 dropDownClassName={`${
                   staticEnums["InvoiceStatus"][item.invoiceStatus] === 0

@@ -1,4 +1,5 @@
 import { ProductItemFooterProps } from "@/types/types";
+import { calculateTax } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 export const ProductItemFooter = ({
@@ -6,8 +7,14 @@ export const ProductItemFooter = ({
   discount,
   grandTotal,
   tax,
-  systemSettings
+  systemSettings,
+  serviceDiscountSum,
+  discountType,
+  taxType
 }: Partial<ProductItemFooterProps>) => {
+
+  const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
+  const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
   const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
@@ -37,14 +44,14 @@ export const ProductItemFooter = ({
             <span className="text-[#1E1E1E] text-base font-medium">
               {translate("pdf.tax")}:
             </span>
-            <span className="text-[#1E1E1E] text-base font-medium ">{tax}</span>
+            <span className="text-[#1E1E1E] text-base font-medium ">{calculatedTax} ({tax}%)</span>
           </div>
           <div className="flex justify-between">
             <span className="text-[#1E1E1E] text-base font-medium">
               {translate("pdf.discount")}:
             </span>
             <span className="text-[#1E1E1E] text-base font-medium">
-              {discount}
+              {serviceDiscountSum && (Number(calculatedDiscount) + serviceDiscountSum).toFixed(2) || calculatedDiscount}
             </span>
           </div>
         </div>
@@ -53,7 +60,7 @@ export const ProductItemFooter = ({
             {translate("pdf.grand_total")}:
           </span>
           <span className="text-base font-semibold text-[#fff]">
-            {grandTotal}{" "+systemSettings?.currency}
+            {grandTotal}{" " + systemSettings?.currency}
           </span>
         </div>
       </div>

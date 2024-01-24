@@ -47,7 +47,6 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     }
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const response = await dispatch(
       updateEmailTemplateSetting({ data, router, setError, translate })
     );

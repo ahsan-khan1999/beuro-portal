@@ -4,6 +4,7 @@ import { CustomerAddress } from "@/types/leads";
 import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 // Define your styles
 const styles = StyleSheet.create({
@@ -72,7 +73,6 @@ export const AddressDetails = ({
   const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 5;
   const valueWidth = 595 - labelWidth;
 
-  console.log(labelWidth, MaxLength);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
@@ -181,7 +181,7 @@ export const AddressDetails = ({
             fontWeight: 500,
             fontStyle: "medium",
             color: "#000",
-            width: "20%",
+            width: "25%",
           }}
         >
           Arbeitstermine:
@@ -204,8 +204,8 @@ export const AddressDetails = ({
         <GridItem width={valueWidth}>
           {workDates?.map((date, index) => (
             <Text style={styles.dateText} key={index}>
-              {`${date.startDate}${
-                date.endDate ? " to " + date.endDate + "," : ""
+              {`${formatDateTimeToDate(date.startDate)}${
+                date.endDate ? " bis " + formatDateTimeToDate(date.endDate) + (workDates?.length -1 != index &&", " || "." ): workDates?.length -1 != index &&", " || "."
               }`}
             </Text>
           ))}

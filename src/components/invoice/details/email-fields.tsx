@@ -276,20 +276,20 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: `${translate(
-                "contracts.contract_email_preview.back_button"
-              )}`,
-              inputType: "button",
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              onClick: onBack,
-            },
-          },
+          // {
+          //   containerClass: "mb-0",
+          //   field: {
+          //     type: Field.button,
+          //     id: "button",
+          //     text: `${translate(
+          //       "contracts.contract_email_preview.back_button"
+          //     )}`,
+          //     inputType: "button",
+          //     className:
+          //       "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+          //     onClick: onBack,
+          //   },
+          // },
           {
             containerClass: "mb-0",
             field: {

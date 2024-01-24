@@ -17,7 +17,10 @@ const ServiceDetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
+  const totalDiscount = offerDetails?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+    const price = service?.discount || 0;
+    return acc + price;
+  }, 0)
   return (
     <LeadsCardLayout>
       <div
@@ -42,7 +45,8 @@ const ServiceDetailsData = ({
       </div>
       <TableLayout>
         <div className="mt-[23px] border-b border-[#e5e5e5] mb-10">
-          <div className="bg-white grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)] mb-[28px]">
+          <div
+            className="bg-white grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[28px]">
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("offers.service_details.detail_headings.title")}
             </span>
@@ -60,13 +64,17 @@ const ServiceDetailsData = ({
               {translate("offers.service_details.detail_headings.count")}
             </span>
             <span>
+              {translate("offers.service_details.detail_headings.discount")}
+            </span>
+
+            <span>
               {translate("offers.service_details.detail_headings.total_price")}
             </span>
           </div>
 
           {offerDetails?.serviceDetail?.serviceDetail.map((item, index) => (
             <div
-              className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)] mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
+              className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
               key={index}
             >
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -83,6 +91,9 @@ const ServiceDetailsData = ({
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.count}
+              </span>
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {item?.discount}
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.totalPrice}
@@ -115,10 +126,10 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.discount")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.discountType === "Amount" ? offerDetails?.discountAmount: calculateTax(offerDetails?.total, Number(offerDetails?.discountAmount))} 
+                  {offerDetails?.discountType === "Amount" ? (offerDetails?.discountAmount + totalDiscount) : (calculateTax(offerDetails?.subTotal, Number(offerDetails?.discountAmount)) + totalDiscount)}
                 </span>
               </div>
-              
+
             </div>
 
             <hr className="opacity-20 mt-2" />

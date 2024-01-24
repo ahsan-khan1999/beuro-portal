@@ -14,6 +14,10 @@ const ServiceDetailsData = ({
   currency?: string;
 }) => {
   const { t: translate } = useTranslation();
+  const totalDiscount = contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+    const price = service?.discount || 0;
+    return acc + price;
+  }, 0)
   return (
     <div
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] w-full h-fit "
@@ -25,7 +29,8 @@ const ServiceDetailsData = ({
 
       <TableLayout>
         <div className="mt-6 border-b border-[#e5e5e5] mb-10">
-          <div className="bg-white grid xs:grid-cols-[minmax(200px,_200px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(180px,_180px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(180px,_180px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)] mb-[28px]">
+          <div
+            className="bg-white grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[28px]">
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("contracts.service_details.title")}
             </span>
@@ -33,16 +38,21 @@ const ServiceDetailsData = ({
               {translate("contracts.service_details.description")}
             </span>
 
-            <span>{translate("contracts.service_details.price")}</span>
+            <span>{translate("contracts.service_details.price")}(
+              {currency})</span>
             <span> {translate("contracts.service_details.unit")}</span>
             <span> {translate("contracts.service_details.count")}</span>
+            <span>
+              {translate("offers.service_details.detail_headings.discount")}
+            </span>
             <span>{translate("contracts.service_details.total_price")}</span>
           </div>
 
           {contractDetails?.offerID?.serviceDetail?.serviceDetail.map(
             (item, index) => (
               <div
-                className="grid xs:grid-cols-[minmax(200px,_200px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(180px,_180px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(180px,_180px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)] mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
+                className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
+
                 key={index}
               >
                 <span className="break-all text-base font-medium text-[#4B4B4B]">
@@ -60,6 +70,9 @@ const ServiceDetailsData = ({
                 </span>
                 <span className="text-base font-medium text-[#4B4B4B]">
                   {item.count}
+                </span>
+                <span className="text-base font-medium text-[#4B4B4B]">
+                  {item?.discount}
                 </span>
                 <span className="text-base font-medium text-[#4B4B4B]">
                   {item.totalPrice}
@@ -91,7 +104,7 @@ const ServiceDetailsData = ({
                   {translate("offers.service_details.detail_headings.discount")}
                 </span>
                 <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractDetails?.offerID?.discountType === "Amount" ? contractDetails?.offerID?.discountAmount : calculateTax(contractDetails?.offerID?.total, Number(contractDetails?.offerID?.discountAmount))}
+                  {contractDetails?.offerID?.discountType === "Amount" ? (contractDetails?.offerID?.discountAmount + totalDiscount) : (calculateTax(contractDetails?.offerID?.subTotal, Number(contractDetails?.offerID?.discountAmount)) + totalDiscount)}
                 </span>
               </div>
             </div>

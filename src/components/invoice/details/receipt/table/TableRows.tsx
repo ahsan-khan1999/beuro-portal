@@ -72,8 +72,10 @@ const TableRows = ({
                   item: item,
                 }))}
                 selectedItem={item.paymentType}
-                onItemSelected={(status) =>
+                onItemSelected={(status) =>{
+
                   handlePaymentStatusUpdate(item.id, status, "reciept")
+                }
                 }
                 dropDownClassName={`${
                   staticEnums["PaymentType"][item.paymentType] === 0
@@ -91,8 +93,11 @@ const TableRows = ({
                   ?.slice(0, -1)
                   ?.map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={(status) =>
-                  handleInvoiceStatusUpdate(item.id, status, "reciept")
+                onItemSelected={(status) =>{
+                  if(status !== "Paid"){
+                    handleInvoiceStatusUpdate(item.id, status, "reciept")
+                  }
+                }
                 }
                 dropDownClassName={`${
                   staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
