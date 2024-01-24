@@ -780,7 +780,8 @@
       "payment_method": "Payment Method",
       "contract_status": "Contarct Status",
       "notes": "Notes",
-      "images": "Images"
+      "images": "Images",
+      "to":"to"
     },
     "tabs_headings": {
       "offer_details": "Offer Details",

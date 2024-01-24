@@ -25,6 +25,7 @@ const ContractDetailsCard = ({
   handleStatusUpdate,
   offerDeleteHandler,
   handleSendEmail,
+  isSendEmail
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -80,14 +81,14 @@ const ContractDetailsCard = ({
             </span>
           </button>
 
-          <PrimaryPDF
+          {isSendEmail && <PrimaryPDF
             onClick={() =>
               router.push({
                 pathname: "/contract/pdf-preview",
                 query: { offerID: contractDetails?.id },
               })
             }
-          />
+          />}
           {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
@@ -169,10 +170,9 @@ const ContractDetailsCard = ({
             <div>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
-                  (item) =>
-                    `${formatDateTimeToDate(
-                      item.startDate
-                    )} to ${formatDateTimeToDate(item.endDate)}`
+                  (item, index) =>
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate ? ` ${translate("contracts.card_content.to")} ` + formatDateTimeToDate(item.endDate) + (contractDetails?.offerID?.date?.length - 1 != index && ", " || ".") : contractDetails?.offerID?.date?.length - 1 != index && ", " || "."
+                    }`
                 )}
               </span>
             </div>
@@ -243,37 +243,37 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                <DropDown
-                  items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
-                  )}
-                  selectedItem={contractDetails?.contractStatus}
-                  onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] rounded-lg px-4 py-[3px] flex items-center`}
-                  dropDownTextClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] text-base font-medium me-1`}
-                  dropDownIconClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}]`}
-                />
-              )) || (
-                <span
-                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getContractStatusColor(
+                  <DropDown
+                    items={Object.keys(staticEnums["ContractStatus"]).map(
+                      (item) => ({ item: item })
+                    )}
+                    selectedItem={contractDetails?.contractStatus}
+                    onItemSelected={handleStatusUpdate}
+                    dropDownClassName={`border border-[${getContractStatusColor(
                       contractDetails?.contractStatus
-                    )}`,
-                    color: `${getContractStatusColor(
+                    )}] rounded-lg px-4 py-[3px] flex items-center`}
+                    dropDownTextClassName={`text-[${getContractStatusColor(
                       contractDetails?.contractStatus
-                    )}`,
-                  }}
-                >
-                  {contractDetails?.contractStatus}
-                </span>
-              )}
+                    )}] text-base font-medium me-1`}
+                    dropDownIconClassName={`text-[${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}]`}
+                  />
+                )) || (
+                  <span
+                    className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                    style={{
+                      borderColor: `${getContractStatusColor(
+                        contractDetails?.contractStatus
+                      )}`,
+                      color: `${getContractStatusColor(
+                        contractDetails?.contractStatus
+                      )}`,
+                    }}
+                  >
+                    {contractDetails?.contractStatus}
+                  </span>
+                )}
             </span>
           </div>
 

@@ -134,7 +134,10 @@ const OfferSignedPdf = ({
 
           <ServiceTableHederRow />
           {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index} />
+            <ServiceTableRow {...item} key={index}
+              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
+            />
           ))}
           <ServicesTotalAmount
             {...serviceItemFooter}
@@ -177,7 +180,7 @@ const OfferSignedPdf = ({
   }, [signature]);
 
   const acceptOffer = async (file: any) => {
-    const convertedFile = blobToFile(file, "offer.pdf");
+    const convertedFile = blobToFile(file, (headerDetails?.offerNo + " " + headerDetails?.companyName) || "offer.pdf");
     if (!signature) {
       toast.error("please sign first");
       return;

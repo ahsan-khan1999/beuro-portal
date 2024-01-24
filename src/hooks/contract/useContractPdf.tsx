@@ -201,7 +201,11 @@ export const useContractPdf = () => {
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               discountType:contractDetails?.offerID?.discountType,
-              taxType:contractDetails?.offerID?.taxType
+              taxType:contractDetails?.offerID?.taxType,
+              serviceDiscountSum:contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              }, 0)
             },
             footerDetails: {
               firstColumn: {
