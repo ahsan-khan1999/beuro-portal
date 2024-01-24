@@ -163,7 +163,7 @@ export const useServiceOfferEditDetail = ({
         setValue(`serviceDetail.${index}.totalPrice`, 0);
 
       }else{
-        setValue(`serviceDetail.${index}.totalPrice`, totalPrice);
+        setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
 
       }
       generateGrandTotal();

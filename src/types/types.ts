@@ -660,7 +660,7 @@ export interface DocumentHeaderDetailsProps {
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
   fileType?: "contract" | "invoice" | "receipt";
-  companyName?:string
+  companyName?:string;
 }
 
 export interface ProductItemFooterProps {
@@ -689,6 +689,8 @@ export interface ContactDetailsProps {
   };
   email: string;
   phone: string;
+  gender?:string
+
 }
 export interface MovingDetailsProps {
   header: string;

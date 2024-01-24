@@ -101,6 +101,28 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
             },
           },
           {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: "gender",
+              className: "mb-[10px] ",
+            },
+            field: {
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              type: Field.select,
+              id: "gender",
+              name: "gender",
+              options: Object.keys(staticEnums.Gender)
+                .map((item) => ({
+                  value: staticEnums.Gender[item],
+                  label: translate(`gender.${item}`),
+                })),
+
+              control,
+              value: "",
+            },
+          },
+          {
             label: {
               text: `${translate("leads.customer_details.full_name")}`,
               htmlFor: "fullName",

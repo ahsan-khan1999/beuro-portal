@@ -136,6 +136,8 @@ export const useOfferPdf = () => {
               },
               email: offerDetails?.leadID?.customerDetail?.email,
               phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+              gender:offerDetails?.leadID?.customerDetail?.gender?.toString()
+
             },
             movingDetails: {
               address: offerDetails?.addressID?.address,

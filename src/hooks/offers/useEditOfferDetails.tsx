@@ -138,7 +138,7 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        gender:null
+        gender: null
       });
     } else {
       reset({
@@ -173,18 +173,23 @@ export const useEditOfferDetails = ({
   });
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-      content: selectedContent,
-      customerID: selectedCustomers[0]?.id,
-      leadID: "",
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        content: selectedContent,
+        customerID: selectedCustomers?.id,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+
+      });
+
+    }
   };
   useMemo(() => {
     const filteredContent = content?.find(

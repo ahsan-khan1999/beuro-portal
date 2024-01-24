@@ -134,6 +134,8 @@ const SignPdfPreview = () => {
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
+                gender: offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
+
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,

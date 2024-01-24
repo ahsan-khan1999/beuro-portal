@@ -117,18 +117,24 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if(selectedCustomers){
 
-    reset({
-      ...selectedCustomers[0],
-      customerID: selectedCustomers[0]?.id,
-      type: type,
-      content: selectedContent,
-      leadID: "",
-    });
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
+  
+      reset({
+        ...selectedCustomers,
+        customerID: selectedCustomers?.id,
+        type: type,
+        content: selectedContent,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+
+      });
+
+    }
   };
   const handleContentSelect = () => { };
   useMemo(() => {

@@ -16,6 +16,8 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import { Button } from "@/base-components/ui/button/button";
+import { BaseButton } from "@/base-components/ui/button/base-button";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -26,6 +28,7 @@ const ContractDetailsCard = ({
   offerDeleteHandler,
   handleSendEmail,
   isSendEmail,
+  handleUpdateAdditionalDetailsModal
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -80,7 +83,7 @@ const ContractDetailsCard = ({
               {translate("contracts.card_content.confirm_button")}
             </span>
           </button>
-
+       
           {isSendEmail && (
             <PrimaryPDF
               onClick={() =>
@@ -173,18 +176,17 @@ const ContractDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
-                      item.endDate
-                        ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
-                          ((contractDetails?.offerID?.date?.length - 1 !=
-                            index &&
-                            ", ") ||
-                            ".")
-                        : (contractDetails?.offerID?.date?.length - 1 !=
-                            index &&
-                            ", ") ||
-                          "."
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                        ".")
+                      : (contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                      "."
                     }`
                 )}
               </span>
@@ -256,37 +258,37 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                <DropDown
-                  items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
-                  )}
-                  selectedItem={contractDetails?.contractStatus}
-                  onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] rounded-lg px-4 py-[3px] flex items-center`}
-                  dropDownTextClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] text-base font-medium me-1`}
-                  dropDownIconClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}]`}
-                />
-              )) || (
-                <span
-                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getContractStatusColor(
+                  <DropDown
+                    items={Object.keys(staticEnums["ContractStatus"]).map(
+                      (item) => ({ item: item })
+                    )}
+                    selectedItem={contractDetails?.contractStatus}
+                    onItemSelected={handleStatusUpdate}
+                    dropDownClassName={`border border-[${getContractStatusColor(
                       contractDetails?.contractStatus
-                    )}`,
-                    color: `${getContractStatusColor(
+                    )}] rounded-lg px-4 py-[3px] flex items-center`}
+                    dropDownTextClassName={`text-[${getContractStatusColor(
                       contractDetails?.contractStatus
-                    )}`,
-                  }}
-                >
-                  {contractDetails?.contractStatus}
-                </span>
-              )}
+                    )}] text-base font-medium me-1`}
+                    dropDownIconClassName={`text-[${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}]`}
+                  />
+                )) || (
+                  <span
+                    className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                    style={{
+                      borderColor: `${getContractStatusColor(
+                        contractDetails?.contractStatus
+                      )}`,
+                      color: `${getContractStatusColor(
+                        contractDetails?.contractStatus
+                      )}`,
+                    }}
+                  >
+                    {contractDetails?.contractStatus}
+                  </span>
+                )}
             </span>
           </div>
 
