@@ -773,7 +773,9 @@
       "payment_method": "Zahlungsmethode",
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
-      "images": "Bilder"
+      "images": "Bilder",
+      "to":"bis"
+
     },
     "tabs_headings": {
       "offer_details": "Angebotedetails",
