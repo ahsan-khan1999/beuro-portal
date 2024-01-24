@@ -17,7 +17,7 @@ export const ContactAddress = ({
 }: Partial<ContactDetailsProps>) => (
   <View style={container}>
     <View style={leftColumn}>
-      <Text style={textBase}>{address?.name}</Text>
+      <Text style={textBase}>Herr/Frau {address?.name}</Text>
       <Text style={textBase}>{address?.streetWithNumber}</Text>
       <Text style={textBase}>{`${address?.postalCode} ${address?.city}`}</Text>
     </View>

@@ -93,7 +93,8 @@ const PdfFile = ({
             <ServiceTableRow
               {...item}
               key={index}
-              pagebreak={index === arr.length - 1}
+              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
             />
           ))}
           <ServicesTotalAmount

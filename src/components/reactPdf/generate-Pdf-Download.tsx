@@ -81,7 +81,7 @@ const PdfDownload = ({
       <BlobProvider
         document={
           <Document>
-            <Page style={{...styles.body, minHeight: "100%"}} dpi={72}>
+            <Page style={{ ...styles.body, minHeight: "100%" }} dpi={72}>
               <Header {...headerDetails} />
               <View
                 style={{
@@ -97,7 +97,11 @@ const PdfDownload = ({
 
                 <ServiceTableHederRow />
                 {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index} />
+                  <ServiceTableRow {...item} key={index}
+                    pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
+
+                  />
                 ))}
                 <ServicesTotalAmount {...serviceItemFooter} />
               </View>

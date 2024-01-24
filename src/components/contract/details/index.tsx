@@ -35,6 +35,7 @@ const ContractDetails = () => {
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleStatusUpdate={handleStatusUpdate}
           handleSendEmail={handleSendEmail}
+          isSendEmail={isSendEmail}
         />
       </div>
 
@@ -49,6 +50,8 @@ const ContractDetails = () => {
               handlePaymentStatusUpdate={handlePaymentStatusUpdate}
               handleStatusUpdate={handleStatusUpdate}
               handleSendEmail={handleSendEmail}
+              isSendEmail={isSendEmail}
+
             />
           </div>
           <div className="mt-5">

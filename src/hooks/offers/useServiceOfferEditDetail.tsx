@@ -195,7 +195,6 @@ export const useServiceOfferEditDetail = ({
         setValue("discountAmount", totalPrices);
         console.info("Amount should not be greater than total price");
       } else if (!!+discountType && discountAmount === "") {
-        console.log("here");
       }
     } else {
       setValue("discountAmount", prevDisAmount);

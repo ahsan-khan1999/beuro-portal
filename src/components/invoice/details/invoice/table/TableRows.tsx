@@ -43,7 +43,6 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-        console.log(dataToAdd);
 
         return (
           <div

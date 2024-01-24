@@ -219,7 +219,11 @@ export const useReceiptPdf = () => {
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               discountType: invoiceDetails?.invoiceID?.contractID?.offerID?.discountType,
-              taxType: invoiceDetails?.invoiceID?.contractID?.offerID?.taxType
+              taxType: invoiceDetails?.invoiceID?.contractID?.offerID?.taxType,
+              serviceDiscountSum: invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              }, 0)
             },
             footerDetails: {
               firstColumn: {
