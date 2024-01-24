@@ -177,7 +177,7 @@ export const AddressDetails = ({
             fontWeight: 500,
             fontStyle: "medium",
             color: "#000",
-            width: "20%",
+            width: "25%",
           }}
         >
           Auftragsdatum:

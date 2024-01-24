@@ -118,6 +118,7 @@ const SignPdfPreview = () => {
                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
+                companyName:offerDetails?.Offer?.createdBy?.company?.companyName,
               },
               contactAddress: {
                 address: {

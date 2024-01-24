@@ -659,7 +659,8 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt"
+  fileType?: "contract" | "invoice" | "receipt";
+  companyName?:string
 }
 
 export interface ProductItemFooterProps {
