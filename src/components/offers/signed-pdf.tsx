@@ -180,7 +180,7 @@ const OfferSignedPdf = ({
   }, [signature]);
 
   const acceptOffer = async (file: any) => {
-    const convertedFile = blobToFile(file, (headerDetails?.offerNo + " " + headerDetails?.companyName) || "offer.pdf");
+    const convertedFile = blobToFile(file, `${headerDetails?.offerNo + "-" + headerDetails?.companyName}.pdf` || "offer.pdf");
     if (!signature) {
       toast.error("please sign first");
       return;
