@@ -386,7 +386,7 @@ export const useInvoicePdf = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/invoices");
+    // router.push("/invoices");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

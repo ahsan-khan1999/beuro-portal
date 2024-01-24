@@ -67,7 +67,6 @@ const ReceiptPdfPreview = () => {
         subHeading={translate("common.modals.receipt_update")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back();
         }}
       />
     ),
