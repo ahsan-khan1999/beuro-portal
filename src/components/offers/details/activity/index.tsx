@@ -12,7 +12,8 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 
 const Activity = () => {
   const { offerActivity } = useAppSelector((state) => state.offer);
-  const activityData: OffersActivityDataTypes[] | null =
+  //@ts-expect-error
+  const activityData:OffersActivityDataTypes[] | null =
     offerActivity &&
     offerActivity?.activity?.map((item) => ({
       activeTime: formatDateTimeToTime(item?.dateTime),

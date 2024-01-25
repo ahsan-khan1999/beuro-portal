@@ -30,7 +30,7 @@ const SettingTopDataButtons = ({
         {buttonsData.map((item, index) => (
           <div className="flex justify-center">
             <button
-              className={`px-4 py-[10px]  whitespace-nowrap text-[#4B4B4B] font-medium text-base ${
+              className={`px-4 py-[10px] whitespace-nowrap text-[#4B4B4B] font-medium text-base ${
                 switchDetails === index
                   ? "bg-[#4A13E7] text-white rounded-md"
                   : ""

@@ -124,11 +124,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender)
-                .map((item) => ({
-                  value: staticEnums.Gender[item],
-                  label: translate(`gender.${item}`),
-                })),
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
 
               control,
               value: "",
@@ -581,7 +580,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "float-right mb-0 mt-[30px]",
       field: {
         type: Field.button,
         id: "button",

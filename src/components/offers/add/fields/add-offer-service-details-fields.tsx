@@ -29,7 +29,7 @@ const serviceObject = {
   description: "",
   totalPrice: "",
   serviceType: "Existing Service",
-  discount:0
+  discount: 0,
 };
 
 export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
@@ -69,8 +69,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
           id: "button",
           text: `${translate("common.remove_button")}`,
           inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${i === 0 && "hidden"
-            }`,
+          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+            i === 0 && "hidden"
+          }`,
           onClick: () => remove(i),
         },
       },
@@ -183,17 +184,18 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
         field: {
           type: Field.div,
           id: `serviceDetail_${i}`,
-          className: "flex gap-x-3 gap-y-5",
+          className: "",
           children: [
             {
               containerClass: "mb-0 col-span-1",
               field: {
                 type: Field.div,
                 id: "div-field",
-                className: "mb-0 grid grid-cols-5 gap-3",
+                className:
+                  "mb-0 grid grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-5",
                 children: [
                   {
-                    containerClass: "mb-0 col-span-1",
+                    containerClass: "mb-0",
                     label: {
                       text: `${translate("offers.service_details.price")}`,
                       htmlFor: `serviceDetail.${i}.price`,
@@ -214,7 +216,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                   },
                   {
-                    containerClass: "mb-0 col-span-1",
+                    containerClass: "mb-0 ",
                     label: {
                       text: `${translate(
                         "offers.service_details.detail_headings.count"
@@ -235,7 +237,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                     },
                   },
                   {
-                    containerClass: "mb-0 col-span-1",
+                    containerClass: "mb-0",
                     label: {
                       text: `${translate(
                         "offers.service_details.detail_headings.discount"
@@ -296,14 +298,12 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       placeholder: "1000CHF",
                       register,
                       step: "0.01",
-                      disabled:true
-
+                      disabled: true,
                     },
                   },
                 ],
               },
             },
-         
           ],
         },
       },
@@ -784,7 +784,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px]",
+          className: "flex items-center justify-end space-x-[18px]",
           children: [
             {
               containerClass: "mb-0",

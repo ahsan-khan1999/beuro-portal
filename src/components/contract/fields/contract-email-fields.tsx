@@ -11,7 +11,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   content,
   contentDetails,
   onContentSelect,
-  attachements, setAttachements,
+  attachements,
+  setAttachements,
   contractDetails,
   isMoreEmail,
   setIsMoreEmail,
@@ -23,7 +24,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
+        className:
+          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
             containerClass: "mb-0 col-span-4",
@@ -54,14 +56,18 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                   field: {
                     type: Field.span,
                     text: `Cc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("cc", "")
+                        setValue("cc", "");
                       }
-                      setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isCc: !isMoreEmail?.isCc,
+                      });
+                    },
                   },
                 },
 
@@ -70,18 +76,22 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                   field: {
                     type: Field.span,
                     text: `Bcc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("bcc", "")
+                        setValue("bcc", "");
                       }
-                      setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isBcc: !isMoreEmail?.isBcc,
+                      });
+                    },
                   },
                 },
-              ]
-            }
+              ],
+            },
           },
 
           {
@@ -103,10 +113,13 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                 })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id && contentDetails?.id || contractDetails?.offerID?.content?.id || ""
+              value:
+                (contentDetails?.id && contentDetails?.id) ||
+                contractDetails?.offerID?.content?.id ||
+                "",
             },
           },
-          isMoreEmail?.isCc && {
+          (isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Cc`,
@@ -119,12 +132,10 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          } || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Cc`,
@@ -137,13 +148,11 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
           },
-          isMoreEmail?.isBcc && {
+          (isMoreEmail?.isBcc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Bcc`,
@@ -156,13 +165,10 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
-          || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Bcc`,
@@ -175,12 +181,10 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
+          },
         ],
       },
     },
@@ -292,7 +296,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px] ",
         children: [
           // {
           //   containerClass: "mb-0",
@@ -325,8 +329,6 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         ],
       },
     },
-
-    
   ];
 
   return formField;
