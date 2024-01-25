@@ -26,22 +26,23 @@ const ComposeMail = () => {
     loading,
     loadingContent,
   } = useInvoiceEmail(backRouteHandler, onNextHandle);
+  
   return (
-    <>
-      <ContractFormCard>
-        <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-20 pb-5">
-          {translate("invoice.receipt_card.invoice_email_preview")}
-        </h2>
+      <>
+        <ContractFormCard>
+          <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-20 pb-5">
+            {translate("invoice.receipt_card.invoice_email_preview")}
+          </h2>
 
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
-      </ContractFormCard>
-    </>
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
+          />
+        </ContractFormCard>
+      </>
   );
 };
 

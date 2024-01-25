@@ -314,32 +314,22 @@ export const QRCodeSettingsAddField: GenerateQRCodeSettingFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
-        className: "flex justify-between",
         type: Field.div,
+        className: "flex justify-end items-center mt-[30px]",
         id: "div",
         children: [
           {
-            containerClass: "",
+            containerClass: "mb-0",
             field: {
-              type: Field.div,
-              className: "flex justify-between space-x-3",
-              id: "div",
-              children: [
-                {
-                  containerClass: "mb-0 mt-[30px]",
-                  field: {
-                    type: Field.button,
-                    id: "button",
-                    text: `${translate("setting.save_setting")}`,
-                    inputType: "submit",
-                    className:
-                      "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
-                    loading,
-                  },
-                },
-              ],
+              type: Field.button,
+              id: "button",
+              text: `${translate("setting.save_setting")}`,
+              inputType: "submit",
+              className:
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+              loading,
             },
           },
         ],

@@ -278,6 +278,20 @@ export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const updateOfferContent: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/content", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            await apiServices.updateOfferContent(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const OfferSlice = createSlice({
     name: "OfferSlice",
     initialState,
@@ -443,6 +457,15 @@ const OfferSlice = createSlice({
             if (action?.payload) state.offerDetails = action?.payload
         });
         builder.addCase(updateOfferDiscount.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateOfferContent.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateOfferContent.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateOfferContent.rejected, (state) => {
             state.loading = false
         });
 

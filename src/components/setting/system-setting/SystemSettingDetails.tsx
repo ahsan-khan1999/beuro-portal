@@ -135,7 +135,7 @@ const SystemSettingDetails = ({
         />
       </div>
 
-      <div className="my-3 ml-[31px]">
+      <div className="my-3 float-right">
         <Button
           id="settings"
           inputType="button"

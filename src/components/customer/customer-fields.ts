@@ -29,8 +29,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px] ",
             },
             field: {
-              className: `!px-4 !border-[#BFBFBF] ${!isUpdate && "!border-light"
-                } focus:!border-primary `,
+              className: `!px-4 !border-[#BFBFBF] ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -54,16 +55,16 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px] ",
             },
             field: {
-              className: `!px-4 !border-[#BFBFBF] ${!isUpdate && "!border-light"
-                } focus:!border-primary `,
+              className: `!px-4 !border-[#BFBFBF] ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender)
-                .map((item) => ({
-                  value: staticEnums.Gender[item],
-                  label: translate(`gender.${item}`),
-                })),
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
 
               control,
               disabled: isUpdate,
@@ -237,7 +238,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px] mt-8",
         children: [
           {
             field: {
@@ -246,8 +247,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] h-[50px] text-dark hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] h-[50px] text-dark hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
             },
           },
           {
@@ -256,8 +258,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "button",
               text: `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${isUpdate && "hidden"
-                }`,
+              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
+                isUpdate && "hidden"
+              }`,
               loading,
             },
           },

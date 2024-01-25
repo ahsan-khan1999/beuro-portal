@@ -108,7 +108,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex items-center space-x-[18px] ",
+          className: "flex justify-end items-center space-x-[18px] ",
           children: [
             {
               containerClass: "mb-0",

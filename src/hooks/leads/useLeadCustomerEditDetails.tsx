@@ -10,6 +10,7 @@ import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { useMemo } from "react";
 import { createLead } from "@/api/slices/lead/leadSlice";
 import { staticEnums } from "@/utils/static";
+import { getKeyByValue } from "@/utils/auth.util";
 
 export const useLeadCustomerEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -41,12 +42,12 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
         fullName: leadDetails.customerDetail?.fullName,
         customer: leadDetails.customerDetail?.id,
 
-        customerType: leadDetails.customerDetail?.customerType,
+        customerType: getKeyByValue(staticEnums["CustomerType"], leadDetails.customerDetail?.customerType),
         email: leadDetails.customerDetail?.email,
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
-        companyName:leadDetails?.customerDetail?.companyName,
+        companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender]
       })
     }

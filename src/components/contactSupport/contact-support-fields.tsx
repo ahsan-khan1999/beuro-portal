@@ -32,7 +32,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "fullName",
               placeholder: "Rahal",
               register,
-              disabled:true
+              disabled: true,
             },
           },
           {
@@ -50,8 +50,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "email",
               placeholder: "rahal.ahmad@gmail.com",
               register,
-              disabled:true
-
+              disabled: true,
             },
           },
           {
@@ -98,15 +97,22 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               options: [
                 { value: "General Inquiry", label: "General Inquiry" },
                 { value: "Account Assistance", label: "Account Assistance" },
-                { value: "Billing or Payment Issues", label: "Billing or Payment Issues" },
+                {
+                  value: "Billing or Payment Issues",
+                  label: "Billing or Payment Issues",
+                },
                 { value: "Technical Support", label: "Technical Support" },
-                { value: "Feedback or Suggestions", label: "Feedback or Suggestions" },
-                { value: "Report a Bug or Error", label: "Report a Bug or Error" },
+                {
+                  value: "Feedback or Suggestions",
+                  label: "Feedback or Suggestions",
+                },
+                {
+                  value: "Report a Bug or Error",
+                  label: "Report a Bug or Error",
+                },
                 { value: "Website Feedback", label: "Website Feedback" },
                 { value: "Complaint", label: "Complaint" },
                 { value: "Other", label: "Other" },
-
-
               ],
               control,
             },
@@ -133,14 +139,14 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "mt-[30px]",
+      containerClass: "mt-[30px] flex justify-end",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
         loading,
       },
     },

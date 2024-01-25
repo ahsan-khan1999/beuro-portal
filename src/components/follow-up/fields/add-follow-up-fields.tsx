@@ -163,14 +163,14 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-[44px] mb-0",
+      containerClass: "mt-[44px] mb-0 float-right",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("follow_up.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

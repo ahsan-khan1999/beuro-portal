@@ -21,6 +21,7 @@ import {
   sendInvoiceEmail,
   setCollectiveInvoiceDetails,
   setInvoiceDetails,
+  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
@@ -68,26 +69,30 @@ export const useInvoiceEmail = (
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
-        dispatch(setCollectiveInvoiceDetails(res?.payload));
-        setAttachements(
-          transformAttachments(
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments as string[]
-          ) || []
-        );
-        reset({
-          email:
-            res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-              ?.email,
-          content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
-          subject:
-            res?.payload?.title + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-          description:
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.body,
-          pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
-            ?.invoiceContent?.attachments,
-        });
+        if (res?.payload) {
+          setAttachements(
+            transformAttachments(
+              res?.payload?.invoiceID?.contractID?.offerID?.content
+                ?.invoiceContent?.attachments as string[]
+            ) || []
+          );
+          reset({
+            email:
+              res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                ?.email,
+            content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
+            subject:
+              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            description:
+              res?.payload?.invoiceID?.contractID?.offerID?.content
+                ?.invoiceContent?.body || "",
+            pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.attachments,
+
+            // title: res?.payload?.title,
+            // additionalDetails: res?.payload?.additionalDetails || "",
+          });
+        }
       });
     }
   }, [invoiceID]);
@@ -100,9 +105,11 @@ export const useInvoiceEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-        description: selectedContent?.invoiceContent?.body,
+        subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
+        // title: collectiveInvoiceDetails?.title,
+        // additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -126,10 +133,20 @@ export const useInvoiceEmail = (
     collectiveInvoiceDetails,
     isMoreEmail,
     setIsMoreEmail,
-    setValue
+    setValue,
+    loadingContent
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
+    // const apiData = {
+    //   id: collectiveInvoiceDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
+
+    // };
+    // const response = await dispatch(updateInvoiceContent({ data: apiData }));
+    // if (response?.payload) {
     const updatedData = {
       ...data,
       id: collectiveInvoiceDetails?.id,
@@ -143,6 +160,7 @@ export const useInvoiceEmail = (
     router.pathname = "/invoices/invoice-pdf-preview";
     router.query = { invoiceID: collectiveInvoiceDetails?.id };
     updateQuery(router, router.locale as string);
+    // }
   };
   return {
     fields,

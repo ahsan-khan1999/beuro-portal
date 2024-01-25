@@ -66,6 +66,7 @@ export interface SubInvoiceTableRowTypes {
   createdAt: string;
   isInvoiceRecurring: boolean;
   title: string;
+  additionalDetails:string
 }
 
 export interface InvoiceEmptyStateType {

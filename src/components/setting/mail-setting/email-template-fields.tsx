@@ -8,7 +8,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
   emailSettings,
   control,
   setValue,
-  data,
+  data
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -167,7 +167,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               placeholder: "45Dkk6",
               value: data?.textColor,
               register,
-              setValue
+              setValue,
             },
           },
         ],
@@ -175,7 +175,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0 mt-[30px] flex justify-end items-center",
       field: {
         type: Field.button,
         id: "button",
@@ -184,7 +184,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         )}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

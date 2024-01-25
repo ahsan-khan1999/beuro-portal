@@ -14,18 +14,19 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import { useTranslation } from "next-i18next";
 import { readService } from "@/api/slices/service/serviceSlice";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { readContent } from "@/api/slices/content/contentSlice";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { leadDetails, loading } = useAppSelector((state) => state.lead);
+  const { leadDetails, loading, loadingDetails } = useAppSelector((state) => state.lead);
 
   const { t: translate } = useTranslation();
   const router = useRouter();
   const id = router.query.lead;
 
   useEffect(() => {
-    dispatch(readService({ params: { filter: { paginate: 0 } } }));
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
   useEffect(() => {
     if (id) {
@@ -88,5 +89,6 @@ export default function useLeadDetail() {
     leadDeleteHandler,
     leadDetails,
     loading,
+    loadingDetails
   };
 }

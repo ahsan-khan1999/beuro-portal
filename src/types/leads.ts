@@ -1,6 +1,7 @@
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { Customers } from "./customer";
 import { User } from ".";
+import { ContentTableRowTypes } from "./content";
 
 // Leads Table
 export interface Lead {
@@ -21,8 +22,8 @@ export interface Lead {
   preferredContact: string;
   budget: string;
   leadSource: string;
-  otherServices: string[];
-  requiredService: string;
+  otherServices: string[] | ContentTableRowTypes[];
+  requiredService: string | ContentTableRowTypes;
   additionalDetails: string;
   createdBy: User;
 }

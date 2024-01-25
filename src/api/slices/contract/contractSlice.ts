@@ -77,6 +77,20 @@ export const updateContract: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const updateContractDates: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("contract/update/dates", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateContractDate(data);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 export const deleteContract: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("contract/delete", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -294,6 +308,19 @@ const ContractSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(readQRCode.rejected, (state) => {
+            state.loading = false
+        })
+
+        builder.addCase(updateContractDates.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateContractDates.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action.payload)
+                state.contractDetails = { ...state.contractDetails, offerID: action.payload };
+
+        });
+        builder.addCase(updateContractDates.rejected, (state) => {
             state.loading = false
         })
 

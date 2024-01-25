@@ -6,6 +6,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { Service } from "@/types/service";
 import { filterLead, formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { ContentTableRowTypes } from "@/types/content";
 
 const ServiceDetailsData = ({
   onClick,
@@ -15,14 +16,9 @@ const ServiceDetailsData = ({
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { service } = useAppSelector((state) => state.service);
 
-  let requiredService = filterLead(
-    leadDetails?.requiredService,
-    service
-  ) as Service;
-  let otherServices = filterLead(
-    leadDetails?.otherServices,
-    service
-  ) as Service[];
+
+  const content = leadDetails?.requiredService as ContentTableRowTypes;
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -84,7 +80,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.required_service")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {requiredService?.serviceName}
+              {content?.contentName}
             </div>
           </div>
           <div>
@@ -146,8 +142,8 @@ const ServiceDetailsData = ({
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
               <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis ">
-                {Array.isArray(otherServices) &&
-                  otherServices?.map((item) => item.serviceName + ", ")}
+                {Array.isArray(contentList) &&
+                  contentList?.map((item) => item?.contentName  + ", ")}
               </span>
             </div>
           </div>

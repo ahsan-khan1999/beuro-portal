@@ -23,6 +23,7 @@ const Discounts = ({
   );
 
   const [discount, setDiscount] = useState(offerDetails?.discountAmount);
+  //@ts-expect-error
   const discountData: OffersDiscountDataTypes[] | null =
     offerActivity &&
     offerActivity?.discount?.map((item) => ({

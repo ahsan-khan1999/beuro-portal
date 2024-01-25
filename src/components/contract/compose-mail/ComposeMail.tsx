@@ -10,7 +10,7 @@ const ComposeMail = ({
   backRouteHandler: Function;
   onNextHandle: Function;
 }) => {
-  const defaultClassName = "pt-5";
+  const defaultClassName = "pt-[30px]";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useContractEmail(backRouteHandler, onNextHandle);
   return (

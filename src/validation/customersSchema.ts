@@ -26,7 +26,7 @@ export const generateCustomerValidation = (translate: Function) => {
     [CustomerDetailsFields.phone]: yup
       .string()
 
-      .required(translate("validationMessages.required")),
+      .notRequired(),
     [CustomerDetailsFields.mobile]: yup
       .string()
 
