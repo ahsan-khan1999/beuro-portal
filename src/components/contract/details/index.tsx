@@ -22,7 +22,8 @@ const ContractDetails = () => {
     onNextHandle,
     loading,
     handleViewPdf,
-    handleUpdateAdditionalDetailsModal
+    handleUpdateAdditionalDetailsModal,
+    editDateHandler,
   } = useContractDetail();
 
   return (
@@ -37,7 +38,10 @@ const ContractDetails = () => {
           handleStatusUpdate={handleStatusUpdate}
           handleSendEmail={handleSendEmail}
           isSendEmail={isSendEmail}
-          handleUpdateAdditionalDetailsModal={handleUpdateAdditionalDetailsModal}
+          handleUpdateAdditionalDetailsModal={
+            handleUpdateAdditionalDetailsModal
+          }
+          handleEditDateModal={editDateHandler}
         />
       </div>
 
@@ -53,8 +57,10 @@ const ContractDetails = () => {
               handleStatusUpdate={handleStatusUpdate}
               handleSendEmail={handleSendEmail}
               isSendEmail={isSendEmail}
-          handleUpdateAdditionalDetailsModal={handleUpdateAdditionalDetailsModal}
-
+              handleUpdateAdditionalDetailsModal={
+                handleUpdateAdditionalDetailsModal
+              }
+              handleEditDateModal={editDateHandler}
             />
           </div>
           <div className="mt-5">

@@ -9,9 +9,7 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
       .email()
       .required(translate("validationMessages.required")),
 
-    [ContractEmailPreview.content]: yup
-      .string()
-      .notRequired(),
+    [ContractEmailPreview.content]: yup.string().notRequired(),
     [ContractEmailPreview.subject]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -20,7 +18,8 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
       .required(translate("validationMessages.required")),
 
     [ContractEmailPreview.fileUpload]: yup
-      .array().of(yup.string()
-        .notRequired()).notRequired()
+      .array()
+      .of(yup.string().notRequired())
+      .notRequired(),
   });
 };
