@@ -391,7 +391,8 @@ export type GenerateInvoiceEmailFormField = (
   details?: SubInvoiceTableRowTypes,
   moreEmail?: { isCc: boolean, isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
-  setValue?: UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>,
+  contentLoading?:boolean
 
 ) => FormField[];
 // Contract formfield

@@ -18,7 +18,7 @@ import { readImage } from "@/api/slices/imageSlice/image";
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { leadDetails, loading } = useAppSelector((state) => state.lead);
+  const { leadDetails, loading ,loadingDetails} = useAppSelector((state) => state.lead);
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -88,5 +88,6 @@ export default function useLeadDetail() {
     leadDeleteHandler,
     leadDetails,
     loading,
+    loadingDetails
   };
 }

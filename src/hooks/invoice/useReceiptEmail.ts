@@ -21,6 +21,7 @@ import {
   sendInvoiceEmail,
   setCollectiveInvoiceDetails,
   setInvoiceDetails,
+  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
@@ -38,7 +39,7 @@ export const useReceiptEmail = (
   );
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
-  const { content, contentDetails } = useAppSelector((state) => state.content);
+  const { content, contentDetails,loading:loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
@@ -68,7 +69,6 @@ export const useReceiptEmail = (
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
-        dispatch(setCollectiveInvoiceDetails(res?.payload));
         setAttachements(
           transformAttachments(
             res?.payload?.invoiceID?.contractID?.offerID?.content
@@ -81,12 +81,14 @@ export const useReceiptEmail = (
               ?.email,
           content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
           subject:
-            res?.payload?.title + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
           description:
             res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.body,
+              ?.receiptContent?.body || "",
           pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
             ?.receiptContent?.attachments,
+          title: res?.payload?.title,
+          additionalDetails: res?.payload?.additionalDetails || "",
         });
       });
     }
@@ -100,9 +102,11 @@ export const useReceiptEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.receiptContent?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-        description: selectedContent?.receiptContent?.body,
+        subject: selectedContent?.receiptContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.receiptContent?.body || "",
         pdf: selectedContent?.receiptContent?.attachments,
+        title: collectiveInvoiceDetails?.title,
+        additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -130,23 +134,32 @@ export const useReceiptEmail = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const updatedData = {
-      ...data,
+    const apiData = {
       id: collectiveInvoiceDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-    } as { [key in string]: any };
+      title: data?.title,
+      additionalDetails: data?.additionalDetails,
 
-    delete updatedData["pdf"];
-
-    try {
-      await localStoreUtil.store_data("receiptEmailCompose", updatedData);
-    } catch (err) {
-      console.warn("LocalStorageError", err);
+    };
+    const response = await dispatch(updateInvoiceContent({ data: apiData }));
+    if (response?.payload) {
+      const updatedData = {
+        ...data,
+        id: collectiveInvoiceDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      } as { [key in string]: any };
+  
+      delete updatedData["pdf"];
+  
+      try {
+        await localStoreUtil.store_data("receiptEmailCompose", updatedData);
+      } catch (err) {
+        console.warn("LocalStorageError", err);
+      }
+  
+      router.pathname = "/invoices/receipt-pdf-preview";
+      router.query = { invoiceID: collectiveInvoiceDetails?.id };
+      updateQuery(router, router.locale as string);
     }
-
-    router.pathname = "/invoices/receipt-pdf-preview";
-    router.query = { invoiceID: collectiveInvoiceDetails?.id };
-    updateQuery(router, router.locale as string);
   };
   return {
     fields,
@@ -156,5 +169,7 @@ export const useReceiptEmail = (
     errors,
     error,
     translate,
+    loading,
+    loadingContent
   };
 };

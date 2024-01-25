@@ -13,7 +13,7 @@ import {
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
+import { sendOfferEmail, updateOfferContent } from "@/api/slices/offer/offerSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
@@ -33,6 +33,8 @@ export const useSendEmail = (
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+  const isMail = router.query?.isMail;
+
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
   const { content, contentDetails } = useAppSelector((state) => state.content);
@@ -61,13 +63,17 @@ export const useSendEmail = (
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
-      subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+      subject: offerDetails?.title || "" + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
 
-      description: offerDetails?.content?.offerContent?.body,
+      description: offerDetails?.content?.offerContent?.body || "",
       attachments: offerDetails?.content?.offerContent?.attachments,
+      title: offerDetails?.title,
+      additionalDetails: offerDetails?.additionalDetails || "",
+
     });
 
   }, []);
+
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id);
@@ -75,9 +81,11 @@ export const useSendEmail = (
       reset({
         email: offerDetails?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.offerContent?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
-        description: selectedContent?.offerContent?.body,
+        subject: selectedContent?.offerContent?.title || "" + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+        description: selectedContent?.offerContent?.body || "",
         attachments: selectedContent?.offerContent?.attachments,
+        title: offerDetails?.title,
+        additionalDetails: offerDetails?.additionalDetails || "",
       });
       setAttachements(transformAttachments(
         selectedContent?.offerContent?.attachments as string[]
@@ -102,20 +110,29 @@ export const useSendEmail = (
     setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const updatedData = {
-      ...data,
+
+    const apiData = {
       id: offerDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-      // router,
-      // translate,
-      // setError,
+      title: data?.title,
+      additionalDetails: data?.additionalDetails,
+
     };
+    const response = await dispatch(updateOfferContent({ data: apiData }));
+    if (response?.payload) {
+      const updatedData = {
+        ...data,
+        id: offerDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      };
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
 
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
+      router.pathname = "/offers/pdf-preview";
+      router.query = { offerID: offerDetails?.id };
+      updateQuery(router, router.locale as string);
+    } else {
 
-    router.pathname = "/offers/pdf-preview";
-    router.query = { offerID: offerDetails?.id };
-    updateQuery(router, router.locale as string);
+    }
+
   };
   return {
     fields,

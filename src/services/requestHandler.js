@@ -107,6 +107,7 @@ const SERVICE_URLS = {
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
 
   settingsQrCode: "/setting/qrcode/qrCode-setting",
+  offerContent: "/offer/update-content/",
 
 
 
@@ -458,6 +459,10 @@ const acceptOffer = (data) =>
 const readOfferActivity = (params) => {
   return get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: true });
 }
+
+const updateOfferContent = (data) =>
+  put(SERVICE_URLS.offerContent + `${data?.id}`, data, { feature: featureConstants.login });
+
 const readAllOfferActivity = (params) =>
   get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: false });
 const readDashboard = (params) =>
@@ -646,6 +651,7 @@ const apiServices = {
   readContractQRCode,
   readInvoiceQRCode,
   readSettingsQrCode,
-  createSettingsQrCode
+  createSettingsQrCode,
+  updateOfferContent
 };
 export default apiServices;

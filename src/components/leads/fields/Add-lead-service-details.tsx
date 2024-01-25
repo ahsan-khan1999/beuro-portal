@@ -165,16 +165,16 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
                   label: `${translate("common.via_whatsapp")}`,
                 },
                 {
-                  value: "Via Facebook",
-                  label: `${translate("common.via_fb")}`,
-                },
-                {
-                  value: "Via Instagram",
-                  label: `${translate("common.via_insta")}`,
+                  value: "Via Phone Call",
+                  label: `${translate("common.via_phone")}`,
                 },
                 {
                   value: "Via Post",
                   label: `${translate("common.via_post")}`,
+                },
+                {
+                  value: "Via Internet",
+                  label: `${translate("common.via_internet")}`,
                 },
               ],
               control,

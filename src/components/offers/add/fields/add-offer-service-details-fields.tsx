@@ -127,7 +127,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
               },
             },
             serviceType[i] === ServiceType.EXISTING_SERVICE && {
-              containerClass: "mb-0 col-span-2",
+              containerClass: "mb-0 col-span-2 ",
               label: {
                 text: `${translate(
                   "offers.service_details.detail_headings.title"

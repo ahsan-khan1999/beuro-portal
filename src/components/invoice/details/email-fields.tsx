@@ -20,7 +20,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   invoiceDetails,
   isMoreEmail,
   setIsMoreEmail,
-  setValue
+  setValue,
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -118,9 +118,9 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               control,
               onItemChange: onContentSelect,
               value:
-                (contentDetails?.id && contentDetails?.id) ||
-                invoiceDetails?.invoiceID?.contractID?.offerID?.content?.id ||
-                "",
+                contentDetails?.id && contentDetails?.id as string ||
+                invoiceDetails?.invoiceID?.contractID?.offerID?.content?.id as string
+                ,
             },
           },
           (isMoreEmail?.isCc && {
@@ -194,22 +194,50 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: `${translate("contracts.contract_email_preview.subject")}`,
-        htmlFor: "subject",
-        className: "mb-[10px]",
-      },
+      containerClass: "",
       field: {
-        type: Field.input,
-        className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-        inputType: "text",
-        id: "subject",
-        name: "subject",
-        placeholder:
-          "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-        register,
-      },
+        type: Field.div,
+        id:"titlefield",
+        className: "grid grid-cols-2 gap-x-3",
+        children: [
+          {
+            containerClass: "mb-0 mt-5",
+            label: {
+              text: `${translate("contracts.contract_email_preview.subject")}`,
+              htmlFor: "subject",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "subject",
+              name: "subject",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0 mt-5",
+            label: {
+              text: `${translate("contracts.contract_email_preview.title")}`,
+              htmlFor: "title",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "title",
+              name: "title",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              register,
+            },
+          },
+        ]
+      }
     },
 
     {
@@ -228,27 +256,24 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         // value: contentDetails?.id && contentDetails?.receiptContent?.body || invoiceDetails?.invoiceID?.contractID?.offerID?.content?.receiptContent?.body
       },
     },
+    {
+      containerClass: "mb-0 mt-5",
+      label: {
+        text: `${translate("contracts.contract_email_preview.additional_details")}`,
+        htmlFor: "additionalDetails",
+        className: "mb-[10px]",
+      },
+      field: {
+        type: Field.ckEditor,
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+        id: "additionalDetails",
+        name: "additionalDetails",
+        control,
 
-    // {
-    //   containerClass: " mt-5",
-    //   label: {
-    //     text: `${translate("contracts.contract_email_preview.attachments")}`,
-    //     htmlFor: "attachments",
-    //     className: "mb-[10px]",
-    //   },
-    //   field: {
-    //     type: Field.dragAndDropPdfField,
-    //     id: "attachments",
-    //     isOpenedFile: false,
-    //     text: "Drop or Attach your files here",
-    //     fileSupported: "Files supported: PDF,JPG, PNG,GIF",
-    //     name: "attachments",
-    //     control,
-    //     attachements,
-    //     setAttachements
-    //   },
-    // },
+      },
+    },
 
+   
     {
       containerClass: " mt-5",
       label: {
@@ -276,20 +301,7 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "div-field",
         className: "flex items-center space-x-[18px] ",
         children: [
-          // {
-          //   containerClass: "mb-0",
-          //   field: {
-          //     type: Field.button,
-          //     id: "button",
-          //     text: `${translate(
-          //       "contracts.contract_email_preview.back_button"
-          //     )}`,
-          //     inputType: "button",
-          //     className:
-          //       "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-          //     onClick: onBack,
-          //   },
-          // },
+        
           {
             containerClass: "mb-0",
             field: {

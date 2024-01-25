@@ -193,25 +193,53 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         ],
       },
     },
-   
     {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: `${translate("contracts.contract_email_preview.subject")}`,
-        htmlFor: "subject",
-        className: "mb-[10px]",
-      },
+      containerClass: "",
       field: {
-        type: Field.input,
-        className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-        inputType: "text",
-        id: "subject",
-        name: "subject",
-        placeholder:
-          "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-        register,
-      },
+        type: Field.div,
+        id:"titlefield",
+        className: "grid grid-cols-2 gap-x-3",
+        children: [
+          {
+            containerClass: "mb-0 mt-5",
+            label: {
+              text: `${translate("contracts.contract_email_preview.subject")}`,
+              htmlFor: "subject",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "subject",
+              name: "subject",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0 mt-5",
+            label: {
+              text: `${translate("contracts.contract_email_preview.title")}`,
+              htmlFor: "title",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "title",
+              name: "title",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              register,
+            },
+          },
+        ]
+      }
     },
+   
 
     {
       containerClass: "mb-0 mt-5",
@@ -229,6 +257,23 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         value:
           (contentDetails?.id && contentDetails?.offerContent?.body) ||
           offerDetails?.content?.offerContent?.body,
+      },
+    },
+
+    {
+      containerClass: "mb-0 mt-5",
+      label: {
+        text: `${translate("contracts.contract_email_preview.additional_details")}`,
+        htmlFor: "additionalDetails",
+        className: "mb-[10px]",
+      },
+      field: {
+        type: Field.ckEditor,
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+        id: "additionalDetails",
+        name: "additionalDetails",
+        control,
+
       },
     },
 

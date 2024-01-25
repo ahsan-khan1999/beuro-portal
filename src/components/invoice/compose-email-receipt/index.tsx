@@ -8,7 +8,6 @@ import MailDetailsCard from "./MailDetailsCard";
 const ReceiptEmail = () => {
 
   return (
-    <>
       <Layout>
         <InvoiceCardLayout>
           {/* <MailDetailsCard
@@ -26,7 +25,6 @@ const ReceiptEmail = () => {
           />
         </div>
       </Layout>
-    </>
   );
 };
 

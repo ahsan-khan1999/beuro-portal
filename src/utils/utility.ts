@@ -143,13 +143,14 @@ export function setErrors(
         }
       });
       setError(key, newObj);
-    } else
+    } else {
       setError(key, {
         message: formatStrings(
           translate(`validationMessages.${value?.split(":")[0]}`),
           value?.split(":").slice(1)
         ),
       });
+    }
   }
 }
 export function setErrorMessage(
@@ -407,6 +408,7 @@ export function formatDateReverse(date: string) {
   return moment(date).format("hh:mm:ss, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
+  if (!date) return null;
   return moment(date).format("DD-MM-YYYY");
 }
 export function formatDateTimeToTime(date: string) {

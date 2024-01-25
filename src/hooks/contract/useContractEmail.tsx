@@ -13,7 +13,7 @@ import {
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
+import { sendContractEmail, updateContractContent } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import localStoreUtil from "@/utils/localstore.util";
@@ -48,7 +48,7 @@ export const useContractEmail = (
     setError,
     formState: { errors },
     watch,
-    reset,setValue
+    reset, setValue
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -59,9 +59,11 @@ export const useContractEmail = (
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
-      subject: contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
-      description: contractDetails?.offerID?.content?.confirmationContent?.body,
+      subject: contractDetails?.title || ""+ " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+      description: contractDetails?.offerID?.content?.confirmationContent?.body || "",
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
+      title: contractDetails?.title,
+      additionalDetails: contractDetails?.additionalDetails || "",
     });
   }, []);
 
@@ -71,9 +73,11 @@ export const useContractEmail = (
       reset({
         email: contractDetails?.offerID?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.confirmationContent?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
-        description: selectedContent?.confirmationContent?.body,
+        subject: selectedContent?.confirmationContent?.title || "" + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.confirmationContent?.body || "",
         pdf: selectedContent?.confirmationContent?.attachments,
+        title: contractDetails?.title,
+        additionalDetails: contractDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -101,30 +105,27 @@ export const useContractEmail = (
 
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const updatedData = {
-      ...data,
+
+    const apiData = {
       id: contractDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-      // router,
-      // translate,
-      // setError,
-    } as { [key: string]: any };
+      title: data?.title,
+      additionalDetails: data?.additionalDetails,
 
-    delete updatedData["pdf"];
+    };
+    const response = await dispatch(updateContractContent({ data: apiData }));
+    if (response?.payload) {
+      const updatedData = {
+        ...data,
+        id: contractDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      } as { [key: string]: any };
+      delete updatedData["pdf"];
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
+      router.pathname = "/contract/pdf-preview";
+      router.query = { offerID: contractDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
 
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
-
-    router.pathname = "/contract/pdf-preview";
-    router.query = { offerID: contractDetails?.id };
-    updateQuery(router, router.locale as string);
-    // const res = await dispatch(sendContractEmail({
-    //   data: {
-    //     ...data, id: contractDetails?.id,
-    //     pdf: attachements?.map((item) => item.value),
-
-    //   }, router, translate, setError
-    // }))
-    // if (res?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }))
   };
   return {
     fields,

@@ -51,7 +51,7 @@ export const useAddLeadAddressDetails = (
               ...item,
               label: item?.label ? item?.label : `Address ${++index}`,
             }))
-          : [{ label: `Address ${addressCount}` }],
+          : [{ label: `Address ${addressCount}`,...leadDetails?.customerDetail?.address }],
       });
     }
   }, [leadDetails?.id]);

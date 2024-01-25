@@ -38,7 +38,8 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const otherServices = watch("otherServices");
+  console.log(errors,"errors");
+  
 
   useMemo(() => {
     if (leadDetails.id) {
@@ -62,7 +63,8 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
-    if (response?.payload) onClick(2, ComponentsType.service);
+    console.log(response,"response");
+    // if (response?.payload) onClick(2, ComponentsType.service);
 
   };
   return {

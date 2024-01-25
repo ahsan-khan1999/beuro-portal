@@ -175,6 +175,10 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via Post",
                   label: `${translate("common.via_post")}`,
                 },
+                {
+                  value: "Via Internet",
+                  label: `${translate("common.via_internet")}`,
+                },
               ],
               control,
             },

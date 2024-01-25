@@ -88,13 +88,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 })),
 
               control,
-              value:
-                (leadDetails?.id &&
-                  getKeyByValue(
-                    staticEnums["CustomerType"],
-                    leadDetails.customerDetail?.customerType
-                  )) ||
-                "",
+              value:""
+              // value:
+             
+              //     customerType,
             },
           },
 

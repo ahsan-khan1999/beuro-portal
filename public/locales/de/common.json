@@ -827,7 +827,9 @@
       "description": "Beschreibung",
       "attachments": "Anhänge",
       "back_button": "Zurück",
-      "next_button": "Weiter"
+      "next_button": "Weiter",
+      "title":"Titel",
+      "additional_details":"Zusätzliche Details"
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -1100,6 +1102,7 @@
     "help": "Hilfezentrum",
     "via_phone": "Per Telefonanruf",
     "via_post": "Über Post",
+    "via_internet": "über das Internet",
     "via_email": "Über E-Mail",
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",

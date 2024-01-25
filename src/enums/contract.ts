@@ -5,4 +5,6 @@ export enum ContractEmailPreview {
   subject = "subject",
   description = "description",
   fileUpload = "attachments",
+  additionalDetails="additionalDetails",
+  title="title"
 }

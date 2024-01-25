@@ -23,6 +23,7 @@ const InvoiceEmail = () => {
       <div className="flex mt-[12px] mb-[18px]">
         <ComposeMail />
       </div>
+
     </Layout>
   );
 };
