@@ -85,10 +85,10 @@ export const generateProfileSettingValidation = (translate: Function) => {
         .required(translate("validationMessages.required")),
       [SettingProfile.phoneNumber]: yup
         .string()
-        .required(translate(translate("validationMessages.required"))),
+        .notRequired(),
       [SettingProfile.mobileNumber]: yup
         .string()
-        .required(translate(translate("validationMessages.required"))),
+        .notRequired(),
       [SettingProfile.website]: yup
         .string()
         .required(translate("validationMessages.required")),
@@ -131,12 +131,11 @@ export const generateEmailTemplateValidation = (translate: Function) => {
       .required(translate("validationMessages.required")),
     [MailSettingsEmailTemplate.PHONE_NUMBER]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate(translate("validationMessages.required"))),
+      
+      .notRequired(),
     [MailSettingsEmailTemplate.MOBILE_NUMBER]: yup
       .string()
-      .min(11, translate("validationMessages.string.min"))
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
     [MailSettingsEmailTemplate.FOOTER_COLOR]: yup
       .string()
       .required(translate("validationMessages.required")),

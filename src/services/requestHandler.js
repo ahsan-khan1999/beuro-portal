@@ -107,7 +107,8 @@ const SERVICE_URLS = {
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
 
   settingsQrCode: "/setting/qrcode/qrCode-setting",
-
+  offerContent: "/offer/update-content/",
+  updateDate: "/offer/update-date/"
 
 
 };
@@ -241,7 +242,8 @@ const readContractDetail = (params) =>
   get(SERVICE_URLS.contract, params, { feature: featureConstants.login }, { detail: true });
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
-
+const updateContractDate = (data) =>
+  put(SERVICE_URLS.updateDate + `${data?.id}`, data, { feature: featureConstants.login });
 const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 const updateContractStatus = (data) =>
@@ -458,6 +460,10 @@ const acceptOffer = (data) =>
 const readOfferActivity = (params) => {
   return get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: true });
 }
+
+const updateOfferContent = (data) =>
+  put(SERVICE_URLS.offerContent + `${data?.id}`, data, { feature: featureConstants.login });
+
 const readAllOfferActivity = (params) =>
   get(SERVICE_URLS.offerActivity, params, { feature: featureConstants.login }, { detail: false });
 const readDashboard = (params) =>
@@ -646,6 +652,8 @@ const apiServices = {
   readContractQRCode,
   readInvoiceQRCode,
   readSettingsQrCode,
-  createSettingsQrCode
+  createSettingsQrCode,
+  updateOfferContent,
+  updateContractDate
 };
 export default apiServices;

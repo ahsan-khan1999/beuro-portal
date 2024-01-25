@@ -24,7 +24,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px]",
+          className: "flex justify-end items-center space-x-[18px]",
           children: [
             {
               containerClass: "mb-0",

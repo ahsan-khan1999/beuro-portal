@@ -1,4 +1,5 @@
 import { Form } from "@/base-components/form/form";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import { useReceiptEmail } from "@/hooks/invoice/useReceiptEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
@@ -14,9 +15,10 @@ const ComposeMail = () => {
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate,loading, loadingContent} =
     useReceiptEmail(backRouteHandler, onNextHandle);
   return (
+    <>
     <ContractFormCard>
       <h2 className="text-[#393939] text-lg font-medium">
         {translate("invoice.receipt_card.receipt_email_preview")}
@@ -32,6 +34,7 @@ const ComposeMail = () => {
         className={`${defaultClassName}`}
       />
     </ContractFormCard>
+    </>
   );
 };
 

@@ -59,7 +59,7 @@ export const useOfferPdf = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
-  const { offerID } = router.query;
+  const { offerID,isMail } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -217,37 +217,42 @@ export const useOfferPdf = () => {
 
   const handleEmailSend = async () => {
     try {
-      const formData = new FormData();
-      setActiveButtonId("email");
+      if(isMail){
+        router.push(`/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`)
+      }else{
 
-      const data = await localStoreUtil.get_data("contractComposeEmail");
-      if (!pdfFile) return;
-      formData.append("file", pdfFile as any);
-      const fileUrl = await dispatch(uploadFileToFirebase(formData));
-      if (data) {
-        // delete apiData["id"]
-
-        let apiData = { ...data, pdf: fileUrl?.payload };
-        delete apiData["content"];
-
-        const res = await dispatch(sendOfferEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
-      } else {
-        let apiData = {
-          email: offerDetails?.leadID?.customerDetail?.email,
-          content: offerDetails?.content?.id,
-          subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
-          description: offerDetails?.content?.offerContent?.body,
-          attachments: offerDetails?.content?.offerContent?.attachments,
-          id: offerDetails?.id,
-          pdf: fileUrl?.payload
-          // pdf: res?.payload
-        };
-        const res = await dispatch(sendOfferEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        const formData = new FormData();
+        setActiveButtonId("email");
+  
+        const data = await localStoreUtil.get_data("contractComposeEmail");
+        if (!pdfFile) return;
+        formData.append("file", pdfFile as any);
+        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+        if (data) {
+          // delete apiData["id"]
+  
+          let apiData = { ...data, pdf: fileUrl?.payload };
+          delete apiData["content"];
+  
+          const res = await dispatch(sendOfferEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
+        } else {
+          let apiData = {
+            email: offerDetails?.leadID?.customerDetail?.email,
+            content: offerDetails?.content?.id,
+            subject: offerDetails?.title + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+            description: offerDetails?.content?.offerContent?.body,
+            attachments: offerDetails?.content?.offerContent?.attachments,
+            id: offerDetails?.id,
+            pdf: fileUrl?.payload
+            // pdf: res?.payload
+          };
+          const res = await dispatch(sendOfferEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         }
       }
     } catch (error) {

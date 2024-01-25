@@ -23,11 +23,11 @@ export const generateEmployDetailsValidation = (translate: Function) => {
 
     [EmployDetailsFields.phoneNumber]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [EmployDetailsFields.mobileNumber]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
   });
 };
 

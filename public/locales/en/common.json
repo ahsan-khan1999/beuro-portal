@@ -833,7 +833,9 @@
       "description": "Description",
       "attachments": "Attachments",
       "back_button": "Back",
-      "next_button": "Next"
+      "next_button": "Next",
+      "title":"Title",
+      "additional_details":"Additional Details"
     },
     "pdf_card_details": {
       "heading": "Contract Details",
@@ -1080,7 +1082,8 @@
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?",
-      "update_success": "Congratulations! Your update was successful."
+      "update_success": "Congratulations! Your update was successful.",
+      "date":"Date"
     },
     "discount": "Discount",
     "update": "Update",
@@ -1106,6 +1109,8 @@
     "action": "Action",
     "help": "help Center",
     "via_post": "Via Post",
+    "via_internet": "Via Internet",
+
     "via_phone": "Via Phone Call",
     "via_email": "Via Email",
     "via_whatsapp": "Via What'sapp",
@@ -1253,7 +1258,8 @@
       "payment_method": "Payment Method",
       "status": "Status",
       "notes": "Notes",
-      "images": "Images"
+      "images": "Images",
+      "reason":"Reason"
     },
     "tabs_heading": {
       "offer": "Offer Details",

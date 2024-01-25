@@ -1,4 +1,3 @@
-import ContractMail from "@/components/contract/compose-mail";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
@@ -6,7 +5,7 @@ import InvoiceEmail from "@/components/invoice/compose-mail";
 
 
 const index = () => {
-  return <InvoiceEmail />;
+  return  <InvoiceEmail />;
 };
 
 export default index;

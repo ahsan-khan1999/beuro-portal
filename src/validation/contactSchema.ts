@@ -15,7 +15,7 @@ export const generateContactSupportValidation = (translate: Function) => {
 
     [ContactSupportFields.phoneNumber]: yup
       .string()
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
 
     [ContactSupportFields.reasonForContact]: yup
       .string()

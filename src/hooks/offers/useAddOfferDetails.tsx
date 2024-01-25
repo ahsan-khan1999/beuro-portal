@@ -83,6 +83,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   }, [customerID]);
 
   useEffect(() => {
+    console.log(offerDetails,"deta");
+    
     if (offerDetails?.id) {
       reset({
         type: "Existing Customer",
@@ -97,10 +99,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title,
+        title: offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
-        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
 
 
       });
@@ -138,6 +140,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   };
   const handleContentSelect = () => { };
   useMemo(() => {
+    console.log(selectedContent,"selectedContent");
+    
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
@@ -196,7 +200,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title,
+        title: offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
@@ -217,8 +221,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
-    control
   );
   const submit = AddOfferDetailsSubmitFormField(
     register,

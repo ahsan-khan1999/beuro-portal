@@ -143,7 +143,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-6",
+      containerClass: "mb-0 mt-6 float-right",
       field: {
         type: Field.button,
         id: "button",

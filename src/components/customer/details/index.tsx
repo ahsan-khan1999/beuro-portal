@@ -26,7 +26,7 @@ const CustomerDetails = () => {
     <Layout>
       <DetailsCard>
         <DetailsData
-          date={formatDateTimeToDate(customerDetail?.createdAt)}
+          date={formatDateTimeToDate(customerDetail?.createdAt) as string}
           id={customerDetail?.refID}
           name={customerDetail?.fullName}
           handlePreviousClick={handlePreviousClick}
