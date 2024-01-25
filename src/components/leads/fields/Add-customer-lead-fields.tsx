@@ -64,9 +64,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                     id: "type",
                     name: "type",
                     register,
-                    checked:
-                     
-                      type === "Existing Customer",
+                    checked: type === "Existing Customer",
                   },
                 },
               ],
@@ -97,7 +95,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   getKeyByValue(
                     staticEnums["CustomerType"],
                     leadDetails.customerDetail?.customerType
-                  )) || customerType,
+                  )) ||
+                customerType,
             },
           },
           {
@@ -112,11 +111,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender)
-                .map((item) => ({
-                  value: staticEnums.Gender[item],
-                  label: translate(`gender.${item}`),
-                })),
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
 
               control,
               value: "",
@@ -191,11 +189,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender)
-                .map((item) => ({
-                  value: staticEnums.Gender[item],
-                  label: translate(`gender.${item}`),
-                })),
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
 
               control,
               value: "",
@@ -299,7 +296,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                leadDetails && leadDetails?.customerDetail?.address?.country || Object.keys(staticEnums.Country)[0],
+                (leadDetails &&
+                  leadDetails?.customerDetail?.address?.country) ||
+                Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -310,7 +309,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px] mt-8",
         children: [
           {
             field: {

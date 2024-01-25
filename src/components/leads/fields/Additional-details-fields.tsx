@@ -26,7 +26,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px] mt-[30px]",
+          className: "flex items-center justify-end space-x-[18px] mt-[30px]",
           children: [
             {
               containerClass: "mb-0",
@@ -37,7 +37,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
                 inputType: "button",
 
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
                 onClick: onClick,
               },
             },

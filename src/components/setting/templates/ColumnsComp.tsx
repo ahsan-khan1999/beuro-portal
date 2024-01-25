@@ -24,7 +24,7 @@ const Column = ({
   handleToggle,
   column,
   mainColumns,
-  handleChangeInput
+  handleChangeInput,
 }: {
   title: string;
   data: colsData[];
@@ -43,9 +43,7 @@ const Column = ({
     value: string,
     index: number
   ) => void;
-
 }) => {
-  
   return (
     <section className="px-[30px] pt-[20px] pb-[25px] rounded-md bg-white mb-6">
       <div className="flex justify-between mb-3">
@@ -58,7 +56,6 @@ const Column = ({
       {data.map((item, index) => (
         <div className="mb-5" key={index}>
           <div className="flex space-x-2">
-
             <CheckBox
               isChecked={item.data.value}
               id={item.data.column + index.toString()}
@@ -76,13 +73,19 @@ const Column = ({
               containerClassName="w-full"
               value={item.data.text}
               textClassName="!p-4 border rounded-lg border-[#EBEBEB] "
-              handleChange={(value) => handleChangeInput(item.data.column, item.data.textType, value, index)}
+              handleChange={(value) =>
+                handleChangeInput(
+                  item.data.column,
+                  item.data.textType,
+                  value,
+                  index
+                )
+              }
             />
             {/* <span className="text-[#484848] text-base font-normal ">
               
               {item.data.type}
             </span> */}
-
           </div>
         </div>
       ))}
@@ -105,7 +108,7 @@ const ColumnsComp = () => {
     thirdColumn: templateSettings?.isThirdColumn || false,
     fourthColumn: templateSettings?.isFourthColumn || false,
   });
-  
+
   const [columnSettings, setColumnSettings] = useState<ColumnStructure>({
     firstColumn: [
       {
@@ -118,7 +121,7 @@ const ColumnsComp = () => {
           type: "isCompanyName",
           value: templateSettings?.firstColumn?.isCompanyName || false,
           text: templateSettings?.firstColumn?.companyName || "",
-          textType:"companyName"
+          textType: "companyName",
         },
       },
       {
@@ -129,8 +132,7 @@ const ColumnsComp = () => {
           type: "isEmail",
           value: templateSettings?.firstColumn?.isEmail || false,
           text: templateSettings?.firstColumn?.email || "",
-          textType:"email"
-
+          textType: "email",
         },
       },
       {
@@ -143,9 +145,7 @@ const ColumnsComp = () => {
           type: "isPhoneNumber",
           value: templateSettings?.firstColumn?.isPhoneNumber || false,
           text: templateSettings?.firstColumn?.phoneNumber || "",
-          textType:"phoneNumber"
-
-
+          textType: "phoneNumber",
         },
       },
       {
@@ -156,9 +156,7 @@ const ColumnsComp = () => {
           type: "isTaxNumber",
           value: templateSettings?.firstColumn?.isWebsite || false,
           text: templateSettings?.firstColumn?.website || "",
-          textType:"website"
-
-
+          textType: "website",
         },
       },
       {
@@ -171,9 +169,7 @@ const ColumnsComp = () => {
           type: "isWebsite",
           value: templateSettings?.firstColumn?.isTaxNumber || false,
           text: templateSettings?.firstColumn?.taxNumber?.toString() || "",
-          textType:"taxNumber"
-
-
+          textType: "taxNumber",
         },
       },
     ],
@@ -186,9 +182,7 @@ const ColumnsComp = () => {
           type: "isStreetNumber",
           value: templateSettings?.secondColumn?.isStreetNumber || false,
           text: templateSettings?.secondColumn?.streetNumber || "",
-          textType:"streetNumber"
-
-
+          textType: "streetNumber",
         },
       },
       {
@@ -199,9 +193,7 @@ const ColumnsComp = () => {
           type: "isPostCode",
           value: templateSettings?.secondColumn?.isPostCode || false,
           text: templateSettings?.secondColumn?.postCode || "",
-          textType:"postCode"
-
-
+          textType: "postCode",
         },
       },
       {
@@ -212,9 +204,7 @@ const ColumnsComp = () => {
           type: "isBankName",
           value: templateSettings?.secondColumn?.isBankName || false,
           text: templateSettings?.secondColumn?.bankName || "",
-          textType:"bankName"
-
-
+          textType: "bankName",
         },
       },
       {
@@ -225,9 +215,7 @@ const ColumnsComp = () => {
           type: "isAccountNumber",
           value: templateSettings?.secondColumn?.isAccountNumber || false,
           text: templateSettings?.secondColumn?.accountNumber || "",
-          textType:"accountNumber"
-
-
+          textType: "accountNumber",
         },
       },
       {
@@ -238,8 +226,7 @@ const ColumnsComp = () => {
           type: "isIBAN",
           value: templateSettings?.secondColumn?.isIBAN || false,
           text: templateSettings?.secondColumn?.iban || "",
-          textType:"iban"
-
+          textType: "iban",
         },
       },
     ],
@@ -252,9 +239,7 @@ const ColumnsComp = () => {
           type: "isRow1",
           value: templateSettings?.thirdColumn?.isRow1 || false,
           text: templateSettings?.thirdColumn?.row1 || "",
-          textType:"row1"
-
-
+          textType: "row1",
         },
       },
       {
@@ -265,9 +250,7 @@ const ColumnsComp = () => {
           type: "isRow2",
           value: templateSettings?.thirdColumn?.isRow2 || false,
           text: templateSettings?.thirdColumn?.row2 || "",
-          textType:"row2"
-
-
+          textType: "row2",
         },
       },
       {
@@ -278,9 +261,7 @@ const ColumnsComp = () => {
           type: "isRow3",
           value: templateSettings?.thirdColumn?.isRow3 || false,
           text: templateSettings?.thirdColumn?.row3 || "",
-          textType:"row3"
-
-
+          textType: "row3",
         },
       },
       {
@@ -291,9 +272,7 @@ const ColumnsComp = () => {
           type: "isRow4",
           value: templateSettings?.thirdColumn?.isRow4 || false,
           text: templateSettings?.thirdColumn?.row4 || "",
-          textType:"row4"
-
-
+          textType: "row4",
         },
       },
       {
@@ -304,9 +283,7 @@ const ColumnsComp = () => {
           type: "isRow5",
           value: templateSettings?.thirdColumn?.isRow5 || false,
           text: templateSettings?.thirdColumn?.row5 || "",
-          textType:"row5"
-
-
+          textType: "row5",
         },
       },
     ],
@@ -319,8 +296,7 @@ const ColumnsComp = () => {
           type: "isRow1",
           value: templateSettings?.fourthColumn?.isRow1 || false,
           text: templateSettings?.fourthColumn?.row1 || "",
-          textType:"row1"
-
+          textType: "row1",
         },
       },
       {
@@ -331,9 +307,7 @@ const ColumnsComp = () => {
           type: "isRow2",
           value: templateSettings?.fourthColumn?.isRow2 || false,
           text: templateSettings?.fourthColumn?.row2 || "",
-          textType:"row2"
-
-
+          textType: "row2",
         },
       },
       {
@@ -344,8 +318,7 @@ const ColumnsComp = () => {
           type: "isRow3",
           value: templateSettings?.fourthColumn?.isRow3 || false,
           text: templateSettings?.fourthColumn?.row3 || "",
-          textType:"row3"
-
+          textType: "row3",
         },
       },
       {
@@ -356,8 +329,7 @@ const ColumnsComp = () => {
           type: "isRow4",
           value: templateSettings?.fourthColumn?.isRow4 || false,
           text: templateSettings?.fourthColumn?.row4 || "",
-          textType:"row4"
-
+          textType: "row4",
         },
       },
       {
@@ -368,8 +340,7 @@ const ColumnsComp = () => {
           type: "isRow5",
           value: templateSettings?.fourthColumn?.isRow5 || false,
           text: templateSettings?.fourthColumn?.row5 || "",
-          textType:"row5"
-
+          textType: "row5",
         },
       },
     ],
@@ -463,7 +434,6 @@ const ColumnsComp = () => {
             ...formatObj[key],
             [item.data.type]: item.data.value,
             [item.data.textType]: item.data.text?.toString(),
-
           },
         };
       }
@@ -500,7 +470,6 @@ const ColumnsComp = () => {
           column="secondColumn"
           mainColumns={mainColumns}
           handleChangeInput={handleChangeInput}
-
         />
         <Column
           title={`${translate(
@@ -512,7 +481,6 @@ const ColumnsComp = () => {
           column="thirdColumn"
           mainColumns={mainColumns}
           handleChangeInput={handleChangeInput}
-
         />
         <Column
           title={`${translate(
@@ -524,13 +492,12 @@ const ColumnsComp = () => {
           column="fourthColumn"
           mainColumns={mainColumns}
           handleChangeInput={handleChangeInput}
-
         />
       </div>
       <Button
         id="setting"
         inputType="button"
-        className="px-4 text-white text-base font-medium rounded-md ml-[32px] bg-[#4A13E7] "
+        className="px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right mb-4"
         text={translate("setting.save_setting")}
         loading={loading}
         onClick={handleSaveSetings}
@@ -553,6 +520,5 @@ const updateColumnValues = (columns: any, apiColumn: any) => {
 
     column.data.value = apiValue;
     column.data.text = apiValueText;
-
   });
 };

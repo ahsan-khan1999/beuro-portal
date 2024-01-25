@@ -230,7 +230,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                 //         value: staticEnums.Gender[item],
                 //         label: translate(`gender.${item}`),
                 //       })),
-      
+
                 //     control,
                 //     value: "",
                 //   },
@@ -508,7 +508,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-5",
+        className: "flex items-center justify-end space-x-[18px] mt-5",
         children: [
           {
             containerClass: "mb-0",
