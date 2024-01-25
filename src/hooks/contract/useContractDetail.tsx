@@ -23,13 +23,14 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
 import { readImage } from "@/api/slices/imageSlice/image";
 import localStoreUtil from "@/utils/localstore.util";
+import { EditDate } from "@/base-components/ui/modals1/editDate";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(false);
-  const { systemSettings } = useAppSelector(state => state.settings)
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
@@ -110,6 +111,10 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
+  const editDateHandler = () => {
+    dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -163,14 +168,17 @@ export default function useContractDetail() {
         route={onSuccess}
       />
     ),
-   
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
   };
+
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
   };
+
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -204,7 +212,7 @@ export default function useContractDetail() {
     window.open(contractDetails?.attachement as string);
   };
   const handleUpdateAdditionalDetailsModal = () => {
-    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS}));
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
   return {
@@ -222,6 +230,7 @@ export default function useContractDetail() {
     loading,
     handleViewPdf,
     systemSettings,
-    handleUpdateAdditionalDetailsModal
+    handleUpdateAdditionalDetailsModal,
+    editDateHandler,
   };
 }

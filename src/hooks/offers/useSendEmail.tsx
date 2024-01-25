@@ -111,27 +111,27 @@ export const useSendEmail = (
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
-    const apiData = {
+    // const apiData = {
+    //   id: offerDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
+
+    // };
+    // const response = await dispatch(updateOfferContent({ data: apiData }));
+    // if (response?.payload) {
+    const updatedData = {
+      ...data,
       id: offerDetails?.id,
-      title: data?.title,
-      additionalDetails: data?.additionalDetails,
-
+      attachments: attachements?.map((item) => item.value),
     };
-    const response = await dispatch(updateOfferContent({ data: apiData }));
-    if (response?.payload) {
-      const updatedData = {
-        ...data,
-        id: offerDetails?.id,
-        attachments: attachements?.map((item) => item.value),
-      };
-      localStoreUtil.store_data("contractComposeEmail", updatedData);
+    localStoreUtil.store_data("contractComposeEmail", updatedData);
 
-      router.pathname = "/offers/pdf-preview";
-      router.query = { offerID: offerDetails?.id };
-      updateQuery(router, router.locale as string);
-    } else {
+    router.pathname = "/offers/pdf-preview";
+    router.query = { offerID: offerDetails?.id };
+    updateQuery(router, router.locale as string);
+    // } else {
 
-    }
+    // }
 
   };
   return {

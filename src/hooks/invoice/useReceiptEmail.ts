@@ -39,7 +39,7 @@ export const useReceiptEmail = (
   );
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
-  const { content, contentDetails,loading:loadingContent } = useAppSelector((state) => state.content);
+  const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
@@ -87,8 +87,8 @@ export const useReceiptEmail = (
               ?.receiptContent?.body || "",
           pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
             ?.receiptContent?.attachments,
-          title: res?.payload?.title,
-          additionalDetails: res?.payload?.additionalDetails || "",
+          // title: res?.payload?.title,
+          // additionalDetails: res?.payload?.additionalDetails || "",
         });
       });
     }
@@ -105,8 +105,8 @@ export const useReceiptEmail = (
         subject: selectedContent?.receiptContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.receiptContent?.body || "",
         pdf: selectedContent?.receiptContent?.attachments,
-        title: collectiveInvoiceDetails?.title,
-        additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
+        // title: collectiveInvoiceDetails?.title,
+        // additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -134,32 +134,32 @@ export const useReceiptEmail = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = {
-      id: collectiveInvoiceDetails?.id,
-      title: data?.title,
-      additionalDetails: data?.additionalDetails,
+    // const apiData = {
+    //   id: collectiveInvoiceDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    };
-    const response = await dispatch(updateInvoiceContent({ data: apiData }));
-    if (response?.payload) {
-      const updatedData = {
-        ...data,
-        id: collectiveInvoiceDetails?.id,
-        attachments: attachements?.map((item) => item.value),
-      } as { [key in string]: any };
-  
-      delete updatedData["pdf"];
-  
-      try {
-        await localStoreUtil.store_data("receiptEmailCompose", updatedData);
-      } catch (err) {
-        console.warn("LocalStorageError", err);
-      }
-  
-      router.pathname = "/invoices/receipt-pdf-preview";
-      router.query = { invoiceID: collectiveInvoiceDetails?.id };
-      updateQuery(router, router.locale as string);
+    // };
+    // const response = await dispatch(updateInvoiceContent({ data: apiData }));
+    // if (response?.payload) {
+    const updatedData = {
+      ...data,
+      id: collectiveInvoiceDetails?.id,
+      attachments: attachements?.map((item) => item.value),
+    } as { [key in string]: any };
+
+    delete updatedData["pdf"];
+
+    try {
+      await localStoreUtil.store_data("receiptEmailCompose", updatedData);
+    } catch (err) {
+      console.warn("LocalStorageError", err);
     }
+
+    router.pathname = "/invoices/receipt-pdf-preview";
+    router.query = { invoiceID: collectiveInvoiceDetails?.id };
+    updateQuery(router, router.locale as string);
+    // }
   };
   return {
     fields,

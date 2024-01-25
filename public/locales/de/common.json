@@ -1075,7 +1075,9 @@
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
-      "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich."
+      "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
+      "date":"Datum"
+
     },
     "discount": "Rabatt",
     "update": "Update",
@@ -1250,7 +1252,9 @@
       "payment_method": "Zahlungsmethode",
       "status": "Status",
       "notes": "Notizen",
-      "images": "Bilder"
+      "images": "Bilder",
+      "reason":"Grund"
+
     },
     "tabs_heading": {
       "offer": "Angebotedetails",

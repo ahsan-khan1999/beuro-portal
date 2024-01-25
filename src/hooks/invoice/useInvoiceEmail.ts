@@ -69,7 +69,7 @@ export const useInvoiceEmail = (
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
-        if(res?.payload) {
+        if (res?.payload) {
           setAttachements(
             transformAttachments(
               res?.payload?.invoiceID?.contractID?.offerID?.content
@@ -82,15 +82,15 @@ export const useInvoiceEmail = (
                 ?.email,
             content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
             subject:
-              res?.payload?.title|| "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
             description:
               res?.payload?.invoiceID?.contractID?.offerID?.content
                 ?.invoiceContent?.body || "",
             pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
               ?.invoiceContent?.attachments,
-  
-            title: res?.payload?.title,
-            additionalDetails: res?.payload?.additionalDetails || "",
+
+            // title: res?.payload?.title,
+            // additionalDetails: res?.payload?.additionalDetails || "",
           });
         }
       });
@@ -108,8 +108,8 @@ export const useInvoiceEmail = (
         subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
-        title: collectiveInvoiceDetails?.title,
-        additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
+        // title: collectiveInvoiceDetails?.title,
+        // additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -139,28 +139,28 @@ export const useInvoiceEmail = (
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
-    const apiData = {
-      id: collectiveInvoiceDetails?.id,
-      title: data?.title,
-      additionalDetails: data?.additionalDetails,
+    // const apiData = {
+    //   id: collectiveInvoiceDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    };
-    const response = await dispatch(updateInvoiceContent({ data: apiData }));
-    if (response?.payload) {
-      const updatedData = {
-        ...data,
-        id: collectiveInvoiceDetails?.id,
-        attachements: attachements?.map((item) => item.value),
-      } as { [key in string]: any };
-  
-      delete updatedData["pdf"];
-  
-      await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
-  
-      router.pathname = "/invoices/invoice-pdf-preview";
-      router.query = { invoiceID: collectiveInvoiceDetails?.id };
-      updateQuery(router, router.locale as string);
-    }
+    // };
+    // const response = await dispatch(updateInvoiceContent({ data: apiData }));
+    // if (response?.payload) {
+    const updatedData = {
+      ...data,
+      id: collectiveInvoiceDetails?.id,
+      attachements: attachements?.map((item) => item.value),
+    } as { [key in string]: any };
+
+    delete updatedData["pdf"];
+
+    await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+
+    router.pathname = "/invoices/invoice-pdf-preview";
+    router.query = { invoiceID: collectiveInvoiceDetails?.id };
+    updateQuery(router, router.locale as string);
+    // }
   };
   return {
     fields,

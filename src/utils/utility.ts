@@ -411,6 +411,11 @@ export function formatDateTimeToDate(date: string) {
   if (!date) return null;
   return moment(date).format("DD-MM-YYYY");
 }
+
+export function formatDateTimeToDateMango(date: string) {
+  if (!date) return null;
+  return moment(date).format("YYYY-MM-DD");
+}
 export function formatDateTimeToTime(date: string) {
   return moment(date).format("hh:mm: A");
 }

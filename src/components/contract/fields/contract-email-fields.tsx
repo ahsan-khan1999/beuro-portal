@@ -193,7 +193,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
         className: "grid grid-cols-2 gap-x-3",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0 mt-5 col-span-2",
             label: {
               text: `${translate("contracts.contract_email_preview.subject")}`,
               htmlFor: "subject",
@@ -210,24 +210,24 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               register,
             },
           },
-          {
-            containerClass: "mb-0 mt-5",
-            label: {
-              text: `${translate("contracts.contract_email_preview.title")}`,
-              htmlFor: "title",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-              inputType: "text",
-              id: "title",
-              name: "title",
-              placeholder:
-                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-              register,
-            },
-          },
+          // {
+          //   containerClass: "mb-0 mt-5",
+          //   label: {
+          //     text: `${translate("contracts.contract_email_preview.title")}`,
+          //     htmlFor: "title",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     type: Field.input,
+          //     className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+          //     inputType: "text",
+          //     id: "title",
+          //     name: "title",
+          //     placeholder:
+          //       "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+          //     register,
+          //   },
+          // },
         ]
       }
     },
@@ -250,22 +250,22 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
           contractDetails?.offerID?.content?.confirmationContent?.body,
       },
     },
-    {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: `${translate("contracts.contract_email_preview.additional_details")}`,
-        htmlFor: "additionalDetails",
-        className: "mb-[10px]",
-      },
-      field: {
-        type: Field.ckEditor,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-        id: "additionalDetails",
-        name: "additionalDetails",
-        control,
+    // {
+    //   containerClass: "mb-0 mt-5",
+    //   label: {
+    //     text: `${translate("contracts.contract_email_preview.additional_details")}`,
+    //     htmlFor: "additionalDetails",
+    //     className: "mb-[10px]",
+    //   },
+    //   field: {
+    //     type: Field.ckEditor,
+    //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+    //     id: "additionalDetails",
+    //     name: "additionalDetails",
+    //     control,
 
-      },
-    },
+    //   },
+    // },
 
     {
       containerClass: " mt-5",

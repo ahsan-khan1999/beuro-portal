@@ -108,7 +108,7 @@ const SERVICE_URLS = {
 
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
-
+  updateDate: "/offer/update-date/"
 
 
 };
@@ -242,7 +242,8 @@ const readContractDetail = (params) =>
   get(SERVICE_URLS.contract, params, { feature: featureConstants.login }, { detail: true });
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
-
+const updateContractDate = (data) =>
+  put(SERVICE_URLS.updateDate + `${data?.id}`, data, { feature: featureConstants.login });
 const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 const updateContractStatus = (data) =>
@@ -652,6 +653,7 @@ const apiServices = {
   readInvoiceQRCode,
   readSettingsQrCode,
   createSettingsQrCode,
-  updateOfferContent
+  updateOfferContent,
+  updateContractDate
 };
 export default apiServices;

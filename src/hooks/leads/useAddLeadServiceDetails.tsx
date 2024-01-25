@@ -10,7 +10,8 @@ import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { readService } from "@/api/slices/service/serviceSlice";
 import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
-import { formatDate, formatDateTimeToDate } from "@/utils/utility";
+import { formatDate, formatDateTimeToDate, formatDateTimeToDateMango } from "@/utils/utility";
+import { readContent } from "@/api/slices/content/contentSlice";
 
 export const useAddLeadServiceDetails = ({
   onHandleBack,
@@ -25,11 +26,11 @@ export const useAddLeadServiceDetails = ({
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const { service } = useAppSelector((state) => state.service);
+  const { content } = useAppSelector((state) => state.content);
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   useEffect(() => {
-    dispatch(readService({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const {
@@ -48,7 +49,7 @@ export const useAddLeadServiceDetails = ({
 
       reset({
         ...leadDetails,
-        desireDate: formatDateTimeToDate(leadDetails?.desireDate),
+        desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
       });
     }
   }, [leadDetails.id]);
@@ -58,7 +59,7 @@ export const useAddLeadServiceDetails = ({
     control,
     onHandleBack,
     trigger,
-    service,
+    content,
     leadDetails,
     systemSettings
   );

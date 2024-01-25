@@ -20,7 +20,7 @@ const AddressDetailsData = ({
         id={translate("offers.tabs_heading.address")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.address_details.main_heading")}s
+          {translate("offers.address_details.main_heading")}
         </h2>
         <button
           onClick={() =>

@@ -59,11 +59,11 @@ export const useContractEmail = (
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
-      subject: contractDetails?.title || ""+ " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+      subject: contractDetails?.title || "" + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
       description: contractDetails?.offerID?.content?.confirmationContent?.body || "",
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
-      title: contractDetails?.title,
-      additionalDetails: contractDetails?.additionalDetails || "",
+      // title: contractDetails?.title,
+      // additionalDetails: contractDetails?.additionalDetails || "",
     });
   }, []);
 
@@ -76,8 +76,8 @@ export const useContractEmail = (
         subject: selectedContent?.confirmationContent?.title || "" + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.confirmationContent?.body || "",
         pdf: selectedContent?.confirmationContent?.attachments,
-        title: contractDetails?.title,
-        additionalDetails: contractDetails?.additionalDetails || "",
+        // title: contractDetails?.title,
+        // additionalDetails: contractDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -106,25 +106,25 @@ export const useContractEmail = (
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
-    const apiData = {
-      id: contractDetails?.id,
-      title: data?.title,
-      additionalDetails: data?.additionalDetails,
+    // const apiData = {
+    //   id: contractDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    };
-    const response = await dispatch(updateContractContent({ data: apiData }));
-    if (response?.payload) {
-      const updatedData = {
-        ...data,
-        id: contractDetails?.id,
-        attachments: attachements?.map((item) => item.value),
-      } as { [key: string]: any };
-      delete updatedData["pdf"];
-      localStoreUtil.store_data("contractComposeEmail", updatedData);
-      router.pathname = "/contract/pdf-preview";
-      router.query = { offerID: contractDetails?.id };
-      updateQuery(router, router.locale as string);
-    }
+    // };
+    // const response = await dispatch(updateContractContent({ data: apiData }));
+    // if (response?.payload) {
+    const updatedData = {
+      ...data,
+      id: contractDetails?.id,
+      attachments: attachements?.map((item) => item.value),
+    } as { [key: string]: any };
+    delete updatedData["pdf"];
+    localStoreUtil.store_data("contractComposeEmail", updatedData);
+    router.pathname = "/contract/pdf-preview";
+    router.query = { offerID: contractDetails?.id };
+    updateQuery(router, router.locale as string);
+    // }
 
   };
   return {

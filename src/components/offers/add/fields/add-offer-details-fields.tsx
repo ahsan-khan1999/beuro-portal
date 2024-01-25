@@ -480,7 +480,6 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   OnClick,
   count,
   handleRemoveDateField,
-  offerDetails
 ) => {
   const formField: FormField[] = [
     {
@@ -495,7 +494,6 @@ export const AddDateFormField: GenerateOfferDateFormField = (
           count,
           OnClick,
           handleRemoveDateField,
-          offerDetails
         ),
       },
     },
@@ -508,7 +506,6 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
-  offerDetails: OffersTableRowTypes
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];

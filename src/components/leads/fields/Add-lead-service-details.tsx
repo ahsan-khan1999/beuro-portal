@@ -10,7 +10,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
   control,
   onHandleBack,
   trigger,
-  service,
+  content,
   leadDetails,
   systemSettings
 ) => {
@@ -35,11 +35,12 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: (leadDetails?.id && leadDetails?.requiredService) || "",
+              value:"",
+              // value: ((leadDetails?.id && leadDetails?.requiredService) && leadDetails?.requiredService) || "",
               options:
-                (service &&
-                  service?.map((item) => ({
-                    label: item.serviceName,
+                (content &&
+                  content?.map((item) => ({
+                    label: item.contentName,
                     value: item.id,
                   }))) ||
                 [],
@@ -263,14 +264,14 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.multiSelect,
-              // @ts-expect-error
+              //@ts-expect-error
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: leadDetails?.id && leadDetails?.otherServices,
+              // value: [""],
               options:
-                service?.map((item) => ({
-                  label: item.serviceName,
+                content?.map((item) => ({
+                  label: item.contentName,
                   value: item.id,
                 })) || [],
 
