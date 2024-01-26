@@ -51,7 +51,7 @@ const InvoiceSection = ({
               systemSetting?.isInvoiceOverDue ? "text-[#4A13E7]" : ""
             }`}
           >
-            Automatically Mark Invoice Over Due
+            {translate("common.mark_invoice")}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

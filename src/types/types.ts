@@ -215,7 +215,7 @@ export type GenerateAccountSettingFormField = (
   control: Control<FieldValues>,
   onClick?: Function,
   user?: User,
-  handleRestore: () => void
+  handleRestore?: () => void
 ) => FormField[];
 
 // change mail setting formfield
