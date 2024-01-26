@@ -24,6 +24,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
+      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
@@ -120,7 +121,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               control,
               value: leadDetails?.id &&
                 leadDetails?.customerDetail?.gender ||
-                gender?.toString() || "",
+                gender,
             },
           },
           {
