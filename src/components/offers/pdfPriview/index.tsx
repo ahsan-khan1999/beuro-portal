@@ -58,7 +58,7 @@ const PdfPriview = () => {
   };
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading ? (
         <LoadingState />
       ) : (
         <div className="">

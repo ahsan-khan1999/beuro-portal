@@ -7,14 +7,19 @@ import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 
 const MailDetailsCard = () => {
   const router = useRouter();
-  const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
+  const { invoiceDetails ,collectiveInvoiceDetails} = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
   const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
   return (
     <>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
         <div className="flex items-center">
-          <span className="cursor-pointer" onClick={() => router.back()}>
+          <span className="cursor-pointer" onClick={() => {
+              router.push({
+                pathname: "/invoices/details",
+                query: { invoice: invoiceDetails?.id},
+              })
+          }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -46,7 +51,7 @@ const MailDetailsCard = () => {
             onClick={() =>
               router.push({
                 pathname: "/invoices/invoice-pdf-preview/",
-                query: { invoiceID: collectiveInvoiceDetails?.id },
+                query: { invoiceID: collectiveInvoiceDetails?.id,isMail:true},
               })
             }
           />

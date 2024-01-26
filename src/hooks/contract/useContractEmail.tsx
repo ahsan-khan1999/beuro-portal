@@ -29,6 +29,8 @@ export const useContractEmail = (
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
+  const isMail = router.query?.isMail;
+
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false })
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -114,16 +116,28 @@ export const useContractEmail = (
     // };
     // const response = await dispatch(updateContractContent({ data: apiData }));
     // if (response?.payload) {
-    const updatedData = {
-      ...data,
-      id: contractDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-    } as { [key: string]: any };
-    delete updatedData["pdf"];
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
-    router.pathname = "/contract/pdf-preview";
-    router.query = { offerID: contractDetails?.id };
-    updateQuery(router, router.locale as string);
+
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      let apiData = { ...data, id: contractDetails?.id, pdf: fileUrl };
+
+      const res = await dispatch(sendContractEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+      const updatedData = {
+        ...data,
+        id: contractDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      } as { [key: string]: any };
+      delete updatedData["pdf"];
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
+      router.pathname = "/contract/pdf-preview";
+      router.query = { offerID: contractDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
+
     // }
 
   };

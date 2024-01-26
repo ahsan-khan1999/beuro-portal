@@ -1,5 +1,7 @@
 import { Form } from "@/base-components/form/form";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
@@ -25,8 +27,24 @@ const ComposeMail = () => {
     translate,
     loading,
     loadingContent,
+    onClose,
+    onSuccess,
+    modal
   } = useInvoiceEmail(backRouteHandler, onNextHandle);
-  
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.EMAIL_CONFIRMATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.invoice_update")}
+        route={onSuccess}
+      />
+    ),
+   
+  };
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
   return (
       <>
         <ContractFormCard>
@@ -42,6 +60,7 @@ const ComposeMail = () => {
             className={`${defaultClassName}`}
           />
         </ContractFormCard>
+        {renderModal()}
       </>
   );
 };

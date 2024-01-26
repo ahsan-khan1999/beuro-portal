@@ -16,17 +16,17 @@ export const EditDate = ({ onClose }: { onClose: () => void }) => {
         onClose={onClose}
         containerClassName="max-w-[400px] lg:max-w-[624px] min-h-auto max-h-[600px] overflow-y-scroll "
       >
-        <main className="relative pt-[26px] pb-[47px] pl-[32px] pr-[25px]">
+        <main className="relative pt-[18px] pb-[47px] pl-[32px] pr-[25px]">
           <Image
             src={crossIcon}
             alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
+            className="absolute right-5 top-6 cursor-pointer"
             onClick={onClose}
           />
 
           <div className="flex flex-col">
-            <h2 className="font-medium text-[18px] text-[#393939] mb-[26px]">
-              {translate("modals.date")}
+            <h2 className="font-medium text-[18px] text-[#393939] mb-[10px]">
+              {translate("common.modals.date")}
             </h2>
 
             <hr className="opacity-10" />

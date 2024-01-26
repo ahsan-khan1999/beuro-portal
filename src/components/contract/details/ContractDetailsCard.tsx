@@ -89,7 +89,7 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id },
+                  query: { offerID: contractDetails?.id ,isMail:true },
                 })
               }
             />

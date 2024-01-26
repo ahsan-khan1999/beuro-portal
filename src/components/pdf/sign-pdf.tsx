@@ -20,6 +20,7 @@ import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
 import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
 import { smoothScrollToSection } from "@/utils/utility";
+import { EditDate } from "@/base-components/ui/modals1/editDate";
 
 export const SignPdf = <T,>({
   newPageData,
@@ -70,6 +71,9 @@ export const SignPdf = <T,>({
     router.push("https://staging.buero365.cloudmeshsolutions.com/");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  const editDateHandler = () => {
+    dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
+  };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.UPDATE_SUCCESS]: (
@@ -98,6 +102,7 @@ export const SignPdf = <T,>({
         routeHandler={onSuccess}
       />
     ),
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
   };
 
   useEffect(() => {
@@ -121,6 +126,7 @@ export const SignPdf = <T,>({
             isOffer={pdfData.isOffer}
             emailTemplateSettings={emailTemplateSettings}
             systemSettings={systemSettings}
+            handleEditDateModal={editDateHandler}
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (

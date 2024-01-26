@@ -98,8 +98,8 @@ const OfferDetailsCard = ({
             <PrimaryPDF
               onClick={() =>
                 router.push({
-                  pathname: "/offers/pdf-preview",
-                  query: { offerID: offerDetails?.id },
+                  pathname: `/offers/pdf-preview`,
+                  query: { offerID: offerDetails?.id,isMail:true },
                 })
               }
             />

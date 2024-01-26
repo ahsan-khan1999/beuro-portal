@@ -292,6 +292,20 @@ export const updateOfferContent: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const updatePublicOfferDates: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/public/dates", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateContractDate(data);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const OfferSlice = createSlice({
     name: "OfferSlice",
     initialState,
@@ -466,6 +480,17 @@ const OfferSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(updateOfferContent.rejected, (state) => {
+            state.loading = false
+        });
+
+
+        builder.addCase(updatePublicOfferDates.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updatePublicOfferDates.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updatePublicOfferDates.rejected, (state) => {
             state.loading = false
         });
 

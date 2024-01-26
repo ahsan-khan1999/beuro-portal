@@ -111,8 +111,12 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               name: "flexibility",
               options: [
                 {
+                  value: "0",
+                  label: `${translate("common.flexible")}`,
+                },
+                {
                   value: "1",
-                  label: `1 ${translate("common.days")}`,
+                  label: `1 ${translate("common.day")}`,
                 },
                 {
                   value: "2",

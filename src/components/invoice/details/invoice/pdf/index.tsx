@@ -74,7 +74,7 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading  ? (
         <LoadingState />
       ) : (
         <>

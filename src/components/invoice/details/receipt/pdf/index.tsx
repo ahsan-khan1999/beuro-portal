@@ -77,7 +77,7 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading ? (
         <LoadingState />
       ) : (
         <>

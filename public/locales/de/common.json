@@ -829,7 +829,9 @@
       "back_button": "Zurück",
       "next_button": "Weiter",
       "title":"Titel",
-      "additional_details":"Zusätzliche Details"
+      "additional_details":"Zusätzliche Details",
+      "send":"Senden Sie"
+
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -976,7 +978,7 @@
     "service_details": {
       "heading": "Dienst-/Produktdetails",
       "edit_button": "Details bearbeiten",
-      "required_service": "Benötigter Dienst",
+      "required_service": "Benötigter Inhalt",
       "desire_date": "Wunschdatum",
       "days": "Tage",
       "flexibility": "Flexibilität",
@@ -984,7 +986,7 @@
       "prefer_contact": "Bevorzugte Kontaktaufnahme",
       "budget": "Budget",
       "lead_source": "Leadquelle",
-      "other_services": "Andere Dienste",
+      "other_services": "Andere Inhalt",
       "save_changes_button": "Änderungen speichern",
       "cancel_button": "Abbrechen",
       "next_button": "Weiter",
@@ -1117,6 +1119,8 @@
     "afternoon": "Nachmittag",
     "evening": "Abend",
     "days": "Tage",
+    "day": "Tage",
+    "flexible": "Nicht flexibel",
     "true": "Wahr",
     "false": "Falsch",
     "done_button": "Fertig",

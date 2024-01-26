@@ -183,10 +183,8 @@ const TableRows = ({
             <span
               className="flex justify-center items-center cursor-pointer rounded-md"
               onClick={() =>
-                router.push({
-                  pathname: "/offers/details",
-                  query: { offer: item?.id },
-                })
+                router.push(`/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`)
+
               }
             >
               <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
