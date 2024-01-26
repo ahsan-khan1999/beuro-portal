@@ -27,6 +27,8 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
   let taxPercentage = 0
+  const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
+
   const {
     register,
     handleSubmit,
@@ -43,7 +45,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const type = watch("type");
   useEffect(() => {
     setValue("type", "0")
-    // setValue("amount", 0)
+    setValue("amount", remainingAmount.toFixed(2))
 
 
   }, [])
@@ -57,22 +59,22 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     type
   );
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
+
     taxPercentage = calculateTax(Number(remainingAmount), amount)
+
     if (type === '0') {
       if (remainingAmount < amount) {
-        setValue("amount", remainingAmount)
-        setValue("remainingAmount", (remainingAmount - (amount || 0)).toFixed(2))
+        setValue("amount", remainingAmount?.toFixed(2))
+        setValue("remainingAmount", Math.abs(remainingAmount - (amount || 0)).toFixed(2))
 
       } else {
-        setValue("remainingAmount", (remainingAmount - (amount || 0)).toFixed(2))
+        setValue("remainingAmount", Math.abs(remainingAmount - (amount || 0)).toFixed(2))
       }
     }
     else if (type === '1') {
       if (Number(remainingAmount) < taxPercentage) {
-        setValue("remainingAmount", remainingAmount.toFixed(2))
+        setValue("remainingAmount", Math.abs(remainingAmount - (taxPercentage || 0)).toFixed(2))
         setValue("amount", 100)
-
       } else {
         setValue("remainingAmount", (Number(remainingAmount) - taxPercentage).toFixed(2))
       }
@@ -94,9 +96,9 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
       createInvoice({ data: apiData, router, setError, translate })
     );
     if (res?.payload) {
-      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))  
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }))
       invoiceCreated();
-    
+
     }
   };
   return {

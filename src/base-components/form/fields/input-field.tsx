@@ -81,7 +81,7 @@ export const InputField = ({
         />
         {percentage && (
           <span
-            className={`mr-3 absolute left-12 ${(inputFocus && "tests") || "test"
+            className={`mr-3 absolute left-14 ${(inputFocus && "tests") || "test"
               }`}
           >
             {percentage}

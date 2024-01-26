@@ -9,6 +9,7 @@ import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const PdfCard = ({
   contractNo,
@@ -24,14 +25,19 @@ const PdfCard = ({
 }: ContractEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
+  const { contractDetails } = useAppSelector(state => state.contract)
   return (
     <div className="mb-5">
       <PdfCardLayout>
         <div className=" rounded-md bg-white w-full h-fit">
           <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-20">
             <div className="flex items-center">
-              <span className="cursor-pointer" onClick={() => router.back()}>
+              <span className="cursor-pointer" onClick={() => {
+                router.push({
+                  pathname: "/contract/details",
+                  query: { offer: contractDetails?.id },
+                });
+              }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="41"

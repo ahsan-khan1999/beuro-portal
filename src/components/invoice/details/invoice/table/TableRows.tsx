@@ -35,9 +35,10 @@ const TableRows = ({
   );
   const { systemSettings } = useAppSelector((state) => state.settings);
   const handleInvoicePdfPreview = (id?: string) => {
-    router.pathname = "/invoices/compose-mail";
-    router.query = { invoiceID: id };
-    updateQuery(router, router.locale as string);
+    router.push({
+      pathname: "/invoices/invoice-pdf-preview",
+      query: { invoiceID: id, isMail: true }
+    })
   };
 
   return (

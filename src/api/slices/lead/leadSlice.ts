@@ -15,7 +15,9 @@ interface LeadState {
     error: Record<string, object>,
     lastPage: number,
     totalCount: number,
-    leadDetails: Lead
+    leadDetails: Lead,
+    loadingDetails: boolean;
+
 }
 
 const initialState: LeadState = {
@@ -25,7 +27,8 @@ const initialState: LeadState = {
     lastPage: 1,
     totalCount: 10,
     //@ts-expect-error
-    leadDetails: DEFAULT_LEAD
+    leadDetails: DEFAULT_LEAD,
+    loadingDetails: false
 }
 
 export const readLead: AsyncThunk<boolean, object, object> | any =
@@ -163,14 +166,14 @@ const leadSlice = createSlice({
             state.loading = false
         });
         builder.addCase(readLeadDetails.pending, (state) => {
-            state.loading = true
+            state.loadingDetails = true
         });
         builder.addCase(readLeadDetails.fulfilled, (state, action) => {
             state.leadDetails = action.payload;
-            state.loading = false;
+            state.loadingDetails = false;
         });
         builder.addCase(readLeadDetails.rejected, (state) => {
-            state.loading = false
+            state.loadingDetails = false
         });
         builder.addCase(createLead.pending, (state) => {
             state.loading = true

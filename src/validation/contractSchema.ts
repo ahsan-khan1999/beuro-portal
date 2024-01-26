@@ -1,4 +1,5 @@
 import { ContractEmailPreview } from "@/enums/contract";
+import { EditOfferDetails } from "@/enums/offers";
 import * as yup from "yup";
 
 // Contract email preview validation is here
@@ -9,18 +10,47 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
       .email()
       .required(translate("validationMessages.required")),
 
-    [ContractEmailPreview.content]: yup
-      .string()
-      .notRequired(),
+    [ContractEmailPreview.content]: yup.string().notRequired(),
     [ContractEmailPreview.subject]: yup
       .string()
       .required(translate("validationMessages.required")),
     [ContractEmailPreview.description]: yup
       .string()
       .required(translate("validationMessages.required")),
+    // [ContractEmailPreview.additionalDetails]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
+    // [ContractEmailPreview.title]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
 
     [ContractEmailPreview.fileUpload]: yup
       .array().of(yup.string()
         .notRequired()).notRequired()
+
+  });
+};
+
+
+export const generateContractDateSchema = (translate: Function) => {
+  return yup.object().shape({
+     [EditOfferDetails.date]: yup
+    .array()
+    .of(
+      yup
+        .object()
+        .shape({
+          startDate: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          endDate: yup
+            .string()
+            .notRequired(),
+        })
+        .required(translate("validationMessages.required"))
+    )
+    .min(1)
+    .required(translate("validationMessages.required")),
+
   });
 };

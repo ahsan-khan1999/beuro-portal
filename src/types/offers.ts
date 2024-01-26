@@ -16,6 +16,7 @@ export interface OffersTableRowTypes {
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
+  
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -66,6 +67,7 @@ export interface OffersTableRowTypes {
   signature?: string;
   attachement?: string;
   isNoteCreated: boolean;
+  reason:string
 }
 
 export interface PublicOffersTableRowTypes {

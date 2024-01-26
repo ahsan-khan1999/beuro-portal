@@ -143,13 +143,14 @@ export function setErrors(
         }
       });
       setError(key, newObj);
-    } else
+    } else {
       setError(key, {
         message: formatStrings(
           translate(`validationMessages.${value?.split(":")[0]}`),
           value?.split(":").slice(1)
         ),
       });
+    }
   }
 }
 export function setErrorMessage(
@@ -400,17 +401,23 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm:ss");
+  return moment(date).format("DD/MM/YYYY HH:MM");
 }
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("hh:mm:ss, DD/MM/YYYY");
+  return moment(date).format("HH:MM, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
+  if (!date) return null;
   return moment(date).format("DD-MM-YYYY");
 }
+
+export function formatDateTimeToDateMango(date: string) {
+  if (!date) return null;
+  return moment(date).format("YYYY-MM-DD");
+}
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("hh:mm: A");
+  return moment(date).format("HH:MM: A");
 }
 
 export function getStatusColor(status: string) {

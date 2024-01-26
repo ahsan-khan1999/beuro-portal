@@ -4,6 +4,8 @@ import writeIcon from "@/assets/svgs/write_icon.svg";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Country } from "@/components/reactPdf/address-details";
+import editIcon from "@/assets/svgs/edit_primary.svg";
+import { useTranslation } from "next-i18next";
 
 export const MovingDetails = ({
   header,
@@ -11,7 +13,8 @@ export const MovingDetails = ({
   workDates,
   isOffer,
   handleTitleUpdate,
-  addressLabels
+  addressLabels,
+  handleEditDateModal
 }: Partial<MovingDetailsProps>) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
@@ -20,7 +23,7 @@ export const MovingDetails = ({
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
+  const { t: translate } = useTranslation()
   const handleSaveClick = () => {
     if (!tempText) return;
     setIsEditing(false);
@@ -111,15 +114,33 @@ export const MovingDetails = ({
         ))}
         <div className="flex flex-row gap-6">
 
-          <span className="min-w-[200px]">Auftragsdatum:</span>
+          <span className="min-w-[205px]">Auftragsdatum:</span>
           <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]" >
-            {workDates?.map((item, index) => (
-              <span className="text-[#000] text-base font-normal" key={index}>
-
-                {`${formatDateTimeToDate(item.startDate)}${item.endDate ? " bis " + formatDateTimeToDate(item.endDate) + (workDates?.length - 1 != index && ", " || ".") : workDates?.length - 1 != index && ", " || "."
-                  }`}
-              </span>
-            ))}
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {workDates?.map(
+                (item, index) =>
+                  `${formatDateTimeToDate(item.startDate)}${item.endDate
+                    ? ` ${translate("contracts.card_content.to")} ` +
+                    formatDateTimeToDate(item.endDate) +
+                    ((workDates?.length - 1 !=
+                      index &&
+                      ", ") ||
+                      ".")
+                    : (workDates?.length - 1 !=
+                      index &&
+                      ", ") ||
+                    "."
+                  }`
+              )}
+            </span>
+            <Image
+              src={editIcon}
+              alt="edit date"
+              width={16}
+              height={16}
+              className="cursor-pointer ms-2"
+              onClick={handleEditDateModal}
+            />
           </div>
         </div>
       </form>

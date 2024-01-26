@@ -214,7 +214,8 @@ export type GenerateAccountSettingFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  user?: User
+  user?: User,
+  handleRestore?: () => void
 ) => FormField[];
 
 // change mail setting formfield
@@ -244,7 +245,7 @@ export type GenerateEmailTemplateFormField = (
   emailSettings: EmailSetting | null,
   control?: Control<FieldValues>,
   setValue?: UseFormSetValue<FieldValues>,
-  data?: any,
+  data?: any
 ) => FormField[];
 
 // edit payment details formfield
@@ -356,7 +357,7 @@ export type GenerateOfferFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: OffersTableRowTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
@@ -372,10 +373,9 @@ export type GenerateContractFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: contractTableTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>
-
 ) => FormField[];
 export type GenerateInvoiceEmailFormField = (
   register: UseFormRegister<FieldValues>,
@@ -389,9 +389,10 @@ export type GenerateInvoiceEmailFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: SubInvoiceTableRowTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
-  setValue?: UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>,
+  contentLoading?: boolean
 
 ) => FormField[];
 // Contract formfield
@@ -419,6 +420,14 @@ export type GenerateOffersFormField = (
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+
+// Generate Euit date form-field
+export type GenerateEditDateFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>
 ) => FormField[];
 
 export type GenerateOfferServiceFormField = (
@@ -467,7 +476,7 @@ export type GenerateOfferDateFormField = (
   onClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
   handleRemoveDateField: UseFieldArrayRemove,
-  offerDetails: OffersTableRowTypes,
+  loading?: boolean,
   control?: Control<FieldValues>
 ) => FormField[];
 // Contract formfield
@@ -477,7 +486,7 @@ export type GenerateLeadsFormField = (
   control: Control<FieldValues>,
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  service?: Service[],
+  content?: ContentTableRowTypes[],
   leadDetails?: Lead,
   systemSettings?: SystemSetting | null
 ) => FormField[];
@@ -528,6 +537,7 @@ export type GenerateLeadsCustomerFormField = (
     handleContentSelect?: () => void;
     selectedContent?: string;
     leadID?: string;
+    gender?: number
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -545,7 +555,12 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
+  data: {
+    customer: Customers[];
+    lead: Lead[];
+    followUps: FollowUp | null;
+    onCustomerSelect?: (id: string) => void;
+  },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -629,9 +644,7 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
-  leadSource?: string[] | string
-
-
+  leadSource?: string[] | string;
 }
 export interface FilterProps {
   filter: FilterType;
@@ -660,7 +673,7 @@ export interface DocumentHeaderDetailsProps {
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
   fileType?: "contract" | "invoice" | "receipt";
-  companyName?:string;
+  companyName?: string;
 }
 
 export interface ProductItemFooterProps {
@@ -668,16 +681,17 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
-  invoiceStatus?: keyof typeof staticEnums["InvoiceStatus"];
+  invoiceStatus?: keyof (typeof staticEnums)["InvoiceStatus"];
   invoiceAmount?: string;
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
   systemSettings?: SystemSetting | null;
-  discountType?:keyof typeof staticEnums["DiscountType"];
-  taxType?:keyof typeof staticEnums["TaxType"];
-  serviceDiscountSum?:number
-
+  discountType?: keyof (typeof staticEnums)["DiscountType"];
+  taxType?: keyof (typeof staticEnums)["TaxType"];
+  serviceDiscountSum?: number;
+  isTax?:boolean;
+  isDiscount?:boolean;
 }
 
 export interface ContactDetailsProps {
@@ -689,8 +703,7 @@ export interface ContactDetailsProps {
   };
   email: string;
   phone: string;
-  gender?:string
-
+  gender?: string;
 }
 export interface MovingDetailsProps {
   header: string;
@@ -700,6 +713,7 @@ export interface MovingDetailsProps {
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
   addressLabels?: string[];
+  handleEditDateModal?: () => void
 }
 export interface ProductItemProps {
   title: string;
@@ -781,7 +795,7 @@ export interface TemplateSettigsSecondColumn {
   postCode: string;
   bankName: string;
   accountNumber: string;
-  iban: string
+  iban: string;
 }
 export interface TemplateSettigsThirdColumn {
   isRow1: boolean;
@@ -794,7 +808,6 @@ export interface TemplateSettigsThirdColumn {
   row3: string;
   row4: string;
   row5: string;
-
 }
 export interface TemplateSettigsFourthColumn {
   isRow1: boolean;
@@ -807,7 +820,6 @@ export interface TemplateSettigsFourthColumn {
   row3: string;
   row4: string;
   row5: string;
-
 }
 export interface TemplateType {
   firstColumn: TemplateSettigsFirstColumn;
@@ -840,7 +852,7 @@ export interface EmailHeaderProps {
   onPrint: () => void;
   handleSendByPost: () => void;
   activeButtonId: string | null;
-  offerId?:string
+  offerId?: string;
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
@@ -884,6 +896,8 @@ export interface PdfProps<T = EmailHeaderProps> {
   signature?: string;
   attachement?: string;
   isCanvas?: boolean;
+  
+
 }
 
 export interface PdfPreviewProps {
@@ -913,6 +927,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
+  handleEditDateModal?: () => void
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;

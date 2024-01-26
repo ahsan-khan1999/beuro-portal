@@ -18,7 +18,9 @@ const EditReceiptContentDetails = ({
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("content.details.receipt_title")}</h2>
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("content.tabs_headings.receipt_content")}
+        </h2>
         <button
           onClick={() => onClick(3, ComponentsType.receiptContent)}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-2 px-9"

@@ -30,11 +30,11 @@ export const generateLeadsCustomerEditDetailsValidation = (
 
     [LeadsCustomerEditDetails.phone]: yup
       .string()
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
 
     [LeadsCustomerEditDetails.mobile]: yup
       .string()
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
 
     [LeadsCustomerEditDetails.address]: yup
       .object({
@@ -121,15 +121,15 @@ export const generateLeadsServiceEditDetailsValidation = (
 
     [LeadsServiceEditDetails.contactAvailablity]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.flexibility]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.preferContact]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.budget]: yup
       .string()
@@ -137,12 +137,12 @@ export const generateLeadsServiceEditDetailsValidation = (
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.otherServices]: yup
       .array()
-      .of(yup.string().required())
-      .min(1, translate("validationMessages.required")),
+      .of(yup.string().notRequired())
+ 
   });
 };
 

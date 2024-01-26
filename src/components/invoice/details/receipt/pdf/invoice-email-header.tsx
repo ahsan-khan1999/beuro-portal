@@ -43,7 +43,12 @@ export const InvoiceEmailHeader = ({
               src={backIcon}
               alt="backIcon"
               className="cursor-pointer"
-              onClick={router.back}
+              onClick={() => {
+                router.push({
+                  pathname: "/invoices/details",
+                  query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+                })
+              }}
             />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
               {title}

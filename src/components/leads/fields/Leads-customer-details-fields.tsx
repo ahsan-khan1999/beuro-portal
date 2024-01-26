@@ -27,7 +27,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
         id: "div-field",
         className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
-
           {
             containerClass: "mb-0",
             label: {
@@ -40,11 +39,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender)
-                .map((item) => ({
-                  value: staticEnums.Gender[item],
-                  label: translate(`gender.${item}`),
-                })),
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
 
               control,
               value: "",
@@ -88,13 +86,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 })),
 
               control,
-              value:
-                (leadDetails?.id &&
-                  getKeyByValue(
-                    staticEnums["CustomerType"],
-                    leadDetails.customerDetail?.customerType
-                  )) ||
-                "",
+              value:""
+              // value:
+             
+              //     customerType,
             },
           },
 
@@ -114,7 +109,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               register,
             },
           },
-        
+
           {
             containerClass: "mb-0",
             label: {
@@ -226,7 +221,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               value:
                 (leadDetails?.id &&
                   leadDetails?.customerDetail?.address?.country) ||
-                  Object.keys(staticEnums.Country)[0],
+                Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -237,7 +232,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-[30px]",
+        className: "flex justify-end items-center space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",

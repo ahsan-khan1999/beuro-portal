@@ -226,8 +226,6 @@ export const useEditOfferDetails = ({
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
-    control
   );
 
   const submit = AddOfferDetailsSubmitFormField(

@@ -11,6 +11,9 @@ import axios from "axios";
 import { BASEURL } from "@/services/HttpProvider";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
 import toast from 'react-hot-toast';
+import { EmailTemplate } from "@/types/settings";
+import { TemplateType } from "@/types";
+import { SystemSetting } from "../settingSlice/settings";
 
 interface OfferState {
     offer: OffersTableRowTypes[];
@@ -20,7 +23,9 @@ interface OfferState {
     totalCount: number,
     offerDetails: OffersTableRowTypes,
     offerActivity: OfferActivity | null,
-    publicOffer: PublicOffersTableRowTypes | null
+    publicOffer: PublicOffersTableRowTypes | null,
+    loadingPublicOffer: boolean;
+
 }
 
 const initialState: OfferState = {
@@ -31,7 +36,8 @@ const initialState: OfferState = {
     totalCount: 10,
     //@ts-expect-error
     offerDetails: DEFAULT_OFFER,
-    offerActivity: null
+    offerActivity: null,
+    loadingPublicOffer: false
 }
 
 export const readOffer: AsyncThunk<boolean, object, object> | any =
@@ -278,6 +284,34 @@ export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const updateOfferContent: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/content", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            await apiServices.updateOfferContent(data);
+            return true;
+        } catch (e: any) {
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
+
+export const updatePublicOfferDates: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("offer/update/public/dates", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const response = await apiServices.updateContractDate(data);
+            return response?.data?.Offer;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const OfferSlice = createSlice({
     name: "OfferSlice",
     initialState,
@@ -287,6 +321,9 @@ const OfferSlice = createSlice({
         },
         setOfferDetails: (state, action) => {
             state.offerDetails = action.payload;
+        },
+        setPublicOfferDetails: (state, action) => {
+            state.publicOffer = action.payload;
         },
     },
     extraReducers(builder) {
@@ -445,9 +482,30 @@ const OfferSlice = createSlice({
         builder.addCase(updateOfferDiscount.rejected, (state) => {
             state.loading = false
         });
+        builder.addCase(updateOfferContent.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateOfferContent.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(updateOfferContent.rejected, (state) => {
+            state.loading = false
+        });
+
+
+        builder.addCase(updatePublicOfferDates.pending, (state) => {
+            state.loadingPublicOffer = true
+        });
+        builder.addCase(updatePublicOfferDates.fulfilled, (state, action) => {
+            state.loadingPublicOffer = false;
+            // if (action.payload) state.publicOffer = { "Mail": state.publicOffer?.Mail as EmailTemplate, "Template": state.publicOffer?.Template as TemplateType, "setting": state.publicOffer?.setting as SystemSetting, "Offer": action.payload }
+        });
+        builder.addCase(updatePublicOfferDates.rejected, (state) => {
+            state.loadingPublicOffer = false
+        });
 
     },
 })
 
 export default OfferSlice.reducer;
-export const { setErrorMessage, setOfferDetails } = OfferSlice.actions
+export const { setErrorMessage, setOfferDetails,setPublicOfferDetails } = OfferSlice.actions

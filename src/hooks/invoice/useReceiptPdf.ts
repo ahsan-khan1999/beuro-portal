@@ -95,7 +95,7 @@ export const useReceiptPdf = () => {
   const maxItemsPerPage = 10;
 
   const router = useRouter();
-  const { invoiceID } = router.query;
+  const { invoiceID ,isMail} = router.query;
 
   useEffect(() => {
     (async () => {
@@ -206,6 +206,8 @@ export const useReceiptPdf = () => {
               invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
                 ?.serviceDetail,
             serviceItemFooter: {
+              isTax:invoiceDetails?.invoiceID?.contractID?.offerID?.isTax,
+              isDiscount:invoiceDetails?.invoiceID?.contractID?.offerID?.isDiscount,
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
               tax:
@@ -326,45 +328,60 @@ export const useReceiptPdf = () => {
 
   const handleEmailSend = async () => {
     try {
+      if (!mergedFile) return;
       const formData = new FormData();
-
       setActiveButtonId("email");
-      const data = await localStoreUtil.get_data("receiptEmailCompose");
-
-      if (data && mergedFile) {
-        formData.append("file", mergedFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
-        let apiData = {
-          ...data,
-          pdf: fileUrl?.payload,
-        };
-        delete apiData["content"];
-        const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-        if (res?.payload)
-          //   await localStoreUtil.remove_data("receiptEmailCompose");
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      } else {
-        let apiData = {
-          email:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
-              ?.customerDetail?.email,
-          content:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.id,
-          subject:
-            collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-          description:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.body,
-          attachments:
-            collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
-              ?.receiptContent?.attachments,
-          id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
-        };
-        const res = await dispatch(sendInvoiceEmail({ apiData }));
-        if (res?.payload)
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      if (!mergedFile) return;
+      formData.append("file", mergedFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (fileUrl?.payload) {
+        localStoreUtil.store_data("pdf", fileUrl?.payload)
       }
+      if (isMail) {
+        router.push(`/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`)
+      }
+      else {
+
+
+        setActiveButtonId("email");
+        const data = await localStoreUtil.get_data("receiptEmailCompose");
+
+        if (data) {
+          formData.append("file", mergedFile as any);
+          const fileUrl = await dispatch(uploadFileToFirebase(formData));
+          let apiData = {
+            ...data,
+            pdf: fileUrl?.payload,
+          };
+          delete apiData["content"];
+          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+          if (res?.payload)
+            //   await localStoreUtil.remove_data("receiptEmailCompose");
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        } else {
+          let apiData = {
+            email:
+              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                ?.customerDetail?.email,
+            content:
+              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+                ?.id,
+            subject:
+              collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            description:
+              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+                ?.receiptContent?.body,
+            attachments:
+              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+                ?.receiptContent?.attachments,
+            id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
+          };
+          const res = await dispatch(sendInvoiceEmail({ apiData }));
+          if (res?.payload)
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        }
+      }
+
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }

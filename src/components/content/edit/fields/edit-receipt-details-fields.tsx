@@ -106,7 +106,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center gap-x-[18px]",
+        className: "flex items-center justify-end gap-x-[18px]",
         children: [
           {
             containerClass: "mb-0",

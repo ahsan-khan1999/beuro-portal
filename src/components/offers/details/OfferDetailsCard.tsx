@@ -85,9 +85,8 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
-              isSendEmail && "hidden"
-            }`}
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
+              }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -99,8 +98,8 @@ const OfferDetailsCard = ({
             <PrimaryPDF
               onClick={() =>
                 router.push({
-                  pathname: "/offers/pdf-preview",
-                  query: { offerID: offerDetails?.id },
+                  pathname: `/offers/pdf-preview`,
+                  query: { offerID: offerDetails?.id,isMail:true },
                 })
               }
             />
@@ -176,14 +175,13 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
-                      item.endDate
-                        ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
-                          ((offerDetails?.date?.length - 1 != index && ", ") ||
-                            ".")
-                        : (offerDetails?.date?.length - 1 != index && ", ") ||
-                          "."
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((offerDetails?.date?.length - 1 != index && ", ") ||
+                        ".")
+                      : (offerDetails?.date?.length - 1 != index && ", ") ||
+                      "."
                     }`
                 )}
               </span>
@@ -191,7 +189,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_100%)_minmax(250px,_250px)_minmax(150px,_100%)] gap-y-2">
+        <div className="grid grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(100px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
@@ -238,7 +236,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base">
+            <span className="text-[#4D4D4D] font-normal text-base" >
               {translate("offers.card_content.status")}:
             </span>
             <span>
@@ -259,21 +257,32 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                <span
-                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getOfferStatusColor(
-                      offerDetails?.offerStatus
-                    )}`,
-                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                  }}
-                >
-                  {offerDetails?.offerStatus}
-                </span>
-              )}
+                  <span
+                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                    style={{
+                      borderColor: `${getOfferStatusColor(
+                        offerDetails?.offerStatus
+                      )}`,
+                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                    }}
+                  >
+                    {offerDetails?.offerStatus}
+                  </span>
+                )}
             </span>
           </div>
+          {
+            offerDetails?.offerStatus === "Rejected" &&
 
+            <div className="flex items-center gap-[11px] ">
+              <span className="text-[#4D4D4D] font-normal text-base" >
+                {translate("offers.card_content.reason")}:
+              </span>
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {offerDetails?.reason || "-"}
+              </span>
+            </div>
+          }
           <div className="flex justify-between items-center">
             <div
               className="flex items-center gap-[11px] cursor-pointer"

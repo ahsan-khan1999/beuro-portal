@@ -52,7 +52,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
 
         control,
         // value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
-        trigger
+        trigger,
       },
     },
     {
@@ -60,7 +60,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] ",
+        className: "flex justify-end items-center space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0 mt-[30px]",

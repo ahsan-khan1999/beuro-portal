@@ -19,7 +19,8 @@ export const ProductPurchasedItemsDetails = ({
   totalPages,
   isOffer,
   emailTemplateSettings,
-  systemSettings
+  systemSettings,
+  handleEditDateModal
 }: Partial<PurchasedItemsDetailsProps>) => {
   
   return (
@@ -27,7 +28,7 @@ export const ProductPurchasedItemsDetails = ({
       <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
-        <MovingDetails {...movingDetails} isOffer={isOffer} />
+        <MovingDetails {...movingDetails} isOffer={isOffer} handleEditDateModal={handleEditDateModal}/>
         <ProcutItemHeader />
         {serviceItem?.map((item,index) => (
           <ProductItem {...item} key={index} />

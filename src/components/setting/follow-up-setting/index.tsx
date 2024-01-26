@@ -122,7 +122,7 @@ const FollowUpSetting = () => {
       <Button
         id="setting"
         inputType="button"
-        className="mt-5 px-4 text-white text-base font-medium rounded-md  bg-[#4A13E7] "
+        className="mt-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
         text={translate("setting.save_setting")}
         loading={loading}
         onClick={handleSaveSetings}
