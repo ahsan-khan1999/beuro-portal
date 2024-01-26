@@ -45,6 +45,7 @@ export const useSendEmail = (
       )) ||
     []
   );
+ 
 
   const schema = generateContractEmailValidationSchema(translate);
   const {
@@ -119,16 +120,27 @@ export const useSendEmail = (
     // };
     // const response = await dispatch(updateOfferContent({ data: apiData }));
     // if (response?.payload) {
-    const updatedData = {
-      ...data,
-      id: offerDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-    };
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
 
-    router.pathname = "/offers/pdf-preview";
-    router.query = { offerID: offerDetails?.id };
-    updateQuery(router, router.locale as string);
+      const res = await dispatch(sendOfferEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+
+      const updatedData = {
+        ...data,
+        id: offerDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      };
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
+
+      router.pathname = "/offers/pdf-preview";
+      router.query = { offerID: offerDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
     // } else {
 
     // }

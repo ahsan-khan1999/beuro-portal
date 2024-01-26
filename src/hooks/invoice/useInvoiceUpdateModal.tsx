@@ -53,27 +53,27 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
     taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {
-        setValue("amount", invoiceDetails?.paidAmount)
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("amount", Number(invoiceDetails?.paidAmount).toFixed(2))
+        setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
 
       } else if (invoiceDetails?.paidAmount === amount) {
-        setValue("remainingAmount", remainingAmount)
+        setValue("remainingAmount", remainingAmount.toFixed(2))
 
       } else {
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
 
       }
     }
     else if (type === '1') {
       if (Number(remainingAmount) < taxPercentage) {
-        setValue("remainingAmount", remainingAmount)
+        setValue("remainingAmount", (remainingAmount).toFixed(2))
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", Number(remainingAmount) - taxPercentage)
+        setValue("remainingAmount", (Number(remainingAmount) - taxPercentage).toFixed(2))
       }
     } else {
-      setValue("remainingAmount", remainingAmount)
+      setValue("remainingAmount", remainingAmount.toFixed(2))
 
     }
   }, [amount, type]);

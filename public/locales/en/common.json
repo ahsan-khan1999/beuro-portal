@@ -835,7 +835,8 @@
       "back_button": "Back",
       "next_button": "Next",
       "title":"Title",
-      "additional_details":"Additional Details"
+      "additional_details":"Additional Details",
+      "send":"Send"
     },
     "pdf_card_details": {
       "heading": "Contract Details",
@@ -983,7 +984,7 @@
     "service_details": {
       "heading": "Service/Product Details",
       "edit_button": "Edit Details",
-      "required_service": "Required Service",
+      "required_service": "Required Content",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
       "days": "Days",
@@ -991,7 +992,7 @@
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",
       "lead_source": "Lead Source",
-      "other_services": "Other Services",
+      "other_services": "Other Content",
       "save_changes_button": "Save Changes",
       "cancel_button": "Cancel",
       "next_button": "Next",
@@ -1124,6 +1125,9 @@
     "afternoon": "Afternoon",
     "evening": "Evening",
     "days": "days",
+    "day": "day",
+    "flexible": "Not Flexible",
+
     "true": "True",
     "false": "False",
     "done_button": "Done",

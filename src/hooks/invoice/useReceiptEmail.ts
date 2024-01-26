@@ -37,6 +37,11 @@ export const useReceiptEmail = (
   const { loading, error, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+  const { modal } = useAppSelector(
+    (state) => state.global
+  );
+  const isMail = router.query?.isMail;
+
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
 
   const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
@@ -116,7 +121,16 @@ export const useReceiptEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
-
+  const onSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    router.push({
+      pathname: "/invoices/details",
+      query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+    })
+  };
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
   const fields = InvoiceEmailPreviewFormField(
     register,
     loading,
@@ -142,24 +156,35 @@ export const useReceiptEmail = (
     // };
     // const response = await dispatch(updateInvoiceContent({ data: apiData }));
     // if (response?.payload) {
-    const updatedData = {
-      ...data,
-      id: collectiveInvoiceDetails?.id,
-      attachments: attachements?.map((item) => item.value),
-    } as { [key in string]: any };
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      let apiData = { ...data, id: invoiceID, pdf: fileUrl };
 
-    delete updatedData["pdf"];
+      const res = await dispatch(sendInvoiceEmail({ data: apiData }));
 
-    try {
-      await localStoreUtil.store_data("receiptEmailCompose", updatedData);
-    } catch (err) {
-      console.warn("LocalStorageError", err);
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+      const updatedData = {
+        ...data,
+        id: collectiveInvoiceDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      } as { [key in string]: any };
+
+      delete updatedData["pdf"];
+
+      try {
+        await localStoreUtil.store_data("receiptEmailCompose", updatedData);
+      } catch (err) {
+        console.warn("LocalStorageError", err);
+      }
+
+      router.pathname = "/invoices/receipt-pdf-preview";
+      router.query = { invoiceID: collectiveInvoiceDetails?.id };
+      updateQuery(router, router.locale as string);
+      // }
     }
-
-    router.pathname = "/invoices/receipt-pdf-preview";
-    router.query = { invoiceID: collectiveInvoiceDetails?.id };
-    updateQuery(router, router.locale as string);
-    // }
   };
   return {
     fields,
@@ -170,6 +195,9 @@ export const useReceiptEmail = (
     error,
     translate,
     loading,
-    loadingContent
+    loadingContent,
+    modal,
+    onSuccess,
+    onClose
   };
 };

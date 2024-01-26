@@ -401,11 +401,11 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm:ss");
+  return moment(date).format("DD/MM/YYYY HH:MM");
 }
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("hh:mm:ss, DD/MM/YYYY");
+  return moment(date).format("HH:MM, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
@@ -417,7 +417,7 @@ export function formatDateTimeToDateMango(date: string) {
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("hh:mm: A");
+  return moment(date).format("HH:MM: A");
 }
 
 export function getStatusColor(status: string) {

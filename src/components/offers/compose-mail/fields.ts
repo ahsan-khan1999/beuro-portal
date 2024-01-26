@@ -5,6 +5,7 @@ import {
   GenerateOfferFormField,
 } from "@/types";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export const OfferEmailFormField: GenerateOfferFormField = (
   register,
@@ -22,6 +23,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   setIsMoreEmail,
   setValue
 ) => {
+  const router = useRouter()
+  const isMail = router?.query?.isMail
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -323,7 +326,9 @@ export const OfferEmailFormField: GenerateOfferFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate(
+              text: isMail && `${translate(
+                "contracts.contract_email_preview.send"
+              )}` || `${translate(
                 "contracts.contract_email_preview.next_button"
               )}`,
               inputType: "submit",

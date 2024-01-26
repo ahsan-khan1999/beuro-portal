@@ -709,6 +709,7 @@ export interface MovingDetailsProps {
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
   addressLabels?: string[];
+  handleEditDateModal?: () => void
 }
 export interface ProductItemProps {
   title: string;
@@ -920,6 +921,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
+  handleEditDateModal?: () => void
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;

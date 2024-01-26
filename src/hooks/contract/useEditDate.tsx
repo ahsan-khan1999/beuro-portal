@@ -10,6 +10,7 @@ import { AddDateFormFieldContract } from "@/components/contract/fields/edit-date
 import { updateContractDates } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import { readOfferPublicDetails, updatePublicOfferDates } from "@/api/slices/offer/offerSlice";
 
 export const useEditDate = () => {
   const { t: translate } = useTranslation();
@@ -18,9 +19,13 @@ export const useEditDate = () => {
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
+  const { publicOffer } = useAppSelector(
+    (state) => state.offer
+  );
   const handleCloseModal = () => {
     dispatch(updateModalType({ type: ModalType.NONE }))
   }
+  const isOffer = router?.pathname?.includes("pdf")
   const schema = generateContractDateSchema(translate);
   const {
     register,
@@ -32,7 +37,7 @@ export const useEditDate = () => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  
+
 
   const {
     fields: testFields,
@@ -43,7 +48,7 @@ export const useEditDate = () => {
     name: "date",
   });
   useEffect(() => {
-    setValue("date", contractDetails?.offerID?.date)
+    setValue("date", isOffer ? publicOffer?.Offer?.date : contractDetails?.offerID?.date)
   }, [])
   const fields = AddDateFormFieldContract(
     register,
@@ -53,8 +58,16 @@ export const useEditDate = () => {
     loading
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(updateContractDates({ data: { ...data, id: contractDetails?.offerID?.id }, router, setError, translate }))
-    if (response?.payload) handleCloseModal()
+    if (isOffer) {
+      const response = await dispatch(updatePublicOfferDates({ data: { ...data, id: publicOffer?.Offer?.id }, router, setError, translate }))
+      if (response?.payload) {
+        handleCloseModal()
+      }
+    } else {
+      const response = await dispatch(updateContractDates({ data: { ...data, id: contractDetails?.offerID?.id }, router, setError, translate }))
+      if (response?.payload) handleCloseModal()
+    }
+
   };
   return {
     fields,

@@ -28,15 +28,18 @@ import { EditDate } from "@/base-components/ui/modals1/editDate";
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const router = useRouter();
+  const id = router.query.contract;
+  const isMail = Boolean(router.query?.isMail);
+
+
   const { images } = useAppSelector((state) => state.image);
-  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
   const { t: translate } = useTranslation();
-  const router = useRouter();
-  const id = router.query.contract;
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
