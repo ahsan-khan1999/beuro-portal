@@ -95,24 +95,39 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               id: "reason",
               name: "reason",
               options: [
-                { value: "General Inquiry", label: "General Inquiry" },
-                { value: "Account Assistance", label: "Account Assistance" },
+                {
+                  value: "General Inquiry",
+                  label: `${translate("common.general_inquery")}`,
+                },
+                {
+                  value: "Account Assistance",
+                  label: `${translate("common.account_assist")}`,
+                },
                 {
                   value: "Billing or Payment Issues",
-                  label: "Billing or Payment Issues",
+                  label: `${translate("common.payment_issues")}`,
                 },
-                { value: "Technical Support", label: "Technical Support" },
+                {
+                  value: "Technical Support",
+                  label: `${translate("common.Technical_support")}`,
+                },
                 {
                   value: "Feedback or Suggestions",
-                  label: "Feedback or Suggestions",
+                  label: `${translate("common.feedback_suggestion")}`,
                 },
                 {
                   value: "Report a Bug or Error",
-                  label: "Report a Bug or Error",
+                  label: `${translate("common.report_bug")}`,
                 },
-                { value: "Website Feedback", label: "Website Feedback" },
-                { value: "Complaint", label: "Complaint" },
-                { value: "Other", label: "Other" },
+                {
+                  value: "Website Feedback",
+                  label: `${translate("common.website_feedback")}`,
+                },
+                {
+                  value: "Complaint",
+                  label: `${translate("common.complaint")}`,
+                },
+                { value: "Other", label: `${translate("common.other")}` },
               ],
               control,
             },
@@ -133,7 +148,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         rows: 2,
         id: "message",
         name: "message",
-        placeholder: "Type your message here",
+        placeholder: `${translate("common.type_message")}`,
         register,
       },
     },

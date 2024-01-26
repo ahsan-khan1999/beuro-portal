@@ -20,31 +20,31 @@ const PaymentHistory = () => {
 
   const planHistoryData: PlanData[] = [
     {
-      description: "Your silver plan",
+      description: "Abonement",
       amount: "CHF9",
       date: "25/08/2023",
       status: "Paid",
     },
     {
-      description: "Your silver plan",
+      description: "Abonement",
       amount: "CHF9",
       date: "25/08/2023",
       status: "Paid",
     },
     {
-      description: "Your silver plan",
+      description: "Abonement",
       amount: "CHF9",
       date: "25/08/2023",
       status: "Paid",
     },
     {
-      description: "Your silver plan",
+      description: "Abonement",
       amount: "CHF9",
       date: "25/08/2023",
       status: "Paid",
     },
     {
-      description: "Your silver plan",
+      description: "Abonement",
       amount: "CHF9",
       date: "25/08/2023",
       status: "Paid",
