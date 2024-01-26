@@ -21,6 +21,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
   let taxPercentage = 0
+  const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
 
   const {
     register,
@@ -48,12 +49,11 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
 
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
 
     taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {
-        setValue("amount", Number(invoiceDetails?.paidAmount).toFixed(2))
+        setValue("amount", remainingAmount?.toFixed(2))
         setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
 
       } else if (invoiceDetails?.paidAmount === amount) {
@@ -61,6 +61,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
       } else {
         setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
+
 
       }
     }
