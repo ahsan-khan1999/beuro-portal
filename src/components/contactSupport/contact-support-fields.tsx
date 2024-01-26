@@ -89,7 +89,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-[#BFBFBF]  focus:!border-primary ",
+              className: "pl-4 !border-[#BFBFBF] focus:!border-primary ",
               type: Field.select,
               value: "",
               id: "reason",
