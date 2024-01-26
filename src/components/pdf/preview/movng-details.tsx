@@ -133,14 +133,14 @@ export const MovingDetails = ({
                   }`
               )}
             </span>
-            {/* <Image
+            <Image
               src={editIcon}
               alt="edit date"
               width={16}
               height={16}
               className="cursor-pointer ms-2"
               onClick={handleEditDateModal}
-            /> */}
+            />
           </div>
         </div>
       </form>

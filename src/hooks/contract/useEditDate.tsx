@@ -5,21 +5,22 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddDateFormField } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateContractDateSchema } from "@/validation/contractSchema";
-import { useEffect } from "react";
+import { SetStateAction, useEffect } from "react";
 import { AddDateFormFieldContract } from "@/components/contract/fields/edit-date-fields";
 import { updateContractDates } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { readOfferPublicDetails, updatePublicOfferDates } from "@/api/slices/offer/offerSlice";
+import { EmailHeaderProps, PdfProps } from "@/types";
 
-export const useEditDate = () => {
+export const useEditDate = (setOfferData?: SetStateAction<any>, pdfData?: PdfProps<EmailHeaderProps>) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
-  const { publicOffer } = useAppSelector(
+  const { publicOffer, loadingPublicOffer } = useAppSelector(
     (state) => state.offer
   );
   const handleCloseModal = () => {
@@ -48,19 +49,20 @@ export const useEditDate = () => {
     name: "date",
   });
   useEffect(() => {
-    setValue("date", isOffer ? publicOffer?.Offer?.date : contractDetails?.offerID?.date)
+    setValue("date", isOffer ? pdfData?.movingDetails?.workDates : contractDetails?.offerID?.date)
   }, [])
   const fields = AddDateFormFieldContract(
     register,
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    loading
+    isOffer ? loadingPublicOffer : loading
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (isOffer) {
       const response = await dispatch(updatePublicOfferDates({ data: { ...data, id: publicOffer?.Offer?.id }, router, setError, translate }))
-      if (response?.payload) {
+      if (response?.payload && setOfferData) {
+        setOfferData({ ...pdfData, "movingDetails": { ...pdfData?.movingDetails, "workDates": response?.payload?.date } })
         handleCloseModal()
       }
     } else {
