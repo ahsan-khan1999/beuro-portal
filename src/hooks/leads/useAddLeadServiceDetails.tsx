@@ -12,6 +12,7 @@ import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { formatDate, formatDateTimeToDate, formatDateTimeToDateMango } from "@/utils/utility";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { ContentTableRowTypes } from "@/types/content";
 
 export const useAddLeadServiceDetails = ({
   onHandleBack,
@@ -44,12 +45,18 @@ export const useAddLeadServiceDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+  const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
   useMemo(() => {
     if (leadDetails.id) {
 
       reset({
         ...leadDetails,
         desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
+        requiredService: selectedContent?.id,
+        // otherServices: contentList?.map((item) => item.id)
+
+
       });
     }
   }, [leadDetails.id]);

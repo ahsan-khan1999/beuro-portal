@@ -59,7 +59,7 @@ export const useOfferPdf = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
-  const { offerID,isMail } = router.query;
+  const { offerID, isMail } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -136,7 +136,7 @@ export const useOfferPdf = () => {
               },
               email: offerDetails?.leadID?.customerDetail?.email,
               phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
-              gender:offerDetails?.leadID?.customerDetail?.gender?.toString()
+              gender: offerDetails?.leadID?.customerDetail?.gender?.toString()
 
             },
             movingDetails: {
@@ -148,6 +148,8 @@ export const useOfferPdf = () => {
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
+              isTax:offerDetails?.isTax,
+              isDiscount:offerDetails?.isDiscount,
               subTotal: offerDetails?.subTotal?.toString(),
               tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
@@ -217,23 +219,28 @@ export const useOfferPdf = () => {
 
   const handleEmailSend = async () => {
     try {
-      if(isMail){
-        router.push(`/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`)
-      }else{
+      const formData = new FormData();
 
-        const formData = new FormData();
+      if (!pdfFile) return;
+      formData.append("file", pdfFile as any);
+      const fileUrl = await dispatch(uploadFileToFirebase(formData));
+      if (fileUrl?.payload) {
+        localStoreUtil.store_data("pdf", fileUrl?.payload)
+      }
+      if (isMail) {
+        router.push(`/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`)
+      } else {
+
         setActiveButtonId("email");
-  
+
         const data = await localStoreUtil.get_data("contractComposeEmail");
-        if (!pdfFile) return;
-        formData.append("file", pdfFile as any);
-        const fileUrl = await dispatch(uploadFileToFirebase(formData));
+
         if (data) {
           // delete apiData["id"]
-  
+
           let apiData = { ...data, pdf: fileUrl?.payload };
           delete apiData["content"];
-  
+
           const res = await dispatch(sendOfferEmail({ data: apiData }));
           if (res?.payload) {
             dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));

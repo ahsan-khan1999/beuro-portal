@@ -43,7 +43,7 @@
     },
     "company_details": {
       "heading": "Tell Us About Your Company",
-      "sub_heading": "Lorem ipsum dollar smith amit dolem isplum sumip alpsum .",
+      "sub_heading": "Enhance support by sharing company information.",
       "company_name": "Company Name",
       "phone_number": "Phone Number",
       "mobile_number": "Mobile Number",
@@ -53,7 +53,7 @@
     },
     "location_details": {
       "heading": "Tell Us About Your Location",
-      "sub_heading": "Lorem ipsum dollar smith amit dolem isplum sumip alpsum .",
+      "sub_heading": "Inform Us About Your Location for Enhanced Service.",
       "street_no": "Street Number",
       "house_no": "House Number",
       "post_code": "Post Code",
@@ -61,7 +61,7 @@
     },
     "bank_details": {
       "heading": "Procced with your bank",
-      "sub_heading": "Tell us about your company, Lorem ipsum dollar smith.",
+      "sub_heading": "Proceed securely by providing your essential bank information now.",
       "choose_currency": "Choose currency",
       "optional": "Optional",
       "bank_name": "Bank Name",
@@ -834,8 +834,9 @@
       "attachments": "Attachments",
       "back_button": "Back",
       "next_button": "Next",
-      "title":"Title",
-      "additional_details":"Additional Details"
+      "title": "Title",
+      "additional_details": "Additional Details",
+      "send":"Send"
     },
     "pdf_card_details": {
       "heading": "Contract Details",
@@ -879,7 +880,7 @@
       "edit_button": "Edit Details",
       "content_name": "Content Name",
       "address_labels": "Address Labels",
-      "offer_title": "Offer Content",
+      "offer_title": "Offer Title",
       "offer_description": "Offer Description",
       "email_body": "Email Body",
       "confirmation_title": "Confirmation Title",
@@ -983,7 +984,7 @@
     "service_details": {
       "heading": "Service/Product Details",
       "edit_button": "Edit Details",
-      "required_service": "Required Service",
+      "required_service": "Required Content",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
       "days": "Days",
@@ -991,7 +992,7 @@
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",
       "lead_source": "Lead Source",
-      "other_services": "Other Services",
+      "other_services": "Other Content",
       "save_changes_button": "Save Changes",
       "cancel_button": "Cancel",
       "next_button": "Next",
@@ -1083,8 +1084,19 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful.",
-      "date":"Date"
+      "date": "Date"
     },
+    "general_inquery": "General Inquiry",
+    "account_assist": "Account Assistance",
+    "payment_issues": "Billing or Payment Issues",
+    "Technical_support": "Technical Support",
+    "feedback_suggestion": "Feedback or Suggestions",
+    "report_bug": "Report a Bug or Error",
+    "website_feedback": "Website Feedback",
+    "complaint": "Complaint",
+    "other": "Other",
+    "type_message": "Type Your Message here",
+    "mark_invoice": "Automatically Mark Invoice Over Due",
     "discount": "Discount",
     "update": "Update",
     "mail": "Mail",
@@ -1124,6 +1136,9 @@
     "afternoon": "Afternoon",
     "evening": "Evening",
     "days": "days",
+    "day": "day",
+    "flexible": "Not Flexible",
+
     "true": "True",
     "false": "False",
     "done_button": "Done",
@@ -1259,7 +1274,7 @@
       "status": "Status",
       "notes": "Notes",
       "images": "Images",
-      "reason":"Reason"
+      "reason": "Reason"
     },
     "tabs_heading": {
       "offer": "Offer Details",
@@ -1862,7 +1877,7 @@
   },
   "pricing_details": {
     "heading": "Let's start with us",
-    "sub_heading": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+    "sub_heading": "You can use any of the given packages on one one-month free trail. Unlock success with Büro 365's flexible plans.",
     "monthly": "Monthly",
     "yearly": "Yearly",
     "button": "Choose Plan",

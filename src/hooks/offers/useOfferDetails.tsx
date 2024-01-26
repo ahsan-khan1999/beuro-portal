@@ -48,7 +48,6 @@ export default function useOfferDetails() {
   const { t: translate } = useTranslation();
   const id = router.query.offer;
 
-
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
 

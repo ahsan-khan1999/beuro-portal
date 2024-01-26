@@ -12,7 +12,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const InvoiceEmail = () => {
   const router = useRouter();
-
+ 
   const { loading } = useAppSelector((state) => state.invoice);
   return (
     <Layout>

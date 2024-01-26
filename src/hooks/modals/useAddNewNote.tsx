@@ -15,7 +15,7 @@ export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => vo
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
 
-  const { modal } = useAppSelector((state) => state.global);
+  const { modal: { data: { id, type } } } = useAppSelector((state) => state.global);
 
   const schema = generateAddNewNoteValidation(translate);
   const {
@@ -30,8 +30,8 @@ export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => vo
   });
   const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const res = await dispatch(createNote({ data: { ...data, id: id, type: type }, router, setError, translate }));
-    // if (res?.payload) handleNotes(id)
+    const res = await dispatch(createNote({ data: { ...data, id: id, type: type }, router, setError, translate }));
+    if (res?.payload) handleNotes(id)
 
   };
   return {

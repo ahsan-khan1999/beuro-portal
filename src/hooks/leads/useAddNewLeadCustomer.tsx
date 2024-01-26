@@ -54,6 +54,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const customerType = watch("customerType");
 
   const type = watch("type");
+  const gender = watch("gender");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
@@ -106,6 +107,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       customerDetails,
       onCancel,
       leadDetails,
+      gender
     },
     setValue
   );

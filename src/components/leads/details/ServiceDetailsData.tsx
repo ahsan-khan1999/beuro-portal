@@ -105,8 +105,8 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.flexibility")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.flexibility || "" + " "}
-              {translate("leads.service_details.days")}
+              {leadDetails?.flexibility === "0" ? translate("common.flexible") : leadDetails?.flexibility}
+              {leadDetails?.flexibility == "0" ? "" : leadDetails?.flexibility == "1" ? translate("common.day") : translate("common.days")}
             </div>
           </div>
           <div>
@@ -143,7 +143,7 @@ const ServiceDetailsData = ({
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
               <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis ">
                 {Array.isArray(contentList) &&
-                  contentList?.map((item) => item?.contentName  + ", ")}
+                  contentList?.map((item) => item?.contentName + ", ")}
               </span>
             </div>
           </div>

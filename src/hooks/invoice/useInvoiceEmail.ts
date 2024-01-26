@@ -34,10 +34,14 @@ export const useInvoiceEmail = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, collectiveInvoiceDetails } = useAppSelector(
+  const { loading, error, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+  const { modal } = useAppSelector(
+    (state) => state.global
+  );
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+  const isMail = router.query?.isMail;
 
   const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -137,6 +141,14 @@ export const useInvoiceEmail = (
     loadingContent
   );
 
+  const onSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    router.push({
+      pathname: "/invoices/details",
+      query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+    })
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
     // const apiData = {
@@ -147,20 +159,36 @@ export const useInvoiceEmail = (
     // };
     // const response = await dispatch(updateInvoiceContent({ data: apiData }));
     // if (response?.payload) {
-    const updatedData = {
-      ...data,
-      id: collectiveInvoiceDetails?.id,
-      attachements: attachements?.map((item) => item.value),
-    } as { [key in string]: any };
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      let apiData = { ...data, id: invoiceID, pdf: fileUrl };
 
-    delete updatedData["pdf"];
+      const res = await dispatch(sendInvoiceEmail({ data: apiData }));
 
-    await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
 
-    router.pathname = "/invoices/invoice-pdf-preview";
-    router.query = { invoiceID: collectiveInvoiceDetails?.id };
-    updateQuery(router, router.locale as string);
+
+      const updatedData = {
+        ...data,
+        id: collectiveInvoiceDetails?.id,
+        attachements: attachements?.map((item) => item.value),
+      } as { [key in string]: any };
+
+      delete updatedData["pdf"];
+
+      await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+
+      router.pathname = "/invoices/invoice-pdf-preview";
+      router.query = { invoiceID: collectiveInvoiceDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
     // }
+  };
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
   return {
     fields,
@@ -171,7 +199,10 @@ export const useInvoiceEmail = (
     error,
     translate,
     loadingContent,
-    loading
+    loading,
+    onClose,
+    onSuccess,
+    modal
 
   };
 };

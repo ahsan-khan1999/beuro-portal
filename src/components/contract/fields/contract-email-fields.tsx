@@ -1,6 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContractFormField } from "@/types";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export const ContractEmailPreviewFormField: GenerateContractFormField = (
   register,
@@ -19,6 +20,8 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
   setValue
 ) => {
   const { t: translate } = useTranslation();
+  const router = useRouter()
+  const isMail = router?.query?.isMail
   const formField: FormField[] = [
     {
       field: {
@@ -317,7 +320,9 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate(
+              text:isMail &&  `${translate(
+                "contracts.contract_email_preview.send"
+              )}`|| `${translate(
                 "contracts.contract_email_preview.next_button"
               )}`,
               inputType: "submit",

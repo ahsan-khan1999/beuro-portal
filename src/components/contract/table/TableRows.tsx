@@ -180,8 +180,8 @@ const TableRows = ({
               className="flex justify-center items-center cursor-pointer"
               onClick={() =>
                 router.push({
-                  pathname: "/contract/details",
-                  query: { contract: item?.id },
+                  pathname: "/contract/pdf-preview",
+                  query: { offerID: item?.id,isMail:true },
                 })
               }
             >

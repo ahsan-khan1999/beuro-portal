@@ -102,7 +102,7 @@ export const useContractPdf = () => {
   const maxItemsPerPage = 10;
 
   const router = useRouter();
-  const { offerID } = router.query;
+  const { offerID, isMail } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -198,6 +198,8 @@ export const useContractPdf = () => {
             },
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
+              isTax:contractDetails?.offerID?.isTax,
+              isDiscount:contractDetails?.offerID?.isDiscount,
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
@@ -343,37 +345,46 @@ export const useContractPdf = () => {
 
   const handleEmailSend = async () => {
     try {
-      const formData = new FormData();
-      setActiveButtonId("email");
 
-      const data = await localStoreUtil.get_data("contractComposeEmail");
+      const formData = new FormData();
       if (!mergedFile) return;
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
-      if (data) {
-        let apiData = { ...data, pdf: fileUrl?.payload };
-
-        delete apiData["content"];
-        const res = await dispatch(sendContractEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
+      if (fileUrl?.payload) {
+        localStoreUtil.store_data("pdf", fileUrl?.payload)
+      }
+      if (isMail) {
+        router.push(`/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`)
       } else {
-        let apiData = {
-          email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-          content: contractDetails?.offerID?.content?.id,
-          subject:
-            contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
-          description:
-            contractDetails?.offerID?.content?.confirmationContent?.body,
-          attachments:
-            contractDetails?.offerID?.content?.confirmationContent?.attachments,
-          id: contractDetails?.id,
-          pdf: fileUrl?.payload,
-        };
-        const res = await dispatch(sendContractEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        setActiveButtonId("email");
+
+        const data = await localStoreUtil.get_data("contractComposeEmail");
+
+        if (data) {
+          let apiData = { ...data, pdf: fileUrl?.payload };
+
+          delete apiData["content"];
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
+        } else {
+          let apiData = {
+            email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+            content: contractDetails?.offerID?.content?.id,
+            subject:
+              contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+            description:
+              contractDetails?.offerID?.content?.confirmationContent?.body,
+            attachments:
+              contractDetails?.offerID?.content?.confirmationContent?.attachments,
+            id: contractDetails?.id,
+            pdf: fileUrl?.payload,
+          };
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         }
       }
     } catch (error) {

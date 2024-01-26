@@ -91,6 +91,7 @@ export const updateContractDates: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
 export const deleteContract: AsyncThunk<boolean, object, object> | any =
     createAsyncThunk("contract/delete", async (args, thunkApi) => {
         const { data, router, setError, translate } = args as any;
@@ -323,6 +324,7 @@ const ContractSlice = createSlice({
         builder.addCase(updateContractDates.rejected, (state) => {
             state.loading = false
         })
+
 
     },
 })

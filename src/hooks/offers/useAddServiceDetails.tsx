@@ -183,7 +183,7 @@ export const useAddServiceDetails = (
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
-        taxType: staticEnums["TaxType"][offerDetails?.taxType],
+        taxType: staticEnums["TaxType"][offerDetails?.taxType] || 0,
         discountAmount: offerDetails?.discountAmount || "",
         discountDescription: offerDetails?.discountDescription,
         taxAmount: offerDetails?.taxAmount || 0,
