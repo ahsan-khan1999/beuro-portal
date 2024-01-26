@@ -8,7 +8,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   loading,
   control,
   onClick,
-  user
+  user,
+  handleRestore
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -517,6 +518,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               id: "button",
               text: `${translate("setting.account_setting.restore_button")}`,
               inputType: "button",
+              onClick: handleRestore,
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px] text-dark hover:bg-none",
             },

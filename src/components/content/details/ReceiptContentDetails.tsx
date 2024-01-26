@@ -21,7 +21,7 @@ const ReceiptContentDetails = ({
     >
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("content.details.receipt_heading")}
+          {translate("content.tabs_headings.receipt_content")}
         </h2>
         <button
           onClick={() => onClick(3, ComponentsType.editReceiptContent)}

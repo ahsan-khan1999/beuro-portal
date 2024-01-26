@@ -140,10 +140,11 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   };
   const handleContentSelect = () => { };
   useMemo(() => {
+    const filteredContent = content?.find(
+      (item) => item.id === selectedContent
+    );
     if (offerDetails?.id) {
-      const filteredContent = content?.find(
-        (item) => item.id === selectedContent
-      );
+     
 
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
@@ -151,10 +152,19 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       const filteredLead = lead.find((item) => item.id === leadID)
       if (filteredLead) {
         const content = filteredLead?.requiredService as ContentTableRowTypes
+        
+        if(selectedContent !==content?.id){
+          setValue("content", selectedContent)
+          setValue("title", filteredContent?.offerContent?.title)  
+        }else{
 
-        setValue("content", content?.id)
-        setValue("title", content?.offerContent?.title)
+          setValue("content", content?.id)
+          setValue("title", content?.offerContent?.title)
+        }
 
+      }else{
+        setValue("content", selectedContent)
+        setValue("title", filteredContent?.offerContent?.title)
       }
     }
 
@@ -195,7 +205,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        title: null,
+        // title: null,
         gender: null
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {

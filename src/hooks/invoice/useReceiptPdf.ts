@@ -206,6 +206,8 @@ export const useReceiptPdf = () => {
               invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
                 ?.serviceDetail,
             serviceItemFooter: {
+              isTax:invoiceDetails?.invoiceID?.contractID?.offerID?.isTax,
+              isDiscount:invoiceDetails?.invoiceID?.contractID?.offerID?.isDiscount,
               subTotal:
                 invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
               tax:

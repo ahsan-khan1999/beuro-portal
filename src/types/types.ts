@@ -214,7 +214,8 @@ export type GenerateAccountSettingFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  user?: User
+  user?: User,
+  handleRestore?: () => void
 ) => FormField[];
 
 // change mail setting formfield
@@ -536,7 +537,7 @@ export type GenerateLeadsCustomerFormField = (
     handleContentSelect?: () => void;
     selectedContent?: string;
     leadID?: string;
-    gender?:number
+    gender?: number
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -689,6 +690,8 @@ export interface ProductItemFooterProps {
   discountType?: keyof (typeof staticEnums)["DiscountType"];
   taxType?: keyof (typeof staticEnums)["TaxType"];
   serviceDiscountSum?: number;
+  isTax?:boolean;
+  isDiscount?:boolean;
 }
 
 export interface ContactDetailsProps {
@@ -893,6 +896,8 @@ export interface PdfProps<T = EmailHeaderProps> {
   signature?: string;
   attachement?: string;
   isCanvas?: boolean;
+  
+
 }
 
 export interface PdfPreviewProps {
