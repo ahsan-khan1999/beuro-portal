@@ -43,7 +43,7 @@
     },
     "company_details": {
       "heading": "Erzählen Sie uns etwas über Ihr Unternehmen",
-      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
+      "sub_heading": "Verbessern Sie den Support durch den Austausch von Unternehmensinformationen.",
       "company_name": "Firmenname",
       "phone_number": "Telefonnummer",
       "mobile_number": "Handynummer",
@@ -53,15 +53,7 @@
     },
     "location_details": {
       "heading": "Erzählen Sie uns etwas über Ihren Standort",
-      "sub_heading": "Lorem ipsum Dollar Smith Amit Dolems Isplum Sumip Alpsum.",
-      "street_no": "Strasse+Nr",
-      "house_no": "Hausnummer",
-      "post_code": "plz+ort",
-      "City": "Stadt"
-    },
-    "bank_details": {
-      "heading": "Fahren Sie mit Ihrer Bank fort",
-      "sub_heading": "Erzählen Sie uns etwas über Ihr Unternehmen, Lorem ipsum Dollar Smith.",
+      "sub_heading": "Informieren Sie uns über Ihren Standort für verbesserten Service.Gehen Sie auf Nummer sicher, indem Sie jetzt Ihre wichtigsten Bankdaten angeben.",
       "choose_currency": "Währung auswählen",
       "optional": "Optional",
       "bank_name": "Bankname",
@@ -182,7 +174,7 @@
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
     "mail_sent_maybe": "E-Mail gesendet",
     "value_min": "{0} Minimum {1} ",
-    "employee_creation_limit_reached":"Ihr Plan läuft aus!",
+    "employee_creation_limit_reached": "Ihr Plan läuft aus!",
 
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
@@ -199,8 +191,7 @@
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
     "value_max": "value_max",
-    "discountLessThanTotalPrice":"muss geringer sein als der Gesamtpreis"
-
+    "discountLessThanTotalPrice": "muss geringer sein als der Gesamtpreis"
   },
   "sidebar": {
     "customer": {
@@ -274,7 +265,7 @@
       "heading": "Details zum Kunden",
       "edit_button": "Details bearbeiten",
       "customer_type": "Kunde Typ",
-      "gender":"Geschlecht",
+      "gender": "Geschlecht",
       "full_name": "Vollständiger Name",
       "email_address": "E-Mail Adresse",
       "phone_number": "Rufnummer",
@@ -775,8 +766,7 @@
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
       "images": "Bilder",
-      "to":"bis"
-
+      "to": "bis"
     },
     "tabs_headings": {
       "offer_details": "Angebotedetails",
@@ -828,8 +818,8 @@
       "attachments": "Anhänge",
       "back_button": "Zurück",
       "next_button": "Weiter",
-      "title":"Titel",
-      "additional_details":"Zusätzliche Details"
+      "title": "Titel",
+      "additional_details": "Zusätzliche Details"
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -1076,8 +1066,7 @@
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
-      "date":"Datum"
-
+      "date": "Datum"
     },
     "discount": "Rabatt",
     "update": "Update",
@@ -1253,8 +1242,7 @@
       "status": "Status",
       "notes": "Notizen",
       "images": "Bilder",
-      "reason":"Grund"
-
+      "reason": "Grund"
     },
     "tabs_heading": {
       "offer": "Angebotedetails",
@@ -1859,7 +1847,7 @@
   },
   "pricing_details": {
     "heading": "Starten Sie mit uns",
-    "sub_heading": "Sie können jedes der angebotenen Pakete einen Monat lang kostenlos testen. Smith Amit Dolemm Isplum Sumip Alpsum Lorem Ipsum.",
+    "sub_heading": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen. Erschließen Sie sich den Erfolg mit den flexiblen Plänen von Büro 365.",
     "monthly": "Monatlich",
     "yearly": "Jährlich",
     "button": "Plan wählen",
