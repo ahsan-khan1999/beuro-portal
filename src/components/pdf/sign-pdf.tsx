@@ -31,6 +31,7 @@ export const SignPdf = <T,>({
   action,
   emailTemplateSettings,
   systemSettings,
+  setOfferData
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
@@ -40,6 +41,7 @@ export const SignPdf = <T,>({
   action?: string;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
+  setOfferData?: SetStateAction<any>
 }) => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -102,7 +104,7 @@ export const SignPdf = <T,>({
         routeHandler={onSuccess}
       />
     ),
-    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} setOfferData={setOfferData} pdfData={pdfData}/>,
   };
 
   useEffect(() => {

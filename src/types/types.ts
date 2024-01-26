@@ -536,6 +536,7 @@ export type GenerateLeadsCustomerFormField = (
     handleContentSelect?: () => void;
     selectedContent?: string;
     leadID?: string;
+    gender?:number
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];

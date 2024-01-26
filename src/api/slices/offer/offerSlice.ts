@@ -11,6 +11,9 @@ import axios from "axios";
 import { BASEURL } from "@/services/HttpProvider";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
 import toast from 'react-hot-toast';
+import { EmailTemplate } from "@/types/settings";
+import { TemplateType } from "@/types";
+import { SystemSetting } from "../settingSlice/settings";
 
 interface OfferState {
     offer: OffersTableRowTypes[];
@@ -20,7 +23,9 @@ interface OfferState {
     totalCount: number,
     offerDetails: OffersTableRowTypes,
     offerActivity: OfferActivity | null,
-    publicOffer: PublicOffersTableRowTypes | null
+    publicOffer: PublicOffersTableRowTypes | null,
+    loadingPublicOffer: boolean;
+
 }
 
 const initialState: OfferState = {
@@ -31,7 +36,8 @@ const initialState: OfferState = {
     totalCount: 10,
     //@ts-expect-error
     offerDetails: DEFAULT_OFFER,
-    offerActivity: null
+    offerActivity: null,
+    loadingPublicOffer: false
 }
 
 export const readOffer: AsyncThunk<boolean, object, object> | any =
@@ -316,6 +322,9 @@ const OfferSlice = createSlice({
         setOfferDetails: (state, action) => {
             state.offerDetails = action.payload;
         },
+        setPublicOfferDetails: (state, action) => {
+            state.publicOffer = action.payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(readOffer.pending, (state) => {
@@ -485,17 +494,18 @@ const OfferSlice = createSlice({
 
 
         builder.addCase(updatePublicOfferDates.pending, (state) => {
-            state.loading = true
+            state.loadingPublicOffer = true
         });
         builder.addCase(updatePublicOfferDates.fulfilled, (state, action) => {
-            state.loading = false;
+            state.loadingPublicOffer = false;
+            // if (action.payload) state.publicOffer = { "Mail": state.publicOffer?.Mail as EmailTemplate, "Template": state.publicOffer?.Template as TemplateType, "setting": state.publicOffer?.setting as SystemSetting, "Offer": action.payload }
         });
         builder.addCase(updatePublicOfferDates.rejected, (state) => {
-            state.loading = false
+            state.loadingPublicOffer = false
         });
 
     },
 })
 
 export default OfferSlice.reducer;
-export const { setErrorMessage, setOfferDetails } = OfferSlice.actions
+export const { setErrorMessage, setOfferDetails,setPublicOfferDetails } = OfferSlice.actions
