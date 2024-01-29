@@ -15,6 +15,7 @@ export const Pdf = <T,>({
   isQr,
   totalPages,
   emailTemplateSettings,
+
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
@@ -35,7 +36,7 @@ export const Pdf = <T,>({
             templateSettings={templateSettings}
             totalPages={totalPages}
             isOffer={pdfData.isOffer}
-            emailTemplateSettings={emailTemplateSettings}
+            // emailTemplateSettings={emailTemplateSettings}pdf
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (
@@ -52,7 +53,7 @@ export const Pdf = <T,>({
             emailTemplateSettings={emailTemplateSettings}
           />
         ))}
-        <Aggrement
+        {/* <Aggrement
           contactAddress={pdfData?.contactAddress}
           headerDetails={pdfData?.headerDetails}
           footerDetails={pdfData?.footerDetails}
@@ -67,7 +68,14 @@ export const Pdf = <T,>({
           signature={pdfData?.signature}
           isCanvas={pdfData?.isCanvas}
           emailTemplateSettings={emailTemplateSettings}
-        />
+          pdfData={pdfData}
+          setComponentMounted={() =>console.log()
+          }
+          setOfferSignature={() =>console.log()
+          }
+          systemSettings={SystemSetting}
+
+        /> */}
         {isQr && (
           <PaymentQRCodeDetails
             contactAddress={pdfData.contactAddress}

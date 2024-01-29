@@ -226,7 +226,7 @@ const OfferSignedPdf = ({
       className="download-link flex justify-center max-w-[1040px] w-full"
       id="gohere"
     >
-      <BlobProvider document={pdfDoc}>
+      {/* <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
             <div className="flex justify-between gap-x-3 my-2">
@@ -255,7 +255,7 @@ const OfferSignedPdf = ({
 
           );
         }}
-      </BlobProvider>
+      </BlobProvider> */}
     </div>
   );
 };
