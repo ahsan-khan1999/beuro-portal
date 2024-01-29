@@ -3,6 +3,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditorBoxProps } from "@/types";
 
+import CustomEditor from '@/base-components/ui/editor/ckeditor/build/ckeditor';
+
 const CustomCKEditor = ({
   id,
   field,
@@ -13,7 +15,7 @@ const CustomCKEditor = ({
 }: CKEditorBoxProps) => (
   <CKEditor
     id={id}
-    editor={ClassicEditor}
+    editor={CustomEditor}
     data={field.value}
     key={data}
     onReady={(editor) => {
@@ -38,9 +40,9 @@ const CustomCKEditor = ({
           "|",
           "heading",
           "|",
-          // "fontfamily",
-          // "fontsize",
-          // "fontColor",
+          "fontfamily",
+          "fontsize",
+          "fontColor",
           // "fontBackgroundColor",
           "|",
           "bold",
