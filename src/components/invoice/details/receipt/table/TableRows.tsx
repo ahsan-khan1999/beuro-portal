@@ -26,9 +26,11 @@ const TableRows = ({
   const { systemSettings } = useAppSelector((state) => state.settings);
 
   const handleReceiptPreview = (id?: string) => {
-    router.pathname = "/invoices/receipt-email";
-    router.query = { invoiceID: id };
-    updateQuery(router, router.locale as string);
+    router.push({
+      pathname: "/invoices/receipt-pdf-preview",
+      query: { invoiceID: id, isMail: true }
+    })
+   
   };
   return (
     <div className="h-screen">

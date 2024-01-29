@@ -38,12 +38,14 @@ export default function useOfferDetails() {
   const { offerDetails, loading, offerActivity } = useAppSelector(
     (state) => state.offer
   );
+  const router = useRouter();
+
   const { systemSettings } = useAppSelector((state) => state.settings);
+  const isMail  = Boolean(router.query?.isMail);
 
   const { images } = useAppSelector((state) => state.image);
-  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { t: translate } = useTranslation();
-  const router = useRouter();
   const id = router.query.offer;
 
   useEffect(() => {
@@ -176,13 +178,18 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
+
   };
 
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
+  };
+
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -254,5 +261,6 @@ export default function useOfferDetails() {
     handleSendByPost,
     handleUpdateDiscount,
     systemSettings,
+    handleUpdateAdditionalDetailsModal
   };
 }

@@ -63,7 +63,7 @@ export interface ContractOfferDetails {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: keyof typeof staticEnums["DiscountType"];
+  discountType: keyof (typeof staticEnums)["DiscountType"];
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;
@@ -97,5 +97,7 @@ export interface ContractDetailCardProps {
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
   handleSendEmail: () => void;
-  isSendEmail:boolean
+  isSendEmail: boolean;
+  handleUpdateAdditionalDetailsModal: () => void;
+  handleEditDateModal: () => void;
 }

@@ -169,7 +169,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `country-${i}`,
                 options: Object.keys(staticEnums.Country).map((item) => ({
                   value: item,
-                  label: item,
+                  label: translate(`countries.${item}`),
                 })),
                 control,
                 value: Object.keys(staticEnums.Country)[0],
@@ -204,7 +204,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex space-x-[18px] ",
+      className: "flex justify-end items-center space-x-[18px] ",
       children: [
         {
           containerClass: "mb-0",

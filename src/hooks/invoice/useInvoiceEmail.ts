@@ -21,6 +21,7 @@ import {
   sendInvoiceEmail,
   setCollectiveInvoiceDetails,
   setInvoiceDetails,
+  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
@@ -33,10 +34,14 @@ export const useInvoiceEmail = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, collectiveInvoiceDetails } = useAppSelector(
+  const { loading, error, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+  const { modal } = useAppSelector(
+    (state) => state.global
+  );
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+  const isMail = router.query?.isMail;
 
   const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -68,26 +73,30 @@ export const useInvoiceEmail = (
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
-        dispatch(setCollectiveInvoiceDetails(res?.payload));
-        setAttachements(
-          transformAttachments(
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.attachments as string[]
-          ) || []
-        );
-        reset({
-          email:
-            res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
-              ?.email,
-          content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
-          subject:
-            res?.payload?.title + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-          description:
-            res?.payload?.invoiceID?.contractID?.offerID?.content
-              ?.invoiceContent?.body,
-          pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
-            ?.invoiceContent?.attachments,
-        });
+        if (res?.payload) {
+          setAttachements(
+            transformAttachments(
+              res?.payload?.invoiceID?.contractID?.offerID?.content
+                ?.invoiceContent?.attachments as string[]
+            ) || []
+          );
+          reset({
+            email:
+              res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                ?.email,
+            content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
+            subject:
+              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            description:
+              res?.payload?.invoiceID?.contractID?.offerID?.content
+                ?.invoiceContent?.body || "",
+            pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
+              ?.invoiceContent?.attachments,
+
+            // title: res?.payload?.title,
+            // additionalDetails: res?.payload?.additionalDetails || "",
+          });
+        }
       });
     }
   }, [invoiceID]);
@@ -100,9 +109,11 @@ export const useInvoiceEmail = (
           collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
-        description: selectedContent?.invoiceContent?.body,
+        subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
+        // title: collectiveInvoiceDetails?.title,
+        // additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -126,23 +137,58 @@ export const useInvoiceEmail = (
     collectiveInvoiceDetails,
     isMoreEmail,
     setIsMoreEmail,
-    setValue
+    setValue,
+    loadingContent
   );
 
+  const onSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    router.push({
+      pathname: "/invoices/details",
+      query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+    })
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const updatedData = {
-      ...data,
-      id: collectiveInvoiceDetails?.id,
-      attachements: attachements?.map((item) => item.value),
-    } as { [key in string]: any };
 
-    delete updatedData["pdf"];
+    // const apiData = {
+    //   id: collectiveInvoiceDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+    // };
+    // const response = await dispatch(updateInvoiceContent({ data: apiData }));
+    // if (response?.payload) {
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      let apiData = { ...data, id: invoiceID, pdf: fileUrl };
 
-    router.pathname = "/invoices/invoice-pdf-preview";
-    router.query = { invoiceID: collectiveInvoiceDetails?.id };
-    updateQuery(router, router.locale as string);
+      const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+
+
+      const updatedData = {
+        ...data,
+        id: collectiveInvoiceDetails?.id,
+        attachements: attachements?.map((item) => item.value),
+      } as { [key in string]: any };
+
+      delete updatedData["pdf"];
+
+      await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
+
+      router.pathname = "/invoices/invoice-pdf-preview";
+      router.query = { invoiceID: collectiveInvoiceDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
+    // }
+  };
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
   return {
     fields,
@@ -153,7 +199,10 @@ export const useInvoiceEmail = (
     error,
     translate,
     loadingContent,
-    loading
+    loading,
+    onClose,
+    onSuccess,
+    modal
 
   };
 };

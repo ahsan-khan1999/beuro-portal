@@ -219,14 +219,14 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0 mt-[30px] flex items-center justify-end",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("setting.save_setting")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

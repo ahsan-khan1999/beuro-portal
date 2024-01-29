@@ -126,6 +126,14 @@ const customerDetailData = ({
               {leadDetails?.customerDetail?.mobileNumber}
             </div>
           </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {translate(`gender.${leadDetails?.customerDetail?.gender}`)}
+            </div>
+          </div>
         </div>
 
         <div className="mt-5">
@@ -154,7 +162,7 @@ const customerDetailData = ({
                 {translate("leads.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerDetail?.address?.country}
+                {translate(`countries.${leadDetails?.customerDetail?.address?.country}`)}
               </div>
             </div>
           </div>

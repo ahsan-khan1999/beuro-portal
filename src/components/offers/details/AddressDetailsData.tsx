@@ -20,7 +20,7 @@ const AddressDetailsData = ({
         id={translate("offers.tabs_heading.address")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.address_details.main_heading")}s
+          {translate("offers.address_details.main_heading")}
         </h2>
         <button
           onClick={() =>
@@ -61,7 +61,7 @@ const AddressDetailsData = ({
                 {translate("offers.address_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-                {item?.country}
+                {translate(`countries.${item?.country}`)}
               </div>
             </div>
           </div>

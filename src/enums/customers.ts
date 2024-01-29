@@ -10,6 +10,7 @@ export enum CustomerDetailsFields {
   postCode = "postalCode",
   country = "country",
   address = "address",
+  gender="gender"
 
 }
 

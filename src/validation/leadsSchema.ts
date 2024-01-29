@@ -16,7 +16,9 @@ export const generateLeadsCustomerEditDetailsValidation = (
     [LeadsCustomerEditDetails.name]: yup
       .string()
       .required(translate("validationMessages.required")),
-
+    [LeadsCustomerEditDetails.gender]: yup
+      .number()
+      .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -28,11 +30,11 @@ export const generateLeadsCustomerEditDetailsValidation = (
 
     [LeadsCustomerEditDetails.phone]: yup
       .string()
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
 
     [LeadsCustomerEditDetails.mobile]: yup
       .string()
-      .required(translate(translate("validationMessages.required"))),
+      .notRequired(),
 
     [LeadsCustomerEditDetails.address]: yup
       .object({
@@ -119,15 +121,15 @@ export const generateLeadsServiceEditDetailsValidation = (
 
     [LeadsServiceEditDetails.contactAvailablity]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.flexibility]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.preferContact]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.budget]: yup
       .string()
@@ -135,12 +137,12 @@ export const generateLeadsServiceEditDetailsValidation = (
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [LeadsServiceEditDetails.otherServices]: yup
       .array()
-      .of(yup.string().required())
-      .min(1, translate("validationMessages.required")),
+      .of(yup.string().notRequired())
+ 
   });
 };
 
@@ -151,6 +153,9 @@ export const generateAddNewLeadCustomerDetailsValidation = (
   return yup.object().shape({
     [LeadsCustomerEditDetails.type]: yup
       .string()
+      .required(translate("validationMessages.required")),
+    [LeadsCustomerEditDetails.gender]: yup
+      .number()
       .required(translate("validationMessages.required")),
     [LeadsCustomerEditDetails.customer]: yup.string().when("type", {
       is: (type: string) => type === "Existing Customer",

@@ -1,6 +1,6 @@
 import { Field } from "@/enums/form";
 import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
-import { staticEnums } from "@/utils/static";
+import { GenderLabel, staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const customerDetailsFormField: GenerateCustomerFormField = (
@@ -19,7 +19,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className: "grid grid-cols-3 xl:grid-cols-3 gap-x-3 gap-y-5",
         children: [
           {
             containerClass: "mb-0",
@@ -48,7 +48,31 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
           },
           {
-            containerClass: "mb-0 w-full xl:col-span-2",
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: "gender",
+              className: "mb-[10px] ",
+            },
+            field: {
+              className: `!px-4 !border-[#BFBFBF] ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary `,
+              type: Field.select,
+              id: "gender",
+              name: "gender",
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
+
+              control,
+              disabled: isUpdate,
+              value: "",
+            },
+          },
+          {
+            containerClass: "mb-0 w-full xl:col-span-1",
             label: {
               text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
@@ -199,7 +223,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               name: "address.country",
               options: Object.keys(staticEnums.Country).map((item) => ({
                 value: item,
-                label: item,
+                label: translate(`countries.${item}`),
               })),
               control,
               disabled: isUpdate,
@@ -214,7 +238,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px] mt-8",
         children: [
           {
             field: {

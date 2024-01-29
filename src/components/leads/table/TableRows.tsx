@@ -2,6 +2,7 @@ import { Lead } from "@/types/leads";
 import React from "react";
 import { useRouter } from "next/router";
 import { formatDate, getStatusColor } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -15,6 +16,8 @@ const TableRows = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
+  const { t: translate } = useTranslation()
+
   const router = useRouter();
   return (
     <div>
@@ -36,10 +39,10 @@ const TableRows = ({
               {item.customerDetail?.phoneNumber}
             </span>
             <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
-              {formatDate(item.createdAt)}
+              {formatDate(item.desireDate)}
             </span>
             <span className="py-4 truncate">
-              {item.customerDetail?.address?.country}
+              {translate(`countries.${item.customerDetail?.address?.country}`)}
             </span>
             <span className={`py-4 flex items-center`}>
               <div

@@ -54,20 +54,25 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const customerType = watch("customerType");
 
   const type = watch("type");
+  const gender = watch("gender");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+      });
+
+    }
   };
- 
+
   useEffect(() => {
     if (leadDetails.id) {
       reset({
@@ -84,6 +89,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
+        gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
+
       });
     }
   }, [leadDetails.id]);
@@ -100,6 +107,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       customerDetails,
       onCancel,
       leadDetails,
+      gender
     },
     setValue
   );

@@ -9,6 +9,9 @@ export const generateCustomerValidation = (translate: Function) => {
     [CustomerDetailsFields.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),
+    [CustomerDetailsFields.gender]: yup
+      .number()
+      .required(translate("validationMessages.required")),
     [CustomerDetailsFields.companyName]: yup
       .string().when('customerType', {
         is: (customerType: string) => customerType === 'company',
@@ -23,7 +26,7 @@ export const generateCustomerValidation = (translate: Function) => {
     [CustomerDetailsFields.phone]: yup
       .string()
 
-      .required(translate("validationMessages.required")),
+      .notRequired(),
     [CustomerDetailsFields.mobile]: yup
       .string()
 

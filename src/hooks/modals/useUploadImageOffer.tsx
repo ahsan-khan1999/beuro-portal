@@ -14,6 +14,8 @@ import { setImageFieldValues } from "@/utils/utility";
 import { createImage, setImages } from "@/api/slices/imageSlice/image";
 import { generateImageValidation } from "@/validation/modalsSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 export const useUploadImageOffer = (
   handleImageSlider: Function,
@@ -27,7 +29,9 @@ export const useUploadImageOffer = (
   const { images, loading } = useAppSelector((state) => state.image);
 
   const schema = generateImageValidation(translate);
-
+  const handleOnClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }))
+  }
   const {
     handleSubmit,
     control,
@@ -57,7 +61,8 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, setError, translate })
       );
-      if (response?.payload) handleImageSlider();
+      if (response?.payload && response?.payload?.length > 0) handleImageSlider();
+      else handleOnClose()
     } else if (type === "Contract") {
       const filteredList = Object.values(data)?.filter((value) => value);
       const apiData = {
@@ -68,7 +73,9 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, setError, translate })
       );
-      if (response?.payload) handleImageSlider();
+      if (response?.payload && response?.payload?.length > 0) handleImageSlider();
+      else handleOnClose()
+
     } else {
     }
   };

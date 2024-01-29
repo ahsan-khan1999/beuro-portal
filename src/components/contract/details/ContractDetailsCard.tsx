@@ -16,6 +16,7 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -26,6 +27,8 @@ const ContractDetailsCard = ({
   offerDeleteHandler,
   handleSendEmail,
   isSendEmail,
+  handleUpdateAdditionalDetailsModal,
+  handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -86,7 +89,7 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id },
+                  query: { offerID: contractDetails?.id ,isMail:true },
                 })
               }
             />
@@ -169,7 +172,7 @@ const ContractDetailsCard = ({
             <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("contracts.card_content.service_date")}:
             </span>
-            <div>
+            <div className="flex items-center gap-x-3">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
                   (item, index) =>
@@ -188,6 +191,14 @@ const ContractDetailsCard = ({
                     }`
                 )}
               </span>
+              <Image
+                src={editIcon}
+                alt="edit date"
+                width={16}
+                height={16}
+                className="cursor-pointer"
+                onClick={handleEditDateModal}
+              />
             </div>
           </div>
         </div>

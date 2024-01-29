@@ -61,11 +61,10 @@ const DetailsPdfPriview = () => {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.invoice_update")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back();
         }}
       />
     ),
@@ -75,7 +74,7 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading  ? (
         <LoadingState />
       ) : (
         <>

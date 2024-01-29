@@ -30,6 +30,27 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: "gender",
+              className: "mb-[10px] ",
+            },
+            field: {
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              type: Field.select,
+              id: "gender",
+              name: "gender",
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
+
+              control,
+              value: "",
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
               text: `${translate("leads.customer_details.first_name")}`,
               htmlFor: "fullName",
               className: "mb-[10px]",
@@ -65,13 +86,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 })),
 
               control,
-              value:
-                (leadDetails?.id &&
-                  getKeyByValue(
-                    staticEnums["CustomerType"],
-                    leadDetails.customerDetail?.customerType
-                  )) ||
-                "",
+              value:""
+              // value:
+             
+              //     customerType,
             },
           },
 
@@ -195,17 +213,15 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               type: Field.select,
               id: "address.country",
               name: "address.country",
-              options: Object.entries(staticEnums.Country).map(
-                ([key, val]) => ({
-                  value: key,
-                  label: `${translate(val as string)}`,
-                })
-              ),
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: translate(`countries.${item}`),
+              })),
               control,
               value:
                 (leadDetails?.id &&
                   leadDetails?.customerDetail?.address?.country) ||
-                  Object.keys(staticEnums.Country)[0],
+                Object.keys(staticEnums.Country)[0],
             },
           },
         ],
@@ -216,7 +232,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-[30px]",
+        className: "flex justify-end items-center space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",

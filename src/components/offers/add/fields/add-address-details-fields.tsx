@@ -32,7 +32,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   const { t: translate } = useTranslation();
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
-    let valueIndex = i
+    let valueIndex = i;
     formField.push(
       {
         containerClass: "mb-0 relative -top-1 right-0 float-right",
@@ -65,9 +65,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 name: `address.${i}.label`,
                 register,
                 value: `Address ${++valueIndex}`,
-                setValue
-
-
+                setValue,
               },
             }) || {
               containerClass: "",
@@ -160,12 +158,10 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
-                options: Object.entries(staticEnums.Country).map(
-                  ([key, val]) => ({
-                    value: key,
-                    label: `${translate(val as string)}`,
-                  })
-                ),
+                options: Object.keys(staticEnums.Country).map((item) => ({
+                  value: item,
+                  label: translate(`countries.${item}`),
+                })),
                 control,
                 value: Object.keys(staticEnums.Country)[0],
               },
@@ -209,11 +205,11 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex flex-col lg:flex-row gap-y-5 justify-between",
+      className: "flex flex-row-reverse gap-y-5 justify-between",
       children: [
         {
           field: {
-            className: "flex gap-x-[18px]",
+            className: "flex items-center gap-x-[18px]",
             type: Field.div,
             id: "div-field",
             children: [

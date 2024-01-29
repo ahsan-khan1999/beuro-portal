@@ -35,13 +35,11 @@ const AddFollowUp = ({
                 className="absolute right-5 top-5 cursor-pointer"
                 onClick={onClose}
               />
-              <div className="flex justify-between items-center">
-                <p className="text-2xl font-medium text-[#000] mb-5">
-                  {translate("follow_up.add_follow_up.heading")}
-                </p>
-              </div>
-
-              <hr className="opacity-10 mb-[30px]" />
+              {/* <div className="flex justify-between items-center"> */}
+              <p className="text-2xl font-medium text-[#000] mb-[30px] border-b border-b-[#000] border-opacity-20 pb-5">
+                {translate("follow_up.add_follow_up.heading")}
+              </p>
+              {/* </div> */}
 
               <Form
                 formFields={fields}

@@ -98,6 +98,7 @@ const SignPdfPreview = () => {
   const { offerID, action } = router.query;
 
   useEffect(() => {
+   
     if (offerID) {
       dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
@@ -134,6 +135,8 @@ const SignPdfPreview = () => {
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
+                gender: offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
+
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,
@@ -300,6 +303,7 @@ const SignPdfPreview = () => {
           action={action as string}
           emailTemplateSettings={emailTemplateSettings}
           systemSettings={systemSetting}
+          setOfferData={setOfferData}
         />
       </Container>
     )

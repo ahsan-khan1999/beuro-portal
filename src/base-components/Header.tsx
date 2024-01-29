@@ -11,6 +11,7 @@ import { staticEnums } from "@/utils/static";
 import logo from "@/assets/svgs/logo.svg";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
+import { logout } from "@/utils/auth.util";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);

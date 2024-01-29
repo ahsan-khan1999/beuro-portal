@@ -71,6 +71,8 @@ const LeadsDetailsCardData = ({
                     serviceDetail: leadDetails?.otherServices,
                   },
                   addressID: { address: leadDetails?.addressID?.address },
+                  content: leadDetails?.requiredService
+
                 })
               );
               dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));

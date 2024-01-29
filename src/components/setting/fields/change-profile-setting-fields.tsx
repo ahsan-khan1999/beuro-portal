@@ -8,7 +8,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   loading,
   control,
   onClick,
-  user
+  user,
+  handleRestore
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -213,6 +214,28 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     register,
                   },
                 },
+                // {
+                //   containerClass: "mb-0",
+                //   label: {
+                //     text: `${translate("customers.details.gender")}`,
+                //     htmlFor: "gender",
+                //     className: "mb-[10px] ",
+                //   },
+                //   field: {
+                //     className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+                //     type: Field.select,
+                //     id: "gender",
+                //     name: "gender",
+                //     options: Object.keys(staticEnums.Gender)
+                //       .map((item) => ({
+                //         value: staticEnums.Gender[item],
+                //         label: translate(`gender.${item}`),
+                //       })),
+
+                //     control,
+                //     value: "",
+                //   },
+                // },
               ],
             },
           },
@@ -305,19 +328,31 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               text: `${translate("setting.account_setting.country")}`,
               htmlFor: "address.address.city",
             },
+            // field: {
+            //   type: Field.input,
+            //   inputType: "text",
+            //   placeholder: "01",
+            //   id: "company.address.city",
+            //   name: "company.address.city",
+            //   svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
+            //     <path d="M5.74414 0.9375C3.00572 0.9375 0.777832 3.16539 0.777832 5.90381C0.777832 6.82903 1.03412 7.73196 1.51916 8.51531L5.46145 14.8682C5.53696 14.9899 5.67 15.0639 5.81309 15.0639C5.81419 15.0639 5.81527 15.0639 5.81637 15.0639C5.9607 15.0628 6.09402 14.9865 6.16815 14.8627L10.01 8.44821C10.4682 7.68142 10.7104 6.80158 10.7104 5.90381C10.7104 3.16539 8.48256 0.9375 5.74414 0.9375ZM9.29963 8.02326L5.80683 13.855L2.22267 8.07922C1.81894 7.4272 1.60003 6.67497 1.60003 5.90381C1.60003 3.62179 3.46212 1.7597 5.74414 1.7597C8.02616 1.7597 9.88549 3.62179 9.88549 5.90381C9.88549 6.65209 9.68102 7.38509 9.29963 8.02326Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
+            //     <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
+            //   </svg>
+            //     `,
+            //   register,
+            //   className: "h-[42px]",
+            // },
             field: {
-              type: Field.input,
-              inputType: "text",
-              placeholder: "01",
-              id: "company.address.city",
-              name: "company.address.city",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="16" viewBox="0 0 11 16" fill="none">
-                <path d="M5.74414 0.9375C3.00572 0.9375 0.777832 3.16539 0.777832 5.90381C0.777832 6.82903 1.03412 7.73196 1.51916 8.51531L5.46145 14.8682C5.53696 14.9899 5.67 15.0639 5.81309 15.0639C5.81419 15.0639 5.81527 15.0639 5.81637 15.0639C5.9607 15.0628 6.09402 14.9865 6.16815 14.8627L10.01 8.44821C10.4682 7.68142 10.7104 6.80158 10.7104 5.90381C10.7104 3.16539 8.48256 0.9375 5.74414 0.9375ZM9.29963 8.02326L5.80683 13.855L2.22267 8.07922C1.81894 7.4272 1.60003 6.67497 1.60003 5.90381C1.60003 3.62179 3.46212 1.7597 5.74414 1.7597C8.02616 1.7597 9.88549 3.62179 9.88549 5.90381C9.88549 6.65209 9.68102 7.38509 9.29963 8.02326Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
-                <path d="M5.7439 3.42188C4.37469 3.42188 3.26074 4.53582 3.26074 5.90503C3.26074 7.26549 4.35656 8.38818 5.7439 8.38818C7.14834 8.38818 8.22705 7.25054 8.22705 5.90503C8.22705 4.53582 7.11311 3.42188 5.7439 3.42188ZM5.7439 7.56598C4.82632 7.56598 4.08294 6.82013 4.08294 5.90503C4.08294 4.99222 4.83109 4.24408 5.7439 4.24408C6.6567 4.24408 7.40209 4.99222 7.40209 5.90503C7.40209 6.80677 6.67602 7.56598 5.7439 7.56598Z" fill="#8F8F8F" stroke="#8F8F8F" strokeWidth="0.2"/>
-              </svg>
-                `,
-              register,
-              className: "h-[42px]",
+              className: "pl-4 !border-[#BFBFBF]  ",
+              type: Field.select,
+              id: `company.address.city`,
+              name: `company.address.city`,
+              options: Object.keys(staticEnums.Country).map((item) => ({
+                value: item,
+                label: translate(`countries.${item}`),
+              })),
+              control,
+              value: Object.keys(staticEnums.Country)[0],
             },
           },
           {
@@ -474,7 +509,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-5",
+        className: "flex items-center justify-end space-x-[18px] mt-5",
         children: [
           {
             containerClass: "mb-0",
@@ -483,6 +518,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
               id: "button",
               text: `${translate("setting.account_setting.restore_button")}`,
               inputType: "button",
+              onClick: handleRestore,
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 w-fit h-[50px] text-dark hover:bg-none",
             },
