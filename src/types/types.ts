@@ -690,8 +690,8 @@ export interface ProductItemFooterProps {
   discountType?: keyof (typeof staticEnums)["DiscountType"];
   taxType?: keyof (typeof staticEnums)["TaxType"];
   serviceDiscountSum?: number;
-  isTax?:boolean;
-  isDiscount?:boolean;
+  isTax?: boolean;
+  isDiscount?: boolean;
 }
 
 export interface ContactDetailsProps {
@@ -896,7 +896,7 @@ export interface PdfProps<T = EmailHeaderProps> {
   signature?: string;
   attachement?: string;
   isCanvas?: boolean;
-  
+
 
 }
 
@@ -988,9 +988,11 @@ export interface AggrementProps {
   isCanvas?: boolean;
   setIsSignatureDone?: SetStateAction<boolean>;
   isSignatureDone?: boolean;
-  emailTemplateSettings?: EmailTemplate | null;
-  setOfferSignature?: SetStateAction<any>;
-  systemSettings?: SystemSetting | null;
+  emailTemplateSettings: EmailTemplate | null;
+  setOfferSignature: SetStateAction<any>;
+  systemSettings: SystemSetting | null;
+  pdfData: PdfProps<any>,
+  setComponentMounted: () => void
 }
 
 export interface FiltersComponentProps {

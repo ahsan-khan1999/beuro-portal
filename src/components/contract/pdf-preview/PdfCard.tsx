@@ -35,7 +35,7 @@ const PdfCard = ({
               <span className="cursor-pointer" onClick={() => {
                 router.push({
                   pathname: "/contract/details",
-                  query: { offer: contractDetails?.id },
+                  query: { contract: contractDetails?.id },
                 });
               }}>
                 <svg
