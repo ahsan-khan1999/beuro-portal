@@ -9,6 +9,11 @@ import moment from "moment";
 import { SetStateAction } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
+import { useAppDispatch } from "@/hooks/useRedux";
 
 export const Aggrement = ({
   contactAddress,
@@ -26,11 +31,20 @@ export const Aggrement = ({
   isSignatureDone,
   emailTemplateSettings,
   setOfferSignature,
-  systemSettings
+  systemSettings,
+  pdfData,
+  setComponentMounted
 }: AggrementProps) => {
 
   const date = moment(new Date()).format("DD/MMMM/YY")
   const { t: translation } = useTranslation();
+  const router = useRouter();
+  const dispatch = useAppDispatch()
+  const { action: pdfAction } = router.query;
+  const rejectOffer = async () => {
+    dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
+  };
+
   return (
     <div id="signature">
       <DocumentHeader {...headerDetails} />
@@ -70,7 +84,15 @@ export const Aggrement = ({
             <div className="w-[450px] h-[278px] flex flex-col justify-end mt-5">
               {
                 isCanvas &&
-                <SignaturePad signature={signature} isCanvas={isCanvas} isSignatureDone={isSignatureDone} setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>} setOfferSignature={setOfferSignature} /> ||
+                <SignaturePad signature={signature} isCanvas={isCanvas} isSignatureDone={isSignatureDone} setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>} setOfferSignature={setOfferSignature}
+                  emailTemplateSettings={emailTemplateSettings}
+                  pdfData={pdfData}
+                  setComponentMounted={setComponentMounted}
+                  systemSettings={systemSettings}
+                  templateSettings={templateSettings}
+                  offerSignature={signature as string}
+
+                /> ||
                 <div className="flex flex-col gap-y-[18px]">
                   {signature && <Image src={signature} alt="signature" height={177} width={446} />}
 
@@ -130,6 +152,19 @@ export const Aggrement = ({
         currPage={currPage}
         emailTemplateSettings={emailTemplateSettings}
       />
+      {
+        pdfAction === "Reject" &&
+        <Button
+          className={`mt-[0px]   ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769] "
+            } rounded-[4px] shadow-md  text-center text-white w-full`}
+          onClick={() =>
+            rejectOffer()
+          }
+          inputType="button"
+          id="gohere"
+          text={pdfAction as string}
+        />
+      }
     </div >
   );
 };

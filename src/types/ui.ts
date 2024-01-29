@@ -55,7 +55,7 @@ export interface ButtonProps {
   className?: string;
   loading?: boolean | null;
   success?: boolean;
-  onClick?: Function;
+  onClick?: Function ;
   loaderColor?: string;
   icon?: any;
   iconAlt?: any;

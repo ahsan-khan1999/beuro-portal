@@ -64,7 +64,7 @@ export const AggrementSignature = ({
       reader.readAsDataURL(signature);
     }
   };
-
+  
   useMemo(() => signature && onFileChange(), [signature]);
   const date = moment(new Date()).format("DD/MMMM/YY");
 

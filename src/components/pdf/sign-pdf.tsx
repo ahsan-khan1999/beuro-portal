@@ -158,16 +158,19 @@ export const SignPdf = <T,>({
           handleDescriptionUpdate={
             pdfData.movingDetails?.handleDescriptionUpdate
           }
-          signature={pdfData?.signature}
-          isCanvas={action === "Reject" ? false : pdfData?.isCanvas}
+          signature={offerSignature as string}
+          isCanvas={pdfData?.isCanvas}
           setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
           isSignatureDone={isSignatureDone}
           emailTemplateSettings={emailTemplateSettings}
           setOfferSignature={setOfferSignature}
           systemSettings={systemSettings}
+          pdfData={pdfData}
+          setComponentMounted={() => setComponentMounted(true)}
+
         />
       </div>
-      <OfferSignedPdf
+      {/* <OfferSignedPdf
         {...{
           emailTemplateSettings,
           signature: offerSignature,
@@ -177,7 +180,7 @@ export const SignPdf = <T,>({
           showContractSign: !!offerSignature,
           onComponentMounted: () => setComponentMounted(true),
         }}
-      />
+      /> */}
 
       {renderModal()}
     </div>
