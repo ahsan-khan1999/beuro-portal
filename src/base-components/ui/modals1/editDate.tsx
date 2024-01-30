@@ -9,7 +9,7 @@ import { EmailHeaderProps, PdfProps } from "@/types";
 
 export const EditDate = ({ onClose, setOfferData, pdfData }: { onClose: () => void, setOfferData?: SetStateAction<any>, pdfData?: PdfProps<EmailHeaderProps> }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useEditDate(setOfferData,pdfData);
+    useEditDate(setOfferData, pdfData);
 
   return (
     <>

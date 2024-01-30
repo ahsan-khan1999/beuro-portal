@@ -15,7 +15,7 @@ const SettingTopDataButtons = ({
     `${translate("setting.steps_heading.system_setting")}`,
     `${translate("setting.steps_heading.templates")}`,
     `${translate("setting.steps_heading.follow_up_setting")}`,
-    `${translate("setting.steps_heading.billing")}`,
+    // `${translate("setting.steps_heading.billing")}`,
     `${translate("setting.steps_heading.mail_setting")}`,
     `${translate("setting.steps_heading.qr_settings")}`,
 
