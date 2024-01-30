@@ -1,4 +1,5 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
+import { replaceClassesWithInlineStyles } from "@/utils/utility";
 import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
@@ -119,13 +120,13 @@ const stylesheet: HtmlStyles = {
     borderLeft: 5,
     borderColor: "#ccc",
     borderStyle: "solid",
+
     marginLeft: 0,
     marginRight: 0,
     overflow: "hidden",
     paddingLeft: "20px",
-
     "blockqoute p": {
-      margin: 0,
+      margin: 10,
     },
   },
   strong: {
@@ -142,23 +143,24 @@ export const AdditionalDetails = ({
   description?: string;
   signature?: any;
 }) => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const onFileChange = () => {
-    if (signature) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader?.result);
-      };
-      reader.readAsDataURL(signature);
-    }
-  };
+  // const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
+  // const onFileChange = () => {
+  //   if (signature) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImageSrc(reader?.result);
+  //     };
+  //     reader.readAsDataURL(signature);
+  //   }
+  // };
 
-  useMemo(() => signature && onFileChange(), [signature]);
+  // useMemo(() => signature && onFileChange(), [signature]);
+  
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
         <Html resetStyles={false} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
-          {description || ""}
+          {replaceClassesWithInlineStyles(description ?? '')}
         </Html>
       </View>
     </View>

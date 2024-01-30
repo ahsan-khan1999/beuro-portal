@@ -133,7 +133,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.lead_source")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.leadSource}
+              {translate(`common.lead_source.${leadDetails?.leadSource}`)}
             </div>
           </div>
           <div className="xl:col-span-2">

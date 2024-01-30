@@ -4,6 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditorBoxProps } from "@/types";
 
 import CustomEditor from '@/base-components/ui/editor/ckeditor/build/ckeditor';
+import { replaceClassesWithInlineStyles } from "@/utils/utility";
 
 const CustomCKEditor = ({
   id,

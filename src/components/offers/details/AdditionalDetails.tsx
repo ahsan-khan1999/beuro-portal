@@ -4,6 +4,7 @@ import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { replaceClassesWithInlineStyles } from "@/utils/utility";
 
 const AdditionalDetails = ({
   offerDetails,
@@ -41,7 +42,7 @@ const AdditionalDetails = ({
       <div className="py-[25px] px-[30px]">
         <div
           className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
-          dangerouslySetInnerHTML={{ __html: offerDetails?.additionalDetails }}
+          dangerouslySetInnerHTML={{ __html: replaceClassesWithInlineStyles(offerDetails?.additionalDetails || "") }}
         />
       </div>
     </LeadsCardLayout>
