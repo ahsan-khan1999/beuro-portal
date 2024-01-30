@@ -15,7 +15,6 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
-import { blobToFile } from "@/utils/utility";
 import { AggrementSignature } from "./aggrement-signature";
 
 Font.register({
@@ -24,6 +23,11 @@ Font.register({
     {
       src: "/assets/fonts/Poppins-Thin.ttf",
       fontStyle: "thin",
+      fontWeight: 100,
+    },
+    {
+      src: "/assets/fonts/Poppins-ThinItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 100,
     },
     {
@@ -37,8 +41,18 @@ Font.register({
       fontWeight: 300,
     },
     {
+      src: "/assets/fonts/Poppins-LightItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 300,
+    },
+    {
       src: "/assets/fonts/Poppins-Medium.ttf",
       fontStyle: "medium",
+      fontWeight: 500,
+    },
+    {
+      src: "/assets/fonts/Poppins-MediumItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 500,
     },
     {
@@ -47,13 +61,28 @@ Font.register({
       fontWeight: 600,
     },
     {
+      src: "/assets/fonts/Poppins-SemiBoldItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 600,
+    },
+    {
       src: "/assets/fonts/Poppins-Bold.ttf",
       fontStyle: "bold",
       fontWeight: 700,
     },
     {
+      src: "/assets/fonts/Poppins-BoldItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 700,
+    },
+    {
       src: "/assets/fonts/Poppins-Black.ttf",
       fontStyle: "black",
+      fontWeight: 800,
+    },
+    {
+      src: "/assets/fonts/Poppins-BlackItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 800,
     },
   ],
