@@ -21,6 +21,7 @@ import { useTranslation } from "next-i18next";
 import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
 import { smoothScrollToSection } from "@/utils/utility";
 import { EditDate } from "@/base-components/ui/modals1/editDate";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export const SignPdf = <T,>({
   newPageData,
@@ -104,7 +105,15 @@ export const SignPdf = <T,>({
         routeHandler={onSuccess}
       />
     ),
-    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} setOfferData={setOfferData} pdfData={pdfData}/>,
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
+      />
+    ),
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} setOfferData={setOfferData} pdfData={pdfData} />,
   };
 
   useEffect(() => {

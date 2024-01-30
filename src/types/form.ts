@@ -234,6 +234,15 @@ export interface InputWithCopyProps
   setValue?: UseFormSetValue<FieldValues>;
 }
 
+export interface SecurityTokenFieldProps {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange: (value: string) => void
+}
+
+
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
   value?: string;

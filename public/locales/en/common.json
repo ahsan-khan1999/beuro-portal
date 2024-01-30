@@ -492,7 +492,7 @@
       "mobile_number": "Mobile Number",
       "website": "Website",
       "mwst_number": "MWST Number (Optional)",
-      "private_info": "Private Information",
+      "private_info": "Address/Bank Information",
       "street_address": "Street Address",
       "post_code": "Post Code",
       "country": "Country",
@@ -556,8 +556,8 @@
         "iban_number": "IBAN Number"
       },
       "third_column": {
-        "third_column_heading": "Third Column",
-        "fourth_column_heading": "Fourth Column",
+        "third_column_heading": "Third Column(Services)",
+        "fourth_column_heading": "Fourth Column(Locations)",
         "row_one": "Row 1",
         "row_two": "Row 2",
         "row_three": "Row 3",
@@ -1138,7 +1138,13 @@
     "days": "days",
     "day": "day",
     "flexible": "Not Flexible",
-
+    "lead_source":{
+      "Umzugsfuchs":"Umzugsfuchs",
+      "Webvermarktung":"Webvermarktung",
+      "Offerten-365":"Offerten-365",
+      "Umzugshero":"Umzugshero",
+      "Via Call":"Via Call"
+    },
     "true": "True",
     "false": "False",
     "done_button": "Done",
@@ -1253,7 +1259,7 @@
       "title": "Offer Title",
       "total_price": "Total Price",
       "created_on": "Created On",
-      "email": "Email",
+      "email": "E-Status",
       "payment": "Payment",
       "status": "Status",
       "images": "Images",
