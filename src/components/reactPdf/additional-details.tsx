@@ -1,4 +1,5 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
+import { replaceClassesWithInlineStyles } from "@/utils/utility";
 import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
@@ -119,13 +120,13 @@ const stylesheet: HtmlStyles = {
     borderLeft: 5,
     borderColor: "#ccc",
     borderStyle: "solid",
+
     marginLeft: 0,
     marginRight: 0,
     overflow: "hidden",
     paddingLeft: "20px",
-
     "blockqoute p": {
-      margin: 0,
+      margin: 10,
     },
   },
   strong: {
@@ -154,11 +155,12 @@ export const AdditionalDetails = ({
   };
 
   useMemo(() => signature && onFileChange(), [signature]);
+  
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
         <Html resetStyles={false} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
-          {description || ""}
+          {replaceClassesWithInlineStyles(description ?? '')}
         </Html>
       </View>
     </View>

@@ -804,3 +804,22 @@ export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
   const pdfBytes = await mergedPdf.save();
   return new Blob([pdfBytes], { type: "application/pdf" });
 };
+
+
+export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
+  const classToStyleMap: { [className: string]: string } = {
+    'text-tiny': 'font-size: 8px;',
+    'text-small': 'font-size: 10px',
+    'text-big': 'font-size: 19.6px',
+    'text-huge': 'font-size: 24px;',
+    "ck-link_selected": 'background-color: rgba(31,176,255,.1)',
+    "ck-list-bogus-paragraph": 'display: block;',
+
+  };
+
+  return htmlContent.replace(/class="([^"]*)"/g, (match, classNames) => {
+    const classes: string[] = classNames.split(/\s+/);
+    const styleRules = classes.map((className: string) => classToStyleMap[className] || '').join(' ');
+    return styleRules ? `style="${styleRules}"` : '';
+  });
+}
