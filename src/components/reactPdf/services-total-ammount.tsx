@@ -126,10 +126,10 @@ export const ServicesTotalAmount = ({
           <View style={styles.subSection}>
             <Text style={styles.text}>Rabatt: </Text>
             {
-              isDiscount &&
+              // isDiscount &&
               <Text style={styles.text}>{(serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || calculatedDiscount)} </Text>
-              ||
-              <Text style={styles.text}>0</Text>
+              // ||
+              // <Text style={styles.text}>0</Text>
             }
           </View>
           {!isShowExtraAmount ? (

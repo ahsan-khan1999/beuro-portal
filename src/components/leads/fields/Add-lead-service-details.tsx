@@ -249,7 +249,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
               options: Object.keys(staticEnums["LeadSource"]).map((item) => ({
-                label: item,
+                label: translate(`common.lead_source.${item}`),
                 value: item,
               })),
 

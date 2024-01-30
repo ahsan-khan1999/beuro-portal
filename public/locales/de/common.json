@@ -381,7 +381,7 @@
       "main_heading": "Dienstleistungen/Produktdetails",
       "customer_id": "ID",
       "created_by": "Erstellt von",
-      "created_date": "Erstellungsdatum"
+      "created_date": "Erstelldatum"
     },
     "detail": {
       "main_heading": "Dienstleistungen/Produktdetails",
@@ -413,7 +413,7 @@
       "heading": "Mitarbeiterdetails",
       "employee_id": "Mitarbeiter-ID",
       "created_by": "Erstellt von",
-      "created_date": "Erstellungsdatum"
+      "created_date": "Erstelldatum"
     },
     "details": {
       "main_heading": "Mitarbeiterdetails",
@@ -479,7 +479,7 @@
       "mobile_number": "Handynummer",
       "website": "Webseite",
       "mwst_number": "MWST-Nummer (Optional)",
-      "private_info": "Private Informationen",
+      "private_info": "Adresse/Bank Informationen",
       "street_address": "Strasse",
       "post_code": "Plz + Ort",
       "country": "Land",
@@ -541,8 +541,8 @@
         "iban_number": "IBAN-Nummer"
       },
       "third_column": {
-        "third_column_heading": "Dritte Spalte",
-        "fourth_column_heading": "Vierte Spalte",
+        "third_column_heading": "Dritte Spalte(Leistungen)",
+        "fourth_column_heading": "Vierte Spalte(Standorte)",
         "row_one": "Zeile 1",
         "row_two": "Zeile 2",
         "row_three": "Zeile 3",
@@ -685,7 +685,7 @@
       "status": "E-Mail-Status",
       "paid_amount": "Bezahlter Betrag",
       "offer_id": "Angebots-ID",
-      "created_date": "Erstellungsdatum",
+      "created_date": "Erstelldatum",
       "notes": "Notizen",
       "unpaid_amount": "Unbezahlter Betrag",
       "create_invoice_button": "Rechnung erstellen",
@@ -759,7 +759,7 @@
       "worker": "Arbeiter",
       "offer_id": "Angebots-ID",
       "email_status": "E-Mail-Status",
-      "created_date": "Erstellungsdatum",
+      "created_date": "Erstelldatum",
       "service_date": "Auftrags-Datum",
       "offer_status": "Angebotestatus",
       "payment_method": "Zahlungsmethode",
@@ -841,7 +841,7 @@
       "s_no": "Nr",
       "title": "Titel des Inhalts",
       "worker": "Bearbeiter",
-      "created_date": "Erstellungsdatum"
+      "created_date": "Erstelldatum"
     },
     "table_headings": {
       "id": "ID",
@@ -909,11 +909,11 @@
       "edit": "bearbeiten"
     },
     "card_content": {
-      "heading": "Leaddetails",
+      "heading": "Lead details",
       "create_button": "Angebot erstellen",
       "lead_id": "Lead-ID",
       "status": "Status",
-      "created_date": "Erstellungsdatum",
+      "created_date": "Erstelldatum",
       "created_by": "Erstellt von"
     },
     "tabs_headings": {
@@ -1110,6 +1110,13 @@
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",
     "via_insta": "Über Instagram",
+    "lead_source":{
+      "Umzugsfuchs":"Umzugsfuchs",
+      "Webvermarktung":"Webvermarktung",
+      "Offerten-365":"Offerten-365",
+      "Umzugshero":"Umzugshero",
+      "Via Call":"Telefon"
+    },
     "less_then": "Weniger als",
     "whatsapp": "WhatsApp",
     "facebook": "Facebook",
@@ -1235,7 +1242,7 @@
       "title": "Angebotstitel",
       "total_price": "Gesamtpreis",
       "created_on": "Erstellt am",
-      "email": "E-Mail",
+      "email": "E-Status",
       "payment": "Zahlung",
       "status": "Status",
       "images": "Bilder",
@@ -1249,7 +1256,7 @@
       "offer_id": "Angebots-ID",
       "offer_title": "Angebotstitel",
       "worker": "Arbeiter",
-      "created_date": "Erstellungsdatum",
+      "created_date": "Erstelldatum",
       "service_date": "Auftrags-Datum",
       "email_status": "E-Mail-Status",
       "payment_method": "Zahlungsmethode",
@@ -1768,7 +1775,7 @@
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",
     "lead_source": "Leadquellen",
-    "activity": "Aktivität",
+    "activity": "Aktivitäten",
     "view_all": "Alle anzeigen",
     "follow_up_heading": "Nachfassungen",
     "months": {
@@ -1911,7 +1918,7 @@
     "customer": "Kunde",
     "customer_id": "ID",
     "phone": "Telefonnummer",
-    "created_date": "Erstellungsdatum",
+    "created_date": "Erstelldatum",
     "name": "Name",
     "mobile_number": "Handynummer",
     "address": "Adresse",

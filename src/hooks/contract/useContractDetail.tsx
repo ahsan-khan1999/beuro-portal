@@ -158,8 +158,8 @@ export default function useContractDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.update_contract_heading")}
-        subHeading={translate("common.modals.update_des")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),

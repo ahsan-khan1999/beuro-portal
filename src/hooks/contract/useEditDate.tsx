@@ -9,9 +9,10 @@ import { SetStateAction, useEffect } from "react";
 import { AddDateFormFieldContract } from "@/components/contract/fields/edit-date-fields";
 import { updateContractDates } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalType } from "@/enums/ui";
+import { ModalConfigType, ModalType } from "@/enums/ui";
 import { readOfferPublicDetails, updatePublicOfferDates } from "@/api/slices/offer/offerSlice";
 import { EmailHeaderProps, PdfProps } from "@/types";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export const useEditDate = (setOfferData?: SetStateAction<any>, pdfData?: PdfProps<EmailHeaderProps>) => {
   const { t: translate } = useTranslation();
@@ -20,11 +21,17 @@ export const useEditDate = (setOfferData?: SetStateAction<any>, pdfData?: PdfPro
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
+  const { modal } = useAppSelector(
+    (state) => state.global
+  );
   const { publicOffer, loadingPublicOffer } = useAppSelector(
     (state) => state.offer
   );
   const handleCloseModal = () => {
     dispatch(updateModalType({ type: ModalType.NONE }))
+  }
+  const handleSuccessModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }))
   }
   const isOffer = router?.pathname?.includes("pdf")
   const schema = generateContractDateSchema(translate);
@@ -58,16 +65,18 @@ export const useEditDate = (setOfferData?: SetStateAction<any>, pdfData?: PdfPro
     remove,
     isOffer ? loadingPublicOffer : loading
   );
+
+  
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (isOffer) {
       const response = await dispatch(updatePublicOfferDates({ data: { ...data, id: publicOffer?.Offer?.id }, router, setError, translate }))
       if (response?.payload && setOfferData) {
         setOfferData({ ...pdfData, "movingDetails": { ...pdfData?.movingDetails, "workDates": response?.payload?.date } })
-        handleCloseModal()
+        handleSuccessModal()
       }
     } else {
       const response = await dispatch(updateContractDates({ data: { ...data, id: contractDetails?.offerID?.id }, router, setError, translate }))
-      if (response?.payload) handleCloseModal()
+      if (response?.payload) handleSuccessModal()
     }
 
   };
