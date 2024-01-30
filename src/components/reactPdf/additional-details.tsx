@@ -143,18 +143,18 @@ export const AdditionalDetails = ({
   description?: string;
   signature?: any;
 }) => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const onFileChange = () => {
-    if (signature) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader?.result);
-      };
-      reader.readAsDataURL(signature);
-    }
-  };
+  // const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
+  // const onFileChange = () => {
+  //   if (signature) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImageSrc(reader?.result);
+  //     };
+  //     reader.readAsDataURL(signature);
+  //   }
+  // };
 
-  useMemo(() => signature && onFileChange(), [signature]);
+  // useMemo(() => signature && onFileChange(), [signature]);
   
   return (
     <View style={styles.borderDiv}>

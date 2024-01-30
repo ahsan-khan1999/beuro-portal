@@ -515,7 +515,7 @@ input[type="number"] {
 @media (max-width: 767px) {
   .html-content > h2 {
     color: #1c1c1c;
-    font-size: 20px !important;
+    /* font-size: 20px !important; */
     /* font-family: ; */
     font-weight: 700;
     margin-bottom: 8px !important;
@@ -523,7 +523,7 @@ input[type="number"] {
 
   .html-content > h3 {
     color: #1c1c1c;
-    font-size: 20px !important;
+    /* font-size: 20px !important; */
     /* font-family: ; */
     font-weight: 700;
     margin-bottom: 24px !important;
@@ -531,7 +531,7 @@ input[type="number"] {
 
   .html-content > h4 {
     color: #1c1c1c;
-    font-size: 16px !important;
+    /* font-size: 16px !important; */
     /* font-family: ; */
     font-weight: 600;
     margin-bottom: 8px !important;
@@ -545,26 +545,26 @@ input[type="number"] {
   }
 }
 .html-content > h1 {
-  font-size: 18px;
+  /* font-size: 18px; */
   margin: 0px;
 }
 .html-content > h2 {
-  font-size: 18px;
+  /* font-size: 18px; */
   margin: 0px;
 }
 
 .html-content > h3 {
-  font-size: 16px;
+  /* font-size: 16px; */
   margin: 0px;
 }
 
 .html-content > h4 {
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 .html-content > p {
   color: #272727;
   margin: 0;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 .html-content > p > a {
   text-decoration: underline !important;
@@ -574,7 +574,7 @@ input[type="number"] {
 }
 .html-content > ul > li {
   list-style: outside;
-  font-size: 13px;
+  /* font-size: 13px; */
 }
 
 .html-content > blockquote {
