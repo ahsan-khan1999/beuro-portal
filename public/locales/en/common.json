@@ -984,7 +984,7 @@
     "service_details": {
       "heading": "Service/Product Details",
       "edit_button": "Edit Details",
-      "required_service": "Required Content",
+      "required_service": "Required Service",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
       "days": "Days",
@@ -992,7 +992,7 @@
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",
       "lead_source": "Lead Source",
-      "other_services": "Other Content",
+      "other_services": "Other Service",
       "save_changes_button": "Save Changes",
       "cancel_button": "Cancel",
       "next_button": "Next",
