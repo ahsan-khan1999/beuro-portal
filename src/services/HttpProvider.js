@@ -128,9 +128,7 @@ export async function get(url, params, featureAndAction, config) {
       queryParams[key] = otherParams[key];
     }
   }
-  // if ("paginate" in filter) {
-  //   queryParams["filter"] = { ...queryParams["filter"], "paginate": filter?.paginate }
-  // }
+  
 
   const queryString = new URLSearchParams(queryParams).toString();
   const fullUrl = queryString ? `${url}?${queryString}` : url;
