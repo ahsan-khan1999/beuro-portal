@@ -308,5 +308,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDetails
   };
 };

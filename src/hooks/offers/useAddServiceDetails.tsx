@@ -384,5 +384,6 @@ export const useAddServiceDetails = (
     error,
     translate,
     systemSettings,
+    offerDetails
   };
 };

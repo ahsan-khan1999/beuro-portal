@@ -275,5 +275,6 @@ export const useEditOfferDetails = ({
     errors,
     error,
     translate,
+    offerDetails
   };
 };

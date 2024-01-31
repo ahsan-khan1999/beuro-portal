@@ -95,5 +95,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDetails
   };
 };

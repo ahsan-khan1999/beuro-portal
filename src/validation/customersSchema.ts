@@ -37,7 +37,7 @@ export const generateCustomerValidation = (translate: Function) => {
         .required(translate("validationMessages.required")),
       [CustomerDetailsFields.postCode]: yup
         .string()
-        .required(translate("validationMessages.required")),
+        .notRequired(),
       [CustomerDetailsFields.country]: yup
         .string()
         .required(translate("validationMessages.required")),

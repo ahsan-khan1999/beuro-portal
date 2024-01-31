@@ -56,7 +56,7 @@
       "sub_heading": "Inform Us About Your Location for Enhanced Service.",
       "street_no": "Street Number",
       "house_no": "House Number",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "City": "City"
     },
     "bank_details": {
@@ -281,7 +281,7 @@
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
@@ -293,7 +293,7 @@
       "name": "Please Enter Your Name",
       "email": "Please Enter Your Email Address",
       "street": "Please Enter Street Number",
-      "post_code": "Please Enter Your Post Code"
+      "post_code": "Please Enter Your Post Code + City"
     },
 
     "side_bar_details": {
@@ -494,7 +494,7 @@
       "mwst_number": "MWST Number (Optional)",
       "private_info": "Address/Bank Information",
       "street_address": "Street Address",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "house_no": "House No",
       "bank_name": "Bank Name",
@@ -550,7 +550,7 @@
       "second_column": {
         "heading": "Second Column",
         "street_no": "Street No",
-        "post_code": "Post Code",
+        "post_code": "Post Code + City",
         "bank_name": "Bank Name",
         "account_number": "Account Number",
         "iban_number": "IBAN Number"
@@ -800,14 +800,14 @@
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country"
     },
     "address_details": {
       "main_heading": "Address Details",
       "heading": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description"
     },
@@ -954,7 +954,7 @@
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
@@ -965,7 +965,7 @@
       "name": "Please Enter Your Name",
       "email": "Please Enter Your Email Address",
       "street": "Please Enter Street Number",
-      "post_code": "Please Enter Your Post Code"
+      "post_code": "Please Enter Your Post Code + City"
     },
     "address_details": {
       "main_heading": "Address Details",
@@ -973,7 +973,7 @@
       "heading": "Address 1 Details",
       "sub_heading": "Address 2 Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description",
       "cancel_button": "Cancel",
@@ -1305,7 +1305,7 @@
       "mobile_number": "Mobile Number",
       "customer_address": "Customer Address",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "select_customer": "Select Customer",
       "customer_name": "Customer Name",
@@ -1324,7 +1324,7 @@
       "address": "Address",
       "details": "Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description",
       "cancel_button": "Cancel",
@@ -1404,7 +1404,7 @@
       "email": "Please Enter Your Email Address",
       "offer_title": "Please Enter Your Offer Title",
       "street": "Please Enter Street Number",
-      "post_code": "Please Enter Your Post Code",
+      "post_code": "Please Enter Your Post Code + City",
       "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "service_title": "Please Enter Your service Name"
     }
@@ -1524,7 +1524,7 @@
         "phone_number": "Phone Number",
         "sub_heading": "Address Details",
         "street_no": "Street No",
-        "post_code": "Post Code",
+        "post_code": "Post Code + City",
         "country": "Country"
       }
     },
@@ -1707,7 +1707,7 @@
     },
     "address_details": {
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description"
     },
@@ -1743,7 +1743,7 @@
       "address_one_heading": "Address 1 Details",
       "address_two_heading": "Address 2 Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country"
     },
     "all_customer_details": {
