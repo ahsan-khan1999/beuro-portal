@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate,offerDetails } =
     useAddOfferDetails(onHandleNext);
   return (
     <FormCard>
@@ -43,7 +43,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
             </svg>
           </span>
           <p className="font-medium text-[24px] leading-6 ">
-            {translate("offers.offer_details.heading")}
+            {translate("offers.offer_details.heading")} {offerDetails?.id && (offerDetails?.offerNumber)}
           </p>
         </div>
         <button

@@ -75,6 +75,7 @@ export const useOfferAditionalDetails = (onHandleNext: (currentComponent: Compon
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
+    offerDetails
   };
 };

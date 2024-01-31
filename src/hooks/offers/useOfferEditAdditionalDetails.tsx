@@ -108,5 +108,6 @@ export const useOfferEditAdditionalDetails = ({
     errors,
     error,
     translate,
+    offerDetails
   };
 };

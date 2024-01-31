@@ -101,7 +101,7 @@ export const generateProfileSettingValidation = (translate: Function) => {
           .required(translate("validationMessages.required")),
         [SettingProfile.postCode]: yup
           .string()
-          .required(translate("validationMessages.required")),
+          .notRequired(),
         [SettingProfile.city]: yup
           .string()
           .required(translate("validationMessages.required")),

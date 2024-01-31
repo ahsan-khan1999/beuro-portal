@@ -43,7 +43,7 @@ export const generateLeadsCustomerEditDetailsValidation = (
           .required(translate("validationMessages.required")),
         [LeadsCustomerEditDetails.postCode]: yup
           .string()
-          .required(translate("validationMessages.required")),
+          .notRequired(),
         [LeadsCustomerEditDetails.country]: yup
           .string()
           .required(translate("validationMessages.required")),
@@ -90,7 +90,7 @@ export const generateLeadsAddressEditDetailsValidation = (
             .required(translate("validationMessages.required")),
           [LeadsAddressEditDetails.postCode]: yup
             .string()
-            .required(translate("validationMessages.required")),
+            .notRequired(),
           [LeadsAddressEditDetails.country]: yup
             .string()
             .required(translate("validationMessages.required")),
@@ -188,7 +188,7 @@ export const generateAddNewLeadCustomerDetailsValidation = (
           .required(translate("validationMessages.required")),
         [LeadsCustomerEditDetails.postCode]: yup
           .string()
-          .required(translate("validationMessages.required")),
+          .notRequired(),
         [LeadsCustomerEditDetails.country]: yup
           .string()
           .required(translate("validationMessages.required")),

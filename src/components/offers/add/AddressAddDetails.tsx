@@ -7,13 +7,13 @@ import { useRouter } from "next/router";
 const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, translate ,offerDetails} =
     useOfferAddAddressDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.address_details.main_heading")}
+          {translate("offers.address_details.main_heading")} {offerDetails?.id && (offerDetails?.offerNumber)}
         </h2>
         <button
           onClick={() => router.push("/offers")}
