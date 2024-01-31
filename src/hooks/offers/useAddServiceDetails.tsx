@@ -127,7 +127,7 @@ export const useAddServiceDetails = (
     const data = getValues();
     const totalPrices = data?.serviceDetail?.reduce(
       (acc: number, element: any) =>
-        acc + parseFloat(element.totalPrice || 0, 10),
+        acc + parseFloat(element.totalPrice || 0),
       0
     );
 
