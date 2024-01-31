@@ -84,6 +84,7 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
+    offerDetails
   };
 };

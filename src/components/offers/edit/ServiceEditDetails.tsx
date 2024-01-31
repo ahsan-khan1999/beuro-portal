@@ -12,13 +12,13 @@ const ServiceEditDetails = ({
 }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate,offerDetails } =
     useServiceOfferEditDetail({ handleNext });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.service_details.main_heading")}
+          {translate("offers.service_details.main_heading")} ({offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={() => router.back()}
