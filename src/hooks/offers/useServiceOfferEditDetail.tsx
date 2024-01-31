@@ -399,5 +399,6 @@ export const useServiceOfferEditDetail = ({
     error,
     translate,
     systemSettings,
+    offerDetails
   };
 };
