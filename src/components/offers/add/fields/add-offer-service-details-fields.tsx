@@ -233,6 +233,8 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       name: `serviceDetail.${i}.count`,
                       placeholder: "10",
                       register,
+                      step: "0.01",
+
                       onChange: () => generatePrice && generatePrice(i),
                     },
                   },
@@ -565,7 +567,7 @@ const generateServiceCalulationChildren = (
                   className:
                     "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
                   id: "span-field",
-                  text: `${total?.subTotal} ${currency}`,
+                  text: `${total?.subTotal?.toFixed(2)} ${currency}`,
                 },
               },
             ],

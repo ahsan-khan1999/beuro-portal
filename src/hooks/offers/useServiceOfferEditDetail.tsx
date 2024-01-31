@@ -174,7 +174,7 @@ export const useServiceOfferEditDetail = ({
     const data = getValues();
     const totalPrices = data?.serviceDetail?.reduce(
       (acc: number, element: any) =>
-        acc + parseInt(element.totalPrice || 0),
+        acc + parseFloat(element.totalPrice || 0),
       0
     );
 
