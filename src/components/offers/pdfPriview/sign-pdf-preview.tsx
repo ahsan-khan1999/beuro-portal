@@ -98,7 +98,7 @@ const SignPdfPreview = () => {
   const { offerID, action } = router.query;
 
   useEffect(() => {
-   
+
     if (offerID) {
       dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
@@ -119,7 +119,7 @@ const SignPdfPreview = () => {
                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
-                companyName:offerDetails?.Offer?.createdBy?.company?.companyName,
+                companyName: offerDetails?.Offer?.createdBy?.company?.companyName,
               },
               contactAddress: {
                 address: {
@@ -154,9 +154,11 @@ const SignPdfPreview = () => {
                 serviceDiscountSum: offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                   const price = service?.discount || 0;
                   return acc + price;
-                }, 0)
+                }, 0),
+                isTax: offerDetails?.Offer?.isTax,
+                isDiscount:offerDetails?.Offer?.isDiscount,
               },
-              
+
               footerDetails: {
                 firstColumn: {
                   companyName:

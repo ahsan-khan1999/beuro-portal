@@ -5,6 +5,7 @@ import { CKEditorBoxProps } from "@/types";
 
 import CustomEditor from '@/base-components/ui/editor/ckeditor/build/ckeditor';
 import { replaceClassesWithInlineStyles } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const CustomCKEditor = ({
   id,
@@ -13,63 +14,67 @@ const CustomCKEditor = ({
   data,
   name,
   type,
-}: CKEditorBoxProps) => (
-  <CKEditor
-    id={id}
-    editor={CustomEditor}
-    data={field.value}
-    key={data}
-    onReady={(editor) => {
-      field.onChange(field.value);
+}: CKEditorBoxProps) => {
 
-    }}
-    onChange={(event, editor) => {
-      field.onChange(editor.getData());
-    }}
-    onBlur={(event, editor) => { }}
-    onFocus={(event, editor) => { }}
-    onError={(error, errorDetails) => {
-      trigger?.(field.name);
-    }}
+  const { t: translate } = useTranslation()
+  return (
+    <CKEditor
+      id={id}
+      editor={CustomEditor}
+      data={field.value}
+      key={data}
+      onReady={(editor) => {
+        field.onChange(field.value);
 
-    config={{
-      language:"de",
-      toolbar: {
-        items: [
-          "undo",
-          "redo",
-          "|",
-          "heading",
-          "|",
-          // "fontfamily",
-          "fontsize",
-          // "fontColor",
-          // "fontBackgroundColor",
-          "|",
-          "bold",
-          "italic",
-          // "underline",
-          "strikethrough",
-          // "subscript",
-          // "superscript",
-          // "code",
-          "|",
-          // "alignment",
-          "link",
-          "blockQuote",
-          // "codeBlock",
-          "|",
-          "bulletedList",
-          "numberedList",
-          // "todoList",
-          "outdent",
-          "indent",
-        ],
-        shouldNotGroupWhenFull: true,
-      },
-      placeholder: "Describe your term here....",
-    }}
-  />
-);
+      }}
+      onChange={(event, editor) => {
+        field.onChange(editor.getData());
+      }}
+      onBlur={(event, editor) => { }}
+      onFocus={(event, editor) => { }}
+      onError={(error, errorDetails) => {
+        trigger?.(field.name);
+      }}
 
+      config={{
+        language: "de",
+        toolbar: {
+          items: [
+            "undo",
+            "redo",
+            "|",
+            "heading",
+            "|",
+            // "fontfamily",
+            "fontsize",
+            // "fontColor",
+            // "fontBackgroundColor",
+            "|",
+            "bold",
+            "italic",
+            // "underline",
+            "strikethrough",
+            // "subscript",
+            // "superscript",
+            // "code",
+            "|",
+            // "alignment",
+            "link",
+            "blockQuote",
+            // "codeBlock",
+            "|",
+            "bulletedList",
+            "numberedList",
+            // "todoList",
+            "outdent",
+            "indent",
+          ],
+          shouldNotGroupWhenFull: true,
+        },
+        placeholder: translate("common.editor_placeholder"),
+      }}
+    />
+
+  );
+}
 export default CustomCKEditor;
