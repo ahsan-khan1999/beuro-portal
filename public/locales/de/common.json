@@ -52,6 +52,14 @@
       "upload_logo": "Firmenlogo hochladen"
     },
     "location_details": {
+      "heading": "Erzählen Sie uns von Ihrem Standort",
+      "sub_heading": "Informieren Sie uns über Ihren Standort für verbesserten Service.",
+      "street_no": "Strasse",
+      "house_no": "Hausnummer",
+      "post_code": "Plz + Ort",
+      "City": "Stadt"
+    },
+    "bank_details": {
       "heading": "Erzählen Sie uns etwas über Ihren Standort",
       "sub_heading": "Informieren Sie uns über Ihren Standort für verbesserten Service.Gehen Sie auf Nummer sicher, indem Sie jetzt Ihre wichtigsten Bankdaten angeben.",
       "choose_currency": "Währung auswählen",
@@ -819,8 +827,8 @@
       "back_button": "Zurück",
       "next_button": "Weiter",
       "title": "Titel",
-      "additional_details": "Zusätzliche Details",
-      "send":"Senden Sie"
+      "additional_details": "Zustäzliche Details",
+      "send":"Senden"
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -967,7 +975,7 @@
     "service_details": {
       "heading": "Leistungen-/Produktdetails",
       "edit_button": "Details bearbeiten",
-      "required_service": "Benötigter Leistungen",
+      "required_service": "Benötigte",
       "desire_date": "Wunschdatum",
       "days": "Tage",
       "flexibility": "Flexibilität",
@@ -982,7 +990,7 @@
       "back_button": "Zurück"
     },
     "additional": {
-      "heading": "Zusätzliche Details",
+      "heading": "Zustäzliche Details",
       "edit_button": "Details bearbeiten",
       "save_changes_button": "Änderungen speichern",
       "next_button": "Weiter",
@@ -1069,6 +1077,9 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "editor_placeholder":"fügen Sie ihren Text hier ein",
+    "content_name":"Titel für Offerte",
+    "content_text":"Text für Offerte",
     "general_inquery": "Allgemeine Anfrage",
     "account_assist": "Account Unterstützung ",
     "payment_issues": "Rechnungs oder Bezahlungs Schwierigkeiten",
@@ -1351,7 +1362,7 @@
     },
 
     "additional_details": {
-      "main_heading": "Zusätzliche Details",
+      "main_heading": "Zustäzliche Details",
       "edit_button": "Details bearbeiten",
       "cancel_button": "Abbrechen",
       "save_button": "Speichern",
@@ -1654,7 +1665,7 @@
     "completed_button": "Abgeschlossen",
     "customer_detail_heading": "Kundendetails",
     "follow_up_detail_heading": "Details zur Nachverfolgung",
-    "additional_detail_heading": "Zusätzliche Details",
+    "additional_detail_heading": "Zustäzliche Details",
     "lead_detail_heading": "Lead-Details",
     "address_detail_heading": "Adressdetails",
     "follow_up_details": {
@@ -1667,7 +1678,7 @@
       "phone_number": "Telefonnummer",
       "mobile_number": "Handynummer",
       "address_detail": "Adressdetails",
-      "required_service": "Benötigter Leistungen",
+      "required_service": "Benötigte",
       "desire_date": "Gewünschtes Datum und Uhrzeit",
       "flexibility": "Flexibilität",
       "budget": "Budget"
@@ -1686,7 +1697,7 @@
       "follow_up_type": "Art der Nachverfolgung"
     },
     "lead_details": {
-      "required_service": "Benötigter Leistungen",
+      "required_service": "Benötigte",
       "desire_date": "Wunschdatum und -zeit",
       "flexibility": "Flexibilität",
       "budget": "Budget"
@@ -1716,7 +1727,7 @@
       "select_lead": "Lead auswählen",
       "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
       "follow_up_type": "Art der Nachverfolgung",
-      "additional_details": "Zusätzliche Details"
+      "additional_details": "Zustäzliche Details"
     },
     "customer_details_modal": {
       "heading": "Kundendetails",
@@ -1758,7 +1769,7 @@
     },
     "service_details": {
       "heading": "Service-Details",
-      "required_service": "Benötigter Leistungen",
+      "required_service": "Benötigte",
       "desire_date": "Wunschdatum",
       "availability": "Kontaktverfügbarkeit",
       "flexibility": "Flexibilität",
@@ -1766,7 +1777,7 @@
       "budget": "Budget",
       "lead_source": "Leadquellen",
       "other_services": "Andere Leistungen",
-      "Additional_details": "Zusätzliche Details"
+      "Additional_details": "Zustäzliche Details"
     }
   },
   "dashboard_detail": {

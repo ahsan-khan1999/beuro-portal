@@ -36,7 +36,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 inputType: "text",
                 id: "confirmationContent.title",
                 name: "confirmationContent.title",
-                placeholder: "Text for Confirmation",
+                placeholder: translate("content.details.confirmation_title"),
                 register,
               },
             },
