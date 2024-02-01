@@ -10,7 +10,9 @@ export const ProductItemFooter = ({
   systemSettings,
   serviceDiscountSum,
   discountType,
-  taxType
+  taxType,
+  isDiscount,
+  isTax
 }: Partial<ProductItemFooterProps>) => {
 
   const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
@@ -44,14 +46,19 @@ export const ProductItemFooter = ({
             <span className="text-[#1E1E1E] text-base font-medium">
               {translate("pdf.tax")}:
             </span>
-            <span className="text-[#1E1E1E] text-base font-medium ">{calculatedTax} ({tax}%)</span>
+            <span className="text-[#1E1E1E] text-base font-medium ">{
+              isTax &&
+              <>
+                {Number(calculatedTax).toFixed(2)}  ({tax}%)
+              </> || 0
+            } </span>
           </div>
           <div className="flex justify-between">
             <span className="text-[#1E1E1E] text-base font-medium">
               {translate("pdf.discount")}:
             </span>
             <span className="text-[#1E1E1E] text-base font-medium">
-              {serviceDiscountSum && (Number(calculatedDiscount) + serviceDiscountSum).toFixed(2) || calculatedDiscount}
+            {!isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)}
             </span>
           </div>
         </div>
