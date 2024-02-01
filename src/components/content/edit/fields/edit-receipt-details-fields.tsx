@@ -35,7 +35,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "receiptContent.title",
               name: "receiptContent.title",
-              placeholder: "Text for Receipt",
+              placeholder: translate("content.details.receipt_title"),
               register,
             },
           },

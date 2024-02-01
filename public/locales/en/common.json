@@ -1086,6 +1086,9 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "editor_placeholder":"Insert your text here",
+    "content_name":"Title for offer",
+    "content_text":"Text for offer",
     "general_inquery": "General Inquiry",
     "account_assist": "Account Assistance",
     "payment_issues": "Billing or Payment Issues",

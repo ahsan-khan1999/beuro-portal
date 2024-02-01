@@ -89,21 +89,26 @@ export const ServicesTotalAmount = ({
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: 500,
-              fontStyle: "medium",
-              color: "#000",
-            }}
-          >
-            Bedingungen für Umzugsschätzungen
-          </Text>
-          <Text style={styles.discountDescription}>
-            Unten finden Sie weitere Informationen zu den Richtlinien und
-            Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden
-            Geschäftsbedingungen zu verstehen.
-          </Text>
+          {
+            !isShowExtraAmount &&
+            <View>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: 500,
+                  fontStyle: "medium",
+                  color: "#000",
+                }}
+              >
+                Bedingungen für Umzugsschätzungen
+              </Text>
+              <Text style={styles.discountDescription}>
+                Unten finden Sie weitere Informationen zu den Richtlinien und
+                Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden
+                Geschäftsbedingungen zu verstehen.
+              </Text>
+            </View>
+          }
         </View>
         <View style={styles.rightColumn}>
           <View style={styles.subSection}>
@@ -127,7 +132,7 @@ export const ServicesTotalAmount = ({
             <Text style={styles.text}>Rabatt: </Text>
             {
               // isDiscount &&
-              <Text style={styles.text}>{(serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || calculatedDiscount)} </Text>
+              <Text style={styles.text}>{!isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)} </Text>
               // ||
               // <Text style={styles.text}>0</Text>
             }
