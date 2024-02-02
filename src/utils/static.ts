@@ -44,7 +44,7 @@ function parseCustomDate(dateString: string) {
 }
 
 export const countryList: countryType = {
-  [Country.Swizterland]: {
+  [Country.Switzerland]: {
     [State.state]: [
       {
         label: "Zürich",
@@ -707,7 +707,7 @@ export const staticEnums: Record<string, any> = {
   },
   SettingStatus: {},
   Country: {
-    Swizterland: "countries.swiz",
+    Switzerland: "countries.swiz",
     Germany: "countries.ger",
     Austria: "countries.aust",
     Italy: "countries.ita",

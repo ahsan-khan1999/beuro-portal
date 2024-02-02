@@ -164,7 +164,7 @@ export interface BreadcrumbItem {
   children?: BreadcrumbItem[]; // children is also optional
 }
 export interface countryType {
-  [Country.Swizterland]: {
+  [Country.Switzerland]: {
     [State.state]: CountryObject[];
   };
   [Country.Germany]: {
@@ -182,7 +182,7 @@ export interface countryType {
 }
 
 export interface CountryType {
-  [Country.Swizterland]: string;
+  [Country.Switzerland]: string;
   [Country.Germany]: string;
   [Country.Austria]: string;
   [Country.Italy]: string;
