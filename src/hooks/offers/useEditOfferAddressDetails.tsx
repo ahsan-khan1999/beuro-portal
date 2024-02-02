@@ -50,7 +50,7 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
             addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
-              country: "Swizterland",
+              country: "Switzerland",
               description: "",
               label: `Address ${++index}`
             })),
