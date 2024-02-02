@@ -22,7 +22,7 @@ export const ContactAddress = ({
     <View style={leftColumn}>
       <Text style={textBase}>{GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}</Text>
       <Text style={textBase}>{address?.streetWithNumber}</Text>
-      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country]}`}</Text>
+      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country] || ""}`}</Text>
     </View>
     <View style={rightColumn}>
       <View style={{ display: "flex", flexDirection: "row" }}>
@@ -40,20 +40,23 @@ export const ContactAddress = ({
         <Text style={textBase}>{email}</Text>
       </View>
 
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <Text
-          style={{
-            fontSize: 10,
-            fontWeight: 400,
-            fontStyle: "normal",
-            color: "#000",
-            width: 50,
-          }}
-        >
-          Telefon:
-        </Text>
-        <Text style={textBase}>{phone}</Text>
-      </View>
+      {
+        (phone !== "+" && phone) &&
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: "#000",
+              width: 50,
+            }}
+          >
+            Telefon:
+          </Text>
+          <Text style={textBase}>{phone}</Text>
+        </View>
+      }
     </View>
-  </View>
+  </View >
 );
