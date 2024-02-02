@@ -223,7 +223,7 @@ export const AddressDetails = ({
 
 
 export const Country = {
-  "Swizterland": "Schweiz",
+  "Switzerland": "Schweiz",
   "Germany": "Deutschland",
   "Austria": "Österreich",
   "Italy": "Italien",

@@ -115,7 +115,7 @@ export enum AuthenticationState {
 }
 
 export enum Country {
-  Swizterland = "Swizterland",
+  Switzerland = "Switzerland",
   Germany = "Germany",
   Austria = "Austria",
   Italy = "Italy",

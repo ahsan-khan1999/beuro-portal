@@ -59,7 +59,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
             addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
-              country: "Swizterland",
+              country: "Switzerland",
               description: "",
               label: `Address ${++index}`
             })),
