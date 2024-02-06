@@ -1844,8 +1844,8 @@
     }
   },
   "pdf": {
-    "offer_number": "Angebote Nr.",
-    "offer_date": "Angebotedatum",
+    "offer_number": "Angebot Nr.",
+    "offer_date": "Angebotsdatum",
     "created_by": "Erstellt von",
     "email": "E-Mail",
     "phone": "Telefon",

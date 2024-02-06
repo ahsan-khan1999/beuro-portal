@@ -48,7 +48,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} Nr:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebot"} Nr:
 
           </Text>
           <Text
@@ -79,7 +79,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebote"} datum:
+            {fileType && HeaderLabel[fileType as keyof typeof HeaderLabel] || "Angebots"}datum:
           </Text>
           <Text
             style={{
