@@ -562,7 +562,7 @@ export const transformAttachments = (attachmemts: string[]) => {
 export function getFileNameFromUrl(url: string) {
   const urlParts = url.split("/");
   const fileName = urlParts[urlParts.length - 1];
-  return fileName;
+  return fileName?.slice(0,28);
 }
 
 export function getEmailColor(status: string) {
