@@ -84,7 +84,7 @@ export const ServicesTotalAmount = ({
   const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
   const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
 
-
+  const totalDiscount = !isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -100,7 +100,7 @@ export const ServicesTotalAmount = ({
                   color: "#000",
                 }}
               >
-                Bedingungen für Umzugsschätzungen
+                Allgemeine Geschäftsbedingungen
               </Text>
               <Text style={styles.discountDescription}>
                 Unten finden Sie weitere Informationen zu den Richtlinien und
@@ -128,15 +128,15 @@ export const ServicesTotalAmount = ({
               </Text>
             }
           </View>
+          {
+            totalDiscount !== 0 &&
           <View style={styles.subSection}>
             <Text style={styles.text}>Rabatt: </Text>
             {
-              // isDiscount &&
-              <Text style={styles.text}>{!isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)} </Text>
-              // ||
-              // <Text style={styles.text}>0</Text>
+              <Text style={styles.text}>{totalDiscount} </Text>
             }
           </View>
+          }
           {!isShowExtraAmount ? (
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Gesamtsumme:</Text>
