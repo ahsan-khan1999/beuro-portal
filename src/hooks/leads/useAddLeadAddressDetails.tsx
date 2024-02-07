@@ -49,9 +49,9 @@ export const useAddLeadAddressDetails = (
         address: leadDetails?.addressID
           ? leadDetails?.addressID?.address?.map((item, index) => ({
               ...item,
-              label: item?.label ? item?.label : `Adress ${++index}`,
+              label: item?.label ? item?.label : `Adresse ${++index}`,
             }))
-          : [{ label: `Adress ${addressCount}`,...leadDetails?.customerDetail?.address }],
+          : [{ label: `Adresse ${addressCount}`,...leadDetails?.customerDetail?.address }],
       });
     }
   }, [leadDetails?.id]);

@@ -624,6 +624,6 @@ input[type="number"] {
     content: "24px " !important;
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator {
+/* input[type="time"]::-webkit-calendar-picker-indicator {
   display: none !important;
-}
+} */

@@ -96,7 +96,8 @@ export const useEditOfferDetails = ({
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.leadID?.customerID,
-            gender: staticEnums["Gender"][res?.payload?.leadID?.customerDetail?.gender]
+            gender: staticEnums["Gender"][res?.payload?.leadID?.customerDetail?.gender],
+            time: res?.payload?.time,
 
 
           });
@@ -226,6 +227,8 @@ export const useEditOfferDetails = ({
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
+    loading,
+    control
   );
 
   const submit = AddOfferDetailsSubmitFormField(
