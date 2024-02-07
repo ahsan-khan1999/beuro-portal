@@ -36,12 +36,11 @@ export const Header = ({
             display: "flex",
             flexDirection: "row",
             rowGap: 4,
-            marginBottom: 6,
           }}
         >
           <Text
             style={{
-              width: 90,
+              marginRight: 10,
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",
@@ -67,12 +66,11 @@ export const Header = ({
             display: "flex",
             flexDirection: "row",
             rowGap: 10,
-            marginBottom: 6,
           }}
         >
           <Text
             style={{
-              width: 90,
+              marginRight: 10,
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",
@@ -92,10 +90,10 @@ export const Header = ({
             {formatDateTimeToDate(offerDate || "")}
           </Text>
         </View>
-        <View style={{ display: "flex", flexDirection: "row", rowGap: 10 }}>
+        <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
           <Text
             style={{
-              width: 90,
+              marginRight: 10,
               fontSize: 10,
               fontWeight: 400,
               fontStyle: "normal",

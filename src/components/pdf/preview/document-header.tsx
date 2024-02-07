@@ -34,8 +34,8 @@ export const DocumentHeader = ({
         )}
       </div>
 
-      <div className="flex flex-col gap-[6px] col-span-1">
-        <div className="flex gap-[30px]">
+      <div className="flex flex-col gap-[0px] col-span-1">
+        <div className="flex gap-[5px]">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
             // style={{ color: textColor }}
@@ -50,7 +50,7 @@ export const DocumentHeader = ({
             {offerNo}
           </span>
         </div>
-        <div className="flex gap-[15px] ">
+        <div className="flex gap-[5px] ">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
             // style={{ color: textColor }}
@@ -66,7 +66,7 @@ export const DocumentHeader = ({
             {formatDateTimeToDate(offerDate || "")}
           </span>
         </div>
-        <div className="flex gap-[12px] ">
+        <div className="flex gap-[5px] ">
           <span
             className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
             // style={{ color: textColor }}

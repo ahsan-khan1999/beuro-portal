@@ -10,6 +10,7 @@ import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useTranslation } from "next-i18next";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { OffersIcon } from "@/assets/svgs/components/sideBar/Offers";
 
 const EmailCard = ({
   emailStatus,
@@ -58,6 +59,7 @@ const EmailCard = ({
                 fill="#4A13E7"
               />
             </svg>
+
           </span>
           <h1 className="text-[#4B4B4B] text-2xl font-medium">
             {translate("offers.card_content.main_heading")}
@@ -65,6 +67,19 @@ const EmailCard = ({
         </div>
 
         <div className="flex items-center gap-5">
+          <BaseButton
+            buttonText={translate("offers.card_content.main_heading")}
+            onClick={() => {
+              router.push({
+                pathname: "/offers/details",
+                query: { offer: offerId },
+              });
+            }}
+            containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
+            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+          >
+           <OffersIcon pathClass="#4A13E7"/>
+          </BaseButton>
           <BaseButton
             buttonText={translate("offer_pdf_card.send_post")}
             onClick={handleSendByPost}

@@ -44,9 +44,9 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
         address: leadDetails?.addressID
           ? leadDetails?.addressID?.address?.map((item, index) => ({
               ...item,
-              label: item?.label ? item?.label : `Address ${++index}`,
+              label: item?.label ? item?.label : `Adress ${++index}`,
             }))
-          : [{ label: `Address ${addressCount}`,...leadDetails?.customerDetail?.address }],
+          : [{ label: `Adress ${addressCount}`,...leadDetails?.customerDetail?.address }],
       });
     }
   }, [leadDetails?.id]);

@@ -36,7 +36,7 @@ export const Aggrement = ({
   setComponentMounted
 }: AggrementProps) => {
 
-  const date = moment(new Date()).format("DD/MMMM/YY")
+  const date = moment(new Date()).format("DD/MM/YYYY")
   const { t: translation } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch()
