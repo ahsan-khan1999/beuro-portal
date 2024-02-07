@@ -193,7 +193,7 @@ const AddNewLeadsData = () => {
         <p className="mb-5 font-normal text-xl text-[#222B45]">
           {translate("leads.add_new_lead")}
         </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-fit gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
