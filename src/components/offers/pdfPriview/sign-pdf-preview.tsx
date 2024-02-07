@@ -136,12 +136,15 @@ const SignPdfPreview = () => {
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
                 gender: offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
+                mobile: offerDetails?.Offer?.leadID?.customerDetail?.mobileNumber,
+
 
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,
                 header: offerDetails?.Offer?.title,
                 workDates: offerDetails?.Offer?.date,
+                time:offerDetails?.Offer?.time
               },
               serviceItem: offerDetails?.Offer?.serviceDetail?.serviceDetail,
               serviceItemFooter: {

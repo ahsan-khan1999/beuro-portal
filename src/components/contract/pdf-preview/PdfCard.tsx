@@ -10,6 +10,7 @@ import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
+import { ContractsIcon } from "@/assets/svgs/components/sideBar/Contracts";
 
 const PdfCard = ({
   contractNo,
@@ -65,6 +66,19 @@ const PdfCard = ({
               </h1>
             </div>
             <div className="flex items-center gap-x-5">
+              <BaseButton
+                buttonText={translate("contracts.pdf_card_details.heading")}
+                onClick={() => {
+                  router.push({
+                    pathname: "/contract/details",
+                    query: { contract: contractDetails?.id },
+                  });
+                }}
+                containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
+                textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+              >
+                <ContractsIcon pathClass="#4A13E7" />
+              </BaseButton>
               <BaseButton
                 buttonText={translate(
                   "contracts.pdf_card_details.send_via_post"

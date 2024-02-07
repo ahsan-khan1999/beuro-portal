@@ -66,7 +66,7 @@ const PdfFile = ({
 
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, header, workDates } = data?.movingDetails || {};
+  const { address, header, workDates,time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
@@ -86,7 +86,7 @@ const PdfFile = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates }} />
+          <AddressDetails {...{ address, header, workDates,time }} />
 
           <ServiceTableHederRow />
           {serviceItem?.map((item, index, arr) => (

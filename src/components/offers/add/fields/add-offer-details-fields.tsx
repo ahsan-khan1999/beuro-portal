@@ -556,8 +556,24 @@ export const generateDateChildren = (
       },
     });
   }
+  dateformFields.push( {
+    containerClass: "mt-[20px]  ",
+    label: {
+      text: `${translate("common.time")}`,
+      htmlFor: 'time',
+      className: "",
+    },
+    field: {
+      type: Field.date,
+      className:
+        "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+      name: "time",
+      register,
+      dateType: "time",
+    },
+  });
   dateformFields.push({
-    containerClass: "mt-[50px]",
+    containerClass: "mt-[50px] ",
     field: {
       type: Field.button,
       id: "button",

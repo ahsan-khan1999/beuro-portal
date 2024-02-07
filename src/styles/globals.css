@@ -593,3 +593,37 @@ input[type="number"] {
 .html-content > blockquote > p {
   margin: 0;
 }
+
+/* For the first list item */
+.ck-rounded-corners .ck.ck-dropdown .ck-dropdown__panel .ck-list li:nth-child(1) button > span::before,
+.ck.ck-dropdown .ck-dropdown__panel .ck-list.ck-rounded-corners li:nth-child(1) button > span::before {
+    content: "8px " !important;
+}
+
+/* For the second list item */
+.ck-rounded-corners .ck.ck-dropdown .ck-dropdown__panel .ck-list li:nth-child(2) button > span::before,
+.ck.ck-dropdown .ck-dropdown__panel .ck-list.ck-rounded-corners li:nth-child(2) button > span::before {
+    content: "10px " !important;
+}
+
+/* For the third list item */
+.ck-rounded-corners .ck.ck-dropdown .ck-dropdown__panel .ck-list li:nth-child(3) button > span::before,
+.ck.ck-dropdown .ck-dropdown__panel .ck-list.ck-rounded-corners li:nth-child(3) button > span::before {
+    content: "16px " !important;
+}
+
+/* For the fourth list item */
+.ck-rounded-corners .ck.ck-dropdown .ck-dropdown__panel .ck-list li:nth-child(4) button > span::before,
+.ck.ck-dropdown .ck-dropdown__panel .ck-list.ck-rounded-corners li:nth-child(4) button > span::before {
+    content: "19px " !important;
+}
+
+/* For the fifth list item */
+.ck-rounded-corners .ck.ck-dropdown .ck-dropdown__panel .ck-list li:nth-child(5) button > span::before,
+.ck.ck-dropdown .ck-dropdown__panel .ck-list.ck-rounded-corners li:nth-child(5) button > span::before {
+    content: "24px " !important;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}

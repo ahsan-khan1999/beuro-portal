@@ -54,14 +54,14 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
+          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Adress ${++index}` }))
           : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
             addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
               country: "Switzerland",
               description: "",
-              label: `Address ${++index}`
+              label: `Adress ${++index}`
             })),
       });
     }

@@ -201,6 +201,8 @@ export const useReceiptPdf = () => {
               workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
+              time: invoiceDetails?.invoiceID?.contractID?.offerID?.time,
+
             },
             serviceItem:
               invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail

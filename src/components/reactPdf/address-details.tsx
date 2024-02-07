@@ -64,6 +64,7 @@ export const AddressDetails = ({
   address,
   header,
   workDates,
+  time
 }: Partial<MovingDetailsProps>) => {
   let MaxLength = 0;
   for (const item of (address && address) || []) {
@@ -71,7 +72,7 @@ export const AddressDetails = ({
     if (labelLength > MaxLength) MaxLength = labelLength;
   }
 
-  const labelWidth = (MaxLength < 15 && 15 * 5.2) || MaxLength * 6;
+  const labelWidth = (MaxLength < 15 && 15 * 6) || MaxLength * 6;
   const valueWidth = 595 - labelWidth;
   return (
     <View style={styles.container}>
@@ -165,7 +166,7 @@ export const AddressDetails = ({
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${Country[address.country as keyof typeof Country]}`}
+                  {`${address.streetNumber}, ${address.postalCode}, ${Country[address.country as keyof typeof Country] || ""}`}
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
@@ -196,7 +197,7 @@ export const AddressDetails = ({
               color: "#000",
             }}
           >
-            Arbeitstermine
+            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
           </Text>
         </GridItem>
 
@@ -212,6 +213,7 @@ export const AddressDetails = ({
                   : (workDates?.length - 1 != index && ", ") || "."
                 }`
             )}
+            {time && ` Um ` + time + " Uhr"}
           </Text>
         </GridItem>
         {/* </View> */}

@@ -16,7 +16,7 @@ export interface OffersTableRowTypes {
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
-  
+  time:string;
   mobileNumber: string;
   status: string;
   editImg?: string;

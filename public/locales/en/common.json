@@ -765,7 +765,9 @@
       "status": "Status",
       "images": "Images",
       "notes": "Notes",
-      "edit": "Edit"
+      "edit": "Edit",
+      "pdf": "Pdf",
+
     },
     "card_content": {
       "heading": "Contract Details",
@@ -1086,6 +1088,10 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "time":"Time",
+    "at":"At",
+    "clock":"o,cklock",
+
     "editor_placeholder":"Insert your text here",
     "content_name":"Title for offer",
     "content_text":"Text for offer",
@@ -1856,9 +1862,12 @@
     "created_by": "Created By",
     "email": "Email",
     "phone": "Phone",
+    "mobile": "Mobile Number",
+
     "address": "Address",
     "work_date": "Work Dates",
     "service": "Service/Product",
+    "description":"Description",
     "price": "Price",
     "unit": "Unit",
     "count": "Count",

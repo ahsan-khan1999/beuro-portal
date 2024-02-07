@@ -116,7 +116,7 @@ export const ServicesTotalAmount = ({
             <Text style={styles.text}>{Number(subTotal).toFixed(2)}</Text>
           </View>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Steuer: </Text>
+            <Text style={styles.text}>MwSt: </Text>
             {
               isTax &&
               <Text style={styles.text}>
