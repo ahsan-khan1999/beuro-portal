@@ -195,6 +195,7 @@ export const useContractPdf = () => {
               workDates: contractDetails?.offerID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
+              time:contractDetails?.offerID?.time
             },
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {

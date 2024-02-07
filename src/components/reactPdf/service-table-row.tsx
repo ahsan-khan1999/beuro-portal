@@ -16,7 +16,16 @@ const styles = StyleSheet.create({
   headerRow: {
     flexDirection: "row",
     width: 531,
-    columnGap: 1,
+    columnGap: 10,
+  },
+  title: {
+    color: "#000",
+    fontSize: 12,
+    fontWeight: "medium",
+    display: "flex",
+    flexDirection: "column",
+    width: 150,
+    rowGap: 4,
   },
   description: {
     color: "#000",
@@ -24,7 +33,7 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
     display: "flex",
     flexDirection: "column",
-    width: 230,
+    width: 150,
     rowGap: 4,
   },
   descriptionTextTitle: {
@@ -32,36 +41,38 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 230,
+    // width: 150,
   },
   descriptionText: {
     color: "#404040",
     fontSize: 10,
     fontWeight: 400,
     fontStyle: "normal",
-    width: 230,
+    // width: 150,
   },
   priceHeader: {
     flexDirection: "row",
     alignItems: "center",
-    width: 300,
+    width: 251,
+    justifyContent:"flex-end"
+    
   },
   headerText: {
     color: "#000",
     fontSize: 10,
     fontWeight: 400,
     fontStyle: "normal",
-    width: 75,
+    width: 50,
   },
   headerTotal: {
     color: "#000",
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 75,
+    width: 50,
   },
   // headerTextTotal: {
-  //   color: "#000",
+  //   color: "#000",60
   //   fontSize: 12,
   //   fontWeight: "bold",
   //   width: 100,
@@ -82,15 +93,19 @@ export const ServiceTableRow = ({
   return (
     <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
-        <View style={styles.description}>
+        <View style={styles.title}>
           <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
-          <Text style={styles.descriptionText}>{description}</Text>
         </View>
+        <View style={styles.description}>
+          <Text style={styles.descriptionText}>{description}</Text>
+
+        </View>
+
         <View style={styles.priceHeader}>
-          <Text style={styles.headerText}>{price}</Text>
-          <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{count}</Text>
-          <Text style={styles.headerTotal}>{discount}</Text>
+          <Text style={styles.headerText}>{unit}</Text>
+          <Text style={styles.headerText}>{price}</Text>
+          <Text style={styles.headerTotal}>{discount === 0 ? "-" : discount}</Text>
           <Text style={styles.headerTotal}>{totalPrice}</Text>
         </View>
       </View>
