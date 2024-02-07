@@ -189,8 +189,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                  : customerDetails && customerDetails?.phoneNumber,
+                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                    : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -211,8 +211,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
-                  : customerDetails && customerDetails?.mobileNumber,
+                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                    : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
@@ -479,6 +479,8 @@ export const AddDateFormField: GenerateOfferDateFormField = (
   OnClick,
   count,
   handleRemoveDateField,
+  loading,
+  control
 ) => {
   const formField: FormField[] = [
     {
@@ -493,6 +495,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
           count,
           OnClick,
           handleRemoveDateField,
+          control
         ),
       },
     },
@@ -505,6 +508,7 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
+  control?: Control<FieldValues>
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
@@ -556,7 +560,7 @@ export const generateDateChildren = (
       },
     });
   }
-  dateformFields.push( {
+  dateformFields.push({
     containerClass: "mt-[20px]  ",
     label: {
       text: `${translate("common.time")}`,
@@ -564,12 +568,39 @@ export const generateDateChildren = (
       className: "",
     },
     field: {
-      type: Field.date,
+      type: Field.select,
       className:
         "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
       name: "time",
-      register,
-      dateType: "time",
+      control,
+      options: [
+        { label: "12:00 AM", value: "12:00 AM" },
+        { label: "1:00 AM", value: "1:00 AM" },
+        { label: "2:00 AM", value: "2:00 AM" },
+        { label: "3:00 AM", value: "3:00 AM" },
+        { label: "4:00 AM", value: "4:00 AM" },
+        { label: "5:00 AM", value: "5:00 AM" },
+        { label: "6:00 AM", value: "6:00 AM" },
+        { label: "7:00 AM", value: "7:00 AM" },
+        { label: "8:00 AM", value: "8:00 AM" },
+        { label: "9:00 AM", value: "9:00 AM" },
+        { label: "10:00 AM", value: "10:00 AM" },
+        { label: "11:00 AM", value: "11:00 AM" },
+        { label: "12:00 PM", value: "12:00 PM" },
+        { label: "1:00 PM", value: "1:00 PM" },
+        { label: "2:00 PM", value: "2:00 PM" },
+        { label: "3:00 PM", value: "3:00 PM" },
+        { label: "4:00 PM", value: "4:00 PM" },
+        { label: "5:00 PM", value: "5:00 PM" },
+        { label: "6:00 PM", value: "6:00 PM" },
+        { label: "7:00 PM", value: "7:00 PM" },
+        { label: "8:00 PM", value: "8:00 PM" },
+        { label: "9:00 PM", value: "9:00 PM" },
+        { label: "10:00 PM", value: "10:00 PM" },
+        { label: "11:00 PM", value: "11:00 PM" }
+      ]
+
+
     },
   });
   dateformFields.push({

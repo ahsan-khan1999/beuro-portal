@@ -279,7 +279,16 @@ export const useServiceOfferEditDetail = ({
       // });
 
       reset({
-        serviceDetail: offerDetails?.serviceDetail?.serviceDetail,
+        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [{
+          serviceTitle: "",
+          price: "",
+          unit: "",
+          count: "",
+          description: "",
+          totalPrice: "",
+          serviceType: "Existing Service",
+          discount: 0,
+        }],
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
