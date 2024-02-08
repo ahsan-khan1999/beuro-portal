@@ -80,7 +80,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex items-center mx-2">
+            <span className="py-4 flex items-center mx-2" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
                   item: item,
@@ -101,7 +101,7 @@ const TableRows = ({
                 dropDownItemsContainerClassName="w-full"
               />
             </span>
-            <span className="py-4 flex items-center mx-1">
+            <span className="py-4 flex items-center mx-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
@@ -129,6 +129,7 @@ const TableRows = ({
             </span>
             <span
               className="py-4 flex justify-center items-center "
+              
               onClick={() => {
                 if (!invoiceDetails?.isInvoiceRecurring) {
                   handleInvoiceEdit(item);
