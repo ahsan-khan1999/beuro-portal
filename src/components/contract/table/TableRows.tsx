@@ -9,6 +9,8 @@ import {
 } from "@/utils/utility";
 import { formatDateString } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
+import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
+import { staticEnums } from "@/utils/static";
 
 const TableRows = ({
   dataToAdd,
@@ -24,13 +26,23 @@ const TableRows = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const colorPicker = {
+    [staticEnums.ContractSignedStatus.Deprecated]: "#FF0000",
+    [staticEnums.ContractSignedStatus.Active]: "#45C769",
+  };
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            onClick={() =>
+              router.push({
+                pathname: "/contract/pdf-preview",
+                query: { offerID: item?.id,isMail:true },
+              })
+            }
+            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.contractNumber}</span>
             <span className="py-4 truncate">
@@ -109,6 +121,17 @@ const TableRows = ({
                 />
               </svg>
             </span>
+            {
+              (item.signedContracts && item.signedContracts?.length > 0)  &&
+            <span
+              className="py-4 flex justify-center items-center cursor-pointer "
+              onClick={() =>item.signedContracts && window.open(item.signedContracts[0].link)}
+            >
+              <PdfIcon pathClass={colorPicker[item?.signedContracts?.[0]?.status]}/>
+            </span> ||   <span
+              className="py-4 flex justify-center items-center cursor-pointer "
+            >-</span>
+            }
             <span
               className="py-4 flex justify-center items-center cursor-pointer "
               onClick={(e) => openModal(item?.id, e)}

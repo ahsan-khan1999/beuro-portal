@@ -16,7 +16,8 @@ export const ContactAddress = ({
   address,
   email,
   phone,
-  gender
+  gender,
+  mobile
 }: Partial<ContactDetailsProps>) => (
   <View style={container}>
     <View style={leftColumn}>
@@ -32,7 +33,7 @@ export const ContactAddress = ({
             fontWeight: 400,
             fontStyle: "normal",
             color: "#000",
-            width: 50,
+            marginRight: 10
           }}
         >
           E-Mail:
@@ -49,12 +50,32 @@ export const ContactAddress = ({
               fontWeight: 400,
               fontStyle: "normal",
               color: "#000",
-              width: 50,
+              marginRight: 10
+
             }}
           >
             Telefon:
           </Text>
           <Text style={textBase}>{phone}</Text>
+        </View>
+      }
+      {
+        (mobile !== "+" && mobile) &&
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: "#000",
+              width: 80,
+              marginRight: 10
+
+            }}
+          >
+            Handynummer:
+          </Text>
+          <Text style={textBase}>{mobile}</Text>
         </View>
       }
     </View>

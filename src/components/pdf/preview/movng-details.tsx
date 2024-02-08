@@ -14,7 +14,7 @@ export const MovingDetails = ({
   isOffer,
   handleTitleUpdate,
   addressLabels,
-  handleEditDateModal
+  handleEditDateModal,time
 }: Partial<MovingDetailsProps>) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
@@ -103,7 +103,7 @@ export const MovingDetails = ({
             <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
-                  country: Country[item?.country as keyof typeof Country],
+                  country: Country[item?.country as keyof typeof Country] ,
                   postalCode: item.postalCode,
                   streetNumber: item.streetNumber,
                 })}
@@ -114,7 +114,10 @@ export const MovingDetails = ({
         ))}
         <div className="flex flex-row gap-6">
 
-          <span className="min-w-[205px]">Auftragsdatum:</span>
+          <span className="min-w-[205px]">
+          {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
+
+          </span>
           <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]" >
             <span className="text-base font-medium text-[#4B4B4B]">
               {workDates?.map(
@@ -132,6 +135,8 @@ export const MovingDetails = ({
                     "."
                   }`
               )}
+            {time && ` ${translate("common.at")} ` + time + ` ${translate("common.clock")} `}
+
             </span>
             <Image
               src={editIcon}

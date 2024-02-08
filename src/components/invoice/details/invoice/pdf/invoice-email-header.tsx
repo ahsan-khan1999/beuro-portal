@@ -11,6 +11,7 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { InvoicesIcon } from "@/assets/svgs/components/sideBar/Invoices";
 
 export const InvoiceEmailHeader = ({
   contentName,
@@ -68,6 +69,20 @@ export const InvoiceEmailHeader = ({
             </h1>
           </div>
           <div className="flex items-center gap-5">
+          <BaseButton
+              id="sendPostButton"
+              buttonText={translate(title)}
+              onClick={() => {
+                router.push({
+                  pathname: "/invoices/details",
+                  query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+                })
+              }}
+              containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "
+            >
+              <InvoicesIcon pathClass="#4A13E7" />
+            </BaseButton>
             <BaseButton
               id="sendPostButton"
               buttonText={translate("contracts.pdf_card_details.send_via_post")}

@@ -102,6 +102,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
+
 
 
       });
@@ -243,6 +245,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
+    loading,
+    control
   );
   const submit = AddOfferDetailsSubmitFormField(
     register,

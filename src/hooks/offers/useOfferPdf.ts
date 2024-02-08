@@ -136,6 +136,8 @@ export const useOfferPdf = () => {
               },
               email: offerDetails?.leadID?.customerDetail?.email,
               phone: offerDetails?.leadID?.customerDetail?.phoneNumber,
+              mobile: offerDetails?.leadID?.customerDetail?.mobileNumber,
+
               gender: offerDetails?.leadID?.customerDetail?.gender?.toString()
 
             },
@@ -145,6 +147,7 @@ export const useOfferPdf = () => {
               workDates: offerDetails?.date,
               handleTitleUpdate: () => { },
               handleDescriptionUpdate: () => { },
+              time:offerDetails?.time
             },
             serviceItem: offerDetails?.serviceDetail?.serviceDetail,
             serviceItemFooter: {

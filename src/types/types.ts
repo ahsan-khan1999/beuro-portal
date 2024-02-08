@@ -704,6 +704,7 @@ export interface ContactDetailsProps {
   email: string;
   phone: string;
   gender?: string;
+  mobile?:string
 }
 export interface MovingDetailsProps {
   header: string;
@@ -713,7 +714,8 @@ export interface MovingDetailsProps {
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
   addressLabels?: string[];
-  handleEditDateModal?: () => void
+  handleEditDateModal?: () => void;
+  time?:string
 }
 export interface ProductItemProps {
   title: string;

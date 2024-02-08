@@ -66,7 +66,7 @@ export const AggrementSignature = ({
   };
   
   useMemo(() => signature && onFileChange(), [signature]);
-  const date = moment(new Date()).format("DD/MMMM/YY");
+  const date = moment(new Date()).format("DD/MM/YYYY");
 
   return (
     <View style={styles.wrapper}>
