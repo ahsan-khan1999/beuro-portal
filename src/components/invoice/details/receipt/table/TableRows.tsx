@@ -30,7 +30,7 @@ const TableRows = ({
       pathname: "/invoices/receipt-pdf-preview",
       query: { invoiceID: id, isMail: true }
     })
-   
+
   };
   return (
     <div className="h-screen">
@@ -70,46 +70,48 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex items-center mx-2">
+            <span className="py-4 flex items-center mx-2"
+              onClick={(e) => e.stopPropagation()}
+            >
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
                   item: item,
                 }))}
                 selectedItem={item.paymentType}
-                onItemSelected={(status) =>{
+                onItemSelected={(status) => {
 
                   handlePaymentStatusUpdate(item.id, status, "reciept")
                 }
                 }
-                dropDownClassName={`${
-                  staticEnums["PaymentType"][item.paymentType] === 0
+                dropDownClassName={`${staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
               />
             </span>
-            <span className="py-4 flex items-center mx-2">
+            <span className="py-4 flex items-center mx-2"
+              onClick={(e) => e.stopPropagation()}
+            >
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item) => ({ item: item }))}
                 selectedItem={item.invoiceStatus}
-                onItemSelected={(status) =>{
-                  if(status !== "Paid"){
+                onItemSelected={(status) => {
+                  if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept")
                   }
                 }
                 }
-                dropDownClassName={`${
-                  staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
+                dropDownClassName={`${staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
                     ? "bg-[#45C769]"
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
-                    ? "bg-[#4A13E7]"
-                    : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                      ? "bg-[#4A13E7]"
+                      : "bg-red"
+                  }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
