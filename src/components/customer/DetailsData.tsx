@@ -14,7 +14,7 @@ const DetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <>
-      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-20 pb-5">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <div onClick={handlePreviousClick} className="cursor-pointer">
             <svg

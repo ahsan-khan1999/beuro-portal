@@ -26,19 +26,22 @@ const PdfCard = ({
 }: ContractEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const { contractDetails } = useAppSelector(state => state.contract)
+  const { contractDetails } = useAppSelector((state) => state.contract);
   return (
     <div className="mb-5">
       <PdfCardLayout>
         <div className=" rounded-md bg-white w-full h-fit">
-          <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-20">
+          <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
             <div className="flex items-center">
-              <span className="cursor-pointer" onClick={() => {
-                router.push({
-                  pathname: "/contract/details",
-                  query: { contract: contractDetails?.id },
-                });
-              }}>
+              {/* <span
+                className="cursor-pointer"
+                onClick={() => {
+                  router.push({
+                    pathname: "/contract/details",
+                    query: { contract: contractDetails?.id },
+                  });
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="41"
@@ -60,13 +63,21 @@ const PdfCard = ({
                     fill="#4A13E7"
                   />
                 </svg>
-              </span>
-              <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
-                {translate("contracts.pdf_card_details.heading")}
+              </span> */}
+              <h1
+                onClick={() => {
+                  router.push({
+                    pathname: "/contract/details",
+                    query: { contract: contractDetails?.id },
+                  });
+                }}
+                className="text-[#4B4B4B] text-2xl font-medium cursor-pointer"
+              >
+                {translate("offers.table_headings.edit")}
               </h1>
             </div>
             <div className="flex items-center gap-x-5">
-              <BaseButton
+              {/* <BaseButton
                 buttonText={translate("contracts.pdf_card_details.heading")}
                 onClick={() => {
                   router.push({
@@ -78,7 +89,7 @@ const PdfCard = ({
                 textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
               >
                 <ContractsIcon pathClass="#4A13E7" />
-              </BaseButton>
+              </BaseButton> */}
               <BaseButton
                 buttonText={translate(
                   "contracts.pdf_card_details.send_via_post"

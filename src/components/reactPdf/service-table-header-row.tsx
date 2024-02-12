@@ -22,25 +22,25 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 150,
+    width: 165,
   },
   headerDescription: {
     color: "white",
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 150,
+    width: 165,
   },
   priceHeader: {
     flexDirection: "row",
-    width: 231,
+    width: 201,
   },
   headerText: {
     color: "white",
     fontSize: 10,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 60,
+    width: 50,
   },
 });
 
@@ -55,7 +55,7 @@ export const ServiceTableHederRow = () => {
           <Text style={styles.headerText}>{"Anzahl"}</Text>
           <Text style={styles.headerText}>{"Einheit"}</Text>
           <Text style={styles.headerText}>{"Preis"}</Text>
-          <Text style={styles.headerText}>{"Rabatt"}</Text>
+          {/* <Text style={styles.headerText}>{"Rabatt"}</Text> */}
           <Text style={styles.headerText}>{"Gesamt"}</Text>
         </View>
       </View>

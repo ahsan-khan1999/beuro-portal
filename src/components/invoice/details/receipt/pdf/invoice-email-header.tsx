@@ -32,13 +32,11 @@ export const InvoiceEmailHeader = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
-  const color = getInvoiceStatusColor(
-    collectiveInvoiceDetails?.invoiceStatus
-  )
+  const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
+        <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
           <div className="flex items-center">
             <Image
               src={backIcon}
@@ -48,7 +46,7 @@ export const InvoiceEmailHeader = ({
                 router.push({
                   pathname: "/invoices/details",
                   query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-                })
+                });
               }}
             />
             <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
@@ -63,7 +61,7 @@ export const InvoiceEmailHeader = ({
                 router.push({
                   pathname: "/invoices/details",
                   query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-                })
+                });
               }}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "
@@ -134,7 +132,9 @@ export const InvoiceEmailHeader = ({
                 {translate("contracts.table_headings.status")}:
               </span>
 
-              <span className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}>
+              <span
+                className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
+              >
                 {collectiveInvoiceDetails?.invoiceStatus}
               </span>
             </div>

@@ -189,8 +189,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -211,8 +211,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
@@ -561,10 +561,10 @@ export const generateDateChildren = (
     });
   }
   dateformFields.push({
-    containerClass: "mt-[20px]  ",
+    containerClass: "mt-[20px]",
     label: {
       text: `${translate("common.time")}`,
-      htmlFor: 'time',
+      htmlFor: "time",
       className: "",
     },
     field: {
@@ -575,32 +575,31 @@ export const generateDateChildren = (
       control,
       options: [
         { label: "12:00 AM", value: "12:00 AM" },
-        { label: "1:00 AM", value: "1:00 AM" },
-        { label: "2:00 AM", value: "2:00 AM" },
-        { label: "3:00 AM", value: "3:00 AM" },
-        { label: "4:00 AM", value: "4:00 AM" },
-        { label: "5:00 AM", value: "5:00 AM" },
-        { label: "6:00 AM", value: "6:00 AM" },
-        { label: "7:00 AM", value: "7:00 AM" },
-        { label: "8:00 AM", value: "8:00 AM" },
-        { label: "9:00 AM", value: "9:00 AM" },
-        { label: "10:00 AM", value: "10:00 AM" },
-        { label: "11:00 AM", value: "11:00 AM" },
-        { label: "12:00 PM", value: "12:00 PM" },
-        { label: "1:00 PM", value: "1:00 PM" },
-        { label: "2:00 PM", value: "2:00 PM" },
-        { label: "3:00 PM", value: "3:00 PM" },
-        { label: "4:00 PM", value: "4:00 PM" },
-        { label: "5:00 PM", value: "5:00 PM" },
-        { label: "6:00 PM", value: "6:00 PM" },
-        { label: "7:00 PM", value: "7:00 PM" },
-        { label: "8:00 PM", value: "8:00 PM" },
-        { label: "9:00 PM", value: "9:00 PM" },
-        { label: "10:00 PM", value: "10:00 PM" },
-        { label: "11:00 PM", value: "11:00 PM" }
-      ]
-
-
+        { label: "12:15 AM", value: "12:15 AM" },
+        { label: "12:30 AM", value: "12:30 AM" },
+        { label: "12:45 AM", value: "12:45 AM" },
+        { label: "13:00 AM", value: "13:00 AM" },
+        { label: "13:15 AM", value: "13:15 AM" },
+        { label: "13:30 AM", value: "13:30 AM" },
+        { label: "13:45 AM", value: "13:45 AM" },
+        { label: "14:00 AM", value: "14:00 AM" },
+        { label: "14:15 AM", value: "14:15 AM" },
+        { label: "14:30 AM", value: "14:30 AM" },
+        { label: "14:45 AM", value: "14:45 AM" },
+        { label: "15:00 AM", value: "15:00 AM" },
+        { label: "15:15 AM", value: "15:15 AM" },
+        { label: "15:30 AM", value: "15:30 AM" },
+        { label: "15:45 AM", value: "15:45 AM" },
+        { label: "16:00 AM", value: "16:00 AM" },
+        { label: "16:15 AM", value: "16:15 AM" },
+        { label: "16:30 AM", value: "16:30 AM" },
+        { label: "16:45 AM", value: "16:45 AM" },
+        { label: "17:00 AM", value: "17:00 AM" },
+        { label: "17:15 AM", value: "17:15 AM" },
+        { label: "17:30 AM", value: "17:30 AM" },
+        { label: "17:45 AM", value: "17:45 AM" },
+        { label: "18:00 AM", value: "18:00 AM" },
+      ],
     },
   });
   dateformFields.push({

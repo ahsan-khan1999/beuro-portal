@@ -27,9 +27,9 @@ const EmailCard = ({
   const { t: translate } = useTranslation();
   return (
     <EmailCardLayout>
-      <div className="flex flex-col mlg:flex-row justify-between gap-y-3 border-b border-[#000] border-opacity-20 pb-5">
+      <div className="flex flex-col mlg:flex-row justify-between gap-y-3 border-b border-[#000] border-opacity-10 pb-5">
         <div className="flex items-center gap-x-6">
-          <span
+          {/* <span
             className="cursor-pointer"
             onClick={() => {
               router.push({
@@ -59,15 +59,22 @@ const EmailCard = ({
                 fill="#4A13E7"
               />
             </svg>
-
-          </span>
-          <h1 className="text-[#4B4B4B] text-2xl font-medium">
-            {translate("offers.card_content.main_heading")}
+          </span> */}
+          <h1
+            onClick={() => {
+              router.push({
+                pathname: "/offers/details",
+                query: { offer: offerId },
+              });
+            }}
+            className="text-[#4B4B4B] text-2xl font-medium cursor-pointer"
+          >
+            {translate("offers.table_headings.edit")}
           </h1>
         </div>
 
         <div className="flex items-center gap-5">
-          <BaseButton
+          {/* <BaseButton
             buttonText={translate("offers.card_content.main_heading")}
             onClick={() => {
               router.push({
@@ -78,8 +85,8 @@ const EmailCard = ({
             containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
           >
-           <OffersIcon pathClass="#4A13E7"/>
-          </BaseButton>
+            <OffersIcon pathClass="#4A13E7" />
+          </BaseButton> */}
           <BaseButton
             buttonText={translate("offer_pdf_card.send_post")}
             onClick={handleSendByPost}

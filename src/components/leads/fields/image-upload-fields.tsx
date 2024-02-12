@@ -211,15 +211,36 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (
       },
     },
     {
-      containerClass: "flex justify-end mb-0 mt-5",
       field: {
-        type: Field.button,
-        id: "button",
-        text: `${translate("common.save_button")}`,
-        inputType: "submit",
-        className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
-        loading,
+        type: Field.div,
+        id: "div-field",
+        className: "flex items-center space-x-4 mt-[30px]",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: `${translate("common.cancel_button")}`,
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[202px] w-fit h-[50px] text-dark hover:bg-none",
+              onClick: onClick,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: `${translate("pdf.submit")}`,
+              inputType: "submit",
+              className:
+                "rounded-lg px-4 min-w-[202px] w-fit h-[50px] text-white hover:bg-none",
+              loading,
+            },
+          },
+        ],
       },
     },
   ];

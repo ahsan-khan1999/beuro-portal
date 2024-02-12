@@ -1642,4 +1642,4 @@ export const HeaderLabel = {
 export const GenderLabel = {
   Mr: "Herr",
   Mrs: "Frau",
-}
+};

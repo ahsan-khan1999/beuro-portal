@@ -5,16 +5,29 @@ import React from "react";
 import { useRouter } from "next/router";
 import { EditComponentsType } from "./EditOffersDetailsData";
 
-const AddressEditDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
+const AddressEditDetails = ({
+  handleNext,
+}: {
+  handleNext: (currentComponent: EditComponentsType) => void;
+}) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error,translate,offerDetails } =
-    useEditOfferAddressDetails({ handleNext });
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    offerDetails,
+  } = useEditOfferAddressDetails({ handleNext });
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">{translate("offers.address_details.main_heading")+" "} 
-         ({offerDetails?.id && offerDetails?.offerNumber})
+      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
+        <h2 className="text-[#393939] text-lg font-medium">
+          {translate("offers.address_details.main_heading") + " "}(
+          {offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={() => router.back()}
@@ -26,13 +39,13 @@ const AddressEditDetails = ({ handleNext }: { handleNext: (currentComponent: Edi
 
       <hr className="opacity-20 mb-5" />
 
-        <Form
-          formFields={fields || []}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
+      <Form
+        formFields={fields || []}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
     </FormCard>
   );
 };

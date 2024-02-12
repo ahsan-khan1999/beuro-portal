@@ -412,6 +412,11 @@ export function formatDateTimeToDate(date: string) {
   return moment(date).format("DD-MM-YYYY");
 }
 
+export function pdfDateFormat(date: string) {
+  if (!date) return null;
+  return moment(date).locale("de").format("DD. MMMM YYYY");
+}
+
 export function formatDateTimeToDateMango(date: string) {
   if (!date) return null;
   return moment(date).format("YYYY-MM-DD");
@@ -562,7 +567,7 @@ export const transformAttachments = (attachmemts: string[]) => {
 export function getFileNameFromUrl(url: string) {
   const urlParts = url.split("/");
   const fileName = urlParts[urlParts.length - 1];
-  return fileName?.slice(0,28);
+  return fileName?.slice(0, 28);
 }
 
 export function getEmailColor(status: string) {
@@ -805,21 +810,21 @@ export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
   return new Blob([pdfBytes], { type: "application/pdf" });
 };
 
-
 export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
   const classToStyleMap: { [className: string]: string } = {
-    'text-tiny': 'font-size: 8px;',
-    'text-small': 'font-size: 10px',
-    'text-big': 'font-size: 19.6px',
-    'text-huge': 'font-size: 24px;',
-    "ck-link_selected": 'background-color: rgba(31,176,255,.1)',
-    "ck-list-bogus-paragraph": 'display: block;',
-
+    "text-tiny": "font-size: 8px;",
+    "text-small": "font-size: 10px",
+    "text-big": "font-size: 19.6px",
+    "text-huge": "font-size: 24px;",
+    "ck-link_selected": "background-color: rgba(31,176,255,.1)",
+    "ck-list-bogus-paragraph": "display: block;",
   };
 
   return htmlContent.replace(/class="([^"]*)"/g, (match, classNames) => {
     const classes: string[] = classNames.split(/\s+/);
-    const styleRules = classes.map((className: string) => classToStyleMap[className] || '').join(' ');
-    return styleRules ? `style="${styleRules}"` : '';
+    const styleRules = classes
+      .map((className: string) => classToStyleMap[className] || "")
+      .join(" ");
+    return styleRules ? `style="${styleRules}"` : "";
   });
-}
+};

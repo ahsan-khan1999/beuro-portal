@@ -28,20 +28,25 @@ export const InvoiceEmailHeader = ({
 }: InvoiceEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const { collectiveInvoiceDetails, invoiceDetails } = useAppSelector((state) => state.invoice);
+  const { collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
   const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
   return (
     <PdfCardLayout>
-      <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
+      <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
         <div className="flex justify-between flex-col xlg:flex-row w-full gap-y-4">
           <div className="flex items-center">
-            <span className="cursor-pointer" onClick={() => {
-              // router.back()
-              router.push({
-                pathname: "/invoices/details",
-                query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-              })
-            }}>
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                // router.back()
+                router.push({
+                  pathname: "/invoices/details",
+                  query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+                });
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="41"
@@ -69,14 +74,14 @@ export const InvoiceEmailHeader = ({
             </h1>
           </div>
           <div className="flex items-center gap-5">
-          <BaseButton
+            <BaseButton
               id="sendPostButton"
               buttonText={translate(title)}
               onClick={() => {
                 router.push({
                   pathname: "/invoices/details",
                   query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-                })
+                });
               }}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "

@@ -85,8 +85,9 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
-              }`}
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
+              isSendEmail && "hidden"
+            }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -99,7 +100,7 @@ const OfferDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: `/offers/pdf-preview`,
-                  query: { offerID: offerDetails?.id,isMail:true },
+                  query: { offerID: offerDetails?.id, isMail: true },
                 })
               }
             />
@@ -175,13 +176,14 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${item.endDate
-                      ? ` ${translate("contracts.card_content.to")} ` +
-                      formatDateTimeToDate(item.endDate) +
-                      ((offerDetails?.date?.length - 1 != index && ", ") ||
-                        ".")
-                      : (offerDetails?.date?.length - 1 != index && ", ") ||
-                      "."
+                    `${formatDateTimeToDate(item.startDate)}${
+                      item.endDate
+                        ? ` ${translate("contracts.card_content.to")} ` +
+                          formatDateTimeToDate(item.endDate) +
+                          ((offerDetails?.date?.length - 1 != index && ", ") ||
+                            ".")
+                        : (offerDetails?.date?.length - 1 != index && ", ") ||
+                          "."
                     }`
                 )}
               </span>
@@ -236,7 +238,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base" >
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
             <span>
@@ -257,32 +259,30 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                  <span
-                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                    style={{
-                      borderColor: `${getOfferStatusColor(
-                        offerDetails?.offerStatus
-                      )}`,
-                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                    }}
-                  >
-                    {offerDetails?.offerStatus}
-                  </span>
-                )}
+                <span
+                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getOfferStatusColor(
+                      offerDetails?.offerStatus
+                    )}`,
+                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                  }}
+                >
+                  {offerDetails?.offerStatus}
+                </span>
+              )}
             </span>
           </div>
-          {
-            offerDetails?.offerStatus === "Rejected" &&
-
+          {offerDetails?.offerStatus === "Rejected" && (
             <div className="flex items-center gap-[11px] ">
-              <span className="text-[#4D4D4D] font-normal text-base" >
+              <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.reason")}:
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.reason || "-"}
               </span>
             </div>
-          }
+          )}
           <div className="flex justify-between items-center">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
