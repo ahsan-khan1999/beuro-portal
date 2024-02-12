@@ -41,7 +41,8 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const fields = ImageUploadFormField(
     loading,
     control as Control<any>,
-    handleImageSlider
+    handleImageSlider,
+    setValue
   );
   const handleOnClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }))
@@ -52,7 +53,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
   }, [leadDetails?.id, images?.length]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)?.filter((value) => value);
+    const filteredList = Object.values(data)?.filter((value) => value)?.reverse();
     const apiData = {
       images: filteredList,
       id: leadDetails?.id,

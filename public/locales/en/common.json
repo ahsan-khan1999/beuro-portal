@@ -670,7 +670,9 @@
       "payment_status": "Payment Status",
       "email_status": "Email Status",
       "invoice_email_preview": "Invoice Email Preview",
-      "receipt_email_preview": "Receipt Email Preview"
+      "receipt_email_preview": "Receipt Email Preview",
+      "edit_invoice": "Bearbeiten Quittung"
+
     },
     "table_functions": {
       "open": "Open",
@@ -1188,7 +1190,7 @@
       "heading": "Images",
       "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
-      "image_slider_heading": "Image Name",
+      "image_slider_heading": "Image",
       "drop_attach": "Drop or attach your file here"
     },
     "delete_modal": {
@@ -1981,5 +1983,10 @@
   "gender": {
     "Mr": "Mr",
     "Mrs": "Mrs"
+  },
+  "lead_status":{
+    "Open":"Open",
+    "Close":"Close",
+    "Expire":"Expired"
   }
 }

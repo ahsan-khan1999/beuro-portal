@@ -47,14 +47,15 @@ export const useEditOfferAddressDetails = ({ handleNext }: { handleNext: (curren
         address: offerDetails?.addressID
           ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Adresse ${++index}` }))
           : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
-            addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "Switzerland",
-              description: "",
-              label: `Adresse ${++index}`
-            })),
-      })
+            offerDetails?.leadID?.customerDetail?.address ? [{ ...offerDetails?.leadID?.customerDetail?.address, label: `Adresse ${1}` }] :
+              addressType?.map((item, index) => ({
+                streetNumber: "",
+                postalCode: "",
+                country: "Switzerland",
+                description: "",
+                label: `Adresse ${++index}`
+              })),
+      });
     }
   }, [offerDetails.id])
   const { fields: addressFields, append, remove } = useFieldArray({

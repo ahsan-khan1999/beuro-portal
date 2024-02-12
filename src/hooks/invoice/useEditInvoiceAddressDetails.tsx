@@ -1,30 +1,21 @@
 import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
+import { OfferAddressDetailsFormField } from "@/components/offers/edit/fields/Offer-address-edit-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
-import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useMemo, useState, useEffect } from "react";
-import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
+import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
+import { useEffect, useMemo, useState } from "react";
+import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
-import { addressObject } from "../../components/offers/add/fields/add-address-details-fields";
 
-export const useOfferAddAddressDetails = (onHandleNext: Function) => {
+export const useEditInvoiceAddressDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const { t: translate } = useTranslation();
-
-
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
-
   const [addressType, setAddressType] = useState(
     offerDetails?.addressID ?
       Array.from(offerDetails?.addressID?.address, () => (false)) :
@@ -32,7 +23,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   )
   const handleBack = () => {
-    onHandleNext(ComponentsType.customerAdded)
+    handleNext(EditComponentsType.offerEdit)
   }
 
   const schema = generateOfferAddressEditDetailsValidation(translate);
@@ -44,13 +35,13 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     setError,
     reset,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
+
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
@@ -66,11 +57,11 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
               })),
       });
     }
-  }, [offerDetails?.id])
-
+  }, [offerDetails.id])
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",
+
   });
 
   const handleFieldTypeChange = (index: number) => {
@@ -78,14 +69,13 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     address[index] = !address[index]
     setAddressType(address)
   }
+  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? addressType?.length : addressFields?.length, append, remove, addressFields, handleFieldTypeChange, addressType, setValue);
 
-  const fields = AddOffAddressDetailsFormField(register, loading, control, handleBack, addressFields?.length === 0 ? addressType?.length : addressFields?.length, append, remove, addressFields, handleFieldTypeChange, addressType, setValue, getValues);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 2, id: offerDetails?.id, stage: ComponentsType.serviceAdded }
+    const apiData = { ...data, step: 2, id: offerDetails?.id, stage: EditComponentsType.serviceEdit }
     const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
-    if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
-
+    if (response?.payload) handleNext(EditComponentsType.serviceEdit);
 
   };
   return {

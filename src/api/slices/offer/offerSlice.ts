@@ -175,7 +175,7 @@ export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
         try {
 
             const response = await apiServices.sendOfferEmail(data);
-            return true;
+            return response?.data?.Offer;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -406,6 +406,7 @@ const OfferSlice = createSlice({
             state.loading = true
         });
         builder.addCase(sendOfferEmail.fulfilled, (state, action) => {
+            if (action?.payload) state.offerDetails = action?.payload
             state.loading = false;
         });
         builder.addCase(sendOfferEmail.rejected, (state) => {

@@ -52,7 +52,7 @@ export const useUploadImageOffer = (
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (type === "Offer") {
-      const filteredList = Object.values(data)?.filter((value) => value);
+      const filteredList = Object.values(data)?.filter((value) => value)?.reverse();
       const apiData = {
         images: filteredList,
         id: offerDetails?.id,
@@ -64,7 +64,7 @@ export const useUploadImageOffer = (
       if (response?.payload && response?.payload?.length > 0) handleImageSlider();
       else handleOnClose()
     } else if (type === "Contract") {
-      const filteredList = Object.values(data)?.filter((value) => value);
+      const filteredList = Object.values(data)?.filter((value) => value)?.reverse();
       const apiData = {
         images: filteredList,
         id: contractDetails?.id,

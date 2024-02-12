@@ -7,6 +7,8 @@ import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
+
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -17,6 +19,7 @@ const InvoiceDetailsData = ({
   handleStopInvoiceCreation,
   handleSendEmail,
   currency,
+  handleInvoiceEdit
 }: InvoiceCardContentProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -55,8 +58,18 @@ const InvoiceDetailsData = ({
             {translate("invoice.card_content.heading")}
           </p>
         </div>
+
         {(!invoiceDetails?.isInvoiceRecurring2 && (
           <div className="flex space-x-2">
+            <Button
+              className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+              inputType="button"
+              text={translate("invoice.receipt_card.edit_invoice")}
+              id="editInvoice"
+              icon={plusIcon }
+
+              onClick={handleInvoiceEdit}
+            />
             <Button
               className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
               inputType="button"
@@ -75,28 +88,37 @@ const InvoiceDetailsData = ({
             />
           </div>
         )) || (
-          <div className="flex space-x-2">
-            <Button
-              className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
-              inputType="button"
-              text="Edit Frequency"
-              onClick={handleEditInvoiceFrequencyCreation}
-              id="freq"
-            />
-            {!(
-              !invoiceDetails?.isInvoiceRecurring &&
-              invoiceDetails?.isInvoiceRecurring2
-            ) && (
+            <div className="flex space-x-2">
               <Button
-                className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
                 inputType="button"
-                text="Stop"
-                onClick={handleStopInvoiceCreation}
+                text={translate("invoice.receipt_card.edit_invoice")}
+                id="editInvoice"
+                icon={plusIcon }
+
+                onClick={handleInvoiceEdit}
+              />
+              <Button
+                className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                inputType="button"
+                text="Edit Frequency"
+                onClick={handleEditInvoiceFrequencyCreation}
                 id="freq"
               />
-            )}
-          </div>
-        )}
+              {!(
+                !invoiceDetails?.isInvoiceRecurring &&
+                invoiceDetails?.isInvoiceRecurring2
+              ) && (
+                  <Button
+                    className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                    inputType="button"
+                    text="Stop"
+                    onClick={handleStopInvoiceCreation}
+                    id="freq"
+                  />
+                )}
+            </div>
+          )}
       </div>
 
       <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-20 pt-4">

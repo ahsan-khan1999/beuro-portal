@@ -32,6 +32,7 @@ const PdfPriview = () => {
     onClose,
     onSuccess,
     systemSetting,
+    offerDetails
   } = useOfferPdf();
   
   const { t: translate } = useTranslation();
@@ -63,7 +64,7 @@ const PdfPriview = () => {
       ) : (
         <div className="">
           <EmailCard
-            emailStatus={offerData?.emailHeader?.emailStatus}
+            emailStatus={offerDetails?.emailStatus}
             offerNo={offerData?.emailHeader?.offerNo}
             onEmailSend={handleEmailSend}
             loading={loading}

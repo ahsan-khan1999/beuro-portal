@@ -474,5 +474,6 @@ export const useReceiptPdf = () => {
     onClose,
     onSuccess,
     dispatch,
+    collectiveInvoiceDetails
   };
 };

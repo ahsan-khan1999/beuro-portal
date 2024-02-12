@@ -663,7 +663,9 @@
       "payment_status": "Zahlungsstatus",
       "email_status": "E-Mail-Status",
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
-      "receipt_email_preview": "E-Mail-Vorschau der Quittung"
+      "receipt_email_preview": "E-Mail-Vorschau der Quittung",
+      "edit_invoice": "Bearbeiten Quittung"
+
     },
     "table_functions": {
       "open": "Offen",
@@ -759,7 +761,6 @@
       "notes": "Notizen",
       "edit": "Bearbeiten",
       "pdf": "Pdf"
-
     },
     "card_content": {
       "heading": "Vertragsdetails",
@@ -830,7 +831,7 @@
       "next_button": "Weiter",
       "title": "Titel",
       "additional_details": "Zustäzliche Details",
-      "send":"Senden"
+      "send": "Senden"
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -1079,12 +1080,12 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
-    "time":"Zeit",
-    "at":"Um",
-    "clock":"Uhr",
-    "editor_placeholder":"fügen Sie ihren Text hier ein",
-    "content_name":"Titel für Offerte",
-    "content_text":"Text für Offerte",
+    "time": "Zeit",
+    "at": "Um",
+    "clock": "Uhr",
+    "editor_placeholder": "fügen Sie ihren Text hier ein",
+    "content_name": "Titel für Offerte",
+    "content_text": "Text für Offerte",
     "general_inquery": "Allgemeine Anfrage",
     "account_assist": "Account Unterstützung ",
     "payment_issues": "Rechnungs oder Bezahlungs Schwierigkeiten",
@@ -1126,12 +1127,12 @@
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",
     "via_insta": "Über Instagram",
-    "lead_source":{
-      "Umzugsfuchs":"Umzugsfuchs",
-      "Webvermarktung":"Webvermarktung",
-      "Offerten-365":"Offerten-365",
-      "Umzugshero":"Umzugshero",
-      "Via Call":"Telefon"
+    "lead_source": {
+      "Umzugsfuchs": "Umzugsfuchs",
+      "Webvermarktung": "Webvermarktung",
+      "Offerten-365": "Offerten-365",
+      "Umzugshero": "Umzugshero",
+      "Via Call": "Telefon"
     },
     "less_then": "Weniger als",
     "whatsapp": "WhatsApp",
@@ -1178,7 +1179,7 @@
       "heading": "Bilder",
       "title": "15 Bilder können hochgeladen werden",
       "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
-      "image_slider_heading": "Bildname",
+      "image_slider_heading": "Bilder",
       "drop_attach": "Datei hier ablegen oder anhängen"
     },
     "delete_modal": {
@@ -1857,7 +1858,7 @@
     "mobile": "Handynummer",
     "address": "Adresse",
     "work_date": "Arbeitstermine",
-    "description":"Beschreibung",
+    "description": "Beschreibung",
 
     "service": "Dienstleistung/Produkt",
     "price": "Preis",
@@ -1973,5 +1974,10 @@
   "gender": {
     "Mr": "Herr",
     "Mrs": "Frau"
+  },
+  "lead_status": {
+    "Open": "Offen",
+    "Close": "Geschlossen",
+    "Expired": "Abgelaufen"
   }
 }

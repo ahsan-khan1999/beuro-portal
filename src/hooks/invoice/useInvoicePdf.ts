@@ -451,5 +451,6 @@ export const useInvoicePdf = () => {
     handleDonwload,
     onClose,
     onSuccess,
+    collectiveInvoiceDetails
   };
 };

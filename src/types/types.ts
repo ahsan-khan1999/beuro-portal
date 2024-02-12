@@ -205,7 +205,8 @@ export type GenerateFormAddressField = (
 export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  setValue?:UseFormSetValue<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield

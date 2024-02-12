@@ -85,6 +85,7 @@ export interface InvoiceCardContentProps {
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
   currency?: string;
+  handleInvoiceEdit?:() => void
 }
 
 export interface InvoiceDetailsTableProps {
