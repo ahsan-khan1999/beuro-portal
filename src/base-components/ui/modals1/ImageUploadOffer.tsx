@@ -32,7 +32,7 @@ const ImagesUploadOffer = ({
             {translate("common.images_modal.heading")}
           </p>
 
-          <div className="flex flex-col gap-y-2 my-5 border-t border-[#000] border-opacity-20 pt-5">
+          <div className="flex flex-col gap-y-2 my-5 border-t border-[#000] border-opacity-10 pt-5">
             <h2 className="text-base font-medium text-[#393939]">
               {translate("common.images_modal.title")}
             </h2>

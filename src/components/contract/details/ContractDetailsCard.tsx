@@ -40,7 +40,7 @@ const ContractDetailsCard = ({
   };
   return (
     <div className="min-h-[218px]">
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
           <span
             className="cursor-pointer"
@@ -89,7 +89,7 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id ,isMail:true },
+                  query: { offerID: contractDetails?.id, isMail: true },
                 })
               }
             />

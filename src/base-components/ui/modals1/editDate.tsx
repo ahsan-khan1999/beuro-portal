@@ -7,7 +7,15 @@ import { Form } from "@/base-components/form/form";
 import { useEditDate } from "@/hooks/contract/useEditDate";
 import { EmailHeaderProps, PdfProps } from "@/types";
 
-export const EditDate = ({ onClose, setOfferData, pdfData }: { onClose: () => void, setOfferData?: SetStateAction<any>, pdfData?: PdfProps<EmailHeaderProps> }) => {
+export const EditDate = ({
+  onClose,
+  setOfferData,
+  pdfData,
+}: {
+  onClose: () => void;
+  setOfferData?: SetStateAction<any>;
+  pdfData?: PdfProps<EmailHeaderProps>;
+}) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditDate(setOfferData, pdfData);
 
@@ -26,11 +34,10 @@ export const EditDate = ({ onClose, setOfferData, pdfData }: { onClose: () => vo
           />
 
           <div className="flex flex-col">
-            <h2 className="font-medium text-[18px] text-[#393939] mb-[10px]">
+            <h2 className="font-medium text-[18px] text-[#393939] mb-[10px] border-b border-b-[#000] border-opacity-10 pb-4">
               {translate("common.modals.date")}
             </h2>
 
-            <hr className="opacity-10" />
             <Form
               formFields={fields}
               handleSubmit={handleSubmit}

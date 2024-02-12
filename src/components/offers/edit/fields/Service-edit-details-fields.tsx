@@ -74,7 +74,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
+      containerClass: "mt-5 border-b border-black border-opacity-10 pb-[35px]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -220,7 +220,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
+      containerClass: "mt-5 border-b border-black border-opacity-10 pb-[35px]",
       field: {
         type: Field.div,
         id: "div-field",

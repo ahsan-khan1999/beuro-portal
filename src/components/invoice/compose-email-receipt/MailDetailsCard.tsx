@@ -15,7 +15,7 @@ const MailDetailsCard = () => {
 
   return (
     <>
-      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-20 gap-y-3 pb-5">
+      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center border-b border-[#000] border-opacity-10 gap-y-3 pb-5">
         <div className="flex items-center gap-x-6">
           <span className="cursor-pointer" onClick={() => router.back()}>
             <svg

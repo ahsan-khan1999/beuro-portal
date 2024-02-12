@@ -767,7 +767,6 @@
       "notes": "Notes",
       "edit": "Edit",
       "pdf": "Pdf"
-
     },
     "card_content": {
       "heading": "Contract Details",
@@ -838,7 +837,7 @@
       "next_button": "Next",
       "title": "Title",
       "additional_details": "Additional Details",
-      "send":"Send"
+      "send": "Send"
     },
     "pdf_card_details": {
       "heading": "Contract Details",
@@ -1088,13 +1087,14 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
-    "time":"Time",
-    "at":"At",
-    "clock":"o,cklock",
-
-    "editor_placeholder":"Insert your text here",
-    "content_name":"Title for offer",
-    "content_text":"Text for offer",
+    "add": "Add",
+    "upload_link": "Upload your link here",
+    "time": "Time",
+    "at": "At",
+    "clock": "o,cklock",
+    "editor_placeholder": "Insert your text here",
+    "content_name": "Title for offer",
+    "content_text": "Text for offer",
     "general_inquery": "General Inquiry",
     "account_assist": "Account Assistance",
     "payment_issues": "Billing or Payment Issues",
@@ -1131,7 +1131,6 @@
     "help": "help Center",
     "via_post": "Via Post",
     "via_internet": "Via Internet",
-
     "via_phone": "Via Phone Call",
     "via_email": "Via Email",
     "via_whatsapp": "Via What'sapp",
@@ -1147,12 +1146,12 @@
     "days": "days",
     "day": "day",
     "flexible": "Not Flexible",
-    "lead_source":{
-      "Umzugsfuchs":"Umzugsfuchs",
-      "Webvermarktung":"Webvermarktung",
-      "Offerten-365":"Offerten-365",
-      "Umzugshero":"Umzugshero",
-      "Via Call":"Via Call"
+    "lead_source": {
+      "Umzugsfuchs": "Umzugsfuchs",
+      "Webvermarktung": "Webvermarktung",
+      "Offerten-365": "Offerten-365",
+      "Umzugshero": "Umzugshero",
+      "Via Call": "Via Call"
     },
     "true": "True",
     "false": "False",
@@ -1185,7 +1184,9 @@
       "button": "Save"
     },
     "images_modal": {
-      "heading": "Images",
+      "heading": "Images & Links",
+      "img_tab": "Images",
+      "link_tab": "Links",
       "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
       "image_slider_heading": "Image Name",
@@ -1863,11 +1864,10 @@
     "email": "Email",
     "phone": "Phone",
     "mobile": "Mobile Number",
-
     "address": "Address",
     "work_date": "Work Dates",
     "service": "Service/Product",
-    "description":"Description",
+    "description": "Description",
     "price": "Price",
     "unit": "Unit",
     "count": "Count",

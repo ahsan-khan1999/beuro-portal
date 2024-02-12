@@ -99,7 +99,7 @@ const InvoiceDetailsData = ({
         )}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-20 pt-4">
+      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">

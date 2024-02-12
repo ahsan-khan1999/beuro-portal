@@ -94,7 +94,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mt-[30px] border-t border-black border-opacity-20 pt-5",
+      containerClass: "mt-[30px] border-t border-black border-opacity-10 pt-5",
       label: {
         text: `${translate("offers.address_details.sub_heading")}`,
         htmlFor: "address-1-details",

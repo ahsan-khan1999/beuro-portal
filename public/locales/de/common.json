@@ -9,7 +9,7 @@
     "full_name_placeholder": "Geben Sie Ihren vollständigen Namen ein",
     "email_placeholder": "Geben Sie Ihre E-Mail ein",
     "password_placeholder": "Geben Sie Ihr Passwort ein",
-    "confirm_password_placeholder": "Bestätigen Sie Ihr Passwort",
+    "confirm_password_placeholder": "Bestätigen Ihr Passwort",
     "agreed": "Durch die Erstellung eines Kontos stimmen Sie unseren",
     "terms_policy": "Datenschutzbestimmungen",
     "button": "Registrieren",
@@ -123,7 +123,7 @@
     "sendagain": "Erneut senden"
   },
   "email_verification": {
-    "title": "Bestätigen Sie Ihre E-Mail-Adresse",
+    "title": "Bestätigen Ihre E-Mail-Adresse",
     "first_sub_heading": "Eine E-Mail wurde gesendet an",
     "end_sub_heading": "Klicken Sie auf den Link in der E-Mail, um Ihre E-Mail-Adresse zu bestätigen",
     "description": "Vielen Dank für die Registrierung! Bitte geben Sie den OTP ein, den wir an Ihre E-Mail-Adresse gesendet haben, um die Registrierung abzuschließen. Überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie den Unterstützung, wenn Sie die E-Mail nicht erhalten haben.",
@@ -138,7 +138,7 @@
     "label": "Neues Passwort",
     "label2": "Passwort bestätigen",
     "placeholder1": "Geben Sie Ihr Passwort ein",
-    "placeholder2": "Bestätigen Sie Ihr Passwort",
+    "placeholder2": "Bestätigen Ihr Passwort",
     "button": "Absenden",
     "dont_have_an_account": "Sie haben noch kein Konto?",
     "create": "Konto erstellen",
@@ -180,7 +180,7 @@
     "server_error": "Interner Serverfehler : 500",
     "oauth_account_in_use": "Bereits verwendetes Konto",
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
-    "mail_sent_maybe": "E-Mail gesendet",
+    "mail_sent_maybe": "E-Mail Gesendet",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
 
@@ -310,7 +310,7 @@
       "main_heading": "Sind Sie sicher",
       "sub_heading": "Sie möchten diese Seite verlassen, ohne die Änderungen zu speichern.",
       "cancel_button": "Abbrechen",
-      "confirm": "Bestätigen Sie"
+      "confirm": "Bestätigen"
     }
   },
   "request_modal": {
@@ -359,10 +359,10 @@
       "attachments": "Anhänge"
     },
     "email_confirmation_modal": {
-      "main_heading": "Bitte bestätigen Sie Ihre Email ID Nummer.",
+      "main_heading": "Bitte Bestätigen Ihre Email ID Nummer.",
       "sub_heading": "Geben Sie Ihre E-Mail-ID-Nummer ein.",
       "cancel_button": "Abbrechen",
-      "confirm_button": "Bestätigen Sie"
+      "confirm_button": "Bestätigen"
     },
     "email_delete_modal": {
       "heading": "Sind Sie sicher, dass Sie diese E-Mail löschen möchten?",
@@ -759,7 +759,6 @@
       "notes": "Notizen",
       "edit": "Bearbeiten",
       "pdf": "Pdf"
-
     },
     "card_content": {
       "heading": "Vertragsdetails",
@@ -830,7 +829,7 @@
       "next_button": "Weiter",
       "title": "Titel",
       "additional_details": "Zustäzliche Details",
-      "send":"Senden"
+      "send": "Senden"
     },
     "pdf_card_details": {
       "heading": "Vertragsdetails",
@@ -1038,40 +1037,40 @@
       "email_config_des": "Vielen Dank für die Erstellung der E-Mail-Konfiguration.",
       "update_setting": "Einstellungen erfolgreich aktualisiert",
       "setting_update_des": "Vielen Dank! Wir freuen uns, Sie als Kunden zu haben.",
-      "employee_confirm": "Bitte bestätigen Sie die Mitarbeiter-ID",
+      "employee_confirm": "Bitte Bestätigen die Mitarbeiter-ID",
       "employee_ID": "Mitarbeiter-ID",
       "delete_employee": "Sind Sie sicher, dass Sie diesen Mitarbeiter löschen möchten?",
-      "service_confirm": "Bitte bestätigen Sie die Leistungen-ID",
+      "service_confirm": "Bitte Bestätigen die Leistungen-ID",
       "service_ID": "Leistungen-ID",
       "delete_service": "Sind Sie sicher, dass Sie diesen Leistungen löschen möchten?",
       "created_service": "Leistungen erfolgreich erstellt",
       "service_created_des": "Vielen Dank für die Erstellung des Leistungens. Wir freuen uns, Sie als Kunden zu haben.",
       "delete_record": "Möchten Sie diesen Datensatz aktualisieren?",
       "contract_done": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
-      "contract_confirm": "Bitte bestätigen Sie die Vertrags-ID",
+      "contract_confirm": "Bitte Bestätigen die Vertrags-ID",
       "contract_ID": "Vertrags-ID eingeben",
       "delete_contract": "Sind Sie sicher, dass Sie diesen Vertrag löschen möchten?",
       "update_contract_heading": "Status erfolgreich aktualisiert",
       "update_des": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
-      "lead_confirm": "Bitte bestätigen Sie die Anfragen-ID",
+      "lead_confirm": "Bitte Bestätigen die Anfragen-ID",
       "lead_ID": "Anfragen-ID eingeben",
       "delete_lead": "Sind Sie sicher, dass Sie diesen Anfragen löschen möchten?",
-      "customer_confirm": "Bitte bestätigen Sie die ID",
+      "customer_confirm": "Bitte Bestätigen die ID",
       "customer_ID": "ID",
       "delete_customer": "Sind Sie sicher, dass Sie diesen Kunden löschen möchten?",
       "created_customer": "Kunde erfolgreich erstellt",
       "customer_created_des": "Vielen Dank für die Erstellung des Kunden. Wir freuen uns, Sie als Kunden zu haben.",
       "are_sure": "Sind Sie sicher?",
       "leave_page": "Sie möchten diese Änderungen speichern?",
-      "offer_delete": "Bitte bestätigen Sie die Angebots-ID",
+      "offer_delete": "Bitte Bestätigen die Angebots-ID",
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "offer_created": "Vorgang erfolgreich",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
-      "offer_email_sent": "E-Mail erfolgreich gesendet",
+      "offer_email_sent": "E-Mail erfolgreich Gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
-      "content_confirmation": "Bitte bestätigen Sie die Inhalts-ID",
+      "content_confirmation": "Bitte Bestätigen die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
       "delete_content": "Sind Sie sicher, dass Sie diesen Inhalt löschen möchten?",
       "plan_created": "Datensatz erfolgreich erstellt",
@@ -1079,12 +1078,14 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
-    "time":"Zeit",
-    "at":"Um",
-    "clock":"Uhr",
-    "editor_placeholder":"fügen Sie ihren Text hier ein",
-    "content_name":"Titel für Offerte",
-    "content_text":"Text für Offerte",
+    "add": "hinzufügen",
+    "upload_link": "Laden Sie Ihren Link hier hoch",
+    "time": "Zeit",
+    "at": "Um",
+    "clock": "Uhr",
+    "editor_placeholder": "fügen Sie ihren Text hier ein",
+    "content_name": "Titel für Offerte",
+    "content_text": "Text für Offerte",
     "general_inquery": "Allgemeine Anfrage",
     "account_assist": "Account Unterstützung ",
     "payment_issues": "Rechnungs oder Bezahlungs Schwierigkeiten",
@@ -1126,12 +1127,12 @@
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",
     "via_insta": "Über Instagram",
-    "lead_source":{
-      "Umzugsfuchs":"Umzugsfuchs",
-      "Webvermarktung":"Webvermarktung",
-      "Offerten-365":"Offerten-365",
-      "Umzugshero":"Umzugshero",
-      "Via Call":"Telefon"
+    "lead_source": {
+      "Umzugsfuchs": "Umzugsfuchs",
+      "Webvermarktung": "Webvermarktung",
+      "Offerten-365": "Offerten-365",
+      "Umzugshero": "Umzugshero",
+      "Via Call": "Telefon"
     },
     "less_then": "Weniger als",
     "whatsapp": "WhatsApp",
@@ -1175,7 +1176,9 @@
       "button": "Speichern"
     },
     "images_modal": {
-      "heading": "Bilder",
+      "heading": "Bilder & Links",
+      "img_tab": "Bilder",
+      "link_tab": "Links",
       "title": "15 Bilder können hochgeladen werden",
       "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
       "image_slider_heading": "Bildname",
@@ -1191,7 +1194,7 @@
       "sub_heading": "Sie wollen dieses Konto kostenlos machen",
       "cancel_button": "Abbrechen",
       "yes_button": "Ja",
-      "confirm_heading": "Bitte bestätigen Sie das Unternehmen",
+      "confirm_heading": "Bitte Bestätigen das Unternehmen",
       "company_name": "Firmenname eingeben",
       "confirm_button": "Bestätigen",
       "success": "Erfolgreich",
@@ -1857,7 +1860,7 @@
     "mobile": "Handynummer",
     "address": "Adresse",
     "work_date": "Arbeitstermine",
-    "description":"Beschreibung",
+    "description": "Beschreibung",
 
     "service": "Dienstleistung/Produkt",
     "price": "Preis",

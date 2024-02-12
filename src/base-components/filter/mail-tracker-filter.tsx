@@ -9,7 +9,6 @@ import CheckField from "./fields/check-field";
 import { FiltersDefaultValues } from "@/enums/static";
 
 export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
-
   const moreFilters: FilterType = {
     email: FiltersDefaultValues.None,
   };
@@ -36,7 +35,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
     email: string[];
     price: string[];
   }>({
-    email: filter.email as string[] || [],
+    email: (filter.email as string[]) || [],
     price: filter.price || [],
   });
 
