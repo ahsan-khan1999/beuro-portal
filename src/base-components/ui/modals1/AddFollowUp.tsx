@@ -36,7 +36,7 @@ const AddFollowUp = ({
                 onClick={onClose}
               />
               {/* <div className="flex justify-between items-center"> */}
-              <p className="text-2xl font-medium text-[#000] mb-[30px] border-b border-b-[#000] border-opacity-20 pb-5">
+              <p className="text-2xl font-medium text-[#000] mb-[30px] border-b border-b-[#000] border-opacity-10 pb-5">
                 {translate("follow_up.add_follow_up.heading")}
               </p>
               {/* </div> */}

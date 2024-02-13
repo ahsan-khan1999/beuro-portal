@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps, FieldValues, UseFormSetValue } from "react-hook-form";
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { useAppDispatch } from "@/hooks/useRedux";
@@ -13,6 +13,8 @@ export const ImageUpload = ({
   fileSupported,
   onClick,
   value,
+  index,
+  setValue
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
@@ -20,6 +22,8 @@ export const ImageUpload = ({
   fileSupported?: string;
   onClick?: Function;
   value?: string;
+  index?: number;
+  setValue?:UseFormSetValue<FieldValues>
 }) => {
   const dispatch = useAppDispatch();
 
@@ -39,10 +43,18 @@ export const ImageUpload = ({
 
   const handleFileSelected = async (e: any) => {
     const formdata = new FormData();
-    const file = e.target.files[0];
-    formdata.append("file", file);
+    const file = e.target.files;
+    for (let item of e.target.files) {
+      formdata.append("files", item);
+    }
     const res = await dispatch(uploadFileToFirebase(formdata));
-    field.onChange(res?.payload);
+    
+    res?.payload?.forEach((res: string, idx: number) => {
+      
+      const fieldId = `upload_image${index as number + 1}`;
+      console.log(fieldId,"index",res);
+      field.onChange(res, fieldId);
+    });
   };
   const deleteImage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -51,6 +63,7 @@ export const ImageUpload = ({
   };
 
   const { t: translate } = useTranslation();
+
   return (
     <>
       <label
@@ -94,6 +107,9 @@ export const ImageUpload = ({
           className="hidden"
           id={id}
           onChange={handleFileSelected}
+          multiple
+          data-index={index}
+
         />
       </label>
     </>

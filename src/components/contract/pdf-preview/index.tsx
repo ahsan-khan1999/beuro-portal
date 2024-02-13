@@ -29,6 +29,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
+    contractDetails
   } = useContractPdf();
 
   const { t: translate } = useTranslation();
@@ -64,7 +65,7 @@ const PdfPriview = () => {
       ) : (
         <>
           <EmailCard
-            contractStatus={contractData?.emailHeader?.emailStatus}
+            contractStatus={contractDetails?.emailStatus}
             contractNo={contractData?.emailHeader?.offerNo}
             onEmailSend={handleEmailSend}
             loading={loading}

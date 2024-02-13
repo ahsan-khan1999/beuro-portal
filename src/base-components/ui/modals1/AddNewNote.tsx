@@ -4,16 +4,21 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
+import { FilterType } from "@/types";
 
 const AddNewNote = ({
   onClose,
   handleNotes,
+  handleFilterChange,
+  filter
 }: {
   onClose: () => void;
   handleNotes: (id: string) => void;
+  handleFilterChange?:(query:FilterType) => void;
+  filter?:FilterType
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useAddNewNote({ handleNotes });
+    useAddNewNote({ handleNotes,handleFilterChange,filter });
 
   return (
     <>

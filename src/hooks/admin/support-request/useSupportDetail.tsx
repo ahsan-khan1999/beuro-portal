@@ -21,12 +21,13 @@ export default function useSupportDetail() {
 
   const items: DropDownItem[] = [
     {
-      item: "pending",
+      item: { label: "pending", value: "pending" },
+
     },
     {
-      item: "resolved",
+      item: { label: "resolved", value: "resolved" },
     },
-    
+
   ];
   const id = router.query.supportRequest;
 

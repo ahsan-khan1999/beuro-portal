@@ -14,7 +14,8 @@ export const MovingDetails = ({
   isOffer,
   handleTitleUpdate,
   addressLabels,
-  handleEditDateModal,time
+  handleEditDateModal,
+  time,
 }: Partial<MovingDetailsProps>) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
@@ -23,11 +24,11 @@ export const MovingDetails = ({
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   const handleSaveClick = () => {
     if (!tempText) return;
     setIsEditing(false);
-    handleTitleUpdate && handleTitleUpdate(tempText)
+    handleTitleUpdate && handleTitleUpdate(tempText);
     setText(tempText);
   };
 
@@ -38,17 +39,16 @@ export const MovingDetails = ({
   return (
     <>
       <form onSubmit={handleSaveClick}>
-
         {!isOffer ? (
           <div
-            className={`mb-[10px] ${isEditing
-              ? "border border-[#4B4B4B] p-2 rounded-md flex justify-between"
-              : ""
-              }`}
+            className={`mb-[10px] ${
+              isEditing
+                ? "border border-[#4B4B4B] p-2 rounded-md flex justify-between"
+                : ""
+            }`}
           >
             <div className="flex gap-[10px]">
               {isEditing ? (
-
                 <input
                   type="text"
                   value={tempText}
@@ -56,7 +56,6 @@ export const MovingDetails = ({
                   className="border border-[#4B4B4B] p-1 rounded-md outline-none border-none"
                   required
                 />
-
               ) : (
                 <span className="text-xl font-semibold text-[#393939]">
                   {text}
@@ -103,7 +102,7 @@ export const MovingDetails = ({
             <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
-                  country: Country[item?.country as keyof typeof Country] ,
+                  country: Country[item?.country as keyof typeof Country],
                   postalCode: item.postalCode,
                   streetNumber: item.streetNumber,
                 })}
@@ -113,30 +112,25 @@ export const MovingDetails = ({
           </div>
         ))}
         <div className="flex flex-row gap-6">
-
-          <span className="min-w-[205px]">
-          {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
-
+          <span className="min-w-[205px] mt-2">
+            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
           </span>
-          <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]" >
+          <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]">
             <span className="text-base font-medium text-[#4B4B4B]">
               {workDates?.map(
                 (item, index) =>
-                  `${formatDateTimeToDate(item.startDate)}${item.endDate
-                    ? ` ${translate("contracts.card_content.to")} ` +
-                    formatDateTimeToDate(item.endDate) +
-                    ((workDates?.length - 1 !=
-                      index &&
-                      ", ") ||
-                      ".")
-                    : (workDates?.length - 1 !=
-                      index &&
-                      ", ") ||
-                    "."
+                  `${formatDateTimeToDate(item.startDate)}${
+                    item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                        formatDateTimeToDate(item.endDate) +
+                        ((workDates?.length - 1 != index && ", ") || ".")
+                      : (workDates?.length - 1 != index && ", ") || "."
                   }`
               )}
-            {time && ` ${translate("common.at")} ` + time + ` ${translate("common.clock")} `}
-
+              {time &&
+                ` ${translate("common.at")} ` +
+                  time +
+                  ` ${translate("common.clock")} `}
             </span>
             <Image
               src={editIcon}
@@ -149,7 +143,6 @@ export const MovingDetails = ({
           </div>
         </div>
       </form>
-
     </>
   );
 };

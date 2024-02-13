@@ -34,7 +34,7 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "totalAmount",
               name: "totalAmount",
-              value: invoiceDetails?.contractID?.offerID?.total?.toString(),
+              value: invoiceDetails?.total?.toString(),
               register,
               disabled: true,
             },

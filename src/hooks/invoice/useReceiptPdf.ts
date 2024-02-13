@@ -152,12 +152,12 @@ export const useReceiptPdf = () => {
             emailHeader: {
               contractId: invoiceDetails?.invoiceNumber,
               workerName:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.createdBy
+                invoiceDetails?.invoiceID?.createdBy
                   ?.fullName,
               contractStatus:
-                invoiceDetails?.invoiceID?.contractID?.contractStatus,
+                invoiceDetails?.invoiceID?.invoiceStatus,
               contentName:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.content
+                invoiceDetails?.invoiceID?.content
                   ?.contentName,
               contractTitle: invoiceDetails?.title,
             },
@@ -173,60 +173,60 @@ export const useReceiptPdf = () => {
             },
             contactAddress: {
               address: {
-                name: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                name: invoiceDetails?.invoiceID
                   ?.customerDetail.fullName,
-                city: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                city: invoiceDetails?.invoiceID
                   ?.customerDetail?.address?.country,
                 postalCode:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  invoiceDetails?.invoiceID
                     ?.customerDetail?.address?.postalCode,
                 streetWithNumber:
-                  invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                  invoiceDetails?.invoiceID
                     ?.customerDetail?.address?.streetNumber,
 
               },
-              gender: invoiceDetails?.invoiceID?.contractID?.offerID?.leadID?.customerDetail?.gender?.toString(),
+              gender: invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
               email:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID
                   ?.customerDetail?.email,
               phone:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+                invoiceDetails?.invoiceID
                   ?.customerDetail?.phoneNumber,
             },
             movingDetails: {
               address:
-                invoiceDetails?.invoiceID?.contractID?.offerID
+                invoiceDetails?.invoiceID
                   ?.addressID?.address,
               header: invoiceDetails?.title as string,
-              workDates: invoiceDetails?.invoiceID?.contractID?.offerID?.date,
+              workDates: invoiceDetails?.invoiceID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
-              time: invoiceDetails?.invoiceID?.contractID?.offerID?.time,
+              time: invoiceDetails?.invoiceID?.time,
 
             },
             serviceItem:
-              invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail
+              invoiceDetails?.invoiceID?.serviceDetail
                 ?.serviceDetail,
             serviceItemFooter: {
-              isTax:invoiceDetails?.invoiceID?.contractID?.offerID?.isTax,
-              isDiscount:invoiceDetails?.invoiceID?.contractID?.offerID?.isDiscount,
+              isTax:invoiceDetails?.invoiceID?.isTax,
+              isDiscount:invoiceDetails?.invoiceID?.isDiscount,
               subTotal:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.subTotal?.toString(),
+                invoiceDetails?.invoiceID?.subTotal?.toString(),
               tax:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.taxAmount?.toString(),
+                invoiceDetails?.invoiceID?.taxAmount?.toString(),
 
               discount:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.discountAmount?.toString(),
+                invoiceDetails?.invoiceID?.discountAmount?.toString(),
               grandTotal:
-                invoiceDetails?.invoiceID?.contractID?.offerID?.total?.toString(),
+                invoiceDetails?.invoiceID?.total?.toString(),
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
-              discountType: invoiceDetails?.invoiceID?.contractID?.offerID?.discountType,
-              taxType: invoiceDetails?.invoiceID?.contractID?.offerID?.taxType,
-              serviceDiscountSum: invoiceDetails?.invoiceID?.contractID?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
+              discountType: invoiceDetails?.invoiceID?.discountType,
+              taxType: invoiceDetails?.invoiceID?.taxType,
+              serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
               }, 0)
@@ -264,8 +264,6 @@ export const useReceiptPdf = () => {
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
-            signature:
-              invoiceDetails?.invoiceID?.contractID?.offerID?.signature,
             isCanvas: false,
           };
 
@@ -273,9 +271,9 @@ export const useReceiptPdf = () => {
 
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.invoiceID?.contractID?.offerID?.content
+            subject: invoiceDetails?.invoiceID?.content
               ?.receiptContent?.title as string,
-            description: invoiceDetails?.invoiceID?.contractID?.offerID?.content
+            description: invoiceDetails?.invoiceID?.content
               ?.receiptContent?.body as string,
           };
         }
@@ -363,7 +361,7 @@ export const useReceiptPdf = () => {
         } else {
           let apiData = {
             email:
-              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+              collectiveInvoiceDetails?.invoiceID
                 ?.customerDetail?.email,
             content:
               collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
@@ -474,5 +472,6 @@ export const useReceiptPdf = () => {
     onClose,
     onSuccess,
     dispatch,
+    collectiveInvoiceDetails
   };
 };

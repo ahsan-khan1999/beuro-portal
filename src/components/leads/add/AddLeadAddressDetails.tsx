@@ -20,7 +20,7 @@ const AddLeadAddressDetails = ({
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
+        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-10"
         id="Address Details"
       >
         <h2 className="text-[#393939] text-lg font-medium">

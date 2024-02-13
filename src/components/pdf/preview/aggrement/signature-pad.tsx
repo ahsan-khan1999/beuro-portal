@@ -126,7 +126,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
   };
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = pdfData?.headerDetails;
-  const { address, header, workDates } = pdfData?.movingDetails || {};
+  const { address, header, workDates,time } = pdfData?.movingDetails || {};
   const contactAddress = pdfData?.contactAddress;
   const serviceItem = pdfData?.serviceItem;
   const serviceItemFooter = pdfData?.serviceItemFooter;
@@ -149,7 +149,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates }} />
+          <AddressDetails {...{ address, header, workDates,time }} />
 
           <ServiceTableHederRow />
           {serviceItem?.map((item, index) => (
@@ -383,6 +383,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
                     loading={offerLoading}
                     text={pdfAction as string}
                   />
+               
                 </div>
 
               );

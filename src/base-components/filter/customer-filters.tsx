@@ -2,26 +2,13 @@ import React, { useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import InputField from "./fields/input-field";
-import { FilterProps, FilterType, MoreFilterType } from "@/types";
+import { DropDownItem, FilterProps, FilterType, MoreFilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import useFilter from "@/hooks/filter/hook";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
-const typeList = [
-  {
-    item: "All",
-    value: "None",
-  },
-  {
-    item: "Individual",
-    value: staticEnums.CustomerType.individual,
-  },
-  {
-    item: "Company",
-    value: staticEnums.CustomerType.company,
-  },
-];
+import { useTranslation } from "next-i18next";
 
 const map: Record<string, string> = {
   [staticEnums.CustomerType.none]: "All",
@@ -48,6 +35,7 @@ export default function CustomerFilters({
   } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const { t: translate } = useTranslation();
 
   const handleSave = () => {
     setFilter((prev: FilterType) => {
@@ -60,6 +48,27 @@ export default function CustomerFilters({
     });
     handleExtraFiltersClose();
   };
+
+  const typeList: DropDownItem[] = [
+    {
+      item: {
+        label: `${translate("typeList.All")}`,
+        value: "None",
+      },
+    },
+    {
+      item: {
+        label: `${translate("typeList.Individual")}`,
+        value: staticEnums.CustomerType.individual,
+      },
+    },
+    {
+      item: {
+        label: `${translate("typeList.Company")}`,
+        value: staticEnums.CustomerType.company,
+      },
+    },
+  ];
 
   return (
     <div className="relative flex cursor-pointer " ref={ref}>

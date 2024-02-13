@@ -16,7 +16,7 @@ const ComposeMail = ({
     useSendEmail(backRouteHandler, onNextHandle);
   return (
     <ContractFormCard>
-      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-20 pb-5 mb-6">
+      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5 mb-6">
         {translate("common.offer_mail_preview")}
       </h2>
 

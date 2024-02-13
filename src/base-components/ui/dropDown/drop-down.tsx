@@ -31,7 +31,7 @@ export const DropDown = ({
   useEffect(() => {
     setSelectedItem(defaultSelectedItem);
   }, [defaultSelectedItem]);
-  
+
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =

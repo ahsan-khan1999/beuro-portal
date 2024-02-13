@@ -220,6 +220,8 @@ export interface ImageUploadFieldProps
   control?: Control<FieldValues>;
   onClick?: Function;
   value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>
 }
 
 // Interface for the input field copy

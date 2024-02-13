@@ -17,50 +17,53 @@ export const ContactAddress = ({
   email,
   phone,
   gender,
-  mobile
+  mobile,
 }: Partial<ContactDetailsProps>) => (
   <View style={container}>
     <View style={leftColumn}>
-      <Text style={textBase}>{GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}</Text>
+      <Text style={textBase}>
+        {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
+      </Text>
       <Text style={textBase}>{address?.streetWithNumber}</Text>
-      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country] || ""}`}</Text>
+      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country] || ""
+        }`}</Text>
     </View>
     <View style={rightColumn}>
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <Text
-          style={{
-            fontSize: 10,
-            fontWeight: 400,
-            fontStyle: "normal",
-            color: "#000",
-            marginRight: 10
-          }}
-        >
-          E-Mail:
-        </Text>
-        <Text style={textBase}>{email}</Text>
-      </View>
-
       {
-        (phone !== "+" && phone) &&
+        email &&
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text
             style={{
-              fontSize: 10,
+              fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
               color: "#000",
-              marginRight: 10
-
+              marginRight: 1,
             }}
           >
-            Telefon:
+            E-Mail :
+          </Text>
+          <Text style={textBase}>{email}</Text>
+        </View>
+      }
+
+      {phone !== "+" && phone && (
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text
+            style={{
+              fontSize: 8,
+              fontWeight: 400,
+              fontStyle: "normal",
+              color: "#000",
+              marginRight: 1,
+            }}
+          >
+            Telefon :
           </Text>
           <Text style={textBase}>{phone}</Text>
         </View>
-      }
-      {
-        (mobile !== "+" && mobile) &&
+      )}
+      {mobile !== "+" && mobile && (
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text
             style={{
@@ -69,15 +72,14 @@ export const ContactAddress = ({
               fontStyle: "normal",
               color: "#000",
               width: 80,
-              marginRight: 10
-
+              marginRight: 1,
             }}
           >
-            Handynummer:
+            Handynummer :
           </Text>
           <Text style={textBase}>{mobile}</Text>
         </View>
-      }
+      )}
     </View>
-  </View >
+  </View>
 );
