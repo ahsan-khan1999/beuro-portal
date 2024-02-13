@@ -1988,5 +1988,30 @@
     "Open": "Open",
     "Close": "Close",
     "Expire": "Expired"
+  },
+  "offer_status": {
+    "Open": "Offen",
+    "Signed": "Signed",
+    "Expire": "Expired",
+    "Rejected": "Rejected"
+  },
+  "contract_status": {
+    "Open": "Open",
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled"
+  },
+  "invoice_status": {
+    "Pending": "Pending",
+    "Overdue": "Overdue",
+    "Paid": "Paid"
+  },
+  "payment_method": {
+    "Cash": "Cash",
+    "Online": "Online"
+  },
+  "typeList": {
+    "All": "All",
+    "Individual": "Individual",
+    "Company": "Company"
   }
 }

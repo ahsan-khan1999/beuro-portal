@@ -1634,7 +1634,7 @@ export const DEFAULT_INVOICE = {
 };
 
 export const HeaderLabel = {
-  contract: "Verträge",
+  contract: "Vertrag",
   invoice: "Rechnung",
   receipt: "Quittung",
 };

@@ -19,9 +19,12 @@ export interface ContainerProps {
   childClassName?: string;
 }
 export interface DropDownItem {
-  item: string;
-  value?: string;
+  item: {
+    label: string;
+    value: string;
+  };
 }
+
 export interface DropDownProps {
   [DropDownKeys.LABEL]?: string;
   [DropDownKeys.ITEMS]: DropDownItem[];

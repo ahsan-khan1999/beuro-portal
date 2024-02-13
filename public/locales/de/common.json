@@ -1983,5 +1983,35 @@
     "Open": "Offen",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
+  },
+  "offer_status": {
+    "Open": "Offen",
+    "Signed": "Unterzeichnet",
+    "Expire": "Abgelaufen",
+    "Rejected": "Abgelehnt"
+  },
+  "contract_status": {
+    "Open": "Offen",
+    "Confirmed": "Bestätigt",
+    "Cancelled": "Abgesagt"
+  },
+  "invoice_status": {
+    "Pending": "Anhängig",
+    "Overdue": "Überfällig",
+    "Paid": "Bezahlt"
+  },
+
+  "payment_method": {
+    "Cash": "Bargeld",
+    "Online": "Online"
+  },
+  "customer_status": {
+    "unBlock": "unBlock",
+    "block": "block"
+  },
+  "typeList": {
+    "All": "Alle",
+    "Individual": "Einzelne",
+    "Company": "Unternehmen"
   }
 }

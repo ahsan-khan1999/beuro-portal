@@ -40,7 +40,22 @@ const OfferDetailsCard = ({
     window.open(offerDetails?.attachement);
   };
 
-  
+  const itemsValue = [
+    `${translate("offer_status.Open")}`,
+    `${translate("offer_status.Signed")}`,
+    `${translate("offer_status.Expire")}`,
+    `${translate("offer_status.Rejected")}`,
+  ];
+
+  const items = Object.keys(staticEnums["OfferStatus"]).map((item, index) => ({
+    item: { label: itemsValue[index], value: item },
+  }));
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -219,8 +234,11 @@ const OfferDetailsCard = ({
               {offerDetails?.paymentType && (
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
-                    (item) => ({
-                      item: item,
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
                     })
                   )}
                   selectedItem={offerDetails?.paymentType}
@@ -246,11 +264,7 @@ const OfferDetailsCard = ({
             <span>
               {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
                 <DropDown
-                  items={Object.keys(staticEnums["OfferStatus"]).map(
-                    (item) => ({
-                      item: item,
-                    })
-                  )}
+                  items={items}
                   selectedItem={offerDetails?.offerStatus}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getOfferStatusColor(
@@ -270,7 +284,7 @@ const OfferDetailsCard = ({
                     color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
                   }}
                 >
-                  {offerDetails?.offerStatus}
+                  {translate(`offer_status.${offerDetails?.offerStatus}`)}
                 </span>
               )}
             </span>

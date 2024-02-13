@@ -38,6 +38,18 @@ const ContractDetailsCard = ({
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const contractStatus = [
+    `${translate("contract_status.Open")}`,
+    `${translate("contract_status.Confirmed")}`,
+    `${translate("contract_status.Cancelled")}`,
+  ];
+
   return (
     <div className="min-h-[218px]">
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
@@ -239,8 +251,11 @@ const ContractDetailsCard = ({
               <span>
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
-                    (item) => ({
-                      item: item,
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
                     })
                   )}
                   selectedItem={contractDetails?.paymentType}
@@ -269,7 +284,12 @@ const ContractDetailsCard = ({
               ] !== 3 && (
                 <DropDown
                   items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
+                    (item, index) => ({
+                      item: {
+                        label: contractStatus[index],
+                        value: item,
+                      },
+                    })
                   )}
                   selectedItem={contractDetails?.contractStatus}
                   onItemSelected={handleStatusUpdate}
