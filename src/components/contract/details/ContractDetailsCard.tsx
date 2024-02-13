@@ -307,33 +307,7 @@ const ContractDetailsCard = ({
                   )}]`}
                 />
               )) || (
-                <span
-                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}] rounded-lg px-4 py-[3px] flex items-center`}
-                    dropDownTextClassName={`text-[${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}] text-base font-medium me-1`}
-                    dropDownIconClassName={`text-[${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}]`}
-                  />
-                )) || (
-                  <span
-                    className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                    style={{
-                      borderColor: `${getContractStatusColor(
-                        contractDetails?.contractStatus
-                      )}`,
-                      color: `${getContractStatusColor(
-                        contractDetails?.contractStatus
-                      )}`,
-                    }}
-                  >
-                    {contractDetails?.contractStatus}
-                  </span>
+               <></>
                 )}
             </span>
           </div>
