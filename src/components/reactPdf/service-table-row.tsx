@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 165,
+    marginRight: 5,
   },
   descriptionText: {
     color: "#404040",
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontStyle: "normal",
     width: 165,
+    marginRight: 5,
   },
   priceHeader: {
     flexDirection: "row",
@@ -59,12 +61,8 @@ export const ServiceTableRow = ({
   return (
     <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
-        <Text style={styles.descriptionTextTitle} wrap>
-          {serviceTitle}
-        </Text>
-        <Text style={styles.descriptionText} wrap>
-          {description}
-        </Text>
+        <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
+        <Text style={styles.descriptionText}>{description}</Text>
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>{count}</Text>
           <Text style={styles.headerText}>{unit}</Text>

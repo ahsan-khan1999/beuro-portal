@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
 import { updateLead } from "@/api/slices/lead/leadSlice";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { setImageFieldValues } from "@/utils/utility";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { createImage, readImage } from "@/api/slices/imageSlice/image";
@@ -26,6 +26,25 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const dispatch = useAppDispatch();
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
+  const [activeTab, setActiveTab] = useState("img_tab");
+  const [enteredLink, setEnteredLink] = useState("");
+  const [enteredLinks, setEnteredLinks] = useState<string[]>([]);
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
+  const handleLinkAdd = () => {
+    if (enteredLink.trim() !== "") {
+      setEnteredLinks([...enteredLinks, enteredLink]);
+      setEnteredLink("");
+    }
+  };
+
+  const handleLinkDelete = (linkToDelete: string) => {
+    const updatedLinks = enteredLinks.filter((link) => link !== linkToDelete);
+    setEnteredLinks(updatedLinks);
+  };
 
   const schema = generateImageValidation(translate);
   const {
@@ -45,15 +64,17 @@ export const useUploadImage = (handleImageSlider: Function) => {
     setValue
   );
   const handleOnClose = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }))
-  }
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
   useMemo(() => {
     if (leadDetails?.id)
       setImageFieldValues(setValue as UseFormSetValue<any>, images);
   }, [leadDetails?.id, images?.length]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)?.filter((value) => value)?.reverse();
+    const filteredList = Object.values(data)
+      ?.filter((value) => value)
+      ?.reverse();
     const apiData = {
       images: filteredList,
       id: leadDetails?.id,
@@ -63,9 +84,9 @@ export const useUploadImage = (handleImageSlider: Function) => {
       createImage({ data: apiData, router, setError, translate })
     );
     if (response?.payload && response?.payload?.length > 0) handleImageSlider();
-    else handleOnClose()
-
+    else handleOnClose();
   };
+
   return {
     fields,
     onSubmit,
@@ -74,5 +95,12 @@ export const useUploadImage = (handleImageSlider: Function) => {
     errors,
     error,
     translate,
+    handleTabChange,
+    activeTab,
+    enteredLink,
+    setEnteredLink,
+    enteredLinks,
+    handleLinkAdd,
+    handleLinkDelete,
   };
 };

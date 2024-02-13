@@ -5,7 +5,13 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
+import { FormField } from ".";
+import { Maybe } from "yup";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -55,7 +61,7 @@ export interface ButtonProps {
   className?: string;
   loading?: boolean | null;
   success?: boolean;
-  onClick?: Function ;
+  onClick?: Function;
   loaderColor?: string;
   icon?: any;
   iconAlt?: any;
@@ -336,4 +342,12 @@ export interface UsePaginationProps {
 
 export interface ChildrenProp {
   children?: ReactNode;
+}
+
+export interface LinkUploadProps {
+  inputLink: string;
+  onAddLink: () => void;
+  enteredLinks: string[];
+  onLinkDelete: (linkToDelete: string) => void;
+  setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
 }
