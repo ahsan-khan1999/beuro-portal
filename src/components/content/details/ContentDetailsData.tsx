@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import OfferContentDetailsData from "./OfferContentDetailsData";
@@ -118,6 +118,8 @@ const ContentDetailsData = () => {
     ),
   };
 
+  const renderComponentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setRenderComponent((prev) => {
       const updatedData = [...prev];
@@ -127,6 +129,12 @@ const ContentDetailsData = () => {
       return updatedData;
     });
   }, [data]);
+
+  useEffect(() => {
+    if (renderComponentRef.current) {
+      renderComponentRef.current.scrollTo(0, 0);
+    }
+  }, [tabType]);
 
   const tabSection: tabArrayTypes[] = [
     {

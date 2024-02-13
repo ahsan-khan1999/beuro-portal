@@ -16,12 +16,12 @@ const InoviceContentDetails = ({
 
   return (
     <div
-      className="rounded-md border-none bg-white pt-5 px-6 pb-6 border w-full h-fit"
+      className="rounded-md border-none bg-white w-full h-fit"
       id={translate("content.tabs_headings.invoice_content")}
     >
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
-        <div className="flex space-x-2 items-center my-auto">
-          <svg
+      <div className="flex justify-between items-center bg-[#C50EE0] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
+        {/* <div className="flex space-x-2 items-center my-auto"> */}
+        {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
             height="19"
@@ -44,22 +44,22 @@ const InoviceContentDetails = ({
                 />
               </clipPath>
             </defs>
-          </svg>
-          <h2 className="text-[#393939] text-lg font-medium">
-            {translate("content.details.invoice_heading")}
-          </h2>
-        </div>
+          </svg> */}
+        <h2 className="text-white text-lg font-medium">
+          {translate("content.details.invoice_heading")}
+        </h2>
+        {/* </div> */}
 
         <button
           onClick={() => onClick(2, ComponentsType.editInvoiceContent)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="bg-white flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <EditIcon />
           {translate("content.details.edit_button")}
         </button>
       </div>
 
-      <div className="mt-5">
+      <div className="pl-[29px] pr-[25px] pt-[22px] pb-[39px]">
         <div>
           <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
             {translate("content.details.invoice_title")}
