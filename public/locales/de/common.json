@@ -665,7 +665,6 @@
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
       "receipt_email_preview": "E-Mail-Vorschau der Quittung",
       "edit_invoice": "Bearbeiten Quittung"
-
     },
     "table_functions": {
       "open": "Offen",
@@ -1080,6 +1079,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "lead": "Anfragen",
     "add": "hinzufügen",
     "upload_link": "Laden Sie Ihren Link hier hoch",
     "time": "Zeit",

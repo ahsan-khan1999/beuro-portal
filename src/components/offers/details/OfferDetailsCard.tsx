@@ -39,6 +39,8 @@ const OfferDetailsCard = ({
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
   };
+
+  
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -191,7 +193,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(100px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
+        <div className="grid grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
@@ -237,7 +239,7 @@ const OfferDetailsCard = ({
               )}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
+          <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
@@ -285,7 +287,7 @@ const OfferDetailsCard = ({
           )}
           <div className="flex justify-between items-center">
             <div
-              className="flex items-center gap-[11px] cursor-pointer"
+              className="flex items-center gap-[11px] cursor-pointer mr-4"
               onClick={(e) => handleNotes(offerDetails?.id, e)}
             >
               <span className="text-[#4D4D4D] font-normal text-base">

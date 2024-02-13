@@ -28,11 +28,11 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4  !border-[#BFBFBF] focus:!border-primary ",
               inputType: "text",
               id: "streetNo",
               name: "streetNo",
-              placeholder: "Zweibrückenstraße, 12 ",
+              placeholder: "Zweibrückenstraße, 12",
               register,
             },
           },
