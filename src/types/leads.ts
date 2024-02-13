@@ -26,6 +26,8 @@ export interface Lead {
   requiredService: string | ContentTableRowTypes;
   additionalDetails: string;
   createdBy: User;
+  isNoteCreated: boolean;
+
 }
 interface CustomerDetails {
   Customer: Customers;

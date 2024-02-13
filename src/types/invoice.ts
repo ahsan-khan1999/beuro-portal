@@ -1,6 +1,11 @@
 import { StaticImageData } from "next/image";
 import { contractTableTypes } from "./contract";
 import { User } from ".";
+import { ContentTableRowTypes } from "./content";
+import { DateRangeProps } from './form';
+import { OfferServiceDetails } from "./offers";
+import { AddressID } from "./leads";
+import { Plan } from "./admin/plans";
 
 // Inovice table layout
 export interface InvoiceTableRowTypes {
@@ -22,6 +27,12 @@ export interface InvoiceTableRowTypes {
   title: string;
   isInvoiceRecurring2: boolean;
   isNoteCreated: boolean;
+  customerDetail: Customers;
+  total: number;
+  content: ContentTableRowTypes;
+
+  
+
 }
 
 // Inovice details table
@@ -35,6 +46,8 @@ export interface InvoiceDetailsTableRowTypes {
   payment: string;
   status: string;
   type?: string;
+  customerDetail: Customers
+
 }
 
 // Receipt details table
@@ -48,6 +61,8 @@ export interface ReceiptDetailsTableRowTypes {
   payment: string;
   emailStatus: string;
   type?: string;
+  customerDetail: Customers
+
 }
 
 export interface SubInvoiceTableRowTypes {
@@ -66,7 +81,8 @@ export interface SubInvoiceTableRowTypes {
   createdAt: string;
   isInvoiceRecurring: boolean;
   title: string;
-  additionalDetails:string
+  additionalDetails: string;
+  customerDetail: Customers
 }
 
 export interface InvoiceEmptyStateType {
@@ -85,7 +101,7 @@ export interface InvoiceCardContentProps {
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
   currency?: string;
-  handleInvoiceEdit?:() => void
+  handleInvoiceEdit?: () => void
 }
 
 export interface InvoiceDetailsTableProps {
@@ -109,6 +125,8 @@ export interface PdfSubInvoiceTypes {
   additionalDetails?: string;
   attachement?: string;
   createdBy: User;
+  customerDetail: Customers
+
 }
 
 export interface InvoiceTableRowTypesPdf {
@@ -127,4 +145,94 @@ export interface InvoiceTableRowTypesPdf {
   invoiceStatus: string;
   isInvoiceRecurring: boolean;
   createdBy: User;
+  customerDetail: Customers;
+  date: DateRangeProps[];
+  time: string;
+  serviceDetail: OfferServiceDetails;
+  subTotal: number;
+  total: number;
+  addressID: AddressID;
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  isDiscount: boolean;
+  isTax: boolean;
+  discountAmount: number;
+  discountDescription: string;
+  discountType: 0 | 1;
+  additionalDetails: string;
+  content: ContentTableRowTypes;
+
+}
+
+
+export interface InvoiceDetailTableRowTypes {
+  id: string;
+  invoiceNumber: string;
+  paidAmount: string;
+  remainingAmount: string;
+  totalEmail: string;
+  sentEmail: string;
+  createdAt: string;
+  contractID: contractTableTypes;
+  invoiceTitle: string;
+  totalPrice: string;
+  emailStatus: string;
+  invoiceStatus: string;
+  isInvoiceRecurring: boolean;
+  invoiceCreatedAmount: number;
+  createdBy: User;
+  title: string;
+  isInvoiceRecurring2: boolean;
+  isNoteCreated: boolean;
+  customerDetail: Customers;
+  content: ContentTableRowTypes;
+  customerID: string;
+  date: DateRangeProps[];
+  time: string;
+  serviceDetail: OfferServiceDetails;
+  subTotal: number;
+  total: number;
+  addressID: AddressID;
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  isDiscount: boolean;
+  isTax: boolean;
+  discountAmount: number;
+  discountDescription: string;
+  discountType: 0 | 1;
+  additionalDetails: string;
+
+
+}
+
+
+interface Customers {
+  id: string;
+  refID: string;
+  createdAt: string
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  date: string;
+  mobileNumber: string;
+  gender: number
+
+  status?: string;
+  editImg?: string;
+  editNote?: string;
+  customerType: string;
+  companyName: string;
+  mobile: string;
+  address: CustomerAddress;
+  edit?: boolean;
+  logo: string
+  plan?: Plan
+  createdBy?: User
+}
+
+interface CustomerAddress {
+  streetNumber: string;
+  country: string;
+  postalCode: string;
+  city?: string
 }

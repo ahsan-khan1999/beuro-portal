@@ -31,7 +31,7 @@ import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
-import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
+import { InvoiceDetailTableRowTypes, InvoiceTableRowTypes, SubInvoiceTableRowTypes } from './invoice';
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
@@ -417,6 +417,8 @@ export type GenerateOffersFormField = (
     onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
@@ -455,6 +457,8 @@ export type GenerateOfferServiceFormField = (
     total?: Total;
     tax?: TaxSetting[] | null;
     currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -524,6 +528,30 @@ export type GenerateLeadsCustomerFormField = (
   control: Control<FieldValues>,
   properties: {
     offerDetails?: OffersTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+    leadID?: string;
+    gender?: number;
+  },
+  setValue: SetFieldValue<FieldValues>
+) => FormField[];
+
+
+export type GenerateInvoiceCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    invoiceDetails?: InvoiceDetailTableRowTypes;
     customerType: string;
     type: string;
     customer: Customers[];

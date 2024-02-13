@@ -55,7 +55,7 @@ const TableRows = ({
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
               {
-                item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                item.invoiceID?.customerDetail
                   ?.fullName
               }
             </span>
@@ -130,7 +130,8 @@ const TableRows = ({
             <span
               className="py-4 flex justify-center items-center "
               
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 if (!invoiceDetails?.isInvoiceRecurring) {
                   handleInvoiceEdit(item);
                 } else {

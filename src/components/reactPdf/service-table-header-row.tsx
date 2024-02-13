@@ -19,17 +19,17 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "white",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 165,
+    width: 140,
   },
   headerDescription: {
     color: "white",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 165,
+    width: 190,
   },
   priceHeader: {
     flexDirection: "row",
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "white",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 50,

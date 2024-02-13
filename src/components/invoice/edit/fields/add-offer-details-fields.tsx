@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import {
   DivProps,
   FormField,
+  GenerateInvoiceCustomerFormField,
   GenerateLeadsCustomerFormField,
   GenerateOfferDateFormField,
   GenerateOffersFormField,
@@ -19,11 +20,13 @@ import {
 import { staticEnums } from "@/utils/static";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
-export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
+import { getKeyByValue } from "@/utils/auth.util";
+export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
   loading,
   control,
   {
+    invoiceDetails,
     customerType,
     type,
     customer,
@@ -35,7 +38,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     content,
     handleContentSelect,
     selectedContent,
-    offerDetails,
     leadID,
   },
   setValue
@@ -109,7 +111,10 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (offerDetails && offerDetails.customerID?.customerType) || "",
+                (invoiceDetails && getKeyByValue(
+                  staticEnums["CustomerType"],
+                  invoiceDetails?.customerDetail?.customerType
+                )) || customerType,
             },
           },
           {
@@ -167,7 +172,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               placeholder: `${translate("offers.placeholders.email")}`,
               register,
-              value: offerDetails && offerDetails.customerID?.email,
+              // value: offerDetails && offerDetails.customerID?.email,
             },
           },
 
@@ -188,8 +193,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               value:
                 type === "New Customer"
                   ? ""
-                  : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : invoiceDetails?.id
+                    ? invoiceDetails?.customerDetail?.phoneNumber
                     : customerDetails && customerDetails?.phoneNumber,
             },
           },
@@ -210,8 +215,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               value:
                 type === "New Customer"
                   ? ""
-                  : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : invoiceDetails?.id
+                    ? invoiceDetails?.customerDetail?.mobileNumber
                     : customerDetails && customerDetails?.mobileNumber,
             },
           },
@@ -245,7 +250,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   }))) ||
                 [],
               control,
-              value: (offerDetails?.id && offerDetails?.content?.id) || "",
+              value: (invoiceDetails?.id && invoiceDetails?.content?.id) || "",
               // onItemChange: handleContentSelect && handleContentSelect,
             },
           },
@@ -299,7 +304,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               placeholder: `${translate("offers.placeholders.street")}`,
               register,
               value:
-                offerDetails && offerDetails?.customerID?.address?.streetNumber,
+                invoiceDetails && invoiceDetails?.customerDetail?.address?.streetNumber,
             },
           },
 
@@ -321,7 +326,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               register,
               value:
-                offerDetails && offerDetails?.customerID?.address?.postalCode,
+                invoiceDetails && invoiceDetails?.customerDetail?.address?.postalCode,
             },
           },
           {
@@ -343,7 +348,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               })),
               control,
               value:
-                (offerDetails && offerDetails?.customerID?.address?.country) ||
+                (invoiceDetails && invoiceDetails?.customerDetail?.address?.country) ||
                 Object.keys(staticEnums.Country)[0],
             },
           },
@@ -378,7 +383,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
-        value: offerDetails?.leadID?.customerDetail?.companyName || "",
+        // value: invoiceDetails?.customerDetail?.companyName || "",
       },
     };
     const divField = formField[fieldIndex]?.field as DivProps;
@@ -418,7 +423,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
+        value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
         setValue,
       },
     };
@@ -429,47 +434,47 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     }
   }
 
-  const fieldLeadIndex = formField.findIndex(
-    (field: any) =>
-      field?.field?.type === Field.div &&
-      Array.isArray(field?.field?.children) &&
-      field?.field?.children.some(
-        (child: any) => child?.field?.id == "customerID"
-      )
-  );
+  // const fieldLeadIndex = formField.findIndex(
+  //   (field: any) =>
+  //     field?.field?.type === Field.div &&
+  //     Array.isArray(field?.field?.children) &&
+  //     field?.field?.children.some(
+  //       (child: any) => child?.field?.id == "customerID"
+  //     )
+  // );
 
-  if (fieldLeadIndex !== -1 && type === "Existing Customer") {
-    const leadField = {
-      containerClass: "mb-0",
-      label: {
-        text: "Lead",
-        htmlFor: "leadID",
-        className: "mb-[10px]",
-      },
-      field: {
-        className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
-        type: Field.select,
-        id: "leadID",
-        name: "leadID",
-        options: lead?.map((item) => ({
-          value: item.id,
-          label: item.refID,
-        })),
-        control,
-        // value:""
-        value:
-          (offerDetails?.id && offerDetails?.leadID?.id) ||
-          (lead && lead?.length > 0 && lead?.at(0)?.id) ||
-          leadID ||
-          leadID,
-        // disabled: offerDetails?.leadID?.id ? true : false,
-      },
-    };
-    const divField = formField[fieldLeadIndex]?.field as DivProps;
-    if (divField && Array.isArray(divField.children)) {
-      divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
-    }
-  }
+  // if (fieldLeadIndex !== -1 && type === "Existing Customer") {
+  //   const leadField = {
+  //     containerClass: "mb-0",
+  //     label: {
+  //       text: "Lead",
+  //       htmlFor: "leadID",
+  //       className: "mb-[10px]",
+  //     },
+  //     field: {
+  //       className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
+  //       type: Field.select,
+  //       id: "leadID",
+  //       name: "leadID",
+  //       options: lead?.map((item) => ({
+  //         value: item.id,
+  //         label: item.refID,
+  //       })),
+  //       control,
+  //       // value:""
+  //       value:
+  //         (offerDetails?.id && offerDetails?.leadID?.id) ||
+  //         (lead && lead?.length > 0 && lead?.at(0)?.id) ||
+  //         leadID ||
+  //         leadID,
+  //       // disabled: offerDetails?.leadID?.id ? true : false,
+  //     },
+  //   };
+  //   const divField = formField[fieldLeadIndex]?.field as DivProps;
+  //   if (divField && Array.isArray(divField.children)) {
+  //     divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
+  //   }
+  // }
 
   return formField;
 };

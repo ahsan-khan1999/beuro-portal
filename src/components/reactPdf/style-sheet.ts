@@ -66,12 +66,12 @@ export const {
     display: "flex",
     flexDirection: "column",
     rowGap: 0,
-    width: "60%",
+    width: "65%",
   },
   rightColumn: {
     flexDirection: "column",
     rowGap: 0,
-    width: "40%",
+    width: "35%",
   },
   textBase: {
     color: "#000",

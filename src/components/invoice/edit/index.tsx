@@ -22,10 +22,10 @@ const EditInvoiceDetails = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
-  useEffect(() => {
-    if (invoiceDetails?.id) dispatch(readImage({ params: { type: "invoiceID", id: invoiceDetails?.id } }));
+  // useEffect(() => {
+  //   if (invoiceDetails?.id) dispatch(readImage({ params: { type: "invoice", id: invoiceDetails?.id } }));
 
-  }, [invoiceDetails?.id])
+  // }, [invoiceDetails?.id])
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

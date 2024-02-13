@@ -45,7 +45,7 @@ const TableRows = ({
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
               {
-                item.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+                item.invoiceID?.customerDetail
                   ?.fullName
               }
             </span>

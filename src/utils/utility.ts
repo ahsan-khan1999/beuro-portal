@@ -30,7 +30,7 @@ import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
-
+import 'moment/locale/de';
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -412,9 +412,9 @@ export function formatDateTimeToDate(date: string) {
   return moment(date).format("DD-MM-YYYY");
 }
 
-export function pdfDateFormat(date: string) {
+export function pdfDateFormat(date: string,locale:string) {
   if (!date) return null;
-  return moment(date).locale("de").format("DD. MMMM YYYY");
+  return moment(date).locale(locale).format("DD. MMMM YYYY");
 }
 
 export function formatDateTimeToDateMango(date: string) {

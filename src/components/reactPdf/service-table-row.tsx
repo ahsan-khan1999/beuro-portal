@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 165,
+    width: 140,
   },
   descriptionText: {
     color: "#404040",
     fontSize: 8,
     fontWeight: 400,
     fontStyle: "normal",
-    width: 165,
+    width: 190,
   },
   priceHeader: {
     flexDirection: "row",

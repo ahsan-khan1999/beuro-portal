@@ -25,12 +25,15 @@ export const ContactDetails = ({
       </div>
 
       <div className="flex flex-col gap-y-[0px] col-span-1">
-        <div className="space-x-3">
-          <span className="text-[#000] text-base font-medium">
-            {translation("pdf.email")}:
-          </span>
-          <span className="text-[#000] text-base font-medium"> {email}</span>
-        </div>
+        {
+          email &&
+          <div className="space-x-3">
+            <span className="text-[#000] text-base font-medium">
+              {translation("pdf.email")}:
+            </span>
+            <span className="text-[#000] text-base font-medium"> {email}</span>
+          </div>
+        }
         {
           (phone !== "+" && phone) &&
           <div className="space-x-3">
@@ -40,7 +43,7 @@ export const ContactDetails = ({
             <span className="text-[#000] text-base font-medium"> {phone}</span>
           </div>
         }
-         {
+        {
           (mobile !== "+" && mobile) &&
           <div className="space-x-3">
             <span className="text-[#404040] text-base font-medium">

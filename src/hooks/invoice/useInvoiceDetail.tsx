@@ -309,7 +309,7 @@ export default function useInvoiceDetail() {
 
   const handleInvoiceUpdate = () => {
     router.pathname = "/invoices/update-invoice";
-    router.query = { invoiceID: invoiceDetails?.id };
+    router.query = { invoice: invoiceDetails?.id };
     updateQuery(router, router.locale as string)
   };
   return {

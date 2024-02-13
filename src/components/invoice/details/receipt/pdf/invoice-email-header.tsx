@@ -144,8 +144,7 @@ export const InvoiceEmailHeader = ({
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {
-                  collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
-                    ?.createdBy?.fullName
+                  collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName
                 }
               </span>
             </div>

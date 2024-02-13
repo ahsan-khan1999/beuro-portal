@@ -4,6 +4,7 @@ import { HeaderLabel } from "@/utils/static";
 import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export const Header = ({
   createdBy,
@@ -12,10 +13,8 @@ export const Header = ({
   offerNo,
   fileType,
 }: Partial<DocumentHeaderDetailsProps>) => {
-  const { t: translate } = useTranslation();
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
-
   return (
     <View
       style={{
@@ -28,10 +27,10 @@ export const Header = ({
       }}
       fixed
     >
-      <View style={{ width: "60%" }}>
+      <View style={{ width: "65%" }}>
         <Image src={logo} style={{ width: 182, height: 73 }} />
       </View>
-      <View style={{ width: "40%" }}>
+      <View style={{ width: "35%" }}>
         <View
           style={{
             display: "flex",
@@ -44,13 +43,13 @@ export const Header = ({
               fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
-              marginRight: 6,
+              marginRight: 1,
               // color: `#${textColour}`,
             }}
           >
             {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
               "Angebot"}{" "}
-            Nr:
+            Nr :
           </Text>
           <Text
             style={{
@@ -75,13 +74,13 @@ export const Header = ({
               fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
-              marginRight: 6,
+              marginRight: 1,
               // color: `#${textColour}`,
             }}
           >
             {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
               "Angebots"}
-            datum:
+            datum :
           </Text>
           <Text
             style={{
@@ -91,7 +90,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {pdfDateFormat(offerDate || "")}
+            {pdfDateFormat(offerDate || "","de")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
@@ -100,11 +99,11 @@ export const Header = ({
               fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
-              marginRight: 6,
+              marginRight: 1,
               // color: `#${textColour}`,
             }}
           >
-            Erstellt von:
+            Erstellt von :
           </Text>
           <Text
             style={{

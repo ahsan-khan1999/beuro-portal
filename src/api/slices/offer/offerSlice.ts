@@ -129,12 +129,6 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             thunkApi.dispatch(setOfferDetails(objectToUpdate));
             return response?.data?.Offer;
         } catch (e: any) {
-            // if (Array.isArray(e?.data?.data?.address)) {
-            //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.address)
-            //     setErrors(setError, transformedValidationMessages, translate);
-            // } else {
-            // }
-
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;

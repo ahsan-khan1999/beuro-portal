@@ -4,6 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { EditComponentsType } from "./EditOffersDetailsData";
+import { useInoviceEditAdditionalDetails } from "@/hooks/invoice/useInvoiceEditAdditionalDetails";
 
 const AditionalEditDetails = ({
   handleNext,
@@ -14,13 +15,13 @@ const AditionalEditDetails = ({
 }) => {
   const router = useRouter();
   const defaultClassName = "pt-5";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate,offerDetails } =
-    useOfferEditAdditionalDetails({ handleNext, handleBack });
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate,invoiceDetails } =
+  useInoviceEditAdditionalDetails({ handleNext, handleBack });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.additional_details.main_heading")} ({offerDetails?.id && offerDetails?.offerNumber})
+          {translate("offers.additional_details.main_heading")} ({invoiceDetails?.id && invoiceDetails?.invoiceNumber})
         </h2>
         <button
           onClick={() => router.back()}

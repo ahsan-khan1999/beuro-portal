@@ -85,9 +85,8 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
-              isSendEmail && "hidden"
-            }`}
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
+              }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
@@ -176,16 +175,19 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
-                      item.endDate
-                        ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
-                          ((offerDetails?.date?.length - 1 != index && ", ") ||
-                            ".")
-                        : (offerDetails?.date?.length - 1 != index && ", ") ||
-                          "."
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((offerDetails?.date?.length - 1 != index && ", ") ||
+                        ".")
+                      : (offerDetails?.date?.length - 1 != index && ", ") ||
+                      "."
                     }`
                 )}
+                {offerDetails?.time &&
+                  ` ${translate("common.at")} ` +
+                  offerDetails?.time +
+                  ` ${translate("common.clock")} `}
               </span>
             </div>
           </div>
@@ -259,18 +261,18 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                <span
-                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getOfferStatusColor(
-                      offerDetails?.offerStatus
-                    )}`,
-                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                  }}
-                >
-                  {offerDetails?.offerStatus}
-                </span>
-              )}
+                  <span
+                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                    style={{
+                      borderColor: `${getOfferStatusColor(
+                        offerDetails?.offerStatus
+                      )}`,
+                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                    }}
+                  >
+                    {offerDetails?.offerStatus}
+                  </span>
+                )}
             </span>
           </div>
           {offerDetails?.offerStatus === "Rejected" && (
@@ -292,7 +294,7 @@ const OfferDetailsCard = ({
                 {translate("offers.card_content.notes")}:
               </span>
               <WriteIcon
-                pathClass={offerDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                pathClass={offerDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"}
               />
             </div>
             <div className="flex items-center gap-[11px]">

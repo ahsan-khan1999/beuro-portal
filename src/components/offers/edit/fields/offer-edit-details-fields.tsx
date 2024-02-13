@@ -131,7 +131,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary ",
               inputType: "number",
               id: "phoneNumber",
               name: "phoneNumber",

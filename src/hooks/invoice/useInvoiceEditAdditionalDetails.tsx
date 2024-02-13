@@ -14,6 +14,7 @@ import {
 } from "@/api/slices/content/contentSlice";
 import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 export const useInoviceEditAdditionalDetails = ({
   handleNext,
@@ -25,14 +26,14 @@ export const useInoviceEditAdditionalDetails = ({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
   );
   const { content, contentDetails } = useAppSelector((state) => state.content);
 
   useEffect(() => {
-    setValue("additionalDetails", offerDetails?.additionalDetails);
-    setValue("content", offerDetails?.content?.id);
+    setValue("additionalDetails", invoiceDetails?.additionalDetails);
+    setValue("content", invoiceDetails?.content?.id);
 
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
@@ -54,10 +55,10 @@ export const useInoviceEditAdditionalDetails = ({
   useMemo(() => {
     setValue(
       "additionalDetails",
-      offerDetails?.additionalDetails ||
-        offerDetails?.content?.offerContent?.description
+      invoiceDetails?.additionalDetails ||
+        invoiceDetails?.content?.invoiceContent?.description
     );
-  }, [offerDetails?.additionalDetails]);
+  }, [invoiceDetails?.additionalDetails]);
 
   const selectedContent = watch("content");
   const handlePrevious = () => {
@@ -68,7 +69,7 @@ export const useInoviceEditAdditionalDetails = ({
     const filteredContent = content?.find((item) => item.id === id);
     if (filteredContent) {
       dispatch(setContentDetails(filteredContent));
-      setValue("additionalDetails", filteredContent?.offerContent?.description);
+      setValue("additionalDetails", filteredContent?.invoiceContent?.description);
       trigger("additionalDetails");
     }
   };
@@ -81,7 +82,7 @@ export const useInoviceEditAdditionalDetails = ({
     {
       content: content,
       contentDetails: contentDetails,
-      offerDetails,
+      invoiceDetails,
       onContentSelect,
       selectedContent,
     },
@@ -92,11 +93,11 @@ export const useInoviceEditAdditionalDetails = ({
     const apiData = {
       ...data,
       step: 4,
-      id: offerDetails?.id,
+      id: invoiceDetails?.id,
       stage: EditComponentsType.additionalEdit,
     };
     const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
+      updateInvoiceDetials({ data: apiData, router, setError, translate })
     );
     if (response?.payload) handleNext(EditComponentsType.additionalEdit);
   };
@@ -108,6 +109,6 @@ export const useInoviceEditAdditionalDetails = ({
     errors,
     error,
     translate,
-    offerDetails
+    invoiceDetails
   };
 };

@@ -10,16 +10,18 @@ import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsDa
 import { useEffect, useMemo, useState } from "react";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 export const useEditInvoiceAddressDetails = ({ handleNext }: { handleNext: (currentComponent: EditComponentsType) => void }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector((state) => state.offer);
+  const { loading, error, invoiceDetails } = useAppSelector((state) => state.invoice);
+  
   const [addressType, setAddressType] = useState(
-    offerDetails?.addressID ?
-      Array.from(offerDetails?.addressID?.address, () => (false)) :
-      offerDetails?.leadID?.addressID?.address ? Array.from(offerDetails?.leadID?.addressID?.address, () => (false)) : [false] || [false],
+    invoiceDetails?.addressID ?
+      Array.from(invoiceDetails?.addressID?.address, () => (false)) :
+      invoiceDetails?.customerDetail?.address ? Array.from([invoiceDetails?.customerDetail?.address], () => (false)) : [false] || [false],
 
   )
   const handleBack = () => {
@@ -42,22 +44,21 @@ export const useEditInvoiceAddressDetails = ({ handleNext }: { handleNext: (curr
 
   useEffect(() => {
 
-    if (offerDetails.id) {
+    if (invoiceDetails.id) {
       reset({
-        address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Adresse ${++index}` }))
-          : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
-            offerDetails?.leadID?.customerDetail?.address ? [{ ...offerDetails?.leadID?.customerDetail?.address, label: `Adresse ${1}` }] :
-              addressType?.map((item, index) => ({
-                streetNumber: "",
-                postalCode: "",
-                country: "Switzerland",
-                description: "",
-                label: `Adresse ${++index}`
-              })),
+        address: invoiceDetails?.addressID
+          ? invoiceDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Adresse ${++index}` }))
+          : invoiceDetails?.customerDetail?.address ? [{ label: `Adresse ${1}`, ...invoiceDetails?.customerDetail?.address }] :
+            addressType?.map((item, index) => ({
+              streetNumber: "",
+              postalCode: "",
+              country: "Switzerland",
+              description: "",
+              label: `Adresse ${++index}`
+            })),
       });
     }
-  }, [offerDetails.id])
+  }, [invoiceDetails.id])
   const { fields: addressFields, append, remove } = useFieldArray({
     control,
     name: "address",
@@ -73,8 +74,8 @@ export const useEditInvoiceAddressDetails = ({ handleNext }: { handleNext: (curr
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 2, id: offerDetails?.id, stage: EditComponentsType.serviceEdit }
-    const response = await dispatch(updateOffer({ data: apiData, router, setError, translate }));
+    const apiData = { ...data, step: 2, id: invoiceDetails?.id, stage: EditComponentsType.serviceEdit }
+    const response = await dispatch(updateInvoiceDetials({ data: apiData, router, setError, translate }));
     if (response?.payload) handleNext(EditComponentsType.serviceEdit);
 
   };
@@ -86,6 +87,6 @@ export const useEditInvoiceAddressDetails = ({ handleNext }: { handleNext: (curr
     errors,
     error,
     translate,
-    offerDetails
+    invoiceDetails
   };
 };

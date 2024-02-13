@@ -80,7 +80,7 @@ const PdfPriview = () => {
             emailTemplateSettings={emailTemplateSettings}
             templateSettings={templateSettings}
             systemSetting={systemSetting}
-            showContractSign={true}
+            showContractSign={false}
             pdfFile={pdfFile}
             setPdfFile={setPdfFile}
           />
@@ -91,7 +91,7 @@ const PdfPriview = () => {
             pdfFile={pdfFile}
             setPdfFile={setPdfFile}
             systemSetting={systemSetting}
-            showContractSign={true}
+            showContractSign={false}
 
           />
 

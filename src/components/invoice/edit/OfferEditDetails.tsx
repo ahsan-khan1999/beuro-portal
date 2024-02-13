@@ -4,6 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { EditComponentsType } from "./EditOffersDetailsData";
+import { useEditInvoiceDetails } from "@/hooks/invoice/useEditInvoiceDetails";
 
 const OfferEditDetails = ({
   handleNext,
@@ -12,13 +13,13 @@ const OfferEditDetails = ({
 }) => {
   const router = useRouter();
   const defaultClassName = "pt-5";
-  const { fields, control, onSubmit, handleSubmit, errors, translate,offerDetails } =
-    useEditOfferDetails({ handleNext });
+  const { fields, control, onSubmit, handleSubmit, errors, translate,invoiceDetails } =
+  useEditInvoiceDetails({ handleNext });
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-20">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.offer_details.heading")} ({offerDetails?.id && offerDetails?.offerNumber})
+          {translate("invoice.invoice_details")} ({invoiceDetails?.id && invoiceDetails?.invoiceNumber})
         </h2>
         <button
           onClick={() => router.back()}

@@ -67,7 +67,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
     [EditOfferDetails.email]: yup
       .string()
       .email()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
 
     [EditOfferDetails.offerTitle]: yup
       .string()
