@@ -25,14 +25,14 @@ export const DropDownItems = ({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
     >
-      {items.map(({ item, value }, idx) => (
+      {items.map(({ item }, idx) => (
         <li
           key={idx}
           role="menuitem"
           className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-4 py-2"
-          onClick={() => handleItemClick(`${item}` || "")}
+          onClick={() => handleItemClick(`${item.value}` || "")}
         >
-          {item}
+          {item.label}
         </li>
       ))}
     </motion.ul>

@@ -15,10 +15,10 @@ const AddressDetailsData = ({
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
       id={translate("contracts.tabs_headings.address_details")}
     >
-      <h2 className="text-[#393939] text-lg font-medium">
+      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
         {translate("contracts.address_details.main_heading")}
       </h2>
-      <hr className="opacity-20 my-6" />
+
       {contractDetails.offerID?.addressID?.address?.map((item, key) => (
         <div className="my-5" key={key}>
           <h4 className="text-[#8F8F8F] mb-[10px]">

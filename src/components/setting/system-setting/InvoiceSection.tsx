@@ -77,7 +77,12 @@ const InvoiceSection = ({
               </p>
               <DropDown
                 items={Object.keys(staticEnums["InvoiceOverDueLimit"]).map(
-                  (item) => ({ item: item })
+                  (item) => ({
+                    item: {
+                      label: item,
+                      value: item,
+                    },
+                  })
                 )}
                 onItemSelected={handleItemSelected}
                 selectedItem={systemSetting?.daysLimit?.toString()}

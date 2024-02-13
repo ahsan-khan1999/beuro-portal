@@ -1,5 +1,6 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditorBoxProps } from "@/types";
 
@@ -35,6 +36,7 @@ const CustomCKEditor = ({
       }}
       config={{
         language: "de",
+
         toolbar: {
           items: [
             "undo",

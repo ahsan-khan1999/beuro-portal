@@ -32,8 +32,7 @@ const PdfCard = ({
       <PdfCardLayout>
         <div className=" rounded-md bg-white w-full h-fit">
           <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
-            <div className="flex items-center">
-              {/* <span
+            {/* <span
                 className="cursor-pointer"
                 onClick={() => {
                   router.push({
@@ -64,18 +63,33 @@ const PdfCard = ({
                   />
                 </svg>
               </span> */}
-              <h1
-                onClick={() => {
-                  router.push({
-                    pathname: "/contract/details",
-                    query: { contract: contractDetails?.id },
-                  });
-                }}
-                className="text-[#4B4B4B] text-2xl font-medium cursor-pointer"
+
+            <div
+              onClick={() => {
+                router.push({
+                  pathname: "/contract/details",
+                  query: { contract: contractDetails?.id },
+                });
+              }}
+              className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="17"
+                viewBox="0 0 9 14"
+                fill="none"
               >
+                <path
+                  d="M8.1165 1.07827C8.30043 1.26226 8.40376 1.51176 8.40376 1.77191C8.40376 2.03207 8.30043 2.28157 8.1165 2.46555L3.26003 7.32203L8.1165 12.1785C8.29522 12.3635 8.39411 12.6114 8.39187 12.8686C8.38964 13.1259 8.28645 13.3719 8.10455 13.5538C7.92264 13.7357 7.67657 13.8389 7.41933 13.8412C7.16208 13.8434 6.91426 13.7445 6.72922 13.5658L1.1791 8.01567C0.995171 7.83169 0.891845 7.58218 0.891845 7.32203C0.891845 7.06187 0.995171 6.81237 1.1791 6.62839L6.72922 1.07827C6.9132 0.894341 7.16271 0.791016 7.42286 0.791016C7.68301 0.791016 7.93252 0.894342 8.1165 1.07827Z"
+                  fill="#4A13E7"
+                />
+              </svg>
+              <span className=" text-2xl font-medium mt-1">
                 {translate("offers.table_headings.edit")}
-              </h1>
+              </span>
             </div>
+
             <div className="flex items-center gap-x-5">
               {/* <BaseButton
                 buttonText={translate("contracts.pdf_card_details.heading")}

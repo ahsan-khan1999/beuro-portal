@@ -665,7 +665,6 @@
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
       "receipt_email_preview": "E-Mail-Vorschau der Quittung",
       "edit_invoice": "Bearbeiten Quittung"
-
     },
     "table_functions": {
       "open": "Offen",
@@ -1080,6 +1079,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "lead": "Anfragen",
     "add": "hinzufügen",
     "upload_link": "Laden Sie Ihren Link hier hoch",
     "time": "Zeit",
@@ -1983,5 +1983,35 @@
     "Open": "Offen",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
+  },
+  "offer_status": {
+    "Open": "Offen",
+    "Signed": "Unterzeichnet",
+    "Expire": "Abgelaufen",
+    "Rejected": "Abgelehnt"
+  },
+  "contract_status": {
+    "Open": "Offen",
+    "Confirmed": "Bestätigt",
+    "Cancelled": "Abgesagt"
+  },
+  "invoice_status": {
+    "Pending": "Anhängig",
+    "Overdue": "Überfällig",
+    "Paid": "Bezahlt"
+  },
+
+  "payment_method": {
+    "Cash": "Bargeld",
+    "Online": "Online"
+  },
+  "customer_status": {
+    "unBlock": "unBlock",
+    "block": "block"
+  },
+  "typeList": {
+    "All": "Alle",
+    "Individual": "Einzelne",
+    "Company": "Unternehmen"
   }
 }

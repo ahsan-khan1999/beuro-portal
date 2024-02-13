@@ -27,7 +27,7 @@ const ServiceDetailsData = ({
       className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] w-full h-fit "
       id={translate("contracts.tabs_headings.service_details")}
     >
-      <h2 className="text-[#393939] text-lg font-medium border-b border-[#e5e5e5] pb-6">
+      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
         {translate("contracts.service_details.heading")}
       </h2>
 

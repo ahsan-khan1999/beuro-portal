@@ -112,6 +112,14 @@ const CustomerDetailsData = ({
               {offerDetails?.leadID?.customerDetail?.gender}
             </div>
           </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("common.lead")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              {offerDetails?.leadID?.customerDetail?.refID}
+            </div>
+          </div>
         </div>
 
         <div className="mt-5">

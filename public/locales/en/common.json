@@ -672,7 +672,6 @@
       "invoice_email_preview": "Invoice Email Preview",
       "receipt_email_preview": "Receipt Email Preview",
       "edit_invoice": "Bearbeiten Quittung"
-
     },
     "table_functions": {
       "open": "Open",
@@ -1089,6 +1088,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "lead": "Lead",
     "add": "Add",
     "upload_link": "Upload your link here",
     "time": "Time",
@@ -1984,9 +1984,34 @@
     "Mr": "Mr",
     "Mrs": "Mrs"
   },
-  "lead_status":{
-    "Open":"Open",
-    "Close":"Close",
-    "Expire":"Expired"
+  "lead_status": {
+    "Open": "Open",
+    "Close": "Close",
+    "Expire": "Expired"
+  },
+  "offer_status": {
+    "Open": "Offen",
+    "Signed": "Signed",
+    "Expire": "Expired",
+    "Rejected": "Rejected"
+  },
+  "contract_status": {
+    "Open": "Open",
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled"
+  },
+  "invoice_status": {
+    "Pending": "Pending",
+    "Overdue": "Overdue",
+    "Paid": "Paid"
+  },
+  "payment_method": {
+    "Cash": "Cash",
+    "Online": "Online"
+  },
+  "typeList": {
+    "All": "All",
+    "Individual": "Individual",
+    "Company": "Company"
   }
 }

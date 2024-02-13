@@ -38,6 +38,18 @@ const ContractDetailsCard = ({
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const contractStatus = [
+    `${translate("contract_status.Open")}`,
+    `${translate("contract_status.Confirmed")}`,
+    `${translate("contract_status.Cancelled")}`,
+  ];
+
   return (
     <div className="min-h-[218px]">
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
@@ -242,8 +254,11 @@ const ContractDetailsCard = ({
               <span>
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
-                    (item) => ({
-                      item: item,
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
                     })
                   )}
                   selectedItem={contractDetails?.paymentType}
@@ -270,13 +285,32 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                  <DropDown
-                    items={Object.keys(staticEnums["ContractStatus"]).map(
-                      (item) => ({ item: item })
-                    )}
-                    selectedItem={contractDetails?.contractStatus}
-                    onItemSelected={handleStatusUpdate}
-                    dropDownClassName={`border border-[${getContractStatusColor(
+                <DropDown
+                  items={Object.keys(staticEnums["ContractStatus"]).map(
+                    (item, index) => ({
+                      item: {
+                        label: contractStatus[index],
+                        value: item,
+                      },
+                    })
+                  )}
+                  selectedItem={contractDetails?.contractStatus}
+                  onItemSelected={handleStatusUpdate}
+                  dropDownClassName={`border border-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}] rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}] text-base font-medium me-1`}
+                  dropDownIconClassName={`text-[${getContractStatusColor(
+                    contractDetails?.contractStatus
+                  )}]`}
+                />
+              )) || (
+                <span
+                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getContractStatusColor(
                       contractDetails?.contractStatus
                     )}] rounded-lg px-4 py-[3px] flex items-center`}
                     dropDownTextClassName={`text-[${getContractStatusColor(

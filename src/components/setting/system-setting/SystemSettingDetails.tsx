@@ -114,7 +114,10 @@ const SystemSettingDetails = ({
           </p>
           <DropDown
             items={Object.keys(staticEnums["currency"]).map((item) => ({
-              item: item,
+              item: {
+                label: item,
+                value: item,
+              },
             }))}
             onItemSelected={handleItemSelected}
             selectedItem={systemSetting?.currency}
