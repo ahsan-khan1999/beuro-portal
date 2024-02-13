@@ -120,13 +120,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               className:
-                " !border-[#BFBFBF] focus:!border-primary cursor-default",
+                "!px-4 !border-[#BFBFBF] focus:!border-primary cursor-default",
               id: "phoneNumber",
               name: "phoneNumber",
-              country: "ch",
-              control,
+              inputType:"number",
+              register,
               disabled: isUpdate,
               value: customerDetails && customerDetails.phoneNumber,
             },

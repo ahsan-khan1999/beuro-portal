@@ -470,5 +470,6 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
+    contractDetails
   };
 };

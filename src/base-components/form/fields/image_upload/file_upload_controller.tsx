@@ -10,7 +10,8 @@ export const ImageUploadField = ({
   text,
   fileSupported,
   onClick,
-  value
+  value,index,
+  setValue
 }: ImageUploadFieldProps) => {
   return (
     <Controller
@@ -24,6 +25,8 @@ export const ImageUploadField = ({
           fileSupported={fileSupported}
           onClick={onClick}
           value={value}
+          index={index}
+          setValue={setValue}
         />
       )}
     />

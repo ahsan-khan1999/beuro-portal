@@ -14,13 +14,22 @@ const AditionalAddDetails = ({
 }) => {
   const router = useRouter();
   const defaultClassName = "pt-5";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate,offerDetails } =
-    useOfferAditionalDetails(onHandleNext, onHandleBack);
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    offerDetails,
+  } = useOfferAditionalDetails(onHandleNext, onHandleBack);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-20">
+      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10">
         <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.additional_details.main_heading")} {offerDetails?.id && (offerDetails?.offerNumber)}
+          {translate("offers.additional_details.main_heading")}{" "}
+          {offerDetails?.id && offerDetails?.offerNumber}
         </h2>
         <button
           onClick={() => router.push("/offers")}

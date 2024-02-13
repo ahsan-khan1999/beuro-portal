@@ -322,6 +322,7 @@ export const useOfferPdf = () => {
     handlePrint,
     onClose,
     onSuccess,
-    systemSetting
+    systemSetting,
+    offerDetails
   };
 };

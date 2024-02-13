@@ -22,12 +22,23 @@ const DetailsData = ({
 }) => {
   const { t: translate } = useTranslation();
 
+  const customerStatus = [
+    `${translate("customer_status.unBlock")}`,
+    `${translate("customer_status.block")}`,
+  ];
+
   const items: DropDownItem[] = [
     {
-      item: "unBlock",
+      item: {
+        label: customerStatus[0],
+        value: "unBlockValue",
+      },
     },
     {
-      item: "block",
+      item: {
+        label: customerStatus[1],
+        value: "blockValue",
+      },
     },
   ];
 

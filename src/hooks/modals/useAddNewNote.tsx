@@ -6,14 +6,26 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
 import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
-import { createLeadNotes } from "@/api/slices/lead/leadSlice";
+import { createLeadNotes, setLeads } from "@/api/slices/lead/leadSlice";
 import { createNote } from "@/api/slices/noteSlice/noteSlice";
+import { FilterType } from "@/types";
+import { setOfferDetails } from "@/api/slices/offer/offerSlice";
+import { setContractDetails } from "@/api/slices/contract/contractSlice";
+import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
 
-export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => void }) => {
+export const useAddNewNote = ({ handleNotes, handleFilterChange, filter }: {
+  handleNotes: (id: string) => void, handleFilterChange?: (query: FilterType) => void;
+  filter?: FilterType
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
+  const { lead } = useAppSelector((state) => state.lead);
+  const { offer, offerDetails } = useAppSelector((state) => state.offer);
+  const { contract,contractDetails } = useAppSelector((state) => state.contract);
+  const { invoice ,invoiceDetails} = useAppSelector((state) => state.invoice);
+
 
   const { modal: { data: { id, type } } } = useAppSelector((state) => state.global);
 
@@ -31,7 +43,36 @@ export const useAddNewNote = ({ handleNotes }: { handleNotes: (id: string) => vo
   const fields = AddNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await dispatch(createNote({ data: { ...data, id: id, type: type }, router, setError, translate }));
-    if (res?.payload) handleNotes(id)
+    if (res?.payload) {
+
+      switch (type) {
+        case "lead":
+          const isFilterLead = lead.find((item) => item.id === id)
+          if (!isFilterLead?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
+          break;
+        case "offer":
+          const isFilterOffer = offer.find((item) => item.id === id)
+          if (!isFilterOffer?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
+          else dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }))
+
+          break;
+        case "contract":
+          const isFilterContract = contract.find((item) => item.id === id)
+          if (!isFilterContract?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
+          else dispatch(setContractDetails({ ...contractDetails, isNoteCreated: true }))
+
+          break;
+        case "invoice":
+          const isFilterInvoice = invoice.find((item) => item.id === id)
+          if (!isFilterInvoice?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
+          else dispatch(setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true }))
+
+          break;
+        default:
+          break;
+      }
+      handleNotes(id)
+    }
 
   };
   return {

@@ -31,7 +31,7 @@ import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
-import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
+import { InvoiceDetailTableRowTypes, InvoiceTableRowTypes, SubInvoiceTableRowTypes } from './invoice';
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
@@ -205,7 +205,8 @@ export type GenerateFormAddressField = (
 export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  setValue?:UseFormSetValue<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -393,7 +394,6 @@ export type GenerateInvoiceEmailFormField = (
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>,
   contentLoading?: boolean
-
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
@@ -417,11 +417,12 @@ export type GenerateOffersFormField = (
     onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
-
 
 // Generate Euit date form-field
 export type GenerateEditDateFormField = (
@@ -456,6 +457,8 @@ export type GenerateOfferServiceFormField = (
     total?: Total;
     tax?: TaxSetting[] | null;
     currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -537,7 +540,31 @@ export type GenerateLeadsCustomerFormField = (
     handleContentSelect?: () => void;
     selectedContent?: string;
     leadID?: string;
-    gender?: number
+    gender?: number;
+  },
+  setValue: SetFieldValue<FieldValues>
+) => FormField[];
+
+
+export type GenerateInvoiceCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+    leadID?: string;
+    gender?: number;
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -704,7 +731,7 @@ export interface ContactDetailsProps {
   email: string;
   phone: string;
   gender?: string;
-  mobile?:string
+  mobile?: string;
 }
 export interface MovingDetailsProps {
   header: string;
@@ -715,7 +742,7 @@ export interface MovingDetailsProps {
   handleDescriptionUpdate?: (value: string) => void;
   addressLabels?: string[];
   handleEditDateModal?: () => void;
-  time?:string
+  time?: string;
 }
 export interface ProductItemProps {
   title: string;
@@ -898,8 +925,6 @@ export interface PdfProps<T = EmailHeaderProps> {
   signature?: string;
   attachement?: string;
   isCanvas?: boolean;
-
-
 }
 
 export interface PdfPreviewProps {
@@ -929,7 +954,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
-  handleEditDateModal?: () => void
+  handleEditDateModal?: () => void;
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -993,8 +1018,8 @@ export interface AggrementProps {
   emailTemplateSettings: EmailTemplate | null;
   setOfferSignature: SetStateAction<any>;
   systemSettings: SystemSetting | null;
-  pdfData: PdfProps<any>,
-  setComponentMounted: () => void
+  pdfData: PdfProps<any>;
+  setComponentMounted: () => void;
 }
 
 export interface FiltersComponentProps {

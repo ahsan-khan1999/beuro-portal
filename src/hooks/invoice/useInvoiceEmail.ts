@@ -47,7 +47,7 @@ export const useInvoiceEmail = (
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
-        collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+        collectiveInvoiceDetails?.invoiceID?.content
           ?.invoiceContent?.attachments as string[]
       )) ||
     []
@@ -76,21 +76,21 @@ export const useInvoiceEmail = (
         if (res?.payload) {
           setAttachements(
             transformAttachments(
-              res?.payload?.invoiceID?.contractID?.offerID?.content
+              res?.payload?.invoiceID?.content
                 ?.invoiceContent?.attachments as string[]
             ) || []
           );
           reset({
             email:
-              res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+              res?.payload?.invoiceID?.customerDetail
                 ?.email,
-            content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
+            content: res?.payload?.invoiceID?.content?.id,
             subject:
-              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.createdBy?.company?.companyName,
             description:
-              res?.payload?.invoiceID?.contractID?.offerID?.content
+              res?.payload?.invoiceID?.content
                 ?.invoiceContent?.body || "",
-            pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
+            pdf: res?.payload?.invoiceID?.content
               ?.invoiceContent?.attachments,
 
             // title: res?.payload?.title,
@@ -106,10 +106,10 @@ export const useInvoiceEmail = (
     if (selectedContent) {
       reset({
         email:
-          collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+          collectiveInvoiceDetails?.invoiceID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName,
         description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
         // title: collectiveInvoiceDetails?.title,

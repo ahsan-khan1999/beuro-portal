@@ -37,7 +37,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               inputType: "text",
               id: "totalAmount",
               name: "totalAmount",
-              value: invoiceDetails?.contractID?.offerID?.total?.toFixed(2),
+              value: invoiceDetails?.total?.toFixed(2),
               register,
               disabled: true,
             },

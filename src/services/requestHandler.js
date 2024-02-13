@@ -69,6 +69,8 @@ const SERVICE_URLS = {
   createInvoice: "/invoice/invoice-collection/",
   updateInvoicePaymentStatus: "/invoice/invoice-collection/update-payment-status/",
   updateInvoiceCollection: "/invoice/invoice-collection/",
+  createInvoiceDetail: "/invoice/invoice-step/",
+
   image: "/lead/images/",
   accountSetting: "/setting/account-setting",
   updatePassword: "/setting/update-password/",
@@ -500,6 +502,17 @@ const readSettingsQrCode = (params) =>
   get(SERVICE_URLS.settingsQrCode, params, { feature: featureConstants.login }, { detail: false });
 const createSettingsQrCode = (data) =>
   post(SERVICE_URLS.settingsQrCode, data, { feature: featureConstants.login });
+
+
+
+const createInvoiceDetail = (data) => {
+  let route = data?.invoiceId ? data?.step + "/" + data?.invoiceId : data?.step
+  return post(SERVICE_URLS.createInvoiceDetail + route, data, { feature: featureConstants.login });
+
+}
+
+const updateInvoiceDetails = (data) =>
+  put(SERVICE_URLS.createInvoiceDetail + `${data?.step}/${data?.id}`, data, { feature: featureConstants.login });
 const apiServices = {
 
   login,
@@ -654,6 +667,8 @@ const apiServices = {
   readSettingsQrCode,
   createSettingsQrCode,
   updateOfferContent,
-  updateContractDate
+  updateContractDate,
+  updateInvoiceDetails,
+  createInvoiceDetail
 };
 export default apiServices;

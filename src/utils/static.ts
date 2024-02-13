@@ -1634,7 +1634,7 @@ export const DEFAULT_INVOICE = {
 };
 
 export const HeaderLabel = {
-  contract: "Verträge",
+  contract: "Vertrag",
   invoice: "Rechnung",
   receipt: "Quittung",
 };
@@ -1642,4 +1642,4 @@ export const HeaderLabel = {
 export const GenderLabel = {
   Mr: "Herr",
   Mrs: "Frau",
-}
+};

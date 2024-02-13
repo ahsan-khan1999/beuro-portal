@@ -48,7 +48,7 @@ export const useReceiptEmail = (
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
-        collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
+        collectiveInvoiceDetails?.invoiceID?.content
           ?.receiptContent?.attachments as string[]
       )) ||
     []
@@ -76,21 +76,21 @@ export const useReceiptEmail = (
       ).then((res: any) => {
         setAttachements(
           transformAttachments(
-            res?.payload?.invoiceID?.contractID?.offerID?.content
+            res?.payload?.invoiceID?.content
               ?.receiptContent?.attachments as string[]
           ) || []
         );
         reset({
           email:
-            res?.payload?.invoiceID?.contractID?.offerID?.leadID?.customerDetail
+            res?.payload?.invoiceID?.customerDetail
               ?.email,
-          content: res?.payload?.invoiceID?.contractID?.offerID?.content?.id,
+          content: res?.payload?.invoiceID?.content?.id,
           subject:
-            res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+            res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.createdBy?.company?.companyName,
           description:
-            res?.payload?.invoiceID?.contractID?.offerID?.content
+            res?.payload?.invoiceID?.content
               ?.receiptContent?.body || "",
-          pdf: res?.payload?.invoiceID?.contractID?.offerID?.content
+          pdf: res?.payload?.invoiceID?.content
             ?.receiptContent?.attachments,
           // title: res?.payload?.title,
           // additionalDetails: res?.payload?.additionalDetails || "",
@@ -104,10 +104,10 @@ export const useReceiptEmail = (
     if (selectedContent) {
       reset({
         email:
-          collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.leadID
+          collectiveInvoiceDetails?.invoiceID
             ?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.receiptContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+        subject: selectedContent?.receiptContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName,
         description: selectedContent?.receiptContent?.body || "",
         pdf: selectedContent?.receiptContent?.attachments,
         // title: collectiveInvoiceDetails?.title,

@@ -75,7 +75,7 @@ const stylesheet: HtmlStyles = {
   },
   p: {
     margin: 0,
-    fontSize: 10,
+    fontSize: 8,
     color: "#272727",
   },
   h1: {
@@ -91,7 +91,7 @@ const stylesheet: HtmlStyles = {
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 13,
   },
   h4: {
     margin: 0,
@@ -106,11 +106,11 @@ const stylesheet: HtmlStyles = {
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 10,
+    fontSize: 9,
   },
   ul: { marginLeft: 0 },
   li: {
-    fontSize: 10,
+    fontSize: 8,
     marginLeft: 0,
     marginRight: 10,
 
@@ -130,7 +130,7 @@ const stylesheet: HtmlStyles = {
     },
   },
   strong: {
-    fontSize: 14,
+    fontSize: 8,
     fontWeight: 700,
     fontStyle: "bold",
   },

@@ -17,12 +17,15 @@ const EditConfirmationContentDetailsData = ({
     useEditConfirmationContentDetails(onClick);
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-20">
+      <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-10">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("content.details.confirmation_heading")}
         </h2>
-        <button onClick={() => onClick(1, ComponentsType.confirmationContent)} className="text-[#4B4B4B] font-medium rounded-lg border py-2 border-[#4A13E7] px-9">
-        {translate("content.details.cancel_button")}
+        <button
+          onClick={() => onClick(1, ComponentsType.confirmationContent)}
+          className="text-[#4B4B4B] font-medium rounded-lg border py-2 border-[#4A13E7] px-9"
+        >
+          {translate("content.details.cancel_button")}
         </button>
       </div>
       <Form

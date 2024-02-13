@@ -8,7 +8,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   control,
   onClick,
   count,
-  { content, contentDetails, offerDetails, onContentSelect, selectedContent },
+  { content, contentDetails, invoiceDetails, onContentSelect, selectedContent },
   setValue,
   trigger
 ) => {

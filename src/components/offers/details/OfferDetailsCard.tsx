@@ -39,6 +39,23 @@ const OfferDetailsCard = ({
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
   };
+
+  const itemsValue = [
+    `${translate("offer_status.Open")}`,
+    `${translate("offer_status.Signed")}`,
+    `${translate("offer_status.Expire")}`,
+    `${translate("offer_status.Rejected")}`,
+  ];
+
+  const items = Object.keys(staticEnums["OfferStatus"]).map((item, index) => ({
+    item: { label: itemsValue[index], value: item },
+  }));
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -67,7 +84,7 @@ const OfferDetailsCard = ({
               fill="#4A13E7"
             />
           </svg>
-          <p className="font-medium text-2xl ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px] ">
             {translate("offers.card_content.main_heading")}
           </p>
         </div>
@@ -99,7 +116,7 @@ const OfferDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: `/offers/pdf-preview`,
-                  query: { offerID: offerDetails?.id,isMail:true },
+                  query: { offerID: offerDetails?.id, isMail: true },
                 })
               }
             />
@@ -184,12 +201,16 @@ const OfferDetailsCard = ({
                       "."
                     }`
                 )}
+                {offerDetails?.time &&
+                  ` ${translate("common.at")} ` +
+                  offerDetails?.time +
+                  ` ${translate("common.clock")} `}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(100px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
+        <div className="grid grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
@@ -215,8 +236,11 @@ const OfferDetailsCard = ({
               {offerDetails?.paymentType && (
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
-                    (item) => ({
-                      item: item,
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
                     })
                   )}
                   selectedItem={offerDetails?.paymentType}
@@ -235,18 +259,14 @@ const OfferDetailsCard = ({
               )}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
-            <span className="text-[#4D4D4D] font-normal text-base" >
+          <div className="flex items-center gap-[11px]">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
             <span>
               {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
                 <DropDown
-                  items={Object.keys(staticEnums["OfferStatus"]).map(
-                    (item) => ({
-                      item: item,
-                    })
-                  )}
+                  items={items}
                   selectedItem={offerDetails?.offerStatus}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getOfferStatusColor(
@@ -257,42 +277,40 @@ const OfferDetailsCard = ({
                   )}] text-base font-medium me-1`}
                 />
               )) || (
-                  <span
-                    className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                    style={{
-                      borderColor: `${getOfferStatusColor(
-                        offerDetails?.offerStatus
-                      )}`,
-                      color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
-                    }}
-                  >
-                    {offerDetails?.offerStatus}
-                  </span>
-                )}
+                <span
+                  className="border w-fit rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
+                  style={{
+                    borderColor: `${getOfferStatusColor(
+                      offerDetails?.offerStatus
+                    )}`,
+                    color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
+                  }}
+                >
+                  {translate(`offer_status.${offerDetails?.offerStatus}`)}
+                </span>
+              )}
             </span>
           </div>
-          {
-            offerDetails?.offerStatus === "Rejected" &&
-
+          {offerDetails?.offerStatus === "Rejected" && (
             <div className="flex items-center gap-[11px] ">
-              <span className="text-[#4D4D4D] font-normal text-base" >
+              <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.reason")}:
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.reason || "-"}
               </span>
             </div>
-          }
+          )}
           <div className="flex justify-between items-center">
             <div
-              className="flex items-center gap-[11px] cursor-pointer"
+              className="flex items-center gap-[11px] cursor-pointer mr-4"
               onClick={(e) => handleNotes(offerDetails?.id, e)}
             >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.notes")}:
               </span>
               <WriteIcon
-                pathClass={offerDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                pathClass={offerDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"}
               />
             </div>
             <div className="flex items-center gap-[11px]">

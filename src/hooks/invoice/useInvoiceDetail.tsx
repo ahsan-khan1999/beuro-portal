@@ -32,6 +32,7 @@ import RecurringInvoiceFrequency from "@/base-components/ui/modals1/InvoiceFrequ
 import InvoiceUpdate from "@/base-components/ui/modals1/InvoiceUpdate";
 import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoiceUpdate";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { updateQuery } from "@/utils/update-query";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -305,6 +306,12 @@ export default function useInvoiceDetail() {
   const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview";
   };
+
+  const handleInvoiceUpdate = () => {
+    router.pathname = "/invoices/update-invoice";
+    router.query = { invoice: invoiceDetails?.id };
+    updateQuery(router, router.locale as string)
+  };
   return {
     invoiceDetails,
     renderModal,
@@ -328,5 +335,6 @@ export default function useInvoiceDetail() {
     handleRecurringInvoiceEdit,
     loading,
     systemSettings,
+    handleInvoiceUpdate
   };
 }
