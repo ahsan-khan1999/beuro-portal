@@ -13,7 +13,13 @@ export type Template = {
 export type colsData = {
   title: string;
   placeholder: string;
-  data: { column: string; type: string; value: boolean, text: string,textType:string };
+  data: {
+    column: string;
+    type: string;
+    value: boolean;
+    text: string;
+    textType: string;
+  };
 };
 export type ColumnStructure = {
   firstColumn: colsData[];
@@ -31,6 +37,7 @@ export interface TemplateSettings {
   isFourthColumn: boolean;
   isThirdColumn: boolean;
   isSecondColumn: boolean;
+  order: boolean;
   firstColumn: {
     isCompanyName: boolean;
     isEmail: boolean;
@@ -54,7 +61,7 @@ export interface TemplateSettings {
     postCode: string;
     bankName: string;
     accountNumber: string;
-    iban: string
+    iban: string;
   };
   thirdColumn: {
     isRow1: boolean;
@@ -67,7 +74,6 @@ export interface TemplateSettings {
     row3: string;
     row4: string;
     row5: string;
-
   };
   fourthColumn: {
     isRow1: boolean;
@@ -121,7 +127,7 @@ export interface EmailSetting {
   phoneNumber: string;
   mobileNumber: string;
   FooterColour: string;
-  textColour: string
+  textColour: string;
 }
 
 export interface EmailTemplate {
@@ -130,9 +136,8 @@ export interface EmailTemplate {
   phoneNumber: string;
   mobileNumber: string;
   FooterColour: string;
-  textColour: string
+  textColour: string;
 }
-
 
 export interface QRSettings {
   companyName: string;
@@ -145,5 +150,5 @@ export interface QRSettings {
 export interface CompanyQrSettings {
   id: string;
   createdAt: string;
-  QrCodeDetail: QRSettings[]
+  QrCodeDetail: QRSettings[];
 }

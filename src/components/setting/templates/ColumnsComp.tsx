@@ -16,6 +16,9 @@ import {
 } from "@/types/settings";
 import { Button } from "@/base-components/ui/button/button";
 import InputField from "@/base-components/filter/fields/input-field";
+import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
+import rightAlignTemplate from "@/assets/pngs/Right_align.png";
+import { CheckIcon } from "@/assets/svgs/components/check-icon";
 
 const Column = ({
   title,
@@ -102,11 +105,14 @@ const ColumnsComp = () => {
     (state) => state.settings
   );
 
+  console.log(templateSettings);
+
   const [mainColumns, setMainColumns] = useState<MainColumns>({
     firstColumn: templateSettings?.isFirstColumn || false,
     secondColumn: templateSettings?.isSecondColumn || false,
     thirdColumn: templateSettings?.isThirdColumn || false,
     fourthColumn: templateSettings?.isFourthColumn || false,
+    order: templateSettings?.order || false,
   });
 
   const [columnSettings, setColumnSettings] = useState<ColumnStructure>({
@@ -345,6 +351,7 @@ const ColumnsComp = () => {
       },
     ],
   });
+
   useEffect(() => {
     setMainColumns({
       ...mainColumns,
@@ -392,6 +399,7 @@ const ColumnsComp = () => {
     columns[column as keyof ColumnStructure][index].data.text = value;
     setColumnSettings(columns);
   };
+
   const handleToggle = (column: string, value: boolean) => {
     let columnsetting = { ...columnSettings };
     let mainColumn = { ...mainColumns };
@@ -421,9 +429,11 @@ const ColumnsComp = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const handleSaveSetings = async () => {
     let formatObj: any = {};
     for (const [key, value] of Object.entries(columnSettings)) {
@@ -450,8 +460,20 @@ const ColumnsComp = () => {
     );
     if (response?.payload) handleSuccess();
   };
+
   return (
     <>
+      {/* template choice */}
+      <div className="flex gap-x-5 mb-5">
+        <div className="relative border-2 border-primary">
+          <div className="absolute -right-3 -top-3">
+            <CheckIcon />
+          </div>
+          <Image src={leftAlignTemplate} alt="left aligned" />
+        </div>
+        <Image src={rightAlignTemplate} alt="right aligned" />
+      </div>
+
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-[27px]">
         <Column
           title={`${translate("setting.templates.first_col_heading.heading")}`}
