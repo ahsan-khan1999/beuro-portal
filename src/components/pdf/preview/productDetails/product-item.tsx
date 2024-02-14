@@ -34,7 +34,7 @@ export const ProductItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{discount} </span>
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px]">
-            {totalPrice} {systemSettings?.currency}
+            {totalPrice} 
           </span>
         </div>
       </div>
