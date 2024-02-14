@@ -229,7 +229,9 @@ export const useReceiptPdf = () => {
               serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:invoiceDetails?.invoiceID?.discountDescription
+
             },
             footerDetails: {
               firstColumn: {
