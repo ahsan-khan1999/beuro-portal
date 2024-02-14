@@ -182,6 +182,21 @@ const ContentDetailsData = () => {
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 750 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 1350 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 1950 });
+    }
+  };
+
   return (
     <>
       <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
@@ -195,6 +210,7 @@ const ContentDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              onScroll={scrollHandler}
             />
           ))}
         </div>

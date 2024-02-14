@@ -93,7 +93,7 @@ const OfferDetailsCard = ({
           <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
-            containerClassName="flex items-center group gap-x-3 row-reverse border  border-primary"
+            containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             loading={loading}
             loaderColor="#4A13E7"
@@ -102,13 +102,13 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer group ${
               isSendEmail && "hidden"
             }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] flex items-center ">
+            <p className="font-medium text-[16px] text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
               {translate("offers.card_content.send_button")}
             </p>
           </div>

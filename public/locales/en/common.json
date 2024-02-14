@@ -1993,7 +1993,8 @@
     "Open": "Open",
     "Signed": "Signed",
     "Expire": "Expired",
-    "Rejected": "Rejected"
+    "Rejected": "Rejected",
+    "Accepted": "Accepted"
   },
   "contract_status": {
     "Open": "Open",

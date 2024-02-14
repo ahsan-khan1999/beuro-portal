@@ -1988,7 +1988,8 @@
     "Open": "Offen",
     "Signed": "Unterzeichnet",
     "Expire": "Abgelaufen",
-    "Rejected": "Abgelehnt"
+    "Rejected": "Abgelehnt",
+    "Accepted": "Angenommen"
   },
   "contract_status": {
     "Open": "Offen",
