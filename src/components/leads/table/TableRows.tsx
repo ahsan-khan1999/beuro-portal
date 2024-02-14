@@ -16,7 +16,7 @@ const TableRows = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
 
   const router = useRouter();
   return (
@@ -32,7 +32,7 @@ const TableRows = ({
               })
             }
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(100px,4fr)_minmax(150px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(90px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(100px,4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item?.refID}</span>
             <span className="py-4 truncate">
@@ -55,9 +55,9 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getStatusColor(item.leadStatus)}`,
                 }}
-                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm`}
               >
-                {item.leadStatus}
+                {translate(`lead_status.${item.leadStatus}`)}
               </div>
             </span>
             <span

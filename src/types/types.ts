@@ -206,7 +206,7 @@ export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
   onClick?: Function,
-  setValue?:UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -701,6 +701,7 @@ export interface DocumentHeaderDetailsProps {
   emailTemplateSettings: EmailTemplate | null;
   fileType?: "contract" | "invoice" | "receipt";
   companyName?: string;
+  isReverseLogo?:boolean
 }
 
 export interface ProductItemFooterProps {
@@ -719,6 +720,7 @@ export interface ProductItemFooterProps {
   serviceDiscountSum?: number;
   isTax?: boolean;
   isDiscount?: boolean;
+  discountDescription?: string
 }
 
 export interface ContactDetailsProps {
@@ -859,6 +861,7 @@ export interface TemplateType {
   isSecondColumn: boolean;
   isThirdColumn: boolean;
   isFourthColumn: boolean;
+  isReverseLogo: boolean
 }
 interface Template {
   Template: TemplateType;

@@ -94,6 +94,21 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 590 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 970 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 1450 });
+    }
+  };
+
   return (
     <>
       <div className="2xl:fixed mb-5">
@@ -106,6 +121,7 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              onScroll={scrollHandler}
             />
           ))}
         </div>

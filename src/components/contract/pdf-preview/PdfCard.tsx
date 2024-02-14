@@ -27,6 +27,7 @@ const PdfCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
+
   return (
     <div className="mb-5">
       <PdfCardLayout>
@@ -85,7 +86,7 @@ const PdfCard = ({
                   fill="#4A13E7"
                 />
               </svg>
-              <span className=" text-2xl font-medium mt-1">
+              <span className=" text-xl font-medium mt-1">
                 {translate("offers.table_headings.edit")}
               </span>
             </div>
@@ -139,34 +140,34 @@ const PdfCard = ({
           </div>
           <div className="grid grid-cols-1 xMaxSize:grid-cols-2 gap-x-6 gap-y-3 mt-5">
             <div className="flex items-center justify-between">
-              <div className="space-x-2">
+              <div className="flex gap-x-2">
                 <span className="text-[#4D4D4D] text-base font-normal">
                   {translate("contracts.pdf_card_details.contract_id")}:
                 </span>
-                &nbsp;
+
                 <span className="text-[#4B4B4B] text-base font-medium">
                   {contractNo}
                 </span>
               </div>
-              <div className="space-x-2">
+              <div className="flex gap-x-2">
                 <span className="text-[#4D4D4D] text-base font-normal">
                   {translate("contracts.pdf_card_details.worker")}:
                 </span>
-                &nbsp;
+
                 <span className="text-[#4B4B4B] text-base font-medium">
                   {worker}
                 </span>
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <div className="space-x-2">
+              <div className="flex gap-x-2">
                 <span className="text-[#4D4D4D] text-base font-normal">
                   {translate("contracts.pdf_card_details.content_name")}:
                 </span>
-                &nbsp;
-                <span className="text-[#4B4B4B] text-base font-medium">
+
+                <p className="text-[#4B4B4B] text-base font-medium xMaxSize:max-w-[200px] truncate">
                   {contractTitle}
-                </span>
+                </p>
               </div>
               <div className="flex items-center gap-x-2">
                 <span className="text-[#4D4D4D] text-base font-normal">
@@ -175,7 +176,7 @@ const PdfCard = ({
 
                 <div className="border-[#FE9244] border rounded-lg px-[8px] ">
                   <span className="text-[#FE9244] text-base font-medium">
-                    {contractStatus}
+                    {translate(`contract_status.${contractStatus}`)}
                   </span>
                 </div>
               </div>

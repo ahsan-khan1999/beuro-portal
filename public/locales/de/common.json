@@ -214,7 +214,7 @@
       "offers": {
         "offers": "Angebote",
         "open": "Offen",
-        "signed": "Unterzeichnet",
+        "signed": "Angenommen",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
       },
@@ -1253,7 +1253,7 @@
     "add_button": "Neu Hinzufügen",
     "table_functions": {
       "open": "Offen",
-      "signed": "Unterzeichnet",
+      "signed": "Angenommen",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
     },
@@ -1987,31 +1987,55 @@
   "offer_status": {
     "Open": "Offen",
     "Signed": "Unterzeichnet",
-    "Expire": "Abgelaufen",
-    "Rejected": "Abgelehnt"
+    "Expired": "Abgelaufen",
+    "Rejected": "Abgelehnt",
+    "Accepted": "Angenommen"
   },
   "contract_status": {
     "Open": "Offen",
+    "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
-    "Cancelled": "Abgesagt"
+    "Cancelled": "Abgesagt",
+    "Pending": "Anhängig"
   },
   "invoice_status": {
     "Pending": "Anhängig",
     "Overdue": "Überfällig",
-    "Paid": "Bezahlt"
+    "Paid": "Bezahlt",
+    "Open": "Offen"
   },
-
+  "support_req_status": {
+    "pending": "anhängig",
+    "resolved": "aufgelöst"
+  },
   "payment_method": {
     "Cash": "Bargeld",
     "Online": "Online"
   },
+
   "customer_status": {
     "unBlock": "unBlock",
     "block": "block"
   },
+
   "typeList": {
     "All": "Alle",
     "Individual": "Einzelne",
     "Company": "Unternehmen"
+  },
+  "email_status": {
+    "Post": "Beitrag",
+    "Pending": "Anhängig",
+    "Sent": "Gesendet",
+    "Failed": "Gescheitert"
+  },
+  "mail_tracker_status": {
+    "pending": "Anhängig",
+    "opend": "Offen",
+    "failed": "Fehlgeschlagen"
+  },
+  "support_request_status": {
+    "pending": "Anhängig",
+    "resolved": "aufgelöst"
   }
 }

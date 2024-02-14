@@ -14,6 +14,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { useAppDispatch } from "@/hooks/useRedux";
+import { pdfDateFormat } from "@/utils/utility";
 
 export const Aggrement = ({
   contactAddress,
@@ -35,10 +36,10 @@ export const Aggrement = ({
   pdfData,
   setComponentMounted
 }: AggrementProps) => {
-
-  const date = moment(new Date()).format("DD/MM/YYYY")
   const { t: translation } = useTranslation();
   const router = useRouter();
+  const currentDate = new Date().toString()
+  const date = pdfDateFormat(currentDate, router.locale as string)
   const dispatch = useAppDispatch()
   const { action: pdfAction } = router.query;
   const rejectOffer = async () => {
@@ -61,7 +62,7 @@ export const Aggrement = ({
             <div>
               <div className="h-[223.656px] flex flex-col justify-between">
                 <div className=" pt-5">
-                  <span className="text-[#000] text-base font-medium">
+                  <span className="text-[#000] text-sm font-medium">
                     {translation("pdf.validate_heading")}:
                   </span>
 
@@ -74,9 +75,9 @@ export const Aggrement = ({
                 </p>
               </div>
               <div className="flex flex-col ">
-                <span className="font-medium text-base mb-2">{date}</span>
+                <span className="font-medium text-sm mb-2">{date}</span>
                 <hr className="mb-[17px]" />
-                <span className="text-base text-black font-normal ">
+                <span className="text-sm text-black font-normal ">
                   {translation("pdf.date")}
                 </span>
               </div>
@@ -97,7 +98,7 @@ export const Aggrement = ({
                   {signature && <Image src={signature} alt="signature" height={177} width={446} />}
 
                   <hr />
-                  <span className="text-base text-black font-normal">
+                  <span className="text-sm text-black font-normal">
                     {translation("pdf.signature")}
                   </span>
                 </div>
@@ -112,7 +113,7 @@ export const Aggrement = ({
                 <div>
                   <div className="h-[223.656px] flex flex-col justify-between">
                     <div className=" pt-5">
-                      <span className="text-[#000] text-base font-medium">
+                      <span className="text-[#000] text-sm font-medium">
                         Validity of the offer:
                       </span>
 
@@ -128,15 +129,15 @@ export const Aggrement = ({
               </div>
               <div className="grid grid-cols-2 gap-x-[103px] mt-4 items-center">
                 <div className="flex flex-col  ">
-                  <span className="font-medium text-base mb-2">{date}</span>
+                  <span className="font-medium text-sm mb-2">{date}</span>
                   <hr className="mb-[17px]" />
-                  <span className="text-base text-black font-normal ">Date</span>
+                  <span className="text-sm text-black font-normal ">Date</span>
                 </div>
                 <div className="flex flex-col gap-y-[18px]">
                   {signature && <Image src={signature} alt="signature" height={177} width={446} />}
 
                   <hr />
-                  <span className="text-base text-black font-normal">
+                  <span className="text-sm text-black font-normal">
                     {translation("pdf.signature")}
                   </span>
                 </div>

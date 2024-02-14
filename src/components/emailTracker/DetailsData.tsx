@@ -84,7 +84,7 @@ const DetailsData = ({
                   emailDetails?.mailStatus || ""
                 )}]`}
               >
-                {translate(emailDetails?.mailStatus || "")}
+                {translate(`mail_tracker_status.${emailDetails?.mailStatus}`)}
               </span>
             )}
           </div>
@@ -105,8 +105,7 @@ const DetailsData = ({
               {emailDetails?.email}
             </span>
           </div>
-          {
-            emailDetails?.cc &&
+          {emailDetails?.cc && (
             <div>
               <span className="font-normal text-[#4D4D4D] text-base mr-5">
                 Cc:
@@ -115,9 +114,8 @@ const DetailsData = ({
                 {emailDetails?.cc}
               </span>
             </div>
-          }
-          {
-            emailDetails?.bcc &&
+          )}
+          {emailDetails?.bcc && (
             <div>
               <span className="font-normal text-[#4D4D4D] text-base mr-5">
                 Bcc:
@@ -126,7 +124,7 @@ const DetailsData = ({
                 {emailDetails?.bcc}
               </span>
             </div>
-          }
+          )}
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:

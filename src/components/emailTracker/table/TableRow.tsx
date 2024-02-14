@@ -6,9 +6,11 @@ import {
   formatDateTimeToTime,
   getMailStatusColor,
 } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <div>
@@ -47,9 +49,9 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               <div
                 className={`bg-[${getMailStatusColor(
                   item?.mailStatus
-                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px]`}
+                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-fit`}
               >
-                {item.mailStatus}
+                {translate(`mail_tracker_status.${item?.mailStatus}`)}
               </div>
             </span>
 

@@ -80,6 +80,7 @@ export const useOfferPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
+            isReverseLogo
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -91,6 +92,7 @@ export const useOfferPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
+            isReverseLogo
           }));
         }
         if (emailTemplate?.payload) {
@@ -124,6 +126,7 @@ export const useOfferPdf = () => {
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
+              isReverseLogo:template.payload.Template?.isReverseLogo
             },
             contactAddress: {
               address: {
@@ -162,7 +165,8 @@ export const useOfferPdf = () => {
               serviceDiscountSum: offerDetails?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:offerDetails?.discountDescription
             },
             footerDetails: {
               firstColumn: {

@@ -31,13 +31,13 @@ const DetailsData = ({
     {
       item: {
         label: customerStatus[0],
-        value: "unBlockValue",
+        value: "unBlock",
       },
     },
     {
       item: {
         label: customerStatus[1],
-        value: "blockValue",
+        value: "block",
       },
     },
   ];

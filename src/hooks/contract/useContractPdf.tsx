@@ -128,6 +128,7 @@ export const useContractPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
+            isReverseLogo
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -139,6 +140,7 @@ export const useContractPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
+            isReverseLogo
           }));
         }
         if (emailTemplate?.payload) {
@@ -168,7 +170,8 @@ export const useContractPdf = () => {
               createdBy: contractDetails?.offerID?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "contract"
+              fileType: "contract",
+              isReverseLogo:template.payload.Template?.isReverseLogo
             },
             contactAddress: {
               address: {
@@ -210,7 +213,8 @@ export const useContractPdf = () => {
               serviceDiscountSum: contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:contractDetails?.offerID?.discountDescription
             },
             footerDetails: {
               firstColumn: {

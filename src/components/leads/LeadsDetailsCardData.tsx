@@ -71,8 +71,7 @@ const LeadsDetailsCardData = ({
                     serviceDetail: leadDetails?.otherServices,
                   },
                   addressID: { address: leadDetails?.addressID?.address },
-                  content: leadDetails?.requiredService
-
+                  content: leadDetails?.requiredService,
                 })
               );
               dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
@@ -115,7 +114,7 @@ const LeadsDetailsCardData = ({
             </span>
             {leadDetails.leadStatus && (
               <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
-                {leadDetails.leadStatus}
+                {translate(`lead_status.${leadDetails.leadStatus}`)}
               </span>
             )}
           </div>
