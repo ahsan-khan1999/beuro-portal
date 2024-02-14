@@ -3,6 +3,7 @@ import { ProductItem } from "./product-item";
 import { DocumentHeader } from "../document-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { Footer } from "../../footer";
+import { ProductDiscountItem } from "./product--discount-item";
 
 export const ProductItemNewPage = ({
   serviceItem,
@@ -25,9 +26,14 @@ export const ProductItemNewPage = ({
     description: serviceItemFooter?.discountDescription || "",
     count: "-",
     pagebreak: true,
-    discount: Number(serviceItemFooter?.discount)
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
+    isGlobalDiscount: serviceItemFooter?.isDiscount
+
+
   }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
   return (
     <div>
       <DocumentHeader
@@ -36,9 +42,14 @@ export const ProductItemNewPage = ({
       />
       <div className="px-[80px] flex flex-col bg-white py-2">
         {serviceItem?.map((item, index) => (
-          <ProductItem {...item} key={index} />
+          <ProductItem {...item} key={index}
+            pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
+          />
         ))}
-        <ProductItem {...disscountTableRow} key={Math.random()} pagebreak={true} isDiscount={isDiscount}/>
+        {
+          (isDiscount || serviceItemFooter?.isDiscount) &&
+          <ProductDiscountItem {...disscountTableRow} key={Math.random()} pagebreak={true} isDiscount={isDiscount} />
+        }
         {isShowTotal && (
           <ProductItemFooter
             {...serviceItemFooter}

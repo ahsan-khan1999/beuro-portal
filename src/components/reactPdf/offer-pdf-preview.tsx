@@ -16,6 +16,7 @@ import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
+import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -111,10 +112,13 @@ const OfferPdfPreview = ({
     description: serviceItemFooter?.discountDescription,
     count: "-",
     pagebreak: true,
-    discount: Number(serviceItemFooter?.discount)
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount:serviceItemFooter?.isDiscount
   }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum &&  Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
-  
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }} >
       <Document title={data?.headerDetails?.offerNo || ""} >
@@ -139,16 +143,17 @@ const OfferPdfPreview = ({
               <ServiceTableRow
                 {...item}
                 key={index}
-                pagebreak={false}
+                pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1:false}
                 isDiscount={isDiscount}
               />
             ))}
-            <ServiceTableRow {...disscountTableRow} key={Math.random()}
-              pagebreak={true}
-              isDiscount={isDiscount}
-
-
-            />
+            {
+              (isDiscount || serviceItemFooter?.isDiscount) &&
+              <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+                pagebreak={true}
+                isDiscount={isDiscount}
+              />
+            }
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}

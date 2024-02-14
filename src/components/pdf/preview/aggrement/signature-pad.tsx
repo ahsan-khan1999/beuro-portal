@@ -29,6 +29,7 @@ import { useRouter } from "next/router";
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 import { pdf as reactPdf } from "@react-pdf/renderer";
+import { ServiceTableDiscountRow } from "@/components/reactPdf/service-table-discount";
 
 
 Font.register({
@@ -143,9 +144,12 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     description: serviceItemFooter?.discountDescription,
     count: "-",
     pagebreak: true,
-    discount: Number(serviceItemFooter?.discount)
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount: serviceItemFooter?.isDiscount
   }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
   const pdfDoc = (
     <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
       <Page style={styles.body}>
@@ -163,17 +167,21 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
           <AddressDetails {...{ address, header, workDates, time }} />
 
           <ServiceTableHederRow isDiscount={isDiscount} />
-          {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index}
-              pagebreak={false}
+          {serviceItem?.map((item, index, arr) => (
+            <ServiceTableRow
+              {...item}
+              key={index}
+              pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
               isDiscount={isDiscount}
-
             />
           ))}
-          <ServiceTableRow {...disscountTableRow} key={Math.random()}
-            pagebreak={true}
-            isDiscount={isDiscount}
-          />
+          {
+            (isDiscount || serviceItemFooter?.isDiscount) &&
+            <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+              pagebreak={true}
+              isDiscount={isDiscount}
+            />
+          }
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSettings}
@@ -262,20 +270,24 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
               >
                 <ContactAddress {...{ ...contactAddress }} />
 
-                <AddressDetails {...{ address, header, workDates,time }} />
+                <AddressDetails {...{ address, header, workDates, time }} />
 
-                <ServiceTableHederRow  isDiscount={isDiscount}/>
-                {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index}
-                    pagebreak={false}
+                <ServiceTableHederRow isDiscount={isDiscount} />
+                {serviceItem?.map((item, index, arr) => (
+                  <ServiceTableRow
+                    {...item}
+                    key={index}
+                    pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
                     isDiscount={isDiscount}
                   />
                 ))}
-
-                <ServiceTableRow {...disscountTableRow} key={Math.random()}
-                  pagebreak={true}
-                  isDiscount={isDiscount}
-                />
+                {
+                  (isDiscount || serviceItemFooter?.isDiscount) &&
+                  <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+                    pagebreak={true}
+                    isDiscount={isDiscount}
+                  />
+                }
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSettings}

@@ -11,6 +11,8 @@ export const ProductItem = ({
   unit,
   discount,
   isDiscount,
+  totalDiscount,
+  pagebreak,
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
@@ -44,7 +46,9 @@ export const ProductItem = ({
           {/* )} */}
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px]">
-            {totalPrice}
+            {pagebreak
+              ? Number(discount || 0) + Number(totalDiscount || 0)
+              : totalPrice}
           </span>
         </div>
       </div>
