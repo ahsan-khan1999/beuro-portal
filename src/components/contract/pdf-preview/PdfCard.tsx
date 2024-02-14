@@ -27,6 +27,7 @@ const PdfCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
+
   return (
     <div className="mb-5">
       <PdfCardLayout>
@@ -175,7 +176,7 @@ const PdfCard = ({
 
                 <div className="border-[#FE9244] border rounded-lg px-[8px] ">
                   <span className="text-[#FE9244] text-base font-medium">
-                    {contractStatus}
+                    {translate(`contract_status.${contractStatus}`)}
                   </span>
                 </div>
               </div>

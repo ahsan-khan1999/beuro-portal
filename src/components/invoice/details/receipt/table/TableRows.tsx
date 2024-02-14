@@ -54,10 +54,7 @@ const TableRows = ({
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
-              {
-                item.invoiceID?.customerDetail
-                  ?.fullName
-              }
+              {item.invoiceID?.customerDetail?.fullName}
             </span>
             <span className="py-4 truncate mr-1 mlg:hidden xMaxSize:block">
               {item?.title}
@@ -93,7 +90,7 @@ const TableRows = ({
                     },
                   })
                 )}
-                selectedItem={item.paymentType}
+                selectedItem={translate(`payment_method.${item.paymentType}`)}
                 onItemSelected={(status) => {
                   handlePaymentStatusUpdate(item.id, status, "reciept");
                 }}
@@ -104,7 +101,7 @@ const TableRows = ({
                 } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName="min-w-[70px] w-fit"
               />
             </span>
             <span
@@ -120,7 +117,7 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={item.invoiceStatus}
+                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
                 onItemSelected={(status) => {
                   if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept");
@@ -132,10 +129,10 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                }  min-w-[90px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                } min-w-[90px] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName="min-w-[90px] w-fit"
                 key={item.id}
               />
             </span>

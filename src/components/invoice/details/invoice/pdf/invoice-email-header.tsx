@@ -32,6 +32,7 @@ export const InvoiceEmailHeader = ({
     (state) => state.invoice
   );
   const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
+
   return (
     <PdfCardLayout>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
@@ -110,7 +111,7 @@ export const InvoiceEmailHeader = ({
                 });
               }}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-              textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             >
               <InvoicesIcon pathClass="#4A13E7" />
             </BaseButton>
@@ -119,7 +120,7 @@ export const InvoiceEmailHeader = ({
               buttonText={translate("contracts.pdf_card_details.send_via_post")}
               onClick={onSendViaPost}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-              textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
               loading={loading && activeButtonId === "post"}
               loaderColor="#4A13E7"
             >
@@ -177,7 +178,9 @@ export const InvoiceEmailHeader = ({
               <span
                 className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
               >
-                {collectiveInvoiceDetails?.invoiceStatus}
+                {translate(
+                  `invoice_status.${collectiveInvoiceDetails?.invoiceStatus}`
+                )}
               </span>
             )}
           </div>
@@ -186,9 +189,7 @@ export const InvoiceEmailHeader = ({
               {translate("invoice.card_content.worker")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
-              {
-                collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName
-              }
+              {collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName}
             </span>
           </div>
         </div>

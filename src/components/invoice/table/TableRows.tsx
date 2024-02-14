@@ -2,6 +2,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import React from "react";
 import { useRouter } from "next/router";
 import { getInvoiceStatusColor } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -10,6 +11,8 @@ const TableRows = ({
   handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
@@ -69,9 +72,9 @@ const TableRows = ({
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] truncate w-fit text-sm`}
               >
-                {item.invoiceStatus}
+                {translate(`invoice_status.${item.invoiceStatus}`)}
               </div>
             </span>
             <span

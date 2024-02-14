@@ -16,7 +16,7 @@ const TableRows = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
 
   const router = useRouter();
   return (
@@ -55,9 +55,9 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getStatusColor(item.leadStatus)}`,
                 }}
-                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit truncate text-sm`}
               >
-                {item.leadStatus}
+                {translate(`lead_status.${item.leadStatus}`)}
               </div>
             </span>
             <span
