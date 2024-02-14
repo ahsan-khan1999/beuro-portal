@@ -32,7 +32,7 @@ export const ProductItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{count}</span>
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{unit}</span>
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{price} </span>
-         {isDiscount && <span className="text-sm font-normal text-[#000] min-w-[50px]">{discount} </span>}
+         {isDiscount && <span className="text-sm font-normal text-[#000] min-w-[50px]">{discount || "-"} </span>}
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px]">
             {totalPrice} 
