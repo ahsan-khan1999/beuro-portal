@@ -187,10 +187,10 @@ const ContentDetailsData = () => {
       window.scrollTo({ behavior: "smooth", top: 0 });
     }
     if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 750 });
+      window.scrollTo({ behavior: "smooth", top: 770 });
     }
     if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 1350 });
+      window.scrollTo({ behavior: "smooth", top: 1370 });
     }
     if (index === 3) {
       window.scrollTo({ behavior: "smooth", top: 1950 });

@@ -1998,6 +1998,7 @@
   },
   "contract_status": {
     "Open": "Open",
+    "Sent": "Sent",
     "Confirmed": "Confirmed",
     "Cancelled": "Cancelled",
     "Pending": "Pending"

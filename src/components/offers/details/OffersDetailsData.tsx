@@ -110,7 +110,7 @@ const OffersDetailsData = ({
       window.scrollTo({ behavior: "smooth", top: 980 });
     }
     if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1200 });
+      window.scrollTo({ behavior: "smooth", top: 1500 });
     }
   };
 

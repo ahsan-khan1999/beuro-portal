@@ -1993,6 +1993,7 @@
   },
   "contract_status": {
     "Open": "Offen",
+    "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgesagt",
     "Pending": "Anhängig"
