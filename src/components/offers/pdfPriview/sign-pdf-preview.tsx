@@ -160,6 +160,7 @@ const SignPdfPreview = () => {
                 }, 0),
                 isTax: offerDetails?.Offer?.isTax,
                 isDiscount:offerDetails?.Offer?.isDiscount,
+                discountDescription:offerDetails?.Offer?.discountDescription
               },
 
               footerDetails: {

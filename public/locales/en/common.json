@@ -214,7 +214,7 @@
       "offers": {
         "offers": "Offers",
         "open": "Open",
-        "signed": "Signed",
+        "signed": "Accepted",
         "expired": "Expired",
         "rejected": "Rejected"
       },
@@ -1261,7 +1261,7 @@
     "add_button": "Add New",
     "table_functions": {
       "open": "Open",
-      "signed": "Signed",
+      "signed": "Accepted",
       "expire": "Expired",
       "rejected": "Rejected"
     },
@@ -1990,7 +1990,7 @@
     "Expire": "Expired"
   },
   "offer_status": {
-    "Open": "Offen",
+    "Open": "Open",
     "Signed": "Signed",
     "Expire": "Expired",
     "Rejected": "Rejected"

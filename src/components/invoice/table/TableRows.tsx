@@ -32,7 +32,7 @@ const TableRows = ({
               {item?.title}
             </span>
             <span className="py-4 truncate">
-              {item.contractID?.offerID?.total}
+              {item?.total}
             </span>
 
             <span className="py-4 flex justify-center items-center">

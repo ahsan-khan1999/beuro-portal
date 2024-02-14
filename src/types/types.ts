@@ -719,6 +719,7 @@ export interface ProductItemFooterProps {
   serviceDiscountSum?: number;
   isTax?: boolean;
   isDiscount?: boolean;
+  discountDescription?:string
 }
 
 export interface ContactDetailsProps {

@@ -214,7 +214,7 @@
       "offers": {
         "offers": "Angebote",
         "open": "Offen",
-        "signed": "Unterzeichnet",
+        "signed": "Angenommen",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
       },
@@ -1253,7 +1253,7 @@
     "add_button": "Neu Hinzufügen",
     "table_functions": {
       "open": "Offen",
-      "signed": "Unterzeichnet",
+      "signed": "Angenommen",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
     },

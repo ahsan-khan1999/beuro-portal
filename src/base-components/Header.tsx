@@ -20,10 +20,10 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = async() => {
-    await dispatch(logoutUser());
-    logout();
-    router.push("/")
-    // router.push({ pathname: "/pdf", query: { offerID: "65b3bded8de3d3616dd91a60", action: "Accept" } })
+    // await dispatch(logoutUser());
+    // logout();
+    // router.push("/")
+    router.push({ pathname: "/pdf", query: { offerID: "65cba92617a425fd28514a54", action: "Accept" } })
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
