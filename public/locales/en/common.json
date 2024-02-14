@@ -1992,7 +1992,7 @@
   "offer_status": {
     "Open": "Open",
     "Signed": "Signed",
-    "Expire": "Expired",
+    "Expired": "Expired",
     "Rejected": "Rejected",
     "Accepted": "Accepted"
   },

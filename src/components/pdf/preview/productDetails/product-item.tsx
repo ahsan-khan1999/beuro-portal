@@ -30,10 +30,10 @@ export const ProductItem = ({
         </div>
 
         <div className="col-span-1 flex space-x-2 items-center pr-[46px] w-full">
-          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
+          <span className="text-sm font-normal text-[#000] min-w-[50px] w-fit break-all">
             {count}
           </span>
-          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
+          <span className="text-sm font-normal text-[#000] w-[50px] break-all">
             {unit}
           </span>
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">

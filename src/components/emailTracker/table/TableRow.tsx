@@ -49,7 +49,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               <div
                 className={`bg-[${getMailStatusColor(
                   item?.mailStatus
-                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-fit truncate`}
+                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-fit`}
               >
                 {translate(`mail_tracker_status.${item?.mailStatus}`)}
               </div>

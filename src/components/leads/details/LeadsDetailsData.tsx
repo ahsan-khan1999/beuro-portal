@@ -182,11 +182,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
       </div>
 
       <div className="w-full break-all flex">
-        <div
-          className={`${
-            images ? "max-w-[280px]" : "max-w-[320px]"
-          }  w-full hidden xlg:block`}
-        ></div>
+        <div className={`max-w-[320px] w-full hidden xlg:block`}></div>
         {/* {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />
