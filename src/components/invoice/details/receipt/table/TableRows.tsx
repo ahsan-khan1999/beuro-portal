@@ -38,9 +38,9 @@ const TableRows = ({
   ];
 
   const invoiceStatus = [
-    `${translate("contract_status.Open")}`,
-    `${translate("contract_status.Confirmed")}`,
-    `${translate("contract_status.Cancelled")}`,
+    `${translate("invoice_status.Pending")}`,
+    `${translate("invoice_status.Overdue")}`,
+    `${translate("invoice_status.Paid")}`,
   ];
 
   return (

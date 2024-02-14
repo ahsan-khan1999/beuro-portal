@@ -37,13 +37,13 @@ export const DocumentHeader = ({
       <div className="flex flex-col gap-[0px] col-span-1">
         <div className="flex gap-[5px]">
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
           >
-            {translation("pdf.offer_number")}:
+            {translation("pdf.offer_number")} :
           </span>
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
 
           >
@@ -52,14 +52,14 @@ export const DocumentHeader = ({
         </div>
         <div className="flex gap-[5px] ">
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
 
           >
-            {translation("pdf.offer_date")}:
+            {translation("pdf.offer_date")} :
           </span>
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
 
           >
@@ -68,14 +68,14 @@ export const DocumentHeader = ({
         </div>
         <div className="flex gap-[5px] ">
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
 
           >
-            {translation("pdf.created_by")}:
+            {translation("pdf.created_by")} :
           </span>
           <span
-            className={`text-[#${emailTemplateSettings?.textColour}] text-base font-medium`}
+            className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
             // style={{ color: textColor }}
 
           >

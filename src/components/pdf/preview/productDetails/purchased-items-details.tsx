@@ -22,21 +22,22 @@ export const ProductPurchasedItemsDetails = ({
   systemSettings,
   handleEditDateModal
 }: Partial<PurchasedItemsDetailsProps>) => {
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
   
   return (
     <div>
-      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings}/>
+      <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings} />
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
-        <MovingDetails {...movingDetails} isOffer={isOffer} handleEditDateModal={handleEditDateModal}/>
-        <ProcutItemHeader />
-        {serviceItem?.map((item,index) => (
+        <MovingDetails {...movingDetails} isOffer={isOffer} handleEditDateModal={handleEditDateModal} />
+        <ProcutItemHeader isDiscount={isDiscount}/>
+        {serviceItem?.map((item, index) => (
           <ProductItem {...item} key={index} />
         ))}
-
-        {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings}/>}
+        
+        {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings} />}
       </div>
-      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} emailTemplateSettings={emailTemplateSettings}/>
+      <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} emailTemplateSettings={emailTemplateSettings} />
     </div>
   );
 };

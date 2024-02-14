@@ -181,9 +181,10 @@ export interface ServiceList {
   totalPrice: number;
   serviceType: string;
   description: string;
-  count: number;
+  count: number |string;
   pagebreak: boolean;
-  discount:number
+  discount:number;
+  isDiscount?:boolean
 }
 export interface EmailStatus {
   Pending: number;

@@ -66,12 +66,24 @@ const PdfFile = ({
 
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, header, workDates,time } = data?.movingDetails || {};
+  const { address, header, workDates, time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const disscountTableRow = {
+    serviceTitle: "Discount",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount)
+  }
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
@@ -86,17 +98,24 @@ const PdfFile = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates,time }} />
+          <AddressDetails {...{ address, header, workDates, time }} />
 
-          <ServiceTableHederRow />
+          <ServiceTableHederRow
+            isDiscount={isDiscount}
+          />
           {serviceItem?.map((item, index, arr) => (
             <ServiceTableRow
               {...item}
               key={index}
-              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+              pagebreak={false}
+              isDiscount={isDiscount}
 
             />
           ))}
+          <ServiceTableRow {...disscountTableRow} key={Math.random()}
+            pagebreak={true}
+            isDiscount={isDiscount}
+          />
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
@@ -141,7 +160,7 @@ const styles = StyleSheet.create({
   body: {
     fontFamily: 'Poppins',
     paddingBottom: 100,
-    
+
   },
 });
 

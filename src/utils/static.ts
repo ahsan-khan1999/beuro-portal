@@ -607,7 +607,7 @@ export const staticEnums: Record<string, any> = {
   },
   OfferStatus: {
     Open: 0,
-    Signed: 1,
+    Accepted: 1,
     Expired: 2,
     Rejected: 3,
   },

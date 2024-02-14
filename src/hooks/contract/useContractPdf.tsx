@@ -210,7 +210,8 @@ export const useContractPdf = () => {
               serviceDiscountSum: contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:contractDetails?.offerID?.discountDescription
             },
             footerDetails: {
               firstColumn: {

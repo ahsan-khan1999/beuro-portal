@@ -117,7 +117,7 @@ const CustomerDetailsData = ({
               {translate("common.lead")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {offerDetails?.leadID?.customerDetail?.refID}
+              {offerDetails?.leadID?.refID}
             </div>
           </div>
         </div>

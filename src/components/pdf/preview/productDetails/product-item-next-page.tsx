@@ -16,6 +16,18 @@ export const ProductItemNewPage = ({
   emailTemplateSettings,
   systemSettings,
 }: Partial<PurchasedItemDetailsNextPageProps>) => {
+  const disscountTableRow = {
+    serviceTitle: "Discount",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription || "",
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount)
+  }
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
   return (
     <div>
       <DocumentHeader
@@ -26,6 +38,7 @@ export const ProductItemNewPage = ({
         {serviceItem?.map((item, index) => (
           <ProductItem {...item} key={index} />
         ))}
+        <ProductItem {...disscountTableRow} key={Math.random()} pagebreak={true} isDiscount={isDiscount}/>
         {isShowTotal && (
           <ProductItemFooter
             {...serviceItemFooter}

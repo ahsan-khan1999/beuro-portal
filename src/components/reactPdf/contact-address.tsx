@@ -67,11 +67,10 @@ export const ContactAddress = ({
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text
             style={{
-              fontSize: 10,
+              fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
               color: "#000",
-              width: 80,
               marginRight: 1,
             }}
           >
