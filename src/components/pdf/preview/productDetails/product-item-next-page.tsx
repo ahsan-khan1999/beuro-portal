@@ -43,6 +43,7 @@ export const ProductItemNewPage = ({
       <div className="px-[80px] flex flex-col bg-white py-2">
         {serviceItem?.map((item, index) => (
           <ProductItem {...item} key={index}
+            isDiscount={isDiscount}
             pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
           />
         ))}

@@ -22,19 +22,23 @@ export const ProductPurchasedItemsDetails = ({
   systemSettings,
   handleEditDateModal
 }: Partial<PurchasedItemsDetailsProps>) => {
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 || false
-  
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+
   return (
     <div>
       <DocumentHeader {...headerDetails} emailTemplateSettings={emailTemplateSettings} />
       <div className="px-[80px] flex flex-col bg-white">
         <ContactDetails {...contactAddress} />
         <MovingDetails {...movingDetails} isOffer={isOffer} handleEditDateModal={handleEditDateModal} />
-        <ProcutItemHeader isDiscount={isDiscount}/>
+        <ProcutItemHeader isDiscount={isDiscount} />
         {serviceItem?.map((item, index) => (
-          <ProductItem {...item} key={index} />
+          <ProductItem {...item} key={index}
+            isDiscount={isDiscount}
+            pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
+          />
         ))}
-        
+
         {isShowTotal && <ProductItemFooter {...serviceItemFooter} systemSettings={systemSettings} />}
       </div>
       <Footer {...footerDetails} columnSettings={templateSettings} totalPages={totalPages} currPage={1} emailTemplateSettings={emailTemplateSettings} />

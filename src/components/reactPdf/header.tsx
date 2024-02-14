@@ -12,14 +12,15 @@ export const Header = ({
   offerDate,
   offerNo,
   fileType,
+  isReverseLogo
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
-  const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
+  const { FooterColour, textColour, logo} = emailTemplateSettings ?? {};
   return (
     <View
       style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: isReverseLogo ? "row-reverse" : "row",
         alignItems: "center",
         // backgroundColor: `#${FooterColour}`,
         padding: 20,
@@ -28,7 +29,7 @@ export const Header = ({
       fixed
     >
       <View style={{ width: "65%" }}>
-        <Image src={logo} style={{ width: 182, height: 73 }} />
+        <Image src={logo} style={{ width: 182, height: 73,display:"flex", justifyContent: isReverseLogo ? "flex-end" : "flex-start",marginLeft:isReverseLogo ? "auto":0 }} />
       </View>
       <View style={{ width: "35%" }}>
         <View
@@ -90,7 +91,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {pdfDateFormat(offerDate || "","de")}
+            {pdfDateFormat(offerDate || "", "de")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
