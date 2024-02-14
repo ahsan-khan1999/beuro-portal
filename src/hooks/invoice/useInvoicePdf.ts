@@ -102,6 +102,7 @@ export const useInvoicePdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
+            isReverseLogo
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -113,6 +114,7 @@ export const useInvoicePdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
+            isReverseLogo
           }));
         }
         if (emailTemplate?.payload) {
@@ -149,7 +151,9 @@ export const useInvoicePdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "invoice"
+              fileType: "invoice",
+              isReverseLogo:template.payload.Template?.isReverseLogo
+
             },
             contactAddress: {
               address: {
@@ -204,7 +208,8 @@ export const useInvoicePdf = () => {
               serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:invoiceDetails?.invoiceID?.discountDescription
             },
             footerDetails: {
               firstColumn: {

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const TableRow = ({
   currentPageRows,
@@ -9,6 +10,8 @@ const TableRow = ({
   currentPageRows: ContactSupport[];
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {currentPageRows?.map((item, index) => {
@@ -38,9 +41,9 @@ const TableRow = ({
               <div
                 className={`${
                   item?.status == "resolved" ? "bg-[#4A13E7]" : "bg-[#FE9244]"
-                } text-white px-2 py-1 text-center rounded-md  w-[90px] text-sm`}
+                } text-white px-2 py-1 text-center rounded-md min-w-[90px] w-fit truncate text-sm`}
               >
-                {item?.status}
+                {translate(`support_request_status.${item?.status}`)}
               </div>
             </span>
             <span className="flex justify-center items-center">

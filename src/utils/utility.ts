@@ -600,7 +600,7 @@ export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Signed"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Accepted"]
   )
     return "#45C769";
   else if (

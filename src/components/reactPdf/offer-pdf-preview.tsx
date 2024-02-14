@@ -16,6 +16,7 @@ import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
+import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -96,12 +97,27 @@ const OfferPdfPreview = ({
   showContractSign,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, header, workDates,time } = data?.movingDetails || {};
+  const { address, header, workDates, time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const disscountTableRow = {
+    serviceTitle: "Rabatt",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount:serviceItemFooter?.isDiscount
+  }
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
 
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }} >
@@ -118,16 +134,26 @@ const OfferPdfPreview = ({
           >
             <ContactAddress {...{ ...contactAddress }} />
 
-            <AddressDetails {...{ address, header, workDates,time }} />
+            <AddressDetails {...{ address, header, workDates, time }} />
 
-            <ServiceTableHederRow />
+            <ServiceTableHederRow
+              isDiscount={isDiscount}
+            />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
                 {...item}
                 key={index}
-                pagebreak={arr.length === 1 ? false : index === arr.length - 1}
+                pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1:false}
+                isDiscount={isDiscount}
               />
             ))}
+            {
+              (isDiscount || serviceItemFooter?.isDiscount) &&
+              <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+                pagebreak={true}
+                isDiscount={isDiscount}
+              />
+            }
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}

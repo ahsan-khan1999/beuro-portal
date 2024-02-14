@@ -57,7 +57,7 @@ export const MovingDetails = ({
                   required
                 />
               ) : (
-                <span className="text-xl font-semibold text-[#393939]">
+                <span className="text-sm font-semibold text-[#393939]">
                   {text}
                 </span>
               )}
@@ -89,7 +89,7 @@ export const MovingDetails = ({
             )}
           </div>
         ) : (
-          <h1 className="text-black text-[20px] font-semibold pb-3 border-b-[3px] mt-5">
+          <h1 className="text-black text-base font-semibold pb-3 border-b-[3px] mt-5">
             {header}
           </h1>
         )}
@@ -98,8 +98,8 @@ export const MovingDetails = ({
             className="flex gap-x-[30px] pb-2 border-b-2 border-[#8C8C8C] border-opacity-50 mt-2"
             key={index}
           >
-            <span className="min-w-[200px]">{item?.label}:</span>
-            <span className="text-[#141414] text-base font-normal max-w-[850px] break-all">
+            <span className="min-w-[200px] text-sm">{item?.label}:</span>
+            <span className="text-[#141414] text-sm font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
                   country: Country[item?.country as keyof typeof Country],
@@ -112,11 +112,11 @@ export const MovingDetails = ({
           </div>
         ))}
         <div className="flex flex-row gap-6">
-          <span className="min-w-[205px] mt-2">
+          <span className="min-w-[205px] mt-2 text-sm">
             {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
           </span>
           <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]">
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-sm font-medium text-[#4B4B4B]">
               {workDates?.map(
                 (item, index) =>
                   `${formatDateTimeToDate(item.startDate)}${

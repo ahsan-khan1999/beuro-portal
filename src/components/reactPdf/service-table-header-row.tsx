@@ -22,18 +22,18 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 140,
+    width: 135,
   },
   headerDescription: {
     color: "white",
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 190,
+    width: 180,
   },
   priceHeader: {
     flexDirection: "row",
-    width: 201,
+    width: 216,
   },
   headerText: {
     color: "white",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ServiceTableHederRow = () => {
+export const ServiceTableHederRow = ({ isDiscount }: { isDiscount?: boolean }) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
@@ -55,7 +55,8 @@ export const ServiceTableHederRow = () => {
           <Text style={styles.headerText}>{"Anzahl"}</Text>
           <Text style={styles.headerText}>{"Einheit"}</Text>
           <Text style={styles.headerText}>{"Preis"}</Text>
-          {/* <Text style={styles.headerText}>{"Rabatt"}</Text> */}
+
+          {isDiscount && <Text style={styles.headerText}>{"Rabatt"}</Text>}
           <Text style={styles.headerText}>{"Gesamt"}</Text>
         </View>
       </View>

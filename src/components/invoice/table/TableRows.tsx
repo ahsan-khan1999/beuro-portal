@@ -2,6 +2,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import React from "react";
 import { useRouter } from "next/router";
 import { getInvoiceStatusColor } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -10,6 +11,8 @@ const TableRows = ({
   handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
@@ -31,9 +34,7 @@ const TableRows = ({
             <span className="py-4 mr-1 mlg:hidden maxSize:block truncate">
               {item?.title}
             </span>
-            <span className="py-4 truncate">
-              {item.contractID?.offerID?.total}
-            </span>
+            <span className="py-4 truncate">{item?.total}</span>
 
             <span className="py-4 flex justify-center items-center">
               <div
@@ -49,14 +50,14 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div className="flex justify-center items-center rounded-md w-full">
                 <div
-                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
+                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.paidAmount)
                     ? Number(item?.paidAmount)?.toFixed(2)
                     : item?.paidAmount}
                 </div>
                 <div
-                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm `}
+                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.remainingAmount)
                     ? Number(item?.remainingAmount)?.toFixed(2)
@@ -69,9 +70,9 @@ const TableRows = ({
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm`}
               >
-                {item.invoiceStatus}
+                {translate(`invoice_status.${item.invoiceStatus}`)}
               </div>
             </span>
             <span

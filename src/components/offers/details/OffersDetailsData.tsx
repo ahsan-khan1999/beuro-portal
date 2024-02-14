@@ -9,7 +9,6 @@ import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
-import { useRouter } from "next/router";
 
 export enum ComponentsType {
   customer,
@@ -100,6 +99,21 @@ const OffersDetailsData = ({
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 600 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 980 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 1500 });
+    }
+  };
+
   return (
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
@@ -113,6 +127,7 @@ const OffersDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              onScroll={scrollHandler}
             />
           ))}
         </div>

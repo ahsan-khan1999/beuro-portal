@@ -121,6 +121,8 @@ export const useReceiptPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
+            isReverseLogo
+
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -132,6 +134,7 @@ export const useReceiptPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
+            isReverseLogo
           }));
         }
         if (emailTemplate?.payload) {
@@ -168,7 +171,9 @@ export const useReceiptPdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "receipt"
+              fileType: "receipt",
+              isReverseLogo:template.payload.Template?.isReverseLogo
+
 
             },
             contactAddress: {
@@ -229,7 +234,9 @@ export const useReceiptPdf = () => {
               serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
                 const price = service?.discount || 0;
                 return acc + price;
-              }, 0)
+              }, 0),
+              discountDescription:invoiceDetails?.invoiceID?.discountDescription
+
             },
             footerDetails: {
               firstColumn: {
@@ -402,7 +409,7 @@ export const useReceiptPdf = () => {
       const url = mergedPdfUrl;
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName}.pdf`;
+      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

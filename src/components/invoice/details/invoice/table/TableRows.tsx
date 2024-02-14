@@ -47,9 +47,9 @@ const TableRows = ({
   ];
 
   const invoiceStatus = [
-    `${translate("contract_status.Open")}`,
-    `${translate("contract_status.Confirmed")}`,
-    `${translate("contract_status.Cancelled")}`,
+    `${translate("invoice_status.Pending")}`,
+    `${translate("invoice_status.Overdue")}`,
+    `${translate("invoice_status.Paid")}`,
   ];
 
   return (
@@ -63,10 +63,7 @@ const TableRows = ({
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
-              {
-                item.invoiceID?.customerDetail
-                  ?.fullName
-              }
+              {item.invoiceID?.customerDetail?.fullName}
             </span>
             <span className="py-4 mlg:hidden maxSize:block truncate mr-1">
               {item?.title}
@@ -102,7 +99,7 @@ const TableRows = ({
                     },
                   })
                 )}
-                selectedItem={item.paymentType}
+                selectedItem={translate(`payment_method.${item.paymentType}`)}
                 onItemSelected={(status) => {
                   handlePaymentStatusUpdate(item.id, status, "invoice");
                 }}
@@ -110,10 +107,10 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                } min-w-[70px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName=" min-w-[70px] w-fit"
               />
             </span>
             <span
@@ -129,7 +126,7 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={item.invoiceStatus}
+                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
                 onItemSelected={(status) => {
                   if (item.invoiceStatus !== status) {
                     handleInvoiceStatusUpdate(item.id, status, "invoice");
