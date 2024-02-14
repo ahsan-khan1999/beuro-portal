@@ -1987,12 +1987,13 @@
   "offer_status": {
     "Open": "Offen",
     "Signed": "Unterzeichnet",
-    "Expire": "Abgelaufen",
+    "Expired": "Abgelaufen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
   "contract_status": {
     "Open": "Offen",
+    "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgesagt",
     "Pending": "Anhängig"

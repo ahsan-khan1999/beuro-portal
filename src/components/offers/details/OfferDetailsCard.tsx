@@ -43,7 +43,7 @@ const OfferDetailsCard = ({
   const itemsValue = [
     `${translate("offer_status.Open")}`,
     `${translate("offer_status.Signed")}`,
-    `${translate("offer_status.Expire")}`,
+    `${translate("offer_status.Expired")}`,
     `${translate("offer_status.Rejected")}`,
   ];
 
@@ -307,9 +307,9 @@ const OfferDetailsCard = ({
               </span>
             </div>
           )}
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between gap-x-2 items-center">
             <div
-              className="flex items-center gap-[11px] cursor-pointer mr-4"
+              className="flex items-center gap-[11px] cursor-pointer"
               onClick={(e) => handleNotes(offerDetails?.id, e)}
             >
               <span className="text-[#4D4D4D] font-normal text-base">
@@ -330,8 +330,8 @@ const OfferDetailsCard = ({
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="33"
+                  width="26"
+                  height="26"
                   viewBox="0 0 34 33"
                   fill="none"
                 >
