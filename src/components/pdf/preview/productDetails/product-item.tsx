@@ -9,7 +9,8 @@ export const ProductItem = ({
   serviceTitle,
   totalPrice,
   unit,
-  discount
+  discount,
+  isDiscount
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
@@ -31,7 +32,7 @@ export const ProductItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{count}</span>
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{unit}</span>
           <span className="text-sm font-normal text-[#000] min-w-[50px]">{price} </span>
-          <span className="text-sm font-normal text-[#000] min-w-[50px]">{discount} </span>
+         {isDiscount && <span className="text-sm font-normal text-[#000] min-w-[50px]">{discount} </span>}
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px]">
             {totalPrice} 
