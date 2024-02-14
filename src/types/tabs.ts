@@ -8,7 +8,7 @@ export interface leadsTabsSectionTypes {
   selectedTab: number;
   name: string;
   icon: string;
-  onScroll: (name: number) => void;
+  onScroll?: (name: number) => void;
 }
 
 // Interface for tab
