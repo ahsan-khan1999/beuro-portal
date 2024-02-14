@@ -74,7 +74,7 @@ const PdfFile = ({
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
   const disscountTableRow = {
-    serviceTitle: "Discount",
+    serviceTitle: "Rabatt",
     price: Number(serviceItemFooter?.discount),
     unit: "-",
     totalPrice: Number(serviceItemFooter?.discount),

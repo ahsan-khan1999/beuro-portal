@@ -204,6 +204,6 @@ export const generateLeadAdditionalDetailsValidation = (
   return yup.object().shape({
     [LeadAdditionalDetails.additionlData]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
   });
 };
