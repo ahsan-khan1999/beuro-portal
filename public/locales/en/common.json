@@ -1987,23 +1987,30 @@
   "lead_status": {
     "Open": "Open",
     "Close": "Close",
-    "Expire": "Expired"
+    "Expired": "Expired"
   },
   "offer_status": {
     "Open": "Open",
     "Signed": "Signed",
     "Expire": "Expired",
-    "Rejected": "Rejected"
+    "Rejected": "Rejected",
+    "Accepted": "Accepted"
   },
   "contract_status": {
     "Open": "Open",
     "Confirmed": "Confirmed",
-    "Cancelled": "Cancelled"
+    "Cancelled": "Cancelled",
+    "Pending": "Pending"
   },
   "invoice_status": {
     "Pending": "Pending",
     "Overdue": "Overdue",
-    "Paid": "Paid"
+    "Paid": "Paid",
+    "Open": "Open"
+  },
+  "support_req_status": {
+    "pending": "pending",
+    "resolved": "resolved"
   },
   "payment_method": {
     "Cash": "Cash",
@@ -2013,5 +2020,20 @@
     "All": "All",
     "Individual": "Individual",
     "Company": "Company"
+  },
+  "email_status": {
+    "Post": "Beitrag",
+    "Pending": "Pending",
+    "Sent": "Sent",
+    "Failed": "Failed"
+  },
+  "mail_tracker_status": {
+    "opend": "opend",
+    "failed": "failed",
+    "pending": "pending"
+  },
+  "support_request_status": {
+    "pending": "pending",
+    "resolved": "resolved"
   }
 }

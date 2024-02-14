@@ -15,6 +15,7 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { InvoicesIcon } from "@/assets/svgs/components/sideBar/Invoices";
+import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 export const InvoiceEmailHeader = ({
   contentName,
@@ -90,7 +91,7 @@ export const InvoiceEmailHeader = ({
                 });
               }}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-              textClassName="text-[#4B4B4B] font-medium group-hover:text-primarborder "
+              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             >
               <InvoicesIcon pathClass="#4A13E7" />
             </BaseButton>
@@ -98,7 +99,7 @@ export const InvoiceEmailHeader = ({
               id="sendPostButton"
               buttonText={title}
               onClick={onSendViaPost}
-              containerClassName="flex items-center group gap-x-3 row-reverse"
+              containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
               loading={loading && activeButtonId === "post"}
               loaderColor="#4A13E7"
@@ -110,7 +111,7 @@ export const InvoiceEmailHeader = ({
                 "contracts.pdf_card_details.send_via_email"
               )}
               onClick={onEmailSend}
-              containerClassName="flex items-center gap-x-3 row-reverse group"
+              containerClassName="flex items-center gap-x-3 row-reverse group border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
               loading={loading && activeButtonId === "email"}
               loaderColor="#4A13E7"
@@ -118,12 +119,7 @@ export const InvoiceEmailHeader = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
-            <Image
-              src={downloadIcon}
-              alt="downloadIcon"
-              className="cursor-pointer"
-              onClick={onDownload}
-            />
+            <DownloadIcon onClick={() => {}} />
             {/* <Image
               src={printerIcon}
               alt="printerIcon"
@@ -161,7 +157,9 @@ export const InvoiceEmailHeader = ({
               <span
                 className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
               >
-                {collectiveInvoiceDetails?.invoiceStatus}
+                {translate(
+                  `invoice_status.${collectiveInvoiceDetails?.invoiceStatus}`
+                )}
               </span>
             </div>
             <div className="flex gap-2">
@@ -169,9 +167,7 @@ export const InvoiceEmailHeader = ({
                 {translate("contracts.card_content.worker")}:
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
-                {
-                  collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName
-                }
+                {collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName}
               </span>
             </div>
           </div>

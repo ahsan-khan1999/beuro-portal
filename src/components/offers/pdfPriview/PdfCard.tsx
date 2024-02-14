@@ -25,6 +25,7 @@ const EmailCard = ({
 }: EmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   return (
     <EmailCardLayout>
       <div className="flex flex-col mlg:flex-row justify-between gap-y-3 border-b border-[#000] border-opacity-10 pb-5">
@@ -143,9 +144,9 @@ const EmailCard = ({
             {translate("offer_pdf_card.email_status")}:
           </span>
           {emailStatus && (
-            <div className="border-[#FE9244] border rounded-md px-[8px] text-center w-[98px] ">
+            <div className="border-[#FE9244] border rounded-md px-[8px] text-center w-fit">
               <span className="text-[#FE9244] text-base font-medium">
-                {emailStatus}
+                {translate(`email_status.${emailStatus}`)}
               </span>
             </div>
           )}

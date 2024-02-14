@@ -93,7 +93,7 @@ const OfferDetailsCard = ({
           <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
-            containerClassName="flex items-center group gap-x-3 row-reverse border  border-primary"
+            containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             loading={loading}
             loaderColor="#4A13E7"
@@ -102,12 +102,13 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${isSendEmail && "hidden"
-              }`}
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer group ${
+              isSendEmail && "hidden"
+            }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] flex items-center ">
+            <p className="font-medium text-[16px] text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
               {translate("offers.card_content.send_button")}
             </p>
           </div>
@@ -192,19 +193,20 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${item.endDate
-                      ? ` ${translate("contracts.card_content.to")} ` +
-                      formatDateTimeToDate(item.endDate) +
-                      ((offerDetails?.date?.length - 1 != index && ", ") ||
-                        ".")
-                      : (offerDetails?.date?.length - 1 != index && ", ") ||
-                      "."
+                    `${formatDateTimeToDate(item.startDate)}${
+                      item.endDate
+                        ? ` ${translate("contracts.card_content.to")} ` +
+                          formatDateTimeToDate(item.endDate) +
+                          ((offerDetails?.date?.length - 1 != index && ", ") ||
+                            ".")
+                        : (offerDetails?.date?.length - 1 != index && ", ") ||
+                          "."
                     }`
                 )}
                 {offerDetails?.time &&
                   ` ${translate("common.at")} ` +
-                  offerDetails?.time +
-                  ` ${translate("common.clock")} `}
+                    offerDetails?.time +
+                    ` ${translate("common.clock")} `}
               </span>
             </div>
           </div>
@@ -224,7 +226,7 @@ const OfferDetailsCard = ({
                   color: `${getEmailColor(offerDetails?.emailStatus)}`,
                 }}
               >
-                {translate(offerDetails?.emailStatus)}
+                {translate(`email_status.${offerDetails?.emailStatus}`)}
               </span>
             )}
           </div>
@@ -243,7 +245,9 @@ const OfferDetailsCard = ({
                       },
                     })
                   )}
-                  selectedItem={offerDetails?.paymentType}
+                  selectedItem={translate(
+                    `payment_method.${offerDetails?.paymentType}`
+                  )}
                   onItemSelected={handlePaymentStatusUpdate}
                   dropDownClassName={`border border-[${getPaymentTypeColor(
                     offerDetails?.paymentType
@@ -267,7 +271,9 @@ const OfferDetailsCard = ({
               {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
                 <DropDown
                   items={items}
-                  selectedItem={offerDetails?.offerStatus}
+                  selectedItem={translate(
+                    `offer_status.${offerDetails?.offerStatus}`
+                  )}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getOfferStatusColor(
                     offerDetails?.offerStatus
