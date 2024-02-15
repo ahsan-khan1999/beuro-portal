@@ -29,7 +29,7 @@ const EmployeeForm = ({
           {translate("employees.details.main_heading")}
         </h2>
         {isUpdate ? (
-          <div className="flex gap-x-5">
+          <div className="flex items-center justify-end gap-x-5">
             <BaseButton
               buttonText={translate("employees.details.edit_password")}
               onClick={() => handlePasswordReset()}

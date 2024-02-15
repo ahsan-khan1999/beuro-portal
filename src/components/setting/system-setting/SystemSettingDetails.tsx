@@ -19,6 +19,7 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { getValueByKey } from "@/utils/auth.util";
+import { RemainTextSection } from "./remainderTextSection";
 
 const SystemSettingDetails = ({
   addTaxHandler,
@@ -100,6 +101,11 @@ const SystemSettingDetails = ({
         setSystemSetting={setSystemSetting}
         tax={tax}
       />
+
+      <div className="my-2">
+        <RemainTextSection />
+      </div>
+
       <div className="my-2">
         <InvoiceSection
           setSystemSetting={setSystemSetting}

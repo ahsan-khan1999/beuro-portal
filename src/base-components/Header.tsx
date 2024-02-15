@@ -19,10 +19,10 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     await dispatch(logoutUser());
     logout();
-    router.push("/")
+    router.push("/");
     // router.push({ pathname: "/pdf", query: { offerID: "65ccea6c7eb3c5d5585bb4ae", action: "Accept" } })
   };
   useEffect(() => {
@@ -30,7 +30,7 @@ const Header = () => {
       dispatch(readSystemSettings());
     }
   }, [user]);
- 
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (

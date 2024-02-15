@@ -45,7 +45,7 @@ const DetailsData = ({
   return (
     <>
       <div className="flex justify-between items-center pb-5">
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <div onClick={handlePreviousClick} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,69 +93,88 @@ const DetailsData = ({
       </div>
 
       <div className="border-t border-t-[#000] border-opacity-10 pt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-5 gap-y-2">
-          <h3 className="text-[#4D4D4D] ">
-            {translate("admin.customers_details.card_content.customer_id")}:
-            <span className="text-[#4B4B4B] font-medium ml-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xMaxSize:grid-cols-[minmax(200px,_200px)_minmax(200px,_200px)_minmax(200px,_300px)_minmax(200px,_200px)_minmax(250px,_100%)] gap-y-2">
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D] ">
+              {translate("admin.customers_details.card_content.customer_id")}:
+            </span>
+
+            <span className="text-[#4B4B4B] font-medium">
               {customerDetail?.company?.refID}
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("admin.customers_details.card_content.role")}:
-            <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.role}
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D] ">
+              {translate("admin.customers_details.card_content.role")}:
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("admin.customers_details.card_content.no_of_employee")}:
-            <span className="ml-3 text-[#4B4B4B] font-medium">
+
+            <span className=" text-[#4B4B4B] font-medium">
+              {translate(`admin_role.${customerDetail?.role}`)}
+            </span>
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("admin.customers_details.card_content.no_of_employee")}
+              :
+            </span>
+
+            <span className="text-[#4B4B4B] font-medium">
               {customerDetail?.plan?.numberOfEmployees}
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("admin.customers_details.card_content.plan")}:
-            <span className="ml-3 text-[#4B4B4B] font-medium">
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("admin.customers_details.card_content.plan")}:
+            </span>
+
+            <span className="text-[#4B4B4B] font-medium">
               {translate(`plan_status.${customerDetail?.plan?.planName}`)}
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate(
-              "admin.customers_details.card_content.subscription_date"
-            )}
-            :
-            <span className="ml-3 text-[#4B4B4B] font-medium">
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate(
+                "admin.customers_details.card_content.subscription_date"
+              )}
+              :
+            </span>
+
+            <span className="text-[#4B4B4B] font-medium">
               {formatDateTimeToDate(customerDetail?.plan?.createdAt)}
             </span>
-          </h3>
+          </div>
         </div>
-        <div className="mt-5 grid grid-cols-2 xl:grid-cols-4">
-          <h3 className="text-[#4D4D4D] flex items-center">
-            {translate("admin.customers_details.card_content.status")}:
-            <span className="ml-3 text-[#4B4B4B] font-medium">
-              <DropDown
-                items={items}
-                onItemSelected={(selectedItem) =>
-                  handleStatusChange(selectedItem)
-                }
-                selectedItem={customerDetail?.status}
-                dropDownClassName="w-[140px] border border-primary justify-between"
-                dropDownTextClassName="text-primary font-medium"
-                dropDownIconClassName="text-primary"
-                dropDownItemsContainerClassName="border border-primary w-full"
-              />
+        <div className="mt-5 flex justify-between lg:grid lg:grid-cols-2 xl:grid-cols-4">
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D] flex items-center">
+              {translate("admin.customers_details.card_content.status")}:
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] flex items-center">
-            {translate("admin.customers_details.card_content.company_logo")}:
-            <span className="text-[#4B4B4B] font-medium ml-3">
-              <Image
-                src={customerDetail?.company?.logo || userIcon}
-                alt="company logo"
-                height={40}
-                width={100}
-              />
+
+            <DropDown
+              items={items}
+              onItemSelected={(selectedItem) =>
+                handleStatusChange(selectedItem)
+              }
+              selectedItem={customerDetail?.status}
+              dropDownClassName="min-w-[108.445px] w-fit border border-primary justify-between"
+              dropDownTextClassName="text-primary font-medium"
+              dropDownIconClassName="text-primary"
+              dropDownItemsContainerClassName="border border-primary w-fit"
+            />
+          </div>
+
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D] flex items-center">
+              {translate("admin.customers_details.card_content.company_logo")}:
             </span>
-          </h3>
+
+            <Image
+              src={customerDetail?.company?.logo || userIcon}
+              alt="company logo"
+              height={40}
+              width={100}
+            />
+          </div>
         </div>
       </div>
     </>

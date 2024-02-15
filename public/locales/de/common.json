@@ -1988,8 +1988,8 @@
   },
   "offer_status": {
     "Open": "Offen",
-    "Signed": "Unterzeichnet",
-    "Expired": "Abgelaufen",
+    "Signed": "Angenommen",
+    "Expired": "Abgeloffen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
@@ -1997,11 +1997,11 @@
     "Open": "Offen",
     "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
-    "Cancelled": "Abgesagt",
+    "Cancelled": "Abgebrochen",
     "Pending": "Anhängig"
   },
   "invoice_status": {
-    "Pending": "Anhängig",
+    "Pending": "Offen",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
     "Open": "Offen"
@@ -2011,7 +2011,7 @@
     "resolved": "aufgelöst"
   },
   "payment_method": {
-    "Cash": "Bargeld",
+    "Cash": "Bar",
     "Online": "Online"
   },
 
@@ -2056,5 +2056,28 @@
     "Free": "Kostenlos",
     "Gold": "Gold",
     "Platinium": "Platinium"
+  },
+  "selected_month": {
+    "January": "Januar",
+    "February": "Februar",
+    "March": "März",
+    "April": "April",
+    "May": "Mai",
+    "June": "Juni",
+    "July": "Juli",
+    "August": "August",
+    "September": "September",
+    "October": "Oktober",
+    "November": "November",
+    "December": "Dezember"
+  },
+  "admin_role": {
+    "Admin": "Verwaltung",
+    "Company": "Unternehmen"
+  },
+  "header_alignment": {
+    "header_heading": "Ausrichtung der Kopfzeile",
+    "left_align": "Logo linksbündig",
+    "right_align": "Logo rechtsbündig"
   }
 }
