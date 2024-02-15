@@ -161,14 +161,13 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     htmlFor: "company.mobileNumber",
                   },
                   field: {
-                    type: Field.phone,
+                    type: Field.input,
                     id: "company.mobileNumber",
                     name: "company.mobileNumber",
                     value: user?.company?.mobileNumber,
-
-                    control,
-                    className: "px-2 h-[42px]",
-                    country: "ch",
+                    inputType:"number",
+                    register,
+                    className: "!px-4 h-[42px]",
                   },
                 },
                 {

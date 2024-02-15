@@ -206,12 +206,12 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              inputType:"number",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country: "ch",
-              control,
+              register,
               value:
                 type === "New Customer"
                   ? ""

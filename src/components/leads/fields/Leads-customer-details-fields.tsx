@@ -137,14 +137,14 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               className: " !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              control,
+              register,
+              inputType: "number",
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
-              country: "ch",
             },
           },
         ],

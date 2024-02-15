@@ -3,7 +3,7 @@ import { ControllerRenderProps, FieldValues, UseFormSetValue } from "react-hook-
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { useAppDispatch } from "@/hooks/useRedux";
-import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import { uploadFileToFirebase, uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useTranslation } from "next-i18next";
 
 export const ImageUpload = ({
@@ -47,7 +47,7 @@ export const ImageUpload = ({
     for (let item of e.target.files) {
       formdata.append("files", item);
     }
-    const res = await dispatch(uploadFileToFirebase(formdata));
+    const res = await dispatch(uploadMultiFileToFirebase(formdata));
     
     res?.payload?.forEach((res: string, idx: number) => {
       

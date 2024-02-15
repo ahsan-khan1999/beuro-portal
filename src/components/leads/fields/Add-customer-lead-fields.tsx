@@ -24,7 +24,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
-      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
@@ -120,7 +119,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (leadDetails?.id && leadDetails?.customerDetail?.gender) ||
+                (leadDetails?.id && staticEnums["Gender"][leadDetails?.customerDetail?.gender]) ||
                 gender,
             },
           },
@@ -190,12 +189,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              inputType:"number",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country: "ch",
-              control,
+              register,
               value: leadDetails?.id
                 ? leadDetails?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.mobileNumber,
