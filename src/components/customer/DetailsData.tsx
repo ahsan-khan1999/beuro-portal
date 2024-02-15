@@ -58,7 +58,7 @@ const DetailsData = ({
         </div>
       </div>
       <div>
-        <div className="grid grid-cols-1 maxSize:grid-cols-[minmax(200px,_1fr)_minmax(300px,_3fr)] items-center mt-5 gap-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(200px,_1fr)_minmax(300px,_3fr)] items-center mt-5 gap-y-4">
           <h3 className="text-[#4D4D4D]">
             {translate("customers.card_content.customer_id")}:
             <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>

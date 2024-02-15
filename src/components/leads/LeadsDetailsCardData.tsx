@@ -23,7 +23,7 @@ const LeadsDetailsCardData = ({
   const dispatch = useAppDispatch();
   return (
     <div className="bg-white rounded-md w-full">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row gap-y-3 lg:justify-between lgitems-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div
           onClick={() => router.push("/leads")}
           className="flex items-center cursor-pointer"
@@ -54,7 +54,7 @@ const LeadsDetailsCardData = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-[22px]">
+        <div className="flex items-center justify-end gap-[22px]">
           <div
             className="w-fit border-[1px] border-[#4A13E7] rounded-lg flex px-4 py-[6px] cursor-pointer"
             onClick={() => {
@@ -96,45 +96,42 @@ const LeadsDetailsCardData = ({
           </span>
         </div>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <span className="font-normal text-[#4D4D4D] leading-6 text-base mr-5">
-              {translate("leads.card_content.lead_id")}:
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-5">
+        <div className="flex items-center gap-x-3">
+          <span className="font-normal text-[#4D4D4D] text-base">
+            {translate("leads.card_content.lead_id")}:
+          </span>
+          <span className="font-medium text-[#4B4B4B] text-base">
+            {leadDetails.refID}
+          </span>
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="font-normal text-[#4D4D4D] text-base">
+            {translate("leads.card_content.status")}:
+          </span>
+          {leadDetails.leadStatus && (
+            <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
+              {translate(`lead_status.${leadDetails.leadStatus}`)}
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
-              {leadDetails.refID}
-            </span>
-          </div>
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-[10px]">
-              {translate("leads.card_content.status")}:
-            </span>
-            {leadDetails.leadStatus && (
-              <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
-                {translate(`lead_status.${leadDetails.leadStatus}`)}
-              </span>
-            )}
-          </div>
+          )}
+        </div>
 
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
-              {translate("leads.card_content.created_date")}:
-            </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
-              {formatDateTimeToDate(leadDetails.createdAt)}
-            </span>
-          </div>
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
-              {translate("leads.card_content.created_by")}:
-            </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
-              {leadDetails.createdBy?.fullName}
-            </span>
-          </div>
+        <div className="flex items-center gap-x-3">
+          <span className="font-normal text-[#4D4D4D] text-base">
+            {translate("leads.card_content.created_date")}:
+          </span>
+          <span className="font-medium text-[#4B4B4B] text-base">
+            {formatDateTimeToDate(leadDetails.createdAt)}
+          </span>
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="font-normal text-[#4D4D4D] text-base">
+            {translate("leads.card_content.created_by")}:
+          </span>
+          <span className="font-medium text-[#4B4B4B] text-base">
+            {leadDetails.createdBy?.fullName}
+          </span>
         </div>
       </div>
     </div>

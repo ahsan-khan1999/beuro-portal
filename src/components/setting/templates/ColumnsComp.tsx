@@ -19,7 +19,6 @@ import InputField from "@/base-components/filter/fields/input-field";
 // import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
 import leftAlignTemplate from "@/assets/svgs/Group 48096404.svg";
 
-
 import rightAlignTemplate from "@/assets/svgs/Group 48096404 (1).svg";
 
 import { CheckIcon } from "@/assets/svgs/components/check-icon";
@@ -361,7 +360,7 @@ const ColumnsComp = () => {
       secondColumn: templateSettings?.isSecondColumn || false,
       thirdColumn: templateSettings?.isThirdColumn || false,
       fourthColumn: templateSettings?.isFourthColumn || false,
-      order: templateSettings?.order || false
+      order: templateSettings?.order || false,
     });
     updateColumnValues(
       columnSettings.firstColumn,
@@ -458,7 +457,7 @@ const ColumnsComp = () => {
       isSecondColumn: mainColumns?.secondColumn,
       isThirdColumn: mainColumns?.thirdColumn,
       isFourthColumn: mainColumns?.fourthColumn,
-      order: mainColumns?.order
+      order: mainColumns?.order,
     };
     const response = await dispatch(
       updateTemplateSetting({ data: apiData, translate })
@@ -469,8 +468,10 @@ const ColumnsComp = () => {
   return (
     <>
       <div className="flex flex-col gap-x-5 mb-5 bg-white">
-        <p className="text-base font-semibold px-5 mt-5">Header Alignment</p>
-        <div className="flex ">
+        <p className="text-base font-semibold px-5 mt-5">
+          {translate("header_alignment.header_heading")}
+        </p>
+        <div className="flex">
           <button
             className={`relative px-6 my-3`}
             onClick={() => setMainColumns({ ...mainColumns, order: false })}
@@ -480,17 +481,25 @@ const ColumnsComp = () => {
                 <CheckIcon />
               </div>
             )}
-            <div className={`border-2 rounded-lg p-4 ${!mainColumns.order ? "border-primary" : "border-lightGray"
-              }`}>
-
-              <Image src={leftAlignTemplate} height={250} width={250} alt="left aligned" />
+            <div
+              className={`border-2 rounded-lg p-4 ${
+                !mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}
+            >
+              <Image
+                src={leftAlignTemplate}
+                height={250}
+                width={250}
+                alt="left aligned"
+              />
             </div>
-            <p className="text-base font-medium py-2">Logo Align Left</p>
-
+            <p className="text-base font-medium py-2">
+              {translate("header_alignment.left_align")}
+            </p>
           </button>
 
           <button
-            className={`relative  `}
+            className={`relative`}
             onClick={() => setMainColumns({ ...mainColumns, order: true })}
           >
             {mainColumns.order && (
@@ -498,14 +507,21 @@ const ColumnsComp = () => {
                 <CheckIcon />
               </div>
             )}
-            <div className={`border-2 rounded-lg p-4 ${mainColumns.order ? "border-primary" : "border-lightGray"
-              }`}>
-
-              <Image src={rightAlignTemplate} height={250} width={250} alt="right aligned" />
-
+            <div
+              className={`border-2 rounded-lg p-4 ${
+                mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}
+            >
+              <Image
+                src={rightAlignTemplate}
+                height={250}
+                width={250}
+                alt="right aligned"
+              />
             </div>
-            <p className="text-base font-medium py-2">Logo Align Right</p>
-
+            <p className="text-base font-medium py-2">
+              {translate("header_alignment.right_align")}
+            </p>
           </button>
         </div>
       </div>

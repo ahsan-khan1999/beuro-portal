@@ -68,7 +68,7 @@ const EmailCard = ({
               query: { offer: offerId },
             });
           }}
-          className="text-[#4B4B4B] hover:text-primary flex  items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer"
+          className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const EmailCard = ({
           </span>
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center justify-end gap-5">
           {/* <BaseButton
             buttonText={translate("offers.card_content.main_heading")}
             onClick={() => {

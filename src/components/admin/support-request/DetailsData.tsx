@@ -112,7 +112,7 @@ const DetailsData = ({
           {translate("admin.support_requests.card_content.button")}
         </button>
       </div>
-      <div className="flex flex-col gap-y-3 xl:flex-row xl:space-x-20 xl:items-center mt-5">
+      <div className="flex flex-col gap-y-3 md:flex-row md:space-x-20 md:items-center mt-5">
         <h3 className="text-[#4D4D4D]">
           {translate("admin.support_requests.card_content.customer_id")}:
           <span className="text-[#4B4B4B] font-medium ml-3">

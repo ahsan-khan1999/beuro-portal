@@ -2071,5 +2071,10 @@
   "admin_role": {
     "Admin": "Admin",
     "Company": "Company"
+  },
+  "header_alignment": {
+    "header_heading": "Header Alignment",
+    "left_align": "Logo Align Left",
+    "right_align": "Logo Align Right"
   }
 }

@@ -93,7 +93,7 @@ const DetailsData = ({
       </div>
 
       <div className="border-t border-t-[#000] border-opacity-10 pt-5">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xMaxSize:grid-cols-[minmax(100px,_100px)_minmax(200px,_250px)_minmax(250px,_350px)_minmax(200px,_200px)_minmax(250px,_100%)] gap-y-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xMaxSize:grid-cols-[minmax(200px,_200px)_minmax(200px,_200px)_minmax(200px,_300px)_minmax(200px,_200px)_minmax(250px,_100%)] gap-y-2">
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] ">
               {translate("admin.customers_details.card_content.customer_id")}:

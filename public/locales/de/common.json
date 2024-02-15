@@ -2072,5 +2072,10 @@
   "admin_role": {
     "Admin": "Verwaltung",
     "Company": "Unternehmen"
+  },
+  "header_alignment": {
+    "header_heading": "Ausrichtung der Kopfzeile",
+    "left_align": "Logo linksbündig",
+    "right_align": "Logo rechtsbündig"
   }
 }

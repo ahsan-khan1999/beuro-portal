@@ -32,7 +32,7 @@ const PdfCard = ({
     <div className="mb-5">
       <PdfCardLayout>
         <div className=" rounded-md bg-white w-full h-fit">
-          <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
+          <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
             {/* <span
                 className="cursor-pointer"
                 onClick={() => {
@@ -72,7 +72,7 @@ const PdfCard = ({
                   query: { contract: contractDetails?.id },
                 });
               }}
-              className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer"
+              className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@ const PdfCard = ({
               </span>
             </div>
 
-            <div className="flex items-center gap-x-5">
+            <div className="flex items-center justify-end gap-x-5">
               {/* <BaseButton
                 buttonText={translate("contracts.pdf_card_details.heading")}
                 onClick={() => {
