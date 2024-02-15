@@ -36,7 +36,7 @@ export const uploadFileToFirebase: any = createAsyncThunk(
           },
         }
       );
-      return response?.data?.data;
+      return response?.data?.data?.url;
     } catch (response: any) {
       if (response?.response?.data?.code === 401) {
         logout();

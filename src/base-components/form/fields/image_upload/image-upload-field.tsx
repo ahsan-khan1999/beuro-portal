@@ -80,6 +80,7 @@ export const ImageUpload = ({
               height={100}
               alt="Uploaded Preview"
               style={{ height: "70px", width: "70px" }}
+              data-action="zoom"
             />
             <div
               className="absolute top-[5px] right-[5px] "
