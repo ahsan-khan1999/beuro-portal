@@ -14,10 +14,8 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { Lead } from "@/types/leads";
-import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { useTranslation } from "next-i18next";
-import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import { setImages } from "@/api/slices/imageSlice/image";
 
 export enum ComponentsType {
   customerAdd,

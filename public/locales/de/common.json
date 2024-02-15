@@ -2037,5 +2037,22 @@
   "support_request_status": {
     "pending": "Anhängig",
     "resolved": "aufgelöst"
+  },
+  "customer_type": {
+    "individual": "individuell",
+    "company": "Unternehmen"
+  },
+  "frequency": {
+    "Weekly": "Wöchentlich",
+    "FourtennDays": "FourtennDays",
+    "Monthly": "Monatlich",
+    "Yearly": "Jährlich"
+  },
+  "plan_status": {
+    "Silver": "Silber",
+    "Diamond": "Diamant",
+    "Free": "Kostenlos",
+    "Gold": "Gold",
+    "Platinium": "Platinium"
   }
 }

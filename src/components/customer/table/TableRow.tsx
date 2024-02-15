@@ -32,7 +32,9 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
             <span className="py-4 flex items-center truncate">
               {translate(`countries.${item?.address?.country}`)}
             </span>
-            <span className="py-4 flex items-center"> {item.customerType}</span>
+            <span className="py-4 flex items-center">
+              {translate(`customer_type.${item.customerType}`)}
+            </span>
             <span
               className="flex justify-center items-center cursor-pointer border-primary"
               onClick={() =>

@@ -39,7 +39,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
                 ?.slice(1)
                 .map((item, key) => ({
                   value: item,
-                  label: item,
+                  label: translate(`customer_type.${item}`),
                 })),
 
               control,
@@ -125,7 +125,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
                 "!px-4 !border-[#BFBFBF] focus:!border-primary cursor-default",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"number",
+              inputType: "number",
               register,
               disabled: isUpdate,
               value: customerDetails && customerDetails.phoneNumber,

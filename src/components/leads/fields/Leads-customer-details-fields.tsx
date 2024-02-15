@@ -82,13 +82,13 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 ?.slice(1)
                 .map((item, key) => ({
                   value: item,
-                  label: item,
+                  label: translate(`customer_type.${item}`),
                 })),
 
               control,
-              value:""
+              value: "",
               // value:
-             
+
               //     customerType,
             },
           },
@@ -123,11 +123,10 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
 
-              inputType:"number",
+              inputType: "number",
               register,
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
-          
             },
           },
           {
