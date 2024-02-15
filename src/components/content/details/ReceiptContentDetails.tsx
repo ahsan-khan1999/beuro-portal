@@ -68,7 +68,7 @@ const ReceiptContentDetails = ({
 
       <div className="pl-[29px] pr-[25px] pt-[22px] pb-[39px]">
         <div>
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.receipt_title")}
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
@@ -77,7 +77,7 @@ const ReceiptContentDetails = ({
         </div>
 
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.receipt_description")}
           </p>
 
@@ -89,7 +89,7 @@ const ReceiptContentDetails = ({
           />
         </div>
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.email_body")}
           </p>
           <div
@@ -102,7 +102,7 @@ const ReceiptContentDetails = ({
 
         {/* attachments is here */}
         <div className="mt-5 w-full xl:w-[90%]">
-          <span className="text-[#1E1E1E] font-normal text-[14px] ">
+          <span className="text-[#1E1E1E] font-semibold text-[14px] ">
             {translate("content.details.attachments")}
           </span>
           <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">

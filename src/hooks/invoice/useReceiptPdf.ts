@@ -121,7 +121,7 @@ export const useReceiptPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            isReverseLogo
+            order
 
           }: TemplateType = template.payload.Template;
 
@@ -134,7 +134,7 @@ export const useReceiptPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            isReverseLogo
+            order
           }));
         }
         if (emailTemplate?.payload) {
@@ -172,7 +172,7 @@ export const useReceiptPdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "receipt",
-              isReverseLogo:template.payload.Template?.isReverseLogo
+              isReverseLogo:template.payload.Template?.order
 
 
             },

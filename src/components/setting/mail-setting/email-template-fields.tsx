@@ -76,13 +76,13 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
                 "setting.mail_setting.template_form_fields.phone_number"
               )}`,
               htmlFor: "phoneNumber",
-              className: "!px-4 mb-[10px] text-sm font-normal text-[#393939]",
+              className: " mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
               type: Field.input,
               id: "phoneNumber",
               name: "phoneNumber",
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               inputType:"number",
               register,
               value: emailSettings?.phoneNumber || "",

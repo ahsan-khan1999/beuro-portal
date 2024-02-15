@@ -2,9 +2,9 @@ export const CheckIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      width="60"
+      height="60"
+      viewBox="0 0 35 35"
     >
       <g id="tick-icon" transform="translate(-512 -1385)">
         <g id="Group_41412" data-name="Group 41412">
