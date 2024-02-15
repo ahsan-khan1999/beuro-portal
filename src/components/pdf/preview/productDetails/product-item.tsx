@@ -14,6 +14,8 @@ export const ProductItem = ({
   totalDiscount,
   pagebreak,
 }: ServiceList) => {
+  console.log(isDiscount,"isDiscount");
+  
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3 pl-3">

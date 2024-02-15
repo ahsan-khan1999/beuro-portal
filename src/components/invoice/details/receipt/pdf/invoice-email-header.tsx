@@ -76,12 +76,12 @@ export const InvoiceEmailHeader = ({
                 fill="#4A13E7"
               />
             </svg>
-            <span className="text-2xl font-medium">
+            <span className="text-xl font-medium">
               {translate("offers.table_headings.edit")}
             </span>
           </div>
           <div className="flex items-center justify-between gap-5">
-            <BaseButton
+            {/* <BaseButton
               id="sendPostButton"
               buttonText={translate(title)}
               onClick={() => {
@@ -94,10 +94,10 @@ export const InvoiceEmailHeader = ({
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             >
               <InvoicesIcon pathClass="#4A13E7" />
-            </BaseButton>
+            </BaseButton> */}
             <BaseButton
               id="sendPostButton"
-              buttonText={title}
+              buttonText={translate("contracts.pdf_card_details.send_via_post")}
               onClick={onSendViaPost}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
@@ -119,7 +119,7 @@ export const InvoiceEmailHeader = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
-            <DownloadIcon onClick={() => {}} />
+            <DownloadIcon onClick={onDownload}  />
             {/* <Image
               src={printerIcon}
               alt="printerIcon"

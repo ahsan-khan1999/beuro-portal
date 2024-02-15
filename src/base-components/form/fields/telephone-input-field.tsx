@@ -31,8 +31,8 @@ export const TelephoneInputField = ({
             <PhoneInput
               country={country}
               onChange={(value) => {
-                // const numberWithPlus = "+" + value;
-                onChange(value);
+                const numberWithPlus = "+" + value;
+                onChange(numberWithPlus);
               }}
               countryCodeEditable={true}
               enableAreaCodeStretch={false}

@@ -4,6 +4,7 @@ import { DocumentHeader } from "../document-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { Footer } from "../../footer";
 import { ProductDiscountItem } from "./product--discount-item";
+import { useTranslation } from "next-i18next";
 
 export const ProductItemNewPage = ({
   serviceItem,
@@ -17,8 +18,10 @@ export const ProductItemNewPage = ({
   emailTemplateSettings,
   systemSettings,
 }: Partial<PurchasedItemDetailsNextPageProps>) => {
+  const { t: translate } = useTranslation()
+
   const disscountTableRow = {
-    serviceTitle: "Discount",
+    serviceTitle: translate("pdf_preview.discount"),
     price: Number(serviceItemFooter?.discount),
     unit: "-",
     totalPrice: Number(serviceItemFooter?.discount),
@@ -43,6 +46,7 @@ export const ProductItemNewPage = ({
       <div className="px-[80px] flex flex-col bg-white py-2">
         {serviceItem?.map((item, index) => (
           <ProductItem {...item} key={index}
+            isDiscount={isDiscount}
             pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
           />
         ))}

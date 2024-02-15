@@ -15,7 +15,7 @@ const DetailsTab = ({
     // if (element) {
     //   element.scrollIntoView({ behavior: "smooth", block: "start" });
     // }
-    onScroll(selectedTab);
+    onScroll && onScroll(selectedTab);
     setTabType(selectedTab);
   };
 
