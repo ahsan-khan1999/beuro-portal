@@ -111,7 +111,7 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.status")}:
           </span>
           {leadDetails.leadStatus && (
-            <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  w-[70px]">
+            <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  min-w-[70px] w-fit">
               {translate(`lead_status.${leadDetails.leadStatus}`)}
             </span>
           )}

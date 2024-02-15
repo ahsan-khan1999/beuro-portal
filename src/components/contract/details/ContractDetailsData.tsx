@@ -122,6 +122,7 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
               icon={item.icon}
               selectedTab={index}
               onScroll={scrollHandler}
+              key={index}
             />
           ))}
         </div>
