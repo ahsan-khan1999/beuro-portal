@@ -460,8 +460,6 @@ const ColumnsComp = () => {
     if (response?.payload) handleSuccess();
   };
 
-  console.log(mainColumns);
-
   return (
     <>
       <div className="flex gap-x-5 mb-5">

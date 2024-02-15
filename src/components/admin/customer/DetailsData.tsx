@@ -44,8 +44,8 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center  ">
-        <div className="flex items-center">
+      <div className="flex justify-between items-center pb-5">
+        <div className="flex items-center ">
           <div onClick={handlePreviousClick} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,9 +91,8 @@ const DetailsData = ({
               )}`}
         </button> */}
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
 
-      <div>
+      <div className="border-t border-t-[#000] border-opacity-10 pt-5">
         <div className="grid grid-cols-2 xl:grid-cols-5 gap-y-2">
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.customer_id")}:
@@ -116,7 +115,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] ">
             {translate("admin.customers_details.card_content.plan")}:
             <span className="ml-3 text-[#4B4B4B] font-medium">
-              {customerDetail?.plan?.planName}
+              {translate(`plan_status.${customerDetail?.plan?.planName}`)}
             </span>
           </h3>
           <h3 className="text-[#4D4D4D] ">

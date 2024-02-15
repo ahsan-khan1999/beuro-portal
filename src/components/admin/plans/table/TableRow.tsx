@@ -1,4 +1,5 @@
 import { Plan } from "@/types/admin/plans";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -10,6 +11,9 @@ const TableRow = ({
   handleDelete: (index: string) => void;
 }) => {
   const router = useRouter();
+
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {currentPageRows?.map((item, index) => {
@@ -19,7 +23,9 @@ const TableRow = ({
             className="hover:bg-[#E9E1FF] items-center bg-white px-5 cursor-pointer shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(400px,_100%)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px),minmax(90px,_90px)_minmax(180px,_100%)_minmax(70px,_70px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100px)_minmax(200px,_100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(50px,_50px)] mt-2  rounded-md"
           >
             <span className="py-4 truncate">{item?.refID}</span>
-            <span className="py-4 truncate">{item?.planName}</span>
+            <span className="py-4 truncate">
+              {translate(`plan_status.${item?.planName}`)}
+            </span>
             <span className="py-4 truncate">{item?.description}</span>
             <span className="py-4 truncate">{item?.monthlyPrice}</span>
             <span className="py-4 flex justify-center items-center">

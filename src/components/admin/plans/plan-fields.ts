@@ -32,7 +32,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "planName",
               name: "planName",
-
               placeholder: "Please Enter Your Plan Name",
               register,
               disabled: isUpdate,
@@ -68,7 +67,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
               id: "discount",
               name: "discount",
               inputType: "text",
-
               placeholder: "Please Enter Anually Discount",
               register,
               disabled: isUpdate,
@@ -88,9 +86,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "number",
               id: "numberOfEmployees",
               name: "numberOfEmployees",
-
               placeholder: "Enter Your Number Of Employs",
-
               register,
               disabled: isUpdate,
             },
@@ -118,7 +114,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "number",
               id: "numberOfRequests",
               name: "numberOfRequests",
-
               placeholder: "Enter Number Of Requests",
               register,
               disabled: isUpdate,
@@ -137,7 +132,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "description",
               name: "description",
-
               placeholder: "Enter Description",
               register,
               disabled: isUpdate,
@@ -168,7 +162,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
                 {
                   field: {
                     type: Field.span,
-
                     id: "test",
                     name: "test",
                     text: `${translate("admin.plan_details.enable_reports")}`,
@@ -239,7 +232,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
                 {
                   field: {
                     type: Field.span,
-
                     id: "test",
                     name: "watermark",
                     text: `${translate("admin.plan_details.enable_watermark")}`,
@@ -276,7 +268,6 @@ export const planDetailsFormField: GeneratePlansFormField = (
                 {
                   field: {
                     type: Field.span,
-
                     id: "test",
                     name: "apiFeatures",
                     text: `${translate("admin.plan_details.enable_api")}`,
