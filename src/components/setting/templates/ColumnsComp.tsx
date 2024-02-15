@@ -105,8 +105,6 @@ const ColumnsComp = () => {
     (state) => state.settings
   );
 
-  console.log(templateSettings);
-
   const [mainColumns, setMainColumns] = useState<MainColumns>({
     firstColumn: templateSettings?.isFirstColumn || false,
     secondColumn: templateSettings?.isSecondColumn || false,
@@ -415,6 +413,7 @@ const ColumnsComp = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
@@ -461,17 +460,38 @@ const ColumnsComp = () => {
     if (response?.payload) handleSuccess();
   };
 
+  console.log(mainColumns);
+
   return (
     <>
-      {/* template choice */}
       <div className="flex gap-x-5 mb-5">
-        <div className="relative border-2 border-primary">
-          <div className="absolute -right-3 -top-3">
-            <CheckIcon />
-          </div>
+        <button
+          className={`relative border-2 ${
+            !mainColumns.order ? "border-primary" : "border-transparent"
+          }`}
+          onClick={() => setMainColumns({ ...mainColumns, order: false })}
+        >
+          {mainColumns.order === false && (
+            <div className="absolute -right-2 -top-2">
+              <CheckIcon />
+            </div>
+          )}
           <Image src={leftAlignTemplate} alt="left aligned" />
-        </div>
-        <Image src={rightAlignTemplate} alt="right aligned" />
+        </button>
+
+        <button
+          className={`relative border-2 ${
+            mainColumns.order ? "border-primary" : "border-transparent"
+          }`}
+          onClick={() => setMainColumns({ ...mainColumns, order: true })}
+        >
+          {mainColumns.order && (
+            <div className="absolute -right-2 -top-2">
+              <CheckIcon />
+            </div>
+          )}
+          <Image src={rightAlignTemplate} alt="right aligned" />
+        </button>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-[27px]">

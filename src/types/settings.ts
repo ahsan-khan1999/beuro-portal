@@ -38,6 +38,7 @@ export interface TemplateSettings {
   isThirdColumn: boolean;
   isSecondColumn: boolean;
   order: boolean;
+  alignment: "left" | "right";
   firstColumn: {
     isCompanyName: boolean;
     isEmail: boolean;
