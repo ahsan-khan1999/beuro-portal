@@ -16,8 +16,12 @@ import {
 } from "@/types/settings";
 import { Button } from "@/base-components/ui/button/button";
 import InputField from "@/base-components/filter/fields/input-field";
-import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
-import rightAlignTemplate from "@/assets/pngs/Right_align.png";
+// import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
+import leftAlignTemplate from "@/assets/svgs/Group 48096404.svg";
+
+
+import rightAlignTemplate from "@/assets/svgs/Group 48096404 (1).svg";
+
 import { CheckIcon } from "@/assets/svgs/components/check-icon";
 
 const Column = ({
@@ -357,6 +361,7 @@ const ColumnsComp = () => {
       secondColumn: templateSettings?.isSecondColumn || false,
       thirdColumn: templateSettings?.isThirdColumn || false,
       fourthColumn: templateSettings?.isFourthColumn || false,
+      order: templateSettings?.order || false
     });
     updateColumnValues(
       columnSettings.firstColumn,
@@ -453,6 +458,7 @@ const ColumnsComp = () => {
       isSecondColumn: mainColumns?.secondColumn,
       isThirdColumn: mainColumns?.thirdColumn,
       isFourthColumn: mainColumns?.fourthColumn,
+      order: mainColumns?.order
     };
     const response = await dispatch(
       updateTemplateSetting({ data: apiData, translate })
@@ -462,34 +468,46 @@ const ColumnsComp = () => {
 
   return (
     <>
-      <div className="flex gap-x-5 mb-5">
-        <button
-          className={`relative border-2 ${
-            !mainColumns.order ? "border-primary" : "border-transparent"
-          }`}
-          onClick={() => setMainColumns({ ...mainColumns, order: false })}
-        >
-          {mainColumns.order === false && (
-            <div className="absolute -right-2 -top-2">
-              <CheckIcon />
-            </div>
-          )}
-          <Image src={leftAlignTemplate} alt="left aligned" />
-        </button>
+      <div className="flex flex-col gap-x-5 mb-5 bg-white">
+        <p className="text-base font-semibold px-5 mt-5">Header Alignment</p>
+        <div className="flex ">
+          <button
+            className={`relative px-6 my-3`}
+            onClick={() => setMainColumns({ ...mainColumns, order: false })}
+          >
+            {mainColumns.order === false && (
+              <div className="absolute -right-2 -top-5">
+                <CheckIcon />
+              </div>
+            )}
+            <div className={`border-2 rounded-lg p-4 ${!mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}>
 
-        <button
-          className={`relative border-2 ${
-            mainColumns.order ? "border-primary" : "border-transparent"
-          }`}
-          onClick={() => setMainColumns({ ...mainColumns, order: true })}
-        >
-          {mainColumns.order && (
-            <div className="absolute -right-2 -top-2">
-              <CheckIcon />
+              <Image src={leftAlignTemplate} height={250} width={250} alt="left aligned" />
             </div>
-          )}
-          <Image src={rightAlignTemplate} alt="right aligned" />
-        </button>
+            <p className="text-base font-medium py-2">Logo Align Left</p>
+
+          </button>
+
+          <button
+            className={`relative  `}
+            onClick={() => setMainColumns({ ...mainColumns, order: true })}
+          >
+            {mainColumns.order && (
+              <div className="absolute -right-8 -top-2">
+                <CheckIcon />
+              </div>
+            )}
+            <div className={`border-2 rounded-lg p-4 ${mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}>
+
+              <Image src={rightAlignTemplate} height={250} width={250} alt="right aligned" />
+
+            </div>
+            <p className="text-base font-medium py-2">Logo Align Right</p>
+
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-[27px]">
