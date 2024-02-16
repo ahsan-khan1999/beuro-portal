@@ -5,12 +5,16 @@ import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
-import { uploadFileToFirebase, uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
+import {
+    uploadFileToFirebase,
+    uploadMultiFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 import Link from "next/link";
 import imgDelete from "@/assets/svgs/img_delete.svg";
+import { Slider } from "../slider/slider";
 
 export const ImageField = ({
     id,
@@ -25,14 +29,20 @@ export const ImageField = ({
     text?: string;
     fileSupported?: string;
     isOpenedFile?: boolean;
-    attachements?: Attachement[];
+    attachements: Attachement[];
     setAttachements?: (attachement?: Attachement[]) => void;
     isAttachement?: boolean;
 }) => {
-    const [isZoomed, setIsZoomed] = useState(false);
+    const [isZoomed, setIsZoomed] = useState({
+        zoomed: false,
+        currentImage: "",
+        sliderImageData: [],
+        currentIndex: 0
+    });
 
-    const toggleZoom = () => {
-        setIsZoomed(!isZoomed);
+    const toggleZoom = (image: string, index: number) => {
+        const imageList = [{ imageSrc: image }, ...attachements?.map((item) => ({ imageSrc: item.value }))] as unknown[]
+        setIsZoomed({ zoomed: !isZoomed.zoomed, currentImage: image, sliderImageData: imageList as never[], currentIndex: ++index });
     };
     const router = useRouter();
     const formdata = new FormData();
@@ -56,12 +66,10 @@ export const ImageField = ({
                 formdata.append("files", item);
             }
             file.push(e.target.files);
-
         }
 
         // if (file) {
         // formdata.append("files", file);
-        console.log(file, "file");
 
         const response = await dispatch(uploadMultiFileToFirebase(formdata));
 
@@ -74,22 +82,19 @@ export const ImageField = ({
 
         // Store the file name locally
         // const response = await dispatch(uploadFileToFirebase(formdata));
-        let newAttachement = attachements && [...attachements] || []
+        let newAttachement = (attachements && [...attachements]) || [];
         if (response?.payload) {
-
             response?.payload?.forEach((element: any) => {
                 newAttachement.push({
                     name: getFileNameFromUrl(element),
-                    value: element
-                })
-            })
-            setAttachements && setAttachements(newAttachement)
+                    value: element,
+                });
+            });
+            setAttachements && setAttachements(newAttachement);
             // setAttachements(
             //     attachements &&
             //     [...attachements, { name: file?.name, value: response?.payload }],
             // );
-
-
         }
         // }
     };
@@ -100,7 +105,10 @@ export const ImageField = ({
         setAttachements && setAttachements(list);
         // field.onChange();
     };
-
+    const SLIDER_IMAGES_DATA = {
+        noOfThumbNails: 8,
+        images: attachements?.map((item) => ({ imageSrc: item?.value })),
+    };
     return (
         <div className="grid grid-cols-1 gap-x-3">
             <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
@@ -164,7 +172,7 @@ export const ImageField = ({
                                             height={100}
                                             alt="Uploaded Preview"
                                             style={{ height: '80px', width: '80px' }}
-                                            onClick={toggleZoom}
+                                            onClick={() => toggleZoom(item.value, index)}
                                             className="cursor-pointer"
                                         />
                                         <div
@@ -173,7 +181,7 @@ export const ImageField = ({
                                         >
                                             <Image src={imgDelete} alt="imgDelete" />
                                         </div>
-                                        {isZoomed && (
+                                        {isZoomed.zoomed && (
                                             <div
                                                 style={{
                                                     position: 'fixed',
@@ -187,23 +195,29 @@ export const ImageField = ({
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
-                                                onClick={toggleZoom}
+                                                onClick={() => toggleZoom(item.value, index)}
+
                                             >
-                                                <Image
-                                                    src={item?.value}
+                                                {/* <Image
+                                                    src={isZoomed?.currentImage || item.value }
                                                     alt="Zoomed Preview"
                                                     height={500}
                                                     width={500}
                                                     style={{ maxHeight: '90vh', maxWidth: '90vw' }}
+                                                /> */}
+                                                <Slider
+                                                    {...SLIDER_IMAGES_DATA} images={isZoomed?.sliderImageData} activeIndex={isZoomed?.currentIndex}
+                                                    containerClasses="w-[80%]"
+                                                    mainImgSliderClasses="w-full h-[615px]"
                                                 />
                                             </div>
                                         )}
                                     </div>
-                                </div>
-                            </div>
+                                </div >
+                            </div >
                         ))}
                 </div>
             </div>
         </div>
     );
-};
+}

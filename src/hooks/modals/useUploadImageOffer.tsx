@@ -49,7 +49,6 @@ export const useUploadImageOffer = (
       let newArray = [...enteredLinks.links]
 
       newArray.push(enteredLink as string)
-      console.log(newArray, "newArray", enteredLink);
       setEnteredLinks({ ...enteredLinks, links: [...newArray] });
       setEnteredLink("");
     }

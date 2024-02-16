@@ -22,7 +22,6 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
   let taxPercentage = 0
   const remainingAmount = invoiceDetails?.total
-  console.log(remainingAmount,"remainingAmount");
   
   const {
     register,
