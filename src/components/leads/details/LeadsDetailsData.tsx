@@ -178,7 +178,7 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
             />
           ))}
         </div>
-        <LeadsDetailsImages images={images} />
+        <LeadsDetailsImages images={images?.images} />
       </div>
 
       <div className="w-full break-all flex">

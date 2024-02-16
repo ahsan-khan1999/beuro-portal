@@ -190,56 +190,56 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               control,
             },
           },
-          {
-            containerClass: "mb-0",
-            label: {
-              text: `${translate("leads.service_details.budget")}`,
-              htmlFor: "budget",
-              className: "mb-[10px]",
-            },
-            field: {
-              className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
-              type: Field.select,
-              id: "budget",
-              name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || "",
+          // {
+          //   containerClass: "mb-0",
+          //   label: {
+          //     text: `${translate("leads.service_details.budget")}`,
+          //     htmlFor: "budget",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     className:
+          //       "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+          //     type: Field.select,
+          //     id: "budget",
+          //     name: "budget",
+          //     value: (leadDetails?.id && leadDetails?.budget) || "",
 
-              options: [
-                {
-                  value: `Less then 500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 500${
-                    systemSettings?.currency
-                  }`,
-                },
-                {
-                  value: `Less then 1000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 1000${
-                    systemSettings?.currency
-                  }`,
-                },
-                {
-                  value: `Less then 1500 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 1500${
-                    systemSettings?.currency
-                  }`,
-                },
-                {
-                  value: `Less then 2000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 2000${
-                    systemSettings?.currency
-                  }`,
-                },
-                {
-                  value: `Less then 5000 ${systemSettings?.currency}`,
-                  label: `${translate("common.less_then")} 5000${
-                    systemSettings?.currency
-                  }`,
-                },
-              ],
-              control,
-            },
-          },
+          //     options: [
+          //       {
+          //         value: `Less then 500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 2000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 2000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 5000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 5000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //     ],
+          //     control,
+          //   },
+          // },
           {
             containerClass: "xl:col-span-1 mb-0",
             label: {
@@ -264,7 +264,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
           },
 
           {
-            containerClass: "xl:col-span-2 mb-0",
+            containerClass: "xl:col-span-3 mb-0",
             label: {
               text: `${translate("leads.service_details.other_services")}`,
               htmlFor: "otherServices",

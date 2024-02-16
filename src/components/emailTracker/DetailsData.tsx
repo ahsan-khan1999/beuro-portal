@@ -5,7 +5,7 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { formatDateReverse, getMailStatusColor } from "@/utils/utility";
+import { formatDateReverse, getFileNameFromUrl, getMailStatusColor } from "@/utils/utility";
 import Link from "next/link";
 
 const DetailsData = ({
@@ -150,12 +150,10 @@ const DetailsData = ({
         </div>
         <div className="mt-5 flex items-end">
           {emailDetails?.attachments?.map((item) => {
-            let length = item?.href?.split("/")?.length - 1;
-
             return (
               <>
                 <Link
-                  href={item?.href || ""}
+                  href={item || ""}
                   target="_blank"
                   className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
                 >
@@ -165,7 +163,7 @@ const DetailsData = ({
                     className=" mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
-                    {item.href?.split("/")[length]}
+                    {getFileNameFromUrl(item,item?.length)}
                   </span>
                 </Link>
                 &nbsp;&nbsp;

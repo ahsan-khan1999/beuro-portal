@@ -36,9 +36,9 @@ export const Container = ({ children }: MyComponentProp) => {
         minWidth: "1160px",
         maxWidth: "1200px",
 
-        display:"flex",
-        justifyContent:"center",
-        margin:"auto"
+        display: "flex",
+        justifyContent: "center",
+        margin: "auto",
       }}
     >
       {children}

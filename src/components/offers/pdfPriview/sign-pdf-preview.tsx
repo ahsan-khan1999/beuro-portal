@@ -120,7 +120,7 @@ const SignPdfPreview = () => {
                 emailTemplateSettings: offerDetails?.Mail,
                 companyName:
                   offerDetails?.Offer?.createdBy?.company?.companyName,
-                isReverseLogo: offerDetails?.Template?.order,
+                // isReverseLogo: offerDetails?.Template?.order,
               },
               contactAddress: {
                 address: {
@@ -140,6 +140,7 @@ const SignPdfPreview = () => {
                   offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
                 mobile:
                   offerDetails?.Offer?.leadID?.customerDetail?.mobileNumber,
+                // isReverseInfo: offerDetails?.Template?.order,
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,

@@ -69,7 +69,6 @@ const FollowUpSetting = () => {
       </section>
 
       <section className="grid grid-cols-3 mt-3 gap-x-2 gap-y-2 xl:gap-y-0">
-        {/* Form */}
         <div className="rounded-md bg-white pl-[32px] pr-[27px] pt-4 col-span-3 xl:col-span-1">
           <span className="text-[#4B4B4B] text-base font-medium">
             {translate("setting.follow_up_setting.add_follow_up.heading")}
@@ -83,7 +82,6 @@ const FollowUpSetting = () => {
           />
         </div>
 
-        {/* List of reasonData */}
         <div className="rounded-md bg-white p-3 col-span-3 xl:col-span-2">
           <div
             className="overflow-y-auto custom-scrollbar"
