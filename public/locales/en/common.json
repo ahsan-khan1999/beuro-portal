@@ -676,7 +676,7 @@
       "email_status": "Email Status",
       "invoice_email_preview": "Invoice Email Preview",
       "receipt_email_preview": "Receipt Email Preview",
-      "edit_invoice": "Bearbeiten Quittung"
+      "edit_invoice": "Edit Invoice"
     },
     "table_functions": {
       "open": "Open",
