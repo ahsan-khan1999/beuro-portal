@@ -297,6 +297,7 @@ interface SliderBaseProps {
 // types for slider
 export interface MainImageSliderProps extends SliderBaseProps {
   imageSrc: string;
+  containerClassName?: string;
   handleMouseMove?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -313,6 +314,8 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
+  containerClasses?: string;
+  mainImgSliderClasses?: string;
 }
 
 export interface ThumbnailSliderProps extends SliderBaseProps {
@@ -349,7 +352,7 @@ export interface ChildrenProp {
 
 export interface LinkUploadProps {
   inputLink: string;
-  onAddLink: (e?:React.FormEvent<HTMLFormElement>) => void;
+  onAddLink: (e?: React.FormEvent<HTMLFormElement>) => void;
   enteredLinks: string[];
   onLinkDelete: (linkToDelete: string) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
