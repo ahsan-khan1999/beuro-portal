@@ -8,7 +8,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { SystemSettingDataProps } from "@/types/settings";
 import InputField from "@/base-components/filter/fields/input-field";
 import { SecurityTokenField } from "@/base-components/ui/password-field";
-import { Field } from '../../../enums/form';
+import { Field } from "../../../enums/form";
 
 const ConnectWithBuro = ({
   systemSetting,
@@ -21,7 +21,6 @@ const ConnectWithBuro = ({
   const password = useRef("dummy");
   const inputRef = useRef<HTMLInputElement>(null);
 
-
   // const password = "#MaT33n";
   const { t: translate } = useTranslation();
   const handleDelete = (index: number) => {
@@ -29,6 +28,7 @@ const ConnectWithBuro = ({
     domain.splice(index, 1);
     setSystemSetting({ ...systemSetting, ["allowedDomains"]: domain });
   };
+
   const handleSubmit = () => {
     event?.preventDefault();
     if (!inputRef?.current?.value) return;
@@ -37,11 +37,12 @@ const ConnectWithBuro = ({
     setSystemSetting({ ...systemSetting, ["allowedDomains"]: domain });
     inputRef.current.value = "";
   };
-  const handleChangeToken = (value: string) => {
-    password.current = value
-    setSystemSetting({ ...systemSetting, ["token"]: value });
 
-  }
+  const handleChangeToken = (value: string) => {
+    password.current = value;
+    setSystemSetting({ ...systemSetting, ["token"]: value });
+  };
+
   return (
     <SettingLayout>
       <div className="pl-[31px] pt-6 pb-5 pr-5 bg-white">
@@ -51,9 +52,7 @@ const ConnectWithBuro = ({
 
         <p className="text-[#1E1E1E] text-xs font-normal mt-2">
           {translate("setting.system_setting.description")}
-          <span className="text-[#F00] ">
-            &nbsp; {translate("common.help")}
-          </span>
+          <span className="text-[#F00]">&nbsp; {translate("common.help")}</span>
         </p>
         {/* <div>
           <p className="text-[#1E1E1E] text-sm font-normal mt-[14px] mb-2">
@@ -91,7 +90,7 @@ const ConnectWithBuro = ({
 
               /> */}
               <InputField
-                handleChange={(value) => { }}
+                handleChange={(value) => {}}
                 // value={filter.text}
                 onEnterPress={handleSubmit}
                 ref={inputRef}
@@ -111,7 +110,6 @@ const ConnectWithBuro = ({
             inputType="text"
             onChange={handleChangeToken}
             value={password.current}
-
           />
         </div>
       </div>

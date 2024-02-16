@@ -1,0 +1,93 @@
+import SettingLayout from "../SettingLayout";
+import InputField from "@/base-components/filter/fields/input-field";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { SystemSettingDataProps } from "@/types/settings";
+import { staticEnums } from "@/utils/static";
+import { AnimatePresence, motion } from "framer-motion";
+import { SetStateAction, useRef } from "react";
+
+export const OfferRemainderSection = ({
+  systemSetting,
+  setSystemSetting,
+}: {
+  systemSetting: SystemSettingDataProps;
+  setSystemSetting: SetStateAction<any>;
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newValue = inputRef?.current?.value;
+    if (newValue) {
+      setSystemSetting({
+        ...systemSetting,
+        remainderText: [...systemSetting.remainderText, newValue],
+      });
+      inputRef.current.value = "";
+    }
+  };
+
+  const handleItemSelected = (selectedItem: string) => {
+    setSystemSetting({
+      ...systemSetting,
+      offerReminderFrequency: selectedItem,
+    });
+  };
+
+  return (
+    <SettingLayout>
+      <div className="pl-[31px] pt-[18px] pr-5 pb-[36px] bg-white">
+        <p className="text-[#393939] font-normal text-lg mb-3">
+          Offer Reminders
+        </p>
+
+        <form onSubmit={handleSubmit}>
+          <p className="text-[#1E1E1E] text-sm font-normal mt-[14px] mb-2">
+            Reminder Text
+          </p>
+
+          <input
+            ref={inputRef}
+            placeholder="1"
+            className="border border-[#BFBFBF] rounded-md w-full text-sm pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] focus:border-[#6665FF]"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSubmit(event);
+              }
+            }}
+          />
+        </form>
+        <AnimatePresence>
+          <motion.div
+            className="mt-[22px]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-[14px] text-[#1E1E1E] font-normal mb-[6px]">
+              Offer Reminder Frequency
+            </p>
+
+            <DropDown
+              items={Object.keys(staticEnums["remainderDays"]).map((item) => ({
+                item: {
+                  label: item,
+                  value: item,
+                },
+              }))}
+              onItemSelected={handleItemSelected}
+              selectedItem={systemSetting?.offerReminderFrequency?.toString()}
+              dropDownTextClassName="custom-text-style"
+              dropDownIconClassName="custom-icon-style"
+              dropDownDisabled={false}
+              shouldNotSelectItem={false}
+              dropDownClassName="!h-[42px] justify-between"
+              dropDownItemsContainerClassName="w-full"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </SettingLayout>
+  );
+};

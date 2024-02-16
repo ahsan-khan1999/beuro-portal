@@ -2,6 +2,10 @@ export interface SystemSettingDataProps {
   allowedDomains: string[];
   currency: string;
   daysLimit: number;
+  remainderText: string;
+  offerReminderFrequency: number;
+  secondWarningDays: number;
+  thirdWarningDays: number;
   isInvoiceOverDue: boolean;
   taxType: number;
 }

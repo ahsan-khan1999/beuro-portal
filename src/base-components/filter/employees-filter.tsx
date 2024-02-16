@@ -4,7 +4,6 @@ import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import InputField from "./fields/input-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
