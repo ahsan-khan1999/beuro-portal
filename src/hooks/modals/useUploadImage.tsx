@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { useEffect, useMemo, useState } from "react";
-import { setImageFieldValues } from "@/utils/utility";
+import { getFileNameFromUrl, setImageFieldValues } from "@/utils/utility";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { createImage, readImage } from "@/api/slices/imageSlice/image";
 import { generateImageValidation } from "@/validation/modalsSchema";
@@ -27,6 +27,8 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const dispatch = useAppDispatch();
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
+  const { loading: loadingGlobal } = useAppSelector((state) => state.global);
+
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({
@@ -35,15 +37,18 @@ export const useUploadImage = (handleImageSlider: Function) => {
     attachements: [],
     video: []
   });
-  const attachementTabs = ["img_tab", "link_tab", "attachement_tab", "video_tab"]
+  const attachementTabs = ["img_tab", "video_tab", "attachement_tab", "link_tab"]
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
 
-  const handleLinkAdd = () => {
+  const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault()
     if (enteredLink.trim() !== "") {
       let newArray = [...enteredLinks.links]
+
       newArray.push(enteredLink as string)
+      console.log(newArray, "newArray", enteredLink);
       setEnteredLinks({ ...enteredLinks, links: [...newArray] });
       setEnteredLink("");
     }
@@ -79,53 +84,77 @@ export const useUploadImage = (handleImageSlider: Function) => {
     setEnteredLinks({ ...enteredLinks, video: updatedAttachements });
   };
 
-  const schema = generateImageValidation(translate);
-  const {
-    handleSubmit,
-    control,
-    setError,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  // const schema = generateImageValidation(translate);
+  // const {
+  //   handleSubmit,
+  //   control,
+  //   setError,
+  //   setValue,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(schema),
+  // });
 
-  const fields = ImageUploadFormField(
-    loading,
-    control as Control<any>,
-    handleImageSlider,
-    setValue
-  );
+  // const fields = ImageUploadFormField(
+  //   loading,
+  //   control as Control<any>,
+  //   handleImageSlider,
+  //   setValue
+  // );
   const handleOnClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   useMemo(() => {
-    if (leadDetails?.id)
-      setImageFieldValues(setValue as UseFormSetValue<any>, images);
-  }, [leadDetails?.id, images?.length]);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const filteredList = Object.values(data)
-      ?.filter((value) => value)
-      ?.reverse();
+    if (leadDetails?.id) {
+      const formatImages = images?.images?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
+      const formatVideos = images?.videos?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
+      const formatAttachments = images?.attachments?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
+      const formatLinks = images?.links
+      console.log(formatImages, "image");
+
+      setEnteredLinks({
+        images: formatImages,
+        links: formatLinks,
+        attachements: formatAttachments,
+        video: formatVideos
+      })
+    }
+  }, [leadDetails?.id, images]);
+
+  const onSubmit = async () => {
+    // const filteredList = Object.values(data)
+    //   ?.filter((value) => value)
+    //   ?.reverse();
+    const formatImages = enteredLinks?.images?.map((item: Attachement) => item.value)
+    const formatVideos = enteredLinks?.video?.map((item: Attachement) => item.value)
+    const formatAttachments = enteredLinks?.attachements?.map((item: Attachement) => item.value)
+    const formatLinks = enteredLinks?.links
+
+
     const apiData = {
-      images: filteredList,
+      // images: filteredList,
+      images: formatImages,
+      links: formatLinks,
+      attachments: formatAttachments,
+      videos: formatVideos,
+
       id: leadDetails?.id,
       type: "leadID",
     };
     const response = await dispatch(
-      createImage({ data: apiData, router, setError, translate })
+      createImage({ data: apiData, router, translate })
     );
-    if (response?.payload && response?.payload?.length > 0) handleImageSlider();
-    else handleOnClose();
+    if (response?.payload) handleOnClose();
+    // else handleOnClose();
   };
 
   return {
-    fields,
-    onSubmit,
-    control,
-    handleSubmit,
-    errors,
+    // fields,
+    // onSubmit,
+    // control,
+    // handleSubmit,
+    // errors,
     error,
     translate,
     handleTabChange,
@@ -141,6 +170,9 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleVideoAdd,
     handleVideoDelete,
     handleimageAdd,
-    handleImageDelete
+    handleImageDelete,
+    onSubmit,
+    loading,
+    loadingGlobal
   };
 };

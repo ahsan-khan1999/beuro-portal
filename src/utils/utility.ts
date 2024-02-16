@@ -31,6 +31,7 @@ import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
 import 'moment/locale/de';
+import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -570,6 +571,7 @@ export function getFileNameFromUrl(url: string) {
   return fileName?.slice(0, 28);
 }
 
+
 export function getEmailColor(status: string) {
   if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
@@ -828,3 +830,12 @@ export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
     return styleRules ? `style="${styleRules}"` : "";
   });
 };
+
+
+export function validateUrl(url:string,translate:TFunction) {
+  const regexp = new RegExp('((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*')
+  if (!regexp.test(url)) {
+    return { isValid: false, message: translate("validationMessages.invalid_format") };
+  }
+  return { isValid: true, message: '' };
+}

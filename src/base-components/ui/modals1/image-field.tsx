@@ -100,7 +100,6 @@ export const ImageField = ({
         setAttachements && setAttachements(list);
         // field.onChange();
     };
-    console.log(attachements, "attachements");
 
     return (
         <div className="grid grid-cols-1 gap-x-3">

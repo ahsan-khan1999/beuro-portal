@@ -1178,15 +1178,21 @@
       "button": "Speichern"
     },
     "images_modal": {
-      "heading": "Bilder & Links",
+      "heading": "Unterstützende Dokumente",
       "img_tab": "Bilder",
       "link_tab": "Links",
-      "title": "15 Bilder können hochgeladen werden",
+      "title": "20 Bilder können hochgeladen werden",
       "sub_title": "Bilder sollten maximal 20 sein, Dateigröße bis zu 10MB",
       "image_slider_heading": "Bilder",
       "drop_attach": "Datei hier ablegen oder anhängen",
       "attachement_tab": "Attachments",
-      "video_tab": "Video"
+      "video_tab": "Video",
+      "video_title": "20 Video kann hochgeladen werden",
+      "video_sub_title": "Video sollte maximal 20 sein, Dateigröße bis zu 10MB",
+      "attachement_title": "20 Anhänge können hochgeladen werden",
+      "attachement_sub_title": "Anhänge sollten maximal 20 sein, Dateigröße bis zu 10MB",
+      "link_title": "Link hinzufügen",
+      "link_sub_title": "Die Anzahl der Links sollte maximal 20 betragen, die Dateigröße bis zu 10 MB."
     },
     "delete_modal": {
       "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
