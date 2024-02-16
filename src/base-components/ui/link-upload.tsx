@@ -6,6 +6,7 @@ import { LinkUploadProps } from "@/types";
 import { validateUrl } from "@/utils/utility";
 import { useState } from "react";
 import error from '@/assets/pngs/error.png';
+import Link from "next/link";
 
 export const LinkUpload = ({
   inputLink,
@@ -56,9 +57,9 @@ export const LinkUpload = ({
             key={index}
             className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-2 mt-2"
           >
-            <p className="text-base font-normal text-black truncate max-w-[500px]">
+            <Link href={link} target="_blank" className="text-base font-normal underline truncate max-w-[500px]">
               {link}
-            </p>
+            </Link>
 
             <div className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
               <Image

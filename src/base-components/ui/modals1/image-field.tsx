@@ -11,6 +11,7 @@ import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 import Link from "next/link";
 import imgDelete from "@/assets/svgs/img_delete.svg";
+import { Slider } from "../slider/slider";
 
 export const ImageField = ({
     id,
@@ -29,10 +30,13 @@ export const ImageField = ({
     setAttachements?: (attachement?: Attachement[]) => void;
     isAttachement?: boolean;
 }) => {
-    const [isZoomed, setIsZoomed] = useState(false);
+    const [isZoomed, setIsZoomed] = useState({
+        zoomed: false,
+        currentImage: ""
+    });
 
-    const toggleZoom = () => {
-        setIsZoomed(!isZoomed);
+    const toggleZoom = (image: string) => {
+        setIsZoomed({ zoomed: !isZoomed.zoomed, currentImage: image });
     };
     const router = useRouter();
     const formdata = new FormData();
@@ -100,7 +104,10 @@ export const ImageField = ({
         setAttachements && setAttachements(list);
         // field.onChange();
     };
-
+    const SLIDER_IMAGES_DATA = {
+        noOfThumbNails: 8,
+        images: attachements?.map((item) => ({ imageSrc: item?.value }))
+    };
     return (
         <div className="grid grid-cols-1 gap-x-3">
             <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
@@ -164,7 +171,7 @@ export const ImageField = ({
                                             height={100}
                                             alt="Uploaded Preview"
                                             style={{ height: '80px', width: '80px' }}
-                                            onClick={toggleZoom}
+                                            onClick={() => toggleZoom(item.value)}
                                             className="cursor-pointer"
                                         />
                                         <div
@@ -173,7 +180,7 @@ export const ImageField = ({
                                         >
                                             <Image src={imgDelete} alt="imgDelete" />
                                         </div>
-                                        {isZoomed && (
+                                        {isZoomed.zoomed && (
                                             <div
                                                 style={{
                                                     position: 'fixed',
@@ -187,15 +194,17 @@ export const ImageField = ({
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
-                                                onClick={toggleZoom}
+                                                onClick={() => toggleZoom(item.value)}
+
                                             >
-                                                <Image
-                                                    src={item?.value}
+                                                {/* <Image
+                                                    src={isZoomed?.currentImage || item.value }
                                                     alt="Zoomed Preview"
                                                     height={500}
                                                     width={500}
                                                     style={{ maxHeight: '90vh', maxWidth: '90vw' }}
-                                                />
+                                                /> */}
+                                                <Slider {...SLIDER_IMAGES_DATA} />
                                             </div>
                                         )}
                                     </div>
