@@ -14,7 +14,7 @@ export interface TableRowEmailTracker {
   email: string;
   refID: string;
   pdf: string;
-  attachments: Pdf[];
+  attachments: string[];
   cc:string;
   bcc:string;
 

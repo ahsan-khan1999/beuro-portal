@@ -19,6 +19,8 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -28,6 +30,7 @@ const useContract = () => {
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
+  const { t: translate } = useTranslation()
 
   const { query } = useRouter();
 
@@ -84,8 +87,8 @@ const useContract = () => {
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+
   };
 
   const handleImageUpload = (
@@ -114,7 +117,7 @@ const useContract = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter}/>
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -123,8 +126,13 @@ const useContract = () => {
         type={"Contract"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
     ),
   };
 

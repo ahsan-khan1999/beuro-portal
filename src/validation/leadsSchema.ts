@@ -131,9 +131,9 @@ export const generateLeadsServiceEditDetailsValidation = (
       .string()
       .notRequired(),
 
-    [LeadsServiceEditDetails.budget]: yup
-      .string()
-      .notRequired(),
+    // [LeadsServiceEditDetails.budget]: yup
+    //   .string()
+    //   .notRequired(),
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()

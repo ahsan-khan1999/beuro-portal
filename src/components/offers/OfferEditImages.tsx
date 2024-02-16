@@ -47,16 +47,15 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${
-              images?.length > 0 ? "cursor-pointer" : "cursor-default"
-            }  `}
-            onClick={() => images?.length > 0 && shareImgModal()}
+            className={`${images && images?.images?.length > 0 ? "cursor-pointer" : "cursor-default"
+              }  `}
+            onClick={() => images && images?.images?.length > 0 && shareImgModal()}
           />
         </div>
 
-        {images?.length > 0 ? (
+        {images?.images && images?.images?.length > 0 ? (
           <div className="grid grid-cols-4 xLarge:grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
-            {images?.map((item, index) => (
+            {images?.images?.map((item, index) => (
               <Image
                 src={item}
                 key={index}
@@ -73,15 +72,14 @@ const OfferEditImages = ({
           </div>
         )}
 
-        <div className="flex justify-between items-center mx-[13px] pb-3">
-          <p
-            className={`text-[12px] font-normal text-[#4A13E7] ${
-              images?.length > 0 ? "cursor-pointer" : "cursor-default"
-            }   `}
-            onClick={() => images?.length > 0 && handleImageSlider()}
+        <div className="flex justify-end items-center mx-[13px] pb-3">
+          {/* <p
+            className={`text-[12px] font-normal text-[#4A13E7] ${images && images?.images?.length > 0 ? "cursor-pointer" : "cursor-default"
+              }   `}
+            onClick={(e) => images && images?.images?.length > 0 && handleImagesUpload(offerDetails?.id, e)}
           >
             {translate("offers.side_images.views")}
-          </p>
+          </p> */}
           <span
             onClick={(e) => handleImagesUpload(offerDetails?.id, e)}
             className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}

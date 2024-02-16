@@ -87,7 +87,9 @@ export const useReceiptPdf = () => {
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const { loading, collectiveInvoiceDetails } = useAppSelector(state => state.invoice);
+  const { loading, collectiveInvoiceDetails } = useAppSelector(
+    (state) => state.invoice
+  );
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -95,7 +97,7 @@ export const useReceiptPdf = () => {
   const maxItemsPerPage = 10;
 
   const router = useRouter();
-  const { invoiceID ,isMail} = router.query;
+  const { invoiceID, isMail } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -121,8 +123,7 @@ export const useReceiptPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            order
-
+            order,
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -134,7 +135,7 @@ export const useReceiptPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            order
+            order,
           }));
         }
         if (emailTemplate?.payload) {
@@ -154,76 +155,56 @@ export const useReceiptPdf = () => {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
               contractId: invoiceDetails?.invoiceNumber,
-              workerName:
-                invoiceDetails?.invoiceID?.createdBy
-                  ?.fullName,
-              contractStatus:
-                invoiceDetails?.invoiceID?.invoiceStatus,
-              contentName:
-                invoiceDetails?.invoiceID?.content
-                  ?.contentName,
+              workerName: invoiceDetails?.invoiceID?.createdBy?.fullName,
+              contractStatus: invoiceDetails?.invoiceID?.invoiceStatus,
+              contentName: invoiceDetails?.invoiceID?.content?.contentName,
               contractTitle: invoiceDetails?.title,
             },
             headerDetails: {
-              offerNo:
-                invoiceDetails?.invoiceNumber,
+              offerNo: invoiceDetails?.invoiceNumber,
               offerDate: invoiceDetails?.createdAt,
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "receipt",
-              isReverseLogo:template.payload.Template?.order
-
-
+              isReverseLogo: template.payload.Template?.order,
             },
             contactAddress: {
               address: {
-                name: invoiceDetails?.invoiceID
-                  ?.customerDetail.fullName,
-                city: invoiceDetails?.invoiceID
-                  ?.customerDetail?.address?.country,
+                name: invoiceDetails?.invoiceID?.customerDetail.fullName,
+                city: invoiceDetails?.invoiceID?.customerDetail?.address
+                  ?.country,
                 postalCode:
-                  invoiceDetails?.invoiceID
-                    ?.customerDetail?.address?.postalCode,
+                  invoiceDetails?.invoiceID?.customerDetail?.address
+                    ?.postalCode,
                 streetWithNumber:
-                  invoiceDetails?.invoiceID
-                    ?.customerDetail?.address?.streetNumber,
-
+                  invoiceDetails?.invoiceID?.customerDetail?.address
+                    ?.streetNumber,
               },
-              gender: invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
-              email:
-                invoiceDetails?.invoiceID
-                  ?.customerDetail?.email,
-              phone:
-                invoiceDetails?.invoiceID
-                  ?.customerDetail?.phoneNumber,
+              gender:
+                invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
+              email: invoiceDetails?.invoiceID?.customerDetail?.email,
+              phone: invoiceDetails?.invoiceID?.customerDetail?.phoneNumber,
+              isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {
-              address:
-                invoiceDetails?.invoiceID
-                  ?.addressID?.address,
+              address: invoiceDetails?.invoiceID?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
               time: invoiceDetails?.invoiceID?.time,
-
             },
             serviceItem:
-              invoiceDetails?.invoiceID?.serviceDetail
-                ?.serviceDetail,
+              invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
-              isTax:invoiceDetails?.invoiceID?.isTax,
-              isDiscount:invoiceDetails?.invoiceID?.isDiscount,
-              subTotal:
-                invoiceDetails?.invoiceID?.subTotal?.toString(),
-              tax:
-                invoiceDetails?.invoiceID?.taxAmount?.toString(),
+              isTax: invoiceDetails?.invoiceID?.isTax,
+              isDiscount: invoiceDetails?.invoiceID?.isDiscount,
+              subTotal: invoiceDetails?.invoiceID?.subTotal?.toString(),
+              tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
 
-              discount:
-                invoiceDetails?.invoiceID?.discountAmount?.toString(),
-              grandTotal:
-                invoiceDetails?.invoiceID?.total?.toString(),
+              discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
+              grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
@@ -231,12 +212,16 @@ export const useReceiptPdf = () => {
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               discountType: invoiceDetails?.invoiceID?.discountType,
               taxType: invoiceDetails?.invoiceID?.taxType,
-              serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
-                const price = service?.discount || 0;
-                return acc + price;
-              }, 0),
-              discountDescription:invoiceDetails?.invoiceID?.discountDescription
-
+              serviceDiscountSum:
+                invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
+                  (acc, service) => {
+                    const price = service?.discount || 0;
+                    return acc + price;
+                  },
+                  0
+                ),
+              discountDescription:
+                invoiceDetails?.invoiceID?.discountDescription,
             },
             footerDetails: {
               firstColumn: {
@@ -278,10 +263,10 @@ export const useReceiptPdf = () => {
 
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.invoiceID?.content
-              ?.receiptContent?.title as string,
-            description: invoiceDetails?.invoiceID?.content
-              ?.receiptContent?.body as string,
+            subject: invoiceDetails?.invoiceID?.content?.receiptContent
+              ?.title as string,
+            description: invoiceDetails?.invoiceID?.content?.receiptContent
+              ?.body as string,
           };
         }
       }
@@ -342,14 +327,13 @@ export const useReceiptPdf = () => {
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
       if (fileUrl?.payload) {
-        localStoreUtil.store_data("pdf", fileUrl?.payload)
+        localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(`/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`)
-      }
-      else {
-
-
+        router.push(
+          `/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`
+        );
+      } else {
         setActiveButtonId("email");
         const data = await localStoreUtil.get_data("receiptEmailCompose");
 
@@ -367,14 +351,17 @@ export const useReceiptPdf = () => {
             dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         } else {
           let apiData = {
-            email:
-              collectiveInvoiceDetails?.invoiceID
-                ?.customerDetail?.email,
+            email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
             content:
               collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
                 ?.id,
             subject:
-              collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.createdBy?.company?.companyName,
+              collectiveInvoiceDetails?.title +
+              " " +
+              collectiveInvoiceDetails?.invoiceNumber +
+              " " +
+              collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
+                ?.createdBy?.company?.companyName,
             description:
               collectiveInvoiceDetails?.invoiceID?.contractID?.offerID?.content
                 ?.receiptContent?.body,
@@ -388,7 +375,6 @@ export const useReceiptPdf = () => {
             dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
         }
       }
-
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }
@@ -407,15 +393,18 @@ export const useReceiptPdf = () => {
   const handleDonwload = () => {
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}.pdf`;
+      a.download = `${
+        collectiveInvoiceDetails?.invoiceNumber +
+        "-" +
+        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName
+      }.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
 
       URL.revokeObjectURL(url);
-
     }
   };
   const handlePrint = () => {
@@ -479,6 +468,6 @@ export const useReceiptPdf = () => {
     onClose,
     onSuccess,
     dispatch,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
   };
 };

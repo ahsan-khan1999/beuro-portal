@@ -102,7 +102,7 @@ export const useInvoicePdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            order
+            order,
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -114,7 +114,7 @@ export const useInvoicePdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            order
+            order,
           }));
         }
         if (emailTemplate?.payload) {
@@ -134,68 +134,56 @@ export const useInvoicePdf = () => {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
               contractId: invoiceDetails?.invoiceNumber,
-              workerName:
-                invoiceDetails?.invoiceID?.createdBy
-                  ?.fullName,
-              contractStatus:
-                invoiceDetails?.invoiceStatus,
-              contentName:
-                invoiceDetails?.invoiceID?.content
-                  ?.contentName,
+              workerName: invoiceDetails?.invoiceID?.createdBy?.fullName,
+              contractStatus: invoiceDetails?.invoiceStatus,
+              contentName: invoiceDetails?.invoiceID?.content?.contentName,
               contractTitle: invoiceDetails?.title,
             },
             headerDetails: {
-              offerNo:
-                invoiceDetails?.invoiceNumber,
+              offerNo: invoiceDetails?.invoiceNumber,
               offerDate: invoiceDetails?.createdAt,
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "invoice",
-              isReverseLogo:template.payload.Template?.order
-
+              isReverseLogo: template.payload.Template?.order,
             },
             contactAddress: {
               address: {
                 name: invoiceDetails?.invoiceID?.customerDetail.fullName,
-                city: invoiceDetails?.invoiceID?.customerDetail?.address?.country,
+                city: invoiceDetails?.invoiceID?.customerDetail?.address
+                  ?.country,
                 postalCode:
-                  invoiceDetails?.invoiceID?.customerDetail?.address?.postalCode,
+                  invoiceDetails?.invoiceID?.customerDetail?.address
+                    ?.postalCode,
                 streetWithNumber:
-                  invoiceDetails?.invoiceID?.customerDetail?.address?.streetNumber,
+                  invoiceDetails?.invoiceID?.customerDetail?.address
+                    ?.streetNumber,
               },
-              email:
-                invoiceDetails?.invoiceID?.customerDetail?.email,
-              phone:
-                invoiceDetails?.invoiceID?.customerDetail?.phoneNumber,
-              gender: invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
-
+              email: invoiceDetails?.invoiceID?.customerDetail?.email,
+              phone: invoiceDetails?.invoiceID?.customerDetail?.phoneNumber,
+              gender:
+                invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
+              isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {
-              address:
-                invoiceDetails?.invoiceID?.addressID?.address,
+              address: invoiceDetails?.invoiceID?.addressID?.address,
               header: invoiceDetails?.title as string,
               workDates: invoiceDetails?.invoiceID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
               time: invoiceDetails?.invoiceID?.time,
-
             },
             serviceItem:
-              invoiceDetails?.invoiceID?.serviceDetail
-                ?.serviceDetail,
+              invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
-              isTax:invoiceDetails?.invoiceID?.isTax,
-              isDiscount:invoiceDetails?.invoiceID?.isDiscount,
-              subTotal:
-                invoiceDetails?.invoiceID?.subTotal?.toString(),
-              tax:
-                invoiceDetails?.invoiceID?.taxAmount?.toString(),
+              isTax: invoiceDetails?.invoiceID?.isTax,
+              isDiscount: invoiceDetails?.invoiceID?.isDiscount,
+              subTotal: invoiceDetails?.invoiceID?.subTotal?.toString(),
+              tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
 
-              discount:
-                invoiceDetails?.invoiceID?.discountAmount?.toString(),
-              grandTotal:
-                invoiceDetails?.invoiceID?.total?.toString(),
+              discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
+              grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoiceCreatedAmount:
                 invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
               invoicePaidAmount:
@@ -205,11 +193,16 @@ export const useInvoicePdf = () => {
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               discountType: invoiceDetails?.invoiceID?.discountType,
               taxType: invoiceDetails?.invoiceID?.taxType,
-              serviceDiscountSum: invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
-                const price = service?.discount || 0;
-                return acc + price;
-              }, 0),
-              discountDescription:invoiceDetails?.invoiceID?.discountDescription
+              serviceDiscountSum:
+                invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
+                  (acc, service) => {
+                    const price = service?.discount || 0;
+                    return acc + price;
+                  },
+                  0
+                ),
+              discountDescription:
+                invoiceDetails?.invoiceID?.discountDescription,
             },
             footerDetails: {
               firstColumn: {
@@ -252,10 +245,10 @@ export const useInvoicePdf = () => {
           setInvoiceData(formatData);
           invoiceInfoObj = {
             ...invoiceInfoObj,
-            subject: invoiceDetails?.invoiceID?.content
-              ?.invoiceContent?.title as string,
-            description: invoiceDetails?.invoiceID?.content
-              ?.invoiceContent?.body as string,
+            subject: invoiceDetails?.invoiceID?.content?.invoiceContent
+              ?.title as string,
+            description: invoiceDetails?.invoiceID?.content?.invoiceContent
+              ?.body as string,
           };
         }
         if (settings?.payload?.Setting) {
@@ -320,10 +313,12 @@ export const useInvoicePdf = () => {
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
       if (fileUrl?.payload) {
-        localStoreUtil.store_data("pdf", fileUrl?.payload)
+        localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(`/invoices/compose-mail?invoiceID=${invoiceID}&isMail=${isMail}`)
+        router.push(
+          `/invoices/compose-mail?invoiceID=${invoiceID}&isMail=${isMail}`
+        );
       } else {
         const data = await localStoreUtil.get_data("invoiceComposeEmail");
         if (data) {
@@ -339,20 +334,21 @@ export const useInvoicePdf = () => {
           }
         } else {
           let apiData = {
-            email:
-              collectiveInvoiceDetails?.invoiceID
-                ?.customerDetail?.email,
-            content:
-              collectiveInvoiceDetails?.invoiceID?.content
-                ?.id,
+            email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
+            content: collectiveInvoiceDetails?.invoiceID?.content?.id,
             subject:
-              collectiveInvoiceDetails?.title + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName,
+              collectiveInvoiceDetails?.title +
+              " " +
+              collectiveInvoiceDetails?.invoiceNumber +
+              " " +
+              collectiveInvoiceDetails?.invoiceID?.createdBy?.company
+                ?.companyName,
             description:
-              collectiveInvoiceDetails?.invoiceID?.content
-                ?.invoiceContent?.body,
+              collectiveInvoiceDetails?.invoiceID?.content?.invoiceContent
+                ?.body,
             attachmetns:
-              collectiveInvoiceDetails?.invoiceID?.content
-                ?.invoiceContent?.attachments,
+              collectiveInvoiceDetails?.invoiceID?.content?.invoiceContent
+                ?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.id,
           };
           const res = await dispatch(sendInvoiceEmail({ apiData }));
@@ -378,15 +374,18 @@ export const useInvoicePdf = () => {
   const handleDonwload = () => {
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${collectiveInvoiceDetails?.invoiceNumber + "-" + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}.pdf`;
+      a.download = `${
+        collectiveInvoiceDetails?.invoiceNumber +
+        "-" +
+        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName
+      }.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
 
       URL.revokeObjectURL(url);
-
     }
   };
   const handlePrint = () => {
@@ -449,6 +448,6 @@ export const useInvoicePdf = () => {
     handleDonwload,
     onClose,
     onSuccess,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
   };
 };

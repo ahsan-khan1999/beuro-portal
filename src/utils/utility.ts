@@ -31,6 +31,7 @@ import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
 import 'moment/locale/de';
+import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -412,7 +413,7 @@ export function formatDateTimeToDate(date: string) {
   return moment(date).format("DD-MM-YYYY");
 }
 
-export function pdfDateFormat(date: string,locale:string) {
+export function pdfDateFormat(date: string, locale: string) {
   if (!date) return null;
   return moment(date).locale(locale).format("DD. MMMM YYYY");
 }
@@ -564,11 +565,14 @@ export const transformAttachments = (attachmemts: string[]) => {
   return list;
 };
 
-export function getFileNameFromUrl(url: string) {
-  const urlParts = url.split("/");
-  const fileName = urlParts[urlParts.length - 1];
-  return fileName?.slice(0, 28);
+export function getFileNameFromUrl(url: string, count?: number) {
+  console.log(url);
+
+  const urlParts = url?.split("/");
+  const fileName = urlParts[urlParts?.length - 1];
+  return fileName?.slice(0, count ? count : 28);
 }
+
 
 export function getEmailColor(status: string) {
   if (
@@ -828,3 +832,12 @@ export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
     return styleRules ? `style="${styleRules}"` : "";
   });
 };
+
+
+export function validateUrl(url: string, translate: TFunction) {
+  const regexp = new RegExp('((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*')
+  if (!regexp.test(url)) {
+    return { isValid: false, message: translate("validationMessages.invalid_format") };
+  }
+  return { isValid: true, message: '' };
+}

@@ -25,6 +25,8 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useTranslation } from "next-i18next";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -36,7 +38,7 @@ const useOffers = () => {
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
-
+  const { t: translate } = useTranslation()
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -110,8 +112,7 @@ const useOffers = () => {
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -139,7 +140,7 @@ const useOffers = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter}/>
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -148,9 +149,17 @@ const useOffers = () => {
         type={"Offer"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
     ),
+    // [ModalType.IMAGE_SLIDER]: (
+    //   <ImageSlider onClose={onClose} details={images} />
+    // ),
   };
 
   const renderModal = () => {

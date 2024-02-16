@@ -3,10 +3,20 @@ import { User } from "@/types";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 interface Image {
+    attachments: string[];
+    images: string[];
+    videos: string[];
+    links: string[];
+    contractID: string;
+    createdAt: string;
+    id: string;
+    offerID: string;
+    leadID: string;
+
 
 }
 interface NoteState {
-    images: string[];
+    images: Image | null;
     loading: boolean;
     error: Record<string, object>,
     totalCount: number;
@@ -14,7 +24,7 @@ interface NoteState {
 }
 
 const initialState: NoteState = {
-    images: [],
+    images: null,
     loading: false,
     error: {},
     lastPage: 1,
@@ -27,7 +37,7 @@ export const readImage: AsyncThunk<boolean, object, object> | any =
 
         try {
             const response = await apiServices.readImage(params);
-            return response?.data?.data;
+            return response?.data?.data?.Image;
             return true;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -41,7 +51,7 @@ export const createImage: AsyncThunk<boolean, object, object> | any =
 
         try {
             const response = await apiServices.createImage(data);
-            return response?.data?.data?.Image?.images;
+            return response?.data?.data?.Image;
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             setErrors(setError, e?.data.data, translate);
@@ -68,7 +78,7 @@ const imageSlice = createSlice({
             state.loading = true
         });
         builder.addCase(readImage.fulfilled, (state, action) => {
-            state.images = action.payload.Image?.images
+            state.images = action.payload
             state.lastPage = action.payload.lastPage
             state.totalCount = action.payload.totalCount
             state.loading = false;
@@ -80,7 +90,7 @@ const imageSlice = createSlice({
             state.loading = true
         });
         builder.addCase(createImage.fulfilled, (state, action) => {
-            if (action.payload) state.images = [...action.payload]
+            if (action.payload) state.images = action.payload
             state.loading = false;
         });
         builder.addCase(createImage.rejected, (state) => {

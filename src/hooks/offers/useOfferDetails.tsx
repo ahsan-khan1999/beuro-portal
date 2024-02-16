@@ -102,8 +102,8 @@ export default function useOfferDetails() {
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    // dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -159,9 +159,9 @@ export default function useOfferDetails() {
         type={"Offer"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
-    ),
+    // [ModalType.IMAGE_SLIDER]: (
+    //   <ImageSlider onClose={onClose} details={images} />
+    // ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}

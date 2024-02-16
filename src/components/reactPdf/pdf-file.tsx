@@ -64,7 +64,6 @@ const PdfFile = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
-
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates, time } = data?.movingDetails || {};
@@ -84,12 +83,14 @@ const PdfFile = ({
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount: serviceItemFooter?.isDiscount
-
-
-  }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
-  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
@@ -106,24 +107,29 @@ const PdfFile = ({
 
           <AddressDetails {...{ address, header, workDates, time }} />
 
-          <ServiceTableHederRow
-            isDiscount={isDiscount}
-          />
+          <ServiceTableHederRow isDiscount={isDiscount} />
           {serviceItem?.map((item, index) => (
             <ServiceTableRow
               {...item}
               key={index}
-              pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
+              pagebreak={
+                !pageBreakCondition
+                  ? serviceItem?.length === 1
+                    ? false
+                    : index === serviceItem?.length - 1
+                  : false
+              }
               isDiscount={isDiscount}
             />
           ))}
-          {
-            (isDiscount || serviceItemFooter?.isDiscount) &&
-            <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+          {(isDiscount || serviceItemFooter?.isDiscount) && (
+            <ServiceTableDiscountRow
+              {...disscountTableRow}
+              key={Math.random()}
               pagebreak={true}
               isDiscount={isDiscount}
             />
-          }
+          )}
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
@@ -166,9 +172,8 @@ const PdfFile = ({
 
 const styles = StyleSheet.create({
   body: {
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
     paddingBottom: 100,
-
   },
 });
 
