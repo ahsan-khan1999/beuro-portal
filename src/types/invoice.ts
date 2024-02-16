@@ -166,6 +166,7 @@ export interface InvoiceTableRowTypesPdf {
 
 
 export interface InvoiceDetailTableRowTypes {
+  amount:number;
   id: string;
   invoiceNumber: string;
   paidAmount: string;

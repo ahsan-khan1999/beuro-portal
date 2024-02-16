@@ -48,7 +48,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
       let newArray = [...enteredLinks.links]
 
       newArray.push(enteredLink as string)
-      console.log(newArray, "newArray", enteredLink);
       setEnteredLinks({ ...enteredLinks, links: [...newArray] });
       setEnteredLink("");
     }
@@ -111,7 +110,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
       const formatVideos = images?.videos?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
       const formatAttachments = images?.attachments?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
       const formatLinks = images?.links
-      console.log(formatImages, "image");
 
       setEnteredLinks({
         images: formatImages,

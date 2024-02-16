@@ -566,7 +566,6 @@ export const transformAttachments = (attachmemts: string[]) => {
 };
 
 export function getFileNameFromUrl(url: string, count?: number) {
-  console.log(url);
 
   const urlParts = url?.split("/");
   const fileName = urlParts[urlParts?.length - 1];

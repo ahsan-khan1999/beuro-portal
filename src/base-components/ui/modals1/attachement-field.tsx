@@ -55,7 +55,6 @@ export const AttachementField = ({
 
         // if (file) {
         // formdata.append("files", file);
-        console.log(file, "file");
 
         const response = await dispatch(uploadMultiFileToFirebase(formdata));
 

@@ -14,7 +14,6 @@ export const ProductItem = ({
   totalDiscount,
   pagebreak,
 }: ServiceList) => {
-  console.log(isDiscount,"isDiscount");
   
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (

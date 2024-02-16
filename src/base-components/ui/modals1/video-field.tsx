@@ -55,7 +55,6 @@ export const VideoField = ({
 
         // if (file) {
         // formdata.append("files", file);
-        console.log(file, "file");
 
         const response = await dispatch(uploadMultiFileToFirebase(formdata));
 
@@ -94,7 +93,6 @@ export const VideoField = ({
         setAttachements && setAttachements(list);
         // field.onChange();
     };
-    console.log(attachements, "attachements");
 
     return (
         <div className="grid grid-cols-1 gap-x-3">
