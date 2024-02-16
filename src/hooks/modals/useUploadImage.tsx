@@ -49,18 +49,17 @@ export const useUploadImage = (handleImageSlider: Function) => {
     }
   };
   const handleimageAdd = (attachement?: Attachement[]) => {
-    // let newArray = [...enteredLinks.attachements]
-    // newArray.push(attachement)
     if (attachement) setEnteredLinks({ ...enteredLinks, images: [...attachement] });
   };
   const handleAttachementAdd = (attachement?: Attachement[]) => {
-    // let newArray = [...enteredLinks.attachements]
-    // newArray.push(attachement)
     if (attachement) setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
   };
+  const handleImageDelete = (linkToDelete: string) => {
+    const { images } = enteredLinks
+    const updatedLinks = images.filter((item: string) => item !== linkToDelete);
+    setEnteredLinks({ ...enteredLinks, images: updatedLinks });
+  };
   const handleVideoAdd = (attachement?: Attachement[]) => {
-    // let newArray = [...enteredLinks.attachements]
-    // newArray.push(attachement)
     if (attachement) setEnteredLinks({ ...enteredLinks, video: [...attachement] });
   };
   const handleLinkDelete = (linkToDelete: string) => {
@@ -141,6 +140,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleAttachementDelete,
     handleVideoAdd,
     handleVideoDelete,
-    handleimageAdd
+    handleimageAdd,
+    handleImageDelete
   };
 };

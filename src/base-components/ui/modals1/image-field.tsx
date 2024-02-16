@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 import Link from "next/link";
+import imgDelete from "@/assets/svgs/img_delete.svg";
 
 export const ImageField = ({
     id,
@@ -156,16 +157,23 @@ export const ImageField = ({
                                     isOpenedFile && router.push("/content/pdf-preview")
                                 }
                             >
-                                <Link href={item.value} target="_blank" className="flex items-center gap-3">
+                                <div className="flex items-center gap-3">
                                     <div style={{ position: 'relative' }}>
-                                        <img
+                                        <Image
                                             src={item?.value}
                                             width={100}
                                             height={100}
                                             alt="Uploaded Preview"
-                                            style={{ height: '100px', width: '100px' }}
+                                            style={{ height: '80px', width: '80px' }}
                                             onClick={toggleZoom}
+                                            className="cursor-pointer"
                                         />
+                                        <div
+                                            className="absolute top-[5px] right-[5px] cursor-pointer"
+                                            onClick={(e) => handleDeleteFile(index)}
+                                        >
+                                            <Image src={imgDelete} alt="imgDelete" />
+                                        </div>
                                         {isZoomed && (
                                             <div
                                                 style={{
@@ -192,7 +200,7 @@ export const ImageField = ({
                                             </div>
                                         )}
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         ))}
                 </div>

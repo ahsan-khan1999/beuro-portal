@@ -94,7 +94,6 @@ export const AttachementField = ({
         setAttachements && setAttachements(list);
         // field.onChange();
     };
-    console.log(attachements, "attachements");
 
     return (
         <div className="grid grid-cols-1 gap-x-3">
@@ -147,21 +146,26 @@ export const AttachementField = ({
                                 className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${isOpenedFile ? "cursor-pointer" : "cursor-default"
                                     }`}
                                 key={index}
-                                onClick={() =>
-                                    isOpenedFile && router.push("/content/pdf-preview")
-                                }
+                            // onClick={() =>
+                            //     isOpenedFile && router.push("/content/pdf-preview")
+                            // }
                             >
-                                <Link href={item.value} target="_blank" className="flex items-center gap-3">
+                                <div  className="flex items-center gap-3 cursor-pointer" onClick={(e) =>{e.stopPropagation()
+                                    window.open(item?.value,"_blank")
+                                }}>
                                     <Image
                                         src={deletePdfIcon}
                                         alt="deletePdfIcon"
-                                        className={`absolute -right-1 -top-1 ${isOpenedFile ? "cursor-pointer" : "cursor-pointer"
-                                            } `}
-                                        onClick={() => handleDeleteFile(index)}
+                                        className={`absolute -right-1 -top-1  cursor-pointer
+                                             `}
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            handleDeleteFile(index)
+                                        }}
                                     />
                                     <Image src={pdfIcon} alt="pdfIcon" />
                                     <span>{item?.name?.slice(0, 20)}...</span>
-                                </Link>
+                                </div>
                             </div>
                         ))}
                 </div>

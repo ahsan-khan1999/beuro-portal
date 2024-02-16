@@ -151,9 +151,22 @@ export const VideoField = ({
                                     isOpenedFile && router.push("/content/pdf-preview")
                                 }
                             >
-                                <Link href={item.value} target="_blank" className="flex items-center gap-3">
-                                   <video src={item.value} autoPlay={false}></video>
-                                </Link>
+                                <div className="flex items-center gap-3 cursor-pointer" onClick={(e) => {
+                                    e.stopPropagation()
+                                    window.open(item?.value, "_blank")
+                                }}>
+                                    <Image
+                                        src={deletePdfIcon}
+                                        alt="deletePdfIcon"
+                                        className={`absolute -right-1 -top-1  cursor-pointer
+                                             `}
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            handleDeleteFile(index)
+                                        }}
+                                    />
+                                    <video src={item.value} autoPlay={false}></video>
+                                </div>
                             </div>
                         ))}
                 </div>
