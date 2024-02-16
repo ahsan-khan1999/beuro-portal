@@ -14,9 +14,8 @@ export const OfferRemainderSection = ({
   systemSetting: SystemSettingDataProps;
   setSystemSetting: SetStateAction<any>;
 }) => {
-  const { systemSettings } = useAppSelector(state => state.settings)
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
-
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -48,7 +47,7 @@ export const OfferRemainderSection = ({
 
         {/* <form onSubmit={handleSubmit}> */}
         <p className="text-[#1E1E1E] text-sm font-normal mt-[14px] mb-2">
-        {translate("setting.remainder_text")}
+          {translate("setting.remainder_text")}
         </p>
 
         <input
@@ -56,7 +55,6 @@ export const OfferRemainderSection = ({
           placeholder="1"
           defaultValue={systemSettings?.reminderText}
           key={systemSettings?.reminderText}
-
           type="text"
           onChange={(e) => {
             setSystemSetting({
@@ -65,11 +63,11 @@ export const OfferRemainderSection = ({
             });
           }}
           className="border border-[#BFBFBF] rounded-md w-full text-sm pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] focus:border-[#6665FF]"
-        // onKeyDown={(event) => {
-        //   if (event.key === "Enter") {
-        //     handleSubmit(event);
-        //   }
-        // }}
+          // onKeyDown={(event) => {
+          //   if (event.key === "Enter") {
+          //     handleSubmit(event);
+          //   }
+          // }}
         />
         {/* </form> */}
         <AnimatePresence>
