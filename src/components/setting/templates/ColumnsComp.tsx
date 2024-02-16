@@ -16,6 +16,12 @@ import {
 } from "@/types/settings";
 import { Button } from "@/base-components/ui/button/button";
 import InputField from "@/base-components/filter/fields/input-field";
+// import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
+import leftAlignTemplate from "@/assets/svgs/Group 48096404.svg";
+
+import rightAlignTemplate from "@/assets/svgs/Group 48096404 (1).svg";
+
+import { CheckIcon } from "@/assets/svgs/components/check-icon";
 
 const Column = ({
   title,
@@ -107,6 +113,7 @@ const ColumnsComp = () => {
     secondColumn: templateSettings?.isSecondColumn || false,
     thirdColumn: templateSettings?.isThirdColumn || false,
     fourthColumn: templateSettings?.isFourthColumn || false,
+    order: templateSettings?.order || false,
   });
 
   const [columnSettings, setColumnSettings] = useState<ColumnStructure>({
@@ -345,6 +352,7 @@ const ColumnsComp = () => {
       },
     ],
   });
+
   useEffect(() => {
     setMainColumns({
       ...mainColumns,
@@ -352,6 +360,7 @@ const ColumnsComp = () => {
       secondColumn: templateSettings?.isSecondColumn || false,
       thirdColumn: templateSettings?.isThirdColumn || false,
       fourthColumn: templateSettings?.isFourthColumn || false,
+      order: templateSettings?.order || false,
     });
     updateColumnValues(
       columnSettings.firstColumn,
@@ -392,6 +401,7 @@ const ColumnsComp = () => {
     columns[column as keyof ColumnStructure][index].data.text = value;
     setColumnSettings(columns);
   };
+
   const handleToggle = (column: string, value: boolean) => {
     let columnsetting = { ...columnSettings };
     let mainColumn = { ...mainColumns };
@@ -407,6 +417,7 @@ const ColumnsComp = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
@@ -421,9 +432,11 @@ const ColumnsComp = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const handleSaveSetings = async () => {
     let formatObj: any = {};
     for (const [key, value] of Object.entries(columnSettings)) {
@@ -444,14 +457,75 @@ const ColumnsComp = () => {
       isSecondColumn: mainColumns?.secondColumn,
       isThirdColumn: mainColumns?.thirdColumn,
       isFourthColumn: mainColumns?.fourthColumn,
+      order: mainColumns?.order,
     };
     const response = await dispatch(
       updateTemplateSetting({ data: apiData, translate })
     );
     if (response?.payload) handleSuccess();
   };
+
   return (
     <>
+      <div className="flex flex-col gap-x-5 mb-5 bg-white">
+        <p className="text-base font-semibold px-5 mt-5">
+          {translate("header_alignment.header_heading")}
+        </p>
+        <div className="flex">
+          <button
+            className={`relative px-6 my-3`}
+            onClick={() => setMainColumns({ ...mainColumns, order: false })}
+          >
+            {mainColumns.order === false && (
+              <div className="absolute -right-2 -top-5">
+                <CheckIcon />
+              </div>
+            )}
+            <div
+              className={`border-2 rounded-lg p-4 ${
+                !mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}
+            >
+              <Image
+                src={leftAlignTemplate}
+                height={250}
+                width={250}
+                alt="left aligned"
+              />
+            </div>
+            <p className="text-base font-medium py-2">
+              {translate("header_alignment.left_align")}
+            </p>
+          </button>
+
+          <button
+            className={`relative`}
+            onClick={() => setMainColumns({ ...mainColumns, order: true })}
+          >
+            {mainColumns.order && (
+              <div className="absolute -right-8 -top-2">
+                <CheckIcon />
+              </div>
+            )}
+            <div
+              className={`border-2 rounded-lg p-4 ${
+                mainColumns.order ? "border-primary" : "border-lightGray"
+              }`}
+            >
+              <Image
+                src={rightAlignTemplate}
+                height={250}
+                width={250}
+                alt="right aligned"
+              />
+            </div>
+            <p className="text-base font-medium py-2">
+              {translate("header_alignment.right_align")}
+            </p>
+          </button>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-[27px]">
         <Column
           title={`${translate("setting.templates.first_col_heading.heading")}`}

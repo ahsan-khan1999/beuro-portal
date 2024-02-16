@@ -124,9 +124,11 @@ const TableRows = ({
             {(item.signedContracts && item.signedContracts?.length > 0 && (
               <span
                 className="py-4 flex justify-center items-center cursor-pointer "
-                onClick={() =>
+                onClick={(e) => {
+                  e.stopPropagation()
                   item.signedContracts &&
-                  window.open(item.signedContracts[0].link)
+                    window.open(item.signedContracts[0].link)
+                }
                 }
               >
                 <PdfIcon
@@ -134,10 +136,10 @@ const TableRows = ({
                 />
               </span>
             )) || (
-              <span className="py-4 flex justify-center items-center cursor-pointer ">
-                -
-              </span>
-            )}
+                <span className="py-4 flex justify-center items-center cursor-pointer ">
+                  -
+                </span>
+              )}
             <span
               className="py-4 flex justify-center items-center cursor-pointer "
               onClick={(e) => openModal(item?.id, e)}

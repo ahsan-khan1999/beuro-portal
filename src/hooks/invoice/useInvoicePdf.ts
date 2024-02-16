@@ -102,7 +102,7 @@ export const useInvoicePdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            isReverseLogo
+            order
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -114,7 +114,7 @@ export const useInvoicePdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            isReverseLogo
+            order
           }));
         }
         if (emailTemplate?.payload) {
@@ -152,7 +152,7 @@ export const useInvoicePdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "invoice",
-              isReverseLogo:template.payload.Template?.isReverseLogo
+              isReverseLogo:template.payload.Template?.order
 
             },
             contactAddress: {

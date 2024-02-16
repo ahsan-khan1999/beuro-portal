@@ -128,7 +128,7 @@ export const useContractPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            isReverseLogo
+            order
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -140,7 +140,7 @@ export const useContractPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            isReverseLogo
+            order
           }));
         }
         if (emailTemplate?.payload) {
@@ -171,7 +171,7 @@ export const useContractPdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
-              isReverseLogo:template.payload.Template?.isReverseLogo
+              isReverseLogo:template.payload.Template?.order
             },
             contactAddress: {
               address: {

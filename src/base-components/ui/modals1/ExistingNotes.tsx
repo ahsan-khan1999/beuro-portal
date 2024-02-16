@@ -119,9 +119,9 @@ const ExistingNotes = ({
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[480px] xl:max-w-[624px] "
+      containerClassName="max-w-[480px] xl:max-w-[624px]"
     >
-      <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4 h-[615px] overflow-y-auto overflow-x-hidden">
+      <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4">
         <Image
           src={crossIcon}
           alt="cross_icon"
@@ -185,13 +185,12 @@ const ExistingNotes = ({
         </span>
 
         {notes && notes?.length > 0 ? (
-          <>
+          <div className="h-[615px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
-                className={` mb-[10px]  ${
-                  notes?.length - 1 !== key &&
-                  "border-b-[1px] border-lightGray "
-                }pb-3 `}
+                className={`mb-[10px] ${
+                  notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
+                } pb-3 `}
                 key={key}
               >
                 <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
@@ -212,7 +211,7 @@ const ExistingNotes = ({
                 </div>
               </div>
             ))}
-          </>
+          </div>
         ) : (
           <div className="flex justify-center items-center">
             <NoDataEmptyState />

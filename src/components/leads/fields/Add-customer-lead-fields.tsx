@@ -16,7 +16,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     customerDetails,
     onCancel,
     leadDetails,
-    gender
+    gender,
   },
   setValue
 ) => {
@@ -24,7 +24,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
-      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",
@@ -88,7 +87,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   ?.slice(1)
                   ?.map((item, key) => ({
                     value: item,
-                    label: item,
+                    label: translate(`customer_type.${item}`),
                   })) || [],
 
               control,
@@ -119,8 +118,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               })),
 
               control,
-              value: leadDetails?.id &&
-                leadDetails?.customerDetail?.gender ||
+              value:
+                (leadDetails?.id && staticEnums["Gender"][leadDetails?.customerDetail?.gender]) ||
                 gender,
             },
           },
@@ -174,7 +173,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"number",
+              inputType: "number",
               register,
               value: leadDetails?.id
                 ? leadDetails?.customerDetail?.phoneNumber
@@ -190,12 +189,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              inputType:"number",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country: "ch",
-              control,
+              register,
               value: leadDetails?.id
                 ? leadDetails?.customerDetail?.phoneNumber
                 : customerDetails && customerDetails?.mobileNumber,

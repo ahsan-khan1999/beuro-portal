@@ -33,7 +33,7 @@ export const LinkUpload = ({
           onClick={onAddLink}
         />
       </div>
-      {enteredLinks.map((link, index) => (
+      {enteredLinks?.map((link, index) => (
         <div
           key={index}
           className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-2 mt-2"

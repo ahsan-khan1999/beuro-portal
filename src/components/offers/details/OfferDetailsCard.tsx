@@ -89,7 +89,7 @@ const OfferDetailsCard = ({
           </p>
         </div>
 
-        <div className="flex gap-[22px]">
+        <div className="flex items-center justify-end gap-[22px]">
           <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
@@ -212,7 +212,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
@@ -307,7 +307,7 @@ const OfferDetailsCard = ({
               </span>
             </div>
           )}
-          <div className="flex justify-between gap-x-2 items-center">
+          <div className="flex justify-between gap-x-2 items-center mt-2 md:mt-0">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
               onClick={(e) => handleNotes(offerDetails?.id, e)}

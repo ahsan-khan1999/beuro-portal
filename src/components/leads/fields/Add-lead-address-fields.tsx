@@ -282,7 +282,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             onClick: () => {
               handleAddNewAddress && handleAddNewAddress(addressObject);
             },
-            loading,
           },
         },
       ],

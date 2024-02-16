@@ -177,13 +177,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
+              inputType:"number",
               id: "mobileNumber",
               name: "mobileNumber",
-              control,
-              country: "ch",
+              register,
               value: user && user?.company?.mobileNumber,
-              className: "h-42",
+              className: "!px-4 h-42",
             },
           },
           {

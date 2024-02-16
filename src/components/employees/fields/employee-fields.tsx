@@ -118,15 +118,14 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: `!border-[#BFBFBF] focus:!border-primary ${
+              type: Field.input,
+              className: `!px-4 !border-[#BFBFBF] focus:!border-primary ${
                 !isUpdate && "!border-light"
               }`,
               id: "mobileNumber",
               name: "mobileNumber",
               disabled: isUpdate,
-              control,
-              country: "ch",
+              register,
               value: employeeDetails && employeeDetails?.mobileNumber,
             },
           },

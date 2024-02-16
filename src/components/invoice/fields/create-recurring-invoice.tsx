@@ -93,7 +93,7 @@ export const CreateRecurringInvoiceFormField: GenerateInvoiceFormField = (
         id: "frequency",
         name: "frequency",
         options: Object.keys(staticEnums["Frequency"]).map((item) => ({
-          label: item,
+          label: translate(`frequency.${item}`),
           value: staticEnums["Frequency"][item],
         })),
 

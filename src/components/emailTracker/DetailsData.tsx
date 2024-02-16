@@ -20,7 +20,7 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <span
             onClick={() => router.push("/email-tracker")}
@@ -63,8 +63,8 @@ const DetailsData = ({
           />
         </span>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="xl:w-11/12 w-full">
+
+      <div className="xl:w-11/12 w-full mt-5">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">

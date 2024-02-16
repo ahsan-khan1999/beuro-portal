@@ -80,7 +80,7 @@ export const useOfferPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            isReverseLogo
+            order
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -92,7 +92,7 @@ export const useOfferPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            isReverseLogo
+            order
           }));
         }
         if (emailTemplate?.payload) {
@@ -126,7 +126,7 @@ export const useOfferPdf = () => {
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              isReverseLogo:template.payload.Template?.isReverseLogo
+              isReverseLogo:template.payload.Template?.order
             },
             contactAddress: {
               address: {

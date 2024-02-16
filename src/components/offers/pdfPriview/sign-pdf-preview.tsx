@@ -120,7 +120,7 @@ const SignPdfPreview = () => {
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
                 companyName: offerDetails?.Offer?.createdBy?.company?.companyName,
-                isReverseLogo:offerDetails?.Template?.isReverseLogo
+                isReverseLogo:offerDetails?.Template?.order
               },
               contactAddress: {
                 address: {
@@ -254,7 +254,7 @@ const SignPdfPreview = () => {
                 isThirdColumn,
                 secondColumn,
                 thirdColumn,
-                isReverseLogo
+                order
               }: TemplateType = offerDetails?.Template;
 
               setTemplateSettings(() => ({
@@ -266,7 +266,7 @@ const SignPdfPreview = () => {
                 isFourthColumn,
                 isSecondColumn,
                 isThirdColumn,
-                isReverseLogo
+                order
               }));
             }
             if (offerDetails?.Mail) {

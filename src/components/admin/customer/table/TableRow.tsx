@@ -35,7 +35,13 @@ const TableRow = ({
             <span className="truncate xs:block mlg:hidden xlg:block py-4">
               {item?.email}
             </span>
-            <span className="py-4 truncate">{item?.plan?.planName}</span>
+            <span className="py-4 truncate">
+              {item &&
+                item.plan &&
+                item.plan.planName &&
+                translate(`plan_status.${item.plan.planName}`)}
+            </span>
+
             <span className="py-4 flex items-center justify-center">
               <div
                 className={`${

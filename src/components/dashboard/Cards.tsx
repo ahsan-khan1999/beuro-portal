@@ -16,7 +16,7 @@ interface DashboardCard {
   open: string;
   closed: string;
   expired: string;
-  route: Function;
+  route?: Function;
 }
 const DashboardCard = ({
   icon,
@@ -90,8 +90,10 @@ const DashboardCard = ({
 
   return (
     <div
-      onClick={() => route()}
-      className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
+      onClick={() => route?.()}
+      className={`${
+        title === "Sales" ? "cursor-default" : "cursor-pointer"
+      } rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
         <Image src={icon} alt={alt} />
