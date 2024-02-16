@@ -4,6 +4,7 @@ import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { SystemSettingDataProps } from "@/types/settings";
 import { SetStateAction } from "react";
+import { useTranslation } from "next-i18next";
 
 export const WarningDays = ({
   systemSetting,
@@ -26,6 +27,8 @@ export const WarningDays = ({
     });
   };
 
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       <AnimatePresence>
@@ -37,7 +40,7 @@ export const WarningDays = ({
           transition={{ duration: 0.4 }}
         >
           <p className="text-[14px] text-[#1E1E1E] font-normal mb-[6px]">
-            Second Warning Days
+            {translate("setting.second_warnings")}
           </p>
 
           <DropDown
@@ -67,7 +70,7 @@ export const WarningDays = ({
           transition={{ duration: 0.4 }}
         >
           <p className="text-[14px] text-[#1E1E1E] font-normal mb-[6px]">
-            Third Warning Days
+            {translate("setting.third_warnings")}
           </p>
 
           <DropDown
