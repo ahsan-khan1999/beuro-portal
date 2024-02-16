@@ -313,6 +313,7 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
+  activeIndex?:number
 }
 
 export interface ThumbnailSliderProps extends SliderBaseProps {

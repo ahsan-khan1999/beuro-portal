@@ -3,7 +3,7 @@ import { SliderImagesDataProps } from "@/types";
 import { MainImageSlider } from "./main-image-slider";
 import { ThumbnailSlider } from "./thumbnail-slider";
 
-export const Slider = ({ images, noOfThumbNails }: SliderImagesDataProps) => {
+export const Slider = ({ images, noOfThumbNails,activeIndex }: SliderImagesDataProps) => {
   const {
     selectedImage,
     thumbnailStartIndex,
@@ -12,8 +12,8 @@ export const Slider = ({ images, noOfThumbNails }: SliderImagesDataProps) => {
     selectImage,
     handleMouseLeave,
     handleMouseMove,
-  } = useSlider({ images, noOfThumbNails });
-
+  } = useSlider({ images, noOfThumbNails,activeIndex });
+  
   return (
     <div className="flex flex-col">
       <MainImageSlider

@@ -26,17 +26,20 @@ export const ImageField = ({
     text?: string;
     fileSupported?: string;
     isOpenedFile?: boolean;
-    attachements?: Attachement[];
+    attachements: Attachement[];
     setAttachements?: (attachement?: Attachement[]) => void;
     isAttachement?: boolean;
 }) => {
     const [isZoomed, setIsZoomed] = useState({
         zoomed: false,
-        currentImage: ""
+        currentImage: "",
+        sliderImageData: [],
+        currentIndex: 0
     });
 
-    const toggleZoom = (image: string) => {
-        setIsZoomed({ zoomed: !isZoomed.zoomed, currentImage: image });
+    const toggleZoom = (image: string, index: number) => {
+        const imageList = [{ imageSrc: image }, ...attachements?.map((item) => ({ imageSrc: item.value }))] as unknown[]
+        setIsZoomed({ zoomed: !isZoomed.zoomed, currentImage: image, sliderImageData: imageList as never[], currentIndex: ++index });
     };
     const router = useRouter();
     const formdata = new FormData();
@@ -106,8 +109,11 @@ export const ImageField = ({
     };
     const SLIDER_IMAGES_DATA = {
         noOfThumbNails: 8,
-        images: attachements?.map((item) => ({ imageSrc: item?.value }))
+        // images: attachements?.map((item) => ({ imageSrc: item?.value }))
+
     };
+    // console.log(isZoomed?.sliderImageData, "image");
+
     return (
         <div className="grid grid-cols-1 gap-x-3">
             <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
@@ -171,7 +177,7 @@ export const ImageField = ({
                                             height={100}
                                             alt="Uploaded Preview"
                                             style={{ height: '80px', width: '80px' }}
-                                            onClick={() => toggleZoom(item.value)}
+                                            onClick={() => toggleZoom(item.value, index)}
                                             className="cursor-pointer"
                                         />
                                         <div
@@ -194,7 +200,7 @@ export const ImageField = ({
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
-                                                onClick={() => toggleZoom(item.value)}
+                                                onClick={() => toggleZoom(item.value, index)}
 
                                             >
                                                 {/* <Image
@@ -204,7 +210,7 @@ export const ImageField = ({
                                                     width={500}
                                                     style={{ maxHeight: '90vh', maxWidth: '90vw' }}
                                                 /> */}
-                                                <Slider {...SLIDER_IMAGES_DATA} />
+                                                <Slider {...SLIDER_IMAGES_DATA} images={isZoomed?.sliderImageData} activeIndex={isZoomed?.currentIndex} />
                                             </div>
                                         )}
                                     </div>
