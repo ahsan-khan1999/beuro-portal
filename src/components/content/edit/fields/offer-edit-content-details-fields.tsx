@@ -26,7 +26,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
 
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: "mb-0",
       label: {
         text: `${translate("content.details.content_name")}`,
         htmlFor: "contentName",

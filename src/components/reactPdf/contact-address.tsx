@@ -33,8 +33,10 @@ export const ContactAddress = ({
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: isReverseInfo ? "flex-end" : "flex-start",
           rowGap: 0,
           width: isReverseInfo ? "35%" : "65%",
+          marginLeft: isReverseInfo ? "auto" : 0,
         }}
       >
         <Text style={textBase}>
