@@ -51,9 +51,9 @@ const EditInvoiceDetails = () => {
         type={"Offer"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
-    ),
+    // [ModalType.IMAGE_SLIDER]: (
+    //   <ImageSlider onClose={onClose} details={images} />
+    // ),
   };
 
   const renderModal = () => {

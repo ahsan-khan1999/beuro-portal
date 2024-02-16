@@ -145,7 +145,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const response = await dispatch(
       createImage({ data: apiData, router, translate })
     );
-    if (response?.payload) handleOnClose();
+    if (response?.payload) handleImageSlider();
     // else handleOnClose();
   };
 
