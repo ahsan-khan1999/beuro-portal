@@ -171,7 +171,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Sales?.paid +
         ` ${translate("dashboard_detail.cards_status.paid")}`,
-      // route: () => router.push("/dashboard"),
+      route: () => router.push("/invoices"),
     },
   ];
 
