@@ -1,11 +1,9 @@
 import { ProductPurchasedItemsDetails } from "./preview/productDetails/purchased-items-details";
-import { Aggrement } from "./preview/aggrement/aggrement";
-import { InvoiceEmailHeaderProps, PdfProps, TemplateType } from "@/types/types";
+import { PdfProps, TemplateType } from "@/types/types";
 import { PaymentQRCodeDetails } from "./preview/qrCode/payment-qr-code-details";
 import { ProductItemNewPage } from "./preview/productDetails/product-item-next-page";
 import { Container } from "./container";
 import { ServiceList } from "@/types/offers";
-import { PreviewCard } from "./preview-card";
 import { EmailTemplate } from "@/types/settings";
 
 export const Pdf = <T,>({
@@ -15,7 +13,6 @@ export const Pdf = <T,>({
   isQr,
   totalPages,
   emailTemplateSettings,
-
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
