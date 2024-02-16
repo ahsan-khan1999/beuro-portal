@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import toggle_active from "@/assets/svgs/toggle_active.svg";
-import toggle_inactive from "@/assets/svgs/toggle_inactive.svg";
-import deleteIcon from "@/assets/svgs/delete.svg";
+import React from "react";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import useAddReason from "@/hooks/setting/useAddReason";
-import { useTranslation } from "next-i18next";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { Button } from "@/base-components/ui/button/button";
 import { ToggleButton } from "@/base-components/ui/button/toggle-button";
 import { FollowUpProp } from "@/types/settings";
@@ -111,7 +104,9 @@ const FollowUpSetting = () => {
                 <Image
                   src={deleteIcon}
                   alt="delete_icon"
-                  className="cursor-pointer mr-5"
+                  width={14}
+                  height={18}
+                  className="cursor-pointer mr-5 w-[14px] h-[18px]"
                   onClick={() => handleRemoveReason(index)}
                 />
               </div>

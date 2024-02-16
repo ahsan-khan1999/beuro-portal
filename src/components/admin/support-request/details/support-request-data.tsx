@@ -13,7 +13,7 @@ const SupportDetailsData = ({
   return (
     <LeadsCardLayout>
       <div className="mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("admin.support_requests.details.name")}

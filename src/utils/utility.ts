@@ -422,7 +422,7 @@ export function formatDateTimeToDateMango(date: string) {
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("HH:MM: A");
+  return moment(date).format("HH:mm");
 }
 
 export function getStatusColor(status: string) {

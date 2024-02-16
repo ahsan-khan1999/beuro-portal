@@ -35,7 +35,7 @@ const OfferContentDetailsData = ({
 
       <div className="pl-[29px] pr-[25px] pt-[22px] pb-[39px]">
         <div>
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.content_name")}
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
@@ -44,7 +44,7 @@ const OfferContentDetailsData = ({
         </div>
 
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.address_labels")}
           </p>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
@@ -60,7 +60,7 @@ const OfferContentDetailsData = ({
         </div>
 
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.offer_title")}
           </p>
           <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
@@ -69,7 +69,7 @@ const OfferContentDetailsData = ({
         </div>
 
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.offer_description")}
           </p>
           <div
@@ -80,7 +80,7 @@ const OfferContentDetailsData = ({
           />
         </div>
         <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-normal text-[14px] mb-[10px]">
+          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
             {translate("content.details.email_body")}
           </p>
           <div
@@ -92,7 +92,7 @@ const OfferContentDetailsData = ({
         </div>
 
         <div className="mt-5 w-full xl:w-[90%]">
-          <span className="text-[#1E1E1E] font-normal text-[14px] ">
+          <span className="text-[#1E1E1E] font-semibold text-[14px] ">
             {translate("content.details.attachments")}
           </span>
           <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">

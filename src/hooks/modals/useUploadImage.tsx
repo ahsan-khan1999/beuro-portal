@@ -19,6 +19,7 @@ import { generateImageValidation } from "@/validation/modalsSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import { Attachement } from "@/types/global";
 
 export const useUploadImage = (handleImageSlider: Function) => {
   const { t: translate } = useTranslation();
@@ -27,23 +28,55 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
   const [activeTab, setActiveTab] = useState("img_tab");
-  const [enteredLink, setEnteredLink] = useState("");
-  const [enteredLinks, setEnteredLinks] = useState<string[]>([]);
-
+  const [enteredLink, setEnteredLink] = useState<string>("");
+  const [enteredLinks, setEnteredLinks] = useState<any>({
+    images: [],
+    links: [],
+    attachements: [],
+    video: []
+  });
+  const attachementTabs = ["img_tab", "link_tab", "attachement_tab", "video_tab"]
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
 
   const handleLinkAdd = () => {
     if (enteredLink.trim() !== "") {
-      setEnteredLinks([...enteredLinks, enteredLink]);
+      let newArray = [...enteredLinks.links]
+      newArray.push(enteredLink as string)
+      setEnteredLinks({ ...enteredLinks, links: [...newArray] });
       setEnteredLink("");
     }
   };
-
+  const handleimageAdd = (attachement?: Attachement[]) => {
+    if (attachement) setEnteredLinks({ ...enteredLinks, images: [...attachement] });
+  };
+  const handleAttachementAdd = (attachement?: Attachement[]) => {
+    if (attachement) setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
+  };
+  const handleImageDelete = (linkToDelete: string) => {
+    const { images } = enteredLinks
+    const updatedLinks = images.filter((item: string) => item !== linkToDelete);
+    setEnteredLinks({ ...enteredLinks, images: updatedLinks });
+  };
+  const handleVideoAdd = (attachement?: Attachement[]) => {
+    if (attachement) setEnteredLinks({ ...enteredLinks, video: [...attachement] });
+  };
   const handleLinkDelete = (linkToDelete: string) => {
-    const updatedLinks = enteredLinks.filter((link) => link !== linkToDelete);
-    setEnteredLinks(updatedLinks);
+    const { links } = enteredLinks
+    const updatedLinks = links.filter((item: string) => item !== linkToDelete);
+    setEnteredLinks({ ...enteredLinks, links: updatedLinks });
+  };
+
+  const handleAttachementDelete = (attachementsToDelete: string) => {
+    const { attachements } = enteredLinks
+    const updatedAttachements = attachements.filter((item: string) => item !== attachementsToDelete);
+    setEnteredLinks({ ...enteredLinks, attachements: updatedAttachements });
+  };
+  const handleVideoDelete = (attachementsToDelete: string) => {
+    const { video } = enteredLinks
+    const updatedAttachements = video.filter((item: string) => item !== attachementsToDelete);
+    setEnteredLinks({ ...enteredLinks, video: updatedAttachements });
   };
 
   const schema = generateImageValidation(translate);
@@ -102,5 +135,12 @@ export const useUploadImage = (handleImageSlider: Function) => {
     enteredLinks,
     handleLinkAdd,
     handleLinkDelete,
+    attachementTabs,
+    handleAttachementAdd,
+    handleAttachementDelete,
+    handleVideoAdd,
+    handleVideoDelete,
+    handleimageAdd,
+    handleImageDelete
   };
 };

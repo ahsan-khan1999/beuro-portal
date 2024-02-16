@@ -78,7 +78,9 @@ export default function DashboardFilters({
           { label: translate("dashboard_detail.months.nov"), value: "11" },
           { label: translate("dashboard_detail.months.dec"), value: "12" },
         ]}
-        label={getKeyByValue(monthObj, filter?.month?.toString())}
+        label={translate(
+          `selected_month.${getKeyByValue(monthObj, filter?.month?.toString())}`
+        )}
         containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
       />
     </div>

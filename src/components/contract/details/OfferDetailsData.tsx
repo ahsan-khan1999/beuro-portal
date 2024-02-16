@@ -27,9 +27,11 @@ const OfferDetailsData = ({
               {translate("contracts.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {getKeyByValue(
-                staticEnums["CustomerType"],
-                contractDetails.offerID?.leadID?.customerDetail?.customerType
+              {translate(
+                `customer_type.${getKeyByValue(
+                  staticEnums["CustomerType"],
+                  contractDetails.offerID?.leadID?.customerDetail?.customerType
+                )}`
               )}
             </div>
           </div>

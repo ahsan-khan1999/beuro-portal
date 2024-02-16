@@ -37,7 +37,7 @@ export const InvoiceEmailHeader = ({
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
+        <div className="flex flex-col mlg:flex-row gap-y-3 mlg:justify-between mlg:items-center border-b border-[#000] border-opacity-10 pb-5">
           {/* <div className="flex items-center">
             <Image
               src={backIcon}
@@ -62,7 +62,7 @@ export const InvoiceEmailHeader = ({
                 query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
               });
             }}
-            className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer"
+            className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export const InvoiceEmailHeader = ({
               {translate("offers.table_headings.edit")}
             </span>
           </div>
-          <div className="flex items-center justify-between gap-5">
+          <div className="flex items-center justify-end gap-x-5">
             {/* <BaseButton
               id="sendPostButton"
               buttonText={translate(title)}
@@ -119,7 +119,7 @@ export const InvoiceEmailHeader = ({
               <EmailIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
 
-            <DownloadIcon onClick={onDownload}  />
+            <DownloadIcon onClick={onDownload} />
             {/* <Image
               src={printerIcon}
               alt="printerIcon"

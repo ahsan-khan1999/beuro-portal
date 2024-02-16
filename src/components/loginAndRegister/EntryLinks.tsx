@@ -44,7 +44,7 @@ const EntryLinks = () => {
         onItemSelected={handleLanguageSelected}
         selectedItem={language}
         dropDownTextClassName="custom-text-style"
-        dropDownIconClassName="custom-icon-style"
+        dropDownIconClassName="custom-icon-style ml-2"
         dropDownDisabled={false}
         shouldNotSelectItem={false}
         dropDownClassName="!h-[42px]"

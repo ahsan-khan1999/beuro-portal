@@ -1192,7 +1192,9 @@
       "title": "15 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
       "image_slider_heading": "Image",
-      "drop_attach": "Drop or attach your file here"
+      "drop_attach": "Drop or attach your file here",
+      "attachement_tab": "Attachments",
+      "video_tab": "Video"
     },
     "delete_modal": {
       "heading": "Are you sure you want to delete this Image?",
@@ -2036,5 +2038,45 @@
   "support_request_status": {
     "pending": "pending",
     "resolved": "resolved"
+  },
+  "customer_type": {
+    "individual": "individual",
+    "company": "company"
+  },
+  "frequency": {
+    "Weekly": "Weekly",
+    "FourtennDays": "FourtennDays",
+    "Monthly": "Monthly",
+    "Yearly": "Yearly"
+  },
+  "plan_status": {
+    "Silver": "Silver",
+    "Diamond": "Diamond",
+    "Free": "Free",
+    "Gold": "Gold",
+    "Platinium": "Platinium"
+  },
+  "selected_month": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+  "admin_role": {
+    "Admin": "Admin",
+    "Company": "Company"
+  },
+  "header_alignment": {
+    "header_heading": "Header Alignment",
+    "left_align": "Logo Align Left",
+    "right_align": "Logo Align Right"
   }
 }

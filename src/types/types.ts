@@ -861,7 +861,7 @@ export interface TemplateType {
   isSecondColumn: boolean;
   isThirdColumn: boolean;
   isFourthColumn: boolean;
-  isReverseLogo: boolean
+  order: boolean
 }
 interface Template {
   Template: TemplateType;

@@ -16,8 +16,6 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
-import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export default function usePlanDetail(stage: boolean) {
   const { t: translate } = useTranslation();
@@ -71,9 +69,11 @@ export default function usePlanDetail(stage: boolean) {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  
   const handleDelete = () => {
     dispatch(updateModalType({ type: ModalType.DELETE_MAIL }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess

@@ -85,7 +85,7 @@ const ContractDetailsCard = ({
           </p>
         </div>
 
-        <div className="flex gap-x-[22px]">
+        <div className="flex justify-end gap-x-[22px]">
           <button
             onClick={handleSendEmail}
             className="w-fit border-[1px] border-primary rounded-lg flex items-center px-4 py-[6px]"

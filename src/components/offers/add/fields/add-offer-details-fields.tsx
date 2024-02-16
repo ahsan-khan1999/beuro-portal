@@ -104,7 +104,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   ?.slice(1)
                   ?.map((item, key) => ({
                     value: item,
-                    label: item,
+                    label: translate(`customer_type.${item}`),
                   })) || [],
 
               control,
@@ -183,14 +183,14 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"number",
+              inputType: "number",
               register,
               value:
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -201,18 +201,18 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              inputType:"number",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country: "ch",
-              control,
+              register,
               value:
                 type === "New Customer"
                   ? ""
                   : offerDetails?.id
-                    ? offerDetails?.leadID?.customerDetail?.mobileNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
