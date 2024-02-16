@@ -31,7 +31,11 @@ import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
-import { InvoiceDetailTableRowTypes, InvoiceTableRowTypes, SubInvoiceTableRowTypes } from './invoice';
+import {
+  InvoiceDetailTableRowTypes,
+  InvoiceTableRowTypes,
+  SubInvoiceTableRowTypes,
+} from "./invoice";
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
@@ -418,7 +422,6 @@ export type GenerateOffersFormField = (
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string;
     invoiceDetails?: InvoiceDetailTableRowTypes;
-
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
@@ -458,7 +461,6 @@ export type GenerateOfferServiceFormField = (
     tax?: TaxSetting[] | null;
     currency?: string;
     invoiceDetails?: InvoiceDetailTableRowTypes;
-
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -544,7 +546,6 @@ export type GenerateLeadsCustomerFormField = (
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
-
 
 export type GenerateInvoiceCustomerFormField = (
   register: UseFormRegister<FieldValues>,
@@ -701,7 +702,7 @@ export interface DocumentHeaderDetailsProps {
   emailTemplateSettings: EmailTemplate | null;
   fileType?: "contract" | "invoice" | "receipt";
   companyName?: string;
-  isReverseLogo?:boolean
+  isReverseLogo?: boolean;
 }
 
 export interface ProductItemFooterProps {
@@ -720,7 +721,7 @@ export interface ProductItemFooterProps {
   serviceDiscountSum?: number;
   isTax?: boolean;
   isDiscount?: boolean;
-  discountDescription?: string
+  discountDescription?: string;
 }
 
 export interface ContactDetailsProps {
@@ -734,6 +735,7 @@ export interface ContactDetailsProps {
   phone: string;
   gender?: string;
   mobile?: string;
+  isReverseInfo?: boolean;
 }
 export interface MovingDetailsProps {
   header: string;
@@ -745,6 +747,7 @@ export interface MovingDetailsProps {
   addressLabels?: string[];
   handleEditDateModal?: () => void;
   time?: string;
+  isReverseAddress?: boolean;
 }
 export interface ProductItemProps {
   title: string;
@@ -861,7 +864,7 @@ export interface TemplateType {
   isSecondColumn: boolean;
   isThirdColumn: boolean;
   isFourthColumn: boolean;
-  order: boolean
+  order: boolean;
 }
 interface Template {
   Template: TemplateType;

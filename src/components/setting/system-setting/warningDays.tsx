@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import SettingLayout from "../SettingLayout";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { SystemSettingDataProps } from "@/types/settings";

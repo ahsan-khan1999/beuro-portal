@@ -18,22 +18,41 @@ export const ContactAddress = ({
   phone,
   gender,
   mobile,
+  isReverseInfo,
 }: Partial<ContactDetailsProps>) => {
-
   return (
-
-    <View style={container}>
-      <View style={leftColumn}>
+    <View
+      style={{
+        display: "flex",
+        flexDirection: isReverseInfo ? "row-reverse" : "row",
+        marginTop: 5,
+        padding: 20,
+      }}
+    >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          rowGap: 0,
+          width: isReverseInfo ? "35%" : "65%",
+        }}
+      >
         <Text style={textBase}>
           {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
         </Text>
         <Text style={textBase}>{address?.streetWithNumber}</Text>
-        <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country] || ""
-          }`}</Text>
+        <Text style={textBase}>{`${address?.postalCode} ${
+          Country[address?.city as keyof typeof Country] || ""
+        }`}</Text>
       </View>
-      <View style={rightColumn}>
-        {
-          email &&
+      <View
+        style={{
+          flexDirection: "column",
+          rowGap: 0,
+          width: isReverseInfo ? "65%" : "35%",
+        }}
+      >
+        {email && (
           <View style={{ display: "flex", flexDirection: "row" }}>
             <Text
               style={{
@@ -48,7 +67,7 @@ export const ContactAddress = ({
             </Text>
             <Text style={textBase}>{email}</Text>
           </View>
-        }
+        )}
 
         {phone !== "+" && phone && (
           <View style={{ display: "flex", flexDirection: "row" }}>
@@ -84,6 +103,5 @@ export const ContactAddress = ({
         )}
       </View>
     </View>
-  )
-
+  );
 };

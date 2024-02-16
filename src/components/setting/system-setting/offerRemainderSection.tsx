@@ -1,5 +1,4 @@
 import SettingLayout from "../SettingLayout";
-import InputField from "@/base-components/filter/fields/input-field";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { SystemSettingDataProps } from "@/types/settings";
 import { staticEnums } from "@/utils/static";

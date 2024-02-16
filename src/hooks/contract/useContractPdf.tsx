@@ -128,7 +128,7 @@ export const useContractPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
-            order
+            order,
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -140,7 +140,7 @@ export const useContractPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
-            order
+            order,
           }));
         }
         if (emailTemplate?.payload) {
@@ -171,7 +171,7 @@ export const useContractPdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
-              isReverseLogo:template.payload.Template?.order
+              isReverseLogo: template.payload.Template?.order,
             },
             contactAddress: {
               address: {
@@ -189,8 +189,9 @@ export const useContractPdf = () => {
               email: contractDetails?.offerID?.leadID?.customerDetail?.email,
               phone:
                 contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
-              gender: contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
-
+              gender:
+                contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
+              isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {
               address: contractDetails?.offerID?.addressID?.address,
@@ -198,23 +199,28 @@ export const useContractPdf = () => {
               workDates: contractDetails?.offerID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
-              time:contractDetails?.offerID?.time
+              time: contractDetails?.offerID?.time,
             },
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
-              isTax:contractDetails?.offerID?.isTax,
-              isDiscount:contractDetails?.offerID?.isDiscount,
+              isTax: contractDetails?.offerID?.isTax,
+              isDiscount: contractDetails?.offerID?.isDiscount,
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               discountType: contractDetails?.offerID?.discountType,
               taxType: contractDetails?.offerID?.taxType,
-              serviceDiscountSum: contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
-                const price = service?.discount || 0;
-                return acc + price;
-              }, 0),
-              discountDescription:contractDetails?.offerID?.discountDescription
+              serviceDiscountSum:
+                contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce(
+                  (acc, service) => {
+                    const price = service?.discount || 0;
+                    return acc + price;
+                  },
+                  0
+                ),
+              discountDescription:
+                contractDetails?.offerID?.discountDescription,
             },
             footerDetails: {
               firstColumn: {
@@ -350,16 +356,17 @@ export const useContractPdf = () => {
 
   const handleEmailSend = async () => {
     try {
-
       const formData = new FormData();
       if (!mergedFile) return;
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
       if (fileUrl?.payload) {
-        localStoreUtil.store_data("pdf", fileUrl?.payload)
+        localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(`/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`)
+        router.push(
+          `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
+        );
       } else {
         setActiveButtonId("email");
 
@@ -378,11 +385,16 @@ export const useContractPdf = () => {
             email: contractDetails?.offerID?.leadID?.customerDetail?.email,
             content: contractDetails?.offerID?.content?.id,
             subject:
-              contractDetails?.title + " " + contractDetails?.contractNumber + " " + contractDetails?.offerID?.createdBy?.company?.companyName,
+              contractDetails?.title +
+              " " +
+              contractDetails?.contractNumber +
+              " " +
+              contractDetails?.offerID?.createdBy?.company?.companyName,
             description:
               contractDetails?.offerID?.content?.confirmationContent?.body,
             attachments:
-              contractDetails?.offerID?.content?.confirmationContent?.attachments,
+              contractDetails?.offerID?.content?.confirmationContent
+                ?.attachments,
             id: contractDetails?.id,
             pdf: fileUrl?.payload,
           };
@@ -401,15 +413,18 @@ export const useContractPdf = () => {
 
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${contractDetails?.contractNumber + "-" + contractDetails?.offerID?.createdBy?.company?.companyName}.pdf`;
+      a.download = `${
+        contractDetails?.contractNumber +
+        "-" +
+        contractDetails?.offerID?.createdBy?.company?.companyName
+      }.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
 
       URL.revokeObjectURL(url);
-
     }
   };
   const handlePrint = () => {
@@ -474,6 +489,6 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
-    contractDetails
+    contractDetails,
   };
 };
