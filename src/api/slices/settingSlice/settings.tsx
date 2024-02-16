@@ -37,6 +37,10 @@ export interface SystemSetting {
   createdAt?: string;
   currency: string;
   daysLimit: number;
+  reminderText: string;
+  offerReminderFrequency: number;
+  secondWarningDays: number;
+  thirdWarningDays: number;
   isInvoiceOverDue: boolean;
   id: string;
   taxType: string;

@@ -5,6 +5,9 @@ import { Form } from "@/base-components/form/form";
 import { useUploadImageOffer } from "@/hooks/modals/useUploadImageOffer";
 import { LinkUpload } from "../link-upload";
 import { BaseButton } from "../button/base-button";
+import { ImageField } from "./image-field";
+import { VideoField } from "./video-field";
+import { AttachementField } from "./attachement-field";
 
 const ImagesUploadOffer = ({
   onClose,
@@ -16,22 +19,109 @@ const ImagesUploadOffer = ({
   type: string;
 }) => {
   const {
-    fields,
-    control,
     onSubmit,
-    handleSubmit,
-    errors,
-    error,
     translate,
     activeTab,
+    handleTabChange,
     enteredLink,
     enteredLinks,
     handleLinkAdd,
     handleLinkDelete,
-    handleTabChange,
     setEnteredLink,
+    attachementTabs,
+    handleAttachementAdd,
+    handleAttachementDelete,
+    handleVideoAdd,
+    handleVideoDelete,
+    handleimageAdd,
+    handleImageDelete,
+    loading,
+    loadingGlobal
   } = useUploadImageOffer(handleImageSlider, type);
+  const attachementLookUp = {
+    "img_tab": <>
+      <div className="flex flex-col gap-y-2 my-5">
+        <h2 className="text-base font-medium text-[#393939]">
+          {translate("common.images_modal.title")}
+        </h2>
+        <p className="text-xs font-normal text-[#8F8F8F]">
+          {translate("common.images_modal.sub_title")}
+        </p>
+      </div>
+      {/* <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+      /> */}
+      <ImageField
+        id="attachement"
+        attachements={enteredLinks?.images}
+        fileSupported="PNG, JPEG, JPG, WEBP "
+        isAttachement={true}
+        isOpenedFile={false}
+        text="Add Attachments"
+        setAttachements={handleimageAdd}
+      />
+    </>,
 
+    "video_tab": <div className="my-0 w-full">
+      <div className="flex flex-col gap-y-2 my-5">
+        <h2 className="text-base font-medium text-[#393939]">
+          {translate("common.images_modal.video_title")}
+        </h2>
+        <p className="text-xs font-normal text-[#8F8F8F]">
+          {translate("common.images_modal.video_sub_title")}
+        </p>
+      </div>
+      <VideoField
+        id="attachement"
+        attachements={enteredLinks?.video}
+        fileSupported="MP4, MOV, AVI, WEBM "
+        isAttachement={true}
+        isOpenedFile={false}
+        text="Add Attachments"
+        setAttachements={handleVideoAdd}
+      />
+    </div>,
+    "link_tab":
+      <div className="my-0 w-full">
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("common.images_modal.link_title")}
+          </h2>
+          {/* <p className="text-xs font-normal text-[#8F8F8F]">
+            {translate("common.images_modal.link_sub_title")}
+          </p> */}
+        </div>
+        <LinkUpload
+          inputLink={enteredLink}
+          onAddLink={handleLinkAdd}
+          enteredLinks={enteredLinks["links"]}
+          onLinkDelete={handleLinkDelete}
+          setEnteredLink={setEnteredLink}
+        />
+      </div>,
+    "attachement_tab": <div className="my-0 w-full">
+      <div className="flex flex-col gap-y-2 my-5">
+        <h2 className="text-base font-medium text-[#393939]">
+          {translate("common.images_modal.attachement_title")}
+        </h2>
+        <p className="text-xs font-normal text-[#8F8F8F]">
+          {translate("common.images_modal.attachement_sub_title")}
+        </p>
+      </div>
+      <AttachementField
+        id="attachement"
+        attachements={enteredLinks?.attachements}
+        fileSupported="Pdf, ODT, DOC, XLXS "
+        isAttachement={true}
+        isOpenedFile={false}
+        text="Add Attachments"
+        setAttachements={handleAttachementAdd}
+      />
+    </div>,
+  }
   return (
     <>
       <BaseModal
@@ -50,62 +140,30 @@ const ImagesUploadOffer = ({
           </p>
 
           <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
-            <button
-              className={`${
-                activeTab === "img_tab" ? "text-primary" : "text-[#393939]"
-              } text-base font-medium pb-[10px] ${
-                activeTab === "img_tab" ? "border-b-2 border-primary" : ""
-              }`}
-              onClick={() => handleTabChange("img_tab")}
-            >
-              {translate("common.images_modal.img_tab")}
-            </button>
-            <button
-              className={`${
-                activeTab === "link_tab" ? "text-primary" : "text-[#393939]"
-              } text-base font-medium pb-[10px] ${
-                activeTab === "link_tab" ? "border-b-2 border-primary" : ""
-              }`}
-              onClick={() => handleTabChange("link_tab")}
-            >
-              {translate("common.images_modal.link_tab")}
-            </button>
+            {
+              attachementTabs.map((item, index) => (
+                <button
+                  className={`${activeTab === item ? "text-primary" : "text-[#393939] "
+                    } text-base font-medium pb-[10px] ${activeTab === item ? "border-b-2 border-primary" : ""
+                    }`}
+                  onClick={() => handleTabChange(item)}
+                >
+                  {translate(`common.images_modal.${item}`)}
+                </button>
+              ))
+            }
           </div>
-          {activeTab === "img_tab" && (
-            <>
-              <div className="flex flex-col gap-y-2 my-5">
-                <h2 className="text-base font-medium text-[#393939]">
-                  {translate("common.images_modal.title")}
-                </h2>
-                <p className="text-xs font-normal text-[#8F8F8F]">
-                  {translate("common.images_modal.sub_title")}
-                </p>
-              </div>
-              <Form
-                formFields={fields}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                errors={errors}
-              />
-            </>
-          )}
 
-          {activeTab === "link_tab" && (
-            <LinkUpload
-              inputLink={enteredLink}
-              onAddLink={handleLinkAdd}
-              enteredLinks={enteredLinks}
-              onLinkDelete={handleLinkDelete}
-              setEnteredLink={setEnteredLink}
-            />
-          )}
+          {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
 
           <div className="flex justify-end mt-5">
             <BaseButton
               buttonText={translate("pdf.submit")}
-              containerClassName="rounded-lg px-4 min-w-[202px] w-fit h-[50px] bg-primary hover:bg-buttonHover"
+              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
               textClassName="text-white"
-              onClick={() => {}}
+              onClick={onSubmit}
+              loading={loading || loadingGlobal}
+              disabled={loadingGlobal}
             />
           </div>
         </div>

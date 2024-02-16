@@ -349,7 +349,7 @@ export interface ChildrenProp {
 
 export interface LinkUploadProps {
   inputLink: string;
-  onAddLink: () => void;
+  onAddLink: (e?:React.FormEvent<HTMLFormElement>) => void;
   enteredLinks: string[];
   onLinkDelete: (linkToDelete: string) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;

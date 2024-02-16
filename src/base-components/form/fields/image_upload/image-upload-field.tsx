@@ -43,18 +43,10 @@ export const ImageUpload = ({
 
   const handleFileSelected = async (e: any) => {
     const formdata = new FormData();
-    const file = e.target.files;
-    for (let item of e.target.files) {
-      formdata.append("files", item);
-    }
-    const res = await dispatch(uploadMultiFileToFirebase(formdata));
-    
-    res?.payload?.forEach((res: string, idx: number) => {
-      
-      const fieldId = `upload_image${index as number + 1}`;
-      console.log(fieldId,"index",res);
-      field.onChange(res, fieldId);
-    });
+    const file = e.target.files[0];
+    formdata.append("file", file);
+    const res = await dispatch(uploadFileToFirebase(formdata));
+    field.onChange(res?.payload);
   };
   const deleteImage = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -108,7 +100,7 @@ export const ImageUpload = ({
           className="hidden"
           id={id}
           onChange={handleFileSelected}
-          multiple
+          
           data-index={index}
 
         />

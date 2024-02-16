@@ -50,6 +50,7 @@ export interface InputFieldProps {
   onEnterPress?: () => void;
   containerClassName?: string;
   textClassName?: string;
+  placeholder?: string;
   bgColor?: boolean;
   iconDisplay?: boolean;
   options?: {
