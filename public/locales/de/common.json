@@ -469,6 +469,11 @@
   "setting": {
     "heading": "Einstellungen",
     "save_setting": "Einstellungen speichern",
+    "offer_remainder": "Angebotserinnerungen",
+    "remainder_text": "Text zur Erinnerung",
+    "remainder_freq": "Angebot Erinnerungsfrequenz",
+    "second_warnings": "Zweite Mahntage",
+    "third_warnings": "Dritte Warntage",
     "steps_heading": {
       "account_setting": "Kontoeinstellungen",
       "system_setting": "Systemeinstellung",

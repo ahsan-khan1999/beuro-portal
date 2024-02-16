@@ -1,11 +1,11 @@
 import SettingLayout from "../SettingLayout";
-import InputField from "@/base-components/filter/fields/input-field";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useAppSelector } from "@/hooks/useRedux";
 import { SystemSettingDataProps } from "@/types/settings";
 import { staticEnums } from "@/utils/static";
 import { AnimatePresence, motion } from "framer-motion";
 import { SetStateAction, useEffect, useRef } from "react";
+import { useTranslation } from "next-i18next";
 
 export const OfferRemainderSection = ({
   systemSetting,
@@ -37,16 +37,18 @@ export const OfferRemainderSection = ({
     });
   };
 
+  const { t: translate } = useTranslation();
+
   return (
     <SettingLayout>
       <div className="pl-[31px] pt-[18px] pr-5 pb-[36px] bg-white">
         <p className="text-[#393939] font-normal text-lg mb-3">
-          Offer Reminders
+          {translate("setting.offer_remainder")}
         </p>
 
         {/* <form onSubmit={handleSubmit}> */}
         <p className="text-[#1E1E1E] text-sm font-normal mt-[14px] mb-2">
-          Reminder Text
+        {translate("setting.remainder_text")}
         </p>
 
         <input
@@ -79,7 +81,7 @@ export const OfferRemainderSection = ({
             transition={{ duration: 0.4 }}
           >
             <p className="text-[14px] text-[#1E1E1E] font-normal mb-[6px]">
-              Offer Reminder Frequency
+              {translate("setting.remainder_freq")}
             </p>
 
             <DropDown

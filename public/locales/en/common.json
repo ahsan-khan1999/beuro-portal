@@ -474,6 +474,11 @@
   "setting": {
     "heading": "Setting",
     "save_setting": "Save Setting",
+    "offer_remainder": "Offer Reminders",
+    "remainder_text": "Reminder Text",
+    "remainder_freq": "Offer Reminder Frequency",
+    "second_warnings": "Second Warning Days",
+    "third_warnings": "Third Warning Days",
     "steps_heading": {
       "account_setting": "Account Setting",
       "system_setting": "System Setting",
