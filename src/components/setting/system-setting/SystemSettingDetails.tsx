@@ -39,7 +39,7 @@ const SystemSettingDetails = ({
     daysLimit: systemSettings?.daysLimit || 0,
     isInvoiceOverDue: systemSettings?.isInvoiceOverDue || false,
     taxType: staticEnums["TaxType"][systemSettings?.taxType as string],
-    remainderText: systemSettings?.remainderText || "",
+    reminderText: systemSettings?.reminderText || "",
     offerReminderFrequency: systemSettings?.offerReminderFrequency || 0,
     secondWarningDays: systemSettings?.secondWarningDays || 0,
     thirdWarningDays: systemSettings?.thirdWarningDays || 0,
@@ -60,7 +60,7 @@ const SystemSettingDetails = ({
         daysLimit: response?.payload?.Setting?.daysLimit,
         isInvoiceOverDue: response?.payload?.Setting?.isInvoiceOverDue,
         taxType: staticEnums["TaxType"][response?.payload?.Setting?.taxType],
-        remainderText: response?.payload?.Setting?.remainderText,
+        reminderText: response?.payload?.Setting?.reminderText,
         offerReminderFrequency:
           response?.payload?.Setting?.offerReminderFrequency,
         secondWarningDays: response?.payload?.Setting?.secondWarningDays,
@@ -95,6 +95,10 @@ const SystemSettingDetails = ({
           ...systemSetting,
           currency: staticEnums["currency"][systemSetting?.currency],
           daysLimit: Number(systemSetting?.daysLimit),
+          offerReminderFrequency: Number(systemSetting?.offerReminderFrequency),
+          secondWarningDays: Number(systemSetting?.secondWarningDays),
+          thirdWarningDays: Number(systemSetting?.thirdWarningDays) ,
+          reminderText: systemSetting?.reminderText,
         },
         translate,
       })

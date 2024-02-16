@@ -2,7 +2,7 @@ export interface SystemSettingDataProps {
   allowedDomains: string[];
   currency: string;
   daysLimit: number;
-  remainderText: string;
+  reminderText: string;
   offerReminderFrequency: number;
   secondWarningDays: number;
   thirdWarningDays: number;

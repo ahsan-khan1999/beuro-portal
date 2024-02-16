@@ -37,7 +37,7 @@ export interface SystemSetting {
   createdAt?: string;
   currency: string;
   daysLimit: number;
-  remainderText: string;
+  reminderText: string;
   offerReminderFrequency: number;
   secondWarningDays: number;
   thirdWarningDays: number;
