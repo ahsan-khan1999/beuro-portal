@@ -2,7 +2,7 @@ import { Plan } from "@/types/admin/plans";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React from "react";
-import deleteIcon from "@/assets/pngs/border_delete.png";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 
 const TableRow = ({
@@ -37,12 +37,14 @@ const TableRow = ({
               className="py-4 flex justify-center items-center"
               onClick={() => handleDelete(item?.refID)}
             >
-              <Image
-                src={deleteIcon}
-                alt="delete record"
-                width={40}
-                height={40}
-              />
+              <div className="border border-[#ED2F2F] rounded-lg py-[10] px-3 w-10 h-10 flex items-center justify-center">
+                <Image
+                  src={deleteIcon}
+                  alt="delete record"
+                  width={16}
+                  height={20}
+                />
+              </div>
             </div>
             <span
               className="flex justify-center items-center"
