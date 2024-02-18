@@ -1,7 +1,10 @@
 export const DownloadIcon = ({ onClick }: { onClick: () => void }) => {
   return (
     <svg
-      onClick={onClick}
+      onClick={(e) => {
+        e.stopPropagation()
+        onClick()
+      }}
       xmlns="http://www.w3.org/2000/svg"
       width="41"
       height="41"

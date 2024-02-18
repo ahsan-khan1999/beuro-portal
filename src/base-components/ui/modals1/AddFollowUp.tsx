@@ -5,9 +5,7 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddFollowUp } from "@/hooks/follow-up/useAddFollowUp";
 import { AddFollowUpProps } from "@/types/follow-up";
-
 import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@/utils/hooks";
 
 const AddFollowUp = ({
   onClose,
@@ -17,8 +15,6 @@ const AddFollowUp = ({
 }: AddFollowUpProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddFollowUp(handleFollowUps, handleAllCustomers, handleAllLeads);
-
-  const ref = useOutsideClick<HTMLDivElement>(onClose);
 
   return (
     <>
@@ -36,7 +32,7 @@ const AddFollowUp = ({
                 onClick={onClose}
               />
               {/* <div className="flex justify-between items-center"> */}
-              <p className="text-2xl font-medium text-[#000] mb-[30px] border-b border-b-[#000] border-opacity-20 pb-5">
+              <p className="text-2xl font-medium text-[#000] mb-[30px] border-b border-b-[#000] border-opacity-10 pb-5">
                 {translate("follow_up.add_follow_up.heading")}
               </p>
               {/* </div> */}

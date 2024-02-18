@@ -48,6 +48,7 @@ const ReceiptPdfPreview = () => {
     onClose,
     onSuccess,
     dispatch,
+    collectiveInvoiceDetails
   } = useReceiptPdf();
 
   const { t: translate } = useTranslation();
@@ -83,6 +84,7 @@ const ReceiptPdfPreview = () => {
         <>
           <InvoiceEmailHeader
             {...receiptData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
             contentName={receiptData?.emailHeader.contentName}
             onEmailSend={handleEmailSend}
             loading={loading}

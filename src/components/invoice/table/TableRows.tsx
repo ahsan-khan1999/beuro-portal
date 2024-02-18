@@ -2,6 +2,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import React from "react";
 import { useRouter } from "next/router";
 import { getInvoiceStatusColor } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -10,24 +11,30 @@ const TableRows = ({
   handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
             key={index}
-            className="hover:bg-[#E9E1FF] items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
+            onClick={() =>
+              router.push({
+                pathname: "/invoices/details",
+                query: { invoice: item.id },
+              })
+            }
+            className="hover:bg-[#E9E1FF] cursor-pointer items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate mr-1">
-              {item.contractID?.offerID?.leadID?.customerDetail?.fullName}
+              {item?.customerDetail?.fullName}
             </span>
             <span className="py-4 mr-1 mlg:hidden maxSize:block truncate">
               {item?.title}
             </span>
-            <span className="py-4 truncate">
-              {item.contractID?.offerID?.total}
-            </span>
+            <span className="py-4 truncate">{item?.total}</span>
 
             <span className="py-4 flex justify-center items-center">
               <div
@@ -43,14 +50,14 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div className="flex justify-center items-center rounded-md w-full">
                 <div
-                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm `}
+                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.paidAmount)
                     ? Number(item?.paidAmount)?.toFixed(2)
                     : item?.paidAmount}
                 </div>
                 <div
-                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm `}
+                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.remainingAmount)
                     ? Number(item?.remainingAmount)?.toFixed(2)
@@ -63,9 +70,9 @@ const TableRows = ({
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm`}
               >
-                {item.invoiceStatus}
+                {translate(`invoice_status.${item.invoiceStatus}`)}
               </div>
             </span>
             <span

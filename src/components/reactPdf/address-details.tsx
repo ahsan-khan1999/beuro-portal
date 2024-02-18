@@ -1,19 +1,15 @@
-import { AddressDetailsProps } from "@/types/pdf";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import { CustomerAddress } from "@/types/leads";
 import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
 import { formatDateTimeToDate } from "@/utils/utility";
-import { useTranslation } from "next-i18next";
 
-// Define your styles
 const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
   header: {
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: 600,
     fontStyle: "semibold",
     color: "#000",
@@ -32,7 +28,7 @@ const styles = StyleSheet.create({
   },
   addressText: {
     color: "#141414",
-    fontSize: 14,
+    fontSize: 8,
     display: "flex",
     flexDirection: "row",
     columnGap: 2,
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dateText: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: "medium",
     color: "#000",
   },
@@ -64,7 +60,8 @@ export const AddressDetails = ({
   address,
   header,
   workDates,
-  time
+  time,
+  isReverseAddress,
 }: Partial<MovingDetailsProps>) => {
   let MaxLength = 0;
   for (const item of (address && address) || []) {
@@ -147,7 +144,7 @@ export const AddressDetails = ({
               <GridItem width={labelWidth}>
                 <Text
                   style={{
-                    fontSize: 10,
+                    fontSize: 8,
                     fontWeight: 500,
                     fontStyle: "medium",
                     color: "#000",
@@ -159,14 +156,16 @@ export const AddressDetails = ({
               <GridItem width={valueWidth}>
                 <Text
                   style={{
-                    fontSize: 10,
+                    fontSize: 8,
                     fontWeight: 400,
                     fontStyle: "normal",
                     color: "#000",
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${Country[address.country as keyof typeof Country] || ""}`}
+                  {`${address.streetNumber}, ${address.postalCode}, ${
+                    Country[address.country as keyof typeof Country] || ""
+                  }`}
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
@@ -191,7 +190,7 @@ export const AddressDetails = ({
         <GridItem width={labelWidth}>
           <Text
             style={{
-              fontSize: 10,
+              fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
               color: "#000",
@@ -206,11 +205,12 @@ export const AddressDetails = ({
           <Text style={{ ...styles.dateText, paddingRight: 30 }}>
             {workDates?.map(
               (date, index) =>
-                `${formatDateTimeToDate(date.startDate)}${date.endDate
-                  ? " bis " +
-                  formatDateTimeToDate(date.endDate) +
-                  ((workDates?.length - 1 != index && ", ") || ".")
-                  : (workDates?.length - 1 != index && ", ") || "."
+                `${formatDateTimeToDate(date.startDate)}${
+                  date.endDate
+                    ? " bis " +
+                      formatDateTimeToDate(date.endDate) +
+                      ((workDates?.length - 1 != index && ", ") || ".")
+                    : (workDates?.length - 1 != index && ", ") || "."
                 }`
             )}
             {time && ` Um ` + time + " Uhr"}
@@ -223,11 +223,10 @@ export const AddressDetails = ({
   );
 };
 
-
 export const Country = {
-  "Switzerland": "Schweiz",
-  "Germany": "Deutschland",
-  "Austria": "Österreich",
-  "Italy": "Italien",
-  "France": "Frankreich"
-}
+  Switzerland: "Schweiz",
+  Germany: "Deutschland",
+  Austria: "Österreich",
+  Italy: "Italien",
+  France: "Frankreich",
+};

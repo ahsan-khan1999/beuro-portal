@@ -30,7 +30,8 @@ import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
-
+import 'moment/locale/de';
+import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -412,12 +413,17 @@ export function formatDateTimeToDate(date: string) {
   return moment(date).format("DD-MM-YYYY");
 }
 
+export function pdfDateFormat(date: string, locale: string) {
+  if (!date) return null;
+  return moment(date).locale(locale).format("DD. MMMM YYYY");
+}
+
 export function formatDateTimeToDateMango(date: string) {
   if (!date) return null;
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("HH:MM: A");
+  return moment(date).format("HH:mm");
 }
 
 export function getStatusColor(status: string) {
@@ -559,11 +565,13 @@ export const transformAttachments = (attachmemts: string[]) => {
   return list;
 };
 
-export function getFileNameFromUrl(url: string) {
-  const urlParts = url.split("/");
-  const fileName = urlParts[urlParts.length - 1];
-  return fileName?.slice(0,28);
+export function getFileNameFromUrl(url: string, count?: number) {
+
+  const urlParts = url?.split("/");
+  const fileName = urlParts[urlParts?.length - 1];
+  return fileName?.slice(0, count ? count : 28);
 }
+
 
 export function getEmailColor(status: string) {
   if (
@@ -595,7 +603,7 @@ export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Signed"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Accepted"]
   )
     return "#45C769";
   else if (
@@ -805,21 +813,30 @@ export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
   return new Blob([pdfBytes], { type: "application/pdf" });
 };
 
-
 export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
   const classToStyleMap: { [className: string]: string } = {
-    'text-tiny': 'font-size: 8px;',
-    'text-small': 'font-size: 10px',
-    'text-big': 'font-size: 19.6px',
-    'text-huge': 'font-size: 24px;',
-    "ck-link_selected": 'background-color: rgba(31,176,255,.1)',
-    "ck-list-bogus-paragraph": 'display: block;',
-
+    "text-tiny": "font-size: 8px;",
+    "text-small": "font-size: 10px",
+    "text-big": "font-size: 19.6px",
+    "text-huge": "font-size: 24px;",
+    "ck-link_selected": "background-color: rgba(31,176,255,.1)",
+    "ck-list-bogus-paragraph": "display: block;",
   };
 
   return htmlContent.replace(/class="([^"]*)"/g, (match, classNames) => {
     const classes: string[] = classNames.split(/\s+/);
-    const styleRules = classes.map((className: string) => classToStyleMap[className] || '').join(' ');
-    return styleRules ? `style="${styleRules}"` : '';
+    const styleRules = classes
+      .map((className: string) => classToStyleMap[className] || "")
+      .join(" ");
+    return styleRules ? `style="${styleRules}"` : "";
   });
+};
+
+
+export function validateUrl(url: string, translate: TFunction) {
+  const regexp = new RegExp('((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*')
+  if (!regexp.test(url)) {
+    return { isValid: false, message: translate("validationMessages.invalid_format") };
+  }
+  return { isValid: true, message: '' };
 }

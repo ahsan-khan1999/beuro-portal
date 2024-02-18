@@ -82,13 +82,13 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 ?.slice(1)
                 .map((item, key) => ({
                   value: item,
-                  label: item,
+                  label: translate(`customer_type.${item}`),
                 })),
 
               control,
-              value:""
+              value: "",
               // value:
-             
+
               //     customerType,
             },
           },
@@ -118,15 +118,15 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
 
-              control,
+              inputType: "number",
+              register,
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
-              country: "ch",
             },
           },
           {
@@ -137,14 +137,14 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               className: " !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              control,
+              register,
+              inputType: "number",
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
-              country: "ch",
             },
           },
         ],

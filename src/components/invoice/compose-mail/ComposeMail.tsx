@@ -29,7 +29,7 @@ const ComposeMail = () => {
     loadingContent,
     onClose,
     onSuccess,
-    modal
+    modal,
   } = useInvoiceEmail(backRouteHandler, onNextHandle);
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -40,28 +40,27 @@ const ComposeMail = () => {
         route={onSuccess}
       />
     ),
-   
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
   return (
-      <>
-        <ContractFormCard>
-          <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-20 pb-5">
-            {translate("invoice.receipt_card.invoice_email_preview")}
-          </h2>
+    <>
+      <ContractFormCard>
+        <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
+          {translate("invoice.receipt_card.invoice_email_preview")}
+        </h2>
 
-          <Form
-            formFields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-            className={`${defaultClassName}`}
-          />
-        </ContractFormCard>
-        {renderModal()}
-      </>
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </ContractFormCard>
+      {renderModal()}
+    </>
   );
 };
 

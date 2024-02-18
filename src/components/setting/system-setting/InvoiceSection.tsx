@@ -4,8 +4,8 @@ import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
 import { SystemSettingDataProps } from "@/types/settings";
-import { useOutsideClick } from "@/utils/hooks";
 import { AnimatePresence, motion } from "framer-motion";
+import { WarningDays } from "./warningDays";
 
 const InvoiceSection = ({
   systemSetting,
@@ -66,7 +66,7 @@ const InvoiceSection = ({
         <AnimatePresence>
           {systemSetting?.isInvoiceOverDue && (
             <motion.div
-              className="mt-[22px] "
+              className="mt-[22px]"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -77,11 +77,16 @@ const InvoiceSection = ({
               </p>
               <DropDown
                 items={Object.keys(staticEnums["InvoiceOverDueLimit"]).map(
-                  (item) => ({ item: item })
+                  (item) => ({
+                    item: {
+                      label: item,
+                      value: item,
+                    },
+                  })
                 )}
                 onItemSelected={handleItemSelected}
                 selectedItem={systemSetting?.daysLimit?.toString()}
-                dropDownTextClassName="custom-text-style "
+                dropDownTextClassName="custom-text-style"
                 dropDownIconClassName="custom-icon-style"
                 dropDownDisabled={false}
                 shouldNotSelectItem={false}
@@ -91,6 +96,11 @@ const InvoiceSection = ({
             </motion.div>
           )}
         </AnimatePresence>
+
+        <WarningDays
+          setSystemSetting={setSystemSetting}
+          systemSetting={systemSetting}
+        />
       </div>
     </SettingLayout>
   );

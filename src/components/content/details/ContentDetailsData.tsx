@@ -9,10 +9,7 @@ import OfferContentEditDetails from "../edit/OfferContentEditDetails";
 import EditConfirmationContentDetailsData from "../edit/EditConfirmationContentDetailsData";
 import EditInoviceContentDetails from "../edit/EditInoviceContentDetails";
 import EditReceiptContentDetails from "../edit/ReceiptContentDetails";
-import { ContentTableRowTypes } from "@/types/content";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useAppSelector } from "@/hooks/useRedux";
 
 export enum ComponentsType {
@@ -39,7 +36,6 @@ const ContentDetailsData = () => {
     setData({ index, component });
   };
 
-  const router = useRouter();
   const { t: translate } = useTranslation();
 
   const componentArray = [
@@ -186,6 +182,21 @@ const ContentDetailsData = () => {
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 770 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 1370 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 1950 });
+    }
+  };
+
   return (
     <>
       <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
@@ -199,6 +210,7 @@ const ContentDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              onScroll={scrollHandler}
             />
           ))}
         </div>

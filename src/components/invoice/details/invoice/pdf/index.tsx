@@ -47,6 +47,7 @@ const DetailsPdfPriview = () => {
     dispatch,
     onClose,
     onSuccess,
+    collectiveInvoiceDetails
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -80,6 +81,7 @@ const DetailsPdfPriview = () => {
         <>
           <InvoiceEmailHeader
             {...invoiceData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
             contentName={invoiceData?.emailHeader.contentName}
             onEmailSend={handleEmailSend}
             loading={loading}

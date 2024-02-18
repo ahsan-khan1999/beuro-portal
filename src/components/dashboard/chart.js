@@ -46,7 +46,7 @@ const PieChart = ({ data }) => {
         {translate("dashboard_detail.lead_source")}
       </h3>
 
-      <div className="flex justify-center items-center h-[340px] py-5 border-t border-[#000] border-opacity-20">
+      <div className="flex justify-center items-center h-[340px] py-5 border-t border-[#000] border-opacity-10">
         {!data ||
         !data.datasets ||
         data.datasets.length === 0 ||

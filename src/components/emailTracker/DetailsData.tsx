@@ -5,7 +5,7 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { formatDateReverse, getMailStatusColor } from "@/utils/utility";
+import { formatDateReverse, getFileNameFromUrl, getMailStatusColor } from "@/utils/utility";
 import Link from "next/link";
 
 const DetailsData = ({
@@ -20,7 +20,7 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <span
             onClick={() => router.push("/email-tracker")}
@@ -63,8 +63,8 @@ const DetailsData = ({
           />
         </span>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="xl:w-11/12 w-full">
+
+      <div className="xl:w-11/12 w-full mt-5">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
@@ -84,7 +84,7 @@ const DetailsData = ({
                   emailDetails?.mailStatus || ""
                 )}]`}
               >
-                {translate(emailDetails?.mailStatus || "")}
+                {translate(`mail_tracker_status.${emailDetails?.mailStatus}`)}
               </span>
             )}
           </div>
@@ -105,8 +105,7 @@ const DetailsData = ({
               {emailDetails?.email}
             </span>
           </div>
-          {
-            emailDetails?.cc &&
+          {emailDetails?.cc && (
             <div>
               <span className="font-normal text-[#4D4D4D] text-base mr-5">
                 Cc:
@@ -115,9 +114,8 @@ const DetailsData = ({
                 {emailDetails?.cc}
               </span>
             </div>
-          }
-          {
-            emailDetails?.bcc &&
+          )}
+          {emailDetails?.bcc && (
             <div>
               <span className="font-normal text-[#4D4D4D] text-base mr-5">
                 Bcc:
@@ -126,7 +124,7 @@ const DetailsData = ({
                 {emailDetails?.bcc}
               </span>
             </div>
-          }
+          )}
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:
@@ -152,12 +150,10 @@ const DetailsData = ({
         </div>
         <div className="mt-5 flex items-end">
           {emailDetails?.attachments?.map((item) => {
-            let length = item?.href?.split("/")?.length - 1;
-
             return (
               <>
                 <Link
-                  href={item?.href || ""}
+                  href={item || ""}
                   target="_blank"
                   className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
                 >
@@ -167,7 +163,7 @@ const DetailsData = ({
                     className=" mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
-                    {item.href?.split("/")[length]}
+                    {getFileNameFromUrl(item,item?.length)}
                   </span>
                 </Link>
                 &nbsp;&nbsp;

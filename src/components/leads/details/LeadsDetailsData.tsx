@@ -146,6 +146,21 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 500 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 650 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 950 });
+    }
+  };
+
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
@@ -159,24 +174,25 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
               icon={item.icon}
               selectedTab={index}
               key={index}
+              onScroll={scrollHandler}
             />
           ))}
         </div>
-        <LeadsDetailsImages images={images} />
+        <LeadsDetailsImages images={images?.images} />
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[320px] w-full hidden xlg:block"></div>
+        <div className={`max-w-[320px] w-full hidden xlg:block`}></div>
         {/* {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />
           </div>
         ) : ( */}
-          <div className="flex flex-col gap-y-5 w-full">
-            {renderComponent.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
+        <div className="flex flex-col gap-y-5 w-full">
+          {renderComponent.map((component, index) => (
+            <div key={index}>{component}</div>
+          ))}
+        </div>
         {/* )} */}
       </div>
     </div>

@@ -6,7 +6,7 @@ export const IconOnlyButton = ({
   disabled,
   buttonClassName,
 }: IconOnlyButtonProps) => (
-  <button onClick={onClick} className={buttonClassName} disabled={disabled}>
+  <button onClick={(e) => { e.stopPropagation(),onClick()}} className={buttonClassName} disabled={disabled}>
     {icon}
   </button>
 );

@@ -38,9 +38,21 @@ const ContractDetailsCard = ({
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const contractStatus = [
+    `${translate("contract_status.Open")}`,
+    `${translate("contract_status.Confirmed")}`,
+    `${translate("contract_status.Cancelled")}`,
+  ];
+
   return (
     <div className="min-h-[218px]">
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
           <span
             className="cursor-pointer"
@@ -73,7 +85,7 @@ const ContractDetailsCard = ({
           </p>
         </div>
 
-        <div className="flex gap-x-[22px]">
+        <div className="flex justify-end gap-x-[22px]">
           <button
             onClick={handleSendEmail}
             className="w-fit border-[1px] border-primary rounded-lg flex items-center px-4 py-[6px]"
@@ -89,7 +101,7 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id ,isMail:true },
+                  query: { offerID: contractDetails?.id, isMail: true },
                 })
               }
             />
@@ -190,6 +202,10 @@ const ContractDetailsCard = ({
                           "."
                     }`
                 )}
+                {contractDetails?.offerID?.time &&
+                  ` ${translate("common.at")} ` +
+                    contractDetails?.offerID?.time +
+                    ` ${translate("common.clock")} `}
               </span>
               <Image
                 src={editIcon}
@@ -239,11 +255,16 @@ const ContractDetailsCard = ({
               <span>
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
-                    (item) => ({
-                      item: item,
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
                     })
                   )}
-                  selectedItem={contractDetails?.paymentType}
+                  selectedItem={translate(
+                    `payment_method.${contractDetails?.paymentType}`
+                  )}
                   onItemSelected={handlePaymentStatusUpdate}
                   dropDownClassName={`border border-[${getPaymentTypeColor(
                     contractDetails?.paymentType
@@ -269,9 +290,16 @@ const ContractDetailsCard = ({
               ] !== 3 && (
                 <DropDown
                   items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
+                    (item, index) => ({
+                      item: {
+                        label: contractStatus[index],
+                        value: item,
+                      },
+                    })
                   )}
-                  selectedItem={contractDetails?.contractStatus}
+                  selectedItem={translate(
+                    `contract_status.${contractDetails?.contractStatus}`
+                  )}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getContractStatusColor(
                     contractDetails?.contractStatus
@@ -283,21 +311,7 @@ const ContractDetailsCard = ({
                     contractDetails?.contractStatus
                   )}]`}
                 />
-              )) || (
-                <span
-                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}`,
-                    color: `${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}`,
-                  }}
-                >
-                  {contractDetails?.contractStatus}
-                </span>
-              )}
+              )) || <></>}
             </span>
           </div>
 
@@ -317,7 +331,7 @@ const ContractDetailsCard = ({
               /> */}
               <WriteIcon
                 pathClass={
-                  contractDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"
+                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
                 }
               />
             </div>

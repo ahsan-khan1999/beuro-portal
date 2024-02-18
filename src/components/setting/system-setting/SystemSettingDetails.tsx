@@ -18,7 +18,7 @@ import { Button } from "@/base-components/ui/button/button";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { getValueByKey } from "@/utils/auth.util";
+import { OfferRemainderSection } from "./offerRemainderSection";
 
 const SystemSettingDetails = ({
   addTaxHandler,
@@ -39,12 +39,18 @@ const SystemSettingDetails = ({
     daysLimit: systemSettings?.daysLimit || 0,
     isInvoiceOverDue: systemSettings?.isInvoiceOverDue || false,
     taxType: staticEnums["TaxType"][systemSettings?.taxType as string],
+    reminderText: systemSettings?.reminderText || "",
+    offerReminderFrequency: systemSettings?.offerReminderFrequency || 0,
+    secondWarningDays: systemSettings?.secondWarningDays || 0,
+    thirdWarningDays: systemSettings?.thirdWarningDays || 0,
   });
+
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const handleItemSelected = (selectedItem: string) => {
     setSystemSetting({ ...systemSetting, currency: selectedItem });
   };
+
   useEffect(() => {
     dispatch(readTaxSettings());
     dispatch(readSystemSettings()).then((response: any) => {
@@ -54,12 +60,19 @@ const SystemSettingDetails = ({
         daysLimit: response?.payload?.Setting?.daysLimit,
         isInvoiceOverDue: response?.payload?.Setting?.isInvoiceOverDue,
         taxType: staticEnums["TaxType"][response?.payload?.Setting?.taxType],
+        reminderText: response?.payload?.Setting?.reminderText,
+        offerReminderFrequency:
+          response?.payload?.Setting?.offerReminderFrequency,
+        secondWarningDays: response?.payload?.Setting?.secondWarningDays,
+        thirdWarningDays: response?.payload?.Setting?.thirdWarningDays,
       });
     });
   }, []);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
@@ -74,6 +87,7 @@ const SystemSettingDetails = ({
       />
     ),
   };
+
   const handleSettingUpdate = async () => {
     const response = await dispatch(
       updateSystemSetting({
@@ -81,12 +95,17 @@ const SystemSettingDetails = ({
           ...systemSetting,
           currency: staticEnums["currency"][systemSetting?.currency],
           daysLimit: Number(systemSetting?.daysLimit),
+          offerReminderFrequency: Number(systemSetting?.offerReminderFrequency),
+          secondWarningDays: Number(systemSetting?.secondWarningDays),
+          thirdWarningDays: Number(systemSetting?.thirdWarningDays) ,
+          reminderText: systemSetting?.reminderText,
         },
         translate,
       })
     );
     if (response?.payload) handleSuccess();
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -100,6 +119,14 @@ const SystemSettingDetails = ({
         setSystemSetting={setSystemSetting}
         tax={tax}
       />
+
+      <div className="my-2">
+        <OfferRemainderSection
+          setSystemSetting={setSystemSetting}
+          systemSetting={systemSetting}
+        />
+      </div>
+
       <div className="my-2">
         <InvoiceSection
           setSystemSetting={setSystemSetting}
@@ -114,7 +141,10 @@ const SystemSettingDetails = ({
           </p>
           <DropDown
             items={Object.keys(staticEnums["currency"]).map((item) => ({
-              item: item,
+              item: {
+                label: item,
+                value: item,
+              },
             }))}
             onItemSelected={handleItemSelected}
             selectedItem={systemSetting?.currency}

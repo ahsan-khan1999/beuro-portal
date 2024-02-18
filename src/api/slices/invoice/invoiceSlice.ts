@@ -2,8 +2,9 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GlobalApiResponseType } from "@/types/global";
-import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
+import { InvoiceDetailTableRowTypes, InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "@/types/invoice";
 import { DEFAULT_INVOICE, staticEnums } from "@/utils/static";
+import localStoreUtil from "@/utils/localstore.util";
 
 interface InvoiceState {
     invoice: InvoiceTableRowTypes[];
@@ -11,7 +12,7 @@ interface InvoiceState {
     error: Record<string, object>,
     lastPage: number,
     totalCount: number,
-    invoiceDetails: InvoiceTableRowTypes,
+    invoiceDetails: InvoiceDetailTableRowTypes,
     collectiveInvoice: SubInvoiceTableRowTypes[],
     collectiveInvoiceDetails: SubInvoiceTableRowTypes,
     collectiveReciept: SubInvoiceTableRowTypes[],
@@ -292,6 +293,52 @@ export const readQRCode: AsyncThunk<boolean, object, object> | any =
             return false;
         }
     });
+
+export const createInvoiceDetial: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/create/detail", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+
+            const { invoiceId, step, stage } = data
+            let apiData = { ...data, invoiceId: invoiceId, step: step }
+
+            apiData = { ...apiData, customerType: staticEnums["CustomerType"][data.customerType] }
+            if (staticEnums["CustomerType"][data.customerType] == 0) delete apiData["companyName"]
+            const response = await apiServices.createInvoiceDetail(apiData);
+            let objectToUpdate = { ...response?.data?.data?.Invoice, type: apiData?.type, stage: stage }
+            localStoreUtil.store_data("invoice", objectToUpdate)
+            thunkApi.dispatch(setInvoiceDetails(objectToUpdate));
+
+
+            return response?.data?.data?.Invoice;
+        } catch (e: any) {
+
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            setErrors(setError, e?.data.data, translate);
+            return false;
+        }
+    });
+export const updateInvoiceDetials: AsyncThunk<boolean, object, object> | any =
+    createAsyncThunk("invoice/details/update", async (args, thunkApi) => {
+        const { data, router, setError, translate } = args as any;
+
+        try {
+            const { stage } = data
+
+            const response = await apiServices.updateInvoiceDetails(data);
+            const invoiceData = await localStoreUtil.get_data("invoice")
+            let objectToUpdate = { ...response?.data?.Invoice, type: invoiceData?.type, stage: stage }
+
+            localStoreUtil.store_data("invoice", objectToUpdate)
+            thunkApi.dispatch(setInvoiceDetails(objectToUpdate));
+            return response?.data?.Invoice;
+        } catch (e: any) {
+            setErrors(setError, e?.data?.data, translate);
+            thunkApi.dispatch(setErrorMessage(e?.data?.message));
+            return false;
+        }
+    });
 const InvoiceSlice = createSlice({
     name: "InvoiceSlice",
     initialState,
@@ -554,7 +601,28 @@ const InvoiceSlice = createSlice({
         builder.addCase(readQRCode.rejected, (state) => {
             state.loading = false
         });
-
+        builder.addCase(createInvoiceDetial.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(createInvoiceDetial.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(createInvoiceDetial.rejected, (state) => {
+            state.loading = false
+        });
+        builder.addCase(updateInvoiceDetials.pending, (state) => {
+            state.loading = true
+        });
+        builder.addCase(updateInvoiceDetials.fulfilled, (state, action) => {
+            // let index = state.in.findIndex((item) => item.id === action.payload?.id)
+            // if (index !== -1) {
+            //     state.offer.splice(index, 1, action.payload)
+            // }
+            state.loading = false;
+        });
+        builder.addCase(updateInvoiceDetials.rejected, (state) => {
+            state.loading = false
+        });
 
     },
 })

@@ -120,7 +120,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       id: `serviceDetail.${i}.serviceType`,
                       name: `serviceDetail.${i}.serviceType`,
                       register,
-                      
+
                       onChange: (val) =>
                         onServiceChange(i, ServiceType.EXISTING_SERVICE),
                     },

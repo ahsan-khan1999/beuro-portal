@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
-
+import { useTranslation } from "next-i18next";
 
 const TableRow = ({
   currentPageRows,
@@ -11,6 +11,8 @@ const TableRow = ({
   currentPageRows: CustomersAdmin[];
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   return (
     <div>
       {currentPageRows?.map((item, index) => {
@@ -33,14 +35,20 @@ const TableRow = ({
             <span className="truncate xs:block mlg:hidden xlg:block py-4">
               {item?.email}
             </span>
-            <span className="py-4 truncate">{item?.plan?.planName}</span>
+            <span className="py-4 truncate">
+              {item &&
+                item.plan &&
+                item.plan.planName &&
+                translate(`plan_status.${item.plan.planName}`)}
+            </span>
+
             <span className="py-4 flex items-center justify-center">
               <div
                 className={`${
                   item.status == "unBlock" ? "bg-[#4A13E7]" : "bg-[#FF0000]"
                 } text-white px-2 py-1 text-center rounded-md  w-[90px] text-sm `}
               >
-                {item.status}
+                {translate(`customer_status.${item.status}`)}
               </div>
             </span>
 

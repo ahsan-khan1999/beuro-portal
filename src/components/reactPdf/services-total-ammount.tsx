@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 12,
+    fontSize: 8,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   discountDescription: {
     marginTop: 6,
     color: "#404040",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 400,
     fontStyle: "normal",
   },
@@ -128,7 +128,7 @@ export const ServicesTotalAmount = ({
               </Text>
             }
           </View>
-          {
+          {/* {
             totalDiscount !== 0 &&
           <View style={styles.subSection}>
             <Text style={styles.text}>Rabatt: </Text>
@@ -136,7 +136,7 @@ export const ServicesTotalAmount = ({
               <Text style={styles.text}>{totalDiscount} </Text>
             }
           </View>
-          }
+          } */}
           {!isShowExtraAmount ? (
             <View style={styles.totalSection}>
               <Text style={styles.whiteText}>Gesamtsumme:</Text>

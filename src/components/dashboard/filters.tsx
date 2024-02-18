@@ -6,7 +6,11 @@ import { useOutsideClick } from "@/utils/hooks";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 
-export default function DashboardFilters({ filter, handleFilterChange, setFilter }: FiltersComponentProps) {
+export default function DashboardFilters({
+  filter,
+  handleFilterChange,
+  setFilter,
+}: FiltersComponentProps) {
   const [isOpen, setIsOpen] = useState({
     [DashboardFiltersToggle.month]: false,
     [DashboardFiltersToggle.week]: false,
@@ -22,20 +26,20 @@ export default function DashboardFilters({ filter, handleFilterChange, setFilter
   };
 
   const monthObj = {
-    "January": "1",
-    "February": "2",
-    "March": "3",
-    "April": "4",
-    "May": "5",
-    "June": "6",
-    "July": "7",
-    "August": "8",
-    "September": "9",
-    "October": "10",
-    "November": "11",
-    "December": "12",
+    January: "1",
+    February: "2",
+    March: "3",
+    April: "4",
+    May: "5",
+    June: "6",
+    July: "7",
+    August: "8",
+    September: "9",
+    October: "10",
+    November: "11",
+    December: "12",
+  };
 
-  }
   return (
     <div className="flex space-x-4">
       {/* <SelectField
@@ -54,13 +58,12 @@ export default function DashboardFilters({ filter, handleFilterChange, setFilter
       /> */}
       <SelectField
         handleChange={(value) => {
-          setFilter({ ...filter, "month": Number(value) })
-          handleFilterChange({ ...filter, "month": Number(value) })
+          setFilter({ ...filter, month: Number(value) });
+          handleFilterChange({ ...filter, month: Number(value) });
         }}
-        value={filter?.month as any || "1"}
+        value={(filter?.month as any) || "1"}
         dropDownIconClassName=""
         isSearch={false}
-
         options={[
           { label: translate("dashboard_detail.months.jan"), value: "1" },
           { label: translate("dashboard_detail.months.feb"), value: "2" },
@@ -75,7 +78,9 @@ export default function DashboardFilters({ filter, handleFilterChange, setFilter
           { label: translate("dashboard_detail.months.nov"), value: "11" },
           { label: translate("dashboard_detail.months.dec"), value: "12" },
         ]}
-        label={getKeyByValue(monthObj, filter?.month?.toString())}
+        label={translate(
+          `selected_month.${getKeyByValue(monthObj, filter?.month?.toString())}`
+        )}
         containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
       />
     </div>

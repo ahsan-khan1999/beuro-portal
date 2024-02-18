@@ -31,10 +31,11 @@ const TableRows = ({
           <div
             key={index}
             onClick={() =>
-              router.push(`/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`)
-
+              router.push(
+                `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
+              )
             }
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(110px,_100%)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(150px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(60px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(120px,_120px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(60px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(70px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.offerNumber}</span>
             <span className="py-4 truncate">
@@ -55,7 +56,7 @@ const TableRows = ({
                   item.emailStatus
                 )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
-                {translate(item?.emailStatus)}
+                {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
 
@@ -64,7 +65,7 @@ const TableRows = ({
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
-                {item.paymentType}
+                {translate(`payment_method.${item.paymentType}`)}
               </div>
             </span>
 
@@ -73,9 +74,9 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
                 }}
-                className="text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm"
+                className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
               >
-                {item.offerStatus}
+                {translate(`offer_status.${item.offerStatus}`)}
               </div>
             </span>
 
@@ -187,8 +188,9 @@ const TableRows = ({
             <span
               className="flex justify-center items-center cursor-pointer rounded-md"
               onClick={() =>
-                router.push(`/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`)
-
+                router.push(
+                  `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
+                )
               }
             >
               <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">

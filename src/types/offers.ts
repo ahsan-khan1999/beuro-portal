@@ -16,7 +16,7 @@ export interface OffersTableRowTypes {
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
-  time:string;
+  time: string;
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -67,7 +67,7 @@ export interface OffersTableRowTypes {
   signature?: string;
   attachement?: string;
   isNoteCreated: boolean;
-  reason:string
+  reason: string
 }
 
 export interface PublicOffersTableRowTypes {
@@ -181,9 +181,13 @@ export interface ServiceList {
   totalPrice: number;
   serviceType: string;
   description: string;
-  count: number;
+  count: number | string;
   pagebreak: boolean;
-  discount:number
+  discount: number;
+  isDiscount?: boolean;
+  totalDiscount?: number;
+  isGlobalDiscount?:boolean
+
 }
 export interface EmailStatus {
   Pending: number;

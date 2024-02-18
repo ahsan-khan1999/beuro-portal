@@ -98,7 +98,6 @@ const SignPdfPreview = () => {
   const { offerID, action } = router.query;
 
   useEffect(() => {
-
     if (offerID) {
       dispatch(readOfferPublicDetails({ params: { filter: offerID } })).then(
         (response: ActionType) => {
@@ -119,7 +118,9 @@ const SignPdfPreview = () => {
                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
-                companyName: offerDetails?.Offer?.createdBy?.company?.companyName,
+                companyName:
+                  offerDetails?.Offer?.createdBy?.company?.companyName,
+                // isReverseLogo: offerDetails?.Template?.order,
               },
               contactAddress: {
                 address: {
@@ -135,16 +136,17 @@ const SignPdfPreview = () => {
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
-                gender: offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
-                mobile: offerDetails?.Offer?.leadID?.customerDetail?.mobileNumber,
-
-
+                gender:
+                  offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
+                mobile:
+                  offerDetails?.Offer?.leadID?.customerDetail?.mobileNumber,
+                // isReverseInfo: offerDetails?.Template?.order,
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,
                 header: offerDetails?.Offer?.title,
                 workDates: offerDetails?.Offer?.date,
-                time:offerDetails?.Offer?.time
+                time: offerDetails?.Offer?.time,
               },
               serviceItem: offerDetails?.Offer?.serviceDetail?.serviceDetail,
               serviceItemFooter: {
@@ -154,12 +156,17 @@ const SignPdfPreview = () => {
                 grandTotal: offerDetails?.Offer?.total?.toString(),
                 discountType: offerDetails?.Offer?.discountType,
                 taxType: offerDetails?.Offer?.taxType,
-                serviceDiscountSum: offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce((acc, service) => {
-                  const price = service?.discount || 0;
-                  return acc + price;
-                }, 0),
+                serviceDiscountSum:
+                  offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
+                    (acc, service) => {
+                      const price = service?.discount || 0;
+                      return acc + price;
+                    },
+                    0
+                  ),
                 isTax: offerDetails?.Offer?.isTax,
-                isDiscount:offerDetails?.Offer?.isDiscount,
+                isDiscount: offerDetails?.Offer?.isDiscount,
+                discountDescription: offerDetails?.Offer?.discountDescription,
               },
 
               footerDetails: {
@@ -252,6 +259,7 @@ const SignPdfPreview = () => {
                 isThirdColumn,
                 secondColumn,
                 thirdColumn,
+                order,
               }: TemplateType = offerDetails?.Template;
 
               setTemplateSettings(() => ({
@@ -263,6 +271,7 @@ const SignPdfPreview = () => {
                 isFourthColumn,
                 isSecondColumn,
                 isThirdColumn,
+                order,
               }));
             }
             if (offerDetails?.Mail) {

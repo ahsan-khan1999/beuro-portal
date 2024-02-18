@@ -1,5 +1,4 @@
 import { ServiceList } from "@/types/offers";
-import { ServiceDetailProps } from "@/types/pdf";
 import { View, Text } from "@react-pdf/renderer";
 import { StyleSheet } from "@react-pdf/renderer";
 
@@ -15,68 +14,38 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: "row",
-    width: 531,
-    columnGap: 10,
-  },
-  title: {
-    color: "#000",
-    fontSize: 12,
-    fontWeight: "medium",
-    display: "flex",
-    flexDirection: "column",
-    width: 150,
-    rowGap: 4,
-  },
-  description: {
-    color: "#000",
-    fontSize: 12,
-    fontWeight: "medium",
-    display: "flex",
-    flexDirection: "column",
-    width: 150,
-    rowGap: 4,
+    maxWidth: 531,
+    width: "100%",
+    columnGap: 3
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    // width: 150,
+    width: 135,
+    // marginRight: 5,
   },
   descriptionText: {
     color: "#404040",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 400,
     fontStyle: "normal",
-    // width: 150,
+    width: 180,
+    // marginRight: 5,
   },
   priceHeader: {
     flexDirection: "row",
     alignItems: "center",
-    width: 251,
-    justifyContent:"flex-end"
-    
+    width: 216,
   },
   headerText: {
     color: "#000",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 400,
     fontStyle: "normal",
     width: 50,
   },
-  headerTotal: {
-    color: "#000",
-    fontSize: 10,
-    fontWeight: 500,
-    fontStyle: "medium",
-    width: 50,
-  },
-  // headerTextTotal: {
-  //   color: "#000",60
-  //   fontSize: 12,
-  //   fontWeight: "bold",
-  //   width: 100,
-  // },
 });
 
 export const ServiceTableRow = ({
@@ -88,25 +57,25 @@ export const ServiceTableRow = ({
   totalPrice,
   pagebreak,
   unit,
-  discount
+  discount,
+  isDiscount,
+  totalDiscount,
+  isGlobalDiscount
 }: Partial<ServiceList>) => {
+
   return (
     <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
-        <View style={styles.title}>
-          <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
-        </View>
-        <View style={styles.description}>
-          <Text style={styles.descriptionText}>{description}</Text>
-
-        </View>
-
+        <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
+        <Text style={styles.descriptionText}>{description}</Text>
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>{count}</Text>
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{price}</Text>
-          <Text style={styles.headerTotal}>{discount === 0 ? "-" : discount}</Text>
-          <Text style={styles.headerTotal}>{totalPrice}</Text>
+
+          {isDiscount && <Text style={styles.headerText}>{ discount || "-"}</Text>}
+
+          <Text style={styles.headerText}>{totalPrice}</Text>
         </View>
       </View>
     </View>

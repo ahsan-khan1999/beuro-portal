@@ -48,7 +48,7 @@ export async function request({ method, url, data, headers }) {
   try {
     response = await promise;
   } catch (error) {
-    toast.error(error?.response?.data?.message);
+    toast.error((error?.response?.data?.message));
 
     if (error?.response?.data?.code === 401) {
       logout();

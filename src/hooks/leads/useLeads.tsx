@@ -18,6 +18,8 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
@@ -28,6 +30,7 @@ const useLeads = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
+  const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -106,8 +109,7 @@ const useLeads = () => {
 
   // function for hnadling the add note
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -135,13 +137,18 @@ const useLeads = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
     ),
   };
 

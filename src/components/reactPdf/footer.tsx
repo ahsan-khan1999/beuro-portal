@@ -69,13 +69,13 @@ export const Footer = ({
   templateSettings,
 }: PdfPreviewFooterProps) => {
   const { companyName, email, phoneNumber, taxNumber, website } =
-  templateSettings?.firstColumn ?? {};
+    templateSettings?.firstColumn ?? {};
   const address = {
-    streetNumber:templateSettings?.secondColumn?.streetNumber,
-    postalCode:templateSettings?.secondColumn?.postCode,
+    streetNumber: templateSettings?.secondColumn?.streetNumber,
+    postalCode: templateSettings?.secondColumn?.postCode,
   }
   const bankDetails = {
-    bankName:templateSettings?.secondColumn?.bankName,
+    bankName: templateSettings?.secondColumn?.bankName,
   }
   // const { address, bankDetails } = documentDetails?.secondColumn ?? {};
   const {
@@ -94,7 +94,7 @@ export const Footer = ({
   } = templateSettings?.fourthColumn ?? {};
   const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 16);
   const accountNumber = insertBreaks(templateSettings?.secondColumn?.accountNumber, 16);
-  
+
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
   const {
     isFirstColumn,
@@ -192,16 +192,17 @@ export const Footer = ({
           {isBankName && (
             <Text style={styles.footerText}>{bankDetails?.bankName}</Text>
           )}
-          {isAccountNumber && (
-            <Text style={styles.footerText}>{accountNumber}</Text>
-          )}
-          {isIBAN && <Text style={styles.footerText}>{ibanNumber}</Text>}
           {isStreetNumber && (
             <Text style={styles.footerText}>{`${address?.streetNumber},`}</Text>
           )}
           {isPostCode && (
             <Text style={styles.footerText}>{`${address?.postalCode}`}</Text>
           )}
+          {isIBAN && <Text style={styles.footerText}>IBAN: {ibanNumber}</Text>}
+          {isAccountNumber && (
+            <Text style={styles.footerText}>Konto: {accountNumber}</Text>
+          )}
+
         </View>
       )}
       {isThirdColumn && (

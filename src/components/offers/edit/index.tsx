@@ -11,13 +11,15 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { useRouter } from "next/router";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useTranslation } from "next-i18next";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
   const { images } = useAppSelector((state) => state.image);
-
+  const { t: translate } = useTranslation()
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
@@ -30,8 +32,7 @@ const EditOffersDetails = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -51,8 +52,13 @@ const EditOffersDetails = () => {
         type={"Offer"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
     ),
   };
 
@@ -65,7 +71,7 @@ const EditOffersDetails = () => {
   const router = useRouter();
   let tab: EditComponentsType | undefined;
 
-  if(router.query?.tab){
+  if (router.query?.tab) {
     tab = +(router.query?.tab);
   }
 

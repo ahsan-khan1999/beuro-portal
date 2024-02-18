@@ -1,12 +1,25 @@
-import React, { SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import SignPad from "signature_pad";
 import { SignatureSubmittedSuccessFully } from "./signature-submitted-success";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { updateModalType, uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import {
+  updateModalType,
+  uploadFileToFirebase,
+} from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import Image from "next/image";
-import { blobToFile, dataURLtoBlob, smoothScrollToSection } from "@/utils/utility";
+import {
+  blobToFile,
+  dataURLtoBlob,
+  smoothScrollToSection,
+} from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import { EmailTemplate, Template, TemplateSettings } from "@/types/settings";
@@ -15,7 +28,15 @@ import { PdfProps, TemplateType } from "@/types";
 import toast from "react-hot-toast";
 import { signOffer } from "@/api/slices/offer/offerSlice";
 import { ModalType } from "@/enums/ui";
-import ReactPDF, { BlobProvider, Document, Font, Page, StyleSheet, View, usePDF } from "@react-pdf/renderer";
+import ReactPDF, {
+  BlobProvider,
+  Document,
+  Font,
+  Page,
+  StyleSheet,
+  View,
+  usePDF,
+} from "@react-pdf/renderer";
 import { Header } from "@/components/reactPdf/header";
 import { ContactAddress } from "@/components/reactPdf/contact-address";
 import { AddressDetails } from "@/components/reactPdf/address-details";
@@ -29,7 +50,7 @@ import { useRouter } from "next/router";
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 import { pdf as reactPdf } from "@react-pdf/renderer";
-
+import { ServiceTableDiscountRow } from "@/components/reactPdf/service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -78,31 +99,42 @@ const originalStrokeWidth = 1;
 const OfferSignedPdf = dynamic(() => import("@/components/offers/signed-pdf"), {
   ssr: false,
 });
-let mySignature: any = null
+let mySignature: any = null;
 
-export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
-  isSignatureDone, setOfferSignature, handleSignature, emailTemplateSettings, pdfData, setComponentMounted, offerSignature, systemSettings, templateSettings
-
-
-
+export const SignaturePad = ({
+  signature,
+  isCanvas,
+  setIsSignatureDone,
+  isSignatureDone,
+  setOfferSignature,
+  handleSignature,
+  emailTemplateSettings,
+  pdfData,
+  setComponentMounted,
+  offerSignature,
+  systemSettings,
+  templateSettings,
 }: {
-  signature?: string, isCanvas?: boolean, setIsSignatureDone?: SetStateAction<boolean>,
-  isSignatureDone?: boolean, setOfferSignature?: SetStateAction<any>, handleSignature?: (sign: any) => void
-  , emailTemplateSettings: EmailTemplate | null,
-  systemSettings: SystemSetting | null,
-  templateSettings: TemplateType | null,
-  offerSignature: string,
-  pdfData: PdfProps<any>,
-  setComponentMounted: SetStateAction<any>
-
+  signature?: string;
+  isCanvas?: boolean;
+  setIsSignatureDone?: SetStateAction<boolean>;
+  isSignatureDone?: boolean;
+  setOfferSignature?: SetStateAction<any>;
+  handleSignature?: (sign: any) => void;
+  emailTemplateSettings: EmailTemplate | null;
+  systemSettings: SystemSetting | null;
+  templateSettings: TemplateType | null;
+  offerSignature: string;
+  pdfData: PdfProps<any>;
+  setComponentMounted: SetStateAction<any>;
 }) => {
-  const dispatch = useAppDispatch()
-  const { t: translate } = useTranslation()
+  const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
   const [signatureHolder, setsignatureHolder] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { loading } = useAppSelector(state => state.global)
+  const { loading } = useAppSelector((state) => state.global);
   const resizeCanvas = () => {
     if (canvasRef.current && signaturePad) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -112,11 +144,11 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
       canvas.width = ow * scale;
       canvas.height = oh * scale;
 
-      const adjustedScale = scale < 1 ? (scale * 2) * 3 : scale;
+      const adjustedScale = scale < 1 ? scale * 2 * 3 : scale;
       const scaledStrokeWidth = originalStrokeWidth / adjustedScale;
 
       signaturePad.minWidth = scaledStrokeWidth;
-      signaturePad.maxWidth = (scaledStrokeWidth * 0.7);
+      signaturePad.maxWidth = scaledStrokeWidth * 0.7;
 
       // Redraw the signature from the existing data
       const data = signaturePad.toData();
@@ -126,7 +158,7 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
   };
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = pdfData?.headerDetails;
-  const { address, header, workDates } = pdfData?.movingDetails || {};
+  const { address, header, workDates, time } = pdfData?.movingDetails || {};
   const contactAddress = pdfData?.contactAddress;
   const serviceItem = pdfData?.serviceItem;
   const serviceItemFooter = pdfData?.serviceItemFooter;
@@ -134,7 +166,25 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
   const router = useRouter();
   const { action: pdfAction } = router.query;
   const acceptButtonRef = useRef<HTMLDivElement>(null);
-
+  const disscountTableRow = {
+    serviceTitle: "Discount",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   const pdfDoc = (
     <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
       <Page style={styles.body}>
@@ -149,15 +199,31 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates }} />
+          <AddressDetails {...{ address, header, workDates, time }} />
 
-          <ServiceTableHederRow />
-          {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index}
-              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
-
+          <ServiceTableHederRow isDiscount={isDiscount} />
+          {serviceItem?.map((item, index, arr) => (
+            <ServiceTableRow
+              {...item}
+              key={index}
+              pagebreak={
+                !pageBreakCondition
+                  ? serviceItem?.length === 1
+                    ? false
+                    : index === serviceItem?.length - 1
+                  : false
+              }
+              isDiscount={isDiscount}
             />
           ))}
+          {(isDiscount || serviceItemFooter?.isDiscount) && (
+            <ServiceTableDiscountRow
+              {...disscountTableRow}
+              key={Math.random()}
+              pagebreak={true}
+              isDiscount={isDiscount}
+            />
+          )}
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSettings}
@@ -200,9 +266,6 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
   //   }
   // }, [mySignature]);
 
-
-
-
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
       const sigPad = new SignPad(canvasRef.current, {
@@ -221,7 +284,6 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
 
   const handleSave = async (signedFile: any, loading: boolean) => {
     if (signaturePad) {
-
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
         setIsSubmitted(true);
@@ -230,8 +292,8 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
 
         const svgContent = signaturePad.toDataURL("image/png");
         const blob = dataURLtoBlob(svgContent);
-        const file = new File([blob], 'signature.png', { type: 'image/png' });
-        mySignature = file
+        const file = new File([blob], "signature.png", { type: "image/png" });
+        mySignature = file;
         let newPdf = (
           <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
             <Page style={styles.body}>
@@ -246,15 +308,31 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
               >
                 <ContactAddress {...{ ...contactAddress }} />
 
-                <AddressDetails {...{ address, header, workDates }} />
+                <AddressDetails {...{ address, header, workDates, time }} />
 
-                <ServiceTableHederRow />
-                {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index}
-                    pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
-
+                <ServiceTableHederRow isDiscount={isDiscount} />
+                {serviceItem?.map((item, index, arr) => (
+                  <ServiceTableRow
+                    {...item}
+                    key={index}
+                    pagebreak={
+                      !pageBreakCondition
+                        ? serviceItem?.length === 1
+                          ? false
+                          : index === serviceItem?.length - 1
+                        : false
+                    }
+                    isDiscount={isDiscount}
                   />
                 ))}
+                {(isDiscount || serviceItemFooter?.isDiscount) && (
+                  <ServiceTableDiscountRow
+                    {...disscountTableRow}
+                    key={Math.random()}
+                    pagebreak={true}
+                    isDiscount={isDiscount}
+                  />
+                )}
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSettings}
@@ -285,8 +363,8 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
               />
             </Page>
           </Document>
-        )
-        const blobPdf = await reactPdf(newPdf).toBlob()
+        );
+        const blobPdf = await reactPdf(newPdf).toBlob();
 
         // setOfferSignature && setOfferSignature(file)
         // setsignatureHolder(file as any)
@@ -294,7 +372,14 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         // updateInstance(pdfDoc);
         // }, 10);
 
-        const convertedFile = blobToFile(blobPdf, `${pdfData?.headerDetails?.offerNo + "-" + pdfData?.headerDetails?.companyName}.pdf` || "offer.pdf");
+        const convertedFile = blobToFile(
+          blobPdf,
+          `${
+            pdfData?.headerDetails?.offerNo +
+            "-" +
+            pdfData?.headerDetails?.companyName
+          }.pdf` || "offer.pdf"
+        );
         if (!svgContent) {
           toast.error("please sign first");
           return false;
@@ -310,21 +395,16 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
         }
-        return true
-
-
-
-
+        return true;
 
         // smoothScrollToSection("#acceptOffer")
 
         // Function to handle scrolling
 
-
         // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
-
-      } else toast.error("please sign first"); return false
-    } else return false
+      } else toast.error("please sign first");
+      return false;
+    } else return false;
   };
 
   const handleClear = () => {
@@ -339,57 +419,49 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     setComponentMounted(true);
   }, []);
   return (
-    pdfAction === "Accept" &&
-    <>
-      <div className="select-none mb-4">
-        <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
-          {!isSubmitted ? (
-            <canvas ref={canvasRef} className="w-full h-full"></canvas>
-          ) : (
-            <SignatureSubmittedSuccessFully />
-          )}
+    pdfAction === "Accept" && (
+      <>
+        <div className="select-none mb-4">
+          <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
+            {!isSubmitted ? (
+              <canvas ref={canvasRef} className="w-full h-full"></canvas>
+            ) : (
+              <SignatureSubmittedSuccessFully />
+            )}
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-between gap-x-3 my-2">
-        
-
-
-        <div
-          className="download-link flex justify-center max-w-[1040px] w-full"
-          id="gohere"
-        >
-          <BlobProvider document={pdfDoc}>
-            {({ blob, url, loading, error }) => {
-              return (
-                <div className="flex justify-between gap-x-3 my-2">
-                  <Button
-                    disabled={isSubmitted}
-                    className="bg-[#393939]  py-[7px] text-center text-white rounded-md shadow-md min-w-[220px]"
-
-                    inputType="button"
-                    id="signature"
-                    onClick={handleClear}
-                    text={translate("pdf.clear")}
-                  />
-                  <Button
-                    className={`mt-[0px]   ${ "bg-[#45C769] "
-                      } rounded-[4px] shadow-md  text-center text-white min-w-[220px]`}
-                    onClick={() =>
-                       handleSave(blob, loading)
-                    }
-                    inputType="button"
-                    id="signature"
-                    loading={offerLoading}
-                    text={pdfAction as string}
-                  />
-                </div>
-
-              );
-            }}
-          </BlobProvider>
-        </div>
-        {/* <button
+        <div className="flex justify-between gap-x-3 my-2">
+          <div
+            className="download-link flex justify-center max-w-[1040px] w-full"
+            id="gohere"
+          >
+            <BlobProvider document={pdfDoc}>
+              {({ blob, url, loading, error }) => {
+                return (
+                  <div className="flex justify-between gap-x-3 my-2">
+                    <Button
+                      disabled={isSubmitted}
+                      className="bg-[#393939]  py-[7px] text-center text-white rounded-md shadow-md min-w-[220px]"
+                      inputType="button"
+                      id="signature"
+                      onClick={handleClear}
+                      text={translate("pdf.clear")}
+                    />
+                    <Button
+                      className={`mt-[0px]   ${"bg-[#45C769] "} rounded-[4px] shadow-md  text-center text-white min-w-[220px]`}
+                      onClick={() => handleSave(blob, loading)}
+                      inputType="button"
+                      id="signature"
+                      loading={offerLoading}
+                      text={pdfAction as string}
+                    />
+                  </div>
+                );
+              }}
+            </BlobProvider>
+          </div>
+          {/* <button
           disabled={isSubmitted}
           onClick={handleClear}
           className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
@@ -405,9 +477,9 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
           text={translate("pdf.submit")}
           className="bg-[#393939]  text-center text-white rounded-md shadow-md w-full"
         /> */}
-
-      </div>
-    </>
+        </div>
+      </>
+    )
     // ||
     // <div className="select-none mb-4">
     //   <div className="relative border-[2px] border-[#A9A9A9] rounded-md bg-[#F5F5F5] h-[181.778px] w-full">
@@ -416,7 +488,6 @@ export const SignaturePad = ({ signature, isCanvas, setIsSignatureDone,
     // </div>
   );
 };
-
 
 const styles = StyleSheet.create({
   body: {

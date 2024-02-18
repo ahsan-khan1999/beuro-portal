@@ -131,9 +131,9 @@ export const generateLeadsServiceEditDetailsValidation = (
       .string()
       .notRequired(),
 
-    [LeadsServiceEditDetails.budget]: yup
-      .string()
-      .notRequired(),
+    // [LeadsServiceEditDetails.budget]: yup
+    //   .string()
+    //   .notRequired(),
 
     [LeadsServiceEditDetails.leadSource]: yup
       .string()
@@ -204,6 +204,6 @@ export const generateLeadAdditionalDetailsValidation = (
   return yup.object().shape({
     [LeadAdditionalDetails.additionlData]: yup
       .string()
-      .required(translate("validationMessages.required")),
+      .notRequired(),
   });
 };

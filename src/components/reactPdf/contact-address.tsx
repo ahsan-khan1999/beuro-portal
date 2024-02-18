@@ -17,67 +17,93 @@ export const ContactAddress = ({
   email,
   phone,
   gender,
-  mobile
-}: Partial<ContactDetailsProps>) => (
-  <View style={container}>
-    <View style={leftColumn}>
-      <Text style={textBase}>{GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}</Text>
-      <Text style={textBase}>{address?.streetWithNumber}</Text>
-      <Text style={textBase}>{`${address?.postalCode} ${Country[address?.city as keyof typeof Country] || ""}`}</Text>
-    </View>
-    <View style={rightColumn}>
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <Text
-          style={{
-            fontSize: 10,
-            fontWeight: 400,
-            fontStyle: "normal",
-            color: "#000",
-            marginRight: 10
-          }}
-        >
-          E-Mail:
+  mobile,
+  isReverseInfo,
+}: Partial<ContactDetailsProps>) => {
+  return (
+    <View
+      style={{
+        display: "flex",
+        flexDirection: isReverseInfo ? "row-reverse" : "row",
+        marginTop: 5,
+        padding: 20,
+      }}
+    >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: isReverseInfo ? "flex-end" : "flex-start",
+          rowGap: 0,
+          width: isReverseInfo ? "35%" : "65%",
+          marginLeft: isReverseInfo ? "30" : 0,
+        }}
+      >
+        <Text style={textBase}>
+          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
         </Text>
-        <Text style={textBase}>{email}</Text>
+        <Text style={textBase}>{address?.streetWithNumber}</Text>
+        <Text style={textBase}>{`${address?.postalCode} ${
+          Country[address?.city as keyof typeof Country] || ""
+        }`}</Text>
       </View>
+      <View
+        style={{
+          flexDirection: "column",
+          rowGap: 0,
+          width: isReverseInfo ? "65%" : "35%",
+        }}
+      >
+        {email && (
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 400,
+                fontStyle: "normal",
+                color: "#000",
+                marginRight: 1,
+              }}
+            >
+              E-Mail :
+            </Text>
+            <Text style={textBase}>{email}</Text>
+          </View>
+        )}
 
-      {
-        (phone !== "+" && phone) &&
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: 400,
-              fontStyle: "normal",
-              color: "#000",
-              marginRight: 10
-
-            }}
-          >
-            Telefon:
-          </Text>
-          <Text style={textBase}>{phone}</Text>
-        </View>
-      }
-      {
-        (mobile !== "+" && mobile) &&
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text
-            style={{
-              fontSize: 10,
-              fontWeight: 400,
-              fontStyle: "normal",
-              color: "#000",
-              width: 80,
-              marginRight: 10
-
-            }}
-          >
-            Handynummer:
-          </Text>
-          <Text style={textBase}>{mobile}</Text>
-        </View>
-      }
+        {phone !== "+" && phone && (
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 400,
+                fontStyle: "normal",
+                color: "#000",
+                marginRight: 1,
+              }}
+            >
+              Telefon :
+            </Text>
+            <Text style={textBase}>{phone}</Text>
+          </View>
+        )}
+        {mobile !== "+" && mobile && (
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 400,
+                fontStyle: "normal",
+                color: "#000",
+                marginRight: 1,
+              }}
+            >
+              Handynummer :
+            </Text>
+            <Text style={textBase}>{mobile}</Text>
+          </View>
+        )}
+      </View>
     </View>
-  </View >
-);
+  );
+};

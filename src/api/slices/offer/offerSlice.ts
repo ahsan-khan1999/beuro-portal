@@ -129,12 +129,6 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
             thunkApi.dispatch(setOfferDetails(objectToUpdate));
             return response?.data?.Offer;
         } catch (e: any) {
-            // if (Array.isArray(e?.data?.data?.address)) {
-            //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.address)
-            //     setErrors(setError, transformedValidationMessages, translate);
-            // } else {
-            // }
-
             setErrors(setError, e?.data?.data, translate);
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -175,7 +169,8 @@ export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
         try {
 
             const response = await apiServices.sendOfferEmail(data);
-            return true;
+            // return response?.data?.Offer;
+            return true
         } catch (e: any) {
             thunkApi.dispatch(setErrorMessage(e?.data?.message));
             return false;
@@ -406,6 +401,7 @@ const OfferSlice = createSlice({
             state.loading = true
         });
         builder.addCase(sendOfferEmail.fulfilled, (state, action) => {
+            if (action?.payload) state.offerDetails = action?.payload
             state.loading = false;
         });
         builder.addCase(sendOfferEmail.rejected, (state) => {

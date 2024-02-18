@@ -21,8 +21,8 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
   let taxPercentage = 0
-  const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
-
+  const remainingAmount = invoiceDetails?.total
+  
   const {
     register,
     handleSubmit,

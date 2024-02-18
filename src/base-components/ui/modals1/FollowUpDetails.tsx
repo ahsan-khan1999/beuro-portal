@@ -297,7 +297,7 @@ const FollowUpDetails = ({
               </div>
             </section>
 
-            <section className="mt-3 border-t border-[#000] border-opacity-20 pt-3">
+            <section className="mt-3 border-t border-[#000] border-opacity-10 pt-3">
               <div className="flex flex-col">
                 <article className="flex gap-x-[50px] items-center">
                   <h2 className="text-lg font-medium text-[#393939]">

@@ -19,7 +19,7 @@ const customerDetailData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
         id={translate("leads.tabs_headings.customer")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -67,8 +67,6 @@ const customerDetailData = ({
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-
       <div className="mt-5">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3  gap-y-5">
           <div>
@@ -76,9 +74,11 @@ const customerDetailData = ({
               {translate("leads.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {getKeyByValue(
-                staticEnums["CustomerType"],
-                leadDetails?.customerDetail?.customerType
+              {translate(
+                `customer_type.${getKeyByValue(
+                  staticEnums["CustomerType"],
+                  leadDetails?.customerDetail?.customerType
+                )}`
               )}
             </div>
           </div>
@@ -162,7 +162,9 @@ const customerDetailData = ({
                 {translate("leads.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {translate(`countries.${leadDetails?.customerDetail?.address?.country}`)}
+                {translate(
+                  `countries.${leadDetails?.customerDetail?.address?.country}`
+                )}
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ const ClassicCKEditor = ({
   data: string;
   onChange: (event: any, editor: CustomEditor) => void;
 }) => {
-  
+
   return (
     <CKEditor
       editor={CustomEditor}
@@ -24,6 +24,7 @@ const ClassicCKEditor = ({
       onBlur={(event, editor) => { }}
       onFocus={(event, editor) => { }}
       config={{
+       
         //   toolbar: [
         //     "undo",
         //     "redo",
@@ -37,6 +38,7 @@ const ClassicCKEditor = ({
         //     "blockQuote",
         //   ],
         toolbar: {
+
           items: [
             "undo",
             "redo",

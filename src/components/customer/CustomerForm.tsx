@@ -1,9 +1,7 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FormDataProps } from "@/types/customer";
-import Image from "next/image";
-import React, { SetStateAction } from "react";
-import editInfo from "@/assets/svgs/edit-customer-details.svg";
+import React from "react";
 import { useTranslation } from "next-i18next";
 
 const CustomerForm = ({
@@ -23,7 +21,7 @@ const CustomerForm = ({
         !isUpdate ? "border-primary" : "border-none"
       } w-full h-fit`}
     >
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
+      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("customers.details.heading")}
         </h2>

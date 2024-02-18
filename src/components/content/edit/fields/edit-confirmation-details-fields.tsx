@@ -17,7 +17,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-5",
+        containerClass: "",
         field: {
           type: Field.div,
           id: "div-field",
