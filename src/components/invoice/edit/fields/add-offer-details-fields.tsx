@@ -188,7 +188,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"number",
+              inputType:"tel",
               register,
               value:
                 type === "New Customer"
@@ -207,7 +207,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"number",
+              inputType:"tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",

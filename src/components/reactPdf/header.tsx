@@ -1,6 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderProps } from "@/types/pdf";
-import { HeaderLabel } from "@/utils/static";
+import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
 import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 import { useTranslation } from "next-i18next";
@@ -57,7 +57,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
+            {(fileType && HeaderLabelNr[fileType as keyof typeof HeaderLabel]) ||
               "Angebot"}
             Nr :
           </Text>

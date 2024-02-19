@@ -36,7 +36,7 @@ export interface LabelProps {
 }
 
 export interface InputProps extends BaseFieldProps<Field.input> {
-  inputType: "text" | "email" | "number";
+  inputType: "text" | "email" | "number" | "tel";
   value?: string;
   success?: boolean;
   register: UseFormRegister<FieldValues>;
