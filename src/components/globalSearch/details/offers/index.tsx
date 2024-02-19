@@ -21,11 +21,11 @@ export default function OffersDetailsTable({}) {
     <>
       <TableLayout>
         <TableHeadings />
-        <TableRows
+        {/* <TableRows
           dataToAdd={currentPageRows}
           openModal={handleNotes}
           handleImageUpload={handleImageUpload}
-        />
+        /> */}
         ,
       </TableLayout>
       {currentPageRows.length > 0 && (
