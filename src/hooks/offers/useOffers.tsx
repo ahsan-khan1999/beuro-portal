@@ -139,8 +139,7 @@ const useOffers = () => {
 
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
-    handleFilterChange(filter)
-
+    handleFilterChange(filter);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
