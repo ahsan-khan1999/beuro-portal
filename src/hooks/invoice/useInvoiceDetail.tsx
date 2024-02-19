@@ -247,12 +247,15 @@ export default function useInvoiceDetail() {
       />
     ),
   };
+
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const handleInvoiceStatusUpdate = async (
     id: string,
     status: string,
@@ -282,6 +285,7 @@ export default function useInvoiceDetail() {
           offerCreatedHandler();
     }
   };
+
   const handlePaymentStatusUpdate = async (
     id: string,
     status: string,
@@ -303,6 +307,7 @@ export default function useInvoiceDetail() {
       if (res?.payload) offerCreatedHandler();
     }
   };
+
   const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview";
   };
@@ -310,7 +315,7 @@ export default function useInvoiceDetail() {
   const handleInvoiceUpdate = () => {
     router.pathname = "/invoices/update-invoice";
     router.query = { invoice: invoiceDetails?.id };
-    updateQuery(router, router.locale as string)
+    updateQuery(router, router.locale as string);
   };
   return {
     invoiceDetails,
@@ -335,6 +340,6 @@ export default function useInvoiceDetail() {
     handleRecurringInvoiceEdit,
     loading,
     systemSettings,
-    handleInvoiceUpdate
+    handleInvoiceUpdate,
   };
 }

@@ -355,6 +355,6 @@ export interface LinkUploadProps {
   inputLink: string;
   onAddLink: (e?: React.FormEvent<HTMLFormElement>) => void;
   enteredLinks: string[];
-  onLinkDelete: (linkToDelete: string) => void;
+  onLinkDelete: (linkToDelete: number) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
 }

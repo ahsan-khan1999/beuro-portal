@@ -1849,7 +1849,7 @@
       "cancel": "Abgebrochen",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
-      "pending": "Anhängig"
+      "pending": "Entwurf"
     },
     "charts_labels": {
       "website": "Webseite",
@@ -2012,7 +2012,7 @@
     "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
-    "Pending": "Anhängig"
+    "Pending": "Entwurf"
   },
   "invoice_status": {
     "Pending": "Offen",
@@ -2021,7 +2021,7 @@
     "Open": "Offen"
   },
   "support_req_status": {
-    "pending": "anhängig",
+    "pending": "Entwurf",
     "resolved": "aufgelöst"
   },
   "payment_method": {
@@ -2041,17 +2041,17 @@
   },
   "email_status": {
     "Post": "Beitrag",
-    "Pending": "Anhängig",
+    "Pending": "Entwurf",
     "Sent": "Gesendet",
     "Failed": "Gescheitert"
   },
   "mail_tracker_status": {
-    "pending": "Anhängig",
+    "pending": "Entwurf",
     "opend": "Offen",
     "failed": "Fehlgeschlagen"
   },
   "support_request_status": {
-    "pending": "Anhängig",
+    "pending": "Entwurf",
     "resolved": "aufgelöst"
   },
   "customer_type": {

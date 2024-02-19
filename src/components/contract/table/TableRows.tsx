@@ -11,11 +11,14 @@ import { formatDateString } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
   dataToAdd,
   openModal,
   handleImageUpload,
+  handleContractStatusUpdate,
+  handlePaymentStatusUpdate,
 }: {
   dataToAdd: contractTableTypes[];
   openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
@@ -23,6 +26,12 @@ const TableRows = ({
     item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  handleContractStatusUpdate: (
+    id: string,
+    status: string,
+    type: string
+  ) => void;
+  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -30,19 +39,31 @@ const TableRows = ({
     [staticEnums.ContractSignedStatus.Deprecated]: "#FF0000",
     [staticEnums.ContractSignedStatus.Active]: "#45C769",
   };
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const contractStatus = [
+    `${translate("contract_status.Open")}`,
+    `${translate("contract_status.Confirmed")}`,
+    `${translate("contract_status.Cancelled")}`,
+  ];
+
   return (
-    <div>
+    <div className="h-screen">
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
             key={index}
-            onClick={() =>
-              router.push({
-                pathname: "/contract/pdf-preview",
-                query: { offerID: item?.id, isMail: true },
-              })
-            }
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
+            // onClick={() =>
+            //   router.push({
+            //     pathname: "/contract/pdf-preview",
+            //     query: { offerID: item?.id, isMail: true },
+            //   })
+            // }
+            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.contractNumber}</span>
             <span className="py-4 truncate">
@@ -57,7 +78,7 @@ const TableRows = ({
             <span className="py-4 mlg:hidden xLarge:block">
               {formatDateString(item.createdAt)}
             </span>
-            <span className="flex justify-center items-center">
+            <span className="flex justify-center items-center mr-1">
               <div
                 className={`bg-[${getEmailColor(
                   item?.emailStatus
@@ -66,22 +87,60 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            <span className="flex justify-center items-center">
-              <div
-                className={`bg-[${getPaymentTypeColor(item?.paymentType)}]
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
-              >
-                {translate(`payment_method.${item?.paymentType}`)}
-              </div>
+            <span className="py-4 flex items-center">
+              <DropDown
+                items={Object.keys(staticEnums["PaymentType"]).map(
+                  (item, index) => ({
+                    item: {
+                      label: paymentMethod[index],
+                      value: item,
+                    },
+                  })
+                )}
+                selectedItem={translate(`payment_method.${item.paymentType}`)}
+                onItemSelected={(status) => {
+                  handlePaymentStatusUpdate(item.id, status, "contracts");
+                }}
+                dropDownClassName={`${
+                  staticEnums["PaymentType"][item.paymentType] === 0
+                    ? "bg-[#45C769]"
+                    : "bg-[#4A13E7]"
+                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName=" min-w-[68.82px]"
+              />
             </span>
 
-            <span className="flex justify-center items-center ">
-              <div
-                className={`bg-[${getContractStatusColor(item.contractStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
-              >
-                {translate(`contract_status.${item.contractStatus}`)}
-              </div>
+            <span className="py-4 flex items-center ml-1">
+              <DropDown
+                items={Object.keys(staticEnums["ContractStatus"]).map(
+                  (item, index) => ({
+                    item: {
+                      label: contractStatus[index],
+                      value: item,
+                    },
+                  })
+                )}
+                selectedItem={translate(
+                  `contract_status.${item.contractStatus}`
+                )}
+                onItemSelected={(status) => {
+                  if (item.contractStatus !== status) {
+                    handleContractStatusUpdate(item.id, status, "contracts");
+                  }
+                }}
+                dropDownClassName={`${
+                  staticEnums["ContractStatus"][item.contractStatus] === 0
+                    ? "bg-[#4A13E7]"
+                    : staticEnums["ContractStatus"][item.contractStatus] === 1
+                    ? "bg-[#45C769]"
+                    : "bg-[#FF0000]"
+                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName=" min-w-[68.82px]"
+              />
             </span>
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
@@ -125,21 +184,20 @@ const TableRows = ({
               <span
                 className="py-4 flex justify-center items-center cursor-pointer "
                 onClick={(e) => {
-                  e.stopPropagation()
+                  e.stopPropagation();
                   item.signedContracts &&
-                    window.open(item.signedContracts[0].link)
-                }
-                }
+                    window.open(item.signedContracts[0].link);
+                }}
               >
                 <PdfIcon
                   pathClass={colorPicker[item?.signedContracts?.[0]?.status]}
                 />
               </span>
             )) || (
-                <span className="py-4 flex justify-center items-center cursor-pointer ">
-                  -
-                </span>
-              )}
+              <span className="py-4 flex justify-center items-center cursor-pointer ">
+                -
+              </span>
+            )}
             <span
               className="py-4 flex justify-center items-center cursor-pointer "
               onClick={(e) => openModal(item?.id, e)}
