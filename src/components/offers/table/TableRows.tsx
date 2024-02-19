@@ -2,7 +2,7 @@ import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
-import { getEmailColor, getMailStatusColor, getOfferStatusColor } from "@/utils/utility";
+import { getEmailColor, getMailStatusColor, getOfferStatusColor, getPaymentTypeColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
@@ -39,7 +39,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div className="">
       {dataToAdd?.map((item, index) => {
         return (
           <div
@@ -69,7 +69,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -91,6 +91,15 @@ const TableRows = ({
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName=" min-w-[68.82px]"
               />
+            </span> */}
+
+            <span className="py-4 flex justify-center items-center">
+              <div
+                className={`bg-[${getPaymentTypeColor(item.paymentType)}]
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+              >
+                {translate(`payment_method.${item.paymentType}`)}
+              </div>
             </span>
             {
               item.offerStatus === "Accepted" ?
@@ -104,30 +113,40 @@ const TableRows = ({
                     {translate(`offer_status.${item.offerStatus}`)}
                   </div>
                 </span> :
-                <span className="py-4 flex justify-center items-center ml-1">
-                  <DropDown
-                    items={Object.keys(staticEnums["OfferStatus"]).map(
-                      (item, index) => ({
-                        item: { label: itemsValue[index], value: item },
-                      })
-                    )}
-                    selectedItem={translate(`offer_status.${item.offerStatus}`)}
-                    onItemSelected={(status) => {
-                      handleOfferStatusUpdate(item.id, status, "offer");
+                // <span className="py-4 flex justify-center items-center ml-1">
+                //   <DropDown
+                //     items={Object.keys(staticEnums["OfferStatus"]).map(
+                //       (item, index) => ({
+                //         item: { label: itemsValue[index], value: item },
+                //       })
+                //     )}
+                //     selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                //     onItemSelected={(status) => {
+                //       handleOfferStatusUpdate(item.id, status, "offer");
+                //     }}
+                //     dropDownClassName={`${staticEnums["OfferStatus"][item.offerStatus] === 0
+                //       ? "bg-[#4A13E7]"
+                //       : staticEnums["OfferStatus"][item.offerStatus] === 1
+                //         ? "bg-[#45C769]"
+                //         : staticEnums["OfferStatus"][item.offerStatus] === 2
+                //           ? "bg-[#FF376F]"
+                //           : "bg-[#FF0000]"
+                //       } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                //     dropDownTextClassName="text-white text-base font-medium pe-2"
+                //     key={item.id}
+                //     dropDownIconClassName={`text-[#fff]`}
+                //     dropDownItemsContainerClassName="w-full"
+                //   />
+                // </span>
+                <span className="py-4 flex justify-center items-center">
+                  <div
+                    style={{
+                      backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
                     }}
-                    dropDownClassName={`${staticEnums["OfferStatus"][item.offerStatus] === 0
-                      ? "bg-[#4A13E7]"
-                      : staticEnums["OfferStatus"][item.offerStatus] === 1
-                        ? "bg-[#45C769]"
-                        : staticEnums["OfferStatus"][item.offerStatus] === 2
-                          ? "bg-[#FF376F]"
-                          : "bg-[#FF0000]"
-                      } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                    dropDownTextClassName="text-white text-base font-medium pe-2"
-                    key={item.id}
-                    dropDownIconClassName={`text-[#fff]`}
-                    dropDownItemsContainerClassName="w-full"
-                  />
+                    className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
+                  >
+                    {translate(`offer_status.${item.offerStatus}`)}
+                  </div>
                 </span>
             }
 

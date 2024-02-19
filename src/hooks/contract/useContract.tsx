@@ -214,9 +214,9 @@ const useContract = () => {
         })
       );
       if (res?.payload)
-        dispatch(
-          readContractDetails({ params: { filter: contractDetails?.id } })
-        ),
+        // dispatch(
+        //   readContractDetails({ params: { filter: contractDetails?.id } })
+        // ),
           offerCreatedHandler();
     }
   };
