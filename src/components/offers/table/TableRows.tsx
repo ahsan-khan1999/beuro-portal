@@ -2,7 +2,7 @@ import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
-import { getEmailColor, getMailStatusColor } from "@/utils/utility";
+import { getEmailColor, getMailStatusColor, getOfferStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
@@ -83,43 +83,53 @@ const TableRows = ({
                 onItemSelected={(status) => {
                   handlePaymentStatusUpdate(item.id, status, "offer");
                 }}
-                dropDownClassName={`${
-                  staticEnums["PaymentType"][item.paymentType] === 0
-                    ? "bg-[#45C769]"
-                    : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                dropDownClassName={`${staticEnums["PaymentType"][item.paymentType] === 0
+                  ? "bg-[#45C769]"
+                  : "bg-[#4A13E7]"
+                  } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName=" min-w-[68.82px]"
               />
             </span>
-
-            <span className="py-4 flex justify-center items-center ml-1">
-              <DropDown
-                items={Object.keys(staticEnums["OfferStatus"]).map(
-                  (item, index) => ({
-                    item: { label: itemsValue[index], value: item },
-                  })
-                )}
-                selectedItem={translate(`offer_status.${item.offerStatus}`)}
-                onItemSelected={(status) => {
-                  handleOfferStatusUpdate(item.id, status, "offer");
-                }}
-                dropDownClassName={`${
-                  staticEnums["OfferStatus"][item.offerStatus] === 0
-                    ? "bg-[#4A13E7]"
-                    : staticEnums["OfferStatus"][item.offerStatus] === 1
-                    ? "bg-[#45C769]"
-                    : staticEnums["OfferStatus"][item.offerStatus] === 2
-                    ? "bg-[#FF376F]"
-                    : "bg-[#FF0000]"
-                } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                key={item.id}
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
-              />
-            </span>
+            {
+              item.offerStatus === "Accepted" ?
+                <span className="py-4 flex justify-center items-center">
+                  <div
+                    style={{
+                      backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
+                    }}
+                    className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
+                  >
+                    {translate(`offer_status.${item.offerStatus}`)}
+                  </div>
+                </span> :
+                <span className="py-4 flex justify-center items-center ml-1">
+                  <DropDown
+                    items={Object.keys(staticEnums["OfferStatus"]).map(
+                      (item, index) => ({
+                        item: { label: itemsValue[index], value: item },
+                      })
+                    )}
+                    selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                    onItemSelected={(status) => {
+                      handleOfferStatusUpdate(item.id, status, "offer");
+                    }}
+                    dropDownClassName={`${staticEnums["OfferStatus"][item.offerStatus] === 0
+                      ? "bg-[#4A13E7]"
+                      : staticEnums["OfferStatus"][item.offerStatus] === 1
+                        ? "bg-[#45C769]"
+                        : staticEnums["OfferStatus"][item.offerStatus] === 2
+                          ? "bg-[#FF376F]"
+                          : "bg-[#FF0000]"
+                      } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                    dropDownTextClassName="text-white text-base font-medium pe-2"
+                    key={item.id}
+                    dropDownIconClassName={`text-[#fff]`}
+                    dropDownItemsContainerClassName="w-full"
+                  />
+                </span>
+            }
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"
