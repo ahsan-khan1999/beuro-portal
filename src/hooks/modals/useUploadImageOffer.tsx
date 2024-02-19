@@ -67,10 +67,11 @@ export const useUploadImageOffer = (
   const handleVideoAdd = (attachement?: Attachement[]) => {
     if (attachement) setEnteredLinks({ ...enteredLinks, video: [...attachement] });
   };
-  const handleLinkDelete = (linkToDelete: string) => {
+  const handleLinkDelete = (linkToDelete: number) => {
     const { links } = enteredLinks
-    const updatedLinks = links.filter((item: string) => item !== linkToDelete);
-    setEnteredLinks({ ...enteredLinks, links: updatedLinks });
+    const linkList =[...links] 
+    linkList?.splice(linkToDelete, 1);
+    setEnteredLinks({ ...enteredLinks, links: linkList });
   };
 
   const handleAttachementDelete = (attachementsToDelete: string) => {

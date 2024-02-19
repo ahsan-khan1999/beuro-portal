@@ -11,7 +11,10 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   readContract,
+  readContractDetails,
   setContractDetails,
+  updateContractPaymentStatus,
+  updateContractStatus,
 } from "@/api/slices/contract/contractSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
@@ -30,7 +33,7 @@ const useContract = () => {
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
 
   const { query } = useRouter();
 
@@ -42,7 +45,7 @@ const useContract = () => {
     //   $lte: FiltersDefaultValues.None,
     // },
     status: FiltersDefaultValues.None,
-    leadSource: FiltersDefaultValues.None
+    leadSource: FiltersDefaultValues.None,
   });
   const totalItems = totalCount;
 
@@ -52,7 +55,9 @@ const useContract = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readContract({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+    dispatch(
+      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Contract);
       }
@@ -88,7 +93,6 @@ const useContract = () => {
   // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
-
   };
 
   const handleImageUpload = (
@@ -108,6 +112,11 @@ const useContract = () => {
     }
   };
 
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    handleFilterChange(filter)
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -117,7 +126,12 @@ const useContract = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+      />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -141,36 +155,87 @@ const useContract = () => {
   };
 
   useEffect(() => {
-
-
     if (query?.filter) {
-      const statusValue = staticEnums["ContractStatus"][query?.filter as string];
+      const statusValue =
+        staticEnums["ContractStatus"][query?.filter as string];
       setFilter({
         ...filter,
-        status: [statusValue?.toString()]
+        status: [statusValue?.toString()],
       });
-      dispatch(readContract({ params: { filter: { ...filter, status: [staticEnums["ContractStatus"][query?.filter as string]] }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-        }
-      );
+      dispatch(
+        readContract({
+          params: {
+            filter: {
+              ...filter,
+              status: [staticEnums["ContractStatus"][query?.filter as string]],
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+      });
     } else {
       setFilter({
         ...filter,
-        status: "None"
+        status: "None",
       });
-      dispatch(readContract({ params: { filter: { ...filter, status: "None" }, page: currentPage, size: 10 } })).then(
-        (response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-        }
-      );
+      dispatch(
+        readContract({
+          params: {
+            filter: { ...filter, status: "None" },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+      });
     }
-
   }, [currentPage, query?.filter]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const handleContractStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "contracts") {
+      const res = await dispatch(
+        updateContractStatus({
+          data: {
+            id: id,
+            contractStatus: staticEnums["ContractStatus"][status],
+          },
+        })
+      );
+      if (res?.payload)
+        dispatch(
+          readContractDetails({ params: { filter: contractDetails?.id } })
+        ),
+          offerCreatedHandler();
+    }
+  };
+
+  const handlePaymentStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "contracts") {
+      const res = await dispatch(
+        updateContractPaymentStatus({
+          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+        })
+      );
+      if (res?.payload) offerCreatedHandler();
+    }
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -183,6 +248,8 @@ const useContract = () => {
     filter,
     setFilter,
     loading,
+    handleContractStatusUpdate,
+    handlePaymentStatusUpdate,
   };
 };
 

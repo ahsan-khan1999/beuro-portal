@@ -17,7 +17,13 @@ import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
-import { readOffer, setOfferDetails } from "@/api/slices/offer/offerSlice";
+import {
+  readOffer,
+  readOfferDetails,
+  setOfferDetails,
+  updateOfferStatus,
+  updatePaymentStatus,
+} from "@/api/slices/offer/offerSlice";
 import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
@@ -38,7 +44,7 @@ const useOffers = () => {
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -131,6 +137,11 @@ const useOffers = () => {
     }
   };
 
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    handleFilterChange(filter);
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -140,7 +151,12 @@ const useOffers = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+      />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -209,6 +225,42 @@ const useOffers = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const handleOfferStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "offer") {
+      const res = await dispatch(
+        updateOfferStatus({
+          data: {
+            id: id,
+            offerStatus: staticEnums["OfferStatus"][status],
+          },
+        })
+      );
+      if (res?.payload)
+        dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
+          offerCreatedHandler();
+    }
+  };
+
+  const handlePaymentStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "offer") {
+      const res = await dispatch(
+        updatePaymentStatus({
+          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+        })
+      );
+      if (res?.payload) offerCreatedHandler();
+    }
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -221,6 +273,8 @@ const useOffers = () => {
     filter,
     setFilter,
     loading,
+    handleOfferStatusUpdate,
+    handlePaymentStatusUpdate,
   };
 };
 

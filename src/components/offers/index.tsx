@@ -6,6 +6,7 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
 import { useEmptyStates } from "@/utils/hooks";
+import useOfferDetails from "@/hooks/offers/useOfferDetails";
 
 export default function Offers() {
   const {
@@ -20,6 +21,8 @@ export default function Offers() {
     setFilter,
     handleFilterChange,
     loading,
+    handleOfferStatusUpdate,
+    handlePaymentStatusUpdate,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -27,6 +30,8 @@ export default function Offers() {
       dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
+      handleOfferStatusUpdate={handleOfferStatusUpdate}
+      handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
     currentPageRows?.length > 0,
     loading
