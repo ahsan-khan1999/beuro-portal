@@ -45,7 +45,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "customerName",
               name: "customerName",
-              placeholder: "Rahal Ahmed",
+              placeholder: "Customer Name",
               register,
             },
           },
@@ -132,7 +132,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.input,
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "number",
+              inputType: "tel",
               id: "phoneNumber",
               name: "phoneNumber",
               placeholder: "+49 445612 2112",
@@ -149,7 +149,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "number",
+              inputType: "tel",
               id: "mobileNumber",
               name: "mobileNumber",
               placeholder: "+49 445612 2112",

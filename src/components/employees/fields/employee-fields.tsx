@@ -105,7 +105,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               disabled: isUpdate,
-              inputType:"number",
+              inputType:"tel",
               register,
               value: employeeDetails && employeeDetails?.phoneNumber,
             },
@@ -124,7 +124,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               }`,
               id: "mobileNumber",
               name: "mobileNumber",
-              inputType:"number",
+              inputType:"tel",
 
               disabled: isUpdate,
               register,

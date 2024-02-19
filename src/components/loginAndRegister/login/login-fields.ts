@@ -161,7 +161,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               type: Field.input,
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"number",
+              inputType:"tel",
               register,
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
 
@@ -178,7 +178,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"number",
+              inputType:"tel",
               id: "mobileNumber",
               name: "mobileNumber",
               register,
