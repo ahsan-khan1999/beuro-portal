@@ -12,7 +12,6 @@ import {
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
-import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 
 const TableRows = ({
@@ -148,7 +147,7 @@ const TableRows = ({
             <span
               className="py-4 flex justify-center items-center"
               onClick={(e) => {
-                e.stopPropagation()
+                e.stopPropagation();
                 if (!invoiceDetails?.isInvoiceRecurring) {
                   handleInvoiceEdit(item);
                 } else {

@@ -41,7 +41,7 @@ export default function useOfferDetails() {
   const router = useRouter();
 
   const { systemSettings } = useAppSelector((state) => state.settings);
-  const isMail  = Boolean(router.query?.isMail);
+  const isMail = Boolean(router.query?.isMail);
 
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
@@ -52,7 +52,7 @@ export default function useOfferDetails() {
     localStoreUtil.remove_data("contractComposeEmail");
 
     if (id) {
-      dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(readOfferDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setOfferDetails(res.payload));
@@ -178,7 +178,6 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
-
   };
 
   const offerCreatedHandler = () => {
@@ -188,7 +187,6 @@ export default function useOfferDetails() {
   const handleUpdateAdditionalDetailsModal = () => {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
-
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -244,6 +242,7 @@ export default function useOfferDetails() {
       dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
     }
   };
+
   return {
     offerDetails,
     renderModal,
@@ -261,6 +260,6 @@ export default function useOfferDetails() {
     handleSendByPost,
     handleUpdateDiscount,
     systemSettings,
-    handleUpdateAdditionalDetailsModal
+    handleUpdateAdditionalDetailsModal,
   };
 }

@@ -10,7 +10,6 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { ContractDetailCardProps } from "@/types/contract";
-import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
