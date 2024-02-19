@@ -240,9 +240,9 @@ const useOffers = () => {
           },
         })
       );
-      if (res?.payload)
-        dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
-          offerCreatedHandler();
+      if (res?.payload) offerCreatedHandler();
+        // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
+        
     }
   };
 
