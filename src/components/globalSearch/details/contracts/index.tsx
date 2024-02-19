@@ -18,21 +18,22 @@ export default function ContractDetailsTable() {
     loading,
   } = useContract();
 
-  const CurrentComponent = useEmptyStates(
-    <TableRows
-      dataToAdd={currentPageRows}
-      handleImageUpload={handleImageUpload}
-      openModal={handleNotes}
-    />,
-    currentPageRows.length > 0,
-    loading
-  );
+  // const CurrentComponent = useEmptyStates(
+  //   <TableRows
+  //     dataToAdd={currentPageRows}
+  //     handleImageUpload={handleImageUpload}
+  //     openModal={handleNotes}
+
+  //   />,
+  //   currentPageRows.length > 0,
+  //   loading
+  // );
 
   return (
     <>
       <TableLayout>
         <TableHeadings />
-        {CurrentComponent}
+        {/* {CurrentComponent} */}
       </TableLayout>
       {currentPageRows.length > 0 && (
         <Pagination

@@ -845,3 +845,19 @@ export const getCurrentMonth = () => {
   const currentDate = new Date();
   return currentDate.getMonth() + 1;
 };
+
+export const downloadFile = (url:string) => {
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = getFileNameFromUrl(url);
+      link.click();
+      URL.revokeObjectURL(blobUrl); 
+    })
+    .catch((error) => {
+      console.error('Error downloading file:', error);
+    });
+};

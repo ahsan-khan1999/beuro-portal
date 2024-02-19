@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 import { contractTableTypes } from "./contract";
 import { User } from ".";
 import { ContentTableRowTypes } from "./content";
-import { DateRangeProps } from './form';
+import { DateRangeProps } from "./form";
 import { OfferServiceDetails } from "./offers";
 import { AddressID } from "./leads";
 import { Plan } from "./admin/plans";
@@ -30,9 +30,6 @@ export interface InvoiceTableRowTypes {
   customerDetail: Customers;
   total: number;
   content: ContentTableRowTypes;
-
-  
-
 }
 
 // Inovice details table
@@ -46,8 +43,7 @@ export interface InvoiceDetailsTableRowTypes {
   payment: string;
   status: string;
   type?: string;
-  customerDetail: Customers
-
+  customerDetail: Customers;
 }
 
 // Receipt details table
@@ -61,8 +57,7 @@ export interface ReceiptDetailsTableRowTypes {
   payment: string;
   emailStatus: string;
   type?: string;
-  customerDetail: Customers
-
+  customerDetail: Customers;
 }
 
 export interface SubInvoiceTableRowTypes {
@@ -82,7 +77,7 @@ export interface SubInvoiceTableRowTypes {
   isInvoiceRecurring: boolean;
   title: string;
   additionalDetails: string;
-  customerDetail: Customers
+  customerDetail: Customers;
 }
 
 export interface InvoiceEmptyStateType {
@@ -101,7 +96,7 @@ export interface InvoiceCardContentProps {
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
   currency?: string;
-  handleInvoiceEdit?: () => void
+  handleInvoiceEdit?: () => void;
 }
 
 export interface InvoiceDetailsTableProps {
@@ -125,8 +120,7 @@ export interface PdfSubInvoiceTypes {
   additionalDetails?: string;
   attachement?: string;
   createdBy: User;
-  customerDetail: Customers
-
+  customerDetail: Customers;
 }
 
 export interface InvoiceTableRowTypesPdf {
@@ -161,12 +155,10 @@ export interface InvoiceTableRowTypesPdf {
   discountType: 0 | 1;
   additionalDetails: string;
   content: ContentTableRowTypes;
-
 }
 
-
 export interface InvoiceDetailTableRowTypes {
-  amount:number;
+  amount: number;
   id: string;
   invoiceNumber: string;
   paidAmount: string;
@@ -202,21 +194,18 @@ export interface InvoiceDetailTableRowTypes {
   discountDescription: string;
   discountType: 0 | 1;
   additionalDetails: string;
-
-
 }
-
 
 interface Customers {
   id: string;
   refID: string;
-  createdAt: string
+  createdAt: string;
   fullName: string;
   email: string;
   phoneNumber: string;
   date: string;
   mobileNumber: string;
-  gender: number
+  gender: number;
 
   status?: string;
   editImg?: string;
@@ -226,14 +215,14 @@ interface Customers {
   mobile: string;
   address: CustomerAddress;
   edit?: boolean;
-  logo: string
-  plan?: Plan
-  createdBy?: User
+  logo: string;
+  plan?: Plan;
+  createdBy?: User;
 }
 
 interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string;
-  city?: string
+  city?: string;
 }

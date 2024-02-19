@@ -57,7 +57,7 @@ export const LinkUpload = ({
             key={index}
             className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-2 mt-2"
           >
-            <Link href={link} target="_blank" className="text-base font-normal underline truncate max-w-[500px]">
+            <Link href={link} target="_blank" className="text-[#0000EE] text-base font-normal underline truncate max-w-[500px]">
               {link}
             </Link>
 
@@ -68,7 +68,7 @@ export const LinkUpload = ({
                 className="cursor-pointer"
                 width={16}
                 height={20}
-                onClick={() => onLinkDelete(link)}
+                onClick={() => onLinkDelete(index)}
               />
             </div>
           </div>
