@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import { formatDateReverse, getFileNameFromUrl, getMailStatusColor } from "@/utils/utility";
 import Link from "next/link";
+import { Pdf } from '../../types/emailTracker';
 
 const DetailsData = ({
   handleConfirmDeletion,
@@ -153,7 +154,7 @@ const DetailsData = ({
             return (
               <>
                 <Link
-                  href={item || ""}
+                  href={typeof item === "string" ? item : item?.href}
                   target="_blank"
                   className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
                 >
@@ -163,7 +164,7 @@ const DetailsData = ({
                     className=" mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
-                    {getFileNameFromUrl(item,item?.length)}
+                    {getFileNameFromUrl(typeof item === "string" ? item : item?.href, typeof item === "string" ? item?.length : item?.href?.length)}
                   </span>
                 </Link>
                 &nbsp;&nbsp;
