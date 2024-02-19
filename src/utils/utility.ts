@@ -840,3 +840,8 @@ export function validateUrl(url: string, translate: TFunction) {
   }
   return { isValid: true, message: '' };
 }
+
+export const getCurrentMonth = () => {
+  const currentDate = new Date();
+  return currentDate.getMonth() + 1;
+};

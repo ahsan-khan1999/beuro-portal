@@ -19,6 +19,7 @@ import leadsPngIcon from "@/assets/pngs/leads.png";
 import offersPngIcon from "@/assets/pngs/offers.png";
 import invoiceIcon from "@/assets/pngs/invoice.png";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { getCurrentMonth } from "@/utils/utility";
 
 interface ActionType {
   type: string;
@@ -53,7 +54,7 @@ const AdminDashboard = () => {
   });
 
   const [filter, setFilter] = useState<FilterType>({
-    month: 1,
+    month: getCurrentMonth(),
   });
   const dispatch = useAppDispatch();
 

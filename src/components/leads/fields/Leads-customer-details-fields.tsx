@@ -123,7 +123,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
 
-              inputType: "number",
+              inputType: "tel",
               register,
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
@@ -142,7 +142,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               id: "mobileNumber",
               name: "mobileNumber",
               register,
-              inputType: "number",
+              inputType: "tel",
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
             },

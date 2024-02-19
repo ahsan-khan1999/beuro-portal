@@ -61,7 +61,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"number",
+              inputType:"tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
