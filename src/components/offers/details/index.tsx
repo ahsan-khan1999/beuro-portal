@@ -23,7 +23,7 @@ const OfferDetails = () => {
     handleUpdateDiscount,
     systemSettings,
   } = useOfferDetails();
-  
+
   return (
     <Layout>
       {/* {loading ? (

@@ -20,6 +20,8 @@ export default function Contract() {
     filter,
     setFilter,
     loading,
+    handleContractStatusUpdate,
+    handlePaymentStatusUpdate,
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
@@ -27,6 +29,8 @@ export default function Contract() {
       dataToAdd={currentPageRows}
       handleImageUpload={handleImageUpload}
       openModal={handleNotes}
+      handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+      handleContractStatusUpdate={handleContractStatusUpdate}
     />,
     currentPageRows.length > 0,
     loading
