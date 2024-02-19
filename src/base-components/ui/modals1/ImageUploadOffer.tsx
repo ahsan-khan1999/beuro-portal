@@ -60,7 +60,8 @@ const ImagesUploadOffer = ({
         fileSupported="PNG, JPEG, JPG, WEBP "
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_image")}
+
         setAttachements={handleimageAdd}
       />
     </>,
@@ -80,7 +81,8 @@ const ImagesUploadOffer = ({
         fileSupported="MP4, MOV, AVI, WEBM "
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_video")}
+
         setAttachements={handleVideoAdd}
       />
     </div>,
@@ -117,7 +119,8 @@ const ImagesUploadOffer = ({
         fileSupported="Pdf, ODT, DOC, XLXS "
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_attachment")}
+
         setAttachements={handleAttachementAdd}
       />
     </div>,

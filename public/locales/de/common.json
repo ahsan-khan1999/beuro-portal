@@ -1197,7 +1197,10 @@
       "attachement_title": "20 Anhänge können hochgeladen werden",
       "attachement_sub_title": "Anhänge sollten maximal 20 sein, Dateigröße bis zu 10MB",
       "link_title": "Link hinzufügen",
-      "link_sub_title": "Die Anzahl der Links sollte maximal 20 betragen, die Dateigröße bis zu 10 MB."
+      "link_sub_title": "Die Anzahl der Links sollte maximal 20 betragen, die Dateigröße bis zu 10 MB.",
+      "add_image":"Bild hinzufügen",
+      "add_video":"Video hinzufügen",
+      "add_attachment":"Anhang hinzufügen"
     },
     "delete_modal": {
       "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",

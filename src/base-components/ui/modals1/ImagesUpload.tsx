@@ -62,10 +62,11 @@ const ImagesUpload = ({
       <ImageField
         id="attachement"
         attachements={enteredLinks?.images}
-        fileSupported="Pdf, ODT, DOC, XLXS "
+        fileSupported="PNG, JPEG, JPG, WEBP "
+
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_image")}
         setAttachements={handleimageAdd}
       />
     </>,
@@ -82,10 +83,12 @@ const ImagesUpload = ({
       <VideoField
         id="attachement"
         attachements={enteredLinks?.video}
-        fileSupported="Pdf, ODT, DOC, XLXS "
+        fileSupported="MP4, MOV, AVI, WEBM "
+
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_video")}
+
         setAttachements={handleVideoAdd}
       />
     </div>,
@@ -122,7 +125,7 @@ const ImagesUpload = ({
         fileSupported="Pdf, ODT, DOC, XLXS "
         isAttachement={true}
         isOpenedFile={false}
-        text="Add Attachments"
+        text={translate("common.images_modal.add_attachment")}
         setAttachements={handleAttachementAdd}
       />
     </div>,
@@ -170,7 +173,7 @@ const ImagesUpload = ({
               onClick={onSubmit}
               loading={loading || loadingGlobal}
               disabled={loadingGlobal}
-              
+
             />
           </div>
         </div>
