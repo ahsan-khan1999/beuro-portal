@@ -83,7 +83,8 @@ export const ServicesTotalAmount = ({
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
   const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
   const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
-
+  console.log(calculatedTax,"calculatedTax",taxType,"subTotal",subTotal);
+  
   const totalDiscount = !isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)
   return (
     <View style={styles.container}>
