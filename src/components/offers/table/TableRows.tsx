@@ -49,7 +49,7 @@ const TableRows = ({
         return (
           <div
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(60px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(60px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(70px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(60px,_3fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(60px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(70px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.offerNumber}</span>
             <span className="py-4 truncate">
@@ -74,7 +74,7 @@ const TableRows = ({
               </div>
             </span>
 
-            {/* <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center ml-1">
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -88,26 +88,27 @@ const TableRows = ({
                 onItemSelected={(status) => {
                   handlePaymentStatusUpdate(item.id, status, "offer");
                 }}
-                dropDownClassName={`${staticEnums["PaymentType"][item.paymentType] === 0
-                  ? "bg-[#45C769]"
-                  : "bg-[#4A13E7]"
-                  } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                dropDownClassName={`${
+                  staticEnums["PaymentType"][item.paymentType] === 0
+                    ? "bg-[#45C769]"
+                    : "bg-[#4A13E7]"
+                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[68.82px]"
+                dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
               />
-            </span> */}
+            </span>
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
             {item.offerStatus === "Accepted" ? (
-              <span className="py-4 flex justify-center items-center">
+              <span className="py-4 ml-1">
                 <div
                   style={{
                     backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
@@ -118,41 +119,43 @@ const TableRows = ({
                 </div>
               </span>
             ) : (
-              // <span className="py-4 flex justify-center items-center ml-1">
-              //   <DropDown
-              //     items={Object.keys(staticEnums["OfferStatus"]).map(
-              //       (item, index) => ({
-              //         item: { label: itemsValue[index], value: item },
-              //       })
-              //     )}
-              //     selectedItem={translate(`offer_status.${item.offerStatus}`)}
-              //     onItemSelected={(status) => {
-              //       handleOfferStatusUpdate(item.id, status, "offer");
-              //     }}
-              //     dropDownClassName={`${staticEnums["OfferStatus"][item.offerStatus] === 0
-              //       ? "bg-[#4A13E7]"
-              //       : staticEnums["OfferStatus"][item.offerStatus] === 1
-              //         ? "bg-[#45C769]"
-              //         : staticEnums["OfferStatus"][item.offerStatus] === 2
-              //           ? "bg-[#FF376F]"
-              //           : "bg-[#FF0000]"
-              //       } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
-              //     dropDownTextClassName="text-white text-base font-medium pe-2"
-              //     key={item.id}
-              //     dropDownIconClassName={`text-[#fff]`}
-              //     dropDownItemsContainerClassName="w-full"
-              //   />
-              // </span>
-              <span className="py-4 flex justify-center items-center">
-                <div
-                  style={{
-                    backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
+              <div className="py-4 flex justify-center items-center ml-1">
+                <DropDown
+                  items={Object.keys(staticEnums["OfferStatus"]).map(
+                    (item, index) => ({
+                      item: { label: itemsValue[index], value: item },
+                    })
+                  )}
+                  selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                  onItemSelected={(status) => {
+                    handleOfferStatusUpdate(item.id, status, "offer");
                   }}
-                  className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
-                >
-                  {translate(`offer_status.${item.offerStatus}`)}
-                </div>
-              </span>
+                  dropDownClassName={`${
+                    staticEnums["OfferStatus"][item.offerStatus] === 0
+                      ? "bg-[#4A13E7]"
+                      : staticEnums["OfferStatus"][item.offerStatus] === 1
+                      ? "bg-[#45C769]"
+                      : staticEnums["OfferStatus"][item.offerStatus] === 2
+                      ? "bg-[#FF376F]"
+                      : "bg-[#FF0000]"
+                  } min-w-[90px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  key={item.id}
+                  dropDownIconClassName={`text-[#fff]`}
+                  dropDownItemsContainerClassName="min-w-[90px] w-full text-center"
+                />
+              </div>
+
+              // <span className="py-4 flex justify-center items-center">
+              //   <div
+              //     style={{
+              //       backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
+              //     }}
+              //     className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
+              //   >
+              //     {translate(`offer_status.${item.offerStatus}`)}
+              //   </div>
+              // </span>
             )}
 
             <span

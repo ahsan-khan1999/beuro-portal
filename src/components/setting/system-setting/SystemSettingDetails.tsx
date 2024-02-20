@@ -97,7 +97,7 @@ const SystemSettingDetails = ({
           daysLimit: Number(systemSetting?.daysLimit),
           offerReminderFrequency: Number(systemSetting?.offerReminderFrequency),
           secondWarningDays: Number(systemSetting?.secondWarningDays),
-          thirdWarningDays: Number(systemSetting?.thirdWarningDays) ,
+          thirdWarningDays: Number(systemSetting?.thirdWarningDays),
           reminderText: systemSetting?.reminderText,
         },
         translate,
@@ -158,12 +158,12 @@ const SystemSettingDetails = ({
         </div>
       </SettingLayout>
 
-      <div className="mt-2">
+      {/* <div className="mt-2">
         <ConnectWithBuro
           systemSetting={systemSetting}
           setSystemSetting={setSystemSetting}
         />
-      </div>
+      </div> */}
 
       <div className="my-3 float-right">
         <Button

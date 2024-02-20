@@ -52,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div>
+    <div className="overflow-visible">
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
@@ -110,7 +110,7 @@ const TableRows = ({
                   } min-w-[70px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
                   dropDownTextClassName="text-white text-base font-medium pe-2"
                   dropDownIconClassName={`text-[#fff]`}
-                  dropDownItemsContainerClassName=" min-w-[70px] w-fit"
+                  dropDownItemsContainerClassName=" min-w-[70px] w-full text-center"
                 />
               </div>
             </span>
@@ -139,11 +139,11 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } min-w-[90px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                } min-w-[90px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 key={item.id}
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName="w-full text-center"
               />
             </span>
             <span

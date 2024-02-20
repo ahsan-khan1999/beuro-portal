@@ -37,24 +37,28 @@ export default function Contract() {
   );
 
   return (
-    <div className="relative">
+    <div>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
-      <div className="absolute right-0 bottom-6">
-        {currentPageRows.length > 0 && (
-          <Pagination
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-          />
-        )}
+
+      <div className="relative">
+        <TableLayout>
+          <TableHeadings />
+
+          {CurrentComponent}
+        </TableLayout>
+        <div className="absolute right-0 mt-1">
+          {currentPageRows.length > 0 && (
+            <Pagination
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </div>
       </div>
       {renderModal()}
     </div>

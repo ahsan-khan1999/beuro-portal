@@ -26,7 +26,7 @@ const TableHeadings = () => {
       <span className="flex justify-center items-center font-medium text-[#8F8F8F] ">
         {translate("contracts.table_headings.payment")}
       </span>
-      <span className="flex justify-center items-center font-medium text-[#8F8F8F] ">
+      <span className="font-medium text-[#8F8F8F]">
         {translate("contracts.table_headings.status")}
       </span>
       <span className="font-medium text-[#8F8F8F] flex items-center justify-center">

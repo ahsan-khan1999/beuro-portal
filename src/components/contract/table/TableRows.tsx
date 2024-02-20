@@ -52,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="">
+    <div className="overflow-y-visible">
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
@@ -87,7 +87,7 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            {/* <span className="py-4 flex items-center">
+            <span className="py-4 flex items-center">
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -108,19 +108,19 @@ const TableRows = ({
                 } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[68.82px]"
+                dropDownItemsContainerClassName=" min-w-[68.82px] w-full text-center"
               />
-            </span> */}
-            <span className="py-4 flex justify-center items-center">
+            </span>
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
-            {/* <span className="py-4 flex items-center ml-1">
+            <span className="py-4 flex items-center ml-1">
               <DropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
@@ -144,20 +144,20 @@ const TableRows = ({
                     : staticEnums["ContractStatus"][item.contractStatus] === 1
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
-                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                } min-w-[68.82px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[68.82px]"
+                dropDownItemsContainerClassName=" min-w-[68.82px] w-fit text-center"
               />
-            </span> */}
-            <span className="flex justify-center items-center ">
+            </span>
+            {/* <span className="flex justify-center items-center ">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span>
+            </span> */}
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}

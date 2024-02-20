@@ -1,18 +1,17 @@
 import { detailScreenCardsLayout } from "@/types";
 import { useTranslation } from "next-i18next";
-import React, { useRef } from "react";
+import React from "react";
 
 const TableLayout = ({ children }: detailScreenCardsLayout) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleDivScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    const container = containerRef.current;
-    if (container) {
-      container.scrollLeft += e.deltaY;
-    }
-  };
+  // const handleDivScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+  //   const container = e.currentTarget;
+  //   if (container.scrollWidth > container.clientWidth) {
+  //     container.scrollLeft += e.deltaY;
+  //   }
+  // };
 
   const { t: translate } = useTranslation();
+
   return (
     <div className="overflow-x-hidden">
       <p className="text-[16px] mlg:hidden block mb-2 mt-3">
@@ -23,12 +22,15 @@ const TableLayout = ({ children }: detailScreenCardsLayout) => {
       </p>
 
       <div
-        className="min-w-full overflow-hidden"
-        style={{ paddingBottom: "calc(100vh - 920px)" }}
-        onWheel={handleDivScroll}
-        ref={containerRef}
+        className="overflow-x-scroll"
+        style={{
+          maxHeight: "calc(100% + 150px)",
+          height: "100%",
+          paddingBottom: "150px",
+        }}
+        // onWheel={handleDivScroll}
       >
-        <div className="xs:w-[1120px] md:w-auto rounded-md">{children}</div>
+        <div className="xs:w-[1120px] md:w-auto rounded-md ">{children}</div>
       </div>
     </div>
   );

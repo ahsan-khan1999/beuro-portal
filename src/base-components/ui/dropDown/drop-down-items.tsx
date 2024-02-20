@@ -29,7 +29,7 @@ export const DropDownItems = ({
         <li
           key={idx}
           role="menuitem"
-          className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-4 py-2"
+          className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-3 py-2"
           onClick={() => handleItemClick(`${item.value}` || "")}
         >
           {item.label}

@@ -82,7 +82,7 @@ const EmailCard = ({
               fill="#4A13E7"
             />
           </svg>
-          <span className=" text-xl font-medium mt-1">
+          <span className=" text-xl font-medium">
             {translate("offers.table_headings.edit")}
           </span>
         </div>
