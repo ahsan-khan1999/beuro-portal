@@ -158,12 +158,12 @@ const SystemSettingDetails = ({
         </div>
       </SettingLayout>
 
-      <div className="mt-2">
+      {/* <div className="mt-2">
         <ConnectWithBuro
           systemSetting={systemSetting}
           setSystemSetting={setSystemSetting}
         />
-      </div>
+      </div> */}
 
       <div className="my-3 float-right">
         <Button
