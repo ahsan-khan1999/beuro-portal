@@ -561,6 +561,7 @@ input[type="number"] {
 .html-content > h4 {
   /* font-size: 14px; */
 }
+
 .html-content > p {
   color: #272727;
   margin: 0;
@@ -594,3 +595,19 @@ input[type="number"] {
   margin: 0;
 }
 
+.scroll-top {
+  scroll-behavior: smooth;
+}
+
+.scroll-top::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-top::-webkit-scrollbar-thumb {
+  background-color: #4f46e5;
+  border-radius: 6px;
+}
+
+.scroll-top::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}

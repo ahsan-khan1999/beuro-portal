@@ -38,7 +38,7 @@ export default function Offers() {
   );
 
   return (
-    <>
+    <div className="relative">
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -48,15 +48,16 @@ export default function Offers() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
-
+      <div className="absolute right-0 bottom-6">
+        {currentPageRows.length > 0 && (
+          <Pagination
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+          />
+        )}
+      </div>
       {renderModal()}
-    </>
+    </div>
   );
 }

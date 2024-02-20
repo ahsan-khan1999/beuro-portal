@@ -44,7 +44,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div>
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
@@ -101,40 +101,44 @@ const TableRows = ({
                 } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="min-w-[70px] w-fit"
+                dropDownItemsContainerClassName="min-w-[70px] w-full text-center"
               />
             </span>
             <span
-              className="py-4 flex items-center mx-2"
+              className="py-4 flex items-center justify-center mx-2"
               onClick={(e) => e.stopPropagation()}
             >
-              <DropDown
-                items={Object.keys(staticEnums["InvoiceStatus"])
-                  ?.slice(0, -1)
-                  ?.map((item, index) => ({
-                    item: {
-                      label: invoiceStatus[index],
-                      value: item,
-                    },
-                  }))}
-                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
-                onItemSelected={(status) => {
-                  if (status !== "Paid") {
-                    handleInvoiceStatusUpdate(item.id, status, "reciept");
-                  }
-                }}
-                dropDownClassName={`${
-                  staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
-                    ? "bg-[#45C769]"
-                    : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
-                    ? "bg-[#4A13E7]"
-                    : "bg-red"
-                } min-w-[90px] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="min-w-[90px] w-fit"
-                key={item.id}
-              />
+              <div className="flex items-center ">
+                <DropDown
+                  items={Object.keys(staticEnums["InvoiceStatus"])
+                    ?.slice(0, -1)
+                    ?.map((item, index) => ({
+                      item: {
+                        label: invoiceStatus[index],
+                        value: item,
+                      },
+                    }))}
+                  selectedItem={translate(
+                    `invoice_status.${item.invoiceStatus}`
+                  )}
+                  onItemSelected={(status) => {
+                    if (status !== "Paid") {
+                      handleInvoiceStatusUpdate(item.id, status, "reciept");
+                    }
+                  }}
+                  dropDownClassName={`${
+                    staticEnums["InvoiceStatus"][item.invoiceStatus] === 0
+                      ? "bg-[#45C769]"
+                      : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
+                      ? "bg-[#4A13E7]"
+                      : "bg-red"
+                  } min-w-[90px] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  dropDownIconClassName={`text-[#fff]`}
+                  dropDownItemsContainerClassName="min-w-[90px] w-fit"
+                  key={item.id}
+                />
+              </div>
             </span>
             <span className="py-4 flex justify-center items-center">
               <svg

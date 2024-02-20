@@ -37,7 +37,7 @@ export const InvoiceEmailHeader = ({
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className="flex flex-col mlg:flex-row gap-y-3 mlg:justify-between mlg:items-center border-b border-[#000] border-opacity-10 pb-5">
+        <div className="flex gap-y-3 justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
           {/* <div className="flex items-center">
             <Image
               src={backIcon}
@@ -55,7 +55,7 @@ export const InvoiceEmailHeader = ({
             </h1>
           </div> */}
 
-          <div
+          <button
             onClick={() => {
               router.push({
                 pathname: "/invoices/details",
@@ -79,8 +79,8 @@ export const InvoiceEmailHeader = ({
             <span className="text-xl font-medium">
               {translate("offers.table_headings.edit")}
             </span>
-          </div>
-          <div className="flex items-center justify-end gap-x-5">
+          </button>
+          <div className="flex items-center gap-x-5">
             {/* <BaseButton
               id="sendPostButton"
               buttonText={translate(title)}

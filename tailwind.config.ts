@@ -22,7 +22,7 @@ module.exports = {
       screens: {
         xs: "375px",
         md: "900px",
-        mlg: "1090px",
+        mlg: "1100px",
         xlg: "1200px",
         maxSize: "1280px",
         xMaxSize: "1400px",
@@ -75,7 +75,7 @@ module.exports = {
         lightDark: "#393939",
 
         statusColor: "#AF2626",
-        defaultBackground: '#f3f3f3',
+        defaultBackground: "#f3f3f3",
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

@@ -36,7 +36,7 @@ export const InvoiceEmailHeader = ({
   return (
     <PdfCardLayout>
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
-        <div className="flex justify-between flex-col xlg:flex-row w-full gap-y-4">
+        <div className="flex justify-between w-full gap-y-4">
           {/* <div className="flex items-center">
             <span
               className="cursor-pointer"
@@ -75,14 +75,14 @@ export const InvoiceEmailHeader = ({
             </h1>
           </div> */}
 
-          <div
+          <button
             onClick={() => {
               router.push({
                 pathname: "/invoices/details",
                 query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
               });
             }}
-            className=" text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer"
+            className=" text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,10 +96,10 @@ export const InvoiceEmailHeader = ({
                 fill="#4A13E7"
               />
             </svg>
-            <span className="text-xl font-medium mt-1">
+            <span className="text-xl font-medium">
               {translate("offers.table_headings.edit")}
             </span>
-          </div>
+          </button>
           <div className="flex items-center gap-5">
             {/* <BaseButton
               id="sendPostButton"

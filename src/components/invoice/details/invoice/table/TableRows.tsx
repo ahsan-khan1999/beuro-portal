@@ -52,13 +52,13 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div>
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
             key={index}
             onClick={() => handleInvoicePdfPreview(item?.id)}
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(170px,_170px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] mt-2 rounded-md"
+            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(170px,_170px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
@@ -86,31 +86,33 @@ const TableRows = ({
             </span>
 
             <span
-              className="py-4 flex items-center mx-2"
+              className="py-4 flex items-center justify-center mx-2"
               onClick={(e) => e.stopPropagation()}
             >
-              <DropDown
-                items={Object.keys(staticEnums["PaymentType"]).map(
-                  (item, index) => ({
-                    item: {
-                      label: paymentMethod[index],
-                      value: item,
-                    },
-                  })
-                )}
-                selectedItem={translate(`payment_method.${item.paymentType}`)}
-                onItemSelected={(status) => {
-                  handlePaymentStatusUpdate(item.id, status, "invoice");
-                }}
-                dropDownClassName={`${
-                  staticEnums["PaymentType"][item.paymentType] === 0
-                    ? "bg-[#45C769]"
-                    : "bg-[#4A13E7]"
-                } min-w-[70px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[70px] w-fit"
-              />
+              <div className="flex items-center">
+                <DropDown
+                  items={Object.keys(staticEnums["PaymentType"]).map(
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
+                    })
+                  )}
+                  selectedItem={translate(`payment_method.${item.paymentType}`)}
+                  onItemSelected={(status) => {
+                    handlePaymentStatusUpdate(item.id, status, "invoice");
+                  }}
+                  dropDownClassName={`${
+                    staticEnums["PaymentType"][item.paymentType] === 0
+                      ? "bg-[#45C769]"
+                      : "bg-[#4A13E7]"
+                  } min-w-[70px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  dropDownIconClassName={`text-[#fff]`}
+                  dropDownItemsContainerClassName=" min-w-[70px] w-fit"
+                />
+              </div>
             </span>
             <span
               className="py-4 flex items-center mx-1"
