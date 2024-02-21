@@ -6,7 +6,9 @@ import { formatDateTimeToDate } from "@/utils/utility";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+
   },
   header: {
     fontSize: 10,
