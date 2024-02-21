@@ -28,7 +28,7 @@ export default function OffersFilters({
     },
     {
       label: translate("offers.table_functions.signed"),
-      type: `${staticEnums.OfferStatus.Signed}`,
+      type: `${staticEnums.OfferStatus.Accepted}`,
     },
     {
       label: translate("offers.table_functions.expire"),
