@@ -79,8 +79,8 @@ const imageSlice = createSlice({
         });
         builder.addCase(readImage.fulfilled, (state, action) => {
             state.images = action.payload
-            state.lastPage = action.payload.lastPage
-            state.totalCount = action.payload.totalCount
+            state.lastPage = action.payload?.lastPage
+            state.totalCount = action.payload?.totalCount
             state.loading = false;
         });
         builder.addCase(readImage.rejected, (state) => {

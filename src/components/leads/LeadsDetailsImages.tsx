@@ -17,7 +17,7 @@ const LeadsDetailsImages = ({ images }: { images?: string[] }) => {
         <div className="bg-[#4A13E7] h-1 "></div>
 
         {images &&images?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] py-[18px] px-3">
+          <div className="grid grid-cols-2 gap-[14px] py-[18px] px-3 ">
             {images?.map((item, index) => (
               <Image
                 src={item}
