@@ -60,7 +60,7 @@ const OfferEditImages = ({
                 src={item}
                 key={index}
                 alt="leads_images"
-                className="w-auto h-auto rounded-lg"
+                className="  rounded-lg"
                 height={106}
                 width={106}
               />
