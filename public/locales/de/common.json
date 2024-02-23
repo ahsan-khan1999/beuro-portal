@@ -2015,7 +2015,7 @@
     "Pending": "Entwurf"
   },
   "invoice_status": {
-    "Pending": "Offen",
+    "Pending": "Ausstehend",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
     "Open": "Offen"

@@ -1330,7 +1330,7 @@ export const sideBar: SideBar[] = [
       {
         title: "sidebar.customer.offers.signed",
         pathname: "/offers",
-        query: "Signed",
+        query: "Accepted",
         role: [1, 2],
       },
       {
