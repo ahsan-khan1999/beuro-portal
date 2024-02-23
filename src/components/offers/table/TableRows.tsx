@@ -11,6 +11,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -38,7 +39,7 @@ const TableRows = ({
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
-    `${translate("offer_status.Signed")}`,
+    `${translate("offer_status.Accepted")}`,
     `${translate("offer_status.Expired")}`,
     `${translate("offer_status.Rejected")}`,
   ];
@@ -79,8 +80,8 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center ml-1">
-              <DropDown
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              {/* <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -98,6 +99,29 @@ const TableRows = ({
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
                 } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
+              /> */}
+
+              <SelectDropDown
+                items={Object.keys(staticEnums["PaymentType"]).map(
+                  (item, index) => ({
+                    item: {
+                      label: paymentMethod[index],
+                      value: item,
+                    },
+                  })
+                )}
+                selectedItem={translate(`payment_method.${item.paymentType}`)}
+                onItemSelected={(status) => {
+                  handlePaymentStatusUpdate(item.id, status, "offer");
+                }}
+                dropDownClassName={`${
+                  staticEnums["PaymentType"][item.paymentType] === 0
+                    ? "bg-[#45C769]"
+                    : "bg-[#4A13E7]"
+                } w-full rounded-lg py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
@@ -124,8 +148,8 @@ const TableRows = ({
                 </div>
               </span>
             ) : (
-              <div className="py-4 flex justify-center items-center ml-1">
-                <DropDown
+              <div className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+                <SelectDropDown
                   items={Object.keys(staticEnums["OfferStatus"]).map(
                     (item, index) => ({
                       item: { label: itemsValue[index], value: item },
@@ -143,7 +167,7 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } min-w-[90px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
+                  } w-full rounded-lg py-[3px] flex items-center justify-center`}
                   dropDownTextClassName="text-white text-base font-medium pe-2"
                   key={item.id}
                   dropDownIconClassName={`text-[#fff]`}

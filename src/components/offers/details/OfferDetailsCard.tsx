@@ -42,7 +42,7 @@ const OfferDetailsCard = ({
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
-    `${translate("offer_status.Signed")}`,
+    `${translate("offer_status.Accepted")}`,
     `${translate("offer_status.Expired")}`,
     `${translate("offer_status.Rejected")}`,
   ];
@@ -255,7 +255,7 @@ const OfferDetailsCard = ({
                   dropDownTextClassName={`text-[${getPaymentTypeColor(
                     offerDetails?.paymentType
                   )}] text-base font-medium me-1`}
-                  dropDownItemsContainerClassName="w-full"
+                  dropDownItemsContainerClassName="w-full text-center"
                   dropDownIconClassName={`text-[${getPaymentTypeColor(
                     offerDetails?.paymentType
                   )}]`}
@@ -281,6 +281,7 @@ const OfferDetailsCard = ({
                   dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}
+                  
                 />
               )) || (
                 <span

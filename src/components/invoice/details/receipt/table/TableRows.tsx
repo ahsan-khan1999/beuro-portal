@@ -11,6 +11,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { updateQuery } from "@/utils/update-query";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   collectiveInvoice,
@@ -77,11 +78,8 @@ const TableRows = ({
               </div>
             </span>
 
-            <span
-              className="py-4 flex items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <DropDown
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+              <SelectDropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -98,14 +96,14 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                } w-fit rounded-lg py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName=" w-full text-center"
               />
             </span>
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
-              <DropDown
+              <SelectDropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({
@@ -126,7 +124,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                } w-full rounded-lg py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName=" w-fit"

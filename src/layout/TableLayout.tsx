@@ -23,11 +23,11 @@ const TableLayout = ({ children }: detailScreenCardsLayout) => {
 
       <div
         className="overflow-x-scroll"
-        style={{
-          maxHeight: "calc(100% + 150px)",
-          height: "100%",
-          paddingBottom: "150px",
-        }}
+        // style={{
+        //   maxHeight: "calc(100% + 150px)",
+        //   height: "100%",
+        //   paddingBottom: "150px",
+        // }}
         // onWheel={handleDivScroll}
       >
         <div className="xs:w-[1120px] md:w-auto rounded-md ">{children}</div>

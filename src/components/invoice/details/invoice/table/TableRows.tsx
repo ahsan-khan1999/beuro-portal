@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import toggleIcon from "@/assets/svgs/edit_info.svg";
 import { SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
 import {
@@ -9,10 +8,10 @@ import {
   getInvoiceStatusColor,
   getMailStatusColor,
 } from "@/utils/utility";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -85,12 +84,9 @@ const TableRows = ({
               </div>
             </span>
 
-            <span
-              className="py-4 flex items-center justify-center mx-2"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center">
-                <DropDown
+                <SelectDropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
                     (item, index) => ({
                       item: {
@@ -114,11 +110,8 @@ const TableRows = ({
                 />
               </div>
             </span>
-            <span
-              className="py-4 flex items-center mx-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <DropDown
+            <span className="py-4 mx-1" onClick={(e) => e.stopPropagation()}>
+              <SelectDropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({

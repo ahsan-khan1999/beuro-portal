@@ -314,7 +314,7 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
-  activeIndex?:number
+  activeIndex?: number;
   containerClasses?: string;
   mainImgSliderClasses?: string;
 }
