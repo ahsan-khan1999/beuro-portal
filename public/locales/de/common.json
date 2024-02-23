@@ -669,7 +669,7 @@
       "email_status": "E-Mail-Status",
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
       "receipt_email_preview": "E-Mail-Vorschau der Quittung",
-      "edit_invoice": "Bearbeiten Quittung"
+      "edit_invoice": "Rechnung Bearbeiten"
     },
     "table_functions": {
       "open": "Offen",
@@ -1084,6 +1084,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "send_again": "erneut senden",
+    "share": "Teilen Sie",
     "lead": "Anfragen",
     "add": "hinzufügen",
     "upload_link": "Laden Sie Ihren Link hier hoch",
@@ -2092,5 +2094,11 @@
     "header_heading": "Ausrichtung der Kopfzeile",
     "left_align": "Logo linksbündig",
     "right_align": "Logo rechtsbündig"
+  },
+  "share_images_tab": {
+    "whats_app": "What'sapp",
+    "email": "E-Mail",
+    "enter_whatsapp_number": "Geben Sie Ihre what'sapp-Nummer ein",
+    "enter_your_email": "Ihre E-Mail eingeben"
   }
 }

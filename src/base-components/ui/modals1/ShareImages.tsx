@@ -1,114 +1,239 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import whatsappIcon from "@/assets/svgs/whats_icon.svg";
-import facebookIcon from "@/assets/svgs/facebook_icon.svg";
-import instaIcon from "@/assets/svgs/inta_icon.svg";
-import twitterIcon from "@/assets/svgs/twitter_icon.svg";
-import messagesIcon from "@/assets/svgs/messages_icon.svg";
-import telegramIcon from "@/assets/svgs/telegram_icon.svg";
-import youtubeIcon from "@/assets/svgs/youtube_icon.svg";
-import linkedIncon from "@/assets/svgs/linkedIn_icon.svg";
-import gmailIncon from "@/assets/svgs/gmail_icon.svg";
-import messengerIcon from "@/assets/svgs/messenger_icon.svg";
-import copyIcon from "@/assets/svgs/copy_icon.svg";
+import { useUploadImage } from "@/hooks/modals/useUploadImage";
+import { Form } from "@/base-components/form/form";
+import { LinkUpload } from "../link-upload";
 import { BaseButton } from "../button/base-button";
-import { useClipboardCopy } from "@/utils/utility";
-import { CopyIcon } from "@/assets/svgs/components/copy-icon";
-import { useRouter } from "next/router";
-import { DOMAIN } from "@/services/HttpProvider";
-import { useTranslation } from "next-i18next";
+import { AttachementField } from "./attachement-field";
+import { VideoField } from "./video-field";
+import { ImageField } from "./image-field";
+import { ShareImagesOnWhatsapp } from "../share-via-number";
+import { ShareImagesOnEmail } from "../share-via-email";
 
-const ShareImages = ({ onClose }: { onClose: () => void }) => {
-  const imgSource = [
-    whatsappIcon,
-    facebookIcon,
-    instaIcon,
-    twitterIcon,
-    messagesIcon,
-    telegramIcon,
-    youtubeIcon,
-    linkedIncon,
-    gmailIncon,
-    messengerIcon,
-  ];
-  const { handleCopy, inputRef, isCopied } = useClipboardCopy();
-  const router = useRouter();
+const ImagesUpload = ({
+  onClose,
+  handleImageSlider,
+}: {
+  handleImageSlider: Function;
+  onClose: () => void;
+}) => {
+  const {
+    // fields,
+    // control,
+    // onSubmit,
+    // handleSubmit,
+    // errors,
+    error,
+    translate,
+    activeTab,
+    handleTabChange,
+    enteredLink,
+    enteredLinks,
+    handleLinkAdd,
+    handleLinkDelete,
+    setEnteredLink,
+    attachementTabs,
+    handleAttachementAdd,
+    handleAttachementDelete,
+    handleVideoAdd,
+    handleVideoDelete,
+    handleimageAdd,
+    handleImageDelete,
+    onSubmit,
+    loading,
+    loadingGlobal,
+    shareImagesTabs,
+    enteredNumber,
+    setEnteredNumber,
+    handleShareImgsViaWhatsapp,
+    enteredEmail,
+    setEnteredEmail,
+    handleShareImgsViaEmail,
+  } = useUploadImage(handleImageSlider);
+  // const attachementLookUp = {
+  //   img_tab: (
+  //     <>
+  //       <div className="flex flex-col gap-y-2 my-5">
+  //         <h2 className="text-base font-medium text-[#393939]">
+  //           {translate("common.images_modal.title")}
+  //         </h2>
+  //         <p className="text-xs font-normal text-[#8F8F8F]">
+  //           {translate("common.images_modal.sub_title")}
+  //         </p>
+  //       </div>
 
-  const { t: translate } = useTranslation();
+  //       <ImageField
+  //         id="attachement"
+  //         attachements={enteredLinks?.images}
+  //         fileSupported="PNG, JPEG, JPG, WEBP "
+  //         isAttachement={true}
+  //         isOpenedFile={false}
+  //         text={translate("common.images_modal.add_image")}
+  //         setAttachements={handleimageAdd}
+  //       />
+  //     </>
+  //   ),
+
+  //   video_tab: (
+  //     <div className="my-0 w-full">
+  //       <div className="flex flex-col gap-y-2 my-5">
+  //         <h2 className="text-base font-medium text-[#393939]">
+  //           {translate("common.images_modal.video_title")}
+  //         </h2>
+  //         <p className="text-xs font-normal text-[#8F8F8F]">
+  //           {translate("common.images_modal.video_sub_title")}
+  //         </p>
+  //       </div>
+  //       <VideoField
+  //         id="attachement"
+  //         attachements={enteredLinks?.video}
+  //         fileSupported="MP4, MOV, AVI, WEBM "
+  //         isAttachement={true}
+  //         isOpenedFile={false}
+  //         text={translate("common.images_modal.add_video")}
+  //         setAttachements={handleVideoAdd}
+  //       />
+  //     </div>
+  //   ),
+  //   link_tab: (
+  //     <div className="my-0 w-full">
+  //       <div className="flex flex-col gap-y-2 my-5">
+  //         <h2 className="text-base font-medium text-[#393939]">
+  //           {translate("common.images_modal.link_title")}
+  //         </h2>
+  //       </div>
+  //       <LinkUpload
+  //         inputLink={enteredLink}
+  //         onAddLink={handleLinkAdd}
+  //         enteredLinks={enteredLinks["links"]}
+  //         onLinkDelete={handleLinkDelete}
+  //         setEnteredLink={setEnteredLink}
+  //       />
+  //     </div>
+  //   ),
+  //   attachement_tab: (
+  //     <div className="my-0 w-full">
+  //       <div className="flex flex-col gap-y-2 my-5">
+  //         <h2 className="text-base font-medium text-[#393939]">
+  //           {translate("common.images_modal.attachement_title")}
+  //         </h2>
+  //         <p className="text-xs font-normal text-[#8F8F8F]">
+  //           {translate("common.images_modal.attachement_sub_title")}
+  //         </p>
+  //       </div>
+  //       <AttachementField
+  //         id="attachement"
+  //         attachements={enteredLinks?.attachements}
+  //         fileSupported="Pdf, ODT, DOC, XLXS "
+  //         isAttachement={true}
+  //         isOpenedFile={false}
+  //         text={translate("common.images_modal.add_attachment")}
+  //         setAttachements={handleAttachementAdd}
+  //       />
+  //     </div>
+  //   ),
+  // };
+
+  const shareImagesLookUp = {
+    whats_app: (
+      <div className="my-0 w-full">
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("share_images_tab.enter_whatsapp_number")}
+          </h2>
+        </div>
+        <ShareImagesOnWhatsapp
+          inputNumber={enteredNumber}
+          setEnteredNumber={setEnteredNumber}
+          onSend={handleShareImgsViaWhatsapp}
+        />
+      </div>
+    ),
+    email: (
+      <div className="my-0 w-full">
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("share_images_tab.enter_your_email")}
+          </h2>
+        </div>
+        <ShareImagesOnEmail
+          inputEmail={enteredEmail}
+          setEnteredEmail={setEnteredEmail}
+          onSend={handleShareImgsViaEmail}
+        />
+      </div>
+    ),
+  };
 
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit "
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
       >
-        <div className="relative flex flex-col lg:px-[39px] lg:pb-[40px] lg:pt-[24px] p-4">
+        <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
           <Image
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <p className="text-[#000] font-medium text-2xl mb-5">
-            {translate("offers.share_images_modal.heading")}
-          </p>
 
-          <hr className="opacity-25 mb-[23px]" />
-          <div>
-            <span className="text-[#393939] font-normal text-base">
-              {translate("offers.share_images_modal.sub_heading")}
-            </span>
+          {/* <p className="text-2xl font-medium text-[#000] border-b-2 border-b-[#000] border-opacity-10 pb-5">
+            {translate("common.images_modal.heading")}
+          </p> */}
 
-            <div className="grid grid-cols-5 gap-y-6 gap-x-[25px] mt-5 mb-4">
-              {imgSource.map((src, index) => (
-                <div key={index} className="flex justify-center items-center">
-                  <Image
-                    src={src}
-                    alt="source"
-                    className="cursor-pointer w-full"
-                  />
-                </div>
+          {/* <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+            {attachementTabs.map((item, index) => (
+              <button
+                className={`${
+                  activeTab === item ? "text-primary" : "text-[#393939] "
+                } text-base font-medium pb-[10px] ${
+                  activeTab === item ? "border-b-2 border-primary" : ""
+                }`}
+                onClick={() => handleTabChange(item)}
+              >
+                {translate(`common.images_modal.${item}`)}
+              </button>
+            ))}
+          </div> */}
+
+          {/* {attachementLookUp[activeTab as keyof typeof attachementLookUp]} */}
+
+          <div className="mt-5">
+            <p className="text-2xl font-medium text-[#000] border-b-2 border-b-[#000] border-opacity-10 pb-5">
+              {translate("offers.share_images_modal.heading")}
+            </p>
+
+            <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+              {shareImagesTabs.map((item, index) => (
+                <button
+                  className={`${
+                    activeTab === item ? "text-primary" : "text-[#393939] "
+                  } text-base font-medium pb-[10px] ${
+                    activeTab === item ? "border-b-2 border-primary" : ""
+                  }`}
+                  onClick={() => handleTabChange(item)}
+                >
+                  {translate(`share_images_tab.${item}`)}
+                </button>
               ))}
             </div>
 
-            <span className="text-[#393939] font-normal text-base">
-              {translate("offers.share_images_modal.link")}
-            </span>
+            {shareImagesLookUp[activeTab as keyof typeof shareImagesLookUp]}
+          </div>
 
-            <div className="flex justify-between items-center border border-[#BFBFBF] rounded-lg px-3 p-1 mt-5">
-              <span className="flex items-center gap-[6px] w-full">
-                <Image src={copyIcon} alt="copyIcon" />
-
-                <input
-                  id={"id"}
-                  className={"text-[#393939] font-medium text-base w-full me-2"}
-                  disabled={true}
-                  value={DOMAIN + router.asPath}
-                  ref={(e) => {
-                    inputRef.current = e;
-                  }}
-                />
-              </span>
-
-              <BaseButton
-                containerClassName={`flex gap-x-1 ${
-                  !isCopied ? "bg-lighttest-gray" : "bg-primary"
-                } py-1 px-2.5 rounded !!border !!border-lightGray`}
-                textClassName={`${
-                  !isCopied ? "text-primary" : "text-white"
-                } font-medium`}
-                buttonText={
-                  !isCopied
-                    ? translate("offers.share_images_modal.copy_button")
-                    : translate("offers.share_images_modal.copied_button")
-                }
-                onClick={handleCopy}
-              >
-                {!isCopied && <CopyIcon />}
-              </BaseButton>
-            </div>
+          <div className="flex justify-end mt-5">
+            <BaseButton
+              buttonText={translate("pdf.submit")}
+              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
+              textClassName="text-white"
+              onClick={onSubmit}
+              loading={loading || loadingGlobal}
+              disabled={loadingGlobal}
+            />
           </div>
         </div>
       </BaseModal>
@@ -116,4 +241,4 @@ const ShareImages = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export default ShareImages;
+export default ImagesUpload;

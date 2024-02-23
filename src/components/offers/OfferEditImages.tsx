@@ -47,9 +47,14 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${images && images?.images?.length > 0 ? "cursor-pointer" : "cursor-default"
-              }  `}
-            onClick={() => images && images?.images?.length > 0 && shareImgModal()}
+            className={`${
+              images && images?.images?.length > 0
+                ? "cursor-pointer"
+                : "cursor-default"
+            }  `}
+            onClick={() =>
+              images && images?.images?.length > 0 && shareImgModal()
+            }
           />
         </div>
 

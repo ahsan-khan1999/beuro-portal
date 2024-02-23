@@ -727,6 +727,7 @@ export interface ProductItemFooterProps {
 export interface ContactDetailsProps {
   address: {
     name: string;
+    companyName: string;
     streetWithNumber: string;
     postalCode: string;
     city: string;

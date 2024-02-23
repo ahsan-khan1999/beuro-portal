@@ -1,6 +1,8 @@
 import { Layout } from "@/layout";
 import React, { useEffect } from "react";
-import EditOffersDetailsData, { EditComponentsType } from "./EditOffersDetailsData";
+import EditOffersDetailsData, {
+  EditComponentsType,
+} from "./EditOffersDetailsData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -19,15 +21,17 @@ const EditOffersDetails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
   const { images } = useAppSelector((state) => state.image);
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
   useEffect(() => {
-    if (offerDetails?.id) dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
-
-  }, [offerDetails?.id])
+    if (offerDetails?.id)
+      dispatch(
+        readImage({ params: { type: "offerID", id: offerDetails?.id } })
+      );
+  }, [offerDetails?.id]);
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -72,7 +76,7 @@ const EditOffersDetails = () => {
   let tab: EditComponentsType | undefined;
 
   if (router.query?.tab) {
-    tab = +(router.query?.tab);
+    tab = +router.query?.tab;
   }
 
   return (

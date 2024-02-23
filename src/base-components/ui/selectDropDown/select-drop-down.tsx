@@ -29,13 +29,13 @@ export const SelectDropDown = ({
   }, [defaultSelectedItem]);
 
   const defaultClasses =
-    "outline-none bg-white px-3 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "outline-none bg-white px-1 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
 
-  const textClasses = combineClasses(
-    `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
-    dropDownTextClassName
-  );
+  // const textClasses = combineClasses(
+  //   `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
+  //   dropDownTextClassName
+  // );
 
   return (
     <>

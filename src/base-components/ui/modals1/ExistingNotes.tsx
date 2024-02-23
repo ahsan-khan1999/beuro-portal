@@ -12,8 +12,8 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { useEmptyStates } from "@/utils/hooks";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { BaseButton } from "../button/base-button";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -193,12 +193,21 @@ const ExistingNotes = ({
                 } pb-3 `}
                 key={key}
               >
-                <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
-                  Created by &nbsp;
-                  <span className="text-[#1E1E1E] text-base font-normal">
-                    {item.createdBy?.fullName}
-                  </span>
-                </p>
+                <div className="flex items-center justify-between mx-[41px] mb-[8px]">
+                  <p className="text-[#8F8F8F] text-[14px] font-normal">
+                    Created by &nbsp;
+                    <span className="text-[#1E1E1E] text-base font-normal">
+                      {item.createdBy?.fullName}
+                    </span>
+                  </p>
+                  <Image
+                    src={deleteIcon}
+                    alt="delete note"
+                    width={20}
+                    height={20}
+                    className="cursor-pointer"
+                  />
+                </div>
 
                 <div className="mx-[41px] border border-[#4B4B4B] rounded-lg">
                   <div

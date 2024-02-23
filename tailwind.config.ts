@@ -24,6 +24,7 @@ module.exports = {
         md: "900px",
         mlg: "1100px",
         xlg: "1200px",
+        xlgg: "1220px",
         maxSize: "1280px",
         xMaxSize: "1400px",
         xLarge: "1460px",

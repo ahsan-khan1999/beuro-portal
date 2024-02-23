@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import TaxVerifiedComp from "./TaxVerifiedComp";
 import InvoiceSection from "./InvoiceSection";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import ConnectWithBuro from "./ConnectWithBuro";
 import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";

@@ -37,7 +37,7 @@ export const InvoiceEmailHeader = ({
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className="flex gap-y-3 justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
+        <div className="flex flex-col xlgg:flex-row xlgg:justify-between xlgg:items-center border-b border-[#000] border-opacity-10 pb-5 gap-y-5">
           {/* <div className="flex items-center">
             <Image
               src={backIcon}
@@ -80,7 +80,12 @@ export const InvoiceEmailHeader = ({
               {translate("offers.table_headings.edit")}
             </span>
           </button>
-          <div className="flex items-center gap-x-5">
+
+          <h1 className="hidden xlgg:flex items-center font-medium text-2xl">
+            {translate("invoice.card_content.heading")}
+          </h1>
+
+          <div className="flex items-center justify-end gap-x-5">
             {/* <BaseButton
               id="sendPostButton"
               buttonText={translate(title)}
@@ -107,9 +112,11 @@ export const InvoiceEmailHeader = ({
               <PostIcon className="text-primary group-hover:text-primary" />
             </BaseButton>
             <BaseButton
-              buttonText={translate(
-                "contracts.pdf_card_details.send_via_email"
-              )}
+              buttonText={
+                collectiveInvoiceDetails?.invoiceStatus === "Sent"
+                  ? translate("common.send_again")
+                  : translate("contracts.pdf_card_details.send_via_email")
+              }
               onClick={onEmailSend}
               containerClassName="flex items-center gap-x-3 row-reverse group border border-primary"
               textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"

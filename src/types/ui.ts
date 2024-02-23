@@ -358,3 +358,14 @@ export interface LinkUploadProps {
   onLinkDelete: (linkToDelete: number) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface ShareImagesViaWhatsapp {
+  inputNumber: string;
+  setEnteredNumber: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
+}
+export interface ShareImagesViaEmail {
+  inputEmail: string;
+  setEnteredEmail: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
+}

@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     maxWidth: 531,
     width: "100%",
-    columnGap: 3
+    columnGap: 3,
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "#404040",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 400,
     fontStyle: "normal",
     width: 180,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#000",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 400,
     fontStyle: "normal",
     width: 50,
@@ -60,9 +60,8 @@ export const ServiceTableRow = ({
   discount,
   isDiscount,
   totalDiscount,
-  isGlobalDiscount
+  isGlobalDiscount,
 }: Partial<ServiceList>) => {
-
   return (
     <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
@@ -73,7 +72,9 @@ export const ServiceTableRow = ({
           <Text style={styles.headerText}>{unit}</Text>
           <Text style={styles.headerText}>{price}</Text>
 
-          {isDiscount && <Text style={styles.headerText}>{ discount || "-"}</Text>}
+          {isDiscount && (
+            <Text style={styles.headerText}>{discount || "-"}</Text>
+          )}
 
           <Text style={styles.headerText}>{totalPrice}</Text>
         </View>

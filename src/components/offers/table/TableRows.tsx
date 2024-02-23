@@ -121,7 +121,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg py-[3px] flex items-center justify-center`}
+                } w-full rounded-lg py-[3px]`}
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
@@ -167,11 +167,11 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } w-full rounded-lg py-[3px] flex items-center justify-center`}
+                  } w-full rounded-lg py-[3px]`}
                   dropDownTextClassName="text-white text-base font-medium pe-2"
                   key={item.id}
                   dropDownIconClassName={`text-[#fff]`}
-                  dropDownItemsContainerClassName="min-w-[90px] w-full text-center"
+                  dropDownItemsContainerClassName=""
                 />
               </div>
 

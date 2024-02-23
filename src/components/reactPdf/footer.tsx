@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   footerText: {
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 400,
     fontStyle: "normal",
     color: "#000",
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   pageNumberText: {
-    fontSize: 12,
+    fontSize: 7,
     fontWeight: "medium",
     color: "#fff",
   },
@@ -73,10 +73,10 @@ export const Footer = ({
   const address = {
     streetNumber: templateSettings?.secondColumn?.streetNumber,
     postalCode: templateSettings?.secondColumn?.postCode,
-  }
+  };
   const bankDetails = {
     bankName: templateSettings?.secondColumn?.bankName,
-  }
+  };
   // const { address, bankDetails } = documentDetails?.secondColumn ?? {};
   const {
     row1: c3Row1,
@@ -93,7 +93,10 @@ export const Footer = ({
     row5: c4Row5,
   } = templateSettings?.fourthColumn ?? {};
   const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 16);
-  const accountNumber = insertBreaks(templateSettings?.secondColumn?.accountNumber, 16);
+  const accountNumber = insertBreaks(
+    templateSettings?.secondColumn?.accountNumber,
+    16
+  );
 
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
   const {
@@ -198,11 +201,10 @@ export const Footer = ({
           {isPostCode && (
             <Text style={styles.footerText}>{`${address?.postalCode}`}</Text>
           )}
-          {isIBAN && <Text style={styles.footerText}>IBAN: {ibanNumber}</Text>}
+          {isIBAN && <Text style={styles.footerText}>{ibanNumber}</Text>}
           {isAccountNumber && (
             <Text style={styles.footerText}>Konto: {accountNumber}</Text>
           )}
-
         </View>
       )}
       {isThirdColumn && (

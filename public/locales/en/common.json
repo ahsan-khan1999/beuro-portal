@@ -1093,6 +1093,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "send_again": "send Again",
+    "share": "Share",
     "lead": "Lead",
     "add": "Add",
     "upload_link": "Upload your link here",
@@ -2091,5 +2093,11 @@
     "header_heading": "Header Alignment",
     "left_align": "Logo Align Left",
     "right_align": "Logo Align Right"
+  },
+  "share_images_tab": {
+    "whats_app": "What'sapp",
+    "email": "Email",
+    "enter_whatsapp_number": "Enter your what'sapp number",
+    "enter_your_email": "Enter your email"
   }
 }
