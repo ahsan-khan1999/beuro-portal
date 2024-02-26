@@ -103,10 +103,8 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } min-w-[70px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                  dropDownTextClassName="text-white text-base font-medium pe-2"
-                  dropDownIconClassName={`text-[#fff]`}
-                  dropDownItemsContainerClassName=" min-w-[70px] w-full text-center"
+                  } w-full rounded-lg flex items-center justify-center`}
+                  dropDownItemsContainerClassName=""
                 />
               </div>
             </span>
@@ -120,7 +118,8 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                // selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (item.invoiceStatus !== status) {
                     handleInvoiceStatusUpdate(item.id, status, "invoice");
@@ -132,11 +131,8 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } min-w-[90px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
+                } w-full rounded-lg px-1 flex items-center justify-center`}
                 key={item.id}
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full text-center"
               />
             </span>
             <span

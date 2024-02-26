@@ -47,6 +47,8 @@ const TableRows = ({
   return (
     <div>
       {collectiveInvoice?.map((item, index: number) => {
+        console.log(item.invoiceStatus);
+
         return (
           <div
             key={index}
@@ -96,10 +98,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-fit rounded-lg py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" w-full text-center"
+                } w-full rounded-lg flex items-center justify-center`}
               />
             </span>
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
@@ -112,7 +111,8 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                // selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept");
@@ -124,10 +124,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-full rounded-lg py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" w-fit"
+                } w-full rounded-lg flex items-center justify-center`}
                 key={item.id}
               />
             </span>

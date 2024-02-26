@@ -24,7 +24,7 @@ export const SelectDropDown = ({
   }, [defaultSelectedItem]);
 
   const defaultClasses =
-    "outline-none bg-white px-1 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "outline-none bg-white px-1 w-full border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
 
   const handleDropdownToggle = () => {

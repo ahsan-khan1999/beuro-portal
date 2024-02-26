@@ -39,6 +39,7 @@ const EditOffersDetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { offerDetails } = useAppSelector((state) => state.offer);
+
   const tabSection: tabArrayTypes[] = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill=${
@@ -91,6 +92,7 @@ const EditOffersDetailsData = ({
       name: `${translate("offers.tabs_heading.additional")}`,
     },
   ];
+
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
       router.push(

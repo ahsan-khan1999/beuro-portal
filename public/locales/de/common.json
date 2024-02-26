@@ -2012,9 +2012,9 @@
   },
   "contract_status": {
     "Open": "Offen",
-    "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
+    "Sent": "Gesendet",
     "Pending": "Entwurf"
   },
   "invoice_status": {
