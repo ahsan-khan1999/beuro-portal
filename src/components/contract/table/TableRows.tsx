@@ -88,7 +88,7 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+            {/* <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <SelectDropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -108,17 +108,17 @@ const TableRows = ({
                     : "bg-[#4A13E7]"
                 } w-full rounded-lg flex items-center justify-center`}
               />
-            </span>
-            {/* <span className="py-4 flex justify-center items-center">
+            </span> */}
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span> */}
+            </span>
 
-            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <SelectDropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
@@ -145,15 +145,15 @@ const TableRows = ({
                     : "bg-[#FF0000]"
                 } w-full rounded-lg flex items-center justify-center`}
               />
-            </span>
-            {/* <span className="flex justify-center items-center ">
+            </span> */}
+            <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span> */}
+            </span>
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}

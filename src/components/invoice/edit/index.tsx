@@ -31,6 +31,7 @@ const EditInvoiceDetails = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));

@@ -48,10 +48,11 @@ export const ImageField = ({
       currentIndex: ++index,
     });
   };
+
   const router = useRouter();
   const formdata = new FormData();
   const dispatch = useAppDispatch();
-  const handleFileInput = async (
+  const handleFileInput = async ( 
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
     e.preventDefault();
@@ -132,6 +133,7 @@ export const ImageField = ({
     setAttachements && setAttachements(list);
     // field.onChange();
   };
+
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,
     images: attachements?.map((item) => ({ imageSrc: item?.value })),
@@ -229,13 +231,6 @@ export const ImageField = ({
                         }}
                         onClick={() => toggleZoom(item.value, index)}
                       >
-                        {/* <Image
-                                                    src={isZoomed?.currentImage || item.value }
-                                                    alt="Zoomed Preview"
-                                                    height={500}
-                                                    width={500}
-                                                    style={{ maxHeight: '90vh', maxWidth: '90vw' }}
-                                                /> */}
                         <Slider
                           {...SLIDER_IMAGES_DATA}
                           images={isZoomed?.sliderImageData}
