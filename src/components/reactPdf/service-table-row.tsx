@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 7,
+    fontSize: 6,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "#404040",
-    fontSize: 7,
+    fontSize: 6,
     fontWeight: 400,
     fontStyle: "normal",
     width: 180,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#000",
-    fontSize: 7,
+    fontSize: 6,
     fontWeight: 400,
     fontStyle: "normal",
     width: 50,

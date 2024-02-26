@@ -121,8 +121,8 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg py-[3px]`}
-                dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
+                } w-full rounded-lg`}
+                dropDownItemsContainerClassName=""
               />
             </span>
 
@@ -140,7 +140,7 @@ const TableRows = ({
                   style={{
                     backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
                   }}
-                  className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
+                  className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm"
                 >
                   {translate(`offer_status.${item.offerStatus}`)}
                 </div>
@@ -153,7 +153,8 @@ const TableRows = ({
                       item: { label: itemsValue[index], value: item },
                     })
                   )}
-                  selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                  // selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                  selectedItem={item.offerStatus}
                   onItemSelected={(status) => {
                     handleOfferStatusUpdate(item.id, status, "offer");
                   }}

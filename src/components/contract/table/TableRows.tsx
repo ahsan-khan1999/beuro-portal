@@ -106,10 +106,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[68.82px] w-full text-center"
+                } w-full rounded-lg flex items-center justify-center`}
               />
             </span>
             {/* <span className="py-4 flex justify-center items-center">
@@ -131,9 +128,10 @@ const TableRows = ({
                     },
                   })
                 )}
-                selectedItem={translate(
-                  `contract_status.${item.contractStatus}`
-                )}
+                // selectedItem={translate(
+                //   `contract_status.${item.contractStatus}`
+                // )}
+                selectedItem={item.contractStatus}
                 onItemSelected={(status) => {
                   if (item.contractStatus !== status) {
                     handleContractStatusUpdate(item.id, status, "contracts");
@@ -145,10 +143,7 @@ const TableRows = ({
                     : staticEnums["ContractStatus"][item.contractStatus] === 1
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
-                } min-w-[68.82px] w-fit rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName=" min-w-[68.82px] w-fit text-center"
+                } w-full rounded-lg flex items-center justify-center`}
               />
             </span>
             {/* <span className="flex justify-center items-center ">

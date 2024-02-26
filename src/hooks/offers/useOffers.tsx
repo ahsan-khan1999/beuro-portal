@@ -120,7 +120,7 @@ const useOffers = () => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "lead" },
+        data: { id: id, type: "offer" },
       })
     );
   };

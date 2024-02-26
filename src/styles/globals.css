@@ -611,16 +611,16 @@ input[type="number"] {
 
 .dropdown_select {
   -webkit-appearance: none;
-  padding: 4px 8px;
+  padding: 2px 5px;
   background-image: url("~@/assets/pngs/drop-down-icon.png");
   background-position: calc(100% - 8px) center;
   background-repeat: no-repeat;
   transition: transform 0.3s ease;
 }
 
-.dropdown_select.isOpen {
-  background-image: url("~@/assets/pngs/drop-down-icon.png");
+.dropdown_select.active {
   transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
 }
 
 .select_dropdown_items {
@@ -633,6 +633,7 @@ input[type="number"] {
   box-shadow: 0 3px 6px #00000029;
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .select_dropdown_items:hover {

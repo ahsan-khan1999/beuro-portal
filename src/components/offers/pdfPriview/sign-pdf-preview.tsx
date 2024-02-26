@@ -17,57 +17,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
 import { Container } from "@/components/pdf/container";
 
-export const DUMMY_DATA: PdfProps = {
-  emailHeader: { emailStatus: "pending", offerNo: "23-A" },
-  headerDetails: {
-    offerNo: "O-4040 Umzugsfuchs",
-    offerDate: "22.09.2023",
-    createdBy: "Heiniger Michèle",
-    logo: "",
-    emailTemplateSettings: null,
-  },
-  contactAddress: {
-    address: {
-      name: "Frau Natalie Semeli",
-      city: "Buren an der Aare",
-      postalCode: "3294",
-      streetWithNumber: "Erlenweg 8",
-    },
-    email: "karinsch242@gmail.com",
-    phone: "031 350 15 15",
-  },
-  movingDetails: {
-    header: "Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken",
-    address: [
-      {
-        country: "",
-        description: "",
-        postalCode: "",
-        streetNumber: "",
-        label: "",
-      },
-    ],
-    workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
-  },
-  serviceItem: [],
-  serviceItemFooter: {
-    subTotal: "2000CHF",
-    tax: "100CHF (7.7%)",
-    discount: "100.50 CHF",
-    grandTotal: "2100.50 CHF",
-  },
-  footerDetails: {
-    firstColumn: {},
-    secondColumn: {},
-    thirdColumn: {},
-    fourthColumn: {},
-    columnSettings: null,
-    currPage: 0,
-    totalPages: 0,
-    emailTemplateSettings: null,
-  },
-  aggrementDetails: "",
-};
+
 interface ActionType {
   payload: PublicOffersTableRowTypes;
   type: string;
@@ -133,6 +83,7 @@ const SignPdfPreview = () => {
                   streetWithNumber:
                     offerDetails?.Offer?.leadID?.customerDetail?.address
                       ?.streetNumber,
+                      companyName:offerDetails?.Offer?.leadID?.customerDetail?.companyName
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,

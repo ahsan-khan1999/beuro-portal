@@ -152,7 +152,7 @@ export const useInvoicePdf = () => {
               address: {
                 name: invoiceDetails?.invoiceID?.customerDetail.fullName,
                 companyName:
-                  invoiceDetails?.invoiceID?.customerDetail.companyName,
+                  invoiceDetails?.invoiceID?.customerDetail?.companyName,
                 city: invoiceDetails?.invoiceID?.customerDetail?.address
                   ?.country,
                 postalCode:

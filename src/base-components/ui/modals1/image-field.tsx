@@ -1,9 +1,5 @@
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
-import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
-import deletePdfIcon from "@/assets/svgs/delete_file.svg";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import {
   uploadFileToFirebase,
@@ -141,7 +137,6 @@ export const ImageField = ({
     images: attachements?.map((item) => ({ imageSrc: item?.value })),
   };
 
-  
   return (
     <>
       <label

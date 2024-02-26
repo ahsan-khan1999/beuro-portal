@@ -33,7 +33,7 @@ export const ShareImages = ({
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px]">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-scroll">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}

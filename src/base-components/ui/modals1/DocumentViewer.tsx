@@ -1,19 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { useDocumentViewer } from "@/hooks/modals/userDocumentViewer";
+import { useRouter } from "next/router";
+import { readImage } from "@/api/slices/imageSlice/image";
 
-export const DocumentViewerModal = ({
-  onClose,
-  handleImageSlider,
-}: {
-  onClose: () => void;
-  handleImageSlider: Function;
-}) => {
+export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   const {
     activeTab,
     attachementTabs,
@@ -21,13 +17,22 @@ export const DocumentViewerModal = ({
     isOpenedFile,
     translate,
   } = useDocumentViewer();
-
   const { images } = useAppSelector((state) => state.image);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const { offerID } = router.query;
+
+  useEffect(() => {
+    if (offerID)
+      dispatch(readImage({ params: { type: "offerID", id: offerID } }));
+  }, [offerID]);
+
   const attachementLookUp = {
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px]">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-scroll ">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
