@@ -92,7 +92,7 @@ export const Footer = ({
     row4: c4Row4,
     row5: c4Row5,
   } = templateSettings?.fourthColumn ?? {};
-  const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 16);
+  const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 32);
   const accountNumber = insertBreaks(templateSettings?.secondColumn?.accountNumber, 16);
 
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
@@ -198,7 +198,7 @@ export const Footer = ({
           {isPostCode && (
             <Text style={styles.footerText}>{`${address?.postalCode}`}</Text>
           )}
-          {isIBAN && <Text style={styles.footerText}>IBAN: {ibanNumber}</Text>}
+          {isIBAN && <Text style={styles.footerText}>{ibanNumber}</Text>}
           {isAccountNumber && (
             <Text style={styles.footerText}>Konto: {accountNumber}</Text>
           )}
