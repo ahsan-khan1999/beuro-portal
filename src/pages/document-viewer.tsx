@@ -1,9 +1,9 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
-import SignPdfPreview from "@/components/offers/pdfPriview/sign-pdf-preview";
-// const SignPdfPreview = dynamic(() => import("@/components/offers/pdfPriview/sign-pdf-preview"), { ssr: false });
+import { DocumentViewer } from "@/components/DocumentViewer";
+
 export default function () {
-  return <SignPdfPreview />;
+  return <DocumentViewer />;
 }
 
 export const getStaticProps = async ({ locale }: Locale) => ({

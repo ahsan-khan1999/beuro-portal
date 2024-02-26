@@ -46,6 +46,8 @@ const EditOffersDetails = () => {
     e.stopPropagation();
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
+
+  
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SHARE_IMAGES]: (
       <ShareImages
