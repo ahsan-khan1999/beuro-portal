@@ -18,8 +18,9 @@ export const SelectDropDownItems = ({
         <option
           key={idx}
           value={item.value}
-          className="select_dropdown_items cursor-pointer"
+          className="select_dropdown_items "
           onClick={() => handleItemClick(item.value)}
+          // style={{ cursor: "pointer !important" }}
         >
           {item.label}
         </option>
