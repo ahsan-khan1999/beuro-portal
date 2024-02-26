@@ -669,7 +669,7 @@
       "email_status": "E-Mail-Status",
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
       "receipt_email_preview": "E-Mail-Vorschau der Quittung",
-      "edit_invoice": "Bearbeiten Quittung"
+      "edit_invoice": "Rechnung Bearbeiten"
     },
     "table_functions": {
       "open": "Offen",
@@ -1084,6 +1084,10 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "view_docs": "Dokumente anzeigen",
+    "share_on_whatsapp": "Auf Whatsapp teilen",
+    "send_again": "erneut senden",
+    "share": "Teilen Sie",
     "lead": "Anfragen",
     "add": "hinzufügen",
     "upload_link": "Laden Sie Ihren Link hier hoch",
@@ -1198,9 +1202,9 @@
       "attachement_sub_title": "Anhänge sollten maximal 20 sein, Dateigröße bis zu 10MB",
       "link_title": "Link hinzufügen",
       "link_sub_title": "Die Anzahl der Links sollte maximal 20 betragen, die Dateigröße bis zu 10 MB.",
-      "add_image":"Bild hinzufügen",
-      "add_video":"Video hinzufügen",
-      "add_attachment":"Anhang hinzufügen"
+      "add_image": "Bild hinzufügen",
+      "add_video": "Video hinzufügen",
+      "add_attachment": "Anhang hinzufügen"
     },
     "delete_modal": {
       "heading": "Sind Sie sicher, dass Sie dieses Bild löschen wollen?",
@@ -2002,16 +2006,15 @@
   },
   "offer_status": {
     "Open": "Offen",
-    "Signed": "Angenommen",
     "Expired": "Abgeloffen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
   "contract_status": {
     "Open": "Offen",
-    "Sent": "Gesendet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
+    "Sent": "Gesendet",
     "Pending": "Entwurf"
   },
   "invoice_status": {
@@ -2093,5 +2096,11 @@
     "header_heading": "Ausrichtung der Kopfzeile",
     "left_align": "Logo linksbündig",
     "right_align": "Logo rechtsbündig"
+  },
+  "share_images_tab": {
+    "whats_app": "What'sapp",
+    "email": "E-Mail",
+    "enter_whatsapp_number": "Geben Sie Ihre what'sapp-Nummer ein",
+    "enter_your_email": "Ihre E-Mail eingeben"
   }
 }

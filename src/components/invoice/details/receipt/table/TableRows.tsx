@@ -11,6 +11,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { updateQuery } from "@/utils/update-query";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   collectiveInvoice,
@@ -44,13 +45,15 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div>
       {collectiveInvoice?.map((item, index: number) => {
+        console.log(item.invoiceStatus);
+
         return (
           <div
             key={index}
             onClick={() => handleReceiptPreview(item?.id)}
-            className="cursor-pointer hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] mt-2 rounded-md"
+            className="cursor-pointer hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(60px,_60px)_minmax(30px,_30px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
@@ -71,17 +74,14 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
                 }}
-                className=" text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
+                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
               >
                 {translate(item?.emailStatus)}
               </div>
             </span>
 
-            <span
-              className="py-4 flex items-center mx-2"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <DropDown
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+              <SelectDropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -98,17 +98,11 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[70px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="min-w-[70px] w-fit"
+                } w-full rounded-lg flex items-center justify-center`}
               />
             </span>
-            <span
-              className="py-4 flex items-center mx-2"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <DropDown
+            <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
+              <SelectDropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({
@@ -117,7 +111,8 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                // selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept");
@@ -129,10 +124,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } min-w-[90px] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="min-w-[90px] w-fit"
+                } w-full rounded-lg flex items-center justify-center`}
                 key={item.id}
               />
             </span>

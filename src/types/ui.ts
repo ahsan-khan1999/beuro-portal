@@ -40,6 +40,14 @@ export interface DropDownProps {
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
 }
 
+export interface SelectDropDownProps {
+  [DropDownKeys.ITEMS]: DropDownItem[];
+  [DropDownKeys.ON_ITEM_SELECTED]: (data: string) => void;
+  [DropDownKeys.SELECTED_ITEM]: string;
+  [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
+}
+
 export interface DropDownItemsProps {
   items: DropDownItem[];
   onItemClick: (data: string) => void;
@@ -314,7 +322,7 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
-  activeIndex?:number
+  activeIndex?: number;
   containerClasses?: string;
   mainImgSliderClasses?: string;
 }
@@ -345,6 +353,7 @@ export interface UsePaginationProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
+  currentPage:number
 }
 
 export interface ChildrenProp {
@@ -357,4 +366,15 @@ export interface LinkUploadProps {
   enteredLinks: string[];
   onLinkDelete: (linkToDelete: number) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ShareImagesViaWhatsapp {
+  inputNumber: string;
+  setEnteredNumber: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
+}
+export interface ShareImagesViaEmail {
+  inputEmail: string;
+  setEnteredEmail: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
 }

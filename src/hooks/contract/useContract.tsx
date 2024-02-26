@@ -90,6 +90,15 @@ const useContract = () => {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "contract" },
+      })
+    );
+  };
+
   // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -114,7 +123,7 @@ const useContract = () => {
 
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
-    handleFilterChange(filter)
+    handleFilterChange(filter);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -123,6 +132,16 @@ const useContract = () => {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={contractDetails}
+        onEditNote={handleEditNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -131,6 +150,7 @@ const useContract = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -177,14 +197,14 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readContract({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -217,7 +237,7 @@ const useContract = () => {
         // dispatch(
         //   readContractDetails({ params: { filter: contractDetails?.id } })
         // ),
-          offerCreatedHandler();
+        offerCreatedHandler();
     }
   };
 
@@ -250,6 +270,7 @@ const useContract = () => {
     loading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
+    currentPage
   };
 };
 

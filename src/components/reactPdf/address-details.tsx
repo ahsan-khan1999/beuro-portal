@@ -8,10 +8,9 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-
   },
   header: {
-    fontSize: 10,
+    fontSize: 7,
     fontWeight: 600,
     fontStyle: "semibold",
     color: "#000",
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
   },
   addressText: {
     color: "#141414",
-    fontSize: 8,
+    fontSize: 7,
     display: "flex",
     flexDirection: "row",
     columnGap: 2,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dateText: {
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: "medium",
     color: "#000",
   },
@@ -146,7 +145,7 @@ export const AddressDetails = ({
               <GridItem width={labelWidth}>
                 <Text
                   style={{
-                    fontSize: 8,
+                    fontSize: 7,
                     fontWeight: 500,
                     fontStyle: "medium",
                     color: "#000",
@@ -158,7 +157,7 @@ export const AddressDetails = ({
               <GridItem width={valueWidth}>
                 <Text
                   style={{
-                    fontSize: 8,
+                    fontSize: 7,
                     fontWeight: 400,
                     fontStyle: "normal",
                     color: "#000",
@@ -192,7 +191,7 @@ export const AddressDetails = ({
         <GridItem width={labelWidth}>
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 500,
               fontStyle: "medium",
               color: "#000",

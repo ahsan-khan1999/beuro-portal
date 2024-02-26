@@ -42,7 +42,7 @@ const OfferDetailsCard = ({
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
-    `${translate("offer_status.Signed")}`,
+    `${translate("offer_status.Accepted")}`,
     `${translate("offer_status.Expired")}`,
     `${translate("offer_status.Rejected")}`,
   ];
@@ -84,7 +84,7 @@ const OfferDetailsCard = ({
               fill="#4A13E7"
             />
           </svg>
-          <p className="font-medium text-2xl ml-[27px] ">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("offers.card_content.main_heading")}
           </p>
         </div>
@@ -109,7 +109,12 @@ const OfferDetailsCard = ({
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
             <p className="font-medium text-[16px] text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
-              {translate("offers.card_content.send_button")}
+              {offerDetails &&
+                (offerDetails.emailStatus === "Sent" ? (
+                  <>{translate("common.send_again")}</>
+                ) : (
+                  <>{translate("offers.card_content.send_button")}</>
+                ))}
             </p>
           </div>
           {isSendEmail && (

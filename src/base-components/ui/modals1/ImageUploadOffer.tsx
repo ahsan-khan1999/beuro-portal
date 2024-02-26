@@ -129,6 +129,7 @@ const ImagesUploadOffer = ({
       </div>
     ),
   };
+
   return (
     <>
       <BaseModal
