@@ -54,7 +54,7 @@ const OfferEditImages = ({
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-4 xLarge:grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
+          <div className="grid grid-cols-4 xLarge:grid-cols-2 max-h-[500px] overflow-scroll gap-[14px] p-3 border-t-4 border-[#4A13E7]">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
