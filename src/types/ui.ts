@@ -314,7 +314,7 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
-  activeIndex?:number
+  activeIndex?: number;
   containerClasses?: string;
   mainImgSliderClasses?: string;
 }
@@ -345,6 +345,7 @@ export interface UsePaginationProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
+  currentPage:number
 }
 
 export interface ChildrenProp {
@@ -357,4 +358,15 @@ export interface LinkUploadProps {
   enteredLinks: string[];
   onLinkDelete: (linkToDelete: number) => void;
   setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ShareImagesViaWhatsapp {
+  inputNumber: string;
+  setEnteredNumber: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
+}
+export interface ShareImagesViaEmail {
+  inputEmail: string;
+  setEnteredEmail: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
 }

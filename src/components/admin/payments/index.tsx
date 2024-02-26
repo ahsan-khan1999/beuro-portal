@@ -16,7 +16,7 @@ import DownloadModal from "@/base-components/ui/modals1/DownloadModal";
 import { GetYearAndMonth } from "@/types/admin/payments";
 
 export default function Payments() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage } =
+  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,currentPage } =
     usePayments();
   const { t: translate } = useTranslation();
 
@@ -29,12 +29,12 @@ export default function Payments() {
   };
 
   const handleSelectMonth = () => {
-    dispatch(updateModalType({type: ModalType.SELECT_MONTH}));
+    dispatch(updateModalType({ type: ModalType.SELECT_MONTH }));
   };
 
   const handleDownload = (date: GetYearAndMonth) => {
-    dispatch(updateModalType({type: ModalType.NONE}));
-    dispatch(updateModalType({type: ModalType.DOWNLOAD_MODAL}));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.DOWNLOAD_MODAL }));
   };
 
   const route = () => {
@@ -73,6 +73,8 @@ export default function Payments() {
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
+
         />
       </Layout>
 

@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
     "> *": {
       // Styles for direct children (Text elements) of the container
       // Add your specific styles for the Text elements here
-      fontSize: 10,
+      fontSize: 7,
       color: "blue",
     },
   },
   heading: {
     marginBottom: 2,
-    fontSize: 14,
+    fontSize: 7,
   },
   description: {
-    fontSize: 12,
+    fontSize: 7,
     fontWeight: "normal",
   },
   shareHeading: {
-    fontSize: 14,
+    fontSize: 7,
     fontWeight: "medium",
     color: "#000",
     marginTop: 30,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
   dateText: {
     paddingTop: 12,
-    fontSize: 12,
+    fontSize: 7,
     fontWeight: 400,
     color: "#000",
   },
@@ -71,46 +71,46 @@ const styles = StyleSheet.create({
 
 const stylesheet: HtmlStyles = {
   body: {
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
   },
   p: {
     margin: 0,
-    fontSize: 8,
+    fontSize: 7,
     color: "#272727",
   },
   h1: {
     margin: 0,
     padding: 0,
-    fontSize: 16,
+    fontSize: 7,
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize: 14,
+    fontSize: 7,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 13,
+    fontSize: 7,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 7,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize: 10,
+    fontSize: 7,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 9,
+    fontSize: 7,
   },
   ul: { marginLeft: 0 },
   li: {
-    fontSize: 8,
+    fontSize: 7,
     marginLeft: 0,
     marginRight: 10,
 
@@ -130,7 +130,7 @@ const stylesheet: HtmlStyles = {
     },
   },
   strong: {
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 700,
     fontStyle: "bold",
   },
@@ -155,12 +155,16 @@ export const AdditionalDetails = ({
   // };
 
   // useMemo(() => signature && onFileChange(), [signature]);
-  
+
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html resetStyles={false} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
-          {replaceClassesWithInlineStyles(description ?? '')}
+        <Html
+          resetStyles={false}
+          stylesheet={stylesheet}
+          style={{ fontFamily: "Poppins" }}
+        >
+          {replaceClassesWithInlineStyles(description ?? "")}
         </Html>
       </View>
     </View>

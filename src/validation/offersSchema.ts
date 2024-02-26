@@ -64,10 +64,10 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
 
-    [EditOfferDetails.email]: yup
-      .string()
-      .email()
-      .notRequired(),
+    // [EditOfferDetails.email]: yup
+    //   .string()
+    //   .email()
+    //   .notRequired(),
 
     [EditOfferDetails.offerTitle]: yup
       .string()
@@ -77,13 +77,9 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
 
-    [EditOfferDetails.phoneNumber]: yup
-      .string()
-      .notRequired(),
+    [EditOfferDetails.phoneNumber]: yup.string().notRequired(),
 
-    [EditOfferDetails.mobileNumber]: yup
-      .string()
-      .notRequired(),
+    [EditOfferDetails.mobileNumber]: yup.string().notRequired(),
 
     [EditOfferDetails.content]: yup
       .string()
@@ -92,9 +88,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       [EditOfferDetails.streetNumber]: yup
         .string()
         .required(translate("validationMessages.required")),
-      [EditOfferDetails.postCode]: yup
-        .string()
-        .notRequired(),
+      [EditOfferDetails.postCode]: yup.string().notRequired(),
       [EditOfferDetails.country]: yup
         .string()
         .required(translate("validationMessages.required")),
@@ -108,9 +102,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
             startDate: yup
               .string()
               .required(translate("validationMessages.required")),
-            endDate: yup
-              .string()
-              .notRequired(),
+            endDate: yup.string().notRequired(),
           })
           .required(translate("validationMessages.required"))
       )
@@ -168,16 +160,15 @@ export const generateOfferAddressEditDetailsValidation = (
           [OfferAddressEditDetails.streetNo]: yup
             .string()
             .required(translate("validationMessages.required")),
-          [OfferAddressEditDetails.postCode]: yup
-            .string()
-            .notRequired(),
+          [OfferAddressEditDetails.postCode]: yup.string().notRequired(),
           [OfferAddressEditDetails.country]: yup
             .string()
             .required(translate("validationMessages.required")),
           [OfferAddressEditDetails.description]: yup.string().notRequired(),
-          [OfferAddressEditDetails.label]: yup.string().required(translate("validationMessages.required")),
+          [OfferAddressEditDetails.label]: yup
+            .string()
+            .required(translate("validationMessages.required")),
           [OfferAddressEditDetails.type]: yup.string().notRequired(),
-
         })
         .required(translate("validationMessages.required"))
     )
@@ -205,8 +196,7 @@ export const generateAddfferServiceDetailsValidation = (
           [AddServiceOfferDetails.price]: yup
             .number()
             .required(translate("validationMessages.required"))
-            .typeError(translate("validationMessages.invalid_format"))
-          ,
+            .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.unit]: yup
             .string()
             .required(translate("validationMessages.required")),
@@ -218,13 +208,11 @@ export const generateAddfferServiceDetailsValidation = (
             .number()
             .notRequired()
             // .lessThan(yup.ref(AddServiceOfferDetails.totalPrice), translate("validationMessages.discountLessThanTotalPrice"))
-            .typeError(translate("validationMessages.invalid_format"))
-          ,
+            .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.totalPrice]: yup
             .number()
             .required(translate("validationMessages.required"))
-            .typeError(translate("validationMessages.invalid_format"))
-          ,
+            .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.description]: yup
             .string()
             .required(translate("validationMessages.required")),
@@ -239,8 +227,7 @@ export const generateAddfferServiceDetailsValidation = (
       .string()
       .when("isDiscount", {
         is: (isDiscount: boolean) => isDiscount,
-        then: () =>
-          yup.string().notRequired(),
+        then: () => yup.string().notRequired(),
       }),
     [AddServiceOfferDetails.isDiscount]: yup
       .boolean()

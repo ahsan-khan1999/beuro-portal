@@ -204,14 +204,14 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readOffer({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -275,6 +275,7 @@ const useOffers = () => {
     loading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
+    currentPage
   };
 };
 

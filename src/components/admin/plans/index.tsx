@@ -20,6 +20,7 @@ export default function Plans() {
     setFilter,
     handleDelete,
     renderModal,
+    currentPage
   } = usePlans();
 
   const CurrentComponent = useEmptyStates(
@@ -35,13 +36,12 @@ export default function Plans() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows?.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
       {renderModal()}
     </Layout>
   );

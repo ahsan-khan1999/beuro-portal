@@ -561,6 +561,7 @@ input[type="number"] {
 .html-content > h4 {
   /* font-size: 14px; */
 }
+
 .html-content > p {
   color: #272727;
   margin: 0;
@@ -594,3 +595,16 @@ input[type="number"] {
   margin: 0;
 }
 
+.table-scroll-bar {
+  overflow-x: scroll;
+}
+
+.table-scroll-bar::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+}
+
+.table-scroll-bar::-webkit-scrollbar-track {
+  background-color: red;
+  border-radius: 6px;
+}

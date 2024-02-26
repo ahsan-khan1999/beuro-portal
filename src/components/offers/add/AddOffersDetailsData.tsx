@@ -101,9 +101,10 @@ const EditOffersDetailsData = () => {
   const router = useRouter();
 
   const route = () => {
-    router.push(`/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`);
+    router.push(
+      `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
+    );
     onClose();
-
   };
 
   const MODAL_CONFIG: ModalConfigType = {

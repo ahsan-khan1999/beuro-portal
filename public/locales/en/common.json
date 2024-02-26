@@ -1093,6 +1093,9 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "share_on_whatsapp": "Share on whatsapp",
+    "send_again": "send Again",
+    "share": "Share",
     "lead": "Lead",
     "add": "Add",
     "upload_link": "Upload your link here",
@@ -1206,10 +1209,9 @@
       "attachement_sub_title": "Attachment should be max 20, file size up to 10MB",
       "link_title": "Add Link",
       "link_sub_title": "Links should be max 20, file size up to 10MB",
-      "add_image":"Add Image",
-      "add_video":"Add Video",
-      "add_attachment":"Add Attachment"
-
+      "add_image": "Add Image",
+      "add_video": "Add Video",
+      "add_attachment": "Add Attachment"
     },
     "delete_modal": {
       "heading": "Are you sure you want to delete this Image?",
@@ -2008,7 +2010,6 @@
   },
   "offer_status": {
     "Open": "Open",
-    "Signed": "Signed",
     "Expired": "Expired",
     "Rejected": "Rejected",
     "Accepted": "Accepted"
@@ -2093,5 +2094,11 @@
     "header_heading": "Header Alignment",
     "left_align": "Logo Align Left",
     "right_align": "Logo Align Right"
+  },
+  "share_images_tab": {
+    "whats_app": "What'sapp",
+    "email": "Email",
+    "enter_whatsapp_number": "Enter your what'sapp number",
+    "enter_your_email": "Enter your email"
   }
 }

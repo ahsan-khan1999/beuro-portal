@@ -73,5 +73,7 @@ export default function useCustomer() {
     setFilter,
     handleFilterChange,
     loading,
+    currentPage
+
   };
 }

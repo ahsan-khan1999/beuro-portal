@@ -123,14 +123,14 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readInvoice({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -178,6 +178,7 @@ const useInvoice = () => {
     handleSendEmail,
     handleSendByPost,
     invoiceDetails,
+    currentPage
   };
 };
 

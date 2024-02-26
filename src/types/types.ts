@@ -622,6 +622,7 @@ export interface PaginationProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
   containerClassName?: string;
+  currentPage:number
 }
 
 export interface PaginationItemProps {
@@ -727,6 +728,7 @@ export interface ProductItemFooterProps {
 export interface ContactDetailsProps {
   address: {
     name: string;
+    companyName: string;
     streetWithNumber: string;
     postalCode: string;
     city: string;

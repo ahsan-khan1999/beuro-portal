@@ -40,7 +40,8 @@ export const ContactAddress = ({
         }}
       >
         <Text style={textBase}>
-          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
+          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name} c/o
+          {address?.companyName}
         </Text>
         <Text style={textBase}>{address?.streetWithNumber}</Text>
         <Text style={textBase}>{`${address?.postalCode} ${
@@ -56,9 +57,9 @@ export const ContactAddress = ({
       >
         {email && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text
+            {/* <Text
               style={{
-                fontSize: 8,
+                fontSize: 7,
                 fontWeight: 400,
                 fontStyle: "normal",
                 color: "#000",
@@ -66,16 +67,16 @@ export const ContactAddress = ({
               }}
             >
               E-Mail :
-            </Text>
+            </Text> */}
             <Text style={textBase}>{email}</Text>
           </View>
         )}
 
         {phone !== "+" && phone && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text
+            {/* <Text
               style={{
-                fontSize: 8,
+                fontSize: 7,
                 fontWeight: 400,
                 fontStyle: "normal",
                 color: "#000",
@@ -83,15 +84,15 @@ export const ContactAddress = ({
               }}
             >
               Telefon :
-            </Text>
+            </Text> */}
             <Text style={textBase}>{phone}</Text>
           </View>
         )}
         {mobile !== "+" && mobile && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text
+            {/* <Text
               style={{
-                fontSize: 8,
+                fontSize: 7,
                 fontWeight: 400,
                 fontStyle: "normal",
                 color: "#000",
@@ -99,7 +100,7 @@ export const ContactAddress = ({
               }}
             >
               Handynummer :
-            </Text>
+            </Text> */}
             <Text style={textBase}>{mobile}</Text>
           </View>
         )}

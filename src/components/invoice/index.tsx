@@ -19,6 +19,7 @@ export default function Invoices() {
     loading,
     setFilter,
     handleFilterChange,
+    currentPage
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -38,13 +39,12 @@ export default function Invoices() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
       {renderModal()}
     </>
   );

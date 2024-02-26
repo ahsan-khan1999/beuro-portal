@@ -63,6 +63,7 @@ const useService = () => {
     setFilter,
     translate,
     loading,
+    currentPage
   };
 };
 

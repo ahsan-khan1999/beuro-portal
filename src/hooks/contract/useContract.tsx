@@ -177,14 +177,14 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readContract({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -250,6 +250,7 @@ const useContract = () => {
     loading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
+    currentPage
   };
 };
 

@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     columnGap: 16,
   },
   text: {
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     color: "#1E1E1E",
   },
   whiteText: {
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   discountDescription: {
     marginTop: 6,
     color: "#404040",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 400,
     fontStyle: "normal",
   },
@@ -74,24 +74,30 @@ export const ServicesTotalAmount = ({
   taxType,
   serviceDiscountSum,
   isTax,
-  isDiscount
-
+  isDiscount,
 }: Partial<ProductItemFooterProps>) => {
+  const isPaid =
+    invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
 
-  const isPaid = invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+  const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount);
+  const calculatedDiscount =
+    discountType && discountType === "Amount"
+      ? discount
+      : calculateTax(Number(discount), Number(subTotal));
+  const calculatedTax =
+    (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
+  console.log(calculatedTax, "calculatedTax", taxType, "subTotal", subTotal);
 
-  const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount)
-  const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
-  const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
-  console.log(calculatedTax,"calculatedTax",taxType,"subTotal",subTotal);
-  
-  const totalDiscount = !isDiscount ? serviceDiscountSum : serviceDiscountSum && (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2) || Number(calculatedDiscount).toFixed(2)
+  const totalDiscount = !isDiscount
+    ? serviceDiscountSum
+    : (serviceDiscountSum &&
+        (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
+      Number(calculatedDiscount).toFixed(2);
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.leftColumn}>
-          {
-            !isShowExtraAmount &&
+          {!isShowExtraAmount && (
             <View>
               <Text
                 style={{
@@ -109,7 +115,7 @@ export const ServicesTotalAmount = ({
                 Geschäftsbedingungen zu verstehen.
               </Text>
             </View>
-          }
+          )}
         </View>
         <View style={styles.rightColumn}>
           <View style={styles.subSection}>
@@ -118,16 +124,11 @@ export const ServicesTotalAmount = ({
           </View>
           <View style={styles.subSection}>
             <Text style={styles.text}>MwSt ({tax}%): </Text>
-            {
-              isTax &&
+            {(isTax && (
               <Text style={styles.text}>
-                {Number(calculatedTax).toFixed(2)}  
+                {Number(calculatedTax).toFixed(2)}
               </Text>
-              ||
-              <Text style={styles.text}>
-                {0}
-              </Text>
-            }
+            )) || <Text style={styles.text}>{0}</Text>}
           </View>
           {/* {
             totalDiscount !== 0 &&
@@ -154,8 +155,12 @@ export const ServicesTotalAmount = ({
                 </Text>
               </View>
               <View style={styles.subSection}>
-                <Text style={styles.text}>{!isPaid ? 'Fälliger Betrag' : 'Bezahlt'}:</Text>
-                <Text style={styles.text}>{Number(invoiceAmount).toFixed(2)} </Text>
+                <Text style={styles.text}>
+                  {!isPaid ? "Fälliger Betrag" : "Bezahlt"}:
+                </Text>
+                <Text style={styles.text}>
+                  {Number(invoiceAmount).toFixed(2)}{" "}
+                </Text>
               </View>
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>Unbezahlter Betrag:</Text>
