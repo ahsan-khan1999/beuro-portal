@@ -30,15 +30,19 @@ export const MainImageSlider = ({
           />
         }
       />
-      <div>
+      <div
+      
+      >
         <Image
           src={imageSrc}
           alt="main image"
           // fill={true}
           id="mainImage"
-          className=" flex justify-center items-center align-middle mx-auto my-auto rounded-lg"
-          height={500}
-          width={500}
+          className=" flex justify-center items-center align-middle mx-auto my-auto bg-black rounded-lg"
+          objectFit='contain'
+          layout='fill'
+
+
           
         />
       </div>
