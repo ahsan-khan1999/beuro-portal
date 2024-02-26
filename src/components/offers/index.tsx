@@ -6,7 +6,6 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
 import { useEmptyStates } from "@/utils/hooks";
-import useOfferDetails from "@/hooks/offers/useOfferDetails";
 
 export default function Offers() {
   const {

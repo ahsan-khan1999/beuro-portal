@@ -172,6 +172,8 @@ export const useReceiptPdf = () => {
             contactAddress: {
               address: {
                 name: invoiceDetails?.invoiceID?.customerDetail.fullName,
+                companyName:
+                  invoiceDetails?.invoiceID?.customerDetail.companyName,
                 city: invoiceDetails?.invoiceID?.customerDetail?.address
                   ?.country,
                 postalCode:

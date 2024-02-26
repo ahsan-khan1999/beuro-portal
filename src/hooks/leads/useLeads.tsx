@@ -118,7 +118,6 @@ const useLeads = () => {
   ) => {
     e.stopPropagation();
     dispatch(setImages([]));
-
     const filteredLead = lead.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
@@ -137,7 +136,12 @@ const useLeads = () => {
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+      />
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />

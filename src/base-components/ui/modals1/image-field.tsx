@@ -140,6 +140,8 @@ export const ImageField = ({
     noOfThumbNails: 8,
     images: attachements?.map((item) => ({ imageSrc: item?.value })),
   };
+
+  
   return (
     <>
       <label

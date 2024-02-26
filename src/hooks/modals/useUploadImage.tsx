@@ -1,22 +1,9 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
-import {
-  Control,
-  FieldValues,
-  SubmitHandler,
-  UseFormSetValue,
-  useForm,
-} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
-import { updateLead } from "@/api/slices/lead/leadSlice";
-import { useEffect, useMemo, useState } from "react";
-import { getFileNameFromUrl, setImageFieldValues } from "@/utils/utility";
-import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { createImage, readImage } from "@/api/slices/imageSlice/image";
-import { generateImageValidation } from "@/validation/modalsSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useMemo, useState } from "react";
+import { getFileNameFromUrl } from "@/utils/utility";
+import { createImage } from "@/api/slices/imageSlice/image";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
@@ -28,14 +15,10 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
+  const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
 
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
-  const shareImagesTabs = ["whats_app", "email"];
-  const [enteredNumber, setEnteredNumber] =
-    useState<string>("0030 11 321 23 33");
-  const [enteredEmail, setEnteredEmail] = useState<string>("");
-
   const [enteredLinks, setEnteredLinks] = useState<any>({
     images: [],
     links: [],
@@ -64,23 +47,28 @@ export const useUploadImage = (handleImageSlider: Function) => {
       setEnteredLink("");
     }
   };
+
   const handleimageAdd = (attachement?: Attachement[]) => {
     if (attachement)
       setEnteredLinks({ ...enteredLinks, images: [...attachement] });
   };
+
   const handleAttachementAdd = (attachement?: Attachement[]) => {
     if (attachement)
       setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
   };
+
   const handleImageDelete = (linkToDelete: string) => {
     const { images } = enteredLinks;
     const updatedLinks = images.filter((item: string) => item !== linkToDelete);
     setEnteredLinks({ ...enteredLinks, images: updatedLinks });
   };
+
   const handleVideoAdd = (attachement?: Attachement[]) => {
     if (attachement)
       setEnteredLinks({ ...enteredLinks, video: [...attachement] });
   };
+
   const handleLinkDelete = (linkToDelete: number) => {
     const { links } = enteredLinks;
     const linkList = [...links];
@@ -95,6 +83,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     );
     setEnteredLinks({ ...enteredLinks, attachements: updatedAttachements });
   };
+
   const handleVideoDelete = (attachementsToDelete: string) => {
     const { video } = enteredLinks;
     const updatedAttachements = video.filter(
@@ -120,13 +109,10 @@ export const useUploadImage = (handleImageSlider: Function) => {
   //   handleImageSlider,
   //   setValue
   // );
+
   const handleOnClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
-
-  const handleShareImgsViaWhatsapp = () => {};
-
-  const handleShareImgsViaEmail = () => {};
 
   useMemo(() => {
     if (leadDetails?.id) {
@@ -210,12 +196,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     onSubmit,
     loading,
     loadingGlobal,
-    shareImagesTabs,
-    enteredNumber,
-    setEnteredNumber,
-    handleShareImgsViaWhatsapp,
-    enteredEmail,
-    setEnteredEmail,
-    handleShareImgsViaEmail,
+    isOpenedFile,
   };
 };

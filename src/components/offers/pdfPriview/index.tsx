@@ -32,9 +32,9 @@ const PdfPriview = () => {
     onClose,
     onSuccess,
     systemSetting,
-    offerDetails
+    offerDetails,
   } = useOfferPdf();
-  
+
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -92,7 +92,6 @@ const PdfPriview = () => {
             setPdfFile={setPdfFile}
             systemSetting={systemSetting}
             showContractSign={true}
-
           />
 
           {renderModal()}
