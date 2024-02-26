@@ -18,33 +18,33 @@ export default function Customers() {
     handleFilterChange,
     loading,
     setFilter,
-  } = useCustomer();
+    currentPage
+} = useCustomer();
 
-  const CurrentComponent = useEmptyStates(
-    <TableRow currentPageRows={currentPageRows} />,
-    currentPageRows?.length > 0,
-    loading
-  );
+const CurrentComponent = useEmptyStates(
+  <TableRow currentPageRows={currentPageRows} />,
+  currentPageRows?.length > 0,
+  loading
+);
 
-  return (
-    <Layout>
-      <TableFunctions
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-      />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+return (
+  <Layout>
+    <TableFunctions
+      filter={filter}
+      setFilter={setFilter}
+      handleFilterChange={handleFilterChange}
+    />
+    <TableLayout>
+      <TableHeading />
+      {CurrentComponent}
+    </TableLayout>
 
-      {currentPageRows?.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
-    </Layout>
-  );
+    <Pagination
+      totalItems={totalItems}
+      itemsPerPage={itemsPerPage}
+      onPageChange={handlePageChange}
+      currentPage={currentPage}
+    />
+  </Layout>
+);
 }

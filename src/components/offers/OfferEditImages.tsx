@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import LeadsDetailImgLayout from "@/layout/Leads/LeadsDetailImgLayout";
-import leadsDetailsImg1 from "@/assets/pngs/leads_detail_img1.png";
-import leadsDetailsImg2 from "@/assets/pngs/leads_detail_img2.png";
-import leadsDetailsImg3 from "@/assets/pngs/leads_detail_img3.png";
-import leadsDetailsImg4 from "@/assets/pngs/leads_detail_img4.png";
 import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import { readImage } from "@/api/slices/imageSlice/image";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const OfferEditImages = ({
@@ -26,13 +21,6 @@ const OfferEditImages = ({
   tabType: number;
   handleImageSlider: () => void;
 }) => {
-  const offersImgs = [
-    leadsDetailsImg1,
-    leadsDetailsImg2,
-    leadsDetailsImg3,
-    leadsDetailsImg4,
-  ];
-
   const { images } = useAppSelector((state) => state.image);
   const { offerDetails } = useAppSelector((state) => state.offer);
 
@@ -47,20 +35,25 @@ const OfferEditImages = ({
           <Image
             src={shareIcon}
             alt="shareIcon"
-            className={`${images && images?.images?.length > 0 ? "cursor-pointer" : "cursor-default"
-              }  `}
-            onClick={() => images && images?.images?.length > 0 && shareImgModal()}
+            className={`${
+              images && images?.images?.length > 0
+                ? "cursor-pointer"
+                : "cursor-default"
+            }  `}
+            onClick={() =>
+              images && images?.images?.length > 0 && shareImgModal()
+            }
           />
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-4 xLarge:grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
+          <div className="grid grid-cols-4 xLarge:grid-cols-2 max-h-[500px] overflow-scroll gap-[14px] p-3 border-t-4 border-[#4A13E7]">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
                 key={index}
                 alt="leads_images"
-                className="w-auto h-auto rounded-lg"
+                className="  rounded-lg"
                 height={106}
                 width={106}
               />

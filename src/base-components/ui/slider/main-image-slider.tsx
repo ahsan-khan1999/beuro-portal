@@ -30,13 +30,20 @@ export const MainImageSlider = ({
           />
         }
       />
-      <div>
+      <div
+      
+      >
         <Image
           src={imageSrc}
           alt="main image"
-          fill={true}
+          // fill={true}
           id="mainImage"
-          className="rounded-lg"
+          className=" flex justify-center items-center align-middle mx-auto my-auto bg-black rounded-lg"
+          objectFit='contain'
+          layout='fill'
+
+
+          
         />
       </div>
       <IconOnlyButton

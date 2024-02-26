@@ -41,58 +41,59 @@ const ImagesUpload = ({
     handleImageDelete,
     onSubmit,
     loading,
-    loadingGlobal
+    loadingGlobal,
   } = useUploadImage(handleImageSlider);
   const attachementLookUp = {
-    "img_tab": <>
-      <div className="flex flex-col gap-y-2 my-5">
-        <h2 className="text-base font-medium text-[#393939]">
-          {translate("common.images_modal.title")}
-        </h2>
-        <p className="text-xs font-normal text-[#8F8F8F]">
-          {translate("common.images_modal.sub_title")}
-        </p>
-      </div>
-      {/* <Form
+    img_tab: (
+      <>
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("common.images_modal.title")}
+          </h2>
+          <p className="text-xs font-normal text-[#8F8F8F]">
+            {translate("common.images_modal.sub_title")}
+          </p>
+        </div>
+        {/* <Form
         formFields={fields}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
       /> */}
-      <ImageField
-        id="attachement"
-        attachements={enteredLinks?.images}
-        fileSupported="PNG, JPEG, JPG, WEBP "
+        <ImageField
+          id="attachement"
+          attachements={enteredLinks?.images}
+          fileSupported="PNG, JPEG, JPG, WEBP "
+          isAttachement={true}
+          isOpenedFile={false}
+          text={translate("common.images_modal.add_image")}
+          setAttachements={handleimageAdd}
+        />
+      </>
+    ),
 
-        isAttachement={true}
-        isOpenedFile={false}
-        text={translate("common.images_modal.add_image")}
-        setAttachements={handleimageAdd}
-      />
-    </>,
-
-    "video_tab": <div className="my-0 w-full">
-      <div className="flex flex-col gap-y-2 my-5">
-        <h2 className="text-base font-medium text-[#393939]">
-          {translate("common.images_modal.video_title")}
-        </h2>
-        <p className="text-xs font-normal text-[#8F8F8F]">
-          {translate("common.images_modal.video_sub_title")}
-        </p>
+    video_tab: (
+      <div className="my-0 w-full">
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("common.images_modal.video_title")}
+          </h2>
+          <p className="text-xs font-normal text-[#8F8F8F]">
+            {translate("common.images_modal.video_sub_title")}
+          </p>
+        </div>
+        <VideoField
+          id="attachement"
+          attachements={enteredLinks?.video}
+          fileSupported="MP4, MOV, AVI, WEBM "
+          isAttachement={true}
+          isOpenedFile={false}
+          text={translate("common.images_modal.add_video")}
+          setAttachements={handleVideoAdd}
+        />
       </div>
-      <VideoField
-        id="attachement"
-        attachements={enteredLinks?.video}
-        fileSupported="MP4, MOV, AVI, WEBM "
-
-        isAttachement={true}
-        isOpenedFile={false}
-        text={translate("common.images_modal.add_video")}
-
-        setAttachements={handleVideoAdd}
-      />
-    </div>,
-    "link_tab":
+    ),
+    link_tab: (
       <div className="my-0 w-full">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
@@ -109,27 +110,30 @@ const ImagesUpload = ({
           onLinkDelete={handleLinkDelete}
           setEnteredLink={setEnteredLink}
         />
-      </div>,
-    "attachement_tab": <div className="my-0 w-full">
-      <div className="flex flex-col gap-y-2 my-5">
-        <h2 className="text-base font-medium text-[#393939]">
-          {translate("common.images_modal.attachement_title")}
-        </h2>
-        <p className="text-xs font-normal text-[#8F8F8F]">
-          {translate("common.images_modal.attachement_sub_title")}
-        </p>
       </div>
-      <AttachementField
-        id="attachement"
-        attachements={enteredLinks?.attachements}
-        fileSupported="Pdf, ODT, DOC, XLXS "
-        isAttachement={true}
-        isOpenedFile={false}
-        text={translate("common.images_modal.add_attachment")}
-        setAttachements={handleAttachementAdd}
-      />
-    </div>,
-  }
+    ),
+    attachement_tab: (
+      <div className="my-0 w-full">
+        <div className="flex flex-col gap-y-2 my-5">
+          <h2 className="text-base font-medium text-[#393939]">
+            {translate("common.images_modal.attachement_title")}
+          </h2>
+          <p className="text-xs font-normal text-[#8F8F8F]">
+            {translate("common.images_modal.attachement_sub_title")}
+          </p>
+        </div>
+        <AttachementField
+          id="attachement"
+          attachements={enteredLinks?.attachements}
+          fileSupported="Pdf, ODT, DOC, XLXS "
+          isAttachement={true}
+          isOpenedFile={false}
+          text={translate("common.images_modal.add_attachment")}
+          setAttachements={handleAttachementAdd}
+        />
+      </div>
+    ),
+  };
   return (
     <>
       <BaseModal
@@ -149,18 +153,18 @@ const ImagesUpload = ({
           </p>
 
           <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
-            {
-              attachementTabs.map((item, index) => (
-                <button
-                  className={`${activeTab === item ? "text-primary" : "text-[#393939] "
-                    } text-base font-medium pb-[10px] ${activeTab === item ? "border-b-2 border-primary" : ""
-                    }`}
-                  onClick={() => handleTabChange(item)}
-                >
-                  {translate(`common.images_modal.${item}`)}
-                </button>
-              ))
-            }
+            {attachementTabs.map((item, index) => (
+              <button
+                className={`${
+                  activeTab === item ? "text-primary" : "text-[#393939] "
+                } text-base font-medium pb-[10px] ${
+                  activeTab === item ? "border-b-2 border-primary" : ""
+                }`}
+                onClick={() => handleTabChange(item)}
+              >
+                {translate(`common.images_modal.${item}`)}
+              </button>
+            ))}
           </div>
 
           {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
@@ -173,7 +177,6 @@ const ImagesUpload = ({
               onClick={onSubmit}
               loading={loading || loadingGlobal}
               disabled={loadingGlobal}
-
             />
           </div>
         </div>

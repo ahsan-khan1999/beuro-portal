@@ -83,6 +83,7 @@ const useLeads = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -107,6 +108,15 @@ const useLeads = () => {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "lead" },
+      })
+    );
+  };
+
   // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -118,7 +128,6 @@ const useLeads = () => {
   ) => {
     e.stopPropagation();
     dispatch(setImages([]));
-
     const filteredLead = lead.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
@@ -134,10 +143,26 @@ const useLeads = () => {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={leadDetails}
+        onEditNote={handleEditNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
+      />
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
@@ -213,6 +238,7 @@ const useLeads = () => {
     filter,
     setFilter,
     loading,
+    currentPage
   };
 };
 

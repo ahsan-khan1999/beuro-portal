@@ -122,7 +122,11 @@ export default function useCustomerDetail(stage: boolean) {
     }
   }, [id]);
   useMemo(() => {
-    if (customerDetails && stage) reset({ ...customerDetails, gender: staticEnums["Gender"][customerDetails?.gender] });
+    if (customerDetails && stage)
+      reset({
+        ...customerDetails,
+        gender: staticEnums["Gender"][customerDetails?.gender],
+      });
   }, [customerDetails.id]);
 
   const handleUpdateCancel = () => {

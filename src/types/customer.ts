@@ -7,6 +7,7 @@ import {
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
 import { Plan } from "./admin/plans";
+import { Company } from "./company";
 
 export interface CustomerTable {
   currentPageRows: Customers[];

@@ -15,6 +15,7 @@ export default function OffersDetailsTable({}) {
     handleNotes,
     handleImageUpload,
     renderModal,
+    currentPage
   } = useOffers();
 
   return (
@@ -28,13 +29,12 @@ export default function OffersDetailsTable({}) {
         /> */}
         ,
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
 
       {renderModal()}
     </>

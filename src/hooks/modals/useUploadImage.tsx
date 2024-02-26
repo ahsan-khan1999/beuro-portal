@@ -1,22 +1,9 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
-import {
-  Control,
-  FieldValues,
-  SubmitHandler,
-  UseFormSetValue,
-  useForm,
-} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
-import { updateLead } from "@/api/slices/lead/leadSlice";
-import { useEffect, useMemo, useState } from "react";
-import { getFileNameFromUrl, setImageFieldValues } from "@/utils/utility";
-import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { createImage, readImage } from "@/api/slices/imageSlice/image";
-import { generateImageValidation } from "@/validation/modalsSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useMemo, useState } from "react";
+import { getFileNameFromUrl } from "@/utils/utility";
+import { createImage } from "@/api/slices/imageSlice/image";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
@@ -28,6 +15,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
+  const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
 
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
@@ -35,52 +23,72 @@ export const useUploadImage = (handleImageSlider: Function) => {
     images: [],
     links: [],
     attachements: [],
-    video: []
+    video: [],
   });
-  const attachementTabs = ["img_tab", "video_tab", "attachement_tab", "link_tab"]
+
+  const attachementTabs = [
+    "img_tab",
+    "video_tab",
+    "attachement_tab",
+    "link_tab",
+  ];
+
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
 
   const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
-    e?.preventDefault()
+    e?.preventDefault();
     if (enteredLink.trim() !== "") {
-      let newArray = [...enteredLinks.links]
+      let newArray = [...enteredLinks.links];
 
-      newArray.push(enteredLink as string)
+      newArray.push(enteredLink as string);
       setEnteredLinks({ ...enteredLinks, links: [...newArray] });
       setEnteredLink("");
     }
   };
+
   const handleimageAdd = (attachement?: Attachement[]) => {
-    if (attachement) setEnteredLinks({ ...enteredLinks, images: [...attachement] });
+    if (attachement)
+      setEnteredLinks({ ...enteredLinks, images: [...attachement] });
   };
+
   const handleAttachementAdd = (attachement?: Attachement[]) => {
-    if (attachement) setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
+    if (attachement)
+      setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
   };
+
   const handleImageDelete = (linkToDelete: string) => {
-    const { images } = enteredLinks
+    const { images } = enteredLinks;
     const updatedLinks = images.filter((item: string) => item !== linkToDelete);
     setEnteredLinks({ ...enteredLinks, images: updatedLinks });
   };
+
   const handleVideoAdd = (attachement?: Attachement[]) => {
-    if (attachement) setEnteredLinks({ ...enteredLinks, video: [...attachement] });
+    if (attachement)
+      setEnteredLinks({ ...enteredLinks, video: [...attachement] });
   };
+
   const handleLinkDelete = (linkToDelete: number) => {
-    const { links } = enteredLinks
-    const linkList =[...links] 
+    const { links } = enteredLinks;
+    const linkList = [...links];
     linkList?.splice(linkToDelete, 1);
     setEnteredLinks({ ...enteredLinks, links: linkList });
   };
 
   const handleAttachementDelete = (attachementsToDelete: string) => {
-    const { attachements } = enteredLinks
-    const updatedAttachements = attachements.filter((item: string) => item !== attachementsToDelete);
+    const { attachements } = enteredLinks;
+    const updatedAttachements = attachements.filter(
+      (item: string) => item !== attachementsToDelete
+    );
     setEnteredLinks({ ...enteredLinks, attachements: updatedAttachements });
   };
+
   const handleVideoDelete = (attachementsToDelete: string) => {
-    const { video } = enteredLinks
-    const updatedAttachements = video.filter((item: string) => item !== attachementsToDelete);
+    const { video } = enteredLinks;
+    const updatedAttachements = video.filter(
+      (item: string) => item !== attachementsToDelete
+    );
     setEnteredLinks({ ...enteredLinks, video: updatedAttachements });
   };
 
@@ -101,23 +109,33 @@ export const useUploadImage = (handleImageSlider: Function) => {
   //   handleImageSlider,
   //   setValue
   // );
+
   const handleOnClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
-  useMemo(() => {
 
+  useMemo(() => {
     if (leadDetails?.id) {
-      const formatImages = images?.images?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
-      const formatVideos = images?.videos?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
-      const formatAttachments = images?.attachments?.map((item: string) => ({ name: getFileNameFromUrl(item), value: item }))
-      const formatLinks = images?.links
+      const formatImages = images?.images?.map((item: string) => ({
+        name: getFileNameFromUrl(item),
+        value: item,
+      }));
+      const formatVideos = images?.videos?.map((item: string) => ({
+        name: getFileNameFromUrl(item),
+        value: item,
+      }));
+      const formatAttachments = images?.attachments?.map((item: string) => ({
+        name: getFileNameFromUrl(item),
+        value: item,
+      }));
+      const formatLinks = images?.links;
 
       setEnteredLinks({
         images: formatImages,
         links: formatLinks,
         attachements: formatAttachments,
-        video: formatVideos
-      })
+        video: formatVideos,
+      });
     }
   }, [leadDetails?.id, images]);
 
@@ -125,11 +143,16 @@ export const useUploadImage = (handleImageSlider: Function) => {
     // const filteredList = Object.values(data)
     //   ?.filter((value) => value)
     //   ?.reverse();
-    const formatImages = enteredLinks?.images?.map((item: Attachement) => item.value)
-    const formatVideos = enteredLinks?.video?.map((item: Attachement) => item.value)
-    const formatAttachments = enteredLinks?.attachements?.map((item: Attachement) => item.value)
-    const formatLinks = enteredLinks?.links
-
+    const formatImages = enteredLinks?.images?.map(
+      (item: Attachement) => item.value
+    );
+    const formatVideos = enteredLinks?.video?.map(
+      (item: Attachement) => item.value
+    );
+    const formatAttachments = enteredLinks?.attachements?.map(
+      (item: Attachement) => item.value
+    );
+    const formatLinks = enteredLinks?.links;
 
     const apiData = {
       // images: filteredList,
@@ -144,6 +167,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const response = await dispatch(
       createImage({ data: apiData, router, translate })
     );
+    
     if (response?.payload) handleImageSlider();
     // else handleOnClose();
   };
@@ -172,6 +196,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
     handleImageDelete,
     onSubmit,
     loading,
-    loadingGlobal
+    loadingGlobal,
+    isOpenedFile,
   };
 };

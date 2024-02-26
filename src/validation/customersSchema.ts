@@ -12,16 +12,16 @@ export const generateCustomerValidation = (translate: Function) => {
     [CustomerDetailsFields.gender]: yup
       .number()
       .required(translate("validationMessages.required")),
-    [CustomerDetailsFields.companyName]: yup
-      .string().when('customerType', {
-        is: (customerType: string) => customerType === 'company',
-        then: () => yup.string().required(translate("validationMessages.required")),
-      }),
+    [CustomerDetailsFields.companyName]: yup.string().when("customerType", {
+      is: (customerType: string) => customerType === "company",
+      then: () =>
+        yup.string().required(translate("validationMessages.required")),
+    }),
 
-    [CustomerDetailsFields.email]: yup
-      .string()
-      .email()
-      .required(translate("validationMessages.required")),
+    // [CustomerDetailsFields.email]: yup
+    //   .string()
+    //   .email()
+    //   .required(translate("validationMessages.required")),
 
     [CustomerDetailsFields.phone]: yup
       .string()
@@ -31,16 +31,16 @@ export const generateCustomerValidation = (translate: Function) => {
       .string()
 
       .notRequired(),
-    [CustomerDetailsFields.address]: yup.object({
-      [CustomerDetailsFields.streetNo]: yup
-        .string()
-        .required(translate("validationMessages.required")),
-      [CustomerDetailsFields.postCode]: yup
-        .string()
-        .notRequired(),
-      [CustomerDetailsFields.country]: yup
-        .string()
-        .required(translate("validationMessages.required")),
-    }).required()
+    [CustomerDetailsFields.address]: yup
+      .object({
+        [CustomerDetailsFields.streetNo]: yup
+          .string()
+          .required(translate("validationMessages.required")),
+        [CustomerDetailsFields.postCode]: yup.string().notRequired(),
+        [CustomerDetailsFields.country]: yup
+          .string()
+          .required(translate("validationMessages.required")),
+      })
+      .required(),
   });
 };

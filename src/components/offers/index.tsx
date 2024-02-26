@@ -6,7 +6,6 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
 import { useEmptyStates } from "@/utils/hooks";
-import useOfferDetails from "@/hooks/offers/useOfferDetails";
 
 export default function Offers() {
   const {
@@ -23,6 +22,7 @@ export default function Offers() {
     loading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
+    currentPage
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -38,7 +38,7 @@ export default function Offers() {
   );
 
   return (
-    <>
+    <div>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -48,15 +48,15 @@ export default function Offers() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
+      {/* <div className="absolute right-0 -bottom-24"> */}
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
-
+      {/* </div> */}
       {renderModal()}
-    </>
+    </div>
   );
 }

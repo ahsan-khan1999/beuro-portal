@@ -164,7 +164,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "text",
-
               placeholder: `${translate("offers.placeholders.email")}`,
               register,
               value: offerDetails && offerDetails.customerID?.email,
@@ -202,7 +201,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"tel",
+              inputType: "tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",

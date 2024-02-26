@@ -32,7 +32,6 @@ export default function useContractDetail() {
   const id = router.query.contract;
   const isMail = Boolean(router.query?.isMail);
 
-
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -92,6 +91,15 @@ export default function useContractDetail() {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "contract" },
+      })
+    );
+  };
+
   // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -139,10 +147,22 @@ export default function useContractDetail() {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={contractDetails}
+        onEditNote={handleEditNote}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer

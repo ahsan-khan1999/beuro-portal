@@ -43,7 +43,7 @@ export interface OffersTableRowTypes {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: keyof typeof staticEnums["DiscountType"];
+  discountType: keyof (typeof staticEnums)["DiscountType"];
   mail: {
     mailStatus: "open" | "failed" | "pending";
   };
@@ -51,7 +51,7 @@ export interface OffersTableRowTypes {
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
-  offerStatus: "Open" | "Signed" | "Expired" | "Rejected" | "Accepted";
+  offerStatus: "Open" | "Accepted" | "Expired" | "Rejected";
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
   taxAmount: number;
@@ -67,7 +67,7 @@ export interface OffersTableRowTypes {
   signature?: string;
   attachement?: string;
   isNoteCreated: boolean;
-  reason: string
+  reason: string;
 }
 
 export interface PublicOffersTableRowTypes {
@@ -186,8 +186,7 @@ export interface ServiceList {
   discount: number;
   isDiscount?: boolean;
   totalDiscount?: number;
-  isGlobalDiscount?:boolean
-
+  isGlobalDiscount?: boolean;
 }
 export interface EmailStatus {
   Pending: number;

@@ -30,7 +30,7 @@ import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
-import 'moment/locale/de';
+import "moment/locale/de";
 import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -566,12 +566,10 @@ export const transformAttachments = (attachmemts: string[]) => {
 };
 
 export function getFileNameFromUrl(url: string, count?: number) {
-
   const urlParts = url?.split("/");
   const fileName = urlParts[urlParts?.length - 1];
   return fileName?.slice(0, count ? count : 28);
 }
-
 
 export function getEmailColor(status: string) {
   if (
@@ -832,13 +830,39 @@ export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
   });
 };
 
-
 export function validateUrl(url: string, translate: TFunction) {
-  const regexp = new RegExp('((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*')
+  const regexp = new RegExp(
+    "((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*"
+  );
   if (!regexp.test(url)) {
-    return { isValid: false, message: translate("validationMessages.invalid_format") };
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
   }
-  return { isValid: true, message: '' };
+  return { isValid: true, message: "" };
+}
+
+export function validateNumber(number: string, translate: TFunction) {
+  const regexp = /^\+41\d{9}$/;
+  if (!regexp.test(number)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export function validateEmail(email: string, translate: TFunction) {
+  const regexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regexp.test(email)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_email"),
+    };
+  }
+  return { isValid: true, message: "" };
 }
 
 export const getCurrentMonth = () => {
@@ -846,18 +870,18 @@ export const getCurrentMonth = () => {
   return currentDate.getMonth() + 1;
 };
 
-export const downloadFile = (url:string) => {
+export const downloadFile = (url: string) => {
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
       const blobUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = blobUrl;
       link.download = getFileNameFromUrl(url);
       link.click();
-      URL.revokeObjectURL(blobUrl); 
+      URL.revokeObjectURL(blobUrl);
     })
     .catch((error) => {
-      console.error('Error downloading file:', error);
+      console.error("Error downloading file:", error);
     });
 };

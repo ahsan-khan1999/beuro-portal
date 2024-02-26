@@ -16,7 +16,7 @@ export default function EmailTracker() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
+    loading,currentPage
   } = useEmailTracker();
 
   const CurrentComponent = useEmptyStates(
@@ -35,13 +35,12 @@ export default function EmailTracker() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
     </>
   );
 }

@@ -54,6 +54,7 @@ const useEmailTracker = () => {
     setFilter,
     handleFilterChange,
     loading,
+    currentPage
   };
 };
 

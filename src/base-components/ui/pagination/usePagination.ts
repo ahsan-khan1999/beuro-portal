@@ -4,8 +4,8 @@ import { useState, useCallback } from "react";
 const PAGE_LIMIT = 5;
 export const dots = "•••";
 
-export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePaginationProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+export const usePagination = ({ totalItems, itemsPerPage, onPageChange,currentPage:defaultPage }: UsePaginationProps) => {
+  const [currentPage, setCurrentPage] = useState<number>(defaultPage || 1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const isFirst = currentPage === 1;

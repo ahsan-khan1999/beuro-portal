@@ -2,7 +2,11 @@ import { useSlider } from "./useSlider";
 import { SliderImagesDataProps } from "@/types";
 import { MainImageSlider } from "./main-image-slider";
 import { ThumbnailSlider } from "./thumbnail-slider";
-import { combineClasses, downloadFile, getFileNameFromUrl } from "@/utils/utility";
+import {
+  combineClasses,
+  downloadFile,
+  getFileNameFromUrl,
+} from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 export const Slider = ({
@@ -10,7 +14,7 @@ export const Slider = ({
   noOfThumbNails,
   containerClasses,
   mainImgSliderClasses,
-  activeIndex
+  activeIndex,
 }: SliderImagesDataProps) => {
   const {
     selectedImage,
@@ -23,16 +27,17 @@ export const Slider = ({
   } = useSlider({ images, noOfThumbNails, activeIndex });
 
   const mainSliderContainer = combineClasses(`relative`, containerClasses);
-  
-  
+
   // Usage example:
-  
+
   return (
     <div className={mainSliderContainer}>
       <div className="absolute right-0 -top-12">
-        <DownloadIcon onClick={() => {
-          downloadFile(selectedImage)
-        }} />
+        <DownloadIcon
+          onClick={() => {
+            downloadFile(selectedImage);
+          }}
+        />
       </div>
 
       <MainImageSlider
