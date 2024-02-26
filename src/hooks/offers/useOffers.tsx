@@ -116,6 +116,15 @@ const useOffers = () => {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "lead" },
+      })
+    );
+  };
+
   // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -148,6 +157,16 @@ const useOffers = () => {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={offerDetails}
+        onEditNote={handleEditNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -156,6 +175,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -241,8 +261,7 @@ const useOffers = () => {
         })
       );
       if (res?.payload) offerCreatedHandler();
-        // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
-        
+      // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
     }
   };
 

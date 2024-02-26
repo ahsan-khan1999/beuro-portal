@@ -1,6 +1,7 @@
 import { DropDownItemsProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import { motion } from "framer-motion";
+import dropdownIcon from "@/assets/pngs/drop-down-icon.png"
 
 export const DropDownItems = ({
   items,

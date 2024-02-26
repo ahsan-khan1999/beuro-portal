@@ -40,6 +40,14 @@ export interface DropDownProps {
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
 }
 
+export interface SelectDropDownProps {
+  [DropDownKeys.ITEMS]: DropDownItem[];
+  [DropDownKeys.ON_ITEM_SELECTED]: (data: string) => void;
+  [DropDownKeys.SELECTED_ITEM]: string;
+  [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
+}
+
 export interface DropDownItemsProps {
   items: DropDownItem[];
   onItemClick: (data: string) => void;

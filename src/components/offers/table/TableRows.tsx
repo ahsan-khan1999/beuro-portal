@@ -122,8 +122,6 @@ const TableRows = ({
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
                 } w-full rounded-lg py-[3px]`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
-                dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
               />
             </span>
@@ -168,9 +166,7 @@ const TableRows = ({
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
                   } w-full rounded-lg py-[3px]`}
-                  dropDownTextClassName="text-white text-base font-medium pe-2"
                   key={item.id}
-                  dropDownIconClassName={`text-[#fff]`}
                   dropDownItemsContainerClassName=""
                 />
               </div>

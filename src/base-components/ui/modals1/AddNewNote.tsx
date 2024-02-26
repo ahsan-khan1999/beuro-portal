@@ -11,11 +11,13 @@ const AddNewNote = ({
   handleNotes,
   handleFilterChange,
   filter,
+  heading,
 }: {
   onClose: () => void;
   handleNotes: (id: string) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
+  heading: string;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewNote({ handleNotes, handleFilterChange, filter });
@@ -35,11 +37,11 @@ const AddNewNote = ({
           />
           <div className="flex justify-between items-center mb-[19px] border-b border-b-[#000] border-opacity-10 pb-5">
             <p className="text-2xl font-medium text-[#000] ml-[38px]">
-              {translate("common.add_note")}
+              {heading}
             </p>
           </div>
 
-          <div className="xl:mx-[42px] mx-4 ">
+          <div className="xl:mx-[42px] mx-4">
             <Form
               formFields={fields}
               handleSubmit={handleSubmit}

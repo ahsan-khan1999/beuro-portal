@@ -83,6 +83,7 @@ const useLeads = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -102,6 +103,15 @@ const useLeads = () => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
+        data: { id: id, type: "lead" },
+      })
+    );
+  };
+
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
         data: { id: id, type: "lead" },
       })
     );
@@ -133,6 +143,16 @@ const useLeads = () => {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={leadDetails}
+        onEditNote={handleEditNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -141,6 +161,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (

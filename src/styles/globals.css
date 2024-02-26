@@ -608,3 +608,35 @@ input[type="number"] {
   background-color: red;
   border-radius: 6px;
 }
+
+.dropdown_select {
+  -webkit-appearance: none;
+  padding: 4px 8px;
+  background-image: url("~@/assets/pngs/drop-down-icon.png");
+  background-position: calc(100% - 8px) center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+
+.dropdown_select.isOpen {
+  background-image: url("~@/assets/pngs/drop-down-icon.png");
+  transform: rotate(180deg);
+}
+
+.select_dropdown_items {
+  color: gray;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #bfbfbf;
+  box-shadow: 0 3px 6px #00000029;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  cursor: pointer;  
+}
+
+.select_dropdown_items:hover {
+  color: white;
+  background-color: #bfbfbf;
+}
