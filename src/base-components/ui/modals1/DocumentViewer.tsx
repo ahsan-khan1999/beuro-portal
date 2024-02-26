@@ -9,30 +9,37 @@ import { useDocumentViewer } from "@/hooks/modals/userDocumentViewer";
 import { useRouter } from "next/router";
 import { readImage } from "@/api/slices/imageSlice/image";
 
-export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
+export const DocumentViewerModal = ({
+  onClose,
+  handleImageSlider,
+}: {
+  onClose: () => void;
+  handleImageSlider: Function;
+}) => {
   const {
     activeTab,
     attachementTabs,
     handleTabChange,
     isOpenedFile,
     translate,
-  } = useDocumentViewer();
+  } = useDocumentViewer(handleImageSlider);
+
   const { images } = useAppSelector((state) => state.image);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { offerId } = router.query;
+  const { offerID } = router.query;
 
   useEffect(() => {
-    if (offerId)
-      dispatch(readImage({ params: { type: "offerID", id: offerId } }));
-  }, [offerId]);
+    if (offerID)
+      dispatch(readImage({ params: { type: "offerID", id: offerID } }));
+  }, [offerID]);
 
   const attachementLookUp = {
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px]">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
@@ -54,7 +61,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     video_tab: (
       <>
         {images?.videos && images?.videos?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px]">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.videos &&
               images?.videos?.map((item, index) => (
                 <video controls poster="poster.jpg" key={index}>
@@ -72,7 +79,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     attachement_tab: (
       <>
         {images?.attachments && images?.attachments?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px]">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
               <div
                 className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
@@ -103,7 +110,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     link_tab: (
       <>
         {images?.links && images?.links?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-y-4">
+          <div className="grid grid-cols-1 gap-y-[14px] max-h-[500px] overflow-y-scroll">
             {images?.links?.map((item, index) => (
               <div
                 key={index}

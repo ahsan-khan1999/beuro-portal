@@ -80,8 +80,8 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
-              {/* <DropDown
+            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}> */}
+            {/* <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -104,7 +104,7 @@ const TableRows = ({
                 dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
               /> */}
 
-              <SelectDropDown
+            {/* <SelectDropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -123,18 +123,28 @@ const TableRows = ({
                     : "bg-[#4A13E7]"
                 } w-full rounded-lg`}
                 dropDownItemsContainerClassName=""
-              />
-            </span>
+              /> */}
+            {/* </span> */}
 
-            {/* <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span> */}
-            {item.offerStatus === "Accepted" ? (
+            </span>
+
+            <span className="py-4 flex justify-center items-center">
+              <div
+                className={`bg-[${getOfferStatusColor(item.offerStatus)}]
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+              >
+                {translate(`offer_status.${item.offerStatus}`)}
+              </div>
+            </span>
+
+            {/* {item.offerStatus === "Accepted" ? (
               <span className="py-4 ml-1">
                 <div
                   style={{
@@ -171,18 +181,7 @@ const TableRows = ({
                   dropDownItemsContainerClassName=""
                 />
               </div>
-
-              // <span className="py-4 flex justify-center items-center">
-              //   <div
-              //     style={{
-              //       backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
-              //     }}
-              //     className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm"
-              //   >
-              //     {translate(`offer_status.${item.offerStatus}`)}
-              //   </div>
-              // </span>
-            )}
+            )} */}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"

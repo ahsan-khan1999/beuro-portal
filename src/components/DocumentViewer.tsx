@@ -13,8 +13,18 @@ export const DocumentViewer = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
+  const handleImageSlider = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.DOCUMENT_VIEWER]: <DocumentViewerModal onClose={onClose} />,
+    [ModalType.DOCUMENT_VIEWER]: (
+      <DocumentViewerModal
+        onClose={onClose}
+        handleImageSlider={handleImageSlider}
+      />
+    ),
   };
 
   useEffect(() => {

@@ -2,12 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useUploadImage } from "@/hooks/modals/useUploadImage";
 import { CopyField } from "../copy-field";
 import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { BaseButton } from "../button/base-button";
+import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { useShareImages } from "@/hooks/modals/useShareImages";
 
 export const ShareImages = ({
   onClose,
@@ -26,14 +27,18 @@ export const ShareImages = ({
     loading,
     loadingGlobal,
     isOpenedFile,
-  } = useUploadImage(handleImageSlider);
+  } = useShareImages(handleImageSlider);
+
+  const handleFileLink = (fileName: string) => {
+    window.open(fileName);
+  };
 
   const { images } = useAppSelector((state) => state.image);
   const attachementLookUp = {
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px]">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
@@ -55,7 +60,7 @@ export const ShareImages = ({
     video_tab: (
       <>
         {images?.videos && images?.videos?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px]">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.videos &&
               images?.videos?.map((item, index) => (
                 <video controls poster="poster.jpg" key={index}>
@@ -73,24 +78,27 @@ export const ShareImages = ({
     attachement_tab: (
       <>
         {images?.attachments && images?.attachments?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px]">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
-              <div
-                className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
-                  isOpenedFile ? "cursor-pointer" : "cursor-default"
-                }`}
-                key={index}
-              >
+              <div className="flex items-center gap-x-3">
                 <div
-                  className="flex items-center gap-3 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(item, "_blank");
-                  }}
+                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 truncate ${
+                    isOpenedFile ? "cursor-pointer" : "cursor-default"
+                  }`}
+                  key={index}
                 >
-                  <Image src={pdfIcon} alt="pdfIcon" />
-                  <span>{item?.slice(0, 20)}...</span>
+                  <div
+                    className="flex items-center gap-3 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(item, "_blank");
+                    }}
+                  >
+                    <Image src={pdfIcon} alt="pdfIcon" />
+                    <span>{item?.slice(0, 20)}...</span>
+                  </div>
                 </div>
+                <DownloadIcon onClick={() => handleFileLink(item)} />
               </div>
             ))}
           </div>
@@ -104,13 +112,16 @@ export const ShareImages = ({
     link_tab: (
       <>
         {images?.links && images?.links?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-y-4">
+          <div className="grid grid-cols-1 gap-y-[14px] max-h-[500px] overflow-y-scroll">
             {images?.links?.map((item, index) => (
               <div
                 key={index}
                 className="border-2 border-lightGray rounded-lg px-4 py-2"
               >
-                <p className="text-base font-normal text-primary truncate select-none">
+                <p
+                  onClick={() => window.open(item, "_blank")}
+                  className="text-base font-normal text-primary truncate select-none cursor-pointer"
+                >
                   {item}
                 </p>
               </div>

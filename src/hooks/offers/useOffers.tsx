@@ -125,7 +125,6 @@ const useOffers = () => {
     );
   };
 
-  // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
