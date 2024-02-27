@@ -10,7 +10,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 
-export const AttachementField = ({
+export const SingleFielAttachmentField = ({
   id,
   text,
   fileSupported,
@@ -79,13 +79,13 @@ export const AttachementField = ({
       setAttachements && setAttachements(newAttachement);
     }
   };
+
   const handleDeleteFile = (index: number) => {
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
     // field.onChange();
   };
-
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
@@ -145,21 +145,21 @@ export const AttachementField = ({
                   isOpenedFile ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={index}
-                // onClick={() =>
-                //     isOpenedFile && router.push("/content/pdf-preview")
-                // }
+                onClick={() =>
+                  isOpenedFile && router.push("/content/pdf-preview")
+                }
               >
                 <div
                   className="flex items-center gap-3 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(item?.value, "_blank");
-                  }}
+                  //   onClick={(e) => {
+                  //     e.stopPropagation();
+                  //     window.open(item?.value, "_blank");
+                  //   }}
                 >
                   <Image
                     src={deletePdfIcon}
                     alt="deletePdfIcon"
-                    className={`absolute -right-1 -top-1 cursor-pointer `}
+                    className={`absolute -right-1 -top-1  cursor-pointer`}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDeleteFile(index);

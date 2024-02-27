@@ -31,6 +31,8 @@ import { updateQuery } from "@/utils/update-query";
 import localStoreUtil from "@/utils/localstore.util";
 import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
+import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -62,6 +64,7 @@ export default function useOfferDetails() {
       dispatch(readOfferActivity({ params: { filter: id } }));
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -71,6 +74,14 @@ export default function useOfferDetails() {
       updateModalType({
         type: ModalType.CONFIRM_DELETION,
         data: { refId: offerDetails?.offerNumber },
+      })
+    );
+  };
+
+  const handleUploadFile = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_FILE,
       })
     );
   };
@@ -134,6 +145,31 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
+  const offerCreatedHandler = (offerStatus: any) => {
+    // const offerStatus = staticEnums["OfferStatus"][offerDetails?.offerStatus];
+    switch (offerStatus) {
+      case staticEnums["OfferStatus"]["Open"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Accepted"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED }));
+        break;
+      case staticEnums["OfferStatus"]["Expired"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Rejected"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_REJECTED }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const defaultOfferCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -194,6 +230,29 @@ export default function useOfferDetails() {
         route={onClose}
       />
     ),
+    [ModalType.OFFER_REJECTED]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_rejected_des")}
+        route={onClose}
+      />
+    ),
+    [ModalType.OFFER_ACCEPTED]: (
+      <OfferAccepted
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+        onFileUpload={handleUploadFile}
+      />
+    ),
+    [ModalType.UPLOAD_FILE]: (
+      <UploadFile
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+      />
+    ),
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
@@ -202,10 +261,6 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
-  };
-
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUpdateAdditionalDetailsModal = () => {
@@ -225,7 +280,7 @@ export default function useOfferDetails() {
         },
       })
     );
-    if (res?.payload) offerCreatedHandler();
+    if (res?.payload) defaultOfferCreatedHandler();
   };
 
   const handleStatusUpdate = async (offerStatus: string) => {
@@ -237,7 +292,8 @@ export default function useOfferDetails() {
         },
       })
     );
-    if (res?.payload) offerCreatedHandler();
+    if (res?.payload)
+      offerCreatedHandler(staticEnums["OfferStatus"][offerStatus]);
   };
 
   const onNextHandle = () => {
@@ -250,7 +306,7 @@ export default function useOfferDetails() {
       id: offerDetails?.id,
     };
     const response = await dispatch(sendOfferByPost({ data: apiData }));
-    if (response?.payload) offerCreatedHandler();
+    if (response?.payload) defaultOfferCreatedHandler();
   };
 
   const handleUpdateDiscount = async (discount: number) => {

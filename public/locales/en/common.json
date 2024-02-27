@@ -1029,6 +1029,7 @@
   },
   "common": {
     "modals": {
+      "offer_rejected_des": "Your change has been made successfully",
       "update_password": "Thanks for updating password, we are happy to have you.",
       "invoice_update": "Thanks for updating invoice, we are happy to have you.",
       "receipt_update": "Thanks for updating receipt, we are happy to have you.",
@@ -1093,7 +1094,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
-    "view_docs":"View Documents",
+    "upload_file": "Upload File",
+    "view_docs": "View Documents",
     "share_on_whatsapp": "Share on whatsapp",
     "send_again": "send Again",
     "share": "Share",
@@ -1207,6 +1209,7 @@
       "video_title": "20 Video can be uploaded",
       "video_sub_title": "Video should be max 20, file size up to 10MB",
       "attachement_title": "20 attachment can be uploaded",
+      "single_attachment":"1 attachment can be uploaded",
       "attachement_sub_title": "Attachment should be max 20, file size up to 10MB",
       "link_title": "Add Link",
       "link_sub_title": "Links should be max 20, file size up to 10MB",

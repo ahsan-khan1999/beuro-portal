@@ -9,11 +9,13 @@ export const OfferAccepted = ({
   heading,
   subHeading,
   route,
+  onFileUpload,
 }: {
   onClose: () => void;
   heading: string;
   subHeading: string;
   route: () => void;
+  onFileUpload: () => void;
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -32,12 +34,20 @@ export const OfferAccepted = ({
             {subHeading}
           </span>
 
-          <button
-            onClick={route}
-            className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[384px] rounded-lg p-4 text-white text-base font-medium"
-          >
-            {translate("common.done_button")}
-          </button>
+          <div className="flex items-center gap-x-6">
+            <button
+              onClick={route}
+              className="bg-[#4A13E7] hover:bg-purple-600 cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[200px] rounded-lg p-4 text-white text-base font-medium"
+            >
+              {translate("common.done_button")}
+            </button>
+            <button
+              onClick={onFileUpload}
+              className="bg-[#4A13E7] hover:bg-purple-600 cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[200px] rounded-lg p-4 text-white text-base font-medium"
+            >
+              {translate("common.upload_file")}
+            </button>
+          </div>
         </div>
       </BaseModal>
     </>
