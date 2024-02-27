@@ -158,7 +158,9 @@ export const useEditOfferDetails = ({
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         customerID: offerDetails?.leadID?.customerID,
-        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
+
 
       })
     }
