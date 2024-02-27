@@ -38,6 +38,7 @@ const ImagesUploadOffer = ({
     loading,
     loadingGlobal,
   } = useUploadImageOffer(handleImageSlider, type);
+
   const attachementLookUp = {
     img_tab: (
       <div className="h-[415px] overflow-y-auto overflow-x-hidden">
@@ -129,6 +130,7 @@ const ImagesUploadOffer = ({
       </div>
     ),
   };
+
   return (
     <>
       <BaseModal

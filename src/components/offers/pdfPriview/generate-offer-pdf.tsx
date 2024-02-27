@@ -69,7 +69,7 @@ const OfferPdfDownload = ({
   pdfFile,
   setPdfFile,
   systemSetting,
-  showContractSign
+  showContractSign,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates, time } = data?.movingDetails || {};
@@ -89,12 +89,15 @@ const OfferPdfDownload = ({
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount: serviceItemFooter?.isDiscount
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
 
-
-  }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
-  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
   return (
     <div className="download-link">
@@ -102,11 +105,11 @@ const OfferPdfDownload = ({
         document={
           <Document
             title={data?.headerDetails?.offerNo || ""}
-          // onRender={(blob) => {
-          //   if(!pdfFile){
-          //     setPdfFile(blobToFile(blob, "offer.pdf"));
-          //   }
-          // }}
+            // onRender={(blob) => {
+            //   if(!pdfFile){
+            //     setPdfFile(blobToFile(blob, "offer.pdf"));
+            //   }
+            // }}
           >
             <Page style={styles.body} dpi={72}>
               <Header {...headerDetails} />
@@ -122,24 +125,29 @@ const OfferPdfDownload = ({
 
                 <AddressDetails {...{ address, header, workDates, time }} />
 
-                <ServiceTableHederRow
-                  isDiscount={isDiscount}
-                />
+                <ServiceTableHederRow isDiscount={isDiscount} />
                 {serviceItem?.map((item, index) => (
                   <ServiceTableRow
                     {...item}
                     key={index}
-                    pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
+                    pagebreak={
+                      !pageBreakCondition
+                        ? serviceItem?.length === 1
+                          ? false
+                          : index === serviceItem?.length - 1
+                        : false
+                    }
                     isDiscount={isDiscount}
                   />
                 ))}
-                {
-                  (isDiscount || serviceItemFooter?.isDiscount) &&
-                  <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+                {(isDiscount || serviceItemFooter?.isDiscount) && (
+                  <ServiceTableDiscountRow
+                    {...disscountTableRow}
+                    key={Math.random()}
                     pagebreak={true}
                     isDiscount={isDiscount}
                   />
-                }
+                )}
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSetting}
@@ -155,7 +163,7 @@ const OfferPdfDownload = ({
             </Page>
 
             {/* Additional details */}
-            <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+            <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} />
               </View>
@@ -201,7 +209,5 @@ const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
     fontFamily: "Poppins",
-
   },
-
 });

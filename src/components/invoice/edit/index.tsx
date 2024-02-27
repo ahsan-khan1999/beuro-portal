@@ -1,22 +1,21 @@
 import { Layout } from "@/layout";
-import React, { useEffect } from "react";
-import EditOffersDetailsData, { EditComponentsType } from "./EditOffersDetailsData";
+import React from "react";
+import EditOffersDetailsData, {
+  EditComponentsType,
+} from "./EditOffersDetailsData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import ShareImages from "@/base-components/ui/modals1/ShareImages";
-import useOffers from "@/hooks/offers/useOffers";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
-import { readImage } from "@/api/slices/imageSlice/image";
+
 import { useRouter } from "next/router";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 const EditInvoiceDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { invoiceDetails } = useAppSelector((state) => state.invoice);
-  const { images } = useAppSelector((state) => state.image);
 
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
@@ -26,9 +25,11 @@ const EditInvoiceDetails = () => {
   //   if (invoiceDetails?.id) dispatch(readImage({ params: { type: "invoice", id: invoiceDetails?.id } }));
 
   // }, [invoiceDetails?.id])
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
@@ -42,7 +43,9 @@ const EditInvoiceDetails = () => {
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.SHARE_IMAGES]: <ShareImages onClose={onClose} />,
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={invoiceDetails?.id} />
+    ),
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -65,8 +68,8 @@ const EditInvoiceDetails = () => {
   const router = useRouter();
   let tab: EditComponentsType | undefined;
 
-  if(router.query?.tab){
-    tab = +(router.query?.tab);
+  if (router.query?.tab) {
+    tab = +router.query?.tab;
   }
 
   return (

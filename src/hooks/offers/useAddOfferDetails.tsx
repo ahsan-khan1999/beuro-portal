@@ -78,7 +78,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID ,status:[0,1]}, paginate: 0 },
+          params: {
+            filter: { customerID: customerID, status: [0, 1] },
+            paginate: 0,
+          },
         })
       );
   }, [customerID]);
@@ -98,14 +101,13 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title || offerDetails?.content?.offerContent?.title,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
-        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
-
-
-
       });
     }
   }, [offerDetails?.id]);
@@ -118,15 +120,11 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     name: "date",
   });
 
-
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
-
-      dispatch(
-        setCustomerDetails(selectedCustomers)
-      );
+      dispatch(setCustomerDetails(selectedCustomers));
 
       reset({
         ...selectedCustomers,
@@ -135,44 +133,35 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         content: selectedContent,
         leadID: "",
         gender: staticEnums["Gender"][selectedCustomers?.gender],
-
       });
-
     }
   };
-  const handleContentSelect = () => { };
+  const handleContentSelect = () => {};
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
     if (offerDetails?.id) {
-     
-
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
     } else {
-      const filteredLead = lead.find((item) => item.id === leadID)
+      const filteredLead = lead.find((item) => item.id === leadID);
       if (filteredLead) {
-        const content = filteredLead?.requiredService as ContentTableRowTypes
-        
-        if(selectedContent !==content?.id){
-          setValue("content", selectedContent)
-          setValue("title", filteredContent?.offerContent?.title)  
-        }else{
+        const content = filteredLead?.requiredService as ContentTableRowTypes;
 
-          setValue("content", content?.id)
-          setValue("title", content?.offerContent?.title)
+        if (selectedContent !== content?.id) {
+          setValue("content", selectedContent);
+          setValue("title", filteredContent?.offerContent?.title);
+        } else {
+          setValue("content", content?.id);
+          setValue("title", content?.offerContent?.title);
         }
-
-      }else{
-        setValue("content", selectedContent)
-        setValue("title", filteredContent?.offerContent?.title)
+      } else {
+        setValue("content", selectedContent);
+        setValue("title", filteredContent?.offerContent?.title);
       }
     }
-
-
-
-  }, [selectedContent,leadID]);
+  }, [selectedContent, leadID]);
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -208,7 +197,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         type: "New Customer",
         content: offerDetails?.content?.id,
         // title: null,
-        gender: null
+        gender: null,
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {
       reset({
@@ -224,19 +213,21 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title || offerDetails?.content?.offerContent?.title,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
-        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender]
-
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
 
       });
     } else if (type === "Existing Customer" && !offerDetails?.id) {
-      dispatch(setLeads([]))
-      dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
-      setValue("content", null)
-      setValue("title", null)
-      setValue("leadID", null)
+      dispatch(setLeads([]));
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+      setValue("content", null);
+      setValue("title", null);
+      setValue("leadID", null);
     }
   }, [type]);
 
@@ -312,6 +303,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
-    offerDetails
+    offerDetails,
   };
 };

@@ -14,18 +14,17 @@ export const ProductItem = ({
   totalDiscount,
   pagebreak,
 }: ServiceList) => {
-  
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3 pl-3">
       <div className="grid grid-cols-3 items-center">
         <div className="col-span-1 flex flex-col gap-y-1">
-          <span className="text-sm font-normal text-[#000]">
+          <span className="text-sm font-normal text-[#000] break-all mr-1">
             {serviceTitle}
           </span>
         </div>
         <div className="col-span-1 flex flex-col gap-y-1">
-          <span className="text-[#404040] text-[14px] font-normal break-all">
+          <span className="text-[#404040] text-[14px] font-normal break-all mr-1">
             {description}
           </span>
         </div>
@@ -40,11 +39,11 @@ export const ProductItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {price}
           </span>
-          {/* {isDiscount && ( */}
+          {isDiscount && (
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {discount || "-"}{" "}
           </span>
-          {/* )} */}
+          )} 
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
             {pagebreak

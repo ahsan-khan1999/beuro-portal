@@ -13,7 +13,7 @@ import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNote, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
@@ -83,6 +83,7 @@ const useLeads = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -93,11 +94,19 @@ const useLeads = () => {
       dispatch(
         readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
       );
+
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     }
   };
 
-  // function for hnadling the add note
+  const handleDeleteNote = async () => {
+    dispatch(
+      deleteNote({
+        data: {},
+      })
+    );
+  };
+
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -107,7 +116,15 @@ const useLeads = () => {
     );
   };
 
-  // function for hnadling the add note
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "lead" },
+      })
+    );
+  };
+
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -118,7 +135,6 @@ const useLeads = () => {
   ) => {
     e.stopPropagation();
     dispatch(setImages([]));
-
     const filteredLead = lead.find((item_) => item_.id === item);
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
@@ -127,17 +143,33 @@ const useLeads = () => {
     }
   };
 
-  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={leadDetails}
+        onEditNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
+      />
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
@@ -207,12 +239,14 @@ const useLeads = () => {
     handlePageChange,
     itemsPerPage,
     handleNotes,
+    handleDeleteNote,
     handleImageUpload,
     renderModal,
     handleFilterChange,
     filter,
     setFilter,
     loading,
+    currentPage,
   };
 };
 

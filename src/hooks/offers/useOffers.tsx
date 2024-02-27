@@ -116,7 +116,15 @@ const useOffers = () => {
     );
   };
 
-  // function for hnadling the add note
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "offer" },
+      })
+    );
+  };
+
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -148,6 +156,18 @@ const useOffers = () => {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={offerDetails}
+        onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -156,6 +176,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -204,14 +225,14 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readOffer({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -241,8 +262,7 @@ const useOffers = () => {
         })
       );
       if (res?.payload) offerCreatedHandler();
-        // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
-        
+      // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
     }
   };
 
@@ -275,6 +295,7 @@ const useOffers = () => {
     loading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
+    currentPage
   };
 };
 

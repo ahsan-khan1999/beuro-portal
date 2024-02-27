@@ -50,20 +50,21 @@ export const Header = ({
         >
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
               // color: `#${textColour}`,
             }}
           >
-            {(fileType && HeaderLabelNr[fileType as keyof typeof HeaderLabel]) ||
-              "Angebot"}
+            {(fileType &&
+              HeaderLabelNr[fileType as keyof typeof HeaderLabel]) ||
+              "Angebot "}
             Nr :
           </Text>
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,
@@ -81,7 +82,7 @@ export const Header = ({
         >
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
@@ -89,12 +90,12 @@ export const Header = ({
             }}
           >
             {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
-              "Angebots"}
+              "Erstell"}
             datum :
           </Text>
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,
@@ -106,7 +107,7 @@ export const Header = ({
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
@@ -117,7 +118,7 @@ export const Header = ({
           </Text>
           <Text
             style={{
-              fontSize: 8,
+              fontSize: 7,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,

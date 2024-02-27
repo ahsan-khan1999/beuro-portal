@@ -13,9 +13,14 @@ import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
 
-export const useAddNewNote = ({ handleNotes, handleFilterChange, filter }: {
-  handleNotes: (id: string) => void, handleFilterChange?: (query: FilterType) => void;
-  filter?: FilterType
+export const useAddNewNote = ({
+  handleNotes,
+  handleFilterChange,
+  filter,
+}: {
+  handleNotes: (id: string) => void;
+  handleFilterChange?: (query: FilterType) => void;
+  filter?: FilterType;
 }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -23,11 +28,16 @@ export const useAddNewNote = ({ handleNotes, handleFilterChange, filter }: {
   const { loading, error } = useAppSelector((state) => state.note);
   const { lead } = useAppSelector((state) => state.lead);
   const { offer, offerDetails } = useAppSelector((state) => state.offer);
-  const { contract,contractDetails } = useAppSelector((state) => state.contract);
-  const { invoice ,invoiceDetails} = useAppSelector((state) => state.invoice);
+  const { contract, contractDetails } = useAppSelector(
+    (state) => state.contract
+  );
+  const { invoice, invoiceDetails } = useAppSelector((state) => state.invoice);
 
-
-  const { modal: { data: { id, type } } } = useAppSelector((state) => state.global);
+  const {
+    modal: {
+      data: { id, type },
+    },
+  } = useAppSelector((state) => state.global);
 
   const schema = generateAddNewNoteValidation(translate);
   const {
@@ -41,40 +51,59 @@ export const useAddNewNote = ({ handleNotes, handleFilterChange, filter }: {
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddNoteFormField(register, loading, control);
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(createNote({ data: { ...data, id: id, type: type }, router, setError, translate }));
-    if (res?.payload) {
 
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const res = await dispatch(
+      createNote({
+        data: { ...data, id: id, type: type },
+        router,
+        setError,
+        translate,
+      })
+    );
+
+    if (res?.payload) {
       switch (type) {
         case "lead":
-          const isFilterLead = lead.find((item) => item.id === id)
-          if (!isFilterLead?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
+          const isFilterLead = lead.find((item) => item.id === id);
+          if (!isFilterLead?.isNoteCreated && handleFilterChange)
+            handleFilterChange(filter || {});
           break;
         case "offer":
-          const isFilterOffer = offer.find((item) => item.id === id)
-          if (!isFilterOffer?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
-          else dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }))
+          const isFilterOffer = offer.find((item) => item.id === id);
+          if (!isFilterOffer?.isNoteCreated && handleFilterChange)
+            handleFilterChange(filter || {});
+          else
+            dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
 
           break;
         case "contract":
-          const isFilterContract = contract.find((item) => item.id === id)
-          if (!isFilterContract?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
-          else dispatch(setContractDetails({ ...contractDetails, isNoteCreated: true }))
+          const isFilterContract = contract.find((item) => item.id === id);
+          if (!isFilterContract?.isNoteCreated && handleFilterChange)
+            handleFilterChange(filter || {});
+          else
+            dispatch(
+              setContractDetails({ ...contractDetails, isNoteCreated: true })
+            );
 
           break;
         case "invoice":
-          const isFilterInvoice = invoice.find((item) => item.id === id)
-          if (!isFilterInvoice?.isNoteCreated && handleFilterChange) handleFilterChange(filter || {})
-          else dispatch(setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true }))
+          const isFilterInvoice = invoice.find((item) => item.id === id);
+          if (!isFilterInvoice?.isNoteCreated && handleFilterChange)
+            handleFilterChange(filter || {});
+          else
+            dispatch(
+              setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true })
+            );
 
           break;
         default:
           break;
       }
-      handleNotes(id)
+      handleNotes(id);
     }
-
   };
+
   return {
     fields,
     onSubmit,
@@ -82,6 +111,6 @@ export const useAddNewNote = ({ handleNotes, handleFilterChange, filter }: {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

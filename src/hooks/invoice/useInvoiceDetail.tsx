@@ -149,6 +149,16 @@ export default function useInvoiceDetail() {
       })
     );
   };
+
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "invoice" },
+      })
+    );
+  };
+
   const handleRecurringSuccess = async () => {
     const res = await dispatch(
       stopRecurringInvoices({
@@ -199,18 +209,36 @@ export default function useInvoiceDetail() {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={invoiceDetails}
+        onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
+
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
+    ),
+
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
     ),
 
     [ModalType.INVOICE_CREATE]: (
       <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
+
     [ModalType.INVOICE_UPDATE]: (
       <InvoiceUpdate onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
+
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}

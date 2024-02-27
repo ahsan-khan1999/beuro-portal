@@ -84,6 +84,7 @@ const useFollowUps = () => {
     renderModal,
     handleFilterChange,
     loading,
+    currentPage
   };
 };
 

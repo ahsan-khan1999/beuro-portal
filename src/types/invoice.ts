@@ -6,6 +6,7 @@ import { DateRangeProps } from "./form";
 import { OfferServiceDetails } from "./offers";
 import { AddressID } from "./leads";
 import { Plan } from "./admin/plans";
+import { Company } from "./company";
 
 // Inovice table layout
 export interface InvoiceTableRowTypes {

@@ -12,7 +12,8 @@ export const ContactDetails = ({
   isReverseInfo,
 }: Partial<ContactDetailsProps>) => {
   const { t: translation } = useTranslation();
-  const { city, name, postalCode, streetWithNumber } = address || {};
+  const { city, name, postalCode, streetWithNumber, companyName } =
+    address || {};
   return (
     <div className="grid grid-cols-4 items-center mt-5 mb-[37px]">
       {isReverseInfo ? (
@@ -50,7 +51,8 @@ export const ContactDetails = ({
           <div className="col-span-1 ml-[80px]">
             <div className="flex flex-col gap-[0px] w-[185px]">
               <span className="text-[#000] text-sm font-medium">
-                {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}
+                {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
+                {companyName && "c/o" + " " + companyName}
               </span>
               <span className="text-[#000] text-sm font-medium">
                 {streetWithNumber}
@@ -65,7 +67,8 @@ export const ContactDetails = ({
         <>
           <div className="flex flex-col gap-[0px] col-span-3">
             <span className="text-[#000] text-sm font-medium">
-              {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}
+              {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
+              {companyName && "c/o" + " " + companyName}
             </span>
             <span className="text-[#000] text-sm font-medium">
               {streetWithNumber}
@@ -78,9 +81,9 @@ export const ContactDetails = ({
           <div className="flex flex-col gap-y-[0px] col-span-1 ml-[6px]">
             {email && (
               <div className="space-x-0">
-                <span className="text-[#000] text-sm font-medium">
+                {/* <span className="text-[#000] text-sm font-medium">
                   {translation("pdf.email")} :
-                </span>
+                </span> */}
                 <span className="text-[#000]  text-sm font-medium">
                   {email}
                 </span>
@@ -88,17 +91,17 @@ export const ContactDetails = ({
             )}
             {phone !== "+" && phone && (
               <div className="space-x-0">
-                <span className="text-[#404040] text-sm font-medium">
+                {/* <span className="text-[#404040] text-sm font-medium">
                   {translation("pdf.phone")} :
-                </span>
+                </span> */}
                 <span className="text-[#000] text-sm font-medium">{phone}</span>
               </div>
             )}
             {mobile !== "+" && mobile && (
               <div className="space-x-0">
-                <span className="text-[#404040] text-sm font-medium">
+                {/* <span className="text-[#404040] text-sm font-medium">
                   {translation("pdf.mobile")} :
-                </span>
+                </span> */}
                 <span className="text-[#000] text-sm font-medium">
                   {mobile}
                 </span>

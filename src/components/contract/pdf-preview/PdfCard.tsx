@@ -32,7 +32,7 @@ const PdfCard = ({
     <div className="mb-5">
       <PdfCardLayout>
         <div className=" rounded-md bg-white w-full h-fit">
-          <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
+          <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
             {/* <span
                 className="cursor-pointer"
                 onClick={() => {
@@ -86,10 +86,14 @@ const PdfCard = ({
                   fill="#4A13E7"
                 />
               </svg>
-              <span className=" text-xl font-medium mt-1">
+              <span className=" text-xl font-medium">
                 {translate("offers.table_headings.edit")}
               </span>
             </div>
+
+            <h1 className="hidden xlg:flex items-center font-medium text-2xl">
+              {translate("contracts.card_content.heading")}
+            </h1>
 
             <div className="flex items-center justify-end gap-x-5">
               {/* <BaseButton
@@ -119,7 +123,11 @@ const PdfCard = ({
               </BaseButton>
 
               <BaseButton
-                buttonText={translate("common.PDF_BUTTONS.send_via_email")}
+                buttonText={
+                  contractStatus === "Sent"
+                    ? translate("common.send_again")
+                    : translate("common.PDF_BUTTONS.send_via_email")
+                }
                 onClick={onEmailSend}
                 containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
                 textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"

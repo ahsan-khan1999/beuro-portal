@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginHorizontal: 20,
     paddingHorizontal: 12,
-    marginTop:0
+    marginTop: 0,
   },
   headerRow: {
     flexDirection: "row",
@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "white",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
   },
   headerDescription: {
     color: "white",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     width: 180,
@@ -38,14 +38,18 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "white",
-    fontSize: 8,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     width: 50,
   },
 });
 
-export const ServiceTableHederRow = ({ isDiscount }: { isDiscount?: boolean }) => {
+export const ServiceTableHederRow = ({
+  isDiscount,
+}: {
+  isDiscount?: boolean;
+}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>

@@ -16,6 +16,7 @@ export default function ContractDetailsTable() {
     handleNotes,
     renderModal,
     loading,
+    currentPage
   } = useContract();
 
   // const CurrentComponent = useEmptyStates(
@@ -35,13 +36,12 @@ export default function ContractDetailsTable() {
         <TableHeadings />
         {/* {CurrentComponent} */}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
       {renderModal()}
     </>
   );

@@ -177,6 +177,8 @@ export const useContractPdf = () => {
               address: {
                 name: contractDetails?.offerID?.leadID?.customerDetail
                   ?.fullName,
+                companyName:
+                  contractDetails?.offerID?.leadID?.customerDetail?.companyName,
                 city: contractDetails?.offerID?.leadID?.customerDetail?.address
                   ?.country,
                 postalCode:

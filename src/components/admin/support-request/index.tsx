@@ -18,6 +18,8 @@ export default function SupportRequest() {
     setFilter,
     handleFilterChange,
     loading,
+    currentPage
+
   } = useSupportRequest();
 
   const CurrentComponent = useEmptyStates(
@@ -37,13 +39,13 @@ export default function SupportRequest() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows?.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+
+      />
     </Layout>
   );
 }

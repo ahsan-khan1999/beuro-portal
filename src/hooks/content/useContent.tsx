@@ -72,6 +72,7 @@ const useContent = () => {
     setFilter,
     translate,
     loading,
+    currentPage
   };
 };
 

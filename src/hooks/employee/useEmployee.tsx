@@ -64,6 +64,7 @@ const useEmployee = () => {
     handleFilterChange,
     translate,
     loading,
+    currentPage
   };
 };
 

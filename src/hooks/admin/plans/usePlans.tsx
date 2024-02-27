@@ -131,5 +131,6 @@ export default function usePlans() {
     loading,
     handleDelete: handleConfirmDeletion,
     renderModal,
+    currentPage
   };
 }

@@ -100,6 +100,15 @@ export default function useOfferDetails() {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "offer" },
+      })
+    );
+  };
+
   // function for hnadling the add note
   const handleImageSlider = () => {
     // dispatch(updateModalType({ type: ModalType.NONE }));
@@ -134,6 +143,7 @@ export default function useOfferDetails() {
         subHeading={translate("common.modals.offer_ID")}
       />
     ),
+
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
@@ -147,10 +157,24 @@ export default function useOfferDetails() {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={offerDetails}
+        onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+      />
+    ),
+
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -203,6 +227,7 @@ export default function useOfferDetails() {
     );
     if (res?.payload) offerCreatedHandler();
   };
+
   const handleStatusUpdate = async (offerStatus: string) => {
     const res = await dispatch(
       updateOfferStatus({

@@ -17,10 +17,12 @@ import { readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
     useAppSelector((state) => state.invoice);
+  const { t: translate } = useTranslation();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<
@@ -58,7 +60,7 @@ const useInvoice = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
-  
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -84,16 +86,42 @@ const useInvoice = () => {
     );
   };
 
+  const handleEditNote = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "invoice" },
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={invoiceDetails}
+        onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
+      />
+    ),
+
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} handleFilterChange={handleFilterChange} filter={filter}/>
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        heading={translate("common.add_note")}
+      />
     ),
   };
 
@@ -123,14 +151,14 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      // setFilter({
+      //   ...filter,
+      //   status: "None",
+      // });
       dispatch(
         readInvoice({
           params: {
-            filter: { ...filter, status: "None" },
+            filter: { ...filter },
             page: currentPage,
             size: 10,
           },
@@ -178,6 +206,7 @@ const useInvoice = () => {
     handleSendEmail,
     handleSendByPost,
     invoiceDetails,
+    currentPage
   };
 };
 
