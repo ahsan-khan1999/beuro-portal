@@ -159,7 +159,6 @@ export default function useOfferDetails() {
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
         onDeleteNote={handleEditNote}
-
       />
     ),
 
@@ -228,6 +227,7 @@ export default function useOfferDetails() {
     );
     if (res?.payload) offerCreatedHandler();
   };
+
   const handleStatusUpdate = async (offerStatus: string) => {
     const res = await dispatch(
       updateOfferStatus({

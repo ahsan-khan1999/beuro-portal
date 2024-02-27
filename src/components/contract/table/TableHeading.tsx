@@ -23,10 +23,10 @@ const TableHeadings = () => {
       <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
         {translate("offers.table_headings.email")}
       </span>
-      <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
+      <span className="font-medium text-[#8F8F8F]">
         {translate("contracts.table_headings.payment")}
       </span>
-      <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
+      <span className="font-medium text-[#8F8F8F] ml-1">
         {translate("contracts.table_headings.status")}
       </span>
       <span className="font-medium text-[#8F8F8F] flex items-center justify-center">

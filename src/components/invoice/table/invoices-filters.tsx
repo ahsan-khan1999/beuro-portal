@@ -124,7 +124,7 @@ export default function InvoicesFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "customerDetial.fullName" },
           ]}
           label={translate("common.sort_button")}
         />

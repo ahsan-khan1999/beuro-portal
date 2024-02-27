@@ -12,6 +12,7 @@ import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -51,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-visible">
+    <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
@@ -86,7 +87,7 @@ const TableRows = ({
 
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center">
-                <SelectDropDown
+                <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
                     (item, index) => ({
                       item: {
@@ -103,13 +104,17 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } w-full rounded-lg flex items-center justify-center`}
-                  dropDownItemsContainerClassName=""
+                  } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                  dropDownTextClassName="text-white text-base font-medium"
+                  dropDownIconClassName={`text-[#fff]`}
+                  dropDownItemsContainerClassName="w-full"
+                  isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
+                  isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
                 />
               </div>
             </span>
             <span className="py-4 mx-1" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+              <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({
@@ -131,8 +136,13 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-full rounded-lg px-1 flex items-center justify-center`}
+                } w-fit rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                 key={item.id}
+                dropDownTextClassName="text-white text-base font-medium"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-fit"
+                isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
+                isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
               />
             </span>
             <span
