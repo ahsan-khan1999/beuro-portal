@@ -12,6 +12,7 @@ import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -86,7 +87,7 @@ const TableRows = ({
 
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center">
-                <SelectDropDown
+                <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
                     (item, index) => ({
                       item: {
@@ -103,13 +104,16 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } w-full rounded-lg flex items-center justify-center`}
-                  dropDownItemsContainerClassName=""
+                  } w-fit rounded-lg py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  dropDownIconClassName={`text-[#fff]`}
+                  dropDownItemsContainerClassName="w-fit"
+                  isLastIndex={index === dataToAdd?.length - 1}
                 />
               </div>
             </span>
             <span className="py-4 mx-1" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+              <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({
@@ -131,8 +135,12 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-full rounded-lg px-1 flex items-center justify-center`}
+                } w-fit rounded-lg py-[3px] flex items-center justify-center`}
                 key={item.id}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-fit"
+                isLastIndex={index === dataToAdd?.length - 1}
               />
             </span>
             <span

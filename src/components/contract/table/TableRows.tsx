@@ -12,7 +12,6 @@ import { useTranslation } from "next-i18next";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -88,8 +87,8 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            {/* <span className="py-4" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+              <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -106,17 +105,21 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg flex items-center justify-center`}
+                } min-w-[68.82px] rounded-lg py-[3px] flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-full"
+                isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span> */}
-            <span className="py-4 flex justify-center items-center">
+            </span>
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
             <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
@@ -128,10 +131,10 @@ const TableRows = ({
                     },
                   })
                 )}
-                // selectedItem={translate(
-                //   `contract_status.${item.contractStatus}`
-                // )}
-                selectedItem={item.contractStatus}
+                selectedItem={translate(
+                  `contract_status.${item.contractStatus}`
+                )}
+                // selectedItem={item.contractStatus}
                 onItemSelected={(status) => {
                   if (item.contractStatus !== status) {
                     handleContractStatusUpdate(item.id, status, "contracts");
@@ -143,18 +146,19 @@ const TableRows = ({
                     : staticEnums["ContractStatus"][item.contractStatus] === 1
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
-                } w-full rounded-lg flex items-center justify-center`}
-                isLastIndex={index === dataToAdd?.length-1}
+                } w-fit py-1 rounded-lg flex items-center justify-center gap-x-2`}
+                isLastIndex={index === dataToAdd?.length - 1}
+                dropDownIconClassName={"text-white"}
               />
             </span>
-            <span className="flex justify-center items-center">
+            {/* <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span>
+            </span> */}
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}
