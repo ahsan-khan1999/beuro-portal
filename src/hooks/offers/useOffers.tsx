@@ -33,6 +33,8 @@ import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
+import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
+import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -145,9 +147,37 @@ const useOffers = () => {
     }
   };
 
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+  const offerCreatedHandler = (offerStatus: any) => {
+    switch (offerStatus) {
+      case staticEnums["OfferStatus"]["Open"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Accepted"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED }));
+        break;
+      case staticEnums["OfferStatus"]["Expired"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Rejected"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_REJECTED }));
+        break;
+
+      default:
+        break;
+    }
     handleFilterChange(filter);
+  };
+
+  const defaultOfferCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleUploadFile = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_FILE,
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -158,7 +188,6 @@ const useOffers = () => {
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
         onDeleteNote={handleEditNote}
-
       />
     ),
     [ModalType.EDIT_NOTE]: (
@@ -192,6 +221,29 @@ const useOffers = () => {
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.offer_created_des")}
         route={onClose}
+      />
+    ),
+    [ModalType.OFFER_REJECTED]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_rejected_des")}
+        route={onClose}
+      />
+    ),
+    [ModalType.OFFER_ACCEPTED]: (
+      <OfferAccepted
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+        onFileUpload={handleUploadFile}
+      />
+    ),
+    [ModalType.UPLOAD_FILE]: (
+      <UploadFile
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
       />
     ),
     // [ModalType.IMAGE_SLIDER]: (
@@ -261,7 +313,7 @@ const useOffers = () => {
           },
         })
       );
-      if (res?.payload) offerCreatedHandler();
+      if (res?.payload) offerCreatedHandler(staticEnums["OfferStatus"][status]);
       // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
     }
   };
@@ -277,7 +329,7 @@ const useOffers = () => {
           data: { id: id, paymentType: staticEnums["PaymentType"][status] },
         })
       );
-      if (res?.payload) offerCreatedHandler();
+      if (res?.payload) defaultOfferCreatedHandler();
     }
   };
 
@@ -295,7 +347,7 @@ const useOffers = () => {
     loading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
-    currentPage
+    currentPage,
   };
 };
 

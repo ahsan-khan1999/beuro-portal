@@ -146,7 +146,6 @@ export default function useOfferDetails() {
   };
 
   const offerCreatedHandler = (offerStatus: any) => {
-    // const offerStatus = staticEnums["OfferStatus"][offerDetails?.offerStatus];
     switch (offerStatus) {
       case staticEnums["OfferStatus"]["Open"]:
         dispatch(updateModalType({ type: ModalType.CREATION }));

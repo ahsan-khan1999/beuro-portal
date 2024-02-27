@@ -29,7 +29,7 @@ export const UploadFile = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[550px]"
+        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[400px] min-h-[400px]"
       >
         <div className="relative flex flex-col px-4 sm:px-[26px] pt-5 pb-[36px]">
           <Image
@@ -52,7 +52,7 @@ export const UploadFile = ({
             <SingleFielAttachmentField
               id="attachement"
               attachements={enteredLinks?.attachements}
-              fileSupported="Pdf, ODT, DOC, XLXS "
+              fileSupported="Pdf, ODT, DOC, XLXS"
               isAttachement={true}
               isOpenedFile={false}
               text={translate("common.images_modal.add_attachment")}
