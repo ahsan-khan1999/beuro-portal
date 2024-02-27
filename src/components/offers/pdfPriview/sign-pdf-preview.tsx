@@ -123,42 +123,49 @@ const SignPdfPreview = () => {
               footerDetails: {
                 firstColumn: {
                   companyName:
-                    offerDetails?.Offer?.createdBy?.company?.companyName,
-                  email: offerDetails?.Offer?.createdBy?.email,
+                    offerDetails?.Template?.firstColumn?.companyName,
+                  email: offerDetails?.Template?.firstColumn?.email,
                   phoneNumber:
-                    offerDetails?.Offer?.createdBy?.company?.phoneNumber,
-                  taxNumber: offerDetails?.Offer?.createdBy?.company?.taxNumber,
-                  website: offerDetails?.Offer?.createdBy?.company?.website,
+                    offerDetails?.Template?.firstColumn?.phoneNumber,
+                  taxNumber: Number(offerDetails?.Template?.firstColumn?.taxNumber) as number,
+                  website: offerDetails?.Template?.firstColumn?.website,
                 },
                 secondColumn: {
                   address: {
                     postalCode:
-                      offerDetails?.Offer?.createdBy?.company.address
-                        .postalCode,
+                      offerDetails?.Template?.secondColumn?.postCode
+                        ,
                     streetNumber:
-                      offerDetails?.Offer?.createdBy?.company.address
-                        .streetNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.streetNumber,
                   },
                   bankDetails: {
                     accountNumber:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .accountNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.accountNumber,
                     bankName:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .bankName,
+                      offerDetails?.Template?.secondColumn
+                        ?.bankName,
                     ibanNumber:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .ibanNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.iban,
                   },
                 },
                 thirdColumn: {
-                  row1: "Standorte",
-                  row2: "bern-Solothurn",
-                  row3: "Aargau-Luzern",
-                  row4: "Basel-Zürich",
-                  row5: "",
+                  row1: offerDetails?.Template?.thirdColumn?.row1,
+                  row2: offerDetails?.Template?.thirdColumn?.row2,
+                  row3: offerDetails?.Template?.thirdColumn?.row3,
+                  row4: offerDetails?.Template?.thirdColumn?.row4,
+                  row5: offerDetails?.Template?.thirdColumn?.row5,
                 },
-                fourthColumn: {},
+                fourthColumn: {
+                  row1: offerDetails?.Template?.fourthColumn?.row1,
+                  row2: offerDetails?.Template?.fourthColumn?.row2,
+                  row3: offerDetails?.Template?.fourthColumn?.row3,
+                  row4: offerDetails?.Template?.fourthColumn?.row4,
+                  row5: offerDetails?.Template?.fourthColumn?.row5,
+
+                },
                 columnSettings: null,
                 currPage: 1,
                 totalPages: calculateTotalPages,

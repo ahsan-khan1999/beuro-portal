@@ -45,7 +45,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     video_tab: (
       <>
         {images?.videos && images?.videos?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] max-h-[350px] overflow-y-scroll">
             {images?.videos &&
               images?.videos?.map((item, index) => (
                 <video controls poster="poster.jpg" key={index}>
@@ -63,7 +63,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     attachement_tab: (
       <>
         {images?.attachments && images?.attachments?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] max-h-[350px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
               <div
                 className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
@@ -94,7 +94,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     link_tab: (
       <>
         {images?.links && images?.links?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-y-[14px] max-h-[250px] overflow-y-scroll">
+          <div className="grid grid-cols-1 gap-y-[14px] max-h-[350px] overflow-y-scroll">
             {images?.links?.map((item, index) => (
               <div
                 key={index}
@@ -122,9 +122,9 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[615px]"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[550px]"
       >
-        <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
+        <div className="relative flex flex-col px-4 sm:px-[26px] pt-5 pb-[36px]">
           <Image
             src={crossIcon}
             alt="cross_icon"
@@ -132,7 +132,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             onClick={onClose}
           />
 
-          <p className="text-2xl font-medium border-b-2 border-b-[#000] border-opacity-10 pb-5">
+          <p className="text-base md:text-2xl font-medium border-b-2 border-b-[#000] border-opacity-10 pb-5">
             {translate("common.view_docs")}
           </p>
 

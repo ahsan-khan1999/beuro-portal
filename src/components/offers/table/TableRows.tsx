@@ -45,7 +45,7 @@ const TableRows = ({
   ];
 
   return (
-    <div>
+    <div className="overflow-y-visible">
       {dataToAdd?.map((item, index) => {
         return (
           <div
@@ -80,8 +80,8 @@ const TableRows = ({
               </div>
             </span>
 
-            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}> */}
-            {/* <DropDown
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -98,13 +98,15 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg px-1 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
+                } min-w-[68.82px] !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="min-w-[68.82px] w-full text-center"
-              /> */}
+                dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
+                isLastIndex={index === dataToAdd?.length - 1}
+              />
 
-            {/* <SelectDropDown
+              {/* <SelectDropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -124,27 +126,27 @@ const TableRows = ({
                 } w-full rounded-lg`}
                 dropDownItemsContainerClassName=""
               /> */}
-            {/* </span> */}
+            </span>
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getOfferStatusColor(item.offerStatus)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`offer_status.${item.offerStatus}`)}
               </div>
-            </span>
+            </span> */}
 
-            {/* {item.offerStatus === "Accepted" ? (
+            {item.offerStatus === "Accepted" ? (
               <span className="py-4 ml-1">
                 <div
                   style={{
@@ -157,14 +159,15 @@ const TableRows = ({
               </span>
             ) : (
               <div className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
-                <SelectDropDown
+                <DropDown
                   items={Object.keys(staticEnums["OfferStatus"]).map(
                     (item, index) => ({
                       item: { label: itemsValue[index], value: item },
                     })
                   )}
-                  // selectedItem={translate(`offer_status.${item.offerStatus}`)}
-                  selectedItem={item.offerStatus}
+                  selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                  // selectedItem={item.offerStatus}
+                  key={item.id}
                   onItemSelected={(status) => {
                     handleOfferStatusUpdate(item.id, status, "offer");
                   }}
@@ -176,12 +179,15 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } w-full rounded-lg py-[3px]`}
-                  key={item.id}
-                  dropDownItemsContainerClassName=""
+                  } w-fit  !py-[0px] rounded-lg flex items-center justify-center gap-x-1`}
+                  dropDownIconClassName={"text-white"}
+                  dropDownTextClassName="text-white text-base font-medium"
+                  isSecondLastIndex={ index === dataToAdd?.length - 2}
+                  isLastIndex={index === dataToAdd?.length - 1}
+                  isOffer={true}
                 />
               </div>
-            )} */}
+            )}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"

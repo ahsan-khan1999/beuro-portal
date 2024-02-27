@@ -12,7 +12,6 @@ import { useTranslation } from "next-i18next";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -53,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-y-visible">
+    <div className="">
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
@@ -64,7 +63,7 @@ const TableRows = ({
                 query: { offerID: item?.id, isMail: true },
               })
             }
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6  shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(65px,_65px)_minmax(90px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)_minmax(75px,_75px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(115px,_115px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(90px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(50px,_50px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(65px,_65px)_minmax(90px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)_minmax(75px,_75px)_minmax(50px,_50px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(90px,_4fr)_minmax(120px,_3fr)_minmax(115px,_115px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.contractNumber}</span>
             <span className="py-4 truncate">
@@ -88,8 +87,8 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            {/* <span className="py-4" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+              <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -106,20 +105,25 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg flex items-center justify-center`}
+                } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                dropDownTextClassName="text-white text-base font-medium"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
+                isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span> */}
-            <span className="py-4 flex justify-center items-center">
+            </span>
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
-            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              <DropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
                     item: {
@@ -128,10 +132,10 @@ const TableRows = ({
                     },
                   })
                 )}
-                // selectedItem={translate(
-                //   `contract_status.${item.contractStatus}`
-                // )}
-                selectedItem={item.contractStatus}
+                selectedItem={translate(
+                  `contract_status.${item.contractStatus}`
+                )}
+                // selectedItem={item.contractStatus}
                 onItemSelected={(status) => {
                   if (item.contractStatus !== status) {
                     handleContractStatusUpdate(item.id, status, "contracts");
@@ -143,17 +147,23 @@ const TableRows = ({
                     : staticEnums["ContractStatus"][item.contractStatus] === 1
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
-                } w-full rounded-lg flex items-center justify-center`}
+                } w-fit !py-[3px] rounded-lg flex items-center justify-center gap-x-1
+                `}
+                dropDownTextClassName="text-white text-base font-medium"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
+                isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span> */}
-            <span className="flex justify-center items-center">
+            </span>
+            {/* <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span>
+            </span> * */}
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}
