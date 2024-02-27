@@ -14,6 +14,8 @@ export const DatePicker = ({
   success,
   onRemove,
   dateType,
+  min,
+  max
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = ` w-full rounded-lg max-h-12 ${
@@ -50,7 +52,9 @@ export const DatePicker = ({
               id={id}
               onBlurCapture={() => setInputFocus(false)}
               {...register(name)}
-              // min={disablePastDate()}
+              min={min}
+              max={max}
+
               className={`${classes} relative`}
             />
             {
