@@ -102,9 +102,9 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
               >
                 <p
                   onClick={() => window.open(item, "_blank")}
-                  className="text-base font-normal text-primary truncate select-none"
+                  className="text-base font-normal text-primary truncate select-none cursor-pointer"
                 >
-                  {/* {item} */}
+                  {item}
                 </p>
               </div>
             ))}
@@ -122,7 +122,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="min-w-[480px] xl:max-w-[624px] min-h-[615px]"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[615px]"
       >
         <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
           <Image

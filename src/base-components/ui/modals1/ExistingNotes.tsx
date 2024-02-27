@@ -93,7 +93,7 @@ const ExistingNotes = ({
                       {item.createdBy?.fullName}
                     </span>
                   </p>
-                  <div className="flex items-center gap-x-4">
+                  {/* <div className="flex items-center gap-x-4">
                     <Image
                       src={editNote}
                       alt="edit note"
@@ -110,7 +110,7 @@ const ExistingNotes = ({
                       className="cursor-pointer"
                       onClick={() => onDeleteNote(leadDetails?.id)}
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="mx-[41px] border border-[#4B4B4B] rounded-lg">

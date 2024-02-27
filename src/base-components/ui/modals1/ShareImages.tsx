@@ -136,7 +136,7 @@ export const ShareImages = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[500px]"
       >
         <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
           <Image
@@ -174,7 +174,7 @@ export const ShareImages = ({
             {translate("common.share_on_whatsapp")}
           </p>
           <CopyField
-            value={`https://api.whatsapp.com/send?text=https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`}
+            value={`https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`}
           />
 
           <div className="flex justify-end mt-5">
