@@ -104,10 +104,11 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } w-fit rounded-lg py-[3px] flex items-center justify-center`}
-                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  } min-w-[68.82px] rounded-lg py-[3px] flex items-center justify-center gap-x-1`}
+                  dropDownTextClassName="text-white text-base font-medium"
                   dropDownIconClassName={`text-[#fff]`}
-                  dropDownItemsContainerClassName="w-fit"
+                  dropDownItemsContainerClassName="w-full"
+                  isSecondLastIndex={index === dataToAdd?.length - 2}
                   isLastIndex={index === dataToAdd?.length - 1}
                 />
               </div>
@@ -135,11 +136,12 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-fit rounded-lg py-[3px] flex items-center justify-center`}
+                } w-fit rounded-lg py-[3px] flex items-center justify-center gap-x-1`}
                 key={item.id}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-fit"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
             </span>

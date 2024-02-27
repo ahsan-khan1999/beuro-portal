@@ -19,8 +19,9 @@ export const DropDown = ({
   dropDownDisabled = false,
   shouldNotSelectItem = false,
   isLastIndex,
-  isSecondLastIndex
-}: DropDownProps & { isLastIndex?: boolean,isSecondLastIndex?:boolean }) => {
+  isSecondLastIndex,
+  isOffer
+}: DropDownProps & { isLastIndex?: boolean; isSecondLastIndex?: boolean ,isOffer?:boolean}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
@@ -77,6 +78,7 @@ export const DropDown = ({
               containerClassName={dropDownItemsContainerClassName}
               isLastIndex={isLastIndex}
               isSecondLastIndex={isSecondLastIndex}
+              isOffer={isOffer}
             />
           )}
         </AnimatePresence>

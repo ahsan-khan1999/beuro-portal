@@ -98,10 +98,11 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg py-[3px] flex items-center justify-center`}
-                dropDownTextClassName="text-white text-base font-medium pe-2"
+                } min-w-[68.82px] py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
 
@@ -178,10 +179,12 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } w-fit py-[3px] rounded-lg flex items-center justify-center gap-x-2`}
+                  } w-fit py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                   dropDownIconClassName={"text-white"}
-                  dropDownTextClassName="text-white text-base font-medium pe-2"
+                  dropDownTextClassName="text-white text-base font-medium"
+                  isSecondLastIndex={index === dataToAdd?.length - 2}
                   isLastIndex={index === dataToAdd?.length - 1}
+                  isOffer={true}
                 />
               </div>
             )}
