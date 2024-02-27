@@ -118,8 +118,8 @@ const TableRows = ({
               </div>
             </span>
 
-            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              <DropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
                     item: {
@@ -144,8 +144,9 @@ const TableRows = ({
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
                 } w-full rounded-lg flex items-center justify-center`}
+                isLastIndex={index === dataToAdd?.length-1}
               />
-            </span> */}
+            </span>
             <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
