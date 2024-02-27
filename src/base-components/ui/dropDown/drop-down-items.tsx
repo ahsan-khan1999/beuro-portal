@@ -8,7 +8,7 @@ export const DropDownItems = ({
   onItemClick,
   containerClassName,
   isLastIndex
-}: DropDownItemsProps & { isLastIndex: boolean }) => {
+}: DropDownItemsProps & { isLastIndex?: boolean }) => {
   const handleItemClick = (item: string) => {
     onItemClick(item);
   };

@@ -210,6 +210,8 @@ export default function useInvoiceDetail() {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
 

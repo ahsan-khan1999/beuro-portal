@@ -19,7 +19,7 @@ export const DropDown = ({
   dropDownDisabled = false,
   shouldNotSelectItem = false,
   isLastIndex
-}: DropDownProps & { isLastIndex: boolean }) => {
+}: DropDownProps & { isLastIndex?: boolean }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
