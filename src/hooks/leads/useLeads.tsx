@@ -13,7 +13,7 @@ import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNote, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
@@ -94,11 +94,19 @@ const useLeads = () => {
       dispatch(
         readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
       );
+
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     }
   };
 
-  // function for hnadling the add note
+  const handleDeleteNote = async () => {
+    dispatch(
+      deleteNote({
+        data: {},
+      })
+    );
+  };
+
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -117,7 +125,6 @@ const useLeads = () => {
     );
   };
 
-  // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -136,7 +143,6 @@ const useLeads = () => {
     }
   };
 
-  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -144,6 +150,7 @@ const useLeads = () => {
         onClose={onClose}
         leadDetails={leadDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (
@@ -232,13 +239,14 @@ const useLeads = () => {
     handlePageChange,
     itemsPerPage,
     handleNotes,
+    handleDeleteNote,
     handleImageUpload,
     renderModal,
     handleFilterChange,
     filter,
     setFilter,
     loading,
-    currentPage
+    currentPage,
   };
 };
 

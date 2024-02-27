@@ -51,6 +51,7 @@ export const useAddNewNote = ({
     resolver: yupResolver<FieldValues>(schema),
   });
   const fields = AddNoteFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await dispatch(
       createNote({
@@ -60,6 +61,7 @@ export const useAddNewNote = ({
         translate,
       })
     );
+
     if (res?.payload) {
       switch (type) {
         case "lead":
@@ -101,6 +103,7 @@ export const useAddNewNote = ({
       handleNotes(id);
     }
   };
+
   return {
     fields,
     onSubmit,

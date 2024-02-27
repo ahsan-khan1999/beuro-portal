@@ -38,7 +38,7 @@ export const ImagePreview = ({ images }: { images: string[] }) => {
             width={100}
             height={100}
             alt="Uploaded Preview"
-            style={{ height: "80px", width: "80px" }}
+            style={{ height: "100px", width: "100px" }}
             onClick={() => toggleZoom(item, index)}
             className="cursor-pointer"
           />
@@ -68,7 +68,7 @@ export const ImagePreview = ({ images }: { images: string[] }) => {
             images={isZoomed?.sliderImageData}
             activeIndex={isZoomed?.currentIndex}
             containerClasses="w-[80%]"
-            mainImgSliderClasses="w-full h-[615px]"
+            mainImgSliderClasses="w-full min-h-[615px]"
           />
         </div>
       )}

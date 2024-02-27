@@ -53,6 +53,20 @@ export const createNote: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+export const deleteNote: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("note/delete", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      await apiServices.deleteNote(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
 const NoteSlice = createSlice({
   name: "NoteSlice",
   initialState,
