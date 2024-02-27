@@ -8,21 +8,16 @@ import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { useDocumentViewer } from "@/hooks/modals/userDocumentViewer";
 import { useRouter } from "next/router";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { ImagePreview } from "./image-preview";
 
-export const DocumentViewerModal = ({
-  onClose,
-  handleImageSlider,
-}: {
-  onClose: () => void;
-  handleImageSlider: Function;
-}) => {
+export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   const {
     activeTab,
     attachementTabs,
     handleTabChange,
     isOpenedFile,
     translate,
-  } = useDocumentViewer(handleImageSlider);
+  } = useDocumentViewer();
 
   const { images } = useAppSelector((state) => state.image);
   const router = useRouter();
@@ -39,18 +34,7 @@ export const DocumentViewerModal = ({
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-scroll ">
-            {images?.images?.map((item, index) => (
-              <Image
-                src={item}
-                key={index}
-                alt="leads_images"
-                className="w-full h-auto rounded-lg"
-                height={106}
-                width={106}
-              />
-            ))}
-          </div>
+          <ImagePreview images={images?.images} />
         ) : (
           <div className="-mt-6 pb-4">
             <NoDataEmptyState />
@@ -61,7 +45,7 @@ export const DocumentViewerModal = ({
     video_tab: (
       <>
         {images?.videos && images?.videos?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
             {images?.videos &&
               images?.videos?.map((item, index) => (
                 <video controls poster="poster.jpg" key={index}>
@@ -79,7 +63,7 @@ export const DocumentViewerModal = ({
     attachement_tab: (
       <>
         {images?.attachments && images?.attachments?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
               <div
                 className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
@@ -110,13 +94,16 @@ export const DocumentViewerModal = ({
     link_tab: (
       <>
         {images?.links && images?.links?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-y-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-1 gap-y-[14px] max-h-[250px] overflow-y-scroll">
             {images?.links?.map((item, index) => (
               <div
                 key={index}
                 className="border-2 border-lightGray rounded-lg px-4 py-2"
               >
-                <p className="text-base font-normal text-primary truncate select-none">
+                <p
+                  onClick={() => window.open(item, "_blank")}
+                  className="text-base font-normal text-primary truncate select-none"
+                >
                   {item}
                 </p>
               </div>

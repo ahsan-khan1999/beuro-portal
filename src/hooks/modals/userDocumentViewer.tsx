@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 
-export const useDocumentViewer = (handleImageSlider: Function) => {
+export const useDocumentViewer = () => {
   const { t: translate } = useTranslation();
   const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState("img_tab");
