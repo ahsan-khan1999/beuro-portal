@@ -81,7 +81,7 @@ const TableRows = ({
             </span>
 
             <span className="py-4" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+              <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
                     item: {
@@ -98,11 +98,15 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg flex items-center justify-center`}
+                } w-fit py-[3px] rounded-lg flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-fit"
+                isLastIndex={index === collectiveInvoice?.length - 1}
               />
             </span>
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
-              <SelectDropDown
+              <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
                   ?.map((item, index) => ({
@@ -111,8 +115,8 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                // selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
-                selectedItem={item.invoiceStatus}
+                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
+                // selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept");
@@ -124,8 +128,12 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-full rounded-lg flex items-center justify-center`}
+                } w-fit py-[3px] rounded-lg flex items-center justify-center`}
+                dropDownTextClassName="text-white text-base font-medium pe-2"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-fit"
                 key={item.id}
+                isLastIndex={index === collectiveInvoice?.length - 1}
               />
             </span>
             <span className="py-4 flex justify-center items-center">
