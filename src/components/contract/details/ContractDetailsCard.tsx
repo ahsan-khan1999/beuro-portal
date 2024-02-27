@@ -187,24 +187,23 @@ const ContractDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
-                      item.endDate
-                        ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
-                          ((contractDetails?.offerID?.date?.length - 1 !=
-                            index &&
-                            ", ") ||
-                            ".")
-                        : (contractDetails?.offerID?.date?.length - 1 !=
-                            index &&
-                            ", ") ||
-                          "."
+                    `${formatDateTimeToDate(item.startDate)}${item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                        ".")
+                      : (contractDetails?.offerID?.date?.length - 1 !=
+                        index &&
+                        ", ") ||
+                      "."
                     }`
                 )}
                 {contractDetails?.offerID?.time &&
                   ` ${translate("common.at")} ` +
-                    contractDetails?.offerID?.time +
-                    ` ${translate("common.clock")} `}
+                  contractDetails?.offerID?.time +
+                  ` ${translate("common.clock")} `}
               </span>
               <Image
                 src={editIcon}
@@ -232,7 +231,9 @@ const ContractDetailsCard = ({
                   color: `${getEmailColor(contractDetails?.emailStatus)}`,
                 }}
               >
-                {translate(contractDetails?.emailStatus)}
+                {translate(
+                  `contract_status.${contractDetails?.emailStatus}`
+                )}
               </div>
             )}
           </div>
@@ -287,30 +288,30 @@ const ContractDetailsCard = ({
               {(staticEnums["ContractStatus"][
                 contractDetails?.contractStatus
               ] !== 3 && (
-                <DropDown
-                  items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item, index) => ({
-                      item: {
-                        label: contractStatus[index],
-                        value: item,
-                      },
-                    })
-                  )}
-                  selectedItem={translate(
-                    `contract_status.${contractDetails?.contractStatus}`
-                  )}
-                  onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] rounded-lg px-4 py-[3px] flex items-center`}
-                  dropDownTextClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}] text-base font-medium me-1`}
-                  dropDownIconClassName={`text-[${getContractStatusColor(
-                    contractDetails?.contractStatus
-                  )}]`}
-                />
-              )) || <></>}
+                  <DropDown
+                    items={Object.keys(staticEnums["ContractStatus"]).map(
+                      (item, index) => ({
+                        item: {
+                          label: contractStatus[index],
+                          value: item,
+                        },
+                      })
+                    )}
+                    selectedItem={translate(
+                      `contract_status.${contractDetails?.contractStatus}`
+                    )}
+                    onItemSelected={handleStatusUpdate}
+                    dropDownClassName={`border border-[${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}] rounded-lg px-4 py-[3px] flex items-center`}
+                    dropDownTextClassName={`text-[${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}] text-base font-medium me-1`}
+                    dropDownIconClassName={`text-[${getContractStatusColor(
+                      contractDetails?.contractStatus
+                    )}]`}
+                  />
+                )) || <></>}
             </span>
           </div>
 
