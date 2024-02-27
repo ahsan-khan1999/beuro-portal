@@ -52,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-y-visible">
+    <div className="">
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
@@ -108,6 +108,7 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium pe-2"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
             </span>
