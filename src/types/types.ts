@@ -482,7 +482,8 @@ export type GenerateOfferDateFormField = (
   count: number,
   handleRemoveDateField: UseFieldArrayRemove,
   loading?: boolean,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  wordDates?: { startDate: string, endDate: string }[]
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
@@ -622,7 +623,7 @@ export interface PaginationProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
   containerClassName?: string;
-  currentPage:number
+  currentPage: number
 }
 
 export interface PaginationItemProps {

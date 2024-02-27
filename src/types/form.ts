@@ -277,6 +277,9 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   success?: boolean;
   onRemove?: () => void;
   dateType?: string;
+  min?:string;
+  max?:string;
+
 }
 
 export interface SpanProps {
