@@ -94,7 +94,7 @@ export default function ContractsFilter({
   };
 
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
+    <div className="relative flex my-auto cursor-pointer z-50" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
