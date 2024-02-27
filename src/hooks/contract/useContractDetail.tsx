@@ -148,6 +148,8 @@ export default function useContractDetail() {
         onClose={onClose}
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
     [ModalType.ADD_NOTE]: (

@@ -3,20 +3,19 @@ import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { CopyField } from "../copy-field";
-import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { BaseButton } from "../button/base-button";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useShareImages } from "@/hooks/modals/useShareImages";
+import { ImagePreview } from "./image-preview";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const ShareImages = ({
   onClose,
-  handleImageSlider,
   offerId,
 }: {
   onClose: () => void;
-  handleImageSlider: Function;
   offerId: string;
 }) => {
   const {
@@ -27,29 +26,19 @@ export const ShareImages = ({
     loading,
     loadingGlobal,
     isOpenedFile,
-  } = useShareImages(handleImageSlider);
+  } = useShareImages();
+
+  const { images } = useAppSelector((state) => state.image);
 
   const handleFileLink = (fileName: string) => {
     window.open(fileName);
   };
 
-  const { images } = useAppSelector((state) => state.image);
   const attachementLookUp = {
     img_tab: (
       <>
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[500px] overflow-scroll">
-            {images?.images?.map((item, index) => (
-              <Image
-                src={item}
-                key={index}
-                alt="leads_images"
-                className="w-full h-auto rounded-lg"
-                height={106}
-                width={106}
-              />
-            ))}
-          </div>
+          <ImagePreview images={images?.images} />
         ) : (
           <div className="-mt-6 pb-4">
             <NoDataEmptyState />
@@ -60,7 +49,7 @@ export const ShareImages = ({
     video_tab: (
       <>
         {images?.videos && images?.videos?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
             {images?.videos &&
               images?.videos?.map((item, index) => (
                 <video controls poster="poster.jpg" key={index}>
@@ -78,9 +67,9 @@ export const ShareImages = ({
     attachement_tab: (
       <>
         {images?.attachments && images?.attachments?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-2 gap-[14px] max-h-[250px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
-              <div className="flex items-center gap-x-3">
+              <div className="flex items-center gap-x-3" key={index}>
                 <div
                   className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 truncate ${
                     isOpenedFile ? "cursor-pointer" : "cursor-default"
@@ -112,7 +101,7 @@ export const ShareImages = ({
     link_tab: (
       <>
         {images?.links && images?.links?.length > 0 ? (
-          <div className="grid grid-cols-1 gap-y-[14px] max-h-[500px] overflow-y-scroll">
+          <div className="grid grid-cols-1 gap-y-[14px] max-h-[250px] overflow-y-scroll">
             {images?.links?.map((item, index) => (
               <div
                 key={index}
@@ -147,7 +136,7 @@ export const ShareImages = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[500px]"
       >
         <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
           <Image
@@ -185,7 +174,7 @@ export const ShareImages = ({
             {translate("common.share_on_whatsapp")}
           </p>
           <CopyField
-            value={`https://api.whatsapp.com/send?text=https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`}
+            value={`https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`}
           />
 
           <div className="flex justify-end mt-5">

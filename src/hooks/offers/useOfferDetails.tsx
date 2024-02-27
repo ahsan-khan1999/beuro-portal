@@ -158,6 +158,8 @@ export default function useOfferDetails() {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
 

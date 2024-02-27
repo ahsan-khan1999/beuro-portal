@@ -18,7 +18,6 @@ const EditOffersDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
-  const { images } = useAppSelector((state) => state.image);
   const { t: translate } = useTranslation();
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
@@ -47,14 +46,9 @@ const EditOffersDetails = () => {
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
 
-  
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages
-        onClose={onClose}
-        handleImageSlider={handleImageSlider}
-        offerId={offerDetails?.id}
-      />
+      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
     ),
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (

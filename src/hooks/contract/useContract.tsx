@@ -133,6 +133,7 @@ const useContract = () => {
         onClose={onClose}
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (

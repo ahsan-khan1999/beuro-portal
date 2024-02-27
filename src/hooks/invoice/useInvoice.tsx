@@ -102,6 +102,8 @@ const useInvoice = () => {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
 
