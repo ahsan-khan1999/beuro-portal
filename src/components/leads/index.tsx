@@ -14,13 +14,14 @@ export default function Leads() {
     totalItems,
     itemsPerPage,
     handleNotes,
+    handleDeleteNote,
     handleImageUpload,
     renderModal,
     filter,
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
+    currentPage,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -44,12 +45,12 @@ export default function Leads() {
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
     </>
   );

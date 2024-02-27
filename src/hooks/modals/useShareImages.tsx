@@ -1,17 +1,12 @@
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useMemo, useState } from "react";
-import { getFileNameFromUrl } from "@/utils/utility";
+import { useAppSelector } from "../useRedux";
+import { useState } from "react";
 
-export const useShareImages = (handleImageSlider: Function) => {
+export const useShareImages = () => {
   const { t: translate } = useTranslation();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const { images, loading } = useAppSelector((state) => state.image);
+  const { loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
-
   const [activeTab, setActiveTab] = useState("img_tab");
 
   const attachementTabs = [
@@ -24,8 +19,6 @@ export const useShareImages = (handleImageSlider: Function) => {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-
-  //   if (response?.payload) handleImageSlider();
 
   return {
     translate,

@@ -52,7 +52,7 @@ export const ImageField = ({
   const router = useRouter();
   const formdata = new FormData();
   const dispatch = useAppDispatch();
-  const handleFileInput = async ( 
+  const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
     e.preventDefault();
@@ -183,6 +183,8 @@ export const ImageField = ({
           onChange={handleFileInput}
           multiple
         />
+
+        
       </label>
 
       <div className="col-span-2 mt-5">

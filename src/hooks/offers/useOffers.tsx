@@ -157,6 +157,8 @@ const useOffers = () => {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
+        onDeleteNote={handleEditNote}
+
       />
     ),
     [ModalType.EDIT_NOTE]: (

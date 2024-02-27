@@ -137,6 +137,7 @@ const EditOffersDetailsData = ({
               index={index + 1}
               icon={item.icon}
               selectedTab={index}
+              key={index}
             />
           ))}
         </div>

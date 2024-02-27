@@ -18,7 +18,8 @@ export const DropDown = ({
   dropDownIconClassName,
   dropDownDisabled = false,
   shouldNotSelectItem = false,
-}: DropDownProps) => {
+  isLastIndex
+}: DropDownProps & { isLastIndex?: boolean }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
@@ -44,9 +45,8 @@ export const DropDown = ({
 
   return (
     <div
-      className={`flex flex-col gap-y-2 w-full ${
-        dropDownDisabled ? "pointer-events-none" : ""
-      }`}
+      className={`flex flex-col gap-y-2 w-full ${dropDownDisabled ? "pointer-events-none" : ""
+        }`}
       ref={dropdownRef}
     >
       {label && <label className="text-sm text-gray">{label}</label>}
@@ -71,6 +71,7 @@ export const DropDown = ({
               items={items}
               onItemClick={toggleDropDown}
               containerClassName={dropDownItemsContainerClassName}
+              isLastIndex={isLastIndex}
             />
           )}
         </AnimatePresence>
