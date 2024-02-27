@@ -179,10 +179,10 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } w-fit !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                  } w-fit  !py-[0px] rounded-lg flex items-center justify-center gap-x-1`}
                   dropDownIconClassName={"text-white"}
                   dropDownTextClassName="text-white text-base font-medium"
-                  isSecondLastIndex={index === dataToAdd?.length - 2}
+                  isSecondLastIndex={ index === dataToAdd?.length - 2}
                   isLastIndex={index === dataToAdd?.length - 1}
                   isOffer={true}
                 />
