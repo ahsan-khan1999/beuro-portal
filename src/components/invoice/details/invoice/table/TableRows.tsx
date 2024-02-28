@@ -104,12 +104,20 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                  } w-full rounded-lg !py-[3px] flex items-center justify-between gap-x-1`}
                   dropDownTextClassName="text-white text-base font-medium"
                   dropDownIconClassName={`text-[#fff]`}
                   dropDownItemsContainerClassName="w-full"
-                  isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
-                  isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
+                  isSecondLastIndex={
+                    dataToAdd?.length <= 2
+                      ? false
+                      : index === dataToAdd?.length - 2
+                  }
+                  isLastIndex={
+                    dataToAdd?.length <= 2
+                      ? false
+                      : index === dataToAdd?.length - 1
+                  }
                 />
               </div>
             </span>
@@ -141,8 +149,16 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-fit"
-                isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
-                isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
+                isSecondLastIndex={
+                  dataToAdd?.length <= 2
+                    ? false
+                    : index === dataToAdd?.length - 2
+                }
+                isLastIndex={
+                  dataToAdd?.length <= 2
+                    ? false
+                    : index === dataToAdd?.length - 1
+                }
               />
             </span>
             <span
