@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 import { useState } from "react";
+import { File } from "buffer";
 
 export const SingleFielAttachmentField = ({
   id,
@@ -21,8 +22,8 @@ export const SingleFielAttachmentField = ({
   text?: string;
   fileSupported?: string;
   isOpenedFile?: boolean;
-  attachements?: Attachement[];
-  setAttachements?: (attachement?: Attachement[]) => void;
+  attachements?: any;
+  setAttachements?: (attachement?: any) => void;
   isAttachement?: boolean;
 }) => {
   const router = useRouter();
@@ -44,15 +45,15 @@ export const SingleFielAttachmentField = ({
       formdata.append("file", file);
     }
 
-    const response = await dispatch(uploadFileToFirebase(formdata));
-    if (response?.payload) {
-      const newAttachment = {
-        name: getFileNameFromUrl(response.payload),
-        value: response.payload,
-      };
-      setAttachements && setAttachements([newAttachment]);
+    // const response = await dispatch(uploadFileToFirebase(formdata));
+    // if (response?.payload) {
+    if (e.target instanceof HTMLInputElement && e.target.files) {
+     
+      setAttachements && setAttachements(e.target.files[0]);
       setFileUploaded(true);
     }
+
+    // }
   };
 
   const handleDeleteFile = () => {
@@ -69,9 +70,8 @@ export const SingleFielAttachmentField = ({
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
-          fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
-        } px-[25px] pt-6 pb-3`}
+        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
+          } px-[25px] pt-6 pb-3`}
       >
         <div className="flex flex-col items-center gap-x-3">
           <svg
@@ -107,17 +107,15 @@ export const SingleFielAttachmentField = ({
           type="file"
           className="hidden"
           onChange={handleFileInput}
-          disabled={fileUploaded}
         />
       </label>
 
       <div className="col-span-2 mt-5">
         <div className="w-[99%]">
-          {attachements && attachements.length > 0 && (
+          {attachements && (
             <div
-              className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
-                isOpenedFile ? "cursor-pointer" : "cursor-default"
-              }`}
+              className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${isOpenedFile ? "cursor-pointer" : "cursor-default"
+                }`}
               onClick={() =>
                 isOpenedFile && router.push("/content/pdf-preview")
               }
@@ -133,7 +131,7 @@ export const SingleFielAttachmentField = ({
                   }}
                 />
                 <Image src={pdfIcon} alt="pdfIcon" />
-                <span>{attachements[0]?.name?.slice(0, 20)}...</span>
+                <span>{attachements?.name?.slice(0, 20)}...</span>
               </div>
             </div>
           )}

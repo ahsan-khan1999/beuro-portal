@@ -18,27 +18,29 @@ export const useFileUpload = () => {
   console.log(id);
 
   const [enteredLinks, setEnteredLinks] = useState<any>({
-    attachements: [],
+    attachements: null,
   });
 
-  const handleAttachementAdd = (attachement?: Attachement[]) => {
+  const handleAttachementAdd = (attachement?: any) => {
     if (attachement)
-      setEnteredLinks({ ...enteredLinks, attachements: [...attachement] });
+      setEnteredLinks({ attachements: attachement });
   };
 
-  useMemo(() => {
-    const formatAttachments = images?.attachments?.map((item: string) => ({
-      name: getFileNameFromUrl(item),
-      value: item,
-    }));
+  // useMemo(() => {
+  //   const formatAttachments = images?.attachments?.map((item: string) => ({
+  //     name: getFileNameFromUrl(item),
+  //     value: item,
+  //   }));
 
-    setEnteredLinks({
-      attachements: formatAttachments,
-    });
-  }, [images]);
+  //   setEnteredLinks({
+  //     attachements: formatAttachments,
+  //   });
+  // }, [images]);
+  console.log(enteredLinks);
+
   const formData = new FormData();
 
-  formData.append("offer", enteredLinks.attachments);
+  formData.append("signature", enteredLinks?.attachements);
 
   const onSubmit = async () => {
     const response = await dispatch(signOffer({ data: { id: id }, formData }));
