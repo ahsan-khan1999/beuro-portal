@@ -217,20 +217,20 @@ export const updateEmailSetting: AsyncThunk<boolean, object, object> | any =
 export const updateEmailTemplateSetting:
   | AsyncThunk<boolean, object, object>
   | any = createAsyncThunk(
-  "add/user/email/template/setting",
-  async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any;
+    "add/user/email/template/setting",
+    async (args, thunkApi) => {
+      const { data, router, setError, translate } = args as any;
 
-    try {
-      const response = await apiServices.createEmailTemplateSettings(data);
-      return response?.data?.data?.MailSetting;
-    } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message));
-      setErrors(setError, e?.data.data, translate);
-      return false;
+      try {
+        const response = await apiServices.createEmailTemplateSettings(data);
+        return response?.data?.data?.MailSetting;
+      } catch (e: any) {
+        thunkApi.dispatch(setErrorMessage(e?.data?.message));
+        setErrors(setError, e?.data.data, translate);
+        return false;
+      }
     }
-  }
-);
+  );
 
 export const updateAdminSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("admin/setting", async (args, thunkApi) => {
@@ -263,6 +263,21 @@ export const createQrCodeSetting: AsyncThunk<boolean, object, object> | any =
 
     try {
       await apiServices.createSettingsQrCode(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+
+export const deleteTaxSetting: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("delete/tax/setting", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      await apiServices.deleteTax(data);
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -448,6 +463,17 @@ const SettingSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createQrCodeSetting.rejected, (state) => {
+      state.loading = false;
+    });
+
+
+    builder.addCase(deleteTaxSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteTaxSetting.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(deleteTaxSetting.rejected, (state) => {
       state.loading = false;
     });
   },

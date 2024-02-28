@@ -53,7 +53,7 @@ export const createNote: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-export const deleteNote: AsyncThunk<boolean, object, object> | any =
+export const deleteNotes: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("note/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
@@ -95,6 +95,17 @@ const NoteSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createNote.rejected, (state) => {
+      state.loading = false;
+    });
+
+
+    builder.addCase(deleteNotes.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteNotes.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(deleteNotes.rejected, (state) => {
       state.loading = false;
     });
   },

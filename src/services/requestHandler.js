@@ -114,6 +114,7 @@ const SERVICE_URLS = {
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
   updateDate: "/offer/update-date/",
+
 };
 
 const login = (data) =>
@@ -547,7 +548,7 @@ const readNotes = (params) =>
     { detail: false }
   );
 
-  
+
 const createNotes = (params) =>
   post(
     SERVICE_URLS.notes + `/${params?.type}/${params?.id}`,
@@ -556,12 +557,12 @@ const createNotes = (params) =>
     { detail: false }
   );
 
-const deleteNote = (params) =>
-  delete (SERVICE_URLS.notes + `/${params?.id}`,
-  params,
-  { feature: featureConstants.login },
-  { detail: false });
-
+const deleteNote = (data) =>
+  del(
+    SERVICE_URLS.notes + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
 const readCollectiveInvoices = (params) =>
   get(
     SERVICE_URLS.invoiceCollection + `/${params?.id}`,
@@ -895,6 +896,16 @@ const updateInvoiceDetails = (data) =>
   put(SERVICE_URLS.createInvoiceDetail + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
+
+const deleteTax = (data) =>
+  del(
+    SERVICE_URLS.tax + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
+
+
 const apiServices = {
   login,
   singUp,
@@ -1053,5 +1064,6 @@ const apiServices = {
   updateContractDate,
   updateInvoiceDetails,
   createInvoiceDetail,
+  deleteTax
 };
 export default apiServices;

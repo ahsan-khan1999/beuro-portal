@@ -13,7 +13,7 @@ import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
-import { deleteNote, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import {  deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
@@ -99,12 +99,12 @@ const useLeads = () => {
     }
   };
 
-  const handleDeleteNote = async () => {
-    dispatch(
-      deleteNote({
-        data: {},
-      })
+  const handleDeleteNote = async (id: string) => {
+    if(!id) return;
+    const response = await dispatch(
+      deleteNotes({ data: { id: id } })
     );
+    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATION }))
   };
 
   const handleAddNote = (id: string) => {
