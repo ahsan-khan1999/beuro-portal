@@ -96,7 +96,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } w-full rounded-lg !py-[3px] flex items-center justify-between gap-x-1`}
+                } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
@@ -126,7 +126,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-full !py-[3px] rounded-lg flex items-center justify-between gap-x-1`}
+                } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-fit"

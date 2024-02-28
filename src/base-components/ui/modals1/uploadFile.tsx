@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useRouter } from "next/router";
 import { SingleFielAttachmentField } from "./single-file-attachment-field";
 import { useFileUpload } from "@/hooks/modals/useFileUpload";
+import { BaseButton } from "../button/base-button";
 
 export const UploadFile = ({
   onClose,
@@ -13,9 +13,7 @@ export const UploadFile = ({
   heading: string;
 }) => {
   const {
-    error,
     handleAttachementAdd,
-    handleAttachementDelete,
     loading,
     loadingGlobal,
     onSubmit,
@@ -23,15 +21,13 @@ export const UploadFile = ({
     enteredLinks,
   } = useFileUpload();
 
-  const router = useRouter();
-
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[400px] min-h-[400px]"
+        containerClassName="max-w-[480px] xl:max-w-[624px] max-h-[450px] min-h-[450px]"
       >
-        <div className="relative flex flex-col px-4 sm:px-[26px] pt-5 pb-[36px]">
+        <div className="relative flex flex-col px-4 sm:px-[26px] py-5">
           <Image
             src={crossIcon}
             alt="cross_icon"
@@ -43,20 +39,28 @@ export const UploadFile = ({
             {translate("common.upload_file")}
           </p>
 
-          <div className="my-0 w-full h-[415px] overflow-y-auto overflow-x-hidden">
-            <div className="flex flex-col gap-y-2 my-5">
-              <h2 className="text-base font-medium text-[#393939]">
-                {translate("common.images_modal.single_attachment")}
-              </h2>
-            </div>
-            <SingleFielAttachmentField
-              id="attachement"
-              attachements={enteredLinks?.attachements}
-              fileSupported="Pdf, ODT, DOC, XLXS"
-              isAttachement={true}
-              isOpenedFile={false}
-              text={translate("common.images_modal.add_attachment")}
-              setAttachements={handleAttachementAdd}
+          <h2 className="text-base font-medium text-[#393939] mt-4 mb-2">
+            {translate("common.images_modal.single_attachment")}
+          </h2>
+
+          <SingleFielAttachmentField
+            id="attachement"
+            attachements={enteredLinks?.attachements}
+            fileSupported="Pdf, ODT, DOC, XLXS"
+            isAttachement={true}
+            isOpenedFile={false}
+            text={translate("common.images_modal.add_attachment")}
+            setAttachements={handleAttachementAdd}
+          />
+
+          <div className="flex justify-end mt-5">
+            <BaseButton
+              buttonText={translate("common.upload_file")}
+              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
+              textClassName="text-white"
+              onClick={onSubmit}
+              loading={loading || loadingGlobal}
+              disabled={loadingGlobal}
             />
           </div>
         </div>

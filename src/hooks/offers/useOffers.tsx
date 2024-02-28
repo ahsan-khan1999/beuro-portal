@@ -40,7 +40,6 @@ const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
     (state) => state.offer
   );
-  const { images } = useAppSelector((state) => state.image);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
@@ -94,6 +93,7 @@ const useOffers = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -147,13 +147,13 @@ const useOffers = () => {
     }
   };
 
-  const offerCreatedHandler = (offerStatus: any) => {
+  const offerCreatedHandler = (offerStatus: any, id: string) => {
     switch (offerStatus) {
       case staticEnums["OfferStatus"]["Open"]:
         dispatch(updateModalType({ type: ModalType.CREATION }));
         break;
       case staticEnums["OfferStatus"]["Accepted"]:
-        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED }));
+        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED, data: id }));
         break;
       case staticEnums["OfferStatus"]["Expired"]:
         dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -172,10 +172,11 @@ const useOffers = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleUploadFile = () => {
+  const handleUploadFile = (id: string) => {
     dispatch(
       updateModalType({
         type: ModalType.UPLOAD_FILE,
+        data: id,
       })
     );
   };
@@ -313,8 +314,8 @@ const useOffers = () => {
           },
         })
       );
-      if (res?.payload) offerCreatedHandler(staticEnums["OfferStatus"][status]);
-      // dispatch(readOfferDetails({ params: { filter: offerDetails?.id } })),
+      if (res?.payload)
+        offerCreatedHandler(staticEnums["OfferStatus"][status], id);
     }
   };
 

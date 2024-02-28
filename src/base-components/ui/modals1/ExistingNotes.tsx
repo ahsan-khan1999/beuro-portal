@@ -11,8 +11,6 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { BaseButton } from "../button/base-button";
-import deleteIcon from "@/assets/pngs/delet-icon.png";
-import editNote from "@/assets/svgs/edit_primary.svg";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -31,7 +29,7 @@ const ExistingNotes = ({
     | contractTableTypes
     | InvoiceTableRowTypes;
 }) => {
-  const { notes, loading } = useAppSelector((state) => state.note);
+  const { notes } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
 
   return (

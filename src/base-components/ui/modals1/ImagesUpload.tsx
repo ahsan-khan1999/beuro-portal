@@ -45,7 +45,7 @@ const ImagesUpload = ({
   } = useUploadImage(handleImageSlider);
   const attachementLookUp = {
     img_tab: (
-      <>
+      <div className="h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.title")}
@@ -63,17 +63,17 @@ const ImagesUpload = ({
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
-          fileSupported="PNG, JPEG, JPG, WEBP "
+          fileSupported="PNG, JPEG, JPG, WEBP"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_image")}
           setAttachements={handleimageAdd}
         />
-      </>
+      </div>
     ),
 
     video_tab: (
-      <div className="my-0 w-full">
+      <div className="h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.video_title")}
@@ -94,7 +94,7 @@ const ImagesUpload = ({
       </div>
     ),
     link_tab: (
-      <div className="my-0 w-full">
+      <div className="h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
@@ -113,7 +113,7 @@ const ImagesUpload = ({
       </div>
     ),
     attachement_tab: (
-      <div className="my-0 w-full">
+      <div className="h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.attachement_title")}
@@ -134,6 +134,7 @@ const ImagesUpload = ({
       </div>
     ),
   };
+
   return (
     <>
       <BaseModal

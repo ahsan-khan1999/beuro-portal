@@ -29,7 +29,7 @@ export const SingleFielAttachmentField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
 
-  const [fileUploaded, setFileUploaded] = useState(false); // State variable to track file upload
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
@@ -69,8 +69,9 @@ export const SingleFielAttachmentField = ({
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        // onDrop={handleDrop}
-        className="flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto cursor-pointer px-[25px] pt-6 pb-3"
+        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
+          fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
+        } px-[25px] pt-6 pb-3`}
       >
         <div className="flex flex-col items-center gap-x-3">
           <svg

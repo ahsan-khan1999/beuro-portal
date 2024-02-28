@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const OfferAccepted = ({
   onClose,
@@ -15,9 +16,11 @@ export const OfferAccepted = ({
   heading: string;
   subHeading: string;
   route: () => void;
-  onFileUpload: () => void;
+  onFileUpload: (id: string) => void;
 }) => {
   const { t: translate } = useTranslation();
+  const id = useAppSelector((state) => state.global.modal.data);
+
   return (
     <>
       <BaseModal
@@ -42,7 +45,7 @@ export const OfferAccepted = ({
               {translate("common.done_button")}
             </button>
             <button
-              onClick={onFileUpload}
+              onClick={() => onFileUpload(id)}
               className="bg-[#4A13E7] hover:bg-purple-600 cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-[200px] rounded-lg p-4 text-white text-base font-medium"
             >
               {translate("common.upload_file")}
