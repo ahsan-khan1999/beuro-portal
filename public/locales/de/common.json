@@ -1879,7 +1879,7 @@
   },
   "pdf": {
     "offer_number": "Angebot Nr",
-    "offer_date": "Angebotsdatum",
+    "offer_date": "Erstelldatum",
     "created_by": "Erstellt von",
     "email": "E-Mail",
     "phone": "Telefon",
@@ -1887,7 +1887,6 @@
     "address": "Adresse",
     "work_date": "Arbeitstermine",
     "description": "Beschreibung",
-
     "service": "Dienstleistung/Produkt",
     "price": "Preis",
     "unit": "Einheit",

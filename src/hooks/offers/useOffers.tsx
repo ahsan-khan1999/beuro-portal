@@ -12,8 +12,6 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { OffersTableRowTypes } from "@/types/offers";
-import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
@@ -24,7 +22,7 @@ import {
   updateOfferStatus,
   updatePaymentStatus,
 } from "@/api/slices/offer/offerSlice";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
@@ -108,7 +106,6 @@ const useOffers = () => {
     }
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -116,6 +113,13 @@ const useOffers = () => {
         data: { id: id, type: "offer" },
       })
     );
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleEditNote = (id: string) => {
@@ -188,7 +192,7 @@ const useOffers = () => {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (

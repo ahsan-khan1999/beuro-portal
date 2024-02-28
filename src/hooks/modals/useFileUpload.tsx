@@ -1,8 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useMemo, useState } from "react";
-import { getFileNameFromUrl } from "@/utils/utility";
-import { Attachement } from "@/types/global";
+import { useState } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { signOffer, uploadOfferPdf } from "@/api/slices/offer/offerSlice";
@@ -15,27 +13,13 @@ export const useFileUpload = () => {
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const id = useAppSelector((state) => state.global.modal.data);
 
-  console.log(id);
-
   const [enteredLinks, setEnteredLinks] = useState<any>({
     attachements: null,
   });
 
   const handleAttachementAdd = (attachement?: any) => {
-    if (attachement)
-      setEnteredLinks({ attachements: attachement });
+    if (attachement) setEnteredLinks({ attachements: attachement });
   };
-
-  // useMemo(() => {
-  //   const formatAttachments = images?.attachments?.map((item: string) => ({
-  //     name: getFileNameFromUrl(item),
-  //     value: item,
-  //   }));
-
-  //   setEnteredLinks({
-  //     attachements: formatAttachments,
-  //   });
-  // }, [images]);
 
   const formData = new FormData();
 

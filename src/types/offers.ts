@@ -47,7 +47,7 @@ export interface OffersTableRowTypes {
   mail: {
     mailStatus: "open" | "failed" | "pending";
   };
-  emailStatus: "Pending" | "Sent" | "Failed";
+  emailStatus: "Pending" | "Sent" | "Failed" ;
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;

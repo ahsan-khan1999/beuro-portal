@@ -2,10 +2,7 @@ import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
-import {
-  uploadFileToFirebase,
-  uploadMultiFileToFirebase,
-} from "@/api/slices/globalSlice/global";
+import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
@@ -27,7 +24,6 @@ export const AttachementField = ({
   setAttachements?: (attachement?: Attachement[]) => void;
   isAttachement?: boolean;
 }) => {
-  const router = useRouter();
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const handleFileInput = async (
@@ -49,6 +45,7 @@ export const AttachementField = ({
       }
       file.push(e.target.files);
     }
+
     const response = await dispatch(uploadMultiFileToFirebase(formdata));
     let newAttachement = (attachements && [...attachements]) || [];
     if (response?.payload) {
@@ -61,6 +58,7 @@ export const AttachementField = ({
       setAttachements && setAttachements(newAttachement);
     }
   };
+
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     for (let item of e.dataTransfer.files) {
