@@ -93,11 +93,11 @@ const useInvoice = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice" },
+        data: { id: id, type: "invoice", data: note },
       })
     );
   };
@@ -126,7 +126,7 @@ const useInvoice = () => {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (

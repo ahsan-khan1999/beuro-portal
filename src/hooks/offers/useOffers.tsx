@@ -56,6 +56,7 @@ const useOffers = () => {
     status: FiltersDefaultValues.None,
     leadSource: FiltersDefaultValues.None,
   });
+
   const totalItems = totalCount;
 
   const itemsPerPage = 10;
@@ -122,11 +123,11 @@ const useOffers = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer" },
+        data: { id: id, type: "offer", data: note },
       })
     );
   };
@@ -201,7 +202,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
