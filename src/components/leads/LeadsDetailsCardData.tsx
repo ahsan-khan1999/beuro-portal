@@ -61,7 +61,7 @@ const LeadsDetailsCardData = ({
               localStoreUtil.remove_data("offer");
               dispatch(
                 setOfferDetails({
-                  id: leadDetails?.id,
+                  id: "convert",
                   type: "Existing Customer",
                   leadID: {
                     ...leadDetails,

@@ -5,7 +5,6 @@ import DetailsData from "./DetailsData";
 import ContractDetailsData from "./ContractDetailsData";
 import useContractDetail from "@/hooks/contract/useContractDetail";
 import ComposeMail from "../compose-mail/ComposeMail";
-import MailDetailsCard from "../compose-mail/MailDetailsCard";
 
 const ContractDetails = () => {
   const {

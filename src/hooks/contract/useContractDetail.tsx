@@ -12,7 +12,7 @@ import {
 import { CustomerPromiseActionType } from "@/types/customer";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
@@ -51,6 +51,7 @@ export default function useContractDetail() {
       );
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -71,6 +72,7 @@ export default function useContractDetail() {
   const routeHandler = () => {
     dispatch(deleteContract({ data: contractDetails, router, translate }));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -81,7 +83,6 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -91,16 +92,22 @@ export default function useContractDetail() {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract" },
+        data: { id: id, type: "contract", data: note },
       })
     );
   };
 
-  // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -148,8 +155,7 @@ export default function useContractDetail() {
         onClose={onClose}
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
-
+        onDeleteNote={handleDeleteNote}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -163,7 +169,7 @@ export default function useContractDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

@@ -1671,9 +1671,9 @@ export const HeaderLabelNr = {
 };
 
 export const HeaderLabel = {
-  contract: "Erstell ",
-  invoice: "Rechnung ",
-  receipt: "Quittung ",
+  contract: "Erstell",
+  invoice: "Rechnung",
+  receipt: "Quittung",
 };
 
 export const GenderLabel = {

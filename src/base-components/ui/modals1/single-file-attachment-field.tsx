@@ -2,12 +2,9 @@ import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
-import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
-import { useAppDispatch } from "@/hooks/useRedux";
-import { Attachement } from "@/types/global";
-import { getFileNameFromUrl } from "@/utils/utility";
+import { useState } from "react";
 
-export const AttachementField = ({
+export const SingleFielAttachmentField = ({
   id,
   text,
   fileSupported,
@@ -20,81 +17,60 @@ export const AttachementField = ({
   text?: string;
   fileSupported?: string;
   isOpenedFile?: boolean;
-  attachements?: Attachement[];
-  setAttachements?: (attachement?: Attachement[]) => void;
+  attachements?: any;
+  setAttachements?: (attachement?: any) => void;
   isAttachement?: boolean;
 }) => {
   const formdata = new FormData();
-  const dispatch = useAppDispatch();
+
+  const [fileUploaded, setFileUploaded] = useState(false);
+
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
     e.preventDefault();
 
-    let file: any = [];
-
     if (e instanceof DragEvent && e.dataTransfer) {
-      for (let item of e.dataTransfer.files) {
-        formdata.append("files", item);
-      }
-      file.push(e.dataTransfer.files);
+      const file = e.dataTransfer.files[0];
+      formdata.append("file", file);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
-      // file = e.target.files ? e.target.files[0] : null;
-      for (let item of e.target.files) {
-        formdata.append("files", item);
-      }
-      file.push(e.target.files);
+      const file = e.target.files[0];
+      formdata.append("file", file);
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
-        });
-      });
-      setAttachements && setAttachements(newAttachement);
+    if (e.target instanceof HTMLInputElement && e.target.files) {
+      setAttachements && setAttachements(e.target.files[0]);
+      setFileUploaded(true);
     }
   };
 
-  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    for (let item of e.dataTransfer.files) {
-      formdata.append("files", item);
-    }
-
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
-        });
-      });
-      setAttachements && setAttachements(newAttachement);
-    }
-  };
-  const handleDeleteFile = (index: number) => {
-    const list = attachements && [...attachements];
-    list?.splice(index, 1);
-    setAttachements && setAttachements(list);
-    // field.onChange();
+  const handleDeleteFile = () => {
+    setAttachements && setAttachements([]);
+    setFileUploaded(false);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
 
+  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+  //   e.preventDefault();
+
+  //   if (e.target instanceof HTMLInputElement && e.target.files) {
+  //     setAttachements && setAttachements(e.target.files[0]);
+  //     setFileUploaded(true);
+  //   }
+  // };
+
   return (
     <>
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        className="flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto cursor-pointer px-[25px] pt-6 pb-3"
+        onDrop={handleFileInput}
+        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
+          fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
+        } px-[25px] pt-6 pb-3`}
       >
         <div className="flex flex-col items-center gap-x-3">
           <svg
@@ -130,46 +106,33 @@ export const AttachementField = ({
           type="file"
           className="hidden"
           onChange={handleFileInput}
-          multiple
         />
       </label>
 
-      <div className="col-span-2 mt-5">
-        <div className="grid mlg:grid-cols-2 xLarge:grid-cols-2 gap-x-4 gap-y-3">
-          {attachements &&
-            attachements?.map((item, index) => (
-              <div
-                className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
-                  isOpenedFile ? "cursor-pointer" : "cursor-default"
-                }`}
-                key={index}
-                // onClick={() =>
-                //     isOpenedFile && router.push("/content/pdf-preview")
-                // }
-              >
-                <div
-                  className="flex items-center gap-3 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(item?.value, "_blank");
-                  }}
-                >
-                  <Image
-                    src={deletePdfIcon}
-                    alt="deletePdfIcon"
-                    className={`absolute -right-1 -top-1 cursor-pointer `}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteFile(index);
-                    }}
-                  />
-                  <Image src={pdfIcon} alt="pdfIcon" />
-                  <span>{item?.name?.slice(0, 20)}...</span>
-                </div>
-              </div>
-            ))}
+      {fileUploaded && (
+        <div
+          className={`mt-5 relative w-[99%] flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+            isOpenedFile ? "cursor-pointer" : "cursor-default"
+          }`}
+          // onClick={() => isOpenedFile && router.push("/content/pdf-preview")}
+        >
+          <div className="flex items-center gap-3 cursor-pointer">
+            <Image
+              src={deletePdfIcon}
+              alt="deletePdfIcon"
+              className={`absolute -right-1 -top-1`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteFile();
+              }}
+            />
+            <Image src={pdfIcon} alt="pdfIcon" />
+            <span className="text-base font-normal truncate">
+              {attachements?.name}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

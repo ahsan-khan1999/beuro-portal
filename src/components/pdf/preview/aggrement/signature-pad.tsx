@@ -391,10 +391,12 @@ export const SignaturePad = ({
         const data = {
           id: pdfData?.id,
         };
+
         const response = await dispatch(signOffer({ data, formData }));
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
         }
+
         return true;
 
         // smoothScrollToSection("#acceptOffer")
