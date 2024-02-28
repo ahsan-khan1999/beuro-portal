@@ -8,7 +8,7 @@ import { signOffer, uploadOfferPdf } from "@/api/slices/offer/offerSlice";
 export const useFileUpload = () => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const { error ,offerDetails} = useAppSelector((state) => state.offer);
+  const { error, offerDetails } = useAppSelector((state) => state.offer);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const id = useAppSelector((state) => state.global.modal.data);
@@ -26,7 +26,9 @@ export const useFileUpload = () => {
   formData.append("signature", enteredLinks?.attachements);
 
   const onSubmit = async () => {
-    const response = await dispatch(uploadOfferPdf({ data: offerDetails?.id, formData }));
+    const response = await dispatch(
+      uploadOfferPdf({ data: offerDetails?.id, formData })
+    );
     if (response?.payload) {
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }

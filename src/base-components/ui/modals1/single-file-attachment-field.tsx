@@ -21,7 +21,6 @@ export const SingleFielAttachmentField = ({
   setAttachements?: (attachement?: any) => void;
   isAttachement?: boolean;
 }) => {
-  const router = useRouter();
   const formdata = new FormData();
 
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -29,23 +28,6 @@ export const SingleFielAttachmentField = ({
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
-    e.preventDefault();
-
-    if (e instanceof DragEvent && e.dataTransfer) {
-      const file = e.dataTransfer.files[0];
-      formdata.append("file", file);
-    } else if (e.target instanceof HTMLInputElement && e.target.files) {
-      const file = e.target.files[0];
-      formdata.append("file", file);
-    }
-
-    if (e.target instanceof HTMLInputElement && e.target.files) {
-      setAttachements && setAttachements(e.target.files[0]);
-      setFileUploaded(true);
-    }
-  };
-
-  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
 
     if (e instanceof DragEvent && e.dataTransfer) {
@@ -71,12 +53,21 @@ export const SingleFielAttachmentField = ({
     e.preventDefault();
   };
 
+  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+  //   e.preventDefault();
+
+  //   if (e.target instanceof HTMLInputElement && e.target.files) {
+  //     setAttachements && setAttachements(e.target.files[0]);
+  //     setFileUploaded(true);
+  //   }
+  // };
+
   return (
     <>
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        onDrop={handleDrop}
+        onDrop={handleFileInput}
         className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
           fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
         } px-[25px] pt-6 pb-3`}
@@ -118,32 +109,30 @@ export const SingleFielAttachmentField = ({
         />
       </label>
 
-      <div className="col-span-2 mt-5">
-        {attachements && (
-          <div
-            className={`relative w-[99%] flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
-              isOpenedFile ? "cursor-pointer" : "cursor-default"
-            }`}
-            onClick={() => isOpenedFile && router.push("/content/pdf-preview")}
-          >
-            <div className="flex items-center gap-3 cursor-pointer">
-              <Image
-                src={deletePdfIcon}
-                alt="deletePdfIcon"
-                className={`absolute -right-1 -top-1`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteFile();
-                }}
-              />
-              <Image src={pdfIcon} alt="pdfIcon" />
-              <span className="text-base font-normal truncate">
-                {attachements?.name}
-              </span>
-            </div>
+      {fileUploaded && (
+        <div
+          className={`mt-5 relative w-[99%] flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+            isOpenedFile ? "cursor-pointer" : "cursor-default"
+          }`}
+          // onClick={() => isOpenedFile && router.push("/content/pdf-preview")}
+        >
+          <div className="flex items-center gap-3 cursor-pointer">
+            <Image
+              src={deletePdfIcon}
+              alt="deletePdfIcon"
+              className={`absolute -right-1 -top-1`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteFile();
+              }}
+            />
+            <Image src={pdfIcon} alt="pdfIcon" />
+            <span className="text-base font-normal truncate">
+              {attachements?.name}
+            </span>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

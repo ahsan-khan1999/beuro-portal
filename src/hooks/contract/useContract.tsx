@@ -94,16 +94,15 @@ const useContract = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract" },
+        data: { id: id, type: "contract", data: note },
       })
     );
   };
 
-  // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };

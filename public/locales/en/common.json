@@ -727,7 +727,7 @@
     "receipt_table_heading": {
       "id": "ID",
       "customer": "Customer",
-      "title": "Invoice Title",
+      "title": "Receipt Title",
       "paid_date": "Paid Date",
       "amount": "Amount",
       "invoice": "Invoice",
@@ -1170,7 +1170,8 @@
     "false": "False",
     "done_button": "Done",
     "save_button": "Save",
-    "add_note": "Add Notes",
+    "add_note": "Add Note",
+    "update_note": "Update Note",
     "remove_button": "Remove",
     "apply_button": "Apply",
     "next_button": "Next",

@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -6,7 +5,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
 import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
-import { createLeadNotes, setLeads } from "@/api/slices/lead/leadSlice";
 import { createNote, updateNote } from "@/api/slices/noteSlice/noteSlice";
 import { FilterType } from "@/types";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
@@ -27,7 +25,7 @@ export const useAddNewNote = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
-  const { lead ,leadDetails} = useAppSelector((state) => state.lead);
+  const { lead, leadDetails } = useAppSelector((state) => state.lead);
   const { offer, offerDetails } = useAppSelector((state) => state.offer);
   const { contract, contractDetails } = useAppSelector(
     (state) => state.contract
@@ -53,8 +51,8 @@ export const useAddNewNote = ({
   });
 
   useEffect(() => {
-    if (data) setValue("description", data)
-  }, [data])
+    if (data) setValue("description", data);
+  }, [data]);
 
   const fields = AddNoteFormField(register, loading, control);
 
@@ -80,7 +78,6 @@ export const useAddNewNote = ({
       );
     }
 
-    
     if (res?.payload) {
       switch (type) {
         case "lead":
@@ -119,12 +116,10 @@ export const useAddNewNote = ({
         default:
           break;
       }
-      if (!data){
+      if (!data) {
         handleNotes(id);
-
-      }else{
+      } else {
         handleNotes(leadDetails?.id);
-
       }
     }
   };

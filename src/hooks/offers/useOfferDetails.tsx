@@ -18,7 +18,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
@@ -112,16 +112,22 @@ export default function useOfferDetails() {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer" },
+        data: { id: id, type: "offer", data: note },
       })
     );
   };
 
-  // function for hnadling the add note
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const handleImageSlider = () => {
     // dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -194,7 +200,7 @@ export default function useOfferDetails() {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
       />
     ),
 
@@ -202,7 +208,7 @@ export default function useOfferDetails() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
