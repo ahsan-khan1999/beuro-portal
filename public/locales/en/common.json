@@ -697,8 +697,8 @@
     "card_content": {
       "invoice_number": "Invoice Number",
       "receipt_number": "Receipt Number",
-
       "heading": "Invoice Details",
+      "receipt_heading": "Receipt Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
       "total_amount": "Total Amount",
@@ -2105,5 +2105,18 @@
     "email": "Email",
     "enter_whatsapp_number": "Enter your what'sapp number",
     "enter_your_email": "Enter your email"
+  },
+  "rejected_offer": {
+    "heading": "Reject Offer",
+    "options": {
+      "Cost Concerns": "Cost Concerns",
+      "Hidden Fees": "Hidden Fees",
+      "Service Scope": "Service Scope",
+      "Negative Reviews": "Negative Reviews",
+      "Unreliable Schedule": "Unreliable Schedule",
+      "Customer Service": "Customer Service",
+      "Inadequate Equipment": "Inadequate Equipment",
+      "Other": "Other"
+    }
   }
 }

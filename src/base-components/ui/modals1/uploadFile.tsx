@@ -8,9 +8,12 @@ import { BaseButton } from "../button/base-button";
 
 export const UploadFile = ({
   onClose,
+  heading,
+  onFileUploadSuccess,
 }: {
   onClose: () => void;
   heading: string;
+  onFileUploadSuccess: Function;
 }) => {
   const {
     handleAttachementAdd,
@@ -19,7 +22,7 @@ export const UploadFile = ({
     onSubmit,
     translate,
     enteredLinks,
-  } = useFileUpload();
+  } = useFileUpload(onFileUploadSuccess);
 
   return (
     <>

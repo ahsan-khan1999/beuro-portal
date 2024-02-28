@@ -139,7 +139,7 @@ export const AttachementField = ({
           {attachements &&
             attachements?.map((item, index) => (
               <div
-                className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                className={`w-[99%] relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                   isOpenedFile ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={index}

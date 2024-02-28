@@ -257,6 +257,7 @@ export default function useOfferDetails() {
       <UploadFile
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
+        onFileUploadSuccess={defaultOfferCreatedHandler}
       />
     ),
     [ModalType.EMAIL_CONFIRMATION]: (

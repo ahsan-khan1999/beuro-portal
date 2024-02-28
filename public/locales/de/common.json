@@ -691,6 +691,7 @@
       "invoice_number": "Rechnungsnummer",
       "receipt_number": "Quittungsnummer",
       "heading": "Rechnungsdetails",
+      "receipt_heading": "Quittungdetails",
       "invoice_id": "Rechnungs-ID",
       "title": "Rechnungstitel",
       "total_amount": "Gesamtbetrag",
@@ -2106,5 +2107,18 @@
     "email": "E-Mail",
     "enter_whatsapp_number": "Geben Sie Ihre what'sapp-Nummer ein",
     "enter_your_email": "Ihre E-Mail eingeben"
+  },
+  "rejected_offer": {
+    "heading": "Reject Offer",
+    "options": {
+      "Cost Concerns": "Kostenaspekte",
+      "Hidden Fees": "Versteckte Gebühren",
+      "Service Scope": "Umfang der Dienstleistung",
+      "Negative Reviews": "Negative Bewertungen",
+      "Unreliable Schedule": "Unzuverlässiger Zeitplan",
+      "Customer Service": "Kundenbetreuung",
+      "Inadequate Equipment": "Unzureichende Ausrüstung",
+      "Other": "Andere"
+    }
   }
 }

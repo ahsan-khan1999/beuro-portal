@@ -1,19 +1,9 @@
-import {
-  Control,
-  FieldValues,
-  SubmitHandler,
-  UseFormSetValue,
-  useForm,
-} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { ImageUploadFormField } from "@/components/leads/fields/image-upload-fields";
-import { useEffect, useMemo, useState } from "react";
-import { getFileNameFromUrl, setImageFieldValues } from "@/utils/utility";
-import { createImage, setImages } from "@/api/slices/imageSlice/image";
-import { generateImageValidation } from "@/validation/modalsSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useMemo, useState } from "react";
+import { getFileNameFromUrl } from "@/utils/utility";
+import { createImage } from "@/api/slices/imageSlice/image";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
@@ -158,9 +148,11 @@ export const useUploadImageOffer = (
         id: offerDetails?.id,
         type: "offerID",
       };
+
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
+
       if (response?.payload) handleImageSlider();
     } else if (type === "Contract") {
       // const filteredList = Object.values(data)
@@ -181,7 +173,7 @@ export const useUploadImageOffer = (
     } else {
     }
   };
-  
+
   return {
     onSubmit,
     error,
