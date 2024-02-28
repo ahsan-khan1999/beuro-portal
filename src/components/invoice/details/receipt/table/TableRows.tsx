@@ -72,7 +72,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
                 }}
-                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
+                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full mr-1"
               >
                 {translate(item?.emailStatus)}
               </div>

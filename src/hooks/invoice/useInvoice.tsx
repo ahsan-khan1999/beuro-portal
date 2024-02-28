@@ -19,6 +19,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -90,7 +91,7 @@ const useInvoice = () => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
   };
 
   const handleEditNote = (id: string, note: string) => {
@@ -102,6 +103,10 @@ const useInvoice = () => {
     );
   };
 
+  const invoiceCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -110,6 +115,15 @@ const useInvoice = () => {
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
         onDeleteNote={handleDeleteNote}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={invoiceCreatedHandler}
+        loading={loading}
       />
     ),
 
@@ -190,10 +204,6 @@ const useInvoice = () => {
 
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
-  };
-
-  const invoiceCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleSendByPost = async () => {

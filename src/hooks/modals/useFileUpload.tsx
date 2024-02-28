@@ -1,11 +1,9 @@
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useState } from "react";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalType } from "@/enums/ui";
-import { signOffer, uploadOfferPdf } from "@/api/slices/offer/offerSlice";
+import { uploadOfferPdf } from "@/api/slices/offer/offerSlice";
 
-export const useFileUpload = () => {
+export const useFileUpload = (onFileUploadSuccess: Function) => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const { error, offerDetails,loading } = useAppSelector((state) => state.offer);
@@ -29,9 +27,8 @@ export const useFileUpload = () => {
     const response = await dispatch(
       uploadOfferPdf({ data: offerDetails?.id, formData })
     );
-    if (response?.payload) {
-      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-    }
+
+    if (response?.payload) onFileUploadSuccess();
 
     return true;
   };

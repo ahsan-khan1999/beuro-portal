@@ -94,6 +94,7 @@ export default function useOfferDetails() {
   const routeHandler = () => {
     dispatch(deleteOffer({ offerDetails, router, translate }));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -125,7 +126,7 @@ export default function useOfferDetails() {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
   };
 
   const handleImageSlider = () => {
@@ -204,6 +205,15 @@ export default function useOfferDetails() {
       />
     ),
 
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={defaultOfferCreatedHandler}
+        loading={loading}
+      />
+    ),
+
     [ModalType.EDIT_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -257,6 +267,7 @@ export default function useOfferDetails() {
       <UploadFile
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
+        onFileUploadSuccess={defaultOfferCreatedHandler}
       />
     ),
     [ModalType.EMAIL_CONFIRMATION]: (

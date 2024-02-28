@@ -15,17 +15,15 @@ import { useRouter } from "next/router";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
     (state) => state.lead
   );
-
-  const { images } = useAppSelector((state) => state.image);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
@@ -114,7 +112,7 @@ const useLeads = () => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
   };
 
   const handleEditNote = (id: string, note: string) => {
@@ -170,6 +168,14 @@ const useLeads = () => {
         handleFilterChange={handleFilterChange}
         filter={filter}
         heading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={handleImageSlider}
+        loading={loading}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
