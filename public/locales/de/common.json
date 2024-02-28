@@ -1020,6 +1020,7 @@
   },
   "common": {
     "modals": {
+      "offer_rejected_des": "Ihre Änderung wurde erfolgreich durchgeführt",
       "update_password": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
       "invoice_update": "Vielen Dank für die Aktualisierung der Rechnung, wir sind froh, dass wir Sie haben.",
       "receipt_update": "Vielen Dank für die Aktualisierung der Quittung, wir sind froh, Sie zu haben.",
@@ -1084,6 +1085,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+
+    "upload_file": "Datei hochladen",
     "view_docs": "Dokumente anzeigen",
     "share_on_whatsapp": "Auf Whatsapp teilen",
     "send_again": "erneut senden",
@@ -1199,6 +1202,7 @@
       "video_title": "20 Video kann hochgeladen werden",
       "video_sub_title": "Video sollte maximal 20 sein, Dateigröße bis zu 10MB",
       "attachement_title": "20 Anhänge können hochgeladen werden",
+      "single_attachment": "1 Anhänge können hochgeladen werden",
       "attachement_sub_title": "Anhänge sollten maximal 20 sein, Dateigröße bis zu 10MB",
       "link_title": "Link hinzufügen",
       "link_sub_title": "Die Anzahl der Links sollte maximal 20 betragen, die Dateigröße bis zu 10 MB.",

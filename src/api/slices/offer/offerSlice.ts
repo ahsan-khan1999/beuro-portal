@@ -260,6 +260,7 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/activity", async (args, thunkApi) => {
     const { params, router, translate } = args as any;
@@ -274,6 +275,7 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update/discount", async (args, thunkApi) => {
     const { params } = args as any;
