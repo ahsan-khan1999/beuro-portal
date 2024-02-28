@@ -127,7 +127,7 @@ export const ShareImages = ({
 
   const handleShare = () => {
     window.open(
-      `https://api.whatsapp.com/send?text=https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`,
+      `https://api.whatsapp.com/send?text=https://portal.buero-365.com/document-viewer?offerID=${offerId}`,
       "_blank"
     );
   };
@@ -174,7 +174,7 @@ export const ShareImages = ({
             {translate("common.share_on_whatsapp")}
           </p>
           <CopyField
-            value={`https://staging.buero-365.cloudmeshsolutions.com/document-viewer?offerID=${offerId}`}
+            value={`https://portal.buero-365.com/document-viewer?offerID=${offerId}`}
           />
 
           <div className="flex justify-end mt-5">
