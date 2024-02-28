@@ -80,7 +80,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -105,27 +105,27 @@ const TableRows = ({
                 isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span>
+            </span> */}
 
-            {/* <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span> */}
+            </span>
 
-            {/* <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getOfferStatusColor(item.offerStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`offer_status.${item.offerStatus}`)}
               </div>
-            </span> */}
+            </span>
 
-            {item.offerStatus === "Accepted" ? (
+            {/* {item.offerStatus === "Accepted" ? (
               <span className="py-4 ml-1">
                 <div
                   style={{
@@ -166,7 +166,7 @@ const TableRows = ({
                   isOffer={true}
                 />
               </div>
-            )}
+            )} */}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"

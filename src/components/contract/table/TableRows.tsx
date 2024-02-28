@@ -87,7 +87,7 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            <span className="py-4" onClick={(e) => e.stopPropagation()}>
+            {/* <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -112,17 +112,17 @@ const TableRows = ({
                 isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span>
-            {/* <span className="py-4 flex justify-center items-center">
+            </span> */}
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span> */}
+            </span>
 
-            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
@@ -154,16 +154,16 @@ const TableRows = ({
                 isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span>
+            </span> */}
 
-            {/* <span className="flex justify-center items-center">
+            <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
+                  } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-full`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span> */}
+            </span>
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "

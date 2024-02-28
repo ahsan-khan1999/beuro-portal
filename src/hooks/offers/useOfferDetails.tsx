@@ -78,10 +78,11 @@ export default function useOfferDetails() {
     );
   };
 
-  const handleUploadFile = () => {
+  const handleUploadFile = (id: string) => {
     dispatch(
       updateModalType({
         type: ModalType.UPLOAD_FILE,
+        data: id,
       })
     );
   };
@@ -145,13 +146,13 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const offerCreatedHandler = (offerStatus: any) => {
+  const offerCreatedHandler = (offerStatus: any, id: string) => {
     switch (offerStatus) {
       case staticEnums["OfferStatus"]["Open"]:
         dispatch(updateModalType({ type: ModalType.CREATION }));
         break;
       case staticEnums["OfferStatus"]["Accepted"]:
-        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED }));
+        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED, data: id }));
         break;
       case staticEnums["OfferStatus"]["Expired"]:
         dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -292,7 +293,10 @@ export default function useOfferDetails() {
       })
     );
     if (res?.payload)
-      offerCreatedHandler(staticEnums["OfferStatus"][offerStatus]);
+      offerCreatedHandler(
+        staticEnums["OfferStatus"][offerStatus],
+        offerDetails?.id
+      );
   };
 
   const onNextHandle = () => {

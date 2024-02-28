@@ -11,6 +11,8 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { BaseButton } from "../button/base-button";
+import editNoteIcon from "@/assets/svgs/edit_primary.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -93,7 +95,7 @@ const ExistingNotes = ({
                   </p>
                   <div className="flex items-center gap-x-4">
                     <Image
-                      src={editNote}
+                      src={editNoteIcon}
                       alt="edit note"
                       width={20}
                       height={20}

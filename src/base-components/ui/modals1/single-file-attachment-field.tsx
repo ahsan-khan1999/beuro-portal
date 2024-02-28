@@ -2,12 +2,7 @@ import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
-import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
-import { useAppDispatch } from "@/hooks/useRedux";
-import { Attachement } from "@/types/global";
-import { getFileNameFromUrl } from "@/utils/utility";
 import { useState } from "react";
-import { File } from "buffer";
 
 export const SingleFielAttachmentField = ({
   id,
@@ -28,7 +23,6 @@ export const SingleFielAttachmentField = ({
 }) => {
   const router = useRouter();
   const formdata = new FormData();
-  const dispatch = useAppDispatch();
 
   const [fileUploaded, setFileUploaded] = useState(false);
 
@@ -45,15 +39,27 @@ export const SingleFielAttachmentField = ({
       formdata.append("file", file);
     }
 
-    // const response = await dispatch(uploadFileToFirebase(formdata));
-    // if (response?.payload) {
     if (e.target instanceof HTMLInputElement && e.target.files) {
-     
       setAttachements && setAttachements(e.target.files[0]);
       setFileUploaded(true);
     }
+  };
 
-    // }
+  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+
+    if (e instanceof DragEvent && e.dataTransfer) {
+      const file = e.dataTransfer.files[0];
+      formdata.append("file", file);
+    } else if (e.target instanceof HTMLInputElement && e.target.files) {
+      const file = e.target.files[0];
+      formdata.append("file", file);
+    }
+
+    if (e.target instanceof HTMLInputElement && e.target.files) {
+      setAttachements && setAttachements(e.target.files[0]);
+      setFileUploaded(true);
+    }
   };
 
   const handleDeleteFile = () => {
@@ -70,8 +76,10 @@ export const SingleFielAttachmentField = ({
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
-          } px-[25px] pt-6 pb-3`}
+        onDrop={handleDrop}
+        className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
+          fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
+        } px-[25px] pt-6 pb-3`}
       >
         <div className="flex flex-col items-center gap-x-3">
           <svg
@@ -111,31 +119,30 @@ export const SingleFielAttachmentField = ({
       </label>
 
       <div className="col-span-2 mt-5">
-        <div className="w-[99%]">
-          {attachements && (
-            <div
-              className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${isOpenedFile ? "cursor-pointer" : "cursor-default"
-                }`}
-              onClick={() =>
-                isOpenedFile && router.push("/content/pdf-preview")
-              }
-            >
-              <div className="flex items-center gap-3 cursor-pointer">
-                <Image
-                  src={deletePdfIcon}
-                  alt="deletePdfIcon"
-                  className={`absolute -right-1 -top-1`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteFile();
-                  }}
-                />
-                <Image src={pdfIcon} alt="pdfIcon" />
-                <span>{attachements?.name?.slice(0, 20)}...</span>
-              </div>
+        {attachements && (
+          <div
+            className={`relative w-[99%] flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+              isOpenedFile ? "cursor-pointer" : "cursor-default"
+            }`}
+            onClick={() => isOpenedFile && router.push("/content/pdf-preview")}
+          >
+            <div className="flex items-center gap-3 cursor-pointer">
+              <Image
+                src={deletePdfIcon}
+                alt="deletePdfIcon"
+                className={`absolute -right-1 -top-1`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteFile();
+                }}
+              />
+              <Image src={pdfIcon} alt="pdfIcon" />
+              <span className="text-base font-normal truncate">
+                {attachements?.name}
+              </span>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

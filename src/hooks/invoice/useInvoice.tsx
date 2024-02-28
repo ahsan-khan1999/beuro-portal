@@ -13,11 +13,12 @@ import {
   sendOfferByPost,
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -76,7 +77,6 @@ const useInvoice = () => {
     }
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -84,6 +84,13 @@ const useInvoice = () => {
         data: { id: id, type: "invoice" },
       })
     );
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleEditNote = (id: string) => {
@@ -102,8 +109,16 @@ const useInvoice = () => {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
+      />
+    ),
 
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
       />
     ),
 
@@ -206,7 +221,7 @@ const useInvoice = () => {
     handleSendEmail,
     handleSendByPost,
     invoiceDetails,
-    currentPage
+    currentPage,
   };
 };
 
