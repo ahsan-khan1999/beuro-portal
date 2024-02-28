@@ -79,7 +79,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
                 }}
-                className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px]"
+                className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px] w-full"
               >
                 {translate(item?.emailStatus)}
               </div>
@@ -104,12 +104,20 @@ const TableRows = ({
                     staticEnums["PaymentType"][item.paymentType] === 0
                       ? "bg-[#45C769]"
                       : "bg-[#4A13E7]"
-                  } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                  } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                   dropDownTextClassName="text-white text-base font-medium"
                   dropDownIconClassName={`text-[#fff]`}
                   dropDownItemsContainerClassName="w-full"
-                  isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
-                  isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
+                  isSecondLastIndex={
+                    dataToAdd?.length <= 2
+                      ? false
+                      : index === dataToAdd?.length - 2
+                  }
+                  isLastIndex={
+                    dataToAdd?.length <= 2
+                      ? false
+                      : index === dataToAdd?.length - 1
+                  }
                 />
               </div>
             </span>
@@ -123,7 +131,6 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                // selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
                 selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (item.invoiceStatus !== status) {
@@ -136,13 +143,21 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-fit rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                 key={item.id}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-fit"
-                isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
-                isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
+                dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={
+                  dataToAdd?.length <= 2
+                    ? false
+                    : index === dataToAdd?.length - 2
+                }
+                isLastIndex={
+                  dataToAdd?.length <= 2
+                    ? false
+                    : index === dataToAdd?.length - 1
+                }
               />
             </span>
             <span

@@ -1,12 +1,11 @@
 import { contractTableTypes } from "@/types/contract";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
@@ -16,14 +15,14 @@ import {
   updateContractPaymentStatus,
   updateContractStatus,
 } from "@/api/slices/contract/contractSlice";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -80,7 +79,6 @@ const useContract = () => {
     }
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -90,16 +88,22 @@ const useContract = () => {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract" },
+        data: { id: id, type: "contract", data: note },
       })
     );
   };
 
-  // function for hnadling the add note
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -121,7 +125,7 @@ const useContract = () => {
     }
   };
 
-  const offerCreatedHandler = () => {
+  const contractHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
     handleFilterChange(filter);
   };
@@ -133,9 +137,18 @@ const useContract = () => {
         onClose={onClose}
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
       />
     ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={contractHandler}
+        loading={loading}
+      />
+    ),
+
     [ModalType.EDIT_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -238,7 +251,7 @@ const useContract = () => {
         // dispatch(
         //   readContractDetails({ params: { filter: contractDetails?.id } })
         // ),
-        offerCreatedHandler();
+        contractHandler();
     }
   };
 
@@ -253,7 +266,7 @@ const useContract = () => {
           data: { id: id, paymentType: staticEnums["PaymentType"][status] },
         })
       );
-      if (res?.payload) offerCreatedHandler();
+      if (res?.payload) contractHandler();
     }
   };
 
@@ -271,7 +284,7 @@ const useContract = () => {
     loading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
-    currentPage
+    currentPage,
   };
 };
 

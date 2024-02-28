@@ -20,7 +20,7 @@ export default function SelectField({
 }: OptionsFieldProps) {
   const defaultClasses = `flex items-center`;
   const containerClasses = combineClasses(
-    "relative flex items-center justify-center min-w-[120px] z-50 w-fit",
+    "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName
   );
 

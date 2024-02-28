@@ -52,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="">
+    <div className="overflow-y-visible">
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
@@ -82,7 +82,7 @@ const TableRows = ({
               <div
                 className={`bg-[${getEmailColor(
                   item?.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
@@ -105,7 +105,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
@@ -135,7 +135,6 @@ const TableRows = ({
                 selectedItem={translate(
                   `contract_status.${item.contractStatus}`
                 )}
-                // selectedItem={item.contractStatus}
                 onItemSelected={(status) => {
                   if (item.contractStatus !== status) {
                     handleContractStatusUpdate(item.id, status, "contracts");
@@ -147,7 +146,7 @@ const TableRows = ({
                     : staticEnums["ContractStatus"][item.contractStatus] === 1
                     ? "bg-[#45C769]"
                     : "bg-[#FF0000]"
-                } w-fit !py-[3px] rounded-lg flex items-center justify-center gap-x-1
+                } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1
                 `}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
@@ -156,14 +155,16 @@ const TableRows = ({
                 isLastIndex={index === dataToAdd?.length - 1}
               />
             </span> */}
+
             <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-fit`}
+                  } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-full`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span> 
+            </span>
+
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}

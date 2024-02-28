@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { Form } from "@/base-components/form/form";
 import { useUploadImageOffer } from "@/hooks/modals/useUploadImageOffer";
 import { LinkUpload } from "../link-upload";
 import { BaseButton } from "../button/base-button";

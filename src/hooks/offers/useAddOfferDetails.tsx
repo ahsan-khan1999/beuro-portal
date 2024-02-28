@@ -136,7 +136,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       });
     }
   };
-  const handleContentSelect = () => {};
+  const handleContentSelect = () => { };
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -253,7 +253,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       const apiData: any = {
         ...data,
         step: 1,
-        offerId: offerDetails?.id,
+        offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
         stage: ComponentsType.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };

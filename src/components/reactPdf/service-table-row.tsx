@@ -36,11 +36,10 @@ const styles = StyleSheet.create({
   },
   priceHeader: {
     flexDirection: "row",
-    alignItems: "center",
     width: 216,
   },
   headerText: {
-    color: "#000",
+    color: "#404040",
     fontSize: 6,
     fontWeight: 400,
     fontStyle: "normal",

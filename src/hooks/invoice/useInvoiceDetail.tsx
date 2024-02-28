@@ -6,7 +6,7 @@ import { deleteContract } from "@/api/slices/contract/contractSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
@@ -109,12 +109,15 @@ export default function useInvoiceDetail() {
   const invoiceCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const handleRecurringInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE }));
   };
+
   const handleStopInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE }));
   };
+
   const handleEditInvoiceFrequencyCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_FREQUENCY }));
   };
@@ -150,11 +153,18 @@ export default function useInvoiceDetail() {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice" },
+        data: { id: id, type: "invoice", data: note },
       })
     );
   };
@@ -210,8 +220,16 @@ export default function useInvoiceDetail() {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
+      />
+    ),
 
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={invoiceCreated}
+        loading={loading}
       />
     ),
 
@@ -219,7 +237,7 @@ export default function useInvoiceDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
 

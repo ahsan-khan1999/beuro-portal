@@ -13,11 +13,13 @@ import {
   sendOfferByPost,
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useInvoice = () => {
   const { lastPage, invoice, loading, totalCount, invoiceDetails } =
@@ -76,7 +78,6 @@ const useInvoice = () => {
     }
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -86,13 +87,24 @@ const useInvoice = () => {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice" },
+        data: { id: id, type: "invoice", data: note },
       })
     );
+  };
+
+  const invoiceCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -102,8 +114,25 @@ const useInvoice = () => {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
+      />
+    ),
 
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={invoiceCreatedHandler}
+        loading={loading}
+      />
+    ),
+
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
       />
     ),
 
@@ -111,7 +140,7 @@ const useInvoice = () => {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -177,10 +206,6 @@ const useInvoice = () => {
     setIsSendEmail(!isSendEmail);
   };
 
-  const invoiceCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const handleSendByPost = async () => {
     const apiData = {
       emailStatus: 2,
@@ -206,7 +231,7 @@ const useInvoice = () => {
     handleSendEmail,
     handleSendByPost,
     invoiceDetails,
-    currentPage
+    currentPage,
   };
 };
 

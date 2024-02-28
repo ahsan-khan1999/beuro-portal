@@ -45,10 +45,8 @@ const TableRows = ({
   ];
 
   return (
-    <div>
+    <div className="overflow-y-visible">
       {collectiveInvoice?.map((item, index: number) => {
-        console.log(item.invoiceStatus);
-
         return (
           <div
             key={index}
@@ -74,7 +72,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
                 }}
-                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px]"
+                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full mr-1"
               >
                 {translate(item?.emailStatus)}
               </div>
@@ -98,7 +96,7 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
@@ -117,7 +115,6 @@ const TableRows = ({
                     },
                   }))}
                 selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
-                // selectedItem={item.invoiceStatus}
                 onItemSelected={(status) => {
                   if (status !== "Paid") {
                     handleInvoiceStatusUpdate(item.id, status, "reciept");
@@ -129,7 +126,7 @@ const TableRows = ({
                     : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                     ? "bg-[#4A13E7]"
                     : "bg-red"
-                } w-fit !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-fit"

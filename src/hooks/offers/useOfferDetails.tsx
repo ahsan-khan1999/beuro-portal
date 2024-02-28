@@ -18,7 +18,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
@@ -31,6 +31,8 @@ import { updateQuery } from "@/utils/update-query";
 import localStoreUtil from "@/utils/localstore.util";
 import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
+import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -62,6 +64,7 @@ export default function useOfferDetails() {
       dispatch(readOfferActivity({ params: { filter: id } }));
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -75,6 +78,15 @@ export default function useOfferDetails() {
     );
   };
 
+  const handleUploadFile = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_FILE,
+        data: id,
+      })
+    );
+  };
+
   const handleDelete = () => {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
@@ -82,6 +94,7 @@ export default function useOfferDetails() {
   const routeHandler = () => {
     dispatch(deleteOffer({ offerDetails, router, translate }));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -100,16 +113,22 @@ export default function useOfferDetails() {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer" },
+        data: { id: id, type: "offer", data: note },
       })
     );
   };
 
-  // function for hnadling the add note
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const handleImageSlider = () => {
     // dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -132,6 +151,30 @@ export default function useOfferDetails() {
   const onSuccess = () => {
     router.push("/offers");
     dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const offerCreatedHandler = (offerStatus: any, id: string) => {
+    switch (offerStatus) {
+      case staticEnums["OfferStatus"]["Open"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Accepted"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_ACCEPTED, data: id }));
+        break;
+      case staticEnums["OfferStatus"]["Expired"]:
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+        break;
+      case staticEnums["OfferStatus"]["Rejected"]:
+        dispatch(updateModalType({ type: ModalType.OFFER_REJECTED }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const defaultOfferCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -158,7 +201,16 @@ export default function useOfferDetails() {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleEditNote}
+        onDeleteNote={handleDeleteNote}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={defaultOfferCreatedHandler}
+        loading={loading}
       />
     ),
 
@@ -166,7 +218,7 @@ export default function useOfferDetails() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -194,6 +246,30 @@ export default function useOfferDetails() {
         route={onClose}
       />
     ),
+    [ModalType.OFFER_REJECTED]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_rejected_des")}
+        route={onClose}
+      />
+    ),
+    [ModalType.OFFER_ACCEPTED]: (
+      <OfferAccepted
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+        onFileUpload={handleUploadFile}
+      />
+    ),
+    [ModalType.UPLOAD_FILE]: (
+      <UploadFile
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        onFileUploadSuccess={defaultOfferCreatedHandler}
+      />
+    ),
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
         onClose={onClose}
@@ -202,10 +278,6 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
-  };
-
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUpdateAdditionalDetailsModal = () => {
@@ -225,7 +297,7 @@ export default function useOfferDetails() {
         },
       })
     );
-    if (res?.payload) offerCreatedHandler();
+    if (res?.payload) defaultOfferCreatedHandler();
   };
 
   const handleStatusUpdate = async (offerStatus: string) => {
@@ -237,7 +309,11 @@ export default function useOfferDetails() {
         },
       })
     );
-    if (res?.payload) offerCreatedHandler();
+    if (res?.payload)
+      offerCreatedHandler(
+        staticEnums["OfferStatus"][offerStatus],
+        offerDetails?.id
+      );
   };
 
   const onNextHandle = () => {
@@ -250,7 +326,7 @@ export default function useOfferDetails() {
       id: offerDetails?.id,
     };
     const response = await dispatch(sendOfferByPost({ data: apiData }));
-    if (response?.payload) offerCreatedHandler();
+    if (response?.payload) defaultOfferCreatedHandler();
   };
 
   const handleUpdateDiscount = async (discount: number) => {

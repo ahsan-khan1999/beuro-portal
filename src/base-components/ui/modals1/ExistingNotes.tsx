@@ -11,8 +11,8 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { BaseButton } from "../button/base-button";
+import editNoteIcon from "@/assets/svgs/edit_primary.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
-import editNote from "@/assets/svgs/edit_primary.svg";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -22,16 +22,16 @@ const ExistingNotes = ({
   leadDetails,
 }: {
   handleAddNote: (id: string) => void;
-  onEditNote: (id: string) => void;
+  onEditNote: (id: string, note: string) => void;
   onDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
-    | Lead
-    | OffersTableRowTypes
-    | contractTableTypes
-    | InvoiceTableRowTypes;
+  | Lead
+  | OffersTableRowTypes
+  | contractTableTypes
+  | InvoiceTableRowTypes;
 }) => {
-  const { notes, loading } = useAppSelector((state) => state.note);
+  const { notes } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
 
   return (
@@ -81,9 +81,8 @@ const ExistingNotes = ({
           <div className="h-[615px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
-                className={`mb-[10px] ${
-                  notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
-                } pb-3 `}
+                className={`mb-[10px] ${notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
+                  } pb-3 `}
                 key={key}
               >
                 <div className="flex items-center justify-between mx-[41px] mb-[8px]">
@@ -93,14 +92,14 @@ const ExistingNotes = ({
                       {item.createdBy?.fullName}
                     </span>
                   </p>
-                  {/* <div className="flex items-center gap-x-4">
+                  <div className="flex items-center gap-x-4">
                     <Image
-                      src={editNote}
+                      src={editNoteIcon}
                       alt="edit note"
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onEditNote(leadDetails?.id)}
+                      onClick={() => onEditNote(item?.id, item?.description)}
                     />
                     <Image
                       src={deleteIcon}
@@ -108,9 +107,9 @@ const ExistingNotes = ({
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onDeleteNote(leadDetails?.id)}
+                      onClick={() => onDeleteNote(item?.id)}
                     />
-                  </div> */}
+                  </div>
                 </div>
 
                 <div className="mx-[41px] border border-[#4B4B4B] rounded-lg">
