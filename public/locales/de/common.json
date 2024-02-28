@@ -1073,6 +1073,7 @@
       "offer_delete": "Bitte Bestätigen die Angebots-ID",
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
+      "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
       "offer_created": "Vorgang erfolgreich",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",

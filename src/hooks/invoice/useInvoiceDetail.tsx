@@ -109,12 +109,15 @@ export default function useInvoiceDetail() {
   const invoiceCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const handleRecurringInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE }));
   };
+
   const handleStopInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE }));
   };
+
   const handleEditInvoiceFrequencyCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_FREQUENCY }));
   };
@@ -154,7 +157,7 @@ export default function useInvoiceDetail() {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
   };
 
   const handleEditNote = (id: string, note: string) => {
@@ -218,6 +221,15 @@ export default function useInvoiceDetail() {
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
         onDeleteNote={handleDeleteNote}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={invoiceCreated}
+        loading={loading}
       />
     ),
 

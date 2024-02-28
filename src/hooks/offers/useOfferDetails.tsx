@@ -94,6 +94,7 @@ export default function useOfferDetails() {
   const routeHandler = () => {
     dispatch(deleteOffer({ offerDetails, router, translate }));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -125,7 +126,7 @@ export default function useOfferDetails() {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
   };
 
   const handleImageSlider = () => {
@@ -201,6 +202,15 @@ export default function useOfferDetails() {
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
         onDeleteNote={handleDeleteNote}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={defaultOfferCreatedHandler}
+        loading={loading}
       />
     ),
 
