@@ -92,7 +92,7 @@ const useContract = () => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE }));
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleEditNote = (id: string, note: string) => {
