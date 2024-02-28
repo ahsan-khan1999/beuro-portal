@@ -70,7 +70,7 @@ const TableRows = ({
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`invoice_status.${item.invoiceStatus}`)}
               </div>

@@ -82,7 +82,7 @@ export const InvoiceEmailHeader = ({
           </button>
 
           <h1 className="hidden xlgg:flex items-center font-medium text-2xl">
-            {translate("invoice.card_content.heading")}
+            {translate("invoice.card_content.receipt_heading")}
           </h1>
 
           <div className="flex items-center justify-end gap-x-5">

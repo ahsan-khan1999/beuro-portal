@@ -158,6 +158,15 @@ export default function useContractDetail() {
         onDeleteNote={handleDeleteNote}
       />
     ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={handleImageSlider}
+        loading={loading}
+      />
+    ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
