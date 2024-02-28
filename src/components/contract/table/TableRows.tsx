@@ -82,7 +82,7 @@ const TableRows = ({
               <div
                 className={`bg-[${getEmailColor(
                   item?.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>

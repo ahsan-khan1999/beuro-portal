@@ -20,7 +20,7 @@ const TableHeading = () => {
       <span className="font-medium text-[#8F8F8F] block mlg:hidden xlg:block">
         {translate("invoice.receipt_table_heading.amount")}
       </span>
-      <span className="font-medium text-[#8F8F8F] flex items-center justify-center">
+      <span className="font-medium text-[#8F8F8F] flex items-center justify-center mr-1">
         {translate("invoice.receipt_table_heading.email_status")}
       </span>
 

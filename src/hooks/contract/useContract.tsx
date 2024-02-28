@@ -22,6 +22,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
@@ -124,7 +125,7 @@ const useContract = () => {
     }
   };
 
-  const offerCreatedHandler = () => {
+  const contractHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
     handleFilterChange(filter);
   };
@@ -139,6 +140,15 @@ const useContract = () => {
         onDeleteNote={handleDeleteNote}
       />
     ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={contractHandler}
+        loading={loading}
+      />
+    ),
+
     [ModalType.EDIT_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -241,7 +251,7 @@ const useContract = () => {
         // dispatch(
         //   readContractDetails({ params: { filter: contractDetails?.id } })
         // ),
-        offerCreatedHandler();
+        contractHandler();
     }
   };
 
@@ -256,7 +266,7 @@ const useContract = () => {
           data: { id: id, paymentType: staticEnums["PaymentType"][status] },
         })
       );
-      if (res?.payload) offerCreatedHandler();
+      if (res?.payload) contractHandler();
     }
   };
 

@@ -66,7 +66,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] max-h-[350px] overflow-y-scroll">
             {images?.attachments?.map((item, index) => (
               <div
-                className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                className={`w-[99%] relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                   isOpenedFile ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={index}

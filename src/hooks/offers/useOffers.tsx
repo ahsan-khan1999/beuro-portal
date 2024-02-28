@@ -33,6 +33,7 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -205,6 +206,14 @@ const useOffers = () => {
         heading={translate("common.update_note")}
       />
     ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        routeHandler={defaultOfferCreatedHandler}
+        loading={loading}
+      />
+    ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -250,6 +259,7 @@ const useOffers = () => {
       <UploadFile
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
+        onFileUploadSuccess={defaultOfferCreatedHandler}
       />
     ),
     // [ModalType.IMAGE_SLIDER]: (
