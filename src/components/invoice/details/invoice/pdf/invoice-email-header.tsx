@@ -132,7 +132,7 @@ export const InvoiceEmailHeader = ({
           </BaseButton>
           <BaseButton
             buttonText={
-              collectiveInvoiceDetails?.invoiceStatus
+              collectiveInvoiceDetails?.emailStatus === "Sent"
                 ? translate("common.send_again")
                 : translate("contracts.pdf_card_details.send_via_email")
             }

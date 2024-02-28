@@ -85,7 +85,8 @@ export const useEditDate = (
     testFields?.length ? testFields?.length : 1,
     remove,
     isOffer ? loadingPublicOffer : loading,
-    control
+    control,
+    isOffer &&pdfData?.movingDetails?.workDates || undefined
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

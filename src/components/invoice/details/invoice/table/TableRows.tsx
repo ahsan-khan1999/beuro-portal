@@ -52,7 +52,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-visible">
+    <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
@@ -108,8 +108,8 @@ const TableRows = ({
                   dropDownTextClassName="text-white text-base font-medium"
                   dropDownIconClassName={`text-[#fff]`}
                   dropDownItemsContainerClassName="w-full"
-                  isSecondLastIndex={index === dataToAdd?.length - 2}
-                  isLastIndex={index === dataToAdd?.length - 1}
+                  isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
+                  isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
                 />
               </div>
             </span>
@@ -141,8 +141,8 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-fit"
-                isSecondLastIndex={index === dataToAdd?.length - 2}
-                isLastIndex={index === dataToAdd?.length - 1}
+                isSecondLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 2}
+                isLastIndex={dataToAdd?.length <= 2 ? false: index === dataToAdd?.length - 1}
               />
             </span>
             <span

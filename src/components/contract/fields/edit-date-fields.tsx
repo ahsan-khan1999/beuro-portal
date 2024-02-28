@@ -14,7 +14,8 @@ export const AddDateFormFieldContract: GenerateOfferDateFormField = (
   count,
   handleRemoveDateField,
   loading,
-  control
+  control,
+  workDates,
 ) => {
   const { t: translate } = useTranslation();
 
@@ -145,7 +146,8 @@ export const AddDateFormFieldContract: GenerateOfferDateFormField = (
           count,
           OnClick,
           handleRemoveDateField,
-          loading
+          loading,
+          workDates
         ),
       },
     },
@@ -158,7 +160,8 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
-  loading?: boolean
+  loading?: boolean,
+  workDates?: { startDate: string, endDate: string }[]
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
@@ -185,6 +188,8 @@ export const generateDateChildren = (
               name: `date.${i}.startDate`,
               register,
               dateType: "date",
+              min: workDates && workDates[i]?.startDate || "",
+              max: workDates && workDates[i]?.endDate || ""
             },
           },
           {
@@ -203,6 +208,8 @@ export const generateDateChildren = (
               onRemove: () => handleRemoveDateField(i),
               register,
               dateType: "date",
+              min:workDates && workDates[i]?.startDate || "",
+              max:workDates && workDates[i]?.endDate || ""
             },
           },
         ],

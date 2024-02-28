@@ -20,7 +20,8 @@ export const DropDown = ({
   shouldNotSelectItem = false,
   isLastIndex,
   isSecondLastIndex,
-}: DropDownProps & { isLastIndex?: boolean; isSecondLastIndex?: boolean }) => {
+  isOffer
+}: DropDownProps & { isLastIndex?: boolean; isSecondLastIndex?: boolean ,isOffer?:boolean}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
@@ -37,7 +38,7 @@ export const DropDown = ({
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
-    "flex items-center bg-white px-3 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "flex items-center bg-white px-3 py-[10px] w-full min-h-8 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
     `text-sm font-medium text-white ${
@@ -77,6 +78,7 @@ export const DropDown = ({
               containerClassName={dropDownItemsContainerClassName}
               isLastIndex={isLastIndex}
               isSecondLastIndex={isSecondLastIndex}
+              isOffer={isOffer}
             />
           )}
         </AnimatePresence>

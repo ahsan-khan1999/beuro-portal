@@ -98,7 +98,7 @@ const SERVICE_URLS = {
   contractContent: "/contract/",
   invoiceContent: "/invoice/invoice-collection/update-content/",
   acceptOffer: "/offer/add-signature/",
-  offerActivity: "/offer/activity/",
+  offerActivity: "/offer/activity",
   dashbaord: "/dashboard/company",
   adminDashboard: "/dashboard/admin",
   sendByPost: "/offer/send-By-Post/",

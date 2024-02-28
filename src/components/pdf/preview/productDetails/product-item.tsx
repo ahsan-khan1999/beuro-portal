@@ -39,11 +39,11 @@ export const ProductItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {price}
           </span>
-          {/* {isDiscount && ( */}
+          {isDiscount && (
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {discount || "-"}{" "}
           </span>
-          {/* )} */}
+          )} 
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
             {pagebreak

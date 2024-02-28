@@ -116,7 +116,7 @@ export default function ContractFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "customerDetail.fullName" },
           ]}
           label={translate("common.sort_button")}
         />

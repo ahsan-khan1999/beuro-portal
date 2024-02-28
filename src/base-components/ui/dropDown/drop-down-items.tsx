@@ -9,18 +9,19 @@ export const DropDownItems = ({
   containerClassName,
   isLastIndex,
   isSecondLastIndex,
+  isOffer
 }: DropDownItemsProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
+  isOffer?: boolean;
 }) => {
   const handleItemClick = (item: string) => {
     onItemClick(item);
   };
-  console.log(isSecondLastIndex, isLastIndex);
-
-  const containerDefaultClasses = `absolute ${
-    (isLastIndex || isSecondLastIndex) && "-top-28"
-  }  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;
+  console.log(isOffer);
+  
+  const containerDefaultClasses =
+    `absolute  ${(isOffer && (isLastIndex || isSecondLastIndex)) && "!-top-40" || (isLastIndex || isSecondLastIndex) && "!-top-20"}  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;
   let containerClasses = combineClasses(
     containerDefaultClasses,
     containerClassName
