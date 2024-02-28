@@ -76,7 +76,7 @@ export default function ContractFilters({
   };
 
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -116,7 +116,10 @@ export default function ContractFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "customerDetail.fullName" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetail.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
         />

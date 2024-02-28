@@ -98,14 +98,13 @@ const TableRows = ({
                   staticEnums["PaymentType"][item.paymentType] === 0
                     ? "bg-[#45C769]"
                     : "bg-[#4A13E7]"
-                } min-w-[68.82px] !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
                 isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
-
             </span> */}
 
             <span className="py-4 flex justify-center items-center">
@@ -120,7 +119,7 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getOfferStatusColor(item.offerStatus)}]
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`offer_status.${item.offerStatus}`)}
               </div>
@@ -146,7 +145,6 @@ const TableRows = ({
                     })
                   )}
                   selectedItem={translate(`offer_status.${item.offerStatus}`)}
-                  // selectedItem={item.offerStatus}
                   key={item.id}
                   onItemSelected={(status) => {
                     handleOfferStatusUpdate(item.id, status, "offer");
@@ -159,10 +157,11 @@ const TableRows = ({
                       : staticEnums["OfferStatus"][item.offerStatus] === 2
                       ? "bg-[#FF376F]"
                       : "bg-[#FF0000]"
-                  } w-fit  !py-[0px] rounded-lg flex items-center justify-center gap-x-1`}
+                  } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                   dropDownIconClassName={"text-white"}
                   dropDownTextClassName="text-white text-base font-medium"
-                  isSecondLastIndex={ index === dataToAdd?.length - 2}
+                  dropDownItemsContainerClassName="w-full"
+                  isSecondLastIndex={index === dataToAdd?.length - 2}
                   isLastIndex={index === dataToAdd?.length - 1}
                   isOffer={true}
                 />

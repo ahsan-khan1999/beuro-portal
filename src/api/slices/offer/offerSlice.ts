@@ -260,6 +260,7 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/activity", async (args, thunkApi) => {
     const { params, router, translate } = args as any;
@@ -274,6 +275,7 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateOfferDiscount: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update/discount", async (args, thunkApi) => {
     const { params } = args as any;
@@ -310,6 +312,36 @@ export const updatePublicOfferDates: AsyncThunk<boolean, object, object> | any =
     } catch (e: any) {
       setErrors(setError, e?.data?.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+
+  export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("upload/offer/pdf", async (args, thunkApi) => {
+    const { data, router, translate, formData } = args as any;
+
+    try {
+      const [authToken, refreshToken] = await Promise.all([
+        getToken(),
+        getRefreshToken(),
+      ]);
+
+      await axios.put(BASEURL + `/offer/upload-file/${data}`, formData, {
+        headers: {
+          Accept: "multipart/form-data",
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+          accessToken: authToken,
+          refreshToken: refreshToken,
+        },
+      });
+
+      return true;
+    } catch (e: any) {
+      toast.error(e?.response?.data?.message);
+      thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
+      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
@@ -507,6 +539,17 @@ const OfferSlice = createSlice({
     });
     builder.addCase(updatePublicOfferDates.rejected, (state) => {
       state.loadingPublicOffer = false;
+    });
+
+
+    builder.addCase(uploadOfferPdf.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(uploadOfferPdf.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(uploadOfferPdf.rejected, (state) => {
+      state.loading = false;
     });
   },
 });

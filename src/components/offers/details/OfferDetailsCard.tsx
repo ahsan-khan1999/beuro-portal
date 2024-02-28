@@ -286,6 +286,7 @@ const OfferDetailsCard = ({
                   dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-fit"
                 />
               )) || (
                 <span

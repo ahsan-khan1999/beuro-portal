@@ -3,10 +3,12 @@ import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
-import { TaxSetting, setTaxSettings } from "@/api/slices/settingSlice/settings";
+import { TaxSetting, deleteTaxSetting, setTaxSettings } from "@/api/slices/settingSlice/settings";
 import { SystemSettingDataProps } from "@/types/settings";
 import { useAppDispatch } from "@/hooks/useRedux";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 const TaxVerifiedComp = memo(
   ({
@@ -41,11 +43,15 @@ const TaxVerifiedComp = memo(
         exclusiveTaxHandler();
       }
     };
-    const handleTaxDelete = (index: number) => {
+    const handleTaxDelete = async (id: string, index: number) => {
       if (!tax) return;
-      const taxSettings = [...tax];
-      taxSettings.splice(index, 1);
-      dispatch(setTaxSettings(taxSettings));
+      const response = await dispatch(deleteTaxSetting({ data: { id: id } }))
+      if (response?.payload) {
+        const taxSettings = [...tax];
+        taxSettings.splice(index, 1);
+        dispatch(setTaxSettings(taxSettings));
+        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      }
     };
 
     return (
@@ -73,11 +79,11 @@ const TaxVerifiedComp = memo(
               <div
                 className={`border rounded-md py-4 px-[18px] flex justify-between items-center w-full 
               ${
-                // ? "border-[#EBEBEB] cursor-default"
-                systemSettings["taxType"] === index
-                  ? "border-[#4A13E7] cursor-pointer"
-                  : "border-[#EBEBEB] cursor-pointer"
-              } <svg
+                  // ? "border-[#EBEBEB] cursor-default"
+                  systemSettings["taxType"] === index
+                    ? "border-[#4A13E7] cursor-pointer"
+                    : "border-[#EBEBEB] cursor-pointer"
+                  } <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="19"
@@ -98,11 +104,10 @@ const TaxVerifiedComp = memo(
               >
                 <span
                   className={`text-base font-medium
-                ${
-                  systemSettings["taxType"] === index
-                    ? "text-[#4A13E7]"
-                    : "text-[#4B4B4B]"
-                }
+                ${systemSettings["taxType"] === index
+                      ? "text-[#4A13E7]"
+                      : "text-[#4B4B4B]"
+                    }
               `}
                 >
                   {item}
@@ -148,7 +153,7 @@ const TaxVerifiedComp = memo(
                       className={
                         "text-base font-medium text-[#8F8F8F] cursor-pointer"
                       }
-                      onClick={() => handleTaxDelete(index)}
+                      onClick={() => handleTaxDelete(item?.id, index)}
                     >
                       {/* <svg
                         xmlns="http://www.w3.org/2000/svg"

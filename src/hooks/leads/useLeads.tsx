@@ -8,12 +8,11 @@ import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
-import { deleteNote, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
@@ -25,6 +24,7 @@ const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
     (state) => state.lead
   );
+
   const { images } = useAppSelector((state) => state.image);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -96,15 +96,9 @@ const useLeads = () => {
       );
 
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    } else {
+      dispatch(updateModalType({ type: ModalType.CREATION }));
     }
-  };
-
-  const handleDeleteNote = async () => {
-    dispatch(
-      deleteNote({
-        data: {},
-      })
-    );
   };
 
   const handleAddNote = (id: string) => {
@@ -116,11 +110,18 @@ const useLeads = () => {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "lead" },
+        data: { id: id, type: "lead", data: note },
       })
     );
   };
@@ -159,7 +160,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        heading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
