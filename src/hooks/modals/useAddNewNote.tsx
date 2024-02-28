@@ -84,43 +84,65 @@ export const useAddNewNote = ({
           const isFilterLead = lead.find((item) => item.id === id);
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
+          handleNotes(leadDetails?.id);
           break;
         case "offer":
           const isFilterOffer = offer.find((item) => item.id === id);
-          if (!isFilterOffer?.isNoteCreated && handleFilterChange)
-            handleFilterChange(filter || {});
-          else
+          if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
+
+            handleFilterChange(filter || {})
+            handleNotes(offerDetails?.id)
+          }
+          else {
             dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
+            handleNotes(offerDetails?.id);
+          }
+
+
 
           break;
         case "contract":
           const isFilterContract = contract.find((item) => item.id === id);
-          if (!isFilterContract?.isNoteCreated && handleFilterChange)
+          if (!isFilterContract?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-          else
+            handleNotes(contractDetails?.id)
+
+
+          }
+          else {
             dispatch(
               setContractDetails({ ...contractDetails, isNoteCreated: true })
             );
+            handleNotes(contractDetails?.id)
+          }
 
           break;
         case "invoice":
           const isFilterInvoice = invoice.find((item) => item.id === id);
-          if (!isFilterInvoice?.isNoteCreated && handleFilterChange)
+          if (!isFilterInvoice?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-          else
+            handleNotes(invoiceDetails?.id)
+
+
+          }
+          else {
             dispatch(
               setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true })
             );
+            handleNotes(invoiceDetails?.id)
+
+
+          }
 
           break;
         default:
           break;
       }
-      if (!data) {
-        handleNotes(id);
-      } else {
-        handleNotes(leadDetails?.id);
-      }
+      // if (!data) {
+      //   handleNotes(id);
+      // } else {
+      //   handleNotes(leadDetails?.id);
+      // }
     }
   };
 
