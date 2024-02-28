@@ -7,11 +7,12 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
 import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
 import { createLeadNotes, setLeads } from "@/api/slices/lead/leadSlice";
-import { createNote } from "@/api/slices/noteSlice/noteSlice";
+import { createNote, updateNote } from "@/api/slices/noteSlice/noteSlice";
 import { FilterType } from "@/types";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import { useEffect } from "react";
 
 export const useAddNewNote = ({
   handleNotes,
@@ -26,7 +27,7 @@ export const useAddNewNote = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
-  const { lead } = useAppSelector((state) => state.lead);
+  const { lead ,leadDetails} = useAppSelector((state) => state.lead);
   const { offer, offerDetails } = useAppSelector((state) => state.offer);
   const { contract, contractDetails } = useAppSelector(
     (state) => state.contract
@@ -35,7 +36,7 @@ export const useAddNewNote = ({
 
   const {
     modal: {
-      data: { id, type },
+      data: { id, type, data },
     },
   } = useAppSelector((state) => state.global);
 
@@ -45,23 +46,41 @@ export const useAddNewNote = ({
     handleSubmit,
     control,
     setError,
-
+    setValue,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  useEffect(() => {
+    if (data) setValue("description", data)
+  }, [data])
+
   const fields = AddNoteFormField(register, loading, control);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await dispatch(
-      createNote({
-        data: { ...data, id: id, type: type },
-        router,
-        setError,
-        translate,
-      })
-    );
+  const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
+    let res;
+    if (!data) {
+      res = await dispatch(
+        createNote({
+          data: { ...formData, id: id, type: type },
+          router,
+          setError,
+          translate,
+        })
+      );
+    } else {
+      res = await dispatch(
+        updateNote({
+          data: { ...formData, id: id, type: type },
+          router,
+          setError,
+          translate,
+        })
+      );
+    }
 
+    
     if (res?.payload) {
       switch (type) {
         case "lead":
@@ -100,7 +119,13 @@ export const useAddNewNote = ({
         default:
           break;
       }
-      handleNotes(id);
+      if (!data){
+        handleNotes(id);
+
+      }else{
+        handleNotes(leadDetails?.id);
+
+      }
     }
   };
 

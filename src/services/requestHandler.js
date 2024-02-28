@@ -246,10 +246,7 @@ const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
   });
-const updateNotes = (data) =>
-  put(SERVICE_URLS.leadNotes + `${data?.id}`, data, {
-    feature: featureConstants.login,
-  });
+
 const deleteLead = (data) =>
   del(
     SERVICE_URLS.readLead + `/${data?.id}`,
@@ -555,6 +552,13 @@ const createNotes = (params) =>
     params,
     { feature: featureConstants.login },
     { detail: false }
+  );
+
+const updateNotes = (params) =>
+  put(
+    SERVICE_URLS.notes + `/${params?.id}`,
+    params,
+    { feature: featureConstants.login },
   );
 
 const deleteNote = (data) =>
@@ -1064,6 +1068,6 @@ const apiServices = {
   updateContractDate,
   updateInvoiceDetails,
   createInvoiceDetail,
-  deleteTax
+  deleteTax,
 };
 export default apiServices;

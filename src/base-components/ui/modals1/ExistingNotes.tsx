@@ -20,7 +20,7 @@ const ExistingNotes = ({
   leadDetails,
 }: {
   handleAddNote: (id: string) => void;
-  onEditNote: (id: string) => void;
+  onEditNote: (id: string,note:string) => void;
   onDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
@@ -92,22 +92,22 @@ const ExistingNotes = ({
                     </span>
                   </p>
                   <div className="flex items-center gap-x-4">
-                    <Image
-                      src={editNote}
+                    <span
+                      src={"editNote"}
                       alt="edit note"
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onEditNote(item?.id)}
-                    />
-                    <Image
-                      src={deleteIcon}
+                      onClick={() => onEditNote(item?.id,item?.description)}
+                    >Edit</span>
+                    <span
+                      src={"deleteIcon"}
                       alt="delete note"
                       width={20}
                       height={20}
                       className="cursor-pointer"
                       onClick={() => onDeleteNote(item?.id)}
-                    />
+                    >Delte</span>
                   </div>
                 </div>
 

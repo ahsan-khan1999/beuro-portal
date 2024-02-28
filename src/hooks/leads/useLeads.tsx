@@ -13,7 +13,7 @@ import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
-import {  deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { areFiltersEmpty } from "@/utils/utility";
@@ -88,6 +88,7 @@ const useLeads = () => {
     if (e) {
       e.stopPropagation();
     }
+
     const filteredLead = lead?.filter((item_) => item_.id === item);
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
@@ -96,11 +97,14 @@ const useLeads = () => {
       );
 
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    } else {
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+
     }
   };
 
   const handleDeleteNote = async (id: string) => {
-    if(!id) return;
+    if (!id) return;
     const response = await dispatch(
       deleteNotes({ data: { id: id } })
     );
@@ -116,11 +120,11 @@ const useLeads = () => {
     );
   };
 
-  const handleEditNote = (id: string) => {
+  const handleEditNote = (id: string, note: string) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "lead" },
+        data: { id: id, type: "lead", data: note},
       })
     );
   };

@@ -52,7 +52,19 @@ export const createNote: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+  export const updateNote: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("note/update", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
 
+    try {
+      await apiServices.updateNotes(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
 export const deleteNotes: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("note/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -106,6 +118,16 @@ const NoteSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteNotes.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateNote.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateNote.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateNote.rejected, (state) => {
       state.loading = false;
     });
   },
