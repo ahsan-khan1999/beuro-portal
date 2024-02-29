@@ -164,6 +164,7 @@ export const useInvoicePdf = () => {
               },
               email: invoiceDetails?.invoiceID?.customerDetail?.email,
               phone: invoiceDetails?.invoiceID?.customerDetail?.phoneNumber,
+              mobile: invoiceDetails?.invoiceID?.customerDetail?.mobileNumber,
               gender:
                 invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
               isReverseInfo: template.payload.Template?.order,

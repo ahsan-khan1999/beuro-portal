@@ -19,6 +19,7 @@ const EditOffersDetails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
   const { t: translate } = useTranslation();
+
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };

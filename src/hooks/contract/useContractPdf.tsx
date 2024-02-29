@@ -191,6 +191,9 @@ export const useContractPdf = () => {
               email: contractDetails?.offerID?.leadID?.customerDetail?.email,
               phone:
                 contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
+              mobile:
+                contractDetails?.offerID?.leadID?.customerDetail?.mobileNumber,
+
               gender:
                 contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
               isReverseInfo: template.payload.Template?.order,

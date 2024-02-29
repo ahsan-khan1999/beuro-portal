@@ -4,23 +4,42 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
-import { formatDateTimeToDate } from "@/utils/utility";
+import {
+  formatDateTimeToDate,
+  getLeadStatusColor,
+  getStatusColor,
+} from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { staticEnums } from "@/utils/static";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
   leadDetails,
+  onStatusUpdate,
 }: {
   leadDeleteHandler: Function;
   leadDetails: Lead;
+  onStatusUpdate: (id: string) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const itemsValue = [
+    `${translate("lead_status.Open")}`,
+    `${translate("lead_status.Close")}`,
+    `${translate("lead_status.Expired")}`,
+  ];
+
+  const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
+    item: { label: itemsValue[index], value: item },
+  }));
+
   return (
     <div className="bg-white rounded-md w-full">
       <div className="flex flex-col lg:flex-row gap-y-3 lg:justify-between lgitems-center border-b border-b-[#000] border-opacity-10 pb-5">
@@ -103,18 +122,31 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.lead_id")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
-            {leadDetails.refID}
+            {leadDetails?.refID}
           </span>
         </div>
         <div className="flex items-center gap-x-3">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.status")}:
           </span>
-          {leadDetails.leadStatus && (
+          {/* {leadDetails.leadStatus && (
             <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  min-w-[70px] w-fit">
               {translate(`lead_status.${leadDetails.leadStatus}`)}
             </span>
-          )}
+          )} */}
+
+          <DropDown
+            items={items}
+            selectedItem={translate(`lead_status.${leadDetails?.leadStatus}`)}
+            onItemSelected={onStatusUpdate}
+            dropDownClassName={`border border-[${getStatusColor(
+              leadDetails?.leadStatus
+            )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+            dropDownTextClassName={`text-[${getStatusColor(
+              leadDetails?.leadStatus
+            )}] text-base font-medium me-1`}
+            dropDownItemsContainerClassName="w-fit"
+          />
         </div>
 
         <div className="flex items-center gap-x-3">
@@ -122,7 +154,7 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.created_date")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
-            {formatDateTimeToDate(leadDetails.createdAt)}
+            {formatDateTimeToDate(leadDetails?.createdAt)}
           </span>
         </div>
         <div className="flex items-center gap-x-3">
@@ -130,7 +162,7 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.created_by")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
-            {leadDetails.createdBy?.fullName}
+            {leadDetails?.createdBy?.fullName}
           </span>
         </div>
       </div>

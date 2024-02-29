@@ -24,6 +24,7 @@ import { staticEnums } from "@/utils/static";
 import { readImage } from "@/api/slices/imageSlice/image";
 import localStoreUtil from "@/utils/localstore.util";
 import { EditDate } from "@/base-components/ui/modals1/editDate";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -132,6 +133,12 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -155,15 +162,15 @@ export default function useContractDetail() {
         onClose={onClose}
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
 
     [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
+      <ConfirmDeleteNote
         onClose={onClose}
         modelHeading={translate("common.modals.delete_note")}
-        routeHandler={handleImageSlider}
+        onDeleteNote={handleDeleteNote}
         loading={loading}
       />
     ),
@@ -247,6 +254,7 @@ export default function useContractDetail() {
   const onNextHandle = () => {
     router.pathname = "/contract/pdf-preview";
   };
+
   const handleViewPdf = () => {
     window.open(contractDetails?.attachement as string);
   };

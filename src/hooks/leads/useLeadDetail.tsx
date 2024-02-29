@@ -9,17 +9,22 @@ import {
   deleteLead,
   readLeadDetails,
   setLeadDetails,
+  updateLeadStatus,
 } from "@/api/slices/lead/leadSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { useTranslation } from "next-i18next";
 import { readService } from "@/api/slices/service/serviceSlice";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { staticEnums } from "@/utils/static";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  const { leadDetails, loading, loadingDetails } = useAppSelector((state) => state.lead);
+  const { leadDetails, loading, loadingDetails } = useAppSelector(
+    (state) => state.lead
+  );
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -62,6 +67,22 @@ export default function useLeadDetail() {
     dispatch(deleteLead({ leadDetails, router, translate }));
   };
 
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleStatusUpdate = async (leadStatus: string) => {
+    const res = await dispatch(
+      updateLeadStatus({
+        data: {
+          id: leadDetails?.id,
+          leadStatus: staticEnums["LeadStatus"][leadStatus],
+        },
+      })
+    );
+    if (res?.payload) defaultUpdateModal();
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -79,16 +100,27 @@ export default function useLeadDetail() {
         loading={loading}
       />
     ),
+
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
+    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return {
     renderModal,
     leadDeleteHandler,
     leadDetails,
     loading,
-    loadingDetails
+    loadingDetails,
+    handleStatusUpdate,
   };
 }
