@@ -587,6 +587,16 @@ export function getEmailColor(status: string) {
   else return "#FF376F";
 }
 
+export function getLeadStatusColor(status: string) {
+  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
+    return "#4A13E7";
+  else if (
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
+  )
+    return "#45C769";
+  else return "#FF376F";
+}
+
 export function getPaymentTypeColor(status: string) {
   if (staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Cash"])
     return "#45C769";

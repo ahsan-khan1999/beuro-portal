@@ -9,6 +9,7 @@ import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import OfferEditImages from "../OfferEditImages";
 
 export enum ComponentsType {
   customer,
@@ -22,11 +23,20 @@ const OffersDetailsData = ({
   loading,
   handleUpdateDiscount,
   currency,
+  shareImgModal,
+  handleImagesUpload,
+  handleImageSlider,
 }: {
   offerDetails: OffersTableRowTypes;
   loading: boolean;
   handleUpdateDiscount: (discount: number) => void;
   currency?: string;
+  shareImgModal: Function;
+  handleImagesUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
 
@@ -132,11 +142,18 @@ const OffersDetailsData = ({
           ))}
         </div>
         <div className="w-full mt-5">
-          <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} />
+          {/* <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} /> */}
+          <OfferEditImages
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleImagesUpload}
+            tabType={tabType}
+            handleImageSlider={handleImageSlider}
+          />
         </div>
       </div>
+
       <div className="w-full break-all flex">
-        <div className="max-w-[380px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[300px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />

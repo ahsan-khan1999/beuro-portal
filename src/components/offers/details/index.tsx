@@ -22,6 +22,9 @@ const OfferDetails = () => {
     handleSendByPost,
     handleUpdateDiscount,
     systemSettings,
+    handleImageSlider,
+    handleUploadImages,
+    shareImgModal,
   } = useOfferDetails();
 
   return (
@@ -43,6 +46,7 @@ const OfferDetails = () => {
           loading={loading}
         />
       </div>
+
       <div className="2xl:mt-[395px] w-full 2xl:block">
         {isSendEmail ? (
           <div className="mt-5">
@@ -57,6 +61,9 @@ const OfferDetails = () => {
             loading={loading}
             handleUpdateDiscount={handleUpdateDiscount}
             currency={systemSettings?.currency}
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleUploadImages}
+            handleImageSlider={handleImageSlider}
           />
         )}
       </div>

@@ -33,6 +33,7 @@ import InvoiceUpdate from "@/base-components/ui/modals1/InvoiceUpdate";
 import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoiceUpdate";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { updateQuery } from "@/utils/update-query";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -197,6 +198,12 @@ export default function useInvoiceDetail() {
     );
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -204,6 +211,15 @@ export default function useInvoiceDetail() {
         handleDelete={handleDelete}
         modelHeading={translate("common.modals.confirm_invoice_id")}
         subHeading={translate("common.modals.enter_invoice_id")}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
       />
     ),
     [ModalType.INFO_DELETED]: (
@@ -220,16 +236,7 @@ export default function useInvoiceDetail() {
         onClose={onClose}
         leadDetails={invoiceDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
-      />
-    ),
-
-    [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
-        onClose={onClose}
-        modelHeading={translate("common.modals.delete_note")}
-        routeHandler={invoiceCreated}
-        loading={loading}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
 

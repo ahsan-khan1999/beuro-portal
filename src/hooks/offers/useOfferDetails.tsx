@@ -33,6 +33,8 @@ import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -177,6 +179,24 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const shareImgModal = () => {
+    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  };
+
+  const handleUploadImages = (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e.stopPropagation();
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -201,15 +221,14 @@ export default function useOfferDetails() {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
-
     [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
+      <ConfirmDeleteNote
         onClose={onClose}
         modelHeading={translate("common.modals.delete_note")}
-        routeHandler={defaultOfferCreatedHandler}
+        onDeleteNote={handleDeleteNote}
         loading={loading}
       />
     ),
@@ -277,6 +296,9 @@ export default function useOfferDetails() {
         subHeading={translate("common.modals.email_sent_des")}
         route={onSuccess}
       />
+    ),
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
     ),
   };
 
@@ -362,5 +384,8 @@ export default function useOfferDetails() {
     handleUpdateDiscount,
     systemSettings,
     handleUpdateAdditionalDetailsModal,
+    shareImgModal,
+    handleUploadImages,
+    handleImageSlider,
   };
 }

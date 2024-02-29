@@ -17,19 +17,19 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 const ExistingNotes = ({
   handleAddNote,
   onEditNote,
-  onDeleteNote,
+  onConfrimDeleteNote,
   onClose,
   leadDetails,
 }: {
   handleAddNote: (id: string) => void;
   onEditNote: (id: string, note: string) => void;
-  onDeleteNote: (id: string) => void;
+  onConfrimDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
-  | Lead
-  | OffersTableRowTypes
-  | contractTableTypes
-  | InvoiceTableRowTypes;
+    | Lead
+    | OffersTableRowTypes
+    | contractTableTypes
+    | InvoiceTableRowTypes;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
@@ -81,8 +81,9 @@ const ExistingNotes = ({
           <div className="h-[615px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
-                className={`mb-[10px] ${notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
-                  } pb-3 `}
+                className={`mb-[10px] ${
+                  notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
+                } pb-3 `}
                 key={key}
               >
                 <div className="flex items-center justify-between mx-[41px] mb-[8px]">
@@ -107,7 +108,7 @@ const ExistingNotes = ({
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onDeleteNote(item?.id)}
+                      onClick={() => onConfrimDeleteNote(item?.id)}
                     />
                   </div>
                 </div>

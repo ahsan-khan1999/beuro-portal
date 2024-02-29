@@ -33,7 +33,7 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useOffers = () => {
   const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
@@ -187,6 +187,12 @@ const useOffers = () => {
     );
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -194,7 +200,7 @@ const useOffers = () => {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (
@@ -207,10 +213,10 @@ const useOffers = () => {
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
+      <ConfirmDeleteNote
         onClose={onClose}
         modelHeading={translate("common.modals.delete_note")}
-        routeHandler={defaultOfferCreatedHandler}
+        onDeleteNote={handleDeleteNote}
         loading={loading}
       />
     ),
