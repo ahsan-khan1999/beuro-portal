@@ -33,6 +33,7 @@ import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -177,6 +178,12 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -201,15 +208,14 @@ export default function useOfferDetails() {
         onClose={onClose}
         leadDetails={offerDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
-
     [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
+      <ConfirmDeleteNote
         onClose={onClose}
         modelHeading={translate("common.modals.delete_note")}
-        routeHandler={defaultOfferCreatedHandler}
+        onDeleteNote={handleDeleteNote}
         loading={loading}
       />
     ),

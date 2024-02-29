@@ -146,6 +146,7 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateOfferStatus: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update/status", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -159,6 +160,7 @@ export const updateOfferStatus: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updatePaymentStatus: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update/payment", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -316,8 +318,7 @@ export const updatePublicOfferDates: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-
-  export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
+export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("upload/offer/pdf", async (args, thunkApi) => {
     const { data, router, translate, formData } = args as any;
 
@@ -540,7 +541,6 @@ const OfferSlice = createSlice({
     builder.addCase(updatePublicOfferDates.rejected, (state) => {
       state.loadingPublicOffer = false;
     });
-
 
     builder.addCase(uploadOfferPdf.pending, (state) => {
       state.loading = true;

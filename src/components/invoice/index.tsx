@@ -19,7 +19,7 @@ export default function Invoices() {
     loading,
     setFilter,
     handleFilterChange,
-    currentPage
+    currentPage,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -34,17 +34,18 @@ export default function Invoices() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
+        // dataToAdd={currentPageRows}
       />
       <TableLayout>
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
     </>
   );
