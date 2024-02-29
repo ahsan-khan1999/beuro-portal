@@ -19,17 +19,6 @@ const TableFunctions = ({
       <h1 className="text-xl text-[#222B45] ">
         {translate("invoice.main_heading")}
       </h1>
-      <div className="flex gap-x-5">
-        <div className="bg-white shadow-lg px-5 py-3 flex flex-col gap-y-1 items-center">
-          <span>Total</span>
-          <span>0.000000 CHf</span>
-        </div>
-        <div className="bg-white shadow-lg px-5 py-3 flex flex-col gap-y-1 items-center">
-          <span>Page Sum</span>
-          <span>0.000000 CHf</span>
-        </div>
-      </div>
-
       <InvoicesFilters
         filter={filter}
         setFilter={setFilter}

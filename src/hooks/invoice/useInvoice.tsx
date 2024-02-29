@@ -22,9 +22,11 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useInvoice = () => {
-  const { lastPage, invoice, loading, totalCount, invoiceDetails } =
+  const { lastPage, invoice, loading, totalCount, invoiceDetails, invoiceSum } =
     useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
+
+  console.log(invoiceSum?.sumOfAllPages);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<
@@ -238,6 +240,7 @@ const useInvoice = () => {
     handleSendByPost,
     invoiceDetails,
     currentPage,
+    invoiceSum,
   };
 };
 

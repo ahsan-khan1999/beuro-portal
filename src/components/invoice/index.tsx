@@ -20,6 +20,7 @@ export default function Invoices() {
     setFilter,
     handleFilterChange,
     currentPage,
+    invoiceSum,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -34,8 +35,20 @@ export default function Invoices() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
-        // dataToAdd={currentPageRows}
       />
+
+      <div className="flex justify-center items-center gap-x-5 my-5">
+        <div className="bg-white shadow-lg px-6 py-3 flex flex-col gap-y-1 items-center">
+          <span>Total</span>
+          <span>{invoiceSum?.sumOfAllPages} CHf</span>
+        </div>
+
+        <div className="bg-white shadow-lg px-5 py-3 flex flex-col gap-y-1 items-center">
+          <span>Page Sum</span>
+          <span>{invoiceSum?.sumOfTotalsPerPage} CHf</span>
+        </div>
+      </div>
+
       <TableLayout>
         <TableHeading />
         {CurrentComponent}
