@@ -187,6 +187,7 @@ export const useReceiptPdf = () => {
                 invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
               email: invoiceDetails?.invoiceID?.customerDetail?.email,
               phone: invoiceDetails?.invoiceID?.customerDetail?.phoneNumber,
+              mobile: invoiceDetails?.invoiceID?.customerDetail?.mobileNumber,
               isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {

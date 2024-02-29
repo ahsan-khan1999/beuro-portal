@@ -9,7 +9,11 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
-import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
+import {
+  readLead,
+  setLeadDetails,
+  updateLeadStatus,
+} from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
@@ -18,7 +22,7 @@ import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useLeads = () => {
   const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
@@ -68,6 +72,7 @@ const useLeads = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readLead({ params: { filter: query, page: currentPage, size: 10 } })
@@ -124,7 +129,7 @@ const useLeads = () => {
     );
   };
 
-  const handleImageSlider = () => {
+  const defaultUpdateModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -142,6 +147,12 @@ const useLeads = () => {
     }
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -149,7 +160,7 @@ const useLeads = () => {
         onClose={onClose}
         leadDetails={leadDetails}
         onEditNote={handleEditNote}
-        onDeleteNote={handleDeleteNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (
@@ -171,15 +182,15 @@ const useLeads = () => {
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
-      <DeleteConfirmation_2
+      <ConfirmDeleteNote
         onClose={onClose}
         modelHeading={translate("common.modals.delete_note")}
-        routeHandler={handleImageSlider}
+        onDeleteNote={handleDeleteNote}
         loading={loading}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
+      <ImagesUpload onClose={onClose} handleImageSlider={defaultUpdateModal} />
     ),
     [ModalType.CREATION]: (
       <CreationCreated

@@ -21,6 +21,10 @@ interface InvoiceState {
   collectiveInvoiceDetails: SubInvoiceTableRowTypes;
   collectiveReciept: SubInvoiceTableRowTypes[];
   invoiceInfo: { subject: string; description: string };
+  invoiceSum: {
+    sumOfAllPages: number;
+    sumOfTotalsPerPage: number;
+  };
 }
 
 const initialState: InvoiceState = {
@@ -39,6 +43,10 @@ const initialState: InvoiceState = {
     subject: "",
     description: "",
   },
+  invoiceSum: {
+    sumOfAllPages: 0,
+    sumOfTotalsPerPage: 0,
+  },
 };
 
 export const readInvoice: AsyncThunk<boolean, object, object> | any =
@@ -47,6 +55,7 @@ export const readInvoice: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readInvoice(params);
+
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -373,6 +382,8 @@ const InvoiceSlice = createSlice({
       state.invoice = action.payload.Invoice;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
+      state.invoiceSum.sumOfAllPages = action.payload.sumOfAllPages;
+      state.invoiceSum.sumOfTotalsPerPage = action.payload.sumOfTotalsPerPage;
       state.loading = false;
     });
     builder.addCase(readInvoice.rejected, (state) => {

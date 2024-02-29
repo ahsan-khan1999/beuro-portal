@@ -209,11 +209,11 @@ const TableRows = ({
                 onClick={(e) => {
                   e.stopPropagation();
                   item.signedContracts &&
-                    window.open(item.signedContracts[0].link);
+                    window.open((item.signedContracts)?.[item?.signedContracts?.length -1]?.link);
                 }}
               >
                 <PdfIcon
-                  pathClass={colorPicker[item?.signedContracts?.[0]?.status]}
+                  pathClass={colorPicker[item?.signedContracts?.[item?.signedContracts?.length -1]?.status]}
                 />
               </span>
             )) || (

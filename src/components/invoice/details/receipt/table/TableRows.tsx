@@ -45,7 +45,7 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-y-visible">
+    <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
@@ -100,8 +100,16 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
-                isSecondLastIndex={index === collectiveInvoice?.length - 2}
-                isLastIndex={index === collectiveInvoice?.length - 1}
+                isSecondLastIndex={
+                  collectiveInvoice?.length <= 2
+                    ? false
+                    : index === collectiveInvoice?.length - 2
+                }
+                isLastIndex={
+                  collectiveInvoice?.length <= 2
+                    ? false
+                    : index === collectiveInvoice?.length - 1
+                }
               />
             </span>
             <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
@@ -129,10 +137,18 @@ const TableRows = ({
                 } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-fit"
+                dropDownItemsContainerClassName="w-full"
                 key={item.id}
-                isSecondLastIndex={index === collectiveInvoice?.length - 2}
-                isLastIndex={index === collectiveInvoice?.length - 1}
+                isSecondLastIndex={
+                  collectiveInvoice?.length <= 2
+                    ? false
+                    : index === collectiveInvoice?.length - 2
+                }
+                isLastIndex={
+                  collectiveInvoice?.length <= 2
+                    ? false
+                    : index === collectiveInvoice?.length - 1
+                }
               />
             </span>
             <span className="py-4 flex justify-center items-center">
