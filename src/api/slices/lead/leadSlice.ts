@@ -125,8 +125,7 @@ export const updateLeadStatus: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.updateLeadStatus(data);
-      thunkApi.dispatch(setLeadDetails(response?.data?.lead));
-      return true;
+      return response?.data?.Lead
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
@@ -253,6 +252,23 @@ const leadSlice = createSlice({
     builder.addCase(createLeadNotes.rejected, (state) => {
       state.loading = false;
     });
+
+
+    builder.addCase(updateLeadStatus.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateLeadStatus.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.leadDetails = action.payload;
+      }
+      state.loading = false;
+    });
+    builder.addCase(updateLeadStatus.rejected, (state) => {
+      state.loading = false;
+    });
+
+
+
   },
 });
 
