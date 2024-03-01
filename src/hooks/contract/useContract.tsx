@@ -137,6 +137,10 @@ const useContract = () => {
     );
   };
 
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -153,6 +157,7 @@ const useContract = () => {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.EDIT_NOTE]: (

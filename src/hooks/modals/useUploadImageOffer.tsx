@@ -15,6 +15,7 @@ export const useUploadImageOffer = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { leadDetails } = useAppSelector((state) => state.lead);
   const { error, offerDetails } = useAppSelector((state) => state.offer);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector((state) => state.image);
@@ -136,7 +137,22 @@ export const useUploadImageOffer = (
 
     const formatLinks = enteredLinks?.links;
 
-    if (type === "Offer") {
+    if (type === "Lead") {
+      const apiData = {
+        images: formatImages,
+        links: formatLinks,
+        attachments: formatAttachments,
+        videos: formatVideos,
+        id: leadDetails?.id,
+        type: "leadID",
+      };
+
+      const response = await dispatch(
+        createImage({ data: apiData, router, translate })
+      );
+
+      if (response?.payload) handleImageSlider();
+    } else if (type === "Offer") {
       // const filteredList = Object.values(data)
       //   ?.filter((value) => value)
       //   ?.reverse();
@@ -148,12 +164,10 @@ export const useUploadImageOffer = (
         id: offerDetails?.id,
         type: "offerID",
       };
-
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
-
-      if (response?.payload) handleImageSlider();
+      if (response?.payload) handleOnClose();
     } else if (type === "Contract") {
       // const filteredList = Object.values(data)
       //   ?.filter((value) => value)
