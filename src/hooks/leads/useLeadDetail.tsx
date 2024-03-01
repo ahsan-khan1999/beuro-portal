@@ -18,6 +18,8 @@ import { readImage } from "@/api/slices/imageSlice/image";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { staticEnums } from "@/utils/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
@@ -31,8 +33,14 @@ export default function useLeadDetail() {
   const id = router.query.lead;
 
   useEffect(() => {
+    if (leadDetails?.id)
+      dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
+  }, [leadDetails?.id]);
+
+  useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
+
   useEffect(() => {
     if (id) {
       dispatch(readLeadDetails({ params: { filter: id } })).then(
@@ -83,6 +91,18 @@ export default function useLeadDetail() {
     if (res?.payload) defaultUpdateModal();
   };
 
+  const handleUploadImages = (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e.stopPropagation();
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+  };
+
+  const shareImgModal = () => {
+    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -109,6 +129,18 @@ export default function useLeadDetail() {
         route={onClose}
       />
     ),
+
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={defaultUpdateModal}
+        type={"Lead"}
+      />
+    ),
+
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+    ),
   };
 
   const renderModal = () => {
@@ -122,5 +154,8 @@ export default function useLeadDetail() {
     loading,
     loadingDetails,
     handleStatusUpdate,
+    handleUploadImages,
+    shareImgModal,
+    defaultUpdateModal,
   };
 }

@@ -153,7 +153,7 @@ const OffersDetailsData = ({
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[300px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />

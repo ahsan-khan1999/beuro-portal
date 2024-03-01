@@ -42,7 +42,7 @@ const LeadsDetailsCardData = ({
 
   return (
     <div className="bg-white rounded-md w-full">
-      <div className="flex flex-col lg:flex-row gap-y-3 lg:justify-between lgitems-center border-b border-b-[#000] border-opacity-10 pb-5">
+      <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div
           onClick={() => router.push("/leads")}
           className="flex items-center cursor-pointer"
@@ -125,7 +125,7 @@ const LeadsDetailsCardData = ({
             {leadDetails?.refID}
           </span>
         </div>
-        <div className="flex items-center gap-x-3">
+        <div className="max-w-[200px] flex items-center gap-x-3">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.status")}:
           </span>
@@ -141,11 +141,11 @@ const LeadsDetailsCardData = ({
             onItemSelected={onStatusUpdate}
             dropDownClassName={`border border-[${getStatusColor(
               leadDetails?.leadStatus
-            )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+            )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
             dropDownTextClassName={`text-[${getStatusColor(
               leadDetails?.leadStatus
             )}] text-base font-medium me-1`}
-            dropDownItemsContainerClassName="w-fit"
+            dropDownItemsContainerClassName="w-full"
           />
         </div>
 

@@ -12,11 +12,13 @@ export const ConfirmDeleteNote = ({
   modelHeading,
   onDeleteNote,
   loading,
+  onCancel,
 }: {
   onClose: () => void;
   modelHeading: string;
   onDeleteNote: (id: string) => void;
   loading: boolean;
+  onCancel: () => void;
 }) => {
   const { t: translate } = useTranslation();
 
@@ -46,7 +48,7 @@ export const ConfirmDeleteNote = ({
 
           <div className="flex gap-[33px] mt-[27px] mb-[38px]">
             <button
-              onClick={onClose}
+              onClick={onCancel}
               className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
             >
               {translate("email_tracker.email_delete_modal.cancel_button")}

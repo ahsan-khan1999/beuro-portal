@@ -647,8 +647,8 @@
       "company_name": "Firmenname",
       "iban_number": "IBAN",
       "house_no": "Hausnummer",
-      "street_no": "Strasse+Nr",
-      "post_code": "Plz + Ort",
+      "street_no": "Strasse",
+      "post_code": "Plz",
       "city": "Stadt"
     }
   },
