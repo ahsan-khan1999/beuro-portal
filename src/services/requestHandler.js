@@ -32,6 +32,7 @@ const SERVICE_URLS = {
   updateLead: "/lead/lead-step/",
   content: "/content",
   contentDetails: "/content/content-step/",
+  leadStatus: "/lead/update-lead-status",
 
   readOffer: "/offer",
   offer: "/offer/Offer-step/",
@@ -114,7 +115,6 @@ const SERVICE_URLS = {
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
   updateDate: "/offer/update-date/",
-
 };
 
 const login = (data) =>
@@ -247,6 +247,11 @@ const updateLead = (data) =>
     feature: featureConstants.login,
   });
 
+const updateLeadStatus = (data) =>
+  put(SERVICE_URLS.leadStatus + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const deleteLead = (data) =>
   del(
     SERVICE_URLS.readLead + `/${data?.id}`,
@@ -326,6 +331,7 @@ const updateOfferStatus = (data) =>
   put(SERVICE_URLS.offerStatus + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const updatePaymentStatus = (data) =>
   put(SERVICE_URLS.offerPaymentStatus + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -545,7 +551,6 @@ const readNotes = (params) =>
     { detail: false }
   );
 
-
 const createNotes = (params) =>
   post(
     SERVICE_URLS.notes + `/${params?.type}/${params?.id}`,
@@ -555,11 +560,9 @@ const createNotes = (params) =>
   );
 
 const updateNotes = (params) =>
-  put(
-    SERVICE_URLS.notes + `/${params?.id}`,
-    params,
-    { feature: featureConstants.login },
-  );
+  put(SERVICE_URLS.notes + `/${params?.id}`, params, {
+    feature: featureConstants.login,
+  });
 
 const deleteNote = (data) =>
   del(
@@ -901,14 +904,12 @@ const updateInvoiceDetails = (data) =>
     feature: featureConstants.login,
   });
 
-
 const deleteTax = (data) =>
   del(
     SERVICE_URLS.tax + `/${data?.id}`,
     {},
     { feature: featureConstants.login }
   );
-
 
 const apiServices = {
   login,
@@ -941,6 +942,7 @@ const apiServices = {
   readLead,
   createLead,
   updateLead,
+  updateLeadStatus,
   deleteLead,
   readContent,
   createContent,
