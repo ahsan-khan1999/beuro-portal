@@ -132,6 +132,10 @@ const useInvoice = () => {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={() => {
+          console.log("");
+          
+        }}
       />
     ),
 
