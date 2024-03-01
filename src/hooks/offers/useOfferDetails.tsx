@@ -392,5 +392,6 @@ export default function useOfferDetails() {
     shareImgModal,
     handleUploadImages,
     handleImageSlider,
+    handleUploadFile
   };
 }

@@ -30,8 +30,7 @@ export const AddPostPonedFollowUpFormField: GeneratePostPondFormField = (
         rows: 3,
         id: "postPonedNote",
         name: "postPonedNote",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+        placeholder: "",
         register,
       },
     },

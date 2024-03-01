@@ -27,13 +27,15 @@ const AddRemarks = ({ onClose, handleFollowUpsDetails }: AddRemarksProps) => {
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <div className="flex flex-col">
-            <p className="text-2xl font-normal text-[#000] ">{translate("follow_up.add_remarks_heading")}</p>
+          {/* <div className="flex flex-col"> */}
+          <p className="text-2xl font-normal my-3">
+            {translate("follow_up.add_remarks_heading")}
+          </p>
 
-            <span className="text-[#1E1E1E] text-sm font-normal my-3">
+          {/* <span className="text-[#1E1E1E] text-sm font-normal my-3">
               Lorem Ipsum dollar smith
-            </span>
-          </div>
+            </span> */}
+          {/* </div> */}
 
           <Form
             formFields={fields}
