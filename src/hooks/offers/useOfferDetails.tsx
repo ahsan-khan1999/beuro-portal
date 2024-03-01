@@ -21,13 +21,10 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { staticEnums } from "@/utils/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { readImage } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import { updateQuery } from "@/utils/update-query";
 import localStoreUtil from "@/utils/localstore.util";
 import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
@@ -47,10 +44,16 @@ export default function useOfferDetails() {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const isMail = Boolean(router.query?.isMail);
 
-  const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { t: translate } = useTranslation();
   const id = router.query.offer;
+
+  useEffect(() => {
+    if (offerDetails?.id)
+      dispatch(
+        readImage({ params: { type: "offerID", id: offerDetails?.id } })
+      );
+  }, [offerDetails?.id]);
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
@@ -105,7 +108,6 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -132,7 +134,6 @@ export default function useOfferDetails() {
   };
 
   const handleImageSlider = () => {
-    // dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -141,7 +142,6 @@ export default function useOfferDetails() {
     e: React.MouseEvent<HTMLSpanElement>
   ) => {
     e.stopPropagation();
-
     dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
@@ -197,6 +197,10 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
 
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -230,6 +234,7 @@ export default function useOfferDetails() {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
 

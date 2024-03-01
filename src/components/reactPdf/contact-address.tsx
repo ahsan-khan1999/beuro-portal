@@ -40,8 +40,11 @@ export const ContactAddress = ({
         }}
       >
         <Text style={textBase}>
-          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name} {address?.companyName && "c/o"} 
-          {address?.companyName && " "+  address?.companyName}
+          {/* {address?.companyName && "c/o"} */}
+          {address?.companyName}
+        </Text>
+        <Text style={textBase}>
+          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
         </Text>
         <Text style={textBase}>{address?.streetWithNumber}</Text>
         <Text style={textBase}>{`${address?.postalCode} ${

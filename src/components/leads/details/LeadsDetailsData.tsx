@@ -13,6 +13,7 @@ import AditionalEditDetails from "../edit/AditionalEditDetails";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import OfferEditImages from "@/components/offers/OfferEditImages";
 
 export enum ComponentsType {
   customer,
@@ -25,7 +26,20 @@ export enum ComponentsType {
   additionalEdit,
 }
 
-const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
+const LeadsDetailsData = ({
+  loading,
+  shareImgModal,
+  handleImagesUpload,
+  handleImageSlider,
+}: {
+  loading: boolean;
+  shareImgModal: Function;
+  handleImagesUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+}) => {
   const [tabType, setTabType] = useState<number>(0);
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { images } = useAppSelector((state) => state.image);
@@ -178,11 +192,18 @@ const LeadsDetailsData = ({ loading }: { loading: boolean }) => {
             />
           ))}
         </div>
-        <LeadsDetailsImages images={images?.images} />
+        {/* <LeadsDetailsImages images={images?.images} /> */}
+
+        <OfferEditImages
+          shareImgModal={shareImgModal}
+          handleImagesUpload={handleImagesUpload}
+          tabType={tabType}
+          handleImageSlider={handleImageSlider}
+        />
       </div>
 
       <div className="w-full break-all flex">
-        <div className={`max-w-[320px] w-full hidden xlg:block`}></div>
+        <div className={`max-w-[330px] w-full hidden xlg:block`}></div>
         {/* {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />

@@ -8,6 +8,7 @@ import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import OfferEditImages from "@/components/offers/OfferEditImages";
 
 export enum ComponentsType {
   customer,
@@ -16,7 +17,20 @@ export enum ComponentsType {
   additional,
 }
 
-const ContractDetailsData = ({ loading }: { loading: boolean }) => {
+const ContractDetailsData = ({
+  loading,
+  shareImgModal,
+  handleImageUpload,
+  handleImageSlider,
+}: {
+  loading: boolean;
+  shareImgModal: Function;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+}) => {
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { t: translate } = useTranslation();
@@ -126,10 +140,19 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
             />
           ))}
         </div>
+
+        <div className="w-full mt-5">
+          <OfferEditImages
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleImageUpload}
+            tabType={tabType}
+            handleImageSlider={handleImageSlider}
+          />
+        </div>
       </div>
 
       <div className="overflow-y-auto w-full break-all flex">
-        <div className="max-w-[260px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <LoadingState />

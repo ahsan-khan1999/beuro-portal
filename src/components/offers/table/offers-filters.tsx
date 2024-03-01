@@ -84,6 +84,7 @@ export default function OffersFilters({
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -145,7 +146,10 @@ export default function OffersFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "leadID.customerDetail.fullName" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "leadID.customerDetail.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
         />
