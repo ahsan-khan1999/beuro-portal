@@ -313,7 +313,7 @@ const OfferDetailsCard = ({
               </span>
             </div>
           )}
-          <div className="flex justify-between gap-x-2 items-center mt-2 md:mt-0">
+          <div className="flex justify-between gap-x-3 items-center mt-2 md:mt-0">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
               onClick={(e) => handleNotes(offerDetails?.id, e)}

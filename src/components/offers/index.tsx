@@ -22,7 +22,7 @@ export default function Offers() {
     loading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
-    currentPage
+    currentPage,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -48,14 +48,12 @@ export default function Offers() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {/* <div className="absolute right-0 -bottom-24"> */}
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
-      {/* </div> */}
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
     </div>
   );

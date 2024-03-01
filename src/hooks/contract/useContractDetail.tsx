@@ -25,6 +25,7 @@ import { readImage } from "@/api/slices/imageSlice/image";
 import localStoreUtil from "@/utils/localstore.util";
 import { EditDate } from "@/base-components/ui/modals1/editDate";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -40,6 +41,13 @@ export default function useContractDetail() {
     (state) => state.contract
   );
   const { t: translate } = useTranslation();
+
+  useEffect(() => {
+    if (contractDetails?.id)
+      dispatch(
+        readImage({ params: { type: "contractID", id: contractDetails?.id } })
+      );
+  }, [contractDetails?.id]);
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
@@ -139,6 +147,14 @@ export default function useContractDetail() {
     );
   };
 
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
+  const shareImgModal = () => {
+    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -172,6 +188,7 @@ export default function useContractDetail() {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -215,6 +232,9 @@ export default function useContractDetail() {
       />
     ),
     [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={contractDetails?.id} />
+    ),
   };
 
   const handleSendEmail = async () => {
@@ -279,5 +299,7 @@ export default function useContractDetail() {
     systemSettings,
     handleUpdateAdditionalDetailsModal,
     editDateHandler,
+    shareImgModal,
+    handleImageSlider,
   };
 }
