@@ -204,6 +204,10 @@ export default function useInvoiceDetail() {
     );
   };
 
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -220,10 +224,7 @@ export default function useInvoiceDetail() {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
-        onCancel={() => {
-          console.log("");
-          
-        }}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.INFO_DELETED]: (

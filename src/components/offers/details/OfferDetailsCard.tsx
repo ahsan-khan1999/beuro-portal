@@ -30,6 +30,7 @@ const OfferDetailsCard = ({
   isSendEmail,
   handleSendByPost,
   loading,
+  onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -371,6 +372,13 @@ const OfferDetailsCard = ({
             </div>
           </div>
         </div>
+
+        <BaseButton
+          buttonText="Upload File"
+          onClick={() => onFileUpload(offerDetails?.id)}
+          containerClassName="w-fit bg-primary"
+          textClassName="text-white"
+        />
       </div>
     </div>
   );
