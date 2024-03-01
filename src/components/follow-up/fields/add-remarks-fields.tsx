@@ -18,8 +18,7 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
         rows: 3,
         id: "completeRemarks",
         name: "completeRemarks",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+        placeholder: "",
         register,
       },
     },
