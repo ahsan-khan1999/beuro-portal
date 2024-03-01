@@ -220,6 +220,10 @@ export default function useInvoiceDetail() {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={() => {
+          console.log("");
+          
+        }}
       />
     ),
     [ModalType.INFO_DELETED]: (
