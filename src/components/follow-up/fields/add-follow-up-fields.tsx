@@ -163,7 +163,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         rows: 2,
         id: "additionalDetails",
         name: "additionalDetails",
-        placeholder: "Lorem ipsum dollar smith emit dloar lorep smith emi",
+        placeholder: "",
         register,
       },
     },

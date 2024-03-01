@@ -132,6 +132,8 @@ export const ShareImages = ({
     );
   };
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <>
       <BaseModal
@@ -155,7 +157,7 @@ export const ShareImages = ({
               <button
                 key={index}
                 className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939] "
+                  activeTab === item ? "text-primary" : "text-[#393939]"
                 } text-base font-medium pb-[10px] ${
                   activeTab === item ? "border-b-2 border-primary" : ""
                 }`}
