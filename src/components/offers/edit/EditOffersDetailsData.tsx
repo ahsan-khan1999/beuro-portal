@@ -6,9 +6,7 @@ import AddressEditDetails from "./AddressEditDetails";
 import AditionalEditDetails from "./AditionalEditDetails";
 import ServiceEditDetails from "./ServiceEditDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
-import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
-import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 

@@ -47,7 +47,6 @@ export const FollowUpNotificationBar = ({
   </defs>
 </svg>`,
     id: item?.id,
-
   }));
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
