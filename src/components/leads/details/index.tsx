@@ -13,7 +13,11 @@ const LeadsDetails = () => {
     loading,
     loadingDetails,
     handleStatusUpdate,
+    defaultUpdateModal,
+    handleUploadImages,
+    shareImgModal,
   } = useLeadDetail();
+
   return (
     <Layout>
       {loadingDetails ? (
@@ -28,7 +32,12 @@ const LeadsDetails = () => {
             />
           </div>
           <div className="xlg:mt-[330px] w-full xlg:block">
-            <LeadsDetailsData loading={loading} />
+            <LeadsDetailsData
+              loading={loading}
+              shareImgModal={shareImgModal}
+              handleImagesUpload={handleUploadImages}
+              handleImageSlider={defaultUpdateModal}
+            />
           </div>
 
           {renderModal()}

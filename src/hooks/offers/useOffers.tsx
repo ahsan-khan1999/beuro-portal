@@ -64,6 +64,7 @@ const useOffers = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readOffer({ params: { filter: query, page: currentPage, size: 10 } })
@@ -193,6 +194,10 @@ const useOffers = () => {
     );
   };
 
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -218,6 +223,7 @@ const useOffers = () => {
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.ADD_NOTE]: (

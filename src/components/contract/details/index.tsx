@@ -23,6 +23,8 @@ const ContractDetails = () => {
     handleViewPdf,
     handleUpdateAdditionalDetailsModal,
     editDateHandler,
+    handleImageSlider,
+    shareImgModal,
   } = useContractDetail();
 
   return (
@@ -81,7 +83,12 @@ const ContractDetails = () => {
               )}
           </div>
 
-          <ContractDetailsData loading={loading} />
+          <ContractDetailsData
+            loading={loading}
+            shareImgModal={shareImgModal}
+            handleImageUpload={handleImageUpload}
+            handleImageSlider={handleImageSlider}
+          />
         </div>
       )}
 
