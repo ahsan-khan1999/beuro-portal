@@ -47,13 +47,15 @@ const LeadsDetailsCardData = ({
   return (
     <div className="bg-white rounded-md w-full">
       <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
-        <div onClick={handleBack} className="flex items-center cursor-pointer">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="41"
             height="40"
             viewBox="0 0 41 40"
             fill="none"
+            className="cursor-pointer"
+            onClick={handleBack}
           >
             <rect
               x="0.750977"

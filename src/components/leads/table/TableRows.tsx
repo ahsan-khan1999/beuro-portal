@@ -19,6 +19,7 @@ const TableRows = ({
   const { t: translate } = useTranslation();
 
   const router = useRouter();
+
   return (
     <div>
       {dataToAdd?.map((item: Lead, index: number) => {

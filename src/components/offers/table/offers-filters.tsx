@@ -40,38 +40,40 @@ export default function OffersFilters({
     },
   ];
 
-  // const handleStatusChange = (value: string, isChecked: boolean) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedStatus = prev.status ? [...prev.status] : [];
-  //     if (isChecked) {
-  //       if (!updatedStatus.includes(value)) {
-  //         updatedStatus.push(value);
-  //       }
-  //     } else {
-  //       const index = updatedStatus.indexOf(value);
-  //       if (index > -1) {
-  //         updatedStatus.splice(index, 1);
-  //       }
-  //     }
-  //     const status = updatedStatus.length > 0 ? updatedStatus : "";
-  //     const updatedFilter = { ...prev, status: status };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status: newStatus.join(","),
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status: newStatus.join(","),
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;

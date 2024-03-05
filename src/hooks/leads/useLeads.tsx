@@ -44,8 +44,6 @@ const useLeads = () => {
     status: FiltersDefaultValues.None,
   });
 
-  console.log(filter.status);
-
   useEffect(() => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
@@ -229,6 +227,7 @@ const useLeads = () => {
         ...filter,
         status: [statusValue?.toString()],
       });
+
       dispatch(
         readLead({
           params: {

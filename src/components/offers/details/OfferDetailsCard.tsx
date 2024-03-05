@@ -18,6 +18,7 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import { updateQuery } from "@/utils/update-query";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -57,19 +58,24 @@ const OfferDetailsCard = ({
     `${translate("payment_method.Online")}`,
   ];
 
+  const handleBack = () => {
+    router.pathname = "/offers";
+    delete router.query["offer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
-        <div
-          onClick={() => router.push("/offers")}
-          className="flex items-center cursor-pointer"
-        >
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="41"
             height="40"
             viewBox="0 0 41 40"
             fill="none"
+            className="cursor-pointer"
+            onClick={handleBack}
           >
             <rect
               x="0.750977"
