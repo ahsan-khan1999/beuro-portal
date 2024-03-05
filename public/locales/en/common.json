@@ -916,6 +916,7 @@
     "side_images_heading": "Images",
     "table_functions": {
       "open": "Open Leads",
+      "inProcess": "InProcess Leads",
       "close": "Close Leads",
       "expire": "Expire Leads"
     },
@@ -2011,6 +2012,7 @@
   },
   "lead_status": {
     "Open": "Open",
+    "InProcess": "InProcress",
     "Close": "Close",
     "Expired": "Expired"
   },

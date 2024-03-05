@@ -4,11 +4,7 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
-import {
-  formatDateTimeToDate,
-  getLeadStatusColor,
-  getStatusColor,
-} from "@/utils/utility";
+import { formatDateTimeToDate, getStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
@@ -16,6 +12,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -32,6 +29,7 @@ const LeadsDetailsCardData = ({
 
   const itemsValue = [
     `${translate("lead_status.Open")}`,
+    `${translate("lead_status.InProcess")}`,
     `${translate("lead_status.Close")}`,
     `${translate("lead_status.Expired")}`,
   ];
@@ -40,13 +38,16 @@ const LeadsDetailsCardData = ({
     item: { label: itemsValue[index], value: item },
   }));
 
+  const handleBack = () => {
+    router.pathname = "/leads";
+    delete router.query["lead"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div className="bg-white rounded-md w-full">
       <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
-        <div
-          onClick={() => router.push("/leads")}
-          className="flex items-center cursor-pointer"
-        >
+        <div onClick={handleBack} className="flex items-center cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="41"

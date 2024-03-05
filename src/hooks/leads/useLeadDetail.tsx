@@ -13,7 +13,6 @@ import {
 } from "@/api/slices/lead/leadSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { useTranslation } from "next-i18next";
-import { readService } from "@/api/slices/service/serviceSlice";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { staticEnums } from "@/utils/static";
@@ -80,6 +79,8 @@ export default function useLeadDetail() {
   };
 
   const handleStatusUpdate = async (leadStatus: string) => {
+    console.log(staticEnums["LeadStatus"][leadStatus]);
+
     const res = await dispatch(
       updateLeadStatus({
         data: {

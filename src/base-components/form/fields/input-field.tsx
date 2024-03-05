@@ -47,8 +47,9 @@ export const InputField = ({
         )}
         {svg && (
           <span
-            className={`mr-3 absolute left-4 ${(inputFocus && "tests") || "test"
-              }`}
+            className={`mr-3 absolute left-4 ${
+              (inputFocus && "tests") || "test"
+            }`}
             dangerouslySetInnerHTML={{ __html: svg }}
           />
         )}
@@ -74,15 +75,16 @@ export const InputField = ({
           key={id}
           step={step}
           min={0}
-          pattern={inputType === "number" && "\d+" || "*"}
+          pattern={(inputType === "number" && "d+") || "*"}
           // onChangeCapture={}
           //@ts-expect-error
           onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}
         />
         {percentage && (
           <span
-            className={`mr-3 absolute left-14 ${(inputFocus && "tests") || "test"
-              }`}
+            className={`mr-3 absolute left-14 ${
+              (inputFocus && "tests") || "test"
+            }`}
           >
             {percentage}
           </span>
