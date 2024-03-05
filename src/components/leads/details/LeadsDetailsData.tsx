@@ -41,8 +41,6 @@ const LeadsDetailsData = ({
   handleImageSlider: () => void;
 }) => {
   const [tabType, setTabType] = useState<number>(0);
-  const { leadDetails } = useAppSelector((state) => state.lead);
-  const { images } = useAppSelector((state) => state.image);
 
   const [data, setData] = useState<{
     index: number;
@@ -192,7 +190,6 @@ const LeadsDetailsData = ({
             />
           ))}
         </div>
-        {/* <LeadsDetailsImages images={images?.images} /> */}
 
         <OfferEditImages
           shareImgModal={shareImgModal}

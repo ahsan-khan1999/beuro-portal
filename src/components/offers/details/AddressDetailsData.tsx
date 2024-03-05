@@ -16,7 +16,7 @@ const AddressDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
         id={translate("offers.tabs_heading.address")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -35,7 +35,7 @@ const AddressDetailsData = ({
           {translate("offers.address_details.edit_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
+
       {offerDetails?.addressID?.address?.map((item, index) => (
         <div className="my-5" key={index}>
           <h4 className="text-[#8F8F8F] mb-[10px]">{item?.label}</h4>

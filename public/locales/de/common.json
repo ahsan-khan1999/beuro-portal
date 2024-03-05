@@ -909,6 +909,7 @@
     "side_images_heading": "Bilder",
     "table_functions": {
       "open": "Anfragen offen",
+      "inProcess": "Anfragen Bearbeitung",
       "close": "Anfragen geschlossen",
       "expire": "Anfragen abgelaufen"
     },
@@ -2007,6 +2008,7 @@
   },
   "lead_status": {
     "Open": "Offen",
+    "InProcess": "Bearbeitung",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
   },

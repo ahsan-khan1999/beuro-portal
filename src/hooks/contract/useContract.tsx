@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   readContract,
-  readContractDetails,
   setContractDetails,
   updateContractPaymentStatus,
   updateContractStatus,
@@ -22,13 +21,11 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
     useAppSelector((state) => state.contract);
-  const { images } = useAppSelector((state) => state.image);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
@@ -47,8 +44,8 @@ const useContract = () => {
     status: FiltersDefaultValues.None,
     leadSource: FiltersDefaultValues.None,
   });
-  const totalItems = totalCount;
 
+  const totalItems = totalCount;
   const itemsPerPage = 10;
 
   const dispatch = useDispatch();
@@ -63,14 +60,18 @@ const useContract = () => {
       }
     });
   };
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
     }
+
     const filteredLead = contract?.filter((item_) => item_.id === item);
+
     if (filteredLead?.length === 1) {
       dispatch(setContractDetails(filteredLead[0]));
       dispatch(
@@ -200,13 +201,40 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    if (query?.filter) {
+    if (query?.filter || query?.status) {
+      const queryStatus = query?.status;
+
+      if (queryStatus) {
+        setFilter({
+          ...filter,
+          status: queryStatus.toString().split(","),
+        });
+
+        dispatch(
+          readContract({
+            params: {
+              filter: {
+                ...filter,
+                status: queryStatus.toString().split(","),
+              },
+              page: currentPage,
+              size: 10,
+            },
+          })
+        ).then((response: any) => {
+          if (response?.payload)
+            setCurrentPageRows(response?.payload?.Contract);
+        });
+        return;
+      }
+
       const statusValue =
         staticEnums["ContractStatus"][query?.filter as string];
       setFilter({
         ...filter,
         status: [statusValue?.toString()],
       });
+
       dispatch(
         readContract({
           params: {
@@ -222,14 +250,14 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     } else {
-      // setFilter({
-      //   ...filter,
-      //   status: "None",
-      // });
+      setFilter({
+        ...filter,
+        status: "None",
+      });
       dispatch(
         readContract({
           params: {
-            filter: { ...filter },
+            filter: { ...filter, status: "None" },
             page: currentPage,
             size: 10,
           },
@@ -238,7 +266,7 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

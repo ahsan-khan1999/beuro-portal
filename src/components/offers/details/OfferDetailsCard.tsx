@@ -18,6 +18,7 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import { updateQuery } from "@/utils/update-query";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -57,19 +58,24 @@ const OfferDetailsCard = ({
     `${translate("payment_method.Online")}`,
   ];
 
+  const handleBack = () => {
+    router.pathname = "/offers";
+    delete router.query["offer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
-        <div
-          onClick={() => router.push("/offers")}
-          className="flex items-center cursor-pointer"
-        >
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="41"
             height="40"
             viewBox="0 0 41 40"
             fill="none"
+            className="cursor-pointer"
+            onClick={handleBack}
           >
             <rect
               x="0.750977"
@@ -154,7 +160,7 @@ const OfferDetailsCard = ({
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-5">
-        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-1">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
           <div>
             <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("offers.card_content.offer_id")}:
@@ -182,7 +188,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid gap-y-1 mlg:grid-cols-2 xl:grid-cols-[minmax(350px,_3fr)_minmax(450px,_100%)]">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
           <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
@@ -216,6 +222,13 @@ const OfferDetailsCard = ({
               </span>
             </div>
           </div>
+
+          <BaseButton
+            buttonText="Upload File"
+            onClick={() => onFileUpload(offerDetails?.id)}
+            containerClassName="w-fit bg-primary"
+            textClassName="text-white"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
@@ -372,13 +385,6 @@ const OfferDetailsCard = ({
             </div>
           </div>
         </div>
-
-        <BaseButton
-          buttonText="Upload File"
-          onClick={() => onFileUpload(offerDetails?.id)}
-          containerClassName="w-fit bg-primary"
-          textClassName="text-white"
-        />
       </div>
     </div>
   );

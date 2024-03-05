@@ -1,13 +1,13 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import React, { useRef } from "react";
 import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 export default function ContractFilters({
   filter,
   setFilter,
@@ -15,6 +15,7 @@ export default function ContractFilters({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -34,15 +35,38 @@ export default function ContractFilters({
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status: newStatus.join(","),
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status: newStatus.join(","),
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
@@ -68,6 +92,7 @@ export default function ContractFilters({
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
