@@ -588,6 +588,7 @@ export const staticEnums: Record<string, any> = {
   },
   LeadStatus: {
     Open: 0,
+    InProcess: 3,
     Close: 1,
     Expired: 2,
   },

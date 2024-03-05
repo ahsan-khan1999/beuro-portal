@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -43,28 +43,11 @@ const useLeads = () => {
     },
     status: FiltersDefaultValues.None,
   });
-  // useMemo(() => {
-  //   setFilter({
-  //     ...filter,
-  //     status: query?.filter as string[],
-  //   });
-  // }, [query?.filter]);
+
   useEffect(() => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: null, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-
-    // dispatch(
-    //   readLead({ params: { filter: queryParams, page: 1, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Lead);
-    //   }
-    // });
   }, []);
 
   const totalItems = totalCount;
@@ -91,7 +74,9 @@ const useLeads = () => {
     if (e) {
       e.stopPropagation();
     }
+
     const filteredLead = lead?.filter((item_) => item_.id === item);
+
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
       dispatch(
@@ -212,13 +197,37 @@ const useLeads = () => {
   };
 
   useEffect(() => {
-    // Update rows for the current page
-    if (query?.filter) {
+    if (query?.filter || query?.status) {
+      const queryStatus = query?.status;
+      if (queryStatus) {
+        setFilter({
+          ...filter,
+          status: queryStatus.toString().split(","),
+        });
+
+        dispatch(
+          readLead({
+            params: {
+              filter: {
+                ...filter,
+                status: queryStatus.toString().split(","),
+              },
+              page: currentPage,
+              size: 10,
+            },
+          })
+        ).then((response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+        });
+        return;
+      }
+
       const statusValue = staticEnums["LeadStatus"][query?.filter as string];
       setFilter({
         ...filter,
         status: [statusValue?.toString()],
       });
+
       dispatch(
         readLead({
           params: {
@@ -250,7 +259,7 @@ const useLeads = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

@@ -284,12 +284,39 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    if (query?.filter) {
+    if (query?.filter || query?.status) {
+      const queryStatus = query?.status;
+      console.log(queryStatus?.toString().split(","));
+
+      if (queryStatus) {
+        setFilter({
+          ...filter,
+          status: queryStatus.toString().split(","),
+        });
+
+        dispatch(
+          readOffer({
+            params: {
+              filter: {
+                ...filter,
+                status: queryStatus.toString().split(","),
+              },
+              page: currentPage,
+              size: 10,
+            },
+          })
+        ).then((response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+        });
+        return;
+      }
+
       const statusValue = staticEnums["OfferStatus"][query?.filter as string];
       setFilter({
         ...filter,
         status: [statusValue?.toString()],
       });
+
       dispatch(
         readOffer({
           params: {
@@ -305,14 +332,14 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     } else {
-      // setFilter({
-      //   ...filter,
-      //   status: "None",
-      // });
+      setFilter({
+        ...filter,
+        status: "None",
+      });
       dispatch(
         readOffer({
           params: {
-            filter: { ...filter },
+            filter: { ...filter, status: "None" },
             page: currentPage,
             size: 10,
           },
@@ -321,7 +348,7 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

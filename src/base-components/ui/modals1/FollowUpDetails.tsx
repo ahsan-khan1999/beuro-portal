@@ -257,7 +257,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
                         {item.value}
                       </span>
                     </div>
@@ -290,7 +290,7 @@ const FollowUpDetails = ({
                   <p className="text-sm font-normal text-[#4D4D4D]">
                     {translate("follow_up.additional_detail_heading")}
                   </p>
-                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base">
+                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[48px]">
                     {followUpDetails?.additionalDetails}
                   </p>
                 </div>
@@ -311,11 +311,11 @@ const FollowUpDetails = ({
 
                 <div className="grid grid-cols-4 gap-x-[25px] mt-[23px]">
                   {leadsDetails.map((item, index) => (
-                    <div className="flex flex-col gap-y-[10px] " key={index}>
+                    <div className="flex flex-col gap-y-[10px]" key={index}>
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
                         {item.value}
                       </span>
                     </div>
@@ -333,7 +333,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
                         {item.value}
                       </span>
                     </div>

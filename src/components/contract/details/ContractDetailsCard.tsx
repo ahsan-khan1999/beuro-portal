@@ -16,6 +16,7 @@ import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import editIcon from "@/assets/svgs/edit_primary.svg";
+import { updateQuery } from "@/utils/update-query";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -49,13 +50,20 @@ const ContractDetailsCard = ({
     `${translate("contract_status.Cancelled")}`,
   ];
 
+  const handleBack = () => {
+    router.pathname = "/contract";
+    delete router.query["contract"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div className="min-h-[218px]">
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
           <span
             className="cursor-pointer"
-            onClick={() => router.push("/contract")}
+            // onClick={() => router.push("/contract")}
+            onClick={handleBack}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

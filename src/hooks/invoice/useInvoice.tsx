@@ -1,5 +1,5 @@
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -14,7 +14,6 @@ import {
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -53,6 +52,7 @@ const useInvoice = () => {
   //     status: query?.filter as string,
   //   });
   // }, [query?.filter]);
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
@@ -172,7 +172,32 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    if (query?.filter) {
+    if (query?.filter || query?.status) {
+      const queryStatus = query?.status;
+
+      if (queryStatus) {
+        setFilter({
+          ...filter,
+          status: queryStatus.toString().split(","),
+        });
+
+        dispatch(
+          readInvoice({
+            params: {
+              filter: {
+                ...filter,
+                status: queryStatus.toString().split(","),
+              },
+              page: currentPage,
+              size: 10,
+            },
+          })
+        ).then((response: any) => {
+          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+        });
+        return;
+      }
+
       const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
       setFilter({
         ...filter,
@@ -193,14 +218,14 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     } else {
-      // setFilter({
-      //   ...filter,
-      //   status: "None",
-      // });
+      setFilter({
+        ...filter,
+        status: "None",
+      });
       dispatch(
         readInvoice({
           params: {
-            filter: { ...filter },
+            filter: { ...filter, status: "None" },
             page: currentPage,
             size: 10,
           },
@@ -209,7 +234,7 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

@@ -1,14 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import {
-  uploadFileToFirebase,
-  uploadMultiFileToFirebase,
-} from "@/api/slices/globalSlice/global";
+import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
-import Link from "next/link";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { Slider } from "../slider/slider";
 
@@ -35,6 +31,7 @@ export const ImageField = ({
     sliderImageData: [],
     currentIndex: 0,
   });
+
 
   const toggleZoom = (image: string, index: number) => {
     const imageList = [
@@ -67,27 +64,14 @@ export const ImageField = ({
 
       file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
-      // file = e.target.files ? e.target.files[0] : null;
       for (let item of e.target.files) {
         formdata.append("files", item);
       }
       file.push(e.target.files);
     }
 
-    // if (file) {
-    // formdata.append("files", file);
-
     const response = await dispatch(uploadMultiFileToFirebase(formdata));
 
-    // res?.payload?.forEach((res: string, idx: number) => {
-
-    //     const fieldId = `upload_image${index as number + 1}`;
-    //     console.log(fieldId, "index", res);
-    //     field.onChange(res, fieldId);
-    // });
-
-    // Store the file name locally
-    // const response = await dispatch(uploadFileToFirebase(formdata));
     let newAttachement = (attachements && [...attachements]) || [];
     if (response?.payload) {
       response?.payload?.forEach((element: any) => {
@@ -97,12 +81,7 @@ export const ImageField = ({
         });
       });
       setAttachements && setAttachements(newAttachement);
-      // setAttachements(
-      //     attachements &&
-      //     [...attachements, { name: file?.name, value: response?.payload }],
-      // );
     }
-    // }
   };
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();

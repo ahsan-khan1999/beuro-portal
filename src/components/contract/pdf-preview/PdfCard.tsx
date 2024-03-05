@@ -28,6 +28,15 @@ const PdfCard = ({
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
 
+  const handleBackToDetail = () => {
+    const { status } = router.query;
+
+    router.push({
+      pathname: "/contract/details",
+      query: { status, contract: contractDetails?.id },
+    });
+  };
+
   return (
     <div className="mb-5">
       <PdfCardLayout>
@@ -66,12 +75,14 @@ const PdfCard = ({
               </span> */}
 
             <div
-              onClick={() => {
-                router.push({
-                  pathname: "/contract/details",
-                  query: { contract: contractDetails?.id },
-                });
-              }}
+              // onClick={() => {
+              //   router.push({
+              //     pathname: "/contract/details",
+              //     query: { contract: contractDetails?.id },
+              //   });
+              // }}
+
+              onClick={handleBackToDetail}
               className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
             >
               <svg
