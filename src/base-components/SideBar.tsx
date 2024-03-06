@@ -57,6 +57,8 @@ const SideBar = () => {
     child: null,
   });
 
+  console.log(selected);
+
   const userRole = staticEnums["User"]["role"][user?.role as string];
 
   const router = useRouter();
@@ -115,6 +117,7 @@ const SideBar = () => {
                   <Link
                     href={{
                       pathname: item.pathname,
+                      query: { status: item.query },
                     }}
                     onClick={() => routeChangeHandler(item)}
                     className={`hover:bg-[#E9E1FF] rounded-lg flex justify-between items-center px-3 py-2 w-full break-all ${
@@ -199,11 +202,11 @@ const SideBar = () => {
                                 <Link
                                   href={{
                                     pathname: it.pathname,
-                                    query: { filter: it.query },
+                                    query: { status: it.query },
                                   }}
                                   onClick={() => filterHandler(it.query)}
                                   className={`text-[#4B4B4B] hover:bg-[#E9E1FF] rounded-lg font-medium tracking-[0.5px] px-3 py-2 w-full text-start block ${
-                                    router.query.filter === it.query
+                                    router.query.status === it.query
                                       ? "bg-primary hover:bg-primary text-white"
                                       : ""
                                   }`}

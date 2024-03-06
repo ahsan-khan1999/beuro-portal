@@ -43,7 +43,7 @@ export default function LeadsFilter({
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
 
-      const newStatus = updatedStatus.map(Number);
+      const newStatus = updatedStatus;
 
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
@@ -53,7 +53,10 @@ export default function LeadsFilter({
           {
             pathname: router.pathname,
             query: {
-              status: newStatus.join(","),
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
             },
           },
           undefined,
@@ -68,7 +71,10 @@ export default function LeadsFilter({
           {
             pathname: router.pathname,
             query: {
-              status: newStatus.join(","),
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
             },
           },
           undefined,
@@ -102,6 +108,7 @@ export default function LeadsFilter({
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
