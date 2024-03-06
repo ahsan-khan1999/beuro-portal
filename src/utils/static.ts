@@ -1300,30 +1300,29 @@ export const sideBar: SideBar[] = [
     icon: "Leads",
     title: "sidebar.customer.leads.leads",
     pathname: "/leads",
+    query: "None",
+
     role: [1, 2],
     inner: [
       {
         title: "sidebar.customer.leads.open",
         pathname: "/leads",
-        query: "Open",
-        role: [1, 2],
-      },
-      {
-        title: "sidebar.customer.leads.InProcess",
-        pathname: "/leads",
-        query: "InProcess",
+        query: "0",
+
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.close",
         pathname: "/leads",
-        query: "Close",
+        query: "1",
+
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.expire",
         pathname: "/leads",
-        query: "Expired",
+        query: "2",
+
         role: [1, 2],
       },
     ],

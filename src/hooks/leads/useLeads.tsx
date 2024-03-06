@@ -53,13 +53,13 @@ const useLeads = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readLead({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Lead);
-      }
-    });
+    // dispatch(
+    //   readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Lead);
+    //   }
+    // });
   };
 
   const onClose = () => {
@@ -193,35 +193,15 @@ const useLeads = () => {
   };
 
   useEffect(() => {
-    if (query?.filter || query?.status) {
+    // setTimeout(() => {
       const queryStatus = query?.status;
-      if (queryStatus) {
-        setFilter({
-          ...filter,
-          status: queryStatus.toString().split(","),
-        });
-
-        dispatch(
-          readLead({
-            params: {
-              filter: {
-                ...filter,
-                status: queryStatus.toString().split(","),
-              },
-              page: currentPage,
-              size: 10,
-            },
-          })
-        ).then((response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-        });
-        return;
-      }
-
-      const statusValue = staticEnums["LeadStatus"][query?.filter as string];
+      
+      console.log(query, "status");
+    if (queryStatus) {
+      const filteredStatus =query?.status === "None" ? "None": queryStatus.toString().split(",").filter((item) => item !== "None")
       setFilter({
         ...filter,
-        status: [statusValue?.toString()],
+        status:  filteredStatus,
       });
 
       dispatch(
@@ -229,7 +209,7 @@ const useLeads = () => {
           params: {
             filter: {
               ...filter,
-              status: [staticEnums["LeadStatus"][query?.filter as string]],
+              status: filteredStatus,
             },
             page: currentPage,
             size: 10,
@@ -238,24 +218,48 @@ const useLeads = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
-    } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
-      dispatch(
-        readLead({
-          params: {
-            filter: { ...filter, status: "None" },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-      });
+      return;
     }
-  }, [currentPage, query?.filter, query?.status]);
+
+    // const statusValue = staticEnums["LeadStatus"][query?.filter as string];
+    // setFilter({
+    //   ...filter,
+    //   status: [statusValue?.toString()],
+    // });
+
+    // dispatch(
+    //   readLead({
+    //     params: {
+    //       filter: {
+    //         ...filter,
+    //         status: [staticEnums["LeadStatus"][query?.filter as string]],
+    //       },
+    //       page: currentPage,
+    //       size: 10,
+    //     },
+    //   })
+    // ).then((response: any) => {
+    //   if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+    // });
+    // } else {
+    //   setFilter({
+    //     ...filter,
+    //     status: "None",
+    //   });
+    //   dispatch(
+    //     readLead({
+    //       params: {
+    //         filter: { ...filter, status: "None" },
+    //         page: currentPage,
+    //         size: 10,
+    //       },
+    //     })
+    //   ).then((response: any) => {
+    //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+    //   });
+    // }
+    // }, 2000);
+  }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

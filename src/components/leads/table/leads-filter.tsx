@@ -43,7 +43,7 @@ export default function LeadsFilter({
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
 
-      const newStatus = updatedStatus.map(Number);
+      const newStatus = updatedStatus;
 
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
