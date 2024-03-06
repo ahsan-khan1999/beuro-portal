@@ -52,13 +52,13 @@ const useContract = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(
-      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Contract);
-      }
-    });
+    // dispatch(
+    //   readContract({ params: { filter: filter, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Contract);
+    //   }
+    // });
   };
 
   const onClose = () => {
@@ -201,38 +201,18 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    if (query?.filter || query?.status) {
-      const queryStatus = query?.status;
-
-      if (queryStatus) {
-        setFilter({
-          ...filter,
-          status: queryStatus.toString().split(","),
-        });
-
-        dispatch(
-          readContract({
-            params: {
-              filter: {
-                ...filter,
-                status: queryStatus.toString().split(","),
-              },
-              page: currentPage,
-              size: 10,
-            },
-          })
-        ).then((response: any) => {
-          if (response?.payload)
-            setCurrentPageRows(response?.payload?.Contract);
-        });
-        return;
-      }
-
-      const statusValue =
-        staticEnums["ContractStatus"][query?.filter as string];
+    const queryStatus = query?.status;
+    if (queryStatus) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryStatus
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
       setFilter({
         ...filter,
-        status: [statusValue?.toString()],
+        status: filteredStatus,
       });
 
       dispatch(
@@ -240,7 +220,7 @@ const useContract = () => {
           params: {
             filter: {
               ...filter,
-              status: [staticEnums["ContractStatus"][query?.filter as string]],
+              status: filteredStatus,
             },
             page: currentPage,
             size: 10,
@@ -249,24 +229,77 @@ const useContract = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
-    } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
-      dispatch(
-        readContract({
-          params: {
-            filter: { ...filter, status: "None" },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-      });
+      return;
     }
-  }, [currentPage, query?.filter, query?.status]);
+  }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   if (query?.filter || query?.status) {
+  //     const queryStatus = query?.status;
+
+  //     if (queryStatus) {
+  //       setFilter({
+  //         ...filter,
+  //         status: queryStatus.toString().split(","),
+  //       });
+
+  //       dispatch(
+  //         readContract({
+  //           params: {
+  //             filter: {
+  //               ...filter,
+  //               status: queryStatus.toString().split(","),
+  //             },
+  //             page: currentPage,
+  //             size: 10,
+  //           },
+  //         })
+  //       ).then((response: any) => {
+  //         if (response?.payload)
+  //           setCurrentPageRows(response?.payload?.Contract);
+  //       });
+  //       return;
+  //     }
+
+  //     const statusValue =
+  //       staticEnums["ContractStatus"][query?.filter as string];
+  //     setFilter({
+  //       ...filter,
+  //       status: [statusValue?.toString()],
+  //     });
+
+  //     dispatch(
+  //       readContract({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: [staticEnums["ContractStatus"][query?.filter as string]],
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+  //     });
+  //   } else {
+  //     setFilter({
+  //       ...filter,
+  //       status: "None",
+  //     });
+  //     dispatch(
+  //       readContract({
+  //         params: {
+  //           filter: { ...filter, status: "None" },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+  //     });
+  //   }
+  // }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

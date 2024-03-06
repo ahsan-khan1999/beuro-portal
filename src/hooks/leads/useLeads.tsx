@@ -194,14 +194,18 @@ const useLeads = () => {
 
   useEffect(() => {
     // setTimeout(() => {
-      const queryStatus = query?.status;
-      
-      console.log(query, "status");
+    const queryStatus = query?.status;
     if (queryStatus) {
-      const filteredStatus =query?.status === "None" ? "None": queryStatus.toString().split(",").filter((item) => item !== "None")
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryStatus
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
       setFilter({
         ...filter,
-        status:  filteredStatus,
+        status: filteredStatus,
       });
 
       dispatch(

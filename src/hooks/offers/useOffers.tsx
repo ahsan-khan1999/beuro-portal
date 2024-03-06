@@ -66,13 +66,13 @@ const useOffers = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Offer);
-      }
-    });
+    // dispatch(
+    //   readOffer({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Offer);
+    //   }
+    // });
   };
 
   useEffect(() => {
@@ -284,37 +284,18 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    if (query?.filter || query?.status) {
-      const queryStatus = query?.status;
-      console.log(queryStatus?.toString().split(","));
-
-      if (queryStatus) {
-        setFilter({
-          ...filter,
-          status: queryStatus.toString().split(","),
-        });
-
-        dispatch(
-          readOffer({
-            params: {
-              filter: {
-                ...filter,
-                status: queryStatus.toString().split(","),
-              },
-              page: currentPage,
-              size: 10,
-            },
-          })
-        ).then((response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-        });
-        return;
-      }
-
-      const statusValue = staticEnums["OfferStatus"][query?.filter as string];
+    const queryStatus = query?.status;
+    if (queryStatus) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryStatus
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
       setFilter({
         ...filter,
-        status: [statusValue?.toString()],
+        status: filteredStatus,
       });
 
       dispatch(
@@ -322,7 +303,7 @@ const useOffers = () => {
           params: {
             filter: {
               ...filter,
-              status: [staticEnums["OfferStatus"][query?.filter as string]],
+              status: filteredStatus,
             },
             page: currentPage,
             size: 10,
@@ -331,24 +312,76 @@ const useOffers = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
-    } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
-      dispatch(
-        readOffer({
-          params: {
-            filter: { ...filter, status: "None" },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-      });
+      return;
     }
-  }, [currentPage, query?.filter, query?.status]);
+  }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   if (query?.filter || query?.status) {
+  //     const queryStatus = query?.status;
+  //     console.log(queryStatus?.toString().split(","));
+
+  //     if (queryStatus) {
+  //       setFilter({
+  //         ...filter,
+  //         status: queryStatus.toString().split(","),
+  //       });
+
+  //       dispatch(
+  //         readOffer({
+  //           params: {
+  //             filter: {
+  //               ...filter,
+  //               status: queryStatus.toString().split(","),
+  //             },
+  //             page: currentPage,
+  //             size: 10,
+  //           },
+  //         })
+  //       ).then((response: any) => {
+  //         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+  //       });
+  //       return;
+  //     }
+
+  //     const statusValue = staticEnums["OfferStatus"][query?.filter as string];
+  //     setFilter({
+  //       ...filter,
+  //       status: [statusValue?.toString()],
+  //     });
+
+  //     dispatch(
+  //       readOffer({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: [staticEnums["OfferStatus"][query?.filter as string]],
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+  //     });
+  //   } else {
+  //     setFilter({
+  //       ...filter,
+  //       status: "None",
+  //     });
+  //     dispatch(
+  //       readOffer({
+  //         params: {
+  //           filter: { ...filter, status: "None" },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+  //     });
+  //   }
+  // }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

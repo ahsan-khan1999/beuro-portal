@@ -54,11 +54,11 @@ const useInvoice = () => {
   // }, [query?.filter]);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
-    });
+    // dispatch(
+    //   readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
+    // });
   };
 
   const onClose = () => {
@@ -172,43 +172,26 @@ const useInvoice = () => {
   };
 
   useEffect(() => {
-    if (query?.filter || query?.status) {
-      const queryStatus = query?.status;
-
-      if (queryStatus) {
-        setFilter({
-          ...filter,
-          status: queryStatus.toString().split(","),
-        });
-
-        dispatch(
-          readInvoice({
-            params: {
-              filter: {
-                ...filter,
-                status: queryStatus.toString().split(","),
-              },
-              page: currentPage,
-              size: 10,
-            },
-          })
-        ).then((response: any) => {
-          if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-        });
-        return;
-      }
-
-      const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
+    const queryStatus = query?.status;
+    if (queryStatus) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryStatus
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
       setFilter({
         ...filter,
-        status: [statusValue?.toString()],
+        status: filteredStatus,
       });
+
       dispatch(
         readInvoice({
           params: {
             filter: {
               ...filter,
-              status: [staticEnums["InvoiceStatus"][query?.filter as string]],
+              status: filteredStatus,
             },
             page: currentPage,
             size: 10,
@@ -217,24 +200,74 @@ const useInvoice = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
-    } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
-      dispatch(
-        readInvoice({
-          params: {
-            filter: { ...filter, status: "None" },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-      });
+      return;
     }
-  }, [currentPage, query?.filter, query?.status]);
+  }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   if (query?.filter || query?.status) {
+  //     const queryStatus = query?.status;
+
+  //     if (queryStatus) {
+  //       setFilter({
+  //         ...filter,
+  //         status: queryStatus.toString().split(","),
+  //       });
+
+  //       dispatch(
+  //         readInvoice({
+  //           params: {
+  //             filter: {
+  //               ...filter,
+  //               status: queryStatus.toString().split(","),
+  //             },
+  //             page: currentPage,
+  //             size: 10,
+  //           },
+  //         })
+  //       ).then((response: any) => {
+  //         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+  //       });
+  //       return;
+  //     }
+
+  //     const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
+  //     setFilter({
+  //       ...filter,
+  //       status: [statusValue?.toString()],
+  //     });
+  //     dispatch(
+  //       readInvoice({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: [staticEnums["InvoiceStatus"][query?.filter as string]],
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+  //     });
+  //   } else {
+  //     setFilter({
+  //       ...filter,
+  //       status: "None",
+  //     });
+  //     dispatch(
+  //       readInvoice({
+  //         params: {
+  //           filter: { ...filter, status: "None" },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+  //     });
+  //   }
+  // }, [currentPage, query?.filter, query?.status]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
