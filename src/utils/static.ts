@@ -1306,21 +1306,24 @@ export const sideBar: SideBar[] = [
         title: "sidebar.customer.leads.open",
         pathname: "/leads",
         query: "Open",
-
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.leads.InProcess",
+        pathname: "/leads",
+        query: "InProcess",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.close",
         pathname: "/leads",
         query: "Close",
-
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.expire",
         pathname: "/leads",
         query: "Expired",
-
         role: [1, 2],
       },
     ],
