@@ -9,11 +9,7 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
-import {
-  readLead,
-  setLeadDetails,
-  updateLeadStatus,
-} from "@/api/slices/lead/leadSlice";
+import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
@@ -29,9 +25,20 @@ const useLeads = () => {
     (state) => state.lead
   );
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
+  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -197,15 +204,18 @@ const useLeads = () => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
-      const queryStatus = query?.status;
-      
-      console.log(query, "status");
+    const queryStatus = query?.status;
     if (queryStatus) {
-      const filteredStatus =query?.status === "None" ? "None": queryStatus.toString().split(",").filter((item) => item !== "None")
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryStatus
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
       setFilter({
         ...filter,
-        status:  filteredStatus,
+        status: filteredStatus,
       });
 
       dispatch(
@@ -262,7 +272,6 @@ const useLeads = () => {
     //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
     //   });
     // }
-    // }, 2000);
   }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {

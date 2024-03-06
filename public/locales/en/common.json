@@ -208,6 +208,7 @@
       "leads": {
         "leads": "Leads",
         "open": "Open",
+        "InProcess": "InProcess",
         "close": "Close",
         "expire": "Expire"
       },
