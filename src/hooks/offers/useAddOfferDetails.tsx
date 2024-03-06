@@ -79,7 +79,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       dispatch(
         readLead({
           params: {
-            filter: { customerID: customerID, status: [0, 1] },
+            filter: { customerID: customerID, status: [0, 1, 3] },
             paginate: 0,
           },
         })
@@ -119,6 +119,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     control,
     name: "date",
   });
+  console.log(offerDetails, "offerDetails");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
@@ -136,7 +137,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       });
     }
   };
-  const handleContentSelect = () => { };
+  const handleContentSelect = () => {};
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -220,7 +221,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         gender:
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
-
       });
     } else if (type === "Existing Customer" && !offerDetails?.id) {
       dispatch(setLeads([]));
