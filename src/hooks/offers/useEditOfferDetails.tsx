@@ -119,7 +119,7 @@ export const useEditOfferDetails = ({
     if (type && customerID) {
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, status: [0, 1] }, paginate: 0 },
+          params: { filter: { customerID: customerID, status: [0, 1,3] }, paginate: 0 },
         })
       );
     }
