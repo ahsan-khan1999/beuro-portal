@@ -15,7 +15,6 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { FiltersDefaultValues } from "@/enums/static";
-import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
@@ -25,14 +24,22 @@ const useInvoice = () => {
     useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
 
-  console.log(invoiceSum?.sumOfAllPages);
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<
     InvoiceTableRowTypes[]
   >([]);
 
   const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,

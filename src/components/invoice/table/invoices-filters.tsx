@@ -55,7 +55,10 @@ export default function InvoicesFilters({
           {
             pathname: router.pathname,
             query: {
-              status: newStatus.join(","),
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
             },
           },
           undefined,
@@ -70,7 +73,10 @@ export default function InvoicesFilters({
           {
             pathname: router.pathname,
             query: {
-              status: newStatus.join(","),
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
             },
           },
           undefined,

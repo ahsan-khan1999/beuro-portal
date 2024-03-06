@@ -4,7 +4,7 @@ import {
   DEFAULT_OFFER,
   staticEnums,
 } from "@/utils/static";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -17,7 +17,6 @@ import { FilterType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
 import {
   readOffer,
-  readOfferDetails,
   setOfferDetails,
   updateOfferStatus,
   updatePaymentStatus,
@@ -27,7 +26,6 @@ import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
@@ -40,12 +38,23 @@ const useOffers = () => {
     (state) => state.offer
   );
 
+  const { query } = useRouter();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
   const { t: translate } = useTranslation();
-  const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,

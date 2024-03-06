@@ -25,9 +25,20 @@ const useLeads = () => {
     (state) => state.lead
   );
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
+  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -193,7 +204,6 @@ const useLeads = () => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
     const queryStatus = query?.status;
     if (queryStatus) {
       const filteredStatus =
@@ -262,7 +272,6 @@ const useLeads = () => {
     //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
     //   });
     // }
-    // }, 2000);
   }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {

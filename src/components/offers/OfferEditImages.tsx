@@ -28,23 +28,25 @@ const OfferEditImages = ({
 
   return (
     <LeadsDetailImgLayout>
-      <div className={`flex flex-col max-h-[400px]`}>
+      <div className={`flex flex-col max-h-[250px]`}>
         <div className="flex justify-between items-center ml-6 mr-[14px] my-4">
           <p className="text-lg font-normal text-[#4A13E7] ">
             {translate("offers.side_images.heading")}
           </p>
-          <Image
-            src={shareIcon}
-            alt="shareIcon"
-            className={`${
-              images && images?.images?.length > 0
-                ? "cursor-pointer"
-                : "cursor-default"
-            }  `}
-            onClick={() =>
-              images && images?.images?.length > 0 && shareImgModal()
-            }
-          />
+          {images && images?.images?.length > 0 && (
+            <Image
+              src={shareIcon}
+              alt="shareIcon"
+              className={`${
+                images && images?.images?.length > 0
+                  ? "cursor-pointer"
+                  : "cursor-default"
+              }  `}
+              onClick={() =>
+                images && images?.images?.length > 0 && shareImgModal()
+              }
+            />
+          )}
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
@@ -67,13 +69,6 @@ const OfferEditImages = ({
         )}
 
         <div className="flex justify-end items-center mx-[13px] pb-3">
-          {/* <p
-            className={`text-[12px] font-normal text-[#4A13E7] ${images && images?.images?.length > 0 ? "cursor-pointer" : "cursor-default"
-              }   `}
-            onClick={(e) => images && images?.images?.length > 0 && handleImagesUpload(offerDetails?.id, e)}
-          >
-            {translate("offers.side_images.views")}
-          </p> */}
           <span
             onClick={(e) => handleImagesUpload(offerDetails?.id, e)}
             className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}

@@ -49,7 +49,7 @@ const OfferDetails = () => {
         />
       </div>
 
-      <div className="2xl:mt-[395px] w-full 2xl:block">
+      <div className="2xl:mt-[395px] w-full 2xl:block mb-10">
         {isSendEmail ? (
           <div className="mt-5">
             <ComposeMail

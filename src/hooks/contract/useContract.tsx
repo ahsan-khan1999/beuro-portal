@@ -26,13 +26,25 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
     useAppSelector((state) => state.contract);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
-  const { t: translate } = useTranslation();
 
   const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
+  const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
