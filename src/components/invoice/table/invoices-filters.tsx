@@ -91,9 +91,11 @@ export default function InvoicesFilters({
       return updatedFilter;
     });
   };
+
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -104,15 +106,29 @@ export default function InvoicesFilters({
 
   const handlePressEnter = () => {
     let inputValue = inputRef?.current?.value;
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
     });
   };
+
   return (
     <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px]">

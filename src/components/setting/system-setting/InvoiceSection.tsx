@@ -16,8 +16,8 @@ const InvoiceSection = ({
 }) => {
   const { t: translate } = useTranslation();
 
-  const handleItemSelected = (selectedItem: string) => {
-    setSystemSetting({ ...systemSetting, daysLimit: selectedItem });
+  const handleItemSelected = (item: string) => {
+    setSystemSetting({ ...systemSetting, daysLimit: item });
   };
 
   const toggleOverdue = () => {
@@ -26,6 +26,7 @@ const InvoiceSection = ({
       isInvoiceOverDue: !systemSetting.isInvoiceOverDue,
     });
   };
+  console.log(systemSetting, "systemSetting");
 
   // const hanldeClose = () => {
   //   setIsOpen(false);

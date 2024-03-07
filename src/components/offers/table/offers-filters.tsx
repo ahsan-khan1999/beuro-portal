@@ -1,7 +1,6 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -103,6 +102,19 @@ export default function OffersFilters({
 
   const handlePressEnter = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }

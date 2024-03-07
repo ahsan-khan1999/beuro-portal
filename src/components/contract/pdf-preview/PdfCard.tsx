@@ -1,16 +1,13 @@
 import React from "react";
-import Image from "next/image";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import PdfCardLayout from "@/components/content/pdfPriview/PdfCardLayout";
-import { ContractEmailHeaderProps, EmailHeaderProps } from "@/types";
+import { ContractEmailHeaderProps } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
-import { ContractsIcon } from "@/assets/svgs/components/sideBar/Contracts";
 
 const PdfCard = ({
   contractNo,
@@ -29,11 +26,11 @@ const PdfCard = ({
   const { contractDetails } = useAppSelector((state) => state.contract);
 
   const handleBackToDetail = () => {
-    const { status } = router.query;
+    const { status, text } = router.query;
 
     router.push({
       pathname: "/contract/details",
-      query: { status, contract: contractDetails?.id },
+      query: { status, text, contract: contractDetails?.id },
     });
   };
 

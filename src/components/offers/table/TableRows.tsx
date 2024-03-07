@@ -9,9 +9,6 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { staticEnums } from "@/utils/static";
-import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,

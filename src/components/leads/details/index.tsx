@@ -24,14 +24,14 @@ const LeadsDetails = () => {
         <LoadingState />
       ) : (
         <>
-          <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[250px] maxSize:border-t-[14px] border-t-defaultBackground calWidth z-0">
+          <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[250px] maxSize:border-t-[14px] border-t-defaultBackground calWidth z-10">
             <LeadsDetailsCardData
               leadDeleteHandler={leadDeleteHandler}
               leadDetails={leadDetails}
               onStatusUpdate={handleStatusUpdate}
             />
           </div>
-          <div className="xlg:mt-[330px] w-full xlg:block z-10 mb-10">
+          <div className="xlg:mt-[330px] w-full xlg:block mb-10">
             <LeadsDetailsData
               loading={loading}
               shareImgModal={shareImgModal}

@@ -85,6 +85,7 @@ export default function ContractFilters({
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -95,6 +96,19 @@ export default function ContractFilters({
 
   const handlePressEnter = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }

@@ -10,7 +10,11 @@ import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { readService } from "@/api/slices/service/serviceSlice";
 import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
-import { formatDate, formatDateTimeToDate, formatDateTimeToDateMango } from "@/utils/utility";
+import {
+  formatDate,
+  formatDateTimeToDate,
+  formatDateTimeToDateMango,
+} from "@/utils/utility";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { ContentTableRowTypes } from "@/types/content";
 
@@ -49,14 +53,11 @@ export const useAddLeadServiceDetails = ({
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
   useMemo(() => {
     if (leadDetails.id) {
-
       reset({
         ...leadDetails,
         desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
         requiredService: selectedContent?.id,
         // otherServices: contentList?.map((item) => item.id)
-
-
       });
     }
   }, [leadDetails.id]);
@@ -71,10 +72,16 @@ export const useAddLeadServiceDetails = ({
     systemSettings
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalAdd }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    const apiData = {
+      ...data,
+      step: 3,
+      id: leadDetails?.id,
+      stage: ComponentsType.additionalAdd,
+    };
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
-
   };
   return {
     fields,

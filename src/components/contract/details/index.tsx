@@ -29,7 +29,7 @@ const ContractDetails = () => {
 
   return (
     <Layout>
-      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-auto 2xl:-mt-[310px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[310px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
         <CardDetailsData
           contractDetails={contractDetails}
           offerDeleteHandler={offerDeleteHandler}
