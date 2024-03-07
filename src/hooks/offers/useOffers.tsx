@@ -294,17 +294,24 @@ const useOffers = () => {
 
   useEffect(() => {
     const queryStatus = query?.status;
-    if (queryStatus) {
+    const searchQuery = query?.text as string;
+    console.log(searchQuery);
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
       const filteredStatus =
         query?.status === "None"
           ? "None"
-          : queryStatus
+          : queryParams
               .toString()
               .split(",")
               .filter((item) => item !== "None");
+
       setFilter({
         ...filter,
         status: filteredStatus,
+        text: searchQuery,
       });
 
       dispatch(
@@ -313,6 +320,7 @@ const useOffers = () => {
             filter: {
               ...filter,
               status: filteredStatus,
+              text: searchQuery,
             },
             page: currentPage,
             size: 10,
@@ -321,9 +329,41 @@ const useOffers = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
-      return;
     }
   }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   const queryStatus = query?.status;
+  //   if (queryStatus) {
+  //     const filteredStatus =
+  //       query?.status === "None"
+  //         ? "None"
+  //         : queryStatus
+  //             .toString()
+  //             .split(",")
+  //             .filter((item) => item !== "None");
+  //     setFilter({
+  //       ...filter,
+  //       status: filteredStatus,
+  //     });
+
+  //     dispatch(
+  //       readOffer({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: filteredStatus,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+  //     });
+  //     return;
+  //   }
+  // }, [currentPage, query]);
 
   // useEffect(() => {
   //   if (query?.filter || query?.status) {

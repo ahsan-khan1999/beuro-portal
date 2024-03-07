@@ -205,17 +205,24 @@ const useLeads = () => {
 
   useEffect(() => {
     const queryStatus = query?.status;
-    if (queryStatus) {
+    const searchQuery = query?.text as string;
+    console.log(searchQuery);
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
       const filteredStatus =
         query?.status === "None"
           ? "None"
-          : queryStatus
+          : queryParams
               .toString()
               .split(",")
               .filter((item) => item !== "None");
+
       setFilter({
         ...filter,
         status: filteredStatus,
+        text: searchQuery,
       });
 
       dispatch(
@@ -224,6 +231,7 @@ const useLeads = () => {
             filter: {
               ...filter,
               status: filteredStatus,
+              text: searchQuery,
             },
             page: currentPage,
             size: 10,
@@ -232,47 +240,83 @@ const useLeads = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
-      return;
     }
-
-    // const statusValue = staticEnums["LeadStatus"][query?.filter as string];
-    // setFilter({
-    //   ...filter,
-    //   status: [statusValue?.toString()],
-    // });
-
-    // dispatch(
-    //   readLead({
-    //     params: {
-    //       filter: {
-    //         ...filter,
-    //         status: [staticEnums["LeadStatus"][query?.filter as string]],
-    //       },
-    //       page: currentPage,
-    //       size: 10,
-    //     },
-    //   })
-    // ).then((response: any) => {
-    //   if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-    // });
-    // } else {
-    //   setFilter({
-    //     ...filter,
-    //     status: "None",
-    //   });
-    //   dispatch(
-    //     readLead({
-    //       params: {
-    //         filter: { ...filter, status: "None" },
-    //         page: currentPage,
-    //         size: 10,
-    //       },
-    //     })
-    //   ).then((response: any) => {
-    //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-    //   });
-    // }
   }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   const queryStatus = query?.status;
+  //   const searchQuery = query?.search;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   // if (queryStatus) {
+  //   const filteredStatus =
+  //     query?.status === "None"
+  //       ? "None"
+  //       : queryParams
+  //           .toString()
+  //           .split(",")
+  //           .filter((item) => item !== "None");
+  //   setFilter({
+  //     ...filter,
+  //     status: filteredStatus,
+  //   });
+
+  //   dispatch(
+  //     readLead({
+  //       params: {
+  //         filter: {
+  //           ...filter,
+  //           status: filteredStatus,
+  //         },
+  //         page: currentPage,
+  //         size: 10,
+  //       },
+  //     })
+  //   ).then((response: any) => {
+  //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+  //   });
+  //   return;
+  //   // }
+
+  //   // const statusValue = staticEnums["LeadStatus"][query?.filter as string];
+  //   // setFilter({
+  //   //   ...filter,
+  //   //   status: [statusValue?.toString()],
+  //   // });
+
+  //   // dispatch(
+  //   //   readLead({
+  //   //     params: {
+  //   //       filter: {
+  //   //         ...filter,
+  //   //         status: [staticEnums["LeadStatus"][query?.filter as string]],
+  //   //       },
+  //   //       page: currentPage,
+  //   //       size: 10,
+  //   //     },
+  //   //   })
+  //   // ).then((response: any) => {
+  //   //   if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+  //   // });
+  //   // } else {
+  //   //   setFilter({
+  //   //     ...filter,
+  //   //     status: "None",
+  //   //   });
+  //   //   dispatch(
+  //   //     readLead({
+  //   //       params: {
+  //   //         filter: { ...filter, status: "None" },
+  //   //         page: currentPage,
+  //   //         size: 10,
+  //   //       },
+  //   //     })
+  //   //   ).then((response: any) => {
+  //   //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+  //   //   });
+  //   // }
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
