@@ -32,15 +32,30 @@ export default function EmployeesFilters({
 
   const handleEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
     });
   };
+
   return (
     <div className="flex items-center space-x-4">
       <InputField

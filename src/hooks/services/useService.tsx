@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 import { Service } from "@/types/service";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
-import {
-  readService,
-  setServiceDetails,
-} from "@/api/slices/service/serviceSlice";
+import { readService } from "@/api/slices/service/serviceSlice";
 import { useTranslation } from "next-i18next";
-import { DEFAULT_SERVICE } from "@/utils/static";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 
 const useService = () => {
   const { service, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.service
   );
+
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
@@ -23,27 +20,7 @@ const useService = () => {
       $lte: FiltersDefaultValues.$lte,
     },
   });
-  const dispatch = useAppDispatch();
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
-  const { t: translate } = useTranslation();
 
-  const totalItems = totalCount;
-  const itemsPerPage = 10;
-
-  useEffect(() => {
-    dispatch(
-      readService({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Service);
-      }
-    });
-  }, [currentPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readService({ params: { filter: query, page: currentPage, size: 10 } })
@@ -53,6 +30,72 @@ const useService = () => {
       }
     });
   };
+
+  const dispatch = useAppDispatch();
+  const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
+  const { t: translate } = useTranslation();
+  const { query } = useRouter();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
+  const totalItems = totalCount;
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      setFilter({
+        ...filter,
+        status: queryStatus,
+        text: searchQuery,
+      });
+
+      dispatch(
+        readService({
+          params: {
+            filter: {
+              ...filter,
+              status: queryStatus,
+              text: searchQuery,
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Service);
+        }
+      });
+    }
+  }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   dispatch(
+  //     readService({ params: { filter: filter, page: currentPage, size: 10 } })
+  //   ).then((res: any) => {
+  //     if (res?.payload) {
+  //       setCurrentPageRows(res?.payload?.Service);
+  //     }
+  //   });
+  // }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return {
     currentPageRows,
     handlePageChange,
@@ -63,7 +106,7 @@ const useService = () => {
     setFilter,
     translate,
     loading,
-    currentPage
+    currentPage,
   };
 };
 

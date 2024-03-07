@@ -31,6 +31,19 @@ export default function CustomerFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
@@ -50,7 +63,6 @@ export default function CustomerFilter({
         // value={inputValue || ""}
         iconDisplay={false}
         onEnterPress={onEnterPress}
-        
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}

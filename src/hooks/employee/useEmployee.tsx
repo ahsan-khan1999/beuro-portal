@@ -10,6 +10,7 @@ import {
 import { DEFAULT_EMPLOYEE } from "@/utils/static";
 import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 
 const useEmployee = () => {
   const [filter, setFilter] = useState<FilterType>({
@@ -24,26 +25,28 @@ const useEmployee = () => {
     (state) => state.employee
   );
   const dispatch = useAppDispatch();
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
   const itemsPerPage = 10;
   const { t: translate } = useTranslation();
 
+  const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   useEffect(() => {
-    dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE))
-    dispatch(
-      readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Employee);
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
       }
-    });
-  }, [currentPage]);
+    }
+  }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readEmployee({ params: { filter: query, page: currentPage, size: 10 } })
@@ -53,6 +56,50 @@ const useEmployee = () => {
       }
     });
   };
+
+  useEffect(() => {
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      setFilter({
+        ...filter,
+        status: queryStatus,
+        text: searchQuery,
+      });
+
+      dispatch(
+        readEmployee({
+          params: {
+            filter: {
+              ...filter,
+              status: queryStatus,
+              text: searchQuery,
+            },
+            page: currentPage,
+            size: 10,
+          },
+        })
+      ).then((res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Employee);
+        }
+      });
+    }
+  }, [currentPage, query]);
+
+  // useEffect(() => {
+  //   dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE));
+  //   dispatch(
+  //     readEmployee({ params: { filter: filter, page: currentPage, size: 10 } })
+  //   ).then((res: any) => {
+  //     if (res?.payload) {
+  //       setCurrentPageRows(res?.payload?.Employee);
+  //     }
+  //   });
+  // }, [currentPage]);
 
   return {
     currentPageRows,
@@ -64,7 +111,7 @@ const useEmployee = () => {
     handleFilterChange,
     translate,
     loading,
-    currentPage
+    currentPage,
   };
 };
 

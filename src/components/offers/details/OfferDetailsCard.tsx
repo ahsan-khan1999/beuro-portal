@@ -223,12 +223,14 @@ const OfferDetailsCard = ({
             </div>
           </div>
 
-          <BaseButton
-            buttonText="Upload File"
-            onClick={() => onFileUpload(offerDetails?.id)}
-            containerClassName="w-fit bg-primary"
-            textClassName="text-white"
-          />
+          {offerDetails?.offerStatus === "Accepted" && (
+            <BaseButton
+              buttonText="Upload File"
+              onClick={() => onFileUpload(offerDetails?.id)}
+              containerClassName="w-fit bg-primary"
+              textClassName="text-white"
+            />
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
