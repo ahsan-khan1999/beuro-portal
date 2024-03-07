@@ -295,7 +295,6 @@ const useOffers = () => {
   useEffect(() => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
-    console.log(searchQuery);
 
     const queryParams = queryStatus || searchQuery;
 

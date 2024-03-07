@@ -23,11 +23,11 @@ const EmailCard = ({
   const { t: translate } = useTranslation();
 
   const handleBackToDetail = () => {
-    const { status } = router.query;
+    const { status, text } = router.query;
 
     router.push({
       pathname: "/offers/details",
-      query: { status, offer: offerId },
+      query: { status, text, offer: offerId },
     });
   };
 
