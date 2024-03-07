@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Service } from "@/types/service";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { updateQuery } from "@/utils/update-query";
 
 const DetailsData = ({
   serviceDetail,
@@ -17,15 +18,19 @@ const DetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
+  const handleBack = () => {
+    router.pathname = "/services";
+    delete router.query["service"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10  pb-5">
         <div className="flex items-center">
           {isUpdate && (
-            <span
-              className="cursor-pointer"
-              onClick={() => router.push("/services")}
-            >
+            <span className="cursor-pointer" onClick={handleBack}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="41"

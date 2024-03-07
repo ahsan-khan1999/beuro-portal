@@ -5,6 +5,7 @@ import { EmployeeDetail } from "@/types/employee";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
+import { updateQuery } from "@/utils/update-query";
 
 const DetailsData = ({
   date,
@@ -16,15 +17,19 @@ const DetailsData = ({
 }: EmployeeDetail) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
+  const handleBack = () => {
+    router.pathname = "/employees";
+    delete router.query["employee"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10  pb-5">
         <div className="flex items-center">
           {isUpdate && router.pathname === "/employees/details" && (
-            <span
-              onClick={() => router.push("/employees")}
-              className="cursor-pointer mr-6"
-            >
+            <span onClick={handleBack} className="cursor-pointer mr-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="41"

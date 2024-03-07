@@ -1289,6 +1289,7 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Customers",
@@ -1427,24 +1428,28 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.services",
     pathname: "/services",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Employees",
     title: "sidebar.customer.employees",
     pathname: "/employees",
     role: [1],
+    query: "None",
   },
   {
     icon: "Content",
     title: "sidebar.customer.content",
     pathname: "/content",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "MailTracker",
     title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Settings",

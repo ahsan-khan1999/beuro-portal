@@ -105,6 +105,18 @@ export default function LeadsFilter({
 
   const handlePressEnter = () => {
     let inputValue = inputRef?.current?.value;
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
