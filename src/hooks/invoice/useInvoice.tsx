@@ -61,11 +61,11 @@ const useInvoice = () => {
   // }, [query?.filter]);
 
   const handleFilterChange = (query: FilterType) => {
-    // dispatch(
-    //   readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
-    // });
+    dispatch(
+      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
+    });
   };
 
   const onClose = () => {

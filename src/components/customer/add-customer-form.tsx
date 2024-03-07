@@ -9,6 +9,7 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, renderModal } =
     useCustomerDetail(false);
+
   const { t: translate } = useTranslation();
 
   return (

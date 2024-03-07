@@ -57,8 +57,6 @@ const SideBar = () => {
     child: null,
   });
 
-  console.log(selected);
-
   const userRole = staticEnums["User"]["role"][user?.role as string];
 
   const router = useRouter();

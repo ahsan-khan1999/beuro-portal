@@ -64,13 +64,13 @@ const useContract = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (filter: FilterType) => {
-    // dispatch(
-    //   readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Contract);
-    //   }
-    // });
+    dispatch(
+      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Contract);
+      }
+    });
   };
 
   const onClose = () => {

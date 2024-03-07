@@ -41,9 +41,11 @@ const useFollowUps = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   const handleFilterChange = () => {
     dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   };
+
   const handleDeleteFollowUp = (id: string) => {
     dispatch(
       updateModalType({
@@ -52,14 +54,17 @@ const useFollowUps = () => {
       })
     );
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const routeHandler = async () => {
     const response = await dispatch(deleteFollowUp({ data: { id: data } }));
     if (response?.payload)
       dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
@@ -70,9 +75,11 @@ const useFollowUps = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return {
     currentPageRows,
     handlePageChange,
@@ -84,7 +91,7 @@ const useFollowUps = () => {
     renderModal,
     handleFilterChange,
     loading,
-    currentPage
+    currentPage,
   };
 };
 

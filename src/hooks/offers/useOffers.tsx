@@ -75,13 +75,13 @@ const useOffers = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    // dispatch(
-    //   readOffer({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Offer);
-    //   }
-    // });
+    dispatch(
+      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Offer);
+      }
+    });
   };
 
   useEffect(() => {

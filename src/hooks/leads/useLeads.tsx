@@ -64,13 +64,13 @@ const useLeads = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    // dispatch(
-    //   readLead({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Lead);
-    //   }
-    // });
+    dispatch(
+      readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.Lead);
+      }
+    });
   };
 
   const onClose = () => {
